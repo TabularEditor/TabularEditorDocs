@@ -29,12 +29,12 @@ te interactive ./model                      # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
-`te interactive` accepts a few flags for tuning the session:
+`te interactive` acepta algunas opciones para ajustar la sesión:
 
-- `--no-banner` - skip the welcome banner on startup.
-- `--echo` - echo each executed command to stdout before its output. Useful for logging when driving the REPL from a script.
-- `--batch` - non-interactive batch mode: read commands from stdin line by line, execute each, and exit on EOF. Automatically enabled when stdin is redirected.
-- `--no-batch` - force interactive TTY mode even when stdin is redirected (mutually exclusive with `--batch`).
+- `--no-banner` - omite el banner de bienvenida al iniciar.
+- `--echo` - escribe en stdout cada comando ejecutado antes de su salida. Útil para llevar un registro cuando se controla la REPL desde un script.
+- `--batch` - modo por lotes no interactivo: lee comandos de stdin línea por línea, ejecuta cada uno y sale al llegar a EOF. Se habilita automáticamente cuando stdin está redirigido.
+- `--no-batch` - fuerza el modo TTY interactivo incluso cuando stdin está redirigido (mutuamente excluyente con `--batch`).
 
 La sesión imprime un banner de bienvenida, muestra el modelo activo y te sitúa en un prompt con contexto del modelo:
 
@@ -91,9 +91,9 @@ Cuando el modo interactivo está activo, los comandos que necesitan información
 
 Para desactivar las indicaciones en un único comando dentro de la sesión, pasa `--non-interactive`.
 
-## Piped and redirected input
+## Entrada canalizada y redirigida
 
-Interactive mode also accepts piped or redirected stdin, so the same REPL can be driven from a script instead of typed by hand. Each line of input is run as a command, exactly as if you had entered it at the prompt, and the session exits when input is exhausted (or when it reaches an `exit` line).
+El modo interactivo también acepta stdin canalizado o redirigido, de modo que puedes controlar la misma REPL desde un script en lugar de introducir los comandos a mano. Cada línea de entrada se ejecuta como un comando, exactamente igual que si la hubieras introducido en el prompt, y la sesión termina cuando se agota la entrada (o cuando llega a una línea `exit`).
 
 ```bash
 printf "ls\nexit\n" | te interactive ./model        # bash / git-bash
@@ -104,7 +104,7 @@ te interactive ./model < script.te                  # redirected file
 (echo ls & echo exit) | te interactive .\model      :: Windows cmd.exe
 ```
 
-Lines that start with `#` are treated as comments and skipped, so you can annotate a script file:
+Las líneas que empiezan por `#` se tratan como comentarios y se omiten, así que puedes anotar un archivo de script:
 
 ```
 # script.te - inspect the model, then exit
@@ -113,9 +113,9 @@ ls measures
 exit
 ```
 
-### Batch mode and exit codes
+### Modo por lotes y códigos de salida
 
-When stdin is piped, `--batch` is the **default**: the session stops at the first command that fails and exits with a non-zero code, which makes a piped run safe to use as a build or CI step. Pass `--no-batch` to keep running the remaining lines even after a command fails. The process exit code is `0` for a clean run and non-zero when a command fails under batch mode.
+Cuando stdin está canalizado, `--batch` es el valor **predeterminado**: la sesión se detiene en el primer comando que falla y sale con un código distinto de cero, lo que hace que una ejecución canalizada sea segura para usarla como paso de compilación o de CI. Usa `--no-batch` para seguir ejecutando las líneas restantes incluso después de que falle un comando. El código de salida del proceso es `0` si la ejecución finaliza correctamente y distinto de cero cuando falla un comando en modo por lotes.
 
 ```bash
 # Default when piped: stop at the first failing command, exit non-zero
@@ -125,9 +125,9 @@ printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./mode
 printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model --no-batch
 ```
 
-### Readable transcripts
+### Transcripciones legibles
 
-`--echo` writes each input line to stdout ahead of its output, which is handy when capturing a transcript of a piped run. Comment lines are not echoed.
+`--echo` escribe cada línea de entrada en stdout antes de su salida, lo que resulta práctico al capturar una transcripción de una ejecución canalizada. Las líneas de comentario no se muestran.
 
 ```bash
 printf "ls tables\nexit\n" | te interactive ./model --echo
@@ -135,40 +135,40 @@ printf "ls tables\nexit\n" | te interactive ./model --echo
 
 ### Opciones
 
-| Opción        | Descripción                                                                                                  |
-| ------------- | ------------------------------------------------------------------------------------------------------------ |
-| `--no-banner` | Suppress the welcome banner.                                                                 |
-| `--echo`      | Echo each input line to stdout (useful for piped transcripts).            |
-| `--batch`     | Exit non-zero on the first failing command (default when stdin is piped). |
-| `--no-batch`  | Continue after errors even when stdin is piped.                                              |
+| Opción        | Descripción                                                                                                                                          |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--no-banner` | Suprime el banner de bienvenida.                                                                                                     |
+| `--echo`      | Escribe cada línea de entrada en stdout (útil para transcripciones de ejecuciones canalizadas).                   |
+| `--batch`     | Sale con un código distinto de cero en el primer comando que falla (predeterminado cuando stdin está canalizado). |
+| `--no-batch`  | Continúa tras los errores incluso cuando stdin se canaliza por una tubería.                                                          |
 
-### Welcome banner vs. preview notice
+### Banner de bienvenida frente al aviso de versión preliminar
 
-Two separate messages can appear at the start of a session - don't conflate them:
+Pueden aparecer dos mensajes distintos al iniciar una sesión; no los confundas:
 
-- The **welcome banner** is the interactive splash described under [Starting a session](#starting-a-session). It is suppressed with `--no-banner`. When stdin is piped, no welcome banner is emitted in the first place, so `--no-banner` has a visible effect only in a true interactive (TTY) session.
-- The **preview-expiry notice** (`This is an early preview release ...`) is a different message. It is always written to **stderr** and is **not** affected by `--no-banner`. Suppress it with `te config set hidePreviewNotice true`.
+- El **banner de bienvenida** es la pantalla inicial interactiva descrita en [Iniciar una sesión](#starting-a-session). Se suprime con `--no-banner`. Cuando stdin se canaliza por una tubería, el banner de bienvenida ni siquiera se muestra, así que `--no-banner` solo tiene un efecto visible en una sesión interactiva (TTY) real.
+- El **aviso de caducidad de la versión preliminar** (`This is an early preview release ...`) es otro de los **mensajes**. Siempre se escribe en **stderr** y **no** se ve afectado por `--no-banner`. Suprímelo con `te config set hidePreviewNotice true`.
 
-## Auto-launch on empty invocation
+## Inicio automático al invocar sin argumentos
 
-Running `te` in a terminal with no arguments drops you straight into the interactive REPL, so exploring a model is as fast as opening a shell and typing `te`. When stdin, stdout, or stderr is redirected (piped output, CI pipelines, scripts), the CLI falls through to its normal parse and prints help instead - so shell scripts that invoke `te` without a subcommand keep behaving the same way.
+Ejecutar `te` en una terminal sin argumentos te lleva directamente al REPL interactivo, así que explorar un modelo es tan rápido como abrir una terminal y escribir `te`. Cuando stdin, stdout o stderr se redirigen (salida por tubería, pipelines de CI, scripts), la CLI continúa con el análisis habitual y muestra la ayuda en su lugar, así que los scripts de shell que invocan `te` sin un subcomando siguen comportándose de la misma manera.
 
-The behavior is controlled by the `launchInteractiveMode` config key with three values:
+Este comportamiento se controla con la clave de configuración `launchInteractiveMode`, que admite tres valores:
 
-| Valor                               | Effect                                                                                                                                                    |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auto` (default) | Launch the REPL only when all three streams are attached to a TTY. Otherwise fall through to normal parse.                |
-| `always`                            | Launch the REPL regardless of stream redirection. Useful when you always want an interactive session.                     |
-| `never`                             | Never auto-launch the REPL. `te` on its own prints help, matching the pre-0.6.0 behavior. |
+| Valor                                      | Efecto                                                                                                                                                                           |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `auto` (predeterminado) | Inicia el REPL solo cuando los tres flujos están adjuntos a un TTY. De lo contrario, pasa al análisis normal.                                    |
+| `always`                                   | Inicia el REPL aunque haya redirección de flujos. Útil si siempre quieres una sesión interactiva.                                                |
+| `never`                                    | No inicia nunca el REPL automáticamente. `te` por sí solo muestra la ayuda, igual que antes de la versión 0.6.0. |
 
-Change it globally with:
+Cámbialo globalmente con:
 
 ```bash
 te config set launchInteractiveMode never    # keep the classic help-on-empty behavior
 te config set launchInteractiveMode auto     # restore the default
 ```
 
-Override for a single invocation via the `TE_INTERACTIVE` environment variable (same values), or pass `--non-interactive` on the command line - both force `never` for that call, so `te --non-interactive` prints help instead of launching the REPL.
+Puedes anularlo para una única ejecución mediante la variable de entorno `TE_INTERACTIVE` (con los mismos valores) o pasar `--non-interactive` en la línea de comandos; ambas opciones fuerzan `never` en esa ejecución, por lo que `te --non-interactive` muestra la ayuda en lugar de iniciar el REPL.
 
 ## Cuándo usar el modo interactivo frente al no interactivo
 
