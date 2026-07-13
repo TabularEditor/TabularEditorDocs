@@ -167,7 +167,7 @@ steps:
 
 `te deploy` y `te save` ejecutan el Best Practice Analyzer como compuerta de verificación previa de forma predeterminada. Hay tres comportamientos que conviene definir de antemano:
 
-- **Aplicar**: el valor predeterminado. Pipeline fails if BPA finds violations at severity >= error. Combínalo con `--fail-on warning` en un paso independiente de `te bpa run` si quieres que las advertencias también hagan fallar el pipeline.
+- **Aplicar**: el valor predeterminado. El pipeline falla si BPA detecta infracciones con severidad >= error. Combínalo con `--fail-on warning` en un paso independiente de `te bpa run` si quieres que las advertencias también hagan fallar el pipeline.
 - **Corrección automática**: `--fix-bpa` aplica las `fixExpression`s en memoria al artefacto desplegado. Los archivos de origen no se modifican. Es útil cuando la fuente de verdad está en el modelo y quieres que los despliegues normalicen el estilo sin intervención del desarrollador.
 - **Omitir**: `--skip-bpa` desactiva el control para un solo comando. Útil para correcciones urgentes de emergencia; no se recomienda como valor predeterminado.
 
