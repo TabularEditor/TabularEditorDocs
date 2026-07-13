@@ -167,7 +167,7 @@ steps:
 
 默认情况下，`te deploy` 和 `te save` 会先运行 Best Practice Analyzer 作为预检门禁。 有三种行为值得提前确定：
 
-- **强制执行**——默认行为。 Pipeline fails if BPA finds violations at severity >= error. 如果你也希望警告导致失败，可在独立的 `te bpa run` 步骤中配合 `--fail-on warning` 使用。
+- **强制执行**——默认行为。 如果 BPA 发现严重级别 >= error 的违规项，流水线将失败。 如果你也希望警告导致失败，可在独立的 `te bpa run` 步骤中配合 `--fail-on warning` 使用。
 - **自动修复**——`--fix-bpa` 会在内存中对部署产物应用 `fixExpression`。 不会修改源文件。 当模型是唯一可信来源，而你希望部署在无需开发者干预的情况下规范化样式时，这很有用。
 - **绕过**——`--skip-bpa` 会为单个命令禁用该门禁。 适合紧急热修复；不建议作为默认做法。
 
