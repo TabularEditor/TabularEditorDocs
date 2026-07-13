@@ -132,7 +132,7 @@ te config set hidePreviewNotice true
 
 ## Shell 自动补全
 
-CLI 提供适用于 **Bash**、**Zsh**、**PowerShell** 和 **Fish** 的 Tab 自动补全脚本。 Pick the block that matches your shell - each one installs the completion persistently for new shell sessions.
+CLI 提供适用于 **Bash**、**Zsh**、**PowerShell** 和 **Fish** 的 Tab 自动补全脚本。 选择与你所用的 shell 相匹配的代码块——每个代码块都会为后续的新 shell 会话持久安装自动补全。
 
 ### Bash（macOS/Linux）
 
