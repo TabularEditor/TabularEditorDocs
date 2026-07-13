@@ -1,6 +1,6 @@
 ---
 uid: github-flow
-title: GitHub Flow and the Octopus Merge pattern
+title: GitHub Flow y el patrón Octopus Merge
 author: Just Blindbæk
 updated: 2026-07-03
 applies_to:
@@ -17,15 +17,15 @@ applies_to:
           full: true
 ---
 
-# GitHub Flow and the Octopus Merge pattern
+# GitHub Flow y el patrón Octopus Merge
 
-This article covers the day-to-day **GitHub Flow** workflow recommended in [Enabling parallel development using Git and Save to Folder](xref:parallel-development), and the **Octopus Merge** pattern that supports it: a way of keeping a shared test environment continuously up to date with everything currently in progress. The second half of the article walks through a complete reference pipeline that implements this — which, as you'll see, ends up covering considerably more than the merge step alone.
+Este artículo explica el flujo de trabajo diario de **GitHub Flow** recomendado en [Habilitar el desarrollo en paralelo con Git y Guardar en carpeta](xref:parallel-development), así como el patrón **Octopus Merge** que lo respalda: una forma de mantener un entorno de prueba compartido continuamente actualizado con todo lo que esté en curso en ese momento. La segunda mitad del artículo recorre una canalización de referencia completa que implementa esto y que, como verás, acaba abarcando bastante más que solo el paso de la fusión.
 
-## GitHub Flow in daily use
+## GitHub Flow en el día a día
 
-GitHub Flow's rule is simple — `main` is always deployable, all work happens on short-lived branches off `main` — but a few details are worth making explicit for a semantic model team.
+La regla de GitHub Flow es simple: `main` siempre está listo para implementarse y todo el trabajo se realiza en ramas de corta duración que parten de `main`; aun así, conviene dejar explícitos algunos detalles para un equipo encargado de un modelo semántico.
 
-**Creating a feature branch:**
+**Crear una rama de funcionalidad:**
 
 ```cmd
 git checkout main
@@ -33,10 +33,10 @@ git pull
 git checkout -b feature/add-tax-calculation
 ```
 
-**Local development.** The developer works in Tabular Editor 3. Two things happen every time they hit **Ctrl+S**:
+**Desarrollo local.** El desarrollador trabaja en Tabular Editor 3. Cada vez que pulsa **Ctrl+S** ocurren dos cosas:
 
-- The model metadata is saved to disk in [Save to Folder (database.json) format](xref:parallel-development#what-is-save-to-folder), ready to be staged and committed to the feature branch in Git.
-- If [Workspace Mode](xref:workspace-mode) is enabled, the model is simultaneously synced to the developer's personal workspace database in a shared dev workspace — allowing live testing in Tabular Editor, and letting Power BI Desktop connect [directly to the workspace database](xref:workspace-mode#advantages-of-workspace-mode) for report-side validation.
+- Los metadatos del modelo se guardan en disco en [formato Guardar en carpeta (Database.json)](xref:parallel-development#what-is-save-to-folder), listos para añadirse al área de preparación y hacer commit en la rama de funcionalidad en Git.
+- Si el [modo del área de trabajo](xref:workspace-mode) está habilitado, el modelo se sincroniza simultáneamente con la base de datos del Workspace personal del desarrollador dentro de un Workspace de desarrollo compartido, lo que permite hacer pruebas en vivo en Tabular Editor y que Power BI Desktop se conecte [directamente a la base de datos del Workspace](xref:workspace-mode#advantages-of-workspace-mode) para validar el Report.
 
 ```cmd
 git add .
@@ -45,27 +45,27 @@ git push
 ```
 
 > [!WARNING]
-> Do not enable Fabric Git integration on the workspace hosting your workspace databases. Tabular Editor writes to workspace databases directly through the XMLA endpoint, and those writes have no relationship to your Git branches — enabling Git integration on the same workspace creates conflicting, out-of-band changes to the same database. This is also called out in the [Workspace Mode documentation](xref:workspace-mode).
+> No habilites la integración de Git de Fabric en el Workspace que hospeda tus bases de datos de Workspace. Tabular Editor escribe directamente en las bases de datos de Workspace a través del punto de conexión XMLA, y esas escrituras no tienen ninguna relación con tus ramas de Git; habilitar la integración con Git en ese mismo Workspace genera cambios conflictivos, fuera de Git, en la misma base de datos. Esto también se señala en la [documentación del modo del área de trabajo de Workspace](xref:workspace-mode).
 
-**Opening a pull request.** When the developer is ready for broader testing, they open a pull request targeting `main`. This is the point where GitHub Flow, on its own, leaves a question open for BI teams: with several developers each having an open PR at once, what should the shared test environment actually reflect? That's what Octopus Merge answers — see below.
+**Abrir una pull request.** Cuando el desarrollador está listo para realizar pruebas más amplias, abre una pull request dirigida a `main`. Este es el punto en el que GitHub Flow, por sí solo, deja una pregunta abierta para los equipos de BI: con varios desarrolladores, cada uno con una PR abierta a la vez, ¿qué debería reflejar realmente el entorno de prueba compartido? Eso es lo que responde Octopus Merge; lo verás más abajo.
 
-**Approval and merge.** Once technical and business reviewers have signed off using the shared test environment, the feature branch is merged into `main` and deleted.
+**Aprobación y fusión.** Una vez que los revisores técnicos y de negocio han dado su visto bueno tras probar en el entorno de prueba compartido, la rama de funcionalidad se fusiona en `main` y se elimina.
 
-**Deploy to UAT / production.** Either every merge to `main` triggers deployment automatically, or merges accumulate and are deployed on a scheduled cadence (for example, weekly). Both are compatible with GitHub Flow — the branch structure is the same either way, only the release trigger differs.
+**Despliegue en UAT / producción.** O bien cada fusión en `main` desencadena el despliegue automáticamente, o bien las fusiones se acumulan y se despliegan con una cadencia programada (por ejemplo, semanal). Ambos son compatibles con GitHub Flow: la estructura de ramas es la misma en ambos casos; lo único que cambia es el disparador del lanzamiento.
 
-## Octopus Merge: keeping the test environment current
+## Octopus Merge: mantener actualizado el entorno de pruebas
 
-##### Note — naming disambiguation
+##### Nota: aclaración de nombres
 
-"Octopus merge" is used in the Git ecosystem to mean three related but distinct things. It's worth being precise about which one we mean here:
+«Octopus merge» se usa en el ecosistema de Git para referirse a tres cosas relacionadas, pero distintas. Conviene precisar a cuál nos referimos aquí:
 
-1. **Git's native octopus merge strategy** — the merge strategy Git automatically uses when you run `git merge branch-a branch-b branch-c`, combining more than two branch heads into a single merge commit _as long as there are no conflicts_. If any branch conflicts with the merge in progress, the whole command fails — Git makes no attempt to resolve or isolate conflicts across more than two branches. This is a low-level Git mechanism, not a workflow.
-2. **`lesfurets/git-octopus`** — a now-archived open-source command-line tool that wrapped this native strategy into a "continuous merge" workflow: resolve a set of branches by naming pattern, merge them, push the result to a disposable branch, and repeat on every push. It also included tooling to iterate through branches one-by-one to pinpoint which one caused a conflict. The tool itself is no longer maintained and isn't what we recommend implementing directly, but the workflow it pioneered is exactly the pattern described below.
-3. **The Octopus Merge pattern described in this article** — a custom CI/CD pipeline that discovers all currently open (non-draft) pull requests targeting `main`, merges their source branches together using Git's native octopus strategy from (1), pushes the result to a disposable branch, and deploys that branch to a shared test environment. The pattern is the same idea as (2), reimplemented as a pipeline script you own — for example a GitHub Actions workflow, or an Azure Pipelines script calling the Azure DevOps REST API — rather than a standalone third-party tool.
+1. **La estrategia nativa de octopus merge de Git** — la estrategia de fusión que Git usa automáticamente cuando ejecutas `git merge branch-a branch-b branch-c`, combinando más de dos cabezas de rama en un único commit de fusión _siempre que no haya conflictos_. Si alguna rama entra en conflicto con el merge en curso, el comando completo falla: Git no intenta resolver ni aislar conflictos entre más de dos ramas. Este es un mecanismo de bajo nivel de Git, no un flujo de trabajo.
+2. **`lesfurets/git-octopus`**: una herramienta de línea de comandos de código abierto, hoy archivada, que convertía esta estrategia nativa en un flujo de trabajo de «continuous merge»: identificaba un conjunto de ramas según un patrón de nombres, las fusionaba, hacía push del resultado a una rama desechable y repetía el proceso con cada push. También incluía herramientas para recorrer las ramas una a una y localizar cuál provocaba un conflicto. La herramienta en sí ya no se mantiene y no es lo que recomendamos implementar directamente, pero el flujo de trabajo que introdujo es exactamente el patrón que se describe a continuación.
+3. **El patrón Octopus Merge descrito en este artículo**: un pipeline de CI/CD personalizado que detecta todas las pull requests actualmente abiertas (que no están en borrador) dirigidas a `main`, fusiona sus ramas de origen usando la estrategia nativa de octopus merge de Git del punto (1), hace push del resultado a una rama desechable y despliega esa rama en un entorno de pruebas compartido. El patrón es la misma idea que en (2), reimplementada como un script de pipeline que controlas —por ejemplo, un workflow de GitHub Actions o un script de Azure Pipelines que llama a la API REST de Azure DevOps— en lugar de una herramienta independiente de terceros.
 
-When this article says "Octopus Merge," it means (3). Note that (3) _uses_ the native strategy from (1) as its actual merge mechanism — the value it adds is the automation and branch lifecycle around that merge, not an alternative way of merging.
+Cuando este artículo dice «Octopus Merge», se refiere a (3). Ten en cuenta que (3) _usa_ la estrategia nativa del punto (1) como mecanismo real de fusión: el valor que aporta está en la automatización y en el ciclo de vida de las ramas alrededor de esa fusión, no en una forma alternativa de fusionar.
 
-The pattern, in short: **your test environment always reflects the combination of everything currently in progress** — not just one feature in isolation. Every time a developer pushes to any open, non-draft pull request, the pipeline rebuilds the combined branch from scratch and redeploys it.
+En resumen, el patrón es este: **tu entorno de pruebas siempre refleja la combinación de todo lo que está actualmente en curso**; no solo una funcionalidad aislada. Cada vez que un desarrollador hace push a cualquier pull request abierta que no esté en borrador, el pipeline reconstruye desde cero la rama combinada y la vuelve a desplegar.
 
 ```mermaid
 flowchart LR
@@ -79,19 +79,19 @@ flowchart LR
 ```
 
 > [!NOTE]
-> Tabular Editor now has a cross-platform CLI (`te`) in Limited Public Preview, purpose-built for CI/CD use — non-interactive mode, native GitHub Actions/Azure DevOps annotations, VSTEST output, and a `te test run` command for running regression tests as part of a pipeline. It's a natural fit for the kind of pipeline described below, and worth watching. As of this writing, Tabular Editor's own documentation advises against using it in production pipelines during preview (the preview build is stated to expire 2026-09-30), so the reference implementation in this article uses the established `TabularEditor.exe` CLI instead. See [CI/CD Integration](xref:te-cli-cicd) for the new CLI's current capabilities and examples.
+> Tabular Editor ahora dispone de una CLI multiplataforma (`te`) en versión preliminar pública limitada, diseñada específicamente para CI/CD: modo no interactivo, anotaciones nativas de GitHub Actions/Azure DevOps, salida VSTEST y un comando `te test run` para ejecutar pruebas de regresión como parte de un pipeline. Encaja de forma natural con el tipo de pipeline descrito a continuación, y merece la pena seguirlo de cerca. En el momento de escribir esto, la propia documentación de Tabular Editor desaconseja usarlo en pipelines de producción durante la versión preliminar (se indica que la compilación preliminar caduca el 2026-09-30), por lo que la implementación de referencia de este artículo usa en su lugar la CLI consolidada `TabularEditor.exe`. Consulta [Integración de CI/CD](xref:te-cli-cicd) para conocer las capacidades actuales y ver ejemplos de la nueva CLI.
 
 <!-- FUTURE SPLIT POINT: everything from "Reference implementation" onward is a candidate to become its own page once it grows further (e.g. once release/production deployment past the test environment is added). -->
 
-## Reference implementation
+## Implementación de referencia
 
-What follows is a complete, working pipeline that implements Octopus Merge — but it's worth being upfront that it does considerably more than the merge step alone. A full run also downloads Tabular Editor, and validates the merged model against your best-practice rules and live data source schema before deploying it to the shared test workspace. Octopus Merge is job 1 of 5; the rest is a general-purpose CI/CD pipeline for semantic models that happens to consume Octopus Merge's output. Deploying reports on top of that model — a separate concern with its own variability by organization — is addressed briefly at the end.
+Lo que sigue es un pipeline completo y funcional que implementa Octopus Merge, pero conviene dejar claro desde el principio que hace bastante más que solo el paso de merge. Una ejecución completa también descarga Tabular Editor y valida el modelo fusionado con tus reglas de buenas prácticas y con el esquema en vivo de la Data source, antes de desplegarlo en el Workspace de pruebas compartido. Octopus Merge es la tarea 1 de 5; el resto es un pipeline de CI/CD de propósito general para modelos semánticos que, además, consume la salida de Octopus Merge. El despliegue de los Report sobre ese modelo — un aspecto aparte, con su propia variabilidad según la organización — se aborda brevemente al final.
 
-The examples below show both **Azure Pipelines** (calling the Azure DevOps REST API) and **GitHub Actions** (calling the GitHub REST API) for the merge job, since the two platforms differ mainly in how they authenticate and query pull requests — the underlying Git operations and Tabular Editor CLI invocations are identical either way.
+Los ejemplos siguientes muestran tanto **Azure Pipelines** (que invoca la API REST de Azure DevOps) como **GitHub Actions** (que invoca la API REST de GitHub) para el trabajo de fusión, ya que ambas plataformas se diferencian principalmente en cómo se autentican y consultan los pull requests; las operaciones de Git subyacentes y las invocaciones a la CLI de Tabular Editor son idénticas en ambos casos.
 
-### Overview of the pipeline
+### Descripción general del pipeline
 
-A full run consists of several jobs, each with explicit dependencies on the ones before it:
+Una ejecución completa consta de varios trabajos, cada uno con dependencias explícitas respecto a los anteriores:
 
 ```mermaid
 flowchart TD
@@ -102,35 +102,35 @@ flowchart TD
     schema --> deploy
 ```
 
-Running each stage as its own job — rather than one long script — gives you independent pass/fail signal for each concern (merge conflicts vs. BPA violations vs. schema drift vs. deployment failures), which makes it much faster to diagnose what actually went wrong when a run fails.
+Ejecutar cada fase como un trabajo independiente —en lugar de un único script largo— te da un indicador independiente de aprobado/reprobado para cada aspecto (conflictos de fusión frente a infracciones de BPA frente a deriva del esquema frente a errores de despliegue), lo que permite diagnosticar mucho más rápido qué fue lo que salió mal cuando falla una ejecución.
 
-##### Note — pipeline agent requirements
+##### Nota: requisitos del agente del pipeline
 
-Since `TabularEditor.exe` only runs on Windows, every job that invokes it needs a Windows-based agent/runner — this includes the BPA verification, schema validation, and model deployment jobs. A cloud-hosted Windows agent works fine as long as it can reach your test workspace and data source over the network; a self-hosted agent is only necessary if those endpoints aren't reachable from outside your network (an on-premises data source, for example). The Octopus merge job itself has no such constraint, since it only needs Git.
+Como `TabularEditor.exe` solo se ejecuta en Windows, todos los trabajos que lo invoquen necesitan un agente/runner basado en Windows; esto incluye los trabajos de verificación de BPA, validación de esquema y despliegue del modelo. Un agente de Windows hospedado en la nube funciona bien siempre que pueda acceder, a través de la red, a tu Workspace de prueba y a tu Data source; un agente autohospedado solo es necesario si no se puede acceder a esos endpoints desde fuera de tu red (por ejemplo, una Data source local). El propio trabajo de fusión de Octopus no tiene esa limitación, ya que solo necesita Git.
 
-### Triggering the pipeline
+### Cómo se desencadena el pipeline
 
-The pipeline isn't triggered by a normal Git push trigger. Since it needs to merge _all_ currently open pull requests — not just the one that changed — it's typically set up with no automatic branch trigger, and instead invoked in one of two ways:
+El pipeline no se activa con un disparador normal por push en Git. Como necesita fusionar _todos_ los pull requests abiertos en ese momento, no solo el que cambió, normalmente se configura sin un disparador automático por rama y se invoca de una de estas dos maneras:
 
-- **From a pull request pipeline or branch policy**, so it runs whenever a pull request targeting `main` is created, or whenever a new commit is pushed to any branch with an open pull request.
-- **On a schedule** (for example, every few minutes), as a simpler alternative if your CI/CD platform makes "run on any open PR's branch update" awkward to configure directly.
+- **Desde un pipeline de pull requests o una política de rama**, para que se ejecute cada vez que se cree un pull request dirigido a `main`, o cada vez que se haga push de un nuevo commit a cualquier rama con un pull request abierto.
+- **De forma programada** (por ejemplo, cada pocos minutos), como alternativa más simple si a tu plataforma de CI/CD le resulta incómodo configurar directamente "ejecutar con cualquier actualización de rama de una PR abierta".
 
-Either approach achieves the same effect: any push to any open pull request causes the combined test environment to be rebuilt.
+Ambos enfoques logran el mismo efecto: cualquier push en cualquier pull request abierto hace que se reconstruya el entorno de prueba combinado.
 
-### Job 1: Octopus merge
+### Trabajo 1: fusión de Octopus
 
-This job is responsible for discovering all currently open pull requests, merging them together, and publishing the result to a disposable branch.
+Este trabajo se encarga de detectar todos los pull requests abiertos en ese momento, fusionarlos y publicar el resultado en una rama desechable.
 
-**What it does, step by step:**
+**Qué hace, paso a paso:**
 
-1. **Authenticate and query pull requests.** The job calls the source-control platform's REST API for open pull requests targeting `main`, authenticated with a token that has permission to list pull requests (including drafts — the filtering happens next, not at the API level).
-2. **Filter to non-draft pull requests.** Draft pull requests are excluded — this gives developers a way to push work-in-progress commits without pulling them into the shared test build. Only when a PR is marked ready for review does it join the merge.
-3. **Clone the repository fresh.** Rather than reusing a previous checkout, the job clones the repository from scratch on every run, authenticating with the pipeline's own access token. This guarantees the merge always starts from a clean, known state.
-4. **Delete and recreate the disposable branch.** Both the remote and local copies of the disposable output branch (for example, `octopus/temp`) are force-deleted if they exist, then recreated fresh from `main`. The branch is never fast-forwarded or reused between runs — it's always rebuilt from scratch.
-5. **Merge all qualifying pull request branches in a single command.** Passing more than two branches to `git merge` invokes Git's native octopus merge strategy automatically — this is the point where the pattern uses the underlying Git mechanism described above.
-6. **Push the result**, if the merge succeeded.
+1. **Autenticarse y consultar los pull requests.** El trabajo invoca la API REST de la plataforma de control de código fuente para listar los pull requests abiertos dirigidos a `main`, autenticándose con un token con permiso para listar pull requests (incluidos los borradores; el filtrado ocurre después, no a nivel de la API).
+2. **Filtrar los pull requests no borrador.** Se excluyen los pull requests en borrador; así, los desarrolladores pueden hacer push de commits de trabajo en curso sin incorporarlos a la compilación de prueba compartida. Una PR solo entra en la fusión cuando se marca como lista para revisión.
+3. **Clonar el repositorio desde cero.** En lugar de reutilizar un checkout anterior, el trabajo clona el repositorio desde cero en cada ejecución y se autentica con el propio token de acceso del pipeline. Esto garantiza que la fusión siempre parta de un estado limpio y conocido.
+4. **Eliminar y recrear la rama desechable.** Tanto la copia remota como la local de la rama de salida desechable (por ejemplo, `octopus/temp`) se eliminan de forma forzada si existen y luego se recrean desde `main`. La rama nunca se actualiza mediante fast-forward ni se reutiliza entre ejecuciones; siempre se reconstruye desde cero.
+5. **Fusiona todas las ramas de los pull requests que cumplan los requisitos con un solo comando.** Al pasar más de dos ramas a `git merge`, Git invoca automáticamente su estrategia nativa de fusión octopus — aquí es donde el patrón usa el mecanismo subyacente de Git descrito anteriormente.
+6. **Haz push del resultado** si la fusión se completó correctamente.
 
-**Azure Pipelines**, calling the Azure DevOps REST API:
+**Azure Pipelines**, invocando la API REST de Azure DevOps:
 
 ```yaml
 - task: PowerShell@2
@@ -154,7 +154,7 @@ This job is responsible for discovering all currently open pull requests, mergin
       git push --set-upstream origin octopus/temp --quiet
 ```
 
-**GitHub Actions**, calling the GitHub REST API via the `gh` CLI:
+**GitHub Actions**, invocando la API REST de GitHub mediante la CLI `gh`:
 
 ```yaml
 - name: Git octopus merge
@@ -175,11 +175,11 @@ This job is responsible for discovering all currently open pull requests, mergin
     git push --set-upstream origin octopus/temp --quiet
 ```
 
-Both versions do the same thing: list open, non-draft PRs targeting `main`, resolve them to branch references, and merge them into a freshly recreated `octopus/temp` branch.
+Ambas versiones hacen lo mismo: enumeran las PR abiertas que no están en borrador y que apuntan a `main`, las resuelven a referencias de rama y las fusionan en una rama `octopus/temp` recién recreada.
 
-**Handling a failed merge:**
+**Cómo gestionar una fusión fallida:**
 
-If the merge fails — most likely due to a conflict between two or more of the open pull requests — don't just log an error and stop. A well-behaved implementation should reset the working directory and push an **empty placeholder commit** to the disposable branch before failing the pipeline run:
+Si la fusión falla —muy probablemente por un conflicto entre dos o más de las pull requests abiertas—, no te limites a registrar un error y detenerte. Una implementación correcta debería restablecer el directorio de trabajo y hacer push de un **commit vacío de marcador de posición** a la rama desechable antes de marcar como fallida la ejecución del pipeline:
 
 ```
 git reset --hard --quiet
@@ -192,73 +192,73 @@ git commit --allow-empty -m "init" --quiet
 git push origin octopus/temp --quiet
 ```
 
-This matters because downstream jobs (BPA verification, schema validation, deployment) may depend on the disposable branch existing in _some_ well-defined state. Without this step, a failed merge could leave the branch missing or half-merged, causing confusing secondary failures in later jobs rather than a single clear error at the merge step.
+Esto importa porque los trabajos posteriores (verificación de BPA, validación de esquema, despliegue) pueden depender de que la rama desechable exista en _algún_ estado bien definido. Sin este paso, una fusión fallida podría dejar la rama ausente o fusionada a medias, y provocar errores secundarios confusos en trabajos posteriores en lugar de un único error claro en el paso de fusión.
 
-##### Note — diagnosing which branch caused the conflict
+##### Nota: cómo diagnosticar qué rama causó el conflicto
 
-A straightforward implementation of this pattern does not automatically identify which pull request caused a merge conflict — it only reports that the merge failed. This is a real limitation compared to the archived `lesfurets/git-octopus` tool, which included tooling to iterate through branches one-by-one to isolate the culprit. In practice, most teams resolve this manually: temporarily unpublish (convert back to draft, or close) the pull requests you suspect, and re-run the pipeline until the merge succeeds again, to narrow down which branch was responsible. If this trial-and-error process becomes a bottleneck for your team, it's worth building an automated one-by-one bisection step into your own pipeline.
+Una implementación sencilla de este patrón no identifica automáticamente qué pull request causó un conflicto de fusión; solo genera un **Report** indicando que la fusión falló. Es una limitación real frente a la herramienta archivada `lesfurets/git-octopus`, que incluía utilidades para iterar por las ramas una a una hasta aislar a la culpable. En la práctica, la mayoría de los equipos lo resuelven manualmente: dejan de publicar temporalmente las pull requests que sospechan (las vuelven a marcar como borrador o las cierran) y vuelven a ejecutar el pipeline hasta que la fusión vuelva a completarse correctamente, para acotar qué rama era la responsable. Si este proceso de prueba y error se convierte en un cuello de botella para tu equipo, merece la pena añadir a tu pipeline un paso automatizado de bisección, rama por rama.
 
-### Job 2: Download Tabular Editor
+### Trabajo 2: Descargar Tabular Editor
 
-Since the jobs that follow need to invoke the Tabular Editor CLI, and build agents can't be assumed to have it pre-installed, a separate job downloads a portable copy of Tabular Editor at the start of every run:
+Como los trabajos siguientes necesitan invocar la CLI de Tabular Editor, y no puede darse por hecho que los agentes de compilación la tengan preinstalada, un trabajo independiente descarga una copia portátil de Tabular Editor al inicio de cada ejecución:
 
-- Fetches the latest release directly (for example, from Tabular Editor's GitHub releases).
-- Unzips it and discards the downloaded archive.
-- Makes the extracted `TabularEditor.exe` available to subsequent jobs on the same agent/runner.
+- Obtiene directamente la versión más reciente (por ejemplo, desde la página de lanzamientos de GitHub de Tabular Editor).
+- La descomprime y descarta el archivo descargado.
+- Deja el `TabularEditor.exe` extraído disponible para los trabajos posteriores en el mismo agente/runner.
 
-Downloading the latest version fresh on every run keeps the pipeline current automatically, without needing to track and update a pinned version number — though if your team wants deterministic, reproducible builds, pinning to a specific release and updating it deliberately is worth considering as an alternative.
+Descargar siempre la versión más reciente en cada ejecución mantiene el pipeline actualizado automáticamente, sin tener que hacer seguimiento ni actualizar un número de versión fijo; aun así, si tu equipo quiere compilaciones deterministas y reproducibles, conviene considerar como alternativa fijar una versión concreta y actualizarla de forma deliberada.
 
-### Job 3: BPA verification
+### Trabajo 3: Verificación de BPA
 
-This job runs Tabular Editor's [Best Practices Analyzer](xref:best-practice-analyzer) against every semantic model produced by the merge, validating it against your team's central quality rules.
+Este trabajo ejecuta el [Best Practices Analyzer](xref:best-practice-analyzer) de Tabular Editor sobre cada modelo semántico generado por la fusión y lo valida frente a las reglas de calidad centrales de tu equipo.
 
-If your repository contains more than one semantic model — common for BI teams serving multiple business areas — each model typically lives in its own subfolder, and the job loops over each one:
+Si tu repositorio contiene más de un modelo semántico —algo habitual en equipos de BI que dan servicio a varias áreas de negocio—, cada modelo suele estar en su propia subcarpeta, y el trabajo recorre cada uno de ellos:
 
 ```
 TabularEditor.exe "<path-to-model>" -A "<path-to-BPARules.json>" -V
 ```
 
-- `-A` points Tabular Editor at the BPA rules file to check against.
-- `-V` verifies the model, reporting the result.
+- `-A` indica a Tabular Editor qué archivo de reglas de BPA debe usar para la comprobación.
+- `-V` verifica el modelo e informa del resultado en un Report.
 
 > [!NOTE]
-> Decide up front whether a BPA violation should **fail** the pipeline or only **warn**. It's tempting to start with warnings while your rule set is still being tuned, but if that's left in place long-term, violations can silently accumulate without ever blocking a deployment. Treat a warn-only BPA step as a temporary state to graduate out of, not a permanent configuration.
+> Decide desde el principio si una infracción de BPA debe **hacer fallar** la canalización o solo **emitir una advertencia**. Es tentador empezar con advertencias mientras aún ajustas el conjunto de reglas, pero si eso se deja así a largo plazo, las infracciones pueden acumularse silenciosamente sin llegar nunca a bloquear una implementación. Trata un paso de BPA que solo emite advertencias como un estado temporal del que hay que salir, no como una configuración permanente.
 
-### Job 4: Schema validation
+### Trabajo 4: Validación del esquema
 
-This job compares each model's expected schema against its real, live data source — catching a renamed or missing column, for example, before it causes a broken refresh in the test environment.
+Este trabajo compara el esquema esperado de cada modelo con su Data source real y en vivo para detectar, por ejemplo, una columna renombrada o ausente antes de que provoque un error de actualización en el entorno de prueba.
 
 ```
 TabularEditor.exe "<path-to-model>" -S "<path-to-connection-script>.cs" -SC -V -W
 ```
 
-- `-S` runs a C# script that sets the model's data source connection string — typically reading it from a pipeline environment variable or secret, so the real connection details never need to be committed to source control.
-- `-SC` performs the schema check itself, comparing the model's metadata against the live source.
-- `-V -W` verify the result and control how warnings are handled.
+- `-S` ejecuta un C# Script que establece la cadena de conexión de la Data source del modelo; normalmente la lee de una variable de entorno o de un secreto de la canalización, para que nunca sea necesario confirmar los detalles reales de la conexión en el control de código fuente.
+- `-SC` realiza la comprobación del esquema, comparando los metadatos del modelo con el origen activo.
+- `-V -W` verifican el resultado y controlan cómo se tratan las advertencias.
 
-If your models depend on database objects that are themselves deployed as part of your pipeline — for example, SQL views published from source control — make sure that deployment step runs _before_ schema validation, so the check runs against the exact objects the model will see once everything is deployed to the test environment. This ordering dependency is easy to miss if the two jobs are written independently of each other.
+Si tus modelos dependen de objetos de base de datos que también se implementan como parte de tu canalización —por ejemplo, vistas SQL publicadas desde el control de código fuente—, asegúrate de que ese paso de implementación se ejecute _antes_ de la validación de esquema, para que la comprobación se haga contra exactamente los objetos que verá el modelo una vez que todo se haya implementado en el entorno de prueba. Es fácil pasar por alto esta dependencia de orden si ambos trabajos se escriben de forma independiente.
 
 > [!NOTE]
-> The specific mechanism for deploying upstream data objects (SQL views, other database artifacts) is going to be specific to your organization's data platform, and isn't part of the Octopus Merge pattern itself. What matters for this pattern is only that schema validation happens after your data source is in its expected state for the test environment — whatever populates that state is up to you.
+> El mecanismo específico para implementar objetos de datos previos (vistas SQL y otros artefactos de base de datos) dependerá de la plataforma de datos de tu organización y no forma parte del patrón Octopus Merge en sí. Lo único que importa para este patrón es que la validación de esquema se realice después de que tu Data source esté en el estado esperado para el entorno de prueba; cómo se llega a ese estado depende de ti.
 
-### Job 5: Model deployment
+### Trabajo 5: Implementación del modelo
 
-Once BPA verification and schema validation have both succeeded, this job deploys the merged model to the shared test workspace, using Tabular Editor's Save to Folder (`database.json`) format deployed directly over the XMLA endpoint:
+Una vez que la verificación de BPA y la validación de esquema se han completado correctamente, este trabajo implementa el modelo combinado en el Workspace de prueba compartido mediante el formato Guardar en carpeta (`Database.json`) de Tabular Editor, y lo despliega directamente a través del punto de conexión XMLA:
 
 ```
 TabularEditor.exe "<path-to-model>\database.json" -D "Provider=MSOLAP;Data Source=<XMLA-endpoint>;User ID=app:<app-id>@<tenant-id>;Password=<app-secret>;LocaleIdentifier=1033" "<model-name>" -O -P -R -W -V -E
 ```
 
-A few things worth calling out:
+Algunos puntos que conviene destacar:
 
-- Authentication is via a **service principal** (an Azure AD app registration), not a user account — appropriate for an unattended pipeline, and avoiding the need to keep a real user's credentials in your pipeline secrets.
-- The model name passed to Tabular Editor typically matches the folder name, so that a repository containing multiple models deploys each one to a correspondingly named dataset.
-- The `-O -P -R -W -V -E` flags cover overwrite, processing, roles, warnings, verification, and error handling — see the [Tabular Editor CLI reference](xref:command-line-options) for the full flag list if you need to adjust any of these for your own setup.
+- La autenticación se realiza mediante una **entidad de servicio** (un registro de aplicación de Azure AD), no con una cuenta de usuario; es lo adecuado para una canalización desatendida y evita tener que guardar las credenciales de un usuario real en los secretos de la canalización.
+- El nombre del modelo que se pasa a Tabular Editor normalmente coincide con el nombre de la carpeta, de modo que un repositorio que contiene varios modelos implementa cada uno en un Dataset con el nombre correspondiente.
+- Las opciones `-O -P -R -W -V -E` cubren sobrescritura, procesamiento, roles, advertencias, verificación y gestión de errores; consulta la [referencia de la CLI de Tabular Editor](xref:command-line-options) para ver la lista completa de opciones si necesitas ajustar alguna de ellas para tu propia configuración.
 
 > [!NOTE]
-> Business reviewers signing off in the shared test environment are validating a report, not a raw XMLA connection — in practice, something still needs to deploy and bind Power BI reports to the freshly deployed test model (and, optionally, update any published Power BI Apps) before that sign-off can happen. Whether every report is redeployed on every run, or only the ones affected by the current changes, is the kind of decision that varies enough by organization to be out of scope here — see @powerbi-cicd for that part of the pipeline.
+> Los revisores de negocio que dan su visto bueno en el entorno de prueba compartido están validando un Report, no una conexión XMLA directa; en la práctica, aún hace falta que algún paso implemente y vincule los informes de Power BI al modelo de prueba recién implementado (y, opcionalmente, actualice cualquier App de Power BI publicada) antes de que ese visto bueno pueda darse. Que se vuelva a implementar cada Report en cada ejecución, o solo los que se vean afectados por los cambios actuales, es el tipo de decisión que varía lo suficiente según la organización como para quedar fuera del alcance de este patrón; consulta @powerbi-cicd para esa parte de la canalización.
 
-### Full workflow diagram
+### Diagrama completo del flujo de trabajo
 
 ```mermaid
 flowchart TB
@@ -294,17 +294,17 @@ flowchart TB
     r1 -.->|"changes requested, developer pushes fix"| d2
 ```
 
-## Key principles
+## Principios clave
 
-- `main` is always in a deployable state; feature branches are short-lived and independent.
-- The disposable branch is deleted and recreated from `main` on every run — never fast-forwarded or reused.
-- A failed merge should leave the disposable branch in a well-defined (even if empty) state, not a missing or half-merged one.
-- Each validation stage (BPA, schema) should be a distinct pipeline job with its own pass/fail signal, not folded into one script.
-- Organization-specific steps (like a SQL views deployment) should be clearly separated from the generic pattern, both in your pipeline code and in how you document it internally — so the pattern remains portable if you need to apply it to a different project.
+- `main` siempre está lista para desplegarse; las ramas de características son de corta duración e independientes.
+- La rama desechable se elimina y se recrea a partir de `main` en cada ejecución; nunca se hace un fast-forward ni se reutiliza.
+- Una fusión fallida debería dejar la rama descartable en un estado bien definido (aunque quede vacía), y no en un estado inexistente o a medio fusionar.
+- Cada etapa de validación (BPA, esquema) debería ser un trabajo independiente en el pipeline, con su propio indicador de éxito o fallo, en lugar de integrarse en un único script.
+- Los pasos específicos de la organización (como el despliegue de vistas SQL) deben estar claramente separados del patrón genérico, tanto en el código del pipeline como en la documentación interna, para que el patrón siga siendo portable si necesitas aplicarlo a otro proyecto.
 
 ## Siguientes pasos
 
-- [Enabling parallel development using Git and Save to Folder](xref:parallel-development) — the branching strategy this pipeline supports.
-- [CI/CD Integration](xref:te-cli-cicd) — the new Tabular Editor CLI's CI/CD patterns, currently in Limited Public Preview.
+- [Habilitar el desarrollo en paralelo con Git y Guardar en carpeta](xref:parallel-development) — la estrategia de ramificación que admite este pipeline.
+- [Integración de CI/CD](xref:te-cli-cicd) — los patrones de CI/CD de la nueva CLI de Tabular Editor, actualmente en vista previa pública limitada.
 - @powerbi-cicd
 - @as-cicd
