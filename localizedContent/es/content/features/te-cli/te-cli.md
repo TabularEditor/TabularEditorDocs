@@ -27,9 +27,9 @@ A diferencia de las opciones de línea de comandos de `TabularEditor.exe` exclus
 
 Tres pilares de diseño están presentes en todos los comandos:
 
-- **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
-- **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
-- **Clear errors** - written to stderr with predictable exit codes.
+- **Salida estructurada** — JSON, CSV, TMDL y TMSL, junto con el texto predeterminado legible para humanos.
+- **Modo no interactivo** — una opción global `--non-interactive` que desactiva los avisos y hace que el comando falle inmediatamente.
+- **Errores claros** — se escriben en stderr con códigos de salida predecibles.
 
 En conjunto, hacen que el mismo binario funcione bien para tres perfiles muy distintos:
 
@@ -60,14 +60,14 @@ Consulta @te-cli-commands para ver una referencia completa de los comandos, con 
 | [Shell](xref:te-cli-commands#shell)                                            | Modo interactivo, estado de la sesión, completado automático del shell                          | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                   |
 
 > [!TIP]
-> The docs use canonical long-form verbs (`list`, `remove`, `move`), but the classic short forms still work as aliases (`ls`, `rm`, `mv`, `rename`). This applies to top-level commands and to `remove` / `list` subcommands under groups like `te bpa rules`, `te macro`, `te config`, `te profile`, `te session`, and `te test`. See @te-cli-commands#command-aliases for the full mapping.
+> La documentación usa los verbos canónicos en formato largo (`list`, `remove`, `move`), pero las formas cortas clásicas siguen funcionando como alias (`ls`, `rm`, `mv`, `rename`). Esto se aplica a los comandos de nivel superior y a los subcomandos `remove` / `list` dentro de grupos como `te bpa rules`, `te macro`, `te config`, `te profile`, `te session` y `te test`. Consulta @te-cli-commands#command-aliases para ver el mapeo completo.
 
 ## Primeros pasos
 
 1. **Regístrate o inicia sesión** en [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) con una cuenta de Tabular Editor.
 2. **Descarga e instala**: consulta @te-cli-install para ver las instrucciones para Windows, macOS y Linux.
 3. **Autentícate**: ejecuta `te auth login` para conectarte a Power BI o Fabric. Consulta @te-cli-auth.
-4. **Ejecuta tu primer comando**: `te --help` enumera todos los comandos; `te <command> --help` muestra las opciones detalladas. Tip: running `te` on its own in a terminal drops you into the interactive REPL - a friendly way to explore a model. Consulta @te-cli-interactive.
+4. **Ejecuta tu primer comando**: `te --help` enumera todos los comandos; `te <command> --help` muestra las opciones detalladas. Consejo: si ejecutas `te` por sí solo en un terminal, entrarás en el REPL interactivo, una forma cómoda de explorar un modelo. Consulta @te-cli-interactive.
 
 Para ver por primera vez un modelo en vivo, solo necesitas dos comandos:
 
@@ -76,7 +76,7 @@ te auth login
 te list -s MyWorkspace -d MyModel
 ```
 
-![Tabular Editor CLI te list example output](~/content/assets/images/features/cli/cli-command-ls.png)
+![Salida de ejemplo de te list en la CLI de Tabular Editor](~/content/assets/images/features/cli/cli-command-ls.png)
 
 ## Aviso de versión preliminar
 
