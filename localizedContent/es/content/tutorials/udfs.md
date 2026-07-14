@@ -2,7 +2,7 @@
 uid: udfs
 title: Funciones DAX definidas por el usuario
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,7 @@ applies_to:
 
 # Funciones DAX definidas por el usuario
 
-Las funciones DAX definidas por el usuario (UDFs) constituyen una nueva capacidad de los modelos semánticos, introducida en Power BI Desktop con la actualización de septiembre de 2025.
+Las UDF de DAX (funciones DAX definidas por el usuario) son una característica de los modelos semánticos. La característica pasó a versión preliminar con la actualización de septiembre de 2025 de Power BI Desktop y está [disponible de forma general](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) desde la versión de junio de 2026 de Power BI.
 
 La característica te permite crear funciones DAX reutilizables que puedes invocar desde cualquier expresión DAX de tu modelo, incluso desde otras funciones. Esta potente característica te ayuda a mantener la coherencia, reducir la duplicación de código y crear expresiones DAX más fáciles de mantener.
 
@@ -133,7 +133,30 @@ Además de especificar el modo de evaluación, también puedes restringir el tip
 
 Estas especificaciones de tipo son opcionales, pero si se indican, realizarán una conversión de tipo implícita en los argumentos que se pasen a la función y también afectarán a las sugerencias de autocompletado en Tabular Editor 3 al escribir código DAX que llame a la función.
 
+Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. Si llama a una UDF con un argumento que no coincide con el tipo de su parámetro —por ejemplo, si pasa un valor escalar cuando se espera un parámetro `TABLEREF`—, el Analizador semántico genera un Report de advertencia o un error.
+
 Consulta la [especificación de Microsoft para las UDF](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) para ver la lista completa de restricciones disponibles.
+
+### Parámetros opcionales con expresiones predeterminadas
+
+A partir de la versión 3.26.2, Tabular Editor 3 admite parámetros opcionales con expresiones predeterminadas. Añade `= expression` después del nombre del parámetro (y después de cualquier indicación de tipo o modo de evaluación) para que el parámetro sea opcional. Cuando quien llama omite el argumento, la expresión predeterminada proporciona el valor.
+
+```dax
+FUNCTION AddTax =
+    (
+        amount: NUMERIC,        // Parámetro obligatorio
+        taxRate: NUMERIC = 0.1  // Parámetro opcional; el valor predeterminado es 10 %
+    )
+    => amount * (1 + taxRate)
+```
+
+Si llamas a `AddTax(10)`, obtienes `11`, mientras que si llamas a `AddTax(10, 0.25)`, obtienes `12.5`.
+
+Los parámetros opcionales se rigen por algunas reglas:
+
+- Puedes dejar vacío un argumento para usar su valor predeterminado; por ejemplo, `MyFunc(1,,3)` omite el segundo argumento. El número mínimo de argumentos lo determina la posición del parámetro obligatorio situado más a la derecha.
+- Una expresión predeterminada solo puede hacer referencia a nombres (columnas, tablas, medidas, funciones) visibles donde se define la función, y no puede hacer referencia a otro parámetro de la misma función.
+- La comprobación de tipos con respecto a la indicación de tipo de un parámetro solo se aplica cuando se usa la expresión predeterminada; en cambio, un argumento pasado explícitamente se comprueba con respecto a esa indicación.
 
 ## Uso de las UDF en tu modelo
 
@@ -311,15 +334,15 @@ Tabular Editor 3 detecta automáticamente cualquier comentario y lo muestra corr
 
 **La función no funciona tras el despliegue**
 
-- Comprueba que tu entorno de destino admite UDFs (nivel de compatibilidad 1702 o superior). A fecha del dieciséis de septiembre de 2025, Power BI Service todavía no admite UDFs, ni tampoco Azure Analysis Services ni SQL Server Analysis Services.
+- Comprueba que tu entorno de destino admite UDFs (nivel de compatibilidad 1702 o superior). El servicio Power BI admite las UDF a partir de la versión de junio de 2026. Azure Analysis Services y SQL Server Analysis Services no admiten las UDF.
 
 ## Limitaciones
 
-- No todos los entornos de Power BI admiten UDFs (requiere compilaciones específicas)
+- Las UDF requieren un nivel de compatibilidad 1702 o superior; Azure Analysis Services y SQL Server Analysis Services no las admiten
 - Las UDFs no pueden ser recursivas (llamarse a sí mismas)
 
 > [!NOTE]
-> A partir de junio de 2026, las UDF están [disponibles de forma general](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738). Como parte de esto, las UDF ahora admiten expresiones predeterminadas y parámetros opcionales. Sin embargo, Tabular Editor 3 muestra actualmente un mensaje de error incorrecto cuando se usa la sintaxis de la expresión predeterminada. Este problema se corregirá en nuestra próxima actualización de Tabular Editor 3.
+> Con la [disponibilidad general](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) de las UDF en junio de 2026, las UDF admiten parámetros opcionales con expresiones predeterminadas. Tabular Editor 3 admite esta sintaxis desde la versión 3.26.2. Las versiones anteriores muestran un mensaje de error incorrecto cuando usas la sintaxis de expresión predeterminada.
 
 ---
 

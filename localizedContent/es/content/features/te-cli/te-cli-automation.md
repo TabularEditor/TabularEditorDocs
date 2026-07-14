@@ -28,11 +28,11 @@ Use `--output-format` para alternar cualquier comando entre el formato de texto 
 | `text` (predeterminado) | Para uso humano                                                                                                                                                                      | Texto sin formato en stdout, independientemente de si el flujo es un TTY o se canaliza.                                                     |
 | `json`                                     | Para uso por máquina                                                                                                                                                                 | Siempre devuelve JSON válido en stdout. Use `--error-format json` si también quiere errores legibles por máquina en stderr. |
 | `csv`                                      | Resultados tabulares (`query`, `bpa run`, `bpa rules`, `vertipaq`, `validate`, `test`, `refresh`, `profile list`, `session list`, `find`, `replace`, `get`, `ls`) | Escapado según RFC 4180.                                                                                                                    |
-| `tmsl` (alias `bim`)    | Serialización TMSL/BIM del objeto completo                                                                                                                                           | Aceptado por `te get` y `te ls`.                                                                                                            |
+| `tmsl` (alias `bim`)    | Serialización TMSL/BIM del objeto completo                                                                                                                                           | Admitido por `te get` y `te list`.                                                                                                          |
 | `tmdl`                                     | Serialización TMDL del objeto completo                                                                                                                                               | Aceptado solo por `te get` (un solo objeto).                                                                             |
 
 ```bash
-te ls --output-format json
+te list --output-format json
 te query -q "EVALUATE VALUES('Date'[Year])" --output-format csv
 te bpa run --output-format json
 ```
@@ -52,11 +52,11 @@ te deploy ./model --non-interactive --force --ci github
 
 Todos los comandos de `te` finalizan con un código de estado predecible, para que quien los invoque pueda tomar decisiones según el éxito o el error sin tener que analizar stdout.
 
-| Código de salida | Significado                                                                                                                                                                                                                                                                                                                      |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0`              | Éxito.                                                                                                                                                                                                                                                                                                           |
-| `1`              | Error genérico: argumentos inválidos, fallo del comando, errores de validación, error de autenticación, fallo en la comprobación de BPA con severidad ≥ error. En `te diff`: se encontraron diferencias (como en la convención `diff`/`cmp`). |
-| `2`              | Solo en `te diff`: se produjo un error durante la comparación, por lo que se desconoce el estado de las diferencias.                                                                                                                                                                             |
+| Código de salida | Significado                                                                                                                                                                                                                                                                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `0`              | Éxito.                                                                                                                                                                                                                                                                                                             |
+| `1`              | Fallo genérico: argumentos no válidos, fallo del comando, errores de validación, fallo de autenticación, fallo en la comprobación de BPA con severidad >= error. En `te diff`: se encontraron diferencias (como en la convención `diff`/`cmp`). |
+| `2`              | Solo en `te diff`: se produjo un error durante la comparación, por lo que se desconoce el estado de las diferencias.                                                                                                                                                                               |
 
 Combina los códigos de salida con las anotaciones `--ci <vsts\|github>` y `--trx <file>` para mostrar información detallada sobre los errores en CI; consulta @te-cli-cicd.
 
@@ -65,7 +65,7 @@ Combina los códigos de salida con las anotaciones `--ci <vsts\|github>` y `--tr
 Los errores, las advertencias y el banner de versión preliminar se escriben en **stderr**; los datos estructurados se escriben en **stdout**. Esto significa que puedes canalizar JSON de forma segura sin que se contamine con indicadores de progreso ni mensajes de diagnóstico:
 
 ```bash
-te ls --output-format json | jq '.[] | .name'
+te list --output-format json | jq '.[] | .name'
 te vertipaq --output-format json > stats.json
 ```
 
@@ -152,7 +152,7 @@ Compón comandos con pipes y `jq`. La salida de texto de la CLI está coloreada 
 
 ```bash
 # Count measures per table
-te ls --type measure --output-format json \
+te list --type measure --output-format json \
   | jq -r '.[] | .table' \
   | sort | uniq -c | sort -rn
 ```
@@ -179,10 +179,10 @@ El TMSL resultante puede revisarse en un pull request, confirmarse mediante un c
 
 Algunos patrones pequeños que aparecen a menudo al componer comandos de `te` en scripts o pipelines:
 
-- **Creaciones y eliminaciones idempotentes de medidas.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` y `te rm Sales/OldMeasure --if-exists --save` salen con código `0` exista o no el objeto; es seguro volver a ejecutarlos en CI.
+- **Creaciones y eliminaciones idempotentes de medidas.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` y `te remove Sales/OldMeasure --if-exists --save` terminan con código de salida `0` exista o no el objeto; es seguro volver a ejecutarlos en CI.
 - **Diferencias en modo de prueba.** `te replace` funciona en modo de prueba de forma predeterminada; añade `--save` solo cuando estés conforme con la vista previa.
 - **Genera TMSL para revisión.** `te deploy ./model --xmla deploy.tmsl` produce el script de implementación sin tocar el servidor; útil para que lo revise un DBA o para aplicarlo manualmente.
-- **Salida solo con rutas.** `te ls --paths-only` y `te find --paths-only` emiten una ruta de objeto por línea, ideal para canalizarlo a `xargs`, `te get` o `te set`. Los contenedores a nivel de modelo para medidas (`te ls Measures`, `te ls Columns`) se combinan bien con esto para recorridos completos del modelo.
+- **Salida solo con rutas.** `te list --paths-only` y `te find --paths-only` emiten una ruta de objeto por línea, ideal para canalizar la salida a `xargs`, `te get` o `te set`. Los contenedores a nivel de modelo para medidas (`te list Measures`, `te list Columns`) se combinan bien con esto para realizar barridos de todo el modelo.
 - **Pruebas de rendimiento de consultas.** `te query --trace --cold --runs 5` ejecuta una consulta DAX con caché en frío, cinco iteraciones y captura eventos de traza de FE/SE.
 - **Tiempos por paso en los logs de CI.** Los comandos de larga duración (`te deploy`, `te refresh`, `te script`, `te validate`) incluyen un campo `durationMs` en la salida JSON; útil para mostrar los tiempos de cada paso en los resúmenes del pipeline.
 
