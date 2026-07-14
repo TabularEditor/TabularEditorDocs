@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: Vista del Explorador TOM
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,7 +52,7 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Muestra un submenú que permite crear nuevas medidas, columnas, jerarquías, carpetas de visualización o elementos de cálculo bajo el objeto seleccionado. Las opciones disponibles dependen del tipo de objeto seleccionado.
 
 - **Mover a un grupo**:
-  Te permite organizar la tabla en un grupo de tablas dentro del Explorador TOM para navegar por el modelo con más facilidad. Esta opción solo está disponible para tablas.
+  Abre un submenú para organizar las tablas seleccionadas en un grupo de tablas y facilitar la navegación por el modelo. El submenú muestra los grupos de tablas existentes, una entrada **(Nuevo...)** que crea un grupo a partir de las tablas seleccionadas y abre el editor para nombrarlo, y una entrada **(Ninguno)** que elimina la asignación al grupo de tablas. Esta opción solo está disponible para tablas.
 
 - **Hacer invisible**:
   Marca el objeto como no visible en las herramientas cliente. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, puedes usar el atajo **Ctrl+I** para ocultar el objeto.
