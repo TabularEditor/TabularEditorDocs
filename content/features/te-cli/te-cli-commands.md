@@ -315,13 +315,6 @@ Move or rename a model object. Both source and destination are `<path>` argument
 - `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 - `--force` - save even if the mutation introduces DAX validation errors.
 
-`te mv` accepts:
-
-- `-t, --type <kind>` - disambiguate when the source path matches multiple object kinds (e.g., a column and a hierarchy with the same name).
-- `--save` / `--save-to <path>` - persist the change.
-- `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
-- `--force` - save even if the mutation introduces DAX validation errors.
-
 ```bash
 te move Sales/Revenue Finance/Revenue --save                # Move measure to another table
 te move Sales/Revenue Sales/TotalRevenue --save             # Rename measure
