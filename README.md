@@ -10,15 +10,31 @@ The site uses [DocFX](https://dotnet.github.io/docfx/) and GitHub flavoured mark
 
 All contributions are welcome. We will review all pull requests submitted.
 
-To test your changes locally:
-- Make sure [DocFX](https://dotnet.github.io/docfx/) and Python 3.11+ are installed.
-- Run `python build-docs.py --serve` in the root of the project.
+For convenience for typical contributions, we have built a simple wrapper around the build process.
+Unless you are working specifically on localization or the build process itself, you should be able to get by with the `run` script.
 
-# Build Script Usage
+Getting started:
+1. Make sure you have Bash installed (included in most Linux distros, macOS, and [Git for Windows](https://git-scm.com/install/windows))
+2. From the repo root, run the setup check and install any tools it reports as missing
+   - (Linux distros and macOS): `./run setup`
+   - (Windows): `bash run setup` (after this run everything from Git Bash)
+3. To iterate on docs and see a preview in your browser:
+   - in one terminal: `./run serve`: launches a localhost server that renders the docs at http://localhost:8080 where you can see the docs as they will be rendered on the docs website
+   - in another terminal: `./run watch`: regenerates the rendered site every time you save a change to a markdown document, so you can refresh your browser to see it
+
+These commands all build and work only on the English language docs, as the English markdown is our canonical version of documentation and the language we expect contributions in.
+
+For more info, try `./run help` and `./run <subcommand> help`.
+If you'd like more detail, [check out the run script README](build_scripts/run_scripts/README.md).
+
+If you want to have more control over the build process, continue reading below about the `build-docs.py` script.
+
+# Advanced build Script Usage
 
 The `build-docs.py` script handles all documentation building tasks including multi-language support.
+Make sure you have Python >=3.11 and docfx installed, the latter either globally or locally.
 
-## Quick Start
+## Using build-docs.py directly
 
 ```bash
 # Build and serve locally (English only, for development)
@@ -50,6 +66,8 @@ swa start _site
 | `--serve` | Build and serve locally (English only, for development) |
 | `--skip-gen` | Skip running gen_redirects.py (use existing configs) |
 | `--no-api-copy` | Skip copying API docs to localized sites |
+| `--skip-api` | Reuse existing API metadata in content/api, ~30-40% faster (local markdown iteration only, requires `--serve`/`--lang`; never for testing/CI/CD/releases) |
+| `--permissive` | Don't treat English DocFX warnings as build failures (for local iteration; full/CI builds stay strict) |
 | `--sync` | Sync English fallback for missing/outdated translations (for local dev) |
 
 ## What the Build Script Does
@@ -68,16 +86,24 @@ swa start _site
 # Project Structure
 
 ```
-TEDoc/
+/
 ├── build-docs.py              # Main build script
+├── run                        # Task runner for common dev tasks (see build_scripts/run_scripts/README.md)
 ├── build_scripts/             # Helper scripts
-│   ├── gen_redirects.py       # Generates docfx.json configs
+│   ├── check_links.py         # Dead-link checker for the generated _site
+│   ├── config_loader.py       # Shared configuration loader for build scripts
+│   ├── csharp_doctest.py      # Validates annotated C# code blocks in docs against the te CLI
 │   ├── gen_languages.py       # Generates language manifest
-│   ├── gen_staticwebapp_config.py
-│   ├── inject_seo_tags.py
-│   ├── sync-localized-content.py
+│   ├── gen_redirects.py       # Generates docfx.json configs
+│   ├── gen_sitemap_index.py   # Post-processes the English sitemap; generates the sitemap index
+│   ├── gen_staticwebapp_config.py     # Generates Azure Static Web Apps routing config
+│   ├── inject_seo_tags.py     # Adds hreflang and canonical tags to built HTML
 │   ├── normalize-localized-alerts.py  # Repairs Crowdin-collapsed DocFX alerts
-│   └── normalize-localized-heading-anchors.py  # Injects English-slug bookmark anchors into translations
+│   ├── normalize-localized-heading-anchors.py  # Injects English-slug bookmark anchors into translations
+│   ├── sync-localized-content.py      # Syncs English content into localized build dirs
+│   ├── te_script_runner.py    # Runs C# snippets against a throwaway model via the te CLI
+│   ├── test-fixtures/         # Fixtures for the build-script tests
+│   └── run_scripts/           # ./run subcommand scripts and shared lib.sh (see its README)
 ├── content/                   # English source content (tracked in git)
 │   └── _ui-strings.json       # English UI strings (header, footer, banners)
 ├── localizedContent/          # Build directories for all languages
@@ -222,4 +248,3 @@ If a key is missing from a language's file, or no `_ui-strings.json` exists at a
 | `tableOfContents` | `Table of Contents` | Mobile TOC offcanvas title |
 | `selectLanguage` | `Select language` | Language picker label |
 | `copyCode` | `Copy code` | Code block copy button aria-label |
-

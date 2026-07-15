@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Task runner for the Tabular Editor docs repo
+#
+# Dispatches to the command scripts in build_scripts/run_scripts/. Always runs
+# from the repo root, regardless of the caller's working directory, so file
+# arguments are repo-root-relative.
+#
+# Usage:
+#   ./run                # this documentation plus the command list (alias: help)
+#   ./run <cmd> [args]   # run a command
+#   ./run <cmd> help     # detailed help for one command
+#   ./run commands       # just the command list (alias: --list)
+#
+# On Windows, invoke from Git Bash (`./run <cmd>`, or `bash run <cmd>`).
+################################################################################
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPTS="$ROOT/build_scripts/run_scripts"
+# shellcheck source=build_scripts/run_scripts/lib.sh
+source "$SCRIPTS/lib.sh"
+cd "$ROOT"
+
+commands () {
+	# List every command script with the first line of its banner.
+	printf 'Commands:\n'
+	local script name
+	for script in "$SCRIPTS"/*.sh; do
+		name="$(basename "$script" .sh)"
+		if [ "$name" = "lib" ]; then
+			continue
+		fi
+		printf '  %-8s %s\n' "$name" "$(banner_title "$script")"
+	done
+	printf '\nRun ./run <command> help for details on one command.\n'
+	printf 'Run ./run help for full runner documentation.\n'
+}
+
+help () {
+	# Full runner documentation (the banner above) plus the command index.
+	banner_help "$0"
+	commands
+}
+
+cmd="${1:-help}"
+if [ "$#" -gt 0 ]; then
+	shift
+fi
+
+case "$cmd" in
+	commands|--list)
+		commands
+		exit 0
+		;;
+	help|--help|-h)
+		help
+		exit 0
+		;;
+esac
+
+script="$SCRIPTS/$cmd.sh"
+if [ ! -f "$script" ]; then
+	error "unknown command: $cmd"
+	commands >&2
+	exit 2
+fi
+
+exec bash "$script" "$@"
