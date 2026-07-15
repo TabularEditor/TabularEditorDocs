@@ -1709,6 +1709,16 @@
               Looks up a localized string similar to File upload to the DAX Optimizer service is disabled by a local policy..
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerObfuscationDictionaryMissingTitle">
+            <summary>
+              Looks up a localized string similar to Previous obfuscation dictionary not found.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerObfuscationDictionaryMissingMessage">
+            <summary>
+              Looks up a localized string similar to The obfuscation dictionary for the previously uploaded version of this model could not be found on this computer. The new version will be uploaded with freshly obfuscated object names, so the DAX Optimizer service may no longer recognize issues you previously marked as ignored for this model..
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_AuthorsLabel">
             <summary>
               Looks up a localized string similar to Authors:.
@@ -2202,6 +2212,11 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.Warning">
             <summary>
               Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.ModelDiff.ModelDiffResult">
+            <summary>
+            Output of <see cref="T:TabularEditor.Shared.ModelDiff.ModelDiffComparer"/>: a hierarchical JSON-level diff tree between two models.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Models.UserOptions.AIConsent">
@@ -3301,79 +3316,6 @@
             A message that has been stripped of sensitive information.
             </summary>
         </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.Endpoint">
-            <summary>
-            Endpoint URL for Azure OpenAI (e.g., "https://your-resource.openai.azure.com")
-            or Custom provider base URL (e.g., "https://openrouter.ai/api/v1").
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.Model">
-            <summary>
-            Model name or deployment ID. If empty, uses the provider's default model.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.MaxOutputTokens">
-            <summary>
-            The DefaultMaxOutputTokens config setting used when creating the Anthropic IChatClient.
-            When the value is set to 0, we use the maximum number of output tokens available for any
-            given Anthropic model. Set the value to any value greater than 0 to override the defaults.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowSelectionContext">
-            <summary>
-            Show the "Context:" selection indicator above assistant replies.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowCustomInstructions">
-            <summary>
-            Show the "Custom Instructions:" / "Invoked:" skill pills above assistant replies.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowKnowledgeBaseSearch">
-            <summary>
-            Show the "Searching knowledge base..." indicator during tool calls.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.AutoCompact">
-            <summary>
-            Automatically compact conversations when context window usage exceeds the threshold.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.AutoCompactThreshold">
-            <summary>
-            Percentage of context window usage that triggers auto-compaction (50-90).
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.EffectiveModel">
-            <summary>
-            Gets the effective model to use, falling back to the provider's default if not specified.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowScriptPreview">
-            <summary>
-            Whether or not to display the "Script preview" dialog after C# script execution
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.CheckForKbUpdatesOnStartup">
-            <summary>
-            Whether to check for knowledge base updates when the AI assistant starts.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.OrganizationId">
-            <summary>
-            For OpenAI endpoints, users can specify an optional Organization (in case they belong to multiple organizations)
-            </summary>
-        </member>
-        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ProjectId">
-            <summary>
-            For OpenAI endpoints, users can specify an optional Project (to direct billing to that project)
-            </summary>
-        </member>
-        <member name="M:TabularEditor.Shared.Services.AI.AIProviderExtensions.GetDefaultModel(TabularEditor.Shared.Services.AI.AIProvider)">
-            <summary>
-            Returns the default model for the provider, or null if user must specify.
-            </summary>
-        </member>
         <member name="T:TabularEditor.Shared.Services.AI.ConsentType">
             <summary>
             Defines the type of data being sent to the AI provider.
@@ -3539,6 +3481,79 @@
             <param name="documentId">The document ID.</param>
             <returns>The document content, or null if the document was not found.</returns>
         </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.Endpoint">
+            <summary>
+            Endpoint URL for Azure OpenAI (e.g., "https://your-resource.openai.azure.com")
+            or Custom provider base URL (e.g., "https://openrouter.ai/api/v1").
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.Model">
+            <summary>
+            Model name or deployment ID. If empty, uses the provider's default model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.MaxOutputTokens">
+            <summary>
+            The DefaultMaxOutputTokens config setting used when creating the Anthropic IChatClient.
+            When the value is set to 0, we use the maximum number of output tokens available for any
+            given Anthropic model. Set the value to any value greater than 0 to override the defaults.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowSelectionContext">
+            <summary>
+            Show the "Context:" selection indicator above assistant replies.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowCustomInstructions">
+            <summary>
+            Show the "Custom Instructions:" / "Invoked:" skill pills above assistant replies.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowKnowledgeBaseSearch">
+            <summary>
+            Show the "Searching knowledge base..." indicator during tool calls.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.AutoCompact">
+            <summary>
+            Automatically compact conversations when context window usage exceeds the threshold.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.AutoCompactThreshold">
+            <summary>
+            Percentage of context window usage that triggers auto-compaction (50-90).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.EffectiveModel">
+            <summary>
+            Gets the effective model to use, falling back to the provider's default if not specified.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowScriptPreview">
+            <summary>
+            Whether or not to display the "Script preview" dialog after C# script execution
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.CheckForKbUpdatesOnStartup">
+            <summary>
+            Whether to check for knowledge base updates when the AI assistant starts.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.OrganizationId">
+            <summary>
+            For OpenAI endpoints, users can specify an optional Organization (in case they belong to multiple organizations)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ProjectId">
+            <summary>
+            For OpenAI endpoints, users can specify an optional Project (to direct billing to that project)
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.AIProviderExtensions.GetDefaultModel(TabularEditor.Shared.Services.AI.AIProvider)">
+            <summary>
+            Returns the default model for the provider, or null if user must specify.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Services.AppCache.Ppu">
             <summary>
             A dictionary indicating whether a given WorkspaceID is a PPU workspace or not
@@ -3635,6 +3650,12 @@
             <param name="complexKeyStr"></param>
             <param name="writable"></param>
             <returns>RegistryKey For the complex Subkey. </returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.DaxOptimizer.DaxOptimizerService.TryLoadObfuscationDictionary(System.String)">
+            <summary>
+            Loads the obfuscation dictionary for the given id from cache or disk (null if empty/not found). Unlike
+            <see cref="M:TabularEditor.Shared.Services.DaxOptimizer.DaxOptimizerService.ResolveObfuscationDictionary(System.String)"/>, it does not touch <see cref="P:TabularEditor.Shared.Services.DaxOptimizer.DaxOptimizerService.ObfuscationDictionaryNeeded"/>.
+            </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.FileSystemHelper.DirectoryFromPath(System.String)">
             <summary>
@@ -4140,6 +4161,13 @@
         </member>
         <member name="M:TabularEditor.Shared.Services.UserOptionsService.GetTabularModelUserOptionsFileName(System.String)">
             <param name="modelFileName">Can be a folder or a file</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.VertiPaqAnalyzer.IVertiPaqAnalyzerService.GetObfuscatedVpax(Dax.Vpax.Obfuscator.Common.ObfuscationDictionary@,Dax.Vpax.Obfuscator.Common.ObfuscationDictionary)">
+            <summary>
+            Obfuscates the current model and returns the obfuscated VPAX bytes.
+            </summary>
+            <param name="obfuscationDictionary">The dictionary describing the applied obfuscation, to be persisted for later deobfuscation.</param>
+            <param name="baseDictionary">Optional dictionary from a previous obfuscation of the same model; when supplied, obfuscation is incremental so obfuscated names stay stable across versions.</param>
         </member>
         <member name="P:TabularEditor.Shared.Services.VertiPaqAnalyzer.PreloadVpaxResult.ReconstructedTom">
             <summary>

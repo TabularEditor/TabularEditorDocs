@@ -9267,6 +9267,47 @@
               Looks up a localized string similar to Error while removing unused files from TMDL folder structure: {0}.
             </summary>
         </member>
+        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.CultureCollectionEditor">
+            <summary>
+            This Collection Editor for Cultures doesn't allow new cultures to be defined without setting the 'Language' property
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1">
+            <summary>
+            A CollectionEditor that automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
+            Moreover, it will automatically call BeginUpdate and EndUpdate on the TabularModelHandler.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.#ctor">
+            <summary>
+            A CollectionEditor that automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
+            Moreover, it will automatically call BeginUpdate and EndUpdate on the TabularModelHandler.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.GetEditableCollection(System.Object)">
+            <summary>
+            Provide the initial collection of items to be shown in the CollectionEditor form.
+            Note: items are not added/removed from this collection while the user is interacting
+            with the CollectionEditor form. Instead, the SetEditableCollection method is called
+            when the user hits the "OK" button. If you need to perform special actions when items
+            are added/removed, override the CreateInstance and DestroyInstance methods.
+            </summary>
+            <param name="editValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.SetEditableCollection(System.Collections.Generic.IList{`0})">
+            <summary>
+            Override this method to update the collection property of the object being edited
+            This is only called when the user hits the "OK" button in the CollectionEditor form.
+            You may also throw an exception here to prevent the user from closing the form.</summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.TabularObjectCollectionEditor`1">
+            <summary>
+            A CollectionEditor that works natively with TabularObjectCollections, and automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
+            </summary>
+        </member>
         <member name="T:TabularEditor.PropertyGridUI.Converters.Currency">
             <summary>
             Provide a structured way to talk about currencies, capturing the symbol,
@@ -9433,28 +9474,42 @@
             complex class that can be converter to and from the FormatString string.
             </summary>
         </member>
+        <member name="T:TabularEditor.PropertyGridUI.ICustomEditor">
+            <summary>
+            The CustomEditors static class, can be used to register custom editors that should be used when
+            a specified property is edited in the PropertyGrid. An editor provided this way, must implement
+            the ICustomEditor interface.
+            
+            An example of a custom editor is the FormDisplayFolderSelect which displays a hierarchical view
+            of Display Folders in a table. The editor is used for editing Display Folder strings in the
+            property grid.
+            
+            Properties that should be editable in a Custom Editors, must be decorated with the Editor attribute
+            like so:
+            
+                [Editor(typeof(CustomDialogEditor), typeof(System.Drawing.Design.UITypeEditor))]
+                public string FormatString { get; set; }
+            </summary>
+        </member>
         <member name="T:TabularEditor.PropertyGridUI.IExpandableIndexer">
             <summary>
-            Stub for IExpandableIndexer. On Windows, this enables dictionary-type
-            properties to be expanded in the PropertyGrid.
+            This interface must be implemented by dictionary-type properties on a class, such as
+            annotations, translations, etc.
             </summary>
+        </member>
+        <member name="M:TabularEditor.PropertyGridUI.IExpandableIndexer.GetDisplayName(System.String)">
+            <summary>
+            Gets the value to display for a given key. Note, this is not the value of the object represented by the key. 
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
         </member>
         <member name="T:TabularEditor.PropertyGridUI.IDropDownProperties">
             <summary>
-            Stub for IDropDownProperties. On Windows, this enables properties to
-            show as dropdown lists in the PropertyGrid.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.PropertyGridUI.IndexerConverter">
-            <summary>
-            Stub for IndexerConverter. The real implementation lives in DictionaryProperty.cs
-            which is WinForms-coupled and excluded from cross-platform builds.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.PropertyGridUI.DataCoverageDefinitionConverter">
-            <summary>
-            Stub for DataCoverageDefinitionConverter. The real implementation lives in
-            AlternateOfEditor.cs which is WinForms-coupled.
+            This interface must be implemented by objects containing one or more property that
+            should show up as a drop-down list in the PropertyGrid. The interface provides a
+            means for the DropDown typeconverter to get the list of string items to display in
+            the drop down.
             </summary>
         </member>
         <member name="T:TabularEditor.PropertyGridUI.NoMultiselectAttribute">
@@ -9473,6 +9528,20 @@
             <summary>
             Use this to indicate that a method call corresponds to resetting the property. This will set the <see cref="P:TabularEditor.PropertyGridUI.PropertyAction.IsResetAction"/> to true,
             indicating to clients that it is not necessary to show an explicit "Reset" menu option, when the action is available.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.DesignerHost">
+            <summary>
+            The DesignerHost is a custom implementation of IDesignerHost and ISite, which is needed to hookup
+            any PropertyGrid components used in the UI to enable proper Undo/Redo functionality. Otherwise,
+            when changing the properties of multiple objects at once, the operation is not batched, meaning
+            that the UI will be updated when a property value is set for every object in the selection. This
+            will cause slow updates when many objects are selected, and furthermore, undoing the entire operation
+            is a hassle, as one Undo-action is needed per object.
+            
+            To set up a PropertyGrid to use this host, use the following code:
+            
+                MyPropertyGrid.Site = new DesignerHost();
             </summary>
         </member>
         <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.ApplyChanges">
@@ -9811,31 +9880,6 @@
         <member name="M:Microsoft.AnalysisServices.Tabular.Helper.MetadataObjectHelper.ValidateName(Microsoft.AnalysisServices.Tabular.NamedMetadataObject,System.String)">
             <summary>
             Throws an exception of the provided new name is invalid for the specified object.
-            </summary>
-        </member>
-        <member name="T:System.Drawing.Design.UITypeEditor">
-            <summary>
-            Stub for System.Drawing.Design.UITypeEditor (Windows Forms only).
-            </summary>
-        </member>
-        <member name="T:System.ComponentModel.Design.MultilineStringEditor">
-            <summary>
-            Stub for System.ComponentModel.Design.MultilineStringEditor (Windows Forms only).
-            </summary>
-        </member>
-        <member name="T:System.Windows.Forms.MessageBoxButtons">
-            <summary>
-            Stub for System.Windows.Forms.MessageBoxButtons (Windows Forms only).
-            </summary>
-        </member>
-        <member name="T:System.Windows.Forms.MessageBoxIcon">
-            <summary>
-            Stub for System.Windows.Forms.MessageBoxIcon (Windows Forms only).
-            </summary>
-        </member>
-        <member name="T:System.Windows.Forms.DialogResult">
-            <summary>
-            Stub for System.Windows.Forms.DialogResult (Windows Forms only).
             </summary>
         </member>
     </members>

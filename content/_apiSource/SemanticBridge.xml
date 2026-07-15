@@ -2076,9 +2076,6 @@
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}},System.String)">
             <inheritdoc
                 cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="validate">Validation function</param>
             <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean})">
@@ -2098,10 +2095,6 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean},System.String)">
             <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the object is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the object is invalid</param>
             <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean})">
@@ -2116,10 +2109,6 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean},System.String)">
             <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the view is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the view is invalid</param>
             <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean})">
@@ -2134,10 +2123,6 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean},System.String)">
             <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the join is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the join is invalid</param>
             <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})">
@@ -2152,10 +2137,6 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean},System.String)">
             <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the field is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the field is invalid</param>
             <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean})">
@@ -2170,10 +2151,6 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean},System.String)">
             <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the measure is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the measure is invalid</param>
             <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular(TabularEditor.TOMWrapper.Model,System.String,System.String,System.Collections.Generic.List{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}@,System.Boolean,System.String)">
@@ -2209,7 +2186,7 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForDimension(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension,System.Boolean})">
             <summary>
-                Legacy name for <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})" />. Produces
+                Legacy name for "MakeValidationRuleForField". Produces
                 a <c>ValidationRule&lt;Dimension&gt;</c> via the generic
                 <c>MakeValidationRule&lt;T&gt;</c> factory with <c>T</c> inferred
                 as <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension" />. The validation visitor picks up
@@ -2408,10 +2385,89 @@
                 in the dim-unresolved recovery case.
             </summary>
         </member>
+        <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewCollection`1">
+            <summary>
+                Read surface of a name-indexed collection of metric view child
+                objects. Name lookups are case-insensitive, matching the Databricks
+                SQL default (<c>spark.sql.caseSensitive=false</c>).
+            </summary>
+            <typeparam name="T">The type of metric view object in the collection</typeparam>
+        </member>
+        <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewCollection`1.Item(System.String)">
+            <summary>
+                Gets the item with the specified name.
+            </summary>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">
+                If no item with the specified name exists
+            </exception>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewCollection`1.Find(System.String)">
+            <summary>
+                Finds an item by name, returning null if not found.
+            </summary>
+            <param name="name">The name to search for</param>
+            <returns>The item with the specified name, or null if not found</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewCollection`1.Contains(System.String)">
+            <summary>
+                Determines whether an item with the specified name exists in the collection.
+            </summary>
+            <param name="name">The name to search for</param>
+            <returns>True if an item with the specified name exists</returns>
+        </member>
+        <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewItemOwner">
+            <summary>
+                The owning collection's contract toward its items: lets a child object
+                coordinate lifecycle operations with whichever collection holds it,
+                without knowing which collection that is (View.Joins, View.Fields,
+                View.Measures, or a nested Join.Joins).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewItemOwner.Remove(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)">
+            <summary>
+                Removes the item from this owner. Reference-based; returns false if
+                the item is not (or no longer) owned by this collection.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewItemOwner.Rename(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase,System.String,System.String)">
+            <summary>
+                Validates and re-keys the name index for a pending rename. Throws
+                ArgumentException when newName already belongs to a different item
+                (case-insensitive) -- and does so BEFORE the item's Name mutates,
+                so a rejected rename leaves both the object and the index
+                untouched.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewNamedObject">
+            <summary>
+                Contract for the named child objects of a View (joins, fields,
+                measures). Renaming through <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewNamedObject.Name" /> keeps the owning
+                collection's name index consistent.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewNamedObject.IsDeleted">
+            <summary>
+                True once this object has been deleted from its parent collection.
+                Deleted objects are zombies: their properties remain readable, but
+                they are detached from the model and no longer serialize.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewNamedObject.Delete">
+            <summary>
+                Deletes this object from its parent collection. Idempotent.
+            </summary>
+        </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject">
             <summary>
-                Marker interface for all MetricView domain objects.
-                Used for type safety and identification in public API
+                Universal contract for all MetricView domain objects, root and
+                children alike. Used for type safety and identification in public API.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject.View">
+            <summary>
+                The root <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View" /> of the object graph this
+                object belongs to. The View itself returns the same instance, so
+                any object can be walked up to the root without pattern matching.
             </summary>
         </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule">
@@ -2898,8 +2954,8 @@
                 different SQL source binding. The placeholder is renamed to
                 <paramref name="renamedName" /> (preserving the relationship
                 wiring that referenced it); the declaration takes the original
-                name with its declared source. Information severity — the rename
-                is a deterministic accommodation of the user's explicit
+                name with its declared source. Information severity: this rename
+                is deterministic accommodation of the user's explicit
                 declaration, not a problem to fix.
             </summary>
         </member>
@@ -2932,8 +2988,8 @@
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.JoinOnNoSourceSide(System.String,System.String,System.String)">
             <summary>
                 Emitted when a join's <c>On</c> clause is a binary equality but
-                the two refs don't pair a source-qualified column with a dim-
-                qualified column — either both refs land on the same side, or
+                the two refs don't pair a source-qualified column with a
+                dim-qualified column. Either both refs land on the same side, or
                 one of them carries an unrelated qualifier. The dim and its
                 source are created, but no FK/PK pair is wired.
             </summary>
@@ -2975,25 +3031,43 @@
                 metric view but untranslatable here.
             </summary>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.DerivedFieldUntranslated(System.String,System.String,System.String)">
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.ExpressionUntranslated(System.Type,System.String,System.String,System.String)">
             <summary>
                 Used for surviving Unknown nodes — constructs that parsed cleanly
-                into the AST but for which we have no translation path. Matches the
-                downstream Tabular-side "could not be translated" diagnostic so the
-                end user sees a single, consistent message regardless of which
-                pipeline stage gave up.
+                into the AST but for which we have no translation path. Code and
+                message are kind-specific: field and measure bodies fall back to a
+                comment-block wrap of the original expression downstream, while an
+                untranslatable join ON clause yields the joined tables without a
+                relationship.
             </summary>
+            <param name="subjectType">
+                what is being analyzed: <c>typeof(Field)</c>,
+                <c>typeof(Measure)</c>, or <c>typeof(Join)</c>
+            </param>
+            <param name="objectName">
+                the object's declared name (formatted into the message)
+            </param>
+            <param name="path">canonical object path (anchor for navigation)</param>
+            <param name="context">
+                diagnostic context: the unhandled construct or semantic error
+                rendered with its source text
+            </param>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.FieldExpressionParseError(System.String,System.String,System.String,System.String)">
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.ExpressionParseError(System.Type,System.String,System.String,System.String,System.String)">
             <summary>
-                Used when ANTLR's lexer or parser reports an error against a
-                dimension expression — i.e., the source SQL itself didn't parse.
-                Distinct from <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.DerivedFieldUntranslated(System.String,System.String,System.String)" />, which signals
+                Used when ANTLR's lexer or parser reports an error against the
+                subject's expression, i.e., the source SQL itself didn't parse.
+                Distinct from <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.ExpressionUntranslated(System.Type,System.String,System.String,System.String)" />, which signals
                 a parsed-but-unhandled construct. As the parser grows in coverage
                 this code becomes a clear "the user's SQL is the problem" signal
-                rather than "we don't translate this yet."
+                rather than "we don't translate this yet." The code is
+                kind-specific; the message carries the kind word.
             </summary>
-            <param name="path">canonical dimension path (anchor for navigation)</param>
+            <param name="subjectType">
+                what is being analyzed: <c>typeof(Field)</c>,
+                <c>typeof(Measure)</c>, or <c>typeof(Join)</c>
+            </param>
+            <param name="path">canonical object path (anchor for navigation)</param>
             <param name="offendingText">
                 the offending source slice — preferably the tight span of the
                 surviving Unknown that overlapped this error; falls back to the
@@ -3018,23 +3092,6 @@
                 diagnostic context — typically the dimension expression and a brief
                 description of which routing branches were considered
             </param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.ExpressionParseError(System.String,System.String,System.String,System.String)">
-            <summary>
-                Kind-aware overload of <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.FieldExpressionParseError(System.String,System.String,System.String,System.String)" />.
-                <paramref name="subjectType" /> identifies what is being analyzed
-                (<c>typeof(Field)</c>, <c>typeof(Measure)</c>,
-                <c>typeof(Join)</c>) for future kind-aware code/message branching;
-                currently delegates to the dimension-flavored factory.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.ExpressionUntranslated(System.String,System.String,System.String)">
-            <summary>
-                Kind-aware overload of <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.DerivedFieldUntranslated(System.String,System.String,System.String)" />.
-                <paramref name="subjectType" /> identifies what is being analyzed
-                for future kind-aware code/message branching; currently delegates
-                to the dimension-flavored factory.
-            </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.MeasureRefOutOfContext(System.Type,System.String,System.String,System.String)">
             <summary>
@@ -3067,18 +3124,18 @@
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.MetricViewMissingFormatType(System.String)">
             <summary>
                 Used when the format specification is missing the required `type`
-                property in yaml.
+                property in YAML.
             </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.MetricViewMissingVersion(System.String)">
             <summary>
                 Use when the metric view is missing required `version` property in
-                yaml.
+                YAML.
             </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.MetricViewUnknownFormatType(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.DTO.FormatDto,System.String)">
             <summary>
-                The format type provided (yaml `type` property) is not known.
+                The format type provided (YAML `type` property) is not known.
             </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.MetricViewUnknownAbbreviation(System.String,System.String)">
@@ -3203,6 +3260,17 @@
                 fails. The fields/dimensions block is skipped on this path
                 (the resulting view has no fields) and the diagnostic is
                 surfaced as a <see cref="T:TabularEditor.SemanticBridge.Orchestration.TransformationResult`1.Failure" />.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewDiagnostics.MetricViewDuplicateName(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase,System.String)">
+            <summary>
+                A second object in the YAML claimed a name already used in the same
+                collection (case-insensitive, matching the Databricks SQL default).
+                Deserialization fails: the object model cannot hold duplicate names,
+                and every metric view name is a SQL alias, so duplicates fail at
+                declare or query time on the platform regardless. Kind and path
+                derive from the first claimant, so they cannot disagree with each
+                other or the collection.
             </summary>
         </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Mapping.MetricViewToAbstractVisitor">
@@ -3373,263 +3441,6 @@
             <param name="source">The source string to parse</param>
             <returns>Database, schema, and table names if parsing succeeds; null otherwise</returns>
         </member>
-        <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews">
-            <summary>
-                Static wrapper/convenience class for use in C# scripts
-            </summary>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Load(System.String)">
-            <summary>
-                Loads a MetricView from a YAML file
-            </summary>
-            <param name="path">full path to the yaml file on disk</param>
-            <returns>an unvalidated MetricView</returns>
-            <exception cref="T:System.IO.InvalidDataException">
-                Thrown in exceptional failures of deserialization; we should always see a result
-            </exception>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Deserialize(System.String)">
-            <summary>
-                Deserialize a MetricView from a YAML string
-            </summary>
-            <param name="yaml">the YAML string to deserialize</param>
-            <returns>an unvalidated MetricView</returns>
-            <exception cref="T:System.IO.InvalidDataException">
-                thrown in exceptional failures of deserialization; we should always see a result
-            </exception>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Save(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.String)">
-            <summary>
-                Serialize the MetricView to YAML and save to disk
-            </summary>
-            <param name="view">the MetricView to serialize</param>
-            <param name="path">the path to save the YAML file</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Serialize(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)">
-            <summary>
-                Serialize a MetricView to a YAML string
-            </summary>
-            <param name="view">the MetricView to serialize</param>
-            <returns>the serialized YAML string</returns>
-        </member>
-        <member name="F:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.DefaultValidationRules">
-            <summary>
-                The default validation rules to use when validating MetricViews.
-                Automatically used when calling `Validate(MetricView)` overload
-            </summary>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.MetricViewValidationVisitor)">
-            <summary>
-                Validate a MetricView using the provided validator
-            </summary>
-            <param name="view">the MetricView to validate</param>
-            <param name="validator">the validator to use</param>
-            <returns>enumerable of diagnostic messages resulting from the validation rules</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)">
-            <summary>
-                Validate a MetricView using the default set of validation rules
-            </summary>
-            <param name="view">MetricView to validate</param>
-            <returns>enumerable of diagnostic messages resulting from the validation rules</returns>
-            <remarks>The set of rules is available as `MetricViews.DefaultValidationRules`</remarks>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule})">
-            <summary>
-                Validate a MetricView using the provided set of rules
-            </summary>
-            <param name="view">the MetricView to validate</param>
-            <param name="rules">the set of validation rules to apply</param>
-            <returns>enumerable of diagnostic messages resulting from the validation rules</returns>
-            <remarks>does not use any of the default rules unless you explicitly include these</remarks>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidator">
-            <summary>
-                Make a new MetricViewValidationVisitor with the default set of rules
-            </summary>
-            <returns>a reusable MetricViewValidationVisitor to use as a validator</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidator(System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule},System.Boolean)">
-            <summary>
-                Make a new MetricViewValidationVisitor with the provided set of
-                rules, optionally including the default rules
-            </summary>
-            <param name="rules">the set of validation rules to use in the validator</param>
-            <param name="includeDefaultRules">
-                whether to include the default rules (default: `true`)
-            </param>
-            <returns>a reusable MetricViewValidationVisitor to use as a validator</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}})">
-            <summary>
-                Creates a validation rule for a specific type of MetricView object.
-            </summary>
-            <typeparam name="T">
-                type of MetricView object the rule applies to. One of `MetricView`,
-                `MetricViewField`, `MetricViewJoin`, `MetricViewMeasure`
-            </typeparam>
-            <param name="name">name of the rule</param>
-            <param name="category">category for the rule (you can use any text)</param>
-            <param name="validate">validation function</param>
-            <returns>a validation rule for use in a validator</returns>
-            <remarks>
-                the validation function `validate` is a function of two arguments:
-                1. the metric view object to which the rule is applied
-                2. the validation context
-                validation context is a `IReadOnlyValidationContext` object which
-                provides:
-                - `PathStack`: identifies the exact object currently being
-                examined, with all of its parents (in reverse order from this
-                object to the root). In general you probably don't need to do
-                much with this.
-                - `JoinNames`: set of strings of all join names already seen
-                during validation
-                - `FieldNames`: set of strings of all field names already
-                seen
-                - `MeasureNames`: set of strings of all measure names already seen
-                - `MakeError(message, property)`: function to create a diagnostic
-                error. **You should use this to create the errors you return**.
-                The first arg is a string describing the error. The second arg
-                is an optional property name (e.g. "Name") to append to the path.
-                **Only use the name of a MetricView object property**, not any
-                arbitrary string.
-                Your function must return an enumerable of DiagnosticMessage objects.
-                If there are no problems, return an empty enumerable (e.g. `[]`).
-                If the object is invalid according to the rule (your conditional
-                checks), then return an enumerable with one or more errors created
-                with the context's `MakeError` method. You can inspect any properties
-                of the object (the first arg to your function) or anything in the
-                context object.
-            </remarks>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}},System.String)">
-            <inheritdoc
-                cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="validate">Validation function</param>
-            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean})">
-            <summary>
-                Create a validation rule for a specific MetricView object type
-            </summary>
-            <typeparam name="T">
-                type of MetricView object the rule applies to. One of `MetricView`,
-                `MetricViewField`, `MetricViewJoin`, `MetricViewMeasure`
-            </typeparam>
-            <param name="name">name of the rule</param>
-            <param name="category">category for the rule (you can use any text)</param>
-            <param name="message">the message returned in the error if the object is invalid</param>
-            <param name="isInvalid">a predicate function to determine if the object is invalid</param>
-            <returns>a validation rule for use in a validator</returns>
-            <remarks>
-                the function `isInvalid` is a simple predicate function that can
-                only inspect the properties of the current MetricView object. If you
-                need to inspect other context, you should use the other overload of
-                `MakeValidationRule`
-            </remarks>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean},System.String)">
-            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the object is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the object is invalid</param>
-            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean})">
-            <summary>
-                Create a validation rule for the root MetricView object
-            </summary>
-            <param name="name">name of the rule</param>
-            <param name="category">category for the rule (you can use any text)</param>
-            <param name="message">the message returned in the error if the object is invalid</param>
-            <param name="isInvalid">a predicate function to determine if the object is invalid</param>
-            <returns>a validation rule for use in a validator</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean},System.String)">
-            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the object is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the object is invalid</param>
-            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean})">
-            <summary>
-                Create a validation rule for MetricViewJoin objects
-            </summary>
-            <param name="name">name of the rule</param>
-            <param name="category">category for the rule (you can use any text)</param>
-            <param name="message">
-                the message returned in the error if the MetricViewJoin is invalid
-            </param>
-            <param name="isInvalid">
-                a predicate function to determine if the MetricViewJoin is invalid
-            </param>
-            <returns>a validation rule for use in a validator</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean},System.String)">
-            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the object is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the object is invalid</param>
-            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})">
-            <summary>
-                Create a validation rule for MetricViewField objects
-            </summary>
-            <param name="name">name of the rule</param>
-            <param name="category">category for the rule (you can use any text)</param>
-            <param name="message">
-                the message returned in the error if the MetricViewField is invalid
-            </param>
-            <param name="isInvalid">
-                a predicate function to determine if the MetricViewField is invalid
-            </param>
-            <returns>a validation rule for use in a validator</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean},System.String)">
-            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the object is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the object is invalid</param>
-            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean})">
-            <summary>
-                Create a validation rule for MetricViewMeasure objects
-            </summary>
-            <param name="name">name of the rule</param>
-            <param name="category">category for the rule (you can use any text)</param>
-            <param name="message">
-                the message returned in the error if the MetricViewMeasure is invalid
-            </param>
-            <param name="isInvalid">
-                a predicate function to determine if the MetricViewMeasure is invalid
-            </param>
-            <returns>a validation rule for use in a validator</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean},System.String)">
-            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean})" />
-            <param name="name">Unique name for the validation rule</param>
-            <param name="category">Category for organizational purposes</param>
-            <param name="message">Error message returned when the object is invalid</param>
-            <param name="isInvalid">Predicate function that returns true when the object is invalid</param>
-            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.ToTabularModel(TabularEditor.TOMWrapper.Model,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.String,System.String,System.Collections.Generic.List{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}@,System.Boolean,System.String)">
-            <summary>
-                Companion to <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.ToTabularModel(TabularEditor.TOMWrapper.Model,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.String,System.String,System.Collections.Generic.List{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}@,System.Boolean,System.String)" /> that routes through the
-                <c>AbstractModel.Next</c> visitor pipeline. Same return contract and
-                diagnostic semantics; the two coexist while the new pipeline is
-                completed.
-            </summary>
-        </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.DTO.ViewDto">
             <summary>
                 DTO for Databricks Metric View YAML serialization.
@@ -3702,9 +3513,6 @@
             <summary>
                 The YAML name for the field
             </summary>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field.Delete">
-            <inheritdoc />
         </member>
         <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field.Expr">
             <summary>
@@ -3989,9 +3797,6 @@
                 Name of the joined table
             </summary>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join.Delete">
-            <inheritdoc />
-        </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join.AddJoin(System.String,System.String)">
             <summary>
                 Adds a child join to this join definition
@@ -4109,8 +3914,11 @@
                 Represents a measure definition in a Databricks Metric View
             </summary>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Delete">
-            <inheritdoc />
+        <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name">
+            <summary>
+                The name of the measure, referenced in Metric View expressions as
+                MEASURE(name)
+            </summary>
         </member>
         <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr">
             <summary>
@@ -4195,36 +4003,57 @@
             <param name="name">The name to search for</param>
             <returns>True if an item with the specified name exists</returns>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1.Add(`0)">
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1.ThrowIfNameTaken(System.String,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)">
             <summary>
-                Adds an item to the collection.
+            	A name is admitted when it is free or already the claimant's own (case-only rename).
             </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1.Add(`0)">
+            <summary> Adds an item to the collection and takes ownership of it. </summary>
             <param name="item">The item to add</param>
             <exception cref="T:System.ArgumentException">If an item with the same name already exists</exception>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1.Remove(`0)">
             <summary>
-                Removes an item from the collection.
+                Removes an item from the collection and relinquishes ownership.
+                Reference-based: the item is removed only when the name index maps
+                its current Name to this exact instance, so a stale index entry can
+                never silently remove the wrong item -- or nothing -- on behalf of a
+                renamed one.
             </summary>
             <param name="item">The item to remove</param>
             <returns>True if the item was removed, false if not found</returns>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1.Clear">
-            <summary>
-                Removes all items from the collection.
-            </summary>
-        </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase">
             <summary>
-                Internal abstract base class for all MetricView domain objects.
-                Implements both the public marker interface and the internal visitable interface.
+                Abstract base class for the named child objects of a View (joins,
+                fields, measures). The root <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.View" /> is not a child and
+                stands outside this hierarchy; the surface shared with it is
+                expressed through <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject" />.
             </summary>
         </member>
         <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.View">
             <summary>
-                Reference to the root View object.
-                For View itself, this points to itself.
-                Used for version validation in property setters.
+                Reference to the root View object this child belongs to.
+                Constructor-established: never null, immutable for the object's
+                lifetime. Deleted objects keep it, so Path and property reads stay
+                valid on zombies.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.#ctor(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)">
+            <summary>
+                Child objects are created with their owning View. private protected
+                with no parameterless overload also removes the possibility of a
+                compiler-synthesized public constructor on a subclass: an author
+                adding a new child type must write an explicit constructor that
+                passes the View, instead of silently shipping a public default one.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Name">
+            <summary>
+                The name of this object, used for name-based indexing in the owning
+                collection. Declared abstract so each concrete class carries its own
+                type-specific documentation on the override.
             </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.EscapeName(System.String)">
@@ -4243,38 +4072,65 @@
                 Deleted objects become "zombies" - they retain their data but are detached from the model.
             </summary>
         </member>
+        <member name="F:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Owner">
+            <summary>
+                The collection that currently owns this object. Wired by
+                <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1.Add(`0)" /> and cleared on removal;
+                null while the object is unattached or deleted, in which case there
+                is no collection to coordinate lifecycle operations with.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.RenameGuard(System.String,System.String)">
+            <summary>
+                Rename coordination for Name setters
+                (<c>set => field = RenameGuard(field, value);</c>): no-op when the
+                name is unchanged or the object has never been named; otherwise the
+                owning collection validates and re-keys BEFORE the backing field
+                mutates, so a rejected rename (duplicate name) leaves the object
+                and the index untouched. Unowned objects -- never attached, or
+                deleted -- just take the new name. A null oldName is the first
+                assignment, which happens during every object initialization:
+                required members assign after the constructor completes and before
+                Add attaches an owner, so there is never anything indexed to
+                re-key. Uniqueness is the only content rule, exactly what Add
+                enforces; blank names are permitted here as they are there.
+            </summary>
+        </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Delete">
             <summary>
-                Deletes this object from its parent collection.
-                After deletion, the object becomes a zombie (IsDeleted=true, View=null).
-            </summary>
-            <exception cref="T:System.InvalidOperationException">
-                Thrown if the object is not attached to a View or is already deleted.
-            </exception>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.MarkDeleted">
-            <summary>
-                Marks this object as deleted.
-                Called by subclasses after removing from collection.
+                Deletes this object from its owning collection. Idempotent: calls
+                after the first are no-ops. The deleted object becomes a zombie --
+                <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.IsDeleted" /> is true, it no longer serializes, and its
+                properties (including <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.View" /> and <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Path" />)
+                remain readable.
             </summary>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.TabularEditor#SemanticBridge#Platforms#Databricks#Interfaces#IMetricViewVisitable#Accept``1(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewVisitor{``0})">
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.AcceptInternal``1(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewVisitor{``0})">
             <summary>
-                Accepts a visitor that produces a result of type TResult.
-                Must be implemented by derived domain objects.
+                Visitor dispatch bridge. Each concrete subclass overrides this with
+                <c>visitor.Visit(this)</c>: overload resolution against the concrete
+                static type of <c>this</c> is what selects the correct typed Visit
+                overload.
             </summary>
+            <remarks>
+                This member exists because the usual double-dispatch spelling is not
+                available here: the model classes are public while the visitor
+                interfaces are internal, so a public abstract Accept cannot compile
+                (inconsistent accessibility), and explicit interface implementations
+                cannot be abstract. Do not "simplify" this into a concrete
+                implementation on this base class: there, <c>this</c> is statically
+                typed as the base, overload resolution can only select
+                Visit(IMetricViewVisitable), and that overload's implementation calls
+                Accept again -- infinite mutual recursion.
+            </remarks>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ValidateVersion(System.String)">
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ValidateVersion``1(``0,System.String)">
             <summary>
-                Validates that the current model version supports the property being set.
-                Call this in property setters for version-gated properties.
+                Version gate for v1.1+ property setters
+                (<c>set => field = ValidateVersion(value);</c>): validates against
+                the owning View's version only when a non-null value is being set,
+                then returns the value unchanged.
             </summary>
-            <param name="propertyName">
-                Auto-populated by compiler via CallerMemberName
-            </param>
-            <exception cref="T:System.InvalidOperationException">
-                Thrown if the property requires a higher version than the current model
-            </exception>
         </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewVersion">
             <summary>
@@ -4376,13 +4232,14 @@
             <param name="propertyName">The name of the property</param>
             <returns>The minimum version string, or null if no MinVersion attribute</returns>
         </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MinVersionCache.ValidateVersion(System.Type,System.String,System.String)">
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MinVersionCache.ValidateVersion``1(System.Type,System.String,``0,System.String)">
             <summary>
-                Checks if the property requires a minimum version and throws if not met.
+                Guard-returning version gate for property setters
+                (<c>set => field = ValidateVersion(value);</c>): when a non-null
+                value is being set on a [MinVersion]-gated property, throws unless
+                the model version meets the property's minimum; otherwise hands the
+                value back unchanged.
             </summary>
-            <param name="type">The type containing the property</param>
-            <param name="propertyName">The name of the property</param>
-            <param name="currentVersion">The current model version</param>
             <exception cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.Exceptions.MetricViewVersionException">
                 Thrown if the property requires a higher version than current
             </exception>
@@ -4412,6 +4269,13 @@
                 Maps a DTO to the domain model, wiring up parent pointers
             </summary>
         </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.MetricViewYamlDeserializer.ReportIfDuplicate``1(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection{``0},System.String,System.Collections.Generic.List{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage})">
+            <summary>
+                Reports a duplicate-name diagnostic when the collection already
+                holds an item under the name. Returns true when it does, in which
+                case the caller must skip the duplicate entry.
+            </summary>
+        </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.MetricViewYamlSerializer">
             <summary>
                 Handles serialization of Databricks Metric Views to YAML
@@ -4423,17 +4287,6 @@
             </summary>
             <param name="metricView">The MetricView object to serialize</param>
             <returns>A YAML string representation</returns>
-        </member>
-        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.MetricViewYamlSerializer.DefaultFor(System.String)">
-            <summary>
-                Version-aware default keyword choice for a view with no explicit
-                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.SerializationOptions" />. Conservative: v1.1 and earlier
-                emit <c>dimensions:</c>; anything strictly greater than v1.1 emits
-                <c>fields:</c>. The <c>fields:</c> alias was introduced after the
-                v1.1 spec was published, so defaulting v1.1 to <c>dimensions:</c>
-                stays compatible with tooling that targets the original v1.1
-                spec.
-            </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.MetricViewYamlSerializer.SerializeWindow(System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Window})">
             <summary>
@@ -4451,9 +4304,43 @@
                 Maps the domain model to a DTO for serialization
             </summary>
         </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.SerializationOptions.DefaultFor(System.String)">
+            <summary>
+                Version-aware default keyword choice for a view with no explicit
+                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Serialization.SerializationOptions" />. Conservative: v1.1 and earlier
+                emit <c>dimensions:</c>; anything strictly greater than v1.1 emits
+                <c>fields:</c>. The <c>fields:</c> alias was introduced after the
+                v1.1 spec was published, so defaulting v1.1 to <c>dimensions:</c>
+                stays compatible with tooling that targets the original v1.1
+                spec.
+            </summary>
+        </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View">
             <summary>
-                Represents a Databricks Metric View definition
+                Represents a Databricks Metric View definition. The root of the
+                metric view object graph: unlike the child objects (joins, fields,
+                measures) it does not derive from <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase" />
+                -- it has no name in the Metric View spec (the view's name lives in
+                Unity Catalog, outside the YAML) and cannot be deleted from anything.
+                The surface shared with child objects is expressed through
+                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject" />.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.TabularEditor#SemanticBridge#Platforms#Databricks#Interfaces#IMetricViewObject#View">
+            <summary>
+                The root of the graph is itself: the fixed point of
+                <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject.View" />. Implemented explicitly
+                because C# forbids a declared member named like its enclosing type
+                (CS0542); root self-reference is only meaningful through
+                interface-typed references anyway.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.ValidateVersion``1(``0,System.String)">
+            <summary>
+                Version gate for this View's own v1.1+ property setters. The
+                child-object equivalent lives on <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase" />
+                and reads <c>View.Version</c>; both are thin shims over
+                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MinVersionCache" />.
             </summary>
         </member>
         <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Version">
@@ -4523,15 +4410,33 @@
         </member>
         <member name="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Dimensions">
             <summary>
-                Legacy name for <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Fields" />. Allocates a fresh
-                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1" /> on each access because
-                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1" /> is invariant — the same
-                instance cannot satisfy both <c>&lt;Field&gt;</c> and
-                <c>&lt;Dimension&gt;</c>. The cast to <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension" /> is
-                safe because <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.NewField(System.String,System.String)" /> constructs every field as a
+                Legacy name for <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Fields" />. A live, read-only view over
+                the same underlying collection: no items are copied, no separate
+                collection is maintained, and every read defers to
+                <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Fields" /> and casts. The cast to <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension" />
+                is safe because <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.NewField(System.String,System.String)" /> constructs every field as a
                 <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension" /> at runtime. Item references are the same
                 instances stored in <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Fields" />, so mutations through
-                either surface are visible through the other.
+                either surface are visible through the other, and later additions or
+                removals are reflected immediately.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.DimensionCollectionView">
+            <summary>
+                The deferring view behind <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Dimensions" />.
+                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1" /> is invariant, so the same
+                instance cannot satisfy both <c>&lt;Field&gt;</c> and
+                <c>&lt;Dimension&gt;</c>; this view bridges the element type for the
+                deprecation window by casting per access.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.DimensionCollectionView.#ctor(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field})">
+            <summary>
+                The deferring view behind <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.Dimensions" />.
+                <see cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewCollection`1" /> is invariant, so the same
+                instance cannot satisfy both <c>&lt;Field&gt;</c> and
+                <c>&lt;Dimension&gt;</c>; this view bridges the element type for the
+                deprecation window by casting per access.
             </summary>
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.NewField(System.String,System.String)">
@@ -4653,6 +4558,240 @@
                 a date or timestamp column; <c>offset</c> has no effect when
                 <see cref="P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Window.Range" /> is <c>all</c>; a shifted frame outside the
                 available data evaluates to NULL at query time.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews">
+            <summary>
+                Static wrapper/convenience class for use in C# scripts
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Load(System.String)">
+            <summary>
+                Loads a MetricView from a YAML file
+            </summary>
+            <param name="path">full path to the yaml file on disk</param>
+            <returns>an unvalidated MetricView</returns>
+            <exception cref="T:System.IO.InvalidDataException">
+                Thrown in exceptional failures of deserialization; we should always see a result
+            </exception>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Deserialize(System.String)">
+            <summary>
+                Deserialize a MetricView from a YAML string
+            </summary>
+            <param name="yaml">the YAML string to deserialize</param>
+            <returns>an unvalidated MetricView</returns>
+            <exception cref="T:System.IO.InvalidDataException">
+                thrown in exceptional failures of deserialization; we should always see a result
+            </exception>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Save(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.String)">
+            <summary>
+                Serialize the MetricView to YAML and save to disk
+            </summary>
+            <param name="view">the MetricView to serialize</param>
+            <param name="path">the path to save the YAML file</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Serialize(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)">
+            <summary>
+                Serialize a MetricView to a YAML string
+            </summary>
+            <param name="view">the MetricView to serialize</param>
+            <returns>the serialized YAML string</returns>
+        </member>
+        <member name="F:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.DefaultValidationRules">
+            <summary>
+                The default validation rules to use when validating MetricViews.
+                Automatically used when calling `Validate(MetricView)` overload
+            </summary>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.MetricViewValidationVisitor)">
+            <summary>
+                Validate a MetricView using the provided validator
+            </summary>
+            <param name="view">the MetricView to validate</param>
+            <param name="validator">the validator to use</param>
+            <returns>enumerable of diagnostic messages resulting from the validation rules</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)">
+            <summary>
+                Validate a MetricView using the default set of validation rules
+            </summary>
+            <param name="view">MetricView to validate</param>
+            <returns>enumerable of diagnostic messages resulting from the validation rules</returns>
+            <remarks>The set of rules is available as `MetricViews.DefaultValidationRules`</remarks>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule})">
+            <summary>
+                Validate a MetricView using the provided set of rules
+            </summary>
+            <param name="view">the MetricView to validate</param>
+            <param name="rules">the set of validation rules to apply</param>
+            <returns>enumerable of diagnostic messages resulting from the validation rules</returns>
+            <remarks>does not use any of the default rules unless you explicitly include these</remarks>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidator">
+            <summary>
+                Make a new MetricViewValidationVisitor with the default set of rules
+            </summary>
+            <returns>a reusable MetricViewValidationVisitor to use as a validator</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidator(System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule},System.Boolean)">
+            <summary>
+                Make a new MetricViewValidationVisitor with the provided set of
+                rules, optionally including the default rules
+            </summary>
+            <param name="rules">the set of validation rules to use in the validator</param>
+            <param name="includeDefaultRules">
+                whether to include the default rules (default: `true`)
+            </param>
+            <returns>a reusable MetricViewValidationVisitor to use as a validator</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}})">
+            <summary>
+                Creates a validation rule for a specific type of MetricView object.
+            </summary>
+            <typeparam name="T">
+                type of MetricView object the rule applies to. One of `MetricView`,
+                `MetricViewField`, `MetricViewJoin`, `MetricViewMeasure`
+            </typeparam>
+            <param name="name">name of the rule</param>
+            <param name="category">category for the rule (you can use any text)</param>
+            <param name="validate">validation function</param>
+            <returns>a validation rule for use in a validator</returns>
+            <remarks>
+                the validation function `validate` is a function of two arguments:
+                1. the metric view object to which the rule is applied
+                2. the validation context
+                validation context is a `IReadOnlyValidationContext` object which
+                provides:
+                - `PathStack`: identifies the exact object currently being
+                examined, with all of its parents (in reverse order from this
+                object to the root). In general you probably don't need to do
+                much with this.
+                - `JoinNames`: set of strings of all join names already seen
+                during validation
+                - `FieldNames`: set of strings of all field names already
+                seen
+                - `MeasureNames`: set of strings of all measure names already seen
+                - `MakeError(message, property)`: function to create a diagnostic
+                error. **You should use this to create the errors you return**.
+                The first arg is a string describing the error. The second arg
+                is an optional property name (e.g. "Name") to append to the path.
+                **Only use the name of a MetricView object property**, not any
+                arbitrary string.
+                Your function must return an enumerable of DiagnosticMessage objects.
+                If there are no problems, return an empty enumerable (e.g. `[]`).
+                If the object is invalid according to the rule (your conditional
+                checks), then return an enumerable with one or more errors created
+                with the context's `MakeError` method. You can inspect any properties
+                of the object (the first arg to your function) or anything in the
+                context object.
+            </remarks>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}},System.String)">
+            <inheritdoc
+                cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.Func{``0,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext,System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}})" />
+            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean})">
+            <summary>
+                Create a validation rule for a specific MetricView object type
+            </summary>
+            <typeparam name="T">
+                type of MetricView object the rule applies to. One of `MetricView`,
+                `MetricViewField`, `MetricViewJoin`, `MetricViewMeasure`
+            </typeparam>
+            <param name="name">name of the rule</param>
+            <param name="category">category for the rule (you can use any text)</param>
+            <param name="message">the message returned in the error if the object is invalid</param>
+            <param name="isInvalid">a predicate function to determine if the object is invalid</param>
+            <returns>a validation rule for use in a validator</returns>
+            <remarks>
+                the function `isInvalid` is a simple predicate function that can
+                only inspect the properties of the current MetricView object. If you
+                need to inspect other context, you should use the other overload of
+                `MakeValidationRule`
+            </remarks>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean},System.String)">
+            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRule``1(System.String,System.String,System.String,System.Func{``0,System.Boolean})" />
+            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean})">
+            <summary>
+                Create a validation rule for the root MetricView object
+            </summary>
+            <param name="name">name of the rule</param>
+            <param name="category">category for the rule (you can use any text)</param>
+            <param name="message">the message returned in the error if the object is invalid</param>
+            <param name="isInvalid">a predicate function to determine if the object is invalid</param>
+            <returns>a validation rule for use in a validator</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean},System.String)">
+            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForView(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.Boolean})" />
+            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean})">
+            <summary>
+                Create a validation rule for MetricViewJoin objects
+            </summary>
+            <param name="name">name of the rule</param>
+            <param name="category">category for the rule (you can use any text)</param>
+            <param name="message">
+                the message returned in the error if the MetricViewJoin is invalid
+            </param>
+            <param name="isInvalid">
+                a predicate function to determine if the MetricViewJoin is invalid
+            </param>
+            <returns>a validation rule for use in a validator</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean},System.String)">
+            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForJoin(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join,System.Boolean})" />
+            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})">
+            <summary>
+                Create a validation rule for MetricViewField objects
+            </summary>
+            <param name="name">name of the rule</param>
+            <param name="category">category for the rule (you can use any text)</param>
+            <param name="message">
+                the message returned in the error if the MetricViewField is invalid
+            </param>
+            <param name="isInvalid">
+                a predicate function to determine if the MetricViewField is invalid
+            </param>
+            <returns>a validation rule for use in a validator</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean},System.String)">
+            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForField(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field,System.Boolean})" />
+            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean})">
+            <summary>
+                Create a validation rule for MetricViewMeasure objects
+            </summary>
+            <param name="name">name of the rule</param>
+            <param name="category">category for the rule (you can use any text)</param>
+            <param name="message">
+                the message returned in the error if the MetricViewMeasure is invalid
+            </param>
+            <param name="isInvalid">
+                a predicate function to determine if the MetricViewMeasure is invalid
+            </param>
+            <returns>a validation rule for use in a validator</returns>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean},System.String)">
+            <inheritdoc cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.MakeValidationRuleForMeasure(System.String,System.String,System.String,System.Func{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,System.Boolean})" />
+            <param name="minVersion">Minimum spec version this rule applies to (e.g. "1.1")</param>
+        </member>
+        <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.ToTabularModel(TabularEditor.TOMWrapper.Model,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.String,System.String,System.Collections.Generic.List{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}@,System.Boolean,System.String)">
+            <summary>
+                Companion to <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricViews.ToTabularModel(TabularEditor.TOMWrapper.Model,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View,System.String,System.String,System.Collections.Generic.List{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}@,System.Boolean,System.String)" /> that routes through the
+                <c>AbstractModel.Next</c> visitor pipeline. Same return contract and
+                diagnostic semantics; the two coexist while the new pipeline is
+                completed.
             </summary>
         </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.Sql.Ast">
@@ -5980,7 +6119,7 @@
         </member>
         <member name="M:TabularEditor.SemanticBridge.Platforms.Databricks.TabularSupport.FormatExtensions.CurrencyPrefix(System.String)">
             <summary>
-                Maps an ISO 4217 currency code to a FormatString prefix. Single-
+                Maps an ISO 4217 currency code to a FormatString prefix. Single 
                 character symbols (e.g., <c>$</c>, <c>€</c>) embed directly;
                 multi-character symbols (e.g., <c>kr</c>, <c>R$</c>) and unknown
                 codes wrap in quotes with a trailing space to separate the label
@@ -5989,10 +6128,13 @@
         </member>
         <member name="F:TabularEditor.SemanticBridge.Platforms.Databricks.TabularSupport.FormatExtensions.CurrencySymbolByIso">
             <summary>
-                ISO 4217 code → currency symbol, derived from OS locale data via
-                <see cref="T:System.Globalization.RegionInfo" />. Same source the validation layer uses
-                for <c>KnownCurrencyCodes</c>; first-seen wins so the mapping is
-                deterministic regardless of culture enumeration order.
+                ISO 4217 code → currency symbol. Curated and static so the emitted
+                FormatString is identical on every OS. Deliberately NOT derived from
+                <see cref="T:System.Globalization.RegionInfo" /> / <see cref="T:System.Globalization.CultureInfo" />: that data is
+                ICU-backed on macOS/Linux but NLS-backed on Windows, and the two
+                disagree on the symbol and on culture-enumeration order (e.g. JPY
+                yields "￥" on Windows but "JP¥" on macOS). Codes not listed here
+                fall back to an ISO-code prefix in <see cref="M:TabularEditor.SemanticBridge.Platforms.Databricks.TabularSupport.FormatExtensions.CurrencyPrefix(System.String)" />.
             </summary>
         </member>
         <member name="T:TabularEditor.SemanticBridge.Platforms.Databricks.TabularSupport.FormatInference">
@@ -6675,8 +6817,8 @@
                 M-rendering for each source it visits; one entry per source platform.
             </summary>
             <remarks>
-                Re-registering the same <typeparamref name="T" /> replaces the prior
-                entry — the natural mechanism for consumer-side overrides of first-party
+                Re-registering the same source system type replaces the prior
+                entry: the natural mechanism for consumer-side overrides of first-party
                 defaults supplied by <see cref="T:TabularEditor.SemanticBridge.Platforms.Tabular.DefaultTabularProviders" />.
             </remarks>
         </member>
@@ -6900,1188 +7042,6 @@
             <summary>
                 Indicates whether initialization was successful.
                 This convenience property allows simple boolean checks without pattern matching.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.SemanticBridge.Strings">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilder_AddFragment_Fragment_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Fragment key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilder_GetFragment_Fragment_with_key___0___is_not_of_type__1__">
-            <summary>
-              Looks up a localized string similar to Fragment with key &apos;{0}&apos; is not of type {1}..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilder_GetFragment_Fragment_with_key___0___not_found">
-            <summary>
-              Looks up a localized string similar to Fragment with key &apos;{0}&apos; not found.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilder_TryBuild_Model">
-            <summary>
-              Looks up a localized string similar to Model.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilderVisitor_Visit_Could_not_parse_join_fields_for_join___0___">
-            <summary>
-              Looks up a localized string similar to Could not parse join fields for join &apos;{0}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilderVisitor_Visit_Join_expression_must_reference__source__table_for_fact_side__Got____0__">
-            <summary>
-              Looks up a localized string similar to Join expression must reference &apos;source&apos; table for fact side. Got: &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilderVisitor_Visit_Multiple_join_conditions_are_not_yet_supported__Join___0___has__1__conditions_">
-            <summary>
-              Looks up a localized string similar to Multiple join conditions are not yet supported. Join &apos;{0}&apos; has {1} conditions..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilderVisitor_Visit_NoRelationshipCreated">
-            <summary>
-              Looks up a localized string similar to No relationship created for join &apos;{0}&apos; (on: &apos;{1}&apos;). The join expression could not be resolved to fact and dimension fields..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelBuilderVisitor_Visit_We_do_not_currently_support_snowflake_joins__Join___0_">
-            <summary>
-              Looks up a localized string similar to We do not currently support snowflake joins. Join: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelFragment_Build_Cannot_find_dimension_fragment_with_key___0___for_dimension_reference">
-            <summary>
-              Looks up a localized string similar to Cannot find dimension fragment with key &apos;{0}&apos; for dimension reference.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelFragment_Build_Cannot_find_fact_fragment_with_key___0___for_dimension_reference">
-            <summary>
-              Looks up a localized string similar to Cannot find fact fragment with key &apos;{0}&apos; for dimension reference.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelFragment_Build_Cannot_find_left_field_fragment_with_key___0___for_dimension_reference">
-            <summary>
-              Looks up a localized string similar to Cannot find left field fragment with key &apos;{0}&apos; for dimension reference.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelFragment_Build_Cannot_find_relationship_fragment_for_dimension_reference">
-            <summary>
-              Looks up a localized string similar to Cannot find relationship fragment for dimension reference.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelFragment_Build_Cannot_find_right_field_fragment_with_key___0___for_dimension_reference">
-            <summary>
-              Looks up a localized string similar to Cannot find right field fragment with key &apos;{0}&apos; for dimension reference.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelFragment_Build_Failed_to_add_dimension_reference___0_">
-            <summary>
-              Looks up a localized string similar to Failed to add dimension reference: {0}.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Untranslated_original_expression" -->
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_CalculatedMeasure_does_not_have_any_expressions_defined">
-            <summary>
-              Looks up a localized string similar to CalculatedMeasure &apos;{0}&apos; does not have any expressions defined..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_Cannot_visit_measure_without_a_current_table_context_">
-            <summary>
-              Looks up a localized string similar to Cannot visit measure &apos;{0}&apos; without a current table context..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_DerivedField_could_not_be_translated">
-            <summary>
-              Looks up a localized string similar to DerivedField &apos;{0}&apos; contains a complex expression that could not be translated to DAX. The original expression has been preserved as a comment..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_DerivedField_no_expressions">
-            <summary>
-              Looks up a localized string similar to DerivedField &apos;{0}&apos; does not have any expressions defined..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_Dimension_table___0___does_not_exist_in_the_model_">
-            <summary>
-              Looks up a localized string similar to Dimension table &apos;{0}&apos; does not exist in the model..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_DimensionAttribute___0___references_source_field___1___which_does_not_exist_in_the_source_s_field_collection_">
-            <summary>
-              Looks up a localized string similar to DimensionAttribute &apos;{0}&apos; references source field &apos;{1}&apos; which does not exist in the source&apos;s field collection..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_Mapping_CalculatedMeasure___0___to_Tabular_Model_is_not_yet_implemented_">
-            <summary>
-              Looks up a localized string similar to Mapping CalculatedMeasure &apos;{0}&apos; to Tabular Model is not yet implemented..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Visit_Measure_contains_untranslatable_expression_in_comment">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; contains a complex expression that could not be translated to DAX. The original expression has been preserved as a comment..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Window_dax_not_available">
-            <summary>
-              Looks up a localized string similar to (no DAX translation available).
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:TabularEditor.SemanticBridge.Strings.AbstractModelToTabularVisitor_Window_measure_unsupported" -->
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_ColumnUnresolvedAtEmit_Measure_references_field_which_has_not_been_emitted">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; references field id {1} which has not been emitted as a column; falling back to verbatim source..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_MeasureNoExpressions_Calculated_measure_has_no_source_expression">
-            <summary>
-              Looks up a localized string similar to Calculated measure &apos;{0}&apos; has no source expressions; emitting placeholder body..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_MeasureUnresolvedAtEmit_Measure_references_measure_which_has_not_been_emitted">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; references measure id {1} which has not been emitted; falling back to verbatim source..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_MeasureUntranslated_Measure_contains_an_untranslatable_expression">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; contains an untranslatable expression; original preserved as a comment..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_MeasureWindowUnsupported">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; uses a window specification that is not currently supported; it has been left inert with the original definition preserved as a comment..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_ReferenceFieldInvalidSource_ReferenceField_references_field_which_is_missing_or_not_a_SourceField">
-            <summary>
-              Looks up a localized string similar to ReferenceField &apos;{0}&apos; references field id {1} which is missing or not a SourceField; emitting column with diagnostic code as SourceColumn placeholder..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_RelationshipEndpointMissing">
-            <summary>
-              Looks up a localized string similar to Relationship &apos;{0}&apos; {1} endpoint (field id {2}) is missing or has no table-side column. Relationship skipped..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_RelationshipInvalidCardinality_Relationship_has_invalid_cardinality">
-            <summary>
-              Looks up a localized string similar to Relationship &apos;{0}&apos; has invalid cardinality ({1}/{2}); expected one Many and one One. Relationship skipped..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.AbstractToTabularDiagnostics_TableUnresolvedAtEmit_Measure_references_table_which_has_not_been_emitted">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; references table id {1} which has not been emitted; falling back to verbatim source..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.ColumnReferenceParser_TryGetSingleColumn_Multiple_dots_in_column_reference_are_unsupported__multi_part_qualification__">
-            <summary>
-              Looks up a localized string similar to Multiple dots in column reference are unsupported (multi-part qualification)..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.ColumnReferenceSpan_ColumnReferenceSpan_Length_must_be_non_negative">
-            <summary>
-              Looks up a localized string similar to Length must be non-negative.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.ColumnReferenceSpan_ColumnReferenceSpan_Start_position_must_be_non_negative">
-            <summary>
-              Looks up a localized string similar to Start position must be non-negative.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DatabricksMetricViewService_ThrowIfNoViewLoaded_No_MetricView_is_currently_loaded__Call_Load___or_Deserialize___first_">
-            <summary>
-              Looks up a localized string similar to No MetricView is currently loaded. Call Load() or Deserialize() first..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DataTypeExtensions_GetTomType_DataType___0___is_not_supported_for_mapping_to_Tabular_Model_">
-            <summary>
-              Looks up a localized string similar to DataType &apos;{0}&apos; is not supported for mapping to Tabular Model..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_TranslatableMetricViewRules_Join___0___must_use_exactly_one_column_in_the__using__clause_for_the_MVP_implementation">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; must use exactly one column in the &apos;using&apos; clause for the MVP implementation.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_TranslatableMetricViewRules_Measure___0___must_use_a_simple_aggregate_function__SUM__COUNT__MIN__MAX__AVG__for_the_MVP_implementation">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; must use a simple aggregate function (SUM, COUNT, MIN, MAX, AVG) for the MVP implementation.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; must use a simple equality condition with table prefixes (e.g. &apos;source.column = dimension.column&apos;).
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Duplicate_field_name">
-            <summary>
-              Looks up a localized string similar to Duplicate field name: &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Duplicate_join_name____0__">
-            <summary>
-              Looks up a localized string similar to Duplicate join name: &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Duplicate_measure_name____0__">
-            <summary>
-              Looks up a localized string similar to Duplicate measure name: &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Expressions">
-            <summary>
-              Looks up a localized string similar to Expressions.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_currency_code_is_not_a_recognized_ISO_4217_code">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; currency_code &apos;{1}&apos; is not a recognized ISO 4217 code.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_date_format_uses_no_date">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; date format uses no_date, which is only valid for date_time.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_date_time_format_hides_both_date_and_time">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; date_time format hides both date and time.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_decimal_places_must_be_between_0_and_10">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; decimal_places must be between 0 and 10.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_display_name_exceeds_255_characters">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; display_name exceeds 255 characters.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_expr_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; expr cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_has_a_synonym_exceeding_255_characters">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; has a synonym exceeding 255 characters.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_has_more_than_10_synonyms">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; has more than 10 synonyms.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Field_name_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Field name cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Join___0___cannot_specify_both__on__and__using__clauses">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; cannot specify both &apos;on&apos; and &apos;using&apos; clauses.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Join___0___must_have_at_least_one_column_specified_in_the__using__clause">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; must have at least one column specified in the &apos;using&apos; clause.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Join___0___must_specify_either__on__or__using__clause">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; must specify either &apos;on&apos; or &apos;using&apos; clause.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Join___0___source_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; source cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Join_name_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Join name cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure___0___expr_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; expr cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_currency_code_is_not_a_recognized_ISO_4217_code">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; currency_code &apos;{1}&apos; is not a recognized ISO 4217 code.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_date_format_uses_no_date">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; date format uses no_date, which is only valid for date_time.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_date_time_format_hides_both_date_and_time">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; date_time format hides both date and time.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_decimal_places_must_be_between_0_and_10">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; decimal_places must be between 0 and 10.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_display_name_exceeds_255_characters">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; display_name exceeds 255 characters.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_has_a_synonym_exceeding_255_characters">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; has a synonym exceeding 255 characters.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_has_more_than_10_synonyms">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; has more than 10 synonyms.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Measure_name_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Measure name cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Names">
-            <summary>
-              Looks up a localized string similar to Names.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_Structure">
-            <summary>
-              Looks up a localized string similar to Structure.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DefaultValidationRules_ValidMetricViewRules_View_source_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to View source cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_dimension_expr_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to dimension expr cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_dimension_name_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to dimension name cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_join_name_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to join name cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_join_source_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to join source cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_measure_expr_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to measure expr cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_measure_name_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to measure name cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_Structure">
-            <summary>
-              Looks up a localized string similar to Structure.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DeserializationValidator_Rules_view_source_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to view source cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Dimension_AddField_A_DimensionAttribute_with_the_same_name_already_exists_for_dimension__0___Field___1__">
-            <summary>
-              Looks up a localized string similar to A DimensionAttribute with the same name already exists for dimension {0}. Field: {1}..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionAttribute_Dimension_Cannot_access_dimension_before_it_is_set_">
-            <summary>
-              Looks up a localized string similar to Cannot access dimension before it is set..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionFragment_AddField_Dimension_Attribute_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Dimension Attribute key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionFragment_Build_Primary_key_field___0___not_found_in_dimension_fields">
-            <summary>
-              Looks up a localized string similar to Primary key field &apos;{0}&apos; not found in dimension fields.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_AddRelationship_Relationship_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Relationship key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_AddRelationship_We_do_not_yet_support_multiple_relationships_for_a_single_dimension_reference__DimRef____0____existing_relationship____1__">
-            <summary>
-              Looks up a localized string similar to We do not yet support multiple relationships for a single dimension reference. DimRef: &apos;{0}&apos;; existing relationship: &apos;{1}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Build_Dimension___0___not_found_in_built_objects__Dimensions_must_be_built_before_dimension_references_">
-            <summary>
-              Looks up a localized string similar to Dimension &apos;{0}&apos; not found in built objects. Dimensions must be built before dimension references..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Build_Relationship___0___could_not_be_built_or_is_not_a_relationship_type">
-            <summary>
-              Looks up a localized string similar to Relationship &apos;{0}&apos; could not be built or is not a relationship type.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_RelationshipKeys_No_relationship_key_has_been_set_yet_">
-            <summary>
-              Looks up a localized string similar to No relationship key has been set yet..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Ambiguity_resolving_dimension_reference__Dimension_key_already_assigned_as____0____but_relationship___1___refers_to___2__">
-            <summary>
-              Looks up a localized string similar to Ambiguity resolving dimension reference. Dimension key already assigned as: &apos;{0}&apos;, but relationship &apos;{1}&apos; refers to &apos;{2}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Ambiguity_resolving_fact_reference__Fact_key_already_assigned_as____0____but_relationship___1___refers_to___2__">
-            <summary>
-              Looks up a localized string similar to Ambiguity resolving fact reference. Fact key already assigned as: &apos;{0}&apos;, but relationship &apos;{1}&apos; refers to &apos;{2}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Dimension_reference___0___not_found_">
-            <summary>
-              Looks up a localized string similar to Dimension reference &apos;{0}&apos; not found..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Fact_reference___0___not_found_">
-            <summary>
-              Looks up a localized string similar to Fact reference &apos;{0}&apos; not found..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Failed_to_find_dimension_for_relationship____0___">
-            <summary>
-              Looks up a localized string similar to Failed to find dimension for relationship, &apos;{0}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Failed_to_find_fact_for_relationship___0__">
-            <summary>
-              Looks up a localized string similar to Failed to find fact for relationship &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Failed_to_find_LHS_fact_for_relationship____0___">
-            <summary>
-              Looks up a localized string similar to Failed to find LHS fact for relationship, &apos;{0}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Failed_to_find_RHS_dimension_for_relationship____0___">
-            <summary>
-              Looks up a localized string similar to Failed to find RHS dimension for relationship, &apos;{0}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Left_field_reference___0___not_found_in_relationship___1___">
-            <summary>
-              Looks up a localized string similar to Left field reference &apos;{0}&apos; not found in relationship &apos;{1}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Missing_fact__dimension__and_relationship_details_">
-            <summary>
-              Looks up a localized string similar to Missing fact, dimension, and relationship details..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Relationship_does_not_match_cardinality">
-             <summary>
-               Looks up a localized string similar to Relationship &apos;{0}&apos; does not match the cardinality of
-            dimension &apos;{1}&apos; and fact &apos;{2}&apos;.
-            Expected: 1 to many or many to 1, but got: {3} to {4}..
-             </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Relationship_reference___0___not_found_">
-            <summary>
-              Looks up a localized string similar to Relationship reference &apos;{0}&apos; not found..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Right_field_reference___0___not_found_in_relationship___1___">
-            <summary>
-              Looks up a localized string similar to Right field reference &apos;{0}&apos; not found in relationship &apos;{1}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.DimensionReferenceFragment_Resolve_Warning__facts_should_be_LHS_of_relationships____0__">
-            <summary>
-              Looks up a localized string similar to Warning, facts should be LHS of relationships. &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Error_MalformedDottedColumn_Malformed_dotted_column_reference">
-            <summary>
-              Looks up a localized string similar to Malformed dotted column reference &apos;{0}&apos;; a dotted reference must not contain an empty or trailing part..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Error_MalformedMeasureRef_Malformed_MEASURE_reference">
-            <summary>
-              Looks up a localized string similar to Malformed MEASURE reference &apos;{0}&apos;; expected the form MEASURE(&lt;measure_name&gt;)..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Fact_AddField_Cannot_add_the_same_field_twice___0_">
-            <summary>
-              Looks up a localized string similar to Cannot add the same field twice: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Fact_AddField_Field_name_cannot_be_blank">
-            <summary>
-              Looks up a localized string similar to Field name cannot be blank.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_AddDimensionReference_Dimension_reference_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Dimension reference key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_AddField_Fact_field_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Fact field key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_AddMeasure_Measure_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Measure key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_Build_All_measures_in_Fact_could_not_be_built_">
-            <summary>
-              Looks up a localized string similar to All measures in Fact could not be built..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_Build_Could_not_find_sourcekey____0__">
-            <summary>
-              Looks up a localized string similar to Could not find sourcekey: &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_Build_Field___0___not_a_field_type">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; not a field type.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_Build_Measure___0___not_a_measure_type">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; not a measure type.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_Build_Source___0___not_an_ISource_type">
-            <summary>
-              Looks up a localized string similar to Source &apos;{0}&apos; not an ISource type.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_Build_Table_could_not_be_built__all_fields_resulted_in_errors_only_">
-            <summary>
-              Looks up a localized string similar to Table could not be built; all fields resulted in errors only..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_ResolveField_FactFragment_ResolveFields__Field___0___has_a_different_TableLikeKey___1___than_expected___2___">
-            <summary>
-              Looks up a localized string similar to FactFragment.ResolveFields: Field &apos;{0}&apos; has a different TableLikeKey &apos;{1}&apos; than expected &apos;{2}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_ResolveField_FactFragment_ResolveFields__Field___0___not_found_or_not_a_valid_field_fragment_">
-            <summary>
-              Looks up a localized string similar to FactFragment.ResolveFields: Field &apos;{0}&apos; not found or not a valid field fragment..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_ResolveMeasures_FactFragment_ResolveMeasures__Measure___0___has_a_different_FactKey___1___than_expected___2___">
-            <summary>
-              Looks up a localized string similar to FactFragment.ResolveMeasures: Measure &apos;{0}&apos; has a different FactKey &apos;{1}&apos; than expected &apos;{2}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FactFragment_ResolveMeasures_FactFragment_ResolveMeasures__Measure___0___not_found_or_not_a_measure_fragment_">
-            <summary>
-              Looks up a localized string similar to FactFragment.ResolveMeasures: Measure &apos;{0}&apos; not found or not a measure fragment..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Field_Table_Cannot_access_table_before_it_is_set_">
-            <summary>
-              Looks up a localized string similar to Cannot access table before it is set..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FieldAnalysis_ParseResultDiagnostics_error_context_message">
-             <summary>
-               Looks up a localized string similar to error context: {0}
-            error message: {1}.
-             </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FieldAnalysis_ParseResultDiagnostics_Unhandled_construct">
-            <summary>
-              Looks up a localized string similar to Unhandled construct: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FieldFragment_Resolve__0__error__Field_not_associated_with_any_table_">
-            <summary>
-              Looks up a localized string similar to {0} error: Field not associated with any table..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FieldFragment_Resolve__0__error__Multiple_tables_contain_field__Using___1____also_found__2__">
-            <summary>
-              Looks up a localized string similar to {0} error: Multiple tables contain field. Using &apos;{1}&apos;, also found {2}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FieldFragment_Resolve_Field___0___references_an_invalid_table_like_object___1___">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; references an invalid table-like object &apos;{1}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FormatExtensions_TranslateByte_byte_auto_scaling_has_no_FormatString_equivalent">
-            <summary>
-              Looks up a localized string similar to byte auto-scaling (KB/MB/GB) has no FormatString equivalent; emitting plain numeric.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FormatExtensions_TranslateDate_locale_short_month_maps_to_Long_Date">
-            <summary>
-              Looks up a localized string similar to locale_short_month maps to Long Date; short-month specificity not preserved.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FormatExtensions_TranslateDate_year_week_has_no_FormatString_equivalent">
-            <summary>
-              Looks up a localized string similar to year_week has no FormatString equivalent; falling back to ISO date.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FormatExtensions_TranslateDateTime_date_time_composition_can_t_preserve_locale_driven_rendering">
-            <summary>
-              Looks up a localized string similar to date_time composition can&apos;t preserve locale-driven rendering; falling back to ISO composite.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FormatExtensions_TranslateDateTime_date_time_has_neither_a_date_nor_a_time_component">
-            <summary>
-              Looks up a localized string similar to date_time has neither a date nor a time component.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.FormatExtensions_TranslateNumber_abbreviation_compact_has_no_FormatString_equivalent">
-            <summary>
-              Looks up a localized string similar to abbreviation: compact has no FormatString equivalent; emitting plain numeric.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.JoinExtensions_ExtractJoinOn_">
-            <summary>
-              Looks up a localized string similar to Unsupported Join.On expression. We support &apos;source.field = dim.field&apos;. Got &apos;{0}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.JoinExtensions_ExtractJoinOn_Join_On_expression_cannot_be_empty">
-            <summary>
-              Looks up a localized string similar to Join.On expression cannot be empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.JoinExtensions_Kind_Metric_View_join_must_be__Using__xor__On__">
-            <summary>
-              Looks up a localized string similar to Metric View join must be &apos;Using&apos; xor &apos;On&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.JoinExtensions_ParseFields_Join_kind_is_invalid">
-            <summary>
-              Looks up a localized string similar to Join kind is invalid.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.JoinExtensions_ParseFields_Using_joins_are_not_yet_supported_">
-            <summary>
-              Looks up a localized string similar to Using joins are not yet supported..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.LicenseFailure_Message_The_SemanticBridge_feature_is_not_enabled_for_the_current_license_tier_and_the_user_should_reach_out_to_support_to_acquire_an_appropriate_license_">
-            <summary>
-              Looks up a localized string similar to The SemanticBridge feature is not enabled for the current license tier and the user should reach out to support to acquire an appropriate license..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Build_AggregationType_is_not_set_for_simple_measure">
-            <summary>
-              Looks up a localized string similar to AggregationType is not set for simple measure.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Build_Could_not_build_measure">
-            <summary>
-              Looks up a localized string similar to Could not build measure.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Build_Measure_cannot_have_both_Field_and_Expression__treating_as_a_simple_measure_">
-            <summary>
-              Looks up a localized string similar to Measure cannot have both Field and Expression; treating as a simple measure..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Resolve_Measure___0___is_associated_with_multiple_Facts___1___Using_the_first_one___2__">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; is associated with multiple Facts: {1}. Using the first one: {2}..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Resolve_Measure___0___is_not_associated_with_any_Fact_">
-            <summary>
-              Looks up a localized string similar to Measure &apos;{0}&apos; is not associated with any Fact..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Resolve_Measure_Resolve__Fact___0___does_not_exist_for_field___1___">
-            <summary>
-              Looks up a localized string similar to Measure.Resolve: Fact &apos;{0}&apos; does not exist for field &apos;{1}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MeasureFragment_Resolve_Measure_Resolve__Field___0___not_found_">
-            <summary>
-              Looks up a localized string similar to Measure.Resolve: Field &apos;{0}&apos; not found..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewCollection_Add_An_item_with_same_name_exists">
-            <summary>
-              Looks up a localized string similar to An item with name &apos;{0}&apos; already exists in the collection..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingDateFormat_Missing_required_date_format_value">
-            <summary>
-              Looks up a localized string similar to Missing required date_format value. Defaulting to year_month_day..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingDecimalType">
-            <summary>
-              Looks up a localized string similar to Missing decimal_places type. Defaulting to all..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingFormatType_Missing_format_type">
-            <summary>
-              Looks up a localized string similar to Missing format type. Ignoring format..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingMaterializationMode">
-            <summary>
-              Looks up a localized string similar to Missing materialization mode. Defaulting to relaxed..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingMaterializedViewType">
-            <summary>
-              Looks up a localized string similar to Missing materialized view type. Defaulting to unaggregated..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingSemiadditive">
-            <summary>
-              Looks up a localized string similar to Missing semiadditive value. Defaulting to Last..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewMissingTimeFormat">
-            <summary>
-              Looks up a localized string similar to Missing time_format value. Defaulting to locale_hour_minute_second..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownAbbreviation_Unknown_abbreviation">
-            <summary>
-              Looks up a localized string similar to Unknown abbreviation value. Ignoring..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownDateFormat_Unknown_date_format_value">
-            <summary>
-              Looks up a localized string similar to Unknown date_format value. Defaulting to year_month_day..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownDecimalType">
-            <summary>
-              Looks up a localized string similar to Unknown decimal_places type. Defaulting to all..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownFormatType_Unknown_format_type">
-            <summary>
-              Looks up a localized string similar to Unknown format type. Ignoring format..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownMaterializationMode">
-            <summary>
-              Looks up a localized string similar to Unknown materialization mode. Defaulting to relaxed..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownMaterializedViewType">
-            <summary>
-              Looks up a localized string similar to Unknown materialized view type. Defaulting to unaggregated..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownSemiadditive">
-            <summary>
-              Looks up a localized string similar to Unknown semiadditive value. Defaulting to Last..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_Deserialization_MetricViewUnknownTimeFormat">
-            <summary>
-              Looks up a localized string similar to Unknown time_format value. Defaulting to locale_hour_minute_second..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_DeserializationWarn_message_prefix">
-            <summary>
-              Looks up a localized string similar to There was a problem during metric view deserialization. {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_DuplicateJoinDimension_Join_would_create_a_dimension_whose_name_collides">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; would create a dimension whose name collides with an existing dimension; the duplicate is skipped. Join names must be unique across the metric view..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_FieldCollisionRename_Field_renamed_to_make_room_for_the_user_declared_dim">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; renamed to &apos;{1}&apos; to make room for the user-declared dim with the same name but a different source binding. The renamed field remains in the model and continues to back any relationship that referenced it..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_FieldConfigurationUnexpected_message">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; has an unexpected configuration that wasn&apos;t fully analyzed. It has been imported as a derived fact field for safety. Please verify the result..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_FieldExpressionParseError_context">
-             <summary>
-               Looks up a localized string similar to error context: {0}
-            error message: {1}.
-             </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_FieldExpressionParseError_message">
-            <summary>
-              Looks up a localized string similar to Failed to parse field expression: &apos;{0}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_FormatTranslationLossy">
-            <summary>
-              Looks up a localized string similar to Format translation is lossy: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_JoinOnEmpty_Join_has_no_on_clause">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; has no &apos;on&apos; clause; the dim and its source are created, but no FK/PK pair is wired..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_JoinOnNoSourceSide_Join_on_clause__doesn_t_pair_an_upstream_source_or_parent_join">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; on-clause &apos;{1}&apos; doesn&apos;t pair an upstream (source or parent join) column with a dim column; the dim and its source are created, but no FK/PK pair is wired..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_JoinOnUnrecognized_Join_on_clause_is_not_a_recognized_equality">
-            <summary>
-              Looks up a localized string similar to Join &apos;{0}&apos; on-clause &apos;{1}&apos; is not a recognized equality between an upstream column and a dim column; the dim and its source are created, but no FK/PK pair is wired..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_MeasureRefOutOfContext">
-            <summary>
-              Looks up a localized string similar to MEASURE references are not permitted in {0} expressions; found &apos;{1}&apos; in &apos;{2}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_MetricViewDeprecatedDimensionsKeyword">
-            <summary>
-              Looks up a localized string similar to The `dimensions:` keyword is deprecated on YAML spec 1.1+; the canonical form is `fields:`. Both keywords continue to work in YAML definitions..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_MetricViewFieldsAndDimensionsBothPresent">
-            <summary>
-              Looks up a localized string similar to A metric view cannot declare both `fields:` and `dimensions:` at the top level. These keywords are aliases - use only one..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_MetricViewFieldsKeywordPreV11">
-            <summary>
-              Looks up a localized string similar to The `fields:` keyword is the canonical form starting in YAML spec 1.1. This view&apos;s version is `{0}`. The `dimensions:` keyword is canonical at this version. Both keywords are accepted on reading YAML definitions..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_MetricViewMissingVersion">
-            <summary>
-              Looks up a localized string similar to Metric view YAML missing `version` property. Using default: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_MetricViewUnknownJoinCardinality">
-            <summary>
-              Looks up a localized string similar to Unknown join cardinality `{0}`. Expected `many_to_one` or `one_to_many`; defaulting to `many_to_one`..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_OneToManyJoinUntranslated">
-            <summary>
-              Looks up a localized string similar to Join `{0}` declares `cardinality: one_to_many`, which the translator does not model. The table is still mapped, but the relationship is skipped - measures that reference its columns may produce wrong or empty results and must be reviewed by hand..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_StructReferenceUnsupported_Dimension_references">
-            <summary>
-              Looks up a localized string similar to Dimension &apos;{0}&apos; references &apos;{1}&apos; as a whole-row or nested struct value, which has no Tabular column equivalent; the column is emitted but will not resolve at refresh..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_UnresolvedDimensionReference_Reference_targets_a_dimension_that_is_not_declared">
-            <summary>
-              Looks up a localized string similar to Reference &apos;{0}.{1}&apos; targets a dimension &apos;{2}&apos; that is not declared as a join; emitting a placeholder DerivedField on Fact preserving the original reference..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewDiagnostics_UnresolvedMeasureReference">
-            <summary>
-              Looks up a localized string similar to MEASURE reference &apos;{0}&apos; in &apos;{1}&apos; does not resolve to a declared measure; falling back to verbatim source..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViews_Deserialize_Failed_to_deserialize_MetricView_from_YAML_string">
-            <summary>
-              Looks up a localized string similar to Failed to deserialize MetricView from YAML string.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViews_Load_Failed_to_load_MetricView_from__0_">
-            <summary>
-              Looks up a localized string similar to Failed to load MetricView from {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewYamlDeserializer_Deserialize_Failed_to_deserialize_YAML_to_MetricView___0_">
-            <summary>
-              Looks up a localized string similar to Failed to deserialize YAML to MetricView: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewYamlDeserializer_Deserialize_Failed_to_deserialize_YAML_to_MetricView__One_or_more_validation_errors_occurred_">
-            <summary>
-              Looks up a localized string similar to Failed to deserialize YAML to MetricView: One or more validation errors occurred..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.MetricViewYamlDeserializer_Deserialize_Failed_to_validate_MetricView">
-            <summary>
-              Looks up a localized string similar to Failed to validate MetricView.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Names_Required__0__must_be_non_empty">
-            <summary>
-              Looks up a localized string similar to {0} must be non-empty.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_GetByPath_Attempted_dictionary_key_lookup_on_non_collection_type___0___">
-            <summary>
-              Looks up a localized string similar to Attempted dictionary key lookup on non-collection type &apos;{0}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_GetByPath_No_item_with_Name___0___found_in_collection_">
-            <summary>
-              Looks up a localized string similar to No item with Name &apos;{0}&apos; found in collection..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_GetByPath_Path_must_not_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Path must not be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_GetByPath_Property___0___not_found_on_type___1___">
-            <summary>
-              Looks up a localized string similar to Property &apos;{0}&apos; not found on type &apos;{1}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_GetByPath_Property___0___on___1___is_null_">
-            <summary>
-              Looks up a localized string similar to Property &apos;{0}&apos; on &apos;{1}&apos; is null..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_GetByPath_Unknown_path_segment_type___0_">
-            <summary>
-              Looks up a localized string similar to Unknown path segment type: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_ParsePath_Expected_closing_bracket_after_quoted_key_in_path___0_">
-            <summary>
-              Looks up a localized string similar to Expected closing bracket after quoted key in path: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_ParsePath_Expected_single_quote_after_____in_path___0_">
-            <summary>
-              Looks up a localized string similar to Expected single quote after &apos;[&apos; in path: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_ParsePath_Unterminated_quoted_key_in_path___0_">
-            <summary>
-              Looks up a localized string similar to Unterminated quoted key in path: {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.PathExtensions_Path_Node_not_found_in_MetricView_graph_">
-            <summary>
-              Looks up a localized string similar to Node not found in MetricView graph..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Qualified_Qualified_A_qualified_column_reference_requires_at_least_one_qualifier_">
-            <summary>
-              Looks up a localized string similar to A qualified column reference requires at least one qualifier..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Build_Left_field___0___not_found_in_built_objects__Fields_must_be_built_before_relationships_">
-            <summary>
-              Looks up a localized string similar to Left field &apos;{0}&apos; not found in built objects. Fields must be built before relationships..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Build_LeftFieldKey_is_not_set">
-            <summary>
-              Looks up a localized string similar to LeftFieldKey is not set.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Build_Required_properties__cardinalities__join_kind__or_filter_direction__are_not_set">
-            <summary>
-              Looks up a localized string similar to Required properties (cardinalities, join kind, or filter direction) are not set.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Build_Right_field___0___not_found_in_built_objects__Fields_must_be_built_before_relationships_">
-            <summary>
-              Looks up a localized string similar to Right field &apos;{0}&apos; not found in built objects. Fields must be built before relationships..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Build_RightFieldKey_is_not_set">
-            <summary>
-              Looks up a localized string similar to RightFieldKey is not set.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Resolve__0____1___does_not_reference_a_valid_field_">
-            <summary>
-              Looks up a localized string similar to {0} &apos;{1}&apos; does not reference a valid field..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Resolve__0____1___is_missing_">
-            <summary>
-              Looks up a localized string similar to {0} &apos;{1}&apos; is missing..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Resolve__0__is_not_set_">
-            <summary>
-              Looks up a localized string similar to {0} is not set..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Resolve_FilterDirection_is_not_set_and_could_not_be_inferred_">
-            <summary>
-              Looks up a localized string similar to FilterDirection is not set and could not be inferred..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.RelationshipFragment_Resolve_Relationship_must_be_between_a_fact_and_a_dimension_">
-            <summary>
-              Looks up a localized string similar to Relationship must be between a fact and a dimension..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_AddCalculatedMeasure_No_fact_with_id__0_">
-            <summary>
-              Looks up a localized string similar to No fact with id {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_AddFact_No_source_with_id__0_">
-            <summary>
-              Looks up a localized string similar to No source with id {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_AddReferenceField_No_field_with_id__0__to_reference">
-            <summary>
-              Looks up a localized string similar to No field with id {0} to reference.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_AddReferenceField_No_table_with_id__0_">
-            <summary>
-              Looks up a localized string similar to No table with id {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_AddRelationship_No_field_with_id__0_">
-            <summary>
-              Looks up a localized string similar to No field with id {0}.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_CheckForDuplicateDimensionReference_Fact___0___already_has_a_reference_to_dimension___1___with_relationship_on_fields___2___and___3__">
-            <summary>
-              Looks up a localized string similar to Fact &apos;{0}&apos; already has a reference to dimension &apos;{1}&apos; with relationship on fields &apos;{2}&apos; and &apos;{3}&apos;.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_FindDimension_Dimension___0___not_found_in_Root_Dimensions">
-            <summary>
-              Looks up a localized string similar to Dimension &apos;{0}&apos; not found in Root.Dimensions.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_FindFact_Fact___0___not_found_in_Root_Facts">
-            <summary>
-              Looks up a localized string similar to Fact &apos;{0}&apos; not found in Root.Facts.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_FindField_Field___0___not_found_in__1___Searched_TechnicalName_and_Name_">
-            <summary>
-              Looks up a localized string similar to Field &apos;{0}&apos; not found in {1}. Searched TechnicalName and Name..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_ValidateRelationshipFields_Relationship_left_field___0___does_not_belong_to_fact___1___or_its_source">
-            <summary>
-              Looks up a localized string similar to Relationship left field &apos;{0}&apos; does not belong to fact &apos;{1}&apos; or its source.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Root_ValidateRelationshipFields_Relationship_right_field___0___does_not_belong_to_dimension___1___or_its_source">
-            <summary>
-              Looks up a localized string similar to Relationship right field &apos;{0}&apos; does not belong to dimension &apos;{1}&apos; or its source.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SemanticBridgeService_TryCreate_">
-            <summary>
-              Looks up a localized string similar to Failed to initialize SemanticBridge service with an unexpected exception. See more details in the `Exception` property..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SemanticBridgeService_TryCreate_Feature_check_service_is_not_available__Maybe_you_are_running_it_outside_of_Tabular_Editor_3_">
-            <summary>
-              Looks up a localized string similar to Feature check service is not available. Maybe you are running it outside of Tabular Editor 3?.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SimpleMeasureExtensions_TryGenerateDax_AggregationType___0___is_not_supported_for_DAX_generation_">
-            <summary>
-              Looks up a localized string similar to AggregationType &apos;{0}&apos; is not supported for DAX generation..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SimpleMeasureExtensions_TryGenerateDax_SimpleMeasure___0___references_column___1___which_does_not_exist_in_table___2___">
-            <summary>
-              Looks up a localized string similar to SimpleMeasure &apos;{0}&apos; references column &apos;{1}&apos; which does not exist in table &apos;{2}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SimpleMeasureExtensions_TryGenerateDax_The_table_referenced_by_measure_does_not_exist_in_the_model">
-            <summary>
-              Looks up a localized string similar to The table &apos;{0}&apos; referenced by measure &apos;{1}&apos; does not exist in the model.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SimpleRelationshipExtensions_TryCreateTomRelationship_Column___0___not_found_in_table___1___for_relationship___2___">
-            <summary>
-              Looks up a localized string similar to Column &apos;{0}&apos; not found in table &apos;{1}&apos; for relationship &apos;{2}&apos;..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SimpleRelationshipExtensions_TryCreateTomRelationship_Relationship___0___has_invalid_cardinality_configuration__Expected_one_side_with_Many_and_one_side_with_One_cardinality_">
-            <summary>
-              Looks up a localized string similar to Relationship &apos;{0}&apos; has invalid cardinality configuration. Expected one side with Many and one side with One cardinality..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SourceFragment_AddField_Source_field_key_cannot_be_null_or_empty_">
-            <summary>
-              Looks up a localized string similar to Source field key cannot be null or empty..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SourceFragment_Build_Could_not_build_source_system">
-            <summary>
-              Looks up a localized string similar to Could not build source system.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SourceFragment_Build_Source_fragment_has_no_valid_object_or_query_defined">
-            <summary>
-              Looks up a localized string similar to Source fragment has no valid object or query defined..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.SqlExpressionError_MultiDotIdentifier_message">
-            <summary>
-              Looks up a localized string similar to Metric View identifiers with more than one dot are not supported..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.Success_Message_">
-            <summary>
-              Looks up a localized string similar to Service was successfully initialized and can be accessed through the `Success` record&apos;s `Service` property..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.ValidationRule_Validate_Cannot_use_validation_rule_for__0__on_node_of__1__">
-            <summary>
-              Looks up a localized string similar to Cannot use validation rule for {0} on node of {1}..
-            </summary>
-        </member>
-        <member name="P:TabularEditor.SemanticBridge.Strings.View_FindJoin_No_join_with_name_found">
-            <summary>
-              Looks up a localized string similar to No join with name found: {0}..
             </summary>
         </member>
         <member name="T:TabularEditor.SemanticBridge.Util.CollectionEquality">
