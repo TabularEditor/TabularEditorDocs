@@ -47,23 +47,26 @@ This is out of caution and a desire to offer the most interoperability with any 
 
 Per [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#dimensions), both keys remain valid for serialization.
 
-We emit a warning upon deserialization when a Metric View's top-level keyword is not what was documented for that version.
-The canonical keyword is `dimensions` before v1.1 and `fields` from v1.1 onward.
-So we warn when a pre-v1.1 (v0.1) Metric View uses `fields`, and when a v1.1 or later Metric View uses `dimensions`.
-The canonical pairings, `dimensions` before v1.1 and `fields` at v1.1 and later, deserialize without a warning.
-Emitting `dimensions` by default at v1.1 while also warning about it upon deserialization is deliberate:
-we emit based on the earliest documented v1.1 spec to avoid breaking any other tooling that is not up to date with the latest spec,
-and we warn because the latest spec now prefers `fields`.
-These warnings do not affect any operations you might want to perform with the Semantic Bridge or the Metric View object model.
-
-When we read a Metric View definition, we track the keyword used in the YAML, so that we can preserve the same keyword upon re-serializing the definition.
-This guarantees that Metric View definitions have round-trip fidelity in our deserializer and serializer; e.g., if you have a v0.1 Metric View using `fields`, we will serialize it using the same keyword so you get the same YAML back out.
-
-The Semantic Bridge default of `dimensions` for v0.1 and v1.1 comes into play if you deserialize a Metric View with neither of `dimensions` or `fields` defined.
-In this case, we apply our default logic if you add fields to the Metric View via a C# script and then later serialize the Metric View to YAML.
+| YAML source uses | Version | Deserialization succeeds | Warning emitted on deserialization   | Reserializes with          |
+|------------------|---------|--------------------------|--------------------------------------|----------------------------|
+| `fields`         | <1.1    | yes                      | yes                                  | `fields`                   |
+| `dimensions`     | <1.1    | yes                      | no                                   | `dimensions`               |
+| neither          | <1.1    | yes                      | no                                   | `dimensions`               |
+| `fields`         | 1.1     | yes                      | no                                   | `fields`                   |
+| `dimensions`     | 1.1     | yes                      | yes                                  | `dimensions`               |
+| neither          | 1.1     | yes                      | no                                   | `dimensions`               |
+| `fields`         | >1.1    | yes                      | no                                   | `fields`                   |
+| `dimensions`     | >1.1    | yes                      | yes                                  | `dimensions`               |
+| neither          | >1.1    | yes                      | no                                   | `fields`                   |
+| both             | any     | no                       | yes (error, failing deserialization) | n/a, deserialization fails |
 
 We will continue to support both keywords in all Metric View versions unless a future spec update indicates otherwise.
 You can continue to freely use either as you prefer, with notes about the warnings and defaults above for serialization and deserialization.
+
+You may note that we warn on `dimensions` in a v1.1 Metric View, and also that we choose `dimensions` as the default if none is provided for the same v1.1.
+This is our conservative default because of the mid-1.1 introduction of `fields` as preferred.
+The warning is in line with Metric View documentation saying that `fields` is to be considered the default.
+The default of `dimensions` is to support interoperability with any other tools that may have only targeted the original v1.1 specification from when it was first published.
 
 We treat the case of both keys in a definition as an error and will fail to deserialize such a Metric View.
 We are aware of no way to generate such a case other than by hand-editing YAML; certainly you cannot accidentally do this via the Semantic Bridge or any operations we expose.
