@@ -2,7 +2,7 @@
 uid: semantic-bridge-add-object
 title: 向 Metric View 添加对象
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,56 +20,93 @@ applies_to:
 
 # 向 Metric View 添加对象
 
-本操作指南演示如何将新的 Metric View 维度（字段）添加到已加载的 Metric View 中。
+This how-to demonstrates adding new objects to a loaded Metric View and setting their properties.
 类似的方法也适用于所有 Metric View 集合。
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-## 创建新的 Metric View 维度对象
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
-使用 Metric View 的 `Dimension` 构造函数来创建新的 Metric View 维度：
+## Add a field
 
-```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
+Use [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) to create and return a new `Field` you can manipulate.
 
-var newDimension = new MetricView.Dimension
-{
-    Name = "customer_city",
-    Expr = "customer.city"
-};
-```
-
-## 添加到 Metric View 中
-
-Metric View 的 `Dimensions` 属性是一个 `IList<Dimension>`，因此可以使用 `Add()` 方法：
-
-```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
+```csharp {run id=addfield setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before adding: {SemanticBridge.MetricView.Model.Dimensions.Count}");
+var view = SemanticBridge.MetricView.Model;
 
-var newDimension = new MetricView.Dimension
-{
-    Name = "customer_city",
-    Expr = "customer.city"
-};
+sb.AppendLine($"Fields before adding: {view.Fields.Count}");
 
-SemanticBridge.MetricView.Model.Dimensions.Add(newDimension);
+var field = view.AddField("customer_city", "customer.city");
 
-sb.AppendLine($"Dimensions after adding: {SemanticBridge.MetricView.Model.Dimensions.Count}");
+sb.AppendLine($"Fields after adding: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **输出**
 
 ```
-Dimensions before adding: 8
-Dimensions after adding: 9
+Fields before adding: 6
+Fields after adding: 7
 ```
+
+## Add and configure a `Join`
+
+[`AddJoin`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddJoin%2A)
+works similarly to `AddField`: it constructs the object, adds it to the Metric View, and returns it so you can set further properties.
+Set the cardinality with the [`JoinCardinality`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality) enum.
+
+```csharp {run id=addjoin setup=mv-sample after=none output=false}
+using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
+
+var view = SemanticBridge.MetricView.Model;
+
+// add a join, then set its remaining properties
+var supplier = view.AddJoin("supplier", "sales.dim.supplier");
+supplier.On = "source.supplier_id = supplier.supplier_id";
+supplier.Cardinality = MetricView.JoinCardinality.ManyToOne;
+```
+
+`AddJoin` is also a method on any existing `Join`.
+You would use this to create nested joins, for example, `supplier.AddJoin("region", "sales.dim.region")`,
+which models a snowflake dimension.
+
+## Add and configure a `Measure`
+
+[`AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A) works similarly to the other `Add` methods.
+
+Some properties, such as a field or measure `Format`, have their own types you need to construct to set the property.
+Create the [`Format`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format) variant you want, such as `Format.Currency` or `Format.Percentage`, and assign it.
+
+```csharp {run id=addmeasure setup=mv-sample after=none output=true}
+using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
+
+var sb = new System.Text.StringBuilder();
+var view = SemanticBridge.MetricView.Model;
+
+// add a new measure, then give it a currency format
+var totalCost = view.AddMeasure("total_cost", "SUM(cost)");
+totalCost.Format = new MetricView.Format.Currency { CurrencyCode = "USD" };
+
+// read the format back off the measure
+sb.AppendLine($"{totalCost.Name} format: {totalCost.Format}");
+Output(sb.ToString());
+```
+
+**输出**
+
+```
+total_cost format: Currency { Type = Currency, DecimalPlaces = , HideGroupSeparator = , Abbreviation = , CurrencyCode = USD }
+```
+
+## 后续步骤
+
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Rename a field](xref:semantic-bridge-rename-objects)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
 
 ## 另见
 
-- @semantic-bridge-remove-object
-- @semantic-bridge-rename-objects
-- @semantic-bridge-serialize
+- [指标视图对象模型](xref:semantic-bridge-metric-view-object-model)
