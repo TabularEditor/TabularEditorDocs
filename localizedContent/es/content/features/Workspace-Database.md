@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-## Presentamos las bases de datos de Workspace
+# Presentamos las bases de datos de Workspace
 
 Tabular Editor 3.0 permite editar los metadatos del modelo cargados desde el disco mientras se mantiene una conexión simultánea a una base de datos implementada en una instancia de Analysis Services. A esta base de datos la llamamos _base de datos de Workspace_. De ahora en adelante, este es el enfoque recomendado para el modelado tabular en Tabular Editor.
 
