@@ -2,7 +2,7 @@
 uid: semantic-bridge-serialize
 title: Serialize a Metric View to YAML
 author: Greg Baldini
-updated: 2026-04-17
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,18 +21,18 @@ applies_to:
 
 This how-to demonstrates how to serialize a Metric View back to YAML format, either as a string or saved to a file.
 
-> [!WARNING]
-> The public preview only supports v0.1 Metric View properties. Any v1.1 metadata present in a loaded Metric View is silently ignored and will be lost when you serialize.
-> Do not overwrite a source YAML file that contains v1.1 metadata.
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Serialize to a string
 
-Use `Serialize()` to get the YAML representation:
+Use `Serialize()` to get the YAML representation.
+This simply re-serializes the YAML you loaded above.
 
-```csharp
+```csharp {run id=serialize setup=mv-sample after=none output=true}
 var yaml = SemanticBridge.MetricView.Serialize();
 
 var sb = new System.Text.StringBuilder();
@@ -42,11 +42,74 @@ sb.AppendLine(yaml);
 Output(sb.ToString());
 ```
 
+**Output**
+
+```
+YAML output:
+------------
+version: 1.1
+source: sales.fact.orders
+joins:
+- name: product
+  source: sales.dim.product
+  on: source.product_id = product.product_id
+  cardinality: many_to_one
+- name: customer
+  source: sales.dim.customer
+  on: source.customer_id = customer.customer_id
+  cardinality: many_to_one
+- name: date
+  source: sales.dim.date
+  on: source.order_date = date.date_key
+  cardinality: many_to_one
+fields:
+- name: product_name
+  expr: product.product_name
+- name: product_category
+  expr: product.category
+  display_name: Product Category
+- name: customer_segment
+  expr: customer.segment
+- name: order_date
+  expr: date.full_date
+- name: order_year
+  expr: date.year
+- name: order_month
+  expr: date.month_name
+measures:
+- name: total_revenue
+  expr: SUM(revenue)
+  display_name: Total Revenue
+  format:
+    type: currency
+    decimal_places:
+      type: exact
+      places: 2
+    currency_code: USD
+- name: gross_margin
+  expr: SUM(revenue) - SUM(cost)
+- name: order_count
+  expr: COUNT(*)
+- name: avg_order_value
+  expr: AVG(revenue)
+- name: revenue_to_budget
+  expr: (SUM(revenue) - SUM(budget)) / SUM(budget)
+  display_name: Revenue vs Budget
+  format:
+    type: percentage
+    decimal_places:
+      type: max
+      places: 1
+- name: unique_customers
+  expr: COUNT(DISTINCT customer_id)
+```
+
 ## Save to a file
 
-Use `Save(path)` to write the YAML directly to disk:
+Use `Save(path)` to write the YAML directly to disk.
+This will write the Metric View you loaded above to disk.
 
-```csharp
+```csharp {compile}
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
 
 SemanticBridge.MetricView.Save(path);
@@ -58,29 +121,12 @@ Output($"Metric View saved to: {path}");
 
 A common workflow is to load, modify, and save a Metric View:
 
-```csharp
-using System.Globalization;
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
-// The Metric View is already loaded from the include above
-
+```csharp {run id=roundtrip setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
-var textInfo = CultureInfo.CurrentCulture.TextInfo;
 
-// Modify: rename dimensions from snake_case to Title Case
-var renamed = view.Dimensions.Select(dim => new MetricView.Dimension
-{
-    Name = textInfo.ToTitleCase(dim.Name.Replace('_', ' ')),
-    Expr = dim.Expr
-}).ToList();
+// set a display name on a field, then serialize to confirm it round-trips
+view.Fields["order_month"].DisplayName = "Order Month";
 
-view.Dimensions.Clear();
-foreach (var dim in renamed)
-{
-    view.Dimensions.Add(dim);
-}
-
-// Serialize to see the result
 var yaml = SemanticBridge.MetricView.Serialize();
 
 var sb = new System.Text.StringBuilder();
@@ -95,44 +141,69 @@ Output(sb.ToString());
 ```
 Modified YAML:
 --------------
-version: 0.1
+version: 1.1
 source: sales.fact.orders
 joins:
 - name: product
   source: sales.dim.product
   on: source.product_id = product.product_id
+  cardinality: many_to_one
 - name: customer
   source: sales.dim.customer
   on: source.customer_id = customer.customer_id
+  cardinality: many_to_one
 - name: date
   source: sales.dim.date
   on: source.order_date = date.date_key
-dimensions:
-- name: Product Name
+  cardinality: many_to_one
+fields:
+- name: product_name
   expr: product.product_name
-- name: Product Category
+- name: product_category
   expr: product.category
-- name: Customer Segment
+  display_name: Product Category
+- name: customer_segment
   expr: customer.segment
-- name: Order Date
+- name: order_date
   expr: date.full_date
-- name: Order Year
+- name: order_year
   expr: date.year
-- name: Order Month
+- name: order_month
   expr: date.month_name
+  display_name: Order Month
 measures:
 - name: total_revenue
   expr: SUM(revenue)
+  display_name: Total Revenue
+  format:
+    type: currency
+    decimal_places:
+      type: exact
+      places: 2
+    currency_code: USD
+- name: gross_margin
+  expr: SUM(revenue) - SUM(cost)
 - name: order_count
-  expr: COUNT(order_id)
+  expr: COUNT(*)
 - name: avg_order_value
   expr: AVG(revenue)
+- name: revenue_to_budget
+  expr: (SUM(revenue) - SUM(budget)) / SUM(budget)
+  display_name: Revenue vs Budget
+  format:
+    type: percentage
+    decimal_places:
+      type: max
+      places: 1
 - name: unique_customers
   expr: COUNT(DISTINCT customer_id)
 ```
 
+## Next steps
+
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Import a Metric View to Tabular](xref:semantic-bridge-import)
+
 ## See also
 
-- @semantic-bridge-load-inspect
-- @semantic-bridge-import
-- @semantic-bridge
+- [Semantic Bridge Overview](xref:semantic-bridge)

@@ -18,7 +18,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 
 ## In Development
 
-- **Semantic Bridge enhancements**: Support for v1.1 properties and enhanced import UI
+- **Semantic Bridge enhancements**: Enhanced import UI, support for multi-fact pattern
 - **Localization improvements**: Expanding language support and refining existing translations
 - **Power Query (M) Auto-Formatting**: Advanced formatting capabilities for M expressions
 - **Graphical Model Comparison**: See the changes that are applied to 
@@ -51,7 +51,7 @@ For detailed information about each release, see the [full release history](xref
 
 ✅ [**Built-in Best Practice Analyzer rules**](xref:built-in-bpa-rules) - Comprehensive set of BPA rules covering formatting, metadata, model layout, DAX expressions, and translations (v3.25.0)
 
-✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0)
+✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0); support for Metric View v1.1 spec
 
 ✅ [**Save with supporting files for Fabric**](xref:save-with-supporting-files) - Support for .platform and definition.pbism files to match Fabric repository structure (v3.25.0)
 

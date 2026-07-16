@@ -2,7 +2,7 @@
 uid: semantic-bridge-how-tos
 title: Semantic Bridge How-Tos
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,21 +23,26 @@ These how-tos are focused on interacting with the [Databricks Metric View object
 
 ## Getting Started
 
-- @semantic-bridge-load-inspect - Load a Metric View and explore its structure
-- @semantic-bridge-import - Import a Metric View to Tabular and view diagnostics
+- @semantic-bridge-load-inspect: Load a Metric View and explore its structure
+- @semantic-bridge-metric-view-import-from-file: Import a Metric View directly from a YAML file
+- @semantic-bridge-import: Import a loaded Metric View to Tabular and view diagnostics
 
 ## Validation
 
-- @semantic-bridge-validate-default - Validate with built-in rules
-- @semantic-bridge-validate-simple-rules - Create predicate-based validation rules for naming conventions
-- @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks like duplicate detection
+- @semantic-bridge-validate-default: Validate with built-in rules
+- @semantic-bridge-validate-simple-rules: Create predicate-based validation rules for naming conventions
+- @semantic-bridge-validate-contextual-rules: Create rules with cross-object checks, such as names reused across object types
 
 ## Manipulating the Object Model
 
-- @semantic-bridge-add-object - Add a new object to a Metric View
-- @semantic-bridge-remove-object - Remove objects from a Metric View
-- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
+- @semantic-bridge-add-object: Add objects to a Metric View and set their properties
+- @semantic-bridge-remove-object: Remove objects from a Metric View
+- @semantic-bridge-rename-objects: Rename a field in a Metric View
 
 ## Serialization
 
-- @semantic-bridge-serialize - Serialize a Metric View back to YAML
+- @semantic-bridge-serialize: Serialize a Metric View back to YAML
+
+## Troubleshooting
+
+- @semantic-bridge-metric-view-handle-failures: Handle invalid input, missing files, and imports that don't complete

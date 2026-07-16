@@ -2,7 +2,7 @@
 uid: semantic-bridge-rename-objects
 title: Rename Objects in a Metric View
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,151 +19,62 @@ applies_to:
 ---
 # Rename objects in a Metric View
 
-This how-to demonstrates how to rename Metric View dimensions using a copy-modify pattern for bulk transformations.
+This how-to demonstrates renaming a Metric View field.
 The same patterns apply to all collections in a Metric View.
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-## The copy-modify pattern
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
-Since Metric View dimension names are properties on objects in a collection, the cleanest approach is to:
+## Rename a field
 
-1. Create new Metric View `Dimension` objects with the modified names
-2. Clear the original collection
-3. Add the new objects
+Rename a field by adding a new field under the new name, copying its other properties across, then removing the original.
+[`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) sets only the name and expression, so copy the remaining properties (`Comment`, `DisplayName`, `Synonyms`, `Format`) yourself.
 
-This avoids issues with modifying objects while iterating.
-
-## Convert snake_case to Title Case
-
-Transform Metric View dimension names from `product_name` to `Product Name`:
-
-```csharp
-using System.Globalization;
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
+```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
-var textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+var old = view.Fields["order_month"];
+
+// add the replacement, copy the remaining properties, then remove the original
+var renamed = view.AddField("Order Month", old.Expr);
+renamed.Comment = old.Comment;
+renamed.DisplayName = old.DisplayName;
+renamed.Synonyms = old.Synonyms;
+renamed.Format = old.Format;
+old.Delete();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("BEFORE");
-sb.AppendLine("------");
-foreach (var dim in view.Dimensions)
+sb.AppendLine("Fields:");
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"  {dim.Name}");
+    sb.AppendLine($"  {field.Name}");
 }
-
-// Create renamed dimensions
-var renamed = view.Dimensions.Select(dim => new MetricView.Dimension
-{
-    Name = textInfo.ToTitleCase(dim.Name.Replace('_', ' ')),
-    Expr = dim.Expr
-}).ToList();
-
-// Replace the collection
-view.Dimensions.Clear();
-foreach (var dim in renamed)
-{
-    view.Dimensions.Add(dim);
-}
-
-sb.AppendLine();
-sb.AppendLine("AFTER");
-sb.AppendLine("-----");
-foreach (var dim in view.Dimensions)
-{
-    sb.AppendLine($"  {dim.Name}");
-}
-
 Output(sb.ToString());
 ```
 
 **Output:**
 
 ```
-BEFORE
-------
+Fields:
   product_name
   product_category
   customer_segment
   order_date
   order_year
-  order_month
-
-AFTER
------
-  Product Name
-  Product Category
-  Customer Segment
-  Order Date
-  Order Year
   Order Month
 ```
 
-## Rename using a mapping dictionary
+The re-added field moves to the end of the collection.
 
-Apply specific renames using a lookup:
+## Next steps
 
-```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
-var view = SemanticBridge.MetricView.Model;
-
-// Define rename mappings
-var renames = new Dictionary<string, string>
-{
-    { "product_name", "Product" },
-    { "product_category", "Category" },
-    { "customer_segment", "Segment" },
-    { "order_date", "Date" },
-    { "order_year", "Year" },
-    { "order_month", "Month" }
-};
-
-var sb = new System.Text.StringBuilder();
-
-// Create renamed dimensions
-var renamed = view.Dimensions
-    .Select(
-        dim => new MetricView.Dimension
-        {
-            Name = renames.TryGetValue(dim.Name, out var newName) ? newName : dim.Name,
-            Expr = dim.Expr
-        })
-    .ToList();
-
-// Replace the collection
-view.Dimensions.Clear();
-foreach (var dim in renamed)
-{
-    view.Dimensions.Add(dim);
-}
-
-sb.AppendLine("Renamed dimensions:");
-sb.AppendLine("-------------------");
-foreach (var dim in view.Dimensions)
-{
-    sb.AppendLine($"  {dim.Name,-20} <- {dim.Expr}");
-}
-
-Output(sb.ToString());
-```
-
-**Output:**
-
-```
-Renamed dimensions:
--------------------
-  Product              <- product.product_name
-  Category             <- product.category
-  Segment              <- customer.segment
-  Date                 <- date.full_date
-  Year                 <- date.year
-  Month                <- date.month_name
-```
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
 
 ## See also
 
-- @semantic-bridge-add-object
-- @semantic-bridge-remove-object
-- @semantic-bridge-serialize
+- [Metric View Object Model](xref:semantic-bridge-metric-view-object-model)

@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-default
 title: Validate a Metric View with Default Rules
 author: Greg Baldini
-updated: 2026-04-17
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,37 +19,38 @@ applies_to:
 ---
 # Validate a Metric View with Default Rules
 
-This how-to demonstrates how to validate a loaded Metric View using the built-in validation rules and interpret the diagnostic messages.
+This how-to demonstrates validating a loaded Metric View using the built-in validation rules and interpreting the diagnostic messages.
+
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
+
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Default validation rules
 
-The Semantic Bridge includes these built-in validation rules:
-
-| Rule                     | Description                                                                   |
-|--------------------------|-------------------------------------------------------------------------------|
-| JoinNameRequired         | Metric View Join must have a name                                             |
-| UniqueJoinName           | Metric View Join names must be unique                                         |
-| JoinSourceRequired       | Metric View Join must have a source                                           |
-| JoinOnOrUsingRequired    | Metric View Join must specify either `on` or `using`                          |
-| JoinOnOrUsingExclusivity | Metric View Join cannot specify both `on` and `using`                         |
-| JoinOnFormat             | Metric View Join `on` clause must be a valid equijoin expression              |
-| JoinUsingColumnCount     | Metric View Join `using` clause must have exactly one column (public preview limitation) |
-| DimensionNameRequired    | Metric View Dimension must have a name                                        |
-| UniqueDimensionName      | Metric View Dimension names must be unique                                    |
-| DimensionExprRequired    | Metric View Dimension must have an expression                                 |
-| MeasureNameRequired      | Metric View Measure must have a name                                          |
-| UniqueMeasureName        | Metric View Measure names must be unique                                      |
-| MeasureExprRequired      | Metric View Measure must have an expression                                   |
+The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/).
+These rules are automatically run upon deserialization, whether via `Deserialize` directly or any method that reads a Metric View, such as `Load` or `ImportToTabularFromFile`.
+Diagnostics from those automatic runs remain available afterward through `SemanticBridge.MetricView.ImportDiagnostics`.
+You can also run these rules on demand against the loaded Metric View, which this document covers.
 
 ## Run validation with default rules
 
-Call `Validate()` with no arguments to use the built-in validation rules.
+Run [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) with no arguments to run the built-in rules against the loaded Metric View.
 
-```csharp
+```csharp {run id=validate-count setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 Output($"Validation complete: {diagnostics.Count} issue(s) found");
 ```
+
+**Output**
+
+```
+Validation complete: 0 issue(s) found
+```
+
+The sample Metric View is valid, so this reports no issues.
 
 ## Interpret diagnostic messages
 
@@ -59,7 +60,7 @@ Each diagnostic message contains:
 - **Message**: Description of the issue
 - **Path**: Location of the object in the Metric View hierarchy
 
-```csharp
+```csharp {run id=interpret setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
@@ -84,55 +85,43 @@ else
 Output(sb.ToString());
 ```
 
-## Example with validation errors
+**Output**
 
-Some rules (required fields) are enforced during deserialization.
-The remaining rules check for duplicates and structural issues after deserialization.
+```
+VALIDATION RESULTS
+------------------
 
-This Metric View demonstrates violations that are caught by `Validate()`:
+No issues found.
+```
 
-```csharp
-SemanticBridge.MetricView.Deserialize("""
-    version: 0.1
-    source: sales.fact.orders
-    joins:
-      # UniqueJoinName - duplicate name 'customer'
-      - name: customer
-        source: sales.dim.customer
-        on: customer_id = customer.customer_id
-      - name: customer
-        source: sales.dim.customer_backup
-        on: customer_id = customer_backup.customer_id
-      # JoinOnOrUsingRequired - neither on nor using
-      - name: date
-        source: sales.dim.date
-    dimensions:
-      # UniqueDimensionName - duplicate name 'category'
-      - name: category
-        expr: product.category
-      - name: category
-        expr: product.subcategory
-      - name: product_name
-        expr: product.product_name
-    measures:
-      # UniqueMeasureName - duplicate name 'total'
-      - name: total
-        expr: SUM(revenue)
-      - name: total
-        expr: SUM(quantity)
-      - name: order_count
-        expr: COUNT(order_id)
-    """);
+## Example with a validation error
+
+Validation always runs against the currently loaded Metric View, so you can introduce a violation in a script and see it caught.
+Here we clear a field's expression to trigger `FieldExprRequired`:
+
+```csharp {run id=error-example setup=mv-sample after=none output=true}
+var view = SemanticBridge.MetricView.Model;
+view.Fields["order_year"].Expr = "";
 
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Found {diagnostics.Count} issue(s):");
+sb.AppendLine("VALIDATION RESULTS");
+sb.AppendLine("------------------");
 sb.AppendLine("");
 
-foreach (var diag in diagnostics)
+if (diagnostics.Count == 0)
 {
-    sb.AppendLine($"[{diag.Severity}] {diag.Message}");
+    sb.AppendLine("No issues found.");
+}
+else
+{
+    foreach (var diag in diagnostics)
+    {
+        sb.AppendLine($"[{diag.Severity}] {diag.Message}");
+        sb.AppendLine($"  Path: {diag.Path}");
+        sb.AppendLine("");
+    }
 }
 
 Output(sb.ToString());
@@ -141,21 +130,18 @@ Output(sb.ToString());
 **Output:**
 
 ```
-Found 6 issue(s):
+VALIDATION RESULTS
+------------------
 
-[Error] Join 'customer' must use a simple equality condition with table prefixes (e.g. 'source.column = dimension.column')
-[Error] Duplicate join name: 'customer'
-[Error] Join 'customer' must use a simple equality condition with table prefixes (e.g. 'source.column = dimension.column')
-[Error] Join 'date' must specify either 'on' or 'using' clause
-[Error] Duplicate dimension name: 'category'
-[Error] Duplicate measure name: 'total'
+[Error] Field 'order_year' expr cannot be empty
+  Path: Model.Fields["order_year"].Expr
 ```
 
 ## Filter diagnostics by severity
 
 You can filter diagnostics to focus on errors only:
 
-```csharp
+```csharp {run id=filter-severity setup=mv-sample after=none output=true}
 using System.Linq;
 using TabularEditor.SemanticBridge.Orchestration;
 
@@ -168,10 +154,17 @@ sb.AppendLine($"Total issues: {diagnostics.Count}");
 Output(sb.ToString());
 ```
 
+**Output**
+
+```
+Errors: 0
+Total issues: 0
+```
+
 ## Next steps
 
-- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules) to enforce your own conventions
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules) for cross-object checks
+- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules)
+- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
 
 ## See also
 

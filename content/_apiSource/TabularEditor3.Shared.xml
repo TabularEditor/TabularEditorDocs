@@ -82,6 +82,233 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.AIChatCSharpArtifact.IsSafe">
+            <summary>Whether the script is considered safe (no #r directives and only safe namespaces).</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.AIChatCSharpArtifact.HasReferenceDirective">
+            <summary>Whether the script contains #r (reference) directives.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.AIChatCSharpArtifact.UnsafeNamespaces">
+            <summary>List of namespaces used that are not in the safe list.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.AIChatCSharpArtifact.SafetyWarning">
+            <summary>Human-readable warning message for unsafe scripts.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.AI.ConsentResult">
+            <summary>
+            The result of a consent request.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.ConsentResult.Granted">
+            <summary>Whether consent was granted.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.ConsentResult.Duration">
+            <summary>The duration for which consent was granted.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.ConsentResult.Denied">
+            <summary>Creates a denied result.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.ConsentResult.Grant(TabularEditor.Shared.Contracts.AI.ConsentDuration)">
+            <summary>Creates a granted result with specified duration.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.AI.ConsentDuration">
+            <summary>
+            Duration options for consent.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Contracts.AI.ConsentDuration.Denied">
+            <summary>Consent was denied.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Contracts.AI.ConsentDuration.ThisTime">
+            <summary>Allow for this single request only.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Contracts.AI.ConsentDuration.ThisSession">
+            <summary>Allow for the remainder of this session.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Contracts.AI.ConsentDuration.ForThisModel">
+            <summary>Allow for this specific model.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Contracts.AI.ConsentDuration.Always">
+            <summary>Always allow (update preference).</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.AI.IAIConsentService">
+            <summary>
+            Service for managing user consent for AI data sharing.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IAIConsentService.CheckOrRequestConsentAsync(TabularEditor.Shared.Services.AI.ConsentType,System.String)">
+            <summary>
+            Checks if consent is already granted for the specified type, or requests it from the user.
+            </summary>
+            <param name="consentType">The type of data being shared.</param>
+            <param name="context">A description of what data will be shared (for the consent dialog).</param>
+            <returns>The consent result.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IAIConsentService.ClearTurnConsent">
+            <summary>
+            Clears turn-scoped consents. Call this when a turn completes so that
+            one-time ("Allow") consents do not carry over to the next turn.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.GetScriptViewById(System.Int32)">
+            <summary>
+            Gets the script handle for an existing document by its ID.
+            Returns null if the document doesn't exist or is not a script view.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.ReplaceScriptContent(System.Object,System.String)">
+            <summary>
+            Replaces the content of an existing script view.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.ShowToolCallProgress(System.String)">
+            <summary>
+            Shows a tool call progress indicator in the UI (bottom of chat).
+            </summary>
+            <param name="toolName">The name of the tool being executed.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.HideToolCallProgress">
+            <summary>
+            Hides the tool call progress indicator (bottom of chat).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.GetToolCallMarker(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a tool call marker tag that can be injected into the message stream.
+            This allows tool calls to appear inline in the conversation history.
+            </summary>
+            <param name="toolName">The internal tool name (e.g., "execute_dax_query").</param>
+            <param name="callId">Unique identifier for the tool call (used for completion updates).</param>
+            <param name="displayName">User-friendly display name for the tool.</param>
+            <param name="details">Optional details to show in tooltip (e.g., the DAX query being executed).</param>
+            <returns>A marker string like &lt;toolcall tool="..." id="..." display="..." details="..."/&gt;</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.MarkToolCallComplete(System.String)">
+            <summary>
+            Marks a tool call as complete in the UI, stopping the animation and showing "Done!".
+            </summary>
+            <param name="callId">The call ID of the tool call to mark complete.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.ShowConsentRequest(System.String,System.String,System.String,System.Collections.Generic.IList{TabularEditor.Shared.Contracts.AI.ConsentOption})">
+            <summary>
+            Shows a consent request in the chat UI.
+            </summary>
+            <param name="requestId">Unique identifier for this consent request.</param>
+            <param name="title">The title of the consent request.</param>
+            <param name="message">The message explaining what consent is being requested.</param>
+            <param name="options">The available consent options.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.RemoveConsentRequest(System.String)">
+            <summary>
+            Removes a consent request from the chat UI (after user responds or on timeout).
+            </summary>
+            <param name="requestId">The request ID to remove.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.SetAvailableSkills(System.Collections.Generic.IList{TabularEditor.Shared.Contracts.AI.SkillInfo})">
+            <summary>
+            Sets the available custom instructions for the /instruction-id autocomplete popup.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.UpdateContextUsage(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Updates the context window usage indicator in the UI.
+            </summary>
+            <param name="usedTokens">Total tokens used so far (input + output).</param>
+            <param name="maxTokens">Maximum context window size.</param>
+            <param name="inputTokens">Input tokens from the latest API call (context pressure).</param>
+            <param name="outputTokens">Accumulated output tokens this turn (context pressure).</param>
+            <param name="cachedTokens">Input tokens read from prompt cache (context pressure).</param>
+            <param name="cacheCreationTokens">Input tokens used to create cache entries (context pressure).</param>
+            <param name="billedInputTokens">Cumulative input tokens billed across all API calls.</param>
+            <param name="billedOutputTokens">Cumulative output tokens billed across all API calls.</param>
+            <param name="billedCachedTokens">Cumulative cached input tokens across all API calls.</param>
+            <param name="billedCacheCreationTokens">Cumulative cache creation tokens across all API calls.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.SetDbConnected(System.Boolean)">
+            <summary>
+            Pushes the current database connection state to the chat UI.
+            When not connected, DAX artifact "Execute" buttons are disabled.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatInterop.NavigateToObjectReference(System.String)">
+            <summary>
+            Navigates to the TOM object referenced by the given string in the TOM Explorer.
+            </summary>
+            <param name="reference">The object reference (e.g., "Sales", "[Total Amount]", "Sales[Amount]").</param>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.AI.SkillInfo">
+            <summary>
+            Represents a custom instruction available for explicit invocation via /instruction-id.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.SkillInfo.Id">
+            <summary>The unique skill identifier (used as /skill-id).</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.SkillInfo.Name">
+            <summary>The display name of the skill.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.SkillInfo.Description">
+            <summary>Optional description shown in the autocomplete popup.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.AI.ConsentOption">
+            <summary>
+            Represents an option in a consent request.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.ConsentOption.Label">
+            <summary>The display label for the option.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.ConsentOption.Value">
+            <summary>The value returned when this option is selected.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Contracts.AI.ConsentOption.IsPrimary">
+            <summary>Whether this is the primary/recommended option.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatService.ConfigureConsent(System.Func{TabularEditor.Shared.Services.AI.AIConsentPreferences},System.Action,System.Func{System.String},System.Func{TabularEditor.Shared.Services.AI.ModelAIConsentState},System.Action{TabularEditor.Shared.Services.AI.ModelAIConsentState},System.Func{TabularEditor.Shared.Services.AI.ConsentType,System.String,System.Threading.Tasks.Task{TabularEditor.Shared.Contracts.AI.ConsentResult}})">
+            <summary>
+            Configures the consent system with callbacks for preferences and UI.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatService.SetDocumentAccessProvider(TabularEditor.Shared.Services.AI.IDocumentAccessProvider)">
+            <summary>
+            Sets the document access provider for AI tools to access open documents.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatService.SetBpaAnalyzer(TabularEditor.Shared.BPA.Analyzer)">
+            <summary>
+            Sets the BPA analyzer for AI tools.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatService.StopGeneration">
+            <summary>
+            Stops the current generation/response in progress.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IChatService.PushAvailableSkills(TabularEditor.Shared.Contracts.AI.IChatInterop)">
+            <summary>
+            Re-pushes available skills to the chat interop (call after WebView is ready).
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.AI.IMacroProvider">
+            <summary>
+            Provides read-only access to the user's macro library for AI tools.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.AI.IMacroProvider.GetMacros">
+            <summary>
+            Gets the current list of macros.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Contracts.UIAction">
+            <summary>
+            Represents a UI action that the AI should be able to request, such as launching the "New model dialog", or the "Preferences" dialog.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Contracts.UIAction.#ctor(System.String,System.Action,System.Nullable{TabularEditor.Shared.Contracts.CommonAction})">
+            <summary>
+            Represents a UI action that the AI should be able to request, such as launching the "New model dialog", or the "Preferences" dialog.
+            </summary>
+        </member>
         <member name="M:TabularEditor.Shared.FormHelper.GetActiveForm">
             <summary>
             Form.ActiveForm is null when Tabular Editor does not have focus (this can happen for example when debugging,
@@ -95,10 +322,39 @@
             Contains Azure AD client IDs and scopes used for authentication.
             </summary>
         </member>
+        <member name="F:TabularEditor.Shared.Infrastructure.AuthenticationConstants.AasScope">
+            <summary>Azure Analysis Services scope pattern.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Infrastructure.AuthenticationConstants.DefaultPowerBiScope">
+            <summary>Default Power BI / Fabric XMLA scope (commercial cloud).</summary>
+        </member>
         <member name="M:TabularEditor.Shared.Infrastructure.AuthenticationConstants.GetPowerBiScopes(System.String)">
             <summary>
             Gets the Power BI scopes based on the Power BI REST API endpoint URL.
             Different cloud environments (commercial, government, Germany, China) require different scopes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Infrastructure.AuthenticationConstants.GetScopeForServer(System.String)">
+            <summary>
+            Determine the appropriate auth scope from a server connection string.
+            Supports Power BI XMLA (multi-cloud), Azure AS, and localhost.
+            Server URLs follow patterns like:
+              powerbi://api.powerbi.com/v1.0/myorg/Workspace
+              powerbi://api.powerbigov.us/v1.0/myorg/Workspace
+              asazure://region.asazure.windows.net/server
+              localhost:port
+            </summary>
+        </member>
+        <member name="E:TabularEditor.Shared.Infrastructure.AzureIdentityClientHelper.InteractiveSignInStarting">
+            <summary>
+            Raised just before an interactive browser/WAM sign-in dialog is shown.
+            Subscribers should hide any overlay UI (e.g. wait forms) so the auth dialog is visible.
+            </summary>
+        </member>
+        <member name="E:TabularEditor.Shared.Infrastructure.AzureIdentityClientHelper.InteractiveSignInCompleted">
+            <summary>
+            Raised after an interactive sign-in dialog has completed (success or failure).
+            Subscribers should restore any overlay UI that was hidden.
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Infrastructure.AzureIdentityClientHelper.GetClientAsync(TabularEditor.Shared.Services.IPreferencesProvider,System.String,System.Boolean,System.IntPtr,System.Threading.CancellationToken)">
@@ -117,6 +373,61 @@
             <summary>
             Checks if the given exception represents an authentication cancellation by the user.
             Handles Azure.Identity, MSAL (used by TOM), SqlClient, and OleDb authentication cancellations.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.ContextExtensions.GetDescription(TabularEditor.Shared.Interaction.Context)">
+            <summary>
+            Returns the localized display name for the given Context, using Smart.Format for pluralization.
+            Singular contexts (e.g. Table, Measure) return the singular form; group/collection contexts
+            (e.g. Tables, PartitionCollection) return the plural form.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.ContextExtensions.GetTypeNameFormat(TabularEditor.Shared.Interaction.Context)">
+            <summary>
+            Returns the Smart.Format template string for the given Context, or null if not mapped.
+            This is the single source of truth for Context-to-localized-name mapping.
+            Resolved against <see cref="P:System.Globalization.CultureInfo.CurrentUICulture"/>.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.ContextExtensions.GetTypeNameFormat(TabularEditor.Shared.Interaction.Context,System.Globalization.CultureInfo)">
+            <summary>
+            Culture-aware variant of <see cref="M:TabularEditor.Shared.Interaction.ContextExtensions.GetTypeNameFormat(TabularEditor.Shared.Interaction.Context)"/>. Resolves the resource in the
+            specified <paramref name="culture"/>, allowing callers (e.g. AI context injection) to force
+            invariant/English output regardless of the UI culture.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.GetLocalizedTypeNameFormat(TabularEditor.TOMWrapper.ITabularObject)">
+            <summary>
+            Returns the Smart.Format template string for the localized type name of the given object.
+            Use with <see cref="M:TabularEditor.Utils.Smart.Format(System.String,System.Object[])"/> and a count to get singular/plural form.
+            Handles concrete subtypes (CalculatedTable, CalculatedColumn, etc.) that don't have Context equivalents.
+            Resolved against <see cref="P:System.Globalization.CultureInfo.CurrentUICulture"/>.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.GetLocalizedTypeNameFormat(TabularEditor.TOMWrapper.ITabularObject,System.Globalization.CultureInfo)">
+            <summary>
+            Culture-aware variant of <see cref="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.GetLocalizedTypeNameFormat(TabularEditor.TOMWrapper.ITabularObject)"/>. Passing a specific
+            <paramref name="culture"/> (e.g. <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/>) forces the resource lookup
+            into that culture so callers can produce language-stable output independent of the current UI culture.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.GetLocalizedTypeNameFormat(TabularEditor.TOMWrapper.ObjectType)">
+            <summary>
+            Returns the Smart.Format template string for the localized type name of the given ObjectType.
+            Use with <see cref="M:TabularEditor.Utils.Smart.Format(System.String,System.Object[])"/> and a count to get singular/plural form.
+            Delegates to the Context mapping for types that have a corresponding Context value.
+            Resolved against <see cref="P:System.Globalization.CultureInfo.CurrentUICulture"/>.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.GetLocalizedTypeNameFormat(TabularEditor.TOMWrapper.ObjectType,System.Globalization.CultureInfo)">
+            <summary>
+            Culture-aware variant of <see cref="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.GetLocalizedTypeNameFormat(TabularEditor.TOMWrapper.ObjectType)"/>.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.LocalizedTypeNameHelper.ToContext(TabularEditor.TOMWrapper.ObjectType)">
+            <summary>
+            Maps an <see cref="T:TabularEditor.TOMWrapper.ObjectType"/> to the corresponding singular <see cref="T:TabularEditor.Shared.Interaction.Context"/> value.
+            Returns <see cref="F:TabularEditor.Shared.Interaction.Context.None"/> for types that have no direct Context mapping (Model, Group, Folder).
             </summary>
         </member>
         <member name="T:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1">
@@ -297,11 +608,20 @@
         <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.Summary(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Boolean,System.Boolean)">
             <summary>
             Returns a string with a short description of the types of objects in the <paramref name="items"/> collection.
+            Resolved against <see cref="P:System.Globalization.CultureInfo.CurrentUICulture"/>.
             </summary>
             <param name="items">The collection to summarize</param>
             <param name="onlyTypeNames">Set to false to always show the types of objects in the collection</param>
             <param name="capitalize"></param>
             <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.Summary(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Globalization.CultureInfo,System.Boolean,System.Boolean)">
+            <summary>
+            Culture-aware variant of <see cref="M:TabularEditor.Shared.Interaction.SelectionHelper.Summary(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Boolean,System.Boolean)"/>. Resolves all
+            resource strings and casing through the supplied <paramref name="culture"/> so callers can produce a
+            language-stable summary independent of the current UI culture. Pass <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/>
+            to obtain the English/neutral form (e.g. for feeding the AI assistant, whose prompts and skills are English-only).
+            </summary>
         </member>
         <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.Edit``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
@@ -526,6 +846,11 @@
             The name of the current table group (if exactly one table group is selected, or if one or more tables within a single table group is selected)
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.SelectedItem">
+            <summary>
+            The currently selected item (if exactly one item is selected in the explorer tree).
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.DirectCount">
             <summary>
             The number of objects directly selected in the Explorer Tree (not counting any child objects).
@@ -579,6 +904,11 @@
             he currently selected KPI.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.KPIs">
+            <summary>
+            All currently selected KPIs.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Levels">
             <summary>
             The currently selected levels.
@@ -602,6 +932,11 @@
         <member name="P:TabularEditor.Shared.Interaction.Selection.Object">
             <summary>
             The currently selected object (if exactly one object is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Objects">
+            <summary>
+            All currently selected objects.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Columns">
@@ -639,9 +974,19 @@
             All currently selected roles.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Role">
+            <summary>
+            The currently selected role (if exactly one role is selected in the explorer tree).
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.SingleColumnRelationships">
             <summary>
             All currently selected relationships.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.SingleColumnRelationship">
+            <summary>
+            The currently selected relationship (if exactly one relationship is selected in the explorer tree).
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Perspectives">
@@ -662,6 +1007,11 @@
         <member name="P:TabularEditor.Shared.Interaction.Selection.TablePermissions">
             <summary>
             All currently selected table permissions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.TablePermission">
+            <summary>
+            The currently selected table permission (if exactly one table permission is selected in the explorer tree).
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.CalculationGroup">
@@ -687,6 +1037,11 @@
         <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedTableColumns">
             <summary>
             All currently selected calculated table columns (including calculated table columns within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedTableColumn">
+            <summary>
+            The currently selected calculated table column (if exactly one calculated table column is selected in the explorer tree).
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.DataColumn">
@@ -762,7 +1117,12 @@
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Folders">
             <summary>
-            Gets the currently selected display folders in the explorer tree.
+            All currently selected display folders in the explorer tree.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Folder">
+            <summary>
+            The currently selected folder (if exactly one folder is selected in the explorer tree).
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Groups">
@@ -790,6 +1150,126 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentDocumentRead">
+            <summary>
+              Looks up a localized string similar to Read documents.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentDocumentReadDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs the content from open documents.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentDocumentReadTooltip">
+            <summary>
+              Looks up a localized string similar to This setting controls whether the AI assistant will have access to read the text content of any documents (scripts, queries, etc.) that are currently open in Tabular Editor..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentDocumentWrite">
+            <summary>
+              Looks up a localized string similar to Modify documents.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentDocumentWriteDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs to modify content in open documents.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentDocumentWriteTooltip">
+            <summary>
+              Looks up a localized string similar to This setting controls whether the AI assistant will be able to modify the content of any documents (scripts, queries, etc.) that are currently open in Tabular Editor..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentEditBpaRules">
+            <summary>
+              Looks up a localized string similar to Edit BPA rules.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentEditBpaRulesDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs to add or modify Best Practice Analyzer rules.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentEditBpaRulesTooltip">
+            <summary>
+              Looks up a localized string similar to This setting controls whether the AI assistant will be able to add or modify Best Practice Analyzer rules in your local user rule collection..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentGenericDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs to access this data.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentMacroRead">
+            <summary>
+              Looks up a localized string similar to Read macros.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentMacroReadDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs to read macros from your macro library.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentMacroReadTooltip">
+            <summary>
+              Looks up a localized string similar to This setting controls whether the AI assistant will be able to read the macros in your macro library, including their C# code..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentModelMetadata">
+            <summary>
+              Looks up a localized string similar to Model metadata.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentModelMetadataDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs to access model metadata.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentModelMetadataTooltip">
+            <summary>
+              Looks up a localized string similar to This setting controls whether the AI assistant will have access to the metadata of the semantic model currently loaded in Tabular Editor (table names, column names, measure definitions, etc.)..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentQueryData">
+            <summary>
+              Looks up a localized string similar to Query data.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentQueryDataDescription">
+            <summary>
+              Looks up a localized string similar to The AI assistant needs to execute DAX queries and read results.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiConsentQueryDataTooltip">
+            <summary>
+              Looks up a localized string similar to This setting controls whether the AI will be able to execute DAX queries against the semantic model and read the results of those queries..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiProviderAnthropic">
+            <summary>
+              Looks up a localized string similar to Anthropic.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiProviderAzureOpenAI">
+            <summary>
+              Looks up a localized string similar to Azure OpenAI.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiProviderCustom">
+            <summary>
+              Looks up a localized string similar to Custom (OpenAI-compatible).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiProviderNone">
+            <summary>
+              Looks up a localized string similar to None (AI disabled).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AiProviderOpenAI">
+            <summary>
+              Looks up a localized string similar to OpenAI.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.AuthenticationModeIntegrated">
@@ -963,8 +1443,8 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleIsAvailableInMdxDescription">
              <summary>
                Looks up a localized string similar to Hidden columns that are not used for sorting or in hierarchies should have their IsAvailableInMdx property set to false. This prevents unnecessary attribute hierarchy creation, reducing processing time and memory consumption.
-            
-            Reference: https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/.
+                
+            NOTE: Ignore this rule if the columns is to be used in Excel PivotTable and Analyze in Excel..
              </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleIsAvailableInMdxName">
@@ -1124,6 +1604,16 @@
               Looks up a localized string similar to Trim object names.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleUdfUseCompoundNamesDescription">
+            <summary>
+              Looks up a localized string similar to User-defined function names should contain a dot or underscore separator (e.g., &apos;MyLib.MyFunction&apos; or &apos;MyLib_MyFunction&apos;) to form a compound/namespaced name. Simple names without a separator are at risk of conflicting with new DAX functions introduced in the future, which could break existing DAX expressions that reference the UDF..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleUdfUseCompoundNamesName">
+            <summary>
+              Looks up a localized string similar to User-defined functions should use compound names.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleCalculationGroupsNoDescriptionDescription">
             <summary>
               Looks up a localized string similar to Visible calculation groups should have descriptions to explain their purpose and how the calculation items modify measure behavior. Descriptions appear in tooltips in Power BI Desktop and can be used to generate automated data documentation..
@@ -1219,9 +1709,94 @@
               Looks up a localized string similar to File upload to the DAX Optimizer service is disabled by a local policy..
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerObfuscationDictionaryMissingTitle">
+            <summary>
+              Looks up a localized string similar to Previous obfuscation dictionary not found.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerObfuscationDictionaryMissingMessage">
+            <summary>
+              Looks up a localized string similar to The obfuscation dictionary for the previously uploaded version of this model could not be found on this computer. The new version will be uploaded with freshly obfuscated object names, so the DAX Optimizer service may no longer recognize issues you previously marked as ignored for this model..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_AuthorsLabel">
+            <summary>
+              Looks up a localized string similar to Authors:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_DescriptionHeader">
+            <summary>
+              Looks up a localized string similar to Description.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_DetailsHeader">
+            <summary>
+              Looks up a localized string similar to Details.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_DisabledDueToLowModelCompatibilityLevel">
             <summary>
               Looks up a localized string similar to Disabled due to low model compatibility level ({0} &lt; {1}).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_DownloadsLabel">
+            <summary>
+              Looks up a localized string similar to Downloads:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_InstallCaption">
+            <summary>
+              Looks up a localized string similar to Install.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_InstalledCaption">
+            <summary>
+              Looks up a localized string similar to Installed.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_OwnersLabel">
+            <summary>
+              Looks up a localized string similar to Owners:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_ProjectUrlLabel">
+            <summary>
+              Looks up a localized string similar to Project URL:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_ProviderLabel">
+            <summary>
+              Looks up a localized string similar to Provider:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_PublishDateLabel">
+            <summary>
+              Looks up a localized string similar to Publish Date:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_ReleaseNotesHeader">
+            <summary>
+              Looks up a localized string similar to Release Notes.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_RemoveCaption">
+            <summary>
+              Looks up a localized string similar to Remove.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_RepositoryUrlLabel">
+            <summary>
+              Looks up a localized string similar to Repository URL:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_TagsLabel">
+            <summary>
+              Looks up a localized string similar to Tags:.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_UpToDateCaption">
+            <summary>
+              Looks up a localized string similar to Up-to-date.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DefaultSemanticModel">
@@ -1336,6 +1911,131 @@
               Looks up a localized string similar to OAuth.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_CalculatedColumn">
+            <summary>
+              Looks up a localized string similar to {0:Calculated Column|Calculated Columns}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_CalculatedTable">
+            <summary>
+              Looks up a localized string similar to {0:Calculated Table|Calculated Tables}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_CalculatedTableColumn">
+            <summary>
+              Looks up a localized string similar to {0:Calculated Table Column|Calculated Table Columns}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_CalculationGroupTable">
+            <summary>
+              Looks up a localized string similar to {0:Calculation Group Table|Calculation Group Tables}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_CalculationItem">
+            <summary>
+              Looks up a localized string similar to {0:Calculation Item|Calculation Items}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Calendar">
+            <summary>
+              Looks up a localized string similar to {0:Calendar|Calendars}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Column">
+            <summary>
+              Looks up a localized string similar to {0:Column|Columns}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_DataSource">
+            <summary>
+              Looks up a localized string similar to {0:Data Source|Data Sources}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Folder">
+            <summary>
+              Looks up a localized string similar to Folder.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Function">
+            <summary>
+              Looks up a localized string similar to {0:Function|Functions}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Group">
+            <summary>
+              Looks up a localized string similar to Group.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Hierarchy">
+            <summary>
+              Looks up a localized string similar to {0:Hierarchy|Hierarchies}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_KPI">
+            <summary>
+              Looks up a localized string similar to {0:KPI|KPIs}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Level">
+            <summary>
+              Looks up a localized string similar to {0:Level|Levels}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Measure">
+            <summary>
+              Looks up a localized string similar to {0:Measure|Measures}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Model">
+            <summary>
+              Looks up a localized string similar to Model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Objects">
+            <summary>
+              Looks up a localized string similar to objects.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Partition">
+            <summary>
+              Looks up a localized string similar to {0:Partition|Partitions}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Perspective">
+            <summary>
+              Looks up a localized string similar to {0:Perspective|Perspectives}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Relationship">
+            <summary>
+              Looks up a localized string similar to {0:Relationship|Relationships}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Role">
+            <summary>
+              Looks up a localized string similar to {0:Role|Roles}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_SharedExpression">
+            <summary>
+              Looks up a localized string similar to {0:Shared Expression|Shared Expressions}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Table">
+            <summary>
+              Looks up a localized string similar to {0:Table|Tables}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_TablePermission">
+            <summary>
+              Looks up a localized string similar to {0:Table Permission|Table Permissions}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ObjectTypeName_Translation">
+            <summary>
+              Looks up a localized string similar to {0:Translation|Translations}.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.PartitionRefreshDescription">
             <summary>
               Looks up a localized string similar to {0} refresh of {1:partition {2}|{} partitions}.
@@ -1379,6 +2079,31 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.ScalarExpression">
             <summary>
               Looks up a localized string similar to Scalar expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SelectionSummary_MultipleObjects">
+            <summary>
+              Looks up a localized string similar to {0} {1}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SelectionSummary_Nothing">
+            <summary>
+              Looks up a localized string similar to Nothing.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SelectionSummary_NothingSelected">
+            <summary>
+              Looks up a localized string similar to (Nothing selected).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SelectionSummary_SingleObjectTypeOnly">
+            <summary>
+              Looks up a localized string similar to 1 {0}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SelectionSummary_SingleObjectWithName">
+            <summary>
+              Looks up a localized string similar to {0} &quot;{1}&quot;.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.SemanticBridge_NotAvailable_InitializationFailure">
@@ -1489,14 +2214,206 @@
               Looks up a localized string similar to Warning.
             </summary>
         </member>
+        <member name="T:TabularEditor.Shared.ModelDiff.ModelDiffResult">
+            <summary>
+            Output of <see cref="T:TabularEditor.Shared.ModelDiff.ModelDiffComparer"/>: a hierarchical JSON-level diff tree between two models.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Models.UserOptions.AIConsent">
+            <summary>
+            AI consent state for this model.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.Models.UserEncryptedConnectionStringSerializer">
             <summary>
             This class ensures that a connection string is encrypted/decrypted in case it contains sensitive data.
             </summary>
         </member>
+        <member name="T:TabularEditor.Shared.Scripting.BpaResult">
+            <summary>
+            Result of evaluating a single BPA rule against a model object.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.BpaResult.FixExpression">
+            <summary>
+            The fix expression for this rule (if any).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.BpaResult.Object">
+            <summary>
+            Reference to the violating TOM object (for fix expression execution).
+            Not serialized to JSON.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.BpaResult.CanFix">
+            <summary>
+            Whether this violation can be auto-fixed.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.BpaRuleError">
+            <summary>
+            Result of a BPA rule that failed to compile or evaluate.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.BpaAnalysisResult">
+            <summary>
+            Complete result of running BPA analysis on a model.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.IScriptMessageSink">
+            <summary>
+            Hook for redirecting script messages (Info / Warning / Error / Output) in
+            command-line / headless hosts. When a sink is registered through
+            <c>ScriptHelper.InitScriptHelper</c> and <see cref="P:TabularEditor.IApp.CommandLineMode"/> is true,
+            all script messaging routes through the sink instead of writing directly to
+            <see cref="T:System.Console"/>. The UI app passes <c>null</c> (legacy behavior preserved).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.IScriptMessageSink.Info(System.String,System.Int32)">
+            <summary>Called when a script invokes <c>Info(message)</c>.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.IScriptMessageSink.Warning(System.String,System.Int32,System.Boolean)">
+            <summary>Called when a script invokes <c>Warning(message)</c>.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.IScriptMessageSink.Error(System.String,System.Int32,System.Boolean)">
+            <summary>Called when a script invokes <c>Error(message)</c>.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.IScriptMessageSink.Output(System.Object,System.Int32)">
+            <summary>Called when a script invokes <c>Output(value)</c>.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.MacroJsonCollection">
+            <summary>
+            Root container for MacroActions.json. Shared schema between TE3 desktop and CLI.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.MacroJson.Folder">
+            <summary>
+            Parsed folder path (from backslash-separated <see cref="P:TabularEditor.Shared.Scripting.MacroJson.Name"/>). Not serialised.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.MacroJson.DisplayName">
+            <summary>
+            Display name without the folder prefix. Not serialised.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.MacroJson.ParseFolderHierarchy">
+            <summary>
+            Parse folder hierarchy from a backslash-separated <see cref="P:TabularEditor.Shared.Scripting.MacroJson.Name"/> into
+            <see cref="P:TabularEditor.Shared.Scripting.MacroJson.Folder"/> and <see cref="P:TabularEditor.Shared.Scripting.MacroJson.DisplayName"/>. Used by both TE3 desktop
+            (via the macro tree UI) and the CLI (`te macro list`/`run`).
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptBpa">
+            <summary>
+            Script-accessible Best Practice Analyzer helper. Exposed as <c>ScriptHost.Bpa</c>.
+            Delegates are wired by the host (CLI or TE3 UI) at startup.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptBpa.AnalyzeDelegate">
+            <summary>
+            Delegate that runs BPA analysis and returns results.
+            Signature: (tableFilter) -&gt; <see cref="T:TabularEditor.Shared.Scripting.BpaAnalysisResult"/>.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptBpa.RulesDelegate">
+            <summary>
+            Delegate that returns the current set of BPA rules (built-in + model).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptBpa.Analyze(System.String[])">
+            <summary>
+            Run BPA analysis on the current model. Optionally filter to specific tables.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptBpa.Rules">
+            <summary>
+            Get the current set of BPA rules (built-in + model-embedded, deduplicated).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptBpa.ExportCsv(TabularEditor.Shared.Scripting.BpaAnalysisResult,System.String)">
+            <summary>
+            Export BPA analysis results to a CSV file at the specified path.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptConstants">
+            <summary>
+            Shared constants and helpers for C# script compilation.
+            Used by both TE3 desktop and CLI script engines.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Scripting.ScriptConstants.CoreUsings">
+            <summary>
+            Core usings available in all TE3/CLI scripts.
+            Each engine may add its own additional usings on top.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptConstants.GetPreprocessorSymbols">
+            <summary>
+            Preprocessor symbols for TE3 script compilation:
+            
+            - `TE3`
+            - `TE3_3_10_OR_GREATER`
+            - `TE3_3_11_OR_GREATER`
+            - ...
+            - `TE3_3_X_OR_GREATER` (where X is the current minor version number of TE3)
+            
+            For TE CLI script compilation, we ONLY define the following symbol:
+            
+            - `TECLI`
+            
+            This allows script authors to have sections of code in their script that only gets compiled under a specific version
+            Tabular Editor 3 or the CLI. That way, a script can contain UI code that gets compiled only when the script is executed
+            in TE3 and ommitted when the script is compiled/executed in TE CLI.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptConstants.WithParseOptions(Microsoft.CodeAnalysis.Scripting.ScriptOptions,Microsoft.CodeAnalysis.CSharp.CSharpParseOptions)">
+            <summary>
+            Apply CSharpParseOptions to ScriptOptions via reflection.
+            The WithParseOptions method is internal in Roslyn.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptEngine.QuickAnalyzeScriptSafety(System.String)">
+            <summary>
+            Performs a quick safety analysis on a C# script without full compilation.
+            Checks for #r reference directives and unsafe using statements.
+            </summary>
+            <param name="script">The C# script code to analyze.</param>
+            <returns>A quick safety analysis result.</returns>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.QuickScriptSafetyResult">
+            <summary>
+            Result of a quick script safety analysis (without full compilation).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.QuickScriptSafetyResult.HasReferenceDirective">
+            <summary>Whether the script contains #r reference directives.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.QuickScriptSafetyResult.UnsafeNamespaces">
+            <summary>Namespaces used in using statements that are not in the safe list.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.QuickScriptSafetyResult.IsSafe">
+            <summary>Whether the script appears safe (no reference directives and no unsafe namespaces).</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.QuickScriptSafetyResult.GetWarningMessage">
+            <summary>Generates a human-readable safety warning message.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptError.ToString">
+            <summary>
+            Formatted error string suitable for human display: <c>(line,col): error: message</c>
+            or <c>(line,col): warning: message</c>. When <see cref="P:TabularEditor.Shared.Scripting.ScriptError.Line"/> is non-positive the
+            position prefix is omitted.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.Scripting.ScriptHelper">
             <summary>
             Contains various extension methods which are commonly used in scripts
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHelper.MessageSink">
+            <summary>
+            Optional sink for command-line / headless hosts. When non-null and
+            <see cref="P:TabularEditor.IApp.CommandLineMode"/> is true, <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/>/<see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Warning(System.String,System.Int32,System.Boolean)"/>/<see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Error(System.String,System.Int32,System.Boolean)"/>/<see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Output(System.Object)"/>
+            route through the sink instead of writing directly to <see cref="T:System.Console"/>.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Scripting.ScriptHelper.WaitFormVisible">
@@ -1742,6 +2659,31 @@
         <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Selected">
             <summary>
             An object that represents the current selection in the TOM Explorer.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Bpa">
+            <summary>
+            Best Practice Analyzer scripting helper. Use <c>Bpa.Analyze()</c>, <c>Bpa.Rules</c>, <c>Bpa.ExportCsv()</c>.
+            </summary>
+            <remarks>
+            Delegates (<see cref="P:TabularEditor.Shared.Scripting.ScriptBpa.AnalyzeDelegate"/> / <see cref="P:TabularEditor.Shared.Scripting.ScriptBpa.RulesDelegate"/>) are wired
+            by the host application during startup. If unwired, calls throw <see cref="T:System.InvalidOperationException"/>.
+            </remarks>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Vpa">
+            <summary>
+            VertiPaq Analyzer read helper. Use <c>Vpa.Summary</c>, <c>Vpa.Tables</c>, <c>Vpa.Columns</c>, etc.
+            Call <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.CollectVertiPaqAnalyzerStats"/> first to populate the data.
+            </summary>
+            <remarks>
+            Provider delegates are wired by the host application during startup. If unwired,
+            collections return empty and <see cref="P:TabularEditor.Shared.Scripting.ScriptVpa.Summary"/> returns null.
+            </remarks>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Viz">
+            <summary>
+            Visualization report builder. Use <c>Viz.CreateReport()</c> to create reports from scripts.
+            Commands are accumulated during script execution and processed by the frontend afterwards.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Scripting.ScriptHost.SemanticBridge">
@@ -2174,6 +3116,195 @@
             top of the code file, where as the "using" directives for each macro is added within the namespace of that class.
             </remarks>
         </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptViz">
+            <summary>
+            Script-accessible visualization builder. Exposed as <c>ScriptHost.Viz</c>.
+            Accumulates <see cref="T:TabularEditor.Shared.Scripting.VizCommand"/> objects that the frontend processes into store actions.
+            Thread safety: <see cref="P:TabularEditor.Shared.Scripting.ScriptViz.Commands"/> is static; cleared at request start, drained at request end.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptViz.ClearCommands">
+            <summary>
+            Clear accumulated commands. Called before script execution.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptViz.DrainCommands">
+            <summary>
+            Get and clear accumulated commands. Called after script execution.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptViz.CreateReport(System.String)">
+            <summary>
+            Create a new visualization report with the given name. Returns a builder for fluent configuration.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.VizReportBuilder">
+            <summary>
+            Fluent builder for configuring a viz report.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizReportBuilder.AddPage(System.String)">
+            <summary>Add a page to the report.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizReportBuilder.SetPalette(System.String)">
+            <summary>Set the color palette by preset name (e.g. "default", "warm-earth", "ocean").</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizReportBuilder.SetPalette(System.String[])">
+            <summary>Set a custom color palette from hex color strings.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizReportBuilder.SetFont(System.String)">
+            <summary>Set the report font family.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.VizPageBuilder">
+            <summary>
+            Fluent builder for configuring a viz page.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizPageBuilder.AddVisual(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Add a visual to the page. Supported types: bar, line, donut, kpi, table, matrix,
+            scatter, histogram, heatmap, radar, sankey, waterfall, treemap, choropleth, distribution.
+            Position and size are optional (auto-layout if omitted).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizPageBuilder.SetName(System.String)">
+            <summary>Set the page name.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizPageBuilder.AddPageFilter(System.String,System.String)">
+            <summary>Add a page-level filter (slicer) for the specified table column.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.VizVisualBuilder">
+            <summary>
+            Fluent builder for configuring a visual within a page.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizVisualBuilder.AddField(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add a field to a well. Wells: rows, values, legend, targets.
+            objectType: "Column" (default) or "Measure".
+            aggregation: "Sum" (default), "Count", "Average", "Min", "Max", "None".
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizVisualBuilder.SetTitle(System.String)">
+            <summary>Set the visual title.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizVisualBuilder.SetOption(System.String,System.Object)">
+            <summary>
+            Set a visual option (e.g. "horizontal" = true, "showLegend" = false).
+            Value must be a primitive type (bool, int, double, string).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizVisualBuilder.SetSize(System.Int32,System.Int32)">
+            <summary>Set the visual size explicitly.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.VizCommand">
+            <summary>
+            A serializable command emitted by the viz scripting API.
+            The frontend viz-script-bridge processes these into store actions.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.VizCommand.#ctor(System.String,System.Object)">
+            <summary>
+            A serializable command emitted by the viz scripting API.
+            The frontend viz-script-bridge processes these into store actions.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptVpa">
+            <summary>
+            Script-accessible VPA (VertiPaq Analyzer) read helper. Exposed as <c>ScriptHost.Vpa</c>.
+            Provides read access to previously collected VPA statistics.
+            Call <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.CollectVertiPaqAnalyzerStats"/> first to populate the data.
+            </summary>
+            <remarks>
+            The data-source delegates are wired by the host (CLI or TE3 UI) during startup.
+            In environments where no provider has been wired, properties return empty results.
+            </remarks>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.SummaryDelegate">
+            <summary>
+            Delegate that returns the VPA summary. Returns null if not collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.IsCollectedDelegate">
+            <summary>
+            Lightweight delegate that checks if VPA stats have been collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.TablesDelegate">
+            <summary>
+            Delegate that returns per-table VPA statistics.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.ColumnsDelegate">
+            <summary>
+            Delegate that returns per-column VPA statistics.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.RelationshipsDelegate">
+            <summary>
+            Delegate that returns relationship VPA statistics.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.PartitionsDelegate">
+            <summary>
+            Delegate that returns per-partition VPA statistics.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.Summary">
+            <summary>
+            Model-level VPA summary (size, counts, dates). Null if stats not yet collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.Tables">
+            <summary>
+            Per-table statistics. Empty list if stats not yet collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.Columns">
+            <summary>
+            Per-column statistics. Empty list if stats not yet collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.Relationships">
+            <summary>
+            Relationship statistics. Empty list if stats not yet collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.Partitions">
+            <summary>
+            Per-partition statistics. Empty list if stats not yet collected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptVpa.IsCollected">
+            <summary>
+            Whether VPA statistics have been collected for the current model.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.VertipaqSummary">
+            <summary>
+            Model-level VertiPaq Analyzer summary. Returned by <see cref="P:TabularEditor.Shared.Scripting.ScriptVpa.Summary"/>.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.TableStats">
+            <summary>
+            Per-table VertiPaq Analyzer statistics. Returned by <see cref="P:TabularEditor.Shared.Scripting.ScriptVpa.Tables"/>.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ColumnStats">
+            <summary>
+            Per-column VertiPaq Analyzer statistics. Returned by <see cref="P:TabularEditor.Shared.Scripting.ScriptVpa.Columns"/>.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.RelationshipStats">
+            <summary>
+            Per-relationship VertiPaq Analyzer statistics. Returned by <see cref="P:TabularEditor.Shared.Scripting.ScriptVpa.Relationships"/>.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.PartitionStats">
+            <summary>
+            Per-partition VertiPaq Analyzer statistics. Returned by <see cref="P:TabularEditor.Shared.Scripting.ScriptVpa.Partitions"/>.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.SensitiveException">
             <summary>
             Represents an exception that may contain PII/sensitive information in the message text. When the exception is sent to the telemetry service,
@@ -2183,6 +3314,244 @@
         <member name="P:TabularEditor.Shared.SensitiveException.PublicMessage">
             <summary>
             A message that has been stripped of sensitive information.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AI.ConsentType">
+            <summary>
+            Defines the type of data being sent to the AI provider.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.ConsentType.QueryData">
+            <summary>DAX query execution results.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.ConsentType.DocumentRead">
+            <summary>Reading content from open document editors.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.ConsentType.DocumentWrite">
+            <summary>Modifying content in open document editors.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.ConsentType.ModelMetadata">
+            <summary>Accessing model metadata.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.ConsentType.EditBpaRules">
+            <summary>Adding or modifying Best Practice Analyzer rules.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.ConsentType.MacroRead">
+            <summary>Reading macros from the user's macro library.</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AI.ConsentTypeMetadata">
+            <summary>
+            Provides metadata and display information for consent types.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.ConsentTypeMetadata.All">
+            <summary>
+            All available consent types.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.ConsentTypeMetadata.GetDescription(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Gets a description for a consent type.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.ConsentTypeMetadata.GetPreferencesLabel(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Gets the label text for the preferences dialog.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.ConsentTypeMetadata.GetPreferencesTooltip(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Gets the tooltip text for the preferences dialog.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.ConsentTypeMetadata.SupportsPerModelConsent(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Returns true if the consent type supports per-model consent storage.
+            Only QueryData and ModelMetadata support "ForThisModel" consent option.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AI.ModelAIConsentState">
+            <summary>
+            Stores per-model AI consent state. Stored in UserOptions (.tmuo file).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.ModelAIConsentState.GrantedConsents">
+            <summary>
+            The set of consent types that have been granted for this model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.ModelAIConsentState.ConsentGrantedAt">
+            <summary>
+            When consent was last granted.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.ModelAIConsentState.HasConsent(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Checks if consent has been granted for a specific type.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.ModelAIConsentState.GrantConsent(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Grants consent for a specific type.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.ModelAIConsentState.HasAnyConsent">
+            <summary>
+            Returns true if any consent has been granted.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AI.AIConsentPreferences">
+            <summary>
+            Stores global AI consent preferences. Only stores "Always" consents.
+            Stored in Preferences.json.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIConsentPreferences.AlwaysGrantedConsents">
+            <summary>
+            The set of consent types that are always granted (without prompting).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.AIConsentPreferences.HasAlwaysConsent(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Checks if a consent type is always granted.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.AIConsentPreferences.GrantAlwaysConsent(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Grants "always" consent for a specific type.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.AIConsentPreferences.RevokeAlwaysConsent(TabularEditor.Shared.Services.AI.ConsentType)">
+            <summary>
+            Revokes "always" consent for a specific type.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.AI.AISkillsHelper.CustomInstructionsPath">
+            <summary>
+            User overlay directory path.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AI.OpenDocumentInfo">
+            <summary>
+            Represents information about an open document in the editor.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.OpenDocumentInfo.Id">
+            <summary>Unique identifier for this document instance.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.OpenDocumentInfo.Type">
+            <summary>Document type: "dax-query", "csharp", or "dax-script".</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.OpenDocumentInfo.Title">
+            <summary>Display title shown in the editor tab.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.OpenDocumentInfo.IsDirty">
+            <summary>Whether the document has unsaved changes.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.OpenDocumentInfo.FileName">
+            <summary>Optional file path if the document is saved to disk.</summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.OpenDocumentInfo.Content">
+            <summary>The document content (only populated if requested and consented).</summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AI.IDocumentAccessProvider">
+            <summary>
+            Provides access to open documents in the editor for AI tools.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.IDocumentAccessProvider.GetOpenDocumentsAsync(System.Boolean)">
+            <summary>
+            Gets a list of open documents in the editor.
+            </summary>
+            <param name="includeContent">If true, includes the document content (requires consent).</param>
+            <returns>List of open document information.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.IDocumentAccessProvider.UpdateDocumentContentAsync(System.Int32,System.String)">
+            <summary>
+            Updates the content of an open document.
+            </summary>
+            <param name="documentId">The document ID to update.</param>
+            <param name="content">The new content for the document.</param>
+            <returns>True if the update was successful, false if the document was not found.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.IDocumentAccessProvider.GetDocumentContentAsync(System.Int32)">
+            <summary>
+            Gets the content of a specific open document.
+            </summary>
+            <param name="documentId">The document ID.</param>
+            <returns>The document content, or null if the document was not found.</returns>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.Endpoint">
+            <summary>
+            Endpoint URL for Azure OpenAI (e.g., "https://your-resource.openai.azure.com")
+            or Custom provider base URL (e.g., "https://openrouter.ai/api/v1").
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.Model">
+            <summary>
+            Model name or deployment ID. If empty, uses the provider's default model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.MaxOutputTokens">
+            <summary>
+            The DefaultMaxOutputTokens config setting used when creating the Anthropic IChatClient.
+            When the value is set to 0, we use the maximum number of output tokens available for any
+            given Anthropic model. Set the value to any value greater than 0 to override the defaults.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowSelectionContext">
+            <summary>
+            Show the "Context:" selection indicator above assistant replies.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowCustomInstructions">
+            <summary>
+            Show the "Custom Instructions:" / "Invoked:" skill pills above assistant replies.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowKnowledgeBaseSearch">
+            <summary>
+            Show the "Searching knowledge base..." indicator during tool calls.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.AutoCompact">
+            <summary>
+            Automatically compact conversations when context window usage exceeds the threshold.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.AutoCompactThreshold">
+            <summary>
+            Percentage of context window usage that triggers auto-compaction (50-90).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.EffectiveModel">
+            <summary>
+            Gets the effective model to use, falling back to the provider's default if not specified.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ShowScriptPreview">
+            <summary>
+            Whether or not to display the "Script preview" dialog after C# script execution
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.CheckForKbUpdatesOnStartup">
+            <summary>
+            Whether to check for knowledge base updates when the AI assistant starts.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.OrganizationId">
+            <summary>
+            For OpenAI endpoints, users can specify an optional Organization (in case they belong to multiple organizations)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.AI.AIPreferences.ProjectId">
+            <summary>
+            For OpenAI endpoints, users can specify an optional Project (to direct billing to that project)
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.AI.AIProviderExtensions.GetDefaultModel(TabularEditor.Shared.Services.AI.AIProvider)">
+            <summary>
+            Returns the default model for the provider, or null if user must specify.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Services.AppCache.Ppu">
@@ -2209,7 +3578,13 @@
             TODO: Handle DirectQuery / user-delegated credentials
             </summary>
         </member>
-        <member name="M:TabularEditor.Shared.Services.Connectivity.Fabric.FabricInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Databricks.DatabricksInfoProvider.BuildConnectionString(System.String,System.String,TabularEditor.Shared.Services.DatabricksAuthMode,System.String,System.String)">
+            <summary>
+            Builds a Databricks ODBC connection string builder with driver, host, and auth parameters.
+            Does not include Catalog/Schema. Callers may add additional parameters before calling ToString().
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Fabric.FabricInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider,TabularEditor.Shared.Services.ITelemetry)">
             <summary>
             This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext
             </summary>
@@ -2275,6 +3650,12 @@
             <param name="complexKeyStr"></param>
             <param name="writable"></param>
             <returns>RegistryKey For the complex Subkey. </returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.DaxOptimizer.DaxOptimizerService.TryLoadObfuscationDictionary(System.String)">
+            <summary>
+            Loads the obfuscation dictionary for the given id from cache or disk (null if empty/not found). Unlike
+            <see cref="M:TabularEditor.Shared.Services.DaxOptimizer.DaxOptimizerService.ResolveObfuscationDictionary(System.String)"/>, it does not touch <see cref="P:TabularEditor.Shared.Services.DaxOptimizer.DaxOptimizerService.ObfuscationDictionaryNeeded"/>.
+            </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.FileSystemHelper.DirectoryFromPath(System.String)">
             <summary>
@@ -2550,6 +3931,25 @@
             <param name="externalQuery"></param>
             <returns></returns>
         </member>
+        <member name="P:TabularEditor.Shared.Services.Policies.DisableAi">
+            <summary>
+            Disables all AI functionality (when flag is set, the TabularEditor3.AI module isn't loaded)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.Policies.DisableAiChat">
+            <summary>
+            Specifically disables the AI Chat feature, aka. AI Assistant. Other AI features may still be available.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.LocalInstance.StripPowerBIDesktopSuffix(System.String)">
+            <summary>
+            Removes known Power BI Desktop/Designer suffixes from a window title string.
+            Only removes suffixes that appear at the end of the string to avoid incorrectly
+            truncating model names that legitimately contain " - ".
+            </summary>
+            <param name="windowTitle">The window title string to process</param>
+            <returns>The window title with known suffixes removed, or the original string if no suffix is present</returns>
+        </member>
         <member name="P:TabularEditor.Shared.Services.Preferences.ProxyUseDefaultCredentials">
             <summary>
             Indicate whether the system credentials of the application are sent with requests.
@@ -2571,6 +3971,13 @@
             Stores an encrypted version of the user password. Use the string Decrypt() extension method to decrypt.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Services.DataBrowsingPreferences.MaxUnindexedSortRows">
+            <summary>
+            Maximum number of (filtered) rows the data preview will sort by a column that has no attribute hierarchy
+            when no primary key / WINDOW support is available. Above this, sorting falls back to a plain in-memory TOPN
+            that materializes the whole table, so we refuse instead of risking an out-of-memory error.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.Services.KeepSortingAndFilteringOption">
             <summary>
             Specifies the options for retaining sorting and filtering settings in grid views.
@@ -2589,6 +3996,11 @@
         <member name="F:TabularEditor.Shared.Services.KeepSortingAndFilteringOption.Always">
             <summary>
             Always: Sorting and filtering are never reset if the columns still exist.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.PreferencesService.TE3AppDataPath">
+            <summary>
+            Path to the Tabular Editor 3 local application data folder, typically `%LocalAppData%\TabularEditor3`
             </summary>
         </member>
         <member name="T:TabularEditor.Shared.Services.RefreshConfig">
@@ -2708,6 +4120,12 @@
             Checks if the given exception represents an authentication cancellation by the user.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Services.IDatabricksTableImportSettings.IsMulticloud">
+            <summary>
+            True if the connection uses DatabricksMultiCloud.Catalogs (i.e. non-Azure Databricks).
+            Azure AD authentication is not supported for multicloud connections.
+            </summary>
+        </member>
         <member name="F:TabularEditor.Shared.Services.IdentifierQuoting.Backtick">
             <summary>
             Indicates that every identifier must be enclosed in a pair of backticks
@@ -2744,6 +4162,13 @@
         <member name="M:TabularEditor.Shared.Services.UserOptionsService.GetTabularModelUserOptionsFileName(System.String)">
             <param name="modelFileName">Can be a folder or a file</param>
         </member>
+        <member name="M:TabularEditor.Shared.Services.VertiPaqAnalyzer.IVertiPaqAnalyzerService.GetObfuscatedVpax(Dax.Vpax.Obfuscator.Common.ObfuscationDictionary@,Dax.Vpax.Obfuscator.Common.ObfuscationDictionary)">
+            <summary>
+            Obfuscates the current model and returns the obfuscated VPAX bytes.
+            </summary>
+            <param name="obfuscationDictionary">The dictionary describing the applied obfuscation, to be persisted for later deobfuscation.</param>
+            <param name="baseDictionary">Optional dictionary from a previous obfuscation of the same model; when supplied, obfuscation is incremental so obfuscated names stay stable across versions.</param>
+        </member>
         <member name="P:TabularEditor.Shared.Services.VertiPaqAnalyzer.PreloadVpaxResult.ReconstructedTom">
             <summary>
             This flag, if true, indicates that the TOM model has to be reconstructed from the VPAX model
@@ -2770,6 +4195,19 @@
               1) WeakReference that is still attached to the model tree
               2) LineageTag
               3) Name
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Snapshot.SnapshotTable.UsesDirectQuery">
+            <summary>
+            True if at least one partition on the table is in DirectQuery mode (considering the model's DefaultMode).
+            DirectQuery tables don't support paginated data preview (TOPNSKIP only works with Skip=0).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Snapshot.SnapshotTable.IsUnique">
+            <summary>
+            True if the table has a primary key - i.e. a column marked IsKey, or the table sits on the "one" side
+            of a one-to-many relationship. This is a prerequisite for paginating via the WINDOW function when
+            sorting by a column that has no attribute hierarchy.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.TextServices.QueryTextTransformer.EvaluateStatement.ShouldLimitRows">
