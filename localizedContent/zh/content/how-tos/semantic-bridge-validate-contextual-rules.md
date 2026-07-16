@@ -24,18 +24,18 @@ applies_to:
 这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的严格技术要求。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
+> 早期版本不支持此处所示的 v1.1 Metric View 功能。
 
 ## 何时使用上下文规则
 
 在需要执行以下操作时，请使用上下文规则：
 
-- Check that a name is not reused across different object types
+- 检查名称是否在不同对象类型之间重复使用
 - 访问先前已验证对象的信息
 
 > [!NOTE]
-> The validation process validates each Metric View object in order (joins, then fields, then measures), so the context consists only of those items already visited in the validation.
+> 验证过程会按顺序验证每个 Metric View 对象（先验证连接，再验证字段，最后验证度量值），因此上下文仅包含在本次验证中已访问过的项。
 
 ## MakeValidationRule 方法
 
@@ -44,23 +44,23 @@ applies_to:
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // or Field, Join, View
+SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // 或 Field、Join、View
     "rule_name",
     "category",
 
-    // return an IEnumerable<DiagnosticMessage>;
-    // an empty collection means the object passed
+    // 返回一个 IEnumerable<DiagnosticMessage>;
+    // 空集合表示该对象通过了验证
     (obj, context) => []
 );
 ```
 
 `context` 参数提供以下内容：
 
-- `context.FieldNames` - names of fields already validated
+- `context.FieldNames` - 已验证的字段名称
 - `context.MeasureNames` - 已验证的度量值名称列表
 - `context.JoinNames` - 已验证的连接名称
-- `context.MakeError(code, message, object)` - create an error diagnostic for the given object
-- `context.MakeWarning(code, message, object)` - create a warning diagnostic for the given object
+- `context.MakeError(code, message, object)` - 为给定对象创建一条错误诊断信息
+- `context.MakeWarning(code, message, object)` - 为给定对象创建一条警告诊断信息
 
 由于诊断信息是在验证函数体内创建的，你可以在信息中加入当前正在验证对象的详细信息。
 
@@ -72,9 +72,9 @@ SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // or Field, 
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 ```
 
-## Rule: a Metric View Measure name must not duplicate a Metric View Field name
+## 规则：Metric View 度量值名称不得与 Metric View 字段名称重复
 
-Fields are validated before measures, so when a measure is checked, `context.FieldNames` already holds every field name.
+字段会先于度量值进行验证，因此在检查度量值时，`context.FieldNames` 已包含所有字段名称。
 
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -86,15 +86,15 @@ var measureNameRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Me
         context.FieldNames.Contains(measure.Name)
             ? [context.MakeError(
                 "measure_field_name_collision",
-                $"Measure '{measure.Name}' has the same name as a field",
+                $"度量值 '{measure.Name}' 与字段同名",
                 measure)]
             : []
 );
 ```
 
-## Rule: a Metric View Measure name must not duplicate a Metric View Join name
+## 规则：Metric View 度量值名称不得与 Metric View 连接名称重复
 
-Joins are validated first, so `context.JoinNames` holds every join name by the time measures are checked.
+连接会最先进行验证，因此在检查度量值时，`context.JoinNames` 已包含所有连接名称。
 
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -106,7 +106,7 @@ var measureNotJoinRule = SemanticBridge.MetricView.MakeValidationRule<MetricView
         context.JoinNames.Contains(measure.Name)
             ? [context.MakeError(
                 "measure_join_name_collision",
-                $"Measure '{measure.Name}' has the same name as a join",
+                $"度量值 '{measure.Name}' 与连接同名",
                 measure)]
             : []
 );
@@ -128,7 +128,7 @@ var measureNotJoinRule = SemanticBridge.MetricView.MakeValidationRule<MetricView
 ```csharp {run id=complete setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-// Create a Metric View with names reused across object types
+// 创建一个在不同对象类型间复用名称的 Metric View
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
     source: sales.fact.orders
@@ -138,19 +138,19 @@ SemanticBridge.MetricView.Deserialize("""
         on: source.customer_id = customer.customer_id
         cardinality: many_to_one
     fields:
-      # 'revenue' is also used as a measure name below
+      # 'revenue' 在下方也被用作度量值名称
       - name: revenue
         expr: source.revenue
       - name: quantity
         expr: source.quantity
     measures:
-      # measureNameRule violation - same name as the 'revenue' field
+      # 违反 measureNameRule - 与 'revenue' 字段同名
       - name: revenue
         expr: SUM(source.revenue)
-      # measureNotJoinRule violation - same name as the 'customer' join
+      # 违反 measureNotJoinRule - 与 'customer' 联接同名
       - name: customer
         expr: COUNT(DISTINCT source.customer_id)
-      # this measure is fine
+      # 这个度量值没问题
       - name: order_count
         expr: COUNT(source.order_id)
     """);
@@ -162,7 +162,7 @@ var measureNameRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Me
         context.FieldNames.Contains(measure.Name)
             ? [context.MakeError(
                 "measure_field_name_collision",
-                $"Measure '{measure.Name}' has the same name as a field",
+                $"度量值 '{measure.Name}' 与字段同名",
                 measure)]
             : []
 );
@@ -174,23 +174,23 @@ var measureNotJoinRule = SemanticBridge.MetricView.MakeValidationRule<MetricView
         context.JoinNames.Contains(measure.Name)
             ? [context.MakeError(
                 "measure_join_name_collision",
-                $"Measure '{measure.Name}' has the same name as a join",
+                $"度量值 '{measure.Name}' 与联接同名",
                 measure)]
             : []
 );
 
-// Run validation with both rules
+// 使用这两个规则运行验证
 var diagnostics = SemanticBridge.MetricView.Validate([
     measureNameRule,
     measureNotJoinRule
 ]).ToList();
 
-// Output results
+// 输出结果
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("CONTEXTUAL VALIDATION RESULTS");
+sb.AppendLine("上下文验证结果");
 sb.AppendLine("-----------------------------");
 sb.AppendLine("");
-sb.AppendLine($"Found {diagnostics.Count} issue(s):");
+sb.AppendLine($"发现 {diagnostics.Count} 个问题(s):");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -204,18 +204,18 @@ Output(sb.ToString());
 **输出：**
 
 ```
-CONTEXTUAL VALIDATION RESULTS
+上下文验证结果
 -----------------------------
 
-Found 2 issue(s):
+发现 2 个问题(s):
 
-[Error] Measure 'revenue' has the same name as a field
-[Error] Measure 'customer' has the same name as a join
+[Error] 度量值 'revenue' 与字段同名
+[Error] 度量值 'customer' 与连接同名
 ```
 
 ## 与默认规则组合
 
-You can run contextual rules alongside the default validation rules by calling `Validate` twice:
+你可以通过调用两次 `Validate`，将上下文规则与默认验证规则一起运行：
 
 ```csharp {run id=combined setup=mv-sample after=complete output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -228,7 +228,7 @@ var customRules = new[] {
             context.FieldNames.Contains(measure.Name)
                 ? [context.MakeError(
                     "measure_field_name_collision",
-                    $"Measure '{measure.Name}' has the same name as a field",
+                    $"度量值 '{measure.Name}' 与字段同名",
                     measure)]
                 : []),
     SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(
@@ -238,28 +238,28 @@ var customRules = new[] {
             context.JoinNames.Contains(measure.Name)
                 ? [context.MakeError(
                     "measure_join_name_collision",
-                    $"Measure '{measure.Name}' has the same name as a join",
+                    $"度量值 '{measure.Name}' 与连接同名",
                     measure)]
                 : [])
 };
 
-// Run default rules first
+// 先运行默认规则
 var defaultDiagnostics = SemanticBridge.MetricView.Validate().ToList();
 
-// Then run custom rules
+// 然后运行自定义规则
 var customDiagnostics = SemanticBridge.MetricView.Validate(customRules).ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Default rule issues: {defaultDiagnostics.Count}");
-sb.AppendLine($"Custom rule issues: {customDiagnostics.Count}");
+sb.AppendLine($"默认规则问题数：{defaultDiagnostics.Count}");
+sb.AppendLine($"自定义规则问题数：{customDiagnostics.Count}");
 Output(sb.ToString());
 ```
 
 **输出**
 
 ```
-Default rule issues: 0
-Custom rule issues: 2
+默认规则问题数：0
+自定义规则问题数：2
 ```
 
 ## 另见
