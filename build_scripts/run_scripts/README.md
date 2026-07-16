@@ -184,6 +184,7 @@ Shared helpers live in [lib.sh](./lib.sh); these are intended to be used for boi
 - `error`: print error messages prefixed with "ERROR: "
 - `log_and_run`: prints the command being run in bold on stderr; use for all commands that actually get run for a scripts work
 - `require`: automatically handle the env var for tool overrides and fail with info if the tool can't be found
+- `run_var_name`: print the `RUN_<TOOL>` env var name for a tool name (the naming convention, defined in one place)
 - `dispatch`: provide a way to take a default function with args (see usage in commands for examples)
 - `banner_title`: print the first one-line summary of a comment banner at the top of a script file (for command lists)
 - `banner_help`: print the whole comment banner at the top of a script file (for help and usage)

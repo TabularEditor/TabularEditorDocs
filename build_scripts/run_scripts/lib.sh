@@ -25,6 +25,13 @@ log_and_run () {
 	"$@"
 }
 
+run_var_name () {
+	# Print the RUN_<NAME> variable name for a tool (uppercased, dashes to
+	# underscores: uvx -> RUN_UVX). The single source of the require naming
+	# convention. LC_ALL=C pins ASCII range semantics regardless of locale.
+	printf 'RUN_%s' "$(printf '%s' "$1" | LC_ALL=C tr 'a-z-' 'A-Z_')"
+}
+
 require () {
 	# Check the given tools and resolve which executable to use for each.
 	# Takes bare tool names, not paths. A pre-set RUN_<NAME> env var (name
@@ -41,8 +48,7 @@ require () {
 			_require_python || failed=1
 			continue
 		fi
-		# LC_ALL=C pins ASCII range semantics regardless of locale.
-		var="RUN_$(printf '%s' "$cmd" | LC_ALL=C tr 'a-z-' 'A-Z_')"
+		var="$(run_var_name "$cmd")"
 		val="${!var:-$cmd}"
 		if command -v "$val" >/dev/null 2>&1; then
 			export "$var=$val"
@@ -53,7 +59,10 @@ require () {
 		fi
 	done
 	if [ "${#missing[@]}" -gt 0 ]; then
-		error "missing required command(s): ${missing[*]}"
+		error 'missing required command(s):'
+		for cmd in "${missing[@]}"; do
+			info "  $cmd"
+		done
 		info 'See build_scripts/run_scripts/README.md for installation instructions.'
 		return 1
 	fi
