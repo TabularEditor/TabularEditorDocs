@@ -15,7 +15,7 @@ applies_to:
           full: true
 ---
 
-## 模型部署
+# 模型部署
 
 Tabular Editor 3（商业版和企业版）可以复制当前加载的语义模型元数据，并将其部署到 Analysis Services 实例或 Power BI / Fabric 的 XMLA endpoint。
 
