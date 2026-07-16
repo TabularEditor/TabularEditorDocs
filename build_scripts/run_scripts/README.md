@@ -19,14 +19,14 @@ problems in one pass. It installs nothing.
 
 ## Requirements
 
-| Tool       | Needed by                 | Notes                                                                       |
-|------------|---------------------------|-----------------------------------------------------------------------------|
-| bash       | everything                | 3.2+; Git Bash on Windows, but available by default on most other platforms |
-| Python     | `build`, `serve`, `watch` | 3.11 or newer                                                               |
-| dotnet     | docfx install and hosting | .NET SDK 8.0 or newer                                                       |
-| docfx      | `build`, `serve`, `watch` | local dotnet tool or global                                                 |
-| uvx        | `lint` (Python sources)   | part of [uv](https://docs.astral.sh/uv/)                                    |
-| shellcheck | `lint` (shell sources)    |                                                                             |
+| Tool       | Needed by                                | Notes                                                                       |
+|------------|------------------------------------------|-----------------------------------------------------------------------------|
+| bash       | everything                               | 3.2+; Git Bash on Windows, but available by default on most other platforms |
+| Python     | `build`, `serve`, `watch`, `check-links` | 3.11 or newer                                                               |
+| dotnet     | docfx install and hosting                | .NET SDK 8.0 or newer                                                       |
+| docfx      | `build`, `serve`, `watch`                | local dotnet tool or global                                                 |
+| uvx        | `lint` (Python sources)                  | part of [uv](https://docs.astral.sh/uv/)                                    |
+| shellcheck | `lint` (shell sources)                   |                                                                             |
 
 The first `./run lint` needs network access: uvx downloads ruff and mypy into
 its cache on first use.
@@ -102,6 +102,9 @@ All sub-commands provide help text at the command line.
 - Lint build scripts and run scripts:
   - `./run lint`: lint everything that is known to already conform to linting standards (all shell scripts and a subset of build scripts)
   - `./run lint file1.sh file2.py ...`: lint specific shell scripts or python scripts (pass as many filenames of either or both types as you like)
+- Check the built site for broken links (needs a built site: run `./run build` first)
+  - `./run check-links`: full check; fetches every unique external URL once, so it needs network access and can take a while
+  - `./run check-links local`: offline; on-disk files and anchors only
 - Clean build artifacts: `./run clean`
 - Get help:
   - `./run help`: print top-level help for the `run` dispatcher and list all subcommands

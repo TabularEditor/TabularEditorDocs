@@ -851,10 +851,20 @@ def cmd_validate(args: list[str], progress: _Progress, base_url: "Callable[[], s
     under = next((arg[len("under=") :] for arg in args if arg.startswith("under=")), None)
     positional = [arg for arg in args if arg not in flags and not arg.startswith("under=")]
     root = Path(positional[0]) if positional else Path("_site")
+    if not root.is_dir():
+        # A missing root would otherwise scan zero pages and "pass"; that
+        # silence would hide a forgotten or failed build.
+        print(f"error: site root not found: {root} (build the site first)", file=sys.stderr)
+        return 2
     source_prefix = os.path.normpath(root / under) if under else None
 
     progress.phase = "enumerating"
     refs, anchors_by_file = enumerate_site(root, source_prefix, progress)
+    if progress.pages == 0:
+        # Same silence risk as a missing root: a site with no HTML means
+        # nothing was validated, not that nothing is broken.
+        print(f"error: no HTML pages found under {root} (build the site first)", file=sys.stderr)
+        return 2
     existing = _existing_files(root)
     progress.phase = "resolving"
     # Resolve the base URL only when needed: local mode never checks live, so it stays offline and config-free.

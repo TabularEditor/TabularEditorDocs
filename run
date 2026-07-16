@@ -33,7 +33,7 @@ commands () {
 		if [ "$name" = "lib" ]; then
 			continue
 		fi
-		printf '  %-8s %s\n' "$name" "$(banner_title "$script")"
+		printf '  %-12s %s\n' "$name" "$(banner_title "$script")"
 	done
 	printf '\nRun ./run <command> help for details on one command.\n'
 	printf 'Run ./run help for full runner documentation.\n'
