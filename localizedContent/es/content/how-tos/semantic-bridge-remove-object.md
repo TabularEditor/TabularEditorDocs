@@ -20,12 +20,12 @@ applies_to:
 
 # Eliminar un objeto de una Metric View
 
-This how-to demonstrates removing Metric View fields and measures.
+En este tutorial se muestra cómo eliminar campos y medidas de Metric View.
 El mismo enfoque se aplica a todas las colecciones de una Metric View.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estos procedimientos están pensados para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
@@ -35,74 +35,74 @@ El mismo enfoque se aplica a todas las colecciones de una Metric View.
 
 ## Eliminar por nombre
 
-Get the Metric View field and delete it.
-After you delete an object, you should not attempt to modify it.
-You can still read properties off of the deleted object.
-It is safe to call `Delete()` on an object multiple times; after the first, these are no-ops.
+Obtén el campo de Metric View y elimínalo.
+Después de eliminar un objeto, no debes intentar modificarlo.
+Aun así, puedes seguir leyendo propiedades del objeto eliminado.
+Puedes llamar a `Delete()` en un objeto varias veces sin problema; después de la primera, las demás llamadas no hacen nada.
 
 ```csharp {run id=removefield setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Fields before: {view.Fields.Count}");
+sb.AppendLine($"Campos antes: {view.Fields.Count}");
 
 var fieldToRemove = view.Fields["order_month"];
 fieldToRemove.Delete();
-fieldToRemove.Delete(); // note we can call Delete twice safely
-sb.AppendLine($"Removed: {fieldToRemove.Name}");
+fieldToRemove.Delete(); // nota: podemos llamar a Delete dos veces sin problema
+sb.AppendLine($"Eliminado: {fieldToRemove.Name}");
 
-sb.AppendLine($"Fields after: {view.Fields.Count}");
+sb.AppendLine($"Campos después: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **Salida:**
 
 ```
-Fields before: 6
-Removed: order_month
-Fields after: 5
+Campos antes: 6
+Eliminado: order_month
+Campos después: 5
 ```
 
-Observe that there are multiple calls to `Delete()` but only one removal.
+Observa que hay varias llamadas a `Delete()`, pero solo una eliminación.
 
-## Remove a measure
+## Eliminar una medida
 
-Measures are removed the same way: get a reference to the measure and delete it.
+Las medidas se eliminan de la misma forma: obtén una referencia a la medida y elimínala.
 
 ```csharp {run id=removemeasure setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Measures before: {view.Measures.Count}");
+sb.AppendLine($"Medidas antes: {view.Measures.Count}");
 
 var measureToRemove = view.Measures["gross_margin"];
 measureToRemove.Delete();
-sb.AppendLine($"Removed: {measureToRemove.Name}");
+sb.AppendLine($"Eliminado: {measureToRemove.Name}");
 
-sb.AppendLine($"Measures after: {view.Measures.Count}");
+sb.AppendLine($"Medidas después: {view.Measures.Count}");
 Output(sb.ToString());
 ```
 
 **Salida:**
 
 ```
-Measures before: 6
-Removed: gross_margin
-Measures after: 5
+Medidas antes: 6
+Eliminado: gross_margin
+Medidas después: 5
 ```
 
-## Remove multiple Metric View fields
+## Eliminar varios campos de Metric View
 
-Filter to the fields you want to remove, snapshot them with `ToList`, then delete each one.
-Snapshotting first avoids modifying the collection while iterating it.
+Filtra los campos que quieres eliminar, crea una instantánea con `ToList` y luego elimina cada uno.
+Crear primero esa instantánea evita modificar la colección mientras la iteras.
 
 ```csharp {run id=removemultiple setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Fields before: {view.Fields.Count}");
+sb.AppendLine($"Campos antes: {view.Fields.Count}");
 
-// Remove all date-related fields
+// Eliminar todos los campos relacionados con fechas
 string[] toRemove = ["order_date", "order_year", "order_month"];
 
 foreach (var field in view.Fields.Where(f => toRemove.Contains(f.Name)).ToList())
@@ -110,9 +110,9 @@ foreach (var field in view.Fields.Where(f => toRemove.Contains(f.Name)).ToList()
     field.Delete();
 }
 
-sb.AppendLine($"Fields after: {view.Fields.Count}");
+sb.AppendLine($"Campos después: {view.Fields.Count}");
 sb.AppendLine();
-sb.AppendLine("Remaining fields:");
+sb.AppendLine("Campos restantes:");
 sb.AppendLine("-----------------");
 foreach (var field in view.Fields)
 {
@@ -125,56 +125,56 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-Fields before: 6
-Fields after: 3
+Campos antes: 6
+Campos después: 3
 
-Remaining fields:
+Campos restantes:
 -----------------
   product_name
   product_category
   customer_segment
 ```
 
-## Remove Metric View fields from a specific table
+## Eliminar campos de Metric View de una tabla específica
 
-Remove all Metric View fields that reference the date table.
+Elimina todos los campos de Metric View que hacen referencia a la tabla de fechas.
 
 > [!WARNING]
-> This example is not guaranteed to remove all and exclusively Metric View fields which reference a given Metric View Join.
-> Metric View fields may include near-arbitrary SQL expressions, and may also reference previously defined Metric View fields.
+> No se garantiza que este ejemplo elimine todos los campos de Metric View que hagan referencia a un Metric View Join determinado, y solo esos.
+> Los campos de Metric View pueden incluir expresiones SQL casi arbitrarias y también pueden hacer referencia a campos de Metric View definidos anteriormente.
 > Este ejemplo es solo con fines ilustrativos.
 
 ```csharp {run id=remove-by-table setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Fields before: {view.Fields.Count}");
+sb.AppendLine($"Campos antes: {view.Fields.Count}");
 
 foreach (var field in view.Fields.Where(f => f.Expr.StartsWith("date.")).ToList())
 {
     field.Delete();
-    sb.AppendLine($"Removed: {field.Name} ({field.Expr})");
+    sb.AppendLine($"Eliminado: {field.Name} ({field.Expr})");
 }
 
-sb.AppendLine($"Fields after: {view.Fields.Count}");
+sb.AppendLine($"Campos después: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **Salida:**
 
 ```
-Fields before: 6
-Removed: order_date (date.full_date)
-Removed: order_year (date.year)
-Removed: order_month (date.month_name)
-Fields after: 3
+Campos antes: 6
+Eliminado: order_date (date.full_date)
+Eliminado: order_year (date.year)
+Eliminado: order_month (date.month_name)
+Campos después: 3
 ```
 
 ## Siguientes pasos
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+- [Agregar objetos a una vista de métricas](xref:semantic-bridge-add-object)
+- [Cambiar el nombre de un campo](xref:semantic-bridge-rename-objects)
+- [Serializar una vista de métricas en YAML](xref:semantic-bridge-serialize)
 
 ## Ver también
 
