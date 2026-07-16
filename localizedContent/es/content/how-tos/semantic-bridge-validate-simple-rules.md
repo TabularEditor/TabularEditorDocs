@@ -24,8 +24,8 @@ Esta guía muestra cómo crear reglas de validación sencillas basadas en predic
 Estas reglas se incluyen solo con fines ilustrativos y no reflejan necesariamente requisitos técnicos estrictos ni de Metric Views ni del Semantic Bridge.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías están pensadas para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
 
 ## Los cuatro métodos auxiliares para reglas
 
@@ -33,7 +33,7 @@ Hay un método auxiliar para cada tipo de objeto de Metric View:
 
 - `MakeValidationRuleForView`: reglas para el objeto View raíz
 - `MakeValidationRuleForJoin`: reglas para objetos Join
-- `MakeValidationRuleForField` - rules for Field objects
+- `MakeValidationRuleForField`: reglas para objetos de tipo Field
 - `MakeValidationRuleForMeasure`: reglas para objetos de medida
 
 Cada método auxiliar acepta cuatro parámetros:
@@ -69,15 +69,15 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
 );
 ```
 
-## Rule for Metric View Field
+## Regla para el campo de Metric View
 
-Check that Metric View field names do not contain underscores:
+Comprueba que los nombres de los campos de Metric View no contengan guiones bajos:
 
 ```csharp {compile}
 var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Field names should use spaces, not underscores",
+    "Los nombres de los campos deben usar espacios, no guiones bajos",
     (field) => field.Name.Contains('_')
 );
 ```
@@ -95,18 +95,18 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 );
 ```
 
-## Rules for specific Metric View versions
+## Reglas para versiones específicas de Metric View
 
-Each helper has an overload that takes a final `minVersion` argument, a string such as "0.1" or "1.1".
-Rules defined with a `minVersion` only run against Metric Views at or above that version.
-This is useful for a rule that checks a property introduced in a later version,
-such as `display_name` (added in v1.1):
+Cada función auxiliar tiene una sobrecarga que acepta un argumento final `minVersion`, una cadena como "0.1" o "1.1".
+Las reglas definidas con `minVersion` solo se ejecutan en Metric Views de esa versión o superior.
+Esto resulta útil para una regla que compruebe una propiedad introducida en una versión posterior,
+como `display_name` (añadida en v1.1):
 
 ```csharp {compile}
 var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "field_display_name_required",
     "naming",
-    "Fields should have a display name set",
+    "Los campos deben tener establecido un nombre para mostrar",
     (field) => string.IsNullOrEmpty(field.DisplayName),
     "1.1"
 );
@@ -117,29 +117,29 @@ var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
 Esta Metric View tiene infracciones en cada una de las reglas definidas anteriormente:
 
 ```csharp {run id=complete setup=mv-sample after=none output=true}
-// Create a Metric View with violations for each rule
+// Crea una Metric View con infracciones para cada regla
 SemanticBridge.MetricView.Deserialize("""
     version: 0.2
     source: sales.fact.orders
     joins:
-      # joinSourceRule violation - not fully qualified
+      # Infracción de joinSourceRule: no está totalmente cualificado
       - name: customer
         source: customer_table
         on: source.customer_id = customer.customer_id
     fields:
-      # fieldNameRule violations - contains underscores
+      # Infracciones de fieldNameRule: contienen guiones bajos
       - name: product_name
         expr: source.product_name
       - name: order_date
         expr: source.order_date
-      # This one is fine
+      # Este está bien
       - name: Category
         expr: source.category
     measures:
-      # measureExprRule violation - contains SELECT subquery
+      # Infracción de measureExprRule: contiene una subconsulta SELECT
       - name: complex_calc
         expr: (SELECT MAX(price) FROM products)
-      # This one is fine
+      # Este está bien
       - name: total_revenue
         expr: SUM(source.revenue)
     """);
@@ -147,32 +147,32 @@ SemanticBridge.MetricView.Deserialize("""
 var versionRule = SemanticBridge.MetricView.MakeValidationRuleForView(
     "version_check",
     "structure",
-    "Metric View version must be 0.1 or 1.1",
+    "La versión de Metric View debe ser 0.1 o 1.1",
     (view) => view.Version != "0.1" && view.Version != "1.1"
 );
 
 var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
     "qualified_source",
     "structure",
-    "Join source must be a fully qualified table name (e.g., `catalog.schema.table`)",
+    "El origen del join debe ser un nombre de tabla totalmente cualificado (p. ej., `catalog.schema.table`)",
     (join) => !join.Source.Contains('.')
 );
 
 var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Field names should use spaces, not underscores",
+    "Los nombres de los campos deben usar espacios, no guiones bajos",
     (field) => field.Name.Contains('_')
 );
 
 var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
     "no_select_subquery",
     "structure",
-    "Measure expressions should not contain SELECT subqueries",
+    "Las expresiones de las medidas no deben contener subconsultas SELECT",
     (measure) => measure.Expr.ToUpper().Contains("SELECT")
 );
 
-// Run validation with custom rules
+// Ejecuta la validación con reglas personalizadas
 var diagnostics = SemanticBridge.MetricView.Validate([
     versionRule,
     joinSourceRule,
@@ -180,12 +180,12 @@ var diagnostics = SemanticBridge.MetricView.Validate([
     measureExprRule
 ]).ToList();
 
-// Output results
+// Muestra los resultados
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("CUSTOM VALIDATION RESULTS");
+sb.AppendLine("RESULTADOS DE LA VALIDACIÓN PERSONALIZADA");
 sb.AppendLine("-------------------------");
 sb.AppendLine("");
-sb.AppendLine($"Found {diagnostics.Count} issue(s):");
+sb.AppendLine($"Se han encontrado {diagnostics.Count} problema(s):");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -199,21 +199,21 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-CUSTOM VALIDATION RESULTS
+RESULTADOS DE LA VALIDACIÓN PERSONALIZADA
 -------------------------
 
-Found 5 issue(s):
+Se han encontrado 5 problema(s):
 
-[Error] Model: Metric View version must be 0.1 or 1.1
-[Error] Model.Joins["customer"]: Join source must be a fully qualified table name (e.g., `catalog.schema.table`)
-[Error] Model.Fields["product_name"]: Field names should use spaces, not underscores
-[Error] Model.Fields["order_date"]: Field names should use spaces, not underscores
-[Error] Model.Measures["complex_calc"]: Measure expressions should not contain SELECT subqueries
+[Error] Model: La versión de Metric View debe ser 0.1 o 1.1
+[Error] Model.Joins["customer"]: El origen del join debe ser un nombre de tabla totalmente cualificado (p. ej., `catalog.schema.table`)
+[Error] Model.Fields["product_name"]: Los nombres de los campos deben usar espacios, no guiones bajos
+[Error] Model.Fields["order_date"]: Los nombres de los campos deben usar espacios, no guiones bajos
+[Error] Model.Measures["complex_calc"]: Las expresiones de las medidas no deben contener subconsultas SELECT
 ```
 
 ## Próximos pasos
 
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
+- [Crear reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules)
 
 ## Ver también
 
