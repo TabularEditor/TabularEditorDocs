@@ -2,7 +2,7 @@
 uid: semantic-bridge-import
 title: 导入指标视图并查看诊断信息
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,75 +18,28 @@ applies_to:
           full: true
 ---
 
-# 导入指标视图并查看诊断信息
+# Import a Metric View and view diagnostics
 
-本教程演示如何使用 C# Script 将指标视图导入表格模型，以及如何查看导入过程中输出的诊断信息。
+This how-to demonstrates importing a loaded Metric View into a Tabular model with a C# script, and reviewing the diagnostic messages the import produces.
 
-## 先决条件
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-导入之前，你必须先在 Tabular Editor 中打开一个表格模型。 可以是：
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
-- 一个新的空模型
-- 一个现有模型，你希望使用指标视图中的对象对其进行扩展
+> [!NOTE]
+> Each example below imports into the open Tabular model.
+> To run more than one, we recommend that you undo the import after each example (Edit>Undo in the menu, or CTRL-z in the TOM Explorer).
+> If you run each import one after the other, you will get multiple translated copies of the Metric View.
 
-## 导入方法
+## Import the loaded Metric View
 
-有两种导入方法：
+`ImportToTabular` translates the currently loaded Metric View into the open Tabular model.
+The Databricks hostname and HTTP path are used when we build the M partition expressions;
+for a quick test you can pass placeholder values and fix them before refreshing data.
 
-| 方法                        | 说明                |
-| ------------------------- | ----------------- |
-| `ImportToTabularFromFile` | 从指定文件路径加载，并一步完成导入 |
-| `ImportToTabular`         | 导入当前已加载的指标视图      |
-
-两种方法都需要：
-
-- 目标 Tabular `Model`
-- Databricks 主机名（用于 M 分区表达式）
-- Databricks HTTP 路径（用于 M 分区表达式）
-
-## 从文件导入
-
-使用 `ImportToTabularFromFile` 一次完成加载和导入：
-
-```csharp
-var success = SemanticBridge.MetricView.ImportToTabularFromFile(
-    "C:/MetricViews/sales-metrics.yaml",
-    Model,
-    "your-workspace.azuredatabricks.net",
-    "/sql/1.0/warehouses/abc123def456",
-    out var diagnostics
-);
-
-var sb = new System.Text.StringBuilder();
-if (success)
-{
-    sb.AppendLine("导入成功！");
-    sb.AppendLine($"诊断信息： {diagnostics.Count}");
-}
-else
-{
-    sb.AppendLine("导入失败。");
-    sb.AppendLine($"错误： {diagnostics.Count}");
-}
-
-Output(sb.ToString());
-```
-
-## 导入已加载的 Metric View
-
-如果你已经加载了 Metric View（用于检查或修改），就用 `ImportToTabular`：
-
-```csharp
-// 先加载 Metric View
-SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
-
-// 可选：检查或修改
-var view = SemanticBridge.MetricView.Model;
-
-var sb = new System.Text.StringBuilder();
-sb.AppendLine($"正在导入包含 {view.Dimensions.Count} 个维度和 {view.Measures.Count} 个度量值的 Metric View");
-
-// 导入到 Tabular
+```csharp {run id=import setup=mv-sample after=none output=true}
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
@@ -94,123 +47,116 @@ var success = SemanticBridge.MetricView.ImportToTabular(
     out var diagnostics
 );
 
-if (success)
-{
-    sb.AppendLine("导入成功！");
-}
-else
-{
-    sb.AppendLine("导入失败。");
-}
-
-Output(sb.ToString());
-```
-
-## 使用占位符连接值
-
-如果你在没有真实 Databricks 连接的情况下测试翻译，可以使用占位符值：
-
-```csharp
-var success = SemanticBridge.MetricView.ImportToTabularFromFile(
-    "C:/MetricViews/sales-metrics.yaml",
-    Model,
-    "placeholder-host",
-    "placeholder-path",
-    out var diagnostics
-);
-
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("导入完成（使用占位符连接值）");
-sb.AppendLine("注意：请在刷新数据之前更新 M 分区表达式。");
-Output(sb.ToString());
-```
-
-## 导入后查看诊断信息
-
-你可以随时通过 `ImportDiagnostics` 访问上一次导入的诊断信息。
-此示例假定你之前已经运行过一次导入，可以通过 GUI 或 C# Script 进行。
-
-```csharp
-var diagnostics = SemanticBridge.MetricView.ImportDiagnostics;
-
-var sb = new System.Text.StringBuilder();
-sb.AppendLine("上次导入诊断信息");
-sb.AppendLine("-----------------------");
-sb.AppendLine("");
-sb.AppendLine($"问题总数： {diagnostics.Count}");
-sb.AppendLine("");
-
+sb.AppendLine($"Imported {Model.AllColumns.Count()} fields and {Model.AllMeasures.Count()} measures.");
+sb.AppendLine(success ? "Import successful." : "Import failed.");
+sb.AppendLine($"Diagnostics: {diagnostics.Count}");
 foreach (var diag in diagnostics)
 {
-    sb.AppendLine($"[{diag.Severity}] {diag.Message}");
+    sb.AppendLine($"  [{diag.Severity}] {diag.Code}: {diag.Message}");
 }
-
 Output(sb.ToString());
 ```
 
-## 直接输出诊断信息
+**输出：**
 
-为了快速查看，你可以直接输出诊断信息集合：
-
-```csharp
-// 输出上一次导入的全部诊断信息
-SemanticBridge.MetricView.ImportDiagnostics.Output();
+```
+Imported 15 fields and 6 measures.
+Import successful.
+Diagnostics: 0
 ```
 
-## 完整工作流示例
+Note that the number of fields imported includes join keys and implicit column references from the Metric View definition,
+so it is larger than the number of explicit `Fields` in the Metric View definition.
 
-加载、验证并导入，并输出完整的诊断报告：
+## Review the last import's diagnostics
 
-```csharp
-var sb = new System.Text.StringBuilder();
+The diagnostics from the most recent import are available at any time through `ImportDiagnostics`, including after an import done through the GUI.
 
-// 加载 Metric View
-SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
+```csharp {compile}
+foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
+    Output($"[{d.Severity}] {d.Code}: {d.Message}");
+```
+
+## See a translation diagnostic
+
+Some Metric View constructs cannot be translated to Tabular.
+A window measure, for example, is not translated to DAX:
+the import creates a placeholder TOM measure with the original Metric View definition in a comment
+and reports a diagnostic warning to you.
+
+Add a window spec to a measure, then import to see the diagnostic:
+
+```csharp {run id=window-diagnostic setup=mv-sample after=none output=true}
+using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
+
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine("Metric View 概览");
-sb.AppendLine("-------------------");
-sb.AppendLine($"来源： {view.Source}");
-sb.AppendLine($"连接数： {view.Joins?.Count ?? 0}");
-sb.AppendLine($"维度数： {view.Dimensions.Count}");
-sb.AppendLine($"度量值数： {view.Measures.Count}");
-sb.AppendLine("");
+// add a window spec
+view.Measures["total_revenue"].Window =
+[
+    new MetricView.Window
+    {
+        Order = "order_date",
+        Range = "trailing 3 month",
+        Semiadditive = MetricView.Window.SemiadditiveType.Last
+    }
+];
 
-// 先验证
-var validationDiags = SemanticBridge.MetricView.Validate().ToList();
-sb.AppendLine("验证");
-sb.AppendLine("----------");
-sb.AppendLine($"问题数： {validationDiags.Count}");
-sb.AppendLine("");
-
-// 导入
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
     "/sql/1.0/warehouses/abc123def456",
-    out var importDiags
+    out var diagnostics
 );
 
-sb.AppendLine("导入结果");
-sb.AppendLine("-------------");
-sb.AppendLine($"是否成功： {success}");
-sb.AppendLine($"诊断信息： {importDiags.Count}");
-sb.AppendLine("");
-
-if (importDiags.Count > 0)
+var sb = new System.Text.StringBuilder();
+sb.AppendLine(success ? "Import succeeded with issues." : "Import failed.");
+foreach (var diag in diagnostics)
 {
-    sb.AppendLine("导入问题：");
-    foreach (var diag in importDiags)
-    {
-        sb.AppendLine($"  [{diag.Severity}] {diag.Message}");
-    }
+    sb.AppendLine($"  [{diag.Severity}] {diag.Code}: {diag.Message}");
 }
-
+// note that we search for the DisplayName, as that is what is translated to TOM
+sb.AppendLine($"TOM measure expression: {Model.AllMeasures.First(m => m.Name == "Total Revenue").Expression}");
 Output(sb.ToString());
 ```
+
+**输出：**
+
+```
+Import succeeded with issues.
+  [Warning] MEASURE_WINDOW_UNSUPPORTED: Measure 'Total Revenue' uses a window specification that is not currently supported; it has been left inert with the original definition preserved as a comment.
+TOM measure expression: // This measure uses a window specification (windowed / cumulative / semiadditive),
+// which is not currently supported when importing Databricks Metric Views.
+// The measure has been left blank - review the details below and author the DAX
+// manually. The translated DAX does NOT account for the window spec; you will most
+// likely need to wrap it in CALCULATE (or similar) to apply the windowing.
+//
+// Original source expression (Databricks SQL):
+/*
+SUM(revenue)
+*/
+//
+// Suggested DAX translation (window spec NOT applied):
+/*
+SUM('Fact'[revenue])
+*/
+//
+// Window specification:
+/*
+- order: order_date
+  range: trailing 3 month
+  semiadditive: last
+
+*/
+```
+
+## 后续步骤
+
+- [Import a Metric View from a file](xref:semantic-bridge-metric-view-import-from-file)
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [验证指标视图](xref:semantic-bridge-validate-default)
 
 ## 另见
 
 - [Semantic Bridge 概览](xref:semantic-bridge)
-- [验证指标视图](xref:semantic-bridge-validate-default)
-- [加载并检查指标视图](xref:semantic-bridge-load-inspect)
