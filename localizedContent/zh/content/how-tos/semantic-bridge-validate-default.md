@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-default
 title: 使用默认规则验证指标视图
 author: Greg Baldini
-updated: 2026-04-17
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,37 +20,38 @@ applies_to:
 
 # 使用默认规则验证指标视图
 
-本操作指南演示如何使用内置验证规则验证已加载的指标视图，并解读诊断信息。
+This how-to demonstrates validating a loaded Metric View using the built-in validation rules and interpreting the diagnostic messages.
+
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
+
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## 默认验证规则
 
-Semantic Bridge 内置以下验证规则：
-
-| 规则                       | 说明                                              |
-| ------------------------ | ----------------------------------------------- |
-| JoinNameRequired         | 指标视图联接必须有名称                                     |
-| UniqueJoinName           | 指标视图联接名称必须唯一                                    |
-| JoinSourceRequired       | 指标视图联接必须指定来源                                    |
-| JoinOnOrUsingRequired    | 指标视图联接必须指定 `on` 或 `using` 之一                    |
-| JoinOnOrUsingExclusivity | 指标视图的 Join 不能同时指定 `on` 和 `using`                |
-| JoinOnFormat             | 指标视图 Join 的 `on` 子句必须是有效的等值连接条件                 |
-| JoinUsingColumnCOUNT     | Metric View 的 Join `using` 子句必须且只能包含一列（公共预览版限制） |
-| DimensionNameRequired    | 指标视图的维度必须有名称                                    |
-| UniqueDimensionName      | 指标视图的维度名称必须唯一                                   |
-| DimensionExprRequired    | 指标视图的维度必须有表达式                                   |
-| 度量值名称必填                  | 指标视图的度量值必须有名称                                   |
-| 度量值名称唯一                  | 指标视图的度量值名称必须唯一                                  |
-| 度量值表达式必填                 | 指标视图的度量值必须有表达式                                  |
+The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/).
+These rules are automatically run upon deserialization, whether via `Deserialize` directly or any method that reads a Metric View, such as `Load` or `ImportToTabularFromFile`.
+Diagnostics from those automatic runs remain available afterward through `SemanticBridge.MetricView.ImportDiagnostics`.
+You can also run these rules on demand against the loaded Metric View, which this document covers.
 
 ## 使用默认规则执行验证
 
-不带参数调用 `Validate()` 即可使用内置验证规则。
+Run [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) with no arguments to run the built-in rules against the loaded Metric View.
 
-```csharp
+```csharp {run id=validate-count setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 Output($"Validation complete: {diagnostics.Count} issue(s) found");
 ```
+
+**输出**
+
+```
+Validation complete: 0 issue(s) found
+```
+
+The sample Metric View is valid, so this reports no issues.
 
 ## 解读诊断信息
 
@@ -60,7 +61,7 @@ Output($"Validation complete: {diagnostics.Count} issue(s) found");
 - **信息**：问题描述
 - **路径**：对象在指标视图层级结构中的位置
 
-```csharp
+```csharp {run id=interpret setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
@@ -85,55 +86,43 @@ else
 Output(sb.ToString());
 ```
 
-## 包含验证错误的示例
+**输出**
 
-有些规则（必填字段）会在反序列化时强制执行。
-其余规则会在反序列化后检查重复项和结构问题。
+```
+VALIDATION RESULTS
+------------------
 
-这个指标视图展示了 `Validate()` 能捕获的违规情况：
+No issues found.
+```
 
-```csharp
-SemanticBridge.MetricView.Deserialize("""
-    version: 0.1
-    source: sales.fact.orders
-    joins:
-      # UniqueJoinName - 名称重复：'customer'
-      - name: customer
-        source: sales.dim.customer
-        on: customer_id = customer.customer_id
-      - name: customer
-        source: sales.dim.customer_backup
-        on: customer_id = customer_backup.customer_id
-      # JoinOnOrUsingRequired - 未指定 on 或 using 子句
-      - name: date
-        source: sales.dim.date
-    dimensions:
-      # UniqueDimensionName - 名称重复：'category'
-      - name: category
-        expr: product.category
-      - name: category
-        expr: product.subcategory
-      - name: product_name
-        expr: product.product_name
-    measures:
-      # UniqueMeasureName - 度量值名称重复：'total'
-      - name: total
-        expr: SUM(revenue)
-      - name: total
-        expr: SUM(quantity)
-      - name: order_count
-        expr: COUNT(order_id)
-    """);
+## Example with a validation error
+
+Validation always runs against the currently loaded Metric View, so you can introduce a violation in a script and see it caught.
+Here we clear a field's expression to trigger `FieldExprRequired`:
+
+```csharp {run id=error-example setup=mv-sample after=none output=true}
+var view = SemanticBridge.MetricView.Model;
+view.Fields["order_year"].Expr = "";
 
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"发现 {diagnostics.Count} 个问题：");
+sb.AppendLine("VALIDATION RESULTS");
+sb.AppendLine("------------------");
 sb.AppendLine("");
 
-foreach (var diag in diagnostics)
+if (diagnostics.Count == 0)
 {
-    sb.AppendLine($"[{diag.Severity}] {diag.Message}");
+    sb.AppendLine("No issues found.");
+}
+else
+{
+    foreach (var diag in diagnostics)
+    {
+        sb.AppendLine($"[{diag.Severity}] {diag.Message}");
+        sb.AppendLine($"  Path: {diag.Path}");
+        sb.AppendLine("");
+    }
 }
 
 Output(sb.ToString());
@@ -142,21 +131,18 @@ Output(sb.ToString());
 **输出：**
 
 ```
-共发现 6 个问题(s):
+VALIDATION RESULTS
+------------------
 
-[Error] 联接 'customer' 必须使用带表前缀的简单相等条件（例如 'source.column = dimension.column'）
-[Error] 联接名称重复：'customer'
-[Error] 联接 'customer' 必须使用带表前缀的简单相等条件（例如 'source.column = dimension.column'）
-[Error] 联接 'date' 必须指定 'on' 或 'using' 子句之一
-[Error] 维度名称重复：'category'
-[Error] 度量值名称重复：'total'
+[Error] Field 'order_year' expr cannot be empty
+  Path: Model.Fields["order_year"].Expr
 ```
 
 ## 按严重性筛选诊断信息
 
 你可以筛选诊断信息，只查看错误：
 
-```csharp
+```csharp {run id=filter-severity setup=mv-sample after=none output=true}
 using System.Linq;
 using TabularEditor.SemanticBridge.Orchestration;
 
@@ -169,10 +155,17 @@ sb.AppendLine($"问题总数： {diagnostics.Count}");
 Output(sb.ToString());
 ```
 
+**输出**
+
+```
+Errors: 0
+Total issues: 0
+```
+
 ## 后续步骤
 
-- [创建简单验证规则](xref:semantic-bridge-validate-simple-rules)，以强制遵循你自己的约定
-- [创建上下文验证规则](xref:semantic-bridge-validate-contextual-rules)，用于跨对象的检查
+- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules)
+- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
 
 ## 另见
 
