@@ -2,7 +2,7 @@
 uid: semantic-bridge-metric-view-object-model
 title: Modelo de objetos de la Metric View de Semantic Bridge
 author: Greg Baldini
-updated: 2026-04-17
+updated: 2026-06-29
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,24 +25,22 @@ SUMMARY: Overview of the Metric View object model built into the Semantic Bridge
 -->
 
 > [!NOTE]
-> El Puente semántico, tal como se lanzó en la versión 3.25.0, se encuentra en vista previa pública.
-> Tiene limitaciones, como se documenta a continuación, y la API y el alcance de la funcionalidad están sujetos a cambios.
-> Este modelo de objetos carece claramente de muchas de las capacidades disponibles en TOMWrapper, con las que quizá esté familiarizado a partir de un C# Script para manipular un modelo tabular.
-> Como se indica en las [limitaciones del Puente semántico](xref:semantic-bridge#public-preview-limitations), por el momento solo admitimos los metadatos de Metric View v0.1.
+> The Semantic Bridge is in public preview.
+> The 3.25.0 release supports Metric View v0.1 metadata, and the 3.26.2 release supports Metric View v1.1 metadata.
 
-Semantic Bridge incluye un modelo de objetos que representa una Metric View de Databricks.
+The Semantic Bridge includes an object model representing a [Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/).
 Esto te permite trabajar con Metric Views mediante programación a través de C# Scripts, de forma similar a como trabajas con un modelo tabular a través de TOMWrapper.
 
 Aparte de la [GUI de importación](xref:semantic-bridge#interface), todo el acceso y la interacción con una Metric View se realizan mediante C# Scripts.
-Todo el contenido de este documento hace referencia al código C# que usarás en un [C# Script](xref:csharp-scripts).
+All content in this document is referring to C# code that you would use in a [C# script](xref:csharp-scripts).
 
 ## Carga y acceso a la Metric View
 
-Puedes cargar una Metric View con [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_) o [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Deserialize_System_String_).
-Esto almacena la Metric View deserializada como [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model).
+You can load a Metric View with [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A) or [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A).
+This stores the deserialized Metric View as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model).
 Esta propiedad devuelve un objeto [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View), que es la raíz del grafo de objetos de la Metric View.
 
-```csharp
+```csharp {compile}
 // Cargar una Metric View desde el disco
 SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
 
@@ -56,74 +54,94 @@ Esto significa que puedes cargar una Metric View una sola vez y hacer referencia
 Solo se carga una única Metric View y está disponible en todos los scripts como `SemanticBridge.MetricView.Model`, como se mencionó anteriormente.
 Este comportamiento es similar al del modelo tabular en scripts de C#, que siempre está disponible simplemente como `Model`.
 
+[!INCLUDE [sample](../how-tos/includes/sample-metricview.md)]
+
 ## Objetos de dominio
 
-El modelo de objetos consta de cuatro tipos principales que se corresponden con la estructura de un archivo YAML de una Metric View:
-No repetimos aquí toda la especificación, por lo que te animamos a consultar la [documentación de Metric View de Databricks](https://learn.microsoft.com/en-us/azure/databricks/metric-views/).
+The object model consists of four main types that correspond to the structure of a Metric View YAML file.
+We do not repeat the entire specification here, so we encourage you to reference the [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
+and our [own API reference for the object model](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView).
 
-| Referencia de la API                                                                       | Descripción                                                                         |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)           | El objeto raíz que representa la Metric View completa                               |
-| [`Join`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join)           | Una definición de unión que conecta una tabla de dimensiones con la tabla de hechos |
-| [`Dimension`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension) | Una definición de campo (columna) en la Metric View              |
-| [`Medida`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)      | Una definición de agregación que representa la lógica de negocio                    |
+| Referencia de la API                                                                  | Descripción                                                                         |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)      | El objeto raíz que representa la Metric View completa                               |
+| [`Join`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join)      | Una definición de unión que conecta una tabla de dimensiones con la tabla de hechos |
+| [`Field`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field)    | Una definición de campo (columna) en la Metric View              |
+| [`Medida`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure) | Una definición de agregación que representa la lógica de negocio                    |
+
+Most properties and attributes of a Metric View have a structured representation in the object model,
+but we defer discussion of these in this document,
+as those are all direct representations of the Metric View spec and documented in our API reference, mentioned above.
 
 > [!NOTE]
-> En el modelo de objetos, seguimos las convenciones de nomenclatura de C#, por lo que usamos `PascalCase` para todos los nombres de tipos y propiedades del modelo de objetos.
+> The object model was introduced in Tabular Editor 3.25.0 with support for Metric View v0.1.
+> Support for Metric View v1.1 was added in Tabular Editor 3.26.2;
+> this includes the `Comment` and `Materialization` properties on the `View`,
+> `Cardinality` and `Rely` on `Join`,
+> `Comment`, `DisplayName`, `Synonyms`, and `Format` on `Field` and `Measure`,
+> `Window` on `Measure`.
+
+> [!NOTE]
+> In the object model, we follow C# naming conventions: `PascalCase` for all type and property names.
 > La especificación YAML de Metric View sigue una convención de nomenclatura `snake_case`.
-> En general, nos centramos en el modelo de objetos de C#, que es un componente de Semantic Bridge.
-> Además de cambiar la capitalización, no modificamos ninguna convención de nomenclatura del YAML.
+> Serialization and deserialization convert between these, so C# scripts use `PascalCase` and the YAML we read and write stays spec-compliant `snake_case`.
 
 ### Vista
 
-El objeto [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) es la raíz de la Metric View y contiene:
+[The `View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object is the root of the Metric View and contains:
 
-- `Version`: La versión de la especificación de Metric View (p. ej., "0.1")
+- `Version`: The Metric View specification version (e.g., "1.1")
 - `Source`: Los datos de origen de la tabla de hechos (p. ej., "catalog.schema.table")
 - `Filter`: Expresión booleana SQL opcional que se aplica a todas las consultas
-- `Joins`: Colección de definiciones de unión
-- `Dimensions`: Colección de definiciones de dimensiones (campos)
-- `Measures`: Colección de definiciones de medidas
+- `Comment`: Optional description of the Metric View
+- `Joins`: Collection of join definitions; non-null empty collection if there are no `Join`s
+- `Fields`: Collection of field definitions; non-null empty collection if there are no `Field`s
+- `Measures`: Collection of measure definitions; non-null empty collection if there are no `Measure`s
+- `Materialization`: Materialization configuration for query acceleration when hosted on Databricks; [see the `Materialization` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Materialization)
 
-```csharp
+```csharp {run id=view-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Versión: {view.Version}");
-sb.AppendLine($"Origen: {view.Source}");
-sb.AppendLine($"Filtro: {view.Filter ?? "(ninguno)"}");
-sb.AppendLine($"Uniones: {view.Joins?.Count ?? 0}");
-sb.AppendLine($"Dimensiones: {view.Dimensions?.Count ?? 0}");
-sb.AppendLine($"Medidas: {view.Measures?.Count ?? 0}");
+sb.AppendLine($"Version: {view.Version}");
+sb.AppendLine($"Source: {view.Source}");
+sb.AppendLine($"Filter: {view.Filter ?? "(none)"}");
+sb.AppendLine($"Joins: {view.Joins.Count}");
+sb.AppendLine($"Fields: {view.Fields.Count}");
+sb.AppendLine($"Measures: {view.Measures.Count}");
 
 Output(sb.ToString());
 ```
 
-#### Traducción y validación de `View`
+**Salida**
 
-La propiedad `View.Source` se convierte en la tabla de hechos del modelo tabular, con el nombre `'Fact'`.
-Si `Source` es una referencia de tabla o vista de 3 partes, se traduce a una partición M que accede al objeto SQL por su nombre.
-Si `Source` no es una referencia de tabla o vista de 3 partes, se traduce a una partición M con una consulta SQL incrustada, siendo la totalidad de la cadena `Source` la propia consulta SQL.
-La propiedad `Filter` se ignora a efectos de la traducción.
-
-Para evaluar las reglas de validación, primero se comprueba `View` y después se valida cada colección en este orden: `Joins`, luego `Dimensions` y, por último, `Measures`.
-La validación de la tabla de hechos `Source` se realiza en una regla de validación del objeto `View`.
+```
+Version: 1.1
+Source: sales.fact.orders
+Filter: (none)
+Joins: 3
+Fields: 6
+Measures: 6
+```
 
 ### Join
 
-Un [`Join`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join) representa una tabla de dimensiones que se une a la tabla de hechos:
+[A `Join`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join) represents a dimension table that is joined to the fact table:
 
 - `Name`: Nombre de la tabla unida (se usa como alias)
 - `Source`: Tabla de origen o consulta para el join (p. ej., "catalog.schema.dimension_table")
 - `On`: Expresión booleana SQL opcional para la condición del join
 - `Using`: Lista opcional de nombres de columna para el join (alternativa a `On`)
 - `Joins`: Uniones secundarias (para esquemas en copo de nieve)
+- `ParentJoin`: if this is a nested join, then `ParentJoin` is a pointer to the parent, otherwise null
+- `Cardinality`: controls the relationship between `View.Source` or `ParentJoin` and this `Join`; [see the `JoinCardinality` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality)
+- `Rely`: Optimizer hints about the `Join`'s relationship to its parent; [see the `Rely` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Rely)
 
-```csharp
+```csharp {run id=join-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-foreach (var join in view.Joins ?? [])
+foreach (var join in view.Joins)
 {
     sb.AppendLine($"Join: {join.Name}");
     sb.AppendLine($"  Source: {join.Source}");
@@ -136,163 +154,185 @@ foreach (var join in view.Joins ?? [])
 Output(sb.ToString());
 ```
 
-#### Traducción y validación de `Join`
+**Salida**
 
-No se admiten `Join`s anidados; es decir, solo se puede traducir un esquema en estrella estricto.
-Para la traducción, solo se admiten joins `On` con un equijoin de un único campo.
-Cada `Join` se convierte en una tabla Tabular, con una partición M definida según las mismas reglas que para la propiedad `View.Source`.
+```
+Join: product
+  Source: sales.dim.product
+  On: source.product_id = product.product_id
+Join: customer
+  Source: sales.dim.customer
+  On: source.customer_id = customer.customer_id
+Join: date
+  Source: sales.dim.date
+  On: source.order_date = date.date_key
+```
 
-Los `Join`s se validan en el orden en que aparecen en la definición de la Metric View.
+### Campo
 
-### Dimensión
+[A `Field`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field) represents a field (column) in the Metric View:
 
-Una [`Dimension`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension) representa un campo (columna) en la Metric View:
+- `Name`: The name of the field, referenced in Metric View expressions
+- `Expr`: The SQL expression defining the field (either a column reference or a SQL expression)
+- `Comment`: Optional description of the field
+- `DisplayName`: Optional human-readable display name for the field
+- `Synonyms`: Optional alternative names for the field, used by AI and BI tools
+- `Format`: Optional display format specification for the field's values; [see the `Format` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format)
 
-- `Name`: el nombre para mostrar de la dimensión
-- `Expr`: La expresión SQL que define la dimensión (ya sea una referencia a una columna o una expresión SQL)
-
-```csharp
+```csharp {run id=field-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-foreach (var dim in view.Dimensions ?? [])
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"Dimension: {dim.Name}");
-    sb.AppendLine($"  Expression: {dim.Expr}");
+    sb.AppendLine($"Field: {field.Name}");
+    sb.AppendLine($"  Expression: {field.Expr}");
 }
 
 Output(sb.ToString());
 ```
 
-#### `Dimension`: Traducción y validación
+**Salida**
 
-Cada `Dimension` se convierte en una columna del modelo tabular.
-Si `Expr` es una referencia de campo no calificada, se agrega a la tabla de hechos.
-Si `Expr` es una referencia calificada (por ejemplo, `table.field`), se agrega a la tabla creada para el `Join` con el mismo nombre que la parte de tabla de la referencia calificada; si la parte de tabla es `source`, se agrega a la tabla de hechos.
-Tanto si la referencia de campo es calificada como si no lo es, el campo se agrega como una [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn).
-Si `Expr` es una expresión SQL, se agrega como [`TOMWrapper.CalculatedColumn`](xref:TabularEditor.TOMWrapper.CalculatedColumn).
-Cuando `Expr` es una expresión SQL, intentamos extraer todas las referencias de campo; si todas las referencias de campo comparten la misma parte de tabla, se agrega a la tabla creada para ese `Join`; de lo contrario, se agrega a la tabla de hechos.
-No traducimos las expresiones SQL de las propiedades `Dimension.Expr`; la expresión SQL se incluye como un comentario en la expresión DAX de la `CalculatedColumn`.
-Depende del usuario traducir estas expresiones.
-Intentamos identificar todas las referencias de campo en la expresión SQL y agregarlas al modelo tabular como columnas `DataColumn` si aún no existen como una `Dimension` de Metric View.
-
-Algunos ejemplos:
-
-| `Expr`                                                | Traducido como tipo | Añadido a la tabla | Nota                                                                                              |
-| ----------------------------------------------------- | ------------------- | ------------------ | ------------------------------------------------------------------------------------------------- |
-| `field1`                                              | `DataColumn`        | `'Fact'`           | las referencias de campo sin calificar son equivalentes a las calificadas con `source`            |
-| `source.field2`                                       | `DataColumn`        | `'Fact'`           | `source` es una referencia a la propiedad `View.Source`, también conocida como la tabla de hechos |
-| `dimCustomer.key`                                     | `DataColumn`        | `'dimCustomer'`    | debe haber un `Join` cuya propiedad `Name` sea `dimCustomer`                                      |
-| `CONCAT(dimCustomer.FirstName, dimCustomer.LastName)` | `CalculatedColumn`  | `'dimCustomer'`    | todas las partes de tabla del nombre cualificado se refieren al mismo nombre                      |
-| `CONCAT(dimGeo.Country, dimCustomer.Address)`         | `CalculatedColumn`  | `'Fact'`           | hay varias partes de tabla diferentes                                                             |
-
-Las `Dimension`s se validan en el orden en que aparecen en la definición de Metric View.
+```
+Field: product_name
+  Expression: product.product_name
+Field: product_category
+  Expression: product.category
+Field: customer_segment
+  Expression: customer.segment
+Field: order_date
+  Expression: date.full_date
+Field: order_year
+  Expression: date.year
+Field: order_month
+  Expression: date.month_name
+```
 
 ### Medida
 
-Una [`medida`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure) representa una agregación con nombre y lógica de negocio:
+[A `Measure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure) represents a named aggregation with business logic:
 
-- `Name`: El nombre para mostrar de la medida
+- `Name`: The name of the measure, referenced in Metric View expressions as `MEASURE(<name>)`
 - `Expr`: La expresión de agregación SQL que define la medida
+- `Comment`: Optional description of the measure
+- `DisplayName`: Optional human-readable display name for the measure
+- `Synonyms`: Optional alternative names for the measure, used by AI and BI tools
+- `Format`: Optional display format specification for the measure's values; [see the `Format` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format)
+- `Window`: Optional list of window specifications for windowed or semi-additive aggregation; [see the `Window` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Window)
 
-```csharp
+```csharp {run id=measure-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-foreach (var measure in view.Measures ?? [])
+foreach (var measure in view.Measures)
 {
-    sb.AppendLine($"Medida: {measure.Name}");
-    sb.AppendLine($"  Expresión: {measure.Expr}");
+    sb.AppendLine($"Measure: {measure.Name}");
+    sb.AppendLine($"  Expression: {measure.Expr}");
 }
 
 Output(sb.ToString());
 ```
 
-#### Traducción y validación de `Measure`
+**Salida**
 
-Todas las medidas se agregan a la tabla de hechos.
-Las agregaciones simples se traducen a expresiones DAX.
-Una agregación simple es una única agregación de un único campo (p. ej., `SUM(table.field)`).
-Las agregaciones admitidas son sum, count, distinct count, max, min y average.
-Otras expresiones se incluyen tal cual como comentario en la expresión DAX de la medida tabular.
-Intentamos identificar todas las referencias a campos en la expresión SQL y añadirlas al modelo tabular como `DataColumn`s si aún no existen como una `Dimension` de Metric View.
-
-> [!WARNING]
-> SQL y DAX son lenguajes distintos con semánticas diferentes.
-> Es posible que una medida traducida automáticamente no exprese el mismo cálculo tanto en Databricks Metric Views como en modelos tabulares.
-> Depende del usuario comprobar que todo el código funciona como se espera.
-
-Las `medida`s se validan en el orden en que aparecen en la definición de Metric View.
+```
+Measure: total_revenue
+  Expression: SUM(revenue)
+Measure: gross_margin
+  Expression: SUM(revenue) - SUM(cost)
+Measure: order_count
+  Expression: COUNT(*)
+Measure: avg_order_value
+  Expression: AVG(revenue)
+Measure: revenue_to_budget
+  Expression: (SUM(revenue) - SUM(budget)) / SUM(budget)
+Measure: unique_customers
+  Expression: COUNT(DISTINCT customer_id)
+```
 
 ## Directivas using
 
 Al trabajar con el modelo de objetos de Metric View en C# Script, es posible que necesite agregar una directiva using para evitar conflictos de nombres con tipos que tienen nombres similares en el Tabular Object Model.
 Recomendamos asignar un alias al espacio de nombres:
 
-```csharp
-// Alias para evitar conflictos con tipos de TOM como Measure
+```csharp {compile}
+// Alias to avoid conflicts with TOM types like Measure
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
 var view = SemanticBridge.MetricView.Model;
 
-// Ahora puedes hacer referencia explícita a los tipos
-foreach (MetricView.Dimension dim in view.Dimensions ?? [])
+// Now you can reference types explicitly
+foreach (MetricView.Field field in view.Fields)
 {
     // ...
 }
 ```
 
-## Ejemplo completo
+## Interacting with the object model
 
-A continuación se muestra un script completo que carga una Metric View y genera un resumen de su contenido:
+This document describes the patterns of using the object model.
+See [the Semantic Bridge how-tos for detailed copy and paste-able examples](xref:semantic-bridge-how-tos).
 
-```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
+### `View` parent pointer
 
-// Cargar la Metric View
+All core Metric View objects described in this document inherit from [`MetricViewObjectBase`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase) for their core functionality.
+Among other things, this means that each holds a `View` pointer back up to the Metric View they are defined in.
+This allows you to inspect the whole Metric View when holding any of these objects.
+
+```csharp {compile}
 SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
-var sb = new System.Text.StringBuilder();
-var view = SemanticBridge.MetricView.Model;
-
-// Resumen con sb.AppendLine
-sb.AppendLine("=== Resumen de la Metric View ===");
-sb.AppendLine($"Versión: {view.Version}");
-sb.AppendLine($"Origen: {view.Source}");
-
-if (view.Joins != null && view.Joins.Count > 0)
-{
-    sb.AppendLine($"\nUniones ({view.Joins.Count}):");
-    foreach (var join in view.Joins)
-    {
-        sb.AppendLine($"  - {join.Name} -> {join.Source}");
-    }
-}
-
-if (view.Dimensions != null && view.Dimensions.Count > 0)
-{
-    sb.AppendLine($"\nDimensiones ({view.Dimensions.Count}):");
-    foreach (var dim in view.Dimensions)
-    {
-        sb.AppendLine($"  - {dim.Name}: {dim.Expr}");
-    }
-}
-
-if (view.Measures != null && view.Measures.Count > 0)
-{
-    sb.AppendLine($"\nMedidas ({view.Measures.Count}):");
-    foreach (var measure in view.Measures)
-    {
-        sb.AppendLine($"  - {measure.Name}: {measure.Expr}");
-    }
-}
-
-Output(sb.ToString());
+var v = SemanticBridge.MetricView.Model; // alias the Metric View as v just for concision
+var f = v.Fields.FirstOrDefault(); // f is the first field defined in the Metric View
+Output(f.View == v); // the field, f, lets you navigate up to the containing view
 ```
+
+### Adding objects
+
+You never instantiate a `View`, `Join`, `Field`, or `Measure` directly.
+Instead, deserialize or load a base `View`, or use the various `Add` methods:
+
+- New Metric View:
+  - [`Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A) YAML in a string
+  - [`Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A) a YAML file from disk
+- Add objects
+  - [`view.AddJoin`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddJoin%2A)
+  - [`view.AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A)
+  - [`view.AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A)
+
+`Deserialize` and `Load` both set the global `SemanticBridge.MetricView.Model` so you can interact with it in scripts.
+The `Add` methods all return the new object just added so that you can interact with it and set additional properties;
+this mirrors the interaction with TOM objects you are already familiar with in C# scripts.
+
+### Modify properties
+
+The Metric View object model is mutable throughout, so you can simply set properties directly.
+C# autocompletion in Tabular Editor 3 will help with finding the right properties and types to use.
+All properties and their types are in [the API documentation](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView).
+
+### Acceso a objetos por nombre
+
+The root `View` contains collections for `Joins`, `Fields`, and `Measures`.
+Each `Join` contains a child `Joins` collection.
+Each of these can be indexed by name;
+this looks up the child object by its `Name` property.
+This lookup is case insensitive, matching the default in Databricks SQL.
+
+### Metric View versions
+
+We track the [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/) to stay up to date with the specification.
+All properties are annotated with the version that they were introduced.
+Thanks to this, the object model will raise exceptions and surface diagnostics if you attempt to set a property that is not allowed for a given version of the spec.
+We recommend always running [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) after modifying a Metric View in a C# script;
+this will check all default validation rules for correctness.
 
 ## Referencias
 
 - [Documentación de la API del espacio de nombres `MetricView`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)
-- @semantic-bridge-how-tos
-- [Documentación de Databricks Metric View](https://learn.microsoft.com/en-us/azure/databricks/metric-views/)
-- [Especificación YAML de Databricks Metric View](https://learn.microsoft.com/en-us/azure/databricks/metric-views/data-modeling/syntax)
+- @semantic-bridge-metric-view-fields-and-dimensions
+- @semantic-bridge-metric-view-validation
+- @semantic-bridge-metric-view-tabular-translation
+- [Semantic Bridge how-tos for detailed examples](xref:semantic-bridge-how-tos)
+- [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
+- [Metric View YAML specification](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)
