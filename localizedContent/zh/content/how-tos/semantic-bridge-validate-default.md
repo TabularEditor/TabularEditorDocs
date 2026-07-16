@@ -20,24 +20,24 @@ applies_to:
 
 # 使用默认规则验证指标视图
 
-This how-to demonstrates validating a loaded Metric View using the built-in validation rules and interpreting the diagnostic messages.
+本操作指南演示如何使用内置验证规则验证已加载的指标视图，并解读诊断信息。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
+> 较早版本不支持此处展示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## 默认验证规则
 
-The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/).
-These rules are automatically run upon deserialization, whether via `Deserialize` directly or any method that reads a Metric View, such as `Load` or `ImportToTabularFromFile`.
-Diagnostics from those automatic runs remain available afterward through `SemanticBridge.MetricView.ImportDiagnostics`.
-You can also run these rules on demand against the loaded Metric View, which this document covers.
+Semantic Bridge 包含内置规则，可依据 [指标视图文档](https://learn.microsoft.com/azure/databricks/business-semantics/) 中定义的规则来验证指标视图定义。
+这些规则会在反序列化时自动运行——无论是直接调用 `Deserialize`，还是通过任何读取指标视图的方法(如 `Load` 或 `ImportToTabularFromFile`)。
+这些自动运行产生的诊断信息随后仍可通过 `SemanticBridge.MetricView.ImportDiagnostics` 获取。
+你也可以按需对已加载的指标视图运行这些规则，本文将介绍这一做法。
 
 ## 使用默认规则执行验证
 
-Run [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) with no arguments to run the built-in rules against the loaded Metric View.
+运行不带参数的 [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate)，即可对已加载的指标视图运行内置规则。
 
 ```csharp {run id=validate-count setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
@@ -48,10 +48,10 @@ Output($"Validation complete: {diagnostics.Count} issue(s) found");
 **输出**
 
 ```
-Validation complete: 0 issue(s) found
+验证完成：发现 0 个问题(s)
 ```
 
-The sample Metric View is valid, so this reports no issues.
+示例指标视图有效，因此此处的 Report 不会显示任何问题。
 
 ## 解读诊断信息
 
@@ -89,16 +89,16 @@ Output(sb.ToString());
 **输出**
 
 ```
-VALIDATION RESULTS
+验证结果
 ------------------
 
-No issues found.
+未发现任何问题。
 ```
 
-## Example with a validation error
+## 包含验证错误的示例
 
-Validation always runs against the currently loaded Metric View, so you can introduce a violation in a script and see it caught.
-Here we clear a field's expression to trigger `FieldExprRequired`:
+验证始终针对当前已加载的指标视图运行，因此你可以在脚本中故意引入违规，并确认它会被检测出来。
+这里我们将某个字段的表达式清空，以触发 `FieldExprRequired`：
 
 ```csharp {run id=error-example setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -107,20 +107,20 @@ view.Fields["order_year"].Expr = "";
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("VALIDATION RESULTS");
+sb.AppendLine("验证结果");
 sb.AppendLine("------------------");
 sb.AppendLine("");
 
 if (diagnostics.Count == 0)
 {
-    sb.AppendLine("No issues found.");
+    sb.AppendLine("未发现任何问题。");
 }
 else
 {
     foreach (var diag in diagnostics)
     {
         sb.AppendLine($"[{diag.Severity}] {diag.Message}");
-        sb.AppendLine($"  Path: {diag.Path}");
+        sb.AppendLine($"  路径: {diag.Path}");
         sb.AppendLine("");
     }
 }
@@ -131,11 +131,11 @@ Output(sb.ToString());
 **输出：**
 
 ```
-VALIDATION RESULTS
+验证结果
 ------------------
 
-[Error] Field 'order_year' expr cannot be empty
-  Path: Model.Fields["order_year"].Expr
+[错误] 字段 'order_year' 的 expr 不能为空
+  路径：Model.Fields["order_year"].Expr
 ```
 
 ## 按严重性筛选诊断信息
@@ -158,14 +158,14 @@ Output(sb.ToString());
 **输出**
 
 ```
-Errors: 0
-Total issues: 0
+错误：0
+问题总数：0
 ```
 
 ## 后续步骤
 
-- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules)
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
+- [创建简单验证规则](xref:semantic-bridge-validate-simple-rules)
+- [创建上下文验证规则](xref:semantic-bridge-validate-contextual-rules)
 
 ## 另见
 
