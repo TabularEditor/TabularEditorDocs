@@ -20,19 +20,19 @@ applies_to:
 
 # Renombrar objetos en una Metric View
 
-This how-to demonstrates renaming a Metric View field.
+Esta guía práctica muestra cómo cambiar el nombre de un campo de una vista de métricas.
 Los mismos patrones se aplican a todas las colecciones de una Metric View.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías prácticas están orientadas a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
-## Rename a field
+## Cambiar el nombre de un campo
 
-Rename a field by adding a new field under the new name, copying its other properties across, then removing the original.
-[`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) sets only the name and expression, so copy the remaining properties (`Comment`, `DisplayName`, `Synonyms`, `Format`) yourself.
+Cambie el nombre de un campo agregando uno nuevo con el nombre nuevo, copiando sus demás propiedades y, después, eliminando el original.
+[`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) solo establece el nombre y la expresión, por lo que debe copiar manualmente las propiedades restantes (`Comment`, `DisplayName`, `Synonyms`, `Format`).
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -68,13 +68,13 @@ Fields:
   Order Month
 ```
 
-The re-added field moves to the end of the collection.
+El campo que se vuelve a agregar pasa al final de la colección.
 
 ## Siguientes pasos
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+- [Agregar objetos a una vista de métricas](xref:semantic-bridge-add-object)
+- [Eliminar objetos de una vista de métricas](xref:semantic-bridge-remove-object)
+- [Serializar una vista de métricas en YAML](xref:semantic-bridge-serialize)
 
 ## Ver también
 
