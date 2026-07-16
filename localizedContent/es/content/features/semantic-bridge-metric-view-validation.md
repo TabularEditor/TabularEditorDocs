@@ -25,8 +25,8 @@ SUMMARY: Describes the validation framework for Metric Views in the Semantic Bri
 -->
 
 Hay un marco de validación integrado en el Semantic Bridge que permite a los usuarios validar y definir reglas para comprobar una Metric View antes de importarla en Tabular.
-This diagnostic reporting is shared at every stage of the translation pipeline,
-from first deserializing the Metric View, through to errors in translation to DAX and Tabular.
+Estos informes de diagnóstico se comparten en todas las etapas de la canalización de traducción,
+desde la deserialización inicial de la Metric View hasta los errores al traducir a DAX y Tabular.
 
 > [!NOTE]
 > El Semantic Bridge está actualmente en versión preliminar pública, por lo que las interfaces pueden cambiar a medida que la funcionalidad madura.
@@ -40,8 +40,7 @@ Hay varias fases de validación
 2. al actuar sobre el Metric View cargado
 3. al traducir el Metric View a Tabular
 
-The first and third are automatic and internal to the Semantic Bridge,
-but the second is where users can provide their own validation rules.
+La primera y la tercera son automáticas e internas del Semantic Bridge, pero en la segunda los usuarios pueden aportar sus propias reglas de validación.
 
 La validación es el proceso de evaluar cada regla de validación de un conjunto sobre todos los objetos del Metric View.
 Una regla de validación se define para aplicarse a un único tipo de objeto de Metric View; por ejemplo, un `Join` o un `Measure`.
@@ -49,7 +48,7 @@ Una vez completada la validación, se devuelven al usuario todos los diagnóstic
 
 ## Anatomía de una regla de validación
 
-Validation rules are all instances of [`IMetricViewValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule).
+Todas las reglas de validación son instancias de [`IMetricViewValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule).
 En lugar de profundizar en esa interfaz, es más fácil entender y trabajar con las reglas de validación mediante los métodos auxiliares:
 
 - [`MakeValidationRuleForField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRuleForField%2A)
@@ -68,32 +67,32 @@ Ofrecen una interfaz simplificada en la que proporcionas:
 
 El nombre y la categoría están pensados para facilitar el trabajo con colecciones de reglas, como se hace en scripts de C# que utilizan reglas personalizadas.
 
-Each of these helpers also has an overload with a final `minVersion` argument.
-This argument would take a version string, such as "0.1" or "1.1".
-Rules with `minVersion` set are only evaluated for Metric Views at or above that version.
+Cada uno de estos métodos auxiliares también tiene una sobrecarga con un argumento final `minVersion`.
+Este argumento acepta una cadena de versión, como "0.1" o "1.1".
+Las reglas con `minVersion` establecido solo se evalúan para Metric Views con esa versión o superior.
 
 Esto se entiende mejor con un ejemplo:
 
 ```csharp {compile}
-// create a rule to check for underscores in field names
+// crear una regla para comprobar si hay guiones bajos en los nombres de los campos
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForField(
 	"no_underscores",
 	"naming",
-	"Do not include underscores in field names. Use user-friendly names with spaces.",
+	"No incluyas guiones bajos en los nombres de los campos. Usa nombres fáciles de leer con espacios.",
 	(field) => field.Name.Contains('_')
 	);
 ```
 
-This makes a rule that will apply to all [Metric View `Field`s](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field).
+Esto crea una regla que se aplicará a todos los [`Field`s de la Metric View](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field).
 La regla se llama (irónicamente) "no_underscores".
 Tiene la categoría "naming", para indicar que tiene que ver con cómo nombramos las cosas.
-The message you will see when the rule is violated is, "Do not include underscores in field names. Use nombres fáciles de leer con espacios."
-The last argument defines a function that will be called for each Metric View field in the model; its body is a boolean expression that returns `true` for a Metric View field with an underscore in its `Name` property.
+Los mensajes que verás cuando se infrinja la regla son: "No incluyas guiones bajos en los nombres de los campos. Use nombres fáciles de leer con espacios."
+El último argumento define una función a la que se llamará para cada campo de Metric View del modelo; su cuerpo es una expresión booleana que devuelve `true` para un campo de Metric View con un guion bajo en su propiedad `Name`.
 
 Aquí tienes un script completo que define una Metric View en línea y luego la deserializa y la valida, mostrando cómo se usa esta regla.
 
 ```csharp {run id=simple setup=none after=none output=true}
-// create a new simple Metric View
+// crear una nueva Metric View sencilla
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
     source: database.schema.table
@@ -104,15 +103,15 @@ SemanticBridge.MetricView.Deserialize("""
         expr: source.another_field_with_no_underscores
     """);
 
-// create a new validation rule
+// crear una nueva regla de validación
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Do not include underscores in field names. Use user-friendly names with spaces.",
+    "No incluyas guiones bajos en los nombres de los campos. Usa nombres fáciles de leer con espacios.",
     (field) => field.Name.Contains('_')
     );
 
-// run validation with the rule defined above and output the diagnostic messages
+// ejecutar la validación con la regla definida arriba y mostrar los mensajes de diagnóstico
 var sb = new System.Text.StringBuilder();
 foreach (var d in SemanticBridge.MetricView.Validate([myRule]))
 {
@@ -127,15 +126,15 @@ Output(sb.ToString());
 
 ```
 [Error] no_underscores Model.Fields["first_field"]
-     Do not include underscores in field names. Use user-friendly names with spaces.
+     No incluyas guiones bajos en los nombres de los campos. Usa nombres fáciles de leer con espacios.
 ```
 
-You can see that one of the Metric View fields has an underscore in its name.
+Puedes ver que uno de los campos de Metric View tiene un guion bajo en su nombre.
 Al ejecutar el script, verás un único mensaje de diagnóstico después de validar con la regla que definimos.
 Puedes ver los detalles que se proporcionan en el mensaje de diagnóstico:
 
-- Code: the name you assign to your rule
-- Context: not set by these helpers
+- Código: el nombre que le das a tu regla
+- Contexto: estos métodos auxiliares no se encargan de establecerlo
 - Mensaje: el mensaje que definiste en la regla
 - Ruta: una representación de dónde se encuentra ese objeto en la Vista de métricas
 - Gravedad: se establece en Error de forma predeterminada con estos métodos auxiliares
@@ -145,11 +144,11 @@ Puedes ver los detalles que se proporcionan en el mensaje de diagnóstico:
 Si quieres más control sobre el mensaje de diagnóstico y más flexibilidad en la función de validación, puedes usar `MakeValidationRule` mencionado arriba para crear una regla de validación contextual.
 
 ```csharp {run id=contextual setup=none after=none output=true}
-// necessary to use the Metric View object model
-// aliasing to avoid conflicts with same-named TOM objects
+// necesario para usar el modelo de objetos de Metric View
+// alias para evitar conflictos con objetos TOM que tienen el mismo nombre
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-// create a new simple Metric View
+// crear una nueva Metric View sencilla
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
     source: database.schema.table
@@ -160,7 +159,7 @@ SemanticBridge.MetricView.Deserialize("""
         expr: source.customer_id
     """);
 
-// create a new validation rule
+// crear una nueva regla de validación
 var myRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Field>(
     "no_aliased_fields",
     "modeling",
@@ -171,11 +170,11 @@ var myRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Field>(
             ? []
             : [context.MakeError(
                 "field_alias",
-                $"Field '{field.Name}' reuses source expression '{field.Expr}', already used by field '{original}'.",
+                $"El campo '{field.Name}' reutiliza la expresión de origen '{field.Expr}', que ya usa el campo '{original}'.",
                 field)];
     });
 
-// run validation with the rule defined above and output the diagnostic messages
+// ejecutar la validación con la regla definida arriba y mostrar los mensajes de diagnóstico
 var sb = new System.Text.StringBuilder();
 foreach (var d in SemanticBridge.MetricView.Validate([myRule]))
 {
@@ -190,19 +189,19 @@ Output(sb.ToString());
 
 ```
 [Error] field_alias Model.Fields["repeat_customer"]
-     Field 'repeat_customer' reuses source expression 'source.customer_id', already used by field 'customer'.
+     El campo 'repeat_customer' reutiliza la expresión de origen 'source.customer_id', que ya usa el campo 'customer'.
 ```
 
-This helper method requires you to pass the object type as a type parameter, and the validation function now is a two-parameter function, defined with the signature `(metricViewObject, context)`.
+Este método auxiliar requiere que pases el tipo de objeto como parámetro de tipo, y ahora la función de validación es una función de dos parámetros, definida con la firma `(metricViewObject, context)`.
 El primer parámetro es el objeto de Metric View para el que se evalúa la regla.
-The second parameter is an [`IReadOnlyValidationContext`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext).
-This context object holds collections with the names of already-checked objects;
-this means we can use it to inspect only objects already validated.
-The context object also has helper methods to make a new diagnostic message;
-the benefit here is that your message doesn't have to be a hard-coded string,
-but can include properties of the object you are checking.
-We use `MakeError`, and the context object also includes a `MakeWarning`.
-You can see in this example that we include in the message both the offending field and the field it aliases.
+El segundo parámetro es un [`IReadOnlyValidationContext`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext).
+Este objeto de contexto contiene colecciones con los nombres de los objetos que ya se han comprobado;
+lo que significa que podemos usarlo para inspeccionar solo los objetos ya validados.
+El objeto de contexto también incluye métodos auxiliares para crear nuevos mensajes de diagnóstico;
+la ventaja es que tus mensajes no tienen por qué ser cadenas codificadas de forma estática,
+sino que pueden incluir propiedades del objeto que estás comprobando.
+Usamos `MakeError`, y el objeto de contexto también incluye `MakeWarning`.
+En este ejemplo puedes ver que incluimos en los mensajes tanto el campo conflictivo como el campo del que es un alias.
 
 ![salida de un campo que infringe la regla de validación más compleja](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation2.png)
 
@@ -210,7 +209,7 @@ You can see in this example that we include in the message both the offending fi
 
 Es recomendable crear muchas reglas simples, en lugar de menos reglas más complejas.
 El proceso de validación es muy ligero, así que no hay problemas de rendimiento por tener muchas reglas.
-For example, if you want to make sure that Metric View field names are not `camelCased`, not `kebab-cased` and not `snake_cased`, it is better to make three separate rules, rather than trying to check for each of those conditions in a single rule.
+Por ejemplo, si quieres asegurarte de que los nombres de los campos de Metric View no estén en `camelCased`, ni en `kebab-cased` ni en `snake_cased`, es mejor crear tres reglas independientes en lugar de intentar comprobar cada una de esas condiciones en una sola regla.
 Esto permite que cada regla sea simple y que los mensajes sean muy específicos y, por tanto, más fáciles de solucionar.
 
 En general, cuando ya tienes una regla que detecta un problema concreto, es mejor dejarla tal cual en vez de editarla.
@@ -218,7 +217,7 @@ Si ves que a la regla le falta alguna condición que te gustaría detectar, solo
 
 Puedes guardar muchas reglas distintas en un C# Script para reutilizarlas con diferentes Metric Views.
 Como [una Metric View cargada es accesible desde varios scripts](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view), puedes guardar varios archivos C# Script que solo definan reglas y luego llamar a `SemanticBridge.MetricView.Validate` y reutilizar esos scripts de validación fácilmente.
-See the image below, where the script on the left, "deserialize-mv.csx" has already been run, to load a Metric View to Tabular Editor.
+Mira la imagen de abajo: el script de la izquierda, "deserialize-mv.csx", ya se ha ejecutado para cargar una Metric View en Tabular Editor.
 Después, se ejecuta el segundo script, a la derecha, "run-rules.csx", para validar.
 Este segundo script podría ser uno que tengas siempre a mano para todas tus Metric Views.
 
@@ -229,7 +228,7 @@ Los scripts se copian a continuación por comodidad, pero no son más que reorga
 **"deserialize-mv.csx"**
 
 ```csharp {run id=deserialize setup=none after=none output=false}
-// create a new simple Metric View
+// crear una nueva Metric View sencilla
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
     source: database.schema.table
@@ -244,19 +243,19 @@ SemanticBridge.MetricView.Deserialize("""
 **"run-rules.csx"**
 
 ```csharp {run id=run-rules setup=none after=deserialize output=true}
-// necessary to use the Metric View object model
-// aliasing to avoid conflicts with same-named TOM objects
+// necesario para usar el modelo de objetos de Metric View
+// uso de alias para evitar conflictos con objetos TOM del mismo nombre
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-//create a simple validation rule
+// crear una regla de validación sencilla
 var simpleRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Do not include underscores in field names. Use user-friendly names with spaces.",
+    "No incluyas guiones bajos en los nombres de los campos. Usa nombres claros con espacios.",
     (field) => field.Name.Contains('_')
     );
 
-// create a contextual validation rule
+// crear una regla de validación contextual
 var contextualRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Field>(
     "no_aliased_fields",
     "modeling",
@@ -267,11 +266,11 @@ var contextualRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Fie
             ? []
             : [context.MakeError(
                 "field_alias",
-                $"Field '{field.Name}' reuses source expression '{field.Expr}', already used by field '{original}'.",
+                $"El campo '{field.Name}' reutiliza la expresión de origen '{field.Expr}', ya utilizada por el campo '{original}'.",
                 field)];
     });
 
-// run validation with the rules defined above and output the diagnostic messages
+// ejecutar la validación con las reglas definidas arriba y mostrar los mensajes de diagnóstico
 var sb = new System.Text.StringBuilder();
 foreach (var d in SemanticBridge.MetricView.Validate([simpleRule, contextualRule]))
 {
@@ -286,10 +285,10 @@ Output(sb.ToString());
 
 ```
 [Error] no_underscores Model.Fields["repeat_customer"]
-     Do not include underscores in field names. Use user-friendly names with spaces.
+     No incluyas guiones bajos en los nombres de los campos. Usa nombres claros con espacios.
 
 [Error] field_alias Model.Fields["repeat_customer"]
-     Field 'repeat_customer' reuses source expression 'source.customer_id', already used by field 'customer'.
+     El campo 'repeat_customer' reutiliza la expresión de origen 'source.customer_id', ya utilizada por el campo 'customer'.
 ```
 
 ## Referencias
