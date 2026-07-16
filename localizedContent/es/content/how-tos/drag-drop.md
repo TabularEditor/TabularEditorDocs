@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Arrastrar y soltar objetos
+# Arrastrar y soltar objetos
 
 Con diferencia, la función más útil de Tabular Editor, al trabajar con modelos con muchas medidas y columnas organizadas en carpetas de visualización. Mira la animación a continuación:
 
