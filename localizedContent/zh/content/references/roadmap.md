@@ -19,7 +19,7 @@ applies_to:
 
 ## 开发中
 
-- **Semantic Bridge enhancements**: Enhanced import UI, support for multi-fact pattern
+- **Semantic Bridge 增强**：导入界面优化，支持多事实模式
 - **本地化改进**：扩展语言支持，并优化现有翻译
 - **Power Query (M) 自动格式化**：为 M 表达式提供更高级的格式化能力
 - **图形化模型比较**：查看将要应用的更改
@@ -52,7 +52,7 @@ applies_to:
 
 ✅ [**内置 Best Practice Analyzer 规则**](xref:built-in-bpa-rules) — 一套全面的 BPA 规则，覆盖格式化、元数据、模型布局、DAX 表达式和翻译（v3.25.0）
 
-✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0); support for Metric View v1.1 spec
+✅ **Semantic Bridge** - 从 Databricks Metric Views 创建语义模型（企业版，v3.25.0）；支持 Metric View v1.1 规范
 
 ✅ [**保存时附带 Fabric 支持文件**](xref:save-with-supporting-files) — 支持 .platform 和 definition.pbism 文件，以匹配 Fabric repository 结构（v3.25.0）
 
