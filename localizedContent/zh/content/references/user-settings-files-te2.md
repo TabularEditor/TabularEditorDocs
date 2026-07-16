@@ -9,7 +9,7 @@ applies_to:
       none: true
 ---
 
-## Tabular Editor 2 的用户设置文件
+# Tabular Editor 2 的用户设置文件
 
 启动 Tabular Editor 2 时，它会在磁盘的多个位置写入一些额外文件。 下面将说明这些文件及其内容：
 
