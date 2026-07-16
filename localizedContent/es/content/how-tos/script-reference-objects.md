@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Crear scripts y hacer referencia a objetos
+# Crear scripts y hacer referencia a objetos
 
 Puedes usar la función de arrastrar y soltar para generar scripts de objetos de las siguientes formas:
 

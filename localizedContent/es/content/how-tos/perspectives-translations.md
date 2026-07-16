@@ -10,7 +10,7 @@ applies_to:
       note: Incluye editores dedicados para perspectivas y traducciones
 ---
 
-## Trabajar con perspectivas y traducciones
+# Trabajar con perspectivas y traducciones
 
 Puedes agregar o editar perspectivas y traducciones (configuraciones regionales) existentes haciendo clic en el nodo Modelo del árbol del Explorador y buscando las propiedades correspondientes en la parte inferior de la cuadrícula de propiedades. Como alternativa, cuando el árbol del Explorador [muestre todos los tipos de objeto](../features/hierarchical-display.md), puedes ver y editar perspectivas, configuraciones regionales y roles directamente en el árbol.
 

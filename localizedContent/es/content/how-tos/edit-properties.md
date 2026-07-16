@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Edición de propiedades
+# Edición de propiedades
 
 La Cuadrícula de propiedades, situada en la parte inferior derecha de la pantalla, muestra la mayoría de las propiedades del objeto(s) seleccionado en el Árbol del Explorador. Si seleccionas varios objetos a la vez, la Cuadrícula de propiedades te permite editar simultáneamente las propiedades de los objetos seleccionados. Esto resulta útil, por ejemplo, al establecer la propiedad "Cadena de formato". Ejemplos de propiedades que puedes establecer mediante la Cuadrícula de propiedades:
 

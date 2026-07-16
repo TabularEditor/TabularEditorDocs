@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Conectar/implementar en bases de datos tabulares de SSAS
+# Conectar/implementar en bases de datos tabulares de SSAS
 
 Al pulsar CTRL+SHIFT+O, puedes abrir un modelo tabular directamente desde una base de datos tabular que ya se ha implementado. Introduce la dirección del servidor y (opcionalmente) proporciona un nombre de usuario y una contraseña. Después de hacer clic en "Aceptar", se te mostrará una lista de las bases de datos del servidor. Selecciona la que quieras cargar y haz clic en "Aceptar" de nuevo.
 

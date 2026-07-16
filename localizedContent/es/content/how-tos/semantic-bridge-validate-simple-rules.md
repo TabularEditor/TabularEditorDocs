@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-simple-rules
 title: Crear reglas de validación sencillas
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,13 +23,17 @@ applies_to:
 Esta guía muestra cómo crear reglas de validación sencillas basadas en predicados para aplicar convenciones de nomenclatura y requisitos estructurales.
 Estas reglas se incluyen solo con fines ilustrativos y no reflejan necesariamente requisitos técnicos estrictos ni de Metric Views ni del Semantic Bridge.
 
+> [!NOTE]
+> Estas guías están pensadas para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
+
 ## Los cuatro métodos auxiliares para reglas
 
 Hay un método auxiliar para cada tipo de objeto de Metric View:
 
 - `MakeValidationRuleForView`: reglas para el objeto View raíz
 - `MakeValidationRuleForJoin`: reglas para objetos Join
-- `MakeValidationRuleForDimension`: reglas para objetos Dimension
+- `MakeValidationRuleForField`: reglas para objetos de tipo Field
 - `MakeValidationRuleForMeasure`: reglas para objetos de medida
 
 Cada método auxiliar acepta cuatro parámetros:
@@ -43,7 +47,7 @@ Cada método auxiliar acepta cuatro parámetros:
 
 Compruebe que el valor de la versión de Metric View sea el esperado:
 
-```csharp
+```csharp {compile}
 var versionRule = SemanticBridge.MetricView.MakeValidationRuleForView(
     "version_check",
     "structure",
@@ -56,7 +60,7 @@ var versionRule = SemanticBridge.MetricView.MakeValidationRuleForView(
 
 Compruebe que los orígenes de join de Metric View utilicen nombres de tabla totalmente cualificados (contienen un punto):
 
-```csharp
+```csharp {compile}
 var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
     "qualified_source",
     "structure",
@@ -65,16 +69,16 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
 );
 ```
 
-## Regla para la dimensión de Metric View
+## Regla para el campo de Metric View
 
-Compruebe que los nombres de las dimensiones de Metric View no contengan guiones bajos:
+Comprueba que los nombres de los campos de Metric View no contengan guiones bajos:
 
-```csharp
-var dimensionNameRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
+```csharp {compile}
+var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Los nombres de las dimensiones deben usar espacios, no guiones bajos",
-    (dim) => dim.Name.Contains('_')
+    "Los nombres de los campos deben usar espacios, no guiones bajos",
+    (field) => field.Name.Contains('_')
 );
 ```
 
@@ -82,7 +86,7 @@ var dimensionNameRule = SemanticBridge.MetricView.MakeValidationRuleForDimension
 
 Compruebe que las expresiones de las medidas de Metric View no contengan SELECT (para evitar subconsultas accidentales):
 
-```csharp
+```csharp {compile}
 var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
     "no_select_subquery",
     "structure",
@@ -91,22 +95,39 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 );
 ```
 
+## Reglas para versiones específicas de Metric View
+
+Cada función auxiliar tiene una sobrecarga que acepta un argumento final `minVersion`, una cadena como "0.1" o "1.1".
+Las reglas definidas con `minVersion` solo se ejecutan en Metric Views de esa versión o superior.
+Esto resulta útil para una regla que compruebe una propiedad introducida en una versión posterior,
+como `display_name` (añadida en v1.1):
+
+```csharp {compile}
+var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
+    "field_display_name_required",
+    "naming",
+    "Los campos deben tener establecido un nombre para mostrar",
+    (field) => string.IsNullOrEmpty(field.DisplayName),
+    "1.1"
+);
+```
+
 ## Ejemplo completo
 
 Esta Metric View tiene infracciones en cada una de las reglas definidas anteriormente:
 
-```csharp
-// Cree una Metric View con infracciones para cada regla
+```csharp {run id=complete setup=mv-sample after=none output=true}
+// Crea una Metric View con infracciones para cada regla
 SemanticBridge.MetricView.Deserialize("""
-    version: 0.2 # 0,2
+    version: 0.2
     source: sales.fact.orders
     joins:
-      # infracción de joinSourceRule: no está totalmente cualificado
+      # Infracción de joinSourceRule: no está totalmente cualificado
       - name: customer
         source: customer_table
         on: source.customer_id = customer.customer_id
-    dimensions:
-      # infracciones de dimensionNameRule: contiene guiones bajos
+    fields:
+      # Infracciones de fieldNameRule: contienen guiones bajos
       - name: product_name
         expr: source.product_name
       - name: order_date
@@ -115,7 +136,7 @@ SemanticBridge.MetricView.Deserialize("""
       - name: Category
         expr: source.category
     measures:
-      # infracción de measureExprRule: contiene una subconsulta SELECT
+      # Infracción de measureExprRule: contiene una subconsulta SELECT
       - name: complex_calc
         expr: (SELECT MAX(price) FROM products)
       # Este está bien
@@ -126,7 +147,7 @@ SemanticBridge.MetricView.Deserialize("""
 var versionRule = SemanticBridge.MetricView.MakeValidationRuleForView(
     "version_check",
     "structure",
-    "La versión de Metric View debe ser 0,1 o 1,1; solo se admiten 0,1 y 1,1",
+    "La versión de Metric View debe ser 0.1 o 1.1",
     (view) => view.Version != "0.1" && view.Version != "1.1"
 );
 
@@ -137,11 +158,11 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
     (join) => !join.Source.Contains('.')
 );
 
-var dimensionNameRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
+var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Los nombres de las dimensiones deben usar espacios, no guiones bajos",
-    (dim) => dim.Name.Contains('_')
+    "Los nombres de los campos deben usar espacios, no guiones bajos",
+    (field) => field.Name.Contains('_')
 );
 
 var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
@@ -151,15 +172,15 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
     (measure) => measure.Expr.ToUpper().Contains("SELECT")
 );
 
-// Ejecute la validación con reglas personalizadas
+// Ejecuta la validación con reglas personalizadas
 var diagnostics = SemanticBridge.MetricView.Validate([
     versionRule,
     joinSourceRule,
-    dimensionNameRule,
+    fieldNameRule,
     measureExprRule
 ]).ToList();
 
-// Muestre los resultados
+// Muestra los resultados
 var sb = new System.Text.StringBuilder();
 sb.AppendLine("RESULTADOS DE LA VALIDACIÓN PERSONALIZADA");
 sb.AppendLine("-------------------------");
@@ -183,18 +204,17 @@ RESULTADOS DE LA VALIDACIÓN PERSONALIZADA
 
 Se han encontrado 5 problema(s):
 
-[Error] MetricView: La versión de Metric View debe ser 0,1 o 1,1
-[Error] MetricView.Joins['customer']: El origen del join debe ser un nombre de tabla totalmente cualificado (p. ej., `catalog.schema.table`)
-[Error] MetricView.Dimensions['product_name']: Los nombres de las dimensiones deben usar espacios, no guiones bajos
-[Error] MetricView.Dimensions['order_date']: Los nombres de las dimensiones deben usar espacios, no guiones bajos
-[Error] MetricView.Measures['complex_calc']: Las expresiones de las medidas no deben contener subconsultas SELECT
+[Error] Model: La versión de Metric View debe ser 0.1 o 1.1
+[Error] Model.Joins["customer"]: El origen del join debe ser un nombre de tabla totalmente cualificado (p. ej., `catalog.schema.table`)
+[Error] Model.Fields["product_name"]: Los nombres de los campos deben usar espacios, no guiones bajos
+[Error] Model.Fields["order_date"]: Los nombres de los campos deben usar espacios, no guiones bajos
+[Error] Model.Measures["complex_calc"]: Las expresiones de las medidas no deben contener subconsultas SELECT
 ```
 
 ## Próximos pasos
 
-- [Cree reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules) para comprobaciones entre objetos, como la detección de duplicados
+- [Crear reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules)
 
 ## Ver también
 
 - [Validación de Semantic Bridge](xref:semantic-bridge-metric-view-validation)
-- [Valide con reglas predeterminadas](xref:semantic-bridge-validate-default)

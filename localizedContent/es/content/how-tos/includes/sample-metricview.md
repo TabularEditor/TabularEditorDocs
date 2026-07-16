@@ -1,38 +1,40 @@
-Este tutorial paso a paso utiliza una Vista de Métricas de comercio electrónico de ejemplo que representa datos de ventas, con tres tablas de dimensiones (producto, cliente y fecha) unidas a una tabla de hechos (pedidos).
+## Carga la Metric View de ejemplo para estas muestras de código
 
-```yaml
-version: 0.1
-source: sales.fact.orders
-joins:
-  - name: product
-    source: sales.dim.product
-    on: source.product_id = product.product_id
-  - name: customer
-    source: sales.dim.customer
-    on: source.customer_id = customer.customer_id
-  - name: date
-    source: sales.dim.date
-    on: source.order_date = date.date_key
-dimensions:
-  - name: product_name
-    expr: product.product_name
-  - name: product_category
-    expr: product.category
-  - name: customer_segment
-    expr: customer.segment
-  - name: order_date
-    expr: date.full_date
-  - name: order_year
-    expr: date.year
-  - name: order_month
-    expr: date.month_name
-measures:
-  - name: total_revenue
-    expr: SUM(revenue)
-  - name: order_count
-    expr: COUNT(order_id)
-  - name: avg_order_value
-    expr: AVG(revenue)
-  - name: unique_customers
-    expr: COUNT(DISTINCT customer_id)
+Antes de empezar, asegúrate de tener abierto Tabular Editor 3 y de haber abierto un modelo tabular, o crea uno nuevo.
+
+Este tutorial paso a paso utiliza una Vista de Métricas de comercio electrónico de ejemplo que representa datos de ventas, con tres tablas de dimensiones (producto, cliente y fecha) unidas a una tabla de hechos (pedidos).
+Usa cualquiera de los métodos siguientes para cargarla («Descargar y cargar» o «Copiar y deserializar»),
+y luego sigue con el resto de esta guía paso a paso.
+Puedes ejecutar cualquiera de los dos comandos en el mismo C# Script que el resto de este ejemplo,
+o puedes ejecutarlo primero en su propio C# Script y el resto del ejemplo en otro C# Script.
+
+<noscript>
+<style>
+  /* Alternativa sin JS: muestra todos los paneles de pestañas apilados para que todo el contenido siga siendo accesible cuando el
+     script de pestañas no se ejecuta. Con los scripts habilitados, este bloque se ignora y las pestañas funcionan con normalidad. */
+  .tabGroup section[role="tabpanel"][hidden] { display: block !important; }
+</style>
+</noscript>
+
+# [Descargar y cargar](#tab/load)
+
+[Descarga `sample-metricview.yaml`](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/how-tos/includes/sample-metricview.yaml)
+y cárgalo indicando la ruta:
+
+```csharp
+SemanticBridge.MetricView.Load("C:/path/to/sample-metricview.yaml");
 ```
+
+# [Copiar y deserializar](#tab/deserialize)
+
+Copia la definición siguiente y pásala a `Deserialize` como una cadena:
+
+```csharp
+SemanticBridge.MetricView.Deserialize("""
+    <PLACEHOLDER: copy and paste the YAML shown below, indented within the triple quotes here>
+    """);
+```
+
+[!code-yaml[Metric View de ejemplo](sample-metricview.yaml)]
+
+***

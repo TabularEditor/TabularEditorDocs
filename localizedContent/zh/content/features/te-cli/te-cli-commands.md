@@ -142,18 +142,18 @@ te list 'Roles/Re*/Members'            # Members of every role matching Re*
 
 这些标志适用于每个命令，可在子命令名称之前或之后使用。
 
-| 选项                         | 说明                                                                                                                                                                                 |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-m, --model <path>`       | 语义模型的路径（TMDL 文件夹、`.bim` 文件、`Database.json` 文件夹或 `.SemanticModel` 文件夹）。                                                                                                             |
-| `-s, --server <endpoint>`  | Workspace 名称或终结点（例如 `MyWorkspace`、`powerbi://...`、`asazure://...`、`localhost`）。                                                                                                    |
-| `-d, --database <name>`    | Workspace 上的语义模型名称。                                                                                                                                                                |
-| `--local`                  | 连接到本地运行的 Power BI Desktop 实例（仅限 Windows）。                                                                                                                                          |
-| `--auth <method>`          | 身份验证方法：`auto`、`interactive`、`spn`、`env`、`managed-identity`（默认值：`auto`）。                                                                                                            |
-| `--output-format <format>` | 标准输出格式：`text` (默认)、`json`、`csv`、`tmsl` (别名 `bim`)、`tmdl`。 输出表格数据的命令会识别 `csv`；`tmsl`/`tmdl` 仅由 `te get` 和 `te list` 用于整个对象的序列化。 命令会拒绝其不支持的格式。 |
-| `--error-format <format>`  | 用于错误、警告和提示的 stderr 格式：`text`（默认）或 `json`。 其他值将回退为 `text`。 它独立于 `--output-format`，因此你可以将 JSON 格式的 stdout 与纯文本错误配合使用（反之亦然）。                                                          |
-| `--recent [N]`             | 使用最近使用过的模型。 未提供值 = 进入交互式选择器；`N` = 最近使用列表中的第 N 个（1 = 最近一次使用）。                                                                                                                       |
-| `--non-interactive`        | 禁用所有交互式提示。 如果缺少必需输入，将给出可操作的错误提示并失败退出。                                                                                                                                              |
-| `--debug`                  | 启用调试日志并输出到 stderr（连接字符串、身份验证流程、耗时）。                                                                                                                                                |
+| 选项                         | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-m, --model <path>`       | 语义模型的路径（TMDL 文件夹、`.bim` 文件、`Database.json` 文件夹或 `.SemanticModel` 文件夹）。                                                                                                                                                                                                                                                                                                                                                                 |
+| `-s, --server <endpoint>`  | Analysis Services 端点或 Power BI Workspace。 服务器名称/FQDN（`MY.SERVER.COM`）、IP 地址（`192.168.1.1`）、`host:port`、`localhost`、`SERVER\\INSTANCE`、`asazure://...` 或 MSOLAP 连接字符串可用于直接连接到 Analysis Services / AAS。 单一标记名称（`MyWorkspace`）、Fabric `Name.Workspace[/Model.SemanticModel]` 路径或 `powerbi://...` URL 会指向 Power BI Workspace。 名称中包含点号的 Workspace 无法与服务器名称区分，因此会被视为服务器，CLI 会输出警告；如需指向 Power BI，请使用其 `.Workspace` 形式或完整的 `powerbi://` URL。 |
+| `-d, --database <name>`    | Workspace 上的语义模型名称。                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `--local`                  | 连接到本地运行的 Power BI Desktop 实例（仅限 Windows）。                                                                                                                                                                                                                                                                                                                                                                                              |
+| `--auth <method>`          | 身份验证方法：`auto`、`interactive`、`spn`、`env`、`managed-identity`（默认值：`auto`）。                                                                                                                                                                                                                                                                                                                                                                |
+| `--output-format <format>` | 标准输出格式：`text` (默认)、`json`、`csv`、`tmsl` (别名 `bim`)、`tmdl`。 输出表格数据的命令会识别 `csv`；`tmsl`/`tmdl` 仅由 `te get` 和 `te list` 用于整个对象的序列化。 命令会拒绝其不支持的格式。                                                                                                                                                                                                                                                     |
+| `--error-format <format>`  | 用于错误、警告和提示的 stderr 格式：`text`（默认）或 `json`。 其他值将回退为 `text`。 它独立于 `--output-format`，因此你可以将 JSON 格式的 stdout 与纯文本错误配合使用（反之亦然）。                                                                                                                                                                                                                                                                                                              |
+| `--recent [N]`             | 使用最近使用过的模型。 未提供值 = 进入交互式选择器；`N` = 最近使用列表中的第 N 个（1 = 最近一次使用）。                                                                                                                                                                                                                                                                                                                                                                           |
+| `--non-interactive`        | 禁用所有交互式提示。 如果缺少必需输入，将给出可操作的错误提示并失败退出。                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `--debug`                  | 启用调试日志并输出到 stderr（连接字符串、身份验证流程、耗时）。                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 `te --version` 会打印 CLI 版本并退出。
 
@@ -834,11 +834,11 @@ te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form w
 
 ### deploy
 
-将语义模型部署到 Power BI、Fabric 或 Azure Analysis Services。
+将语义模型部署到 Power BI、Fabric、Azure Analysis Services 或本地 SQL Server Analysis Services。
 
 `te deploy` 支持以下参数：
 
-- `-s, --server` / `-d, --database` - 目标 Workspace 和模型。
+- `-s, --server` / `-d, --database` - 指定目标服务器/Workspace 和模型。 使用服务器名称、FQDN、IP 地址或 MSOLAP 连接字符串时，会部署到 Analysis Services（本地环境使用 Windows 集成身份验证）；使用 Workspace 名称或 `powerbi://...` URL 时，会部署到 Power BI。 有关 `-s` 的含义，请参阅 [全局选项](#global-options) 表。
 - `--deploy-full` - 覆盖现有内容，并同时部署连接、分区、共享表达式、角色及角色成员。
 - `--deploy-connections`
 - `--deploy-partitions`
@@ -857,6 +857,7 @@ te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form w
 
 ```bash
 te deploy ./model -s my-workspace -d my-model --force --ci github
+te deploy ./model -s MY.SERVER.COM -d my-model --force    # On-prem SSAS (Integrated auth)
 te deploy ./model --xmla script.tmsl    # Generate TMSL only
 te deploy ./model --profile staging --force
 ```

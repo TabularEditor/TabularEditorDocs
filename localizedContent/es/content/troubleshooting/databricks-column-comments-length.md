@@ -150,15 +150,13 @@ Si nunca has creado un archivo .ini, sigue estos pasos detallados:
    ```
 
 3. **Guarda el archivo:**
+
    - Haz clic en **Archivo > Guardar como**
-
    - Navega hasta `C:\Program Files\Simba Spark ODBC Driver\`
-
    - En la lista desplegable **Guardar como tipo**, selecciona **Todos los archivos (_._)** (¡importante!)
-
    - En el campo **Nombre de archivo**, escribe exactamente: **microsoft.sparkodbc.ini**
-
    - Haga clic en **Guardar**
+
    > [!IMPORTANT]> Asegúrate de seleccionar "Todos los archivos" como tipo de archivo; de lo contrario, el Bloc de notas lo guardará como microsoft.sparkodbc.ini.txt y no funcionará.
 
 4. **Comprueba que el archivo se creó correctamente:**

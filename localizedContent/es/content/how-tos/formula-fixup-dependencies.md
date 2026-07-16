@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Corrección automática de fórmulas y dependencias de fórmulas
+# Corrección automática de fórmulas y dependencias de fórmulas
 
 Tabular Editor analiza continuamente las expresiones DAX de todas las medidas, columnas calculadas y tablas calculadas de tu modelo para construir un árbol de dependencias de estos objetos. Este árbol de dependencias se usa para la funcionalidad de Corrección automática de fórmulas, que puedes habilitar en "Archivo" > "Preferencia". La Corrección automática de fórmulas actualiza la expresión DAX de cualquier medida, columna calculada o tabla calculada cada vez que se cambia el nombre de un objeto al que se hacía referencia en la expresión.
 

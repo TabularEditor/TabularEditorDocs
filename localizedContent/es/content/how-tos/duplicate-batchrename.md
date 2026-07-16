@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Duplicar objetos y renombrar en lote
+# Duplicar objetos y renombrar en lote
 
 El menú contextual, accesible con clic derecho, del árbol del Explorador le permite duplicar medidas y columnas. Los objetos duplicados tendrán el sufijo "copy" al final del nombre. Además, puede realizar cambios de nombre en lote seleccionando varios objetos y haciendo clic con el botón derecho en el árbol del Explorador.
 

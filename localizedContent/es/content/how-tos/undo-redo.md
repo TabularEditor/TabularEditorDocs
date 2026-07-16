@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Compatibilidad con Deshacer/Rehacer
+# Compatibilidad con Deshacer/Rehacer
 
 Cualquier cambio que hagas en Tabular Editor se puede deshacer con CTRL+Z y, a continuación, rehacer con CTRL+Y. No hay límite en el número de operaciones que se pueden deshacer, pero la pila se restablece cuando abres un archivo Model.bim o cargas un modelo desde una base de datos.
 

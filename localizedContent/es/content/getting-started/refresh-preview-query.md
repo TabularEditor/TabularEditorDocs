@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Actualización, vista previa y consulta de datos
 author: Daniel Otykier
-updated: 2026-01-08
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -84,7 +84,15 @@ En determinados momentos, durante la creación de DAX y el desarrollo del Data m
 
 ![Preview Data](~/content/assets/images/preview-data-big.png)
 
-Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Además, puedes ordenar o filtrar columnas individuales. No hay un límite práctico para el número de filas que se pueden previsualizar. Tabular Editor simplemente ejecuta una consulta DAX [`TOPNSKIP`](https://dax.guide/topnskip) contra el modelo y devuelve solo un número reducido de registros, suficiente para rellenar la vista actual.
+Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Además, puedes ordenar o filtrar columnas individuales. Tabular Editor ejecuta una consulta DAX sobre el modelo para devolver solo un pequeño número de registros, suficiente para completar la vista actual, y luego va cargando más filas a medida que te desplazas.
+
+El funcionamiento de la paginación depende del modo de almacenamiento y del motor:
+
+- En las tablas Import en motores que admiten la función [`WINDOW`](https://dax.guide/window), la paginación usa `WINDOW` sobre la clave principal de la tabla, por lo que puedes desplazarte por toda la tabla.
+- Si el motor no admite `WINDOW` o la tabla no tiene clave primaria, la vista previa muestra las primeras filas e indica que el desplazamiento está deshabilitado.
+- Las tablas DirectQuery solo muestran las primeras filas — no es posible paginar — junto con mensajes informativos.
+
+Los metadatos de la vista previa se almacenan en caché durante la sesión, por lo que volver a abrir una vista previa no vuelve a consultar el servidor. Haz clic en **Actualizar** para volver a leer los metadatos, por ejemplo, después de que el modelo se haya procesado fuera de Tabular Editor.
 
 Si una o más columnas calculadas están en un estado no válido, esas columnas contienen el texto _(Calculation needed)_. Puedes recalcular la tabla haciendo clic con el botón derecho en la columna y eligiendo la opción **Recalcular tabla...**.
 

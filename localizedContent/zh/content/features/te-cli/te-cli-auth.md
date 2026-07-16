@@ -111,6 +111,9 @@ te connect ./my-model
 # Connect to a running Power BI Desktop instance (Windows only)
 te connect --local
 
+# Filter by report name when multiple Power BI Desktop instances are running
+te connect --local my-report
+
 # Show the active connection
 te connect
 

@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Copia de seguridad de metadatos
+# Copia de seguridad de metadatos
 
 Si lo deseas, Tabular Editor puede guardar automáticamente una copia de seguridad de los metadatos del modelo existente antes de cada guardado (cuando estés conectado a una base de datos existente) o despliegue. Esto resulta útil si no utilizas un sistema de control de versiones, pero aun así necesitas revertir a una versión anterior de tu modelo.
 

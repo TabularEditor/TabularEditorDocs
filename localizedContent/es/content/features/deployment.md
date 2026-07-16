@@ -15,7 +15,7 @@ applies_to:
           full: true
 ---
 
-## Implementación del modelo
+# Implementación del modelo
 
 Tabular Editor 3 (Edición Business y Edición Enterprise) puede tomar una copia de los metadatos del modelo semántico cargado actualmente y desplegarla en una instancia de Analysis Services o en el punto de conexión XMLA de Power BI / Fabric.
 

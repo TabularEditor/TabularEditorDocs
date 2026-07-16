@@ -15,7 +15,7 @@ applies_to:
           full: true
 ---
 
-## 层级显示
+# 层级显示
 
 已加载模型中的对象会显示在 TOM Explorer 树状视图中。 默认情况下，会显示所有对象类型（可见表、角色、关系等） 都会显示。 如果只想查看表、度量值、列和层级结构，请在“View”菜单中关闭“Show all object types”。
 
