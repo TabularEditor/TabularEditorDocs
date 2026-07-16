@@ -4,8 +4,9 @@
 # Check that all required tooling is installed
 #
 # Verifies every dependency the run commands need: Python >= 3.11, uvx,
-# and shellcheck, plus docfx (either the repo-local dotnet tool or a global
-# install). Reports everything that is missing in one pass; installs nothing.
+# and shellcheck, the te CLI, plus docfx (either the repo-local dotnet tool
+# or a global install). Reports everything that is missing in one pass;
+# installs nothing.
 #
 # Usage:
 #   ./run setup
@@ -38,7 +39,7 @@ check () {
 	local failed=0
 	# dotnet is not in this list: _docfx_ok requires it only when no global
 	# docfx exists, so it is reported exactly once and only when relevant.
-	require python shellcheck uvx || failed=1
+	require python shellcheck te uvx || failed=1
 	if ! _docfx_ok; then
 		error "docfx not found: neither 'dotnet docfx --version' nor 'docfx --version' succeeded."
 		info 'See build_scripts/run_scripts/README.md for installation instructions.'

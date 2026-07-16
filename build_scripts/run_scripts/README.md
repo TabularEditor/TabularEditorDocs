@@ -19,14 +19,15 @@ problems in one pass. It installs nothing.
 
 ## Requirements
 
-| Tool       | Needed by                                | Notes                                                                       |
-|------------|------------------------------------------|-----------------------------------------------------------------------------|
-| bash       | everything                               | 3.2+; Git Bash on Windows, but available by default on most other platforms |
-| Python     | `build`, `serve`, `watch`, `check-links` | 3.11 or newer                                                               |
-| dotnet     | docfx install and hosting                | .NET SDK 8.0 or newer                                                       |
-| docfx      | `build`, `serve`, `watch`                | local dotnet tool or global                                                 |
-| uvx        | `lint` (Python sources)                  | part of [uv](https://docs.astral.sh/uv/)                                    |
-| shellcheck | `lint` (shell sources)                   |                                                                             |
+| Tool       | Needed by                                           | Notes                                                       |
+|------------|-----------------------------------------------------|-------------------------------------------------------------|
+| bash       | everything                                          | 3.2+; Git Bash on Windows; included on most other platforms |
+| Python     | `build`, `serve`, `watch`, `check-links`, `doctest` | 3.11 or newer                                               |
+| dotnet     | docfx install and hosting                           | .NET SDK 8.0 or newer                                       |
+| docfx      | `build`, `serve`, `watch`                           | local dotnet tool or global                                 |
+| uvx        | `lint` (Python sources)                             | part of [uv](https://docs.astral.sh/uv/)                    |
+| shellcheck | `lint` (shell sources)                              |                                                             |
+| te         | `doctest` (all but validate)                        | Tabular Editor CLI                                          |
 
 The first `./run lint` needs network access: uvx downloads ruff and mypy into
 its cache on first use.
@@ -42,6 +43,7 @@ If you prefer, though, you can follow these links to each tool's official instal
 - docfx: https://dotnet.github.io/docfx/
 - uv: https://docs.astral.sh/uv/#installation
 - shellcheck: https://github.com/koalaman/shellcheck#user-content-installing
+- te (Tabular Editor CLI): https://tabulareditor.com/download-tabular-editor-cli
 
 ### Linux
 
@@ -85,6 +87,15 @@ dotnet tool restore
 
 If you are running a `dotnet` older than 10.0, run `dotnet new tool-manifest` first.
 
+### te CLI (all platforms)
+
+The te CLI is installed the same way on every platform: sign in at
+[tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli),
+download the archive for your platform and architecture, extract it, and put
+`te` on your PATH (or point `RUN_TE` at it). Full instructions, including
+verification, live in this repo's own docs:
+[te CLI install guide](../../content/features/te-cli/te-cli-install.md).
+
 ## Usage
 
 The most common commands are provided below for reference.
@@ -105,6 +116,11 @@ All sub-commands provide help text at the command line.
 - Check the built site for broken links (needs a built site: run `./run build` first)
   - `./run check-links`: full check; fetches every unique external URL once, so it needs network access and can take a while
   - `./run check-links local`: offline; on-disk files and anchors only
+- Test the annotated C# code blocks in the docs (needs the te CLI); without file args, automatically discovers all markdown files with annotated C# code blocks.
+  - `./run doctest`: compile and run all annotated code blocks; compare results to `**Output**` blocks, but do not update files
+  - `./run doctest file1.md file2.md`: same, for exactly the named files
+  - `./run doctest update`: compile, run, and replace `**Output**` blocks in all markdown files with annotated code blocks
+  - `./run doctest update file1.md path/to/file2.md`: same, but only for the named files.
 - Clean build artifacts: `./run clean`
 - Get help:
   - `./run help`: print top-level help for the `run` dispatcher and list all subcommands
@@ -113,7 +129,7 @@ All sub-commands provide help text at the command line.
 ### Dependency overrides
 
 Every external tool (e.g., python, uvx, shellcheck) can be pinned to a specific executable with a `RUN_<TOOL>` environment variable:
-`RUN_PYTHON`, `RUN_UVX`, `RUN_SHELLCHECK`.
+`RUN_PYTHON`, `RUN_UVX`, `RUN_SHELLCHECK`, `RUN_TE`.
 When set, that path is the only candidate checked; there is no fallback to PATH. Example:
 
 ```bash

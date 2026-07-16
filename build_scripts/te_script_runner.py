@@ -28,6 +28,7 @@ Usage:
 """
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -36,7 +37,10 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, NamedTuple
 
-DEFAULT_TE_BIN = "te"
+# RUN_TE is the ./run tooling's override convention (see
+# build_scripts/run_scripts/README.md); honoring it here means a pinned te
+# applies to everything built on this module.
+DEFAULT_TE_BIN = os.environ.get("RUN_TE", "te")
 _WORKDIR_PREFIX = "te-script-run."
 # Emitted between the next-to-last and last script when last_only is set, so the runner
 # can report only the final script's output. Chosen to be absent from any real output.
