@@ -24,8 +24,8 @@ applies_to:
 这是进行其他所有 Metric View 操作的基础。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
+> 较早版本不支持本文所示的 v1.1 指标视图功能。
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
@@ -46,8 +46,8 @@ Output(sb.ToString());
 **输出**
 
 ```
-Version: 1.1
-Source (fact table): sales.fact.orders
+版本: 1.1
+源（事实表）: sales.fact.orders
 ```
 
 ## 检查 Metric View 的连接（维度表）
@@ -58,15 +58,15 @@ Metric View 的 `Joins` 属性包含与事实表连接的维度表。
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of joins: {view.Joins.Count}");
+sb.AppendLine($"联接数量: {view.Joins.Count}");
 sb.AppendLine("");
 
 foreach (var join in view.Joins)
 {
-    sb.AppendLine($"Join: {join.Name}");
-    sb.AppendLine($"  Source: {join.Source}");
-    sb.AppendLine($"  On: {join.On}");
-    sb.AppendLine($"  Cardinality: {join.Cardinality?.ToString() ?? "ManyToOne (default)"}");
+    sb.AppendLine($"联接: {join.Name}");
+    sb.AppendLine($"  来源: {join.Source}");
+    sb.AppendLine($"  连接条件: {join.On}");
+    sb.AppendLine($"  基数: {join.Cardinality?.ToString() ?? "ManyToOne（默认）"}");
     sb.AppendLine("");
 }
 
@@ -76,33 +76,33 @@ Output(sb.ToString());
 **输出：**
 
 ```
-Number of joins: 3
+联接数量: 3
 
-Join: product
-  Source: sales.dim.product
-  On: source.product_id = product.product_id
-  Cardinality: ManyToOne
+联接: product
+  来源: sales.dim.product
+  连接条件: source.product_id = product.product_id
+  基数: ManyToOne
 
-Join: customer
-  Source: sales.dim.customer
-  On: source.customer_id = customer.customer_id
-  Cardinality: ManyToOne
+联接: customer
+  来源: sales.dim.customer
+  连接条件: source.customer_id = customer.customer_id
+  基数: ManyToOne
 
-Join: date
-  Source: sales.dim.date
-  On: source.order_date = date.date_key
-  Cardinality: ManyToOne
+联接: date
+  来源: sales.dim.date
+  连接条件: source.order_date = date.date_key
+  基数: ManyToOne
 ```
 
-## Inspect Metric View fields
+## 检查指标视图字段
 
-The Metric View `Fields` property contains all field definitions.
+指标视图的 `Fields` 属性包含所有字段定义。
 
 ```csharp {run id=fields setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of fields: {view.Fields.Count}");
+sb.AppendLine($"字段数量: {view.Fields.Count}");
 sb.AppendLine("");
 
 foreach (var field in view.Fields)
@@ -116,7 +116,7 @@ Output(sb.ToString());
 **输出：**
 
 ```
-Number of fields: 6
+字段数量: 6
 
 product_name         <- product.product_name
 product_category     <- product.category
@@ -134,7 +134,7 @@ Metric View 的 `Measures` 属性包含所有 Metric View 度量值定义及其�
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of measures: {view.Measures.Count}");
+sb.AppendLine($"度量值数量: {view.Measures.Count}");
 sb.AppendLine("");
 
 foreach (var measure in view.Measures)
@@ -148,7 +148,7 @@ Output(sb.ToString());
 **输出：**
 
 ```
-Number of measures: 6
+度量值数量: 6
 
 total_revenue        = SUM(revenue)
 gross_margin         = SUM(revenue) - SUM(cost)
@@ -166,15 +166,15 @@ unique_customers     = COUNT(DISTINCT customer_id)
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine("METRIC VIEW SUMMARY");
+sb.AppendLine("指标视图摘要");
 sb.AppendLine("===================");
 sb.AppendLine("");
-sb.AppendLine($"Version: {view.Version}");
-sb.AppendLine($"Fact Source: {view.Source}");
+sb.AppendLine($"版本: {view.Version}");
+sb.AppendLine($"事实数据源: {view.Source}");
 sb.AppendLine("");
 
 // Joins
-sb.AppendLine($"JOINS ({view.Joins.Count})");
+sb.AppendLine($"联接 ({view.Joins.Count})");
 sb.AppendLine("---------");
 foreach (var join in view.Joins)
 {
@@ -183,7 +183,7 @@ foreach (var join in view.Joins)
 sb.AppendLine("");
 
 // Fields
-sb.AppendLine($"FIELDS ({view.Fields.Count})");
+sb.AppendLine($"字段 ({view.Fields.Count})");
 sb.AppendLine("--------------");
 foreach (var field in view.Fields)
 {
@@ -192,7 +192,7 @@ foreach (var field in view.Fields)
 sb.AppendLine("");
 
 // Measures
-sb.AppendLine($"MEASURES ({view.Measures.Count})");
+sb.AppendLine($"度量值 ({view.Measures.Count})");
 sb.AppendLine("------------");
 foreach (var measure in view.Measures)
 {
@@ -205,19 +205,19 @@ Output(sb.ToString());
 **输出**
 
 ```
-METRIC VIEW SUMMARY
+指标视图摘要
 ===================
 
-Version: 1.1
-Fact Source: sales.fact.orders
+版本: 1.1
+事实数据源: sales.fact.orders
 
-JOINS (3)
+联接 (3)
 ---------
   product         -> sales.dim.product
   customer        -> sales.dim.customer
   date            -> sales.dim.date
 
-FIELDS (6)
+字段 (6)
 --------------
   product_name         <- product.product_name
   product_category     <- product.category
@@ -226,7 +226,7 @@ FIELDS (6)
   order_year           <- date.year
   order_month          <- date.month_name
 
-MEASURES (6)
+度量值 (6)
 ------------
   total_revenue        = SUM(revenue)
   gross_margin         = SUM(revenue) - SUM(cost)
@@ -240,11 +240,11 @@ MEASURES (6)
 
 现在你已经能够加载并检查 Metric View 了，你还可以：
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Validate the Metric View](xref:semantic-bridge-validate-default)
-- [Import the Metric View to Tabular](xref:semantic-bridge-import)
+- [向指标视图添加对象](xref:semantic-bridge-add-object)
+- [从指标视图中移除对象](xref:semantic-bridge-remove-object)
+- [重命名字段](xref:semantic-bridge-rename-objects)
+- [验证指标视图](xref:semantic-bridge-validate-default)
+- [将指标视图导入 Tabular](xref:semantic-bridge-import)
 
 ## 另见
 
