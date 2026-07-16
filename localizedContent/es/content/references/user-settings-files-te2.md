@@ -9,7 +9,7 @@ applies_to:
       none: true
 ---
 
-## Archivos de configuración del usuario de Tabular Editor 2
+# Archivos de configuración del usuario de Tabular Editor 2
 
 Cuando se inicia Tabular Editor 2, escribe algunos archivos adicionales en el disco en varias ubicaciones. A continuación se describen estos archivos y su contenido:
 
