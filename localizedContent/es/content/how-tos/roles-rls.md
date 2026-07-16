@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Roles y seguridad a nivel de filas
+# Roles y seguridad a nivel de filas
 
 Los roles son visibles en el Árbol del Explorador. Puedes hacer clic con el botón derecho en el árbol para crear nuevos roles, eliminar o duplicar roles existentes. Puedes ver y editar los miembros de cada rol. Para ello, localiza el rol en el árbol del Explorador y ve a la propiedad "Miembros del rol" en la cuadrícula de propiedades. Ten en cuenta que, al implementar, el [Asistente de implementación](../features/deployment.md) no implementa los miembros del rol de forma predeterminada.
 
