@@ -25,7 +25,7 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> The Semantic Bridge is in public preview.
+> El Semantic Bridge está en versión preliminar pública.
 > Tiene limitaciones, como se documenta a continuación, y tanto la API como el alcance de la funcionalidad pueden cambiar.
 
 El Puente semántico es un compilador de modelos semánticos capaz de traducir la estructura y las expresiones de un modelo semántico de una plataforma a otra.
@@ -84,7 +84,7 @@ Si haces clic en **Ver diagnósticos**, puedes ver una lista de mensajes que des
 Estos diagnósticos están disponibles para revisarlos más adelante al emitirlos desde un C# Script:
 
 ```csharp {compile}
-// Show all diagnostic messages from the last attempted import of a Metric View
+// Mostrar todos los mensajes de diagnóstico del último intento de importar una Metric View
 var sb = new System.Text.StringBuilder();
 foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
 {
@@ -111,8 +111,8 @@ En la versión preliminar pública, admitimos traducciones de una Metric View de
 
 ### Conectividad
 
-The public preview does not connect to any platforms besides Fabric, Power BI, and Analysis Services.
-Working with models from other platforms, e.g., Databricks Metric Views, is based on local source files, such as a Metric View YAML definition.
+La versión preliminar pública no se conecta a ninguna plataforma aparte de Fabric, Power BI y Analysis Services.
+Trabajar con modelos de otras plataformas, p. ej., Metric Views de Databricks, se basa en archivos de origen locales, como una definición YAML de Metric View.
 
 ## Apéndice sobre nomenclatura
 
@@ -127,7 +127,7 @@ Por ello, hemos adoptado las siguientes definiciones y estándares en nuestra do
 ### Definiciones
 
 - _modelo semántico_: cuando se usa por sí solo, siempre se refiere al concepto genérico de una colección de datos, metadatos y lógica de negocio para respaldar la elaboración de informes y el análisis.
-  If and only if it is immediately preceded by "Fabric" or "Power BI", then it is referring to that artifact type in that platform, specifically a Tabular model that is saved as TMDL or BIM and using M and DAX; we tend to prefer to use the term Tabular model to refer to the Power BI / Fabric semantic model to avoid this confusion where possible, because the Tabular model is shared across Power BI / Fabric as well as Analysis Services Tabular.
+  Si, y solo si, va inmediatamente precedido de "Fabric" o "Power BI", entonces se refiere a ese tipo de artefacto en esa plataforma, concretamente a un modelo tabular que se guarda como TMDL o BIM y utiliza M y DAX; solemos preferir usar el término modelo tabular para referirnos al modelo semántico de Power BI / Fabric y evitar esta confusión siempre que sea posible, porque el modelo tabular se comparte entre Power BI / Fabric y también con Analysis Services Tabular.
 - _Plataforma_: una solución tecnológica que tiene una capa semántica, en la que se aloja un modelo semántico genérico.
   Databricks Metric Views representan una plataforma; Fabric / Power BI representan una plataforma; Analysis Services Tabular es una plataforma; Analysis Services Multidimensional es una plataforma para la que hoy no tenemos compatibilidad en Semantic Bridge.
 - _Formato de serialización_: una forma de representar un modelo semántico en disco en un formato textual.
@@ -142,13 +142,13 @@ Hay muchos términos que se usan de forma general al hablar de un modelo dimensi
 En una Metric View, una medida es una expresión SQL con nombre que define una agregación en la Metric View, y en un modelo tabular, una medida es una expresión DAX con nombre que define una agregación en el modelo tabular.
 Es imposible hablar del trabajo de Semantic Bridge sin hablar a la vez de los múltiples significados de estas palabras.
 Por ejemplo, hablamos de traducir una medida de Metric View a una medida tabular.
-As such, **we always refer to an object in a specific platform's model by saying the platform and the object, e.g., "Metric View measure" or "Tabular measure"; "Metric View field" or "TOM column".**
-If the term is ever used without being accompanied by a platform's name, then we are discussing the idea generically.
+Por ello, **siempre nos referimos a un objeto del modelo de una plataforma específica mencionando la plataforma y el objeto, por ejemplo, "medida de Metric View" o "medida tabular"; "campo de Metric View" o "columna de TOM".**
+Si alguna vez se usa el término sin ir acompañado del nombre de una plataforma, entonces estamos hablando del concepto de forma genérica.
 
 ## Recursos adicionales
 
-- [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
-- [Metric View YAML reference](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)
+- [Documentación de Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/)
+- [Referencia de YAML para Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)
 - @semantic-bridge-metric-view-tabular-translation
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation
