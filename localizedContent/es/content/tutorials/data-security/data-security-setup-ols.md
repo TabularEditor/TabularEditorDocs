@@ -95,7 +95,7 @@ Configurar o modificar OLS es muy fácil para columnas y tablas. Solo tienes que
   <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-change.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> La propiedad de seguridad a nivel de objetos se puede cambiar mediante el menú desplegable adyacente, que permite seleccionar <i>Default</i>, <i>None</i> o <i>Read</i>.</figcaption>
 </figure>
 
----&#x20;
+---
 
 ### 5. Combinar OLS con RLS
 
