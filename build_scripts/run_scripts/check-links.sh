@@ -19,6 +19,8 @@
 #   stats           print per-host fetch diagnostics
 #   under=<path>    only check links from pages under _site/<path>
 #
+# Tool overrides (env vars): RUN_PYTHON.
+#
 # Usage:
 #   ./run check-links               # full check (fetches external URLs)
 #   ./run check-links local         # offline: on-disk checks only

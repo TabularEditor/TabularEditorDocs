@@ -1,0 +1,23 @@
+# Configuration for the repo's Python tooling (build_scripts/*.py).
+#
+# The ruff `include` and mypy `files` lists below are the same list and must
+# stay in sync: the build scripts that meet the bar enforced by
+# `./run scripts check`. Add scripts to both lists as they qualify.
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+lint.select = ["F", "B", "SIM", "I", "UP"]
+include = [
+    "build_scripts/check_links.py",
+    "build_scripts/csharp_doctest.py",
+    "build_scripts/te_script_runner.py",
+]
+
+[tool.mypy]
+files = [
+    "build_scripts/check_links.py",
+    "build_scripts/csharp_doctest.py",
+    "build_scripts/te_script_runner.py",
+]
+strict = true

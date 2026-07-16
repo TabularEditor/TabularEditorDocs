@@ -11,17 +11,22 @@ info() { printf '%s\n' "$*" >&2; }
 # Error message with a uniform prefix, on stderr.
 error() { printf 'ERROR: %s\n' "$*" >&2; }
 
-# Print a command then execute it, bold (like just's recipe echo) with a
-# "$ " prefix marking it as a command line. The echo goes to stderr so a
-# command's stdout stays clean for its own output; escape codes only when
-# stderr is a terminal and NO_COLOR is unset, so redirected output stays
-# plain.
-log_and_run() {
+# Print a command line without running it, bold (like just's recipe echo)
+# with a "$ " prefix. Goes to stderr so a command's stdout stays clean for
+# its own output; escape codes only when stderr is a terminal and NO_COLOR
+# is unset, so redirected output stays plain. Use directly when the command
+# itself runs indirected (e.g. backgrounded with captured output).
+log_cmd() {
 	if [ -t 2 ] && [ -z "${NO_COLOR:-}" ]; then
 		printf '\033[1m$ %s\033[0m\n' "$*" >&2
 	else
 		printf '$ %s\n' "$*" >&2
 	fi
+}
+
+# Print a command then execute it.
+log_and_run() {
+	log_cmd "$@"
 	"$@"
 }
 
@@ -127,6 +132,16 @@ _require_python() {
 	fi
 	info 'Set RUN_PYTHON to a suitable interpreter, or see build_scripts/run_scripts/README.md for installation instructions.'
 	return 1
+}
+
+print_resolved() {
+	# Print each tool name with the executable path its RUN_<TOOL> variable
+	# resolved to. Call require on the tools first.
+	local tool var
+	for tool in "$@"; do
+		var="$(run_var_name "$tool")"
+		printf '  %-11s %s\n' "$tool" "$(command -v "${!var}")"
+	done
 }
 
 dispatch() {

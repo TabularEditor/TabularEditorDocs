@@ -11,6 +11,8 @@
 #   fast  also reuse existing API metadata and tolerate DocFX warnings;
 #         the same build that `watch` runs
 #
+# Tool overrides (env vars): RUN_PYTHON.
+#
 # Usage:
 #   ./run build [full|fast]
 #   ./run build help

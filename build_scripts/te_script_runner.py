@@ -84,11 +84,7 @@ def _parse_json(stdout: str) -> dict[str, Any] | None:
 def _output_lines(data: dict[str, Any]) -> list[str]:
     """The text of every output-level message, in order. Pure."""
     messages = data.get("messages") or []
-    return [
-        str(m.get("text", ""))
-        for m in messages
-        if isinstance(m, dict) and m.get("level") == "output"
-    ]
+    return [str(m.get("text", "")) for m in messages if isinstance(m, dict) and m.get("level") == "output"]
 
 
 def _diagnostic_lines(data: dict[str, Any]) -> list[str]:
@@ -139,11 +135,7 @@ def summarize(stdout: str, exit_code: int) -> Result:
     """
     data = _parse_json(stdout)
     if data is None:
-        diagnostics = (
-            [f"[te] failed with exit {exit_code} and no json output"]
-            if exit_code != 0
-            else []
-        )
+        diagnostics = [f"[te] failed with exit {exit_code} and no json output"] if exit_code != 0 else []
         return Result(exit_code, exit_code == 0, "", diagnostics)
     if data.get("dryRun"):
         return _summarize_dry_run(data, exit_code)

@@ -10,6 +10,8 @@
 # Run `./run watch` in another terminal for live rebuilds as you edit, then
 # refresh the browser after each rebuild.
 #
+# Tool overrides (env vars): RUN_PYTHON.
+#
 # Usage:
 #   ./run serve
 #   ./run serve help
