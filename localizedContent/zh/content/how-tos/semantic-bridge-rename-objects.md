@@ -2,7 +2,7 @@
 uid: semantic-bridge-rename-objects
 title: 在指标视图中重命名对象
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,151 +20,62 @@ applies_to:
 
 # 在指标视图中重命名对象
 
-本操作指南演示如何使用“复制-修改”模式，对指标视图的维度进行批量重命名。
+This how-to demonstrates renaming a Metric View field.
 同样的模式也适用于指标视图中的所有集合。
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-## 复制-修改模式
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
-由于指标视图的维度名称是集合中对象的属性，最简单的做法是：
+## Rename a field
 
-1. 创建新的指标视图 `Dimension` 对象，并使用修改后的名称
-2. 清空原始集合
-3. 将新对象添加回集合
+Rename a field by adding a new field under the new name, copying its other properties across, then removing the original.
+[`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) sets only the name and expression, so copy the remaining properties (`Comment`, `DisplayName`, `Synonyms`, `Format`) yourself.
 
-这样可以避免在迭代时修改对象所带来的问题。
-
-## 将 snake_case 转换为 Title Case
-
-将指标视图维度名称从 `product_name` 转换为 `Product Name`：
-
-```csharp
-using System.Globalization;
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
+```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
-var textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+var old = view.Fields["order_month"];
+
+// add the replacement, copy the remaining properties, then remove the original
+var renamed = view.AddField("Order Month", old.Expr);
+renamed.Comment = old.Comment;
+renamed.DisplayName = old.DisplayName;
+renamed.Synonyms = old.Synonyms;
+renamed.Format = old.Format;
+old.Delete();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("BEFORE");
-sb.AppendLine("------");
-foreach (var dim in view.Dimensions)
+sb.AppendLine("Fields:");
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"  {dim.Name}");
+    sb.AppendLine($"  {field.Name}");
 }
-
-// Create renamed dimensions
-var renamed = view.Dimensions.Select(dim => new MetricView.Dimension
-{
-    Name = textInfo.ToTitleCase(dim.Name.Replace('_', ' ')),
-    Expr = dim.Expr
-}).ToList();
-
-// Replace the collection
-view.Dimensions.Clear();
-foreach (var dim in renamed)
-{
-    view.Dimensions.Add(dim);
-}
-
-sb.AppendLine();
-sb.AppendLine("AFTER");
-sb.AppendLine("-----");
-foreach (var dim in view.Dimensions)
-{
-    sb.AppendLine($"  {dim.Name}");
-}
-
 Output(sb.ToString());
 ```
 
 **输出：**
 
 ```
-BEFORE
-------
+Fields:
   product_name
   product_category
   customer_segment
   order_date
   order_year
-  order_month
-
-AFTER
------
-  产品名称
-  产品类别
-  客户分段
-  订单日期
-  订单年份
-  订单月份
+  Order Month
 ```
 
-## 使用映射字典进行重命名
+The re-added field moves to the end of the collection.
 
-使用查找表应用特定重命名：
+## 后续步骤
 
-```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
-var view = SemanticBridge.MetricView.Model;
-
-// 定义重命名映射
-var renames = new Dictionary<string, string>
-{
-    { "product_name", "Product" },
-    { "product_category", "Category" },
-    { "customer_segment", "Segment" },
-    { "order_date", "Date" },
-    { "order_year", "Year" },
-    { "order_month", "Month" }
-};
-
-var sb = new System.Text.StringBuilder();
-
-// 创建已重命名的维度
-var renamed = view.Dimensions
-    .Select(
-        dim => new MetricView.Dimension
-        {
-            Name = renames.TryGetValue(dim.Name, out var newName) ? newName : dim.Name,
-            Expr = dim.Expr
-        })
-    .ToList();
-
-// 替换集合
-view.Dimensions.Clear();
-foreach (var dim in renamed)
-{
-    view.Dimensions.Add(dim);
-}
-
-sb.AppendLine("重命名后的维度：");
-sb.AppendLine("-------------------");
-foreach (var dim in view.Dimensions)
-{
-    sb.AppendLine($"  {dim.Name,-20} <- {dim.Expr}");
-}
-
-Output(sb.ToString());
-```
-
-**输出：**
-
-```
-重命名后的维度：
--------------------
-  Product              <- product.product_name
-  Category             <- product.category
-  分段                  <- customer.segment
-  Date                 <- date.full_date
-  Year                 <- date.year
-  Month                <- date.month_name
-```
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
 
 ## 另见
 
-- @semantic-bridge-add-object
-- @semantic-bridge-remove-object
-- @semantic-bridge-serialize
+- [指标视图对象模型](xref:semantic-bridge-metric-view-object-model)
