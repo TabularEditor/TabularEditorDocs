@@ -20,65 +20,65 @@ applies_to:
 
 # Agregar un objeto a una Metric View
 
-This how-to demonstrates adding new objects to a loaded Metric View and setting their properties.
+En esta guía práctica se muestra cómo agregar nuevos objetos a una vista de métricas cargada y establecer sus propiedades.
 Este patrón se aplica a todas las colecciones de Metric View.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías paso a paso están pensadas para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
-## Add a field
+## Agregar un campo
 
-Use [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) to create and return a new `Field` you can manipulate.
+Use [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) para crear y devolver un nuevo `Field` que pueda manipular.
 
 ```csharp {run id=addfield setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Fields before adding: {view.Fields.Count}");
+sb.AppendLine($"Campos antes de agregar: {view.Fields.Count}");
 
 var field = view.AddField("customer_city", "customer.city");
 
-sb.AppendLine($"Fields after adding: {view.Fields.Count}");
+sb.AppendLine($"Campos después de agregar: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **Salida**
 
 ```
-Fields before adding: 6
-Fields after adding: 7
+Campos antes de agregar: 6
+Campos después de agregar: 7
 ```
 
-## Add and configure a `Join`
+## Agregar y configurar un `Join`
 
 [`AddJoin`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddJoin%2A)
-works similarly to `AddField`: it constructs the object, adds it to the Metric View, and returns it so you can set further properties.
-Set the cardinality with the [`JoinCardinality`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality) enum.
+funciona de forma similar a `AddField`: construye el objeto, lo agrega a la vista de métricas y lo devuelve para que puedas establecer propiedades adicionales.
+Establece la cardinalidad con la enumeración [`JoinCardinality`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality).
 
 ```csharp {run id=addjoin setup=mv-sample after=none output=false}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var view = SemanticBridge.MetricView.Model;
 
-// add a join, then set its remaining properties
+// agrega un join y, a continuación, establece sus propiedades restantes
 var supplier = view.AddJoin("supplier", "sales.dim.supplier");
 supplier.On = "source.supplier_id = supplier.supplier_id";
 supplier.Cardinality = MetricView.JoinCardinality.ManyToOne;
 ```
 
-`AddJoin` is also a method on any existing `Join`.
-You would use this to create nested joins, for example, `supplier.AddJoin("region", "sales.dim.region")`,
-which models a snowflake dimension.
+`AddJoin` también es un método en cualquier `Join` existente.
+Puede usarlo para crear joins anidados; por ejemplo, `supplier.AddJoin("region", "sales.dim.region")`,
+que modela una dimensión en copo de nieve.
 
-## Add and configure a `Measure`
+## Agregar y configurar una `medida`
 
-[`AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A) works similarly to the other `Add` methods.
+[`AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A) funciona de forma similar a los demás métodos `Add`.
 
-Some properties, such as a field or measure `Format`, have their own types you need to construct to set the property.
-Create the [`Format`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format) variant you want, such as `Format.Currency` or `Format.Percentage`, and assign it.
+Algunas propiedades, como el `Format` de un campo o una medida, tienen sus propios tipos que debes crear para poder establecer la propiedad.
+Crea la variante de [`Format`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format) que quieras, como `Format.Currency` o `Format.Percentage`, y asígnala.
 
 ```csharp {run id=addmeasure setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -86,26 +86,26 @@ using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-// add a new measure, then give it a currency format
+// agrega una nueva medida y luego asígnale un formato de moneda
 var totalCost = view.AddMeasure("total_cost", "SUM(cost)");
 totalCost.Format = new MetricView.Format.Currency { CurrencyCode = "USD" };
 
-// read the format back off the measure
-sb.AppendLine($"{totalCost.Name} format: {totalCost.Format}");
+// vuelve a leer el formato de la medida
+sb.AppendLine($"{totalCost.Name} formato: {totalCost.Format}");
 Output(sb.ToString());
 ```
 
 **Salida**
 
 ```
-total_cost format: Currency { Type = Currency, DecimalPlaces = , HideGroupSeparator = , Abbreviation = , CurrencyCode = USD }
+total_cost formato: Currency { Type = Currency, DecimalPlaces = , HideGroupSeparator = , Abbreviation = , CurrencyCode = USD }
 ```
 
 ## Pasos a seguir
 
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+- [Eliminar objetos de una vista de métricas](xref:semantic-bridge-remove-object)
+- [Cambiar el nombre de un campo](xref:semantic-bridge-rename-objects)
+- [Serializar una vista de métricas a YAML](xref:semantic-bridge-serialize)
 
 ## Ver también
 
