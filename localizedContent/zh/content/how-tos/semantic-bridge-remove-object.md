@@ -2,7 +2,7 @@
 uid: semantic-bridge-remove-object
 title: 从 Metric View 中移除对象
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,10 +20,14 @@ applies_to:
 
 # 从 Metric View 中移除对象
 
-本文演示如何从已加载的 Metric View 中移除其维度。
+This how-to demonstrates removing Metric View fields and measures.
 类似的方法适用于 Metric View 中的所有集合。
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
+
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 > [!NOTE]
 > 这里的每个移除脚本都会影响当前已加载的 Metric View。
@@ -31,68 +35,88 @@ applies_to:
 
 ## 按名称移除
 
-找到要移除的 Metric View 维度，并将其从集合中移除：
+Get the Metric View field and delete it.
+After you delete an object, you should not attempt to modify it.
+You can still read properties off of the deleted object.
+It is safe to call `Delete()` on an object multiple times; after the first, these are no-ops.
 
-```csharp
+```csharp {run id=removefield setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Fields before: {view.Fields.Count}");
 
-var dimToRemove = view.Dimensions.FirstOrDefault(d => d.Name == "order_month");
-if (dimToRemove != null)
-{
-    view.Dimensions.Remove(dimToRemove);
-    sb.AppendLine($"Removed: {dimToRemove.Name}");
-}
+var fieldToRemove = view.Fields["order_month"];
+fieldToRemove.Delete();
+fieldToRemove.Delete(); // note we can call Delete twice safely
+sb.AppendLine($"Removed: {fieldToRemove.Name}");
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Fields after: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **输出：**
 
 ```
-Dimensions before: 6
+Fields before: 6
 Removed: order_month
-Dimensions after: 5
+Fields after: 5
 ```
 
-注意：如果你连续运行两次上述脚本，不会再移除任何内容；移除前后计数都会是 5。
+Observe that there are multiple calls to `Delete()` but only one removal.
 
-## 移除多个 Metric View 维度
+## Remove a measure
 
-使用 LINQ 进行筛选并重建集合：
+Measures are removed the same way: get a reference to the measure and delete it.
 
-```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
+```csharp {run id=removemeasure setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Measures before: {view.Measures.Count}");
 
-// Remove all date-related dimensions
+var measureToRemove = view.Measures["gross_margin"];
+measureToRemove.Delete();
+sb.AppendLine($"Removed: {measureToRemove.Name}");
+
+sb.AppendLine($"Measures after: {view.Measures.Count}");
+Output(sb.ToString());
+```
+
+**输出：**
+
+```
+Measures before: 6
+Removed: gross_margin
+Measures after: 5
+```
+
+## Remove multiple Metric View fields
+
+Filter to the fields you want to remove, snapshot them with `ToList`, then delete each one.
+Snapshotting first avoids modifying the collection while iterating it.
+
+```csharp {run id=removemultiple setup=mv-sample after=none output=true}
+var view = SemanticBridge.MetricView.Model;
+
+var sb = new System.Text.StringBuilder();
+sb.AppendLine($"Fields before: {view.Fields.Count}");
+
+// Remove all date-related fields
 string[] toRemove = ["order_date", "order_year", "order_month"];
 
-var toKeep = view.Dimensions
-    .Where(d => !toRemove.Contains(d.Name))
-    .ToList();
-
-// Clear and repopulate
-view.Dimensions.Clear();
-foreach (var dim in toKeep)
+foreach (var field in view.Fields.Where(f => toRemove.Contains(f.Name)).ToList())
 {
-    view.Dimensions.Add(dim);
+    field.Delete();
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Fields after: {view.Fields.Count}");
 sb.AppendLine();
-sb.AppendLine("Remaining dimensions:");
-sb.AppendLine("---------------------");
-foreach (var dim in view.Dimensions)
+sb.AppendLine("Remaining fields:");
+sb.AppendLine("-----------------");
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"  {dim.Name}");
+    sb.AppendLine($"  {field.Name}");
 }
 
 Output(sb.ToString());
@@ -101,57 +125,57 @@ Output(sb.ToString());
 **输出：**
 
 ```
-移除前维度数：6
-移除后维度数：3
+Fields before: 6
+Fields after: 3
 
-剩余维度：
----------------------
+Remaining fields:
+-----------------
   product_name
   product_category
   customer_segment
 ```
 
-## 从指定表中移除 Metric View 维度
+## Remove Metric View fields from a specific table
 
-移除所有引用日期表的 Metric View 维度。
+Remove all Metric View fields that reference the date table.
 
 > [!WARNING]
-> 此示例不保证能够移除所有且仅移除引用给定 Metric View Join 的 Metric View 维度。
-> Metric View 维度可能包含近乎任意的 SQL 表达式，也可能引用先前定义的 Metric View 维度。
+> This example is not guaranteed to remove all and exclusively Metric View fields which reference a given Metric View Join.
+> Metric View fields may include near-arbitrary SQL expressions, and may also reference previously defined Metric View fields.
 > 此示例仅用于说明。
 
-```csharp
+```csharp {run id=remove-by-table setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Fields before: {view.Fields.Count}");
 
-var toRemove = view.Dimensions
-    .Where(d => d.Expr.StartsWith("date."))
-    .ToList();
-
-foreach (var dim in toRemove)
+foreach (var field in view.Fields.Where(f => f.Expr.StartsWith("date.")).ToList())
 {
-    view.Dimensions.Remove(dim);
-    sb.AppendLine($"Removed: {dim.Name} ({dim.Expr})");
+    field.Delete();
+    sb.AppendLine($"Removed: {field.Name} ({field.Expr})");
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Fields after: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **输出：**
 
 ```
-移除前维度数：6
-已移除：order_date (date.full_date)
-已移除：order_year (date.year)
-已移除：order_month (date.month_name)
-移除后维度数：3
+Fields before: 6
+Removed: order_date (date.full_date)
+Removed: order_year (date.year)
+Removed: order_month (date.month_name)
+Fields after: 3
 ```
+
+## 后续步骤
+
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Rename a field](xref:semantic-bridge-rename-objects)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
 
 ## 另请参阅
 
-- @semantic-bridge-add-object
-- @semantic-bridge-rename-objects
-- @semantic-bridge-serialize
+- [指标视图对象模型](xref:semantic-bridge-metric-view-object-model)
