@@ -19,7 +19,7 @@ A continuación se muestra un resumen de las principales novedades que se inclui
 
 ## En desarrollo
 
-- **Semantic Bridge enhancements**: Enhanced import UI, support for multi-fact pattern
+- **Mejoras de Semantic Bridge**: interfaz de importación mejorada, compatibilidad con el patrón multifacto
 - **Mejoras de localización**: ampliación de la compatibilidad con idiomas y perfeccionamiento de las traducciones existentes
 - **Autoformato de Power Query (M)**: capacidades de formato avanzadas para expresiones M
 - **Comparación gráfica de modelos**: ver los cambios que se aplican a
@@ -52,7 +52,7 @@ Para obtener información detallada sobre cada versión, consulta el [historial 
 
 ✅ [**Reglas integradas del Best Practice Analyzer**](xref:built-in-bpa-rules) - Conjunto completo de reglas de BPA que cubren el formato, los metadatos, el diseño del modelo, las expresiones DAX y las traducciones (v3.25.0)
 
-✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0); support for Metric View v1.1 spec
+✅ **Semantic Bridge** - Crea modelos semánticos a partir de las Databricks Metric Views (Edición Enterprise, v3.25.0); compatibilidad con la especificación de Metric View v1.1
 
 ✅ [**Guardar con archivos auxiliares para Fabric**](xref:save-with-supporting-files) - Compatibilidad con archivos .platform y definition.pbism para ajustarse a la estructura del repositorio de Fabric (v3.25.0)
 
