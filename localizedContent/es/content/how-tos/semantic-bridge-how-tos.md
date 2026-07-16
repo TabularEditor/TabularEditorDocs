@@ -24,26 +24,26 @@ Estas guías prácticas se centran en interactuar con el [modelo de objetos de M
 
 ## Primeros pasos
 
-- @semantic-bridge-load-inspect: Load a Metric View and explore its structure
-- @semantic-bridge-metric-view-import-from-file: Import a Metric View directly from a YAML file
-- @semantic-bridge-import: Import a loaded Metric View to Tabular and view diagnostics
+- @semantic-bridge-load-inspect: Cargar una Metric View y explorar su estructura
+- @semantic-bridge-metric-view-import-from-file: Importar una Metric View directamente desde un archivo YAML
+- @semantic-bridge-import: Importar en Tabular una Metric View cargada y ver los diagnósticos
 
 ## Validación
 
-- @semantic-bridge-validate-default: Validate with built-in rules
-- @semantic-bridge-validate-simple-rules: Create predicate-based validation rules for naming conventions
-- @semantic-bridge-validate-contextual-rules: Create rules with cross-object checks, such as names reused across object types
+- @semantic-bridge-validate-default: Validar con reglas integradas
+- @semantic-bridge-validate-simple-rules: Crear reglas de validación basadas en predicados para convenciones de nomenclatura
+- @semantic-bridge-validate-contextual-rules: Crear reglas con comprobaciones entre objetos, como nombres reutilizados en distintos tipos de objetos
 
 ## Manipulación del modelo de objetos
 
-- @semantic-bridge-add-object: Add objects to a Metric View and set their properties
-- @semantic-bridge-remove-object: Remove objects from a Metric View
-- @semantic-bridge-rename-objects: Rename a field in a Metric View
+- @semantic-bridge-add-object: Agregar objetos a una Metric View y configurar sus propiedades
+- @semantic-bridge-remove-object: Quitar objetos de una Metric View
+- @semantic-bridge-rename-objects: Renombrar un campo en una Metric View
 
 ## Serialización
 
-- @semantic-bridge-serialize: Serialize a Metric View back to YAML
+- @semantic-bridge-serialize: Serializar una Metric View de nuevo a YAML
 
 ## Solución de problemas
 
-- @semantic-bridge-metric-view-handle-failures: Handle invalid input, missing files, and imports that don't complete
+- @semantic-bridge-metric-view-handle-failures: Gestionar entradas no válidas, archivos faltantes e importaciones que no llegan a completarse
