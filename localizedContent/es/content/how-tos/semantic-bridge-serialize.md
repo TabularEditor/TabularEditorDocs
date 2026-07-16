@@ -23,15 +23,15 @@ applies_to:
 Este procedimiento explica cómo volver a serializar una Metric View al formato YAML, ya sea como una cadena o guardándola en un archivo.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías están pensadas para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las funcionalidades de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Serializar como cadena
 
-Use `Serialize()` to get the YAML representation.
-This simply re-serializes the YAML you loaded above.
+Use `Serialize()` para obtener la representación en YAML.
+Esto simplemente vuelve a serializar el YAML que cargó anteriormente.
 
 ```csharp {run id=serialize setup=mv-sample after=none output=true}
 var yaml = SemanticBridge.MetricView.Serialize();
@@ -46,7 +46,7 @@ Output(sb.ToString());
 **Salida**
 
 ```
-YAML output:
+Salida en YAML:
 ------------
 version: 1.1
 source: sales.fact.orders
@@ -68,7 +68,7 @@ fields:
   expr: product.product_name
 - name: product_category
   expr: product.category
-  display_name: Product Category
+  display_name: Categoría de producto
 - name: customer_segment
   expr: customer.segment
 - name: order_date
@@ -80,7 +80,7 @@ fields:
 measures:
 - name: total_revenue
   expr: SUM(revenue)
-  display_name: Total Revenue
+  display_name: Ingresos totales
   format:
     type: currency
     decimal_places:
@@ -95,7 +95,7 @@ measures:
   expr: AVG(revenue)
 - name: revenue_to_budget
   expr: (SUM(revenue) - SUM(budget)) / SUM(budget)
-  display_name: Revenue vs Budget
+  display_name: Ingresos frente al presupuesto
   format:
     type: percentage
     decimal_places:
@@ -107,8 +107,8 @@ measures:
 
 ## Guardar en un archivo
 
-Use `Save(path)` to write the YAML directly to disk.
-This will write the Metric View you loaded above to disk.
+Use `Save(path)` para escribir el YAML directamente en disco.
+Esto guardará en disco la vista de métricas que cargó anteriormente.
 
 ```csharp {compile}
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
@@ -125,13 +125,13 @@ Un flujo de trabajo habitual es cargar, modificar y guardar una Metric View:
 ```csharp {run id=roundtrip setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
-// set a display name on a field, then serialize to confirm it round-trips
-view.Fields["order_month"].DisplayName = "Order Month";
+// establecer un nombre para mostrar en un campo y luego serializar para confirmar que los cambios se conservan
+view.Fields["order_month"].DisplayName = "Mes del pedido";
 
 var yaml = SemanticBridge.MetricView.Serialize();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("Modified YAML:");
+sb.AppendLine("YAML modificado:");
 sb.AppendLine("--------------");
 sb.AppendLine(yaml);
 Output(sb.ToString());
@@ -140,7 +140,7 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-Modified YAML:
+YAML modificado:
 --------------
 version: 1.1
 source: sales.fact.orders
@@ -162,7 +162,7 @@ fields:
   expr: product.product_name
 - name: product_category
   expr: product.category
-  display_name: Product Category
+  display_name: Categoría de producto
 - name: customer_segment
   expr: customer.segment
 - name: order_date
@@ -171,11 +171,11 @@ fields:
   expr: date.year
 - name: order_month
   expr: date.month_name
-  display_name: Order Month
+  display_name: Mes del pedido
 measures:
 - name: total_revenue
   expr: SUM(revenue)
-  display_name: Total Revenue
+  display_name: Ingresos totales
   format:
     type: currency
     decimal_places:
@@ -190,7 +190,7 @@ measures:
   expr: AVG(revenue)
 - name: revenue_to_budget
   expr: (SUM(revenue) - SUM(budget)) / SUM(budget)
-  display_name: Revenue vs Budget
+  display_name: Ingresos frente al presupuesto
   format:
     type: percentage
     decimal_places:
@@ -202,8 +202,8 @@ measures:
 
 ## Pasos a seguir
 
-- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
-- [Import a Metric View to Tabular](xref:semantic-bridge-import)
+- [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
+- [Importar una vista de métricas en Tabular](xref:semantic-bridge-import)
 
 ## Ver también
 
