@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-## Workspace 数据库介绍
+# Workspace 数据库介绍
 
 Tabular Editor 3 支持在编辑从磁盘加载的模型元数据时，同时连接到部署在 Analysis Services 实例上的数据库。 我们将该数据库称为 _工作区数据库_。 今后，这是在 Tabular Editor 中进行表格建模的推荐方式。
 
