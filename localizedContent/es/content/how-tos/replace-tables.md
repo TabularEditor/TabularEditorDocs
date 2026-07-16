@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Reemplazar tablas
+# Reemplazar tablas
 
 Puedes reemplazar una tabla simplemente copiando (CTRL+C) una tabla —incluso desde otra instancia de Tabular Editor— y, a continuación, seleccionando la tabla que quieras reemplazar antes de pegar (CTRL+V). Aparecerá un mensaje para que confirmes si realmente quieres reemplazar la tabla ("Sí"), insertarla como una tabla nueva ("No") o cancelar la operación por completo:
 
