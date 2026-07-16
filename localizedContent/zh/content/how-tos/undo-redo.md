@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## 支持撤销/重做
+# 支持撤销/重做
 
 你在 Tabular Editor 中所做的任何更改，都可以使用 CTRL+Z 撤销，随后可使用 CTRL+Y 重做。 可撤销的操作次数没有限制，但当你打开 Model.bim 文件或从数据库加载模型时，撤销/重做堆栈会被重置。
 
