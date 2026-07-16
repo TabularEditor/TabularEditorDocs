@@ -6,17 +6,17 @@
 #   bash build_scripts/run_scripts/lib.sh require git python3
 
 # Status/progress chatter, on stderr so stdout stays clean for command output.
-info () { printf '%s\n' "$*" >&2; }
+info() { printf '%s\n' "$*" >&2; }
 
 # Error message with a uniform prefix, on stderr.
-error () { printf 'ERROR: %s\n' "$*" >&2; }
+error() { printf 'ERROR: %s\n' "$*" >&2; }
 
 # Print a command then execute it, bold (like just's recipe echo) with a
 # "$ " prefix marking it as a command line. The echo goes to stderr so a
 # command's stdout stays clean for its own output; escape codes only when
 # stderr is a terminal and NO_COLOR is unset, so redirected output stays
 # plain.
-log_and_run () {
+log_and_run() {
 	if [ -t 2 ] && [ -z "${NO_COLOR:-}" ]; then
 		printf '\033[1m$ %s\033[0m\n' "$*" >&2
 	else
@@ -25,14 +25,14 @@ log_and_run () {
 	"$@"
 }
 
-run_var_name () {
+run_var_name() {
 	# Print the RUN_<NAME> variable name for a tool (uppercased, dashes to
 	# underscores: uvx -> RUN_UVX). The single source of the require naming
 	# convention. LC_ALL=C pins ASCII range semantics regardless of locale.
 	printf 'RUN_%s' "$(printf '%s' "$1" | LC_ALL=C tr 'a-z-' 'A-Z_')"
 }
 
-require () {
+require() {
 	# Check the given tools and resolve which executable to use for each.
 	# Takes bare tool names, not paths. A pre-set RUN_<NAME> env var (name
 	# uppercased, dashes to underscores: RUN_UVX for uvx, RUN_SHELLCHECK
@@ -69,14 +69,14 @@ require () {
 	return "$failed"
 }
 
-_python_ok () {
+_python_ok() {
 	# True if the given interpreter exists and is Python >= 3.11 (the
 	# version floor for the repo's build tooling, matching CI).
 	command -v "$1" >/dev/null 2>&1 &&
 		"$1" -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 11) else 1)' >/dev/null 2>&1
 }
 
-_require_python () {
+_require_python() {
 	# Locate a Python >= 3.11 and export it as RUN_PYTHON for commands to
 	# invoke. When RUN_PYTHON is already set (contributor override) it is
 	# the ONLY candidate checked, so a broken override fails loudly instead
@@ -129,7 +129,7 @@ _require_python () {
 	return 1
 }
 
-dispatch () {
+dispatch() {
 	# dispatch <default_fn> [args...]: call the function named by the first
 	# remaining arg, or default_fn when none is given. Unknown names print
 	# the calling script's help and fail with a usage error.
@@ -149,7 +149,7 @@ dispatch () {
 	fi
 }
 
-banner_title () {
+banner_title() {
 	# Print only the first line of the #### banner block of the given script
 	# (used by ./run for its one-line-per-command index).
 	awk '
@@ -158,7 +158,7 @@ banner_title () {
 	' "$1"
 }
 
-banner_help () {
+banner_help() {
 	# Print the #### banner block at the top of the given script, unprefixed.
 	awk '
 		BEGIN { inIntro=0; introDone=0 }
@@ -168,12 +168,12 @@ banner_help () {
 	' "$1"
 }
 
-command_help () {
+command_help() {
 	# Print each function in the given script with its leading comment lines.
 	# Underscore-prefixed functions are internal and excluded.
 	printf 'Commands:\n'
 	awk '
-		/^[a-z][a-z_]* *\(\) *\{/ { fn=$1; inCmd=1; next }
+		/^[a-z][a-z_]* *\(\) *\{/ { fn=$1; sub(/\(\)$/, "", fn); inCmd=1; next }
 		inCmd==1 && /^[ \t]+#/ {
 			if (fn != "") { print "  " fn; fn="" }
 			gsub(/^[ \t]+# ?/, "    ")
@@ -185,7 +185,7 @@ command_help () {
 }
 
 # Dispatch only when executed directly; stay silent when sourced.
-if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
 	set -euo pipefail
 	"$@"
 fi

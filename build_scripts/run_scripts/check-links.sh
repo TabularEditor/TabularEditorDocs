@@ -33,13 +33,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-check () {
+check() {
 	# validate the built site; args pass through to check_links.py validate
 	require python
 	log_and_run "$RUN_PYTHON" build_scripts/check_links.py validate "$@"
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

@@ -20,7 +20,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-clean () {
+clean() {
 	# remove all generated build artifacts (gitignored); tracked source is
 	# left intact
 	log_and_run rm -rf _site obj docfx.json
@@ -35,7 +35,7 @@ clean () {
 	info "Clean complete."
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

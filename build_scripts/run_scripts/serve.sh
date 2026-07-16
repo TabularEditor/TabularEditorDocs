@@ -22,13 +22,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-serve () {
+serve() {
 	# full English build, then serve at http://localhost:8080 (Ctrl-C stops)
 	require python
 	log_and_run "$RUN_PYTHON" build-docs.py --serve --permissive
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

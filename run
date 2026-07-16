@@ -24,7 +24,7 @@ SCRIPTS="$ROOT/build_scripts/run_scripts"
 source "$SCRIPTS/lib.sh"
 cd "$ROOT"
 
-commands () {
+commands() {
 	# List every command script with the first line of its banner.
 	printf 'Commands:\n'
 	local script name
@@ -39,7 +39,7 @@ commands () {
 	printf 'Run ./run help for full runner documentation.\n'
 }
 
-help () {
+help() {
 	# Full runner documentation (the banner above) plus the command index.
 	banner_help "$0"
 	commands
@@ -51,14 +51,14 @@ if [ "$#" -gt 0 ]; then
 fi
 
 case "$cmd" in
-	commands|--list)
-		commands
-		exit 0
-		;;
-	help|--help|-h)
-		help
-		exit 0
-		;;
+commands | --list)
+	commands
+	exit 0
+	;;
+help | --help | -h)
+	help
+	exit 0
+	;;
 esac
 
 script="$SCRIPTS/$cmd.sh"

@@ -37,7 +37,7 @@ PYTHON_SOURCES=(
 )
 SHELL_SOURCES=(run build_scripts/run_scripts/*.sh)
 
-python () {
+python() {
 	# ruff + mypy --strict on the Python tooling (default: PYTHON_SOURCES)
 	require uvx
 	local files=("$@")
@@ -51,7 +51,7 @@ python () {
 	log_and_run "$RUN_UVX" mypy --strict --no-error-summary "${files[@]}"
 }
 
-shell () {
+shell() {
 	# check the shell tooling with shellcheck (default: SHELL_SOURCES)
 	require shellcheck
 	local files=("$@")
@@ -61,7 +61,7 @@ shell () {
 	log_and_run "$RUN_SHELLCHECK" --external-sources "${files[@]}"
 }
 
-all () {
+all() {
 	# python + shell; with file args, routes each by extension (run -> shell)
 	if [ "$#" -eq 0 ]; then
 		python
@@ -71,9 +71,9 @@ all () {
 	local py=() sh=() path
 	for path in "$@"; do
 		case "$path" in
-			*.py)           py+=("$path") ;;
-			*.sh|run|*/run) sh+=("$path") ;;
-			*)              info "lint: ignoring path with unrecognized extension: $path" ;;
+		*.py) py+=("$path") ;;
+		*.sh | run | */run) sh+=("$path") ;;
+		*) info "lint: ignoring path with unrecognized extension: $path" ;;
 		esac
 	done
 	if [ "${#py[@]}" -eq 0 ] && [ "${#sh[@]}" -eq 0 ]; then
@@ -88,7 +88,7 @@ all () {
 	fi
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

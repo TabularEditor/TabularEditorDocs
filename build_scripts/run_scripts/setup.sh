@@ -20,11 +20,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-_docfx_ok () {
+_docfx_ok() {
 	# True if docfx is invocable in either form build-docs.py resolves:
 	# the repo-local dotnet tool, or a docfx on PATH.
-	if docfx --version >/dev/null 2>&1
-	then return 0
+	if docfx --version >/dev/null 2>&1; then
+		return 0
 	fi
 
 	# This function runs inside a conditional (check's `if ! _docfx_ok`),
@@ -34,7 +34,7 @@ _docfx_ok () {
 	"$RUN_DOTNET" docfx --version >/dev/null 2>&1
 }
 
-_docfx_desc () {
+_docfx_desc() {
 	# Describe which docfx form resolved, mirroring _docfx_ok's probe order:
 	# a docfx on PATH, else the repo-local dotnet tool (RUN_DOTNET is set in
 	# that case, by _docfx_ok's require).
@@ -45,7 +45,7 @@ _docfx_desc () {
 	fi
 }
 
-check () {
+check() {
 	# verify all tooling the run commands need and print what each tool
 	# resolved to; report problems all at once
 	local failed=0
@@ -69,7 +69,7 @@ check () {
 	return "$failed"
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

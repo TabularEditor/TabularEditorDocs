@@ -147,6 +147,7 @@ a `DOCFX` environment variable, then a repo-local dotnet tool manifest, then a g
 ### Conventions for these scripts
 
 - bash 3.2 compatible (macOS default bash), ASCII only, long-form CLI flags.
+- Formatted with shfmt defaults: `shfmt -w run build_scripts/run_scripts` (tab indentation, `name() {` function style).
 - Each script: banner help block, per-function comment docs, awk-extracted help, `dispatch <default_fn> "$@"` at the bottom.
 - Shared helpers live in `lib.sh`; command-specific state lives in the command's script.
 - All of this tooling is linted by `./run lint` (shellcheck for the shell scripts, ruff + mypy for the Python sources).
@@ -249,11 +250,11 @@ The very first thing in the function definition must be comments that become the
 Example:
 
 ```shell
-fn () {
-        # the help text for this function
-		# can span many lines
-		require ...
-		<implementation>
+fn() {
+	# the help text for this function
+	# can span many lines
+	require ...
+	<implementation>
 ```
 
 These functions must declare their required tools upfront with `require`, e.g., `require uvx`;
@@ -320,7 +321,7 @@ These pull help text out of the banner comment and all leading comments in funct
 They are automatically formatted as you see when you run `./run help` or `./run subcommand help`.
 
 ```shell
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

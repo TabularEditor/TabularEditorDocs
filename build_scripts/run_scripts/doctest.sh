@@ -31,12 +31,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-_annotated_files () {
+_annotated_files() {
 	# print the content markdown files containing annotated csharp fences
 	grep --recursive --files-with-matches --include='*.md' -- '```csharp {' content || true
 }
 
-_run_mode () {
+_run_mode() {
 	# run csharp_doctest.py <mode> once per file (it takes exactly one file
 	# per invocation), continuing past failures so every file is reported.
 	# Explicit file arguments always win; discovery of annotated content
@@ -65,34 +65,34 @@ _run_mode () {
 	return "$status"
 }
 
-validate () {
+validate() {
 	# check annotation correctness: report on malformed annotations.
 	# no te requirement
 	require python
 	_run_mode validate "$@"
 }
 
-compile () {
+compile() {
 	# compile every annotated block via te --dry-run; catches API drift
 	# without executing anything
 	require python te
 	_run_mode compile "$@"
 }
 
-compare () {
+compare() {
 	# execute annotated blocks and compare their documented outputs
 	require python te
 	_run_mode compare "$@"
 }
 
-update () {
+update() {
 	# execute annotated blocks and REWRITE the documented outputs in the
 	# markdown files in place
 	require python te
 	_run_mode update "$@"
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

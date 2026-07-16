@@ -23,7 +23,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-common_flags () {
+common_flags() {
 	# Set FLAGS to the markdown-iteration base: English only, and reuse the
 	# generated docfx.json configs (--skip-gen) when they exist. After a
 	# `clean` they do not, so the generation step runs on the next build.
@@ -33,14 +33,14 @@ common_flags () {
 	fi
 }
 
-full () {
+full() {
 	# regenerate the API reference; fail on DocFX warnings
 	require python
 	common_flags
 	log_and_run "$RUN_PYTHON" build-docs.py "${FLAGS[@]}"
 }
 
-fast () {
+fast() {
 	# reuse existing API metadata (--skip-api); tolerate DocFX warnings
 	# (--permissive); the build that watch runs after each save
 	require python
@@ -48,7 +48,7 @@ fast () {
 	log_and_run "$RUN_PYTHON" build-docs.py "${FLAGS[@]}" --skip-api --permissive
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"

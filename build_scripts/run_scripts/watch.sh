@@ -23,7 +23,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 cd "$SCRIPT_DIR/../.."
 
-watch () {
+watch() {
 	# poll content/ and templates/; run the fast build on each change
 	require python
 	info "Watching content/ and templates/ for changes (Ctrl-C to stop)..."
@@ -42,7 +42,7 @@ watch () {
 	done
 }
 
-help () {
+help() {
 	# show this help
 	banner_help "$0"
 	command_help "$0"
