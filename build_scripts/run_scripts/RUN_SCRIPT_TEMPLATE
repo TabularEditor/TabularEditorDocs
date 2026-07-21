@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+################################################################################
+# TODO one-line summary, shown by './run commands' and './run help'
+#
+# TODO describe what this command does for the user running it.
+#
+# TODO list all RUN_<TOOL> environment vars applicable to this command.
+#
+# Usage:
+#   ./run TODO
+#   ./run TODO help
+################################################################################
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=build_scripts/run_scripts/lib.sh
+source "$SCRIPT_DIR/lib.sh"
+cd "$SCRIPT_DIR/../.."
+
+TODO_FUNCTION_NAME() {
+	# TODO help text for this function
+	# TODO declare tools upfront: require <tool ...>
+	require TODO
+	error 'not implemented'
+	return 1 #TODO return 0 on success
+}
+
+help() {
+	# show this help
+	banner_help "$0"
+	command_help "$0"
+}
+
+dispatch TODO_FUNCTION_DEFAULT "$@"

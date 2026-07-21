@@ -348,7 +348,7 @@ def fetch_external(url: str, need_body: bool) -> FetchResult:
     `_GET_ONLY_HOSTS`). GET downloads the body only when a fragment must be verified."""
     target = "https:" + url if url.startswith("//") else url  # protocol-relative //host needs a scheme
     get_only = need_body or _host_of(url) in _GET_ONLY_HOSTS
-    for method in (("GET",) if get_only else ("HEAD", "GET")):
+    for method in ("GET",) if get_only else ("HEAD", "GET"):
         request = urllib.request.Request(target, method=method, headers={"User-Agent": _USER_AGENT})
         try:
             with urllib.request.urlopen(request, timeout=20) as response:
@@ -642,7 +642,7 @@ def map_to_source(built: str, root: Path) -> str | None:
 def _anchor_member(type_stem: str, fragment: str) -> str:
     """Best-effort member name from a DocFX member anchor; empty when the anchor scheme does not match."""
     prefix = type_stem.replace(".", "_") + "_"
-    return fragment[len(prefix):].split("_", 1)[0] if fragment.startswith(prefix) else ""
+    return fragment[len(prefix) :].split("_", 1)[0] if fragment.startswith(prefix) else ""
 
 
 def _fragment_suffix(target: Target) -> str:
@@ -826,16 +826,20 @@ def print_diagnostics(stats: dict[str, HostStats], outcomes: dict[str, Outcome],
         return outcome.broken, outcome.partial, stat.rate_limited, stat.wait_seconds
 
     print(f"\n--- stats ({elapsed:.1f}s, {len(active)} hosts) ---")
-    print(f"{'total':>5} {'ok':>5} {'frag':>5} {'bad':>5} {'reqs':>5} {'429':>4} {'401':>4} {'403':>4} {'404':>4} "
-          f"{'oth':>4} {'net':>4} {'wait(s)':>8} {'fb':>4} {'cap':>4}  host  [retry-after seen]")
+    print(
+        f"{'total':>5} {'ok':>5} {'frag':>5} {'bad':>5} {'reqs':>5} {'429':>4} {'401':>4} {'403':>4} {'404':>4} "
+        f"{'oth':>4} {'net':>4} {'wait(s)':>8} {'fb':>4} {'cap':>4}  host  [retry-after seen]"
+    )
     for host, stat in sorted(active.items(), key=rank, reverse=True):
         oc = outcomes.get(host, empty)
         seen = sorted(stat.retry_after_seen)
         tail = f"  {seen}" if stat.rate_limited else ""
-        print(f"{oc.total:>5} {oc.ok:>5} {oc.partial:>5} {oc.broken:>5} {stat.requests:>5} {stat.rate_limited:>4} "
-              f"{oc.status.get(401, 0):>4} {oc.status.get(403, 0):>4} {oc.status.get(404, 0):>4} "
-              f"{oc.other_http:>4} {oc.transport:>4} {stat.wait_seconds:>8.1f} "
-              f"{stat.head_fallbacks:>4} {stat.final_cap:>4}  {host}{tail}")
+        print(
+            f"{oc.total:>5} {oc.ok:>5} {oc.partial:>5} {oc.broken:>5} {stat.requests:>5} {stat.rate_limited:>4} "
+            f"{oc.status.get(401, 0):>4} {oc.status.get(403, 0):>4} {oc.status.get(404, 0):>4} "
+            f"{oc.other_http:>4} {oc.transport:>4} {stat.wait_seconds:>8.1f} "
+            f"{stat.head_fallbacks:>4} {stat.final_cap:>4}  {host}{tail}"
+        )
 
 
 def cmd_validate(args: list[str], progress: _Progress, base_url: "Callable[[], str]") -> int:
@@ -851,10 +855,20 @@ def cmd_validate(args: list[str], progress: _Progress, base_url: "Callable[[], s
     under = next((arg[len("under=") :] for arg in args if arg.startswith("under=")), None)
     positional = [arg for arg in args if arg not in flags and not arg.startswith("under=")]
     root = Path(positional[0]) if positional else Path("_site")
+    if not root.is_dir():
+        # A missing root would otherwise scan zero pages and "pass"; that
+        # silence would hide a forgotten or failed build.
+        print(f"error: site root not found: {root} (build the site first)", file=sys.stderr)
+        return 2
     source_prefix = os.path.normpath(root / under) if under else None
 
     progress.phase = "enumerating"
     refs, anchors_by_file = enumerate_site(root, source_prefix, progress)
+    if progress.pages == 0:
+        # Same silence risk as a missing root: a site with no HTML means
+        # nothing was validated, not that nothing is broken.
+        print(f"error: no HTML pages found under {root} (build the site first)", file=sys.stderr)
+        return 2
     existing = _existing_files(root)
     progress.phase = "resolving"
     # Resolve the base URL only when needed: local mode never checks live, so it stays offline and config-free.

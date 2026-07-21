@@ -28,6 +28,7 @@ Usage:
 """
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -36,7 +37,10 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, NamedTuple
 
-DEFAULT_TE_BIN = "te"
+# RUN_TE is the ./run tooling's override convention (see
+# build_scripts/run_scripts/README.md); honoring it here means a pinned te
+# applies to everything built on this module.
+DEFAULT_TE_BIN = os.environ.get("RUN_TE", "te")
 _WORKDIR_PREFIX = "te-script-run."
 # Emitted between the next-to-last and last script when last_only is set, so the runner
 # can report only the final script's output. Chosen to be absent from any real output.
@@ -80,11 +84,7 @@ def _parse_json(stdout: str) -> dict[str, Any] | None:
 def _output_lines(data: dict[str, Any]) -> list[str]:
     """The text of every output-level message, in order. Pure."""
     messages = data.get("messages") or []
-    return [
-        str(m.get("text", ""))
-        for m in messages
-        if isinstance(m, dict) and m.get("level") == "output"
-    ]
+    return [str(m.get("text", "")) for m in messages if isinstance(m, dict) and m.get("level") == "output"]
 
 
 def _diagnostic_lines(data: dict[str, Any]) -> list[str]:
@@ -135,11 +135,7 @@ def summarize(stdout: str, exit_code: int) -> Result:
     """
     data = _parse_json(stdout)
     if data is None:
-        diagnostics = (
-            [f"[te] failed with exit {exit_code} and no json output"]
-            if exit_code != 0
-            else []
-        )
+        diagnostics = [f"[te] failed with exit {exit_code} and no json output"] if exit_code != 0 else []
         return Result(exit_code, exit_code == 0, "", diagnostics)
     if data.get("dryRun"):
         return _summarize_dry_run(data, exit_code)

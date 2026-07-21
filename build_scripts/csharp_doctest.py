@@ -352,8 +352,7 @@ def _classify_fence(fence: Fence, following: Fence | None) -> Block | None:
         first = fence.annotation.split(None, 1)[0] if fence.annotation else ""
         if first in ("compile", "run"):
             raise ValueError(
-                f"{first} annotation is only valid on a csharp block "
-                f"(line {fence.line}, lang={fence.lang or 'plain'})"
+                f"{first} annotation is only valid on a csharp block (line {fence.line}, lang={fence.lang or 'plain'})"
             )
         return None
     annotation = fence.annotation
