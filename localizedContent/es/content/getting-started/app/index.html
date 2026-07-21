@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Get Started — Tabular Editor 3</title>
+<meta name="description" content="Get started with Tabular Editor 3 — courses, demos, documentation, and upgrade options.">
+
+<style>
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('AlbertSans.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --border: #efeae1;
+  --text: #000000;
+  --teal: #004c47;
+  --off-white: #fafaf8;
+  --font: 'Albert Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Dark skin: the host app appends ?style=dark and JS adds .dark-mode. */
+#content-wrapper.dark-mode {
+  --bg: #232323;
+  --surface: #2a2a2a;
+  --border: #3a3a3a;
+  --text: #f0f0f0;
+  --teal: #29aa97;
+}
+
+html, body { overflow: hidden; }
+
+#content-wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#content-wrapper.dark-mode::-webkit-scrollbar { width: 16px; }
+#content-wrapper.dark-mode::-webkit-scrollbar-track { background: #323232; }
+#content-wrapper.dark-mode::-webkit-scrollbar-thumb { background: #232323; border: 1px solid #4B4B4B; }
+#content-wrapper.dark-mode::-webkit-scrollbar-thumb:hover { border-color: #d0d0d0; }
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon { color: var(--text); }
+
+.page {
+  max-width: 1717px;
+  min-height: 900px;
+  padding: clamp(32px, 4.2vw, 60px) clamp(24px, 5.4vw, 92px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.1vw, 30px);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+
+.title {
+  font-size: clamp(30px, 3.5vw, 50px);
+  font-weight: 500;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+/* ── Two-column content ── */
+.content {
+  display: flex;
+  gap: clamp(24px, 3vw, 50px);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.col-main {
+  flex: 0 0 clamp(280px, 62%, 1000px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.col-side {
+  flex: 1 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3.5vw, 50px);
+  min-width: 0;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: clamp(20px, 2.1vw, 30px) clamp(24px, 2.9vw, 42px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.card-heading {
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 500;
+  line-height: 1;
+  flex: 1;
+}
+
+/* ── Sub-labels (Courses:, Demo's:, Documentation:) ── */
+.sub-label {
+  font-size: clamp(14px, 1.1vw, 18px);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* ── List items ── */
+.item {
+  display: flex;
+  gap: 12px;
+  font-size: clamp(14px, 1.1vw, 18px);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.item-dash {
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+.item-text {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.item-text strong {
+  font-weight: 600;
+}
+
+a.inline-link, a.inline-link-bold {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a.inline-link { font-weight: 400; }
+a.inline-link-bold { font-weight: 600; }
+
+a.inline-link:hover, a.inline-link-bold:hover {
+  opacity: 0.65;
+}
+
+a.inline-link:focus-visible, a.inline-link-bold:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* ── Sidebar sections ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Edition variants: hidden until JS reveals the one matching ?edition. */
+[data-edition] { display: none; }
+[data-edition].is-visible { display: flex; }
+
+.section-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.section-heading {
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.tagline {
+  font-size: clamp(16px, 1.4vw, 22px);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* ── Feature list (bold label + regular description on next line) ── */
+.feature {
+  font-size: clamp(14px, 1.1vw, 18px);
+  line-height: 1.5;
+}
+
+.feature-name {
+  font-weight: 600;
+  display: block;
+}
+
+.feature-desc {
+  font-weight: 400;
+  display: block;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 22px;
+  font-family: var(--font);
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.btn-primary:hover { background: #468E89; }
+	
+.btn-secondary:hover {
+	background: var(--teal);
+	color: var(--off-white);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: var(--off-white);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--teal);
+}
+
+.btn-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ── Icons ── */
+.icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+  overflow: visible;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .content { flex-direction: column; }
+  .col-main { flex: none; width: 100%; }
+  .col-side { flex: none; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+<div id="content-wrapper">
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <h1 class="title">Get Started</h1>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Left: Learn card -->
+    <div class="col-main">
+      <div class="card">
+
+        <div class="card-header">
+          <!-- HatGraduation icon -->
+          <svg class="icon" viewBox="0 0 21.6 16.7968" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9.00756 0.477956C10.1176 -0.159319 11.4824 -0.159318 12.5924 0.477956L21.2987 5.47645C21.4851 5.58344 21.6 5.78192 21.6 5.9968C21.6 6.21168 21.4851 6.41015 21.2987 6.51714L18 8.41098V13.7968C18 13.9559 17.9368 14.1085 17.8243 14.221L17.8224 14.2229L17.8196 14.2257L17.8113 14.2338L17.7841 14.2598C17.7612 14.2814 17.7289 14.3113 17.6873 14.3483C17.6041 14.4223 17.4835 14.5248 17.3267 14.6462C17.0133 14.8888 16.5538 15.2081 15.9574 15.5262C14.7639 16.1627 13.0175 16.7968 10.8 16.7968C8.58254 16.7968 6.8361 16.1627 5.64265 15.5262C5.04622 15.2081 4.58671 14.8888 4.27332 14.6462C4.11652 14.5248 3.99593 14.4223 3.91271 14.3483C3.87109 14.3113 3.83877 14.2814 3.8159 14.2598C3.68671 14.1351 3.6 13.9813 3.6 13.7968V8.41098L1.2 7.03311L1.2 12.5968C1.2 12.9281 0.931371 13.1968 0.6 13.1968C0.268629 13.1968 0 12.9281 0 12.5968V5.9968C0 5.76954 0.126344 5.57176 0.312622 5.46993L9.00756 0.477956ZM12.5924 11.5155C11.4824 12.1528 10.1176 12.1528 9.00759 11.5155L4.8 9.09991V13.5294C4.85623 13.5769 4.92563 13.6336 5.00793 13.6973C5.27579 13.9047 5.67878 14.1854 6.20735 14.4673C7.26391 15.0308 8.81746 15.5968 10.8 15.5968C12.7825 15.5968 14.3361 15.0308 15.3926 14.4673C15.9212 14.1854 16.3242 13.9047 16.5921 13.6973C16.6744 13.6336 16.7438 13.5769 16.8 13.5294V9.09991L12.5924 11.5155ZM11.995 1.51864C11.255 1.09379 10.345 1.09379 9.60504 1.51864L1.80507 5.99679L9.60506 10.4748C10.345 10.8997 11.255 10.8997 11.9949 10.4749L19.7949 5.99679L11.995 1.51864Z" fill="currentColor"/>
+          </svg>
+          <h2 class="card-heading">Learn Tabular Editor 3</h2>
+        </div>
+
+        <p class="sub-label">Courses:</p>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>Tabular Editor for beginners</strong>: Create your first semantic model in Power BI with Tabular Editor. Learn the interface, connect, build, and optimize models efficiently — all in one free course. — <a class="inline-link" href="https://learn.tabulareditor.com/beginnercourse" target="_blank" rel="noopener">Open course</a>
+          </span>
+        </div>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>Want to go deeper? Explore our <a class="inline-link-bold" href="https://tabulareditor.com/learn" target="_blank" rel="noopener">Learning hub</a>.</strong>
+          </span>
+        </div>
+
+        <p class="sub-label">Demo's:</p>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>Tabular Editor UI Overview</strong>: Let's walk through the Tabular Editor 3 UI together! — <a class="inline-link" href="https://tabulareditor.com/resources/click-through-demos" target="_blank" rel="noopener">View demo</a>
+          </span>
+        </div>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>Your first Tabular Editor Model</strong>: Build your first model, explore the data, and make batch changes. — <a class="inline-link" href="https://tabulareditor.com/resources/click-through-demos" target="_blank" rel="noopener">View demo</a>
+          </span>
+        </div>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>See more demo's at <a class="inline-link-bold" href="https://tabulareditor.com/resources/click-through-demos" target="_blank" rel="noopener">Click-through demos</a>.</strong>
+          </span>
+        </div>
+
+        <p class="sub-label">Documentation:</p>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>Getting Started with Tabular Editor 3</strong>: <a class="inline-link" href="https://docs.tabulareditor.com/en/getting-started/getting-started.html" target="_blank" rel="noopener">View now</a>
+          </span>
+        </div>
+
+        <div class="item">
+          <span class="item-dash">—</span>
+          <span class="item-text">
+            <strong>Explore all of our <a class="inline-link-bold" href="https://docs.tabulareditor.com/en/index.html?tabs=TE3" target="_blank" rel="noopener">Docs.</a></strong>
+          </span>
+        </div>
+
+      </div>
+    </div><!-- /col-main -->
+
+    <!-- Right / sidebar -->
+    <div class="col-side">
+
+      <!-- TRIAL: buy -->
+      <div class="section" data-edition="trial">
+        <div class="section-header">
+          <svg class="icon" viewBox="0 0 19.2 19.2" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.6 0C1.61178 0 0 1.61177 0 3.6V6.42501C0.343157 6.03622 0.748314 5.70344 1.2 5.44215V3.6C1.2 2.27452 2.27452 1.2 3.6 1.2H7.8C8.13137 1.2 8.4 0.931371 8.4 0.6C8.4 0.268629 8.13137 0 7.8 0H3.6ZM15.6 19.2H12.775C13.1638 18.8568 13.4966 18.4517 13.7578 18H15.6C16.9255 18 18 16.9255 18 15.6V11.4C18 11.0686 18.2686 10.8 18.6 10.8C18.9314 10.8 19.2 11.0686 19.2 11.4V15.6C19.2 17.5882 17.5882 19.2 15.6 19.2ZM11.4 0C11.0686 0 10.8 0.268629 10.8 0.6C10.8 0.931371 11.0686 1.2 11.4 1.2H15.6C16.9255 1.2 18 2.27452 18 3.6V7.8C18 8.13137 18.2686 8.4 18.6 8.4C18.9314 8.4 19.2 8.13137 19.2 7.8V3.6C19.2 1.61177 17.5882 0 15.6 0H11.4ZM3.6 6C1.61178 6 0 7.61178 0 9.6V15.6C0 17.5882 1.61178 19.2 3.6 19.2H9.6C11.5882 19.2 13.2 17.5882 13.2 15.6V9.6C13.2 7.61178 11.5882 6 9.6 6H3.6ZM1.2 9.6C1.2 8.27452 2.27452 7.2 3.6 7.2L3.6 9.6H1.2ZM4.8 9.6L4.8 7.2H8.4V9.6H4.8ZM9.6 9.6L9.6 7.2C10.9255 7.2 12 8.27452 12 9.6H9.6ZM4.8 10.8H8.4L8.4 14.4H4.8L4.8 10.8ZM9.6 10.8H12V14.4H9.6L9.6 10.8ZM4.8 15.6H8.4V18H4.8V15.6ZM12 15.6C12 16.9255 10.9255 18 9.6 18V15.6H12ZM1.2 10.8H3.6L3.6 14.4H1.2V10.8ZM1.2 15.6H3.6V18C2.27452 18 1.2 16.9255 1.2 15.6Z" fill="currentColor"/>
+          </svg>
+          <h2 class="section-heading">Tabular Editor 3</h2>
+        </div>
+        <p class="tagline">Cut development time by up to 60%</p>
+        <div class="feature"><span class="feature-name">Faster development</span><span class="feature-desc">Edit DAX, manage tables, and refine relationships in seconds.</span></div>
+        <div class="feature"><span class="feature-name">Advanced debugging</span><span class="feature-desc">Pinpoint and resolve issues with powerful DAX debugging tools.</span></div>
+        <div class="feature"><span class="feature-name">Seamless Power BI and SSAS integration</span><span class="feature-desc">Work directly with your data models. Plug into what you already use, and work the way you want.</span></div>
+        <a class="btn btn-primary" href="#">Buy now</a>
+      </div>
+
+      <!-- DESKTOP: upgrade to unlock features missing in Desktop -->
+      <div class="section" data-edition="desktop">
+        <div class="section-header">
+          <svg class="icon" viewBox="0 0 19.2 19.2" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.6 0C1.61178 0 0 1.61177 0 3.6V6.42501C0.343157 6.03622 0.748314 5.70344 1.2 5.44215V3.6C1.2 2.27452 2.27452 1.2 3.6 1.2H7.8C8.13137 1.2 8.4 0.931371 8.4 0.6C8.4 0.268629 8.13137 0 7.8 0H3.6ZM15.6 19.2H12.775C13.1638 18.8568 13.4966 18.4517 13.7578 18H15.6C16.9255 18 18 16.9255 18 15.6V11.4C18 11.0686 18.2686 10.8 18.6 10.8C18.9314 10.8 19.2 11.0686 19.2 11.4V15.6C19.2 17.5882 17.5882 19.2 15.6 19.2ZM11.4 0C11.0686 0 10.8 0.268629 10.8 0.6C10.8 0.931371 11.0686 1.2 11.4 1.2H15.6C16.9255 1.2 18 2.27452 18 3.6V7.8C18 8.13137 18.2686 8.4 18.6 8.4C18.9314 8.4 19.2 8.13137 19.2 7.8V3.6C19.2 1.61177 17.5882 0 15.6 0H11.4ZM3.6 6C1.61178 6 0 7.61178 0 9.6V15.6C0 17.5882 1.61178 19.2 3.6 19.2H9.6C11.5882 19.2 13.2 17.5882 13.2 15.6V9.6C13.2 7.61178 11.5882 6 9.6 6H3.6ZM1.2 9.6C1.2 8.27452 2.27452 7.2 3.6 7.2L3.6 9.6H1.2ZM4.8 9.6L4.8 7.2H8.4V9.6H4.8ZM9.6 9.6L9.6 7.2C10.9255 7.2 12 8.27452 12 9.6H9.6ZM4.8 10.8H8.4L8.4 14.4H4.8L4.8 10.8ZM9.6 10.8H12V14.4H9.6L9.6 10.8ZM4.8 15.6H8.4V18H4.8V15.6ZM12 15.6C12 16.9255 10.9255 18 9.6 18V15.6H12ZM1.2 10.8H3.6L3.6 14.4H1.2V10.8ZM1.2 15.6H3.6V18C2.27452 18 1.2 16.9255 1.2 15.6Z" fill="currentColor"/>
+          </svg>
+          <h2 class="section-heading">Upgrade your edition</h2>
+        </div>
+        <p class="tagline">Do more than edit Power BI Desktop models</p>
+        <div class="feature"><span class="feature-name">Open and save models from disk</span><span class="feature-desc">Work with TMDL, .bim, .pbip, .pbit and Tabular Editor folder structures outside Power BI Desktop.</span></div>
+        <div class="feature"><span class="feature-name">Workspace Mode</span><span class="feature-desc">Edit metadata on disk while keeping a live database in sync.</span></div>
+        <div class="feature"><span class="feature-name">Connect beyond Power BI Desktop</span><span class="feature-desc">SQL Server Analysis Services, Azure Analysis Services and Power BI Premium Per User.</span></div>
+        <div class="feature"><span class="feature-name">Advanced Refresh dialog</span><span class="feature-desc">Fine-grained control over table and partition processing.</span></div>
+        <a class="btn btn-primary" href="#">Click here to upgrade</a>
+      </div>
+
+      <!-- BUSINESS: upgrade to unlock Enterprise-only features -->
+      <div class="section" data-edition="business">
+        <div class="section-header">
+          <svg class="icon" viewBox="0 0 19.2 19.2" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.6 0C1.61178 0 0 1.61177 0 3.6V6.42501C0.343157 6.03622 0.748314 5.70344 1.2 5.44215V3.6C1.2 2.27452 2.27452 1.2 3.6 1.2H7.8C8.13137 1.2 8.4 0.931371 8.4 0.6C8.4 0.268629 8.13137 0 7.8 0H3.6ZM15.6 19.2H12.775C13.1638 18.8568 13.4966 18.4517 13.7578 18H15.6C16.9255 18 18 16.9255 18 15.6V11.4C18 11.0686 18.2686 10.8 18.6 10.8C18.9314 10.8 19.2 11.0686 19.2 11.4V15.6C19.2 17.5882 17.5882 19.2 15.6 19.2ZM11.4 0C11.0686 0 10.8 0.268629 10.8 0.6C10.8 0.931371 11.0686 1.2 11.4 1.2H15.6C16.9255 1.2 18 2.27452 18 3.6V7.8C18 8.13137 18.2686 8.4 18.6 8.4C18.9314 8.4 19.2 8.13137 19.2 7.8V3.6C19.2 1.61177 17.5882 0 15.6 0H11.4ZM3.6 6C1.61178 6 0 7.61178 0 9.6V15.6C0 17.5882 1.61178 19.2 3.6 19.2H9.6C11.5882 19.2 13.2 17.5882 13.2 15.6V9.6C13.2 7.61178 11.5882 6 9.6 6H3.6ZM1.2 9.6C1.2 8.27452 2.27452 7.2 3.6 7.2L3.6 9.6H1.2ZM4.8 9.6L4.8 7.2H8.4V9.6H4.8ZM9.6 9.6L9.6 7.2C10.9255 7.2 12 8.27452 12 9.6H9.6ZM4.8 10.8H8.4L8.4 14.4H4.8L4.8 10.8ZM9.6 10.8H12V14.4H9.6L9.6 10.8ZM4.8 15.6H8.4V18H4.8V15.6ZM12 15.6C12 16.9255 10.9255 18 9.6 18V15.6H12ZM1.2 10.8H3.6L3.6 14.4H1.2V10.8ZM1.2 15.6H3.6V18C2.27452 18 1.2 16.9255 1.2 15.6Z" fill="currentColor"/>
+          </svg>
+          <h2 class="section-heading">Upgrade to Enterprise</h2>
+        </div>
+        <p class="tagline">Unlock enterprise-tier modeling</p>
+        <div class="feature"><span class="feature-name">Enterprise-tier connections</span><span class="feature-desc">Power BI Premium and Fabric capacities (P/F/A/EM SKUs) via the XMLA endpoint, SQL Server Enterprise and Azure AS Standard.</span></div>
+        <div class="feature"><span class="feature-name">Direct Lake semantic models</span><span class="feature-desc">Build and edit Direct Lake datasets.</span></div>
+        <div class="feature"><span class="feature-name">Perspectives and multiple partitions</span><span class="feature-desc">On SQL Server and Azure Analysis Services models.</span></div>
+        <div class="feature"><span class="feature-name">Semantic Bridge and DAX Optimizer</span><span class="feature-desc">Import Databricks metric views, plus a free DAX Optimizer license.</span></div>
+        <a class="btn btn-primary" href="#">Click here to upgrade</a>
+      </div>
+
+      <!-- ENTERPRISE: no upsell, support contact instead -->
+      <div class="section" data-edition="enterprise">
+        <div class="section-header">
+          <svg class="icon" viewBox="0 0 20.4014 21.5982" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14.5922 0.0309528C14.9066 0.135741 15.0765 0.475533 14.9717 0.789899L14.3717 2.5899C14.2669 2.90427 13.9271 3.07416 13.6128 2.96937C13.2984 2.86458 13.1285 2.52479 13.2333 2.21043L13.8333 0.410426C13.9381 0.0960601 14.2779 -0.0738358 14.5922 0.0309528ZM19.0278 2.22441C19.2621 1.9901 19.2621 1.6102 19.0278 1.37588C18.7935 1.14157 18.4136 1.14157 18.1793 1.37588L15.7793 3.77588C15.5449 4.0102 15.5449 4.3901 15.7793 4.62441C16.0136 4.85873 16.3935 4.85873 16.6278 4.62441L19.0278 2.22441ZM6.73079 2.57469C7.4552 1.05003 9.48557 0.729817 10.6441 1.95751L18.5482 10.3337C19.6862 11.5397 19.2876 13.5088 17.7703 14.1772L13.0457 16.2586C13.1476 16.621 13.2022 17.0032 13.2022 17.3982C13.2022 19.7178 11.3218 21.5982 9.00215 21.5982C7.49523 21.5982 6.17366 20.8045 5.43261 19.6125L3.99186 20.2472C3.31486 20.5454 2.52433 20.3991 1.99895 19.8783L0.532822 18.4249C-0.0100176 17.8867 -0.153794 17.0645 0.174238 16.3741L6.73079 2.57469ZM6.54642 19.1218C7.08923 19.8937 7.98678 20.3982 9.00215 20.3982C10.659 20.3982 12.0022 19.055 12.0022 17.3982C12.0022 17.1754 11.9779 16.9582 11.9318 16.7493L6.54642 19.1218ZM9.77131 2.78109C9.19205 2.16724 8.17687 2.32735 7.81466 3.08968L1.25811 16.889C1.14877 17.1192 1.1967 17.3933 1.37764 17.5727L2.84377 19.026C3.0189 19.1997 3.28241 19.2484 3.50807 19.149L17.2865 13.0791C18.0451 12.7448 18.2444 11.7603 17.6755 11.1573L9.77131 2.78109ZM18.0023 6.00015C17.671 6.00015 17.4023 6.26877 17.4023 6.60015C17.4023 6.93152 17.671 7.20015 18.0023 7.20015H19.8014C20.1328 7.20015 20.4014 6.93152 20.4014 6.60015C20.4014 6.26877 20.1328 6.00015 19.8014 6.00015H18.0023Z" fill="currentColor"/>
+          </svg>
+          <h2 class="section-heading">Need help?</h2>
+        </div>
+        <p class="tagline">Our team is here to help you get the most out of Tabular Editor 3.</p>
+        <a class="btn btn-primary" href="mailto:support@tabulareditor.com?subject=Tabular%20Editor%203%20support">Contact support</a>
+      </div>
+
+      <!-- Pre-sales: shown for everyone except Enterprise -->
+      <div class="section" data-edition="trial desktop business">
+        <div class="section-header">
+          <svg class="icon" viewBox="0 0 20.4014 21.5982" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14.5922 0.0309528C14.9066 0.135741 15.0765 0.475533 14.9717 0.789899L14.3717 2.5899C14.2669 2.90427 13.9271 3.07416 13.6128 2.96937C13.2984 2.86458 13.1285 2.52479 13.2333 2.21043L13.8333 0.410426C13.9381 0.0960601 14.2779 -0.0738358 14.5922 0.0309528ZM19.0278 2.22441C19.2621 1.9901 19.2621 1.6102 19.0278 1.37588C18.7935 1.14157 18.4136 1.14157 18.1793 1.37588L15.7793 3.77588C15.5449 4.0102 15.5449 4.3901 15.7793 4.62441C16.0136 4.85873 16.3935 4.85873 16.6278 4.62441L19.0278 2.22441ZM6.73079 2.57469C7.4552 1.05003 9.48557 0.729817 10.6441 1.95751L18.5482 10.3337C19.6862 11.5397 19.2876 13.5088 17.7703 14.1772L13.0457 16.2586C13.1476 16.621 13.2022 17.0032 13.2022 17.3982C13.2022 19.7178 11.3218 21.5982 9.00215 21.5982C7.49523 21.5982 6.17366 20.8045 5.43261 19.6125L3.99186 20.2472C3.31486 20.5454 2.52433 20.3991 1.99895 19.8783L0.532822 18.4249C-0.0100176 17.8867 -0.153794 17.0645 0.174238 16.3741L6.73079 2.57469ZM6.54642 19.1218C7.08923 19.8937 7.98678 20.3982 9.00215 20.3982C10.659 20.3982 12.0022 19.055 12.0022 17.3982C12.0022 17.1754 11.9779 16.9582 11.9318 16.7493L6.54642 19.1218ZM9.77131 2.78109C9.19205 2.16724 8.17687 2.32735 7.81466 3.08968L1.25811 16.889C1.14877 17.1192 1.1967 17.3933 1.37764 17.5727L2.84377 19.026C3.0189 19.1997 3.28241 19.2484 3.50807 19.149L17.2865 13.0791C18.0451 12.7448 18.2444 11.7603 17.6755 11.1573L9.77131 2.78109ZM18.0023 6.00015C17.671 6.00015 17.4023 6.26877 17.4023 6.60015C17.4023 6.93152 17.671 7.20015 18.0023 7.20015H19.8014C20.1328 7.20015 20.4014 6.93152 20.4014 6.60015C20.4014 6.26877 20.1328 6.00015 19.8014 6.00015H18.0023Z" fill="currentColor"/>
+          </svg>
+          <h2 class="section-heading">Need more info?</h2>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-secondary" href="#">Book a demo</a>
+          <a class="btn btn-secondary" href="#">Get a quote</a>
+        </div>
+      </div>
+
+    </div><!-- /col-side -->
+
+  </div><!-- /content -->
+
+</div><!-- /page -->
+</div><!-- /content-wrapper -->
+<script>
+  function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(window.location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+  function applyStyle() {
+    if (getParameterByName('style') === 'dark') {
+      document.getElementById('content-wrapper').classList.add('dark-mode');
+    }
+  }
+  function applyEdition() {
+    var edition = getParameterByName('edition') || 'trial';
+    var blocks = document.querySelectorAll('[data-edition]');
+    for (var i = 0; i < blocks.length; i++) {
+      var list = blocks[i].getAttribute('data-edition').split(' ');
+      if (list.indexOf(edition) !== -1) blocks[i].classList.add('is-visible');
+      else blocks[i].classList.remove('is-visible');
+    }
+  }
+  function init() { applyStyle(); applyEdition(); }
+  if (document.addEventListener) { document.addEventListener('DOMContentLoaded', init); }
+  else if (document.attachEvent) { document.attachEvent('onreadystatechange', function () { if (document.readyState === 'complete') { init(); } }); }
+</script>
+</body>
+</html>
