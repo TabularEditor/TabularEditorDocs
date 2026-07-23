@@ -16,9 +16,9 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI ships with a drop-in **agent skill** that teaches AI coding agents how to drive the `te` command-line interface. It's a single Markdown file, [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skill), packed with the CLI's conventions, command reference, workflows, and gotchas. Once installed, an agent answers "deploy this model" or "add a measure that calculates margin" with idiomatic `te` invocations instead of guessing or hallucinating flags.
+The Tabular Editor CLI ships with a drop-in **agent skill** that teaches AI coding agents how to drive the `te` command-line interface. It's a single Markdown file, [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), packed with the CLI's conventions, command reference, workflows, and gotchas. Once installed, an agent answers "deploy this model" or "add a measure that calculates margin" with idiomatic `te` invocations instead of guessing or hallucinating flags.
 
-The skill is maintained in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI/tree/main/skill) repository and tracks the preview surface of the CLI as it evolves.
+The skill is maintained in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) repository and tracks the preview surface of the CLI as it evolves.
 
 ## What a skill is
 
@@ -42,13 +42,13 @@ This is the same ground the rest of this section documents for humans. See @te-c
 
 ## Download the skill file
 
-The skill is a single file: [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skill/SKILL.md).
+The skill is a single file: [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md).
 
-1. Open [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skill/SKILL.md) on GitHub.
+1. Open [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) on GitHub.
 2. Click **Download raw file** (top-right of the file viewer).
 3. Save the file somewhere convenient.
 
-You'll move this file to a tool-specific location in the install steps below. To see what changed between versions before grabbing a newer copy, check the [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skill/CHANGELOG.md).
+You'll move this file to a tool-specific location in the install steps below. To see what changed between versions before grabbing a newer copy, check the [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md).
 
 ## Choose an install scope
 
@@ -155,13 +155,13 @@ For tools that follow the [`AGENTS.md` convention](https://agents.md) or accept 
 
 To pull a newer version:
 
-1. Open [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skill/SKILL.md) on GitHub and use **Download raw file** to grab the latest copy.
+1. Open [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) on GitHub and use **Download raw file** to grab the latest copy.
 2. Replace the file you previously installed:
    - **Native skills (Claude Code, Codex, Copilot Agent Skills):** overwrite `SKILL.md` in the skill folder.
    - **Claude.ai / Desktop:** re-zip the `te-cli` folder and re-upload it through the Skills UI.
    - **Instruction-file installs (Copilot custom instructions, AGENTS.md):** re-paste the body into `.github/copilot-instructions.md` or `AGENTS.md`.
 
-See the [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skill/CHANGELOG.md) for what changed between versions.
+See the [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md) for what changed between versions.
 
 ## Next steps
 
