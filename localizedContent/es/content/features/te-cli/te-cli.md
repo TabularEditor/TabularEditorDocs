@@ -38,7 +38,7 @@ En conjunto, hacen que el mismo binario funcione bien para tres perfiles muy dis
 - **Canalizaciones de CI/CD** — ejecución no interactiva, anotaciones de GitHub Actions y Azure DevOps, y resultados de pruebas compatibles con VSTEST.
 
 > [!Note]
-> Cuando uses la TE CLI con agentes, usa la [skill de TE CLI para agentes de codificación con IA](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), que encapsula la TE CLI de principio a fin.
+> When using the TE CLI with agents use the TE CLI [skill for AI coding agents](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) that wraps the TE CLI end-to-end. See [AI Agent Skill](xref:te-cli-skill) for how to install the skill.
 
 ## Qué puede hacer la CLI
 
