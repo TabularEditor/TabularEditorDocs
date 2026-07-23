@@ -17,9 +17,9 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Tabular Editor CLI incluye un **skill de agente** listo para usar que enseña a los agentes de programación con IA a manejar la interfaz de línea de comandos `te`. It's a single Markdown file, [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), packed with the CLI's conventions, command reference, workflows, and gotchas. Una vez instalado, un agente responde a «despliega este modelo» o «añade una medida que calcule el margen» con invocaciones idiomáticas de `te`, en lugar de adivinar o inventarse parámetros.
+Tabular Editor CLI incluye un **skill de agente** listo para usar que enseña a los agentes de programación con IA a manejar la interfaz de línea de comandos `te`. Es un único archivo Markdown, [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), que reúne las convenciones de la CLI, la referencia de comandos, los flujos de trabajo y los aspectos a tener en cuenta. Una vez instalado, un agente responde a «despliega este modelo» o «añade una medida que calcule el margen» con invocaciones idiomáticas de `te`, en lugar de adivinar o inventarse parámetros.
 
-The skill is maintained in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) repository and tracks the preview surface of the CLI as it evolves.
+El skill se mantiene en el repositorio público [TabularEditor/CLI](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) y hace un seguimiento de las funcionalidades en versión preliminar de la CLI a medida que evoluciona.
 
 ## Qué es un skill
 
@@ -43,13 +43,13 @@ Esto cubre lo mismo que el resto de esta sección documenta para humanos. Consul
 
 ## Descarga el archivo del skill
 
-The skill is a single file: [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md).
+Este skill es un único archivo: [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md).
 
-1. Open [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) on GitHub.
+1. Abre [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) en GitHub.
 2. Haz clic en **Download raw file** (en la parte superior derecha del visor de archivos).
 3. Guarda el archivo en un lugar práctico.
 
-Moverás este archivo a una ubicación específica de la herramienta en los pasos de instalación que se indican a continuación. To see what changed between versions before grabbing a newer copy, check the [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md).
+Moverás este archivo a una ubicación específica de la herramienta en los pasos de instalación que se indican a continuación. Para ver qué cambió entre versiones antes de descargar una copia más reciente, consulta el [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md).
 
 ## Elige un ámbito de instalación
 
@@ -155,13 +155,13 @@ Para herramientas que siguen la [convención `AGENTS.md`](https://agents.md) o a
 
 Para obtener una versión más reciente:
 
-1. Open [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) on GitHub and use **Download raw file** to grab the latest copy.
+1. Abre [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) en GitHub y usa **Download raw file** para descargar la copia más reciente.
 2. Sustituye el archivo que instalaste antes:
    - **Skills nativas (Claude Code, Codex, Copilot Agent Skills):** sobrescribe `SKILL.md` en la carpeta de la skill.
    - **Claude.ai / Desktop:** vuelve a comprimir en ZIP la carpeta `te-cli` y vuelve a subirla desde la interfaz de Skills.
    - **Instalaciones mediante archivos de instrucciones (instrucciones personalizadas de Copilot, AGENTS.md):** vuelve a pegar el texto completo en `.github/copilot-instructions.md` o `AGENTS.md`.
 
-See the [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md) for what changed between versions.
+Consulta el [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md) para ver qué cambió entre versiones.
 
 ## Siguientes pasos
 
