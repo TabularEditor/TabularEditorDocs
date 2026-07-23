@@ -2,7 +2,7 @@
 uid: built-in-bpa-rules
 title: Built-in BPA Rules
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-07-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Enterprise Edition feature providing 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
+description: 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # Built-in BPA Rules
 
 ## Overview
 
-Tabular Editor 3 Enterprise Edition includes 28 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
+Tabular Editor 3 includes 28 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
 
 Unlike custom rules stored in JSON files, built-in rules:
 - Are integrated directly into the application
@@ -119,7 +119,6 @@ Built-in and custom rules work side by side:
 | **Updates** | Automatic with releases | Manual editing required |
 | **Modification** | Read-only | Fully editable |
 | **Documentation** | Integrated KB articles | User-provided descriptions |
-| **Availability** | Enterprise Edition only | All editions |
 | **Sharing** | Consistent across teams | Requires manual distribution |
 
 ### Recommended Workflow
@@ -159,7 +158,7 @@ When rolling out built-in rules to your team:
 ### Built-in Rules Not Appearing
 
 If built-in rules don't show in the BPA window:
-1. Check that you're using Tabular Editor 3 Enterprise Edition
+1. Check that you're using Tabular Editor 3.24.0 or later
 2. Verify that built-in rules are enabled in **Tools** > **Preferences** > **Best Practice Analyzer**
 3. Restart Tabular Editor if you just changed preferences
 4. Confirm your license is active
@@ -175,7 +174,6 @@ Built-in rules reserve certain ID prefixes. Choose a different ID that doesn't s
 ## Compatibility
 
 - Requires Tabular Editor 3.24.0 or later
-- Enterprise Edition only
 - Works with all compatibility levels (1200+)
 
 ## Next Steps
