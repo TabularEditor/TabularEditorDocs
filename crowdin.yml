@@ -11,6 +11,10 @@
     "translation": "/localizedContent/%two_letters_code%/content/404.html"
   },
   {
+    "source": "/content/getting-started/app/**/*.html",
+    "translation": "/localizedContent/%two_letters_code%/%original_path%/%original_file_name%"
+  },
+  {
     "source": "/content/toc.yml",
     "translation": "/localizedContent/%two_letters_code%/content/toc.yml"
   },
