@@ -94,11 +94,11 @@ body {
   display: flex;
   gap: clamp(24px, 3vw, 50px);
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .col-main {
-  flex: 0 0 clamp(280px, 62%, 1000px);
+  flex: 0 1 clamp(280px, 62%, 1000px);
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -106,7 +106,7 @@ body {
 }
 
 .col-side {
-  flex: 1 0 260px;
+  flex: 1 1 260px;
   display: flex;
   flex-direction: column;
   gap: clamp(28px, 3.5vw, 50px);
