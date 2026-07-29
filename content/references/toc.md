@@ -1,7 +1,7 @@
 # Downloads and Releases
 ## @downloads
 ## @release-history
-## @whats-new
+
 
 # Technical Reference
 ## @faq
