@@ -30,7 +30,7 @@ Compatibility Level and Compatibility Mode are separate properties that serve di
 
 | Property | Controls | Values |
 |---|---|---|
-| `Database.CompatibilityLevel` | Which TOM features are available (e.g., custom calendars, DAX UDFs) | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
+| `Database.CompatibilityLevel` | Which TOM features are available (e.g., custom calendars, DAX UDFs) | `1200`, `1500`, `1600`, `1701`, `1702`, `1705`, etc. |
 | `Database.CompatibilityMode` | Which platform the model targets, which TOM objects and properties are available, and which edition restrictions apply | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel` |
 
 If you need to change the platform target rather than unlock new TOM features, see [Change compatibility mode](xref:change-compatibility-mode).
@@ -40,7 +40,7 @@ If you need to change the platform target rather than unlock new TOM features, s
 Upgrade when:
 
 - A feature exists in Power BI Desktop but the related TOM property is missing in Tabular Editor
-- You need newly introduced capabilities like **custom calendars** (1701+) or **DAX user-defined functions** (1702+)
+- You need newly introduced capabilities like **custom calendars** (1701+), **DAX user-defined functions** (1702+), or **user-context calculated columns** (calculated columns that use user-context functions, 1705+)
 - You're standardizing development across environments and want consistent minimum feature sets
 
 ## Before you start
@@ -86,6 +86,7 @@ Examples:
 
 - **Custom calendars:** 1701+
 - **DAX UDFs:** 1702+
+- **User-context calculated columns:** 1705+
 
 > [!NOTE]
 > Minimum required levels for features can change as the platform evolves. Always verify prerequisites in current documentation. Some levels/features are Power BI-only and may not be available on SSAS/AAS.

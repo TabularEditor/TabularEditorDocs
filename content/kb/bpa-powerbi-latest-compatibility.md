@@ -70,13 +70,13 @@ Team policy to delay upgrades.
 
 ```
 Model Compatibility Level: 1500
-Current Maximum Level: 1700
+Current Maximum Level: 1705
 ```
 
 ### After Fix
 
 ```
-Model Compatibility Level: 1700 (Latest)
+Model Compatibility Level: 1705 (Latest)
 ```
 
 Access to new features like enhanced calculation groups and field parameters.

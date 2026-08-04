@@ -215,19 +215,19 @@ te open ./model.bim      # Open a BIM file in TE3
 
 ### init
 
-Create a new empty semantic model at the given path. Defaults to a TMDL model in `PowerBI` compatibility mode at compatibility level 1702.
+Create a new empty semantic model at the given path. Defaults to a TMDL model in `PowerBI` compatibility mode at compatibility level 1705.
 
 `te init` accepts:
 
 - `<output-path>` - positional argument: directory to create the model in (omit to use the global `--model` path).
 - `--compatibility-mode <mode>` - `PowerBI` (default) or `AnalysisServices`.
-- `--compatibility-level <N>` (alias `--compat`) - compatibility level. Defaults to `1702` when the mode is `PowerBI`, `1500` otherwise. See @update-compatibility-level.
+- `--compatibility-level <N>` (alias `--compat`) - compatibility level. Defaults to `1705` when the mode is `PowerBI`, `1500` otherwise. See @update-compatibility-level.
 - `--name <name>` - model/database name (default: the directory name).
 - `--serialization <fmt>` - `tmdl` (default), `bim` (alias `tmsl`), `database.json`, `pbip`.
 - `--force` - replace any existing file or directory at the target path.
 
 ```bash
-te init ./new-model                                       # TMDL, PowerBI mode, compat 1702
+te init ./new-model                                       # TMDL, PowerBI mode, compat 1705
 te init ./new-model --serialization bim                   # Single-file BIM model
 te init ./as-model --compatibility-mode AnalysisServices  # AS model, compat 1500
 te init ./existing-dir --force                            # Overwrite non-empty directory
