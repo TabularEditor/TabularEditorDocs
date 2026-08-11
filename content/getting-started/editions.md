@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2026-06-09
+updated: 2026-08-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,6 +27,13 @@ The main difference between the various editions of Tabular Editor 3, is which t
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
 
 We consider the **highlighted** flavors of Analysis Services to be Enterprise-Tier, and as such, these may only be used with Tabular Editor 3 Enterprise Edition.
+
+We draw that line where Microsoft draws its own, between per-user and capacity-based licensing:
+
+- **Premium Per User is a per-seat license.** The person editing the model is the person who paid for the seat. That matches how Business Edition is licensed: a personal, non-transferable key tied to a single user. See [Personal vs. Transferable licenses](#personal-vs-transferable-licenses).
+- **Premium Capacity (P SKUs), Embedded Capacity (A/EM SKUs) and Fabric Capacity (F SKUs) are shared, organization-scale deployments.** Models hosted there are team-owned and serve many consumers, which is the scenario Enterprise Edition is built and priced for.
+
+The same logic applies outside Power BI. Business Edition covers the SQL Server Analysis Services Developer and Standard editions along with the Azure Analysis Services Developer and Basic tiers. Those tiers serve a single developer or a small-scale deployment. SQL Server Analysis Services Enterprise Edition and Azure Analysis Services Standard tier host organization-scale models, so they require Enterprise Edition.
 
 > [!IMPORTANT]
 > Tabular Editor only allows editing data models using Compatibility Level 1200 or higher. This is the default on any instance of Analysis Services starting from SQL Server 2016. For the same reason, Tabular Editor does not support Excel PowerPivot, as this uses an earlier Compatibility Level.
