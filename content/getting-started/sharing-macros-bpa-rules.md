@@ -49,30 +49,6 @@ If your team maintains a single semantic model repository today, the same-repo a
 
 Whichever you choose, the sync mechanisms described below work the same way. A dedicated macros repository just means they reach into a second repository rather than one you already have checked out.
 
-## Sharing BPA rules
-
-Tabular Editor has first-class support for combining Best Practice Analyzer rules from multiple sources, with no symlinks or workarounds required:
-
-- **Rule collections** let a model draw rules from the current model, the local user's `BPARules.json`, a machine-wide `BPARules.json` and any number of additional collections you add explicitly. Those additional sources include a file elsewhere on disk (with support for paths relative to the model, so the rule file can live in the same repository), a network share or an HTTP/HTTPS URL. Collections have a defined precedence order, so a shared central rule can be overridden at the model level where needed. See [Managing Best Practice Rules](xref:best-practice-analyzer#managing-best-practice-rules) for how to add and prioritize collections.
-- **Built-in rules** (Tabular Editor 3) ship a curated, versioned set of best-practice rules directly in the application, updated automatically with each release, with knowledge-base articles linked from each rule. These sit alongside your custom rules rather than replacing them. See [Built-in BPA Rules](xref:built-in-bpa-rules).
-
-Between these two features, most "how do we share BPA rules across the team" scenarios are covered natively. A shared rule file committed to a repository and included as a collection via a relative path, network share or URL is often all you need. No symlink or hook is required, since Tabular Editor reads the collection directly rather than through a fixed personal path.
-
-> [!NOTE]
-> Because rule collections can point at a relative path, a network share or a URL, the same-repo-vs-separate-repo question above matters much less for BPA rules than for macros. A rule collection works the same way regardless of which repository the rule file lives in, since nothing needs to be copied or symlinked onto a fixed local path first. This is one practical advantage of BPA's native multi-source support over the file-copying mechanisms macros currently require.
-
-### Which collection type to use
-
-Of the three ways to add an external rule collection, a relative-path file in a Git repository is the recommended default for most teams, for reasons the other two options don't share:
-
-- URL-based collections are read-only. Tabular Editor doesn't allow editing a rule collection loaded from an HTTP/HTTPS URL. That's a reasonable restriction for something like Microsoft's [standard Analysis Services BPA rules](https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules), which you consume as-is. It rules out a URL as the home for a rule set your own team actively edits: you'd maintain the real file somewhere else and treat the URL as a read-only mirror, which is more moving parts than it's worth.
-- Network shares assume every machine can reach the same network location. That fits an on-premises or single-office setup but is a poor match for a distributed team, anyone working remotely or a cloud-first CI/CD pipeline agent that won't have your internal network mounted.
-- A relative path checked into the semantic model's own Git repository avoids both problems. It's fully editable, a normal file edited and reviewed like any other in the repo, and it makes no network topology assumptions. Whatever machine has the repo cloned has the rule file too, whether that's a developer's laptop or a CI/CD build agent.
-
-One constraint worth knowing: relative paths only resolve when the model is loaded from disk (a Save to Folder model), not when Tabular Editor connects directly to a live Analysis Services or Power BI instance. This rarely matters for parallel development built on Git and [Save to Folder](xref:parallel-development#what-is-save-to-folder), since the model is on disk throughout. Check it if part of your team connects directly to a live workspace instead.
-
-If your team already has a shared, reachable network location and prefers not to introduce a per-repo file, a network share is a workable alternative. It trades portability for whatever convenience your existing file-share setup offers. Reserve a URL-based collection for consuming an external, read-only rule set (like Microsoft's standard rules) rather than rules your own team maintains.
-
 ## Sharing macros
 
 Macros are different: Tabular Editor reads a single `MacroActions.json` file per user, from a fixed path, with no equivalent to BPA's rule-collection system. See the [Macros view reference](xref:macros-view-reference) for how the file itself is structured.
@@ -121,6 +97,30 @@ None of the three options above can combine more than one source at once. They a
 ## Sharing preferences
 
 `Preferences.json` has the same fixed-path constraint as macros, with no native multi-source support. Any of the three options above works identically for it.
+
+## Sharing BPA rules
+
+Tabular Editor has first-class support for combining Best Practice Analyzer rules from multiple sources, with no symlinks or workarounds required:
+
+- **Rule collections** let a model draw rules from the current model, the local user's `BPARules.json`, a machine-wide `BPARules.json` and any number of additional collections you add explicitly. Those additional sources include a file elsewhere on disk (with support for paths relative to the model, so the rule file can live in the same repository), a network share or an HTTP/HTTPS URL. Collections have a defined precedence order, so a shared central rule can be overridden at the model level where needed. See [Managing Best Practice Rules](xref:best-practice-analyzer#managing-best-practice-rules) for how to add and prioritize collections.
+- **Built-in rules** (Tabular Editor 3) ship a curated, versioned set of best-practice rules directly in the application, updated automatically with each release, with knowledge-base articles linked from each rule. These sit alongside your custom rules rather than replacing them. See [Built-in BPA Rules](xref:built-in-bpa-rules).
+
+Between these two features, most "how do we share BPA rules across the team" scenarios are covered natively. A shared rule file committed to a repository and included as a collection via a relative path, network share or URL is often all you need. No symlink or hook is required, since Tabular Editor reads the collection directly rather than through a fixed personal path.
+
+> [!NOTE]
+> Because rule collections can point at a relative path, a network share or a URL, the same-repo-vs-separate-repo question above matters much less for BPA rules than for macros. A rule collection works the same way regardless of which repository the rule file lives in, since nothing needs to be copied or symlinked onto a fixed local path first. This is one practical advantage of BPA's native multi-source support over the file-copying mechanisms macros currently require.
+
+### Which collection type to use
+
+Of the three ways to add an external rule collection, a relative-path file in a Git repository is the recommended default for most teams, for reasons the other two options don't share:
+
+- URL-based collections are read-only. Tabular Editor doesn't allow editing a rule collection loaded from an HTTP/HTTPS URL. That's a reasonable restriction for something like Microsoft's [standard Analysis Services BPA rules](https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules), which you consume as-is. It rules out a URL as the home for a rule set your own team actively edits: you'd maintain the real file somewhere else and treat the URL as a read-only mirror, which is more moving parts than it's worth.
+- Network shares assume every machine can reach the same network location. That fits an on-premises or single-office setup but is a poor match for a distributed team, anyone working remotely or a cloud-first CI/CD pipeline agent that won't have your internal network mounted.
+- A relative path checked into the semantic model's own Git repository avoids both problems. It's fully editable, a normal file edited and reviewed like any other in the repo, and it makes no network topology assumptions. Whatever machine has the repo cloned has the rule file too, whether that's a developer's laptop or a CI/CD build agent.
+
+One constraint worth knowing: relative paths only resolve when the model is loaded from disk (a Save to Folder model), not when Tabular Editor connects directly to a live Analysis Services or Power BI instance. This rarely matters for parallel development built on Git and [Save to Folder](xref:parallel-development#what-is-save-to-folder), since the model is on disk throughout. Check it if part of your team connects directly to a live workspace instead.
+
+If your team already has a shared, reachable network location and prefers not to introduce a per-repo file, a network share is a workable alternative. It trades portability for whatever convenience your existing file-share setup offers. Reserve a URL-based collection for consuming an external, read-only rule set (like Microsoft's standard rules) rather than rules your own team maintains.
 
 ## Summary
 
