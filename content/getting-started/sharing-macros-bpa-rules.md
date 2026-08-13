@@ -19,7 +19,7 @@ applies_to:
 
 # Sharing macros, BPA rules and preferences across a team
 
-Tabular Editor reads several configuration files from a fixed location on each user's machine: `%LOCALAPPDATA%\TabularEditor3\` for Tabular Editor 3, or `%LOCALAPPDATA%\TabularEditor\` for Tabular Editor 2. The most important are `MacroActions.json` (the user's macros), `BPARules.json` (the user's local Best Practice Analyzer (BPA) rules) and `Preferences.json` (general application preferences).
+Tabular Editor reads several configuration files from a fixed location on each user's machine: `%LOCALAPPDATA%\TabularEditor3\` for Tabular Editor 3, or `%LOCALAPPDATA%\TabularEditor\` for Tabular Editor 2. The most important are [`MacroActions.json`](xref:supported-files#macroactionsjson) (the user's macros), [`BPARules.json`](xref:supported-files#bparulesjson) (the user's local Best Practice Analyzer (BPA) rules) and `Preferences.json` (general application preferences). See [Supported file types](xref:supported-files#local-setting-files) for a full description of these and the other local setting files.
 
 That default works for a single developer. Teams that want a shared, consistent set of macros or preferences across a whole team, a department or between local development and CI hit an obvious question: how do you keep a file at a fixed local path in sync with something version-controlled and shared?
 
