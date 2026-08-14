@@ -56,7 +56,7 @@ The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.
 | **Model editing in pipeline** | | |
 | Run C# scripts | `-S` flag | `te script` - multiple scripts, inline code, stdin, `--dry-run`, preprocessor symbols (`TECLI`) |
 | Run macros | No | `te macro run` with `--on <object>` context |
-| Set/get properties | No | `te get`, `te set`, `te add`, `te rm`, `te mv`, `te replace` |
+| Set/get properties | No | `te get`, `te set`, `te add`, `te rm`, `te mv` |
 | DAX formatting | No | `te format` - all expressions or single object, DAX and M |
 | **Inspection** | | |
 | List model objects | No | `te ls` with wildcard path filters, `--type`, `--paths-only`, `--output-format bim` |
