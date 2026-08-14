@@ -28,7 +28,7 @@ A skill is a Markdown file an AI agent loads on demand based on your prompt. Its
 
 The skill teaches the agent the full `te` surface:
 
-- every `te` command across all families - load, save, init, deploy, refresh, bpa, validate, query, script, format, and more
+- every `te` command across all families - save, init, deploy, refresh, bpa, validate, query, script, format, and more
 - authentication patterns - interactive, service principal with secret or certificate, environment variables, managed identity
 - object path grammar - slash form, DAX form, and wildcards
 - the staging model - `--save`, `--stage`, and `--revert` behavior

@@ -18,7 +18,7 @@ applies_to:
 
 The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things:
  
-- **File paths** - where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
+- **File paths** - where the CLI reads macros and BPA rules, and where to write the query log.
 - **Behavioral defaults** - BPA gates, auto-format, validation.
 - **Saved connection profiles** - the list of named profiles you can switch between.
 
@@ -109,7 +109,6 @@ The complete JSON config schema with all keys at their default values. Use this 
   "disableTelemetry": false,
 
   "queryLog": null,
-  "te3ExePath": null,
 
   "profiles": {}
 }
@@ -123,7 +122,6 @@ Set these in your config to avoid passing the same paths on every command. Per-c
 | -- | -- |
 | `macros` | Explicit path to a macros JSON file (typically `MacroActions.json`). Resolved by every `te macro` command. Point at a shared file (network share, repo-local, or even the TE3 desktop file) to reuse the same set of macros across machines and between the CLI and TE3 Desktop. |
 | `bpa.rules` | Ordered list of paths or URLs to BPA rule files. `te bpa run` and the deploy/save gate load **every** existing entry; `te bpa rules list` and `te config paths` use the first existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
-| `te3ExePath` | Explicit path to the Tabular Editor 3 Desktop executable (`TabularEditor.exe`). Used **only** by `te open` to launch the desktop app; safe to leave unset on Linux/macOS or when you don't use `te open`. If unset, `te open` falls back to a `PATH` lookup. |
 | `queryLog` | Path to a log file where every `te query` invocation appends its query text and execution metadata. Useful for audit trails or analyzing query patterns over time. Supports `~` for the home directory (e.g., `~/.config/te/queries.log`). |
 
 ### Path resolution priority
@@ -145,7 +143,7 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 | Key | Default | Description |
 | -- | -- | -- |
 | `autoFormat` | `false` | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te move` / `te macro run`. Uses the in-house formatter by default; opt into the SQL BI web service via `formatOptions.useSqlBiDaxFormatter`. |
-| `validateOnMutation` | `true` | After a mutating command (`add`, `set`, `mv`, `replace --save`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy. |
+| `validateOnMutation` | `true` | After a mutating command (`add`, `set`, `mv`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy. |
 | `bpa.onMutation` | `false` | Run a scoped BPA analysis after each mutating command (`set`, `add`, `mv`, `rm`, `macro run`). Only the affected table's objects are checked, not the whole model - useful for fast feedback during iterative edits. |
 | `bpa.onDeploy` | `true` | Run the BPA gate before `te deploy` executes. The deploy is aborted if any rule fires at severity >= error. Bypass per-invocation with `--skip-bpa`, or auto-fix with `--fix-bpa`. |
 | `bpa.onSave` | `true` | Run the BPA gate before `te save -o` writes to disk. Bypass per-invocation with `--skip-bpa` or `--force`. |
@@ -226,7 +224,7 @@ Both `bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply consistently to t
 
 ## Post-mutation behavior
 
-When you run a mutating command (`te add`, `te set`, `te move`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
+When you run a mutating command (`te add`, `te set`, `te move`, `te macro run`), the CLI performs these checks automatically:
 
 1. **TOM errors** are always surfaced. Invalid DAX or M in measures, columns, partitions, or calculation items always fails the command.
 2. **Schema validation** (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve, cross-checking metadata consistency.
@@ -245,7 +243,6 @@ Use the following CLI-specific environment variables for paths, behavior, and di
 | `TE_MACROS_PATH` | Override the macros file path (second in resolution order - see above). Read by `te macro` commands. |
 | `TE_BPA_RULES` | Override the BPA rules file/URL list used by `te bpa run` and `te bpa rules` subcommands. |
 | `TE_BPA_CONFIG` | Override the path to the BPA gate config (`.te-bpa.json`) the deploy/save gate reads. |
-| `TE3_EXE_PATH` | Path to the Tabular Editor 3 desktop binary. Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. Falls back to `PATH` lookup. |
 | `TE_DEBUG` | Set to `1` to enable debug logging globally (same as `--debug` or `debug: true` in config). |
 | `NO_SPINNER` | Set to `1` or `true` to disable animated progress indicators (alternative to `spinner: false` in config). |
 | `CI` | Auto-detected. When `1` or `true`, the CLI disables the spinner and switches to plain output. Most CI runners set this automatically. |

@@ -26,7 +26,7 @@ Use `--output-format` to switch any command between text (human-readable) and ma
 | -- | -- | -- |
 | `text` (default) | Human-readable use | Plain text on stdout regardless of whether the stream is a TTY or piped. |
 | `json` | Machine-readable use | Always valid JSON to stdout. Use `--error-format json` if you also want machine-readable errors on stderr. |
-| `csv` | Tabular results (`query`, `bpa run`, `bpa rules`, `vertipaq`, `validate`, `test`, `refresh`, `profile list`, `session list`, `find`, `replace`, `get`, `ls`) | RFC 4180 escaping. |
+| `csv` | Tabular results (`query`, `bpa run`, `bpa rules`, `vertipaq`, `validate`, `test`, `refresh`, `profile list`, `session list`, `find`, `get`, `ls`) | RFC 4180 escaping. |
 | `tmsl` (alias `bim`) | Whole-object TMSL/BIM serialization | Accepted by `te get` and `te list`. |
 | `tmdl` | Whole-object TMDL serialization | Accepted by `te get` only (single object). |
 
@@ -179,7 +179,7 @@ The resulting TMSL can be reviewed in a pull request, committed, executed by the
 A handful of small idioms that come up often when composing `te` commands in scripts or pipelines:
 
 - **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te remove Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
-- **Dry-run diffs.** `te replace` is dry-run by default; add `--save` only when you're satisfied with the preview.
+- **Nothing persists without `--save`.** Mutating commands (`te add`, `te set`, `te move`, `te remove`, `te format`, `te script`, `te macro run`) apply the change in memory, report what they did, and then print `Changes not saved. Use --save to persist.` Run one bare to confirm it resolves the objects you expect, then re-run with `--save`. `te remove --dry-run` goes further and reports what would be removed without applying anything.
 - **Emit TMSL for review.** `te deploy ./model --xmla deploy.tmsl` produces the deployment script without touching the server - useful for DBA review or manual apply.
 - **Path-only output.** `te list --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`. The model-level containers (`te list Measures`, `te list Columns`) compose well with this for whole-model sweeps.
 - **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
