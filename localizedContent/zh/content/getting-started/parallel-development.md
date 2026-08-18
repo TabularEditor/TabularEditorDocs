@@ -255,6 +255,7 @@ gitGraph
 
 ## 后续步骤
 
+- @sharing-macros-bpa-rules
 - @powerbi-cicd
 - @as-cicd
 - @optimizing-workflow-workspace-mode

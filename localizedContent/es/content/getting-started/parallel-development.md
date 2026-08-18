@@ -255,6 +255,7 @@ En los siguientes artículos ofrecemos más detalles sobre cómo configurar las 
 
 ## Siguientes pasos
 
+- @sharing-macros-bpa-rules
 - @powerbi-cicd
 - @as-cicd
 - @optimizing-workflow-workspace-mode
