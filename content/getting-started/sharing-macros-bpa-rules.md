@@ -58,14 +58,7 @@ Macros are different: Tabular Editor reads a single `MacroActions.json` file per
 > [!NOTE]
 > **Why there's no built-in remote-loading feature:** Macros are C# scripts. Tabular Editor deliberately doesn't download or load macros from a location outside the user's control, such as a webpage, a GitHub repository or a public "marketplace." Loading and executing arbitrary code from a remote source without an explicit step by the user would be a real security risk. Any sharing mechanism must involve something the user or team sets up themselves.
 
-Three approaches teams use to bridge the gap between a central repository and Tabular Editor's fixed local path. All three share the same basic shape: something moves `MacroActions.json` between your Git repository and the fixed local path, and Tabular Editor itself only ever reads and writes that local path — it has no concept of Git. What differs between the options is what performs that move, in which direction, and on what trigger:
-
-```mermaid
-flowchart LR
-    repo["Git repository<br/>MacroActions.json"] -->|"A, B or C"| local["%LOCALAPPDATA%\TabularEditor3\<br/>MacroActions.json"]
-    local -->|"read on startup"| te["Tabular Editor"]
-    te -.->|"GUI edits<br/>(two-way options only)"| local
-```
+Three approaches teams use to bridge the gap between a central repository and Tabular Editor's fixed local path. All three move `MacroActions.json` between your Git repository and that fixed local path — Tabular Editor itself only ever reads and writes the local copy, with no concept of Git. What differs between the options is what performs that move, in which direction, and on what trigger:
 
 ### Option A: symbolic link
 
