@@ -23,6 +23,8 @@ Tabular Editor reads several configuration files from a fixed location on each u
 
 That default works for a single developer. Teams that want a shared, consistent set of macros or preferences across a whole team, a department or between local development and CI hit an obvious question: how do you keep a file at a fixed local path in sync with something version-controlled and shared?
 
+![Diagram of shared configuration flow](~/content/assets/images/sharing-config-two-paths.png)
+
 > [!NOTE]
 > If what you want to share is BPA rules, this is already solved. See [Sharing BPA rules](#sharing-bpa-rules) below. The rest of this page covers macros and preferences, which don't have the same native support.
 
