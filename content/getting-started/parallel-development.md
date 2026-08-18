@@ -250,6 +250,7 @@ We present more details about how to configure git branch policies, set up autom
 
 ## Next steps
 
+- @sharing-macros-bpa-rules
 - @powerbi-cicd
 - @as-cicd
 - @optimizing-workflow-workspace-mode

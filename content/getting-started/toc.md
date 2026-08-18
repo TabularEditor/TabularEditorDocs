@@ -30,6 +30,7 @@
 
 # Parallel development
 ## @parallel-development
+## @sharing-macros-bpa-rules
 ## @optimizing-workflow-workspace-mode
 
 # Built models faster with Tabular Editor
