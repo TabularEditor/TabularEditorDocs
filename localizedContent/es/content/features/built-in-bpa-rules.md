@@ -2,7 +2,7 @@
 uid: built-in-bpa-rules
 title: Reglas BPA integradas
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-07-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Funcionalidad de la Edición Enterprise que ofrece 28 reglas de mejores prácticas seleccionadas y codificadas de forma nativa en Tabular Editor 3, con integración de la base de conocimientos.
+description: 28 reglas de mejores prácticas seleccionadas e integradas de forma nativa en Tabular Editor 3, con integración con la base de conocimientos.
 ---
 
 # Reglas BPA integradas
 
 ## Información general
 
-La Edición Enterprise de Tabular Editor 3 incluye 28 reglas de mejores prácticas integradas. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
+Tabular Editor 3 incluye 28 reglas de mejores prácticas integradas. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
 
 A diferencia de las reglas personalizadas almacenadas en archivos JSON, las reglas integradas:
 
@@ -120,14 +120,13 @@ El conjunto actual incluye las siguientes reglas:
 
 Las reglas integradas y las personalizadas conviven:
 
-| Característica      | Reglas integradas                        | Reglas personalizadas                       |
-| ------------------- | ---------------------------------------- | ------------------------------------------- |
-| **Almacenamiento**  | Integrado en el código de la aplicación  | Archivos JSON o anotaciones del modelo      |
-| **Actualizaciones** | Automático con cada versión              | Requiere edición manual                     |
-| **Modificación**    | Solo lectura                             | Totalmente editable                         |
-| **Documentación**   | Artículos de KB integrados               | Descripciones proporcionadas por el usuario |
-| **Disponibilidad**  | Solo disponible en la Edición Enterprise | Todas las ediciones                         |
-| **Compartir**       | Consistente entre equipos                | Requiere distribución manual                |
+| Característica      | Reglas integradas                       | Reglas personalizadas                       |
+| ------------------- | --------------------------------------- | ------------------------------------------- |
+| **Almacenamiento**  | Integrado en el código de la aplicación | Archivos JSON o anotaciones del modelo      |
+| **Actualizaciones** | Automático con cada versión             | Requiere edición manual                     |
+| **Modificación**    | Solo lectura                            | Totalmente editable                         |
+| **Documentación**   | Artículos de KB integrados              | Descripciones proporcionadas por el usuario |
+| **Compartir**       | Consistente entre equipos               | Requiere distribución manual                |
 
 ### Flujo de trabajo recomendado
 
@@ -168,7 +167,7 @@ Al implementar las reglas integradas en tu equipo:
 
 Si las reglas integradas no se muestran en la ventana del BPA:
 
-1. Comprueba que estás usando Tabular Editor 3 Edición Enterprise
+1. Comprueba que estás usando Tabular Editor 3.24.0 o una versión posterior
 2. Verifica que las reglas integradas estén habilitadas en **Tools** > **Preferences** > **Best Practice Analyzer**
 3. Reinicia Tabular Editor si acabas de cambiar las preferencias
 4. Confirma que tu licencia está activa
@@ -184,7 +183,6 @@ Las reglas integradas reservan ciertos prefijos de ID. Elige un ID diferente que
 ## Compatibilidad
 
 - Requiere Tabular Editor 3.24.0 o una versión posterior
-- Solo para la Edición Enterprise
 - Funciona con todos los niveles de compatibilidad (1200+)
 
 ## Siguientes pasos
