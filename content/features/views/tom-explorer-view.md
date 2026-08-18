@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: TOM Explorer view
 author: Morten Lønskov
-updated: 2026-06-24
+updated: 2026-08-18
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -74,7 +74,7 @@ Visualizes dependencies between the selected table and other model objects. Can 
 Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
 
 - **Macro Menus**:
-Macros can be placed into folders and run against the selected object. In the example above the user has a Modelling and Analysis folder for Macro scripts on table objects.
+Macros can be placed into folders and run against the selected object. If you have created macros for the given object type, they appear as additional menu items or folders in the right-click menu.
 
 - **Cut / Copy / Paste / Delete**:
 Standard clipboard operations. Use these to move, duplicate, or remove model objects.
@@ -118,16 +118,16 @@ The toolbar allows you to show and hide different types of objects, toggle persp
 7. **Group User-Defined Functions by Namespace**
    When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
 
-8. **Show/Hide Table Groups**
-   Toggle the visibility of table groups in the TOM Explorer tree. This provides quick access to the same setting found in **Tools > Preferences** without leaving the explorer.
-
-9. **Show/Hide Hidden Objects**
+8. **Show/Hide Hidden Objects**
    Toggles whether hidden objects are shown.
    **Shortcut:** **Ctrl+6**
 
-10. **Show/Hide Info Columns**
-    Shows or hides metadata columns, such as data types or object status.
-    **Shortcut:** **Ctrl+7**
+9. **Show/Hide Info Columns**
+   Shows or hides metadata columns, such as data types or object status.
+   **Shortcut:** **Ctrl+7**
+
+10. **Show/Hide Table Groups**
+    Toggle the visibility of table groups in the TOM Explorer tree. This provides quick access to the same setting found in **Tools > Preferences** without leaving the explorer.
 
 11. **Perspective Selector**
     Drop-down to choose a specific perspective. Only objects in the selected perspective will be shown in the TOM Explorer.
