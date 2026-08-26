@@ -691,7 +691,7 @@ Format DAX or M/Power Query expressions.
 - `-t, --type <kind>` - disambiguate when the path matches multiple table-children.
 - `--lang <lang>` - expression language: `dax` (default) or `m`/`pq` for Power Query.
 - `--semicolons` - use semicolons as list separators (European locale).
-- `--long` - use long format (more line breaks). Default is short.
+- `--long` - use long format (fewer line breaks). Default is short.
 - `--no-space-after-function` - skip the space after function names.
 - `--save` / `--save-to` - persist formatted expressions.
 
