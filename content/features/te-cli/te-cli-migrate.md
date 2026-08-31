@@ -26,7 +26,7 @@ TE2 compatibility mode is activated in any of three ways:
 
 1. **Binary name.** Rename `te` to `te2` (or symlink it) and the CLI runs in TE2-exact mode. This is the drop-in replacement path: swap `TabularEditor.exe` for `te2` in your existing pipeline and the same arguments work.
 2. **Environment variable.** Set `TE_COMPAT=te2` before invoking `te` to force TE2 mode.
-3. **Auto-detection.** If the first argument isn't a `te` subcommand (`load`, `deploy`, …) and at least one recognized TE2 flag appears somewhere in the argument list, the CLI auto-routes to TE2 mode. This means most existing TE2 invocations work without any changes.
+3. **Auto-detection.** If the first argument isn't a `te` subcommand (`deploy`, `validate`, …) and at least one recognized TE2 flag appears somewhere in the argument list, the CLI auto-routes to TE2 mode. This means most existing TE2 invocations work without any changes.
 
 ```bash
 # All three are equivalent - each runs in TE2 mode

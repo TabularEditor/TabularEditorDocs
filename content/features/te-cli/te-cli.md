@@ -47,7 +47,7 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 
 | Family | What it does | Example commands |
 | -- | -- | -- |
-| [Model I/O](xref:te-cli-commands#model-io) | Load, save, convert, initialize models | [`te load`](xref:te-cli-commands#load), [`te save`](xref:te-cli-commands#save), [`te init`](xref:te-cli-commands#init) |
+| [Model I/O](xref:te-cli-commands#model-io) | Save, convert, initialize models | [`te save`](xref:te-cli-commands#save), [`te init`](xref:te-cli-commands#init) |
 | [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move) |
 | [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
 | [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te format`](xref:te-cli-commands#format), [`te vertipaq`](xref:te-cli-commands#vertipaq) |

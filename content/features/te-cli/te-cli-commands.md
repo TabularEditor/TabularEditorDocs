@@ -168,16 +168,6 @@ positional `<model>` argument → `--model` global flag → `--server`/`--databa
 
 ## Model I/O
 
-### load
-
-Load a semantic model and display a summary of the model - name, compatibility level, and high-level object counts (tables, measures, columns).
-
-```bash
-te load ./model                            # TMDL folder
-te load model.bim                          # BIM file
-te load -s MyWorkspace -d MyModel          # Remote workspace
-```
-
 ### save
 
 Save a model to disk. Use it to write a remote workspace model to local files, convert formats, or persist edits back to the source.
@@ -202,16 +192,6 @@ te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 
 > [!TIP]
 > Use `te save -o <path> -s <workspace> -d <model>` to download a remote model to disk. Pair with `--skip-validation` for the fastest passthrough when you only need the bytes (no DAX semantic analysis).
-
-### open
-
-Open a model in Tabular Editor 3 Desktop. **Windows only** (requires TE3 to be installed). With no arguments, launches TE3 with a blank workspace.
-
-```bash
-te open                  # Launch TE3 with a blank workspace
-te open ./my-model       # Open a TMDL folder in TE3
-te open ./model.bim      # Open a BIM file in TE3
-```
 
 ### init
 
@@ -321,37 +301,6 @@ te move Sales/Revenue Sales/TotalRevenue --save             # Rename measure
 te move Sales/Date Sales/CalendarDate -t Hierarchy --save   # Disambiguate hierarchy from column
 ```
 
-### replace
-
-Find and replace text across model objects. Dry-run by default; add `--save` to apply.
-
-`te replace` accepts:
-
-- `--in <scope>` - scope: `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all` (default: `all`).
-- `--regex` - treat the find pattern as a regular expression.
-- `--case-sensitive` - enable case-sensitive matching.
-- `--dry-run` - preview changes without applying. Default behavior.
-- `--save` - persist the mutation to the source location. Mutually exclusive with `--revert` and `--stage`.
-- `--save-to <path>` - save to a different path (implies `--save`).
-- `--serialization <fmt>` - model serialization: `tmdl`, `bim` (alias `tmsl`), `database.json`.
-- `--force` - save even if the replacement introduces DAX validation errors.
-
-`--in expressions` walks every expression-bearing property:
-
-- **Measure**: `Expression`, `DetailRowsExpression`
-- **KPI**: `TargetExpression`, `StatusExpression`, `TrendExpression`
-- **Partition**: source M, polling M
-- **Table permission**: `FilterExpression`
-- **Calculation group**: selection expressions
-- **Calculated column**: DAX expression
-
-Adding new expression-shaped properties to the model surfaces them automatically.
-
-```bash
-te replace "OldTable" "NewTable" --in expressions --save
-te replace "SUM" "SUMX" --regex --in expressions --save
-```
-
 ## Inspection
 
 ### list
@@ -411,7 +360,7 @@ Search for text across model objects.
 
 `te find` accepts:
 
-- `--in <scope>` - as per `te replace` (default `all`).
+- `--in <scope>` - scope: `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all` (default: `all`).
 - `--regex`, `--case-sensitive`, `--paths-only`.
 - `--no-multiline` - collapse multi-line match context to a single line. Text output only.
 
