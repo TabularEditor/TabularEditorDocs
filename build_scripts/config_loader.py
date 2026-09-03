@@ -199,6 +199,10 @@ def get_sitemap_exclude(config: dict[str, Any] | None = None) -> list[dict[str, 
 def compute_file_hash(file_path: Path | str) -> str:
     """Compute SHA256 hash of a file's contents.
     
+    CRLF line endings are normalized to LF before hashing so the hash is the same
+    for a Windows checkout (core.autocrlf), a Linux CI checkout and the blob in
+    git. The translation status files compare these hashes across all three.
+    
     Returns a hex string prefixed with 'sha256:' for clarity.
     Returns empty string if file doesn't exist.
     """
@@ -207,13 +211,11 @@ def compute_file_hash(file_path: Path | str) -> str:
     if not file_path.exists():
         return ""
     
-    sha256_hash = hashlib.sha256()
     with open(file_path, "rb") as f:
-        # Read in chunks for large files
-        for chunk in iter(lambda: f.read(8192), b""):
-            sha256_hash.update(chunk)
-    
-    return f"sha256:{sha256_hash.hexdigest()}"
+        data = f.read()
+
+    normalized = data.replace(b"\r\n", b"\n")
+    return f"sha256:{hashlib.sha256(normalized).hexdigest()}"
 
 
 def get_all_content_files(content_dir: Path | str) -> list[Path]:

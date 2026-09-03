@@ -1,0 +1,105 @@
+name: Translate content (Translated)
+
+# Replaces the Crowdin GitHub integration. Every push to main that touches English
+# content submits the changed files to Translated (TranslationOS), waits for the
+# machine translations, and pushes them to the `localization` branch as a review PR —
+# the same branch name Crowdin used, so deploy.yml keeps building translation PRs only
+# when a review is requested. The scheduled run collects deliveries that were not
+# ready in time.
+#
+# Secrets / variables (repository settings):
+#   TRANSLATED_API_KEY       secret  — TranslationOS API key (sandbox or production)
+#   TRANSLATED_BASE_URL      var     — optional; overrides translation.baseUrl in metadata/build-config.json
+#   TRANSLATED_SERVICE_TYPE  var     — optional; overrides translation.serviceType
+# "Allow GitHub Actions to create and approve pull requests" must be enabled under
+# Settings > Actions > General for the PR step to work with GITHUB_TOKEN.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'metadata/build-config.json'
+      - 'metadata/language-metadata.json'
+      - 'build_scripts/translate-content.py'
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      wait:
+        description: Minutes to wait for deliveries before pushing what has arrived
+        default: '25'
+      limit:
+        description: Submit at most N files per language (0 = no limit)
+        default: '0'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: translate-content
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    name: Submit and collect translations
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Continue from the open localization branch
+        # Unmerged translations and in-flight job records live on `localization`.
+        # Fold them into main's tree so this run builds on them instead of resubmitting.
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin localization >/dev/null; then
+            git fetch origin localization
+            git merge --no-edit -X theirs origin/localization
+          fi
+
+      - name: Translate changed content
+        env:
+          TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_API_KEY }}
+          TRANSLATED_BASE_URL: ${{ vars.TRANSLATED_BASE_URL }}
+          TRANSLATED_SERVICE_TYPE: ${{ vars.TRANSLATED_SERVICE_TYPE }}
+        run: |
+          python build_scripts/translate-content.py --run \
+            --wait "${{ inputs.wait || '25' }}" \
+            --limit "${{ inputs.limit || '0' }}" \
+            --report "$RUNNER_TEMP/translation-report.md"
+
+      - name: Push to localization branch
+        id: push
+        run: |
+          if [ -n "$(git status --porcelain localizedContent)" ]; then
+            git add localizedContent
+            git commit -m "New translations (Translated)"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          if git ls-remote --exit-code --heads origin localization >/dev/null || [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git push origin HEAD:localization
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update the review PR
+        if: steps.push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          number=$(gh pr list --base main --head localization --state open --json number --jq '.[0].number // empty')
+          if [ -z "$number" ]; then
+            gh pr create --base main --head localization \
+              --title "New translations (Translated)" \
+              --body-file "$RUNNER_TEMP/translation-report.md"
+          elif [ "${{ steps.push.outputs.changed }}" = "true" ]; then
+            gh pr comment "$number" --body-file "$RUNNER_TEMP/translation-report.md"
+          fi

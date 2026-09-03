@@ -13,6 +13,21 @@
       { "match": "/api/", "priority": 0.1 }
     ]
   },
+  "translation": {
+    "_comment": "Automated translation via Translated (TranslationOS), see build_scripts/translate-content.py. 'sources' are globs relative to content/ (same scope Crowdin had, plus toc.md); files under sharedDirectories are always skipped. baseUrl/serviceType can be overridden with TRANSLATED_BASE_URL / TRANSLATED_SERVICE_TYPE. Sandbox only accepts service type 'premium'; production service types are defined per account by Translated.",
+    "baseUrl": "https://api.sandbox.translated.com/v2/",
+    "serviceType": "premium",
+    "sourceLocale": "en-US",
+    "sources": [
+      { "pattern": "**/*.md" },
+      { "pattern": "404.html" },
+      { "pattern": "getting-started/app/**/*.html" },
+      { "pattern": "toc.yml" },
+      { "pattern": "_ui-strings.json" }
+    ],
+    "ignore": [],
+    "instructions": "Technical documentation for Tabular Editor 3 (a Power BI / Analysis Services modelling tool). Keep all Markdown, YAML and HTML structure exactly as in the source: do not translate or alter code, code fences, inline code, file paths, URLs, link targets, anchors, xref/uid identifiers, HTML tags and attributes, keyboard shortcuts, alert markers such as [!NOTE] or [!include], or placeholders like {count}. Do not translate product and technology names: Tabular Editor, Power BI, Analysis Services, DAX, Tabular Object Model (TOM), Fabric, Best Practice Analyzer, C#, Visual Studio. Use the terminology of the localized Power BI user interface where it exists."
+  },
   "contentDirectories": {
     "_comment": "Directories that contain translatable content (markdown and HTML files)",
     "directories": [

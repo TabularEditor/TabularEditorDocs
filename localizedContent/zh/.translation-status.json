@@ -3,583 +3,583 @@
   "sourceBaseline": "content",
   "files": {
     "features/advanced-refresh.md": {
-      "sourceHash": "sha256:a3f181fa26c3fb2a96949d37a42a9b2729ea01279baa4ce78cab95fca8047ff7",
+      "sourceHash": "sha256:4c8a5deb7eaece9c11a76f650eab3352e5a16e51cc445eccd356ec7ddb451c5c",
       "status": "translated"
     },
     "features/Best-Practice-Analyzer.md": {
-      "sourceHash": "sha256:b95e98bcacdc9bec745a801592ec906a4bb1490a44f997c700f4f6244436fe78",
+      "sourceHash": "sha256:253dba4e0485c6b8052ae8da292cece72490d32b7fea72112aada89dbd2b8264",
       "status": "translated"
     },
     "features/built-in-bpa-rules.md": {
-      "sourceHash": "sha256:233d6d9f44bae808b345197b2c7b5691cb0b4af32ddb66468ef5debb4c1653fa",
+      "sourceHash": "sha256:bdffc9c4bc7c941d725928c7b068e04907b5f111d273daacd59d38e57faf0a30",
       "status": "translated"
     },
     "features/code-actions.md": {
-      "sourceHash": "sha256:2965d0ab377e3989e5adefdf317b44318049f00f8c51c35df2a7632dee475fbf",
+      "sourceHash": "sha256:82baf7662cf3be05e7a4b399cd9cf3cf6b7ab76eb6eea7233b020be46862b47b",
       "status": "translated"
     },
     "features/Command-line-Options.md": {
-      "sourceHash": "sha256:6b2a4865311b0da759029cb643f838fa0243438a352cb8e855deb53ae8804146",
+      "sourceHash": "sha256:8f0e81ec57e6bc1e49ea2967760f68bc18e29f170de2a89bd83fc54b953b6741",
       "status": "translated"
     },
     "features/creating-macros.md": {
-      "sourceHash": "sha256:031b3f5aca8eec28c78609ef421d48595cdc2df96f073d7a52ab16bebdf44326",
+      "sourceHash": "sha256:b1a3ff506c962feae7461cf83f78b86ab387d573bc53060d7f12f5c22963778c",
       "status": "translated"
     },
     "features/csharp-scripts.md": {
-      "sourceHash": "sha256:fe043bad73d6f8e483b6413ca58f6a62f5ded53074863ab11e5cde5fc0975ac3",
+      "sourceHash": "sha256:e7ea43de890f061f9c5c23ba7d5b446c13003a59722836cb94c2912ce2bba1db",
       "status": "translated"
     },
     "features/Custom-Actions-hidden.md": {
-      "sourceHash": "sha256:0100c53a221855d5b1a8fa5c2a810fd9f56eda751fedb1eccad1b76d0cb8189c",
+      "sourceHash": "sha256:a803f1066adffe1f7f0a0f8fc0c71c70b268737b756491c39ec54c70d49f204c",
       "status": "translated"
     },
     "features/dax-debugger.md": {
-      "sourceHash": "sha256:20fdc750de8ab9f6d153f82b51c392201b53c89da26b3ee6a4508f87ac3a8403",
+      "sourceHash": "sha256:97d080142ccf2afca94b197cf7f0153dcbac57b9e0c0559c947b2da455c5814d",
       "status": "translated"
     },
     "features/dax-editor.md": {
-      "sourceHash": "sha256:1f2c0c195b157d031bc3ced3a532165fb97a69de0c1636749b0775f487dcd236",
+      "sourceHash": "sha256:60ef7116000aa877e6e88ae05e6e517f32081b183a45972e1864515dbef58c6b",
       "status": "translated"
     },
     "features/dax-optimizer-integration.md": {
-      "sourceHash": "sha256:445aebdd1cfe2ebba6ad4d31786808f963aaa394d2971079a9dbf1bdf31dcde3",
+      "sourceHash": "sha256:7f360b8d39e0a763558717f52a112f4e908cd7e30b99c94580b0f478277858f1",
       "status": "translated"
     },
     "features/dax-package-manager.md": {
-      "sourceHash": "sha256:a8f12f885d8ffa3af88d600aa9f9f584f081bc527407cb9c3332a7780c7d1903",
+      "sourceHash": "sha256:1b6e0543d34a7b9f09bd8da1f53bafccaa4edbb4d8639dd057c4675820f3242f",
       "status": "translated"
     },
     "features/dax-query.md": {
-      "sourceHash": "sha256:8c45adcffa202f972c37ddd6b1278da37dbe3ecdc0b62f85abf27a723f7f8f0c",
+      "sourceHash": "sha256:f4307107c9930ea338c695ff713f38b64d0c5ff2e831dba1682f4131604f17e7",
       "status": "translated"
     },
     "features/dax-scripts.md": {
-      "sourceHash": "sha256:e88d01ebe77b65464d9b7abd6688a27c3fee2e3f8539d8ebd51c2e5b813e105d",
+      "sourceHash": "sha256:0de5ac712cbc629c2f24101dc01d425ab7121175a44c2004157164fa0e6208ec",
       "status": "translated"
     },
     "features/deployment.md": {
-      "sourceHash": "sha256:9e60fe917808f281dd83193a448915452f828350dca386fe8c2b2bfef15c0365",
+      "sourceHash": "sha256:dd753224144a686b1e621ea6bfdd3ea03601bd032fae1be49da58a0b1b6c24ee",
       "status": "translated"
     },
     "features/hierarchical-display.md": {
-      "sourceHash": "sha256:2f5c506f7b35ecfea164cccfee74ce6de9c8dd317c01fff96fd04e132512c0dc",
+      "sourceHash": "sha256:6a726e430a507cfa17e106e498360d1518df8da7e656883c3ff845202d936cf5",
       "status": "translated"
     },
     "features/import-tables.partial.md": {
-      "sourceHash": "sha256:b82db90bbf187352379ec8762cbd205610e72490e130136debac3b75ec70ce42",
+      "sourceHash": "sha256:ca53e315bb2c4d8a1c45350141d2fcff7eb386c03d66950a8bff4d2761d1fd55",
       "status": "translated"
     },
     "features/index.md": {
-      "sourceHash": "sha256:50f03bfd484f4801fd99569881b836a2c93d4d8b179ab731f588cb3c0c9b2a35",
+      "sourceHash": "sha256:5bac9edafd8e6fe76387a56ec818c4ca1665313ad6f2300212d522e57a77ee73",
       "status": "translated"
     },
     "features/metadata-translation-editor.md": {
-      "sourceHash": "sha256:4262cf9f4d08a6f141fe470c9ac670d33edd49f9c4755bcc17fc8bbb26f31a41",
+      "sourceHash": "sha256:7dd826b950714972b3429347f09fed22bcdbaf3f149e4f47dc6382ecf26e69e5",
       "status": "translated"
     },
     "features/perspective-editor.md": {
-      "sourceHash": "sha256:c52ab63a25c110c9302b50b563d52d81d7bbe7a4b7fc999908cae7cff5a1b77f",
+      "sourceHash": "sha256:d7bd4b9834bb8fac3a1072e4c84d43efe36d64e7443b50f0778f0f76f189476f",
       "status": "translated"
     },
     "features/pivot-grid.md": {
-      "sourceHash": "sha256:b6af168f855063133df7efcafa67927ff16748fe3cdd59c4fb0b9786d93be066",
+      "sourceHash": "sha256:13469e84b4715d3989eb9f9220222807cad8eaa30bb5dc6eb1837da1e13d82ee",
       "status": "translated"
     },
     "features/refresh-overrides.md": {
-      "sourceHash": "sha256:d2363ece74c675093076e1d3bb692fb2841cb9c705e52a458aec64df266d9f36",
+      "sourceHash": "sha256:5cf34fc846be329c7ecdf10fb5927e1e3b9f5a3de4bafde5f63f30894e17fe8e",
       "status": "translated"
     },
     "features/save-to-folder.md": {
-      "sourceHash": "sha256:ef91c2f9f796fef7e91358ead257c2b3cf32c57092114cb95c4f16ca4552a503",
+      "sourceHash": "sha256:b4301ebe814e9c08764c9e634e51bc5a46047cd2534c61a540fb9ff0a5d89f0d",
       "status": "translated"
     },
     "features/save-with-supporting-files.md": {
-      "sourceHash": "sha256:8b436e18eaae2061c8521ac117fa08e8ed83c43a218b7631c1409caaedf1974d",
+      "sourceHash": "sha256:b61b721a1d9f2cf0652155795e046291d1e8d5c80fb865f528ec03e2ada0d98d",
       "status": "translated"
     },
     "features/script-helper-methods.md": {
-      "sourceHash": "sha256:52ece0ac2ca74b3aceefd177057e773977da7b27b44977e432c3ed207677b6c6",
+      "sourceHash": "sha256:5cb24ef463fa580075848ea2facacb0b906a1e08ff6cb1c62f7e41ae3824fbf6",
       "status": "translated"
     },
     "features/semantic-bridge-metric-view-object-model.md": {
-      "sourceHash": "sha256:d27290a24b2917dcaa396d9d0aa9c1d2680b00dfba2e976d15007749b3831d08",
+      "sourceHash": "sha256:6028084095ef69f4cd3c5f0e0770809dafca75ba3636e9f02335c7984e06c826",
       "status": "translated"
     },
     "features/semantic-bridge-metric-view-validation.md": {
-      "sourceHash": "sha256:81d096d6308ae4b99b860082843c6e89e753a6374efd9787264bbd158329a96d",
+      "sourceHash": "sha256:3b323ce1afb0fe35d9dc2067e7d8b0365eff7b7df5f6363c797a38f0267f51b1",
       "status": "translated"
     },
     "features/semantic-bridge.md": {
-      "sourceHash": "sha256:a8da16703cd2c553fbdbf78e8337d1a2a9499b964f48373e4817012153c33548",
+      "sourceHash": "sha256:148612d364d9d289779fdf6bb5119e69a5a06f1162e11a909c5456284fbfcdbb",
       "status": "translated"
     },
     "features/table-groups.md": {
-      "sourceHash": "sha256:6a2a5c2d24ce7f1f8171211e61ddb8f2774619d945fb24bcf33fc83db6c0f8e8",
+      "sourceHash": "sha256:75438952d25956a239efcb3acfdbd4d91fb124b02959bfad8065b83cfc8eb78a",
       "status": "translated"
     },
     "features/tmdl.md": {
-      "sourceHash": "sha256:4b1e71e59f7377cb6694e22848a9831907d8bce20459dbb5814a4badcde68463",
+      "sourceHash": "sha256:f05bb3b99f5266a4f692fb9b628b151114647378f6ef55d9058688cfb59afb85",
       "status": "translated"
     },
     "features/toc.md": {
-      "sourceHash": "sha256:124251b5b1d7b83b2daba79f72ec18bf2961bd43075635ebda15094992f326ea",
+      "sourceHash": "sha256:9de7b2b89d41288caf042ff23187fa805f19ec472f91d34541b555b5f20d6de7",
       "status": "translated"
     },
     "features/Useful-script-snippets.md": {
-      "sourceHash": "sha256:1a220bb878ce665e3ba52328c2929758bf399c56613d9a072b2d5894710d4be2",
+      "sourceHash": "sha256:72e52b00b78c38dd76279535adbae7a80a1d2b755ecadd80c33b967d7998b988",
       "status": "translated"
     },
     "features/using-bpa-sample-rules-expressions.md": {
-      "sourceHash": "sha256:fbf4aca9a2718fc53171edac32f27bbacd194e1b3644c4f19a62c996435697a2",
+      "sourceHash": "sha256:8c516b0268e11a5686c8d9e171cf7b3fe433594f88ca5b6e18c2708224c19bef",
       "status": "translated"
     },
     "features/using-bpa.md": {
-      "sourceHash": "sha256:a750489f209d1bb3d314368e15c88913e3fad6c08402139c29aa77d172755684",
+      "sourceHash": "sha256:2bae3a2476d435a2fece243326c3b5061cc80dde7f28fc53d38b4d3ebbe256ce",
       "status": "translated"
     },
     "features/Workspace-Database.md": {
-      "sourceHash": "sha256:037cf90e068ae6f0297fad2560012d9c08072abee11af6833c07e4d9bd4f4f7f",
+      "sourceHash": "sha256:356ced6221e49a7fc0552fd195c48bd3af5503e9599fe71f473d320010a27c0f",
       "status": "translated"
     },
     "features/workspace-mode.partial.md": {
-      "sourceHash": "sha256:14bcfb19450618ce483f54692c50573694a0f9f1432923610e4bfb3b42d56155",
+      "sourceHash": "sha256:f18c36e62b6d46dfca6ec6daba5b5e6964f9020a23b6d8683b995a6715bcf27b",
       "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library-advanced.md": {
-      "sourceHash": "sha256:d9896cd8b9c754d2c382efcb22525c1e4af263988d656cff7b95d250115fb299",
+      "sourceHash": "sha256:1bffc5de50a63a02a1499b6c690f8f021a456f69bcea94de8d30589792f76e9f",
       "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library-beginner.md": {
-      "sourceHash": "sha256:728395ae6dc4b6686c418b09ed9d090c41ca9066a4c734e82469075c34fc4881",
+      "sourceHash": "sha256:8297f36b1b4788ff484bc7fbda33135465e258039c2c4fb91a10d7dd8d8dceb7",
       "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library.md": {
-      "sourceHash": "sha256:4a83b9ee945a704d09879d38757a8e8838acdce54c519a9191d3748c80f2c6dc",
+      "sourceHash": "sha256:46b1ba3cb8415ab08589e29d961cbd45c89f8a94e545c381ef189be5e0641b55",
       "status": "translated"
     },
     "features/Semantic-Model/direct-lake-sql-model.md": {
-      "sourceHash": "sha256:24c924ac00b363280270397b20e38bfcb58ec284ffcbafd332acdef9cdf70517",
+      "sourceHash": "sha256:5b7665db988503e68a3f05a8cb10f7883663bfda426d0c1856c6b1e50021e4c1",
       "status": "translated"
     },
     "features/Semantic-Model/direct-query-over-as.md": {
-      "sourceHash": "sha256:85af1a152e4cf86a04fdd91bcf518bea567e30e55688e99f2201d524eaad22a9",
+      "sourceHash": "sha256:280fbda0a57da7ba6b11294d3809f7b52c4f25cdf7ca5fa07e85264e5cd1e74d",
       "status": "translated"
     },
     "features/Semantic-Model/semantic-model-types.md": {
-      "sourceHash": "sha256:64a1be153fec80ec6235186a2ec316d53fe9af11dfc9d1cbee637c0ed6fd41dd",
+      "sourceHash": "sha256:d314cae6177dff5be507edbe44a1132f70dad1f9683cb60ed4aee5aa05d24578",
       "status": "translated"
     },
     "features/views/bpa-view.md": {
-      "sourceHash": "sha256:c7ec9d9df36d5f768d0d6384f7b1baa7ddd134a5222d34fa32fbec4f9eb44395",
+      "sourceHash": "sha256:dcccdbd044bbd074e52b5abf8e72d8ec7b714d81617f0261b49ab8a776de1670",
       "status": "translated"
     },
     "features/views/data-refresh-view.md": {
-      "sourceHash": "sha256:b248eb0c684a13d7f3d787b0ddd6a1637f4556eed8da40138dab30ccc308003e",
+      "sourceHash": "sha256:e7e5f52207d8c255922157fda644998d286de3dbc1a053af89e9b2566456eb48",
       "status": "translated"
     },
     "features/views/diagram-view.md": {
-      "sourceHash": "sha256:980b80557f3d1bf12969c4d974f53b1e76e211c152d544447fcb9b77dd32294e",
+      "sourceHash": "sha256:f548e5788e92d4961a62520bc56d4ea0ace76833d1f17fdbad7d74ff4cb25ae7",
       "status": "translated"
     },
     "features/views/find-replace.md": {
-      "sourceHash": "sha256:f42cbffa4ba076ede971a7f74eb1a04c51a671f709167e80d123a27708f348b6",
+      "sourceHash": "sha256:32a2e329d26e3712c1115ee0cb1965780387888d05c5af11b7bb2b056c8f3d42",
       "status": "translated"
     },
     "features/views/macros-view.md": {
-      "sourceHash": "sha256:520dd7be90d9a286f15c145d0c3f151213fc79a4c9f8b25af4de9b766f20b012",
+      "sourceHash": "sha256:6f8046bc8d5bcf581c147a3263fefeb4f6dbc160cccd29a0a8b09db2949f055e",
       "status": "translated"
     },
     "features/views/messages-view.md": {
-      "sourceHash": "sha256:f4d90ae99db74ddc3742853ad8ca848480cafe1c392565525394db5b24003a6a",
+      "sourceHash": "sha256:c444a771025eab4067d298298fa8391fd1e0157c38582320b097f9d2320d4657",
       "status": "translated"
     },
     "features/views/properties-view.md": {
-      "sourceHash": "sha256:f001df97118de15a898b6d160c3ad5df453589bdace10f50391eb8223802f30e",
+      "sourceHash": "sha256:58dbde868a400d90bf5cfc1c77996b76c61c38b53de7900bd585dd91d3635e7f",
       "status": "translated"
     },
     "features/views/tom-explorer-view.md": {
-      "sourceHash": "sha256:3d2dbacf216f262ac4cc0380a1545b11c2bd9ae3d953e4a4afb870431c777d96",
+      "sourceHash": "sha256:052acb70972248b2677de696ddc8e2988ce7641af381d36d440eddea17dba98d",
       "status": "translated"
     },
     "features/views/user-interface.md": {
-      "sourceHash": "sha256:986ae970de12c4745c8c55268cc2278f50ed0f0f612237b8701645df0a3571f8",
+      "sourceHash": "sha256:abb08b4fcdd7abc175ac495e5dc0e11168c55a249f31eb315a8093a8a260e50f",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-add-databricks-metadata-descriptions.md": {
-      "sourceHash": "sha256:1cdf755e7b2b922a65e1e5458e87ad870bf94d7fa559cdd811f0c4cbd8a671f8",
+      "sourceHash": "sha256:3e3502fa81133433b74714be43bbc8eb911a90f8848ff98d0f1828f56036f9f9",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-dlsql-to-dlol.md": {
-      "sourceHash": "sha256:a9ccc97caf8639e63c4b196449dbebb7efade5aa9e0991f3f460f6b6a46f7415",
+      "sourceHash": "sha256:f977fe473183a92168b7d227519993669391f41e3aa535e167b89b9239fe6124",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-import-to-dlol.md": {
-      "sourceHash": "sha256:f6e6afd6430cc5eaf734a29eee11ba1bdc300efcd2f3e9a8566ab933cad8a0d7",
+      "sourceHash": "sha256:2740a932e1e7cb4f2a2eb7eb9129d2847db63209cbb2baaf6b20e3b45b4d71c4",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-count-things.md": {
-      "sourceHash": "sha256:a57cc71eca07c7ef5625dcd0de4ef25dbd135d124376ee97b5c163f135e094ac",
+      "sourceHash": "sha256:67e92ecd96ccbe2ec1373a8d3280182a126d832821001b70e21c990a4742deb2",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-and-replace-M-parameter.md": {
-      "sourceHash": "sha256:98e78822d061113b577caa032c5cec2ecdc01dc3cc54415d895d6635b5372a40",
+      "sourceHash": "sha256:0ce06f6f7719671d46c05fabbbc25a25721c9069615c6484b6dbe2bf058b8505",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-databricks-relationships.md": {
-      "sourceHash": "sha256:2c057aa107ad51f212de201495d4b957a9caedb5b4020295677215937c1bb989",
+      "sourceHash": "sha256:7100c6e93a2961e64c4962a5e22d0bca278b2f5c97b1c4509fbc20be236b7b5d",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-date-table.md": {
-      "sourceHash": "sha256:d3a6814c2600eb4104b75aa09736fe94c707a5b9314affe7228ffad221a7c58d",
+      "sourceHash": "sha256:a95991c83be2e3b7d7fbfa7c8b1eff5f59467487b66aaed2fe7a43e510f002ca",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-databricks-semantic-model-set-up.md": {
-      "sourceHash": "sha256:a88f9235ec3544b569919b71dfd67918aadda89f3594bd4a930dc2cd0cd6c3b1",
+      "sourceHash": "sha256:d18ee6c4ecb762d70373d3632b828a41a5dd76b283a0f742065aed5bc9ce0233",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-find-replace-selected-measures.md": {
-      "sourceHash": "sha256:8810d2b2c4b290a475cf2c25547d55e11581052adecd15722d33722f1dee8d7f",
+      "sourceHash": "sha256:01f8139d9460fda1438695c2ff55c02a0671fc22ec442b111dd44236cd0f22c1",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-format-power-query.md": {
-      "sourceHash": "sha256:e0d227f4dee9e9555941f4f1692f9149db96601ef93cfe170fac0aec1ef15a7d",
+      "sourceHash": "sha256:a18bc6f534e163a0cc87d75f47b02f13c3f6d47d4dd988ce53f55bd52002126b",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-incremental-refresh.md": {
-      "sourceHash": "sha256:d073d4bf9223b7c04a68b06f0430d5116eef349187beeb4ae624f0b28a40ba67",
+      "sourceHash": "sha256:ebeaff67ce308880b8ba5be4b9cd198c30a5f48af87df7b477d48ed313bb1907",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-user-defined-aggregations.md": {
-      "sourceHash": "sha256:e6d7233c69c13b465e0a8c444a458d13115711ce3e093651a0177bd074eac83b",
+      "sourceHash": "sha256:e4a1668f2fe37b9dfedf705f1ba2052a3f696c10e3422420ee24e7f9a983aa8c",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-output-things.md": {
-      "sourceHash": "sha256:55aa64a311c8d33ea0012e86cca9c7d9e39b492bf1f9012f442234966871c568",
+      "sourceHash": "sha256:b2e5c8db2ba620c4e8ccb72e729b96c474b926b2cf8e5124736be1fcfc4291f4",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-remove-measures-with-error.md": {
-      "sourceHash": "sha256:98a4e7ce55c0cbe7bc418827593433cf4cd4c24d02b266114b80cb2b14ef29bc",
+      "sourceHash": "sha256:d0a4c46a77e8af7bb00b109e8875d4b549bc0c03f22ec28d2f1bd2d95ce4f20d",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-count-rows.md": {
-      "sourceHash": "sha256:880b4cecde42c22e2ac5449590145195c30dd0b53499dc57eb5bfce960575ab3",
+      "sourceHash": "sha256:691212c34c7c4dc0b39809eedd600fa594cdcb8d8e0d116fa9e6804a07fd1088",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-field-parameter.md": {
-      "sourceHash": "sha256:b900174834019481edb57daee36c1cd06ab33e5e04ded0ad7989bd211c034df3",
+      "sourceHash": "sha256:68a3acca96d3e372683c73129f700024e3229daa1752be3805653accc56fd91d",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-m-parameter.md": {
-      "sourceHash": "sha256:495d56bf23e3a8b96b109e692530b55539dd59f8d6861ffa17a0aadebd2ef00e",
+      "sourceHash": "sha256:9e2f4adee2211c2ef4a90fb017b289dbe5bdd935e290172030e5b6f32f1bf2bb",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-measure-table.md": {
-      "sourceHash": "sha256:287bd8089fa3be09b2d5cc7830934549c219b6957cd71b76e36c75400168b8af",
+      "sourceHash": "sha256:0a641a1fa1d5b7b7ab73799b15d9434407b3fecc1d721ed1d43a58a4ff1d30e2",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-sum-measures-from-columns.md": {
-      "sourceHash": "sha256:9aeacf4afb6eb0ea78b0783bb0f17203b478f3b504e17080f9e01d40973d068b",
+      "sourceHash": "sha256:50bd3f2a8ef34e438493f91da92be743f7cd4296a694d3243460abeb47f28c89",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-table-groups.md": {
-      "sourceHash": "sha256:297ec32a4bd6104b89273ae6ef1708b653f81bea40c8c5fac8ef8a8e73e59cb9",
+      "sourceHash": "sha256:74dd9a2bda903d85972caedcf9e230ca4843fa87fa490bd82122498db8a261c4",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-display-unique-column-values.md": {
-      "sourceHash": "sha256:18b6074f21c2f083eb8bc5486d060ba6f9655db11f4f5e7e087460eeae839128",
+      "sourceHash": "sha256:9305105469bd45fb0ce7edbb66fdc9c7ec9be16d377bca79c8265ca16451aeeb",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-edit-hidden-partitions.md": {
-      "sourceHash": "sha256:12372b7806e13174ec41bb1dfe207f63a039e7e416b50a7a441325dc1a788e22",
+      "sourceHash": "sha256:fe1dfb281e64a7367180a7705a5559be43d8c9368e1c5e7acccab093ee1430d4",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-format-numeric-measures.md": {
-      "sourceHash": "sha256:efcac83bb47fb34182536fd7626e1e9159186aed8addc1218a089bcf8f995836",
+      "sourceHash": "sha256:e2c47703f04f15d22d23fd66c8abda9a27e5ff15ffbf6c9e73a9dbc54ba3952d",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-show-data-source-dependencies.md": {
-      "sourceHash": "sha256:4754d28371a514ff7e5ce78cd6d87f0a4a9a4907336e0fca1f0af4a05774d6c9",
+      "sourceHash": "sha256:6bd1324dda48a5363b2d1e9d9e893f61f2e3364913c64848180c5069442a1600",
       "status": "translated"
     },
     "features/CSharpScripts/Template/csharp-script-Template.md": {
-      "sourceHash": "sha256:97b462002593a46b2335518b6e0773f101ec09a5ae39ef2800a4dd584940d835",
+      "sourceHash": "sha256:9759ddcf839ac9befcbc5e895af14e4c555a327e1866fb48f373933d5e86758e",
       "status": "translated"
     },
     "getting-started/azure-marketplace.md": {
-      "sourceHash": "sha256:7e5c57b8926ef7ca70b7da036ae439e63bf3559959742e13394bd7ecf6d17166",
+      "sourceHash": "sha256:3b2b5db9e85d9639eed51fbb91c18dead4a7feebc4e4d324804aaf41011243de",
       "status": "translated"
     },
     "getting-started/boosting-productivity-te3.md": {
-      "sourceHash": "sha256:1dd6814ad7f714f01e4b7ca3e3c6565cd1c6deaff949c02fb6c1d2d493e95e92",
+      "sourceHash": "sha256:6cbd04a7b267e22d41c812a2efedda6cfc840a8c9e7146b0144cae6a1b077a61",
       "status": "translated"
     },
     "getting-started/bpa.md": {
-      "sourceHash": "sha256:1942bcbb9b7d7f130e4f9869e1d541a12efc14d706b082ae013a016f779c9d3d",
+      "sourceHash": "sha256:2fe5b3652da37a39f1e8f413a6fe4b6d4a406227a941c730743ef29e579e221d",
       "status": "translated"
     },
     "getting-started/creating-and-testing-dax.md": {
-      "sourceHash": "sha256:0650899dbd3142d41cb52eeb857e1829a3482874388865d999b577fa9fb7b704",
+      "sourceHash": "sha256:a44ead38de3eff665cc936036392d074088113bd7ab15be2209e587518290df1",
       "status": "translated"
     },
     "getting-started/cs-scripts-and-macros.md": {
-      "sourceHash": "sha256:a32b793efb495fb0a23a981df218b49b34e58d0d6c2c19f2d037b8ae229887ce",
+      "sourceHash": "sha256:4f8a1fbaa0acc5a25fb1574c379e24f9ffaf280e74ce1bbc755f8922f6feae36",
       "status": "translated"
     },
     "getting-started/dax-script-introduction.md": {
-      "sourceHash": "sha256:4393ece02e4cc62ad20d3ee63c1cf86866c6b70cbf5fd5124806da2adace7336",
+      "sourceHash": "sha256:1c500ed5798529eb123c3f097b3052dd48a97e2bb4a6fb8e2ff8a3c0660048ae",
       "status": "translated"
     },
     "getting-started/desktop-limitations.md": {
-      "sourceHash": "sha256:77d974f5d7444f6d09d4dceb67c21946e514884fd10b2b2777d43b3693dac3cc",
+      "sourceHash": "sha256:4cb45a0e90a6407c47b35fda020c92600243839644ba8899d7981803abd52221",
       "status": "translated"
     },
     "getting-started/editions.md": {
-      "sourceHash": "sha256:16752e36d2acf132ad4ce88ebcd226c065b77b11fc0ccca64612fe095709e2c4",
+      "sourceHash": "sha256:ada26d8ba83b53d2dd528def9455c52c3755406f44161eeb4b804ac87b2ef5af",
       "status": "translated"
     },
     "getting-started/general-introduction.md": {
-      "sourceHash": "sha256:61337e48a6edff56d82bc3cbe0d2618d8139c93d434c1342ef312b7b8ba80d78",
+      "sourceHash": "sha256:4751981c02c68d5ba523befe0b4fdca2c6d9dd316ffa82839653c41c7550def0",
       "status": "translated"
     },
     "getting-started/Getting-Started-te2.md": {
-      "sourceHash": "sha256:33dfe416723db01f219fafff7262251d16f9fda0d75570bac748a42d67930012",
+      "sourceHash": "sha256:07a52d7e6a05b99cee21912889a9848d74163b7b4273f46b74bad4bfe0fa9b00",
       "status": "translated"
     },
     "getting-started/getting-started.md": {
-      "sourceHash": "sha256:28ea3283bb5bef0b4fd62eea31b3d4a5bb0d65abbe7d498451e2952d915756cd",
+      "sourceHash": "sha256:7468ddd7943d4547083cb4f1388d5a6d3613f6a459f4148942f04393b29aabb1",
       "status": "translated"
     },
     "getting-started/importing-tables-data-modeling.md": {
-      "sourceHash": "sha256:539c1165edc406679fcb0d9dedcaa96ebf598346c49df92018cf74f52da894c6",
+      "sourceHash": "sha256:fd8e6ecb5d903f6515c3ec26f4e00d4e67a62dc8b5c2cdcf189f104576567b22",
       "status": "translated"
     },
     "getting-started/index.md": {
-      "sourceHash": "sha256:1cff893340218b6b9399d31193263f541a0afd5205d2c520580069cf18b634b8",
+      "sourceHash": "sha256:a7a9719e3b24b4a414dfdbb77069ef5e6fefde7b83385e9ef67a5f0cb42a7c4c",
       "status": "translated"
     },
     "getting-started/installation.md": {
-      "sourceHash": "sha256:ae80dbaf88ee37d9427ee9e0400e2ed7229530595e768027886ed6dc1fa4f87b",
+      "sourceHash": "sha256:89e25d98425d713ef85bc08cfe9780cffb5adf1974fc06d133233cdc76f507b2",
       "status": "translated"
     },
     "getting-started/migrate-from-desktop.md": {
-      "sourceHash": "sha256:dc1fd7a811ed4408a7a453ec25361274f2bab258e2ea5329aa6d897c9afe04d4",
+      "sourceHash": "sha256:5f187bd69c968abea61375703f9c19b5e1c4674b6219878d6a18a07396f23bcf",
       "status": "translated"
     },
     "getting-started/migrate-from-te2.md": {
-      "sourceHash": "sha256:942550423c2eb42cad3282142919fe92972d84b1f0c2cd12c4571f39422abc51",
+      "sourceHash": "sha256:e3b8f23bb9f7f7e7e0a911db6d0de1ad7f6479cdeed5e6093421e27ff6ce3c20",
       "status": "translated"
     },
     "getting-started/migrate-from-vs.md": {
-      "sourceHash": "sha256:b7943609a6bab00f3299960d772ddf12a4161d46a011e5821a86e4c4560fd9a4",
+      "sourceHash": "sha256:2b87bf81182d2d0c645bfe354b06abf23343d2d61ff486918fd9b7055334043f",
       "status": "translated"
     },
     "getting-started/optimizing-workflow-workspace-mode.md": {
-      "sourceHash": "sha256:b549dd9c660da15116394520e2c7db8a1167f1062a90964f8a078fac0969f7fa",
+      "sourceHash": "sha256:be881580d2cef038fc74e503591f8110998d40922a7c30bc15936ad7a36dc823",
       "status": "translated"
     },
     "getting-started/parallel-development.md": {
-      "sourceHash": "sha256:771e22a14e4149f7d32da22a47ba73440b81a61564b1de976f16520c6e98fee0",
+      "sourceHash": "sha256:0101f8323927cee6cdd2a67c5b3f1384e1481e7648eada619b7ab3e0e0ba1b2b",
       "status": "translated"
     },
     "getting-started/personalizing-te3.md": {
-      "sourceHash": "sha256:af5c6881e93c82a790f36c1cfd84dbf7456c320e067a207193b7d59a40e5773b",
+      "sourceHash": "sha256:6cb01ce0ac5ecd6bb4b231cf54937781e523805c024fe96a2c5f4492e39fd951",
       "status": "translated"
     },
     "getting-started/Power-BI-Desktop-Integration.md": {
-      "sourceHash": "sha256:7c23b5811b153da076659cc097d65d04eb73794464942c3058059346eed3860f",
+      "sourceHash": "sha256:3e22d21db3ea34088cc114527f0a21951630fd0a37453ec99d5ca0d8f19fbf8f",
       "status": "translated"
     },
     "getting-started/refresh-preview-query.md": {
-      "sourceHash": "sha256:1b95ce652f9fe220ce0baa2bdb2e0de95e1746729d9d6f4f1807717b04f6b804",
+      "sourceHash": "sha256:9b245c1a7ecdb7de7738329b2da2f3452e96665b7f7778316d78039cd4c1a3b1",
       "status": "translated"
     },
     "getting-started/toc.md": {
-      "sourceHash": "sha256:e2f87443d4ec79c44180a2e305fdf21ef9361b8f2f97c9b5f4f30816cf64727e",
+      "sourceHash": "sha256:6f0f1913443119bf78a723b94748f4baa411175f4da79da34ba60ebb3ffae4cc",
       "status": "translated"
     },
     "getting-started/training-telearn.md": {
-      "sourceHash": "sha256:d58ebfdb0ba3721250865f314b7e234d07d60883edbd87ae9abb53dfbe6c54d2",
+      "sourceHash": "sha256:cba2b907335edf7e1310d6323c063305cbed3c66013758b932d91466394b4d85",
       "status": "translated"
     },
     "getting-started/views/bpa-view-reference.md": {
-      "sourceHash": "sha256:b1b9af1605783a0d1a7215c3cbd463444d6e870ed8e31edc952c328e73f9996c",
+      "sourceHash": "sha256:15ca9b6b41ad2b4a120b6ef5ea17c4474e72fa68375e5539654e662057eb2383",
       "status": "translated"
     },
     "getting-started/views/data-refresh-view-reference.md": {
-      "sourceHash": "sha256:2b0531afa0df2babacda9b8b0f942b626195ec5a6034aa9a158250d2168e7a7f",
+      "sourceHash": "sha256:5ae489e72f396630aec7b81960492180ce2359df98a403503cc7613fd2f22049",
       "status": "translated"
     },
     "getting-started/views/diagram-view-reference.md": {
-      "sourceHash": "sha256:7d20597c914bebc07cfa6f3937a8183d152b8ba642e70e1cf8a6b041edd2a2f7",
+      "sourceHash": "sha256:00d1bab69592c55957a4dbde3661e24689af0bb471e4e982d0723c4ed8122127",
       "status": "translated"
     },
     "getting-started/views/find-replace-reference.md": {
-      "sourceHash": "sha256:eea63df2e08bedcae9c7bc5f00fb21386cd95c9171ea8ad89f87f959c05a26ad",
+      "sourceHash": "sha256:a207ceafc5c8e3d3a218c80d405fafc3c71a9d9491964366607ee205e28a2b69",
       "status": "translated"
     },
     "getting-started/views/macros-view-reference.md": {
-      "sourceHash": "sha256:88d73c55965ca306db4ad3e379fa987063c89c17c95ebed50e83d6240b9cb71a",
+      "sourceHash": "sha256:684b3ae341bc7955f0f304e04782f7b80505ca4bb2490a7c91e99e19439b743a",
       "status": "translated"
     },
     "getting-started/views/messages-view-reference.md": {
-      "sourceHash": "sha256:a68d178caeb8eada8179a539ae061a3e5be49562edd30e5d95f154f749de8bff",
+      "sourceHash": "sha256:b4e921bba59577a9f8566439d26b22c2fa5e6dd7abc73ca5dee661d2d659c627",
       "status": "translated"
     },
     "getting-started/views/properties-view-reference.md": {
-      "sourceHash": "sha256:f15e10357990e0871d0c6d003f3e422574ce05503a20e6ee1f8c585cabc45d53",
+      "sourceHash": "sha256:6915dedc081501314e88a8e8700a946ec5217564c2b12e8aa45b3b4a54ad2a81",
       "status": "translated"
     },
     "getting-started/views/tom-explorer-view-reference.md": {
-      "sourceHash": "sha256:cff7e065f5ad8926552d64ce6170e782d999e24f3894e0b0a7e2f9858a801a7a",
+      "sourceHash": "sha256:0531754556357e77414ea097c8e89932c87f7e39ddcc33ef9cf3677653b50564",
       "status": "translated"
     },
     "getting-started/views/user-interface-reference.md": {
-      "sourceHash": "sha256:2725adb9a676940d5e4b83c68c4989d2f40d503a83a216397840857874398563",
+      "sourceHash": "sha256:db5941a9366d706a595db7c01c82659fae0e0372be1a7e12c9d8061bfbde1e06",
       "status": "translated"
     },
     "how-tos/Advanced-Filtering-of-the-Explorer-Tree.md": {
-      "sourceHash": "sha256:95d4c41f0fdc8f73ebbdde8c9829278f7e6cd01264c25c5b46763c225a0ec988",
+      "sourceHash": "sha256:935a9dc732e0fd11e5550a6c4472d35a42d3ee1a381586d693ac7a5830542903",
       "status": "translated"
     },
     "how-tos/Advanced-Scripting.md": {
-      "sourceHash": "sha256:631d59ddf5d4bd7a39db9f62c2c11b1376e1933685da763c8b0992bdf982e370",
+      "sourceHash": "sha256:a7c6dd9a5fc927f309f47ffb69b335996b503abf3cde9271c94a5afd5e366f21",
       "status": "translated"
     },
     "how-tos/connect-ssas.md": {
-      "sourceHash": "sha256:c2dfe9827a42110e7d25cfe9c3ed7c4a04ff7c2990d1ed10f64ab3c551037b16",
+      "sourceHash": "sha256:738df17f3a1ad8792884661e7b0ba408872170bc4180a239abfc66c2f5081ed5",
       "status": "translated"
     },
     "how-tos/deploy-current-model.md": {
-      "sourceHash": "sha256:6ab8db3b6bcc1757ae8d0fdd51133ddc53334d3d7a78c45c7c4085a3f652027d",
+      "sourceHash": "sha256:834b504afe131332faeb2a705df8fb5f7df3f5137cfbc335d44b77a00b527930",
       "status": "translated"
     },
     "how-tos/drag-drop.md": {
-      "sourceHash": "sha256:b3b4f89d0bc2b76a905e868d06d50917d81f8d4d64b3b1b5002dbfdf06fa6e72",
+      "sourceHash": "sha256:a7209f5254e6988a92bdca532d3a375cc82d134739e432a1970a6312814b8027",
       "status": "translated"
     },
     "how-tos/duplicate-batchrename.md": {
-      "sourceHash": "sha256:0da1c04c8e0206882f716e3957cf86dae92500d4f6b6d51c7c7e44e5d33b3f54",
+      "sourceHash": "sha256:8fd7332b2b836c9e4358bc944b07c62c7fbea09ef3abd896653e05fed4c937cd",
       "status": "translated"
     },
     "how-tos/edit-properties.md": {
-      "sourceHash": "sha256:e3edbd6a49beb9bb75a2d2076e51bea33227202ea910b070cedda099c17618f4",
+      "sourceHash": "sha256:36d9f419afff9ce4d1ba814f1a97ec3c825e569dc0698c82d6ccec72380cbabd",
       "status": "translated"
     },
     "how-tos/folder-serialization.md": {
-      "sourceHash": "sha256:8b41e78bef09301284841690f12002ed1ca983c845d3b1d8b1b6cc85cb73c5b1",
+      "sourceHash": "sha256:6b4dae8fb419f7efb1d3348211d95f6febe409c9f6d860985f8f14a8beee052a",
       "status": "translated"
     },
     "how-tos/formula-fixup-dependencies.md": {
-      "sourceHash": "sha256:cbb583c5453297aa76e267f86984587c0947dea569d937f291d54fc0921ddf23",
+      "sourceHash": "sha256:7b92d3f7a82312c06fe839e066df04411aae4a3d0aadf94aea44cc3b1934efb2",
       "status": "translated"
     },
     "how-tos/import-export-translations.md": {
-      "sourceHash": "sha256:ee2d4bbed5fad42c661ef39838e0a62ea4a9459a7350a949b4c540569b77f6eb",
+      "sourceHash": "sha256:e360d9f6fb69f4ed660b150bc7cdbeaad188998f9addaca07a1ba95880158fbc",
       "status": "translated"
     },
     "how-tos/importing-tables-from-excel.md": {
-      "sourceHash": "sha256:54be367cdb3652a1f329935b5f663df6076a420b1d1782b968fc3f467a580fe3",
+      "sourceHash": "sha256:6a68727673ad603d2091784ea68b0fd13ebc1eed7c5e279366841237e3319e9a",
       "status": "translated"
     },
     "how-tos/Importing-Tables.md": {
-      "sourceHash": "sha256:17f8530c0bc0109b8e199fe56d36919fc24697fc437674e7728fadb353c878e5",
+      "sourceHash": "sha256:d50f21da67fec34065c172f1e57cc8479e6d98900fd1aefc05b2f9913213e3ab",
       "status": "translated"
     },
     "how-tos/incremental-refresh2-h.md": {
-      "sourceHash": "sha256:b7cb1ce87b83b31c3cf44af327adf14324cbed8448fcf15223121c3bd083f819",
+      "sourceHash": "sha256:f784f8946b99d76865d5180b766c6d5c934b79ce89b6a15aeb99ed4e124c799d",
       "status": "translated"
     },
     "how-tos/index.md": {
-      "sourceHash": "sha256:d6ca415819641e338d7d22d2eaabd75a2e83585fd226537776c6c00a22bb0f92",
+      "sourceHash": "sha256:602751d2958e61e1f0f0fbef21e254551b3e803070597384104c8689787809bf",
       "status": "translated"
     },
     "how-tos/load-save.md": {
-      "sourceHash": "sha256:5999c48324037425d2cde3d8f82aa9afd0d419c2401c9605e31b5df0973bc2b4",
+      "sourceHash": "sha256:16972c8e9dc5861cafebda87d9c646fa1569dd9282d4f46049b34c700a9124a0",
       "status": "translated"
     },
     "how-tos/Master-model-pattern.md": {
-      "sourceHash": "sha256:e6efeec6d7944d0aff773e9cc4219cd255af65bf23cd4b1aa39553d63ba033c5",
+      "sourceHash": "sha256:00f0f58661780f3001fc5ea01d866a6c7e05c95b1ffb10e2b4ebdec19fcb7eae",
       "status": "translated"
     },
     "how-tos/metadata-backup.md": {
-      "sourceHash": "sha256:8c842b9fb0eb88fbcbc09a20036e1d21f6d6e48a6cf882141e2bc63cb759e329",
+      "sourceHash": "sha256:2e09520c1a8cc63a14d2bb548106dc094e24f105ea47b9adb2cbb67259f9ca4d",
       "status": "translated"
     },
     "how-tos/perspectives-translations.md": {
-      "sourceHash": "sha256:6b640688ab87fee2e73e02776f4042efffa3f1bc007b0e607214c89a3386e16f",
+      "sourceHash": "sha256:d982fc9f33492df087251ffccfb498a4e482f5c49da5aed8139af5e591f9a1fd",
       "status": "translated"
     },
     "how-tos/powerbi-xmla-pbix-workaround.md": {
-      "sourceHash": "sha256:032818b434b6b69fbe8db47914cee6c58a56d00cb279e47da3e99129c9f45315",
+      "sourceHash": "sha256:abb8737c6f6ea6d42eaa8303312d659b2ba8f4c4bf63eb0c17cc2de60be02c3a",
       "status": "translated"
     },
     "how-tos/replace-tables.md": {
-      "sourceHash": "sha256:a71712e15de2cfb89a52c8022246743617bb75c97a025c6b0d2f02bb1569e80d",
+      "sourceHash": "sha256:bb2c09a2091a99c069bd2f206cefe471732284e7bd838b3a33047571ccacda73",
       "status": "translated"
     },
     "how-tos/roles-rls.md": {
-      "sourceHash": "sha256:0f3e7a0ecf642bd55eeb6865d7c881563cf8e2f7708517172590def678060540",
+      "sourceHash": "sha256:fae9d351ead61fb6b1286401bb9f38c5e23d9cc427d1c1aab5bf351059afe56c",
       "status": "translated"
     },
     "how-tos/script-reference-objects.md": {
-      "sourceHash": "sha256:486150d7fb6512e0038b7aa1d95480bc1dd4cda5116e9ca99e0ad75c420a57d1",
+      "sourceHash": "sha256:f4807e41f2785b359bc6b9875519aaebdca84da06415bea5a6cd09179a59e18e",
       "status": "translated"
     },
     "how-tos/semantic-bridge-add-object.md": {
-      "sourceHash": "sha256:47cebddcb3457d0c355fd207c68de6fb980ad1e9b864ec39d80ca64aac861217",
+      "sourceHash": "sha256:fc45b9109e248917012968eaed3d31ab2731c749be09ea3a3604317771dd6761",
       "status": "translated"
     },
     "how-tos/semantic-bridge-how-tos.md": {
-      "sourceHash": "sha256:ebc5e0ee2c2688b218ad90eb3ab2882183651deb6e797058bc34192e3850602f",
+      "sourceHash": "sha256:3e7254cf0f1574d7a0b75109d152b36e4911d1ff417a4691b1bcafc115fd175f",
       "status": "translated"
     },
     "how-tos/semantic-bridge-import.md": {
-      "sourceHash": "sha256:f6f20eecc7756a8ef3739106b3ebc82ab85ba4282fee87701ecd8b78d415f397",
+      "sourceHash": "sha256:5e44456f341235b172a178e01ac6c0ecfee7d3b6a4e4d955ba240a2ee4d0cb47",
       "status": "translated"
     },
     "how-tos/semantic-bridge-load-inspect.md": {
-      "sourceHash": "sha256:c4903b1f3dae22e24ef7401892ef4ec18d284493b19217a92095a6ec02e774d2",
+      "sourceHash": "sha256:5267a8486231514b4500cae234bf91aad00ecd2ccb5ae44389f46fb01b6a3de3",
       "status": "translated"
     },
     "how-tos/semantic-bridge-remove-object.md": {
-      "sourceHash": "sha256:0201f69d14698b005e06d60f6a721b3bc371d83bbc885944df38cc82e58aeb10",
+      "sourceHash": "sha256:4d3b3a064617e5b8792d448d6bcc6bfca71e449c7eb168e8958466096fae4fb9",
       "status": "translated"
     },
     "how-tos/semantic-bridge-rename-objects.md": {
-      "sourceHash": "sha256:980236af341a7130899bb8bfa1655636edef998c95ba27d0552d504b1039c735",
+      "sourceHash": "sha256:2b741ad175e8be66503950d5aa5de558e2ce01b93371905faa8a8ded3bff914c",
       "status": "translated"
     },
     "how-tos/semantic-bridge-serialize.md": {
-      "sourceHash": "sha256:2ca79bc033307934ac2ee7223639b8b71d7c7dc76fdaf5d13ec3d638d279bb40",
+      "sourceHash": "sha256:27ca90dfaf274d3d7933c2bb5839e2f6f28d213692e91b9e96d0b0199ac3174f",
       "status": "translated"
     },
     "how-tos/semantic-bridge-validate-contextual-rules.md": {
-      "sourceHash": "sha256:2c8475f1c9b0d4169ff21e493fc47e4c03eb16fd06aa88b6fa9065ef2a03a2a9",
+      "sourceHash": "sha256:d29e2a536f0c2211f2f2a81896b281b994922d6ed8d82d6aa218fe2432c9b3e0",
       "status": "translated"
     },
     "how-tos/semantic-bridge-validate-default.md": {
-      "sourceHash": "sha256:744cb9028b5d70ec6146649d98c6e5b2b909abfb6dd76addde90bfe2f9534c80",
+      "sourceHash": "sha256:c580f957c8083de4a78ffd1b6c7c97801c7c39821d1362205f014f0d075e11cf",
       "status": "translated"
     },
     "how-tos/semantic-bridge-validate-simple-rules.md": {
-      "sourceHash": "sha256:871544d36d746d980df2cce373ca58961a3b21a612e28361e5ad5af1f37fda0d",
+      "sourceHash": "sha256:8022c0d65d92617604199afbf23383d9a1f8ab74184565435f0f57b0d6cbd46e",
       "status": "translated"
     },
     "how-tos/toc.md": {
-      "sourceHash": "sha256:1b2f757b9db44d77156204b5fa006f78828eba9bc76fad02d97f54ece3cf3bf7",
+      "sourceHash": "sha256:f606912c946d395fc1111c834b54add1687e58c0bad5de55bfde1ec331377d32",
       "status": "translated"
     },
     "how-tos/undo-redo.md": {
-      "sourceHash": "sha256:e03d98c7fe13f0ada9d6a887c417798a510ad82916e7b2c4e98c498a2d5ba69d",
+      "sourceHash": "sha256:743d09f92c48856bd0a069bc81d94c43038951d3b31baf2a6ac48495d705ca7c",
       "status": "translated"
     },
     "how-tos/update-compatibility-level.md": {
-      "sourceHash": "sha256:6ff9fa9aa0a1979456abec53ec14addbf3c00a188bc8426adda43333e4ce1701",
+      "sourceHash": "sha256:db1e5f011e9012548630f4dc75358331f1a2b50b4652693feb145c2e685b9162",
       "status": "translated"
     },
     "how-tos/xmla-as-connectivity.md": {
-      "sourceHash": "sha256:cf80a9d3d83420cd977af328fc21c63066ee28a7e12665b277d866f1e280ff40",
+      "sourceHash": "sha256:2c7134c5882b2901561935c89eea4f27f3d45534385e02b7d92d58416d269cda",
       "status": "translated"
     },
     "how-tos/includes/sample-metricview-deserialize.md": {
@@ -587,7 +587,7 @@
       "status": "translated"
     },
     "how-tos/includes/sample-metricview.md": {
-      "sourceHash": "sha256:41ed9d676177a7c23aec90bfbe9e703e7a18a1498009cc26b916805bca31ac41",
+      "sourceHash": "sha256:fccd99fc0bee912d39f879757f5b18d263bbe88d130d534fe5663283a2351dad",
       "status": "translated"
     },
     "how-tos/includes/sample-metricview.yaml": {
@@ -595,651 +595,651 @@
       "status": "translated"
     },
     "references/application-language.md": {
-      "sourceHash": "sha256:2b145c41ce53e4fb5013008471d79d4f7fe0602e4bedff220be0fcaa3028ee7c",
+      "sourceHash": "sha256:3d8bb1e49bd7cf97c56210ab5c8322b7c419cbb0152966f195cabeabb87d1ded",
       "status": "translated"
     },
     "references/downloads.md": {
-      "sourceHash": "sha256:443087bae7d1bdebac65c03f355e1152f85d5d135d4f0783f6b710a6fd8941aa",
+      "sourceHash": "sha256:0bdbdf1e0ab65e52a9bb7b697b55057605c5911322c4613269f250dd3609a632",
       "status": "translated"
     },
     "references/FAQ.md": {
-      "sourceHash": "sha256:821216efcbde4b1e629a83a1979c77a4cfd9f3b5c1f0ebcd273e3d828311d29b",
+      "sourceHash": "sha256:bf29800bdcc5ace4dd5d3813fc1fb8c48b30a034039a0285bd62768866b924e9",
       "status": "translated"
     },
     "references/FormatDax.md": {
-      "sourceHash": "sha256:1b225bea6ccef4ae3a996a02443464307999ea958824b62b7445206245daf7e6",
+      "sourceHash": "sha256:d6d07781fc5c8cbecb8187caa6123eb0a13f0f145abfa4b8c4cb1274c7e9dcf2",
       "status": "translated"
     },
     "references/index.md": {
-      "sourceHash": "sha256:2a1ed8e5bca82a8c8f180ba910dd7fc87ee891adef3d59234248f751545da10e",
+      "sourceHash": "sha256:a7562663ae2f94db4f055c883a66e6a28d911925ae9cb1e9aea2fe1de791d569",
       "status": "translated"
     },
     "references/Keyboard-Shortcuts2.md": {
-      "sourceHash": "sha256:e0807f2e3f258f1c0d62555107041dfbaa17650d7150dca186ef237431af4ced",
+      "sourceHash": "sha256:6dac63cca6fed07aeeaa4c9c97b9174104c299528f823785cb9d042fc567f93c",
       "status": "translated"
     },
     "references/policies.md": {
-      "sourceHash": "sha256:9092b34841be3fdcf0021e529713a49d47346556b06073b3f81407ce15503c95",
+      "sourceHash": "sha256:876619a9cba13d65a05f11ed3cc9d0b62c7e0378124ccaa3e111b57cc25de1e7",
       "status": "translated"
     },
     "references/preferences.md": {
-      "sourceHash": "sha256:6fe02d486971ff696c28b22e9e2a88662bb67d41cce4099342a1ba0f23c3089f",
+      "sourceHash": "sha256:c967483c9c594efaa8b0ec09ac4d4a1fa3e9f7f74bf89f33808133cd668c00d4",
       "status": "translated"
     },
     "references/release-history.md": {
-      "sourceHash": "sha256:30f7a485e3e60ebd809664c4b93f58c8598b0bc7d0fc4bc3715305179c0ed133",
+      "sourceHash": "sha256:41847ab7494390d2a3af39d40b378cea8eb8a654e36f59dde79d022cd37a1af6",
       "status": "translated"
     },
     "references/roadmap.md": {
-      "sourceHash": "sha256:dc7eb645cafbae20584b9422f22de6bba82c6c86aaaa41c3922f430b29d962d3",
+      "sourceHash": "sha256:b0995af14ffeba3c104b4bcc0d65bfedea42ef4e3ddeeed9e8d2d1f594efc0ef",
       "status": "translated"
     },
     "references/Roadmap2-h.md": {
-      "sourceHash": "sha256:269e6b5b5fc980f70aa642ad6882ed01909631c2afafe6daff399e6efdbea8f1",
+      "sourceHash": "sha256:9c6d16935c781d75cd4eb81451ca7614291f880442892daf52d994b7106ccb69",
       "status": "translated"
     },
     "references/shortcuts3.md": {
-      "sourceHash": "sha256:c58efcb0bfd40d9a32809349f54a791c86ee5a501718c4aaca7b72733e74347e",
+      "sourceHash": "sha256:4b911e79caf257e42f4a55171c8f98aa6fddfd20b855946a6855a250f3df8bf4",
       "status": "translated"
     },
     "references/SQL-Server-2017-support-h.md": {
-      "sourceHash": "sha256:db00c8642b2526adb31b4dfe2c7e56cc0040c8c34fec031125f7064bfa41b63c",
+      "sourceHash": "sha256:05b6c42b0be102be9030d3b5b34f801cfdfcfb0c2be058f2b940c96a1d2d9dae",
       "status": "translated"
     },
     "references/supported-files.md": {
-      "sourceHash": "sha256:79abc83bd95b9f176b4567e47e482ce1100ad12913143dead97f7d0b03ba3720",
+      "sourceHash": "sha256:477feb6c5f662dcd2bd2728ae1309d80336e0603cf2a9bae8064adc2cf721200",
       "status": "translated"
     },
     "references/TabularEditor.TOMWrapper-h.md": {
-      "sourceHash": "sha256:603e7d30f3b77493a42ed2c269400c4139617bd026588328a78dfb16c92f317c",
+      "sourceHash": "sha256:d1ed449a9a96c0031fe8b280f1c808858196806f71363d8fa9447e0db6e7d71a",
       "status": "translated"
     },
     "references/toc.md": {
-      "sourceHash": "sha256:2a8242ed589d5a5c1726553305054d7aa2a004cbd758bd270534ea0f26500621",
+      "sourceHash": "sha256:7b2c861545b832b72f70656afcb0d91d25ff24337dbab65a2a220f8c19847aaa",
       "status": "translated"
     },
     "references/user-options.md": {
-      "sourceHash": "sha256:3547b53ce1fe8d2e177517d1937921bd4b8320f09ed7434e037e0d4db6f70981",
+      "sourceHash": "sha256:ef957dffafe614addc2110c8fd05b9c9021acc49fde1b975eddb3b431c349e1d",
       "status": "translated"
     },
     "references/user-settings-files-te2.md": {
-      "sourceHash": "sha256:4a17aaa1b20a1c4d0f54affd7af348292b7f08a73504b0e3665f6e817f11f88f",
+      "sourceHash": "sha256:0a2da6cad41a5e1983662c6d621ab9f78f671aa59f2389f31004b7847deef1f9",
       "status": "translated"
     },
     "references/whats-new.md": {
-      "sourceHash": "sha256:e3887e4264963f35ae76ae568968c9fb7249858520e60ffbbd8adf944e77491a",
+      "sourceHash": "sha256:1d8d160e5a2a13c2b73bd97fa4b42f9c7f0b6ee04dbce8501039f39eef107b4c",
       "status": "translated"
     },
     "references/release-notes/3_0_1.md": {
-      "sourceHash": "sha256:4f90835a7971b4820009525b985c3e279039d71151e54d45753130777aa671ce",
+      "sourceHash": "sha256:9dd7d412075ffeb73fd903e6e560738125b944c1107d5279e06278b3a1c67ac6",
       "status": "translated"
     },
     "references/release-notes/3_0_10.md": {
-      "sourceHash": "sha256:2b7777b0f54be87bc8bf9e080b4986f3e0d13e9431040fe5f80bc91980a286a4",
+      "sourceHash": "sha256:e4ed9e02f1d530888ea3291a800b799de6e5dce5717597aed5b02f96e6874819",
       "status": "translated"
     },
     "references/release-notes/3_0_2.md": {
-      "sourceHash": "sha256:4c4fa9537b2f5691880e242791c3b091af34b0b9839ef2e7049adf4ed82a8801",
+      "sourceHash": "sha256:c259a508fc8aa8ab579248baa48edc26886cc11a7b46c1c300f5381f7f9a7576",
       "status": "translated"
     },
     "references/release-notes/3_0_3.md": {
-      "sourceHash": "sha256:68d74ed0dd95601fccb517df398d555811ec85f50470b976df9b3b567a73a434",
+      "sourceHash": "sha256:e34eb6b6cc40a550c2b1e5555ab3dd5ae9aab4fe150191da8b217f7e1c44b7f8",
       "status": "translated"
     },
     "references/release-notes/3_0_4.md": {
-      "sourceHash": "sha256:eae59197c4a996948b54885cc9f9c4775e38ad255f256f5f8b35219c7e52db79",
+      "sourceHash": "sha256:0745acfac1154de9e0b61300052c871454382fff3120fa89b0bf5b794522bcb1",
       "status": "translated"
     },
     "references/release-notes/3_0_5.md": {
-      "sourceHash": "sha256:c39eb7e39bb3704d5691b8a4c0c7c3f9d5525c46586f29ffac646c2aa55f78f1",
+      "sourceHash": "sha256:0bc3323e03649c932b63cb6997eb73c33f7d8211601640a21630c7cb61851ffd",
       "status": "translated"
     },
     "references/release-notes/3_0_6.md": {
-      "sourceHash": "sha256:6c43864671d333449ff843ba761a878b5bd9c3a4e56407ee193f25e07f7fc82f",
+      "sourceHash": "sha256:1e570cc335e2d65c8c4a137009c2aedaa3aeb09e0a45140121b6bc7cbe1d7468",
       "status": "translated"
     },
     "references/release-notes/3_0_7.md": {
-      "sourceHash": "sha256:bd673da3dffc46611b124a292422bde1ecfa8360f0cc49732c029d610e6ad343",
+      "sourceHash": "sha256:5abefcdef1f490a553d1a625f1b3ae2c22e063ee14d751d483feeb1d347593bc",
       "status": "translated"
     },
     "references/release-notes/3_0_8.md": {
-      "sourceHash": "sha256:df7eb26d1c7a747cbadc84887b83437c36b038f3578b32e07d656965a6fb8313",
+      "sourceHash": "sha256:cb1bfca1fe61a069fe1f3bf3f53ea69ba4209a25e434d94b0b1ff4fb63d64012",
       "status": "translated"
     },
     "references/release-notes/3_0_9.md": {
-      "sourceHash": "sha256:8efdca40e1b9b66def91c1f2fa0813171e54537686a5cc4e1a17be4fc9130723",
+      "sourceHash": "sha256:645ce98903aff7368af55a9b23fdeff5964c5804e16d3dfbbebe34f2eeaed37d",
       "status": "translated"
     },
     "references/release-notes/3_10_0.md": {
-      "sourceHash": "sha256:5049f3d981c44f82d9cecbc0e1c5ac0c8b5ab5137280e9957dfafdca0126b717",
+      "sourceHash": "sha256:280c2247e870b506a5134ad2da70ea21f53a5d7b2ad8e9f5319414e2f21d29b9",
       "status": "translated"
     },
     "references/release-notes/3_10_1.md": {
-      "sourceHash": "sha256:875854de66aaec104359b884495bf6b51bca7325859d14fce9fe69057f6d7690",
+      "sourceHash": "sha256:8fcb4cee86daee9325723dc6cb6b9f3ffb3d9a41e67f0fc2c35510b8e0a78521",
       "status": "translated"
     },
     "references/release-notes/3_11_0.md": {
-      "sourceHash": "sha256:021ecd692848551cfac260cbeb0b916c55df53273bbf2a197587ccce5b28d8db",
+      "sourceHash": "sha256:00487e4ef0ddf0ee9e93644ec740a1381bc984d716553cb60d2abc0140fc7b6d",
       "status": "translated"
     },
     "references/release-notes/3_12_0.md": {
-      "sourceHash": "sha256:edb7df4534aed409999badff422f868c8c8014e8a13526c1cc378c44fc5e3837",
+      "sourceHash": "sha256:5ce41677cf81415a721c8db3c5c7e435c8b9c6fcf6ba61af7932cfcd2cd7f2b6",
       "status": "translated"
     },
     "references/release-notes/3_12_1.md": {
-      "sourceHash": "sha256:f16279a68ee3df9a44a514232180cb1f3c1eb876c79c5c248d5c4fc0f3606893",
+      "sourceHash": "sha256:48c8104c99b0af6a26485ed1e19971ac9a06ca2fa143c55d1c2c5c74fe5252ca",
       "status": "translated"
     },
     "references/release-notes/3_13_0.md": {
-      "sourceHash": "sha256:499f64520f241e0fe9d67cc959f734a4ae2aafa0e02dec11ec9328198a176159",
+      "sourceHash": "sha256:43b9bff69d3f4fd23c2f98102be764674c6ee63c5832e8dccbf6cadcb2d5cb0a",
       "status": "translated"
     },
     "references/release-notes/3_14_0.md": {
-      "sourceHash": "sha256:31fd3fcc3de4989ef621536886603c7d14809ff8abb2b92ecee610cab80ea447",
+      "sourceHash": "sha256:f9819f664683671f5c6ad1f4b38f27c0d6390d88d748746ea2ca6f939ec57a3b",
       "status": "translated"
     },
     "references/release-notes/3_15_0.md": {
-      "sourceHash": "sha256:f6e31f4a06cf0638a436461ca586375185fb6d83bb1f84769ca77714d6d85373",
+      "sourceHash": "sha256:892511af91a5becc0cddf3c17031eb2772f1c0362f2e144fa6137a9cfef864e1",
       "status": "translated"
     },
     "references/release-notes/3_16_0.md": {
-      "sourceHash": "sha256:1b4ac68461f244e79d06ab74147edda6273a66d810cd7a51ee208692bf570d25",
+      "sourceHash": "sha256:c370d56ce763d64929dab9191dfec25d4d8e5cf4aac5ae242c965213497c07c9",
       "status": "translated"
     },
     "references/release-notes/3_16_1.md": {
-      "sourceHash": "sha256:72b2fd9dfd0d056f91f0b57281b175432f4e1be79c2eddbd821fe69089461ad4",
+      "sourceHash": "sha256:8c963ee75f969d1f42991744d912d3ee9901209fe4729421791fff43cef34c16",
       "status": "translated"
     },
     "references/release-notes/3_16_2.md": {
-      "sourceHash": "sha256:43b57904637bb57a6761d28eb7fe672e6c379f2dcd70d59c0a0e3f2d40690d7e",
+      "sourceHash": "sha256:2afcb4c569c945fcefcbb4ae5db451c3d3e6c386d6ce01520456af225cc397d7",
       "status": "translated"
     },
     "references/release-notes/3_17_0.md": {
-      "sourceHash": "sha256:7a2234e15b112c51fa69cb1ee20242f34e58f555d2aac7ec85b3eaace801d276",
+      "sourceHash": "sha256:c8d747fa588ed2e9724ca5642094b3183a7848de106206c5acb7a6db003f03ad",
       "status": "translated"
     },
     "references/release-notes/3_17_1.md": {
-      "sourceHash": "sha256:5506c04dceed3f9087ecc8ffccc73e0c846dc564a7bdc5dc8d3bb059521946cf",
+      "sourceHash": "sha256:43426ca1856ba7146d873c25c365fd7ca9dd6c2dac27172d4302aa08caf73a13",
       "status": "translated"
     },
     "references/release-notes/3_18_0.md": {
-      "sourceHash": "sha256:794ca24e8ddacd1ea723639b9511a1550e9d5e9fbbc9e924f241c2871b9c2196",
+      "sourceHash": "sha256:ccef1d643cac9bbba5813f1f9101466c79a12f8adf5622f1b20780964bd39b36",
       "status": "translated"
     },
     "references/release-notes/3_18_1.md": {
-      "sourceHash": "sha256:821a9da8c370a714da2ea8e89bfad676e8115c366019ef36f46edf0e6127fe7e",
+      "sourceHash": "sha256:864335c116512c8d22394bc0b36873a8c4855d1a61a18f15524bd16afabb5869",
       "status": "translated"
     },
     "references/release-notes/3_18_2.md": {
-      "sourceHash": "sha256:cb3a96d6736f0a2394f226d3c1d7ffe1888781741ea19ed03b4dcff3fe8474a0",
+      "sourceHash": "sha256:498e7482728a3b72acb8b42b8eec7caf732df56677d3b44ac0fbf5a32562ef17",
       "status": "translated"
     },
     "references/release-notes/3_19_0.md": {
-      "sourceHash": "sha256:c35acaddef5e1a0c26d8946c910cc60e73fd7387e68a4258c06befbbdb4633f2",
+      "sourceHash": "sha256:1a50d8f5bbee16ffcefb119bcdc3f2ff8f0ee153f7f9848f0a4acd7383f8ac16",
       "status": "translated"
     },
     "references/release-notes/3_1_0.md": {
-      "sourceHash": "sha256:22b2ffee0b524fa1ca565e36f263b612fc243df5f213ff2a39b86d1a52bad6b8",
+      "sourceHash": "sha256:0585f4b1aad5d388d66147afa156d2e57e8f615ce5c3d3fb0830925d5393ee61",
       "status": "translated"
     },
     "references/release-notes/3_1_1.md": {
-      "sourceHash": "sha256:fef2f46ee6c5fa38fd785bc0a3b0de38c79d2b654cd906c61577cae09b6511c3",
+      "sourceHash": "sha256:1d6e4b185d09f93a6688f14f954a766353fd3daa17ecedd6689735c2c01c5208",
       "status": "translated"
     },
     "references/release-notes/3_1_2.md": {
-      "sourceHash": "sha256:8741312f51bdca558a909b8a5b6bb6466a9d9d9512960687ef611980b7fb13b3",
+      "sourceHash": "sha256:9f7ef93ca36c28f28b2a61b62b7cf68738da2a31a73abbc67ebacd4be6b05915",
       "status": "translated"
     },
     "references/release-notes/3_1_3.md": {
-      "sourceHash": "sha256:4167126ca437e2f0bf9162170b8fd9b183b560e455767835b7593a2b91507e26",
+      "sourceHash": "sha256:63da26ecf5029706dd4a732a7494b15ff4df4bbf3d4e1e7743f61b46d979d2ef",
       "status": "translated"
     },
     "references/release-notes/3_1_4.md": {
-      "sourceHash": "sha256:a7ee27790de5c9dfe8e3c1fc919c6f7c8174da7bfa9f50633dbc75a9ae5e0ebb",
+      "sourceHash": "sha256:690c2c05528da4f99adb4177a5e1ca448305c1093948d0cbb7948242961aa453",
       "status": "translated"
     },
     "references/release-notes/3_1_5.md": {
-      "sourceHash": "sha256:50e2bcd0f0552965f413a0675665e4aff37913526fce4b762fe745453a927309",
+      "sourceHash": "sha256:c8984a8ab4c13021d98434ce71d4a54db9636dd3725c313de6795e2d6ad4fd88",
       "status": "translated"
     },
     "references/release-notes/3_1_6.md": {
-      "sourceHash": "sha256:ee331894b3d1d983cebc386a7722c268df841b87982e7cb00b4c8238d91849f6",
+      "sourceHash": "sha256:1e7e09b6f4d7b733050ee43873ffe842c7e55faba945cd9d5afce8996739f183",
       "status": "translated"
     },
     "references/release-notes/3_1_7.md": {
-      "sourceHash": "sha256:0c2dd7f51db662b57a39a2d62b47947aa0b139449a1872382288078d3588de4d",
+      "sourceHash": "sha256:cc33ce5dd956b6802c5184d84ead86749e676bddf9034b7228b0963ab1fa8279",
       "status": "translated"
     },
     "references/release-notes/3_20_0.md": {
-      "sourceHash": "sha256:b7b01a2570adb84248f5daefa4fb67c904aa3e86c5a6f76981b39eaac307e120",
+      "sourceHash": "sha256:5a259bbe3b2d0cb22234ba3fb754c0fc17f21a30ad3eea8af4090108d1103488",
       "status": "translated"
     },
     "references/release-notes/3_20_1.md": {
-      "sourceHash": "sha256:c2c6eea97accfbe2a647977c0c5bf465d9ee8b1acf04d9873b32371268550fa6",
+      "sourceHash": "sha256:1adab99bfc877197b1138f98ae2889337b269b54951dbf8984609192eeb9f5ab",
       "status": "translated"
     },
     "references/release-notes/3_21_0.md": {
-      "sourceHash": "sha256:42faa7c3ce84c0f5c7d7784e97add9b7bedaf38f2f6b3221b2bc304d864d43b6",
+      "sourceHash": "sha256:e989c0564fe64acbba6215cf25eacb1e79c6da59f17756ad9ea74500a059dc8e",
       "status": "translated"
     },
     "references/release-notes/3_22_0.md": {
-      "sourceHash": "sha256:bc2ca2fdef85e48d39ea13b915a49c718151242d913c81e0e6882a1e9bbf6327",
+      "sourceHash": "sha256:71625baf4598ce69ea8022cde2848d04b60229d8c60ad15bb9fb806540d62288",
       "status": "translated"
     },
     "references/release-notes/3_22_1.md": {
-      "sourceHash": "sha256:ff9af1848652e8e0b7bd21630e2ac64b802c17454d37394ae9355efff2c23c67",
+      "sourceHash": "sha256:1e3e64b4b3955f35edd2a9c0bae68ca092be3729c7cf46ee376234ef1f8432f8",
       "status": "translated"
     },
     "references/release-notes/3_23_0.md": {
-      "sourceHash": "sha256:4d58b8bce271a54de47e21a2adef2fe4eda998ef7ca6a8bfb5b51fd9aa150dee",
+      "sourceHash": "sha256:5dfe7273a83bb750fb67556bfaa0494f3474489e8584d8a4416f81db7638e4b6",
       "status": "translated"
     },
     "references/release-notes/3_23_1.md": {
-      "sourceHash": "sha256:3ff1341b1e0137f5fe9207ae386a30817be1497345d8cfa5df1a4b4b8dd6107f",
+      "sourceHash": "sha256:a9693c900f2bd1ba870cbd36bbd3dae8c5b2cc07046953c0f1c62f8ab073b41a",
       "status": "translated"
     },
     "references/release-notes/3_24_0.md": {
-      "sourceHash": "sha256:ce832ff6d1995bc3638f1965f1ecefde7c0e49932f2fc42507b450193b179935",
+      "sourceHash": "sha256:7e06a6582ce450f85e58773fa486f8dfa2b57ae5ff8ba5228e90a2df42b2b0a2",
       "status": "translated"
     },
     "references/release-notes/3_24_1.md": {
-      "sourceHash": "sha256:80e1125a923675ad3e4504b46b37640376e194ff5ecbacf6a00330b20a8a6ec5",
+      "sourceHash": "sha256:2f6edfbfe6bac0cf0c6e0ca0c941208626b1ae2df232c8dc14046a2c6312fd9a",
       "status": "translated"
     },
     "references/release-notes/3_24_2.md": {
-      "sourceHash": "sha256:893114bb290ec42da3d606631f01ed47ba501f9fcd4cf7d4bdcdd73af8ed9836",
+      "sourceHash": "sha256:002bd955620438ac8a76221d201bf17027262f15b5356fd994a340dae2953c46",
       "status": "translated"
     },
     "references/release-notes/3_25_0.md": {
-      "sourceHash": "sha256:1ea99aa120d56dd1cce9309c1cef346bb8bf62619420099a278e13d2ce123622",
+      "sourceHash": "sha256:94073554f6e49579ce01eeb1ad53b54d66d8a2949d9fb2281123688b597594b1",
       "status": "translated"
     },
     "references/release-notes/3_25_1.md": {
-      "sourceHash": "sha256:a87e83af303e7f21e202aff5230470e76aff37a0f4d047a451875ebd1c17aad4",
+      "sourceHash": "sha256:5327769633fab3d45273026fa50388e6cc572bc4e3ad4e1685ae544d777d96be",
       "status": "translated"
     },
     "references/release-notes/3_25_2.md": {
-      "sourceHash": "sha256:112207b0ea9c112fff765c543e76ab4126a57aa808225f33b4540b5923b9e827",
+      "sourceHash": "sha256:ed0cfa9bb38b492a133d7742ffb1a57169616ea1f604ef3091d0dba292a5d9c5",
       "status": "translated"
     },
     "references/release-notes/3_25_3.md": {
-      "sourceHash": "sha256:4012345c860df7cd946fb6841ffae2b784639ddcbd5a219b16155addca036efa",
+      "sourceHash": "sha256:e2aedc2e010c287c6a6480f950eb5abaa06c24faeec99b6f298ca9236e8ecc11",
       "status": "translated"
     },
     "references/release-notes/3_25_5.md": {
-      "sourceHash": "sha256:7144981670ed4e6fe18d1fb3e28b158cd32912ba22b1bd20798bd20d32cad741",
+      "sourceHash": "sha256:cbceecff8d36b2bb9f4ba3a54c9957fd081f06ec869f2d37eaa14bd731854744",
       "status": "translated"
     },
     "references/release-notes/3_2_0.md": {
-      "sourceHash": "sha256:6ecf64ba7d0f65cd64c9b32ab46e3850b1c7ec033b9476a6192d5769c5bb12f2",
+      "sourceHash": "sha256:f80a34035dde22a0619af4ce18d51f59866d2eff27418c893e676f9da877b10c",
       "status": "translated"
     },
     "references/release-notes/3_2_1.md": {
-      "sourceHash": "sha256:ea8937b624cc1128a892a687bfd23fdc536638d8a81efef8a2048baf632cc7a5",
+      "sourceHash": "sha256:43e1be32e10f7a17a7d86df369eef21a78ebe5b2a52b53a1f83b6fd386b29049",
       "status": "translated"
     },
     "references/release-notes/3_2_2.md": {
-      "sourceHash": "sha256:744d48cbe380075f3a3d442bebfff7444fa9023e2d3945a6e50898e4600841fe",
+      "sourceHash": "sha256:2da5802638de5f4ebb2f12cffb33be191351e460ce411293e865bf8310ea9747",
       "status": "translated"
     },
     "references/release-notes/3_2_3.md": {
-      "sourceHash": "sha256:8c5389af01656e536faa8eabe7460e18c6aab4a62c543d80299e1cfdcc1afd50",
+      "sourceHash": "sha256:233ad017abfdf9b6cf5938bcd58d76dfac5aaa83c691e6b8613e8501ead44f6e",
       "status": "translated"
     },
     "references/release-notes/3_3_0.md": {
-      "sourceHash": "sha256:f15db7654636a547034b22e1f5bba04be511349b93e1aef08fde7010f43eabaf",
+      "sourceHash": "sha256:6407130a08fc4aba3742cdc01f6fcdbe315036324a6ef4ef485750bbab90d75e",
       "status": "translated"
     },
     "references/release-notes/3_3_1.md": {
-      "sourceHash": "sha256:d272ef003c110516559a348f5295cf82a4ee1bff2e009b882cb7bc7cb51092e0",
+      "sourceHash": "sha256:069220239a8a82d1f0d310a468b3af4959525d5b03e11298fb2049e0ebacc52a",
       "status": "translated"
     },
     "references/release-notes/3_3_2.md": {
-      "sourceHash": "sha256:d08125afaed41782db0bb8fbf83f2e78c28e8c46db887d437cfb31545a3932f9",
+      "sourceHash": "sha256:e11afa6e505c7d0d7a2cc19b12232f05b12a402d1534d689a3987a692ad6eabd",
       "status": "translated"
     },
     "references/release-notes/3_3_3.md": {
-      "sourceHash": "sha256:e5b8c6b56a4b96f45972422c4fbfa03fbb709c018d5f11590deb5c2b71d8fd83",
+      "sourceHash": "sha256:b25a3e45ea9245ff2348aef322932081aa9419469de741bd98ab45435fc01106",
       "status": "translated"
     },
     "references/release-notes/3_3_4.md": {
-      "sourceHash": "sha256:84c5028c878ef1c45ce054680d1333e441f23771611bfb7ea382481a1ffad6fc",
+      "sourceHash": "sha256:dabac3bc52ea3ecb59ffc39e10a13d252a29530412a604c284cf33fa988e7ccb",
       "status": "translated"
     },
     "references/release-notes/3_3_5.md": {
-      "sourceHash": "sha256:d5feae59a649bf8b811f5cf755c2916166de03e67770cd8e34b11553b38a87c0",
+      "sourceHash": "sha256:b88d6bc31375caca6ccbc5af1f95d1c64a64bac5d5861d540a5a111046ec2709",
       "status": "translated"
     },
     "references/release-notes/3_3_6.md": {
-      "sourceHash": "sha256:65208a7bf0072e7a0d2c03b7bff4e915f51a9887a394bd439576b5146db3282c",
+      "sourceHash": "sha256:2eea5eec39317d1fc007cffd6971bf08411e04b79984bac9e9e7c5f4a9237329",
       "status": "translated"
     },
     "references/release-notes/3_4_0.md": {
-      "sourceHash": "sha256:f20043008ef5673020ea9daa33bf6f8587005a191248e74852f7b45b12506442",
+      "sourceHash": "sha256:45921e73217c3fd5d69b614e10428aa428b0d466bdb49d83058cb79a49b846c7",
       "status": "translated"
     },
     "references/release-notes/3_4_1.md": {
-      "sourceHash": "sha256:429344a948a9ffe9a834aa625598625247f93164f72bb04d712ad3346f3b61b0",
+      "sourceHash": "sha256:2c4222b3083566a37505c7ede112ee3076111acf89a9cacb7335241c5195a1be",
       "status": "translated"
     },
     "references/release-notes/3_4_2.md": {
-      "sourceHash": "sha256:36fb93b69db715b9f5b5b398530c3f9b58026020af5876ac9959996d4676cadb",
+      "sourceHash": "sha256:8aca2f841be6c495daf791f1c8a812605c4215639dd6d61bf9a99a1450913eb3",
       "status": "translated"
     },
     "references/release-notes/3_5_0.md": {
-      "sourceHash": "sha256:617775d38e30f4b632cee846088b385ad92586f59a159b2b47da954df2ceba36",
+      "sourceHash": "sha256:3e8574e571c37b8fdf644f42377a8f20e4494f57683aa2aeeb66f6cc5dbb3b3d",
       "status": "translated"
     },
     "references/release-notes/3_5_1.md": {
-      "sourceHash": "sha256:886e863e3e341e4f6f2247545ca023731546bb974b7280b8414f40a9b1d9984b",
+      "sourceHash": "sha256:bbf6c0a5eaf0581ef564c23861341ba086a336a7a0c8556b18c82a3b97263de0",
       "status": "translated"
     },
     "references/release-notes/3_6_0.md": {
-      "sourceHash": "sha256:596c121f04782773b41eb122d56f79a8110a9cec2bd7356577d392dbe1dbdcb2",
+      "sourceHash": "sha256:390ff39fcddb43462ce6371e434faeffaec2542bf1ce3871bf109c31afbebb8e",
       "status": "translated"
     },
     "references/release-notes/3_7_0.md": {
-      "sourceHash": "sha256:855ac7bfe0b863764f62d2fe015af40dff189ba01e925b209937f91183327ed1",
+      "sourceHash": "sha256:1193e309b3e6b7c5ab312cdfac506a029c5d3fe1a46e55c44cfa73ac02b05559",
       "status": "translated"
     },
     "references/release-notes/3_7_1.md": {
-      "sourceHash": "sha256:728972a441ab5076cd1c8d6fec671071f19709e59e8ba3461e75947efcf27b0b",
+      "sourceHash": "sha256:bb30b3f2c2edfb66b5b948a092b63522ffae1661d74837bec19ab8df42931536",
       "status": "translated"
     },
     "references/release-notes/3_8_0.md": {
-      "sourceHash": "sha256:22f799307afd7023f568e1ab561d84a04ab17873724b175fc5297a38122db9df",
+      "sourceHash": "sha256:59c7b7c50555df06c3b4d8862429c9dac365f71abe0b2867433c4eb467ff227a",
       "status": "translated"
     },
     "references/release-notes/3_9_0.md": {
-      "sourceHash": "sha256:1a84abd1786511b5866baca58ae4e73d03b64a76948a8ff19a7fb2a2cc23988b",
+      "sourceHash": "sha256:435580f98c2577516a67e1c12f4c451c0f3116bc864b4dc1f474b47650d048c1",
       "status": "translated"
     },
     "references/release-notes/beta-16_6.md": {
-      "sourceHash": "sha256:6f69b0b3fecd9de0dd92b1e8ddb826554594f74ec46c71a4a0e3548871b40290",
+      "sourceHash": "sha256:ef23109d790ae2a02b9e8103f0832d951f09230342655ae7d67360e532b2b2a5",
       "status": "translated"
     },
     "references/release-notes/beta-17_4.md": {
-      "sourceHash": "sha256:8172363576b8f546b2ebe6cd9ce517f99fdf56ce3ff29ea87eabd5bccfaeb3b3",
+      "sourceHash": "sha256:5fc5a6537d9c3b6e46e1798fa60fcc348258e23722c2fa7936f1950a6e94e9ac",
       "status": "translated"
     },
     "references/release-notes/beta-18_1.md": {
-      "sourceHash": "sha256:9a598f4bc2cf7575f46ddb732bc0d96ba65659dd6dfb180488c5eb667e1ac53c",
+      "sourceHash": "sha256:948893b0e25d9c457f7757c8c2aed0be34f9fd7897e47dfbb9d48adf34281a9c",
       "status": "translated"
     },
     "references/release-notes/beta-18_2.md": {
-      "sourceHash": "sha256:03a0435624e0bd41b2667a98fee65f90a4c80355f4a2237cd941ad85a138577e",
+      "sourceHash": "sha256:44023c249d6312fe7174132138a20bee776cbaac990f9f63be3609f405cf7ecd",
       "status": "translated"
     },
     "references/release-notes/beta-18_3.md": {
-      "sourceHash": "sha256:7493081d9011736b7ac078eb92bcc615e41f8a76aa4d0af6f966ed5a9ea671f3",
+      "sourceHash": "sha256:a65ccb795d0cfe9ad39045068462b4c4fcb92940cca33dc06907e32c84994f90",
       "status": "translated"
     },
     "references/release-notes/beta-18_4.md": {
-      "sourceHash": "sha256:1c13e6e1d9e4d852a20450200cdd205a3f8ab0c655a8ccfe81a52ae0e2bf6246",
+      "sourceHash": "sha256:f41a8fb3249f05fcee27d35961101bacc220c9914d9cc3c74f1d515ae6b6723d",
       "status": "translated"
     },
     "references/release-notes/beta-18_5.md": {
-      "sourceHash": "sha256:6d943c183893bf768292e4a185899aa9f78839292bc0839eb685583ddec03358",
+      "sourceHash": "sha256:f2edb22650b9e8fc6e21507d01e9ad0326f3fb88d2be6d9981ad513c365f63fb",
       "status": "translated"
     },
     "kb/bpa-avoid-invalid-characters-descriptions.md": {
-      "sourceHash": "sha256:e1ab3b636de9a49a6c62cc900b49c51e138d0ee3cc1588bd2c102b16056449f2",
+      "sourceHash": "sha256:348a0b21b9c03d6e496e239a00cfdc81d39610af0fd5ad6de6fe1ff623f7ceff",
       "status": "translated"
     },
     "kb/bpa-avoid-invalid-characters-names.md": {
-      "sourceHash": "sha256:dbb102b008123984fdb1e23f2a6c47e8e6741cc85a28ad6c20111e1915548198",
+      "sourceHash": "sha256:8f013bf4faea84f9a24756e185ded303c9807c17b4ac5eb76df448b810e07eb0",
       "status": "translated"
     },
     "kb/bpa-avoid-provider-partitions-structured.md": {
-      "sourceHash": "sha256:448f378b6fc6d8d04266a43c75302dd7252d623fb811555c1cf0fb8240e6c6cb",
+      "sourceHash": "sha256:86ec65070d81d5063e4d173d7c8c0966853f9b6694bbd8e726b468e7cb8b01f5",
       "status": "translated"
     },
     "kb/bpa-calculation-groups-no-items.md": {
-      "sourceHash": "sha256:3437dabfe44b34fa1a43cf96ce9853060fe16f0e3e742906bb14dc13860628c5",
+      "sourceHash": "sha256:744c11cb3577957cc223454875f5ea95726fce0a94970698756f47b0a46c86b6",
       "status": "translated"
     },
     "kb/bpa-data-column-source.md": {
-      "sourceHash": "sha256:b7f6ae4783b0623ae359df487021142386d62c94ae785950e33cf58aa9b4964a",
+      "sourceHash": "sha256:a94e71eb040d34b57ad1f867e09460c23bf2d2e59ac848fdb92af82237851292",
       "status": "translated"
     },
     "kb/bpa-date-table-exists.md": {
-      "sourceHash": "sha256:cdd48113cf8b398961e8180b357e538ce668dac9d7957a7cd57f9b5f79383347",
+      "sourceHash": "sha256:de3f26c0b6618516bdc57f3ea4575d35e22ff6dfe2adc856c77b6075b26842e1",
       "status": "translated"
     },
     "kb/bpa-do-not-summarize-numeric.md": {
-      "sourceHash": "sha256:6ba62d431be290fc77e7a8292ce582d2e0f0a427b70b3ff8139aba8467c5fd9a",
+      "sourceHash": "sha256:244d8e116c98cab2126d5fc368471e4f432912e9e19181f58227d94b8322ddb6",
       "status": "translated"
     },
     "kb/bpa-expression-required.md": {
-      "sourceHash": "sha256:70979585bf4e27b51ab9fbc2ceb7fe01d0b380a6422f32e3dafb25831f505ccd",
+      "sourceHash": "sha256:8a411171214efbf1a8fd9da1be301ee6ca0f09bcadf38ce54082acf21984346b",
       "status": "translated"
     },
     "kb/bpa-format-string-columns.md": {
-      "sourceHash": "sha256:e21436631db1326ec9bb6e5144c3596b6b4cf08fab5c2b50753baa3925c2c815",
+      "sourceHash": "sha256:bf422113bd43cb69befbac033445b65b29a8569d9621a1c91eaf082a26047a9b",
       "status": "translated"
     },
     "kb/bpa-format-string-measures.md": {
-      "sourceHash": "sha256:3bc53cc91e1370a99162e252117bc534514140bd54d9f174d0b7905d97f63ac8",
+      "sourceHash": "sha256:bc6cd3c9bb8d66074e6f7836e4f2dd33f650df390bef17394e5cf385e744fce3",
       "status": "translated"
     },
     "kb/bpa-hide-foreign-keys.md": {
-      "sourceHash": "sha256:299852702c84c3e412fd28183dd3c3a1a14c7fed99391bfa4b9a55e2e95d83c6",
+      "sourceHash": "sha256:9b67226f8b72ed7990a1c46dba893bcd36e775169fc562099bb3a8e17c47dace",
       "status": "translated"
     },
     "kb/bpa-many-to-many-single-direction.md": {
-      "sourceHash": "sha256:69900d8c9a83fa75dde15bb6015b975d1bafbfb55f5f9e81303705aa3ab792f8",
+      "sourceHash": "sha256:caf01f0d64fd87d6cd67e3247c059c9a02b366c4478ad2a36ebcbea14228c261",
       "status": "translated"
     },
     "kb/bpa-perspectives-no-objects.md": {
-      "sourceHash": "sha256:fb6fdaf5edb9d02bfbfeff47bcab9ed92c613d4a73aafa23b3be594913b5fd4b",
+      "sourceHash": "sha256:8c2e025fa682be0443b0d926d49eef193f807af7d1df74736dcbe7d867140506",
       "status": "translated"
     },
     "kb/bpa-powerbi-latest-compatibility.md": {
-      "sourceHash": "sha256:9385968afdcce0b67a7332c7ccd7efb4c633b4b485581a2d244530269082c52a",
+      "sourceHash": "sha256:21ff822045d3a8bcd70bab6945d025c6ed8285c153ed739d7759ac552f056830",
       "status": "translated"
     },
     "kb/bpa-relationship-same-datatype.md": {
-      "sourceHash": "sha256:a61a0744ac2497ace5ff92e59f31d563df61216a04ce64aeced2e30240d0ac4f",
+      "sourceHash": "sha256:291f46cc5c6ef8980aba3c960edd1e0d6d42de202f390d2ada4d4ec71342521f",
       "status": "translated"
     },
     "kb/bpa-remove-auto-date-table.md": {
-      "sourceHash": "sha256:96c8da84cf9e550ab9b1d40aa8253796cc325ffc2386bd875e350f5fadd4db52",
+      "sourceHash": "sha256:2328dbcb9c6571901c1f6565f73963c973556285e52765be67bf4d2efb3436e5",
       "status": "translated"
     },
     "kb/bpa-remove-unused-data-sources.md": {
-      "sourceHash": "sha256:c49846acf4d5326b6dcfaffd42ae33d38a110cf111c14cca3476ca89d9819c32",
+      "sourceHash": "sha256:58bd7d8482b7e17548d3b8f525c0f21c6648e2872815daadd8e5c1d84443f189",
       "status": "translated"
     },
     "kb/bpa-set-isavailableinmdx-false.md": {
-      "sourceHash": "sha256:f3d18c1a403e7cad3d49570f209c68ce1ab539301c0e0099f4aa0bbe1e8f5f8c",
+      "sourceHash": "sha256:9a5934a34ee1b4c911d855a78e87163a5427422d1ee59093b47d9c407f3bc50d",
       "status": "translated"
     },
     "kb/bpa-set-isavailableinmdx-true-necessary.md": {
-      "sourceHash": "sha256:b0bb9ccba1eaddf3abaa7def7c1fe17c9cbdfd7ea8e4f728d919f54b6b516f66",
+      "sourceHash": "sha256:9f1148b29e5e6ec221f24f0c4998e2da7d4a3955d23fe911dec5d63401e1094a",
       "status": "translated"
     },
     "kb/bpa-specify-application-name.md": {
-      "sourceHash": "sha256:e93bf3c1c57fa05f0522694980f7b511779ac127d6a6abf47571a4500d7320f9",
+      "sourceHash": "sha256:3de1a94d6a0b66003b65d5b06669ed905f792c3151cc36117abc73c10f52abcc",
       "status": "translated"
     },
     "kb/bpa-translate-descriptions.md": {
-      "sourceHash": "sha256:241a9cbde9056914f8494f0d29e37d0f17266b9aaaf672c0c731610bc1130d94",
+      "sourceHash": "sha256:8c73f97d93d7f0b5635b31d7e96bc5464f15f7cfc06507b8ca549edeae0cd374",
       "status": "translated"
     },
     "kb/bpa-translate-display-folders.md": {
-      "sourceHash": "sha256:aad20fc98449ad88378f6fcec1d4da25429fc0dd15710d8e0cddb4062944480d",
+      "sourceHash": "sha256:10c7a4f9324e0de5c4c122ea7d10a2b6bb4e412a2f435802fc5e43d30dc65c53",
       "status": "translated"
     },
     "kb/bpa-translate-hierarchy-levels.md": {
-      "sourceHash": "sha256:71d10084d1e0f2c546fce80d73388ea5da05135f813b8512fdf60a5593381711",
+      "sourceHash": "sha256:27062bb6d7edfea8f0d78f3a789b985b18cc844690d29bc4127d55b66cac466d",
       "status": "translated"
     },
     "kb/bpa-translate-perspectives.md": {
-      "sourceHash": "sha256:b1ba0f2c572b59dd564e9fb2ac02cf2fc05d7fc495b0f6ab5406ee8cf4027912",
+      "sourceHash": "sha256:8dbbdd6fd6f41cab313d51334c38cb91cdbb7830c560472a5abbdb39d40a7525",
       "status": "translated"
     },
     "kb/bpa-translate-visible-names.md": {
-      "sourceHash": "sha256:fe5dd4b69830746c9af69840c8f8975c1e279f4c5959f90f7388ac27b0552001",
+      "sourceHash": "sha256:48c6cc3b4998a6ca24f517a88b714f5e92c29add04010e2c607faca34c45d9da",
       "status": "translated"
     },
     "kb/bpa-trim-object-names.md": {
-      "sourceHash": "sha256:387cd8339cd496acfed940f772b2772b55a923269f4c2e8e90e5bd7f48a8bb75",
+      "sourceHash": "sha256:f9c4103682dd64f14587c68948264b3049aa3fcdb63997d7ebd3645075c4aa5a",
       "status": "translated"
     },
     "kb/bpa-visible-objects-no-description.md": {
-      "sourceHash": "sha256:a0eaaa105b4326ffa49f4e6240b4cb6f84e0007bfa455065d64bfe721bcf5f9e",
+      "sourceHash": "sha256:be6aff3d1618ad140b7be83ae59f97756572de2bc8b84eb5e035953f39642abb",
       "status": "translated"
     },
     "kb/DI001.md": {
-      "sourceHash": "sha256:25783e67a976a42a7cabe303f2c5381f58d07b67de7bc5f89b84f438c86cc299",
+      "sourceHash": "sha256:0fdec75eb29be6ad908093cf6a95b9ab331bb568382772bf814fcc919a2dfc2a",
       "status": "translated"
     },
     "kb/DI002.md": {
-      "sourceHash": "sha256:561ec551f444faf58f604028df338a3bdb83cc37ac6cc296db53d1d0a2d8aa9b",
+      "sourceHash": "sha256:068a81baf4c2c490ef06e51cfb9886723242dce676a9edea26e0948c0b00f702",
       "status": "translated"
     },
     "kb/DI003.md": {
-      "sourceHash": "sha256:76cfa3c7a491d3b15f4dcbb8793f0ca59da12cb8aed5db6cee66b15f6943f027",
+      "sourceHash": "sha256:b8e00a8116d08be012100d264b75fec171eedfc043a1bc52b1f2cf074c2dd0e1",
       "status": "translated"
     },
     "kb/DI004.md": {
-      "sourceHash": "sha256:1caf47bc6102b0081dc285ecbd9219dd710073c8f3abc8662af3f9d88cac7ed9",
+      "sourceHash": "sha256:c61d11bc3eb6a5e005f9c1b6f3fccdde21252abca2ffa9b4a181cfdd8ec7dba7",
       "status": "translated"
     },
     "kb/DI005.md": {
-      "sourceHash": "sha256:7febf977cd43487cb392144bd4223f352d1911c03cb2976f5a9d967f774dfd17",
+      "sourceHash": "sha256:8e03cd78771896db6b9dfb81a57e0a45f42335d6b242e0d474699da70843de53",
       "status": "translated"
     },
     "kb/DI006.md": {
-      "sourceHash": "sha256:c78dba443fb20fb07079a810a4e2564660e9a0519068713000d203ad52fef6a8",
+      "sourceHash": "sha256:96086b12841c4fe8365a83fc91fb167c81d915b2c98e448489bdf55773167704",
       "status": "translated"
     },
     "kb/DI007.md": {
-      "sourceHash": "sha256:8633dc8c141fadd780cfc42dd27c94d89556a53f03282a1cfade47249922a4b7",
+      "sourceHash": "sha256:78dd569b532ba7d5cb0efe9c96e5623604c5c9dadd67949d65ad14449832c1b7",
       "status": "translated"
     },
     "kb/DI008.md": {
-      "sourceHash": "sha256:48f3168b416e177a426c6e933f7d5a48d8c18749f33693b1600f9882a4f25cbb",
+      "sourceHash": "sha256:5521d0162fdacf2da404c49d5715d5124f4fa682f793dce4df3d7b952519a2bc",
       "status": "translated"
     },
     "kb/DI009.md": {
-      "sourceHash": "sha256:fb4313a94b1c454af18a68b8fb2e002f471e0a2d0d97bf100eb05363edff7a7a",
+      "sourceHash": "sha256:790d74322a9d163c6acb9bf5d2b0e45352b85b954d68f2c1bddb06c4600361b3",
       "status": "translated"
     },
     "kb/DI010.md": {
-      "sourceHash": "sha256:43867cfd04ef7ee82d8ee6a8cfb3080bb0e4a703ff4bc7e7d34c8a09728f6e4b",
+      "sourceHash": "sha256:bf5c57cf42365ee7869cb9f4d24c5ca20f96f79f73007a587b9034d25bb321df",
       "status": "translated"
     },
     "kb/DI011.md": {
-      "sourceHash": "sha256:c87f24040121b3efea63e5fee9fce16acf9f9075b76b9b2e4da412eb04720e35",
+      "sourceHash": "sha256:805dd2b2e2e754ef66ab07bba08fa0755c519e7432af9e83fbf4490a49f68924",
       "status": "translated"
     },
     "kb/DI012.md": {
-      "sourceHash": "sha256:33dd64c2880b75abea78fe99e999c79478066262665081c9269861c8aeacce10",
+      "sourceHash": "sha256:b9934cee7d4ea8c47cb70de48454918e64326fb8f76bee17db773b0f32627462",
       "status": "translated"
     },
     "kb/DI013.md": {
-      "sourceHash": "sha256:b8ba1b12d831664e73e208b8778daea7cca6b39982b40aeac7f0c7cb67698fd1",
+      "sourceHash": "sha256:19a2309ca26b9eedf30cde50cb70f3f70e8d8aa786ac98fc3e7bab74143d54e6",
       "status": "translated"
     },
     "kb/DI014.md": {
-      "sourceHash": "sha256:2d337e7363fb934ca706e037e388710c2e05aefaea1c64f58b430ecec12cec99",
+      "sourceHash": "sha256:be9a88c83f9dfa328b63298e7adf2a809b2cd83ea03cb14886838ac891536f1c",
       "status": "translated"
     },
     "kb/DI015.md": {
-      "sourceHash": "sha256:08da38c3345155cb4d2826a3974c8aac8f7e5607baf2408bceefd7c3aa20f5eb",
+      "sourceHash": "sha256:c1c69cade3182935031f846cbe3f4165a4fd453ca77012e76f4f8cff1de2d3c3",
       "status": "translated"
     },
     "kb/DR001.md": {
-      "sourceHash": "sha256:95d71ac50e5393d178a2810260b4d14ab400bd2472cedd7b34f4ab76eb4a95d0",
+      "sourceHash": "sha256:ad922ebf457863f55e34000fd78fc007c0d69f9bee556d2f79b5cd27c03273fa",
       "status": "translated"
     },
     "kb/DR002.md": {
-      "sourceHash": "sha256:8f34b0a352f00b138fabe27f6f0c94d486a3ce71e7940eea7596fc66dfa91de7",
+      "sourceHash": "sha256:0ad80ebc8cbf3ec27662dffc0210986cbabe8f92810bdb7a33717de8fab16037",
       "status": "translated"
     },
     "kb/DR003.md": {
-      "sourceHash": "sha256:0c8e4590399adb2a53a133b4495750caa773cd5c79d3de9b75d9c97917c09ff5",
+      "sourceHash": "sha256:b76298c84d8c1269703dba2770d51a6674dfa4f03979e5aa71a53a456575bb49",
       "status": "translated"
     },
     "kb/DR004.md": {
-      "sourceHash": "sha256:bb39fa203c9290c3be5226702a613cfde1af0b151f3f4caca990a199f6aa875d",
+      "sourceHash": "sha256:d370d93822297f2614b44a30c04d330e5feef34160b080eb9ad3e019c70c7f6b",
       "status": "translated"
     },
     "kb/DR005.md": {
-      "sourceHash": "sha256:05894b5b1a0ab1c9f641ced87626eaa332f3a0c575af29ed6faa3a59bfd0a40d",
+      "sourceHash": "sha256:5b1451993738cd1b1737d47e96f328e5899f14028c161fe7c92357d74bfd29da",
       "status": "translated"
     },
     "kb/DR006.md": {
-      "sourceHash": "sha256:1ba9f39490bc64310a41acd5cef7a9c3b939fa5d22c28ca3bd211b28b7cb0cc8",
+      "sourceHash": "sha256:a91536c340fc07b1293e3a2e8cd4e89828d9fbdd8bacf3b23a736cfb8314e329",
       "status": "translated"
     },
     "kb/DR007.md": {
-      "sourceHash": "sha256:53f849a4055bb6875e47677d8f85296ebf8877a9dc0933abd126b141ac13fea3",
+      "sourceHash": "sha256:a03a20219e9ed635de09831705034fe148912a694c50d8d36b87b4efa26ffbd9",
       "status": "translated"
     },
     "kb/DR008.md": {
-      "sourceHash": "sha256:37f6d0770424f1182e0dbeeea9045ce087d9a42eb8492160b130351d49f6dfae",
+      "sourceHash": "sha256:980a8345025fe79ac9cb8c3f841b204702f60dadb9574d72b33ba229cf9a475b",
       "status": "translated"
     },
     "kb/DR009.md": {
-      "sourceHash": "sha256:b0bb1af2ba8ad830e16441b9e4e1f9bfee463f3d4df83c5a663b67167f617368",
+      "sourceHash": "sha256:8609e608aaebfce4391671248f28d02870da055a99c90e126d56c4b415ceabb9",
       "status": "translated"
     },
     "kb/DR010.md": {
-      "sourceHash": "sha256:0d27c6fd8af6bafb4f91cb941cdca10fbcd3a624d0066daab88634354a3c5b4d",
+      "sourceHash": "sha256:76c8d124d90f77650b62cc3b03402177ef55f25898b032bc7b94180130778485",
       "status": "translated"
     },
     "kb/DR011.md": {
-      "sourceHash": "sha256:d2a50f75d0a4feb91e1ee4c7879e4839aa5d8193b0ad509da5fd892b655a6430",
+      "sourceHash": "sha256:ddb675bac420ba94a6a2eef2f7ab9cb4c9981b23398cc2a984a5cd30197743d2",
       "status": "translated"
     },
     "kb/DR012.md": {
-      "sourceHash": "sha256:8394a610677b999f04ef2be435bb2b53b838fa924fcc8c6b195720fd20cc63cb",
+      "sourceHash": "sha256:dc8c217235ef82b45ca02328f0e1d78ccc12114dddd5a44394126ec3cd638a61",
       "status": "translated"
     },
     "kb/DR013.md": {
-      "sourceHash": "sha256:57fb582e349dc96388134c30775e3956f18f1370030163b93c7d5f6b2ed74264",
+      "sourceHash": "sha256:3e81af96332221c3b1f36655a6ee3f8dc0b116c019cdb7a5c26c5971c9cfc51f",
       "status": "translated"
     },
     "kb/DR014.md": {
-      "sourceHash": "sha256:204c5bed823d9cf87efdf87e45959ca9b172f4e066f8fd59f36417f1342ee8bf",
+      "sourceHash": "sha256:d435c5959eb47b00a7aab3b846013228ec6d2077a3dc245e50c1a5328c392dbc",
       "status": "translated"
     },
     "kb/index.md": {
-      "sourceHash": "sha256:86639aab87287a6fa22a24e4bd4e73b4c2101050db8fc40fec71f74578f6c6c2",
+      "sourceHash": "sha256:8331987f38c8b52d8907a3f0d2c773d188e888cc823f2a5a21463d0a163f7a15",
       "status": "translated"
     },
     "kb/RW001.md": {
-      "sourceHash": "sha256:f1eb1722568740f11d8758df85670050ca3dcca28fa288911bdff6eeecd06c44",
+      "sourceHash": "sha256:cc6cd9a2294f425380d825ff0a5ca882c3bd40a4d5207cf6cce0793f7c6af493",
       "status": "translated"
     },
     "kb/RW002.md": {
-      "sourceHash": "sha256:b7a7ad43cd3d1034dc3bf9f7507601265960becd05ea316fd1bd8802d01b117b",
+      "sourceHash": "sha256:597595d6f8a1102114f51ae992bb519d21095f2a1003a8b1a90d3d96849916c2",
       "status": "translated"
     },
     "kb/RW003.md": {
-      "sourceHash": "sha256:e41f03c10279ba88c2bfb1b9d3a5eafeb8d9fa536f459809b57f0291407d25eb",
+      "sourceHash": "sha256:289a445b62c13098e4ed6af7fa37901b1aec8bfb4d3b57e1e42eda8f1de9ad5e",
       "status": "translated"
     },
     "kb/toc.md": {
-      "sourceHash": "sha256:64a6d46f855afa5a748dc2f2393641abdc38473e142817a9e0e043a924e01c1c",
+      "sourceHash": "sha256:db0f8007f8bb5998ac188559ffcd9831d49a8c938f1b41434295625097a0a160",
       "status": "translated"
     },
     "security/gdpr-delete.md": {
-      "sourceHash": "sha256:e21e2f61114f7765cf5dab166ac9204244d3b6d056567ceb947410171480436c",
+      "sourceHash": "sha256:25dafde7519c658a7212697ee19bee0033405761a2dfda883549908d63e7ea1f",
       "status": "translated"
     },
     "security/index.md": {
-      "sourceHash": "sha256:956d0f7d76b544f0b5f70f7de43436d701221ca2c842efa8bef4ebb0e91179b3",
+      "sourceHash": "sha256:14f520a1bc03f8d8f7e417d4dea1e7034f2e4c45addb8b9cfacb97e6585efa65",
       "status": "translated"
     },
     "security/privacy-policy.md": {
-      "sourceHash": "sha256:da89cecb73fc1b4de82c27c50ed76e6ca8f9365c1018f329a2502d855c5d9b1b",
+      "sourceHash": "sha256:3b3d626bc3e999fb30369deca46398b5799282797bf93325e4566fab677fa59b",
       "status": "translated"
     },
     "security/security-privacy.md": {
-      "sourceHash": "sha256:449a306a6aa7e7376460bfa3c802d42fa6e53781fac39a287a64bb2cea0e349c",
+      "sourceHash": "sha256:8622b0b5b8fcf3fe1b2927de9d3a1c93f4ae4a7cbfd3cbcd22bc21ad2381bf88",
       "status": "translated"
     },
     "security/te3-eula.md": {
@@ -1247,131 +1247,131 @@
       "status": "translated"
     },
     "security/third-party-notices.md": {
-      "sourceHash": "sha256:38d3a67fc048930c6da47d2f6af09fbf463d002dced7a385e587389aab42f2f2",
+      "sourceHash": "sha256:f21ab9783b89a6295a1343c4cd986b90acbf7940eb0f49d2b3ef33aa05d2282f",
       "status": "translated"
     },
     "security/toc.md": {
-      "sourceHash": "sha256:cd3387b30602644747d9a3268b58f11db953524611b1a0c565af57d99cc954ff",
+      "sourceHash": "sha256:d9a103f54e335e2e91434c926317f8f4dda1ea8c20b45ae25b6700c958db3e83",
       "status": "translated"
     },
     "troubleshooting/calendar-blank-value.md": {
-      "sourceHash": "sha256:34be544d6ed74231467eb6250280305eec9ac7df68119d382026e4d6a3966169",
+      "sourceHash": "sha256:0306783580e503f6745682cf15906a60703d87b56ce743eb0f4e04c6b2ed4ca9",
       "status": "translated"
     },
     "troubleshooting/direct-lake-entity-updates-reverting.md": {
-      "sourceHash": "sha256:02969e9dec89cad15a480bfe0ace86e8f3e8ef943b6e0a20ab233034846029c8",
+      "sourceHash": "sha256:aab510b71ae2d9128c2c1fc565e2e3a3bee5cf2e568fc57aa33a8710b1f650cc",
       "status": "translated"
     },
     "troubleshooting/index.md": {
-      "sourceHash": "sha256:30d2e5d94e50a74d5ff8522ce6a738d1378034bc97e094cc7f319ce19148023b",
+      "sourceHash": "sha256:201e48fac8aefa81c9dbcf119fc81fc8783ecc822ec5bcf4dd6fc464b8c15393",
       "status": "translated"
     },
     "troubleshooting/licensing-activation.md": {
-      "sourceHash": "sha256:d64bc93160e955bf39b7f7c316200882e301e466d0c40548e3f975bc258096fd",
+      "sourceHash": "sha256:55b69d4c3ecc2cf40666029a8ec010e1305a09be496c86b72367bd4bf769ecfd",
       "status": "translated"
     },
     "troubleshooting/locale-not-supported.md": {
-      "sourceHash": "sha256:381d1e4b89e12bd52d76bf83d583c5df01918b3b1e0facdc2b9895c312db7290",
+      "sourceHash": "sha256:3913bccc1fa6aafb9d2d6ab07f4018ea91efa1c1cc34874fc7267ab9b7034091",
       "status": "translated"
     },
     "troubleshooting/proxy-settings.md": {
-      "sourceHash": "sha256:312d26f827c50d0daaf4bc95aeb42b6e263330046db563374d5dc44c3d8524ab",
+      "sourceHash": "sha256:9de7a8f714d448d4dd5184645833cd2a0ca298d2743cae52595ef2ebb83044c8",
       "status": "translated"
     },
     "troubleshooting/toc.md": {
-      "sourceHash": "sha256:123158de09eea87e20e872f5d2eb233c6cbed3f6a585170c2c304edcc4483577",
+      "sourceHash": "sha256:eb90344041259d96a138c386edc99bc3c992c331f293f88539c4deca6fffd323",
       "status": "translated"
     },
     "tutorials/calendars.md": {
-      "sourceHash": "sha256:cc9cfd5bd837c7e00deb3e1753e72ffa4a7e38441465f2debc08abfdc66fc138",
+      "sourceHash": "sha256:42d5fbcac1800e22943c402afc8cc0ab45ecae62d802ffafb492d37a3e4096b2",
       "status": "translated"
     },
     "tutorials/connecting-to-azure-databricks.md": {
-      "sourceHash": "sha256:05f30942709cf7b0b25b56e593bc29c36564c8b85525eb6240b9c6dcae674156",
+      "sourceHash": "sha256:269182b9bd66273e3dfa41139b91525312377a98230583820217b5afe3971c99",
       "status": "translated"
     },
     "tutorials/creating-macros.md": {
-      "sourceHash": "sha256:aaaf277d68310b19f1cb98127df696d654b1729b083a23211f5050435cddde01",
+      "sourceHash": "sha256:c6c5951e9b76a66c146878235441b06c929595c6d11e86e2a23f8bc00eb5e9d4",
       "status": "translated"
     },
     "tutorials/detail-rows-expression.md": {
-      "sourceHash": "sha256:525e717f1598862cc24d406a29ff960782a20bd05c80bf87acec6d4e2b26ca3a",
+      "sourceHash": "sha256:649495b03f0cf86488f215704d4353ac0998be3de9eac2cb653a69b0a60b74ce",
       "status": "translated"
     },
     "tutorials/direct-lake-guidance.md": {
-      "sourceHash": "sha256:d2f12ce024b19491468051cd810308da7147965aa84fecee4cc255b6a929705d",
+      "sourceHash": "sha256:12780771ea12151faacfa1f4d911d88b512b898ce535f8634deb6a0fc60ce3e0",
       "status": "translated"
     },
     "tutorials/importing-tables.md": {
-      "sourceHash": "sha256:6dee33a9de491f235d0520976222c5fa84aecea75e9c20094fdef12d8bf7abf5",
+      "sourceHash": "sha256:1e9205918c6b3e8b7b93dd6c47efe358059e49876878db2233a25a8476257d1c",
       "status": "translated"
     },
     "tutorials/index.md": {
-      "sourceHash": "sha256:9c632bdce66bdb47d8a087fa61be80247151cdf61601ceb834481f8ef49da3ec",
+      "sourceHash": "sha256:08b69c87240fadba66c946ff66b645ca69f32f49a7057d69509af1b6fce4f840",
       "status": "translated"
     },
     "tutorials/new-as-model.md": {
-      "sourceHash": "sha256:3a3cf1f4b09fa5c93afeef984c89b548eb7c289e47e0b7f64cd61dce72ab88e2",
+      "sourceHash": "sha256:c69cc02c8746abaf67e28bd3d691a8ef39b85da924337f60500e9ef20b87697b",
       "status": "translated"
     },
     "tutorials/new-pbi-model.md": {
-      "sourceHash": "sha256:8461303b7161afcaf58f8513c85ae2a48f5e3d0c19c4bd45c2fef4149e3de363",
+      "sourceHash": "sha256:c1bdce1cc3623b25d976edf1e6830a16765e4684e8cc48801987242b42083bed",
       "status": "translated"
     },
     "tutorials/powerbi-xmla.md": {
-      "sourceHash": "sha256:4ec8d37ee8644e56a17ac7a3662a38de1498b8fdca1ab8a737109fa971ee0881",
+      "sourceHash": "sha256:f445f13880be03d2923a5b2ecfc85ce22148e6da2ac72661997e8548b5bcc124",
       "status": "translated"
     },
     "tutorials/toc.md": {
-      "sourceHash": "sha256:e79cc11f5e05d84a3f615483f2822ce848db0c6f537da131957927b6569c643a",
+      "sourceHash": "sha256:8a2515bffeac53dd28f78da28c6c321a4c7687437cb4952039b1f230347996b0",
       "status": "translated"
     },
     "tutorials/udfs.md": {
-      "sourceHash": "sha256:dcc0d3f956f4e241a9a6653e852f3823f57fcad790918099135eecc649efa3cf",
+      "sourceHash": "sha256:309fa14887cbea21f7148e07c67382301d071e3257d5e2356a6ac49bcdb113ef",
       "status": "translated"
     },
     "tutorials/user-defined-aggregations.md": {
-      "sourceHash": "sha256:8e353aa782edadd1734d8e8c4c4e30b41b3edd150956cb0289c771002181005a",
+      "sourceHash": "sha256:27fbed8599f40b55b8277e0e40e5fba309feb664a92be7ad76ff662ac52ab922",
       "status": "translated"
     },
     "tutorials/workspace-mode.md": {
-      "sourceHash": "sha256:f90519dd1b92514690fdd3530c190719ceb7a6526ed5911a534f09800ff867ff",
+      "sourceHash": "sha256:e35e6f82ed64cb2d6a73fe987b64d631ebd2416fba3bb1055e56bb91c89d4eed",
       "status": "translated"
     },
     "tutorials/data-security/data-security-about.md": {
-      "sourceHash": "sha256:67f06a996eb51a92f12af6334fb67e35bd0dbe90b7087f1d26a37ddfd4909381",
+      "sourceHash": "sha256:cb222b35457c3f4617e95b55a8415187ca28631d10f99b6d3472f61d6da93614",
       "status": "translated"
     },
     "tutorials/data-security/data-security-setup-ols.md": {
-      "sourceHash": "sha256:ba55db45323585ce76de9ac9702c90a0d6e0836161a3eabcecdb779351f653f7",
+      "sourceHash": "sha256:c2f2266fc6f918d57da5fc9347a5c21aee8b769c020eabca32b0fc4408605cf1",
       "status": "translated"
     },
     "tutorials/data-security/data-security-setup-rls.md": {
-      "sourceHash": "sha256:37aa92c73edc07e2f9d01afd3de6d85045b6730da6ddbbcc452f5d14b43e9460",
+      "sourceHash": "sha256:0315eac2798ccef13b32c9b9566dc914fc754cbbd2d31c130c7a8eca249e0571",
       "status": "translated"
     },
     "tutorials/data-security/data-security-testing.md": {
-      "sourceHash": "sha256:bc93809b7fafe060954311b3a1d97aecce69e906f20fca244220384fcc1f1147",
+      "sourceHash": "sha256:aa6878e48f87256250f79f03275616644eea55578b54f7e5cfc965b5ecd20449",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-about.md": {
-      "sourceHash": "sha256:80c779772e0e1f5638302bee4ae27ffcec86249050f34ca30ccdb8031537e894",
+      "sourceHash": "sha256:e36870b0ec41dce6e7d95b2b95aed9d996707289be50590585645c26de0cc6a2",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-modify.md": {
-      "sourceHash": "sha256:71a9811c9adec7c0ea3e188bc4d604eec123f11854c98611ff1e98d4582f6305",
+      "sourceHash": "sha256:b984b2ea73f6fe7e10f9d0971da6377b14b7dbd8adde86a7b99acf2b33f5e7e8",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-schema.md": {
-      "sourceHash": "sha256:aa35afdc0710e4e8ac5373c1a16ee44843848ecf0669e61e49769217a0b04d6d",
+      "sourceHash": "sha256:8d2ce1926f887ac402e3189d5f3264bd3f9ba3e5febbb8495945d2696b676cfd",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-setup.md": {
-      "sourceHash": "sha256:6899e4a1b7393cd795b3fec5bcd60339648769fc91e279f8e04102a97d7c9f3d",
+      "sourceHash": "sha256:d2b72afa3364f56fe87a23b4f5cf68e462a1be587863c735ff6a4f3c4ecd14f9",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-workspace-mode.md": {
-      "sourceHash": "sha256:98f31b4429d3a98a7541041c417d062257da648ffd393b7e44bb7c5429660953",
+      "sourceHash": "sha256:f758272b3776eae20df95e68bca8be9f51091b177dc95b2192ae2a6b25503042",
       "status": "translated"
     },
     "whats-new/3-11-0.html": {
@@ -1487,27 +1487,229 @@
       "status": "translated"
     },
     "index.md": {
-      "sourceHash": "sha256:81a81e409a97ca4d17b0fc503180b5ef6926ce0ba00e62d9b257f58613dc5697",
+      "sourceHash": "sha256:1f4253085ee1a9650ad521ba52e0ec8371938577fb6b5369cd0f6b30649fea75",
       "status": "translated"
     },
     "toc.yml": {
-      "sourceHash": "sha256:364efc09fddb9e225cd3fa156dce1c88b52b39f816af4ea9d49622a2df522a65",
+      "sourceHash": "sha256:11d5df2671e45efed1baf56cd10c6634fc48f5f34b8f40d5b83456258a929108",
       "status": "translated"
     },
     "404.html": {
-      "sourceHash": "sha256:a630d6e508ff79709689c70f0dba4244fc700783402a0a6c75f4018f61cec3b5",
+      "sourceHash": "sha256:8e5748cfcc9ca6d991e8e65c36fb2b411cfec8c78e4f7c7be154ca6200c2f80e",
       "status": "translated"
     },
     "_ui-strings.json": {
-      "sourceHash": "sha256:b97210e8c2ad0c87c8f5ed95f8f2cc31c85725c96907e91c5ba950df78d14963",
+      "sourceHash": "sha256:01a51cba4185663722f9194cdaf9c8c61d9d65dac841e841120c8661b7485fbf",
+      "status": "translated"
+    },
+    "features/ai-assistant.md": {
+      "sourceHash": "sha256:8267b87af307df2b39e440252675d40ed0f2265952db810cac3899c60f622680",
+      "status": "translated"
+    },
+    "features/CSharpScripts/Advanced/script-convert-dlol-to-import.md": {
+      "sourceHash": "sha256:35795fbeb43ca8cd0f1da2d5f94fdc58825d5951526475c99bd52f1cacf77ccc",
+      "status": "translated"
+    },
+    "features/semantic-bridge-metric-view-fields-and-dimensions.md": {
+      "sourceHash": "sha256:58bd40eea2c9da6f1cf4b1b24ca50f04ed021a171289ba554edccd4874fbafa4",
+      "status": "translated"
+    },
+    "features/semantic-bridge-metric-view-tabular-translation.md": {
+      "sourceHash": "sha256:74be78dd2533ebab27bb4d9dff59a263f12f19b90e8bc746d6206feb4d7f08b5",
+      "status": "translated"
+    },
+    "features/te-cli/includes/te-cli-preview-notice.md": {
+      "sourceHash": "sha256:3def00decf392f4d017bd0d3132c2e690fbaae2d09b381b0e3588fded89b7fb8",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-auth.md": {
+      "sourceHash": "sha256:64acf273c54477802fb09fe452573ec74bb01b3c1409a457db20cb6a53ec4557",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-automation.md": {
+      "sourceHash": "sha256:0cbf17e32e1455bacd1898f40190ec310ba4ed4855de3892e10c2d5010cceb9b",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-cicd.md": {
+      "sourceHash": "sha256:f3cb9d43acbfbd218059a68e2424221db17065ff2924e1d3f9c8dd77f3fba631",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-commands.md": {
+      "sourceHash": "sha256:8477ea050acdfe20c798929180a94e35a433dd73dab7214d57a3486d773f18fc",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-config.md": {
+      "sourceHash": "sha256:cc5e0827d7ebc71a3aa4ade3edf245d425ef227b1a796d04f1cb28267760b9a8",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-install.md": {
+      "sourceHash": "sha256:e3b97de653c2b76bff2553ba5618b8031699a28303b1bd1ad5de33887ac579ab",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-interactive.md": {
+      "sourceHash": "sha256:797076275a2c1c0f4cff8042250aed209107f1b50ecfd9279d6695983e5881b1",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-limitations.md": {
+      "sourceHash": "sha256:86caaf7b4ef53a92af84f2cab900f231555ad280139385e86e15eb7aa277ff4a",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-migrate.md": {
+      "sourceHash": "sha256:2dbe1b5ad09e9d096a6816db117ddbb07b7611c427689362cd72753546a283e7",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli-skill.md": {
+      "sourceHash": "sha256:4b6eba64e68df9170c9ebf0e046932dfd63a256258881874f081cafe47606fa5",
+      "status": "translated"
+    },
+    "features/te-cli/te-cli.md": {
+      "sourceHash": "sha256:7996d6b15f1739097767af168689007e4f7b03bff5b730bb65e50fb42bd2f3c4",
+      "status": "translated"
+    },
+    "getting-started/github-flow.md": {
+      "sourceHash": "sha256:1d6e200523cd43563e31dbbea87d34006012ba667d50d308cd3c336e91720db8",
+      "status": "translated"
+    },
+    "getting-started/sharing-macros-bpa-rules.md": {
+      "sourceHash": "sha256:96f6211eee67f507f4c31db2ebf9b3726cdf92ccfae790c64a8a7a40e16202e5",
+      "status": "translated"
+    },
+    "how-tos/change-compatibility-mode.md": {
+      "sourceHash": "sha256:3fbf4c15fa1139dceed32d02cc4c59e4d46c17e8bca55704057158be01f44300",
+      "status": "translated"
+    },
+    "how-tos/scripting-add-clone-remove-objects.md": {
+      "sourceHash": "sha256:4d28cbac2e46174af4ed28927c660275192fb013621c5b2d37c0dd5563f95f07",
+      "status": "translated"
+    },
+    "how-tos/scripting-check-object-types.md": {
+      "sourceHash": "sha256:e5fb737f603fb9234e8177ce7d888e6f73219b3823561bfea0d2db110e9788c0",
+      "status": "translated"
+    },
+    "how-tos/scripting-custom-winforms-dialogs.md": {
+      "sourceHash": "sha256:9830c8cea603b15203226db2df1e217209cc5b78e67c14fbbe11f9cbc1f229e5",
+      "status": "translated"
+    },
+    "how-tos/scripting-dynamic-linq-vs-csharp.md": {
+      "sourceHash": "sha256:e989800b165f6c5b86076bbdb28e749cd7e882f7be7ee0f72f9e3924634abbe9",
+      "status": "translated"
+    },
+    "how-tos/scripting-filter-query-linq.md": {
+      "sourceHash": "sha256:a269be822be81370fd10a982730d6eb1f47bc3ed2cc6081a28fd7b4428c632fc",
+      "status": "translated"
+    },
+    "how-tos/scripting-navigate-tom-hierarchy.md": {
+      "sourceHash": "sha256:f12fd751688eab6151b40579ac6e2840657d4f8693364facbef5bcea131e9f8f",
+      "status": "translated"
+    },
+    "how-tos/scripting-perspectives-translations.md": {
+      "sourceHash": "sha256:0767acd259fb03acba4804f0ce3f4f31d6fd03fb5313b000bcd7b292835ded09",
+      "status": "translated"
+    },
+    "how-tos/scripting-tom-interfaces.md": {
+      "sourceHash": "sha256:73b571f60ab78fc67b7523f78e157a21127856a6570e53a9a101f344d2117f3c",
+      "status": "translated"
+    },
+    "how-tos/scripting-ui-helpers.md": {
+      "sourceHash": "sha256:23b920a830d6bef0afa9fa6041fa3453824b50057121e5f4a6c2e92470fd00e9",
+      "status": "translated"
+    },
+    "how-tos/scripting-use-selected-object.md": {
+      "sourceHash": "sha256:430cfe77c38d7718c3908af2f7757e19b10fe2c1d5191c9113bc1c4c85fd286a",
+      "status": "translated"
+    },
+    "how-tos/scripting-work-with-annotations.md": {
+      "sourceHash": "sha256:31f333c1fa02b5aa1b844b5e6b391f56f13b59fb4d3b6c0c4ef55d5a9a49673d",
+      "status": "translated"
+    },
+    "how-tos/scripting-work-with-dependencies.md": {
+      "sourceHash": "sha256:7a2fc4475716bdb80bb7d1c2ce4264276ac3be2b8e474bb0b43659c549ca7ca9",
+      "status": "translated"
+    },
+    "how-tos/scripting-work-with-expressions.md": {
+      "sourceHash": "sha256:a294b1cad950289516b26454aa616a985abb037bff7f767fb17bb4ef56c77a3d",
+      "status": "translated"
+    },
+    "how-tos/semantic-bridge-metric-view-handle-failures.md": {
+      "sourceHash": "sha256:67ad4305aa673c9d258a13b33b0cfb7e00d23a22ab410f4abf197d80676a7a3b",
+      "status": "translated"
+    },
+    "how-tos/semantic-bridge-metric-view-import-from-file.md": {
+      "sourceHash": "sha256:93070e6a840581a2c023da6990574598fba958968ef7c0c7fab22b489ae793e4",
+      "status": "translated"
+    },
+    "includes/feature-comparison.partial.md": {
+      "sourceHash": "sha256:46272433823ee39eb87e0f8592c46465ea0f0c8dd0bb9c12a67a409e81dc114e",
+      "status": "translated"
+    },
+    "kb/bpa-udf-use-compound-names.md": {
+      "sourceHash": "sha256:6a626e28ba35b857383cbaf6069708880026531ad2dba4faee0a09cb52bb102e",
+      "status": "translated"
+    },
+    "references/release-notes/3_26_0.md": {
+      "sourceHash": "sha256:877aaef72b1b712c4ac6060a0812b8f6a37e85b5d7f7c907d73aaf0aec50b4c0",
+      "status": "translated"
+    },
+    "references/release-notes/3_26_1.md": {
+      "sourceHash": "sha256:454c83599c5098dc644a438bdf15a80714a45f53fb63ac17d8514b1b197050c8",
+      "status": "translated"
+    },
+    "references/release-notes/3_26_2.md": {
+      "sourceHash": "sha256:fa204a34a64c2f6a9e2764031e5c0c255b684edd6cbe18fd195a0d4fea2978bd",
+      "status": "translated"
+    },
+    "references/release-notes/3_26_3.md": {
+      "sourceHash": "sha256:feb01ccd22d33c9adb705a0b7f6ef3523f4dfbdf1905410809d6b3f193515335",
+      "status": "translated"
+    },
+    "security/terms.md": {
+      "sourceHash": "sha256:90fd51f0cff45e9e16b2c200fc4dc3ccf769b97a3c6afcd09b7a688cfc5b87f0",
+      "status": "translated"
+    },
+    "todo/as-cicd.md": {
+      "sourceHash": "sha256:b9c4e2179d5be3177a2119ec147214c8f0e5f19bc82993fce18a1712717ad839",
+      "status": "translated"
+    },
+    "todo/Maintaining-Calculations-using-Scripting.md": {
+      "sourceHash": "sha256:f01409f53e2dd517b8504f021d56725efc821bff3e94d5cf25c223f6ee9ed977",
+      "status": "translated"
+    },
+    "todo/powerbi-cicd.md": {
+      "sourceHash": "sha256:a564d8b5f8312289b739fa332d0dfae6a3b07822e454da25c6f10c16b1e4c016",
+      "status": "translated"
+    },
+    "todo/te2-advanced.md": {
+      "sourceHash": "sha256:02b6a9bfe2f57d4a8ca9cca47d635343f4dee8b1759807de26faa9ffd51157f2",
+      "status": "translated"
+    },
+    "troubleshooting/azure-openai-connection-errors.md": {
+      "sourceHash": "sha256:e0212bb587e9af4f18ba63af831a01f9e84b893a8306685475e6a55abbef8650",
+      "status": "translated"
+    },
+    "troubleshooting/composite-model-measure-formatting.md": {
+      "sourceHash": "sha256:752fe4e77aa95d8710d48287f8d650ab12b71097e3dd81e49f50f72dd62175fb",
+      "status": "translated"
+    },
+    "troubleshooting/databricks-column-comments-length.md": {
+      "sourceHash": "sha256:5fb9b67014b00e5af4fe732edd4c5b9c99d00adbe3e251f3213ab4d17f2751d5",
+      "status": "translated"
+    },
+    "troubleshooting/databricks-refresh-empty-catalog.md": {
+      "sourceHash": "sha256:b6c29f4798ad8be4abac566ab051314ee0f1e0b477f21160fdbc6c44702195d8",
+      "status": "translated"
+    },
+    "getting-started/app/index.html": {
+      "sourceHash": "sha256:6a2a51cf6bd96a68cdbf553d4d8d5622899b22acca9623068a5dd06b16d00b78",
       "status": "translated"
     }
   },
   "summary": {
-    "translated": 375,
+    "translated": 425,
     "outdated": 0,
     "untranslated": 0,
-    "total": 375,
-    "completionPercent": 100.0
+    "total": 425,
+    "completionPercent": 100.0,
+    "pendingJobs": 0,
+    "failures": 0
   }
 }

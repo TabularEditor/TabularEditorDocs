@@ -74,7 +74,7 @@ swa start _site
 
 1. **Generates DocFX configurations** - Runs `gen_redirects.py` to create `docfx.json` for each language
 2. **Generates language manifest** - Creates `metadata/languages.json` for runtime language switching
-3. **Syncs content** - Copies English source to `localizedContent/en/`. For other languages, only shared directories (assets, api) are synced by default since Crowdin manages translations. Use `--sync` to enable full English fallback for missing/outdated translations (useful for local development).
+3. **Syncs content** - Copies English source to `localizedContent/en/`. For other languages, only shared directories (assets, api) are synced by default since translations are managed by the automated translation workflow (see [Translating Content](#translating-content)). Use `--sync` to enable full English fallback for missing/outdated translations (useful for local development).
 4. **Normalizes DocFX alerts** - Runs `normalize-localized-alerts.py` on each non-English language to repair Crowdin-collapsed Note/Tip/etc. alerts before building (see [DocFX Alerts and Translations](#docfx-alerts-and-translations))
 5. **Stabilizes heading anchors** - Runs `normalize-localized-heading-anchors.py` on each non-English language to inject English-slug bookmark anchors before translated headings, so `#anchor` cross-references resolve even when the heading text is translated (see [Bookmark Links and Translations](#bookmark-links-and-translations))
 6. **Builds documentation** - Runs DocFX for each requested language
@@ -101,6 +101,7 @@ swa start _site
 │   ├── normalize-localized-alerts.py  # Repairs Crowdin-collapsed DocFX alerts
 │   ├── normalize-localized-heading-anchors.py  # Injects English-slug bookmark anchors into translations
 │   ├── sync-localized-content.py      # Syncs English content into localized build dirs
+│   ├── translate-content.py           # Submits changed English content to Translated and collects translations
 │   ├── te_script_runner.py    # Runs C# snippets against a throwaway model via the te CLI
 │   ├── test-fixtures/         # Fixtures for the build-script tests
 │   └── run_scripts/           # ./run subcommand scripts and shared lib.sh (see its README)
@@ -132,7 +133,36 @@ swa start _site
 4. Add a translated `_ui-strings.json` to the content subdirectory (see [Translating UI Strings](#translating-ui-strings) below). If no translation is provided, an automatic fallback will be generated.
 5. Run `python build-docs.py --all` to generate configs and build. Language will be added dynamically to language picker.
 
-> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, Crowdin manages translations via PRs. Shared directories (assets, api) are always synced from English. To use English as fallback for missing/outdated translations during local development, add the `--sync` flag.
+> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, translations arrive as review PRs from the automated translation workflow (see [Translating Content](#translating-content)); add `"translatedLocale"` (e.g. `"fr-FR"`) to the language's entry in `metadata/language-metadata.json` so it is picked up. Shared directories (assets, api) are always synced from English. To use English as fallback for missing/outdated translations during local development, add the `--sync` flag.
+
+# Translating Content
+
+Translations are produced by [Translated](https://translated.com) through the TranslationOS API and arrive as review PRs from the `localization` branch, driven by `.github/workflows/translate.yml` and `build_scripts/translate-content.py`. English in `content/` is the only authored source.
+
+**Scope.** The `translation` section of `metadata/build-config.json` lists what is translated: every `content/**/*.md` (including sidebar `toc.md` files), `404.html`, `getting-started/app/**/*.html`, `toc.yml` and `_ui-strings.json`. Shared directories (`assets`, `api`) and the `whats-new/*.html` release pages are copied from English, not translated. The same section holds the API base URL, service type and the file-level instructions sent with every job (do-not-translate terms, structure rules).
+
+**How a run works.** On every push to `main` that touches `content/`, the workflow:
+
+1. Merges the open `localization` branch (unmerged translations and in-flight job records) into main's tree.
+2. Compares each English file's SHA-256 with `localizedContent/{lang}/.translation-status.json` and submits only missing or outdated files, one request per file and language (Markdown is sent as `text/markdown`, `toc.yml` as a JSON map of its `name` values so hrefs never reach the translator).
+3. Polls for deliveries for up to 25 minutes. Each delivered file is verified against its English source (same heading, code-fence, alert-marker and link-target counts; `uid` and other frontmatter keys are restored from English, only `title`/`description` take the translated value). Files that fail verification are recorded under `failures` in the status file and listed in the PR instead of being written.
+4. Commits to `localization`, opens the PR (or comments the run report on the open one). A scheduled run every six hours collects deliveries that were not ready in time.
+
+`deploy.yml` builds a `localization` PR only when a review is requested, so review it, request a review to get a preview build, then merge.
+
+**Local use** (needs `TRANSLATED_API_KEY`; the default endpoint is the sandbox):
+
+```bash
+python build_scripts/translate-content.py --plan                          # what would be sent, and how many characters
+python build_scripts/translate-content.py --submit --lang es --limit 3    # send a few files (sandbox test)
+python build_scripts/translate-content.py --poll --wait 10                # collect deliveries
+python build_scripts/translate-content.py --run --wait 25 --report r.md   # what CI does
+python build_scripts/translate-content.py --baseline --baseline-ref <sha> # one-time: accept existing translations as current
+```
+
+`--baseline` was used once when migrating from Crowdin: it marks every existing translation as current, hashing the English sources at the given ref (the last Crowdin merge) so pages edited since then are re-translated on the first run. `--lenient` writes translations that fail structural verification, for inspecting what the translator did.
+
+**Secrets and settings.** `TRANSLATED_API_KEY` (repository secret), optional `TRANSLATED_BASE_URL` / `TRANSLATED_SERVICE_TYPE` repository variables to switch from the sandbox to production, and *Allow GitHub Actions to create and approve pull requests* enabled under Settings > Actions.
 
 # Bookmark Links and Translations
 

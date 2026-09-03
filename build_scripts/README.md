@@ -4,6 +4,7 @@ This document covers new build tools:
 - `te_script_runner.py`: standalone runner and module for other tools that need to execute C# scripts
 - `csharp_doctest.py`: compiles and runs annotated `csharp` code blocks in markdown files
 - `check_links.py`: dead link checker for built site
+- `translate-content.py`: submits changed English content to Translated (TranslationOS) and collects the translations; see [Translating Content](../README.md#translating-content)
 
 Existing docfx and localization orchestration can be found in [../README.md](../README.md)
 
