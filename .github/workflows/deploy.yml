@@ -33,7 +33,7 @@ jobs:
           python-version: '3.11'
       - name: Set up uv
         # `./run scripts check` runs ruff and mypy through uvx.
-        uses: astral-sh/setup-uv@v10
+        uses: astral-sh/setup-uv@v10.0.1
       - name: Install shell tooling
         # shellcheck ships on the ubuntu runner image; shfmt does not, so it
         # is pinned and downloaded (formatting rules can drift between shfmt
