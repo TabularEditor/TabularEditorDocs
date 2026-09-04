@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: Automation and Scripting
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,6 +36,8 @@ te query -q "EVALUATE VALUES('Date'[Year])" --output-format csv
 te bpa run --output-format json
 ```
 
+Under `--output-format json`, `te validate`, `te bpa run`, `te test run`, and `te query` share one findings JSON envelope with a `summary`, a flat `findings[]` array, and `durationMs` - see @te-cli-findings for the shape to parse.
+
 > [!NOTE]
 > `--output-format` and `--error-format` are independent. Setting `--output-format json` does *not* switch stderr to JSON; pass `--error-format json` for that. There is no automatic format switching when stdout is redirected - the default is always `text` unless you ask otherwise.
 
@@ -43,8 +45,11 @@ te bpa run --output-format json
 
 Add `--non-interactive` to any command to disable confirmation prompts, credential picklists, and guided wizards. If the command needs input it cannot resolve from flags, environment, or config, it exits non-zero with an actionable error instead of hanging.
 
+`te deploy` and `te refresh` are additionally dry-run by default - they print the TMSL they would send and touch nothing. `--execute` performs the action, and in piped or CI runs `--execute` requires `--force` (the confirmation prompt cannot be answered).
+
 ```bash
-te deploy ./model --non-interactive --force --ci github
+te deploy --model ./model --target-server my-workspace --target-database my-model \
+  --non-interactive --execute --force --ci github
 ```
 
 ## Exit codes
@@ -61,7 +66,7 @@ Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to 
 
 ## Errors on stderr
 
-Errors, warnings, and the preview banner are written to **stderr**; structured data is written to **stdout**. This means you can pipe JSON safely without it being contaminated by progress indicators or diagnostic messages:
+Errors, warnings, progress and status notices (the spinner, `Using active connection:`), and the preview banner are written to **stderr**; stdout carries only the result. This means you can pipe JSON safely without it being contaminated by progress indicators or diagnostic messages:
 
 ```bash
 te list --output-format json | jq '.[] | .name'
@@ -88,7 +93,7 @@ def query(server: str, database: str, dax: str) -> list[dict]:
         capture_output=True,
         text=True,
     )
-    return json.loads(result.stdout)
+    return json.loads(result.stdout)["rows"]
 
 rows = query("Finance", "Revenue Model", "EVALUATE TOPN(10, 'Sales')")
 for row in rows:
@@ -102,9 +107,10 @@ import json
 import subprocess
 
 result = subprocess.run(
-    ["te", "deploy", "./model",
-     "-s", "Finance", "-d", "Revenue",
-     "--output-format", "json", "--non-interactive", "--force"],
+    ["te", "deploy", "--model", "./model",
+     "--target-server", "Finance", "--target-database", "Revenue",
+     "--output-format", "json", "--error-format", "json",
+     "--non-interactive", "--execute", "--force"],
     capture_output=True, text=True,
 )
 
@@ -121,10 +127,10 @@ if result.returncode != 0:
 PowerShell handles JSON natively. `te` is a regular console binary that works directly in PowerShell pipelines (see @te-cli-migrate if you're porting from the older `TabularEditor.exe` CLI):
 
 ```powershell
-$rows = te query -s Finance -d Revenue -q "EVALUATE TOPN(10, 'Sales')" --output-format json --non-interactive
+$result = te query -s Finance -d Revenue -q "EVALUATE TOPN(10, 'Sales')" --output-format json --non-interactive
   | ConvertFrom-Json
 
-$rows | Format-Table
+$result.rows | Format-Table
 
 # Check exit code after the pipeline
 if ($LASTEXITCODE -ne 0) {
@@ -140,9 +146,9 @@ $env:AZURE_CLIENT_ID     = "your-app-id"
 $env:AZURE_CLIENT_SECRET = "your-client-secret"
 $env:AZURE_TENANT_ID     = "your-tenant-id"
 
-te deploy ./model `
-  -s my-workspace -d my-model `
-  --auth env --non-interactive --force --ci vsts
+te deploy --model ./model `
+  --target-server my-workspace --target-database my-model `
+  --auth env --non-interactive --execute --force --ci vsts
 ```
 
 ## Bash
@@ -168,22 +174,24 @@ Generating a refresh TMSL script and version-controlling it is three commands:
 
 ```bash
 te connect MyWorkspace MyModel
-te refresh --type full --dry-run > refresh.tmsl
+te refresh --type full > refresh.tmsl
 cat refresh.tmsl
 ```
 
-The resulting TMSL can be reviewed in a pull request, committed, executed by the CLI (`te refresh --type full`), handed to a DBA, or applied by any XMLA-compatible tool. The CLI becomes a building block rather than a black box.
+The resulting TMSL can be reviewed in a pull request, committed, executed by the CLI (`te refresh --type full --execute`), handed to a DBA, or applied by any XMLA-compatible tool. The CLI becomes a building block rather than a black box.
 
 ## Useful patterns
 
 A handful of small idioms that come up often when composing `te` commands in scripts or pipelines:
 
-- **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te remove Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
+- **Idempotent creates and removes.** `te add Sales/Marker -t Measure -p Expression="0" --if-not-exists --save` and `te remove Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
 - **Nothing persists without `--save`.** Mutating commands (`te add`, `te set`, `te move`, `te remove`, `te script`, `te macro run`) apply the change in memory, report what they did, and then print `Dry run - nothing saved. Add --save to persist.` Run one bare to confirm it resolves the objects you expect, then re-run with `--save`. `te remove --dry-run` goes further and reports what would be removed without applying anything.
-- **Emit TMSL for review.** `te deploy ./model --xmla deploy.tmsl` produces the deployment script without touching the server - useful for DBA review or manual apply.
+- **Emit TMSL for review.** `te deploy --model ./model --target-server my-workspace --target-database my-model > deploy.tmsl` - deploy is dry-run by default and prints the exact target-aware TMSL to stdout, so redirecting it produces the deployment script without touching the server. Useful for DBA review or manual apply.
+- **Piped values via `-`.** Every value-taking option reads piped stdin through `-` (trailing newline removed, byte-order mark stripped; errors immediately when nothing is piped): `cat query.dax | te query -q -` (bare piped stdin with no `-q` also works), `te set Sales/Amount -p Expression=- < expr.dax --save`, `cat fix.csx | te script --inline - --save`, `cat messy.dax | te util format-dax -`.
+- **Parseable change sets.** Mutating commands (`set`, `add`, `remove`, `move`, `script`, `bpa run --fix`) render a diff by default; `--stat` and `--name-only` give compact text alternatives, and `te config set mutationOutput diff|stat|name-only|none` sets a standing default. JSON output always carries the full `changes` array (one entry per changed object with `objectPath`, `objectType`, `changeKind`, and before/after property pairs) regardless of these flags - the stable shape to parse in scripts.
 - **Path-only output.** `te list --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`. The model-level containers (`te list Measures`, `te list Columns`) compose well with this for whole-model sweeps.
 - **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
-- **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`) include a `durationMs` field in JSON output - useful for surfacing per-step timings in pipeline summaries.
+- **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`, `te query`) include a `durationMs` field in JSON output - useful for surfacing per-step timings in pipeline summaries.
 
 ## Related pages 
 
