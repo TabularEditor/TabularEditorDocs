@@ -126,7 +126,21 @@ jobs:
           Write-Host "API files generated: $((Get-ChildItem content/api/*.yml).Count) YAML files"
         shell: pwsh
       - name: Build all documentation
-        run: python build-docs.py --all --skip-gen
+        # English DocFX warnings fail the build; es/zh warnings do not, so they
+        # are collected into a markdown report for the job summary below.
+        run: python build-docs.py --all --skip-gen --warnings-report build-warnings.md
+        env:
+          PYTHONUNBUFFERED: '1'  # keep the per-language banners in order with DocFX's own output in the log
+      - name: Publish DocFX warnings
+        if: always()
+        shell: bash
+        run: |
+          if [ -f build-warnings.md ]; then
+            cat build-warnings.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '## DocFX build warnings' >> "$GITHUB_STEP_SUMMARY"
+            echo 'No report was produced (the build stopped before any language was built).' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:

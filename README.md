@@ -69,6 +69,7 @@ swa start _site
 | `--skip-api` | Reuse existing API metadata in content/api, ~30-40% faster (local markdown iteration only, requires `--serve`/`--lang`; never for testing/CI/CD/releases) |
 | `--permissive` | Don't treat English DocFX warnings as build failures (for local iteration; full/CI builds stay strict) |
 | `--sync` | Sync English fallback for missing/outdated translations (for local dev) |
+| `--warnings-report PATH` | Write a markdown summary of the DocFX warnings per built language to `PATH` (CI appends it to the job summary); written even when the build fails |
 
 ## What the Build Script Does
 
@@ -92,7 +93,7 @@ The deploy step waits for all checks, so a failing check blocks both the product
 |-----|--------------|------------|
 | Lint build scripts | `./run scripts check`: ruff, ruff format, mypy `--strict` on the qualified Python sources (see `pyproject.toml`); shellcheck and shfmt on `run` and `build_scripts/run_scripts/*.sh` | any lint, type, or formatting finding |
 | Doctest C# code blocks | `./run doctest validate` always; `./run doctest` (compile, run, and compare `**Output**` blocks) when a te CLI is available, see below | malformed annotation; with te: compile error, runtime error, or output mismatch |
-| Build Documentation | `python build-docs.py --all --skip-gen` on Windows, uploads `_site` | DocFX build failure or English DocFX warnings |
+| Build Documentation | `python build-docs.py --all --skip-gen --warnings-report build-warnings.md` on Windows, uploads `_site`; the per-language DocFX warning report goes to the job summary | DocFX build failure or English DocFX warnings |
 | Check links | `python build_scripts/check_links.py validate stats` against the built `_site` | any broken **internal** link: missing file, missing anchor, or an old root-style path that no longer redirects on the live site |
 | Deploy to Azure | Azure Static Web Apps upload | only after all of the above pass |
 
@@ -101,6 +102,10 @@ The link check fetches every unique external URL once, but a bad status or a net
 the site is outside our control, and outages, bot-blocking, and link rot should not stop docs from shipping.
 The full report, including the list of external URLs to verify by hand, is attached to the job summary of the "Check links" job.
 Fix or remove genuinely dead external links as part of normal maintenance.
+
+**Translation build warnings are visible but not blocking.**
+Only English DocFX warnings fail the build; the es and zh builds are Crowdin-managed translations and may carry warnings such as broken bookmarks or missing includes.
+The "Build Documentation" job summary lists every DocFX warning per language, so translation problems can be spotted and fed back without blocking a deploy.
 
 **Executing the doctests needs the te CLI.**
 The CLI download is gated behind sign-in, so the workflow cannot fetch it from a public URL.
