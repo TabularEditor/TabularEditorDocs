@@ -42,35 +42,35 @@ The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.
 | **CI/CD** | | |
 | CI annotations | `-V` (Azure DevOps), `-G` (GitHub) | `--ci vsts`, `--ci github` on every command |
 | Non-interactive mode | No explicit flag; errors may prompt | `--non-interactive` global flag - fails fast, no prompts |
-| Predictable exit codes | Partial | `0` = success, `1` = failure, `2` = diff mismatch |
+| Predictable exit codes | Partial | `0` = success, `1` = failure (for `te diff`: differences found), `2` = `te diff` comparison error |
 | Structured output | No | `--output-format json/csv/tmdl/tmsl` on every command |
 | VSTEST results | `-T` flag | `--trx <file>` on `validate`, `bpa run`, `test run` |
 | **Deployment** | | |
 | Deploy model | `-D` flag | `te deploy` with fine-grained flags (`--deploy-roles`, `--deploy-partitions`, `--deploy-connections`, `--deploy-full`, etc.) |
-| Generate XMLA/TMSL without deploying | `-X` flag | `te deploy --xmla <file>` or `--dry-run` |
+| Generate XMLA/TMSL without deploying | `-X` flag | The default: `te deploy` without `--execute` prints the TMSL to stdout |
 | BPA gate before deploy | No | Built-in; `--skip-bpa` or `--fix-bpa` to override |
 | Connection profiles | No | `te profile set/list/show` - reusable named profiles per environment |
 | **Best Practice Analyzer** | | |
 | Run BPA | `-A` / `-AX` flags | `te bpa run` with `--fail-on warning/error`, `--fix`, `--path` scoping, `--vpax` for VPA-aware rules |
 | BPA rule management | No | `te bpa rules add/rm/set/list/disable/enable/init` |
 | **Model editing in pipeline** | | |
-| Run C# scripts | `-S` flag | `te script` - multiple scripts, inline code, stdin, `--dry-run`, preprocessor symbols (`TECLI`) |
+| Run C# scripts | `-S` flag | `te script` - multiple scripts, inline code, stdin, `--validate` compile check, preprocessor symbols (`TECLI`) |
 | Run macros | No | `te macro run` with `--on <object>` context |
 | Set/get properties | No | `te get`, `te set`, `te add`, `te rm`, `te mv` |
-| DAX formatting | No | `te format` - all expressions or single object, DAX and M |
+| DAX formatting | No | `te set --format` for model objects, `te util format-dax` / `format-m` for loose expressions |
 | **Inspection** | | |
 | List model objects | No | `te ls` with wildcard path filters, `--type`, `--paths-only`, `--output-format bim` |
 | Search expressions/names | No | `te find` with regex and scope (`--in expressions/names/descriptions`) |
-| Diff two models | No | `te diff` - structural comparison with exit code `2` on any difference |
+| Diff two models | No | `te diff` - structural comparison with exit code `1` on any difference |
 | Dependency analysis | No | `te deps` - upstream/downstream for any object; `--unused` to find dead code |
 | **Refresh** | | |
-| Trigger refresh | No | `te refresh` with `--type`, `--table`, `--partition`, `--apply-refresh-policy`, `--dry-run` |
+| Trigger refresh | No | `te refresh` with `--type`, `--table`, `--partition`, `--apply-refresh-policy`; dry run by default, `--execute` to run |
 | **Testing** | | |
 | DAX assertion tests | No | `te test run` with `--tag`, `--trx`, `--ci`; `te test init/snapshot/compare` |
 | **VertiPaq analysis** | | |
 | Storage statistics | No | `te vertipaq` - columns, relationships, partitions; `--export`/`--import` VPAX |
 | **Other** | | |
-| Interactive REPL | No | `te interactive` - model-aware shell with tab completion |
+| Interactive REPL | No | `te interactive` - model-aware shell with persistent history and staged edits |
 | Shell tab completion | No | `te completion bash/zsh/pwsh` |
 | TE2 backward compatibility | Native | Built-in compatibility layer - existing `TabularEditor.exe` invocations work unchanged |
 
