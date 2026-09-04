@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migrating from the TE2 Command Line
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -40,32 +40,32 @@ te Model.bim -S fix.csx -D "localhost\tabular" MyDB -O
 
 ## The migrate command
 
-Use `te migrate` as a live reference for how TE2 flags map to the new CLI. It prints a colorized table of every known TE2 flag, its status (supported, renamed, planned), and the equivalent `te` command.
+Use `te util migrate` as a live reference for how TE2 flags map to the new CLI. It prints a colorized table of every known TE2 flag, its status (supported, renamed, planned), and the equivalent `te` command.
 
 ```bash
-te migrate                   # Full flag mapping table
-te migrate -A                # Look up a single flag
-te migrate --output-format json     # Machine-readable mapping
+te util migrate                   # Full flag mapping table
+te util migrate -A                # Look up a single flag
+te util migrate --output-format json     # Machine-readable mapping
 ```
 
-Refer to the output of the `te migrate` command for the current mapping that reflects the CLI version you have installed.
+Refer to the output of the `te util migrate` command for the current mapping that reflects the CLI version you have installed.
 
 ## Flag mapping (curated subset)
 
-A non-exhaustive summary of the most commonly used flags. Run `te migrate` for the full list.
+A non-exhaustive summary of the most commonly used flags. Run `te util migrate` for the full list.
 
 | TE2 flag | New CLI equivalent | Notes |
 | -- | -- | -- |
-| `file` (positional) | `te <command> <path>` or global `--model` | First positional arg on most commands. |
-| `server`, `database` | `te connect <server> <database>` or `te deploy <model> -s <server> -d <database>` | Server is no longer a global positional; `te deploy` takes only `<model>` positionally, with server and database as named flags. |
+| `file` (positional) | `--model <path>` (global option) | Always the global `--model` option; no command takes the model as a positional argument. Or set an active model once with `te connect <path>`. |
+| `server`, `database` | `te connect <server> <database>` or global `-s <server> -d <database>` | `-s`/`-d` always identify the model source; deploy destinations use `--target-server` / `--target-database`. |
 | `-L` / `-LOCAL` | `te connect --local` | Windows only. |
-| `-S` / `-SCRIPT` | `te script -S <file.csx>` or `-e "code"` | Supports multiple scripts, inline code, and stdin. Note: uppercase `-S` - lowercase `-s` is the global `--server` option. |
+| `-S` / `-SCRIPT` | `te script --file <file.csx>` or `--inline "code"` | A bare `.csx` path also works (`te script fix.csx`). Supports multiple scripts (`--file a.csx --file b.csx`), inline code, and stdin (`--inline -`); files and inline code run in the order given. |
 | `-A` / `-ANALYZE` | `te bpa run --rules <file-or-url>` | Supports `--fail-on`, `--fix`, multiple rule files. |
 | `-AX` / `-ANALYZEX` | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default. |
-| `-B` / `-BIM` | `te save <model> -o <file.bim> --serialization bim` | |
-| `-F` / `-FOLDER` | `te save <model> -o <dir> --serialization database.json` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
-| `-TMDL` | `te save <model> -o <dir> --serialization tmdl` | TMDL is the default save format. |
-| `-D` / `-DEPLOY` | `te deploy <model> -s <server> -d <database>` | Separate command with named options; only `<model>` is positional. |
+| `-B` / `-BIM` | `te save-as --model <model> -o <file.bim> --serialization bim` | |
+| `-F` / `-FOLDER` | `te save-as --model <model> -o <dir> --serialization database.json` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
+| `-TMDL` | `te save-as --model <model> -o <dir> --serialization tmdl` | `--serialization` can be omitted - the format is inferred from the output path. |
+| `-D` / `-DEPLOY` | `te deploy --model <model> --target-server <server> --target-database <database> --execute` | Separate command with named options. Without `--execute`, `te deploy` is a dry run that prints the TMSL it would send. |
 | `-O` / `-OVERWRITE` | (default) or `--create-only` to opt out | Overwrite is the default in the new CLI. |
 | `-C` / `-CONNECTIONS` | `te deploy --deploy-connections` | |
 | `-P` / `-PARTITIONS` | `te deploy --deploy-partitions` | |
@@ -74,7 +74,7 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | `-R` / `-ROLES` | `te deploy --deploy-roles` | |
 | `-M` / `-MEMBERS` | `te deploy --deploy-role-members` | |
 | `-FULL` (after `-D`) | `te deploy --deploy-full` | Equivalent to overwrite + connections + partitions + shared + roles + role-members. |
-| `-X` / `-XMLA <file>` | `te deploy ... --xmla <file>` | Use `-` for stdout. |
+| `-X` / `-XMLA <file>` | `te deploy ... > <file>` (omit `--execute`) | Script emission is the default: without `--execute`, deploy connects read-only and prints the TMSL to stdout - redirect it to a file. |
 | `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `deploy` | Emits `##vso[...]` annotations to stderr. |
 | `-G` / `-GITHUB` | `--ci github` | Emits `::error::` / `::warning::` annotations. |
 | `-T` / `-TRX <file>` | `--trx <file>` on `validate`, `bpa run`, `test run` | VSTEST `.trx` file for Azure DevOps test publishing. |
@@ -92,13 +92,13 @@ The recommended path from a TE2-based pipeline to the new CLI:
    - Start with `-A` / `-AX` → `te bpa run` to pick up richer BPA output (`--fail-on`, `--fix`, `--trx`).
    - Then `-D` → `te deploy` for fine-grained deploy control.
    - Finally `-V` / `-G` → `--ci vsts` / `--ci github`.
-3. **Switch to non-interactive CI flags.** Add `--non-interactive --ci <vsts|github>` to every `te` command and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
+3. **Switch to non-interactive CI flags.** Add `--non-interactive` to every `te` command (and `--ci <vsts|github>` on `validate`, `bpa run`, `deploy`, and `test run`), pass `--execute --force` on `deploy`/`refresh` steps that must act, and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
 4. **Adopt service principal auth.** Replace `-D -L <user> <pass>` with `te auth login -u ... -p ... -t ...` or an environment-credential pipeline step. See @te-cli-auth.
 
 ## Important differences
 
 - **BPA gate on deploy.** `te deploy` now runs BPA as a pre-flight gate by default. Use `--skip-bpa` to preserve the old behavior, or `--fix-bpa` to auto-fix violations before deploy. See @te-cli-config.
-- **Interactive confirmation on deploy.** `te deploy` prompts for confirmation by default (with `n` as the safe default answer). CI pipelines must pass `--force`.
+- **Dry run by default.** `te deploy` and `te refresh` print the exact TMSL they would send and change nothing; pass `--execute` to act. `--execute` asks for confirmation at a terminal (with `n` as the safe default); CI pipelines must pass `--execute --force`.
 - **Structured output.** Every command supports `--output-format json` for machine-readable output - see @te-cli-automation.
 - **No `start /wait` needed.** The new CLI is a regular console binary; invoke it directly in shell scripts, PowerShell, and CI tasks.
 - **Cross-platform.** The CLI runs on Windows, macOS, and Linux. Local SSAS and Power BI Desktop connections remain Windows-only.
