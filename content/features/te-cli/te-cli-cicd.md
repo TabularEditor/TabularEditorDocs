@@ -21,7 +21,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 > [!WARNING]
 > **Do not use the CLI in production pipelines during Limited Public Preview.** Two preview-specific risks apply to pipeline owners:
 >
-> - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
+> - **Hard expiry.** The preview binary stops functioning on **2026-10-31** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
 >
 > Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA version matches your needs.
@@ -52,7 +52,7 @@ your-repo/
 Place the **extracted** binary - not the archive - so the pipeline can call it directly. Pick the build that matches your runner OS/arch; see @te-cli-install for the filename table. The self-contained binary is ~70 MB; consider Git LFS if your repo is sensitive to size.
 
 > [!NOTE]
-> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-09-30** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
+> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-10-31** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
 
 ## GitHub Actions
 

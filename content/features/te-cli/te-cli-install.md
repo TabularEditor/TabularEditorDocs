@@ -127,7 +127,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of the preview end date** (2026-09-30), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
+> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## Shell completion
 

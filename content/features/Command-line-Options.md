@@ -27,11 +27,11 @@ Running `TabularEditor.exe` in a CI/CD pipeline does not require a Tabular Edito
 
 ## TabularEditor.exe vs. the Tabular Editor CLI
 
-The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.exe`. It's not just a rewrite for macOS and Linux - it adds model editing, inspection, diffing, testing, refresh triggering, and VertiPaq analysis as first-class pipeline operations, none of which were possible with `TabularEditor.exe`. The `te` CLI is in Limited Public Preview (expires 2026-09-30); use `TabularEditor.exe` for production pipelines today.
+The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.exe`. It's not just a rewrite for macOS and Linux - it adds model editing, inspection, diffing, testing, refresh triggering, and VertiPaq analysis as first-class pipeline operations, none of which were possible with `TabularEditor.exe`. The `te` CLI is in Limited Public Preview (expires 2026-10-31); use `TabularEditor.exe` for production pipelines today.
 
 | | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
 |---|---|---|
-| Status | Stable, production-ready | Limited Public Preview (expires 2026-09-30) |
+| Status | Stable, production-ready | Limited Public Preview (expires 2026-10-31) |
 | Platform | Windows only | Windows, macOS, Linux |
 | License required | No | No (preview); TBD at GA |
 | Binary | WinForms app, requires `start /wait` wrapper | Purpose-built console binary, no wrapper needed |
