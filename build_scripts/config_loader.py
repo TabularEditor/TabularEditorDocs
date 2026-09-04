@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 Shared configuration loader for build scripts.
 
@@ -11,7 +10,6 @@ import hashlib
 import json
 from pathlib import Path
 from typing import Any
-
 
 # Default paths (relative to project root)
 BUILD_CONFIG_PATH = "metadata/build-config.json"
@@ -25,60 +23,54 @@ _redirects_config: dict[str, Any] | None = None
 
 def load_build_config(config_path: Path | str | None = None) -> dict[str, Any]:
     """Load the build configuration from JSON file.
-    
+
     Returns the full config dict with the following keys:
     - contentDirectories: directories with translatable content
     - sharedDirectories: assets/api that aren't translated
     - rootFiles: root-level files (index.md, toc.yml, etc.)
     """
     global _build_config
-    
+
     if _build_config is not None and config_path is None:
         return _build_config
-    
-    if config_path is None:
-        config_path = Path(BUILD_CONFIG_PATH)
-    else:
-        config_path = Path(config_path)
-    
+
+    config_path = Path(BUILD_CONFIG_PATH) if config_path is None else Path(config_path)
+
     if not config_path.exists():
         raise FileNotFoundError(f"Build config not found: {config_path}")
-    
+
     with open(config_path, encoding="utf-8") as f:
         config: dict[str, Any] = json.load(f)
-    
+
     if config_path == Path(BUILD_CONFIG_PATH):
         _build_config = config
-    
+
     return config
 
 
 def load_redirects_config(config_path: Path | str | None = None) -> dict[str, Any]:
     """Load the redirects configuration from JSON file.
-    
+
     Returns the full config dict with the following keys:
     - serverRedirects: 301 redirects handled by Azure SWA
     - clientRedirects: meta-refresh HTML redirects
     """
     global _redirects_config
-    
+
     if _redirects_config is not None and config_path is None:
         return _redirects_config
-    
-    if config_path is None:
-        config_path = Path(REDIRECTS_CONFIG_PATH)
-    else:
-        config_path = Path(config_path)
-    
+
+    config_path = Path(REDIRECTS_CONFIG_PATH) if config_path is None else Path(config_path)
+
     if not config_path.exists():
         raise FileNotFoundError(f"Redirects config not found: {config_path}")
-    
+
     with open(config_path, encoding="utf-8") as f:
         config: dict[str, Any] = json.load(f)
-    
+
     if config_path == Path(REDIRECTS_CONFIG_PATH):
         _redirects_config = config
-    
+
     return config
 
 
@@ -108,7 +100,7 @@ def get_root_files(config: dict[str, Any] | None = None) -> list[str]:
 
 def get_legacy_shortcuts(config: dict[str, Any] | None = None) -> dict[str, str]:
     """Get legacy shortcut redirects (old URL → new URL).
-    
+
     These are server-side 301 redirects for high-priority/vanity URLs.
     Filters out keys starting with '_' which are used for comments.
     """
@@ -121,7 +113,7 @@ def get_legacy_shortcuts(config: dict[str, Any] | None = None) -> dict[str, str]
 
 def get_client_redirects(config: dict[str, Any] | None = None) -> dict[str, str]:
     """Get client-side redirects for legacy content URLs.
-    
+
     These are meta-refresh HTML redirects for content migration.
     Keys are paths like '/te2/Getting-Started.html', values are target paths.
     Filters out keys starting with '_' which are used for comments.
@@ -135,13 +127,13 @@ def get_client_redirects(config: dict[str, Any] | None = None) -> dict[str, str]
 
 def get_all_redirects(config: dict[str, Any] | None = None) -> dict[str, str]:
     """Get all redirects (both server and client) merged together.
-    
+
     Returns a combined dict of all redirects. Server redirects take precedence
     if there are any duplicates (though there shouldn't be).
     """
     if config is None:
         config = load_redirects_config()
-    
+
     all_redirects = {}
     all_redirects.update(get_client_redirects(config))
     all_redirects.update(get_legacy_shortcuts(config))
@@ -166,9 +158,7 @@ def get_base_url(config: dict[str, Any] | None = None) -> str:
         config = load_build_config()
     base_url: str | None = config.get("baseUrl")
     if not base_url:
-        raise KeyError(
-            '"baseUrl" is missing from metadata/build-config.json'
-        )
+        raise KeyError('"baseUrl" is missing from metadata/build-config.json')
     return base_url.rstrip("/")
 
 
@@ -198,19 +188,19 @@ def get_sitemap_exclude(config: dict[str, Any] | None = None) -> list[dict[str, 
 
 def compute_file_hash(file_path: Path | str) -> str:
     """Compute SHA256 hash of a file's contents.
-    
+
     CRLF line endings are normalized to LF before hashing so the hash is the same
     for a Windows checkout (core.autocrlf), a Linux CI checkout and the blob in
     git. The translation status files compare these hashes across all three.
-    
+
     Returns a hex string prefixed with 'sha256:' for clarity.
     Returns empty string if file doesn't exist.
     """
     file_path = Path(file_path)
-    
+
     if not file_path.exists():
         return ""
-    
+
     with open(file_path, "rb") as f:
         data = f.read()
 
@@ -220,16 +210,16 @@ def compute_file_hash(file_path: Path | str) -> str:
 
 def get_all_content_files(content_dir: Path | str) -> list[Path]:
     """Get all content files (markdown, yaml) from a content directory.
-    
+
     Returns list of paths relative to the content directory.
     """
     content_dir = Path(content_dir)
-    
+
     if not content_dir.exists():
         return []
-    
+
     files: list[Path] = []
     for pattern in ["**/*.md", "**/*.yml", "**/*.yaml"]:
         files.extend(content_dir.glob(pattern))
-    
+
     return sorted(files)

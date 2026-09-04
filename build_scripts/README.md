@@ -4,7 +4,7 @@ This document covers new build tools:
 - `te_script_runner.py`: standalone runner and module for other tools that need to execute C# scripts
 - `csharp_doctest.py`: compiles and runs annotated `csharp` code blocks in markdown files
 - `check_links.py`: dead link checker for built site
-- `translate-content.py`: submits changed English content to Translated (TranslationOS) and collects the translations; see [Translating Content](../README.md#translating-content)
+- `translate-content.py`: submits changed English content to Translated (TranslationOS), then repairs, verifies and writes the delivered translations; `python build_scripts/translate-content.py --self-test` runs its offline test suite (no key, no network; CI runs it on every PR). CLI, environment variables and runbook: [Translating Content](../README.md#translating-content)
 
 Existing docfx and localization orchestration can be found in [../README.md](../README.md)
 
@@ -23,10 +23,11 @@ paths like `_site` and `content/` resolve relative to the current directory.
 ## Contributing and development notes
 
 Scripts have no build phase.
-All Python build scripts are linted and type-checked:
+The Python build scripts listed in `pyproject.toml` (`check_links.py`, `csharp_doctest.py`, `te_script_runner.py`, `translate-content.py`, `config_loader.py`) are linted, format-checked and type-checked by `./run scripts check`; add a script to both lists there when it meets the bar:
 
 ```shell
-$ uvx ruff check --select F,B,SIM,I,UP  <python_sources>
+$ uvx ruff check --select F,B,SIM,I,UP --line-length 120 --target-version py311  <python_sources>
+$ uvx ruff format --check --line-length 120  <python_sources>
 $ uvx mypy --strict  <python_sources>
 ```
 

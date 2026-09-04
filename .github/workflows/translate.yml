@@ -1,18 +1,75 @@
 name: Translate content (Translated)
 
-# Replaces the Crowdin GitHub integration. Every push to main that touches English
-# content submits the changed files to Translated (TranslationOS), waits for the
-# machine translations, and pushes them to the `localization` branch as a review PR —
-# the same branch name Crowdin used, so deploy.yml keeps building translation PRs only
-# when a review is requested. The scheduled run collects deliveries that were not
-# ready in time.
+# Machine-translates the English docs with Translated (TranslationOS) and hands the
+# result over as a review PR. build_scripts/translate-content.py does the work; this
+# file only decides WHEN it runs, in WHICH environment, and WHERE the output goes.
 #
-# Secrets / variables (repository settings):
-#   TRANSLATED_API_KEY       secret  — TranslationOS API key (sandbox or production)
-#   TRANSLATED_BASE_URL      var     — optional; overrides translation.baseUrl in metadata/build-config.json
-#   TRANSLATED_SERVICE_TYPE  var     — optional; overrides translation.serviceType
-# "Allow GitHub Actions to create and approve pull requests" must be enabled under
-# Settings > Actions > General for the PR step to work with GITHUB_TOKEN.
+# Jobs
+#   dry_run    pull_request only. Runs the PR's own copy of the script offline
+#              (--self-test, --plan, --dump-orders) and uploads the dumped orders.
+#              When the PR carries the label `translate-sandbox-dryrun` AND a key is
+#              present, it also submits ONE file (features/toc.md, es) to the sandbox
+#              with `--run --force --wait 5` and uploads the report plus a patch of
+#              localizedContent. Never pushes, never opens a PR.
+#   translate  push / schedule / workflow_dispatch. Folds the open translation
+#              branch into main's tree, runs --self-test, then --run (or --probe),
+#              commits localizedContent, pushes to the target branch and opens or
+#              updates the review PR. Holds the `translate-content` concurrency slot.
+#
+# Gating (event x TRANSLATED_ENV)
+#   pull_request       -> dry_run only (offline; sandbox mini-run needs label + key)
+#   push / schedule    -> translate, ONLY when the variable TRANSLATED_ENV == production;
+#                         otherwise the job is skipped (no sandbox spam, no sandbox MT PRs)
+#   workflow_dispatch  -> translate in whatever environment TRANSLATED_ENV names.
+#                         Sandbox runs push to `localization-sandbox` as a DRAFT PR titled
+#                         "New translations (sandbox - do not merge)" labelled `sandbox`;
+#                         only production runs may target `localization`.
+#
+# Secrets / variables (repository settings)
+#   TRANSLATED_API_KEY           secret    TranslationOS key matching TRANSLATED_ENV
+#   TRANSLATED_SANDBOX_API_KEY   secret    optional; used by the pull_request dry run
+#                                          (falls back to TRANSLATED_API_KEY). Add it when
+#                                          TRANSLATED_API_KEY is switched to the production
+#                                          key so the label-gated PR run keeps hitting the
+#                                          sandbox.
+#   TRANSLATED_ENV               variable  sandbox | production; selects
+#                                          translation.environments[...] in metadata/build-config.json
+#   TRANSLATED_SERVICE_TYPE      variable  optional override of the environment's serviceType
+#                                          (production has none until it is set; find it with mode=probe)
+# Missing key or TRANSLATED_ENV: a dispatch fails with ::error::; push/schedule end green
+# with a ::warning:: so the schedule does not go red four times a day.
+#
+# workflow_dispatch inputs
+#   mode           translate (default): --run, then commit/push/PR.
+#                  probe: --probe only (key, languages, service types); nothing pushed.
+#                  dry-run: --plan and --dump-orders, then in sandbox --run with a report
+#                  (jobs are submitted and collected, the report is uploaded, nothing is
+#                  committed or pushed). In production the mode stops after --dump-orders,
+#                  because a production submission that is never pushed would be billed
+#                  and then resubmitted by the next run.
+#   target_branch  default '' = auto: `localization` when TRANSLATED_ENV == production,
+#                  `localization-sandbox` otherwise. An explicit `localization` is refused
+#                  (exit 1) for mode=translate unless TRANSLATED_ENV == production; for
+#                  probe/dry-run it is remapped to `localization-sandbox` with a ::notice::.
+#   limit / wait / force / file  passed through as --limit / --wait / --force / --file.
+#                  `wait` must be a whole number of minutes <= 35: the job is killed at
+#                  45 minutes and the accepted job records must be pushed before that.
+# The script refuses sandbox submissions without --limit/--file and caps files and
+# characters per run (translation.sandboxLimits); this workflow never passes
+# --allow-unbounded and never passes --lenient.
+#
+# Repository settings an admin must enable (Settings > Actions > General / Settings > General)
+#   "Allow GitHub Actions to create and approve pull requests" - needed by the PR step
+#     (it warns instead of failing when off; the push has already landed)
+#   "Automatically delete head branches" - keeps `localization` from going stale after a
+#     squash merge (the merge step also deletes a stale branch whose PR is merged/closed)
+#
+# Failure safety: the push and PR steps run even when the translate step fails
+# (`!cancelled()`), so job records that Translated already accepted are committed and
+# never resubmitted; the PR body/comment then starts with a warning line. The merge
+# step is the opposite: when the open translation branch cannot be folded into main it
+# fails the run BEFORE anything is submitted, because continuing from main would lose
+# the in-flight job records on that branch and resubmit (and pay for) their files.
 
 on:
   push:
@@ -22,84 +79,448 @@ on:
       - 'metadata/build-config.json'
       - 'metadata/language-metadata.json'
       - 'build_scripts/translate-content.py'
+      - 'build_scripts/config_loader.py'
+      - '.github/workflows/translate.yml'
   schedule:
     - cron: '17 */6 * * *'
   workflow_dispatch:
     inputs:
-      wait:
-        description: Minutes to wait for deliveries before pushing what has arrived
-        default: '25'
+      mode:
+        description: translate = submit/collect and push; probe = check key, languages and service types only; dry-run = plan, dump orders and (sandbox only) run without pushing
+        type: choice
+        options: [translate, probe, dry-run]
+        default: translate
+      target_branch:
+        description: Branch that receives the translations. Empty = auto (`localization` when TRANSLATED_ENV is production, `localization-sandbox` otherwise); an explicit `localization` is refused outside production.
+        type: string
+        default: ''
       limit:
-        description: Submit at most N files per language (0 = no limit)
+        description: Submit at most N files per language (0 = no limit; sandbox requires a limit or a file)
+        type: string
         default: '0'
+      wait:
+        description: Minutes to wait for deliveries before pushing what has arrived (whole number, at most 35)
+        type: string
+        default: '25'
+      force:
+        description: Re-translate the matched files even when they are current (with --file/--limit; without either it means the whole corpus)
+        type: boolean
+        default: false
+      file:
+        description: Only files matching this glob, relative to content/ (e.g. features/toc.md)
+        type: string
+        default: ''
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - '.github/workflows/translate.yml'
+      - 'build_scripts/translate-content.py'
+      - 'build_scripts/config_loader.py'
+      - 'metadata/build-config.json'
+      - 'metadata/language-metadata.json'
 
-permissions:
-  contents: write
-  pull-requests: write
-
-concurrency:
-  group: translate-content
-  cancel-in-progress: false
+defaults:
+  run:
+    # `bash -eo pipefail`; every run block below relies on it.
+    shell: bash
 
 jobs:
-  translate:
+  dry_run:
+    name: Dry run (pull request)
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    name: Submit and collect translations
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    concurrency:
+      group: translate-dry-run-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    env:
+      # `secrets` cannot be used in `if:`; fork PRs get no secrets, so this is 'false' there.
+      # Prefer the dedicated sandbox key so this run keeps working once TRANSLATED_API_KEY
+      # holds the production key.
+      HAS_KEY: ${{ (secrets.TRANSLATED_SANDBOX_API_KEY || secrets.TRANSLATED_API_KEY) != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
-          fetch-depth: 0
+          # The PR's own commit, not the synthetic merge commit: test what will be merged.
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Continue from the open localization branch
-        # Unmerged translations and in-flight job records live on `localization`.
+      - name: Self-test (offline)
+        run: python build_scripts/translate-content.py --self-test
+
+      - name: Plan (offline)
+        run: python build_scripts/translate-content.py --plan | tee "$RUNNER_TEMP/plan.txt"
+
+      - name: Dump orders (offline)
+        run: python build_scripts/translate-content.py --dump-orders "$RUNNER_TEMP/orders"
+
+      - name: Sandbox mini-run (label translate-sandbox-dryrun)
+        id: sandbox
+        if: env.HAS_KEY == 'true' && contains(github.event.pull_request.labels.*.name, 'translate-sandbox-dryrun')
+        env:
+          TRANSLATED_ENV: sandbox
+          TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_SANDBOX_API_KEY || secrets.TRANSLATED_API_KEY }}
+        run: |
+          python build_scripts/translate-content.py --run --force --limit 1 --file "features/toc.md" --lang es \
+            --wait 5 --report "$RUNNER_TEMP/report.md"
+
+      - name: Patch of localizedContent
+        if: ${{ !cancelled() && steps.sandbox.outcome != 'skipped' }}
+        run: |
+          git add -N localizedContent
+          git diff localizedContent > "$RUNNER_TEMP/translations.patch"
+          git diff --stat localizedContent
+
+      - name: Upload artefacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: translate-dry-run
+          if-no-files-found: ignore
+          path: |
+            ${{ runner.temp }}/plan.txt
+            ${{ runner.temp }}/orders
+            ${{ runner.temp }}/report.md
+            ${{ runner.temp }}/translations.patch
+
+      - name: Step summary
+        if: always()
+        run: |
+          {
+            echo "## Translation dry run"
+            echo
+            if [ -f "$RUNNER_TEMP/report.md" ]; then
+              head -c 60000 "$RUNNER_TEMP/report.md"
+              echo
+            elif [ -f "$RUNNER_TEMP/plan.txt" ]; then
+              echo 'No sandbox run (label `translate-sandbox-dryrun` missing or secret absent). Plan:'
+              echo
+              echo '```'
+              head -c 60000 "$RUNNER_TEMP/plan.txt"
+              echo '```'
+            else
+              echo "The self-test failed before a plan was produced; see the job log."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  translate:
+    name: Submit and collect translations
+    # Automatic triggers only in production; a dispatch runs in whatever TRANSLATED_ENV names.
+    if: github.event_name == 'workflow_dispatch' || (github.event_name != 'pull_request' && vars.TRANSLATED_ENV == 'production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      pull-requests: write
+      # `gh label create sandbox` (labels are an issues-API resource)
+      issues: write
+    concurrency:
+      group: translate-content
+      cancel-in-progress: false
+    env:
+      TRANSLATED_ENV: ${{ vars.TRANSLATED_ENV }}
+      TRANSLATED_SERVICE_TYPE: ${{ vars.TRANSLATED_SERVICE_TYPE }}
+      HAS_KEY: ${{ secrets.TRANSLATED_API_KEY != '' }}
+    steps:
+      - name: Check secret, environment and inputs
+        id: preflight
+        env:
+          INPUT_WAIT: ${{ inputs.wait }}
+        run: |
+          # `wait` only exists on a dispatch; the job is killed after 45 minutes and the
+          # accepted job records must be committed and pushed before that.
+          if [ -n "$INPUT_WAIT" ]; then
+            if ! [[ "$INPUT_WAIT" =~ ^[0-9]+$ ]]; then
+              echo "::error::Input 'wait' must be a whole number of minutes (got '$INPUT_WAIT')."
+              exit 1
+            fi
+            if [ "$INPUT_WAIT" -gt 35 ]; then
+              echo "::error::Input 'wait' is $INPUT_WAIT minutes; the maximum is 35 (the job times out at 45 and must push the accepted job records first)."
+              exit 1
+            fi
+          fi
+          ready=true
+          problems=()
+          if [ "$HAS_KEY" != "true" ]; then
+            problems+=("secret TRANSLATED_API_KEY is not set")
+          fi
+          if [ -z "$TRANSLATED_ENV" ]; then
+            problems+=("repository variable TRANSLATED_ENV is not set (sandbox | production)")
+          fi
+          if [ "${#problems[@]}" -gt 0 ]; then
+            ready=false
+            msg="Translation run skipped: ${problems[*]}"
+            if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+              echo "::error::$msg"
+              exit 1
+            fi
+            echo "::warning::$msg"
+          fi
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.preflight.outputs.ready == 'true'
+        with:
+          # Always main, whatever branch the dispatch was started from (the script
+          # version under test on a PR is covered by the dry_run job).
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        if: steps.preflight.outputs.ready == 'true'
+        with:
+          python-version: '3.11'
+
+      - name: Resolve target branch
+        id: target
+        if: steps.preflight.outputs.ready == 'true'
+        env:
+          INPUT_TARGET_BRANCH: ${{ inputs.target_branch }}
+          INPUT_MODE: ${{ inputs.mode }}
+        run: |
+          # Empty (the default, and always on push/schedule) means auto by environment.
+          target="$INPUT_TARGET_BRANCH"
+          if [ -z "$target" ]; then
+            if [ "$TRANSLATED_ENV" = "production" ]; then
+              target=localization
+            else
+              target=localization-sandbox
+            fi
+            echo "target_branch not given; auto-selected '$target' for TRANSLATED_ENV=$TRANSLATED_ENV"
+          fi
+          if [ "$target" = "localization" ] && [ "$TRANSLATED_ENV" != "production" ]; then
+            case "${INPUT_MODE:-translate}" in
+              probe|dry-run)
+                # Nothing is pushed in these modes; fall back so the merge step can still
+                # pick up in-flight records instead of failing the run.
+                echo "::notice::TRANSLATED_ENV=$TRANSLATED_ENV; using localization-sandbox instead of localization (nothing is pushed in mode $INPUT_MODE)"
+                target=localization-sandbox
+                ;;
+              *)
+                echo "::error::Refusing to target 'localization' while TRANSLATED_ENV=$TRANSLATED_ENV; only production runs may. Use target_branch=localization-sandbox (or leave it empty for auto)."
+                exit 1
+                ;;
+            esac
+          fi
+          echo "Target branch: $target (TRANSLATED_ENV=$TRANSLATED_ENV)"
+          echo "branch=$target" >> "$GITHUB_OUTPUT"
+
+      - name: Continue from the open translation branch
+        # Unmerged translations and in-flight job records live on the target branch.
         # Fold them into main's tree so this run builds on them instead of resubmitting.
+        # A stale branch (tip already in main, or its PR merged/closed at that tip - the
+        # squash-merge case) is deleted instead, so no empty PR is opened afterwards.
+        # If the branch can neither be merged nor taken as-is, the run FAILS here:
+        # continuing from main would resubmit files whose job records live on the branch.
+        if: steps.preflight.outputs.ready == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ steps.target.outputs.branch }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git ls-remote --exit-code --heads origin localization >/dev/null; then
-            git fetch origin localization
-            git merge --no-edit -X theirs origin/localization
+          if ! git ls-remote --exit-code --heads origin "$TARGET" >/dev/null; then
+            echo "No branch '$TARGET' on origin; starting from main."
+            exit 0
           fi
+          git fetch origin "$TARGET"
+          tip="$(git rev-parse "origin/$TARGET")"
+
+          stale=""
+          if git merge-base --is-ancestor "$tip" HEAD; then
+            stale="its tip $tip is already contained in main"
+          else
+            open_count="$(gh pr list -R "$GITHUB_REPOSITORY" --head "$TARGET" --state open --json number --jq 'length' || echo 0)"
+            done_heads="$( { gh pr list -R "$GITHUB_REPOSITORY" --head "$TARGET" --state merged --json headRefOid --jq '.[].headRefOid';
+                             gh pr list -R "$GITHUB_REPOSITORY" --head "$TARGET" --state closed --json headRefOid --jq '.[].headRefOid'; } 2>/dev/null || true)"
+            if [ "$open_count" = "0" ] && printf '%s\n' "$done_heads" | grep -qx "$tip"; then
+              stale="its PR was merged/closed at $tip and no PR is open"
+            fi
+          fi
+          if [ -n "$stale" ]; then
+            echo "Deleting stale branch '$TARGET': $stale"
+            git push origin --delete "$TARGET"
+            exit 0
+          fi
+
+          if git merge --no-edit -X theirs "origin/$TARGET"; then
+            exit 0
+          fi
+          if ! test -f .git/MERGE_HEAD; then
+            # Not a conflict but some other failure (unrelated histories, dirty tree, ...):
+            # there is nothing to repair, and continuing from main is not an option.
+            echo "::error::git merge origin/$TARGET failed without leaving a merge in progress. Nothing was submitted or pushed; inspect branch '$TARGET' and rerun."
+            exit 1
+          fi
+          echo "::warning::Merge of origin/$TARGET left conflicts (modify/delete?); taking the branch's localizedContent as-is."
+          if git checkout "origin/$TARGET" -- localizedContent \
+            && git add -A localizedContent \
+            && { git -c core.editor=true merge --continue || git commit -m "Merge $TARGET (translations)"; }; then
+            exit 0
+          fi
+          unmerged="$(git diff --name-only --diff-filter=U | tr '\n' ' ')"
+          echo "::error::Could not fold origin/$TARGET into main; unmerged paths: ${unmerged:-(none reported)}. Nothing was submitted or pushed. Resolve the conflict on '$TARGET' (or merge/close its PR so the branch is deleted) and rerun."
+          git merge --abort || true
+          exit 1
+
+      - name: Self-test (offline)
+        if: steps.preflight.outputs.ready == 'true'
+        run: python build_scripts/translate-content.py --self-test
 
       - name: Translate changed content
+        id: translate
+        if: steps.preflight.outputs.ready == 'true'
         env:
           TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_API_KEY }}
-          TRANSLATED_BASE_URL: ${{ vars.TRANSLATED_BASE_URL }}
-          TRANSLATED_SERVICE_TYPE: ${{ vars.TRANSLATED_SERVICE_TYPE }}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_WAIT: ${{ inputs.wait }}
+          INPUT_LIMIT: ${{ inputs.limit }}
+          INPUT_FORCE: ${{ inputs.force }}
+          INPUT_FILE: ${{ inputs.file }}
         run: |
-          python build_scripts/translate-content.py --run \
-            --wait "${{ inputs.wait || '25' }}" \
-            --limit "${{ inputs.limit || '0' }}" \
-            --report "$RUNNER_TEMP/translation-report.md"
+          mode="${INPUT_MODE:-translate}"
+          report="$RUNNER_TEMP/translation-report.md"
+          run_args=(--run --wait "${INPUT_WAIT:-25}" --limit "${INPUT_LIMIT:-0}" --report "$report")
+          if [ "$INPUT_FORCE" = "true" ]; then
+            run_args+=(--force)
+          fi
+          if [ -n "$INPUT_FILE" ]; then
+            run_args+=(--file "$INPUT_FILE")
+          fi
+          echo "mode=$mode TRANSLATED_ENV=$TRANSLATED_ENV"
+          case "$mode" in
+            probe)
+              python build_scripts/translate-content.py --probe
+              ;;
+            dry-run)
+              python build_scripts/translate-content.py --plan
+              python build_scripts/translate-content.py --dump-orders "$RUNNER_TEMP/orders"
+              if [ "$TRANSLATED_ENV" = "production" ]; then
+                # A production --run whose results are never pushed would be billed and
+                # then resubmitted by the next run; plan + dumped orders are the dry run here.
+                echo "::warning::mode=dry-run in production stops after --plan/--dump-orders (nothing is submitted)."
+              else
+                python build_scripts/translate-content.py "${run_args[@]}"
+              fi
+              ;;
+            *)
+              python build_scripts/translate-content.py "${run_args[@]}"
+              ;;
+          esac
 
-      - name: Push to localization branch
+      - name: Push to the translation branch
         id: push
+        # Runs even when the translate step failed so accepted job records are kept.
+        if: ${{ !cancelled() && steps.translate.outcome != 'skipped' && inputs.mode != 'dry-run' && inputs.mode != 'probe' }}
+        env:
+          TARGET: ${{ steps.target.outputs.branch }}
         run: |
+          changed=false
+          pushed=false
           if [ -n "$(git status --porcelain localizedContent)" ]; then
-            git add localizedContent
-            git commit -m "New translations (Translated)"
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git add -A localizedContent
+            if [ "$TRANSLATED_ENV" = "production" ]; then
+              git commit -m "New translations (Translated)"
+            else
+              git commit -m "New translations (Translated, sandbox)"
+            fi
+            changed=true
           fi
-          if git ls-remote --exit-code --heads origin localization >/dev/null || [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-            git push origin HEAD:localization
-            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          if git diff --quiet origin/main -- localizedContent; then
+            echo "localizedContent matches main; nothing to review."
+          else
+            if [ "$changed" = "false" ] \
+              && git rev-parse -q --verify "origin/$TARGET" >/dev/null \
+              && git diff --quiet "origin/$TARGET" HEAD -- localizedContent; then
+              echo "origin/$TARGET already carries these translations; not pushing an empty merge."
+            else
+              git push origin "HEAD:refs/heads/$TARGET"
+              echo "Pushed to $TARGET."
+            fi
+            pushed=true
           fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "pushed=$pushed" >> "$GITHUB_OUTPUT"
 
       - name: Open or update the review PR
-        if: steps.push.outputs.pushed == 'true'
+        # No implicit success(): after a failed translate step the pushed records still
+        # deserve a PR (or a comment), flagged with a warning line.
+        if: ${{ !cancelled() && steps.push.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ steps.target.outputs.branch }}
+          CHANGED: ${{ steps.push.outputs.changed }}
+          TRANSLATE_OUTCOME: ${{ steps.translate.outcome }}
         run: |
-          number=$(gh pr list --base main --head localization --state open --json number --jq '.[0].number // empty')
+          report="$RUNNER_TEMP/translation-report.md"
+          body="$RUNNER_TEMP/pr-body.md"
+          {
+            if [ "$TRANSLATE_OUTCOME" = "failure" ]; then
+              echo '> The translate step ended with an error; some files may not have been submitted or collected. See the run log.'
+              echo
+            fi
+            if [ -f "$report" ]; then
+              head -c 60000 "$report"
+            else
+              printf 'Translations on `%s` from run %s/%s/actions/runs/%s (no report was produced; see the job log).\n' \
+                "$TARGET" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"
+            fi
+          } > "$body"
+          number="$(gh pr list -R "$GITHUB_REPOSITORY" --base main --head "$TARGET" --state open --json number --jq '.[0].number // empty')"
           if [ -z "$number" ]; then
-            gh pr create --base main --head localization \
-              --title "New translations (Translated)" \
-              --body-file "$RUNNER_TEMP/translation-report.md"
-          elif [ "${{ steps.push.outputs.changed }}" = "true" ]; then
-            gh pr comment "$number" --body-file "$RUNNER_TEMP/translation-report.md"
+            if [ "$TRANSLATED_ENV" = "production" ]; then
+              create_args=(--title "New translations (Translated)")
+            else
+              create_args=(--title "New translations (sandbox - do not merge)" --draft)
+              gh label create sandbox -R "$GITHUB_REPOSITORY" --color d4c5f9 \
+                --description "Sandbox machine translations; never merge" >/dev/null 2>&1 || true
+            fi
+            if url="$(gh pr create -R "$GITHUB_REPOSITORY" --base main --head "$TARGET" "${create_args[@]}" --body-file "$body")"; then
+              echo "Opened $url"
+              if [ "$TRANSLATED_ENV" != "production" ]; then
+                gh pr edit "$url" -R "$GITHUB_REPOSITORY" --add-label sandbox \
+                  || echo "::warning::Could not add label 'sandbox' to $url"
+              fi
+            else
+              echo "::warning::Could not open a PR for branch '$TARGET'. The translations are pushed; open the PR manually and check Settings > Actions > General > 'Allow GitHub Actions to create and approve pull requests'."
+            fi
+          elif [ "$CHANGED" = "true" ]; then
+            gh pr comment "$number" -R "$GITHUB_REPOSITORY" --body-file "$body" \
+              || echo "::warning::Could not comment on PR #$number"
+          else
+            echo "PR #$number is open and nothing changed this run."
           fi
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: translation-report
+          if-no-files-found: ignore
+          path: |
+            ${{ runner.temp }}/translation-report.md
+            ${{ runner.temp }}/orders
+
+      - name: Step summary
+        if: always()
+        env:
+          READY: ${{ steps.preflight.outputs.ready }}
+          INPUT_MODE: ${{ inputs.mode }}
+        run: |
+          {
+            echo "## Translation run (${INPUT_MODE:-translate}, TRANSLATED_ENV=${TRANSLATED_ENV:-unset})"
+            echo
+            if [ -f "$RUNNER_TEMP/translation-report.md" ]; then
+              head -c 60000 "$RUNNER_TEMP/translation-report.md"
+              echo
+            elif [ "$READY" != "true" ]; then
+              echo "Skipped: TRANSLATED_API_KEY secret or TRANSLATED_ENV variable is missing (see the job log)."
+            else
+              echo "No report was produced (mode probe/dry-run, or the run stopped early); see the job log."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

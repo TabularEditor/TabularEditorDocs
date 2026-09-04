@@ -14,9 +14,11 @@
     ]
   },
   "translation": {
-    "_comment": "Automated translation via Translated (TranslationOS), see build_scripts/translate-content.py. 'sources' are globs relative to content/ (same scope Crowdin had, plus toc.md); files under sharedDirectories are always skipped. baseUrl/serviceType can be overridden with TRANSLATED_BASE_URL / TRANSLATED_SERVICE_TYPE. Sandbox only accepts service type 'premium'; production service types are defined per account by Translated.",
-    "baseUrl": "https://api.sandbox.translated.com/v2/",
-    "serviceType": "premium",
+    "_comment": "Automated translation via Translated (TranslationOS), see build_scripts/translate-content.py and the 'Translating Content' section of README.md. 'sources' are globs relative to content/ (the previous provider's scope, plus the sidebar toc.md files); files under sharedDirectories are always skipped; 'passthrough' files are copied from English as-is (not translated) and tracked the same way. The active environment is selected with the TRANSLATED_ENV environment variable / repository variable (sandbox | production); TRANSLATED_SERVICE_TYPE overrides the environment's serviceType. Sandbox only accepts service type 'premium'; production service types are defined per account by Translated (see --probe), so production has no default and refuses to run until one is set. 'instructions' are file-level notes shown to linguists on human service types; glossaries and do-not-translate lists are configured by Translated on the service type itself.",
+    "environments": {
+      "sandbox": { "baseUrl": "https://api.sandbox.translated.com/v2/", "serviceType": "premium" },
+      "production": { "baseUrl": "https://api.translated.com/v2/", "serviceType": null }
+    },
     "sourceLocale": "en-US",
     "sources": [
       { "pattern": "**/*.md" },
@@ -25,7 +27,16 @@
       { "pattern": "toc.yml" },
       { "pattern": "_ui-strings.json" }
     ],
+    "passthrough": [
+      { "pattern": "whats-new/**/*.html" }
+    ],
     "ignore": [],
+    "batchSize": 200,
+    "sandboxLimits": {
+      "_comment": "Translated warns that excessive use of the sandbox human-translation workflow can get the sandbox key blocked. In sandbox mode a run refuses to exceed these unless --allow-unbounded is given.",
+      "maxFilesPerRun": 20,
+      "maxCharsPerRun": 200000
+    },
     "instructions": "Technical documentation for Tabular Editor 3 (a Power BI / Analysis Services modelling tool). Keep all Markdown, YAML and HTML structure exactly as in the source: do not translate or alter code, code fences, inline code, file paths, URLs, link targets, anchors, xref/uid identifiers, HTML tags and attributes, keyboard shortcuts, alert markers such as [!NOTE] or [!include], or placeholders like {count}. Do not translate product and technology names: Tabular Editor, Power BI, Analysis Services, DAX, Tabular Object Model (TOM), Fabric, Best Practice Analyzer, C#, Visual Studio. Use the terminology of the localized Power BI user interface where it exists."
   },
   "contentDirectories": {

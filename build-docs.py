@@ -171,7 +171,9 @@ def prepare_localized_content(lang: str, sync: bool = False) -> int:
     For English: always copies all source content (required for docfx)
     For other languages:
         sync=True:  full English fallback sync (hash comparison, copy missing/outdated)
-        sync=False: only sync shared directories (assets, api) — Crowdin manages translations
+        sync=False: only sync shared directories (assets, api) — translations are
+                    committed by the automated translation workflow
+                    (translate-content.py / translate.yml)
     """
     if lang == "en":
         # English always needs full sync
@@ -193,8 +195,10 @@ def prepare_localized_content(lang: str, sync: bool = False) -> int:
     if result != 0:
         return result
 
-    # Repair Crowdin-collapsed DocFX alerts (e.g. "> [!NOTE]> text") before docfx
-    # builds this language, so alerts render as styled boxes instead of plain quotes.
+    # Repair collapsed DocFX alerts in translator output (e.g. "> [!NOTE]> text")
+    # before docfx builds this language, so alerts render as styled boxes instead
+    # of plain quotes. A safety net: the translation script verifies markers, but
+    # older translations and hand edits can still carry the collapsed form.
     result = run_command(
         [sys.executable, "build_scripts/normalize-localized-alerts.py", lang],
         f"Normalizing DocFX alerts for {lang}"
@@ -226,9 +230,10 @@ def build_language(lang: str, sync: bool = False, skip_api: bool = False, permis
         return result
 
     # Build the documentation — fail on DocFX warnings only for English (the
-    # authored source). Localized content is Crowdin-managed and may carry
-    # translation warnings that must not block deployment. `permissive` lifts the
-    # English gate too, for local iteration where transient warnings are expected
+    # authored source). Localized content comes from the automated translation
+    # workflow and may carry translation warnings that must not block deployment.
+    # `permissive` lifts the English gate too, for local iteration where transient
+    # warnings are expected
     # (warnings are still printed, just not fatal); full/CI builds leave it off.
     #
     # `docfx build` skips API metadata regeneration and reuses the existing
@@ -348,7 +353,7 @@ def main() -> int:
     parser.add_argument("--no-api-copy", action="store_true", help="Skip copying API docs to localized sites")
     parser.add_argument("--skip-api", action="store_true", help="LOCAL markdown iteration only (requires --serve/--lang): reuse existing content/api, ~30-40%% faster. NEVER for testing/CI/CD/releases")
     parser.add_argument("--permissive", action="store_true", help="Don't treat English DocFX warnings as build failures (for local iteration; keep full/CI builds strict)")
-    parser.add_argument("--sync", action="store_true", help="Sync English fallback for missing/outdated translations (for local dev)")
+    parser.add_argument("--sync", action="store_true", help="Copy English over missing/outdated translations for a local build (fallback copies only; never commit them)")
     
     args = parser.parse_args()
     
