@@ -45,6 +45,21 @@ _ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
 BUILD_WARNINGS: dict[str, list[str]] = {}
 
 
+def _use_utf8_stdio() -> None:
+    """Make stdout/stderr UTF-8 with replacement for unencodable characters.
+
+    DocFX echoes translated headings and file names (e.g. Chinese) in its
+    diagnostics, which this script re-prints while streaming. When stdout is
+    redirected on Windows (CI logs, `| tee`), Python defaults to the ANSI code
+    page and print() raises UnicodeEncodeError on them, aborting the build over
+    a log line. A real console is already UTF-16/UTF-8 on Windows, so this only
+    changes the redirected case.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 def _clean_warning_line(line: str) -> str:
     """Strip colour codes and the absolute working-directory prefix from a DocFX diagnostic."""
     text = _ANSI_RE.sub('', line).rstrip()
@@ -398,6 +413,7 @@ def fix_xref_in_api() -> int:
 
 
 def main() -> int:
+    _use_utf8_stdio()
     parser = argparse.ArgumentParser(
         description="Build documentation for one or more languages",
         formatter_class=argparse.RawDescriptionHelpFormatter,
