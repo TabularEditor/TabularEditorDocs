@@ -2,7 +2,7 @@
 uid: te-cli-interactive
 title: Interactive Mode
 author: Peer Grønnerup
-updated: 2026-06-26
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ To Start a session run any of these commands:
 
 ```bash
 te interactive                              # Start and connect to a model later
-te interactive ./model                      # Start with a local model
+te interactive --model ./model              # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
@@ -48,7 +48,7 @@ Once a REPL has started, every `te` subcommand is available **without the `te` p
 
 ```
 ls tables
-get "Sales/Revenue" -q expression
+get Sales/Revenue -p expression
 query -q "EVALUATE TOPN(5, 'Sales')"
 bpa run --fail-on error
 ```
@@ -82,12 +82,28 @@ These are handled by the REPL itself, not the regular command tree:
 | -- | -- |
 | `help` or `?` | List available commands. |
 | `status` or `pwd` | Show the active model/connection. |
+| `save` | Commit all staged in-memory edits back to the model source. |
+| `revert` | Discard all staged edits made since the last save. |
 | `clear` or `cls` | Clear the screen. |
 | `exit`, `quit`, or `q` | Exit interactive mode. |
 
+`save` inside the session takes no arguments - re-serializing the model to another format or location is `save-as` (e.g. `save-as -o ./out --serialization bim`), exactly as outside the session.
+
+## Staged edits
+
+Inside the session, mutating commands (`set`, `add`, `remove`, `move`, `script`, `macro run`, ...) stage their changes in memory instead of writing to the source, and the prompt shows an indicator while unsaved staged edits exist. The built-in `save` command commits everything staged; `revert` discards everything staged.
+
+Each mutating command can also decide for itself: `--save` persists that one command's change immediately, `--stage` keeps it in memory (the default), and `--revert` rolls the command's change back after showing its effect - useful for a "what would this do?" probe. The three are mutually exclusive, and `--stage`/`--revert` exist only inside the session.
+
+The default per-command behavior is the `interactiveEditMode` config key (`stage` | `save` | `revert`) - see @te-cli-config.
+
+## Line editing and keys
+
+The prompt offers single-line editing: arrow keys move the caret, Home/End (also Ctrl+A/Ctrl+E) jump to the ends, Backspace/Delete edit in place. Up/Down browse the command history, which persists across sessions. Ctrl+C cancels the current command without leaving the session; Ctrl+D on an empty prompt exits (Ctrl+Z then Enter on Windows). There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
+
 ## Guided prompts
 
-When interactive mode is active, commands that need missing input prompt for it instead of failing. Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy` without `--force` shows a summary and asks for confirmation (`n` is the safe default).
+When interactive mode is active, commands that need missing input prompt for it instead of failing. Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy --execute` without `--force` shows a summary and asks for confirmation (`n` is the safe default). A `deploy` without `--execute` is a dry run that prints the TMSL the deployment would send, so it never prompts.
 
 To disable prompts for a single command inside the session, pass `--non-interactive`.
 
@@ -96,13 +112,15 @@ To disable prompts for a single command inside the session, pass `--non-interact
 Interactive mode also accepts piped or redirected stdin, so the same REPL can be driven from a script instead of typed by hand. Each line of input is run as a command, exactly as if you had entered it at the prompt, and the session exits when input is exhausted (or when it reaches an `exit` line).
 
 ```bash
-printf "ls\nexit\n" | te interactive ./model        # bash / git-bash
-te interactive ./model < script.te                  # redirected file
+printf "ls\nexit\n" | te interactive --model ./model    # bash / git-bash
+te interactive --model ./model < script.te              # redirected file
 ```
 
 ```bat
-(echo ls & echo exit) | te interactive .\model      :: Windows cmd.exe
+(echo ls & echo exit) | te interactive --model .\model  :: Windows cmd.exe
 ```
+
+The `-` stdin convention (`set -p Expression=-`, `query -q -`, and so on) is refused inside the interactive session, because the session itself owns stdin - use it from the outer shell instead.
 
 Lines that start with `#` are treated as comments and skipped, so you can annotate a script file:
 
@@ -119,10 +137,10 @@ When stdin is piped, `--batch` is the **default**: the session stops at the firs
 
 ```bash
 # Default when piped: stop at the first failing command, exit non-zero
-printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model
+printf "bpa run --fail-on error\ndeploy --execute --force\nexit\n" | te interactive --model ./model
 
 # Run every line regardless of failures
-printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model --no-batch
+printf "bpa run --fail-on error\ndeploy --execute --force\nexit\n" | te interactive --model ./model --no-batch
 ```
 
 ### Readable transcripts
@@ -130,7 +148,7 @@ printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./mode
 `--echo` writes each input line to stdout ahead of its output, which is handy when capturing a transcript of a piped run. Comment lines are not echoed.
 
 ```bash
-printf "ls tables\nexit\n" | te interactive ./model --echo
+printf "ls tables\nexit\n" | te interactive --model ./model --echo
 ```
 
 ### Options
@@ -159,7 +177,7 @@ The behavior is controlled by the `launchInteractiveMode` config key with three 
 | -- | -- |
 | `auto` (default) | Launch the REPL only when all three streams are attached to a TTY. Otherwise fall through to normal parse. |
 | `always` | Launch the REPL regardless of stream redirection. Useful when you always want an interactive session. |
-| `never` | Never auto-launch the REPL. `te` on its own prints help, matching the pre-0.6.0 behavior. |
+| `never` | Never auto-launch the REPL. `te` on its own prints help. |
 
 Change it globally with:
 

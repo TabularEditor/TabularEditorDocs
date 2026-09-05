@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Authentication and Connections
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -35,6 +35,9 @@ The CLI supports the full Azure Identity credential chain:
 > `--auth` is a **global** option, available on every `te` command - not just `te auth login`. Pass it to [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect), or any other command that connects to a remote endpoint, to override the default chain for that invocation. The default (`auto`) tries environment credentials first, then falls back to the cached or interactive browser login.
 
 For headless, SSH, WSL, or devcontainer scenarios, use a service principal - `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
+
+> [!NOTE]
+> The schema-detection flags on `te add -t Table` and `te set --update-schema` (`--source sql`, `--endpoint`) sign in with Entra ID for Azure-family SQL endpoints (`*.database.windows.net`, `*.datawarehouse.fabric.microsoft.com`, `*.sql.azuresynapse.net`) and honor `--auth`. On-prem servers use Windows-integrated authentication; `--connection-string` is honored verbatim.
 
 ## `te auth login`
 
@@ -107,11 +110,12 @@ te connect my-workspace my-model
 # Local TMDL folder, .bim file, or .SemanticModel container
 te connect ./my-model
 
-# Connect to a running Power BI Desktop instance (Windows only)
+# Connect to a locally running Analysis Services instance
+# (Power BI Desktop, Visual Studio workspace, standalone SSAS - Windows only)
 te connect --local
 
-# Filter by report name when multiple Power BI Desktop instances are running
-te connect --local my-report
+# Match an instance (e.g. an open report's window title) or a database name
+te connect --local my-model
 
 # Show the active connection
 te connect
@@ -120,7 +124,9 @@ te connect
 te connect --clear
 ```
 
-Active-connection state is per-terminal-session: opening a new terminal starts fresh. Inspect or clean up session state with [`te session`](xref:te-cli-commands#session).
+When several local instances or databases are found, the CLI prompts in two steps (instance, then database); with `--non-interactive` it fails with the candidate list instead of picking silently.
+
+Active-connection state is per-terminal-session: opening a new terminal starts fresh. Inspect or clean up session state with [`te session`](xref:te-cli-commands#session). For `te deploy`, the active connection also serves as the default `--target-server`/`--target-database` when the model source is local.
 
 ### Workspace mode (`-w` / `--workspace`)
 
@@ -170,7 +176,7 @@ te profile show prod
 te connect --profile prod
 
 # One-shot use without changing the active connection
-te deploy ./model --profile staging --force
+te deploy --model ./model --profile staging --execute --force
 ```
 
 Profiles can also carry behavioral overrides that take effect whenever the profile is active:
@@ -199,9 +205,11 @@ export AZURE_CLIENT_ID="your-app-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-te deploy ./model -s my-workspace -d my-model \
+te deploy --model ./model \
+  --target-server my-workspace --target-database my-model \
   --auth env \
   --non-interactive \
+  --execute \
   --force \
   --ci github
 ```

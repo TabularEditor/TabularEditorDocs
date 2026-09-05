@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Limited Public Preview)
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,10 +24,11 @@ Unlike the Windows-only `TabularEditor.exe` command-line options (TE2) - which w
 
 ## Built for three audiences
 
-Three design pillars run through every command:
+Four design pillars run through every command:
 
 - **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
 - **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
+- **Safe by default** - mutating commands preview their changes until you pass `--save`; `te deploy` and `te refresh` print the exact TMSL they would send until you pass `--execute`.
 - **Clear errors** - written to stderr with predictable exit codes.
 
 Together they make the same binary work well for three very different audiences:
@@ -41,21 +42,21 @@ Together they make the same binary work well for three very different audiences:
 
 ## What the CLI can do
 
-The CLI organizes more than 50 commands into 10 families. Each family maps to a concrete stage of the semantic-model lifecycle.
+The CLI organizes its commands into 10 families. Each family maps to a concrete stage of the semantic-model lifecycle.
 
 See @te-cli-commands for a full command reference with syntax, options, and examples for each command. Click any example command in the table to jump straight to its reference entry.
 
 | Family | What it does | Example commands |
 | -- | -- | -- |
-| [Model I/O](xref:te-cli-commands#model-io) | Load, save, convert, initialize models | [`te load`](xref:te-cli-commands#load), [`te save`](xref:te-cli-commands#save), [`te init`](xref:te-cli-commands#init) |
+| [Model I/O](xref:te-cli-commands#model-io) | Save, convert, initialize models | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init) |
 | [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move) |
 | [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
-| [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te format`](xref:te-cli-commands#format), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX and M, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
 | [Execution](xref:te-cli-commands#execution) | Run DAX queries, C# scripts, macros | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro) |
-| [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, incremental refresh | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te incremental-refresh`](xref:te-cli-commands#incremental-refresh) |
+| [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, apply refresh policies | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh) |
 | [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |
 | [Connection & Authentication](xref:te-cli-commands#connection-and-authentication) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
-| [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-list--paths--init--set) |
+| [Configuration](xref:te-cli-commands#configuration) | CLI settings and defaults | [`te config`](xref:te-cli-commands#config-list--paths--init--set) |
 | [Shell](xref:te-cli-commands#shell) | Interactive mode, session state, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion) |
 
 > [!TIP]
@@ -90,7 +91,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of the preview end date** (2026-09-30), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
+> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## License outlook
 

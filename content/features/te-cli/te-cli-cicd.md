@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: CI/CD Integration
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,7 +21,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 > [!WARNING]
 > **Do not use the CLI in production pipelines during Limited Public Preview.** Two preview-specific risks apply to pipeline owners:
 >
-> - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
+> - **Hard expiry.** The preview binary stops functioning on **2026-10-31** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
 >
 > Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA version matches your needs.
@@ -30,10 +30,11 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 
 - **Single self-contained binary.** No runtime install, no `TabularEditor.exe`, no `start /wait`.
 - **`--non-interactive` global flag.** Disables every prompt; fails fast with actionable errors.
-- **`--force`** on mutating commands (`te deploy`, `te refresh`) skips confirmation prompts.
-- **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr.
+- **Dry run by default.** `te deploy` and `te refresh` print the exact TMSL they would send; add `--execute` to act. `te deploy --execute --force` skips the confirmation prompt - required in CI, where a prompt cannot be answered.
+- **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub).
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
-- **Structured errors.** `--output-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
+- **Structured errors.** `--error-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
+- **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable envelope under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
 
 ## Adding the CLI to your repo
 
@@ -52,7 +53,7 @@ your-repo/
 Place the **extracted** binary - not the archive - so the pipeline can call it directly. Pick the build that matches your runner OS/arch; see @te-cli-install for the filename table. The self-contained binary is ~70 MB; consider Git LFS if your repo is sensitive to size.
 
 > [!NOTE]
-> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-09-30** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
+> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-10-31** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
 
 ## GitHub Actions
 
@@ -81,18 +82,19 @@ jobs:
           echo "$GITHUB_WORKSPACE/tools/te" >> $GITHUB_PATH
 
       - name: Validate
-        run: te validate ./model --ci github --trx validate.trx
+        run: te validate --model ./model --ci github --trx validate.trx
 
       - name: Best Practice Analyzer (gate)
-        run: te bpa run ./model --fail-on error --ci github --trx bpa.trx
+        run: te bpa run --model ./model --fail-on error --ci github --trx bpa.trx
 
       - name: Deploy
         run: |
-          te deploy ./model \
-            -s "${{ vars.WORKSPACE }}" \
-            -d "${{ vars.MODEL }}" \
+          te deploy --model ./model \
+            --target-server "${{ vars.WORKSPACE }}" \
+            --target-database "${{ vars.MODEL }}" \
             --auth env \
             --non-interactive \
+            --execute \
             --force \
             --ci github
 
@@ -132,16 +134,16 @@ steps:
   - powershell: Write-Host "##vso[task.prependpath]$(Build.SourcesDirectory)\tools\te"
     displayName: 'Set up Tabular Editor CLI'
 
-  - script: te validate ./model --ci vsts --trx validate.trx
+  - script: te validate --model ./model --ci vsts --trx validate.trx
     displayName: 'Validate'
 
-  - script: te bpa run ./model --fail-on error --ci vsts --trx bpa.trx
+  - script: te bpa run --model ./model --fail-on error --ci vsts --trx bpa.trx
     displayName: 'BPA gate'
 
   - script: |
-      te deploy ./model ^
-        -s "$(WORKSPACE)" -d "$(MODEL)" ^
-        --auth env --non-interactive --force --ci vsts
+      te deploy --model ./model ^
+        --target-server "$(WORKSPACE)" --target-database "$(MODEL)" ^
+        --auth env --non-interactive --execute --force --ci vsts
     displayName: 'Deploy'
     env:
       AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)
@@ -164,7 +166,7 @@ steps:
 
 ## BPA gate patterns
 
-`te deploy` and `te save` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth determining up-front:
+`te deploy` and `te save-as` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth determining up-front:
 
 - **Enforce** - the default. Pipeline fails if BPA finds violations at severity >= error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
 - **Auto-fix** - `--fix-bpa` applies `fixExpression`s in memory for the deployed artifact. Source files are not modified. Useful when the source of truth lives in the model and you want deploys to normalize style without developer intervention.
@@ -172,44 +174,53 @@ steps:
 
 ```bash
 # Treat warnings as failures in PR validation
-te bpa run ./model --fail-on warning --ci github --trx bpa.trx
+te bpa run --model ./model --fail-on warning --ci github --trx bpa.trx
 
 # Auto-fix during deploy (source unchanged)
-te deploy ./model -s my-ws -d my-model --fix-bpa --force --ci github
+te deploy --model ./model --target-server my-ws --target-database my-model --fix-bpa --execute --force --ci github
 
 # Emergency bypass
-te deploy ./model -s my-ws -d my-model --skip-bpa --force --ci github
+te deploy --model ./model --target-server my-ws --target-database my-model --skip-bpa --execute --force --ci github
 ```
 
 See @te-cli-config for controlling the BPA gate globally via `bpa.onDeploy` / `bpa.onSave` config keys.
 
+## Script validation
+
+C# scripts can be compile-checked without loading any model - an offline lint step for PR validation:
+
+```bash
+# Compile-check C# scripts without a model (offline lint)
+te script --file ./scripts/fix.csx --validate
+```
+
 ## Refresh patterns
 
-Refresh in pipelines is typically a follow-up step after deployment. Use `--non-interactive` and pick a deterministic `--type`:
+Refresh in pipelines is typically a follow-up step after deployment. Add `--execute` (without it the command only prints the TMSL it would run), use `--non-interactive`, and pick a deterministic `--type`:
 
 ```bash
 # Full refresh of the whole model after deploy
-te refresh -s my-ws -d my-model --type full --non-interactive
+te refresh -s my-ws -d my-model --type full --execute --non-interactive
 
 # Refresh a single fact table (e.g., daily incremental pipeline)
-te refresh -s my-ws -d my-model --table Sales --type full --non-interactive
+te refresh -s my-ws -d my-model --table Sales --type full --execute --non-interactive
 
 # Recalculate only (useful after calculation-group changes)
-te refresh -s my-ws -d my-model --type calculate --non-interactive
+te refresh -s my-ws -d my-model --type calculate --execute --non-interactive
 ```
 
-For incremental refresh workflows, combine `--apply-refresh-policy`, `--effective-date <yyyy-MM-dd>`, and `--partition <Table.Partition>` flags. See @te-cli-commands for details.
+For incremental refresh workflows, use `--apply-refresh-policy` (pass `true`, `false`, or a table name to scope the refresh to that table) together with `--effective-date <yyyy-MM-dd>` and `--execute`. See @te-cli-commands for details.
 
 ## Artifact patterns
 
 Emit TMSL or XMLA as an artifact without deploying, so DBAs or a later job can review or apply it:
 
 ```bash
-# Produce the XMLA/TMSL script that would deploy - do not deploy
-te deploy ./model -s my-ws -d my-model --xmla deploy.tmsl --force
+# Produce the TMSL script that a deploy would send - do not deploy (dry run is the default)
+te deploy --model ./model --target-server my-ws --target-database my-model > deploy.tmsl
 
-# Produce the TMSL refresh command - do not execute
-te refresh -s my-ws -d my-model --type full --dry-run > refresh.tmsl
+# Produce the TMSL refresh command - do not execute (dry run is the default)
+te refresh -s my-ws -d my-model --type full > refresh.tmsl
 ```
 
 Commit these artifacts to git, upload them to the pipeline's artifact storage, or pass them between jobs. They're plain text and diff cleanly in pull requests.
