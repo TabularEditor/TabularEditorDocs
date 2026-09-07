@@ -29,12 +29,12 @@ La principal diferencia entre las distintas ediciones de Tabular Editor 3 es qu�
 
 Consideramos que las variantes **resaltadas** de Analysis Services son de nivel Enterprise y, por tanto, solo se pueden usar con la Edición Enterprise de Tabular Editor 3.
 
-We draw that line where Microsoft draws its own, between per-user and capacity-based licensing:
+Trazamos esa línea donde Microsoft traza la suya: entre licencias por usuario y licencias basadas en capacidad:
 
-- **Premium Per User is a per-seat license.** The person editing the model is the person who paid for the seat. That matches how Business Edition is licensed: a personal, non-transferable key tied to a single user. See [Personal vs. Transferable licenses](#personal-vs-transferable-licenses).
-- **Premium Capacity (P SKUs), Embedded Capacity (A/EM SKUs) and Fabric Capacity (F SKUs) are shared, organization-scale deployments.** Models hosted there are team-owned and serve many consumers, which is the scenario Enterprise Edition is built and priced for.
+- **Premium Per User es una licencia por puesto.** Quien edita el modelo es quien pagó el puesto. Eso coincide con la forma en que se licencia la Edición Business: una clave personal e intransferible vinculada a un único usuario. Consulta [Licencias personales vs. transferibles](#personal-vs-transferable-licenses).
+- **Premium Capacity (P SKUs), Embedded Capacity (A/EM SKUs) y Fabric Capacity (F SKUs) son implementaciones compartidas a escala organizativa.** Los modelos hospedados allí son propiedad del equipo y dan servicio a muchos consumidores, y es el escenario para el que se ha diseñado la Edición Enterprise y se ha fijado su precio.
 
-The same logic applies outside Power BI. Business Edition covers the SQL Server Analysis Services Developer and Standard editions along with the Azure Analysis Services Developer and Basic tiers. Those tiers serve a single developer or a small-scale deployment. SQL Server Analysis Services Enterprise Edition and Azure Analysis Services Standard tier host organization-scale models, so they require Enterprise Edition.
+La misma lógica se aplica fuera de Power BI. La Edición Business cubre las ediciones Developer y Standard de SQL Server Analysis Services, junto con los niveles Developer y Basic de Azure Analysis Services. Esos niveles están pensados para un único desarrollador o un despliegue a pequeña escala. La Edición Enterprise de SQL Server Analysis Services y el nivel Standard de Azure Analysis Services hospedan modelos a escala organizativa, por lo que requieren la Edición Enterprise.
 
 > [!IMPORTANT]
 > Tabular Editor solo permite editar Data models con un nivel de compatibilidad 1200 o superior. Este es el valor predeterminado en cualquier instancia de Analysis Services a partir de SQL Server 2016. Por el mismo motivo, Tabular Editor no es compatible con Excel PowerPivot, ya que usa un nivel de compatibilidad anterior.
