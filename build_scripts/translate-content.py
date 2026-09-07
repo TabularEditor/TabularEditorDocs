@@ -14,7 +14,8 @@ Actions (exactly one per invocation):
                  language) and record the job under "pendingJobs" in the status file
   --poll         POST /status for all pending jobs; when delivered, repair what can be restored
                  from the English source (code, markers, link targets), verify the rest, write the
-                 file and mark it "translated" at the source hash it was translated from
+                 file and mark it "translated" at the source hash it was translated from (in the
+                 sandbox, requests that stop at "completed" are pushed through POST /sandbox/delivery)
   --run          --submit followed by --poll (CI mode)
   --baseline     one-time migration step: run every existing translation through the same
                  repair-then-verify path as a delivery, mark the valid ones as current so only future
@@ -23,6 +24,9 @@ Actions (exactly one per invocation):
   --self-test    offline proof that extraction, repair, verification and bookkeeping work
   --probe        GET service types and languages from the API and check the configuration
   --dump-orders  write the exact /translate request bodies to a directory instead of sending them
+  --cancel-pending
+                 POST /translate/cancel for every pending request of the active environment and drop
+                 its "pendingJobs" record (translations and failures untouched; production needs --force)
 
 Scope (which files are translated and how) comes from the "translation" section of
 metadata/build-config.json; locales come from "translatedLocale" in
@@ -38,11 +42,12 @@ Usage (run from the docs repo root):
     python build_scripts/translate-content.py --self-test
     python build_scripts/translate-content.py --probe
     python build_scripts/translate-content.py --dump-orders /tmp/orders
+    python build_scripts/translate-content.py --cancel-pending [--lang es] [--force]
 
 Environment:
     TRANSLATED_ENV            sandbox | production: selects translation.environments[...] in
-                              build-config.json; required for --submit/--poll/--run/--probe
-    TRANSLATED_API_KEY        required for --submit/--poll/--run/--probe
+                              build-config.json; required for --submit/--poll/--run/--probe/--cancel-pending
+    TRANSLATED_API_KEY        required for --submit/--poll/--run/--probe/--cancel-pending
     TRANSLATED_SERVICE_TYPE   overrides the environment's serviceType (production has none until set)
 
 Exit code is 1 for configuration or API errors and when any /translate batch failed.
@@ -55,6 +60,7 @@ from __future__ import annotations
 
 import argparse
 import difflib
+import email.message
 import fnmatch
 import hashlib
 import http.client
@@ -72,7 +78,7 @@ import urllib.request
 import uuid
 from collections import Counter
 from collections.abc import Callable, Iterator
-from contextlib import contextmanager, redirect_stdout
+from contextlib import contextmanager, redirect_stdout, suppress
 from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -93,7 +99,8 @@ STATUS_COPIED = "copied"
 # TranslationOS request_status enum: preprocessing, upload, machine translation, wc raw,
 # ingested, bucketing, analyzing, quote, in progress, completed, delivered, invoiced,
 # failed, failed delivery, cancelled. Content is trusted at delivered/invoiced only;
-# "completed" precedes delivery and is a waiting state.
+# "completed" precedes delivery and is a waiting state. Delivery is a project manager's step in
+# production; the sandbox has no such step, so sandbox polls trigger it via POST /sandbox/delivery.
 DELIVERED_STATUSES = frozenset({"delivered", "invoiced"})
 FAILED_STATUSES = frozenset({"failed", "failed delivery", "cancelled", "canceled", "error", "rejected"})
 WAITING_STATUSES = frozenset(
@@ -118,10 +125,13 @@ TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 POLL_DELAYS = (30, 60, 120)  # seconds between rounds: 30 s, then 60 s, then 120 s
 RUN_INITIAL_DELAY = 20  # seconds to wait before the first poll round in --run mode
 STATUS_CHUNK = 200  # id_request values per POST /status call
+SANDBOX_DELIVERY_CHUNK = 200  # id_request values per POST /sandbox/delivery call
+CANCEL_CHUNK = 200  # id values per POST /translate/cancel call
 RETRYABLE_HTTP = frozenset({425, 429, 500, 502, 503, 504})
 REPORT_LIST_CAP = 50
 IDENTITY_MIN_LETTERS = 200
 REPAIR_KINDS = ("fences", "inline code", "markers", "links")  # order used in "repaired: ..." lines
+WARNING_KINDS = frozenset({"inline code"})  # count mismatches of these kinds are warnings, not problems
 
 CONTENT_TYPES = {
     ".md": "text/markdown",
@@ -649,6 +659,7 @@ class RepairResult:
     text: str
     problems: list[str] = field(default_factory=list)
     repaired: Counter[str] = field(default_factory=Counter)
+    warnings: list[str] = field(default_factory=list)
 
 
 MD_RESTORE_RULES: tuple[tuple[re.Pattern[str], int, str, str], ...] = (
@@ -662,7 +673,9 @@ def repair_markdown_body(source_body: str, translated_body: str, repair: bool = 
     """Repair-then-verify for a Markdown body (LF line endings, no frontmatter).
     Fenced blocks, inline code, alert/include markers and link targets are restored from
     the source positionally when their counts match; count mismatches and heading count
-    differences are problems. With repair=False, differences become problems (verify only)."""
+    differences are problems. With repair=False, differences become problems (verify only).
+    Exception: an inline-code count mismatch is only a warning (MT routinely adds or drops a
+    backtick pair) and the delivered spans are kept as they are."""
     result = RepairResult(translated_body)
     src_fences, tr_fences = count_fence_lines(source_body), count_fence_lines(translated_body)
     if src_fences != tr_fences:
@@ -682,7 +695,8 @@ def repair_markdown_body(source_body: str, translated_body: str, repair: bool = 
     for regex, group, kind, what in MD_RESTORE_RULES:
         restored = restore_positionally(tr_text, src_text, regex, group)
         if restored is None:
-            result.problems.append(count_diff(src_text, tr_text, regex, group, what))
+            findings = result.warnings if kind in WARNING_KINDS else result.problems
+            findings.append(count_diff(src_text, tr_text, regex, group, what))
         elif restored[1] and repair:
             result.repaired[kind] += restored[1]
             tr_text = restored[0]
@@ -774,14 +788,14 @@ def finalize_translation(
     translated: str,
     repair: bool = True,
     check_identity: bool = True,
-) -> tuple[str, list[str], Counter[str]]:
+) -> tuple[str, list[str], Counter[str], list[str]]:
     """Turn delivered content into the file to write.
-    Returns (text, problems, repaired counts by kind). The text is only written when
-    problems is empty (or --lenient is given)."""
+    Returns (text, problems, repaired counts by kind, warnings). The text is only written when
+    problems is empty (or --lenient is given); warnings never block writing."""
     suffix = Path(rel).suffix.lower()
     if job.get("mode") == "yaml-names":
         text, toc_problems = reinsert_yaml_names(source_text, translated)
-        return text, toc_problems, Counter()
+        return text, toc_problems, Counter(), []
 
     bom = BOM if source_text.startswith(BOM) else ""
     crlf = "\r\n" in source_text
@@ -789,6 +803,7 @@ def finalize_translation(
     delivered = to_lf(translated.lstrip(BOM))
     repaired: Counter[str] = Counter()
     problems: list[str] = []
+    warnings: list[str] = []
 
     if suffix == ".md":
         src_fm, src_body = split_frontmatter(source_lf)
@@ -800,6 +815,7 @@ def finalize_translation(
         result = repair_markdown_body(src_body, tr_body, repair)
         problems.extend(result.problems)
         repaired.update(result.repaired)
+        warnings.extend(result.warnings)
         body = match_trailing_newline(result.text, src_body)
         if (
             check_identity
@@ -813,6 +829,7 @@ def finalize_translation(
         result = repair_html(source_lf, delivered, repair)
         problems.extend(result.problems)
         repaired.update(result.repaired)
+        warnings.extend(result.warnings)
         text = match_trailing_newline(result.text, source_lf)
         if check_identity and not problems and letters(text) > IDENTITY_MIN_LETTERS and text == source_lf:
             problems.append("delivered content identical to source")
@@ -823,7 +840,7 @@ def finalize_translation(
         text = delivered
     if crlf:
         text = text.replace("\n", "\r\n")
-    return bom + text, problems, repaired
+    return bom + text, problems, repaired, warnings
 
 
 # ---------------------------------------------------------------------------
@@ -878,16 +895,25 @@ class TranslationClient(Protocol):
 
     def cancel(self, id_requests: list[int]) -> dict[str, Any]: ...
 
+    def sandbox_deliver(self, id_requests: list[int]) -> Any: ...
+
     def service_type_names(self) -> list[dict[str, Any]]: ...
 
     def languages(self) -> list[dict[str, Any]]: ...
 
 
 class TranslatedClient:
-    def __init__(self, base_url: str, api_key: str, sleep: Callable[[float], None] = time.sleep) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        api_key: str,
+        sleep: Callable[[float], None] = time.sleep,
+        opener: Callable[..., Any] = urllib.request.urlopen,
+    ) -> None:
         self.base_url = base_url
         self.api_key = api_key
         self.sleep = sleep
+        self.opener = opener  # urlopen-compatible; injectable so the self-test can fake HTTP answers offline
 
     def _request(
         self,
@@ -907,7 +933,7 @@ class TranslatedClient:
         for attempt in range(retries + 1):
             req = urllib.request.Request(url, data=data, method=method, headers=headers)
             try:
-                with urllib.request.urlopen(req, timeout=180) as resp:
+                with self.opener(req, timeout=180) as resp:
                     return json.loads(resp.read().decode("utf-8") or "null")
             except urllib.error.HTTPError as e:
                 payload = e.read().decode("utf-8", errors="replace")
@@ -923,8 +949,8 @@ class TranslatedClient:
                 self.sleep(2**attempt * 2)
         raise TranslatedApiError(f"{method} {endpoint} failed after {retries + 1} attempts ({last_error})")
 
-    def _post(self, endpoint: str, body: Any, extra_headers: dict[str, str] | None = None) -> Any:
-        return self._request("POST", endpoint, body, extra_headers)
+    def _post(self, endpoint: str, body: Any, extra_headers: dict[str, str] | None = None, retries: int = 3) -> Any:
+        return self._request("POST", endpoint, body, extra_headers, retries)
 
     def _get(self, endpoint: str) -> Any:
         return self._request("GET", endpoint)
@@ -950,6 +976,17 @@ class TranslatedClient:
     def cancel(self, id_requests: list[int]) -> dict[str, Any]:
         result = self._post("translate/cancel", {"id": id_requests})
         return result if isinstance(result, dict) else {}
+
+    def sandbox_deliver(self, id_requests: list[int]) -> Any:
+        """Sandbox only: deliver requests that stopped at "completed" (in production a project manager does
+        this). Not retried: the sandbox answers 500 for requests it cannot deliver yet, and the next poll round
+        asks again anyway. Returns the concatenated delivery_output items of all chunks."""
+        items: list[Any] = []
+        for start in range(0, len(id_requests), SANDBOX_DELIVERY_CHUNK):
+            chunk = id_requests[start : start + SANDBOX_DELIVERY_CHUNK]
+            result = self._post("sandbox/delivery", {"ids_requests": chunk}, retries=0)
+            items.extend(result if isinstance(result, list) else [result])
+        return items
 
     def service_type_names(self) -> list[dict[str, Any]]:
         items = self._get("symbol/service-type-names")
@@ -1078,6 +1115,7 @@ class RunReport:
     def __init__(self) -> None:
         self.per_lang: dict[str, dict[str, Any]] = {}
         self.batch_failures = 0
+        self.cancel_failures = 0  # pending requests --cancel-pending could not cancel
         self.status_rounds_ok = 0  # POST /status calls that returned
         self.status_rounds_failed = 0  # ... that raised after retries
         self.notes: list[str] = []
@@ -1089,7 +1127,7 @@ class RunReport:
 
     @property
     def failed(self) -> bool:
-        return self.batch_failures > 0 or self.poll_failed
+        return self.batch_failures > 0 or self.poll_failed or self.cancel_failures > 0
 
     def lang(self, lang: str) -> dict[str, Any]:
         return self.per_lang.setdefault(
@@ -1099,8 +1137,10 @@ class RunReport:
                 "delivered": [],
                 "repaired_files": [],
                 "repaired": Counter(),
+                "warnings": [],
                 "copied": [],
                 "superseded": [],
+                "cancelled": [],
                 "dropped": [],
                 "still_pending": [],
                 "failed": [],
@@ -1122,14 +1162,15 @@ class RunReport:
     def to_markdown(self, config: TranslationConfig) -> str:
         out = [f"## Translation run ({config.environment_label}, service type `{config.service_type or 'unset'}`)", ""]
         out.append(
-            "| Language | Submitted | Delivered | Repaired | Copied | Superseded | Dropped | Still pending | Failed | Removed |"
+            "| Language | Submitted | Delivered | Repaired | Warnings | Copied | Superseded | Dropped | "
+            "Still pending | Failed | Removed |"
         )
-        out.append("|---|---|---|---|---|---|---|---|---|---|")
+        out.append("|---|---|---|---|---|---|---|---|---|---|---|")
         for lang, r in sorted(self.per_lang.items()):
             out.append(
                 f"| {lang} | {len(r['submitted'])} | {len(r['delivered'])} | {len(r['repaired_files'])} | "
-                f"{len(r['copied'])} | {len(r['superseded'])} | {len(r['dropped'])} | {len(r['still_pending'])} | "
-                f"{len(r['failed'])} | {len(r['removed'])} |"
+                f"{len(r['warnings'])} | {len(r['copied'])} | {len(r['superseded'])} | {len(r['dropped'])} | "
+                f"{len(r['still_pending'])} | {len(r['failed'])} | {len(r['removed'])} |"
             )
         for lang, r in sorted(self.per_lang.items()):
             if r["chars"]:
@@ -1143,7 +1184,12 @@ class RunReport:
                 out.append(f"\n{lang}: repaired from English: {kinds} in {len(r['repaired_files'])} file(s).")
             sections: list[tuple[str, list[str]]] = [
                 (f"{lang}: failed (translation kept as before)", [f"`{rel}` — {why}" for rel, why in r["failed"]]),
+                (f"{lang}: written with warnings", [f"`{rel}` — {why}" for rel, why in r["warnings"]]),
                 (f"{lang}: superseded (in-flight job cancelled, resubmitted)", [f"`{x}`" for x in r["superseded"]]),
+                (
+                    f"{lang}: cancelled (pending request dropped, translation unchanged)",
+                    [f"`{x}`" for x in r["cancelled"]],
+                ),
                 (f"{lang}: dropped pending jobs", [f"`{rel}` — {why}" for rel, why in r["dropped"]]),
                 (f"{lang}: still pending at Translated", [f"`{x}`" for x in r["still_pending"]]),
                 (f"{lang}: removed (English source gone)", [f"`{x}`" for x in r["removed"]]),
@@ -1204,21 +1250,23 @@ def cmd_plan(langs: list[str], sources: dict[str, str], passthrough: dict[str, s
         print_plan(lang, build_plan(lang, sources, passthrough, status, options), status, options.limit)
 
 
-def check_existing_translation(rel: str, source_text: str, translated_text: str) -> tuple[str, list[str], Counter[str]]:
+def check_existing_translation(
+    rel: str, source_text: str, translated_text: str
+) -> tuple[str, list[str], Counter[str], list[str]]:
     """Run an existing translation through the delivery path (repair, then verify) against its
-    English source. Returns (repaired text, problems, repaired counts by kind)."""
+    English source. Returns (repaired text, problems, repaired counts by kind, warnings)."""
     suffix = Path(rel).suffix.lower()
     if suffix in (".yml", ".yaml"):
         src_names, tr_names = yaml_name_map(source_text), yaml_name_map(translated_text)
         problems = [] if set(src_names) == set(tr_names) else [f"toc names {len(src_names)} -> {len(tr_names)}"]
-        return translated_text, problems, Counter()
+        return translated_text, problems, Counter(), []
     job = {"mode": "json-placeholders" if suffix == ".json" else "raw"}
     if suffix == ".json":
         translated_text = encode_placeholders(translated_text)
     try:
         return finalize_translation(rel, job, source_text, translated_text, repair=True, check_identity=False)
     except Exception as e:  # noqa: BLE001 - reported, never crashes the baseline
-        return translated_text, [f"could not verify: {e}"], Counter()
+        return translated_text, [f"could not verify: {e}"], Counter(), []
 
 
 def format_repairs(repaired: Counter[str]) -> str:
@@ -1253,6 +1301,7 @@ def cmd_baseline(
         notes: list[str] = []
         repairs: Counter[str] = Counter()
         repaired_files = 0
+        warned = 0
         for rel, src_hash in sources.items():
             entry = status["files"].get(rel, {})
             if entry.get("manual") is True:
@@ -1262,11 +1311,16 @@ def cmd_baseline(
                 status["files"][rel] = {"sourceHash": "", "status": STATUS_UNTRANSLATED}
                 missing += 1
                 continue
-            text, problems, repaired = check_existing_translation(rel, read_text(CONTENT_DIR / rel), read_text(target))
+            text, problems, repaired, warnings = check_existing_translation(
+                rel, read_text(CONTENT_DIR / rel), read_text(target)
+            )
             if problems:
                 status["files"][rel] = {"sourceHash": "", "status": STATUS_UNTRANSLATED}
                 marked.append((rel, "; ".join(problems)))
                 continue
+            if warnings:
+                warned += 1
+                notes.append(f"  {'warning':<13} {rel}: {'; '.join(warnings)}")
             if repaired:
                 repairs.update(repaired)
                 repaired_files += 1
@@ -1289,7 +1343,8 @@ def cmd_baseline(
         save_status(lang, status)
         print(
             f"\n{lang}: baseline written — {current} current, {outdated} changed since {ref or 'HEAD'}, "
-            f"{len(marked) - outdated} structurally stale, {missing} missing, {repaired_files} {verb}"
+            f"{len(marked) - outdated} structurally stale, {missing} missing, {repaired_files} {verb}, "
+            f"{warned} accepted with inline-code warnings"
         )
         for line in notes:
             print(line)
@@ -1595,7 +1650,7 @@ def handle_job_state(
         status["pendingJobs"].pop(rel)
         for key in ("words", "equivalent_words", "fee_words"):
             r[key] += words_of(item, key)
-        problems, repaired = apply_delivery(lang, rel, job, item, sources, status, lenient)
+        problems, repaired, warnings = apply_delivery(lang, rel, job, item, sources, status, lenient)
         if problems:
             r["failed"].append((rel, "; ".join(problems)))
             print(f"{lang}: REJECTED {rel}: {'; '.join(problems)}")
@@ -1604,6 +1659,8 @@ def handle_job_state(
             if repaired:
                 r["repaired"].update(repaired)
                 r["repaired_files"].append(rel)
+            if warnings:
+                r["warnings"].append((rel, "; ".join(warnings)))
             print(f"{lang}: delivered {rel}" + (f" (repaired {dict(repaired)})" if repaired else ""))
         return False
     if state in FAILED_STATUSES:
@@ -1652,6 +1709,80 @@ def drop_foreign_jobs(config: TranslationConfig, lang: str, status: dict[str, An
     return changed
 
 
+@dataclass
+class PollState:
+    """Memory shared by all poll rounds of one run."""
+
+    unknown_states: set[str] = field(default_factory=set)
+    delivery_triggered: set[int] = field(default_factory=set)  # sandbox request ids already sent to /sandbox/delivery
+    delivery_errors: Counter[str] = field(default_factory=Counter)  # lang -> failed POST /sandbox/delivery calls
+    last_delivery_error: dict[str, str] = field(default_factory=dict)  # lang -> last error text printed
+
+
+def delivery_failures(payload: Any) -> list[tuple[str, str]]:
+    """Flatten a /sandbox/delivery response into (subject, error) pairs for what was not delivered.
+
+    The endpoint answers with either a list of jobs ({id_job, delivery_status, requests: [...], error_message,
+    error_body}) or a flat list of requests ({id_request, delivery_status, error_message, status_code, ...})."""
+    failures: list[tuple[str, str]] = []
+    for item in payload if isinstance(payload, list) else []:
+        if not isinstance(item, dict) or "delivery_status" not in item:
+            continue
+        failed = str(item.get("delivery_status", "")).lower() != "succeeded"
+        message = str(item.get("error_message") or item.get("error_body") or "no error message")
+        requests = item.get("requests")
+        if isinstance(requests, list):
+            nested = delivery_failures(requests)
+            if nested:
+                failures.extend(nested)
+            elif failed:
+                failures.append((f"job {item.get('id_job')}", message))
+        elif failed:
+            failures.append((f"request {item.get('id_request')}", message))
+    return failures
+
+
+def sandbox_delivery_candidates(
+    pending: dict[str, dict[str, Any]], by_id: dict[str, dict[str, Any]], triggered: set[int]
+) -> list[int]:
+    """Still-pending sandbox requests whose /status state is exactly "completed" and that were not pushed yet
+    in this run. Anything earlier in the pipeline is left alone: the sandbox answers 500 for those."""
+    ids: set[int] = set()
+    for job in pending.values():
+        item = by_id.get(str(job.get("jobId")))
+        if item is not None and str(item.get("status", "")).lower() == "completed":
+            ids.add(int(job["jobId"]))
+    return sorted(ids - triggered)
+
+
+def trigger_sandbox_delivery(
+    client: TranslationClient,
+    lang: str,
+    pending: dict[str, dict[str, Any]],
+    by_id: dict[str, dict[str, Any]],
+    state: PollState,
+) -> None:
+    """Sandbox only: ask Translated to deliver requests that would otherwise wait at "completed" forever.
+    Failures are printed and the jobs stay pending; the next status round shows what got through. A failing
+    endpoint is counted every round but printed only when its error text changes, so a stuck sandbox does not
+    flood the log."""
+    ids = sandbox_delivery_candidates(pending, by_id, state.delivery_triggered)
+    if not ids:
+        return
+    try:
+        payload = client.sandbox_deliver(ids)
+    except TranslatedApiError as e:
+        state.delivery_errors[lang] += 1
+        if state.last_delivery_error.get(lang) != str(e):
+            state.last_delivery_error[lang] = str(e)
+            print(f"{lang}: WARNING POST sandbox/delivery failed: {e}")
+        return
+    state.delivery_triggered.update(ids)
+    print(f"{lang}: triggered sandbox delivery for {len(ids)} request(s)")
+    for subject, message in delivery_failures(payload):
+        print(f"{lang}: sandbox delivery failed for {subject}: {message}")
+
+
 def poll_round(
     config: TranslationConfig,
     client: TranslationClient,
@@ -1659,7 +1790,7 @@ def poll_round(
     sources: dict[str, str],
     lenient: bool,
     report: RunReport,
-    unknown_states: set[str],
+    state: PollState,
     first_round: bool,
 ) -> int:
     """One /status round for one language. Returns the number of jobs still pending."""
@@ -1694,12 +1825,14 @@ def poll_round(
     outstanding = 0
     for rel, job in list(pending.items()):
         item = by_id.get(str(job.get("jobId")))
-        if handle_job_state(lang, rel, job, item, sources, status, lenient, r, unknown_states):
+        if handle_job_state(lang, rel, job, item, sources, status, lenient, r, state.unknown_states):
             outstanding += 1
             if first_round:
                 print(f"{lang}: waiting  {rel} ({(item or {}).get('status', 'unknown')})")
         else:
             changed = True
+    if config.is_sandbox and outstanding:
+        trigger_sandbox_delivery(client, lang, pending, by_id, state)
     if changed:
         save_status(lang, status)
     return outstanding
@@ -1720,14 +1853,14 @@ def cmd_poll(
     if initial_delay and any(load_status(lang)["pendingJobs"] for lang in langs):
         print(f"waiting {initial_delay:.0f}s before the first status round")
         sleep(initial_delay)
-    unknown_states: set[str] = set()
+    state = PollState()
     round_no = 0
     while True:
         outstanding = 0
         for lang in langs:
             if round_no and time.monotonic() >= deadline:
                 break
-            outstanding += poll_round(config, client, lang, sources, lenient, report, unknown_states, round_no == 0)
+            outstanding += poll_round(config, client, lang, sources, lenient, report, state, round_no == 0)
         remaining = deadline - time.monotonic()
         if outstanding == 0 or remaining <= 0:
             break
@@ -1737,6 +1870,10 @@ def cmd_poll(
         round_no += 1
     for lang in langs:
         report.lang(lang)["still_pending"] = sorted(load_status(lang)["pendingJobs"])
+    for lang, count in sorted(state.delivery_errors.items()):
+        report.notes.append(
+            f"{lang}: POST sandbox/delivery failed {count} time(s); last error: {state.last_delivery_error[lang]}"
+        )
     if report.poll_failed:
         note = (
             f"every POST status call failed ({report.status_rounds_failed} attempt(s)); no delivery could be "
@@ -1754,27 +1891,28 @@ def apply_delivery(
     sources: dict[str, str],
     status: dict[str, Any],
     lenient: bool,
-) -> tuple[list[str], Counter[str]]:
-    """Repair, verify and write one delivered translation. Returns (problems, repaired counts)."""
+) -> tuple[list[str], Counter[str], list[str]]:
+    """Repair, verify and write one delivered translation. Returns (problems, repaired counts, warnings).
+    Problems reject the delivery (unless --lenient); warnings are written and reported."""
     job_hash = str(job.get("sourceHash", ""))
     if status["files"].get(rel, {}).get("manual") is True:
         # Pinned after submission: the hand-maintained file wins, the delivery is not written.
         print(f"{lang}: {rel} is pinned (manual: true); delivery discarded")
-        return ["pinned; delivery discarded"], Counter()
+        return ["pinned; delivery discarded"], Counter(), []
     translated = item.get("translated_content")
     if not isinstance(translated, str) or not translated:
         record_failure(status, rel, "delivered without translated_content", job_hash, jobId=job.get("jobId"))
-        return ["delivered without translated_content"], Counter()
+        return ["delivered without translated_content"], Counter(), []
     source_path = CONTENT_DIR / rel
     if not source_path.exists():
         record_failure(status, rel, "English source no longer exists", job_hash, jobId=job.get("jobId"))
-        return ["English source no longer exists"], Counter()
+        return ["English source no longer exists"], Counter(), []
     stale = job_hash != sources.get(rel)
     try:
-        text, problems, repaired = finalize_translation(rel, job, read_text(source_path), translated)
+        text, problems, repaired, warnings = finalize_translation(rel, job, read_text(source_path), translated)
     except Exception as e:  # noqa: BLE001 - reported to the reviewer, never crashes the run
         record_failure(status, rel, f"could not reinsert translation: {e}", job_hash, jobId=job.get("jobId"))
-        return [f"could not reinsert translation: {e}"], Counter()
+        return [f"could not reinsert translation: {e}"], Counter(), []
     # --lenient only makes sense for raw Markdown/HTML, where the assembled text is still usable.
     # A structured payload (toc names, UI strings) with problems rebuilds to English or nothing.
     structured = job.get("mode") in ("yaml-names", "json-placeholders")
@@ -1786,16 +1924,107 @@ def apply_delivery(
             why = "no usable text" if not text else "structured payload cannot be written partially"
             print(f"{lang}: --lenient ignored for {rel}: {why}")
         record_failure(status, rel, error, job_hash, jobId=job.get("jobId"))
-        return problems, repaired
+        return problems, repaired, warnings
     write_text(target_file(lang, rel), text)
     # A stale job is written at the hash it was translated from; the next submit re-plans it.
     status["files"][rel] = {"sourceHash": job_hash if stale else sources[rel], "status": STATUS_TRANSLATED}
     status["failures"].pop(rel, None)
     if problems:
         print(f"{lang}: written despite problems ({'; '.join(problems)}): {rel}")
+    if warnings:
+        print(f"{lang}: written with warnings ({'; '.join(warnings)}): {rel}")
     if stale:
         print(f"{lang}: source changed while translating {rel}; written at the old hash, will resubmit")
-    return [], repaired
+    return [], repaired, warnings
+
+
+# ---------------------------------------------------------------------------
+# Commands: cancel pending
+# ---------------------------------------------------------------------------
+
+
+def confirmed_cancellations(response: dict[str, Any], requested: list[int]) -> set[int]:
+    """Ids a /translate/cancel response confirms. Without an id_request list the 200 itself confirms the call."""
+    listed = response.get("id_request")
+    if not isinstance(listed, list):
+        return set(requested)
+    return {int(i) for i in listed if isinstance(i, (int, float))} & set(requested)
+
+
+def cancel_requests(client: TranslationClient, ids: list[int]) -> tuple[set[int], dict[int, str]]:
+    """POST /translate/cancel in chunks. Returns (confirmed ids, id -> error for the rest).
+
+    Translated cancels all-or-nothing per call and only while a request is still in an early state (upload,
+    wc raw, ingested, bucketing), so a refused chunk is retried one id at a time: the cancellable requests
+    still go and every other one gets its own error."""
+    confirmed: set[int] = set()
+    errors: dict[int, str] = {}
+
+    def attempt(batch: list[int]) -> str | None:
+        try:
+            confirmed.update(confirmed_cancellations(client.cancel(batch), batch))
+        except TranslatedApiError as e:
+            return str(e)
+        return None
+
+    for start in range(0, len(ids), CANCEL_CHUNK):
+        chunk = ids[start : start + CANCEL_CHUNK]
+        error = attempt(chunk)
+        if error is None:
+            continue
+        for job_id in chunk:
+            single = attempt([job_id]) if len(chunk) > 1 else error
+            if single is not None:
+                errors[job_id] = single
+    for job_id in ids:
+        if job_id not in confirmed and job_id not in errors:
+            errors[job_id] = "not confirmed by the cancel response"
+    return confirmed, errors
+
+
+def cmd_cancel_pending(
+    config: TranslationConfig, client: TranslationClient, langs: list[str], force: bool, report: RunReport
+) -> None:
+    """Cancel every pending request of the active environment and drop its record. `files` and `failures` are
+    untouched; pending jobs from another environment are left alone and reported."""
+    if not config.is_sandbox and not force:
+        raise SystemExit(
+            f"Refusing to cancel pending {config.environment_label} requests without --force: cancelling production "
+            "requests discards paid work."
+        )
+    for lang in langs:
+        status = load_status(lang)
+        r = report.lang(lang)
+        pending = status["pendingJobs"]
+        foreign: Counter[str] = Counter()
+        by_job: dict[int, str] = {}
+        for rel, job in pending.items():
+            env = str(job.get("environment") or "an unrecorded environment")
+            if env != config.environment:
+                foreign[env] += 1
+                continue
+            try:
+                by_job[int(job["jobId"])] = rel
+            except (KeyError, TypeError, ValueError):
+                print(f"{lang}: WARNING invalid jobId {job.get('jobId')!r} for {rel}; left pending")
+        for env, n in sorted(foreign.items()):
+            print(f"{lang}: {n} pending job(s) from {env} left untouched")
+        if not by_job:
+            print(f"{lang}: nothing to cancel")
+            continue
+        confirmed, errors = cancel_requests(client, sorted(by_job))
+        for job_id, error in sorted(errors.items()):
+            report.cancel_failures += 1
+            print(f"{lang}: WARNING could not cancel request {job_id} for {by_job[job_id]}; kept pending: {error}")
+        cancelled = sorted(by_job[job_id] for job_id in confirmed)
+        for rel in cancelled:
+            pending.pop(rel)
+        r["cancelled"].extend(cancelled)
+        if cancelled:
+            save_status(lang, status)
+        print(f"{lang}: cancelled {len(cancelled)} request(s)")
+        for rel in cancelled:
+            print(f"  cancelled  {rel}")
 
 
 # ---------------------------------------------------------------------------
@@ -1893,7 +2122,7 @@ FIXTURE_HTML = '<html>\n<body>\n<a href="page.html">Go</a>\n<img src="img/a.png"
 
 def fin(
     source: str, delivered: str, rel: str = "x.md", check_identity: bool = False, repair: bool = True
-) -> tuple[str, list[str], Counter[str]]:
+) -> tuple[str, list[str], Counter[str], list[str]]:
     _, _, info = prepare_payload(rel, source)
     return finalize_translation(rel, info, source, delivered, repair=repair, check_identity=check_identity)
 
@@ -1906,12 +2135,12 @@ def selftest_corpus(t: SelfTest, config: TranslationConfig) -> None:
         text = read_text(CONTENT_DIR / rel)
         content, _, info = prepare_payload(rel, text)
         try:
-            out, problems, repaired = finalize_translation(rel, info, text, content, check_identity=False)
+            out, problems, repaired, warnings = finalize_translation(rel, info, text, content, check_identity=False)
         except Exception as e:  # noqa: BLE001
             bad.append(f"{rel}: raised {e}")
             continue
-        if out != text or problems or repaired:
-            bad.append(f"{rel}: {'differs' if out != text else ''} {problems} {dict(repaired)}")
+        if out != text or problems or repaired or warnings:
+            bad.append(f"{rel}: {'differs' if out != text else ''} {problems} {dict(repaired)} {warnings}")
     t.check(f"{len(sources)} scoped sources round-trip byte-for-byte with zero problems", not bad, "; ".join(bad[:5]))
     passthrough = get_passthrough_sources(config, sources)
     t.check("passthrough files are outside the translation scope", not set(passthrough) & set(sources))
@@ -1920,41 +2149,68 @@ def selftest_corpus(t: SelfTest, config: TranslationConfig) -> None:
 def selftest_fixtures(t: SelfTest) -> None:
     t.section("markdown repair-then-verify")
     identity = FIXTURE_MD.lstrip(BOM)
-    out, problems, repaired = fin(FIXTURE_MD, identity)
+    out, problems, repaired, _ = fin(FIXTURE_MD, identity)
     t.check(
         "identity delivery reproduces the source (BOM restored)", out == FIXTURE_MD and not problems and not repaired
     )
-    _, problems, _ = fin(FIXTURE_MD, identity.replace("## Next steps\n", ""))
+    _, problems, _, _ = fin(FIXTURE_MD, identity.replace("## Next steps\n", ""))
     t.check("dropped heading -> problem", any("headings" in p for p in problems), str(problems))
-    out, problems, repaired = fin(FIXTURE_MD, identity.replace("(guide.md)", "(guia.md)"))
+    out, problems, repaired, _ = fin(FIXTURE_MD, identity.replace("(guide.md)", "(guia.md)"))
     t.check(
         "changed link target (equal count) -> repaired", out == FIXTURE_MD and not problems and repaired["links"] == 1
     )
-    _, problems, _ = fin(FIXTURE_MD, identity + "\n[more](extra.md)\n")
+    _, problems, _, _ = fin(FIXTURE_MD, identity + "\n[more](extra.md)\n")
     t.check("extra link -> problem", any("link targets" in p for p in problems), str(problems))
-    _, problems, _ = fin(FIXTURE_MD, identity.replace("var x = 1;\n```\n", "var x = 1;\n"))
+    _, problems, _, _ = fin(FIXTURE_MD, identity.replace("var x = 1;\n```\n", "var x = 1;\n"))
     t.check("missing fence line -> problem", any("code fences" in p for p in problems), str(problems))
-    out, problems, repaired = fin(FIXTURE_MD, identity.replace("// Assembly references", "// Las referencias"))
+    out, problems, repaired, _ = fin(FIXTURE_MD, identity.replace("// Assembly references", "// Las referencias"))
     t.check(
         "translated fenced comment -> restored to English",
         out == FIXTURE_MD and not problems and repaired["fences"] == 1,
     )
-    out, problems, repaired = fin(FIXTURE_MD, identity.replace("`View → Options`", "`Ver → Opciones`"))
+    out, problems, repaired, _ = fin(FIXTURE_MD, identity.replace("`View → Options`", "`Ver → Opciones`"))
     t.check(
         "changed inline code (equal count) -> repaired",
         out == FIXTURE_MD and not problems and repaired["inline code"] == 1,
     )
-    _, problems, _ = fin(FIXTURE_MD, identity.replace("`Selected.Tables`", "Selected.Tables"))
-    t.check("dropped inline code span -> problem", any("inline code" in p for p in problems), str(problems))
-    out, problems, repaired = fin(FIXTURE_MD, identity.replace("[!NOTE]", "[!NOTA]"))
+    dropped_span = identity.replace("`Selected.Tables`", "Selected.Tables")
+    out, problems, repaired, warnings = fin(FIXTURE_MD, dropped_span)
+    t.check(
+        "dropped inline code span -> warning, not a problem; delivered text kept",
+        not problems
+        and not repaired
+        and warnings == ["inline code spans 2 -> 1 (missing ['`Selected.Tables`'], added [])"]
+        and out == BOM + dropped_span,
+        f"{problems} {warnings}",
+    )
+    extra_span = identity.replace("Open `View", "Open `true` `View")
+    out, problems, _, warnings = fin(FIXTURE_MD, extra_span)
+    t.check(
+        "added inline code span -> warning, not a problem; delivered text kept",
+        not problems
+        and warnings == ["inline code spans 2 -> 3 (missing [], added ['`true`'])"]
+        and out == BOM + extra_span,
+        f"{problems} {warnings}",
+    )
+    out, problems, repaired, warnings = fin(FIXTURE_MD, dropped_span.replace("(guide.md)", "(guia.md)"))
+    t.check(
+        "inline-code drift does not block the other repairs (link target still restored)",
+        not problems and len(warnings) == 1 and repaired["links"] == 1 and out == BOM + dropped_span,
+        f"{problems} {warnings} {dict(repaired)}",
+    )
+    _, problems, _, warnings = fin(FIXTURE_MD, dropped_span, repair=False)
+    t.check(
+        "inline-code drift is a warning in verify-only mode too", not problems and len(warnings) == 1, str(problems)
+    )
+    out, problems, repaired, _ = fin(FIXTURE_MD, identity.replace("[!NOTE]", "[!NOTA]"))
     t.check(
         "[!NOTE] -> [!NOTA] (equal count) -> repaired", out == FIXTURE_MD and not problems and repaired["markers"] == 1
     )
-    out, problems, _ = fin(FIXTURE_MD, identity.replace("[!NOTE]", "[!note]"))
+    out, problems, _, _ = fin(FIXTURE_MD, identity.replace("[!NOTE]", "[!note]"))
     t.check("[!note] lowercase -> repaired to [!NOTE]", out == FIXTURE_MD and not problems)
-    _, problems, _ = fin(FIXTURE_MD, identity.replace("> [!NOTE]\n", "> NOTE\n"))
+    _, problems, _, _ = fin(FIXTURE_MD, identity.replace("> [!NOTE]\n", "> NOTE\n"))
     t.check("dropped alert marker -> problem", any("markers" in p for p in problems), str(problems))
-    out, problems, _ = fin(
+    out, problems, _, _ = fin(
         FIXTURE_MD,
         identity.replace("uid: getting-started\nauthor: Nedas", "uid: empezar\nauthor: Pedro").replace(
             "title: Getting started", "title: Empezar"
@@ -1964,37 +2220,37 @@ def selftest_fixtures(t: SelfTest) -> None:
         "uid/author rewritten -> restored from English, title kept",
         "uid: getting-started\nauthor: Nedas" in out and "title: Empezar\n" in out and not problems,
     )
-    out, problems, _ = fin(FIXTURE_MD, identity.replace("title: Getting started", "title: Guía: introducción"))
+    out, problems, _, _ = fin(FIXTURE_MD, identity.replace("title: Getting started", "title: Guía: introducción"))
     t.check("title gaining ': ' -> quoted", 'title: "Guía: introducción"\n' in out and not problems, out[:80])
-    out, _, _ = fin(FIXTURE_MD, identity.replace("title: Getting started", "title: Scripts de C#"))
+    out, _, _, _ = fin(FIXTURE_MD, identity.replace("title: Getting started", "title: Scripts de C#"))
     t.check("title with '#' -> quoted", 'title: "Scripts de C#"\n' in out)
-    _, problems, _ = fin(FIXTURE_MD, identity.replace("description: Intro to TE3\n", ""))
+    _, problems, _, _ = fin(FIXTURE_MD, identity.replace("description: Intro to TE3\n", ""))
     t.check("description dropped from frontmatter -> problem", any("description" in p for p in problems), str(problems))
-    _, problems, _ = fin(FIXTURE_MD, identity.split("---\n", 2)[2])
+    _, problems, _, _ = fin(FIXTURE_MD, identity.split("---\n", 2)[2])
     t.check("frontmatter dropped -> problem", any("frontmatter missing" in p for p in problems), str(problems))
-    out, problems, _ = fin(FIXTURE_MD, "\n" + identity)
+    out, problems, _, _ = fin(FIXTURE_MD, "\n" + identity)
     t.check("blank line before frontmatter -> tolerated", out == FIXTURE_MD and not problems)
-    out, problems, _ = fin(FIXTURE_MD, identity)
+    out, problems, _, _ = fin(FIXTURE_MD, identity)
     t.check("BOM stripped by translator -> restored", out.startswith(BOM))
     crlf_src = FIXTURE_MD.replace("\n", "\r\n")
-    out, problems, _ = fin(crlf_src, identity)
+    out, problems, _, _ = fin(crlf_src, identity)
     t.check("LF delivery for a CRLF source -> CRLF restored", out == crlf_src and not problems)
-    out, problems, _ = fin(FIXTURE_MD, identity.replace("\n", "\r\n"))
+    out, problems, _, _ = fin(FIXTURE_MD, identity.replace("\n", "\r\n"))
     t.check("CRLF delivery for an LF source -> LF", out == FIXTURE_MD and not problems)
-    out, problems, _ = fin(FIXTURE_MD, identity.rstrip("\n"))
+    out, problems, _, _ = fin(FIXTURE_MD, identity.rstrip("\n"))
     t.check("trailing newline restored", out == FIXTURE_MD and not problems)
     long_src = "# T\n\n" + ("The quick brown fox jumps over the lazy dog. " * 8) + "\n"
-    _, problems, _ = fin(long_src, long_src, check_identity=True)
+    _, problems, _, _ = fin(long_src, long_src, check_identity=True)
     t.check(
         "delivered body identical to source (>200 letters) -> problem",
         any("identical" in p for p in problems),
         str(problems),
     )
-    _, problems, _ = fin(long_src, long_src.replace("quick", "rápido"), check_identity=True)
+    _, problems, _, _ = fin(long_src, long_src.replace("quick", "rápido"), check_identity=True)
     t.check("translated long body -> no identity problem", not problems, str(problems))
-    _, problems, _ = fin(FIXTURE_MD, identity, check_identity=True)
+    _, problems, _, _ = fin(FIXTURE_MD, identity, check_identity=True)
     t.check("short identical body (<200 letters) -> accepted", not problems, str(problems))
-    _, problems, _ = fin(FIXTURE_MD, identity.replace("// Assembly references", "// Las referencias"), repair=False)
+    _, problems, _, _ = fin(FIXTURE_MD, identity.replace("// Assembly references", "// Las referencias"), repair=False)
     t.check(
         "verify-only mode reports fenced differences instead of repairing",
         any("fenced code differs" in p for p in problems),
@@ -2007,13 +2263,13 @@ def selftest_fixtures(t: SelfTest) -> None:
         "{name} encoded as {{name}} in the payload",
         "{{name}}" in payload and "{{count}}" in payload and "{name}" not in payload.replace("{{name}}", ""),
     )
-    out, problems, _ = finalize_translation("_ui-strings.json", info, FIXTURE_JSON, payload)
+    out, problems, _, _ = finalize_translation("_ui-strings.json", info, FIXTURE_JSON, payload)
     t.check("json identity round-trip", out == FIXTURE_JSON and not problems, str(problems))
-    _, problems, _ = finalize_translation(
+    _, problems, _, _ = finalize_translation(
         "_ui-strings.json", info, FIXTURE_JSON, '{\n  "greeting": "Hola {{name}}, {{count}} items"\n}\n'
     )
     t.check("json key dropped -> problem", any("keys differ" in p for p in problems), str(problems))
-    _, problems, _ = finalize_translation(
+    _, problems, _, _ = finalize_translation(
         "_ui-strings.json", info, FIXTURE_JSON, payload.replace("{{count}}", "{{recuento}}")
     )
     t.check(
@@ -2021,13 +2277,13 @@ def selftest_fixtures(t: SelfTest) -> None:
         any("placeholders" in p for p in problems),
         str(problems),
     )
-    _, problems, _ = finalize_translation(
+    _, problems, _, _ = finalize_translation(
         "_ui-strings.json", info, FIXTURE_JSON, payload.replace("{{count}}", "{count}")
     )
     t.check("single-brace placeholder returned unencoded -> still accepted", not problems, str(problems))
-    out, problems, _ = finalize_translation("_ui-strings.json", info, BOM + FIXTURE_JSON, BOM + payload)
+    out, problems, _, _ = finalize_translation("_ui-strings.json", info, BOM + FIXTURE_JSON, BOM + payload)
     t.check("json BOM handling", out == BOM + FIXTURE_JSON and not problems)
-    _, problems, _ = finalize_translation("_ui-strings.json", info, FIXTURE_JSON, "not json")
+    _, problems, _, _ = finalize_translation("_ui-strings.json", info, FIXTURE_JSON, "not json")
     t.check("unparseable json -> problem", any("does not parse" in p for p in problems))
 
     t.section("toc.yml (yaml-names)")
@@ -2038,40 +2294,40 @@ def selftest_fixtures(t: SelfTest) -> None:
         set(names.values()) == {"Home", "Getting started", "Install"}
         and all(YAML_NAME_KEY_RE.fullmatch(k) for k in names),
     )
-    out, problems, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, payload)
+    out, problems, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, payload)
     t.check("toc identity round-trip (BOM kept)", out == FIXTURE_TOC and not problems, str(problems))
     crlf_toc = FIXTURE_TOC.replace("\n", "\r\n")
-    out, problems, _ = finalize_translation("toc.yml", info, crlf_toc, payload)
+    out, problems, _, _ = finalize_translation("toc.yml", info, crlf_toc, payload)
     t.check("toc CRLF source round-trip", out == crlf_toc and not problems)
-    out, problems, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, BOM + payload)
+    out, problems, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, BOM + payload)
     t.check("toc payload with BOM -> parsed", out == FIXTURE_TOC and not problems, str(problems))
     translated = dict(names)
     key_home = next(k for k, v in names.items() if v == "Home")
     translated[key_home] = "Inicio: página"
-    out, problems, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(translated))
+    out, problems, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(translated))
     t.check("toc name gaining ': ' -> quoted", '- name: "Inicio: página"\n' in out and not problems, out)
     translated[key_home] = "true"
-    out, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(translated))
+    out, _, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(translated))
     t.check("toc name 'true' -> quoted", '- name: "true"\n' in out)
     translated[key_home] = "- Inicio"
-    out, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(translated))
+    out, _, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(translated))
     t.check("toc name starting with '-' -> quoted", '- name: "- Inicio"\n' in out)
     translated[key_home] = "Inicio"
-    _, problems, _ = finalize_translation(
+    _, problems, _, _ = finalize_translation(
         "toc.yml", info, FIXTURE_TOC, json.dumps({k: v for k, v in translated.items() if k != key_home})
     )
     t.check("toc payload missing a key -> problem", any("missing" in p for p in problems), str(problems))
-    _, problems, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps({**translated, "n99": "Extra"}))
+    _, problems, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps({**translated, "n99": "Extra"}))
     t.check("toc payload with an unexpected key -> problem", any("unexpected" in p for p in problems), str(problems))
-    _, problems, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps({**translated, "x": "Bad"}))
+    _, problems, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps({**translated, "x": "Bad"}))
     t.check("toc payload with a malformed key -> problem", any("malformed" in p for p in problems), str(problems))
-    _, problems, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(["Home"]))
+    _, problems, _, _ = finalize_translation("toc.yml", info, FIXTURE_TOC, json.dumps(["Home"]))
     t.check(
         "toc payload not a dict -> problem (no exception)",
         any("not a JSON object" in p for p in problems),
         str(problems),
     )
-    _, problems, _ = finalize_translation(
+    _, problems, _, _ = finalize_translation(
         "toc.yml", info, FIXTURE_TOC, json.dumps({**translated, key_home: "Ini\ncio"})
     )
     t.check("toc name with a line break -> problem", any("line breaks" in p for p in problems), str(problems))
@@ -2094,20 +2350,20 @@ def selftest_fixtures(t: SelfTest) -> None:
 
     t.section("html")
     payload, _, info = prepare_payload("404.html", FIXTURE_HTML)
-    out, problems, _ = finalize_translation("404.html", info, FIXTURE_HTML, payload)
+    out, problems, _, _ = finalize_translation("404.html", info, FIXTURE_HTML, payload)
     t.check("html identity round-trip", out == FIXTURE_HTML and not problems)
-    out, problems, repaired = finalize_translation(
+    out, problems, repaired, _ = finalize_translation(
         "404.html", info, FIXTURE_HTML, payload.replace("page.html", "pagina.html")
     )
     t.check("changed href (equal count) -> repaired", out == FIXTURE_HTML and not problems and repaired["links"] == 1)
-    _, problems, _ = finalize_translation("404.html", info, FIXTURE_HTML, payload.replace("<p>Text</p>\n", "Text\n"))
+    _, problems, _, _ = finalize_translation("404.html", info, FIXTURE_HTML, payload.replace("<p>Text</p>\n", "Text\n"))
     t.check("dropped tag -> problem", any("tag counts" in p for p in problems), str(problems))
-    _, problems, _ = finalize_translation(
+    _, problems, _, _ = finalize_translation(
         "404.html", info, FIXTURE_HTML, payload.replace("<p>Text</p>", '<p><a href="x.html">Text</a></p>')
     )
     t.check("extra href -> problem", any("href/src" in p for p in problems), str(problems))
     crlf_html = FIXTURE_HTML.replace("\n", "\r\n")
-    out, problems, _ = finalize_translation("404.html", info, crlf_html, payload)
+    out, problems, _, _ = finalize_translation("404.html", info, crlf_html, payload)
     t.check("html CRLF source restored", out == crlf_html and not problems)
 
     t.section("configuration and client helpers")
@@ -2142,11 +2398,14 @@ def selftest_fixtures(t: SelfTest) -> None:
         TranslationConfig(build_config, "production", "enterprise").service_type == "enterprise",
     )
     sandbox = TranslationConfig(build_config, "sandbox")
+    sandbox_tier = build_config["translation"]["environments"]["sandbox"]["serviceType"]
     t.check(
-        "sandbox environment resolved",
+        "sandbox environment resolved (service type taken from build-config.json, not hard-coded)",
         sandbox.is_sandbox
-        and sandbox.service_type == "premium"
+        and bool(sandbox_tier)
+        and sandbox.service_type == sandbox_tier
         and sandbox.base_url == "https://api.sandbox.translated.com/v2/",
+        f"service type {sandbox.service_type!r}, config {sandbox_tier!r}",
     )
     t.check(
         "is_sandbox is the environment name, not a URL substring",
@@ -2175,7 +2434,8 @@ def selftest_fixtures(t: SelfTest) -> None:
     )
     check_option_combinations(parser.parse_args(["--baseline", "--repair-existing", "--overwrite-baseline"]))
     t.check("--baseline --repair-existing accepted", True)
-    t.check("--baseline-ref help has no provider name", "Crowdin" not in parser.format_help())
+    help_text = " ".join(parser.format_help().split())
+    t.check("--baseline-ref help names no provider", "previous translation provider" in help_text)
 
     t.section("git ref resolution (monkeypatched git)")
 
@@ -2198,7 +2458,9 @@ def selftest_fixtures(t: SelfTest) -> None:
         str(seen),
     )
     t.expect_exit(
-        "unknown --baseline-ref -> SystemExit", lambda: resolve_git_ref("bogus", git_missing), "is not a commit in this clone"
+        "unknown --baseline-ref -> SystemExit",
+        lambda: resolve_git_ref("bogus", git_missing),
+        "is not a commit in this clone",
     )
     if shutil.which("git"):
         t.expect_exit(
@@ -2224,8 +2486,13 @@ class FakeTranslatedClient:
         self.states: dict[str, str] = {}
         self.deliveries: dict[str, str] = {}
         self.cancelled: list[int] = []
+        self.cancel_calls: list[list[int]] = []
+        self.uncancellable: set[str] = set()  # id_content past the cancellable states: the whole call is refused
         self.status_calls: list[list[int]] = []
         self.raise_on_status = False
+        self.delivery_calls: list[list[int]] = []
+        self.fail_delivery: dict[str, str] = {}  # id_content -> error_message answered by /sandbox/delivery
+        self.delivery_error: str | None = None  # when set, sandbox_deliver raises TranslatedApiError(...)
 
     def translate(self, orders: list[dict[str, Any]]) -> list[dict[str, Any]]:
         self.translate_calls += 1
@@ -2285,11 +2552,52 @@ class FakeTranslatedClient:
         return items
 
     def cancel(self, id_requests: list[int]) -> dict[str, Any]:
+        self.cancel_calls.append(list(id_requests))
+        late = [i for i in id_requests if self.jobs.get(i, {}).get("id_content") in self.uncancellable]
+        if late:
+            raise TranslatedApiError(
+                f"POST translate/cancel failed with 422: NOT_CANCELLABLE; request {late[0]} is not cancellable",
+                422,
+                {"code": "NOT_CANCELLABLE"},
+            )
         self.cancelled.extend(id_requests)
         return {"id_request": id_requests, "uuid_key": [], "status": "cancelled", "message": "ok"}
 
+    def sandbox_deliver(self, id_requests: list[int]) -> Any:
+        # Answers in the flat request shape; only "completed" requests move on to "delivered".
+        self.delivery_calls.append(list(id_requests))
+        if self.delivery_error is not None:
+            raise TranslatedApiError(self.delivery_error)
+        items: list[dict[str, Any]] = []
+        for job_id in id_requests:
+            job = self.jobs.get(job_id)
+            error: str | None
+            if job is None:
+                error = "request not found"
+            else:
+                id_content = job["id_content"]
+                error = self.fail_delivery.get(id_content)
+                if error is None and self.states.get(id_content) != "completed":
+                    error = f"request is {self.states.get(id_content, 'delivered')}, not completed"
+                if error is None:
+                    self.states[id_content] = "delivered"
+            items.append(
+                {
+                    "id_request": job_id,
+                    "delivery_status": "failed" if error else "succeeded",
+                    "should_be_notified": False,
+                    "has_notification_channel": False,
+                    "error_message": error,
+                    "status_code": 400 if error else None,
+                }
+            )
+        return items
+
     def service_type_names(self) -> list[dict[str, Any]]:
-        return [{"name": "premium", "human_enabled": True, "machine_enabled": False}]
+        return [
+            {"name": "economy", "human_enabled": False, "machine_enabled": True},
+            {"name": "premium", "human_enabled": True, "machine_enabled": False},
+        ]
 
     def languages(self) -> list[dict[str, Any]]:
         return [
@@ -2310,6 +2618,9 @@ MINI_FILES: dict[str, str] = {
 CODE_MD = "# Code\n\n```csharp\n// Assembly references go first\nvar x = 1;\n```\n"
 CODE_MD_TRANSLATED_FENCE = CODE_MD.replace("// Assembly references go first", "// Las referencias van primero")
 OLD_INDEX_MD = BOM + "---\ntitle: Home\n---\n# Home\n\nOlder intro.\n"
+INLINE_MD = "# Inline\n\nSet `enabled` to true.\n"
+INLINE_MD_EXTRA_SPAN = INLINE_MD.replace("Set `enabled` to true.", "Establece `enabled` en `true`.")
+INLINE_WARNING = "inline code spans 1 -> 2 (missing [], added ['`true`'])"
 
 
 def mini_build_config(batch_size: int = 200, max_files: int = 3) -> dict[str, Any]:
@@ -2317,7 +2628,7 @@ def mini_build_config(batch_size: int = 200, max_files: int = 3) -> dict[str, An
         "sharedDirectories": {"directories": ["assets", "api"]},
         "translation": {
             "environments": {
-                "sandbox": {"baseUrl": "https://api.sandbox.translated.com", "serviceType": "premium"},
+                "sandbox": {"baseUrl": "https://api.sandbox.translated.com", "serviceType": "economy"},
                 "production": {"baseUrl": "https://api.translated.com/v2/", "serviceType": None},
             },
             "sourceLocale": "en-US",
@@ -2373,9 +2684,22 @@ class Harness:
             self.report,
         )
 
-    def poll(self, lenient: bool = False, config: TranslationConfig | None = None) -> None:
+    def poll(
+        self,
+        lenient: bool = False,
+        config: TranslationConfig | None = None,
+        wait: float = 0,
+        sleep: Callable[[float], None] | None = None,
+    ) -> None:
         cmd_poll(
-            config or self.config, self.client, ["es"], self.sources, 0, lenient, self.report, sleep=lambda _s: None
+            config or self.config,
+            self.client,
+            ["es"],
+            self.sources,
+            wait,
+            lenient,
+            self.report,
+            sleep=sleep or (lambda _s: None),
         )
 
     def plan(self, options: PlanOptions | None = None) -> LanguagePlan:
@@ -2551,7 +2875,9 @@ def selftest_fake_client(t: SelfTest) -> None:
             and status["files"]["guide.md"].get("manual") is True,
             str(status),
         )
-        t.check("other deliveries in the same round written", status["files"]["index.md"]["status"] == STATUS_TRANSLATED)
+        t.check(
+            "other deliveries in the same round written", status["files"]["index.md"]["status"] == STATUS_TRANSLATED
+        )
 
     t.section("fake client: poll robustness")
     with mini_repo():
@@ -2605,6 +2931,7 @@ def selftest_fake_client(t: SelfTest) -> None:
             and "cancelled" in status["failures"]["guide.md"]["error"],
         )
         t.check("status 'completed' is still waiting", "index.md" in status["pendingJobs"])
+        t.check("status 'completed' in production never calls /sandbox/delivery", not h.client.delivery_calls)
         t.check("unknown status is treated as waiting", "toc.yml" in status["pendingJobs"])
         t.check(
             "status 'invoiced' counts as delivered",
@@ -2771,16 +3098,52 @@ def selftest_fake_client(t: SelfTest) -> None:
         )
         t.check("dropped jobs made no /status call", not h.client.status_calls)
 
+    t.section("fake client: inline-code count drift is written with a warning")
+    with mini_repo():
+        h = prod_harness()
+        h.submit()
+        drifted = MINI_FILES["guide.md"].replace("Note text.", "Texto de `nota`.")
+        h.client.deliveries["es/guide.md"] = drifted
+        out = captured(h.poll)
+        status = load_status("es")
+        r = h.report.lang("es")
+        warning = "inline code spans 0 -> 1 (missing [], added ['`nota`'])"
+        t.check(
+            "delivery with an extra backtick pair is written as delivered and recorded translated",
+            read_text(target_file("es", "guide.md")) == drifted
+            and status["files"]["guide.md"] == {"sourceHash": h.sources["guide.md"], "status": STATUS_TRANSLATED}
+            and "guide.md" not in status["failures"]
+            and "guide.md" in r["delivered"]
+            and not r["failed"],
+            out,
+        )
+        t.check(
+            "warning printed and collected per language in the report",
+            f"es: written with warnings ({warning}): guide.md" in out and r["warnings"] == [("guide.md", warning)],
+            out + str(r["warnings"]),
+        )
+        md = h.report.to_markdown(h.config)
+        t.check(
+            "report has a Warnings column and a 'written with warnings' section",
+            "| Warnings |" in md
+            and "| es | 4 | 4 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |" in md
+            and "### es: written with warnings" in md
+            and f"- `guide.md` — {warning}" in md,
+            md,
+        )
+
     t.section("baseline and dump-orders")
     with mini_repo() as tmp:
         cfg = TranslationConfig(mini_build_config())
         write_text(CONTENT_DIR / "code.md", CODE_MD)
+        write_text(CONTENT_DIR / "inline.md", INLINE_MD)
         sources = get_scoped_sources(cfg)
         passthrough = get_passthrough_sources(cfg, sources)
         write_text(target_file("es", "index.md"), MINI_FILES["index.md"].replace("title: Home", "title: Inicio"))
         write_text(target_file("es", "guide.md"), MINI_FILES["guide.md"].replace("# Guide\n\n", ""))
         write_text(target_file("es", "toc.yml"), MINI_FILES["toc.yml"].replace("Home", "Inicio"))
         write_text(target_file("es", "code.md"), CODE_MD_TRANSLATED_FENCE)
+        write_text(target_file("es", "inline.md"), INLINE_MD_EXTRA_SPAN)
         status = load_status("es")
         status["files"]["other/thing.yaml"] = {"sourceHash": "sha256:y", "status": STATUS_TRANSLATED}
         status["files"]["whats-new/1-0-0.html"] = {"sourceHash": "sha256:z", "status": STATUS_COPIED}
@@ -2819,6 +3182,14 @@ def selftest_fake_client(t: SelfTest) -> None:
             and "1 would repair" in out,
             out,
         )
+        t.check(
+            "baseline: inline-code count drift is accepted as translated with a warning, file unchanged",
+            status["files"]["inline.md"] == {"sourceHash": sources["inline.md"], "status": STATUS_TRANSLATED}
+            and read_text(target_file("es", "inline.md")) == INLINE_MD_EXTRA_SPAN
+            and f"warning       inline.md: {INLINE_WARNING}" in out
+            and "1 accepted with inline-code warnings" in out,
+            out,
+        )
         t.expect_exit(
             "baseline refuses to overwrite without --overwrite-baseline",
             lambda: cmd_baseline(["es"], sources, passthrough, None, overwrite=False),
@@ -2843,6 +3214,11 @@ def selftest_fake_client(t: SelfTest) -> None:
             "baseline --repair-existing: heading mismatch still untranslated, file untouched",
             status["files"]["guide.md"] == {"sourceHash": "", "status": STATUS_UNTRANSLATED}
             and read_text(target_file("es", "guide.md")) == MINI_FILES["guide.md"].replace("# Guide\n\n", ""),
+        )
+        t.check(
+            "baseline --repair-existing: inline-code drift still accepted, nothing rewritten",
+            status["files"]["inline.md"]["status"] == STATUS_TRANSLATED
+            and read_text(target_file("es", "inline.md")) == INLINE_MD_EXTRA_SPAN,
         )
         crlf_target = target_file("es", "code.md")
         write_text(crlf_target, CODE_MD_TRANSLATED_FENCE.replace("\n", "\r\n"))
@@ -2927,11 +3303,307 @@ def selftest_fake_client(t: SelfTest) -> None:
         )
 
 
+def sandbox_harness() -> Harness:
+    return Harness(TranslationConfig(mini_build_config(), "sandbox"))
+
+
+def selftest_sandbox_delivery(t: SelfTest) -> None:
+    t.section("sandbox delivery: response parsing, candidate selection, no retry")
+    job_shape = [
+        {
+            "id_job": 7,
+            "delivery_status": "failed",
+            "requests": [
+                {"id_request": 1, "delivery_status": "succeeded", "error_message": None},
+                {"id_request": 2, "delivery_status": "failed", "error_message": "callback refused"},
+            ],
+            "error_message": "partial",
+            "error_body": None,
+        },
+        {"id_job": 8, "delivery_status": "failed", "requests": [], "error_message": None, "error_body": "boom"},
+        {"id_job": 9, "delivery_status": "succeeded", "requests": [], "error_message": None, "error_body": None},
+    ]
+    t.check(
+        "delivery_output (job shape): nested request failure and request-less job failure reported",
+        delivery_failures(job_shape) == [("request 2", "callback refused"), ("job 8", "boom")],
+        str(delivery_failures(job_shape)),
+    )
+    flat_shape = [
+        {"id_request": 3, "delivery_status": "succeeded", "error_message": None, "status_code": None},
+        {"id_request": 4, "delivery_status": "failed", "error_message": "not completed", "status_code": 400},
+    ]
+    t.check(
+        "delivery_output (request shape); unexpected bodies report nothing",
+        delivery_failures(flat_shape) == [("request 4", "not completed")]
+        and delivery_failures({"message": "ok"}) == []
+        and delivery_failures(None) == []
+        and delivery_failures([{"unexpected": True}]) == [],
+    )
+    pending: dict[str, dict[str, Any]] = {
+        "a.md": {"jobId": 1},
+        "b.md": {"jobId": 2},
+        "c.md": {"jobId": 3},
+        "d.md": {"jobId": 4},
+        "e.md": {"jobId": 5},
+    }
+    by_id: dict[str, dict[str, Any]] = {
+        "1": {"status": "completed"},
+        "2": {"status": "in progress"},
+        "3": {"status": "analyzing"},
+        "4": {"status": "Completed"},
+    }
+    t.check(
+        "candidates: exactly 'completed' (any case), never earlier states or ids unknown to /status, never twice",
+        sandbox_delivery_candidates(pending, by_id, set()) == [1, 4]
+        and sandbox_delivery_candidates(pending, by_id, {1}) == [4]
+        and sandbox_delivery_candidates(pending, by_id, {1, 4}) == [],
+        str(sandbox_delivery_candidates(pending, by_id, set())),
+    )
+    http_calls: list[str] = []
+
+    def opener_500(req: urllib.request.Request, timeout: float | None = None) -> Any:
+        http_calls.append(req.full_url)
+        body = b"Internal server error."
+        raise urllib.error.HTTPError(
+            req.full_url, 500, "Internal server error.", email.message.Message(), io.BytesIO(body)
+        )
+
+    client = TranslatedClient("https://sandbox.invalid/v2/", "key", sleep=lambda _s: None, opener=opener_500)
+    delivery_error = ""
+    try:
+        client.sandbox_deliver([1, 2])
+    except TranslatedApiError as e:
+        delivery_error = str(e)
+    delivery_http_calls = len(http_calls)
+    http_calls.clear()
+    with suppress(TranslatedApiError):
+        client.cancel([1])
+    t.check(
+        "POST sandbox/delivery is sent once on a 500 (no retries) while other endpoints still retry",
+        delivery_http_calls == 1
+        and len(http_calls) == 4
+        and "500: Internal server error." in delivery_error
+        and delivery_error.startswith("POST sandbox/delivery failed"),
+        f"{delivery_http_calls} delivery call(s), {len(http_calls)} cancel call(s): {delivery_error}",
+    )
+
+    t.section("fake client: sandbox delivery of completed requests")
+    with mini_repo():
+        h = sandbox_harness()
+        for rel in h.sources:
+            h.client.states[f"es/{rel}"] = "completed"
+        h.submit()
+        ids = sorted(int(j["jobId"]) for j in load_status("es")["pendingJobs"].values())
+        out = captured(lambda: h.poll(wait=1))
+        status = load_status("es")
+        t.check(
+            "round 1 triggers one delivery call with exactly the completed request ids",
+            h.client.delivery_calls == [ids] and "es: triggered sandbox delivery for 4 request(s)" in out,
+            out + str(h.client.delivery_calls),
+        )
+        t.check(
+            "round 2 finds them delivered: files written, nothing pending, two status rounds, run not flagged",
+            not status["pendingJobs"]
+            and all(status["files"][rel]["status"] == STATUS_TRANSLATED for rel in h.sources)
+            and len(h.client.status_calls) == 2
+            and not h.report.failed,
+            str(status),
+        )
+
+    with mini_repo():
+        h = sandbox_harness()
+        h.client.states["es/guide.md"] = "completed"
+        h.client.fail_delivery["es/guide.md"] = "callback refused"
+        h.client.states["es/index.md"] = "analyzing"
+        h.client.states["es/toc.yml"] = "in progress"
+        h.submit()
+        status = load_status("es")
+        status["pendingJobs"]["index.md"]["submittedAt"] = (datetime.now(UTC) - timedelta(hours=1)).strftime(
+            TIMESTAMP_FORMAT
+        )
+        save_status("es", status)
+        guide_id = int(status["pendingJobs"]["guide.md"]["jobId"])
+        index_id = int(status["pendingJobs"]["index.md"]["jobId"])
+        snapshots: list[dict[str, Any]] = []
+
+        def between_rounds(_delay: float) -> None:
+            snapshots.append(load_status("es"))
+            if len(snapshots) == 2:  # two rounds saw the same states; now let everything through
+                h.client.fail_delivery.clear()
+                for id_content in ("es/guide.md", "es/index.md", "es/toc.yml"):
+                    h.client.states[id_content] = "delivered"
+
+        out = captured(lambda: h.poll(wait=1, sleep=between_rounds))
+        status = load_status("es")
+        t.check(
+            "failed delivery entry: warning printed, job kept pending, no failure recorded, others delivered",
+            f"es: sandbox delivery failed for request {guide_id}: callback refused" in out
+            and "guide.md" in snapshots[0]["pendingJobs"]
+            and "guide.md" not in snapshots[0]["failures"]
+            and snapshots[0]["files"]["_ui-strings.json"]["status"] == STATUS_TRANSLATED,
+            out,
+        )
+        t.check(
+            "only completed requests are pushed: an hour-old 'analyzing' job is not",
+            h.client.delivery_calls == [[guide_id]] and f"request {index_id}" not in out,
+            out + str(h.client.delivery_calls),
+        )
+        t.check(
+            "no second trigger for the same request within the run",
+            out.count("triggered sandbox delivery") == 1 and len(h.client.delivery_calls) == 1,
+            out,
+        )
+        t.check(
+            "run completes once the sandbox delivers: nothing pending, all translated, three status rounds",
+            not status["pendingJobs"]
+            and not status["failures"]
+            and all(status["files"][rel]["status"] == STATUS_TRANSLATED for rel in h.sources)
+            and len(h.client.status_calls) == 3
+            and not h.report.failed,
+            str(status),
+        )
+
+    with mini_repo():
+        h = sandbox_harness()
+        h.client.states["es/guide.md"] = "completed"
+        error_500 = "POST sandbox/delivery failed after 1 attempts (500: Internal server error.)"
+        error_503 = "POST sandbox/delivery failed after 1 attempts (503: maintenance)"
+        h.client.delivery_error = error_500
+        h.submit()
+        snapshots = []
+
+        def between_error_rounds(_delay: float) -> None:
+            snapshots.append(load_status("es"))
+            if len(snapshots) == 2:  # rounds 1-2 failed with the same text; round 3 fails differently
+                h.client.delivery_error = error_503
+            elif len(snapshots) == 3:  # round 4 succeeds, round 5 sees the delivery
+                h.client.delivery_error = None
+
+        out = captured(lambda: h.poll(wait=1, sleep=between_error_rounds))
+        status = load_status("es")
+        md = h.report.to_markdown(h.config)
+        t.check(
+            "endpoint errors: job stays pending with no failure recorded, other deliveries written",
+            "guide.md" in snapshots[0]["pendingJobs"]
+            and "guide.md" not in snapshots[0]["failures"]
+            and snapshots[0]["files"]["index.md"]["status"] == STATUS_TRANSLATED,
+            str(snapshots[0]),
+        )
+        t.check(
+            "endpoint errors: warned once per distinct message, every failure counted in the report note",
+            out.count("es: WARNING POST sandbox/delivery failed") == 2
+            and f"es: WARNING POST sandbox/delivery failed: {error_500}" in out
+            and f"es: WARNING POST sandbox/delivery failed: {error_503}" in out
+            and f"- es: POST sandbox/delivery failed 3 time(s); last error: {error_503}" in md,
+            out + md,
+        )
+        t.check(
+            "endpoint errors: asked again every round (4 calls), delivered once the endpoint recovers, not flagged",
+            len(h.client.delivery_calls) == 4
+            and len(h.client.status_calls) == 5
+            and not status["pendingJobs"]
+            and status["files"]["guide.md"]["status"] == STATUS_TRANSLATED
+            and not h.report.failed,
+            out + str(h.client.delivery_calls),
+        )
+
+    with mini_repo():
+        h = prod_harness()
+        h.client.states["es/guide.md"] = "completed"
+        h.client.states["es/index.md"] = "in progress"
+        h.submit()
+        out = captured(h.poll)
+        t.check(
+            "production: completed and in-flight jobs wait; /sandbox/delivery is never called",
+            not h.client.delivery_calls
+            and "sandbox delivery" not in out
+            and {"guide.md", "index.md"} <= set(load_status("es")["pendingJobs"]),
+            out,
+        )
+
+
+def selftest_cancel_pending(t: SelfTest) -> None:
+    t.section("cancel pending requests")
+    t.check(
+        "cancel response: listed ids confirmed, missing ids not; a response without the list confirms the call",
+        confirmed_cancellations({"id_request": [1, 2], "status": "cancelled"}, [1, 2, 3]) == {1, 2}
+        and confirmed_cancellations({"status": "cancelled", "message": "ok"}, [4]) == {4},
+    )
+    with mini_repo():
+        h = sandbox_harness()
+        h.submit()
+        status = load_status("es")
+        status["pendingJobs"]["kb/foreign.md"] = {
+            "jobId": 999,
+            "environment": "production",
+            "sourceHash": "sha256:f",
+            "submittedAt": utc_now(),
+        }
+        save_status("es", status)
+        files_before = json.dumps(status["files"], sort_keys=True)
+        ids = sorted(int(j["jobId"]) for j in status["pendingJobs"].values() if j["environment"] == "sandbox")
+        out = captured(lambda: cmd_cancel_pending(h.config, h.client, ["es"], False, h.report))
+        status = load_status("es")
+        t.check(
+            "sandbox: one cancel call with exactly the active-environment ids; their records dropped",
+            h.client.cancel_calls == [ids] and list(status["pendingJobs"]) == ["kb/foreign.md"],
+            out + str(h.client.cancel_calls),
+        )
+        t.check(
+            "sandbox: files[] untouched, nothing under failures, report lists the cancelled files, run not flagged",
+            json.dumps(status["files"], sort_keys=True) == files_before
+            and not status["failures"]
+            and sorted(h.report.lang("es")["cancelled"]) == sorted(h.sources)
+            and not h.report.failed,
+            str(status),
+        )
+        md = h.report.to_markdown(h.config)
+        t.check(
+            "sandbox: count, file list and foreign-job notice printed; report has a cancelled section",
+            "es: cancelled 4 request(s)" in out
+            and "  cancelled  guide.md" in out
+            and "es: 1 pending job(s) from production left untouched" in out
+            and "### es: cancelled (pending request dropped, translation unchanged)" in md
+            and "- `guide.md`" in md,
+            out + md,
+        )
+    with mini_repo():
+        h = prod_harness()
+        h.submit()
+        t.expect_exit(
+            "production without --force refused (exit 1)",
+            lambda: cmd_cancel_pending(h.config, h.client, ["es"], False, h.report),
+            "--force",
+        )
+        t.check(
+            "refusal made no cancel call and kept the jobs",
+            not h.client.cancel_calls and len(load_status("es")["pendingJobs"]) == 4,
+        )
+        h.client.uncancellable.add("es/guide.md")
+        out = captured(lambda: cmd_cancel_pending(h.config, h.client, ["es"], True, h.report))
+        status = load_status("es")
+        t.check(
+            "production --force: refused chunk retried per id; uncancellable job kept pending with a warning, exit 1",
+            len(h.client.cancel_calls) == 5
+            and list(status["pendingJobs"]) == ["guide.md"]
+            and "guide.md" not in status["failures"]
+            and "es: WARNING could not cancel request" in out
+            and "NOT_CANCELLABLE" in out
+            and "es: cancelled 3 request(s)" in out
+            and h.report.cancel_failures == 1
+            and h.report.failed
+            and sorted(h.report.lang("es")["cancelled"]) == ["_ui-strings.json", "index.md", "toc.yml"],
+            out + str(h.client.cancel_calls),
+        )
+
+
 def cmd_self_test(config: TranslationConfig) -> int:
     t = SelfTest()
     selftest_corpus(t, config)
     selftest_fixtures(t)
     selftest_fake_client(t)
+    selftest_sandbox_delivery(t)
+    selftest_cancel_pending(t)
     print(f"\nself-test: {t.passed} passed, {len(t.failures)} failed")
     for name in t.failures:
         print(f"  FAILED: {name}")
@@ -2963,11 +3635,20 @@ def build_parser() -> argparse.ArgumentParser:
     actions.add_argument("--self-test", action="store_true", help="offline self-test (no key, no network)")
     actions.add_argument("--probe", action="store_true", help="check service types and languages against the API")
     actions.add_argument("--dump-orders", metavar="DIR", help="write the /translate bodies to DIR instead of sending")
+    actions.add_argument(
+        "--cancel-pending",
+        action="store_true",
+        help="cancel every pending request of the active environment and drop its record (production needs --force)",
+    )
     parser.add_argument("--lang", action="append", help="limit to a language folder (repeatable)")
     parser.add_argument("--file", action="append", default=[], help="glob relative to content/ (repeatable)")
     parser.add_argument("--limit", type=int, default=0, help="submit at most N files per language")
     parser.add_argument("--wait", type=float, default=0, help="minutes to keep polling for deliveries")
-    parser.add_argument("--force", action="store_true", help="resubmit matched files even when they are current")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="resubmit matched files even when they are current; with --cancel-pending: allow cancelling in production",
+    )
     parser.add_argument("--lenient", action="store_true", help="write translations that fail structural verification")
     parser.add_argument("--allow-unbounded", action="store_true", help="lift the sandbox per-run caps")
     parser.add_argument(
@@ -3042,12 +3723,14 @@ def main() -> int:
     if args.probe:
         return cmd_probe(config, require_client(config, "--probe", need_service_type=False), langs, locales)
 
-    action = "--submit" if args.submit else "--poll" if args.poll else "--run"
+    action = "--run" if args.run else "--submit" if args.submit else "--poll" if args.poll else "--cancel-pending"
     client = require_client(config, action)
     if args.submit or args.run:
         check_sandbox_filter(config, options, args.allow_unbounded)
     report = RunReport()
     try:
+        if args.cancel_pending:
+            cmd_cancel_pending(config, client, langs, args.force, report)
         if args.submit or args.run:
             cmd_submit(config, client, langs, sources, passthrough, locales, options, args.allow_unbounded, report)
         if args.poll or args.run:

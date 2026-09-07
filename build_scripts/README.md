@@ -4,7 +4,7 @@ This document covers new build tools:
 - `te_script_runner.py`: standalone runner and module for other tools that need to execute C# scripts
 - `csharp_doctest.py`: compiles and runs annotated `csharp` code blocks in markdown files
 - `check_links.py`: dead link checker for built site
-- `translate-content.py`: submits changed English content to Translated (TranslationOS), then repairs, verifies and writes the delivered translations; `python build_scripts/translate-content.py --self-test` runs its offline test suite (no key, no network; CI runs it on every PR). CLI, environment variables and runbook: [Translating Content](../README.md#translating-content)
+- `translate-content.py`: submits changed English content to Translated (TranslationOS), then repairs, verifies and writes the delivered translations; `python build_scripts/translate-content.py --self-test` runs its offline test suite (no key, no network; the `pull_request` dry-run job runs it on PRs that touch the script or its config, and every `translate` run starts with it). CLI, environment variables and runbook: [Translating Content](../README.md#translating-content)
 
 Existing docfx and localization orchestration can be found in [../README.md](../README.md)
 
@@ -12,7 +12,7 @@ Existing docfx and localization orchestration can be found in [../README.md](../
 
 Required on PATH:
 
-- `python3` -- 3.10+ (the scripts use 3.10 syntax; validated on 3.14).
+- `python3` -- 3.11+ (`pyproject.toml` targets py311 and CI runs 3.11; validated on 3.14).
 - `uv` -- provides `uvx`, for lint and type-check.
 - `te` -- the Tabular Editor CLI, for the doc-validation scripts; you should use a build aligned with TE3 release for checking docs.
 - `docfx` -- or `dotnet` with the pinned local docfx tool, to build the site.

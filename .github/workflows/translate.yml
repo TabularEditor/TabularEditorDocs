@@ -51,6 +51,8 @@ name: Translate content (Translated)
 #                  `localization-sandbox` otherwise. An explicit `localization` is refused
 #                  (exit 1) for mode=translate unless TRANSLATED_ENV == production; for
 #                  probe/dry-run it is remapped to `localization-sandbox` with a ::notice::.
+#                  Any other value must start with `localization-`; the bot never pushes
+#                  to main or to a feature branch.
 #   limit / wait / force / file  passed through as --limit / --wait / --force / --file.
 #                  `wait` must be a whole number of minutes <= 35: the job is killed at
 #                  45 minutes and the accepted job records must be pushed before that.
@@ -91,7 +93,7 @@ on:
         options: [translate, probe, dry-run]
         default: translate
       target_branch:
-        description: Branch that receives the translations. Empty = auto (`localization` when TRANSLATED_ENV is production, `localization-sandbox` otherwise); an explicit `localization` is refused outside production.
+        description: Branch that receives the translations. Empty = auto (`localization` when TRANSLATED_ENV is production, `localization-sandbox` otherwise); an explicit `localization` is refused outside production; any other name must start with `localization-`.
         type: string
         default: ''
       limit:
@@ -293,6 +295,14 @@ jobs:
             fi
             echo "target_branch not given; auto-selected '$target' for TRANSLATED_ENV=$TRANSLATED_ENV"
           fi
+          # Only translation branches may receive bot pushes: never main or a feature branch.
+          case "$target" in
+            localization|localization-*) ;;
+            *)
+              echo "::error::target_branch must be 'localization' or start with 'localization-' (got '$target')."
+              exit 1
+              ;;
+          esac
           if [ "$target" = "localization" ] && [ "$TRANSLATED_ENV" != "production" ]; then
             case "${INPUT_MODE:-translate}" in
               probe|dry-run)
