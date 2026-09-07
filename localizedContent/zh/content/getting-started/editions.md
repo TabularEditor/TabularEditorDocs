@@ -2,7 +2,7 @@
 uid: editions
 title: 比较版本
 author: Søren Toft Joensen
-updated: 2026-06-09
+updated: 2026-08-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,6 +28,13 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 - Azure Analysis Services（层级：开发者层、基本层、**标准层**）
 
 我们将 Analysis Services 中**突出显示**的这些形态视为企业级，因此只能在 Tabular Editor 3 企业版中使用。
+
+我们与 Microsoft 一样，在按用户授权与按容量授权之间划定界线：
+
+- **Premium Per User 是按席位许可。** 编辑模型的人必须就是购买该席位的那位用户。 这与商业版的授权方式一致：个人、不可转让的密钥，绑定到单一用户。 请参阅 [个人许可证与可转让许可证](#personal-vs-transferable-licenses)。
+- **Premium Capacity（P SKU）、Embedded Capacity（A/EM SKU）和 Fabric Capacity（F SKU）属于共享的组织级部署。** 托管在这些容量上的模型归团队所有，并服务于众多使用者——这正是企业版的设计与定价所针对的场景。
+
+同样的逻辑也适用于 Power BI 之外的场景。 商业版涵盖 SQL Server Analysis Services 的 Developer 和 Standard 版本，以及 Azure Analysis Services 的 Developer 和 Basic 层级。 这些版本和层级通常面向单个开发者或小规模部署。 SQL Server Analysis Services Enterprise Edition 和 Azure Analysis Services Standard 层用于托管组织级模型，因此需要企业版。
 
 > [!IMPORTANT]
 > Tabular Editor 仅允许编辑兼容级别为 1200 或更高的数据模型。 自 SQL Server 2016 起，Analysis Services 的所有实例默认都是如此。 出于同样的原因，Tabular Editor 不支持 Excel PowerPivot，因为它使用更早的兼容级别。
