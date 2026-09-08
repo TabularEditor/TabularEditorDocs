@@ -2,7 +2,7 @@
 uid: user-interface
 title: Basic user interface
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-08-18
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,7 +45,7 @@ All UI elements may be resized and/or rearranged to fit your needs. You can even
 
 To reset the application to the default layout, choose the **Window > Default layout** option. Users of Tabular Editor 2.x may prefer the **Window > Classic layout** option which places the TOM Explorer on the left side of the screen, and the Properties view below the Expression Editor.
 
-Use the **Window > Capture current layout..." option to save a customized layout such that it will become available as a new layout option within the Window menu, allowing you to quickly switch back and forth between different layouts. Use the **Window > Manage layouts...** option to bring up a list of all available layouts, allowing you to rename, save, delete layouts, etc. When saving a layout to disk, the result is an .xml file which you can share with other users of Tabular Editor 3.
+Use the **Window > Capture Layout** option to save a customized layout such that it will become available as a new layout option within the Window menu, allowing you to quickly switch back and forth between different layouts. Use the **Window > Layouts...** option to bring up a list of all available layouts, allowing you to apply, load, remove and save layouts. When saving a layout to disk, the result is an .xml file which you can share with other users of Tabular Editor 3.
 
 ![Manage Layouts](~/content/assets/images/manage-layouts.png)
 
@@ -73,12 +73,12 @@ There are two primary ways to dock windows, each serving a different purpose:
 
 ### Changing themes and palettes
 
-The visual appearance of Tabular Editor 3 can be changed by choosing a different theme and/or palette. Tabular Editor 3 ships with five different themes (sometimes called "skins"), available through the **Window > Themes** menu:
+The visual appearance of Tabular Editor 3 can be changed by choosing a different theme and/or palette. Tabular Editor 3 ships with five different themes (sometimes called "skins"), available through the **Window > Theme** menu:
 
 - Basic and Bezier (vector based, works well on high-DPI displays)
-- Blue, Dark and Light (raster based, not recommended for high-DIP Displays)
+- Blue, Dark and Light (raster based, not recommended for high-DPI displays)
 
-For the vector based themes (Basic and Bezier), use the **Window > Palette** menu item to change the colors used by the theme.
+For the vector based themes (Basic and Bezier), use the **Window > Default palette** menu item to change the colors used by the theme.
 
 ![Palettes](~/content/assets/images/palettes.png)
 
@@ -114,6 +114,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
   - **Model from DB...** Specify Analysis Services or Power BI XMLA connection details, or connect to a local instance of Analysis Services (such as Visual Studio's Integrated Workspace server or Power BI Desktop), in order to load model metadata from a tabular model that has already been deployed.
   - **Model from folder...** Open model metadata from a folder structure which was previously saved using any version of Tabular Editor.
   - **File...** displays a dialog that lets you open any type of file supported by Tabular Editor 3, based on the file name extension. See [Supported file types](xref:supported-files) for more information.
+  - **Import from Metric View YAML...** Imports model metadata from a Databricks Metric View YAML file.
 
     ![Supported File Types](~/content/assets/images/supported-file-types.png)
 
@@ -143,8 +144,6 @@ The **Edit** menu contains standard Windows application menu items for editing a
 
 - **Undo**: This option undoes the last change made to the model metadata. When there is no active document, the familiar CTRL+Z shortcut maps to this option.
 - **Redo**: This option undoes the last undo against the model metadata. When there is no active document, the familiar CTRL+Y shortcut maps to this option.
-- **Undo typing**: Undoes the last text change in the currently active document. When there is no active document, this option is not available.
-- **Redo typing**: Undoes the last undo within the currently active document. When there is no active document, this option is not available.
 - **Find**: Displays the "Find and replace" dialog with the "Find" tab selected. [More information](xref:find-replace#find).
 - **Replace**: Displays the "Find and replace" dialog with the "Replace" tab selected. [More information](xref:find-replace#replace).
 - **Cut / Copy / Paste**: These are the familiar Windows editing operations. If there is an active document, then these apply to the text selection within that document. Otherwise, these options may be used to manipulate objects in the TOM Explorer. For example, you can duplicate multiple measures by holding down the SHIFT or CTRL key while selecting the measures in the TOM Explorer, then hitting CTRL+C followed by CTRL+V.
@@ -155,6 +154,7 @@ The **Edit** menu contains standard Windows application menu items for editing a
 
 - **Select all**: Selects all text in the currently active document, or all objects belonging to the same parent within the TOM Explorer.
 - **Code assist**: This option is available when editing DAX code. It provides a shortcut to various code assist features relevant for editing DAX code. See [DAX editor](xref:dax-editor#code-assist-features) for more information.
+- **Word Wrap**: Toggles word wrapping in the currently active text document.
 
 ## View
 
@@ -163,12 +163,20 @@ The **View** menu lets you navigate between the different views of the Tabular E
 ![View Menu](~/content/assets/images/view-menu.png)
 
 - **TOM Explorer**: The TOM Explorer presents a hierarchical view of the entire [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the currently loaded model metadata. See @tom-explorer-view for more information.
+- **AI Assistant**: The AI Assistant view lets you interact with an AI assistant that can help you with modeling tasks.
+- **DAX Package Manager**: The DAX Package Manager view lets you browse and install DAX user-defined function packages into your model.
 - **Best Practice Analyzer**: The Best Practice Analyzer helps improve the quality of your model by letting you specify rules for best practice validation. See @bpa-view for more information.
 - **Messages**: The Messages view displays errors, warnings and informational messages from various sources, such as the Tabular Editor 3 Semantic Analyzer. See @messages-view for more information.
 - **Data Refresh**: The Data Refresh view allows you to track data refresh operations that are running in the background. See @data-refresh-view for more information.
+- **Expression Editor**: This is the "quick editor" that lets you edit DAX, M or SQL expressions on whichever object is currently selected in the TOM Explorer. See @dax-editor for more information.
 - **Macros**: The Macros view allows you to manage any macros you have created. Macros can be created from @csharp-scripts. See @creating-macros for more information.
 - **VertiPaq Analyzer**: The VertiPaq Analyzer view allows you to collect, import and export detailed statistics about the data in your model, to help improve and debug DAX performance. VertiPaq Analyzer is created and maintained by [Marco Russo](https://twitter.com/marcorus) of [SQLBI](https://sqlbi.com) under MIT license. More information on the [GitHub project page](https://github.com/sql-bi/VertiPaq-Analyzer).
-- **Expression Editor**: This is the "quick editor" that lets you edit DAX, M or SQL expressions on whichever object is currently selected in the TOM Explorer. See @dax-editor for more information.
+- **Dependencies**: The Dependencies view visualizes dependencies between the currently selected object and other objects in the model.
+- **DAX Optimizer**: The DAX Optimizer view integrates with [DAX Optimizer](https://www.daxoptimizer.com) to analyze your model for DAX performance issues.
+- **Calendar Editor**: The Calendar Editor view lets you define and manage calendars in models using the modern time intelligence feature.
+- **Perspective Editor**: The Perspective Editor view provides a matrix overview of which objects are included in each perspective of the model.
+- **Metadata Translation Editor**: The Metadata Translation Editor view provides a grid for editing metadata translations (cultures) of model objects.
+- **Toolbars / Properties**: The remaining items let you toggle the visibility of toolbars and bring up the Properties view (F4).
 
 ## Model
 
@@ -181,14 +189,15 @@ The **Model** menu displays actions that can be performed at the level of the Mo
 > [!IMPORTANT]
 > The **Deploy** option is not available in Tabular Editor 3 Desktop Edition. For more information see @editions.
 
+- **Serialization options...** Lets you configure how model metadata is serialized when saving to disk (file or folder structure).
 - **Import tables...** Launches the Tabular Editor 3 Import Table Wizard. For more information, see @importing-tables.
-- **Update table schema...** Detects schema changes in the data source(s) for the currently selected table(s) or partition(s) compared to the currently imported columns. See [Updating table schema](xref:importing-tables#updating-table-schema) for more information.
+- **Update schema (all tables)...** Detects schema changes in the data source(s) for all tables of the model compared to the currently imported columns. See [Updating table schema](xref:importing-tables#updating-table-schema) for more information.
 - **Script DAX**: Generates a DAX script for the currently selected object(s) (or all DAX objects in the model, if nothing is selected). See @dax-scripts for more information.
 - **Refresh model**: When Tabular Editor is connected to an instance of Analysis Services, this submenu contains options for starting a background refresh operation at the model level. The submenu has the options below. For more information, see [Refresh command (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request).
   - **Automatic (model)**: Analysis Services determines which objects to refresh (only objects that are not in the "Ready" state).
   - **Full refresh (model)**: Analysis Services performs a full refresh of the model.
   - **Calculate (model)**: Analysis Services performs a re-calculation of all calculated tables, calculated columns, calculation groups and relationships. No data is read from the data sources.
-- **Create [object type]**: The remaining shortcuts in the **Model** menu lets you create new types of model child objects (tables, data sources, perspectives, etc.).
+- **Add [object type]**: The remaining shortcuts in the **Model** menu lets you create new types of model child objects (tables, data sources, perspectives, etc.).
 
 ## Tools
 
@@ -198,6 +207,7 @@ The **Tools** menu contains options for controlling Tabular Editor 3 preferences
 
 - **Customize...** Launches the Tabular Editor 3 User Interface Layout customization dialog, which lets you create new toolbars, rearrange and edit menus and toolbar buttons, etc.
 - **Preferences...** Launches the Tabular Editor 3 Preferences dialog, which is a central hub for managing all other aspects of Tabular Editor and its features, such as update checks, proxy settings, query row limits, request timeouts, etc. See @preferences for more information.
+- **Manage BPA rules...** Launches the Best Practice Analyzer rule manager, which lets you view and edit the Best Practice Analyzer rules and rule collections. See @bpa-view for more information.
 
 ## Window
 
@@ -212,7 +222,7 @@ The **Window** menu provides shortcuts for managing and navigating between the v
   ![View Menu](~/content/assets/images/tab-context-menu.png)
 
 - **New Horizontal/Vertical Tab Group**: This option lets you divide the main document area into multiple sections (aka. "tab groups), in order to have multiple documents displayed simultaneously side-by-side or top-by-bottom.
-- **Close All Documents**: Closes all document tabs. You are prompted to save unsaved changes, if any.
+- **Close All**: Closes all document tabs. You are prompted to save unsaved changes, if any.
 - **Reset Window Layout**: Resets all customization applied to the main document area.
 - **1..N [document]**: The first 10 open documents are listed here, allowing you to navigate between them. You can also use the CTLR+Tab shortcut to quickly switch between open documents and views, such as shown in the screenshot below:
 
@@ -222,8 +232,9 @@ The **Window** menu provides shortcuts for managing and navigating between the v
 
   ![View Menu](~/content/assets/images/windows-manager.png)
 
-- **Capture current layout** / **Manage layouts...** / **Default layout** / **Classic layout**: These menu items were discussed [earlier in this article](#choosing-a-different-layout).
+- **Capture Layout** / **Layouts...** / **Default layout** / **Classic layout**: These menu items were discussed [earlier in this article](#choosing-a-different-layout).
 - **Theme** / **Default palette**: These menu items were discussed [earlier in this article](#changing-themes-and-palettes).
+- **Language**: Lets you change the display language of the Tabular Editor 3 user interface.
 
 ## Help
 
@@ -231,10 +242,11 @@ The **Help** menu provides shortcuts for online resources and more.
 
 ![View Menu](~/content/assets/images/help-menu.png)
 
-- **Getting Started**: This menu item links to [this article](xref:getting-started).
-- **Tabular Editor 3 Docs**: This menu item links to [docs.tabulareditor.com](https://docs.tabulareditor.com/te3).
+- **Online Documentation**: This menu item links to [docs.tabulareditor.com](https://docs.tabulareditor.com/te3).
+- **Onboarding Guide**: This menu item opens the Tabular Editor 3 onboarding guide, which helps new users get started with the application.
 - **Community Support**: This menu item links to our [public community support site](https://github.com/TabularEditor/TabularEditor3).
 - **Dedicated Support**: This menu item lets you send an e-mail directly to our dedicated support hotline.
+- **What's New**: This menu item shows the release notes of the currently installed version of Tabular Editor 3.
 
 > [!NOTE]
 > Dedicated support is reserved for Tabular Editor 3 Enterprise Edition customers. All other customers should reach out on the [public community support site](https://github.com/TabularEditor/TabularEditor3) for any technical issues, questions or other product-specific questions.
