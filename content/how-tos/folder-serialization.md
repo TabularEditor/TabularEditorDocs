@@ -11,7 +11,7 @@ applies_to:
 # Folder Serialization
 This feature allows you to more easily integrate your SSAS Tabular Models in a file-based source control environment such as TFS, SubVersion or Git. By choosing "File" > "Save to Folder...", Tabular Editor will deconstruct the Model.bim file and save its content as separate files in a folder structure similar to the structure of the JSON within the Model.bim. When subsequently saving the model, only files with changed metadata will be touched, meaning most version control systems can easily detect which changes have been done to the model, making source merging and conflict handling a lot easier, than when working with a single Model.bim file.
 
-![image](https://cloud.githubusercontent.com/assets/8976200/22483167/5e07ad52-e7fc-11e6-890f-5c0d20fff0cb.png)
+![Folder serialization example](~/content/assets/images/folder-serialization-example.png)
 
 By default, objects are serialized down to the lowest object level (meaning measures, columns and hierarchies are stored as individual .json files).
 
@@ -21,4 +21,4 @@ If you want to customize the granularity at which metadata is saved to individua
 
 These settings are saved in an annotation on the model, the first time you use the Save to Folder function, so that the settings are reused when the model is loaded and the "Save"-button is subsequently clicked. If you want to apply new settings, use "File > Save to Folder..." again.
 
-<img src="https://cloud.githubusercontent.com/assets/8976200/25333606/30578a78-28eb-11e7-9885-0fc66f5e4046.png" width="300" />
+<img src="~/content/assets/images/folder-serialization-settings-te2.png" width="300" />
