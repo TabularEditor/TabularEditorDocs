@@ -24,12 +24,14 @@ the link lands on the right section, while the heading keeps its translated text
 This neutralizes the whole class of warning for current and future pages without
 touching translations.
 
-Headings are aligned to the English source positionally (Crowdin preserves
-heading structure). If the heading count differs (a translation added/removed a
-heading, or is stale), the file is skipped and reported rather than risk a
-misaligned anchor. Frontmatter and fenced code blocks are skipped. Injected
-anchors are tagged `data-loc-xref` so the script is idempotent: it strips its own
-prior anchors before recomputing.
+Headings are aligned to the English source positionally: the translation script
+(build_scripts/translate-content.py) rejects deliveries whose heading count
+differs from the English source, so positional alignment is safe for anything it
+wrote. If the heading count differs anyway (a hand-edited or stale translation),
+the file is skipped and reported rather than risk a misaligned anchor.
+Frontmatter and fenced code blocks are skipped. Injected anchors are tagged
+`data-loc-xref` so the script is idempotent: it strips its own prior anchors
+before recomputing.
 
 English (`en`) is never modified - it is the source of the slugs.
 
