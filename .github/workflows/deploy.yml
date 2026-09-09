@@ -9,7 +9,85 @@ on:
     branches:
       - main
 
+# Every job except close_pull_request_job carries the same `if`: run on pushes
+# to main and on open PRs, but only build the Crowdin `localization` branch
+# once a review is requested. GitHub Actions has no way to share a job
+# condition, so the expression is repeated verbatim; keep the copies in sync.
+#
+# Job layout:
+#   lint_job, doctest_job      independent checks on the repo sources
+#   build_job                  full multi-language site build
+#   link_check_job             needs the built site from build_job
+#   deploy_job                 waits for all of the above, so a failing check
+#                              blocks the deploy (production and PR previews)
 jobs:
+  lint_job:
+    if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
+    runs-on: ubuntu-latest
+    name: Lint build scripts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Set up uv
+        # `./run scripts check` runs ruff and mypy through uvx.
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Install shell tooling
+        # shellcheck ships on the ubuntu runner image; shfmt does not, so it
+        # is pinned and downloaded (formatting rules can drift between shfmt
+        # versions, and a moving version would make the check flaky).
+        run: |
+          command -v shellcheck >/dev/null || sudo apt-get install -y shellcheck
+          curl -sSfL "https://github.com/mvdan/sh/releases/download/${SHFMT_VERSION}/shfmt_${SHFMT_VERSION}_linux_amd64" -o /usr/local/bin/shfmt
+          chmod +x /usr/local/bin/shfmt
+          shellcheck --version | head -2
+          shfmt --version
+        env:
+          SHFMT_VERSION: v3.14.0
+      - name: Check scripts
+        # ruff lint + format diff + mypy --strict on the qualified Python
+        # sources (pyproject.toml); shellcheck + shfmt diff on the run scripts.
+        run: ./run scripts check
+
+  doctest_job:
+    if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
+    runs-on: ubuntu-latest
+    name: Doctest C# code blocks
+    env:
+      # Optional repository secret: a direct download URL for the Linux x64
+      # Tabular Editor CLI archive (te-linux-x64.tar.gz). The CLI is gated
+      # behind sign-in, so there is no public URL to fetch it from. When the
+      # secret is unset, only the te-free annotation validation runs.
+      TE_CLI_URL: ${{ secrets.TE_CLI_DOWNLOAD_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate doctest annotations
+        # Grammar and coverage of the ```csharp {compile} / {run ...} fences
+        # in every annotated content/*.md; no te needed.
+        run: ./run doctest validate
+      - name: Install Tabular Editor CLI
+        if: env.TE_CLI_URL != ''
+        run: |
+          mkdir -p "$RUNNER_TEMP/te"
+          curl -sSfL "$TE_CLI_URL" | tar -xz -C "$RUNNER_TEMP/te"
+          chmod +x "$RUNNER_TEMP/te/te"
+          echo "$RUNNER_TEMP/te" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/te/te" --version
+      - name: Run doctests
+        if: env.TE_CLI_URL != ''
+        # Compile and execute every annotated block against a throwaway model
+        # and diff its Output() against the documented **Output** fence.
+        run: ./run doctest
+      - name: Doctest execution skipped
+        if: env.TE_CLI_URL == ''
+        run: echo "::notice title=Doctests not executed::Set the TE_CLI_DOWNLOAD_URL repository secret to a te-linux-x64.tar.gz download URL to compile and run the annotated C# blocks in CI. Only annotation validation ran."
+
   build_job:
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
     runs-on: windows-latest
@@ -48,7 +126,21 @@ jobs:
           Write-Host "API files generated: $((Get-ChildItem content/api/*.yml).Count) YAML files"
         shell: pwsh
       - name: Build all documentation
-        run: python build-docs.py --all --skip-gen
+        # English DocFX warnings fail the build; es/zh warnings do not, so they
+        # are collected into a markdown report for the job summary below.
+        run: python build-docs.py --all --skip-gen --warnings-report build-warnings.md
+        env:
+          PYTHONUNBUFFERED: '1'  # keep the per-language banners in order with DocFX's own output in the log
+      - name: Publish DocFX warnings
+        if: always()
+        shell: bash
+        run: |
+          if [ -f build-warnings.md ]; then
+            cat build-warnings.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '## DocFX build warnings' >> "$GITHUB_STEP_SUMMARY"
+            echo 'No report was produced (the build stopped before any language was built).' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -56,9 +148,51 @@ jobs:
           path: _site
           retention-days: 7
 
+  link_check_job:
+    needs: build_job
+    runs-on: ubuntu-latest
+    name: Check links
+    # A full run fetches every unique external URL once (a few thousand), so
+    # it takes minutes; the cap keeps a stalled host from holding the deploy.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+      - name: Check links
+        # Internal (own-site) links are errors and fail this job: local files,
+        # anchors, and old root-style paths (those are resolved against the
+        # live site's redirects). External links are warnings only: they are
+        # listed in the report and never fail the run, since third-party
+        # outages and bot-blocking are outside our control.
+        shell: bash
+        run: python build_scripts/check_links.py validate stats 2>&1 | tee link-check-report.txt
+      - name: Publish link report
+        # The report (including the external URLs to verify by hand) goes to
+        # the job summary, so warnings are visible without opening the log.
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## Link check report'
+            echo
+            echo 'Internal broken links fail this job. External URLs listed under "WARNINGS" are informational; verify them by hand.'
+            echo
+            echo '```'
+            head -c 900000 link-check-report.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
   deploy_job:
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
-    needs: build_job
+    needs: [build_job, lint_job, doctest_job, link_check_job]
     runs-on: ubuntu-latest
     name: Deploy to Azure
     steps:

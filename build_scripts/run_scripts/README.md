@@ -143,7 +143,7 @@ and the authoring guidance below that section.
 `./run scripts` and its nested commands are the gateway to run scripts about run scripts.
 
 - Check the script-development tools are installed: `./run scripts setup`
-- Lint and verify formatting, without modifying anything (the check a PR should pass):
+- Lint and verify formatting, without modifying anything (CI runs this on every PR; see the [Continuous integration](../../README.md#continuous-integration) section of the project README):
   - `./run scripts check`: everything (all shell tooling, the qualified Python sources)
   - `./run scripts check file1.sh file2.py ...`: specific files, routed by kind
 - Apply the formatters (writes files): `./run scripts format [file ...]`

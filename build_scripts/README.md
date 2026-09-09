@@ -42,6 +42,7 @@ Both need `te` on PATH.
 
 Current state only validates semantic bridge docs.
 The code block annotations can be used in any doc.
+CI runs `./run doctest validate` on every PR, and the full `./run doctest` when the `TE_CLI_DOWNLOAD_URL` repository secret provides a te CLI; see [Continuous integration](../README.md#continuous-integration).
 
 #### `te_script_runner.py` -- generic runner
 
@@ -181,6 +182,7 @@ Fragment/text failures keep their `#anchor` / `:~:text=` in that list (the bare 
 the fragment is what broke); a wholly unreachable URL is listed bare.
 
 Exit codes: `1` if any internal (own-site) reference is broken, else `0`. External warnings never fail the run, so third-party link rot will not break CI.
+CI runs `validate stats` against the built site on every PR and attaches the report to the job summary; see [Continuous integration](../README.md#continuous-integration).
 
 Options to modify output:
 
