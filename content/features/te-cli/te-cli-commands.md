@@ -87,7 +87,9 @@ Several names act as container keywords. A keyword can stand alone (listing the 
 | `Levels` | Hierarchy | Levels of a hierarchy. |
 | `Members`, `TablePermissions` (alias `Permissions`) | Role | Children of a role. |
 
-Calculated sets are addressable in container form only (`<table>/Sets/<name>`); an individual KPI is `<table>/<measure>/KPI`; calendars resolve at `<table>/Calendars/<name>`; relationships resolve at `Relationships/{guid}` (`--paths-only` prints the GUID form, and the display name is also accepted).
+Calculated sets are addressable in container form only (`<table>/Sets/<name>`); an individual KPI is `<table>/<measure>/KPI`; calendars resolve at `<table>/Calendars/<name>`; relationships resolve at `Relationships/"{guid}"`.
+
+`--paths-only` prints the relationship's TOM name, which is not always a GUID: it is the GUID in Power BI models, and a display-style name such as `Relationships/Relationship 1` in SSAS-sourced models. Because `{` and `}` are reserved characters in a path, a name containing them has to be quoted - `Relationships/"{guid}"` - and `--paths-only` prints it that way, ready to paste into another command. The display name is also accepted.
 
 A few examples show how plain and container-scoped paths differ:
 
