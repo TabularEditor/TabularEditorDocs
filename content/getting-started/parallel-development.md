@@ -250,6 +250,5 @@ We present more details about how to configure git branch policies, set up autom
 
 ## Next steps
 
-- @powerbi-cicd
-- @as-cicd
+- @cicd-overview
 - @optimizing-workflow-workspace-mode

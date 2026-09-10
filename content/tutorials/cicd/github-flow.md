@@ -306,5 +306,5 @@ flowchart TB
 
 - [Enabling parallel development using Git and Save to Folder](xref:parallel-development) — the branching strategy this pipeline supports.
 - [CI/CD Integration](xref:te-cli-cicd) — the new Tabular Editor CLI's CI/CD patterns, currently in Limited Public Preview.
+- @cicd-overview — the CI/CD for Semantic Models section this pipeline pattern belongs to.
 - @powerbi-cicd
-- @as-cicd

@@ -33,3 +33,23 @@
 # Automation with C# Scripting
 ## @creating-macros
 ## @csharp-script-library
+
+# CI/CD for Semantic Models
+## @cicd-overview
+## Foundations
+### @cicd-fabric-workspaces
+### @cicd-repository-setup
+### @cicd-branching-strategies
+### @github-flow
+## Ways of working
+### @cicd-parallel-development
+### @cicd-workspace-mode
+## Validation and testing
+### @cicd-validation
+### @cicd-testing
+## Deployment
+### @cicd-deployment-strategies
+### @powerbi-cicd
+## Reference pipelines
+### @cicd-azure-devops-pipeline
+### @cicd-github-actions-workflow

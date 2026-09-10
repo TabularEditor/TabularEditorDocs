@@ -18,6 +18,7 @@ This section contains comprehensive tutorials for learning Tabular Editor.
 - @incremental-refresh-about - Large dataset management
 - @detail-rows-expression - Configuring drillthrough details
 - @user-defined-aggregations - Optimizing query performance with aggregations
+- @cicd-overview - End-to-end CI/CD for semantic models with the Tabular Editor CLI
 
 ---
 
