@@ -61,7 +61,7 @@ A non-exhaustive summary of the most commonly used flags. Run `te util migrate` 
 | `-L` / `-LOCAL` | `te connect --local` | Windows only. |
 | `-S` / `-SCRIPT` | `te script --file <file.csx>` or `--inline "code"` | A bare `.csx` path also works (`te script fix.csx`). Supports multiple scripts (`--file a.csx --file b.csx`), inline code, and stdin (`--inline -`); files and inline code run in the order given. |
 | `-A` / `-ANALYZE` | `te bpa run --rules <file-or-url>` | Supports `--fail-on`, `--fix`, multiple rule files. |
-| `-AX` / `-ANALYZEX` | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default. |
+| `-AX` / `-ANALYZEX` | `te bpa run --rules <file> --no-model-rules` | Model-embedded rules are included by default; `--no-model-rules` excludes them, matching what `-AX` did. |
 | `-B` / `-BIM` | `te save-as --model <model> -o <file.bim> --serialization bim` | |
 | `-F` / `-FOLDER` | `te save-as --model <model> -o <dir> --serialization database.json` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
 | `-TMDL` | `te save-as --model <model> -o <dir> --serialization tmdl` | `--serialization` can be omitted - the format is inferred from the output path. |
