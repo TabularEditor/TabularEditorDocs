@@ -345,7 +345,7 @@ Move or rename a model object. Both source and destination are `<path>` argument
 - `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 - `--force` - save even if the mutation introduces DAX validation errors.
 
-Renaming an object whose name is not yours to set is refused with a non-zero exit code rather than reported as `No changes.` - a relationship (its name always describes the columns it joins), a measure's KPI, a role's table permission. The same applies in scripts: assigning `Relationship.Name` from `te script` stops the script with a message explaining why.
+Renaming an object whose name is not yours to set is refused with a non-zero exit code rather than reported as `No changes.` - a relationship (its name always describes the columns it joins), a measure's KPI, a role's table permission.
 
 ```bash
 te move Sales/Revenue Finance/Revenue --save                # Move measure to another table
