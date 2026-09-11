@@ -78,47 +78,47 @@ Los grupos sin cerrar abarcan hasta el final de la línea, por lo que una comill
 
 Estos comandos los gestiona el propio REPL, no el árbol de comandos habitual:
 
-| Comando              | Propósito                                                                                                                                                                                             |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `help` o `?`         | Lista los comandos disponibles.                                                                                                                                                       |
-| `status` o `pwd`     | Muestra el modelo o la conexión en uso.                                                                                                                                               |
-| `save`               | Commit all staged in-memory edits back to the model source.                                                                                                                           |
-| `revert`             | Discard all staged edits made since the last save.                                                                                                                                    |
-| `clear` o `cls`      | Limpia la pantalla.                                                                                                                                                                   |
-| `exit`, `quit` o `q` | Sale del modo interactivo. If staged edits are unsaved you are asked to confirm (`n` is the default); `exit --force` discards them without asking. |
+| Comando              | Propósito                                                                                                                                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `help` o `?`         | Lista los comandos disponibles.                                                                                                                                                                             |
+| `status` o `pwd`     | Muestra el modelo o la conexión en uso.                                                                                                                                                                     |
+| `save`               | Aplica al origen del modelo todas las ediciones preparadas en memoria.                                                                                                                                      |
+| `revert`             | Descarta todos los cambios preparados realizados desde el último guardado.                                                                                                                                  |
+| `clear` o `cls`      | Limpia la pantalla.                                                                                                                                                                                         |
+| `exit`, `quit` o `q` | Sale del modo interactivo. Si hay cambios preparados sin guardar, se te pedirá confirmación (`n` es el valor predeterminado); `exit --force` los descarta sin preguntar. |
 
-`save` inside the session takes no arguments - re-serializing the model to another format or location is `save-as` (e.g. `save-as -o ./out --serialization bim`), exactly as outside the session.
+`save` dentro de la sesión no acepta argumentos: para volver a serializar el modelo en otro formato o ubicación se usa `save-as` (por ejemplo, `save-as -o ./out --serialization bim`), exactamente igual que fuera de la sesión.
 
-## Staged edits
+## Cambios preparados
 
-Inside the session, mutating commands (`set`, `add`, `remove`, `move`, `script`, `macro run`, ...) stage their changes in memory instead of writing to the source, and the prompt shows an indicator while unsaved staged edits exist. The built-in `save` command commits everything staged; `revert` discards everything staged.
+Dentro de la sesión, los comandos que modifican el modelo (`set`, `add`, `remove`, `move`, `script`, `macro run`, ...) preparan sus cambios en memoria en lugar de escribirlos en el origen, y el prompt muestra un indicador mientras existan cambios preparados sin guardar. El comando integrado `save` confirma todo lo preparado; `revert` descarta todo lo preparado.
 
-Each mutating command can also decide for itself: `--save` persists that one command's change immediately, `--stage` keeps it in memory (the default), and `--revert` rolls the command's change back after showing its effect - useful for a "what would this do?" probe. The three are mutually exclusive, and `--stage`/`--revert` exist only inside the session.
+Cada comando que modifica el modelo también puede decidir por sí mismo: `--save` guarda de inmediato el cambio de ese comando, `--stage` lo mantiene en memoria (la opción predeterminada) y `--revert` revierte el cambio del comando después de mostrar su efecto; útil para una prueba de "¿qué haría esto?". Los tres son mutuamente excluyentes, y `--stage`/`--revert` solo existen dentro de la sesión.
 
-The default per-command behavior is the `interactiveEditMode` config key (`stage` | `save` | `revert`) - see @te-cli-config.
+El comportamiento predeterminado por comando lo define la clave de configuración `interactiveEditMode` (`stage` | `save` | `revert`); consulta @te-cli-config.
 
-Staged edits are never thrown away silently. Closing a session that still holds them - with `exit`, **Ctrl+D**, or by reaching the end of piped input - first checks for unsaved changes. If unsaved changes exist and a terminal is active, you are asked to confirm, with "no" as the default, and declining returns you to the prompt with the edits intact. Where nobody can answer (stdin piped or redirected, or `--non-interactive`), the session writes a warning naming the unsaved changes and exits with a failure code instead of a success one. Nothing is saved on the way out either way: run `save` first, or `exit --force` to discard the edits deliberately.
+Los cambios preparados nunca se descartan en silencio. Al cerrar una sesión que todavía los contiene —con `exit`, **Ctrl+D** o al llegar al final de la entrada por tubería—, primero se comprueba si hay cambios sin guardar. Si existen cambios sin guardar y hay un terminal activo, se te pedirá confirmación, con "no" como valor predeterminado; si respondes que no, volverás al prompt con las ediciones intactas. Cuando nadie puede responder (stdin por tubería o redirigida, o con `--non-interactive`), la sesión muestra una advertencia indicando qué cambios no se han guardado y sale con un código de error en lugar de uno de éxito. Al salir, en ningún caso se guarda nada: ejecuta `save` primero, o usa `exit --force` para descartar los cambios deliberadamente.
 
-## Line editing and keys
+## Edición de línea y teclas
 
-The prompt offers single-line editing:
+El prompt ofrece edición de una sola línea:
 
-- **Left/Right** move the caret; **Home/End** (also **Ctrl+A**/**Ctrl+E**) jump to the ends; **Backspace/Delete** edit in place.
-- **Up/Down** browse the command history, which persists across sessions.
-- **Ctrl+C** cancels the current command without leaving the session and abandons the half-typed line for good - it is never run, Up does not bring it back, and it is not added to the history.
-- **Ctrl+D** on an empty prompt exits (**Ctrl+Z** then **Enter** on Windows).
+- **Izquierda/Derecha** mueven el cursor; **Inicio/Fin** (también **Ctrl+A**/**Ctrl+E**) saltan a los extremos; **Retroceso/Supr** editan en el mismo lugar.
+- **Arriba/Abajo** recorren el historial de comandos, que se conserva entre sesiones.
+- **Ctrl+C** cancela el comando actual sin salir de la sesión y descarta definitivamente la línea a medio escribir: nunca se ejecuta, **Arriba** no la recupera y no se añade al historial.
+- **Ctrl+D** en un prompt vacío cierra la sesión (**Ctrl+Z** y luego **Enter** en Windows).
 
-There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
+Dentro de la sesión no hay autocompletado con la tecla Tab; el autocompletado de la shell mediante `te completion` solo se aplica a la shell externa.
 
 ## Indicaciones guiadas
 
-Cuando el modo interactivo está activo, los comandos que necesitan información faltante la solicitan en lugar de fallar. Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy --execute` or `refresh --execute` without `--force` shows a summary and asks for confirmation (`n` is the safe default). A `deploy` or `refresh` without `--execute` is a dry run that prints the TMSL it would send, so it never prompts.
+Cuando el modo interactivo está activo, los comandos que necesitan información faltante la solicitan en lugar de fallar. Al ejecutar `auth` sin subcomando, se abre un selector para Inicio de sesión / Estado / Cierre de sesión; al ejecutar `deploy --execute` o `refresh --execute` sin `--force`, se muestra un resumen y se pide confirmación (`n` es la opción predeterminada más segura). Un `deploy` o `refresh` sin `--execute` es una simulación que imprime el TMSL que enviaría, así que nunca solicita confirmación.
 
 Para desactivar las indicaciones en un único comando dentro de la sesión, pasa `--non-interactive`.
 
 ## Entrada canalizada y redirigida
 
-El modo interactivo también acepta stdin canalizado o redirigido, de modo que puedes controlar la misma REPL desde un script en lugar de introducir los comandos a mano. Cada línea de entrada se ejecuta como un comando, exactamente igual que si la hubieras introducido en el prompt, y la sesión termina cuando se agota la entrada (o cuando llega a una línea `exit`). If staged edits are still unsaved at that point, the session warns and exits non-zero - end a mutating script with `save` (or `exit --force` to discard on purpose).
+El modo interactivo también acepta stdin canalizado o redirigido, de modo que puedes controlar la misma REPL desde un script en lugar de introducir los comandos a mano. Cada línea de entrada se ejecuta como un comando, exactamente igual que si la hubieras introducido en el prompt, y la sesión termina cuando se agota la entrada (o cuando llega a una línea `exit`). Si en ese momento todavía hay cambios en fase de preparación sin guardar, la sesión avisa y termina con un código de salida distinto de cero; finaliza un script con cambios con `save` (o usa `exit --force` para descartarlos a propósito).
 
 ```bash
 printf "ls\nexit\n" | te interactive --model ./model    # bash / git-bash
@@ -129,7 +129,7 @@ te interactive --model ./model < script.te              # redirected file
 (echo ls & echo exit) | te interactive --model .\model  :: Windows cmd.exe
 ```
 
-The `-` stdin convention (`set -p Expression=-`, `query -q -`, and so on) is refused inside the interactive session, because the session itself owns stdin - use it from the outer shell instead.
+La convención de stdin con `-` (`set -p Expression=-`, `query -q -`, etc.) se rechaza dentro de la sesión interactiva, porque la propia sesión es la dueña de stdin; úsala desde la shell externa.
 
 Las líneas que empiezan por `#` se tratan como comentarios y se omiten, así que puedes anotar un archivo de script:
 
@@ -186,7 +186,7 @@ Este comportamiento se controla con la clave de configuración `launchInteractiv
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `auto` (predeterminado) | Inicia el REPL solo cuando los tres flujos están adjuntos a un TTY. De lo contrario, pasa al análisis normal. |
 | `always`                                   | Inicia el REPL aunque haya redirección de flujos. Útil si siempre quieres una sesión interactiva.             |
-| `never`                                    | No inicia nunca el REPL automáticamente. `te` on its own prints help.                                         |
+| `never`                                    | No inicia nunca el REPL automáticamente. `te` por sí solo muestra la ayuda.                                   |
 
 Cámbialo globalmente con:
 
