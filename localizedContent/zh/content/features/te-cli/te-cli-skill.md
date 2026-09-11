@@ -17,38 +17,38 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Tabular Editor CLI 自带一个开箱即用的**智能体技能**，让 AI 编码智能体学会如何驱动 `te` 命令行界面。 It's a skill folder - a [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) entry point plus a `references/` set of on-demand deep-dive files - packed with the CLI's conventions, command reference, workflows, and gotchas. 安装后，如果你说“部署这个模型”或“添加一个计算利润率的度量值”，智能体会给出符合 `te` 用法的命令，而不是靠猜测或臆造选项。
+Tabular Editor CLI 自带一个开箱即用的**智能体技能**，让 AI 编码智能体学会如何驱动 `te` 命令行界面。 这是一个技能文件夹——包含作为入口的 [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli)，以及 `references/` 中一组按需查阅的深入资料——里面整理了 CLI 的约定、命令参考、工作流和常见坑点。 安装后，如果你说“部署这个模型”或“添加一个计算利润率的度量值”，智能体会给出符合 `te` 用法的命令，而不是靠猜测或臆造选项。
 
 该技能在公开的 [TabularEditor/CLI](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) repository 中维护，并会随着 CLI 预览功能的演进同步更新。
 
 ## 什么是技能
 
-A skill is a folder with a `SKILL.md` entry point that the agent loads on demand, based on your prompt. 它的 YAML frontmatter（`name`、`description`、`version`）会告诉智能体**何时**加载它，以及它涵盖**哪些**内容。 The Markdown body teaches the agent **how** to do the job, and larger skills - like this one - bundle extra reference files under `references/` that the agent reads only when needed.
+技能就是一个文件夹，里面有一个作为入口的 `SKILL.md`，代理会根据你的提示按需加载它。 它的 YAML frontmatter（`name`、`description`、`version`）会告诉智能体**何时**加载它，以及它涵盖**哪些**内容。 Markdown 正文会教代理**如何**完成这项工作；而更大的技能——比如这个——会在 `references/` 下附带额外的参考文件，代理只会在需要时读取。
 
 ## 技能涵盖的内容
 
 该技能会向智能体讲解 `te` 的完整功能：
 
-- every `te` command across all families - save-as, init, deploy, refresh, bpa, validate, query, script, util, and more
+- 所有系列的 `te` 命令——涵盖 save-as、init、deploy、refresh、bpa、validate、query、script、util 等等
 - 身份验证模式——交互式、使用机密或证书的服务主体、环境变量、托管标识
 - 对象路径语法——斜杠形式、DAX 形式和通配符
-- the save model - dry run by default, `--save` to persist, and the interactive shell's `--stage`/`--revert`
+- 保存模型——默认执行 dry run；使用 `--save` 才会持久化保存；交互式 shell 还支持 `--stage`/`--revert`
 - TE2 到 CLI 的迁移映射
 - 适用于 GitHub Actions 和 Azure DevOps 的 CI/CD 实践方案
 - 输出格式、退出代码、环境变量和配置键
-- a cheatsheet of common property names for `-p Name=Value`
+- 用于 `-p Name=Value` 的常用属性名速查表
 - 实践中容易让智能体出错的常见坑点
 
 这些内容与本节其余部分面向人类读者的说明是同一套内容。 命令参考请参见 @te-cli-commands，身份验证请参见 @te-cli-auth，流水线模式请参见 @te-cli-cicd。
 
-## Download the skill
+## 下载技能
 
-The skill lives in the [`skills/te-cli`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) folder of the CLI repository - `SKILL.md` plus its `references/` subfolder.
+该技能位于 CLI repository 的 [`skills/te-cli`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) 文件夹中：包含 `SKILL.md` 以及其 `references/` 子文件夹。
 
-1. Clone the [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository, or download the repository ZIP (**Code > Download ZIP**) and extract it.
-2. Copy the whole `skills/te-cli/` folder somewhere convenient, keeping the `references/` subfolder next to `SKILL.md`.
+1. 克隆 [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository，或下载该 repository 的 ZIP（**Code > Download ZIP**）并解压。
+2. 将整个 `skills/te-cli/` 文件夹复制到一个方便的位置，并确保 `references/` 子文件夹与 `SKILL.md` 放在一起。
 
-You'll move this folder to a tool-specific location in the install steps below. 在下载较新版本之前，如果你想先看看版本之间有哪些变更，可以查看 [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md)。
+在下面的安装步骤中，你会把这个文件夹移到工具指定的位置。 在下载较新版本之前，如果你想先看看版本之间有哪些变更，可以查看 [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md)。
 
 ## 选择安装范围
 
@@ -64,16 +64,16 @@ Claude Code 会从 `.claude/skills/` 下的命名文件夹中加载技能。 `de
 **项目范围** - 技能只会在这个项目中加载：
 
 1. 在项目根目录中，创建文件夹 `.claude/skills/te-cli/`。
-2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
+2. 将下载的 `te-cli` 文件夹中的内容（`SKILL.md` 和 `references/`）复制到该文件夹中。
 
-The final path is `<your-project>/.claude/skills/te-cli/SKILL.md`, with `references/` alongside it.
+最终路径为 `<your-project>/.claude/skills/te-cli/SKILL.md`，并让 `references/` 与其位于同一级目录。
 
 **用户范围** - 技能会在当前用户的所有项目中加载：
 
 1. 在你的用户级 Claude 技能目录中创建 `te-cli` 文件夹：
    - **macOS / Linux：** `~/.claude/skills/te-cli/`
    - **Windows：** `%USERPROFILE%\\.claude\\skills\\te-cli\\`（通常为 `C:\\Users\\<you>\\.claude\\skills\\te-cli\\`）
-2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
+2. 将下载的 `te-cli` 文件夹中的内容（`SKILL.md` 和 `references/`）复制到该文件夹中。
 
 > [!NOTE]
 > Claude Code 会监视技能目录，并在当前会话中识别新增或已编辑的技能，无需重启。 例外情况是：如果 `.claude/skills/` 目录在会话开始时并不存在，而你后来才创建它，则需要重启一次 Claude Code，让它开始监视这个新目录。
@@ -94,14 +94,14 @@ The final path is `<your-project>/.claude/skills/te-cli/SKILL.md`, with `referen
 what does `te deploy` do without `--execute`?
 ```
 
-Claude answers with the documented behavior - it's a dry run that prints the TMSL deployment script to stdout without deploying anything - which confirms the skill is loaded and in use.
+Claude 会按文档所述的行为作答——这是一次 dry run：它会将 TMSL 部署脚本打印到 stdout，而不会部署任何内容——这就表明该技能已加载并正在使用。
 
 ## 在 Claude.ai 和 Claude Desktop 中安装
 
 Claude.ai（网页和桌面版）内置了 **Skills** 功能。 Skills 需要启用代码执行，并且上传时应使用技能文件夹打包成的 ZIP，而不是单独的 `SKILL.md` 文件。
 
 1. 启用代码执行：前往 **Settings > Capabilities**，并开启 **Code execution and file creation**。 在 Team 和 Enterprise 计划中，所有者需要在组织设置里启用这个功能。
-2. Compress the whole downloaded `te-cli` folder (including `references/`) into `te-cli.zip`.
+2. 将整个下载的 `te-cli` 文件夹（包括 `references/`）压缩为 `te-cli.zip`。
 3. 前往 **Settings > Capabilities > Skills**（也可通过 **Customize > Skills** 进入）。
 4. 点击 **+**，选择 **Upload skill**，然后选中 `te-cli.zip`。 Claude 会读取里面的 `SKILL.md`，并显示这个技能的摘要。
 5. 开启这个技能。 当你提到 `te` 或相关概念时，它会自动加载。
@@ -112,11 +112,11 @@ Claude.ai（网页和桌面版）内置了 **Skills** 功能。 Skills 需要启
 
 ## 在 GitHub Copilot 中安装
 
-VS Code 中的 GitHub Copilot 原生支持 Agent Skills 开放标准——也就是 Claude Code 和 Codex 使用的同一种 `SKILL.md` 格式。 这是推荐的方式，因为技能只会在相关时加载。 For Copilot setups that predate Agent Skills, fall back to the generic `AGENTS.md` install below.
+VS Code 中的 GitHub Copilot 原生支持 Agent Skills 开放标准——也就是 Claude Code 和 Codex 使用的同一种 `SKILL.md` 格式。 这是推荐的方式，因为技能只会在相关时加载。 如果你的 Copilot 配置早于 Agent Skills，就改用下面通用的 `AGENTS.md` 安装方式。
 
 ### Agent Skills（VS Code）
 
-Place the skill folder contents (`SKILL.md` and `references/`) in a named folder under a skills directory. 文件夹名称必须与 frontmatter 中的 `name` 字段一致，因此请使用 `te-cli`，并保持 YAML frontmatter 完整不变。
+将技能文件夹中的内容（`SKILL.md` 和 `references/`）放到 skills 目录下一个单独命名的文件夹中。 文件夹名称必须与 frontmatter 中的 `name` 字段一致，因此请使用 `te-cli`，并保持 YAML frontmatter 完整不变。
 
 - **Workspace 作用域：** `.github/skills/te-cli/SKILL.md`（Copilot 也会读取 `.claude/skills/` 和 `.agents/skills/`）。
 - **用户范围：** `~/.copilot/skills/te-cli/SKILL.md`（Copilot 也会读取 `~/.claude/skills/` 和 `~/.agents/skills/`）。
@@ -130,14 +130,14 @@ Codex CLI 会直接从 `.agents/skills/` 下的命名文件夹中加载技能，
 **项目范围**——该技能只会在这个项目中加载：
 
 1. 在项目根目录中创建文件夹 `.agents/skills/te-cli/`。
-2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
+2. 将下载的 `te-cli` 文件夹中的内容（`SKILL.md` 和 `references/`）复制到该文件夹中。
 
 Codex 会从你的工作目录向上扫描，因此提交在 repository 根目录（`$REPO_ROOT/.agents/skills/te-cli/`）的技能，会在该 repository 中的所有协作者之间共享。
 
 **个人范围**——该技能会在你的每个项目中加载：
 
 1. 在你的个人 Codex 技能目录中创建 `te-cli` 文件夹：`~/.agents/skills/te-cli/`。
-2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
+2. 将下载的 `te-cli` 文件夹中的内容（`SKILL.md` 和 `references/`）复制到该文件夹中。
 
 在 Codex CLI 或 IDE 中运行 `/skills`，确认列表中有 `te-cli`，并输入 `te-cli` 以显式指定该技能。
 
@@ -145,21 +145,21 @@ Codex 会从你的工作目录向上扫描，因此提交在 repository 根目�
 
 对于遵循 [`AGENTS.md` convention](https://agents.md) 或支持使用任意说明文件的工具——Aider、Continue、自定义内部 Agent：
 
-1. Download the skill folder.
-2. In a copy of `SKILL.md`, remove the YAML frontmatter block at the top (everything between the first and second `---` lines, including those lines).
-3. Rename that file to `AGENTS.md` and place it at your project root, or wherever the tool expects its instructions file.
-4. Copy the `references/` folder next to your `AGENTS.md` so its relative links keep working.
+1. 下载技能文件夹。
+2. 在 `SKILL.md` 的一个副本中，删除顶部的 YAML frontmatter 区块（即第一处和第二处 `---` 之间的所有内容，包括这两行本身）。
+3. 将该文件重命名为 `AGENTS.md`，并放到项目根目录，或该工具预期的说明文件位置。
+4. 将 `references/` 文件夹复制到 `AGENTS.md` 旁边，以便其中的相对链接继续正常工作。
 5. 这个项目中下一次运行 Agent 时，就会读取这些说明。
 
 ## 更新技能
 
 要获取更新版本：
 
-1. Grab the latest [`skills/te-cli`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) folder from GitHub (re-clone, pull, or re-download the repository ZIP).
-2. Replace what you previously installed:
-   - **Native skills (Claude Code, Codex, Copilot Agent Skills):** replace the whole skill folder contents (`SKILL.md` and `references/`).
+1. 从 GitHub 获取最新的 [`skills/te-cli`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) 文件夹（重新克隆、拉取更新，或重新下载 repository 的 ZIP 包）。
+2. 替换之前安装的内容：
+   - **原生技能（Claude Code、Codex、Copilot Agent Skills）：** 替换整个技能文件夹的全部内容（`SKILL.md` 和 `references/`）。
    - **Claude.ai / Desktop：** 重新将 `te-cli` 文件夹打包成 ZIP 文件，再通过 Skills UI 重新上传。
-   - **Instruction-file installs (AGENTS.md):** re-paste the body into `AGENTS.md` and refresh the copied `references/` folder.
+   - **基于说明文件的安装（AGENTS.md）：** 将正文重新粘贴到 `AGENTS.md` 中，并更新已复制的 `references/` 文件夹。
 
 查看 [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md) 了解各版本之间的变更。
 
