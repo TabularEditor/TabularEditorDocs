@@ -128,7 +128,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. Esto garantiza que tengas una advertencia visible antes de que la CLI deje de funcionar.
+> El banner vuelve a mostrarse en cada comando durante los **14 días anteriores a la fecha de finalización de la versión preliminar** (2026-10-31), independientemente de `hidePreviewNotice`. Esto garantiza que tengas una advertencia visible antes de que la CLI deje de funcionar.
 
 ## Autocompletado del shell
 
@@ -169,16 +169,16 @@ El autocompletado abarca subcomandos, opciones globales y rutas de modelos (cuan
 
 La mayoría de las funcionalidades son idénticas en todas las plataformas. Unas pocas dependen de transportes exclusivos de Windows:
 
-| Funcionalidad                                                                                                                        | Windows | macOS / Linux |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- |
-| Work with local TMDL and BIM model files                                                                                             | Sí      | Sí            |
-| Desplegar en Power BI / Fabric / Azure Analysis Services                                                                             | Sí      | Sí            |
-| Best Practice Analyzer y Analizador VertiPaq                                                                                         | Sí      | Sí            |
-| C# Script                                                                                                                            | Sí      | Sí            |
-| Consultas DAX en modelos en la nube                                                                                                  | Sí      | Sí            |
-| Authentication: browser (interactive), service principal, environment variables, managed identity | Sí      | Sí            |
-| Conectarse a una instancia local de SSAS (transporte TCP)                                                         | Sí      | **No**        |
-| Conectarse a Power BI Desktop (transporte por canalización con nombre)                                            | Sí      | **No**        |
+| Funcionalidad                                                                                                                                  | Windows | macOS / Linux |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------- |
+| Trabajar con archivos locales de modelos TMDL y BIM                                                                                            | Sí      | Sí            |
+| Desplegar en Power BI / Fabric / Azure Analysis Services                                                                                       | Sí      | Sí            |
+| Best Practice Analyzer y Analizador VertiPaq                                                                                                   | Sí      | Sí            |
+| C# Script                                                                                                                                      | Sí      | Sí            |
+| Consultas DAX en modelos en la nube                                                                                                            | Sí      | Sí            |
+| Autenticación: navegador (interactivo), principal de servicio, variables de entorno, identidad administrada | Sí      | Sí            |
+| Conectarse a una instancia local de SSAS (transporte TCP)                                                                   | Sí      | **No**        |
+| Conectarse a Power BI Desktop (transporte por canalización con nombre)                                                      | Sí      | **No**        |
 
 > [!IMPORTANT]
 > Las conexiones locales a SSAS y Power BI Desktop dependen de protocolos de transporte solo disponibles en Windows. Todos los flujos de trabajo basados en la nube (Power BI Service, Fabric y Azure Analysis Services) funcionan en cualquier plataforma.
