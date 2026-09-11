@@ -2,7 +2,7 @@
 uid: te-cli-interactive
 title: 交互模式
 author: Peer Grønnerup
-updated: 2026-06-26
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ applies_to:
 
 ```bash
 te interactive                              # Start and connect to a model later
-te interactive ./model                      # Start with a local model
+te interactive --model ./model              # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
@@ -48,7 +48,7 @@ REPL 启动后，所有 `te` 子命令都可用，**且无需加上 `te` 前缀*
 
 ```
 ls tables
-get "Sales/Revenue" -q expression
+get Sales/Revenue -p expression
 query -q "EVALUATE TOPN(5, 'Sales')"
 bpa run --fail-on error
 ```
@@ -78,31 +78,58 @@ ls 'Net Sales'/'Sales Amount'        # Quoted segments with a slash separator
 
 这些由 REPL 自身处理，而不是常规命令树：
 
-| 命令                  | 用途            |
-| ------------------- | ------------- |
-| `help` 或 `?`        | 列出可用命令。       |
-| `status` 或 `pwd`    | 显示当前活动的模型/连接。 |
-| `clear` 或 `cls`     | 清空屏幕。         |
-| `exit`、`quit` 或 `q` | 退出交互模式。       |
+| 命令                  | 用途                                                                                                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `help` 或 `?`        | 列出可用命令。                                                                                                                                                            |
+| `status` 或 `pwd`    | 显示当前活动的模型/连接。                                                                                                                                                      |
+| `save`              | Commit all staged in-memory edits back to the model source.                                                                                        |
+| `revert`            | Discard all staged edits made since the last save.                                                                                                 |
+| `clear` 或 `cls`     | 清空屏幕。                                                                                                                                                              |
+| `exit`、`quit` 或 `q` | 退出交互模式。 If staged edits are unsaved you are asked to confirm (`n` is the default); `exit --force` discards them without asking. |
+
+`save` inside the session takes no arguments - re-serializing the model to another format or location is `save-as` (e.g. `save-as -o ./out --serialization bim`), exactly as outside the session.
+
+## Staged edits
+
+Inside the session, mutating commands (`set`, `add`, `remove`, `move`, `script`, `macro run`, ...) stage their changes in memory instead of writing to the source, and the prompt shows an indicator while unsaved staged edits exist. The built-in `save` command commits everything staged; `revert` discards everything staged.
+
+Each mutating command can also decide for itself: `--save` persists that one command's change immediately, `--stage` keeps it in memory (the default), and `--revert` rolls the command's change back after showing its effect - useful for a "what would this do?" probe. The three are mutually exclusive, and `--stage`/`--revert` exist only inside the session.
+
+The default per-command behavior is the `interactiveEditMode` config key (`stage` | `save` | `revert`) - see @te-cli-config.
+
+Staged edits are never thrown away silently. Closing a session that still holds them - with `exit`, **Ctrl+D**, or by reaching the end of piped input - first checks for unsaved changes. If unsaved changes exist and a terminal is active, you are asked to confirm, with "no" as the default, and declining returns you to the prompt with the edits intact. Where nobody can answer (stdin piped or redirected, or `--non-interactive`), the session writes a warning naming the unsaved changes and exits with a failure code instead of a success one. Nothing is saved on the way out either way: run `save` first, or `exit --force` to discard the edits deliberately.
+
+## Line editing and keys
+
+The prompt offers single-line editing:
+
+- **Left/Right** move the caret; **Home/End** (also **Ctrl+A**/**Ctrl+E**) jump to the ends; **Backspace/Delete** edit in place.
+- **Up/Down** browse the command history, which persists across sessions.
+- **Ctrl+C** cancels the current command without leaving the session and abandons the half-typed line for good - it is never run, Up does not bring it back, and it is not added to the history.
+- **Ctrl+D** on an empty prompt exits (**Ctrl+Z** then **Enter** on Windows).
+
+There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
 
 ## 引导式提示
 
-启用交互模式后，需要补全输入的命令会提示你输入，而不是直接失败。 不带子命令运行 `auth` 时，会打开一个选择界面，让你在 Login / Status / Logout 之间选择；不带 `--force` 运行 `deploy` 时，会显示摘要并要求确认（安全的默认值为 `n`）。
+启用交互模式后，需要补全输入的命令会提示你输入，而不是直接失败。 Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy --execute` or `refresh --execute` without `--force` shows a summary and asks for confirmation (`n` is the safe default). A `deploy` or `refresh` without `--execute` is a dry run that prints the TMSL it would send, so it never prompts.
 
 如果想在当前会话中为单个命令禁用提示，传入 `--non-interactive`。
 
 ## 管道与重定向输入
 
-交互模式也支持通过管道传入或重定向的 stdin，因此你可以用脚本驱动同一个 REPL，而不必手动逐条输入。 每一行输入都会作为一条命令执行，就像你在提示符处输入它一样；当输入耗尽时，会话将退出（或者在读到 `exit` 这一行时退出）。
+交互模式也支持通过管道传入或重定向的 stdin，因此你可以用脚本驱动同一个 REPL，而不必手动逐条输入。 每一行输入都会作为一条命令执行，就像你在提示符处输入它一样；当输入耗尽时，会话将退出（或者在读到 `exit` 这一行时退出）。 If staged edits are still unsaved at that point, the session warns and exits non-zero - end a mutating script with `save` (or `exit --force` to discard on purpose).
 
 ```bash
-printf "ls\nexit\n" | te interactive ./model        # bash / git-bash
-te interactive ./model < script.te                  # redirected file
+printf "ls\nexit\n" | te interactive --model ./model    # bash / git-bash
+te interactive --model ./model < script.te              # redirected file
 ```
 
 ```bat
-(echo ls & echo exit) | te interactive .\model      :: Windows cmd.exe
+(echo ls & echo exit) | te interactive --model .\model  :: Windows cmd.exe
 ```
+
+The `-` stdin convention (`set -p Expression=-`, `query -q -`, and so on) is refused inside the interactive session, because the session itself owns stdin - use it from the outer shell instead.
 
 以 `#` 开头的行会被视为注释并跳过，因此你可以为脚本文件添加注释：
 
@@ -119,10 +146,10 @@ exit
 
 ```bash
 # Default when piped: stop at the first failing command, exit non-zero
-printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model
+printf "bpa run --fail-on error\ndeploy --execute --force\nexit\n" | te interactive --model ./model
 
 # Run every line regardless of failures
-printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model --no-batch
+printf "bpa run --fail-on error\ndeploy --execute --force\nexit\n" | te interactive --model ./model --no-batch
 ```
 
 ### 便于阅读的执行记录
@@ -130,7 +157,7 @@ printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./mode
 `--echo` 会在对应输出之前将每一行输入写入 stdout，这在捕获管道运行的执行记录时很方便。 注释行不会被回显。
 
 ```bash
-printf "ls tables\nexit\n" | te interactive ./model --echo
+printf "ls tables\nexit\n" | te interactive --model ./model --echo
 ```
 
 ### 选项
@@ -155,11 +182,11 @@ printf "ls tables\nexit\n" | te interactive ./model --echo
 
 此行为由 `launchInteractiveMode` 配置项控制，提供三个取值：
 
-| 值          | 效果                                                                            |
-| ---------- | ----------------------------------------------------------------------------- |
-| `auto`（默认） | 仅当三个流都连接到 TTY 时才启动 REPL。 否则回退到常规解析流程。                                         |
-| `always`   | 无论流是否被重定向，都启动 REPL。 适合始终需要交互式会话的情况。                                           |
-| `never`    | 从不自动启动 REPL。 单独运行 `te` 会打印帮助，与 0.6.0 之前的行为一致。 |
+| 值          | 效果                                                        |
+| ---------- | --------------------------------------------------------- |
+| `auto`（默认） | 仅当三个流都连接到 TTY 时才启动 REPL。 否则回退到常规解析流程。                     |
+| `always`   | 无论流是否被重定向，都启动 REPL。 适合始终需要交互式会话的情况。                       |
+| `never`    | 从不自动启动 REPL。 `te` on its own prints help. |
 
 可通过以下方式全局更改：
 
