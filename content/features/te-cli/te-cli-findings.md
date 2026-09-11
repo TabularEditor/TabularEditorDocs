@@ -1,6 +1,6 @@
 ---
 uid: te-cli-findings
-title: Findings JSON
+title: Machine-Readable Results (JSON)
 author: Peer Grønnerup
 updated: 2026-09-11
 applies_to:
@@ -12,16 +12,16 @@ applies_to:
     - product: Tabular Editor CLI
       full: true
 ---
-# Findings JSON
+# Machine-Readable Results (JSON)
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-`te validate`, `te bpa run`, `te test run`, and `te query` report problems in one shared JSON shape, so a pipeline that gates on more than one of them needs one parser instead of four. Under `--output-format json`, each of these commands emits a **single document** - there is no way for one of them to leave nothing to parse.
+`te validate`, `te bpa run`, `te test run`, and `te query` report problems in one shared JSON shape. Under `--output-format json`, each of these commands emits a **single document** - there is no way for one of them to leave nothing to parse.
 
 > [!NOTE]
-> `te query` emits the findings envelope only when its pre-execution DAX validation produces at least one error. A successful query emits the query result instead: `{columns, rows, rowCount, truncated, durationMs, trace?}`.
+> `te query` uses this JSON shape only when its pre-execution DAX validation produces at least one error. A successful query emits the query result instead: `{columns, rows, rowCount, truncated, durationMs, trace?}`.
 
-## The envelope
+## The JSON document
 
 ```json
 {
@@ -80,13 +80,13 @@ The closed set of `objectType` values (the singular forms of the path-grammar co
 
 ## Per-command extras
 
-Each command keeps a few keys of its own at the top level of the envelope:
+Each command keeps a few keys of its own at the top level of the document:
 
 | Command | Extra keys |
 | -- | -- |
 | `te validate` | `valid` (boolean). |
 | `te bpa run` | `model`, `rulesEvaluated`, `violations`, `ruleErrors`, `ignoredRules`. Rule-evaluation errors appear in `findings` at severity `error` with `objectType: "BpaRule"` - `violations` and `ruleErrors` split the two counts. |
-| `te bpa run --fix` | A `fix` key inside the same single document: `changes`, `fixed`, `fixErrors`, `skipped`, `fixedItems`, `fixErrorItems`. If the fix pass itself fails, the envelope is still written with the reason in `fix.error`. Absent without `--fix`. |
+| `te bpa run --fix` | A `fix` key inside the same single document: `changes`, `fixed`, `fixErrors`, `skipped`, `fixedItems`, `fixErrorItems`. If the fix pass itself fails, the document is still written with the reason in `fix.error`. Absent without `--fix`. |
 | `te test run` | `suites`, `invalidSuites`, `testSummary` (per-status test tallies; `summary` remains the shared severity tally). |
 | `te query` | None - and only on validation errors; see the note above. |
 

@@ -22,7 +22,7 @@ The skill is maintained in the public [TabularEditor/CLI](https://github.com/Tab
 
 ## What a skill is
 
-A skill is a folder with a `SKILL.md` entry point the agent loads on demand based on your prompt. Its YAML frontmatter (`name`, `description`, `version`) tells the agent **when** to load it and **what** it covers. The Markdown body teaches the agent **how** to do the job, and larger skills - like this one - bundle extra reference files under `references/` that the agent reads only when needed.
+A skill is a folder with a `SKILL.md` entry point that the agent loads on demand, based on your prompt. Its YAML frontmatter (`name`, `description`, `version`) tells the agent **when** to load it and **what** it covers. The Markdown body teaches the agent **how** to do the job, and larger skills - like this one - bundle extra reference files under `references/` that the agent reads only when needed.
 
 ## What the skill covers
 

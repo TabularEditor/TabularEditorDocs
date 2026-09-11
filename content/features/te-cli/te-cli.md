@@ -22,13 +22,13 @@ Unlike the Windows-only `TabularEditor.exe` command-line options (TE2) - which w
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-## Built for three audiences
+## Design pillars and target audiences
 
-Four design pillars run through every command:
+Four design pillars shape every command:
 
 - **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
 - **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
-- **Safe by default** - mutating commands preview their changes until you pass `--save`; `te deploy` and `te refresh` print the exact TMSL they would send until you pass `--execute`, and ask for confirmation before acting unless you add `--force`.
+- **Safe by default** - editing commands such as `te set`, `te add` and `te remove` show their change as a diff and write nothing until you add `--save`; adding `--force` saves even when the change introduces validation errors. `te deploy` and `te refresh` print the exact TMSL they would send until you add `--execute`, and then ask for confirmation first unless you add `--force`.
 - **Clear errors** - written to stderr with predictable exit codes.
 
 Together they make the same binary work well for three very different audiences:
@@ -48,7 +48,7 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 
 | Family | What it does | Example commands |
 | -- | -- | -- |
-| [Model I/O](xref:te-cli-commands#model-io) | Save, convert, initialize models | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init) |
+| [Model initialization and save](xref:te-cli-commands#model-initialization-and-save) | Save, convert, initialize models | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init) |
 | [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move) |
 | [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
 | [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX and M, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |

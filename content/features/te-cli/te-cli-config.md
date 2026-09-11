@@ -165,13 +165,13 @@ te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUI
 
 ### Format options
 
-Applied whenever the CLI formats DAX. The CLI ships with an in-house formatter that works fully offline. The layout keys (`shortFormat`, `skipSpaceAfterFunction`) apply when `autoFormat` reformats mutated expressions and when `te query` renders query text; explicit formatting via `te set <path> --format <Property>` and `te util format-dax` takes the equivalent per-invocation flags (`--long`, `--no-space-after-function`) instead. There is deliberately no list-separator key: DAX stored in a model or sent to Analysis Services is always comma-separated, so every config-driven formatting pass uses commas. The one place the semicolon dialect applies is the `--semicolons` flag on `te util format-dax`, for DAX you have typed with semicolons yourself. `formatOptions.useSqlBiDaxFormatter` routes explicit formatting and `te query`'s rendering through the SQL BI [daxformatter.com](https://www.daxformatter.com) web service (requires internet access) if you need that style; `autoFormat` always uses the built-in formatter regardless.
+Applied whenever the CLI formats DAX. The CLI ships a formatter that works fully offline. The layout keys (`shortFormat`, `skipSpaceAfterFunction`) apply when `autoFormat` reformats mutated expressions and when `te query` renders query text; explicit formatting via `te set <path> --format <Property>` and `te util format-dax` takes the equivalent per-invocation flags (`--long`, `--no-space-after-function`) instead. There is deliberately no list-separator key: DAX stored in a model or sent to Analysis Services is always comma-separated, so every config-driven formatting pass uses commas. The one place the semicolon dialect applies is the `--semicolons` flag on `te util format-dax`, for DAX you have typed with semicolons yourself. `formatOptions.useSqlBiDaxFormatter` routes explicit formatting and `te query`'s rendering through the SQL BI [daxformatter.com](https://www.daxformatter.com) web service (requires internet access) if you need that style; `autoFormat` always uses the built-in formatter regardless.
 
 | Key | Default | Description |
 | -- | -- | -- |
 | `formatOptions.shortFormat` | `false` | Prefer short, single-line formatting where possible instead of the default multi-line layout. |
 | `formatOptions.skipSpaceAfterFunction` | `false` | Omit the space between a function name and its opening parenthesis (e.g. `SUM(x)` instead of `SUM (x)`). |
-| `formatOptions.useSqlBiDaxFormatter` | `false` | Format DAX via the [SQL BI daxformatter.com](https://www.daxformatter.com) web service instead of the in-house formatter. Requires internet access. The in-house formatter (default) works offline and matches the Tabular Editor 3 Desktop default. |
+| `formatOptions.useSqlBiDaxFormatter` | `false` | Format DAX via the [SQL BI daxformatter.com](https://www.daxformatter.com) web service instead of the built-in formatter. Requires internet access. The built-in formatter (default) works offline and matches the Tabular Editor 3 Desktop default. |
 
 ### Display
 

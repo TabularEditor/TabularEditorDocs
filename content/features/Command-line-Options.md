@@ -29,47 +29,69 @@ Running `TabularEditor.exe` in a CI/CD pipeline does not require a Tabular Edito
 
 The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.exe`. It's not just a rewrite for macOS and Linux - it adds model editing, inspection, diffing, testing, refresh triggering, and VertiPaq analysis as first-class pipeline operations, none of which were possible with `TabularEditor.exe`. The `te` CLI is in Limited Public Preview (expires 2026-10-31); use `TabularEditor.exe` for production pipelines today.
 
-| | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+#### At a glance
+
+| Aspect | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
 |---|---|---|
 | Status | Stable, production-ready | Limited Public Preview (expires 2026-10-31) |
 | Platform | Windows only | Windows, macOS, Linux |
 | License required | No | No (preview); TBD at GA |
 | Binary | WinForms app, requires `start /wait` wrapper | Purpose-built console binary, no wrapper needed |
-| **Authentication** | | |
+
+#### Authentication
+
+| Capability | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+|---|---|---|
 | Service Principal | Via MSOLAP connection string | Native `--auth spn`, `--auth env`, `--auth managed-identity`; credentials via env vars, stdin, or certificate; OS-native secure credential store |
 | Managed identity | No | Yes (`--auth managed-identity`), for Azure-hosted runners |
 | Interactive browser login | No | Yes (`te auth login`) |
-| **CI/CD** | | |
+
+#### CI/CD
+
+| Capability | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+|---|---|---|
 | CI annotations | `-V` (Azure DevOps), `-G` (GitHub) | `--ci vsts`, `--ci github` on every command |
 | Non-interactive mode | No explicit flag; errors may prompt | `--non-interactive` global flag - fails fast, no prompts |
 | Predictable exit codes | Partial | `0` = success, `1` = failure (for `te diff`: differences found), `2` = `te diff` comparison error |
 | Structured output | No | `--output-format json/csv/tmdl/tmsl` on every command |
 | VSTEST results | `-T` flag | `--trx <file>` on `validate`, `bpa run`, `test run` |
-| **Deployment** | | |
+
+#### Deployment
+
+| Capability | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+|---|---|---|
 | Deploy model | `-D` flag | `te deploy` with fine-grained flags (`--deploy-roles`, `--deploy-partitions`, `--deploy-connections`, `--deploy-full`, etc.) |
 | Generate XMLA/TMSL without deploying | `-X` flag | The default: `te deploy` without `--execute` prints the TMSL to stdout |
 | BPA gate before deploy | No | Built-in; `--skip-bpa` or `--fix-bpa` to override |
 | Connection profiles | No | `te profile set/list/show` - reusable named profiles per environment |
-| **Best Practice Analyzer** | | |
+
+#### Best Practice Analyzer and model editing
+
+| Capability | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+|---|---|---|
 | Run BPA | `-A` / `-AX` flags | `te bpa run` with `--fail-on warning/error`, `--fix`, `--path` scoping, `--vpax` for VPA-aware rules |
 | BPA rule management | No | `te bpa rules add/rm/set/list/disable/enable/init` |
-| **Model editing in pipeline** | | |
 | Run C# scripts | `-S` flag | `te script` - multiple scripts, inline code, stdin, `--validate` compile check, preprocessor symbols (`TECLI`) |
 | Run macros | No | `te macro run` with `--on <object>` context |
 | Set/get properties | No | `te get`, `te set`, `te add`, `te rm`, `te mv` |
 | DAX formatting | No | `te set --format` for model objects, `te util format-dax` / `format-m` for loose expressions |
-| **Inspection** | | |
+
+#### Inspection, refresh, testing and VertiPaq analysis
+
+| Capability | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+|---|---|---|
 | List model objects | No | `te ls` with wildcard path filters, `--type`, `--paths-only`, `--output-format bim` |
 | Search expressions/names | No | `te find` with regex and scope (`--in expressions/names/descriptions`) |
 | Diff two models | No | `te diff` - structural comparison with exit code `1` on any difference |
 | Dependency analysis | No | `te deps` - upstream/downstream for any object; `--unused` to find dead code |
-| **Refresh** | | |
 | Trigger refresh | No | `te refresh` with `--type`, `--table`, `--partition`, `--apply-refresh-policy`; dry run by default, `--execute` to run |
-| **Testing** | | |
 | DAX assertion tests | No | `te test run` with `--tag`, `--trx`, `--ci`; `te test init/snapshot/compare` |
-| **VertiPaq analysis** | | |
 | Storage statistics | No | `te vertipaq` - columns, relationships, partitions; `--export`/`--import` VPAX |
-| **Other** | | |
+
+#### Other
+
+| Capability | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`) |
+|---|---|---|
 | Interactive REPL | No | `te interactive` - model-aware shell with persistent history and staged edits |
 | Shell tab completion | No | `te completion bash/zsh/pwsh` |
 | TE2 backward compatibility | Native | Built-in compatibility layer - existing `TabularEditor.exe` invocations work unchanged |

@@ -52,7 +52,7 @@ Refer to the output of the `te util migrate` command for the current mapping tha
 
 ## Flag mapping (curated subset)
 
-A non-exhaustive summary of the most commonly used flags. Run `te util migrate` for the full list.
+Below is a non-exhaustive summary of the most commonly used flags. Run `te util migrate` for the full list.
 
 | TE2 flag | New CLI equivalent | Notes |
 | -- | -- | -- |

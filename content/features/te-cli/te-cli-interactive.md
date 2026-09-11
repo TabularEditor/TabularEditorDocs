@@ -97,11 +97,18 @@ Each mutating command can also decide for itself: `--save` persists that one com
 
 The default per-command behavior is the `interactiveEditMode` config key (`stage` | `save` | `revert`) - see @te-cli-config.
 
-Staged edits are never thrown away silently. Closing a session that still holds them - with `exit`, **Ctrl+D**, or by reaching the end of piped input - first checks: at a terminal you are told there are unsaved changes and asked to confirm, with "no" as the default, and declining returns you to the prompt with the edits intact. Where nobody can answer (stdin piped or redirected, or `--non-interactive`), the session writes a warning naming the unsaved changes and exits with a failure code instead of a success one. Nothing is saved on the way out either way: run `save` first, or `exit --force` to discard the edits deliberately.
+Staged edits are never thrown away silently. Closing a session that still holds them - with `exit`, **Ctrl+D**, or by reaching the end of piped input - first checks for unsaved changes. If unsaved changes exist and a terminal is active, you are asked to confirm, with "no" as the default, and declining returns you to the prompt with the edits intact. Where nobody can answer (stdin piped or redirected, or `--non-interactive`), the session writes a warning naming the unsaved changes and exits with a failure code instead of a success one. Nothing is saved on the way out either way: run `save` first, or `exit --force` to discard the edits deliberately.
 
 ## Line editing and keys
 
-The prompt offers single-line editing: arrow keys move the caret, Home/End (also Ctrl+A/Ctrl+E) jump to the ends, Backspace/Delete edit in place. Up/Down browse the command history, which persists across sessions. Ctrl+C cancels the current command without leaving the session and abandons the half-typed line for good - it is never run, Up does not bring it back, and it is not added to the history. Ctrl+D on an empty prompt exits (Ctrl+Z then Enter on Windows). There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
+The prompt offers single-line editing:
+
+- **Left/Right** move the caret; **Home/End** (also **Ctrl+A**/**Ctrl+E**) jump to the ends; **Backspace/Delete** edit in place.
+- **Up/Down** browse the command history, which persists across sessions.
+- **Ctrl+C** cancels the current command without leaving the session and abandons the half-typed line for good - it is never run, Up does not bring it back, and it is not added to the history.
+- **Ctrl+D** on an empty prompt exits (**Ctrl+Z** then **Enter** on Windows).
+
+There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
 
 ## Guided prompts
 

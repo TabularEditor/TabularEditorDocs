@@ -1,6 +1,6 @@
 ---
 uid: te-cli-limitations
-title: Known Limitations
+title: Behavior Differences and Known Limitations
 author: Peer Grønnerup
 updated: 2026-09-11
 applies_to:
@@ -12,14 +12,14 @@ applies_to:
     - product: Tabular Editor CLI
       full: true
 ---
-# Known Limitations
+# Behavior Differences and Known Limitations
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-This page lists known limitations of the Tabular Editor CLI (`te`) so you can plan around them and avoid common pitfalls. It is updated with each release; if you find an issue that is not listed here, please file it in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository.
+This page collects the places where the Tabular Editor CLI (`te`) behaves differently from Tabular Editor 2 and 3, together with the things it cannot do yet, so you can plan around both and avoid common pitfalls. It is updated with each release; if you find an issue that is not listed here, please file it in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository.
  
 > [!NOTE]
-> Limitations are grouped by area. Each entry describes the constraint and, where one exists, a workaround or the recommended CLI-friendly alternative.
+> Entries are grouped by area. Each one describes the difference or constraint and, where one exists, a workaround or the recommended CLI-friendly alternative.
 
 ## Scripting
 
@@ -53,7 +53,7 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 | -- | -- |
 | **`te validate` cannot auto-fix Code Action violations** | `te validate` reports Code Action violations but offers no CLI flag to apply the suggested fix. Apply the fix in Tabular Editor 3, or use `te bpa run --fix` for the subset of Code Actions that overlap with BPA rules. |
 
-## Model I/O
+## Model initialization and save
 
 | Limitation | Notes / Workaround |
 | -- | -- |

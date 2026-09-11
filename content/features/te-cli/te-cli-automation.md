@@ -36,7 +36,7 @@ te query -q "EVALUATE VALUES('Date'[Year])" --output-format csv
 te bpa run --output-format json
 ```
 
-Under `--output-format json`, `te validate`, `te bpa run`, `te test run`, and `te query` share one findings JSON envelope with a `summary`, a flat `findings[]` array, and `durationMs` - see @te-cli-findings for the shape to parse.
+Under `--output-format json`, `te validate`, `te bpa run`, `te test run`, and `te query` share one JSON document shape with a `summary`, a flat `findings[]` array, and `durationMs` - see @te-cli-findings for the shape to parse.
 
 > [!NOTE]
 > `--output-format` and `--error-format` are independent. Setting `--output-format json` does *not* switch stderr to JSON; pass `--error-format json` for that. There is no automatic format switching when stdout is redirected - the default is always `text` unless you ask otherwise.

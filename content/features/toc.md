@@ -71,10 +71,10 @@
 ### [Interactive Mode](xref:te-cli-interactive)
 ### [Automation and Scripting](xref:te-cli-automation)
 ### [CI/CD Integration](xref:te-cli-cicd)
-### [Findings JSON](xref:te-cli-findings)
+### [Machine-Readable Results (JSON)](xref:te-cli-findings)
 ### [AI Agent Skill](xref:te-cli-skill)
 ### [Migrating from TE2 CLI](xref:te-cli-migrate)
-### [Known Limitations](xref:te-cli-limitations)
+### [Behavior Differences and Known Limitations](xref:te-cli-limitations)
 ## @command-line-options
 
 # [Semantic Bridge for cross-platform translations](xref:semantic-bridge)

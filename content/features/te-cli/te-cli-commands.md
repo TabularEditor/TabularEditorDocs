@@ -172,7 +172,7 @@ The model is never a positional argument - a stray path on the command line is r
 > [!NOTE]
 > **Dotted server names.** `-s`/`--server` treats a dotted name (e.g. `Sales.2026`) as an Analysis Services server hostname, not a Power BI workspace. A warning fires when the CLI has to make this call, with a hint to append `.Workspace` (e.g. `Sales.2026.Workspace`) or use a full `powerbi://` URL if you meant the Power BI workspace. Applies to `te connect`, `te deploy`, `te refresh`, `te query`, `te vertipaq`, and `te test run`.
 
-## Model I/O
+## Model initialization and save
 
 ### save-as
 
@@ -513,7 +513,7 @@ te validate --errors-only                 # Hide warnings and anti-pattern hints
 
 Every finding carries a stable code, shown in the **Code** column of the Errors, Warnings, and Anti-patterns tables as well as in JSON, `--ci` annotations, and `--trx`. Three codes are worth knowing when a hand-written model is involved: `TE0012` (a column and a measure, or two columns, share a name within one table) and `TE0013` (a measure name is repeated across tables) are errors - Analysis Services refuses to load such a model, and `te save-as` refuses to write one unless `--force` or `--skip-validation` is passed; `TE0014` is a warning that a TMDL folder has no `database.tmdl`, so the compatibility level in effect is a substitute for the one the model declared. The folder still loads and `te validate` still exits `0` for `TE0014`; hide it like any other warning with `--no-warnings` or `--errors-only`.
 
-Under `--output-format json`, `te validate` emits the unified findings envelope (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te test run`, and `te query` - see @te-cli-findings.
+Under `--output-format json`, `te validate` emits the shared findings JSON document (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te test run`, and `te query` - see @te-cli-findings.
 
 > [!NOTE]
 > `te validate` does not support `--output-format csv` - CSV is rejected up front with an actionable error rather than producing a partial result. Use `text` or `json` for validation output.
@@ -550,7 +550,7 @@ te bpa run --path 'Sa*'            # Wildcard - every table starting with Sa
 te bpa run --path Sales/Measures   # Path filter applied to the matched tables
 ```
 
-Under `--output-format json`, `te bpa run` emits the unified findings envelope (see @te-cli-findings); with `--fix`, the JSON is a single document that also includes the `fix` change set.
+Under `--output-format json`, `te bpa run` emits the shared findings JSON document (see @te-cli-findings); with `--fix`, the JSON is a single document that also includes the `fix` change set.
 
 #### Rule sources and resolution
 
@@ -956,7 +956,7 @@ te test run --ci github --trx results.trx
 te test run --tag revenue
 ```
 
-Suites are validated before any connection is made; a suite that fails validation (for example, a missing `query_file`) exits `1` without running anything. Under `--output-format json`, `te test run` emits the unified findings envelope with test-specific extras (`suites`, `invalidSuites`, `testSummary`) - see @te-cli-findings.
+Suites are validated before any connection is made; a suite that fails validation (for example, a missing `query_file`) exits `1` without running anything. Under `--output-format json`, `te test run` emits the shared findings JSON document with test-specific extras (`suites`, `invalidSuites`, `testSummary`) - see @te-cli-findings.
 
 ### test init / spec / use / list / snapshot / compare
 

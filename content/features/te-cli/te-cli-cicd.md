@@ -35,7 +35,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 - **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub). `azdo` / `azure-devops` and `gh` are accepted aliases, `none` means no annotations, and a mistyped value is rejected before the command runs instead of silently emitting nothing.
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
 - **Structured errors.** `--error-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
-- **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable envelope under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
+- **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable JSON document under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
 
 ## Adding the CLI to your repo
 
