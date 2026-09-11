@@ -2,7 +2,7 @@
 uid: te-cli-skill
 title: Habilidad de agente de IA
 author: Morten Lønskov
-updated: 2026-06-04
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,39 +17,38 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Tabular Editor CLI incluye un **skill de agente** listo para usar que enseña a los agentes de programación con IA a manejar la interfaz de línea de comandos `te`. Es un único archivo Markdown, [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), que reúne las convenciones de la CLI, la referencia de comandos, los flujos de trabajo y los aspectos a tener en cuenta. Una vez instalado, un agente responde a «despliega este modelo» o «añade una medida que calcule el margen» con invocaciones idiomáticas de `te`, en lugar de adivinar o inventarse parámetros.
+Tabular Editor CLI incluye un **skill de agente** listo para usar que enseña a los agentes de programación con IA a manejar la interfaz de línea de comandos `te`. It's a skill folder - a [`SKILL.md`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) entry point plus a `references/` set of on-demand deep-dive files - packed with the CLI's conventions, command reference, workflows, and gotchas. Una vez instalado, un agente responde a «despliega este modelo» o «añade una medida que calcule el margen» con invocaciones idiomáticas de `te`, en lugar de adivinar o inventarse parámetros.
 
 El skill se mantiene en el repositorio público [TabularEditor/CLI](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) y hace un seguimiento de las funcionalidades en versión preliminar de la CLI a medida que evoluciona.
 
 ## Qué es un skill
 
-Un skill es un archivo Markdown que un agente de IA carga bajo demanda en función de tu prompt. Su frontmatter YAML (`name`, `description`, `version`) le indica al agente **cuándo** cargarlo y **qué** cubre. El cuerpo en Markdown le enseña al agente **cómo** realizar la tarea.
+A skill is a folder with a `SKILL.md` entry point that the agent loads on demand, based on your prompt. Su frontmatter YAML (`name`, `description`, `version`) le indica al agente **cuándo** cargarlo y **qué** cubre. The Markdown body teaches the agent **how** to do the job, and larger skills - like this one - bundle extra reference files under `references/` that the agent reads only when needed.
 
 ## Qué cubre el skill
 
 El skill enseña al agente toda la superficie de `te`:
 
-- todos los comandos de `te` en todas sus familias: load, save, init, deploy, refresh, bpa, validate, query, script, format y más
+- every `te` command across all families - save-as, init, deploy, refresh, bpa, validate, query, script, util, and more
 - patrones de autenticación: interactiva, entidad de servicio con secreto o certificado, variables de entorno, identidad administrada
 - gramática de rutas de objeto: forma con barras, forma DAX y comodines
-- el modelo de staging: comportamiento de `--save`, `--stage` y `--revert`
+- the save model - dry run by default, `--save` to persist, and the interactive shell's `--stage`/`--revert`
 - Correspondencias de migración de TE2 a CLI
 - Recetas de CI/CD para GitHub Actions y Azure DevOps
 - formatos de salida, códigos de salida, variables de entorno y claves de configuración
-- una hoja de referencia de propiedades comunes de `-q`
+- a cheatsheet of common property names for `-p Name=Value`
 - los escollos que hacen tropezar a los agentes en la práctica
 
 Esto cubre lo mismo que el resto de esta sección documenta para humanos. Consulta @te-cli-commands para la referencia de comandos, @te-cli-auth para la autenticación y @te-cli-cicd para patrones de canalización.
 
-## Descarga el archivo del skill
+## Download the skill
 
-Este skill es un único archivo: [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md).
+The skill lives in the [`skills/te-cli`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) folder of the CLI repository - `SKILL.md` plus its `references/` subfolder.
 
-1. Abre [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) en GitHub.
-2. Haz clic en **Download raw file** (en la parte superior derecha del visor de archivos).
-3. Guarda el archivo en un lugar práctico.
+1. Clone the [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository, or download the repository ZIP (**Code > Download ZIP**) and extract it.
+2. Copy the whole `skills/te-cli/` folder somewhere convenient, keeping the `references/` subfolder next to `SKILL.md`.
 
-Moverás este archivo a una ubicación específica de la herramienta en los pasos de instalación que se indican a continuación. Para ver qué cambió entre versiones antes de descargar una copia más reciente, consulta el [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md).
+You'll move this folder to a tool-specific location in the install steps below. Para ver qué cambió entre versiones antes de descargar una copia más reciente, consulta el [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md).
 
 ## Elige un ámbito de instalación
 
@@ -65,16 +64,16 @@ Claude Code carga las habilidades desde una carpeta con un nombre específico de
 **Ámbito de proyecto** - la habilidad solo se carga dentro de este proyecto:
 
 1. En la raíz de tu proyecto, crea la carpeta `.claude/skills/te-cli/`.
-2. Coloca el archivo `SKILL.md` descargado dentro de esa carpeta.
+2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
 
-La ruta final es `<your-project>/.claude/skills/te-cli/SKILL.md`.
+The final path is `<your-project>/.claude/skills/te-cli/SKILL.md`, with `references/` alongside it.
 
 **Ámbito de usuario** - la habilidad se carga en todos los proyectos del usuario actual:
 
 1. Crea una carpeta `te-cli` dentro de tu directorio de habilidades de Claude a nivel de usuario:
    - **macOS / Linux:** `~/.claude/skills/te-cli/`
    - **Windows:** `%USERPROFILE%\.claude\skills\te-cli\` (normalmente `C:\Users\<you>\.claude\skills\te-cli\`)
-2. Coloca el archivo `SKILL.md` descargado dentro de esa carpeta.
+2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
 
 > [!NOTE]
 > Claude Code vigila los directorios de habilidades y detecta habilidades nuevas o editadas durante la sesión actual; no necesitas reiniciar. La excepción es crear un directorio `.claude/skills/` que no existía al iniciar la sesión: reinicia Claude Code una vez para que empiece a vigilar el nuevo directorio.
@@ -92,17 +91,17 @@ Deberías ver `te-cli` en la lista. Si no aparece, confirma la ruta del archivo 
 Para hacer una prueba de humo funcional, pregunta:
 
 ```
-what does `te deploy --xmla` do?
+what does `te deploy` do without `--execute`?
 ```
 
-Claude responde con el comportamiento documentado: genera un script TMSL/XMLA en stdout en lugar de desplegarlo, lo que confirma que la skill está cargada y en uso.
+Claude answers with the documented behavior - it's a dry run that prints the TMSL deployment script to stdout without deploying anything - which confirms the skill is loaded and in use.
 
 ## Instalación para Claude.ai y Claude Desktop
 
 Claude.ai (web y escritorio) incluye una función integrada de **Skills**. Las Skills requieren ejecución de código, y debes subirlas como un archivo ZIP de la carpeta de la skill, en lugar del `SKILL.md` suelto.
 
 1. Activa la ejecución de código: ve a **Configuración > Capacidades** y habilita **Ejecución de código y creación de archivos**. En los planes Team y Enterprise, un propietario lo habilita en la configuración de la organización.
-2. Coloca el `SKILL.md` descargado dentro de una carpeta llamada `te-cli` y, después, comprime esa carpeta en `te-cli.zip`.
+2. Compress the whole downloaded `te-cli` folder (including `references/`) into `te-cli.zip`.
 3. Ve a **Configuración > Capacidades > Skills** (también accesible desde **Personalizar > Skills**).
 4. Haz clic en **+**, elige **Subir una skill** y selecciona `te-cli.zip`. Claude lee el `SKILL.md` incluido y muestra un resumen de la skill.
 5. Activa la skill. Se carga automáticamente cuando mencionas `te` o un concepto relacionado.
@@ -113,11 +112,11 @@ Consulta el [artículo de ayuda sobre Skills de Anthropic](https://support.claud
 
 ## Instalación para GitHub Copilot
 
-GitHub Copilot en VS Code es compatible de forma nativa con el estándar abierto Agent Skills: el mismo formato `SKILL.md` que usan Claude Code y Codex. Este es el enfoque recomendado porque la skill solo se carga cuando es relevante. En configuraciones de Copilot anteriores a Agent Skills, usa como alternativa el archivo de instrucciones personalizadas siempre activo que aparece más abajo.
+GitHub Copilot en VS Code es compatible de forma nativa con el estándar abierto Agent Skills: el mismo formato `SKILL.md` que usan Claude Code y Codex. Este es el enfoque recomendado porque la skill solo se carga cuando es relevante. For Copilot setups that predate Agent Skills, fall back to the generic `AGENTS.md` install below.
 
 ### Agent Skills (VS Code)
 
-Coloca la skill en una carpeta con nombre dentro de un directorio de skills. El nombre de la carpeta debe coincidir con el campo `name` del frontmatter, así que usa `te-cli` y mantén intacto el frontmatter YAML.
+Place the skill folder contents (`SKILL.md` and `references/`) in a named folder under a skills directory. El nombre de la carpeta debe coincidir con el campo `name` del frontmatter, así que usa `te-cli` y mantén intacto el frontmatter YAML.
 
 - **Alcance del Workspace:** `.github/skills/te-cli/SKILL.md` (Copilot también lee `.claude/skills/` y `.agents/skills/`).
 - **Ámbito de usuario:** `~/.copilot/skills/te-cli/SKILL.md` (Copilot también lee `~/.claude/skills/` y `~/.agents/skills/`).
@@ -131,14 +130,14 @@ Codex CLI carga skills de forma nativa desde una carpeta con nombre dentro de `.
 **Ámbito de proyecto**: la skill se carga solo dentro de este proyecto:
 
 1. En la raíz del proyecto, crea la carpeta `.agents/skills/te-cli/`.
-2. Coloca el archivo `SKILL.md` descargado dentro de esa carpeta.
+2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
 
 Codex busca hacia arriba desde tu directorio de trabajo, así que una skill incluida en la raíz del repositorio (`$REPO_ROOT/.agents/skills/te-cli/`) se comparte con todos los que trabajan en el repositorio.
 
 **Ámbito personal**: la skill se carga en todos los proyectos del usuario actual:
 
 1. Crea la carpeta `te-cli` dentro de tu directorio personal de skills de Codex: `~/.agents/skills/te-cli/`.
-2. Coloca el archivo `SKILL.md` descargado dentro de esa carpeta.
+2. Copy the contents of the downloaded `te-cli` folder (`SKILL.md` and `references/`) into that folder.
 
 Ejecuta `/skills` en la CLI de Codex o en el IDE para confirmar que `te-cli` aparece en la lista, y escribe `te-cli` para mencionar una skill explícitamente.
 
@@ -146,20 +145,21 @@ Ejecuta `/skills` en la CLI de Codex o en el IDE para confirmar que `te-cli` apa
 
 Para herramientas que siguen la [convención `AGENTS.md`](https://agents.md) o aceptan un archivo de instrucciones arbitrario —Aider, Continue, agentes internos personalizados—:
 
-1. Descarga `SKILL.md`.
-2. Elimina el bloque de frontmatter YAML de la parte superior (todo lo que haya entre la primera y la segunda línea `---`, incluidas esas líneas).
-3. Cambia el nombre del archivo a `AGENTS.md` y colócalo en la raíz del proyecto, o donde la herramienta espere su archivo de instrucciones.
-4. La siguiente invocación del agente en ese proyecto detectará las instrucciones.
+1. Download the skill folder.
+2. In a copy of `SKILL.md`, remove the YAML frontmatter block at the top (everything between the first and second `---` lines, including those lines).
+3. Rename that file to `AGENTS.md` and place it at your project root, or wherever the tool expects its instructions file.
+4. Copy the `references/` folder next to your `AGENTS.md` so its relative links keep working.
+5. La siguiente invocación del agente en ese proyecto detectará las instrucciones.
 
 ## Actualizar la skill
 
 Para obtener una versión más reciente:
 
-1. Abre [`SKILL.md`](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/SKILL.md) en GitHub y usa **Download raw file** para descargar la copia más reciente.
-2. Sustituye el archivo que instalaste antes:
-   - **Skills nativas (Claude Code, Codex, Copilot Agent Skills):** sobrescribe `SKILL.md` en la carpeta de la skill.
+1. Grab the latest [`skills/te-cli`](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) folder from GitHub (re-clone, pull, or re-download the repository ZIP).
+2. Replace what you previously installed:
+   - **Native skills (Claude Code, Codex, Copilot Agent Skills):** replace the whole skill folder contents (`SKILL.md` and `references/`).
    - **Claude.ai / Desktop:** vuelve a comprimir en ZIP la carpeta `te-cli` y vuelve a subirla desde la interfaz de Skills.
-   - **Instalaciones mediante archivos de instrucciones (instrucciones personalizadas de Copilot, AGENTS.md):** vuelve a pegar el texto completo en `.github/copilot-instructions.md` o `AGENTS.md`.
+   - **Instruction-file installs (AGENTS.md):** re-paste the body into `AGENTS.md` and refresh the copied `references/` folder.
 
 Consulta el [CHANGELOG](https://github.com/TabularEditor/CLI/blob/main/skills/te-cli/CHANGELOG.md) para ver qué cambió entre versiones.
 
