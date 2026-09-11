@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: Installation and Setup
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -127,7 +127,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of the preview end date** (2026-09-30), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
+> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## Shell completion
 
@@ -170,12 +170,12 @@ Most features are identical across platforms. A handful depend on Windows-only t
 
 | Feature | Windows | macOS / Linux |
 | -- | -- | -- |
-| Load/save BIM and TMDL | Yes | Yes |
+| Work with local TMDL and BIM model files | Yes | Yes |
 | Deploy to Power BI / Fabric / Azure Analysis Services | Yes | Yes |
 | Best Practice Analyzer and VertiPaq Analyzer | Yes | Yes |
 | C# scripting | Yes | Yes |
 | DAX queries against cloud models | Yes | Yes |
-| Authentication: browser, device-code, service principal, env, managed identity | Yes | Yes |
+| Authentication: browser (interactive), service principal, environment variables, managed identity | Yes | Yes |
 | Connect to local SSAS instance (TCP transport) | Yes | **No** |
 | Connect to Power BI Desktop (named-pipe transport) | Yes | **No** |
 
