@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: CI/CD Integration
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,8 +30,9 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 
 - **Single self-contained binary.** No runtime install, no `TabularEditor.exe`, no `start /wait`.
 - **`--non-interactive` global flag.** Disables every prompt; fails fast with actionable errors.
-- **Dry run by default.** `te deploy` and `te refresh` print the exact TMSL they would send; add `--execute` to act. `te deploy --execute --force` skips the confirmation prompt - required in CI, where a prompt cannot be answered.
-- **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub).
+- **Dry run by default.** `te deploy` and `te refresh` print the exact TMSL they would send; add `--execute` to act. Both ask for confirmation at a terminal, so `--execute --force` is required in CI, where a prompt cannot be answered.
+- **Failure is failure.** `te deploy` exits non-zero when the server accepts the metadata but parks objects with errors, and `te script` exits non-zero when a script reports an error - a gate on the exit code cannot pass a broken run.
+- **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub). `azdo` / `azure-devops` and `gh` are accepted aliases, `none` means no annotations, and a mistyped value is rejected before the command runs instead of silently emitting nothing.
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
 - **Structured errors.** `--error-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
 - **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable envelope under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
@@ -196,20 +197,20 @@ te script --file ./scripts/fix.csx --validate
 
 ## Refresh patterns
 
-Refresh in pipelines is typically a follow-up step after deployment. Add `--execute` (without it the command only prints the TMSL it would run), use `--non-interactive`, and pick a deterministic `--type`:
+Refresh in pipelines is typically a follow-up step after deployment. Add `--execute --force` (without `--execute` the command only prints the TMSL it would run; without `--force` it stops to ask for a confirmation nobody can give), use `--non-interactive`, and pick a deterministic `--type`:
 
 ```bash
 # Full refresh of the whole model after deploy
-te refresh -s my-ws -d my-model --type full --execute --non-interactive
+te refresh -s my-ws -d my-model --type full --execute --force --non-interactive
 
 # Refresh a single fact table (e.g., daily incremental pipeline)
-te refresh -s my-ws -d my-model --table Sales --type full --execute --non-interactive
+te refresh -s my-ws -d my-model --table Sales --type full --execute --force --non-interactive
 
 # Recalculate only (useful after calculation-group changes)
-te refresh -s my-ws -d my-model --type calculate --execute --non-interactive
+te refresh -s my-ws -d my-model --type calculate --execute --force --non-interactive
 ```
 
-For incremental refresh workflows, use `--apply-refresh-policy` (pass `true`, `false`, or a table name to scope the refresh to that table) together with `--effective-date <yyyy-MM-dd>` and `--execute`. See @te-cli-commands for details.
+For incremental refresh workflows, use `--apply-refresh-policy` (pass `true`, `false`, or a table name to scope the refresh to that table) together with `--effective-date <yyyy-MM-dd>` and `--execute --force`. See @te-cli-commands for details.
 
 ## Artifact patterns
 

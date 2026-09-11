@@ -2,7 +2,7 @@
 uid: te-cli-interactive
 title: Interactive Mode
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -85,7 +85,7 @@ These are handled by the REPL itself, not the regular command tree:
 | `save` | Commit all staged in-memory edits back to the model source. |
 | `revert` | Discard all staged edits made since the last save. |
 | `clear` or `cls` | Clear the screen. |
-| `exit`, `quit`, or `q` | Exit interactive mode. |
+| `exit`, `quit`, or `q` | Exit interactive mode. If staged edits are unsaved you are asked to confirm (`n` is the default); `exit --force` discards them without asking. |
 
 `save` inside the session takes no arguments - re-serializing the model to another format or location is `save-as` (e.g. `save-as -o ./out --serialization bim`), exactly as outside the session.
 
@@ -97,19 +97,21 @@ Each mutating command can also decide for itself: `--save` persists that one com
 
 The default per-command behavior is the `interactiveEditMode` config key (`stage` | `save` | `revert`) - see @te-cli-config.
 
+Staged edits are never thrown away silently. Closing a session that still holds them - with `exit`, **Ctrl+D**, or by reaching the end of piped input - first checks: at a terminal you are told there are unsaved changes and asked to confirm, with "no" as the default, and declining returns you to the prompt with the edits intact. Where nobody can answer (stdin piped or redirected, or `--non-interactive`), the session writes a warning naming the unsaved changes and exits with a failure code instead of a success one. Nothing is saved on the way out either way: run `save` first, or `exit --force` to discard the edits deliberately.
+
 ## Line editing and keys
 
-The prompt offers single-line editing: arrow keys move the caret, Home/End (also Ctrl+A/Ctrl+E) jump to the ends, Backspace/Delete edit in place. Up/Down browse the command history, which persists across sessions. Ctrl+C cancels the current command without leaving the session; Ctrl+D on an empty prompt exits (Ctrl+Z then Enter on Windows). There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
+The prompt offers single-line editing: arrow keys move the caret, Home/End (also Ctrl+A/Ctrl+E) jump to the ends, Backspace/Delete edit in place. Up/Down browse the command history, which persists across sessions. Ctrl+C cancels the current command without leaving the session and abandons the half-typed line for good - it is never run, Up does not bring it back, and it is not added to the history. Ctrl+D on an empty prompt exits (Ctrl+Z then Enter on Windows). There is no tab completion inside the session - shell completion via `te completion` applies to the outer shell only.
 
 ## Guided prompts
 
-When interactive mode is active, commands that need missing input prompt for it instead of failing. Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy --execute` without `--force` shows a summary and asks for confirmation (`n` is the safe default). A `deploy` without `--execute` is a dry run that prints the TMSL the deployment would send, so it never prompts.
+When interactive mode is active, commands that need missing input prompt for it instead of failing. Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy --execute` or `refresh --execute` without `--force` shows a summary and asks for confirmation (`n` is the safe default). A `deploy` or `refresh` without `--execute` is a dry run that prints the TMSL it would send, so it never prompts.
 
 To disable prompts for a single command inside the session, pass `--non-interactive`.
 
 ## Piped and redirected input
 
-Interactive mode also accepts piped or redirected stdin, so the same REPL can be driven from a script instead of typed by hand. Each line of input is run as a command, exactly as if you had entered it at the prompt, and the session exits when input is exhausted (or when it reaches an `exit` line).
+Interactive mode also accepts piped or redirected stdin, so the same REPL can be driven from a script instead of typed by hand. Each line of input is run as a command, exactly as if you had entered it at the prompt, and the session exits when input is exhausted (or when it reaches an `exit` line). If staged edits are still unsaved at that point, the session warns and exits non-zero - end a mutating script with `save` (or `exit --force` to discard on purpose).
 
 ```bash
 printf "ls\nexit\n" | te interactive --model ./model    # bash / git-bash

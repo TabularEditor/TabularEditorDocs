@@ -2,7 +2,7 @@
 uid: te-cli-config
 title: Custom Configuration
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -99,7 +99,6 @@ The complete JSON config schema with all keys at their default values. Use this 
   "launchInteractiveMode": "auto",
 
   "formatOptions": {
-    "useSemicolons": false,
     "shortFormat": false,
     "skipSpaceAfterFunction": false,
     "useSqlBiDaxFormatter": false
@@ -144,7 +143,7 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 
 | Key | Default | Description |
 | -- | -- | -- |
-| `autoFormat` | `false` | Automatically format the DAX expressions changed by a mutating command. Formatting is scoped to the objects the command touched but covers every DAX expression property they hold (expressions, format string expressions, detail rows, KPI target/status/trend, calculation group and table permission expressions, etc.). Power Query (M) and SQL partition queries are never reformatted. Always uses the built-in offline formatter; the `formatOptions` layout keys apply. |
+| `autoFormat` | `false` | Automatically format the DAX expressions changed by a mutating command. Formatting is scoped to the objects the command touched but covers every DAX expression property they hold (expressions, format string expressions, detail rows, KPI target/status/trend, calculation group and table permission expressions, etc.). Power Query (M) and SQL partition queries are never reformatted. Always uses the built-in offline formatter in the comma dialect; the `formatOptions` layout keys apply. |
 | `validateOnMutation` | `true` | After a mutating command (`add`, `set`, `mv`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy. |
 | `mutationOutput` | `diff` | How mutating commands (`add`, `set`, `move`, `remove`, `script`, `bpa run --fix`) render the resulting change set in text output: `diff` (full before/after diff), `stat` (per-object change counts), `name-only` (changed object paths), or `none` (suppress the change set; config-only - there is no `--none` flag). The per-command `--diff` / `--stat` / `--name-only` flags override for one invocation. JSON output always carries the full `changes` array regardless. |
 | `bpa.onMutation` | `false` | Run a scoped BPA analysis after each mutating command (`set`, `add`, `mv`, `rm`, `macro run`). Only the affected table's objects are checked, not the whole model - useful for fast feedback during iterative edits. |
@@ -166,11 +165,10 @@ te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUI
 
 ### Format options
 
-Applied whenever the CLI formats DAX. The CLI ships with an in-house formatter that works fully offline. The layout keys (`useSemicolons`, `shortFormat`, `skipSpaceAfterFunction`) apply when `autoFormat` reformats mutated expressions and when `te query` renders query text; explicit formatting via `te set <path> --format <Property>` and `te util format-dax` takes the equivalent per-invocation flags (`--semicolons`, `--long`, `--no-space-after-function`) instead. `formatOptions.useSqlBiDaxFormatter` routes explicit formatting and `te query`'s rendering through the SQL BI [daxformatter.com](https://www.daxformatter.com) web service (requires internet access) if you need that style; `autoFormat` always uses the built-in formatter regardless.
+Applied whenever the CLI formats DAX. The CLI ships with an in-house formatter that works fully offline. The layout keys (`shortFormat`, `skipSpaceAfterFunction`) apply when `autoFormat` reformats mutated expressions and when `te query` renders query text; explicit formatting via `te set <path> --format <Property>` and `te util format-dax` takes the equivalent per-invocation flags (`--long`, `--no-space-after-function`) instead. There is deliberately no list-separator key: DAX stored in a model or sent to Analysis Services is always comma-separated, so every config-driven formatting pass uses commas. The one place the semicolon dialect applies is the `--semicolons` flag on `te util format-dax`, for DAX you have typed with semicolons yourself. `formatOptions.useSqlBiDaxFormatter` routes explicit formatting and `te query`'s rendering through the SQL BI [daxformatter.com](https://www.daxformatter.com) web service (requires internet access) if you need that style; `autoFormat` always uses the built-in formatter regardless.
 
 | Key | Default | Description |
 | -- | -- | -- |
-| `formatOptions.useSemicolons` | `false` | Use `;` as the list separator (European/EU locale convention). The default `,` matches the en-US locale. |
 | `formatOptions.shortFormat` | `false` | Prefer short, single-line formatting where possible instead of the default multi-line layout. |
 | `formatOptions.skipSpaceAfterFunction` | `false` | Omit the space between a function name and its opening parenthesis (e.g. `SUM(x)` instead of `SUM (x)`). |
 | `formatOptions.useSqlBiDaxFormatter` | `false` | Format DAX via the [SQL BI daxformatter.com](https://www.daxformatter.com) web service instead of the in-house formatter. Requires internet access. The in-house formatter (default) works offline and matches the Tabular Editor 3 Desktop default. |
@@ -237,6 +235,19 @@ When you run a mutating command (`te add`, `te set`, `te move`, `te macro run`),
 4. **BPA on mutation** (`bpa.onMutation`, default `false`) runs BPA after the mutation when enabled, warning or failing based on `--fail-on`.
 
 Disable a check with `te config set <key> false`, or scope the relaxation to a specific environment via a profile.
+
+## Administrator policies
+
+On Windows, `te` honors the same administrator policies as Tabular Editor 3. Policies are read from the registry under `Software\Policies\Tabular Editor ApS` - with an optional `TECLI` subkey for values that should apply to the CLI only, and a `TE3` subkey for the desktop - and from the earlier `Software\Policies\Kapacity\Tabular Editor` key, which keeps working unchanged. A machine-wide value (`HKEY_LOCAL_MACHINE`) takes precedence over a per-user one (`HKEY_CURRENT_USER`), and within a hive a product-specific value takes precedence over a shared one. Where a policy turns a feature off, the command names the policy responsible, does nothing, and exits with a failure - so a pipeline that depends on something an administrator has since turned off fails visibly rather than reporting success for work it never did.
+
+| Policy | Effect on the CLI |
+| -- | -- |
+| `DisableCSharpScripts` | Refuses `te script` and the automatic fixes of `te bpa run --fix`. |
+| `DisableMacros` | Refuses every `te macro` command. |
+| `DisableBpaDownload` | Refuses Best Practice Analyzer rules given as a URL. Rule files on disk and the built-in rules are unaffected. |
+| `DisableTelemetry` | Turns anonymous usage statistics off, whatever `disableTelemetry` in config says. |
+
+Policies that govern features the CLI does not have - update checks, error reports, DAX Optimizer, the DAX Package Manager, the AI assistant, and the MCP server - have no effect on it. See @policies for the full list of policies and how to deploy them.
 
 ## Environment variables
 

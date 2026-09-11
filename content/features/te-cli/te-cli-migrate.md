@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migrating from the TE2 Command Line
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -75,8 +75,8 @@ A non-exhaustive summary of the most commonly used flags. Run `te util migrate` 
 | `-M` / `-MEMBERS` | `te deploy --deploy-role-members` | |
 | `-FULL` (after `-D`) | `te deploy --deploy-full` | Equivalent to overwrite + connections + partitions + shared + roles + role-members. |
 | `-X` / `-XMLA <file>` | `te deploy ... > <file>` (omit `--execute`) | Script emission is the default: without `--execute`, deploy connects read-only and prints the TMSL to stdout - redirect it to a file. |
-| `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `deploy` | Emits `##vso[...]` annotations to stderr. |
-| `-G` / `-GITHUB` | `--ci github` | Emits `::error::` / `::warning::` annotations. |
+| `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `deploy`, `test run` | Emits `##vso[...]` annotations to stderr. `azdo` and `azure-devops` are accepted aliases. |
+| `-G` / `-GITHUB` | `--ci github` (alias `gh`) | Emits `::error::` / `::warning::` / `::notice::` annotations. |
 | `-T` / `-TRX <file>` | `--trx <file>` on `validate`, `bpa run`, `test run` | VSTEST `.trx` file for Azure DevOps test publishing. |
 | `-W` / `-WARN` | (default) | Warnings always reported in deploy results. |
 | `-E` / `-ERR` | (default) | Deploy returns non-zero exit on DAX errors. |

@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Command Reference
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,8 +30,8 @@ te bpa run --help           # Help for a command with subcommands
 
 Object addressing in the CLI uses a single grammar that's shared across every command. Two flavours of path appear in the reference below:
 
-- **`<path>`** - resolves to **exactly one** object or container. Used by commands that operate on a single target: `te get`, `te set`, `te add`, `te remove`, `te move`, `te deps`, `te macro run --on`.
-- **`<path-filter>`** - resolves to **zero or more** objects, with wildcard support. Used by commands that operate on a set: `te list`, `te bpa run --path`, and other inspection-style commands.
+- **`<path>`** - resolves to **exactly one** object or container. Used by commands that change the model or need a single target: `te set`, `te add`, `te remove`, `te move`, `te deps`, `te macro run --on`, and `te get` with `-p`, `--deps`, or `--properties`.
+- **`<path-filter>`** - resolves to **zero or more** objects, with wildcard support. Used by commands that operate on a set: `te list`, plain `te get` (a wildcard or container path lists every match), `te bpa run --path`, and other inspection-style commands.
 
 Both path forms share the same syntax rules; they differ in only two places:
 
@@ -119,7 +119,7 @@ DAX bracket-suffix is rejected in filter paths; quote names containing `[` and `
 
 ### Errors and hints
 
-Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Empty containers (e.g., `te list Hierarchies` on a model without hierarchies) emit a simple "nothing here" hint rather than an error.
+Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. The list offers tables, measures, columns, and hierarchies, each as a full `Table/Object` path that pastes straight back into the next command. A name written in single quotes is a table reference (`te deps 'Revenue'` looks for a table named Revenue), and the error points at the `Table/Object` and `"[Object]"` forms for anything that is not a table. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Every path an error or hint prints is taken from your model and quoted so it resolves as printed - a refusal never suggests a path that does not exist. Empty containers (e.g., `te list Hierarchies` on a model without hierarchies) emit a simple "nothing here" hint rather than an error.
 
 ## Command aliases
 
@@ -196,7 +196,9 @@ te save-as -o ./project --serialization pbip         # Save as a PBIP project
 te save-as -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
 
-`--serialization pbip` output opens directly in Power BI Desktop and is named after the source model (`SpaceParts.pbip`, not `Model.pbip`).
+`--serialization pbip` output opens directly in Power BI Desktop and is named after the source model (`SpaceParts.pbip`, not `Model.pbip`). Saving into a folder that already holds a project adds only the files that are missing and leaves everything already there - the report's pages, theme, connection, and item identity - exactly as it was, so a save that changes nothing leaves the project unchanged under source control.
+
+Validation guards saving: a model with a name collision Analysis Services would refuse (`TE0012` / `TE0013`, see [validate](#validate)) is not written unless `--force` or `--skip-validation` is passed.
 
 > [!TIP]
 > Use `te save-as -o <path> -s <workspace> -d <model>` to download a remote model to disk. Pair with `--skip-validation` for the fastest passthrough when you only need the bytes (no DAX semantic analysis).
@@ -233,9 +235,10 @@ Set properties on a model object, format its expressions, or sync a table with i
 
 `te set` accepts:
 
-- `-p, --property <Name=Value>` - property assignment (e.g., `-p expression="SUM(Sales[Amt])"`, `-p isHidden=true`). **Repeatable** - everything after the first `=` is the value. Bare positional assignments work too: `te set Sales/Amount formatString="#,0" --save`. Property names accept dotted paths and indexers: `-p KPI.StatusGraphic=...`, `-p "Annotations[Tabular Editor]=..."`, `-p "TranslatedNames[fr-FR]=..."`. Use `-p Name=-` to read the value from stdin (one assignment per stream), and `-p Name=null` to clear object-valued properties (`SortByColumn=null`, `RefreshPolicy=null`).
-- `--format <PropertyName>` - format that expression property (repeatable; DAX or M is detected from the property). Formatter tweaks `--semicolons`, `--long` (fewer line breaks), and `--no-space-after-function` require `--format` on a DAX property.
-- `--update-schema` - sync a table's columns with its source schema: adds new source columns with detected types, retypes drifted ones, and preserves column properties. Removed source columns only warn unless `--drop-removed-columns` (destructive). A renamed source column looks like remove + add - remap it first with `-p SourceColumn=<newName>`. Refused on calculated tables and calculation groups; cannot combine with `-p` or `--format`. Shares the schema-detection source flags with `te add` (`--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`); when the source flags are omitted, the source is taken from the partition's own binding.
+- `-p, --property <Name=Value>` - property assignment (e.g., `-p expression="SUM(Sales[Amt])"`, `-p isHidden=true`). **Repeatable** - everything after the first `=` is the value. Bare positional assignments work too: `te set Sales/Amount formatString="#,0" --save`. Property names are case-insensitive, accept both spellings where the grid label and the TOM name differ (`Hidden` and `IsHidden`), and accept dotted paths and indexers: `-p KPI.StatusGraphic=...`, `-p "Annotations[Tabular Editor]=..."`, `-p "TranslatedNames[fr-FR]=..."`. Run `te get <path> --properties` to list every name an object accepts - see [get](#get). A partition's expression is `-p Expression` whatever kind of partition it is (`MExpression` and `Query` still work). Use `-p Name=-` to read the value from stdin (one assignment per stream; a piped value is taken verbatim, so piping the text `null` stores the word `null`). `-p Name=` assigns an empty string.
+- `--unset <Name>` - clear a property; repeatable (`--unset description --unset displayFolder`). `-p Name=null` is the shorthand. Works on every property that can hold nothing - text properties included - and on object-valued ones (`SortByColumn`, `RefreshPolicy`); `-p "Annotations[key]=null"` removes an annotation. Numbers, booleans, and fixed-choice properties cannot be cleared and are refused.
+- `--format <PropertyName>` - format that expression property (repeatable; DAX or M is detected from the property). The formatter tweaks `--long` (fewer line breaks) and `--no-space-after-function` require `--format` on a DAX property. `--semicolons` is refused together with `--format`: an expression stored in a model is always comma-separated, so the semicolon dialect can never parse it - format semicolon-authored DAX with [`te util format-dax --semicolons`](#util-format-dax) instead.
+- `--update-schema` - sync a table's columns with its source schema: adds new source columns with detected types, retypes drifted ones, and preserves everything else about every existing column (name, description, format string, display folder, sort-by column, visibility, annotations, translations, perspective membership). Removed source columns only warn unless `--drop-removed-columns` (destructive). A renamed source column looks like remove + add - remap it first with `-p SourceColumn=<newName>`. Refused on calculated tables and calculation groups; cannot combine with `-p` or `--format`. With no connection flags, the connection is read from the model itself - the data source the table's partitions are bound to, the connection written into the table's own query, or the model's single usable data source - and the source table from the partition's binding, falling back to the model table's name; `--data-source <name>` chooses when the model has several usable sources. Naming a connection explicitly with the schema-detection flags shared with `te add` (`--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`) always wins. When no source can be worked out, or the source table cannot be found, the error says which case you are in and names the table it looked for.
 - `-t, --type <kind>` - disambiguation when the same path could resolve to multiple object kinds (`Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`).
 - `--save` / `--save-to <path>` - persist changes.
 - `--diff` / `--stat` / `--name-only` - change-output rendering (see the note above).
@@ -247,8 +250,10 @@ te set Sales/Amount -p expression="SUM(Sales[Amt])" --save
 te set "'Net Sales'[Sales Amount]" -p formatString="#,0" --save        # DAX form with spaced names
 te set Sales -p isHidden=true --save
 te set Sales/Amount -p formatString="#,0" -p description="Net sales" --save   # Multiple properties, one atomic change
+te set "Sales/Total Sales" --unset description --save                   # Clear a property (same as -p description=null)
 te set Sales/Amount --format Expression --save                          # Format one expression property
-te set Sales --update-schema --save                                     # Sync columns with the source schema
+te set Sales --update-schema --save                                     # Sync columns with the source schema (connection inferred from the model)
+te set Sales --update-schema --data-source "Sales DW" --save            # Pick the data source when the model has several
 ```
 
 #### Incremental refresh policies
@@ -287,13 +292,13 @@ Adding a single data column to an existing table takes `-t DataColumn` with both
 te add Sales/Quantity -t DataColumn -p SourceColumn=Qty -p DataType=Int64 --save
 ```
 
-Tables can be created in one shot from the model's **own** data source - no connection flags needed. Columns are detected by reading the model's data source; missing credentials, no data source, or no columns is a clean refusal with nothing created:
+Tables can be created in one shot from the model's **own** data source - no connection flags needed. The CLI reads the connection off the model's data source, discovers the source table's columns and their types, and creates the table with a partition already bound to that source. Over a legacy (provider) data source the partition is a legacy SQL query holding the generated `SELECT`, matching what the desktop **Import Tables** wizard writes; pass `--source-type m` for a Power Query (M) partition instead. Over a structured (Power Query) data source the partition is always M. Refusals are clean and create nothing: several usable data sources and no `--data-source`, no data source the CLI can read (SQL Server, Azure SQL, and Fabric SQL sources are covered), a source whose password the model does not store, or a source table the connection cannot find - the error names the table it looked for and where that name came from.
 
 - `--source-table <schema.table>` - create the table from this source table.
-- `--query "SELECT ..."` - create the table from a query instead (columns inferred by describing the query; long form only).
+- `--query "SELECT ..."` - create the table from a query instead: the query is described against the connection without being run, the new table gets exactly the columns it returns, and the query is kept as the partition's content. Works with an inferred connection and with one named explicitly. `--source-type query` places the SQL in a legacy Query partition bound to the model's legacy data source. Refused together with `--mode directlake` (a Direct Lake partition holds no query), with `--columns`, and with an expression of its own (`-p Expression=` or `--file`).
 - `--data-source "<name>"` - disambiguate when the model has several data sources.
 
-Schema detection against an explicit source also works: `--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`, or a manual column spec `--columns "Id:Int64,Name:String"`.
+Schema detection against an explicit source also works, and always wins over inference: `--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`, or a manual column spec `--columns "Id:Int64,Name:String"`. `te add "<table>" -t Table` with no source at all still creates an empty table to fill in yourself.
 
 ```bash
 te add Sales/Revenue -t Measure -p Expression="SUM(Sales[Amount])" --save
@@ -340,6 +345,8 @@ Move or rename a model object. Both source and destination are `<path>` argument
 - `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 - `--force` - save even if the mutation introduces DAX validation errors.
 
+Renaming an object whose name is not yours to set is refused with a non-zero exit code rather than reported as `No changes.` - a relationship (its name always describes the columns it joins), a measure's KPI, a role's table permission. The same applies in scripts: assigning `Relationship.Name` from `te script` stops the script with a message explaining why.
+
 ```bash
 te move Sales/Revenue Finance/Revenue --save                # Move measure to another table
 te move Sales/Revenue Sales/TotalRevenue --save             # Rename measure
@@ -384,12 +391,13 @@ In JSON output, every listed object leads with its `objectPath` - a canonical pa
 
 ### get
 
-Get properties of a model object, filter and list sets of objects, and analyze dependencies - `get` is the CLI's one read pipeline (`te list` and `te deps` remain as shortcuts). Takes a `<path>`; omit it to list the model (same as `te list`), or pass `.` for the model root.
+Get properties of a model object, filter and list sets of objects, and analyze dependencies - `get` is the CLI's one read pipeline (`te list` and `te deps` remain as shortcuts). Takes a `<path>`; omit it to list the model (same as `te list`), or pass `.` for the model root. A wildcard path (`te get "Sa*"`) or a container path (`te get Sales/Measures`) lists every match without needing `--ls`; `-p`, `--deps`, and `--properties` need exactly one object, so on a wildcard path they say so and suggest dropping the flag.
 
 `te get` accepts:
 
 - `-p, --property <property>` - project a single property (e.g. `expression`, `formatString`).
-- `--where <Prop=Value>` - filter the result set; repeatable (AND), case-insensitive. A value with no `*` is an exact match; `*` is a wildcard, so a contains-search is `--where Name=*margin*`.
+- `--where <Prop=Value>` - filter the result set; repeatable (AND), case-insensitive. A value with no `*` is an exact match; `*` is a wildcard, so a contains-search is `--where Name=*margin*`. With no path, `--where` filters the model's **top-level tables** - pass a container to search other kinds (`te get Measures --where Name=*margin*`). An empty result names what was searched and how the pattern was matched, and offers commands that widen the search.
+- `--properties` - list the property names `-p` accepts on the resolved object, with each property's type, whether it can be written, what it holds, and - where a property takes a fixed set of values - the values it accepts. Both spellings are shown where they differ (`Hidden` / `IsHidden`), and annotations and translations appear in the bracket form they have to be written in. Internal bookkeeping properties are left out; `--all` adds them. Text and JSON output only; needs a single-object path and cannot combine with `-p`, `--ls`, `--where`, `--deps`, or `--unused`.
 - `--ls` - compact table layout (the same rendering as `te list`).
 - `--deps [upstream|downstream]` - dependency analysis (default: both directions); `--deep` for the recursive tree, `--max-depth <N>` (default `10`).
 - `--unused` / `--hidden` - surface unused objects, as on `te deps`.
@@ -401,6 +409,8 @@ Get properties of a model object, filter and list sets of objects, and analyze d
 
 `te get` and `te list` share a single descriptor catalog, so every property surfaces the same way across formats - the text table, JSON, and CSV all see the same set, and adding a new property to the model exposes it everywhere.
 
+The `Settable:` line under a `te get <path>` result lists the properties `te set` accepts on that object (`SortByColumn` among them) and ends with a pointer to `--properties` for the full list; an unknown property name on `te get -p` or `te set -p` points at the same listing. `te get -p` syntax-highlights every expression-valued property, detail rows and format string expressions included. In JSON output, a single object leads with `objectPath` (the canonical path, resolvable as-is by `te get`, `te set`, or `te remove`), followed by `type` and `properties`; a listing that matches nothing prints an empty array.
+
 ```bash
 te get Sales/Amount -p expression                # Print DAX
 te get "'Sales'[Amount]"                         # DAX form: same as Sales/Amount
@@ -410,13 +420,16 @@ te get Sales/Revenue/KPI                         # KPI sub-object of a measure
 te get Sales --output-format tmdl                # Emit the table as TMDL
 te get Sales --output-format bim                 # Emit the table as TMSL/BIM
 te get . -p description                          # Model-level property
+te get "Sa*"                                     # Every table matching the wildcard, no --ls needed
 te get Measures --where IsHidden=true --ls       # Filter + list rendering
+te get Measures --where Name=*margin*            # Contains-search across all measures
+te get Sales/Amount --properties                 # Property names -p accepts, with types and allowed values
 te get Sales/Revenue --deps downstream --deep    # Recursive dependents
 ```
 
 ### find
 
-Search for text across model objects.
+Search string properties for text and report each match site. The pattern is a **literal, case-insensitive substring** by default - `te find "Gross*"` looks for a literal asterisk - so pass `--regex` for pattern matching. Use `te get --where Name=*Gross*` when you want to filter objects by a property value rather than search text. An empty result names the scope that was searched and the matching mode used, and offers commands that widen the search; a `--regex` pattern that is not a valid regular expression is refused with an error naming the flag and the pattern.
 
 `te find` accepts:
 
@@ -430,11 +443,16 @@ Search for text across model objects.
 te find "CALCULATE" --in expressions
 te find "Revenue" --in names
 te find "CALCULATE" --in expressions --paths-only | xargs -I{} te get {} -p expression
+te find "Gross.*Margin" --in names --regex
 ```
+
+Under `--output-format json`, `te find` reports the scope it searched and the matching mode it used alongside the matches.
 
 ### diff
 
 Compare two models for structural differences. Returns the following exit codes: `0` = identical, `1` = differences found, `2` = error.
+
+Changes are reported the same way the mutating commands report theirs: one consolidated entry per changed object, with `-`/`+` lines per property in text output. In JSON, the `changes` array entries carry `objectPath` (the canonical path, pipeable into `te get`), `objectType` (the same closed vocabulary as the findings JSON - `KPI`, `Member`, ...), `changeKind` (`created`, `deleted`, `modified`, or `moved` - a renamed object that carries a lineage tag is a single `moved` entry with `movedFromObjectPath`), and a `properties` array of `{property, before, after}` with PascalCase property names. An object that exists in only one of the two models is listed together with its contents - a new role's row-level security filters, a new table's columns, measures, and partitions, a new hierarchy's levels - each as its own entry, and the summary counts include them.
 
 ```bash
 te diff ./model-v1 ./model-v2
@@ -461,6 +479,8 @@ Analyze an object's upstream and downstream dependencies, or surface unused obje
 - `--unused` - list measures, calculated columns, and **all data columns** that no DAX references and that aren't used in any relationship, hierarchy level, sort-by, variation, AlternateOf base, or calendar time role. Each result shows `(hidden)` in text mode and an `isHidden` field in JSON.
 - `--hidden` - narrow `--unused` to hidden objects only. Hidden, unused objects are the safest prune candidates because nothing user-facing depends on them.
 
+In JSON output, every entry - and every `upstream`, `downstream`, and `--deep` tree node - is named the way the rest of the CLI names objects: `objectPath` (canonical path, pipeable into `te get`), `object` (bare name), and `objectType`.
+
 ```bash
 te deps Sales/Revenue                     # Upstream + downstream for one object
 te deps "'Sales'[Revenue]"                # DAX form is accepted everywhere a <path> is
@@ -477,7 +497,7 @@ Validate model expressions, schema integrity, and TOM errors.
 
 `te validate` accepts:
 
-- `--ci <fmt>` - emit CI annotations to stderr: `vsts` or `github`.
+- `--ci <fmt>` - emit CI annotations to stderr: `vsts` (aliases `azdo`, `azure-devops`) or `github` (alias `gh`). `none` or an empty value means no annotations; any other value is rejected before the command runs.
 - `--trx <path>` - write results as a VSTEST `.trx` file.
 - `--errors-only` - shorthand for `--no-warnings --no-antipatterns`: only show errors.
 - `--no-warnings` - hide warnings from the semantic analyzer.
@@ -490,6 +510,8 @@ te validate -m ./model
 te validate --ci github --trx results.trx
 te validate --errors-only                 # Hide warnings and anti-pattern hints
 ```
+
+Every finding carries a stable code, shown in the **Code** column of the Errors, Warnings, and Anti-patterns tables as well as in JSON, `--ci` annotations, and `--trx`. Three codes are worth knowing when a hand-written model is involved: `TE0012` (a column and a measure, or two columns, share a name within one table) and `TE0013` (a measure name is repeated across tables) are errors - Analysis Services refuses to load such a model, and `te save-as` refuses to write one unless `--force` or `--skip-validation` is passed; `TE0014` is a warning that a TMDL folder has no `database.tmdl`, so the compatibility level in effect is a substitute for the one the model declared. The folder still loads and `te validate` still exits `0` for `TE0014`; hide it like any other warning with `--no-warnings` or `--errors-only`.
 
 Under `--output-format json`, `te validate` emits the unified findings envelope (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te test run`, and `te query` - see @te-cli-findings.
 
@@ -515,7 +537,7 @@ Run Best Practice Analyzer rules against a model.
 - `--diff` / `--stat` / `--name-only` - change-output rendering for the fix pass (see the [Model editing](#model-editing) note).
 - `--serialization <fmt>` - model serialization: `tmdl`, `bim` (alias `tmsl`), `database.json`.
 - `--fail-on <severity>` - failure threshold: `error` (default) or `warning`. Exits with code `1` when violations meet the threshold. Rule-loading or evaluation errors (invalid expressions, unreadable rule files) also cause a non-zero exit regardless of `--fail-on`.
-- `--ci <fmt>` - emit CI logging commands to stderr: `vsts` (Azure DevOps), `github` (GitHub Actions).
+- `--ci <fmt>` - emit CI logging commands to stderr: `vsts` (Azure DevOps; aliases `azdo`, `azure-devops`), `github` (GitHub Actions; alias `gh`). Unrecognised values are rejected up front.
 - `--trx <path>` - write results as a VSTEST `.trx` file to the specified path.
 - `--no-multiline` - collapse multi-line cell content in the violations table to a single line. Text output only.
 
@@ -541,7 +563,7 @@ Each `te bpa run` invocation assembles rules from three independent layers:
 2. **Built-in defaults** - loaded unless `--no-defaults` is passed or [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) is `false` in config. Individual built-ins listed in `bpa.disabledBuiltInRuleIds` are skipped.
 3. **Model-embedded rules** - rules in the model's `BestPracticeAnalyzer_Rules` annotation, loaded unless `--no-model-rules` is passed. External URL annotations are skipped unless `--allow-external-rules` is also passed.
 
-The built-in defaults are exactly Tabular Editor 3's built-in rule set (the `TE3_BUILT_IN_*` IDs), so `te bpa run` and TE3 Desktop agree on what the built-ins flag.
+The built-in defaults are exactly Tabular Editor 3's documented [built-in rule set](xref:built-in-bpa-rules) (the `TE3_BUILT_IN_*` IDs), so `te bpa run` and TE3 Desktop agree on what the built-ins flag. The six VertiPaq Analyzer rules (`VPA_*`) that earlier previews presented as built-in are not part of that set, and the `--vpa-rules` flag no longer exists; if a pipeline gates on one of them, copy its definition into your own rules file and point at it with `--rules`, `bpa.rules`, or `TE_BPA_RULES`. `--vpax` is unchanged and still supplies the statistics a VPA-aware rule of your own reads. C# scripts (`te script`, `te macro run`) see the same rule set through `Bpa.Rules` and `Bpa.Analyze()`.
 
 Each rule ID is evaluated once. When the same ID appears in more than one layer, an explicit `--rules` file's definition wins in `te bpa run`, while the built-in definition wins in the deploy/save gates. Rule IDs in the model's `BestPracticeAnalyzer_IgnoreRules` annotation are then removed.
 
@@ -702,6 +724,8 @@ Expression formatting lives in three places, depending on what you are formattin
 - **A loose expression** (not in any model): `te util format-dax` / `te util format-m` - see [Utilities](#utilities).
 - **A whole-model sweep**: `te script --inline "Model.AllMeasures.FormatDax();" --save`.
 
+DAX in a model is always comma-separated, so `--semicolons` exists only on `te util format-dax`, for DAX you have typed with semicolons yourself.
+
 ## Execution
 
 ### query
@@ -747,6 +771,8 @@ echo "Info(Model.Name);" | te script --inline -
 te script --file fix.cs --validate               # Compile-only, no model needed
 ```
 
+A run in which any script calls `Error(...)` exits non-zero, reports `"success": false` in JSON, and closes by saying the run completed with errors; changes the script already made are still saved when `--save` is given. `Warning(...)` and `Info(...)` never fail a run. On Windows, the `DisableCSharpScripts` administrator policy refuses `te script` outright - see [Administrator policies](xref:te-cli-config#administrator-policies).
+
 > [!IMPORTANT]
 > Two behavioral details to know if you're porting an older script:
 >
@@ -777,7 +803,7 @@ te script --file fix.cs --validate               # Compile-only, no model needed
 
 ### macro
 
-Manage and run macros from a macros JSON file (typically `MacroActions.json`). The macros file is resolved in this order: `--macros <path>` → `TE_MACROS_PATH` env var → `macros` in CLI config → `./MacroActions.json`.
+Manage and run macros from a macros JSON file (typically `MacroActions.json`). The macros file is resolved in this order: `--macros <path>` → `TE_MACROS_PATH` env var → `macros` in CLI config → `./MacroActions.json`. On Windows, the `DisableMacros` administrator policy refuses every `te macro` command - see [Administrator policies](xref:te-cli-config#administrator-policies).
 
 Subcommands:
 
@@ -861,7 +887,7 @@ Deploy a semantic model to Power BI, Fabric, Azure Analysis Services, or on-prem
 - `--fix-bpa` - auto-fix BPA violations where rules define a fix expression.
 - `--bpa-rules <path>` - repeatable; override `bpa.rules` from your CLI config for this single deploy. Built-in rules still apply unless `bpa.builtInRules` is `false`.
 - `--force` - skip the interactive confirmation.
-- `--ci <fmt>` - `vsts` or `github`.
+- `--ci <fmt>` - `vsts` (aliases `azdo`, `azure-devops`) or `github` (alias `gh`); unrecognised values are rejected up front.
 - `-p, --profile <name>` - one-shot use of a saved @te-cli-auth profile.
 
 `--output-format bim|tmdl` is rejected on deploy. To capture the deployment script for review, redirect the dry-run output: `te deploy ... > deploy.tmsl`.
@@ -877,6 +903,8 @@ te deploy --local --target-server my-workspace --target-database my-model --exec
 > [!IMPORTANT]
 > `te deploy` runs the Best Practice Analyzer as a gate before executing. See @te-cli-config for BPA gate configuration.
 
+A deploy **fails** when the server reports errors on one or more objects, even though the metadata has been written: the exit code is non-zero, JSON reports `"success": false` with the reason in `error`, the headline says the deploy landed with errors, and `--ci` reports the object errors as errors. Unprocessed objects are not a failure - a metadata-only deploy legitimately leaves objects holding no data. The workspace mirror set up with `te connect -w` applies the same rule.
+
 > [!NOTE]
 > When `--output-format json` is set, `te deploy`'s JSON payload always includes the resolved `server` and `database`, even when they were resolved from active connection or profile rather than passed explicitly. Pipelines can use these fields to confirm the deploy target without re-parsing the command line. `te deploy` also exits non-zero on failure under `--output-format json`, matching its text-mode behavior - the JSON payload is the failure record, not a success signal.
 
@@ -891,16 +919,18 @@ Trigger a data refresh on a deployed model.
 - `--type <type>` - `full`, `dataonly` (alias `data-only`, `data`), `automatic` (alias `auto`), `calculate` (alias `calc`), `clearvalues` (alias `clear`), `defragment` (alias `defrag`), `add` (default: `automatic`).
 - `--table <name>` - refresh specific table(s); repeatable.
 - `--partition <Table.Partition>` - refresh specific partition(s).
-- `--execute` - actually run the refresh.
+- `--execute` - actually run the refresh. At a terminal it asks for confirmation with **`n` as the safe default**; add `--force` to skip the question. An unattended run (redirected output, `--output-format json`, or `--non-interactive`) stops with an error unless `--force` is given, so `te refresh --type full --execute --force` is the CI form.
+- `--force` - skip the confirmation prompt.
 - `--apply-refresh-policy <true|false|table>` - apply incremental refresh policies to determine which partitions are refreshed; pass a table name to scope the refresh to that table. Policies apply by default when the refresh type and scope are compatible, except for models hosted in Power BI Desktop. An explicit value wins (with warnings when it cannot take effect).
 - `--effective-date <yyyy-MM-dd>` - set the effective date used by the refresh policy (ignored, with a warning, when no policy applies).
 - `--max-parallelism <N>` - set the maximum number of partitions to refresh in parallel. Wraps the refresh in a TMSL `sequence` command.
-- `--no-progress`, `--trace [path]`. `--trace` without `--execute` warns and prints the TMSL.
+- `--no-progress`, `--trace [path]`. `--trace` without `--execute` warns and prints the TMSL. Trace timing comes from the server's clock, the log is kept until the server has finished delivering buffered events, and `te-refresh-*` traces older than an hour that interrupted runs left behind are stopped and dropped at the start of a traced refresh (traces from other tools are never touched).
 
 Executed refreshes under `--output-format json` always include a `progress` array; with the `vertipaqOnRefresh` config key enabled, a per-table `vertipaq` array (rows, size, columns) is included too - no `--trace` needed.
 
 ```bash
-te refresh --type full --execute                        # Full refresh
+te refresh --type full --execute                        # Full refresh (asks for confirmation at a terminal)
+te refresh --type full --execute --force                # Unattended: skip the confirmation
 te refresh --table Sales --type full --execute          # Single table
 te refresh --type full > refresh.tmsl                   # Dry run: emit TMSL only
 te refresh --apply-refresh-policy Sales --execute       # Apply Sales' incremental refresh policy
@@ -1009,21 +1039,21 @@ Model-free helpers. `te util` subcommands never touch a model - `--model`, `-s`/
 Format a loose DAX expression.
 
 - `<expression>` - the expression to format; `-` reads it from stdin.
-- `--semicolons` - semicolons as list separators (European locale).
+- `--semicolons` - format DAX written with semicolons as list separators (European locale). The flag selects the semicolon dialect for the expression that is read as well as for the output, so it is for DAX you authored with semicolons - comma-separated DAX fails with a syntax error under it. It is accepted only here: `te set --format` refuses it, because an expression stored in a model is always comma-separated.
 - `--long` - long format with fewer line breaks. Default is short.
 - `--no-space-after-function` - skip the space after function names.
 
 ```bash
 te util format-dax "SUM ( Sales[Amount] )"
 cat query.dax | te util format-dax -
-te util format-dax "SUM(Sales[Amount])" --semicolons
+te util format-dax "CALCULATE(SUM(Sales[Amt]); Sales[Region] = \"EU\")" --semicolons   # Semicolon-authored DAX
 ```
 
 JSON output carries `success`, `formatted`, and `errors`. For expressions already in the model, use `te set <path> --format <PropertyName>` instead; for a whole-model sweep, `te script --inline "Model.AllMeasures.FormatDax();" --save`.
 
 ### util format-m
 
-Format a loose M/Power Query expression. `-` reads from stdin; no language-specific options.
+Format a loose M/Power Query expression. `-` reads from stdin; no language-specific options. A malformed expression - an unterminated string, for example - is reported as a failure with a non-zero exit code and the original text returned unchanged, never a silently shortened result.
 
 ```bash
 te util format-m "let x = 1 in x"
@@ -1063,7 +1093,7 @@ te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 printf "list Measures\nexit\n" | te interactive --model ./model   # Pipe commands via stdin
 ```
 
-Inside the session, mutating commands stage in memory: `save` (no arguments) commits the staged edits and `revert` discards them, while `save-as` re-serializes to a format or location - see @te-cli-interactive.
+Inside the session, mutating commands stage in memory: `save` (no arguments) commits the staged edits and `revert` discards them, while `save-as` re-serializes to a format or location. Closing a session that still holds staged edits asks for confirmation (or, when nobody can answer, warns and exits non-zero); `exit --force` throws them away deliberately - see @te-cli-interactive.
 
 Quoting and DAX-style references work the same as outside the session - see the [Object paths](#object-paths) section above and @te-cli-interactive for details on bracket-aware argv splitting inside the REPL.
 
@@ -1109,7 +1139,7 @@ te completion fish
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error). For `te diff`: differences found. |
+| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error, a `te script` run in which a script reported an error, a `te deploy` the server accepted with object errors). For `te diff`: differences found. |
 | `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 For fine-grained control in CI pipelines, combine exit codes with `--ci <vsts/github>` annotations and `--trx` results files - see @te-cli-cicd.

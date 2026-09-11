@@ -2,7 +2,7 @@
 uid: te-cli-findings
 title: Findings JSON
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -92,7 +92,7 @@ Each command keeps a few keys of its own at the top level of the envelope:
 
 ## CI annotations
 
-All four commands share one annotation writer for `--ci vsts` / `--ci github` (annotations go to stderr; stdout stays parseable):
+All four commands share one annotation writer for `--ci vsts` / `--ci github` (`azdo`, `azure-devops`, and `gh` are accepted aliases; `none` disables annotations; anything else is rejected before the command runs). Annotations go to stderr; stdout stays parseable:
 
 - Annotations carry the finding's code: `code=` on Azure DevOps, `title=` on GitHub.
 - Info-severity findings are not warnings: on GitHub they emit `::notice::`, on Azure DevOps a plain log line. An Azure DevOps run whose only findings are informational reports **Succeeded**.

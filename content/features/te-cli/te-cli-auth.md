@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Authentication and Connections
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -197,6 +197,8 @@ For CI/CD pipelines, agents, or any unattended context, avoid interactive flows 
 
 - The `--non-interactive` global flag (fails fast instead of prompting).
 - One of the non-interactive auth methods: `env`, `managed-identity`, or explicit service principal credentials.
+
+With `--non-interactive` and nothing to sign in with - no cached login, no `AZURE_CLIENT_*` variables, no managed identity - a command that connects to a workspace or server stops immediately, never opens a browser, and reports that no credentials are available, naming every way to supply them: `te auth login`, a service principal cached with `te auth login -u <client-id> -p <secret> -t <tenant>`, `--auth env`, or `--auth managed-identity`. A cached service principal is used silently, so only runs with genuinely nothing to sign in with fail this way.
 
 Environment-based example for a pipeline:
 

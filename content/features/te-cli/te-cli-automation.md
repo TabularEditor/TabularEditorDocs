@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: Automation and Scripting
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -59,14 +59,14 @@ Every `te` command exits with a predictable status code so callers can branch on
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure - invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error. For `te diff`: differences found (like the `diff`/`cmp` convention). |
+| `1` | Generic failure - invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error, a `te script` run in which a script called `Error(...)`, a `te deploy` the server accepted with object errors. For `te diff`: differences found (like the `diff`/`cmp` convention). |
 | `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to surface rich failure information in CI - see @te-cli-cicd.
 
 ## Errors on stderr
 
-Errors, warnings, progress and status notices (the spinner, `Using active connection:`), and the preview banner are written to **stderr**; stdout carries only the result. This means you can pipe JSON safely without it being contaminated by progress indicators or diagnostic messages:
+Errors, warnings, progress and status notices (the spinner, `Using active connection:`), the usage reminder that follows an argument error, and the preview banner are written to **stderr**; stdout carries only the result. A rejected command therefore leaves stdout empty, so a captured dry run is either valid output or nothing at all, and you can pipe JSON safely without it being contaminated by progress indicators or diagnostic messages:
 
 ```bash
 te list --output-format json | jq '.[] | .name'
@@ -187,8 +187,9 @@ A handful of small idioms that come up often when composing `te` commands in scr
 - **Idempotent creates and removes.** `te add Sales/Marker -t Measure -p Expression="0" --if-not-exists --save` and `te remove Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
 - **Nothing persists without `--save`.** Mutating commands (`te add`, `te set`, `te move`, `te remove`, `te script`, `te macro run`) apply the change in memory, report what they did, and then print `Dry run - nothing saved. Add --save to persist.` Run one bare to confirm it resolves the objects you expect, then re-run with `--save`. `te remove --dry-run` goes further and reports what would be removed without applying anything.
 - **Emit TMSL for review.** `te deploy --model ./model --target-server my-workspace --target-database my-model > deploy.tmsl` - deploy is dry-run by default and prints the exact target-aware TMSL to stdout, so redirecting it produces the deployment script without touching the server. Useful for DBA review or manual apply.
-- **Piped values via `-`.** Every value-taking option reads piped stdin through `-` (trailing newline removed, byte-order mark stripped; errors immediately when nothing is piped): `cat query.dax | te query -q -` (bare piped stdin with no `-q` also works), `te set Sales/Amount -p Expression=- < expr.dax --save`, `cat fix.csx | te script --inline - --save`, `cat messy.dax | te util format-dax -`.
-- **Parseable change sets.** Mutating commands (`set`, `add`, `remove`, `move`, `script`, `bpa run --fix`) render a diff by default; `--stat` and `--name-only` give compact text alternatives, and `te config set mutationOutput diff|stat|name-only|none` sets a standing default. JSON output always carries the full `changes` array (one entry per changed object with `objectPath`, `objectType`, `changeKind`, and before/after property pairs) regardless of these flags - the stable shape to parse in scripts.
+- **Piped values via `-`.** Every value-taking option reads piped stdin through `-` (trailing newline removed, byte-order mark stripped; errors immediately when nothing is piped): `cat query.dax | te query -q -` (bare piped stdin with no `-q` also works), `te set Sales/Amount -p Expression=- < expr.dax --save`, `cat fix.csx | te script --inline - --save`, `cat messy.dax | te util format-dax -`. A piped value is taken verbatim - piping the text `null` stores the word `null`, where `-p Name=null` or `--unset Name` clears the property.
+- **Discover property names.** `te get <path> --properties --output-format json` returns every name `-p` accepts on that object with its type, writability, and allowed values - the list to consult before generating `te set` calls.
+- **Parseable change sets.** Mutating commands (`set`, `add`, `remove`, `move`, `script`, `bpa run --fix`) render a diff by default; `--stat` and `--name-only` give compact text alternatives, and `te config set mutationOutput diff|stat|name-only|none` sets a standing default. JSON output always carries the full `changes` array (one entry per changed object with `objectPath`, `objectType`, `changeKind`, and before/after property pairs) regardless of these flags - the stable shape to parse in scripts. `te diff` reports its differences in the same shape.
 - **Path-only output.** `te list --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`. The model-level containers (`te list Measures`, `te list Columns`) compose well with this for whole-model sweeps.
 - **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
 - **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`, `te query`) include a `durationMs` field in JSON output - useful for surfacing per-step timings in pipeline summaries.

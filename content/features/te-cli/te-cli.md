@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Limited Public Preview)
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ Four design pillars run through every command:
 
 - **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
 - **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
-- **Safe by default** - mutating commands preview their changes until you pass `--save`; `te deploy` and `te refresh` print the exact TMSL they would send until you pass `--execute`.
+- **Safe by default** - mutating commands preview their changes until you pass `--save`; `te deploy` and `te refresh` print the exact TMSL they would send until you pass `--execute`, and ask for confirmation before acting unless you add `--force`.
 - **Clear errors** - written to stderr with predictable exit codes.
 
 Together they make the same binary work well for three very different audiences:
