@@ -128,7 +128,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. 这样可确保在 CLI 停止工作前，你能看到明确的警告。
+> 在**预览结束日期前后 14 天内**（2026-10-31），无论如何设置 `hidePreviewNotice`，每次运行命令都会再次显示该横幅。 这样可确保在 CLI 停止工作前，你能看到明确的警告。
 
 ## Shell 自动补全
 
@@ -169,16 +169,16 @@ te completion fish > ~/.config/fish/completions/te.fish
 
 大多数功能在各个平台上都相同。 少数功能依赖仅 Windows 支持的传输机制：
 
-| 功能                                                                                                                                   | Windows | macOS / Linux |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- |
-| Work with local TMDL and BIM model files                                                                                             | 是的      | 是             |
-| 部署到 Power BI / Fabric / Azure Analysis Services                                                                                      | 是的      | 是             |
-| Best Practice Analyzer 和 VertiPaq分析器                                                                                                 | 是的      | 是             |
-| C# Script 脚本编写                                                                                                                       | 是的      | 是             |
-| 针对云端模型的 DAX 查询                                                                                                                       | 是的      | 是             |
-| Authentication: browser (interactive), service principal, environment variables, managed identity | 是的      | 是             |
-| 连接到本地 SSAS 实例（TCP 传输）                                                                                                                | 是       | **否**         |
-| 连接到 Power BI Desktop（命名管道传输）                                                                                                         | 是       | **否**         |
+| 功能                                              | Windows | macOS / Linux |
+| ----------------------------------------------- | ------- | ------------- |
+| 使用本地 TMDL 和 BIM 模型文件                            | 是的      | 是             |
+| 部署到 Power BI / Fabric / Azure Analysis Services | 是的      | 是             |
+| Best Practice Analyzer 和 VertiPaq分析器            | 是的      | 是             |
+| C# Script 脚本编写                                  | 是的      | 是             |
+| 针对云端模型的 DAX 查询                                  | 是的      | 是             |
+| 身份验证方式：浏览器（交互式）、服务主体、环境变量、托管标识                  | 是的      | 是             |
+| 连接到本地 SSAS 实例（TCP 传输）                           | 是       | **否**         |
+| 连接到 Power BI Desktop（命名管道传输）                    | 是       | **否**         |
 
 > [!IMPORTANT]
 > 本地 SSAS 和 Power BI Desktop 连接依赖于仅限 Windows 的传输协议。 所有基于云的工作流（Power BI Service、Fabric、Azure Analysis Services）均可在所有平台上运行。
