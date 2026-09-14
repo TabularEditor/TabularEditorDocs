@@ -22,6 +22,9 @@ Options:
                     (~30-40% faster). LOCAL markdown iteration ONLY, with --serve/--lang;
                     never for testing, CI/CD, or release builds.
     --permissive    Don't fail the English build on DocFX warnings (local iteration)
+    --warnings-report PATH
+                    Write a markdown summary of the DocFX warnings per built language
+                    to PATH (for CI job summaries); written even when the build fails
 """
 
 import argparse
@@ -35,21 +38,58 @@ from pathlib import Path
 
 
 _DOCFX_WARNING_RE = re.compile(r': warning ', re.IGNORECASE)
+_ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
+
+# Language -> DocFX warning diagnostics seen while building it. Filled by
+# build_language(); rendered by write_warnings_report() for --warnings-report.
+BUILD_WARNINGS: dict[str, list[str]] = {}
 
 
-def run_command(cmd: list[str], description: str, check: bool = True, fail_on_warnings: bool = False) -> int:
+def _use_utf8_stdio() -> None:
+    """Make stdout/stderr UTF-8 with replacement for unencodable characters.
+
+    DocFX echoes translated headings and file names (e.g. Chinese) in its
+    diagnostics, which this script re-prints while streaming. When stdout is
+    redirected on Windows (CI logs, `| tee`), Python defaults to the ANSI code
+    page and print() raises UnicodeEncodeError on them, aborting the build over
+    a log line. A real console is already UTF-16/UTF-8 on Windows, so this only
+    changes the redirected case.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
+def _clean_warning_line(line: str) -> str:
+    """Strip colour codes and the absolute working-directory prefix from a DocFX diagnostic."""
+    text = _ANSI_RE.sub('', line).rstrip()
+    cwd = str(Path.cwd())
+    return text.replace(cwd + os.sep, '').replace(cwd + '/', '')
+
+
+def run_command(
+    cmd: list[str],
+    description: str,
+    check: bool = True,
+    fail_on_warnings: bool = False,
+    warnings: list[str] | None = None,
+) -> int:
     """Run a command and return exit code.
 
     If fail_on_warnings=True, streams output line-by-line, counts DocFX warning
     diagnostics (lines matching ': warning '), and returns exit code 1 if any
     are found — even when the process itself exits 0.
+
+    If `warnings` is a list, output is streamed the same way and every warning
+    diagnostic is appended to it (colour codes and the working directory
+    stripped) for the --warnings-report summary; the exit code is unaffected.
     """
     print(f"\n{'='*60}")
     print(f"  {description}")
     print(f"{'='*60}")
     print(f"Running: {' '.join(cmd)}\n")
 
-    if fail_on_warnings:
+    if fail_on_warnings or warnings is not None:
         warning_count = 0
         process = subprocess.Popen(
             cmd,
@@ -64,13 +104,15 @@ def run_command(cmd: list[str], description: str, check: bool = True, fail_on_wa
             print(line, end='', flush=True)
             if _DOCFX_WARNING_RE.search(line):
                 warning_count += 1
+                if warnings is not None:
+                    warnings.append(_clean_warning_line(line))
         process.wait()
 
         if check and process.returncode != 0:
             print(f"Error: Command failed with exit code {process.returncode}")
             return process.returncode
 
-        if warning_count > 0:
+        if fail_on_warnings and warning_count > 0:
             print(f"\nError: DocFX produced {warning_count} warning(s). Failing build.")
             return 1
 
@@ -234,11 +276,47 @@ def build_language(lang: str, sync: bool = False, skip_api: bool = False, permis
     # `docfx build` skips API metadata regeneration and reuses the existing
     # content/api/*.yml (the _apiSource DLLs don't change between content edits),
     # which is ~30-40% faster; bare `docfx` regenerates metadata then builds.
+    BUILD_WARNINGS[lang] = []
     return run_docfx(
         [*(["build"] if skip_api else []), config_path],
         f"Building {lang} documentation",
-        fail_on_warnings=(lang == "en" and not permissive)
+        fail_on_warnings=(lang == "en" and not permissive),
+        warnings=BUILD_WARNINGS[lang],
     )
+
+
+_REPORT_MAX_LINES = 200  # per language; keeps the job summary well under GitHub's 1 MiB cap
+
+
+def write_warnings_report(path: Path) -> None:
+    """Write a markdown summary of the DocFX warnings collected per built language.
+
+    Meant for CI job summaries (append the file to $GITHUB_STEP_SUMMARY). English
+    warnings already fail the build, but the localized builds only warn, so this
+    is where translation warnings become visible without reading the whole log.
+    """
+    lines = ["## DocFX build warnings", ""]
+    if not BUILD_WARNINGS:
+        lines += ["No language build ran.", ""]
+    else:
+        lines += ["| Language | Warnings |", "|----------|---------:|"]
+        lines += [f"| {lang} | {len(found)} |" for lang, found in BUILD_WARNINGS.items()]
+        lines += [
+            "",
+            "English warnings fail the build. Other languages are translations managed outside "
+            "this repo, so their warnings are listed here but never block a deploy.",
+            "",
+        ]
+        for lang, found in BUILD_WARNINGS.items():
+            if not found:
+                continue
+            lines += [f"<details><summary>{lang}: {len(found)} warning(s)</summary>", "", "```text"]
+            lines += found[:_REPORT_MAX_LINES]
+            if len(found) > _REPORT_MAX_LINES:
+                lines.append(f"... {len(found) - _REPORT_MAX_LINES} more; see the build log")
+            lines += ["```", "", "</details>", ""]
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"Warnings report written to {path}")
 
 
 def copy_languages_manifest() -> int:
@@ -335,6 +413,7 @@ def fix_xref_in_api() -> int:
 
 
 def main() -> int:
+    _use_utf8_stdio()
     parser = argparse.ArgumentParser(
         description="Build documentation for one or more languages",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -349,9 +428,20 @@ def main() -> int:
     parser.add_argument("--skip-api", action="store_true", help="LOCAL markdown iteration only (requires --serve/--lang): reuse existing content/api, ~30-40%% faster. NEVER for testing/CI/CD/releases")
     parser.add_argument("--permissive", action="store_true", help="Don't treat English DocFX warnings as build failures (for local iteration; keep full/CI builds strict)")
     parser.add_argument("--sync", action="store_true", help="Sync English fallback for missing/outdated translations (for local dev)")
-    
+    parser.add_argument("--warnings-report", metavar="PATH", help="Write a markdown summary of DocFX warnings per built language to PATH (for CI job summaries); written even when the build fails")
+
     args = parser.parse_args()
-    
+
+    try:
+        return _build(args)
+    finally:
+        # Written even after a failed language build, so CI still gets the partial picture.
+        if args.warnings_report:
+            write_warnings_report(Path(args.warnings_report))
+
+
+def _build(args: argparse.Namespace) -> int:
+    """Run the build described by the parsed command line; returns the exit code."""
     # List available languages
     if args.list:
         langs = get_available_languages()

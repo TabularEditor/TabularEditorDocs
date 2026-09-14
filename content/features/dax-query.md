@@ -63,7 +63,7 @@ The "Apply" option syncs the DAX expression for all measures, columns or tables 
 
 The "Apply Selection" and "Apply Selection & Sync" will only apply the measures, columns or tables within the current selection of the query editor.
 
-Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
+Unlike the [DAX Script feature](xref:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
 
 The "Apply" option has also been added to the right-click context menu.
 
@@ -114,7 +114,7 @@ Customers
 
 ## Debugging DAX Query
 
-DAX queries are one of the two places where it is possible to run the [DAX Debugger](xrefid:dax-debugger), the other being the Pivot Grid.
+DAX queries are one of the two places where it is possible to run the [DAX Debugger](xref:dax-debugger), the other being the Pivot Grid.
 
 The DAX debugger unlocks the ability to understand how the DAX works inside a single cell. To start the debugger simply right click on the desired cell and choose 'Debug cell', which will start the debugger in the context of the chosen cell.
 
