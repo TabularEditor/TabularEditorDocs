@@ -29,7 +29,7 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
 
 - En el menú Archivo, elige Nuevo > Modelo... o pulsa `CTRL+N`
 
-![New model](~/content/assets/images/new-as-model-new-model.png)
+![Nuevo modelo](~/content/assets/images/new-as-model-new-model.png)
 
 - Proporciona un nombre para tu modelo o usa el valor predeterminado. Luego, elige el nivel de compatibilidad en función de la versión de Analysis Services a la que apuntas. Tus opciones son las siguientes:
   - 1200 (Funciona con SQL Server 2016 o posterior y con Azure Analysis Services)
@@ -51,11 +51,11 @@ Una vez creado el modelo, el siguiente paso es agregar un Data source y algunas 
 
 Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. Para obtener más información sobre las diferencias entre estos dos tipos de Data source, [consulta el blog de Microsoft Analysis Services](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
-![Add data source](~/content/assets/images/new-as-model-add-data-source.png)
+![Agregar un Data source](~/content/assets/images/new-as-model-add-data-source.png)
 
 En este ejemplo, crearemos un Data source de Power Query, que usaremos para importar algunas tablas de una base de datos relacional de SQL Server. Una vez creado el Data source, pulsa F2 para cambiarle el nombre y configúralo con la cuadrícula de propiedades, como se muestra en la captura de pantalla siguiente:
 
-![Set data source properties](~/content/assets/images/new-as-model-data-source-properties.png)
+![Configurar las propiedades del Data source](~/content/assets/images/new-as-model-data-source-properties.png)
 
 En nuestro ejemplo, establecimos las siguientes propiedades:
 
@@ -81,18 +81,18 @@ in
 
 Esto asume que la base de datos relacional de SQL Server contiene una tabla llamada "FactInternetSales" dentro del esquema "dbo".
 
-![M partition expression](~/content/assets/images/new-as-model-m-partition.png)
+![Expresión de partición M](~/content/assets/images/new-as-model-m-partition.png)
 
 A continuación, haz clic con el botón derecho en la tabla recién creada y elige "Actualizar esquema de tabla...". Esto permite que Tabular Editor rellene automáticamente las columnas de la tabla en función de la consulta de la partición.
 
 > [!NOTE]
 > Si no estás usando una base de datos de Workspace, esta operación solo está disponible en Tabular Editor, versión 3.1.0 o posterior.
 
-![Schema compare](~/content/assets/images/new-as-model-schema-compare.png)
+![Comparación de esquemas](~/content/assets/images/new-as-model-schema-compare.png)
 
 Haz clic en "Aceptar" para añadir las columnas a la tabla. Haz clic en Guardar de nuevo (Ctrl+S). Si estás usando una base de datos de Workspace, puedes actualizar la tabla en el servidor y explorar los datos de la tabla una vez que finalice la operación de actualización. Para ello, haz clic con el botón derecho en la tabla y elige "Actualizar tabla > Automático (tabla)". Espera a que finalice la operación en la pestaña "Actualización de datos" y, después, haz clic con el botón derecho en la tabla y elige "Vista previa" (también puedes hacerlo desde el Explorador TOM) para ver los datos reales de la tabla:
 
-![Data refresh](~/content/assets/images/new-as-model-data-refresh.png)
+![Actualización de datos](~/content/assets/images/new-as-model-data-refresh.png)
 
 Si la tabla que importaste es una tabla de dimensión, recomendamos establecer la propiedad "Key" de la columna de clave principal de la tabla como "true". Esto facilita definir relaciones entre esta tabla y otras, como veremos más adelante.
 
@@ -102,11 +102,11 @@ Repite este proceso con cualquier tabla que quieras importar en tu modelo tabula
 
 Una vez que hayas importado varias tablas, la forma más sencilla de definir las relaciones entre ellas con Tabular Editor 3 es crear un nuevo diagrama. Elige "File > New > Diagram". Después, selecciona varias tablas y arrástralas a la Vista de diagrama, o haz clic con el botón derecho en las tablas y elige "Add to diagram":
 
-![Add to diagram](~/content/assets/images/new-as-model-add-to-diagram.png)
+![Agregar al diagrama](~/content/assets/images/new-as-model-add-to-diagram.png)
 
 Para crear una relación entre dos tablas, localiza la columna de clave externa en la tabla de hechos y "arrastra" esa columna hasta la columna de clave primaria de la tabla de dimensiones. Pulsa "OK" para confirmar la configuración de la relación en el cuadro de diálogo que aparece.
 
-![Diagram view](~/content/assets/images/new-as-model-diagram-view.png)
+![Vista de diagrama](~/content/assets/images/new-as-model-diagram-view.png)
 
 Cierra la Vista de diagrama (no hace falta guardarla, ya que siempre puedes reconstruir el diagrama más adelante). Pulsa Ctrl+S de nuevo para guardar el modelo. Ahora toca añadir algo de lógica de negocio. Si estás usando una Workspace Database, este es un buen momento para ejecutar una actualización ("Automatic" o "Calculate") a nivel del modelo, para asegurarte de que en el servidor se crean las estructuras de soporte para las relaciones y, así, dejar el modelo en un estado consultable.
 
@@ -114,7 +114,7 @@ Cierra la Vista de diagrama (no hace falta guardarla, ya que siempre puedes reco
 
 Selecciona una de las tablas en el Explorador TOM y pulsa Alt+1 (o elige Create > New Measure) para añadir una medida a esa tabla. Asigna un nombre a la medida y proporciona una expresión DAX para la medida.
 
-![Add measure](~/content/assets/images/new-as-model-add-measure.png)
+![Agregar medida](~/content/assets/images/new-as-model-add-measure.png)
 
 Pulsa Ctrl+S para guardar los metadatos del modelo.
 
@@ -128,7 +128,7 @@ Si no usaste una Workspace Database, tendrás que desplegar tu modelo en una ins
 
 Para implementar los metadatos del modelo en cualquier instancia de Analysis Services, haz clic en el menú "Modelo" y elige "Implementar...". Esto abre el Asistente de implementación de Tabular Editor 3, similar al Asistente de implementación de Tabular Editor 2.X. Sigue las instrucciones de las distintas páginas del asistente para implementar los metadatos del modelo en una instancia de Analysis Services. También puedes usar el Asistente de implementación para generar un script TMSL/XMLA, que puedes entregar a un administrador del servidor de Analysis Services para que lo implemente manualmente.
 
-![Deployment](~/content/assets/images/new-as-model-deployment.png)
+![Despliegue](~/content/assets/images/new-as-model-deployment.png)
 
 Para actualizar y probar la base de datos implementada, puedes usar las herramientas estándar de administración y cliente proporcionadas por Microsoft, o bien otra instancia de Tabular Editor 3 (siempre que tengas acceso administrativo a la instancia de Analysis Services donde se encuentra el modelo implementado).
 
