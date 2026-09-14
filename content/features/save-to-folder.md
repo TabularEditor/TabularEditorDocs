@@ -2,7 +2,7 @@
 uid: save-to-folder
 title: Save to folder
 author: Morten Lønskov
-updated: 2023-08-08
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -51,6 +51,30 @@ The tabs General and Save-to-folder contains settings regarding the serializatio
 
 Tabular Editor 3 has a default setting for JSON serialization and you must actively choose a different setting in serialization mode, which is also where you change to the TMDL format. 
 ***
+
+### User Defined Functions (UDFs)
+
+Since Tabular Editor 3.27.0, the JSON folder format can store each [DAX User-Defined Function](xref:udfs) in its own file, the same way it already does for tables, measures and columns. The functions go in a `functions` subfolder at the model root:
+
+```
+MyModel/
+├── database.json
+├── functions/
+│   ├── Sales.MarginPct.json
+│   └── Time.SameDayLastYear.json
+├── tables/
+└── ...
+```
+
+The benefit is the same as for every other object type: two developers editing two different functions change two different files, so Git has nothing to merge. Without it every function lives inline in `database.json`, and any two parallel edits collide in that one file.
+
+Turn it on with the **User Defined Functions (UDFs)** level, under **Tools > Preferences > File Formats > Save-to-folder** or, for the model you have open, under **Model > Serialization options...**.
+
+![Placeholder: Screenshot of the Model > Serialization options dialog, with the User Defined Functions (UDFs) level ticked]
+
+> [!IMPORTANT]
+> Tabular Editor selects this level by default only for a model you save to a folder for the *first* time. A model that's already folder-serialized keeps the levels stored in its own serialization annotation, so its functions stay inline until you select **User Defined Functions (UDFs)** under **Model > Serialization options...** and save the model again.
+
 ### Serialization Model Annotation
 Tabular Editor saves the serialization settings on your model so that they will always stay the same no matter who is working on the model. This ensures that a developer's local preferences do not overwrite model's setting and lead to an unmanageable merge in your source control. You can find these annotations in the TOM Explorer properties of the Model > Annotations > TabularEditor_SerializeOptions
 <br></br>

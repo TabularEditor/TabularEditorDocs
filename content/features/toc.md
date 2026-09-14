@@ -58,6 +58,7 @@
 ## @tmdl
 ## @save-to-folder
 ## @save-with-supporting-files
+## @automatic-revert
 ## @advanced-refresh
 ## @refresh-overrides
 

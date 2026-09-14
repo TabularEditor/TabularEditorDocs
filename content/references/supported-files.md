@@ -2,7 +2,7 @@
 uid: supported-files
 title: Supported file types
 author: Morten Lønskov
-updated: 2023-10-17
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -170,6 +170,9 @@ The .platform file contains metadata about the semantic model item, including:
 - **logicalId**: An automatically generated cross-workspace identifier
 
 This file is a JSON file that should not be manually edited unless you understand the Fabric item format.
+
+> [!NOTE]
+> This synchronization applies to a model whose metadata carries a name or a description. A Power BI Project (PBIP) semantic model authored by Power BI Desktop carries neither in its TMDL: both live only in the `.platform` file.
 
 ### definition.pbism
 

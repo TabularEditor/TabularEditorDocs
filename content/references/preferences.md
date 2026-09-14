@@ -2,7 +2,7 @@
 uid: preferences
 title: Controlling preferences
 author: Daniel Otykier
-updated: 2026-01-12
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -55,29 +55,6 @@ When "Line break on first line of DAX" is enabled, this sub-setting controls whe
 ##### *Default Power BI authentication mode* (Integrated)
 
 Select the default authentication method (Integrated, ServicePrincipal, or MasterUser) to use when connecting to Power BI datasets.
-
-### Metadata Synchronization
-
-These settings control the behavior of Tabular Editor 3 when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application.
-
-##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
-
-When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. For example, if you're wondering why a DAX query or a Pivot Grid does not produce the expected result, this could be due to a measure expression being changed in Tabular Editor without saving the change to Analysis Services. The bar disappears when you hit save (Ctrl+S).
-
-##### *Track external model changes* (enabled)
-
-Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
-
-##### *Refresh local Tabular Object Model metadata automatically* (enabled)
-
-When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
-
-##### *Cleanup orphaned Tabular Editor traces*
-
-Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor will be removed.
-
-> [!NOTE]
-> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
 
 ### Best Practice Analyzer
 
@@ -380,7 +357,7 @@ Store translations with individual objects instead of in a central location. Thi
 
 ##### *Levels*
 
-Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure.
+Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure. The available levels are Data Sources, User Defined Functions (UDFs), Shared Expressions, Perspectives, Relationships, Roles, Tables, Columns, Hierarchies, Measures, Partitions, Calculation Items and Translations.
 
 ##### *Ignore inferred objects* (enabled)
 
@@ -427,6 +404,39 @@ Choose between tabs or spaces for indentation in TMDL files. Tabs are the defaul
 ##### *Indentation spaces* (4)
 
 When using spaces, specify the number of spaces per indentation level.
+
+<a name="miscellaneous"></a>
+
+## Tabular Editor > Miscellaneous
+
+![Placeholder: Screenshot of Miscellaneous preferences page]
+
+### Metadata Synchronization
+
+These settings control how Tabular Editor 3 deals with model metadata that changes outside the application. The first three cover a model loaded from a database on an instance of Analysis Services and rely on an Analysis Services trace. **Automatically revert from disk** covers a model loaded from a file or a folder, and watches those files directly.
+
+##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
+
+When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. For example, if you're wondering why a DAX query or a Pivot Grid does not produce the expected result, this could be due to a measure expression being changed in Tabular Editor without saving the change to Analysis Services. The bar disappears when you hit save (Ctrl+S).
+
+##### *Track external model changes* (enabled)
+
+Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
+
+##### *Refresh local Tabular Object Model metadata automatically* (enabled)
+
+When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
+
+##### *Automatically revert from disk* (enabled)
+
+When checked, Tabular Editor watches the metadata files the model was loaded from and reloads the model when another application changes them. Unlike the two settings above, this doesn't involve an Analysis Services trace: it watches the files themselves, so it covers a model loaded from a `.bim` file or from a folder, whether or not a server is involved. If the model has unsaved changes, Tabular Editor asks you which copy to keep. See [Staying in sync with files on disk](xref:automatic-revert).
+
+##### *Cleanup orphaned Tabular Editor traces*
+
+Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor will be removed.
+
+> [!NOTE]
+> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
 
 ## Data Browsing > General
 

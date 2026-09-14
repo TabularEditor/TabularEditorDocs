@@ -51,6 +51,7 @@ This section contains documentation about Tabular Editor features.
 - @workspace-mode - Collaborative development mode
 - @tmdl - Tabular Model Definition Language support
 - @save-to-folder - Serialize models to folder structures
+- @automatic-revert - Keeping the loaded model and the files on disk in step
 
 ### Command Line and Integration
 - @command-line-options - CLI usage and automation

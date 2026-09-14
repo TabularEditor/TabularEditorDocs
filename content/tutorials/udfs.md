@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX User-Defined Functions
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -233,6 +233,12 @@ In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to cust
 
 > [!NOTE]
 > This organizational feature in Tabular Editor doesn't affect DAX code. You still need to type out the full UDF name when calling a UDF, including any namespace parts.
+
+## UDFs and source control
+
+If you store your model as a folder structure, Tabular Editor can write each UDF to its own file instead of keeping them all inside `database.json`. Two developers editing two different functions then change two different files, and Git has nothing to merge.
+
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**, or under **Tools > Preferences > File Formats > Save-to-folder** for a model you save to a folder for the first time. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Best Practices
 

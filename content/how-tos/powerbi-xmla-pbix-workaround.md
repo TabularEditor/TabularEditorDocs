@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creating PBIX File from XMLA Endpoint.
 author: Morten Lønskov
-updated: 2023-10-18
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
