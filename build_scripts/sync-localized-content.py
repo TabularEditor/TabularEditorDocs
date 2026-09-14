@@ -1,24 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Sync localized content with translation status tracking.
+Sync localized content for local builds.
 
-This script manages the synchronization between source content (English)
-and localized content, tracking which translations are current vs outdated.
+This script prepares localizedContent/{lang}/ for a build: it copies English
+into localizedContent/en/, syncs the shared directories (assets, api) for every
+language and, with --sync, copies English over missing/outdated translations so
+a local build has a complete site.
 
-Features:
-- Tracks source file hashes to detect changes
-- Falls back to English for outdated/missing translations
-- Provides status reports on translation coverage
+Translations themselves are produced by the automated translation workflow
+(build_scripts/translate-content.py, .github/workflows/translate.yml), which
+also owns localizedContent/{lang}/.translation-status.json. This script only
+READS that file (to tell current from outdated translations) and never writes
+it from --sync. The English fallback copies written by --sync are for local
+builds only and must never be committed.
 
 Usage:
     python sync-localized-content.py --status              # Show all languages
     python sync-localized-content.py --status es           # Show Spanish details
-    python sync-localized-content.py --sync es             # Sync Spanish content
-    python sync-localized-content.py --shared-only es      # Sync only shared dirs (assets, api)
+    python sync-localized-content.py --sync en             # Copy English source into localizedContent/en/
+    python sync-localized-content.py --sync es             # English fallback copies for a local es build (do not commit)
+    python sync-localized-content.py --shared-only es      # Sync only shared dirs (assets, api) - the default build path
+    python sync-localized-content.py --json                # JSON output for CI
+
+Legacy (kept for hand repairs; the status file is normally maintained by
+translate-content.py, use its --baseline instead):
     python sync-localized-content.py --init es             # Initialize tracking
     python sync-localized-content.py --mark-translated es  # Mark all as translated
-    python sync-localized-content.py --json                # JSON output for CI
 """
 
 import argparse
@@ -176,6 +184,10 @@ def check_translation_status(lang: str, source_files: dict[str, str]) -> dict[st
 def sync_language(lang: str, source_files: dict[str, str], dry_run: bool = False) -> dict[str, int]:
     """Sync content for a language, falling back to English for outdated/missing.
     
+    For local builds only: the English copies are fallbacks and must never be
+    committed. The translation status file is read, not written (it is owned by
+    translate-content.py).
+
     Returns dict with counts of actions taken.
     """
     status = check_translation_status(lang, source_files)
@@ -196,8 +208,6 @@ def sync_language(lang: str, source_files: dict[str, str], dry_run: bool = False
             if not dry_run:
                 dest_file.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(source_file, dest_file)
-                # Update status to untranslated (since we replaced with English)
-                file_info["status"] = STATUS_UNTRANSLATED
             counts["replaced"] += 1
             print(f"  Replaced (outdated): {rel_path}")
         elif file_status == STATUS_UNTRANSLATED:
@@ -226,8 +236,9 @@ def sync_language(lang: str, source_files: dict[str, str], dry_run: bool = False
             shutil.copytree(src, dest)
             print(f"  Synced shared: {dir_name}/")
     
-    if not dry_run:
-        save_translation_status(lang, status)
+    if counts["copied"] or counts["replaced"]:
+        print(f"  Note: {STATUS_FILENAME} was not modified (it is maintained by translate-content.py).")
+        print("  The English fallback copies above are for local builds only - do not commit them.")
     
     return counts
 
@@ -281,8 +292,9 @@ def sync_english(dry_run: bool = False) -> dict[str, int]:
 def sync_shared_only(lang: str, dry_run: bool = False) -> dict[str, int]:
     """Sync only shared directories (assets, api) for a language.
 
-    Used when full translation sync is disabled (Crowdin manages translations).
-    Skips hash comparison and translation status tracking.
+    The default build path: translations are committed by the automated
+    translation workflow (translate-content.py), so only the shared directories
+    need syncing. Skips hash comparison and translation status tracking.
     """
     localized_content_dir = LOCALIZED_DIR / lang / "content"
     counts = {"synced_dirs": 0}
@@ -304,9 +316,11 @@ def sync_shared_only(lang: str, dry_run: bool = False) -> dict[str, int]:
 
 
 def init_language(lang: str, source_files: dict[str, str]) -> None:
-    """Initialize translation tracking for an existing language.
+    """Initialize translation tracking for an existing language (legacy).
     
     Marks all existing translations as 'translated' with current source hash.
+    Prefer `translate-content.py --baseline`, which also verifies each
+    translation against its source and keeps the pendingJobs/failures sections.
     """
     localized_content_dir = LOCALIZED_DIR / lang / "content"
     
@@ -345,9 +359,11 @@ def init_language(lang: str, source_files: dict[str, str]) -> None:
 
 
 def mark_translated(lang: str, file_paths: list[str] | None, source_files: dict[str, str]) -> None:
-    """Mark files as translated with current source hash.
+    """Mark files as translated with current source hash (legacy).
     
-    If file_paths is None, marks all files in the language.
+    If file_paths is None, marks all files in the language. Rewrites the summary
+    section of the status file; the file is normally maintained by
+    translate-content.py.
     """
     status = load_translation_status(lang)
 
@@ -462,7 +478,8 @@ def main() -> int:
     parser.add_argument(
         "--sync",
         metavar="LANG",
-        help="Sync content for a language (use 'en' for English)"
+        help="Sync content for a language ('en' copies the English source; other languages get "
+             "English fallback copies for a local build - never commit those)"
     )
     parser.add_argument(
         "--shared-only",
@@ -472,12 +489,12 @@ def main() -> int:
     parser.add_argument(
         "--init",
         metavar="LANG",
-        help="Initialize tracking for existing translations"
+        help="Legacy: initialize tracking for existing translations (prefer translate-content.py --baseline)"
     )
     parser.add_argument(
         "--mark-translated",
         metavar="LANG",
-        help="Mark files as translated (all files if no --files specified)"
+        help="Legacy: mark files as translated (all files if no --files specified)"
     )
     parser.add_argument(
         "--files",
