@@ -29,7 +29,7 @@ applies_to:
 
 - 在“文件”菜单中，选择“新建” > “模型……” 或按 `CTRL+N`
 
-![新建模型](https://user-images.githubusercontent.com/8976200/116813646-02a6fc80-ab55-11eb-89b0-8909b768ce7e.png)
+![New model](~/content/assets/images/new-as-model-new-model.png)
 
 - 为模型命名，或使用默认名称。 然后，根据你要面向的 Analysis Services 版本选择相应的兼容级别。 可选项如下：
   - 1200（适用于 SQL Server 2016 或更高版本，以及 Azure Analysis Services）
@@ -51,11 +51,11 @@ applies_to:
 
 在将数据导入到表格模型之前，你必须先设置一个或多个数据源。 在 TOM Explorer 中，右键单击“数据源”文件夹，然后选择“创建”。 对于使用兼容级别 1400 或更高版本的模型，我们有两个选项：旧版数据源和 Power Query 数据源。 想详细了解这两类数据源的差异，可以参阅 [Microsoft Analysis Services 博客](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400)。
 
-![添加数据源](https://user-images.githubusercontent.com/8976200/124598010-72db4280-de64-11eb-818a-e5793f061185.png)
+![Add data source](~/content/assets/images/new-as-model-add-data-source.png)
 
 在此示例中，我们将创建一个 Power Query 数据源，用它从 SQL Server 关系数据库导入几个表。 创建数据源后，按 F2 将其重命名，然后使用属性网格配置该数据源，如下图所示：
 
-![设置数据源属性](https://user-images.githubusercontent.com/8976200/124599856-71ab1500-de66-11eb-8ede-3a6272872734.png)
+![Set data source properties](~/content/assets/images/new-as-model-data-source-properties.png)
 
 在本示例中，我们设置了以下属性：
 
@@ -81,18 +81,18 @@ in
 
 这假设关系型 SQL Server 数据库在“dbo”架构下包含一个名为“FactInternetSales”的表。
 
-![M 分区表达式](https://user-images.githubusercontent.com/8976200/124601212-dd41b200-de67-11eb-9720-3890d7d746ba.png)
+![M partition expression](~/content/assets/images/new-as-model-m-partition.png)
 
 接下来，右键单击新建的表并选择“更新表架构...”。 这样 Tabular Editor 就能根据分区查询自动填充表中的列。
 
 > [!NOTE]
 > 如果你未使用 Workspace 数据库，此操作仅在 Tabular Editor 3.1.0 或更高版本中可用。
 
-![架构对比](https://user-images.githubusercontent.com/8976200/124601333-0104f800-de68-11eb-94f7-654c9e8ff206.png)
+![Schema compare](~/content/assets/images/new-as-model-schema-compare.png)
 
 点击“确定”将列添加到表中。 再次点击“保存”（Ctrl+S）。 如果你使用的是 Workspace 数据库，可以在刷新操作完成后在服务器上刷新该表，并浏览表中的数据。 为此，右键单击该表并选择“刷新表 > 自动（表）”。 等待“数据刷新”选项卡上的操作完成，然后右键单击该表并选择“预览”（也可以在 TOM Explorer 中执行），以查看表中的实际数据：
 
-![数据刷新](https://user-images.githubusercontent.com/8976200/124602234-f0a14d00-de68-11eb-8886-dc7e0d255f9a.png)
+![Data refresh](~/content/assets/images/new-as-model-data-refresh.png)
 
 如果你导入的表是维度表，我们建议将该表主键列的“Key”属性设置为“true”。 这样可以更轻松地定义该表与其他表之间的关系，我们稍后会看到这一点。
 
@@ -102,11 +102,11 @@ in
 
 当你导入了多张表后，在 Tabular Editor 3 中定义它们之间关系的最简单方法是新建一个图表。 选择“文件 > 新建 > 图表”。 然后，多选并将表拖到图表视图中，或右键单击表并选择“添加到图表”：
 
-![添加到图表](https://user-images.githubusercontent.com/8976200/124602823-8a68fa00-de69-11eb-9332-09ad42c4f1b3.png)
+![Add to diagram](~/content/assets/images/new-as-model-add-to-diagram.png)
 
 要在两张表之间创建关系，请在事实表上找到外键列，然后将该列“拖动”到维度表的主键列上。 在弹出的对话框中，单击“确定”以确认关系设置。
 
-![图表视图](https://user-images.githubusercontent.com/8976200/124604764-8f2ead80-de6b-11eb-88d0-c9cebbca57d0.png)
+![Diagram view](~/content/assets/images/new-as-model-diagram-view.png)
 
 关闭图表视图（不用保存，因为你之后随时都可以重建该图表）。 再次按 Ctrl+S 保存模型。 现在该添加一些业务逻辑了。 如果你使用的是 Workspace Database，现在正适合在模型级别执行一次刷新（automatic 或 calculate），以确保服务器已为这些关系创建相应的支撑结构，从而使模型处于可查询状态。
 
@@ -114,13 +114,13 @@ in
 
 在 TOM Explorer 中选择一张表，然后按 Alt+1（或选择“创建 > 新建度量值”）将度量值添加到该表。 为度量值命名，并为该度量值提供 DAX 表达式。
 
-![添加度量值](https://user-images.githubusercontent.com/8976200/124605349-19771180-de6c-11eb-94be-7baf8b5e0ee9.png)
+![Add measure](~/content/assets/images/new-as-model-add-measure.png)
 
 按 Ctrl+S 保存模型元数据。
 
 如果你使用的是 Workspace Database，现在可以直接在 Tabular Editor 3 中测试新建的度量值。 最简单的测试方法是使用 Pivot Grid。 选择“文件 > 新建 > Pivot Grid”，然后将刚创建的度量值从 TOM Explorer 拖到网格中。 你也可以将列和层次结构从 TOM Explorer 拖到 Pivot Grid 的“筛选器”、“行”或“列”区域，按不同的维度属性对度量值进行切片：
 
-![Pivot Grid](https://user-images.githubusercontent.com/8976200/124605906-ae7a0a80-de6c-11eb-985d-6fd580ed81d1.png)
+![Pivot Grid](~/content/assets/images/new-as-model-pivot-grid.png)
 
 如果你没有使用 Workspace Database，则必须先将模型部署到某个 Analysis Services 实例，之后才能执行数据刷新并查询模型。
 
@@ -128,7 +128,7 @@ in
 
 要将模型元数据部署到任意 Analysis Services 实例，请单击“Model”菜单并选择“Deploy...”。 这将启动 Tabular Editor 3 的 Deployment Wizard，它与 Tabular Editor 2.X 的 Deployment Wizard 类似。 按照向导各个页面上的说明操作，即可将模型元数据部署到 Analysis Services 的某个实例。 你也可以使用 Deployment Wizard 生成 TMSL/XMLA 脚本，然后交由 Analysis Services 服务器管理员手动部署。
 
-![Deployment](https://user-images.githubusercontent.com/8976200/124607262-f5b4cb00-de6d-11eb-8139-4f74b5ae19bf.png)
+![Deployment](~/content/assets/images/new-as-model-deployment.png)
 
 要刷新并测试已部署的数据库，你可以使用 Microsoft 提供的标准管理工具和客户端工具；也可以使用另一个 Tabular Editor 3 实例（前提是你在已部署模型所在的 Analysis Services 实例上具有管理员访问权限）。
 
