@@ -78,7 +78,7 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Exporta los objetos seleccionados como un script TMSL o TMDL para usarlo en la implementación o el control de código fuente.
 
 - **Menús de macros**:
-  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. If you have created macros for the given object type, they appear as additional menu items or folders in the right-click menu.
+  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. Si has creado macros para el tipo de objeto especificado, aparecerán como elementos de menú o carpetas adicionales en el menú contextual al hacer clic con el botón derecho.
 
 - **Cortar / Copiar / Pegar / Eliminar**:
   Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo.
@@ -128,12 +128,12 @@ La barra de herramientas te permite mostrar y ocultar distintos tipos de objetos
    Activa o desactiva si se muestran los objetos ocultos.
    **Acceso directo:** **Ctrl+6**
 
-9. **Show/Hide Info Columns**
-   Shows or hides metadata columns, such as data types or object status.
+9. **Mostrar/ocultar columnas de información**
+   Muestra u oculta columnas de metadatos, como el tipo de datos o el estado del objeto.
    **Acceso directo:** **Ctrl+7**
 
-10. **Show/Hide Table Groups**
-    Toggle the visibility of table groups in the TOM Explorer tree. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
+10. **Mostrar/ocultar grupos de tablas**
+    Activa o desactiva la visibilidad de los grupos de tablas en el árbol del Explorador TOM. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
 
 11. **Selector de perspectiva**
     Lista desplegable para seleccionar una perspectiva específica. Solo se mostrarán en el Explorador TOM los objetos de la perspectiva seleccionada.
