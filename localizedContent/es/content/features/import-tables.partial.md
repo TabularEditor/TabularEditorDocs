@@ -120,9 +120,9 @@ Al usar esta opción, Tabular Editor se conectará a todos los orígenes de dato
 
 ![Diálogo de comparación de esquema](~/content/assets/images/schema-compare-dialog.png)
 
-En la captura de pantalla anterior, Tabular Editor detectó algunas columnas nuevas, un cambio de tipo de datos y dos columnas cuyo nombre se cambió en el origen. Ten en cuenta que la detección de un cambio de nombre de columna solo funciona para cambios simples. En otros casos, un cambio de nombre suele hacer que Tabular Editor detecte la eliminación de una columna y la adición de otra; es lo que ocurre con la columna `Tax Amount` que aparece a continuación, que parece haberse renombrado a `TaxAmt` en el origen.
+In the screenshot above, Tabular Editor detected two new columns in the source that have not yet been imported (`Color` and `Material`), and flagged two existing columns for removal (`Colour` and `Substance Type`) because their names no longer match any column in the source. Detection of a column rename only works for simple changes; here, the names differ enough that Tabular Editor reports a removal and an addition rather than a rename - `Colour` has in fact been renamed to `Color` in the source, and `Substance Type` to `Material`.
 
-Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Tax Amount]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las dos filas del cuadro de diálogo Cambios de esquema y, a continuación, hacer clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
+To avoid breaking existing DAX formulas that rely on the `[Colour]` column, you can hold down the Ctrl button and click on the `Color` (import) and `Colour` (remove) rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
 
 ![Combinar actualización de SourceColumn](~/content/assets/images/combine-sourcecolumn-update.png)
 
