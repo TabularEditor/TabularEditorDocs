@@ -78,7 +78,7 @@ TOM Explorer 由两个主要区域组成：第一部分是 Data model 对象，�
   将所选对象导出为 TMSL 或 TMDL 脚本，以用于部署或源代码管理。
 
 - **宏菜单**：
-  可将宏放入文件夹中，并对所选对象运行这些宏。 If you have created macros for the given object type, they appear as additional menu items or folders in the right-click menu.
+  可将宏放入文件夹中，并对所选对象运行这些宏。 如果你为该对象类型创建了宏，这些宏会在右键菜单中以额外的菜单项或文件夹形式显示。
 
 - **剪切 / 复制 / 粘贴 / 删除**：
   标准剪贴板操作。 使用这些选项可移动、复制或删除模型对象。
@@ -128,12 +128,12 @@ TOM Explorer 支持显示或隐藏 Data model 对象的其他信息列。 也可
    切换是否显示隐藏对象。
    **快捷键：** **Ctrl+6**
 
-9. **Show/Hide Info Columns**
-   Shows or hides metadata columns, such as data types or object status.
+9. **显示/隐藏信息列**
+   显示或隐藏元数据列，例如数据类型或对象状态。
    **快捷键：** **Ctrl+7**
 
-10. **Show/Hide Table Groups**
-    Toggle the visibility of table groups in the TOM Explorer tree. 这样无需离开资源管理器，即可快速访问 **Tools > Preferences** 中的相同设置。
+10. **显示/隐藏表格组**
+    在 TOM Explorer 树中切换表格组的显示状态。 这样无需离开资源管理器，即可快速访问 **Tools > Preferences** 中的相同设置。
 
 11. **透视选择器**
     用于选择特定透视的下拉列表。 TOM Explorer 中只会显示所选透视中的对象。
