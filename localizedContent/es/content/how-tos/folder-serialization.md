@@ -13,7 +13,7 @@ applies_to:
 
 Esta función te permite integrar más fácilmente tus modelos tabulares de SSAS en un entorno de control de versiones basado en archivos, como TFS, Subversion o Git. Al elegir "Archivo" > "Guardar en carpeta...", Tabular Editor descompondrá el archivo Model.bim y guardará su contenido en archivos independientes dentro de una estructura de carpetas similar a la del JSON contenido en Model.bim. Cuando vuelvas a guardar el modelo, solo se modificarán los archivos cuyos metadatos hayan cambiado. Esto significa que la mayoría de los sistemas de control de versiones pueden detectar fácilmente qué cambios se han hecho en el modelo, lo que facilita mucho la fusión de cambios y la gestión de conflictos en comparación con trabajar con un único archivo Model.bim.
 
-![Folder serialization example](~/content/assets/images/folder-serialization-example.png)
+![Ejemplo de serialización de carpetas](~/content/assets/images/folder-serialization-example.png)
 
 De forma predeterminada, los objetos se serializan hasta el nivel de objeto más bajo (es decir, las medidas, las columnas y las jerarquías se almacenan como archivos .json individuales).
 
