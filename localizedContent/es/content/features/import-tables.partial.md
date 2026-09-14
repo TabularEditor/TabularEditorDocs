@@ -120,9 +120,9 @@ Al usar esta opción, Tabular Editor se conectará a todos los orígenes de dato
 
 ![Diálogo de comparación de esquema](~/content/assets/images/schema-compare-dialog.png)
 
-In the screenshot above, Tabular Editor detected two new columns in the source that have not yet been imported (`Color` and `Material`), and flagged two existing columns for removal (`Colour` and `Substance Type`) because their names no longer match any column in the source. Detection of a column rename only works for simple changes; here, the names differ enough that Tabular Editor reports a removal and an addition rather than a rename - `Colour` has in fact been renamed to `Color` in the source, and `Substance Type` to `Material`.
+En la captura de pantalla anterior, Tabular Editor detectó dos columnas nuevas en el origen que aún no se han importado (`Color` y `Material`) y marcó para eliminar dos columnas existentes (`Colour` y `Substance Type`) porque sus nombres ya no coinciden con ninguna columna del origen. La detección del cambio de nombre de una columna solo funciona con cambios simples; en este caso, los nombres difieren lo suficiente como para que Tabular Editor haga un Report de una eliminación y una adición, en lugar de un cambio de nombre: en realidad, en el origen, `Colour` se ha renombrado a `Color` y `Substance Type` a `Material`.
 
-To avoid breaking existing DAX formulas that rely on the `[Colour]` column, you can hold down the Ctrl button and click on the `Color` (import) and `Colour` (remove) rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
+Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Colour]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las filas `Color` (importar) y `Colour` (eliminar) del cuadro de diálogo Schema Change; a continuación, haz clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
 
 ![Combinar actualización de SourceColumn](~/content/assets/images/combine-sourcecolumn-update.png)
 
