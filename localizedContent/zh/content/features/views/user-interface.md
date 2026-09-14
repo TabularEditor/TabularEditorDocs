@@ -46,7 +46,7 @@ applies_to:
 
 要将应用重置为默认布局，请选择 **窗口 > 默认布局**。 Tabular Editor 2.x 用户可能更喜欢 **窗口 > 经典布局** 选项：TOM Explorer 位于屏幕左侧，属性视图位于表达式编辑器下方。
 
-Use the **Window > Capture Layout** option to save a customized layout such that it will become available as a new layout option within the Window menu, allowing you to quickly switch back and forth between different layouts. Use the **Window > Layouts...** option to bring up a list of all available layouts, allowing you to apply, load, remove and save layouts. 将布局保存到磁盘时，会生成一个 .xml 文件，你可以与其他 Tabular Editor 3 用户共享。
+使用 **窗口 > 捕获布局** 选项保存自定义布局，使其作为“窗口”菜单中的新布局选项提供，方便你在不同布局之间快速切换。 使用 **窗口 > 布局...** 选项可打开所有可用布局的列表，你可以应用、加载、删除和保存布局。 将布局保存到磁盘时，会生成一个 .xml 文件，你可以与其他 Tabular Editor 3 用户共享。
 
 ![管理布局](~/content/assets/images/manage-layouts.png)
 
@@ -76,12 +76,12 @@ Use the **Window > Capture Layout** option to save a customized layout such that
 
 ### 更改主题和调色板
 
-你可以通过选择不同的主题和/或调色板来更改 Tabular Editor 3 的外观。 Tabular Editor 3 ships with five different themes (sometimes called "skins"), available through the **Window > Theme** menu:
+你可以通过选择不同的主题和/或调色板来更改 Tabular Editor 3 的外观。 Tabular Editor 3 附带五种不同的主题（有时也称为“皮肤”），可通过 **窗口 > 主题** 菜单选择：
 
 - Basic 与 Bezier（矢量主题，适用于高 DPI 显示器）
-- Blue, Dark and Light (raster based, not recommended for high-DPI displays)
+- Blue、Dark 与 Light（位图主题，不推荐用于高 DPI 显示器）
 
-For the vector based themes (Basic and Bezier), use the **Window > Default palette** menu item to change the colors used by the theme.
+对于基于矢量的主题（Basic 和 Bezier），可使用 **窗口 > 默认调色板** 菜单项更改主题使用的颜色。
 
 ![Palettes](~/content/assets/images/palettes.png)
 
@@ -117,7 +117,7 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
   - **从 DB 加载模型...** 指定 Analysis Services 或 Power BI XMLA 连接详细信息，或连接到本地 Analysis Services 实例（例如 Visual Studio 的集成 Workspace 服务器或 Power BI Desktop），以便从已部署的表格模型加载模型元数据。
   - **从文件夹加载模型...** 从文件夹结构中打开模型元数据，该结构此前使用任意版本的 Tabular Editor 保存。
   - **文件...** 会显示一个对话框，可根据文件扩展名打开 Tabular Editor 3 支持的任意类型文件。 更多信息，请参阅 [支持的文件类型](xref:supported-files)。
-  - **Import from Metric View YAML...** Imports model metadata from a Databricks Metric View YAML file.
+  - **从 Metric View YAML 导入...** 从 Databricks Metric View YAML 文件导入模型元数据。
 
     ![支持的文件类型](~/content/assets/images/supported-file-types.png)
 
@@ -157,7 +157,7 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 
 - **全选**：选中当前活动文档中的所有文本，或选中 TOM Explorer 中属于同一父级的所有对象。
 - **Code Assist**：此选项仅在编辑 DAX 代码时可用。 它提供了一个快捷入口，可访问多种与编辑 DAX 代码相关的 Code Assist 功能。 更多信息，请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
-- **Word Wrap**: Toggles word wrapping in the currently active text document.
+- **自动换行**：在当前活动的文本文档中切换是否启用自动换行。
 
 ## 视图
 
@@ -166,20 +166,20 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 ![视图菜单](~/content/assets/images/view-menu.png)
 
 - **TOM Explorer**: 以层次结构视图呈现当前加载的模型元数据的整个 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。 更多信息请参见 @tom-explorer-view。
-- **AI Assistant**: The AI Assistant view lets you interact with an AI assistant that can help you with modeling tasks.
-- **DAX Package Manager**: The DAX Package Manager view lets you browse and install DAX user-defined function packages into your model.
-- **Best Practice Analyzer**: 通过让你指定用于最佳实践验证的规则，帮助提升模型质量。 See @bpa-view for more information.
-- **信息**: 信息视图显示来自各种来源的错误、警告和信息性消息，例如 Tabular Editor 3 语义分析器。 See @messages-view for more information.
-- **数据刷新**：数据刷新视图用于跟踪后台运行的数据刷新操作。 See @data-refresh-view for more information.
+- **AI 助手**：AI 助手视图可让你与 AI 助手交互，协助完成建模任务。
+- **DAX 组件管理器**：DAX 组件管理器视图可让你浏览 DAX 用户定义函数组件，并将其安装到模型中。
+- **Best Practice Analyzer**: 通过让你指定用于最佳实践验证的规则，帮助提升模型质量。 更多信息见 @bpa-view。
+- **信息**: 信息视图显示来自各种来源的错误、警告和信息性消息，例如 Tabular Editor 3 语义分析器。 更多信息见 @messages-view。
+- **数据刷新**：数据刷新视图用于跟踪后台运行的数据刷新操作。 更多信息见 @data-refresh-view。
 - **表达式编辑器**：这是一个“快速编辑器”，可让你编辑 TOM Explorer 中当前选定对象的 DAX、M 或 SQL 表达式。 更多信息请参见 @dax-editor。
 - **宏**: 宏视图允许你管理你创建的任何宏。 可通过 @csharp-scripts 创建宏。 更多信息请参见 @creating-macros。
 - **VertiPaq分析器**：VertiPaq分析器视图允许你收集、导入和导出有关模型数据的详细统计信息，用于优化和调试 DAX 性能。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。 更多信息请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
-- **Dependencies**: The Dependencies view visualizes dependencies between the currently selected object and other objects in the model.
-- **DAX Optimizer**: The DAX Optimizer view integrates with [DAX Optimizer](https://www.daxoptimizer.com) to analyze your model for DAX performance issues.
-- **Calendar Editor**: The Calendar Editor view lets you define and manage calendars in models using the modern time intelligence feature.
-- **Perspective Editor**: The Perspective Editor view provides a matrix overview of which objects are included in each perspective of the model.
-- **Metadata Translation Editor**: The Metadata Translation Editor view provides a grid for editing metadata translations (cultures) of model objects.
-- **Toolbars / Properties**: The remaining items let you toggle the visibility of toolbars and bring up the Properties view (F4).
+- **依赖关系**：依赖关系视图将当前所选对象与模型中其他对象之间的依赖关系可视化。
+- **DAX优化器**：DAX优化器视图与 [DAX优化器](https://www.daxoptimizer.com) 集成，用于分析模型中的 DAX 性能问题。
+- **日历编辑器**：日历编辑器视图允许你使用现代时间智能功能在模型中定义和管理日历。
+- **透视编辑器**：透视编辑器视图提供一个矩阵概览，显示模型的每个透视中包含了哪些对象。
+- **元数据翻译编辑器**: 元数据翻译编辑器视图提供一个网格，用于编辑模型对象的元数据翻译(区域设置)。
+- **工具栏 / 属性**：其余项可让你切换工具栏的可见性，并打开属性视图（F4）。
 
 ## 模型
 
@@ -192,15 +192,15 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 > [!IMPORTANT]
 > **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。 有关详细信息，请参阅 @editions。
 
-- **Serialization options...** Lets you configure how model metadata is serialized when saving to disk (file or folder structure).
+- **序列化选项...**：可配置将模型元数据保存到磁盘时（文件或文件夹结构）的序列化方式。
 - **导入表...** 启动 Tabular Editor 3 导入表向导。 有关详细信息，请参阅 @importing-tables。
-- **Update schema (all tables)...** Detects schema changes in the data source(s) for all tables of the model compared to the currently imported columns. 有关更多信息，请参阅[更新表架构](xref:importing-tables#updating-table-schema)。
+- **更新架构 (所有表)...** 检测模型中所有表的数据源中的架构更改，并与当前已导入的列进行比较。 有关更多信息，请参阅[更新表架构](xref:importing-tables#updating-table-schema)。
 - **Script DAX**: 为当前选定的对象生成 DAX 脚本(如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX 脚本)。 有关详细信息，请参阅 @dax-scripts。
 - **刷新模型**: 当 Tabular Editor 连接到 Analysis Services 实例时，此子菜单包含用于在模型级别启动后台刷新操作的选项。 此子菜单包含以下选项。 有关详细信息，请参阅 [刷新命令 (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
   - **自动（模型）**：Analysis Services 将决定要刷新的对象（仅刷新不处于“Ready”状态的对象）。
   - **完全刷新（模型）**：Analysis Services 对模型执行完全刷新。
   - **计算（模型）**：Analysis Services 将对所有计算表格、计算列、计算组以及关系执行重新计算。 不会从数据源读取任何数据。
-- **Add [object type]**: The remaining shortcuts in the **Model** menu lets you create new types of model child objects (tables, data sources, perspectives, etc.).
+- **添加 [对象类型]**: **模型** 菜单中其余的快捷方式可用于创建新的模型子对象类型(表、数据源、透视等)。
 
 ## 工具
 
@@ -210,7 +210,7 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 
 - **自定义...** 启动 Tabular Editor 3 用户界面布局自定义对话框，可在其中创建新工具栏、重新排列并编辑菜单和工具栏按钮等。
 - **偏好...** 启动 Tabular Editor 3 偏好对话框。它是管理 Tabular Editor 及其各项功能的中心入口，例如更新检查、代理设置、查询行数限制、请求超时等。 有关详细信息，请参阅 @preferences。
-- **Manage BPA rules...** Launches the Best Practice Analyzer rule manager, which lets you view and edit the Best Practice Analyzer rules and rule collections. See @bpa-view for more information.
+- **管理 BPA 规则...**：启动 Best Practice Analyzer 规则管理器，你可以查看和编辑 Best Practice Analyzer 规则及规则集。 更多信息见 @bpa-view。
 
 ## 窗口
 
@@ -228,7 +228,7 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 
 - **新建水平/垂直选项卡组**：此选项可将主文档区域划分为多个区域（即“选项卡组”），以便同时并排或上下显示多个文档。
 
-- **Close All**: Closes all document tabs. 如有未保存的更改，系统会提示你保存。
+- **全部关闭**：关闭所有文档选项卡。 如有未保存的更改，系统会提示你保存。
 
 - **重置窗口布局**：重置对主文档区域应用的所有自定义设置。
 
@@ -240,11 +240,11 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 
   ![窗口管理器](~/content/assets/images/windows-manager.png)
 
-- **Capture Layout** / **Layouts...** / **Default layout** / **Classic layout**: These menu items were discussed [earlier in this article](#choosing-a-different-layout).
+- **捕获布局** / **布局...** / **默认布局** / **经典布局**：这些菜单项已在[本文前文](#choosing-a-different-layout)中介绍过。
 
 - **主题** / **默认调色板**：这些菜单项已在[本文前面](#changing-themes-and-palettes)讨论过。
 
-- **Language**: Lets you change the display language of the Tabular Editor 3 user interface.
+- **语言**：可以更改 Tabular Editor 3 用户界面的显示语言。
 
 ## 帮助
 
@@ -252,11 +252,11 @@ For the vector based themes (Basic and Bezier), use the **Window > Default palet
 
 ![帮助菜单](~/content/assets/images/help-menu.png)
 
-- **Online Documentation**: This menu item links to [docs.tabulareditor.com](https://docs.tabulareditor.com/te3).
-- **Onboarding Guide**: This menu item opens the Tabular Editor 3 onboarding guide, which helps new users get started with the application.
+- **在线文档**：此菜单项链接到 [docs.tabulareditor.com](https://docs.tabulareditor.com/te3)。
+- **入门指南**：这个菜单项会打开 Tabular Editor 3 入门指南，帮助新用户快速上手这个应用。
 - **社区支持**：此菜单项链接到我们的[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)。
 - **专属支持**：此菜单项可让你直接向我们的专属支持热线发送电子邮件。
-- **What's New**: This menu item shows the release notes of the currently installed version of Tabular Editor 3.
+- **新功能**：此菜单项会显示当前安装的 Tabular Editor 3 版本的发布说明。
 
 > [!NOTE]
 > 专属支持仅提供给 Tabular Editor 3 企业版客户。 其他客户如有任何技术问题、疑问或其他产品相关问题，请前往[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)寻求帮助。
