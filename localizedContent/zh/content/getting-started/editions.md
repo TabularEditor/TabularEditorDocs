@@ -91,7 +91,7 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
-![此版本的 Tabular Editor 3 不支持企业级语义模型](https://github.com/TabularEditor/TabularEditorDocs/assets/8976200/7ef69593-ea4b-4a16-a8df-543f5c31ac65)
+![This edition of Tabular Editor 3 does not support Enterprise-tier semantic models](~/content/assets/images/editions-01.png)
 
 除了上面列出的内容之外，Tabular Editor 3 各版本之间没有其他功能差异。
 
