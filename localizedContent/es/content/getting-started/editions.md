@@ -91,7 +91,7 @@ Del mismo modo, [los Workspaces de Power BI Premium-Per-User no admiten los Data
 
 Si intentas abrir un modelo que utiliza una o más de las restricciones de modelado indicadas anteriormente con una licencia TE3 de Edición Business, verás los siguientes mensajes de error:
 
-![This edition of Tabular Editor 3 does not support Enterprise-tier semantic models](~/content/assets/images/editions-01.png)
+![Esta edición de Tabular Editor 3 no es compatible con modelos semánticos de nivel Enterprise](~/content/assets/images/editions-01.png)
 
 No hay más diferencias de funcionalidades entre las ediciones de Tabular Editor 3 que las enumeradas arriba.
 
