@@ -81,7 +81,7 @@
 - 关键列现在以 **粗体** 显示
 - 新增“Define Measure”和“Inline Measure”重构选项
 - 改进了 DAX 查询中 DEFINE / EVALUATE 语句相关的自动补全行为。 例如，自动补全现在也会提示在查询内部定义的度量值、列和表。
-- Auto-complete now also suggests measures for the Name parameter of functions such as SUMMARIZECOLUMNS, ADDCOLUMNS, etc., completing both the Name and the Expression parameter at once:
+- 自动补全现在也会为 SUMMARIZECOLUMNS、ADDCOLUMNS 等函数的 Name 参数提供度量值建议，并可一次性补全 Name 和 Expression 参数：
   ![autocomplete names](~/content/assets/images/beta-16-6-01.gif)
 - 重新审阅了 #42。
 - Deployment Wizard 现在会将部署偏好（目标 + 选项）保存到磁盘上与 Model.bim 或 Database.json 同目录的 .tmuo 文件中。 如果每个模型始终部署到同一目标，那么在不同模型之间切换时执行部署会更轻松。
