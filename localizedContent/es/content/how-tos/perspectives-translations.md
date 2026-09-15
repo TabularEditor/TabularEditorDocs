@@ -14,7 +14,7 @@ applies_to:
 
 Puedes agregar o editar perspectivas y traducciones (configuraciones regionales) existentes haciendo clic en el nodo Modelo del árbol del Explorador y buscando las propiedades correspondientes en la parte inferior de la cuadrícula de propiedades. Como alternativa, cuando el árbol del Explorador [muestre todos los tipos de objeto](../features/hierarchical-display.md), puedes ver y editar perspectivas, configuraciones regionales y roles directamente en el árbol.
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
+![](~/content/assets/images/perspectives-translations-01.png)
 
 Puedes duplicar una perspectiva, un rol o una traducción existente abriendo el menú con el botón derecho y seleccionando "Duplicar". Esto creará una copia exacta del objeto, que después puedes modificar según tus necesidades.
 

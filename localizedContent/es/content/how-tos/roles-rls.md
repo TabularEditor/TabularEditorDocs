@@ -15,8 +15,8 @@ Los roles son visibles en el Árbol del Explorador. Puedes hacer clic con el bot
 
 La mayor ventaja de trabajar con roles en Tabular Editor es que cada objeto de tabla tiene una propiedad "Filtros de nivel de fila", que te permite ver y editar los filtros definidos en esa tabla para todos los roles:
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RLSTableContext.png)
+![](~/content/assets/images/roles-rls-01.png)
 
 Por supuesto, también puedes ver los filtros de todas las tablas en un rol concreto, de forma similar a la interfaz de usuario de SSMS o Visual Studio:
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RLSRoleContext.png)
+![](~/content/assets/images/roles-rls-02.png)
