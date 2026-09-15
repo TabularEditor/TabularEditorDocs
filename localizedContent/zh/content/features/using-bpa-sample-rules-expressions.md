@@ -21,15 +21,15 @@ applies_to:
 
 在本节中，你将看到一些可用于定义规则的 Dynamic LINQ 表达式示例。 在规则表达式的“表达式编辑器”中输入的表达式会在文本框失去焦点时进行求值，任何语法错误都会显示在屏幕顶部：
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-01.png)
+![图片](~/content/assets/images/using-bpa-sample-rules-expressions-01.png)
 
 你的规则表达式可以访问 TOM 中对象的任何公共属性。 如果你尝试访问该对象类型上不存在的属性，也会显示错误：
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-02.png)
+![图片](~/content/assets/images/using-bpa-sample-rules-expressions-02.png)
 
 “Column” 对象上不存在“Expression”，但如果我们将下拉列表切换为“计算列”，上面的语句就能正常工作：
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-03.png)
+![图片](~/content/assets/images/using-bpa-sample-rules-expressions-03.png)
 
 Dynamic LINQ 支持所有标准的算术、逻辑和比较运算符；通过“.”表示法，你可以访问任何对象的子属性和方法。
 
@@ -49,7 +49,7 @@ Columns.Count(DisplayFolder = "") > 10
 
 在这里，我们可以看到这条规则在 Adventure Works 表格模型上的实际效果。 注意：“Reseller”表会显示为违规，而“Reseller Sales”不会（后者的列已整理到显示文件夹中）：
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-04.png)
+![图片](~/content/assets/images/using-bpa-sample-rules-expressions-04.png)
 
 要在 LINQ 方法中引用父对象，可以用特殊的 "outerIt" 语法。 将这条规则应用于表时，会找出那些包含列名不以表名开头的列的表：
 
@@ -121,6 +121,6 @@ and not ReferencedBy.Roles.Any()
 
 这条规则会找出所有在关系("Many"/"From" 端)使用的列，但这些列或其父表并未隐藏。 建议永远不要显示此类列，因为用户应该改用相关的（维度）表来筛选数据。 因此，这里的修复方式就是将列的 IsHidden 属性设置为 true，而上面的 "FixExpression" 字符串正是这么做的。 要看看实际效果的话，在任何违反这条规则的对象上右键，然后选择“生成修复脚本”。 这会将一小段脚本复制到剪贴板，你可以将其粘贴到高级脚本编辑器中，然后就能轻松检查代码并执行：
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-05.png)
+![图片](~/content/assets/images/using-bpa-sample-rules-expressions-05.png)
 
 记住：脚本执行后对模型所做的更改随时都能撤销（CTRL+Z）。
