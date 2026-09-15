@@ -81,8 +81,8 @@ Se avecina una lista bastante grande de correcciones de errores y pequeñas mejo
 - Las columnas clave ahora se muestran en **negrita**
 - Se han añadido las opciones de refactorización "Definir medida" y "Medida en línea"
 - Se ha mejorado el comportamiento del autocompletado en torno a las instrucciones DEFINE / EVALUATE de las consultas DAX. Por ejemplo, ahora el autocompletado también puede sugerir medidas, columnas y tablas definidas dentro de la consulta.
-- El autocompletado ahora también sugiere medidas para el parámetro Name de funciones como SUMMARIZECOLUMNS, ADDCOLUMNS, etc., y completa de una vez los parámetros Name y Expression:
-  ![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
+- Auto-complete now also suggests measures for the Name parameter of functions such as SUMMARIZECOLUMNS, ADDCOLUMNS, etc., completing both the Name and the Expression parameter at once:
+  ![autocomplete names](~/content/assets/images/beta-16-6-01.gif)
 - Revisado el #42.
 - El Asistente de implementación ahora guarda las preferencias de implementación (destino + opciones) en el archivo .tmuo que se encuentra junto al archivo Model.bim o Database.json en el disco. Esto facilita las implementaciones al cambiar entre distintos modelos cuando cada modelo se implementa siempre en el mismo destino.
 - TOM actualizado a 19.16.3. Debería corregir el problema #63.
