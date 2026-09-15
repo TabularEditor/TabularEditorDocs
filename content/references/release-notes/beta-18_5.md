@@ -12,7 +12,7 @@
 
 - The Search dialog (CTRL+F) now supports searching the entire model. When this option is selected in the dropdown, another dropdown appears that lets you choose which object properties to search. There are also options for regular expressions, backslash expressions and also [Dynamic LINQ search, similar to Tabular Editor 2.x](https://docs.tabulareditor.com/Advanced-Filtering-of-the-Explorer-Tree.html) (Dynamic LINQ can also be enabled by entering `:` as the first character in the "Find what" field). Search results are displayed in a separate window, and double-clicking on an item in the search results window will take you directly to that item, highlighting the relevant property in the property grid:
 
-![image](https://user-images.githubusercontent.com/30911111/119983803-edd94f80-bfc0-11eb-91cb-aee084e0c83d.png)
+![image](~/content/assets/images/beta-18-5-01.png)
 
 - Added support for DAX date literal syntax `dt"2021-05-27"`
 - Updated TOM to version 19.21.0

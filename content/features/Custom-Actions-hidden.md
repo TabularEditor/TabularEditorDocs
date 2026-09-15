@@ -8,11 +8,11 @@ title: Custom Actions
 
 Say you have created a useful script using the `Selected` object, and you want to be able to execute the script several times on different objects in the explorer tree. Instead of hitting the "Play" button whenever you want to execute the script, Tabular Editor lets you save it as a Custom Action:
 
-![image](https://user-images.githubusercontent.com/8976200/33581673-0db35ed0-d952-11e7-90cd-e3164e198865.png)
+![image](~/content/assets/images/custom-actions-01.png)
 
 After saving the custom action, you will see that it is now available directly from the right-click context menu of the explorer tree, making it very easy to invoke the script on any objects selected in the tree. You can create as many custom actions as you want. Use backslashes (\\) in the names to create a submenu structure within the context menu.
 
-![Custom Actions show up directly in the context menu](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
+![Custom Actions show up directly in the context menu](~/content/assets/images/custom-actions-02.png)
 
 Custom Actions are stored in the CustomActions.json file within %AppData%\Local\TabularEditor. In the above example, the contents of this file will look like this:
 

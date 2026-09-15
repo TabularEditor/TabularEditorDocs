@@ -283,7 +283,7 @@ start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sal
 
 The figure below shows what such a build looks like in Azure DevOps:
 
-![image](https://user-images.githubusercontent.com/8976200/27128146-bc044356-50fd-11e7-9a67-b893fc48ea50.png)
+![image](~/content/assets/images/command-line-options-01.png)
 
 If the deployment fails for any reason, Tabular Editor returns the "Failed" status to Azure DevOps, regardless of whether or not you are using the "-W" switch.
 
