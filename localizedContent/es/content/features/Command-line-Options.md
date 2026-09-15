@@ -296,7 +296,7 @@ start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sal
 
 La figura siguiente muestra el aspecto de este tipo de compilación en Azure DevOps:
 
-![image](https://user-images.githubusercontent.com/8976200/27128146-bc044356-50fd-11e7-9a67-b893fc48ea50.png)
+![imagen](~/content/assets/images/command-line-options-01.png)
 
 Si el despliegue falla por cualquier motivo, Tabular Editor devuelve el estado "Fallido" a Azure DevOps, independientemente de si está usando o no el modificador "-W".
 
