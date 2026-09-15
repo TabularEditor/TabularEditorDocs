@@ -19,15 +19,15 @@ applies_to:
 #  Rule Expression Samples
 In this section, you'll see some examples of Dynamic LINQ expressions that can be used to define rules. The expression that is entered in the Rule Expression Editor, will be evaluated whenever focus leaves the textbox, and any syntax errors will be shown on top of the screen:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25380170/9f01634e-29af-11e7-952e-e10a1f28df32.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-01.png)
 
 Your rule expressions may access any public properties on the objects in the TOM. If you try to access a property that does not exist on that type of object, an error will also be shown:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25381302/798bab98-29b3-11e7-931e-789e5286fc45.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-02.png)
 
 "Expression" does not exist on the "Column" object, but if we switch the dropdown to "Calculated Columns", the statement above works fine:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25380451/87b160da-29b0-11e7-8e2e-c4e47593007d.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-03.png)
 
 Dynamic LINQ supports all the standard arithmetic, logical and comparison operators, and using the "."-notation, you can access subproperties and -methods of all objects.
 
@@ -47,7 +47,7 @@ Whenever we use a LINQ method to iterate over a collection, the expression used 
 
 Here, we see this rule in action on the Adventure Works tabular model. Note how the "Reseller" table shows up as being in violation, while the "Reseller Sales" does not show up (columns in the latter have been organized in Display Folders):
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25380809/d9d1c3a4-29b1-11e7-839e-29450ad39c8a.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-04.png)
 
 To refer to the parent object inside a LINQ method, use the special "outerIt" syntax. This rule, applied to tables, will find those that contain columns whose name does not start with the table name:
 
@@ -117,6 +117,6 @@ In some cases, it is possible to automatically fix the issues on objects satisfy
 
 This rule finds all columns that are used in a relationship (on the "Many"/"From" side), but where the column or its parent table are not hidden. It is recommended that such columns are never shown, as users should filter data using the related (dimension) table instead. So the fix in this case, would be to set the columns IsHidden property to true, which is exactly what the "FixExpression" string above does. To see this in action, right-click any objects that violate the rule, and choose "Generate Fix Script". This puts a small script into the clipboard, which can be pasted into the Advanced Script Editor, from where you can easily review the code and execute it:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25298489/9035bab6-26f5-11e7-8134-8502daaf4132.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-05.png)
 
 Remember that you can always undo (CTRL+Z) changes done to a model after script execution.

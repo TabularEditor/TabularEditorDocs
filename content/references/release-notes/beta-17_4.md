@@ -39,7 +39,7 @@
 
 ## Updates in BETA-17.1:
 
-![image](https://user-images.githubusercontent.com/8976200/112887423-762b9900-90d3-11eb-8248-d9da55fe8fe3.png)
+![image](~/content/assets/images/beta-17-4-01.png)
 
 - Added [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) (you may need to delete the Layout.gz file under %LocalAppData%\TabularEditor3 and/or reset to the Default window workspace if the new view doesn't appear in the UI)
   - Collects statistics (column and table cardinalities and sizes) which will then show up in the TOM Explorer tooltips as well as when hovering over a column or table reference in any DAX editor.
