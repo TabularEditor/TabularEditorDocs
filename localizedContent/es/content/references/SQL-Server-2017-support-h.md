@@ -12,23 +12,23 @@ A continuación tienes un resumen rápido de cómo se usan las nuevas caracterí
 
 Todas las relaciones ahora muestran la propiedad "Join on Date Behavior" en la cuadrícula de propiedades:
 
-![image](~/content/assets/images/sql-server-2017-support-01.png)
+![imagen](~/content/assets/images/sql-server-2017-support-01.png)
 
 ## Variaciones (reutilización de columna/jerarquía)
 
 Puedes configurar variaciones en una columna expandiendo la propiedad "Variaciones" en la cuadrícula de propiedades:
 
-![image](~/content/assets/images/sql-server-2017-support-02.png)
+![imagen](~/content/assets/images/sql-server-2017-support-02.png)
 
 Ten en cuenta que también puedes especificar **Seguridad de nivel de objeto** a nivel de columna.
 
 Al hacer clic en el botón de puntos suspensivos, se abre el Editor de la colección de variaciones, desde donde puedes configurar cómo se vuelven a mostrar las columnas y las jerarquías en Power BI:
 
-![image](~/content/assets/images/sql-server-2017-support-03.png)
+![imagen](~/content/assets/images/sql-server-2017-support-03.png)
 
 Recuerda establecer la propiedad "Show As Variations Only" en "True" a nivel de tabla:
 
-![image](~/content/assets/images/sql-server-2017-support-04.png)
+![imagen](~/content/assets/images/sql-server-2017-support-04.png)
 
 Las **Expresiones de fila de detalle** se pueden establecer directamente en tablas y medidas. Sin embargo, por ahora no hay resaltado de sintaxis ni IntelliSense.
 
