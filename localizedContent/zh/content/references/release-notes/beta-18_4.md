@@ -49,7 +49,7 @@ Tabular Editor 首次能够检测 Power Query 数据源和分区的架构更改�
 
 因此，为了检测 Power Query 分区的架构更改，Tabular Editor 3 现在会在模型中添加一个隐藏的临时表，并对我们要检测架构的源查询运行 M 函数 [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema)，将结果写入该表。 然后在服务器端刷新该临时表（使用服务器上已存储的凭据访问数据源）——得益于 M 引擎内部的查询折叠，这次刷新只需一瞬间。 最后，Tabular Editor 会查询该表以读取架构信息，然后回滚整个事务。 结果：
 
-![image](~/content/assets/images/beta-18-3-01.gif)
+![图片](~/content/assets/images/beta-18-3-01.gif)
 
 当然，唯一要注意的是 Tabular Editor 3 必须连接到一个 Analysis Services 实例。不过你正在处理的模型有没有数据都不重要——只要数据源的凭据已存储在 AS 中（并且 AS 确实能访问该数据源）。 如果你使用 Tabular Editor 3 的 [工作区模式](https://docs.tabulareditor.com/Workspace-Database.html)，这项技术尤其有用。
 
