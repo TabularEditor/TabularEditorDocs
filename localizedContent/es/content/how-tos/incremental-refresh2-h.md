@@ -28,27 +28,27 @@ Los Datasets alojados en el servicio de Power BI pueden tener configurada la [ac
 ## Configurar la actualización incremental desde cero con Tabular Editor
 
 1. Conéctate al punto de conexión XMLA R/W de Power BI de tu Workspace, y abre el Dataset en el que quieres configurar la actualización incremental.
-2. Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)), so let's start by adding two new Shared Expressions in Tabular Editor:
-   ![Add shared expressions](~/content/assets/images/incremental-refresh2-01.png)
+2. La actualización incremental requiere crear los parámetros `RangeStart` y `RangeEnd` ([más información](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)), así que empecemos añadiendo dos nuevas Shared Expressions en Tabular Editor:
+   ![Agregar expresiones compartidas](~/content/assets/images/incremental-refresh2-01.png)
 3. Asígnales los nombres `RangeStart` y `RangeEnd`, respectivamente, establece su propiedad `Kind` en "M" y define su expresión como sigue (el valor real de fecha y hora que especifiques no importa, ya que lo establecerá el servicio de Power BI al iniciar la actualización de datos):
 
   ```M
   #datetime(2021, 6, 9, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
   ```
 
-![Set kind property](~/content/assets/images/incremental-refresh2-02.png)
+![Establecer la propiedad Kind](~/content/assets/images/incremental-refresh2-02.png)
 4. A continuación, selecciona la tabla en la que quieres habilitar la actualización incremental
-5. Set the `EnableRefreshPolicy` property on the table to "true":
-![Enable Refresh Policy](~/content/assets/images/incremental-refresh2-03.png)
+5. Configura la propiedad `EnableRefreshPolicy` de la tabla como "true":
+![Habilitar la política de actualización](~/content/assets/images/incremental-refresh2-03.png)
 6. Configura las propiedades restantes según la política de actualización incremental que necesites. Recuerda especificar una expresión M para la propiedad `SourceExpression` (esta es la expresión que se agregará a las particiones creadas por la política de actualización incremental, y debería usar los parámetros `RangeStart` y `RangeEnd` para filtrar los datos en el origen). El operador = solo debe aplicarse a RangeStart o a RangeEnd, pero no a ambos, ya que los datos podrían duplicarse.
-![Configure Properties](~/content/assets/images/incremental-refresh2-04.png)
+![Configurar propiedades](~/content/assets/images/incremental-refresh2-04.png)
 7. Guarda el modelo (Ctrl+S).
 8. Haz clic derecho en la tabla y elige "Aplicar política de actualización".
-![Apply Refresh Policy](~/content/assets/images/incremental-refresh2-05.png)
+![Aplicar la política de actualización](~/content/assets/images/incremental-refresh2-05.png)
 
 ¡Eso es todo! En este punto, deberías ver que el servicio de Power BI ha generado automáticamente las particiones en tu tabla, en función de la política que especificaste.
 
-![Generated Partitions](~/content/assets/images/incremental-refresh2-06.png)
+![Particiones generadas](~/content/assets/images/incremental-refresh2-06.png)
 
 El siguiente paso es actualizar los datos de las particiones. Para ello, puedes usar el servicio de Power BI o actualizar las particiones por lotes mediante [XMLA/TMSL desde SQL Server Management Studio](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), o incluso con el scripting de [Tabular Editor](https://www.elegantbi.com/post/datarefreshintabulareditor).
 
@@ -87,7 +87,7 @@ var effectiveDate = new DateTime(2020, 1, 1);  // Todo: replace with your effect
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
 
-![Use scripts to apply refresh policy](~/content/assets/images/incremental-refresh2-07.png)
+![Usa scripts para aplicar la política de actualización](~/content/assets/images/incremental-refresh2-07.png)
 
 ## Eliminar la actualización incremental con Tabular Editor
 
