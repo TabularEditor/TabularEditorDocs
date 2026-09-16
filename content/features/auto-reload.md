@@ -88,7 +88,7 @@ Changes that arrive while Tabular Editor is in the background are held rather th
 
 Auto-reload is enabled by default. To make the disk-to-memory direction manual again, clear **Automatically reload from disk** under **Tools > Preferences > Miscellaneous**.
 
-![Placeholder: Screenshot of the Tools > Preferences > Miscellaneous page, showing the Automatically reload from disk checkbox]
+![Tools > Preferences > Miscellaneous, showing the automatic reload setting under Metadata Synchronization](~/content/assets/images/pref-miscellaneous.png)
 
 Turn it off when the model folder is also written to by something that runs continuously, such as a file sync client or a CI checkout that refreshes in the background. The prompt is modal, so a folder that changes often interrupts you rather than helping you.
 

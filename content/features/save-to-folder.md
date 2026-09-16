@@ -70,7 +70,7 @@ The benefit is the same as for every other object type: two developers editing t
 
 Turn it on with the **User Defined Functions (UDFs)** level, under **Tools > Preferences > File Formats > Save-to-folder** or, for the model you have open, under **Model > Serialization options...**.
 
-![Placeholder: Screenshot of the Model > Serialization options dialog, with the User Defined Functions (UDFs) level ticked]
+![Model > Serialization options, with the User Defined Functions (UDFs) level ticked](~/content/assets/images/serialization-options-udf.png)
 
 > [!IMPORTANT]
 > Tabular Editor selects this level by default only for a model you save to a folder for the *first* time. A model that's already folder-serialized keeps the levels stored in its own serialization annotation, so its functions stay inline until you select **User Defined Functions (UDFs)** under **Model > Serialization options...** and save the model again.

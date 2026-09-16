@@ -347,7 +347,7 @@ Three grants are worth a closer look:
 
 Open **Tools > Preferences > AI Features > Permissions**. Each resource has a dropdown carrying its available levels.
 
-![Placeholder: Screenshot of the AI Features > Permissions preferences page, showing one dropdown per resource at its default]
+![AI Features > Permissions preferences, one dropdown per resource at its default](~/content/assets/images/pref-ai-permissions.png)
 
 There is no separate "ask me" level. **Deny** is what asking looks like: in the chat, a resource you have not granted produces a permission card at the moment it is needed. Over MCP, where there is nobody to ask, a denied resource's tools are unavailable.
 

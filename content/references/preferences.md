@@ -90,7 +90,7 @@ Automatically refresh Direct Lake tables when saving changes to ensure data is c
 
 ## Tabular Editor > Updates and Feedback
 
-![Placeholder: Screenshot of Updates and Feedback preferences page]
+![Updates and Feedback preferences](~/content/assets/images/pref-updates-and-feedback.png)
 
 ### Updates
 
@@ -120,7 +120,7 @@ In cases of crashes, Tabular Editor displays an option for sending a crash repor
 
 ## Tabular Editor > Deployment
 
-![Placeholder: Screenshot of Deployment preferences page]
+![Model Deployment preferences](~/content/assets/images/pref-model-deployment.png)
 
 Configure which types of objects are deployed by default when using the deployment wizard:
 
@@ -342,7 +342,7 @@ Automatically remove all table objects when a table is removed from a perspectiv
 
 ## Tabular Editor > Schema Compare
 
-![Placeholder: Screenshot of Schema Compare preferences page]
+![Schema Compare preferences](~/content/assets/images/pref-schema-compare.png)
 
 Configure which changes are ignored during schema comparison when updating table schemas:
 
@@ -368,7 +368,7 @@ Use Analysis Services metadata as the source of truth for schema detection. When
 
 ## Tabular Editor > Save to Folder/File
 
-![Placeholder: Screenshot of Save to Folder preferences page]
+![Save to Folder preferences](~/content/assets/images/pref-save-to-folder.png)
 
 ### Serialization Mode
 
@@ -452,7 +452,7 @@ When using spaces, specify the number of spaces per indentation level.
 
 ## Tabular Editor > Miscellaneous
 
-![Placeholder: Screenshot of Miscellaneous preferences page]
+![Miscellaneous preferences](~/content/assets/images/pref-miscellaneous.png)
 
 ### Metadata Synchronization
 
@@ -483,7 +483,7 @@ Normally, Tabular Editor 3 should automatically stop and remove any AS traces st
 
 ## Data Browsing > Pivot Grid
 
-![Placeholder: Screenshot of Pivot Grid preferences page]
+![Pivot Grid preferences](~/content/assets/images/pref-pivot-grid.png)
 
 ### Basic
 
@@ -522,7 +522,7 @@ Choose the default layout for the pivot grid field list. Options include:
 
 ## Data Browsing > DAX Query
 
-![Placeholder: Screenshot of DAX Query preferences page]
+![DAX Query preferences](~/content/assets/images/pref-dax-query.png)
 
 ### Basic
 
@@ -555,7 +555,7 @@ Insert comments into generated object definitions, for example the `DEFINE` bloc
 
 ## Data Browsing > Table Preview
 
-![Placeholder: Screenshot of Table Preview preferences page]
+![Table Preview preferences](~/content/assets/images/pref-table-preview.png)
 
 ### Basic
 
@@ -758,7 +758,7 @@ Extension columns can be defined without a table name. When checked, the DAX edi
 
 ## DAX Editor > Code Assist
 
-![Placeholder: Screenshot of DAX Editor Code Assist preferences page]
+![DAX Editor Code Assist preferences](~/content/assets/images/pref-dax-code-assist.png)
 
 On this page, you can configure the two most important Code Assist features, namely calltips (aka. "parameter info") and auto-complete.
 
@@ -788,7 +788,7 @@ Only show items starting with the typed letter. Disable this to use incremental 
 
 ## DAX Editor > Code Actions
 
-![Placeholder: Screenshot of DAX Editor Code Actions preferences page]
+![DAX Editor Code Actions preferences](~/content/assets/images/pref-dax-code-actions.png)
 
 Configure automatic code improvement suggestions:
 
@@ -844,7 +844,7 @@ Specify where obfuscation dictionaries are stored. The dictionary maintains cons
 
 ## VertiPaq Analyzer
 
-![Placeholder: Screenshot of VertiPaq Analyzer preferences page]
+![VertiPaq Analyzer preferences](~/content/assets/images/pref-vertipaq-analyzer.png)
 
 ##### *Include TOM metadata* (enabled)
 
@@ -874,7 +874,7 @@ Number of columns to analyze in each batch. Adjust this based on your model size
 
 ## Power BI Integration
 
-![Placeholder: Screenshot of Power BI Integration preferences page]
+![Power BI Integration preferences](~/content/assets/images/pref-power-bi.png)
 
 ##### *Power BI endpoint base URL* (`https://api.powerbi.com`)
 
@@ -890,7 +890,7 @@ Use the embedded browser for OAuth authentication instead of the system browser.
 
 ## Proxy Settings
 
-![Placeholder: Screenshot of Proxy Settings preferences page]
+![Proxy Settings preferences](~/content/assets/images/pref-proxy-settings.png)
 
 ##### *Proxy type* (None)
 
