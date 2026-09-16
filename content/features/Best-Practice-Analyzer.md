@@ -52,7 +52,7 @@ Click **Add...** in the Manage BPA Rules window and choose one of:
 - **Include local Rule File** attaches a `.json` file of rules you already have.
 - **Include Rule File from URL** attaches rules served over HTTP or HTTPS, for example the [standard BPA rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json) published by Microsoft. Collections loaded from a URL are read-only.
 
-![Placeholder: The Add rule collection dialog, showing the Create new Rule File, Include local Rule File and Include Rule File from URL options]
+![The Add rule collection dialog, showing the Create new Rule File, Include local Rule File and Include Rule File from URL options](~/content/assets/images/bpa-add-rule-collection.png)
 
 For the two file options you can store the reference as a relative path, which is worth doing when the rule file lives in the same repository as the model. A relative reference only resolves when the model itself was loaded from disk, since a model loaded from a server has no working directory to resolve against. A file on a different drive or a network share has to be referenced absolutely.
 
