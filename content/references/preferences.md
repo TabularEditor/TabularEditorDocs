@@ -217,55 +217,31 @@ Automatically create .tmuo (Tabular Model User Options) files for new models. Th
 
 Configure keyboard shortcuts for all Tabular Editor commands. Use the search functionality to quickly find specific commands and assign or modify their keyboard shortcuts to match your preferred workflow.
 
-## Tabular Editor > TOM Explorer View
+## Tabular Editor > TOM Explorer
 
-![Tom Explorer Settings](~/content/assets/images/tom-explorer-settings.png)
+![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
 
-Control which objects and properties are visible in the TOM (Tabular Object Model) Explorer:
+Control how the TOM (Tabular Object Model) Explorer presents the model, and what happens to the objects you delete.
 
-##### *Display folders* (enabled)
+The toggles that decide which object types appear in the tree, such as measures, columns, hierarchies, partitions, display folders and hidden objects, are not preferences. They live on the @tom-explorer-view toolbar, where you can change them per model without opening this dialog.
 
-Show or hide display folder groupings. When enabled, objects are organized into their display folder hierarchy.
+### Display and filtering
 
-##### *Hidden objects* (disabled)
+##### *Use table groups* (enabled)
 
-Show or hide objects marked as hidden in the model. Enable this if you need to work with hidden tables, columns, or measures.
-
-##### *All object types* (enabled)
-
-Show all object types in the explorer tree. When disabled, only the most common object types are shown.
-
-##### *Sort alphabetically* (enabled)
-
-Sort objects alphabetically instead of by creation order. This makes it easier to find specific objects in large models.
-
-##### *Show measures* (enabled)
-
-Display measures in the explorer tree.
-
-##### *Show columns* (enabled)
-
-Display columns in the explorer tree.
-
-##### *Show hierarchies* (enabled)
-
-Display hierarchies in the explorer tree.
-
-##### *Show partitions* (enabled)
-
-Display partitions in the explorer tree.
-
-##### *Show metadata information* (disabled)
-
-Display additional metadata properties in tooltips and property grid. This includes information like lineage tags, creation timestamps, and other technical metadata.
+Group your tables in the TOM Explorer, for example to keep calculation groups, dimensions and fact tables apart. Tabular Editor records a table's group in an annotation on the table itself, so the grouping travels with the model. It is internal to Tabular Editor: no other client tool, Power BI Desktop included, shows it. See @table-groups.
 
 ##### *Show full branch* (disabled)
 
-When filtering the TOM Explorer, by default Tabular Editor 3 shows all items in the hierarchy that matches the filter string, including their parents. If you want to see all child items as well (even though these might not match the filter string), enable this option.
+When you filter the tree, Tabular Editor shows the objects that match your filter string together with their parents. Enable this to also show every child of a match, whether or not the children match the string themselves.
+
+##### *Highlight relationships* (enabled)
+
+Highlight the relationships that involve the table or column you have selected, so you can see at a glance what a column is joined to.
 
 ### Unsaved changes
 
-These settings control how [unsaved changes](xref:unsaved-changes) are indicated in the TOM Explorer and the Properties view. They were introduced in Tabular Editor 3.27.0.
+These settings control how [unsaved changes](xref:unsaved-changes) are indicated in the TOM Explorer and the Properties view.
 
 ##### *Mark objects with unsaved changes* (enabled)
 
@@ -296,9 +272,29 @@ If you prefer Tabular Editor 3 to prompt you to confirm all object deletions, en
 > [!NOTE]
 > All delete operations in Tabular Editor 3 can be undone by hitting CTRL+Z.
 
-### Column Preferences
+### Localization
 
-Configure which columns are visible in multi-column views and their display order.
+These settings decide the format string Tabular Editor writes when you pick the *Currency* number format for an object in the Properties pane.
+
+##### *Default currency* (English (United States))
+
+The formatting convention to base the currency format string on. Pick the locale whose currency symbol, decimal separator and digit grouping you want.
+
+##### *Use a custom currency symbol* (disabled)
+
+Supply your own symbol instead of taking one from the locale above. The three settings below apply only while this is checked.
+
+##### *Custom currency symbol*
+
+The symbol to use. Enter the symbol on its own, without the number; whitespace is ignored.
+
+##### *Custom currency symbol position* (Before number)
+
+Whether the symbol goes before or after the numeric value.
+
+##### *Put a space between the number and symbol* (disabled)
+
+Separate the symbol from the numeric value with a space.
 
 ## Tabular Editor > Copy/Paste
 

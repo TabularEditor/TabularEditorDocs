@@ -77,7 +77,7 @@ Normally, Tabular Editor 3 should automatically stop and remove any AS traces st
 
 The settings below control various aspects of the TOM Explorer. You can find these settings under **Tabular Editor > TOM Explorer**:
 
-![Tom Explorer Settings](~/content/assets/images/tom-explorer-settings.png)
+![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
 
 ##### *Show full branch* (disabled)
 

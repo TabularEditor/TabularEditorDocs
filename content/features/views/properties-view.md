@@ -2,7 +2,7 @@
 uid: properties-view
 title: Properties view
 author: Daniel Otykier
-updated: 2026-09-08
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,7 +46,7 @@ The toolbar at the top of the Properties view contains the following buttons:
 - **Categorized**: Groups the properties into categories such as *Basic*, *Metadata* and *Options*.
 - **Alphabetical**: Lists all properties in a single, alphabetically sorted list.
 - **Show changes**: Hides all properties that have not changed since the model was last saved, so that only the properties with [unsaved changes](xref:unsaved-changes) remain. While the filter is active, the title of the view reads **Properties (Changed)**.
-- **Show help**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property.
+- **Property descriptions**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property.
 - **Search box**: Filters the list of properties by name.
 
 ## Unsaved changes
@@ -54,7 +54,7 @@ The toolbar at the top of the Properties view contains the following buttons:
 Properties that differ from the last saved version of the model are drawn with a light orange row background. When several objects are selected, a row is marked if any of the selected objects changed that property.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/properties-view-unsaved-changes.png" alt="Properties view with unsaved changes" style="width: 500px;"/>
+  <img class="noscale" src="~/content/assets/images/unsaved-changes/revert-property.png" alt="Properties view with unsaved changes" style="width: 500px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A measure with unsaved changes to its Description and Format String. The <strong>Revert</strong> option puts a single property back to its saved value.</figcaption>
 </figure>
 

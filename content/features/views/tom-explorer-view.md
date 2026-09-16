@@ -103,7 +103,7 @@ The TOM Explorer allows for toggling on additional info columns about the data m
 These extra info also exists in the property window, but allow for a quick view of the Object Type, Format String, Data Type, Expression and Description.
 ![Tom Explorer Show Hide Columns](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
 
-### Unsaved changes
+## Unsaved changes
 Objects that differ from the last saved version of the model are tinted and badged: orange for edited objects, green for added objects and red for deleted objects, which also stay in the tree, struck through, until the model is saved. Tables, folders and groups that contain changed objects get a hatched fill. Deleted objects can be brought back with the right-click **Restore** option, and the **Show changes** toolbar button filters the tree down to the changed objects. See @unsaved-changes for details, including how to revert individual changes and how to adjust the indicators under **Tools > Preferences**.
 
 ![Tom Explorer Unsaved Changes](~/content/assets/images/user-interface/TOMExplorerUnsavedChanges.png)
@@ -150,7 +150,7 @@ The toolbar allows you to show and hide different types of objects, toggle persp
 10. **Show/Hide Table Groups**
     Toggle the visibility of table groups in the TOM Explorer tree. This provides quick access to the same setting found in **Tools > Preferences** without leaving the explorer.
 
-11. **Show Changes**
+11. **Show changes**
     Filters the tree down to objects with [unsaved changes](xref:unsaved-changes), together with the tables, folders and groups needed to reach them. While the filter is active, the title of the view reads **TOM Explorer (Changed)**.
 
 12. **Perspective Selector**

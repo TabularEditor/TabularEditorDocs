@@ -123,7 +123,7 @@ Either way, the AI assemblies are never written to the installation folder, the 
 Upgrading an existing installation keeps the feature selection that machine already has, so a machine that was deployed without the AI features before 3.27.0 does not gain them by being upgraded. Pass `ADDLOCAL=MainFeature` on fresh installations, where there is no earlier selection to inherit.
 
 > [!IMPORTANT]
-> Leaving the component out controls what you deploy, not what a user can install. Anyone who runs the installer themselves gets the AI features, because they are the default. To make the decision stick, set the `DisableAi` @policies as well: it turns off the AI Assistant and the MCP server at runtime whether or not the component is present, and setting it under `HKEY_LOCAL_MACHINE` applies it to every user on the machine. Deploy the policy and the feature selection together.
+> The command line controls what *you* deploy, not what a user can install: the AI features are the default, so anyone who runs the installer themselves gets them. To make the decision stick, set the `DisableAi` @policies as well. From 3.27.0 the installer reads that policy and leaves the AI component out on its own, whoever runs it and however it is run, and the policy also turns the AI Assistant and the MCP server off at runtime if the component is already present. Set it machine-wide, under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3`, so it applies to every user and cannot be overridden per user.
 
 > [!NOTE]
 > When using `ADDLOCAL`, list `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.

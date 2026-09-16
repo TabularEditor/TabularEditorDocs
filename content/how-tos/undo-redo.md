@@ -2,7 +2,7 @@
 uid: undo-redo
 title: Undo/Redo support
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -40,4 +40,4 @@ A single object that nothing depends on is deleted without a prompt, on the grou
 
 In Tabular Editor 3, undo and the unsaved-change indicators work against the same reference point. Undoing back to the state the model was last saved in clears every indicator; redoing brings them back. Undoing *past* the last save point makes indicators reappear for the objects that were rolled back.
 
-**Revert** is the more direct tool when you want to discard a specific change rather than walk the undo stack back to it. It puts a single property, an object, a table or the whole model back to its last saved state in one undoable step, leaving every other unsaved edit alone. See [Unsaved changes](xref:tom-explorer-view#unsaved-changes).
+**Revert** is the more direct tool when you want to discard a specific change rather than walk the undo stack back to it. It puts a single property, an object, a table or the whole model back to its last saved state in one undoable step, leaving every other unsaved edit alone. See @unsaved-changes.
