@@ -2,6 +2,7 @@
 ## @user-interface
 ## @tom-explorer-view
 ## @properties-view
+## @unsaved-changes
 ## @bpa-view
 ## @data-refresh-view
 ## @find-replace

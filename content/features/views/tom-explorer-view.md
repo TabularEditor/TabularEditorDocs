@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: TOM Explorer view
 author: Morten Lønskov
-updated: 2026-08-18
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -76,8 +76,14 @@ Exports the selected objects as a TMSL or TMDL script for use in deployment or s
 - **Macro Menus**:
 Macros can be placed into folders and run against the selected object. If you have created macros for the given object type, they appear as additional menu items or folders in the right-click menu.
 
+- **Revert**:
+Puts the selected object, and everything beneath it, back to the way it was when the model was last saved, leaving all other unsaved changes in place. Only shown for objects with [unsaved changes](xref:unsaved-changes), and for tables, display folders, table groups and the **Model** node when something beneath them has changed.
+
+- **Restore**:
+Brings back a deleted object, exactly as it was the moment before it was deleted. Only shown when right-clicking objects that were [deleted since the last save](xref:unsaved-changes#deleted-objects), which remain visible in the TOM Explorer with a struck-through name.
+
 - **Cut / Copy / Paste / Delete**:
-Standard clipboard operations. Use these to move, duplicate, or remove model objects.
+Standard clipboard operations. Use these to move, duplicate, or remove model objects. Deleted objects stay visible in the TOM Explorer, struck through, until the model is saved. See @unsaved-changes.
 
 - **Properties**:
 Opens the Properties pane for the selected object. Shortcut: **Alt+Enter**. Used to inspect and edit metadata, expressions, formatting and visibility settings.
@@ -86,6 +92,11 @@ Opens the Properties pane for the selected object. Shortcut: **Alt+Enter**. Used
 The TOM Explorer allows for toggling on additional info columns about the data model objects. This can be done with the shortcut **Ctrl+7**.
 These extra info also exists in the property window, but allow for a quick view of the Object Type, Format String, Data Type, Expression and Description.
 ![Tom Explorer Show Hide Columns](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
+
+### Unsaved changes
+Objects that differ from the last saved version of the model are tinted and badged: orange for edited objects, green for added objects and red for deleted objects, which also stay in the tree, struck through, until the model is saved. Tables, folders and groups that contain changed objects get a hatched fill. Deleted objects can be brought back with the right-click **Restore** option, and the **Show changes** toolbar button filters the tree down to the changed objects. See @unsaved-changes for details, including how to revert individual changes and how to adjust the indicators under **Tools > Preferences**.
+
+![Tom Explorer Unsaved Changes](~/content/assets/images/user-interface/TOMExplorerUnsavedChanges.png)
 
 ## TOM Explorer Toolbar
 The toolbar allows you to show and hide different types of objects, toggle perspectives and languages and search for specific objects in the data model.
@@ -129,14 +140,17 @@ The toolbar allows you to show and hide different types of objects, toggle persp
 10. **Show/Hide Table Groups**
     Toggle the visibility of table groups in the TOM Explorer tree. This provides quick access to the same setting found in **Tools > Preferences** without leaving the explorer.
 
-11. **Perspective Selector**
+11. **Show Changes**
+    Filters the tree down to objects with [unsaved changes](xref:unsaved-changes), together with the tables, folders and groups needed to reach them. While the filter is active, the title of the view reads **TOM Explorer (Changed)**.
+
+12. **Perspective Selector**
     Drop-down to choose a specific perspective. Only objects in the selected perspective will be shown in the TOM Explorer.
 
-12. **Language Selector**
+13. **Language Selector**
     Allows switching between different languages for model metadata localization.
 
-13. **Collapse All**
+14. **Collapse All**
     Collapses all nodes in the TOM Explorer tree view.
 
-14. **Search Bar**
+15. **Search Bar**
     Provides real-time filtering and navigation within the TOM Explorer. Type to search across all visible model objects.

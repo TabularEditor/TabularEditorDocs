@@ -1,8 +1,8 @@
-﻿---
+---
 uid: preferences
 title: Controlling preferences
 author: Daniel Otykier
-updated: 2026-09-11
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -241,6 +241,32 @@ Display additional metadata properties in tooltips and property grid. This inclu
 ##### *Show full branch* (disabled)
 
 When filtering the TOM Explorer, by default Tabular Editor 3 shows all items in the hierarchy that matches the filter string, including their parents. If you want to see all child items as well (even though these might not match the filter string), enable this option.
+
+### Unsaved changes
+
+These settings control how [unsaved changes](xref:unsaved-changes) are indicated in the TOM Explorer and the Properties view. They were introduced in Tabular Editor 3.27.0.
+
+##### *Mark objects with unsaved changes* (enabled)
+
+Highlight objects in the TOM Explorer that differ from the last saved version of the model, using a tinted row and a badge on the object's icon: orange for edited objects, green for added objects and red for deleted objects. Tables, folders and groups that contain changed objects get a hatched fill. When disabled, deleted objects still stay visible according to the setting below, and the **Show changes** toolbar filter still works. Use **Color blindness mode** under **User Interface > Accessibility** to mark added objects in teal instead of green.
+
+##### *Keep deleted objects visible* (Until the model is saved)
+
+How long deleted objects remain visible in the TOM Explorer, struck through, where they used to be. Right-click a deleted object and choose **Restore** to bring it back. Options:
+
+- **Never**: Deleted objects disappear from the TOM Explorer at once.
+- **Until the model is saved**: Deleted objects are treated as unsaved changes and disappear when the model is saved.
+- **Until the model is closed**: Deleted objects stay visible, and restorable, for the whole editing session, even across saves.
+
+##### *Gather deleted objects under a "Deleted objects" node* (disabled)
+
+Show the deleted objects of a table, hierarchy, role or table group together under a single **Deleted objects** node at the end of their container, instead of each where it used to be. Right-click the node and choose **Restore** to bring back all of them at once.
+
+##### *Mark properties with unsaved changes in the Properties pane* (enabled)
+
+Highlight properties in the Properties view that differ from the last saved version of the model, using a tinted row. When disabled, the **Show changes** toolbar filter in the Properties view still works.
+
+### Delete
 
 ##### *Always show delete warnings* (disabled)
 
