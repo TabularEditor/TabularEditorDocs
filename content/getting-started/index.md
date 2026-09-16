@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: Welcome
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 ---
 # Welcome
 
@@ -71,7 +71,7 @@ This training material focuses on the Tabular Editor product, so we assume you a
 
 **Additional resources:**
 
-- [Get Started with Tabular Editor 3](xref:getting-started)
+- [Install and activate Tabular Editor 3](xref:getting-started)
 - [Advanced installation and activation](xref:installation-activation-basic)
 - [Download Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)

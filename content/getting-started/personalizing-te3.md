@@ -2,7 +2,7 @@
 uid: personalizing-te3
 title: Personalizing and configuring Tabular Editor 3 to suit your needs
 author: Daniel Otykier
-updated: 2021-09-28
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -240,7 +240,7 @@ When this is checked, table prefixes are automatically removed from measure refe
 
 ##### *Preferred keyword casing* (default = UPPER)
 
-This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc. This also applies when a keyword is inserted through the auto-complete feature.
+This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc. This also applies when a keyword is inserted through the auto-complete feature, including the fixed keyword values of functions that take them. See @preferences for the full list.
 
 ##### *Preferred function casing* (default = UPPER)
 

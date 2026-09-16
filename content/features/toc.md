@@ -36,6 +36,7 @@
 
 # Data Exploration and Connectivity
 ## @import-tables
+## @table-preview
 ## @pivot-grid
 ## @semantic-model-types
 ### @direct-lake-sql-model
@@ -45,6 +46,7 @@
 ## @ai-assistant
 
 # Advanced Modelling Features
+## @user-context-calculated-columns
 ## @metadata-translation-editor
 ## @perspective-editor
 
@@ -59,7 +61,7 @@
 ## @tmdl
 ## @save-to-folder
 ## @save-with-supporting-files
-## @automatic-revert
+## @auto-reload
 ## @advanced-refresh
 ## @refresh-overrides
 

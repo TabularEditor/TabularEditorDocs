@@ -2,7 +2,7 @@
 uid: dax-query
 title: DAX Queries
 author: Morten Lønskov
-updated: 2025-08-27
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,11 @@ Tabular Editor has a built-in DAX query window to write and execute DAX queries 
 
 A widespread use case for DAX queries is the DAX query produced by the [Power BI Performance Analyzer](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/), where it is possible to copy the query of each visual for troubleshooting, debugging, or detailed performance analysis.
 
-The window can be opened while connected to a semantic model using either the **File > New > DAX Query** menu or the toolbar shortcut.
+The window can be opened while connected to a semantic model in any of three ways:
+
+- the **File > New > DAX Query** menu
+- the toolbar shortcut
+- **Show actual DAX query...** on the right-click menu of a @table-preview, which opens a new query document holding the query behind the preview, filter and sort included
 
 ![Dax Query New](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
 

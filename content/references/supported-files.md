@@ -2,7 +2,7 @@
 uid: supported-files
 title: Supported file types
 author: Morten Lønskov
-updated: 2026-09-11
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -187,6 +187,14 @@ For complete documentation on this feature, see [Save with supporting files](xre
 Supporting files are files which are not used by Analysis Services or Power BI. Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
 
 All supporting files can be saved individually using either Ctrl+S or 'File > Save' while having the corresponding document or window open and focused. 
+
+### User Options (.tmuo)
+
+A `.tmuo` file holds your own, machine-local settings for one model: the workspace database, data source credential overrides, table import settings, refresh overrides and AI permission grants. It sits next to the model and is named after it and your Windows user name, so several developers can work on the same model without treading on one another.
+
+Credentials inside it are encrypted with your Windows user key, which means the file cannot usefully be shared. Add `*.tmuo` to `.gitignore`.
+
+See @user-options for the full contents and where the file is written for each model format.
 
 ### Diagram file (.te3diag)
 

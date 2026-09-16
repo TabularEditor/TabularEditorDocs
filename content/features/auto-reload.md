@@ -1,6 +1,6 @@
 ---
-uid: automatic-revert
-title: Staying in sync with files on disk
+uid: auto-reload
+title: Auto-reload from disk
 author: Morten Lønskov
 updated: 2026-09-11
 applies_to:
@@ -18,11 +18,11 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Staying in sync with files on disk
+# Auto-reload from disk
 
 While you work, two copies of your model exist: the one Tabular Editor holds in memory, and the metadata files on disk it was loaded from. Anything that edits one without the other pulls them apart.
 
-![Tabular Editor holds the model in memory and the files on disk hold the same model; File > Save writes from memory to disk, an automatic reload carries changes back the other way, and another tool such as an agent, a script or a Git pull writes straight to the files](~/content/assets/images/features/automatic-revert-sync.png)
+![Tabular Editor holds the model in memory and the files on disk hold the same model; File > Save writes from memory to disk, an automatic reload carries changes back the other way, and another tool such as an agent, a script or a Git pull writes straight to the files](~/content/assets/images/features/auto-reload-sync.png)
 
 Tabular Editor keeps the two together in both directions:
 
@@ -86,9 +86,9 @@ Changes that arrive while Tabular Editor is in the background are held rather th
 
 ## Turning it off
 
-The disk-to-memory direction is enabled by default. To make it manual again, clear **Automatically revert from disk** under **Tools > Preferences > Miscellaneous**.
+Auto-reload is enabled by default. To make the disk-to-memory direction manual again, clear **Automatically reload from disk** under **Tools > Preferences > Miscellaneous**.
 
-![Placeholder: Screenshot of the Tools > Preferences > Miscellaneous page, showing the Automatically revert from disk checkbox]
+![Placeholder: Screenshot of the Tools > Preferences > Miscellaneous page, showing the Automatically reload from disk checkbox]
 
 Turn it off when the model folder is also written to by something that runs continuously, such as a file sync client or a CI checkout that refreshes in the background. The prompt is modal, so a folder that changes often interrupts you rather than helping you.
 

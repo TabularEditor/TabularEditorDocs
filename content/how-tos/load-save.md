@@ -58,7 +58,7 @@ To write a model somewhere else, or in a different format:
 
 **File > Revert** discards everything you've changed since your last save and reloads the metadata from the source.
 
-If an agent, a script or a `git pull` rewrites the metadata files while you have the model open, Tabular Editor notices and reloads the model for you, so the two copies stay in step without a manual revert. See [Staying in sync with files on disk](xref:automatic-revert).
+If an agent, a script or a `git pull` rewrites the metadata files while you have the model open, Tabular Editor notices and reloads the model for you, so the two copies stay in step without a manual revert. See [Auto-reload from disk](xref:auto-reload).
 
 > [!WARNING]
 > Back up your model metadata before you let any tool write to it, Tabular Editor included. A save overwrites the source, and **File > Revert** can't bring back changes you've already saved.
