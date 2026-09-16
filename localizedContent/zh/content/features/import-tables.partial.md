@@ -120,9 +120,9 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 ![Schema Compare Dialog](~/content/assets/images/schema-compare-dialog.png)
 
-在上面的截图中，Tabular Editor 检测到几列新增列、一处数据类型变更，以及两列在源中被重命名。 注意，列重命名的检测只对简单更改有效。 在其他情况下，名称更改通常会导致 Tabular Editor 将其检测为“删除了一列”并“新增了一列”。下面的 `Tax Amount` 列就是这种情况：它似乎在源中被重命名为 `TaxAmt`。
+在上方的屏幕截图中，Tabular Editor 在源中检测到两个尚未导入的新列（`Color` 和 `Material`），并将两个现有列标记为待移除（`Colour` 和 `Substance Type`），因为它们的名称已无法与源中的任何列匹配。 列重命名的检测仅适用于简单变更；此处名称差异较大，因此 Tabular Editor 会将其报告为删除和新增，而非重命名——实际上，源中的 `Colour` 已重命名为 `Color`，`Substance Type` 已重命名为 `Material`。
 
-为避免破坏依赖 `[Tax Amount]` 列的现有 DAX 公式，你可以按住 Ctrl 键并单击“架构更改”对话框中的两行，然后右键单击，将“删除列”和“新增列”合并为一次 SourceColumn 更新操作：
+为避免破坏依赖 `[Colour]` 列的现有 DAX 公式，你可以按住 Ctrl 键，在“架构更改”对话框中点击 `Color`（导入）和 `Colour`（删除）两行，然后右键单击，将“删除列”和“新增列”合并为一次 SourceColumn 更新操作：
 
 ![Combine Sourcecolumn Update](~/content/assets/images/combine-sourcecolumn-update.png)
 

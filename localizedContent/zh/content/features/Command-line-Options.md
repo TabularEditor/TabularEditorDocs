@@ -291,7 +291,7 @@ start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sal
 
 下图展示了此类构建在 Azure DevOps 中的样子：
 
-![image](https://user-images.githubusercontent.com/8976200/27128146-bc044356-50fd-11e7-9a67-b893fc48ea50.png)
+![image](~/content/assets/images/command-line-options-01.png)
 
 如果部署因任何原因失败，Tabular Editor 都会向 Azure DevOps 返回“Failed”状态，无论你是否使用了“-W”开关。
 

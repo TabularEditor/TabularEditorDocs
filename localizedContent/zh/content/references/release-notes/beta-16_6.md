@@ -81,8 +81,8 @@
 - 关键列现在以 **粗体** 显示
 - 新增“Define Measure”和“Inline Measure”重构选项
 - 改进了 DAX 查询中 DEFINE / EVALUATE 语句相关的自动补全行为。 例如，自动补全现在也会提示在查询内部定义的度量值、列和表。
-- 自动补全现在也会针对 SUMMARIZECOLUMNS、ADDCOLUMNS 等函数的 Name 参数提示度量值，并可一次性补全 Name 和 Expression 参数：
-  ![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
+- 自动补全现在也会为 SUMMARIZECOLUMNS、ADDCOLUMNS 等函数的 Name 参数提供度量值建议，并可一次性补全 Name 和 Expression 参数：
+  ![autocomplete names](~/content/assets/images/beta-16-6-01.gif)
 - 重新审阅了 #42。
 - Deployment Wizard 现在会将部署偏好（目标 + 选项）保存到磁盘上与 Model.bim 或 Database.json 同目录的 .tmuo 文件中。 如果每个模型始终部署到同一目标，那么在不同模型之间切换时执行部署会更轻松。
 - 已将 TOM 更新到 19.16.3。 应可修复问题 #63。

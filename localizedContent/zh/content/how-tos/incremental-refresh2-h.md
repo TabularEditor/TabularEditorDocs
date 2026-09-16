@@ -28,27 +28,27 @@ applies_to:
 ## 使用 Tabular Editor 从零开始设置增量刷新
 
 1. 连接到你的 Workspace 的 Power BI XMLA R/W 终结点，然后打开你要配置增量刷新的 Dataset。
-2. 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[更多信息](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。我们先在 Tabular Editor 中添加两个新的共享表达式：
-   ![添加共享表达式](https://user-images.githubusercontent.com/8976200/121341006-8906e900-c920-11eb-97af-ee683ff40609.png)
+2. 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[更多信息](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。因此，我们先在 Tabular Editor 中添加两个新的共享表达式：
+   ![添加共享表达式](~/content/assets/images/incremental-refresh2-01.png)
 3. 分别将它们命名为 `RangeStart` 和 `RangeEnd`，将它们的 `Kind` 属性设置为 "M"，并将表达式设置为以下内容（你填写的实际日期/时间无关紧要，因为在开始数据刷新时会由 Power BI 服务设置）：
 
   ```M
   #datetime(2021, 6, 9, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
   ```
 
-![设置 Kind 属性](https://user-images.githubusercontent.com/8976200/121342389-dc2d6b80-c921-11eb-8848-b67950e55e36.png)
+![设置 Kind 属性](~/content/assets/images/incremental-refresh2-02.png)
 4。 接下来，选择要启用增量刷新的表
 5。 将表的 `EnableRefreshPolicy` 属性设置为 "true"：
-![启用刷新策略](https://user-images.githubusercontent.com/8976200/121339872-3842c080-c91f-11eb-8e63-a051b34fb36f.png)
+![启用刷新策略](~/content/assets/images/incremental-refresh2-03.png)
 6。 根据你需要的增量刷新策略，配置其余属性。 别忘了为 `SourceExpression` 属性指定一个 M 表达式（增量刷新的刷新策略创建的分区会添加该表达式；它应使用 `RangeStart` 和 `RangeEnd` 参数在源端筛选数据）。 “=”运算符只能应用于 RangeStart 或 RangeEnd 其中一个，不能同时用于两者，否则可能会产生重复数据。
-![配置属性](https://user-images.githubusercontent.com/45298358/170603450-8232ad55-0b4a-4ead-b113-786a781f94ad.png)
+![配置属性](~/content/assets/images/incremental-refresh2-04.png)
 7。 保存模型（Ctrl+S）。
 8。 右键单击该表，然后选择“应用刷新策略”。
-![应用刷新策略](https://user-images.githubusercontent.com/8976200/121342947-78577280-c922-11eb-82b5-a517fbe86c3e.png)
+![应用刷新策略](~/content/assets/images/incremental-refresh2-05.png)
 
 就这样！ 这时你会看到 Power BI 服务已经根据你指定的策略，自动为这张表生成了分区。
 
-![生成的分区](https://user-images.githubusercontent.com/8976200/121343417-eef47000-c922-11eb-8731-1ac4dde916ef.png)
+![已生成的分区](~/content/assets/images/incremental-refresh2-06.png)
 
 下一步是刷新这些分区中的数据。 你可以使用 Power BI 服务完成这一步；也可以在 [SQL Server Management Studio 中通过 XMLA/TMSL](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms) 分批刷新分区；甚至还可以使用 [Tabular Editor 的脚本](https://www.elegantbi.com/post/datarefreshintabulareditor)。
 
@@ -87,7 +87,7 @@ var effectiveDate = new DateTime(2020, 1, 1);  // Todo: replace with your effect
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
 
-![使用脚本应用刷新策略](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
+![使用脚本应用刷新策略](~/content/assets/images/incremental-refresh2-07.png)
 
 ## 使用 Tabular Editor 移除增量刷新
 

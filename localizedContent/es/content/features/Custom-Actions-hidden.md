@@ -10,11 +10,11 @@ title: Acciones personalizadas
 
 Supón que has creado un script útil usando el objeto `Selected` y quieres poder ejecutarlo varias veces sobre distintos objetos del árbol del explorador. En lugar de pulsar el botón "Reproducir" cada vez que quieras ejecutar el script, Tabular Editor te permite guardarlo como una Acción personalizada:
 
-![image](https://user-images.githubusercontent.com/8976200/33581673-0db35ed0-d952-11e7-90cd-e3164e198865.png)
+![imagen](~/content/assets/images/custom-actions-01.png)
 
 Después de guardar la acción personalizada, verás que ya está disponible directamente en el menú contextual de clic derecho del árbol del explorador, lo que facilita mucho ejecutar el script sobre cualquier objeto seleccionado en el árbol. Puedes crear tantas acciones personalizadas como quieras. Usa barras invertidas (\\) en los nombres para crear una estructura de submenús dentro del menú contextual.
 
-![Las acciones personalizadas aparecen directamente en el menú contextual](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
+![Las acciones personalizadas aparecen directamente en el menú contextual](~/content/assets/images/custom-actions-02.png)
 
 Las acciones personalizadas se almacenan en el archivo CustomActions.json en %AppData%\Local\TabularEditor. En el ejemplo anterior, el contenido de este archivo se verá así:
 

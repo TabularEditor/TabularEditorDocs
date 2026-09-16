@@ -120,9 +120,9 @@ Al usar esta opción, Tabular Editor se conectará a todos los orígenes de dato
 
 ![Diálogo de comparación de esquema](~/content/assets/images/schema-compare-dialog.png)
 
-En la captura de pantalla anterior, Tabular Editor detectó algunas columnas nuevas, un cambio de tipo de datos y dos columnas cuyo nombre se cambió en el origen. Ten en cuenta que la detección de un cambio de nombre de columna solo funciona para cambios simples. En otros casos, un cambio de nombre suele hacer que Tabular Editor detecte la eliminación de una columna y la adición de otra; es lo que ocurre con la columna `Tax Amount` que aparece a continuación, que parece haberse renombrado a `TaxAmt` en el origen.
+En la captura de pantalla anterior, Tabular Editor detectó dos columnas nuevas en el origen que aún no se han importado (`Color` y `Material`) y marcó para eliminar dos columnas existentes (`Colour` y `Substance Type`) porque sus nombres ya no coinciden con ninguna columna del origen. La detección del cambio de nombre de una columna solo funciona con cambios simples; en este caso, los nombres difieren lo suficiente como para que Tabular Editor haga un Report de una eliminación y una adición, en lugar de un cambio de nombre: en realidad, en el origen, `Colour` se ha renombrado a `Color` y `Substance Type` a `Material`.
 
-Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Tax Amount]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las dos filas del cuadro de diálogo Cambios de esquema y, a continuación, hacer clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
+Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Colour]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las filas `Color` (importar) y `Colour` (eliminar) del cuadro de diálogo Schema Change; a continuación, haz clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
 
 ![Combinar actualización de SourceColumn](~/content/assets/images/combine-sourcecolumn-update.png)
 

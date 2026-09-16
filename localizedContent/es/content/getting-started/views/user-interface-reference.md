@@ -2,7 +2,7 @@
 uid: user-interface-reference
 title: Interfaz de usuario básica
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-08-18
 applies_to:
   products:
     - product: Tabular Editor 2

@@ -25,7 +25,7 @@ Esto simplifica mucho el flujo de trabajo de desarrollo, ya que solo tienes que 
 
 Cuando cargas un modelo desde un archivo Model.bim o una estructura de carpetas, verás el siguiente aviso:
 
-![image](https://user-images.githubusercontent.com/8976200/58166683-a65db180-7c8a-11e9-9df3-be9a716b3ad1.png)
+![imagen](~/content/assets/images/workspace-database-01.png)
 
 - **Sí**: Los metadatos del modelo se cargan desde el disco y, a continuación, se implementan inmediatamente en una instancia de Analysis Services. Luego, Tabular Editor se conectará a la base de datos recién implementada. La próxima vez que se cargue el mismo modelo desde el disco, Tabular Editor volverá a implementarlo y se conectará a la base de datos automáticamente.
 - **No**: Los metadatos del modelo se cargan desde el disco en Tabular Editor como siempre, sin conectarse a una instancia de Analysis Services.
@@ -35,7 +35,7 @@ Cuando cargas un modelo desde un archivo Model.bim o una estructura de carpetas,
 
 Cuando seleccionas la opción "Sí" en el aviso mostrado arriba, se te pedirá un nombre de servidor y credenciales (opcionales) para una instancia de Analysis Services. Al hacer clic en "OK", verás una lista de las bases de datos que ya existen en la instancia. Tabular Editor asume que quieres desplegar una nueva base de datos y proporciona un nombre predeterminado para ella, basado en tu nombre de usuario de Windows y la fecha y hora actuales:
 
-![image](https://user-images.githubusercontent.com/8976200/58179509-a10f5f80-7ca8-11e9-9764-4cb76b9d1a8b.png)
+![imagen](~/content/assets/images/workspace-database-02.png)
 
 Si desea usar una base de datos existente como base de datos de Workspace, simplemente selecciónela en la lista. **Advertencia: Si elige una base de datos existente, se sobrescribirá con los metadatos del modelo cargado desde el disco. Por este motivo, no se recomienda configurar bases de datos de Workspace en una instancia de producción!**
 
