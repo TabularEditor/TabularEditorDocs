@@ -830,4 +830,4 @@ List of addresses that should bypass the proxy (e.g., `localhost;*.company.local
 
 ## Next Steps
 
-For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide (Personalizing TE3)[xrefid: personalizing-te3].
+For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide [Personalizing TE3](xref:personalizing-te3).
