@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Daniel Otykier
-updated: 2026-09-16
+updated: 2026-09-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -75,8 +75,8 @@ To enforce one of these, add a `REG_DWORD` value with the name below and a non-z
 |Value|Products|When enforced...|
 |--|--|--|
 | DisableUpdates | TE3, TE2 | Tabular Editor will not check whether newer versions are available online. Users cannot check for updates manually either. |
-| DisableCSharpScripts | TE3, CLI, TE2 | Tabular Editor will not let users create or execute C# scripts. |
-| DisableMacros | TE3, CLI, TE2 | Tabular Editor will not let users save or run macros. Macros stored in the `%LocalAppData%` folder are not loaded when the application starts. |
+| DisableCSharpScripts | TE3, TE2 | Tabular Editor will not let users create or execute C# scripts. |
+| DisableMacros | TE3, TE2 | Tabular Editor will not let users save or run macros. Macros stored in the `%LocalAppData%` folder are not loaded when the application starts. |
 | DisableBpaDownload | TE3, CLI, TE2 | Best Practice Analyzer rules cannot be downloaded from the web. Rules stored locally or alongside the model keep working. |
 | DisableWebDaxFormatter | TE3, CLI, TE2 | The DAX formatter that sends code to daxformatter.com is disabled. Tabular Editor 3 still offers its built-in formatter, which sends nothing over the network. |
 | DisableErrorReports | TE3 | Users cannot send error or crash reports to the Tabular Editor support team. |
@@ -138,7 +138,7 @@ A configuration the policy does not permit is refused, and the AI Assistant says
 |Value|Kind|What it does|
 |--|--|--|
 | AiCustomInstructionsPath | Path | Names a folder of Custom Instructions that the AI Assistant loads for every user, in addition to the ones that ship with the product. A UNC path to a read-only network share is supported. Where an organization instruction and a user's own instruction share the same identifier, the organization's wins. |
-| DisableUserCustomInstructions | On/off | The AI Assistant ignores Custom Instructions the user has placed in their own folder, and the button that opens that folder is hidden. Instructions that ship with the product, and any organization folder, still load. |
+| DisableUserCustomInstructions | On/off | The AI Assistant ignores Custom Instructions the user has placed in their own folder, and the button that opens that folder is disabled. Instructions that ship with the product, and any organization folder, still load. |
 
 ### MCP server
 
@@ -146,7 +146,6 @@ A configuration the policy does not permit is refused, and the AI Assistant says
 |--|--|--|
 | McpDisabledTools | List | Names of MCP tools that are never offered to a connected client. Listed tools are absent from the client's tool list and refuse to run even if a client asks for one by name. The AI Assistant chat is not affected. |
 | McpPort | Number, 1024 to 49151 | Locks the port the MCP server listens on, so one client configuration can be shared across an organization. The default is 42100. The server only ever listens on the loopback address. |
-| McpAutoStart | On/off | Locks whether the MCP server starts automatically when Tabular Editor 3 starts. `1` requires automatic start; `0` forbids it, so the user must start the server themselves. |
 
 ### Audit log
 
