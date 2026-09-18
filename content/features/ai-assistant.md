@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-09-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,6 +22,8 @@ applies_to:
 The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With an enterprise-ready design, full control of what is sent to the AI, and built-in consent management, you can use the AI Assistant with confidence. The AI Assistant has undergone independent security penetration testing. For details, visit the [Tabular Editor Trust Center](https://trust.tabulareditor.com). It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
 
 The AI Assistant uses a bring-your-own-key model. You provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
+
+There is a second way in that needs no key at all. From 3.27.0 Tabular Editor 3 can act as an MCP server, so an agent you already subscribe to, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, works on the open model through the same tools and the same permissions as the chat. See @mcp-server. The two share one permission record, so whichever you use, you set the boundaries once.
 
 > [!NOTE]
 > The AI Assistant is in public preview starting with Tabular Editor 3.26.0. We welcome feedback on the experience as we continue to refine it.
@@ -219,6 +221,8 @@ The AI Assistant has access to your model context and can perform the following 
 - **Knowledge base search**: Search the embedded Tabular Editor documentation for answers
 - **UI navigation**: Generate `te3://` action links that open specific Tabular Editor dialogs and features
 
+An agent connected over the [MCP server](xref:mcp-server) is offered the same capabilities, with two exceptions: UI navigation is chat-only, and where the chat opens a C# script for you to execute, an agent with the Model metadata Write grant runs it directly as a single undoable step.
+
 > [!NOTE]
 > Tools that require an active database connection, including DAX query execution and VertiPaq Analyzer statistics, are automatically hidden when working with a model file (for example a `.bim` or `.tmdl` folder) that is not connected to Analysis Services or Power BI. The assistant still writes DAX queries for you, but the **Execute** button on DAX query artifacts is disabled until a connection is established. VertiPaq Analyzer statistics remain available if they were previously loaded from a `.vpax` file.
 
@@ -322,7 +326,7 @@ Notes on how files are read:
 
 ## Permissions and consent
 
-What the AI Assistant may touch is governed by *five resources*, each carrying one access level. The same five grants govern the MCP server, so there is one place to look and one place to change your mind.
+What the AI Assistant may touch is governed by *five resources*, each carrying one access level. The same five grants govern the [MCP server](xref:mcp-server), so there is one place to look and one place to change your mind.
 
 | Resource | What it covers | Levels | Default |
 | -- | -- | -- | -- |
@@ -352,6 +356,9 @@ Open **Tools > Preferences > AI Features > Permissions**. Each resource has a dr
 There is no separate "ask me" level. **Deny** is what asking looks like: in the chat, a resource you have not granted produces a permission card at the moment it is needed. Over MCP, where there is nobody to ask, a denied resource's tools are unavailable.
 
 > [!NOTE]
+> If you used the AI Assistant before 3.27.0 you will notice fewer prompts. Model metadata, Documents and Macros now start at Read or above, so the chat no longer asks for them. Only DAX query results and Best Practice Analyzer rule edits still raise a card out of the box. Set a resource to **Deny** to get its prompt back.
+
+> [!NOTE]
 > In the Enterprise Edition, IT administrators can set policies that determine these permissions. See @policies.
 
 ### Permission cards in the chat
@@ -374,7 +381,7 @@ You do not have to answer the card at all. See [Stopping a turn while permission
 
 ### What the MCP server shares, and what it does not
 
-The MCP server reads the *same five grants*, but it does not use the card flow. An agent connecting over MCP is unattended, so there is nobody to prompt:
+The [MCP server](xref:mcp-server) reads the *same five grants*, but it does not use the card flow. An agent connecting over MCP is unattended, so there is nobody to prompt:
 
 - Grants are *snapshotted when the server starts* and govern its tool surface for the server's lifetime. Changing a grant while the server is running has no effect until you restart it.
 - Only the *global* grants are read. A grant you gave with **Allow for this model**, and a session grant, apply to the chat alone and never reach an MCP agent.
@@ -471,13 +478,15 @@ Other ways to reduce token usage:
 - The AI Assistant is not a replacement for understanding DAX and semantic model design fundamentals
 - Response quality varies by provider and model selection
 - The AI Assistant cannot connect to external files, services or search the web
-- The AI Assistant cannot add or act as an MCP server
+- The AI Assistant cannot connect to external MCP servers to extend its own tools. This is about the chat only: Tabular Editor 3 itself acts as an MCP server, so your own agent can work on the open model. See @mcp-server
 - The AI Assistant cannot connect to a different model from within the chat. Use the Tabular Editor user interface to change model connections
 - The AI Assistant cannot manage preferences
 
 ## Disabling the AI Assistant
 
-The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Before 3.27.0 it was left out of a default installation and had to be selected manually. You can modify an existing Tabular Editor 3 installation, to include or exclude the AI Assistant component, by running the Tabular Editor 3 installer again. If using the portable build of Tabular Editor 3, you can remove the AI Assistant component by deleting the file named `TabularEditor3.AI.dll` from the installation directory.
+The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. You can modify an existing Tabular Editor 3 installation, to include or exclude the AI Assistant component, by running the Tabular Editor 3 installer again. If using the portable build of Tabular Editor 3, you can remove the AI Assistant component by deleting the file named `TabularEditor3.AI.dll` from the installation directory.
+
+The AI Assistant and the MCP server ship in the same component, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off the chat while keeping the MCP server, leave the component in place and use the `DisableAiChat` policy.
 
 > [!NOTE]
-> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3 by specifying the [`DisableAi` policy](xref:policies).
+> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3, the MCP server included, by specifying the [`DisableAi` policy](xref:policies). `DisableAiChat` turns off the chat alone, and `DisableMcpServer` the MCP server alone. See @policies.
