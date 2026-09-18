@@ -2,7 +2,7 @@
 uid: getting-started
 title: Installation and Activation
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,27 +16,29 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Getting Started
+# Installation and Activation
 
 ## Installation
 
 Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
 
-We recommend the MSI 64-bit installer for most scenarios. Once downloaded, double-click the MSI file and complete the installer pages.
+We recommend the 64-bit `.exe` installer on .NET 10 for most scenarios. Once downloaded, double-click it and complete the installer pages.
 
 ![Install](~/content/assets/images/getting-started/install.png)
 
 ### Prerequisites
 
-None.
+For the `.exe` installer, the matching **.NET Desktop Runtime**: [10](https://dotnet.microsoft.com/download/dotnet/10.0) for the recommended build, or [8](https://dotnet.microsoft.com/download/dotnet/8.0) for the .NET 8 build. The installer offers to download and install it for you, so in practice there is nothing to do beforehand.
+
+The other two packages differ. The `.msi` does not bring the runtime along, so install it yourself when deploying centrally, and the portable `.zip` is self-contained and needs no runtime at all.
 
 ### System requirements
 
 - **Operating system:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
 - **Architecture:** x64, ARM64 (native from 3.23.0)
-- **.NET Runtime:** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- **.NET Runtime:** .NET Desktop Runtime 10 or 8, matching the build you install
 
-See the .NET supported OS policy for current Windows versions supported by each runtime.
+See @system-requirements for the full matrix and for how to choose between the builds.
 
 ## Activating your installation
 
@@ -83,7 +85,7 @@ When Tabular Editor 3 is activated, you change your license key in the Help menu
 
 In the dialog, select **Change license key**. This option is only available when no model is loaded in Tabular Editor. If a model is open, close it under **File > Close model**. Once you click **Change license key**, Tabular Editor prompts you whether you want to remove the current license:
 
-![image](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+![image](~/content/assets/images/getting-started-01.png)
 
 If you accept, the current license is removed and you re-enter a license key to use the product.
 

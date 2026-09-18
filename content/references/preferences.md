@@ -1,8 +1,8 @@
-﻿---
+---
 uid: preferences
 title: Controlling preferences
 author: Daniel Otykier
-updated: 2026-01-12
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,29 +56,6 @@ When "Line break on first line of DAX" is enabled, this sub-setting controls whe
 
 Select the default authentication method (Integrated, ServicePrincipal, or MasterUser) to use when connecting to Power BI datasets.
 
-### Metadata Synchronization
-
-These settings control the behavior of Tabular Editor 3 when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application.
-
-##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
-
-When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. For example, if you're wondering why a DAX query or a Pivot Grid does not produce the expected result, this could be due to a measure expression being changed in Tabular Editor without saving the change to Analysis Services. The bar disappears when you hit save (Ctrl+S).
-
-##### *Track external model changes* (enabled)
-
-Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
-
-##### *Refresh local Tabular Object Model metadata automatically* (enabled)
-
-When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
-
-##### *Cleanup orphaned Tabular Editor traces*
-
-Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor will be removed.
-
-> [!NOTE]
-> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
-
 ### Best Practice Analyzer
 
 ##### *Scan for Best Practice violations in the background* (enabled)
@@ -113,15 +90,25 @@ Automatically refresh Direct Lake tables when saving changes to ensure data is c
 
 ## Tabular Editor > Updates and Feedback
 
-![Placeholder: Screenshot of Updates and Feedback preferences page]
+![Updates and Feedback preferences](~/content/assets/images/pref-updates-and-feedback.png)
+
+### Updates
+
+##### *Show "Get Started" page on updates* (enabled)
+
+When checked, the **Get Started** page opens automatically the first time you run Tabular Editor after it has been updated. It appears **on updates**, not on every start-up. You can open it at any time from **Help > Get Started**.
 
 ##### *Check for updates on start-up* (enabled)
 
 When checked, Tabular Editor will check for new versions when the application starts. This ensures you stay up to date with the latest features and bug fixes.
 
-##### *Check for major updates only* (disabled)
+##### *Major updates only* (disabled)
 
-When checked, only major version updates will trigger notifications. Minor and patch updates will be ignored.
+When checked, only major version updates trigger notifications. Minor and patch updates are ignored. This setting is only available while *Check for updates on start-up* is checked.
+
+The version you are running is shown below these settings, along with a **Check for updates** button that runs the check immediately.
+
+### Usage Data and Feedback
 
 ##### *Help improve Tabular Editor by collecting anonymous usage data* (enabled)
 
@@ -133,7 +120,7 @@ In cases of crashes, Tabular Editor displays an option for sending a crash repor
 
 ## Tabular Editor > Deployment
 
-![Placeholder: Screenshot of Deployment preferences page]
+![Model Deployment preferences](~/content/assets/images/pref-model-deployment.png)
 
 Configure which types of objects are deployed by default when using the deployment wizard:
 
@@ -191,11 +178,22 @@ Specify the folder where deployment backups are stored. By default, backups are 
 
 ##### *New model compatibility level* (1600)
 
-Set the default compatibility level for newly created models. Compatibility level 1600 corresponds to SQL Server 2022 and Power BI.
+Set the default compatibility level for newly created models. The choices are the same as in the **New Model** dialog:
+
+| Level | Target |
+|---|---|
+| 1200 | Azure Analysis Services / SQL Server 2016+ |
+| 1400 | Azure Analysis Services / SQL Server 2017+ |
+| 1500 | Azure Analysis Services / SQL Server 2019+ |
+| 1600 | Azure Analysis Services / SQL Server 2022+ |
+| 1700 | Azure Analysis Services / SQL Server 2025+ |
+| 1706 | Power BI / Fabric |
+
+1700 is the highest level Analysis Services supports; 1706 is the highest overall and is Power BI and Fabric only.
 
 ##### *Use latest compatibility level as default* (enabled)
 
-Automatically use the latest available compatibility level for new models. When enabled, this overrides the specific compatibility level setting above.
+Automatically use the latest available compatibility level for new models. When enabled, this overrides the specific compatibility level setting above, and the dropdown is disabled.
 
 ##### *New models use workspace database* (enabled)
 
@@ -219,51 +217,53 @@ Automatically create .tmuo (Tabular Model User Options) files for new models. Th
 
 Configure keyboard shortcuts for all Tabular Editor commands. Use the search functionality to quickly find specific commands and assign or modify their keyboard shortcuts to match your preferred workflow.
 
-## Tabular Editor > TOM Explorer View
+## Tabular Editor > TOM Explorer
 
-![Tom Explorer Settings](~/content/assets/images/tom-explorer-settings.png)
+![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
 
-Control which objects and properties are visible in the TOM (Tabular Object Model) Explorer:
+Control how the TOM (Tabular Object Model) Explorer presents the model, and what happens to the objects you delete.
 
-##### *Display folders* (enabled)
+The toggles that decide which object types appear in the tree, such as measures, columns, hierarchies, partitions, display folders and hidden objects, are not preferences. They live on the @tom-explorer-view toolbar, where you can change them per model without opening this dialog.
 
-Show or hide display folder groupings. When enabled, objects are organized into their display folder hierarchy.
+### Display and filtering
 
-##### *Hidden objects* (disabled)
+##### *Use table groups* (enabled)
 
-Show or hide objects marked as hidden in the model. Enable this if you need to work with hidden tables, columns, or measures.
-
-##### *All object types* (enabled)
-
-Show all object types in the explorer tree. When disabled, only the most common object types are shown.
-
-##### *Sort alphabetically* (enabled)
-
-Sort objects alphabetically instead of by creation order. This makes it easier to find specific objects in large models.
-
-##### *Show measures* (enabled)
-
-Display measures in the explorer tree.
-
-##### *Show columns* (enabled)
-
-Display columns in the explorer tree.
-
-##### *Show hierarchies* (enabled)
-
-Display hierarchies in the explorer tree.
-
-##### *Show partitions* (enabled)
-
-Display partitions in the explorer tree.
-
-##### *Show metadata information* (disabled)
-
-Display additional metadata properties in tooltips and property grid. This includes information like lineage tags, creation timestamps, and other technical metadata.
+Group your tables in the TOM Explorer, for example to keep calculation groups, dimensions and fact tables apart. Tabular Editor records a table's group in an annotation on the table itself, so the grouping travels with the model. It is internal to Tabular Editor: no other client tool, Power BI Desktop included, shows it. See @table-groups.
 
 ##### *Show full branch* (disabled)
 
-When filtering the TOM Explorer, by default Tabular Editor 3 shows all items in the hierarchy that matches the filter string, including their parents. If you want to see all child items as well (even though these might not match the filter string), enable this option.
+When you filter the tree, Tabular Editor shows the objects that match your filter string together with their parents. Enable this to also show every child of a match, whether or not the children match the string themselves.
+
+##### *Highlight relationships* (enabled)
+
+Highlight the relationships that involve the table or column you have selected, so you can see at a glance what a column is joined to.
+
+### Unsaved changes
+
+These settings control how [unsaved changes](xref:unsaved-changes) are indicated in the TOM Explorer and the Properties view.
+
+##### *Mark objects with unsaved changes* (enabled)
+
+Highlight objects in the TOM Explorer that differ from the last saved version of the model, using a tinted row and a badge on the object's icon: orange for edited objects, green for added objects and red for deleted objects. Tables, folders and groups that contain changed objects get a hatched fill. When disabled, deleted objects still stay visible according to the setting below, and the **Show changes** toolbar filter still works. Use **Color blindness mode** under **User Interface > Accessibility** to mark added objects in teal instead of green.
+
+##### *Keep deleted objects visible* (Until the model is saved)
+
+How long deleted objects remain visible in the TOM Explorer, struck through, where they used to be. Right-click a deleted object and choose **Restore** to bring it back. Options:
+
+- **Never**: Deleted objects disappear from the TOM Explorer at once.
+- **Until the model is saved**: Deleted objects are treated as unsaved changes and disappear when the model is saved.
+- **Until the model is closed**: Deleted objects stay visible, and restorable, for the whole editing session, even across saves.
+
+##### *Gather deleted objects under a "Deleted objects" node* (disabled)
+
+Show the deleted objects of a table, hierarchy, role or table group together under a single **Deleted objects** node at the end of their container, instead of each where it used to be. Right-click the node and choose **Restore** to bring back all of them at once.
+
+##### *Mark properties with unsaved changes in the Properties pane* (enabled)
+
+Highlight properties in the Properties view that differ from the last saved version of the model, using a tinted row. When disabled, the **Show changes** toolbar filter in the Properties view still works.
+
+### Delete
 
 ##### *Always show delete warnings* (disabled)
 
@@ -272,9 +272,29 @@ If you prefer Tabular Editor 3 to prompt you to confirm all object deletions, en
 > [!NOTE]
 > All delete operations in Tabular Editor 3 can be undone by hitting CTRL+Z.
 
-### Column Preferences
+### Localization
 
-Configure which columns are visible in multi-column views and their display order.
+These settings decide the format string Tabular Editor writes when you pick the *Currency* number format for an object in the Properties pane.
+
+##### *Default currency* (English (United States))
+
+The formatting convention to base the currency format string on. Pick the locale whose currency symbol, decimal separator and digit grouping you want.
+
+##### *Use a custom currency symbol* (disabled)
+
+Supply your own symbol instead of taking one from the locale above. The three settings below apply only while this is checked.
+
+##### *Custom currency symbol*
+
+The symbol to use. Enter the symbol on its own, without the number; whitespace is ignored.
+
+##### *Custom currency symbol position* (Before number)
+
+Whether the symbol goes before or after the numeric value.
+
+##### *Put a space between the number and symbol* (disabled)
+
+Separate the symbol from the numeric value with a space.
 
 ## Tabular Editor > Copy/Paste
 
@@ -322,7 +342,7 @@ Automatically remove all table objects when a table is removed from a perspectiv
 
 ## Tabular Editor > Schema Compare
 
-![Placeholder: Screenshot of Schema Compare preferences page]
+![Schema Compare preferences](~/content/assets/images/pref-schema-compare.png)
 
 Configure which changes are ignored during schema comparison when updating table schemas:
 
@@ -348,7 +368,7 @@ Use Analysis Services metadata as the source of truth for schema detection. When
 
 ## Tabular Editor > Save to Folder/File
 
-![Placeholder: Screenshot of Save to Folder preferences page]
+![Save to Folder preferences](~/content/assets/images/pref-save-to-folder.png)
 
 ### Serialization Mode
 
@@ -380,7 +400,7 @@ Store translations with individual objects instead of in a central location. Thi
 
 ##### *Levels*
 
-Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure.
+Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure. The available levels are Data Sources, User Defined Functions (UDFs), Shared Expressions, Perspectives, Relationships, Roles, Tables, Columns, Hierarchies, Measures, Partitions, Calculation Items and Translations.
 
 ##### *Ignore inferred objects* (enabled)
 
@@ -428,44 +448,68 @@ Choose between tabs or spaces for indentation in TMDL files. Tabs are the defaul
 
 When using spaces, specify the number of spaces per indentation level.
 
-## Data Browsing > General
+<a name="miscellaneous"></a>
 
-![Placeholder: Screenshot of Data Browsing General preferences page]
+## Tabular Editor > Miscellaneous
 
-##### *Auto-refresh data preview* (enabled)
+![Miscellaneous preferences](~/content/assets/images/pref-miscellaneous.png)
 
-Automatically refresh table preview windows when model changes are saved. This feature is super-useful when debugging - update an expression in one window while having a data preview open in another. Whenever you hit CTRL+S, the preview is automatically refreshed.
+### Metadata Synchronization
 
-##### *Auto-execute DAX queries* (enabled)
+These settings control how Tabular Editor 3 deals with model metadata that changes outside the application. The first three cover a model loaded from a database on an instance of Analysis Services and rely on an Analysis Services trace. **Automatically reload from disk** covers a model loaded from a file or a folder, and watches those files directly.
 
-Automatically execute DAX queries when model changes are saved. Similar to auto-refresh data preview, this allows you to see the immediate impact of changes to measures or calculated columns.
+##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
 
-##### *DAX query smart selection* (enabled)
+When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. For example, if you're wondering why a DAX query or a Pivot Grid does not produce the expected result, this could be due to a measure expression being changed in Tabular Editor without saving the change to Analysis Services. The bar disappears when you hit save (Ctrl+S).
 
-When executing a partial selection in a DAX query, intelligently determine the query context. This allows you to execute just a portion of your query for testing.
+##### *Track external model changes* (enabled)
 
-##### *Keep filtering and sorting in DAX query results* (WhenQueryUnchanged)
+Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
 
-Control whether to preserve grid filters and sorting when re-executing queries:
-- **Never**: Sorting and filtering are always reset when a query is executed
-- **WhenQueryUnchanged**: Sorting and filtering are reset only when the query is modified
-- **Always**: Sorting and filtering are never reset if the columns still exist
+##### *Refresh local Tabular Object Model metadata automatically* (enabled)
 
-##### *Direct query max rows* (100)
+When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
 
-Maximum number of rows to retrieve in Direct Query mode. Adjust this if you need to preview more data, but be mindful of performance.
+##### *Automatically reload from disk* (enabled)
 
-##### *DAX query max rows* (1000)
+When checked, Tabular Editor watches the metadata files the model was loaded from and reloads the model when another application changes them. Unlike the two settings above, this doesn't involve an Analysis Services trace: it watches the files themselves, so it covers a model loaded from a `.bim` file or from a folder, whether or not a server is involved. If the model has unsaved changes, Tabular Editor asks you which copy to keep. See [Auto-reload from disk](xref:auto-reload).
 
-Maximum number of rows to retrieve for DAX queries. Increase this if you need to analyze larger result sets.
+##### *Cleanup orphaned Tabular Editor traces*
+
+Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor will be removed.
+
+> [!NOTE]
+> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
 
 ## Data Browsing > Pivot Grid
 
-![Placeholder: Screenshot of Pivot Grid preferences page]
+![Pivot Grid preferences](~/content/assets/images/pref-pivot-grid.png)
+
+### Basic
 
 ##### *Auto-refresh pivot grid* (enabled)
 
 Automatically refresh pivot grids when model changes are saved. Just like with DAX queries, this allows you to immediately see the impact of changes to measures.
+
+##### *Warn if pivot grid fields mismatch* (enabled)
+
+Show a warning when pivot grid field definitions don't match the current model. This can happen if you've deleted or renamed fields used in a saved pivot grid.
+
+### Field Headers
+
+##### *Pivot header word wrap* (enabled)
+
+Enable word wrapping in pivot grid headers. This makes long field names more readable.
+
+### Field List
+
+##### *Always show pivot grid field list* (enabled)
+
+Keep the pivot grid field list visible by default. Disable this if you prefer more screen space for the pivot grid itself.
+
+##### *Show all fields in pivot customization* (enabled)
+
+Display all available fields in the pivot grid field list by default, including hidden fields.
 
 ##### *Pivot grid customization default layout* (StackedDefault)
 
@@ -476,21 +520,72 @@ Choose the default layout for the pivot grid field list. Options include:
 - **BottomPanelOnly2by2**: Field list in a 2x2 grid at the bottom
 - **BottomPanelOnly1by4**: Field list in a 1x4 layout at the bottom
 
-##### *Show all fields in pivot customization* (enabled)
+## Data Browsing > DAX Query
 
-Display all available fields in the pivot grid field list by default, including hidden fields.
+![DAX Query preferences](~/content/assets/images/pref-dax-query.png)
 
-##### *Pivot header word wrap* (enabled)
+### Basic
 
-Enable word wrapping in pivot grid headers. This makes long field names more readable.
+##### *Automatically execute DAX queries by default* (enabled)
 
-##### *Warn if pivot grid fields mismatch* (enabled)
+New DAX queries open with **Auto-execute** enabled, so the query re-runs whenever changes are made to the deployed semantic model. Turn it off if you would rather execute each query yourself.
 
-Show a warning when pivot grid field definitions don't match the current model. This can happen if you've deleted or renamed fields used in a saved pivot grid.
+##### *Keep existing sorting and filtering in the result grid* (WhenQueryUnchanged)
 
-##### *Always show pivot grid field list* (enabled)
+Control whether to preserve grid filters and sorting when re-executing queries:
+- **Never**: sorting and filtering are always reset when a query is executed
+- **WhenQueryUnchanged**: sorting and filtering are reset only when the query is modified
+- **Always**: sorting and filtering are never reset if the columns still exist
 
-Keep the pivot grid field list visible by default. Disable this if you prefer more screen space for the pivot grid itself.
+### Query settings
+
+##### *Smart selection* (enabled)
+
+When you execute part of a query, Tabular Editor turns that selection into a valid DAX query on your behalf, wrapping a scalar expression in curly braces and adding the `DEFINE` section or the `EVALUATE` keyword when they are not part of the selection.
+
+##### *Row limit* (1,000)
+
+Wraps every `EVALUATE` statement in a `TOPN` call, to keep an accidental query over a large table from running for a long time or exhausting memory. Set it to `0` to remove the limit entirely.
+
+### Code Generation
+
+##### *Use comments as separators* (enabled)
+
+Insert comments into generated object definitions, for example the `DEFINE` block produced by **Define object in query**, to make them easier to read.
+
+## Data Browsing > Table Preview
+
+![Table Preview preferences](~/content/assets/images/pref-table-preview.png)
+
+### Basic
+
+##### *Automatically refresh table previews by default* (enabled)
+
+New table previews open with **Auto-refresh** enabled, so the preview refreshes whenever changes are made to the deployed semantic model. This is useful when debugging: update an expression in one window while a preview of the same table is open in another.
+
+##### *Sort table preview columns alphabetically* (disabled)
+
+When checked, table preview columns are sorted alphabetically by name, matching the order the @tom-explorer-view lists a table's columns in. When unchecked (the default), columns appear in the order the engine returns them, which is roughly internal column order and can look arbitrary.
+
+##### *Max. values in filter dropdown* (5,000)
+
+Maximum number of distinct values listed in a column's filter dropdown. On a column with more distinct values than this, the values beyond the limit are not listed and cannot be ticked directly. Raising it lists more values at the cost of a heavier query each time the dropdown is opened. Accepts 100 to 1,000,000.
+
+##### *Max. rows to sort without an attribute hierarchy* (100,000)
+
+Upper bound on the number of rows Tabular Editor sorts by a column that has no attribute hierarchy to sort on.
+
+### DirectQuery
+
+##### *Row limit* (100)
+
+Maximum number of rows to retrieve for a table preview in DirectQuery mode. Raise it if you need to see more data, bearing in mind that every row is fetched from the underlying source.
+
+### Behavior
+
+##### *Track selected column in TOM Explorer* (enabled)
+
+When you select a column in the @tom-explorer-view, the open table preview scrolls that column into view and highlights it, which is the quickest way to find one column of a very wide table. The same setting can be turned on and off for a single preview with **Track selected column** on the Table Preview toolbar.
 
 ## DAX Editor > General
 
@@ -639,7 +734,7 @@ When checked, table prefixes are automatically removed from measure references, 
 
 ##### *Preferred keyword casing* (UPPER)
 
-This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc.
+This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc. It also governs the fixed keyword *values* auto-complete offers for functions that take them: `ASC` and `DESC`, `KEEP`, `FIRST`, `LAST` and `DEFAULT`, the `CROSSFILTER` directions and `LOOKUP`'s `EXPLICIT` and `INFERRED`. Choose **Capitalize first letter only** to be offered `Explicit` rather than `EXPLICIT`.
 
 ##### *Preferred function casing* (UPPER)
 
@@ -663,7 +758,7 @@ Extension columns can be defined without a table name. When checked, the DAX edi
 
 ## DAX Editor > Code Assist
 
-![Placeholder: Screenshot of DAX Editor Code Assist preferences page]
+![DAX Editor Code Assist preferences](~/content/assets/images/pref-dax-code-assist.png)
 
 On this page, you can configure the two most important Code Assist features, namely calltips (aka. "parameter info") and auto-complete.
 
@@ -693,7 +788,7 @@ Only show items starting with the typed letter. Disable this to use incremental 
 
 ## DAX Editor > Code Actions
 
-![Placeholder: Screenshot of DAX Editor Code Actions preferences page]
+![DAX Editor Code Actions preferences](~/content/assets/images/pref-dax-code-actions.png)
 
 Configure automatic code improvement suggestions:
 
@@ -749,7 +844,7 @@ Specify where obfuscation dictionaries are stored. The dictionary maintains cons
 
 ## VertiPaq Analyzer
 
-![Placeholder: Screenshot of VertiPaq Analyzer preferences page]
+![VertiPaq Analyzer preferences](~/content/assets/images/pref-vertipaq-analyzer.png)
 
 ##### *Include TOM metadata* (enabled)
 
@@ -779,7 +874,7 @@ Number of columns to analyze in each batch. Adjust this based on your model size
 
 ## Power BI Integration
 
-![Placeholder: Screenshot of Power BI Integration preferences page]
+![Power BI Integration preferences](~/content/assets/images/pref-power-bi.png)
 
 ##### *Power BI endpoint base URL* (`https://api.powerbi.com`)
 
@@ -795,7 +890,7 @@ Use the embedded browser for OAuth authentication instead of the system browser.
 
 ## Proxy Settings
 
-![Placeholder: Screenshot of Proxy Settings preferences page]
+![Proxy Settings preferences](~/content/assets/images/pref-proxy-settings.png)
 
 ##### *Proxy type* (None)
 

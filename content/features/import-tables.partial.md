@@ -1,6 +1,8 @@
 ---
 uid: import-tables
 title: Import Tables
+author: Morten Lønskov
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -104,7 +106,12 @@ At this point, you should see your tables imported with all columns, data types,
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
-# Updating table schema
+Columns are created in the order they appear in the source table. Importing the same table twice therefore produces the same column order both times.
+
+> [!NOTE]
+> Creating Import tables from a **Fabric Lakehouse** or **Fabric Warehouse** reads the table's schema through the SQL analytics endpoint carried on the data source. Where no endpoint can be determined and none is given in the import settings, Tabular Editor reports an error naming what it needs: the SQL endpoint as the server, or a workspace id and item id. It does not create a table with no columns.
+
+## Updating table schema
 
 If columns are added/changed in the source, or if you recently modified a partition expression or query, you can use Tabular Editor's **Update table schema** feature to update the column metadata in your model.
 
@@ -112,7 +119,7 @@ If columns are added/changed in the source, or if you recently modified a partit
 
 This menu item can be invoked at the model level, as well as on a collection of tables or even individual table partitions.
 
-When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), in order to determine if new columns need to be added or existing column modified or removed.
+When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), to determine whether columns need to be added, modified or removed. Columns follow the source table's own column order, so a schema update does not shuffle them.
 
 > [!IMPORTANT]
 > If a column that was previously imported to your Semantic Model has been removed or renamed in the source, you must update the table schema in your Semantic Model. Otherwise, data refresh operations may fail.

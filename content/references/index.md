@@ -6,8 +6,8 @@ This section contains reference materials for Tabular Editor.
 
 ### Downloads and Releases
 - @downloads - Download links and installation packages for Tabular Editor 3
+- @system-requirements - Supported Windows versions, runtimes, architectures and package formats
 - @release-history - Complete version history with download links
-- @whats-new - Latest features and updates
 
 ### Technical Reference
 - @faq - Frequently asked questions and answers

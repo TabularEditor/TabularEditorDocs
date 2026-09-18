@@ -2,7 +2,7 @@
 uid: user-interface
 title: Basic user interface
 author: Daniel Otykier
-updated: 2026-08-18
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -121,7 +121,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 > [!IMPORTANT]
 > In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](xref:supported-files#supported-file-types), not files containing metadata.
 
-- **Revert**: This option lets you reload the model metadata from the source, discarding any changes that are made in Tabular Editor, which have not yet been saved. This option is useful when Tabular Editor 3 is used as an External Tool for Power BI Desktop, and a change is made in Power BI Desktop while Tabular Editor 3 is connected. By choosing **Revert**, Tabular Editor 3 can reload the model metadata from Power BI Desktop without having to reconnect.
+- **Revert**: This option lets you reload the model metadata from the source, discarding any changes that are made in Tabular Editor, which have not yet been saved. This option is useful when Tabular Editor 3 is used as an External Tool for Power BI Desktop, and a change is made in Power BI Desktop while Tabular Editor 3 is connected. By choosing **Revert**, Tabular Editor 3 can reload the model metadata from Power BI Desktop without having to reconnect. If you loaded the model from a file or a folder you rarely need this command, because Tabular Editor reloads the model by itself when those files change on disk. See [Auto-reload from disk](xref:auto-reload).
 - **Close Document** (Ctrl+W): Closes the currently active document or panel in the main area, such as a DAX Query, a C# script, a data model diagram, or any other view with focus. If the document has unsaved changes, Tabular Editor will prompt you to save the changes before closing. This command is context-aware and will close whichever item is currently active in the main workspace area.
 - **Close model**: This unloads the currently loaded model metadata from Tabular Editor. If you made changes to the metadata, Tabular Editor will prompt you to save the changes before closing.
 - **Save**: This saves the active document back to the source file. If no document is active, this saves the model metadata back to the source, which could be a Model.bim file, a Database.json (folder structure) or a connected instance of Analysis Services (including Power BI Desktop) or the Power BI XMLA endpoint.
@@ -171,7 +171,7 @@ The **View** menu lets you navigate between the different views of the Tabular E
 - **Expression Editor**: This is the "quick editor" that lets you edit DAX, M or SQL expressions on whichever object is currently selected in the TOM Explorer. See @dax-editor for more information.
 - **Macros**: The Macros view allows you to manage any macros you have created. Macros can be created from @csharp-scripts. See @creating-macros for more information.
 - **VertiPaq Analyzer**: The VertiPaq Analyzer view allows you to collect, import and export detailed statistics about the data in your model, to help improve and debug DAX performance. VertiPaq Analyzer is created and maintained by [Marco Russo](https://twitter.com/marcorus) of [SQLBI](https://sqlbi.com) under MIT license. More information on the [GitHub project page](https://github.com/sql-bi/VertiPaq-Analyzer).
-- **Dependencies**: The Dependencies view visualizes dependencies between the currently selected object and other objects in the model.
+- **Dependencies**: The [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) visualizes dependencies between the currently selected object and other objects in the model. Tick **Track TOM Explorer** to have it follow the tree selection.
 - **DAX Optimizer**: The DAX Optimizer view integrates with [DAX Optimizer](https://www.daxoptimizer.com) to analyze your model for DAX performance issues.
 - **Calendar Editor**: The Calendar Editor view lets you define and manage calendars in models using the modern time intelligence feature.
 - **Perspective Editor**: The Perspective Editor view provides a matrix overview of which objects are included in each perspective of the model.
@@ -242,11 +242,11 @@ The **Help** menu provides shortcuts for online resources and more.
 
 ![View Menu](~/content/assets/images/help-menu.png)
 
-- **Online Documentation**: This menu item links to [docs.tabulareditor.com](https://docs.tabulareditor.com/te3).
+- **Online Documentation**: This menu item opens [docs.tabulareditor.com](https://docs.tabulareditor.com), this documentation site, in your default web browser.
 - **Onboarding Guide**: This menu item opens the Tabular Editor 3 onboarding guide, which helps new users get started with the application.
 - **Community Support**: This menu item links to our [public community support site](https://github.com/TabularEditor/TabularEditor3).
 - **Dedicated Support**: This menu item lets you send an e-mail directly to our dedicated support hotline.
-- **What's New**: This menu item shows the release notes of the currently installed version of Tabular Editor 3.
+- **Get Started**: This menu item opens the **Get Started** page, which collects courses, demos and documentation for Tabular Editor. Prior to Tabular Editor 3.27.0 this item was called **What's New** and showed the release notes of the installed version; release notes now live in the @release-history.
 
 > [!NOTE]
 > Dedicated support is reserved for Tabular Editor 3 Enterprise Edition customers. All other customers should reach out on the [public community support site](https://github.com/TabularEditor/TabularEditor3) for any technical issues, questions or other product-specific questions.

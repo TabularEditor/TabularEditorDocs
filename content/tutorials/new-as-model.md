@@ -2,7 +2,7 @@
 uid: new-as-model
 title: Create an Analysis Services Model
 author: Daniel Otykier
-updated: 2021-09-06
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,11 +31,14 @@ This page walks you through the process of creating a new Analysis Services tabu
 ![New model](~/content/assets/images/new-as-model-new-model.png)
 
 - Provide a name for your model or use the default value. Then, choose the compatibility level depending on which version of Analysis Services you are targeting. Your options are the following:
-  - 1200 (Works with SQL Server 2016 or newer, and Azure Analysis Services)
-  - 1400 (Works with SQL Server 2017 or newer, and Azure Analysis Services)
-  - 1500 (Works with SQL Server 2019 or Azure Analysis Services)
-  - 1600 (Works with SQL Server 2022 or Azure Analysis Services)
-  - 1700 (Works with SQL Server 2025 or Azure Analysis Services)
+  - 1200 (Azure Analysis Services / SQL Server 2016+)
+  - 1400 (Azure Analysis Services / SQL Server 2017+)
+  - 1500 (Azure Analysis Services / SQL Server 2019+)
+  - 1600 (Azure Analysis Services / SQL Server 2022+)
+  - 1700 (Azure Analysis Services / SQL Server 2025+)
+  - 1706 (Power BI / Fabric)
+
+  1700 is the highest level Analysis Services supports. 1706 is for Power BI and Fabric only, and is the level to choose when you deploy the model through the Power BI XMLA endpoint.
 
 - For the best development experience, check the "Use workspace database" option. This requires that you have an instance of Analysis Services available on which your workspace database will be deployed. This could be a local or a remote instance of SQL Server Analysis Services or it could be an instance of Azure Analysis Services. When you click OK, you will be prompted to enter the connection string for the Analysis Services instance in which you want the workspace database created.
 

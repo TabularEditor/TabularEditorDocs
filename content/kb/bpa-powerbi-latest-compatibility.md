@@ -2,7 +2,7 @@
 uid: kb.bpa-powerbi-latest-compatibility
 title: Use Latest Compatibility Level for Power BI Models
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-09-14
 description: Best practice rule ensuring Power BI models use the latest compatibility level for optimal features and performance.
 ---
 
@@ -70,16 +70,16 @@ Team policy to delay upgrades.
 
 ```
 Model Compatibility Level: 1500
-Current Maximum Level: 1700
+Current Maximum Level: 1706
 ```
 
 ### After Fix
 
 ```
-Model Compatibility Level: 1700 (Latest)
+Model Compatibility Level: 1706 (Latest)
 ```
 
-Access to new features like enhanced calculation groups and field parameters.
+Access to newer capabilities such as [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), @user-context-calculated-columns (1705+) and String Indexing Behavior on a column (1706+).
 
 ## Compatibility Level
 

@@ -30,12 +30,14 @@ This section contains documentation about Tabular Editor features.
 
 ### Data Exploration and Connectivity
 - @import-tables - Table import functionality
+- @table-preview - Inspect a table's contents row by row
 - @pivot-grid - Data analysis and visualization
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
 
 ### Advanced Modelling Features
+- @user-context-calculated-columns - Calculated columns evaluated per user, and what can reference them
 - @metadata-translation-editor - Multi-language support
 - @perspective-editor - Managing model perspectives
 
@@ -51,6 +53,7 @@ This section contains documentation about Tabular Editor features.
 - @workspace-mode - Collaborative development mode
 - @tmdl - Tabular Model Definition Language support
 - @save-to-folder - Serialize models to folder structures
+- @auto-reload - Keeping the loaded model and the files on disk in step
 
 ### Command Line and Integration
 - @command-line-options - CLI usage and automation

@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-05-27
+updated: 2026-09-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -163,6 +163,8 @@ The following table lists all available singular and plural accessors on the `Se
 
 > [!NOTE]
 > The accessors for Role, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable and Partition were added in Tabular Editor 3.26.0.
+
+Starting with Tabular Editor 3.27.0, objects that were deleted since the model was last saved remain visible in the TOM Explorer, and can be selected. Such objects are not part of the model, so they never appear in the accessors above. Instead, `Selected.Deleted` lists the selected deleted objects, each with a `Name`, `ObjectType`, `Parent` and a `Restore()` method. `Selected.Deleted.Restore()` restores all of them at once. Model objects also expose `HasUnsavedChanges` and `Revert()`, which let a script roll back part of a model. See @unsaved-changes for details.
 
 ## Helper methods
 Tabular Editor provides a set of special helper methods to make certain script tasks easier to achieve. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.

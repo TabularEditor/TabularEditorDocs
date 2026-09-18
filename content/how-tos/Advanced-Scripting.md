@@ -1,17 +1,20 @@
 ﻿---
 uid: advanced-scripting
 title: Advanced Scripting
+author: Morten Lønskov
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       full: true
+      note: "Called C# scripts in Tabular Editor 3"
 ---
 
 # Advanced Scripting
 
-This is an introduction to the Advanced Scripting capabilities of Tabular Editor. Information in this document is subject to change. Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor. 
+This is an introduction to the scripting capabilities of Tabular Editor. Everything below applies to both products, but the names differ: what Tabular Editor 2 calls **Advanced Scripting**, Tabular Editor 3 calls **C# scripts**, with a dedicated editor, IntelliSense, a script debugger and saved macros. See @csharp-scripts for the Tabular Editor 3 experience, and @csharp-script-library for real-life examples.
 ## What is Advanced Scripting?
 The goal of the UI of Tabular Editor is to make it easy to perform most tasks commonly needed when building Tabular Models. For example, changing the Display Folder of multiple measures at once is just a matter of selecting the objects in the explorer tree and then dragging and dropping them around. The right-click context menu of the explorer tree provides a convenient way to perform many of these tasks, such as adding/removing objects from perspectives, renaming multiple objects, etc.
 
@@ -77,7 +80,7 @@ Use the IntelliSense functionality of the Advanced Script editor to see what oth
 ## Working with the **Model** object
 To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the Advanced Scripting editor:
 
-![Dragging and dropping an object into the Advanced Scripting editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/DragDropTOM.gif)
+![Dragging and dropping an object into the Advanced Scripting editor](~/content/assets/images/advanced-scripting-01.gif)
 
 Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to <xref:api-index> for a complete listing of the properties and methods exposed by the wrapper object.
 
@@ -111,7 +114,7 @@ Alternatively, we may use the LINQ ForEach()-method, as described above, to incl
 
 ```csharp
 Selected.Measures
-        .ForEach(m => if(m.Name.Contains("Reseller")) m.Name += " DEPRECATED");
+        .ForEach(m => { if(m.Name.Contains("Reseller")) m.Name += " DEPRECATED"; });
 ```
 
 This example will append the text " DEPRECATED" to the names of all selected measures where the names contain the word "Reseller". Alternatively, we could use the LINQ extension method `Where()` to filter the collection before applying the `ForEach()` operation, which would yield exactly the same result:
@@ -125,24 +128,11 @@ Selected.Measures
 ## Helper methods
 To make debugging scripts easier, Tabular Editor provides a set of special helper methods. Internally, these are static methods decorated with the `[ScriptMethod]`-attribute. This attribute allows scripts to call the methods directly, without the need to specify a namespace or class name. Plugins may also use the `[ScriptMethod]` attribute to expose public static methods for scripting in a similar way.
 
-As of 2.7.4, Tabular Editor provides the following script methods. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
+Some of them may be invoked as extension methods, so `object.Output();` and `Output(object);` are equivalent.
 
-* `Output(object);` - displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When executed through the CLI, the information is outputted to the console.
-* `SaveFile(filePath, content);` - convenient way to save text data to a file.
-* `ReadFile(filePath);` - convenient way to load text data from a file.
-* `ExportProperties(objects, properties);` - convenient way to export a set of properties from multiple objects as a TSV string.
-* `ImportProperties(tsvData);` - convenient way to load properties into multiple objects from a TSV string.
-* `CustomAction(name);` - invoke a Custom Action by name.
-* `CustomAction(objects, name);` - invoke a Custom Action on the specified objects.
-* `ConvertDax(dax, useSemicolons);` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* `FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-* `FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-* `CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `Info(string);` - Displays an informational message in a popup dialog. When the script is running in the CLI, an information message is written to the console.
-* `Warning(string);` - Displays a warning message in a popup dialog. When the script is running in the CLI, a warning message is written to the console.
-* `Error(string);` - Displays an error message in a popup dialog. When the script is running in the CLI, an error message is written to the console.
+The ones you will reach for most often are `Output()` for inspecting an object mid-script, `Info()`, `Warning()` and `Error()` for messages, `SaveFile()` and `ReadFile()` for text data, and `ExportProperties()` / `ImportProperties()` for moving property values in and out as TSV.
 
-You can find an updated list of all helper methods [here](xref:script-helper-methods).
+@script-helper-methods is the maintained list of every helper method with its full signature. Use it rather than the summary here.
 
 ### Debugging scripts
 As mentioned above, you can use the `Output(object);` method to pause script execution, and open a dialog box with information about the passed object. You can also use this method as an extension method, invoking it as `object.Output();`. The script is resumed when the dialog is closed.
@@ -151,25 +141,25 @@ The dialog will appear in one of four different ways, depending on the kind of o
 
 - Singular objects (such as strings, ints and DateTimes, except any object that derives from TabularNamedObject) will be displayed as a simple message dialog, by invoking the `.ToString()` method on the object:
 
-![image](https://user-images.githubusercontent.com/8976200/29941982-9917d0cc-8e94-11e7-9e78-24aaf11fd311.png)
+![image](~/content/assets/images/advanced-scripting-02.png)
 
 - Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Rollback on error" is enabled:
 
-![image](https://user-images.githubusercontent.com/8976200/29941852-2acc9846-8e94-11e7-9380-f84fef26a78c.png)
+![image](~/content/assets/images/advanced-scripting-03.png)
 
 - Any IEnumerable of objects (except TabularNamedObjects) will be displayed in a list, where each list item shows the `.ToString()` value and type of the object in the IEnumerable:
 
-![image](https://user-images.githubusercontent.com/8976200/29942113-02dad928-8e95-11e7-9c04-5bb87b396f3f.png)
+![image](~/content/assets/images/advanced-scripting-04.png)
 
 - Any IEnumerable of TabularNamedObjects will cause the dialog to display a list of the objects on the left, and a Property Grid on the right. The Property Grid will be populated from whatever object is selected in the list, and properties may be edited just as when a single TabularNamedObject is being output:
 
-![image](https://user-images.githubusercontent.com/8976200/29942190-498cbb5c-8e95-11e7-8455-32750767cf13.png)
+![image](~/content/assets/images/advanced-scripting-05.png)
 
 You can tick the "Don't show more outputs" checkbox at the lower left-hand corner, to prevent the script from halting on any further `.Output()` invocations.
 
 ## .NET references
 
-[Tabular Editor version 2.8.6](https://github.com/TabularEditor/TabularEditor/tree/2.8.6) makes it a lot easier to write complex scripts. Thanks to the new pre-processor, you can now use the `using` keyword to shorten class names, etc. just like in regular C# source code. In addition, you can include external assemblies by using the syntax `#r "<assembly name or DLL path>"` similar to .csx scripts used in Azure Functions.
+Scripts support the `using` keyword to shorten class names, just as regular C# source does, and can pull in external assemblies with `#r "<assembly name or DLL path>"`, the same syntax `.csx` scripts use.
 
 For example, the following script will now work as expected:
 
@@ -217,9 +207,12 @@ In addition, the following .NET Framework assemblies are loaded by default:
 
 ## Compiling with Roslyn
 
-If you prefer to compile your scripts using the new Roslyn compiler introduced with Visual Studio 2017, you can set this up under File > Preferences > General, starting with Tabular Editor version 2.12.2. This allows you to use newer C# language features such as string interpolation. Simply specify the path to the directory that holds the compiler executable (`csc.exe`) and specify the language version as an option for the compiler:
+> [!NOTE]
+> This section applies to **Tabular Editor 2 only**. Tabular Editor 3 compiles scripts with Roslyn natively, so newer C# language features are available with no setup and there is no compiler path to configure.
 
-![image](https://user-images.githubusercontent.com/8976200/92464140-0902f580-f1cd-11ea-998a-b6ecce57b399.png)
+Tabular Editor 2 compiles scripts with the C# compiler that ships with .NET Framework, which supports C# 5. To use later language features such as string interpolation, point it at a Roslyn compiler instead, under **File > Preferences > General**. Specify the directory holding the compiler executable (`csc.exe`) and the language version to pass to it:
+
+![image](~/content/assets/images/advanced-scripting-06.png)
 
 ### Visual Studio 2017
 
@@ -231,7 +224,7 @@ c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
 
 This includes the C# 6.0 language features by default.
 
-![image](https://user-images.githubusercontent.com/8976200/92464584-a52cfc80-f1cd-11ea-9b66-3b47ac36f6c6.png)
+![image](~/content/assets/images/advanced-scripting-07.png)
 
 ### Visual Studio 2019
 
