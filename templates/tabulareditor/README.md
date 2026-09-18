@@ -101,16 +101,20 @@ we could exec followng command when standing in the root directory of `tabular-e
     └── whats-new
 ```
 
-### Sync command
+In normal operation this is done by the `DocsTemplate-deploy` Azure pipeline (`.pipelines/doc-template-deploy.yml`),
+which builds the template on every push to `main`, mirrors it into `TabularEditorDocs/templates/tabulareditor/` and
+opens a PR on the `automation/template-sync` branch. That branch is recreated from `main` and force-pushed on every
+run, so never commit to it by hand; fix things here and let the pipeline re-run.
+
+The sync is a mirror (`rsync --delete` / `robocopy /MIR`): anything not built or tracked in this repo is removed
+downstream. Static assets that the site needs (the self-hosted fonts under `public/googlefonts/`, favicons, `main.css`,
+`main.js`) are therefore tracked here even though the rest of `public/` is build output.
+
+### Manual sync command
 
 ```bash
-rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocs/templates/
-```
-
-And temporary for the forked repository.
-
-```bash
-rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocsFork/templates/
+(cd templates && npm run build)
+rsync -av --delete --exclude='src' --exclude='tools' --exclude='node_modules' ./templates/tabulareditor/ ../TabularEditorDocs/templates/tabulareditor/
 ```
 
 For windows
@@ -118,7 +122,7 @@ For windows
 ```bash
 npm run build
 
-robocopy "<yourpath>\templates\tabulareditor" "<yourpath>\TabularEditorDocs\templates\tabulareditor" /E /XD src tools /MIR
+robocopy "<yourpath>\templates\tabulareditor" "<yourpath>\TabularEditorDocs\templates\tabulareditor" /E /XD src tools node_modules /MIR
 ```
 
 ## Additional Files
