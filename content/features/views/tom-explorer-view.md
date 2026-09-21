@@ -108,6 +108,14 @@ Objects that differ from the last saved version of the model are tinted and badg
 
 ![Tom Explorer Unsaved Changes](~/content/assets/images/user-interface/TOMExplorerUnsavedChanges.png)
 
+## Keeping your place in the tree
+
+The TOM Explorer keeps its state when the model underneath it changes. Expanded nodes stay expanded, the focused object stays focused, your selection is preserved and the tree does not scroll away from where you were looking.
+
+This applies when you revert the model, whether it is loaded from a file, from a folder or from a server in [workspace mode](xref:workspace-mode), and when the model is reloaded because its files changed on disk. See @auto-reload.
+
+It applies to ordinary editing too. Semantic analysis runs continuously as you edit DAX, and the tree now updates in place as it completes rather than rebuilding, so a long expression no longer costs you your position in a large model.
+
 ## TOM Explorer Toolbar
 The toolbar allows you to show and hide different types of objects, toggle perspectives and languages and search for specific objects in the data model.
 ![Tom Explorer Toolbar](~/content/assets/images/user-interface/TOMExplorerToolbar.png)

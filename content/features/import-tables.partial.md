@@ -57,10 +57,10 @@ Currently, the following data sources are natively supported by Tabular Editor 3
 - Snowflake*
 - Power BI Dataflow*
 - Databricks*
-- Fabric Lakehouse*
-- Fabric Warehouse*
-- Fabric SQL Database*
-- Fabric Mirrored Database*
+- Fabric Lakehouse
+- Fabric Warehouse
+- Fabric SQL Database
+- Fabric Mirrored Database
 
 *=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
 
@@ -72,6 +72,23 @@ After choosing one of the data sources on the list, Tabular Editor displays a co
 ![Sql Auth](~/content/assets/images/sql-auth.png)
 
 If you want Analysis Services to use different credentials when connecting, you can specify that by editing the data source properties of the Tabular Object Model after importing the tables.
+
+## Connecting to a data source
+
+Each source type has its own connection dialog, and the authenticators on offer differ between them. The choice matters beyond the first connection, because some authenticators need a person at the keyboard and so cannot be used for a scheduled refresh.
+
+See @connectivity for the full list, and the page for your source:
+
+- @connect-sql-server, covering Azure SQL and Synapse
+- @connect-snowflake, including key pair authentication for unattended work
+- @connect-databricks
+- @connect-oracle
+- @connect-odbc, which is also how PostgreSQL, MySQL, MariaDB and IBM Db2 are reached
+- @connect-oledb
+- @connect-onelake
+- @connect-dataflows
+
+Credentials are stored per user and per model in the [user options](xref:user-options) file, encrypted with your Windows account key, and never become part of the model metadata.
 
 ## Choosing objects to import
 

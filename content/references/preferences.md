@@ -108,6 +108,14 @@ When checked, only major version updates trigger notifications. Minor and patch 
 
 The version you are running is shown below these settings, along with a **Check for updates** button that runs the check immediately.
 
+### Managed by your organization
+
+Where an administrator has configured [policies](xref:policies), a read-only **Managed by your organization** section is appended to this page listing every policy value Tabular Editor found, as `Name = value`. Hover over an entry to see which registry key and hive it came from.
+
+A value Tabular Editor could not interpret is listed with an `(invalid)` marker rather than being left out. That marker is the fastest way to find the typo behind a policy that appears to do nothing, so check here first when a policy is not taking effect.
+
+The section is absent when no policy applies. Settings that a policy locks or limits are shown read-only elsewhere in this dialog, and in the **Tools > MCP Server...** dialog, with a tooltip saying so.
+
 ### Usage Data and Feedback
 
 ##### *Help improve Tabular Editor by collecting anonymous usage data* (enabled)
@@ -449,6 +457,122 @@ Choose between tabs or spaces for indentation in TMDL files. Tabs are the defaul
 When using spaces, specify the number of spaces per indentation level.
 
 <a name="miscellaneous"></a>
+
+## AI Features
+
+The parent page carries the two settings that apply to every AI feature, the chat and the [MCP server](xref:mcp-server) alike.
+
+##### *Check for knowledge base updates on startup* (enabled)
+
+The AI Assistant searches a local copy of the Tabular Editor documentation. When checked, Tabular Editor looks for a newer copy at start-up and downloads it if one is available. This is the only outbound request any AI feature makes on its own.
+
+##### Audit log
+
+**Open audit folder** opens this computer's record of what the AI Assistant and the MCP server did: permission decisions, which tools were called and how each one ended, and the full text of any script that was run or handed over for review. Prompts, replies and data values are never recorded. Files are written one per day and kept for 30 days by default. Administrators can move the folder and change the retention period. See @policies and @ai-assistant.
+
+## AI Features > AI Assistant
+
+Connection settings for the AI Assistant chat. The **AI Provider** child page renders here. See @ai-assistant for what each provider needs.
+
+##### *Choose provider* (None)
+
+Which AI provider the chat talks to: **OpenAI**, **Anthropic**, **Azure OpenAI** or **Custom (OpenAI-compatible)**. The fields below change with your choice. An administrator can lock this to a single provider, or narrow the list, by policy.
+
+##### *Base URL* / *Service endpoint*
+
+Where requests are sent. OpenAI and Anthropic supply a default and the field is optional. Azure OpenAI and Custom have no default, so an endpoint is required.
+
+##### *API Key*
+
+Your own key for the chosen provider. It is stored encrypted on this machine in `Preferences.json`. Tabular Editor ships no built-in key and never proxies your requests.
+
+##### *OpenAI Organization ID* and *OpenAI Project ID*
+
+Optional, and shown for the OpenAI provider only. Use them where your OpenAI account bills or scopes usage per organization or project.
+
+##### *Model name* (*Deployment* for Azure OpenAI)
+
+Which model to use. For OpenAI and Anthropic this is a dropdown filled from an online catalog, so it is empty until the catalog has been fetched once on this machine. For Azure OpenAI the field is labelled **Deployment** and takes the name you gave the deployment, which is not necessarily the name of the underlying model. Leaving it blank uses the provider's default, except for Azure OpenAI and Custom, which have none.
+
+## AI Features > AI Assistant > Preferences
+
+How the chat behaves. See @ai-assistant for the detail behind each group.
+
+### Chat Display
+
+##### *Show selection context indicator* (enabled)
+
+Show which model object is currently selected above the chat, so you can see what the assistant will treat as context.
+
+##### *Show custom instructions indicator* (enabled)
+
+Show which [Custom Instructions](xref:ai-assistant#custom-instructions) were applied above each reply.
+
+##### *Show knowledge base search indicator* (enabled)
+
+Show progress while the assistant searches the knowledge base.
+
+### Context Compaction
+
+##### *Auto compact* (enabled)
+
+Summarize the older part of a conversation automatically as it approaches the model's context limit, so a long conversation can carry on.
+
+##### *Auto compact threshold %* (80)
+
+How full the context window gets before compaction runs, as a percentage of the *model's own* window rather than a fixed number of tokens. Values outside 50 to 100 have no further effect.
+
+### C# Script
+
+##### *Allow AI assistant to run C# scripts directly* (disabled)
+
+Let the assistant carry out the model change you asked for, instead of writing a script and opening it for you to run. Only scripts the safety analysis considers safe are run this way, meaning scripts that touch model objects and nothing else; anything reaching for files, the network or an external assembly is still handed to you for review. Each run lands as a single undo step.
+
+This setting is unavailable until **Model metadata** is set to **Write** on the [Permissions](#ai-features--permissions) page, and it becomes available as soon as you change that dropdown, without closing the dialog. It is also unavailable, with a tooltip saying so, where an administrator has set the `DisableCSharpScripts` [policy](xref:policies). It is off by default deliberately: **Model metadata > Write** is also what an agent needs over the MCP server, and granting it there must not silently change what the chat does. See [Letting the assistant change your model](xref:ai-assistant#letting-the-assistant-change-your-model).
+
+##### *Preview changes* (enabled)
+
+Show the script preview dialog before a change the assistant made stands, so you can see every model metadata change and accept or cancel it. Cancelling puts the model back and tells the assistant you rejected the change.
+
+## AI Features > MCP Server
+
+Settings for the [MCP server](xref:mcp-server), which lets an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open.
+
+![MCP Server preferences](~/content/assets/images/pref-mcp-server.png)
+
+##### *Enable MCP Server* (enabled)
+
+Whether the MCP server is available at all. Clearing it stops a running server and removes both the **Tools > MCP Server...** menu item and the status bar indicator.
+
+##### *Start MCP server automatically* (disabled)
+
+Start the server when Tabular Editor starts, so an agent can connect without you starting it by hand. If the port is in use at start-up, the server does not start and no prompt is shown.
+
+##### *Require access token* (disabled)
+
+Make agents present a bearer token, shown in the **Tools > MCP Server...** dialog. The server listens on the loopback interface only, so this matters most on a machine where several people are signed in at once, such as a Remote Desktop or Citrix host, where every session can reach `127.0.0.1`. Administrators can enforce it with the `RequireMcpAccessToken` [policy](xref:policies).
+
+##### *Port* (42100)
+
+The loopback port the server listens on, from 1024 to 49151. Changing it invalidates existing agent registrations, which point at a fixed address. If the port is taken when you start the server by hand, Tabular Editor offers the next free port it finds.
+
+## AI Features > Permissions
+
+One standing grant per resource, governing both the AI Assistant chat and any agent connected over the MCP server. The chat can additionally ask for something a grant does not cover; an agent cannot, so for MCP the grants apply as they stand and only change when the server restarts.
+
+![AI Features Permissions preferences](~/content/assets/images/pref-ai-permissions.png)
+
+| Resource | Levels | Default | What it covers |
+| -- | -- | -- | -- |
+| **Model metadata** | Deny / Read / Write | Read | Tables, columns, measures, expressions, descriptions and relationships, plus VertiPaq Analyzer statistics. Write allows changes through C# scripts |
+| **Model data** | Deny / Read | Deny | Data values from your model, such as DAX query results. There is no write level |
+| **Best Practice Analyzer** | Deny / Read / Write | Read | Read lists rules and runs the analysis; Write adds or modifies rules |
+| **Documents** | Deny / Read / Write | Write | Your open C# script and DAX query tabs. Read is their contents; Write creates or modifies them |
+| **Macros** | Deny / Read / Write | Write | Your macro library |
+
+**Write** covers Read, so there is no need to grant both. **Model data** is the one resource denied by default, because metadata describes your model while data *is* its contents.
+
+In the Enterprise, Consultancy and Trial editions an administrator can cap any of these by [policy](xref:policies), separately for the chat and for the MCP server. A capped dropdown is shown read-only. See @ai-assistant for how the chat asks for what a grant does not cover, and @mcp-server for what an agent sees.
 
 ## Tabular Editor > Miscellaneous
 

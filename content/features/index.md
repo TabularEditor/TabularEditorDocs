@@ -30,11 +30,18 @@ This section contains documentation about Tabular Editor features.
 
 ### Data Exploration and Connectivity
 - @import-tables - Table import functionality
+- @connectivity - Connecting to data sources, and which authenticator to choose
+  - @connect-sql-server, @connect-snowflake, @connect-databricks, @connect-oracle
+  - @connect-odbc, @connect-oledb, @connect-onelake, @connect-dataflows
 - @table-preview - Inspect a table's contents row by row
 - @pivot-grid - Data analysis and visualization
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
+
+### AI Features
+- @ai-assistant - Chat-based model development using your own AI provider key
+- @mcp-server - Let an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open
 
 ### Advanced Modelling Features
 - @user-context-calculated-columns - Calculated columns evaluated per user, and what can reference them

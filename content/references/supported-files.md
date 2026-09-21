@@ -278,6 +278,14 @@ It can be helpful to share these files across a team so that all developers have
 > However, this is not supported by Tabular Editor directly, so implement it at your own discretion. 
 
 
+### AI audit log
+
+Present only when the AI features component is installed. Tabular Editor writes a record of what the [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) did: which permissions were asked for and how they were answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed over for review. Prompts, replies and data values from your model are never recorded.
+
+Files are written one per day and kept for 30 days by default. Reach the folder with **Open audit folder** under **Tools > Preferences > AI Features**. Administrators can move it and change the retention period by [policy](xref:policies).
+
+Unlike the other files in this folder, this one is a record rather than a setting. Do not share or sync it: it is a per-machine log, and the scripts it contains may reveal the structure of models you have worked on.
+
 ### MacroActions.json
 This file stores all the macros that you have created or imported. It can be useful to share this file with your colleagues or backup it in a version control system and can also be configured to sync with a remote repository that contains macros (See tip above).
 

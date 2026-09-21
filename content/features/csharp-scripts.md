@@ -236,7 +236,10 @@ All model metadata changes from a script execution are wrapped in a single undo 
 > The preview and undo features only apply to model metadata changes. If a script performs external operations such as writing to files, databases or making web requests, those operations are executed immediately and cannot be reverted. The preview dialog does not attempt to analyze the script code — it works by comparing the model metadata state before and after execution.
 
 > [!TIP]
-> The [AI Assistant](xref:ai-assistant) shows the preview changes dialog automatically when you execute C# scripts from the chat, so you always get a chance to review AI-generated model changes before they are applied.
+> The [AI Assistant](xref:ai-assistant) shows this dialog when it runs a script itself, as long as **Preview changes** is on under **Tools > Preferences > AI Features > AI Assistant**. It is on by default, so you always get a chance to review AI-generated model changes before they are applied.
+
+> [!NOTE]
+> The preview dialog does not apply to a script run by an agent over the [MCP server](xref:mcp-server). Those scripts are compiled, checked by the safety analysis and run against the model atomically. The agent gets back a structured summary of what changed, and the changes are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) for you to review or revert afterwards.
 
 ## .NET references
 

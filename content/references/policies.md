@@ -90,6 +90,12 @@ To enforce one of these, add a `REG_DWORD` value with the name below and a non-z
 | DisableMcpServer | TE3 | The MCP server is unavailable, so external agent tools cannot connect to Tabular Editor 3. The AI Assistant chat is unaffected. |
 | RequireMcpAccessToken | TE3 | Clients connecting to the MCP server must present the access token shown in the **Tools > MCP Server...** dialog, and users cannot turn that requirement off. |
 
+### In the TE CLI
+
+The Tabular Editor CLI honors the policies marked **CLI** above, on Windows, reading the same keys in the same order as Tabular Editor 3.
+
+A refused operation is not silent. `te` names the policy that refused it and exits with a non-zero code, so a pipeline step fails rather than appearing to succeed with nothing done.
+
 ## Enterprise policies
 
 These policies configure the AI Assistant and the MCP server, and require Tabular Editor 3 Enterprise Edition. They are honored by Tabular Editor 3 only, and belong under `Tabular Editor ApS\TE3`.

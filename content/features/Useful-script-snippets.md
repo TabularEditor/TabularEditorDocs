@@ -696,7 +696,7 @@ The following methods are available:
 | `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
 | `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
 
-The methods are scoped to the `Model.Database` object, but they can also be executed directly without any prefix.
+Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
 
 Darren Gosbell presents an interesting use-case of generating data-driven measures using the `ExecuteDax` method [here](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/).
 

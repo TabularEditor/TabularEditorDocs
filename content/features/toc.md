@@ -36,6 +36,15 @@
 
 # Data Exploration and Connectivity
 ## @import-tables
+## @connectivity
+### @connect-sql-server
+### @connect-snowflake
+### @connect-databricks
+### @connect-oracle
+### @connect-odbc
+### @connect-oledb
+### @connect-onelake
+### @connect-dataflows
 ## @table-preview
 ## @pivot-grid
 ## @semantic-model-types
