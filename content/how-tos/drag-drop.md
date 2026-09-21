@@ -21,7 +21,11 @@ The gesture is always a move. Tabular Editor shows the move cursor when a drop i
 
 Drag a display folder and every object underneath it comes along, including nested subfolders, which keep their shape. This is the reason the feature exists: restructuring the folder layout of a large model is one gesture per folder rather than one edit per measure.
 
-![Placeholder: Animation of a display folder being dragged onto another folder in the TOM Explorer, with the measures and subfolders beneath it following]
+<!-- IMAGE NEEDED: drag-drop-display-folders.gif
+     An animation of a display folder being dragged onto another folder in the TOM Explorer,
+     with the measures and subfolders beneath it following. Needs a model with at least two
+     levels of nesting so the shape is visibly preserved.
+     Alt text: "A display folder being dragged onto another folder in the TOM Explorer" -->
 
 Everything else in the tree moves the same way:
 

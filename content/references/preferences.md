@@ -182,7 +182,9 @@ Specify the folder where deployment backups are stored. By default, backups are 
 
 ## Tabular Editor > Defaults
 
-![Placeholder: Screenshot of Defaults preferences page]
+<!-- IMAGE NEEDED: pref-defaults.png
+     The Tabular Editor > Defaults preferences page at its default settings.
+     Alt text: "The Defaults preferences page" -->
 
 ##### *New model compatibility level* (1600)
 
@@ -306,7 +308,9 @@ Separate the symbol from the numeric value with a space.
 
 ## Tabular Editor > Copy/Paste
 
-![Placeholder: Screenshot of Copy/Paste preferences page]
+<!-- IMAGE NEEDED: pref-copy-paste.png
+     The Tabular Editor > Copy/Paste preferences page at its default settings.
+     Alt text: "The Copy/Paste preferences page" -->
 
 Control what metadata is included when copying objects:
 
@@ -328,7 +332,9 @@ Copy Object-Level Security settings with objects. This applies when copying obje
 
 ## Tabular Editor > Perspectives
 
-![Placeholder: Screenshot of Perspectives preferences page]
+<!-- IMAGE NEEDED: pref-perspectives.png
+     The Tabular Editor > Perspectives preferences page at its default settings.
+     Alt text: "The Perspectives preferences page" -->
 
 Control how perspective membership is handled:
 
@@ -926,7 +932,10 @@ Define acceptable prefixes for temporary column names (e.g., `@`, `$`, `_`, `x`,
 
 ## SQL Editor / M Editor / C# Editor
 
-![Placeholder: Screenshot of SQL/M/C# Editor preferences pages]
+<!-- IMAGE NEEDED: pref-code-editors.png
+     One of the SQL Editor, M Editor and C# Editor preferences pages. The three share a
+     layout, so a single shot covers the section.
+     Alt text: "The code editor preferences page, shared by the SQL, M and C# editors" -->
 
 Similar configuration options are available for SQL, M (Power Query), and C# script editors, including:
 - Syntax highlighting and color schemes
@@ -938,7 +947,9 @@ Each editor can be customized independently to match your preferred coding style
 
 ## DAX Formatter
 
-![Placeholder: Screenshot of DAX Formatter preferences page]
+<!-- IMAGE NEEDED: pref-dax-formatter.png
+     The DAX Formatter preferences page at its default settings.
+     Alt text: "The DAX Formatter preferences page" -->
 
 ##### *DAX formatter consent* (disabled)
 
@@ -950,7 +961,9 @@ Timeout in milliseconds for DAX formatter requests. Increase this if you frequen
 
 ## DAX Optimizer Integration
 
-![Placeholder: Screenshot of DAX Optimizer Integration preferences page]
+<!-- IMAGE NEEDED: pref-dax-optimizer.png
+     The DAX Optimizer Integration preferences page at its default settings.
+     Alt text: "The DAX Optimizer Integration preferences page" -->
 
 Configure integration with DAX Optimizer (Enterprise Edition only):
 
