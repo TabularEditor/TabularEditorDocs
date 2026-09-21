@@ -55,7 +55,7 @@ If you have no unsaved changes, only one copy moved, so there's nothing to weigh
 
 If you have unsaved changes as well, both copies moved and they disagree. Tabular Editor can't merge model metadata, so it asks you which copy wins.
 
-![Placeholder: Screenshot of the External changes detected prompt, showing the Reload and Ignore buttons]
+![Prompt shown when Tabular Editor detects that both copies where changed](~/content/assets/images/features/external-changes-prompt.png)
 
 - **Reload** discards your unsaved changes and takes the version on disk.
 - **Ignore** keeps your changes and leaves the model as it is. The files on disk aren't touched, so the two copies stay apart until your next save overwrites them.
