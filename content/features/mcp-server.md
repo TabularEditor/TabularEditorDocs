@@ -32,15 +32,13 @@ An agent that edits model files on disk is working blind. It has the text of a `
 - **Analysis the agent can't do on its own.** [Best Practice Analyzer](xref:best-practice-analyzer) results, VertiPaq Analyzer statistics, DAX query results against live data and the Tabular Editor knowledge base are all tools the agent can call. It stops guessing about your model and starts measuring it.
 - **A review step you can see.** Everything the agent does lands in your session as unsaved changes, marked in the [TOM Explorer and the Properties view](xref:unsaved-changes). You read the diff in the UI, revert the parts you don't want and save when you're happy. Nothing reaches the source until you save it.
 
-That last point is the difference between delegating work and losing control of it. The agent proposes, your session holds the result, and you're the one who commits it.
+That last point is the difference between delegating work and losing control of it. The agent proposes, your session holds the result, and you're the one who checks, test and save it.
 
 ## Before you start
 
 - Tabular Editor 3.27.0 or later, any edition.
 - The **AI features** component installed. It's part of a default installation from 3.27.0 onwards. See @installation-activation-basic if you deploy Tabular Editor centrally, and @policies if your administrator has turned AI features off.
 - An agent that supports MCP over streamable HTTP.
-
-You don't need an AI Assistant API key, a model provider or a network connection to anything except your own machine. The server listens on loopback only.
 
 ## Start the server
 
@@ -59,7 +57,7 @@ The dialog shows the address the server is listening on, `http://127.0.0.1:42100
      and Open audit folder buttons. House border, 100% DPI.
      Alt text: "The MCP Server dialog showing the server URL, access token and the five agent permission rows" -->
 
-The server works with or without a model open. An agent that connects while no model is loaded gets told so rather than getting an error, and you can open a model afterwards without restarting anything.
+The server works with or without a model open. An agent that connects while no model is loaded gets told so rather than getting an error, and you can open a model afterwards without restarting the MCP server.
 
 Right-click the status bar indicator for the things you'll want day to day: starting and stopping the server, copying a registration configuration and the preferences page. Left-clicking it opens the dialog without changing whether the server is running.
 
@@ -70,9 +68,9 @@ Right-click the status bar indicator for the things you'll want day to day: star
      MCP Server preferences... Crop to the right-hand end of the status bar.
      Alt text: "The MCP status bar indicator with its right-click menu and the Copy MCP configuration submenu open" -->
 
-### Preferences
+### MCP preferences
 
-Open **Tools > Preferences > AI Features > MCP Server**.
+Open **Tools > Preferences > AI Features > MCP Server**. Here you can set the preferences for the MCP server to for example start it automatically at start up. 
 
 ![MCP Server preferences, showing Enable MCP Server, Start MCP server automatically, Require access token and the port](~/content/assets/images/pref-mcp-server.png)
 
@@ -146,21 +144,21 @@ url = "http://127.0.0.1:42100/"
 }
 ```
 
-With **Require access token** on, each of these carries the token too, in the shape its own format wants: a "--header" flag for Claude Code, a `headers` member for VS Code, Copilot CLI and Cursor, and an `http_headers` key for Codex. Copy the configuration from the dialog rather than writing it by hand and you get the right one.
+With **Require access token** on, each of these carries the token too, in the shape its own format wants.Copy the configuration from the dialog rather than writing it by hand and you get the right one.
 
 Any other MCP client works too. Point it at `http://127.0.0.1:42100/` over streamable HTTP, and add the same header if you've required the token.
 
 ### Check that it worked
 
-Ask your agent *what model am I connected to in Tabular Editor?* It calls `get_workspace_info` and answers with the model name, how the model is loaded, whether it has unsaved changes and its compatibility level. With no model open it says so, which is also a correct answer.
+Ask your agent *what model am I connected to in Tabular Editor?* It answers with the model name, how the model is loaded, whether it has unsaved changes and its compatibility level. With no model open it says so, which is also a correct answer.
 
 Nothing prompts you in Tabular Editor. That's the point: the permissions were settled before the agent connected.
 
 ## Deciding what the agent may do
 
-An agent connecting over MCP is unattended. There's nobody at the keyboard to answer a consent prompt, so Tabular Editor doesn't ask: you decide the whole envelope up front, in the server dialog, and the agent is handed exactly the tools your grants cover. Anything else is never offered to it.
+An agent connecting over MCP works unattended and you decide up front what the agent can do through Tabular Editor. The same preferences decide what the MCP server and the AI Assistant can do. Go to **Tools > Preferences > AI Features > Permissions** to grant the MCP server access to tools. The agent is handed exactly the tools your preference grants cover. Anything else is never offered to it.
 
-Five resources, each with one access level:
+There are five resources, each with one access level:
 
 | Resource | Default | What the agent gets |
 | -- | -- | -- |
@@ -183,80 +181,37 @@ The two you raise deliberately are worth a moment's thought:
 
 ![The AI Features Permissions page, with one dropdown per resource at its default level](~/content/assets/images/pref-ai-permissions.png)
 
-The same five grants govern the [AI Assistant](xref:ai-assistant) chat, stored once and editable from either the server dialog or **Tools > Preferences > AI Features > Permissions**. Use the built-in chat, your own agent or both. See @ai-assistant for the permission model in full, including how the chat asks for what a grant doesn't cover.
-
-One consequence catches people who used the chat before 3.27.0: because metadata, documents and macros now start at Read or Write, the chat no longer asks for them. Set a resource to **Deny** if you want it to ask again.
-
 > [!IMPORTANT]
 > Permissions are read when the server starts, and an agent is handed its tool list when it connects. After changing a grant, stop and start the server, then reconnect the agent. Until you do, the agent keeps working under the permissions that were in force when it connected.
 
 ## What the agent can do
 
-The agent is handed a set of named tools when it connects. You never call these yourself, but knowing what's there tells you what to ask for, and the permission column tells you why a tool is missing.
+When an agent connects, Tabular Editor offers it a set of capabilities shaped by your grants. You never invoke any of this yourself. What matters is knowing what you can ask for, and which grant a request depends on, because a capability your grants don't cover is never offered in the first place rather than being refused halfway through a task.
 
-**Finding its way around.** Available to every agent, whatever your grants, because none of them touch your model:
+**Finding its way around.** Every agent can identify the instance it is talking to and the model that instance has open, search the Tabular Editor documentation, blog, GitHub issues and discussions, and look up the scripting API: the properties, methods and signatures available on the model objects. None of that touches your model, so none of it needs a grant.
 
-| Tool | What it does |
-| -- | -- |
-| `get_workspace_info` | Identifies this instance and the model it has open, including unsaved-changes state |
-| `search_knowledge_base` | Searches the Tabular Editor documentation, blog, GitHub issues and discussions |
-| `get_full_content` | Retrieves a knowledge base article in full |
-| `lookup_api_documentation` | Looks up the scripting API: properties, methods and signatures of `Model`, `Table`, `Measure`, `ScriptHost` and the rest |
+That last part matters more than it sounds. It's why an agent writing a Tabular Editor script doesn't have to invent properties, functions or APIs from memory. It looks the signature up, in the version you're running.
 
-Those last three are why an agent writing a Tabular Editor script doesn't have to invent the API from memory. It looks the signature up, in the version you're running.
+**Reading the model.** With **Model metadata > Read**, which is the default, an agent can take an overview of your tables, their column and measure counts and every relationship; pull full detail for objects it names, including expressions, descriptions, format strings and data types; and search the model by name, description, DAX or M expression, format string or annotation. It can also ask for the model in full, though that is expensive and it is told so.
 
-**Reading the model.** Needs **Model metadata > Read**, which is the default:
+It can also see what you have selected in the TOM Explorer. That one is worth knowing about: select three measures, say *format these consistently*, and the agent knows what "these" means.
 
-| Tool | What it does |
-| -- | -- |
-| `get_model_overview` | Table names with column and measure counts, plus every relationship |
-| `get_object_details` | Full metadata for named objects: expressions, descriptions, format strings, data types. With nothing named, it inspects what you have selected |
-| `search_model` | Searches objects by name, description, DAX or M expression, format string or annotation |
-| `get_selected_objects` | What you have selected in the TOM Explorer right now |
-| `get_full_model_metadata` | The whole model as TOM JSON. Expensive, and the tool says so to the agent |
+**Measuring the model.** **Best Practice Analyzer > Read** lets an agent list the effective rules, your own included, and run the analysis to get real violations back. **Best Practice Analyzer > Write** lets it add or change rules in your local collection. VertiPaq Analyzer statistics, meaning table sizes, column cardinalities and memory use, fall under **Model metadata > Read**. Running a DAX query and getting rows back needs **Model data > Read** on top of metadata access, and returns a bounded number of rows rather than an unbounded result set.
 
-`get_selected_objects` is worth knowing about. Select three measures in the TOM Explorer and say *format these consistently*, and the agent knows what "these" means.
-
-**Measuring the model.** Each row names the grant it needs:
-
-| Tool | Needs | What it does |
-| -- | -- | -- |
-| `get_bpa_rules` | Best Practice Analyzer > Read | Lists the effective rules, including your own |
-| `get_bpa_rule_results` | Best Practice Analyzer > Read and Model metadata > Read | Runs the analysis and returns the violations |
-| `add_bpa_rule`, `update_bpa_rule` | Best Practice Analyzer > Write | Adds or edits a rule in your local rule collection |
-| `get_vpax_stats` | Model metadata > Read | VertiPaq Analyzer statistics: table sizes, column cardinalities, memory use |
-| `execute_dax_query` | Model data > Read and Model metadata > Read | Runs a DAX query and returns the rows, 100 by default and up to 500 |
-
-*Ask the Best Practice Analyzer and fix what it finds* is the single most useful thing to delegate here, because the agent gets a concrete list of real problems in your model instead of generic advice.
+*Run the Best Practice Analyzer and fix what it finds* is the single most useful thing to delegate here, because the agent gets a concrete list of real problems in your model instead of generic advice about semantic models.
 
 > [!NOTE]
-> `execute_dax_query` needs a live connection, and `get_vpax_stats` needs either a connection or statistics you've already collected. Both are decided when the agent connects, so if you connect the model afterwards, reconnect the agent to pick them up.
+> Querying data needs a live connection, and VertiPaq statistics need either a connection or statistics you have already collected. Both are settled when the agent connects, so if you connect the model afterwards, reconnect the agent to pick them up.
 
-**Your documents and macros.** Listing your open tabs needs only metadata access. Reading and writing their contents needs the **Documents** grant, which defaults to Write, and the macro library needs **Macros**:
+**Your documents and macros.** Listing your open script and query tabs needs only metadata access. Reading what is in them needs **Documents > Read**. Editing a tab, or putting a new C# script or DAX query in front of you to look at, needs **Documents > Write**. Anything an agent hands you this way is compiled, or validated against the open model, before you see it, so it has already had the chance to correct its own mistakes; a DAX query needs Tabular Editor connected to Analysis Services or Power BI for that validation to happen. Your macro library is a separate resource, read under **Macros > Read**.
 
-| Tool | Needs | What it does |
-| -- | -- | -- |
-| `get_open_documents` | Documents > Read for contents, Model metadata > Read to list | Lists your open script and query tabs |
-| `get_document_content` | Documents > Read | Reads one tab |
-| `update_document_content` | Documents > Write | Edits a tab |
-| `write_csharp_script` | Documents > Write | Puts a C# script into a document for you to review and run. Compiled and safety-checked first, so the agent can fix its own errors before you look |
-| `write_dax_query` | Documents > Write | The same for a DAX query, validated against the open model. Needs Tabular Editor connected to Analysis Services or Power BI |
-| `get_macros` | Macros > Read | Reads your macro library, names, descriptions and code |
-
-**Changing the model.** Needs **Model metadata > Write**:
-
-| Tool | What it does |
-| -- | -- |
-| `execute_csharp_script` | Compiles, safety-checks and runs a C# script against the open model, atomically, returning a structured diff |
-
-This one tool is the whole write surface, and that's deliberate. Anything the [C# scripting API](xref:csharp-scripts) can do to a model, an agent can ask for through it: measures, columns, calculation groups, perspectives, translations, relationships, refresh policies, bulk renames, formatting passes. There's no list of supported operations to run out of.
-
-> [!NOTE]
-> Tool results are capped at roughly 24,000 characters rather than paged. A request that returns more comes back truncated, with a message telling the agent how to narrow it. Agents handle this by asking for less, so it shows up as an extra round trip rather than as an error.
+**Changing the model.** That takes **Model metadata > Write**, and it works differently enough from everything above to be worth its own section. See [How an agent changes your model](#how-an-agent-changes-your-model) below.
 
 ## How an agent changes your model
 
-With **Model metadata > Write**, an agent changes your model by writing a [C# script](xref:csharp-scripts) and asking Tabular Editor to run it. Tabular Editor compiles it, analyzes it for safety and executes it against the open model. That indirection is what makes agent edits reviewable:
+With **Model metadata > Write**, an agent can change your model directly, and it does this by creating a [C# script](xref:csharp-scripts) in the background that Tabular Editor compiles, checks for safety and runs against the open model.
+
+There is no second route, and that is deliberate. Anything the C# scripting API can do to a model can be asked for this way, so there's no list of supported operations to run out of: measures, columns, calculation groups, perspectives, translations, relationships, refresh policies, bulk renames, formatting passes. And because every change arrives the same way, there is one place where safety and review are enforced rather than one per operation. That indirection is what makes agent edits reviewable:
 
 - **One undo step.** Everything a script did collapses into a single entry on the undo stack, whatever it touched. One **Ctrl+Z** puts the model back. See @undo-redo.
 - **All or nothing.** A script that throws part-way through is rolled back completely. You never inherit half an edit.
@@ -272,12 +227,14 @@ With **Model metadata > Write**, an agent changes your model by writing a [C# sc
 
 That's the review loop: ask, watch it land, filter to what changed, revert what you disagree with, save. You're reviewing a diff in the tool you already know, not reading a summary and hoping.
 
+The [AI Assistant](xref:ai-assistant) chat can run scripts the same way, and gets the same single undo step and the same rollback. Two things stay particular to an agent. It is never prompted, so there's no preview dialog and no **Cancel** to fall back on; the marked changes in the tree are your review step, after the fact rather than before it. And its undo entry is named *C# script (MCP)*, so you can tell an agent's work from the chat's in the undo dropdown.
+
 ### What an agent is never allowed to do
 
 Some things are off the table regardless of your grants:
 
 - **Raw TMSL and XMLA execution.** `ExecuteCommand` always fails for an agent-run script. It bypasses the object model, so it can't be undone or rolled back, which makes it incompatible with every guarantee above.
-- **Anything outside the model.** A script that touches the file system, makes a web request or references an external assembly is never executed for an agent. It opens as an **Agent script (review)** document in Tabular Editor instead, and the agent is told you have to review and run it yourself. This needs the **Documents > Write** grant; without it the script is refused outright.
+- **Anything outside the model.** A script that touches the file system, makes a web request or references an external assembly is never executed for an agent. It opens as an **Agent script (review)** document in Tabular Editor instead, and the agent is told you have to review and run it yourself. This needs the **Documents > Write** grant; without it the script is refused outright. The check is a semantic analysis of the compiled script rather than a scan of its text, so indirect routes to the same places, through reflection, expression trees, `Activator`, `AppDomain`, XML readers or deserialization, are refused too.
 - **Querying data it wasn't granted.** The DAX helpers inside a script are gated on **Model data > Read** exactly like the query tool, so an agent can't reach data by wrapping a query in a script.
 
 ### Asking for a draft instead of a change
@@ -294,14 +251,16 @@ The loop is: open the model, ask for something, watch it land, review it, save i
 
 > Run the Best Practice Analyzer and tell me what's worth fixing, worst first.
 
-The agent calls `get_bpa_rule_results`, gets real violations with real object names, and reasons about your model instead of about semantic models in general. Follow up with *fix the format string violations*, and with **Model metadata > Write** granted it writes one script and runs it. The TOM Explorer fills with orange badges. Click **Show changes** in the [Properties view](xref:unsaved-changes) to read the before and after per property, right-click **Revert** on the two you disagree with and save.
+The agent runs the analysis, gets real violations with real object names, and reasons about your model instead of about semantic models in general. Follow up with *fix the format string violations*, and with **Model metadata > Write** granted it writes one script and runs it. The TOM Explorer fills with orange badges. Click **Show changes** in the [Properties view](xref:unsaved-changes) to read the before and after per property, right-click **Revert** on the two you disagree with and save.
 
 **Start from a requirement.** Point the agent at a specification, a ticket or a spreadsheet of measure definitions:
 
 > Add the measures in requirements.md to the Sales table. Follow the naming and format strings already used there.
 
-It reads the existing measures with `get_object_details` first, so the new ones match what's already in the model rather than a convention it invented.
-
+It reads the existing measures first, so the new ones match what's already in the model rather than a convention it invented.
+
+
+
 The requirements file comes from your agent's own workspace, not through Tabular Editor. That split is the whole arrangement: your agent brings the context it already has about your project, and Tabular Editor brings the model it could never see.
 
 **Ask it to check its own work.** Grant **Model data > Read** and the agent can verify instead of assert:
@@ -316,7 +275,7 @@ It writes the DAX, runs it and compares. This is the grant that turns *I've adde
 
 The script arrives as a document in Tabular Editor, compiled and safety-checked, and you run it yourself when you've read it.
 
-Two habits make all of this go better. Say which instance you mean when more than one is open, because the agent asks `get_workspace_info` but can't read your mind. And save, or at least review, between tasks: unsaved changes accumulate, and a smaller diff is a faster review.
+Two habits make all of this go better. Say which instance you mean when more than one is open: the agent can ask an instance which model it has, but it can't read your mind about which one you meant. And save, or at least review, between tasks: unsaved changes accumulate, and a smaller diff is a faster review.
 
 ## Running several instances
 
@@ -353,7 +312,7 @@ The MCP server is on by default and any user can turn it off. Administrators hav
 - `DisableMcpServer` removes the feature entirely, leaving the AI Assistant chat alone.
 - `DisableAi` turns off all AI functionality, the MCP server included, and keeps the AI component off the machine when the installer runs.
 - `RequireMcpAccessToken` forces token authentication.
-- `DisableCSharpScripts` removes both `execute_csharp_script` and `write_csharp_script`, so an agent can neither run a script nor draft one into a document. `write_dax_query` and the read tools stay.
+- `DisableCSharpScripts` stops an agent both running a C# script and drafting one into a document for you. Writing a DAX query, and everything that only reads, is unaffected.
 - A set of Enterprise-tier policies caps what the AI Assistant and the MCP server may reach per resource. The `Max...` ceilings apply to both surfaces; the `McpMax...` ceilings apply to the MCP server alone and can only lower the shared one, so an unattended agent is never allowed more than the interactive chat. The same tier carries the audit log's location and retention, and the AI provider lock.
 
 > [!WARNING]
@@ -381,5 +340,6 @@ See @policies for the full list, the registry layout and the administrative temp
 - @ai-assistant for the permission model in full, and for the chat if you'd rather not bring your own agent.
 - @unsaved-changes for reviewing and reverting what an agent did.
 - @csharp-scripts for what a script can do, which is the ceiling on what an agent can do to your model.
-- @policies for governing the server across an organization.
+- @policies for governing the server across an organization.
+
 - @te-cli-skill if your agent works on model files in a repository or a pipeline rather than on a model you have open.

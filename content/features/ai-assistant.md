@@ -214,17 +214,34 @@ The AI Assistant has access to your model context and can perform the following 
 
 - **Model exploration**: Query model metadata including tables, columns, measures, relationships and their properties
 - **DAX query writing**: Generate DAX queries and execute them against your connected model, returning result sets directly in the chat
-- **C# script generation**: Create C# scripts for model modifications that open in a new editor window. When you click **Execute** in the chat, the [preview changes](xref:csharp-scripts#run-c-scripts-with-preview) dialog is shown by default, letting you review all model metadata changes before accepting them. You can also open the script in the editor and run it from the script toolbar, with or without the preview. Model metadata changes can be undone with **Ctrl+Z**
+- **C# script generation**: Create C# scripts for model modifications. The assistant either opens the script in a new editor window for you to run, or carries the change out itself, depending on your settings. See [Letting the assistant change your model](#letting-the-assistant-change-your-model). Model metadata changes can be undone with **Ctrl+Z**
 - **Best Practice Analyzer**: Run BPA analysis, view rule violations and create or modify BPA rules
 - **VertiPaq Analyzer**: Query memory usage statistics and column cardinality
 - **Document access**: Read and modify open documents such as DAX scripts and DAX queries
 - **Knowledge base search**: Search the embedded Tabular Editor documentation for answers
 - **UI navigation**: Generate `te3://` action links that open specific Tabular Editor dialogs and features
 
-An agent connected over the [MCP server](xref:mcp-server) is offered the same capabilities, with two exceptions: UI navigation is chat-only, and where the chat opens a C# script for you to execute, an agent with the Model metadata Write grant runs it directly as a single undoable step.
+An agent connected over the [MCP server](xref:mcp-server) is offered the same capabilities, with one exception: UI navigation is chat-only. Both surfaces can change your model by running a C# script, and both do it as a single undoable step. What differs is how the change is put to you, and how permission is settled. See [What the MCP server shares, and what it does not](#what-the-mcp-server-shares-and-what-it-does-not).
 
 > [!NOTE]
 > Tools that require an active database connection, including DAX query execution and VertiPaq Analyzer statistics, are automatically hidden when working with a model file (for example a `.bim` or `.tmdl` folder) that is not connected to Analysis Services or Power BI. The assistant still writes DAX queries for you, but the **Execute** button on DAX query artifacts is disabled until a connection is established. VertiPaq Analyzer statistics remain available if they were previously loaded from a `.vpax` file.
+
+## Letting the assistant change your model
+
+By default the assistant writes a C# script and opens it in an editor window for you to read and run. From Tabular Editor 3.27.0 it can carry the change out itself instead.
+
+Tick **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant**. The setting is off until you turn it on, and the checkbox is unavailable until **Model metadata** is set to **Write** under **Tools > Preferences > AI Features > Permissions**. Raise or lower that grant and the checkbox follows it immediately, without closing the dialog. Your choice is remembered while the checkbox is unavailable, so lowering the grant and raising it again does not lose it.
+
+### What happens when the assistant runs a script
+
+- **You see the change first.** With **Preview changes** on, which is the default, the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before anything stands. Choosing **Cancel** puts the model back and tells the assistant you rejected the change, so it asks what to do differently rather than trying the same thing again. With the preference off, the change is applied without a dialog.
+- **One undo step.** Everything the script did collapses into a single entry named *C# script (AI Assistant)*. One **Ctrl+Z** puts the model back.
+- **All or nothing.** A script that fails part way through leaves the model untouched, and the assistant reports the error rather than leaving you with half an edit.
+- **Only model work runs this way.** A script that reaches for files, the network or an external assembly is never executed for you. It comes back as a script artifact carrying an **Unsafe** badge with **Execute** disabled, and the assistant tells you what it used.
+
+Asking for a script rather than for the change still gives you a script. *Write me a script that renames every measure to sentence case* opens a script document for you to run yourself, whatever this setting says.
+
+Administrators can prevent this entirely with the `DisableCSharpScripts` [policy](xref:policies), which also stops the assistant writing scripts for you to run.
 
 ## Conversations
 
@@ -343,7 +360,7 @@ A **Write** grant covers Read, so there is no need to grant both. **Model data**
 
 Three grants are worth a closer look:
 
-- **Model metadata > Write** additionally lets the assistant execute C# scripts against your model. Only scripts that are statically determined to be safe are executed this way; they run as a single undoable step, and **Ctrl+Z** reverses them. A script that reaches outside the model, to the file system or the network, is never executed for you.
+- **Model metadata > Write** lets the assistant change your model. On its own, that means writing a C# script and handing it to you to run. It is also the grant that makes [direct execution](#letting-the-assistant-change-your-model) possible, but the assistant only runs scripts itself once you have turned that on separately. Either way, only scripts that are statically determined to be safe ever run, and a script that reaches outside the model, to the file system or the network, is never executed for you.
 - **Best Practice Analyzer > Read** lets the assistant run the analysis, but running it also needs **Model metadata > Read**, since the analysis reads the model.
 - **Model data > Read** is not sufficient on its own to run a DAX query: that needs **Model metadata > Read** as well, because a query can read metadata through `INFO` functions, DMVs and the column names in its own result.
 
@@ -393,6 +410,12 @@ Set the resource back to **Deny** on the Permissions page. The chat asks again t
 
 Lowering a global grant does not clear a per-model grant. To withdraw one of those, delete the model's `.tmuo` file, or the `Permissions` entry within it. See details in @user-options.
 
+### Audit record
+
+Tabular Editor keeps a local record of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded.
+
+The files are written one per day and kept for 30 days. **Open audit folder** under **Tools > Preferences > AI Features** takes you to them. Administrators can move the folder elsewhere and change how long it is kept. See @policies.
+
 ### Stopping a turn while permission is pending
 
 A **Permission Required** card waits for an answer before the assistant can carry on. You do not have to answer it: pressing **Stop** ends the turn, removes the card and treats the request as denied. The panel returns to its normal state and you can carry on in the same conversation with a new message.
@@ -416,17 +439,14 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 | Auto compact | true | Automatically summarize old messages when approaching the context limit |
 | Auto compact threshold % | 80 | Percentage of the model's own context window at which auto-compaction is triggered. Values outside 50-100 have no additional effect |
 
-### Knowledge Base
-
-| Preference | Default | Description |
-| -- | -- | -- |
-| Check for knowledge base updates on startup | true | Automatically check for knowledge base updates when Tabular Editor starts |
-
 ### C# Script
 
 | Preference | Default | Description |
 | -- | -- | -- |
+| Allow AI assistant to run C# scripts directly | false | Let the assistant carry out model changes itself instead of opening a script for you to run. Unavailable until **Model metadata** is set to **Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). See [Letting the assistant change your model](#letting-the-assistant-change-your-model) |
 | Preview changes | true | Show the preview changes dialog when executing AI-generated C# scripts from the chat |
+
+Two further settings sit on the **AI Features** page itself, above **AI Assistant**, because they apply to the MCP server as well: *Check for knowledge base updates on startup*, and the **Open audit folder** button. See @preferences.
 
 ![AI Assistant Preferences](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
