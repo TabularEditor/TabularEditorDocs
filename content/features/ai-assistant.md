@@ -59,7 +59,7 @@ Leave the model field blank to use the provider's default model. For OpenAI and 
 | Azure OpenAI | None. A deployment name is required | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | None. A model name is required | API key and custom endpoint URL |
 
-![The AI Provider preferences page with the Choose provider dropdown open on OpenAI, Anthropic, Azure OpenAI and Custom (OpenAI-compatible)](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+![The AI Provider preferences page with the Choose provider dropdown open on None (AI disabled), OpenAI, Anthropic, Azure OpenAI and Custom (OpenAI-compatible), and a URL and API Key field beneath it](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
 ### Choosing a model
 
@@ -455,7 +455,7 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 
 Two further settings sit on the **AI Features** page itself, above **AI Assistant**, because they apply to the MCP server as well: *Check for knowledge base updates on startup*, and the **Open audit folder** button. See @preferences.
 
-![The AI Assistant preferences page, with the three chat display indicators, Auto compact and its threshold, the knowledge base update check and Preview changes for C# scripts](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+![The AI Assistant preferences page, with the three chat display indicators, Auto compact and its threshold, and the two C# script settings: Allow AI assistant to run C# scripts directly, cleared, and Preview changes, ticked](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
 ## Token Usage
 
