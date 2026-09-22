@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2026-08-11
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -92,7 +92,24 @@ If you attempt to open a model that uses one or more of the modeling restriction
 
 ![This edition of Tabular Editor 3 does not support Enterprise-tier semantic models](~/content/assets/images/editions-01.png)
 
-There are no other feature differences between the Tabular Editor 3 editions, than the ones listed above.
+Apart from the modeling restrictions above, the editions differ only in the administrator controls described below.
+
+## Administrator controls
+
+Most of the [policies](xref:policies) an IT department can deploy - turning off updates, error reports, telemetry, C# scripts, macros, the web DAX formatter, the DAX Optimizer integration, the DAX Package Manager or all AI functionality - apply in every edition of Tabular Editor 3.
+
+The controls that govern *how* a feature may be used, rather than whether it exists at all, require Enterprise Edition:
+
+| Control | Business | Enterprise |
+|---|---|---|
+| Capping what the AI Assistant and the MCP server may reach, per resource |<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| Locking the AI provider, endpoint, model and organization, or restricting them to an allowlist |<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| Publishing Custom Instructions for the organization, and ruling out the user's own |<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| Withholding individual MCP tools, and fixing the MCP server port |<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| Allowing only C# scripts and macros that stay within the model (`BlockUnsafeScripts`) |<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| A local audit record of AI Assistant and MCP server activity |<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+
+These policies are never quietly ignored on an edition that is not licensed for them. If any of their values is set on a machine running Desktop or Business Edition, the AI Assistant and the MCP server refuse to start and say which values require Enterprise Edition, and a `BlockUnsafeScripts` value stops every script and macro from running until an Enterprise license is activated. Set them against the licenses you actually have. See @policies.
 
 
 > [!IMPORTANT]

@@ -2,7 +2,7 @@
 uid: auto-reload
 title: Auto-reload from disk
 author: Morten Lønskov
-updated: 2026-09-11
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -92,6 +92,6 @@ Auto-reload is enabled by default. To make the disk-to-memory direction manual a
 
 Turn it off when the model folder is also written to by something that runs continuously, such as a file sync client or a CI checkout that refreshes in the background. The prompt is modal, so a folder that changes often interrupts you rather than helping you.
 
-With the setting cleared, Tabular Editor watches nothing, and the two copies come back together only when you use **File > Revert** or **File > Save**.
+With the setting cleared, Tabular Editor watches nothing, and the two copies come back together only when you use **File > Reload from disk** or **File > Save**.
 
 See [Preferences](xref:preferences#miscellaneous) for the rest of the settings on that page.

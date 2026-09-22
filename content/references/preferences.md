@@ -474,7 +474,7 @@ The AI Assistant searches a local copy of the Tabular Editor documentation. When
 
 ##### Audit log
 
-**Open audit folder** opens this computer's record of what the AI Assistant and the MCP server did: permission decisions, which tools were called and how each one ended, and the full text of any script that was run or handed over for review. Prompts, replies and data values are never recorded. Files are written one per day and kept for 30 days by default. Administrators can move the folder and change the retention period. See @policies and @ai-assistant.
+**Open audit folder** opens this computer's record of what the AI Assistant and the MCP server did: permission decisions, which tools were called and how each one ended, and the full text of any script that was run or handed over for review. Prompts, replies and data values are never recorded. Files are written one per day and kept for 30 days by default. Administrators can move the folder and change the retention period. The record is an Enterprise Edition feature: on Desktop and Business nothing is recorded and the button is not shown. See @policies and @ai-assistant.
 
 ## AI Features > AI Assistant
 

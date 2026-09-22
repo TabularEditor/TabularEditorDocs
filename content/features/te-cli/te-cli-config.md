@@ -246,8 +246,11 @@ On Windows, `te` honors the same administrator policies as Tabular Editor 3. Pol
 | `DisableMacros` | Refuses every `te macro` command. |
 | `DisableBpaDownload` | Refuses Best Practice Analyzer rules given as a URL. Rule files on disk and the built-in rules are unaffected. |
 | `DisableTelemetry` | Turns anonymous usage statistics off, whatever `disableTelemetry` in config says. |
+| `BlockUnsafeScripts` | Allows `te script`, `te macro run` and `te bpa run --fix` only where the code stays within the semantic model. Anything that reads or writes a file, reaches the network, starts another program or references an outside assembly is refused before it runs, with `blockedByPolicy` in JSON output. |
 
 Policies that govern features the CLI does not have - update checks, error reports, DAX Optimizer, the DAX Package Manager, the AI assistant, and the MCP server - have no effect on it. See @policies for the full list of policies and how to deploy them.
+
+`BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition in the desktop application. The CLI has no editions, so it simply applies the policy wherever it finds it. See [C# Scripts](xref:csharp-scripts#administrator-policies) for what counts as staying within the model.
 
 ## Environment variables
 

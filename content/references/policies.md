@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Daniel Otykier
-updated: 2026-09-17
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -92,13 +92,30 @@ To enforce one of these, add a `REG_DWORD` value with the name below and a non-z
 
 ### In the TE CLI
 
-The Tabular Editor CLI honors the policies marked **CLI** above, on Windows, reading the same keys in the same order as Tabular Editor 3.
+The Tabular Editor CLI honors the policies marked **CLI** above, on Windows, reading the same keys in the same order as Tabular Editor 3. It also honors `BlockUnsafeScripts` from the [Enterprise policies](#scripts-and-macros) below, for `te script`, `te macro run` and `te bpa run --fix`.
 
 A refused operation is not silent. `te` names the policy that refused it and exits with a non-zero code, so a pipeline step fails rather than appearing to succeed with nothing done.
 
+The CLI has no editions, so a policy that requires Tabular Editor 3 Enterprise Edition in the desktop application is simply applied by the CLI, whatever license the machine holds.
+
 ## Enterprise policies
 
-These policies configure the AI Assistant and the MCP server, and require Tabular Editor 3 Enterprise Edition. They are honored by Tabular Editor 3 only, and belong under `Tabular Editor ApS\TE3`.
+These policies decide what a C# script may do, and configure the AI Assistant and the MCP server. They all require Tabular Editor 3 Enterprise Edition, and belong under `Tabular Editor ApS\TE3`. Only `BlockUnsafeScripts` reaches beyond Tabular Editor 3: the Tabular Editor CLI honors it too, from `Tabular Editor ApS\TECLI` or the shared key.
+
+### Scripts and macros
+
+|Value|Kind|What it does|
+|--|--|--|
+| BlockUnsafeScripts | On/off | C# scripts and macros are allowed only where they stay within the semantic model. A script that reads or writes a file, reaches the network, starts another program, pulls in outside code or sends a command straight to the server is refused before any of it runs. |
+
+The restriction holds wherever a script runs: **Run script** and **Run with preview** in a script document, **Apply fix** in the Best Practice Analyzer, the AI Assistant, the MCP server, and `te script`, `te macro run` and `te bpa run --fix` on the command line. A refused script is not a failed script. Nothing reaches the model, the error list stays empty, and a **Script not run** dialog names the policy and what the script used.
+
+A macro that reaches outside the model is left out of every menu, so it cannot be run by accident. It is still listed under **View > Macros** with its **Blocked** column filled in, and it can still be opened and edited, so it can be brought back inside the line rather than rewritten from scratch. Saving such a macro succeeds and says that it is saved but will not run.
+
+What counts as staying within the model is decided by analyzing the compiled script rather than by searching its text, so indirect routes to the same places - reflection, expression trees, `Activator`, `AppDomain`, XML readers or deserialization - are refused as well. Among the built-in [helper methods](xref:script-helper-methods), the three that write outside the model, `SaveFile`, `ExecuteCommand` and `Bpa.ExportCsv`, count as unsafe; the ones that only read, including `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader` and `ExportProperties`, do not. See [Administrator policies](xref:csharp-scripts#administrator-policies) for the same rule from the script author's side.
+
+> [!NOTE]
+> This value is not in the administrative templates yet, so set it in the registry by hand. It is still reported under **Managed by your organization** like every other policy.
 
 ### Permission limits
 
@@ -155,11 +172,13 @@ A configuration the policy does not permit is refused, and the AI Assistant says
 
 ### Audit log
 
-Tabular Editor 3 keeps a local record of AI Assistant and MCP server activity - tool calls, permission decisions, configuration and server sessions. The text of a prompt or a response is never recorded. The log is written in every edition; these two policies, which change where it goes and how long it is kept, require Enterprise Edition.
+Tabular Editor 3 keeps a local record of AI Assistant and MCP server activity - tool calls, permission decisions, configuration and server sessions. The text of a prompt or a response is never recorded.
+
+The record is an Enterprise Edition feature. On Enterprise, Consultancy and Trial licenses it is written, and **Open audit folder** appears on **Tools > Preferences > AI Features** and in the **Tools > MCP Server...** dialog. On Desktop and Business, and before a license is activated, nothing is written, no folder is created and neither button is shown.
 
 |Value|Kind|What it does|
 |--|--|--|
-| AiAuditLogPath | Path | Redirects the audit log, so it can be collected centrally. A UNC path to a network share is supported. When the policy is not set, the log is written to the user's local application data folder. |
+| AiAuditLogPath | Path | Redirects the audit log, so it can be collected centrally. A UNC path to a network share is supported. When the policy is not set, the log is written to `%LocalAppData%\TabularEditor3\AI\audit`, one `ai-audit-<date>.jsonl` file per day, with the recorded scripts under `audit\scripts\<date>`. |
 | AiAuditLogRetentionDays | Number, 0 to 3650 | How many days of audit log to keep; older files are deleted. `0` keeps everything. The default is 30 days. |
 
 ## What happens without Enterprise Edition
@@ -167,6 +186,8 @@ Tabular Editor 3 keeps a local record of AI Assistant and MCP server activity - 
 Enterprise policies are never quietly ignored. If any of the values in the Enterprise tables above is set - even one Tabular Editor cannot interpret - and the installed copy of Tabular Editor 3 is not licensed for Enterprise Edition, the AI Assistant and the MCP server refuse to start, and the AI Assistant reports that your organization has configured AI policies that require Tabular Editor 3 Enterprise Edition, naming the values in question. Everything else in Tabular Editor 3 keeps working, and the general policies above keep being enforced.
 
 Enterprise policies also fail closed when a value cannot be interpreted. A permission limit that is mistyped denies the resource rather than being read as "no limit", and a provider name Tabular Editor does not recognize makes the AI Assistant unavailable rather than falling back to the user's own choice.
+
+`BlockUnsafeScripts` fails closed in the same way, and it is worth knowing exactly how, because it reaches further than the AI surfaces. On a copy that is not licensed for Enterprise Edition, the value being present stops **every** script and macro from running, safe or not, with a message naming the edition required; the macros leave the menus until an Enterprise license is activated, which they return to without a restart. A value the reader cannot interpret enforces the restriction rather than lifting it. An explicit `0` does not enforce it, but still counts as configured, so it too puts the AI surfaces behind the Enterprise gate.
 
 To turn off all AI functionality without an Enterprise license, use the general `DisableAi` policy.
 
@@ -206,6 +227,8 @@ Policies shared by Tabular Editor 3 and the CLI sit directly under **Tabular Edi
 
 Setting a policy to **Enabled** writes its registry value. Setting it to **Disabled**, or leaving it **Not configured**, means the policy is not enforced. The templates do not write to the legacy `Kapacity\Tabular Editor` key, so set that key by hand if a policy also has to reach Tabular Editor 2.
 
+The templates cover every policy on this page except `BlockUnsafeScripts`, which has to be set in the registry, or deployed as a registry preference through Group Policy Preferences.
+
 ## Disabling web communications
 
 If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, `DisableDaxOptimizer`, `DisableDaxPackageManager` and `DisableAi` policies.
@@ -216,6 +239,8 @@ If you want to ensure that Tabular Editor does not perform web requests, specify
 ## Disabling custom scripts
 
 If you want to ensure that Tabular Editor does not allow users to execute arbitrary code, specify the `DisableCSharpScripts` and `DisableMacros` policies.
+
+If scripting is something your organization wants to keep, but not at the cost of letting any script reach the file system, the network or another program, use `BlockUnsafeScripts` instead. Scripts and macros keep working against the model, and only the parts that leave it are refused. That policy requires Enterprise Edition; the two above apply in every edition.
 
 ## Disabling AI features
 

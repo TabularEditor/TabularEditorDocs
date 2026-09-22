@@ -243,6 +243,8 @@ Asking for a script rather than for the change still gives you a script. *Write 
 
 Administrators can prevent this entirely with the `DisableCSharpScripts` [policy](xref:policies), which also stops the assistant writing scripts for you to run.
 
+They can also allow scripting but keep it inside the model, with the `BlockUnsafeScripts` policy. Under it a script that reaches for files, the network or an external assembly is refused outright rather than handed to you for review, wherever it came from. See [Administrator policies](xref:csharp-scripts#administrator-policies).
+
 ## Conversations
 
 The AI Assistant supports multiple simultaneous conversations. Each conversation maintains its own message history and context.
@@ -341,6 +343,20 @@ Notes on how files are read:
 - `{{version}}` anywhere in the body is replaced with the Tabular Editor AI component's version
 - Only `.md` files directly in the folder are read; subfolders are not searched
 
+### Custom Instructions from your organization
+
+An administrator can publish a folder of Custom Instructions for everyone, with the `AiCustomInstructionsPath` [policy](xref:policies). It can be a read-only network share. Those instructions load for every user in addition to the built-in ones, and they are used exactly like any other: offered in `/` autocomplete, chosen by their description, invoked by `/id`.
+
+Where the same `id` exists in more than one place, the one that wins is:
+
+1. Your organization's folder
+2. Your own folder
+3. The built-in instructions
+
+So an organization instruction overrides both a built-in one and a user's own file of the same name. A separate policy, `DisableUserCustomInstructions`, makes Tabular Editor ignore the instructions in your own folder altogether and disables **Open Custom Instructions Folder**; the built-in and organization instructions keep loading.
+
+Both policies require Tabular Editor 3 Enterprise Edition.
+
 ## Permissions and consent
 
 What the AI Assistant may touch is governed by *five resources*, each carrying one access level. The same five grants govern the [MCP server](xref:mcp-server), so there is one place to look and one place to change your mind.
@@ -412,9 +428,13 @@ Lowering a global grant does not clear a per-model grant. To withdraw one of tho
 
 ### Audit record
 
-Tabular Editor keeps a local record of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded.
+On Tabular Editor 3 Enterprise Edition, a local record is kept of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded.
 
 The files are written one per day and kept for 30 days. **Open audit folder** under **Tools > Preferences > AI Features** takes you to them. Administrators can move the folder elsewhere and change how long it is kept. See @policies.
+
+Unless a policy moves it, the record lives in `%LocalAppData%\TabularEditor3\AI\audit`, one `ai-audit-<date>.jsonl` file per day, with the scripts themselves kept beside it under `audit\scripts\<date>`.
+
+On Desktop and Business Edition, and before a license is activated, nothing is recorded, no folder is created and the button is not shown.
 
 ### Stopping a turn while permission is pending
 

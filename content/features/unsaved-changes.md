@@ -2,7 +2,7 @@
 uid: unsaved-changes
 title: Unsaved change indicators
 author: Daniel Otykier
-updated: 2026-09-16
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -68,7 +68,7 @@ The **Show changes** button on the Properties view toolbar hides all unchanged r
 
 ## Reverting changes
 
-**File > Revert** discards every unsaved change at once, by reloading the model metadata from its source. The **Revert** options below undo individual changes instead, leaving all other unsaved changes in place.
+**File > Reload from disk** discards every unsaved change at once, by reloading the model metadata from its source. The command reads **Reload from server** for a model you opened from a server. The **Revert** options below undo individual changes instead, leaving all other unsaved changes in place.
 
 A revert behaves exactly like typing the old value back in, or recreating the deleted object by hand: DAX references are fixed up, dependent objects are recalculated, and the whole revert becomes a single step on the undo stack. If you change your mind, one **Edit > Undo** (**Ctrl+Z**) brings the reverted change back.
 
@@ -130,7 +130,7 @@ By default, deleted objects stay visible until the model is saved, since they ar
 An object or property loses its mark when it no longer differs from the last saved state of the model. This happens when:
 
 - The model is saved, whether to a file, a folder or a database. Every indicator clears at once.
-- The change is reverted, either through **Revert** in the TOM Explorer or Properties view, or through **File > Revert**.
+- The change is reverted, either through **Revert** in the TOM Explorer or Properties view, or through **File > Reload from disk** (**Reload from server**), which discards them all.
 - The change is undone with **Edit > Undo** back to the point of the last save. Redoing the change brings the mark back, and undoing *past* the last save marks the rolled-back objects instead.
 - A property is set back to its original value by hand. Tabular Editor 3 compares the current value with the saved one, so a net-zero edit does not count as a change.
 

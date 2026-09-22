@@ -42,6 +42,7 @@
 |[Save with supporting files for Fabric](xref:save-with-supporting-files)||<span class="emoji">&#10004;</span>||
 |Semantic Bridge for Databricks Metric Views (Enterprise Edition)||<span class="emoji">&#10004;</span>\*||
 |[Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)||<span class="emoji">&#10004;</span>||
+|[Administrator policies](xref:policies) for governing the product across an organization|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>\*|
 |[AI Assistant](xref:ai-assistant) for model design, DAX authoring and scripted edits||<span class="emoji">&#10004;</span>||
 |[MCP Server](xref:mcp-server), letting agent tools such as Claude Code, GitHub Copilot and VS Code agent mode work on the open model||<span class="emoji">&#10004;</span>||
 |Unsaved change indicators, with per-property and per-object [Revert](xref:unsaved-changes)||<span class="emoji">&#10004;</span>||

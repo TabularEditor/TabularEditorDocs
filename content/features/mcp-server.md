@@ -2,7 +2,7 @@
 uid: mcp-server
 title: MCP Server
 author: Morten Lønskov
-updated: 2026-09-17
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -156,7 +156,9 @@ Nothing prompts you in Tabular Editor. That's the point: the permissions were se
 
 ## Deciding what the agent may do
 
-An agent connecting over MCP works unattended and you decide up front what the agent can do through Tabular Editor. The same preferences decide what the MCP server and the AI Assistant can do. Go to **Tools > Preferences > AI Features > Permissions** to grant the MCP server access to tools. The agent is handed exactly the tools your preference grants cover. Anything else is never offered to it.
+An agent connecting over MCP works unattended and you decide up front what the agent can do through Tabular Editor. The same grants decide what the MCP server and the AI Assistant can do. They sit on the **Tools > MCP Server...** dialog itself, so you can set them on your way to starting the server, and on **Tools > Preferences > AI Features > Permissions**, which is the same setting in both places. The agent is handed exactly the tools your grants cover. Anything else is never offered to it.
+
+Hovering a permission, either its label or its dropdown, describes what that level gives the agent. Where an administrator has capped a resource by [policy](xref:policies), the dropdown is read-only and says so.
 
 There are five resources, each with one access level:
 
@@ -216,6 +218,7 @@ There is no second route, and that is deliberate. Anything the C# scripting API 
 - **One undo step.** Everything a script did collapses into a single entry on the undo stack, whatever it touched. One **Ctrl+Z** puts the model back. See @undo-redo.
 - **All or nothing.** A script that throws part-way through is rolled back completely. You never inherit half an edit.
 - **A structured summary.** The agent gets back a description of every object it added, changed or removed, plus anything the script printed. It can tell you what it did without guessing, and it can tell when it did something other than what it intended.
+- **Nothing waits for you.** A message a script would normally put on screen, through `Output`, `Info`, `Warning` or `Error`, is returned to the agent as part of the result instead of stopping the call on a dialog nobody is watching. While a long call runs, Tabular Editor shows a **Please wait** indicator and ignores clicks, so the window cannot be worked in against a model that is being changed underneath you, and clicks do not queue up and land the moment the agent finishes.
 - **Marked in the UI.** Changed objects and properties are tinted and badged in the [TOM Explorer and the Properties view](xref:unsaved-changes) until you save. Use **Show changes** to filter both views down to the agent's work, and right-click **Revert** to undo a single property, a single object or a whole branch without touching the rest.
 
 <!-- IMAGE NEEDED: mcp-server/agent-change-review.png
@@ -313,12 +316,13 @@ The MCP server is on by default and any user can turn it off. Administrators hav
 - `DisableAi` turns off all AI functionality, the MCP server included, and keeps the AI component off the machine when the installer runs.
 - `RequireMcpAccessToken` forces token authentication.
 - `DisableCSharpScripts` stops an agent both running a C# script and drafting one into a document for you. Writing a DAX query, and everything that only reads, is unaffected.
+- `BlockUnsafeScripts` keeps agent-run scripts but allows only the ones that stay within the model. It is the same line the agent already works to, applied to every script in Tabular Editor rather than to agent scripts alone, and it is enforced whatever the agent asks for. Enterprise tier.
 - A set of Enterprise-tier policies caps what the AI Assistant and the MCP server may reach per resource. The `Max...` ceilings apply to both surfaces; the `McpMax...` ceilings apply to the MCP server alone and can only lower the shared one, so an unattended agent is never allowed more than the interactive chat. The same tier carries the audit log's location and retention, and the AI provider lock.
 
 > [!WARNING]
 > The Enterprise-tier policies fail closed. If any of their value names is present on a machine whose license is not Enterprise, Consultancy or Trial, the AI Assistant and the MCP server refuse to start, and the menu item and the status bar indicator disappear. One value set across a mixed fleet turns the feature off for everyone on the wrong edition, so roll these out against the licenses you actually have. See @policies.
 
-Tabular Editor also keeps a local record of what the AI Assistant and the MCP server did: which permissions were requested and how they were answered, which tools ran and whether each succeeded, failed or was refused, and the full text of any C# script an agent ran or handed you for review. Prompts, replies and data values are never recorded. **Open audit folder**, in the server dialog and on **Tools > Preferences > AI Features**, takes you to the daily files, which are kept for 30 days. Administrators can redirect them and change how long they are kept.
+On Enterprise Edition, Tabular Editor also keeps a local record of what the AI Assistant and the MCP server did: which permissions were requested and how they were answered, which tools ran and whether each succeeded, failed or was refused, and the full text of any C# script an agent ran or handed you for review. Prompts, replies and data values are never recorded. **Open audit folder**, in the server dialog and on **Tools > Preferences > AI Features**, takes you to the daily files, which are kept for 30 days. Administrators can redirect them and change how long they are kept. On Desktop and Business nothing is recorded and neither button is shown.
 
 See @policies for the full list, the registry layout and the administrative templates, and @security-privacy for what leaves your machine.
 

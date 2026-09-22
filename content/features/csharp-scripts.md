@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-09-08
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -293,6 +293,9 @@ In addition, the following .NET Framework assemblies are loaded by default:
 
 When running C# scripts via the Tabular Editor CLI (especially in CI/CD pipelines), you can pass parameters to your scripts using environment variables. This is the recommended approach, as C# scripts executed by Tabular Editor CLI don't support traditional command-line arguments.
 
+> [!NOTE]
+> `Environment` is one of the types refused when an administrator has set the `BlockUnsafeScripts` policy. See [Administrator policies](#administrator-policies).
+
 ### Reading Environment Variables
 
 Use the `Environment.GetEnvironmentVariable()` method to read environment variables in your script:
@@ -368,6 +371,37 @@ foreach(var table in Model.Tables)
 
 Info($"Configured model for {environment} environment");
 ```
+
+## Administrator policies
+
+Scripting can be governed centrally, so what a script may do on your own machine is not always what it may do on a machine your IT department manages. Two [policies](xref:policies) decide that.
+
+`DisableCSharpScripts` turns scripting off outright: scripts cannot be created or executed, and the same goes for macros under `DisableMacros`.
+
+`BlockUnsafeScripts` is the middle ground, and the one worth understanding as a script author. Scripts and macros keep working, but only where they stay within the semantic model. A script that reads or writes a file, makes a web request, starts another program, references an outside assembly with `#r`, or sends a command straight to the server is refused before any of it runs.
+
+### What counts as staying within the model
+
+The decision is made by analyzing the compiled script, not by searching its text, so an indirect route to the same place is refused too: reflection through `Type.GetType` or `InvokeMember`, expression trees and delegate invocation, `Activator`, `AppDomain`, `Environment`, XML readers and writers that take a path or a URL, and type-name-based deserialization.
+
+Among the [helper methods](xref:script-helper-methods), the three that write outside the model count as unsafe:
+
+| Refused | Still available |
+| -- | -- |
+| `SaveFile`, `ExecuteCommand`, `Bpa.ExportCsv` | `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader`, `ExportProperties` |
+
+Everything in the TOM object model is fine, as are `System`, `System.Linq`, `System.Collections.Generic` and `Newtonsoft.Json`. In practice a script that builds and changes model objects is unaffected, and a script that exports something to disk is not.
+
+### What you see when a script is refused
+
+A **Script not run** dialog names the policy and what the script used, and the status bar reads *Script blocked by your organization's policy*. The error list stays empty, because this is not a compile error: the script is valid, it is just not allowed to run here. **Run with preview** behaves the same way and shows no preview dialog.
+
+A macro is analyzed when it is saved. Saving succeeds, and a dialog tells you the macro is saved but will not run. A blocked macro is left out of every menu, so it cannot be run by accident, and appears under **View > Macros** with its **Blocked** column filled in. Edit it back inside the line and its menu item returns, without restarting Tabular Editor.
+
+On the command line, `te script`, `te macro run` and `te bpa run --fix` refuse in the same way, exit with a non-zero code and report `blockedByPolicy` in JSON output.
+
+> [!NOTE]
+> `BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition. If the value is set on a copy that is not licensed for it, no script or macro runs at all, safe or not, until an Enterprise license is activated. The Tabular Editor CLI has no editions and simply applies the policy.
 
 ## Compatibility
 
