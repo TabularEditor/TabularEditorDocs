@@ -100,7 +100,7 @@ The CLI has no editions, so a policy that requires Tabular Editor 3 Enterprise E
 
 ## Enterprise policies
 
-These policies decide what a C# script may do, and configure the AI Assistant and the MCP server. They all require Tabular Editor 3 Enterprise Edition, and belong under `Tabular Editor ApS\TE3`. Only `BlockUnsafeScripts` reaches beyond Tabular Editor 3: the Tabular Editor CLI honors it too, from `Tabular Editor ApS\TECLI` or the shared key.
+These policies decide what a C# script may do, and configure the AI Assistant and the MCP server. They all require Tabular Editor 3 Enterprise Edition, and belong under `Tabular Editor ApS\TE3` - except `BlockUnsafeScripts`, which the Tabular Editor CLI honors as well, and which therefore belongs in the shared `Tabular Editor ApS` key. Put it under `TE3` or `TECLI` instead to reach only one of the two.
 
 ### Scripts and macros
 
@@ -114,8 +114,7 @@ A macro that reaches outside the model is left out of every menu, so it cannot b
 
 What counts as staying within the model is decided by analyzing the compiled script rather than by searching its text, so indirect routes to the same places - reflection, expression trees, `Activator`, `AppDomain`, XML readers or deserialization - are refused as well. Among the built-in [helper methods](xref:script-helper-methods), the three that write outside the model, `SaveFile`, `ExecuteCommand` and `Bpa.ExportCsv`, count as unsafe; the ones that only read, including `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader` and `ExportProperties`, do not. See [Administrator policies](xref:csharp-scripts#administrator-policies) for the same rule from the script author's side.
 
-> [!NOTE]
-> This value is not in the administrative templates yet, so set it in the registry by hand. It is still reported under **Managed by your organization** like every other policy.
+In the Group Policy editor this one is called **Only allow scripts and macros that stay within the model**, and because it is written to the shared key it sits directly under **Administrative Templates > Tabular Editor** rather than in the **Tabular Editor 3** subfolder.
 
 ### Permission limits
 
@@ -227,7 +226,7 @@ Policies shared by Tabular Editor 3 and the CLI sit directly under **Tabular Edi
 
 Setting a policy to **Enabled** writes its registry value. Setting it to **Disabled**, or leaving it **Not configured**, means the policy is not enforced. The templates do not write to the legacy `Kapacity\Tabular Editor` key, so set that key by hand if a policy also has to reach Tabular Editor 2.
 
-The templates cover every policy on this page except `BlockUnsafeScripts`, which has to be set in the registry, or deployed as a registry preference through Group Policy Preferences.
+For the Enterprise policies, **Disabled** removes the registry value rather than writing a `0`. That is deliberate: an Enterprise value being present at all is what puts the AI Assistant and the MCP server behind the Enterprise license check, so a policy an administrator has just turned off must not leave a value behind.
 
 ## Disabling web communications
 
