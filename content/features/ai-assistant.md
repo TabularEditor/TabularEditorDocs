@@ -29,7 +29,7 @@ There is a second way in that needs no key at all. From 3.27.0 Tabular Editor 3 
 > The AI Assistant is in public preview starting with Tabular Editor 3.26.0. We welcome feedback on the experience as we continue to refine it.
 
 
-![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
+![The AI Assistant pane as it first opens, with the assistant's greeting listing what it can do - answer questions, query the model, write and execute C# scripts, change the model - and what it cannot, above an empty message box](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
 
 ## Getting Started
 
@@ -59,7 +59,7 @@ Leave the model field blank to use the provider's default model. For OpenAI and 
 | Azure OpenAI | None. A deployment name is required | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | None. A model name is required | API key and custom endpoint URL |
 
-![AI Assistant Provider Selection](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+![The AI Provider preferences page with the Choose provider dropdown open on OpenAI, Anthropic, Azure OpenAI and Custom (OpenAI-compatible)](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
 ### Choosing a model
 
@@ -70,28 +70,17 @@ Where there is no list to offer (a Custom or Azure OpenAI deployment name, or a 
 > [!NOTE]
 > The indicator is hidden until a provider, an API key and a model are all in place.
 
-### Where the model list comes from
-
-The list behind both the picker and the **Model name** dropdown in preferences is a curated catalog maintained online, refreshed roughly once a day and kept locally so it is available offline. The recommended model for the selected provider is listed first, and models the provider has retired drop off without waiting for a Tabular Editor update.
-
-> [!IMPORTANT]
-> Tabular Editor no longer carries a built-in list of model names. Until the catalog has been retrieved once on this machine, the dropdown and the picker are *empty by design*. Both fields remain free text, so you can always type a model name by hand, and the model you already have configured is never changed.
-
-The catalog covers OpenAI and Anthropic only. Azure OpenAI and the Custom provider name a deployment on your own resource, so there is nothing for Tabular Editor to enumerate; those fields are always free text.
-
-The catalog is fetched only when you open one of the two pickers, never on start-up and never when the Preferences dialog opens. It is fetched anonymously over HTTPS and carries no information about you or your model. Where an administrator has applied the `DisableUpdates` policy, it is not fetched at all.
-
 ### OpenAI
 
 Select **OpenAI** as the provider and enter your API key. You can optionally specify an Organization ID and Project ID if your OpenAI account uses these. The default model is **gpt-5.5**, but you can change it to any model available on your account.
 
-![AI Assistant OpenAI Configuration](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
+![The AI Provider preferences page with OpenAI selected, a masked API key, empty Organization ID and Project ID fields, and the model name](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
 
 ### Anthropic
 
 Select **Anthropic** as the provider and enter your API key. The default model is **claude-sonnet-4-6**. You can change the model name to any Anthropic model available on your account.
 
-![AI Assistant Anthropic Configuration](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![The AI Assistant preferences page with Anthropic selected as the provider, the base URL https://api.anthropic.com, a masked API key and claude-sonnet-4-6 as the model name](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
 > Anthropic enforces input token per minute (ITPM) rate limits based on your account tier. A new API key starts at Tier 1 with 30,000 ITPM for Claude Sonnet 4.x. A single request against a large model can exceed this limit. Purchase $40 or more in API credits to reach Tier 2 (450,000 ITPM). See the [Anthropic rate limits documentation](https://docs.anthropic.com/en/api/rate-limits) for full tier details.
@@ -230,7 +219,7 @@ An agent connected over the [MCP server](xref:mcp-server) is offered the same ca
 
 By default the assistant writes a C# script and opens it in an editor window for you to read and run. From Tabular Editor 3.27.0 it can carry the change out itself instead.
 
-Tick **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant**. The setting is off until you turn it on, and the checkbox is unavailable until **Model metadata** is set to **Write** under **Tools > Preferences > AI Features > Permissions**. Raise or lower that grant and the checkbox follows it immediately, without closing the dialog. Your choice is remembered while the checkbox is unavailable, so lowering the grant and raising it again does not lose it.
+Tick **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant**. The setting is off until you turn it on, and the checkbox is unavailable until **Model metadata** is set to **Write** under **Tools > Preferences > AI Features > Permissions**. 
 
 ### What happens when the assistant runs a script
 
@@ -269,11 +258,11 @@ When the AI Assistant generates code, it creates **artifacts** that open directl
 
 Artifacts stream in real-time as the AI generates them. C# script artifacts include safety analysis that flags potentially unsafe code (e.g. file system access or network operations).
 
-![AI Assistant Generate C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
+![The AI Assistant pane showing a generated C# script artifact with an Execute button, and the assistant's explanation of what the script does and the case-sensitivity caveat it comes with](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
 When you execute a C# script from the chat, the **Script Preview** dialog shows a side-by-side diff of all model metadata changes made by the script. You can accept the changes or revert them. See [Running scripts with preview](xref:csharp-scripts#run-c-scripts-with-preview) for details.
 
-![Script Preview - Model Changes](~/content/assets/images/preview-script-changes.png)
+![The Script Preview - Model Changes dialog, the model before and after side by side, with the Internet Total Freight measure's format string changed and a description and a display folder added, each marked against its original](~/content/assets/images/preview-script-changes.png)
 
 ## Custom Instructions
 
@@ -398,7 +387,7 @@ There is no separate "ask me" level. **Deny** is what asking looks like: in the 
 
 When the assistant needs a resource your standing grant does not cover, a **Permission Required** card appears in the conversation, naming what it wants to do, for instance "The AI would like to access the metadata of your semantic model", or the DAX query it proposes to run.
 
-![AI Assistant Permission Required card](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
+![A Permission Required card in the chat, naming the DAX query the assistant wants to run, with Allow, Allow for session, Allow for this model, Always allow and Deny buttons](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
 
 | Button | What it does |
 | -- | -- |
@@ -466,7 +455,7 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 
 Two further settings sit on the **AI Features** page itself, above **AI Assistant**, because they apply to the MCP server as well: *Check for knowledge base updates on startup*, and the **Open audit folder** button. See @preferences.
 
-![AI Assistant Preferences](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+![The AI Assistant preferences page, with the three chat display indicators, Auto compact and its threshold, the knowledge base update check and Preview changes for C# scripts](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
 ## Token Usage
 
