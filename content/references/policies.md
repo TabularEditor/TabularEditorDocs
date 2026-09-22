@@ -173,7 +173,7 @@ A configuration the policy does not permit is refused, and the AI Assistant says
 
 Tabular Editor 3 keeps a local record of AI Assistant and MCP server activity - tool calls, permission decisions, configuration and server sessions. The text of a prompt or a response is never recorded.
 
-The record is an Enterprise Edition feature. On Enterprise, Consultancy and Trial licenses it is written, and **Open audit folder** appears on **Tools > Preferences > AI Features** and in the **Tools > MCP Server...** dialog. On Desktop and Business, and before a license is activated, nothing is written, no folder is created and neither button is shown.
+The record is an Enterprise Edition feature. On Enterprise, Consultancy and Trial licenses it is written, and **Open audit folder** appears on **Tools > Preferences > AI Features** and in the **Tools > MCP Server...** dialog. On Desktop and Business, and before a license is activated, nothing is written, no folder is created and neither button is shown. See @ai-audit-log.
 
 |Value|Kind|What it does|
 |--|--|--|

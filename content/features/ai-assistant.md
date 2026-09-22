@@ -428,13 +428,11 @@ Lowering a global grant does not clear a per-model grant. To withdraw one of tho
 
 ### Audit record
 
-On Tabular Editor 3 Enterprise Edition, a local record is kept of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded.
-
-The files are written one per day and kept for 30 days. **Open audit folder** under **Tools > Preferences > AI Features** takes you to them. Administrators can move the folder elsewhere and change how long it is kept. See @policies.
-
-Unless a policy moves it, the record lives in `%LocalAppData%\TabularEditor3\AI\audit`, one `ai-audit-<date>.jsonl` file per day, with the scripts themselves kept beside it under `audit\scripts\<date>`.
+On Tabular Editor 3 Enterprise Edition, a local record is kept of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** takes you to the files.
 
 On Desktop and Business Edition, and before a license is activated, nothing is recorded, no folder is created and the button is not shown.
+
+See @ai-audit-log for what each record holds, where the files live and the policies that redirect them.
 
 ### Stopping a turn while permission is pending
 

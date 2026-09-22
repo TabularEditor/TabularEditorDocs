@@ -42,6 +42,7 @@ This section contains documentation about Tabular Editor features.
 ### AI Features
 - @ai-assistant - Chat-based model development using your own AI provider key
 - @mcp-server - Let an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open
+- @ai-audit-log - See what the AI Assistant and the MCP server did
 
 ### Advanced Modelling Features
 - @user-context-calculated-columns - Calculated columns evaluated per user, and what can reference them

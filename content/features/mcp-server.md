@@ -56,12 +56,7 @@ The server works with or without a model open. An agent that connects while no m
 
 Right-click the status bar indicator for the things you'll want day to day: starting and stopping the server, copying a registration configuration and the preferences page. Left-clicking it opens the dialog without changing whether the server is running.
 
-<!-- IMAGE NEEDED: mcp-server/status-bar-context-menu.png
-     The status bar indicator reading MCP Started, with its right-click context menu open:
-     MCP Server details... (bold), Start/Stop MCP server, Copy MCP configuration with its
-     submenu expanded to show Claude Code, VS Code, Copilot CLI, Codex and Cursor, and
-     MCP Server preferences... Crop to the right-hand end of the status bar.
-     Alt text: "The MCP status bar indicator with its right-click menu and the Copy MCP configuration submenu open" -->
+![The MCP status bar indicator with its right-click menu open on MCP Server details..., Stop MCP server, Copy MCP configuration and MCP Server preferences..., and the Copy MCP configuration submenu expanded to list Claude Code, VS Code, Copilot CLI, Codex and Cursor](~/content/assets/images/features/mcp-server/status-bar-context-menu.png)
 
 ### MCP preferences
 
@@ -308,7 +303,7 @@ The MCP server is on by default and any user can turn it off. Administrators hav
 > [!WARNING]
 > The Enterprise-tier policies fail closed. If any of their value names is present on a machine whose license is not Enterprise, Consultancy or Trial, the AI Assistant and the MCP server refuse to start, and the menu item and the status bar indicator disappear. One value set across a mixed fleet turns the feature off for everyone on the wrong edition, so roll these out against the licenses you actually have. See @policies.
 
-On Enterprise Edition, Tabular Editor also keeps a local record of what the AI Assistant and the MCP server did: which permissions were requested and how they were answered, which tools ran and whether each succeeded, failed or was refused, and the full text of any C# script an agent ran or handed you for review. Prompts, replies and data values are never recorded. **Open audit folder**, in the server dialog and on **Tools > Preferences > AI Features**, takes you to the daily files, which are kept for 30 days. Administrators can redirect them and change how long they are kept. On Desktop and Business nothing is recorded and neither button is shown.
+On Enterprise Edition, Tabular Editor also keeps a local record of what the AI Assistant and the MCP server did, including every tool an agent called and the full text of any C# script it ran. Prompts, replies and data values are never recorded. **Open audit folder**, in the server dialog and on **Tools > Preferences > AI Features**, takes you to it. On Desktop and Business nothing is recorded and neither button is shown. See @ai-audit-log.
 
 See @policies for the full list, the registry layout and the administrative templates, and @security-privacy for what leaves your machine.
 
