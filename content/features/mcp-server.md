@@ -50,11 +50,13 @@ The dialog shows the address the server is listening on, `http://127.0.0.1:42100
 
 ![The MCP Server dialog, showing the server URL, a masked access token and the five agent permission rows](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
 
+![The MCP status bar indicator reading MCP Started, with its tooltip showing "MCP server listening on http://127.0.0.1:42100/. Click to open the connection dialog."](~/content/assets/images/features/mcp-server/status-bar-menu.png)
+
 The server works with or without a model open. An agent that connects while no model is loaded gets told so rather than getting an error, and you can open a model afterwards without restarting the MCP server.
 
 Right-click the status bar indicator for the things you'll want day to day: starting and stopping the server, copying a registration configuration and the preferences page. Left-clicking it opens the dialog without changing whether the server is running.
 
-<!-- IMAGE NEEDED: mcp-server/status-bar-menu.png
+<!-- IMAGE NEEDED: mcp-server/status-bar-context-menu.png
      The status bar indicator reading MCP Started, with its right-click context menu open:
      MCP Server details... (bold), Start/Stop MCP server, Copy MCP configuration with its
      submenu expanded to show Claude Code, VS Code, Copilot CLI, Codex and Cursor, and
