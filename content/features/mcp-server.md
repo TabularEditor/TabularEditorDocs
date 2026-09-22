@@ -48,14 +48,7 @@ That last point is the difference between delegating work and losing control of 
 
 The dialog shows the address the server is listening on, `http://127.0.0.1:42100/` unless you've changed the port. A status bar indicator switches from **MCP Stopped** to **MCP Started**, with the address in its tooltip.
 
-<!-- IMAGE NEEDED: mcp-server/dialog.png
-     The Tools > MCP Server... dialog, server running, Require access token ON so the
-     Access token row and its refresh button are visible. Must show: Server URL row,
-     Access token row, the Agent permissions header and all five permission rows at
-     their defaults (Model metadata Read, Model data Deny, Best Practice Analyzer Read,
-     Documents Read/Write, Macros Read/Write), and the Export configuration, Stop server
-     and Open audit folder buttons. House border, 100% DPI.
-     Alt text: "The MCP Server dialog showing the server URL, access token and the five agent permission rows" -->
+![The MCP Server dialog, showing the server URL, a masked access token and the five agent permission rows](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
 
 The server works with or without a model open. An agent that connects while no model is loaded gets told so rather than getting an error, and you can open a model afterwards without restarting the MCP server.
 
@@ -87,11 +80,7 @@ Tick **Start MCP server automatically** once you're past experimenting. An agent
 
 You register Tabular Editor with your agent once. In the server dialog, pick your agent from **Export configuration** and paste what lands on the clipboard. The configuration carries the address, and the access token if you've turned that on. The server registers itself under the name `tabular-editor`.
 
-<!-- IMAGE NEEDED: mcp-server/export-configuration.png
-     The Export configuration dropdown button in the MCP Server dialog, expanded, listing
-     Claude Code, VS Code, Copilot CLI, Codex and Cursor in that order. Crop tight to the
-     button and its open list.
-     Alt text: "The Export configuration dropdown listing Claude Code, VS Code, Copilot CLI, Codex and Cursor" -->
+![The Export configuration dropdown, expanded to list Claude Code, VS Code, Copilot CLI, Codex and Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
 
 **Claude Code.** Run the copied command in a terminal:
 
@@ -221,12 +210,7 @@ There is no second route, and that is deliberate. Anything the C# scripting API 
 - **Nothing waits for you.** A message a script would normally put on screen, through `Output`, `Info`, `Warning` or `Error`, is returned to the agent as part of the result instead of stopping the call on a dialog nobody is watching. While a long call runs, Tabular Editor shows a **Please wait** indicator and ignores clicks, so the window cannot be worked in against a model that is being changed underneath you, and clicks do not queue up and land the moment the agent finishes.
 - **Marked in the UI.** Changed objects and properties are tinted and badged in the [TOM Explorer and the Properties view](xref:unsaved-changes) until you save. Use **Show changes** to filter both views down to the agent's work, and right-click **Revert** to undo a single property, a single object or a whole branch without touching the rest.
 
-<!-- IMAGE NEEDED: mcp-server/agent-change-review.png
-     The payoff shot for this article. After an agent has run a script: TOM Explorer with
-     orange edited badges on several measures, the Properties view beside it showing an
-     orange tinted changed property, and the undo dropdown open showing the single entry
-     "C# script (MCP)". One capture if the layout allows, otherwise a composite.
-     Alt text: "An agent's changes marked in the TOM Explorer and Properties view, with the undo dropdown showing a single C# script (MCP) step" -->
+![The Edit menu open on a single Undo C# script (MCP) entry, with the TOM Explorer beside it marking an added measure in green, a changed measure in orange and a deleted measure struck through in red, and the Properties view filtered to the one property the agent changed](~/content/assets/images/features/mcp-server/agent-change-review.png)
 
 That's the review loop: ask, watch it land, filter to what changed, revert what you disagree with, save. You're reviewing a diff in the tool you already know, not reading a summary and hoping.
 
