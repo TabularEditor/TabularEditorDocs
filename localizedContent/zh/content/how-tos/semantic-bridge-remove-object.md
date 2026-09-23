@@ -20,25 +20,19 @@ applies_to:
 
 # 从 Metric View 中移除对象
 
-本操作指南演示如何删除 Metric View 字段和度量值。
-类似的方法适用于 Metric View 中的所有集合。
+本操作指南演示如何删除 Metric View 字段和度量值。类似的方法适用于 Metric View 中的所有集合。
 
 > [!NOTE]
-> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
-> 早期版本不支持此处展示的 v1.1 Metric View 功能。
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。早期版本不支持此处展示的 v1.1 Metric View 功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 > [!NOTE]
-> 这里的每个移除脚本都会影响当前已加载的 Metric View。
-> 如果你想把这些脚本都运行一遍，请确保在每次移除操作前都先运行上面的 `Deserialize`。
+> 这里的每个移除脚本都会影响当前已加载的 Metric View。如果你想把这些脚本都运行一遍，请确保在每次移除操作前都先运行上面的 `Deserialize`。
 
 ## 按名称移除
 
-获取要删除的 Metric View 字段，然后删除它。
-删除对象后，请勿再尝试修改它。
-你仍可读取已删除对象的属性。
-对同一对象多次调用 `Delete()` 是安全的；第一次之后，其余调用都不会执行任何操作。
+获取要删除的 Metric View 字段，然后删除它。删除对象后，请勿再尝试修改它。你仍可读取已删除对象的属性。对同一对象多次调用 `Delete()` 是安全的；第一次之后，其余调用都不会执行任何操作。
 
 ```csharp {run id=removefield setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -93,8 +87,7 @@ Output(sb.ToString());
 
 ## 移除多个 Metric View 字段
 
-先筛选出要移除的字段，用 `ToList` 为它们创建快照，然后逐个删除。
-先创建快照可避免在遍历集合时修改该集合。
+先筛选出要移除的字段，用 `ToList` 为它们创建快照，然后逐个删除。先创建快照可避免在遍历集合时修改该集合。
 
 ```csharp {run id=removemultiple setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -141,8 +134,7 @@ Output(sb.ToString());
 
 > [!WARNING]
 > 此示例无法保证会移除所有引用指定 Metric View Join 的 Metric View 字段，也无法保证只移除这些字段。
-> Metric View 字段可能包含几乎任意的 SQL 表达式，也可能引用之前定义的 Metric View 字段。
-> 此示例仅用于说明。
+> Metric View 字段可能包含几乎任意的 SQL 表达式，也可能引用之前定义的 Metric View 字段。此示例仅用于说明。
 
 ```csharp {run id=remove-by-table setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
