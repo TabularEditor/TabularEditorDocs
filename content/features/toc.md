@@ -54,6 +54,7 @@
 # AI Features
 ## @ai-assistant
 ## @mcp-server
+## @ai-audit-log
 
 # Advanced Modelling Features
 ## @user-context-calculated-columns
