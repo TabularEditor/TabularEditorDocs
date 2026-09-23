@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI 助手
 author: Morten Lønskov
-updated: 2026-06-24
+updated: 2026-09-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,21 +20,25 @@ applies_to:
 
 # AI 助手
 
-AI 助手是一款基于聊天的界面，面向 AI 辅助的语义模型开发，旨在帮助你更快创建语义模型。 它采用企业级设计，可让你完全掌控发送给 AI 的内容，并内置同意管理，让你可以放心使用 AI 助手。 AI 助手已通过独立的安全渗透测试。 详情请访问 [Tabular Editor 信任中心](https://trust.tabulareditor.com)。 它可以浏览模型元数据、编写并执行 DAX 查询、生成 C# Script、运行 Best Practice Analyzer 检查、查询 VertiPaq分析器统计信息，并搜索 Tabular Editor 知识库。
+AI 助手是一款基于聊天的界面，面向 AI 辅助的语义模型开发，旨在帮助你更快创建语义模型。它采用企业级设计，可让你完全掌控发送给 AI 的内容，并内置同意管理，让你可以放心使用 AI 助手。 AI 助手已通过独立的安全渗透测试。详情请访问 [Tabular Editor 信任中心](https://trust.tabulareditor.com)。它可以浏览模型元数据、编写并执行 DAX 查询、生成 C# Script、运行 Best Practice Analyzer 检查、查询 VertiPaq分析器统计信息，并搜索 Tabular Editor 知识库。
 
-AI 助手采用自带密钥 BYOK 模式。 你只需从受支持的提供商中选择一个并提供其 API 密钥，助手就会直接通过该提供商的 API 运行。
+AI 助手采用自带密钥 BYOK 模式。你只需从受支持的提供商中选择一个并提供其 API 密钥，助手就会直接通过该提供商的 API 运行。
+
+There is a second way in that needs no key at all. From 3.27.0 Tabular Editor 3 can act as an MCP server, so an agent you already subscribe to, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, works on the open model through the same tools and the same permissions as the chat. See @mcp-server. The two share one permission record, so whichever you use, you set the boundaries once.
 
 > [!NOTE]
-> 从 Tabular Editor 3.26.0 开始，AI 助手处于公共预览阶段。 我们欢迎你反馈使用体验，帮助我们持续改进。
+> 从 Tabular Editor 3.26.0 开始，AI 助手处于公共预览阶段。我们欢迎你反馈使用体验，帮助我们持续改进。
 
-![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
+![The AI Assistant pane as it first opens, with the assistant's greeting listing what it can do - answer questions, query the model, write and execute C# scripts, change the model - and what it cannot, above an empty message box](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
 
 ## 快速入门
 
-1. 打开 **工具 > 偏好 > AI 助手**
-2. 选择 AI 提供商——全新安装时默认是 **无（AI 已禁用）**——然后输入你的 API 密钥
+1. Open **Tools > Preferences > AI Features > AI Assistant**
+2. Select your AI provider (on a fresh install this defaults to **None (AI disabled)**), then enter your API key
 3. 从 **视图 > AI 助手** 打开 AI 助手面板
 4. 输入一条信息并按 **Enter** 键开始对话
+
+The model the assistant is using is shown in the status strip directly above the message box. See [Choosing a model](#choosing-a-model) to change it without leaving the chat.
 
 > [!TIP]
 > 使用我们的 [AI 助手交互式演示](https://demos.tabulareditor.com/psl/of150vcy?) 了解如何设置和使用它。
@@ -44,41 +48,54 @@ AI 助手采用自带密钥 BYOK 模式。 你只需从受支持的提供商中�
 
 ## 支持的提供程序
 
-在 **工具 > 偏好 > AI 助手 > AI 提供程序** 下配置 AI 提供程序。 从下拉列表中选择一个提供商——在你完成配置之前，默认是 **无（AI 已禁用）**——输入你的 API 密钥，并可按需替换默认模型。 对于 OpenAI 和 Anthropic，**模型名称**字段是一个预先填充了当前模型的下拉框——包括 Anthropic 的 `claude-fable-5` 和 `claude-opus-4-8`，以及 OpenAI 的 `gpt-5.5` 和 `gpt-5.5-pro`——这样你无需手动输入自定义 ID，也能直接选择较新的模型。 你也可以输入自定义模型名称。
+Configure your AI provider under **Tools > Preferences > AI Features > AI Assistant > AI Provider**. Select a provider from the dropdown (the default is **None (AI disabled)** until you configure one), enter your API key and optionally override the default model.
 
-| 提供程序           | 默认模型                    | 需要配置                           |
-| -------------- | ----------------------- | ------------------------------ |
-| OpenAI         | gpt-5.5 | API 密钥。 可选：基础 URL、组织 ID 和项目 ID |
-| Anthropic      | claude-sonnet-4-6       | API 密钥。 可选：基础 URL              |
-| Azure OpenAI   | 视部署而定                   | API 密钥、端点 URL 和部署名称            |
-| 自定义（兼容 OpenAI） | 由用户指定                   | API 密钥和自定义端点 URL               |
+Leave the model field blank to use the provider's default model. For OpenAI and Anthropic the defaults are listed in the table below; Azure OpenAI and the Custom provider have no default, so those two always need a value.
 
-![AI 助手提供程序偏好设置选择](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+| 提供程序           | 默认模型                             | 需要配置                          |
+| -------------- | -------------------------------- | ----------------------------- |
+| OpenAI         | gpt-5.5          | API 密钥。可选：基础 URL、组织 ID 和项目 ID |
+| Anthropic      | claude-sonnet-4-6                | API 密钥。可选：基础 URL              |
+| Azure OpenAI   | 无。 A deployment name is required | API 密钥、端点 URL 和部署名称           |
+| 自定义（兼容 OpenAI） | 无。 A model name is required      | API 密钥和自定义端点 URL              |
+
+![The AI Provider preferences page with the Choose provider dropdown open on None (AI disabled), OpenAI, Anthropic, Azure OpenAI and Custom (OpenAI-compatible), and a URL and API Key field beneath it](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+
+### Choosing a model
+
+The active model is shown in the status strip above the message box, next to the context usage bar. Click it to open a picker listing the models currently available for the configured provider; choosing one applies to every request that follows, with no dialog and no restart. The last entry, **Preferences...**, opens **Tools > Preferences > AI Features > AI Assistant** for anything not on the list.
+
+![The model picker open above the message box, listing claude-sonnet-5, claude-fable-5-1, claude-fable-5, claude-opus-5, claude-haiku-4-5, claude-opus-4-8 and the active claude-sonnet-4-6 in bold, with Preferences... beneath a separator](~/content/assets/images/ai-assistant/ui-model-picker.png)
+
+Where there is no list to offer (a Custom or Azure OpenAI deployment name, or a machine where the model list has never been retrieved), the model name is a plain link to those same preferences instead of a picker.
+
+> [!NOTE]
+> The indicator is hidden until a provider, an API key and a model are all in place.
 
 ### OpenAI
 
-将提供程序选择为 **OpenAI**，然后输入你的 API 密钥。 如果你的 OpenAI 账户使用组织 ID 和项目 ID，也可以选择填写这些信息。 默认模型为 **gpt-5.5**，但你可以将其更改为你账号下可用的任意模型。
+将提供程序选择为 **OpenAI**，然后输入你的 API 密钥。如果你的 OpenAI 账户使用组织 ID 和项目 ID，也可以选择填写这些信息。默认模型为 **gpt-5.5**，但你可以将其更改为你账号下可用的任意模型。
 
-![AI 助手 OpenAI 配置](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
+![The AI Provider preferences page with OpenAI selected, a masked API key, empty Organization ID and Project ID fields, and the model name](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
 
 ### Anthropic
 
-选择 **Anthropic** 作为提供商，然后输入你的 API 密钥。 默认模型是 **claude-sonnet-4-6**。 你可以将模型名称更改为你账户中可用的任意 Anthropic 模型。
+选择 **Anthropic** 作为提供商，然后输入你的 API 密钥。默认模型是 **claude-sonnet-4-6**。你可以将模型名称更改为你账户中可用的任意 Anthropic 模型。
 
-![AI 助手 Anthropic 配置](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![The AI Assistant preferences page with Anthropic selected as the provider, the base URL https://api.anthropic.com, a masked API key and claude-sonnet-4-6 as the model name](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
-> Anthropic 会根据你的账户等级，强制执行每分钟输入 token（ITPM）的速率限制。 新创建的 API 密钥起始为 Tier 1，Claude Sonnet 4.x 的 ITPM 上限为 30,000。 对大型模型发起的一次请求就可能超过此限制。 购买 $40 或以上的 API 额度即可升至第 2 档（450,000 ITPM）。 有关各档位的完整详情，请参阅 [Anthropic 速率限制文档](https://docs.anthropic.com/en/api/rate-limits)。
+> Anthropic 会根据你的账户等级，强制执行每分钟输入 token（ITPM）的速率限制。新创建的 API 密钥起始为 Tier 1，Claude Sonnet 4.x 的 ITPM 上限为 30,000。对大型模型发起的一次请求就可能超过此限制。购买 $40 或以上的 API 额度即可升至第 2 档（450,000 ITPM）。有关各档位的完整详情，请参阅 [Anthropic 速率限制文档](https://docs.anthropic.com/en/api/rate-limits)。
 
 ### Azure OpenAI
 
 选择 **Azure OpenAI** 作为提供商，并配置以下三个字段：
 
-- **API 密钥** — 用于访问你的 Azure OpenAI 资源的密钥
-- **服务终结点** — 你的资源的终结点 URL，例如 `https://your-resource.openai.azure.com`。 使用资源 URL，而不要使用 `privatelink` 别名；SSL 证书是为 `*.openai.azure.com` 签发的，直接连接到 `*.privatelink.openai.azure.com` 会导致证书验证失败
-- **模型名称** — 填写的是 **部署名称**，不是底层模型名称，也不是资源名称
+- **API key**: the access key for your Azure OpenAI resource
+- **Service endpoint**: the endpoint URL for your resource, for example `https://your-resource.openai.azure.com`. 使用资源 URL，而不要使用 `privatelink` 别名；SSL 证书是为 `*.openai.azure.com` 签发的，直接连接到 `*.privatelink.openai.azure.com` 会导致证书验证失败
+- **Deployment**: the **deployment name**, not the underlying model name and not the resource name
 
-Azure OpenAI 要求在每次 API 调用中都提供部署名称。 部署名称是在创建部署时指定的，因此它可以是任意字符串。 部署通常会以其所服务的模型命名（例如 `gpt-4o`），但这只是约定，并非强制要求。 如果你输入的是资源名称，或者一个并未作为部署存在的底层模型名称，请求就会失败。
+Azure OpenAI 要求在每次 API 调用中都提供部署名称。部署名称是在创建部署时指定的，因此它可以是任意字符串。部署通常会以其所服务的模型命名（例如 `gpt-4o`），但这只是约定，并非强制要求。如果你输入的是资源名称，或者一个并未作为部署存在的底层模型名称，请求就会失败。
 
 #### 查找部署名称
 
@@ -88,7 +105,7 @@ Azure OpenAI 要求在每次 API 调用中都提供部署名称。 部署名称�
 2. 打开 **部署**（如果资源已升级到 Foundry，则为 **模型 + 终结点**）
 3. 复制 **名称** 列中的值
 
-在你的组织采用 Azure AI Foundry 之前创建的部署，可能不会在门户中显示。 可通过 Azure CLI 列出它们：
+在你的组织采用 Azure AI Foundry 之前创建的部署，可能不会在门户中显示。可通过 Azure CLI 列出它们：
 
 ```bash
 az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table
@@ -99,21 +116,21 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 有关 403 错误、SSL 失败或 "DeploymentNotFound" 响应，请参阅 @azure-openai-connection-errors。
 
 > [!NOTE]
-> **Azure OpenAI** 提供程序适用于使用 `api-version` 查询参数的经典 Azure OpenAI 资源。 如果你使用的是新的 **Microsoft Foundry**，请参阅下文的[使用 Microsoft Foundry](#using-microsoft-foundry)。
+> **Azure OpenAI** 提供程序适用于使用 `api-version` 查询参数的经典 Azure OpenAI 资源。如果你使用的是新的 **Microsoft Foundry**，请参阅下文的[使用 Microsoft Foundry](#using-microsoft-foundry)。
 
 ### 自定义（OpenAI 兼容）
 
-“自定义”提供商选项支持本地或组织内部的 LLM，只要它们提供 OpenAI 兼容的 API 端点即可。 输入你的 API 密钥和自定义端点 URL。 这样你就可以将所有数据保留在自己的基础设施内，以满足数据隐私或合规要求。
+“自定义”提供商选项支持本地或组织内部的 LLM，只要它们提供 OpenAI 兼容的 API 端点即可。输入你的 API 密钥和自定义端点 URL。这样你就可以将所有数据保留在自己的基础设施内，以满足数据隐私或合规要求。
 
 ### 使用本地或组织内部的 LLM
 
-你可以通过“自定义”提供商让 AI 助手对接自托管的 LLM。 这会将所有数据保留在你自己的基础设施内——无论是运行在本机上的模型，还是在组织网络中集中托管的 LLM。 无论哪种方式，都不会将数据发送到第三方云提供商。
+你可以通过“自定义”提供商让 AI 助手对接自托管的 LLM。 This keeps all data within your own infrastructure, whether that is a model running on your local machine or a centrally hosted LLM within your organization's network. 无论哪种方式，都不会将数据发送到第三方云提供商。
 
 以下工具可托管模型并提供 OpenAI 兼容的 API：
 
-- [Ollama](https://ollama.com) — 轻量级 CLI，用于在本地下载并运行模型
-- [LM Studio](https://lmstudio.ai) — 带图形界面的桌面应用，用于管理并运行本地模型
-- [LocalAI](https://localai.io) — 自托管、社区驱动的替代方案，支持多种模型
+- [Ollama](https://ollama.com): lightweight CLI for downloading and running models locally
+- [LM Studio](https://lmstudio.ai): desktop application with a graphical interface for managing and running local models
+- [LocalAI](https://localai.io): self-hosted, community-driven alternative with broad model support
 
 这些工具既可以在开发者的工作站上运行供个人使用，也可以部署在组织内的共享服务器上，为你的团队提供集中管理的 LLM 端点。
 
@@ -122,33 +139,33 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 1. [下载并安装 Ollama](https://ollama.com/download)
 2. 拉取一个模型（下载），例如：`ollama pull llama3.1`
 3. 启动 Ollama 服务器（安装后会自动运行，默认使用端口 11434）
-4. 在 Tabular Editor 中，依次点击 **Tools > 偏好 > AI Assistant > AI Provider**
+4. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 5. 将 **Choose provider** 设置为 **Custom (OpenAI-compatible)**
 6. 将 **Service Endpoint** 设置为 `http://localhost:11434/v1`
 7. 将 **Model name** 设置为你拉取的模型（例如 `llama3.1`）
-8. **API Key** 字段可以设置为任意非空值（例如 `ollama`）——Ollama 不需要身份验证，但该字段不能为空
+8. The **API Key** field can be set to any non-empty value (e.g. `ollama`). Ollama does not require authentication, but the field cannot be left blank
 
 #### 示例：LM Studio
 
 1. [下载并安装 LM Studio](https://lmstudio.ai/download)
-2. 拉取一个模型。 可以通过左侧面板的模型搜索页面或 CLI 来完成。 例如：`lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
-3. 启动 LM Studio 服务器。 可以通过左侧面板的开发者页面或 CLI 来完成。 例如：`lms server start`
-   注意：你需要将其配置为 OpenAI 兼容模式。 另外，你可能需要将默认上下文大小调整为 100,000 tokens 以上。
-4. 在 Tabular Editor 中，依次点击 **Tools > 偏好 > AI Assistant > AI Provider**
+2. 拉取一个模型。可以通过左侧面板的模型搜索页面或 CLI 来完成。例如：`lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
+3. 启动 LM Studio 服务器。可以通过左侧面板的开发者页面或 CLI 来完成。例如：`lms server start`
+   注意：你需要将其配置为 OpenAI 兼容模式。另外，你可能需要将默认上下文大小调整为 100,000 tokens 以上。
+4. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 5. 将 **Choose provider** 设置为 **Custom (OpenAI-compatible)**
 6. 将 **Service Endpoint** 设置为 `http://localhost:1234/v1`
 7. 将 **Model name** 设置为你拉取的模型（例如 `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`）
-8. **API Key** 字段可以设置为任意非空值（例如 `lms`）——LM Studio 不需要身份验证，但该字段不能为空
+8. The **API Key** field can be set to any non-empty value (e.g. `lms`). LM Studio does not require authentication, but the field cannot be left blank
 
 > [!NOTE]
-> 本地模型的响应质量取决于模型规模以及你的硬件配置。 更大的模型通常能产生更好的结果，但需要更多 RAM 和性能更强的 GPU。 AI Assistant 的工具调用能力需要使用支持 OpenAI 兼容格式函数调用的模型。
+> 本地模型的响应质量取决于模型规模以及你的硬件配置。更大的模型通常能产生更好的结果，但需要更多 RAM 和性能更强的 GPU。 AI Assistant 的工具调用能力需要使用支持 OpenAI 兼容格式函数调用的模型。
 
 > [!TIP]
-> 我们建议选择参数量至少为 30B 的模型，但理想情况下至少应有 100B 参数。 例如，Qwen3.5-122B-A10B 模型在我们的内部测试中表现良好。
+> 我们建议选择参数量至少为 30B 的模型，但理想情况下至少应有 100B 参数。例如，Qwen3.5-122B-A10B 模型在我们的内部测试中表现良好。
 
 ### 使用 Microsoft Foundry
 
-[Microsoft Foundry](https://ai.azure.com)（前身为 Azure AI Foundry）可让你在 Azure 环境中部署 OpenAI 和 Anthropic 模型。 在 Tabular Editor 中，这些模型需要通过 **OpenAI** 或 **Anthropic** 提供程序访问——而不是 **Azure OpenAI** 提供程序；后者适用于经典 Azure OpenAI 资源。
+[Microsoft Foundry](https://ai.azure.com)（前身为 Azure AI Foundry）可让你在 Azure 环境中部署 OpenAI 和 Anthropic 模型。 These models are accessed through the **OpenAI** or **Anthropic** provider in Tabular Editor, not the **Azure OpenAI** provider, which is for classic Azure OpenAI resources.
 
 > [!IMPORTANT]
 > 不要将 **Azure OpenAI** 提供程序用于 Microsoft Foundry 模型。 **Azure OpenAI** 提供程序仅兼容经典 Azure OpenAI 资源。
@@ -157,7 +174,7 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 
 要使用部署在 Microsoft Foundry 中的 OpenAI 模型（如 GPT-4o 或 GPT-5.4-mini）：
 
-1. 在 Tabular Editor 中，依次点击 **Tools > 偏好 > AI Assistant > AI Provider**
+1. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 2. 将 **选择提供程序** 设置为 **OpenAI**
 3. 将 **Base URL** 设置为你的 Foundry 资源端点，并在末尾加上 `/openai/v1`。 URL 采用以下任一格式：
    - `https://your-resource.services.ai.azure.com/openai/v1`
@@ -166,20 +183,20 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 5. 将 **模型名称** 设置为你的部署名称（例如 `gpt-5.4-mini`）
 
 > [!NOTE]
-> Microsoft Foundry 门户不会直接显示基础 URL。 门户会显示一个包含完整 API 路径的 **目标 URI**（例如 `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`）。 基础 URL 只需使用 `https://your-resource.services.ai.azure.com/openai/v1`。
+> Microsoft Foundry 门户不会直接显示基础 URL。门户会显示一个包含完整 API 路径的 **目标 URI**（例如 `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`）。基础 URL 只需使用 `https://your-resource.services.ai.azure.com/openai/v1`。
 
 #### Microsoft Foundry 中的 Anthropic 模型
 
 要使用部署在 Microsoft Foundry 中的 Anthropic 模型（例如 Claude Sonnet 4.6）：
 
-1. 在 Tabular Editor 中，依次点击 **Tools > 偏好 > AI Assistant > AI Provider**
+1. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 2. 将 **选择提供程序** 设置为 **Anthropic**
 3. 将 **基础 URL** 设置为你的 Foundry 资源端点，并在末尾追加 `/anthropic`，例如 `https://your-resource.services.ai.azure.com/anthropic`
 4. 输入你的 Foundry **API 密钥**
 5. 将 **模型名称** 设置为模型标识符（例如 `claude-sonnet-4-6`）
 
 > [!NOTE]
-> 门户会显示一个 **目标 URI**，例如 `https://your-resource.services.ai.azure.com/anthropic/v1/messages`。 基础 URL 只需填写到并包含 `/anthropic` 为止。
+> 门户会显示一个 **目标 URI**，例如 `https://your-resource.services.ai.azure.com/anthropic/v1/messages`。基础 URL 只需填写到并包含 `/anthropic` 为止。
 
 ## 功能
 
@@ -187,23 +204,50 @@ AI 助手可以访问你的模型上下文，并能执行以下操作：
 
 - **模型探索**：查询模型元数据，包括表、列、度量值、关系及其属性
 - **DAX 查询编写**：生成 DAX 查询并对你在连接模式下连接的模型执行，结果集会直接在聊天中返回
-- **C# Script 生成**：创建用于修改模型的 C# Script，并在新的编辑器窗口中打开。 当你在聊天中点击 **执行** 时，默认会弹出“[预览更改](xref:csharp-scripts#run-c-scripts-with-preview)”对话框，方便你在接受之前先检查所有模型元数据变更。 你也可以在编辑器中打开脚本，并从脚本工具栏运行它，可选择是否启用预览。 模型元数据更改可通过 **Ctrl+Z** 撤销
+- **C# script generation**: Create C# scripts for model modifications. The assistant either opens the script in a new editor window for you to run, or carries the change out itself, depending on your settings. See [Letting the assistant change your model](#letting-the-assistant-change-your-model). 模型元数据更改可通过 **Ctrl+Z** 撤销
 - **Best Practice Analyzer**：运行 BPA 分析，查看规则违规情况，并创建或修改 BPA 规则
 - **VertiPaq分析器**：查询内存使用统计信息和列的基数
 - **文档访问**：读取并修改已打开的文档，例如 DAX 脚本和 DAX 查询
 - **知识库搜索**：搜索内置的 Tabular Editor 文档以获取答案
 - **UI 导航**：生成 `te3://` 操作链接，用于打开特定的 Tabular Editor 对话框和功能
 
+An agent connected over the [MCP server](xref:mcp-server) is offered the same capabilities, with one exception: UI navigation is chat-only. Both surfaces can change your model by running a C# script, and both do it as a single undoable step. What differs is how the change is put to you, and how permission is settled. See [What the MCP server shares, and what it does not](#what-the-mcp-server-shares-and-what-it-does-not).
+
 > [!NOTE]
-> 在处理未连接到 Analysis Services 或 Power BI 的模型文件(例如 `.bim` 文件或 `.tmdl` 文件夹)时，所有需要活动数据库连接的工具——包括 DAX 查询执行和 VertiPaq分析器统计信息——都会自动隐藏。 助手仍会为你编写 DAX 查询，但在建立连接之前，DAX 查询项上的 **执行** 按钮会被禁用。 如果之前已从 `.vpax` 文件加载过，VertiPaq分析器统计信息仍然可用。
+> Tools that require an active database connection, including DAX query execution and VertiPaq Analyzer statistics, are automatically hidden when working with a model file (for example a `.bim` or `.tmdl` folder) that is not connected to Analysis Services or Power BI. The assistant still writes DAX queries for you, but the **Execute** button on DAX query artifacts is disabled until a connection is established. 如果之前已从 `.vpax` 文件加载过，VertiPaq分析器统计信息仍然可用。
+
+## Letting the assistant change your model
+
+By default the assistant writes a C# script and opens it in an editor window for you to read and run. From Tabular Editor 3.27.0 it can carry the change out itself instead.
+
+Tick **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant**. The setting is off until you turn it on, and the checkbox is unavailable until **Model metadata** is set to **Write** under **Tools > Preferences > AI Features > Permissions**.
+
+### What happens when the assistant runs a script
+
+- **You see the change first.** With **Preview changes** on, which is the default, the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before anything stands. Choosing **Cancel** puts the model back and tells the assistant you rejected the change, so it asks what to do differently rather than trying the same thing again. With the preference off, the change is applied without a dialog.
+- **One undo step.** Everything the script did collapses into a single entry named _C# script (AI Assistant)_. One **Ctrl+Z** puts the model back.
+- **All or nothing.** A script that fails part way through leaves the model untouched, and the assistant reports the error rather than leaving you with half an edit.
+- **Only model work runs this way.** A script that reaches for files, the network or an external assembly is never executed for you. It comes back as a script artifact carrying an **Unsafe** badge with **Execute** disabled, and the assistant tells you what it used.
+
+Asking for a script rather than for the change still gives you a script. _Write me a script that renames every measure to sentence case_ opens a script document for you to run yourself, whatever this setting says.
+
+Administrators can prevent this entirely with the `DisableCSharpScripts` [policy](xref:policies), which also stops the assistant writing scripts for you to run.
+
+They can also allow scripting but keep it inside the model, with the `BlockUnsafeScripts` policy. Under it a script that reaches for files, the network or an external assembly is refused outright rather than handed to you for review, wherever it came from. See [Administrator policies](xref:csharp-scripts#administrator-policies).
 
 ## 对话
 
-AI 助手支持多个同时进行的对话。 每个对话都会维护各自的信息历史记录和上下文。
+AI 助手支持多个同时进行的对话。每个对话都会维护各自的信息历史记录和上下文。
 
 - 对话会跨会话保留，并存储在本地的 `%LocalAppData%\TabularEditor3\AI\Conversations\` 中
-- 标题会在首次交流后自动生成。 你可以手动重命名对话
-- **自动压缩**：当对话接近上下文窗口限制（约 80%）时，较早的信息会自动总结，以腾出空间。 压缩前会先归档完整对话的快照
+- 标题会在首次交流后自动生成。你可以手动重命名对话
+- **Auto-compaction**: when the conversation approaches the context window limit, older messages are automatically summarized to free up space. A snapshot of the full conversation is archived before compaction. The threshold is set under [Context Compaction](#context-compaction), and is a percentage of the model's own context window
+
+### Deleting a conversation
+
+**Delete conversation** sits at the left-hand end of the AI Assistant toolbar, next to **New conversation**. It asks for confirmation first.
+
+The conversation and its history are removed from disk and cannot be recovered. To hide the AI Assistant panel instead of deleting anything, use the close button on the panel's title bar, or **View > AI Assistant**.
 
 ## 工件
 
@@ -214,110 +258,178 @@ AI 助手支持多个同时进行的对话。 每个对话都会维护各自的�
 
 生成物会在 AI 生成过程中实时流式输出。 C# Script 生成物包含安全分析，可标记潜在不安全的代码（例如文件系统访问或网络操作）。
 
-![AI Assistant Generate C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
+![The AI Assistant pane showing a generated C# script artifact with an Execute button, and the assistant's explanation of what the script does and the case-sensitivity caveat it comes with](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
-当你从聊天中执行 C# Script 时，**脚本预览**对话框会并排显示该脚本对模型元数据所做的所有更改的差异对比。 你可以接受这些更改，或将其撤销。 详见[使用预览运行脚本](xref:csharp-scripts#run-c-scripts-with-preview)。
+当你从聊天中执行 C# Script 时，**脚本预览**对话框会并排显示该脚本对模型元数据所做的所有更改的差异对比。你可以接受这些更改，或将其撤销。详见[使用预览运行脚本](xref:csharp-scripts#run-c-scripts-with-preview)。
 
-![脚本预览 - 模型更改](~/content/assets/images/preview-script-changes.png)
+![The Script Preview - Model Changes dialog, the model before and after side by side, with the Internet Total Freight measure's format string changed and a description and a display folder added, each marked against its original](~/content/assets/images/preview-script-changes.png)
 
 ## 自定义指令
 
-自定义指令是一组用于在特定任务中引导 AI 助手行为的指令。 它们会根据意图识别自动启用，也可以手动调用。
+自定义指令是一组用于在特定任务中引导 AI 助手行为的指令。 The assistant is given a list of every available instruction and only loads the full text of the ones it judges relevant to your request. Once an instruction has been loaded it stays in effect for the rest of the conversation.
+
+> [!IMPORTANT]
+> The `description` is now the only thing the assistant reads when deciding if an instruction should be used, so keep yours accurate and specific.
 
 ### 内置自定义指令
 
 AI 助手包含以下内置自定义指令：
 
-| 自定义指令  | 触发词                 |
-| ------ | ------------------- |
-| DAX 查询 | DAX、查询、EVALUATE、度量值 |
-| 模型修改   | 修改、更改、添加、更新、创建      |
-| 模型设计   | 设计、架构、模式、最佳实践       |
-| 整理模型   | 整理、清理、文件夹、重命名       |
-| 优化模型   | 优化、性能、慢、速度          |
-| 宏      | 宏、自动化、录制            |
-| UDF    | UDF、函数、用户自定义函数      |
-| BPA    | BPA、最佳实践、规则、违规      |
+| 自定义指令                            | Invoke with           | Covers                                                                                                                                               |
+| -------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DAX 查询                           | `/dax-querying`       | Writing and executing DAX queries: column and measure qualification, verifying filter values, validating and updating queries        |
+| 模型修改                             | `/model-modification` | C# scripts that create or change model objects: TOMWrapper API patterns, execution order, idempotent updates, naming rules           |
+| Semantic Model Design            | `/model-design`       | Star schema, relationships and cross-filtering, date tables, measures versus calculated columns, calculation groups, naming                          |
+| Semantic Model Organization      | `/organize-model`     | Auditing and tidying model metadata: naming conventions, table groups, display folders, hidden columns, format strings, descriptions |
+| Semantic Model Size Optimization | `/optimize-model`     | Reducing model memory and size: VertiPaq measurement, column removal, data type tuning, structural changes, SKU limits               |
+| 宏                                | `/macros`             | Reusable C# macros for the Macros window: selection contexts, generic-code rules                                                     |
+| DAX 用户自定义函数                      | `/udf`                | Writing DAX UDFs: syntax, `VAL`/`EXPR` parameter modes, type hints, namespaces, DaxLib                                               |
+| 最佳实践分析器                          | `/bpa`                | Reviewing violations and writing custom rules as LINQ Dynamic expressions                                                                            |
 
-自定义指令会在助手回复上方以指示器形式显示，用于说明哪些指令影响了本次回复。 你可以在 **偏好 > AI Assistant > 偏好 > 显示自定义指令指示器** 中切换该指示器的显示。
+自定义指令会在助手回复上方以指示器形式显示，用于说明哪些指令影响了本次回复。 You can toggle this display in **Tools > Preferences > AI Features > AI Assistant > Preferences > Show custom instructions indicator**.
 
 ### 调用自定义指令
 
-输入 `/` 浏览可用的自定义指令；或在信息开头输入完整的 `/instruction-id`，以明确调用某条特定指令。 例如，`/dax-querying` 会强制使用 DAX 查询指令，无论信息内容如何。
+输入 `/` 浏览可用的自定义指令；或在信息开头输入完整的 `/instruction-id`，以明确调用某条特定指令。例如，`/dax-querying` 会强制使用 DAX 查询指令，无论信息内容如何。 If you type nothing after the `/id`, the assistant is just asked to use that instruction.
+
+Explicit invocation is still worth using when you want to be certain the instruction is applied. An explicitly invoked instruction stays in effect for the rest of the conversation, just as an automatically loaded one does.
 
 ### 添加自己的自定义指令
 
-你可以将 `.md` 文件放到 `%LocalAppData%\TabularEditor3\AI\CustomInstructions\` 中，以创建自定义指令。 每个文件都需要包含 YAML front matter，用于定义指令的元数据：
+你可以将 `.md` 文件放到 `%LocalAppData%\TabularEditor3\AI\CustomInstructions\` 中，以创建自定义指令。 The folder is created the first time the AI Assistant runs, with an `example.md` file in it to copy from. Use **Open Custom Instructions Folder** on the AI Assistant toolbar to get there.
+
+Each file may open with YAML frontmatter defining the instruction metadata. None of it is required:
 
 ```yaml
 ---
-id: my-custom-skill
-name: My Custom Skill
+id: my-custom-instruction
+name: My Custom Instruction
 description: A brief description shown in the autocomplete popup.
 priority: 100
 always_inject: false
 hidden: false
-triggers:
-  keywords:
-    - keyword1
-    - keyword2
-  patterns:
-    - "\\bregex pattern\\b"
-  context_required:
-    - model_loaded
 ---
 
-你的指令内容写在这里。当该指令被激活时，这段文本会
-注入到 AI 的 system prompt 中。
+Your instruction content goes here. This is the text that will be
+injected into the AI's system prompt when the instruction is activated.
 ```
 
-| 字段                          | 必需 | 默认值                                                    | 说明                                |
-| --------------------------- | -- | ------------------------------------------------------ | --------------------------------- |
-| `id`                        | 否  | 不含 `.md` 的文件名                                          | 唯一标识符，也会作为 `/id` 用于显式调用           |
-| `name`                      | 否  | `id` 使用标题式大小写                                          | 自动完成中的显示名称                        |
-| `description`               | 否  | -                                                      | 显示在名称下方的简短说明                      |
-| `priority`                  | 否  | 100                                                    | 当匹配到多个自定义指令时，数值越高越优先注入            |
-| `always_inject`             | 否  | false                                                  | 如果为 true，则始终包含在系统提示词中             |
-| `hidden`                    | 否  | false                                                  | 如果为 true，则不会在 `/command` 的自动补全中显示 |
-| `triggers.keywords`         | 否  | [] | 触发该指令的词（不区分大小写）                   |
-| `triggers.patterns`         | 否  | [] | 用于复杂匹配的正则表达式                      |
-| `triggers.context_required` | 否  | [] | 必须满足的条件（例如 `model_loaded`）        |
+| 字段              | 必需 | 默认值                  | 说明                                                                                                                    |
+| --------------- | -- | -------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `id`            | 否  | 不含 `.md` 的文件名        | 唯一标识符，也会作为 `/id` 用于显式调用                                                                                               |
+| `name`          | 否  | `id` 使用标题式大小写        | 自动完成中的显示名称                                                                                                            |
+| `description`   | 否  | Falls back to `name` | Say what the instruction covers and when it applies                                                                   |
+| `priority`      | 否  | 100                  | Higher values are injected first when several Custom Instructions are in effect                                       |
+| `always_inject` | 否  | false                | If true, always included in the system prompt. Such an instruction is not offered in `/` autocomplete |
+| `hidden`        | 否  | false                | 如果为 true，则不会在 `/command` 的自动补全中显示                                                                                     |
 
 具有与内置指令相同 `id` 的自定义指令会覆盖内置版本。
 
-## 同意
+Notes on how files are read:
 
-AI 助手在将数据发送给 AI 提供商之前会先请求你的许可。 同意按特定数据类型进行限定：
+- Frontmatter must start with `---` on the very first line of the file and end with a `---` line. If it does not, or if the YAML cannot be parsed, the whole file is treated as instruction content and every default above applies
+- Keys that are not in the table above are ignored. This is what makes a leftover `triggers:` section harmless
+- `{{version}}` anywhere in the body is replaced with the Tabular Editor AI component's version
+- Only `.md` files directly in the folder are read; subfolders are not searched
 
-| 同意类别      | 说明                              |
-| --------- | ------------------------------- |
-| 查询数据      | DAX 查询结果和数据样本                   |
-| 读取文档      | 读取打开的文档内容，例如 DAX 脚本和 DAX 查询     |
-| 修改文档      | 对打开的文档进行更改                      |
-| 模型元数据     | 表和列架构、度量值定义以及其他模型元数据            |
-| 编辑 BPA 规则 | 创建或修改 Best Practice Analyzer 规则 |
-| 读取宏       | 读取宏定义                           |
+### Custom Instructions from your organization
 
-当 AI 助手首次需要访问某种数据类型时，会显示一个同意对话框。 你可以选择同意的持续时间：
+An administrator can publish a folder of Custom Instructions for everyone, with the `AiCustomInstructionsPath` [policy](xref:policies). It can be a read-only network share. Those instructions load for every user in addition to the built-in ones, and they are used exactly like any other: offered in `/` autocomplete, chosen by their description, invoked by `/id`.
 
-| 选项   | 范围                                                        |
-| ---- | --------------------------------------------------------- |
-| 这次   | 仅限单次请求                                                    |
-| 本次会话 | 直到重新启动 Tabular Editor                                     |
-| 此模型  | 保存在模型的用户选项 (.tmuo) 文件中 |
-| 始终   | 全局偏好，将在所有模型和会话间保留                                         |
+Where the same `id` exists in more than one place, the one that wins is:
 
-![AI Assistant Consent Dialog](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
+1. Your organization's folder
+2. Your own folder
+3. The built-in instructions
 
-### 管理同意项
+So an organization instruction overrides both a built-in one and a user's own file of the same name. A separate policy, `DisableUserCustomInstructions`, makes Tabular Editor ignore the instructions in your own folder altogether and disables **Open Custom Instructions Folder**; the built-in and organization instructions keep loading.
 
-你可以在 **工具 > 偏好 > AI 助手 > AI 同意** 中查看并重置你的同意选择。 每个同意类别都会显示其当前状态。 点击 **Reset** 可撤销处于“Always allowed”状态的同意，并将其恢复为“Ask when needed”。
+Both policies require Tabular Editor 3 Enterprise Edition.
 
-![AI Assistant Consent Settings](~/content/assets/images/ai-assistant/ai-assistant-consent-reset.png)
+## Permissions and consent
+
+What the AI Assistant may touch is governed by _five resources_, each carrying one access level. The same five grants govern the [MCP server](xref:mcp-server), so there is one place to look and one place to change your mind.
+
+| Resource                   | What it covers                                                                                                                                           | 级别                  | 默认值       |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------- |
+| **Model metadata**         | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics                    | Deny / Read / Write | **Read**  |
+| **Model data**             | Data values from your model, such as DAX query results. Requires a live connection                                                       | Deny / Read         | **Deny**  |
+| **Best Practice Analyzer** | Read lists rules and runs the analysis; Write adds or modifies rules                                                                                     | Deny / Read / Write | **Read**  |
+| **Documents**              | Your open document editors: C# scripts and DAX queries. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | **Write** |
+| **Macros**                 | Your macro library. Read lists and reads macros; Write is reserved for future macro-editing tools                                        | Deny / Read / Write | **Write** |
+
+A **Write** grant covers Read, so there is no need to grant both. **Model data** is read-only by nature (the assistant can query your data but has no way to write values back), so it offers only Deny and Read.
+
+> [!NOTE]
+> **Model data** is the one resource denied by default. Metadata describes your model; data _is_ your model's contents, so sending it to an AI provider is a decision worth making deliberately rather than inheriting from a default.
+
+Three grants are worth a closer look:
+
+- **Model metadata > Write** lets the assistant change your model. On its own, that means writing a C# script and handing it to you to run. It is also the grant that makes [direct execution](#letting-the-assistant-change-your-model) possible, but the assistant only runs scripts itself once you have turned that on separately. Either way, only scripts that are statically determined to be safe ever run, and a script that reaches outside the model, to the file system or the network, is never executed for you.
+- **Best Practice Analyzer > Read** lets the assistant run the analysis, but running it also needs **Model metadata > Read**, since the analysis reads the model.
+- **Model data > Read** is not sufficient on its own to run a DAX query: that needs **Model metadata > Read** as well, because a query can read metadata through `INFO` functions, DMVs and the column names in its own result.
+
+### Setting the permission grants
+
+Open **Tools > Preferences > AI Features > Permissions**. Each resource has a dropdown carrying its available levels.
+
+![AI Features > Permissions preferences, one dropdown per resource at its default](~/content/assets/images/pref-ai-permissions.png)
+
+There is no separate "ask me" level. **Deny** is what asking looks like: in the chat, a resource you have not granted produces a permission card at the moment it is needed. Over MCP, where there is nobody to ask, a denied resource's tools are unavailable.
+
+> [!NOTE]
+> If you used the AI Assistant before 3.27.0 you will notice fewer prompts. Model metadata, Documents and Macros now start at Read or above, so the chat no longer asks for them. Only DAX query results and Best Practice Analyzer rule edits still raise a card out of the box. Set a resource to **Deny** to get its prompt back.
+
+> [!NOTE]
+> In the Enterprise Edition, IT administrators can set policies that determine these permissions. See @policies.
+
+### Permission cards in the chat
+
+When the assistant needs a resource your standing grant does not cover, a **Permission Required** card appears in the conversation, naming what it wants to do, for instance "The AI would like to access the metadata of your semantic model", or the DAX query it proposes to run.
+
+![A Permission Required card in the chat, naming the DAX query the assistant wants to run, with Allow, Allow for session, Allow for this model, Always allow and Deny buttons](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
+
+| Button                   | What it does                                                                                                                                                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Allow**                | This turn only. The assistant may repeat the same request while it finishes what you asked, and nothing is remembered afterwards                                                                          |
+| **Allow for session**    | Until Tabular Editor is restarted. Held in memory, never written to disk                                                                                                                                  |
+| **Allow for this model** | Recorded in the model's [user options](xref:user-options) file, so it applies the next time you open this model. Offered for **Model metadata** and **Model data** only, and only while a model is loaded |
+| **Always allow**         | Raises the standing grant on the Permissions page, for every model and every session                                                                                                                                      |
+| **Deny**                 | Refuses this request. The assistant carries on without that access and asks again next time                                                                                                               |
+
+**Always allow** only ever raises a grant, never lowers one: allowing a read cannot narrow a Write grant you already had.
+
+You do not have to answer the card at all. See [Stopping a turn while permission is pending](#stopping-a-turn-while-permission-is-pending) below.
+
+### What the MCP server shares, and what it does not
+
+The [MCP server](xref:mcp-server) reads the _same five grants_, but it does not use the card flow. An agent connecting over MCP is unattended, so there is nobody to prompt:
+
+- Grants are _snapshotted when the server starts_ and govern its tool surface for the server's lifetime. Changing a grant while the server is running has no effect until you restart it.
+- Only the _global_ grants are read. A grant you gave with **Allow for this model**, and a session grant, apply to the chat alone and never reach an MCP agent.
+- A denied resource's tools are not offered to the agent at all, rather than being offered and then refused.
+
+### Withdrawing permission
+
+Set the resource back to **Deny** on the Permissions page. The chat asks again the next time it needs that resource; a running MCP server keeps the access it started with until you restart it.
+
+Lowering a global grant does not clear a per-model grant. To withdraw one of those, delete the model's `.tmuo` file, or the `Permissions` entry within it. See details in @user-options.
+
+### Audit record
+
+On Tabular Editor 3 Enterprise Edition, a local record is kept of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** takes you to the files.
+
+On Desktop and Business Edition, and before a license is activated, nothing is recorded, no folder is created and the button is not shown.
+
+See @ai-audit-log for what each record holds, where the files live and the policies that redirect them.
+
+### Stopping a turn while permission is pending
+
+A **Permission Required** card waits for an answer before the assistant can carry on. You do not have to answer it: pressing **Stop** ends the turn, removes the card and treats the request as denied. The panel returns to its normal state and you can carry on in the same conversation with a new message.
 
 ## 偏好设置
 
-在 **Tools > 偏好设置 > AI Assistant > 偏好设置** 中配置 AI Assistant 的显示和行为选项。
+Configure AI Assistant display and behavior options under **Tools > Preferences > AI Features > AI Assistant > Preferences**.
 
 ### 聊天显示
 
@@ -329,66 +441,79 @@ AI 助手在将数据发送给 AI 提供商之前会先请求你的许可。 同
 
 ### 上下文压缩
 
-| 偏好       | 默认值  | 说明                 |
-| -------- | ---- | ------------------ |
-| 自动压缩     | true | 接近上下文限制时自动摘要较早的信息  |
-| 自动压缩阈值 % | 80   | 令牌使用率达到该百分比时触发自动压缩 |
-
-### 知识库
-
-| 偏好         | 默认值  | 说明                          |
-| ---------- | ---- | --------------------------- |
-| 启动时检查知识库更新 | true | Tabular Editor 启动时自动检查知识库更新 |
+| 偏好       | 默认值  | 说明                                                                                                                                                  |
+| -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 自动压缩     | true | 接近上下文限制时自动摘要较早的信息                                                                                                                                   |
+| 自动压缩阈值 % | 80   | Percentage of the model's own context window at which auto-compaction is triggered. Values outside 50-100 have no additional effect |
 
 ### C# Script
 
-| 偏好   | 默认值  | 说明                                    |
-| ---- | ---- | ------------------------------------- |
-| 预览更改 | true | 在聊天中执行 AI 生成的 C# Script 时，显示“预览更改”对话框 |
+| 偏好                                            | 默认值   | 说明                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------------------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Allow AI assistant to run C# scripts directly | false | Let the assistant carry out model changes itself instead of opening a script for you to run. Unavailable until **Model metadata** is set to **Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). See [Letting the assistant change your model](#letting-the-assistant-change-your-model) |
+| 预览更改                                          | true  | 在聊天中执行 AI 生成的 C# Script 时，显示“预览更改”对话框                                                                                                                                                                                                                                                                                                                                                   |
 
-![AI 助手偏好](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+Two further settings sit on the **AI Features** page itself, above **AI Assistant**, because they apply to the MCP server as well: _Check for knowledge base updates on startup_, and the **Open audit folder** button. See @preferences.
+
+![The AI Assistant preferences page, with the three chat display indicators, Auto compact and its threshold, and the two C# script settings: Allow AI assistant to run C# scripts directly, cleared, and Preview changes, ticked](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
 ## Token 使用量
 
-每条发给 AI 助手的信息都会消耗输入 token。 单条信息的 token 成本取决于包含了哪些上下文：
+每条发给 AI 助手的信息都会消耗输入 token。单条信息的 token 成本取决于包含了哪些上下文：
 
-- **系统提示词和自定义说明**：每条信息都会一并发送。 通常为 5,000 到 15,000 个 token，具体取决于启用了哪些自定义说明。
-- **模型元数据**：当助手需要理解你的模型时，会通过工具调用获取元数据。 为了在处理大型模型时不超出提供程序的速率限制，助手会采用渐进式披露的方式——先获取轻量级概览（表和度量值名称、关系），然后按名称、说明或 DAX 表达式搜索相关对象，只有在问题确实需要时，才会深入获取特定表或对象的完整信息。 原本会非常庞大的工具结果会被截断，并附带说明助手如何检索其余数据。
+- **系统提示词和自定义说明**：每条信息都会一并发送。通常为 5,000 到 15,000 个 token，具体取决于启用了哪些自定义说明。
+- **Model metadata**: when the assistant needs to understand your model, it retrieves metadata through tool calls. To stay within provider rate limits on large models, the assistant uses a progressive-disclosure approach. That is, it first fetches a lightweight overview (table and measure names, relationships), then searches for relevant objects by name, description or DAX expression and only drills into full details for the specific tables or objects that the question requires. 原本会非常庞大的工具结果会被截断，并附带说明助手如何检索其余数据。
 
 ### 令牌计数器
 
-聊天输入区域右下角的令牌计数器会显示当前对话的累计令牌用量，其中包括工具往返调用产生的输入。 将鼠标悬停在计数器上可查看明细：
+The token counter sits in the status strip above the message box, next to the [active model indicator](#choosing-a-model). The bar reads _used_ / _total_ in thousands of tokens and is colored green, amber or red as the context fills up. A `±` in front of the figure means an exact count is not available yet.
 
-- **输入** — 对话中按全价计费的输入令牌；下面一行会显示其中有多少来自提供程序的提示缓存
-- **缓存写入** — 写入提示缓存的令牌（取决于提供程序）
-- **输出** — 模型生成的令牌
-- **上下文压力** — 当前已使用的上下文窗口百分比；也会通过计数器旁边的滑条进行可视化显示
+Hover over it for a breakdown in three labeled sections:
+
+| Section                                           | What it covers                                                                                                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Last turn**                                     | What the most recent exchange cost: fresh input, tokens served from the provider's prompt cache, tokens written to the cache and output |
+| **This conversation (billed)** | The same four figures accumulated across every request in the conversation, tool round-trips included                                                   |
+| **Context**                                       | Tokens currently in the context window, against the window's real size                                                                                  |
+
+A line reads, for example, `37,588 input + 131,744 cached · write 37,558 · output 2,866`. The cache parts are left out for providers that do not support prompt caching, and a section is left out entirely when it has nothing to report.
+
+> [!TIP]
+> Separating the last turn from the conversation total is what tells you whether a short follow-up question was actually expensive. A large **This conversation (billed)** figure next to a small **Last turn** figure is normal in a long conversation.
+
+### Context window
+
+The context usage bar, the auto-compaction point and the maximum length of a single reply all follow the _real context window of the model in use_, not one fixed figure. A model with a one-million-token window is measured against a million tokens.
+
+Where the model's real window is not known (an Azure OpenAI or Custom deployment name, or a machine where the model catalog has never been retrieved), Tabular Editor falls back to 200,000 tokens.
 
 ### 减少 token 使用量
 
-提问前，先在 **TOM Explorer** 中选择特定对象。 选中对象后，助手会将上下文限定在这些对象上，而不是拉取整个模型的元数据。 这是同时减少 token 使用量和 API 成本的最有效方式。
+提问前，先在 **TOM Explorer** 中选择特定对象。选中对象后，助手会将上下文限定在这些对象上，而不是拉取整个模型的元数据。这是同时减少 token 使用量和 API 成本的最有效方式。
 
 其他减少 token 使用量的方法：
 
-- 围绕特定的表、度量值或列提出更聚焦的问题，而不是对整个模型提出泛泛的问题。 像 _“为所有度量值设置显示文件夹”_ 这样含糊的提示，会迫使助手检索整个模型的元数据。 像 _“为我选中的度量值设置显示文件夹”_ 这样具体的提示，会将上下文限制在当前选择范围内，并且消耗的 token 少得多
+- 围绕特定的表、度量值或列提出更聚焦的问题，而不是对整个模型提出泛泛的问题。像 _“为所有度量值设置显示文件夹”_ 这样含糊的提示，会迫使助手检索整个模型的元数据。像 _“为我选中的度量值设置显示文件夹”_ 这样具体的提示，会将上下文限制在当前选择范围内，并且消耗的 token 少得多
 - 切换话题时开启新对话，避免累积过长的对话历史
 - 进行探索性提问时，使用更小或成本更低的模型
 
 ## 局限性
 
-- 需要用户提供 API 密钥。 不包含内置 API 密钥
+- 需要用户提供 API 密钥。不包含内置 API 密钥
 - AI 的响应取决于所选模型及提供商的能力
-- 最大上下文窗口为 200,000 个 token
+- The usable context window is the selected model's own; where Tabular Editor cannot determine it, 200,000 tokens is assumed
 - AI 助手不能替代你对 DAX 和语义模型设计基础的理解
 - 响应质量会因提供商和模型选择而异
 - AI 助手无法连接到外部文件或服务，也无法搜索网页
-- AI 助手无法添加或充当 MCP 服务器
-- AI 助手无法在聊天中切换到其他模型。 使用 Tabular Editor 的用户界面更改模型连接
+- The AI Assistant cannot connect to external MCP servers to extend its own tools. This is about the chat only: Tabular Editor 3 itself acts as an MCP server, so your own agent can work on the open model. See @mcp-server
+- AI 助手无法在聊天中切换到其他模型。使用 Tabular Editor 的用户界面更改模型连接
 - AI 助手无法管理偏好
 
 ## 禁用 AI 助手
 
-AI 助手是一个可选组件。 该功能目前处于公开预览阶段，安装时默认不会包含，但用户可以选择安装。 你可以再次运行 Tabular Editor 3 安装程序，修改现有的 Tabular Editor 3 安装，以包含或排除 AI 助手组件。 如果你使用的是 Tabular Editor 3 便携版，可以从安装目录中删除名为 `TabularEditor3.AI.dll` 的文件来移除 AI 助手组件。
+The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. 你可以再次运行 Tabular Editor 3 安装程序，修改现有的 Tabular Editor 3 安装，以包含或排除 AI 助手组件。如果你使用的是 Tabular Editor 3 便携版，可以从安装目录中删除名为 `TabularEditor3.AI.dll` 的文件来移除 AI 助手组件。
+
+The AI Assistant and the MCP server ship in the same component, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off the chat while keeping the MCP server, leave the component in place and use the `DisableAiChat` policy.
 
 > [!NOTE]
-> 无论是否安装 AI 助手组件，系统管理员都可以通过指定 [`DisableAi` 策略](xref:policies) 来禁用 Tabular Editor 3 中的所有 AI 功能。
+> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3, the MCP server included, by specifying the [`DisableAi` policy](xref:policies). `DisableAiChat` turns off the chat alone, and `DisableMcpServer` the MCP server alone. See @policies.
