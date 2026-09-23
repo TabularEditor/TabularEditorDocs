@@ -2,7 +2,7 @@
 uid: macros
 title: Creación de macros
 author: Morten Lønskov
-updated: 2023-12-07
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -61,6 +61,14 @@ Tabular Editor sugerirá un contexto en función del script que se esté guardan
 Una macro puede abrirse haciendo doble clic en ella en el panel de macros y, tras editar el C# Script, guardarse con _Ctrl + S_ o mediante el botón Editar macro.
 
 ![Cuadro de información de edición de macro](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
+
+## Administrator policies
+
+Macros can be governed centrally, through the registry policies an IT department deploys. `DisableMacros` stops them being saved or run at all, and macros stored in `%LocalAppData%` are not loaded when Tabular Editor starts.
+
+In Tabular Editor 3, `BlockUnsafeScripts` allows macros only where they stay within the semantic model. A macro that reads or writes a file, reaches the network, starts another program or references an outside assembly is saved, but left out of every menu so it cannot be run by accident. You will find it under **View > Macros** with its **Blocked** column filled in, where it can still be opened and edited; bring it back inside the line and its menu item returns without restarting Tabular Editor. Saving such a macro tells you it is saved but will not run.
+
+See [C# Scripts](xref:csharp-scripts#administrator-policies) for what counts as staying within the model, and @policies for the registry values themselves.
 
 ## Archivo JSON de macros
 
