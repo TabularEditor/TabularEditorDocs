@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-此脚本作为 Tabular Editor x Databricks 系列的一部分创建。 在 Databricks Unity Catalog 中，表名不能使用大写字母。 在不使用大写字母的前提下，让表名更易读的一种常见做法是采用 snake_case。 另外，虽然列名可以包含空格，但通常不建议这样做，因为用起来很麻烦；因此数据工程师多半会使用 snake_case、camelCase 或 PascalCase。
+此脚本作为 Tabular Editor x Databricks 系列的一部分创建。在 Databricks Unity Catalog 中，表名不能使用大写字母。在不使用大写字母的前提下，让表名更易读的一种常见做法是采用 snake_case。另外，虽然列名可以包含空格，但通常不建议这样做，因为用起来很麻烦；因此数据工程师多半会使用 snake_case、camelCase 或 PascalCase。
 
 不过，我们希望语义模型的用户在模型中看到业务友好的名称。
 
@@ -98,5 +98,5 @@ foreach(var t in Model.Tables) {
 
 ### 说明
 
-此脚本执行后，会遍历模型中的所有表和列，并将其重命名为更友好的名称。 以 snake_case、camelCase 或 PascalCase 命名的名称都会转换为 Proper Case。 无需选择表，因为会处理模型中的所有表；直接运行脚本即可。 在遍历列的同时，它还会将默认汇总设置为“无”，并为所有 DateTime 类型字段设置格式字符串。
+此脚本执行后，会遍历模型中的所有表和列，并将其重命名为更友好的名称。以 snake_case、camelCase 或 PascalCase 命名的名称都会转换为 Proper Case。无需选择表，因为会处理模型中的所有表；直接运行脚本即可。在遍历列的同时，它还会将默认汇总设置为“无”，并为所有 DateTime 类型字段设置格式字符串。
 
