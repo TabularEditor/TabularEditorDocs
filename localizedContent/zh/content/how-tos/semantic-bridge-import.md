@@ -23,20 +23,16 @@ applies_to:
 这篇操作指南演示如何使用 C# Script 将已加载的指标视图导入到表格模型中，以及如何查看导入产生的诊断信息。
 
 > [!NOTE]
-> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。
-> 早期版本不支持此处展示的 v1.1 指标视图功能。
+> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。早期版本不支持此处展示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 > [!NOTE]
-> 下面的每个示例都会导入到当前打开的表格模型中。
-> 如果要运行多个示例，建议在每个示例之后撤销导入（菜单中选择 Edit>Undo，或在 TOM Explorer 中按 CTRL-z）。
-> 如果依次执行每次导入，就会生成多个已转换的指标视图副本。
+> 下面的每个示例都会导入到当前打开的表格模型中。如果要运行多个示例，建议在每个示例之后撤销导入（菜单中选择 Edit>Undo，或在 TOM Explorer 中按 CTRL-z）。如果依次执行每次导入，就会生成多个已转换的指标视图副本。
 
 ## 导入已加载的指标视图
 
-`ImportToTabular` 会将当前加载的指标视图转换为当前打开的表格模型。
-构建 M 分区表达式时会用到 Databricks 主机名和 HTTP 路径；
+`ImportToTabular` 会将当前加载的指标视图转换为当前打开的表格模型。构建 M 分区表达式时会用到 Databricks 主机名和 HTTP 路径；
 如需快速测试，可以先传入占位值，再在刷新数据前修正。
 
 ```csharp {run id=import setup=mv-sample after=none output=true}
@@ -80,8 +76,7 @@ foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
 
 ## 查看翻译诊断信息
 
-某些指标视图中的结构无法转换为 Tabular。
-例如，窗口度量值不会转换为 DAX：
+某些指标视图中的结构无法转换为 Tabular。例如，窗口度量值不会转换为 DAX：
 导入时会创建一个占位 TOM 度量值，并在注释中保留原始指标视图定义，
 同时向你 Report 一条诊断警告。
 
