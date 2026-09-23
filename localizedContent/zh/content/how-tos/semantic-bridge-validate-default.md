@@ -23,17 +23,13 @@ applies_to:
 本操作指南演示如何使用内置验证规则验证已加载的指标视图，并解读诊断信息。
 
 > [!NOTE]
-> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
-> 较早版本不支持此处展示的 v1.1 指标视图功能。
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。较早版本不支持此处展示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## 默认验证规则
 
-Semantic Bridge 包含内置规则，可依据 [指标视图文档](https://learn.microsoft.com/azure/databricks/business-semantics/) 中定义的规则来验证指标视图定义。
-这些规则会在反序列化时自动运行——无论是直接调用 `Deserialize`，还是通过任何读取指标视图的方法(如 `Load` 或 `ImportToTabularFromFile`)。
-这些自动运行产生的诊断信息随后仍可通过 `SemanticBridge.MetricView.ImportDiagnostics` 获取。
-你也可以按需对已加载的指标视图运行这些规则，本文将介绍这一做法。
+Semantic Bridge 包含内置规则，可依据 [指标视图文档](https://learn.microsoft.com/azure/databricks/business-semantics/) 中定义的规则来验证指标视图定义。这些规则会在反序列化时自动运行——无论是直接调用 `Deserialize`，还是通过任何读取指标视图的方法(如 `Load` 或 `ImportToTabularFromFile`)。这些自动运行产生的诊断信息随后仍可通过 `SemanticBridge.MetricView.ImportDiagnostics` 获取。你也可以按需对已加载的指标视图运行这些规则，本文将介绍这一做法。
 
 ## 使用默认规则执行验证
 
@@ -97,8 +93,7 @@ Output(sb.ToString());
 
 ## 包含验证错误的示例
 
-验证始终针对当前已加载的指标视图运行，因此你可以在脚本中故意引入违规，并确认它会被检测出来。
-这里我们将某个字段的表达式清空，以触发 `FieldExprRequired`：
+验证始终针对当前已加载的指标视图运行，因此你可以在脚本中故意引入违规，并确认它会被检测出来。这里我们将某个字段的表达式清空，以触发 `FieldExprRequired`：
 
 ```csharp {run id=error-example setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
