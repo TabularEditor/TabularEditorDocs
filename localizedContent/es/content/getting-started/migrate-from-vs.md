@@ -2,7 +2,7 @@
 uid: migrate-from-vs
 title: Migración desde Visual Studio
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -82,7 +82,7 @@ Si habilitas la opción **Usar base de datos del Workspace**, Tabular Editor te 
 
 ### Requisitos del nivel de compatibilidad
 
-Tabular Editor te permite crear y editar modelos con nivel de compatibilidad 1200 o superior, incluidos Analysis Services, Azure Analysis Services y los datasets de Power BI implementados a través del [punto de conexión XMLA](xref:powerbi-xmla). El conjunto de niveles disponibles depende de tu destino de implementación, y los niveles más recientes desbloquean características como calendarios personalizados y funciones definidas por el usuario en DAX.
+Tabular Editor lets you create and edit models at compatibility level 1200 and higher covering Analysis Services, Azure Analysis Services and Power BI datasets deployed through the [XMLA endpoint](xref:powerbi-xmla). The set of available levels depends on your deployment target (Analysis Services stops at 1700, while 1706 is Power BI and Fabric only), and newer levels add features such as custom calendars (1701+) and DAX user-defined functions (1702+).
 
 Para consultar la lista completa de niveles y orientación sobre cómo elegirlos y cambiarlos, consulta @update-compatibility-level.
 
