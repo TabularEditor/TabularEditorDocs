@@ -52,6 +52,7 @@ This training material focuses on the Tabular Editor product, so we assume you a
 - @properties-view-reference
 - @tom-explorer-view-reference
 - @diagram-view-reference
+- @table-preview-reference
 
 **Parallel development**
 
