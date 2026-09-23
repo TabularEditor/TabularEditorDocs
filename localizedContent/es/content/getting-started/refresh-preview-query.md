@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Actualización, vista previa y consulta de datos
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -84,19 +84,11 @@ En determinados momentos, durante la creación de DAX y el desarrollo del Data m
 
 ![Preview Data](~/content/assets/images/preview-data-big.png)
 
-Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Además, puedes ordenar o filtrar columnas individuales. Tabular Editor ejecuta una consulta DAX sobre el modelo para devolver solo un pequeño número de registros, suficiente para completar la vista actual, y luego va cargando más filas a medida que te desplazas.
+Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Tabular Editor ejecuta una consulta DAX sobre el modelo para devolver solo un pequeño número de registros, suficiente para completar la vista actual, y luego va cargando más filas a medida que te desplazas.
 
-El funcionamiento de la paginación depende del modo de almacenamiento y del motor:
+Each column header carries a sort and a filter, the grid's right-click menu can open a calculated column's expression or recalculate the table, and **Show actual DAX query...** hands you the query behind the preview as a new DAX query document. Selecting a column in the TOM Explorer scrolls the preview to it.
 
-- En las tablas Import en motores que admiten la función [`WINDOW`](https://dax.guide/window), la paginación usa `WINDOW` sobre la clave principal de la tabla, por lo que puedes desplazarte por toda la tabla.
-- Si el motor no admite `WINDOW` o la tabla no tiene clave primaria, la vista previa muestra las primeras filas e indica que el desplazamiento está deshabilitado.
-- Las tablas DirectQuery solo muestran las primeras filas — no es posible paginar — junto con mensajes informativos.
-
-Los metadatos de la vista previa se almacenan en caché durante la sesión, por lo que volver a abrir una vista previa no vuelve a consultar el servidor. Haz clic en **Actualizar** para volver a leer los metadatos, por ejemplo, después de que el modelo se haya procesado fuera de Tabular Editor.
-
-Si una o más columnas calculadas están en un estado no válido, esas columnas contienen el texto _(Calculation needed)_. Puedes recalcular la tabla haciendo clic con el botón derecho en la columna y eligiendo la opción **Recalcular tabla...**.
-
-![Recalculate Table](~/content/assets/images/recalculate-table.png)
+See @table-preview for the toolbar, the right-click menu, how far you can scroll in each storage mode and the preferences that govern column order and the filter dropdown.
 
 # Pivot Grid
 
