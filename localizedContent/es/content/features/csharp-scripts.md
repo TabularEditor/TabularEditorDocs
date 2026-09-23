@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-05-27
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -171,6 +171,8 @@ La siguiente tabla enumera todos los accesores singulares y plurales disponibles
 > [!NOTE]
 > Los accesores de Rol, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable y Partición se agregaron en Tabular Editor 3.26.0.
 
+Starting with Tabular Editor 3.27.0, objects that were deleted since the model was last saved remain visible in the TOM Explorer, and can be selected. Such objects are not part of the model, so they never appear in the accessors above. Instead, `Selected.Deleted` lists the selected deleted objects, each with a `Name`, `ObjectType`, `Parent` and a `Restore()` method. `Selected.Deleted.Restore()` restores all of them at once. Model objects also expose `HasUnsavedChanges` and `Revert()`, which let a script roll back part of a model. See @unsaved-changes for details.
+
 ## Métodos auxiliares
 
 Tabular Editor proporciona un conjunto de métodos auxiliares especiales para facilitar la realización de determinadas tareas de scripting. Ten en cuenta que algunos de ellos pueden invocarse como métodos de extensión. Por ejemplo, `object.Output();` y `Output(object);` son equivalentes.
@@ -243,7 +245,10 @@ Todos los cambios de metadatos del modelo derivados de la ejecución de un scrip
 > Las funciones de vista previa y deshacer solo se aplican a los cambios de metadatos del modelo. Si un script realiza operaciones externas, como escribir en archivos, bases de datos o realizar solicitudes web, esas operaciones se ejecutan de inmediato y no se pueden revertir. El cuadro de diálogo de vista previa no intenta analizar el código del script; funciona comparando el estado de los metadatos del modelo antes y después de la ejecución.
 
 > [!TIP]
-> El [Asistente de IA](xref:ai-assistant) muestra automáticamente el cuadro de diálogo de vista previa de cambios cuando ejecuta C# Script desde el chat, de modo que siempre puede revisar los cambios del modelo generados por la IA antes de que se apliquen.
+> The [AI Assistant](xref:ai-assistant) shows this dialog when it runs a script itself, as long as **Preview changes** is on under **Tools > Preferences > AI Features > AI Assistant**. It is on by default, so you always get a chance to review AI-generated model changes before they are applied.
+
+> [!NOTE]
+> The preview dialog does not apply to a script run by an agent over the [MCP server](xref:mcp-server). Those scripts are compiled, checked by the safety analysis and run against the model atomically. The agent gets back a structured summary of what changed, and the changes are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) for you to review or revert afterwards.
 
 ## Referencias de .NET
 
@@ -296,6 +301,9 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 ## Acceso a variables de entorno
 
 Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
+
+> [!NOTE]
+> `Environment` is one of the types refused when an administrator has set the `BlockUnsafeScripts` policy. See [Administrator policies](#administrator-policies).
 
 ### Lectura de variables de entorno
 
@@ -372,6 +380,37 @@ foreach(var table in Model.Tables)
 
 Info($"Modelo configurado para el entorno {environment}");
 ```
+
+## Administrator policies
+
+Scripting can be governed centrally, so what a script may do on your own machine is not always what it may do on a machine your IT department manages. Two [policies](xref:policies) decide that.
+
+`DisableCSharpScripts` turns scripting off outright: scripts cannot be created or executed, and the same goes for macros under `DisableMacros`.
+
+`BlockUnsafeScripts` is the middle ground, and the one worth understanding as a script author. Scripts and macros keep working, but only where they stay within the semantic model. A script that reads or writes a file, makes a web request, starts another program, references an outside assembly with `#r`, or sends a command straight to the server is refused before any of it runs.
+
+### What counts as staying within the model
+
+The decision is made by analyzing the compiled script, not by searching its text, so an indirect route to the same place is refused too: reflection through `Type.GetType` or `InvokeMember`, expression trees and delegate invocation, `Activator`, `AppDomain`, `Environment`, XML readers and writers that take a path or a URL, and type-name-based deserialization.
+
+Among the [helper methods](xref:script-helper-methods), the three that write outside the model count as unsafe:
+
+| Refused                                       | Still available                                                              |
+| --------------------------------------------- | ---------------------------------------------------------------------------- |
+| `SaveFile`, `ExecuteCommand`, `Bpa.ExportCsv` | `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader`, `ExportProperties` |
+
+Everything in the TOM object model is fine, as are `System`, `System.Linq`, `System.Collections.Generic` and `Newtonsoft.Json`. In practice a script that builds and changes model objects is unaffected, and a script that exports something to disk is not.
+
+### What you see when a script is refused
+
+A **Script not run** dialog names the policy and what the script used, and the status bar reads _Script blocked by your organization's policy_. The error list stays empty, because this is not a compile error: the script is valid, it is just not allowed to run here. **Run with preview** behaves the same way and shows no preview dialog.
+
+A macro is analyzed when it is saved. Saving succeeds, and a dialog tells you the macro is saved but will not run. A blocked macro is left out of every menu, so it cannot be run by accident, and appears under **View > Macros** with its **Blocked** column filled in. Edit it back inside the line and its menu item returns, without restarting Tabular Editor.
+
+On the command line, `te script`, `te macro run` and `te bpa run --fix` refuse in the same way, exit with a non-zero code and report `blockedByPolicy` in JSON output.
+
+> [!NOTE]
+> `BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition. If the value is set on a copy that is not licensed for it, no script or macro runs at all, safe or not, until an Enterprise license is activated. The Tabular Editor CLI has no editions and simply applies the policy.
 
 ## Compatibilidad
 
