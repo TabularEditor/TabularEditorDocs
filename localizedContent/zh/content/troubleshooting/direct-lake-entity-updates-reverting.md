@@ -19,7 +19,7 @@ applies_to:
 
 # Direct Lake 模型中的实体名称更改会被还原
 
-在 Tabular Editor 3 中编辑 Direct Lake 表分区的 `EntityName` 后，模型在 Power BI 中重新加载时可能会恢复为原始名称。 这种现象常常看起来像是 TE3 没有保存更改，但根因是 Power BI 在刷新期间解析 Direct Lake 元数据的方式。
+在 Tabular Editor 3 中编辑 Direct Lake 表分区的 `EntityName` 后，模型在 Power BI 中重新加载时可能会恢复为原始名称。这种现象常常看起来像是 TE3 没有保存更改，但根因是 Power BI 在刷新期间解析 Direct Lake 元数据的方式。
 
 ---
 
@@ -33,7 +33,7 @@ applies_to:
 
 ## 根本原因
 
-Power BI 通过 `SourceLineageTag` 属性将 Direct Lake 表与其来源绑定。 当该标记与当前分区的 `EntityName` 不匹配时，Power BI 会认为表应与原始源保持同步，并恢复之前的元数据。 Direct Lake 分区还要求通过 `ChangedProperties` 集合记录有意的更改；否则，Power BI 会忽略在 Power BI 服务之外进行的手动编辑。
+Power BI 通过 `SourceLineageTag` 属性将 Direct Lake 表与其来源绑定。当该标记与当前分区的 `EntityName` 不匹配时，Power BI 会认为表应与原始源保持同步，并恢复之前的元数据。 Direct Lake 分区还要求通过 `ChangedProperties` 集合记录有意的更改；否则，Power BI 会忽略在 Power BI 服务之外进行的手动编辑。
 
 ---
 
@@ -51,13 +51,13 @@ Power BI 通过 `SourceLineageTag` 属性将 Direct Lake 表与其来源绑定�
 
 ## 重要说明
 
-- 重命名表时，TE3 不会自动更新 `SourceLineageTag`。 务必手动对齐该标记。
+- 重命名表时，TE3 不会自动更新 `SourceLineageTag`。务必手动对齐该标记。
 - 只有 Direct Lake 表（以及其他复合表）才需要 `ChangedProperties` 标志；传统的导入模式模型不需要它。
 - 这些行为源自 Power BI 的元数据同步规则，而不是 TE3 的存储机制。
 
 ## 使用 C# 自动化批量更新
 
-需要调整多个 Direct Lake 表时，可以运行以下 TE3 脚本。 它会提示输入新的实体名称，更新每个选中的表，同步 `SourceLineageTag`，并标记已更改的元数据。
+需要调整多个 Direct Lake 表时，可以运行以下 TE3 脚本。它会提示输入新的实体名称，更新每个选中的表，同步 `SourceLineageTag`，并标记已更改的元数据。
 
 > **在 TE3 中使用：** 选择相关的 Direct Lake 表，打开 **C# Script** 窗口，粘贴脚本并运行。
 
@@ -320,6 +320,6 @@ public class BatchEntityEditor : Form
 > [!NOTE]
 > 该脚本使用 LLM 进行 Code Assist 生成，但已由 Tabular Editor 团队测试。
 
-运行该脚本只会更新那些被设置了新实体名称的表。 脚本运行结束后，检查更改、保存模型，并在 Power BI 中刷新，以确认元数据能够持久保留。
+运行该脚本只会更新那些被设置了新实体名称的表。脚本运行结束后，检查更改、保存模型，并在 Power BI 中刷新，以确认元数据能够持久保留。
 
 最后，在从 Power BI 刷新之前，打开每个已更新的分区，并验证 `ChangedProperties` 集合中包含 `Name`。
