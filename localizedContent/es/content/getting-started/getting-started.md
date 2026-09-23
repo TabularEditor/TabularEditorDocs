@@ -2,7 +2,7 @@
 uid: getting-started
 title: Instalación y activación
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,27 +17,29 @@ applies_to:
           full: true
 ---
 
-# Primeros pasos
+# Instalación y activación
 
 ## Instalación
 
 Descarga la versión más reciente de Tabular Editor 3 desde nuestra [página de descargas](xref:downloads).
 
-Recomendamos el instalador MSI de 64 bits para la mayoría de los casos. Una vez descargado, haz doble clic en el archivo MSI y completa las pantallas del instalador.
+We recommend the 64-bit `.exe` installer on .NET 10 for most scenarios. Once downloaded, double-click it and complete the installer pages.
 
 ![Instalar](~/content/assets/images/getting-started/install.png)
 
 ### Requisitos previos
 
-Ninguno.
+For the `.exe` installer, the matching **.NET Desktop Runtime**: [10](https://dotnet.microsoft.com/download/dotnet/10.0) for the recommended build, or [8](https://dotnet.microsoft.com/download/dotnet/8.0) for the .NET 8 build. The installer offers to download and install it for you, so in practice there is nothing to do beforehand.
+
+The other two packages differ. The `.msi` does not bring the runtime along, so install it yourself when deploying centrally, and the portable `.zip` is self-contained and needs no runtime at all.
 
 ### Requisitos del sistema
 
 - **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
 - **Arquitectura:** x64, ARM64 (nativo desde la versión 3.23.0)
-- **Runtime de .NET:** [.NET Runtime de Escritorio 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- **.NET Runtime:** .NET Desktop Runtime 10 or 8, matching the build you install
 
-Consulta la directiva de sistemas operativos compatibles de .NET para ver qué versiones actuales de Windows admite cada entorno de ejecución.
+See @system-requirements for the full matrix and for how to choose between the builds.
 
 ## Activación de su instalación
 
@@ -84,7 +86,7 @@ Una vez activado Tabular Editor 3, puedes cambiar la clave de licencia en el men
 
 En el cuadro de diálogo, selecciona **Cambiar clave de licencia**. Esta opción solo está disponible cuando no hay ningún modelo cargado en Tabular Editor. Si hay un modelo abierto, ciérralo desde **Archivo > Cerrar modelo**. Al hacer clic en **Cambiar clave de licencia**, Tabular Editor te preguntará si quieres quitar la licencia actual:
 
-![imagen](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+![image](~/content/assets/images/getting-started-01.png)
 
 Si aceptas, se quita la licencia actual y tendrás que volver a introducir una clave de licencia para usar el producto.
 
