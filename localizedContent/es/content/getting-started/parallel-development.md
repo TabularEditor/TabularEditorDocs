@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Habilitar el desarrollo en paralelo con Git y Guardar en carpeta
 author: Daniel Otykier
-updated: 2026-07-03
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,6 +56,8 @@ Como se mencionó anteriormente, los metadatos de un modelo tabular se almacenan
 ![Guardar en carpeta](~/content/assets/images/save-to-folder.png)
 
 Los nombres de cada uno de los archivos que representan objetos TOM individuales se basan simplemente en la propiedad `Name` del propio objeto. El nombre del archivo "raíz" es **Database.json**, por eso a veces nos referimos al formato de almacenamiento basado en carpetas simplemente como **Database.json**.
+
+Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**/ See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Ventajas de usar Guardar en carpeta
 
