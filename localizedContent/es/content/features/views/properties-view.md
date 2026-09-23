@@ -2,7 +2,7 @@
 uid: properties-view
 title: Vista de propiedades
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,5 +37,27 @@ La vista de propiedades te ayuda a:
 
 > [!TIP]
 > Puedes seleccionar varios objetos para ver las propiedades que tienen en común y editarlas en bloque. Esto puede ser útil para establecer cadenas de formato, por ejemplo.
+
+## Toolbar
+
+The toolbar at the top of the Properties view contains the following buttons:
+
+- **Categorized**: Groups the properties into categories such as _Basic_, _Metadata_ and _Options_.
+- **Alphabetical**: Lists all properties in a single, alphabetically sorted list.
+- **Show changes**: Hides all properties that have not changed since the model was last saved, so that only the properties with [unsaved changes](xref:unsaved-changes) remain. While the filter is active, the title of the view reads **Properties (Changed)**.
+- **Property descriptions**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property.
+- **Search box**: Filters the list of properties by name.
+
+## Unsaved changes
+
+Properties that differ from the last saved version of the model are drawn with a light orange row background. When several objects are selected, a row is marked if any of the selected objects changed that property.
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/content/assets/images/unsaved-changes/revert-property.png" alt="Properties view with unsaved changes" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A measure with unsaved changes to its Description and Format String. The <strong>Revert</strong> option puts a single property back to its saved value.</figcaption>
+</figure>
+
+Right-click a marked row and choose **Revert** to put that property back to the value it had at the last save, without touching any other unsaved changes. The revert is a single step on the undo stack, so **Ctrl+Z** brings the change back. See @unsaved-changes for details, including how to revert whole objects from the TOM Explorer, and how to turn the indicators off under **Tools > Preferences**.
+
+## Docking
 
 De forma predeterminada, la vista de propiedades se encuentra en la esquina inferior derecha, pero también puedes abrirla pulsando F4 en tu teclado. También puedes acoplarla a cualquiera de los lados de la ventana principal o desacoplarla para que aparezca en una ventana independiente.
