@@ -116,7 +116,7 @@ applies_to:
 
 ## 已于 2023 年发布
 
-✅ “保存到文件夹”默认使用 TMDL 作为文件格式。 （取决于 Microsoft 发布 TMDL 的时间）
+✅ “保存到文件夹”默认使用 TMDL 作为文件格式。（取决于 Microsoft 发布 TMDL 的时间）
 
 ✅ 导入表向导支持 Databricks（待用于获取元数据/架构的 REST 端点可用）
 
@@ -163,4 +163,4 @@ applies_to:
 # Tabular Editor 2 路线图
 
 > [!NOTE]
-> Tabular Editor 2 已不再进行积极开发，我们将不再添加或改进任何重大功能。 不过，我们还是会让它保持最新：确保支持 Microsoft 发布的新的语义模型功能，并修复任何关键或阻断性问题。 由于该项目基于 MIT 协议开源，任何人都可以提交 Pull Request，我们团队会审核并批准。
+> Tabular Editor 2 已不再进行积极开发，我们将不再添加或改进任何重大功能。不过，我们还是会让它保持最新：确保支持 Microsoft 发布的新的语义模型功能，并修复任何关键或阻断性问题。由于该项目基于 MIT 协议开源，任何人都可以提交 Pull Request，我们团队会审核并批准。
