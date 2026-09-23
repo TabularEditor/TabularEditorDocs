@@ -20,19 +20,16 @@ applies_to:
 
 # 加载并检查指标视图
 
-本操作指南演示如何将 Databricks Metric View 加载到 Tabular Editor 中，并使用 C# Script 探索其结构。
-这是进行其他所有 Metric View 操作的基础。
+本操作指南演示如何将 Databricks Metric View 加载到 Tabular Editor 中，并使用 C# Script 探索其结构。这是进行其他所有 Metric View 操作的基础。
 
 > [!NOTE]
-> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
-> 较早版本不支持本文所示的 v1.1 指标视图功能。
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。较早版本不支持本文所示的 v1.1 指标视图功能。
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
 ## 访问已加载的 Metric View
 
-加载完成后，可在任何脚本中通过 `SemanticBridge.MetricView.Model` 访问该 Metric View。
-这会返回一个 Metric View 的 [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) 对象，它是 [Metric View 对象图](xref:semantic-bridge-metric-view-object-model) 的根节点。
+加载完成后，可在任何脚本中通过 `SemanticBridge.MetricView.Model` 访问该 Metric View。这会返回一个 Metric View 的 [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) 对象，它是 [Metric View 对象图](xref:semantic-bridge-metric-view-object-model) 的根节点。
 
 ```csharp {run id=basic setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
