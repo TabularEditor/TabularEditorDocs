@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: Guardar con archivos de apoyo
 author: Peer Grønnerup
-updated: 2026-01-19
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -39,6 +39,19 @@ La propiedad `Name` de Database también se sincroniza con la propiedad `display
 > 2. Establece el valor de displayName en el archivo de metadatos .platform
 >
 > La propiedad `Description` también se sincroniza con el archivo de metadatos .platform.
+
+<a name="power-bi-desktop-authored-pbip-projects"></a>
+
+### Power BI Desktop authored PBIP projects
+
+The rules above describe a model whose metadata carries a name and a description. A [Power BI Project (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) semantic model authored by Power BI Desktop carries neither: in those projects the item name and description live only in the `.platform` file.
+
+Tabular Editor leaves the existing `displayName` and `description` in `.platform` as they are and names a new folder after the item, instead of creating a folder called `.SemanticModel`
+
+> [!IMPORTANT]
+> Tabular Editor versions before 3.27.0 renamed the item and cleared its description in the Fabric workspace on the next Git sync.
+
+To let Tabular Editor control the name and the description of the item, set the `Name` and `Description` properties on the Database object as described above. Once the metadata carries them, Tabular Editor synchronizes them to `.platform` on every save.
 
 ### Archivos incluidos
 
