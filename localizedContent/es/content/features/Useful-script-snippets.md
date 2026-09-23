@@ -19,12 +19,12 @@ applies_to:
 
 # Fragmentos de script útiles
 
-Aquí tienes una colección de pequeños fragmentos de script para empezar a usar la [funcionalidad de scripting avanzado](/Advanced-Scripting) de Tabular Editor. Muchos de estos scripts son útiles para guardarlos como [Acciones personalizadas](/Custom-Actions), de modo que puedas reutilizarlos fácilmente desde el menú contextual.
+Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](xref:advanced-scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](xref:custom-actions), so that you can easily reuse them from the context menu.
 
 Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
 
 > [!TIP]
-> Si buscas material de referencia estructurado y organizado por patrones sobre C# Script y Dynamic LINQ, consulta la serie de guías prácticas [Patrones de scripting](/how-tos/scripting-navigate-tom-hierarchy). Para consultar la API completa del wrapper de TOM, ve a @api-index.
+> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](xref:how-to-navigate-tom-hierarchy) how-to series. Para consultar la API completa del wrapper de TOM, ve a @api-index.
 
 ***
 
@@ -81,7 +81,7 @@ CustomAction(@"Time Intelligence\Create LY measure");
 
 Esto ilustra cómo puedes ejecutar una (o varias) acciones personalizadas desde dentro de otra acción (ten cuidado con las referencias circulares: harán que Tabular Editor se bloquee). Guarda esto como una nueva acción personalizada "Inteligencia temporal\Todo lo anterior", y tendrás una forma sencilla de generar todas tus medidas de inteligencia temporal con un solo clic:
 
-![imagen](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
+![image](~/content/assets/images/useful-script-snippets-01.png)
 
 Por supuesto, también puedes poner todos tus cálculos de inteligencia temporal en un único script como el siguiente:
 
@@ -266,7 +266,7 @@ foreach(var m in Selected.Measures) {
 
 Si necesitas proporcionar una partición personalizada para una tabla, un C# Script puede ayudarte a generar rápidamente muchas particiones. La idea básica es añadir una anotación a tu tabla que contenga la consulta SQL o M que se usará como plantilla para cada partición. Luego, el script sustituirá los parámetros de filtro según sea necesario. Por ejemplo, usando particiones SQL, podríamos añadir una anotación llamada `PartitionTemplateSQL` y establecer su valor en `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`. Nuestro script sustituirá los marcadores `{0}` y `{1}` al generar las particiones finales. En este caso, `CalendarID` es un entero, pero por lo general te corresponde asegurarte de que la cadena resultante sea una consulta SQL (o M) válida.
 
-![](https://user-images.githubusercontent.com/8976200/70135273-07c6fa00-168a-11ea-84f6-90f0b3498ed8.png)
+![](~/content/assets/images/useful-script-snippets-02.png)
 
 Este ejemplo genera una partición por mes. Selecciona una tabla que tenga asignada la anotación `PartitionTemplateSQL` y luego ejecuta el script.
 
@@ -310,9 +310,9 @@ var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
 
-El archivo .TSV resultante se ve así al abrirlo en Excel:
-![image](https://user-images.githubusercontent.com/8976200/36632472-e8e96ef6-197e-11e8-8285-6816b09ad036.png)
-El contenido de la primera columna (Object) es una referencia al objeto. Si se cambia el contenido de esta columna, es posible que la importación posterior de las propiedades no funcione correctamente. Para cambiar el nombre de un objeto, cambia solo el valor de la segunda columna (Name).
+The resulting .TSV file looks like this, when opened in Excel:
+![image](~/content/assets/images/useful-script-snippets-03.png)
+The contents of the first column (Object) is a reference to the object. Si se cambia el contenido de esta columna, es posible que la importación posterior de las propiedades no funcione correctamente. Para cambiar el nombre de un objeto, cambia solo el valor de la segunda columna (Name).
 
 De forma predeterminada, el archivo se guarda en la misma carpeta donde se encuentra TabularEditor.exe. De forma predeterminada, solo se exportan las siguientes propiedades (cuando corresponda, según el tipo de objeto exportado):
 
@@ -356,7 +356,7 @@ SaveFile(@"c:\Project\MeasurePerspectives.tsv", tsv);
 
 El archivo TSV se ve así al abrirlo en Excel:
 
-![imagen](https://user-images.githubusercontent.com/8976200/85208532-956dec80-b331-11ea-8568-32dbd4cc5516.png)
+![image](~/content/assets/images/useful-script-snippets-04.png)
 
 Y tal y como se muestra arriba, puedes hacer cambios en Excel, guardar y luego cargar de nuevo los valores actualizados en Tabular Editor mediante `ImportProperties`.
 
@@ -440,7 +440,7 @@ foreach(var row in tsvRows.Skip(1))
 }
 ```
 
-Si necesitas automatizar este proceso, guarda el script anterior en un archivo y usa la [Tabular Editor CLI](/Command-line-Options) de la siguiente manera:
+If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](xref:command-line-options) as follows:
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
@@ -489,7 +489,7 @@ Esto supone que las particiones de la tabla 'Reseller Sales' utilizan un origen 
 
 ## Dar formato a expresiones DAX
 
-Consulta [FormatDax](/FormatDax) para obtener más información.
+Please see [FormatDax](xref:script-helper-methods) for more information.
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
@@ -705,7 +705,7 @@ foreach(var col in aggTable.Columns)
 
 Después de ejecutar el script, deberías ver que la propiedad `AlternateOf` se ha asignado a todas las columnas de tu tabla de agregación (consulta la captura de pantalla a continuación). Ten en cuenta que la partición de la tabla base debe usar DirectQuery para que las agregaciones funcionen.
 
-![imagen](https://user-images.githubusercontent.com/8976200/85851134-6ed70800-b7ae-11ea-82eb-37fcaa2ca9c4.png)
+![image](~/content/assets/images/useful-script-snippets-05.png)
 
 ***
 
@@ -722,7 +722,7 @@ Están disponibles los siguientes métodos:
 | `DataSet ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
 | `object EvaluateDax(string dax)`                              | Ejecuta la _expresión_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto que representa el resultado. Si la expresión DAX es escalar, se devuelve un objeto del tipo correspondiente (string, long, decimal, double, DateTime). Si la expresión DAX es de tipo tabla, se devuelve un [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6).                                                                                                                                                                       |
 
-Los métodos están acotados al objeto `Model.Database`, pero también se pueden ejecutar directamente sin ningún prefijo.
+Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
 
 Darren Gosbell presenta [aquí](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/) un caso de uso interesante: generar medidas basadas en datos mediante el método `ExecuteDax`.
 
@@ -764,7 +764,7 @@ EvaluateDax("\"Hello from AS\"").Output(); // A string
 EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 ```
 
-![imagen](https://user-images.githubusercontent.com/8976200/91638299-bbd59580-ea0e-11ea-882b-55bff73c30fb.png)
+![image](~/content/assets/images/useful-script-snippets-06.png)
 
 ...o, si desea devolver el valor de la medida seleccionada actualmente:
 
@@ -772,7 +772,7 @@ EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 EvaluateDax(Selected.Measure.DaxObjectFullName).Output();
 ```
 
-![imagen](https://user-images.githubusercontent.com/8976200/91638367-6f3e8a00-ea0f-11ea-90cd-7d2e4cff6e31.png)
+![image](~/content/assets/images/useful-script-snippets-07.png)
 
 Y aquí tiene un ejemplo más avanzado que permite seleccionar y evaluar varias medidas a la vez:
 
@@ -781,7 +781,7 @@ var dax = "ROW(" + string.Join(",", Selected.Measures.Select(m => "\"" + m.Name 
 EvaluateDax(dax).Output();
 ```
 
-![imagen](https://user-images.githubusercontent.com/8976200/91638356-546c1580-ea0f-11ea-8302-3e40829e00dd.png)
+![image](~/content/assets/images/useful-script-snippets-08.png)
 
 Si ya está en un nivel avanzado, puede usar SUMMARIZECOLUMNS u otra función DAX para visualizar la medida seleccionada desglosada por alguna columna:
 
@@ -790,11 +790,11 @@ var dax = "SUMMARIZECOLUMNS('Product'[Color], " + string.Join(",", Selected.Meas
 EvaluateDax(dax).Output();
 ```
 
-![imagen](https://user-images.githubusercontent.com/8976200/91638389-9b5a0b00-ea0f-11ea-819f-d3eee3ddfa71.png)
+![image](~/content/assets/images/useful-script-snippets-09.png)
 
 Recuerde que puede guardar estos scripts como Acciones personalizadas haciendo clic en el icono "+" justo encima del editor de scripts. De este modo, obtienes una colección de consultas DAX fácilmente reutilizable que puedes ejecutar y visualizar directamente desde el menú contextual de Tabular Editor:
 
-![imagen](https://user-images.githubusercontent.com/8976200/91638790-305e0380-ea12-11ea-9d84-313f4388496f.png)
+![image](~/content/assets/images/useful-script-snippets-10.png)
 
 ### Exportación de datos
 
