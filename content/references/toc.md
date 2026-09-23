@@ -1,5 +1,6 @@
 # Downloads and Releases
 ## @downloads
+## @system-requirements
 ## @release-history
 
 
@@ -11,6 +12,7 @@
 ## @shortcuts2
 ## @user-options
 ## @supported-files
+## @accessibility
 ## @user-setting-files-te2
 
 # Development and Planning

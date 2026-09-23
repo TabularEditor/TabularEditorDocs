@@ -17,7 +17,7 @@ It is not uncommon to have several Tabular models in an organisation, with a sub
 
 For simplicity, consider the AdventureWorks sample model:
 
-![image](https://user-images.githubusercontent.com/8976200/43959290-895c1c96-9cae-11e8-8112-008f54cb400a.png)
+![image](~/content/assets/images/master-model-pattern-01.png)
 
 Let's say that for some reason, these is a need to deploy everything relating to Internet Sales as one model, and everything relating to Reseller Sales as another. This could be for security reasons, performance, scalability, or maybe even because your team is servicing a number of external clients, where each client needs their own copy of the model, containing both shared and specific functionality.
 
@@ -26,7 +26,7 @@ Instead of actually maintaining one development branch for each of the different
 ## (Ab)using perspectives
 The idea is quite simple. Start by adding a number of new perspectives to your model, corresponding to the number of target models you need to deploy to. Make sure to prefix these perspectives in a consistent way, to separate them from user-oriented perspectives:
 
-![image](https://user-images.githubusercontent.com/8976200/43960154-6b637042-9cb1-11e8-906b-6671bbb9558e.png)
+![image](~/content/assets/images/master-model-pattern-02.png)
 
 Here, we use a ``$``-sign as the prefix on the perspective names. Later on we will see how these perspectives are stripped from the model, so that end users will not see them. They are only used by the model developers.
 
@@ -69,11 +69,11 @@ I recommend saving this script as a Custom Action at the Model level, to make it
 
 By the way, if you want to make a copy of a perspective, you can already do that through the UI. Click on the "Perspectives" node in the explorer tree, and then click the ellipsis button in the property grid:
 
-![image](https://user-images.githubusercontent.com/8976200/44028910-c7ffab80-9efb-11e8-813a-5b0f5c137bab.png)
+![image](~/content/assets/images/master-model-pattern-03.png)
 
 This will open a dialog that lets you create and delete perspectives, as well as clone existing perspectives:
 
-![image](https://user-images.githubusercontent.com/8976200/44028953-f13c91ca-9efb-11e8-936a-1f0e1d4eb93f.png)
+![image](~/content/assets/images/master-model-pattern-04.png)
 
 To supplement this, here's a script that removes all invisible and unused objects from a perspective, in case you need to clean up a bit:
 
@@ -133,9 +133,9 @@ For measures, we do the same thing, but simplified to only remove measures that 
 * The measure is hidden (or the table in which the measure resides is hidden)
 * The measure is not directly or indirectly referenced in any DAX expressions on other visible objects in the perspective
 
-If you're a team of developers working on the model, you should already be using Tabular Editors ["Save to Folder" functionality](xref:folder-serialization) together with a source control environment such as Git. Make sure to check the "Serialize perspectives per-object" option under "File" > "Preferences" > "Save to Folder", to avoid getting heaps of merge conflicts on your perspective definitions.
+If you're a team of developers working on the model, you should already be using Tabular Editors ["Save to Folder" functionality](xref:folder-serialization) together with a source control environment such as Git. Make sure to check the "Serialize perspectives per-object" option under **Tools > Preferences > File Formats > Save-to-folder** (**File > Preferences > Save to Folder** in Tabular Editor 2), to avoid getting heaps of merge conflicts on your perspective definitions.
 
-![image](https://user-images.githubusercontent.com/8976200/44029969-935e0efe-9eff-11e8-93de-c1223f7ebe7f.png)
+![image](~/content/assets/images/master-model-pattern-05.png)
 
 ## Adding more fine-grained control
 By now, you've probably guessed that we're going to use scripting to create one version of the model for every of our prefixed developer perspectives. The script will simply remove all objects from the model, that are not included in a given developer perspective. However, before we do that, there are a couple more situations we need to handle.
@@ -145,14 +145,14 @@ Some objects, such as perspectives, data sources and roles, are not included nor
 
 So let's add a new annotation called "DevPerspectives" on each of the 3 original perspectives, and let's just supply the names of the developer perspectives as a comma-separated string:
 
-![image](https://user-images.githubusercontent.com/8976200/44032304-01bdcc70-9f07-11e8-9b28-db0912ea1ade.png)
+![image](~/content/assets/images/master-model-pattern-06.png)
 
 When adding new *user* perspectives to the model, remember to add the same annotation and provide the names of the developer perspectives that you want the *user* perspective included in. When scripting the final model versions later on, we will use the information in these annotations to include the perspectives needed. We can do the same thing for data sources and roles.
 
 ### Controlling object metadata
 There may also be situations where the same measure should have slightly different expressions or format strings across the different model versions. Again, we can use annotation to provide the metadata per developer perspective, and then apply the metadata when we script out the final model.
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file) script function. However, that's a little overkill for our use case, so let's just specify directly which properties we want to store as annotations. Create the following script:
+The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) script function. However, that's a little overkill for our use case, so let's just specify directly which properties we want to store as annotations. Create the following script:
 ```csharp
 foreach(var m in Selected.Measures) { 
     m.SetAnnotation(Selected.Perspective.Name + "_Expression", m.Expression);
@@ -162,7 +162,7 @@ foreach(var m in Selected.Measures) {
 ```
 And save it as a custom action named "Save Metadata as Annotations":
 
-![image](https://user-images.githubusercontent.com/8976200/44033695-7a754482-9f0b-11e8-937b-0bc0987ce7cb.png)
+![image](~/content/assets/images/master-model-pattern-07.png)
 
 Similarly, save the following script as a custom action called "Load Metadata from Annotations":
 ```csharp
@@ -178,22 +178,22 @@ The idea is that we create one annotation for each of the properties we would li
 
 Use your new custom actions to apply model version specific changes to the developer perspectives (or add the annotations by hand). For example, in our Adventure Works sample, we want the [Day Count] measure to have a different expression in the $ResellerModel perspective, so we apply the changes to the measure, and invoke the "Save Metadata as Annotations" action while having selected the "$ResellerModel" perspective in the dropdown:
 
-![image](https://user-images.githubusercontent.com/8976200/44033944-3104e414-9f0c-11e8-9f06-396bf85a0e4f.png)
+![image](~/content/assets/images/master-model-pattern-08.png)
 
 In the screenshot above, we have 3 annotations for each of the developer perspectives. In reality, though, we would only need to create these annotations for those developer perspectives where the properties should differ from their native values.
 
 ## Altering partition queries
 We can use a similar technique to apply changes to partition queries between the different versions. For example, we may want different SQL `WHERE` criterias on some partition queries depending on the version. Let's start by creating a set of new annotations on our *table* objects, to specify the base SQL query we want our partitions to use for each version. Here, for example, we want to restrict which records are included in the Product table on two of our three versions:
 
-![image](https://user-images.githubusercontent.com/8976200/44736562-69221580-aaa4-11e8-82ee-88388015d30d.png)
+![image](~/content/assets/images/master-model-pattern-09.png)
 
 For tables that have multiple partitions, we specify the WHERE criteria using "placeholders", that will be replaced later on:
 
-![image](https://user-images.githubusercontent.com/8976200/44737015-b3f05d00-aaa5-11e8-9bad-cadd5b4dae35.png)
+![image](~/content/assets/images/master-model-pattern-10.png)
 
 Define the placeholder values within each partition (note, you must be using [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) or newer to edit partition annotations through the UI):
 
-![image](https://user-images.githubusercontent.com/8976200/44737199-2a8d5a80-aaa6-11e8-8813-8189b593da98.png)
+![image](~/content/assets/images/master-model-pattern-11.png)
 
 In dynamic partitioning scenarios, don't forget to include these annotations in the script you're using when creating the new partitions. In the next section, we'll see how to apply these placeholder values during deployment.
 
@@ -270,7 +270,7 @@ foreach(Table t in Model.Tables) {
 
 Note that we could also just add additional specific model changes directly to this script, if we wanted to, but the whole point of this exercise was how we can maintain several models directly from within Tabular Editor. The script above is the same, regardless of which version we want to deploy (except, of course, for line 1).
 
-Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](/Command-line-Options):
+Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](xref:command-line-options):
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ResellerModel.cs -D localhost AdventureWorksReseller -O -R
@@ -284,7 +284,7 @@ start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.b
 This assumes that you are executing the command line within the directory of your Model.bim file (or Database.json file if using the "Save to Folder"-functionality). The -S switch instructs Tabular Editor to apply the supplied script to the model, and the -D switch performs the deployment. The -O switch allows overwriting an existing database with the same name, and the -R switch indicates that we also want to overwrite roles of the target database.
 
 ## Master model processing
-If you have a dedicated processing server and large amounts of data overlap between the individual models, it may make sense for you to process the data into the master model first, before splitting it up. This way, you can avoid processing the same data several times, into individual models. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](/xref:Master-model-pattern#altering-partition-queries).** The recipe for this is outlined below:
+If you have a dedicated processing server and large amounts of data overlap between the individual models, it may make sense for you to process the data into the master model first, before splitting it up. This way, you can avoid processing the same data several times, into individual models. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](#altering-partition-queries).** The recipe for this is outlined below:
 
 1. (Optional - in case there were metadata changes) Deploy your master model to your processing server
 2. Perform the processing you need on your master model (do not process tables that have version-specific partition queries).

@@ -2,6 +2,7 @@
 ## @user-interface
 ## @tom-explorer-view
 ## @properties-view
+## @unsaved-changes
 ## @bpa-view
 ## @data-refresh-view
 ## @find-replace
@@ -35,6 +36,16 @@
 
 # Data Exploration and Connectivity
 ## @import-tables
+## @connectivity
+### @connect-sql-server
+### @connect-snowflake
+### @connect-databricks
+### @connect-oracle
+### @connect-odbc
+### @connect-oledb
+### @connect-onelake
+### @connect-dataflows
+## @table-preview
 ## @pivot-grid
 ## @semantic-model-types
 ### @direct-lake-sql-model
@@ -42,8 +53,11 @@
 
 # AI Features
 ## @ai-assistant
+## @mcp-server
+## @ai-audit-log
 
 # Advanced Modelling Features
+## @user-context-calculated-columns
 ## @metadata-translation-editor
 ## @perspective-editor
 
@@ -58,6 +72,7 @@
 ## @tmdl
 ## @save-to-folder
 ## @save-with-supporting-files
+## @auto-reload
 ## @advanced-refresh
 ## @refresh-overrides
 

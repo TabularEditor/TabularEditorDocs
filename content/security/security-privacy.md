@@ -2,7 +2,7 @@
 uid: security-privacy
 title: Security overview
 author: Daniel Otykier
-updated: 2026-03-25
+updated: 2026-09-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -55,28 +55,51 @@ Because of the requirement for a user to have administrative privileges on the i
 
 ### AI Assistant
 
-Tabular Editor 3 includes an optional AI Assistant for chat-based semantic model development. The AI Assistant is an optional module that the user selects during installation. If you choose not to install the module, no AI-related code is present on the machine and none of the behavior described in this section applies. The AI Assistant uses a **bring-your-own-key** model. You provide an API key from a supported AI provider (OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint). No built-in API key is included and Tabular Editor does not provide or intermediate any AI service.
+Tabular Editor 3 includes an AI Assistant for chat-based semantic model development. From 3.27.0 it is part of a default installation; before that it had to be selected deliberately. If the component is not installed, no AI-related code is present on the machine and none of the behavior described in this section applies.
 
-**Data flow.** All communication between the AI Assistant and the AI provider happens directly from the client machine to the provider API. No data passes through Tabular Editor servers. The data sent depends on the actions you perform in the chat and is scoped to the following categories, each requiring explicit user consent before any data is transmitted:
+The AI Assistant uses a **bring-your-own-key** model. You provide an API key from a supported AI provider (OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint). No built-in API key is included and Tabular Editor does not provide or intermediate any AI service.
 
-| Consent Category | Data Sent to AI Provider |
-| -- | -- |
-| Model metadata | Table and column schemas, measure definitions and other structural model metadata |
-| Query data | DAX query results and data samples |
-| Read documents | Content from open documents such as DAX scripts and DAX queries |
-| Modify documents | Requests to make changes to open documents |
-| Edit BPA rules | Best Practice Analyzer rule definitions |
-| Read macros | Macro definitions from the user macro library |
+**Data flow.** All communication between the AI Assistant and the AI provider happens directly from the client machine to the provider API. No data passes through Tabular Editor servers. What is sent depends on what you ask for, and is bounded by five permission resources, each carrying one access level:
 
-**Consent management.** The AI Assistant prompts for consent the first time it needs access to each data category. You choose the duration of your consent: single request, current session, the current model only, or always. You can review and revoke consents at any time under **Tools > Preferences > AI Assistant > AI Consents**. Per-model consents for query data and model metadata are stored in the model user options (.tmuo) file. Global "always" consents are stored in the local Preferences.json file.
+| Resource | What it covers | Levels | Default |
+| -- | -- | -- | -- |
+| Model metadata | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics | Deny / Read / Write | Read |
+| Model data | Data values from your model, such as DAX query results. Requires a live connection | Deny / Read | Deny |
+| Best Practice Analyzer | Read lists rules and runs the analysis; Write adds or modifies rules | Deny / Read / Write | Read |
+| Documents | Your open C# script and DAX query editors. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | Write |
+| Macros | Your macro library | Deny / Read / Write | Write |
+
+Write covers Read. Model data is denied by default, because metadata describes a model where data values are the model's contents.
+
+**Permission management.** The grants are standing settings rather than per-request prompts. Review and change them under **Tools > Preferences > AI Features > Permissions**, or in the **Tools > MCP Server...** dialog, which edits the same record. Where the chat needs something a grant does not cover, it shows a permission card at that moment, and you answer for the turn, the session, the current model or always. **Always allow** raises the standing grant and never lowers one. Global grants are stored in the local Preferences.json file; grants given for a single model are stored in that model's user options (.tmuo) file and apply to the chat only. Setting a resource back to **Deny** makes the chat ask again.
+
+**Administrator ceilings.** In the Enterprise, Consultancy and Trial editions, an administrator can cap each resource by [policy](xref:policies), separately for the chat and for the MCP server, and the MCP cap can only be lower. A cap outranks every grant, including one a user has already given, and the corresponding option is shown read-only. These policies fail closed: if any Enterprise-tier policy value is present on a machine that is not licensed for it, the AI Assistant and the MCP server refuse to start rather than ignoring the policy.
+
+**Audit record.** Tabular Editor 3 writes a local record of what the AI Assistant and the MCP server did: which permissions were requested and how they were answered, which tools ran and whether each succeeded, failed or was refused, and the full text of any C# script an agent ran or handed over for review. Prompts, replies and data values are not recorded. The daily files are kept for 30 days, and **Open audit folder** under **Tools > Preferences > AI Features** opens them. Administrators can redirect the location and change the retention period.
 
 **API key storage.** API keys are stored encrypted on the local machine in the Preferences.json file. If the AI module is not loaded (for example because it was excluded during installation or disabled by policy), any previously stored API key configuration is cleared automatically.
 
 **Conversation storage.** Conversations are stored locally on the client machine in `%LocalAppData%\TabularEditor3\AI\Conversations\`. No conversation data is sent to Tabular Editor servers.
 
-**Disabling the AI Assistant.** The AI Assistant is an optional component. You can exclude it during installation, disable it under **Tools > Preferences > AI Assistant**, or enforce the `DisableAi` [policy](xref:policies) through the Windows registry.
+**Disabling the AI Assistant.** You can exclude the AI features component during installation, clear the provider under **Tools > Preferences > AI Features > AI Assistant**, or enforce a [policy](xref:policies) through the Windows registry: `DisableAi` turns off all AI functionality including the MCP server and clears stored provider configuration, while `DisableAiChat` turns off the chat alone and leaves the MCP server running.
 
 **Penetration testing.** A separate penetration test of the AI Assistant has been performed. The report is available in our [Trust Center](https://trust.tabulareditor.com/).
+
+### MCP server
+
+Tabular Editor 3 can act as an MCP (Model Context Protocol) server, so that an AI agent running on the same machine can work on the model you have open. See @mcp-server for the feature itself.
+
+**Network exposure.** The server is an HTTP listener bound explicitly to `127.0.0.1`, by default on port 42100. It is not reachable from another machine. Browser requests carrying a non-local `Origin` header are rejected as a defense against DNS rebinding. The server runs only after you start it, or from application start if you have asked for that.
+
+**Authentication.** Loopback binding is the default boundary, so the server accepts local connections without credentials out of the box. On a host where several people are signed in at once, such as a Remote Desktop or Citrix server, that is not sufficient: any session on the machine reaches `127.0.0.1`. While the token is off, any process on the machine can connect without credentials. Turn on **Require access token** under **Tools > Preferences > AI Features > MCP Server**, and clients must present a bearer token, which is stored encrypted in the local Preferences.json file. Administrators can enforce this with the `RequireMcpAccessToken` [policy](xref:policies).
+
+**Data flow.** Tabular Editor does not contact an AI provider for this feature and holds no API key for it. The agent is the only party that talks to a provider, under its own configuration and its own subscription. What the agent can read from the model is bounded by the same five permission grants that govern the AI Assistant, snapshotted when the server starts, and any tool a grant does not cover is never offered to the agent. Model data is denied by default, so no data values leave the model unless you grant that explicitly.
+
+**Changes to the model.** An agent changes the model only through the C# scripting engine, atomically and as a single undo step, and only with the model metadata grant at Write. Raw TMSL and XMLA execution is never available to an agent, and a script that reaches outside the model is never executed for it.
+
+**Audit record.** Permission decisions, tool calls and the full text of any C# script an agent ran or handed over for review are written to a local audit log. Prompts, replies and data values are not recorded.
+
+**Disabling the MCP server.** Clear **Enable MCP Server** under **Tools > Preferences > AI Features > MCP Server**, or enforce the `DisableMcpServer` or `DisableAi` [policy](xref:policies). The server is part of the AI features component, so excluding that component at install time removes it as well.
 
 ### Web requests
 
@@ -95,7 +118,9 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
   - https://australiaeast.api.daxoptimizer.com/api
   - https://eastus.api.daxoptimizer.com/api
   - https://westeurope.api.daxoptimizer.com/api
-- **AI Assistant.** When the AI Assistant is configured and in use, Tabular Editor 3 sends requests directly to the configured AI provider API. The endpoints depend on the selected provider (for example `https://api.openai.com` for OpenAI, `https://api.anthropic.com` for Anthropic, or a user-specified endpoint for Azure OpenAI and custom providers). Only data for which the user has granted consent is included in these requests. See the [AI Assistant](#ai-assistant) section above for details on data categories and consent management.
+- **AI Assistant.** When the AI Assistant is configured and in use, Tabular Editor 3 sends requests directly to the configured AI provider API. The endpoints depend on the selected provider (for example `https://api.openai.com` for OpenAI, `https://api.anthropic.com` for Anthropic, or a user-specified endpoint for Azure OpenAI and custom providers). Only data covered by the permission grants is included in these requests. See the [AI Assistant](#ai-assistant) section above for the resources and their defaults.
+- **AI knowledge base updates.** The knowledge base the AI Assistant searches is a local database that ships with the AI features component. Tabular Editor 3 checks for a newer copy and downloads it from `https://cdn.tabulareditor.com`. The request carries no data about you or your model.
+- **MCP server.** The MCP server makes no outbound requests. It accepts connections on the loopback interface only, and the agent that connects to it is what talks to an AI provider, under its own configuration. See the [MCP server](#mcp-server) section above.
 - **Importing Best Practice Rules.** Tabular Editor has a feature that allows a user to specify an URL from which to retrieve a list of Best Practice rules in a JSON based format. This type of request only downloads the JSON data from the URL - no data is transmitted to the URL.
 - **Using C# scripts.** Tabular Editor allows users to write and execute code written in C#, for purposes of automation. Such a script may potentially connect to online resources, using C# language features and the .NET runtime. The user is always responsible for ensuring that executed code does not cause any unintended sharing of data. Tabular Editor ApS cannot be held liable for any damages, losses or leaks caused by the use of the C# scripting feature in general. Tabular Editor will never execute C# scripts without the explicit action of the user.
 
@@ -109,6 +134,8 @@ To allow traffic to the above mentioned web requests, you'll have to whitelist:
 - Import Best Practice Rules / C# Scripts: Depends on the context
 - DAX Optimizer: Endpoints listed above.
 - AI Assistant: Depends on the configured provider (e.g. **https://api.openai.com**, **https://api.anthropic.com**, or user-specified Azure OpenAI / custom endpoints)
+- AI knowledge base updates: **https://cdn.tabulareditor.com**
+- MCP server: nothing. It listens on **127.0.0.1** and makes no outbound requests
 
 > [!NOTE]
 > A system administrator may enforce certain [policies](xref:policies), which can be used to disable some or all of the features shown on the list above.
@@ -120,3 +147,5 @@ Tabular Editor does not require any elevated privileges on the Windows machine i
 When the application is executing, all access to external resources are performed through the AMO/TOM client library or the web requests mentioned above.
 
 The C# script feature allows Tabular Editor to execute arbitrary C# code within the .NET runtime. Such code is only compiled and executed on the explicit request of the user. C# scripts may also be saved as "macros", which makes it easier for the user to manage and execute multiple different scripts. The code is stored to the users own `%localappdata%` folder, ensuring that only they or a local machine administrator, can access the scripts. The user is always responsible for ensuring that executed code does not cause any unintended sideeffects. Under no circumstance can Tabular Editor ApS be held liable for any damages, losses or leaks caused by the use of the C# scripting or custom actions/macros features.
+
+Organizations that do not want this left to the individual user can govern it centrally. The `DisableCSharpScripts` and `DisableMacros` [policies](xref:policies) turn the features off entirely, in every edition. With Tabular Editor 3 Enterprise Edition, `BlockUnsafeScripts` keeps scripting available but allows only scripts and macros that stay within the semantic model: anything that reads or writes a file, reaches the network, starts another program or loads outside code is refused before it runs, wherever the script came from - a script document, the Best Practice Analyzer, a macro, the AI Assistant, the MCP server or the command line. See [Administrator policies](xref:csharp-scripts#administrator-policies).
