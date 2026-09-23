@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-09-14
 ---
 
 # Tabular Editor
@@ -94,6 +94,6 @@ Si eres nuevo en el modelado tabular en general, te recomendamos que uses las he
 ## Siguientes pasos
 
 - [Primeros pasos con Tabular Editor 2](xref:getting-started-te2)
-- [Primeros pasos con Tabular Editor 3](xref:getting-started)
+- [Install and activate Tabular Editor 3](xref:getting-started)
 - [Plan de ruta de Tabular Editor 3](xref:roadmap)
 
