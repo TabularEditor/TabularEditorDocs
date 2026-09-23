@@ -2,7 +2,7 @@
 uid: xmla-as-connectivity
 title: Conectividad con XMLA / Analysis Services
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,6 +34,14 @@ Se abrirá el cuadro de diálogo **Cargar modelo semántico desde la base de dat
 > En Tabular Editor 2.x, las **Opciones avanzadas** (para especificar el modo de lectura/escritura y un color personalizado para la barra de estado) no están disponibles.
 
 ![Cuadro de diálogo de conexión](~/content/assets/images/connect-dialog.png)
+
+### Status bar color
+
+**Advanced Options** includes a **Status bar color** picker. The color you choose is remembered with the connection, and Tabular Editor paints the status bar with it whenever a model is open on that server.
+
+No particular color means anything in itself; assigning one is what matters. Giving production a color you would not choose for anything else makes it obvious, at a glance and without reading the server name, which environment the window in front of you is connected to. Leave it on **Default** to keep the theme's own status bar.
+
+Closing the model restores the status bar to the active theme.
 
 ## Seleccionar base de datos
 
