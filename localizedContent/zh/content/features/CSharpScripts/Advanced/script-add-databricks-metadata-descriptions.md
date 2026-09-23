@@ -15,13 +15,12 @@ applies_to:
 
 ## 脚本用途
 
-该脚本作为 Tabular Editor x Databricks 系列的一部分编写。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
+该脚本作为 Tabular Editor x Databricks 系列的一部分编写。在 Unity Catalog 中，可以为表和列添加描述性注释。此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
 
 > [!NOTE]
-> 此脚本需要 Databricks ODBC 驱动程序。 我们推荐新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 脚本会自动检测已安装的驱动程序，并据此使用相应驱动程序。
+> 此脚本需要 Databricks ODBC 驱动程序。我们推荐新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。脚本会自动检测已安装的驱动程序，并据此使用相应驱动程序。
 
-每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。 这是用于向 Databricks 进行身份验证所必需的。
-该脚本会使用 Unity Catalog 中的 information_schema 表来获取关系信息，因此你可能需要与 Databricks 管理员再次确认，确保自己有权限查询这些表。 <br></br>
+每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。这是用于向 Databricks 进行身份验证所必需的。该脚本会使用 Unity Catalog 中的 information_schema 表来获取关系信息，因此你可能需要与 Databricks 管理员再次确认，确保自己有权限查询这些表。 <br></br>
 
 ## 脚本
 
@@ -594,7 +593,7 @@ foreach (var t in Selected.Tables)
 
 ### 说明
 
-该脚本使用 WinForms 弹窗提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。 对每个选中的表，脚本都会从其分区中的 M 查询提取 Databricks 连接字符串信息，以及架构名和表名。 随后，脚本会使用检测到的 ODBC 驱动程序向 Databricks 发送 SQL 查询，查询 information_schema 表，从而返回 Unity Catalog 中定义的表说明。 然后会将其更新到语义模型中的表说明。 还会对所选表再发送一条使用 DESCRIBE 命令的 SQL 查询，以获取列说明。 随后会遍历这些结果，并在模型中补充说明。 脚本在每个选定的表上运行完毕后，会弹出对话框，显示已更新的描述数量。
+该脚本使用 WinForms 弹窗提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。对每个选中的表，脚本都会从其分区中的 M 查询提取 Databricks 连接字符串信息，以及架构名和表名。随后，脚本会使用检测到的 ODBC 驱动程序向 Databricks 发送 SQL 查询，查询 information_schema 表，从而返回 Unity Catalog 中定义的表说明。然后会将其更新到语义模型中的表说明。还会对所选表再发送一条使用 DESCRIBE 命令的 SQL 查询，以获取列说明。随后会遍历这些结果，并在模型中补充说明。脚本在每个选定的表上运行完毕后，会弹出对话框，显示已更新的描述数量。
 
 ## 输出示例
 
