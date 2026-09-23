@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX 用户自定义函数
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,9 +20,9 @@ applies_to:
 
 # DAX 用户自定义函数
 
-DAX 用户自定义函数 (UDF) 是语义模型提供的一项能力。 该功能在 Power BI Desktop 2025 年九月更新中进入预览阶段，并自 Power BI 2026 年六月版本起[正式发布](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。
+DAX 用户自定义函数 (UDF) 是语义模型提供的一项能力。该功能在 Power BI Desktop 2025 年九月更新中进入预览阶段，并自 Power BI 2026 年六月版本起[正式发布](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。
 
-该功能让你能够创建可复用的 DAX 函数，并可在模型中的任何 DAX 表达式里调用，甚至在其他函数中也能调用。 这个强大的功能可帮助你保持一致性、减少代码重复，并创建更易维护的 DAX 表达式。
+该功能让你能够创建可复用的 DAX 函数，并可在模型中的任何 DAX 表达式里调用，甚至在其他函数中也能调用。这个强大的功能可帮助你保持一致性、减少代码重复，并创建更易维护的 DAX 表达式。
 
 Tabular Editor 3 自 3.23.0 版本起支持 UDFs。不过，我们建议使用 [3.23.1](xref:release-3-23-1)（或更高版本），以获得多项 bug 修复与改进。
 
@@ -30,7 +30,7 @@ Tabular Editor 3 自 3.23.0 版本起支持 UDFs。不过，我们建议使用 [
 
 ## 理解 UDFs
 
-你可以将 UDFs 理解为自定义 DAX 函数：定义一次，即可在整个模型中反复使用。 你可以定义函数要接受哪些参数；这些参数既可以是标量值或表值，也可以是对对象的引用。然后，你需要提供一个使用这些参数来计算结果的 DAX 表达式，而结果同样可以是标量值或表值。
+你可以将 UDFs 理解为自定义 DAX 函数：定义一次，即可在整个模型中反复使用。你可以定义函数要接受哪些参数；这些参数既可以是标量值或表值，也可以是对对象的引用。然后，你需要提供一个使用这些参数来计算结果的 DAX 表达式，而结果同样可以是标量值或表值。
 
 如需进一步了解 DAX UDF 的工作原理，我们推荐阅读 [SQLBI 的这篇文章](https://www.sqlbi.com/articles/introducing-user-defined-functions-in-dax/)。
 
@@ -38,7 +38,7 @@ Tabular Editor 3 自 3.23.0 版本起支持 UDFs。不过，我们建议使用 [
 
 在 Tabular Editor 3 中创建和使用 UDFs 之前，确保满足以下条件：
 
-- 你的模型兼容级别为 **1702 或更高**
+- Your model compatibility level is **1702 or higher**.
 
 ## 创建你的第一个 UDF
 
@@ -64,7 +64,7 @@ Tabular Editor 3 自 3.23.0 版本起支持 UDFs。不过，我们建议使用 [
 
 你也可以通过 **Model > Add User-Defined Function** 菜单选项添加 UDF。
 
-另外，你也可以在 DAX 查询的 **DEFINE** 部分直接创建 UDF：按下 F7（Apply），或使用 **Query > Apply** 菜单选项。 如果查询包含多个查询作用域的定义，你也可以只选择其中一部分，然后按 F8（Apply Selection）。
+另外，你也可以在 DAX 查询的 **DEFINE** 部分直接创建 UDF：按下 F7（Apply），或使用 **Query > Apply** 菜单选项。如果查询包含多个查询作用域的定义，你也可以只选择其中一部分，然后按 F8（Apply Selection）。
 
 ![从 DAX 查询创建 UDF](~/content/assets/images/tutorials/udf-from-query.png)
 
@@ -105,11 +105,11 @@ FUNCTION FunctionName =
 
 ### 参数求值模式
 
-UDF 的一个关键特性是，参数可采用两种模式定义：**按值传递**和 **按引用传递**。 默认情况下，除非你另有指定，参数将采用**按值传递**。 这意味着该参数在 UDF 表达式内部的行为与 DAX 变量基本一致（即使用 `VAR` 关键字定义的变量）。 换句话说，当调用 UDF 时，参数值会被“复制”到函数中，函数内部对该参数的任何引用都会始终返回相同的值。
+UDF 的一个关键特性是，参数可采用两种模式定义：**按值传递**和 **按引用传递**。默认情况下，除非你另有指定，参数将采用**按值传递**。这意味着该参数在 UDF 表达式内部的行为与 DAX 变量基本一致（即使用 `VAR` 关键字定义的变量）。换句话说，当调用 UDF 时，参数值会被“复制”到函数中，函数内部对该参数的任何引用都会始终返回相同的值。
 
-相比之下，**按引用传递**参数的行为更像度量值。 也就是说，在函数内部对该参数进行求值的结果，可能会因评估语境不同而变化。
+相比之下，**按引用传递**参数的行为更像度量值。也就是说，在函数内部对该参数进行求值的结果，可能会因评估语境不同而变化。
 
-要指定求值模式，请在参数名后添加参数规格，并用冒号（`:`）分隔。 该说明可以是 `VAL` 或 `EXPR`，分别对应“按值传递”和“按引用传递”。 如上所述，“按值传递”是默认值，因此未指定时会隐式采用 `VAL`。 例如：
+要指定求值模式，请在参数名后添加参数规格，并用冒号（`:`）分隔。该说明可以是 `VAL` 或 `EXPR`，分别对应“按值传递”和“按引用传递”。如上所述，“按值传递”是默认值，因此未指定时会隐式采用 `VAL`。例如：
 
 ```dax
 (
@@ -133,13 +133,13 @@ ROW(
 
 这些类型说明是可选的，但一旦指定，它们会对传入函数的参数执行隐式类型转换；同时，也会影响在 Tabular Editor 3 中编写调用该函数的 DAX 代码时的自动完成建议。
 
-Tabular Editor 3 会根据已声明的参数类型验证实参。 如果你调用 UDF 时传入的实参与其参数类型不匹配——例如，在需要 `TABLEREF` 参数的位置传入标量值——语义分析器会 Report 警告或错误。
+Tabular Editor 3 会根据已声明的参数类型验证实参。 If you call a UDF with an argument that does not match its parameter type, for example passing a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
 可用约束的完整列表，请参阅 [Microsoft 的 UDF 规范](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)。
 
 ### 带默认表达式的可选参数
 
-从 3.26.2 版本开始，Tabular Editor 3 支持带默认表达式的可选参数。 在参数名称后（以及任何类型或求值模式提示之后）追加 `= expression`，即可将该参数设为可选。 调用方省略该实参时，将由默认表达式提供其值。
+从 3.26.2 版本开始，Tabular Editor 3 支持带默认表达式的可选参数。在参数名称后（以及任何类型或求值模式提示之后）追加 `= expression`，即可将该参数设为可选。调用方省略该实参时，将由默认表达式提供其值。
 
 ```dax
 FUNCTION AddTax =
@@ -154,7 +154,7 @@ FUNCTION AddTax =
 
 可选参数遵循以下规则：
 
-- 调用方可以将实参留空，以回退到默认值，例如 `MyFunc(1,,3)` 省略了第二个实参。 最少参数个数由最右侧必需参数的位置决定。
+- 调用方可以将实参留空，以回退到默认值，例如 `MyFunc(1,,3)` 省略了第二个实参。最少参数个数由最右侧必需参数的位置决定。
 - 默认表达式只能引用在函数定义位置可见的名称（列、表、度量值、函数），并且不能引用同一函数的其他参数。
 - 只有在使用默认表达式时，才会按参数的类型提示进行类型检查；如果显式传入实参，则改为检查该实参是否符合该类型提示。
 
@@ -162,7 +162,7 @@ FUNCTION AddTax =
 
 ### 在对象表达式中
 
-创建 UDF 之后，你可以在整个模型中的任何 DAX 表达式里使用它。 你输入时，Tabular Editor 3 的自动完成功能会提示你已定义的 UDF。
+创建 UDF 之后，你可以在整个模型中的任何 DAX 表达式里使用它。你输入时，Tabular Editor 3 的自动完成功能会提示你已定义的 UDF。
 
 ### 在 DAX脚本中
 
@@ -184,7 +184,7 @@ MEASURE 'Date'[New Measure] = MyFuncRenamed(1,2)
 
 ### 在 DAX 查询中
 
-Tabular Editor 3 新增了用于在 DAX 查询中使用 UDF 的强大功能。 我们在上文已经提到，你可以从 DAX 查询的 **DEFINE** 部分“应用”某个 UDF，使其成为模型的永久组成部分。 此外，在 DAX 查询中使用 UDF 时，你可以在函数调用处右键并选择 **Define Function**，即可自动在查询的 **DEFINE** 部分生成函数定义：
+Tabular Editor 3 新增了用于在 DAX 查询中使用 UDF 的强大功能。我们在上文已经提到，你可以从 DAX 查询的 **DEFINE** 部分“应用”某个 UDF，使其成为模型的永久组成部分。此外，在 DAX 查询中使用 UDF 时，你可以在函数调用处右键并选择 **Define Function**，即可自动在查询的 **DEFINE** 部分生成函数定义：
 
 ![从查询中执行 Define Function](~/content/assets/images/tutorials/udf-define.png)
 
@@ -198,7 +198,7 @@ Tabular Editor 3 新增了用于在 DAX 查询中使用 UDF 的强大功能。 �
 
 ## DAX 组件管理器
 
-Tabular Editor 3.24.0 引入了一项名为 **DAX 组件管理器** 的新功能，让你可以直接在 Tabular Editor 中轻松发现、安装和管理 DAX UDF 库。 在首次发布时，组件管理器支持热门的 [DaxLib](https://daxlib.org) 源，其中包含覆盖多种场景的大量实用 UDF。
+Tabular Editor 3.24.0 引入了一项名为 **DAX 组件管理器** 的新功能，让你可以直接在 Tabular Editor 中轻松发现、安装和管理 DAX UDF 库。在首次发布时，组件管理器支持热门的 [DaxLib](https://daxlib.org) 源，其中包含覆盖多种场景的大量实用 UDF。
 
 系统管理员可以通过指定 [组策略](xref:policies) 来禁用对 DAX 组件管理器的访问。
 
@@ -227,14 +227,20 @@ UDF 会显示在 **DAX 依赖项**（Shift+F12）视图中，同时展示：
 
 ### 命名空间
 
-DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时尽量避免歧义，并让 UDF 的来源一目了然。 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 作为命名空间分隔符）。 当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。 你可以使用 TOM Explorer 上方工具栏中的 **Group User-Defined Functions by namespace** 切换按钮，按命名空间对 UDF 的显示进行分组（注意：仅当处理兼容级别为 1702 或更高的模型时，才会显示该按钮）。
+DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时尽量避免歧义，并让 UDF 的来源一目了然。例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 作为命名空间分隔符）。当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。你可以使用 TOM Explorer 上方工具栏中的 **Group User-Defined Functions by namespace** 切换按钮，按命名空间对 UDF 的显示进行分组（注意：仅当处理兼容级别为 1702 或更高的模型时，才会显示该按钮）。
 
 ![按命名空间分组的 DAX UDF](~/content/assets/images/udf-namespaces-tom-explorer.png)
 
-在 Tabular Editor 中，UDF 还有一个“Namespace” _属性_，让你可以为每个 UDF 单独自定义命名空间，而不用更改实际的 UDF 对象名称。 这与度量值的显示文件夹非常相似。 例如，如果你想对多个 UDF 执行批量重命名 (F2)，去掉名称中的命名空间，但仍希望它们在 TOM Explorer 中保持良好的层级组织，那么将“Namespace”属性设置为不同于可从 UDF 名称中推断出的值就会很有用。
+在 Tabular Editor 中，UDF 还有一个“Namespace” _属性_，让你可以为每个 UDF 单独自定义命名空间，而不用更改实际的 UDF 对象名称。这与度量值的显示文件夹非常相似。例如，如果你想对多个 UDF 执行批量重命名 (F2)，去掉名称中的命名空间，但仍希望它们在 TOM Explorer 中保持良好的层级组织，那么将“Namespace”属性设置为不同于可从 UDF 名称中推断出的值就会很有用。
 
 > [!NOTE]
-> Tabular Editor 里的这个组织功能不会影响 DAX 代码。 调用 UDF 时，你仍然需要输入完整的 UDF 名称，包括所有命名空间部分。
+> Tabular Editor 里的这个组织功能不会影响 DAX 代码。调用 UDF 时，你仍然需要输入完整的 UDF 名称，包括所有命名空间部分。
+
+## UDFs and source control
+
+If you store your model as a folder structure, Tabular Editor can write each UDF to its own file instead of keeping them all inside `database.json`. Two developers editing two different functions then change two different files, and Git has nothing to merge.
+
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**, or under **Tools > Preferences > File Formats > Save-to-folder** for a model you save to a folder for the first time. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## 最佳实践
 
@@ -243,7 +249,7 @@ DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时�
 - 使用具有描述性的名称，清晰表明函数用途
 - 可考虑用组织的首字母缩写作为 UDF 前缀（例如 `ACME.CalculateDiscount`）
 - 避免使用过于通用的名称，以免与未来的 DAX 函数发生冲突
-- 使用带分隔符字符（`.` 或 `_`）的复合名称。 例如，`Finance.CalcProfit` 或 `My_CalcProfit`。 这样即使 Microsoft 引入同名的内置 DAX 函数，你的 UDF 也不会因此失效。 有关详细信息，请参阅[内置 BPA 规则](xref:kb.bpa-udf-use-compound-names)
+- 使用带分隔符字符（`.` 或 `_`）的复合名称。例如，`Finance.CalcProfit` 或 `My_CalcProfit`。这样即使 Microsoft 引入同名的内置 DAX 函数，你的 UDF 也不会因此失效。有关详细信息，请参阅[内置 BPA 规则](xref:kb.bpa-udf-use-compound-names)
 
 ### 文档
 
@@ -322,9 +328,12 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 
 **函数未出现在自动补全中**
 
-- 确认函数已成功保存
-- 检查函数定义中是否存在语法错误
-- 确保在兼容的上下文中使用该函数
+Tabular Editor decides what to offer from the function's own definition and from where your cursor is. Work through these in order:
+
+1. **The function's definition has a semantic error.** A UDF whose body does not analyze cleanly, one that needs a row context it has not been given or misuses `MATCHBY`, cannot be validly invoked, so it is left out of the suggestion list entirely. Open the function and clear the error. Its calltip still works, which is why this is easy to miss.
+2. **The return type does not fit the argument you are completing.** The return type is inferred from the body, not declared. A UDF that returns a table is not offered where a scalar is expected, and one that returns a scalar is not offered where a table is expected. Filter arguments, for instance the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either. A function whose body is an untyped `EXPR` parameter fits everywhere.
+3. **Visual calculation mismatch.** A UDF written for visual calculations is only offered inside another visual calculation, and vice versa.
+4. **It is the function you are editing.** A function is not offered inside its own definition.
 
 **参数约束错误**
 
@@ -342,8 +351,8 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 - UDF 不能递归（调用自身）
 
 > [!NOTE]
-> 随着 UDF 于 2026 年六月[正式发布](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)，UDF 支持带默认表达式的可选参数。 Tabular Editor 3 自 3.26.2 版本起支持此语法。 较旧版本在使用默认表达式语法时会显示误报的错误信息。
+> 随着 UDF 于 2026 年六月[正式发布](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)，UDF 支持带默认表达式的可选参数。 Tabular Editor 3 自 3.26.2 版本起支持此语法。较旧版本在使用默认表达式语法时会显示误报的错误信息。
 
 ---
 
-Tabular Editor 3 中的 UDF 提供了一种强大方式，可用于创建可复用、易维护的 DAX 代码。 遵循这些指南和最佳实践，你可以构建一个函数库，从而提升模型一致性并缩短开发时间。
+Tabular Editor 3 中的 UDF 提供了一种强大方式，可用于创建可复用、易维护的 DAX 代码。遵循这些指南和最佳实践，你可以构建一个函数库，从而提升模型一致性并缩短开发时间。
