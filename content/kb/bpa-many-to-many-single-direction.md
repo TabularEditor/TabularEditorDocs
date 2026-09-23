@@ -40,8 +40,8 @@ The rule triggers when a relationship meets all conditions:
 ### Manual Fix
 
 1. In **TOM Explorer**, locate the flagged relationship
-2. In **Properties** pane, find `Cross Filter Direction`
-3. Change from **Both** to **Single**
+2. In **Properties** pane, find **Cross Filtering Behavior**
+3. Change from **BothDirections** to **OneDirection**
 
 Choose direction based on typical filter flow:
 - From dimension to fact
@@ -77,14 +77,14 @@ Used both-direction filtering to solve a specific problem without considering pe
 
 ```
 'Sales' (Many) <--> (Many) 'ProductBridge'
-Cross Filter Direction: Both  ← Problem
+Cross Filtering Behavior: BothDirections  ← Problem
 ```
 
 ### After Fix
 
 ```
 'Sales' (Many) --> (Many) 'ProductBridge'
-Cross Filter Direction: Single
+Cross Filtering Behavior: OneDirection
 ```
 
 When Products need to filter Sales, use DAX:
