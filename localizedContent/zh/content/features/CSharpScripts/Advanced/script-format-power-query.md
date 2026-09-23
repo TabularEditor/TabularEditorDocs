@@ -18,8 +18,7 @@ applies_to:
 如果您想对复杂的 Power Query 进行格式化，使其更易阅读、也更方便修改。 <br></br>
 
 > [!NOTE]
-> 此脚本会将您的 Power Query M 代码发送到 Power Query Formatter API。
-> 使用此脚本格式化 Power Query 代码时，请确保以负责任且合规的方式使用，并遵守相关要求。 <br></br>
+> 此脚本会将您的 Power Query M 代码发送到 Power Query Formatter API。使用此脚本格式化 Power Query 代码时，请确保以负责任且合规的方式使用，并遵守相关要求。 <br></br>
 
 ## 脚本
 
@@ -117,8 +116,7 @@ Info(
 
 ### 说明
 
-此代码片段会将 M 分区中的 Power Query 以 HTTP POST 请求发送到 [Power Query Formatter](https://www.powerqueryformatter.com/)。
-同时还做了一些手动格式化，让代码更易读。
+此代码片段会将 M 分区中的 Power Query 以 HTTP POST 请求发送到 [Power Query Formatter](https://www.powerqueryformatter.com/)。同时还做了一些手动格式化，让代码更易读。
 
 ## 输出示例
 
