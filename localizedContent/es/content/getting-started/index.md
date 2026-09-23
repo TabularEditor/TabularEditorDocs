@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: Te damos la bienvenida
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 ---
 
 # Te damos la bienvenida
@@ -54,6 +54,7 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 - @properties-view-reference
 - @tom-explorer-view-reference
 - @diagram-view-reference
+- @table-preview-reference
 
 **Desarrollo paralelo**
 
@@ -73,7 +74,7 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 
 **Recursos adicionales:**
 
-- [Primeros pasos con Tabular Editor 3](xref:getting-started)
+- [Install and activate Tabular Editor 3](xref:getting-started)
 - [Instalación y activación avanzadas](xref:installation-activation-basic)
 - [Descargar Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)
