@@ -1,6 +1,8 @@
 ---
 uid: import-tables
 title: Importar tablas
+author: Morten Lønskov
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,10 +58,10 @@ Actualmente, Tabular Editor 3 admite de forma nativa los siguientes orígenes de
 - Snowflake\*
 - Dataflow de Power BI\*
 - Databricks\*
-- Lakehouse de Fabric\*
-- Warehouse de Fabric\*
-- Base de datos SQL de Fabric\*
-- Base de datos reflejada de Fabric\*
+- Fabric Lakehouse
+- Fabric Warehouse
+- Fabric SQL Database
+- Fabric Mirrored Database
 
 \*=Estos orígenes de datos solo se admiten como orígenes de datos implícitos en los modelos de datos de Power BI. No están disponibles en SSAS / Azure AS.
 
@@ -71,6 +73,23 @@ Después de elegir uno de los orígenes de datos de la lista, Tabular Editor mue
 ![Autenticación SQL](~/content/assets/images/sql-auth.png)
 
 Si desea que Analysis Services use credenciales diferentes al conectarse, puede especificarlo editando las propiedades del origen de datos en el Tabular Object Model después de importar las tablas.
+
+## Connecting to a data source
+
+Each source type has its own connection dialog, and the authenticators on offer differ between them. The choice matters beyond the first connection, because some authenticators need a person at the keyboard and so cannot be used for a scheduled refresh.
+
+See @connectivity for the full list, and the page for your source:
+
+- @connect-sql-server, covering Azure SQL and Synapse
+- @connect-snowflake, including key pair authentication for unattended work
+- @connect-databricks
+- @connect-oracle
+- @connect-odbc, which is also how PostgreSQL, MySQL, MariaDB and IBM Db2 are reached
+- @connect-oledb
+- @connect-onelake
+- @connect-dataflows
+
+Credentials are stored per user and per model in the [user options](xref:user-options) file, encrypted with your Windows account key, and never become part of the model metadata.
 
 ## Seleccionar objetos para importar
 
@@ -105,7 +124,12 @@ En este punto, debería ver sus tablas importadas con todas las columnas, los ti
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
-# Actualización del esquema de tabla
+Columns are created in the order they appear in the source table. Importing the same table twice therefore produces the same column order both times.
+
+> [!NOTE]
+> Creating Import tables from a **Fabric Lakehouse** or **Fabric Warehouse** reads the table's schema through the SQL analytics endpoint carried on the data source. Where no endpoint can be determined and none is given in the import settings, Tabular Editor reports an error naming what it needs: the SQL endpoint as the server, or a workspace id and item id. It does not create a table with no columns.
+
+## Actualización del esquema de tabla
 
 Si se agregan o cambian columnas en el origen, o si ha modificado recientemente una expresión de partición o una consulta, puede usar la característica **Actualizar esquema de tabla** de Tabular Editor para actualizar los metadatos de las columnas en su modelo.
 
@@ -113,7 +137,7 @@ Si se agregan o cambian columnas en el origen, o si ha modificado recientemente 
 
 Esta opción del menú se puede invocar a nivel de modelo, así como en una colección de tablas o incluso en particiones individuales de una tabla.
 
-Al usar esta opción, Tabular Editor se conectará a todos los orígenes de datos pertinentes (solicitando credenciales cuando sea necesario) para determinar si es necesario agregar nuevas columnas o si alguna columna existente debe modificarse o eliminarse.
+When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), to determine whether columns need to be added, modified or removed. Columns follow the source table's own column order, so a schema update does not shuffle them.
 
 > [!IMPORTANT]
 > Si una columna que se importó anteriormente en su modelo semántico se ha quitado o se ha cambiado de nombre en el origen, debe actualizar el esquema de la tabla en su modelo semántico. De lo contrario, las operaciones de actualización de datos pueden fallar.
