@@ -1,6 +1,8 @@
 ---
 uid: undo-redo
 title: 支持撤销/重做
+author: Morten Lønskov
+updated: 2026-09-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -11,6 +13,32 @@ applies_to:
 
 # 支持撤销/重做
 
-你在 Tabular Editor 中所做的任何更改，都可以使用 CTRL+Z 撤销，随后可使用 CTRL+Y 重做。 可撤销的操作次数没有限制，但当你打开 Model.bim 文件或从数据库加载模型时，撤销/重做堆栈会被重置。
+Any change you make in Tabular Editor can be undone with **Ctrl+Z** and redone with **Ctrl+Y**. There's no limit to how many operations you can undo, but the stack is reset when you load a different model, whether from a file or from a database.
 
-从模型中删除对象时，所有引用该对象的翻译、透视和关系也会自动删除（而在 Visual Studio 中通常会显示错误信息，提示该对象无法删除）。 如果误删除了对象，你可以使用“撤销”功能将其恢复，同时也会恢复随之删除的任何翻译、透视或关系。 请注意，尽管 Tabular Editor 可以检测 [DAX 公式依赖项](xref:formula-fix-up-dependencies)，但如果你删除了在其他度量值或计算列的 DAX 表达式中被引用的度量值或列，Tabular Editor 并不会发出警告。
+An operation that touches many objects undoes as one step. Dragging a display folder full of measures to a new parent, renaming a batch of objects, or applying a Best Practice Analyzer fix script each undo in a single **Ctrl+Z**.
+
+## 删除对象
+
+Deleting an object also removes what depended on it. For a column, that means the relationships it takes part in, the hierarchy levels built on it, and its translations and perspective memberships. In Tabular Editor 3 it's also dropped from any calendars and variations that used it, and a _Sort by column_ pointing at it is cleared.
+
+Undo restores the object _and_ everything that was removed alongside it, as one step.
+
+Tabular Editor warns you before a delete that has consequences. Deleting a single object that other objects reference tells you so and asks you to confirm, naming what will happen:
+
+- The object is referenced by other objects through DAX expressions, so those expressions will stop working.
+- The column is used in one or more hierarchies, so the corresponding levels will be deleted.
+- The column is used in one or more relationships, so those relationships will be removed.
+- In Tabular Editor 3, the column is used in one or more calendars, so it will be removed from them.
+
+Deleting several objects at once always asks for confirmation, though it doesn't itemise which object raises which concern.
+
+A single object that nothing depends on is deleted without a prompt, on the grounds that undo is one keystroke away. If you would rather be asked every time, tick **Always show delete warnings** under **Tools > Preferences > TOM Explorer > Delete** in Tabular Editor 3.
+
+> [!NOTE]
+> Deleting an object doesn't rewrite the DAX that referenced it. The dependent expressions keep the now-dangling reference and are reported as errors in the @messages-view. This is different from renaming, where [formula fix-up](xref:formula-fix-up-dependencies) updates the referencing expressions for you.
+
+## Undo and unsaved changes
+
+In Tabular Editor 3, undo and the unsaved-change indicators work against the same reference point. Undoing back to the state the model was last saved in clears every indicator; redoing brings them back. Undoing _past_ the last save point makes indicators reappear for the objects that were rolled back.
+
+**Revert** is the more direct tool when you want to discard a specific change rather than walk the undo stack back to it. It puts a single property, an object, a table or the whole model back to its last saved state in one undoable step, leaving every other unsaved edit alone. See @unsaved-changes.
