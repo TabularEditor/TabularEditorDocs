@@ -2,7 +2,7 @@
 uid: semantic-bridge-rename-objects
 title: 在指标视图中重命名对象
 author: Greg Baldini
-updated: 2026-07-02
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,34 +21,24 @@ applies_to:
 # 在指标视图中重命名对象
 
 这篇操作指南演示如何重命名指标视图中的字段。
-同样的模式也适用于指标视图中的所有集合。
+The same pattern applies to every collection in a Metric View: `Fields`, `Measures`, `Dimensions` and `Joins`.
 
 > [!NOTE]
-> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。
-> 较早版本不支持此处所示的 v1.1 指标视图功能。
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。较早版本不支持此处所示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## 重命名字段
 
-要重命名字段，可以先用新名称添加一个新字段，复制其余属性，然后删除原字段。
-[`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) 仅会设置名称和表达式，因此其余属性（`Comment`, `DisplayName`, `Synonyms`, `Format`）请自行复制。
+Assign to the object's `Name` property. Everything else about the object (its expression, comment, display name, synonyms and format) is left alone, and it keeps its place in the collection.
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
-var old = view.Fields["order_month"];
-
-// 添加替代字段，复制其余属性，然后删除原字段
-var renamed = view.AddField("Order Month", old.Expr);
-renamed.Comment = old.Comment;
-renamed.DisplayName = old.DisplayName;
-renamed.Synonyms = old.Synonyms;
-renamed.Format = old.Format;
-old.Delete();
+view.Fields["order_month"].Name = "Order Month";
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("字段：");
+sb.AppendLine("Fields:");
 foreach (var field in view.Fields)
 {
     sb.AppendLine($"  {field.Name}");
@@ -68,7 +58,17 @@ Output(sb.ToString());
   Order Month
 ```
 
-重新添加的字段会出现在集合末尾。
+The collection's name index is updated with the object, so the field is reachable under its new name straight away:
+
+```csharp
+var field = view.Fields["Order Month"];
+```
+
+## Rules
+
+- **Names must stay unique within their collection.** Renaming a field to a name another field already uses throws an `ArgumentException`, and neither the object nor the collection is changed.
+- **Name matching is case-insensitive**, following Databricks SQL. `view.Fields["ORDER MONTH"]` finds the field renamed above. A rename that only changes casing is still worth doing, since it refreshes the stored name.
+- **The rename applies to the object model in memory.** Serialize the view to write it out.
 
 ## 后续步骤
 
@@ -79,3 +79,4 @@ Output(sb.ToString());
 ## 另见
 
 - [指标视图对象模型](xref:semantic-bridge-metric-view-object-model)
+- @semantic-bridge-metric-view-validation
