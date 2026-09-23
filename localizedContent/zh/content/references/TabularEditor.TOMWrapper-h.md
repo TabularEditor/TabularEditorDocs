@@ -1,6 +1,6 @@
 # TabularEditor.TOMWrapper 参考文档
 
-这是为 TOMWrapper API 自动生成的文档。 使用 CTRL+F 或右侧的侧边栏，定位特定的类、属性或方法。
+这是为 TOMWrapper API 自动生成的文档。使用 CTRL+F 或右侧的侧边栏，定位特定的类、属性或方法。
 
 ## `AddObjectType`
 
@@ -155,7 +155,7 @@ public abstract class TabularEditor.TOMWrapper.Column
 
 ## `ColumnCollection`
 
-Column 的集合类。 提供便捷属性，可一次为多个对象设置同一属性。
+Column 的集合类。提供便捷属性，可一次为多个对象设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.ColumnCollection
@@ -237,7 +237,7 @@ public class TabularEditor.TOMWrapper.Culture
 
 ## `区域设置集合`
 
-区域设置的集合类。 提供便捷的属性，可一次性在多个对象上设置同一属性。
+区域设置的集合类。提供便捷的属性，可一次性在多个对象上设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.CultureCollection
@@ -351,7 +351,7 @@ public abstract class TabularEditor.TOMWrapper.DataSource
 
 ## `DataSourceCollection`
 
-用于 DataSource 的集合类。 提供便捷的属性，可一次性在多个对象上设置同一属性。
+用于 DataSource 的集合类。提供便捷的属性，可一次性在多个对象上设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.DataSourceCollection
@@ -472,7 +472,7 @@ public enum TabularEditor.TOMWrapper.DeploymentStatus
 
 ## `Folder`
 
-表示 TreeView 中的文件夹。 与 TOM 中的任何对象都不对应。  实现 IDisplayFolderObject，因为文件夹本身也可能位于另一个显示文件夹中。  实现 IParentObject，因为文件夹可以包含子对象。
+表示 TreeView 中的文件夹。与 TOM 中的任何对象都不对应。实现 IDisplayFolderObject，因为文件夹本身也可能位于另一个显示文件夹中。实现 IParentObject，因为文件夹可以包含子对象。
 
 ```csharp
 public class TabularEditor.TOMWrapper.Folder
@@ -508,14 +508,14 @@ public class TabularEditor.TOMWrapper.Folder
 
 方法
 
-| 类型                                 | 名称                                                                   | 摘要                                                      |
-| ---------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------- |
-| `void`                             | CheckChildrenErrors()                             |                                                         |
-| `void`                             | Delete()                                          | 删除文件夹不会删除其中的子对象，只会移除该文件夹。  任何子文件夹都会保留（但会在“显示文件夹”层级中上移）。 |
-| `IEnumerable<ITabularNamedObject>` | GetChildren()                                     |                                                         |
-| `IEnumerable<IDetailObject>`       | GetChildrenByFolders(`Boolean` recursive = False) |                                                         |
-| `void`                             | SetFolderName(`String` newName)                   |                                                         |
-| `void`                             | UndoSetPath(`String` value)                       |                                                         |
+| 类型                                 | 名称                                                                   | 摘要                                                    |
+| ---------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------- |
+| `void`                             | CheckChildrenErrors()                             |                                                       |
+| `void`                             | Delete()                                          | 删除文件夹不会删除其中的子对象，只会移除该文件夹。任何子文件夹都会保留（但会在“显示文件夹”层级中上移）。 |
+| `IEnumerable<ITabularNamedObject>` | GetChildren()                                     |                                                       |
+| `IEnumerable<IDetailObject>`       | GetChildrenByFolders(`Boolean` recursive = False) |                                                       |
+| `void`                             | SetFolderName(`String` newName)                   |                                                       |
+| `void`                             | UndoSetPath(`String` value)                       |                                                       |
 
 静态方法
 
@@ -591,7 +591,7 @@ public class TabularEditor.TOMWrapper.Hierarchy
 
 ## `HierarchyCollection`
 
-Hierarchy 的集合类。 提供便捷的属性，可一次为多个对象设置同一属性。
+Hierarchy 的集合类。提供便捷的属性，可一次为多个对象设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.HierarchyCollection
@@ -692,7 +692,7 @@ public interface TabularEditor.TOMWrapper.IDescriptionObject
 
 ## `IDetailObject`
 
-表示可包含在显示文件夹中的对象。 示例：* 度量值
+表示可包含在显示文件夹中的对象。示例：* 度量值
 * 列
 * 层次结构
 * 文件夹
@@ -712,7 +712,7 @@ public interface TabularEditor.TOMWrapper.IDetailObject
 
 ## `IDetailObjectContainer`
 
-表示既可包含其他对象，也可包含显示文件夹的对象。 示例：  - 文件夹  - 表
+表示既可包含其他对象，也可包含显示文件夹的对象。示例：  - 文件夹  - 表
 
 ```csharp
 public interface TabularEditor.TOMWrapper.IDetailObjectContainer
@@ -976,7 +976,7 @@ public class TabularEditor.TOMWrapper.Level
 
 ## `LevelCollection`
 
-用于 Level 的集合类。 提供便捷的属性，可在多个对象上一次性设置某项属性。
+用于 Level 的集合类。提供便捷的属性，可在多个对象上一次性设置某项属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.LevelCollection
@@ -1106,7 +1106,7 @@ public class TabularEditor.TOMWrapper.Measure
 
 ## `度量值集合`
 
-度量值集合类。 提供便捷属性，可一次性在多个对象上设置同一属性。
+度量值集合类。提供便捷属性，可一次性在多个对象上设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.MeasureCollection
@@ -1230,7 +1230,7 @@ public class TabularEditor.TOMWrapper.ModelRole
 
 ## `ModelRoleCollection`
 
-ModelRole 的集合类。 提供便捷属性，可一次性为多个对象设置同一属性。
+ModelRole 的集合类。提供便捷属性，可一次性为多个对象设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.ModelRoleCollection
@@ -1365,7 +1365,7 @@ public class TabularEditor.TOMWrapper.Partition
 
 ## `PartitionCollection` 分区集合
 
-分区的集合类。 提供便捷属性，可一次性在多个对象上设置同一属性。
+分区的集合类。提供便捷属性，可一次性在多个对象上设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.PartitionCollection
@@ -1418,7 +1418,7 @@ public class TabularEditor.TOMWrapper.Perspective
 
 ## `PerspectiveCollection`
 
-透视的集合类。 提供便捷的属性，用于一次性在多个对象上设置同一个属性。
+透视的集合类。提供便捷的属性，用于一次性在多个对象上设置同一个属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.PerspectiveCollection
@@ -1635,7 +1635,7 @@ public abstract class TabularEditor.TOMWrapper.Relationship
 
 ## `关系集合`
 
-关系集合类。 提供便捷属性，可一次性为多个对象设置同一属性。
+关系集合类。提供便捷属性，可一次性为多个对象设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.RelationshipCollection
@@ -1687,7 +1687,7 @@ public class TabularEditor.TOMWrapper.RelationshipCollection2
 
 ## `RoleRLSIndexer`
 
-RoleRLSIndexer 用于针对某一特定角色浏览模型中所有表的全部筛选器。 相比之下，TableRLSIndexer 用于针对某一特定表浏览模型中所有角色的筛选器。
+RoleRLSIndexer 用于针对某一特定角色浏览模型中所有表的全部筛选器。相比之下，TableRLSIndexer 用于针对某一特定表浏览模型中所有角色的筛选器。
 
 ```csharp
 public class TabularEditor.TOMWrapper.RoleRLSIndexer
@@ -1849,7 +1849,7 @@ public class TabularEditor.TOMWrapper.Table
 
 ## `TableCollection`
 
-用于 Table 的集合类。 提供便捷的属性，可一次性为多个对象设置同一属性。
+用于 Table 的集合类。提供便捷的属性，可一次性为多个对象设置同一属性。
 
 ```csharp
 public class TabularEditor.TOMWrapper.TableCollection
@@ -1887,7 +1887,7 @@ public static class TabularEditor.TOMWrapper.TableExtension
 
 ## `TableRLSIndexer`
 
-TableRLSIndexer 用于浏览模型中针对某个特定表定义的所有筛选器，涵盖模型中的所有角色。 这与 RoleRLSIndexer 相对：后者用于浏览模型中某个特定角色在所有表上定义的筛选器。
+TableRLSIndexer 用于浏览模型中针对某个特定表定义的所有筛选器，涵盖模型中的所有角色。这与 RoleRLSIndexer 相对：后者用于浏览模型中某个特定角色在所有表上定义的筛选器。
 
 ```csharp
 public class TabularEditor.TOMWrapper.TableRLSIndexer
@@ -1945,7 +1945,7 @@ public static class TabularEditor.TOMWrapper.TabularCollectionHelper
 
 ## `TabularCommonActions`
 
-提供用于在 Tabular 模型上执行常见操作的便捷方法，这些操作通常会同时更改多个对象。  例如，可使用这些方法轻松执行 UI 拖放操作，从而更改层次结构级别、显示文件夹等。
+提供用于在 Tabular 模型上执行常见操作的便捷方法，这些操作通常会同时更改多个对象。例如，可使用这些方法轻松执行 UI 拖放操作，从而更改层次结构级别、显示文件夹等。
 
 ```csharp
 public class TabularEditor.TOMWrapper.TabularCommonActions
@@ -2006,13 +2006,13 @@ public class TabularEditor.TOMWrapper.TabularDeployer
 
 静态方法
 
-| 类型                 | 名称                                                                                                                                | 摘要                                                                |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `void`             | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseName)                            | 使用指定的选项，将指定数据库部署到指定的目标服务器和数据库 ID。  部署成功后，将返回数据库中对象的 DAX 错误列表（如有）。 |
-| `DeploymentResult` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseID, `DeploymentOptions` options) | 使用指定的选项，将指定数据库部署到指定的目标服务器和数据库 ID。  部署成功后，将返回数据库中对象的 DAX 错误列表（如有）。 |
-| `String`           | GetTMSL(`Database` db, `Server` server, `String` targetDatabaseID, `DeploymentOptions` options)                |                                                                   |
-| `void`             | SaveModelMetadataBackup(`String` connectionString, `String` targetDatabaseID, `String` backupFilePath)         |                                                                   |
-| `void`             | WriteZip(`String` fileName, `String` content)                                                                  |                                                                   |
+| 类型                 | 名称                                                                                                                                | 摘要                                                              |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `void`             | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseName)                            | 使用指定的选项，将指定数据库部署到指定的目标服务器和数据库 ID。部署成功后，将返回数据库中对象的 DAX 错误列表（如有）。 |
+| `DeploymentResult` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseID, `DeploymentOptions` options) | 使用指定的选项，将指定数据库部署到指定的目标服务器和数据库 ID。部署成功后，将返回数据库中对象的 DAX 错误列表（如有）。 |
+| `String`           | GetTMSL(`Database` db, `Server` server, `String` targetDatabaseID, `DeploymentOptions` options)                |                                                                 |
+| `void`             | SaveModelMetadataBackup(`String` connectionString, `String` targetDatabaseID, `String` backupFilePath)         |                                                                 |
+| `void`             | WriteZip(`String` fileName, `String` content)                                                                  |                                                                 |
 
 ## `TabularModelHandler`
 
@@ -2031,48 +2031,48 @@ public class TabularEditor.TOMWrapper.TabularModelHandler
 
 属性
 
-| 类型                                          | 名称                       | 摘要                                                                              |
-| ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------- |
-| `TabularCommonActions`                      | Actions                  |                                                                                 |
-| `Boolean`                                   | AutoFixup                | 用于指定对象名称（表、列、度量值）发生更改时，是否应自动更新 DAX 表达式以反映新名称。 设置为 true 时，将解析模型中的所有表达式，以构建依赖关系树。 |
-| `Database`                                  | Database                 |                                                                                 |
-| `Boolean`                                   | DelayBuildDependencyTree |                                                                                 |
-| `IList<Tuple<NamedMetadataObject, String>>` | Errors                   |                                                                                 |
-| `Boolean`                                   | HasUnsavedChanges        |                                                                                 |
-| `Boolean`                                   | IsConnected              |                                                                                 |
-| `Model`                                     | Model                    |                                                                                 |
-| `String`                                    | Status                   |                                                                                 |
-| `TabularTree`                               | Tree                     |                                                                                 |
-| `UndoManager`                               | UndoManager              |                                                                                 |
-| `Int64`                                     | Version                  |                                                                                 |
+| 类型                                          | 名称                       | 摘要                                                                             |
+| ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------ |
+| `TabularCommonActions`                      | Actions                  |                                                                                |
+| `Boolean`                                   | AutoFixup                | 用于指定对象名称（表、列、度量值）发生更改时，是否应自动更新 DAX 表达式以反映新名称。设置为 true 时，将解析模型中的所有表达式，以构建依赖关系树。 |
+| `Database`                                  | Database                 |                                                                                |
+| `Boolean`                                   | DelayBuildDependencyTree |                                                                                |
+| `IList<Tuple<NamedMetadataObject, String>>` | Errors                   |                                                                                |
+| `Boolean`                                   | HasUnsavedChanges        |                                                                                |
+| `Boolean`                                   | IsConnected              |                                                                                |
+| `Model`                                     | Model                    |                                                                                |
+| `String`                                    | Status                   |                                                                                |
+| `TabularTree`                               | Tree                     |                                                                                |
+| `UndoManager`                               | UndoManager              |                                                                                |
+| `Int64`                                     | Version                  |                                                                                |
 
 方法
 
-| 类型                          | 名称                                                                                                                 | 摘要                                                                                                                      |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `IDetailObject`             | Add(`AddObjectType` objectType, `IDetailObjectContainer` container)                             |                                                                                                                         |
-| `void`                      | BeginUpdate(`String` undoName)                                                                  |                                                                                                                         |
-| `void`                      | BuildDependencyTree(`IExpressionObject` expressionObj)                                          |                                                                                                                         |
-| `void`                      | BuildDependencyTree()                                                                           |                                                                                                                         |
-| `ConflictInfo`              | CheckConflicts()                                                                                |                                                                                                                         |
-| `IList<TabularNamedObject>` | DeserializeObjects(`String` json)                                                               |                                                                                                                         |
-| `void`                      | Dispose()                                                                                       |                                                                                                                         |
-| `void`                      | DoFixup(`IDaxObject` obj, `String` newName)                                                     | 将对对象“obj”的所有引用更改为“newName”                                                                                              |
-| `Int32`                     | EndUpdate(`Boolean` undoable = True, `Boolean` rollback = False)                                |                                                                                                                         |
-| `Int32`                     | EndUpdateAll(`Boolean` rollback = False)                                                        |                                                                                                                         |
-| `Model`                     | GetModel()                                                                                      |                                                                                                                         |
-| `Boolean`                   | ImportTranslations(`String` culturesJson, `Boolean` overwriteExisting, `Boolean` ignoreInvalid) | 从 JSON 字符串中应用翻译内容。                                                                                                      |
-| `void`                      | SaveDB()                                                                                        | 将更改保存到数据库。 用户需自行检查：自数据库加载到 TOMWrapper 之后，数据库是否已被更改。 为此，可使用 Handler.CheckConflicts()。 |
-| `void`                      | SaveFile(`String` fileName, `SerializeOptions` options)                                         |                                                                                                                         |
-| `void`                      | SaveToFolder(`String` path, `SerializeOptions` options)                                         |                                                                                                                         |
-| `String`                    | ScriptCreateOrReplace()                                                                         | 为整个数据库生成脚本                                                                                                              |
-| `String`                    | ScriptCreateOrReplace(`TabularNamedObject` obj)                                                 | 为整个数据库生成脚本                                                                                                              |
-| `String`                    | 脚本翻译 ScriptTranslations(`IEnumerable<Culture>` translations)                                    |                                                                                                                         |
-| `String`                    | SerializeObjects(`IEnumerable<TabularNamedObject>` objects)                                     |                                                                                                                         |
-| `void`                      | UpdateFolders(`Table` table)                                                                    |                                                                                                                         |
-| `void`                      | UpdateLevels(`Hierarchy` hierarchy)                                                             |                                                                                                                         |
-| `void`                      | UpdateObject(`ITabularObject` obj)                                                              |                                                                                                                         |
-| `void`                      | UpdateTables()                                                                                  |                                                                                                                         |
+| 类型                          | 名称                                                                                                                 | 摘要                                                                                                                    |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `IDetailObject`             | Add(`AddObjectType` objectType, `IDetailObjectContainer` container)                             |                                                                                                                       |
+| `void`                      | BeginUpdate(`String` undoName)                                                                  |                                                                                                                       |
+| `void`                      | BuildDependencyTree(`IExpressionObject` expressionObj)                                          |                                                                                                                       |
+| `void`                      | BuildDependencyTree()                                                                           |                                                                                                                       |
+| `ConflictInfo`              | CheckConflicts()                                                                                |                                                                                                                       |
+| `IList<TabularNamedObject>` | DeserializeObjects(`String` json)                                                               |                                                                                                                       |
+| `void`                      | Dispose()                                                                                       |                                                                                                                       |
+| `void`                      | DoFixup(`IDaxObject` obj, `String` newName)                                                     | 将对对象“obj”的所有引用更改为“newName”                                                                                            |
+| `Int32`                     | EndUpdate(`Boolean` undoable = True, `Boolean` rollback = False)                                |                                                                                                                       |
+| `Int32`                     | EndUpdateAll(`Boolean` rollback = False)                                                        |                                                                                                                       |
+| `Model`                     | GetModel()                                                                                      |                                                                                                                       |
+| `Boolean`                   | ImportTranslations(`String` culturesJson, `Boolean` overwriteExisting, `Boolean` ignoreInvalid) | 从 JSON 字符串中应用翻译内容。                                                                                                    |
+| `void`                      | SaveDB()                                                                                        | 将更改保存到数据库。用户需自行检查：自数据库加载到 TOMWrapper 之后，数据库是否已被更改。为此，可使用 Handler.CheckConflicts()。 |
+| `void`                      | SaveFile(`String` fileName, `SerializeOptions` options)                                         |                                                                                                                       |
+| `void`                      | SaveToFolder(`String` path, `SerializeOptions` options)                                         |                                                                                                                       |
+| `String`                    | ScriptCreateOrReplace()                                                                         | 为整个数据库生成脚本                                                                                                            |
+| `String`                    | ScriptCreateOrReplace(`TabularNamedObject` obj)                                                 | 为整个数据库生成脚本                                                                                                            |
+| `String`                    | 脚本翻译 ScriptTranslations(`IEnumerable<Culture>` translations)                                    |                                                                                                                       |
+| `String`                    | SerializeObjects(`IEnumerable<TabularNamedObject>` objects)                                     |                                                                                                                       |
+| `void`                      | UpdateFolders(`Table` table)                                                                    |                                                                                                                       |
+| `void`                      | UpdateLevels(`Hierarchy` hierarchy)                                                             |                                                                                                                       |
+| `void`                      | UpdateObject(`ITabularObject` obj)                                                              |                                                                                                                       |
+| `void`                      | UpdateTables()                                                                                  |                                                                                                                       |
 
 静态字段
 
@@ -2098,7 +2098,7 @@ public class TabularEditor.TOMWrapper.TabularModelHandler
 
 ## `TabularNamedObject`
 
-TabularObject 是对 Microsoft.AnalysisServices.Tabular.NamedMetadataObject 类的封装。  该封装用于所有需要在 Tabular Editor 中查看和编辑的对象。  Tabular Model 中的各类对象都使用同一个基类。 该基类提供一个方法，用于编辑（本地化）名称和说明。
+TabularObject 是对 Microsoft.AnalysisServices.Tabular.NamedMetadataObject 类的封装。该封装用于所有需要在 Tabular Editor 中查看和编辑的对象。  Tabular Model 中的各类对象都使用同一个基类。该基类提供一个方法，用于编辑（本地化）名称和说明。
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.TabularNamedObject
@@ -2117,13 +2117,13 @@ public abstract class TabularEditor.TOMWrapper.TabularNamedObject
 
 方法
 
-| 类型                   | 名称                                                                        | 摘要                                                                            |
-| -------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations) |                                                                               |
-| `Int32`              | CompareTo(`Object` obj)                                |                                                                               |
-| `void`               | Delete()                                               |                                                                               |
-| `void`               | Init()                                                 |                                                                               |
-| `void`               | Undelete(`ITabularObjectCollection` collection)        | 要撤销删除操作，需要一个不太优雅的临时变通方案。  派生类必须注意更新该对象所“拥有”的所有对象。 例如，度量值必须负责更新其 KPI 的包装器（如有）。 |
+| 类型                   | 名称                                                                        | 摘要                                                                         |
+| -------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations) |                                                                            |
+| `Int32`              | CompareTo(`Object` obj)                                |                                                                            |
+| `void`               | Delete()                                               |                                                                            |
+| `void`               | Init()                                                 |                                                                            |
+| `void`               | Undelete(`ITabularObjectCollection` collection)        | 要撤销删除操作，需要一个不太优雅的临时变通方案。派生类必须注意更新该对象所“拥有”的所有对象。例如，度量值必须负责更新其 KPI 的包装器（如有）。 |
 
 ## `TabularObject`
 
@@ -2160,12 +2160,12 @@ public abstract class TabularEditor.TOMWrapper.TabularObject
 
 方法
 
-| 类型        | 名称                                                                                                                      | 摘要                                                                       |
-| --------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `void`    | Init()                                                                                               | 派生类应重写此方法，以实例化子对象                                                        |
-| `void`    | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue)                       |                                                                          |
-| `void`    | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) | 在对象的属性更改之前调用。 派生类可以控制如何处理此更改。  在此方法中抛出 ArgumentException，以便在 UI 中显示错误信息。 |
-| `Boolean` | SetField(`T&` field, `T` value, `String` propertyName = null)                                        |                                                                          |
+| 类型        | 名称                                                                                                                      | 摘要                                                                    |
+| --------- | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `void`    | Init()                                                                                               | 派生类应重写此方法，以实例化子对象                                                     |
+| `void`    | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue)                       |                                                                       |
+| `void`    | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) | 在对象的属性更改之前调用。派生类可以控制如何处理此更改。在此方法中抛出 ArgumentException，以便在 UI 中显示错误信息。 |
+| `Boolean` | SetField(`T&` field, `T` value, `String` propertyName = null)                                        |                                                                       |
 
 ## `TabularObjectCollection<T, TT, TP>`
 
@@ -2269,7 +2269,7 @@ public static class TabularEditor.TOMWrapper.TabularObjectHelper
 
 ## `TabularTree`
 
-TabularLogicalModel 用于控制 TabularObjects 之间的关系，使其能够在 TreeViewAdv 控件中显示。 单个 TabularObject 本身既不知道，也不关心它与其他对象之间的逻辑关系（例如，在特定区域设置下通过 DisplayFolders 建立的关系）。 TabularObjects 只关心其物理关系，这些关系直接从 Tabular Object Model 继承而来（例如，度量值属于某个表等）。
+TabularLogicalModel 用于控制 TabularObjects 之间的关系，使其能够在 TreeViewAdv 控件中显示。单个 TabularObject 本身既不知道，也不关心它与其他对象之间的逻辑关系（例如，在特定区域设置下通过 DisplayFolders 建立的关系）。 TabularObjects 只关心其物理关系，这些关系直接从 Tabular Object Model 继承而来（例如，度量值属于某个表等）。
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.TabularTree
@@ -2303,24 +2303,24 @@ public abstract class TabularEditor.TOMWrapper.TabularTree
 
 方法
 
-| 类型                     | 名称                                                                                                           | 摘要                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
-| `void`                 | BeginUpdate()                                                                             |                                                           |
-| `void`                 | EndUpdate()                                                                               |                                                           |
-| `IEnumerable`          | GetChildren(`ITabularObjectContainer` tabularObject)                                      | 此方法封装了用于定义表格式模型的树形表示应如何构建的逻辑                              |
-| `Func<String, String>` | GetFolderMutation(`Object` source, `Object` destination)                                  |                                                           |
-| `Func<String, String>` | GetFolderMutation(`String` oldPath, `String` newPath)                                     |                                                           |
-| `void`                 | ModifyDisplayFolder(`Table` table, `String` oldPath, `String` newPath, `Culture` culture) | 更新同一张表中所有表格对象的 DisplayFolder 属性。 位于更新后路径下各子文件夹中的对象也会同步更新。 |
-| `void`                 | OnNodesChanged(`ITabularObject` nodeItem)                                                 |                                                           |
-| `void`                 | OnNodesInserted(`ITabularObject` parent, `ITabularObject[]` children)                     |                                                           |
-| `void`                 | OnNodesInserted(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)          |                                                           |
-| `void`                 | OnNodesRemoved(`ITabularObject` parent, `ITabularObject[]` children)                      |                                                           |
-| `void`                 | OnNodesRemoved(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)           |                                                           |
-| `void`                 | OnStructureChanged(`ITabularNamedObject` obj = null)                                      |                                                           |
-| `void`                 | SetCulture(`String` cultureName)                                                          |                                                           |
-| `void`                 | SetPerspective(`String` perspectiveName)                                                  |                                                           |
-| `void`                 | UpdateFolder(`Folder` folder, `String` oldFullPath = null)                                |                                                           |
-| `Boolean`              | VisibleInTree(`ITabularNamedObject` tabularObject)                                        |                                                           |
+| 类型                     | 名称                                                                                                           | 摘要                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| `void`                 | BeginUpdate()                                                                             |                                                          |
+| `void`                 | EndUpdate()                                                                               |                                                          |
+| `IEnumerable`          | GetChildren(`ITabularObjectContainer` tabularObject)                                      | 此方法封装了用于定义表格式模型的树形表示应如何构建的逻辑                             |
+| `Func<String, String>` | GetFolderMutation(`Object` source, `Object` destination)                                  |                                                          |
+| `Func<String, String>` | GetFolderMutation(`String` oldPath, `String` newPath)                                     |                                                          |
+| `void`                 | ModifyDisplayFolder(`Table` table, `String` oldPath, `String` newPath, `Culture` culture) | 更新同一张表中所有表格对象的 DisplayFolder 属性。位于更新后路径下各子文件夹中的对象也会同步更新。 |
+| `void`                 | OnNodesChanged(`ITabularObject` nodeItem)                                                 |                                                          |
+| `void`                 | OnNodesInserted(`ITabularObject` parent, `ITabularObject[]` children)                     |                                                          |
+| `void`                 | OnNodesInserted(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)          |                                                          |
+| `void`                 | OnNodesRemoved(`ITabularObject` parent, `ITabularObject[]` children)                      |                                                          |
+| `void`                 | OnNodesRemoved(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)           |                                                          |
+| `void`                 | OnStructureChanged(`ITabularNamedObject` obj = null)                                      |                                                          |
+| `void`                 | SetCulture(`String` cultureName)                                                          |                                                          |
+| `void`                 | SetPerspective(`String` perspectiveName)                                                  |                                                          |
+| `void`                 | UpdateFolder(`Folder` folder, `String` oldFullPath = null)                                |                                                          |
+| `Boolean`              | VisibleInTree(`ITabularNamedObject` tabularObject)                                        |                                                          |
 
 ## `翻译索引器`
 
@@ -2343,17 +2343,17 @@ public class TabularEditor.TOMWrapper.TranslationIndexer
 
 方法
 
-| 类型                           | 名称                                                                                          | 摘要                                                                  |
-| ---------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `void`                       | Clear()                                                                  | 清除该对象的所有翻译值。                                                        |
-| `Boolean`                    | Contains(`区域设置` culture)                                                 |                                                                     |
-| `Dictionary<String, String>` | Copy()                                                                   |                                                                     |
-| `void`                       | CopyFrom(`TranslationIndexer` 翻译, `Func<String, String>` mutator = null) |                                                                     |
-| `void`                       | CopyFrom(`IDictionary<String, String>` source)                           |                                                                     |
-| `String`                     | GetDisplayName(`String` key)                                             |                                                                     |
-| `IEnumerator<String>`        | GetEnumerator()                                                          |                                                                     |
-| `void`                       | Refresh()                                                                |                                                                     |
-| `void`                       | Reset()                                                                  | 重置该对象的翻译内容。 将删除标题翻译，使该对象在所有区域设置中都显示为基本名称。 显示文件夹和描述的翻译将被设置为该对象的未翻译值。 |
-| `void`                       | SetAll(`String` value)                                                   |                                                                     |
+| 类型                           | 名称                                                                                          | 摘要                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `void`                       | Clear()                                                                  | 清除该对象的所有翻译值。                                                      |
+| `Boolean`                    | Contains(`区域设置` culture)                                                 |                                                                   |
+| `Dictionary<String, String>` | Copy()                                                                   |                                                                   |
+| `void`                       | CopyFrom(`TranslationIndexer` 翻译, `Func<String, String>` mutator = null) |                                                                   |
+| `void`                       | CopyFrom(`IDictionary<String, String>` source)                           |                                                                   |
+| `String`                     | GetDisplayName(`String` key)                                             |                                                                   |
+| `IEnumerator<String>`        | GetEnumerator()                                                          |                                                                   |
+| `void`                       | Refresh()                                                                |                                                                   |
+| `void`                       | Reset()                                                                  | 重置该对象的翻译内容。将删除标题翻译，使该对象在所有区域设置中都显示为基本名称。显示文件夹和描述的翻译将被设置为该对象的未翻译值。 |
+| `void`                       | SetAll(`String` value)                                                   |                                                                   |
 
 
