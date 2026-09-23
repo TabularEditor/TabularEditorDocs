@@ -10,7 +10,7 @@ description: 最佳实践规则：在 SQL Server 连接字符串中包含应用�
 
 ## 概述
 
-此规则用于识别其连接字符串中缺少 Application Name 参数的 SQL Server Provider数据源。 包含应用程序名称可提升监控与故障排查的效果。
+此规则用于识别其连接字符串中缺少 Application Name 参数的 SQL Server Provider数据源。包含应用程序名称可提升监控与故障排查的效果。
 
 - 类别：性能
 - 严重性：低（1）
