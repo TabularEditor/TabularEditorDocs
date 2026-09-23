@@ -17,7 +17,7 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Tabular Editor CLI 使用与 Tabular Editor 3 相同的 Power BI Desktop 客户端 ID 来对 Power BI 服务、Microsoft Fabric 和 Azure Analysis Services 进行身份验证。 令牌会缓存在本地，因此你只需进行一次身份验证，之后无需再次登录即可重新运行命令，直到刷新令牌过期（通常为 90 天）。
+Tabular Editor CLI 使用与 Tabular Editor 3 相同的 Power BI Desktop 客户端 ID 来对 Power BI 服务、Microsoft Fabric 和 Azure Analysis Services 进行身份验证。令牌会缓存在本地，因此你只需进行一次身份验证，之后无需再次登录即可重新运行命令，直到刷新令牌过期（通常为 90 天）。
 
 ## 身份验证方法
 
@@ -33,12 +33,12 @@ Tabular Editor CLI 使用与 Tabular Editor 3 相同的 Power BI Desktop 客户�
 | 托管标识        | Azure 虚拟机、Azure 容器应用、Azure Functions                          | `managed-identity`                  |
 
 > [!NOTE]
-> `--auth` 是一个**全局**选项，所有 `te` 命令都可用，而不只是 `te auth login`。 将其传递给 [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)、[`te query`](xref:te-cli-commands#query)、[`te connect`](xref:te-cli-commands#connect)，或任何其他需要连接远程端点的命令，以覆盖该次调用的默认身份验证链。 默认值 (`auto`) 会先尝试环境凭据，然后再回退到缓存的登录信息或交互式浏览器登录。
+> `--auth` 是一个**全局**选项，所有 `te` 命令都可用，而不只是 `te auth login`。将其传递给 [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)、[`te query`](xref:te-cli-commands#query)、[`te connect`](xref:te-cli-commands#connect)，或任何其他需要连接远程端点的命令，以覆盖该次调用的默认身份验证链。默认值 (`auto`) 会先尝试环境凭据，然后再回退到缓存的登录信息或交互式浏览器登录。
 
-对于无界面、SSH、WSL 或 devcontainer 场景，可使用服务主体：`te auth login -u <id> -p <secret> -t <tenant>`（或 `--certificate`）。 登录会被缓存，因此后续命令可通过 `--auth auto` 静默获取令牌。
+对于无界面、SSH、WSL 或 devcontainer 场景，可使用服务主体：`te auth login -u <id> -p <secret> -t <tenant>`（或 `--certificate`）。登录会被缓存，因此后续命令可通过 `--auth auto` 静默获取令牌。
 
 > [!NOTE]
-> `te add -t Table` 和 `te set --update-schema` 中用于架构检测的标志（`--source sql`、`--endpoint`）在连接 Azure 系列 SQL 端点（`*.database.windows.net`、`*.datawarehouse.fabric.microsoft.com`、`*.sql.azuresynapse.net`）时会使用 Entra ID 登录，并遵循 `--auth` 设置。 本地部署服务器使用 Windows 集成身份验证；`--connection-string` 会按原样生效。
+> `te add -t Table` 和 `te set --update-schema` 中用于架构检测的标志（`--source sql`、`--endpoint`）在连接 Azure 系列 SQL 端点（`*.database.windows.net`、`*.datawarehouse.fabric.microsoft.com`、`*.sql.azuresynapse.net`）时会使用 Entra ID 登录，并遵循 `--auth` 设置。本地部署服务器使用 Windows 集成身份验证；`--connection-string` 会按原样生效。
 
 ## `te auth login`
 
@@ -61,10 +61,10 @@ te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx
 te auth login --identity     # Alias: -I
 ```
 
-服务主体登录成功后，CLI 会**缓存凭据**，这样后续所有 `te` 命令都能静默获取令牌，无需再次传入 `-u / -p / -t`，也不用设置 `AZURE_CLIENT_*` 环境变量。 传入 `--save=false` 可进行一次性登录且不更新缓存，或者运行 `te auth logout` 清除缓存。
+服务主体登录成功后，CLI 会**缓存凭据**，这样后续所有 `te` 命令都能静默获取令牌，无需再次传入 `-u / -p / -t`，也不用设置 `AZURE_CLIENT_*` 环境变量。传入 `--save=false` 可进行一次性登录且不更新缓存，或者运行 `te auth logout` 清除缓存。
 
 > [!WARNING]
-> 在命令行中直接传递密钥会使其暴露在进程列表和 shell 历史记录中。 优先使用 `AZURE_CLIENT_SECRET` 环境变量，或通过 stdin 配合 `-p -` 管道传入密钥。
+> 在命令行中直接传递密钥会使其暴露在进程列表和 shell 历史记录中。优先使用 `AZURE_CLIENT_SECRET` 环境变量，或通过 stdin 配合 `-p -` 管道传入密钥。
 
 ## `te auth status`
 
@@ -87,7 +87,7 @@ te auth logout
 
 ## 凭据存储
 
-默认情况下，CLI 会将访问令牌和刷新令牌以及服务主体记录存储在**操作系统原生的安全存储**中。 仅当操作系统密钥库不可用时（例如无界面 Linux 且未安装 libsecret/D-Bus），才会自动回退为 `0600` 权限的文件存储。
+默认情况下，CLI 会将访问令牌和刷新令牌以及服务主体记录存储在**操作系统原生的安全存储**中。仅当操作系统密钥库不可用时（例如无界面 Linux 且未安装 libsecret/D-Bus），才会自动回退为 `0600` 权限的文件存储。
 
 | 平台       | 后端               | 存储位置                                                |
 | -------- | ---------------- | --------------------------------------------------- |
@@ -96,13 +96,13 @@ te auth logout
 | macOS    | 钥匙串              | 服务 `com.tabulareditor.cli.*`，账户 `te-msal-cache.bin` |
 | 任意平台（回退） | `0600` 文件        | `~/.te-cli/te-msal-cache.bin` 以及每个键对应的 `.bin` blob  |
 
-交互式浏览器流和服务主体流共用同一缓存；MSAL 的账户模型会区分它们，不会有单独的 `auth-record*.json` 配套文件。 使用 `--debug` 运行任意命令，即可查看启动时选择了哪个后端。
+交互式浏览器流和服务主体流共用同一缓存；MSAL 的账户模型会区分它们，不会有单独的 `auth-record*.json` 配套文件。使用 `--debug` 运行任意命令，即可查看启动时选择了哪个后端。
 
 无论当前使用哪个后端，`te auth logout` 都会清除所有缓存记录（包括 MSAL 令牌缓存和所有 SPN blob）。
 
 ## `te connect`：设置活动连接
 
-`te connect` 会为当前终端会话保存一个活动连接。 之后支持 `-s` / `-d` 的命令可以省略这两个参数：
+`te connect` 会为当前终端会话保存一个活动连接。之后支持 `-s` / `-d` 的命令可以省略这两个参数：
 
 ```bash
 # Remote workspace
@@ -127,11 +127,11 @@ te connect --clear
 
 找到多个本地实例或数据库时，CLI 会分两步提示（先选实例，再选数据库）；使用 `--non-interactive` 时，命令会直接失败并列出候选项，而不会静默选择其一。
 
-活动连接状态按终端会话分别保存：打开新的终端会话后将重新开始。 通过 [`te session`](xref:te-cli-commands#session) 查看或清理会话状态。 对于 `te deploy`，如果模型源位于本地，当前活动连接也会用作默认的 `--target-server`/`--target-database`。
+活动连接状态按终端会话分别保存：打开新的终端会话后将重新开始。通过 [`te session`](xref:te-cli-commands#session) 查看或清理会话状态。对于 `te deploy`，如果模型源位于本地，当前活动连接也会用作默认的 `--target-server`/`--target-database`。
 
 ### 工作区模式（Workspace，`-w` / `--workspace`）
 
-`te connect -w <target>` 会将一个主源与一个辅助镜像配对，因此后续每次执行 `--save` 都会同时写入两者。 可用它让远程模型的本地工作副本保持同步，或在保存时将本地修改推送到 Workspace：
+`te connect -w <target>` 会将一个主源与一个辅助镜像配对，因此后续每次执行 `--save` 都会同时写入两者。可用它让远程模型的本地工作副本保持同步，或在保存时将本地修改推送到 Workspace：
 
 ```bash
 # Mirror remote workspace ↔ local TMDL folder
@@ -141,7 +141,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也能反映用户的最新更改。 有关 `--workspace-format`、覆盖语义以及清理镜像，请参阅 [工作区模式](xref:te-cli-commands#workspace-mode--w----workspace)。
+保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也能反映用户的最新更改。有关 `--workspace-format`、覆盖语义以及清理镜像，请参阅 [工作区模式](xref:te-cli-commands#workspace-mode--w----workspace)。
 
 ## 连接到不同的云
 
@@ -199,7 +199,7 @@ te profile set prod --auto-format true
 - `--non-interactive` 全局标志（不会提示，而是立即失败）。
 - 以下任一非交互式身份验证方法：`env`、`managed-identity`，或显式提供的服务主体凭据。
 
-在使用 `--non-interactive` 且没有任何可用于登录的方式——没有缓存的登录信息、没有 `AZURE_CLIENT_*` 变量、也没有托管身份——时，任何连接到 Workspace 或服务器的命令都会立即停止，不会打开浏览器，并报告没有可用凭据，同时列出提供凭据的所有方式：`te auth login`、通过 `te auth login -u <client-id> -p <secret> -t <tenant>` 缓存的服务主体、`--auth env` 或 `--auth managed-identity`。 缓存的服务主体会被静默使用，因此只有在确实没有任何可用于登录的方式时，才会以这种方式失败。
+在使用 `--non-interactive` 且没有任何可用于登录的方式——没有缓存的登录信息、没有 `AZURE_CLIENT_*` 变量、也没有托管身份——时，任何连接到 Workspace 或服务器的命令都会立即停止，不会打开浏览器，并报告没有可用凭据，同时列出提供凭据的所有方式：`te auth login`、通过 `te auth login -u <client-id> -p <secret> -t <tenant>` 缓存的服务主体、`--auth env` 或 `--auth managed-identity`。缓存的服务主体会被静默使用，因此只有在确实没有任何可用于登录的方式时，才会以这种方式失败。
 
 适用于管道的基于环境变量的示例：
 
@@ -223,13 +223,13 @@ te deploy --model ./model \
 
 当使用 `--auth env`（以及作为 `auto` 链的一部分）时，CLI 会遵循标准的 Azure.Identity 环境变量：
 
-| 变量                              | 用途                                                                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `AZURE_CLIENT_ID`               | 服务主体应用程序 ID。                                                                                                        |
-| `AZURE_CLIENT_SECRET`           | 服务主体客户端机密。 需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                                                           |
-| `AZURE_TENANT_ID`               | 服务主体的租户（目录）ID。                                                                                                      |
-| `AZURE_CLIENT_CERTIFICATE_PATH` | 用于基于证书的服务主体身份验证的 PEM 或 PKCS12 证书文件的 PATH。 需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                            |
-| `AZURE_AUTHORITY_HOST`          | 为主权云覆盖授权主机（例如 `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`）。 默认使用商业云。 |
+| 变量                              | 用途                                                                                                                 |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `AZURE_CLIENT_ID`               | 服务主体应用程序 ID。                                                                                                       |
+| `AZURE_CLIENT_SECRET`           | 服务主体客户端机密。需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                                                           |
+| `AZURE_TENANT_ID`               | 服务主体的租户（目录）ID。                                                                                                     |
+| `AZURE_CLIENT_CERTIFICATE_PATH` | 用于基于证书的服务主体身份验证的 PEM 或 PKCS12 证书文件的 PATH。需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                            |
+| `AZURE_AUTHORITY_HOST`          | 为主权云覆盖授权主机（例如 `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`）。默认使用商业云。 |
 
 有关 CLI 专用环境变量（配置 PATH、调试日志、TE2 兼容性），请参见 @te-cli-config。
 
