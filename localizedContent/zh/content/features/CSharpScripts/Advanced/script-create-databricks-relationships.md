@@ -15,13 +15,12 @@ applies_to:
 
 ## 脚本用途
 
-此脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以在表之间定义主键和外键关系。 此脚本可复用这些信息，在 Tabular Editor 中自动检测并创建关系。 在导入这些关系时，脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。 主键也会在语义模型中标记为 IsKey = TRUE。 <br></br>
+此脚本是 Tabular Editor x Databricks 系列的一部分。在 Unity Catalog 中，可以在表之间定义主键和外键关系。此脚本可复用这些信息，在 Tabular Editor 中自动检测并创建关系。在导入这些关系时，脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。主键也会在语义模型中标记为 IsKey = TRUE。 <br></br>
 
 > [!NOTE]
-> 此脚本需要 Databricks ODBC 驱动程序。 我们推荐使用新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 该脚本会自动检测已安装的驱动程序，并自动使用相应的驱动程序。
+> 此脚本需要 Databricks ODBC 驱动程序。我们推荐使用新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。该脚本会自动检测已安装的驱动程序，并自动使用相应的驱动程序。
 
-每次运行该脚本时，都会提示用户输入 Databricks 个人访问令牌。 这用于对 Databricks 进行身份验证。
-该脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此您可能需要再与 Databricks 管理员确认一下，确保您有权限查询这些表。 <br></br>
+每次运行该脚本时，都会提示用户输入 Databricks 个人访问令牌。这用于对 Databricks 进行身份验证。该脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此您可能需要再与 Databricks 管理员确认一下，确保您有权限查询这些表。 <br></br>
 
 ## 脚本
 
@@ -621,7 +620,7 @@ foreach (var t in Selected.Tables)
 
 ### 说明
 
-脚本使用 WinForms 来提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。 对于每个选中的表，脚本会从该表分区中的 M 查询获取 Databricks 连接字符串信息，以及 schema 和表名。 随后，它会使用检测到的 ODBC 驱动程序向 Databricks 发送一条 SQL 查询，通过查询 information_schema 表来查找在 Unity Catalog 中为该表定义的任何外键关系。 对于 SQL 查询返回的每一行，脚本都会在模型中查找匹配的表名和列名；如果尚未存在关系，则会创建一个新的关系。 对于角色扮演维度，同一张表可能通过多个外键关联到同一目标表，脚本检测到的第一个关系将被设为活动关系，其他随后创建的关系均设为非活动。 脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。 主键也会在语义模型中标记为 IsKey = TRUE。 脚本对所有选定表都运行完成后，会弹出一个对话框，显示新创建了多少个关系。
+脚本使用 WinForms 来提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。对于每个选中的表，脚本会从该表分区中的 M 查询获取 Databricks 连接字符串信息，以及 schema 和表名。随后，它会使用检测到的 ODBC 驱动程序向 Databricks 发送一条 SQL 查询，通过查询 information_schema 表来查找在 Unity Catalog 中为该表定义的任何外键关系。对于 SQL 查询返回的每一行，脚本都会在模型中查找匹配的表名和列名；如果尚未存在关系，则会创建一个新的关系。对于角色扮演维度，同一张表可能通过多个外键关联到同一目标表，脚本检测到的第一个关系将被设为活动关系，其他随后创建的关系均设为非活动。脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。主键也会在语义模型中标记为 IsKey = TRUE。脚本对所有选定表都运行完成后，会弹出一个对话框，显示新创建了多少个关系。
 
 ## 示例输出
 
