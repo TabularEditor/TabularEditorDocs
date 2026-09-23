@@ -2,7 +2,7 @@
 uid: update-compatibility-level
 title: Actualizar el nivel de compatibilidad
 author: Morten Lønskov
-updated: 2026-01-12
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,10 +28,10 @@ El **nivel de compatibilidad** de un modelo controla qué características del T
 
 El nivel de compatibilidad y el modo de compatibilidad son propiedades independientes que cumplen finalidades distintas:
 
-| Propiedad                     | Lo que controla                                                                                                                    | Valores                                                      |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `Database.CompatibilityLevel` | Qué características de TOM están disponibles (por ejemplo, calendarios personalizados, UDFs de DAX)             | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
-| `Database.CompatibilityMode`  | A qué plataforma se dirige el modelo, qué objetos y propiedades de TOM están disponibles y qué restricciones de edición se aplican | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel`            |
+| Propiedad                     | Lo que controla                                                                                                                    | Valores                                                                |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `Database.CompatibilityLevel` | Qué características de TOM están disponibles (por ejemplo, calendarios personalizados, UDFs de DAX)             | `1200`, `1400`, `1500`, `1600`, `1700`, `1701`, `1702`, `1705`, `1706` |
+| `Database.CompatibilityMode`  | A qué plataforma se dirige el modelo, qué objetos y propiedades de TOM están disponibles y qué restricciones de edición se aplican | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel`                      |
 
 Si necesita cambiar la plataforma de destino en lugar de habilitar nuevas características de TOM, consulte [Cambiar el modo de compatibilidad](xref:change-compatibility-mode).
 
@@ -40,7 +40,7 @@ Si necesita cambiar la plataforma de destino en lugar de habilitar nuevas caract
 Actualiza cuando:
 
 - Existe una característica en Power BI Desktop, pero falta la propiedad TOM relacionada en Tabular Editor
-- Necesitas capacidades introducidas recientemente, como **calendarios personalizados** (1701+) o **funciones DAX definidas por el usuario** (1702+)
+- You need newly introduced capabilities like **custom calendars** (1701+), **DAX user-defined functions** (1702+), **user-context calculated columns** (1705+) or **String Indexing Behavior** (1706+)
 - Estás estandarizando el desarrollo entre entornos y quieres conjuntos mínimos de características coherentes
 
 ## Antes de empezar
@@ -84,8 +84,11 @@ Establece el nivel de compatibilidad en el mínimo necesario para tu funcionalid
 
 Ejemplos:
 
+- **Calculation groups:** 1500+
 - **Calendarios personalizados:** 1701+
 - **UDFs de DAX:** 1702+
+- **User-context calculated columns** (the column's _Expression Context_ property): 1705+
+- **String Indexing Behavior** on a column: 1706+
 
 > [!NOTE]
 > Los niveles mínimos necesarios para las funcionalidades pueden cambiar a medida que evoluciona la plataforma. Verifica siempre los requisitos previos en la documentación actual. Algunos niveles/funcionalidades son exclusivos de Power BI y es posible que no estén disponibles en SSAS/AAS.
