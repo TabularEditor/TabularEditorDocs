@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: 高级安装与激活
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,13 +31,13 @@ applies_to:
 
 ![手动激活提示](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
-输入邮箱后，会弹出一个对话框，其中包含指向激活密钥的链接。 复制该 URL，并在可连接到互联网的 Web 浏览器中打开。
+输入邮箱后，会弹出一个对话框，其中包含指向激活密钥的链接。复制该 URL，并在可连接到互联网的 Web 浏览器中打开。
 
 该 URL 会返回一个 JSON 对象：
 
 ![手动激活 JSON 对象](~/content/assets/images/getting-started/activation_manual_jsonobject.png)
 
-复制完整的 JSON 对象，并将其粘贴到对话框中。 完成后，手动激活对话框应如下方截图所示。
+复制完整的 JSON 对象，并将其粘贴到对话框中。完成后，手动激活对话框应如下方截图所示。
 
 ![已填写的手动激活](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
@@ -45,7 +45,7 @@ applies_to:
 
 ## 更换企业版席位
 
-要更换企业版席位，必须先通过 [Tabular Editor 自助服务门户](https://tabulareditor.com/my-account/) 将现有用户从该席位取消注册。 要管理许可证席位，订阅所有者或许可证管理员需要创建一个账户，或使用现有账户登录。
+要更换企业版席位，必须先通过 [Tabular Editor 自助服务门户](https://tabulareditor.com/my-account/) 将现有用户从该席位取消注册。要管理许可证席位，订阅所有者或许可证管理员需要创建一个账户，或使用现有账户登录。
 
 > [!NOTE]
 > 仅企业版支持更换用户。
@@ -64,7 +64,7 @@ REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 
 ![注册表编辑器](~/content/assets/images/troubleshooting/registry-editor.png)
 
-系统管理员还可以通过在每个用户的 `SOFTWARE\Kapacity\Tabular Editor 3` 注册表项下设置 **LicenseKey** 和 **User** 值，提前为计算机分配 Tabular Editor 3 许可证。 完整部署过程见 [静默安装和许可证预配](#silent-installation-and-license-pre-provisioning)。
+系统管理员还可以通过在每个用户的 `SOFTWARE\Kapacity\Tabular Editor 3` 注册表项下设置 **LicenseKey** 和 **User** 值，提前为计算机分配 Tabular Editor 3 许可证。完整部署过程见 [静默安装和许可证预配](#silent-installation-and-license-pre-provisioning)。
 
 ## 在注册表中更改许可证密钥
 
@@ -86,48 +86,75 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 
 ## 静默安装与许可证预配置
 
-你可以以静默方式部署 Tabular Editor，并通过 Windows 注册表预先配置许可证。
+You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry. Install first, then write the license, which has to be in place before the application is launched for the first time.
 
-1. **静默安装**（无界面、无需重启）：
+### Install silently
 
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
-   ```
+No UI, no reboot:
 
-   要包含 **AI Assistant** 功能，请在 `ADDLOCAL` 属性中指定它。 AI Assistant 默认不会安装。
+```powershell
+msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
+```
 
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
-   ```
+| MSI 功能        | Shown in the installer as | 说明                                                | Installed by default                             |
+| ------------- | ------------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| `MainFeature` | Tabular Editor 3          | Tabular Editor 3 核心应用程序                           | 是（必需）                                            |
+| `AIAssistant` | AI features               | The @ai-assistant and the MCP server | Yes, from 3.27.0 |
 
-   | MSI 功能        | 说明                                 | 默认安装  |
-   | ------------- | ---------------------------------- | ----- |
-   | `MainFeature` | Tabular Editor 3 核心应用程序            | 是（必需） |
-   | `AIAssistant` | 用于 Tabular Editor 3 的 AI Assistant | 否     |
+> [!IMPORTANT]
+> The command above installs the **AI features** component. Up to 3.26.x it had to be selected deliberately and a default installation left it out; from 3.27.0 it is part of a default installation. If your organization does not want the AI Assistant or the MCP server on user machines, you have to say so explicitly, as described in the next section.
 
-   > [!NOTE]> 使用 `ADDLOCAL` 时，除任何可选功能外，还必须包含 `MainFeature`。 如果仅指定 `AIAssistant` 而不包含 `MainFeature`，将导致安装不完整。
+### Deploying without the AI features
 
-你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 版 MSI。
+To keep the AI files off the machine, name the features you want and leave `AIAssistant` out:
+
+```powershell
+msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
+```
+
+To take the component off machines that already have it, run the same package with `REMOVE`:
+
+```powershell
+msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
+```
+
+Either way, the AI assemblies are never written to the installation folder, the **AI Assistant** pane and the MCP server are absent from the application, and nothing reaches out to a model provider. Everything else in Tabular Editor 3 is unaffected.
+
+Upgrading an existing installation keeps the feature selection that machine already has, so a machine that was deployed without the AI features before 3.27.0 does not gain them by being upgraded. Pass `ADDLOCAL=MainFeature` on fresh installations, where there is no earlier selection to inherit.
+
+> [!IMPORTANT]
+> The command line controls what _you_ deploy, not what a user can install: the AI features are the default, so anyone who runs the installer themselves gets them. To make the decision stick, set the `DisableAi` @policies as well. From 3.27.0 the installer reads that policy and leaves the AI component out on its own, whoever runs it and however it is run, and the policy also turns the AI Assistant and the MCP server off at runtime if the component is already present. Set it machine-wide, under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3`, so it applies to every user and cannot be overridden per user.
+
+> [!NOTE]
+> When using `ADDLOCAL`, list `MainFeature` alongside any optional features. 如果仅指定 `AIAssistant` 而不包含 `MainFeature`，将导致安装不完整。
+
+### Package names and other MSI options
+
+你也可以使用 `/package` 替代 `/i`。将 `<version>` 替换为实际的版本字符串。
+
+MSI packages are named `TabularEditor.<version>.<architecture>.<runtime>.msi`, for example `TabularEditor.3.27.0.x64.Net10.msi` or `TabularEditor.3.27.0.ARM64.Net8.msi`. Pick the architecture and runtime that suit the target machines; see @system-requirements. The MSI does not install the .NET Desktop Runtime, so deploy that first.
 
 可用的 MSI 命令行选项详见 Microsoft 官方文档：
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
-2. 在应用程序**首次启动前**，**将许可证写入注册表**：
+### Pre-provision the license
 
-   ```bat
-   REM 每用户许可证密钥 (HKCU)
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
-   ```
+Write the license to the Registry _before the first launch_ of the application:
 
-   如果使用的是**企业版**许可证密钥，还需要设置授权用户的电子邮件地址：
+```bat
+REM 每用户许可证密钥 (HKCU)
+REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
+```
 
-   ```bat
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
-   ```
+如果使用的是**企业版**许可证密钥，还需要设置授权用户的电子邮件地址：
+
+```bat
+REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
+```
 
 **注意事项**
 
 - 安装程序不接受许可证参数；许可通过上述注册表项进行处理。
-- 许可证密钥存储在 **HKCU** 下（按用户）。 确保这些命令在目标用户的上下文中运行（例如通过登录脚本），这样这些值才会写入正确的用户配置文件。
+- 许可证密钥存储在 **HKCU** 下（按用户）。确保这些命令在目标用户的上下文中运行（例如通过登录脚本），这样这些值才会写入正确的用户配置文件。
 - 如需其他键和值，请参阅 [注册表详细信息](#registry-details)。
 
