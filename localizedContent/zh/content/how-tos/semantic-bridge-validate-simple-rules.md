@@ -20,12 +20,10 @@ applies_to:
 
 # 创建简单验证规则
 
-本操作指南演示如何创建基于谓词的简单验证规则，以强制遵循命名约定并满足结构要求。
-这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的硬性技术要求。
+本操作指南演示如何创建基于谓词的简单验证规则，以强制遵循命名约定并满足结构要求。这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的硬性技术要求。
 
 > [!NOTE]
-> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。
-> 更早的版本不支持此处所示的 v1.1 Metric View 功能。
+> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。更早的版本不支持此处所示的 v1.1 Metric View 功能。
 
 ## 四个规则帮助方法
 
@@ -97,9 +95,7 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 
 ## 针对特定 Metric View 版本的规则
 
-每个辅助方法都有一个重载，可在最后接收一个 `minVersion` 参数，比如 "0.1" 或 "1.1" 这样的字符串。
-使用 `minVersion` 定义的规则只会对该版本或更高版本的 Metric View 运行。
-这对于检查在较新版本中引入的属性的规则很有用，
+每个辅助方法都有一个重载，可在最后接收一个 `minVersion` 参数，比如 "0.1" 或 "1.1" 这样的字符串。使用 `minVersion` 定义的规则只会对该版本或更高版本的 Metric View 运行。这对于检查在较新版本中引入的属性的规则很有用，
 例如 `display_name`（在 v1.1 中添加）：
 
 ```csharp {compile}
