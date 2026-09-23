@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用表达式和 DAX 属性
 
-度量值、计算列、计算项、KPI 和分区都有各自的表达式。 本文介绍如何读取、修改和生成 DAX 表达式，以及如何使用 `IExpressionObject` 接口。
+度量值、计算列、计算项、KPI 和分区都有各自的表达式。本文介绍如何读取、修改和生成 DAX 表达式，以及如何使用 `IExpressionObject` 接口。
 
 ## 快速参考
 
@@ -72,7 +72,7 @@ m.FormatString = "#,##0.00";
 | `DaxTableName`      | `'Sales'`         | `'Sales'`   | `'Sales'` |
 
 > [!NOTE]
-> 对于度量值，`DaxObjectFullName` 返回的值与 `DaxObjectName`（不带限定符）相同。 在 DAX 中，度量值不需要表名限定。 对于列，`DaxObjectFullName` 包含表前缀。
+> 对于度量值，`DaxObjectFullName` 返回的值与 `DaxObjectName`（不带限定符）相同。在 DAX 中，度量值不需要表名限定。对于列，`DaxObjectFullName` 包含表前缀。
 
 生成 DAX 时，请使用以下属性以避免引号错误：
 
@@ -90,7 +90,7 @@ foreach (var col in Selected.Columns)
 
 ## IExpressionObject 接口
 
-包含表达式的对象会实现 (xref:TabularEditor.TOMWrapper.IExpressionObject) 接口。 在 Tabular Editor 2 中，此接口仅提供 `Expression` 属性。 在 Tabular Editor 3 中，该接口新增了 `GetExpression()`、`SetExpression()` 和 `GetExpressionProperties()`，用于在单个对象上处理多种表达式类型。
+包含表达式的对象会实现 (xref:TabularEditor.TOMWrapper.IExpressionObject) 接口。在 Tabular Editor 2 中，此接口仅提供 `Expression` 属性。在 Tabular Editor 3 中，该接口新增了 `GetExpression()`、`SetExpression()` 和 `GetExpressionProperties()`，用于在单个对象上处理多种表达式类型。
 
 ```csharp
 // Tabular Editor 2: use the Expression property directly
@@ -99,7 +99,7 @@ var dax = measure.Expression;
 ```
 
 > [!NOTE]
-> 下面的 `GetExpression`/`SetExpression` 模式仅在 Tabular Editor 3 中可用。 在 Tabular Editor 2 中，直接在对象上访问 `Expression` 属性。
+> 下面的 `GetExpression`/`SetExpression` 模式仅在 Tabular Editor 3 中可用。在 Tabular Editor 2 中，直接在对象上访问 `Expression` 属性。
 
 ```csharp
 // Tabular Editor 3 only: list all expression types on an object
@@ -130,7 +130,7 @@ exprObj.SetExpression(ExpressionProperty.FormatStringExpression, "\"$#,##0.00\""
 
 ## 格式化 DAX
 
-`FormatDax()` 会将对象加入格式化队列。 格式化会在脚本结束时自动执行。 仅当你需要在脚本执行中途获取格式化结果时，才调用 `CallDaxFormatter()`。
+`FormatDax()` 会将对象加入格式化队列。格式化会在脚本结束时自动执行。仅当你需要在脚本执行中途获取格式化结果时，才调用 `CallDaxFormatter()`。
 
 ```csharp
 // Typical usage -- formatting happens automatically after the script ends
@@ -146,7 +146,7 @@ var after = Selected.Measure.Expression; // now contains the formatted DAX
 
 ## 令牌化
 
-`Tokenize()` 会返回表达式中的 DAX 令牌。 令牌提供了一种不受空白字符和格式影响的可靠表示形式。 当你需要分析 DAX 表达式的结构，且分析需求超出内置依赖项跟踪和重命名功能所能提供的范围时，请使用令牌化。
+`Tokenize()` 会返回表达式中的 DAX 令牌。令牌提供了一种不受空白字符和格式影响的可靠表示形式。当你需要分析 DAX 表达式的结构，且分析需求超出内置依赖项跟踪和重命名功能所能提供的范围时，请使用令牌化。
 
 ```csharp
 foreach (var m in Model.AllMeasures.OrderByDescending(m => m.Tokenize().Count))
@@ -155,7 +155,7 @@ foreach (var m in Model.AllMeasures.OrderByDescending(m => m.Tokenize().Count))
 
 ## 在表达式中查找和替换
 
-使用 `Replace()` 进行字符串替换时，操作对象是原始表达式文本，包括字符串字面量和注释中的内容。 如果要有针对性地替换特定 DAX 构造（表引用、列引用），请改为分析令牌化后的表达式。
+使用 `Replace()` 进行字符串替换时，操作对象是原始表达式文本，包括字符串字面量和注释中的内容。如果要有针对性地替换特定 DAX 构造（表引用、列引用），请改为分析令牌化后的表达式。
 
 ```csharp
 // Replace a column reference across all measures
@@ -183,9 +183,9 @@ foreach (var m in Model.AllMeasures.Where(m => m.Expression.Contains("[Old Colum
 
 > [!IMPORTANT]
 >
-> - `DataColumn` 没有 `Expression` 属性。 只有 `CalculatedColumn`、`度量值`、`CalculationItem` 和 `分区` 具有表达式。 在 `DataColumn` 上访问 `Expression` 时，会因所处上下文不同而引发编译错误或运行时异常。
-> - `DaxObjectName` 返回未限定名称（例如 `[Revenue]`），而 `DaxObjectFullName` 包含表名前缀（例如 `'Sales'[Revenue]`）。 在 DAX 中引用列时使用 `DaxObjectFullName`，在引用度量值且表限定可选时使用 `DaxObjectName`。
-> - Tabular Editor 2 中的 `FormatDax()` 会调用外部的 daxformatter.com API，因此需要联网。 Tabular Editor 3 默认使用内置格式化程序。 要在 TE3 中使用 daxformatter.com，请在偏好中启用它。
+> - `DataColumn` 没有 `Expression` 属性。只有 `CalculatedColumn`、`度量值`、`CalculationItem` 和 `分区` 具有表达式。在 `DataColumn` 上访问 `Expression` 时，会因所处上下文不同而引发编译错误或运行时异常。
+> - `DaxObjectName` 返回未限定名称（例如 `[Revenue]`），而 `DaxObjectFullName` 包含表名前缀（例如 `'Sales'[Revenue]`）。在 DAX 中引用列时使用 `DaxObjectFullName`，在引用度量值且表限定可选时使用 `DaxObjectName`。
+> - Tabular Editor 2 中的 `FormatDax()` 会调用外部的 daxformatter.com API，因此需要联网。 Tabular Editor 3 默认使用内置格式化程序。要在 TE3 中使用 daxformatter.com，请在偏好中启用它。
 
 ## 另见
 
