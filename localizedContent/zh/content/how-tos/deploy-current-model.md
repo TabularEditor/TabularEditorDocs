@@ -1,6 +1,8 @@
 ---
 uid: deploy-current-model
-title: 部署当前已加载的模型
+title: Deploy the loaded model
+author: Morten Lønskov
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,18 +11,24 @@ applies_to:
       full: true
 ---
 
-# 部署当前已加载的模型
+# Deploy the loaded model
 
-## 部署
+Deployment pushes the model you have open to a server, either creating a new database or overwriting an existing one. It's how you get a model held in a `.bim` file or a folder onto a server, and how you promote a model from one environment to the next.
 
-如果您想将当前加载的模型部署到新数据库，或用模型更改覆盖现有数据库（例如从 Model.bim 文件加载时），请使用“模型”>“部署...”下的 Deployment Wizard。
+Open the wizard with **Model > Deploy...**, choose the destination server and database, then choose how much of the model to send.
 
-Tabular Editor 内置 Deployment Wizard，相比从 SSDT 部署有一些优势——尤其是在部署到现有数据库时。 选择要部署到的服务器和数据库后，您可以为本次部署选择以下选项：
+## What each option controls
 
-![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
+The wizard's value is in what it lets you _leave alone_ on the destination. Each option is a decision about whether the destination keeps its own version of something:
 
-不勾选“部署连接”复选框，就能确保目标数据库上的所有数据源保持不变。 如果模型中有一个或多个表使用了目标数据库中尚不存在的数据源，则会报错。
+- **Deploy Model Structure** sends the model metadata. This is the deployment itself; clearing it leaves nothing to do.
+- **Deploy Data Sources** sends explicit data sources. Clear it to keep the destination's own connection strings and credentials, which is usually what you want when promoting from development to test.
+- **Deploy Table Partitions** synchronizes partitions with the model metadata. Clear it to leave existing partitions, and the data in them, untouched. With it enabled, partitions on the destination that aren't in the model are removed along with their data.
+  - **Deploy partitions governed by Incremental Refresh Policies** appears when the option above is enabled, and lets you deploy every partition _except_ those an incremental refresh policy generates.
+- **Deploy Model Roles** sends the roles defined in the model. Clear it to keep the destination's roles as they are.
+  - **Deploy Model Role Members** sends role membership. Role members are commonly managed on the server rather than in the metadata, so clearing this is normal.
 
-同样地，不勾选“部署表分区”，就能确保表上现有的分区不会被更改，从而保持分区中的数据不变。
+@deployment covers all of this in detail, along with the TMSL script the wizard generates, what a deployment does to data already in the destination, and how to deploy from the command line or a pipeline.
 
-勾选“部署角色”后，目标数据库中的角色将更新为与当前加载的模型一致；但如果未勾选“部署角色成员”，则目标数据库中各角色的成员将保持不变。
+> [!NOTE]
+> Deploying is not the same as saving. If you opened the model from a server, **File > Save** writes back to _that_ database, as described in @connect-ssas. Use deployment when the destination is somewhere else.
