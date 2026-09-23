@@ -15,11 +15,11 @@ applies_to:
 
 # Tabular Editor CLI（有限公开预览）
 
-Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模型的跨平台命令行工具。 它以单个自包含的可执行文件形式在 Windows、macOS 和 Linux 上运行，并基于驱动 Tabular Editor 3 的同一基础构建。
+Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模型的跨平台命令行工具。它以单个自包含的可执行文件形式在 Windows、macOS 和 Linux 上运行，并基于驱动 Tabular Editor 3 的同一基础构建。
 
 使用 Tabular Editor CLI，你可以在终端中检查、编辑、验证、部署、刷新和测试语义模型——可针对本地 TMDL 或 BIM 文件、Power BI Desktop，或 Fabric 和 Power BI Service Workspace 中的语义模型。
 
-与仅限 Windows 的 `TabularEditor.exe` 命令行选项（TE2）不同——后者主要用于从桌面端二进制文件自动执行 C# Script 和宏——`te` 是专为跨平台打造的 CLI，提供结构化输出、可预测的退出代码以及交互式 shell。 这让现有的 [TE2 CLI](xref:command-line-options) 难以很好覆盖的场景成为可能：在 macOS 和 Linux 上通过终端完成模型工作、由 AI 代理直接驱动模型更改，以及无缝接入任何现代 CI 运行器。
+与仅限 Windows 的 `TabularEditor.exe` 命令行选项（TE2）不同——后者主要用于从桌面端二进制文件自动执行 C# Script 和宏——`te` 是专为跨平台打造的 CLI，提供结构化输出、可预测的退出代码以及交互式 shell。这让现有的 [TE2 CLI](xref:command-line-options) 难以很好覆盖的场景成为可能：在 macOS 和 Linux 上通过终端完成模型工作、由 AI 代理直接驱动模型更改，以及无缝接入任何现代 CI 运行器。
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
@@ -39,13 +39,13 @@ Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模�
 - **CI/CD 管道** — 非交互式执行、GitHub Actions 和 Azure DevOps 注释，以及兼容 VSTEST 的测试结果。
 
 > [!Note]
-> 当与代理配合使用 TE CLI 时，请使用 TE CLI 的[面向 AI 编码代理的技能](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli)，它对 TE CLI 进行了端到端封装。 有关如何安装该技能，请参见 [AI Agent Skill](xref:te-cli-skill)。
+> 当与代理配合使用 TE CLI 时，请使用 TE CLI 的[面向 AI 编码代理的技能](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli)，它对 TE CLI 进行了端到端封装。有关如何安装该技能，请参见 [AI Agent Skill](xref:te-cli-skill)。
 
 ## CLI 可以做什么
 
-CLI 将命令分为 10 类。 每个命令族都对应语义模型生命周期中的一个具体阶段。
+CLI 将命令分为 10 类。每个命令族都对应语义模型生命周期中的一个具体阶段。
 
-有关每个命令的语法、选项和示例的完整命令参考，请参阅 @te-cli-commands。 点击表中的任意示例命令，直接跳转到对应的参考条目。
+有关每个命令的语法、选项和示例的完整命令参考，请参阅 @te-cli-commands。点击表中的任意示例命令，直接跳转到对应的参考条目。
 
 | 命令族                                                            | 功能                         | 示例命令                                                                                                                                                                                   |
 | -------------------------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -61,14 +61,14 @@ CLI 将命令分为 10 类。 每个命令族都对应语义模型生命周期�
 | [Shell](xref:te-cli-commands#shell)                            | 交互模式、会话状态、Shell 自动补全       | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                 |
 
 > [!TIP]
-> 文档中使用规范的长形式动词（`list`、`remove`、`move`），但传统的短形式仍可作为别名使用（`ls`、`rm`、`mv`、`rename`）。 这既适用于顶层命令，也适用于 `te bpa rules`、`te macro`、`te config`、`te profile`、`te session` 和 `te test` 等命令组下的 `remove` / `list` 子命令。 完整映射请参见 @te-cli-commands#command-aliases。
+> 文档中使用规范的长形式动词（`list`、`remove`、`move`），但传统的短形式仍可作为别名使用（`ls`、`rm`、`mv`、`rename`）。这既适用于顶层命令，也适用于 `te bpa rules`、`te macro`、`te config`、`te profile`、`te session` 和 `te test` 等命令组下的 `remove` / `list` 子命令。完整映射请参见 @te-cli-commands#command-aliases。
 
 ## 开始使用
 
 1. **注册或登录**：前往 [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) 注册 Tabular Editor 帐户或登录。
 2. **下载并安装**：Windows、macOS 和 Linux 的说明见 @te-cli-install。
-3. **进行身份验证**：运行 `te auth login`，即可连接到 Power BI 或 Fabric。 见 @te-cli-auth。
-4. **运行第一个命令**：`te --help` 会列出所有命令；`te <command> --help` 会显示详细选项。 提示：在终端中单独运行 `te` 会进入交互式 REPL，这是探索模型的一种更友好的方式。 参见 @te-cli-interactive。
+3. **进行身份验证**：运行 `te auth login`，即可连接到 Power BI 或 Fabric。见 @te-cli-auth。
+4. **运行第一个命令**：`te --help` 会列出所有命令；`te <command> --help` 会显示详细选项。提示：在终端中单独运行 `te` 会进入交互式 REPL，这是探索模型的一种更友好的方式。参见 @te-cli-interactive。
 
 初次查看实时模型只需两条命令：
 
@@ -92,11 +92,11 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 在预览结束日期（2026-10-31）前 14 天内，无论 `hidePreviewNotice` 如何设置，每次执行命令时该横幅都会再次出现。 这可确保在 CLI 停止运行之前，你能提前看到醒目的警告。
+> 在预览结束日期（2026-10-31）前 14 天内，无论 `hidePreviewNotice` 如何设置，每次执行命令时该横幅都会再次出现。这可确保在 CLI 停止运行之前，你能提前看到醒目的警告。
 
 ## 许可概览
 
-在有限公开预览期间，CLI 无需许可证；你只需要一个 Tabular Editor 账户即可下载。 在正式发布 (GA) 时，CLI 将需要许可证；定价仍在最终敲定中，并会在 GA 前公布。
+在有限公开预览期间，CLI 无需许可证；你只需要一个 Tabular Editor 账户即可下载。在正式发布 (GA) 时，CLI 将需要许可证；定价仍在最终敲定中，并会在 GA 前公布。
 
 ## 反馈与社区
 
