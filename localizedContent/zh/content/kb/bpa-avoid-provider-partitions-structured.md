@@ -22,7 +22,7 @@ description: 此最佳实践规则通过识别 Power BI 中与 Structured数据�
 
 ## 为何重要
 
-Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。 在 Structured数据源中使用提供程序分区会导致：
+Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。在 Structured数据源中使用提供程序分区会导致：
 
 - **部署失败**：模型无法发布到 Power BI Service
 - **刷新错误**：在服务中执行的计划刷新会失败
