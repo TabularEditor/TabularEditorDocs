@@ -20,10 +20,10 @@ applies_to:
 
 # 增量刷新
 
-托管在 Power BI 服务中的 Dataset 可以在一个或多个表上设置 [增量刷新](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview)。 要在 Power BI 的 Dataset 上配置或修改增量刷新，你可以直接使用 Power BI 服务的 [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla)；也可以按照下面的说明，使用连接到 XMLA endpoint 的 Tabular Editor 来操作：
+托管在 Power BI 服务中的 Dataset 可以在一个或多个表上设置 [增量刷新](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview)。要在 Power BI 的 Dataset 上配置或修改增量刷新，你可以直接使用 Power BI 服务的 [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla)；也可以按照下面的说明，使用连接到 XMLA endpoint 的 Tabular Editor 来操作：
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。 对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 在 Tabular Editor 3 中设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ## 使用 Tabular Editor 从零开始设置增量刷新
 
@@ -37,25 +37,24 @@ applies_to:
   ```
 
 ![设置 Kind 属性](~/content/assets/images/incremental-refresh2-02.png)
-4。 接下来，选择要启用增量刷新的表
-5。 将表的 `EnableRefreshPolicy` 属性设置为 "true"：
+4。接下来，选择要启用增量刷新的表
+5。将表的 `EnableRefreshPolicy` 属性设置为 "true"：
 ![启用刷新策略](~/content/assets/images/incremental-refresh2-03.png)
-6。 根据你需要的增量刷新策略，配置其余属性。 别忘了为 `SourceExpression` 属性指定一个 M 表达式（增量刷新的刷新策略创建的分区会添加该表达式；它应使用 `RangeStart` 和 `RangeEnd` 参数在源端筛选数据）。 “=”运算符只能应用于 RangeStart 或 RangeEnd 其中一个，不能同时用于两者，否则可能会产生重复数据。
+6。根据你需要的增量刷新策略，配置其余属性。别忘了为 `SourceExpression` 属性指定一个 M 表达式（增量刷新的刷新策略创建的分区会添加该表达式；它应使用 `RangeStart` 和 `RangeEnd` 参数在源端筛选数据）。 “=”运算符只能应用于 RangeStart 或 RangeEnd 其中一个，不能同时用于两者，否则可能会产生重复数据。
 ![配置属性](~/content/assets/images/incremental-refresh2-04.png)
-7。 保存模型（Ctrl+S）。
-8。 右键单击该表，然后选择“应用刷新策略”。
+7。保存模型（Ctrl+S）。
+8。右键单击该表，然后选择“应用刷新策略”。
 ![应用刷新策略](~/content/assets/images/incremental-refresh2-05.png)
 
-就这样！ 这时你会看到 Power BI 服务已经根据你指定的策略，自动为这张表生成了分区。
+就这样！这时你会看到 Power BI 服务已经根据你指定的策略，自动为这张表生成了分区。
 
 ![已生成的分区](~/content/assets/images/incremental-refresh2-06.png)
 
-下一步是刷新这些分区中的数据。 你可以使用 Power BI 服务完成这一步；也可以在 [SQL Server Management Studio 中通过 XMLA/TMSL](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms) 分批刷新分区；甚至还可以使用 [Tabular Editor 的脚本](https://www.elegantbi.com/post/datarefreshintabulareditor)。
+下一步是刷新这些分区中的数据。你可以使用 Power BI 服务完成这一步；也可以在 [SQL Server Management Studio 中通过 XMLA/TMSL](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms) 分批刷新分区；甚至还可以使用 [Tabular Editor 的脚本](https://www.elegantbi.com/post/datarefreshintabulareditor)。
 
 ### 应用增量刷新策略后的完全刷新
 
-如果你已对表应用了刷新策略，并希望执行完全刷新，则必须确保在脚本中将 [applyRefreshPolicy 设置为 false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior)。 这样可以确保对表中的所有分区执行完全刷新。
-在我们的示例中，TMSL 命令如下所示：
+如果你已对表应用了刷新策略，并希望执行完全刷新，则必须确保在脚本中将 [applyRefreshPolicy 设置为 false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior)。这样可以确保对表中的所有分区执行完全刷新。在我们的示例中，TMSL 命令如下所示：
 
   ```
   {
@@ -74,7 +73,7 @@ applies_to:
 
 ## 修改现有刷新策略
 
-你也可以使用 Tabular Editor 来修改通过 Power BI Desktop 设置的现有刷新策略。 在这种情况下，只需按上面的第 6-8 步操作即可。
+你也可以使用 Tabular Editor 来修改通过 Power BI Desktop 设置的现有刷新策略。在这种情况下，只需按上面的第 6-8 步操作即可。
 
 ## 使用 `EffectiveDate` 应用刷新策略
 
@@ -98,6 +97,6 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 3. 右键单击该表，然后创建一个新的 M 分区。
 4. 把上面步骤 1 中的 M 代码粘贴到该分区的表达式中。
 5. 编辑 M 代码，删除包含 Table.SelectRows() 函数的步骤，该函数用于 RangeStart/RangeEnd 参数。
-6. 删除所有历史分区。 它们的 SourceType 为“Policy Range”。
+6. 删除所有历史分区。它们的 SourceType 为“Policy Range”。
 7. 刷新该表 (Tabular Editor 3)，或在服务中刷新 Dataset，以重新填充该表。
 8. 可选：如果模型里没有其他表设置了增量刷新的刷新策略，可以删除 RangeStart/RangeEnd 共享表达式。
