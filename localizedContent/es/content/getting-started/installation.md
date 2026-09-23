@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: Instalación, activación y configuración básica
 author: Morten Lønskov
-updated: 2021-09-30
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -86,44 +86,71 @@ La primera vez que inicias Tabular Editor 3 en un equipo nuevo, se te pedirá qu
 
 ## Instalación desatendida y preaprovisionamiento de licencias
 
-Puedes desplegar Tabular Editor de forma desatendida y preaprovisionar la licencia a través del Registro de Windows.
+You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry. Install first, then write the license, which has to be in place before the application is launched for the first time.
 
-1. **Instalar en modo silencioso** (sin interfaz de usuario, sin reinicio):
+### Install silently
 
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
-   ```
+No UI, no reboot:
 
-   Para incluir la funcionalidad **AI Assistant**, especifica la propiedad `ADDLOCAL`. AI Assistant no se instala de forma predeterminada.
+```powershell
+msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
+```
 
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
-   ```
+| Característica de MSI | Shown in the installer as | Descripción                                       | Activar la instalación                           |
+| --------------------- | ------------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| `MainFeature`         | Tabular Editor 3          | Aplicación principal de Tabular Editor 3          | Sí (obligatorio)              |
+| `AIAssistant`         | AI features               | The @ai-assistant and the MCP server | Yes, from 3.27.0 |
 
-   | Característica de MSI | Descripción                              | Activar la instalación              |
-   | --------------------- | ---------------------------------------- | ----------------------------------- |
-   | `MainFeature`         | Aplicación principal de Tabular Editor 3 | Sí (obligatorio) |
-   | `AIAssistant`         | AI Assistant para Tabular Editor 3       | No                                  |
+> [!IMPORTANT]
+> The command above installs the **AI features** component. Up to 3.26.x it had to be selected deliberately and a default installation left it out; from 3.27.0 it is part of a default installation. If your organization does not want the AI Assistant or the MCP server on user machines, you have to say so explicitly, as described in the next section.
 
-   > [!NOTE]> Al usar `ADDLOCAL`, incluye `MainFeature` junto con cualquier característica opcional. Si especificas solo `AIAssistant` sin `MainFeature`, la instalación quedará incompleta.
+### Deploying without the AI features
 
-También puedes usar `/package` en lugar de `/i`. Reemplaza `<version>` por la cadena de versión real. Usa el MSI de ARM64 si corresponde.
+To keep the AI files off the machine, name the features you want and leave `AIAssistant` out:
+
+```powershell
+msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
+```
+
+To take the component off machines that already have it, run the same package with `REMOVE`:
+
+```powershell
+msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
+```
+
+Either way, the AI assemblies are never written to the installation folder, the **AI Assistant** pane and the MCP server are absent from the application, and nothing reaches out to a model provider. Everything else in Tabular Editor 3 is unaffected.
+
+Upgrading an existing installation keeps the feature selection that machine already has, so a machine that was deployed without the AI features before 3.27.0 does not gain them by being upgraded. Pass `ADDLOCAL=MainFeature` on fresh installations, where there is no earlier selection to inherit.
+
+> [!IMPORTANT]
+> The command line controls what _you_ deploy, not what a user can install: the AI features are the default, so anyone who runs the installer themselves gets them. To make the decision stick, set the `DisableAi` @policies as well. From 3.27.0 the installer reads that policy and leaves the AI component out on its own, whoever runs it and however it is run, and the policy also turns the AI Assistant and the MCP server off at runtime if the component is already present. Set it machine-wide, under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3`, so it applies to every user and cannot be overridden per user.
+
+> [!NOTE]
+> When using `ADDLOCAL`, list `MainFeature` alongside any optional features. Si especificas solo `AIAssistant` sin `MainFeature`, la instalación quedará incompleta.
+
+### Package names and other MSI options
+
+También puedes usar `/package` en lugar de `/i`. Reemplaza `<version>` por la cadena de versión real.
+
+MSI packages are named `TabularEditor.<version>.<architecture>.<runtime>.msi`, for example `TabularEditor.3.27.0.x64.Net10.msi` or `TabularEditor.3.27.0.ARM64.Net8.msi`. Pick the architecture and runtime that suit the target machines; see @system-requirements. The MSI does not install the .NET Desktop Runtime, so deploy that first.
 
 Para obtener información detallada sobre las opciones de línea de comandos de MSI disponibles, consulta la documentación oficial de Microsoft:
 [Opciones de la línea de comandos de Microsoft Standard Installer - aplicaciones Win32 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
-2. **Escribe la licencia en el Registro** **antes de abrir la aplicación por primera vez**:
+### Pre-provision the license
 
-   ```bat
-   REM Clave de licencia por usuario (HKCU)
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
-   ```
+Write the license to the Registry _before the first launch_ of the application:
 
-   Si usas una clave de licencia de la **Edición Enterprise**, configura también el correo electrónico del usuario licenciado:
+```bat
+REM Clave de licencia por usuario (HKCU)
+REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
+```
 
-   ```bat
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
-   ```
+Si usas una clave de licencia de la **Edición Enterprise**, configura también el correo electrónico del usuario licenciado:
+
+```bat
+REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
+```
 
 **Notas**
 
