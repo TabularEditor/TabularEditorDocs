@@ -2,7 +2,7 @@
 uid: udfs
 title: Funciones DAX definidas por el usuario
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ Para obtener más información sobre cómo funcionan las UDF de DAX, recomendamo
 
 Antes de poder crear y usar UDFs en Tabular Editor 3, asegúrate de que:
 
-- El nivel de compatibilidad de tu modelo es **1702 o superior**
+- Your model compatibility level is **1702 or higher**.
 
 ## Crear tu primera UDF
 
@@ -133,7 +133,7 @@ Además de especificar el modo de evaluación, también puedes restringir el tip
 
 Estas especificaciones de tipo son opcionales, pero si se indican, realizarán una conversión de tipo implícita en los argumentos que se pasen a la función y también afectarán a las sugerencias de autocompletado en Tabular Editor 3 al escribir código DAX que llame a la función.
 
-Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. Si llama a una UDF con un argumento que no coincide con el tipo de su parámetro —por ejemplo, si pasa un valor escalar cuando se espera un parámetro `TABLEREF`—, el Analizador semántico genera un Report de advertencia o un error.
+Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. If you call a UDF with an argument that does not match its parameter type, for example passing a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
 Consulta la [especificación de Microsoft para las UDF](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) para ver la lista completa de restricciones disponibles.
 
@@ -236,6 +236,12 @@ En Tabular Editor, las UDFs también tienen una _propiedad_ "Namespace", que te 
 > [!NOTE]
 > Esta característica de organización en Tabular Editor no afecta al código DAX. Aun así, cuando llames a una UDF tendrás que escribir el nombre completo, incluidas las partes del espacio de nombres.
 
+## UDFs and source control
+
+If you store your model as a folder structure, Tabular Editor can write each UDF to its own file instead of keeping them all inside `database.json`. Two developers editing two different functions then change two different files, and Git has nothing to merge.
+
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**, or under **Tools > Preferences > File Formats > Save-to-folder** for a model you save to a folder for the first time. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+
 ## Buenas prácticas
 
 ### Convenciones de nomenclatura
@@ -322,9 +328,12 @@ Tabular Editor 3 detecta automáticamente cualquier comentario y lo muestra corr
 
 **La función no aparece en el autocompletado**
 
-- Comprueba que la función se haya guardado correctamente
-- Comprueba que no haya errores de sintaxis en la definición de la función
-- Asegúrate de que estás usando la función en un contexto compatible
+Tabular Editor decides what to offer from the function's own definition and from where your cursor is. Work through these in order:
+
+1. **The function's definition has a semantic error.** A UDF whose body does not analyze cleanly, one that needs a row context it has not been given or misuses `MATCHBY`, cannot be validly invoked, so it is left out of the suggestion list entirely. Open the function and clear the error. Its calltip still works, which is why this is easy to miss.
+2. **The return type does not fit the argument you are completing.** The return type is inferred from the body, not declared. A UDF that returns a table is not offered where a scalar is expected, and one that returns a scalar is not offered where a table is expected. Filter arguments, for instance the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either. A function whose body is an untyped `EXPR` parameter fits everywhere.
+3. **Visual calculation mismatch.** A UDF written for visual calculations is only offered inside another visual calculation, and vice versa.
+4. **It is the function you are editing.** A function is not offered inside its own definition.
 
 **Errores de restricción de parámetros**
 
