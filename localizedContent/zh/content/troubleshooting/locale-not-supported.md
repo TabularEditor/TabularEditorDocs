@@ -40,7 +40,7 @@ XXXX 不是有效的区域设置标识符
 
 ## 场景与解决方案
 
-### 1。 连接到本地 SSAS 实例
+### 1。连接到本地 SSAS 实例
 
 如果你在本地计算机上运行 SQL Server Analysis Services (SSAS)：
 
@@ -49,7 +49,7 @@ XXXX 不是有效的区域设置标识符
 
 ---
 
-### 2。 连接到远程 SSAS、Azure AS 或 Power BI
+### 2。连接到远程 SSAS、Azure AS 或 Power BI
 
 连接到远程实例时，有两种可行的解决方案：
 
