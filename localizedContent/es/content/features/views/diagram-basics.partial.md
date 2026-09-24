@@ -28,22 +28,22 @@ Para editar una relación existente, haz clic con el botón derecho sobre ella y
 > [!NOTE]
 > También puedes crear relaciones sin usar un diagrama, desde el Explorador TOM. Localiza la columna desde la que debe comenzar la relación (lado de muchos / lado de la tabla de hechos), haz clic con el botón derecho y elige **Crear > Relación desde**. Especifica la columna de destino en el cuadro de diálogo Crear relación que aparece en pantalla.
 
-## Selection and navigation
+## Selección y navegación
 
-A diagram and the TOM Explorer keep the same object selected. Clicking a table, a column or a relationship in the diagram selects it in the tree, without pulling focus away from the diagram. Going the other way, selecting a table or a column in the tree highlights it in every open diagram, scrolling a column into view inside its table shape.
+Un diagrama y el Explorador TOM mantienen seleccionado el mismo objeto. Al hacer clic en una tabla, una columna o una relación en el diagrama, ese elemento se selecciona en el árbol sin quitarle el foco al diagrama. A la inversa, al seleccionar una tabla o una columna en el árbol, se resalta en todos los diagramas abiertos y, en el caso de una columna, esta se desplaza hasta quedar visible dentro del recuadro de su tabla.
 
-This works for navigation you did not perform by hand in the tree: **Go to** actions and search results highlight in your diagrams too.
+Esto también funciona con la navegación que no realizaste manualmente en el árbol: tanto las acciones de **Ir a** como los resultados de búsqueda se resaltan también en los diagramas.
 
-A selection that does not resolve to a single table or column, whether several objects or none, clears the diagram's highlight rather than leaving a stale one behind.
+Una selección que no se corresponde con una sola tabla o columna —ya sea porque hay varios objetos o ninguno— borra el resaltado del diagrama en lugar de dejar uno obsoleto.
 
 > [!NOTE]
-> Selecting an object in the TOM Explorer never switches the active document to a diagram. If a diagram is open in the background it updates quietly, and you keep working where you were.
+> Seleccionar un objeto en el Explorador TOM nunca hace que el documento activo pase a ser un diagrama. Si hay un diagrama abierto en segundo plano, se actualiza discretamente y puedes seguir trabajando donde estabas.
 
-Double-click a relationship to open **Edit relationship**.
+Haz doble clic en una relación para abrir **Editar relación**.
 
 ## Guardar un diagrama
 
-To save a diagram, use the **File > Save** (**Ctrl+S**) option. Tabular Editor 3 prompts you to save the diagram if you close the document or the application while the diagram has unsaved changes.
+Para guardar un diagrama, usa la opción **Archivo > Guardar** (**Ctrl+S**). Tabular Editor 3 te pedirá que guardes el diagrama si cierras el documento o la aplicación con cambios sin guardar en el diagrama.
 
 > [!TIP]
 > El mismo archivo de diagrama puede cargarse para diferentes Data model. Los diagramas hacen referencia a las tablas por su nombre. Las tablas que no estén presentes en el modelo al cargar el diagrama simplemente se eliminan del diagrama.
