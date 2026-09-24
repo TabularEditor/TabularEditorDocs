@@ -23,11 +23,11 @@ Tabular Editor incluye una ventana integrada de Consulta DAX para escribir y eje
 
 Un caso de uso muy común de las Consultas DAX es la Consulta DAX generada por el [Analizador de rendimiento de Power BI](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/), que permite copiar la consulta de cada Visual para solucionar problemas, depurar o realizar un análisis de rendimiento detallado.
 
-The window can be opened while connected to a semantic model in any of three ways:
+La ventana se puede abrir mientras estás conectado a un modelo semántico de cualquiera de estas tres formas:
 
-- the **File > New > DAX Query** menu
-- the toolbar shortcut
-- **Show actual DAX query...** on the right-click menu of a @table-preview, which opens a new query document holding the query behind the preview, filter and sort included
+- el menú **Archivo > Nuevo > Consulta DAX**
+- el atajo de la barra de herramientas
+- **Mostrar la Consulta DAX actual...** en el menú contextual de una @table-preview, lo que abre un nuevo documento de consulta que contiene la consulta que hay detrás de la vista previa, con el filtro y la ordenación incluidos
 
 ![Consulta Dax Nueva](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
 
