@@ -40,7 +40,7 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
   - 1700 (Azure Analysis Services / SQL Server 2025+)
   - 1706 (Power BI / Fabric)
 
-  1700 is the highest level Analysis Services supports. 1706 is for Power BI and Fabric only, and is the level to choose when you deploy the model through the Power BI XMLA endpoint.
+  1700 es el nivel más alto que admite Analysis Services. 1706 es exclusivo de Power BI y Fabric, y es el nivel que debe elegir al implementar el modelo mediante el punto de conexión XMLA de Power BI.
 
 - Para obtener la mejor experiencia de desarrollo, selecciona la opción "Usar base de datos del Workspace". Esto requiere que tengas disponible una instancia de Analysis Services en la que se implementará la base de datos del Workspace. Puede ser una instancia local o remota de SQL Server Analysis Services, o una instancia de Azure Analysis Services. Al hacer clic en Aceptar, se te solicitará que introduzcas la cadena de conexión de la instancia de Analysis Services en la que quieres que se cree la base de datos del Workspace.
 
