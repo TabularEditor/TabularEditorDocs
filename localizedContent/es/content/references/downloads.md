@@ -23,30 +23,30 @@ Esta página ofrece instrucciones de descarga e instalación para Tabular Editor
 
 ## Última versión
 
-Tabular Editor 3.27.0.0 (_[Release notes](release-notes/3_27_0_0.md)_) is published as two builds, one on .NET 10 and one on .NET 8. The two builds are _functionally identical_, and they can be installed side by side.
+Tabular Editor 3.27.0.0 (_[Notas de la versión](release-notes/3_27_0_0.md)_) se publica en dos compilaciones: una con .NET 10 y otra con .NET 8. Las dos compilaciones son _funcionalmente idénticas_ y se pueden instalar en paralelo.
 
-### On .NET 10 (recommended)
+### En .NET 10 (recomendado)
 
-Requires the [.NET Desktop Runtime 10](https://dotnet.microsoft.com/download/dotnet/10.0). The `.exe` installer offers to download and install it for you; the portable `.zip` is self-contained and needs no runtime at all.
+Requiere el [Runtime de escritorio de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0). El instalador `.exe` te ofrece descargarlo e instalarlo; el `.zip` portátil es autónomo y no requiere ningún entorno de ejecución.
 
-- Download [Tabular Editor 3.27.0.0 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net10.exe) _(recommended)_
-- Download [Tabular Editor 3.27.0.0 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net10.exe)
-- Portable versions: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.zip)
-- MSI version: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.msi)
+- Descarga [Tabular Editor 3.27.0.0 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net10.exe) _(recomendado)_
+- Descarga [Tabular Editor 3.27.0.0 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net10.exe)
+- Versiones portátiles: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.zip)
+- Versión MSI: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.msi)
 
-### On .NET 8
+### En .NET 8
 
-For machines that cannot yet run the .NET 10 desktop runtime. Requires the [.NET Desktop Runtime 8](https://dotnet.microsoft.com/download/dotnet/8.0).
+Para equipos que aún no pueden ejecutar el runtime de escritorio de .NET 10. Requiere el [Runtime de escritorio de .NET 8](https://dotnet.microsoft.com/download/dotnet/8.0).
 
-- Download [Tabular Editor 3.27.0.0 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net8.exe)
-- Download [Tabular Editor 3.27.0.0 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net8.exe)
-- Portable versions: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.zip)
-- MSI version: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.msi)
+- Descarga [Tabular Editor 3.27.0.0 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net8.exe)
+- Descarga [Tabular Editor 3.27.0.0 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net8.exe)
+- Versiones portátiles: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.zip)
+- Versión MSI: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.msi)
 
 > [!TIP]
-> Unsure which to take? Take the .NET 10 x64 installer. Choose ARM64 only on an ARM-based PC, and choose .NET 8 only if your organization cannot install the .NET 10 desktop runtime.
+> ¿No sabes cuál elegir? Elige el instalador x64 de .NET 10. Elige ARM64 solo en un PC basado en ARM, y elige .NET 8 solo si tu organización no puede instalar el runtime de escritorio de .NET 10.
 
-See @system-requirements for the full matrix, and @release-history for the release notes of this and every previous version.
+Consulta @system-requirements para ver la matriz completa y @release-history para ver las notas de la versión de esta y de todas las versiones anteriores.
 
 ## Instrucciones de instalación
 
@@ -58,13 +58,13 @@ No es necesario desinstalar versiones anteriores al actualizar a una versión m�
 
 ## Historial
 
-- 2026-09-22 **Tabular Editor 3.27.0.0** (_[Release notes](release-notes/3_27_0_0.md)_)
-  - .NET 10 installer (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net10.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net10.exe)
-  - .NET 10 portable (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.zip)
-  - .NET 10 installer (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.msi)
-  - .NET 8 installer (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net8.exe)
-  - .NET 8 portable (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.zip)
-  - .NET 8 installer (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.msi)
+- 2026-09-22 **Tabular Editor 3.27.0.0** (_[Notas de la versión](release-notes/3_27_0_0.md)_)
+  - .NET 10 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net10.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net10.exe)
+  - .NET 10 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.zip)
+  - .NET 10 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net10.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net10.msi)
+  - .NET 8 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.Installer.ARM64.Net8.exe)
+  - .NET 8 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.zip)
+  - .NET 8 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.27.0.0.ARM64.Net8.msi)
 - 2026-07-10 **Tabular Editor 3.26.3** (_[Notas de la versión](release-notes/3_26_3.md)_)
   - .NET 8: instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.3.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.3.Installer.ARM64.Net8.exe)
   - .NET 8: versión portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.3.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.3.ARM64.Net8.zip)
