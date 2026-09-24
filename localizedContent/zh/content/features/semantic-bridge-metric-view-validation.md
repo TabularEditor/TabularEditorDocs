@@ -43,75 +43,75 @@ SUMMARY: Describes the validation framework for Metric Views in the Semantic Bri
 
 验证是一个过程：针对 Metric View 中的所有对象，逐一评估一组验证规则。每条验证规则都只针对一种指标视图对象类型，例如 `Join` 或 `Measure`。验证完成后，所有由规则违规产生的诊断信息都会返回给你，方便你进行后续处理。
 
-## Built-in diagnostic codes
+## 内置诊断代码
 
-The first and third phases raise their own diagnostics, with codes the Semantic Bridge defines. They reach you the same way your own rules' diagnostics do: each carries a `Severity`, a `Code`, a `Path`, a `Context` and a `Message`.
+第一和第三阶段都会产生各自的诊断，并使用由 Semantic Bridge 定义的代码。它们会像你自己的规则生成的诊断一样传递给你：每条都包含 `Severity`、`Code`、`Path`、`Context` 和 `信息`。
 
-Severity is one of `Error`, `Warning` or `Information`. An `Error` stops the operation. A `Warning` means the Bridge carried on having made a decision for you, and is telling you what it decided.
+`Severity` 的值可以是 `Error`、`Warning` 或 `Information`。 `Error` 会停止操作。 `Warning` 表示 Bridge 替你做出了决定并继续执行，同时会告诉你它的决定是什么。
 
-### Reading the YAML
+### 读取 YAML
 
-| Code                                                               | Severity | Raised when                                                                                                                                                                   |
-| ------------------------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `METRIC_VIEW_FIELDS_AND_DIMENSIONS_BOTH_PRESENT`                   | 错误       | The view declares both `fields:` and `dimensions:` at the top level. They are aliases for one another; use one                                                |
-| `METRIC_VIEW_DUPLICATE_NAME`                                       | 错误       | Two objects in the same collection claim the same name. Matching is case-insensitive                                                                          |
-| `METRIC_VIEW_DEPRECATED_DIMENSIONS_KEYWORD`                        | 警告       | A view at YAML spec 1.1 or later uses `dimensions:`. `fields:` is the canonical form; both keep working. Raised once per file |
-| `METRIC_VIEW_FIELDS_KEYWORD_PRE_V11`                               | 警告       | A view below spec 1.1 uses `fields:`. `dimensions:` is canonical at that version; both are accepted                                           |
-| `MISSING_VERSION`                                                  | 警告       | The YAML has no `version` property. A default is assumed                                                                                                      |
-| `UNKNOWN_JOIN_CARDINALITY`                                         | 警告       | A join declares a cardinality other than `many_to_one` or `one_to_many`. `many_to_one` is assumed                                                             |
-| `MISSING_FORMAT_TYPE`, `UNKNOWN_FORMAT_TYPE`                       | 警告       | A format has no type, or one the Bridge does not recognize. The format is ignored                                                                             |
-| `MISSING_DATE_FORMAT`, `UNKNOWN_DATE_FORMAT`                       | 警告       | Defaults to `year_month_day`                                                                                                                                                  |
-| `MISSING_TIME_FORMAT`, `UNKNOWN_TIME_FORMAT`                       | 警告       | Defaults to `locale_hour_minute_second`                                                                                                                                       |
-| `MISSING_DECIMAL_TYPE`, `UNKNOWN_DECIMAL_TYPE`                     | 警告       | Defaults to `all`                                                                                                                                                             |
-| `MISSING_SEMIADDITIVE`, `UNKNOWN_SEMIADDITIVE`                     | 警告       | Defaults to `Last`                                                                                                                                                            |
-| `MISSING_MATERIALIZATION_MODE`, `UNKNOWN_MATERIALIZATION_MODE`     | 警告       | Defaults to `relaxed`                                                                                                                                                         |
-| `MISSING_MATERIALIZED_VIEW_TYPE`, `UNKNOWN_MATERIALIZED_VIEW_TYPE` | 警告       | Defaults to `unaggregated`                                                                                                                                                    |
-| `VERSION_MISMATCH`                                                 | 警告       | The declared version does not match what was found                                                                                                                            |
+| 代码                                                                 | 严重性 | 触发条件                                                                                         |
+| ------------------------------------------------------------------ | --- | -------------------------------------------------------------------------------------------- |
+| `METRIC_VIEW_FIELDS_AND_DIMENSIONS_BOTH_PRESENT`                   | 错误  | 该视图在顶层同时声明了 `fields:` 和 `dimensions:`。它们互为别名；请只使用其中一个                                        |
+| `METRIC_VIEW_DUPLICATE_NAME`                                       | 错误  | 同一集合中的两个对象使用了相同的名称。匹配不区分大小写                                                                  |
+| `METRIC_VIEW_DEPRECATED_DIMENSIONS_KEYWORD`                        | 警告  | 符合 YAML 规范 1.1 或更高版本的视图使用了 `dimensions:`。 `fields:` 是规范写法；两者都可继续使用。每个文件只触发一次 |
+| `METRIC_VIEW_FIELDS_KEYWORD_PRE_V11`                               | 警告  | 规范版本低于 1.1 的视图使用了 `fields:`。在该版本中，`dimensions:` 是规范写法；两者都可接受                 |
+| `MISSING_VERSION`                                                  | 警告  | YAML 没有 `version` 属性。将采用默认值                                                                  |
+| `UNKNOWN_JOIN_CARDINALITY`                                         | 警告  | 某个联接声明了除 `many_to_one` 或 `one_to_many` 之外的基数。默认为 `many_to_one`                               |
+| `MISSING_FORMAT_TYPE`, `UNKNOWN_FORMAT_TYPE`                       | 警告  | 某个格式没有类型，或者 Bridge 无法识别其类型。该格式将被忽略                                                           |
+| `MISSING_DATE_FORMAT`, `UNKNOWN_DATE_FORMAT`                       | 警告  | 默认为 `year_month_day`                                                                         |
+| `MISSING_TIME_FORMAT`, `UNKNOWN_TIME_FORMAT`                       | 警告  | 默认为 `locale_hour_minute_second`                                                              |
+| `MISSING_DECIMAL_TYPE`, `UNKNOWN_DECIMAL_TYPE`                     | 警告  | 默认为 `all`                                                                                    |
+| `MISSING_SEMIADDITIVE`, `UNKNOWN_SEMIADDITIVE`                     | 警告  | 默认为 `Last`                                                                                   |
+| `MISSING_MATERIALIZATION_MODE`, `UNKNOWN_MATERIALIZATION_MODE`     | 警告  | 默认为 `relaxed`                                                                                |
+| `MISSING_MATERIALIZED_VIEW_TYPE`, `UNKNOWN_MATERIALIZED_VIEW_TYPE` | 警告  | 默认为 `unaggregated`                                                                           |
+| `VERSION_MISMATCH`                                                 | 警告  | 声明的版本与检测到的版本不匹配                                                                              |
 
-### Mapping the Metric View
+### Metric View 映射
 
-Every code in this group is a `Warning` except where noted. The object is still created, but something about it did not survive intact.
+除非另有说明，此组中的每个代码都属于 `Warning`。对象仍会被创建，但其中某些内容未能完整保留。
 
-| Code                             | Raised when                                                                                                                                                                                                        |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `JOIN_ON_EMPTY`                  | A join has no `on` clause. The dimension and its source are created, but no foreign-key / primary-key pair is wired                                                                                |
-| `JOIN_ON_UNRECOGNIZED`           | A join's `on` clause is not a recognized equality between an upstream column and a dimension column. Again, no key pair                                                                            |
-| `JOIN_ON_NO_SOURCE_SIDE`         | A join's `on` clause pairs no upstream column. Again, no key pair                                                                                                                                  |
-| `ONE_TO_MANY_JOIN_UNTRANSLATED`  | A join declares `cardinality: one_to_many`, which the translator does not model. _The relationship is skipped_, so measures referencing its columns may be wrong or empty; review these by hand    |
-| `DUPLICATE_JOIN_DIMENSION`       | A join would create a dimension whose name collides with an existing one. The duplicate is skipped. Join names must be unique across the view                                      |
-| `UNRESOLVED_DIMENSION_REFERENCE` | A reference targets a dimension that is not declared as a join. A placeholder derived field is emitted, preserving the original reference                                                          |
-| `STRUCT_REFERENCE_UNSUPPORTED`   | A dimension references a whole-row or nested struct value, which has no Tabular column equivalent. The column is emitted but will not resolve at refresh                                           |
-| `FORMAT_TRANSLATION_LOSSY`       | A Databricks format spec cannot be expressed exactly as a Tabular format string                                                                                                                                    |
-| `FIELD_COLLISION_RENAME`         | _Information._ A generated field name collided with a user-declared dimension, so the field was renamed. It stays in the model and still backs any relationship that referenced it |
-| `MEASURE_REF_OUT_OF_CONTEXT`     | A `MEASURE(...)` reference appears in an expression that is not a measure                                                                                                                                          |
-| `UNRESOLVED_MEASURE_REFERENCE`   | A `MEASURE(...)` reference names no declared measure. Falls back to the verbatim source                                                                                                            |
-| `FIELD_CONFIGURATION_UNEXPECTED` | A field had a configuration the analyzer could not classify, and was imported as a derived fact field for safety. Verify the result                                                                |
+| 代码                               | 触发条件                                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------- |
+| `JOIN_ON_EMPTY`                  | 某个 join 缺少 `on` 子句。维度及其数据源已创建，但未关联任何外键/主键对                                            |
+| `JOIN_ON_UNRECOGNIZED`           | 某个 join 的 `on` 子句不是可识别的上游列与维度列之间的相等条件。同样，未找到键对                                        |
+| `JOIN_ON_NO_SOURCE_SIDE`         | 某个 join 的 `on` 子句没有与任何上游列配对。同样，未找到键对                                                  |
+| `ONE_TO_MANY_JOIN_UNTRANSLATED`  | 某个 join 声明了 `cardinality: one_to_many`，但转换器不支持对此建模。_该关系会被跳过_，因此引用其列的度量值可能会出错或为空；请手动检查 |
+| `DUPLICATE_JOIN_DIMENSION`       | 某个 join 会创建一个维度，但其名称会与现有维度冲突。重复项会被跳过。在整个视图范围内，join 名称必须唯一                             |
+| `UNRESOLVED_DIMENSION_REFERENCE` | 某个引用指向了一个未声明为 join 的维度。会生成一个占位派生字段，并保留原始引用                                            |
+| `STRUCT_REFERENCE_UNSUPPORTED`   | 某个维度引用了整行值或嵌套结构体值，而在 Tabular 中没有对应的列。该列会被生成，但在刷新时将无法解析                                |
+| `FORMAT_TRANSLATION_LOSSY`       | Databricks 格式规范无法精确地表示为 Tabular 格式字符串                                                 |
+| `FIELD_COLLISION_RENAME`         | _信息。_ 生成的字段名称与用户声明的维度冲突，因此该字段已重命名。它会保留在模型中，并继续支撑任何引用它的关系                              |
+| `度量值引用超出上下文`                     | 在非度量值的表达式中出现了 `MEASURE(...)` 引用                                                       |
+| `未解析的度量值引用`                      | `MEASURE(...)` 引用未指向任何已声明的度量值。回退为源文本原样内容                                              |
+| `FIELD_CONFIGURATION_UNEXPECTED` | 某个字段的配置无法被分析器归类，因此为安全起见，它被作为派生事实字段导入。验证结果                                             |
 
-### Expression diagnostics, by object kind
+### 按对象类型分类的表达式诊断
 
-Expression problems report under their own code per object kind, so you can tell at a glance which kind of object failed:
+表达式问题会在 Report 中按对象类型分别在各自的代码下呈现，因此你可以一眼看出是哪类对象失败了：
 
-| Kind | Could not be translated           | Could not be parsed              |
-| ---- | --------------------------------- | -------------------------------- |
-| 字段   | `FIELD_EXPRESSION_UNTRANSLATED`   | `FIELD_EXPRESSION_PARSE_ERROR`   |
-| 度量值  | `MEASURE_EXPRESSION_UNTRANSLATED` | `MEASURE_EXPRESSION_PARSE_ERROR` |
-| Join | `JOIN_EXPRESSION_UNTRANSLATED`    | `JOIN_EXPRESSION_PARSE_ERROR`    |
+| 类型  | 无法转换                            | 无法解析                           |
+| --- | ------------------------------- | ------------------------------ |
+| 字段  | `FIELD_EXPRESSION_UNTRANSLATED` | `FIELD_EXPRESSION_PARSE_ERROR` |
+| 度量值 | `未翻译的度量值表达式`                    | `度量值表达式解析错误`                   |
+| 联接  | `JOIN_EXPRESSION_UNTRANSLATED`  | `JOIN_EXPRESSION_PARSE_ERROR`  |
 
-An _untranslated_ expression was understood but uses a construct with no DAX equivalent; the original is preserved as a comment. A _parse error_ means the expression could not be read at all, and the diagnostic's `Context` carries the parser's own message.
+一&#x4E2A;_&#x672A;转&#x6362;_&#x7684;表达式虽然可以理解，但它使用了没有 DAX 等价项的结构；原始内容会作为注释保留。_解析错误_ 表示该表达式完全无法被读取，且诊断信息的 `Context` 会携带解析器自身的信息。
 
-### Emitting to Tabular
+### 向 Tabular 输出
 
-| Code                               | Raised when                                                                                                                               |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `REFERENCE_FIELD_INVALID_SOURCE`   | A reference field points at a field id that is missing or is not a source field. A placeholder column is emitted          |
-| `DERIVED_FIELD_UNTRANSLATED`       | A derived field's expression could not be translated to DAX. The original is preserved as a comment                       |
-| `DERIVED_FIELD_NO_EXPRESSION`      | A derived field has no expression                                                                                                         |
-| `MEASURE_UNTRANSLATED`             | A measure's expression could not be translated. The original is preserved as a comment                                    |
-| `CALCULATED_MEASURE_NO_EXPRESSION` | A calculated measure has no source expression. A placeholder body is emitted                                              |
-| `MEASURE_UNRESOLVED_AT_EMIT`       | A measure references a measure that has not been emitted. Falls back to the verbatim source                               |
-| `TABLE_UNRESOLVED_AT_EMIT`         | A measure references a table that has not been emitted. Falls back to the verbatim source                                 |
-| `COLUMN_UNRESOLVED_AT_EMIT`        | A measure references a field that has not been emitted as a column. Falls back to the verbatim source                     |
-| `MEASURE_WINDOW_UNSUPPORTED`       | A measure uses an unsupported window specification. It is left inert, with the original definition preserved as a comment |
+| 代码                                 | 触发条件                                       |
+| ---------------------------------- | ------------------------------------------ |
+| `REFERENCE_FIELD_INVALID_SOURCE`   | 引用字段指向的字段 id 缺失，或该字段不是源字段。会输出一个占位列         |
+| `DERIVED_FIELD_UNTRANSLATED`       | 派生字段的表达式无法转换为 DAX。原始内容会保留为注释               |
+| `DERIVED_FIELD_NO_EXPRESSION`      | 派生字段未提供表达式                                 |
+| `MEASURE_UNTRANSLATED`             | 度量值的表达式无法翻译。原始内容会保留为注释                     |
+| `CALCULATED_MEASURE_NO_EXPRESSION` | 计算度量值没有源表达式。会输出一段占位正文                      |
+| `MEASURE_UNRESOLVED_AT_EMIT`       | 某个度量值引用了尚未输出的度量值。将回退为原样源文本                 |
+| `TABLE_UNRESOLVED_AT_EMIT`         | 某个度量值引用了尚未输出的表。将回退为原样源文本                   |
+| `COLUMN_UNRESOLVED_AT_EMIT`        | 某个度量值引用了尚未输出为列的字段。回退为源文本原文                 |
+| `MEASURE_WINDOW_UNSUPPORTED`       | 某个度量值使用了不受支持的窗口定义。它将保持为非活动状态，并将原始定义以注释形式保留 |
 
 ## 验证规则的构成
 
