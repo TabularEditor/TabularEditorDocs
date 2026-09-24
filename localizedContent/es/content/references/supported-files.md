@@ -174,7 +174,7 @@ El archivo .platform contiene metadatos sobre el elemento de modelo semántico, 
 Este archivo JSON no debe editarse manualmente a menos que entiendas el formato de elementos de Fabric.
 
 > [!NOTE]
-> This synchronization applies to a model whose metadata carries a name or a description. A Power BI Project (PBIP) semantic model authored by Power BI Desktop carries neither in its TMDL: both live only in the `.platform` file.
+> Esta sincronización se aplica a un modelo cuyos metadatos incluyen un nombre o una descripción. Un modelo semántico de un Proyecto de Power BI (PBIP) creado con Power BI Desktop no incluye ninguno de los dos en su TMDL: ambos solo existen en el archivo `.platform`.
 
 ### definition.pbism
 
@@ -190,13 +190,13 @@ Los archivos de soporte son archivos que no utilizan Analysis Services ni Power 
 
 Todos los archivos auxiliares se pueden guardar individualmente con Ctrl+S o con 'Archivo > Guardar', siempre que tengas abierto y en primer plano el documento o la ventana correspondiente.
 
-### User Options (.tmuo)
+### Opciones de usuario (.tmuo)
 
-A `.tmuo` file holds your own, machine-local settings for one model: the workspace database, data source credential overrides, table import settings, refresh overrides and AI permission grants. It sits next to the model and is named after it and your Windows user name, so several developers can work on the same model without treading on one another.
+Un archivo `.tmuo` guarda tu configuración local de tu equipo para un modelo: la base de datos del Workspace, las anulaciones de credenciales de Data source, la configuración de importación de tablas, las anulaciones de actualización y las concesiones de permisos de IA. Se guarda junto al modelo y se nombra a partir de este y de tu nombre de usuario de Windows, de modo que varios desarrolladores puedan trabajar en el mismo modelo sin interferir entre sí.
 
-Credentials inside it are encrypted with your Windows user key, which means the file cannot usefully be shared. Add `*.tmuo` to `.gitignore`.
+Las credenciales que contiene se cifran con tu clave de usuario de Windows, por lo que no resulta útil compartir el archivo. Agrega `*.tmuo` a `.gitignore`.
 
-See @user-options for the full contents and where the file is written for each model format.
+Consulta @user-options para ver el contenido completo y dónde se escribe el archivo para cada formato de modelo.
 
 ### Archivo de diagrama (.te3diag)
 
@@ -279,13 +279,13 @@ Te puede resultar útil compartir estos archivos con el equipo para que todos lo
 > Guarda los archivos necesarios en Git u OneDrive y crea un Symlink a la carpeta "%localappdata%\TabularEditor3", pero ten en cuenta que esto puede acabar causando problemas de sincronización si varios usuarios actualizan la misma versión del archivo.
 > Sin embargo, Tabular Editor no lo admite directamente, así que impleméntalo bajo tu propia responsabilidad.
 
-### AI audit log
+### Registro de auditoría de IA
 
-Present only when the AI features component is installed. Tabular Editor writes a record of what the [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) did: which permissions were asked for and how they were answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed over for review. Prompts, replies and data values from your model are never recorded.
+Solo aparece cuando está instalado el componente de características de IA. Tabular Editor registra lo que hicieron el [Asistente de IA](xref:ai-assistant) y el [servidor MCP](xref:mcp-server): qué permisos se solicitaron y cómo se contestó a ellos, qué herramientas se ejecutaron y si cada una tuvo éxito, falló o fue rechazada, y el texto completo de cualquier C# Script que se ejecutó o se entregó para revisión. Los prompts, las respuestas y los valores de datos de tu modelo nunca se registran.
 
-Files are written one per day and kept for 30 days by default. Reach the folder with **Open audit folder** under **Tools > Preferences > AI Features**. Administrators can move it and change the retention period by [policy](xref:policies). See @ai-audit-log for what each record holds.
+Se escribe un archivo al día y, de forma predeterminada, se conservan durante 30 días. Accede a la carpeta con **Abrir carpeta de auditoría** en **Herramientas > Preferencias > Características de IA**. Los administradores pueden moverlo y cambiar el período de retención mediante una [directiva](xref:policies). Consulta @ai-audit-log para ver qué contiene cada registro.
 
-Unlike the other files in this folder, this one is a record rather than a setting. Do not share or sync it: it is a per-machine log, and the scripts it contains may reveal the structure of models you have worked on.
+A diferencia de los demás archivos de esta carpeta, este es un registro, no una configuración. No lo compartas ni lo sincronices: es un registro por equipo, y los scripts que contiene pueden revelar la estructura de los modelos en los que has trabajado.
 
 ### MacroActions.json
 
