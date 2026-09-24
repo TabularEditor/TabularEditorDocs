@@ -19,9 +19,9 @@ applies_to:
 
 ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-01.png)
 
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Hierarchical by parent**: The search will apply to _parent_ objects, that is Tables and Display Folders (if those are enabled). 当父级项匹配搜索条件时，将显示其所有子项。
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Hierarchical by children**: The search will apply to _child_ objects, that is Measures, Columns, Hierarchies, etc. 父级对象仅在其至少有一个子对象匹配搜索条件时才会显示。
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Flat**: The search will apply to all objects, and results will be displayed in a flat list. 包含子项的对象仍会以分层方式显示其子项。
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **按父级分层**：搜索会应用于 _父级_ 对象，即表和显示文件夹（如已启用）。当父级项匹配搜索条件时，将显示其所有子项。
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **按子级分层**：搜索会应用于 _子级_ 对象，例如度量值、列、层次结构等。父级对象仅在其至少有一个子对象匹配搜索条件时才会显示。
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **平铺**：搜索将应用于所有对象，结果将以平铺列表显示。包含子项的对象仍会以分层方式显示其子项。
 
 ## 简单搜索
 
@@ -55,7 +55,7 @@ applies_to:
 
 ## 动态 LINQ 搜索
 
-You can also use [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) to search for objects, which is the same thing you do when creating [Best Practice Analyzer rules](xref:best-practice-analyzer). 要在筛选框中启用动态 LINQ 模式，只需在搜索字符串前加上 `:`（冒号）。例如，要查看所有名称以“Key”结尾的对象（区分大小写），请输入：
+你还可以使用 [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) 来搜索对象，这与创建 [Best Practice Analyzer 规则](xref:best-practice-analyzer) 时使用的方法相同。要在筛选框中启用动态 LINQ 模式，只需在搜索字符串前加上 `:`（冒号）。例如，要查看所有名称以“Key”结尾的对象（区分大小写），请输入：
 
 ```
 :Name.EndsWith("Key")
