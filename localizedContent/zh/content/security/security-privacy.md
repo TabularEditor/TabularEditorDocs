@@ -57,51 +57,51 @@ AMO/TOM 客户端库建立连接后，Tabular Editor 会请求用户要连接的
 
 ### AI 助手
 
-Tabular Editor 3 includes an AI Assistant for chat-based semantic model development. From 3.27.0 it is part of a default installation; before that it had to be selected deliberately. If the component is not installed, no AI-related code is present on the machine and none of the behavior described in this section applies.
+Tabular Editor 3 内置一款 AI 助手，用于以聊天方式进行语义模型开发。从 3.27.0 版本起，它已包含在默认安装中；在此之前，需要手动勾选安装。如果未安装该组件，则机器上不存在任何与 AI 相关的代码，本节所述的行为也都不适用。
 
-The AI Assistant uses a **bring-your-own-key** model. You provide an API key from a supported AI provider (OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint). No built-in API key is included and Tabular Editor does not provide or intermediate any AI service.
+AI 助手采用 **自带密钥** 模式。你需要提供受支持的 AI 提供商的 API 密钥（OpenAI、Anthropic、Azure OpenAI 或任何与 OpenAI 兼容的端点）。不包含任何内置 API 密钥，Tabular Editor 也不会提供或代为转接任何 AI 服务。
 
-**数据流。** AI 助手与 AI 提供商之间的所有通信都在客户端计算机与提供商 API 之间直接进行。 No data passes through Tabular Editor servers. What is sent depends on what you ask for, and is bounded by five permission resources, each carrying one access level:
+**数据流。** AI 助手与 AI 提供商之间的所有通信都在客户端计算机与提供商 API 之间直接进行。不会有任何数据经过 Tabular Editor 的服务器。实际发送的内容取决于你的请求，并受五项权限资源约束，每项对应一个访问级别：
 
-| Resource   | What it covers                                                                                                                        | 级别                  | 默认值   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----- |
-| 模型元数据      | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics | Deny / Read / Write | Read  |
-| Model data | Data values from your model, such as DAX query results. Requires a live connection                                    | Deny / Read         | Deny  |
-| 最佳实践分析器    | Read lists rules and runs the analysis; Write adds or modifies rules                                                                  | Deny / Read / Write | Read  |
-| Documents  | Your open C# script and DAX query editors. Read is their contents; Write is needed to create or modify them           | Deny / Read / Write | Write |
-| 宏          | Your macro library                                                                                                                    | Deny / Read / Write | Write |
+| 资源      | 涵盖内容                                                  | 级别           | 默认值 |
+| ------- | ----------------------------------------------------- | ------------ | --- |
+| 模型元数据   | 表、列和度量值的名称、表达式、说明等。读取权限还包括 VertiPaq分析器统计信息            | 拒绝 / 读取 / 写入 | 读取  |
+| 模型数据    | 模型中的数据值，例如 DAX 查询结果。需要实时连接                            | 拒绝 / 读取      | 拒绝  |
+| 最佳实践分析器 | 读取可列出规则并运行分析；写入可添加或修改规则                               | 拒绝 / 读取 / 写入 | 读取  |
+| 文档      | 你已打开的 C# Script 编辑器和 DAX 查询编辑器。读取用于查看其内容；创建或修改则需要写入权限 | 拒绝 / 读取 / 写入 | 写入  |
+| 宏       | 你的宏库                                                  | 拒绝 / 读取 / 写入 | 写入  |
 
-Write covers Read. Model data is denied by default, because metadata describes a model where data values are the model's contents.
+写入包含读取权限。默认拒绝访问模型数据，因为在描述模型的元数据中，数据值才构成模型的内容。
 
-**Permission management.** The grants are standing settings rather than per-request prompts. Review and change them under **Tools > Preferences > AI Features > Permissions**, or in the **Tools > MCP Server...** dialog, which edits the same record. Where the chat needs something a grant does not cover, it shows a permission card at that moment, and you answer for the turn, the session, the current model or always. **Always allow** raises the standing grant and never lowers one. Global grants are stored in the local Preferences.json file; grants given for a single model are stored in that model's user options (.tmuo) file and apply to the chat only. Setting a resource back to **Deny** makes the chat ask again.
+**权限管理。** 这些授权是持续生效的设置，而不是按每次请求弹出的提示。你可以在 **工具 > 偏好 > AI 功能 > 权限** 下查看和更改这些设置，也可以在 **工具 > MCP 服务器...** 对话框中进行更改；两处编辑的是同一项设置。当聊天需要的内容超出授权范围时，它会在当下显示一张权限卡片，你可以选择仅对本轮、对本次会话、对当前模型或始终允许。**始终允许** 会提升持续授权级别，不会降低现有授权。全局授权存储在本地的 Preferences.json 文件中；针对单个模型授予的权限存储在该模型的用户选项 (.tmuo) 文件中，且仅对聊天生效。将某项资源重新设为 **拒绝** 后，聊天会再次询问。
 
-**Administrator ceilings.** In the Enterprise, Consultancy and Trial editions, an administrator can cap each resource by [policy](xref:policies), separately for the chat and for the MCP server, and the MCP cap can only be lower. A cap outranks every grant, including one a user has already given, and the corresponding option is shown read-only. These policies fail closed: if any Enterprise-tier policy value is present on a machine that is not licensed for it, the AI Assistant and the MCP server refuse to start rather than ignoring the policy.
+**管理员上限。** 在 Enterprise、Consultancy 和 Trial 版本中，管理员可以通过[策略](xref:policies)为每项资源设置上限，并分别对聊天和 MCP 服务器生效；其中 MCP 的上限只能低于聊天的上限。上限优先于任何授权，包括用户之前已授予的授权；相应选项会显示为只读。这些策略采用“默认拒绝”方式：如果某台机器上存在任何 Enterprise 级别的策略值，但该机器并未获得相应许可，AI 助手和 MCP 服务器将拒绝启动，而不是忽略该策略。
 
-**Audit record.** Tabular Editor 3 writes a local record of what the AI Assistant and the MCP server did: which permissions were requested and how they were answered, which tools ran and whether each succeeded, failed or was refused, and the full text of any C# script an agent ran or handed over for review. Prompts, replies and data values are not recorded. The daily files are kept for 30 days, and **Open audit folder** under **Tools > Preferences > AI Features** opens them. Administrators can redirect the location and change the retention period.
+**审核记录。** Tabular Editor 3 会在本地记录 AI 助手和 MCP 服务器的操作：请求了哪些权限以及这些请求得到了怎样的回应、运行了哪些工具以及每项是成功、失败还是被拒绝，以及代理运行或提交以供审查的任何 C# Script 的完整文本。提示词、回复和数据值不会被记录。按天生成的文件会保留 30 天，**工具 > 偏好 > AI 功能** 下的 **打开审核文件夹** 可打开这些文件所在的文件夹。管理员可以重定向存储位置并更改保留期限。
 
 **API 密钥存储。** API 密钥会以加密方式存储在本地计算机的偏好文件 Preferences.json 中。如果未加载 AI 模块（例如在安装期间被排除，或被策略禁用），任何先前存储的 API 密钥配置都会自动清除。
 
 **对话存储。** 对话会存储在客户端本地的 `%LocalAppData%\TabularEditor3\AI\Conversations\` 中。不会将任何对话数据发送到 Tabular Editor 服务器。
 
-**Disabling the AI Assistant.** You can exclude the AI features component during installation, clear the provider under **Tools > Preferences > AI Features > AI Assistant**, or enforce a [policy](xref:policies) through the Windows registry: `DisableAi` turns off all AI functionality including the MCP server and clears stored provider configuration, while `DisableAiChat` turns off the chat alone and leaves the MCP server running.
+**禁用 AI 助手。** 你可以在安装期间排除 AI 功能组件，在 **工具 > 偏好 > AI 功能 > AI 助手** 下清除提供程序设置，或通过 Windows 注册表强制应用 [策略](xref:policies): `DisableAi` 会关闭包括 MCP 服务器在内的所有 AI 功能，并清除已存储的提供程序配置；而 `DisableAiChat` 仅关闭聊天，MCP 服务器仍会继续运行。
 
 **渗透测试。** 已对 AI 助手进行了单独的渗透测试。该报告可在我们的 [Trust Center](https://trust.tabulareditor.com/) 中查看。
 
-### MCP server
+### MCP 服务器
 
-Tabular Editor 3 can act as an MCP (Model Context Protocol) server, so that an AI agent running on the same machine can work on the model you have open. See @mcp-server for the feature itself.
+Tabular Editor 3 可以充当 MCP (Model Context Protocol) 服务器，让运行在同一台机器上的 AI 代理处理你当前打开的模型。有关这个功能本身，见 @mcp-server。
 
-**Network exposure.** The server is an HTTP listener bound explicitly to `127.0.0.1`, by default on port 42100. It is not reachable from another machine. Browser requests carrying a non-local `Origin` header are rejected as a defense against DNS rebinding. The server runs only after you start it, or from application start if you have asked for that.
+**网络暴露。** 该服务器是一个显式绑定到 `127.0.0.1` 的 HTTP 监听器，默认端口为 42100。无法从其他计算机访问。为防御 DNS 重绑定，携带非本地 `Origin` 标头的浏览器请求会被拒绝。该服务器仅在你启动后才会运行；如果你进行了相应设置，也可以在应用启动时自动运行。
 
-**Authentication.** Loopback binding is the default boundary, so the server accepts local connections without credentials out of the box. On a host where several people are signed in at once, such as a Remote Desktop or Citrix server, that is not sufficient: any session on the machine reaches `127.0.0.1`. While the token is off, any process on the machine can connect without credentials. Turn on **Require access token** under **Tools > Preferences > AI Features > MCP Server**, and clients must present a bearer token, which is stored encrypted in the local Preferences.json file. Administrators can enforce this with the `RequireMcpAccessToken` [policy](xref:policies).
+**身份验证。** 回环绑定是默认边界，因此该服务器开箱即用即可接受本地连接，无需凭据。但在多个用户可同时登录的主机上，例如远程桌面或 Citrix 服务器，这还不够：该计算机上的任何会话都可以访问 `127.0.0.1`。未启用访问令牌时，这台机器上的任何进程都可以在无凭据的情况下连接。在 **工具 > 偏好 > AI 功能 > MCP 服务器** 下启用 **要求访问令牌** 后，客户端必须提供 Bearer 令牌；该令牌会以加密形式存储在本地 Preferences.json 文件中。管理员可以通过 `RequireMcpAccessToken` [策略](xref:policies) 强制执行此设置。
 
-**Data flow.** Tabular Editor does not contact an AI provider for this feature and holds no API key for it. The agent is the only party that talks to a provider, under its own configuration and its own subscription. What the agent can read from the model is bounded by the same five permission grants that govern the AI Assistant, snapshotted when the server starts, and any tool a grant does not cover is never offered to the agent. Model data is denied by default, so no data values leave the model unless you grant that explicitly.
+**数据流。** Tabular Editor 不会为此功能联系任何 AI 提供商，也不会为其持有任何 API 密钥。只有代理会在其自身的配置和订阅下与提供商通信。代理可从模型中读取的内容，受 AI 助手所使用的同一组五项权限授予限制；这些权限会在服务器启动时被快照固定。任何不在授权范围内的工具都不会提供给代理。模型数据默认禁止访问，因此除非你明确授予权限，否则任何数据值都不会离开模型。
 
-**Changes to the model.** An agent changes the model only through the C# scripting engine, atomically and as a single undo step, and only with the model metadata grant at Write. Raw TMSL and XMLA execution is never available to an agent, and a script that reaches outside the model is never executed for it.
+**对模型的更改。** 代理只能通过 C# Script 脚本引擎更改模型，并且会以原子方式执行、作为单个撤销步骤，且仅在模型元数据权限为 Write 时才允许这样做。绝不会向代理开放原始 TMSL 和 XMLA 执行，也绝不会替它执行任何超出模型范围的脚本。
 
-**Audit record.** Permission decisions, tool calls and the full text of any C# script an agent ran or handed over for review are written to a local audit log. Prompts, replies and data values are not recorded.
+**审计记录。** 权限决策、工具调用，以及代理已运行或提交审核的任何 C# Script 的完整文本，都会写入本地审计日志。提示、回复和数据值不会被记录。
 
-**Disabling the MCP server.** Clear **Enable MCP Server** under **Tools > Preferences > AI Features > MCP Server**, or enforce the `DisableMcpServer` or `DisableAi` [policy](xref:policies). The server is part of the AI features component, so excluding that component at install time removes it as well.
+**禁用 MCP 服务器。** 取消选中 **工具 > 偏好 > AI 功能 > MCP 服务器** 下的 **启用 MCP 服务器**，或强制执行 `DisableMcpServer` 或 `DisableAi` [策略](xref:policies)。该服务器属于 AI 功能组件，因此安装时如果排除该组件，也会同时移除该服务器。
 
 ### Web 请求
 
@@ -118,9 +118,9 @@ Tabular Editor 仅会在以下情况下向在线资源（Web URL）发起请求�
   - https://australiaeast.api.daxoptimizer.com/api
   - https://eastus.api.daxoptimizer.com/api
   - https://westeurope.api.daxoptimizer.com/api
-- **AI 助手。** 当 AI 助手已完成配置并在使用时，Tabular Editor 3 会将请求直接发送到所配置的 AI 提供商 API。端点取决于所选提供商（例如 OpenAI 为 `https://api.openai.com`、Anthropic 为 `https://api.anthropic.com`，而 Azure OpenAI 和自定义提供商则使用用户指定的端点）。 Only data covered by the permission grants is included in these requests. See the [AI Assistant](#ai-assistant) section above for the resources and their defaults.
-- **AI knowledge base updates.** The knowledge base the AI Assistant searches is a local database that ships with the AI features component. Tabular Editor 3 checks for a newer copy and downloads it from `https://cdn.tabulareditor.com`. The request carries no data about you or your model.
-- **MCP server.** The MCP server makes no outbound requests. It accepts connections on the loopback interface only, and the agent that connects to it is what talks to an AI provider, under its own configuration. See the [MCP server](#mcp-server) section above.
+- **AI 助手。** 当 AI 助手已完成配置并在使用时，Tabular Editor 3 会将请求直接发送到所配置的 AI 提供商 API。端点取决于所选提供商（例如 OpenAI 为 `https://api.openai.com`、Anthropic 为 `https://api.anthropic.com`，而 Azure OpenAI 和自定义提供商则使用用户指定的端点）。这些请求中仅包含权限授予所涵盖的数据。有关这些资源及其默认设置，请参见上面的 [AI 助手](#ai-assistant) 部分。
+- **AI 知识库更新。** AI 助手搜索的知识库是随 AI 功能组件一起提供的本地数据库。 Tabular Editor 3 会检查是否有更新版本，并从 `https://cdn.tabulareditor.com` 下载。该请求不包含任何与你或你的模型有关的数据。
+- **MCP 服务器。** MCP 服务器不会发出任何出站请求。它只接受来自环回接口的连接；连接到它的代理会根据自身配置与 AI 提供商通信。见上文的 [MCP 服务器](#mcp-server) 一节。
 - **导入最佳实践规则。** Tabular Editor 提供一项功能，让你可以指定一个 URL，从中获取以 JSON 格式提供的最佳实践规则列表。此类请求只会从该 URL 下载 JSON 数据——不会向该 URL 传输任何数据。
 - **使用 C# Script。** Tabular Editor 允许用户编写并执行 C# 代码，以实现自动化。此类脚本可能会使用 C# 语言特性和 .NET 运行时连接到在线资源。你始终需要确保执行的代码不会导致任何非预期的数据共享。对于使用 C# Script 功能可能造成的任何损害、损失或泄露，Tabular Editor ApS 概不负责。未经用户明确操作，Tabular Editor 绝不会执行 C# Script。
 
@@ -135,8 +135,8 @@ Tabular Editor 仅会在以下情况下向在线资源（Web URL）发起请求�
 - 导入最佳实践规则 / C# Script：视具体情况而定
 - DAX优化器：端点见上文列表。
 - AI 助手：取决于所配置的提供商（例如 \*\*https://api.openai.com\*\*、\*\*https://api.anthropic.com\*\*，或你指定的 Azure OpenAI / 自定义端点）
-- AI knowledge base updates: **https://cdn.tabulareditor.com**
-- MCP server: nothing. It listens on **127.0.0.1** and makes no outbound requests
+- AI 知识库更新：**https://cdn.tabulareditor.com**
+- MCP 服务器：无。它监听 **127.0.0.1**，且不会发起任何出站请求
 
 > [!NOTE]
 > 系统管理员可能会强制执行某些[策略](xref:policies)，用来禁用上面列表中的部分或全部功能。
@@ -149,4 +149,4 @@ Tabular Editor 安装在 Windows 电脑上时不需要任何提升权限，也�
 
 C# Script 功能允许 Tabular Editor 在 .NET 运行时中执行任意 C# 代码。此类代码仅会在用户明确提出请求时才会编译并执行。 C# Script 也可以保存为“宏”，便于用户管理并执行多个不同的脚本。代码会存储在用户自己的 `%localappdata%` 文件夹中，确保只有用户本人或本机管理员可以访问这些脚本。你始终需要负责确保执行的代码不会造成任何非预期的副作用。在任何情况下，对于因使用 C# Script 或自定义操作/宏功能而造成的任何损害、损失或泄露，Tabular Editor ApS 均不承担任何责任。
 
-Organizations that do not want this left to the individual user can govern it centrally. The `DisableCSharpScripts` and `DisableMacros` [policies](xref:policies) turn the features off entirely, in every edition. With Tabular Editor 3 Enterprise Edition, `BlockUnsafeScripts` keeps scripting available but allows only scripts and macros that stay within the semantic model: anything that reads or writes a file, reaches the network, starts another program or loads outside code is refused before it runs, wherever the script came from - a script document, the Best Practice Analyzer, a macro, the AI Assistant, the MCP server or the command line. See [Administrator policies](xref:csharp-scripts#administrator-policies).
+不希望将此交由个人用户自行决定的组织，可以进行集中管控。 `DisableCSharpScripts` 和 `DisableMacros` [策略](xref:policies) 可在所有版本中彻底禁用 C# 脚本和宏功能。使用 Tabular Editor 3 企业版时，`BlockUnsafeScripts` 会保留脚本功能，但只允许在语义模型范围内运行的脚本和宏：任何读取或写入文件、访问网络、启动其他程序或加载外部代码的行为，都会在运行前被拒绝，无论脚本来自何处——脚本文档、Best Practice Analyzer、宏、AI 助手、MCP 服务器还是命令行。见[管理员策略](xref:csharp-scripts#administrator-policies)。
