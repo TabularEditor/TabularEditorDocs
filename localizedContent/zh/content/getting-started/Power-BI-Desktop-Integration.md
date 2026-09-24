@@ -36,7 +36,7 @@ applies_to:
 > 通过 **Live Connection** 连接到 SSAS、Azure AS 或 Power BI Workspace 中的 Dataset 的 Power BI Desktop Report 不包含 Data model。因此，这些 Report **无法**与 Tabular Editor 等外部工具一起使用。
 
 > [!IMPORTANT]
-> Power BI Desktop reports that directly edits a **Direct Lake** or other Fabric model do not contain a data model. 相反，Tabular Editor 将直接从服务中打开模型——这基本上也是 Power BI Desktop 的做法。
+> 在 Power BI Desktop 中，直接编辑 **Direct Lake** 或其他 Fabric 模型的 Report 不包含 Data model。相反，Tabular Editor 将直接从服务中打开模型——这基本上也是 Power BI Desktop 的做法。
 
 外部工具可以通过 Power BI Desktop 分配的特定端口号，连接到由 Power BI Desktop 管理的 Analysis Services 实例。当你从 Power BI Desktop 的“外部工具”功能区直接启动某个工具时，该端口号会作为命令行参数传递给外部工具。对于 Tabular Editor 而言，这会使其加载该 Data model。
 
