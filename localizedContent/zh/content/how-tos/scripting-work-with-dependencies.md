@@ -16,7 +16,7 @@ applies_to:
 TOM 封装器会通过 `DependsOn` 和 `ReferencedBy` 属性跟踪对象之间的引用关系。可用它们进行影响分析、查找未使用对象，以及理解 DAX 血缘关系。
 
 > [!NOTE]
-> The `DependsOn` and `ReferencedBy` properties expose the same dependency information shown in the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) in Tabular Editor's UI.
+> `DependsOn` 和 `ReferencedBy` 属性公开的依赖信息与 Tabular Editor 界面中的 [**DAX 依赖关系** 视图](xref:creating-and-testing-dax#dax-dependencies) 所显示的信息相同。
 
 ## 快速参考
 
