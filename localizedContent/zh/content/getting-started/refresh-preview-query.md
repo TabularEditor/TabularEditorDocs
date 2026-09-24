@@ -86,9 +86,9 @@ Tabular Editor 3 支持对不同对象类型执行刷新操作。支持的刷新
 
 你可以打开多个此类表格预览，并在用户界面中按你的习惯随意排列。 Tabular Editor 会针对模型执行 DAX 查询，只返回足以填充当前视图的一小部分记录，然后在你滚动时逐页加载更多行。
 
-Each column header carries a sort and a filter, the grid's right-click menu can open a calculated column's expression or recalculate the table, and **Show actual DAX query...** hands you the query behind the preview as a new DAX query document. Selecting a column in the TOM Explorer scrolls the preview to it.
+每个列标题都提供排序和筛选功能；网格的右键菜单可打开计算列的表达式或重新计算表格；而 **显示实际 DAX 查询...** 会将预览背后的查询以新的 DAX 查询文档形式提供给你。在 TOM Explorer 中选择某一列，会使预览滚动到该列位置。
 
-See @table-preview for the toolbar, the right-click menu, how far you can scroll in each storage mode and the preferences that govern column order and the filter dropdown.
+有关工具栏、右键菜单、在各存储模式下可滚动的范围，以及控制列顺序和筛选下拉菜单的偏好设置，请参阅 @table-preview。
 
 # Pivot Grid：数据透视网格
 
