@@ -77,7 +77,7 @@ Normalmente, Tabular Editor 3 debería detener y eliminar automáticamente cualq
 
 Las opciones siguientes controlan varios aspectos del Explorador TOM. Puedes encontrar estos ajustes en **Tabular Editor > Explorador TOM**:
 
-![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
+![Configuración de Tom Explorer](~/content/assets/images/unsaved-changes/preferences.png)
 
 ##### _Mostrar toda la rama_ (desactivado)
 
@@ -240,7 +240,7 @@ Cuando esta opción está marcada, los prefijos de tabla se eliminan automática
 
 ##### _Capitalización preferida de palabras clave_ (predeterminado = UPPER)
 
-Esta configuración te permite cambiar el uso de mayúsculas/minúsculas en las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. This also applies when a keyword is inserted through the auto-complete feature, including the fixed keyword values of functions that take them. See @preferences for the full list.
+Esta configuración te permite cambiar el uso de mayúsculas/minúsculas en las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. Esto también se aplica cuando se inserta una palabra clave mediante la función de autocompletado, incluidos los valores fijos de palabras clave de las funciones que los aceptan. Consulta @preferencias para ver la lista completa.
 
 ##### _Capitalización preferida de funciones_ (predeterminado = UPPER)
 
