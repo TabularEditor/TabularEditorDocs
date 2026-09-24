@@ -94,6 +94,6 @@ Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Ser
 ## 后续步骤
 
 - [开始使用 Tabular Editor 2](xref:getting-started-te2)
-- [Install and activate Tabular Editor 3](xref:getting-started)
+- [安装并激活 Tabular Editor 3](xref:getting-started)
 - [Tabular Editor 3 路线图](xref:roadmap)
 
