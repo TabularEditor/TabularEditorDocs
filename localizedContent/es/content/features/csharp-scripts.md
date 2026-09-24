@@ -171,7 +171,7 @@ La siguiente tabla enumera todos los accesores singulares y plurales disponibles
 > [!NOTE]
 > Los accesores de Rol, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable y Partición se agregaron en Tabular Editor 3.26.0.
 
-Starting with Tabular Editor 3.27.0, objects that were deleted since the model was last saved remain visible in the TOM Explorer, and can be selected. Such objects are not part of the model, so they never appear in the accessors above. Instead, `Selected.Deleted` lists the selected deleted objects, each with a `Name`, `ObjectType`, `Parent` and a `Restore()` method. `Selected.Deleted.Restore()` restores all of them at once. Model objects also expose `HasUnsavedChanges` and `Revert()`, which let a script roll back part of a model. See @unsaved-changes for details.
+A partir de Tabular Editor 3.27.0, los objetos que se hayan eliminado desde la última vez que se guardó el modelo siguen visibles en el Explorador TOM y se pueden seleccionar. Esos objetos no forman parte del modelo, por lo que nunca aparecen en los métodos de acceso anteriores. En su lugar, `Selected.Deleted` enumera los objetos eliminados seleccionados, cada uno con las propiedades `Name`, `ObjectType`, `Parent` y el método `Restore()`. `Selected.Deleted.Restore()` los restaura todos de una vez. Los objetos del modelo también exponen `HasUnsavedChanges` y `Revert()`, que permiten a un script revertir una parte del modelo. Consulta @unsaved-changes para más detalles.
 
 ## Métodos auxiliares
 
@@ -245,10 +245,10 @@ Todos los cambios de metadatos del modelo derivados de la ejecución de un scrip
 > Las funciones de vista previa y deshacer solo se aplican a los cambios de metadatos del modelo. Si un script realiza operaciones externas, como escribir en archivos, bases de datos o realizar solicitudes web, esas operaciones se ejecutan de inmediato y no se pueden revertir. El cuadro de diálogo de vista previa no intenta analizar el código del script; funciona comparando el estado de los metadatos del modelo antes y después de la ejecución.
 
 > [!TIP]
-> The [AI Assistant](xref:ai-assistant) shows this dialog when it runs a script itself, as long as **Preview changes** is on under **Tools > Preferences > AI Features > AI Assistant**. It is on by default, so you always get a chance to review AI-generated model changes before they are applied.
+> El [Asistente de IA](xref:ai-assistant) muestra este cuadro de diálogo cuando ejecuta un script por su cuenta, siempre que **Vista previa de cambios** esté activada en **Herramientas > Preferencias > Funciones de IA > Asistente de IA**. Está activada de forma predeterminada, de modo que siempre tienes la oportunidad de revisar los cambios del modelo generados por IA antes de que se apliquen.
 
 > [!NOTE]
-> The preview dialog does not apply to a script run by an agent over the [MCP server](xref:mcp-server). Those scripts are compiled, checked by the safety analysis and run against the model atomically. The agent gets back a structured summary of what changed, and the changes are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) for you to review or revert afterwards.
+> El cuadro de diálogo de vista previa no se aplica a un script ejecutado por un agente a través del [servidor MCP](xref:mcp-server). Esos scripts se compilan, se comprueban mediante el análisis de seguridad y se ejecutan de forma atómica sobre el modelo. El agente recibe un resumen estructurado de lo que ha cambiado, y los cambios quedan marcados en el [Explorador TOM y la vista de propiedades](xref:unsaved-changes) para que puedas revisarlos o revertirlos después.
 
 ## Referencias de .NET
 
@@ -303,7 +303,7 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
 
 > [!NOTE]
-> `Environment` is one of the types refused when an administrator has set the `BlockUnsafeScripts` policy. See [Administrator policies](#administrator-policies).
+> `Environment` es uno de los tipos que se rechazan cuando un administrador ha establecido la directiva `BlockUnsafeScripts`. Consulta [Directivas de administrador](#administrator-policies).
 
 ### Lectura de variables de entorno
 
@@ -381,36 +381,36 @@ foreach(var table in Model.Tables)
 Info($"Modelo configurado para el entorno {environment}");
 ```
 
-## Administrator policies
+## Directivas de administrador
 
-Scripting can be governed centrally, so what a script may do on your own machine is not always what it may do on a machine your IT department manages. Two [policies](xref:policies) decide that.
+El uso de scripts puede gestionarse de forma centralizada, así que lo que un script puede hacer en tu propio equipo no siempre es lo mismo que puede hacer en un equipo administrado por tu departamento de TI. Eso lo determinan dos [directivas](xref:policies).
 
-`DisableCSharpScripts` turns scripting off outright: scripts cannot be created or executed, and the same goes for macros under `DisableMacros`.
+`DisableCSharpScripts` desactiva por completo los scripts: no se pueden crear ni ejecutar, y con `DisableMacros` ocurre lo mismo con las macros.
 
-`BlockUnsafeScripts` is the middle ground, and the one worth understanding as a script author. Scripts and macros keep working, but only where they stay within the semantic model. A script that reads or writes a file, makes a web request, starts another program, references an outside assembly with `#r`, or sends a command straight to the server is refused before any of it runs.
+`BlockUnsafeScripts` es la opción intermedia, y la que conviene entender si escribes scripts. Los scripts y las macros siguen funcionando, pero solo mientras se mantengan dentro del modelo semántico. Un script que lee o escribe un archivo, realiza una solicitud web, inicia otro programa, hace referencia a un ensamblado externo con `#r` o envía un comando directamente al servidor se rechaza antes de que se ejecute nada.
 
-### What counts as staying within the model
+### Qué se considera estar dentro del modelo
 
-The decision is made by analyzing the compiled script, not by searching its text, so an indirect route to the same place is refused too: reflection through `Type.GetType` or `InvokeMember`, expression trees and delegate invocation, `Activator`, `AppDomain`, `Environment`, XML readers and writers that take a path or a URL, and type-name-based deserialization.
+La decisión se toma analizando el script compilado, no buscando en su texto, por lo que también se rechazan las vías indirectas para llegar al mismo sitio: reflexión mediante `Type.GetType` o `InvokeMember`, árboles de expresión e invocación de delegados, `Activator`, `AppDomain`, `Environment`, lectores y escritores XML que aceptan una ruta de acceso o una dirección URL, y la deserialización basada en nombres de tipo.
 
-Among the [helper methods](xref:script-helper-methods), the three that write outside the model count as unsafe:
+Entre los [métodos auxiliares](xref:script-helper-methods), los tres que escriben fuera del modelo se consideran inseguros:
 
-| Refused                                       | Still available                                                              |
+| Rechazado                                     | Todavía disponible                                                           |
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
 | `SaveFile`, `ExecuteCommand`, `Bpa.ExportCsv` | `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader`, `ExportProperties` |
 
-Everything in the TOM object model is fine, as are `System`, `System.Linq`, `System.Collections.Generic` and `Newtonsoft.Json`. In practice a script that builds and changes model objects is unaffected, and a script that exports something to disk is not.
+Todo en el modelo de objetos TOM es válido, al igual que `System`, `System.Linq`, `System.Collections.Generic` y `Newtonsoft.Json`. En la práctica, un script que crea y modifica objetos del modelo no se ve afectado, pero uno que exporta algo al disco sí se ve afectado.
 
-### What you see when a script is refused
+### Qué ves cuando se rechaza un script
 
-A **Script not run** dialog names the policy and what the script used, and the status bar reads _Script blocked by your organization's policy_. The error list stays empty, because this is not a compile error: the script is valid, it is just not allowed to run here. **Run with preview** behaves the same way and shows no preview dialog.
+Un cuadro de diálogo **Script no ejecutado** indica el nombre de la directiva y lo que usó el script, y la barra de estado muestra _Script bloqueado por la directiva de tu organización_. La lista de errores permanece vacía, porque esto no es un error de compilación: el script es válido; simplemente no está permitido ejecutarlo aquí. **Ejecutar con vista previa** se comporta igual y no muestra ningún cuadro de diálogo de vista previa.
 
-A macro is analyzed when it is saved. Saving succeeds, and a dialog tells you the macro is saved but will not run. A blocked macro is left out of every menu, so it cannot be run by accident, and appears under **View > Macros** with its **Blocked** column filled in. Edit it back inside the line and its menu item returns, without restarting Tabular Editor.
+Una macro se analiza al guardarla. Se guarda correctamente y un cuadro de diálogo te indica que la macro se ha guardado, pero no se ejecutará. Una macro bloqueada se omite de todos los menús, para que no pueda ejecutarse por accidente, y aparece en **Ver > Macros** con la columna **Bloqueado** completada. Vuelve a editarla para que quede de nuevo dentro del límite y su opción de menú vuelve a aparecer, sin necesidad de reiniciar Tabular Editor.
 
-On the command line, `te script`, `te macro run` and `te bpa run --fix` refuse in the same way, exit with a non-zero code and report `blockedByPolicy` in JSON output.
+En la línea de comandos, `te script`, `te macro run` y `te bpa run --fix` se rechazan del mismo modo, devuelven un código distinto de cero y reportan `blockedByPolicy` en la salida JSON.
 
 > [!NOTE]
-> `BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition. If the value is set on a copy that is not licensed for it, no script or macro runs at all, safe or not, until an Enterprise license is activated. The Tabular Editor CLI has no editions and simply applies the policy.
+> `BlockUnsafeScripts` requiere la Edición Enterprise de Tabular Editor 3. Si el valor se establece en una copia que no tiene licencia para ello, no se ejecuta ningún script ni macro, ya sea seguro o no, hasta que se active una licencia Enterprise. La CLI de Tabular Editor no tiene ediciones y simplemente aplica la directiva.
 
 ## Compatibilidad
 
