@@ -52,9 +52,9 @@ Tabular Editor 3 对 JSON 序列化有一套默认设置；如果要使用不同
 
 ***
 
-### User Defined Functions (UDFs)
+### 用户自定义函数（UDFs）
 
-Since Tabular Editor 3.27.0, the JSON folder format can store each [DAX User-Defined Function](xref:udfs) in its own file, the same way it already does for tables, measures and columns. The functions go in a `functions` subfolder at the model root:
+自 Tabular Editor 3.27.0 起，JSON 文件夹格式可将每个 [DAX 用户自定义函数](xref:udfs) 分别存储为独立文件，与表、度量值和列的存储方式一致。这些函数位于模型根目录下的 `functions` 子文件夹中：
 
 ```
 MyModel/
@@ -63,17 +63,17 @@ MyModel/
 │   ├── Sales.MarginPct.json
 │   └── Time.SameDayLastYear.json
 ├── tables/
-└── ...
+└── ……
 ```
 
-The benefit is the same as for every other object type: two developers editing two different functions change two different files, so Git has nothing to merge. Without it every function lives inline in `database.json`, and any two parallel edits collide in that one file.
+好处与其他任何对象类型相同：两位开发人员分别编辑两个不同的函数时，会修改两个不同的文件，因此 Git 没有任何需要合并的内容。如果不启用它，每个函数都会以内联方式保存在 `Database.json` 中，任何两项并行编辑都会在这一个文件里发生冲突。
 
-Turn it on with the **User Defined Functions (UDFs)** level, under **Tools > Preferences > File Formats > Save-to-folder** or, for the model you have open, under **Model > Serialization options...**.
+可在 **工具 > 偏好 > 文件格式 > 保存到文件夹** 下启用 **用户自定义函数（UDFs）** 级别；对于当前打开的模型，也可在 **模型 > 序列化选项...** 中启用。
 
-![Model > Serialization options, with the User Defined Functions (UDFs) level ticked](~/content/assets/images/serialization-options-udf.png)
+![模型 > 序列化选项，其中已勾选“用户定义函数（UDFs）”级别](~/content/assets/images/serialization-options-udf.png)
 
 > [!IMPORTANT]
-> Tabular Editor selects this level by default only for a model you save to a folder for the _first_ time. A model that's already folder-serialized keeps the levels stored in its own serialization annotation, so its functions stay inline until you select **User Defined Functions (UDFs)** under **Model > Serialization options...** and save the model again.
+> 只有在&#x4F60;_&#x9996;&#x6B21;_&#x5C06;模型保存到文件夹时，Tabular Editor 才会默认选中此级别。已采用文件夹序列化的模型会在自身的序列化注释中保留已存储的级别，因此在你于 **模型 > 序列化选项...** 中选择 **用户自定义函数（UDFs）** 并再次保存模型之前，这些函数仍会继续以内联方式存储。
 
 ### 序列化模型注释
 
