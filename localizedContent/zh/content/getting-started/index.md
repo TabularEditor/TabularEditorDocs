@@ -74,7 +74,7 @@ updated: 2026-09-14
 
 **更多资源：**
 
-- [Install and activate Tabular Editor 3](xref:getting-started)
+- [安装并激活 Tabular Editor 3](xref:getting-started)
 - [高级安装和激活](xref:installation-activation-basic)
 - [下载 Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn 学习中心](https://tabulareditor.com/learn)
