@@ -1,6 +1,6 @@
 ---
 uid: connect-ssas
-title: Connect and deploy to Analysis Services
+title: Conectar y desplegar en Analysis Services
 author: Morten Lønskov
 updated: 2026-09-15
 applies_to:
@@ -17,31 +17,31 @@ applies_to:
           full: true
 ---
 
-# Connect and deploy to Analysis Services
+# Conectar y desplegar en Analysis Services
 
-You can open a semantic model straight from a server rather than from a file, work on it, and write your changes back. This covers SQL Server Analysis Services, Azure Analysis Services, and the Power BI / Fabric XMLA endpoint.
+Puedes abrir un modelo semántico directamente desde un servidor, en lugar de hacerlo desde un archivo, trabajar en él y guardar los cambios de nuevo en el servidor. Esto incluye SQL Server Analysis Services, Azure Analysis Services y el punto de conexión XMLA de Power BI / Fabric.
 
-## Opening a model from a server
+## Abrir un modelo desde un servidor
 
-Choose **File > Open > Model from DB...** (**Ctrl+Shift+O**) and enter the server address. Tabular Editor then lists the databases on that server so you can pick the one to load.
+Elige **Archivo > Abrir > Modelo desde BD...** (**Ctrl+Shift+O**) e introduce la dirección del servidor. Después, Tabular Editor muestra las bases de datos de ese servidor para que puedas elegir cuál cargar.
 
-- For **SQL Server Analysis Services**, use the instance name, for example `localhost` or `myserver\tabular`.
-- For **Azure Analysis Services**, use the full instance name beginning with `asazure://`.
-- For the **Power BI / Fabric XMLA endpoint**, use the workspace connection string beginning with `powerbi://`.
-- The **Local Instance** dropdown lists running instances of Power BI Desktop and Visual Studio integrated workspaces, so you can attach to one without knowing its port.
+- Para **SQL Server Analysis Services**, usa el nombre de la instancia; por ejemplo, `localhost` o `myserver\\tabular`.
+- Para **Azure Analysis Services**, usa el nombre completo de la instancia que comienza por `asazure://`.
+- Para el **punto de conexión XMLA de Power BI / Fabric**, usa la cadena de conexión del Workspace que comienza por `powerbi://`.
+- El menú desplegable **Instancia local** muestra las instancias en ejecución de Power BI Desktop y los Workspaces integrados de Visual Studio, por lo que puedes conectarte a uno sin conocer su puerto.
 
-@xmla-as-connectivity covers the connection dialog in full, including authentication modes, advanced connection string properties, the per-connection status bar colour, and what to check when a connection fails. @load-save-model lists every way a model can be opened.
+@xmla-as-connectivity explica en detalle el cuadro de diálogo de conexión, incluidos los modos de autenticación, las propiedades avanzadas de la cadena de conexión, el color de la barra de estado para cada conexión y qué comprobar cuando falla una conexión. @load-save-model enumera todas las formas de abrir un modelo.
 
-## Saving changes back
+## Guardar los cambios
 
-**File > Save** (**Ctrl+S**) writes your changes to the connected database. Client tools such as Excel, Power BI and DAX Studio see them immediately. Depending on what you changed, objects may need recalculating before the model can be queried again.
+**Archivo > Guardar** (**Ctrl+S**) guarda los cambios en la base de datos conectada. Las herramientas cliente, como Excel, Power BI y DAX Studio, los reflejan inmediatamente. Según lo que hayas cambiado, puede que sea necesario volver a calcular los objetos antes de poder consultar de nuevo el modelo.
 
-To take a copy of a connected model onto disk instead, use **File > Save As...** or **File > Save to Folder...**.
+Para guardar en disco una copia de un modelo en **modo conectado**, usa **Archivo > Guardar como...** o **Archivo > Guardar en carpeta...**.
 
-## Deploying to a different database
+## Desplegar en una base de datos diferente
 
-Saving updates the database you're connected to. To push the loaded model to a _different_ server or database, use the deployment wizard instead, described in @deployment.
+Al guardar, se actualiza la base de datos a la que estás conectado. Para enviar el modelo cargado a un servidor o una base de datos _distintos_, utiliza en su lugar el **Asistente de implementación**, descrito en @deployment.
 
-## Editing a Power BI Desktop model
+## Editar un modelo de Power BI Desktop
 
-Tabular Editor can attach to a running instance of Power BI Desktop through the **Local Instance** dropdown. As of the June 2025 Power BI Desktop update there are no longer any unsupported write operations, so third-party tools may freely modify the semantic model hosted in Desktop. On earlier versions some operations are restricted; see @desktop-limitations and @desktop-integration.
+Tabular Editor puede conectarse a una instancia de Power BI Desktop en ejecución desde el desplegable **Instancia local**. Con la actualización de junio de 2025 de Power BI Desktop, ya no existen operaciones de escritura no admitidas, por lo que las herramientas de terceros pueden modificar libremente el modelo semántico alojado en Power BI Desktop. En versiones anteriores, algunas operaciones están restringidas; consulta @desktop-limitations y @desktop-integration.
