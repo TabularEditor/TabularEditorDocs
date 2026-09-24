@@ -1,6 +1,6 @@
 ---
 uid: user-context-calculated-columns
-title: User-context calculated columns
+title: Columnas calculadas con contexto de usuario
 author: Morten Lønskov
 updated: 2026-09-14
 applies_to:
@@ -18,54 +18,54 @@ applies_to:
           full: true
 ---
 
-# User-context calculated columns
+# Columnas calculadas con contexto de usuario
 
-A calculated column is normally evaluated once, when the table is processed, and every user who queries the model sees the same value. A _user-context calculated column_ is evaluated per user instead, so its expression can call functions such as [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) or [`USERNAME`](https://dax.guide/username) and give each user a different answer.
+Normalmente, una columna calculada se evalúa una vez, cuando se procesa la tabla, y todos los usuarios que consultan el modelo ven el mismo valor. En cambio, una _columna calculada con contexto de usuario_ se evalúa para cada usuario, por lo que su expresión puede llamar a funciones como [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) o [`USERNAME`](https://dax.guide/username) y devolver un resultado distinto para cada usuario.
 
-This is controlled by the calculated column's **Expression Context** property.
+Esto se controla con la propiedad **Contexto de expresión** de la columna calculada.
 
-| Expression Context | Significado                                                                                                                     |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| **Standard**       | The default. The expression can use only standard functions, and the column has one value per row for everybody |
-| **User Context**   | The expression can call user-context functions, and is evaluated per user                                                       |
+| Contexto de expresión   | Significado                                                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Estándar**            | La opción predeterminada. La expresión solo puede usar funciones estándar, y la columna tiene un valor por fila para todos los usuarios |
+| **Contexto de usuario** | La expresión puede llamar a funciones de contexto de usuario y se evalúa para cada usuario                                                              |
 
-Select a calculated column in the @tom-explorer-view and set **Expression Context** under **Options** in the @properties-view.
+Selecciona una columna calculada en @tom-explorer-view y establece **Contexto de expresión** en **Opciones** de la @properties-view.
 
 > [!NOTE]
-> **Expression Context** requires compatibility level 1705 or above. Below that, a calculated column is always Standard.
+> **Contexto de expresión** requiere un nivel de compatibilidad de 1705 o superior. Por debajo de ese nivel, una columna calculada siempre es Estándar.
 
-## What a user-context column cannot be used for
+## Para qué no puede usarse una columna con contexto de usuario
 
-Because the value depends on who is asking, a user-context calculated column cannot be read by anything that is evaluated once for the whole model. Tabular Editor's Semantic Analyzer checks the four cases and reports an error for each:
+Como el valor depende de quién consulta, una columna calculada con contexto de usuario no puede ser leída por ningún elemento que se evalúe una sola vez para todo el modelo. El Semantic Analyzer de Tabular Editor comprueba los cuatro casos y reporta un error en cada uno:
 
-| A user-context column cannot be referenced by | Mensaje                                                                                                                                                      |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| A **standard** calculated column              | _This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a standard calculated column._ |
-| A **calculated table**                        | _This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a calculated table._           |
-| A **row-level security filter**               | _This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a row-level security filter._  |
-| A **relationship**, as an endpoint            | _A relationship cannot use the user-context-aware calculated column `Table[Column]` as an endpoint._                                         |
+| Una columna con contexto de usuario no puede ser referenciada por | Mensaje                                                                                                                                                                                             |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Una columna calculada **estándar**                                | _Esta expresión hace referencia a la columna calculada dependiente del contexto del usuario `Table[Column]`, lo cual no está permitido en una columna calculada estándar._          |
+| Una **tabla calculada**                                           | _Esta expresión hace referencia a la columna calculada dependiente del contexto del usuario `Table[Column]`, lo cual no está permitido en una tabla calculada._                     |
+| Un **filtro de seguridad a nivel de filas**                       | _Esta expresión hace referencia a la columna calculada dependiente del contexto del usuario `Table[Column]`, lo cual no está permitido en un filtro de seguridad a nivel de filas._ |
+| Una **relación** como extremo                                     | _Una relación no puede usar la columna calculada dependiente del contexto del usuario `Table[Column]` como extremo._                                                                |
 
-The first three apply _indirectly as well as directly_. Reaching the column through a measure is still reaching it, and is reported the same way.
+Los tres primeros se aplican _tanto de forma indirecta como directa_. Acceder a la columna a través de una medida sigue siendo acceder a ella, y se reporta de la misma manera en el Report.
 
-Two things are explicitly allowed: a _measure_ can reference a user-context column, and so can _another user-context calculated column_.
+Hay dos cosas que se permiten explícitamente: una _medida_ puede hacer referencia a una columna con contexto de usuario, y _otra columna calculada con contexto de usuario_ también puede hacerlo.
 
-## Where the errors appear
+## Dónde aparecen los errores
 
-| How the column is referenced              | DAX editor | @messages-view | `te validate` |
-| ----------------------------------------- | ---------- | --------------------------- | ------------- |
-| Directly                                  | Sí         | Sí                          | Sí            |
-| Indirectly, for example through a measure | No         | Sí                          | Sí            |
-| As a relationship endpoint                | No         | Sí                          | Sí            |
+| Cómo se hace referencia a la columna               | Editor de DAX | @vista-de-mensajes | `te validate` |
+| -------------------------------------------------- | ------------- | ------------------------------- | ------------- |
+| Directamente                                       | Sí            | Sí                              | Sí            |
+| Indirectamente, por ejemplo a través de una medida | No            | Sí                              | Sí            |
+| Como extremo de una relación                       | No            | Sí                              | Sí            |
 
-An indirect violation has no squiggle in the editor, because the expression you are looking at is perfectly valid on its own. The chain is what breaks. Check the @messages-view before deploying.
+En una infracción indirecta no aparece ningún subrayado ondulado en el editor, porque la expresión que estás viendo es perfectamente válida por sí sola. Lo que falla es la cadena. Consulta @vista-de-mensajes antes de implementar.
 
-A relationship-endpoint violation also appears as the relationship's **Error Message** property, and is reported once per offending endpoint, so a relationship with user-context columns on both sides produces two errors. Inactive relationships are checked too.
+Una infracción en un extremo de una relación también aparece como la propiedad **Mensaje de error** de la relación, y se reporta una vez por cada extremo infractor, por lo que una relación con columnas con contexto de usuario en ambos extremos produce dos errores en Mensajes del Report. También se comprueban las relaciones inactivas.
 
 > [!IMPORTANT]
-> `te validate --errors-only` does _not_ suppress these. They are errors, not warnings, and `--errors-only` only hides warnings and anti-patterns.
+> `te validate --errors-only` _no_ los oculta. Son errores, no advertencias, y `--errors-only` solo oculta advertencias y antipatrones.
 
 ## Pasos a seguir
 
-- @messages-view
+- @vista de mensajes
 - @dax-editor
 - @preferencias
