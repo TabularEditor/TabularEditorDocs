@@ -35,7 +35,7 @@ applies_to:
 
 ![新建模型](~/content/assets/images/tutorials/new-pbi-model.png)
 
-- 为模型指定名称，或使用默认值。 Then, set the compatibility level to "1706 (Power BI / Fabric)".
+- 为模型指定名称，或使用默认值。然后将兼容级别设置为“1706（Power BI / Fabric）”。
 - 为了获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。这要求你在 Power BI 中有一个可用的开发 Workspace，并已启用 XMLA 读/写。单击“确定”后，系统会提示你输入 Power BI Workspace 的连接字符串，以便在该 Power BI Workspace 中创建 Workspace 数据库。
 
 > [!NOTE]
