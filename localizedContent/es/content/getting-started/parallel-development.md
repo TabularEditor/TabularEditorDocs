@@ -57,7 +57,7 @@ Como se mencionó anteriormente, los metadatos de un modelo tabular se almacenan
 
 Los nombres de cada uno de los archivos que representan objetos TOM individuales se basan simplemente en la propiedad `Name` del propio objeto. El nombre del archivo "raíz" es **Database.json**, por eso a veces nos referimos al formato de almacenamiento basado en carpetas simplemente como **Database.json**.
 
-Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**/ See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+Tabular Editor también separa las [funciones DAX definidas por el usuario](xref:udfs) de la misma manera y las coloca en una carpeta `functions` en la raíz del modelo. Actívalo en cuanto haya más de una persona escribiendo funciones: hasta entonces, cada función se guarda dentro de **Database.json**. Consulta [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Ventajas de usar Guardar en carpeta
 
