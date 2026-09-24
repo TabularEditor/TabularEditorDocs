@@ -25,7 +25,7 @@ applies_to:
 
 ## 关于旧式数据源与 Structured数据源的说明
 
-As there is currently no way for Tabular Editor 2 to infer the metadata returned from M (Power Query) expressions, this UI only supports Legacy (aka. Provider) Data Sources. 如果你必须使用 Structured数据源，仍然可以先使用临时的旧式连接来初始导入表架构（前提是你的数据源可通过 SQL、OLE DB 或 ODBC 访问），然后再手动将已导入表的分区切换为使用 Structured数据源。 If you are importing data from "exotic" data sources, such as web services, Azure Data Lake Storage, etc. schema metadata can not be imported automatically, but [there is an option for providing the metadata information through the clipboard](#power-query-data-sources).
+由于 Tabular Editor 2 目前无法推断 M（Power Query）表达式返回的元数据，因此此界面仅支持旧版（又称 Provider）数据源。如果你必须使用 Structured数据源，仍然可以先使用临时的旧式连接来初始导入表架构（前提是你的数据源可通过 SQL、OLE DB 或 ODBC 访问），然后再手动将已导入表的分区切换为使用 Structured数据源。如果你要从“非典型”的数据源（例如 Web 服务、Azure Data Lake Storage 等）导入数据，则无法自动导入架构元数据，但你可以选择[通过剪贴板提供元数据信息](#power-query-data-sources)。
 
 不过，总的来说，建议对以下类型的数据源始终使用 Legacy 连接：
 
@@ -52,7 +52,7 @@ As there is currently no way for Tabular Editor 2 to infer the metadata returned
 
 列表中的下一个选项“使用临时连接”不会在模型中添加新的数据源。这意味着在部署模型之前，你需要自行将数据源分配给新导入表的分区。
 
-最后一个选项“从另一个应用程序手动导入元数据”，用于在你希望基于列元数据列表导入新表时使用。 This is useful for Structured (Power Query) Data Sources, [see below](#power-query-data-sources).
+最后一个选项“从另一个应用程序手动导入元数据”，用于在你希望基于列元数据列表导入新表时使用。这对结构化（Power Query）数据源很有用，[见下文](#power-query-data-sources)。
 
 ## SQL 功能
 
@@ -148,10 +148,10 @@ Provider=MSOLEDBSQL;Data Source=<sql server name>.database.windows.net;User ID=d
   ![image](~/content/assets/images/importing-tables-07.png)
 - 对于其他类型的数据源，可能更方便的做法是先在 SSDT 中创建初始模型和前几张表，以弄清楚数据源应如何配置；之后在添加更多表时再使用下面的技巧。
 - 在 Excel 或 Power BI Desktop 里使用 Power Query 连接到源数据，并应用需要的转换。
-- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the previous output:
+- 在 Power Query 的“高级编辑器”中，添加一个步骤，对上一步的输出调用 `Table.Schema(...)` [M 函数](https://docs.microsoft.com/en-us/powerquery-m/table-schema)：
   ![image](~/content/assets/images/importing-tables-08.png)
-- Select the full output preview, copy it into the clipboard (CTRL+A, CTRL+C) and paste it into the schema/metadata textbox in the Import Tables Wizard:
+- 选择完整的输出预览，将其复制到剪贴板（CTRL+A、CTRL+C），然后粘贴到“导入表向导”中的架构/元数据文本框里：
   ![image](~/content/assets/images/importing-tables-09.png)
 - 单击“Import!”，并为表指定一个合适的名称。
-- 最后，将你在 Excel/Power BI 中使用的原始 M 表达式（即在用 `Table.Schema(...)` 函数修改之前的版本）粘贴到新建表的分区中。 Modify the M expression to point to the source you specified in the first step:
+- 最后，将你在 Excel/Power BI 中使用的原始 M 表达式（即在用 `Table.Schema(...)` 函数修改之前的版本）粘贴到新建表的分区中。修改 M 表达式，使其指向你在第一步中指定的源：
   ![image](~/content/assets/images/importing-tables-10.png)
