@@ -65,25 +65,25 @@ En los scripts DAX y las consultas DAX, a veces es útil incluir la definición 
 
 ## Medida en línea
 
-Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Right-click a measure reference in the DAX editor and choose **Inline Measure**.
+Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Haz clic con el botón derecho en una referencia de medida en el editor de DAX y elige **Insertar medida en línea**.
 
-A measure reference implicitly turns the current row into a filter before the measure's expression is evaluated. Pasting the expression in as-is would therefore change the result, so when the reference sits inside a row context, for example as the second argument of an iterator such as [`SUMX`](https://dax.guide/sumx) or [`FILTER`](https://dax.guide/filter), Tabular Editor wraps the inlined expression in [`CALCULATE`](https://dax.guide/calculate) to preserve that behavior:
+Una referencia de medida convierte implícitamente la fila actual en un filtro antes de que se evalúe la expresión de la medida. Pegar la expresión tal cual cambiaría, por tanto, el resultado; por eso, cuando la referencia está dentro de un contexto de fila —por ejemplo, como segundo argumento de un iterador como [`SUMX`](https://dax.guide/sumx) o [`FILTER`](https://dax.guide/filter)—, Tabular Editor envuelve la expresión insertada en línea en [`CALCULATE`](https://dax.guide/calculate) para conservar ese comportamiento:
 
 ```dax
-// Before using inline measure on the [Margin] measure
+// Antes de usar Insertar medida en línea en la medida [Margin]
 SUMX ( 'Sales', [Margin] )
 
-// After using inline measure on the [Margin] measure
+// Después de usar Insertar medida en línea en la medida [Margin]
 SUMX ( 'Sales', CALCULATE ( 'Sales'[Amount] - 'Sales'[Cost] ) )
 ```
 
-The wrap is only added where it can make a difference. The expression is inserted unwrapped when:
+La envoltura solo se añade cuando puede marcar la diferencia. La expresión se inserta sin envolver cuando:
 
-- the reference is **not inside a row context**, including when it already sits inside a `CALCULATE( ... )` of its own
-- the measure's expression **reads nothing from the model** (a constant, a reference to another measure or a call to a function such as `TODAY()`). A reference to a table, a column, a calendar or a [user-defined function](xref:udfs) does count as reading from the model, and does get the wrap
-- the expression **already performs the transition itself**, through a `CALCULATE( ... )` or `CALCULATETABLE( ... )` with no filter arguments. With a filter argument the wrap is still added, because filter arguments are evaluated before the transition
+- la referencia **no está dentro de un contexto de fila**, incluso cuando ya está dentro de un `CALCULATE( ... )`
+- la expresión de la medida **no lee nada del modelo** (una constante, una referencia a otra medida o una llamada a una función como `TODAY()`). Una referencia a una tabla, una columna, un calendario o una [función definida por el usuario](xref:udfs) sí cuenta como lectura del modelo y sí recibe la envoltura
+- la expresión **ya realiza la transición por sí misma**, mediante un `CALCULATE( ... )` o `CALCULATETABLE( ... )` sin argumentos de filtro. Con un argumento de filtro, la envoltura se sigue agregando, porque los argumentos de filtro se evalúan antes de la transición
 
-If the measure's expression cannot be analyzed, the wrap is added, on the principle that a wrap that was not needed is harmless where a missing one is not.
+Si no se puede analizar la expresión de la medida, se agrega la envoltura, por el principio de que una envoltura innecesaria es inocua, mientras que la ausencia de una necesaria no lo es.
 
 ## Formatear DAX
 
