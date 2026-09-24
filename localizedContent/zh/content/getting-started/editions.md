@@ -18,14 +18,14 @@ applies_to:
 > [!NOTE]
 > Tabular Editor 3 许可证为**按开发者**授权。换句话说，只有实际使用 Tabular Editor 3 产品的人才需要许可证。
 
-The editions differ in two ways: **which data modeling scenarios** they support - that is, where the model you are editing may live - and **which features** are available once it is open. The two sections below cover each in turn. Anything not listed in either is available in every edition.
+各版本有两点区别：它们支持**哪些数据建模场景**——也就是你正在编辑的 Data model 可能位于何处——以及该模型打开后可用的**功能**有哪些。下面两个部分会分别介绍这两点。未在任一部分列出的内容，均适用于所有版本。
 
 > [!TIP]
-> Upgrading a license takes effect straight away. Activate the new key under **Help > About Tabular Editor**, and the features it unlocks are available without restarting Tabular Editor 3.
+> 升级许可证会立即生效。在 **Help > About Tabular Editor** 中激活新密钥后，无需重启 Tabular Editor 3，即可使用该密钥解锁的功能。
 
 ## 支持的 Data model 建模场景
 
-The first difference between the editions is which types of tabular data modeling scenarios they support. 要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
+各版本之间的第一个区别在于它们支持哪些类型的表格式数据建模场景。要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
 
 - Power BI Desktop（请确保您了解[限制](xref:desktop-limitations)）
 - 通过 XMLA 终结点使用的 Power BI Premium（Premium Per User、**Premium 容量 [A、EM 或 P SKUs]**、**Fabric 容量 [F SKUs]**）
@@ -68,80 +68,80 @@ The first difference between the editions is which types of tabular data modelin
 
 \*\*\***注：** 工作区模式允许 Tabular Editor 3 同时将模型元数据保存到磁盘，并同步所购买的 Tabular Editor 3 版本支持的任意 Analysis Services 或 Power BI 版本上的数据库。
 
-## Feature availability
+## 功能可用情况
 
-Beyond the scenarios above, these are the features whose availability depends on the edition. Trial and Consultancy licenses carry the Enterprise Edition feature set.
+除了上述场景外，以下功能是否可用也取决于版本。试用许可和咨询许可均提供企业版功能集。
 
-### Editing and refreshing
+### 编辑和刷新
 
-| 功能                                                                                                       | 桌面版                                                     | 商务版                                                     | 企业版                                                     |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| [Save with supporting files](xref:save-with-supporting-files) for Fabric                                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| [Advanced Refresh dialog](xref:advanced-refresh) and [refresh override profiles](xref:refresh-overrides) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Automatic metadata backups on save and deploy                                                            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 功能                                                                    | 桌面版                                                     | 商务版                                                     | 企业版                                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| 适用于 Fabric 的 [连同支持文件一起保存](xref:save-with-supporting-files)            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| [高级刷新对话框](xref:advanced-refresh) 和 [刷新覆盖配置文件](xref:refresh-overrides) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 保存和部署时自动备份元数据                                                         | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 
-Ordinary refresh commands, and everything else in the refresh menu, are available in every edition. The three rows above are unavailable in Desktop Edition because that edition works only against a live Power BI Desktop model, with no model files of its own.
+常规刷新命令以及刷新菜单中的其他所有内容在所有版本中均可使用。上面的三行在桌面版中不可用，因为该版本只能针对实时的 Power BI Desktop 模型工作，自身不包含任何模型文件。
 
-### Modeling features
+### 建模功能
 
-| 功能                                                                  | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
-| ------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Perspectives in an Analysis Services model\*                        | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Tables with multiple partitions in an Analysis Services model\*     | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Perspectives and multiple partitions in a Power BI model            | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Direct Lake tables                                                  | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| [Semantic Bridge](xref:semantic-bridge) for Databricks Metric Views | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 功能                                                                   | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| -------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Analysis Services 模型中的透视\*                                           | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Analysis Services 模型中具有多个分区的表\*                                      | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Power BI 模型中的透视和多个分区                                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Direct Lake 表                                                        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 用于 Databricks Metric Views 的 [Semantic Bridge](xref:semantic-bridge) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
-\***Note:** Desktop Edition cannot open Analysis Services models at all, which is why these two rows do not apply to it. See [Modeling Restrictions](#modeling-restrictions) below for what happens when a model uses one of these features on an edition that does not allow it.
+\***注意：** 桌面版完全无法打开 Analysis Services 模型，因此这两行不适用于它。请参阅下方的[建模限制](#modeling-restrictions)，了解当模型在不允许使用这些功能的版本中使用其中某项功能时会发生什么。
 
-The Semantic Bridge row covers the **Import from Metric View YAML...** command and the `SemanticBridge` object in [C# scripts](xref:csharp-scripts); on a lower edition the menu item is not shown, and a script that reaches for the service reports that it is unavailable at your license level.
+Semantic Bridge 这一行涵盖 **从 Metric View YAML 导入...** 命令，以及 [C# 脚本](xref:csharp-scripts) 中的 `SemanticBridge` 对象；在较低版本中，该菜单项不会显示，而尝试访问该服务的脚本会报告该服务在你的许可级别不可用。
 
-### AI Assistant, MCP server and administrator policies
+### AI 助手、MCP 服务器和管理员策略
 
-The [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) themselves are available in every edition. What Enterprise Edition adds is the ability to govern them centrally, and a record of what they did.
+[AI 助手](xref:ai-assistant) 和 [MCP 服务器](xref:mcp-server) 本身在所有版本中都可用。企业版额外提供的是集中管理它们的能力，以及它们执行过哪些操作的记录。
 
-| 功能                                                                                                                      | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
-| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| AI Assistant and MCP server                                                                                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| General administrator [policies](xref:policies), such as turning off updates, telemetry, scripts, macros or AI entirely | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Capping what the AI Assistant and the MCP server may reach, per resource                                                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Locking the AI provider, endpoint, model, organization and project, or restricting them to an allowlist                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Publishing Custom Instructions for the organization, and ruling out the ones a user keeps                               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Withholding individual MCP tools, and fixing the MCP server port                                                        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Allowing only C# scripts and macros that stay within the model (`BlockUnsafeScripts`)                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| A local audit record of AI Assistant and MCP server activity                                                            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 功能                                              | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| ----------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| AI 助手和 MCP 服务器                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 常规管理员[策略](xref:policies)，例如完全关闭更新、遥测、脚本、宏或 AI   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 按资源对 AI 助手和 MCP 服务器的可访问范围设定上限                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 锁定 AI 提供商、端点、模型、组织和项目，或将其限制在允许列表内               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 发布组织级自定义指令，并屏蔽用户保留的个人指令                         | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 屏蔽特定的 MCP 工具，并固定 MCP 服务器端口                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 仅允许在模型范围内运行的 C# Script 和宏（`BlockUnsafeScripts`） | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 用于记录 AI 助手和 MCP 服务器活动的本地审计日志                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
 > [!IMPORTANT]
-> The Enterprise policies are never quietly ignored on an edition that is not licensed for them. If any of their values is set on a machine running Desktop or Business Edition, the AI Assistant and the MCP server refuse to start and name the values that require Enterprise Edition, and a `BlockUnsafeScripts` value stops every script and macro from running until an Enterprise license is activated. Roll them out against the licenses you actually have. See @policies.
+> 在未获得相应许可的版本中，企业策略绝不会被悄悄忽略。如果在运行 Desktop 版或商业版的计算机上设置了其中任何一个值，AI Assistant 和 MCP 服务器将拒绝启动，并指出哪些值需要企业版；而 `BlockUnsafeScripts` 值会阻止所有脚本和宏运行，直到激活企业版许可证。请按你实际持有的许可证来部署这些策略。见 @policies。
 
-### Licensing and support
+### 许可与支持
 
-| 功能                                                                    | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
-| --------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| [Free DAX Optimizer access](xref:dax-optimizer-integration)           | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| **Help > Dedicated Support** for contacting our support team directly | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Simultaneous installations per user                                   | 1                                                       | 2                                                       | 3                                                       |
+| 功能                                                | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| ------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| [免费获取 DAX优化器访问权限](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 通过 **帮助 > 专属支持** 直接联系我们的支持团队                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 每位用户可同时安装的设备数                                     | 1                                                       | 2                                                       | 3                                                       |
 
-The DAX Optimizer _integration_ itself is in every edition; what Enterprise Edition adds is eligibility for a redemption code that gives you DAX Optimizer access at no extra cost.
+DAX优化器的 _集成_ 在所有版本中都提供；企业版额外提供的是兑换码领取资格，可让你无需额外付费即可使用 DAX优化器。
 
-### Available in every edition
+### 所有版本均提供
 
-Everything else is the same whichever edition you hold, including the DAX editor and IntelliSense-like [code assist](xref:code-actions), [DAX queries](xref:dax-query) and the [DAX debugger](xref:dax-debugger), [DAX scripts](xref:dax-scripts) and [user-defined functions](xref:udfs), [C# scripts](xref:csharp-scripts) and [macros](xref:macros), the [Best Practice Analyzer](xref:using-bpa) with its [built-in rules](xref:built-in-bpa-rules), the [Perspective Editor](xref:perspective-editor), the [Metadata Translation Editor](xref:metadata-translation-editor), the [Calendar Editor](xref:calendars), [table groups](xref:table-groups), [diagrams](xref:diagram-view), [data preview](xref:table-preview) and [pivot grids](xref:pivot-grid), the VertiPaq Analyzer integration, the [DAX Package Manager](xref:dax-package-manager), the [Table Import Wizard](xref:import-tables) and [unsaved change indicators](xref:unsaved-changes).
+无论你使用哪个版本，其他所有功能都完全相同，包括 DAX 编辑器和类似 IntelliSense 的 [Code Assist](xref:code-actions)、[DAX 查询](xref:dax-query) 和 [DAX调试器](xref:dax-debugger)、[DAX 脚本](xref:dax-scripts) 和 [用户定义函数](xref:udfs)、[C# Script](xref:csharp-scripts) 和 [宏](xref:macros)、带有 [内置规则](xref:built-in-bpa-rules) 的 [Best Practice Analyzer](xref:using-bpa)、[透视编辑器](xref:perspective-editor)、[元数据翻译编辑器](xref:metadata-translation-editor)、[日历编辑器](xref:calendars)、[表格组](xref:table-groups)、[关系图](xref:diagram-view)、[数据预览](xref:table-preview) 和 [Pivot Grid](xref:pivot-grid)、VertiPaq分析器集成、[DAX 组件管理器](xref:dax-package-manager)、[表导入向导](xref:import-tables) 以及 [未保存更改指示器](xref:unsaved-changes)。
 
 ## 建模限制
 
 我们也会在 Tabular Editor 3 中限制部分 Data model 建模操作，以与 Microsoft 某些服务层级（Azure Analysis Services _Basic Tier_、SQL Server Analysis Services _Standard Edition_，以及 Power BI _Premium-Per-User_）的限制保持一致。
 
-Specifically, [Azure AS Basic Tier and SQL Server Standard Edition do not support perspectives or multiple partitions](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), and as such, SSAS/Azure AS models using these features require TE3 Enterprise Edition. DirectQuery is not restricted by your Tabular Editor 3 edition at all: whether you can use it depends on the server the model is hosted on.
+具体来说，[Azure AS Basic 层和 SQL Server Analysis Services 标准版不支持透视或多个分区](https://azure.microsoft.com/en-us/pricing/details/analysis-services/)，因此，使用这些功能的 SSAS/Azure AS 模型需要 TE3 企业版。 DirectQuery 完全不受你所用 Tabular Editor 3 版本的限制：能否使用它取决于托管该模型的服务器。
 
 同样地，[Power BI Premium-Per-User Workspace 不支持 Direct Lake Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites)，所以使用该功能的 Power BI 模型也需要 TE3 企业版。
 
 | 模型类型            | 功能            | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
 | --------------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Azure AS / SSAS | 透视            | N/A                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | 多个分区          | N/A                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | DirectQuery\* | N/A                                                     | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | Direct Lake   | N/A                                                     | N/A                                                     | N/A                                                     |
+| Azure AS / SSAS | 透视            | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | 多个分区          | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | DirectQuery\* | 不适用                                                     | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | Direct Lake   | 不适用                                                     | 不适用                                                     | 不适用                                                     |
 | Power BI        | 透视\*\*        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 | Power BI        | 多个分区\*\*      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 | Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
@@ -151,13 +151,13 @@ Specifically, [Azure AS Basic Tier and SQL Server Standard Edition do not suppor
 
 \*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
 
-Desktop Edition works only against a live Power BI Desktop model, which is why the Analysis Services rows do not apply to it.
+桌面版只能连接到正在运行的 Power BI Desktop 模型，因此与 Analysis Services 相关的那些行不适用于它。
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
 ![此版本的 Tabular Editor 3 不支持企业级语义模型](~/content/assets/images/editions-01.png)
 
-A model that acquires one of these while you are editing it is not silently mangled either: the save is refused, and the message names the feature and, for multiple partitions, the tables in question. Adding a perspective to an Analysis Services model is prevented up front - the **Perspectives** folder is not shown in the TOM Explorer and the command to create one is unavailable.
+如果你在编辑模型时，它启用了其中某项功能，也不会在不提示的情况下被破坏：系统会拒绝保存，并在信息中注明具体是哪个功能；如果涉及多个分区，还会列出相关的表。在 Analysis Services 模型中添加透视会在一开始就被阻止——TOM Explorer 中不会显示 **Perspectives** 文件夹，创建透视的命令也不可用。
 
 > [!IMPORTANT]
 > 只有当 Power BI Report（.pbix、.pbip 或 .pbit）文件包含 Data model（Import、DirectQuery 或 Composite）时，Tabular Editor 才能在 Power BI Desktop 中作为外部工具使用。**不支持使用 Live connection 的 Report**，因为这些 Report 不包含 Data model。[更多信息](xref:desktop-limitations)。
