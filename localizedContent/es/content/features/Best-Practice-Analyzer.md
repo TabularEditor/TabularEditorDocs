@@ -19,52 +19,52 @@ applies_to:
 
 # Best Practice Analyzer
 
-The Best Practice Analyzer checks your model against a set of rules and lists every object that violates one. It runs in the background as you work, so the count of outstanding issues is always current, and it can fix many of the issues it finds for you.
+El Best Practice Analyzer comprueba tu modelo con un conjunto de reglas y enumera todos los objetos que infringen alguna de esas reglas. Se ejecuta en segundo plano mientras trabajas, por lo que el número de problemas pendientes siempre está actualizado y puede corregir muchos de los problemas que encuentra por ti.
 
-A rule is a condition written against the model's objects, plus a severity and a description. Rules cover the things that are easy to get wrong and expensive to discover later: calculated columns that should be pushed to the source, relationships on columns of mismatched data types, measures without a format string, objects left visible that should be hidden.
+Una regla es una condición definida sobre los objetos del modelo, además de un nivel de gravedad y una descripción. Las reglas cubren aspectos en los que es fácil equivocarse y resulta caro detectarlo más tarde: columnas calculadas que deberían trasladarse al origen, relaciones entre columnas con tipos de datos que no coinciden, medidas sin cadena de formato y objetos que se han dejado visibles cuando deberían estar ocultos.
 
-Press **F10**, or click the issue count in the main window, to open the Best Practice Analyzer. Background scanning can be turned off under **Tools > Preferences > Best Practice Analyzer** (**File > Preferences** in Tabular Editor 2).
+Pulsa **F10** o haz clic en el recuento de problemas de la ventana principal para abrir el Best Practice Analyzer. Puedes desactivar el análisis en segundo plano en **Herramientas > Preferencias > Best Practice Analyzer** (**Archivo > Preferencias** en Tabular Editor 2).
 
-## Where to go next
+## Dónde ir a continuación
 
-| Page                                             | What it covers                                                                                                                                                                                                                                           |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| @using-bpa                          | Working with the results: the issue list, going to an object, ignoring an object or a rule, and generating or applying a fix script. Also the Manage BPA Rules window and the rule collections it lists. |
-| @built-in-bpa-rules                 | The curated rule set shipped with Tabular Editor 3, its categories, and how to turn individual rules off.                                                                                                                                |
-| @using-bpa-sample-rules-expressions | Writing your own rule expressions, with worked examples.                                                                                                                                                                                 |
+| Página                                           | Qué cubre                                                                                                                                                                                                                                                                                              |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| @using-bpa                          | Cómo trabajar con los resultados: la lista de problemas, ir a un objeto, ignorar un objeto o una regla y generar o aplicar un script de corrección. También se trata la ventana **Administrar reglas de BPA** y las colecciones de reglas que enumera. |
+| @built-in-bpa-rules                 | El conjunto de reglas seleccionado incluido con Tabular Editor 3, sus categorías y cómo desactivar reglas individuales.                                                                                                                                                                |
+| @using-bpa-sample-rules-expressions | Cómo escribir tus propias expresiones de regla, con ejemplos detallados.                                                                                                                                                                                                               |
 
-The rest of this page covers where rules come from and how to bring in rules that live outside the model.
+El resto de esta página explica de dónde vienen las reglas y cómo incorporar reglas que están fuera del modelo.
 
-## Rule collections and precedence
+## Colecciones de reglas y precedencia
 
-Rules reach a model through _collections_, listed in the top half of the Manage BPA Rules window. @using-bpa describes each collection and where its rules are stored.
+Las reglas llegan a un modelo a través de _colecciones_, que aparecen en la mitad superior de la ventana **Administrar reglas de BPA**. @using-bpa describe cada colección y dónde se almacenan sus reglas.
 
-If the same rule ID appears in more than one collection, precedence runs from the top of the list downwards: a rule defined within the model beats a rule with the same ID defined for the local machine. That's what lets you override a shared rule to account for a convention specific to one model.
+Si el mismo ID de regla aparece en más de una colección, la precedencia va de arriba abajo en la lista: una regla definida dentro del modelo tiene prioridad sobre una regla con el mismo ID definida en la máquina local. Eso te permite sobrescribir una regla compartida para adaptarla a una convención específica de un modelo concreto.
 
-Select **(Effective rules)** at the top of the list to see the rules that actually apply after precedence is resolved. Each rule shows which collection it came from, and a rule struck through is one that a higher-precedence collection has overridden.
+Selecciona **(Reglas efectivas)** en la parte superior de la lista para ver las reglas que realmente se aplican una vez resuelta la precedencia. Cada regla muestra de qué colección procede, y una regla tachada indica que una colección con mayor precedencia la ha sobrescrito.
 
-## Adding a rule collection
+## Agregar una colección de reglas
 
-Beyond the built-in, model, user and machine collections, you can attach rule files from elsewhere. Collections added this way take precedence over rules defined within the model, and if you add several you can move them up and down to set their order.
+Además de las colecciones integradas, del modelo, del usuario y de la máquina, puedes adjuntar archivos de reglas desde cualquier otra ubicación. Las colecciones agregadas de este modo tienen prioridad sobre las reglas definidas en el modelo y, si agregas varias, puedes moverlas arriba y abajo para establecer su orden.
 
-Click **Add...** in the Manage BPA Rules window and choose one of:
+En la ventana Administrar reglas de BPA, haz clic en **Agregar...** y elige una de estas opciones:
 
-- **Create new Rule File** creates an empty `.json` file at a location you pick, ready for you to add rules to.
-- **Include local Rule File** attaches a `.json` file of rules you already have.
-- **Include Rule File from URL** attaches rules served over HTTP or HTTPS, for example the [standard BPA rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json) published by Microsoft. Collections loaded from a URL are read-only.
+- **Crear nuevo archivo de reglas** crea un archivo `.json` vacío en la ubicación que elijas, listo para que agregues reglas.
+- **Incluir archivo de reglas local** adjunta un archivo `.json` de reglas que ya tienes.
+- **Incluir archivo de reglas desde una URL** adjunta reglas disponibles a través de HTTP o HTTPS; por ejemplo, las [reglas estándar de BPA](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json) publicadas por Microsoft. Las colecciones cargadas desde una URL son de solo lectura.
 
-![The Add rule collection dialog, showing the Create new Rule File, Include local Rule File and Include Rule File from URL options](~/content/assets/images/bpa-add-rule-collection.png)
+![El cuadro de diálogo Agregar colección de reglas, que muestra las opciones Crear nuevo archivo de reglas, Incluir archivo de reglas local e Incluir archivo de reglas desde una URL](~/content/assets/images/bpa-add-rule-collection.png)
 
-For the two file options you can store the reference as a relative path, which is worth doing when the rule file lives in the same repository as the model. A relative reference only resolves when the model itself was loaded from disk, since a model loaded from a server has no working directory to resolve against. A file on a different drive or a network share has to be referenced absolutely.
+En las dos opciones de archivo, puedes guardar la referencia como una ruta relativa; conviene hacerlo cuando el archivo de reglas está en el mismo repositorio que el modelo. Una referencia relativa solo se resuelve cuando el propio modelo se cargó desde el disco, ya que un modelo cargado desde un servidor no tiene un directorio de trabajo con respecto al que resolverla. Un archivo en otra unidad o en un recurso compartido de red debe indicarse mediante una ruta absoluta.
 
-You can add, edit, clone and delete rules in any collection you have write access to. **Move to...** moves or copies the selected rule into another collection.
+Puedes agregar, editar, clonar y eliminar reglas en cualquier colección para la que tengas permisos de escritura. **Mover a...** mueve o copia la regla seleccionada a otra colección.
 
-## Placeholders in rule descriptions
+## Marcadores de posición en las descripciones de reglas
 
-A rule's description is shown as a tooltip against each object that violates it, so it's worth making it name the object it's talking about. Three placeholders are substituted when the description is displayed:
+La descripción de una regla se muestra como información sobre herramientas en cada objeto que la incumple; por eso conviene que mencione el objeto al que se refiere. Se sustituyen tres marcadores de posición cuando se muestra la descripción:
 
-| Placeholder    | Expands to                                                       |
-| -------------- | ---------------------------------------------------------------- |
-| `%object%`     | A fully qualified DAX reference to the object, where one applies |
-| `%objectname%` | The name of the object                                           |
-| `%objecttype%` | The type of the object                                           |
+| Marcador de posición | Se expande a                                              |
+| -------------------- | --------------------------------------------------------- |
+| `%object%`           | Una referencia DAX completa al objeto, cuando corresponda |
+| `%objectname%`       | El nombre del objeto                                      |
+| `%objecttype%`       | El tipo del objeto                                        |
