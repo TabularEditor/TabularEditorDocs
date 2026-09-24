@@ -174,7 +174,7 @@ DatabaseName.SemanticModel/
 这是一个 JSON 文件，除非你了解 Fabric 项目项的格式，否则不要手动编辑。
 
 > [!NOTE]
-> This synchronization applies to a model whose metadata carries a name or a description. A Power BI Project (PBIP) semantic model authored by Power BI Desktop carries neither in its TMDL: both live only in the `.platform` file.
+> 此同步仅适用于元数据中带有名称或描述的模型。由 Power BI Desktop 创建的 Power BI Project (PBIP) 语义模型在其 TMDL 中既不包含名称也不包含描述：二者都只存在于 `.platform` 文件中。
 
 ### definition.pbism
 
@@ -190,13 +190,13 @@ DatabaseName.SemanticModel/
 
 打开并选中对应的文档或窗口后，你可以用 Ctrl+S 或“文件 > 保存”来单独保存任何辅助文件。
 
-### User Options (.tmuo)
+### 用户选项（.tmuo）
 
-A `.tmuo` file holds your own, machine-local settings for one model: the workspace database, data source credential overrides, table import settings, refresh overrides and AI permission grants. It sits next to the model and is named after it and your Windows user name, so several developers can work on the same model without treading on one another.
+`.tmuo` 文件保存你为单个模型设置的、仅限本机的个人设置：Workspace 数据库、数据源凭据覆盖项、表导入设置、刷新覆盖项以及 AI 权限授予项。它与模型放在同一位置，并以模型名和你的 Windows 用户名命名，因此多个开发者可以处理同一个模型而互不干扰。
 
-Credentials inside it are encrypted with your Windows user key, which means the file cannot usefully be shared. Add `*.tmuo` to `.gitignore`.
+其中的凭据使用你的 Windows 用户密钥加密，因此共享该文件基本没有意义。将 `*.tmuo` 添加到 `.gitignore`。
 
-See @user-options for the full contents and where the file is written for each model format.
+有关完整内容以及每种模型格式中该文件会写入到哪里，请参阅 @user-options。
 
 ### 关系图文件 (.te3diag)
 
@@ -278,13 +278,13 @@ Tabular Editor 会在 "%localappdata%\\TabularEditor3" 文件夹中维护多个�
 >
 > 把所需文件放在 Git 或 OneDrive 里，并为“%localappdata%\TabularEditor3”文件夹创建一个符号链接。不过要注意：如果有多个用户更新同一个文件版本，最后可能会出现同步问题。不过，Tabular Editor 本身并不直接支持这种方式，因此是否采用请自行斟酌。
 
-### AI audit log
+### AI 审计日志
 
-Present only when the AI features component is installed. Tabular Editor writes a record of what the [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) did: which permissions were asked for and how they were answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed over for review. Prompts, replies and data values from your model are never recorded.
+仅在安装了 AI 功能组件时显示。 Tabular Editor 会记录 [AI Assistant](xref:ai-assistant) 和 [MCP server](xref:mcp-server) 的操作：请求了哪些权限以及如何回应，运行了哪些工具，以及每个工具是成功、失败还是被拒绝；还会记录任何已运行或交由审阅的 C# Script 的完整文本。提示词、回复以及模型中的数据值绝不会被记录。
 
-Files are written one per day and kept for 30 days by default. Reach the folder with **Open audit folder** under **Tools > Preferences > AI Features**. Administrators can move it and change the retention period by [policy](xref:policies). See @ai-audit-log for what each record holds.
+默认每天写入一个文件，并保留 30 天。可在 **工具 > 偏好 > AI 功能** 中点击 **打开审计文件夹** 进入该文件夹。管理员可通过 [策略](xref:policies) 移动它并更改保留期限。有关每条记录包含哪些内容，请参阅 @ai-audit-log。
 
-Unlike the other files in this folder, this one is a record rather than a setting. Do not share or sync it: it is a per-machine log, and the scripts it contains may reveal the structure of models you have worked on.
+与此文件夹中的其他文件不同，这个文件记录的是日志，而不是设置。不要共享或同步它：这是每台计算机各自的日志，其中包含的脚本可能会暴露你处理过的模型结构。
 
 ### MacroActions.json
 
