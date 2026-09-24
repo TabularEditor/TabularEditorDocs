@@ -62,13 +62,13 @@ Una macro puede abrirse haciendo doble clic en ella en el panel de macros y, tra
 
 ![Cuadro de información de edición de macro](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
-## Administrator policies
+## Directivas del administrador
 
-Macros can be governed centrally, through the registry policies an IT department deploys. `DisableMacros` stops them being saved or run at all, and macros stored in `%LocalAppData%` are not loaded when Tabular Editor starts.
+Las macros pueden administrarse de forma centralizada mediante las directivas del Registro que despliega el departamento de TI. `DisableMacros` impide que se guarden o se ejecuten en absoluto, y las macros almacenadas en `%LocalAppData%` no se cargan cuando se inicia Tabular Editor.
 
-In Tabular Editor 3, `BlockUnsafeScripts` allows macros only where they stay within the semantic model. A macro that reads or writes a file, reaches the network, starts another program or references an outside assembly is saved, but left out of every menu so it cannot be run by accident. You will find it under **View > Macros** with its **Blocked** column filled in, where it can still be opened and edited; bring it back inside the line and its menu item returns without restarting Tabular Editor. Saving such a macro tells you it is saved but will not run.
+En Tabular Editor 3, `BlockUnsafeScripts` solo permite macros cuando se mantienen dentro del modelo semántico. Una macro que lea o escriba un archivo, acceda a la red, inicie otro programa o haga referencia a un ensamblado externo se guarda, pero se excluye de todos los menús para que no pueda ejecutarse accidentalmente. La encontrarás en **Ver > Macros** con la columna **Bloqueada** marcada, donde todavía puedes abrirla y editarla; si la vuelves a ajustar para que cumpla los límites, su opción de menú reaparecerá sin reiniciar Tabular Editor. Al guardar una macro de este tipo, se te indica que se ha guardado, pero que no se ejecutará.
 
-See [C# Scripts](xref:csharp-scripts#administrator-policies) for what counts as staying within the model, and @policies for the registry values themselves.
+Consulta [C# Scripts](xref:csharp-scripts#administrator-policies) para saber qué se considera que permanece dentro del modelo, y @policies para ver los propios valores del Registro.
 
 ## Archivo JSON de macros
 
