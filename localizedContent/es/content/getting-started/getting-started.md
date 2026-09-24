@@ -23,23 +23,23 @@ applies_to:
 
 Descarga la versión más reciente de Tabular Editor 3 desde nuestra [página de descargas](xref:downloads).
 
-We recommend the 64-bit `.exe` installer on .NET 10 for most scenarios. Once downloaded, double-click it and complete the installer pages.
+Recomendamos el instalador `.exe` de 64 bits con .NET 10 para la mayoría de los escenarios. Una vez descargado, haz doble clic y completa los pasos del instalador.
 
 ![Instalar](~/content/assets/images/getting-started/install.png)
 
 ### Requisitos previos
 
-For the `.exe` installer, the matching **.NET Desktop Runtime**: [10](https://dotnet.microsoft.com/download/dotnet/10.0) for the recommended build, or [8](https://dotnet.microsoft.com/download/dotnet/8.0) for the .NET 8 build. The installer offers to download and install it for you, so in practice there is nothing to do beforehand.
+Para el instalador `.exe`, el **.NET Desktop Runtime** correspondiente: [10](https://dotnet.microsoft.com/download/dotnet/10.0) para la compilación recomendada o [8](https://dotnet.microsoft.com/download/dotnet/8.0) para la compilación de .NET 8. El instalador te ofrece descargarlo e instalarlo, así que en la práctica no hay nada que hacer de antemano.
 
-The other two packages differ. The `.msi` does not bring the runtime along, so install it yourself when deploying centrally, and the portable `.zip` is self-contained and needs no runtime at all.
+Los otros dos paquetes son distintos. El `.msi` no incluye el runtime, así que instálalo tú mismo si realizas un despliegue centralizado, y el `.zip` portátil es autónomo y no necesita runtime en absoluto.
 
 ### Requisitos del sistema
 
 - **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
 - **Arquitectura:** x64, ARM64 (nativo desde la versión 3.23.0)
-- **.NET Runtime:** .NET Desktop Runtime 10 or 8, matching the build you install
+- **.NET Runtime:** .NET Desktop Runtime 10 u 8, según la compilación que instales
 
-See @system-requirements for the full matrix and for how to choose between the builds.
+Consulta @system-requirements para ver la matriz completa y saber cómo elegir entre las compilaciones.
 
 ## Activación de su instalación
 
