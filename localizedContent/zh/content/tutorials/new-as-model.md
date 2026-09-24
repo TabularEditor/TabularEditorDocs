@@ -36,11 +36,11 @@ applies_to:
   - 1200（Azure Analysis Services / SQL Server 2016+）
   - 1400（Azure Analysis Services / SQL Server 2017+）
   - 1500（Azure Analysis Services / SQL Server 2019+）
-  - 1600 (Azure Analysis Services / SQL Server 2022+)
-  - 1700 (Azure Analysis Services / SQL Server 2025+)
-  - 1706 (Power BI / Fabric)
+  - 1600（Azure Analysis Services / SQL Server 2022+）
+  - 1700（Azure Analysis Services / SQL Server 2025+）
+  - 1706（Power BI / Fabric）
 
-  1700 is the highest level Analysis Services supports. 1706 is for Power BI and Fabric only, and is the level to choose when you deploy the model through the Power BI XMLA endpoint.
+  1700 是 Analysis Services 支持的最高级别。 1706 仅适用于 Power BI 和 Fabric，也是通过 Power BI XMLA endpoint 部署模型时应选择的级别。
 
 - 为了获得最佳的开发体验，请选中“使用 Workspace 数据库”选项。这要求你拥有一个可用的 Analysis Services 实例，以便将 Workspace 数据库部署到其上。它可以是本地或远程的 SQL Server Analysis Services 实例，也可以是 Azure Analysis Services 实例。单击“确定”后，系统会提示你输入连接字符串，以连接要在其中创建 Workspace 数据库的 Analysis Services 实例。
 
