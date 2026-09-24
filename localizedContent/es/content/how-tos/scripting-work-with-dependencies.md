@@ -16,7 +16,7 @@ applies_to:
 El wrapper de TOM realiza el seguimiento de qué objetos hacen referencia a qué otros objetos mediante las propiedades `DependsOn` y `ReferencedBy`. Úsalas para analizar el impacto, encontrar objetos sin usar y comprender el linaje de DAX.
 
 > [!NOTE]
-> The `DependsOn` and `ReferencedBy` properties expose the same dependency information shown in the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) in Tabular Editor's UI.
+> Las propiedades `DependsOn` y `ReferencedBy` muestran la misma información de dependencias que se presenta en la vista [**Dependencias de DAX**](xref:creating-and-testing-dax#dax-dependencies) de la interfaz de usuario de Tabular Editor.
 
 ## Referencia rápida
 
