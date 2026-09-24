@@ -35,13 +35,13 @@ Tabular Editor 使用 [AMO 客户端库](https://learn.microsoft.com/en-us/analy
 
 ![连接对话框](~/content/assets/images/connect-dialog.png)
 
-### Status bar color
+### 状态栏颜色
 
-**Advanced Options** includes a **Status bar color** picker. The color you choose is remembered with the connection, and Tabular Editor paints the status bar with it whenever a model is open on that server.
+**高级选项**中包含一个 **状态栏颜色** 选择器。你选择的颜色会与该连接一同保存；只要在该服务器上打开模型，Tabular Editor 就会用该颜色为状态栏着色。
 
-No particular color means anything in itself; assigning one is what matters. Giving production a color you would not choose for anything else makes it obvious, at a glance and without reading the server name, which environment the window in front of you is connected to. Leave it on **Default** to keep the theme's own status bar.
+任何特定颜色本身都没有固定含义；重要的是分配一种颜色。为生产环境指定一种不会用于其他任何环境的颜色，这样一眼就能看出当前窗口连接的是哪个环境，无需查看服务器名称。将其保持为 **Default**，即可继续使用主题自带的状态栏。
 
-Closing the model restores the status bar to the active theme.
+关闭模型后，状态栏会恢复为当前主题的配色。
 
 ## 选择数据库
 
