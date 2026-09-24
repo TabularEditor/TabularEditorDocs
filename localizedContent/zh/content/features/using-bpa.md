@@ -53,7 +53,7 @@ Best Practice Analyzer 窗口会持续列出模型中所有 **有效规则**，�
 - **转到对象...**：选择此选项，或在列表中双击某个对象，会在主界面中定位到同一对象。
 - **忽略项/多项**：在列表中选择一个或多个对象并选择此选项，会向所选对象应用注释，指示 Best Practice Analyzer 之后忽略这些对象。如果你误将某个对象设为忽略，请在屏幕顶部切换“显示已忽略”按钮。这样你就能取消忽略之前忽略的对象。
 - **忽略规则**：如果你在列表中选择了一个或多个规则，此选项会在模型级别添加注释，指示始终忽略所选规则。同样，切换“显示已忽略”按钮也能取消忽略这些规则。
-- **生成修复脚本**：对于有简易修复的规则（即只需在对象上设置单个属性即可解决问题），将启用此选项。点击后，会把一段 C# Script 复制到你的剪贴板中。 This script can then be subsequently pasted into the [Advanced Scripting](xref:advanced-scripting) area of Tabular Editor, where you can review it before executing it to apply the fix.
+- **生成修复脚本**：对于有简易修复的规则（即只需在对象上设置单个属性即可解决问题），将启用此选项。点击后，会把一段 C# Script 复制到你的剪贴板中。随后，你可以将此脚本粘贴到 Tabular Editor 的[高级脚本](xref:advanced-scripting)区域，并在执行以应用修复之前先进行检查。
 - **应用修复**：如上所述，这个选项同样适用于有简易修复的规则。它不会将脚本复制到剪贴板，而是会立即执行它。
 
 ## 管理最佳实践规则
@@ -64,19 +64,19 @@ Best Practice Analyzer 窗口会持续列出模型中所有 **有效规则**，�
 
 “管理 BPA 规则”窗口包含两个列表：上方列表表示当前已加载的规则**集合**。在该列表中选择一个集合后，下方列表会显示此集合中定义的所有规则。
 
-The collections are:
+这些集合如下：
 
-| Collection                                  | Where its rules live                                                                                                                     | Editable                                 |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| **(Effective rules)**    | Not a store of its own; the merged, deduplicated set of every rule below, which is what actually runs against your model                 | 否                                        |
-| **Built-in Best Practices**                 | Shipped with Tabular Editor 3; a curated set maintained by the Tabular Editor team. See @built-in-bpa-rules | No, but individual rules can be disabled |
-| One entry per **external rule file or URL** | Wherever the file or URL points                                                                                                          | Depends on the source                    |
-| **Rules within the current model**          | An annotation on the model itself, so they travel with it                                                                                | 是的                                       |
-| **Rules for the local user**                | `%LocalAppData%\TabularEditor3\BPARules.json`; only you see them                                                                       | 是的                                       |
-| **Rules on the local machine**              | `%ProgramData%`; every user of this machine sees them                                                                                    | 是的                                       |
+| 集合                      | 规则所在位置                                                                                 | 可编辑        |
+| ----------------------- | -------------------------------------------------------------------------------------- | ---------- |
+| **（生效规则）**              | 它本身并不是一个独立的存储；而是将下方所有规则合并并去重后的集合，实际对你的模型运行的就是这组规则                                      | 否          |
+| **内置最佳实践**              | 随 Tabular Editor 3 提供；由 Tabular Editor 团队维护的一组精选规则。参见 @built-in-bpa-rules | 否，但可禁用单个规则 |
+| 每个**外部规则文件或 URL**对应一个条目 | 文件或 URL 指向的位置                                                                          | 取决于来源      |
+| **当前模型中的规则**            | 作为模型本身的一个注释存储，因此会随模型一起携带                                                               | 是的         |
+| **本地用户的规则**             | `%LocalAppData%\\TabularEditor3\\BPARules.json`；仅你自己可见                             | 是的         |
+| **本地计算机上的规则**           | `%ProgramData%`；此计算机上的每位用户都能看到这些规则                                                     | 是的         |
 
-The built-in collection is only listed while _Enable built-in best practice rules_ is on under @preferences. Its rule IDs are reserved: defining your own rule with one of them is refused.
+只有在 @preferences 中打开 _启用内置最佳实践规则_ 时，才会显示内置集合。其规则 ID 为保留项：如果你使用其中任何一个来定义自己的规则，系统将拒绝。
 
-Use **Enable All** and **Disable All** to switch a whole collection on or off without deleting anything.
+使用 **全部启用** 和 **全部禁用**，无需删除任何内容即可启用或禁用整个集合。
 
 ![BPA Manage Rules UI](~/content/assets/images/common/PBAOverviewManageRulesPopUp.png)
