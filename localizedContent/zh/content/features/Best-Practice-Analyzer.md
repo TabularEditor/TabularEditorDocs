@@ -19,52 +19,52 @@ applies_to:
 
 # Best Practice Analyzer
 
-The Best Practice Analyzer checks your model against a set of rules and lists every object that violates one. It runs in the background as you work, so the count of outstanding issues is always current, and it can fix many of the issues it finds for you.
+Best Practice Analyzer 会根据一组规则检查你的模型，并列出所有违反其中任一规则的对象。它会在你工作时在后台持续运行，因此未解决问题的数量始终保持最新，并且还能帮你修复它发现的许多问题。
 
-A rule is a condition written against the model's objects, plus a severity and a description. Rules cover the things that are easy to get wrong and expensive to discover later: calculated columns that should be pushed to the source, relationships on columns of mismatched data types, measures without a format string, objects left visible that should be hidden.
+规则由针对模型对象编写的条件、严重级别以及说明组成。规则涵盖那些很容易出错、而且往往要到后来才会代价高昂地发现的问题：应下推到源端的计算列、建立在数据类型不匹配列上的关系、没有格式字符串的度量值，以及本应隐藏却仍保持可见的对象。
 
-Press **F10**, or click the issue count in the main window, to open the Best Practice Analyzer. Background scanning can be turned off under **Tools > Preferences > Best Practice Analyzer** (**File > Preferences** in Tabular Editor 2).
+按 **F10**，或点击主窗口中的问题数量，即可打开 Best Practice Analyzer。可在 **工具 > 偏好 > Best Practice Analyzer** 中关闭后台扫描（Tabular Editor 2 中为 **文件 > 偏好**）。
 
-## Where to go next
+## 下一步
 
-| Page                                             | What it covers                                                                                                                                                                                                                                           |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| @using-bpa                          | Working with the results: the issue list, going to an object, ignoring an object or a rule, and generating or applying a fix script. Also the Manage BPA Rules window and the rule collections it lists. |
-| @built-in-bpa-rules                 | The curated rule set shipped with Tabular Editor 3, its categories, and how to turn individual rules off.                                                                                                                                |
-| @using-bpa-sample-rules-expressions | Writing your own rule expressions, with worked examples.                                                                                                                                                                                 |
+| 页面                                               | 涵盖内容                                                            |
+| ------------------------------------------------ | --------------------------------------------------------------- |
+| @using-bpa                          | 如何处理结果：问题列表、转到对象、忽略对象或规则，以及生成或应用修复脚本。还包括“管理 BPA 规则”窗口及其中列出的规则集。 |
+| @built-in-bpa-rules                 | Tabular Editor 3 随附的精选规则集、其类别，以及如何关闭单条规则。                       |
+| @using-bpa-sample-rules-expressions | 编写你自己的规则表达式，并提供详细示例。                                            |
 
-The rest of this page covers where rules come from and how to bring in rules that live outside the model.
+本页其余部分将说明规则的来源，以及如何引入存储在模型外部的规则。
 
-## Rule collections and precedence
+## 规则集和优先级
 
-Rules reach a model through _collections_, listed in the top half of the Manage BPA Rules window. @using-bpa describes each collection and where its rules are stored.
+规则通&#x8FC7;_&#x89C4;则&#x96C6;_&#x8FDB;入模型；这些规则集列在“管理 BPA 规则”窗口的上半部分。 @using-bpa 介绍了每个规则集及其规则的存储位置。
 
-If the same rule ID appears in more than one collection, precedence runs from the top of the list downwards: a rule defined within the model beats a rule with the same ID defined for the local machine. That's what lets you override a shared rule to account for a convention specific to one model.
+如果同一规则 ID 出现在多个规则集中，则优先级按列表自上而下生效：在模型内定义的规则，会优先于在本机上定义且具有相同 ID 的规则。这样你就可以覆盖共享规则，以适应某个模型特有的约定。
 
-Select **(Effective rules)** at the top of the list to see the rules that actually apply after precedence is resolved. Each rule shows which collection it came from, and a rule struck through is one that a higher-precedence collection has overridden.
+选择列表顶部的 **(生效规则)**，即可查看在解析完优先级后实际生效的规则。每条规则都会显示其来源的规则集；带删除线的规则表示已被优先级更高的规则集覆盖。
 
-## Adding a rule collection
+## 添加规则集
 
-Beyond the built-in, model, user and machine collections, you can attach rule files from elsewhere. Collections added this way take precedence over rules defined within the model, and if you add several you can move them up and down to set their order.
+除了内置、模型、用户和计算机规则集之外，你还可以附加来自其他位置的规则文件。以这种方式添加的规则集会优先于模型中定义的规则生效；如果添加了多个规则集，还可以上下移动它们以调整顺序。
 
-Click **Add...** in the Manage BPA Rules window and choose one of:
+在“管理 BPA 规则”窗口中点击**添加...**，然后选择以下一项：
 
-- **Create new Rule File** creates an empty `.json` file at a location you pick, ready for you to add rules to.
-- **Include local Rule File** attaches a `.json` file of rules you already have.
-- **Include Rule File from URL** attaches rules served over HTTP or HTTPS, for example the [standard BPA rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json) published by Microsoft. Collections loaded from a URL are read-only.
+- **新建规则文件**会在你指定的位置创建一个空的 `.json` 文件，方便你向其中添加规则。
+- **包含本地规则文件**会附加你已有的 `.json` 规则文件。
+- **从 URL 包含规则文件**会附加通过 HTTP 或 HTTPS 提供的规则文件，例如 Microsoft 发布的[标准 BPA 规则](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)。从 URL 加载的规则集是只读的。
 
-![The Add rule collection dialog, showing the Create new Rule File, Include local Rule File and Include Rule File from URL options](~/content/assets/images/bpa-add-rule-collection.png)
+![“添加规则集”对话框，显示“新建规则文件”“包含本地规则文件”和“从 URL 包含规则文件”选项](~/content/assets/images/bpa-add-rule-collection.png)
 
-For the two file options you can store the reference as a relative path, which is worth doing when the rule file lives in the same repository as the model. A relative reference only resolves when the model itself was loaded from disk, since a model loaded from a server has no working directory to resolve against. A file on a different drive or a network share has to be referenced absolutely.
+对于这两种文件选项，你可以将引用保存为相对路径；当规则文件与模型位于同一代码仓库时，建议这样做。只有当模型本身是从磁盘加载时，相对引用才能解析，因为从服务器加载的模型没有可用于解析的工作目录。位于其他驱动器或网络共享中的文件必须使用绝对路径引用。
 
-You can add, edit, clone and delete rules in any collection you have write access to. **Move to...** moves or copies the selected rule into another collection.
+你可以在任何有写入权限的规则集中添加、编辑、克隆和删除规则。\*\*移动到...\*\*会将所选规则移动或复制到另一个规则集中。
 
-## Placeholders in rule descriptions
+## 规则说明中的占位符
 
-A rule's description is shown as a tooltip against each object that violates it, so it's worth making it name the object it's talking about. Three placeholders are substituted when the description is displayed:
+规则说明会以工具提示的形式显示在每个违反该规则的对象上，因此最好在说明中直接点明所指的对象。显示说明时，会替换以下三个占位符：
 
-| Placeholder    | Expands to                                                       |
-| -------------- | ---------------------------------------------------------------- |
-| `%object%`     | A fully qualified DAX reference to the object, where one applies |
-| `%objectname%` | The name of the object                                           |
-| `%objecttype%` | The type of the object                                           |
+| 占位符            | 替换为                    |
+| -------------- | ---------------------- |
+| `%object%`     | 在适用的情况下，对象的完全限定 DAX 引用 |
+| `%objectname%` | 对象名称                   |
+| `%objecttype%` | 对象类型                   |
