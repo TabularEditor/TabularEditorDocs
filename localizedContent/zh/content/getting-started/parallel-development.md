@@ -57,7 +57,7 @@ Tabular Editor 的目标是简化这一过程：无论模型是 Analysis Service
 
 每个表示单个 TOM 对象的文件名，直接取自该对象的 `Name` 属性。“根”文件名为 **Database.json**，因此我们有时也会把这种基于文件夹的存储格式简称为 **Database.json**。
 
-Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**/ See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+Tabular Editor 也会采用同样的方式，将 [DAX 用户自定义函数](xref:udfs) 单独拆分出来，放在模型根目录的 `functions` 文件夹下。只要有不止一个人编写函数，就应尽快启用此选项；否则，每个函数都会保存在 **Database.json** 中。参见 [保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)。
 
 ## 使用“保存到文件夹”的优点
 
