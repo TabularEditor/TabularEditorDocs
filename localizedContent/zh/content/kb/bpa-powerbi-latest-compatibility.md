@@ -69,17 +69,17 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 ### 修复前
 
 ```
-Model Compatibility Level: 1500
-Current Maximum Level: 1706
+模型兼容级别：1500
+当前最大级别：1706
 ```
 
 ### 修复后
 
 ```
-Model Compatibility Level: 1706 (Latest)
+模型兼容级别：1706（最新）
 ```
 
-Access to newer capabilities such as [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), @user-context-calculated-columns (1705+) and String Indexing Behavior on a column (1706+).
+可以使用较新的功能，例如 [自定义日历](xref:calendars) (1701+)、[DAX 用户定义函数](xref:udfs) (1702+)、@user-context-calculated-columns (1705+)，以及列上的字符串索引行为 (1706+)。
 
 ## 兼容级别
 
