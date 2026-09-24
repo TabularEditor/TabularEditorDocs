@@ -36,7 +36,7 @@ Cuando un Report de Power BI Desktop contiene un Data model (es decir, se han ag
 > Los Reports de Power BI Desktop que usan una **conexión en vivo** a SSAS, Azure AS o a un Dataset en un Workspace de Power BI no contienen un Data model. Por tanto, estos Reports **no pueden** usarse con herramientas externas como Tabular Editor.
 
 > [!IMPORTANT]
-> Power BI Desktop reports that directly edits a **Direct Lake** or other Fabric model do not contain a data model. En su lugar, Tabular Editor abrirá el modelo directamente desde el servicio, que es básicamente lo mismo que hace Power BI Desktop.
+> Los Report de Power BI Desktop que editan directamente un modelo **Direct Lake** u otro modelo de Fabric no incluyen un Data model. En su lugar, Tabular Editor abrirá el modelo directamente desde el servicio, que es básicamente lo mismo que hace Power BI Desktop.
 
 Las herramientas externas pueden conectarse a la instancia de Analysis Services administrada por Power BI Desktop a través de un número de puerto específico asignado por Power BI Desktop. Cuando se inicia una herramienta directamente desde la cinta de opciones "Herramientas externas" de Power BI Desktop, este número de puerto se pasa a la herramienta externa como argumento de la línea de comandos. En el caso de Tabular Editor, esto hace que el Data model se cargue en Tabular Editor.
 
