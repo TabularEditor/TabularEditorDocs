@@ -13,7 +13,7 @@ applies_to:
 
 如果需要，Tabular Editor 可以在每次保存（连接到现有数据库时）或部署之前，自动为现有模型元数据保存一份备份。如果你没有使用版本控制系统，但仍需要将模型回退到之前的版本，这个功能就很有用。
 
-To enable this setting, go to **Tools > Preferences** (**File > Preferences** in Tabular Editor 2), enable the checkbox and choose a folder to place the metadata backups:
+要启用此设置，请前往 **工具 > 偏好**（在 Tabular Editor 2 中则为 **文件 > 偏好**），勾选复选框，然后选择一个用于存放元数据备份的文件夹：
 
 <img src="../assets/images/metadata-backup-01.png" width="300" />
 
