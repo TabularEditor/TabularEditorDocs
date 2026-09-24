@@ -121,25 +121,25 @@ TOM Explorer 中的所有对象都可以使用 Tabular Editor 进行复制和粘
 
 ## DAX 依赖项
 
-To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (**Shift+F12**). This opens the **DAX Dependencies** view, which displays the dependencies of the selected object. Double-click an object in the tree to navigate to it, or right-click for **Go to item**, **Copy as text** and **Copy as JSON**.
+要查看对象之间的 DAX 依赖项，请在 **TOM Explorer** 中选择一个对象，然后右键单击并选择 **显示依赖项**（**Shift+F12**）。这会打开 **DAX 依赖项** 视图，其中显示所选对象的依赖项。在树中双击对象即可跳转到该对象；也可以右键单击，选择 **转到项**、**复制为文本** 或 **复制为 JSON**。
 
 ![Dax 依赖项与 Tom Explorer](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
 
-The view shows one direction at a time. Choose which with the radio buttons:
+该视图一次只显示一个方向。使用单选按钮选择要显示的方向：
 
-| 选项                                         | Shows                                                                                                                                        |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Objects that depend on this**            | What would break if you changed or deleted the selected object                                                                               |
-| **Objects on which this depends**          | What the selected object reads from                                                                                                          |
-| **Relationships starting from this table** | The relationships leaving the selected table. With a column selected, this reads **Relationships starting from this column** |
+| 选项            | 显示                                |
+| ------------- | --------------------------------- |
+| **依赖于此对象的对象** | 如果更改或删除所选对象，哪些对象会失效               |
+| **此对象依赖的对象**  | 所选对象会从哪些对象中读取内容                   |
+| **从此表开始的关系**  | 从所选表出发的关系。选择列时，此项显示为 **从此列开始的关系** |
 
-Tick **Show inactive** to include inactive relationships.
+勾选 **显示非活动** 以纳入非活动关系。
 
-### Following the TOM Explorer
+### 跟随 TOM Explorer 选择
 
-Rather than invoking **Show dependencies** for each object in turn, tick **Track TOM Explorer** and the view follows whatever is selected in the tree. Ticking it shows the dependencies of the object that is _already_ selected straight away, rather than waiting for the next selection change.
+无需依次对每个对象都使用 **显示依赖项**，勾选 **跟踪 TOM Explorer** 后，视图就会跟随树中当前选中的内容。勾选后，会立即显示当&#x524D;_&#x5DF2;_&#x9009;中的对象的依赖项，而无需等到下一次选择更改后才显示。
 
-Tracking applies to a single selected object. Selecting several objects, or none, clears the view rather than showing a partial answer.
+跟踪仅适用于单个选定对象。如果同时选择多个对象，或未选择任何对象，视图会被清空，而不会显示不完整的结果。
 
 # 显示文件夹
 
