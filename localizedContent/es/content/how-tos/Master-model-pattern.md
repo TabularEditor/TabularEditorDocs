@@ -138,7 +138,7 @@ Para las medidas, hacemos lo mismo, pero de forma simplificada: solo quitamos la
 - La medida está oculta (o la tabla donde se encuentra la medida está oculta)
 - No se hace referencia a la medida, directa ni indirectamente, en ninguna expresión DAX de otros objetos visibles de la perspectiva
 
-Si trabajas en un equipo de desarrolladores en el modelo, ya deberías estar usando la funcionalidad ["Guardar en carpeta"](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Make sure to check the "Serialize perspectives per-object" option under **Tools > Preferences > File Formats > Save-to-folder** (**File > Preferences > Save to Folder** in Tabular Editor 2), to avoid getting heaps of merge conflicts on your perspective definitions.
+Si trabajas en un equipo de desarrolladores en el modelo, ya deberías estar usando la funcionalidad ["Guardar en carpeta"](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Asegúrate de activar la opción "Serialize perspectives per-object" en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** (**Archivo > Preferencias > Guardar en carpeta** en Tabular Editor 2) para evitar un montón de conflictos de fusión en las definiciones de tus perspectivas.
 
 ![image](~/content/assets/images/master-model-pattern-05.png)
 
@@ -160,7 +160,7 @@ Cuando agregues nuevas perspectivas de _usuario_ al modelo, recuerda añadir la 
 
 También puede haber situaciones en las que la misma medida deba tener expresiones o cadenas de formato ligeramente distintas entre las diferentes versiones del modelo. De nuevo, podemos usar anotaciones para proporcionar los metadatos por perspectiva de desarrollador y, luego, aplicar esos metadatos cuando generemos mediante scripting el modelo final.
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) script function. Sin embargo, para nuestro caso de uso es un poco excesivo, así que vamos a especificar directamente qué propiedades queremos guardar como anotaciones. Crea el siguiente script:
+La forma más sencilla de serializar como texto todas las propiedades de los objetos probablemente sea la función de script [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file). Sin embargo, para nuestro caso de uso es un poco excesivo, así que vamos a especificar directamente qué propiedades queremos guardar como anotaciones. Crea el siguiente script:
 
 ```csharp
 foreach(var m in Selected.Measures) { 
@@ -283,7 +283,7 @@ foreach(Table t in Model.Tables) {
 
 Ten en cuenta que también podríamos añadir cambios específicos adicionales del modelo directamente a este script si quisiéramos, pero el objetivo de este ejercicio era ver cómo podemos mantener varios modelos directamente desde Tabular Editor. El script anterior es el mismo, independientemente de la versión que queramos desplegar (salvo, por supuesto, la línea 1).
 
-Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](xref:command-line-options):
+Por último, podemos cargar nuestro archivo Model.bim, ejecutar el script y desplegar el modelo modificado de una sola vez usando la siguiente [sintaxis de línea de comandos](xref:command-line-options):
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ResellerModel.cs -D localhost AdventureWorksReseller -O -R
@@ -300,7 +300,7 @@ Esto supone que estás ejecutando el comando desde el directorio donde se encuen
 
 ## Procesamiento del modelo maestro
 
-Si tienes un servidor de procesamiento dedicado y existe un gran solapamiento de datos entre los modelos individuales, puede tener sentido procesar primero los datos en el modelo maestro antes de dividirlo. Así puedes evitar procesar los mismos datos varias veces en modelos individuales. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](#altering-partition-queries).** The recipe for this is outlined below:
+Si tienes un servidor de procesamiento dedicado y existe un gran solapamiento de datos entre los modelos individuales, puede tener sentido procesar primero los datos en el modelo maestro antes de dividirlo. Así puedes evitar procesar los mismos datos varias veces en modelos individuales. **No obstante, esto supone que no estás procesando ninguna tabla en la que la consulta de partición haya cambiado entre versiones, como se muestra en [esta sección](#altering-partition-queries).** A continuación se describe el procedimiento:
 
 1. (Opcional, en caso de que haya cambios en los metadatos) Implementa tu modelo maestro en tu servidor de procesamiento
 2. Realiza el procesamiento que necesites en tu modelo maestro (no proceses las tablas que tengan consultas de partición específicas de la versión).
