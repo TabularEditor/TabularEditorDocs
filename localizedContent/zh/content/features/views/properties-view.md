@@ -36,26 +36,26 @@ Tabular Editor 中的属性视图可让你检查并修改表格模型中任何�
 > [!TIP]
 > 你可以多选对象，以查看它们共有的属性，并进行批量编辑。例如，这对于设置格式字符串很有用。
 
-## Toolbar
+## 工具栏
 
-The toolbar at the top of the Properties view contains the following buttons:
+属性视图顶部的工具栏包含以下按钮：
 
-- **Categorized**: Groups the properties into categories such as _Basic_, _Metadata_ and _Options_.
-- **Alphabetical**: Lists all properties in a single, alphabetically sorted list.
-- **Show changes**: Hides all properties that have not changed since the model was last saved, so that only the properties with [unsaved changes](xref:unsaved-changes) remain. While the filter is active, the title of the view reads **Properties (Changed)**.
-- **Property descriptions**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property.
-- **Search box**: Filters the list of properties by name.
+- **分类**：将属性按 _基本_、_元数据_ 和 _选项_ 等类别分组。
+- **按字母顺序**：在一个按字母顺序排序的列表中显示所有属性。
+- **显示更改**：隐藏自上次保存模型以来未更改的所有属性，这样就只会保留有[未保存的更改](xref:unsaved-changes)的属性。启用该筛选器时，视图标题将显示为 **属性（已更改）**。
+- **属性说明**：显示或隐藏视图底部的说明窗格，用于解释当前选中的属性。
+- **搜索框**：按名称筛选属性列表。
 
-## Unsaved changes
+## 未保存的更改
 
-Properties that differ from the last saved version of the model are drawn with a light orange row background. When several objects are selected, a row is marked if any of the selected objects changed that property.
+与模型上次保存版本不同的属性，其所在行会以浅橙色背景显示。选择多个对象时，如果所选对象中有任意一个更改了该属性，对应行就会被标记。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/unsaved-changes/revert-property.png" alt="Properties view with unsaved changes" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A measure with unsaved changes to its Description and Format String. The <strong>Revert</strong> option puts a single property back to its saved value.</figcaption>
+  <img class="noscale" src="~/content/assets/images/unsaved-changes/revert-property.png" alt="Properties view with unsaved changes" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong> 一个度量值的“说明”和“格式字符串”存在未保存的更改。<strong>还原</strong> 选项可将单个属性恢复为其已保存的值。</figcaption>
 </figure>
 
-Right-click a marked row and choose **Revert** to put that property back to the value it had at the last save, without touching any other unsaved changes. The revert is a single step on the undo stack, so **Ctrl+Z** brings the change back. See @unsaved-changes for details, including how to revert whole objects from the TOM Explorer, and how to turn the indicators off under **Tools > Preferences**.
+右键单击已标记的行并选择 **还原**，即可将该属性恢复为上次保存时的值，而不会影响任何其他未保存的更改。该还原操作在撤销堆栈中只占一步，因此按 **Ctrl+Z** 即可撤销还原并恢复更改。详见 @unsaved-changes，了解如何在 TOM Explorer 中还原整个对象，以及如何在 **工具 > 偏好** 中关闭这些指示标记。
 
-## Docking
+## 停靠
 
 默认情况下，属性视图位于右下角；你也可以按键盘上的 F4 打开它。你还可以将其停靠到主窗口的任意一侧，或将其取消停靠为独立窗口。
