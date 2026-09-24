@@ -7,7 +7,7 @@ Esta sección contiene materiales de referencia para Tabular Editor.
 ### Descargas y versiones
 
 - @downloads: enlaces de descarga y paquetes de instalación para Tabular Editor 3
-- @system-requirements - Supported Windows versions, runtimes, architectures and package formats
+- @system-requirements - Versiones compatibles de Windows, entornos de ejecución, arquitecturas y formatos de paquete
 - @release-history: historial completo de versiones con enlaces de descarga
 
 ### Referencia técnica
@@ -18,8 +18,8 @@ Esta sección contiene materiales de referencia para Tabular Editor.
 - @shortcuts3: referencia de atajos de teclado para Tabular Editor 3
 - @shortcuts2: referencia de atajos de teclado para Tabular Editor 2
 - @user-options: archivo de opciones de usuario del modelo tabular (.tmuo)
-- @supported-files - File formats Tabular Editor can open and save
-- @accessibility - Color blindness mode, keyboard access, scaling and themes
+- @supported-files - Formatos de archivo que Tabular Editor puede abrir y guardar
+- @accessibility - Modo para personas con daltonismo, acceso mediante teclado, escalado y temas
 
 ### Desarrollo y planificación
 
