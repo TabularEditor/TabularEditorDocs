@@ -86,9 +86,9 @@ En determinados momentos, durante la creación de DAX y el desarrollo del Data m
 
 Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Tabular Editor ejecuta una consulta DAX sobre el modelo para devolver solo un pequeño número de registros, suficiente para completar la vista actual, y luego va cargando más filas a medida que te desplazas.
 
-Each column header carries a sort and a filter, the grid's right-click menu can open a calculated column's expression or recalculate the table, and **Show actual DAX query...** hands you the query behind the preview as a new DAX query document. Selecting a column in the TOM Explorer scrolls the preview to it.
+Cada encabezado de columna incluye opciones de ordenación y filtrado; el menú contextual de la cuadrícula puede abrir la expresión de una columna calculada o recalcular la tabla, y **Mostrar la consulta DAX real...** muestra la consulta en la que se basa la vista previa como un nuevo documento de consulta DAX. Al seleccionar una columna en el Explorador TOM, la vista previa se desplaza hasta ella.
 
-See @table-preview for the toolbar, the right-click menu, how far you can scroll in each storage mode and the preferences that govern column order and the filter dropdown.
+Consulta @table-preview para ver la barra de herramientas y el menú contextual, saber hasta dónde puedes desplazarte en cada modo de almacenamiento y conocer las preferencias que controlan el orden de las columnas y el desplegable del filtro.
 
 # Pivot Grid
 
