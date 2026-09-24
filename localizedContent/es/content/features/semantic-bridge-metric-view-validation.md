@@ -46,75 +46,75 @@ La validación es el proceso de evaluar cada regla de validación de un conjunto
 Una regla de validación se define para aplicarse a un único tipo de objeto de Metric View; por ejemplo, un `Join` o un `Measure`.
 Una vez completada la validación, se devuelven al usuario todos los diagnósticos de los incumplimientos de reglas para que actúe en consecuencia.
 
-## Built-in diagnostic codes
+## Códigos de diagnóstico integrados
 
-The first and third phases raise their own diagnostics, with codes the Semantic Bridge defines. They reach you the same way your own rules' diagnostics do: each carries a `Severity`, a `Code`, a `Path`, a `Context` and a `Message`.
+La primera y la tercera fase generan sus propios diagnósticos, con códigos definidos por Semantic Bridge. Te llegan igual que los diagnósticos de tus propias reglas: cada uno incluye `Severity`, `Code`, `Path`, `Context` y `Mensaje`.
 
-Severity is one of `Error`, `Warning` or `Information`. An `Error` stops the operation. A `Warning` means the Bridge carried on having made a decision for you, and is telling you what it decided.
+La gravedad es `Error`, `Warning` o `Information`. Un `Error` detiene la operación. Un `Warning` significa que el Bridge siguió adelante tras tomar una decisión por ti, y te indica cuál fue.
 
-### Reading the YAML
+### Lectura del YAML
 
-| Code                                                               | Severity    | Raised when                                                                                                                                                                   |
-| ------------------------------------------------------------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `METRIC_VIEW_FIELDS_AND_DIMENSIONS_BOTH_PRESENT`                   | Error       | The view declares both `fields:` and `dimensions:` at the top level. They are aliases for one another; use one                                                |
-| `METRIC_VIEW_DUPLICATE_NAME`                                       | Error       | Two objects in the same collection claim the same name. Matching is case-insensitive                                                                          |
-| `METRIC_VIEW_DEPRECATED_DIMENSIONS_KEYWORD`                        | Advertencia | A view at YAML spec 1.1 or later uses `dimensions:`. `fields:` is the canonical form; both keep working. Raised once per file |
-| `METRIC_VIEW_FIELDS_KEYWORD_PRE_V11`                               | Advertencia | A view below spec 1.1 uses `fields:`. `dimensions:` is canonical at that version; both are accepted                                           |
-| `MISSING_VERSION`                                                  | Advertencia | The YAML has no `version` property. A default is assumed                                                                                                      |
-| `UNKNOWN_JOIN_CARDINALITY`                                         | Advertencia | A join declares a cardinality other than `many_to_one` or `one_to_many`. `many_to_one` is assumed                                                             |
-| `MISSING_FORMAT_TYPE`, `UNKNOWN_FORMAT_TYPE`                       | Advertencia | A format has no type, or one the Bridge does not recognize. The format is ignored                                                                             |
-| `MISSING_DATE_FORMAT`, `UNKNOWN_DATE_FORMAT`                       | Advertencia | Defaults to `year_month_day`                                                                                                                                                  |
-| `MISSING_TIME_FORMAT`, `UNKNOWN_TIME_FORMAT`                       | Advertencia | Defaults to `locale_hour_minute_second`                                                                                                                                       |
-| `MISSING_DECIMAL_TYPE`, `UNKNOWN_DECIMAL_TYPE`                     | Advertencia | Defaults to `all`                                                                                                                                                             |
-| `MISSING_SEMIADDITIVE`, `UNKNOWN_SEMIADDITIVE`                     | Advertencia | Defaults to `Last`                                                                                                                                                            |
-| `MISSING_MATERIALIZATION_MODE`, `UNKNOWN_MATERIALIZATION_MODE`     | Advertencia | Defaults to `relaxed`                                                                                                                                                         |
-| `MISSING_MATERIALIZED_VIEW_TYPE`, `UNKNOWN_MATERIALIZED_VIEW_TYPE` | Advertencia | Defaults to `unaggregated`                                                                                                                                                    |
-| `VERSION_MISMATCH`                                                 | Advertencia | The declared version does not match what was found                                                                                                                            |
+| Código                                                             | Gravedad    | Se genera cuando                                                                                                                                                                                                |
+| ------------------------------------------------------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `METRIC_VIEW_FIELDS_AND_DIMENSIONS_BOTH_PRESENT`                   | Error       | La vista declara tanto `fields:` como `dimensions:` en el nivel superior. Son alias entre sí; usa uno solo                                                                                      |
+| `METRIC_VIEW_DUPLICATE_NAME`                                       | Error       | Dos objetos de la misma colección declaran el mismo nombre. La coincidencia no distingue entre mayúsculas y minúsculas                                                                          |
+| `METRIC_VIEW_DEPRECATED_DIMENSIONS_KEYWORD`                        | Advertencia | Una vista con la especificación YAML 1.1 o posterior usa `dimensions:`. `fields:` es la forma canónica; ambas siguen funcionando. Se genera una vez por archivo |
+| `METRIC_VIEW_FIELDS_KEYWORD_PRE_V11`                               | Advertencia | Una vista con una especificación anterior a la versión 1.1 usa `fields:`. `dimensions:` es la forma canónica en esa versión; se aceptan ambas                                   |
+| `MISSING_VERSION`                                                  | Advertencia | El YAML no incluye la propiedad `version`. Se asume un valor predeterminado                                                                                                                     |
+| `UNKNOWN_JOIN_CARDINALITY`                                         | Advertencia | Un join declara una cardinalidad distinta de `many_to_one` o `one_to_many`. Se asume `many_to_one`                                                                                              |
+| `MISSING_FORMAT_TYPE`, `UNKNOWN_FORMAT_TYPE`                       | Advertencia | Un formato no tiene tipo, o tiene uno que el Bridge no reconoce. Se ignora el formato                                                                                                           |
+| `MISSING_DATE_FORMAT`, `UNKNOWN_DATE_FORMAT`                       | Advertencia | El valor predeterminado es `year_month_day`                                                                                                                                                                     |
+| `MISSING_TIME_FORMAT`, `UNKNOWN_TIME_FORMAT`                       | Advertencia | El valor predeterminado es `locale_hour_minute_second`                                                                                                                                                          |
+| `MISSING_DECIMAL_TYPE`, `UNKNOWN_DECIMAL_TYPE`                     | Advertencia | El valor predeterminado es `all`                                                                                                                                                                                |
+| `MISSING_SEMIADDITIVE`, `UNKNOWN_SEMIADDITIVE`                     | Advertencia | El valor predeterminado es `Last`                                                                                                                                                                               |
+| `MISSING_MATERIALIZATION_MODE`, `UNKNOWN_MATERIALIZATION_MODE`     | Advertencia | El valor predeterminado es `relaxed`                                                                                                                                                                            |
+| `MISSING_MATERIALIZED_VIEW_TYPE`, `UNKNOWN_MATERIALIZED_VIEW_TYPE` | Advertencia | El valor predeterminado es `unaggregated`                                                                                                                                                                       |
+| `VERSION_MISMATCH`                                                 | Advertencia | La versión declarada no coincide con la encontrada                                                                                                                                                              |
 
-### Mapping the Metric View
+### Mapeo de la Metric View
 
-Every code in this group is a `Warning` except where noted. The object is still created, but something about it did not survive intact.
+Todos los códigos de este grupo son `Warning`, salvo que se indique lo contrario. El objeto se sigue creando, pero algo en él no se conserva intacto.
 
-| Code                             | Raised when                                                                                                                                                                                                        |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `JOIN_ON_EMPTY`                  | A join has no `on` clause. The dimension and its source are created, but no foreign-key / primary-key pair is wired                                                                                |
-| `JOIN_ON_UNRECOGNIZED`           | A join's `on` clause is not a recognized equality between an upstream column and a dimension column. Again, no key pair                                                                            |
-| `JOIN_ON_NO_SOURCE_SIDE`         | A join's `on` clause pairs no upstream column. Again, no key pair                                                                                                                                  |
-| `ONE_TO_MANY_JOIN_UNTRANSLATED`  | A join declares `cardinality: one_to_many`, which the translator does not model. _The relationship is skipped_, so measures referencing its columns may be wrong or empty; review these by hand    |
-| `DUPLICATE_JOIN_DIMENSION`       | A join would create a dimension whose name collides with an existing one. The duplicate is skipped. Join names must be unique across the view                                      |
-| `UNRESOLVED_DIMENSION_REFERENCE` | A reference targets a dimension that is not declared as a join. A placeholder derived field is emitted, preserving the original reference                                                          |
-| `STRUCT_REFERENCE_UNSUPPORTED`   | A dimension references a whole-row or nested struct value, which has no Tabular column equivalent. The column is emitted but will not resolve at refresh                                           |
-| `FORMAT_TRANSLATION_LOSSY`       | A Databricks format spec cannot be expressed exactly as a Tabular format string                                                                                                                                    |
-| `FIELD_COLLISION_RENAME`         | _Information._ A generated field name collided with a user-declared dimension, so the field was renamed. It stays in the model and still backs any relationship that referenced it |
-| `MEASURE_REF_OUT_OF_CONTEXT`     | A `MEASURE(...)` reference appears in an expression that is not a measure                                                                                                                                          |
-| `UNRESOLVED_MEASURE_REFERENCE`   | A `MEASURE(...)` reference names no declared measure. Falls back to the verbatim source                                                                                                            |
-| `FIELD_CONFIGURATION_UNEXPECTED` | A field had a configuration the analyzer could not classify, and was imported as a derived fact field for safety. Verify the result                                                                |
+| Código                           | Se genera cuando                                                                                                                                                                                                                                                           |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `JOIN_ON_EMPTY`                  | Un join no tiene una cláusula `on`. La dimensión y su origen se crean, pero no se enlaza ningún par de clave foránea / clave primaria                                                                                                                      |
+| `JOIN_ON_UNRECOGNIZED`           | La cláusula `on` de un join no es una igualdad reconocida entre una columna aguas arriba y una columna de la dimensión. De nuevo, no hay ningún par de claves                                                                                              |
+| `JOIN_ON_NO_SOURCE_SIDE`         | La cláusula `on` de un join no empareja ninguna columna aguas arriba. De nuevo, no hay ningún par de claves                                                                                                                                                |
+| `ONE_TO_MANY_JOIN_UNTRANSLATED`  | Un join declara `cardinality: one_to_many`, que el traductor no modela. _La relación se omite_, por lo que las medidas que hacen referencia a sus columnas pueden ser incorrectas o estar vacías; revísalas manualmente                                    |
+| `DUPLICATE_JOIN_DIMENSION`       | Un join crearía una dimensión cuyo nombre entra en conflicto con el de una ya existente. El duplicado se omite. Los nombres de los joins deben ser únicos en toda la vista                                                                 |
+| `UNRESOLVED_DIMENSION_REFERENCE` | Una referencia apunta a una dimensión que no está declarada como un join. Se genera un campo derivado provisional que conserva la referencia original                                                                                                      |
+| `STRUCT_REFERENCE_UNSUPPORTED`   | Una dimensión hace referencia a un valor de fila completa o a una `struct` anidada, que no tiene un equivalente como columna en Tabular. La columna se genera, pero no se resolverá al actualizar                                                          |
+| `FORMAT_TRANSLATION_LOSSY`       | Una especificación de formato de Databricks no puede expresarse exactamente como una cadena de formato de Tabular                                                                                                                                                          |
+| `FIELD_COLLISION_RENAME`         | _Información._ Un nombre de campo generado entró en conflicto con una dimensión declarada por el usuario, por lo que se cambió el nombre del campo. Permanece en el modelo y sigue respaldando cualquier relación que haga referencia a él |
+| `MEASURE_REF_OUT_OF_CONTEXT`     | Una referencia a `MEASURE(...)` aparece en una expresión que no es una medida                                                                                                                                                                                              |
+| `UNRESOLVED_MEASURE_REFERENCE`   | Una referencia a `MEASURE(...)` no corresponde a ninguna medida declarada. Recurre a la fuente literal                                                                                                                                                     |
+| `FIELD_CONFIGURATION_UNEXPECTED` | Un campo tenía una configuración que el analizador no pudo clasificar y, por seguridad, se importó como un campo de hechos derivado. Verifica el resultado                                                                                                 |
 
-### Expression diagnostics, by object kind
+### Diagnósticos de expresiones por tipo de objeto
 
-Expression problems report under their own code per object kind, so you can tell at a glance which kind of object failed:
+Los problemas de expresión aparecen en el Report bajo su propio código según el tipo de objeto, para que puedas ver de un vistazo qué tipo de objeto falló:
 
-| Kind   | Could not be translated           | Could not be parsed              |
+| Tipo   | No se pudo traducir               | No se pudo analizar              |
 | ------ | --------------------------------- | -------------------------------- |
 | Campo  | `FIELD_EXPRESSION_UNTRANSLATED`   | `FIELD_EXPRESSION_PARSE_ERROR`   |
 | Medida | `MEASURE_EXPRESSION_UNTRANSLATED` | `MEASURE_EXPRESSION_PARSE_ERROR` |
-| Join   | `JOIN_EXPRESSION_UNTRANSLATED`    | `JOIN_EXPRESSION_PARSE_ERROR`    |
+| Unión  | `JOIN_EXPRESSION_UNTRANSLATED`    | `JOIN_EXPRESSION_PARSE_ERROR`    |
 
-An _untranslated_ expression was understood but uses a construct with no DAX equivalent; the original is preserved as a comment. A _parse error_ means the expression could not be read at all, and the diagnostic's `Context` carries the parser's own message.
+Se interpretó una expresión _sin traducir_, pero usa una construcción sin equivalente en DAX; el original se conserva como comentario. Un _error de análisis_ significa que no se pudo leer la expresión en absoluto y que el `Context` del diagnóstico contiene los propios mensajes del analizador.
 
-### Emitting to Tabular
+### Salida a Tabular
 
-| Code                               | Raised when                                                                                                                               |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `REFERENCE_FIELD_INVALID_SOURCE`   | A reference field points at a field id that is missing or is not a source field. A placeholder column is emitted          |
-| `DERIVED_FIELD_UNTRANSLATED`       | A derived field's expression could not be translated to DAX. The original is preserved as a comment                       |
-| `DERIVED_FIELD_NO_EXPRESSION`      | A derived field has no expression                                                                                                         |
-| `MEASURE_UNTRANSLATED`             | A measure's expression could not be translated. The original is preserved as a comment                                    |
-| `CALCULATED_MEASURE_NO_EXPRESSION` | A calculated measure has no source expression. A placeholder body is emitted                                              |
-| `MEASURE_UNRESOLVED_AT_EMIT`       | A measure references a measure that has not been emitted. Falls back to the verbatim source                               |
-| `TABLE_UNRESOLVED_AT_EMIT`         | A measure references a table that has not been emitted. Falls back to the verbatim source                                 |
-| `COLUMN_UNRESOLVED_AT_EMIT`        | A measure references a field that has not been emitted as a column. Falls back to the verbatim source                     |
-| `MEASURE_WINDOW_UNSUPPORTED`       | A measure uses an unsupported window specification. It is left inert, with the original definition preserved as a comment |
+| Código                             | Se produce cuando                                                                                                                                                 |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `REFERENCE_FIELD_INVALID_SOURCE`   | Un campo de referencia apunta a un identificador de campo que falta o que no es un campo de origen. Se genera una columna de marcador de posición |
+| `DERIVED_FIELD_UNTRANSLATED`       | La expresión de un campo derivado no se pudo traducir a DAX. El original se conserva como comentario                                              |
+| `DERIVED_FIELD_NO_EXPRESSION`      | Un campo derivado no tiene expresión                                                                                                                              |
+| `MEASURE_UNTRANSLATED`             | La expresión de una medida no se pudo traducir. El original se conserva como comentario                                                           |
+| `CALCULATED_MEASURE_NO_EXPRESSION` | Una medida calculada no tiene expresión de origen. Se genera un cuerpo de marcador de posición                                                    |
+| `MEASURE_UNRESOLVED_AT_EMIT`       | Una medida hace referencia a otra medida que no se ha emitido. Se usa el texto de origen tal cual                                                 |
+| `TABLE_UNRESOLVED_AT_EMIT`         | Una medida hace referencia a una tabla que no se ha emitido. Se recurre al texto de origen literal                                                |
+| `COLUMN_UNRESOLVED_AT_EMIT`        | Una medida hace referencia a un campo que no se ha generado como columna. Se recurre al texto de origen literal                                   |
+| `MEASURE_WINDOW_UNSUPPORTED`       | Una medida usa una especificación de ventana no admitida. Se deja inerte, y la definición original se conserva como comentario                    |
 
 ## Anatomía de una regla de validación
 
