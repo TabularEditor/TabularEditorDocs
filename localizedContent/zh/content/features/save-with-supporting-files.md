@@ -42,16 +42,16 @@ Database 的 `Name` 属性也会同步到 .platform 元数据文件中的 `displ
 
 <a name="power-bi-desktop-authored-pbip-projects"></a>
 
-### Power BI Desktop authored PBIP projects
+### 在 Power BI Desktop 中创作的 PBIP 项目
 
-The rules above describe a model whose metadata carries a name and a description. A [Power BI Project (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) semantic model authored by Power BI Desktop carries neither: in those projects the item name and description live only in the `.platform` file.
+上述规则描述的是一种元数据包含名称和说明的模型。由 Power BI Desktop 创建的 [Power BI Project (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) 语义模型，其元数据不包含这两项：在这些项目中，项名称和说明仅保存在 `.platform` 文件中。
 
-Tabular Editor leaves the existing `displayName` and `description` in `.platform` as they are and names a new folder after the item, instead of creating a folder called `.SemanticModel`
+Tabular Editor 会将 `.platform` 中现有的 `displayName` 和 `description` 原样保留，并以该项名称创建一个新文件夹，而不是创建名为 `.SemanticModel` 的文件夹
 
 > [!IMPORTANT]
-> Tabular Editor versions before 3.27.0 renamed the item and cleared its description in the Fabric workspace on the next Git sync.
+> Tabular Editor 3.27.0 之前的版本会在下一次 Git 同步时，在 Fabric Workspace 中重命名该项并清空其说明。
 
-To let Tabular Editor control the name and the description of the item, set the `Name` and `Description` properties on the Database object as described above. Once the metadata carries them, Tabular Editor synchronizes them to `.platform` on every save.
+若要让 Tabular Editor 控制该项的名称和说明，请按上述说明在 Database 对象上设置 `Name` 和 `Description` 属性。一旦元数据中包含这些信息，Tabular Editor 就会在每次保存时将其同步到 `.platform`。
 
 ### 包含的文件
 
