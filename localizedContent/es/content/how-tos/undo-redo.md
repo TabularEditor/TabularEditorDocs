@@ -13,32 +13,32 @@ applies_to:
 
 # Compatibilidad con Deshacer/Rehacer
 
-Any change you make in Tabular Editor can be undone with **Ctrl+Z** and redone with **Ctrl+Y**. There's no limit to how many operations you can undo, but the stack is reset when you load a different model, whether from a file or from a database.
+Cualquier cambio que hagas en Tabular Editor se puede deshacer con **Ctrl+Z** y rehacer con **Ctrl+Y**. No hay límite en la cantidad de operaciones que puedes deshacer, pero la pila se restablece cuando cargas un modelo diferente, ya sea desde un archivo o desde una base de datos.
 
-An operation that touches many objects undoes as one step. Dragging a display folder full of measures to a new parent, renaming a batch of objects, or applying a Best Practice Analyzer fix script each undo in a single **Ctrl+Z**.
+Una operación que afecta a muchos objetos se deshace en un solo paso. Arrastrar una carpeta de visualización llena de medidas a un nuevo elemento padre, cambiar el nombre en lote de varios objetos o aplicar un script de corrección de Best Practice Analyzer; cada una de estas acciones se deshace con un solo **Ctrl+Z**.
 
 ## Eliminar objetos
 
-Deleting an object also removes what depended on it. For a column, that means the relationships it takes part in, the hierarchy levels built on it, and its translations and perspective memberships. In Tabular Editor 3 it's also dropped from any calendars and variations that used it, and a _Sort by column_ pointing at it is cleared.
+Al eliminar un objeto, también se elimina todo lo que dependía de él. En el caso de una columna, eso incluye las relaciones en las que participa, los niveles de jerarquía creados sobre ella y sus traducciones, así como las perspectivas a las que pertenece. En Tabular Editor 3, también se quita de los calendarios y las variaciones que la usaban, y se borra cualquier configuración de _Ordenar por columna_ que apunte a ella.
 
-Undo restores the object _and_ everything that was removed alongside it, as one step.
+Deshacer restaura el objeto _y_ todo lo que se eliminó junto con él, en un solo paso.
 
-Tabular Editor warns you before a delete that has consequences. Deleting a single object that other objects reference tells you so and asks you to confirm, naming what will happen:
+Tabular Editor te avisa antes de eliminar algo que tenga consecuencias. Si eliminas un único objeto al que hacen referencia otros objetos, se te informa y se te pide confirmación, indicando lo que ocurrirá:
 
-- The object is referenced by other objects through DAX expressions, so those expressions will stop working.
-- The column is used in one or more hierarchies, so the corresponding levels will be deleted.
-- The column is used in one or more relationships, so those relationships will be removed.
-- In Tabular Editor 3, the column is used in one or more calendars, so it will be removed from them.
+- Otros objetos hacen referencia al objeto mediante expresiones DAX, por lo que esas expresiones dejarán de funcionar.
+- La columna se usa en una o varias jerarquías, por lo que se eliminarán los niveles correspondientes.
+- La columna se usa en una o varias relaciones, por lo que esas relaciones se eliminarán.
+- En Tabular Editor 3, la columna se usa en uno o varios calendarios, por lo que se quitará de ellos.
 
-Deleting several objects at once always asks for confirmation, though it doesn't itemise which object raises which concern.
+Al eliminar varios objetos a la vez, siempre se pide confirmación, aunque no se detalla qué objeto origina cada advertencia.
 
-A single object that nothing depends on is deleted without a prompt, on the grounds that undo is one keystroke away. If you would rather be asked every time, tick **Always show delete warnings** under **Tools > Preferences > TOM Explorer > Delete** in Tabular Editor 3.
+Un único objeto del que no depende nada se elimina sin confirmación, porque deshacer está a una sola tecla de distancia. Si prefieres que se te pregunte siempre, marca **Mostrar siempre advertencias al eliminar** en **Herramientas > Preferencias > Explorador TOM > Eliminar** en Tabular Editor 3.
 
 > [!NOTE]
-> Deleting an object doesn't rewrite the DAX that referenced it. The dependent expressions keep the now-dangling reference and are reported as errors in the @messages-view. This is different from renaming, where [formula fix-up](xref:formula-fix-up-dependencies) updates the referencing expressions for you.
+> Eliminar un objeto no reescribe el DAX que hacía referencia a él. Las expresiones dependientes conservan la referencia, que ahora queda huérfana, y se reportan como errores en el Report @messages-view. Esto es distinto de cambiar el nombre: en ese caso, [la corrección de fórmulas](xref:formula-fix-up-dependencies) actualiza por ti las expresiones que hacen referencia al objeto.
 
-## Undo and unsaved changes
+## Deshacer y cambios no guardados
 
-In Tabular Editor 3, undo and the unsaved-change indicators work against the same reference point. Undoing back to the state the model was last saved in clears every indicator; redoing brings them back. Undoing _past_ the last save point makes indicators reappear for the objects that were rolled back.
+En Tabular Editor 3, deshacer y los indicadores de cambios no guardados usan el mismo punto de referencia. Deshacer hasta volver al estado en que se guardó el modelo por última vez borra todos los indicadores; rehacer hace que vuelvan a aparecer. Deshacer _más allá_ del último punto de guardado hace que reaparezcan los indicadores de los objetos que se revirtieron.
 
-**Revert** is the more direct tool when you want to discard a specific change rather than walk the undo stack back to it. It puts a single property, an object, a table or the whole model back to its last saved state in one undoable step, leaving every other unsaved edit alone. See @unsaved-changes.
+**Revert** es la herramienta más directa cuando quieres descartar un cambio concreto, en lugar de retroceder por la pila de deshacer hasta llegar a él. Restaura una sola propiedad, un objeto, una tabla o todo el modelo a su último estado guardado en un único paso reversible, sin afectar a ninguna otra edición no guardada. Consulta @unsaved-changes.
