@@ -60,8 +60,8 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 - Databricks\*
 - Fabric Lakehouse
 - Fabric Warehouse
-- Fabric SQL Database
-- Fabric Mirrored Database
+- Fabric SQL 数据库
+- Fabric 镜像数据库
 
 \*=这些数据源仅在 Power BI Data model 中作为隐式数据源受到支持。它们在 SSAS / Azure AS 中不可用。
 
@@ -74,22 +74,22 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 如果你希望 Analysis Services 在连接时使用不同的凭据，可以在导入表之后，通过编辑 Tabular Object Model 中的数据源属性来指定。
 
-## Connecting to a data source
+## 连接到数据源
 
-Each source type has its own connection dialog, and the authenticators on offer differ between them. The choice matters beyond the first connection, because some authenticators need a person at the keyboard and so cannot be used for a scheduled refresh.
+每种数据源类型都有自己的连接对话框，可用的身份验证方法也各不相同。这种选择不仅影响首次连接，因为某些身份验证方法需要人工交互，因此无法用于计划刷新。
 
-See @connectivity for the full list, and the page for your source:
+完整列表请参阅 @connectivity，并查看相应数据源的页面：
 
-- @connect-sql-server, covering Azure SQL and Synapse
-- @connect-snowflake, including key pair authentication for unattended work
+- @connect-sql-server，涵盖 Azure SQL 和 Synapse
+- @connect-snowflake，包括适用于无人值守场景的密钥对身份验证
 - @connect-databricks
 - @connect-oracle
-- @connect-odbc, which is also how PostgreSQL, MySQL, MariaDB and IBM Db2 are reached
+- @connect-odbc，也可用于连接 PostgreSQL、MySQL、MariaDB 和 IBM Db2
 - @connect-oledb
 - @connect-onelake
 - @connect-dataflows
 
-Credentials are stored per user and per model in the [user options](xref:user-options) file, encrypted with your Windows account key, and never become part of the model metadata.
+凭据按用户和模型分别存储在 [用户选项](xref:user-options) 文件中，使用你的 Windows 帐户密钥加密，且不会写入模型元数据。
 
 ## 选择要导入的对象
 
@@ -124,10 +124,10 @@ Credentials are stored per user and per model in the [user options](xref:user-op
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
-Columns are created in the order they appear in the source table. Importing the same table twice therefore produces the same column order both times.
+列会按照它们在源表中出现的顺序创建。因此，两次导入同一个表都会得到相同的列顺序。
 
 > [!NOTE]
-> Creating Import tables from a **Fabric Lakehouse** or **Fabric Warehouse** reads the table's schema through the SQL analytics endpoint carried on the data source. Where no endpoint can be determined and none is given in the import settings, Tabular Editor reports an error naming what it needs: the SQL endpoint as the server, or a workspace id and item id. It does not create a table with no columns.
+> 从 **Fabric Lakehouse** 或 **Fabric Warehouse** 创建导入表时，会通过数据源提供的 SQL analytics endpoint 读取表的架构。如果无法确定任何终结点，且导入设置中也未指定，Tabular Editor 会报错并说明需要提供的内容：将 SQL 终结点作为服务器，或提供 Workspace ID 和 item ID。它不会创建一个没有列的表。
 
 ## 更新表架构
 
@@ -137,7 +137,7 @@ Columns are created in the order they appear in the source table. Importing the 
 
 此菜单项既可在模型级别调用，也可对一组表甚至单个表分区调用。
 
-When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), to determine whether columns need to be added, modified or removed. Columns follow the source table's own column order, so a schema update does not shuffle them.
+使用此选项时，Tabular Editor 会连接到所有相关数据源（必要时会提示你输入凭据），以确定是否需要添加、修改或删除列。列会遵循源表自身的列顺序，因此架构更新不会打乱它们的顺序。
 
 > [!IMPORTANT]
 > 如果之前导入到语义模型中的某个列在源中被删除或重命名，则必须更新语义模型中的表架构。否则，数据刷新操作可能会失败。
