@@ -35,13 +35,13 @@ Se abrirá el cuadro de diálogo **Cargar modelo semántico desde la base de dat
 
 ![Cuadro de diálogo de conexión](~/content/assets/images/connect-dialog.png)
 
-### Status bar color
+### Color de la barra de estado
 
-**Advanced Options** includes a **Status bar color** picker. The color you choose is remembered with the connection, and Tabular Editor paints the status bar with it whenever a model is open on that server.
+En **Opciones avanzadas** hay un selector de **Color de la barra de estado**. El color que elijas se guarda con la conexión y Tabular Editor pinta la barra de estado con ese color siempre que haya un modelo abierto en ese servidor.
 
-No particular color means anything in itself; assigning one is what matters. Giving production a color you would not choose for anything else makes it obvious, at a glance and without reading the server name, which environment the window in front of you is connected to. Leave it on **Default** to keep the theme's own status bar.
+Ningún color concreto significa nada por sí mismo; lo que importa es asignar uno. Asignar al entorno de producción un color que no usarías para nada más hace evidente, de un vistazo y sin leer el nombre del servidor, a qué entorno está conectada la ventana actual. Déjalo en **Predeterminado** para conservar la barra de estado del tema.
 
-Closing the model restores the status bar to the active theme.
+Al cerrar el modelo, la barra de estado vuelve al tema activo.
 
 ## Seleccionar base de datos
 
