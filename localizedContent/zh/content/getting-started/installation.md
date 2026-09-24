@@ -86,60 +86,60 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 
 ## 静默安装与许可证预配置
 
-You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry. Install first, then write the license, which has to be in place before the application is launched for the first time.
+你可以以静默方式部署 Tabular Editor，并通过 Windows 注册表预先配置许可证。先安装，再写入许可证；许可证必须在应用程序首次启动前就已写入。
 
-### Install silently
+### 静默安装
 
-No UI, no reboot:
+无界面、无需重启：
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
 ```
 
-| MSI 功能        | Shown in the installer as | 说明                                                | Installed by default                             |
-| ------------- | ------------------------- | ------------------------------------------------- | ------------------------------------------------ |
-| `MainFeature` | Tabular Editor 3          | Tabular Editor 3 核心应用程序                           | 是（必需）                                            |
-| `AIAssistant` | AI features               | The @ai-assistant and the MCP server | Yes, from 3.27.0 |
+| MSI 功能        | 在安装程序中显示为        | 说明                                   | 默认安装                                         |
+| ------------- | ---------------- | ------------------------------------ | -------------------------------------------- |
+| `MainFeature` | Tabular Editor 3 | Tabular Editor 3 核心应用程序              | 是（必需）                                        |
+| `AIAssistant` | AI 功能            | @ai-assistant 和 MCP 服务器 | 是，自 3.27.0 起 |
 
 > [!IMPORTANT]
-> The command above installs the **AI features** component. Up to 3.26.x it had to be selected deliberately and a default installation left it out; from 3.27.0 it is part of a default installation. If your organization does not want the AI Assistant or the MCP server on user machines, you have to say so explicitly, as described in the next section.
+> 上述命令会安装 **AI 功能** 组件。在 3.26.x 及更早版本中，必须手动选中它，默认安装不会包含它；从 3.27.0 起，它已成为默认安装的一部分。如果贵组织不希望在用户计算机上安装 AI Assistant 或 MCP 服务器，则必须按下一节所述进行明确指定。
 
-### Deploying without the AI features
+### 部署时不包含 AI 功能
 
-To keep the AI files off the machine, name the features you want and leave `AIAssistant` out:
+若要避免将 AI 文件安装到计算机上，请指定需要的功能，并省略 `AIAssistant`：
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
 ```
 
-To take the component off machines that already have it, run the same package with `REMOVE`:
+若要在已安装该组件的计算机上将其移除，请使用同一个组件并加上 `REMOVE`：
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
 ```
 
-Either way, the AI assemblies are never written to the installation folder, the **AI Assistant** pane and the MCP server are absent from the application, and nothing reaches out to a model provider. Everything else in Tabular Editor 3 is unaffected.
+无论哪种方式，AI 程序集都不会写入安装文件夹；应用程序中不会出现 **AI Assistant** 窗格和 MCP 服务器；也不会向任何模型提供程序发起连接。 Tabular Editor 3 的其他所有功能都不受影响。
 
-Upgrading an existing installation keeps the feature selection that machine already has, so a machine that was deployed without the AI features before 3.27.0 does not gain them by being upgraded. Pass `ADDLOCAL=MainFeature` on fresh installations, where there is no earlier selection to inherit.
+升级现有安装时，会保留该计算机原有的功能选择，因此，如果某台计算机在 3.27.0 之前部署时未包含 AI 功能，升级后也不会自动获得这些功能。对于全新安装，由于没有先前的选择可继承，请传入 `ADDLOCAL=MainFeature`。
 
 > [!IMPORTANT]
-> The command line controls what _you_ deploy, not what a user can install: the AI features are the default, so anyone who runs the installer themselves gets them. To make the decision stick, set the `DisableAi` @policies as well. From 3.27.0 the installer reads that policy and leaves the AI component out on its own, whoever runs it and however it is run, and the policy also turns the AI Assistant and the MCP server off at runtime if the component is already present. Set it machine-wide, under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3`, so it applies to every user and cannot be overridden per user.
+> 命令行只控制 _你_ 要部署的内容，而不控制用户能安装什么：AI 功能默认包含在内，因此任何自行运行安装程序的人都会获得这些功能。要让该设置持续生效，还需要同时设置 `DisableAi` @policies。从 3.27.0 起，安装程序会读取该策略，并自动跳过 AI 组件；不管由谁运行、以何种方式运行都是如此。如果该组件已存在，该策略还会在运行时关闭 AI Assistant 和 MCP 服务器。请在整机范围内进行设置，即在 `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` 下设置，这样它会对所有用户生效，并且无法按用户进行覆盖。
 
 > [!NOTE]
-> When using `ADDLOCAL`, list `MainFeature` alongside any optional features. 如果仅指定 `AIAssistant` 而不包含 `MainFeature`，将导致安装不完整。
+> 使用 `ADDLOCAL` 时，除了任何可选功能外，也必须包含 `MainFeature`。如果仅指定 `AIAssistant` 而不包含 `MainFeature`，将导致安装不完整。
 
-### Package names and other MSI options
+### 组件名称和其他 MSI 选项
 
 你也可以使用 `/package` 替代 `/i`。将 `<version>` 替换为实际的版本字符串。
 
-MSI packages are named `TabularEditor.<version>.<architecture>.<runtime>.msi`, for example `TabularEditor.3.27.0.x64.Net10.msi` or `TabularEditor.3.27.0.ARM64.Net8.msi`. Pick the architecture and runtime that suit the target machines; see @system-requirements. The MSI does not install the .NET Desktop Runtime, so deploy that first.
+MSI 组件的命名格式为 `TabularEditor.<version>`.<architecture>.<runtime>.msi`，例如 `TabularEditor.3.27.0.x64.Net10.msi`或`TabularEditor.3.27.0.ARM64.Net8.msi\`。选择适合目标计算机的体系结构和运行时；参见 @system-requirements。 MSI 不会安装 .NET Desktop Runtime，所以先部署它。
 
 可用的 MSI 命令行选项详见 Microsoft 官方文档：
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
-### Pre-provision the license
+### 预先配置许可证
 
-Write the license to the Registry _before the first launch_ of the application:
+在应用程序 _首次启动之前_ 将许可证写入注册表：
 
 ```bat
 REM 每用户许可证密钥 (HKCU)
