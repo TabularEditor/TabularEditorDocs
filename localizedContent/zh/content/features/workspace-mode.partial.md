@@ -38,7 +38,7 @@ Tabular Editor 3 在工具内创建新模型，或加载现有模型的 Model.bi
 如果保持选中，在点击“确定”后，系统会提示你连接到一个 Analysis Services 实例。这就是你的 Workspace 数据库将要部署到的 Analysis Services 实例。
 
 > [!IMPORTANT]
-> If you plan to deploy your workspace database to the Power BI Service XMLA endpoint, make sure you choose Compatibility Level 1706 (Power BI / Fabric) in the dialog above.
+> 如果你计划将 Workspace 中的数据库部署到 Power BI 服务的 XMLA endpoint，请务必在上方对话框中选择兼容级别 1706（Power BI / Fabric）。
 
 输入 Analysis Services 服务器信息并（可选）提供凭据后，你会看到服务器上当前所有数据库的列表（如果是 Power BI Workspace，则会显示已部署到该 Workspace 的 Dataset 列表）：
 
