@@ -65,25 +65,25 @@ Code Assist 的大多数选项可在 [**工具 > 偏好 > 文本编辑器 > DAX�
 
 ## 内联度量值
 
-如果你想将某个度量值的定义带入当前文档，**内联度量值** 功能正好可以做到这一点。 Right-click a measure reference in the DAX editor and choose **Inline Measure**.
+如果你想将某个度量值的定义带入当前文档，**内联度量值** 功能正好可以做到这一点。在 DAX 编辑器中右键单击度量值引用，然后选择 **内联度量值**。
 
-A measure reference implicitly turns the current row into a filter before the measure's expression is evaluated. Pasting the expression in as-is would therefore change the result, so when the reference sits inside a row context, for example as the second argument of an iterator such as [`SUMX`](https://dax.guide/sumx) or [`FILTER`](https://dax.guide/filter), Tabular Editor wraps the inlined expression in [`CALCULATE`](https://dax.guide/calculate) to preserve that behavior:
+度量值引用会在评估该度量值的表达式之前，隐式将当前行转换为筛选器。因此，如果原样直接粘贴该表达式，结果就会发生变化。所以，当该引用位于行语境中时，例如作为 [`SUMX`](https://dax.guide/sumx) 或 [`FILTER`](https://dax.guide/filter) 等迭代器的第二个参数，Tabular Editor 会用 [`CALCULATE`](https://dax.guide/calculate) 包裹内联后的表达式，以保留这种行为：
 
 ```dax
-// Before using inline measure on the [Margin] measure
+// 对 [Margin] 度量值使用内联度量值之前
 SUMX ( 'Sales', [Margin] )
 
-// After using inline measure on the [Margin] measure
+// 对 [Margin] 度量值使用内联度量值之后
 SUMX ( 'Sales', CALCULATE ( 'Sales'[Amount] - 'Sales'[Cost] ) )
 ```
 
-The wrap is only added where it can make a difference. The expression is inserted unwrapped when:
+仅在确实可能影响结果时，才会添加这层包裹。在以下情况下，插入表达式时不会添加包裹：
 
-- the reference is **not inside a row context**, including when it already sits inside a `CALCULATE( ... )` of its own
-- the measure's expression **reads nothing from the model** (a constant, a reference to another measure or a call to a function such as `TODAY()`). A reference to a table, a column, a calendar or a [user-defined function](xref:udfs) does count as reading from the model, and does get the wrap
-- the expression **already performs the transition itself**, through a `CALCULATE( ... )` or `CALCULATETABLE( ... )` with no filter arguments. With a filter argument the wrap is still added, because filter arguments are evaluated before the transition
+- 该引用**不在行语境中**，包括它本来就位于自己的 `CALCULATE( …… )` 中
+- 该度量值的表达式**不从模型中读取任何内容**（例如常量、对其他度量值的引用，或对 `TODAY()` 之类函数的调用）。对表、列、日历或[用户定义函数](xref:udfs)的引用都算作从模型中读取内容，因此也会添加这层包裹
+- 该表达式**已经自行执行了上下文转换**，例如通过 `CALCULATE( …… )` 或 `CALCULATETABLE( …… )` 且不带任何筛选参数。如果带有筛选参数，仍会添加这层包裹，因为筛选参数会在转换之前求值
 
-If the measure's expression cannot be analyzed, the wrap is added, on the principle that a wrap that was not needed is harmless where a missing one is not.
+如果无法分析该度量值的表达式，就会添加这层包裹。原则是：多加一层即使不需要也无害，漏掉该加的一层则不行。
 
 ## 格式化 DAX
 
