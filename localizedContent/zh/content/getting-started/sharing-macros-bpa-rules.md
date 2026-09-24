@@ -104,7 +104,7 @@ New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\TabularEditor3\MacroAct
 
 Tabular Editor 原生支持组合来自多个来源的 Best Practice Analyzer 规则，无需符号链接或变通办法：
 
-- **规则集**允许模型使用来自当前模型、本地用户的 `BPARules.json`、计算机级别的 `BPARules.json`，以及你显式添加的任意数量的其他规则集中的规则。这些附加来源可以是磁盘上其他位置的文件（支持相对于模型的路径，因此规则文件可以放在同一 repository 中）、网络共享，或 HTTP/HTTPS URL。规则集具有明确的优先顺序，因此在需要时，可以在模型级别覆盖中央共享规则。 See [Adding a rule collection](xref:best-practice-analyzer#adding-a-rule-collection) for how to add and prioritize collections.
+- **规则集**允许模型使用来自当前模型、本地用户的 `BPARules.json`、计算机级别的 `BPARules.json`，以及你显式添加的任意数量的其他规则集中的规则。这些附加来源可以是磁盘上其他位置的文件（支持相对于模型的路径，因此规则文件可以放在同一 repository 中）、网络共享，或 HTTP/HTTPS URL。规则集具有明确的优先顺序，因此在需要时，可以在模型级别覆盖中央共享规则。有关如何添加规则集并设置其优先级，请参阅[添加规则集](xref:best-practice-analyzer#adding-a-rule-collection)。
 - **内置规则**（Tabular Editor 3）在应用中直接内置提供一套经过精选、带版本管理的最佳实践规则，并会随每次发布自动更新；每条规则都附有指向相应知识库文章的链接。它们会与你的自定义规则并存，而不是取而代之。参见 [内置 BPA 规则](xref:built-in-bpa-rules)。
 
 结合这两个功能，大多数“如何在团队内共享 BPA 规则”的场景都已有原生支持。将共享规则文件提交到 repository，并通过相对路径、网络共享或 URL 将其作为规则集引入，通常就足够了。无需 symlink 或 hook，因为 Tabular Editor 读取规则集时是直接读取，而不是通过固定的个人路径。
