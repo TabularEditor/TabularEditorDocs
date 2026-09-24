@@ -91,33 +91,33 @@ Actualiza automáticamente las tablas Direct Lake al guardar cambios para garant
 
 ## Tabular Editor > Actualizaciones y comentarios
 
-![Updates and Feedback preferences](~/content/assets/images/pref-updates-and-feedback.png)
+![Preferencias de actualizaciones y comentarios](~/content/assets/images/pref-updates-and-feedback.png)
 
-### Updates
+### Actualizaciones
 
-##### _Show "Get Started" page on updates_ (enabled)
+##### _Mostrar la página "Primeros pasos" tras una actualización_ (activado)
 
-When checked, the **Get Started** page opens automatically the first time you run Tabular Editor after it has been updated. It appears **on updates**, not on every start-up. You can open it at any time from **Help > Get Started**.
+Si la activas, la página **Primeros pasos** se abre automáticamente la primera vez que ejecutas Tabular Editor después de actualizarlo. Se muestra **tras una actualización**, no en cada inicio. Puedes abrirla en cualquier momento desde **Ayuda > Primeros pasos**.
 
 ##### _Buscar actualizaciones al iniciar_ (habilitado)
 
 Si lo activas, Tabular Editor buscará nuevas versiones cuando se inicie la aplicación. Así te mantienes al día con las últimas funciones y correcciones de errores.
 
-##### _Major updates only_ (disabled)
+##### _Solo actualizaciones principales_ (desactivada)
 
-When checked, only major version updates trigger notifications. Minor and patch updates are ignored. This setting is only available while _Check for updates on start-up_ is checked.
+Si lo activas, solo las actualizaciones de versión principal activarán las notificaciones. Se ignorarán las actualizaciones menores y las de corrección. Esta configuración solo está disponible cuando está activada la opción _Buscar actualizaciones al iniciar_.
 
-The version you are running is shown below these settings, along with a **Check for updates** button that runs the check immediately.
+Debajo de estas opciones se muestra la versión que estás usando, junto con un botón **Buscar actualizaciones** que realiza la comprobación de inmediato.
 
-### Managed by your organization
+### Administrado por tu organización
 
-Where an administrator has configured [policies](xref:policies), a read-only **Managed by your organization** section is appended to this page listing every policy value Tabular Editor found, as `Name = value`. Hover over an entry to see which registry key and hive it came from.
+Si un administrador ha configurado [directivas](xref:policies), al final de esta página se agrega una sección de solo lectura, **Administrado por tu organización**, que enumera todos los valores de directiva que Tabular Editor encontró, con el formato `Nombre = valor`. Pasa el cursor sobre una entrada para ver de qué clave y colmena del Registro procede.
 
-A value Tabular Editor could not interpret is listed with an `(invalid)` marker rather than being left out. That marker is the fastest way to find the typo behind a policy that appears to do nothing, so check here first when a policy is not taking effect.
+Un valor que Tabular Editor no pudo interpretar se muestra con la marca `(invalid)` en lugar de omitirse. Esa marca es la forma más rápida de encontrar el error tipográfico detrás de una directiva que parece no hacer nada, así que revisa aquí primero cuando una directiva no esté surtiendo efecto.
 
-The section is absent when no policy applies. Settings that a policy locks or limits are shown read-only elsewhere in this dialog, and in the **Tools > MCP Server...** dialog, with a tooltip saying so.
+La sección no aparece cuando no se aplica ninguna directiva. Las opciones que una directiva bloquea o limita se muestran como de solo lectura en otras partes de este cuadro de diálogo y en el cuadro de diálogo **Herramientas > Servidor MCP...**, con una descripción emergente que lo indica.
 
-### Usage Data and Feedback
+### Datos de uso y comentarios
 
 ##### _Ayuda a mejorar Tabular Editor recopilando datos de uso anónimos_ (habilitado)
 
@@ -129,7 +129,7 @@ En caso de bloqueo, si esta opción está activada, Tabular Editor muestra la op
 
 ## Tabular Editor > Implementación
 
-![Model Deployment preferences](~/content/assets/images/pref-model-deployment.png)
+![Preferencias de implementación del modelo](~/content/assets/images/pref-model-deployment.png)
 
 Configura qué tipos de objetos se implementan de forma predeterminada al usar el Asistente de implementación:
 
@@ -189,9 +189,9 @@ Especifica la carpeta en la que se almacenan las copias de seguridad de las part
 
 ##### _Nivel de compatibilidad del nuevo modelo_ (1600)
 
-Establece el nivel de compatibilidad predeterminado para los modelos recién creados. The choices are the same as in the **New Model** dialog:
+Establece el nivel de compatibilidad predeterminado para los modelos recién creados. Las opciones son las mismas que en el cuadro de diálogo **Nuevo modelo**:
 
-| Nivel | Target                                     |
+| Nivel | Destino                                    |
 | ----- | ------------------------------------------ |
 | 1200  | Azure Analysis Services / SQL Server 2016+ |
 | 1400  | Azure Analysis Services / SQL Server 2017+ |
@@ -200,11 +200,11 @@ Establece el nivel de compatibilidad predeterminado para los modelos recién cre
 | 1700  | Azure Analysis Services / SQL Server 2025+ |
 | 1706  | Power BI / Fabric                          |
 
-1700 is the highest level Analysis Services supports; 1706 is the highest overall and is Power BI and Fabric only.
+1700 es el nivel más alto compatible con Analysis Services; 1706 es el nivel más alto en general y es exclusivo de Power BI y Fabric.
 
 ##### _Usar el nivel de compatibilidad más reciente como valor predeterminado_ (habilitado)
 
-Usa automáticamente el nivel de compatibilidad más reciente disponible para los modelos nuevos. When enabled, this overrides the specific compatibility level setting above, and the dropdown is disabled.
+Usa automáticamente el nivel de compatibilidad más reciente disponible para los modelos nuevos. Al habilitarlo, se reemplaza la configuración específica del nivel de compatibilidad anterior y se deshabilita el menú desplegable.
 
 ##### _Los nuevos modelos usan la base de datos de Workspace_ (habilitado)
 
@@ -228,53 +228,53 @@ Crea automáticamente archivos .tmuo (Tabular Model User Options) para los model
 
 Configura los atajos de teclado para todos los comandos de Tabular Editor. Usa la función de búsqueda para encontrar rápidamente comandos específicos y asignar o modificar sus atajos de teclado para adaptarlos a tu flujo de trabajo.
 
-## Tabular Editor > TOM Explorer
+## Tabular Editor > Explorador TOM
 
-![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
+![Configuración del Explorador Tom](~/content/assets/images/unsaved-changes/preferences.png)
 
-Control how the TOM (Tabular Object Model) Explorer presents the model, and what happens to the objects you delete.
+Controla cómo el Explorador TOM (Tabular Object Model) presenta el modelo y qué ocurre con los objetos que eliminas.
 
-The toggles that decide which object types appear in the tree, such as measures, columns, hierarchies, partitions, display folders and hidden objects, are not preferences. They live on the @tom-explorer-view toolbar, where you can change them per model without opening this dialog.
+Los conmutadores que determinan qué tipos de objetos aparecen en el árbol, como medidas, columnas, jerarquías, particiones, carpetas de visualización y objetos ocultos, no son preferencias. Se encuentran en la barra de herramientas @tom-explorer-view, donde puedes cambiarlos en cada modelo sin abrir este cuadro de diálogo.
 
-### Display and filtering
+### Visualización y filtrado
 
-##### _Use table groups_ (enabled)
+##### _Usar grupos de tablas_ (activado)
 
-Group your tables in the TOM Explorer, for example to keep calculation groups, dimensions and fact tables apart. Tabular Editor records a table's group in an annotation on the table itself, so the grouping travels with the model. It is internal to Tabular Editor: no other client tool, Power BI Desktop included, shows it. See @table-groups.
+Agrupa tus tablas en el Explorador TOM, por ejemplo, para mantener separados los grupos de cálculo, las dimensiones y las tablas de hechos. Tabular Editor registra el grupo de una tabla en una anotación de la propia tabla, de modo que la agrupación acompaña al modelo. Es interno de Tabular Editor: ninguna otra herramienta cliente, ni siquiera Power BI Desktop, muestra esa agrupación. Consulta @table-groups.
 
 ##### _Mostrar rama completa_ (deshabilitado)
 
-When you filter the tree, Tabular Editor shows the objects that match your filter string together with their parents. Enable this to also show every child of a match, whether or not the children match the string themselves.
+Cuando filtras el árbol, Tabular Editor muestra los objetos que coinciden con tu cadena de filtro junto con sus nodos principales. Activa esta opción para mostrar también todos los elementos secundarios de una coincidencia, independientemente de que coincidan o no con la cadena.
 
-##### _Highlight relationships_ (enabled)
+##### _Resaltar relaciones_ (habilitado)
 
-Highlight the relationships that involve the table or column you have selected, so you can see at a glance what a column is joined to.
+Resalta las relaciones en las que interviene la tabla o la columna que has seleccionado, para que puedas ver de un vistazo con qué se une una columna.
 
-### Unsaved changes
+### Cambios no guardados
 
-These settings control how [unsaved changes](xref:unsaved-changes) are indicated in the TOM Explorer and the Properties view.
+Estos ajustes controlan cómo se indican los [cambios no guardados](xref:unsaved-changes) en el Explorador TOM y en la vista de propiedades.
 
-##### _Mark objects with unsaved changes_ (enabled)
+##### _Marcar objetos con cambios no guardados_ (habilitado)
 
-Highlight objects in the TOM Explorer that differ from the last saved version of the model, using a tinted row and a badge on the object's icon: orange for edited objects, green for added objects and red for deleted objects. Tables, folders and groups that contain changed objects get a hatched fill. When disabled, deleted objects still stay visible according to the setting below, and the **Show changes** toolbar filter still works. Use **Color blindness mode** under **User Interface > Accessibility** to mark added objects in teal instead of green.
+Resalta en el Explorador TOM los objetos que difieren de la última versión guardada del modelo, mediante una fila sombreada y un distintivo en el icono del objeto: naranja para los objetos editados, verde para los objetos añadidos y rojo para los objetos eliminados. Las tablas, carpetas y grupos que contienen objetos modificados reciben un relleno rayado. Cuando está deshabilitado, los objetos eliminados siguen siendo visibles según la configuración siguiente, y el filtro **Mostrar cambios** de la barra de herramientas sigue funcionando. Usa **Modo para daltónicos** en **Interfaz de usuario > Accesibilidad** para marcar los objetos añadidos en verde azulado en lugar de verde.
 
-##### _Keep deleted objects visible_ (Until the model is saved)
+##### _Mantener visibles los objetos eliminados_ (Hasta que se guarde el modelo)
 
-How long deleted objects remain visible in the TOM Explorer, struck through, where they used to be. Right-click a deleted object and choose **Restore** to bring it back. Options:
+Cuánto tiempo permanecen visibles los objetos eliminados en el Explorador TOM, tachados, en el lugar que ocupaban. Haz clic con el botón derecho en un objeto eliminado y elige **Restaurar** para recuperarlo. Opciones:
 
-- **Never**: Deleted objects disappear from the TOM Explorer at once.
-- **Until the model is saved**: Deleted objects are treated as unsaved changes and disappear when the model is saved.
-- **Until the model is closed**: Deleted objects stay visible, and restorable, for the whole editing session, even across saves.
+- **Nunca**: Los objetos eliminados desaparecen del Explorador TOM de inmediato.
+- **Hasta que se guarde el modelo**: Los objetos eliminados se tratan como cambios no guardados y desaparecen al guardar el modelo.
+- **Hasta que se cierre el modelo**: Los objetos eliminados permanecen visibles y se pueden restaurar durante toda la sesión de edición, incluso después de guardar.
 
-##### _Gather deleted objects under a "Deleted objects" node_ (disabled)
+##### _Agrupar los objetos eliminados bajo un nodo "Objetos eliminados"_ (deshabilitado)
 
-Show the deleted objects of a table, hierarchy, role or table group together under a single **Deleted objects** node at the end of their container, instead of each where it used to be. Right-click the node and choose **Restore** to bring back all of them at once.
+Muestra juntos los objetos eliminados de una tabla, jerarquía, rol o grupo de tablas bajo un único nodo **Objetos eliminados** al final de su contenedor, en lugar de mostrarlos individualmente donde estaban. Haz clic con el botón derecho en el nodo y elige **Restaurar** para recuperarlos todos de una vez.
 
-##### _Mark properties with unsaved changes in the Properties pane_ (enabled)
+##### _Marcar las propiedades con cambios no guardados en el panel de propiedades_ (habilitado)
 
-Highlight properties in the Properties view that differ from the last saved version of the model, using a tinted row. When disabled, the **Show changes** toolbar filter in the Properties view still works.
+Resalta en la vista de propiedades aquellas que difieren de la última versión guardada del modelo, mediante una fila sombreada. Cuando está deshabilitado, el filtro **Mostrar cambios** de la barra de herramientas en la vista de propiedades sigue funcionando.
 
-### Delete
+### Eliminar
 
 ##### _Mostrar siempre advertencias de eliminación_ (deshabilitado)
 
@@ -283,29 +283,29 @@ Si prefieres que Tabular Editor 3 te pida confirmación para todas las eliminaci
 > [!NOTE]
 > Todas las operaciones de eliminación en Tabular Editor 3 se pueden deshacer con CTRL+Z.
 
-### Localization
+### Localización
 
-These settings decide the format string Tabular Editor writes when you pick the _Currency_ number format for an object in the Properties pane.
+Estos ajustes determinan la cadena de formato que Tabular Editor escribe cuando seleccionas el formato numérico _Moneda_ para un objeto en el panel de propiedades.
 
-##### _Default currency_ (English (United States))
+##### _Moneda predeterminada_ (Inglés (Estados Unidos))
 
-The formatting convention to base the currency format string on. Pick the locale whose currency symbol, decimal separator and digit grouping you want.
+La convención de formato que se usa como base para la cadena de formato de moneda. Elige la configuración regional cuyo símbolo de moneda, separador decimal y agrupación de dígitos quieras usar.
 
-##### _Use a custom currency symbol_ (disabled)
+##### _Usar un símbolo de moneda personalizado_ (desactivado)
 
-Supply your own symbol instead of taking one from the locale above. The three settings below apply only while this is checked.
+Indica tu propio símbolo en lugar de usar el de la configuración regional anterior. Las tres opciones siguientes solo se aplican mientras esta casilla esté seleccionada.
 
-##### _Custom currency symbol_
+##### _Símbolo de moneda personalizado_
 
-The symbol to use. Enter the symbol on its own, without the number; whitespace is ignored.
+El símbolo que se usará. Escribe solo el símbolo, sin el número; se ignoran los espacios en blanco.
 
-##### _Custom currency symbol position_ (Before number)
+##### _Posición del símbolo de moneda personalizado_ (Antes del número)
 
-Whether the symbol goes before or after the numeric value.
+Si el símbolo va antes o después del valor numérico.
 
-##### _Put a space between the number and symbol_ (disabled)
+##### _Poner un espacio entre el número y el símbolo_ (desactivado)
 
-Separate the symbol from the numeric value with a space.
+Separa el símbolo del valor numérico con un espacio.
 
 ## Tabular Editor > Copiar/Pegar
 
@@ -357,7 +357,7 @@ Quita automáticamente todos los objetos de la tabla cuando se quita una tabla d
 
 ## Tabular Editor > Comparación de esquemas
 
-![Schema Compare preferences](~/content/assets/images/pref-schema-compare.png)
+![Preferencias de comparación de esquema](~/content/assets/images/pref-schema-compare.png)
 
 Configura qué cambios se ignoran durante la comparación de esquemas al actualizar los esquemas de las tablas:
 
@@ -383,7 +383,7 @@ Usa los metadatos de Analysis Services como fuente de referencia para la detecci
 
 ## Tabular Editor > Guardar en carpeta/archivo
 
-![Save to Folder preferences](~/content/assets/images/pref-save-to-folder.png)
+![Preferencias de Guardar en carpeta](~/content/assets/images/pref-save-to-folder.png)
 
 ### Modo de serialización
 
@@ -415,7 +415,7 @@ Guarda las traducciones junto a cada objeto, en lugar de en una ubicación centr
 
 ##### _Niveles_
 
-Selecciona qué tipos de objetos se deben serializar en cada nivel de carpeta. Esto te permite organizar los archivos del modelo en una estructura jerárquica. The available levels are Data Sources, User Defined Functions (UDFs), Shared Expressions, Perspectives, Relationships, Roles, Tables, Columns, Hierarchies, Measures, Partitions, Calculation Items and Translations.
+Selecciona qué tipos de objetos se deben serializar en cada nivel de carpeta. Esto te permite organizar los archivos del modelo en una estructura jerárquica. Los niveles disponibles son Data sources, funciones definidas por el usuario (UDFs), expresiones compartidas, perspectivas, relaciones, roles, tablas, columnas, jerarquías, medidas, particiones, elementos de cálculo y traducciones.
 
 ##### _Ignorar objetos inferidos_ (activado)
 
@@ -465,129 +465,129 @@ Si usas espacios, especifica el número de espacios por nivel de sangría.
 
 <a name="miscellaneous"></a>
 
-## AI Features
+## Funciones de IA
 
-The parent page carries the two settings that apply to every AI feature, the chat and the [MCP server](xref:mcp-server) alike.
+La página principal contiene las dos opciones que se aplican a todas las funciones de IA, tanto al chat como al [servidor MCP](xref:mcp-server).
 
-##### _Check for knowledge base updates on startup_ (enabled)
+##### _Buscar actualizaciones de la base de conocimientos al iniciar_ (activado)
 
-The AI Assistant searches a local copy of the Tabular Editor documentation. When checked, Tabular Editor looks for a newer copy at start-up and downloads it if one is available. This is the only outbound request any AI feature makes on its own.
+El Asistente de IA busca en una copia local de la documentación de Tabular Editor. Cuando esta opción está seleccionada, Tabular Editor busca una copia más reciente al iniciarse y la descarga si hay una disponible. Esta es la única solicitud saliente que realiza por sí sola cualquier función de IA.
 
-##### Audit log
+##### Registro de auditoría
 
-**Open audit folder** opens this computer's record of what the AI Assistant and the MCP server did: permission decisions, which tools were called and how each one ended, and the full text of any script that was run or handed over for review. Prompts, replies and data values are never recorded. The record is an Enterprise Edition feature: on Desktop and Business nothing is recorded and the button is not shown. See @ai-audit-log.
+**Abrir carpeta de auditoría** abre el registro de este equipo de lo que hicieron el Asistente de IA y el servidor MCP: decisiones de permisos, qué herramientas se llamaron y cómo terminó cada una, y el texto completo de cualquier script que se ejecutó o se entregó para su revisión. Los prompts, las respuestas y los valores de datos nunca se registran. El registro es una función de la Edición Enterprise: en las ediciones Desktop y Business no se registra nada y no se muestra el botón. Consulta @ai-audit-log.
 
-## AI Features > AI Assistant
+## Funciones de IA > Asistente de IA
 
-Connection settings for the AI Assistant chat. The **AI Provider** child page renders here. See @ai-assistant for what each provider needs.
+Configuración de conexión para el chat del Asistente de IA. La subpágina **Proveedor de IA** se muestra aquí. Consulta @ai-assistant para ver qué necesita cada proveedor.
 
-##### _Choose provider_ (None)
+##### _Elegir proveedor_ (Ninguno)
 
-Which AI provider the chat talks to: **OpenAI**, **Anthropic**, **Azure OpenAI** or **Custom (OpenAI-compatible)**. The fields below change with your choice. An administrator can lock this to a single provider, or narrow the list, by policy.
+Con qué proveedor de IA se comunica el chat: **OpenAI**, **Anthropic**, **Azure OpenAI** o **Personalizado (compatible con OpenAI)**. Los campos de abajo cambian según tu elección. Un administrador puede fijarlo a un único proveedor o limitar la lista mediante una directiva.
 
-##### _Base URL_ / _Service endpoint_
+##### _URL base_ / _Punto de conexión del servicio_
 
-Where requests are sent. OpenAI and Anthropic supply a default and the field is optional. Azure OpenAI and Custom have no default, so an endpoint is required.
+Dónde se envían las solicitudes. OpenAI y Anthropic proporcionan uno predeterminado y el campo es opcional. Azure OpenAI y Personalizado no tienen ningún valor predeterminado, por lo que se requiere un punto de conexión.
 
-##### _API Key_
+##### _Clave de API_
 
-Your own key for the chosen provider. It is stored encrypted on this machine in `Preferences.json`. Tabular Editor ships no built-in key and never proxies your requests.
+Tu propia clave para el proveedor elegido. Se almacena cifrada en este equipo, en el archivo de preferencias `Preferences.json`. Tabular Editor no incluye ninguna clave integrada y nunca actúa como proxy de tus solicitudes.
 
-##### _OpenAI Organization ID_ and _OpenAI Project ID_
+##### _ID de organización de OpenAI_ y _ID de proyecto de OpenAI_
 
-Optional, and shown for the OpenAI provider only. Use them where your OpenAI account bills or scopes usage per organization or project.
+Son opcionales y solo se muestran para el proveedor OpenAI. Úsalos cuando tu cuenta de OpenAI facture o delimite el uso por organización o proyecto.
 
-##### _Model name_ (_Deployment_ for Azure OpenAI)
+##### _Nombre del modelo_ (_Implementación_ para Azure OpenAI)
 
-Which model to use. For OpenAI and Anthropic this is a dropdown filled from an online catalog, so it is empty until the catalog has been fetched once on this machine. For Azure OpenAI the field is labelled **Deployment** and takes the name you gave the deployment, which is not necessarily the name of the underlying model. Leaving it blank uses the provider's default, except for Azure OpenAI and Custom, which have none.
+Qué modelo usar. Para OpenAI y Anthropic, es una lista desplegable que se rellena desde un catálogo en línea, por lo que estará vacía hasta que se haya descargado el catálogo al menos una vez en este equipo. En Azure OpenAI, el campo se etiqueta como **Implementación** y toma el nombre que le diste a la implementación, que no necesariamente coincide con el nombre del modelo subyacente. Si se deja en blanco, se usa el valor predeterminado del proveedor, salvo en Azure OpenAI y Personalizado, que no tienen valor predeterminado.
 
-## AI Features > AI Assistant > Preferences
+## Funciones de IA > Asistente de IA > Preferencias
 
-How the chat behaves. See @ai-assistant for the detail behind each group.
+Cómo se comporta el chat. Consulta @ai-assistant para conocer los detalles de cada grupo.
 
 ### Visualización del chat
 
-##### _Show selection context indicator_ (enabled)
+##### _Mostrar indicador de contexto de selección_ (habilitado)
 
-Show which model object is currently selected above the chat, so you can see what the assistant will treat as context.
+Muestra qué objeto del modelo está seleccionado actualmente encima del chat, para que veas qué tratará el asistente como contexto.
 
-##### _Show custom instructions indicator_ (enabled)
+##### _Mostrar indicador de instrucciones personalizadas_ (habilitado)
 
-Show which [Custom Instructions](xref:ai-assistant#custom-instructions) were applied above each reply.
+Muestra qué [Instrucciones personalizadas](xref:ai-assistant#custom-instructions) se aplicaron sobre cada respuesta.
 
-##### _Show knowledge base search indicator_ (enabled)
+##### _Mostrar indicador de búsqueda en la base de conocimientos_ (habilitado)
 
-Show progress while the assistant searches the knowledge base.
+Muestra el progreso mientras el asistente busca en la base de conocimientos.
 
 ### Compactación de contexto
 
-##### _Auto compact_ (enabled)
+##### _Compactación automática_ (habilitado)
 
-Summarize the older part of a conversation automatically as it approaches the model's context limit, so a long conversation can carry on.
+Resume automáticamente la parte más antigua de una conversación cuando se acerca al límite de contexto del modelo, para que una conversación larga pueda continuar.
 
-##### _Auto compact threshold %_ (80)
+##### _Umbral de compactación automática %_ (80)
 
-How full the context window gets before compaction runs, as a percentage of the _model's own_ window rather than a fixed number of tokens. Values outside 50 to 100 have no further effect.
+Cuánto se llena la ventana de contexto antes de que se ejecute la compactación, como porcentaje de la ventana del _propio modelo_ en lugar de un número fijo de tokens. Los valores fuera del rango de 50 a 100 no tienen ningún efecto adicional.
 
 ### C# Script
 
-##### _Allow AI assistant to run C# scripts directly_ (disabled)
+##### _Permitir que el asistente de IA ejecute C# Scripts directamente_ (deshabilitado)
 
-Let the assistant carry out the model change you asked for, instead of writing a script and opening it for you to run. Only scripts the safety analysis considers safe are run this way, meaning scripts that touch model objects and nothing else; anything reaching for files, the network or an external assembly is still handed to you for review. Each run lands as a single undo step.
+Permite que el asistente realice el cambio en el modelo que pediste, en lugar de escribir un script y abrirlo para que lo ejecutes. Solo se ejecutan así los scripts que el análisis de seguridad considera seguros; es decir, scripts que solo modifican objetos del modelo y nada más. Cualquier script que acceda a archivos, a la red o a un ensamblado externo se te seguirá entregando para su revisión. Cada ejecución queda registrada como un único paso de deshacer.
 
-This setting is unavailable until **Model metadata** is set to **Write** on the [Permissions](#ai-features--permissions) page, and it becomes available as soon as you change that dropdown, without closing the dialog. It is also unavailable, with a tooltip saying so, where an administrator has set the `DisableCSharpScripts` [policy](xref:policies). It is off by default deliberately: **Model metadata > Write** is also what an agent needs over the MCP server, and granting it there must not silently change what the chat does. See [Letting the assistant change your model](xref:ai-assistant#letting-the-assistant-change-your-model).
+Esta opción no está disponible hasta que configures **Metadatos del modelo** como **Escritura** en la página [Permisos](#ai-features--permissions), y pasa a estar disponible en cuanto cambies esa lista desplegable, sin cerrar el cuadro de diálogo. Tampoco está disponible, con un tooltip que lo indica, cuando un administrador ha establecido la [directiva](xref:policies) `DisableCSharpScripts`. Está desactivada deliberadamente de forma predeterminada: **Metadatos del modelo > Escritura** es también lo que un agente necesita a través del servidor MCP, y concederlo ahí no debe cambiar silenciosamente el comportamiento del chat. Consulta [Permitir que el asistente cambie tu modelo](xref:ai-assistant#letting-the-assistant-change-your-model).
 
-##### _Preview changes_ (enabled)
+##### _Vista previa de los cambios_ (activada)
 
-Show the script preview dialog before a change the assistant made stands, so you can see every model metadata change and accept or cancel it. Cancelling puts the model back and tells the assistant you rejected the change.
+Muestra el cuadro de diálogo de vista previa del script antes de que se aplique un cambio realizado por el asistente, para que puedas ver todos los cambios de metadatos del modelo y aceptarlos o cancelarlos. Al cancelar, el modelo vuelve a su estado anterior y el asistente recibe la indicación de que rechazaste el cambio.
 
-## AI Features > MCP Server
+## Funciones de IA > Servidor MCP
 
-Settings for the [MCP server](xref:mcp-server), which lets an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open.
+Configuración del [servidor MCP](xref:mcp-server), que permite que un agente externo, como Claude Code, GitHub Copilot o Cursor, trabaje en el modelo que tienes abierto.
 
-![MCP Server preferences](~/content/assets/images/pref-mcp-server.png)
+![Preferencias del servidor MCP](~/content/assets/images/pref-mcp-server.png)
 
-##### _Enable MCP Server_ (enabled)
+##### _Habilitar el servidor MCP_ (activado)
 
-Whether the MCP server is available at all. Clearing it stops a running server and removes both the **Tools > MCP Server...** menu item and the status bar indicator.
+Determina si el servidor MCP está disponible. Al desmarcarlo, se detiene el servidor en ejecución y se eliminan tanto la opción de menú **Herramientas > Servidor MCP...** como el indicador de la barra de estado.
 
-##### _Start MCP server automatically_ (disabled)
+##### _Iniciar el servidor MCP automáticamente_ (desactivado)
 
-Start the server when Tabular Editor starts, so an agent can connect without you starting it by hand. If the port is in use at start-up, the server does not start and no prompt is shown.
+Inicia el servidor cuando se inicia Tabular Editor, para que un agente pueda conectarse sin que tengas que iniciarlo manualmente. Si el puerto está en uso al iniciar, el servidor no se inicia y no se muestra ningún aviso.
 
-##### _Require access token_ (disabled)
+##### _Requerir token de acceso_ (desactivado)
 
-Make agents present a bearer token, shown in the **Tools > MCP Server...** dialog. The server listens on the loopback interface only, so this matters most on a machine where several people are signed in at once, such as a Remote Desktop or Citrix host, where every session can reach `127.0.0.1`. Administrators can enforce it with the `RequireMcpAccessToken` [policy](xref:policies).
+Hace que los agentes deban presentar un token bearer, que se muestra en el cuadro de diálogo **Herramientas > Servidor MCP...**. El servidor solo escucha en la interfaz de loopback, por lo que esto es especialmente relevante en una máquina en la que varias personas han iniciado sesión a la vez, como un host de Escritorio remoto o Citrix, donde cada sesión puede acceder a `127.0.0.1`. Los administradores pueden imponerlo mediante la [directiva](xref:policies) `RequireMcpAccessToken`.
 
-##### _Port_ (42100)
+##### _Puerto_ (42100)
 
-The loopback port the server listens on, from 1024 to 49151. Changing it invalidates existing agent registrations, which point at a fixed address. If the port is taken when you start the server by hand, Tabular Editor offers the next free port it finds.
+El puerto de loopback en el que escucha el servidor, entre 1024 y 49151. Cambiarlo invalida los registros existentes de los agentes, que apuntan a una dirección fija. Si el puerto está ocupado cuando inicias el servidor manualmente, Tabular Editor te ofrece el siguiente puerto libre que encuentre.
 
-## AI Features > Permissions
+## Funciones de IA > Permisos
 
-One standing grant per resource, governing both the AI Assistant chat and any agent connected over the MCP server. The chat can additionally ask for something a grant does not cover; an agent cannot, so for MCP the grants apply as they stand and only change when the server restarts.
+Una autorización permanente por recurso, que se aplica tanto al chat del Asistente de IA como a cualquier agente conectado a través del servidor MCP. Además, el chat puede pedir algo que una autorización no cubra; un agente no puede hacerlo, así que en MCP las autorizaciones se aplican tal como están y solo cambian cuando el servidor se reinicia.
 
-![AI Features Permissions preferences](~/content/assets/images/pref-ai-permissions.png)
+![Preferencias de permisos de las funciones de IA](~/content/assets/images/pref-ai-permissions.png)
 
-| Resource                   | Niveles             | Predeterminado | What it covers                                                                                                                                                     |
-| -------------------------- | ------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Model metadata**         | Deny / Read / Write | Read           | Tables, columns, measures, expressions, descriptions and relationships, plus VertiPaq Analyzer statistics. Write allows changes through C# scripts |
-| **Model data**             | Deny / Read         | Deny           | Data values from your model, such as DAX query results. There is no write level                                                                    |
-| **Best Practice Analyzer** | Deny / Read / Write | Read           | Read lists rules and runs the analysis; Write adds or modifies rules                                                                                               |
-| **Documents**              | Deny / Read / Write | Write          | Your open C# script and DAX query tabs. Read is their contents; Write creates or modifies them                                                     |
-| **Macros**                 | Deny / Read / Write | Write          | Your macro library                                                                                                                                                 |
+| Recurso                    | Niveles                   | Predeterminado | Qué cubre                                                                                                                                                                                     |
+| -------------------------- | ------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Metadatos del modelo**   | Denegar / Leer / Escribir | Leer           | Tablas, columnas, medidas, expresiones, descripciones y relaciones, además de las estadísticas del Analizador VertiPaq. Escribir permite realizar cambios mediante C# Scripts |
+| **Datos del modelo**       | Denegar / Leer            | Denegar        | Valores de datos del modelo, como los resultados de Consultas DAX. No existe un nivel de escritura                                                                            |
+| **Best Practice Analyzer** | Denegar / Leer / Escribir | Leer           | Leer muestra las reglas y ejecuta el análisis; escribir agrega o modifica reglas                                                                                                              |
+| **Documentos**             | Denegar / Leer / Escribir | Escribir       | Tus pestañas abiertas de C# Scripts y de Consultas DAX. Leer permite ver su contenido; escribir permite crearlas o modificarlas                                               |
+| **Macros**                 | Denegar / Leer / Escribir | Escribir       | Tu biblioteca de macros                                                                                                                                                                       |
 
-**Write** covers Read, so there is no need to grant both. **Model data** is the one resource denied by default, because metadata describes your model while data _is_ its contents.
+**Escribir** incluye el permiso de lectura, por lo que no es necesario conceder ambos permisos. Los **datos del modelo** son el único recurso que se deniega de forma predeterminada, porque los metadatos describen tu modelo, mientras que los datos _son_ su contenido.
 
-In the Enterprise, Consultancy and Trial editions an administrator can cap any of these by [policy](xref:policies), separately for the chat and for the MCP server. A capped dropdown is shown read-only. See @ai-assistant for how the chat asks for what a grant does not cover, and @mcp-server for what an agent sees.
+En las ediciones Enterprise, Consultancy y Trial, un administrador puede establecer un límite para cualquiera de estos mediante una [política](xref:policies), por separado para el chat y para el servidor MCP. Un desplegable con límite se muestra en modo de solo lectura. Consulta @ai-assistant para ver cómo el chat solicita lo que un permiso no cubre, y @mcp-server para ver lo que ve un agente.
 
-## Tabular Editor > Miscellaneous
+## Tabular Editor > Miscelánea
 
-![Miscellaneous preferences](~/content/assets/images/pref-miscellaneous.png)
+![Preferencias de Miscelánea](~/content/assets/images/pref-miscellaneous.png)
 
 ### Sincronización de metadatos
 
-These settings control how Tabular Editor 3 deals with model metadata that changes outside the application. The first three cover a model loaded from a database on an instance of Analysis Services and rely on an Analysis Services trace. **Automatically reload from disk** covers a model loaded from a file or a folder, and watches those files directly.
+Estas configuraciones controlan cómo gestiona Tabular Editor 3 los metadatos del modelo que cambian fuera de la aplicación. Las tres primeras se aplican a un modelo cargado desde una base de datos en una instancia de Analysis Services y dependen de una traza de Analysis Services. **Recargar automáticamente desde disco** se aplica a un modelo cargado desde un archivo o una carpeta, y supervisa esos archivos directamente.
 
 ##### _Advertir cuando los metadatos locales estén desincronizados con el modelo implementado_ (habilitado)
 
@@ -601,9 +601,9 @@ Al igual que Power BI Desktop puede detectar cuándo una herramienta externa rea
 
 Cuando está habilitado el mecanismo de trazas descrito anteriormente, esta opción permite que Tabular Editor actualice automáticamente los metadatos del modelo cuando se detecta un cambio externo. Esto es útil si cambias a menudo entre Power BI Desktop y Tabular Editor 3.
 
-##### _Automatically reload from disk_ (enabled)
+##### _Recargar automáticamente desde disco_ (habilitado)
 
-When checked, Tabular Editor watches the metadata files the model was loaded from and reloads the model when another application changes them. Unlike the two settings above, this doesn't involve an Analysis Services trace: it watches the files themselves, so it covers a model loaded from a `.bim` file or from a folder, whether or not a server is involved. If the model has unsaved changes, Tabular Editor asks you which copy to keep. See [Auto-reload from disk](xref:auto-reload).
+Cuando está marcada, Tabular Editor supervisa los archivos de metadatos desde los que se cargó el modelo y vuelve a cargar el modelo cuando otra aplicación los modifica. A diferencia de las dos opciones anteriores, esto no implica una traza de Analysis Services: supervisa los propios archivos, por lo que se aplica a un modelo cargado desde un archivo `.bim` o desde una carpeta, haya o no un servidor de por medio. Si el modelo tiene cambios sin guardar, Tabular Editor te pregunta qué copia quieres conservar. Consulta [Recarga automática desde disco](xref:auto-reload).
 
 ##### _Limpiar trazas huérfanas de Tabular Editor_
 
@@ -614,9 +614,9 @@ Normalmente, Tabular Editor 3 debería detener y eliminar automáticamente cualq
 
 ## Exploración de datos > Pivot Grid
 
-![Pivot Grid preferences](~/content/assets/images/pref-pivot-grid.png)
+![Preferencias de Pivot Grid](~/content/assets/images/pref-pivot-grid.png)
 
-### Basic
+### Básico
 
 ##### _Actualización automática de Pivot Grid_ (activada)
 
@@ -626,7 +626,7 @@ Actualiza automáticamente las cuadrículas Pivot Grid cuando se guardan los cam
 
 Muestra una advertencia cuando las definiciones de campos del Pivot Grid no coinciden con el modelo actual. Esto puede ocurrir si has eliminado o cambiado el nombre de los campos usados en un Pivot Grid guardado.
 
-### Field Headers
+### Encabezados de campo
 
 ##### _Ajuste de línea en los encabezados del Pivot Grid_ (habilitado)
 
@@ -652,73 +652,73 @@ Elige el diseño predeterminado para la lista de campos de la Pivot Grid. Las op
 - **BottomPanelOnly2by2**: Lista de campos en una cuadrícula 2x2 en la parte inferior
 - **BottomPanelOnly1by4**: Lista de campos en un diseño 1x4 en la parte inferior
 
-## Data Browsing > DAX Query
+## Exploración de datos > Consulta DAX
 
-![DAX Query preferences](~/content/assets/images/pref-dax-query.png)
+![Preferencias de la Consulta DAX](~/content/assets/images/pref-dax-query.png)
 
-### Basic
+### Básico
 
-##### _Automatically execute DAX queries by default_ (enabled)
+##### _Ejecutar automáticamente las Consultas DAX de forma predeterminada_ (habilitado)
 
-New DAX queries open with **Auto-execute** enabled, so the query re-runs whenever changes are made to the deployed semantic model. Turn it off if you would rather execute each query yourself.
+Las nuevas Consultas DAX se abren con **Ejecución automática** activada, por lo que se vuelven a ejecutar cada vez que se realizan cambios en el modelo semántico implementado. Desactiva esta opción si prefieres ejecutar cada consulta por tu cuenta.
 
-##### _Keep existing sorting and filtering in the result grid_ (WhenQueryUnchanged)
+##### _Mantener la ordenación y el filtrado existentes en la cuadrícula de resultados_ (WhenQueryUnchanged)
 
 Controla si se deben conservar los filtros y la ordenación de la cuadrícula al volver a ejecutar consultas:
 
-- **Never**: sorting and filtering are always reset when a query is executed
-- **WhenQueryUnchanged**: sorting and filtering are reset only when the query is modified
-- **Always**: sorting and filtering are never reset if the columns still exist
+- **Nunca**: la ordenación y el filtrado siempre se restablecen cuando se ejecuta una consulta
+- **WhenQueryUnchanged**: la ordenación y el filtrado se restablecen solo cuando se modifica la consulta
+- **Always**: la ordenación y el filtrado nunca se restablecen si las columnas siguen existiendo
 
-### Query settings
+### Configuración de la consulta
 
-##### _Smart selection_ (enabled)
+##### _Selección inteligente_ (habilitada)
 
-When you execute part of a query, Tabular Editor turns that selection into a valid DAX query on your behalf, wrapping a scalar expression in curly braces and adding the `DEFINE` section or the `EVALUATE` keyword when they are not part of the selection.
+Cuando ejecutas parte de una consulta, Tabular Editor convierte esa selección en una consulta DAX válida automáticamente, envolviendo una expresión escalar entre llaves y añadiendo la sección `DEFINE` o la palabra clave `EVALUATE` cuando no forman parte de la selección.
 
-##### _Row limit_ (1,000)
+##### _Límite de filas_ (1,000)
 
-Wraps every `EVALUATE` statement in a `TOPN` call, to keep an accidental query over a large table from running for a long time or exhausting memory. Set it to `0` to remove the limit entirely.
+Envuelve cada instrucción `EVALUATE` en una llamada a `TOPN`, para evitar que una consulta accidental sobre una tabla grande se ejecute durante mucho tiempo o agote la memoria. Establécelo en `0` para quitar el límite por completo.
 
-### Code Generation
+### Generación de código
 
-##### _Use comments as separators_ (enabled)
+##### _Usar comentarios como separadores_ (habilitado)
 
-Insert comments into generated object definitions, for example the `DEFINE` block produced by **Define object in query**, to make them easier to read.
+Inserta comentarios en las definiciones de objetos generadas, por ejemplo en el bloque `DEFINE` producido por **Definir objeto en la consulta**, para que sean más fáciles de leer.
 
-## Data Browsing > Table Preview
+## Exploración de datos > Vista previa de tabla
 
-![Table Preview preferences](~/content/assets/images/pref-table-preview.png)
+![Preferencias de Vista previa de tabla](~/content/assets/images/pref-table-preview.png)
 
-### Basic
+### Básico
 
-##### _Automatically refresh table previews by default_ (enabled)
+##### _Actualizar automáticamente las Vistas previas de tabla de forma predeterminada_ (habilitado)
 
-New table previews open with **Auto-refresh** enabled, so the preview refreshes whenever changes are made to the deployed semantic model. This is useful when debugging: update an expression in one window while a preview of the same table is open in another.
+Las nuevas Vistas previas de tabla se abren con **Actualización automática** habilitada, de modo que la vista previa se actualiza cada vez que se realizan cambios en el modelo semántico implementado. Esto es útil al depurar: actualiza una expresión en una ventana mientras mantienes abierta una vista previa de la misma tabla en otra.
 
-##### _Sort table preview columns alphabetically_ (disabled)
+##### _Ordenar alfabéticamente las columnas de la Vista previa de tabla_ (desactivado)
 
-When checked, table preview columns are sorted alphabetically by name, matching the order the @tom-explorer-view lists a table's columns in. When unchecked (the default), columns appear in the order the engine returns them, which is roughly internal column order and can look arbitrary.
+Al marcarla, las columnas de la Vista previa de tabla se ordenan alfabéticamente por nombre, coincidiendo con el orden en que @tom-explorer-view muestra las columnas de una tabla. Cuando no está marcada (valor predeterminado), las columnas aparecen en el orden en que las devuelve el motor, que es aproximadamente el orden interno de las columnas y puede parecer arbitrario.
 
-##### _Max. values in filter dropdown_ (5,000)
+##### _Máx. valores en el menú desplegable del filtro_ (5,000)
 
-Maximum number of distinct values listed in a column's filter dropdown. On a column with more distinct values than this, the values beyond the limit are not listed and cannot be ticked directly. Raising it lists more values at the cost of a heavier query each time the dropdown is opened. Accepts 100 to 1,000,000.
+Número máximo de valores distintos que se muestran en el desplegable de filtro de una columna. En una columna con más valores distintos que este límite, los valores que lo superen no se mostrarán en la lista ni podrán marcarse directamente. Al aumentarlo, se mostrarán más valores, a costa de una consulta más pesada cada vez que se abra el desplegable. Acepta de 100 a 1.000.000.
 
-##### _Max. rows to sort without an attribute hierarchy_ (100,000)
+##### _Máx. filas para ordenar sin una jerarquía de atributos_ (100.000)
 
-Upper bound on the number of rows Tabular Editor sorts by a column that has no attribute hierarchy to sort on.
+Límite superior del número de filas que Tabular Editor ordena al ordenar por una columna que no tiene una jerarquía de atributos para ordenar.
 
 ### DirectQuery
 
-##### _Row limit_ (100)
+##### _Límite de filas_ (100)
 
-Maximum number of rows to retrieve for a table preview in DirectQuery mode. Raise it if you need to see more data, bearing in mind that every row is fetched from the underlying source.
+Número máximo de filas que se pueden recuperar para una Vista previa de tabla en modo DirectQuery. Auméntalo si necesitas ver más datos, teniendo en cuenta que cada fila se recupera del origen subyacente.
 
 ### Comportamiento
 
-##### _Track selected column in TOM Explorer_ (enabled)
+##### _Seguir la columna seleccionada en el Explorador TOM_ (habilitado)
 
-When you select a column in the @tom-explorer-view, the open table preview scrolls that column into view and highlights it, which is the quickest way to find one column of a very wide table. The same setting can be turned on and off for a single preview with **Track selected column** on the Table Preview toolbar.
+Cuando seleccionas una columna en la vista @tom-explorer-view, la Vista previa de tabla abierta se desplaza hasta esa columna y la resalta; es la forma más rápida de encontrar una columna en una tabla muy ancha. La misma configuración puede activarse y desactivarse para una sola vista previa con **Seguir la columna seleccionada** en la barra de herramientas de la Vista previa de tabla.
 
 ## Editor de DAX > General
 
@@ -867,7 +867,7 @@ Si se activa, los prefijos de tabla se quitan automáticamente de las referencia
 
 ##### _Uso de mayúsculas preferido para palabras clave_ (MAYÚSCULAS)
 
-Esta configuración permite cambiar el uso de mayúsculas/minúsculas de las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. It also governs the fixed keyword _values_ auto-complete offers for functions that take them: `ASC` and `DESC`, `KEEP`, `FIRST`, `LAST` and `DEFAULT`, the `CROSSFILTER` directions and `LOOKUP`'s `EXPLICIT` and `INFERRED`. Choose **Capitalize first letter only** to be offered `Explicit` rather than `EXPLICIT`.
+Esta configuración permite cambiar el uso de mayúsculas/minúsculas de las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. También controla los _valores_ de palabras clave fijas que ofrece el autocompletado para las funciones que los aceptan: `ASC` y `DESC`, `KEEP`, `FIRST`, `LAST` y `DEFAULT`, las direcciones de `CROSSFILTER` y los valores `EXPLICIT` e `INFERRED` de `LOOKUP`. Elige **Capitalizar solo la primera letra** para que se ofrezca `Explicit` en lugar de `EXPLICIT`.
 
 ##### _Uso de mayúsculas preferido para funciones_ (MAYÚSCULAS)
 
@@ -891,7 +891,7 @@ Las columnas de extensión se pueden definir sin un nombre de tabla. Si se activ
 
 ## Editor de DAX > Code Assist
 
-![DAX Editor Code Assist preferences](~/content/assets/images/pref-dax-code-assist.png)
+![Preferencias de Code Assist del Editor de DAX](~/content/assets/images/pref-dax-code-assist.png)
 
 En esta página puedes configurar las dos funciones más importantes de Code Assist: los calltips (también conocidos como "información de parámetros") y el autocompletado.
 
@@ -921,7 +921,7 @@ Muestra solo los elementos que empiezan por la letra escrita. Desactiva esta opc
 
 ## Editor de DAX > Acciones de código
 
-![DAX Editor Code Actions preferences](~/content/assets/images/pref-dax-code-actions.png)
+![Preferencias de acciones de código del Editor de DAX](~/content/assets/images/pref-dax-code-actions.png)
 
 Configura sugerencias automáticas de mejora de código:
 
@@ -985,7 +985,7 @@ Especifica dónde se almacenan los diccionarios de ofuscación. El diccionario m
 
 ## Analizador VertiPaq
 
-![VertiPaq Analyzer preferences](~/content/assets/images/pref-vertipaq-analyzer.png)
+![Preferencias del Analizador VertiPaq](~/content/assets/images/pref-vertipaq-analyzer.png)
 
 ##### _Incluir metadatos de TOM_ (habilitado)
 
@@ -1016,7 +1016,7 @@ Número de columnas que se analizan en cada lote. Ajusta esto en función del ta
 
 ## Integración con Power BI
 
-![Power BI Integration preferences](~/content/assets/images/pref-power-bi.png)
+![Preferencias de integración con Power BI](~/content/assets/images/pref-power-bi.png)
 
 ##### _URL base del punto de conexión de Power BI_ (`https://api.powerbi.com`)
 
@@ -1032,7 +1032,7 @@ Usa el navegador integrado para la autenticación OAuth en lugar del navegador d
 
 ## Configuración del proxy
 
-![Proxy Settings preferences](~/content/assets/images/pref-proxy-settings.png)
+![Preferencias de configuración de proxy](~/content/assets/images/pref-proxy-settings.png)
 
 ##### _Tipo de proxy_ (Ninguno)
 
