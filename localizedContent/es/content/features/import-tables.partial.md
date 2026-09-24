@@ -58,10 +58,10 @@ Actualmente, Tabular Editor 3 admite de forma nativa los siguientes orígenes de
 - Snowflake\*
 - Dataflow de Power BI\*
 - Databricks\*
-- Fabric Lakehouse
-- Fabric Warehouse
-- Fabric SQL Database
-- Fabric Mirrored Database
+- Lakehouse de Fabric
+- Warehouse de Fabric
+- Base de datos SQL de Fabric
+- Base de datos reflejada de Fabric
 
 \*=Estos orígenes de datos solo se admiten como orígenes de datos implícitos en los modelos de datos de Power BI. No están disponibles en SSAS / Azure AS.
 
@@ -74,22 +74,22 @@ Después de elegir uno de los orígenes de datos de la lista, Tabular Editor mue
 
 Si desea que Analysis Services use credenciales diferentes al conectarse, puede especificarlo editando las propiedades del origen de datos en el Tabular Object Model después de importar las tablas.
 
-## Connecting to a data source
+## Conectarse a un Data source
 
-Each source type has its own connection dialog, and the authenticators on offer differ between them. The choice matters beyond the first connection, because some authenticators need a person at the keyboard and so cannot be used for a scheduled refresh.
+Cada tipo de origen tiene su propio cuadro de diálogo de conexión y los métodos de autenticación disponibles varían entre ellos. La elección es importante más allá de la primera conexión, porque algunos métodos de autenticación requieren a una persona delante del teclado y, por tanto, no pueden usarse para una actualización programada.
 
-See @connectivity for the full list, and the page for your source:
+Consulta @connectivity para ver la lista completa y la página correspondiente a tu origen:
 
-- @connect-sql-server, covering Azure SQL and Synapse
-- @connect-snowflake, including key pair authentication for unattended work
+- @connect-sql-server, que abarca Azure SQL y Synapse
+- @connect-snowflake, incluida la autenticación con par de claves para trabajo desatendido
 - @connect-databricks
 - @connect-oracle
-- @connect-odbc, which is also how PostgreSQL, MySQL, MariaDB and IBM Db2 are reached
+- @connect-odbc, que es también la vía para conectarse a PostgreSQL, MySQL, MariaDB e IBM Db2
 - @connect-oledb
 - @connect-onelake
 - @connect-dataflows
 
-Credentials are stored per user and per model in the [user options](xref:user-options) file, encrypted with your Windows account key, and never become part of the model metadata.
+Las credenciales se almacenan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options), cifradas con la clave de la cuenta de Windows, y nunca pasan a formar parte de los metadatos del modelo.
 
 ## Seleccionar objetos para importar
 
@@ -124,10 +124,10 @@ En este punto, debería ver sus tablas importadas con todas las columnas, los ti
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
-Columns are created in the order they appear in the source table. Importing the same table twice therefore produces the same column order both times.
+Las columnas se crean en el orden en que aparecen en la tabla de origen. Importar la misma tabla dos veces produce, por tanto, el mismo orden de columnas en ambas ocasiones.
 
 > [!NOTE]
-> Creating Import tables from a **Fabric Lakehouse** or **Fabric Warehouse** reads the table's schema through the SQL analytics endpoint carried on the data source. Where no endpoint can be determined and none is given in the import settings, Tabular Editor reports an error naming what it needs: the SQL endpoint as the server, or a workspace id and item id. It does not create a table with no columns.
+> Al crear tablas de importación a partir de un **Lakehouse de Fabric** o un **Warehouse de Fabric**, se lee el esquema de la tabla a través del punto de conexión de análisis SQL del Data source. Si no se puede determinar ningún punto de conexión y no se indica ninguno en la configuración de importación, Tabular Editor muestra un error indicando lo que necesita: el punto de conexión SQL como servidor, o bien un ID de Workspace y un ID de elemento. No crea una tabla sin columnas.
 
 ## Actualización del esquema de tabla
 
@@ -137,7 +137,7 @@ Si se agregan o cambian columnas en el origen, o si ha modificado recientemente 
 
 Esta opción del menú se puede invocar a nivel de modelo, así como en una colección de tablas o incluso en particiones individuales de una tabla.
 
-When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), to determine whether columns need to be added, modified or removed. Columns follow the source table's own column order, so a schema update does not shuffle them.
+Al usar esta opción, Tabular Editor se conectará a todos los Data sources pertinentes (solicitando credenciales cuando sea necesario) para determinar si es necesario agregar, modificar o eliminar columnas. Las columnas siguen el orden de la tabla de origen, por lo que una actualización del esquema no las reordena.
 
 > [!IMPORTANT]
 > Si una columna que se importó anteriormente en su modelo semántico se ha quitado o se ha cambiado de nombre en el origen, debe actualizar el esquema de la tabla en su modelo semántico. De lo contrario, las operaciones de actualización de datos pueden fallar.
