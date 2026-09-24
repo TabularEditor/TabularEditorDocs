@@ -19,9 +19,9 @@ Desde la versión [2.7.4](https://github.com/TabularEditor/TabularEditor/release
 
 ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-01.png)
 
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Hierarchical by parent**: The search will apply to _parent_ objects, that is Tables and Display Folders (if those are enabled). Cuando un elemento padre cumpla los criterios de búsqueda, se mostrarán todos los elementos hijos.
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Hierarchical by children**: The search will apply to _child_ objects, that is Measures, Columns, Hierarchies, etc. Los objetos padre solo se mostrarán si tienen al menos un objeto hijo que cumpla los criterios de búsqueda.
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Flat**: The search will apply to all objects, and results will be displayed in a flat list. Los objetos que contengan elementos secundarios seguirán mostrándolos de forma jerárquica.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Jerárquico por padre**: La búsqueda se aplicará a los objetos _padre_, es decir, tablas y carpetas de visualización (si están habilitadas). Cuando un elemento padre cumpla los criterios de búsqueda, se mostrarán todos los elementos hijos.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Jerárquico por hijos**: La búsqueda se aplicará a los objetos _hijos_, es decir, medidas, columnas, jerarquías, etc. Los objetos padre solo se mostrarán si tienen al menos un objeto hijo que cumpla los criterios de búsqueda.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Plano**: La búsqueda se aplicará a todos los objetos y los resultados se mostrarán en una lista plana. Los objetos que contengan elementos secundarios seguirán mostrándolos de forma jerárquica.
 
 ## Búsqueda simple
 
@@ -55,7 +55,7 @@ Los comodines se pueden colocar en cualquier parte de la cadena y puedes incluir
 
 ## Búsqueda con LINQ dinámico
 
-You can also use [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) to search for objects, which is the same thing you do when creating [Best Practice Analyzer rules](xref:best-practice-analyzer). Para habilitar el modo LINQ dinámico en el cuadro de texto Filtro, solo tienes que poner un `:` (dos puntos) delante de tu cadena de búsqueda. Por ejemplo, para ver todos los objetos cuyo nombre termina en "Key" (distingue entre mayúsculas y minúsculas), escribe:
+También puedes usar [LINQ dinámico](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) para buscar objetos, lo mismo que haces al crear reglas del [Best Practice Analyzer](xref:best-practice-analyzer). Para habilitar el modo LINQ dinámico en el cuadro de texto Filtro, solo tienes que poner un `:` (dos puntos) delante de tu cadena de búsqueda. Por ejemplo, para ver todos los objetos cuyo nombre termina en "Key" (distingue entre mayúsculas y minúsculas), escribe:
 
 ```
 :Name.EndsWith("Key")
