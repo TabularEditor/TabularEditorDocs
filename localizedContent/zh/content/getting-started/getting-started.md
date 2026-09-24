@@ -23,23 +23,23 @@ applies_to:
 
 从我们的[下载页面](xref:downloads)下载最新版本的 Tabular Editor 3。
 
-We recommend the 64-bit `.exe` installer on .NET 10 for most scenarios. Once downloaded, double-click it and complete the installer pages.
+在大多数场景下，我们建议使用基于 .NET 10 的 64 位 `.exe` 安装程序。下载完成后，双击运行，并按安装向导页面提示完成安装。
 
 ![Install](~/content/assets/images/getting-started/install.png)
 
 ### 先决条件
 
-For the `.exe` installer, the matching **.NET Desktop Runtime**: [10](https://dotnet.microsoft.com/download/dotnet/10.0) for the recommended build, or [8](https://dotnet.microsoft.com/download/dotnet/8.0) for the .NET 8 build. The installer offers to download and install it for you, so in practice there is nothing to do beforehand.
+对于 `.exe` 安装程序，需要安装匹配的 **.NET Desktop Runtime**：推荐版本对应 [10](https://dotnet.microsoft.com/download/dotnet/10.0)，.NET 8 版本对应 [8](https://dotnet.microsoft.com/download/dotnet/8.0)。安装程序会自动下载并安装它，因此实际上事先无需做任何准备。
 
-The other two packages differ. The `.msi` does not bring the runtime along, so install it yourself when deploying centrally, and the portable `.zip` is self-contained and needs no runtime at all.
+另外两个组件有所不同。 `.msi` 不附带运行时，因此在集中部署时需要自行安装；而便携式 `.zip` 为自包含版本，完全不需要运行时。
 
 ### 系统要求
 
 - **操作系统：** Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
 - **架构：** x64、ARM64（自 3.23.0 起原生支持）
-- **.NET Runtime:** .NET Desktop Runtime 10 or 8, matching the build you install
+- **.NET 运行时：** .NET Desktop Runtime 10 或 8，与你安装的构建相匹配
 
-See @system-requirements for the full matrix and for how to choose between the builds.
+完整矩阵以及如何在不同构建之间进行选择，见 @system-requirements。
 
 ## 激活安装
 
