@@ -241,17 +241,17 @@ CLI 随附一套权威的内置 BPA 规则集，并以 JSON 资源的形式嵌�
 
 在 Windows 上，`te` 遵循与 Tabular Editor 3 相同的管理员策略。策略从注册表 `Software\Policies\Tabular Editor ApS` 下读取：可选的 `TECLI` 子项用于仅对 CLI 生效的值，`TE3` 子项用于桌面版；同时也会从更早的 `Software\Policies\Kapacity\Tabular Editor` 项读取，该项仍按原样继续生效。计算机范围的值 (`HKEY_LOCAL_MACHINE`) 优先于用户范围的值 (`HKEY_CURRENT_USER`)；在同一注册表配置单元内，产品专用值优先于共享值。如果某项策略关闭了某个功能，命令会指出是哪个策略导致的，不执行任何操作，并以失败退出——这样一来，依赖某项后来被管理员关闭的功能的管道会明确失败，而不是把根本没做的工作也 Report 为成功。
 
-| 策略                     | 对 CLI 的影响                                                                                                                                                                                                                                                                                                                            |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DisableCSharpScripts` | 拒绝执行 `te script` 以及 `te bpa run --fix` 的自动修复功能。                                                                                                                                                                                                                                                                                      |
-| `DisableMacros`        | 拒绝执行所有 `te macro` 命令。                                                                                                                                                                                                                                                                                                                |
-| `DisableBpaDownload`   | 拒绝使用以 URL 形式提供的 Best Practice Analyzer 规则。磁盘上的规则文件和内置规则不受影响。                                                                                                                                                                                                                                                                         |
-| `DisableTelemetry`     | 无论配置中的 `disableTelemetry` 如何设置，都会关闭匿名使用情况统计。                                                                                                                                                                                                                                                                                         |
-| `BlockUnsafeScripts`   | Allows `te script`, `te macro run` and `te bpa run --fix` only where the code stays within the semantic model. Anything that reads or writes a file, reaches the network, starts another program or references an outside assembly is refused before it runs, with `blockedByPolicy` in JSON output. |
+| 策略                     | 对 CLI 的影响                                                                                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DisableCSharpScripts` | 拒绝执行 `te script` 以及 `te bpa run --fix` 的自动修复功能。                                                                                                     |
+| `DisableMacros`        | 拒绝执行所有 `te macro` 命令。                                                                                                                               |
+| `DisableBpaDownload`   | 拒绝使用以 URL 形式提供的 Best Practice Analyzer 规则。磁盘上的规则文件和内置规则不受影响。                                                                                        |
+| `DisableTelemetry`     | 无论配置中的 `disableTelemetry` 如何设置，都会关闭匿名使用情况统计。                                                                                                        |
+| `BlockUnsafeScripts`   | 仅当代码保持在语义模型范围内时，才允许使用 `te script`、`te macro run` 和 `te bpa run --fix`。任何读取或写入文件、访问网络、启动其他程序或引用外部程序集的操作，都会在运行前被拒绝，并在 JSON 输出中以 `blockedByPolicy` 标记。 |
 
 用于控制 CLI 不具备功能的策略——更新检查、错误Report、DAX优化器、DAX 组件管理器、AI 助手和 MCP 服务器——对 CLI 不起作用。完整的策略列表及部署方式见 @policies。
 
-`BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition in the desktop application. The CLI has no editions, so it simply applies the policy wherever it finds it. See [C# Scripts](xref:csharp-scripts#administrator-policies) for what counts as staying within the model.
+在桌面应用中使用 `BlockUnsafeScripts` 需要 Tabular Editor 3 企业版。 CLI 没有版本之分，因此只要检测到该策略就会应用。有关哪些情况算作保持在模型范围内，请参阅 [C# Script](xref:csharp-scripts#administrator-policies)。
 
 ## 环境变量
 
