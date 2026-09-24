@@ -35,7 +35,7 @@ Esta página te guía paso a paso por el proceso de crear un nuevo modelo semán
 
 ![Nuevo modelo](~/content/assets/images/tutorials/new-pbi-model.png)
 
-- Indica un nombre para tu modelo o usa el valor predeterminado. Then, set the compatibility level to "1706 (Power BI / Fabric)".
+- Indica un nombre para tu modelo o usa el valor predeterminado. Luego, establece el nivel de compatibilidad en "1706 (Power BI / Fabric)".
 - Para obtener la mejor experiencia de desarrollo, marca la opción "Usar base de datos del Workspace". Esto requiere que tengas un Workspace de desarrollo disponible en Power BI, con el punto de conexión XMLA de lectura/escritura habilitado. Al hacer clic en Aceptar, se te pedirá que introduzcas la cadena de conexión del Workspace de Power BI en el que quieres que se cree la base de datos del Workspace.
 
 > [!NOTE]
