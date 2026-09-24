@@ -34,7 +34,7 @@ applies_to:
 5. **表达式编辑器**：表达式编辑器提供一种快捷方式，用于编辑 TOM Explorer 中当前选中对象的任意 DAX、SQL 或 M 表达式。如果你关闭了表达式编辑器，只需在 TOM Explorer 中双击某个对象，即可将其重新打开。顶部的下拉列表可让你在不同的表达式属性之间切换，以防当前选定对象包含多个此类属性（例如，KPI 具有目标表达式、状态表达式和趋势表达式，它们是同一个 KPI 对象下的 3 个不同 DAX 表达式）。
 6. **属性视图**：显示 TOM Explorer 中当前选定对象（一个或多个）的所有可用 TOM 属性的详细信息。大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。
 7. **信息视图**：Tabular Editor 3 会持续分析你模型中的 DAX 表达式，查找语义错误。任何此类错误都会在此处显示。此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。
-8. **状态栏**：状态栏会提供与当前选择相关的各种上下文信息、Best Practice Analyzer 的检测结果等。 When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, with the address the server is listening on in its tooltip. Click it to open the MCP Server dialog, or right-click it to start and stop the server, copy a registration configuration for your agent or jump to the preferences page.
+8. **状态栏**：状态栏会提供与当前选择相关的各种上下文信息、Best Practice Analyzer 的检测结果等。当 [MCP 服务器](xref:mcp-server) 可用时，右侧末端的指示器会显示 **MCP Started** 或 **MCP Stopped**，其工具提示中会显示服务器正在侦听的地址。单击可打开 MCP Server 对话框；右键单击可启动或停止服务器、复制供你的代理使用的注册配置，或跳转到偏好页面。
 
 还提供一些其他视图，用于不同用途。更多信息请查看 [视图菜单](#view) 一节。
 
@@ -124,7 +124,7 @@ applies_to:
 > [!IMPORTANT]
 > 在 Tabular Editor 3 桌面版中，**打开 > 从文件打开模型...** 和 **打开 > 从文件夹打开模型...** 选项不可用，并且 **打开 > 文件...** 对话框只允许打开[支持的文件](xref:supported-files#supported-file-types)，不允许打开包含元数据的文件。
 
-- **还原**：此选项可让你从源重新加载模型元数据，并丢弃在 Tabular Editor 中所做但尚未保存的任何更改。当 Tabular Editor 3 作为 Power BI Desktop 的外部工具使用，并且在 Tabular Editor 3 保持连接期间你在 Power BI Desktop 中进行了更改时，此选项非常有用。选择 **还原** 后，Tabular Editor 3 无需重新连接即可从 Power BI Desktop 重新加载模型元数据。 If you loaded the model from a file or a folder you rarely need this command, because Tabular Editor reloads the model by itself when those files change on disk. See [Auto-reload from disk](xref:auto-reload).
+- **还原**：此选项可让你从源重新加载模型元数据，并丢弃在 Tabular Editor 中所做但尚未保存的任何更改。当 Tabular Editor 3 作为 Power BI Desktop 的外部工具使用，并且在 Tabular Editor 3 保持连接期间你在 Power BI Desktop 中进行了更改时，此选项非常有用。选择 **还原** 后，Tabular Editor 3 无需重新连接即可从 Power BI Desktop 重新加载模型元数据。如果你是从文件或文件夹加载的模型，通常很少需要这个命令，因为当磁盘上的这些文件发生更改时，Tabular Editor 会自行重新加载模型。参见 [从磁盘自动重新加载](xref:auto-reload)。
 - **关闭文档** (Ctrl+W): 关闭主区域中当前处于活动状态的文档或面板，例如 DAX 查询、C# Script、Data model 图，或任何其他具有焦点的视图。如果文档有未保存的更改，Tabular Editor 会在关闭前提示你保存这些更改。此命令具有上下文感知能力，会关闭主 Workspace 区域中当前处于活动状态的项目。
 - **关闭模型**：会从 Tabular Editor 中卸载当前加载的模型元数据。如果你更改了元数据，Tabular Editor 会在关闭前提示你保存这些更改。
 - **保存**：此操作会将当前活动文档保存回源文件。如果当前没有活动文档，此操作会将模型元数据保存回源；源可以是 Model.bim 文件、Database.json（文件夹结构），也可以是已连接的 Analysis Services 实例（包括 Power BI Desktop）或 Power BI XMLA endpoint。
@@ -174,7 +174,7 @@ applies_to:
 - **表达式编辑器**：这是一个“快速编辑器”，可让你编辑 TOM Explorer 中当前选定对象的 DAX、M 或 SQL 表达式。更多信息请参见 @dax-editor。
 - **宏**: 宏视图允许你管理你创建的任何宏。可通过 @csharp-scripts 创建宏。更多信息请参见 @creating-macros。
 - **VertiPaq分析器**：VertiPaq分析器视图允许你收集、导入和导出有关模型数据的详细统计信息，用于优化和调试 DAX 性能。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。更多信息请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
-- **Dependencies**: The [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) visualizes dependencies between the currently selected object and other objects in the model. Tick **Track TOM Explorer** to have it follow the tree selection.
+- **依赖关系**：[**DAX 依赖关系**](xref:creating-and-testing-dax#dax-dependencies) 视图会以可视化方式显示当前选中对象与模型中其他对象之间的依赖关系。勾选 **Track TOM Explorer**，即可让其跟随树形结构中的选中项。
 - **DAX优化器**：DAX优化器视图与 [DAX优化器](https://www.daxoptimizer.com) 集成，用于分析模型中的 DAX 性能问题。
 - **日历编辑器**：日历编辑器视图允许你使用现代时间智能功能在模型中定义和管理日历。
 - **透视编辑器**：透视编辑器视图提供一个矩阵概览，显示模型的每个透视中包含了哪些对象。
@@ -211,7 +211,7 @@ applies_to:
 - **自定义...** 启动 Tabular Editor 3 用户界面布局自定义对话框，可在其中创建新工具栏、重新排列并编辑菜单和工具栏按钮等。
 - **偏好...** 启动 Tabular Editor 3 偏好对话框。它是管理 Tabular Editor 及其各项功能的中心入口，例如更新检查、代理设置、查询行数限制、请求超时等。有关详细信息，请参阅 @preferences。
 - **管理 BPA 规则...**：启动 Best Practice Analyzer 规则管理器，你可以查看和编辑 Best Practice Analyzer 规则及规则集。更多信息见 @bpa-view。
-- **MCP Server...** Launches the MCP Server dialog, from which you start and stop the server that lets an external AI agent work on the model you have open, review the permissions it will be given and copy a registration configuration for your agent. See @mcp-server for more information. The item is hidden when the AI features component is not installed, when **Enable MCP Server** is unchecked, or where an administrator has disabled it by policy.
+- **MCP Server...**：打开 MCP Server 对话框，可在其中启动或停止服务器，使外部 AI 代理能够操作你当前打开的模型，查看将授予它的权限，并复制供你的代理使用的注册配置。更多信息见 @mcp-server。如果未安装 AI 功能组件、未勾选 **启用 MCP 服务器**，或者管理员已通过策略将其禁用，则该项会被隐藏。
 
 ## 窗口
 
@@ -253,11 +253,11 @@ applies_to:
 
 ![帮助菜单](~/content/assets/images/help-menu.png)
 
-- **Online Documentation**: This menu item opens [docs.tabulareditor.com](https://docs.tabulareditor.com), this documentation site, in your default web browser.
+- **联机文档**：这个菜单项会在你的默认 Web 浏览器中打开文档站点 [docs.tabulareditor.com](https://docs.tabulareditor.com)。
 - **入门指南**：这个菜单项会打开 Tabular Editor 3 入门指南，帮助新用户快速上手这个应用。
 - **社区支持**：此菜单项链接到我们的[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)。
 - **专属支持**：此菜单项可让你直接向我们的专属支持热线发送电子邮件。
-- **Get Started**: This menu item opens the **Get Started** page, which collects courses, demos and documentation for Tabular Editor. Prior to Tabular Editor 3.27.0 this item was called **What's New** and showed the release notes of the installed version; release notes now live in the @release-history.
+- **开始使用**：这个菜单项会打开 **开始使用** 页面，其中汇集了 Tabular Editor 的课程、演示和文档。在 Tabular Editor 3.27.0 之前，这个菜单项名为 **新增功能**，用于显示已安装版本的发行说明；现在发行说明已移至 @release-history。
 
 > [!NOTE]
 > 专属支持仅提供给 Tabular Editor 3 企业版客户。其他客户如有任何技术问题、疑问或其他产品相关问题，请前往[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)寻求帮助。
