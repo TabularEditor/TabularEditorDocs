@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Normalize DocFX alerts in Crowdin-translated content.
+Normalize DocFX alerts in translated content.
 
-Crowdin collapses DocFX/GitHub-style alerts that are nested inside list items,
-joining the marker line and the first content line. This:
+Some translation exports (machine translation included) collapse DocFX/GitHub-style
+alerts that are nested inside list items, joining the marker line and the first
+content line. This:
 
     > [!NOTE]
     > text
 
-comes back from Crowdin as:
+comes back from the translator as:
 
     > [!NOTE]> text
 
@@ -20,7 +21,10 @@ alert to a plain <blockquote>, losing the styled NOTE/TIP/IMPORTANT box.
 This script finds the collapsed form and splits it back into two lines,
 preserving the original indentation so the alert stays inside its list item.
 It is idempotent and only rewrites the exact collapsed pattern, so it is safe
-to run after every Crowdin pull. Lines inside fenced code blocks are skipped so
+to run after merging every translation PR; the build runs it on every non-English
+language as a safety net for translator output (build_scripts/translate-content.py
+restores alert markers from English, but older translations and hand edits may
+still carry the collapsed form). Lines inside fenced code blocks are skipped so
 documentation that shows alert syntax verbatim is never altered.
 
 Usage:
@@ -117,7 +121,7 @@ def iter_markdown_files(lang: str | None):
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Split Crowdin-collapsed DocFX alerts back into two lines."
+        description="Split collapsed DocFX alerts in translated content back into two lines."
     )
     parser.add_argument(
         "lang", nargs="?",

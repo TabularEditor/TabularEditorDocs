@@ -10,14 +10,18 @@ target-version = "py311"
 lint.select = ["F", "B", "SIM", "I", "UP"]
 include = [
     "build_scripts/check_links.py",
+    "build_scripts/config_loader.py",
     "build_scripts/csharp_doctest.py",
     "build_scripts/te_script_runner.py",
+    "build_scripts/translate-content.py",
 ]
 
 [tool.mypy]
 files = [
     "build_scripts/check_links.py",
+    "build_scripts/config_loader.py",
     "build_scripts/csharp_doctest.py",
     "build_scripts/te_script_runner.py",
+    "build_scripts/translate-content.py",
 ]
 strict = true
