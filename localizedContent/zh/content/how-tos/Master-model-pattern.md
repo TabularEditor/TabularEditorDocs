@@ -17,7 +17,7 @@ applies_to:
 
 为简化说明，我们以 AdventureWorks 示例模型为例：
 
-![image](~/content/assets/images/master-model-pattern-01.png)
+![图片](~/content/assets/images/master-model-pattern-01.png)
 
 假设出于某种原因，你需要将所有与 Internet Sales 相关的内容部署为一个模型，将所有与 Reseller Sales 相关的内容部署为另一个模型。原因可能是安全、性能、可扩展性；也可能是因为你的团队需要服务多个外部客户，而每个客户都需要一份自己的模型副本，其中既包含共享功能，也包含其专属功能。
 
@@ -27,7 +27,7 @@ applies_to:
 
 思路其实很简单。首先，在模型中新增若干个透视，数量与需要部署的目标模型数量对应。记得用一致的方式为这些透视添加前缀，好把它们与面向用户的透视区分开：
 
-![image](~/content/assets/images/master-model-pattern-02.png)
+![图片](~/content/assets/images/master-model-pattern-02.png)
 
 这里我们在透视名称前使用 `-` 号作为前缀。稍后我们会看到如何从模型中剥离这些透视，从而确保最终用户不会看到它们。它们仅供模型开发人员使用。
 
@@ -71,11 +71,11 @@ foreach(var c in Model.AllColumns.Where(c => c.InPerspective[Selected.Perspectiv
 
 顺便说一句，如果你想复制某个透视，现在已经可以直接在 UI 中完成。在资源管理器树中点击“透视”节点，然后在属性网格中点击省略号按钮：
 
-![image](~/content/assets/images/master-model-pattern-03.png)
+![图片](~/content/assets/images/master-model-pattern-03.png)
 
 这会打开一个对话框，你可以在其中创建和删除透视，也可以克隆现有透视：
 
-![image](~/content/assets/images/master-model-pattern-04.png)
+![图片](~/content/assets/images/master-model-pattern-04.png)
 
 作为补充，下面这段脚本会从透视中移除所有不可见且未使用的对象，便于你做一些清理：
 
@@ -138,9 +138,9 @@ foreach(var m in Model.AllMeasures.Where(m => m.InPerspective[Selected.Perspecti
 - 度量值已隐藏（或该度量值所在的表已隐藏）
 - 在透视中，度量值未被其他任何可见对象上的 DAX 表达式直接或间接引用
 
-如果你们是一个共同开发该模型的团队，那么应该已经在使用 Tabular Editor 的[“保存到文件夹”功能](xref:folder-serialization)，并配合 Git 等版本控制系统。 Make sure to check the "Serialize perspectives per-object" option under **Tools > Preferences > File Formats > Save-to-folder** (**File > Preferences > Save to Folder** in Tabular Editor 2), to avoid getting heaps of merge conflicts on your perspective definitions.
+如果你们是一个共同开发该模型的团队，那么应该已经在使用 Tabular Editor 的[“保存到文件夹”功能](xref:folder-serialization)，并配合 Git 等版本控制系统。请务必在 **工具 > 偏好 > 文件格式 > 保存到文件夹**（Tabular Editor 2 中为 **文件 > 偏好 > 保存到文件夹**）下勾选“Serialize perspectives per-object”选项，以避免在透视定义中产生大量合并冲突。
 
-![image](~/content/assets/images/master-model-pattern-05.png)
+![图片](~/content/assets/images/master-model-pattern-05.png)
 
 ## 增加更精细的控制
 
@@ -152,7 +152,7 @@ foreach(var m in Model.AllMeasures.Where(m => m.InPerspective[Selected.Perspecti
 
 那么我们就在这 3 个原始透视上各新增一个名为“DevPerspectives”的注释，并把开发者透视的名称以逗号分隔的字符串形式填进去：
 
-![image](~/content/assets/images/master-model-pattern-06.png)
+![图片](~/content/assets/images/master-model-pattern-06.png)
 
 在模型中新增 _用户_ 透视时，记得也添加同样的注释，并填写你希望该 _用户_ 透视被包含到哪些开发者透视中。后面在脚本生成最终模型版本时，我们会使用这些注释中的信息来包含所需的透视。数据源和角色也可以用同样的方法。
 
@@ -160,7 +160,7 @@ foreach(var m in Model.AllMeasures.Where(m => m.InPerspective[Selected.Perspecti
 
 在某些情况下，同一个度量值在不同模型版本中可能需要略有不同的表达式或格式字符串。同样地，我们可以用注释按开发者透视提供元数据，然后在脚本生成最终模型时应用这些元数据。
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) script function. 不过对我们的场景来说有点“杀鸡用牛刀”，所以我们直接指定要作为注释存储的属性即可。创建以下脚本：
+如果要把所有对象属性序列化为文本，最简单的方式大概是使用 [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) 脚本函数。不过对我们的场景来说有点“杀鸡用牛刀”，所以我们直接指定要作为注释存储的属性即可。创建以下脚本：
 
 ```csharp
 foreach(var m in Selected.Measures) { 
@@ -172,7 +172,7 @@ foreach(var m in Selected.Measures) {
 
 并将其保存为名为“Save Metadata as Annotations”的自定义操作：
 
-![image](~/content/assets/images/master-model-pattern-07.png)
+![图片](~/content/assets/images/master-model-pattern-07.png)
 
 同样，将以下脚本保存为名为“Load Metadata from Annotations”的自定义操作：
 
@@ -189,7 +189,7 @@ foreach(Measure m in Selected.Measures) {
 
 使用你新建的自定义操作，将特定于模型版本的更改应用到开发者透视（或手动添加注释）。例如，在我们的 Adventure Works 示例中，我们希望 [Day Count] 度量值在 $ResellerModel 透视中使用不同的表达式。因此我们先对该度量值应用更改，然后在下拉框中选中“$ResellerModel”透视的情况下，调用“Save Metadata as Annotations”操作：
 
-![image](~/content/assets/images/master-model-pattern-08.png)
+![图片](~/content/assets/images/master-model-pattern-08.png)
 
 在上面的截图中，我们为每个开发者透视都创建了 3 条注释。但在实际使用中，我们只需要为那些属性值应该不同于其默认值的开发者透视创建这些注释。
 
@@ -197,15 +197,15 @@ foreach(Measure m in Selected.Measures) {
 
 我们也可以用类似的方法，在不同版本之间对分区查询应用不同的更改。例如，根据版本不同，我们可能希望在某些分区查询中使用不同的 SQL `WHERE` 条件。我们先在表对象上创建一组新的注释，用来为每个版本指定分区要使用的基础 SQL 查询。比如在这里，我们希望在三个版本中的两个版本中，限制 Product 表包含哪些记录：
 
-![image](~/content/assets/images/master-model-pattern-09.png)
+![图片](~/content/assets/images/master-model-pattern-09.png)
 
 对于包含多个分区的表，我们使用“占位符”来指定 WHERE 条件，后续会再替换为实际值：
 
-![image](~/content/assets/images/master-model-pattern-10.png)
+![图片](~/content/assets/images/master-model-pattern-10.png)
 
 在每个分区中定义占位符的值（注意：必须使用 [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) 或更高版本，才能通过 UI 编辑分区注释）：
 
-![image](~/content/assets/images/master-model-pattern-11.png)
+![图片](~/content/assets/images/master-model-pattern-11.png)
 
 在动态分区场景中，别忘了在你用来创建新分区的脚本里，也把这些注释包含进去。下一节我们会看看如何在部署过程中应用这些占位符值。
 
@@ -283,7 +283,7 @@ foreach(Table t in Model.Tables) {
 
 注意：如果愿意，我们也可以直接在这个脚本里加入更多针对模型的特定改动；但本练习的重点是：如何直接在 Tabular Editor 内维护多个模型。无论要部署哪个版本，上面的脚本都是一样的（当然，除了第 1 行）。
 
-Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](xref:command-line-options):
+最后，我们可以加载 Model.bim 文件、执行脚本，并使用以下 [命令行语法](xref:command-line-options) 一次性部署修改后的模型：
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ResellerModel.cs -D localhost AdventureWorksReseller -O -R
@@ -300,7 +300,7 @@ start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.b
 
 ## 主模型处理
 
-如果你有专用的处理服务器，并且各个独立模型之间有大量数据重叠，那么可以先把数据处理到主模型中，再进行拆分。这样可以避免对相同数据在各个独立模型中重复处理多次。 **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](#altering-partition-queries).** The recipe for this is outlined below:
+如果你有专用的处理服务器，并且各个独立模型之间有大量数据重叠，那么可以先把数据处理到主模型中，再进行拆分。这样可以避免对相同数据在各个独立模型中重复处理多次。**不过，这样做的前提是：你不会处理任何在不同版本之间分区查询发生过更改的表，如 [本节](#altering-partition-queries) 所示。** 具体做法如下：
 
 1. （可选：如元数据有变更）将主模型部署到处理服务器
 2. 对主模型执行所需的处理（不要处理包含特定版本分区查询的表）。
