@@ -77,7 +77,7 @@ Power BI Desktop 的外部工具存在一些 [限制](xref:desktop-limitations)�
 
 以下设置用于控制 TOM Explorer 的各个方面。你可以在 **Tabular Editor > TOM Explorer** 中找到这些设置：
 
-![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
+![Tom Explorer 设置](~/content/assets/images/unsaved-changes/preferences.png)
 
 ##### _显示完整分支_（已禁用）
 
@@ -240,7 +240,7 @@ SUM(Sales[Amount])
 
 ##### _首选关键字大小写_（默认值：UPPER）
 
-此设置可让你更改关键字的大小写形式，例如 `ORDER BY`、`VAR`、`EVALUATE` 等。 This also applies when a keyword is inserted through the auto-complete feature, including the fixed keyword values of functions that take them. See @preferences for the full list.
+此设置可让你更改关键字的大小写形式，例如 `ORDER BY`、`VAR`、`EVALUATE` 等。这同样适用于通过自动完成功能插入关键字的情况，包括那些将关键字作为参数的函数所提供的固定关键字值。完整列表请参阅 @preferences。
 
 ##### _首选函数大小写_（默认值：UPPER）
 
