@@ -58,13 +58,13 @@ Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
 ![宏编辑信息框](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
-## Administrator policies
+## 管理员策略
 
-Macros can be governed centrally, through the registry policies an IT department deploys. `DisableMacros` stops them being saved or run at all, and macros stored in `%LocalAppData%` are not loaded when Tabular Editor starts.
+宏可通过 IT 部门部署的注册表策略进行集中管控。 `DisableMacros` 会完全阻止宏被保存或运行，并且 Tabular Editor 启动时不会加载存储在 `%LocalAppData%` 中的宏。
 
-In Tabular Editor 3, `BlockUnsafeScripts` allows macros only where they stay within the semantic model. A macro that reads or writes a file, reaches the network, starts another program or references an outside assembly is saved, but left out of every menu so it cannot be run by accident. You will find it under **View > Macros** with its **Blocked** column filled in, where it can still be opened and edited; bring it back inside the line and its menu item returns without restarting Tabular Editor. Saving such a macro tells you it is saved but will not run.
+在 Tabular Editor 3 中，`BlockUnsafeScripts` 仅允许宏保持在语义模型范围内。会读取或写入文件、访问网络、启动其他程序或引用外部程序集的宏仍可保存，但不会出现在任何菜单中，因此无法被误运行。你会在 **View > Macros** 下找到它，此时它的 **Blocked** 列会被填上标记；你仍然可以打开并编辑它。把它移回到该行内，它的菜单项就会恢复，无需重启 Tabular Editor。保存此类宏时，会提示你该宏已保存，但无法运行。
 
-See [C# Scripts](xref:csharp-scripts#administrator-policies) for what counts as staying within the model, and @policies for the registry values themselves.
+有关哪些情况算作在语义模型范围内，请参阅 [C# Script](xref:csharp-scripts#administrator-policies)；有关注册表值本身，请参阅 @policies。
 
 ## 宏 JSON 文件
 
