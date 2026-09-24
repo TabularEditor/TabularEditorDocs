@@ -21,7 +21,7 @@ applies_to:
 # Renombrar objetos en una Metric View
 
 Esta guía práctica muestra cómo cambiar el nombre de un campo de una vista de métricas.
-The same pattern applies to every collection in a Metric View: `Fields`, `Measures`, `Dimensions` and `Joins`.
+El mismo patrón se aplica a todas las colecciones en una Metric View: `Fields`, `Measures`, `Dimensions` y `Joins`.
 
 > [!NOTE]
 > Estas guías prácticas están orientadas a Tabular Editor 3.26.2 y versiones posteriores.
@@ -31,7 +31,7 @@ The same pattern applies to every collection in a Metric View: `Fields`, `Measur
 
 ## Cambiar el nombre de un campo
 
-Assign to the object's `Name` property. Everything else about the object (its expression, comment, display name, synonyms and format) is left alone, and it keeps its place in the collection.
+Asigna a la propiedad `Name` del objeto. Todo lo demás del objeto (su expresión, comentario, nombre para mostrar, sinónimos y formato) se mantiene intacto, y conserva su lugar en la colección.
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -59,17 +59,17 @@ Fields:
   Order Month
 ```
 
-The collection's name index is updated with the object, so the field is reachable under its new name straight away:
+El índice de nombres de la colección se actualiza con el objeto, por lo que se puede acceder al campo de inmediato con su nuevo nombre:
 
 ```csharp
 var field = view.Fields["Order Month"];
 ```
 
-## Rules
+## Reglas
 
-- **Names must stay unique within their collection.** Renaming a field to a name another field already uses throws an `ArgumentException`, and neither the object nor the collection is changed.
-- **Name matching is case-insensitive**, following Databricks SQL. `view.Fields["ORDER MONTH"]` finds the field renamed above. A rename that only changes casing is still worth doing, since it refreshes the stored name.
-- **The rename applies to the object model in memory.** Serialize the view to write it out.
+- **Los nombres deben seguir siendo únicos dentro de su colección.** Si le cambias el nombre a un campo por uno que ya usa otro campo, se produce una `ArgumentException` y no se modifica ni el objeto ni la colección.
+- **La coincidencia de nombres no distingue entre mayúsculas y minúsculas**, igual que en Databricks SQL. `view.Fields["ORDER MONTH"]` encuentra el campo al que le cambiaste el nombre antes. Un cambio de nombre que solo modifica las mayúsculas y minúsculas sigue siendo útil, ya que actualiza el nombre almacenado.
+- **El cambio de nombre se aplica al modelo de objetos en memoria.** Serializa la vista para escribirla.
 
 ## Siguientes pasos
 
