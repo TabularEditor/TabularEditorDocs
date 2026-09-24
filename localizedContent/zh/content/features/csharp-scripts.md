@@ -169,7 +169,7 @@ Selected.Measures
 > [!NOTE]
 > 在 Tabular Editor 3.26.0 中，新增了 角色、KPI、日历、计算项、表权限、函数、数据源、单列关系、计算列、计算表列、数据列、计算表和分区的访问器。
 
-Starting with Tabular Editor 3.27.0, objects that were deleted since the model was last saved remain visible in the TOM Explorer, and can be selected. Such objects are not part of the model, so they never appear in the accessors above. Instead, `Selected.Deleted` lists the selected deleted objects, each with a `Name`, `ObjectType`, `Parent` and a `Restore()` method. `Selected.Deleted.Restore()` restores all of them at once. Model objects also expose `HasUnsavedChanges` and `Revert()`, which let a script roll back part of a model. See @unsaved-changes for details.
+从 Tabular Editor 3.27.0 开始，自上次保存模型以来被删除的对象仍会显示在 TOM Explorer 中，并且仍可被选中。这类对象不属于模型，因此不会出现在上面的访问器中。相反，`Selected.Deleted` 会列出当前选中的已删除对象，每个对象都具有 `Name`、`ObjectType`、`Parent` 以及 `Restore()` 方法。 `Selected.Deleted.Restore()` 会一次性还原它们全部。模型对象还提供了 `HasUnsavedChanges` 和 `Revert()`，让脚本能够回滚模型的一部分。详见 @unsaved-changes。
 
 ## 辅助方法
 
@@ -243,10 +243,10 @@ Tabular Editor 提供了一组专用的辅助方法，便于完成某些脚本�
 > 预览与撤销功能仅适用于模型元数据更改。如果脚本执行写入文件、数据库或发起 Web 请求等外部操作，这些操作会立即执行，且无法撤销。预览对话框不会尝试分析脚本代码——其原理是比较执行前后的模型元数据状态。
 
 > [!TIP]
-> The [AI Assistant](xref:ai-assistant) shows this dialog when it runs a script itself, as long as **Preview changes** is on under **Tools > Preferences > AI Features > AI Assistant**. It is on by default, so you always get a chance to review AI-generated model changes before they are applied.
+> 只要在 **工具 > 偏好 > AI 功能 > AI 助手** 中启用 **预览更改**，[AI 助手](xref:ai-assistant) 自行运行脚本时就会显示此对话框。该选项默认开启，因此在应用 AI 生成的模型更改之前，你始终有机会先进行检查。
 
 > [!NOTE]
-> The preview dialog does not apply to a script run by an agent over the [MCP server](xref:mcp-server). Those scripts are compiled, checked by the safety analysis and run against the model atomically. The agent gets back a structured summary of what changed, and the changes are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) for you to review or revert afterwards.
+> 预览对话框不适用于代理通过 [MCP 服务器](xref:mcp-server) 运行的脚本。这些脚本会先编译，并通过安全分析检查，然后以原子方式对模型运行。代理会收到一份结构化的更改摘要，而这些更改也会在 [TOM Explorer 和属性视图](xref:unsaved-changes) 中标记出来，方便你稍后查看或还原。
 
 ## .NET 引用
 
@@ -301,7 +301,7 @@ using TabularEditor.UI;
 通过 Tabular Editor CLI 运行 C# Script 时（尤其是在 CI/CD 流水线中），可以使用环境变量向脚本传递参数。这是推荐的做法，因为 Tabular Editor CLI 执行的 C# Script 不支持传统的命令行参数。
 
 > [!NOTE]
-> `Environment` is one of the types refused when an administrator has set the `BlockUnsafeScripts` policy. See [Administrator policies](#administrator-policies).
+> 当管理员设置了 `BlockUnsafeScripts` 策略时，`Environment` 是被拒绝的类型之一。参见 [管理员策略](#administrator-policies)。
 
 ### 读取环境变量
 
@@ -379,36 +379,36 @@ foreach(var table in Model.Tables)
 Info($"已为 {environment} 环境配置模型");
 ```
 
-## Administrator policies
+## 管理员策略
 
-Scripting can be governed centrally, so what a script may do on your own machine is not always what it may do on a machine your IT department manages. Two [policies](xref:policies) decide that.
+脚本功能可以集中管理，因此，脚本在你自己的电脑上能做的事，在由 IT 部门管理的电脑上不一定也能做。这由两项 [策略](xref:policies) 决定。
 
-`DisableCSharpScripts` turns scripting off outright: scripts cannot be created or executed, and the same goes for macros under `DisableMacros`.
+`DisableCSharpScripts` 会直接禁用脚本功能：既不能创建脚本，也不能执行脚本；启用 `DisableMacros` 时，宏也一样。
 
-`BlockUnsafeScripts` is the middle ground, and the one worth understanding as a script author. Scripts and macros keep working, but only where they stay within the semantic model. A script that reads or writes a file, makes a web request, starts another program, references an outside assembly with `#r`, or sends a command straight to the server is refused before any of it runs.
+`BlockUnsafeScripts` 是折中方案，也是作为脚本作者最该了解的一项策略。脚本和宏仍可继续使用，但前提是它们的操作仅限于语义模型内部。凡是读取或写入文件、发出 Web 请求、启动其他程序、用 `#r` 引用外部程序集，或直接向服务器发送命令的脚本，都会在运行前被拒绝。
 
-### What counts as staying within the model
+### 什么算是在模型内部操作
 
-The decision is made by analyzing the compiled script, not by searching its text, so an indirect route to the same place is refused too: reflection through `Type.GetType` or `InvokeMember`, expression trees and delegate invocation, `Activator`, `AppDomain`, `Environment`, XML readers and writers that take a path or a URL, and type-name-based deserialization.
+系统会通过分析已编译的脚本来做出判断，而不是搜索脚本文本，因此，任何以间接方式达到同样目的的做法也会被拒绝：通过 `Type.GetType` 或 `InvokeMember` 进行反射、表达式树和委托调用、`Activator`、`AppDomain`、`Environment`、接受路径或 URL 的 XML 读取器和写入器，以及基于类型名称的反序列化。
 
-Among the [helper methods](xref:script-helper-methods), the three that write outside the model count as unsafe:
+在 [帮助程序方法](xref:script-helper-methods) 中，有三个会向模型外部写入内容，因此被视为不安全：
 
-| Refused                                       | Still available                                                              |
+| 被拒绝                                           | 仍可用                                                                          |
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
 | `SaveFile`, `ExecuteCommand`, `Bpa.ExportCsv` | `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader`, `ExportProperties` |
 
-Everything in the TOM object model is fine, as are `System`, `System.Linq`, `System.Collections.Generic` and `Newtonsoft.Json`. In practice a script that builds and changes model objects is unaffected, and a script that exports something to disk is not.
+TOM 对象模型中的所有内容都没问题，`System`、`System.Linq`、`System.Collections.Generic` 和 `Newtonsoft.Json` 也一样。在实际使用中，创建和修改模型对象的脚本不受影响，而将内容导出到磁盘的脚本则会受影响。
 
-### What you see when a script is refused
+### 脚本被拒绝运行时的提示
 
-A **Script not run** dialog names the policy and what the script used, and the status bar reads _Script blocked by your organization's policy_. The error list stays empty, because this is not a compile error: the script is valid, it is just not allowed to run here. **Run with preview** behaves the same way and shows no preview dialog.
+**脚本未运行** 对话框会显示策略名称以及脚本使用了哪些内容，状态栏则会显示 _脚本已被组织策略阻止_。错误列表会保持为空，因为这不是编译错误：脚本本身有效，只是不允许在这里运行。**运行并预览** 的行为相同，也不会显示预览对话框。
 
-A macro is analyzed when it is saved. Saving succeeds, and a dialog tells you the macro is saved but will not run. A blocked macro is left out of every menu, so it cannot be run by accident, and appears under **View > Macros** with its **Blocked** column filled in. Edit it back inside the line and its menu item returns, without restarting Tabular Editor.
+宏在保存时会被分析。保存会成功，并且会有一个对话框告诉你这个宏已保存，但无法运行。被阻止的宏不会出现在任何菜单中，因此不会被误运行；它会显示在 **View > Macros** 下，并且其 **Blocked** 列会被填充。把它改回到允许范围内后，它的菜单项就会恢复，无需重启 Tabular Editor。
 
-On the command line, `te script`, `te macro run` and `te bpa run --fix` refuse in the same way, exit with a non-zero code and report `blockedByPolicy` in JSON output.
+在命令行中，`te script`、`te macro run` 和 `te bpa run --fix` 也会以同样的方式拒绝执行，并以非零退出码退出，同时在 JSON 输出中报告 `blockedByPolicy`。
 
 > [!NOTE]
-> `BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition. If the value is set on a copy that is not licensed for it, no script or macro runs at all, safe or not, until an Enterprise license is activated. The Tabular Editor CLI has no editions and simply applies the policy.
+> `BlockUnsafeScripts` 需要 Tabular Editor 3 企业版。如果在未获得该功能许可的副本上设置了此值，那么在激活企业版许可证之前，任何脚本或宏都无法运行，无论是否安全。 Tabular Editor CLI 不区分版本，只会直接应用该策略。
 
 ## 兼容性
 
