@@ -19,12 +19,12 @@ applies_to:
 
 # 实用脚本片段
 
-Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](xref:advanced-scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](xref:custom-actions), so that you can easily reuse them from the context menu.
+这里汇总了一些小脚本片段，帮助你快速上手 Tabular Editor 的 [高级脚本功能](xref:advanced-scripting)。这些脚本中有很多都适合保存为 [自定义操作](xref:custom-actions)，这样你就可以在上下文菜单中轻松复用它们。
 
 另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实际场景的示例，展示了你可以如何利用 Tabular Editor 的脚本功能。
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](xref:how-to-navigate-tom-hierarchy) how-to series. 完整的 TOM 包装器 API 请参阅 @api-index。
+> 如需查阅按模式逐条整理的 C# Script 和 Dynamic LINQ 参考资料，请参阅 [脚本模式](xref:how-to-navigate-tom-hierarchy) 操作指南系列。完整的 TOM 包装器 API 请参阅 @api-index。
 
 ***
 
@@ -310,9 +310,9 @@ var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
 
-The resulting .TSV file looks like this, when opened in Excel:
+在 Excel 中打开后，生成的 .TSV 文件如下所示：
 ![image](~/content/assets/images/useful-script-snippets-03.png)
-The contents of the first column (Object) is a reference to the object. 如果更改了该列内容，后续导入这些属性时可能无法正常进行。如果你想修改对象名称，只需更改第二列（Name）中的值。
+第一列（Object）中的内容是对该对象的引用。如果更改了该列内容，后续导入这些属性时可能无法正常进行。如果你想修改对象名称，只需更改第二列（Name）中的值。
 
 默认情况下，文件会保存到 TabularEditor.exe 所在的文件夹中。默认情况下，仅导出以下属性（如适用，具体取决于所导出对象的类型）：
 
@@ -440,7 +440,7 @@ foreach(var row in tsvRows.Skip(1))
 }
 ```
 
-If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](xref:command-line-options) as follows:
+如果你需要将此流程自动化，可以把上面的脚本保存到文件中，然后按如下方式使用 [Tabular Editor CLI](xref:command-line-options)：
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
@@ -489,7 +489,7 @@ source.ConnectionString = oldConnectionString;
 
 ## 格式化 DAX 表达式
 
-Please see [FormatDax](xref:script-helper-methods) for more information.
+有关详细信息，请参阅 [FormatDax](xref:script-helper-methods)。
 
 ```csharp
 // 适用于 Tabular Editor 2.13.0 或更高版本：
@@ -720,7 +720,7 @@ foreach(var col in aggTable.Columns)
 | `Dataset ExecuteDax(string dax)`                              | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回一个 [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。返回的 Dataset 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。不建议返回超大的数据表，因为这可能会导致内存不足或其他稳定性问题。 |
 | `object EvaluateDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示执行结果的对象。如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                             |
 
-Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
+直接调用这些方法，无需任何前缀。在 Tabular Editor 3.26.x 及更早版本中，也可以通过 `Model.Database` 对象调用它们；从 3.27.0 开始则不再支持，因此 `Model.Database.ExecuteCommand(tmsl)` 将无法再通过编译，应改用 `ExecuteCommand(tmsl)`。
 
 Darren Gosbell 在 [此处](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/) 介绍了一个有趣的用例：如何使用 `ExecuteDax` 方法生成数据驱动的度量值。
 
