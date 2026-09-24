@@ -9,12 +9,12 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       full: true
-      note: "Called C# scripts in Tabular Editor 3"
+      note: "在 Tabular Editor 3 中称为 C# Script"
 ---
 
 # 高级脚本
 
-This is an introduction to the scripting capabilities of Tabular Editor. Everything below applies to both products, but the names differ: what Tabular Editor 2 calls **Advanced Scripting**, Tabular Editor 3 calls **C# scripts**, with a dedicated editor, IntelliSense, a script debugger and saved macros. See @csharp-scripts for the Tabular Editor 3 experience, and @csharp-script-library for real-life examples.
+本文将介绍 Tabular Editor 的脚本功能。下文内容同时适用于这两款产品，但名称不同：Tabular Editor 2 中称为 **高级脚本** 的功能，在 Tabular Editor 3 中称为 **C# Script**，并提供专用编辑器、IntelliSense、脚本调试器和已保存的宏。有关 Tabular Editor 3 中的使用体验，请参阅 @csharp-scripts；实际示例请参阅 @csharp-script-library。
 
 ## 什么是高级脚本？
 
@@ -86,7 +86,7 @@ Model.Tables["FactInternetSales"].Measures["Sales Amount"].DisplayFolder = "New 
 
 要快速引用当前加载的表格模型中的任意对象，可以将该对象从资源管理器树状视图拖放到高级脚本编辑器中：
 
-![Dragging and dropping an object into the Advanced Scripting editor](~/content/assets/images/advanced-scripting-01.gif)
+![将对象拖放到高级脚本编辑器中](~/content/assets/images/advanced-scripting-01.gif)
 
 如需了解 Model 及其后代对象包含哪些属性，请参阅 [TOM 文档](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx)。另外，你也可以查看 <xref:api-index>，获取这个包装对象公开的属性和方法的完整列表。
 
@@ -134,11 +134,11 @@ Selected.Measures
 
 为了让脚本调试更容易，Tabular Editor 提供了一组特殊的辅助方法。从内部实现来看，这些是用 `[ScriptMethod]` 特性修饰的静态方法。该特性允许脚本直接调用这些方法，无需指定命名空间或类名。插件也可以使用 `[ScriptMethod]` 特性，以类似方式将公共静态方法公开给脚本调用。
 
-Some of them may be invoked as extension methods, so `object.Output();` and `Output(object);` are equivalent.
+其中一些也可以作为扩展方法调用，因此 `object.Output();` 和 `Output(object);` 是等效的。
 
-The ones you will reach for most often are `Output()` for inspecting an object mid-script, `Info()`, `Warning()` and `Error()` for messages, `SaveFile()` and `ReadFile()` for text data, and `ExportProperties()` / `ImportProperties()` for moving property values in and out as TSV.
+最常用的包括：用于在脚本执行过程中检查对象的 `Output()`；用于输出信息的 `Info()`、`Warning()` 和 `Error()`；用于处理文本数据的 `SaveFile()` 和 `ReadFile()`；以及用于以 TSV 格式导出/导入属性值的 `ExportProperties()` / `ImportProperties()`。
 
-@script-helper-methods is the maintained list of every helper method with its full signature. Use it rather than the summary here.
+@script-helper-methods 是一份持续维护的列表，包含所有辅助方法及其完整签名。请以它为准，而不是这里的摘要。
 
 ### 调试脚本
 
@@ -148,25 +148,25 @@ The ones you will reach for most often are `Output()` for inspecting an object m
 
 - 单个对象（例如 string、int 和 DateTime，但不包括派生自 TabularNamedObject 的任何对象）会通过对该对象调用 `.ToString()` 方法，以简单的信息对话框形式显示：
 
-![image](~/content/assets/images/advanced-scripting-02.png)
+![图像](~/content/assets/images/advanced-scripting-02.png)
 
 - 单个 TabularNamedObject（例如表、度量值，或 Tabular Editor 中提供的任何其他 TOM NamedMetadataObject）会显示在属性网格中，类似于在 Tree Explorer 中选中对象时的效果。你可以在网格中编辑对象的属性。但请注意：如果在脚本后续执行过程中遇到错误，且启用了“出错时回滚”，这些更改会自动撤销：
 
-![image](~/content/assets/images/advanced-scripting-03.png)
+![图像](~/content/assets/images/advanced-scripting-03.png)
 
 - 任何对象的 IEnumerable（不包括 TabularNamedObject）都会以列表形式显示；列表中的每一项都会显示该 IEnumerable 中对象的 `.ToString()` 值及其类型：
 
-![image](~/content/assets/images/advanced-scripting-04.png)
+![图像](~/content/assets/images/advanced-scripting-04.png)
 
 - 任何 TabularNamedObject 的 IEnumerable 都会使对话框左侧显示对象列表，右侧显示属性网格。属性网格会根据列表中当前选中的对象进行填充；你也可以像输出单个 TabularNamedObject 时一样编辑其属性：
 
-![image](~/content/assets/images/advanced-scripting-05.png)
+![图像](~/content/assets/images/advanced-scripting-05.png)
 
 你可以勾选左下角的“不再显示更多输出”复选框，以防脚本在后续任何 `.Output()` 调用时暂停。
 
 ## .NET 引用
 
-Scripts support the `using` keyword to shorten class names, just as regular C# source does, and can pull in external assemblies with `#r "<assembly name or DLL path>"`, the same syntax `.csx` scripts use.
+脚本支持使用 `using` 关键字来简化类名，就像常规 C# 源代码一样；还可以通过 `#r "<assembly name or DLL path>"` 引入外部程序集，语法与 `.csx` 脚本相同。
 
 例如，下面的脚本现在将按预期工作：
 
@@ -215,11 +215,11 @@ using TabularEditor.UI;
 ## 使用 Roslyn 进行编译
 
 > [!NOTE]
-> This section applies to **Tabular Editor 2 only**. Tabular Editor 3 compiles scripts with Roslyn natively, so newer C# language features are available with no setup and there is no compiler path to configure.
+> 本节**仅适用于 Tabular Editor 2**。 Tabular Editor 3 原生使用 Roslyn 编译脚本，因此无需任何设置即可使用较新的 C# 语言功能，也无需配置编译器路径。
 
-Tabular Editor 2 compiles scripts with the C# compiler that ships with .NET Framework, which supports C# 5. To use later language features such as string interpolation, point it at a Roslyn compiler instead, under **File > Preferences > General**. Specify the directory holding the compiler executable (`csc.exe`) and the language version to pass to it:
+Tabular Editor 2 使用 .NET Framework 附带的 C# 编译器来编译脚本，该编译器支持 C# 5。若要使用字符串插值等较新的语言功能，请在 **文件 > 偏好设置 > 常规** 中改为指定 Roslyn 编译器。指定包含编译器可执行文件 (`csc.exe`) 的目录，以及要传递给它的语言版本：
 
-![image](~/content/assets/images/advanced-scripting-06.png)
+![图像](~/content/assets/images/advanced-scripting-06.png)
 
 ### Visual Studio 2017
 
@@ -231,7 +231,7 @@ c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
 
 默认包含 C# 6.0 的语言特性。
 
-![image](~/content/assets/images/advanced-scripting-07.png)
+![图像](~/content/assets/images/advanced-scripting-07.png)
 
 ### Visual Studio 2019
 
