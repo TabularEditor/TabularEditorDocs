@@ -82,7 +82,7 @@ tabulareditor.exe Database.json -B model.bim
 
 ### 兼容级别要求
 
-Tabular Editor lets you create and edit models at compatibility level 1200 and higher covering Analysis Services, Azure Analysis Services and Power BI datasets deployed through the [XMLA endpoint](xref:powerbi-xmla). The set of available levels depends on your deployment target (Analysis Services stops at 1700, while 1706 is Power BI and Fabric only), and newer levels add features such as custom calendars (1701+) and DAX user-defined functions (1702+).
+Tabular Editor 让你可以创建和编辑兼容级别为 1200 及以上的模型，适用于 Analysis Services、Azure Analysis Services，以及通过 [XMLA endpoint](xref:powerbi-xmla) 部署的 Power BI Dataset。可用级别取决于你的部署目标（Analysis Services 的兼容级别最高到 1700，而 1706 仅适用于 Power BI 和 Fabric）。较新的级别还会增加一些功能，例如自定义日历（1701+）和 DAX 用户定义函数（1702+）。
 
 有关完整的级别列表，以及如何选择和更改级别的说明，请参阅 @update-compatibility-level。
 
