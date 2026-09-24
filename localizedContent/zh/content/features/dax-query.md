@@ -23,11 +23,11 @@ Tabular Editor 内置 DAX 查询窗口，可针对语义模型编写并执行 DA
 
 DAX 查询的一个常见用例是由 [Power BI 性能分析器](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/) 生成的 DAX 查询：可以复制每个 Visual 的查询，用于故障排查、调试或更深入的性能分析。
 
-The window can be opened while connected to a semantic model in any of three ways:
+连接到语义模型时，可通过以下三种方式之一打开该窗口：
 
-- the **File > New > DAX Query** menu
-- the toolbar shortcut
-- **Show actual DAX query...** on the right-click menu of a @table-preview, which opens a new query document holding the query behind the preview, filter and sort included
+- **文件 > 新建 > DAX 查询** 菜单项
+- 工具栏快捷按钮
+- 在 @table-preview 的右键菜单中选择 **显示实际 DAX 查询...**，将打开一个新的查询文档，其中包含该预览背后的查询，包括筛选和排序
 
 ![新建 Dax 查询](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
 
