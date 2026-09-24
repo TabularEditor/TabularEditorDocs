@@ -38,7 +38,7 @@ Tabular Editor 3 自 3.23.0 版本起支持 UDFs。不过，我们建议使用 [
 
 在 Tabular Editor 3 中创建和使用 UDFs 之前，确保满足以下条件：
 
-- Your model compatibility level is **1702 or higher**.
+- 你的模型兼容级别为 **1702 或更高**。
 
 ## 创建你的第一个 UDF
 
@@ -133,7 +133,7 @@ ROW(
 
 这些类型说明是可选的，但一旦指定，它们会对传入函数的参数执行隐式类型转换；同时，也会影响在 Tabular Editor 3 中编写调用该函数的 DAX 代码时的自动完成建议。
 
-Tabular Editor 3 会根据已声明的参数类型验证实参。 If you call a UDF with an argument that does not match its parameter type, for example passing a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 会根据已声明的参数类型验证实参。如果你调用 UDF 时传入的参数与其形参类型不匹配，例如在期望 `TABLEREF` 参数的地方传入标量值，语义分析器会报告警告或错误。
 
 可用约束的完整列表，请参阅 [Microsoft 的 UDF 规范](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)。
 
@@ -236,11 +236,11 @@ DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时�
 > [!NOTE]
 > Tabular Editor 里的这个组织功能不会影响 DAX 代码。调用 UDF 时，你仍然需要输入完整的 UDF 名称，包括所有命名空间部分。
 
-## UDFs and source control
+## UDF 与源代码版本控制
 
-If you store your model as a folder structure, Tabular Editor can write each UDF to its own file instead of keeping them all inside `database.json`. Two developers editing two different functions then change two different files, and Git has nothing to merge.
+如果你将模型存储为文件夹结构，Tabular Editor 可以将每个 UDF 写入各自的文件，而不是都保存在 `Database.json` 中。两位开发人员分别编辑两个不同的函数时，各自改动的就是不同的文件，Git 无需合并任何内容。
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**, or under **Tools > Preferences > File Formats > Save-to-folder** for a model you save to a folder for the first time. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+在 **模型 > 序列化选项...** 下选择 **User Defined Functions (UDFs)** 级别；如果是首次将模型保存到文件夹，也可以在 **工具 > 偏好 > 文件格式 > 保存到文件夹** 下进行设置。参见 [保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)。
 
 ## 最佳实践
 
@@ -328,12 +328,12 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 
 **函数未出现在自动补全中**
 
-Tabular Editor decides what to offer from the function's own definition and from where your cursor is. Work through these in order:
+Tabular Editor 会根据函数自身的定义以及光标所在位置，决定提供哪些建议。按以下顺序逐项检查：
 
-1. **The function's definition has a semantic error.** A UDF whose body does not analyze cleanly, one that needs a row context it has not been given or misuses `MATCHBY`, cannot be validly invoked, so it is left out of the suggestion list entirely. Open the function and clear the error. Its calltip still works, which is why this is easy to miss.
-2. **The return type does not fit the argument you are completing.** The return type is inferred from the body, not declared. A UDF that returns a table is not offered where a scalar is expected, and one that returns a scalar is not offered where a table is expected. Filter arguments, for instance the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either. A function whose body is an untyped `EXPR` parameter fits everywhere.
-3. **Visual calculation mismatch.** A UDF written for visual calculations is only offered inside another visual calculation, and vice versa.
-4. **It is the function you are editing.** A function is not offered inside its own definition.
+1. **函数定义存在语义错误。** 如果某个 UDF 的函数体无法顺利通过分析、需要但未获得行语境，或者错误使用了 `MATCHBY`，它就无法被有效调用，因此会被完全排除在建议列表之外。打开该函数并清除错误。它的调用提示仍然可用，所以这一点很容易被忽略。
+2. **返回类型与正在补全的参数不匹配。** 返回类型是从函数体推断出来的，不是显式声明的。在需要标量的位置，不会提供返回表的 UDF；在需要表的位置，也不会提供返回标量的 UDF。不过，筛选器参数两者都可接受，例如 [`CALCULATE`](https://dax.guide/calculate) 的第二个及后续参数。如果 UDF 的函数体只是一个未类型化的 `EXPR` 参数，那么它在任何位置都适用。
+3. **Visual 计算不匹配。** 为 Visual 计算编写的 UDF 只会在另一条 Visual 计算中提供，反之亦然。
+4. **这就是你正在编辑的函数。** 函数不会在其自身定义内部提供。
 
 **参数约束错误**
 
