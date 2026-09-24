@@ -94,6 +94,6 @@ Si eres nuevo en el modelado tabular en general, te recomendamos que uses las he
 ## Siguientes pasos
 
 - [Primeros pasos con Tabular Editor 2](xref:getting-started-te2)
-- [Install and activate Tabular Editor 3](xref:getting-started)
+- [Instale y active Tabular Editor 3](xref:getting-started)
 - [Plan de ruta de Tabular Editor 3](xref:roadmap)
 
