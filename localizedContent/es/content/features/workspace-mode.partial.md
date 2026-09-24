@@ -38,7 +38,7 @@ Cuando creas un nuevo modelo en Tabular Editor, la opción "Usar base de datos d
 Si lo dejas seleccionado, después de hacer clic en "OK" se te pedirá que te conectes a una instancia de Analysis Services. Esta es la instancia de Analysis Services en la que se implementará tu base de datos del área de trabajo.
 
 > [!IMPORTANT]
-> If you plan to deploy your workspace database to the Power BI Service XMLA endpoint, make sure you choose Compatibility Level 1706 (Power BI / Fabric) in the dialog above.
+> Si tienes previsto desplegar la base de datos de tu Workspace en el punto de conexión XMLA del servicio de Power BI, asegúrate de seleccionar el nivel de compatibilidad 1706 (Power BI / Fabric) en el cuadro de diálogo anterior.
 
 Después de introducir los datos del servidor de Analysis Services y las credenciales (opcionales), se muestra una lista de todas las bases de datos que residen actualmente en el servidor (o, para un área de trabajo de Power BI, la lista de conjuntos de datos implementados en el área de trabajo):
 
