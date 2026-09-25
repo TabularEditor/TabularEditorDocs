@@ -13,7 +13,7 @@ applies_to:
 
 A partir de la versión 2.7.3, Tabular Editor admite los siguientes atajos de teclado:
 
-| General                                                                  | Atajo                                |
+| General                                                                  | Shortcut                             |
 | ------------------------------------------------------------------------ | ------------------------------------ |
 | Nuevo modelo                                                             | Ctrl+N                               |
 | Cargar modelo desde un archivo                                           | Ctrl+O                               |
@@ -21,14 +21,14 @@ A partir de la versión 2.7.3, Tabular Editor admite los siguientes atajos de te
 | Guardar modelo                                                           | Ctrl+S                               |
 | Copiar la selección                                                      | Ctrl+C                               |
 | Cortar la selección                                                      | Ctrl+X                               |
-| Pegar                                                                    | Ctrl+V                               |
+| Paste                                                                    | Ctrl+V                               |
 | Deshacer                                                                 | Ctrl+Z                               |
 | Rehacer                                                                  | Ctrl+Y                               |
 | Seleccionar todo                                                         | Ctrl+A                               |
 | ~Iniciar el Asistente de implementación~ | ~F6~ |
 | Iniciar el Best Practice Analyzer                                        | F10                                  |
 
-| Editor de expresiones                                | Atajo                |
+| Editor de expresiones                                | Shortcut             |
 | ---------------------------------------------------- | -------------------- |
 | Buscar                                               | Ctrl+F               |
 | Buscar y reemplazar                                  | Ctrl+H               |
@@ -40,13 +40,13 @@ A partir de la versión 2.7.3, Tabular Editor admite los siguientes atajos de te
 | Comentar líneas                                      | Ctrl+Shift+C         |
 | Descomentar líneas                                   | Ctrl+Shift+U         |
 
-| Editor de scripts   | Atajo  |
-| ------------------- | ------ |
-| Buscar              | Ctrl+F |
-| Buscar y reemplazar | Ctrl+H |
-| Ejecutar script     | F5     |
+| Editor de scripts   | Shortcut |
+| ------------------- | -------- |
+| Buscar              | Ctrl+F   |
+| Buscar y reemplazar | Ctrl+H   |
+| Ejecutar script     | F5       |
 
-| Árbol del explorador                                    | Atajo                                 |
+| Árbol del explorador                                    | Shortcut                              |
 | ------------------------------------------------------- | ------------------------------------- |
 | Navegar hacia arriba o hacia abajo                      | Flecha arriba / abajo                 |
 | Expandir / contraer el nodo actual                      | Flecha derecha / izquierda            |
