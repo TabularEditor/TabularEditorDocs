@@ -20,13 +20,13 @@ applies_to:
 
 # Azure OpenAI 连接错误
 
-This page covers common connection failures when using Azure OpenAI as the provider for the @ai-assistant. 设置详情请参阅[Azure OpenAI 配置部分](xref:ai-assistant#azure-openai)。
+本页面介绍在 @ai-assistant 中将 Azure OpenAI 作为提供程序时常见的连接失败问题。设置详情请参阅[Azure OpenAI 配置部分](xref:ai-assistant#azure-openai)。
 
-## 403 "公共访问已禁用。 Please configure private endpoint"
+## 403 "公共访问已禁用。请配置专用终结点"
 
-此 403 错误来自 Azure OpenAI 本身，说明 HTTP 请求到达了公共终结点，而非你的专用终结点。 Azure rejects it because public access is disabled on the resource.
+此 403 错误来自 Azure OpenAI 本身，说明 HTTP 请求到达了公共终结点，而非你的专用终结点。 Azure 会拒绝该请求，因为该资源已禁用公共访问。
 
-The typical cause is a system proxy that resolves DNS outside your VPN tunnel. 你的工作站通过 Azure Private DNS 将 Azure OpenAI 主机名解析为专用 IP，但代理服务器使用自己的解析器，访问到公共 IP，因此被拒绝。
+典型原因是系统代理在 VPN 隧道之外解析 DNS。你的工作站通过 Azure Private DNS 将 Azure OpenAI 主机名解析为专用 IP，但代理服务器使用自己的解析器，访问到公共 IP，因此被拒绝。
 
 要确认工作站上的 DNS 解析是否正确：
 
@@ -38,7 +38,7 @@ nslookup yourresource.openai.azure.com
 
 可用的解决办法：
 
-- 在 **工具 > 偏好设置 > 代理设置** 中，将你的 Azure OpenAI 主机名添加到绕过列表，让请求跳过代理并直接通过 VPN 隧道发送。 Separate multiple hostnames with semicolons
+- 在 **工具 > 偏好设置 > 代理设置** 中，将你的 Azure OpenAI 主机名添加到绕过列表，让请求跳过代理并直接通过 VPN 隧道发送。使用分号分隔多个主机名
 - 让网络团队更新代理 PAC 文件，绕过 `*.openai.azure.com`；或者把代理服务器配置为能够解析 Azure Private DNS 区域
 - 使用拆分隧道，使 Azure 专用终结点的 IP 范围直接路由，而不是经过代理
 
@@ -56,7 +56,7 @@ https://your-resource.openai.azure.com
 
 ## "获取 AI 响应时出错"，出现 404 或 DeploymentNotFound
 
-**模型名称** 字段中的值与 Azure OpenAI 资源中的任何部署都不匹配。 Azure OpenAI requires the **deployment name** in every API call, not the underlying model name and not the resource name.
+**模型名称** 字段中的值与 Azure OpenAI 资源中的任何部署都不匹配。 Azure OpenAI 在每次 API 调用中都要求提供 **部署名称**，而不是底层模型名称，也不是资源名称。
 
 确认部署名称：
 
@@ -64,7 +64,7 @@ https://your-resource.openai.azure.com
 2. 打开 **部署**（如果资源已升级到 Foundry，则为 **模型 + 终结点**）
 3. 复制 **名称** 列中的值
 
-在你的组织采用 Azure AI Foundry 之前创建的部署，可能不会显示在门户中。 List them from the Azure CLI:
+在你的组织采用 Azure AI Foundry 之前创建的部署，可能不会显示在门户中。通过 Azure CLI 列出它们：
 
 ```bash
 az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table
