@@ -1,6 +1,6 @@
 ---
 uid: hierarchical-display
-title: Hierarchical display
+title: Vista jerárquica
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
           full: true
 ---
 
-# Hierarchical display
+# Vista jerárquica
 
 Los objetos del modelo cargado se muestran en el árbol del Explorador TOM. De forma predeterminada, todos los tipos de objetos (tablas visibles, roles, relaciones, etc.) se muestran. Si solo desea ver tablas, medidas, columnas y jerarquías, vaya al menú "Ver" y desactive "Mostrar todos los tipos de objetos".
 
