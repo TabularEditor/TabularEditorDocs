@@ -10,7 +10,7 @@ description: 最佳实践规则：确保 Power BI 模型使用最新的兼容级
 
 ## 概览
 
-此规则用于识别未使用最新可用兼容级别的 Power BI 模型。 Using the latest level ensures access to newest features, performance optimizations, and bug fixes.
+此规则用于识别未使用最新可用兼容级别的 Power BI 模型。使用最新级别可确保你获得最新功能、性能优化和错误修复。
 
 - 类别：治理
 - 严重性：高（3）
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### 自动修复
 
-该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。 If you have an older version of Tabular Editor 3 installed you should update your installation.
+该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。如果你安装的是较旧版本的 Tabular Editor 3，请更新到最新版本。
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -79,7 +79,7 @@ Current Maximum Level: 1706
 Model Compatibility Level: 1706 (Latest)
 ```
 
-Access to newer capabilities such as [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), @user-context-calculated-columns (1705+) and String Indexing Behavior on a column (1706+).
+可访问更新的功能，例如 [自定义日历](xref:calendars) (1701+)、[DAX 用户定义函数](xref:udfs) (1702+)、@user-context-calculated-columns (1705+) 以及列上的字符串索引行为 (1706+)。
 
 ## 兼容级别
 
