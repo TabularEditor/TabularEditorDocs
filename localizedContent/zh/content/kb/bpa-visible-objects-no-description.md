@@ -10,7 +10,7 @@ description: 一条最佳实践规则：确保可见的模型对象都有描述�
 
 ## 概览
 
-此最佳实践规则会识别缺少描述的可见表、列、度量值、计算组以及用户定义函数。 Adding descriptions improves model usability, documentation quality, and user experience.
+此最佳实践规则会识别缺少描述的可见表、列、度量值、计算组以及用户定义函数。添加说明可提升模型的可用性、文档质量和用户体验。
 
 - 类别：**维护**
 
@@ -37,8 +37,7 @@ description: 一条最佳实践规则：确保可见的模型对象都有描述�
 - **增强的工具提示**：Power BI 和 Excel 会在悬停时的工具提示中显示描述
 - **文档基础**：描述是自动化文档的基础
 - **治理与合规**：描述可包含数据血缘和业务定义
-- **AI 使用**：如果对象包含说明，AI 代理能更准确地推断其用途。
-  Without descriptions, users guess at field meanings, leading to incorrect analysis and increased support requests.
+- **AI 使用**：如果对象包含说明，AI 代理能更准确地推断其用途。如果没有说明，用户只能猜测字段含义，导致分析不准确，并增加支持请求。
 
 ## 此规则何时触发
 
