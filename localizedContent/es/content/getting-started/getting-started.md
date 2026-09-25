@@ -23,23 +23,23 @@ applies_to:
 
 Descarga la versión más reciente de Tabular Editor 3 desde nuestra [página de descargas](xref:downloads).
 
-Recomendamos el instalador `.exe` de 64 bits con .NET 10 para la mayoría de los escenarios. Una vez descargado, haz doble clic y completa los pasos del instalador.
+We recommend the 64-bit `.exe` installer on .NET 10 for most scenarios. Once downloaded, double-click it and complete the installer pages.
 
 ![Instalar](~/content/assets/images/getting-started/install.png)
 
 ### Requisitos previos
 
-Para el instalador `.exe`, el **.NET Desktop Runtime** correspondiente: [10](https://dotnet.microsoft.com/download/dotnet/10.0) para la compilación recomendada o [8](https://dotnet.microsoft.com/download/dotnet/8.0) para la compilación de .NET 8. El instalador te ofrece descargarlo e instalarlo, así que en la práctica no hay nada que hacer de antemano.
+For the `.exe` installer, the matching **.NET Desktop Runtime**: [10](https://dotnet.microsoft.com/download/dotnet/10.0) for the recommended build, or [8](https://dotnet.microsoft.com/download/dotnet/8.0) for the .NET 8 build. The installer offers to download and install it for you, so in practice there is nothing to do beforehand.
 
-Los otros dos paquetes son distintos. El `.msi` no incluye el runtime, así que instálalo tú mismo si realizas un despliegue centralizado, y el `.zip` portátil es autónomo y no necesita runtime en absoluto.
+The other two packages differ. The `.msi` does not bring the runtime along, so install it yourself when deploying centrally, and the portable `.zip` is self-contained and needs no runtime at all.
 
 ### Requisitos del sistema
 
 - **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
 - **Arquitectura:** x64, ARM64 (nativo desde la versión 3.23.0)
-- **.NET Runtime:** .NET Desktop Runtime 10 u 8, según la compilación que instales
+- **.NET Runtime:** .NET Desktop Runtime 10 or 8, matching the build you install
 
-Consulta @system-requirements para ver la matriz completa y saber cómo elegir entre las compilaciones.
+See @system-requirements for the full matrix and for how to choose between the builds.
 
 ## Activación de su instalación
 
@@ -60,16 +60,16 @@ Cuando compres una licencia de Tabular Editor 3, recibirás un correo electróni
 
 Las instalaciones de Tabular Editor 3 se activan **por usuario**. Si varios usuarios comparten el mismo equipo, cada usuario debe activar el producto en su propio perfil de usuario de Windows.
 
-### Cuenta de Windows vs. cuenta de Power BI / Entra
+### Windows account vs Power BI / Entra account
 
-La cuenta de Windows en la que está instalado Tabular Editor 3 es independiente de la cuenta de Microsoft Entra que se usa para autenticarse en un Workspace de Power BI / Fabric.
+The Windows account on which Tabular Editor 3 is installed is independent from the Microsoft Entra account used to authenticate against a Power BI / Fabric workspace.
 
-- **La activación de la licencia** se almacena en el Registro de Windows, en `HKEY_CURRENT_USER`, del usuario de Windows que activó el producto. La licencia no está vinculada a ninguna identidad en la nube.
-- **La autenticación del Workspace** se realiza al conectarte, en el cuadro de diálogo **Cargar modelo semántico desde la base de datos**. Inicias sesión con la cuenta de Microsoft Entra que tiene permisos en el Workspace.
+- **License activation** is stored in the Windows Registry under `HKEY_CURRENT_USER` of the Windows user that activated the product. The license is not tied to any cloud identity.
+- **Workspace authentication** happens at connection time in the **Load Semantic Model from Database** dialog. You sign in with the Microsoft Entra account that has permission on the workspace.
 
-No necesitas iniciar Tabular Editor 3 con **Ejecutar como** desde otra cuenta de Windows solo porque uses una cuenta de Entra distinta (por ejemplo, una cuenta de administrador no habilitada para correo) para administrar el Workspace de Power BI. Inicia Tabular Editor 3 con tu cuenta habitual de Windows, actívalo con tu clave de licencia en esa cuenta y proporciona tus credenciales de administrador de Entra en el cuadro de diálogo de conexión.
+You do not need to launch Tabular Editor 3 with **Run as** under a different Windows account just because you use a separate Entra account (for example a non-mail-enabled admin account) to manage the Power BI workspace. Launch Tabular Editor 3 under your normal Windows account, activate it with your license key under that account, and provide your admin Entra credentials in the connection dialog.
 
-Para más información sobre cómo Tabular Editor se autentica en el punto de conexión XMLA y cómo elegir el modo de autenticación adecuado (por ejemplo, **Microsoft Entra MFA** cuando tu inicio de sesión de Windows no coincide con tu cuenta de Power BI), consulta @xmla-as-connectivity.
+For details on how Tabular Editor authenticates to the XMLA endpoint and how to pick the right authentication mode (for example **Microsoft Entra MFA** when your Windows login does not match your Power BI account), see @xmla-as-connectivity.
 
 ### Solicitar una licencia de prueba
 
@@ -95,42 +95,42 @@ Si aceptas, se quita la licencia actual y tendrás que volver a introducir una c
 
 ## Configuración posterior a la instalación
 
-Tabular Editor 3 ofrece muchas opciones de configuración. La configuración predeterminada es suficiente para la mayoría de los escenarios de desarrollo, pero revisa las opciones siguientes.
+Tabular Editor 3 provides many configuration options. The default settings are sufficient for most development scenarios, but review the options below.
 
-### Buscar actualizaciones al iniciar
+### Check for updates on start-up
 
-De forma predeterminada, cada vez que se inicia Tabular Editor 3, la herramienta comprueba en línea si hay una versión más reciente disponible. Puedes controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Actualizaciones y comentarios**.
+By default, whenever Tabular Editor 3 is launched, the tool checks online to see if a newer version is available. You control how this update check is performed under **Tools > Preferences > Updates and Feedback**.
 
 > [!NOTE]
-> Usa siempre la versión más reciente de Tabular Editor 3. Nuestro equipo de soporte asume que estás en la versión más reciente antes de enviar un Report de error.
+> Usa siempre la versión más reciente de Tabular Editor 3. Our support team assumes you are on the latest version before submitting a bug report.
 
-### Desactivar la recopilación de telemetría
+### Opting out of telemetry collection
 
-Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda a mejorar el producto. Puedes desactivar esta recopilación en cualquier momento: inicia Tabular Editor 3 y ve a **Herramientas > Preferencias > Actualizaciones y comentarios**. Para desactivar esta recopilación, desmarca la casilla **Ayudar a mejorar Tabular Editor recopilando datos de uso anónimos**.
+Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
 
-![Recopilar telemetría](~/content/assets/images/getting-started/collect-telemetry.png)
+![Collect Telemetry](~/content/assets/images/getting-started/collect-telemetry.png)
 
 ### Configuración del proxy
 
-Si estás en una red con conectividad a Internet limitada, especifica la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Configuración del proxy**. Esto es necesario para que Tabular Editor 3 pueda usar cualquier funcionalidad que dependa de solicitudes web salientes. En concreto:
+If you are on a network with limited internet connectivity, specify the address, username, and password of a proxy server under **Tools > Preferences > Proxy Settings**. This is required before Tabular Editor 3 can use any features that rely on outgoing web requests. Specifically:
 
-- Comprobaciones de actualizaciones
+- Update checks
 - Activación del producto
-- Formato de DAX
-- Descarga de reglas de mejores prácticas desde direcciones URL externas
+- DAX Formatting
+- Download of Best Practice Rules from external URLs
 
 > [!TIP]
-> A veces, la configuración del proxy puede interferir con los cuadros de diálogo de autenticación u otros avisos externos. Prueba a cambiar la configuración del proxy entre **System** y **None** y, a continuación, cierra y vuelve a abrir Tabular Editor 3 para comprobarlo.
+> The proxy settings can at times interfere with authentication dialog boxes or other external prompts. Try switching the proxy setting between **System** and **None**, then close and reopen Tabular Editor 3 to verify.
 
-### Otras preferencias
+### Other preferences
 
-Tabular Editor 3 incluye muchos otros ajustes para controlar el comportamiento de la aplicación. Para obtener más información, consulta @preferences.
+Tabular Editor 3 contains many other settings for controlling application behavior. To learn more, see @preferences.
 
-## Escenarios avanzados
+## Advanced scenarios
 
-Para la activación manual (sin conexión a Internet), la administración de licencias basada en el registro, la implementación desatendida y la administración de asientos de Enterprise, consulta @installation-activation-basic.
+For manual (no-internet) activation, registry-based license management, silent deployment, and Enterprise seat administration, see @installation-activation-basic.
 
-## Siguientes pasos
+## Próximos pasos
 
 - [Información general sobre la interfaz de usuario de Tabular Editor 3](xref:user-interface)
 - @xmla-as-connectivity
