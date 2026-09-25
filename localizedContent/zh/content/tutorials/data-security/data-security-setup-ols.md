@@ -23,7 +23,7 @@ applies_to:
 
 ---
 
-**通过调整针对表或列定义的角色或对象权限来更改 OLS。** 对象权限是 TOM 属性，可通过 `Object Level Security` 属性查看，其取值可以是 `Default`（不启用 OLS；功能上类似于 `Read`）、`Read` 或 `None`。 OLS differs from RLS in that it does not filter data, but prevents execution of the object **and all dependents.** This means any relationship or measure that references the object where `Object Level Security` is set to `None` will return an error upon evaluation.
+**通过调整针对表或列定义的角色或对象权限来更改 OLS。** 对象权限是 TOM 属性，可通过 `Object Level Security` 属性查看，其取值可以是 `Default`（不启用 OLS；功能上类似于 `Read`）、`Read` 或 `None`。 OLS 与 RLS 的区别在于，它不会筛选数据，而是阻止该对象 **及其所有依赖项** 的执行。这意味着，任何引用 `对象级安全性` 设置为 `None` 的对象的关系或度量值，在求值时都会报错。
 
 ---
 
@@ -36,7 +36,7 @@ applies_to:
 
 ## 在 Tabular Editor 3 中配置 OLS
 
-_Below is an overview of common changes one might make to existing OLS. 此外，下文还介绍了针对非典型对象（度量值、计算组）配置 OLS 的策略：_
+_下面概述了对现有 OLS 常见的一些修改。此外，下文还介绍了针对非典型对象（度量值、计算组）配置 OLS 的策略：_
 
 ---
 
@@ -76,10 +76,10 @@ _Below is an overview of common changes one might make to existing OLS. 此外�
 
 ### 3。移除 OLS
 
-要从模型中移除 OLS，必须将所有列和表在所有角色下的 `Object Level Security` 属性都配置为 `Default`。 To remove Data Security from the model, all Roles must be deleted.
+要从模型中移除 OLS，必须将所有列和表在所有角色下的 `Object Level Security` 属性都配置为 `Default`。要从模型中移除数据安全性，必须删除所有角色。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 4：</strong>选择某一列或表时，可在 <i>Properties</i> 窗格中找到“对象级安全性”属性。 The property does not exist for Measures, Relationships and other Object Types.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 4：</strong>选择某一列或表时，可在 <i>Properties</i> 窗格中找到“对象级安全性”属性。该属性不适用于度量值、关系以及其他对象类型。</figcaption>
 </figure>
 
 > [!NOTE]
@@ -89,7 +89,7 @@ _Below is an overview of common changes one might make to existing OLS. 此外�
 
 ### 4. 设置或更改 OLS
 
-Setup or Modification of OLS is trivial for Columns and Table. 只需选择对象并找到 `Object Level Security` 属性，然后使用下拉列表将该属性更改为所需值即可。
+对于列和表，设置或修改 OLS 都很简单。只需选择对象并找到 `Object Level Security` 属性，然后使用下拉列表将该属性更改为所需值即可。
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-change.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 4：</strong>可通过旁边的下拉列表更改“对象级安全性”属性，并选择 <i>Default</i>、<i>None</i> 或 <i>Read</i>。</figcaption>
@@ -99,12 +99,12 @@ Setup or Modification of OLS is trivial for Columns and Table. 只需选择对�
 
 ### 5. 将 OLS 与 RLS 结合使用
 
-要将 RLS 与 OLS 成功结合使用，需要让模型设计与数据安全/访问管理策略相互匹配。 Since RLS and OLS cannot combine across roles, this means if you plan on implementing both RLS and OLS, users are limited to a single role.
+要将 RLS 与 OLS 成功结合使用，需要让模型设计与数据安全/访问管理策略相互匹配。由于 RLS 和 OLS 不能跨角色叠加，如果你计划同时使用 RLS 和 OLS，用户就只能属于一个角色。
 
 ---
 
 ### 6. 为度量值配置 OLS
 
-Natively, OLS works only on Columns, Tables and their dependents; there is no `Object-Level Security` property for measures. However, since OLS also applies to dependents, it is possible to design OLS that works on measures via disconnected tables or calculation groups. To do this, the measure DAX has to be altered to evaluate a column or calculation group configured with RLS. If the `Object-Level Security` property of that object is `None`, then the Measure will not evaluate.
+默认情况下，OLS 仅适用于列、表及其依赖项；度量值没有 `对象级安全性` 属性。但是，由于 OLS 也适用于依赖项，因此可以通过断开连接的表或计算组来设计作用于度量值的 OLS。为此，必须修改该度量值的 DAX，使其对已配置 RLS 的列或计算组进行求值。如果该对象的 `对象级安全性` 属性为 `None`，则该度量值将无法求值。
 
 另请参阅 SQLBI 的[这篇关于隐藏度量值的文章](https://www.sqlbi.com/articles/hiding-measures-by-using-object-level-security-in-power-bi/)，其中对这种方法做了详细说明。
