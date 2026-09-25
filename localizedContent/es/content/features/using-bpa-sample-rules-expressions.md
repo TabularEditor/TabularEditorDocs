@@ -21,15 +21,15 @@ applies_to:
 
 En esta sección verás algunos ejemplos de expresiones de LINQ dinámico que se pueden usar para definir reglas. La expresión que se escribe en el Editor de expresiones se evaluará cada vez que el foco abandone el cuadro de texto, y cualquier error de sintaxis se mostrará en la parte superior de la pantalla:
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-01.png)
+![imagen](~/content/assets/images/using-bpa-sample-rules-expressions-01.png)
 
 Sus expresiones de reglas pueden acceder a cualquier propiedad pública de los objetos del TOM. Si intenta acceder a una propiedad que no existe en ese tipo de objeto, también se mostrará un error:
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-02.png)
+![imagen](~/content/assets/images/using-bpa-sample-rules-expressions-02.png)
 
 "Expression" no existe en el objeto "Column", pero si cambiamos el menú desplegable a "Columnas calculadas", la instrucción anterior funciona sin problema:
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-03.png)
+![imagen](~/content/assets/images/using-bpa-sample-rules-expressions-03.png)
 
 LINQ dinámico admite todos los operadores aritméticos, lógicos y de comparación estándar y, mediante la notación ".", puede acceder a subpropiedades y -métodos de todos los objetos.
 
@@ -49,7 +49,7 @@ Cada vez que usamos un método LINQ para iterar sobre una colección, la expresi
 
 Aquí vemos esta regla en acción en el modelo tabular Adventure Works. Observa cómo la tabla "Reseller" aparece como incumpliendo la regla, mientras que "Reseller Sales" no aparece (las columnas de esta última se han organizado en carpetas de visualización):
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-04.png)
+![imagen](~/content/assets/images/using-bpa-sample-rules-expressions-04.png)
 
 Para hacer referencia al objeto padre dentro de un método LINQ, usa la sintaxis especial "outerIt". Esta regla, aplicada a tablas, encontrará aquellas que contienen columnas cuyo nombre no empieza por el nombre de la tabla:
 
@@ -121,6 +121,6 @@ En algunos casos, es posible corregir automáticamente los problemas en los obje
 
 Esta regla encuentra todas las columnas que se usan en una relación (en el lado "Many"/"From"), pero en las que ni la columna ni su tabla principal están ocultas. Se recomienda que estas columnas nunca se muestren, ya que los usuarios deberían filtrar los datos usando la tabla relacionada (de dimensión). Así, la corrección en este caso sería establecer la propiedad IsHidden de las columnas en true, que es exactamente lo que hace la cadena "FixExpression" anterior. Para verlo en acción, haz clic con el botón derecho en cualquier objeto que incumpla la regla y elige "Generar script de corrección". Esto coloca un pequeño script en el portapapeles, que se puede pegar en el Editor avanzado de scripts, desde donde puedes revisar el código fácilmente y ejecutarlo:
 
-![image](~/content/assets/images/using-bpa-sample-rules-expressions-05.png)
+![imagen](~/content/assets/images/using-bpa-sample-rules-expressions-05.png)
 
 Recuerda que siempre puedes deshacer (CTRL+Z) los cambios realizados en un modelo después de ejecutar el script.
