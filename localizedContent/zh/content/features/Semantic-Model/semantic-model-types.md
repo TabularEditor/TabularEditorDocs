@@ -19,7 +19,7 @@ applies_to:
 
 # 语义模型类型
 
-Tabular Editor 支持多种不同的模型类型。下面概述了哪些模型类型可与 Tabular Editor 一起使用，以及每种模型类型可使用哪些功能。
+Tabular Editor can work with several different model types. 下面概述了哪些模型类型可与 Tabular Editor 一起使用，以及每种模型类型可使用哪些功能。
 
 | 模型类型                                   | 导入 | DirectQuery | OneLake 上的 Direct Lake                  | SQL 上的 Direct Lake                         | .pbix | .pbip |
 | -------------------------------------- | -- | ----------- | --------------------------------------- | ------------------------------------------ | --------------------- | --------------------- |
@@ -47,17 +47,17 @@ Tabular Editor 支持多种不同的模型类型。下面概述了哪些模型�
 | 处理模型和表格<sup>[3](#TE3Prem)</sup>        | ✔️ | ✔️          | ✔️                                      | ✔️                                         | ✔️                    | ✔️                    |
 | 删除对象                                   | ✔️ | ✔️          | ✔️                                      | ✔️                                         |                       |                       |
 
-**图例：**
+**Legend:**
 
 - ✔️：支持
 - ❌：不支持
 
-<a name="DirectLake">1</a> - 表分区必须是 Entity Partition，才能正常工作。 Direct Lake 模型的每个表只能有一个分区。 <a name="DirectLakeCalculated">2</a> - 计算表格不能引用 OneLake 上的 Direct Lake 表或列。支持计算组、假设分析参数和字段参数。
+<a name="DirectLake">1</a> - The table partition must be an Entity Partition to work correctly. Direct Lake models can only have one partition per table. <a name="DirectLakeCalculated">2</a> - 计算表格不能引用 OneLake 上的 Direct Lake 表或列。 Calculation groups, what-if parameters and field parameters are supported.
 
-<a name="TE3Prem">3</a> - 仅限 Tabular Editor 3 功能。通过 XMLA endpoint 执行的操作需要 Business 或 Enterprise 许可证。[更多信息](xref:editions)。 <a name="DirectLakeSQLCalculated">4</a> - SQL 上的 Direct Lake 仅支持计算组、假设分析参数和字段参数，它们会隐式创建计算表格。不支持常规计算表格。
+<a name="TE3Prem">3</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [更多信息](xref:editions)。 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake on SQL only supports calculation groups, what-if parameters and field parameters, which implicitly create calculated tables. General calculated tables are not supported.
 
 > [!NOTE]
-> 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。在此之前，许多建模操作都不受支持。见 [Power BI Desktop 限制](xref:desktop-limitations)。
+> 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。 Prior to that, various modeling operations were not supported. See [Power BI Desktop Limitations](xref:desktop-limitations).
 
 > [!TIP]
 > 如需了解 Direct Lake 模型限制的更多详细信息，请参阅 Microsoft 的 [Direct Lake 文档](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
@@ -71,5 +71,5 @@ Tabular Editor 支持多种不同的模型类型。下面概述了哪些模型�
 - 具有推送数据的模型。
 - 存储在 Power BI 我的工作区中的模型。
 - 存储在 Power BI Pro 工作区中的模型。
-- Direct Lake 默认语义模型。自 2025 年九月起，创建 Warehouse、Lakehouse 或镜像项时，Power BI 不再自动创建默认语义模型。到 2025 年十一月，所有现有默认语义模型都已与其对应项断开连接，并成为独立的语义模型。可以连接到默认语义模型，但无法通过 XMLA endpoint 对其进行更改。
+- Direct Lake Default Semantic Models. As of September 2025, Power BI no longer automatically creates default semantic models when a warehouse, lakehouse or mirrored item is created. By November 2025, all existing default semantic models were disconnected from their items and became independent semantic models. It is possible to connect to a default semantic model, but it is not possible to change it through the XMLA endpoint.
 - Excel 工作簿语义模型。
