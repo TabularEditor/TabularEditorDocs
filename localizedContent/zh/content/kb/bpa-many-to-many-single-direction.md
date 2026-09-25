@@ -10,7 +10,7 @@ description: 最佳实践规则：在多对多关系上使用单向筛选，以�
 
 ## 概览
 
-此最佳实践规则用于识别使用双向交叉筛选的多对多关系。 Many-to-many relationships with both-directions filtering cause significant performance degradation.
+此最佳实践规则用于识别使用双向交叉筛选的多对多关系。采用双向筛选的多对多关系会导致性能明显下降。
 
 - 类别：性能
 - 严重级别：中等（2）
