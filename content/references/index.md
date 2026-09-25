@@ -19,6 +19,9 @@ This section contains reference materials for Tabular Editor.
 - @supported-files - File formats Tabular Editor can open and save
 - @accessibility - Color blindness mode, keyboard access, scaling and themes
 
+### Object Properties Reference
+- @object-properties - What every property in the Properties view does, grouped by object type
+
 ### Development and Planning
 - @roadmap - Product roadmap and future plans
 

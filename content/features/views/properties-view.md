@@ -46,7 +46,7 @@ The toolbar at the top of the Properties view contains the following buttons:
 - **Categorized**: Groups the properties into categories such as *Basic*, *Metadata* and *Options*.
 - **Alphabetical**: Lists all properties in a single, alphabetically sorted list.
 - **Show changes**: Hides all properties that have not changed since the model was last saved, so that only the properties with [unsaved changes](xref:unsaved-changes) remain. While the filter is active, the title of the view reads **Properties (Changed)**.
-- **Property descriptions**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property.
+- **Property descriptions**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property. For a full description of every property, see @object-properties.
 - **Search box**: Filters the list of properties by name.
 
 ## Unsaved changes
