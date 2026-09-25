@@ -1,6 +1,6 @@
 ---
 uid: unsaved-changes
-title: Unsaved change indicators
+title: Indicadores de cambios sin guardar
 author: Daniel Otykier
 updated: 2026-09-22
 applies_to:
@@ -18,149 +18,149 @@ applies_to:
           full: true
 ---
 
-# Unsaved change indicators
+# Indicadores de cambios sin guardar
 
-Tabular Editor 3 marks every object and property that differs from the last saved version of the model. Changes are marked whether they were made by hand, by a [C# script](xref:csharp-scripts) or macro, or by the [AI Assistant](xref:ai-assistant), and the marks disappear the moment the change is saved, reverted or undone.
+Tabular Editor 3 marca todos los objetos y propiedades que difieren de la última versión guardada del modelo. Los cambios se marcan tanto si se hicieron a mano como mediante un [C# Script](xref:csharp-scripts), una macro o el [Asistente de IA](xref:ai-assistant), y las marcas desaparecen en cuanto se guarda, se revierte o se deshace el cambio.
 
-The indicators appear in two places:
+Los indicadores aparecen en dos lugares:
 
-- In the [TOM Explorer](xref:tom-explorer-view), changed objects get a tinted row and a badge on their icon, in the same colors as the model comparison view shown when deploying: orange for edited objects, green for added objects and red for deleted objects. Deleted objects stay visible, struck through, where they used to be, and the tables and folders that contain changed objects get a hatched fill.
-- In the [Properties view](xref:properties-view), properties that differ from the saved model get an orange tinted row.
+- En el [Explorador TOM](xref:tom-explorer-view), los objetos modificados aparecen con una fila resaltada y una insignia en el icono, con los mismos colores que la vista de comparación de modelos que se muestra al desplegar: naranja para los objetos editados, verde para los objetos agregados y rojo para los objetos eliminados. Los objetos eliminados siguen siendo visibles, tachados, en el lugar que ocupaban, y las tablas y carpetas que contienen objetos modificados aparecen con un relleno rayado.
+- En la [vista de propiedades](xref:properties-view), las propiedades que difieren del modelo guardado reciben una fila sombreada en naranja.
 
-![Unsaved changes in the TOM Explorer and the Properties view](~/content/assets/images/unsaved-changes/overview.png)
+![Cambios sin guardar en el Explorador TOM y la vista de propiedades](~/content/assets/images/unsaved-changes/overview.png)
 
-Both views have a **Show changes** toolbar button that filters the view down to what has changed, and both views offer a right-click **Revert** option that puts a single property, a single object or a whole branch of the model back to its saved state, without touching any other unsaved changes.
+Ambas vistas tienen un botón **Mostrar cambios** en la barra de herramientas que filtra la vista para mostrar solo lo que ha cambiado, y ambas ofrecen, al hacer clic con el botón derecho, la opción **Revertir**, que devuelve una sola propiedad, un solo objeto o toda una rama del modelo a su estado guardado, sin afectar a ningún otro cambio sin guardar.
 
 > [!NOTE]
-> The indicators track changes relative to the source the model was loaded from or last saved to. Deploying the model to a different database does not clear them, since the loaded model still differs from its own source.
+> Los indicadores registran los cambios con respecto al origen desde el que se cargó el modelo o en el que se guardó por última vez. Desplegar el modelo en otra base de datos no los borra, ya que el modelo cargado sigue siendo distinto de su propio origen.
 
-## Change indicators in the TOM Explorer
+## Indicadores de cambios en el Explorador TOM
 
-Each object in the tree is tinted and badged according to what happened to it since the last save:
+Cada objeto del árbol se resalta y recibe una insignia según lo que le haya ocurrido desde la última vez que se guardó:
 
-- **Edited** objects get a light orange row and an orange dot badge on their icon. This covers any modified property, including changes to a sub-object that has no node of its own in the tree, such as a table's refresh policy or a column's _Alternate Of_ settings.
-- **Added** objects get a light green row and a green **+** badge. A new table and all of its new columns are green. Editing a property of a newly added object keeps it green, since the object is still new compared to the saved model.
-- **Deleted** objects get a light red row and a red **−** badge, and their name is struck through. See [Deleted objects](#deleted-objects) below.
+- Los objetos **editados** reciben una fila de color naranja claro y una insignia con un punto naranja en el icono. Esto incluye cualquier propiedad modificada, incluidos los cambios en un subobjeto que no tiene su propio nodo en el árbol, como la política de actualización de una tabla o la configuración de _Alternate Of_ de una columna.
+- Los objetos **agregados** reciben una fila verde claro y una insignia verde con un **+**. Una tabla nueva y todas sus columnas nuevas aparecen en verde. Editar una propiedad de un objeto recién agregado mantiene el objeto en verde, ya que sigue siendo nuevo en comparación con el modelo guardado.
+- Los objetos **eliminados** aparecen con una fila de color rojo claro y una insignia roja **−**, y su nombre se muestra tachado. Consulta [Objetos eliminados](#deleted-objects) más abajo.
 
-Tables, display folders, table groups and the **Model** node are marked too, when something beneath them has changed: their row gets a hatched fill and their icon gets the badge of the change beneath them. Green when only objects were added, and orange otherwise. This lets you follow the changes down through a collapsed tree, or use the **Show changes** filter to see only the changed objects.
+Las tablas, las carpetas de visualización, los grupos de tablas y el nodo **Modelo** también se marcan cuando cambia algo por debajo de ellos: su fila recibe un relleno rayado y su icono muestra la insignia de ese cambio. Verde cuando solo se han agregado objetos; naranja en caso contrario. Esto te permite seguir los cambios en un árbol contraído o usar el filtro **Mostrar cambios** para ver solo los objetos modificados.
 
-When an object is selected, the normal selection highlight takes precedence over the tint, so a multi-selection stays readable. The badge on the icon still marks the changed objects within the selection. Error and warning badges also take precedence over the change badge, so an object with a semantic error keeps its error badge even when it has unsaved changes.
+Cuando se selecciona un objeto, el resaltado normal de selección tiene prioridad sobre el tinte, por lo que una selección múltiple sigue siendo legible. La insignia del icono sigue marcando los objetos modificados dentro de la selección. Las insignias de error y advertencia también tienen prioridad sobre la insignia de cambio, por lo que un objeto con un error semántico conserva su insignia de error incluso cuando tiene cambios sin guardar.
 
 > [!TIP]
-> If green and red rows are hard to tell apart, enable **Color blindness mode** under **Tools > Preferences > User Interface > Accessibility**. Added objects are then marked in teal instead of green, both here and in the model comparison view.
+> Si te cuesta distinguir las filas verdes de las rojas, activa **Modo para daltónicos** en **Herramientas > Preferencias > Interfaz de usuario > Accesibilidad**. Los objetos agregados se marcan entonces en color verde azulado en lugar de verde, tanto aquí como en la vista de comparación de modelos.
 
-### Show changes
+### Mostrar cambios
 
-The **Show changes** button on the TOM Explorer toolbar filters the tree down to objects with unsaved changes, together with the tables, folders and groups needed to reach them. While the filter is active, the title of the view reads **TOM Explorer (Changed)**.
+El botón **Mostrar cambios** de la barra de herramientas del Explorador TOM filtra el árbol para mostrar solo los objetos con cambios sin guardar, junto con las tablas, carpetas y grupos necesarios para llegar a ellos. Mientras el filtro está activo, el título de la vista es **Explorador TOM (Con cambios)**.
 
-![Show changes filter in the TOM Explorer](~/content/assets/images/unsaved-changes/tom-explorer-show-changes.png)
+![Filtro Mostrar cambios en el Explorador TOM](~/content/assets/images/unsaved-changes/tom-explorer-show-changes.png)
 
-The filter is applied together with the other toolbar toggles and the search box. For example, hiding columns with **Ctrl+2** also hides changed columns from the filtered view.
+El filtro se aplica junto con los demás controles de alternancia de la barra de herramientas y el cuadro de búsqueda. Por ejemplo, al ocultar columnas con **Ctrl+2** también se ocultan las columnas modificadas en la vista filtrada.
 
-## Change indicators in the Properties view
+## Indicadores de cambios en la vista de propiedades
 
-When you select a changed object, the properties that differ from the saved model are drawn with the same light orange tint. A collapsed row that holds a sub-object, such as a measure's **KPI** row or a table's **Refresh Policy** row, is marked when anything inside the sub-object has changed. For indexed rows such as **Annotations**, only the individual annotation that changed is marked.
+Cuando seleccionas un objeto modificado, las propiedades que difieren del modelo guardado se muestran con el mismo tono naranja claro. Una fila contraída que contiene un subobjeto, como la fila **KPI** de una medida o la fila **política de actualización** de una tabla, se marca cuando cambia algo dentro del subobjeto. Para las filas indexadas, como **Anotaciones**, solo se marca la anotación individual que cambió.
 
-When several objects are selected, a property row is marked if any of the selected objects changed that property.
+Cuando se seleccionan varios objetos, una fila de propiedad se marca si alguno de los objetos seleccionados cambió esa propiedad.
 
-The **Show changes** button on the Properties view toolbar hides all unchanged rows, so that only the changed properties remain. While the filter is active, the title of the view reads **Properties (Changed)**.
+El botón **Mostrar cambios** de la barra de herramientas de la vista de propiedades oculta todas las filas sin cambios, de modo que solo queden las propiedades modificadas. Mientras el filtro está activo, el título de la vista es **Propiedades (Con cambios)**.
 
-![Show changes filter in the Properties view](~/content/assets/images/unsaved-changes/properties-show-changes.png)
+![Filtro Mostrar cambios en la vista de propiedades](~/content/assets/images/unsaved-changes/properties-show-changes.png)
 
-## Reverting changes
+## Revertir cambios
 
-**File > Reload from disk** discards every unsaved change at once, by reloading the model metadata from its source. The command reads **Reload from server** for a model you opened from a server. The **Revert** options below undo individual changes instead, leaving all other unsaved changes in place.
+**Archivo > Recargar desde disco** descarta de una sola vez todos los cambios sin guardar, al recargar desde su origen los metadatos del modelo. En un modelo abierto desde un servidor, el comando se llama **Recargar desde el servidor**. Las opciones de **Revertir** que aparecen más abajo deshacen cambios individuales y dejan intactos todos los demás cambios sin guardar.
 
-A revert behaves exactly like typing the old value back in, or recreating the deleted object by hand: DAX references are fixed up, dependent objects are recalculated, and the whole revert becomes a single step on the undo stack. If you change your mind, one **Edit > Undo** (**Ctrl+Z**) brings the reverted change back.
+Una operación de revertir se comporta exactamente igual que volver a escribir el valor anterior o recrear manualmente el objeto eliminado: las referencias DAX se corrigen, los objetos dependientes se recalculan y toda la operación se convierte en un único paso en la pila de deshacer. Si cambias de idea, con **Editar > Deshacer** (**Ctrl+Z**) restauras el cambio revertido.
 
-### Reverting a single property
+### Revertir una sola propiedad
 
-Right-click a marked row in the Properties view and choose **Revert** to put that property back to the value it had at the last save. Every other unsaved change on the object stays in place.
+Haz clic con el botón derecho en una fila marcada en la vista de propiedades y elige **Revertir** para restablecer esa propiedad al valor que tenía la última vez que guardaste. Todos los demás cambios sin guardar del objeto se mantienen.
 
-![Revert a single property](~/content/assets/images/unsaved-changes/revert-property.png)
+![Revertir una sola propiedad](~/content/assets/images/unsaved-changes/revert-property.png)
 
-The **Revert** option is only enabled on rows that have unsaved changes. With several objects selected, **Revert** on a merged row reverts the property on all the selected objects that changed it, as a single undoable step. **Revert** on a container row such as **Annotations** reverts all the annotations at once: edited annotations return to their saved values, added annotations are removed and deleted annotations come back.
+La opción **Revertir** solo está habilitada en las filas que tienen cambios sin guardar. Si seleccionas varios objetos, **Revertir** en una fila combinada revierte la propiedad en todos los objetos seleccionados que la hayan cambiado, como un único paso que puedes deshacer. **Revertir** en una fila de contenedor como **Anotaciones** revierte todas las anotaciones de una vez: las anotaciones editadas vuelven a sus valores guardados, las anotaciones agregadas se eliminan y las anotaciones eliminadas reaparecen.
 
-### Reverting an object or a branch of the model
+### Revertir un objeto o una rama del modelo
 
-Right-click a marked object in the TOM Explorer and choose **Revert** to return the object, and everything beneath it, to the way it was at the last save. **Revert** is also available on tables, display folders, table groups and the **Model** node, even though these are not marked themselves, as long as something beneath them has changed. Choosing **Revert** on the **Model** node discards every unsaved change in the model, as a single undoable step.
+Haz clic con el botón derecho en un objeto marcado en el Explorador TOM y elige **Revertir** para devolver el objeto y todo lo que hay debajo de él al estado en el que estaba la última vez que guardaste. **Revertir** también está disponible en tablas, carpetas de visualización, grupos de tablas y en el nodo **Modelo**, aunque esos elementos no estén marcados, siempre que algo que esté debajo haya cambiado. Si eliges **Revertir** en el nodo **Modelo**, descartas todos los cambios sin guardar del modelo como un único paso que puedes deshacer.
 
-![Revert an object in the TOM Explorer](~/content/assets/images/unsaved-changes/revert-object.png)
+![Revertir un objeto en el Explorador TOM](~/content/assets/images/unsaved-changes/revert-object.png)
 
-When reverting an object or a branch:
+Al revertir un objeto o una rama del modelo:
 
-- Edited properties return to their saved values.
-- Objects added since the last save are removed.
-- Objects deleted since the last save come back exactly as they were saved, including a deleted measure's KPI, or a deleted column's hierarchy levels and relationships.
-- Objects elsewhere in the model keep their unsaved changes.
+- Las propiedades editadas vuelven a sus valores guardados.
+- Los objetos agregados desde el último guardado se eliminan.
+- Los objetos eliminados desde el último guardado vuelven exactamente como se guardaron, incluido el KPI de una medida eliminada o los niveles de jerarquía y las relaciones de una columna eliminada.
+- Los objetos de otras partes del modelo conservan sus cambios sin guardar.
 
-Anything that cannot be put back is listed in a **Revert incomplete** message, and the rest of the revert stands. This happens, for example, when a deleted object's name has since been given to a new object that cannot be removed.
+Todo lo que no se pueda revertir se enumera en **Mensajes** mediante un mensaje de **Reversión incompleta**, y el resto de la reversión se mantiene. Esto sucede, por ejemplo, cuando el nombre de un objeto eliminado se ha asignado después a un objeto nuevo que no se puede eliminar.
 
-## Deleted objects
+## Objetos eliminados
 
-Deleting an object does not remove it from the TOM Explorer. Until the model is saved, the object stays where it was, struck through on a light red row, with a red **−** badge on its icon. When the info columns are shown, the **Object Type** column reads for example **Measure (Deleted)**. This makes a deletion as easy to spot as an edit.
+Al eliminar un objeto, este no se quita del Explorador TOM. Hasta que se guarde el modelo, el objeto permanece donde estaba, tachado en una fila de color rojo claro, con una insignia roja **−** en el icono. Cuando se muestran las columnas de información, la columna **Tipo de objeto** muestra, por ejemplo, **medida (eliminada)**. Así, una eliminación es tan fácil de detectar como una edición.
 
-![Deleted objects in the TOM Explorer](~/content/assets/images/unsaved-changes/deleted-objects.png)
+![Objetos eliminados en el Explorador TOM](~/content/assets/images/unsaved-changes/deleted-objects.png)
 
-Right-click a deleted object and choose **Restore** to bring it back exactly as it was the moment before it was deleted. If the object had unsaved edits before it was deleted, these come back with it and remain marked, so that they can be reverted separately. You can multi-select several deleted objects and restore them in one step.
+Haz clic con el botón derecho en un objeto eliminado y elige **Restaurar** para devolverlo exactamente al estado en que estaba justo antes de eliminarlo. Si el objeto tenía ediciones sin guardar antes de eliminarse, estas reaparecen con él y siguen marcadas, para que puedan revertirse por separado. Puedes seleccionar varios objetos eliminados y restaurarlos en un solo paso.
 
-Deleted objects are placeholders, not model objects:
+Los objetos eliminados son marcadores de posición, no objetos del modelo:
 
-- They cannot be edited, renamed, dragged or expanded, and they are never included in a drag-and-drop or paste target.
-- Selecting them does not select a model object. The Properties view shows nothing, and the right-click menu offers **Restore** only.
-- A selection that mixes deleted and live objects offers neither **Restore** nor the normal object actions.
-- They disappear as soon as the model is saved.
+- No se pueden editar, cambiar de nombre, arrastrar ni expandir, y nunca se pueden usar como destino para arrastrar y soltar o pegar.
+- Seleccionarlos no selecciona ningún objeto del modelo. La vista de propiedades no muestra nada, y el menú contextual solo ofrece **Restaurar**.
+- Una selección que mezcla objetos eliminados y activos no ofrece ni **Restaurar** ni las acciones habituales de los objetos.
+- Desaparecen en cuanto se guarda el modelo.
 
-C# scripts can reach the selected deleted objects through `Selected.Deleted`. See [Scripting](#scripting) below.
+Los C# Scripts pueden acceder a los objetos eliminados seleccionados mediante `Selected.Deleted`. Consulta [Scripting](#scripting) más abajo.
 
-### Gathering deleted objects under one node
+### Agrupar los objetos eliminados en un solo nodo
 
-If you prefer not to have deleted objects mixed in with live ones, check **Gather deleted objects under a "Deleted objects" node** under **Tools > Preferences > TOM Explorer > Unsaved changes**. The deleted objects of a table, hierarchy, role or table group are then shown together under a single **Deleted objects** node at the end of their container, regardless of the display folders they used to be in. The node takes the red highlight and a deleted badge of its own, and the objects beneath it are struck through. Right-click the node and choose **Restore** to bring back everything beneath it in one step.
+Si prefieres no mezclar los objetos eliminados con los activos, activa **Agrupar los objetos eliminados bajo un nodo "Objetos eliminados"** en **Herramientas > Preferencias > Explorador TOM > Cambios no guardados**. Los objetos eliminados de una tabla, jerarquía, rol o grupo de tablas se muestran entonces juntos bajo un único nodo **Objetos eliminados** al final de su contenedor, independientemente de las carpetas de visualización en las que estuvieran antes. El nodo adopta el resaltado rojo y su propia insignia de eliminado, y los objetos que contiene aparecen tachados. Haz clic con el botón derecho en el nodo y elige **Restaurar** para recuperar todo lo que contiene en un solo paso.
 
-![Deleted objects gathered under one node](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
+![Objetos eliminados agrupados bajo un solo nodo](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
 
-### Keeping deleted objects across saves
+### Conservar los objetos eliminados entre guardados
 
-By default, deleted objects stay visible until the model is saved, since they are unsaved changes like any other. The **Keep deleted objects visible** preference offers two alternatives:
+De forma predeterminada, los objetos eliminados permanecen visibles hasta que se guarda el modelo, ya que son cambios no guardados como cualquier otro. La preferencia **Mantener visibles los objetos eliminados** ofrece dos alternativas:
 
-- **Never**: Deleted objects vanish from the TOM Explorer at once. They can still be brought back with **Revert** on their container, or with **Edit > Undo**.
-- **Until the model is closed**: Deleted objects stay visible for the whole editing session, even across saves, and remain restorable. Restoring an object that was deleted before the last save creates it anew, so it is then marked as an added object. Objects that were created and deleted between two saves are kept only if they were edited or saved at some point. An object that was created and deleted without ever being touched leaves no trace.
+- **Nunca**: Los objetos eliminados desaparecen del Explorador TOM de inmediato. Aun así, pueden restaurarse con **Revertir** en su contenedor o con **Editar > Deshacer**.
+- **Hasta que se cierre el modelo**: Los objetos eliminados siguen visibles durante toda la sesión de edición, incluso entre guardados, y se pueden restaurar. Restaurar un objeto que se eliminó antes del último guardado lo crea de nuevo, por lo que después queda marcado como objeto agregado. Los objetos que se crearon y se eliminaron entre dos guardados solo se conservan si en algún momento se editaron o se guardaron. Un objeto que se creó y se eliminó sin llegar a modificarse no deja rastro.
 
-## When indicators clear
+## Cuándo se limpian los indicadores
 
-An object or property loses its mark when it no longer differs from the last saved state of the model. This happens when:
+Un objeto o una propiedad pierde su marca cuando deja de diferir del último estado guardado del modelo. Esto sucede cuando:
 
-- The model is saved, whether to a file, a folder or a database. Every indicator clears at once.
-- The change is reverted, either through **Revert** in the TOM Explorer or Properties view, or through **File > Reload from disk** (**Reload from server**), which discards them all.
-- The change is undone with **Edit > Undo** back to the point of the last save. Redoing the change brings the mark back, and undoing _past_ the last save marks the rolled-back objects instead.
-- A property is set back to its original value by hand. Tabular Editor 3 compares the current value with the saved one, so a net-zero edit does not count as a change.
+- Se guarda el modelo, ya sea en un archivo, una carpeta o una base de datos. Todos los indicadores se limpian a la vez.
+- El cambio se revierte, ya sea con **Revertir** en el Explorador TOM o en la vista de propiedades, o mediante **Archivo > Recargar desde disco** (**Recargar desde el servidor**), lo que descarta todos los cambios.
+- El cambio se deshace con **Editar > Deshacer** hasta volver al punto del último guardado. Volver a aplicar el cambio hace que reaparezca la marca y, si se deshace _más allá_ del último guardado, se marcan en su lugar los objetos revertidos.
+- Una propiedad se restablece manualmente a su valor original. Tabular Editor 3 compara el valor actual con el guardado, por lo que una edición sin cambios netos no cuenta como cambio.
 
 ## Preferencias
 
-The indicators can be adjusted under **Tools > Preferences > TOM Explorer**, in the **Unsaved changes** section:
+Los indicadores se pueden ajustar en **Herramientas > Preferencias > Explorador TOM**, en la sección **Cambios no guardados**:
 
-![Unsaved changes preferences](~/content/assets/images/unsaved-changes/preferences.png)
+![Preferencias de cambios no guardados](~/content/assets/images/unsaved-changes/preferences.png)
 
-- **Mark objects with unsaved changes** (enabled): Tint the rows and badge the icons of added, edited and deleted objects in the TOM Explorer, and mark their containers with a hatched fill. When unchecked, deleted objects still stay visible and the **Show changes** filter still works.
-- **Keep deleted objects visible** (Until the model is saved): How long deleted objects stay in the TOM Explorer. See [Keeping deleted objects across saves](#keeping-deleted-objects-across-saves).
-- **Gather deleted objects under a "Deleted objects" node** (disabled): Show a container's deleted objects together under one node instead of each where it used to be. See [Gathering deleted objects under one node](#gathering-deleted-objects-under-one-node).
-- **Mark properties with unsaved changes in the Properties pane** (enabled): Tint the rows of changed properties in the Properties view. When unchecked, the **Show changes** filter in the Properties view still works.
+- **Marcar objetos con cambios no guardados** (activado): Tiñe las filas y añade una insignia a los iconos de los objetos agregados, editados y eliminados en el Explorador TOM, y marca sus contenedores con un relleno rayado. Si se desmarca, los objetos eliminados siguen visibles y el filtro **Mostrar cambios** sigue funcionando.
+- **Mantener visibles los objetos eliminados** (Hasta que se guarde el modelo): Cuánto tiempo permanecen los objetos eliminados en el Explorador TOM. Consulta [Mantener los objetos eliminados entre guardados](#keeping-deleted-objects-across-saves).
+- **Agrupar los objetos eliminados bajo un nodo "Objetos eliminados"** (desactivado): Muestra juntos los objetos eliminados de un contenedor bajo un único nodo, en lugar de mantener cada uno en su ubicación original. Consulta [Agrupar los objetos eliminados bajo un único nodo](#gathering-deleted-objects-under-one-node).
+- **Marcar las propiedades con cambios sin guardar en el panel Propiedades** (activado): Tiñe las filas de las propiedades modificadas en la vista de propiedades. Cuando esta opción no está marcada, el filtro **Mostrar cambios** de la vista de propiedades sigue funcionando.
 
-See @preferences for the other settings on this page. The colors used for added objects can be adjusted for color blindness under **Tools > Preferences > User Interface > Accessibility**.
+Consulta @preferences para ver las demás preferencias de esta página. Los colores utilizados para los objetos añadidos se pueden ajustar para personas con daltonismo en **Herramientas > Preferencias > Interfaz de usuario > Accesibilidad**.
 
 ## Scripts
 
-The same information and operations are available to [C# scripts](xref:csharp-scripts) and macros, which lets a script inspect what has changed and roll back part of a model without touching the rest.
+La misma información y las mismas operaciones están disponibles para los [C# Scripts](xref:csharp-scripts) y las macros, lo que permite que un C# Script inspeccione qué ha cambiado y revierta parte de un modelo sin tocar el resto.
 
-Every model object exposes the following members:
+Cada objeto del modelo expone los siguientes miembros:
 
-- `HasUnsavedChanges` returns `true` when the object, or anything beneath it, differs from the last saved state. On the `Model` object, this tells whether the model has unsaved changes at all.
-- `Revert()` puts the object and everything beneath it back to the saved state, as one undoable step. The same method exists on collections such as `Selected.Measures`, and on `Model` for the whole model. An exception listing what could not be put back is thrown when part of the revert fails.
-- `Revert("PropertyName")` reverts a single property to its saved value, for example `Revert("Expression")` or `Revert("Annotations[MyAnnotation]")`. It does nothing when the property is unchanged.
+- `HasUnsavedChanges` devuelve `true` cuando el objeto, o cualquier elemento por debajo de él, difiere del último estado guardado. En el objeto `Model`, esto indica si el modelo tiene algún cambio no guardado.
+- `Revert()` restaura el objeto y todo lo que hay por debajo de él al estado guardado, en un único paso que se puede deshacer. El mismo método existe en colecciones como `Selected.Measures` y en `Model` para todo el modelo. Si falla parte de la restauración, se genera una excepción que enumera lo que no se pudo restaurar.
+- `Revert("PropertyName")` restaura una sola propiedad a su valor guardado, por ejemplo `Revert("Expression")` o `Revert("Annotations[MyAnnotation]")`. No hace nada si la propiedad no ha cambiado.
 
-Containers such as tables, hierarchies and roles expose a `DeletedObjects` collection listing the objects deleted from them in the current session. Each entry has a `Name`, `ObjectType` and `Parent`, and a `Restore()` method. Calling `Restore()` on the collection restores all of them at once.
+Los contenedores, como tablas, jerarquías y roles, exponen una colección `DeletedObjects` que enumera los objetos eliminados de estos contenedores en la sesión actual. Cada entrada tiene `Name`, `ObjectType` y `Parent`, además de un método `Restore()`. Llamar a `Restore()` en la colección restaura todos los elementos de una vez.
 
-In the TOM Explorer, deleted objects that are currently selected are available through `Selected.Deleted`. Since deleted objects are not model objects, they never appear in `Selected.Measures`, `Selected.Columns` and the other accessors.
+En el Explorador TOM, los objetos eliminados que estén seleccionados actualmente están disponibles a través de `Selected.Deleted`. Dado que los objetos eliminados no son objetos del modelo, nunca aparecen en `Selected.Measures`, `Selected.Columns` ni en los demás accesores.
 
 ```csharp
 // List the measures with unsaved changes in the selected tables:
