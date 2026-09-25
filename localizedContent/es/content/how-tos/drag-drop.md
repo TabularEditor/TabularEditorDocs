@@ -13,13 +13,13 @@ applies_to:
 
 # Arrastrar y soltar objetos
 
-You reorganise a model in the @tom-explorer-view, the same tree you use to browse it. Pick objects up where you find them, drop them where they belong. There's no separate modelling surface to switch into first, and nothing is out of reach because the view you're in doesn't happen to draw it.
+Reorganiza un modelo en @tom-explorer-view, el mismo árbol que usas para explorarlo. Recoge los objetos donde los encuentres y suéltalos donde deban estar. No hay una superficie de modelado independiente a la que tengas que cambiar antes, y nada queda fuera de tu alcance solo porque la vista en la que estás no lo muestre.
 
-The gesture is always a move. Tabular Editor shows the move cursor when a drop is allowed and the no-drop cursor when it isn't, and there's no modifier key that turns a drag into a copy. To copy an object, use **Duplicate** instead, described in @duplicate-and-batch.
+La acción siempre es un movimiento. Tabular Editor muestra el cursor de movimiento cuando se permite soltar y el cursor de no permitido cuando no, y no hay ninguna tecla modificadora que convierta un arrastre en una copia. Para copiar un objeto, usa **Duplicar**; se describe en @duplicate-and-batch.
 
-## Reorganising display folders
+## Reorganizar carpetas de visualización
 
-Drag a display folder and every object underneath it comes along, including nested subfolders, which keep their shape. This is the reason the feature exists: restructuring the folder layout of a large model is one gesture per folder rather than one edit per measure.
+Arrastra una carpeta de visualización y todos los objetos que contiene se moverán con ella, incluidas las subcarpetas anidadas, que conservan su estructura. Para eso existe esta función: reestructurar la organización de carpetas de un modelo grande pasa a ser una sola acción por carpeta en lugar de una edición por medida.
 
 <!-- IMAGE NEEDED: drag-drop-display-folders.gif
      An animation of a display folder being dragged onto another folder in the TOM Explorer,
@@ -27,72 +27,72 @@ Drag a display folder and every object underneath it comes along, including nest
      levels of nesting so the shape is visibly preserved.
      Alt text: "A display folder being dragged onto another folder in the TOM Explorer" -->
 
-Everything else in the tree moves the same way:
+El resto de elementos del árbol se mueve del mismo modo:
 
-- Select several objects with **Ctrl+click** or **Shift+click** and drag them together. You can mix measures, columns, hierarchies and folders as long as they're in the same table.
-- Drop objects on the **table node** itself to take them out of their folder and back to the top level of the table.
-- Drop a folder into a folder to nest it. Tabular Editor refuses a drop into the folder's own subfolder, so you can't lose a branch inside itself.
+- Selecciona varios objetos con **Ctrl+clic** o **Mayús+clic** y arrástralos juntos. Puedes mezclar medidas, columnas, jerarquías y carpetas siempre que estén en la misma tabla.
+- Suelta los objetos directamente sobre el **nodo de la tabla** para sacarlos de su carpeta y devolverlos al nivel superior de la tabla.
+- Suelta una carpeta dentro de otra para anidarla. Tabular Editor no permite soltar una carpeta dentro de una de sus propias subcarpetas, así que no puedes perder una rama dentro de sí misma.
 
-Each drop is a single **Edit > Undo** step, however many objects it touched.
+Cada acción de soltar cuenta como un único paso de **Editar > Deshacer**, sin importar cuántos objetos afecte.
 
-Display folders are nothing more than a string property on each object, with `\` separating the levels, so `Sales\Ratios` is the _Ratios_ folder inside _Sales_. An object can sit in more than one folder at once by separating the paths with `;`.
+Las carpetas de visualización no son más que una propiedad de cadena de cada objeto, con `\\` separando los niveles; por ejemplo, `Sales\\Ratios` es la carpeta _Ratios_ dentro de _Sales_. Un objeto puede estar en más de una carpeta a la vez si separas las rutas con `;`.
 
-## Moving an object to another table
+## Mover un objeto a otra tabla
 
-Measures and calculated columns can be dragged to a different table, either onto the table node or straight into one of its display folders. No other object type can cross tables this way.
+Las medidas y las columnas calculadas se pueden arrastrar a otra tabla, ya sea al nodo de la tabla o directamente a una de sus carpetas de visualización. Ningún otro tipo de objeto puede pasar de una tabla a otra de este modo.
 
-What comes with the object:
+Qué incluye el objeto:
 
-- **Translations** of its name and description.
-- **Perspective membership.** By default the object keeps the perspectives it was in. Tick _Inherit table membership when object pasted or moved to table_ under **Tools > Preferences > Tabular Editor** to have it adopt the destination table's membership instead.
-- **The KPI**, for a measure that has one.
-- **Error and warning indicators.** An expression that was invalid before the move is still marked as invalid afterwards, rather than looking clean until you next edit it.
+- **Traducciones** de su nombre y descripción.
+- **Pertenencia a perspectivas.** De forma predeterminada, el objeto conserva las perspectivas en las que estaba. Marca _Heredar la pertenencia de tabla al pegar o mover un objeto a una tabla_ en **Herramientas > Preferencias > Tabular Editor** para que adopte en su lugar la pertenencia de la tabla de destino.
+- **El KPI**, en el caso de una medida que lo tenga.
+- **Indicadores de error y advertencia.** Una expresión que no era válida antes del movimiento sigue marcada como no válida después, en lugar de parecer correcta hasta que la vuelvas a editar.
 
 > [!WARNING]
-> Moving a **calculated column** to another table removes the things that depended on it in its old position. Any relationship it takes part in is deleted, any hierarchy level built on it is deleted, it's dropped from calendars and variations, and a _Sort by column_ pointing at it is cleared. You aren't asked to confirm this. **Edit > Undo** puts all of it back as one step, so check the model before you do anything else.
+> Mover una **columna calculada** a otra tabla elimina los elementos que dependían de ella en su posición anterior. Se elimina cualquier relación en la que participe, se elimina cualquier nivel de jerarquía construido sobre ella, se quita de calendarios y variaciones, y se borra cualquier _Ordenar por columna_ que apunte a ella. No se te pedirá que lo confirmes. **Editar > Deshacer** restaura todo en un solo paso, así que comprueba el modelo antes de hacer nada más.
 
-DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and keeps pointing at the table the column has left. Measure references are written as `[Measure]` without a table, so they're unaffected. Run @using-bpa or check the @messages-view after a move to catch what broke.
+El DAX que hace referencia a la columna por su tabla anterior, como `'Reseller Sales'[Margin]`, no se reescribe y sigue apuntando a la tabla de la que salió la columna. Las referencias a medidas se escriben como `[Measure]` sin tabla, por lo que no se ven afectadas. Ejecuta @using-bpa o revisa @messages-view tras un movimiento para detectar qué se rompió.
 
-## Building hierarchies and ordering calculation items
+## Crear jerarquías y ordenar elementos de cálculo
 
-- Drag one or more **columns onto a hierarchy** to add them as levels. Drop between two existing levels to choose the position. A column that's already a level of that hierarchy is refused.
-- Drag **levels** within a hierarchy to reorder them, or onto another hierarchy in the same table to move them there.
-- Drag **calculation items** to reorder them inside their calculation group, or onto another calculation group to move them.
+- Arrastra una o varias **columnas sobre una jerarquía** para agregarlas como niveles. Suéltalas entre dos niveles existentes para elegir la posición. Se rechaza una columna que ya sea un nivel de esa jerarquía.
+- Arrastra los **niveles** dentro de una jerarquía para reordenarlos, o sobre otra jerarquía de la misma tabla para moverlos allí.
+- Arrastra los **elementos de cálculo** para reordenarlos dentro de su grupo de cálculo, o sobre otro grupo de cálculo para moverlos.
 
-## Grouping tables
+## Agrupar tablas
 
-In Tabular Editor 3 you can drag one or more tables onto a **table group** to put them in it. Dropping tables onto another table gives them whatever group that table is in, which is also how you take tables out of a group: drop them on a table that isn't in one.
+En Tabular Editor 3, puedes arrastrar una o varias tablas sobre un **grupo de tablas** para incluirlas en él. Si sueltas tablas sobre otra tabla, pasarán al grupo en el que esté esa tabla; así también es como se sacan tablas de un grupo: suéltalas sobre una tabla que no esté en ninguno.
 
-Table groups are a Tabular Editor convenience for organising the tree. They're stored as an annotation and aren't part of the model metadata, so they don't appear in Power BI or Analysis Services.
+Los grupos de tablas son una función práctica de Tabular Editor para organizar el árbol. Se almacenan como una anotación y no forman parte de los metadatos del modelo, por lo que no aparecen en Power BI ni en Analysis Services.
 
-## Display folders and translations
+## Carpetas de visualización y traducciones
 
-A drag changes the display folder _for the translation you're currently viewing_ in the TOM Explorer, and only that one.
+Al arrastrar, cambias la carpeta de visualización _de la traducción que estás viendo actualmente_ en el Explorador TOM, y solo esa.
 
-- With no translation selected, which is the default, the drag writes the untranslated display folder. Translated display folder names are left exactly as they were, so in those cultures the objects stay in the old folder.
-- With a culture selected in the TOM Explorer's translation dropdown, the drag writes that culture's translated display folder and leaves the untranslated one alone.
+- Si no hay ninguna traducción seleccionada, que es la opción predeterminada, al arrastrar se escribe la carpeta de visualización sin traducir. Los nombres traducidos de las carpetas de visualización se dejan exactamente como estaban, por lo que en esas configuraciones regionales los objetos permanecen en la carpeta anterior.
+- Con una configuración regional seleccionada en la lista desplegable de traducción del Explorador TOM, al arrastrar se escribe la carpeta de visualización traducida de esa configuración regional y se deja intacta la carpeta sin traducir.
 
-So reorganising folders in the default view doesn't carry the translations with it. Bring them back into line in the @metadata-translation-editor, or run the built-in Best Practice Analyzer rule for objects that have a display folder but no translated display folder, whose fix copies the untranslated value into every culture.
+Así que reorganizar carpetas en la vista predeterminada no arrastra las traducciones. Vuelve a sincronizar las traducciones en el @metadata-translation-editor, o ejecuta la regla integrada de Best Practice Analyzer para los objetos que tienen una carpeta de visualización pero no una carpeta de visualización traducida, cuya corrección copia el valor sin traducir en cada configuración regional.
 
-Moving an object to another table is the exception: its own translations are preserved across the move.
+Mover un objeto a otra tabla es la excepción: sus propias traducciones se conservan al moverlo.
 
-## What can be dragged, and where it can go
+## Qué se puede arrastrar y adónde puede ir
 
-| Drag                                    | Onto                                            | Resultado                     |
-| --------------------------------------- | ----------------------------------------------- | ----------------------------- |
-| Measures, columns, hierarchies, folders | A display folder in the same table              | Objects move into that folder |
-| The same                                | The table node                                  | Objects leave their folder    |
-| Measures, calculated columns            | Another table, or a folder in it                | Objects move to that table    |
-| Columnas                                | A hierarchy or one of its levels                | Columns are added as levels   |
-| Niveles                                 | The same hierarchy, or another one in the table | Levels are reordered or moved |
-| Elementos de cálculo                    | Their group, or another calculation group       | Items are reordered or moved  |
-| Tablas                                  | A table group, or another table                 | Tables take on that group     |
+| Arrastrar                                | En                                             | Resultado                                    |
+| ---------------------------------------- | ---------------------------------------------- | -------------------------------------------- |
+| Medidas, columnas, jerarquías y carpetas | Una carpeta de visualización en la misma tabla | Los objetos se mueven a esa carpeta          |
+| Lo mismo                                 | El nodo de la tabla                            | Los objetos salen de su carpeta              |
+| Medidas y columnas calculadas            | Otra tabla, o una carpeta dentro de ella       | Los objetos se mueven a esa tabla            |
+| Columnas                                 | Una jerarquía o uno de sus niveles             | Las columnas se añaden como niveles          |
+| Niveles                                  | La misma jerarquía, u otra de la misma tabla   | Los niveles se reordenan o se mueven         |
+| Elementos de cálculo                     | Su grupo, u otro grupo de cálculo              | Los elementos se reordenan o se mueven       |
+| Tablas                                   | Un grupo de tablas o otra tabla                | Las tablas pasan a formar parte de ese grupo |
 
-Partitions, roles, perspectives, relationships, data sources and shared expressions can't be dragged. Objects deleted since the last save, shown struck through in the tree, can't be dragged either, and can't be used as a drop target. Objects only appear where the tree is set up to show them, so display folders and table groups have to be switched on in the toolbar before you can drop onto them.
+Las particiones, los roles, las perspectivas, las relaciones, los Data source y las expresiones compartidas no se pueden arrastrar. Los objetos eliminados desde el último guardado, que aparecen tachados en el árbol, tampoco se pueden arrastrar ni usar como destino para soltar. Los objetos solo aparecen donde el árbol está configurado para mostrarlos, así que tienes que activar las carpetas de visualización y los grupos de tablas en la barra de herramientas antes de poder soltarlos ahí.
 
-## Doing the same from a script
+## Hacer lo mismo mediante un script
 
-Display folders are a property, so a script sets the string directly. Use `\\` in a regular C# string, or a verbatim string:
+Las carpetas de visualización son una propiedad, por lo que un script establece la cadena directamente. Usa `\\` en una cadena normal de C#, o una cadena literal:
 
 ```csharp
 Selected.Measures.SetDisplayFolder(@"Sales\Ratios");
@@ -100,25 +100,25 @@ Model.Tables["Sales"].Measures["Margin %"].DisplayFolder = @"Sales\Ratios";
 Model.Tables["Sales"].Measures["Margin %"].TranslatedDisplayFolders["da-DK"] = @"Salg\Nøgletal";
 ```
 
-A measure moves between tables with `MoveTo`, which keeps its error indicators exactly as the drag does:
+Una medida se mueve entre tablas con `MoveTo`, que conserva sus indicadores de error exactamente igual que al arrastrarla:
 
 ```csharp
 Model.Tables["Sales"].Measures["Margin %"].MoveTo(Model.Tables["Reseller Sales"]);
 ```
 
-Calculated columns have no `MoveTo`. Use the same action the tree uses:
+Las columnas calculadas no tienen `MoveTo`. Usa la misma acción que usa el árbol:
 
 ```csharp
 var column = Model.Tables["Sales"].Columns["Margin"];
 column.Handler.Actions.MoveObject(column, Model.Tables["Reseller Sales"], false, null);
 ```
 
-Table groups are a property too: `Model.Tables["Sales"].TableGroup = "Facts";`. See @csharp-scripts for how to run any of this.
+Los grupos de tablas también son una propiedad: `Model.Tables["Sales"].TableGroup = "Facts";`. Consulta @csharp-scripts para ver cómo ejecutar todo esto.
 
-## Dragging elsewhere in the application
+## Arrastrar en otras partes de la aplicación
 
-The TOM Explorer is the only place a drag changes model structure, but it's the source for several other drops:
+El Explorador TOM es el único lugar donde, al arrastrar, se cambia la estructura del modelo, pero también sirve como origen de varias otras acciones de arrastrar y soltar:
 
-- Drag an object into the DAX or C# editor to insert its fully qualified name, rather than typing it. See @dax-editor.
-- Drag tables from the tree onto an open model diagram to add them to it. Inside the diagram, drag a column onto a column in another table to create a relationship between them. See @diagram-view.
-- Drag columns, measures or hierarchies onto a pivot grid to add them as fields.
+- Arrastra un objeto al editor de DAX o C# para insertar su nombre completo, en lugar de escribirlo. Consulta @dax-editor.
+- Arrastra tablas desde el árbol hasta un diagrama de modelo abierto para agregarlas. Dentro del diagrama, arrastra una columna sobre una columna de otra tabla para crear una relación entre ambas. Consulta @diagram-view.
+- Arrastra columnas, medidas o jerarquías a un Pivot Grid para agregarlas como campos.
