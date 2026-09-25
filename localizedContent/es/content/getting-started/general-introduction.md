@@ -27,7 +27,7 @@ Un **Data model** se compone de varias tablas. Cada tabla tiene una o varias col
 
 Mediante una biblioteca cliente llamada [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor puede cargar y guardar metadatos en este formato basado en JSON. Además, la biblioteca cliente permite a Tabular Editor conectarse directamente a cualquier instancia de Analysis Services para obtener los metadatos del modelo desde una base de datos existente. Esto se ilustra en la figura siguiente.
 
-![Architecture](~/content/assets/images/architecture.png)
+![Arquitectura](~/content/assets/images/architecture.png)
 
 > [!NOTE]
 > En el párrafo anterior, usamos el término **base de datos** para referirnos a un modelo que se ha desplegado en Analysis Services. En el servicio de Power BI se usa el término **Dataset** para referirse a lo mismo, es decir, a un modelo tabular.
@@ -39,10 +39,10 @@ Tabular Editor puede cargar los metadatos del modelo desde las siguientes fuente
 - [3] Archivos .pbit (plantilla de Power BI)
 - [4] Una base de datos en SQL Server Analysis Services (Tabular)
 - [5] Una base de datos en Azure Analysis Services
-- [6] A semantic model in a Power BI workspace assigned to a capacity\*
+- [6] Un modelo semántico en un Workspace de Power BI asignado a una capacidad\*
 - [7] Un Report de Power BI Desktop en modo Import/DirectQuery
 
-\*Third party tools connect to Power BI semantic models through the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). It requires a Microsoft Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User license. XMLA read/write is enabled by default on all capacity SKUs since June 2025; see @xmla-as-connectivity if you can't connect.
+\*Las herramientas de terceros se conectan a los modelos semánticos de Power BI a través del [punto de conexión XMLA](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). Requiere una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium Per User. La lectura/escritura de XMLA está habilitada de forma predeterminada en todos los SKU de capacidad desde junio de 2025; consulta @xmla-as-connectivity si no puedes conectarte.
 
 > [!IMPORTANT]
 > Tabular Editor 2.x admite todas las fuentes 1-7 anteriores. Tabular Editor 3 solo admite algunas fuentes, en función de la [edición de Tabular Editor 3](xref:editions) que estés utilizando.
