@@ -24,18 +24,18 @@ Este procedimiento muestra cómo crear reglas de validación que comprueben cond
 Estas reglas se incluyen solo con fines ilustrativos y no reflejan necesariamente requisitos técnicos estrictos ni de Metric Views ni del Semantic Bridge.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estos procedimientos se aplican a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
 
 ## Cuándo usar reglas contextuales
 
 Use reglas contextuales cuando necesite:
 
-- Check that a name is not reused across different object types
+- Comprueba que no se reutilice un nombre en distintos tipos de objeto
 - Acceder a información sobre objetos validados previamente
 
 > [!NOTE]
-> The validation process validates each Metric View object in order (joins, then fields, then measures), so the context consists only of those items already visited in the validation.
+> El proceso de validación valida cada objeto de Metric View en orden (primero los joins, luego los campos y después las medidas), por lo que el contexto solo incluye los elementos que ya se han procesado durante la validación.
 
 ## El método MakeValidationRule
 
@@ -56,11 +56,11 @@ SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // or Field, 
 
 El parámetro `context` proporciona:
 
-- `context.FieldNames` - names of fields already validated
+- `context.FieldNames` - nombres de los campos ya validados
 - `context.MeasureNames` - nombres de las medidas ya validadas
 - `context.JoinNames` - nombres de los joins ya validados
-- `context.MakeError(code, message, object)` - create an error diagnostic for the given object
-- `context.MakeWarning(code, message, object)` - create a warning diagnostic for the given object
+- `context.MakeError(code, message, object)` - crea un diagnóstico de error con un código y mensajes para el objeto especificado
+- `context.MakeWarning(code, message, object)` - crea un diagnóstico de advertencia con un código y mensajes para el objeto especificado
 
 Como creas el mensaje de diagnóstico en el cuerpo de la función de validación, puedes incluir en el mensaje detalles sobre el objeto actual que se está validando.
 
@@ -72,9 +72,9 @@ Agrega esta directiva `using` para hacer referencia a los tipos de Metric View:
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 ```
 
-## Rule: a Metric View Measure name must not duplicate a Metric View Field name
+## Regla: El nombre de una medida de Metric View no debe duplicar el nombre de un campo de Metric View
 
-Fields are validated before measures, so when a measure is checked, `context.FieldNames` already holds every field name.
+Los campos se validan antes que las medidas, de modo que, cuando se comprueba una medida, `context.FieldNames` ya contiene todos los nombres de los campos.
 
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -92,9 +92,9 @@ var measureNameRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Me
 );
 ```
 
-## Rule: a Metric View Measure name must not duplicate a Metric View Join name
+## Regla: El nombre de una medida de Metric View no debe duplicar el nombre de un join de Metric View
 
-Joins are validated first, so `context.JoinNames` holds every join name by the time measures are checked.
+Los joins se validan primero, por lo que `context.JoinNames` ya contiene todos los nombres de los joins cuando se comprueban las medidas.
 
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -215,7 +215,7 @@ Found 2 issue(s):
 
 ## Combinar con las reglas predeterminadas
 
-You can run contextual rules alongside the default validation rules by calling `Validate` twice:
+Puedes ejecutar reglas contextuales junto con las reglas de validación predeterminadas llamando a `Validate` dos veces:
 
 ```csharp {run id=combined setup=mv-sample after=complete output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
