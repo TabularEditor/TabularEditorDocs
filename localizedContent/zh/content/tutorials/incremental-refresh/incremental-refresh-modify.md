@@ -23,10 +23,10 @@ applies_to:
 
 ---
 
-**通过调整刷新策略属性来更改增量刷新。** 具体要更改哪一项，就调整相应的属性。这些属性的完整概览见[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+**Incremental Refresh is changed by adjusting the Refresh Policy properties.** Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties).
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中配置增量刷新仅限于托管在 Power BI Datasets 服务中的 Dataset。对于 Analysis Services，必须进行自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。 For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ---
 
@@ -40,19 +40,19 @@ applies_to:
 
 3. **找到“刷新策略”属性：** 在 _Properties_ 窗口中，进入 _刷新策略_ 部分。
 
-    <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
+   <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
-4. **更改属性：** 根据要更改的内容，在下方各节中修改指定的 **Property**。有关所有刷新策略属性及其作用的概览，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+4. **Change the property:** Change the **Property** specified in the below sections, depending on what you want to change. 有关所有刷新策略属性及其作用的概览，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
 
 5. **应用更改：** 部署模型更改。
 
 6. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
 
-    <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
-7. **刷新所有分区：** 按住 Shift 键并单击，以选中所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表并选择 _“预览数据”_ 来查看结果。
+7. **Refresh all partitions:** Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
-    <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 
@@ -62,7 +62,7 @@ applies_to:
 
 **目的：** 增加或减少模型中的数据量。
 
-**属性：** <span style="color:#BC4A47">_RollingWindowPeriods_</span>。增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。
+**属性：** <span style="color:#BC4A47">_RollingWindowPeriods_</span>。 Increase to extend the window (more data); decrease to reduce the window (less data).
 
 **注意：** 你也可以更改 <span style="color:#BC4A47">_RollingWindowGranularity_</span> 来进行更细粒度的选择，例如从 3 年改为 36 个月。
 
@@ -76,7 +76,7 @@ applies_to:
 
 **目的：** 在计划刷新操作中，增加或减少要刷新的数据量。
 
-**属性：** <span style="color:#455C86">_IncrementalWindowPeriods_</span>。增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。
+**属性：** <span style="color:#455C86">_IncrementalWindowPeriods_</span>。 Increase to extend the window (more data); decrease to reduce the window (less data).
 
 **注意：** 你也可以更改 <span style="color:#455C86">_IncrementalWindowGranularity_</span> 来进行更细粒度的选择，例如从 3 年改为 36 个月。
 
@@ -90,7 +90,7 @@ applies_to:
 
 **目的：** 从 <span style="color:#BC4A47">滚动窗口</span> 中排除不完整（未完成）的周期
 
-**属性：** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>。将值设为 `-1`，即可将周期偏移 1，从而排除当前周期。
+**属性：** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>。 Set the value to `-1` to offset the period by 1, excluding the current period.
 
 **注意：** 你还可以进一步偏移该窗口，例如只刷新最近一个完整周期之前的那些周期。
 
@@ -111,10 +111,10 @@ applies_to:
 1. 将 _Mode_ 设置为所需的 `Import` 或 `Hybrid` 值
 2. 右键单击该表，然后选择 _应用刷新策略_
 3. 部署模型更改
-4. 按住 Shift 键并单击以选择所有分区。右键单击并选择 _刷新 > 完全刷新（分区）_。也可以右键单击该表，然后选择 _“预览数据”_ 查看结果。
+4. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 > [!NOTE]
-> 建议检查滚动窗口是否针对所选 _Mode_ 设置得当。从 `Import` 模式切换到 `Hybrid` 模式时，最新的策略范围分区将变为 DirectQuery 分区。可以考虑选择更细粒度的窗口，以限制通过 DirectQuery 查询的数据量。
+> It is recommended to check that the Rolling Window is appropriately set for the selected _Mode_. When switching from `Import` to `Hybrid` Mode, the latest Policy Range Partition will become the DirectQuery partition. You may wish to opt for a more fine-grain window, to limit the amount of data queried with DirectQuery.
 
 <br></br>
 
@@ -126,7 +126,7 @@ applies_to:
 
 **目的：** 设置为：当日期列（例如 _LastUpdate_）的值发生变化时，刷新已归档数据。
 
-**属性：** _PollingExpression_。添加一个有效的 M 表达式，用于返回某列的最大日期值。所有包含该日期的记录都会被刷新，无论它们属于哪个分区。
+**Property:** _PollingExpression_. Add a valid M Expression which returns a maximum date value for a column. All records containing that date will be refreshed, irrespective of their partition.
 
 **注意：** 按以下流程配置“检测数据更改”：
 
@@ -134,14 +134,14 @@ applies_to:
 2. 复制下面的 M 表达式，并将 _LastUpdate_ 替换为所需的列名。
 
 ```M
-// 获取列 [LastUpdate] 的最大值
-// 将 LastUpdate 替换为你自己的列名
-// 对于该列中值等于该列在整个表中最大值的任何记录，
-//    都将触发数据刷新
+// Retrieves the maximum value of the column [LastUpdate]
+// Replace LastUpdate with your own column name
+// The data will refresh for any records where the value in this column
+//    equals the maximum value in the column across the entire table
 let
     #"maxLastUpdate" =
         List.Max(
-            // 将下面替换为你的列名和表名
+            // Replace the below with your column and table name
             Orders[LastUpdate] 
         ),
 
@@ -155,10 +155,10 @@ in
 
 3. 右键单击该表，然后选择 _应用刷新策略_
 4. 部署模型更改
-5. 按住 Shift 键并单击以选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表并选择 _“预览数据”_ 来查看结果。
+5. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 > [!WARNING]
-> 如果某个值等于该列中的最大值，则相关记录都会更新。并不一定会因为该值发生变化而更新，也不一定会因为该值等于刷新日期而更新。
+> 如果某个值等于该列中的最大值，则相关记录都会更新。 It does not necessarily update explicitly  because the value has changed, or if the value equals the refresh date.
 
 <br></br>
 
@@ -173,7 +173,7 @@ in
 选中增量刷新表后，在 Tabular Editor 的 _“New C# Script”_ 窗格中运行以下脚本，而不是通过右键单击表来应用刷新策略。
 
 ```csharp
-// Todo: 替换为你的生效日期
+// Todo: replace with your effective date
 var effectiveDate = new DateTime(2020, 1, 1);  
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
@@ -190,16 +190,16 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 ### 禁用增量刷新
 
-**目的：** 在不需要刷新策略或使用场景不再适用时，将其禁用。
+**Purpose:** To disable a refresh policy because it is not needed or the use-case no longer fits.
 
 **属性：** _EnableRefreshPolicy_
 
 **注意：** 要禁用增量刷新，按以下步骤操作：
 
-1. **复制 _源表达式_：** 选中表后，在 _表达式编辑器_ 窗口中，从左上角下拉列表选择 _源表达式_。将 _源表达式_ 复制到单独的文本编辑器窗口中。
+1. **Copy the _Source Expression_:** With the table selected, in the _Expression Editor_ window, select _Source Expression_ from the top-left dropdown. 将 _源表达式_ 复制到单独的文本编辑器窗口中。
 2. **禁用刷新策略：** 将 _EnableRefreshPolicy_ 更改为 `False`
 3. **移除所有 Policy Range 分区：** 选择并删除所有 Policy Range 分区
-4. **创建新的 M 分区：** 右键单击表，然后选择 _创建 > 新建分区_。将分区的 _kind_ 属性设置为 `M`。
+4. **创建新的 M 分区：** 右键单击表，然后选择 _创建 > 新建分区_。 Set the partition _kind_ property to `M`.
 5. **粘贴 _源表达式_：** 选中新分区后，将 **步骤 6** 中的 _源表达式_ 复制到 _表达式编辑器_，并将其作为 _M 表达式_ 粘贴。
 6. **应用更改：** 部署模型的更改。
-7. **刷新表：** 选中表格并右键单击。选择 _刷新 > 完全刷新（表）_。你可以右键单击表格，并选择 _“预览数据”_ 来查看结果。
+7. **Refresh the Table:** Select and right-click the table. Select _Refresh > Full refresh (table)_. You can right-click the table and select _'Preview data'_ to see the result.
