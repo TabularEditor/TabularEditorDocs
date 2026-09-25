@@ -8,19 +8,19 @@ description: 用于删除孤立数据源的最佳实践规则，可降低模型�
 
 # 删除未使用的数据源
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别未被任何分区或表表达式引用的数据源。删除未使用的数据源可以降低模型复杂性、提升可维护性，并避免混淆。
+此最佳实践规则用于识别未被任何分区或表表达式引用的数据源。 Removing unused data sources reduces model complexity, improves maintainability, and prevents confusion.
 
 - 类别：维护
-- 严重性：低（1）
+- 严重性：低 (1)
 
-## 适用范围
+## 适用于
 
 - Provider数据源
 - Structured数据源
 
-## 为何重要
+## 为何这很重要
 
 未使用的数据源会带来不必要的开销：
 
@@ -38,7 +38,7 @@ description: 用于删除孤立数据源的最佳实践规则，可降低模型�
 - 删除表但未清理其数据源
 - 测试其他连接方式
 
-## 此规则何时触发
+## 该规则何时触发
 
 当数据源同时满足以下所有条件时，就会触发此规则：
 
@@ -90,24 +90,24 @@ Delete()
 ### 修复前
 
 ```
-数据源:
-  - SQLServer_Production (Provider, 供 Sales 分区使用)
-  - SQLServer_Staging (Provider, 未使用)  ← 删除
-  - AzureSQL_Archive (Structured, 未使用)  ← 删除
-  - PowerQuery_Web (Structured, 供 Product 分区使用)
+Data Sources:
+  - SQLServer_Production (Provider, used by Sales partition)
+  - SQLServer_Staging (Provider, NOT USED)  ← Remove
+  - AzureSQL_Archive (Structured, NOT USED)  ← Remove
+  - PowerQuery_Web (Structured, used by Product partition)
 ```
 
 ### 修复后
 
 ```
-数据源:
-  - SQLServer_Production (Provider, 供 Sales 分区使用)
-  - PowerQuery_Web (Structured, 供 Product 分区使用)
+Data Sources:
+  - SQLServer_Production (Provider, used by Sales partition)
+  - PowerQuery_Web (Structured, used by Product partition)
 ```
 
 **结果**：模型更简洁，只保留必要的数据源
 
-## 误报
+## False Positives
 
 该规则可能会标记以下类型的数据源：
 
