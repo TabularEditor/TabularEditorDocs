@@ -19,17 +19,17 @@ applies_to:
 
 # DAX 组件管理器
 
-## 概述
+## 概览
 
 Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在应用内轻松发现、安装、更新并管理 [DAX 用户自定义函数（UDF）](xref:udfs) 库（称为 DAX 组件）。  
-这些库通过可重用函数扩展你的 DAX 功能，让你更容易构建一致且易于维护的 Power BI 语义模型。
+These libraries extend your DAX capabilities with reusable functions, making it easier to build consistent and maintainable Power BI semantic models.
 
-顾名思义，该功能的工作方式类似于 NuGet 或 npm 等组件管理器，用于帮助开发者管理代码库。 DAX 组件来源于 https://daxlib.org，这是由 [SQLBI](https://sqlbi.com) 创建的开源非营利项目。
+As the name suggests, this feature acts like a package manager similar to how NuGet or npm manage code libraries for developers. DAX 组件来源于 https://daxlib.org，这是由 [SQLBI](https://sqlbi.com) 创建的开源非营利项目。
 
 只要模型支持 DAX 用户自定义函数，你就可以使用 DAX 组件管理器；也就是说，模型的兼容级别必须为 1702 或更高。
 
 > [!WARNING]
-> DAX 用户自定义函数目前（截至 2025 年十一月）是 Power BI 的预览功能。使用前请先了解其[限制](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations)。
+> DAX 用户自定义函数目前（截至 2025 年十一月）是 Power BI 的预览功能。 Consider their [limitations](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) before use.
 
 ---
 
@@ -37,18 +37,18 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 
 ## 界面布局
 
-### 1。启动 DAX 组件管理器
+### 1. 启动 DAX 组件管理器
 
-你可以通过 **视图** 菜单打开 DPM 面板。你也可以通过 **工具 > 偏好 > 键盘** 为 `View.DaxPackageManager` 命令分配自定义快捷键。
+You can open the DPM panel through the **View** menu. 你也可以通过 **工具 > 偏好 > 键盘** 为 `View.DaxPackageManager` 命令分配自定义快捷键。
 
 - **菜单：** `视图 → DAX 组件管理器`
 - **快捷键：** _(如果已在偏好设置中分配)_
 
 ---
 
-### 2。组件列表
+### 2. Package lists
 
-在屏幕左侧，你会看到以下三个选项卡。每个选项卡旁都会显示一个与该选项卡相关的组件列表：
+On the left of the screen, you'll find the following three tabs. Each tab is accompanied by a list of packages relevant to its context:
 
 | 选项卡     | 说明                                                          |
 | ------- | ----------------------------------------------------------- |
@@ -67,31 +67,31 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 
 ---
 
-### 3。搜索栏
+### 3。 Search bar
 
-输入搜索关键词或组件名称（可输入部分名称），即可筛选列表，仅显示与搜索词匹配的项目。此功能适用于这三个选项卡，即 **浏览**、**已安装** 和 **更新**。
+Enter your search keywords or the (partial) name of the package, to filter the list of items to only those that match the search terms. This feature applies to all three tabs, i.e., **Browse**, **Installed**, and **Updates**.
 
 > [!NOTE]
-> 我们目前只显示与搜索条件匹配的前 20 个组件。目前还没有分页功能——将在后续更新中加入。如果需要浏览所有可用的组件，请前往来源网站，例如 https://daxlib.org。
+> We currently only show the top 20 packages matching the search criteria. There is no pagination feature yet - this will come in a future update. If you need to browse all available packages, go to the source, e.g. https://daxlib.org.
 
 ---
 
-### 4。组件详情面板
+### 4. Package Detail Pane
 
 选择某个组件后，会显示详细信息：
 
-| 字段                 | 说明                                   |
-| ------------------ | ------------------------------------ |
-| **已安装 / 版本**       | 当前版本及可用更新信息。                         |
-| **说明**             | 该库提供内容的摘要。                           |
-| **发布说明**           | 关于最新版本中新功能或变更的信息。                    |
-| **提供方 / 所有者 / 作者** | 署名元数据。                               |
-| **标签**             | 便于分类和搜索。                             |
-| **URL**            | 项目文档、API 以及 GitHub repository 的直接链接。 |
-| **发布日期**           | 当前版本发布的时间戳。                          |
-| **下载量**            | 所有用户的总安装次数。                          |
+| 字段                 | 说明                                    |
+| ------------------ | ------------------------------------- |
+| **已安装 / 版本**       | 当前版本及可用更新信息。                          |
+| **说明**             | 该库提供内容的摘要。                            |
+| **发布说明**           | 关于最新版本中新功能或变更的信息。                     |
+| **提供方 / 所有者 / 作者** | Attribution metadata. |
+| **标签**             | 便于分类和搜索。                              |
+| **URL**            | 项目文档、API 以及 GitHub repository 的直接链接。  |
+| **发布日期**           | 当前版本发布的时间戳。                           |
+| **下载量**            | 所有用户的总安装次数。                           |
 
-未安装的组件会显示 **“安装”** 按钮。点击该按钮会立即将该组件中的 UDF 添加到你的模型中。
+A package that is not installed, will show an **“Install”** button. Clicking this button will instantly add the UDFs in the package to your model.
 
 已安装的组件会显示 **“移除”** 按钮。
 
@@ -102,7 +102,7 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 
 ---
 
-### 5。更新通知
+### 5. 更新通知
 
 打开使用了有可用更新的组件的模型时，你会在 **TOM Explorer** 底部看到更新通知。
 
@@ -113,7 +113,7 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 ## 安装组件
 
 1. 打开 **DAX 组件管理器**。
-2. 在 **浏览** 选项卡中，选择一个组件（例如 `DaxLib.SVG`）。按需使用搜索栏缩小搜索范围。
+2. 在 **浏览** 选项卡中，选择一个组件（例如 `DaxLib.SVG`）。 Use the search bar to refine the search as needed.
 3. 点击 **安装**。
 4. 安装完成后，该组件及其函数会显示在 TOM Explorer 中。
 
@@ -138,27 +138,27 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 所有关联的 UDF 都将从模型中移除。
 
 > [!CAUTION]
-> 移除 UDF 可能会导致模型中其他位置（度量值、计算列等）的 DAX 表达式变得无效。如果发生这种情况，你随时可以按 **撤销**（Ctrl+Z）来撤销移除组件的操作。在移除组件之前，你可以使用 **显示依赖项**（Shift+F12）功能来查看这些 UDF 在哪些地方被使用。
+> 移除 UDF 可能会导致模型中其他位置（度量值、计算列等）的 DAX 表达式 to become invalid. If this happens, you can always hit **Undo** (Ctrl+Z) to undo the package removal. Use the **Show dependencies** (Shift+F12) feature to identify where the UDFs are used before removing a package.
 
 ---
 
 ## 技术注意事项
 
-DAX 组件管理器使用 [扩展属性](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) 来跟踪已安装的组件。扩展属性类似于注释，但更适合以 JSON 格式存储自定义元数据。
+DAX 组件管理器使用 [扩展属性](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) 来跟踪已安装的组件。 Extended properties are similar to annotations, but are better suited for storing custom metadata in JSON format.
 
 DAX 组件管理器会在 **Model** 对象上创建以下扩展属性：
 
-| 属性名称                             | 说明                                                                  |
-| -------------------------------- | ------------------------------------------------------------------- |
-| `TabularEditor_ModelDaxPkgTable` | 一个 JSON 字典，每个已安装的组件对应一个条目。键是按顺序递增的整数，而值包含组件提供方、提供方内的组件 ID，以及组件版本信息。 |
-| `TabularEditor_ModelDaxPkgSeq`   | 一个整数值，每安装一个组件就会递增。用于为 `TabularEditor_ModelDaxPkgTable` 属性生成唯一键。     |
+| 属性名称                             | 说明                                                                                                                                                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TabularEditor_ModelDaxPkgTable` | 一个 JSON 字典，每个已安装的组件对应一个条目。 The key is a sequential integer, while the value contains information about the package provider, package ID within the provider, and package version. |
+| `TabularEditor_ModelDaxPkgSeq`   | An integer value that is incremented each time a package is installed. This is used to generate unique keys for the `TabularEditor_ModelDaxPkgTable` property.    |
 
 此外，通过 DAX 组件管理器导入的每个 UDF 都会被赋予以下扩展属性：
 
-| 属性名称                                 | 说明                                                                                      |
-| ------------------------------------ | --------------------------------------------------------------------------------------- |
-| `TabularEditor_ObjDaxPkgHandle`      | 一个整数值，对应模型上 `TabularEditor_ModelDaxPkgTable` 属性中的键。这使 Tabular Editor 能够识别某个 UDF 属于哪个组件。 |
-| `TabularEditor_ObjDaxPkgContentHash` | 一个哈希值，在安装时根据该 UDF 的 DAX 表达式计算得出。用于检测 UDF 自安装以来是否被修改——这在更新或移除组件时很重要。                     |
+| 属性名称                                 | 说明                                                                                                                                                                            |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TabularEditor_ObjDaxPkgHandle`      | 一个整数值，对应模型上 `TabularEditor_ModelDaxPkgTable` 属性中的键。 This allows Tabular Editor to identify which package a UDF belongs to.                                    |
+| `TabularEditor_ObjDaxPkgContentHash` | 一个哈希值，在安装时根据该 UDF 的 DAX 表达式计算得出。 This is used to detect if a UDF has been modified since installation, which is important when updating or removing packages. |
 
 > [!CAUTION]
 > 手动修改或删除这些扩展属性可能会导致 DAX 组件管理器出现意外行为。
@@ -178,7 +178,7 @@ DAX 组件管理器会在 **Model** 对象上创建以下扩展属性：
 - **取消**：取消更新。
 
 > [!TIP]
-> 如果你想将现有 UDF 与 DAX 组件管理器“取消关联”，请从 UDF 对象中删除扩展属性 `TabularEditor_ObjDaxPkgHandle` 和 `TabularEditor_ObjDaxPkgContentHash`。这样一来，DAX 组件管理器将不再跟踪这些 UDF，它们也不会受到后续组件更新或卸载的影响。不过，你仍需要留意名称冲突。
+> 如果你想将现有 UDF 与 DAX 组件管理器“取消关联”，请从 UDF 对象中删除扩展属性 `TabularEditor_ObjDaxPkgHandle` 和 `TabularEditor_ObjDaxPkgContentHash`。 This way, the DAX Package Manager will no longer track these UDFs, and they will not be affected by future package updates or removals. However, you still need to be aware of name conflicts.
 
 ### 安装存在名称冲突的组件
 
