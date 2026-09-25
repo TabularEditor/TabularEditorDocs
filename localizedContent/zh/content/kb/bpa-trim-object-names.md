@@ -8,14 +8,14 @@ description: 用于删除对象名称首尾空格的最佳实践规则，以避�
 
 # 删除对象名称首尾空格
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别名称包含首尾空格的对象。这些多余的空格会导致 DAX 引用问题、显示异常，并引起混淆。
+This best practice rule identifies objects whose names contain leading or trailing spaces. These unnecessary spaces cause DAX referencing issues, display problems, and general confusion.
 
 - 类别：**命名约定**
 - 严重性：低 (1)
 
-## 适用对象
+## 适用于
 
 - 模型
 - 表
@@ -35,14 +35,14 @@ description: 用于删除对象名称首尾空格的最佳实践规则，以避�
 - 计算组
 - 计算项
 
-## 为什么这很重要
+## 为何这很重要
 
 - **DAX 语法问题**：多余的空格会迫使你在使用括号引用时更加小心
 - **显示不一致**：对象在字段列表中看起来不对齐
 - **搜索困难**：用户搜索时可能找不到对象
 - **维护易混淆**：开发人员可能没注意到空格，从而创建重复对象
 
-## 此规则何时触发
+## 此规则何时会触发
 
 当对象名称以空格开头或结尾时，会触发此规则：
 
@@ -71,16 +71,16 @@ Name.StartsWith(" ") or Name.EndsWith(" ")
 
 ### 原因 3：复制对象
 
-复制对象时，名称末尾会追加“ copy”后缀。很容易忽略删除 "copy" 前面的空格
+When duplicating objects the name will have an added " copy" post-fixed. 很容易忽略删除 "copy" 前面的空格
 
 ## 示例
 
 ### 修复前
 
 ```
-度量值：
+Measures:
   - Total Sales
-  -  Total Sales  (带空格——看起来不一样！)
+  -  Total Sales  (with spaces - appears different!)
 ```
 
 DAX: `[ Total Sales]` ——用哪一个？
@@ -88,15 +88,15 @@ DAX: `[ Total Sales]` ——用哪一个？
 ### 修复后
 
 ```
-度量值：
-  - Total Sales (单一且一致的度量值)
+Measures:
+  - Total Sales (single consistent measure)
 ```
 
 DAX: `[Total Sales]` ——没有歧义
 
 ## 兼容级别
 
-此规则适用于兼容级别为 **1200** 及更高的模型。
+该规则适用于兼容级别为 **1200** 及以上的模型。
 
 ## 相关规则
 
