@@ -25,7 +25,7 @@ Los grupos de tablas son una nueva funcionalidad disponible en Tabular Editor 3 
 
 Puedes configurar los grupos de tablas haciendo clic con el botón derecho en una tabla y eligiendo la opción de menú **Crear > Grupo de tablas**, o bien especificando un nombre para el grupo de tablas en la **vista de propiedades** mientras seleccionas una o varias tablas.
 
-You can also use the **Move to group** right-click submenu on one or more selected tables. The submenu lists existing Table Groups, a **(New...)** entry that creates a new group from the selected tables and opens its name editor, and a **(None)** entry that removes the Table Group assignment.
+También puedes usar, con clic derecho, el submenú **Mover al grupo** en una o varias tablas seleccionadas. El submenú enumera los grupos de tablas existentes, una opción **(Nuevo...)** que crea un grupo nuevo a partir de las tablas seleccionadas y abre el editor para asignarle un nombre, y una opción **(Ninguno)** que quita la asignación al grupo de tablas.
 
 Las tablas se pueden mover entre grupos de tablas arrastrando y soltando en el Explorador TOM. Ten en cuenta que, a diferencia de las carpetas de visualización para medidas, columnas y jerarquías, los grupos de tablas no se pueden anidar.
 
