@@ -21,9 +21,7 @@ applies_to:
 # 工作区模式与增量刷新
 
 > [!IMPORTANT]
-> This article only applies to versions 3.4.2 and earlier of Tabular Editor.
-> Since the 3.5.0 update, _Workspace Mode_ will not overwrite deployed Refresh Policy partitions from scheduled refreshes.
-> Refresh policy partitions will also not be serialized in source control. You can change this setting in _'Tools > Preferences... > Save-to-Folder'_.
+> 本文仅适用于 Tabular Editor 3.4.2 及更早版本。自 3.5.0 更新起，_工作区模式_ 不会再覆盖由计划刷新生成的已部署刷新策略分区。刷新策略分区也不会序列化并纳入源代码管理。你可以在 _'工具 > 偏好…… > 保存到文件夹'_。
 
 ---
 
@@ -31,24 +29,24 @@ applies_to:
 
 ---
 
-Incremental Refresh creates new partitions upon the first scheduled refresh in a day. As a result, any local metadata (i.e. `.bim` or `database.json`) will be out-of-sync with the remote model metadata after the refresh. As a result, **when working with a model that has tables configured with Incremental Refresh, _Workspace Mode_ is not recommended**.
+增量刷新会在一天中的首次计划刷新时创建新的分区。因此，刷新后，任何本地元数据（即 `.bim` 或 `Database.json`）都会与远程模型元数据不同步。因此，__当处理表已配置增量刷新的模型时，不建议使用 _工作区模式_ __。
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中设置增量刷新仅限于托管在 Power BI Dataset 服务中的数据集。 For Analysis Services, custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> 在 Tabular Editor 3 中设置增量刷新仅限于托管在 Power BI Dataset 服务中的数据集。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
 ### 不建议使用工作区模式
 
-原因在于：_工作区模式_ 会用本地元数据文件覆盖远程模型元数据；任何不同步的更改（例如对策略范围分区的更改）都会丢失。 When working with _Workspace Mode_ on these models, you would need to _Apply refresh policy_ for tables using incremental refresh before saving changes every day.
+原因在于：_工作区模式_ 会用本地元数据文件覆盖远程模型元数据；任何不同步的更改（例如对策略范围分区的更改）都会丢失。在这些模型中使用 _工作区模式_ 时，你需要在每天保存更改之前，对使用增量刷新的表执行 _应用刷新策略_。
 
 ![工作区模式可能会与本地元数据不同步。](~/content/assets/images/tutorials/incremental-refresh-workspace-mode-out-of-sync.png)
 
 ### 建议：基于本地元数据进行开发和部署
 
-**相反，建议基于本地元数据文件来开发模型。** 部署更改时可以排除受刷新策略管控的分区，因此不会有覆盖 Power BI 所创建策略的风险。 A second read/refresh instance of Tabular Editor can be connected to the remote model for testing purposes.
+**相反，建议基于本地元数据文件来开发模型。** 部署更改时可以排除受刷新策略管控的分区，因此不会有覆盖 Power BI 所创建策略的风险。可以再启动一个用于读取/刷新的 Tabular Editor 实例，并将其连接到远程模型以进行测试。
 
-要部署模型，请转到 _Model > Deploy..._，这将打开 Deployment Wizard。 Here you can select whether you want to include partitions governed by Incremental Refresh policies:
+要部署模型，请转到 _Model > Deploy..._，这将打开 Deployment Wizard。在这里，你可以选择是否要包含受增量刷新的刷新策略控制的分区：
 
 ![部署分区，同时避开带有刷新策略的分区。](~/content/assets/images/tutorials/incremental-refresh-deploy-partitions.png)
 
