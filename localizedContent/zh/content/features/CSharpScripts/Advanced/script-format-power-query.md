@@ -18,15 +18,16 @@ applies_to:
 如果您想对复杂的 Power Query 进行格式化，使其更易阅读、也更方便修改。 <br></br>
 
 > [!NOTE]
-> 此脚本会将您的 Power Query M 代码发送到 Power Query Formatter API。使用此脚本格式化 Power Query 代码时，请确保以负责任且合规的方式使用，并遵守相关要求。 <br></br>
+> 此脚本会将您的 Power Query M 代码发送到 Power Query Formatter API。
+> Please ensure responsible use and compliance when using this script to format your Power Query code. <br></br>
 
 ## 脚本
 
 ### 格式化 Power Query
 
 ```csharp
-// 此脚本会格式化任意所选 M 分区的 Power Query（M 代码）（不包含共享表达式或源表达式）。
-// 它会将表达式通过 HTTPS POST 请求发送到 Power Query Formatter API，并用返回结果替换代码。
+// This script formats the Power Query (M Code) of any selected M Partition (not Shared Expression or Source Expression).
+// It will send an HTTPS POST request of the expression to the Power Query Formatter API and replace the code with the result.
 //
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -34,17 +35,17 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-// powerqueryformatter.com API 的 URL
+// URL of the powerqueryformatter.com API
 string powerqueryformatterAPI = "https://m-formatter.azurewebsites.net/api/v2";
 
-// 使用 HttpClient 向该 URL 发起 API POST 调用
+// HttpClient method to initiate the API call POST method for the URL
 HttpClient client = new HttpClient();
 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, powerqueryformatterAPI);
 
-// 获取所选分区的 M 表达式
+// Get the M Expression of the selected partition
 string partitionExpression = Selected.Partition.Expression;
 
-// 将请求正文序列化为 JSON 对象
+// Serialize the request body as a JSON object
 var requestBody = JsonConvert.SerializeObject(
     new { 
         code = partitionExpression, 
@@ -54,69 +55,70 @@ var requestBody = JsonConvert.SerializeObject(
         includeComments = true
     });
 
-// 将请求头中的 "Content-Type" 设置为 "application/json"，编码设置为 UTF-8
+// Set the "Content-Type" header of the request to "application/json" and the encoding to UTF-8
 var content = new StringContent(requestBody, Encoding.UTF8, "application/json");
 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-// 获取响应
+// Retrieve the response
 var response = client.PostAsync(powerqueryformatterAPI, content).Result;
 
-// 如果响应成功
+// If the response is successful
 if (response.IsSuccessStatusCode)
 {
-    // 获取响应结果
+    // Get the result of the response
     var result = response.Content.ReadAsStringAsync().Result;
 
-    // 从字符串解析响应的 JSON 对象
+    // Parse the response JSON object from the string
     JObject data = JObject.Parse(result.ToString());
 
-    // 获取格式化后的 Power Query 结果
+    // Get the formatted Power Query response
     string formattedPowerQuery = (string)data["result"];
 
     ///////////////////////////////////////////////////////////////////////
-    // 可选：手动格式化
-    // 为每个步骤手动添加换行和注释
+    // OPTIONAL MANUAL FORMATTING
+    // Manually add a new line and comment to each step
     var replace = new Dictionary<string, string> 
     { 
         { " //", "\n\n//" }, 
-        { "\n  #", "\n\n  // 步骤\n  #" }, 
-        { "\n  Source", "\n\n  // 数据源\n  Source" }, 
-        { "\n  Dataflow", "\n\n  // Dataflow 连接信息\n  Dataflow" }, 
-        {"\n  Data =", "\n\n  // 步骤\n  Data ="}, 
-        {"\n  Navigation =", "\n\n  // 步骤\n  Navigation ="}, 
-        {"in\n\n  // 步骤\n  #", "in\n  #"}, 
-        {"\nin", "\n\n// 结果\nin"} 
+        { "\n  #", "\n\n  // Step\n  #" }, 
+        { "\n  Source", "\n\n  // Data Source\n  Source" }, 
+        { "\n  Dataflow", "\n\n  // Dataflow Connection Info\n  Dataflow" }, 
+        {"\n  Data =", "\n\n  // Step\n  Data ="}, 
+        {"\n  Navigation =", "\n\n  // Step\n  Navigation ="}, 
+        {"in\n\n  // Step\n  #", "in\n  #"}, 
+        {"\nin", "\n\n// Result\nin"} 
     };
 
-    // 用字典中的第二个字符串替换第一个字符串
+    // Replace the first string in the dictionary with the second
     var manuallyformattedPowerQuery = replace.Aggregate(
         formattedPowerQuery, 
         (before, after) => before.Replace(after.Key, after.Value));
 
-    // 用手动格式化版本替换自动格式化后的代码
+    // Replace the auto-formatted code with the manually formatted version
     formattedPowerQuery = manuallyformattedPowerQuery;
     ////////////////////////////////////////////////////////////////////////
 
-    // 用格式化后的表达式替换未格式化的 M 表达式
+    // Replace the unformatted M expression with the formatted expression
     Selected.Partition.Expression = formattedPowerQuery;
 
-    // 弹窗提示完成
-    Info("已格式化 " + Selected.Partition.Name);
+    // Pop-up to inform of completion
+    Info("Formatted " + Selected.Partition.Name);
 }
 
-// 否则返回错误信息
+// Otherwise return an error message
 else
 {
 Info(
-    "API 调用失败。" +
-    "\n请确认您选择的是包含有效 M 表达式的分区。"
+    "API call unsuccessful." +
+    "\nCheck that you are selecting a partition with a valid M Expression."
     );
 }
 ```
 
 ### 说明
 
-此代码片段会将 M 分区中的 Power Query 以 HTTP POST 请求发送到 [Power Query Formatter](https://www.powerqueryformatter.com/)。同时还做了一些手动格式化，让代码更易读。
+此代码片段会将 M 分区中的 Power Query 以 HTTP POST 请求发送到 [Power Query Formatter](https://www.powerqueryformatter.com/)。
+Some manual formatting is done to make the code further readable.
 
 ## 输出示例
 
