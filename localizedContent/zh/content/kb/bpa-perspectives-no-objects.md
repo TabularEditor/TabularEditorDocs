@@ -10,20 +10,20 @@ description: 用于移除不含任何可见对象的空透视的最佳实践规�
 
 ## 概览
 
-此最佳实践规则用于识别不包含任何可见表的透视。空透视没有任何用途，应将其移除。
+此最佳实践规则用于识别不包含任何可见表的透视。 Empty perspectives serve no purpose and should be removed.
 
 - 类别：维护
-- 严重性：低（1）
+- 严重性：低 (1)
 
-## 适用范围
+## 适用于
 
 - 透视
 
-## 为什么这很重要
+## 为何这很重要
 
 - **用户困惑**: 空透视会显示在客户端工具中，但不会展示任何数据
 
-## 何时触发此规则
+## 此规则何时会触发
 
 当某个透视没有任何可见表时，会触发该规则：
 
@@ -68,16 +68,16 @@ Delete()
 ### 修复前
 
 ```
-透视：
-  - Sales（包含：Sales、Customer、Product 表）✓
-  - Marketing（包含：无表）✗
+Perspectives:
+  - Sales (contains: Sales, Customer, Product tables) ✓
+  - Marketing (contains: NO TABLES) ✗
 ```
 
 ### 修复后
 
 ```
-透视：
-  - Sales（包含：Sales、Customer、Product 表）✓
+Perspectives:
+  - Sales (contains: Sales, Customer, Product tables) ✓
 ```
 
 ## 兼容级别
