@@ -21,10 +21,10 @@ description: 更改 Tabular Editor 3 界面的显示语言。
 
 # 应用语言
 
-Tabular Editor 3 支持多种 UI 语言。 You can switch between them at any time.
+Tabular Editor 3 支持多种 UI 语言。你可以随时在它们之间切换。
 
 > [!NOTE]
-> Tabular Editor 3 目前仍未完全本地化。 Specifically we have so far not localized the individual TOM properties.
+> Tabular Editor 3 目前仍未完全本地化。具体来说，我们目前尚未本地化各个 TOM 属性。
 
 ## 支持的语言
 
@@ -33,20 +33,20 @@ Tabular Editor 3 支持多种 UI 语言。 You can switch between them at any ti
 | 英语   | 完全支持 |
 | 西班牙语 | 预览   |
 | 中文   | 预览   |
-| 法语   | Beta |
-| 德语   | Beta |
-| 日语   | Beta |
+| 法语   | 测试版  |
+| 德语   | 测试版  |
+| 日语   | 测试版  |
 
 > [!NOTE]
-> **预览**语言已翻译核心 UI 元素，但可能仍有部分内容未覆盖。 **Beta** languages are experimental and may have significant gaps or inconsistencies. Report issues on [GitHub](https://github.com/TabularEditor/TabularEditor3/issues).
+> **预览**语言已翻译核心 UI 元素，但可能仍有部分内容未覆盖。**测试版**语言属于实验性质，可能存在较大缺漏或不一致。在 [GitHub](https://github.com/TabularEditor/TabularEditor3/issues) 上 Report 问题。
 
 ### 预览语言
 
-处于 Beta 支持状态的语言表示其翻译已由人工译者校对，但 Tabular Editor 3 仍可能未完全本地化。 Specifically we have so far not localized the individual TOM properties.
+处于 Beta 支持状态的语言表示其翻译已由人工译者校对，但 Tabular Editor 3 仍可能未完全本地化。具体来说，我们目前尚未本地化各个 TOM 属性。
 
 ### Beta 语言
 
-Beta 语言完全由 AI 翻译，尚未经人工译者校对。 We plan to bring beta languages into Preview in Q2 2026.
+Beta 语言完全由 AI 翻译，尚未经人工译者校对。我们计划在 2026 年第二季度将测试版语言推进到预览阶段。
 
 ## 更改语言
 
@@ -61,7 +61,7 @@ Beta 语言完全由 AI 翻译，尚未经人工译者校对。 We plan to bring
 
 [通过窗口菜单更改语言](~/content/assets/images/user-interface/chaning-language-windows-ui.png)
 
-### Via Preferences
+### 通过偏好
 
 1. 点击 **工具** > **偏好**
 2. 转到 **UI** 部分
@@ -73,19 +73,19 @@ Beta 语言完全由 AI 翻译，尚未经人工译者校对。 We plan to bring
 
 ## 需要重新启动
 
-**你必须重启 Tabular Editor 3**，语言更改才会生效。 The application prompts you to restart but does not restart automatically. Save your work before changing the language.
+**你必须重启 Tabular Editor 3**，语言更改才会生效。应用程序会提示你重新启动，但不会自动重启。更改语言前请先保存你的工作。
 
 [通过“窗口”菜单更改语言](~/content/assets/images/user-interface/chaning-language-restart-pop-up.png)
 
 ## 安装语言
 
-During installation, the installer prompts you to select a language (English, Spanish, or Chinese). 这会设置你的初始语言偏好，Tabular Editor 3 首次启动时将以该语言显示。
+安装过程中，安装程序会提示你选择语言（英语、西班牙语或中文）。这会设置你的初始语言偏好，Tabular Editor 3 首次启动时将以该语言显示。
 
-安装程序会将你的选择写入 LocalAppData 文件夹中的偏好设置文件。 You can change this later using either method above.
+安装程序会将你的选择写入 LocalAppData 文件夹中的偏好设置文件。之后你可以通过上述任一方法进行更改。
 
 ## 语言设置持久化
 
-你的语言偏好会存储在你的用户配置文件中的 `UiPreferences.json` 里。 The setting persists across application updates and restarts.
+你的语言偏好会存储在你的用户配置文件中的 `UiPreferences.json` 里。此设置在应用更新和重启后仍会保留。
 
 ## 提供反馈
 
