@@ -26,7 +26,7 @@ applies_to:
 **DAX 查询**、**Pivot Grid** 或 **预览数据** 可用于在 Tabular Editor 中测试数据安全。建议每次更改配置后都务必测试数据安全，以降低 RLS/OLS 实施不当及其后果带来的风险。
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中使用模拟来测试数据安全，仅适用于托管在 Analysis Services 实例或 Power BI 服务中的 Dataset。 Tabular Editor 3 Desktop Licenses cannot benefit from this feature.
+> 在 Tabular Editor 3 中使用模拟来测试数据安全，仅适用于托管在 Analysis Services 实例或 Power BI 服务中的 Dataset。 Tabular Editor 3 Desktop 许可证无法使用此功能。
 
 ---
 
@@ -39,18 +39,18 @@ applies_to:
 
 ## 使用模拟进行测试
 
-**在 Tabular Editor 3 中使用 _模拟_ 功能即可轻松测试数据安全。** “模拟”是一项功能，可让你以模型角色或用户的身份查看查询结果。 It is similar to the _'View As Role...'_ feature in the Power BI service, with two key differences:
+**在 Tabular Editor 3 中使用 _模拟_ 功能即可轻松测试数据安全。** “模拟”是一项功能，可让你以模型角色或用户的身份查看查询结果。这与 Power BI 服务中的 _“以角色身份查看...”_ 功能类似，但有两个关键区别：
 
-1. The End-User being impersonated requires **dataset Build permissions** in addition to Role assignment & Dataset Read access.
+1. 除角色分配和 Dataset 读取访问权限外，被模拟的最终用户还需要具备 **Dataset Build 权限**。
 2. 在 Tabular Editor 3 中可以执行任何查询；不像 Power BI 服务那样，仅限于 Report 中现有的 Visual。
 
-这很有价值，因为它让你可以运行预定义的测试，看看任何拥有构建权限的最终用户会如何看到结果。 This helps ensure that even for complex queries and DAX expressions, the Data Security works as expected, and users only see what they should see.
+这很有价值，因为它让你可以运行预定义的测试，看看任何拥有构建权限的最终用户会如何看到结果。这有助于确保即使面对复杂查询和 DAX 表达式，数据安全也能按预期工作，并且用户只能看到他们应该看到的内容。
 
 > [!IMPORTANT]
 > 请确保不要通过为最终用户分配 Workspace 角色（Contributor、Member、Admin）来授予 Build 权限，因为这些角色对 Dataset 具有 **Write** 权限，从而会绕过数据安全；即使配置正确，测试也会看起来像没有生效一样。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 在 Tabular Editor 中使用模拟身份进行 RLS 测试的演示。 Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 在 Tabular Editor 中使用模拟身份进行 RLS 测试的演示。图中展示了分别使用 (A) 数据预览、(B) DAX 查询和 (C) Pivot Grid 进行的测试。</figcaption>
 </figure>
 
 ---
@@ -62,7 +62,7 @@ applies_to:
 1. **确保 Dataset 配置和访问权限正确:**
    被模拟的最终用户……
 
-- _...have been assigned to the appropriate **Roles**._
+- _...已分配至相应的 **角色**。_
 - _...已被授予 **Dataset 读取访问权限**。_
 - _...已被授予 **Dataset 生成访问权限**。 (Power BI)_
 - _...**不是** Workspace 的 Contributor、Member 或 Admin（Power BI）_。
@@ -70,7 +70,7 @@ applies_to:
 2. **新建一个 DAX 查询、Pivot Grid 或“预览数据”窗口：**
 
 - 建议先从 _预览数据_ 开始，以观察对模型表的影响
-- Thereafter, perform a second validation with a _DAX Query_. 这是因为 DAX 查询可以保存，用于文档记录和后续参考；当模型发生变更需要重新测试时会很有用。
+- 然后，使用 _DAX 查询_ 执行第二次验证。这是因为 DAX 查询可以保存，用于文档记录和后续参考；当模型发生变更需要重新测试时会很有用。
 
 3. **选择 'Impersonation' 并输入用户电子邮件:** 如果你已实施 _Static RLS_，也可以改为测试该角色。
 
@@ -78,8 +78,8 @@ applies_to:
 
 ### 测试技巧
 
-1. **Test more than one user:** It's recommended you test at least 3-10 different users per Role. 你也可以将测试自动化，遍历安全表中的每个 UPN（例如使用 C# Script 和宏）。
+1. **测试多个用户：** 建议每个角色至少测试 3 到 10 个不同用户。你也可以将测试自动化，遍历安全表中的每个 UPN（例如使用 C# Script 和宏）。
 
-2. **测试每个角色和表格权限：** 由于每个表格权限对应不同的 DAX 筛选表达式，因此必须分别测试。 Ensure that each Role is tested, and that each test includes the relevant tables with configured Filter Expressions. For example, if a Role consists of table expressions on the 'Customers' and 'Products' table, ensure your query includes attributes from both tables for validation purposes.
+2. **测试每个角色和表格权限：** 由于每个表格权限对应不同的 DAX 筛选表达式，因此必须分别测试。确保每个角色都经过测试，并且每次测试都包含已配置筛选表达式的相关表。例如，如果某个角色在 'Customers' 和 'Products' 表上定义了表表达式，请确保你的查询包含这两张表中的属性，以便进行验证。
 
-3. **Test many Queries/Measures:** Try to find complex queries to test, particularly those which might be problematic in the context of Data Security. 例如，如果计算需要与未过滤的总体平均值（即占总计的百分比）进行比较，并且预期 _该总计_ 在 RLS 中不会被过滤，那么开发者可能需要结合模型重新审视数据安全的实现方案。
+3. **测试多种查询/度量值：** 尽量找一些复杂的查询或度量值来测试，尤其是那些在数据安全场景下可能出问题的查询或度量值。例如，如果计算需要与未过滤的总体平均值（即占总计的百分比）进行比较，并且预期 _该总计_ 在 RLS 中不会被过滤，那么开发者可能需要结合模型重新审视数据安全的实现方案。
