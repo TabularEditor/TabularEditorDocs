@@ -1,6 +1,6 @@
 ---
 uid: deploy-current-model
-title: 部署已加载的模型
+title: Deploy the loaded model
 author: Morten Lønskov
 updated: 2026-09-15
 applies_to:
@@ -11,24 +11,24 @@ applies_to:
       full: true
 ---
 
-# 部署已加载的模型
+# Deploy the loaded model
 
-部署会将你当前打开的模型推送到服务器，可新建数据库，也可覆盖现有数据库。这就是将存放在 `.bim` 文件或文件夹中的模型部署到服务器，以及将模型从一个环境提升到另一个环境的方法。
+Deployment pushes the model you have open to a server, either creating a new database or overwriting an existing one. It's how you get a model held in a `.bim` file or a folder onto a server, and how you promote a model from one environment to the next.
 
-通过 **模型 > 部署...** 打开向导，选择目标服务器和数据库，然后选择要发送模型的哪些部分。
+Open the wizard with **Model > Deploy...**, choose the destination server and database, then choose how much of the model to send.
 
-## 各选项的作用
+## What each option controls
 
-该向导的价值在于，它让你决定目标端哪些内容可&#x4EE5;_&#x4FDD;持不变_。每个选项都用于决定：目标端是否保留某项内容的现有版本：
+The wizard's value is in what it lets you _leave alone_ on the destination. Each option is a decision about whether the destination keeps its own version of something:
 
-- **部署模型结构**会发送模型元数据。这本身就是部署操作；如果清除此选项，就没有任何内容可部署。
-- **部署数据源**会发送显式定义的数据源。清除此选项可保留目标端自己的连接字符串和凭据；将模型从开发环境发布到测试环境时，通常就该这样做。
-- **部署表分区**用于将分区与模型元数据同步。清除此选项可保留现有分区及其中的数据，不作任何更改。启用后，目标端上不在模型中的分区会连同其数据一起被删除。
-  - 启用上述选项后，会出现**部署受增量刷新策略控制的分区**选项；它让你部署除由增量刷新策略生成的分区之外的所有分区。
-- **部署模型角色**会发送模型中定义的角色。清除此选项可保留目标端现有的角色。
-  - **部署模型角色成员**会发送角色成员信息。角色成员通常是在服务器上管理，而不是在元数据里定义，因此清除此选项很常见。
+- **Deploy Model Structure** sends the model metadata. This is the deployment itself; clearing it leaves nothing to do.
+- **Deploy Data Sources** sends explicit data sources. Clear it to keep the destination's own connection strings and credentials, which is usually what you want when promoting from development to test.
+- **Deploy Table Partitions** synchronizes partitions with the model metadata. Clear it to leave existing partitions, and the data in them, untouched. With it enabled, partitions on the destination that aren't in the model are removed along with their data.
+  - **Deploy partitions governed by Incremental Refresh Policies** appears when the option above is enabled, and lets you deploy every partition _except_ those an incremental refresh policy generates.
+- **Deploy Model Roles** sends the roles defined in the model. Clear it to keep the destination's roles as they are.
+  - **Deploy Model Role Members** sends role membership. Role members are commonly managed on the server rather than in the metadata, so clearing this is normal.
 
-在 @deployment 中对上述内容都有详细说明，包括向导生成的 TMSL 脚本、部署对目标端既有数据的影响，以及如何通过命令行或管道进行部署。
+@deployment covers all of this in detail, along with the TMSL script the wizard generates, what a deployment does to data already in the destination, and how to deploy from the command line or a pipeline.
 
 > [!NOTE]
-> 部署不同于保存。如果你是从服务器打开该模型，**文件 > 保存**会将内容写回&#x5230;_&#x8BE5;_&#x6570;据库，如 @connect-ssas 中所述。当目标端是其他位置时，请使用部署。
+> Deploying is not the same as saving. If you opened the model from a server, **File > Save** writes back to _that_ database, as described in @connect-ssas. Use deployment when the destination is somewhere else.
