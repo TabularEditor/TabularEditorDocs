@@ -1,6 +1,6 @@
 ---
 uid: pivot-grid
-title: Pivot Grids
+title: Pivot Grid
 author: Daniel Otykier
 updated: 2026-05-27
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Pivot Grids
+# Pivot Grid
 
 > [!NOTE]
 > La información de este artículo se aplica a Tabular Editor 3.16.0 o posterior. Asegúrese de estar usando la versión más reciente de Tabular Editor 3 para aprovechar las nuevas funciones y mejoras.
@@ -167,5 +167,5 @@ A continuación se muestra una lista de limitaciones y problemas conocidos de lo
 
 - Reglas de formato (como conjuntos de iconos, barras de datos, etc.) no se conservan correctamente al guardar un diseño de Pivot Grid como archivo `.te3pivot`.
 - Si abre un archivo .te3pivot en un modelo distinto de aquel del que se guardó el diseño, los campos que no existan en el modelo actual se eliminarán del diseño. Al pulsar Guardar (Ctrl+S), se guardará el diseño con esos campos ya eliminados. Es posible que cambiemos este comportamiento en una versión futura para que el archivo .te3pivot no se sobrescriba sin una confirmación explícita.
-- Las columnas que usan la propiedad **Agrupar por columnas** (incluidas las columnas de parámetros de campo) no se pueden agregar por sí solas al Área de filas ni al Área de columnas. Al hacerlo, se produce el error _"La columna X forma parte de una clave compuesta, pero no se incluyen todas las columnas de la clave compuesta en la expresión o en su expresión dependiente"_. Esta es una limitación general de los clientes MDX y también sucede al usar una columna de este tipo en una tabla dinámica de Excel. Para evitarlo, agrega la columna de agrupación relacionada al Pivot Grid _antes_ de agregar la columna dependiente. Por ejemplo, si `[ProductKey]` está configurada como la columna de agrupación de `[ProductName]`, agrega primero `[ProductKey]` al Área de filas o al Área de columnas y, después, agrega `[ProductName]`.
-- Aplicar una ordenación ascendente o descendente explícita a una columna del Área de filas o del Área de columnas ordena los valores alfabéticamente como cadenas, independientemente del tipo de datos de la columna. Las fechas con formato de fecha larga (por ejemplo, "4 de mayo de 2024") y los enteros se ordenan de forma lexicográfica, no cronológica ni numérica. Esta es una limitación de la forma en que ordenan los clientes MDX, y el mismo comportamiento se produce en una tabla dinámica de Excel conectada al modelo. Para obtener una ordenación cronológica o numérica, usa la ordenación natural de la columna (no apliques una ordenación explícita) o usa la propiedad **Ordenar por columna** en la columna del modelo para que apunte a una columna con un valor subyacente ordenable.
+- Columns that use the **Group By Columns** property (including field parameter columns) cannot be added to the Row Area or Column Area on their own. Doing so produces the error _"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"_. This is a general limitation of MDX clients and also occurs when using such a column in an Excel PivotTable. To work around it, add the related Group By Column to the Pivot Grid _before_ adding the dependent column. For example, if `[ProductKey]` is configured as the Group By Column of `[ProductName]`, add `[ProductKey]` to the Row Area or Column Area first, then add `[ProductName]`.
+- Applying an explicit ascending or descending sort to a column in the Row Area or Column Area sorts values alphabetically as strings, regardless of the column data type. Dates formatted as long date (for example "May 4, 2024") and integers are sorted lexicographically rather than chronologically or numerically. This is a limitation of how MDX clients sort and the same behavior occurs in an Excel PivotTable connected to the model. To get chronological or numerical ordering, rely on the column's natural sort (do not apply an explicit sort) or use the **Sort By Column** property on the model column to point at a column with a sortable underlying value.
