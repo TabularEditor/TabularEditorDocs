@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-metric-view-handle-failures
-title: Solucionar errores comunes
+title: Handle Common Failures
 author: Greg Baldini
 updated: 2026-07-02
 applies_to:
@@ -18,21 +18,21 @@ applies_to:
           full: true
 ---
 
-# Solucionar errores comunes
+# Handle common failures
 
-Este procedimiento muestra cómo gestionar varios modos de fallo habituales al trabajar con Metric Views en C# Script:
-YAML no válido, archivos ausentes, operaciones sin ningún Metric View cargado y una importación que no finaliza.
+This how-to shows how to handle several common failure modes when working with Metric Views in C# scripts:
+invalid YAML, missing files, operations with no loaded metric view, and an import that does not complete.
 
 > [!NOTE]
-> Estas guías están orientadas a Tabular Editor 3.26.2 y versiones posteriores.
-> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-## Fallo al cargar o deserializar
+## A failed load or deserialize
 
-`Load` y `Deserialize` generan `System.IO.InvalidDataException` cuando la entrada no representa un YAML de Metric View válido.
-La excepción en sí solo indica que la carga falló;
-los motivos concretos se recogen en `ImportDiagnostics`.
-Si se produce un error, el Metric View actual (`SemanticBridge.MetricView.Model`) se establece en `null`.
+`Load` and `Deserialize` throw `System.IO.InvalidDataException` when the input does not represent valid Metric View YAML.
+The exception itself only signals that loading failed;
+the specific reasons are captured in `ImportDiagnostics`.
+On failure, the current Metric View (`SemanticBridge.MetricView.Model`) is set to `null`.
 
 ```csharp {run id=failed-deserialize setup=none after=none output=true}
 try
@@ -65,15 +65,15 @@ Could not load the Metric View:
 ```
 
 > [!NOTE]
-> `Load` lee desde una ruta de archivo, por lo que una ruta que no existe genera `System.IO.FileNotFoundException` en lugar de `InvalidDataException`.
-> Captura esa excepción (o una `System.Exception` más general) al cargar desde una ruta.
+> `Load` reads from a file path, so a path that does not exist throws `System.IO.FileNotFoundException` instead of `InvalidDataException`.
+> Catch that (or a broader `System.Exception`) when loading by path.
 
-## Evita operar sin un Metric View cargado
+## Guard against no loaded Metric View
 
-`Validate`, `Serialize`, `Save` e `ImportToTabular` generan `System.InvalidOperationException` si no hay ningún Metric View cargado.
-`Model` es `null` cuando no hay nada cargado, por lo que conviene comprobarlo antes.
+`Validate`, `Serialize`, `Save`, and `ImportToTabular` throw `System.InvalidOperationException` if no Metric View is loaded.
+`Model` is `null` when nothing is loaded, so guard against it.
 
-Ejecuta este script en una instancia nueva de Tabular Editor 3 para asegurarte de que no haya ningún Metric View cargado:
+Run this script in a fresh Tabular Editor 3 instance to ensure you have no loaded Metric View:
 
 ```csharp {run id=guard-no-model setup=none after=none output=true}
 if (SemanticBridge.MetricView.Model == null)
@@ -93,19 +93,19 @@ else
 No Metric View is loaded. Load or deserialize one first.
 ```
 
-Sin esta comprobación, llamar a `SemanticBridge.MetricView.Validate()` sin nada cargado genera `InvalidOperationException`.
+Without the guard, calling `SemanticBridge.MetricView.Validate()` with nothing loaded throws `InvalidOperationException`.
 
-## Una importación que no se completa
+## An import that does not complete
 
-`ImportToTabular` y `ImportToTabularFromFile` devuelven `false` cuando la importación no puede completarse, en lugar de generar una excepción.
-Comprueba el valor devuelto y lee los diagnósticos de `out` para ver por qué.
+`ImportToTabular` and `ImportToTabularFromFile` return `false` when the import cannot complete, rather than throwing an exception.
+Check the return value and read the `out` diagnostics to see why.
 
-El ejemplo siguiente deserializa una vista de métricas válida,
-y luego deja en blanco la expresión de un campo, lo que genera un error de validación.
-Como `failOnValidationErrors` está configurado de forma predeterminada en `true`,
-la importación se detiene antes de traducir y devuelve `false`,
-con los motivos en los diagnósticos de `out`.
-Debe haber un modelo tabular abierto.
+The example below deserializes a valid Metric View,
+then edits a field's expression to be blank, which yields a validation error.
+Because `failOnValidationErrors` defaults to `true`,
+the import stops before translating and returns `false`,
+with the reasons in the `out` diagnostics.
+A Tabular model must be open.
 
 ```csharp {run id=import-incomplete setup=none after=none output=true}
 // Load a valid Metric View, then make it invalid
@@ -153,15 +153,15 @@ Import did not complete:
   [Error] FIELD_EXPR_REQUIRED: Field 'order_year' expr cannot be empty
 ```
 
-Use `failOnValidationErrors: false` bajo su propia responsabilidad si desea importar a pesar de los problemas de validación.
-Si no hay ninguna vista de métricas cargada al llamar a este método,
-se lanza `InvalidOperationException`, como se describe arriba.
+Pass `failOnValidationErrors: false` at your own risk if you'd like to import despite validation issues.
+If no Metric View is loaded when you call this,
+it throws `InvalidOperationException` as described above.
 
 ## Pasos a seguir
 
-- [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
 - [Validar una vista de métricas](xref:semantic-bridge-validate-default)
-- [Importar una vista de métricas y ver los diagnósticos](xref:semantic-bridge-import)
+- [Import a Metric View and view diagnostics](xref:semantic-bridge-import)
 
 ## Ver también
 
