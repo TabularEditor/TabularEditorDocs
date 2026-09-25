@@ -81,7 +81,7 @@ To add a calculated table, right-click on the model or on the "Tables" folder, a
 To add a [calculation group](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Give the Calculation Group a name. Also consider a different name for the default **Name** column.
 
 > [!IMPORTANT]
-> This option is only available on models at compatibility level 1500 or higher.
+> This option is only available on models at compatibility level 1470 or higher. Analysis Services supports calculation groups from compatibility level 1500.
 
 To add calculation items, right-click on the newly created calculation group and choose **Create > Calculation Item**. Give the Calculation Item a name and edit its DAX expression using the **Expression Editor** similar to how we did for measures above.
 
