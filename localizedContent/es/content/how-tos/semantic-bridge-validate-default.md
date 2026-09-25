@@ -20,24 +20,24 @@ applies_to:
 
 # Validar una vista de métricas con las reglas predeterminadas
 
-This how-to demonstrates validating a loaded Metric View using the built-in validation rules and interpreting the diagnostic messages.
+Esta guía muestra cómo validar una vista de métricas cargada mediante las reglas de validación integradas e interpretar los mensajes de diagnóstico.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías prácticas están orientadas a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Reglas de validación predeterminadas
 
-The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/).
-These rules are automatically run upon deserialization, whether via `Deserialize` directly or any method that reads a Metric View, such as `Load` or `ImportToTabularFromFile`.
-Diagnostics from those automatic runs remain available afterward through `SemanticBridge.MetricView.ImportDiagnostics`.
-You can also run these rules on demand against the loaded Metric View, which this document covers.
+El Semantic Bridge incluye reglas integradas que validan una definición de vista de métricas según las reglas definidas en [la documentación de la vista de métricas](https://learn.microsoft.com/azure/databricks/business-semantics/).
+Estas reglas se ejecutan automáticamente durante la deserialización, ya sea directamente mediante `Deserialize` o a través de cualquier método que lea una vista de métricas, como `Load` o `ImportToTabularFromFile`.
+Los diagnósticos de esas ejecuciones automáticas siguen estando disponibles posteriormente mediante `SemanticBridge.MetricView.ImportDiagnostics`.
+También puedes ejecutar estas reglas cuando lo necesites sobre la vista de métricas cargada, que es lo que se explica en este documento.
 
 ## Ejecutar la validación con las reglas predeterminadas
 
-Run [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) with no arguments to run the built-in rules against the loaded Metric View.
+Ejecuta [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) sin argumentos para aplicar las reglas integradas a la vista de métricas cargada.
 
 ```csharp {run id=validate-count setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
@@ -51,7 +51,7 @@ Output($"Validation complete: {diagnostics.Count} issue(s) found");
 Validation complete: 0 issue(s) found
 ```
 
-The sample Metric View is valid, so this reports no issues.
+La vista de métricas de ejemplo es válida, por lo que se obtiene un Report sin incidencias.
 
 ## Interpreta los mensajes de diagnóstico
 
@@ -95,10 +95,10 @@ VALIDATION RESULTS
 No issues found.
 ```
 
-## Example with a validation error
+## Ejemplo con un error de validación
 
-Validation always runs against the currently loaded Metric View, so you can introduce a violation in a script and see it caught.
-Here we clear a field's expression to trigger `FieldExprRequired`:
+La validación siempre se ejecuta sobre la vista de métricas cargada en ese momento, por lo que puedes introducir una infracción en un script y ver cómo se detecta.
+Aquí borramos la expresión de un campo para desencadenar `FieldExprRequired`:
 
 ```csharp {run id=error-example setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -164,8 +164,8 @@ Total issues: 0
 
 ## Pasos a seguir
 
-- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules)
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
+- [Crear reglas de validación sencillas](xref:semantic-bridge-validate-simple-rules)
+- [Crear reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules)
 
 ## Ver también
 
