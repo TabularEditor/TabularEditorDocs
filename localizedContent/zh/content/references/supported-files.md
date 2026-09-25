@@ -20,7 +20,7 @@ applies_to:
 
 # 支持的文件类型
 
-Tabular Editor 3 使用多种不同的文件格式和文档类型，其中一些并非 Analysis Services 或 Power BI 使用的格式。本文将概述并逐一介绍这些文件类型。
+Tabular Editor 3 使用多种不同的文件格式和文档类型，其中一些并非 Analysis Services 或 Power BI 使用的格式。 This article provides an overview and a description of each of these file types.
 
 ![支持的文件类型](~/content/assets/images/file-types/te3-supported-file-types.png)
 
@@ -28,12 +28,12 @@ Tabular Editor 3 使用多种不同的文件格式和文档类型，其中一些
 
 ## Dataset 文件类型
 
-Tabular Editor 支持语义模型的四种文件类型：.bim、Power BI 文件 (.pbit 和 .pbip)、.json 和 .tmdl。每种文件类型都有不同的功能与限制，下面将逐一说明。
+Tabular Editor 支持语义模型的四种文件类型：.bim、Power BI 文件 (.pbit 和 .pbip)、.json 和 .tmdl。 Each file type has different features and limitations, which are explained below.
 
-此外，Tabular Editor 3 的 Business 版和企业版支持通过“**保存并附带支持文件**”方式实现 Microsoft Fabric 的 Git 集成。这会创建一个文件夹结构，在模型文件旁边包含 .platform 和 definition.pbism 元数据文件，从而支持与 Fabric Workspace 无缝同步。详情见[保存并附带支持文件](xref:save-with-supporting-files)。
+Additionally, Tabular Editor 3 Business and Enterprise editions support **saving with supporting files** for Microsoft Fabric Git integration. This creates a folder structure containing .platform and definition.pbism metadata files alongside your model files, enabling seamless synchronization with Fabric workspaces. See [Save with supporting files](xref:save-with-supporting-files) for details.
 
 > [!NOTE]
-> 由于 **Tabular Editor 3 桌面版** 仅用于作为 Power BI Desktop 的外部工具，因此该版本不允许加载和保存语义模型文件。不过，你仍然可以使用 Tabular Editor 2.x 来实现此目的。参阅 <xref:editions> 了解 Tabular Editor 3 各版本之间的差异。
+> 由于 **Tabular Editor 3 桌面版** 仅用于作为 Power BI Desktop 的外部工具，因此该版本不允许加载和保存语义模型文件。 You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
 
 ### [表格模型文件 (.bim)](#tab/BIM)
 
@@ -60,7 +60,7 @@ DatabaseName.SemanticModel/
 └── model.bim
 ```
 
-借助该结构，可将语义模型提交到 Git repository，并与 Fabric Workspace 同步。完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。
+借助该结构，可将语义模型提交到 Git repository，并与 Fabric Workspace 同步。 See [Save with supporting files](xref:save-with-supporting-files) for complete documentation.
 
 ### [Power BI](#tab/PowerBI)
 
@@ -71,24 +71,24 @@ Tabular Editor 可以处理两种 Power BI 存储格式：
 
 #### Power BI Project 文件夹（.pbip） _(预览)_
 
-Power BI Project 文件夹于 2023 年六月推出，目前在 Power BI Desktop 中以预览功能提供（也称为“开发人员模式”）。这种存储格式是一种替代方案，用更利于版本控制以及第三方读取/编辑的形式来存储 .pbix 文件内容。
+Power BI Project 文件夹于 2023 年六月推出，目前在 Power BI Desktop 中以预览功能提供（也称为“开发人员模式”）。 The storage format is an alternative way to store the contents of a .pbix file, in a format that is more friendly to version control and 3rd party reading/editing of the content.
 
 > [!WARNING]
 > 与 .pbix 文件一样，Power BI Project 文件夹除了 **元数据** 外，也可能包含模型 **数据**，因此应像对待 .pbix 文件一样，将该文件夹视为敏感内容并妥善保护。
 
-Power BI Project 文件夹的根目录下有一个 .pbip 文件。该文件本质上是一个指向 Power BI 报表定义文件的指针，而该报表定义文件又可能进一步指向 Power BI 数据集：要么是本地的同一文件夹结构中的数据集(stored as a model.bim file)，要么是发布到 Power BI 服务的数据集(in this case, the report is said to be in _Live connect_ mode)。如果 Power BI Project 文件夹中存在数据集(model.bim 文件)，Tabular Editor 将能够在打开 .pbip 文件时加载该模型元数据。
+At the root of the Power BI Project folders sits a .pbip file. 该文件本质上是一个指向 Power BI 报表定义文件的指针，而该报表定义文件又可能进一步指向 Power BI 数据集：要么是本地的同一文件夹结构中的数据集(stored as a model.bim file)，要么是发布到 Power BI 服务的数据集(in this case, the report is said to be in _Live connect_ mode)。 If a dataset (model.bim file) is present in the Power BI Project folder, Tabular Editor will be able to load this model metadata when opening the .pbip file.
 
 要详细了解 Power BI Project 文件夹，请阅读微软的这篇官方博客文章：[这篇官方博客](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/)。
 
 > [!IMPORTANT]
-> 在将 Power BI 与 Tabular Editor 搭配使用时，建议使用 Power BI Project 文件，因为它支持[最广泛的建模操作](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring)。对模型元数据进行除上述列表以外的其他更改，可能会导致 Power BI Desktop 无法加载你的模型；一旦出现这种情况，Microsoft 支持也无法为你提供帮助。
+> 在将 Power BI 与 Tabular Editor 搭配使用时，建议使用 Power BI Project 文件，因为它支持[最广泛的建模操作](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring)。 Making other types of changes to the model metadata than those listed, may cause your model to become unloadable in Power BI Desktop, and in this case, Microsoft Support will not be able to help you.
 
 #### Power BI 模板文件（.pbit）
 
-Power BI 模板文件与 .pbix 文件类似，但区别在于它不包含任何模型 **数据**，只包含模型 **元数据**。因此，这些模型元数据可以在 Tabular Editor 中打开并编辑。
+Power BI 模板文件与 .pbix 文件类似，但区别在于它不包含任何模型 **数据**，只包含模型 **元数据**。 As such, this model metadata can be opened and edited in Tabular Editor.
 
 > [!WARNING]
-> 尽管从技术上讲，可以从 .pbit 文件加载模型元数据并将其保存回 .pbit 文件，但这种做法不受 Power BI Desktop 支持。 Tabular Editor 默认会显示警告并阻止更改。如果你打算通过 Tabular Editor 修改 Power BI 模型，请改用 Power BI Project 文件夹。
+> 尽管从技术上讲，可以从 .pbit 文件加载模型元数据并将其保存回 .pbit 文件，但这种做法不受 Power BI Desktop 支持。 Tabular Editor will show a warning and block changes by default. Use Power BI Project folders instead, if you intend to make changes to your Power BI model through Tabular Editor.
 
 ### [表格模型文件夹（.json）](#tab/JSON)
 
@@ -96,11 +96,11 @@ Tabular Editor 允许你将 Dataset 对象保存为单独的 JSON 文件，这�
 
 该格式会保留对象的结构和属性，例如表、列、度量值和关系。
 
-这种格式从 Tabular Editor 早期起就已支持，是一种经过验证的方法，可将 Dataset 对象以单独文件的形式存储，但 Microsoft 并不支持这种做法。从而让开发人员能够在源代码管理中跟踪更改，并协作构建语义模型。
+这种格式从 Tabular Editor 早期起就已支持，是一种经过验证的方法，可将 Dataset 对象以单独文件的形式存储，但 Microsoft 并不支持这种做法。 Thereby enabling developers to track changes in source control and collaborate on building semantic models.
 
 在 JSON 文件结构方面，Tabular Editor 2 与 3 完全兼容。
 
-要将语义模型保存为 JSON，首次保存时必须选择“保存到文件夹”选项。此后，对从 JSON 结构化模型加载的模型进行后续保存时，会保留该设置。你随时都可以通过“文件 > 另存为”把 JSON 格式的模型转换为 .bim 文件
+In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. 你随时都可以通过“文件 > 另存为”把 JSON 格式的模型转换为 .bim 文件
 
 ![支持的文件类型：JSON](~/content/assets/images/file-types/te3-supported-file-json.png)
 
@@ -151,16 +151,16 @@ DatabaseName.SemanticModel/
 └── definition/
     ├── database.tmdl
     ├── tables.tmdl
-    └── ……
+    └── ...
 ```
 
-在使用 Fabric Git 集成时，便于阅读的 TMDL 格式特别适合用于版本控制和代码审查。完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。
+在使用 Fabric Git 集成时，便于阅读的 TMDL 格式特别适合用于版本控制和代码审查。 See [Save with supporting files](xref:save-with-supporting-files) for complete documentation.
 
 ***
 
 ## Fabric Git 集成文件
 
-使用**保存并附带支持文件**功能（Business 版和企业版）时，Tabular Editor 会创建 Microsoft Fabric Git 集成所需的额外元数据文件。这些文件由 Tabular Editor 自动生成并管理。
+使用**保存并附带支持文件**功能（Business 版和企业版）时，Tabular Editor 会创建 Microsoft Fabric Git 集成所需的额外元数据文件。 These files are automatically generated and managed by Tabular Editor.
 
 ### .platform
 
@@ -174,35 +174,35 @@ DatabaseName.SemanticModel/
 这是一个 JSON 文件，除非你了解 Fabric 项目项的格式，否则不要手动编辑。
 
 > [!NOTE]
-> 此同步仅适用于元数据中带有名称或描述的模型。由 Power BI Desktop 创建的 Power BI Project (PBIP) 语义模型在其 TMDL 中既不包含名称也不包含描述：二者都只存在于 `.platform` 文件中。
+> This synchronization applies to a model whose metadata carries a name or a description. A Power BI Project (PBIP) semantic model authored by Power BI Desktop carries neither in its TMDL: both live only in the `.platform` file.
 
 ### definition.pbism
 
-该 definition.pbism 文件包含语义模型的整体定义和核心设置。此文件与模型元数据（存储为 model.bim 或位于 definition/ 文件夹中）配合使用，为 Microsoft Fabric 提供所需的完整语义模型信息。
+该 definition.pbism 文件包含语义模型的整体定义和核心设置。 This file works alongside the model metadata (stored as either model.bim or in the definition/ folder) to provide complete semantic model information required by Microsoft Fabric.
 
-在保存操作中勾选 **保存并包含支持文件** 选项后，这两个文件会自动创建。生成的文件夹结构（带 .SemanticModel 后缀）可以提交到 Git repository，并与 Fabric Workspace 同步。
+Both files are automatically created when you check the **Save with supporting files** option during save operations. 生成的文件夹结构（带 .SemanticModel 后缀）可以提交到 Git repository，并与 Fabric Workspace 同步。
 
 有关此功能的完整文档，请参阅[保存并包含支持文件](xref:save-with-supporting-files)。
 
 ## Tabular Editor 支持文件
 
-支持文件是指 Analysis Services 或 Power BI 不会使用的文件。相反，这些文件用于支持 Tabular Editor 3 以及其他工具中的不同开发工作流。
+支持文件是指 Analysis Services 或 Power BI 不会使用的文件。 Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
 
 打开并选中对应的文档或窗口后，你可以用 Ctrl+S 或“文件 > 保存”来单独保存任何辅助文件。
 
-### 用户选项（.tmuo）
+### User Options (.tmuo)
 
-`.tmuo` 文件保存你为单个模型设置的、仅限本机的个人设置：Workspace 数据库、数据源凭据覆盖项、表导入设置、刷新覆盖项以及 AI 权限授予项。它与模型放在同一位置，并以模型名和你的 Windows 用户名命名，因此多个开发者可以处理同一个模型而互不干扰。
+A `.tmuo` file holds your own, machine-local settings for one model: the workspace database, data source credential overrides, table import settings, refresh overrides and AI permission grants. It sits next to the model and is named after it and your Windows user name, so several developers can work on the same model without treading on one another.
 
-其中的凭据使用你的 Windows 用户密钥加密，因此共享该文件基本没有意义。将 `*.tmuo` 添加到 `.gitignore`。
+Credentials inside it are encrypted with your Windows user key, which means the file cannot usefully be shared. Add `*.tmuo` to `.gitignore`.
 
-有关完整内容以及每种模型格式中该文件会写入到哪里，请参阅 @user-options。
+See @user-options for the full contents and where the file is written for each model format.
 
 ### 关系图文件 (.te3diag)
 
 .te3diag 文件是一种文件格式，用于存储使用 TE3 创建的模型关系图。
 
-这些文件可用于记录模型结构与逻辑，方便参与同一项目的其他开发者查看与协作。为了方便你访问和查阅，你可以把 .te3diag 文件保存在和模型文件同一个文件夹里。
+这些文件可用于记录模型结构与逻辑，方便参与同一项目的其他开发者查看与协作。 A .te3diag file can be saved in the same folder as the model file for easy access and reference.
 
 关系图文件本质上以 JSON 格式存储，并保存在 Tabular Editor 3 扩展中。
 
@@ -210,9 +210,9 @@ DatabaseName.SemanticModel/
 
 ### DAX 查询文件（.dax 或 .msdax）
 
-DAX 查询是可用于处理和分析语义模型中数据的表达式。 DAX 文件是包含一个或多个 DAX 查询的文本文件。
+DAX queries are expressions that can be used to manipulate and analyze data in semantic models. DAX 文件是包含一个或多个 DAX 查询的文本文件。
 
-你可以在 Tabular Editor 3 中保存 DAX 文件，并在之后再次运行这些查询。你也可以在其他支持 DAX 的工具中打开 DAX 文件，例如 [DAX Studio](https://daxstudio.org)。
+你可以在 Tabular Editor 3 中保存 DAX 文件，并在之后再次运行这些查询。 You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
 
 [下载示例 DAX 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-query-example.dax)
 
@@ -220,29 +220,29 @@ DAX 查询是可用于处理和分析语义模型中数据的表达式。 DAX �
 
 ### Pivot Grid 布局（.te3pivot）
 
-这些文件包含 Tabular Editor 3 中 Pivot Grid 的布局。它们是简单的 JSON 文件，用于指定 Pivot Grid 中显示哪些字段（度量值、列、层次结构），以及这些字段的排列方式。
+These files contain the layout of a Pivot Grid in Tabular Editor 3. 它们是简单的 JSON 文件，用于指定 Pivot Grid 中显示哪些字段（度量值、列、层次结构），以及这些字段的排列方式。
 
 只有当 Tabular Editor 3 连接到 Analysis Services 实例或 Power BI/Fabric XMLA endpoint 时，才能打开这些文件。
 
 ### DAX脚本（.te3daxs）
 
-这些文件是已保存的 DAX脚本（不是查询），用来在 Tabular Editor 中一次处理多个 DAX 对象。例如，修改语义模型中的多个度量值。
+这些文件是已保存的 DAX脚本（不是查询），用来在 Tabular Editor 中一次处理多个 DAX 对象。 For example, modifying multiple measures in a semantic model.
 
 ### C# Script（.csx）
 
 创建和编辑 C# Script 是 Tabular Editor 最能提升效率的功能之一。
 
-这些脚本可以保存为扩展名为 .csc 的文件，并可加载到 Tabular Editor 中，也可以保存为宏。 Tabular Editor 会维护一个 [MacroActions.json 本地设置文件](xref:supported-files#macroactionsjson)。
+这些脚本可以保存为扩展名为 .csc 的文件，并可加载到 Tabular Editor 中，也可以保存为宏。 A [MacroActions.json local setting file](xref:supported-files#macroactionsjson) is maintained by Tabular Editor.
 
-这样，你就能复用脚本，而不必每次都从头编写。[脚本库](xref:csharp-script-library) 是一个很好的去处，可在此查看并复用各类脚本示例；这些示例展示了 C# 的不同特性和功能。
+This way, scripts can be reused without having to write them from scratch every time. [脚本库](xref:csharp-script-library) 是一个很好的去处，可在此查看并复用各类脚本示例；这些示例展示了 C# 的不同特性和功能。
 
 [下载示例 C# Script 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/create-sum-measures-csharp.csx)
 
 ### VertiPaq Analyzer 文件（.vpax）
 
-在 Tabular Editor 中，你可以通过 VertiPaq Analyzer 功能导出和导入 .vpax 文件。 .vpax 文件是一个压缩文件，包含有关语义模型大小和结构的信息，但不包含实际数据。
+在 Tabular Editor 中，你可以通过 VertiPaq Analyzer 功能导出和导入 .vpax 文件。 A .vpax file is a compressed file that contains information about the size and structure of your semantic model, but not the actual data.
 
-你可以用该文件来分析并优化模型性能，同时不暴露敏感数据。例如，你可以使用 [DAX optimizer](https://www.daxoptimizer.com/) 工具，基于 .vpax 文件获取改进 DAX 公式的建议。
+You can use this file to analyze and optimize your model performance, without exposing sensitive data. 例如，你可以使用 [DAX optimizer](https://www.daxoptimizer.com/) 工具，基于 .vpax 文件获取改进 DAX 公式的建议。
 
 [下载示例 DAX脚本文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-script-example.te3daxs)
 
@@ -253,11 +253,11 @@ DAX 查询是可用于处理和分析语义模型中数据的表达式。 DAX �
 [下载示例 VPAX 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/vpaq-example.vpax)
 
 > [!WARNING]
-> 如果你的模型元数据属于机密信息，那么 .vpax 文件也应视为机密，并仅在充分考虑这一点的情况下共享。如果你担心保护知识产权，Tabular Editor 3 提供了一个选项，可对 VPAX 文件进行混淆处理。
+> 如果你的模型元数据属于机密信息，那么 .vpax 文件也应视为机密，并仅在充分考虑这一点的情况下共享。 If you are concerned about protecting IP, Tabular Editor 3 has an option to obfuscate VPAX files.
 
-#### 混淆
+#### Obfuscation
 
-如果你需要将 VPAX 文件交付给第三方(例如顾问或工具供应商)，可以对文件进行混淆，以隐藏模型元数据。做法是：在 VertiPaq Analyzer 窗口中，点击“导出”按钮旁的下拉按钮，然后选择“混淆导出...”。
+如果你需要将 VPAX 文件交付给第三方(例如顾问或工具供应商)，可以对文件进行混淆，以隐藏模型元数据。 This is done by selecting the 'Obfuscated Export...' option under the drop-down button next to the 'Export' button in the Vertipaq Analyzer window.
 
 混淆后的 VPAX 文件使用 .ovpax 文件扩展名。
 
@@ -269,44 +269,46 @@ DAX 查询是可用于处理和分析语义模型中数据的表达式。 DAX �
 
 ## 本地设置文件
 
-Tabular Editor 会在 "%localappdata%\\TabularEditor3" 文件夹中维护多个本地文件。这些文件在功能上与 Tabular Editor 3 密切相关，了解它们会很有帮助。
+Tabular Editor 会在 "%localappdata%\\TabularEditor3" 文件夹中维护多个本地文件。 These files are functionally relevant for Tabular Editor 3 and are useful to know.
 
 在团队里共享这些文件会很有用，这样所有开发者都能用到相同的宏和 BPA 规则。
 
 > [!TIP]
 > 在 Windows 上，将受版本控制的文件同步到 "%localappdata%\TabularEditor3" 文件夹的原生方法之一，是使用 [SymLink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/)。
 >
-> 把所需文件放在 Git 或 OneDrive 里，并为“%localappdata%\TabularEditor3”文件夹创建一个符号链接。不过要注意：如果有多个用户更新同一个文件版本，最后可能会出现同步问题。不过，Tabular Editor 本身并不直接支持这种方式，因此是否采用请自行斟酌。
+> 把所需文件放在 Git 或 OneDrive 里，并为“%localappdata%\TabularEditor3”文件夹创建一个符号链接。不过要注意：如果有多个用户更新同一个文件版本，最后可能会出现同步问题。
+> However, this is not supported by Tabular Editor directly, so implement it at your own discretion.
 
-### AI 审计日志
+### AI audit log
 
-仅在安装了 AI 功能组件时显示。 Tabular Editor 会记录 [AI Assistant](xref:ai-assistant) 和 [MCP server](xref:mcp-server) 的操作：请求了哪些权限以及如何回应，运行了哪些工具，以及每个工具是成功、失败还是被拒绝；还会记录任何已运行或交由审阅的 C# Script 的完整文本。提示词、回复以及模型中的数据值绝不会被记录。
+Present only when the AI features component is installed. Tabular Editor writes a record of what the [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) did: which permissions were asked for and how they were answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed over for review. Prompts, replies and data values from your model are never recorded.
 
-默认每天写入一个文件，并保留 30 天。可在 **工具 > 偏好 > AI 功能** 中点击 **打开审计文件夹** 进入该文件夹。管理员可通过 [策略](xref:policies) 移动它并更改保留期限。有关每条记录包含哪些内容，请参阅 @ai-audit-log。
+Files are written one per day and kept for 30 days by default. Reach the folder with **Open audit folder** under **Tools > Preferences > AI Features**. Administrators can move it and change the retention period by [policy](xref:policies). See @ai-audit-log for what each record holds.
 
-与此文件夹中的其他文件不同，这个文件记录的是日志，而不是设置。不要共享或同步它：这是每台计算机各自的日志，其中包含的脚本可能会暴露你处理过的模型结构。
+Unlike the other files in this folder, this one is a record rather than a setting. Do not share or sync it: it is a per-machine log, and the scripts it contains may reveal the structure of models you have worked on.
 
 ### MacroActions.json
 
-此文件存储你创建或导入的所有宏。你可以将此文件分享给同事，或将其备份到版本控制系统中；也可以将它配置为与包含宏的远程 repository 同步（见上方提示）。
+This file stores all the macros that you have created or imported. 你可以将此文件分享给同事，或将其备份到版本控制系统中；也可以将它配置为与包含宏的远程 repository 同步（见上方提示）。
 
-此文件包含软件中使用的每个宏的索引。如果你需要调整任意宏的顺序或名称，可以使用文本编辑器手动编辑此文件。不过要注意，避免在文件中引入错误或不一致，否则可能导致文件损坏；请务必先备份。
+此文件包含软件中使用的每个宏的索引。 If you need to change the order or the name of any macro, you can edit this file manually with a text editor. However, be careful not to introduce any errors or inconsistencies in the file thereby corrupting so make sure to create a backup.
 
 [下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 ### BPARules.json
 
-该文件包含 [Best Practice Analyzer 规则](xref:using-bpa)以及修复表达式。唯一可以添加和编辑修复表达式的地方是在此 JSON 文件中。建议把 BPA 规则文件放进版本控制系统，这样也能在部署前对语义模型运行 BPA 规则。
+该文件包含 [Best Practice Analyzer 规则](xref:using-bpa)以及修复表达式。 The only place to add and edit  fix expressions is inside this JSON file.
+It is recommended to store the PBA rule file in version control, which also enables the possibility of running the BPA rules against the semantic model before deployment.
 
 你可以在此处下载微软官方的 BPA 规则：[PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
 
 ### RecentServers.json
 
-包含用户曾连接过的所有服务器。你可以考虑手动编辑它，以“忘记”那些不再相关的历史服务器。
+Contains all the servers a user has been connected to. It can be advisable to edit it manually to 'forget' past servers no longer relevant.
 
 ### Layouts.json
 
-Layouts 文件会在启动 Tabular Editor 时自动生成。它包含 Tabular Editor 3 的 UI 布局配置所需的全部信息。
+Layouts 文件会在启动 Tabular Editor 时自动生成。 It contains all information to how Tabular Editor 3's UI layout is configured.
 
 > [!TIP]
-> 删除此文件将重置 Tabular Editor 的布局。如果 Tabular Editor 的布局表现不符合预期，你可以先把这个文件备份到别的地方，删掉原文件，然后重启 Tabular Editor 3。
+> 删除此文件将重置 Tabular Editor 的布局。 If the Tabular Editor layout does not behave as expected a good first step is to backup this file somewhere else, delete the original and restart Tabular Editor 3.
