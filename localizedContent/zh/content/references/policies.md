@@ -1,5 +1,5 @@
 ---
-uid: policies
+uid: 策略
 title: 策略
 author: Daniel Otykier
 updated: 2026-09-22
@@ -7,39 +7,39 @@ applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Tabular Editor 2 reads the legacy registry key only, and honors only the policies marked TE2 below."
+      note: "Tabular Editor 2 只读取旧版注册表项，并且仅应用下文标记为 TE2 的策略。"
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
           partial: true
-          note: "General policies only"
+          note: "仅限常规策略"
         - edition: Business
           partial: true
-          note: "General policies only"
+          note: "仅限常规策略"
         - edition: Enterprise
           full: true
     - product: Tabular Editor CLI
       partial: true
-      note: "On Windows, and only for the policies marked CLI below."
+      note: "仅适用于 Windows，且仅适用于下文标注为 CLI 的策略。"
 ---
 
 # 策略
 
-If you administer Tabular Editor for an organization, you can limit its features, and configure the AI Assistant and the MCP server on your users' behalf, through group policy. Set the values in the Windows registry by hand, or use the administrative templates that ship with Tabular Editor 3.
+如果您为组织管理 Tabular Editor，可以通过组策略限制其功能，并代表用户配置 AI 助手和 MCP 服务器。你可以手动在 Windows 注册表中设置这些值，也可以使用 Tabular Editor 3 随附的管理模板。
 
-Most policies are general policies, available in every edition of Tabular Editor 3. The policies that configure the AI Assistant and the MCP server require [Tabular Editor 3 Enterprise Edition](xref:editions), and are marked **Enterprise** below.
+大多数策略都是常规策略，在 Tabular Editor 3 的每个版本中都可用。用于配置 AI 助手和 MCP 服务器的策略需要 [Tabular Editor 3 企业版](xref:editions)，并在下文标注为 **Enterprise**。
 
 > [!NOTE]
 > 此功能需要以下版本的 Tabular Editor：
 >
-> - Tabular Editor [2.17.0](https://github.com/TabularEditor/TabularEditor/releases/tag/2.17.0) or newer
-> - Tabular Editor [3.3.5](https://github.com/TabularEditor/TabularEditor3/releases/tag/3.3.5) or newer, for the general policies
-> - Tabular Editor 3.27 or newer, for the registry keys below, for machine-wide policies and for every Enterprise policy
-> - Tabular Editor CLI 0.7 or newer
+> - Tabular Editor [2.17.0](https://github.com/TabularEditor/TabularEditor/releases/tag/2.17.0) 或更高版本
+> - 如需使用常规策略，需要 Tabular Editor [3.3.5](https://github.com/TabularEditor/TabularEditor3/releases/tag/3.3.5) 或更高版本
+> - 如需使用下方的注册表项、计算机范围的策略以及所有 Enterprise 策略，需要 Tabular Editor 3.27 或更高版本
+> - Tabular Editor CLI 0.7 或更高版本
 
-## Registry keys
+## 注册表项
 
-Policies are read from six keys, and the first key that defines a value decides that value. Every key under `HKEY_LOCAL_MACHINE` outranks every key under `HKEY_CURRENT_USER`, so a machine-wide policy set through Computer Configuration cannot be overridden by the user. Within a hive, a product-specific key outranks the shared key, which outranks the legacy key:
+系统会从六个注册表项中读取策略，哪个注册表项最先定义某个值，就以哪个值为准。 `HKEY_LOCAL_MACHINE` 下的任何注册表项优先级都高于 `HKEY_CURRENT_USER` 下的任何注册表项，因此通过“计算机配置”设置的计算机范围策略不能由用户覆盖。在同一配置单元内，产品专用注册表项的优先级高于共享注册表项，而共享注册表项又高于旧版注册表项：
 
 ```
 HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3
@@ -50,201 +50,200 @@ HKEY_CURRENT_USER\Software\Policies\Tabular Editor ApS
 HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor
 ```
 
-- `Tabular Editor ApS\TE3` is read by Tabular Editor 3 only. The Tabular Editor CLI reads `Tabular Editor ApS\TECLI` in its place; the other four keys are the same for both.
-- `Tabular Editor ApS` is the shared key, read by both Tabular Editor 3 and the CLI.
-- `Kapacity\Tabular Editor` is the key used by earlier versions. It is still read, and it is the only key Tabular Editor 2 reads, so set a policy there too if it also has to reach Tabular Editor 2.
+- `Tabular Editor ApS\TE3` 仅由 Tabular Editor 3 读取。 Tabular Editor CLI 则改为读取 `Tabular Editor ApS\TECLI`；其余四个注册表项两者相同。
+- `Tabular Editor ApS` 是共享注册表项，由 Tabular Editor 3 和 CLI 共同读取。
+- `Kapacity\Tabular Editor` 是早期版本使用的注册表项。该键仍会被读取，而且这是 Tabular Editor 2 唯一会读取的键。因此，如果策略也需要对 Tabular Editor 2 生效，也要在此处设置。
 
-Precedence applies to each value separately: a machine-wide `DisableTelemetry` of 0 overrides a per-user `DisableTelemetry` of 1, while a `DisableCSharpScripts` set only per user still applies.
-Value names are not case sensitive.
+优先级会分别应用到每个值：计算机范围的 `DisableTelemetry` 设为 0 时，会覆盖按用户设置为 1 的 `DisableTelemetry`；而只按用户设置的 `DisableCSharpScripts` 仍然生效。值名称不区分大小写。
 
-## Value types
+## 值类型
 
-| Kind of setting       | Registry type  | 说明                                                                                                                                                                                                           |
-| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| On/off policy         | `REG_DWORD`    | Any non-zero value enforces the policy. `0`, and the absence of the value, both mean it is not enforced.                                                                     |
-| Choice                | `REG_SZ`       | The name of the choice, for example `Read`. A `REG_DWORD` holding the position of the choice in the list is also accepted, which is what the administrative template writes. |
-| List                  | `REG_MULTI_SZ` | One entry per line. A `REG_SZ` whose entries are separated by semicolons is also accepted.                                                                                   |
-| Path, address or name | `REG_SZ`       |                                                                                                                                                                                                              |
+| 设置类型     | 注册表类型          | 说明                                                               |
+| -------- | -------------- | ---------------------------------------------------------------- |
+| 开/关策略    | `REG_DWORD`    | 任何非零值都会强制执行该策略。 `0` 以及该值不存在，都表示不强制实施该策略。                         |
+| 选项       | `REG_SZ`       | 选项的名称，例如 `Read`。也接受一个 `REG_DWORD` 值，用于保存该选项在列表中的位置；这也是管理模板写入的形式。 |
+| 列表       | `REG_MULTI_SZ` | 每行一个条目。也接受使用分号分隔各条目的 `REG_SZ`。                                   |
+| 路径、地址或名称 | `REG_SZ`       |                                                                  |
 
-Tabular Editor reads policy values once, at start-up. A change takes effect the next time you start the application.
+Tabular Editor 只会在启动时读取一次策略值。更改会在下次启动应用程序时生效。
 
-## General policies
+## 常规策略
 
-To enforce one of these, add a `REG_DWORD` value with the name below and a non-zero value. The **Products** column shows which products honor the policy: **TE3** is Tabular Editor 3, **CLI** is the Tabular Editor CLI, and **TE2** is Tabular Editor 2, which reads the legacy key only.
+要强制执行其中一项，只需添加一个名为下述名称且数值为非零的 `REG_DWORD` 值。 **Products** 列显示哪些产品会遵循该策略：**TE3** 表示 Tabular Editor 3，**CLI** 表示 Tabular Editor CLI，**TE2** 表示 Tabular Editor 2，且它仅会读取旧版键。
 
-| 值                              | Products      | 启用后……                                                                                                                                                                                                                                                                                  |
-| ------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DisableUpdates                 | TE3, TE2      | Tabular Editor will not check whether newer versions are available online. Users cannot check for updates manually either.                                                                                                                             |
-| DisableCSharpScripts           | TE3, TE2      | Tabular Editor will not let users create or execute C# scripts.                                                                                                                                                                                                        |
-| DisableMacros                  | TE3, TE2      | Tabular Editor 不允许用户保存或运行宏。 Macros stored in the `%LocalAppData%` folder are not loaded when the application starts.                                                                                                                                                   |
-| DisableBpaDownload             | TE3, CLI, TE2 | Best Practice Analyzer rules cannot be downloaded from the web. Rules stored locally or alongside the model keep working.                                                                                                                              |
-| DisableWebDaxFormatter         | TE3, CLI, TE2 | The DAX formatter that sends code to daxformatter.com is disabled. Tabular Editor 3 still offers its built-in formatter, which sends nothing over the network.                                                                         |
-| DisableErrorReports            | TE3           | Users cannot send error or crash reports to the Tabular Editor support team.                                                                                                                                                                                           |
-| DisableTelemetry               | TE3, CLI      | No anonymous usage data is collected or sent to the Tabular Editor support team.                                                                                                                                                                                       |
-| DisableDaxOptimizer            | TE3           | The DAX Optimizer integration is not available.                                                                                                                                                                                                                        |
-| DisableDaxOptimizerUpload      | TE3           | Users cannot upload VertiPaq Analyzer files through the DAX Optimizer integration. Implied when `DisableDaxOptimizer` is enforced.                                                                                                                     |
-| RequireDaxOptimizerObfuscation | TE3           | Users cannot upload clear-text VertiPaq Analyzer files through the DAX Optimizer integration; only obfuscated files may be uploaded. Implied when `DisableDaxOptimizer` or `DisableDaxOptimizerUpload` is enforced.                                    |
-| DisableDaxPackageManager       | TE3           | The DAX Package Manager is not available.                                                                                                                                                                                                                              |
-| DisableAi                      | TE3           | All AI functionality is turned off: the AI Assistant, the MCP server and every AI-powered feature are unavailable, nothing AI-related is loaded when the application starts, and any stored provider configuration, including the API key, is cleared. |
-| DisableAiChat                  | TE3           | The AI Assistant chat panel is unavailable. Other AI functionality, including the MCP server, is unaffected.                                                                                                                                           |
-| DisableMcpServer               | TE3           | The MCP server is unavailable, so external agent tools cannot connect to Tabular Editor 3. The AI Assistant chat is unaffected.                                                                                                                        |
-| RequireMcpAccessToken          | TE3           | Clients connecting to the MCP server must present the access token shown in the **Tools > MCP Server...** dialog, and users cannot turn that requirement off.                                                          |
+| 值                              | 产品            | 启用后……                                                                                                             |
+| ------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------- |
+| DisableUpdates                 | TE3, TE2      | Tabular Editor 不会在线检查是否有新版本可用。用户也无法手动检查更新。                                                                        |
+| DisableCSharpScripts           | TE3, TE2      | Tabular Editor 不允许用户创建或执行 C# Script。                                                                              |
+| DisableMacros                  | TE3, TE2      | Tabular Editor 不允许用户保存或运行宏。应用启动时不会加载存储在 `%LocalAppData%` 文件夹中的宏。                                                  |
+| DisableBpaDownload             | TE3, CLI, TE2 | 无法从网络下载 Best Practice Analyzer 规则。保存在本地或随模型一起存放的规则仍可正常使用。                                                         |
+| DisableWebDaxFormatter         | TE3, CLI, TE2 | 会将代码发送到 daxformatter.com 的 DAX 格式化程序已被禁用。 Tabular Editor 3 仍提供其内置格式化程序，不会通过网络发送任何数据。              |
+| DisableErrorReports            | TE3           | 用户无法向 Tabular Editor 支持团队发送错误或崩溃 Report。                                                                          |
+| DisableTelemetry               | TE3, CLI      | 不会收集匿名使用数据，也不会将其发送给 Tabular Editor 支持团队。                                                                          |
+| DisableDaxOptimizer            | TE3           | DAX优化器集成功能不可用。                                                                                                    |
+| DisableDaxOptimizerUpload      | TE3           | 用户无法通过DAX优化器集成上传VertiPaq分析器文件。强制执行 `DisableDaxOptimizer` 时，此项也会自动生效。                                              |
+| RequireDaxOptimizerObfuscation | TE3           | 用户无法通过DAX优化器集成上传明文VertiPaq分析器文件；只能上传已混淆的文件。强制执行 `DisableDaxOptimizer` 或 `DisableDaxOptimizerUpload` 时，此项也会自动生效。   |
+| DisableDax组件管理器                | TE3           | DAX 组件管理器不可用。                                                                                                     |
+| DisableAi                      | TE3           | 所有 AI 功能都会关闭：AI 助手、MCP 服务器以及所有由 AI 提供支持的功能都将不可用；应用启动时不会加载任何与 AI 相关的内容；并会清除任何已存储的提供程序配置（包括 API 密钥）。                |
+| DisableAiChat                  | TE3           | AI 助手聊天面板不可用。其他 AI 功能（包括 MCP 服务器）不受影响。                                                                            |
+| DisableMcpServer               | TE3           | MCP 服务器不可用，因此外部代理工具无法连接到 Tabular Editor 3。 AI 助手聊天不受影响。                                                           |
+| RequireMcpAccessToken          | TE3           | 连接到 MCP 服务器的客户端必须提供 **工具 > MCP 服务器...** 对话框中显示的访问令牌，而且用户无法关闭这一要求。 |
 
-### In the TE CLI
+### 在 TE CLI 中
 
-The Tabular Editor CLI honors the policies marked **CLI** above, on Windows, reading the same keys in the same order as Tabular Editor 3. It also honors `BlockUnsafeScripts` from the [Enterprise policies](#scripts-and-macros) below, for `te script`, `te macro run` and `te bpa run --fix`.
+在 Windows 上，Tabular Editor CLI 会遵循上文标记为 **CLI** 的策略，并按与 Tabular Editor 3 相同的顺序读取相同的键。它也会遵循下方[企业策略](#scripts-and-macros)中的 `BlockUnsafeScripts`，适用于 `te script`、`te macro run` 和 `te bpa run --fix`。
 
-A refused operation is not silent. `te` names the policy that refused it and exits with a non-zero code, so a pipeline step fails rather than appearing to succeed with nothing done.
+被拒绝的操作不会悄无声息。 `te` 会指出拒绝该操作的策略，并以非零代码退出，因此流水线步骤会失败，而不是看起来成功却什么也没做。
 
-The CLI has no editions, so a policy that requires Tabular Editor 3 Enterprise Edition in the desktop application is simply applied by the CLI, whatever license the machine holds.
+CLI 没有版本之分，因此，在桌面应用中要求使用 Tabular Editor 3 企业版的策略，CLI 都会直接应用，无论该计算机持有什么许可证。
 
-## Enterprise policies
+## 企业策略
 
-These policies decide what a C# script may do, and configure the AI Assistant and the MCP server. They all require Tabular Editor 3 Enterprise Edition, and belong under `Tabular Editor ApS\TE3` - except `BlockUnsafeScripts`, which the Tabular Editor CLI honors as well, and which therefore belongs in the shared `Tabular Editor ApS` key. Put it under `TE3` or `TECLI` instead to reach only one of the two.
+这些策略决定 C# Script 可以执行哪些操作，并配置 AI Assistant 和 MCP 服务器。它们都要求使用 Tabular Editor 3 企业版，并且应位于 `Tabular Editor ApS\TE3` 下；但 `BlockUnsafeScripts` 例外，Tabular Editor CLI 也会遵循它，因此它应放在共享的 `Tabular Editor ApS` 键中。如果只想让两者中的一个生效，请改为将其放在 `TE3` 或 `TECLI` 下。
 
-### Scripts and macros
+### 脚本和宏
 
-| 值                  | Kind   | What it does                                                                                                                                                                                                                                                                                           |
-| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| BlockUnsafeScripts | On/off | C# scripts and macros are allowed only where they stay within the semantic model. A script that reads or writes a file, reaches the network, starts another program, pulls in outside code or sends a command straight to the server is refused before any of it runs. |
+| 值                  | 类型  | 作用                                                                                         |
+| ------------------ | --- | ------------------------------------------------------------------------------------------ |
+| BlockUnsafeScripts | 开/关 | 仅当 C# Script 和宏的操作限定在语义模型范围内时，才允许使用。凡是读取或写入文件、访问网络、启动其他程序、引入外部代码，或直接向服务器发送命令的脚本，都会在执行前被拒绝。 |
 
-The restriction holds wherever a script runs: **Run script** and **Run with preview** in a script document, **Apply fix** in the Best Practice Analyzer, the AI Assistant, the MCP server, and `te script`, `te macro run` and `te bpa run --fix` on the command line. A refused script is not a failed script. Nothing reaches the model, the error list stays empty, and a **Script not run** dialog names the policy and what the script used.
+无论脚本在哪里运行，此限制都适用：脚本文档中的 **运行脚本** 和 **运行并预览**，Best Practice Analyzer 中的 **应用修复**，AI Assistant、MCP 服务器，以及命令行中的 `te script`、用于宏的 `te macro run` 和 `te bpa run --fix`。被拒绝的脚本不算脚本执行失败。模型不会受到任何影响，错误列表仍为空，并且 **脚本未运行** 对话框会显示对应的策略以及脚本使用了哪些功能。
 
-A macro that reaches outside the model is left out of every menu, so it cannot be run by accident. It is still listed under **View > Macros** with its **Blocked** column filled in, and it can still be opened and edited, so it can be brought back inside the line rather than rewritten from scratch. Saving such a macro succeeds and says that it is saved but will not run.
+超出模型范围的宏不会出现在任何菜单中，因此无法被误运行。它仍会列在 **视图 > 宏** 中，并且其 **Blocked** 列会被填充；你仍然可以打开并编辑它，这样就能把它改回允许范围内，而不必从头重写。这类宏可以保存，界面也会提示已保存，但实际上无法运行。
 
-What counts as staying within the model is decided by analyzing the compiled script rather than by searching its text, so indirect routes to the same places - reflection, expression trees, `Activator`, `AppDomain`, XML readers or deserialization - are refused as well. Among the built-in [helper methods](xref:script-helper-methods), the three that write outside the model, `SaveFile`, `ExecuteCommand` and `Bpa.ExportCsv`, count as unsafe; the ones that only read, including `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader` and `ExportProperties`, do not. See [Administrator policies](xref:csharp-scripts#administrator-policies) for the same rule from the script author's side.
+是否算作“保持在模型范围内”，是通过分析已编译的脚本来判断的，而不是通过搜索脚本文本。因此，任何通过间接方式到达同一位置的途径——反射、表达式树、`Activator`、`AppDomain`、XML 读取器或反序列化——同样会被拒绝。在内置的[辅助方法](xref:script-helper-methods)中，`SaveFile`、`ExecuteCommand` 和 `Bpa.ExportCsv` 这三个会向模型外部写入，因此被视为不安全；仅执行读取的方法则不算，包括 `ReadFile`、`ExecuteDax`、`EvaluateDax`、`ExecuteReader` 和 `ExportProperties`。如需从脚本作者的角度了解同一规则，请参阅[管理员策略](xref:csharp-scripts#administrator-policies)。
 
-In the Group Policy editor this one is called **Only allow scripts and macros that stay within the model**, and because it is written to the shared key it sits directly under **Administrative Templates > Tabular Editor** rather than in the **Tabular Editor 3** subfolder.
+在组策略编辑器中，此项名为 **仅允许保持在模型范围内的脚本和宏**。由于它写入共享注册表项，因此它直接位于 **管理模板 > Tabular Editor** 下，而不是 **Tabular Editor 3** 子文件夹中。
 
-### Permission limits
+### 权限上限
 
-Each of these sets an upper limit on what the AI Assistant and the MCP server may reach for one kind of resource. The accepted values are `Deny`, `Read` and `Write`, except for model data, where `Read` is the highest meaningful setting.
+其中每一项都会为 AI Assistant 和 MCP 服务器可访问的某一类资源设定上限。可接受的值为 `Deny`、`Read` 和 `Write`，但模型数据除外，因为对模型数据来说，`Read` 已是最高且有意义的设置。
 
-A limit caps what a user may grant: an existing permission above the limit is reduced to it, the matching option under **Tools > Preferences > AI Features > Permissions** and in the **Tools > MCP Server...** dialog is shown read-only, and the AI Assistant no longer asks for permission it cannot be given. No grant outranks a limit - not a standing permission, not one given for a single model and not one given in an earlier version. The user's own choice is left untouched in their preferences, so it returns if the policy is removed.
+上限会限制用户可授予的权限：任何高于上限的现有权限都会被下调到该上限；**工具 > 偏好 > AI 功能 > 权限** 下对应的选项以及 **工具 > MCP Server...** 对话框中的对应选项都会显示为只读；AI Assistant 也不会再请求无法授予的权限。任何授权都不能高于上限——无论是常设权限、针对单个模型授予的权限，还是在早期版本中授予的权限。用户自己在偏好中的选择不会被改动，因此如果移除此策略，该选择会恢复生效。
 
-| 值                         | Accepted values   | Limits access to...                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| MaxModelMetadataAccess    | Deny, Read, Write | The metadata of the open model: table, column and measure names, expressions, descriptions, Best Practice Analyzer results and VertiPaq statistics. `Write` additionally allows the assistant to run its own C# scripts against the model. At `Deny`, nothing about the open model is sent at all - no model summary, no notice that the model changed and no current selection. |
-| MaxModelDataAccess        | Deny, Read        | Data values from the model, that is, the results of DAX queries.                                                                                                                                                                                                                                                                                                                                                                 |
-| MaxBpaAccess              | Deny, Read, Write | Best Practice Analyzer rules. `Read` allows listing the rules and running the analysis; `Write` additionally allows adding and changing rules.                                                                                                                                                                                                                                                                   |
-| MaxDocumentsAccess        | Deny, Read, Write | The documents the user has open, such as C# scripts and DAX queries. `Read` allows reading their contents; `Write` additionally allows changing them.                                                                                                                                                                                                                                                            |
-| MaxMacrosAccess           | Deny, Read, Write | The user's macro library.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| McpMaxModelMetadataAccess | Deny, Read, Write | The same five resources, for the MCP server alone.                                                                                                                                                                                                                                                                                                                                                                               |
-| McpMaxModelDataAccess     | Deny, Read        |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| McpMaxBpaAccess           | Deny, Read, Write |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| McpMaxDocumentsAccess     | Deny, Read, Write |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| McpMaxMacrosAccess        | Deny, Read, Write |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 值                         | 可接受的值             | 限制对以下内容的访问……                                                                                                                                                       |
+| ------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| MaxModelMetadataAccess    | Deny, Read, Write | 当前打开模型的元数据：表、列和度量值名称、表达式、说明、Best Practice Analyzer 结果以及 VertiPaq 统计信息。 `Write` 还允许助手对模型运行其自身的 C# Script。当设为 `Deny` 时，与当前打开模型有关的任何内容都不会发送——没有模型摘要、没有模型更改通知，也没有当前选择。 |
+| MaxModelDataAccess        | Deny, Read        | 模型中的数据值，也就是 DAX 查询的结果。                                                                                                                                             |
+| MaxBpaAccess              | Deny, Read, Write | Best Practice Analyzer 规则。 `Read` 允许列出规则并运行分析；`Write` 还允许添加和修改规则。                                                                                                  |
+| MaxDocumentsAccess        | Deny, Read, Write | 用户当前打开的文档，例如 C# Script 脚本和 DAX 查询。 `Read` 允许读取其内容；`Write` 还允许对其进行修改。                                                                                               |
+| 最大宏访问权限                   | Deny, Read, Write | 用户的宏库。                                                                                                                                                             |
+| McpMaxModelMetadataAccess | Deny, Read, Write | 同样的五类资源，但仅适用于 MCP 服务器。                                                                                                                                             |
+| McpMaxModelDataAccess     | Deny, Read        |                                                                                                                                                                    |
+| McpMaxBpaAccess           | Deny, Read, Write |                                                                                                                                                                    |
+| McpMaxDocumentsAccess     | Deny, Read, Write |                                                                                                                                                                    |
+| Mcp 最大宏访问权限               | Deny, Read, Write |                                                                                                                                                                    |
 
-The five `McpMax...` values apply to the MCP server alone. When one of them is not set, the MCP server inherits the corresponding `Max...` limit. They can only lower that limit, never raise it, so an unattended agent is never allowed more than the interactive assistant.
+这五个 `McpMax...` 值仅适用于 MCP 服务器。当其中某个值未设置时，MCP 服务器会继承对应的 `Max...` 限制。它们只能降低该限制，不能提高，因此无人值守代理的权限绝不会超过交互式助手。
 
-### AI provider
+### AI 提供商
 
-| 值                      | Kind    | Accepted values                              | What it does                                                                                                                                                                                                                                             |
-| ---------------------- | ------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AiProvider             | Choice  | None, OpenAI, Anthropic, AzureOpenAI, Custom | Locks the AI Assistant to one provider. `None` turns the AI Assistant off; the MCP server is not affected.                                                                                                               |
-| AiEndpoint             | Address |                                              | Locks the endpoint or base URL requests are sent to, for example an internal gateway or an Azure OpenAI resource.                                                                                                                        |
-| AiModel                | 姓名      |                                              | Locks the model, or the Azure OpenAI deployment name. The model picker in the chat panel is replaced by a plain indicator, so users cannot switch models.                                                                |
-| AiOrganizationId       | 姓名      |                                              | Locks the OpenAI organization requests are billed to.                                                                                                                                                                                    |
-| AiProjectId            | 姓名      |                                              | Locks the OpenAI project requests are billed to.                                                                                                                                                                                         |
-| AiAllowedProviders     | List    | Any of the provider names above              | Restricts which providers users may configure. A provider set by `AiProvider` is allowed whether or not it is listed, and `None` is always offered - an allowlist is not a way to stop a user turning the assistant off. |
-| AiAllowedEndpointHosts | List    | Host names                                   | Restricts which hosts an endpoint may point at, for example `gateway.contoso.com` or `*.contoso.com`.                                                                                                                                    |
+| 值                      | 类型 | 可接受的值                                        | 用途                                                                            |
+| ---------------------- | -- | -------------------------------------------- | ----------------------------------------------------------------------------- |
+| AiProvider             | 选项 | None, OpenAI, Anthropic, AzureOpenAI, Custom | 将 AI 助手锁定为仅使用一个提供商。 `None` 会关闭 AI 助手；MCP 服务器不受影响。                             |
+| AiEndpoint             | 地址 |                                              | 锁定请求发送到的端点或基础 URL，例如内部 Gateway 或 Azure OpenAI 资源。                             |
+| AiModel                | 姓名 |                                              | 锁定模型或 Azure OpenAI 部署名称。聊天面板中的模型选择器会被替换为一个仅作显示的指示器，因此用户无法切换模型。                |
+| AiOrganizationId       | 姓名 |                                              | 锁定 OpenAI 请求的计费组织。                                                            |
+| AiProjectId            | 姓名 |                                              | 锁定 OpenAI 请求的计费项目。                                                            |
+| AiAllowedProviders     | 列表 | 上述任一提供商名称                                    | 限制用户可配置的提供商。即使未在列表中，`AiProvider` 设置的提供商也始终允许使用，且始终提供 `None`——允许列表并不能阻止用户关闭助手。 |
+| AiAllowedEndpointHosts | 列表 | 主机名                                          | 限制端点可指向的主机，例如 `gateway.contoso.com` 或 `*.contoso.com`。                        |
 
-Locked settings appear read-only under **Tools > Preferences > AI Features > AI Assistant**, and the AI Assistant uses the locked configuration whatever the user had chosen before. Nothing is written into the user's own preferences, so their provider, endpoint, model and API key come back if the policy is removed. API keys are never distributed by policy.
+锁定的设置会在 **工具 > 偏好 > AI 功能 > AI 助手** 下显示为只读；无论用户之前如何选择，AI 助手都会使用锁定的配置。不会向用户自己的偏好中写入任何内容，因此如果移除该策略，提供程序、终结点、模型和 API 密钥将恢复为用户原先设置的值。策略绝不会分发 API 密钥。
 
-Host names are matched against the host part of the endpoint URL only. Matching ignores case and ignores the port. A leading `*.` covers the subdomains of a domain but not the domain itself, so list both if both are wanted. The list applies to every provider whenever an endpoint is set, so a base-URL override cannot be used to get past it.
+主机名仅与终结点 URL 的主机部分匹配。匹配时不区分大小写，也会忽略端口。前导 `*.` 可匹配某个域的子域，但不包括该域本身，因此如果两者都需要，请同时列出。只要设置了终结点，此列表就会对所有提供程序生效，因此无法通过 base URL 覆盖来绕过它。
 
-A configuration the policy does not permit is refused, and the AI Assistant says which rule refused it instead of sending the request: a provider that is not on the allowlist, an endpoint host that is not on the host allowlist, an endpoint that is not a valid URL while a host allowlist applies, or a locked Azure OpenAI or Custom provider with no endpoint at all.
+策略不允许的配置会被拒绝。AI 助手不会发送请求，而是说明是哪条规则拒绝了该配置：提供程序不在允许列表中、终结点主机不在主机允许列表中、在主机允许列表生效时终结点不是有效 URL，或者已锁定的 Azure OpenAI 或 Custom 提供程序完全没有终结点。
 
 ### 自定义指令
 
-| 值                             | Kind   | What it does                                                                                                                                                                                                                                                                                                                                                   |
-| ----------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AiCustomInstructionsPath      | Path   | Names a folder of Custom Instructions that the AI Assistant loads for every user, in addition to the ones that ship with the product. A UNC path to a read-only network share is supported. Where an organization instruction and a user's own instruction share the same identifier, the organization's wins. |
-| DisableUserCustomInstructions | On/off | The AI Assistant ignores Custom Instructions the user has placed in their own folder, and the button that opens that folder is disabled. Instructions that ship with the product, and any organization folder, still load.                                                                                                     |
+| 值                             | 类型  | 作用                                                                                                   |
+| ----------------------------- | --- | ---------------------------------------------------------------------------------------------------- |
+| AiCustomInstructionsPath      | 路径  | 指定一个“自定义说明”文件夹；除了产品随附的说明外，AI 助手还会为每个用户加载该文件夹中的内容。支持指向只读网络共享的 UNC 路径。如果组织说明与用户自己的说明使用相同的标识符，则以组织说明为准。 |
+| DisableUserCustomInstructions | 开/关 | AI 助手会忽略用户放在自己文件夹中的“自定义说明”，用于打开该文件夹的按钮也将被禁用。产品随附的说明以及任何组织文件夹中的说明仍会加载。                                |
 
-### MCP server
+### MCP 服务器
 
-| 值                | Kind                  | What it does                                                                                                                                                                                                                                                         |
-| ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| McpDisabledTools | List                  | Names of MCP tools that are never offered to a connected client. Listed tools are absent from the client's tool list and refuse to run even if a client asks for one by name. The AI Assistant chat is not affected. |
-| McpPort          | Number, 1024 to 49151 | Locks the port the MCP server listens on, so one client configuration can be shared across an organization. The default is 42100. The server only ever listens on the loopback address.                              |
+| 值                | 类型              | 作用                                                                                    |
+| ---------------- | --------------- | ------------------------------------------------------------------------------------- |
+| McpDisabledTools | 列表              | 指定永远不会提供给已连接客户端的 MCP 工具名称。列出的工具不会出现在客户端的工具列表中，即使客户端按名称请求其中某个工具，也会拒绝执行。 AI 助手聊天功能不受影响。 |
+| McpPort          | 数值范围：1024–49151 | 固定 MCP 服务器侦听的端口，这样整个组织就可以共享同一份客户端配置。默认值为 42100。服务器始终只侦听回环地址。                          |
 
-### Audit log
+### 审计日志
 
-Tabular Editor 3 keeps a local record of AI Assistant and MCP server activity - tool calls, permission decisions, configuration and server sessions. The text of a prompt or a response is never recorded.
+Tabular Editor 3 会在本地保留 AI 助手和 MCP 服务器活动记录——包括工具调用、权限决策、配置以及服务器会话。不会记录提示或响应的文本内容。
 
-The record is an Enterprise Edition feature. On Enterprise, Consultancy and Trial licenses it is written, and **Open audit folder** appears on **Tools > Preferences > AI Features** and in the **Tools > MCP Server...** dialog. On Desktop and Business, and before a license is activated, nothing is written, no folder is created and neither button is shown. See @ai-audit-log.
+此记录功能仅在企业版中提供。在企业版、咨询版和试用版许可证下，会写入该记录；并且在 **工具 > 偏好 > AI 功能** 和 **工具 > MCP 服务器...** 对话框中会显示 **打开审计文件夹**。在 Desktop 版和 Business 版中，以及在许可证激活之前，不会写入任何内容，也不会创建文件夹，并且两个位置都不会显示该按钮。参见 @ai-audit-log。
 
-| 值                       | Kind              | What it does                                                                                                                                                                                                                                                                                                                                              |
-| ----------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AiAuditLogPath          | Path              | Redirects the audit log, so it can be collected centrally. A UNC path to a network share is supported. When the policy is not set, the log is written to `%LocalAppData%\TabularEditor3\AI\audit`, one `ai-audit-<date>.jsonl` file per day, with the recorded scripts under `audit\scripts\<date>`. |
-| AiAuditLogRetentionDays | Number, 0 to 3650 | How many days of audit log to keep; older files are deleted. `0` keeps everything. The default is 30 days.                                                                                                                                                                                                |
+| 值                       | 类型          | 作用                                                                                                                                                               |
+| ----------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AiAuditLogPath          | 路径          | 重定向审计日志，以便集中收集。支持指向网络共享的 UNC 路径。未设置该策略时，日志会写入 `%LocalAppData%\TabularEditor3\AI\audit`，每天生成一个 `ai-audit-<date>.jsonl` 文件；记录的脚本存放在 `audit\scripts\<date>` 下。 |
+| AiAuditLogRetentionDays | 数值范围：0–3650 | 保留审计日志的天数；更旧的文件会被删除。 `0` 表示全部保留。默认值为 30 天。                                                                                                                       |
 
-## What happens without Enterprise Edition
+## 没有企业版时会发生什么
 
-Enterprise policies are never quietly ignored. If any of the values in the Enterprise tables above is set - even one Tabular Editor cannot interpret - and the installed copy of Tabular Editor 3 is not licensed for Enterprise Edition, the AI Assistant and the MCP server refuse to start, and the AI Assistant reports that your organization has configured AI policies that require Tabular Editor 3 Enterprise Edition, naming the values in question. Everything else in Tabular Editor 3 keeps working, and the general policies above keep being enforced.
+企业策略绝不会被悄悄忽略。如果上面的企业版表格中设置了任何值——哪怕只设置了一个 Tabular Editor 无法解析的值——而已安装的 Tabular Editor 3 又未获得企业版许可，AI Assistant 和 MCP 服务器都会拒绝启动；AI Assistant 还会提示你的组织已配置需要 Tabular Editor 3 企业版的 AI 策略，并点名列出相关值。 Tabular Editor 3 中的其他所有功能仍可正常运行，上述通用策略也会继续生效。
 
-Enterprise policies also fail closed when a value cannot be interpreted. A permission limit that is mistyped denies the resource rather than being read as "no limit", and a provider name Tabular Editor does not recognize makes the AI Assistant unavailable rather than falling back to the user's own choice.
+当某个值无法被解释时，企业策略也会采用“默认拒绝”，即 fail closed 的方式。如果权限限制值写错了，会拒绝访问该资源，而不会被当作“无限制”；如果提供程序名称不被 Tabular Editor 识别，AI Assistant 就会不可用，而不会回退到用户自己的选择。
 
-`BlockUnsafeScripts` fails closed in the same way, and it is worth knowing exactly how, because it reaches further than the AI surfaces. On a copy that is not licensed for Enterprise Edition, the value being present stops **every** script and macro from running, safe or not, with a message naming the edition required; the macros leave the menus until an Enterprise license is activated, which they return to without a restart. A value the reader cannot interpret enforces the restriction rather than lifting it. An explicit `0` does not enforce it, but still counts as configured, so it too puts the AI surfaces behind the Enterprise gate.
+`BlockUnsafeScripts` 也会以同样的默认拒绝方式处理，而且有必要确切了解它的行为，因为它影响的不只是 AI 相关界面。如果当前安装的副本未获得企业版许可，只要存在该值，就会阻止**所有**脚本和宏运行，无论是否安全，并显示一条消息，说明所需的版本；宏会从菜单中消失，直到激活企业版许可证，且激活后无需重启就会恢复到菜单中。读取方无法解析的值会强制执行限制，而不是解除限制。显式的 `0` 不会强制实施该限制，但仍会被视为已配置，因此它同样会让 AI 相关界面只能在企业版中使用。
 
-To turn off all AI functionality without an Enterprise license, use the general `DisableAi` policy.
+要在没有企业版许可证的情况下关闭所有 AI 功能，请使用通用 `DisableAi` 策略。
 
-## Seeing which policies are in effect
+## 查看当前生效的策略
 
-Open **Tools > Preferences > Tabular Editor > Updates and Feedback**. When any policy is set, a **Managed by your organization** section lists every value Tabular Editor found, the value itself and which registry key and hive it came from. A value Tabular Editor could not interpret is marked _(invalid)_, which is the quickest way to find a typo in a policy that appears to have no effect.
+打开 **工具 > 偏好 > Tabular Editor > 更新和反馈**。当设置了任意策略时，**由你的组织管理**部分会列出 Tabular Editor 找到的每个值、该值本身，以及它来自哪个注册表项和注册表配置单元。 Tabular Editor 无法解释的值会标记为 _(无效)_，这是找出看似没有效果的策略中拼写错误的最快方法。
 
-Controls that a policy has locked or limited elsewhere in **Preferences**, and in the **Tools > MCP Server...** dialog, are shown read-only and carry a tooltip saying the setting is controlled by your organization's policy.
+在 **偏好** 的其他位置，以及 **工具 > MCP Server...** 对话框中，凡是被策略锁定或限制的控件都会显示为只读，并带有工具提示，说明该设置由你的组织策略控制。
 
-## Using the administrative templates
+## 使用管理模板
 
-Tabular Editor 3.27 and newer install a Group Policy administrative template pair, so the policies above can be set from the Group Policy editor instead of by editing the registry. You will find them in the `Policies` folder of the installation folder, which by default is `C:\Program Files\Tabular Editor 3\Policies`:
+Tabular Editor 3.27 及更高版本会安装一对组策略管理模板，因此可在组策略编辑器中设置上述策略，而不必直接编辑注册表。你可以在安装目录下的 `Policies` 文件夹中找到它们，默认路径为 `C:\Program Files\Tabular Editor 3\Policies`：
 
 - `TabularEditorApS.admx`
 - `en-US\TabularEditorApS.adml`
 
-To use them on a single machine, copy both files into `%SystemRoot%\PolicyDefinitions`, keeping the `en-US` folder structure:
+若要在单台计算机上使用它们，请将这两个文件复制到 `%SystemRoot%\PolicyDefinitions`，并保留 `en-US` 文件夹结构：
 
 ```
 C:\Windows\PolicyDefinitions\TabularEditorApS.admx
 C:\Windows\PolicyDefinitions\en-US\TabularEditorApS.adml
 ```
 
-To use them across a domain, copy them into the central store on a domain controller instead, keeping the same structure:
+若要在整个域中使用它们，请改为将它们复制到域控制器上的中央存储，并保留相同的目录结构：
 
 ```
 \\<your-domain>\SYSVOL\<your-domain>\Policies\PolicyDefinitions\TabularEditorApS.admx
 \\<your-domain>\SYSVOL\<your-domain>\Policies\PolicyDefinitions\en-US\TabularEditorApS.adml
 ```
 
-Then open the Local Group Policy Editor (`gpedit.msc`) or the Group Policy Management Editor, and look under:
+然后打开本地组策略编辑器 (`gpedit.msc`) 或组策略管理编辑器，并查看以下位置：
 
-- **Computer Configuration > Administrative Templates > Tabular Editor** for machine-wide policies
-- **User Configuration > Administrative Templates > Tabular Editor** for per-user policies
+- 整台计算机范围的策略：**计算机配置 > 管理模板 > Tabular Editor**
+- 按用户生效的策略位于 **用户配置 > 管理模板 > Tabular Editor** 下
 
-Policies shared by Tabular Editor 3 and the CLI sit directly under **Tabular Editor**. Policies Tabular Editor 3 honors alone are under **Tabular Editor > Tabular Editor 3**, with the AI Assistant, the MCP server and the DAX Optimizer integration in subfolders of their own.
+Tabular Editor 3 与 CLI 共用的策略直接位于 **Tabular Editor** 下。仅 Tabular Editor 3 会遵循的策略位于 **Tabular Editor > Tabular Editor 3** 下；AI 助手、MCP 服务器和 DAX优化器集成则分别位于各自的子文件夹中。
 
-Setting a policy to **Enabled** writes its registry value. Setting it to **Disabled**, or leaving it **Not configured**, means the policy is not enforced. The templates do not write to the legacy `Kapacity\Tabular Editor` key, so set that key by hand if a policy also has to reach Tabular Editor 2.
+将策略设置为 **已启用** 会写入其注册表值。将其设置为 **已禁用**，或保留为 **未配置**，表示该策略不会被强制执行。这些模板不会写入旧版 `Kapacity\Tabular Editor` 键，因此如果某项策略还需要作用于 Tabular Editor 2，请手动设置该键。
 
-For the Enterprise policies, **Disabled** removes the registry value rather than writing a `0`. That is deliberate: an Enterprise value being present at all is what puts the AI Assistant and the MCP server behind the Enterprise license check, so a policy an administrator has just turned off must not leave a value behind.
+对于企业版策略，**已禁用** 会删除注册表值，而不是写入 `0`。这是刻意设计的：只要存在任何企业版相关的值，AI 助手和 MCP 服务器就会受到企业版许可证检查，因此管理员刚关闭的策略不能遗留任何值。
 
 ## 禁用 Web 通信
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, `DisableDaxOptimizer`, `DisableDaxPackageManager` and `DisableAi` policies.
+如果希望确保 Tabular Editor 不会发起任何 Web 请求，请设置 `DisableUpdates`、`DisableBpaDownload`、`DisableWebDaxFormatter`、`DisableErrorReports`、`DisableTelemetry`、`DisableDaxOptimizer`、`DisableDaxPackageManager` 和 `DisableAi` 策略。
 
 > [!NOTE]
-> 即使已指定上述策略，Tabular Editor 3 仍会偶尔向 `https://api.tabulareditor.com` 发起请求，用于许可证验证。 If Tabular Editor 3 is not able to reach this endpoint (due to a firewall or proxy), the user will have to [manually activate](xref:installation-activation-basic#manual-activation-no-internet) the product every 30 days.
+> 即使已指定上述策略，Tabular Editor 3 仍会偶尔向 `https://api.tabulareditor.com` 发起请求，用于许可证验证。如果 Tabular Editor 3 无法访问此终结点（例如由于防火墙或代理），用户就必须每 30 天为该产品执行一次[手动激活](xref:installation-activation-basic#manual-activation-no-internet)。
 
 ## 禁用自定义脚本
 
 如果你想确保 Tabular Editor 不允许用户执行任意代码，请指定 `DisableCSharpScripts` 和 `DisableMacros` 策略。
 
-If scripting is something your organization wants to keep, but not at the cost of letting any script reach the file system, the network or another program, use `BlockUnsafeScripts` instead. Scripts and macros keep working against the model, and only the parts that leave it are refused. That policy requires Enterprise Edition; the two above apply in every edition.
+如果贵组织希望保留脚本功能，但不希望任何脚本访问文件系统、网络或其他程序，请改用 `BlockUnsafeScripts`。脚本和宏仍可对模型执行操作，只有超出模型范围的部分会被拒绝。该策略需要企业版；上面两项则适用于所有版本。
 
 ## 禁用 AI 功能
 
-If you want to prevent all AI functionality, specify the `DisableAi` policy. This prevents anything AI-related from loading at startup and clears any stored API key configuration. It applies in every edition and needs no Enterprise license.
+如果希望禁用所有 AI 功能，请设置 `DisableAi` 策略。这会阻止任何与 AI 相关的内容在启动时加载，并清除任何已存储的 API 密钥配置。它适用于所有版本，无需企业版许可证。
 
-From 3.27.0 the installer reads the policy too, from all six keys and with the same precedence, and leaves the AI component out entirely, so the AI assemblies are never written to the installation folder on a machine whose policy disables AI. Set the value as a `REG_DWORD` of `1`: the installer treats `1` as _disable_ and any other present value as _not disabled_, where the application accepts any non-zero number. See [Deploying without the AI features](xref:installation-activation-basic#deploying-without-the-ai-features) for deploying the feature selection and the policy together.
+从 3.27.0 开始，安装程序也会按相同的优先级从全部六个键读取该策略，并完全省略 AI 组件；因此，对于策略禁用了 AI 的计算机，AI 程序集永远不会写入其安装文件夹。将该值设置为 `1` 的 `REG_DWORD`：安装程序将 `1` 视为 _禁用_，将任何其他已存在的值视为 _未禁用_；而应用程序则接受任何非零值。有关同时部署功能选择和该策略的信息，请参阅[不带 AI 功能进行部署](xref:installation-activation-basic#deploying-without-the-ai-features)。
 
-To keep the AI Assistant available but confine what it may do, use the Enterprise policies above instead: set the permission limits to what your organization is comfortable with, lock the provider and endpoint to a gateway you operate, and use `McpDisabledTools` to withhold individual tools from connected agents.
+若要保留 AI 助手但限制其可执行的操作，请改用上述企业版策略：将权限上限设置为贵组织可接受的范围，将提供程序和终结点锁定到由贵方运营的 Gateway，并使用 `McpDisabledTools` 为已连接的代理禁用特定工具。
