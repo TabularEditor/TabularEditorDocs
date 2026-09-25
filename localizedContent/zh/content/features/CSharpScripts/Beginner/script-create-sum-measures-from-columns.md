@@ -22,31 +22,31 @@ applies_to:
 ### 从列创建度量值
 
 ```csharp
-// 为当前选中的每一列创建一个 SUM 度量值，并隐藏该列。
+// Creates a SUM measure for every currently selected column and hide the column.
 foreach(var c in Selected.Columns)
 {
     var newMeasure = c.Table.AddMeasure(
-        "求和 " + c.Name,                    // 名称
-        "SUM(" + c.DaxObjectFullName + ")",    // DAX 表达式
-        c.DisplayFolder                        // 显示文件夹
+        "Sum of " + c.Name,                    // Name
+        "SUM(" + c.DaxObjectFullName + ")",    // DAX expression
+        c.DisplayFolder                        // Display Folder
     );
     
-    // 为新度量值设置格式：
+    // Set the format string on the new measure:
     newMeasure.FormatString = "0.00";
 
-    // 添加说明：
-    newMeasure.Description = "此度量值为列 " + c.DaxObjectFullName + " 的总和";
+    // Provide some documentation:
+    newMeasure.Description = "This measure is the sum of column " + c.DaxObjectFullName;
 
-    // 隐藏基础列：
+    // Hide the base column:
     c.IsHidden = true;
 }
 ```
 
 ### 说明
 
-此代码片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数在表上创建新的度量值。我们使用 `DaxObjectFullName` 属性获取列的完全限定名称，用于 DAX 表达式：`'TableName'[ColumnName]`。
+这个片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数，在表中创建一个新的度量值。 We use the `DaxObjectFullName` property to get the fully qualified name of the column for use in the DAX expression: `'TableName'[ColumnName]`.
 
-## 示例输出
+## 输出示例
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/create-sum-measures-from-columns.png" alt="Example of measures created with the script" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 使用此脚本创建的度量值示例。</figcaption>
