@@ -1,6 +1,6 @@
 ---
 uid: connect-onelake
-title: Conectar con Fabric y OneLake
+title: Connect to Fabric and OneLake
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,27 +17,27 @@ applies_to:
           full: true
 ---
 
-# Conectar con Fabric y OneLake
+# Connect to Fabric and OneLake
 
-Tabular Editor se conecta a Microsoft Fabric para listar los Workspaces y los elementos de Lakehouse, Warehouse y otros que hay en ellos, y para importar desde OneLake.
+Tabular Editor connects to Microsoft Fabric to list workspaces and the Lakehouse, Warehouse and other items in them, and to import from OneLake.
 
-![El cuadro de diálogo Conectar a un Lakehouse, que enumera elementos del catálogo de OneLake por nombre, tipo, propietario y ubicación](~/content/assets/images/features/connectivity/onelake-connection.png)
+![The Connect to a Lakehouse dialog, listing OneLake catalog items by name, type, owner and location](~/content/assets/images/features/connectivity/onelake-connection.png)
 
-## Métodos de autenticación
+## Authenticators
 
-Fabric y OneLake usan Microsoft Entra ID para autenticarse. El inicio de sesión interactivo es la opción predeterminada y cubre el trabajo habitual de modelado. Para una actualización sin supervisión, usa una entidad de servicio y concédele acceso al Workspace en Fabric.
+Fabric and OneLake authenticate with Microsoft Entra ID. Signing in interactively is the default and covers ordinary modelling work. For an unattended refresh, use a service principal and grant it access to the workspace in Fabric.
 
-Los permisos de Fabric se conceden en Fabric, no en Tabular Editor. Una cuenta que puede iniciar sesión pero no ve ningún Workspace no tiene acceso a ellos, por lo que es una cuestión de permisos de Fabric y no un problema de conexión.
+Fabric permissions are granted in Fabric, not in Tabular Editor. An account that can sign in but sees no workspaces has not been given access to them, which is a Fabric permissions question rather than a connection problem.
 
 ## Direct Lake
 
-Un modelo Direct Lake lee desde OneLake en lugar de importar datos, por lo que la conexión forma parte del modelo y no de un paso de importación. Consulta @direct-lake-sql-model.
+A Direct Lake model reads from OneLake rather than importing, so the connection is part of the model rather than an import step. See @direct-lake-sql-model.
 
 > [!NOTE]
-> Cuando no se puede determinar el punto de conexión de análisis SQL de un Lakehouse o Warehouse, Tabular Editor lo indica en lugar de crear una tabla sin columnas. Si ves ese error, comprueba que el elemento haya terminado de aprovisionar su punto de conexión en Fabric.
+> Where the SQL analytics endpoint of a Lakehouse or Warehouse cannot be determined, Tabular Editor reports that rather than creating a table with no columns. If you see that error, check that the item has finished provisioning its endpoint in Fabric.
 
-## Dónde se almacenan las credenciales
+## Where the credentials are stored
 
-Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se incluyen en el control de código fuente, y un compañero que abra el mismo modelo tendrá que proporcionar las suyas.
+Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
 
-La expresión M generada solo incluye el nombre del servidor y del objeto. Nunca contiene una contraseña, un token o una clave.
+The generated M expression names the server and the object only. It never contains a password, a token or a key.
