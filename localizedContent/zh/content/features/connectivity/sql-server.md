@@ -1,6 +1,6 @@
 ---
 uid: connect-sql-server
-title: 连接到 SQL Server
+title: Connect to SQL Server
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,35 +17,35 @@ applies_to:
           full: true
 ---
 
-# 连接到 SQL Server
+# Connect to SQL Server
 
-涵盖 SQL Server、Azure SQL Database、Azure SQL Managed Instance 和 Azure Synapse。从 **模型 > 导入表...** 开始，然后选择 SQL Server 数据源。
+Covers SQL Server, Azure SQL Database, Azure SQL Managed Instance and Azure Synapse. Start from **Model > Import tables...** and choose a SQL Server source.
 
-![“连接到 SQL Server”对话框，其中已在“身份验证”列表中选择“Azure Active Directory - 通用，启用 MFA”](~/content/assets/images/features/connectivity/sql-server-connection.png)
+![The Connect to SQL Server dialog, with Azure Active Directory - Universal with MFA chosen in the Authentication list](~/content/assets/images/features/connectivity/sql-server-connection.png)
 
-## 身份验证方式
+## Authenticators
 
-| 身份验证                                   | 需要提供的内容         | 说明                                   |
-| -------------------------------------- | --------------- | ------------------------------------ |
-| **SQL Server 身份验证**                    | 用户名和密码          | 由服务器本身定义的登录名，而非目录中的账户                |
-| **Windows 身份验证**                       | 无需提供            | 使用 Tabular Editor 当前运行所用的 Windows 账户 |
-| **Azure Active Directory - 通用，启用 MFA** | 通过浏览器登录         | 这是唯一会弹出交互提示的方式。用于交互式操作，不适用于计划任务      |
-| **Azure Active Directory - 密码**        | 用户名和密码          | 目录账户。如果该账户需要多重身份验证，此方式将无法使用          |
-| **Azure Active Directory - 集成**        | 无               | 使用你用于登录 Windows 的目录帐户，前提是该计算机已加入该目录  |
-| **Azure Active Directory - 服务主体**      | 应用程序（客户端）ID 和密钥 | 通常用于无人值守刷新                           |
+| 身份验证                                            | What you supply                                       | 说明                                                                                                         |
+| ----------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **SQL Server Authentication**                   | User name and password                                | A login defined on the server itself, not in your directory                                                |
+| **Windows Authentication**                      | Nothing                                               | Uses the Windows account Tabular Editor is running as                                                      |
+| **Azure Active Directory - Universal with MFA** | A browser sign-in                                     | The only mode that prompts. Use it for interactive work, not for a scheduled job           |
+| **Azure Active Directory - Password**           | User name and password                                | A directory account. Fails where the account requires multi-factor authentication          |
+| **Azure Active Directory - Integrated**         | Nothing                                               | Uses the directory account you are signed in to Windows with, where the machine is joined to the directory |
+| **Azure Active Directory - Service Principal**  | Application (client) ID and secret | The usual choice for unattended refresh                                                                    |
 
-两种集成模式都不需要用户名或密码，选择其中一种时，Tabular Editor 会清空这两个字段。
+The two integrated modes take no user name or password, and Tabular Editor clears both fields when you select one.
 
-## 加密
+## Encryption
 
-**加密连接**用于控制连接是否必须使用 TLS。 Azure SQL 要求启用此项。除非你要连接到没有证书的本地服务器，否则请保持开启。若连接到无证书服务器，连接会因证书错误而失败，直到你安装证书或将其关闭。
+**Encrypt connection** controls whether the connection requires TLS. Azure SQL requires it. Leave it on unless you are connecting to an on-premises server with no certificate, in which case the connection fails with a certificate error until you either install a certificate or turn this off.
 
-## 保存密码
+## Saving the password
 
-**保存密码**会保存该密码，供下次使用。如果取消勾选，下次模型需要该数据源时会再次提示你输入。
+**Save password** stores the password for next time. With it cleared, you are asked again the next time the model needs the source.
 
-## 凭据的存储位置
+## Where the credentials are stored
 
-你在此处输入的凭据会按用户、按模型保存在模型旁的 [用户选项](xref:user-options) 文件（`.tmuo`）中，并经过加密，只有你的 Windows 账户可以读取。它们不是模型元数据的一部分，因此不会提交到源代码管理；同事打开同一模型时需要输入自己的凭据。
+Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
 
-生成的 M 表达式只会包含服务器和对象的名称。其中绝不会包含密码、令牌或密钥。
+The generated M expression names the server and the object only. It never contains a password, a token or a key.
