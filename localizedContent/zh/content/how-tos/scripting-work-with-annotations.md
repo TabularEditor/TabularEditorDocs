@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用注释和扩展属性
 
-注释是纯信息性的元数据，不会影响模型的行为。它们对自动化和脚本编写非常有用。扩展属性旨在用于需要特定支持的客户端工具扩展。例如，Power BI 中的字段参数依赖扩展属性，因此此功能仅限 Power BI。
+Annotations are informational-only metadata with no impact on model behavior. They are useful for automation and scripting. Extended properties are intended for client tool extensions that require specific support. For example, field parameters in Power BI depend on extended properties, which is why this feature is Power BI-only.
 
 ## 快速参考
 
@@ -39,7 +39,7 @@ obj.ExtendedProperties                      // ExtendedPropertyCollection (index
 
 ## 设置和读取注释
 
-任何实现 (xref:TabularEditor.TOMWrapper.IAnnotationObject) 接口的对象都支持注释。其中包括表、列、度量值、层次结构、分区、透视、角色、数据源以及关系。
+任何实现 (xref:TabularEditor.TOMWrapper.IAnnotationObject) 接口的对象都支持注释。 This includes tables, columns, measures, hierarchies, partitions, perspectives, roles, data sources and relationships.
 
 为自动生成的度量值添加标记，以便后续脚本识别并更新它们：
 
@@ -79,7 +79,7 @@ Model.AllMeasures
 
 ## 遍历对象上的所有注释
 
-`GetAnnotations()` 返回所有注释的名称。使用 `GetAnnotation(name)` 获取值。
+`GetAnnotations()` 返回所有注释的名称。 Use `GetAnnotation(name)` to retrieve values.
 
 ```csharp
 foreach (var name in m.GetAnnotations())
@@ -140,15 +140,15 @@ var val = table.ExtendedProperties["key"];
 
 在 BPA 规则表达式中，可以直接对上下文中的对象调用注释方法。
 
-| C# Script                           | Dynamic LINQ (BPA) |
-| ----------------------------------- | ------------------------------------- |
-| `m.GetAnnotation("key") == "value"` | `GetAnnotation("key") = "value"`      |
-| `m.HasAnnotation("key")`            | `HasAnnotation("key")`                |
-| `m.GetAnnotation("key") != null`    | `GetAnnotation("key") != null`        |
-| `m.GetAnnotationsCount() > 0`       | `GetAnnotationsCount() > 0`           |
+| C# Script                           | Dynamic LINQ（BPA）                |
+| ----------------------------------- | -------------------------------- |
+| `m.GetAnnotation("key") == "value"` | `GetAnnotation("key") = "value"` |
+| `m.HasAnnotation("key")`            | `HasAnnotation("key")`           |
+| `m.GetAnnotation("key") != null`    | `GetAnnotation("key") != null`   |
+| `m.GetAnnotationsCount() > 0`       | `GetAnnotationsCount() > 0`      |
 
 ## 另见
 
-- @实用脚本片段
+- @useful-script-snippets
 - @create-field-parameter
 - @how-to-navigate-tom-hierarchy
