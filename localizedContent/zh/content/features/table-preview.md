@@ -1,6 +1,6 @@
 ---
 uid: table-preview
-title: 表格预览
+title: Table Preview
 author: Morten Lønskov
 updated: 2026-09-14
 applies_to:
@@ -17,77 +17,77 @@ applies_to:
           full: true
 ---
 
-# 表格预览
+# Table Preview
 
-**表格预览** 会逐行显示单个表的内容，无需编写查询。在 @tom-explorer-view 中右键单击表并选择 **预览数据**，或选中该表后按 **Ctrl+R**。
+A **Table Preview** shows the contents of one table, row by row, without writing a query. Right-click a table in the @tom-explorer-view and choose **Preview data**, or select the table and press **Ctrl+R**.
 
 ![预览数据](~/content/assets/images/preview-data-big.png)
 
-你可以同时打开多个表的预览，并按自己的需要任意排列。每个预览都是普通文档，因此可以停靠、浮动，或移到第二台显示器上。
+You can open a preview of several tables at once and arrange them however you like. Each preview is an ordinary document, so it can be docked, floated or moved to a second monitor.
 
-## 查看网格
+## Reading the grid
 
-Tabular Editor 会执行一个 DAX 查询，只返回当前视图可显示的行数；随着你滚动，会再分页加载更多行。可滚动的范围取决于存储模式和引擎：
+Tabular Editor executes a DAX query that returns only as many rows as the view can show, then pages in more as you scroll. How far you can scroll depends on the storage mode and the engine:
 
-| 表                                                          | 滚动                                    |
-| ---------------------------------------------------------- | ------------------------------------- |
-| 导入模式：在支持 [`WINDOW`](https://dax.guide/window) 的引擎上，且该表具有主键 | 整个表。分页会基于主键使用 `WINDOW`                |
-| 导入模式，不支持 `WINDOW` 或该表没有主键                                  | 仅显示前几行；预览中会说明已禁用滚动                    |
-| DirectQuery                                                | 仅显示前几行，最多到 **行数限制** 偏好设置的上限；提示信息会说明原因 |
+| 表                                                                                                          | Scrolling                                                                                      |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Import, on an engine that supports [`WINDOW`](https://dax.guide/window), where the table has a primary key | The full table. Paging uses `WINDOW` against the primary key                   |
+| Import, without `WINDOW` support or without a primary key                                                  | The first rows only; the preview says that scrolling is disabled                               |
+| DirectQuery                                                                                                | The first rows only, up to the **Row limit** preference; an informational message explains why |
 
-预览元数据会在当前会话中缓存，因此重新打开预览时不会再次查询服务器。例如，如果模型是在 Tabular Editor 外部处理的，可以使用 **刷新预览** 重新读取预览内容。
+Preview metadata is cached for the session, so reopening a preview does not re-query the server. Use **Refresh Preview** to re-read it if for example the model has been processed outside Tabular Editor.
 
-如果某个计算列处于无效状态，其单元格会显示 _(需要计算)_。使用工具栏上的 **计算表格**，或在列的右键菜单中选择 **重新计算表格...**，即可将其更新到最新状态。
+If a calculated column is in an invalid state, its cells read _(Calculation needed)_. Use **Calculate Table** on the toolbar, or **Recalculate table...** on the column's right-click menu, to bring it up to date.
 
 ![重新计算表格](~/content/assets/images/recalculate-table.png)
 
-## 列顺序
+## Column order
 
-默认情况下，列会按引擎返回的顺序显示，这大致就是内部列顺序，因此看起来往往比较随意。在 @preferences 中勾选 _按字母顺序排序表格预览列_，即可让它们改为按 TOM Explorer 使用的相同顺序排列。
+By default, columns appear in the order the engine returns them, which is roughly internal column order and often looks arbitrary. Tick _Sort table preview columns alphabetically_ under @preferences to have them follow the same order the TOM Explorer uses instead.
 
-## 在宽表中查找列
+## Finding a column in a wide table
 
-在 @tom-explorer-view 中选择某一列时，预览会滚动到该列并将其高亮显示。该功能默认开启。你可以在工具栏上取消 **跟踪所选列**，仅对单个预览关闭；也可以在 @偏好 中为所有预览关闭。
+Selecting a column in the @tom-explorer-view scrolls the preview to that column and highlights it. This is on by default and can be turned off for a single preview with **Track selected column** on the toolbar, or for every preview under @preferences.
 
-## 工具栏
+## Toolbar
 
-**表格预览** 工具栏和对应的 **表格预览** 菜单包含相同的命令：
+The **Table Preview** toolbar and the matching **Table Preview** menu carry the same commands:
 
-| 命令                                                          | 作用                                                 |
-| ----------------------------------------------------------- | -------------------------------------------------- |
-| **身份模拟...** | 选择预览查询运行时使用的身份，以查看特定用户会看到的数据                       |
-| **刷新预览**                                                    | 重新读取该表，并丢弃缓存的元数据                                   |
-| **自动刷新**                                                    | 每当已部署的模型发生更改时，自动刷新此预览。新建预览的默认设置来自 @偏好 |
-| **跟踪所选列**                                                   | 如上所述，跟随 TOM Explorer 中的列选择                         |
-| **计算表格**                                                    | 重新计算该表的计算列                                         |
+| 命令                                                                   | What it does                                                                                                                                                          |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Impersonation...** | Choose the identity the preview query runs as, to see the data a particular user would see                                                                            |
+| **Refresh Preview**                                                  | Re-read the table, discarding cached metadata                                                                                                                         |
+| **Auto-refresh**                                                     | Refresh this preview automatically whenever changes are made to the deployed model. The default for new previews comes from @preferences |
+| **Track selected column**                                            | Follow the TOM Explorer's column selection, as described above                                                                                                        |
+| **Calculate Table**                                                  | Recalculate the table's calculated columns                                                                                                                            |
 
-## 右键菜单
+## Right-click menu
 
-除了标准网格命令（排序、筛选、自动调整列宽、列选择器）之外，预览网格还增加了：
+On top of the standard grid commands (sorting, filtering, best fit, column chooser), the preview grid adds:
 
-| 命令                                                                 | 显示位置        | 作用                                                |
-| ------------------------------------------------------------------ | ----------- | ------------------------------------------------- |
-| **锁定列宽**                                                           | 列标题         | 防止在滚动并分页加载更多行时，网格自动重新调整列宽                         |
-| **编辑表达式...**       | 计算列的列标题     | 在 **表达式编辑器** 中打开该列的 DAX 表达式                       |
-| **重新计算计算表格...**    | 未保持最新的计算列标题 | 重新计算该表格                                           |
-| **显示实际 DAX 查询...** | 网格中的任意位置    | 打开一个新的可编辑 [DAX 查询](xref:dax-query) 文档，其中包含生成预览的查询 |
+| 命令                                                                           | Where it appears                                     | What it does                                                                                       |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Lock column widths**                                                       | Column header                                        | Stops the grid resizing columns as you scroll and page in more rows                                |
+| **Edit expression...**       | Header of a calculated column                        | Opens that column's DAX expression in the **Expression Editor**                                    |
+| **Recalculate table...**     | Header of a calculated column that is not up to date | Recalculates the table                                                                             |
+| **Show actual DAX query...** | Anywhere in the grid                                 | Opens a new, editable [DAX query](xref:dax-query) document containing the query behind the preview |
 
-### 显示实际 DAX 查询
+### Show actual DAX query
 
-**显示实际 DAX 查询...** 会提取预览当前正在运行的查询，包括你在网格中应用的所有筛选和排序，对其进行格式化，并将其作为新的 DAX 查询文档打开。系统不会自动执行它；准备好后，编辑并运行即可。
+**Show actual DAX query...** takes the query the preview is running, including whatever filter and sort you have applied in the grid, formats it and opens it as a new DAX Query document. It is not executed for you; edit it and run it when you are ready.
 
-我们有意省略了分页封装，因此你拿到的是针对当前正在查看的数据的查询，而不是只针对当前一屏数据的查询。
+The paging wrappers are deliberately left out, so what you get is the query over the data you are looking at rather than the query over one screenful of it.
 
 > [!NOTE]
-> **DAX 查询** 视图在其结果网格上也有一个同名命令，但它的作用不同：它会在只读窗口中显示上次执行的查询，而不是打开一个新文档。
+> The **DAX Query** view has a command of the same name on its results grid, but it does something different: it shows the last executed query in a read-only window rather than opening a new document.
 
-## 筛选
+## Filtering
 
-每个列标题都有一个筛选下拉菜单，列出该列的不同值。对于具有许多不同值的列，该列表会按 _Max 限制。过滤器下拉列表中的值数_ 限制，位于 @preferences 下，默认值为 5,000。超过上限的值不会列出，也无法直接勾选。如果需要这些值，可以提高上限，但请注意，打开下拉菜单时会运行开销更大的查询。
+Each column header carries a filter dropdown listing the column's distinct values. On a column with many distinct values the list is capped by _Max. values in filter dropdown_ under @preferences, 5,000 by default. Values beyond the cap are not listed and cannot be ticked directly. Raise the cap if you need them, bearing in mind that opening the dropdown then runs a heavier query.
 
 ## 偏好设置
 
-本页提到的所有设置都位于 **工具 > 偏好 > 数据浏览 > 表格预览** 下。完整列表请参见 @preferences。
+Every setting mentioned on this page lives under **Tools > Preferences > Data Browsing > Table Preview**. See @preferences for the full list.
 
 ## 后续步骤
 
