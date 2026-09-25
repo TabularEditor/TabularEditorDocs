@@ -17,7 +17,7 @@ No es raro que una organización tenga varios modelos tabulares, con un solapami
 
 Para simplificar, consideremos el modelo de ejemplo AdventureWorks:
 
-![image](~/content/assets/images/master-model-pattern-01.png)
+![imagen](~/content/assets/images/master-model-pattern-01.png)
 
 Supongamos que, por alguna razón, hay que desplegar todo lo relacionado con Internet Sales como un modelo y todo lo relacionado con Reseller Sales como otro. Puede ser por motivos de seguridad, rendimiento, escalabilidad o incluso porque tu equipo da servicio a varios clientes externos y cada cliente necesita su propia copia del modelo, con funcionalidad tanto compartida como específica.
 
@@ -27,7 +27,7 @@ En lugar de mantener una rama de desarrollo para cada una de las versiones, la t
 
 La idea es bastante simple. Empieza agregando varias perspectivas nuevas al modelo, en función del número de modelos de destino que necesites implementar. Asegúrate de anteponer un prefijo coherente a estas perspectivas para separarlas de las perspectivas orientadas al usuario:
 
-![image](~/content/assets/images/master-model-pattern-02.png)
+![imagen](~/content/assets/images/master-model-pattern-02.png)
 
 Aquí usamos el signo `-` como prefijo en los nombres de las perspectivas. Más adelante veremos cómo se eliminan estas perspectivas del modelo, de modo que los usuarios finales no las vean. Solo las usan los desarrolladores del modelo.
 
@@ -71,11 +71,11 @@ Te recomiendo guardar este script como una acción personalizada a nivel de mode
 
 Por cierto, si quieres hacer una copia de una perspectiva, ya puedes hacerlo desde la IU. Haz clic en el nodo "perspectivas" del árbol del explorador y, después, haz clic en el botón de puntos suspensivos de la cuadrícula de propiedades:
 
-![image](~/content/assets/images/master-model-pattern-03.png)
+![imagen](~/content/assets/images/master-model-pattern-03.png)
 
 Esto abrirá un cuadro de diálogo que te permite crear y eliminar perspectivas, así como clonar las existentes:
 
-![image](~/content/assets/images/master-model-pattern-04.png)
+![imagen](~/content/assets/images/master-model-pattern-04.png)
 
 Para complementar esto, aquí tienes un script que elimina de una perspectiva todos los objetos invisibles y sin uso, por si necesitas hacer un poco de limpieza:
 
@@ -138,9 +138,9 @@ Para las medidas, hacemos lo mismo, pero de forma simplificada: solo quitamos la
 - La medida está oculta (o la tabla donde se encuentra la medida está oculta)
 - No se hace referencia a la medida, directa ni indirectamente, en ninguna expresión DAX de otros objetos visibles de la perspectiva
 
-Si trabajas en un equipo de desarrolladores en el modelo, ya deberías estar usando la funcionalidad ["Guardar en carpeta"](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Make sure to check the "Serialize perspectives per-object" option under **Tools > Preferences > File Formats > Save-to-folder** (**File > Preferences > Save to Folder** in Tabular Editor 2), to avoid getting heaps of merge conflicts on your perspective definitions.
+Si trabajas en un equipo de desarrolladores en el modelo, ya deberías estar usando la funcionalidad ["Guardar en carpeta"](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Asegúrate de marcar la opción "Serializar perspectivas por objeto" en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** (**Archivo > Preferencias > Guardar en carpeta** en Tabular Editor 2) para evitar muchos conflictos de fusión en las definiciones de tus perspectivas.
 
-![image](~/content/assets/images/master-model-pattern-05.png)
+![imagen](~/content/assets/images/master-model-pattern-05.png)
 
 ## Añadir un control más granular
 
@@ -152,7 +152,7 @@ Algunos objetos, como las perspectivas, los Data sources y los roles, no se incl
 
 Así que vamos a añadir una nueva anotación llamada "DevPerspectives" en cada una de las 3 perspectivas originales, y simplemente proporcionaremos los nombres de las perspectivas de desarrollador como una cadena separada por comas:
 
-![image](~/content/assets/images/master-model-pattern-06.png)
+![imagen](~/content/assets/images/master-model-pattern-06.png)
 
 Cuando agregues nuevas perspectivas de _usuario_ al modelo, recuerda añadir la misma anotación y proporcionar los nombres de las perspectivas de desarrollador en las que quieres que se incluya la perspectiva de _usuario_. Cuando más adelante generemos mediante scripting las versiones finales del modelo, usaremos la información de estas anotaciones para incluir las perspectivas necesarias. Podemos hacer lo mismo con los Data sources y los roles.
 
@@ -160,7 +160,7 @@ Cuando agregues nuevas perspectivas de _usuario_ al modelo, recuerda añadir la 
 
 También puede haber situaciones en las que la misma medida deba tener expresiones o cadenas de formato ligeramente distintas entre las diferentes versiones del modelo. De nuevo, podemos usar anotaciones para proporcionar los metadatos por perspectiva de desarrollador y, luego, aplicar esos metadatos cuando generemos mediante scripting el modelo final.
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) script function. Sin embargo, para nuestro caso de uso es un poco excesivo, así que vamos a especificar directamente qué propiedades queremos guardar como anotaciones. Crea el siguiente script:
+La forma más sencilla de serializar todas las propiedades de los objetos en texto probablemente sea la función de script [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file). Sin embargo, para nuestro caso de uso es un poco excesivo, así que vamos a especificar directamente qué propiedades queremos guardar como anotaciones. Crea el siguiente script:
 
 ```csharp
 foreach(var m in Selected.Measures) { 
@@ -172,7 +172,7 @@ foreach(var m in Selected.Measures) {
 
 A continuación, guárdalo como una acción personalizada llamada "Save Metadata as Annotations":
 
-![image](~/content/assets/images/master-model-pattern-07.png)
+![imagen](~/content/assets/images/master-model-pattern-07.png)
 
 Del mismo modo, guarda el siguiente script como una acción personalizada llamada "Load Metadata from Annotations":
 
@@ -189,7 +189,7 @@ La idea es crear una anotación para cada una de las propiedades de las que quer
 
 Usa tus nuevas acciones personalizadas para aplicar cambios específicos de la versión del modelo a las perspectivas del desarrollador (o añade las anotaciones a mano). Por ejemplo, en nuestro ejemplo de Adventure Works, queremos que la medida [Day Count] tenga una expresión diferente en la perspectiva $ResellerModel; para ello, aplicamos los cambios a la medida y ejecutamos la acción "Save Metadata as Annotations" con la perspectiva "$ResellerModel" seleccionada en el desplegable:
 
-![image](~/content/assets/images/master-model-pattern-08.png)
+![imagen](~/content/assets/images/master-model-pattern-08.png)
 
 En la captura anterior, tenemos 3 anotaciones para cada una de las perspectivas del desarrollador. Sin embargo, en la práctica solo tendríamos que crear estas anotaciones para aquellas perspectivas del desarrollador en las que las propiedades deban diferir de sus valores originales.
 
@@ -197,15 +197,15 @@ En la captura anterior, tenemos 3 anotaciones para cada una de las perspectivas 
 
 Podemos usar una técnica similar para aplicar cambios a las consultas de partición entre las distintas versiones. Por ejemplo, quizá quieras criterios SQL `WHERE` distintos en algunas consultas de partición según la versión. Empecemos creando un conjunto de nuevas anotaciones en nuestros objetos de _tabla_ para especificar la consulta SQL base que queremos que usen nuestras particiones para cada versión. Aquí, por ejemplo, queremos restringir qué registros se incluyen en la tabla Product en dos de nuestras tres versiones:
 
-![image](~/content/assets/images/master-model-pattern-09.png)
+![imagen](~/content/assets/images/master-model-pattern-09.png)
 
 En las tablas que tienen varias particiones, especifica los criterios WHERE mediante "marcadores de posición", que se reemplazarán más adelante:
 
-![image](~/content/assets/images/master-model-pattern-10.png)
+![imagen](~/content/assets/images/master-model-pattern-10.png)
 
 Define los valores de los marcadores de posición dentro de cada partición (nota: debes usar [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) o una versión posterior para editar las anotaciones de partición desde la interfaz de usuario):
 
-![image](~/content/assets/images/master-model-pattern-11.png)
+![imagen](~/content/assets/images/master-model-pattern-11.png)
 
 En escenarios de particionado dinámico, no olvides incluir estas anotaciones en el script que uses al crear las nuevas particiones. En la siguiente sección, veremos cómo aplicar estos valores de los marcadores de posición durante la implementación.
 
@@ -283,7 +283,7 @@ foreach(Table t in Model.Tables) {
 
 Ten en cuenta que también podríamos añadir cambios específicos adicionales del modelo directamente a este script si quisiéramos, pero el objetivo de este ejercicio era ver cómo podemos mantener varios modelos directamente desde Tabular Editor. El script anterior es el mismo, independientemente de la versión que queramos desplegar (salvo, por supuesto, la línea 1).
 
-Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](xref:command-line-options):
+Por último, podemos cargar nuestro archivo Model.bim, ejecutar el script y desplegar el modelo modificado de una sola vez utilizando la siguiente [sintaxis de línea de comandos](xref:command-line-options):
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ResellerModel.cs -D localhost AdventureWorksReseller -O -R
@@ -300,7 +300,7 @@ Esto supone que estás ejecutando el comando desde el directorio donde se encuen
 
 ## Procesamiento del modelo maestro
 
-Si tienes un servidor de procesamiento dedicado y existe un gran solapamiento de datos entre los modelos individuales, puede tener sentido procesar primero los datos en el modelo maestro antes de dividirlo. Así puedes evitar procesar los mismos datos varias veces en modelos individuales. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](#altering-partition-queries).** The recipe for this is outlined below:
+Si tienes un servidor de procesamiento dedicado y existe un gran solapamiento de datos entre los modelos individuales, puede tener sentido procesar primero los datos en el modelo maestro antes de dividirlo. Así puedes evitar procesar los mismos datos varias veces en modelos individuales. **Sin embargo, esto supone que no estás procesando ninguna tabla en la que la consulta de partición haya cambiado entre versiones, como se muestra en [esta sección](#altering-partition-queries).** A continuación se describe el procedimiento:
 
 1. (Opcional, en caso de que haya cambios en los metadatos) Implementa tu modelo maestro en tu servidor de procesamiento
 2. Realiza el procesamiento que necesites en tu modelo maestro (no proceses las tablas que tengan consultas de partición específicas de la versión).
