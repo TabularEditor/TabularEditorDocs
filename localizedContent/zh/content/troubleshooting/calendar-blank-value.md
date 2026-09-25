@@ -21,7 +21,7 @@ applies_to:
 
 ## 概览
 
-在 **Tabular Editor 3 (TE3)** 中刷新模型时可能会出现这个错误，即使受影响的表并未直接引用 `CALENDAR()` 函数。 It typically indicates that a dependent Date or Calendar table relies on values from other tables that are temporarily empty, resulting in blank start or end date values.
+在 **Tabular Editor 3 (TE3)** 中刷新模型时可能会出现这个错误，即使受影响的表并未直接引用 `CALENDAR()` 函数。这通常意味着某个 Date 或 Calendar 表所依赖的其他表在刷新期间暂时为空，导致起始日期或结束日期出现空白值。
 
 ## 症状
 
@@ -47,7 +47,7 @@ applies_to:
 
 ## 原因
 
-Although the error may appear unrelated to the table being refreshed, it usually originates from a downstream dependency in the model.
+尽管该错误似乎与正在刷新的表无关，但通常是由模型中的下游依赖关系引起的。
 
 例如，日期表或日历表可能会基于多个事务表中的最小日期和最大日期，动态定义其范围：
 
@@ -65,7 +65,7 @@ CALENDAR(
 1. **识别依赖表**
    - 在 Tabular Editor 3 中使用 **Dependencies** 视图，找出引用其他表日期字段的 Date 或 Calendar 表。
 2. **检查空表**
-   - Verify that all referenced tables contain data. 如果源表为空，请刷新数据源或调整架构变量配置。
+   - 请确认所有被引用的表中都包含数据。如果源表为空，请刷新数据源或调整架构变量配置。
 3. **添加默认兜底值**
    - 为避免边界为空，请用 `COALESCE()` 包裹表达式，或指定默认日期值：
 
