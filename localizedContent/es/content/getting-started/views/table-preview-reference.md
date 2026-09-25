@@ -1,6 +1,6 @@
 ---
 uid: table-preview-reference
-title: Vista previa de tabla
+title: Table Preview
 author: Morten Lønskov
 updated: 2026-09-14
 applies_to:
