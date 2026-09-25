@@ -77,7 +77,7 @@ Normalmente, Tabular Editor 3 debería detener y eliminar automáticamente cualq
 
 Las opciones siguientes controlan varios aspectos del Explorador TOM. Puedes encontrar estos ajustes en **Tabular Editor > Explorador TOM**:
 
-![Configuración de Tom Explorer](~/content/assets/images/unsaved-changes/preferences.png)
+![Tom Explorer Settings](~/content/assets/images/unsaved-changes/preferences.png)
 
 ##### _Mostrar toda la rama_ (desactivado)
 
@@ -110,9 +110,9 @@ Al marcar esta opción, se inserta un carácter de tabulación (`\t`) cada vez q
 
 DAX admite comentarios de línea con barras (`//`) o guiones (`--`). Este ajuste determina qué estilo de comentario se usa cuando Tabular Editor 3 genera código DAX, por ejemplo, al usar la funcionalidad de scripts DAX.
 
-## Ajustes de DAX
+## Configuración de DAX
 
-Estas opciones determinan determinados comportamientos del analizador de código DAX. La opción _Locale_ es simplemente una cuestión de preferencia. El resto de las opciones solo son relevantes cuando Tabular Editor 3 no puede determinar la versión de Analysis Services utilizada, como ocurre, por ejemplo, cuando se carga directamente un archivo Model.bim. En este caso, Tabular Editor intenta deducir en qué versión se implementará el modelo, basándose en el nivel de compatibilidad especificado en el modelo; sin embargo, en función de la versión real del destino de implementación, pueden existir distintas diferencias en el lenguaje DAX que Tabular Editor no puede determinar. Si Tabular Editor muestra errores semánticos o de sintaxis incorrectos en el Report, es posible que tengas que ajustar estas configuraciones.
+Estas opciones determinan determinados comportamientos del analizador de código DAX. La opción _Locale_ es simplemente una cuestión de preferencia. El resto de las opciones solo son relevantes cuando Tabular Editor 3 no puede determinar la versión de Analysis Services utilizada, como ocurre, por ejemplo, cuando se carga directamente un archivo Model.bim. En este caso, Tabular Editor intenta deducir en qué versión se implementará el modelo, basándose en el nivel de compatibilidad especificado en el modelo; sin embargo, en función de la versión real del destino de implementación, pueden existir distintas diferencias en el lenguaje DAX que Tabular Editor no puede determinar. Si Tabular Editor genera un Report de errores semánticos o de sintaxis que no lo son, puede que debas ajustar esta configuración.
 
 # Formato automático
 
@@ -120,25 +120,25 @@ En la página **Editores de texto > Editor de DAX > Formato automático**, encon
 
 ![Configuración de formato automático](~/content/assets/images/auto-formatting-settings.png)
 
-##### _Formatear automáticamente el código al escribir_ (habilitado)
+##### _Formatear el código automáticamente mientras escribes_ (habilitado)
 
-Esta opción aplicará automáticamente determinadas reglas de formato cuando se produzcan ciertas pulsaciones de teclas. Por ejemplo, al cerrar un paréntesis, esta función se asegura de que todo lo que esté dentro del paréntesis se formatee según el resto de las configuraciones de esta página.
+Esta opción aplicará automáticamente ciertas reglas de formato cuando se produzcan determinadas pulsaciones de teclas. Por ejemplo, al cerrar un paréntesis, esta función garantiza que todo lo que esté dentro del paréntesis se formatee según los demás ajustes de esta página.
 
 ##### _Formatear automáticamente las llamadas a funciones_ (habilitado)
 
 Esta opción controla específicamente si el formato automático de las llamadas a funciones (es decir, el espaciado entre argumentos y paréntesis) debe aplicarse cuando se cierra un paréntesis.
 
-##### _Autocierre de llaves_ (habilitado)
+##### _Cierre automático de llaves_ (habilitado)
 
-Esta opción aplica sangría automáticamente a los argumentos de las funciones cuando se inserta un salto de línea dentro de una llamada a función.
+Esta opción aplica sangría automáticamente a los argumentos de una función cuando se inserta un salto de línea dentro de una llamada a una función.
 
 ##### _Sangría automática_ (habilitado)
 
-Esta opción inserta automáticamente la llave o comilla de cierre cuando se introduce una llave o comilla de apertura.
+Cuando está habilitada, esta opción envuelve automáticamente la selección actual con la llave de cierre al escribir una llave de apertura.
 
-##### _Encapsular la selección_ (habilitado)
+##### _Envolver la selección_ (habilitado)
 
-Cuando está habilitada, esta opción envuelve automáticamente la selección actual con la llave de cierre cuando se introduce una llave de apertura.
+Esta opción inserta automáticamente la llave o la comilla de cierre cuando se escribe una llave o comilla de apertura.
 
 ## Reglas de formato
 
@@ -160,9 +160,9 @@ SUM( 'Sales'[Amount] )
 
 ***
 
-##### _Nueva línea después de las funciones_ (deshabilitado)
+##### [Habilitado](#tab/newline-after-function-on)
 
-Solo se aplica cuando una llamada a una función debe dividirse en varias líneas.
+Se aplica solo cuando es necesario dividir una llamada de función en varias líneas.
 
 # [Habilitado](#tab/tab3)
 
@@ -203,7 +203,7 @@ Solo se aplica cuando una operación binaria debe dividirse en varias líneas.
 
 ***
 
-##### _Añadir espacios dentro de los paréntesis_ (habilitado)
+##### _Pad parentheses_ (enabled)
 
 # [Habilitado](#tab/tab7)
 
@@ -219,49 +219,49 @@ SUM(Sales[Amount])
 
 ***
 
-##### _Límite de línea en formato largo_ (120)
+##### _Límite de línea del formato largo_ (120)
 
-El número máximo de caracteres que se pueden mantener en una sola línea antes de que una expresión se divida en varias líneas, al usar la opción **Formato DAX (líneas largas)**.
+El número máximo de caracteres que se conservarán en una sola línea antes de dividir una expresión en varias líneas, al usar la opción **Formatear DAX (líneas cortas)**.
 
-##### _Límite de línea en formato corto_ (60)
+##### _Límite de línea del formato corto_ (60)
 
-El número máximo de caracteres que se pueden mantener en una sola línea antes de que una expresión se divida en varias líneas, al usar la opción **Formato DAX (líneas cortas)**.
+El número máximo de caracteres que se pueden mantener en una sola línea antes de dividir una expresión en varias líneas, al usar la opción **Formatear DAX (líneas largas)**.
 
 > [!NOTE]
 > La mayoría de los ajustes anteriores solo surten efecto al usar el formateador de DAX integrado (predeterminado).
 
-## Uso de mayúsculas y comillas
+## Casings and quotes
 
-Además de formatear los espacios en blanco del código DAX, Tabular Editor 3 también puede corregir las referencias a objetos y el uso de mayúsculas y minúsculas de funciones y palabras clave.
+Además de dar formato a los espacios en blanco del código DAX, Tabular Editor 3 también puede corregir referencias a objetos y el uso de mayúsculas/minúsculas en funciones y palabras clave.
 
-##### _Corregir calificadores de medidas/columnas_ (activado)
+##### _Corregir calificadores de medidas/columnas_ (habilitado)
 
 Cuando esta opción está marcada, los prefijos de tabla se eliminan automáticamente de las referencias a medidas y se insertan automáticamente en las referencias a columnas.
 
 ##### _Capitalización preferida de palabras clave_ (predeterminado = UPPER)
 
-Esta configuración te permite cambiar el uso de mayúsculas/minúsculas en las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. Esto también se aplica cuando se inserta una palabra clave mediante la función de autocompletado, incluidos los valores fijos de palabras clave de las funciones que los aceptan. Consulta @preferencias para ver la lista completa.
+Esta configuración permite cambiar el uso de mayúsculas/minúsculas de las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. This also applies when a keyword is inserted through the auto-complete feature, including the fixed keyword values of functions that take them. See @preferences for the full list.
 
 ##### _Capitalización preferida de funciones_ (predeterminado = UPPER)
 
-Esta configuración te permite cambiar la capitalización de las funciones, como `CALCULATE(...)`, `SUM(...)`, etc. Esto también se aplica cuando una función se inserta mediante el autocompletado.
+Esta configuración permite cambiar el uso de mayúsculas/minúsculas de las funciones, como `CALCULATE(...)`, `SUM(...)`, etc. Esto también se aplica cuando una función se inserta mediante el autocompletado.
 
-##### _Corregir mayúsculas/minúsculas de palabras clave y funciones_ (activado)
+##### _Corregir mayúsculas/minúsculas de palabras clave/funciones_ (habilitado)
 
 Cuando esta opción está marcada, el uso de mayúsculas/minúsculas en palabras clave y funciones se corrige automáticamente cada vez que el código se formatea automáticamente o de forma manual.
 
-##### _Corregir mayúsculas/minúsculas de las referencias a objetos_ (activado)
+##### _Corregir mayúsculas/minúsculas en referencias a objetos_ (habilitado)
 
-DAX no distingue entre mayúsculas y minúsculas. Cuando está activado, las referencias a tablas, columnas y medidas se corrigen automáticamente para que el uso de mayúsculas/minúsculas coincida con el nombre físico de los objetos a los que se hace referencia. Esta corrección se realiza cada vez que el código se formatea automáticamente o de forma manual.
+DAX no distingue entre mayúsculas y minúsculas. Si se activa, las referencias a tablas, columnas y medidas se corrigen automáticamente para que el uso de mayúsculas/minúsculas coincida con el nombre físico de los objetos a los que se hace referencia. Esta corrección se realiza cada vez que el código se formatea automáticamente o de forma manual.
 
-##### _Citar siempre las tablas_ (desactivado)
+##### _Poner siempre comillas a los nombres de tabla_ (deshabilitado)
 
-En DAX, para hacer referencia a determinados nombres de tabla no es necesario poner comillas simples alrededor. Sin embargo, si prefieres que las referencias a tablas vayan siempre entre comillas, independientemente del nombre de la tabla, puedes activar esta opción.
+Para hacer referencia a ciertos nombres de tabla no es necesario encerrarlos entre comillas simples en DAX. Sin embargo, si prefieres que las referencias a tablas vayan siempre entre comillas, independientemente del nombre de la tabla, puedes activar esta opción.
 
-##### _Anteponer siempre el prefijo de tabla a las columnas de extensión_ (desactivado)
+##### _Anteponer siempre el prefijo a las columnas de extensión_ (deshabilitado)
 
 Las columnas de extensión se pueden definir sin un nombre de tabla. Cuando esta opción está seleccionada, el Editor de DAX siempre añadirá el prefijo de tabla a una columna de extensión, incluso si el nombre de la tabla está en blanco. En ese caso, la referencia a la columna se verá así: `''[Extension Column]`.
 
-# Siguientes pasos
+# Pasos a seguir
 
 - @boosting-productivity-te3
