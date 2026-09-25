@@ -21,7 +21,7 @@ applies_to:
 
 [Tabular Editor Learn](https://tabulareditor.com/learn) es un entorno de aprendizaje interactivo y gratuito diseñado para ayudarte a dominar Tabular Editor 3 y sus funciones. Tanto si estás empezando como si ya tienes experiencia, ofrece una variedad de cursos, tutoriales y ejercicios prácticos para mejorar tus habilidades.
 
-## Self-paced learning
+## Aprendizaje a tu propio ritmo
 
 La plataforma de aprendizaje incluye tanto cursos introductorios como cursos en profundidad sobre todos los aspectos de Tabular Editor. Además, también ofrecemos cursos sobre habilidades de desarrollo profesional en Power BI, como TMDL, Notebooks y funciones definidas por el usuario.
 
