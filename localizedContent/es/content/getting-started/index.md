@@ -22,7 +22,7 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 
 **Temas tratados en esta guía:**
 
-**Primeros pasos con Tabular Editor 3**
+**Getting Started with Tabular Editor 3**
 
 - @general-introduction
 - @getting-started
@@ -38,7 +38,7 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 
 - @getting-started-te2
 
-**Power BI Desktop y Tabular Editor**
+**Power BI Desktop & Tabular Editor**
 
 - @desktop-integration
 - @desktop-limitations
@@ -56,12 +56,12 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 - @diagram-view-reference
 - @table-preview-reference
 
-**Desarrollo paralelo**
+**Parallel development**
 
 - @parallel-development
 - @optimizing-workflow-workspace-mode
 
-**Crea modelos más rápido con Tabular Editor**
+**Build models faster with Tabular Editor**
 
 - @boosting-productivity-te3
 - @importing-tables-data-modeling
@@ -74,8 +74,8 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 
 **Recursos adicionales:**
 
-- [Instalar y activar Tabular Editor 3](xref:getting-started)
-- [Instalación y activación avanzadas](xref:installation-activation-basic)
+- [Install and activate Tabular Editor 3](xref:getting-started)
+- [Advanced installation and activation](xref:installation-activation-basic)
 - [Descargar Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)
 - [Soporte dedicado (solo para clientes de la Edición Enterprise)](mailto:support@tabulareditor.com)
