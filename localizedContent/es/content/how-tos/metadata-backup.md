@@ -1,6 +1,6 @@
 ---
 uid: metadata-backup
-title: Metadata Backup
+title: Copia de seguridad de metadatos
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,11 +9,11 @@ applies_to:
       full: true
 ---
 
-# Metadata Backup
+# Copia de seguridad de metadatos
 
 Si lo deseas, Tabular Editor puede guardar automáticamente una copia de seguridad de los metadatos del modelo existente antes de cada guardado (cuando estés conectado a una base de datos existente) o despliegue. Esto resulta útil si no utilizas un sistema de control de versiones, pero aun así necesitas revertir a una versión anterior de tu modelo.
 
-To enable this setting, go to **Tools > Preferences** (**File > Preferences** in Tabular Editor 2), enable the checkbox and choose a folder to place the metadata backups:
+Para habilitar esta configuración, ve a **Herramientas > Preferencias** (**Archivo > Preferencias** en Tabular Editor 2), marca la casilla y elige una carpeta en la que guardar las copias de seguridad de metadatos:
 
 <img src="../assets/images/metadata-backup-01.png" width="300" />
 
