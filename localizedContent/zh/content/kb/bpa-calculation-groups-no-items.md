@@ -10,23 +10,23 @@ description: 此最佳做法规则用于识别未包含任何计算项的计算�
 
 ## 概览
 
-此最佳做法规则会识别不包含任何计算项的计算组。空的计算组没有实际作用，应补充计算项或直接移除。
+此最佳做法规则会识别不包含任何计算项的计算组。 Empty calculation groups serve no purpose and should be populated or removed.
 
 - 类别：维护
-- 严重性：中等（2）
+- 严重级别：中等（2）
 
-## 适用对象
+## 适用于
 
 - 计算组
 
-## 为什么重要
+## 为何这很重要
 
 - **部署错误**：空计算组可能无法通过 Power BI Service 的验证
 - **模型错误**：可能导致 DAX 计算出现非预期行为
 - **开发人员困惑**：团队成员会浪费时间排查不完整的结构
 - **性能开销**：引擎会处理不必要的元数据
 
-## 此规则何时触发
+## 此规则何时会触发
 
 当计算组中的计算项数量为零时，此规则会触发：
 
@@ -72,23 +72,23 @@ CalculationItems.Count == 0
 ### 修复前
 
 ```
-计算组：时间智能
-  计算项：(无)  ← 问题
+Calculation Group: Time Intelligence
+  Items: (none)  ← Problem
 ```
 
 ### 修复后
 
 ```
-计算组：时间智能
-  计算项：
-    - 当前期间：SELECTEDMEASURE()
-    - 年初至今：CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
-    - 去年同期：CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
+Calculation Group: Time Intelligence
+  Items:
+    - Current Period: SELECTEDMEASURE()
+    - Year-to-Date: CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
+    - Prior Year: CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
 ```
 
 ## 兼容级别
 
-此规则适用于兼容级别为 **1200** 及以上的模型。
+本规则适用于兼容级别为 **1200** 及以上的模型。
 
 ## 相关规则
 
