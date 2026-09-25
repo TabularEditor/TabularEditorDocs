@@ -118,7 +118,7 @@ Tabular Editor 仅会在以下情况下向在线资源（Web URL）发起请求�
 
 ## 应用程序安全
 
-Tabular Editor 安装在 Windows 电脑上时不需要任何提升权限，也不会访问这台电脑上的任何受限资源。 此规则有一个例外：如果使用 Tabular Editor 安装程序文件（.msi），工具所需的可执行文件和支持文件默认会复制到 `Program Files` 文件夹；而该文件夹通常需要提升权限。 Tabular Editor 的二进制文件和安装程序文件都已使用签发给 Kapacity A/S 的代码签名证书进行签名，这能保证代码没有被任何第三方篡改。
+Tabular Editor 安装在 Windows 电脑上时不需要任何提升权限，也不会访问这台电脑上的任何受限资源。 此规则有一个例外：如果使用 Tabular Editor 安装程序文件（.msi），工具所需的可执行文件和支持文件默认会复制到 `Program Files` 文件夹；而该文件夹通常需要提升权限。 Tabular Editor 的二进制文件和安装程序文件都已使用签发给 Tabular Editor ApS 的代码签名证书进行签名，这能保证代码没有被任何第三方篡改。
 
 应用程序运行时，所有对外部资源的访问都通过 AMO/TOM 客户端库或上面提到的 Web 请求完成。
 
