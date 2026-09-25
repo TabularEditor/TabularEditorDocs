@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: 28 reglas de mejores prácticas seleccionadas e integradas de forma nativa en Tabular Editor 3, con integración con la base de conocimientos.
+description: 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # Reglas BPA integradas
 
-## Información general
+## Resumen
 
-Tabular Editor 3 incluye 28 reglas de mejores prácticas integradas. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
+Tabular Editor 3 includes 28 built-in best practice rules. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
 
 A diferencia de las reglas personalizadas almacenadas en archivos JSON, las reglas integradas:
 
@@ -167,7 +167,7 @@ Al implementar las reglas integradas en tu equipo:
 
 Si las reglas integradas no se muestran en la ventana del BPA:
 
-1. Comprueba que estás usando Tabular Editor 3.24.0 o una versión posterior
+1. Check that you're using Tabular Editor 3.24.0 or later
 2. Verifica que las reglas integradas estén habilitadas en **Tools** > **Preferences** > **Best Practice Analyzer**
 3. Reinicia Tabular Editor si acabas de cambiar las preferencias
 4. Confirma que tu licencia está activa
