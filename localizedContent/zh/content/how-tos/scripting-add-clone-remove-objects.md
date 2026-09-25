@@ -13,7 +13,7 @@ applies_to:
 
 # 如何添加、克隆和删除对象
 
-C# Script 可用于创建新的模型对象、克隆现有对象以及删除对象。本文介绍 Add、Clone 和 Delete 的常用模式。
+C# Script 可用于创建新的模型对象、克隆现有对象以及删除对象。 This article covers the Add, Clone and Delete patterns.
 
 ## 快速参考
 
@@ -48,9 +48,9 @@ table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 
 ## 添加度量值
 
-`AddMeasure()` 会在表上创建并返回一个新的 `Measure` 度量值。第一个参数是名称，第二个是 DAX 表达式，第三个是显示文件夹。除第一个参数外，其他参数都是可选的。
+`AddMeasure()` creates and returns a new `Measure` on a table. The first parameter is the name, the second is a DAX expression and the third is the display folder. All parameters except the first are optional.
 
-将返回的对象保存到变量中，以便设置其他属性。所有 `Add*` 方法都遵循这一模式。
+将返回的对象保存到变量中，以便设置其他属性。 This pattern is the same across all `Add*` methods.
 
 ```csharp
 var table = Model.Tables["Sales"];
@@ -92,11 +92,11 @@ var dc = table.AddDataColumn(
 ```
 
 > [!WARNING]
-> 添加数据列不会修改表的分区查询。你必须单独更新 M 表达式或 SQL 查询，以包含与 `sourceColumn` 参数匹配的源列。
+> Adding a data column does not modify the table's partition query. 你必须单独更新 M 表达式或 SQL 查询，以包含与 `sourceColumn` 参数匹配的源列。
 
 ## 添加层次结构
 
-`levels` 参数是可变参数。在一次调用中传入任意数量的列，即可自动创建相应的级别。
+The `levels` parameter is variadic. Pass any number of columns in a single call to create the corresponding levels automatically.
 
 ```csharp
 var dateTable = Model.Tables["Date"];
@@ -129,11 +129,11 @@ var ct = Model.AddCalculatedTable(
 
 ## 添加关系
 
-`AddRelationship()` 会创建并返回一个空关系。你必须明确设置相关列。
+`AddRelationship()` 会创建并返回一个空关系。 You must set the columns explicitly.
 
-`FromColumn` 是多端 (N)，`ToColumn` 是一端 (1)。 Tabular Editor 不会自动检测关系方向。一个好记的助记法：F 表示 From，F 也表示 Fact table（多的一侧）。
+`FromColumn` is the many (N) side and `ToColumn` is the one (1) side. Tabular Editor does not detect the direction automatically. A useful mnemonic: F for From, F for Fact table (the many side).
 
-新建关系默认使用 `CrossFilteringBehavior.OneDirection`，并且 `IsActive = true`。仅在需要设置为其他值时才修改它们。
+新建关系默认使用 `CrossFilteringBehavior.OneDirection`，并且 `IsActive = true`。 Set these only if you need a different value.
 
 ```csharp
 var rel = Model.AddRelationship();
@@ -160,7 +160,7 @@ var copy2 = original.Clone("Revenue Copy", true, Model.Tables["Reporting"]);
 
 ## 从列生成度量值
 
-一种常见模式：遍历所选列并创建派生度量值。注意这里用了 `DaxObjectFullName`。它会返回完全限定且已正确加引号的 DAX 引用（例如 `'Sales'[Amount]`），以避免引号错误。
+A common pattern: iterate selected columns and create derived measures. 注意这里用了 `DaxObjectFullName`。它会返回完全限定且已正确加引号的 DAX 引用（例如 `'Sales'[Amount]`），以避免引号错误。
 
 ```csharp
 foreach (var col in Selected.Columns)
@@ -177,7 +177,7 @@ foreach (var col in Selected.Columns)
 
 ## 删除对象
 
-对任何命名对象调用 `Delete()` 即可将其删除。在循环中修改集合时（删除、添加或移动对象），务必先调用 `.ToList()`，将当前集合物化为一个快照。
+对任何命名对象调用 `Delete()` 即可将其删除。 When modifying a collection in a loop (deleting, adding or moving objects), always call `.ToList()` first to materialize a snapshot.
 
 ```csharp
 // Delete a single object
@@ -194,14 +194,14 @@ Model.AllMeasures
 
 > [!WARNING]
 >
-> - 在循环中修改对象之前，务必先调用 `.ToList()` 或 `.ToArray()`。否则，在枚举过程中修改集合会导致：`"Collection was modified; enumeration operation may not complete."`
-> - `AddRelationship()` 会创建一个不完整的关系。必须同时为 `FromColumn` 和 `ToColumn` 赋值，模型才能通过验证。
-> - `Column` 是抽象类，但无需强制转换也可以访问所有基类属性（`Name`、`DataType`、`FormatString`、`IsHidden`）。只有在需要访问特定类型的属性时，才将其强制转换为子类型。
-> - `Clone()` 会复制所有元数据，包括注释、翻译以及透视成员资格。克隆后删除不需要的元数据。
+> - 在循环中修改对象之前，务必先调用 `.ToList()` 或 `.ToArray()`。 Without it, modifying the collection during iteration causes: `"Collection was modified; enumeration operation may not complete."`
+> - `AddRelationship()` creates an incomplete relationship. You must assign both `FromColumn` and `ToColumn` before the model validates.
+> - `Column` 是抽象类，但无需强制转换也可以访问所有基类属性（`Name`、`DataType`、`FormatString`、`IsHidden`）。 Only cast to a subtype for type-specific properties.
+> - `Clone()` copies all metadata including annotations, translations and perspective membership. Remove unwanted metadata after cloning.
 
 ## 另见
 
-- @实用脚本片段
+- @useful-script-snippets
 - @从列创建求和度量值
 - @how-to-navigate-tom-hierarchy
 - @how-to-use-selected-object
