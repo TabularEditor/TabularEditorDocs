@@ -13,7 +13,7 @@ applies_to:
 
 # Ver/eliminar medidas con errores
 
-## Propósito del script
+## Objetivo del script
 
 Si quieres ver todas las medidas con errores y tener la opción de eliminarlas del modelo, puedes guardar una copia de seguridad en un archivo .tsv de las medidas eliminadas en el directorio que selecciones (por si quieres volver a agregarlas más adelante).
 
@@ -22,36 +22,36 @@ Si quieres ver todas las medidas con errores y tener la opción de eliminarlas d
 ### Ver y eliminar medidas con errores
 
 ```csharp
-// Este script examina el modelo y muestra todas las medidas con errores, dando la opción de quitarlas.
+// This script scans the model and shows all measures with errors, giving the option to remove them.
 //
-// El método .GetCachedSemantics(...) solo está disponible en TE3
+// .GetCachedSemantics(...) method is only available in TE3
 using System.Windows.Forms;
 
-// Oculta el spinbox de "Running Macro"
+// Hide the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = false;
 
-// Obtén todas las medidas que tienen errores
+// Get all the measures that have errors
 var measuresWithError = Model.AllMeasures.Where(m => m.GetCachedSemantics(ExpressionProperty.Expression).HasError).ToList();
-// En versiones anteriores a Tabular Editor 3.12.0 debe usarse el método GetSemantics.
+//Prior to Tabular Editor 3.12.0 the GetSemantics method must be used.
 //var measuresWithError = Model.AllMeasures.Where(m => m.GetSemantics(ExpressionProperty.Expression).HasError).ToList();
 
-// Si no hay medidas con errores, finaliza el script con un error.
+// If no measures with errors, end script with error.
 if ( measuresWithError.Count == 0 )
 { 
-Info ( "¡No hay medidas con errores! 👍" );
+Info ( "No measures with errors! 👍" );
 }
 
-// Gestiona las medidas erróneas
+// Handle erroneous measures
 else 
 {
 
-// Muestra la lista de medidas con un error
+// View the list of measures with an error
 measuresWithError.Output();
 
-//   En la lista, puedes seleccionar 1 o más medidas para eliminarlas
-var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Selecciona las medidas que quieres eliminar.\nMás adelante podrás exportar una copia de seguridad.");
+//   From the list, you can select 1 or more measures to delete
+var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select measures to delete.\nYou will be able to export a back-up, later.");
 
-    // Elimina las medidas seleccionadas
+    // Delete the selected measures
     try
     {
         foreach ( var _m in _ToDelete ) 
@@ -60,47 +60,47 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Selecciona 
             }
     
         Info ( 
-            "Se eliminaron " + 
+            "Deleted " + 
             Convert.ToString(_ToDelete.Count()) + 
-            " medidas con errores." 
+            " measures with errors." 
         );
     
-        // Crea una instancia de la clase FolderBrowserDialog
+        // Create an instance of the FolderBrowserDialog class
         FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
         
-        // Establece el título del cuadro de diálogo
-        folderBrowserDialog.Description = "Selecciona un directorio donde guardar una copia de seguridad de las medidas eliminadas.";
+        // Set the title of the dialog box
+        folderBrowserDialog.Description = "Select a directory to output a backup of the deleted measures.";
         
-        // Establece la carpeta raíz del cuadro de diálogo
+        // Set the root folder of the dialog box
         folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
         
-        // Muestra el cuadro de diálogo y obtiene el resultado
+        // Show the dialog box and get the result
         DialogResult result = folderBrowserDialog.ShowDialog();
         
-        // Comprueba si el usuario hizo clic en Aceptar y obtiene la ruta seleccionada
+        // Check if the user clicked the OK button and get the selected path
         if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
             {
-                // Obtén la ruta de salida como una cadena
+                // Get the output path as a string
                 string _outputPath = folderBrowserDialog.SelectedPath;
                 
-                // Obtén las propiedades de las medidas eliminadas
+                // Get the properties of the deleted measures
                 var _backup = ExportProperties( _ToDelete );
     
-                // Guarda una copia de seguridad de las medidas eliminadas
+                // Save a backup of the deleted measures
                 SaveFile( _outputPath + "/DeletedMeasures-" + Model.Name + DateTime.Today.ToString("-yyyy-MM-dd") + ".tsv", _backup);
     
                 Info ( 
-                    "Se exportó una copia de seguridad de " + 
+                    "Exported a backup of " + 
                     Convert.ToString(_ToDelete.Count()) +
-                    " medidas a " + 
+                    " Measures to " + 
                     _outputPath
                 );
             }
     }
     catch
-    // Muestra un cuadro de información si no se seleccionó ninguna medida
+    // Display an info box if no measure was selected
     {
-    Info ( "No se seleccionó ninguna medida." );
+    Info ( "No measure selected." );
     }
 }
 
@@ -110,7 +110,7 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Selecciona 
 
 Este fragmento obtiene todas las medidas que tienen errores según el análisis semántico de Tabular Editor. Después, las mostrará en una ventana de salida donde podrás revisarlas manualmente o hacer cambios. A continuación, se pueden seleccionar medidas para eliminarlas. Las medidas quitadas se pueden guardar como un archivo .tsv de copia de seguridad por si quieres importarlas más adelante.
 
-## Ejemplo de salida
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/script-view-error-measures.png" alt="An output dialog that lets the user view and edit any measures with errors in Tabular Editor" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Un cuadro de diálogo de salida te permite ver y editar cualquier medida que actualmente tenga "errores" según el análisis semántico de Analysis Services.</figcaption>
