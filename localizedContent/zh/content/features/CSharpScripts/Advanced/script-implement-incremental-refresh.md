@@ -15,17 +15,21 @@ applies_to:
 
 ## 脚本用途
 
-如果你想基于某个特定的日期字段为导入表配置增量刷新。此脚本适用于你希望配置增量刷新的 `datetime`、`date` 或 `integer` 日期列。
+如果你想基于某个特定的日期字段为导入表配置增量刷新。
+This script will work for `datetime`, `date`, or `integer` date columns for which you want to configure incremental refresh.
 
-要使用此脚本，请在要配置增量刷新的表中选中日期列，然后运行脚本。仅当你尚未创建 #"RangeStart" 和 #"RangeEnd" 参数，并且所选表尚未配置刷新策略时，脚本才会运行。
+To use the script, select the date column in the table for which you want to configure incremental refresh, then run the script. 仅当你尚未创建 #"RangeStart" 和 #"RangeEnd" 参数，并且所选表尚未配置刷新策略时，脚本才会运行。
 
 > [!NOTE]
-> 此脚本会自动修改该表的 M 分区，以添加筛选步骤。请务必检查是否已正确完成。
+> 此脚本会自动修改该表的 M 分区，以添加筛选步骤。
+> Be sure to check that this was done correctly.
 >
-> 如果你有很多步骤，务必将此步骤移动到可以折叠到数据源的位置。请确保在 Power Query 中调整所有 \`#"Step References"
+> If you have many steps you must be sure to move this step to a point when it will fold to the data source.
+> 请确保在 Power Query 中调整所有 \`#"Step References"
 
 > [!NOTE]
-> 此脚本会使用用户输入来生成刷新策略。请确保在用户输入对话框中输入正确的值。
+> 此脚本会使用用户输入来生成刷新策略。
+> Make sure you enter the correct values in the user input dialogue box.
 
 ## 脚本
 
@@ -483,7 +487,7 @@ catch
 ## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>运行脚本时，系统会提示你选择要配置的表，以及要为其配置策略的 DateTime 或 Int 列。然后，将出现此图所示的对话框，让你输入刷新策略参数。</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>运行脚本时，系统会提示你选择要配置的表，以及要为其配置策略的 DateTime 或 Int 列。 Then, the dialog in this image will appear to let you enter the Refresh Policy parameters.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
