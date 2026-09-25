@@ -21,7 +21,7 @@ applies_to:
 | 保存模型                                                   | Ctrl+S                               |
 | 复制所选内容                                                 | Ctrl+C                               |
 | 剪切所选内容                                                 | Ctrl+X                               |
-| 粘贴                                                     | Ctrl+V                               |
+| Paste                                                  | Ctrl+V                               |
 | 撤销                                                     | Ctrl+Z                               |
 | 重做                                                     | Ctrl+Y                               |
 | 全选                                                     | Ctrl+A                               |
@@ -38,7 +38,7 @@ applies_to:
 | 格式化 DAX     | F6           |
 | 格式化 DAX（短行） | Ctrl+F6      |
 | 注释行         | Ctrl+Shift+C |
-| 取消注释        | Ctrl+Shift+U |
+| 取消注释行       | Ctrl+Shift+U |
 
 | 脚本编辑器 | 快捷键    |
 | ----- | ------ |
@@ -46,7 +46,7 @@ applies_to:
 | 查找和替换 | Ctrl+H |
 | 运行脚本  | F5     |
 
-| 资源管理器树状视图       | 快捷键              |
+| Explorer tree   | 快捷键              |
 | --------------- | ---------------- |
 | 向上或向下移动         | 上/下箭头            |
 | 展开/折叠当前节点       | 右/左箭头            |
