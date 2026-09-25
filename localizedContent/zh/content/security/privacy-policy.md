@@ -19,20 +19,20 @@ applies_to:
 
 # 隐私政策
 
-Tabular Editor ApS ("we," "our," or "us") is committed to protecting your privacy. 本《隐私政策》说明 Tabular Editor ApS 如何收集、使用和披露您的个人信息。
+Tabular Editor ApS（以下简称“我们”）致力于保护你的隐私。本《隐私政策》说明 Tabular Editor ApS 如何收集、使用和披露您的个人信息。
 
-本《隐私政策》适用于我们的网站及其相关子域名（统称为我们的“服务”），以及我们的应用程序 Tabular Editor 3。 By accessing or using our Service, you signify that you have read, understood, and agree to our collection, storage, use, and disclosure of your personal information as described in this Privacy Policy and our Terms of Service.
+本《隐私政策》适用于我们的网站及其相关子域名（统称为我们的“服务”），以及我们的应用程序 Tabular Editor 3。访问或使用我们的服务，即表示你已阅读、理解并同意我们按照本《隐私政策》和《服务条款》所述方式收集、存储、使用和披露你的个人信息。
 
 #### 定义与关键术语
 
 为尽可能清晰地说明本《隐私政策》的内容，本文提及下列术语时，其定义如下：
 
-- _Cookie_：由网站生成并由您的网络浏览器保存的少量数据。 It is used to identify your browser, provide analytics, remember information about you such as your language preference or login information.
+- _Cookie_：由网站生成并由您的网络浏览器保存的少量数据。它用于识别你的浏览器、提供分析，并记住与你相关的信息，例如你的语言偏好或登录信息。
 - _公司_：当本政策提及“公司”、“我们”、“我方”或“我们的”时，指 Tabular Editor ApS（地址：丹麦 DK-2150 Nordhavn, Sundkaj 125），该公司根据本《隐私政策》对您的信息负责。
 - _国家/地区_：指 Tabular Editor ApS 或 Tabular Editor ApS 的所有者/创始人所在的国家/地区，本例中为丹麦
 - _客户_：指购买 Tabular Editor 3 订阅的公司、组织或个人。
 - _设备_：任何可连接互联网的设备，例如手机、平板电脑、计算机或任何其他可用于访问 tabulareditor.com 和/或使用 Tabular Editor 3 产品的设备。
-- _IP 地址_：每台连接到互联网的设备都会被分配一个编号，称为互联网协议（IP）地址。 These numbers are usually assigned in geographic blocks. An IP address can often be used to identify the location from which a device is connecting to the Internet.
+- _IP 地址_：每台连接到互联网的设备都会被分配一个编号，称为互联网协议（IP）地址。这些号码通常会按地理区域分段分配。 IP 地址通常可用于识别设备连接到互联网时所处的位置。
 - _人员_：指受雇于 Tabular Editor ApS，或与任一方签订合同并代表其提供服务的个人。
 - _个人数据_：任何能够直接、间接或与其他信息结合—包括个人识别号码—从而识别或可识别自然人的信息。
 - _服务_：指 Tabular Editor ApS 按相关条款（如有）并通过本平台提供的服务。
@@ -62,16 +62,16 @@ Tabular Editor ApS ("we," "our," or "us") is committed to protecting your privac
 
 针对上述目的，我们处理你的个人数据的法律基础包括：
 
-- 为购买产品或服务而履行合同（GDPR 第。 6 (1) (b)).
-- 为提供服务而履行合同（GDPR 第。 6 (1) (b)).
-- 我们作为数据控制者所承担的法定义务（GDPR 第。 6 (1) (c)).
-- 同意发送新闻简报及其他直接营销信息（《GDPR》第。 6 (1) (a)).
-- Legitimate interest in being able to send out service messages (the GDPR art. 6 (1) (f)).
-- 为便于沟通并回应您的评论、问题和请求而具备的正当利益（《GDPR》第。 6 (1) (f)).
-- 为能够发送客户满意度调查而具备的正当利益（《GDPR》第。 6 (1) (f)).
-- Legitimate interest in being able to establish, exercise or defence legal claims (the GDPR art. 6 (1) (f) and the GDPR art. 9 (2) (f)).
-- 为能够收集并管理您的数据而具备的正当利益，这也包括基于您在营销邮件发送相关的点击行为，以及通过我们网站上的 Cookie（《GDPR》第。 6 (1) (f)).
-- 为能够个性化并改进我们的服务，并出于营销目的提供定制化内容或功能而具备的正当利益（《GDPR》第。 6 (1) (f)).
+- 为购买产品或服务而履行合同（GDPR 第。 6 (1) (b))。
+- 为提供服务而履行合同（GDPR 第。 6 (1) (b))。
+- 我们作为数据控制者所承担的法定义务（GDPR 第。 6 (1) (c))。
+- 同意发送新闻简报及其他直接营销信息（《GDPR》第。 6 (1) (a))。
+- 为能够发送服务信息而具有的正当利益（《GDPR》第。 6 (1) (f))。
+- 为便于沟通并回应您的评论、问题和请求而具备的正当利益（《GDPR》第。 6 (1) (f))。
+- 为能够发送客户满意度调查而具备的正当利益（《GDPR》第。 6 (1) (f))。
+- 为能够确立、行使或抗辩法律主张而具有的正当利益（《GDPR》第。 6 (1) (f) 以及《GDPR》第。 9 (2) (f))。
+- 为能够收集并管理您的数据而具备的正当利益，这也包括基于您在营销邮件发送相关的点击行为，以及通过我们网站上的 Cookie（《GDPR》第。 6 (1) (f))。
+- 为能够个性化并改进我们的服务，并出于营销目的提供定制化内容或功能而具备的正当利益（《GDPR》第。 6 (1) (f))。
 
 #### 我们会与第三方共享所收集的信息吗？
 
@@ -79,9 +79,9 @@ Tabular Editor ApS ("we," "our," or "us") is committed to protecting your privac
 
 除以下情形外，我们不会与第三方共享所收集的信息：
 
-We may engage trusted third party service providers acting as data processors to perform functions and provide services to us, such as hosting and maintaining our servers and the website/app, database storage and management, e-mail management, storage marketing, credit card processing, customer service and fulfilling orders for products and services you may purchase through the website/app. We will likely share your personal information, and possibly some non-personal information, with these third parties to enable them to perform these services for us and for you.
+我们可能会聘请值得信赖、作为数据处理者的第三方服务提供商，代表我们履行相关职能并提供服务，例如托管和维护我们的服务器及网站/应用程序、数据库存储与管理、电子邮件管理、存储、营销、信用卡处理、客户服务，以及履行你可能通过网站/应用程序购买的产品和服务订单。为使这些第三方能够为我们以及你提供上述服务，我们很可能会与其共享你的个人信息，并可能还会共享某些非个人信息。
 
-除非我们另有指示，否则数据处理者不会查看、共享、分发或引用任何已收集的信息。 All data processors have implemented security measures to protect against unauthorized access, loss, use or alteration of the information. Further, data processing agreements have been entered into with all data processors.
+除非我们另有指示，否则数据处理者不会查看、共享、分发或引用任何已收集的信息。所有数据处理方均已实施安全度量值，以防止信息遭到未经授权的访问、丢失、使用或更改。此外，我们已与所有数据处理方签订数据处理协议。
 
 目前我们使用以下数据处理者：.
 
@@ -93,33 +93,33 @@ We may engage trusted third party service providers acting as data processors to
 
 其他第三方：
 
-We may share portions of our log file data, including IP addresses, for analytics purposes with third parties such as web analytics partners, application developers, and ad networks. If your IP address is shared, it may be used to estimate general location and other technographics such as connection speed, whether you have visited the website/app in a shared location, and type of the device used to visit the website/app. They may aggregate information about our advertising and what you see on the website/app and then provide auditing, research and reporting for us and our advertisers.
+出于分析目的，我们可能会与网站分析合作伙伴、应用程序开发者和广告网络等第三方共享我们的部分日志文件数据，包括 IP 地址。如果共享了你的 IP 地址，该地址可能会被用于估算你的大致位置及其他技术特征，例如连接速度、你是否曾在共用网络环境下访问过该网站/应用，以及你用于访问该网站/应用的设备类型。这些第三方可能会汇总有关我们的广告以及你在网站/应用上看到的内容的信息，然后为我们及我们的广告主提供审计、研究和 Report 服务。
 
 我们也可能在我们自行酌情认为必要或适当的情况下，向政府或执法部门人员或私人机构披露与你有关的个人信息和非个人信息，以便回应主张、响应法律程序（包括传票）、保护我们或第三方的权利和利益、保障公众或任何人的安全、防止或制止任何非法、不道德或可依法追究责任的活动，或以其他方式遵守适用的法院命令、法律、规则和法规。
 
 #### 我们如何使用你的电子邮件地址？
 
-By submitting your email address on this website/app, you agree to receive emails from us. You can cancel your participation in any of these email lists at any time by clicking on the opt-out link or other unsubscribe option that is included in the respective email. We only send emails to people who have authorized us to contact them, either directly, or through a third party. We do not send unsolicited commercial emails, because we hate spam as much as you do. Email addresses submitted only through the order processing page will be used for the sole purpose of sending you information and updates pertaining to your order. If, however, you have provided the same email to us through another method, we may use it for any of the purposes stated in this Policy.
+在本网站/应用上提交你的电子邮件地址，即表示你同意接收我们发送的电子邮件。你可以随时点击相关电子邮件中的退订链接或其他取消订阅选项，退出这些电子邮件列表中的任何一个。我们只会向已授权我们与其联系的人发送电子邮件，这种授权可以由其直接授予，也可以通过第三方授予。我们不会发送未经请求的商业电子邮件，因为我们和你一样讨厌垃圾邮件。仅通过订单处理页面提交的电子邮件地址，只会用于向你发送与订单相关的信息和更新。但是，如果你还通过其他方式向我们提供了相同的电子邮件地址，我们可能会将其用于本政策中所述的任何目的。
 
 注意：如果你在任何时候希望取消订阅后续邮件，我们会在每封邮件底部提供详细的退订说明。
 
 #### 我们会保留你的信息多久？
 
-我们仅在向你提供 Tabular Editor 3 以及/或实现本政策所述目的所需的期限内保留你的信息。 This is also the case for anyone that we share your information with and who carries out services on our behalf. When we no longer need to use your information and there is no need for us to keep it to comply with our legal or regulatory obligations, we’ll either remove it from our systems or depersonalize it so that we can’t identify you.
+我们仅在向你提供 Tabular Editor 3 以及/或实现本政策所述目的所需的期限内保留你的信息。同样适用于我们与其共享你的信息、并代表我们提供服务的任何第三方。当我们不再需要使用你的信息，且也无需为履行法律或监管义务而保留这些信息时，我们会将其从系统中删除，或对其进行去标识化处理，使我们无法识别你的身份。
 
 #### 我们如何保护你的信息？
 
-We implement a variety of security measures to maintain the safety of your personal information when you place an order or enter, submit, or access your personal information. We offer the use of a secure server. All supplied sensitive/credit information is transmitted via Secure Socket Layer (SSL) technology and then encrypted into our Payment gateway providers database only to be accessible by those authorized with special access rights to such systems, and are required to keep the information confidential. After a transaction, your private information (credit cards, social security numbers, financials, etc.) is never kept on file. We cannot, however, ensure or warrant the absolute security of any information you transmit to Tabular Editor ApS or guarantee that your information on the Service may not be accessed, disclosed, altered, or destroyed by a breach of any of our physical, technical, or managerial safeguards.
+当你下订单或输入、提交或访问你的个人信息时，我们会采取多种安全度量值来保护你个人信息的安全。我们提供安全服务器供你使用。所有提供的敏感信息/信用卡信息都会通过安全套接字层（SSL）技术传输，随后加密存储在我们的支付 Gateway 服务提供商的数据库中，只有获得授权并拥有该等系统特殊访问权限的人员才能访问，而且他们必须对这些信息保密。交易完成后，你的私人信息（信用卡信息、社会安全号码、财务信息等）绝不会被存档保存。但是，我们无法确保或担保你传输给 Tabular Editor ApS 的任何信息都绝对安全，也无法保证在我们的任何物理、技术或管理保护措施遭到突破的情况下，你在本服务上的信息不会被访问、披露、更改或销毁。
 
-信用卡信息仅由我们的支付/订阅合作伙伴收集和处理，目前为 Chargebee.com。 Tabular Editor ApS does not collect or store Credit Card information.
+信用卡信息仅由我们的支付/订阅合作伙伴收集和处理，目前为 Chargebee.com。 Tabular Editor ApS 不会收集或存储信用卡信息。
 
 #### 我的信息会被传输到其他国家/地区吗？
 
-Tabular Editor ApS is incorporated in Denmark. Information collected via our website, through direct interactions with you, or from use of our help services may be transferred from time to time to our offices or personnel, or to third parties within the EU/EEA. We do not transfer your information to unsecure third countries, i.e. countries outside of EU/EEA that have not been considered by the Commission to have an adequate level of data protection.
+Tabular Editor ApS 在丹麦注册成立。通过我们的网站、与你的直接互动，或你使用我们的帮助服务所收集的信息，可能会不时传输至我们的办公室或工作人员，或传输给位于欧盟/欧洲经济区 EU/EEA 内的第三方。我们不会将你的信息传输至不安全的第三国，即欧盟/欧洲经济区 EU/EEA 之外且未被欧盟委员会认定为具备充分数据保护水平的国家。
 
 #### 通过 Tabular Editor 服务收集的信息安全吗？
 
-我们会采取预防措施来保护你的信息安全。 We have physical, electronic, and managerial procedures to help safeguard, prevent unauthorized access, maintain data security, and correctly use your information. However, neither people nor security systems are fool proof, including encryption systems. In addition, people can commit intentional crimes, make mistakes or fail to follow policies. Therefore, while we use reasonable efforts to protect your personal information, we cannot guarantee its absolute security. If applicable law imposes any non-disclaimable duty to protect your personal information, you agree that intentional misconduct will be the standards used to measure our compliance with that duty.
+我们会采取预防措施来保护你的信息安全。我们制定了物理、电子和管理方面的程序，以帮助保护你的信息、防止未经授权的访问、维护数据安全并正确使用你的信息。然而，无论是人员还是安全系统（包括加密系统），都无法做到万无一失。此外，人们可能会故意实施犯罪、犯错，或未能遵守相关政策。因此，尽管我们会尽合理努力保护您的个人信息，但我们无法保证其绝对安全。如果适用法律规定我们负有任何不可免除的保护您个人信息的义务，您同意以故意不当行为作为度量值，用于衡量我们是否履行该义务的标准。
 
 #### 我可以更新或更正我的信息吗？我还享有哪些其他权利？
 
@@ -127,7 +127,7 @@ Tabular Editor ApS is incorporated in Denmark. Information collected via our web
 
 这些更新、更正、变更和删除不会影响我们保存的其他信息，也不会影响我们在这些更新、更正、变更或删除之前依据本隐私政策向第三方提供的信息。
 
-为保护你的隐私与安全，在允许你访问个人资料或进行更正之前，我们可能会采取合理措施（例如要求你提供专用密码）来验证你的身份。 You are responsible for maintaining the secrecy of your unique password and account information at all times.
+为保护你的隐私与安全，在允许你访问个人资料或进行更正之前，我们可能会采取合理措施（例如要求你提供专用密码）来验证你的身份。您有责任始终对您的专属密码和账户信息保密。
 
 在收到你的请求后，我们会尽快并在合理且技术可行的范围内，对我们正在使用的数据库中存储的所有个人信息以及其他可便捷检索的介质中的信息进行相应的更新、更正、变更或删除。
 
@@ -141,23 +141,22 @@ Tabular Editor ApS is incorporated in Denmark. Information collected via our web
 
 #### 适用法律
 
-This Privacy Policy is governed by the laws of Denmark without regard to its conflict of laws provision.
-我们与你订立的任何合同以及你对网站/应用的使用均受丹麦法律管辖，并排除其法律冲突规则。 Your use of the website/app may also be subject to other local, state, national, or international laws.
+本隐私政策受丹麦法律管辖，但不适用其法律冲突规则。我们与你订立的任何合同以及你对网站/应用的使用均受丹麦法律管辖，并排除其法律冲突规则。您对本网站/应用的使用还可能受其他地方、州、国家或国际法律的约束。
 
 #### 接受本隐私政策
 
-通过使用 Tabular Editor 或直接联系我们，即表示你接受本隐私政策。 If you do not agree to this Privacy Policy, you should not engage with our website, or use our services. Continued use of the website, direct engagement with us, or following the posting of changes to this Privacy Policy that do not significantly affect the use or disclosure of your personal information will mean that you accept those changes.
+通过使用 Tabular Editor 或直接联系我们，即表示你接受本隐私政策。如果您不同意本隐私政策，请勿使用我们的网站或服务，或与我们的网站进行互动。如果对本隐私政策的变更不会显著影响您个人信息的使用或披露，则在这些变更发布后，您继续使用本网站、继续与我们直接互动，即表示您接受这些变更。
 
-我们已更新本隐私政策，让你能充分了解你访问我们网站时会设置哪些数据，以及这些数据将如何被使用。 By using our website/app, registering an account, or making a purchase, you hereby consent to our Privacy Policy and agree to its terms.
+我们已更新本隐私政策，让你能充分了解你访问我们网站时会设置哪些数据，以及这些数据将如何被使用。通过使用我们的网站/应用、注册账户或进行购买，您即表示同意我们的隐私政策并接受其中的条款。
 
 #### 链接至其他网站
 
-This Privacy Policy applies only to the Services. The Services may contain links to other websites not operated or controlled by Tabular Editor. We are not responsible for the content, accuracy or opinions expressed in such websites, and such websites are not investigated, monitored or checked for accuracy or completeness by us. Please remember that when you use a link to go from the Services to another website, our Privacy Policy is no longer in effect. Your browsing and interaction on any other website, including those that have a link on our platform, is subject to that website’s own rules and policies. Such third parties may use their own cookies or other methods to collect information about you.
+本隐私政策仅适用于本服务。本服务可能包含指向其他网站的链接，而这些网站并非由 Tabular Editor 运营或控制。我们不对这些网站的内容、准确性或其中表达的观点负责，也不会调查、监控或核查这些网站的准确性或完整性。请注意，当你通过本服务中的链接访问其他网站时，我们的隐私政策将不再适用。您在任何其他网站上的浏览和互动（包括我们平台上提供链接的网站）均受该网站自身规则和政策的约束。此类第三方可能会使用其自身的 Cookie 或其他方法来收集有关您的信息。
 
 \####Cookies
-tabulareditor.com 使用“Cookie”来识别你访问过我们网站的哪些区域。 We use Cookies to enhance the performance and functionality of our website/app but are non-essential to their use. However, without these cookies, certain functionality like videos may become unavailable or you would be required to enter your login details every time you visit the website/app as we would not be able to remember that you had logged in previously. Most web browsers can be set to disable the use of Cookies. However, if you disable Cookies, you may not be able to access functionality on our website correctly or at all. We never place Personally Identifiable Information in Cookies.
+tabulareditor.com 使用“Cookie”来识别你访问过我们网站的哪些区域。我们使用 Cookie 来提升我们网站/应用的性能和功能，但 Cookie 并非使用网站/应用所必需。但是，如果没有这些 Cookie，某些功能（如视频）可能无法使用；或者由于我们无法记住您之前已登录，您每次访问网站/应用时都需要重新输入登录信息。大多数网络浏览器都可以设置为禁用 Cookie。但是，如果您禁用 Cookie，您可能无法正常使用我们网站上的某些功能，甚至可能完全无法使用。我们绝不会在 Cookie 中存储个人身份识别信息。
 
-你也应注意，如果你在浏览器中阻止 Cookie，你可能会丢失部分已保存的信息（例如已保存的登录信息、网站偏好）。 Different browsers make different controls available to you. Disabling a cookie or category of cookie does not delete the cookie from your browser, you will need to do this yourself from within your browser, you should visit your browser’s help menu for more information.
+你也应注意，如果你在浏览器中阻止 Cookie，你可能会丢失部分已保存的信息（例如已保存的登录信息、网站偏好）。不同浏览器为您提供的控制选项各不相同。禁用某个 Cookie 或某类 Cookie 并不会将其从您的浏览器中删除，您需要在浏览器中自行删除。更多信息请查看浏览器的帮助菜单。
 
 #### 支付信息
 
@@ -165,11 +164,11 @@ tabulareditor.com 使用“Cookie”来识别你访问过我们网站的哪些�
 
 #### 儿童隐私
 
-We do not address anyone under the age of 13. 我们不会明知而收集 13 周岁以下任何人的个人身份识别信息。 If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.
+我们的服务不面向 13 岁以下的任何人。我们不会明知而收集 13 周岁以下任何人的个人身份识别信息。如果您是家长或监护人，并且您知道您的孩子已向我们提供个人数据，请联系我们。如果我们发现，在未核实父母同意的情况下，我们收集了任何未满 13 周岁人士的个人数据，我们将采取措施从我们的服务器中删除该等信息。
 
 #### 隐私政策的变更
 
-We may change our Service and policies, and we may need to make changes to this Privacy Policy so that they accurately reflect our Service and policies. Unless otherwise required by law, we will notify you (for example, through our Service) before we make changes to this Privacy Policy and give you an opportunity to review them before they go into effect. Then, if you continue to use the Service, you will be bound by the updated Privacy Policy. If you do not want to agree to this or any updated Privacy Policy, you can delete your account.
+我们可能会更改我们的服务和政策，因此也可能需要修改本隐私政策，以确保其准确反映我们的服务和政策。除非法律另有要求，否则在我们对本隐私政策作出更改之前，我们会先通知您（例如通过我们的服务），并让您有机会在这些变更生效前查阅。此后，如果您继续使用该服务，即表示您将受更新后的隐私政策约束。如果您不同意本隐私政策或其任何更新版本，您可以删除您的账户。
 
 #### 联系我们
 
@@ -180,4 +179,4 @@ We may change our Service and policies, and we may need to make changes to this 
 
 #### 投诉
 
-如果你想就我们对你个人数据的处理提出投诉，可以通过[contact@tabulareditor.com](mailto:contact@tabulareditor.com)联系我们。 You may also contact the Data Protection Agency, Borgergade 28, 5., 1300 Copenhagen K.
+如果你想就我们对你个人数据的处理提出投诉，可以通过[contact@tabulareditor.com](mailto:contact@tabulareditor.com)联系我们。您也可以联系 Data Protection Agency，地址：Borgergade 28, 5., 1300 Copenhagen K。
