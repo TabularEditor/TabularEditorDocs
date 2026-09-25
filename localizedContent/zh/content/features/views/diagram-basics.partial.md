@@ -4,49 +4,49 @@
 
 - 在 TOM Explorer 中(多选)选择表，然后右键单击并选择 **添加到关系图**。
 - 在 TOM Explorer 中(单选或多选)表，然后将表拖到关系图上
-- 选择菜单 **图表 > 添加表...**，然后在弹出的对话框中（可多选）选择要添加的表。
+- Use the **Diagram > Add tables...** menu option, and (multi-)select the tables you want to add through the dialog box.
   ![关系图：添加表](~/content/assets/images/diagram-add-tables.png)
 
 要向关系图添加更多表，可以再次使用上述方法；或者在关系图中右键单击现有表，并选择以下选项之一：
 
-- **添加筛选此表的表**：将所有可能直接筛选当前选中表，或通过其他表间接筛选当前选中表的表添加到关系图中。从事实表开始时很有用。
-- **添加所有相关表**：将所有与当前选中表直接相关的表添加到关系图中。从维度表开始时很有用。
-  ![添加相关表](~/content/assets/images/add-related-tables.png)
+- **添加筛选此表的表**：将所有可能直接筛选当前选中表，或通过其他表间接筛选当前选中表的表添加到关系图中。 Useful when starting from a fact table.
+- **添加所有相关表**：将所有与当前选中表直接相关的表添加到关系图中。 Useful when starting from a dimension table.
+  ![Add Related Tables](~/content/assets/images/add-related-tables.png)
 
 在继续之前，先按你的偏好重新排列并调整关系图中的表大小；或者使用 **关系图 > 自动排列** 功能，让 Tabular Editor 3 自动布局这些表。
 
 ## 使用关系图修改关系
 
-要在两张表之间添加新关系，请找到该关系中事实表（多方）上的列，并将该列拖到维度表（单方）上对应的列。确认关系设置，然后单击 **确定**。
+要在两张表之间添加新关系，请找到该关系中事实表（多方）上的列，并将该列拖到维度表（单方）上对应的列。 Confirm the settings for the relationship and hit **OK**.
 
 ![创建关系](~/content/assets/images/create-relationship.png)
 
-要编辑现有关系，右键单击它并选择 **编辑关系**。右键菜单中还提供了反转或删除关系的快捷命令，如下图所示。
+To edit an existing relationship, right-click on it and choose **Edit relationship**. The right-click menu also contains shortcuts for reversing or deleting a relationship, as shown on the screenshot below.
 
 ![编辑关系图](~/content/assets/images/edit-relationship-diagram.png)
 
 > [!NOTE]
-> 你也可以不使用关系图，而是通过 TOM Explorer 创建关系。找到关系应从其开始的列（多端/事实表端），右键单击并选择 **创建 > 从此列创建关系**。在随后出现的“创建关系”对话框中指定目标列。
+> 你也可以不使用关系图，而是通过 TOM Explorer 创建关系。 Locate the column from which the relationship should start (many-side / fact-table side), right-click and choose **Create > Relationship from**. Specify the destination column in the Create Relationship dialog that appears on the screen.
 
-## 选择与导航
+## Selection and navigation
 
-图表与 TOM Explorer 会始终保持选中同一对象。在图表中单击表、列或关系时，会在树形视图中选中它，同时不会将焦点从图表移开。反过来，在树形视图中选择表或列时，它会在所有打开的图表中高亮显示，并在其表框内将该列滚动到可见位置。
+A diagram and the TOM Explorer keep the same object selected. Clicking a table, a column or a relationship in the diagram selects it in the tree, without pulling focus away from the diagram. Going the other way, selecting a table or a column in the tree highlights it in every open diagram, scrolling a column into view inside its table shape.
 
-对于不是在树形视图中手动完成的导航也同样适用：例如 **转到** 操作和搜索结果，也会在图表中高亮显示。
+This works for navigation you did not perform by hand in the tree: **Go to** actions and search results highlight in your diagrams too.
 
-如果某个选择无法解析为单个表或列——无论是选中了多个对象，还是未选中任何对象——都会清除图表中的高亮，而不会保留过时的高亮。
+A selection that does not resolve to a single table or column, whether several objects or none, clears the diagram's highlight rather than leaving a stale one behind.
 
 > [!NOTE]
-> 在 TOM Explorer 中选择对象时，不会将活动文档切换到图表。如果某个图表在后台处于打开状态，它会静默更新，而你可以继续在原来的位置工作。
+> Selecting an object in the TOM Explorer never switches the active document to a diagram. If a diagram is open in the background it updates quietly, and you keep working where you were.
 
-双击某个关系即可打开 **编辑关系**。
+Double-click a relationship to open **Edit relationship**.
 
 ## 保存关系图
 
-要保存图表，使用 **文件 > 保存**（**Ctrl+S**）即可。如果图表有未保存的更改，而你此时关闭文档或应用程序，Tabular Editor 3 会提示你保存该图表。
+To save a diagram, use the **File > Save** (**Ctrl+S**) option. Tabular Editor 3 prompts you to save the diagram if you close the document or the application while the diagram has unsaved changes.
 
 > [!TIP]
-> 同一个关系图文件可以用于不同的 Data model。图表通过表名来引用表。加载图表时，凡是模型中不存在的表，都会直接从图表中移除。
+> 同一个关系图文件可以用于不同的 Data model。 Diagrams reference tables by their names. Any tables not present in the model upon diagram load are simply removed from the diagram.
 
 > [!NOTE]
 > 每次添加或修改关系后，都需要先对 Data model 运行一次“计算”刷新，然后才能在查询模型时使用这些关系。
