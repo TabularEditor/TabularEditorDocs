@@ -20,18 +20,18 @@ applies_to:
 
 # Renombrar objetos en una Metric View
 
-This how-to demonstrates renaming a Metric View field.
-The same pattern applies to every collection in a Metric View: `Fields`, `Measures`, `Dimensions` and `Joins`.
+Este procedimiento muestra cómo cambiar el nombre de un campo de una vista de métricas.
+El mismo patrón se aplica a todas las colecciones de una vista de métricas: `Fields`, `Measures`, `Dimensions` y `Joins`.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estos procedimientos están dirigidos a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las funcionalidades de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
-## Rename a field
+## Cambiar el nombre de un campo
 
-Assign to the object's `Name` property. Everything else about the object (its expression, comment, display name, synonyms and format) is left alone, and it keeps its place in the collection.
+Asigna la propiedad `Name` del objeto. Todo lo demás del objeto (su expresión, comentario, nombre para mostrar, sinónimos y formato) se mantiene sin cambios, y conserva su lugar en la colección.
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -59,25 +59,25 @@ Fields:
   Order Month
 ```
 
-The collection's name index is updated with the object, so the field is reachable under its new name straight away:
+El índice de nombres de la colección se actualiza con el objeto, de modo que se puede acceder al campo de inmediato con su nuevo nombre:
 
 ```csharp
 var field = view.Fields["Order Month"];
 ```
 
-## Rules
+## Reglas
 
-- **Names must stay unique within their collection.** Renaming a field to a name another field already uses throws an `ArgumentException`, and neither the object nor the collection is changed.
-- **Name matching is case-insensitive**, following Databricks SQL. `view.Fields["ORDER MONTH"]` finds the field renamed above. A rename that only changes casing is still worth doing, since it refreshes the stored name.
-- **The rename applies to the object model in memory.** Serialize the view to write it out.
+- **Los nombres deben ser únicos dentro de su colección.** Si cambias el nombre de un campo por uno que ya usa otro campo, se produce una `ArgumentException` y no se modifica ni el objeto ni la colección.
+- **La coincidencia de nombres no distingue entre mayúsculas y minúsculas**, de acuerdo con Databricks SQL. `view.Fields["ORDER MONTH"]` encuentra el campo cuyo nombre se cambió anteriormente. Aunque un cambio de nombre solo modifique las mayúsculas y minúsculas, sigue siendo útil, ya que actualiza el nombre almacenado.
+- **El cambio de nombre se aplica al modelo de objetos en memoria.** Serializa la vista para escribirla.
 
 ## Pasos a seguir
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+- [Agregar objetos a una vista de métricas](xref:semantic-bridge-add-object)
+- [Quitar objetos de una vista de métricas](xref:semantic-bridge-remove-object)
+- [Serializar una vista de métricas a YAML](xref:semantic-bridge-serialize)
 
 ## Ver también
 
 - [Modelo de objetos de la Metric View](xref:semantic-bridge-metric-view-object-model)
-- @semantic-bridge-metric-view-validation
+- @validación de Metric View en Semantic Bridge
