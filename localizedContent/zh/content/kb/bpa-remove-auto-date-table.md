@@ -8,22 +8,22 @@ description: 用于识别并移除会增大模型体积、降低性能的自动�
 
 # 移除自动日期表
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别由 Power BI Desktop 自动生成的日期表。应移除这些自动生成的表（`DateTableTemplate_` 和 `LocalDateTable_`），改用一个明确、统一的日期表，以优化模型大小和性能。
+此最佳实践规则用于识别由 Power BI Desktop 自动生成的日期表。 These auto-generated tables (`DateTableTemplate_` and `LocalDateTable_`) should be removed in favor of a single, explicit date table to optimize model size and performance.
 
 - 类别：性能
 
-- 严重性：中（2）
+- 严重级别：中等（2）
 
-## 适用范围
+## 适用于
 
 - 表
 - 计算表格
 
-## 为什么这很重要
+## 为何这很重要
 
-当启用“自动日期/时间”时，Power BI 会为每个日期/日期时间列自动创建隐藏的日期表。这会带来以下问题：
+当启用“自动日期/时间”时，Power BI 会为每个日期/日期时间列自动创建隐藏的日期表。 This causes issues:
 
 - **模型大小增加**：每个自动生成的表都会添加不必要的数据
 - **内存开销增加**：多个日期表比共享同一个日期表占用更多内存
@@ -31,7 +31,7 @@ description: 用于识别并移除会增大模型体积、降低性能的自动�
 
 使用一个设计良好的日期表会更高效，也更易于维护。
 
-## 此规则何时触发
+## 该规则何时触发
 
 当规则发现名称符合以下条件的计算表格时会触发：
 
@@ -69,12 +69,12 @@ Power BI Desktop 的“自动日期/时间”功能会自动创建这些表格�
 ### 修复前
 
 ```
-表格：
+Tables:
   - Sales
-  - LocalDateTable_OrderDate（隐藏，自动生成）
-  - LocalDateTable_ShipDate（隐藏，自动生成）
+  - LocalDateTable_OrderDate (hidden, auto-generated)
+  - LocalDateTable_ShipDate (hidden, auto-generated)
   - Products
-  - LocalDateTable_ReleaseDate（隐藏，自动生成）
+  - LocalDateTable_ReleaseDate (hidden, auto-generated)
 ```
 
 **结果**：多个隐藏表会导致模型体积膨胀
@@ -82,11 +82,11 @@ Power BI Desktop 的“自动日期/时间”功能会自动创建这些表格�
 ### 修复后
 
 ```
-表格：
+Tables:
   - Sales
   - Products
-  - DateTable（显式创建，标记为日期表格）
-    -> 与 Sales[OrderDate]、Sales[ShipDate]、Products[ReleaseDate] 建立关系
+  - DateTable (explicit, marked as date table)
+    -> Relationships to Sales[OrderDate], Sales[ShipDate], Products[ReleaseDate]
 ```
 
 **结果**：一个高效的日期表即可支撑所有日期关系
