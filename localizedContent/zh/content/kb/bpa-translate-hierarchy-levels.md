@@ -8,25 +8,25 @@ description: 最佳做法规则：确保为所有已定义的区域设置翻译�
 
 # 为所有区域设置翻译层次结构级别名称
 
-## 概述
+## 概览
 
 此规则用于识别可见层次结构中在一个或多个区域设置下缺少名称翻译的层级。
 
 - 类别：模型布局
-- 严重性：低（1）
+- 严重性：低 (1)
 
-## 适用对象
+## 适用于
 
 - 级别（层次结构内）
 
-## 为什么这很重要
+## 为何这很重要
 
 - **本地化不完整**：级别名称仅以默认语言显示
 - **体验不一致**：层次结构只做了部分翻译
 - **用户困惑**：导航看起来不完整
 - **专业形象**：缺少翻译会降低整体质量
 
-## 此规则何时触发
+## 此规则何时会触发
 
 当某个层次结构级别同时满足以下两个条件时，此规则会触发：
 
@@ -45,8 +45,8 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ### 手动修复
 
 1. 在 **TOM Explorer** 中选择该级别
-2. 在 **属性** 窗格中，展开 **翻译名称**
-3. 为每个区域设置分别输入翻译
+2. 在 **Properties** 窗格中，展开 **Translated Names**
+3. 为每个区域设置输入翻译
 
 ## 常见原因
 
@@ -56,7 +56,7 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 ### 原因 2：后续添加了区域设置
 
-层级创建后才添加区域设置。
+Culture added after hierarchy was created.
 
 ### 原因 3：翻译不完整
 
@@ -67,24 +67,24 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ### 修复前
 
 ```
-层次结构：Geography
-  级别：Country
-    英语："Country"
-    西班牙语：（缺失）
+Hierarchy: Geography
+  Level: Country
+    English: "Country"
+    Spanish: (missing)
 ```
 
 ### 修复后
 
 ```
-层次结构：Geography
-  级别：Country
-    英语："Country"
-    西班牙语："País"
+Hierarchy: Geography
+  Level: Country
+    English: "Country"
+    Spanish: "País"
 ```
 
 ## 兼容级别
 
-此规则适用于兼容级别为 **1200** 及以上的模型。
+该规则适用于兼容级别为 **1200** 及以上的模型。
 
 ## 相关规则
 
