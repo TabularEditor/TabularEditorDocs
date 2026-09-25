@@ -46,7 +46,7 @@ Los perfiles de sobrescritura usan JSON que sigue la [especificación del comand
 
 Cada sobrescritura dentro de `dataSources`, `expressions`, `partitions` o `columns` debe incluir una propiedad `originalObject` que identifique qué objeto del modelo se va a sobrescribir.
 
-### Ámbito de la sobrescritura
+### Override scope
 
 De forma predeterminada, las sobrescrituras se aplican de manera global a la operación de actualización. Sin embargo, puedes usar la propiedad `scope` para limitar una sobrescritura y que solo afecte a una tabla o partición específicas. Esto es útil cuando quieres actualizar todo el modelo, pero necesitas que determinadas tablas obtengan los datos de forma distinta a como está configurado en los metadatos del modelo.
 
