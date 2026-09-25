@@ -61,7 +61,7 @@ Hay dos formas de cambiar el idioma de la aplicación:
 
 [Cambiar el idioma a través del menú Ventana](~/content/assets/images/user-interface/chaning-language-windows-ui.png)
 
-### Desde Preferencia
+### Via Preferences
 
 1. Haz clic en **Herramientas** > **Preferencia**
 2. Ve a la sección **UI**
