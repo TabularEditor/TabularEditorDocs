@@ -8,7 +8,7 @@ description: Regla de buenas prácticas que garantiza que las relaciones conecte
 
 # Las columnas de una relación deben tener el mismo tipo de datos
 
-## Descripción general
+## Resumen
 
 Esta regla de prácticas recomendadas identifica relaciones en las que las columnas vinculadas tienen tipos de datos distintos. Ambas columnas de una relación deben compartir el mismo tipo de datos para garantizar un filtrado correcto, evitar errores y mantener un rendimiento óptimo de las consultas.
 
@@ -41,9 +41,9 @@ FromColumn.DataType != ToColumn.DataType
 
 Esto detecta relaciones que conectan columnas con tipos de datos diferentes.
 
-## Cómo corregirlo
+## Cómo corregir
 
-### Solución manual
+### Corrección manual
 
 1. Identifica qué columna debe cambiar de tipo de datos
 2. Cambia el tipo de datos en **Power Query**, en el Data source subyacente o en el modelo
@@ -67,10 +67,10 @@ Tablas de hechos que usan columnas DateTime mientras que las dimensiones de fech
 
 ## Ejemplo
 
-### Antes de la corrección
+### Antes de la solución
 
 ```
-Relación: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
+Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
 ```
 
 **Error**: la relación no pasa la validación o provoca problemas de rendimiento por conversión implícita
@@ -78,7 +78,7 @@ Relación: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
 ### Después de la corrección
 
 ```
-Relación: Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
+Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
 ```
 
 **Resultado**: la relación funciona de forma eficiente, sin sobrecarga por conversión de tipos
