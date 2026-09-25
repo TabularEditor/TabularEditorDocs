@@ -19,9 +19,9 @@ Desde la versión [2.7.4](https://github.com/TabularEditor/TabularEditor/release
 
 ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-01.png)
 
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Jerárquico por padre**: La búsqueda se aplicará a los objetos _padre_, es decir, tablas y carpetas de visualización (si están habilitadas). Cuando un elemento padre cumpla los criterios de búsqueda, se mostrarán todos los elementos hijos.
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Jerárquico por hijos**: La búsqueda se aplicará a los objetos _hijos_, es decir, medidas, columnas, jerarquías, etc. Los objetos padre solo se mostrarán si tienen al menos un objeto hijo que cumpla los criterios de búsqueda.
-- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Plano**: La búsqueda se aplicará a todos los objetos y los resultados se mostrarán en una lista plana. Los objetos que contengan elementos secundarios seguirán mostrándolos de forma jerárquica.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Hierarchical by parent**: The search will apply to _parent_ objects, that is Tables and Display Folders (if those are enabled). Cuando un elemento padre cumpla los criterios de búsqueda, se mostrarán todos los elementos hijos.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Hierarchical by children**: The search will apply to _child_ objects, that is Measures, Columns, Hierarchies, etc. Los objetos padre solo se mostrarán si tienen al menos un objeto hijo que cumpla los criterios de búsqueda.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Flat**: The search will apply to all objects, and results will be displayed in a flat list. Los objetos que contengan elementos secundarios seguirán mostrándolos de forma jerárquica.
 
 ## Búsqueda simple
 
@@ -35,7 +35,7 @@ Al expandir cualquiera de las tablas, se mostrarán todas las medidas, columnas,
 
 Observa que la tabla "Employee" ahora aparece en la lista, ya que tiene un par de elementos secundarios (columnas, en este caso) que contienen la palabra "sales".
 
-## Búsqueda con comodines
+## Wildcard search
 
 Al escribir una cadena en el cuadro de texto del filtro, puedes usar el comodín `?` para indicar cualquier carácter y `*` para indicar cualquier secuencia de caracteres (cero o más). Así, escribir `*sales*` produciría exactamente los mismos resultados que se muestran más arriba; sin embargo, si escribes `sales*`, solo se mostrarán los objetos cuyo nombre _empieza_ por la palabra "sales" (de nuevo, no distingue entre mayúsculas y minúsculas).
 
@@ -55,7 +55,7 @@ Los comodines se pueden colocar en cualquier parte de la cadena y puedes incluir
 
 ## Búsqueda con LINQ dinámico
 
-También puedes usar [LINQ dinámico](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) para buscar objetos, lo mismo que haces al crear reglas del [Best Practice Analyzer](xref:best-practice-analyzer). Para habilitar el modo LINQ dinámico en el cuadro de texto Filtro, solo tienes que poner un `:` (dos puntos) delante de tu cadena de búsqueda. Por ejemplo, para ver todos los objetos cuyo nombre termina en "Key" (distingue entre mayúsculas y minúsculas), escribe:
+You can also use [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) to search for objects, which is the same thing you do when creating [Best Practice Analyzer rules](xref:best-practice-analyzer). Para habilitar el modo LINQ dinámico en el cuadro de texto Filtro, solo tienes que poner un `:` (dos puntos) delante de tu cadena de búsqueda. Por ejemplo, para ver todos los objetos cuyo nombre termina en "Key" (distingue entre mayúsculas y minúsculas), escribe:
 
 ```
 :Name.EndsWith("Key")
@@ -86,7 +86,7 @@ No estás limitado a buscar solo en los nombres de los objetos. Las cadenas de b
 Como otro ejemplo, lo siguiente mostrará todas las medidas ocultas del modelo que no estén referenciadas por ningún otro objeto:
 
 ```
-:ObjectType="medida" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
+:ObjectType="Measure" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
 ```
 
 También puedes usar expresiones regulares. Lo siguiente encontrará todas las columnas cuyo nombre contenga la palabra "Number" o "Amount":
