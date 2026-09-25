@@ -53,7 +53,7 @@ El resultado es técnicamente correcto, pero no es útil: se exponen los nombres
 
 Una expresión de filas de detalle se puede definir en dos niveles:
 
-| Nivel      | Nombre de la propiedad                       | Ámbito                                                                  |
+| Nivel      | Nombre de la propiedad                       | Scope                                                                   |
 | ---------- | -------------------------------------------- | ----------------------------------------------------------------------- |
 | **Tabla**  | Expresión de filas de detalle predeterminada | Se aplica a todas las medidas de la tabla                               |
 | **Medida** | Expresión de filas de detalle                | Se aplica solo a esa medida; sobrescribe la expresión de nivel de tabla |
