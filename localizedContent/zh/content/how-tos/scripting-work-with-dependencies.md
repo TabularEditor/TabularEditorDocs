@@ -13,10 +13,10 @@ applies_to:
 
 # 如何使用依赖关系
 
-TOM 封装器会通过 `DependsOn` 和 `ReferencedBy` 属性跟踪对象之间的引用关系。可用它们进行影响分析、查找未使用对象，以及理解 DAX 血缘关系。
+The TOM wrapper tracks which objects reference which other objects through the `DependsOn` and `ReferencedBy` properties. Use these for impact analysis, finding unused objects and understanding DAX lineage.
 
 > [!NOTE]
-> `DependsOn` 和 `ReferencedBy` 属性公开的依赖信息与 Tabular Editor 界面中的 [**DAX 依赖关系** 视图](xref:creating-and-testing-dax#dax-dependencies) 所显示的信息相同。
+> The `DependsOn` and `ReferencedBy` properties expose the same dependency information shown in the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) in Tabular Editor's UI.
 
 ## 快速参考
 
@@ -52,7 +52,7 @@ column.UsedInSortBy            // columns using this as SortByColumn
 
 ## `DependsOn`：这个对象引用了什么？
 
-`DependsOn` 适用于 (xref:TabularEditor.TOMWrapper.IDaxDependantObject) 类型，即具有 DAX 表达式的对象。这包括度量值、计算列、计算项、KPI、表和分区。
+`DependsOn` is available on (xref:TabularEditor.TOMWrapper.IDaxDependantObject) types -- objects that have a DAX expression. This includes measures, calculated columns, calculation items, KPIs, tables and partitions.
 
 ```csharp
 var measure = Model.AllMeasures.First(m => m.Name == "Revenue");
@@ -67,7 +67,7 @@ var usesDate = measure.DependsOn.Tables.Any(t => t.Name == "Date");
 
 ## `ReferencedBy`：哪些对象引用了这个对象？
 
-`ReferencedBy` 适用于任何 (xref:TabularEditor.TOMWrapper.IDaxObject) 对象。这也包括自身不含 DAX 表达式的对象，例如 `DataColumn`；它们仍可在其他对象的 DAX 中通过名称被引用。
+`ReferencedBy` is available on any (xref:TabularEditor.TOMWrapper.IDaxObject). 这也包括自身不含 DAX 表达式的对象，例如 `DataColumn`；它们仍可在其他对象的 DAX 中通过名称被引用。
 
 ```csharp
 var column = Model.Tables["Sales"].Columns["Amount"];
@@ -82,7 +82,7 @@ var usedInRLS = column.ReferencedBy.Roles.Any();
 
 ## 深度遍历
 
-`Deep()` 会以传递方式沿着依赖链继续遍历。可用于完整的影响分析。
+`Deep()` 会以传递方式沿着依赖链继续遍历。 Use it for full impact analysis.
 
 ```csharp
 // All upstream objects (direct + indirect) that a measure depends on
@@ -97,7 +97,7 @@ var affectedMeasures = allDownstream.OfType<Measure>();
 
 ## 查找未使用的对象
 
-没有任何引用的对象是清理的候选对象。这种模式与用于检测未使用对象的内置 BPA 规则一致。
+Objects with no references are candidates for cleanup. This pattern mirrors the built-in BPA rule for detecting unused objects.
 
 ```csharp
 // Measures not referenced by any other DAX expression
@@ -135,7 +135,7 @@ Info($"Total objects affected (deep): {allAffected.Count}");
 
 在 BPA 规则表达式中，可直接在当前上下文对象上访问这些依赖属性。
 
-| C# Script                                           | Dynamic LINQ (BPA)            |
+| C# Script                                           | Dynamic LINQ（BPA）                                |
 | --------------------------------------------------- | ------------------------------------------------ |
 | `m.ReferencedBy.Count == 0`                         | `ReferencedBy.Count = 0`                         |
 | `m.DependsOn.Any()`                                 | `DependsOn.Any()`                                |
@@ -149,9 +149,9 @@ Info($"Total objects affected (deep): {allAffected.Count}");
 
 > [!IMPORTANT]
 >
-> - `DependsOn` 需要 DAX 表达式，并且仅适用于 `IDaxDependantObject` 类型：`Measure`、`CalculatedColumn`、`CalculationItem`、`KPI`、`Table`、`Partition`、`TablePermission`。 `DataColumn` 没有 `DependsOn`，因为它没有 DAX 表达式。
-> - `ReferencedBy` 不需要 DAX 表达式。它适用于任何 `IDaxObject` 类型：`Column`、`Measure`、`Table`、`Hierarchy`。 `DataColumn` 有 `ReferencedBy`，因为其他对象可以按名称引用它。并非每种对象类型都同时具有这两个属性。
-> - `UsedInRelationships`、`UsedInHierarchies` 和 `UsedInSortBy` 是列专有的属性。它们追踪的是结构性使用情况，而不是对 DAX 表达式的引用。要找出真正未使用的列，请同时检查结构性引用和 DAX 引用。
+> - `DependsOn` 需要 DAX 表达式，并且仅适用于 `IDaxDependantObject` 类型：`Measure`、`CalculatedColumn`、`CalculationItem`、`KPI`、`Table`、`Partition`、`TablePermission`。 A `DataColumn` does not have `DependsOn` because it has no DAX expression.
+> - `ReferencedBy` 不需要 DAX 表达式。 It is available on any `IDaxObject` type: `Column`, `Measure`, `Table`, `Hierarchy`. A `DataColumn` has `ReferencedBy` because other objects can reference it by name. Not every object type has both properties.
+> - `UsedInRelationships`, `UsedInHierarchies` and `UsedInSortBy` are column-specific properties. 它们追踪的是结构性使用情况，而不是对 DAX 表达式的引用。 Check both structural and DAX references to find truly unused columns.
 > - 在依赖链层级很深、嵌套复杂的大型模型中，`ReferencedBy.Deep()` 和 `DependsOn.Deep()` 的计算开销可能会非常高。
 
 ## 另见
