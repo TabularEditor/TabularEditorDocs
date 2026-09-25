@@ -81,7 +81,7 @@ var otherCol = m.Table.Model.Tables["Product"].Columns.First();
 > [!NOTE]
 > El último ejemplo muestra que puedes subir hasta `Model` desde cualquier objeto hijo y volver a bajar hasta cualquier tabla del modelo.
 
-## Navegar por los objetos secundarios de una tabla
+## Navigating table children
 
 Cada `Table` expone colecciones tipadas para sus objetos secundarios.
 
@@ -141,12 +141,12 @@ foreach (var rel in Model.Relationships)
 
 En las expresiones de reglas de Best Practice Analyzer (BPA) y en los filtros del árbol del **Explorador TOM**, puedes acceder directamente a las propiedades del objeto en el contexto. La navegación al elemento padre utiliza la notación de puntos.
 
-| C# Script                             | LINQ dinámico (BPA) |
-| ------------------------------------- | -------------------------------------- |
-| `measure.Table.Name`                  | `Table.Name`                           |
-| `column.Table.IsHidden`               | `Table.IsHidden`                       |
-| `table.Columns.Count()`               | `Columns.Count()`                      |
-| `table.Measures.Any(m => m.IsHidden)` | `Measures.Any(IsHidden)`               |
+| C# Script                            | LINQ dinámico (BPA) |
+| ------------------------------------ | -------------------------------------- |
+| `measure.Table.Name`                 | `Table.Name`                           |
+| `column.Table.IsHidden`              | `Table.IsHidden`                       |
+| `table.Columns.Count()`              | `Columns.Count()`                      |
+| `table.Medidas.Any(m => m.IsHidden)` | `Medidas.Any(IsHidden)`                |
 
 > [!NOTE]
 > Las expresiones de LINQ dinámico en las reglas de BPA se evalúan sobre un único objeto a la vez. No tienes acceso a `Model` ni a colecciones entre tablas. Usa el ámbito **Se aplica a** de la regla para seleccionar el tipo de objeto sobre el que se ejecuta la expresión.
@@ -155,4 +155,4 @@ En las expresiones de reglas de Best Practice Analyzer (BPA) y en los filtros de
 
 - @csharp-scripts
 - @advanced-scripting
-- @how-to-filter-query-objects-linq
+- @como-filtrar-objetos-de-consulta-con-linq
