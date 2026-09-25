@@ -1,6 +1,6 @@
 ---
 uid: connect-oracle
-title: Connect to Oracle
+title: Conectar a Oracle
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,30 +17,30 @@ applies_to:
           full: true
 ---
 
-# Connect to Oracle
+# Conectar a Oracle
 
-Start from **Model > Import tables...** and choose an Oracle source.
+Ve a **Modelo > Importar tablas...** y selecciona un origen de Oracle.
 
-The Oracle connector requires the Oracle OLE DB provider to be installed on your machine. You get this warning if it is not:
+El conector de Oracle requiere que el proveedor OLE DB de Oracle esté instalado en tu equipo. Si no está instalado, verás esta advertencia:
 
-![The ODAC driver not installed warning, saying that Tabular Editor 3 requires the OraOLEDB.Oracle provider from the Oracle Data Access Components](~/content/assets/images/features/connectivity/oracle-connection.png)
+![Advertencia de que el controlador ODAC no está instalado; indica que Tabular Editor 3 requiere el proveedor OraOLEDB.Oracle de Oracle Data Access Components](~/content/assets/images/features/connectivity/oracle-connection.png)
 
-## Authenticators
+## Métodos de autenticación
 
-Oracle connections use a database user name and password. There is no integrated or directory-based mode in the connection dialog.
+Las conexiones de Oracle usan un nombre de usuario y una contraseña de base de datos. En el cuadro de diálogo de conexión no existe ningún modo de autenticación integrada ni basado en directorios.
 
-| Campo                          | What it is                                                   |
-| ------------------------------ | ------------------------------------------------------------ |
-| **Server**                     | The TNS name, Easy Connect string or full connect descriptor |
-| **User name** and **Password** | An Oracle database account                                   |
-| **Additional options**         | Extra connection string settings, passed through unchanged   |
+| Campo                                  | Qué es                                                                      |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| **Servidor**                           | El nombre TNS, una cadena Easy Connect o el descriptor de conexión completo |
+| **Nombre de usuario** y **Contraseña** | Una cuenta de base de datos de Oracle                                       |
+| **Opciones adicionales**               | Configuración adicional de la cadena de conexión, que se pasa sin cambios   |
 
-## Identifiers
+## Identificadores
 
-Oracle object names are always quoted with double quotes, and Oracle treats an unquoted name as upper case. A table created as `sales` is therefore `"SALES"` unless it was created quoted. If the wizard does not list a table you expected, check the case of its name in Oracle before assuming a permissions problem.
+Los nombres de los objetos de Oracle siempre van entre comillas dobles, y Oracle interpreta un nombre sin comillas como si estuviera en mayúsculas. Por lo tanto, una tabla creada como `sales` será `\"SALES\"` a menos que se haya creado entre comillas. Si el asistente no enumera una tabla que esperabas, comprueba el uso de mayúsculas y minúsculas en su nombre en Oracle antes de dar por hecho que se trata de un problema de permisos.
 
-## Where the credentials are stored
+## Dónde se almacenan las credenciales
 
-Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
+Las credenciales que introduces aquí se guardan, por usuario y por modelo, en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, así que no se registran en el control de versiones, y cualquier compañero que abra el mismo modelo deberá proporcionar sus propias credenciales.
 
-The generated M expression names the server and the object only. It never contains a password, a token or a key.
+La expresión M generada solo nombra el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
