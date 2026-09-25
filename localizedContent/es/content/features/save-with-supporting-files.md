@@ -42,16 +42,16 @@ La propiedad `Name` de Database también se sincroniza con la propiedad `display
 
 <a name="power-bi-desktop-authored-pbip-projects"></a>
 
-### Proyectos PBIP creados con Power BI Desktop
+### Power BI Desktop authored PBIP projects
 
-Las reglas anteriores describen un modelo cuyos metadatos incluyen un nombre y una descripción. Un modelo semántico de un [Proyecto de Power BI (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) creado con Power BI Desktop no incluye ninguno de ellos: en esos proyectos, el nombre y la descripción del elemento solo se encuentran en el archivo `.platform`.
+The rules above describe a model whose metadata carries a name and a description. A [Power BI Project (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) semantic model authored by Power BI Desktop carries neither: in those projects the item name and description live only in the `.platform` file.
 
-Tabular Editor deja como están los valores existentes de `displayName` y `description` en `.platform` y nombra una nueva carpeta con el nombre del elemento, en lugar de crear una carpeta llamada `.SemanticModel`
+Tabular Editor leaves the existing `displayName` and `description` in `.platform` as they are and names a new folder after the item, instead of creating a folder called `.SemanticModel`
 
 > [!IMPORTANT]
-> Las versiones de Tabular Editor anteriores a la 3.27.0 cambiaban el nombre del elemento y borraban su descripción en el Workspace de Fabric en la siguiente sincronización de Git.
+> Tabular Editor versions before 3.27.0 renamed the item and cleared its description in the Fabric workspace on the next Git sync.
 
-Para que Tabular Editor controle el nombre y la descripción del elemento, establece las propiedades `Name` y `Description` en el objeto Database, como se describe anteriormente. Cuando los metadatos ya los incluyen, Tabular Editor los sincroniza con `.platform` cada vez que guardas.
+To let Tabular Editor control the name and the description of the item, set the `Name` and `Description` properties on the Database object as described above. Once the metadata carries them, Tabular Editor synchronizes them to `.platform` on every save.
 
 ### Archivos incluidos
 
@@ -73,8 +73,8 @@ Ejemplo de estructura de carpetas para una base de datos llamada "Sales":
 Sales.SemanticModel/
 ├── .platform
 ├── definition.pbism
-├── model.bim                    (si se guarda como TMSL)
-└── definition/                  (si se guarda como TMDL)
+├── model.bim                    (if saved as TMSL)
+└── definition/                  (if saved as TMDL)
     ├── database.tmdl
     ├── tables.tmdl
     └── ...
