@@ -42,7 +42,7 @@ Puede usar el Administrador de paquetes de DAX con cualquier modelo que admita f
 Puede abrir el panel de DPM desde el menú **Ver**. También es posible asignar un atajo personalizado al comando `View.DaxPackageManager` desde **Herramientas > Preferencias > Teclado**.
 
 - **Menú:** `Ver → Administrador de paquetes de DAX`
-- **Shortcut:** _(if assigned in Preferences)_
+- **Atajo:** _(si se asignó en Preferencias)_
 
 ---
 
