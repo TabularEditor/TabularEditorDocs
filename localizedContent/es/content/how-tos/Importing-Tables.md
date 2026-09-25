@@ -25,7 +25,7 @@ Puedes seleccionar varias tablas/vistas para importarlas a la vez. Cuando hagas 
 
 ## Una nota sobre los Data sources heredados frente a los orígenes de datos estructurados
 
-As there is currently no way for Tabular Editor 2 to infer the metadata returned from M (Power Query) expressions, this UI only supports Legacy (aka. Provider) Data Sources. Si necesitas usar orígenes de datos estructurados, aún puedes usar una conexión heredada temporal para importar inicialmente el esquema de la tabla (siempre que se pueda acceder a tu Data source mediante SQL, OLE DB u ODBC) y, después, cambiar manualmente las particiones de las tablas importadas para que usen los orígenes de datos estructurados. If you are importing data from "exotic" data sources, such as web services, Azure Data Lake Storage, etc. schema metadata can not be imported automatically, but [there is an option for providing the metadata information through the clipboard](#power-query-data-sources).
+Como actualmente no hay forma de que Tabular Editor 2 pueda inferir los metadatos que devuelven las expresiones M (Power Query), esta interfaz de usuario solo admite Data sources heredados (también conocidos como Provider). Si necesitas usar orígenes de datos estructurados, aún puedes usar una conexión heredada temporal para importar inicialmente el esquema de la tabla (siempre que se pueda acceder a tu Data source mediante SQL, OLE DB u ODBC) y, después, cambiar manualmente las particiones de las tablas importadas para que usen los orígenes de datos estructurados. Si importas datos de Data sources "poco habituales", como servicios web, Azure Data Lake Storage, etc., no se pueden importar automáticamente los metadatos del esquema, pero [hay una opción para proporcionar los metadatos a través del portapapeles](#power-query-data-sources).
 
 En general, sin embargo, se recomienda usar siempre una conexión Legacy para los siguientes tipos de orígenes:
 
@@ -52,7 +52,7 @@ Al hacer clic en "OK", se creará en tu modelo un Data source (Legacy) con la co
 
 La siguiente opción de la lista, "Use a temporary connection", no hará que se agregue un nuevo Data source al modelo. Esto significa que eres responsable de asignar un Data source a las particiones de la tabla recién importada antes de implementar el modelo.
 
-La última opción, "Manually import metadata from another application", se usa cuando quieres importar una nueva tabla a partir de una lista de metadatos de columnas. This is useful for Structured (Power Query) Data Sources, [see below](#power-query-data-sources).
+La última opción, "Manually import metadata from another application", se usa cuando quieres importar una nueva tabla a partir de una lista de metadatos de columnas. Esto resulta útil para los Data sources estructurados (Power Query). [Consulta más abajo](#power-query-data-sources).
 
 ## Capacidades de SQL
 
@@ -114,7 +114,7 @@ Si quieres importar tablas desde una base de datos Azure SQL o desde un pool de 
 
 Aquí tienes instrucciones paso a paso para configurar el Data source y que funcione con MFA:
 
-1. Crea un nuevo Data source heredado y agrégalo a tu modelo. Model > New Data Source (Legacy)
+1. Crea un nuevo Data source heredado y agrégalo a tu modelo. Model > New Data source (Legacy)
 2. Especifica `System.Data.OleDb` como valor de la propiedad Provider y utiliza una cadena de conexión como la siguiente, sustituyendo los nombres correctos del servidor, la base de datos y el usuario:
 
 ### Para bases de datos de Azure SQL:
@@ -148,10 +148,10 @@ Como no existe una forma oficialmente admitida de ejecutar o validar una expresi
   ![image](~/content/assets/images/importing-tables-07.png)
 - Para otros tipos de Data sources, puede resultarte más fácil crear el modelo inicial y las primeras tablas en SSDT para averiguar cómo debe configurarse el Data source, y luego usar la técnica que se describe a continuación solo al añadir tablas adicionales.
 - Usa Power Query en Excel o Power BI Desktop para conectarte a tus datos de origen y aplicar las transformaciones necesarias.
-- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the previous output:
+- En el Editor avanzado de Power Query, añade un paso que use la [función M](https://docs.microsoft.com/en-us/powerquery-m/table-schema) `Table.Schema(...)` sobre el resultado anterior:
   ![image](~/content/assets/images/importing-tables-08.png)
-- Select the full output preview, copy it into the clipboard (CTRL+A, CTRL+C) and paste it into the schema/metadata textbox in the Import Tables Wizard:
+- Selecciona toda la vista previa de la salida, cópiala al portapapeles (CTRL+A, CTRL+C) y pégala en el cuadro de texto de esquema/metadatos del Asistente para importar tablas:
   ![image](~/content/assets/images/importing-tables-09.png)
 - Haz clic en "Import!" y ponle un nombre adecuado a tu tabla.
-- Por último, pega en la partición de la tabla recién creada la expresión M original que usaste en Excel/Power BI, la que tenías antes de modificarla con la función `Table.Schema(...)`. Modify the M expression to point to the source you specified in the first step:
+- Por último, pega en la partición de la tabla recién creada la expresión M original que usaste en Excel/Power BI, la que tenías antes de modificarla con la función `Table.Schema(...)`. Modifica la expresión M para que apunte al origen que especificaste en el primer paso:
   ![image](~/content/assets/images/importing-tables-10.png)
