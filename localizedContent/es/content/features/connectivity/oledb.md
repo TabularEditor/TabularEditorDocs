@@ -1,6 +1,6 @@
 ---
 uid: connect-oledb
-title: Conectar mediante OLE DB
+title: Connect through OLE DB
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,30 +17,30 @@ applies_to:
           full: true
 ---
 
-# Conectar mediante OLE DB
+# Connect through OLE DB
 
-OLE DB es la otra vía de propósito general y la opción adecuada cuando un origen ofrece un proveedor OLE DB, pero no un controlador ODBC que funcione.
+OLE DB is the other general-purpose route, and the one to use where a source offers an OLE DB provider but no usable ODBC driver.
 
-![El cuadro de diálogo Propiedades del vínculo de datos en su pestaña Proveedor, con la lista de proveedores OLE DB instalados en el equipo](~/content/assets/images/features/connectivity/oledb-connection.png)
+![The Data Link Properties dialog on its Provider tab, listing the OLE DB providers installed on the machine](~/content/assets/images/features/connectivity/oledb-connection.png)
 
-## Autenticadores
+## Authenticators
 
-Al igual que con ODBC, es el proveedor quien decide cómo inicias sesión, no Tabular Editor.
+As with ODBC, the provider decides how you sign in rather than Tabular Editor.
 
-| Campo                                  | Qué es                                                                      |
-| -------------------------------------- | --------------------------------------------------------------------------- |
-| **Proveedor**                          | Un proveedor OLE DB instalado en este equipo                                |
-| **Servidor**                           | Lo que el proveedor necesite para identificar el origen                     |
-| **Nombre de usuario** y **contraseña** | Se facilitan al proveedor cuando las necesita                               |
-| **Opciones adicionales**               | Configuración adicional de la cadena de conexión, que se transmite tal cual |
+| Campo                          | What it is                                                 |
+| ------------------------------ | ---------------------------------------------------------- |
+| **Provider**                   | An OLE DB provider installed on this machine               |
+| **Server**                     | Whatever the provider expects to identify the source       |
+| **User name** and **Password** | Supplied to the provider where it needs them               |
+| **Additional options**         | Extra connection string settings, passed through unchanged |
 
-La lista de proveedores se lee del equipo, por lo que muestra lo que está instalado y no todo lo que existe. Si falta un proveedor en la lista, primero hay que instalarlo con la misma arquitectura que Tabular Editor.
+The provider list is read from the machine, so it shows what is installed rather than everything that exists. A provider missing from the list needs installing first, in the same architecture as Tabular Editor.
 
 > [!TIP]
-> Prefiere un cuadro de diálogo específico cuando exista; si no, ODBC antes que OLE DB. Analysis Services admite una gama más limitada de proveedores OLE DB que Windows, por lo que un origen que se conecta en el asistente puede, aun así, fallar al actualizarse en el servidor.
+> Prefer a dedicated dialog where one exists, and ODBC over OLE DB otherwise. Analysis Services supports a narrower range of OLE DB providers than Windows does, so a source that connects in the wizard can still fail to refresh on the server.
 
-## Dónde se almacenan las credenciales
+## Where the credentials are stored
 
-Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se confirman en el control de versiones, y un compañero que abra el mismo modelo proporcionará las suyas.
+Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
 
-La expresión M generada solo incluye el nombre del servidor y del objeto. Nunca contiene una contraseña, un token ni una clave.
+The generated M expression names the server and the object only. It never contains a password, a token or a key.
