@@ -56,7 +56,7 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 ### 原因 2：后续添加了区域设置
 
-Culture added after hierarchy was created.
+该区域设置是在层次结构创建后才添加的。
 
 ### 原因 3：翻译不完整
 
