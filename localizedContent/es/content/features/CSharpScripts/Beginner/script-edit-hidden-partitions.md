@@ -13,11 +13,11 @@ applies_to:
 
 # Editar particiones ocultas
 
-## Propósito del script
+## Objetivo del script
 
 Las tablas calculadas, los grupos de cálculo y los parámetros de campo no muestran particiones en Tabular Editor. Esto es así a propósito, ya que por lo general no se deben ni se pueden editar. Sin embargo, aún se puede acceder a las propiedades de la partición y editarlas mediante el siguiente fragmento de script.
 
-## Secuencia de comandos
+## Script
 
 ```csharp
 Selected.Table.Partitions[0].Output();
