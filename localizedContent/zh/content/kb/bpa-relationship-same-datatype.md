@@ -8,19 +8,19 @@ description: 此最佳实践规则可确保关系所连接的列数据类型一�
 
 # 关系列必须具有相同的数据类型
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别关系两端所连接的列数据类型不一致的情况。关系中的两列必须使用相同的数据类型，才能确保筛选正常、防止错误，并保持最佳查询性能。
+此最佳实践规则用于识别关系两端所连接的列数据类型不一致的情况。 Both columns in a relationship must share the same data type to ensure proper filtering, prevent errors, and maintain optimal query performance.
 
 - 类别：错误预防
 
 - 严重性：高（3）
 
-## 适用范围
+## 适用于
 
 - 关系
 
-## 为什么这很重要
+## 为何这很重要
 
 数据类型不匹配的关系会导致严重问题：
 
@@ -31,7 +31,7 @@ description: 此最佳实践规则可确保关系所连接的列数据类型一�
 - **性能下降**：查询过程中转换数据类型会拖慢执行速度
 - **内存开销**：转换缓冲区需要额外内存
 
-## 何时触发此规则
+## 此规则何时触发
 
 出现以下情况时会触发该规则：
 
@@ -70,7 +70,7 @@ FromColumn.DataType != ToColumn.DataType
 ### 修复前
 
 ```
-关系：Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
+Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
 ```
 
 **错误**：关系验证失败，或因隐式转换导致性能问题
@@ -78,7 +78,7 @@ FromColumn.DataType != ToColumn.DataType
 ### 修复后
 
 ```
-关系：Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
+Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
 ```
 
 **结果**：关系可高效运行，无类型转换开销
