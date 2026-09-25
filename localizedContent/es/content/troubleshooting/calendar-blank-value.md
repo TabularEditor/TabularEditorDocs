@@ -19,7 +19,7 @@ applies_to:
 
 # Error de fecha en blanco en la función Calendar
 
-## Información general
+## Resumen
 
 Este error puede aparecer al actualizar un modelo en **Tabular Editor 3 (TE3)**, incluso si la tabla afectada no hace referencia directamente a una función `CALENDAR()`. Normalmente indica que una tabla de Fecha o Calendario dependiente se basa en valores de otras tablas que están temporalmente vacías, lo que da como resultado valores en blanco para la fecha de inicio o de fin.
 
@@ -28,7 +28,7 @@ Este error puede aparecer al actualizar un modelo en **Tabular Editor 3 (TE3)**,
 - La actualización del modelo en Tabular Editor 3 falla con:
 
   ```
-  La fecha de inicio o la fecha de fin en la función Calendar no puede estar en blanco.
+  The start date or end date in Calendar function cannot be Blank value.
   ```
 
 - El mismo modelo o tabla se actualiza correctamente en Power BI Desktop o en Power BI Service.
