@@ -8,12 +8,12 @@ description: 最佳实践规则：确保为所有已定义的区域设置翻译�
 
 # 为所有区域设置提供显示文件夹翻译
 
-## 概述
+## 概览
 
 此规则用于识别已设置显示文件夹但在一个或多个区域设置中缺少翻译的可见对象。
 
 - 类别：模型布局
-- 严重性：低（1）
+- 严重性：低 (1)
 
 ## 适用于
 
@@ -21,9 +21,9 @@ description: 最佳实践规则：确保为所有已定义的区域设置翻译�
 - 层次结构
 - 数据列
 - 计算列
-- 计算表格的列
+- 计算表格列
 
-## 为什么这很重要
+## 为何这很重要
 
 - **本地化不完整**：显示文件夹只会以默认语言显示
 - **导航不一致**：文件夹结构仅部分翻译
@@ -34,7 +34,7 @@ description: 最佳实践规则：确保为所有已定义的区域设置翻译�
 
 当某个对象同时满足以下三项条件时，此规则会触发：
 
-1. 该对象对最终用户**可见**（未隐藏）
+1. 该对象对终端用户**可见**（未隐藏）
 2. 该对象已设置**显示文件夹**（用于将其组织到文件夹结构中）
 3. 模型中至少有一个区域设置未为该显示文件夹**提供翻译**
 
@@ -68,9 +68,9 @@ TranslatedDisplayFolders.Reset()
 
 创建显示文件夹时未提供翻译。
 
-### 原因 2：后续才添加区域设置
+### 原因 2：后续添加了区域设置
 
-在定义显示文件夹之后才添加了区域设置。
+Culture added after display folders were defined.
 
 ### 原因 3：翻译不完整
 
@@ -81,22 +81,22 @@ TranslatedDisplayFolders.Reset()
 ### 修复前
 
 ```
-度量值：[Total Sales]
-显示文件夹（英语）：“Sales Metrics”
-显示文件夹（法语）：（缺失）
+Measure: [Total Sales]
+Display Folder (English): "Sales Metrics"
+Display Folder (French): (missing)
 ```
 
 ### 修复后
 
 ```
-度量值：[Total Sales]
-显示文件夹（英语）：“Sales Metrics”
-显示文件夹（法语）：“Métriques de Vente”
+Measure: [Total Sales]
+Display Folder (English): "Sales Metrics"
+Display Folder (French): "Métriques de Vente"
 ```
 
 ## 兼容级别
 
-这个规则适用于兼容级别为 **1200** 及以上的模型。
+这个规则适用于兼容级别 **1200** 及更高的模型。
 
 ## 相关规则
 
