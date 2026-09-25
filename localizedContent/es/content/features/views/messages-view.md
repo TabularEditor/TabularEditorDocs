@@ -1,5 +1,5 @@
 ---
-uid: messages-view
+uid: vista-de-mensajes
 title: Vista de mensajes
 author: Daniel Otykier
 updated: 2021-09-08
