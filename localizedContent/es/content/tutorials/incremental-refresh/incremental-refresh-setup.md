@@ -61,8 +61,8 @@ Para configurar la actualización incremental, debe definir una nueva política 
    _A continuación se muestra un ejemplo de un paso de filtro válido:_
 
 ```M
-// El paso de filtro debe poder plegarse de nuevo al Data source
-// Ningún paso anterior debe romper el plegado de consultas
+// The filter step must be able to fold back to the data source
+// No steps before this should break query folding
 #"Incremental Refresh Filter Step" = 
     Table.SelectRows(
         Navigation,
@@ -97,7 +97,7 @@ Las columnas de tipo fecha, cadena o entero también se pueden filtrar mantenien
 
 10. **Actualizar todas las particiones:** Mantén pulsada Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Preview data'_ para ver el resultado.
 
-   <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
 
 Por último, puedes configurar la actualización programada en Power BI Service. Power BI se encargará automáticamente de crear las particiones de tu tabla. Siempre puedes conectarte al modelo remoto para ver y validar las particiones, por ejemplo, usando el Analizador VertiPaq.
 
@@ -119,15 +119,15 @@ Si tu columna de fecha es de tipo entero, usa lo siguiente en lugar del paso 4 d
 
 ```M
 let
-   // Conectar a tu Data source
+   // Connect to your data source
    Source = 
       Sql.Database(#"SqlEndpoint", #"Database"),
 
-// Cargar los datos de la tabla
+// Load the table data
    Data = 
       Source{ [Schema="Factview", Item="Orders"] }[Data],
 
-   // Realizar las transformaciones que deban plegarse de nuevo en el Data source
+   // Make any transformations that should fold back to the data source
    #"Remove Unnecessary Columns" = 
       Table.RemoveColumns ( 
          Data, 
@@ -137,17 +137,17 @@ let
          } 
       ),
 
-   // Agregar el paso de filtro de actualización incremental
-   //    El paso de filtro debe poder plegarse de nuevo en el Data source
-   //    Ningún paso anterior a este debería romper el plegado de consultas
-   #"Actualización incremental" = 
+   // Add incremental refresh filter step
+   //    The filter step must be able to fold back to the data source
+   //    No steps before this should break query folding
+   #"Incremental Refresh" = 
      Table.SelectRows(
        #"Remove Unnecessary Columns",
          each [OrderDateKey] >= ConvertDatetimeToInt(#"RangeStart")
          and  [OrderDateKey] < ConvertDatetimeToInt(#"RangeEnd")
      )
 in
-   #"Actualización incremental" 
+   #"Incremental Refresh" 
 ```
 
 3. **Continúa con normalidad con los siguientes pasos:** Después, puedes continuar con la configuración y la aplicación de la política de actualización con _"Aplicar política de actualización"_ y, por último, actualizar todas las particiones. Previsualiza los datos de la tabla una vez finalicen las operaciones de actualización para ver el resultado.
@@ -160,15 +160,15 @@ Si tu columna de fecha es de tipo cadena, deberías configurar el paso de filtro
 
 ```M
 let
-   // Conectar a tu Data source
+   // Connect to your data source
    Source = 
       Sql.Database(#"SqlEndpoint", #"Database"),
 
-   // Cargar los datos de la tabla
+   // Load the table data
    Data = 
       Source{ [Schema="Factview", Item="Orders"] }[Data],
 
-   // Realizar las transformaciones que deban plegarse de nuevo en el Data source
+   // Make any transformations that should fold back to the    data source
    #"Remove Unnecessary Columns" = 
       Table.RemoveColumns ( 
          Data, 
@@ -178,15 +178,15 @@ let
          } 
       ),
 
-   // Agregar el paso de filtro de actualización incremental
-   //    El paso de filtro debe poder plegarse de nuevo en el Data source
-   //    Ningún paso anterior a este debería romper el plegado de consultas
-   #"Actualización incremental" = 
+   // Add incremental refresh filter step
+   //    The filter step must be able to fold back to the   data source
+   //    No steps before this should break query folding
+   #"Incremental Refresh" = 
      Table.SelectRows(
        #"Remove Unnecessary Columns",
        each 
 
-       // Convierte "2022-01-09" a DateTime, por ejemplo
+       // Converts "2022-01-09" to DateTime, for example
        DateTime.From(
          Date.FromText(
            [OrderDate], 
@@ -204,7 +204,7 @@ let
        ) < #"RangeEnd"      
      )
 in
-   #"Actualización incremental" 
+   #"Incremental Refresh" 
 ```
 
 Consulta también la documentación de la función `Date.FromText` en Power Query [aquí](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext). Si no es posible convertir la columna Date sobre la marcha manteniendo el plegado de consultas, también puedes configurar la actualización incremental con una consulta nativa, como se describe en la sección siguiente.
@@ -230,7 +230,7 @@ Sustituye el texto anterior en el parámetro `Query` por el siguiente, por ejemp
 3. **Añadir `RangeStart` y `RangeEnd`:** Concatena "RangeStart" y "RangeEnd" dentro de la cláusula `WHERE`, sustituyendo los campos de marcador de posición y convirtiendo los parámetros al tipo de fecha con `Date.From` y al tipo de texto mediante `Date.ToText`, con la opción `Format` establecida en `"yyyy-MM-dd`. No olvides incluir comillas simples `'` a ambos lados de la concatenación. A continuación tienes un ejemplo de cómo quedaría la consulta final:
 
 ```M
-// Ejemplo de una consulta nativa completa que se pliega y funciona con actualización incremental
+// Example of a full native query that folds and works with Incremental Refresh
 let
     Source = Sql.Database("yoursql.database.windows.net", "YourDatabaseName", 
     [Query="
