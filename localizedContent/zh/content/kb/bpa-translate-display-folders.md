@@ -70,7 +70,7 @@ TranslatedDisplayFolders.Reset()
 
 ### 原因 2：后续添加了区域设置
 
-Culture added after display folders were defined.
+在定义显示文件夹之后才添加了区域设置。
 
 ### 原因 3：翻译不完整
 
