@@ -1,6 +1,6 @@
 ---
 uid: connect-dataflows
-title: Conectarse a los Dataflows de Power BI
+title: Connect to Power BI dataflows
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,28 +17,28 @@ applies_to:
           full: true
 ---
 
-# Conectarse a los Dataflows de Power BI
+# Connect to Power BI dataflows
 
-Tabular Editor puede importar entidades de un Dataflow de Power BI, de modo que un modelo pueda reutilizar las transformaciones que ya existen en un Workspace en lugar de repetirlas.
+Tabular Editor can import entities from a Power BI dataflow, so a model can reuse transformations that already exist in a workspace rather than repeating them.
 
-![El cuadro de diálogo Conectarse a un Workspace de Power BI, en el que se enumeran los Workspaces a los que pertenece la cuenta con la que has iniciado sesión](~/content/assets/images/features/connectivity/dataflows-connection.png)
+![The Connect to a Power BI workspace dialog, listing the workspaces the signed-in account belongs to](~/content/assets/images/features/connectivity/dataflows-connection.png)
 
-## Métodos de autenticación
+## Authenticators
 
-Los Dataflows se autentican con Microsoft Entra ID frente al servicio de Power BI.
+Dataflows authenticate with Microsoft Entra ID, against the Power BI service.
 
-| Lo que proporcionas                                    | Cuándo                                 |
-| ------------------------------------------------------ | -------------------------------------- |
-| Un inicio de sesión interactivo con Microsoft Entra ID | Uso interactivo normal                 |
-| Una entidad de servicio                                | Actualización programada o desatendida |
+| What you supply                           | When                            |
+| ----------------------------------------- | ------------------------------- |
+| An interactive Microsoft Entra ID sign-in | Normal interactive use          |
+| A service principal                       | Scheduled or unattended refresh |
 
-Puedes ver los Workspaces de los que forma parte tu cuenta. Un Dataflow de un Workspace al que no te hayan agregado no aparece, y un Workspace sin Dataflows se muestra vacío en lugar de ocultarse.
+You see the workspaces your account is a member of. A dataflow in a workspace you have not been added to does not appear, and a workspace with no dataflows in it is listed empty rather than hidden.
 
 > [!NOTE]
-> Un administrador de Power BI debe habilitar el acceso de la entidad de servicio a la API REST de Power BI en la configuración del inquilino antes de que una entidad de servicio pueda siquiera enumerar Workspaces. Hasta que se habilite, una entidad de servicio inicia sesión correctamente y no ve nada.
+> Service principal access to the Power BI REST API has to be enabled by a Power BI administrator in the tenant settings before a service principal can list workspaces at all. Until it is, a service principal signs in successfully and sees nothing.
 
-## Dónde se almacenan las credenciales
+## Where the credentials are stored
 
-Las credenciales que introduces aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas de modo que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se incluyen en el control de código fuente y un compañero que abra el mismo modelo tendrá que proporcionar las suyas.
+Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
 
-La expresión M generada solo incluye el nombre del servidor y del objeto. Nunca contiene una contraseña, un token ni una clave.
+The generated M expression names the server and the object only. It never contains a password, a token or a key.
