@@ -10,7 +10,7 @@ description: 用于删除对象名称首尾空格的最佳实践规则，以避�
 
 ## 概览
 
-This best practice rule identifies objects whose names contain leading or trailing spaces. These unnecessary spaces cause DAX referencing issues, display problems, and general confusion.
+此最佳实践规则用于识别名称前后包含空格的对象。这些多余的空格会导致 DAX 引用问题、显示异常，并造成混乱。
 
 - 类别：**命名约定**
 - 严重性：低 (1)
@@ -71,7 +71,7 @@ Name.StartsWith(" ") or Name.EndsWith(" ")
 
 ### 原因 3：复制对象
 
-When duplicating objects the name will have an added " copy" post-fixed. 很容易忽略删除 "copy" 前面的空格
+复制对象时，名称末尾会自动追加“ copy”后缀，其中 copy 前带空格。很容易忽略删除 "copy" 前面的空格
 
 ## 示例
 
