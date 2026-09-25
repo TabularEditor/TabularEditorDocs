@@ -8,25 +8,25 @@ description: 一条最佳实践规则，确保数据列具有有效的源列映�
 
 # 数据列必须指定源列
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别缺少有效的 `SourceColumn` 属性的数据列。每个数据列都必须引用底层数据源中的某个源列，才能在刷新时正常工作。
+此最佳实践规则用于识别缺少有效的 `SourceColumn` 属性的数据列。 Every data column must reference a source column from the underlying data source to function correctly during refresh.
 
 - 类别：错误预防
 - 严重性：高（3）
 
-## 适用范围
+## 适用于
 
 - 数据列
 
-## 为何重要
+## 为何这很重要
 
 - **刷新失败**：数据刷新操作会因“找不到列”错误而失败
 - **部署问题**：在 Power BI 服务或 Analysis Services 中，模型验证失败
 - **数据完整性**：列可能一直为空，或包含陈旧数据
 - **依赖项损坏**：度量值和关系可能产生不正确的结果
 
-## 此规则何时触发
+## 此规则何时会触发
 
 当数据列满足以下条件时，会触发此规则：
 
@@ -68,9 +68,9 @@ string.IsNullOrWhitespace(SourceColumn)
 ### 修复前
 
 ```
-表：Sales
-列：ProductName (DataColumn)
-  SourceColumn：[空]
+Table: Sales
+Column: ProductName (DataColumn)
+  SourceColumn: [empty]
 ```
 
 结果：刷新失败，并提示“在源查询中找不到列 'ProductName'”
@@ -78,16 +78,16 @@ string.IsNullOrWhitespace(SourceColumn)
 ### 修复后
 
 ```
-表：Sales
-列：ProductName (DataColumn)
-  SourceColumn：ProductName
+Table: Sales
+Column: ProductName (DataColumn)
+  SourceColumn: ProductName
 ```
 
 结果：刷新时该列会正确填充
 
 ## 兼容级别
 
-这条规则适用于兼容级别为 **1200** 及以上的模型。
+本规则适用于兼容级别为 **1200** 及以上的模型。
 
 ## 相关规则
 
