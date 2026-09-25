@@ -1,6 +1,6 @@
 ---
 uid: te-cli-findings
-title: Resultados legibles por máquina (JSON)
+title: Machine-Readable Results (JSON)
 author: Peer Grønnerup
 updated: 2026-09-11
 applies_to:
@@ -13,16 +13,16 @@ applies_to:
       full: true
 ---
 
-# Resultados legibles por máquina (JSON)
+# Machine-Readable Results (JSON)
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-`te validate`, `te bpa run`, `te test run` y `te query` generan un Report de problemas en un mismo formato JSON. Con `--output-format json`, cada uno de estos comandos emite un **único documento**; no hay forma de que alguno de ellos no genere nada para analizar.
+`te validate`, `te bpa run`, `te test run`, and `te query` report problems in one shared JSON shape. Under `--output-format json`, each of these commands emits a **single document** - there is no way for one of them to leave nothing to parse.
 
 > [!NOTE]
-> `te query` usa esta estructura JSON solo cuando su validación DAX previa a la ejecución produce al menos un error. Si la consulta se ejecuta correctamente, emite en su lugar el resultado de la consulta: `{columns, rows, rowCount, truncated, durationMs, trace?}`.
+> `te query` uses this JSON shape only when its pre-execution DAX validation produces at least one error. A successful query emits the query result instead: `{columns, rows, rowCount, truncated, durationMs, trace?}`.
 
-## El documento JSON
+## The JSON document
 
 ```json
 {
@@ -46,61 +46,61 @@ applies_to:
 }
 ```
 
-- `command` - qué comando generó el documento.
-- `durationMs` - duración total de la ejecución.
-- `summary` - recuento por gravedad: `errors`, `warnings`, `info`, `total`.
-- `findings` - un único array plano, clasificado por `severity`.
+- `command` - which command produced the document.
+- `durationMs` - total run duration.
+- `summary` - severity tally: `errors`, `warnings`, `info`, `total`.
+- `findings` - one flat array, discriminated by `severity`.
 
-## Claves de cada hallazgo
+## Per-finding keys
 
-Presentes en **cada** hallazgo:
+Present on **every** finding:
 
-| Clave        | Valores / significado                                                                                                                                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `severity`   | `error`, `warning` o `info`.                                                                                                                                                                              |
-| `source`     | `validate`, `bpa`, `test` o `query`.                                                                                                                                                                      |
-| `code`       | Código estable del hallazgo (ID de mensaje de validación, ID de regla de BPA, `TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID`, ...). |
-| `message`    | Descripción legible para humanos.                                                                                                                                                                         |
-| `object`     | Nombre sin calificar del objeto al que se refiere el hallazgo.                                                                                                                                            |
-| `objectType` | Un valor de un vocabulario cerrado; véase más abajo.                                                                                                                                                      |
-| `fixable`    | `true` solo en las infracciones de BPA cuya regla define una expresión de corrección.                                                                                                                     |
+| Clave        | Values / meaning                                                                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `severity`   | `error`, `warning`, or `info`.                                                                                                                                                         |
+| `source`     | `validate`, `bpa`, `test`, or `query`.                                                                                                                                                 |
+| `code`       | Stable finding code (a validation message ID, BPA rule ID, `TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID`, ...). |
+| `message`    | Human-readable description.                                                                                                                                                            |
+| `object`     | Bare name of the object the finding is about.                                                                                                                                          |
+| `objectType` | One of a closed vocabulary - see below.                                                                                                                                                |
+| `fixable`    | `true` only for BPA violations whose rule defines a fix expression.                                                                                                                    |
 
-Se incluyen **solo cuando la CLI las conoce**; estas claves están _ausentes_ en lugar de `null` cuando no se establecen:
+Present **only where the CLI knows them** - these keys are _absent_ rather than `null` when unset:
 
-| Clave                  | Generado por                                 | Significado                                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `objectPath`           | Solo para infracciones de `validate` y `bpa` | Ruta canónica del objeto, resoluble tal cual mediante `te get` o `te set`. No aparece en los hallazgos de pruebas, los hallazgos de consultas ni los errores de reglas de BPA.                                                                                                                                                 |
-| `expressionPosition`   | Solo en `validate` y `query`                 | `{property, lineNumber, column}` dentro de la propiedad `Named Expression` de la expresión. **Opcional en todos los orígenes, incluidos validate y query**: no aparece cuando el analizador no hizo Report de ninguna posición utilizable y es de todo o nada (nunca una posición parcial). |
-| `ruleName`, `category` | Solo en `bpa`                                | El nombre y la categoría de la regla infringida.                                                                                                                                                                                                                                                                                               |
+| Clave                  | Populated by                         | Significado                                                                                                                                                                                                                                                                                     |
+| ---------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `objectPath`           | `validate` and `bpa` violations only | Canonical object path, resolvable as-is by `te get` or `te set`. Absent for test findings, query findings, and BPA rule errors.                                                                                                                                 |
+| `expressionPosition`   | `validate` and `query` only          | `{property, lineNumber, column}` inside the named expression property. **Optional on every source, including validate and query** - absent whenever the analyzer reported no usable position, and all-or-nothing (never a partial position). |
+| `ruleName`, `category` | `bpa` only                           | The violated rule's name and category.                                                                                                                                                                                                                                          |
 
-### vocabulario de objectType
+### objectType vocabulary
 
-El conjunto cerrado de valores de `objectType` (las formas singulares de los contenedores de la gramática de rutas, no una enumeración de TOM):
+The closed set of `objectType` values (the singular forms of the path-grammar containers, not a TOM enum):
 
-`medida`, `Column`, `Hierarchy`, `Level`, `partición`, `CalculationItem`, `Table`, `rol`, `TablePermission`, `perspectiva`, `configuración regional`, `DataSource`, `Expression`, `Function`, `relación`, `KPI`, `RefreshPolicy`, `Member`, `Calendar`, `Variation`, `Model`, `BpaRule`, `Test`, `TestSuite`, `Query`.
+`Measure`, `Column`, `Hierarchy`, `Level`, `Partition`, `CalculationItem`, `Table`, `Role`, `TablePermission`, `Perspective`, `Culture`, `DataSource`, `Expression`, `Function`, `Relationship`, `KPI`, `RefreshPolicy`, `Member`, `Calendar`, `Variation`, `Model`, `BpaRule`, `Test`, `TestSuite`, `Query`.
 
-## Elementos adicionales por comando
+## Per-command extras
 
-Cada comando mantiene algunas claves propias en el nivel superior del documento:
+Each command keeps a few keys of its own at the top level of the document:
 
-| Comando            | Claves adicionales                                                                                                                                                                                                                                                                                                           |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `te validate`      | `valid` (booleano).                                                                                                                                                                                                                                                                       |
-| `te bpa run`       | `model`, `rulesEvaluated`, `violations`, `ruleErrors`, `ignoredRules`. Los errores de evaluación de reglas aparecen en `findings` con severidad `error` y `objectType: "BpaRule"`; `violations` y `ruleErrors` desglosan ambos recuentos.                                                    |
-| `te bpa run --fix` | Una clave `fix` dentro del mismo documento: `changes`, `fixed`, `fixErrors`, `skipped`, `fixedItems`, `fixErrorItems`. Si falla la propia pasada de corrección, el documento se sigue escribiendo con la causa en `fix.error`. No está presente sin `--fix`. |
-| `te test run`      | `suites`, `invalidSuites`, `testSummary` (recuentos de pruebas por estado; `summary` sigue siendo el recuento compartido por gravedad).                                                                                                                                                   |
-| `te query`         | Ninguno, y solo en caso de errores de validación; consulta la nota anterior.                                                                                                                                                                                                                                 |
+| Comando            | Extra keys                                                                                                                                                                                                                                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `te validate`      | `valid` (boolean).                                                                                                                                                                                                                                                       |
+| `te bpa run`       | `model`, `rulesEvaluated`, `violations`, `ruleErrors`, `ignoredRules`. Rule-evaluation errors appear in `findings` at severity `error` with `objectType: "BpaRule"` - `violations` and `ruleErrors` split the two counts.                                                   |
+| `te bpa run --fix` | A `fix` key inside the same single document: `changes`, `fixed`, `fixErrors`, `skipped`, `fixedItems`, `fixErrorItems`. If the fix pass itself fails, the document is still written with the reason in `fix.error`. Absent without `--fix`. |
+| `te test run`      | `suites`, `invalidSuites`, `testSummary` (per-status test tallies; `summary` remains the shared severity tally).                                                                                                                                                         |
+| `te query`         | None - and only on validation errors; see the note above.                                                                                                                                                                                                                                   |
 
-## Anotaciones de CI
+## CI annotations
 
-Los cuatro comandos comparten un único generador de anotaciones para `--ci vsts` / `--ci github` (`azdo`, `azure-devops` y `gh` son alias admitidos; `none` desactiva las anotaciones; cualquier otro valor se rechaza antes de que se ejecute el comando). Las anotaciones se envían a stderr; stdout sigue siendo analizable:
+All four commands share one annotation writer for `--ci vsts` / `--ci github` (`azdo`, `azure-devops`, and `gh` are accepted aliases; `none` disables annotations; anything else is rejected before the command runs). Annotations go to stderr; stdout stays parseable:
 
-- Las anotaciones incluyen el código del hallazgo: `code=` en Azure DevOps, `title=` en GitHub.
-- Los hallazgos de severidad informativa no son advertencias: en GitHub se emiten como `::notice::`; en Azure DevOps, como una simple línea de registro. Una ejecución de Azure DevOps cuyos únicos hallazgos son informativos muestra **Succeeded** en el Report.
-- Los mensajes de varias líneas se escapan en una sola línea de anotación, para que la descripción de una regla no pueda romper el formato del registro.
+- Annotations carry the finding's code: `code=` on Azure DevOps, `title=` on GitHub.
+- Info-severity findings are not warnings: on GitHub they emit `::notice::`, on Azure DevOps a plain log line. An Azure DevOps run whose only findings are informational reports **Succeeded**.
+- Multi-line messages are escaped into a single annotation line, so a rule description cannot break the log format.
 
 ## Páginas relacionadas
 
-- @te-cli-commands#exit-codes - los códigos de salida no se ven afectados por el formato de salida.
-- @te-cli-cicd - patrones de pipeline que consumen esta estructura.
-- @te-cli-automation - parseo de salida estructurada desde scripts.
+- @te-cli-commands#exit-codes - exit codes are unaffected by the output format.
+- @te-cli-cicd - pipeline patterns that consume this shape.
+- @te-cli-automation - parsing structured output from scripts.
