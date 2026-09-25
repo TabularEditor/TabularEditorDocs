@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-metric-view-fields-and-dimensions
-title: Fields and Dimensions in Metric Views
+title: Campos y dimensiones en Metric Views
 author: Greg Baldini
 updated: 2026-06-25
 applies_to:
@@ -18,7 +18,7 @@ applies_to:
           full: true
 ---
 
-# Fields and Dimensions in Metric Views
+# Campos y dimensiones en Metric Views
 
 <!--
 SUMMARY: Explains the Databricks Metric View `dimensions` -> `fields` keyword rename and the
@@ -26,109 +26,109 @@ matching Semantic Bridge C# API rename (Dimension -> Field): what changed, that 
 still work, migration guidance, and what Tabular Editor emits on round-trip.
 -->
 
-In spring 2026, the Metric View spec redefined a canonical top-level key in the Metric View YAML specification from `dimensions` (now legacy) to `fields`.
-These both refer to the collection of columns—whether direct references to source columns or defined by a SQL expression—that is available to query in the Metric View.
-[The documentation indicates that, `fields` is to be preferred, but both terms remain valid](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#dimensions).
-We have updated the Metric View object model in the Semantic Bridge to align with this.
-Serialization and deserialization continue to work with either key in conformance with the Metric View spec.
-We offer backward-compatibility shims in the object model for the old "dimension"-associated names.
-Users of the object model in C# scripts should migrate to "field"-associated names when they can.
+En la primavera de 2026, la especificación de Metric View redefinió una clave canónica de nivel superior del YAML de Metric View: cambió de `dimensions` (ahora heredada) a `fields`.
+Ambas hacen referencia al conjunto de columnas disponible para consultar en la Metric View, tanto si son referencias directas a columnas de origen como si están definidas mediante una expresión SQL.
+[La documentación indica que debe preferirse `fields`, pero ambos términos siguen siendo válidos](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#dimensions).
+Hemos actualizado el modelo de objetos de Metric View en Semantic Bridge para alinearlo con este cambio.
+La serialización y la deserialización siguen funcionando con cualquiera de las dos claves, de conformidad con la especificación de Metric View.
+Ofrecemos capas de compatibilidad con versiones anteriores en el modelo de objetos para los nombres antiguos asociados a "dimension".
+Los usuarios del modelo de objetos en C# Scripts deberían migrar a los nombres asociados a "field" en cuanto puedan.
 
-**Who this affects**: anyone writing Metric View YAML by hand, anyone using the Metric View object model in C# scripts in Tabular Editor.
+**A quién afecta**: cualquiera que escriba YAML de Metric View a mano y cualquiera que use el modelo de objetos de Metric View en C# Scripts en Tabular Editor.
 
-## Versioning
+## Control de versiones
 
-This change came after the v1.1 spec was published, and with no new spec version.
-As such, we take a conservative approach in the Semantic Bridge.
-We treat `dimensions` as the default for v0.1 and v1.1 Metric Views.
-In the future, we will treat `fields` as the default for any newer-versioned Metric Views.
-This is out of caution and a desire to offer the most interoperability with any other tools that may not be up to date with the latest published Metric View spec.
+Este cambio llegó después de que se publicara la especificación v1.1 y sin una nueva versión de la especificación.
+Por ello, en Semantic Bridge adoptamos un enfoque conservador.
+Consideramos `dimensions` como valor predeterminado para las Metric Views v0.1 y v1.1.
+En el futuro, trataremos `fields` como valor predeterminado para las Metric Views de versiones posteriores.
+Lo hacemos por cautela y para ofrecer la máxima interoperabilidad con otras herramientas que quizá no estén al día con la última especificación publicada de Metric View.
 
-## Serialization and deserialization
+## Serialización y deserialización
 
-Per [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#dimensions), both keys remain valid for serialization.
+Según la [documentación de Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#dimensions), ambas claves siguen siendo válidas para la serialización.
 
-| YAML source uses | Version                                       | Deserialization succeeds | Warning emitted on deserialization                      | Reserializes with          |
-| ---------------- | --------------------------------------------- | ------------------------ | ------------------------------------------------------- | -------------------------- |
-| `fields`         | <1.1 | yes                      | yes                                                     | `fields`                   |
-| `dimensions`     | <1.1 | yes                      | no                                                      | `dimensions`               |
-| neither          | <1.1 | yes                      | no                                                      | `dimensions`               |
-| `fields`         | 1.1                           | yes                      | no                                                      | `fields`                   |
-| `dimensions`     | 1.1                           | yes                      | yes                                                     | `dimensions`               |
-| neither          | 1.1                           | yes                      | no                                                      | `dimensions`               |
-| `fields`         | > 1.1                         | yes                      | no                                                      | `fields`                   |
-| `dimensions`     | > 1.1                         | yes                      | yes                                                     | `dimensions`               |
-| neither          | > 1.1                         | yes                      | no                                                      | `fields`                   |
-| both             | any                                           | no                       | yes (error, failing deserialization) | n/a, deserialization fails |
+| La fuente YAML utiliza | Versión                                       | La deserialización se realiza correctamente | Se emite una advertencia al deserializar                | Se vuelve a serializar con    |
+| ---------------------- | --------------------------------------------- | ------------------------------------------- | ------------------------------------------------------- | ----------------------------- |
+| `campos`               | <1.1 | sí                                          | sí                                                      | `campos`                      |
+| `dimensiones`          | <1.1 | sí                                          | no                                                      | `dimensiones`                 |
+| ninguno de los dos     | <1.1 | sí                                          | no                                                      | `dimensiones`                 |
+| `campos`               | 1.1                           | sí                                          | no                                                      | `campos`                      |
+| `dimensiones`          | 1.1                           | sí                                          | sí                                                      | `dimensiones`                 |
+| ninguno de los dos     | 1.1                           | sí                                          | no                                                      | `dimensiones`                 |
+| `campos`               | > 1.1                         | sí                                          | no                                                      | `campos`                      |
+| `dimensiones`          | > 1.1                         | sí                                          | sí                                                      | `dimensiones`                 |
+| ninguno de los dos     | > 1.1                         | sí                                          | no                                                      | `campos`                      |
+| ambos                  | cualquiera                                    | no                                          | sí (error; falla la deserialización) | n/a; falla la deserialización |
 
-We will continue to support both keywords in all Metric View versions unless a future spec update indicates otherwise.
-You can continue to freely use either as you prefer, with notes about the warnings and defaults above for serialization and deserialization.
+Seguiremos admitiendo ambas palabras clave en todas las versiones de Metric View, a menos que una futura actualización de la especificación indique lo contrario.
+Puedes seguir usando libremente cualquiera de las dos, como prefieras, teniendo en cuenta las notas anteriores sobre las advertencias y los valores predeterminados para la serialización y la deserialización.
 
-You may note that we warn on `dimensions` in a v1.1 Metric View, and also that we choose `dimensions` as the default if none is provided for the same v1.1.
-This is our conservative default because of the mid-1.1 introduction of `fields` as preferred.
-The warning is in line with Metric View documentation saying that `fields` is to be considered the default.
-The default of `dimensions` is to support interoperability with any other tools that may have only targeted the original v1.1 specification from when it was first published.
+Puedes observar que mostramos una advertencia sobre `dimensions` en una Metric View v1.1 y que también elegimos `dimensions` como valor predeterminado si no se proporciona ninguna clave en esa misma v1.1.
+Este es nuestro valor predeterminado conservador porque, a mitad de la versión 1.1, se introdujo `fields` como opción preferida.
+La advertencia está en consonancia con la documentación de Metric View, que indica que `fields` debe considerarse el valor predeterminado.
+El valor predeterminado de `dimensions` permite la interoperabilidad con cualquier otra herramienta que quizá solo se haya ajustado a la especificación original v1.1 cuando se publicó por primera vez.
 
-We treat the case of both keys in a definition as an error and will fail to deserialize such a Metric View.
-We are aware of no way to generate such a case other than by hand-editing YAML; certainly you cannot accidentally do this via the Semantic Bridge or any operations we expose.
-Such a Metric View definition, which uses both `dimensions` and `fields`, will need manual remediation.
+Consideramos un error que ambas claves aparezcan en una definición y no podremos deserializar una Metric View de ese tipo.
+No conocemos ninguna forma de generar un caso así que no sea editando manualmente el YAML; desde luego, no puedes hacerlo por accidente mediante Semantic Bridge ni mediante ninguna de las operaciones que exponemos.
+Una definición de Metric View de este tipo, que usa tanto `dimensions` como `fields`, requerirá una corrección manual.
 
-An important note on the `materialization` block of the Metric View YAML definition: this section of YAML continues to use only `dimensions` regardless of the top-level key used.
-[See the documentation for authoritative guidance on materialization](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#materialization).
+Una nota importante sobre el bloque `materialization` de la definición YAML de Metric View: esta sección de YAML sigue usando solo `dimensions`, independientemente de la clave de nivel superior que se utilice.
+[Consulta la documentación para obtener directrices definitivas sobre `materialization`](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#materialization).
 
-Finally, there is no behavior or semantic difference in using either of `dimensions` or `fields`.
-These keywords are simply synonyms, with guidance that `fields` is to be preferred.
+Por último, no hay ninguna diferencia de comportamiento ni semántica entre usar `dimensions` o `fields`.
+Estas palabras clave son simplemente sinónimos, con la indicación de que debe preferirse `fields`.
 
-## Metric View object model API change: `Dimension` to `Field`
+## Cambio en la API del modelo de objetos de Metric View: de `Dimension` a `Field`
 
-In light of guidance that `fields` is to be preferred, we have aligned to this throughout the Semantic Bridge.
-We ship a [Metric View object model for programmatic interaction with a Metric View](xref:semantic-bridge-metric-view-object-model), necessary for implementing the translations in the Semantic Bridge.
-We have deprecated the `Dimension` object, and all associated methods and properties that used "dimension" or "dimensions" in their name.
-We have created a new `Field` object, and new "field"-named methods and properties.
-The `Dimension` object and associated methods and properties will now give you a warning about their obsolete state.
-All `Dimension`-based code will continue to work, but we may remove these after a suitable amount of time has passed.
-Like Databricks, we recommend that you use `Field` and associated methods for all new work.
+En línea con la recomendación de preferir `fields`, hemos aplicado este criterio en todo Semantic Bridge.
+Ofrecemos un [modelo de objetos de Metric View para interactuar programáticamente con una Metric View](xref:semantic-bridge-metric-view-object-model), necesario para implementar las traducciones en el Semantic Bridge.
+Hemos marcado como obsoleto el objeto `Dimension`, así como todos los métodos y propiedades asociados que tenían "dimension" o "dimensions" en su nombre.
+Hemos creado un nuevo objeto `Field`, así como nuevos métodos y propiedades con "field" en su nombre.
+El objeto `Dimension` y los métodos y propiedades asociados ahora mostrarán una advertencia sobre su estado obsoleto.
+Todo el código basado en `Dimension` seguirá funcionando, pero es posible que retiremos estos elementos cuando haya transcurrido un tiempo prudencial.
+Al igual que Databricks, recomendamos que utilices `Field` y los métodos asociados para todo trabajo nuevo.
 
-In terms of implementation, all `Dimension`-based code passes through or mirrors the implementation of the `Field`-based code.
-While we recommend using `Field`, you can use both interchangeably.
-In general, migrating from `Dimension` to `Field` should be transparent.
+En términos de implementación, todo el código basado en `Dimension` pasa por la implementación del código basado en `Field` o la reproduce.
+Aunque recomendamos usar `Field`, puedes usar ambos indistintamente.
+En general, la migración de `Dimension` a `Field` debería ser transparente.
 
-A technical note, [`Dimension`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension) is a subclass of `Field`.
-As such, there are a few ways in which you might observe differences between `Field` and `Dimension` code, and there are reasonable workarounds.
-To write code that survives `Dimension`'s removal, branch and declare against `Field`; never name or test the concrete `Dimension` type. Given a field `f`:
+Una nota técnica: [`Dimension`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension) es una subclase de `Field`.
+Por ello, puedes observar algunas diferencias entre el código de `Field` y el de `Dimension`, y existen soluciones alternativas razonables.
+Para escribir código que siga funcionando cuando se elimine `Dimension`, bifurca y declara en términos de `Field`; nunca nombres ni compruebes el tipo concreto `Dimension`. Dado un campo `f`:
 
-| Avoid                                                                  | Use instead                                                | Why it breaks when `Dimension` is removed                                                    |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `f is Dimension`                                                       | `f is Field`                                               | `Dimension` stops compiling; `is Field` is true in both eras                                 |
-| `f is Dimension x`                                                     | `f is Field x`                                             | same                                                                                         |
-| `case Dimension x:`                                                    | `case Field x:`                                            | same                                                                                         |
-| `(Dimension)f`, `f as Dimension`                                       | use `f` directly as a `Field` (no cast) | the cast target disappears; `f` already is a `Field`                                         |
-| `f.GetType() == typeof(Dimension)`                                     | `f is Field`                                               | `typeof(Dimension)` stops compiling                                                          |
-| `f.GetType() == typeof(Field)`                                         | `f is Field`                                               | false now (runtime type is `Dimension`), true later, so it silently flips |
-| `f.GetType().Name == "Dimension"` (or `== "Field"`) | `f is Field`; for a label, `f.ToString()` or `f.Name`      | the type-name string is `"Dimension"` now, `"Field"` later                                   |
-| `Dimension x = ...`, `List<Dimension>`, `IEnumerable<Dimension>`       | `Field x = ...`, `view.Fields`, `IReadOnlyList<Field>`     | the `Dimension` type name goes away                                                          |
-| `typeof(Dimension)`, `nameof(Dimension)`                               | `typeof(Field)`, `nameof(Field)`                           | the `Dimension` symbol is removed                                                            |
-| `MakeValidationRule<MetricView.Dimension>(...)`                        | `MakeValidationRule<MetricView.Field>(...)`                | the type argument references a removed type                                                  |
+| Evita                                                                 | Usa en su lugar                                                               | Por qué deja de funcionar cuando se elimina `Dimension`                                                                           |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `f is Dimension`                                                      | `f is Field`                                                                  | `Dimension` deja de compilar; `is Field` es verdadero en ambas épocas                                                             |
+| `f is Dimension x`                                                    | `f is Field x`                                                                | igual                                                                                                                             |
+| `case Dimension x:`                                                   | `case Field x:`                                                               | igual                                                                                                                             |
+| `(Dimension)f`, `f as Dimension`                                      | usa `f` directamente como `Field` (sin conversión de tipo) | el tipo de destino de la conversión desaparece; `f` ya es un `Field`                                                              |
+| `f.GetType() == typeof(Dimension)`                                    | `f is Field`                                                                  | `typeof(Dimension)` ya no compila                                                                                                 |
+| `f.GetType() == typeof(Field)`                                        | `f is Field`                                                                  | false ahora (el tipo en tiempo de ejecución es `Dimension`), true más adelante, así que cambia silenciosamente |
+| `f.GetType().Name == "Dimension"` (o `== "Field"`) | `f is Field`; para una etiqueta, `f.ToString()` o `f.Name`                    | la cadena del nombre del tipo es `"Dimension"` ahora, `"Field"` más adelante                                                      |
+| `Dimension x = ...`, `List<Dimension>`, `IEnumerable<Dimension>`      | `Field x = ...`, `view.Fields`, `IReadOnlyList<Field>`                        | el nombre de tipo `Dimension` desaparece                                                                                          |
+| `typeof(Dimension)`, `nameof(Dimension)`                              | `typeof(Field)`, `nameof(Field)`                                              | se elimina el símbolo `Dimension`                                                                                                 |
+| `MakeValidationRule<MetricView.Dimension>(...)`                       | `MakeValidationRule<MetricView.Field>(...)`                                   | el argumento de tipo hace referencia a un tipo eliminado                                                                          |
 
 > [!NOTE]
-> The object model deprecation of the `Dimension` type and any future removal of this type and associated methods will have no effect on serializing or deserializing with either YAML keyword.
+> La obsolescencia del tipo `Dimension` en el modelo de objetos, así como cualquier eliminación futura de este tipo y de los métodos asociados, no afectarán a la serialización ni a la deserialización con cualquiera de las dos palabras clave de YAML.
 
-## Name reference: `Dimension` to `Field`
+## Referencia de nombre: de `Dimension` a `Field`
 
-The following table lists each deprecated `Dimension`-based name and its canonical `Field`-based replacement. The legacy names still compile (with an obsolete warning) and behave identically; prefer the canonical names in new scripts.
+La siguiente tabla enumera cada nombre basado en `Dimension` en desuso y su reemplazo canónico basado en `Field`. Los nombres heredados siguen compilando (con una advertencia de obsolescencia) y se comportan de forma idéntica; se recomienda usar los nombres canónicos en scripts nuevos.
 
-| Legacy name (obsolete)                       | Canonical name                                              | Where                                                                                     |
-| --------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `MetricView.Dimension` (type)                | `MetricView.Field` (type)                | Object model                                                                              |
-| `view.Dimensions`                                               | `view.Fields`                                               | `View` collection                                                                         |
-| `view.Dimensions["name"]`                                       | `view.Fields["name"]`                                       | Name-based indexing into the collection                                                   |
-| `view.AddDimension(name, expr)`                                 | `view.AddField(name, expr)`                                 | `View` method                                                                             |
-| `SemanticBridge.MetricView.MakeValidationRuleForDimension(...)` | `SemanticBridge.MetricView.MakeValidationRuleForField(...)` | Validation rule helper (both overloads, with and without `minVersion`) |
-| `context.DimensionNames`                                        | `context.FieldNames`                                        | Context passed to a validation rule                                                       |
+| Nombre heredado (obsoleto)                   | Nombre canónico                                             | Dónde                                                                                                     |
+| --------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `MetricView.Dimension` (tipo)                | `MetricView.Field` (tipo)                | Modelo de objetos                                                                                         |
+| `view.Dimensions`                                               | `view.Fields`                                               | Colección de `View`                                                                                       |
+| `view.Dimensions["name"]`                                       | `view.Fields["name"]`                                       | Indexación por nombre en la colección                                                                     |
+| `view.AddDimension(name, expr)`                                 | `view.AddField(name, expr)`                                 | Método de `View`                                                                                          |
+| `SemanticBridge.MetricView.MakeValidationRuleForDimension(...)` | `SemanticBridge.MetricView.MakeValidationRuleForField(...)` | Función auxiliar para reglas de validación (ambas sobrecargas, con y sin `minVersion`) |
+| `context.DimensionNames`                                        | `context.FieldNames`                                        | Contexto que se pasa a una regla de validación                                                            |
 
-## Related
+## Relacionado
 
 - @semantic-bridge
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation
-- [Metric View API](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)
+- [API de Metric View](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)
