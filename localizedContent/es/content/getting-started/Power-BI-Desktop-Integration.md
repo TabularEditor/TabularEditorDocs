@@ -19,7 +19,7 @@ applies_to:
 
 [Power BI Desktop admite herramientas externas](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools), lo que permite a Tabular Editor realizar operaciones de modelado al trabajar con datos importados o DirectQuery en Power BI Desktop.
 
-![image](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
+![imagen](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
 ## Requisitos previos
 
@@ -36,7 +36,7 @@ Cuando un Report de Power BI Desktop contiene un Data model (es decir, se han ag
 > Los Reports de Power BI Desktop que usan una **conexión en vivo** a SSAS, Azure AS o a un Dataset en un Workspace de Power BI no contienen un Data model. Por tanto, estos Reports **no pueden** usarse con herramientas externas como Tabular Editor.
 
 > [!IMPORTANT]
-> Power BI Desktop reports that directly edits a **Direct Lake** or other Fabric model do not contain a data model. En su lugar, Tabular Editor abrirá el modelo directamente desde el servicio, que es básicamente lo mismo que hace Power BI Desktop.
+> Los Reports de Power BI Desktop que permiten editar directamente un modelo **Direct Lake** u otro modelo de Fabric no contienen un Data model. En su lugar, Tabular Editor abrirá el modelo directamente desde el servicio, que es básicamente lo mismo que hace Power BI Desktop.
 
 Las herramientas externas pueden conectarse a la instancia de Analysis Services administrada por Power BI Desktop a través de un número de puerto específico asignado por Power BI Desktop. Cuando se inicia una herramienta directamente desde la cinta de opciones "Herramientas externas" de Power BI Desktop, este número de puerto se pasa a la herramienta externa como argumento de la línea de comandos. En el caso de Tabular Editor, esto hace que el Data model se cargue en Tabular Editor.
 
