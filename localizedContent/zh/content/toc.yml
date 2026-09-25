@@ -1,26 +1,26 @@
 ﻿- name: 首页
   href: index.md
 - name: 快速入门
-  href: getting-started/
-  homepage: getting-started/index.md
+  href: 快速入门/
+  homepage: 快速入门/index.md
 - name: 功能
-  href: features/
-  homepage: features/index.md
+  href: 功能/
+  homepage: 功能/index.md
 - name: 操作指南
-  href: how-tos/
-  homepage: how-tos/index.md
+  href: 操作指南/
+  homepage: 操作指南/index.md
 - name: 教程
-  href: tutorials/
-  homepage: tutorials/index.md
+  href: 教程/
+  homepage: 教程/index.md
 - name: 参考资料
-  href: references/
-  homepage: references/index.md
+  href: 参考资料/
+  homepage: 参考资料/index.md
 - name: 故障排除
-  href: troubleshooting/
-  homepage: troubleshooting/index.md
+  href: 故障排查/
+  homepage: 故障排查/index.md
 - name: 安全
-  href: security/
-  homepage: security/index.md
+  href: 安全/
+  homepage: 安全/index.md
 - name: API
   href: api/
   homepage: api/index.md
