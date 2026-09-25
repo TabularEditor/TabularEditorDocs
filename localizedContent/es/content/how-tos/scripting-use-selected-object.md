@@ -52,7 +52,7 @@ El objeto `Selected` expone accesores tanto en singular como en plural para cada
 
 | Accesor             | Devuelve               | Comportamiento cuando el recuento no es 1                                                                                                     |
 | ------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Selected.Measure`  | una única `medida`     | Lanza una excepción si se seleccionan 0 medidas o 2 o más medidas                                                                             |
+| `Selected.Medida`   | una única `medida`     | Lanza una excepción si se seleccionan 0 medidas o 2 o más medidas                                                                             |
 | `Selected.Measures` | `IEnumerable<Measure>` | Devuelve una colección que puede estar vacía, pero nunca es nula. Puedes iterarla directamente con seguridad. |
 
 Usa la forma **singular** cuando tu script requiera exactamente un objeto. Usa la forma **plural** cuando el script deba funcionar con cero o más objetos.
