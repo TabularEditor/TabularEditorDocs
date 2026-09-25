@@ -10,11 +10,11 @@ title: Acciones personalizadas
 
 Supón que has creado un script útil usando el objeto `Selected` y quieres poder ejecutarlo varias veces sobre distintos objetos del árbol del explorador. En lugar de pulsar el botón "Reproducir" cada vez que quieras ejecutar el script, Tabular Editor te permite guardarlo como una Acción personalizada:
 
-![imagen](~/content/assets/images/custom-actions-01.png)
+![image](~/content/assets/images/custom-actions-01.png)
 
 Después de guardar la acción personalizada, verás que ya está disponible directamente en el menú contextual de clic derecho del árbol del explorador, lo que facilita mucho ejecutar el script sobre cualquier objeto seleccionado en el árbol. Puedes crear tantas acciones personalizadas como quieras. Usa barras invertidas (\\) en los nombres para crear una estructura de submenús dentro del menú contextual.
 
-![Las acciones personalizadas aparecen directamente en el menú contextual](~/content/assets/images/custom-actions-02.png)
+![Custom Actions show up directly in the context menu](~/content/assets/images/custom-actions-02.png)
 
 Las acciones personalizadas se almacenan en el archivo CustomActions.json en %AppData%\Local\TabularEditor. En el ejemplo anterior, el contenido de este archivo se verá así:
 
@@ -22,10 +22,10 @@ Las acciones personalizadas se almacenan en el archivo CustomActions.json en %Ap
 {
   "Actions": [
     {
-      "Name": "Formato personalizado\\Número con 1 decimal",
+      "Name": "Custom Formatting\\Number with 1 decimal",
       "Enabled": "true",
       "Execute": "Selected.Measures.ForEach(m => m.FormatString = \"0.0\";",
-      "Tooltip": "Establece la propiedad FormatString en \"0.0\"",
+      "Tooltip": "Sets the FormatString property to \"0.0\"",
       "ValidContexts": "Measure, Column"
     }
   ]
@@ -44,10 +44,10 @@ Si necesitas aún más control sobre cuándo se puede invocar una acción desde 
 {
   "Actions": [
     {
-      "Name": "Restablecer nombre de la medida",
+      "Name": "Reset measure name",
       "Enabled": "Selected.Measures.Count == 1",
       "Execute": "Selected.Measure.Name == \"New Measure\"",
-      "ValidContexts": "medida"
+      "ValidContexts": "Measure"
     }
   ]
 }
@@ -60,13 +60,13 @@ Esto deshabilitará la opción del menú contextual, a menos que se haya selecci
 La versión 2,7 introduce un nuevo método de script `CustomAction(...)`, que puede llamarse para invocar acciones personalizadas guardadas previamente. Puede usar este método como un método independiente (similar a `Output(...)`), o puede usarlo como un método de extensión en cualquier conjunto de objetos:
 
 ```csharp
-// Ejecuta "My custom action" sobre la selección actual:
+// Executes "My custom action" against the current selection:
 CustomAction("My custom action");                
 
-// Ejecuta "My custom action" sobre todas las tablas del modelo:
+// Executes "My custom action" against all tables in the model:
 CustomAction(Model.Tables, "My custom action");
 
-// Ejecuta "My custom action" sobre cada medida en la selección actual cuyo nombre empieza por "Sum":
+// Executes "My custom action" against every measure in the current selection whose name starts with "Sum":
 Selected.Measures.Where(m => m.Name.StartsWith("Sum")).CustomAction("My custom action");
 ```
 
