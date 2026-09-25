@@ -34,7 +34,7 @@ XXXX is an invalid culture identifier
 ![区域设置不受支持信息](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
 
 当你的本地计算机使用 **Analysis Services (SSAS) 引擎不支持的区域设置** 时，通常会出现此问题。  
-In most cases, the error is triggered by another underlying issue or warning, but this message is shown as a result.
+在大多数情况下，该错误是由其他潜在问题或警告引起的，而显示这条信息只是其结果。
 
 ---
 
@@ -45,7 +45,7 @@ In most cases, the error is triggered by another underlying issue or warning, bu
 如果你在本地计算机上运行 SQL Server Analysis Services (SSAS)：
 
 - **解决方案：** 更改 SSAS 实例使用的 **服务账户**。  
-  Updating the account often resolves unsupported locale mismatches.
+  更新账户通常可以解决因不受支持的区域设置不匹配而导致的问题。
 
 ---
 
