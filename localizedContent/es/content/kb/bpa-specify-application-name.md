@@ -8,12 +8,12 @@ description: Regla de prácticas recomendadas para incluir el nombre de la aplic
 
 # Especificar el nombre de la aplicación en las cadenas de conexión
 
-## Descripción general
+## Resumen
 
 Esta regla identifica los orígenes de datos del proveedor de SQL Server que no incluyen el parámetro `Application Name` en sus cadenas de conexión. Incluir el nombre de la aplicación permite una mejor supervisión y solución de problemas.
 
 - Categoría: Rendimiento
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
