@@ -19,17 +19,17 @@ applies_to:
 
 # 安装并激活 Tabular Editor 3
 
-This page covers common installation and activation problems for Tabular Editor 3 and how to resolve them. For the standard activation flow, see @getting-started. For advanced deployment scenarios (silent install, license pre-provisioning, post-install configuration), see @installation-activation-basic.
+本页介绍 Tabular Editor 3 常见的安装和激活问题，以及相应的解决方法。有关标准激活流程，请参阅 @getting-started。有关高级部署场景（静默安装、许可证预配、安装后配置），请参阅 @installation-activation-basic。
 
 ## 检查系统要求
 
-Confirm the machine meets the requirements before further troubleshooting:
+进一步排查前，先确认这台计算机满足要求：
 
 - **操作系统：** Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
 - **架构：** x64、ARM64（自 3.23.0 起原生支持）
 - **.NET 运行时：** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-Use the matching MSI for your architecture from the [downloads page](xref:downloads). An installer or architecture mismatch is a frequent cause of failed installs and missing-dependency errors at first launch.
+请从 [下载页面](xref:downloads) 下载与系统架构匹配的 MSI 安装包。安装程序与系统架构不匹配是导致安装失败以及首次启动时出现缺少依赖项错误的常见原因。
 
 ## 检查已激活的许可证
 
@@ -41,33 +41,33 @@ Tabular Editor 3 会将激活详细信息存储在 Windows 注册表 `HKEY_CURRE
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also inspect and edit the **LicenseKey** and **User** values directly using `regedit.exe`.
+你还可以直接使用 `regedit.exe` 检查并编辑 **LicenseKey** 和 **User** 值。
 
 ![注册表编辑器](~/content/assets/images/troubleshooting/registry-editor.png)
 
-## Activation dialog keeps reappearing
+## 激活对话框反复出现
 
-Tabular Editor 3 contacts `https://api.tabulareditor.com` at startup and periodically to validate the license. If this endpoint is unreachable due to a firewall or proxy, the application requires re-activation every 30 days. See @policies for the full list of endpoints used.
+Tabular Editor 3 会在启动时以及随后定期连接 `https://api.tabulareditor.com` 以验证许可证。如果由于防火墙或代理无法访问该端点，应用程序每 30 天都需要重新激活一次。使用的端点完整列表请参阅 @policies。
 
-If activation prompts persist:
+如果激活提示持续出现：
 
-1. Confirm `api.tabulareditor.com` is reachable from the affected machine.
-2. Configure proxy settings under **Tools > Preferences > Proxy Settings**. See @proxy-settings for proxy-specific troubleshooting, including the **AnalysisServices.AppSettings.json** override that enables external MSAL proxy support.
-3. If the network blocks outbound traffic to the activation endpoint, use [Manual activation](#manual-activation-no-internet) below.
+1. 确认受影响的计算机可以访问 `api.tabulareditor.com`。
+2. 在 **工具 > 偏好设置 > 代理设置** 中配置代理。与代理相关的故障排除请参阅 @proxy-settings，其中包括用于启用外部 MSAL 代理支持的 **AnalysisServices.AppSettings.json** 覆盖设置。
+3. 如果网络阻止向激活端点的出站连接，请使用下面的[手动激活](#manual-activation-no-internet)。
 
 ## 手动激活（无网络连接）
 
-If the machine running Tabular Editor cannot reach the activation endpoint, the activation prompt offers a manual flow.
+如果运行 Tabular Editor 的计算机无法访问激活终结点，激活提示会提供手动激活流程。
 
 ![手动激活提示](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
-1. Enter your e-mail. A dialog appears with a link to an activation key.
+1. 请输入你的电子邮箱地址。会弹出一个对话框，其中包含指向激活密钥的链接。
 
-2. Copy the URL and open it on a different machine that has internet access. The URL returns a JSON object.
+2. 复制该 URL，并在另一台可访问互联网的计算机上打开它。该 URL 会返回一个 JSON 对象。
 
    ![手动激活 JSON 对象](~/content/assets/images/getting-started/activation_manual_jsonobject.png)
 
-3. Copy the full JSON object and paste it into the dialog on the offline machine.
+3. 复制完整的 JSON 对象，并将其粘贴到离线计算机上的对话框中。
 
    ![已填写的手动激活信息](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
@@ -75,9 +75,9 @@ If the machine running Tabular Editor cannot reach the activation endpoint, the 
 
 ## 无法通过 UI 更改许可证密钥
 
-The **Change license key** button under **Help > About Tabular Editor** is only enabled when no model is loaded. If the button is grayed out, close the open model under **File > Close model** and try again.
+位于 **帮助 > 关于 Tabular Editor** 下的 **更改许可证密钥** 按钮，只有在未加载任何模型时才会启用。如果该按钮呈灰显状态，请先通过 **文件 > 关闭模型** 关闭当前打开的模型，然后重试。
 
-If the UI option still fails, reset the license through the Registry Editor:
+如果 UI 选项仍然无效，请通过注册表编辑器重置许可证：
 
 1. 关闭所有 Tabular Editor 3 实例。
 2. 打开注册表编辑器（开始 > 运行 > regedit.msc）。
@@ -91,46 +91,46 @@ If the UI option still fails, reset the license through the Registry Editor:
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
-The next launch prompts for a license key as if the application were freshly installed.
+下次启动时，会像应用刚安装时那样提示你输入许可证密钥。
 
 > [!IMPORTANT]
-> Once a license key is removed, the product is not usable by the current Windows user on that machine until a new license key is entered.
+> 一旦移除许可证密钥，在输入新的许可证密钥之前，该计算机上的当前 Windows 用户将无法使用该产品。
 
-## License is on the wrong Windows user
+## 许可证绑定到了错误的 Windows 用户
 
-Tabular Editor 3 activations are stored **per user** under `HKEY_CURRENT_USER`. If multiple users share a machine, each user activates the product on their own Windows profile. A license activated under one Windows account is not visible to another Windows account on the same machine.
+Tabular Editor 3 的激活信息会按**用户**存储在 `HKEY_CURRENT_USER` 下。如果多名用户共用一台计算机，每位用户都需要在各自的 Windows 用户配置文件中激活该产品。在某个 Windows 帐户下激活的许可证，对同一台计算机上的其他 Windows 帐户不可见。
 
-To check which Windows account holds the license, log in as that user and run the registry query in [Inspect the activated license](#inspect-the-activated-license).
+要检查哪个 Windows 帐户持有该许可证，请使用该用户登录，并运行[检查已激活的许可证](#inspect-the-activated-license)中的注册表查询。
 
-### Windows account vs Power BI / Entra account
+### Windows 帐户与 Power BI / Entra 帐户
 
-A common source of confusion: the Windows account that runs Tabular Editor 3 is independent from the Microsoft Entra account used to authenticate against a Power BI / Fabric workspace.
+一个常见的混淆点是：运行 Tabular Editor 3 的 Windows 帐户，与用于对 Power BI / Fabric 工作区进行身份验证的 Microsoft Entra 帐户是相互独立的。
 
-- **License activation** is stored under `HKEY_CURRENT_USER` of the Windows user that activated the product. It is not tied to any cloud identity.
-- **Workspace authentication** happens at connection time in the **Load Semantic Model from Database** dialog. Sign in there with the Microsoft Entra account that has permission on the workspace.
+- **许可证激活** 存储在激活该产品的 Windows 用户的 `HKEY_CURRENT_USER` 下。它不与任何云身份绑定。
+- **Workspace 身份验证**是在 **从数据库加载语义模型** 对话框中建立连接时进行的。在这里使用对该 Workspace 有权限的 Microsoft Entra 帐户登录。
 
-You do not need to launch Tabular Editor 3 with **Run as** under a different Windows account just because you connect to Power BI with a separate Entra account (for example a non-mail-enabled admin account). Launch under your normal Windows account, activate the license under that account, and provide the admin Entra credentials in the connection dialog.
+即使你使用单独的 Entra 帐户连接到 Power BI（例如未启用邮件的管理员帐户），也不需要因此改用其他 Windows 帐户并通过 **以其他用户身份运行** 启动 Tabular Editor 3。使用你常用的 Windows 帐户启动，在该帐户下激活许可证，并在连接对话框中提供管理员 Entra 凭据。
 
-For details on how to choose the right authentication mode (for example **Microsoft Entra MFA** when your Windows login does not match your Power BI account), see @xmla-as-connectivity.
+有关如何选择正确的身份验证模式的详细信息（例如，当你的 Windows 登录与 Power BI 帐户不一致时使用 **Microsoft Entra MFA**），参见 @xmla-as-connectivity。
 
-## Enterprise seat is in use by another user
+## 企业版席位正被另一位用户占用
 
-Enterprise licenses are seat-based. To activate Tabular Editor 3 on a new user when all seats are occupied, the existing user must first be deregistered from a seat through the [Tabular Editor Self-Service portal](https://tabulareditor.com/my-account/). The subscription owner or license administrator performs this action.
+企业版许可证按席位分配。当所有席位都已占用时，如需为新用户激活 Tabular Editor 3，必须先通过 [Tabular Editor 自助服务门户](https://tabulareditor.com/my-account/) 将现有用户从某个席位取消注册。此操作需由订阅所有者或许可证管理员执行。
 
 > [!NOTE]
-> Seat reassignment is only possible on the Enterprise Edition.
+> 只有企业版才支持重新分配席位。
 
-## Activation behind a proxy
+## 代理环境下激活
 
-Tabular Editor 3 uses outgoing web requests for product activation, update checks, DAX formatting, and downloading external Best Practice rules. If you are behind a proxy:
+Tabular Editor 3 会发起出站 Web 请求，用于产品激活、检查更新、DAX 格式化以及下载外部最佳实践规则。如果你通过代理上网：
 
-1. Configure **Tools > Preferences > Proxy Settings**. Switch the **Proxy Type** between `System` and `None`, restart Tabular Editor 3, and retry activation.
-2. If activation still fails, see @proxy-settings for advanced proxy diagnostics.
-3. If outbound access to `api.tabulareditor.com` is blocked, use [Manual activation](#manual-activation-no-internet).
+1. 在 **工具 > 偏好 > 代理设置** 中进行配置。在 `System` 和 `None` 之间切换 **代理类型**，重启 Tabular Editor 3，然后重试激活。
+2. 如果激活仍然失败，请参阅 @proxy-settings 进行高级代理诊断。
+3. 如果对 `api.tabulareditor.com` 的出站访问被阻止，使用 [手动激活](#manual-activation-no-internet)。
 
 > [!TIP]
-> Proxy settings can interfere with authentication dialogs and other external prompts. After changing the proxy type, always close and reopen Tabular Editor 3 before retesting.
+> 代理设置可能会干扰身份验证对话框和其他外部提示。更改代理类型后，重新测试前务必先关闭并重新打开 Tabular Editor 3。
 
-## Confirm you are on the latest version
+## 确认你正在使用最新版本
 
-与激活相关的问题有时会在较新的 Tabular Editor 3 版本中修复。 Confirm you are on the latest version before submitting a support request. Check for updates under **Tools > Preferences > Updates and Feedback**, or download the latest installer from the [downloads page](xref:downloads).
+与激活相关的问题有时会在较新的 Tabular Editor 3 版本中修复。提交支持请求前，请先确认你正在使用最新版本。在 **工具 > 偏好 > 更新和反馈** 中检查更新，或从 [下载页面](xref:downloads) 下载最新安装程序。
