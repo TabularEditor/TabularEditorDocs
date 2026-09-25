@@ -41,7 +41,7 @@
 
 ### DAX 代码分析（DI）
 
-针对 DAX 代码结构和效率的改进建议。 These rules identify opportunities to simplify and optimize your expressions.
+针对 DAX 代码结构和效率的改进建议。这些规则可帮助你找出简化并优化表达式的机会。
 
 - @DI001 - 移除未使用的变量
 - @DI002 - 移除未使用的变量
@@ -61,10 +61,10 @@
 
 ### DAX 重构 (DR)
 
-Refactoring suggestions for complex or inefficient DAX patterns. 这些规则可帮助你使 DAX 代码更现代化，并提升可读性。
+针对复杂或低效的 DAX 模式的重构建议。这些规则可帮助你使 DAX 代码更现代化，并提升可读性。
 
 - @DR001 - 转换为标量谓词
-- @DR002 - Use aggregator instead of iterator
+- @DR002 - 使用聚合函数替代迭代器
 - @DR003 - 用 VALUES 替代 SUMMARIZE
 - @DR004 - 为变量添加前缀
 - @DR005 - 为临时列添加前缀
