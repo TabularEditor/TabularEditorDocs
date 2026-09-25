@@ -20,12 +20,12 @@ applies_to:
 
 # Eliminar un objeto de una Metric View
 
-This how-to demonstrates removing Metric View fields and measures.
+Este procedimiento muestra cómo eliminar los campos y las medidas de Metric View.
 El mismo enfoque se aplica a todas las colecciones de una Metric View.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estos procedimientos se aplican a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
@@ -35,10 +35,10 @@ El mismo enfoque se aplica a todas las colecciones de una Metric View.
 
 ## Eliminar por nombre
 
-Get the Metric View field and delete it.
-After you delete an object, you should not attempt to modify it.
-You can still read properties off of the deleted object.
-It is safe to call `Delete()` on an object multiple times; after the first, these are no-ops.
+Obtén el campo de Metric View y elimínalo.
+Después de eliminar un objeto, no debes intentar modificarlo.
+Aun así, puedes leer las propiedades del objeto eliminado.
+Es seguro llamar a `Delete()` en un objeto varias veces; después de la primera, las siguientes llamadas no tienen efecto.
 
 ```csharp {run id=removefield setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -63,11 +63,11 @@ Removed: order_month
 Fields after: 5
 ```
 
-Observe that there are multiple calls to `Delete()` but only one removal.
+Observa que hay varias llamadas a `Delete()`, pero solo se realiza una eliminación.
 
-## Remove a measure
+## Eliminar una medida
 
-Measures are removed the same way: get a reference to the measure and delete it.
+Las medidas se eliminan de la misma manera: obtén una referencia a la medida y elimínala.
 
 ```csharp {run id=removemeasure setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -91,10 +91,10 @@ Removed: gross_margin
 Measures after: 5
 ```
 
-## Remove multiple Metric View fields
+## Eliminar varios campos de Metric View
 
-Filter to the fields you want to remove, snapshot them with `ToList`, then delete each one.
-Snapshotting first avoids modifying the collection while iterating it.
+Filtra los campos que quieras eliminar, crea una instantánea con `ToList` y, después, elimina cada uno.
+Crear primero la instantánea evita modificar la colección mientras la iteras.
 
 ```csharp {run id=removemultiple setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -135,13 +135,13 @@ Remaining fields:
   customer_segment
 ```
 
-## Remove Metric View fields from a specific table
+## Eliminar campos de Metric View de una tabla específica
 
-Remove all Metric View fields that reference the date table.
+Elimina todos los campos de Metric View que hacen referencia a la tabla de fechas.
 
 > [!WARNING]
-> This example is not guaranteed to remove all and exclusively Metric View fields which reference a given Metric View Join.
-> Metric View fields may include near-arbitrary SQL expressions, and may also reference previously defined Metric View fields.
+> No se garantiza que este ejemplo elimine todos y únicamente los campos de Metric View que hagan referencia a un Metric View Join determinado.
+> Los campos de Metric View pueden incluir expresiones SQL casi arbitrarias y también pueden hacer referencia a campos de Metric View definidos anteriormente.
 > Este ejemplo es solo con fines ilustrativos.
 
 ```csharp {run id=remove-by-table setup=mv-sample after=none output=true}
@@ -172,9 +172,9 @@ Fields after: 3
 
 ## Siguientes pasos
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+- [Añadir objetos a una vista de métricas](xref:semantic-bridge-add-object)
+- [Cambiar el nombre de un campo](xref:semantic-bridge-rename-objects)
+- [Serializar una vista de métricas a YAML](xref:semantic-bridge-serialize)
 
 ## Ver también
 
