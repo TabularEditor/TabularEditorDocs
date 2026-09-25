@@ -19,10 +19,10 @@ applies_to:
 
 # 图表视图
 
-Tabular Editor 3 中的**图表视图**是语义模型的可视化呈现。它提供直观的布局，用于查看表、表中的列，以及它们之间的关系。它特别适合快速把握架构、创建关系，并向利益相关者展示模型。图表可以保存为独立文件。更多信息请参阅 <xref:supported-files#diagram-file-te3diag>。
+Tabular Editor 3 中的**图表视图**是语义模型的可视化呈现。 It provides an intuitive layout for viewing tables, their columns, and the relationships between them. It is particularly helpful for understanding the schema at a glance, creating relationships, and presenting models to stakeholders. A diagram can be saved as a stand alone file. See <xref:supported-files#diagram-file-te3diag> for more information.
 
 > [!NOTE]
-> 我们建议创建多个较小的图表，而不是少数几个大型图表。当图表包含 20 张左右甚至更多的表时，很快就会显得杂乱，难以理解。
+> 我们建议创建多个较小的图表，而不是少数几个大型图表。 When a diagram contains more than 20 or so tables, it quickly becomes overwhelming and difficult to understand.
 
 在 Tabular Editor 3 中加载模型后，选择菜单 **文件 > 新建 > 图表** 创建新图表；或在主工具栏中新建图表，然后将 TOM Explorer 中的表拖放到图表窗口中。
 
@@ -41,14 +41,14 @@ Tabular Editor 3 中的**图表视图**是语义模型的可视化呈现。它�
 - **添加表...**：打开对话框，手动向图表添加更多表。
 - **添加可筛选此表的表**：自动引入可筛选当前表的相关表。
 - **添加所有相关表**：加载与所选表存在关系的所有表。
-- **编辑关系**：打开所选关系的编辑器。仅在选中关系时可见。
-- **反转关系**：交换所选关系的“从”端和“到”端。仅在选中关系时可见。
-- **激活关系**：激活未激活的关系。仅在选中未激活的关系时可见。
-- **停用关系**：停用已激活的关系。仅在选中已激活的关系时可见。
+- **编辑关系**：打开所选关系的编辑器。 Only visible when a relationship is selected.
+- **Invert relationship**: Swaps the from and to sides of the selected relationship. Only visible when a relationship is selected.
+- **激活关系**：激活未激活的关系。 Only visible when an inactive relationship is selected.
+- **停用关系**：停用已激活的关系。 Only visible when an active relationship is selected.
 - **适合页面**：调整图表的缩放级别，使所有可见表都能完整显示。
 - **自动排列**：自动将表排列成星型架构。
 - **从图中移除**：从当前视图中隐藏所选表。
-- **删除关系**：从模型中删除所选关系。仅在选中关系时可见。
+- **删除关系**：从模型中删除所选关系。 Only visible when a relationship is selected.
 
 ### 关系指示器
 
@@ -63,7 +63,7 @@ Tabular Editor 3 中的**图表视图**是语义模型的可视化呈现。它�
 
 ### 列显示切换
 
-每个表的右上角都有一个**人字形切换按钮**。点击后可在以下选项之间切换：
+A **chevron toggle** is available in the top-right corner of each table, by clicking it you will toggle between the following options:
 
 ![图表人字形切换按钮](~/content/assets/images/diagram-chevron-toggle.png)
 
