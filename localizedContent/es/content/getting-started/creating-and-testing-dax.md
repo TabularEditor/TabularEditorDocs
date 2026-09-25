@@ -121,25 +121,25 @@ Puedes usar los botones de flecha de la esquina superior derecha del **Editor de
 
 ## Dependencias de DAX
 
-Para ver las dependencias de DAX entre objetos, selecciona un objeto en el **Explorador TOM** y, después, haz clic con el botón derecho y elige **Mostrar dependencias** (**Shift+F12**). Esto abre la vista **Dependencias de DAX**, que muestra las dependencias del objeto seleccionado. Haz doble clic en un objeto del árbol para ir a él, o haz clic con el botón derecho y selecciona **Ir al elemento**, **Copiar como texto** y **Copiar como JSON**.
+To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (**Shift+F12**). This opens the **DAX Dependencies** view, which displays the dependencies of the selected object. Double-click an object in the tree to navigate to it, or right-click for **Go to item**, **Copy as text** and **Copy as JSON**.
 
 ![Dependencias de Dax y Explorador Tom](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
 
-La vista muestra una dirección cada vez. Elige cuál mostrar con los botones de opción:
+The view shows one direction at a time. Choose which with the radio buttons:
 
-| Opción                                  | Muestra                                                                                                                                                |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Objetos que dependen de este**        | Qué dejaría de funcionar si cambias o eliminas el objeto seleccionado                                                                                  |
-| **Objetos de los que depende este**     | De dónde obtiene la información el objeto seleccionado                                                                                                 |
-| **Relaciones que parten de esta tabla** | Las relaciones que parten de la tabla seleccionada. Con una columna seleccionada, se muestra **Relaciones que parten de esta columna** |
+| Opción                                     | Shows                                                                                                                                        |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Objects that depend on this**            | What would break if you changed or deleted the selected object                                                                               |
+| **Objects on which this depends**          | What the selected object reads from                                                                                                          |
+| **Relationships starting from this table** | The relationships leaving the selected table. With a column selected, this reads **Relationships starting from this column** |
 
-Marca **Mostrar inactivas** para incluir las relaciones inactivas.
+Tick **Show inactive** to include inactive relationships.
 
-### Seguimiento del Explorador TOM
+### Following the TOM Explorer
 
-En lugar de usar **Mostrar dependencias** en cada objeto uno por uno, activa **Seguir el Explorador TOM** y la vista seguirá lo que esté seleccionado en el árbol. Al marcarlo, se muestran de inmediato las dependencias del objeto que _ya_ está seleccionado, en lugar de esperar al siguiente cambio de selección.
+Rather than invoking **Show dependencies** for each object in turn, tick **Track TOM Explorer** and the view follows whatever is selected in the tree. Ticking it shows the dependencies of the object that is _already_ selected straight away, rather than waiting for the next selection change.
 
-El seguimiento se aplica a un único objeto seleccionado. Si seleccionas varios objetos, o ninguno, la vista se vacía en lugar de mostrar un resultado parcial.
+Tracking applies to a single selected object. Selecting several objects, or none, clears the view rather than showing a partial answer.
 
 # Carpetas de visualización
 
@@ -147,7 +147,7 @@ Cuando tu modelo empieza a tener un número considerable de medidas, una buena p
 
 También puedes cortar/copiar/pegar o arrastrar y soltar objetos entre carpetas de visualización.
 
-# Próximos pasos
+# Pasos a seguir
 
 - @dax-script-introduction
 - @bpa
