@@ -1,6 +1,6 @@
 ---
 uid: table-preview
-title: Table Preview
+title: Vista previa de tabla
 author: Morten Lønskov
 updated: 2026-09-14
 applies_to:
@@ -17,77 +17,77 @@ applies_to:
           full: true
 ---
 
-# Table Preview
+# Vista previa de tabla
 
-A **Table Preview** shows the contents of one table, row by row, without writing a query. Right-click a table in the @tom-explorer-view and choose **Preview data**, or select the table and press **Ctrl+R**.
+Una **Vista previa de tabla** muestra el contenido de una tabla, fila por fila, sin escribir una consulta. Haz clic con el botón derecho en una tabla del @tom-explorer-view y selecciona **Previsualizar datos**, o selecciona la tabla y pulsa **Ctrl+R**.
 
-![Preview Data](~/content/assets/images/preview-data-big.png)
+![Vista previa de datos](~/content/assets/images/preview-data-big.png)
 
-You can open a preview of several tables at once and arrange them however you like. Each preview is an ordinary document, so it can be docked, floated or moved to a second monitor.
+Puedes abrir una vista previa de varias tablas a la vez y organizarlas como quieras. Cada vista previa es un documento normal, así que puedes acoplarla, hacerla flotante o moverla a un segundo monitor.
 
-## Reading the grid
+## Cómo interpretar la cuadrícula
 
-Tabular Editor executes a DAX query that returns only as many rows as the view can show, then pages in more as you scroll. How far you can scroll depends on the storage mode and the engine:
+Tabular Editor ejecuta una Consulta DAX que devuelve solo tantas filas como puede mostrar la vista y, a medida que te desplazas, va cargando más. Hasta dónde puedes desplazarte depende del modo de almacenamiento y del motor:
 
-| Tabla                                                                                                      | Scrolling                                                                                      |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Import, on an engine that supports [`WINDOW`](https://dax.guide/window), where the table has a primary key | The full table. Paging uses `WINDOW` against the primary key                   |
-| Import, without `WINDOW` support or without a primary key                                                  | The first rows only; the preview says that scrolling is disabled                               |
-| DirectQuery                                                                                                | The first rows only, up to the **Row limit** preference; an informational message explains why |
+| Tabla                                                                                                                  | Desplazamiento                                                                                                             |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Importación, en un motor que admite [`WINDOW`](https://dax.guide/window) y en el que la tabla tiene una clave primaria | Toda la tabla. La paginación usa `WINDOW` sobre la clave primaria                                          |
+| Importación, sin compatibilidad con `WINDOW` o sin una clave primaria                                                  | Solo las primeras filas; la vista previa indica que el desplazamiento está desactivado                                     |
+| DirectQuery                                                                                                            | Solo las primeras filas, hasta el valor de la preferencia **Límite de filas**; unos mensajes informativos explican por qué |
 
-Preview metadata is cached for the session, so reopening a preview does not re-query the server. Use **Refresh Preview** to re-read it if for example the model has been processed outside Tabular Editor.
+Los metadatos de la vista previa se almacenan en caché durante la sesión, por lo que al volver a abrir una vista previa no se vuelve a consultar el servidor. Usa **Actualizar vista previa** para volver a leerla si, por ejemplo, el modelo se ha procesado fuera de Tabular Editor.
 
-If a calculated column is in an invalid state, its cells read _(Calculation needed)_. Use **Calculate Table** on the toolbar, or **Recalculate table...** on the column's right-click menu, to bring it up to date.
+Si una columna calculada está en un estado no válido, sus celdas muestran _(Calculation needed)_. Usa **Calcular tabla** en la barra de herramientas o **Recalcular tabla...** en el menú contextual de la columna para ponerla al día.
 
-![Recalculate Table](~/content/assets/images/recalculate-table.png)
+![Recalcular tabla](~/content/assets/images/recalculate-table.png)
 
-## Column order
+## Orden de las columnas
 
-By default, columns appear in the order the engine returns them, which is roughly internal column order and often looks arbitrary. Tick _Sort table preview columns alphabetically_ under @preferences to have them follow the same order the TOM Explorer uses instead.
+De forma predeterminada, las columnas aparecen en el orden en que el motor las devuelve, que se corresponde aproximadamente con el orden interno de las columnas y a menudo parece arbitrario. Marca _Ordenar alfabéticamente las columnas de la Vista previa de tabla_ en @preferencias para que sigan el mismo orden que usa el Explorador TOM.
 
-## Finding a column in a wide table
+## Encontrar una columna en una tabla ancha
 
-Selecting a column in the @tom-explorer-view scrolls the preview to that column and highlights it. This is on by default and can be turned off for a single preview with **Track selected column** on the toolbar, or for every preview under @preferences.
+Al seleccionar una columna en @tom-explorer-view, la vista previa se desplaza hasta esa columna y la resalta. Esto está activado de forma predeterminada y puedes desactivarlo para una sola vista previa con **Seguir la columna seleccionada** en la barra de herramientas, o para todas las vistas previas en @preferencias.
 
-## Toolbar
+## Barra de herramientas
 
-The **Table Preview** toolbar and the matching **Table Preview** menu carry the same commands:
+La barra de herramientas de **Vista previa de tabla** y el menú **Vista previa de tabla** correspondiente incluyen los mismos comandos:
 
-| Comando                                                              | Qué hace                                                                                                                                                              |
-| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Impersonation...** | Choose the identity the preview query runs as, to see the data a particular user would see                                                                            |
-| **Refresh Preview**                                                  | Re-read the table, discarding cached metadata                                                                                                                         |
-| **Auto-refresh**                                                     | Refresh this preview automatically whenever changes are made to the deployed model. The default for new previews comes from @preferences |
-| **Track selected column**                                            | Follow the TOM Explorer's column selection, as described above                                                                                                        |
-| **Calculate Table**                                                  | Recalculate the table's calculated columns                                                                                                                            |
+| Comando                                                             | Qué hace                                                                                                                                                                                                           |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Suplantación...** | Elige la identidad con la que se ejecuta la consulta de vista previa para ver los datos que vería un usuario concreto                                                                                              |
+| **Actualizar vista previa**                                         | Vuelve a leer la tabla y descarta los metadatos en caché                                                                                                                                                           |
+| **Actualización automática**                                        | Actualiza esta vista previa automáticamente cada vez que se hagan cambios en el modelo implementado. El valor predeterminado para las nuevas vistas previas proviene de @preferencias |
+| **Seguir la columna seleccionada**                                  | Sigue la selección de columnas del Explorador TOM, como se describe más arriba                                                                                                                                     |
+| **Calcular tabla**                                                  | Vuelve a calcular las columnas calculadas de la tabla                                                                                                                                                              |
 
-## Right-click menu
+## Menú contextual
 
-On top of the standard grid commands (sorting, filtering, best fit, column chooser), the preview grid adds:
+Además de los comandos estándar de la cuadrícula (ordenación, filtrado, mejor ajuste, selector de columnas), la cuadrícula de vista previa añade:
 
-| Comando                                                                      | Where it appears                                     | Qué hace                                                                                           |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Lock column widths**                                                       | Column header                                        | Stops the grid resizing columns as you scroll and page in more rows                                |
-| **Edit expression...**       | Header of a calculated column                        | Opens that column's DAX expression in the **Expression Editor**                                    |
-| **Recalculate table...**     | Header of a calculated column that is not up to date | Recalculates the table                                                                             |
-| **Show actual DAX query...** | Anywhere in the grid                                 | Opens a new, editable [DAX query](xref:dax-query) document containing the query behind the preview |
+| Comando                                                                             | Dónde aparece                                               | Qué hace                                                                                                                        |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Bloquear el ancho de las columnas**                                               | Encabezado de columna                                       | Evita que la cuadrícula redimensione las columnas mientras te desplazas y se cargan más filas al paginar                        |
+| **Editar expresión...**             | Encabezado de una columna calculada                         | Abre la expresión DAX de esa columna en el **Editor de expresiones**                                                            |
+| **Recalcular tabla calculada...**   | Encabezado de una columna calculada que no está actualizada | Recalcula la tabla                                                                                                              |
+| **Mostrar la Consulta DAX real...** | En cualquier lugar de la cuadrícula                         | Abre un documento nuevo y editable de [Consulta DAX](xref:dax-query) que contiene la consulta que hay detrás de la vista previa |
 
-### Show actual DAX query
+### Mostrar la Consulta DAX real
 
-**Show actual DAX query...** takes the query the preview is running, including whatever filter and sort you have applied in the grid, formats it and opens it as a new DAX Query document. It is not executed for you; edit it and run it when you are ready.
+**Mostrar la Consulta DAX real...** toma la consulta que ejecuta la vista previa, incluidos los filtros y la ordenación que has aplicado en la cuadrícula, la formatea y la abre como un nuevo documento de Consulta DAX. No se ejecuta automáticamente; edítala y ejecútala cuando quieras.
 
-The paging wrappers are deliberately left out, so what you get is the query over the data you are looking at rather than the query over one screenful of it.
+Los envoltorios de paginación se omiten deliberadamente, de modo que obtienes la consulta sobre los datos que estás viendo, en lugar de la consulta sobre una sola pantalla.
 
 > [!NOTE]
-> The **DAX Query** view has a command of the same name on its results grid, but it does something different: it shows the last executed query in a read-only window rather than opening a new document.
+> La vista **Consulta DAX** tiene un comando con el mismo nombre en su cuadrícula de resultados, pero hace algo distinto: muestra la última consulta ejecutada en una ventana de solo lectura en lugar de abrir un documento nuevo.
 
-## Filtering
+## Filtrado
 
-Each column header carries a filter dropdown listing the column's distinct values. On a column with many distinct values the list is capped by _Max. values in filter dropdown_ under @preferences, 5,000 by default. Values beyond the cap are not listed and cannot be ticked directly. Raise the cap if you need them, bearing in mind that opening the dropdown then runs a heavier query.
+Cada encabezado de columna incluye un menú desplegable de filtro con los valores distintos de la columna. En una columna con muchos valores distintos, la lista está limitada por _Máx. valores en el menú desplegable de filtro_ en @Preferencias; el valor predeterminado es 5.000. Los valores que superan ese límite no se muestran en la lista y no se pueden marcar directamente. Aumenta el límite si los necesitas, teniendo en cuenta que al abrir el menú desplegable se ejecuta una consulta más costosa.
 
 ## Preferencias
 
-Every setting mentioned on this page lives under **Tools > Preferences > Data Browsing > Table Preview**. See @preferences for the full list.
+Todas las opciones mencionadas en esta página se encuentran en **Herramientas > Preferencias > Exploración de datos > Vista previa de tabla**. Consulte @preferencias para ver la lista completa.
 
 ## Pasos a seguir
 
