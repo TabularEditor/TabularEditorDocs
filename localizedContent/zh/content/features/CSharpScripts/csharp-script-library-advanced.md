@@ -13,12 +13,12 @@ applies_to:
 
 # C# Script 库：高级脚本
 
-这些脚本更加高级，功能也更复杂，需要对 C# 语言和 TOM 有更深入的理解。这些脚本更难修改，因此建议你在熟悉 Tabular Editor 中的 C# Script 基础后再使用。
+These are more advanced scripts with sophisticated functionalities requiring a more advanced understanding of the C# language and TOM. 这些脚本更难修改，因此建议你在熟悉 Tabular Editor 中的 C# Script 基础后再使用。
 
 <br>
 <br>
 
-| <div style="width:250px">脚本名称</div>                                                      | 用途                                                                      | 适用场景                                                   |
+| <div style="width:250px">脚本名称</div>                                                      | 用途                                                                      | 使用场景                                                   |
 | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------ |
 | [统计模型对象数量](xref:script-count-things)                                                     | 统计模型中各类对象的数量。                                                           | 当你需要概览模型内容，或需要按类型统计对象数量时。                              |
 | [在网格中输出对象详细信息](xref:script-output-things)                                                | 在网格视图中输出对象详细信息。                                                         | 当你需要在网格视图中输出对象详细信息以便检查时。                               |
