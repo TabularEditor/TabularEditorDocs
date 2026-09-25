@@ -10,7 +10,7 @@ description: 用于隐藏外键列的最佳实践规则，可为最终用户简�
 
 ## 概览
 
-此最佳实践规则会识别对最终用户可见的外键列（关系的多方）。 Foreign keys should be hidden because they serve only as relationship connectors and provide no analytical value when displayed.
+此最佳实践规则会识别对最终用户可见的外键列（关系的多方）。应当隐藏外键，因为它们仅用于连接关系，显示出来也没有任何分析价值。
 
 - 类别：格式化
 
@@ -32,7 +32,7 @@ description: 用于隐藏外键列的最佳实践规则，可为最终用户简�
 - **误用风险**：用户可能按键值分组，而不是按正确的维度属性分组
 - **可视化效果差**：图表显示的是键值，而不是易读的名称
 
-Foreign keys exist only to create relationships between tables. 一旦关系建立完成，用户就应使用维度属性，而不是外键本身。
+外键仅用于在表之间建立关系。一旦关系建立完成，用户就应使用维度属性，而不是外键本身。
 
 ## 该规则何时触发
 
@@ -107,7 +107,7 @@ Sales Table Fields (visible):
   - Quantity
 ```
 
-**User experience**: Clean field list. Users naturally use dimension attributes, relationship filtering works automatically.
+**用户体验**：字段列表更整洁。用户会自然而然地使用维度属性，关系筛选也会自动生效。
 
 ## 兼容级别
 
