@@ -2,7 +2,7 @@
 uid: auto-reload
 title: Auto-reload from disk
 author: Morten Lønskov
-updated: 2026-09-22
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,7 +12,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "Desktop Edition cannot open model metadata from a file or a folder, so there's nothing on disk to stay in sync with."
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -20,78 +20,61 @@ applies_to:
 ---
 # Auto-reload from disk
 
-While you work, two copies of your model exist: the one Tabular Editor holds in memory, and the metadata files on disk it was loaded from. Anything that edits one without the other pulls them apart.
+When the metadata files of a model you loaded from a file or folder change on disk, Tabular Editor reloads the model automatically. If you have unsaved changes, a prompt appears where you choose to reload or keep your changes. Typical sources of external changes are an AI agent, a script, another editor, a `git pull` or a colleague editing a shared folder.
 
-![Tabular Editor holds the model in memory and the files on disk hold the same model; File > Save writes from memory to disk, an automatic reload carries changes back the other way, and another tool such as an agent, a script or a Git pull writes straight to the files](~/content/assets/images/features/auto-reload-sync.png)
-
-Tabular Editor keeps the two together in both directions:
-
-| Direction | What moves it |
-|---|---|
-| Memory to disk | **File > Save** (**Ctrl+S**), whenever you choose. |
-| Disk to memory | Automatic, since Tabular Editor watches the files and reloads the model when something else changes them. |
-
-The other tool is usually an AI agent or a script, but it can equally be another editor, a `git pull` or a colleague working in a shared folder.
+![Diagram: File > Save writes the model in Tabular Editor to the files on disk; another tool writes to the files; an automatic reload loads the changed files back into Tabular Editor](~/content/assets/images/features/auto-reload-sync.png)
 
 > [!NOTE]
-> This is file-level synchronization. It is not the same as **Track external model changes** and **Refresh local Tabular Object Model metadata automatically**, which sit next to it under [Tools > Preferences > Miscellaneous](xref:preferences#miscellaneous) but start an Analysis Services trace to detect changes made to a *connected database*. The two mechanisms are independent and cover different sources of change.
+> Auto-reload monitors files and is independent of **Track external model changes** and **Refresh local Tabular Object Model metadata automatically** under [Tools > Preferences > Tabular Editor > Miscellaneous](xref:preferences#miscellaneous). Those settings use an Analysis Services trace to detect changes to a connected database.
 
-## What Tabular Editor watches
+## Monitored files
 
-| Model loaded from | Watched |
+| Model loaded from | Monitored files |
 |---|---|
-| A `.bim` file | That one file. Other files in the same folder are ignored. |
+| A `.bim` file | That file. Other files in the same folder are ignored. |
 | A folder in the JSON (Database.json) format | Every `.json` file below the model root, including subfolders. |
 | A folder in the [Tabular Model Definition Language (TMDL)](xref:tmdl) format | Every `.tmdl` file below the model root, including subfolders. |
-| A workspace database | The files backing the model in [workspace mode](xref:workspace-mode), watched by the same rules as the two rows above. |
-| A database or Power BI Desktop, outside workspace mode | Nothing. The model has no files on disk, so there are no two copies to reconcile. |
-| A `.pbit` template, or a model you've never saved | Nothing. A `.pbit` is a binary file that no external tool edits in place. |
+| A workspace database | The files backing the model in [workspace mode](xref:workspace-mode), by the same rules as the rows above. |
+| A database or Power BI Desktop, outside workspace mode | None. The model has no files on disk. |
+| A `.pbit` template, or a model you've never saved | None. |
 
-## When only the files changed
+## Reload with unsaved changes
 
-If you have no unsaved changes, only one copy moved, so there's nothing to weigh up. Tabular Editor reloads the model and the two are in step again.
+If you have unsaved changes, the **External changes detected** prompt appears and you choose which version to keep, because Tabular Editor doesn't merge them.
 
-## When both copies changed
+![External changes detected prompt with the Reload and Ignore buttons, Reload focused](~/content/assets/images/features/external-changes-prompt.png)
 
-If you have unsaved changes as well, both copies moved and they disagree. Tabular Editor can't merge model metadata, so it asks you which copy wins.
+- **Reload** discards your unsaved changes and loads the version on disk.
+- **Ignore** keeps your changes. The files on disk keep the external changes, and your next save overwrites them.
 
-![Prompt shown when Tabular Editor detects that both copies where changed](~/content/assets/images/features/external-changes-prompt.png)
-
-- **Reload** discards your unsaved changes and takes the version on disk.
-- **Ignore** keeps your changes and leaves the model as it is. The files on disk aren't touched, so the two copies stay apart until your next save overwrites them.
-
-**Ignore** is the safe default. Pressing Esc, or closing the prompt with its window button, keeps your changes exactly as **Ignore** does.
+Pressing **Esc** or closing the prompt has the same effect as **Ignore**.
 
 > [!WARNING]
-> If you choose **Reload**, Tabular Editor discards your unsaved changes without a further confirmation, and you can't undo the reload.
+> **Reload** is the default button, so pressing **Enter** at the prompt also reloads. A reload discards your unsaved changes without further confirmation, and you can't undo it.
 
-### A typical sequence
+### Example
 
-1. You open a TMDL folder model and rename a measure. The copy in memory has moved ahead of the files.
-2. An AI agent working in the same folder rewrites four `.tmdl` files. Now both copies have moved, in different directions.
-3. Tabular Editor waits for the agent's writes to settle, then raises one **External changes detected** prompt.
-4. You choose **Reload**. Your measure rename is gone, the agent's four files are loaded, the two copies are in step, and the TOM Explorer is still expanded to the table you were working in.
+1. You open a TMDL folder model and rename a measure.
+2. An AI agent working in the same folder rewrites four `.tmdl` files.
+3. After the agent's writes finish, one **External changes detected** prompt appears.
+4. You choose **Reload**, which discards the rename and loads the agent's changes. The TOM Explorer keeps its expanded nodes.
 
-Had you chosen **Ignore**, your rename would have survived, the copies would have stayed apart, and the agent's four files would be overwritten the next time you pressed **Ctrl+S**.
+## Multiple writes and background changes
 
-## Coalescing and background changes
+When a tool rewrites a folder-serialized model, it changes many files in quick succession, and Tabular Editor reloads once, after the writes finish.
 
-A tool that rewrites a folder-serialized model touches many files in quick succession. Tabular Editor waits for the writes to settle and then reloads once, not once per file.
-
-Changes that arrive while Tabular Editor is in the background are held rather than raised immediately. You're asked once when you switch back to Tabular Editor, so returning from an agent session that rewrote a dozen files gives you a single prompt.
+If Tabular Editor isn't the active window when the files change, the reload or prompt happens when you switch back to it. All changes made while it was inactive produce one prompt.
 
 ## Workspace mode
 
-[Workspace mode](xref:workspace-mode) adds a third copy: the workspace database on the server. A reload redeploys it as well, so all three stay in step rather than leaving the server on metadata the files no longer describe.
+In [workspace mode](xref:workspace-mode), a reload also redeploys the model to the workspace database.
 
 ## Turning it off
 
-Auto-reload is enabled by default. To make the disk-to-memory direction manual again, clear **Automatically reload from disk** under **Tools > Preferences > Miscellaneous**.
+Auto-reload is enabled by default, and you turn it off by clearing **Automatically reload from disk (hot reload)** under **Tools > Preferences > Tabular Editor > Miscellaneous**.
 
-![Tools > Preferences > Miscellaneous, showing the automatic reload setting under Metadata Synchronization](~/content/assets/images/pref-miscellaneous.png)
+![Tools > Preferences > Tabular Editor > Miscellaneous, showing the automatic reload setting under Metadata Synchronization](~/content/assets/images/pref-miscellaneous.png)
 
-Turn it off when the model folder is also written to by something that runs continuously, such as a file sync client or a CI checkout that refreshes in the background. The prompt is modal, so a folder that changes often interrupts you rather than helping you.
+Turn it off if a continuously running process also writes to the model folder, such as a file sync client or a CI checkout that refreshes in the background. Each change triggers a reload, or the modal prompt when you have unsaved changes.
 
-With the setting cleared, Tabular Editor watches nothing, and the two copies come back together only when you use **File > Reload from disk** or **File > Save**.
-
-See [Preferences](xref:preferences#miscellaneous) for the rest of the settings on that page.
+With the setting cleared, use **File > Reload from disk** to load external changes, or **File > Save** to overwrite them with the model in Tabular Editor. See [Preferences](xref:preferences#miscellaneous) for the other settings on that page.
