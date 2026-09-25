@@ -8,16 +8,16 @@ description: 一条最佳实践规则，通过识别对象描述中的控制字�
 
 # 避免在描述中使用无效字符
 
-## 概述
+## 概览
 
-此最佳做法规则会识别描述中包含无效控制字符（不可打印字符，标准空白字符除外）的对象。这些字符可能导致显示问题、元数据损坏以及部署失败。
+此最佳做法规则会识别描述中包含无效控制字符（不可打印字符，标准空白字符除外）的对象。 These characters can cause display problems, metadata corruption, and deployment failures.
 
-- 类别：预防错误
+- 类别：错误预防
 - 严重性：高（3）
 
-## 适用范围
+## 适用于
 
-- 表格
+- 表
 - 度量值
 - 层次结构
 - 级别
@@ -31,7 +31,7 @@ description: 一条最佳实践规则，通过识别对象描述中的控制字�
 - 计算组
 - 计算项
 
-## 为什么这很重要
+## 为何这很重要
 
 描述中的控制字符会引发多种问题：
 
@@ -44,7 +44,7 @@ description: 一条最佳实践规则，通过识别对象描述中的控制字�
 
 标准空白字符（空格、换行符、制表符）可以保留，但要移除不可打印的控制字符。
 
-## 何时触发此规则
+## 该规则何时触发
 
 当对象的描述中包含非标准空白字符的控制字符时，就会触发此规则：
 
@@ -52,13 +52,13 @@ description: 一条最佳实践规则，通过识别对象描述中的控制字�
 Description.ToCharArray().Any(char.IsControl(it) and !char.IsWhiteSpace(it))
 ```
 
-这样既能检测到有问题的字符，又允许保留合法的空白格式。
+这样既能保留正常的空白格式，也能检测出有问题的字符。
 
 ## 如何修复
 
 ### 自动修复
 
-这个规则带有自动修复功能，会把无效字符替换成空格：
+这个规则提供自动修复，会把无效字符替换为空格：
 
 ```csharp
 Description = string.Concat(
@@ -68,14 +68,14 @@ Description = string.Concat(
 )
 ```
 
-应用步骤：
+应用方法：
 
 1. 在 **Best Practice Analyzer** 中选择被标记的对象
-2. 单击 **Apply Fix**
+2. 点击 **Apply Fix**
 
 ### 手动修复
 
-1. 在 **TOM Explorer** 中选择该对象
+1. 在 **TOM Explorer** 中选择对象
 2. 在 **属性** 窗格中找到 **描述** 字段
 3. 编辑描述，移除无效字符
 4. 保存更改
@@ -92,15 +92,15 @@ Description = string.Concat(
 
 ### 原因 3：从外部源导入数据
 
-导入包含编码伪影或控制代码的元数据。
+导入包含编码残留或控制码的元数据。
 
 ## 示例
 
 ### 修复前
 
 ```
-度量值：[Total Revenue]
-Description: "Calculates\x00total\x0Brevenue"（包含 NULL 和垂直制表符）
+Measure: [Total Revenue]
+Description: "Calculates\x00total\x0Brevenue"  (contains NULL and vertical tab)
 ```
 
 工具提示显示：“Calculates□total□revenue”（出现明显乱码）
@@ -108,15 +108,15 @@ Description: "Calculates\x00total\x0Brevenue"（包含 NULL 和垂直制表符�
 ### 修复后
 
 ```
-度量值：[Total Revenue]
-Description: "Calculates total revenue"（将控制字符替换为空格）
+Measure: [Total Revenue]
+Description: "Calculates total revenue"  (control characters replaced with spaces)
 ```
 
 工具提示正确显示："Calculates total revenue"
 
 ## 兼容级别
 
-此规则适用于兼容级别为 **1200** 及以上的模型。
+这个规则适用于兼容级别 **1200** 及以上的模型。
 
 ## 相关规则
 
