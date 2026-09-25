@@ -19,16 +19,16 @@ applies_to:
 
 # Calendar 函数日期为空的错误
 
-## 概述
+## 概览
 
-在 **Tabular Editor 3 (TE3)** 中刷新模型时可能会出现这个错误，即使受影响的表并未直接引用 `CALENDAR()` 函数。这通常表示某个依赖的日期表或日历表依赖其他表中的值，而这些表在刷新过程中会暂时为空，导致开始日期或结束日期的值为空白。
+在 **Tabular Editor 3 (TE3)** 中刷新模型时可能会出现这个错误，即使受影响的表并未直接引用 `CALENDAR()` 函数。 It typically indicates that a dependent Date or Calendar table relies on values from other tables that are temporarily empty, resulting in blank start or end date values.
 
 ## 症状
 
 - 在 Tabular Editor 3 中刷新模型失败，错误为：
 
   ```
-  Calendar 函数中的开始日期或结束日期不能为“空白”值。
+  The start date or end date in Calendar function cannot be Blank value.
   ```
 
 - 同一模型或表在 Power BI Desktop 或 Power BI Service 中可以成功刷新。
@@ -47,7 +47,7 @@ applies_to:
 
 ## 原因
 
-虽然这个错误看起来与正在刷新的表无关，但通常源自模型中的下游依赖项。
+Although the error may appear unrelated to the table being refreshed, it usually originates from a downstream dependency in the model.
 
 例如，日期表或日历表可能会基于多个事务表中的最小日期和最大日期，动态定义其范围：
 
@@ -65,7 +65,7 @@ CALENDAR(
 1. **识别依赖表**
    - 在 Tabular Editor 3 中使用 **Dependencies** 视图，找出引用其他表日期字段的 Date 或 Calendar 表。
 2. **检查空表**
-   - 确认所有被引用的表都包含数据。如果源表为空，请刷新数据源或调整架构变量配置。
+   - Verify that all referenced tables contain data. 如果源表为空，请刷新数据源或调整架构变量配置。
 3. **添加默认兜底值**
    - 为避免边界为空，请用 `COALESCE()` 包裹表达式，或指定默认日期值：
 
