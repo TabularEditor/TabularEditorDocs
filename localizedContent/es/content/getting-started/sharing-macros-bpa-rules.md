@@ -1,6 +1,6 @@
 ---
 uid: sharing-macros-bpa-rules
-title: Compartir macros, reglas de BPA y preferencias en todo el equipo
+title: Sharing macros, BPA rules and preferences across a team
 author: Just Blindbæk
 updated: 2026-07-06
 applies_to:
@@ -17,125 +17,125 @@ applies_to:
           full: true
 ---
 
-# Compartir macros, reglas de BPA y preferencias en todo el equipo
+# Sharing macros, BPA rules and preferences across a team
 
-Tabular Editor lee varios archivos de configuración desde una ubicación fija en el equipo de cada usuario: `%LOCALAPPDATA%\\TabularEditor3\\` para Tabular Editor 3, o `%LOCALAPPDATA%\\TabularEditor\\` para Tabular Editor 2. Los más importantes son [`MacroActions.json`](xref:supported-files#macroactionsjson) (las macros del usuario), [`BPARules.json`](xref:supported-files#bparulesjson) (las reglas locales del Best Practice Analyzer (BPA) del usuario) y `Preferences.json` (preferencias generales de la aplicación). Consulta [Tipos de archivo admitidos](xref:supported-files#local-setting-files) para ver una descripción completa de estos y de los demás archivos de configuración local.
+Tabular Editor reads several configuration files from a fixed location on each user's machine: `%LOCALAPPDATA%\TabularEditor3\` for Tabular Editor 3, or `%LOCALAPPDATA%\TabularEditor\` for Tabular Editor 2. The most important are [`MacroActions.json`](xref:supported-files#macroactionsjson) (the user's macros), [`BPARules.json`](xref:supported-files#bparulesjson) (the user's local Best Practice Analyzer (BPA) rules) and `Preferences.json` (general application preferences). See [Supported file types](xref:supported-files#local-setting-files) for a full description of these and the other local setting files.
 
-Esa configuración predeterminada funciona para un único desarrollador. Los equipos que quieren un conjunto compartido y coherente de macros o preferencias para todo el equipo, un departamento o entre el desarrollo local y la CI se topan con una pregunta evidente: ¿cómo se mantiene sincronizado un archivo en una ruta local fija con algo compartido y bajo control de versiones?
+That default works for a single developer. Teams that want a shared, consistent set of macros or preferences across a whole team, a department or between local development and CI hit an obvious question: how do you keep a file at a fixed local path in sync with something version-controlled and shared?
 
-![Diagrama del flujo de configuración compartida](~/content/assets/images/sharing-config-two-paths.png)
-
-> [!NOTE]
-> Si lo que quieres compartir son reglas de BPA, esto ya está resuelto. Consulta [Compartir reglas de BPA](#sharing-bpa-rules) a continuación. El resto de esta página trata sobre macros y preferencias, que no tienen la misma compatibilidad nativa.
-
-## Empieza con un repositorio central de Git
-
-Sea cual sea el mecanismo que uses para llevar archivos al equipo de un desarrollador, debería obtenerlos de un único repositorio central de Git dedicado a la configuración compartida: macros y, opcionalmente, un `Preferences.json` compartido como línea base de preferencias. Considerar ese repositorio como la fuente de referencia, en lugar del equipo de un desarrollador concreto, es lo que hace que compartir tenga sentido:
-
-- Los cambios en una macro se pueden revisar mediante una pull request, igual que revisarías un cambio en un modelo semántico.
-- Tienes un historial completo de quién cambió qué macro y cuándo, y puedes revertir un cambio erróneo igual que revertirías cualquier otro commit.
-- Los nuevos miembros del equipo obtienen toda la biblioteca de macros del equipo clonando un repositorio, en lugar de copiar archivos del ordenador de un compañero.
-- El mismo repositorio también puede servir como origen para las colecciones de reglas de BPA (consulta más abajo), de modo que los estándares compartidos del equipo queden en un solo lugar en vez de estar dispersos entre varios mecanismos de sincronización.
-
-## ¿El mismo repositorio que tu modelo semántico, o uno independiente?
-
-Antes de elegir un mecanismo de sincronización, decide dónde están las macros compartidas y las reglas de BPA: en el mismo repositorio que tu modelo semántico o en un repositorio dedicado.
-
-Usar el mismo repositorio que tu modelo semántico es la opción predeterminada más simple y el punto de partida adecuado. Las macros y las reglas son archivos que están junto al modelo y se versionan de forma conjunta. Con [GitHub Flow](xref:github-flow), al crear una rama de funcionalidad a partir de `main`, obtienes las macros y reglas vigentes en ese momento, sin ningún paso adicional. Mantenerlas actualizadas sale gratis gracias al uso de ramas, que ya haces para cada tarea. Un cambio en una macro es otra rama de características y otro pull request, como cualquier otro cambio. Los revisores ven en el diff que solo se modifica `MacroActions.json`, así que no hay confusión sobre qué está en revisión.
-
-Un repositorio dedicado e independiente tiene sentido cuando ya tienes varios repositorios de modelos semánticos realmente independientes: distintos equipos o departamentos, cada uno con el suyo. Sin él, cada repositorio de modelos semánticos necesita su propia copia de las macros y reglas compartidas. Mantener sincronizadas esas copias se convierte en otro problema manual, justo lo contrario de lo que se pretendía resolver al centralizarlas.
-
-Incluso en ese escenario con varios equipos, comprueba si la necesidad real es un único repositorio independiente de macros o una base compartida con espacio para añadidos locales: por ejemplo, un conjunto de macros para toda la organización con las propias de un departamento añadidas encima. Es una cuestión de múltiples orígenes, más que de elegir entre el mismo repositorio o uno separado. Las colecciones de reglas de BPA lo admiten de forma nativa (consulta [Compartir reglas de BPA](#sharing-bpa-rules) más arriba). Para las macros, consulta [Combinar varios orígenes de macros](#combining-multiple-macro-sources) más abajo.
-
-Si tu equipo mantiene hoy un único repositorio de modelo semántico, el enfoque del mismo repositorio es la opción más simple y el problema de la duplicación todavía no se plantea. Considera si eso seguirá siendo cierto dentro de un año, ya que migrar más adelante las macros compartidas fuera de un repositorio de modelo semántico requiere más trabajo que empezar con ellas por separado.
-
-Elijas lo que elijas, los mecanismos de sincronización descritos a continuación funcionan igual. Un repositorio dedicado de macros solo implica acceder a un segundo repositorio, en lugar de a uno que ya tienes en local.
-
-## Compartir macros
-
-Las macros son distintas: Tabular Editor lee un único archivo `MacroActions.json` por usuario, desde una ruta fija, sin ningún equivalente al sistema de colecciones de reglas de BPA. Consulta la [referencia de la Vista de macros](xref:macros-view-reference) para ver cómo se estructura el propio archivo.
+![Diagram of shared configuration flow](~/content/assets/images/sharing-config-two-paths.png)
 
 > [!NOTE]
-> **Por qué no hay una funcionalidad integrada de carga remota:** Las macros son C# Scripts. Tabular Editor no descarga ni carga macros de forma deliberada desde ubicaciones que estén fuera del control del usuario, como una página web, un repositorio de GitHub o un "marketplace" público. Cargar y ejecutar código arbitrario desde un origen remoto sin que el usuario dé un paso explícito sería un riesgo de seguridad real. Cualquier mecanismo para compartir debe implicar algo que el propio usuario o equipo configure por su cuenta.
+> If what you want to share is BPA rules, this is already solved. See [Sharing BPA rules](#sharing-bpa-rules) below. The rest of this page covers macros and preferences, which don't have the same native support.
 
-Tres enfoques que usan los equipos para conectar un repositorio central con la ruta local fija de Tabular Editor. Los tres mueven `MacroActions.json` entre tu repositorio de Git y esa ruta local fija; Tabular Editor solo lee y escribe la copia local, sin ningún concepto de Git. Lo que varía entre las opciones es quién realiza ese traslado, en qué dirección y qué lo desencadena:
+## Start with a central Git repository
 
-### Opción A: enlace simbólico
+Whichever mechanism you use to get files onto a developer's machine, it should pull from a single, central Git repository dedicated to shared configuration: macros and optionally a shared baseline `Preferences.json`. Treating that repository as the source of truth, rather than any one developer's machine, is what makes sharing meaningful:
 
-La ruta fija pasa a ser un enlace a tu repositorio, de modo que Tabular Editor lee y escribe de forma transparente tu copia de trabajo de `MacroActions.json`.
+- Changes to a macro are reviewable via pull request, the same way you'd review a change to a semantic model.
+- You get a full history of who changed what macro and when, and can revert a bad change the same way you'd revert any other commit.
+- New team members get the whole team's macro library by cloning one repository, rather than copying files from a colleague's machine.
+- The same repository can double as the source for BPA rule collections (see below), so a team's shared standards live in one place rather than scattered across multiple sync mechanisms.
+
+## Same repo as your semantic model, or a separate repo?
+
+Before choosing a sync mechanism, decide where the shared macros and BPA rules live: in the same repository as your semantic model, or in a dedicated repository.
+
+The same repository as your semantic model is the simpler default and the right starting point. Macros and rules are files alongside the model, versioned together. Under [GitHub Flow](xref:github-flow), creating a feature branch off `main` gets you whatever macros and rules were current at that moment, with no separate step. Freshness comes for free from branching, which you already do for every piece of work. A change to a macro is another feature branch and pull request, like any other change. Reviewers see from the diff that it only touches `MacroActions.json`, so there's no confusion about what's under review.
+
+A separate, dedicated repository makes sense once you have multiple, genuinely independent semantic model repositories: different teams or departments each maintaining their own. Without it, every model repository needs its own copy of the shared macros and rules. Keeping those copies in sync becomes its own manual problem, the opposite of what centralizing them was supposed to solve.
+
+Even in that multi-team case, check whether the real need is a single separate macros repository or a shared baseline with room for local additions: an organization-wide set of macros with a department's own layered on top, for example. That's a multi-source question rather than a same-repo-vs-separate-repo one. BPA rule collections support it natively (see [Sharing BPA rules](#sharing-bpa-rules) above). For macros, see [Combining multiple macro sources](#combining-multiple-macro-sources) below.
+
+If your team maintains a single semantic model repository today, the same-repo approach is the simplest choice and the duplication concern doesn't apply yet. Consider whether that will still be true in a year, since migrating shared macros out of a model repo later is more work than starting with them separate.
+
+Whichever you choose, the sync mechanisms described below work the same way. A dedicated macros repository just means they reach into a second repository rather than one you already have checked out.
+
+## Sharing macros
+
+Macros are different: Tabular Editor reads a single `MacroActions.json` file per user, from a fixed path, with no equivalent to BPA's rule-collection system. See the [Macros view reference](xref:macros-view-reference) for how the file itself is structured.
+
+> [!NOTE]
+> **Why there's no built-in remote-loading feature:** Macros are C# scripts. Tabular Editor deliberately doesn't download or load macros from a location outside the user's control, such as a webpage, a GitHub repository or a public "marketplace." Loading and executing arbitrary code from a remote source without an explicit step by the user would be a real security risk. Any sharing mechanism must involve something the user or team sets up themselves.
+
+Three approaches teams use to bridge the gap between a central repository and Tabular Editor's fixed local path. All three move `MacroActions.json` between your Git repository and that fixed local path — Tabular Editor itself only ever reads and writes the local copy, with no concept of Git. What differs between the options is what performs that move, in which direction, and on what trigger:
+
+### Option A: symbolic link
+
+The fixed path becomes a link into your repository, so Tabular Editor transparently reads and writes your working copy of `MacroActions.json`.
 
 ```powershell
 New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\TabularEditor3\MacroActions.json" -Target "C:\path\to\your\repo\MacroActions.json"
 ```
 
-(Para Tabular Editor 2, usa `%LOCALAPPDATA%\\TabularEditor\\` en lugar de `%LOCALAPPDATA%\\TabularEditor3\\`.)
+(For Tabular Editor 2, use `%LOCALAPPDATA%\TabularEditor\` instead of `%LOCALAPPDATA%\TabularEditor3\`.)
 
-- Bidireccional: las ediciones realizadas en la GUI de Tabular Editor llegan directamente a tu copia de trabajo, listas para revisarlas y hacer un commit, como cualquier otro cambio de archivo.
-- Sigue haciendo falta un `git pull` explícito para traer los cambios de un compañero. El enlace simbólico elimina el paso manual de copia, pero no la necesidad de sincronizar con el repositorio remoto.
-- Crear un enlace simbólico en Windows requiere tener habilitado el Modo de desarrollador o usar una consola con privilegios elevados, algo que las directivas suelen bloquear en equipos muy restringidos. En esos casos, TI puede conceder el permiso de forma centralizada (mediante una directiva de dispositivo o el derecho `SeCreateSymbolicLinkPrivilege`) como parte del despliegue de Tabular Editor, para que los desarrolladores no tengan que elevar privilegios por su cuenta. Después, un pequeño script independiente puede crear el enlace una vez que el desarrollador haya clonado el repositorio.
+- Two-way: edits made in Tabular Editor's GUI land directly in your working copy, ready to review and commit like any other file change.
+- Still needs an explicit `git pull` to bring down a teammate's changes. The symlink removes the manual copy step, not the need to sync with the remote.
+- Creating a symlink on Windows needs Developer Mode enabled or an elevated prompt, often blocked by policy on locked-down machines. Where that's the case, IT can grant the permission centrally (via device policy or the `SeCreateSymbolicLinkPrivilege` right) as part of deploying Tabular Editor, so developers don't need to self-elevate. A separate small script can then create the link once a developer has cloned the repo.
 
-### Opción B: hook de pre-commit
+### Option B: pre-commit hook
 
-Un [hook de pre-commit de Git](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks), incluido en el repositorio, que copia `MacroActions.json` del repositorio a `%LOCALAPPDATA%\\TabularEditor3\\` cada vez que haces un commit (`%LOCALAPPDATA%\\TabularEditor\\` para Tabular Editor 2).
+A [Git pre-commit hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks), checked into the repository, that copies `MacroActions.json` from the repo to `%LOCALAPPDATA%\TabularEditor3\` every time you commit (`%LOCALAPPDATA%\TabularEditor\` for Tabular Editor 2).
 
-- No se necesitan permisos elevados ni el Modo de desarrollador. Basta con una copia de archivo sencilla, y funciona independientemente de dónde haya clonado el repositorio cada desarrollador. El origen es relativo a la raíz del repositorio; el destino, `%LOCALAPPDATA%`, se resuelve automáticamente para cada usuario.
-- Unidireccional: se sincroniza al hacer commit, no al hacer pull. No puedes ver los cambios de un compañero hasta que se integre su PR y tú hagas pull, así que rara vez importa, salvo que tu rama pase mucho tiempo sin incorporar `main`. Un hook de `post-merge` o `post-checkout` cierra esa brecha si llega a importar.
-- Una edición hecha en la GUI de Tabular Editor se queda en local hasta que la copies manualmente de vuelta al repositorio y hagas commit. De lo contrario, se sobrescribe silenciosamente la próxima vez que se ejecute el hook.
+- No elevated permissions or Developer Mode needed. A plain file copy is all it takes, and it works regardless of where a developer cloned the repo. The source is relative to the repo root; the destination, `%LOCALAPPDATA%`, resolves per-user automatically.
+- One-way, and it syncs on commit, not on pull. You can't see a teammate's change any sooner than after their PR merges and you pull it yourself, so this rarely matters unless your branch goes a long time without picking up `main`. A `post-merge` or `post-checkout` hook closes that gap if it does.
+- A GUI-made edit in Tabular Editor stays local until you manually copy it back into the repo and commit. Otherwise it's silently overwritten next time the hook runs.
 
-### Opción C: una herramienta de copia al aplicar
+### Option C: a copy-on-apply tool
 
-Los gestores de dotfiles como [chezmoi](https://www.chezmoi.io/) resuelven en general el mismo problema. Guarda el archivo en un repositorio, cópialo a su ubicación de destino con un comando `apply` y copia las ediciones locales de vuelta con un comando `add`. Nada se enlaza ni se escribe automáticamente.
+Dotfiles managers like [chezmoi](https://www.chezmoi.io/) solve the same problem generally. Keep the file in a repository, copy it to its target location with an `apply` command and copy local edits back with an `add` command. Nothing links or writes through automatically.
 
-- Los mismos beneficios prácticos que la opción B (sin permisos elevados ni dependencia de una ruta de clonación local concreta), pero en ambos sentidos se requieren comandos explícitos, algo que algunos equipos prefieren frente a la escritura silenciosa de un enlace simbólico.
-- La contrapartida es tener que aprender una herramienta de terceros con sus propios conceptos, probablemente más de lo que necesita por sí solo un único archivo JSON. La excepción es un equipo que ya gestiona así otra configuración de la máquina del desarrollador (por ejemplo, una configuración compartida de VS Code o Git); en ese caso, las macros pasan a ser un archivo más dentro de un sistema que el equipo ya ha adoptado.
-
-> [!NOTE]
-> Ninguna de estas es «la» forma oficial de hacerlo. Cada una implica ventajas e inconvenientes distintos para el mismo problema. Elige una y úsala de forma coherente, en lugar de mezclar mecanismos según el archivo.
-
-### Combinar varias fuentes de macros
-
-Ninguna de las tres opciones anteriores puede combinar más de una fuente a la vez. Todas se limitan a mover un único archivo de un lugar a otro. Para combinar un conjunto central de macros con otro departamental o personal, necesitas un script que las fusione antes de que Tabular Editor lea el archivo. Esto es una solución alternativa, no una funcionalidad de primera clase: a diferencia de las reglas de BPA, las macros no tienen un equivalente nativo a las colecciones de reglas. Manténlo lo bastante simple como para que cualquier desarrollador pueda entenderlo y corregirlo.
-
-## Compartir preferencias
-
-`Preferences.json` tiene la misma limitación de ruta fija que las macros, sin compatibilidad nativa con múltiples fuentes. Cualquiera de las tres opciones anteriores funciona de forma idéntica en este caso.
-
-## Compartir reglas de BPA
-
-Tabular Editor ofrece compatibilidad de primera clase para combinar reglas de Best Practice Analyzer de varias fuentes, sin necesidad de enlaces simbólicos ni soluciones alternativas:
-
-- Las **colecciones de reglas** permiten que un modelo tome reglas del modelo actual, del `BPARules.json` del usuario local, de un `BPARules.json` para toda la máquina y de cualquier cantidad de colecciones adicionales que añadas explícitamente. Esas fuentes adicionales incluyen un archivo en otra ubicación del disco (con compatibilidad con rutas relativas al modelo, por lo que el archivo de reglas puede estar en el mismo repositorio), un recurso compartido de red o una dirección URL HTTP/HTTPS. Las colecciones tienen un orden de precedencia definido, por lo que una regla central compartida puede sobrescribirse a nivel de modelo cuando sea necesario. Consulta [Agregar una colección de reglas](xref:best-practice-analyzer#adding-a-rule-collection) para saber cómo agregar colecciones de reglas y definir su prioridad.
-- **Reglas integradas** (Tabular Editor 3) incorporan en la propia aplicación un conjunto seleccionado y versionado de reglas de mejores prácticas, que se actualiza automáticamente con cada versión, con artículos de la base de conocimiento vinculados desde cada regla. Estas conviven con tus reglas personalizadas en lugar de sustituirlas. Consulta [Reglas BPA integradas](xref:built-in-bpa-rules).
-
-Entre estas dos características, la mayoría de los escenarios de «cómo compartimos las reglas BPA en el equipo» quedan cubiertos de forma nativa. A menudo, basta con un archivo de reglas compartido, confirmado en un repositorio e incluido como colección mediante una ruta relativa, un recurso compartido de red o una URL. No se requiere ningún enlace simbólico ni hook, ya que Tabular Editor lee la colección directamente, en lugar de hacerlo desde una ruta personal fija.
+- Same practical benefits as Option B (no elevated permissions, no dependency on a specific local clone path), but both directions are explicit commands, which some teams prefer over a symlink's silent write-through.
+- The trade-off is learning a third-party tool with its own concepts, likely more than a single JSON file needs on its own. The exception is a team that already manages other developer-machine configuration this way (shared VS Code or Git config, for example), where macros become one more file in a system you've already adopted.
 
 > [!NOTE]
-> Como las colecciones de reglas pueden apuntar a una ruta relativa, un recurso compartido de red o una URL, la cuestión anterior de usar el mismo repositorio o uno independiente importa mucho menos para las reglas BPA que para las macros. Una colección de reglas funciona igual independientemente del repositorio en el que esté el archivo de reglas, ya que no hace falta copiar nada ni crear enlaces simbólicos en una ruta local fija primero. Esta es una ventaja práctica del soporte nativo de BPA para varios orígenes frente a los mecanismos de copia de archivos que actualmente requieren las macros.
+> None of these is "the" official mechanism. They're different trade-offs for the same problem. Pick one and use it consistently rather than mixing mechanisms per file.
 
-### Qué tipo de colección usar
+### Combining multiple macro sources
 
-De las tres formas de agregar una colección de reglas externa, el valor predeterminado recomendado para la mayoría de los equipos es un archivo con ruta relativa en un repositorio Git, por motivos que las otras dos opciones no comparten:
+None of the three options above can combine more than one source at once. They all just move a single file from one place to another. To combine a central set of macros with a department or personal set, you need a script that merges them before Tabular Editor reads the file. This is a workaround, not a first-class feature: unlike BPA rules, macros have no native rule-collection equivalent. Keep it simple enough that any developer can understand and fix it.
 
-- Las colecciones basadas en URL son de solo lectura. Tabular Editor no permite editar una colección de reglas cargada desde una URL HTTP/HTTPS. Es una restricción razonable para algo como las [reglas BPA estándar de Analysis Services](https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules) de Microsoft, que se consumen tal cual. Eso descarta una URL como ubicación principal para un conjunto de reglas que tu propio equipo edita activamente: mantendrías el archivo real en otro lugar y tratarías la URL como un espejo de solo lectura, lo que añade más complejidad de la que compensa.
-- Los recursos compartidos de red asumen que todas las máquinas pueden acceder a la misma ubicación de red. Eso encaja en una configuración local o de una sola oficina, pero es una mala opción para un equipo distribuido, para cualquiera que trabaje en remoto o para un agente de canalización de CI/CD centrado en la nube que no tendrá montada la red interna de tu organización.
-- Una ruta relativa incluida en el propio repositorio Git del modelo semántico evita ambos problemas. Es totalmente editable, un archivo normal que se edita y revisa como cualquier otro del repositorio, y no presupone ninguna topología de red. Cualquier máquina que tenga clonado el repositorio también tiene el archivo de reglas, ya sea el portátil de un desarrollador o un agente de compilación de CI/CD.
+## Sharing preferences
 
-Hay una limitación que conviene conocer: las rutas relativas solo se resuelven cuando el modelo se carga desde disco (un modelo de tipo Guardar en carpeta), no cuando Tabular Editor se conecta directamente a una instancia activa de Analysis Services o Power BI. Esto rara vez importa en el desarrollo en paralelo basado en Git y [Guardar en carpeta](xref:parallel-development#what-is-save-to-folder), ya que el modelo permanece en disco en todo momento. Compruébalo si, en cambio, parte de tu equipo se conecta directamente a un Workspace activo.
+`Preferences.json` has the same fixed-path constraint as macros, with no native multi-source support. Any of the three options above works identically for it.
 
-Si tu equipo ya tiene una ubicación de red compartida y accesible, y prefiere no introducir un archivo por repositorio, un recurso compartido de red es una alternativa viable. Cambia portabilidad por la comodidad que ofrezca tu configuración actual de recursos compartidos. Reserva una colección basada en URL para consumir un conjunto de reglas externo y de solo lectura (como las reglas estándar de Microsoft), en lugar de las reglas que mantiene tu propio equipo.
+## Sharing BPA rules
 
-## Resumen
+Tabular Editor has first-class support for combining Best Practice Analyzer rules from multiple sources, with no symlinks or workarounds required:
 
-| Objetivo                                                                                     | Enfoque                                                                                                                                                                                                                                                                                                                                                                                  |
-| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Decide dónde deben residir las macros o reglas compartidas                                   | En el mismo repositorio que tu modelo semántico si solo mantienes uno; en un repositorio dedicado independiente si mantienes varios; consulta [¿El mismo repositorio o uno independiente?](#same-repo-as-your-semantic-model-or-a-separate-repo)                                                                                                                                         |
-| Compartir reglas de BPA con un equipo                                                        | Colección de archivos con rutas relativas en un repositorio Git (recomendada de forma predeterminada); consulta [Qué tipo de colección usar](#which-collection-type-to-use). También puedes usar un recurso compartido de red o una colección basada en URL; consulta la sección enlazada para conocer las ventajas e inconvenientes. |
-| Obtener un conjunto de reglas base, seleccionado y mantenido, sin necesidad de configuración | [Reglas BPA integradas](xref:built-in-bpa-rules) (TE3)                                                                                                                                                                                                                                                                                                                |
-| Compartir macros o preferencias, en ambos sentidos                                           | Enlace simbólico (opción A). Aún así, necesitas hacer `git pull` para incorporar los cambios de un compañero; puede que necesites que TI te conceda permisos en equipos con restricciones                                                                                                                                                             |
-| Compartir macros o preferencias, sin permisos elevados                                       | Hook pre-commit (opción B): unidireccional; sincroniza al hacer commit, no al hacer pull                                                                                                                                                                                                                                                              |
-| Compartir macros o preferencias, de forma explícita y revisable                              | Una herramienta de gestión de dotfiles como chezmoi (opción C): requiere aprender más; es mejor si ya la usas para otra configuración                                                                                                                                                                                                                 |
-| Combinar varias fuentes de macros (central + del departamento + personal) | Un script de combinación que concatena los arrays en un único archivo que lee Tabular Editor; es una solución alternativa, no integrada                                                                                                                                                                                                                                                  |
-| Cargar macros desde una ubicación que el usuario no controla                                 | No se admite, por diseño: las macros son código ejecutable                                                                                                                                                                                                                                                                                                               |
+- **Rule collections** let a model draw rules from the current model, the local user's `BPARules.json`, a machine-wide `BPARules.json` and any number of additional collections you add explicitly. Those additional sources include a file elsewhere on disk (with support for paths relative to the model, so the rule file can live in the same repository), a network share or an HTTP/HTTPS URL. Collections have a defined precedence order, so a shared central rule can be overridden at the model level where needed. See [Adding a rule collection](xref:best-practice-analyzer#adding-a-rule-collection) for how to add and prioritize collections.
+- **Built-in rules** (Tabular Editor 3) ship a curated, versioned set of best-practice rules directly in the application, updated automatically with each release, with knowledge-base articles linked from each rule. These sit alongside your custom rules rather than replacing them. See [Built-in BPA Rules](xref:built-in-bpa-rules).
+
+Between these two features, most "how do we share BPA rules across the team" scenarios are covered natively. A shared rule file committed to a repository and included as a collection via a relative path, network share or URL is often all you need. No symlink or hook is required, since Tabular Editor reads the collection directly rather than through a fixed personal path.
+
+> [!NOTE]
+> Because rule collections can point at a relative path, a network share or a URL, the same-repo-vs-separate-repo question above matters much less for BPA rules than for macros. A rule collection works the same way regardless of which repository the rule file lives in, since nothing needs to be copied or symlinked onto a fixed local path first. This is one practical advantage of BPA's native multi-source support over the file-copying mechanisms macros currently require.
+
+### Which collection type to use
+
+Of the three ways to add an external rule collection, a relative-path file in a Git repository is the recommended default for most teams, for reasons the other two options don't share:
+
+- URL-based collections are read-only. Tabular Editor doesn't allow editing a rule collection loaded from an HTTP/HTTPS URL. That's a reasonable restriction for something like Microsoft's [standard Analysis Services BPA rules](https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules), which you consume as-is. It rules out a URL as the home for a rule set your own team actively edits: you'd maintain the real file somewhere else and treat the URL as a read-only mirror, which is more moving parts than it's worth.
+- Network shares assume every machine can reach the same network location. That fits an on-premises or single-office setup but is a poor match for a distributed team, anyone working remotely or a cloud-first CI/CD pipeline agent that won't have your internal network mounted.
+- A relative path checked into the semantic model's own Git repository avoids both problems. It's fully editable, a normal file edited and reviewed like any other in the repo, and it makes no network topology assumptions. Whatever machine has the repo cloned has the rule file too, whether that's a developer's laptop or a CI/CD build agent.
+
+One constraint worth knowing: relative paths only resolve when the model is loaded from disk (a Save to Folder model), not when Tabular Editor connects directly to a live Analysis Services or Power BI instance. This rarely matters for parallel development built on Git and [Save to Folder](xref:parallel-development#what-is-save-to-folder), since the model is on disk throughout. Check it if part of your team connects directly to a live workspace instead.
+
+If your team already has a shared, reachable network location and prefers not to introduce a per-repo file, a network share is a workable alternative. It trades portability for whatever convenience your existing file-share setup offers. Reserve a URL-based collection for consuming an external, read-only rule set (like Microsoft's standard rules) rather than rules your own team maintains.
+
+## Summary
+
+| Goal                                                                                | Approach                                                                                                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Decide where shared macros/rules should live                                        | Same repo as a semantic model if you only maintain one such repo; a separate dedicated repo if you maintain several; see [Same repo or a separate repo?](#same-repo-as-your-semantic-model-or-a-separate-repo)                                                                   |
+| Share BPA rules across a team                                                       | Relative-path file collection in a Git repository (recommended default); see [Which collection type to use](#which-collection-type-to-use). Network share or URL collection also possible; see linked section for trade-offs. |
+| Get a curated, maintained baseline rule set with no setup                           | [Built-in BPA Rules](xref:built-in-bpa-rules) (TE3)                                                                                                                                                                                                           |
+| Share macros or preferences, two-way                                                | Symbolic link (Option A). Still needs `git pull` for a teammate's changes; may need IT to grant permission on locked-down machines                                                                                                            |
+| Share macros or preferences, no elevated permissions                                | Pre-commit hook (Option B): one-way, syncs on commit not on pull                                                                                                                                                                              |
+| Share macros or preferences, explicit and reviewable                                | A dotfiles-manager tool like chezmoi (Option C): more to learn, best if already used for other config                                                                                                                                         |
+| Combine multiple macro sources (central + department + personal) | A merge script that concatenates the arrays into the single file Tabular Editor reads; a workaround, not built-in                                                                                                                                                                |
+| Load macros from a location the user doesn't control                                | Not supported, by design: macros are executable code                                                                                                                                                                                                             |
 
 ## Siguientes pasos
 
