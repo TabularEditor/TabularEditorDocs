@@ -47,7 +47,7 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
 1. 该对象有说明（不为空）
 2. 模型中至少有一个区域设置缺少该说明的翻译
 
-In other words, if you have descriptions and multiple cultures defined, all descriptions should be translated for all cultures.
+换言之，如果你已编写描述并定义了多个区域设置，则应为每个区域设置翻译所有描述。
 
 ## 如何修复
 
@@ -65,7 +65,7 @@ In other words, if you have descriptions and multiple cultures defined, all desc
 
 ### 原因 2：后续添加了区域设置
 
-Culture added after descriptions were written.
+在编写描述之后才添加了区域设置。
 
 ### 原因 3：翻译不完整
 
