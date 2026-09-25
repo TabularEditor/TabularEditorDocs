@@ -8,28 +8,28 @@ description: 此最佳实践规则通过识别 Power BI 中与 Structured数据�
 
 # 避免在 Structured数据源中使用提供程序分区
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别 Power BI 模型中与 Structured数据源配合使用旧版基于提供程序的查询（SourceType = Query）的分区。 Power BI Service 不支持这种组合，因而会导致部署失败。
+此最佳实践规则用于识别 Power BI 模型中与 Structured数据源配合使用旧版基于提供程序的查询（SourceType = Query）的分区。 This combination is not supported in Power BI Service and will cause deployment failures.
 
 - 类别：错误预防
 
-- 严重性：中等（2）
+- 严重级别：中等（2）
 
-## 适用范围
+## 适用于
 
 - 分区
 
-## 为何重要
+## 为何这很重要
 
-Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。在 Structured数据源中使用提供程序分区会导致：
+Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。 Using provider partitions with structured data sources causes:
 
 - **部署失败**：模型无法发布到 Power BI Service
 - **刷新错误**：在服务中执行的计划刷新会失败
 - **兼容性问题**：模型无法正确共享或部署
 - **迁移障碍**：阻碍从 Analysis Services 迁移到 Power BI
 
-## 规则触发条件
+## 此规则何时触发
 
 当某个分区同时满足以下所有条件时，规则会触发：
 
@@ -63,7 +63,7 @@ Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而
 ### 修复前
 
 ```
-分区: Sales_Partition
+Partition: Sales_Partition
   SourceType: Query
   Query: SELECT * FROM Sales
   DataSource: PowerQuerySource (Type: Structured)
@@ -74,7 +74,7 @@ Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而
 ### 修复后
 
 ```
-分区: Sales_Partition
+Partition: Sales_Partition
   SourceType: M
   Expression: 
     let
