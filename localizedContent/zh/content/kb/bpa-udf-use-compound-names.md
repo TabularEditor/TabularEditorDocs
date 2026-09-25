@@ -10,7 +10,7 @@ description: 最佳实践规则：确保 DEFINE 中的用户定义函数使用�
 
 ## 概览
 
-This best practice rule identifies User-Defined Functions (UDFs) whose names do not contain a separator character (`.` or `_`). 复合名称可以避免命名冲突：如果 Microsoft 引入了同名的内置 DAX 函数，也不会受到影响。
+本最佳实践规则用于识别名称中不包含分隔符（`.` 或 `_`）的用户自定义函数（UDF）。复合名称可以避免命名冲突：如果 Microsoft 引入了同名的内置 DAX 函数，也不会受到影响。
 
 - 类别：错误预防
 
