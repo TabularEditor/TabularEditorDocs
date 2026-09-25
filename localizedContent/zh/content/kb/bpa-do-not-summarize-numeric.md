@@ -8,11 +8,11 @@ description: 最佳实践规则：防止对不应求和的数值列进行错误�
 
 # 将数值列的 SummarizeBy 设置为 None
 
-## 概述
+## 概览
 
-此最佳实践规则会识别可见的数值列（Int64、Decimal、Double），其默认聚合行为（`SummarizeBy`）不为 `None`。大多数数值列不应被自动聚合，因为对 ID、非可加语境下的数量或代码等数值求和会产生毫无意义的结果。
+此最佳实践规则会识别可见的数值列（Int64、Decimal、Double），其默认聚合行为（`SummarizeBy`）不为 `None`。 Most numeric columns should not be automatically aggregated, as summing values like IDs, quantities in non-additive contexts, or codes produces meaningless results.
 
-- 类别：格式设置
+- 类别：格式化
 
 - 严重性：高（3）
 
@@ -20,9 +20,9 @@ description: 最佳实践规则：防止对不应求和的数值列进行错误�
 
 - 数据列
 - 计算列
-- 计算表格的列
+- 计算表格列
 
-## 为什么这很重要
+## 为何这很重要
 
 对不合适的列进行默认聚合会带来严重问题：
 
@@ -34,7 +34,7 @@ description: 最佳实践规则：防止对不应求和的数值列进行错误�
 
 常见的“不应聚合”列包括 ID、键、代码、比率、百分比，以及不可加的数量。
 
-## 此规则何时触发
+## 该规则何时触发
 
 当某列同时满足以下 ALL 项条件时，此规则会触发：
 
@@ -51,7 +51,7 @@ and not (IsHidden or Table.IsHidden)
 
 ### 自动修复
 
-此规则提供自动修复：
+这条规则包含一个自动修复：
 
 ```csharp
 SummarizeBy = AggregateFunction.None
@@ -60,7 +60,7 @@ SummarizeBy = AggregateFunction.None
 应用方法：
 
 1. 在 **Best Practice Analyzer** 中选择被标记的对象
-2. 单击 **Apply Fix**
+2. 点击 **Apply Fix**
 
 ### 手动修复
 
@@ -107,7 +107,7 @@ Column: CustomerID
 
 ## 兼容级别
 
-这个规则适用于兼容级别为 **1200** 及以上的模型。
+这个规则适用于兼容级别 **1200** 及以上的模型。
 
 ## 相关规则
 
