@@ -13,18 +13,18 @@ applies_to:
 
 # Crear partición M
 
-## Propósito del script
+## Objetivo del script
 
 Si quieres crear un nuevo parámetro M dinámico para usarlo en consultas de Power Query (particiones M o expresiones compartidas).
 
-## Secuencia de comandos
+## Script
 
 ### Crear una nueva partición M
 
 ```csharp
-// Este script crea un nuevo parámetro M en las 'Expresiones compartidas' de un modelo.
+// This script creates a new M parameter in the 'Shared Expressions' of a model.
 //
-// Crea una nueva expresión compartida llamada "New Parameter"
+// Create a new shared expression called "New Parameter"
 Model.AddExpression( 
     "New Parameter", 
     @"
@@ -36,15 +36,15 @@ Model.AddExpression(
 ]"
 );
 
-// Muestra un mensaje con instrucciones sobre cómo configurar y usar el parámetro
+// Provides an output informing how to configure and use the parameter
 Info ( 
-    "Se ha creado una nueva expresión compartida llamada 'New Parameter', que es una plantilla de parámetro M." + 
+    "Created a new Shared Expression called 'New Parameter', which is an M Parameter template." + 
     "\n------------------------------------------------------\n" + 
-    "Para configurarlo:" +
+    "To configure:" +
     "\n------------------------------------------------------\n    " + 
-    "1. Reemplaza el texto 'New Parameter' por el valor de parámetro deseado\n    " +
-    "2. Establece el tipo de datos correctamente\n    " +
-    "3. Reemplaza cualquier valor encontrado en las particiones M por la referencia al parámetro." );
+    "1. Replace the text 'New Parameter' with the desired parameter value\n    " +
+    "2. Set the data type appropriately\n    " +
+    "3. Replace any values found in the M partitions with the parameter reference." );
 ```
 
 ### Explicación
