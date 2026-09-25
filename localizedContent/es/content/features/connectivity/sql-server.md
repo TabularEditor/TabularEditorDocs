@@ -1,6 +1,6 @@
 ---
 uid: connect-sql-server
-title: Connect to SQL Server
+title: Conectar a SQL Server
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,35 +17,35 @@ applies_to:
           full: true
 ---
 
-# Connect to SQL Server
+# Conectar a SQL Server
 
-Covers SQL Server, Azure SQL Database, Azure SQL Managed Instance and Azure Synapse. Start from **Model > Import tables...** and choose a SQL Server source.
+Incluye SQL Server, Azure SQL Database, Azure SQL Managed Instance y Azure Synapse. Ve a **Modelo > Importar tablas...** y elige un origen de SQL Server.
 
-![The Connect to SQL Server dialog, with Azure Active Directory - Universal with MFA chosen in the Authentication list](~/content/assets/images/features/connectivity/sql-server-connection.png)
+![El cuadro de diálogo Conectar a SQL Server, con la opción Azure Active Directory - Universal con MFA seleccionada en la lista de Autenticación](~/content/assets/images/features/connectivity/sql-server-connection.png)
 
-## Authenticators
+## Métodos de autenticación
 
-| Autenticación                                   | What you supply                                       | Notas                                                                                                      |
-| ----------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **SQL Server Authentication**                   | User name and password                                | A login defined on the server itself, not in your directory                                                |
-| **Windows Authentication**                      | Nothing                                               | Uses the Windows account Tabular Editor is running as                                                      |
-| **Azure Active Directory - Universal with MFA** | A browser sign-in                                     | The only mode that prompts. Use it for interactive work, not for a scheduled job           |
-| **Azure Active Directory - Password**           | User name and password                                | A directory account. Fails where the account requires multi-factor authentication          |
-| **Azure Active Directory - Integrated**         | Nothing                                               | Uses the directory account you are signed in to Windows with, where the machine is joined to the directory |
-| **Azure Active Directory - Service Principal**  | Application (client) ID and secret | The usual choice for unattended refresh                                                                    |
+| Autenticación                                      | Qué debes proporcionar                                  | Notas                                                                                                                     |
+| -------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Autenticación de SQL Server**                    | Nombre de usuario y contraseña                          | Un inicio de sesión definido en el propio servidor, no en tu directorio                                                   |
+| **Autenticación de Windows**                       | Nada                                                    | Usa la cuenta de Windows con la que se está ejecutando Tabular Editor                                                     |
+| **Azure Active Directory - Universal con MFA**     | Inicio de sesión mediante el navegador                  | Es el único modo que solicita autenticación. Úsalo para trabajo interactivo, no para una tarea programada |
+| **Azure Active Directory - Contraseña**            | Nombre de usuario y contraseña                          | Una cuenta de directorio. No funciona si la cuenta requiere autenticación multifactor                     |
+| **Azure Active Directory - Integrada**             | Nada                                                    | Usa la cuenta del directorio con la que has iniciado sesión en Windows si el equipo está unido al directorio              |
+| **Azure Active Directory - Principal de servicio** | ID de aplicación (cliente) y secreto | La opción habitual para la actualización desatendida                                                                      |
 
-The two integrated modes take no user name or password, and Tabular Editor clears both fields when you select one.
+Los dos modos de autenticación Integrada no requieren nombre de usuario ni contraseña, y Tabular Editor borra ambos campos cuando seleccionas uno de ellos.
 
-## Encryption
+## Cifrado
 
-**Encrypt connection** controls whether the connection requires TLS. Azure SQL requires it. Leave it on unless you are connecting to an on-premises server with no certificate, in which case the connection fails with a certificate error until you either install a certificate or turn this off.
+**Cifrar conexión** controla si la conexión requiere TLS. Azure SQL lo requiere. Déjalo activado salvo que te conectes a un servidor local sin certificado; en ese caso, la conexión falla con un error de certificado hasta que instales un certificado o lo desactives.
 
-## Saving the password
+## Guardar la contraseña
 
-**Save password** stores the password for next time. With it cleared, you are asked again the next time the model needs the source.
+**Guardar contraseña** almacena la contraseña para la próxima vez. Si está desactivada, se te volverá a pedir la próxima vez que el modelo necesite el origen.
 
-## Where the credentials are stored
+## Dónde se almacenan las credenciales
 
-Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
+Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) situado junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se incluyen en el control de código fuente, y cualquier colega que abra el mismo modelo deberá proporcionar las suyas.
 
-The generated M expression names the server and the object only. It never contains a password, a token or a key.
+La expresión M generada solo indica el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
