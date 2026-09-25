@@ -25,19 +25,19 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 根据你使用的 Analysis Services 版本，在模型元数据中定义数据源的方式也不同：
 
-- **提供程序（又称旧版）**：在所有 Analysis Services 版本和所有兼容级别中均可用。支持的数据源范围有限，主要通过 OLE DB/ODBC 驱动程序访问关系型数据源。分区通常使用 SQL 语句定义，并以原生方式在数据源上执行。凭据在 Tabular Object Model 的 Provider数据源对象中进行管理，并在服务器端存储和加密。
-- **结构化（又称 Power Query）**：自 SQL Server 2017 起可用（兼容级别 1400+）。支持的数据源范围比旧版提供程序更广。分区通常使用 M（Power Query）表达式定义。凭据在 Tabular Object Model 的 Structured数据源对象中进行管理，并且每次部署到 Analysis Services 时都需要指定。
-- **隐式数据源**：仅用于 Power BI 语义模型。模型中不会创建显式的数据源对象。取而代之的是，M（Power Query）表达式会隐式定义数据源。凭据不存储在 Tabular Object Model 中，而是由 Power BI Desktop 或 Power BI 服务进行管理。
+- **Provider (aka. Legacy)**: Available in every version of Analysis Services and every compatibility level. Supports a limited range of sources, primarily relational through OLE DB/ODBC drivers. Partitions are usually defined using a SQL statement, which is executed natively against the source. Credentials are managed in the Provider Data Source object in the Tabular Object Model and stored and encrypted server-side.
+- **结构化（又称 Power Query）**：自 SQL Server 2017 起可用（兼容级别 1400+）。 Supports a wider range of data sources than Legacy providers. Partitions are usually defined using M (Power Query) expressions. Credentials are managed in the Structured Data Source object in the Tabular Object Model and need to be specified upon every deployment to Analysis Services.
+- **隐式数据源**：仅用于 Power BI 语义模型。 No explicit Data Source object is created in the model. Instead, the M (Power Query) expression implicitly defines the data source. Credentials are not stored in the Tabular Object Model, but are managed by Power BI Desktop or the Power BI Service.
 
 > [!NOTE]
-> Tabular Editor 2.x 的“表导入向导”和“更新表架构”功能仅支持包含 SQL 分区的旧版数据源。换句话说，不支持 Power Query 分区。因此，通常建议使用 Legacy 旧版数据源，因为它们能在各类开发者工具之间实现最高程度的互操作性。
+> Tabular Editor 2.x 的“表导入向导”和“更新表架构”功能仅支持包含 SQL 分区的旧版数据源。 In other words, there is no support for Power Query partitions. For this reason, Legacy data sources are usually recommended, as they provide the highest level of interoperability between the developer tools.
 
 ## 导入新表
 
-在导入表时（模型菜单 > 导入表...），Tabular Editor 会显示上面提到的选项（用于创建新的数据源），以及模型中已存在的数据源列表。如果要导入的表在模型中已指定的某个数据源中可用，请避免创建新的数据源。
+在导入表时（模型菜单 > 导入表...），Tabular Editor 会显示上面提到的选项（用于创建新的数据源），以及模型中已存在的数据源列表。 Avoid creating new data sources if the tables you want to import are available in one of the data sources already specified in the model.
 
 > [!TIP]
-> 语义模型通常被视为关系型 Warehouse 中经过优化、驻留内存的语义缓存。因此，理想情况下，一个模型最好只包含一个数据源，这个数据源指向基于 SQL 的 Warehouse 或数据集市。
+> 语义模型通常被视为关系型 Warehouse 中经过优化、驻留内存的语义缓存。 For this reason, a model should ideally only contain a single data source, which would point to a SQL-based data warehouse or data mart.
 
 ## 创建新的数据源
 
@@ -45,7 +45,7 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 ![创建新数据源](~/content/assets/images/create-new-source.png)
 
-请注意，尤其是 Power BI，Analysis Services 和 Power BI 支持的数据源范围要广得多；不过，上面截图中列出的数据源，才是 Tabular Editor 为了自动导入表元数据(即列名和数据类型)而能够连接的数据源。对于不在此列表中的数据源，Tabular Editor 3 仍然可以[利用 Analysis Services 更新表架构](#updating-table-schema-through-analysis-services)。
+请注意，尤其是 Power BI，Analysis Services 和 Power BI 支持的数据源范围要广得多；不过，上面截图中列出的数据源，才是 Tabular Editor 为了自动导入表元数据(即列名和数据类型)而能够连接的数据源。 For data sources not on this list, Tabular Editor 3 can still [update table schema by utilising Analysis Services](#updating-table-schema-through-analysis-services).
 
 目前，Tabular Editor 3 原生支持以下数据源：
 
@@ -60,36 +60,36 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 - Databricks\*
 - Fabric Lakehouse
 - Fabric Warehouse
-- Fabric SQL 数据库
-- Fabric 镜像数据库
+- Fabric SQL Database
+- Fabric Mirrored Database
 
-\*=这些数据源仅在 Power BI Data model 中作为隐式数据源受到支持。它们在 SSAS / Azure AS 中不可用。
+\*=这些数据源仅在 Power BI Data model 中作为隐式数据源受到支持。 They are not available in SSAS / Azure AS.
 
 > [!TIP]
 > 想了解如何连接到 Azure Databricks 的更多信息，可以看看 [连接到 Azure Databricks](xref:connecting-to-azure-databricks)。
 
-从列表中选择某个数据源后，Tabular Editor 会显示一个连接详细信息对话框，让你指定服务器地址、凭据等与要创建的数据源相关的设置。你指定的设置应该是 Tabular Editor 用来建立到该源的本地连接时要用的设置。这些设置会保存在你的 @user-options 中。
+After choosing one of the data sources on the list, Tabular Editor displays a connection details dialog, allowing you to specify server addresses, credentials, etc., specific to the data source you want to create. The settings that you specify should be those that Tabular Editor should use for establishing a local connection to the source. These settings are saved in your @user-options.
 
 ![Sql Auth](~/content/assets/images/sql-auth.png)
 
 如果你希望 Analysis Services 在连接时使用不同的凭据，可以在导入表之后，通过编辑 Tabular Object Model 中的数据源属性来指定。
 
-## 连接到数据源
+## Connecting to a data source
 
-每种数据源类型都有自己的连接对话框，可用的身份验证方法也各不相同。这种选择不仅影响首次连接，因为某些身份验证方法需要人工交互，因此无法用于计划刷新。
+Each source type has its own connection dialog, and the authenticators on offer differ between them. The choice matters beyond the first connection, because some authenticators need a person at the keyboard and so cannot be used for a scheduled refresh.
 
-完整列表请参阅 @connectivity，并查看相应数据源的页面：
+See @connectivity for the full list, and the page for your source:
 
-- @connect-sql-server，涵盖 Azure SQL 和 Synapse
-- @connect-snowflake，包括适用于无人值守场景的密钥对身份验证
+- @connect-sql-server, covering Azure SQL and Synapse
+- @connect-snowflake, including key pair authentication for unattended work
 - @connect-databricks
 - @connect-oracle
-- @connect-odbc，也可用于连接 PostgreSQL、MySQL、MariaDB 和 IBM Db2
+- @connect-odbc, which is also how PostgreSQL, MySQL, MariaDB and IBM Db2 are reached
 - @connect-oledb
 - @connect-onelake
 - @connect-dataflows
 
-凭据按用户和模型分别存储在 [用户选项](xref:user-options) 文件中，使用你的 Windows 帐户密钥加密，且不会写入模型元数据。
+Credentials are stored per user and per model in the [user options](xref:user-options) file, encrypted with your Windows account key, and never become part of the model metadata.
 
 ## 选择要导入的对象
 
@@ -101,20 +101,20 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 ![Choose Source Objects](~/content/assets/images/choose-source-objects.png)
 
-你可以在左侧勾选，以一次导入多个表/视图。对于每个表/视图，你都可以取消勾选或勾选要导入的列。
+你可以在左侧勾选，以一次导入多个表/视图。 For each table/view, you may deselect/select columns to import.
 
 > [!TIP]
-> 如果你能控制源系统，我们建议始终在要导入的表之上创建一个视图。在该视图中，确保更正将在语义模型中使用的名称、拼写等，并移除语义模型不需要的列（系统列、时间戳等）。
+> If you are in control of the source, we recommend always creating a view on top of the tables you wish to import. In the view, make sure to correct any names, spellings, etc., to be used in the Semantic Model, and get rid of any columns not needed by the Semantic Model (system columns, timestamps, etc.).
 >
-> 然后，在模型中从该视图导入所有列（本质上会生成一条 `SELECT * FROM ...` 语句）。这样更易于维护，因为你只需在 Tabular Editor 中运行 Schema Update，就能判断源端是否有任何更改。
+> 然后，在模型中从该视图导入所有列（本质上会生成一条 `SELECT * FROM ...` 语句）。 This makes maintenance easier, as you only need to run a Schema Update in Tabular Editor to determine if anything was changed in the source.
 
 ![Advanced Import](~/content/assets/images/advanced-import.png)
 
-如果你使用左上角的下拉列表将预览模式切换为“Schema only”，就可以为每个源列更改导入的数据类型和列名。例如，如果源数据使用浮点值，但你希望将数据以定点小数的形式导入，这会很有用。
+如果你使用左上角的下拉列表将预览模式切换为“Schema only”，就可以为每个源列更改导入的数据类型和列名。 This may be useful for example if your source using floating-point values, but you want the data to be imported as fixed-decimal.
 
 ![Confirm Selection](~/content/assets/images/confirm-selection.png)
 
-在最后一页，确认你的选择，并选择要创建哪种类型的分区。对于 Provider数据源，默认创建的分区类型是 `SQL`；而对于 Structured数据源，默认则为 `M`。
+On the last page, confirm your selection and choose which type of partitions to create. 对于 Provider数据源，默认创建的分区类型是 `SQL`；而对于 Structured数据源，默认则为 `M`。
 
 ![Confirm Selection Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
 
@@ -124,10 +124,10 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
-列会按照它们在源表中出现的顺序创建。因此，两次导入同一个表都会得到相同的列顺序。
+Columns are created in the order they appear in the source table. Importing the same table twice therefore produces the same column order both times.
 
 > [!NOTE]
-> 从 **Fabric Lakehouse** 或 **Fabric Warehouse** 创建导入表时，会通过数据源提供的 SQL analytics endpoint 读取表的架构。如果无法确定任何终结点，且导入设置中也未指定，Tabular Editor 会报错并说明需要提供的内容：将 SQL 终结点作为服务器，或提供 Workspace ID 和 item ID。它不会创建一个没有列的表。
+> Creating Import tables from a **Fabric Lakehouse** or **Fabric Warehouse** reads the table's schema through the SQL analytics endpoint carried on the data source. Where no endpoint can be determined and none is given in the import settings, Tabular Editor reports an error naming what it needs: the SQL endpoint as the server, or a workspace id and item id. It does not create a table with no columns.
 
 ## 更新表架构
 
@@ -137,16 +137,16 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 此菜单项既可在模型级别调用，也可对一组表甚至单个表分区调用。
 
-使用此选项时，Tabular Editor 会连接到所有相关数据源（必要时会提示你输入凭据），以确定是否需要添加、修改或删除列。列会遵循源表自身的列顺序，因此架构更新不会打乱它们的顺序。
+When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), to determine whether columns need to be added, modified or removed. Columns follow the source table's own column order, so a schema update does not shuffle them.
 
 > [!IMPORTANT]
-> 如果之前导入到语义模型中的某个列在源中被删除或重命名，则必须更新语义模型中的表架构。否则，数据刷新操作可能会失败。
+> 如果之前导入到语义模型中的某个列在源中被删除或重命名，则必须更新语义模型中的表架构。 Otherwise, data refresh operations may fail.
 
 ![Schema Compare Dialog](~/content/assets/images/schema-compare-dialog.png)
 
-在上方的屏幕截图中，Tabular Editor 在源中检测到两个尚未导入的新列（`Color` 和 `Material`），并将两个现有列标记为待移除（`Colour` 和 `Substance Type`），因为它们的名称已无法与源中的任何列匹配。列重命名的检测仅适用于简单变更；此处名称差异较大，因此 Tabular Editor 会将其报告为删除和新增，而非重命名——实际上，源中的 `Colour` 已重命名为 `Color`，`Substance Type` 已重命名为 `Material`。
+In the screenshot above, Tabular Editor detected two new columns in the source that have not yet been imported (`Color` and `Material`), and flagged two existing columns for removal (`Colour` and `Substance Type`) because their names no longer match any column in the source. Detection of a column rename only works for simple changes; here, the names differ enough that Tabular Editor reports a removal and an addition rather than a rename - `Colour` has in fact been renamed to `Color` in the source, and `Substance Type` to `Material`.
 
-为避免破坏依赖 `[Colour]` 列的现有 DAX 公式，你可以按住 Ctrl 键，在“架构更改”对话框中点击 `Color`（导入）和 `Colour`（删除）两行，然后右键单击，将“删除列”和“新增列”合并为一次 SourceColumn 更新操作：
+To avoid breaking existing DAX formulas that rely on the `[Colour]` column, you can hold down the Ctrl button and click on the `Color` (import) and `Colour` (remove) rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
 
 ![Combine Sourcecolumn Update](~/content/assets/images/combine-sourcecolumn-update.png)
 
@@ -156,20 +156,20 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 
 ## 通过 Analysis Services 更新表架构
 
-默认情况下，Tabular Editor 3 会尝试直接连接到数据源，以便更新已导入表的架构。当然，这只在 Tabular Editor 3 支持该数据源时才有效。如果你需要更新从 Tabular Editor 3 不支持的数据源导入的表的架构，可以在 **工具 > 偏好 > 架构比较** 下启用 **使用 Analysis Services 进行更改检测** 选项。当某个分区或共享表达式的 M 表达式过于复杂，以至于 Tabular Editor 3 的内置架构检测功能无法处理时，也同样适用。例如，内置架构检测不支持某些 M 函数。
+By default, Tabular Editor 3 attempts to connect directly to the data source for the purposes of updating the imported table schema. Naturally, this only works when the data source is supported by Tabular Editor 3. 如果你需要更新从 Tabular Editor 3 不支持的数据源导入的表的架构，可以在 **工具 > 偏好 > 架构比较** 下启用 **使用 Analysis Services 进行更改检测** 选项。 This also applies when the M expression of a partition or shared expression is too complex for Tabular Editor 3's built-in schema detection feature. For example, the built-in schema detection does not support certain M functions.
 
 ![通过 As 更新表架构](~/content/assets/images/update-table-schema-through-as.png)
 
 启用此选项后，当 Tabular Editor 3 连接到 Analysis Services 或 Power BI XMLA endpoint 时，即可更新从 Analysis Services 或 Power BI 支持的**任何**数据源导入的表的架构。
 
 > [!NOTE]
-> **使用 Analysis Services 进行更改检测** 选项仅在 Tabular Editor 3 连接到 Analysis Services 或 Power BI XMLA endpoint 时才会生效。因此，建议你在开发模型时始终使用[工作区模式](xref:workspace-mode)。
+> **使用 Analysis Services 进行更改检测** 选项仅在 Tabular Editor 3 连接到 Analysis Services 或 Power BI XMLA endpoint 时才会生效。 For this reason, we recommend that developers always use the [Workspace Mode](xref:workspace-mode) when developing models.
 
 启用“**使用 Analysis Services 进行更改检测**”选项后，当请求更新架构时，Tabular Editor 3 将使用以下技术：
 
 1. 针对已连接的 Analysis Services 实例创建一个新的事务
-2. 向模型添加一个新的临时表。该表使用一个 Power Query 分区表达式，用于返回原始表达式的架构，而该原始表达式已请求更新架构。这是通过 [`Table.Schema` M 函数](https://docs.microsoft.com/en-us/powerquery-m/table-schema)实现的。
-3. Analysis Services 刷新该临时表。 Analysis Services 负责连接到数据源，以检索更新后的架构。
+2. A new temporary table is added to the model. 该表使用一个 Power Query 分区表达式，用于返回原始表达式的架构，而该原始表达式已请求更新架构。 This is done using the [`Table.Schema` M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
+3. Analysis Services 刷新该临时表。 Analysis Services takes care of connecting to the data source in order to retrieve the updated schema.
 4. Tabular Editor 3 查询临时表的内容，以获取架构元数据。
 5. 回滚该事务，使 Analysis Services 数据库或 Power BI 语义模型回到步骤 1 之前的原始状态。
 6. 如果存在任何架构更改，Tabular Editor 3 会显示如上所示的“应用架构更改”对话框。
@@ -177,7 +177,7 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 借助该技术，无论表背后的 M 查询有多复杂、使用了哪些函数，Tabular Editor 3 都可以从原本不受支持的数据源导入并更新表。
 
 > [!NOTE]
-> 如果你的 M 表达式通过 M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) 函数等方式组合了多个来源的数据，你可能需要在 Power BI 服务中的语义模型里，将[**隐私级别**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/)从“私有”更改为“组织”。否则，你可能会看到一条错误提示：`<Query> references other queries or steps, so it may not directly access a 数据源。请重建此数据组合`。即使未启用“**使用 Analysis Services 进行更改检测**”，也可能出现此错误，因为当 M 表达式复杂到超出 Tabular Editor 3 内置架构检测能力时，Tabular Editor 3 会自动回退到该检测机制。
+> 如果你的 M 表达式通过 M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) 函数等方式组合了多个来源的数据，你可能需要在 Power BI 服务中的语义模型里，将[**隐私级别**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/)从“私有”更改为“组织”。 Otherwise, you may see an error indicating that `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. This error may also occur even if **Use Analysis Services for change detection** is not enabled, as Tabular Editor 3 will automatically fall back to this detection mechanism when the M expression is too complex for Tabular Editor 3's built-in schema detection.
 
 ### 通过 Analysis Services 导入新表
 
