@@ -73,7 +73,7 @@ La línea 2 del script establece la descripción de la medida a partir de una ca
 
 En Tabular Editor, puedes generar automáticamente el código que hace referencia a un objeto específico arrastrándolo y soltándolo desde el Explorador TOM a la vista de C# Script.
 
-![Generate an object reference by dragging](~/content/assets/images/generate-csharp-code.gif)
+![Generar una referencia a un objeto arrastrando](~/content/assets/images/generate-csharp-code.gif)
 
 La mayoría de los objetos TOM (tablas, columnas, medidas, etc.) en Tabular Editor exponen el mismo conjunto de propiedades que están disponibles al usar directamente las bibliotecas de cliente AMO/TOM. Por este motivo, puedes consultar la [documentación de AMO/TOM de Microsoft](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) para saber qué propiedades están disponibles. Por ejemplo, [aquí](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) está la documentación sobre las propiedades disponibles de una medida.
 
@@ -98,10 +98,10 @@ En los ejemplos anteriores, usamos los métodos globales `Info(...)` y `Warning(
 - `string ReadFile(string filePath)` - forma práctica de cargar datos de texto desde un archivo.
 - `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - forma práctica de exportar un conjunto de propiedades de varios objetos como una cadena TSV.
 - `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos a partir de una cadena TSV.
-- `string ConvertDax(dax, useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y las que no son de EE. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido a un formato no EE. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Y viceversa si `useSemicolons` se establece en `false`.
-- `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX en todos los objetos de la colección proporcionada
+- `string ConvertDax(dax, useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y las que no son de EE. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido a un formato no EE. Es decir, las comas (separadores de lista) se convertirán en puntos y coma y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en `false`.
+- ¿`void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX en todos los objetos de la colección proporcionada
 - `void FormatDax(IDaxDependantObject obj)` - pone un objeto en cola para el formateo de expresiones DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
-- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos que se hayan puesto en cola hasta el momento
+- ¿`void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos que se hayan puesto en cola hasta el momento
 - `void Info(string message)` - Muestra mensajes informativos.
 - `void Warning(string message)` - Muestra mensajes de advertencia.
 - `void Error(string message)` - Muestra mensajes de error.
