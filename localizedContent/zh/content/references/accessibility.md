@@ -1,6 +1,6 @@
 ---
 uid: accessibility
-title: Accessibility
+title: 辅助功能
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,40 +17,40 @@ applies_to:
           full: true
 ---
 
-# Accessibility
+# 辅助功能
 
-This page collects the settings in Tabular Editor 3 that affect how readable and how operable the application is, and says what each one does. Most of them live under **Tools > Preferences > User Interface**.
+这个页面汇总了 Tabular Editor 3 中会影响应用程序可读性和可操作性的设置，并说明每项设置的作用。其中大多数位于 **工具 > 偏好 > 用户界面** 下。
 
-## Color blindness mode
+## 色觉障碍模式
 
-Tabular Editor uses color to tell you what changed. [Unsaved changes](xref:unsaved-changes) mark added objects green, deleted objects red and edited objects orange, and the model comparison view uses the same three.
+Tabular Editor 用颜色来标示哪些内容发生了变化。[未保存的更改](xref:unsaved-changes) 会将新增对象标记为绿色、已删除对象标记为红色、已编辑对象标记为橙色，模型比较视图也使用这三种颜色。
 
-Check **Color blindness mode** under **Tools > Preferences > User Interface**, in the **Accessibility** group. Added objects are then marked teal instead of green, which moves them onto a channel that can be seen, and leaves deleted and edited where they are, since those two were already far apart. The setting applies to the TOM Explorer and to the model comparison view, and it changes both the row tint and the badge on the object's icon.
+在 **工具 > 偏好 > 用户界面** 的 **辅助功能** 组中选中 **色觉障碍模式**。这样一来，新增对象会改用蓝绿色而不是绿色标记，更容易被识别；删除和编辑对象的颜色则保持不变，因为这两种颜色本来就有足够区分度。此设置适用于 TOM Explorer 和模型比较视图，并且会同时更改行的底色以及对象图标上的徽标。
 
-The setting is off by default and is remembered per user.
+此设置默认关闭，并会按用户单独保存。
 
-## Keyboard access
+## 键盘操作
 
-Every action in Tabular Editor is reachable from the menus, and the menus are reachable from the keyboard. Commands you use often can be given a shortcut of your own under **Tools > Preferences > Keyboard**, which also lists the shortcuts already assigned.
+Tabular Editor 里的每个操作都能从菜单中找到，菜单本身也能用键盘操作。你常用的命令可以在 **工具 > 偏好 > 键盘** 中自定义快捷键；该页面也会列出已分配的快捷键。
 
-See @shortcuts3 for the full list of default shortcuts.
+默认快捷键的完整列表见 @shortcuts3。
 
-## Text size and display scaling
+## 文本大小和显示缩放
 
-Tabular Editor follows the display scaling set in Windows, so raising the scaling factor in **Settings > System > Display** enlarges the whole interface rather than only part of it.
+Tabular Editor 会遵循 Windows 中设置的显示缩放，因此在 **设置 > 系统 > 显示** 中提高缩放比例时，放大的是整个界面，而不只是其中一部分。
 
-The DAX, M, SQL and C# editors take their own font and size, under **Tools > Preferences > DAX Editor > General** and the equivalent pages for the other languages. Raising the editor font is usually a better first step than scaling the whole application, since expressions are where most reading happens.
+DAX、M、SQL 和 C# 编辑器的字体和字号可在各自页面中单独设置：例如 **工具 > 偏好 > DAX编辑器 > 常规**，其他语言也有对应页面。与缩放整个应用程序相比，通常更建议先调大编辑器字体，因为大多数阅读工作都发生在表达式里。
 
-## Themes and contrast
+## 主题和对比度
 
-Tabular Editor ships several themes, including dark ones. Choose one under **Tools > Preferences > User Interface**, or from **Window > Theme**. See [Changing themes and palettes](xref:user-interface#changing-themes-and-palettes).
+Tabular Editor 提供了多个主题，其中包括深色主题。在 **工具 > 偏好 > 用户界面** 下选择其一，或通过 **窗口 > 主题** 进行选择。参见[更改主题和配色方案](xref:user-interface#changing-themes-and-palettes)。
 
-Themes change the application's own chrome. The syntax coloring inside the code editors is set separately, under **Tools > Preferences > DAX Editor**, so a dark theme and a light editor palette can be combined if that reads better for you.
+主题会更改应用程序自身的界面外观。代码编辑器内的语法高亮可在 **工具 > 偏好 > DAX编辑器** 中单独设置，因此如果更便于阅读，你可以将深色主题与浅色的编辑器配色组合使用。
 
 ## 语言
 
-The interface is available in several languages. Choose one under **Tools > Preferences > User Interface**, in the **Language** group. The setting takes effect after a restart. See @personalizing-te3.
+界面提供多种语言版本。在 **工具 > 偏好 > 用户界面** 的 **语言** 组中选择。该设置将在重启后生效。参见 @personalizing-te3。
 
-## Reporting an accessibility problem
+## Report 无障碍问题
 
-If something in Tabular Editor 3 is unusable for you, tell us: the settings above are the ones we have, and the list grows from what people report. Use **Help > Community Support**, or **Help > Dedicated Support** if your license includes it.
+如果 Tabular Editor 3 中有任何内容对你来说无法使用，请告诉我们：以上就是我们目前提供的设置，而这个列表会根据大家反馈的内容不断扩展。请使用 **帮助 > 社区支持**，或在许可证包含该服务时使用 **帮助 > 专属支持**。
