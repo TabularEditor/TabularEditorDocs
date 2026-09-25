@@ -25,7 +25,7 @@ Los grupos de tablas son una nueva funcionalidad disponible en Tabular Editor 3 
 
 Puedes configurar los grupos de tablas haciendo clic con el botón derecho en una tabla y eligiendo la opción de menú **Crear > Grupo de tablas**, o bien especificando un nombre para el grupo de tablas en la **vista de propiedades** mientras seleccionas una o varias tablas.
 
-También puedes usar el submenú contextual **Mover al grupo** al hacer clic con el botón derecho en una o varias tablas seleccionadas. El submenú muestra los grupos de tablas existentes, una opción **(Nuevo...)** que crea un nuevo grupo a partir de las tablas seleccionadas y abre el editor para asignarle un nombre, y una opción **(Ninguno)** que elimina la asignación del grupo de tablas.
+You can also use the **Move to group** right-click submenu on one or more selected tables. The submenu lists existing Table Groups, a **(New...)** entry that creates a new group from the selected tables and opens its name editor, and a **(None)** entry that removes the Table Group assignment.
 
 Las tablas se pueden mover entre grupos de tablas arrastrando y soltando en el Explorador TOM. Ten en cuenta que, a diferencia de las carpetas de visualización para medidas, columnas y jerarquías, los grupos de tablas no se pueden anidar.
 
@@ -41,37 +41,37 @@ Tabular Editor usa una anotación en cada tabla para especificar a qué grupo de
 A continuación se muestra un ejemplo de C# Script que recorre todas las tablas de un modelo y las organiza en grupos de tablas en función de su tipo y uso:
 
 ```csharp
-// Recorrer todas las tablas:
+// Loop through all tables:
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
     {
-        table.TableGroup = "Grupos de cálculo";
+        table.TableGroup = "Calculation Groups";
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tablas que contienen medidas visibles, pero sin relaciones con otras tablas
-        table.TableGroup = "Grupos de medidas";
+        // Tables containing visible measures, but no relationships to other tables
+        table.TableGroup = "Measure Groups";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tablas que están exclusivamente en el lado "muchos" de las relaciones:
-        table.TableGroup = "Hechos";
+        // Tables exclusively on the "many" side of relationships:
+        table.TableGroup = "Facts";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tablas sin ninguna relación, que son tablas calculadas y no tienen medidas:
-        table.TableGroup = "Tablas de parámetros";
+        // Tables without any relationships, that are Calculated Tables and do not have measures:
+        table.TableGroup = "Parameter Tables";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tablas en el lado "uno" de las relaciones:
-        table.TableGroup = "Dimensiones";
+        // Tables on the "one" side of relationships:
+        table.TableGroup = "Dimensions";
     }
     else
     {
-        // Todas las demás tablas:
-        table.TableGroup = "Varios";
+        // All other tables:
+        table.TableGroup = "Misc";
     }
 }
 ```
