@@ -25,29 +25,31 @@ applies_to:
 ### 选择列或度量值以创建字段参数表
 
 ```csharp
-// 运行脚本前，请先选择要用作字段参数的度量值或列（按住 CTRL 可多选对象）。
-// 此外，你也可以在下方修改字段参数表的名称。注意：如果用于 Power BI Desktop，
-// 你必须在“文件 > 偏好”(TE2) 或“工具 > 偏好”(TE3) 下启用“不受支持的功能”。
+// Before running the script, select the measures or columns that you
+// would like to use as field parameters (hold down CTRL to select multiple
+// objects). Also, you may change the name of the field parameter table
+// below. NOTE: If used against Power BI Desktop, you must enable unsupported
+// features under File > Preferences (TE2) or Tools > Preferences (TE3).
 var name = "Parameter";
 
-if(Selected.Columns.Count == 0 && Selected.Measures.Count == 0) throw new Exception("未选择任何列或度量值！");
+if(Selected.Columns.Count == 0 && Selected.Measures.Count == 0) throw new Exception("No columns or measures selected!");
 
-// 基于当前选择构建计算表格的 DAX：
+// Construct the DAX for the calculated table based on the current selection:
 var objects = Selected.Columns.Any() ? Selected.Columns.Cast<ITabularTableObject>() : Selected.Measures;
 var dax = "{\n    " + string.Join(",\n    ", objects.Select((c,i) => string.Format("(\"{0}\", NAMEOF('{1}'[{0}]), {2})", c.Name, c.Table.Name, i))) + "\n}";
 
-// 将计算表格添加到模型：
+// Add the calculated table to the model:
 var table = Model.AddCalculatedTable(name, dax);
 
-// 在 TE2 中，不会根据 DAX 表达式自动创建列，因此
-// 需要手动添加：
+// In TE2 columns are not created automatically from a DAX expression, so 
+// we will have to add them manually:
 var te2 = table.Columns.Count == 0;
 var nameColumn = te2 ? table.AddCalculatedTableColumn(name, "[Value1]") : table.Columns["Value1"] as CalculatedTableColumn;
 var fieldColumn = te2 ? table.AddCalculatedTableColumn(name + " Fields", "[Value2]") : table.Columns["Value2"] as CalculatedTableColumn;
 var orderColumn = te2 ? table.AddCalculatedTableColumn(name + " Order", "[Value3]") : table.Columns["Value3"] as CalculatedTableColumn;
 
 if(!te2) {
-    // 重命名在 TE3 中自动添加的列：
+    // Rename the columns that were added automatically in TE3:
     nameColumn.IsNameInferred = false;
     nameColumn.Name = name;
     fieldColumn.IsNameInferred = false;
@@ -55,8 +57,8 @@ if(!te2) {
     orderColumn.IsNameInferred = false;
     orderColumn.Name = name + " Order";
 }
-// 设置其余属性，以便字段参数正常工作
-// 参考：https://twitter.com/markbdi/status/1526558841172893696
+// Set remaining properties for field parameters to work
+// See: https://twitter.com/markbdi/status/1526558841172893696
 nameColumn.SortByColumn = orderColumn;
 nameColumn.GroupByColumns.Add(fieldColumn);
 fieldColumn.SortByColumn = orderColumn;
@@ -67,5 +69,6 @@ orderColumn.IsHidden = true;
 
 ### 说明
 
-在运行脚本之前，用户需要在 TOM Explorer 中选择他们希望包含在字段参数表中的度量值或列。随后，这些所选对象会被插入到一个计算表格中，并自动配置为字段参数表。
+在运行脚本之前，用户需要在 TOM Explorer 中选择他们希望包含在字段参数表中的度量值或列。
+The selected objects are then inserted into a calculated table which is then configured as a field parameter table automatically.
 
