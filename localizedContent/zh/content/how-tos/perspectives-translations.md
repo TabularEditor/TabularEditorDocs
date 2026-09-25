@@ -12,13 +12,13 @@ applies_to:
 
 # 使用透视与翻译
 
-你可以在资源管理器树中单击“模型”节点，然后在属性网格底部找到相关属性，以添加/编辑现有的透视和翻译（区域设置）。另外，当你的资源管理器树设置为[显示所有对象类型](../features/hierarchical-display.md)时，你可以直接在树中查看和编辑透视、区域设置和角色。
+你可以在资源管理器树中单击“模型”节点，然后在属性网格底部找到相关属性，以添加/编辑现有的透视和翻译（区域设置）。 Alternatively, when your Explorer Tree is [showing all object types](../features/hierarchical-display.md), you can view and edit perspectives, cultures and roles directly in the tree.
 
 ![](~/content/assets/images/perspectives-translations-01.png)
 
-你可以通过右键菜单选择“Duplicate”来复制现有的透视、角色或翻译。这会创建该对象的完全副本，然后你可以按需进行修改。
+You can duplicate an existing perspective, role or translation by opening the right-click menu and choose "Duplicate". This will create an exact copy of the object, which you can then modify to your needs.
 
-要查看透视和/或翻译的实际效果，请使用屏幕顶部附近工具栏上的两个下拉列表。选择透视会隐藏所有未包含在该透视中的对象；选择翻译则会在树中以翻译后的名称和显示文件夹来显示所有对象。按下 F2 更改对象/显示文件夹名称，或在树中拖动对象时，这些更改只会应用于所选翻译。
+To view perspectives and/or translations "in action", use the two dropdown lists in the toolbar near the top of the screen. 选择透视会隐藏所有未包含在该透视中的对象；选择翻译则会在树中以翻译后的名称和显示文件夹来显示所有对象。 When hitting F2 to change the names of objects/display folders or when dragging objects around in the tree, the changes will only apply to the selected translation.
 
 ## 对象上下文中的透视/翻译
 
