@@ -105,7 +105,7 @@ foreach (var culture in Model.Cultures)
 }
 ```
 
-## Creating and removing cultures
+## Creación y eliminación de configuraciones regionales
 
 ```csharp
 // Add a new culture
