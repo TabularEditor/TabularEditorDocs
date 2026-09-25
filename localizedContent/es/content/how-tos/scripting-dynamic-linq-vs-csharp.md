@@ -17,12 +17,12 @@ Los C# Scripts usan LINQ estándar de C# con expresiones lambda. Las reglas de B
 
 ## Dónde se usa cada uno
 
-| Contexto                                                                   | Syntax                                                                       |
+| Contexto                                                                   | Sintaxis                                                                     |
 | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | C# Scripts y macros                                                        | C# LINQ                                                                      |
-| Expresiones de reglas de BPA                                               | Dynamic LINQ                                                                 |
+| Expresiones de reglas de BPA                                               | LINQ dinámico                                                                |
 | Expresiones de corrección del BPA                                          | Dynamic LINQ (con el prefijo `it.` para las asignaciones) |
-| Filtro del árbol del **Explorador TOM** (prefijo `:`)\* | Dynamic LINQ                                                                 |
+| Filtro del árbol del **Explorador TOM** (prefijo `:`)\* | LINQ dinámico                                                                |
 
 \* Solo en Tabular Editor 2.
 
@@ -34,9 +34,9 @@ En Dynamic LINQ, el objeto es implícito: no hay ningún parámetro lambda como 
 | ---------------------------------- | ------------------------------------------ | ---------------------------------------------- |
 | AND lógico                         | `&&`                                       | `and`                                          |
 | OR lógico                          | `\|\|`                                     | `or`                                           |
-| Boolean NOT                        | `!`                                        | `not`                                          |
-| Equals                             | `==`                                       | `=`                                            |
-| Not equals                         | `!=`                                       | `!=` o `<>`                                    |
+| NO lógico                          | `!`                                        | `not`                                          |
+| Igual a                            | `==`                                       | `=`                                            |
+| Distinto de                        | `!=`                                       | `!=` o `<>`                                    |
 | Mayor/menor que                    | `>`, `<`, `>=`, `<=`                       | `>`, `<`, `>=`, `<=`                           |
 | La cadena contiene                 | `m.Name.Contains("Sales")`                 | `Name.Contains("Sales")`                       |
 | La cadena empieza con              | `m.Name.StartsWith("Sum")`                 | `Name.StartsWith("Sum")`                       |
@@ -49,7 +49,7 @@ En Dynamic LINQ, el objeto es implícito: no hay ningún parámetro lambda como 
 
 C# usa valores de enumeración con tipo. Dynamic LINQ usa representaciones como cadenas.
 
-| C# LINQ                                                             | Dynamic LINQ                                |
+| C# LINQ                                                             | LINQ dinámico                               |
 | ------------------------------------------------------------------- | ------------------------------------------- |
 | `c.DataType == DataType.String`                                     | `DataType = "String"`                       |
 | `p.SourceType == PartitionSourceType.M`                             | `SourceType = "M"`                          |
@@ -127,7 +127,7 @@ C# usa `OfType<T>()` o `is`. En BPA, el ámbito **Se aplica a** de la regla se e
 
 Funcionan igual en ambas sintaxis, pero LINQ dinámico omite el prefijo del objeto.
 
-| C# LINQ                       | Dynamic LINQ                |
+| C# LINQ                       | LINQ dinámico               |
 | ----------------------------- | --------------------------- |
 | `m.ReferencedBy.Count == 0`   | `ReferencedBy.Count = 0`    |
 | `m.DependsOn.Any()`           | `DependsOn.Any()`           |
@@ -146,7 +146,7 @@ Model.AllMeasures.Where(m => m.HasAnnotation("AUTOGEN"));
 HasAnnotation("AUTOGEN")
 ```
 
-| C# LINQ                             | Dynamic LINQ                     |
+| C# LINQ                             | LINQ dinámico                    |
 | ----------------------------------- | -------------------------------- |
 | `m.GetAnnotation("key") == "value"` | `GetAnnotation("key") = "value"` |
 | `m.HasAnnotation("key")`            | `HasAnnotation("key")`           |
@@ -163,7 +163,7 @@ Model.AllMeasures.Where(m => m.InPerspective["Sales"]);
 InPerspective["Sales"]
 ```
 
-| C# LINQ                                            | Dynamic LINQ                                     |
+| C# LINQ                                            | LINQ dinámico                                    |
 | -------------------------------------------------- | ------------------------------------------------ |
 | `m.InPerspective["Sales"]`                         | `InPerspective["Sales"]`                         |
 | `!m.InPerspective["Sales"]`                        | `not InPerspective["Sales"]`                     |
