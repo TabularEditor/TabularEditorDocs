@@ -1,5 +1,5 @@
 ---
-uid: importing-tables-from-excel
+uid: importacion-de-tablas-desde-excel
 title: Importación de tablas desde Excel
 author: Daniel Otykier
 updated: 2021-11-10
