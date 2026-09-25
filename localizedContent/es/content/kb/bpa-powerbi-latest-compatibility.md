@@ -43,7 +43,7 @@ La regla de prácticas recomendadas incluye una corrección automática que esta
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 ```
 
-### Corrección manual
+### Solución manual
 
 1. En Tabular Editor, ve a las propiedades de **Model**
 2. Establece el **nivel de compatibilidad** en el nivel más reciente disponible
@@ -69,17 +69,17 @@ Política del equipo: retrasar las actualizaciones.
 ### Antes de la corrección
 
 ```
-Nivel de compatibilidad del modelo: 1500
-Nivel máximo actual: 1706
+Model Compatibility Level: 1500
+Current Maximum Level: 1706
 ```
 
 ### Después de la corrección
 
 ```
-Nivel de compatibilidad del modelo: 1706 (el más reciente)
+Model Compatibility Level: 1706 (Latest)
 ```
 
-Acceso a nuevas capacidades, como [calendarios personalizados](xref:calendars) (1701+), [funciones definidas por el usuario en DAX](xref:udfs) (1702+), @user-context-calculated-columns (1705+) y el comportamiento de indexación de cadenas en una columna (1706+).
+Access to newer capabilities such as [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), @user-context-calculated-columns (1705+) and String Indexing Behavior on a column (1706+).
 
 ## Nivel de compatibilidad
 
