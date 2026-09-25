@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用透视和翻译
 
-透视用于控制哪些对象会显示在特定的客户端视图中。翻译（区域设置）提供本地化的名称、描述和显示文件夹。两者都使用 TOM 对象上的索引器属性。有关如何访问 TOM 对象及其索引器的详细信息，请参阅 @how-to-navigate-tom-hierarchy。
+Perspectives control which objects are visible in specific client views. Translations (cultures) provide localized names, descriptions and display folders. Both use indexer properties on TOM objects. 有关如何访问 TOM 对象及其索引器的详细信息，请参阅 @how-to-navigate-tom-hierarchy。
 
 ## 快速参考
 
@@ -72,7 +72,7 @@ Model.Perspectives["Old View"].Delete();
 
 ## 设置翻译
 
-翻译索引器适用于实现 (xref:TabularEditor.TOMWrapper.ITranslatableObject) 接口的对象（表、列、度量值、层次结构、级别）。显示文件夹的翻译需要对象实现 (xref:TabularEditor.TOMWrapper.IFolderObject)（度量值、列、层次结构）。
+翻译索引器适用于实现 (xref:TabularEditor.TOMWrapper.ITranslatableObject) 接口的对象（表、列、度量值、层次结构、级别）。 Display folder translations require (xref:TabularEditor.TOMWrapper.IFolderObject) (measures, columns, hierarchies).
 
 ```csharp
 var m = Model.AllMeasures.First(m => m.Name == "Revenue");
@@ -105,7 +105,7 @@ foreach (var culture in Model.Cultures)
 }
 ```
 
-## 创建和删除区域设置
+## Creating and removing cultures
 
 ```csharp
 // Add a new culture
@@ -119,7 +119,7 @@ Model.Cultures["fr-FR"].Delete();
 
 在 BPA 规则表达式中，可直接访问透视和翻译索引器。
 
-| C# Script                                          | Dynamic LINQ (BPA)            |
+| C# Script                                          | Dynamic LINQ（BPA）                                |
 | -------------------------------------------------- | ------------------------------------------------ |
 | `m.InPerspective["Sales"]`                         | `InPerspective["Sales"]`                         |
 | `!m.InPerspective["Sales"]`                        | `not InPerspective["Sales"]`                     |
