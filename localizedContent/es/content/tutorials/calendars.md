@@ -158,7 +158,7 @@ Las columnas asociadas tienen el mismo comportamiento de filtro que la columna p
 
 ![Panel de columnas asociadas en el Editor de calendario](~/content/assets/images/tutorials/calendar-associated-columns.png)
 
-#### Columnas de «Ordenar por»
+#### Sort By Columns
 
 Cuando una columna de unidad de tiempo principal tiene definida una columna **Ordenar por**, la columna **Ordenar por** se considera automáticamente una columna asociada. Esto garantiza que ambas columnas tengan el mismo comportamiento de filtrado durante los cálculos de inteligencia temporal, en consonancia con la manera en que Analysis Services procesa las configuraciones de calendario.
 
