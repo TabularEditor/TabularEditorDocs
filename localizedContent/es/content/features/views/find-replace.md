@@ -33,7 +33,7 @@ Para realizar una búsqueda, defina la expresión que desea buscar y utilice las
 Además, puede especificar dónde buscar, en distintas áreas de su instancia de Tabular Editor, para limitar o ampliar el alcance de la búsqueda. Las opciones de Buscar en incluyen:
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog-look-in.png" alt="Find and Replace Dialog Box" style="width: 200px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Ventana "Buscar/Reemplazar" en Tabular Editor. Ctrl+F abre el cuadro de diálogo. </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog-look-in.png" alt="Find and Replace Dialog Box" style="width: 200px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Ventana "Buscar/Reemplazar" en Tabular Editor. Ctrl+F abre el cuadro de diálogo </figcaption>
 </figure>
 
 - _Selección_: Buscar dentro de la selección en el documento abierto actualmente (No se puede buscar en el Dataset)
@@ -54,7 +54,7 @@ El cuadro de diálogo Reemplazar no requiere nada en el campo _Reemplazar con_, 
 Tiene las mismas opciones que en el cuadro de diálogo Buscar para definir los criterios de búsqueda, pero la función _Buscar en_ solo está disponible para documentos; es decir, no puede buscar y reemplazar dentro de los objetos de su Dataset.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Replace Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Ventana de Reemplazar en Tabular Editor. Ctrl+F abre el cuadro de diálogo. </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Replace Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Ventana de Reemplazar en Tabular Editor. Ctrl+F abre el cuadro de diálogo </figcaption>
 </figure>
 
 > [!TIP]
