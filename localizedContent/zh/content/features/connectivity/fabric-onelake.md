@@ -1,6 +1,6 @@
 ---
 uid: connect-onelake
-title: 连接到 Fabric 和 OneLake
+title: Connect to Fabric and OneLake
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,27 +17,27 @@ applies_to:
           full: true
 ---
 
-# 连接到 Fabric 和 OneLake
+# Connect to Fabric and OneLake
 
-Tabular Editor 可连接到 Microsoft Fabric，以列出 Workspace 及其中的 Lakehouse、Warehouse 等项目，并从 OneLake 导入。
+Tabular Editor connects to Microsoft Fabric to list workspaces and the Lakehouse, Warehouse and other items in them, and to import from OneLake.
 
-![“连接到 Lakehouse”对话框，按名称、类型、所有者和位置列出 OneLake catalog 中的项目](~/content/assets/images/features/connectivity/onelake-connection.png)
+![The Connect to a Lakehouse dialog, listing OneLake catalog items by name, type, owner and location](~/content/assets/images/features/connectivity/onelake-connection.png)
 
-## 身份验证方式
+## Authenticators
 
-Fabric 和 OneLake 使用 Microsoft Entra ID 进行身份验证。交互式登录是默认方式，适用于日常建模工作。如需无人值守刷新，请使用服务主体，并在 Fabric 中授予其对该 Workspace 的访问权限。
+Fabric and OneLake authenticate with Microsoft Entra ID. Signing in interactively is the default and covers ordinary modelling work. For an unattended refresh, use a service principal and grant it access to the workspace in Fabric.
 
-Fabric 权限在 Fabric 中授予，而不是在 Tabular Editor 中授予。如果某个帐户可以登录但看不到任何 Workspace，说明它尚未获得这些 Workspace 的访问权限。这是 Fabric 权限问题，不是连接问题。
+Fabric permissions are granted in Fabric, not in Tabular Editor. An account that can sign in but sees no workspaces has not been given access to them, which is a Fabric permissions question rather than a connection problem.
 
 ## Direct Lake
 
-Direct Lake 模型从 OneLake 读取数据，而不是导入数据，因此该连接是模型的一部分，而不是导入步骤。参见 @direct-lake-sql-model。
+A Direct Lake model reads from OneLake rather than importing, so the connection is part of the model rather than an import step. See @direct-lake-sql-model.
 
 > [!NOTE]
-> 如果无法确定 Lakehouse 或 Warehouse 的 SQL analytics endpoint，Tabular Editor 会改为 Report 该情况，而不会创建一个没有列的表。如果看到该错误，请检查该项目是否已在 Fabric 中完成端点预配。
+> Where the SQL analytics endpoint of a Lakehouse or Warehouse cannot be determined, Tabular Editor reports that rather than creating a table with no columns. If you see that error, check that the item has finished provisioning its endpoint in Fabric.
 
-## 凭据的存储位置
+## Where the credentials are stored
 
-你在此处输入的凭据会按用户和模型分别保存到模型旁的 [用户选项](xref:user-options) 文件 (`.tmuo`) 中，并经过加密，只有你的 Windows 帐户才能读取。它们不属于模型元数据的一部分，因此不会提交到源代码管理；打开同一模型的同事需要提供自己的凭据。
+Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
 
-生成的 M 表达式只包含服务器和对象名称。其中绝不包含密码、令牌或密钥。
+The generated M expression names the server and the object only. It never contains a password, a token or a key.
