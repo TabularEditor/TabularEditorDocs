@@ -139,7 +139,7 @@ SUM( 'Order details'[Net Order Quantity] )
 ```
 
 ```dax
-// Valor
+// Value
 SUM( 'Order details'[Net Order Value] )
 ```
 
@@ -169,7 +169,7 @@ En Power BI Desktop, la vista de modelo muestra la misma estructura con iconos d
 
 ![Vista de modelo de Power BI Desktop que muestra la configuración de agregación completada con dimensiones en modo Dual, una tabla de agregación oculta en modo Import y una tabla de detalle oculta en modo DirectQuery](../assets/images/tutorials/user-defined-aggregations/diagram-view-power-bi-desktop.jpg)
 
-## Más información
+## Lecturas adicionales
 
 - [Microsoft Docs: Agregaciones definidas por el usuario en Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
 - [Microsoft Docs: Modos de almacenamiento en Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
