@@ -21,7 +21,7 @@ applies_to:
 
 Este artículo describe cómo usar el [Asistente de importación de tablas](#table-import-wizard) de Tabular Editor 3 para agregar nuevas tablas al modelo. También hay una sección sobre cómo [actualizar el esquema de la tabla](#updating-table-schema) de una tabla existente. Por último, explicamos cómo usar la [herramienta de diagramas](#working-with-diagrams) para definir y editar relaciones entre tablas.
 
-## Asistente de importación de tablas
+## Asistente para importar tablas
 
 [!include[importing-tables1](../features/import-tables.partial.md)]
 
@@ -36,7 +36,7 @@ Después de cargar un modelo en Tabular Editor 3, elige la opción de menú **Ar
 
 [!include[diagram-basics](../features/views/diagram-basics.partial.md)]
 
-# Siguientes pasos
+# Pasos a seguir
 
 - @refresh-preview-query
 - @creating-and-testing-dax
