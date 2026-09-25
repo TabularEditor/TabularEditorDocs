@@ -13,10 +13,10 @@ applies_to:
 
 # 复制对象和批量重命名
 
-在资源管理器树中右键点击即可打开上下文菜单，用于复制度量值和列。复制后的对象名称会自动追加“copy”后缀。此外，你也可以选中多个对象，然后在资源管理器树中右键点击以进行批量重命名。
+The right-click context menu in the Explorer Tree lets you duplicate measures and columns. The duplicated objects will have their names suffixed by "copy". Furthermore, you can perform batch renames by selecting multiple objects and right-clicking in the Explorer Tree.
 
-![批量重命名对话框](~/content/assets/images/getting-started-te-03.png)
+![Batch rename dialog](~/content/assets/images/getting-started-te-03.png)
 
 你可以在重命名时使用正则表达式 RegEx，并可选择是否也要重命名翻译内容。
 
-复制出来的对象会保留原对象携带的错误和警告标识，因此，若原对象包含无效表达式，其副本也会立即被标记为无效。
+A duplicated object keeps whatever error and warning indicators the original carried, so a copy of an object with an invalid expression is marked as invalid straight away.
