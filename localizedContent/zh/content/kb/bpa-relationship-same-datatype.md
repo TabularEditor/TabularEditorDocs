@@ -10,7 +10,7 @@ description: 此最佳实践规则可确保关系所连接的列数据类型一�
 
 ## 概览
 
-此最佳实践规则用于识别关系两端所连接的列数据类型不一致的情况。 Both columns in a relationship must share the same data type to ensure proper filtering, prevent errors, and maintain optimal query performance.
+此最佳实践规则用于识别关系两端所连接的列数据类型不一致的情况。关系中的两列必须使用相同的数据类型，才能确保正确筛选、避免错误，并保持最佳查询性能。
 
 - 类别：错误预防
 
