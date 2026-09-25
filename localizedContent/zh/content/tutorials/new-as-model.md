@@ -23,43 +23,43 @@ applies_to:
 本页将指导您使用 Tabular Editor 3 从零开始创建一个新的 Analysis Services 表格模型。
 
 > [!NOTE]
-> Tabular Editor 3 商业版仅限于 [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) 和 [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier)。请注意，在这些层级中不支持某些建模功能。
+> Tabular Editor 3 商业版仅限于 [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) 和 [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier)。 Note that certain modeling features are not supported at these tiers.
 
 ##### 创建新模型
 
 - 在“文件”菜单中，选择“新建” > “模型……”或按 `CTRL+N`
 
-![新建模型](~/content/assets/images/new-as-model-new-model.png)
+![New model](~/content/assets/images/new-as-model-new-model.png)
 
-- 为模型命名，或使用默认名称。然后，根据你要面向的 Analysis Services 版本选择相应的兼容级别。可选项如下：
+- Provide a name for your model or use the default value. 然后，根据你要面向的 Analysis Services 版本选择相应的兼容级别。 Your options are the following:
 
   - 1200（Azure Analysis Services / SQL Server 2016+）
   - 1400（Azure Analysis Services / SQL Server 2017+）
   - 1500（Azure Analysis Services / SQL Server 2019+）
-  - 1600（Azure Analysis Services / SQL Server 2022+）
-  - 1700（Azure Analysis Services / SQL Server 2025+）
-  - 1706（Power BI / Fabric）
+  - 1600 (Azure Analysis Services / SQL Server 2022+)
+  - 1700 (Azure Analysis Services / SQL Server 2025+)
+  - 1706 (Power BI / Fabric)
 
-  1700 是 Analysis Services 支持的最高级别。 1706 仅适用于 Power BI 和 Fabric，也是通过 Power BI XMLA endpoint 部署模型时应选择的级别。
+  1700 is the highest level Analysis Services supports. 1706 is for Power BI and Fabric only, and is the level to choose when you deploy the model through the Power BI XMLA endpoint.
 
-- 为了获得最佳的开发体验，请选中“使用 Workspace 数据库”选项。这要求你拥有一个可用的 Analysis Services 实例，以便将 Workspace 数据库部署到其上。它可以是本地或远程的 SQL Server Analysis Services 实例，也可以是 Azure Analysis Services 实例。单击“确定”后，系统会提示你输入连接字符串，以连接要在其中创建 Workspace 数据库的 Analysis Services 实例。
+- For the best development experience, check the "Use workspace database" option. 这要求你拥有一个可用的 Analysis Services 实例，以便将 Workspace 数据库部署到其上。 This could be a local or a remote instance of SQL Server Analysis Services or it could be an instance of Azure Analysis Services. When you click OK, you will be prompted to enter the connection string for the Analysis Services instance in which you want the workspace database created.
 
   [了解有关 Workspace 数据库的详细信息](xref:workspace-mode)。
 
 > [!NOTE]
-> 使用 Workspace 数据库时，你可以验证 Power Query（M 表达式），并从 Power Query 表达式导入表架构。你还可以在 Workspace 数据库中刷新和查询数据，从而更轻松地调试和测试你的 DAX 表达式。
+> 使用 Workspace 数据库，你可以验证 Power Query（M 表达式），并从 Power Query 表达式中导入表架构。 You can also refresh and query data in the workspace database, making it easier to debug and test your DAX expressions.
 
 模型创建完成后，下一步是添加一个数据源和一些表。
 
 #### 添加数据源和表
 
-在将数据导入到表格模型之前，你必须先设置一个或多个数据源。在 TOM Explorer 中，右键单击“数据源”文件夹，然后选择“创建”。对于使用兼容级别 1400 或更高版本的模型，我们有两个选项：旧版数据源和 Power Query 数据源。想详细了解这两类数据源的差异，可以参阅 [Microsoft Analysis Services 博客](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400)。
+Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
-![添加数据源](~/content/assets/images/new-as-model-add-data-source.png)
+![Add data source](~/content/assets/images/new-as-model-add-data-source.png)
 
-在此示例中，我们将创建一个 Power Query 数据源，用它从 SQL Server 关系数据库导入几个表。创建数据源后，按 F2 将其重命名，然后使用属性网格配置该数据源，如下图所示：
+在此示例中，我们将创建一个 Power Query 数据源，用它从 SQL Server 关系数据库导入几个表。 Once the data source is created, hit F2 to rename it and configure the data source using the Property Grid as seen in the screenshot below:
 
-![设置数据源属性](~/content/assets/images/new-as-model-data-source-properties.png)
+![Set data source properties](~/content/assets/images/new-as-model-data-source-properties.png)
 
 在本示例中，我们设置了以下属性：
 
@@ -71,9 +71,9 @@ applies_to:
 | 服务器                | `localhost`            |
 | AuthenticationKind | `ServiceAccount`       |
 
-点击“保存”（Ctrl+S）。系统会提示你为 Model.bim 文件指定路径和文件名，该文件将保存你迄今为止创建的模型元数据。你也可以改为将模型保存为文件夹结构（文件 > 保存到文件夹...）。如果你计划将模型元数据集成到版本控制环境中，建议使用此方式。如果你使用的是 Workspace 数据库，Tabular Editor 3 还会将元数据同步到已连接的 Analysis Services 实例。
+Hit Save (Ctrl+S). You will be prompted to provide a path and file name for the Model.bim file which will hold the model metadata that you have created so far. You may also save the model as a folder structure instead (File > Save to folder...), which is recommended if you plan to integrate your model metadata into a version controlled environment. If you are using a Workspace Database, Tabular Editor 3 will also synchronize the metadata to the connected instance of Analysis Services.
 
-接下来，右键单击“Tables”文件夹并选择“Create > Table”（也可以按 Alt+5），以向模型添加一个新表。为该表命名，在我们的示例中为 `Internet Sales`。展开该表，找到表上的分区，并将以下 M 查询作为分区表达式，以便向表中填充数据：
+Next, add a new table to the model by right-clicking on the "Tables" folder and choosing "Create > Table" (you can also hit Alt+5). Give the table a name, in our example `Internet Sales`. Expand the table, locate the partition on the table and provide the following M query as the partition expression, in order to populate the table with data:
 
 ```M
 let
@@ -85,44 +85,44 @@ in
 
 这假设关系型 SQL Server 数据库在“dbo”架构下包含一个名为“FactInternetSales”的表。
 
-![M 分区表达式](~/content/assets/images/new-as-model-m-partition.png)
+![M partition expression](~/content/assets/images/new-as-model-m-partition.png)
 
-接下来，右键单击新建的表并选择“更新表架构...”。这样 Tabular Editor 就能根据分区查询自动填充表中的列。
+Next, right-click on the newly created table and choose "Update table schema...". This allows Tabular Editor to automatically populate the table columns based on the partition query.
 
 > [!NOTE]
 > 如果你未使用 Workspace 数据库，此操作仅在 Tabular Editor 3.1.0 或更高版本中可用。
 
-![架构对比](~/content/assets/images/new-as-model-schema-compare.png)
+![Schema compare](~/content/assets/images/new-as-model-schema-compare.png)
 
-点击“确定”将列添加到表中。再次点击“保存”（Ctrl+S）。如果你使用的是 Workspace 数据库，可以在刷新操作完成后在服务器上刷新该表，并浏览表中的数据。为此，右键单击该表并选择“刷新表 > 自动（表）”。等待“数据刷新”选项卡上的操作完成，然后右键单击该表并选择“预览”（也可以在 TOM Explorer 中执行），以查看表中的实际数据：
+Hit "OK" to add the columns to the table. Hit Save again (Ctrl+S). 如果你使用的是 Workspace 数据库，可以在刷新操作完成后在服务器上刷新该表，并浏览表中的数据。 To do so, right-click the table and choose "Refresh table > Automatic (table)". Wait for the operation on the "Data Refresh" tab to complete, then right-click the table and choose "Preview" (you can do so from the TOM Explorer as well), to view the actual data within the table:
 
-![数据刷新](~/content/assets/images/new-as-model-data-refresh.png)
+![Data refresh](~/content/assets/images/new-as-model-data-refresh.png)
 
-如果你导入的表是维度表，我们建议将该表主键列的“Key”属性设置为“true”。这样可以更轻松地定义该表与其他表之间的关系，我们稍后会看到这一点。
+如果你导入的表是维度表，我们建议将该表主键列的“Key”属性设置为“true”。 This makes it easier to define relationships between this and other tables, as we shall see later.
 
-对要导入到表格模型的每张表，都重复此操作。你无需逐个刷新每个表中的数据——可以直接在模型级别运行刷新操作。
+Repeat this process for any table you wish to import to your Tabular model. 你无需逐个刷新每个表中的数据——可以直接在模型级别运行刷新操作。
 
 #### 定义关系
 
-当你导入了多张表后，在 Tabular Editor 3 中定义它们之间关系的最简单方法是新建一个图表。选择“文件 > 新建 > 图表”。然后，多选并将表拖到图表视图中，或右键单击表并选择“添加到图表”：
+当你导入了多张表后，在 Tabular Editor 3 中定义它们之间关系的最简单方法是新建一个图表。 Choose "File > New > Diagram". Then, multi-select and drag the tables into the diagram view or right-click on the tables and choose "Add to diagram":
 
-![添加到图表](~/content/assets/images/new-as-model-add-to-diagram.png)
+![Add to diagram](~/content/assets/images/new-as-model-add-to-diagram.png)
 
-要在两张表之间创建关系，请在事实表上找到外键列，然后将该列“拖动”到维度表的主键列上。在弹出的对话框中，单击“确定”以确认关系设置。
+要在两张表之间创建关系，请在事实表上找到外键列，然后将该列“拖动”到维度表的主键列上。 Hit "OK" to confirm the relationship settings in the dialog that appears.
 
-![图表视图](~/content/assets/images/new-as-model-diagram-view.png)
+![Diagram view](~/content/assets/images/new-as-model-diagram-view.png)
 
-关闭图表视图（不用保存，因为你之后随时都可以重建该图表）。再次按 Ctrl+S 保存模型。现在该添加一些业务逻辑了。如果你使用的是 Workspace Database，现在正适合在模型级别执行一次刷新（automatic 或 calculate），以确保服务器已为这些关系创建相应的支撑结构，从而使模型处于可查询状态。
+Close the diagram view (no need to save it, as you can always reconstruct the diagram later). Hit Ctrl+S once again to save the model. Now it's time to add some business logic. 如果你使用的是 Workspace Database，现在正适合在模型级别执行一次刷新（automatic 或 calculate），以确保服务器已为这些关系创建相应的支撑结构，从而使模型处于可查询状态。
 
 #### 添加度量值
 
-在 TOM Explorer 中选择一张表，然后按 Alt+1（或选择“创建 > 新建度量值”）将度量值添加到该表。为度量值命名，并为该度量值提供 DAX 表达式。
+Select one of the tables in the TOM Explorer and hit Alt+1 (or choose Create > New Measure) to add a measure to that table. Give the measure a name and provide a DAX expression for the measure.
 
-![添加度量值](~/content/assets/images/new-as-model-add-measure.png)
+![Add measure](~/content/assets/images/new-as-model-add-measure.png)
 
 按 Ctrl+S 保存模型元数据。
 
-如果你使用的是 Workspace Database，现在可以直接在 Tabular Editor 3 中测试新建的度量值。最简单的测试方法是使用 Pivot Grid。选择“文件 > 新建 > Pivot Grid”，然后将刚创建的度量值从 TOM Explorer 拖到网格中。你也可以将列和层次结构从 TOM Explorer 拖到 Pivot Grid 的“筛选器”、“行”或“列”区域，按不同的维度属性对度量值进行切片：
+如果你使用的是 Workspace Database，现在可以直接在 Tabular Editor 3 中测试新建的度量值。 The easiest way to test it is by using a Pivot Grid. Choose File > New > Pivot Grid, then drag the newly created measure from the TOM Explorer into the grid. You can also drag columns and hierarchies from the TOM Explorer into the Filter, Row or Column area of the Pivot Grid, to slice your measure by different dimension attributes:
 
 ![Pivot Grid](~/content/assets/images/new-as-model-pivot-grid.png)
 
@@ -130,10 +130,10 @@ in
 
 #### 部署 Data model
 
-要将模型元数据部署到任意 Analysis Services 实例，请单击“Model”菜单并选择“Deploy...”。这将启动 Tabular Editor 3 的 Deployment Wizard，它与 Tabular Editor 2.X 的 Deployment Wizard 类似。按照向导各个页面上的说明操作，即可将模型元数据部署到 Analysis Services 的某个实例。你也可以使用 Deployment Wizard 生成 TMSL/XMLA 脚本，然后交由 Analysis Services 服务器管理员手动部署。
+To deploy the model metadata to any instance of Analysis Services, click on the "Model" menu and choose "Deploy...". This brings up the Tabular Editor 3 Deployment Wizard which is similar to the Deployment Wizard of Tabular Editor 2.X. Follow the instructions on the various pages of the wizard, to deploy the model metadata to an instance of Analysis Services. You can also use the Deployment Wizard to generate a TMSL/XMLA script, that can be handed over to an Analysis Services server administrator for manual deployment.
 
-![部署](~/content/assets/images/new-as-model-deployment.png)
+![Deployment](~/content/assets/images/new-as-model-deployment.png)
 
 要刷新并测试已部署的数据库，你可以使用 Microsoft 提供的标准管理工具和客户端工具；也可以使用另一个 Tabular Editor 3 实例（前提是你在已部署模型所在的 Analysis Services 实例上具有管理员访问权限）。
 
-上面的段落很好地说明了为什么要采用前文所述的 Workspace Database 方法。连接到 Workspace 数据库后，你可以在同一个 Tabular Editor 3 实例中完成所有开发操作，包括数据刷新和业务逻辑测试，而无需依赖其他工具。
+The paragraph above provides a good reason for using the Workspace Database approach described above. When connected to a workspace database, you will be able to perform all development operations, including data refresh and testing of business logic within the same instance of Tabular Editor 3, without having to rely on other tools.
