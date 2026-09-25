@@ -11,7 +11,7 @@ applies_to:
       none: true
 ---
 
-# Getting Started
+# Primeros pasos
 
 ## Instalación
 
@@ -35,7 +35,7 @@ El flujo de trabajo recomendado es configurar las tablas y relaciones con SSDT c
 
 Carga un archivo Model.bim seleccionando Abrir > Desde archivo... en el menú Archivo (CTRL+O), o abre una base de datos existente desde una instancia de Analysis Services seleccionando Abrir > Desde BD... opción. En este último caso, se te pedirá un nombre de servidor y credenciales opcionales:
 
-![Connecting to an already deployed Tabular Model](~/content/assets/images/getting-started-te-01.png)
+![Conectar con un modelo tabular ya implementado](~/content/assets/images/getting-started-te-01.png)
 
 Esto también es compatible con el nuevo Azure Analysis Services PaaS. El menú desplegable "Instancia local" se puede usar para explorar y conectarte a cualquier instancia en ejecución de Power BI Desktop o a espacios de trabajo integrados de Visual Studio. **Ten en cuenta que, aunque Tabular Editor puede realizar cambios en un modelo de Power BI a través de TOM, Microsoft no admite todas las operaciones de modelado. [Más información](Power-BI-Desktop-Integration.md)**
 
@@ -43,11 +43,11 @@ Después de hacer clic en "Aceptar", se mostrará una lista de bases de datos en
 
 Así es como se ve la interfaz de usuario después de cargar un modelo en Tabular Editor:
 
-![The main UI of Tabular Editor](~/content/assets/images/getting-started-te-02.png)
+![La interfaz de usuario principal de Tabular Editor](~/content/assets/images/getting-started-te-02.png)
 
 El árbol del lado izquierdo de la pantalla muestra todas las tablas del modelo tabular. Al expandir una tabla, se mostrarán todas las columnas, medidas y jerarquías dentro de la tabla, agrupadas por sus carpetas de visualización. Usa los botones justo encima del árbol para alternar las carpetas de visualización, los objetos ocultos, ciertos tipos de objetos o para filtrar objetos por nombre. Al hacer clic con el botón derecho en cualquier parte del árbol, se abrirá un menú contextual con acciones habituales, como agregar nuevas medidas, ocultar un objeto, duplicar objetos, eliminar objetos, etc. Pulsa F2 para cambiar el nombre del objeto seleccionado actualmente, o selecciona varios y haz clic con el botón derecho para cambiar el nombre en lote de varios objetos.
 
-![Batch Renaming lets you rename multiple objects simultaneously](~/content/assets/images/getting-started-te-03.png)
+![El cambio de nombre por lotes te permite renombrar varios objetos a la vez](~/content/assets/images/getting-started-te-03.png)
 
 En la parte superior derecha de la interfaz de usuario principal, verás el Editor de DAX, que puedes usar para editar la expresión DAX de cualquier medida o columna calculada del modelo. Haz clic en el botón "DAX Formatter" para dar formato automáticamente al código a través de www.daxformatter.com.
 
@@ -55,7 +55,7 @@ Usa la cuadrícula de propiedades en la esquina inferior derecha para revisar y 
 
 Para editar perspectivas o traducciones (configuraciones regionales), selecciona el objeto "Model" en el árbol y localiza las propiedades "Model Perspectives" o "Model Cultures" en la cuadrícula de propiedades. Haz clic en el pequeño botón de puntos suspensivos para abrir un editor de colecciones y agregar, quitar o editar perspectivas y configuraciones regionales.
 
-![Editing perspectives - click the ellipsis button to the right](~/content/assets/images/getting-started-te-04.png)
+![Edición de perspectivas: haz clic en el botón de los tres puntos de la derecha](~/content/assets/images/getting-started-te-04.png)
 
 Para guardar los cambios en el archivo Model.bim, haz clic en el botón Guardar o pulsa CTRL+S. Si abriste una base de datos tabular existente, los cambios se guardan directamente en la base de datos. Se te avisará si la base de datos cambió desde que la cargaste en Tabular Editor. Siempre puedes deshacer los cambios pulsando CTRL+Z.
 
@@ -65,7 +65,7 @@ Si quieres implementar tu modelo en otra ubicación, ve al menú "Modelo" y elig
 
 Tabular Editor incluye un asistente de implementación que ofrece algunas ventajas frente a la implementación desde SSDT, especialmente al implementar en una base de datos existente. Después de elegir un servidor y una base de datos donde realizar la implementación, tienes las siguientes opciones:
 
-![Deployment Wizard](~/content/assets/images/getting-started-te-05.png)
+![Asistente de implementación](~/content/assets/images/getting-started-te-05.png)
 
 Si dejas sin marcar la casilla "Implementar conexiones", te aseguras de que todos los Data source de la base de datos de destino se mantengan intactos. Recibirás un error si tu modelo contiene una o más tablas con un Data source que no exista ya en la base de datos de destino.
 
@@ -110,6 +110,6 @@ Tabular Editor te permite usar C# para crear scripts que modifiquen el modelo ca
 
 El editor de scripts avanzado incluye una funcionalidad de IntelliSense limitada para ayudarte a empezar:
 
-![IntelliSense helps you create scripts for Tabular Editor](~/content/assets/images/getting-started-te-06.png)
+![IntelliSense te ayuda a crear scripts para Tabular Editor](~/content/assets/images/getting-started-te-06.png)
 
 Puedes encontrar más documentación y ejemplos sobre scripting avanzado [aquí](../how-tos/Advanced-Scripting.md).
