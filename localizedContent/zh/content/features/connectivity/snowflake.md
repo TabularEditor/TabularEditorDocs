@@ -1,6 +1,6 @@
 ---
 uid: connect-snowflake
-title: 连接到 Snowflake
+title: Connect to Snowflake
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,31 +17,31 @@ applies_to:
           full: true
 ---
 
-# 连接到 Snowflake
+# Connect to Snowflake
 
-依次选择 **模型 > 导入表...**，然后选择 Snowflake 数据源。每种身份验证方式都需要服务器（你的账户 URL）和 Warehouse。
+Start from **Model > Import tables...** and choose a Snowflake source. Every authenticator needs the server (your account URL) and the warehouse.
 
-![“连接到 Snowflake”对话框：在“身份验证方式”列表中选择了“外部浏览器”，且“用户名”和“密码”字段已禁用](~/content/assets/images/features/connectivity/snowflake-connection.png)
+![The Connect to Snowflake dialog, with External browser chosen in the Authenticator list and the user name and password fields disabled](~/content/assets/images/features/connectivity/snowflake-connection.png)
 
-## 身份验证方式
+## Authenticators
 
-| 身份验证方式        | 你需要提供的内容                             | 可在无人值守时重连 |
-| ------------- | ------------------------------------ | --------- |
-| **Snowflake** | 用户名和密码                               | 是的        |
-| **外部浏览器**     | 通过浏览器向你的身份提供程序登录                     | 否         |
-| **OAuth**     | 来自你的 OAuth 提供程序的令牌                   | 是，只要令牌有效  |
-| **密钥对**       | 用户名和 RSA 私钥文件；如果该密钥设置了密码短语，还需要提供密码短语 | 是的        |
+| Authenticator        | What you supply                                                               | Reconnects unattended         |
+| -------------------- | ----------------------------------------------------------------------------- | ----------------------------- |
+| **Snowflake**        | User name and password                                                        | 是的                            |
+| **External browser** | A browser sign-in against your identity provider                              | 否                             |
+| **OAuth**            | A token from your OAuth provider                                              | Yes, while the token is valid |
+| **Key pair**         | User name and an RSA private key file, plus its passphrase if the key has one | 是的                            |
 
-## 密钥对身份验证
+## Key pair authentication
 
-由于 Snowflake 现在对服务账户强制启用多重身份验证，因此用于无人值守工作时，应选择“密钥对”作为身份验证方式。它无需交互式登录，因此保存后的连接可自行重连。
+Key pair is the authenticator to choose for unattended work now that Snowflake enforces multi-factor authentication for service accounts. It needs no interactive sign-in, so a saved connection reconnects on its own.
 
-选择 **密钥对**，输入用户名，然后浏览到你的私钥文件。选择此身份验证器后，密码字段会改名为 **密码短语**。**确定** 按钮会一直处于禁用状态，直到服务器、Warehouse、用户名都已填写，且已选择私钥文件。
+Choose **Key pair**, enter your user name and browse to your private key file. The password field is relabelled **Passphrase** while this authenticator is selected. **OK** stays disabled until the server, warehouse, user name and private key file are all filled in.
 
-支持的密钥格式包括未加密的 PKCS#1 和 PKCS#8，以及使用密码短语加密的 PKCS#8；这也是 [Snowflake 官方密钥对说明](https://docs.snowflake.com/en/user-guide/key-pair-auth) 生成的格式。
+Supported key formats are unencrypted PKCS#1 and PKCS#8, and passphrase-encrypted PKCS#8, which is what [Snowflake's own key-pair instructions](https://docs.snowflake.com/en/user-guide/key-pair-auth) produce.
 
 > [!IMPORTANT]
-> 不支持使用旧版 OpenSSL 方案加密的密钥。这类密钥以 `-----BEGIN RSA PRIVATE KEY-----` 开头，并带有 `Proc-Type` 和 `DEK-Info` 标头。使用一条 `openssl pkcs8 -topk8` 命令即可完成转换。这不需要生成新的密钥对，因此已为你的 Snowflake 用户注册的公钥仍然有效。
+> A key encrypted with the legacy OpenSSL scheme is not supported. These begin `-----BEGIN RSA PRIVATE KEY-----` and carry `Proc-Type` and `DEK-Info` headers. Convert it with a single `openssl pkcs8 -topk8` command. This does not require generating a new key pair, so the public key already registered on your Snowflake user stays valid.
 
 <!-- IMAGE NEEDED: connectivity/snowflake-key-pair.png
      The Snowflake connection dialog with Key pair selected, so the Private key file field
@@ -49,18 +49,18 @@ applies_to:
      House border, 100% DPI.
      Alt text: "The Snowflake connection dialog with Key pair authentication selected" -->
 
-## 外部浏览器登录
+## External browser sign-ins
 
-浏览器登录会被缓存，因此你不必在每次操作时都重新登录。从 Tabular Editor 3.27.0 开始，如果缓存的登录已过期或被你的身份提供程序撤销，也不会再阻止连接：一旦 Snowflake 拒绝该登录，Tabular Editor 就会将其丢弃，并重新打开浏览器登录流程。
+A browser sign-in is cached so you are not prompted for every operation. From Tabular Editor 3.27.0, a cached sign-in that your identity provider has expired or revoked no longer blocks the connection: Tabular Editor discards it as soon as Snowflake rejects it and reopens the browser sign-in.
 
-以前如果不重新打开浏览器，之后的每项操作都会失败；向导不会显示错误，而是显示空的表和列；唯一的恢复办法就是重启 Tabular Editor。现在，若你中途放弃登录，或登录超时，系统会将其视为取消，而不是会阻塞后续工作的错误。
+Previously every later operation failed without reopening the browser, the wizard showed empty tables and columns instead of an error, and the only recovery was restarting Tabular Editor. A sign-in you abandon, or that times out, now counts as a cancellation rather than an error that blocks later work.
 
-## 切换身份验证器
+## Switching authenticator
 
-切换回 **Snowflake** 时，会清除私钥路径和密码短语，而不会把密码短语继续当作账户密码。
+Switching back to **Snowflake** clears the private key path and the passphrase rather than carrying the passphrase over as an account password.
 
-## 凭据的存储位置
+## Where the credentials are stored
 
-你在此处输入的凭据会按用户、按模型保存在模型旁边的 [用户选项](xref:user-options) 文件 (`.tmuo`) 中，并经过加密，只有你的 Windows 账户可以读取。它们不属于模型元数据，因此不会提交到源代码管理；打开同一模型的同事需要提供他们自己的凭据。
+Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
 
-生成的 M 表达式只包含服务器和对象的名称。其中绝不会包含密码、令牌或密钥。
+The generated M expression names the server and the object only. It never contains a password, a token or a key.
