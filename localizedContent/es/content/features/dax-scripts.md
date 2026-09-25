@@ -56,7 +56,7 @@ Si quieres incluir la definición de una medida a la que se hace referencia en e
 
 ![Definir medida con dependencias](~/content/assets/images/define-measure-with-deps.png)
 
-## Shortcuts
+## Atajos
 
 Para aplicar el script al modelo, usa los siguientes atajos:
 
