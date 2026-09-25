@@ -1,6 +1,6 @@
 ---
 uid: te-cli-findings
-title: 机器可读结果（JSON）
+title: Machine-Readable Results (JSON)
 author: Peer Grønnerup
 updated: 2026-09-11
 applies_to:
@@ -13,16 +13,16 @@ applies_to:
       full: true
 ---
 
-# 机器可读结果（JSON）
+# Machine-Readable Results (JSON)
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-`te validate`、`te bpa run`、`te test run` 和 `te query` 会使用统一的 JSON 结构来 Report 问题。使用 `--output-format json` 时，这些命令都会输出 **单个文档**，不会出现没有任何内容可供解析的情况。
+`te validate`, `te bpa run`, `te test run`, and `te query` report problems in one shared JSON shape. Under `--output-format json`, each of these commands emits a **single document** - there is no way for one of them to leave nothing to parse.
 
 > [!NOTE]
-> `te query` 仅在执行前的 DAX 验证产生至少一个错误时，才会使用此 JSON 结构。查询成功时，会改为输出查询结果：`{columns, rows, rowCount, truncated, durationMs, trace?}`。
+> `te query` uses this JSON shape only when its pre-execution DAX validation produces at least one error. A successful query emits the query result instead: `{columns, rows, rowCount, truncated, durationMs, trace?}`.
 
-## JSON 文档
+## The JSON document
 
 ```json
 {
@@ -46,61 +46,61 @@ applies_to:
 }
 ```
 
-- `command`：生成该文档的命令。
-- `durationMs`：总运行时长。
-- `summary`：严重性统计：`errors`、`warnings`、`info`、`total`。
-- `findings`：一个扁平数组，通过 `severity` 区分。
+- `command` - which command produced the document.
+- `durationMs` - total run duration.
+- `summary` - severity tally: `errors`, `warnings`, `info`, `total`.
+- `findings` - one flat array, discriminated by `severity`.
 
-## 每个发现项的键名
+## Per-finding keys
 
-每个发现项都包含：
+Present on **every** finding:
 
-| 键            | 值/含义                                                                            |
-| ------------ | ------------------------------------------------------------------------------- |
-| `severity`   | `error`、`warning` 或 `info`。                                                     |
-| `source`     | `validate`、`bpa`、`test` 或 `query`。                                              |
-| `code`       | 稳定的发现代码（验证信息 ID、BPA 规则 ID、`TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID` 等）。 |
-| `信息`         | 便于理解的描述。                                                                        |
-| `object`     | 该发现所涉及对象的基本名称。                                                                  |
-| `objectType` | 预定义值之一——见下文。                                                                    |
-| `fixable`    | 仅当 BPA 违规项的规则定义了修复表达式时，值才为 `true`。                                              |
+| 键            | Values / meaning                                                                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `severity`   | `error`, `warning`, or `info`.                                                                                                                                                         |
+| `source`     | `validate`, `bpa`, `test`, or `query`.                                                                                                                                                 |
+| `code`       | Stable finding code (a validation message ID, BPA rule ID, `TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID`, ...). |
+| `message`    | Human-readable description.                                                                                                                                                            |
+| `object`     | Bare name of the object the finding is about.                                                                                                                                          |
+| `objectType` | One of a closed vocabulary - see below.                                                                                                                                                |
+| `fixable`    | `true` only for BPA violations whose rule defines a fix expression.                                                                                                                    |
 
-**仅在 CLI 已知这些值时**才会出现——未设置时，这些键&#x4F1A;_&#x7F3A;失_，而不是 `null`：
+Present **only where the CLI knows them** - these keys are _absent_ rather than `null` when unset:
 
-| 键                      | 填充自                          | 含义                                                                                                                                                                      |
-| ---------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `objectPath`           | 仅适用于 `validate` 和 `bpa` 的违规项 | 规范对象路径，可由 `te get` 或 `te set` 直接按原样解析。测试发现项、查询发现项以及 BPA 规则错误中没有此字段。                                                                                                     |
-| `expressionPosition`   | 仅限 `validate` 和 `query`      | Named Expression 属性中的 `{property, lineNumber, column}`。**在所有来源中，包括 validate 和 query，都是可选的** - 只要分析器未报告任何可用位置，此字段就不存在；并且要么完整提供，要么完全不提供(绝不会只提供部分位置信息)。 |
-| `ruleName`, `category` | 仅限 `bpa`                     | 所违反规则的名称和类别。                                                                                                                                                            |
+| 键                      | Populated by                         | 含义                                                                                                                                                                                                                                                                                              |
+| ---------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `objectPath`           | `validate` and `bpa` violations only | Canonical object path, resolvable as-is by `te get` or `te set`. Absent for test findings, query findings, and BPA rule errors.                                                                                                                                 |
+| `expressionPosition`   | `validate` and `query` only          | `{property, lineNumber, column}` inside the named expression property. **Optional on every source, including validate and query** - absent whenever the analyzer reported no usable position, and all-or-nothing (never a partial position). |
+| `ruleName`, `category` | `bpa` only                           | The violated rule's name and category.                                                                                                                                                                                                                                          |
 
-### objectType 取值表
+### objectType vocabulary
 
-`objectType` 的取值是一个封闭集合（使用路径语法中各容器的单数形式，而不是 TOM 枚举）：
+The closed set of `objectType` values (the singular forms of the path-grammar containers, not a TOM enum):
 
-`Measure`, `Column`, `Hierarchy`, `Level`, `Partition`, `CalculationItem`, `Table`, `Role`, `TablePermission`, `Perspective`, `Culture`, `DataSource`, `Expression`, `Function`, `Relationship`, `KPI`, `RefreshPolicy`, `Member`, `Calendar`, `Variation`, `Model`, `BpaRule`, `Test`, `TestSuite`, `Query`。
+`Measure`, `Column`, `Hierarchy`, `Level`, `Partition`, `CalculationItem`, `Table`, `Role`, `TablePermission`, `Perspective`, `Culture`, `DataSource`, `Expression`, `Function`, `Relationship`, `KPI`, `RefreshPolicy`, `Member`, `Calendar`, `Variation`, `Model`, `BpaRule`, `Test`, `TestSuite`, `Query`.
 
-## 各命令专有字段
+## Per-command extras
 
-每个命令都会在文档顶层带有少量自身专有的键：
+Each command keeps a few keys of its own at the top level of the document:
 
-| 命令                 | 额外键                                                                                                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `te validate`      | `valid`（布尔值）。                                                                                                                                                            |
-| `te bpa run`       | `model`、`rulesEvaluated`、`violations`、`ruleErrors`、`ignoredRules`。规则评估错误会以严重性 `error`、`objectType: "BpaRule"` 的形式出现在 `findings` 中；`violations` 和 `ruleErrors` 分别统计这两类数量。 |
-| `te bpa run --fix` | 在同一个文档内新增一个 `fix` 键：`changes`、`fixed`、`fixErrors`、`skipped`、`fixedItems`、`fixErrorItems`。如果修复步骤本身失败，仍会生成文档，并将原因写入 `fix.error`。不带 `--fix` 时不会出现。                          |
-| `te test run`      | `suites`、`invalidSuites`、`testSummary`（按状态汇总测试数量；`summary` 仍为共享的严重性汇总）。                                                                                                  |
-| `te query`         | 没有——而且只会在验证错误时出现；见上文说明。                                                                                                                                                  |
+| 命令                 | Extra keys                                                                                                                                                                                                                                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `te validate`      | `valid` (boolean).                                                                                                                                                                                                                                                       |
+| `te bpa run`       | `model`, `rulesEvaluated`, `violations`, `ruleErrors`, `ignoredRules`. Rule-evaluation errors appear in `findings` at severity `error` with `objectType: "BpaRule"` - `violations` and `ruleErrors` split the two counts.                                                   |
+| `te bpa run --fix` | A `fix` key inside the same single document: `changes`, `fixed`, `fixErrors`, `skipped`, `fixedItems`, `fixErrorItems`. If the fix pass itself fails, the document is still written with the reason in `fix.error`. Absent without `--fix`. |
+| `te test run`      | `suites`, `invalidSuites`, `testSummary` (per-status test tallies; `summary` remains the shared severity tally).                                                                                                                                                         |
+| `te query`         | None - and only on validation errors; see the note above.                                                                                                                                                                                                                                   |
 
-## CI 注释
+## CI annotations
 
-这四个命令共用同一个注释写入器，用于 `--ci vsts` / `--ci github`（接受 `azdo`、`azure-devops` 和 `gh` 作为别名；`none` 会禁用注释；其他任何值都会在命令运行前被拒绝）。注释会输出到 stderr；stdout 保持可解析：
+All four commands share one annotation writer for `--ci vsts` / `--ci github` (`azdo`, `azure-devops`, and `gh` are accepted aliases; `none` disables annotations; anything else is rejected before the command runs). Annotations go to stderr; stdout stays parseable:
 
-- 注释会带上发现项的代码：在 Azure DevOps 中使用 `code=`，在 GitHub 中使用 `title=`。
-- 信息级 Info 发现项不是警告：在 GitHub 上会输出 `::notice::`，在 Azure DevOps 上则是一条普通日志行。如果某次 Azure DevOps 运行的发现项只有信息类 Report，则该运行会显示为 **Succeeded**。
-- 多行信息会被转义为单行注释，因此规则说明不会破坏日志格式。
+- Annotations carry the finding's code: `code=` on Azure DevOps, `title=` on GitHub.
+- Info-severity findings are not warnings: on GitHub they emit `::notice::`, on Azure DevOps a plain log line. An Azure DevOps run whose only findings are informational reports **Succeeded**.
+- Multi-line messages are escaped into a single annotation line, so a rule description cannot break the log format.
 
 ## 相关页面
 
-- @te-cli-commands#exit-codes - 退出代码不受输出格式影响。
-- @te-cli-cicd - 使用这种输出结构的管道模式。
-- @te-cli-automation - 在脚本中解析结构化输出。
+- @te-cli-commands#exit-codes - exit codes are unaffected by the output format.
+- @te-cli-cicd - pipeline patterns that consume this shape.
+- @te-cli-automation - parsing structured output from scripts.
