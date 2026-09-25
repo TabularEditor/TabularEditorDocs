@@ -165,13 +165,13 @@ La siguiente tabla enumera todos los accesores singulares y plurales disponibles
 | `Selected.Function`                 | `Selected.Functions`                 | Funciones definidas por el usuario |
 | `Selected.DataSource`               | `Selected.DataSources`               | Fuentes de datos                   |
 | `Selected.SingleColumnRelationship` | `Selected.SingleColumnRelationships` | Relaciones                         |
-| `Selected.Perspective`              | `Selected.Perspectives`              | Perspectivas                       |
+| `Selected.Perspectiva`              | `Selected.Perspectives`              | Perspectivas                       |
 | `Selected.Culture`                  | `Selected.Cultures`                  | Traducciones                       |
 
 > [!NOTE]
 > Los accesores de Rol, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable y Partición se agregaron en Tabular Editor 3.26.0.
 
-Starting with Tabular Editor 3.27.0, objects that were deleted since the model was last saved remain visible in the TOM Explorer, and can be selected. Such objects are not part of the model, so they never appear in the accessors above. Instead, `Selected.Deleted` lists the selected deleted objects, each with a `Name`, `ObjectType`, `Parent` and a `Restore()` method. `Selected.Deleted.Restore()` restores all of them at once. Model objects also expose `HasUnsavedChanges` and `Revert()`, which let a script roll back part of a model. See @unsaved-changes for details.
+A partir de Tabular Editor 3.27.0, los objetos que se hayan eliminado desde la última vez que se guardó el modelo siguen visibles en el Explorador TOM y se pueden seleccionar. Estos objetos no forman parte del modelo, por lo que nunca aparecen en los métodos de acceso anteriores. En su lugar, `Selected.Deleted` enumera los objetos eliminados seleccionados, cada uno con `Name`, `ObjectType`, `Parent` y el método `Restore()`. `Selected.Deleted.Restore()` los restaura todos a la vez. Los objetos del modelo también exponen `HasUnsavedChanges` y `Revert()`, que permiten a un script deshacer cambios en parte del modelo. Consulta @unsaved-changes para más detalles.
 
 ## Métodos auxiliares
 
@@ -184,10 +184,10 @@ Tabular Editor proporciona un conjunto de métodos auxiliares especiales para fa
 - `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos a partir de una cadena TSV.
 - `void CustomAction(string name)` - invoca una macro por su nombre.
 - `void CustomAction(this IEnumerable<ITabularNamedObject> objects, string name)` - invoca una macro en los objetos especificados.
-- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Y viceversa si `useSemicolons` se establece en `false`.
-- `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX de todos los objetos de la colección proporcionada
+- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. Es decir, las comas (separadores de lista) se convertirán en punto y coma, y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en `false`.
+- ¿`void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX de todos los objetos de la colección proporcionada
 - `void FormatDax(this IDaxDependantObject obj)` - pone un objeto en cola para dar formato a la expresión DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
-- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos que se hayan puesto en cola hasta el momento
+- ¿`void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos que se hayan puesto en cola hasta el momento
 - `void Info(string)` - Escribe un mensaje informativo en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
 - `void Warning(string)` - Escribe un mensaje de advertencia en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
 - `void Error(string)` - Escribe un mensaje de error en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
@@ -205,19 +205,19 @@ El cuadro de diálogo aparecerá de una de estas cuatro formas, según el tipo d
 
 - Los objetos individuales (como string, int y DateTime, excepto cualquier objeto que derive de TabularNamedObject) se mostrarán como un cuadro de diálogo de mensaje sencillo, invocando el método `.ToString()` del objeto:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-output-function.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-output-function.png)
 
 - Los TabularNamedObjects individuales (como tablas, medidas o cualquier otro NamedMetadataObject de TOM disponible en Tabular Editor) se mostrarán en una cuadrícula de propiedades, similar a cuando se ha seleccionado un objeto en el Tree Explorer. Las propiedades del objeto se pueden editar en la cuadrícula, pero tenga en cuenta que, si se encuentra un error más adelante durante la ejecución del script, la edición se deshará automáticamente si "Auto-Rollback" está habilitado:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-auto-rollback.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-auto-rollback.png)
 
 - Cualquier IEnumerable de objetos (excepto TabularNamedObjects) se mostrará en una lista, donde cada elemento de la lista muestra el valor de `.ToString()` y el tipo del objeto en el IEnumerable:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-output-to-string-function.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-output-to-string-function.png)
 
 - Cualquier IEnumerable de TabularNamedObjects hará que el cuadro de diálogo muestre una lista de los objetos a la izquierda y una cuadrícula de propiedades a la derecha. La cuadrícula de propiedades se rellenará con el objeto seleccionado en la lista, y las propiedades se pueden editar igual que cuando se envía a la salida un único TabularNamedObject:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-output-function-enumerated.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-output-function-enumerated.png)
 
 Puedes marcar la casilla "Don't show more outputs" en la esquina inferior izquierda para evitar que el script se detenga en futuras invocaciones de `.Output()`.
 
@@ -245,10 +245,10 @@ Todos los cambios de metadatos del modelo derivados de la ejecución de un scrip
 > Las funciones de vista previa y deshacer solo se aplican a los cambios de metadatos del modelo. Si un script realiza operaciones externas, como escribir en archivos, bases de datos o realizar solicitudes web, esas operaciones se ejecutan de inmediato y no se pueden revertir. El cuadro de diálogo de vista previa no intenta analizar el código del script; funciona comparando el estado de los metadatos del modelo antes y después de la ejecución.
 
 > [!TIP]
-> The [AI Assistant](xref:ai-assistant) shows this dialog when it runs a script itself, as long as **Preview changes** is on under **Tools > Preferences > AI Features > AI Assistant**. It is on by default, so you always get a chance to review AI-generated model changes before they are applied.
+> El [Asistente de IA](xref:ai-assistant) muestra este cuadro de diálogo cuando ejecuta un script por sí mismo, siempre que **Vista previa de cambios** esté activada en **Herramientas > Preferencia > Funciones de IA > Asistente de IA**. Está activada de forma predeterminada, por lo que siempre tendrás la oportunidad de revisar los cambios en el modelo generados por IA antes de que se apliquen.
 
 > [!NOTE]
-> The preview dialog does not apply to a script run by an agent over the [MCP server](xref:mcp-server). Those scripts are compiled, checked by the safety analysis and run against the model atomically. The agent gets back a structured summary of what changed, and the changes are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) for you to review or revert afterwards.
+> El cuadro de diálogo de vista previa no se aplica a un script ejecutado por un agente a través del [servidor MCP](xref:mcp-server). Esos scripts se compilan, se comprueban mediante el análisis de seguridad y se ejecutan de forma atómica en el modelo. El agente recibe un resumen estructurado de lo que cambió, y los cambios se marcan en el [Explorador TOM y la vista de propiedades](xref:unsaved-changes) para que puedas revisarlos o revertirlos después.
 
 ## Referencias de «.NET»
 
@@ -303,7 +303,7 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
 
 > [!NOTE]
-> `Environment` is one of the types refused when an administrator has set the `BlockUnsafeScripts` policy. See [Administrator policies](#administrator-policies).
+> `Environment` es uno de los tipos que se rechazan cuando un administrador ha establecido la directiva `BlockUnsafeScripts`. Consulta las [Directivas de administrador](#administrator-policies).
 
 ### Lectura de variables de entorno
 
@@ -381,40 +381,40 @@ foreach(var table in Model.Tables)
 Info($"Configured model for {environment} environment");
 ```
 
-## Administrator policies
+## Directivas de administrador
 
-Scripting can be governed centrally, so what a script may do on your own machine is not always what it may do on a machine your IT department manages. Two [policies](xref:policies) decide that.
+La creación de scripts se puede controlar de forma centralizada, por lo que lo que un script puede hacer en tu equipo no siempre es lo que podrá hacer en un equipo administrado por tu departamento de TI. Dos [directivas](xref:policies) lo determinan.
 
-`DisableCSharpScripts` turns scripting off outright: scripts cannot be created or executed, and the same goes for macros under `DisableMacros`.
+`DisableCSharpScripts` desactiva por completo los scripts: no se pueden crear ni ejecutar scripts, y lo mismo ocurre con las macros cuando se usa `DisableMacros`.
 
-`BlockUnsafeScripts` is the middle ground, and the one worth understanding as a script author. Scripts and macros keep working, but only where they stay within the semantic model. A script that reads or writes a file, makes a web request, starts another program, references an outside assembly with `#r`, or sends a command straight to the server is refused before any of it runs.
+`BlockUnsafeScripts` es el término medio, y conviene entenderla si escribes scripts. Los scripts y las macros siguen funcionando, pero solo mientras se mantengan dentro del modelo semántico. Un script que lea o escriba un archivo, haga una solicitud web, inicie otro programa, haga referencia a un ensamblado externo con `#r` o envíe un comando directamente al servidor se rechaza antes de que se ejecute nada.
 
-### What counts as staying within the model
+### Qué significa mantenerse dentro del modelo
 
-The decision is made by analyzing the compiled script, not by searching its text, so an indirect route to the same place is refused too: reflection through `Type.GetType` or `InvokeMember`, expression trees and delegate invocation, `Activator`, `AppDomain`, `Environment`, XML readers and writers that take a path or a URL, and type-name-based deserialization.
+La decisión se toma analizando el script compilado, no buscando en su texto; por eso también se rechazan las vías indirectas para llegar al mismo resultado: la reflexión mediante `Type.GetType` o `InvokeMember`, los árboles de expresiones y la invocación de delegados, `Activator`, `AppDomain`, `Environment`, los lectores y escritores de XML que aceptan una ruta o una URL, y la deserialización basada en nombres de tipo.
 
-Among the [helper methods](xref:script-helper-methods), the three that write outside the model count as unsafe:
+Entre los [métodos auxiliares](xref:script-helper-methods), los tres que escriben fuera del modelo se consideran inseguros:
 
-| Refused                                       | Still available                                                              |
+| Rechazado                                     | Aún disponible                                                               |
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
 | `SaveFile`, `ExecuteCommand`, `Bpa.ExportCsv` | `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader`, `ExportProperties` |
 
-Everything in the TOM object model is fine, as are `System`, `System.Linq`, `System.Collections.Generic` and `Newtonsoft.Json`. In practice a script that builds and changes model objects is unaffected, and a script that exports something to disk is not.
+Todo lo que forma parte del modelo de objetos TOM está permitido, al igual que `System`, `System.Linq`, `System.Collections.Generic` y `Newtonsoft.Json`. En la práctica, un script que crea y modifica objetos del modelo no se ve afectado, mientras que uno que exporta algo al disco sí.
 
-### What you see when a script is refused
+### Qué ves cuando se rechaza un script
 
-A **Script not run** dialog names the policy and what the script used, and the status bar reads _Script blocked by your organization's policy_. The error list stays empty, because this is not a compile error: the script is valid, it is just not allowed to run here. **Run with preview** behaves the same way and shows no preview dialog.
+El cuadro de diálogo **Script not run** indica la directiva y lo que utilizó el script, y la barra de estado muestra _Script blocked by your organization's policy_. La lista de errores sigue vacía porque esto no es un error de compilación: el script es válido; simplemente no se permite ejecutarlo aquí. **Ejecutar con vista previa** se comporta del mismo modo y no muestra ningún cuadro de diálogo de vista previa.
 
-A macro is analyzed when it is saved. Saving succeeds, and a dialog tells you the macro is saved but will not run. A blocked macro is left out of every menu, so it cannot be run by accident, and appears under **View > Macros** with its **Blocked** column filled in. Edit it back inside the line and its menu item returns, without restarting Tabular Editor.
+Una macro se analiza cuando se guarda. El guardado se completa correctamente y un cuadro de diálogo te indica que la macro se ha guardado, pero no se ejecutará. Una macro bloqueada queda fuera de todos los menús, por lo que no puede ejecutarse por accidente, y aparece en **Ver > Macros** con la columna **Bloqueado** rellena. Vuelve a editarla para que vuelva a quedar dentro de la línea y su elemento del menú reaparecerá, sin necesidad de reiniciar Tabular Editor.
 
-On the command line, `te script`, `te macro run` and `te bpa run --fix` refuse in the same way, exit with a non-zero code and report `blockedByPolicy` in JSON output.
+En la línea de comandos, `te script`, `te macro run` y `te bpa run --fix` se niegan del mismo modo, finalizan con un código distinto de cero e informan de `blockedByPolicy` en el Report de la salida JSON.
 
 > [!NOTE]
-> `BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition. If the value is set on a copy that is not licensed for it, no script or macro runs at all, safe or not, until an Enterprise license is activated. The Tabular Editor CLI has no editions and simply applies the policy.
+> `BlockUnsafeScripts` requiere Tabular Editor 3, Edición Enterprise. Si el valor se establece en una copia que no tiene licencia para ello, no se ejecutará ningún script ni ninguna macro, sea seguro o no, hasta que se active una licencia Enterprise. La CLI de Tabular Editor no tiene ediciones y simplemente aplica la directiva.
 
 ## Compatibilidad
 
-Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de Tabular Editor son compatibles en su mayor parte, pero hay casos en los que conviene compilar el código de forma condicional según el host en el que se ejecute. The CLI host defines a `TECLI` preprocessor symbol; TE3 Desktop defines `TE3` (and version-bracketed symbols like `TE3_3_15_OR_GREATER` for the active minor); TE2 defines neither. Las directivas de preprocesador se introdujeron en Tabular Editor 3.10.0. Use them to write portable scripts:
+Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de Tabular Editor son compatibles en su mayor parte, pero hay casos en los que conviene compilar el código de forma condicional según el host en el que se ejecute. El host de la CLI define un símbolo de preprocesador `TECLI`; TE3 Desktop define `TE3` (y símbolos delimitados por versión, como `TE3_3_15_OR_GREATER`, para la versión secundaria activa); TE2 no define ninguno de los dos. Las directivas de preprocesador se introdujeron en Tabular Editor 3.10.0. Úsalos para escribir scripts portátiles:
 
 ```csharp
 #if TECLI
@@ -433,7 +433,7 @@ Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de
 #endif
 ```
 
-One CLI-specific caveat: the TE3-Desktop UI helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` under `te script` since the CLI has no UI to pop up. Wrap such calls in `#if TE3` (or `try/catch`) when sharing scripts across hosts.
+Una advertencia específica de la CLI: los asistentes de interfaz de usuario de TE3-Desktop `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()` y `SelectObjects()` lanzan `NotSupportedException` en `te script`, ya que la CLI no tiene interfaz de usuario para mostrar una ventana emergente. Encapsula este tipo de llamadas en `#if TE3` (o `try/catch`) cuando compartas scripts entre hosts.
 
 Si necesitas conocer la versión exacta de Tabular Editor en tiempo de ejecución del script, puedes inspeccionar la versión del ensamblado:
 
