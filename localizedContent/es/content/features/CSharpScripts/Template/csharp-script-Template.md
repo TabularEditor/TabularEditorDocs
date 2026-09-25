@@ -11,7 +11,7 @@ applies_to:
 
 # Título
 
-## Propósito del script
+## Objetivo del script
 
 <br></br>
 
