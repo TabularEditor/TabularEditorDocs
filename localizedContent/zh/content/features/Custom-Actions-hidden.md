@@ -8,15 +8,15 @@ title: 自定义操作
 > [!NOTE]
 > 请注意：此功能与多维模型中的“自定义操作”功能无关。
 
-假设你使用 `Selected` 对象创建了一个很实用的脚本，并且希望能在资源管理器树中对不同对象重复执行该脚本。无需每次执行脚本都点击“播放”按钮，Tabular Editor 允许你将其保存为自定义操作：
+假设你使用 `Selected` 对象创建了一个很实用的脚本，并且希望能在资源管理器树中对不同对象重复执行该脚本。 Instead of hitting the "Play" button whenever you want to execute the script, Tabular Editor lets you save it as a Custom Action:
 
-![图片](~/content/assets/images/custom-actions-01.png)
+![image](~/content/assets/images/custom-actions-01.png)
 
-保存自定义操作后，你会发现它会直接出现在资源管理器树的右键上下文菜单中，这样就能非常方便地对树中选中的任意对象调用该脚本。你可以按需创建任意数量的自定义操作。在名称中使用反斜杠（\\）可在上下文菜单中创建子菜单结构。
+保存自定义操作后，你会发现它会直接出现在资源管理器树的右键上下文菜单中，这样就能非常方便地对树中选中的任意对象调用该脚本。 You can create as many custom actions as you want. Use backslashes (\\) in the names to create a submenu structure within the context menu.
 
-![自定义操作会直接显示在上下文菜单中](~/content/assets/images/custom-actions-02.png)
+![Custom Actions show up directly in the context menu](~/content/assets/images/custom-actions-02.png)
 
-自定义操作存储在 %AppData%\Local\TabularEditor 下的 CustomActions.json 文件中。在上面的示例中，该文件的内容如下：
+自定义操作存储在 %AppData%\Local\TabularEditor 下的 CustomActions.json 文件中。 In the above example, the contents of this file will look like this:
 
 ```json
 {
@@ -32,13 +32,13 @@ title: 自定义操作
 }
 ```
 
-如你所见，`Name` 和 `Tooltip` 的值来自保存该操作时所填写的内容。 `Execute` 是在调用该操作时实际要执行的脚本。请注意：CustomActions.json 文件中的任何语法错误都会导致 Tabular Editor 完全跳过加载所有自定义操作。因此，在将脚本保存为自定义操作之前，请先确保该脚本能在高级脚本编辑器中成功执行。
+As you can see, `Name` and `Tooltip` gets their values from whatever was specified when the action was saved. `Execute` is the actual script to be executed when the action is invoked. 请注意：CustomActions.json 文件中的任何语法错误都会导致 Tabular Editor 完全跳过加载所有自定义操作。因此，在将脚本保存为自定义操作之前，请先确保该脚本能在高级脚本编辑器中成功执行。
 
-`ValidContexts` 属性包含一个对象类型列表，操作仅会对这些类型的对象可用。在树中选择对象时，如果当前选择中包含任何不在 `ValidContexts` 属性列表中的对象类型，该操作将不会显示在上下文菜单中。
+The `ValidContexts` property holds a list of object types for which the Action will be available. 在树中选择对象时，如果当前选择中包含任何不在 `ValidContexts` 属性列表中的对象类型，该操作将不会显示在上下文菜单中。
 
 ## 控制操作可用性
 
-如果你需要更精细地控制操作何时可从上下文菜单调用，可以将 `Enabled` 属性设置为一个自定义表达式。该表达式必须返回布尔值，用于指示在当前选择下该操作是否可用。默认情况下，`Enabled` 属性的值为 "true"，表示在有效上下文中该操作始终可用。请记住，在 `Selected` 对象上使用单数对象引用时要特别注意，例如 `Selected.Measure` 或 `Selected.Table`，因为如果当前选择未恰好包含一个该类型的对象，就会抛出错误。在这种情况下，建议使用 `Enabled` 属性检查当前是否恰好选中了一个所需类型的对象：
+如果你需要更精细地控制操作何时可从上下文菜单调用，可以将 `Enabled` 属性设置为一个自定义表达式。该表达式必须返回布尔值，用于指示在当前选择下该操作是否可用。 By default, the `Enabled` property has the value "true", which means that the action will always be enabled within the valid context. Keep this in mind, when using the singular object references on the `Selected` object, such as `Selected.Measure` or `Selected.Table`, as these will throw an error if the current selection does not contain exactly one of that type of object. In such a case, it is recommended to use the `Enabled` property to check that one and only one object of the required type, has been selected:
 
 ```json
 {
@@ -57,16 +57,16 @@ title: 自定义操作
 
 ## 重用自定义操作
 
-2.7 版本引入了新的脚本方法 `CustomAction(...)`，可用于调用之前保存的自定义操作。你可以将此方法作为独立方法使用（类似于 `Output(...)`），也可以将其作为扩展方法用于任意对象集合：
+2.7 版本引入了新的脚本方法 `CustomAction(...)`，可用于调用之前保存的自定义操作。 You can use this method as a stand-alone method (similar to `Output(...)`), or you can use it as an extension method on any set of objects:
 
 ```csharp
-// 对当前选择执行“我的自定义操作”：
+// Executes "My custom action" against the current selection:
 CustomAction("My custom action");                
 
-// 对模型中的所有表执行“我的自定义操作”：
+// Executes "My custom action" against all tables in the model:
 CustomAction(Model.Tables, "My custom action");
 
-// 对当前选择中名称以“Sum”开头的每个度量值执行“我的自定义操作”：
+// Executes "My custom action" against every measure in the current selection whose name starts with "Sum":
 Selected.Measures.Where(m => m.Name.StartsWith("Sum")).CustomAction("My custom action");
 ```
 
