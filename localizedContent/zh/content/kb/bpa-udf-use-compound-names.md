@@ -8,19 +8,19 @@ description: 最佳实践规则：确保 DEFINE 中的用户定义函数使用�
 
 # 为用户定义函数使用复合名称
 
-## 概述
+## 概览
 
-此最佳实践规则会识别在 DEFINE 中定义且名称中不包含分隔符字符（`.` 或 `_`）的用户定义函数（UDF）。复合名称可以避免命名冲突：如果 Microsoft 引入了同名的内置 DAX 函数，也不会受到影响。
+This best practice rule identifies User-Defined Functions (UDFs) whose names do not contain a separator character (`.` or `_`). 复合名称可以避免命名冲突：如果 Microsoft 引入了同名的内置 DAX 函数，也不会受到影响。
 
-- 类别：预防错误
+- 类别：错误预防
 
-- 严重性：低（1）
+- 严重性：低 (1)
 
-## 适用范围
+## 适用于
 
 - 用户定义函数
 
-## 为什么这很重要
+## 为何这很重要
 
 名称中不含分隔符字符的 UDF 将来可能会失效，风险包括：
 
@@ -30,7 +30,7 @@ description: 最佳实践规则：确保 DEFINE 中的用户定义函数使用�
 
 使用复合名称（例如 `Finance.CalcProfit` 或 `My_CalcProfit`）可以让你的 UDF 与内置 DAX 函数明显区分开来。
 
-## 此规则何时触发
+## 该规则何时触发
 
 当 UDF 名称既不包含句点也不包含下划线时，将触发此规则：
 
@@ -61,7 +61,7 @@ not Name.Contains(".") and not Name.Contains("_")
 ### 修复前
 
 ```dax
-// 未使用命名空间分隔符命名的函数
+// Function named without separator
 FUNCTION CalcProfit =
     (
         revenue: DOUBLE,
@@ -73,7 +73,7 @@ FUNCTION CalcProfit =
 ### 修复后
 
 ```dax
-// 使用命名空间分隔符命名的函数
+// Function named with namespace separator
 FUNCTION Finance.CalcProfit =
     (
         revenue: DOUBLE,
