@@ -10,7 +10,7 @@ description: 用于移除不含任何可见对象的空透视的最佳实践规�
 
 ## 概览
 
-此最佳实践规则用于识别不包含任何可见表的透视。 Empty perspectives serve no purpose and should be removed.
+此最佳实践规则用于识别不包含任何可见表的透视。空的透视没有任何意义，应予删除。
 
 - 类别：维护
 - 严重性：低 (1)
