@@ -9,12 +9,12 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       full: true
-      note: "Called C# scripts in Tabular Editor 3"
+      note: "Se denominan C# Scripts en Tabular Editor 3"
 ---
 
 # Scripting avanzado
 
-This is an introduction to the scripting capabilities of Tabular Editor. Everything below applies to both products, but the names differ: what Tabular Editor 2 calls **Advanced Scripting**, Tabular Editor 3 calls **C# scripts**, with a dedicated editor, IntelliSense, a script debugger and saved macros. See @csharp-scripts for the Tabular Editor 3 experience, and @csharp-script-library for real-life examples.
+Esta es una introducción a las capacidades de scripting de Tabular Editor. Todo lo que aparece a continuación se aplica a ambos productos, pero los nombres difieren: lo que Tabular Editor 2 llama **Scripting avanzado**, en Tabular Editor 3 se denomina **C# Scripts**, con un editor dedicado, IntelliSense, un depurador de scripts y macros guardadas. Consulta @csharp-scripts para la experiencia en Tabular Editor 3 y @csharp-script-library para ver ejemplos reales.
 
 ## ¿Qué es el scripting avanzado?
 
@@ -86,7 +86,7 @@ Usa la funcionalidad de IntelliSense del editor de scripts avanzado para ver qu�
 
 Para hacer referencia rápidamente a cualquier objeto del modelo tabular cargado actualmente, puedes arrastrar y soltar el objeto desde el árbol del explorador hasta el editor de scripts avanzado:
 
-![Dragging and dropping an object into the Advanced Scripting editor](~/content/assets/images/advanced-scripting-01.gif)
+![Arrastrar y soltar un objeto en el editor de scripts avanzado](~/content/assets/images/advanced-scripting-01.gif)
 
 Consulta la [documentación de TOM](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) para ver un resumen de las propiedades disponibles en `Model` y en sus objetos descendientes. Además, consulta <xref:api-index> para ver un listado completo de las propiedades y métodos expuestos por el objeto contenedor.
 
@@ -136,11 +136,11 @@ Selected.Measures
 
 Para facilitar la depuración de scripts, Tabular Editor ofrece un conjunto de métodos auxiliares especiales. Internamente, se trata de métodos estáticos decorados con el atributo `[ScriptMethod]`. Este atributo permite que los scripts llamen a los métodos directamente, sin necesidad de especificar un espacio de nombres o un nombre de clase. Los complementos también pueden usar el atributo `[ScriptMethod]` para exponer métodos estáticos públicos para su uso en scripts, de forma similar.
 
-Some of them may be invoked as extension methods, so `object.Output();` and `Output(object);` are equivalent.
+Algunos de ellos pueden invocarse como métodos de extensión, por lo que `object.Output();` y `Output(object);` son equivalentes.
 
-The ones you will reach for most often are `Output()` for inspecting an object mid-script, `Info()`, `Warning()` and `Error()` for messages, `SaveFile()` and `ReadFile()` for text data, and `ExportProperties()` / `ImportProperties()` for moving property values in and out as TSV.
+Los que usarás con más frecuencia son `Output()` para inspeccionar un objeto en mitad del script; `Info()`, `Warning()` y `Error()` para mensajes; `SaveFile()` y `ReadFile()` para datos de texto; y `ExportProperties()` / `ImportProperties()` para exportar e importar valores de propiedades como TSV.
 
-@script-helper-methods is the maintained list of every helper method with its full signature. Use it rather than the summary here.
+@script-helper-methods es la lista actualizada de todos los métodos auxiliares con su firma completa. Úsala en lugar del resumen que aparece aquí.
 
 ### Depuración de scripts
 
@@ -150,25 +150,25 @@ El cuadro de diálogo aparecerá de una de estas cuatro formas, según el tipo d
 
 - Los objetos individuales (como string, int y DateTime, excepto cualquier objeto que derive de TabularNamedObject) se mostrarán como un cuadro de diálogo de mensaje sencillo, invocando el método `.ToString()` del objeto:
 
-![image](~/content/assets/images/advanced-scripting-02.png)
+![imagen](~/content/assets/images/advanced-scripting-02.png)
 
 - Los TabularNamedObjects individuales (como tablas, medidas o cualquier otro NamedMetadataObject de TOM disponible en Tabular Editor) se mostrarán en una cuadrícula de propiedades, similar a cuando se ha seleccionado un objeto en el Tree Explorer. Las propiedades del objeto se pueden editar en la cuadrícula, pero ten en cuenta que, si se produce un error más adelante durante la ejecución del script, la edición se deshará automáticamente si "Rollback on error" está habilitado:
 
-![image](~/content/assets/images/advanced-scripting-03.png)
+![imagen](~/content/assets/images/advanced-scripting-03.png)
 
 - Cualquier IEnumerable de objetos (excepto TabularNamedObjects) se mostrará en una lista, donde cada elemento de la lista muestra el valor de `.ToString()` y el tipo del objeto en el IEnumerable:
 
-![image](~/content/assets/images/advanced-scripting-04.png)
+![imagen](~/content/assets/images/advanced-scripting-04.png)
 
 - Cualquier IEnumerable de TabularNamedObjects hará que el cuadro de diálogo muestre una lista de los objetos a la izquierda y una cuadrícula de propiedades a la derecha. La cuadrícula de propiedades se rellenará con el objeto seleccionado en la lista, y las propiedades se pueden editar igual que cuando se envía a la salida un único TabularNamedObject:
 
-![image](~/content/assets/images/advanced-scripting-05.png)
+![imagen](~/content/assets/images/advanced-scripting-05.png)
 
 Puedes marcar la casilla "Don't show more outputs" en la esquina inferior izquierda para evitar que el script se detenga en futuras invocaciones de `.Output()`.
 
 ## Referencias de «.NET»
 
-Scripts support the `using` keyword to shorten class names, just as regular C# source does, and can pull in external assemblies with `#r "<assembly name or DLL path>"`, the same syntax `.csx` scripts use.
+Los scripts admiten la palabra clave `using` para acortar los nombres de clase, igual que el código fuente normal de C#, y pueden incorporar ensamblados externos con `#r "<assembly name or DLL path>"`, la misma sintaxis que usan los scripts `.csx`.
 
 Por ejemplo, el siguiente script ahora funcionará como se espera:
 
@@ -217,11 +217,11 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 ## Compilar con Roslyn
 
 > [!NOTE]
-> This section applies to **Tabular Editor 2 only**. Tabular Editor 3 compiles scripts with Roslyn natively, so newer C# language features are available with no setup and there is no compiler path to configure.
+> Esta sección solo se aplica a **Tabular Editor 2**. Tabular Editor 3 compila los scripts de forma nativa con Roslyn, por lo que las características más recientes del lenguaje C# están disponibles sin necesidad de configuración y no hay ninguna ruta de compilador que configurar.
 
-Tabular Editor 2 compiles scripts with the C# compiler that ships with .NET Framework, which supports C# 5. To use later language features such as string interpolation, point it at a Roslyn compiler instead, under **File > Preferences > General**. Specify the directory holding the compiler executable (`csc.exe`) and the language version to pass to it:
+Tabular Editor 2 compila scripts con el compilador de C# incluido en .NET Framework, que admite C# 5. Para usar características más recientes del lenguaje, como la interpolación de cadenas, en su lugar configúralo para que use un compilador de Roslyn en **Archivo > Preferencias > General**. Especifica el directorio que contiene el ejecutable del compilador (`csc.exe`) y la versión del lenguaje que se le debe pasar:
 
-![image](~/content/assets/images/advanced-scripting-06.png)
+![imagen](~/content/assets/images/advanced-scripting-06.png)
 
 ### Visual Studio 2017
 
@@ -233,7 +233,7 @@ c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
 
 Esto incluye las características del lenguaje C# 6.0 de forma predeterminada.
 
-![image](~/content/assets/images/advanced-scripting-07.png)
+![imagen](~/content/assets/images/advanced-scripting-07.png)
 
 ### Visual Studio 2019
 
