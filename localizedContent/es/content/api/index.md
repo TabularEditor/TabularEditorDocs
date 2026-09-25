@@ -20,11 +20,11 @@ Además, el objeto `ScriptHost` contiene métodos estáticos que se exponen al s
 ## Ejemplo
 
 ```csharp
-// Muestra un cuadro de diálogo para que el usuario seleccione una medida:
+// Displays a dialog to the user prompting them to select a measure:
 var myMeasure = SelectMeasure();
 
-// Crea una nueva medida en la primera tabla del modelo, con el mismo nombre y expresión
-// que la medida seleccionada previamente:
+// Creates a new measure on the first table of the model, with the same name and expression
+// as the previously selected measure:
 Model.Tables.First().AddMeasure(myMeasure.Name + " copy", myMeasure.Expression);
 ```
 
