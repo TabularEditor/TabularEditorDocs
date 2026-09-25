@@ -19,57 +19,57 @@ applies_to:
 
 # 系统要求
 
-Tabular Editor 3 is a Windows desktop application. From version 3.27.0 it is published on two .NET runtimes, for two processor architectures, in three package formats.
+Tabular Editor 3 是一款 Windows 桌面应用程序。从 3.27.0 版本起，它将针对两种 .NET 运行时、两种处理器架构，并以三种组件格式发布。
 
-## Operating system
+## 操作系统
 
-- Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
+- Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
 
-Which Windows versions are supported at any given moment follows Microsoft's .NET supported OS policy for the runtime you install, so it can narrow over time independently of Tabular Editor.
+在任何时刻支持哪些 Windows 版本，取决于你安装的运行时所遵循的 Microsoft .NET 受支持操作系统策略；因此即使 Tabular Editor 本身不变，支持范围也可能会随着时间推移而缩小。
 
-## What is published
+## 发布内容
 
-| Runtime                                                    | 架构         | Formats                                   |
-| ---------------------------------------------------------- | ---------- | ----------------------------------------- |
-| .NET 10 _(recommended)_ | x64, ARM64 | `.exe` installer, `.msi`, portable `.zip` |
-| .NET 8                                     | x64, ARM64 | `.exe` installer, `.msi`, portable `.zip` |
+| 运行时                            | 架构        | 格式                            |
+| ------------------------------ | --------- | ----------------------------- |
+| .NET 10 _（推荐）_ | x64、ARM64 | `.exe` 安装程序、`.msi`、便携式 `.zip` |
+| .NET 8         | x64、ARM64 | `.exe` 安装程序、`.msi`、便携式 `.zip` |
 
-The .NET 10 and .NET 8 builds are _functionally identical_. Nothing is available in one and missing from the other, and the two can be installed side by side.
+.NET 10 和 .NET 8 的构建&#x5728;_&#x529F;能上完全一致_。两者功能完全对等，没有一方有而另一方缺的内容，而且可以同时安装。
 
-ARM64 builds are native, from version 3.23.0 onwards.
+从 3.23.0 版本开始，ARM64 构建为原生版本。
 
 ## .NET 运行时
 
-| Build            | Needs                                                                                                                                                                                                                                                                                                        |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `.exe` installer | The matching [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet): [10](https://dotnet.microsoft.com/download/dotnet/10.0) or [8](https://dotnet.microsoft.com/download/dotnet/8.0). The installer offers to download and install it for you |
-| `.msi`           | The matching .NET Desktop Runtime, installed beforehand. The MSI does _not_ bring it along, which is what makes it suitable for unattended deployment                                                                                                                        |
-| Portable `.zip`  | Nothing. It is self-contained                                                                                                                                                                                                                                                                |
+| 构建          | 所需内容                                                                                                                                                                                                                   |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.exe` 安装程序 | 对应的 [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet)：[10](https://dotnet.microsoft.com/download/dotnet/10.0) 或 [8](https://dotnet.microsoft.com/download/dotnet/8.0)。安装程序会为你下载并安装它 |
+| `.msi`      | 需要预先安装匹配的 .NET 桌面运行时。 MSI _不&#x4F1A;_&#x5C06;其一并包含，这也是它适合无人值守部署的原因                                                                                                                                     |
+| 便携版 `.zip`  | 无需任何额外组件。它是自包含的                                                                                                                                                                                                        |
 
-It must be the _Desktop_ runtime. The ASP.NET Core runtime and the plain .NET runtime do not carry the Windows Forms and WPF libraries the application needs.
+必须安装 _Desktop_ 运行时。 ASP.NET Core 运行时和普通的 .NET 运行时不包含此应用所需的 Windows Forms 和 WPF 库。
 
-## Choosing a build
+## 选择构建版本
 
-Take the **.NET 10 x64 `.exe` installer** unless you have a reason not to. The reasons are:
+除非你有明确理由，否则请选择 **.NET 10 x64 `.exe` 安装程序**。理由如下：
 
-- **ARM64**: you are on an ARM-based PC
-- **.NET 8**: your organization cannot install the .NET 10 desktop runtime yet
-- **`.msi`**: you are deploying centrally. See [silent installation](xref:installation-activation-basic)
-- **portable `.zip`**: you cannot install software on the machine, or you want several versions side by side
+- **ARM64**：你使用的是基于 ARM 的 PC
+- **.NET 8**：你的组织目前还无法安装 .NET 10 桌面运行时
+- **`.msi`**：你正在进行集中部署。参见 [静默安装](xref:installation-activation-basic)
+- **便携版 `.zip`**：你无法在这台计算机上安装软件，或者你希望同时使用多个版本
 
-## Optional components
+## 可选组件
 
-| Component                                                                                   | Needed for                                                                 | 说明                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Microsoft Edge WebView2 runtime](https://developer.microsoft.com/microsoft-edge/webview2/) | The in-application **Get Started** page and the @ai-assistant | Present on current Windows installations. Where it is missing, Tabular Editor falls back to the built-in browser control or offers a link to open the page in your default browser         |
-| AI features                                                                                 | The @ai-assistant and the MCP server                          | An installer component, selected by default. It can be deselected during installation, and an administrator can disable AI features regardless with the `DisableAi` @policies |
+| 组件                                                                                      | 用途                                           | 说明                                                                                     |
+| --------------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [Microsoft Edge WebView2 运行时](https://developer.microsoft.com/microsoft-edge/webview2/) | 应用内的 **开始使用** 页面和 @ai-assistant | 当前版本的 Windows 通常已预装。如果缺少该组件，Tabular Editor 会改用内置浏览器控件，或提供链接让你在默认浏览器中打开该页面              |
+| AI 功能                                                                                   | @ai-assistant 与 MCP 服务器         | 默认会被选中的安装组件。安装时可取消选中；此外，无论是否选中，管理员都可以通过 @policies 中的 `DisableAi` 禁用 AI 功能 |
 
-## Where the downloads are
+## 下载位置
 
-See @downloads for the current version, and @release-history for previous ones.
+当前版本请参见 @downloads，旧版本请参见 @release-history。
 
 ## 后续步骤
 
-- @downloads
-- @getting-started
+- @下载量
+- @快速入门
 - @installation-activation-basic
