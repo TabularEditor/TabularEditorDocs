@@ -19,7 +19,7 @@ applies_to:
 
 # Administrador de paquetes de DAX
 
-## Descripción general
+## Resumen
 
 El **Administrador de paquetes de DAX** (DPM) de Tabular Editor permite a los usuarios descubrir, instalar, actualizar y administrar bibliotecas de [funciones DAX definidas por el usuario (UDF)](xref:udfs) (llamadas paquetes de DAX), directamente en la aplicación.  
 Estas bibliotecas amplían sus capacidades de DAX con funciones reutilizables, lo que facilita crear modelos semánticos de Power BI coherentes y fáciles de mantener.
@@ -42,7 +42,7 @@ Puede usar el Administrador de paquetes de DAX con cualquier modelo que admita f
 Puede abrir el panel de DPM desde el menú **Ver**. También es posible asignar un atajo personalizado al comando `View.DaxPackageManager` desde **Herramientas > Preferencias > Teclado**.
 
 - **Menú:** `Ver → Administrador de paquetes de DAX`
-- **Atajo:** _(si se ha asignado en Preferencias)_
+- **Shortcut:** _(if assigned in Preferences)_
 
 ---
 
@@ -50,7 +50,7 @@ Puede abrir el panel de DPM desde el menú **Ver**. También es posible asignar 
 
 A la izquierda de la pantalla, encontrarás las tres pestañas siguientes. Cada pestaña va acompañada de una lista de paquetes relevantes para su contexto:
 
-| Pestaña             | Descripción                                                                                                                                           |
+| Tab                 | Descripción                                                                                                                                           |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Explorar**        | Descubre los paquetes de DAX disponibles del proveedor (p. ej., `api.daxlib.org`). |
 | **Instalados**      | Consulta todos los paquetes instalados actualmente y sus versiones.                                                                   |
