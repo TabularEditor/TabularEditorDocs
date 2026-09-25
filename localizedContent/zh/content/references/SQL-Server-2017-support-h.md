@@ -1,8 +1,8 @@
 # SQL Server 2017 支持
 
-Starting from version 2.3, Tabular Editor now also supports SQL Server 2017 (Compatibility Level 1400). 这意味着 Tabular Editor 的界面现已支持[这里](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/)中介绍的部分新功能。
+自 2.3 版起，Tabular Editor 现也支持 SQL Server 2017（兼容级别 1400）。这意味着 Tabular Editor 的界面现已支持[这里](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/)中介绍的部分新功能。
 
-Please note, however, that you need to download the [proper build of Tabular Editor](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5-CL1400) to use these features. 原因是：Microsoft 为 SQL Server 2017 / SSDT 17.0 提供了一组新的客户端库，而这些库与面向 SQL Server 2016 构建的 Tabular Editor 不兼容。 The new libraries can be obtained through the new [version of SSDT](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt) (requires Visual Studio 2015).
+但请注意，要使用这些功能，你需要下载[正确的 Tabular Editor 构建版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5-CL1400)。原因是：Microsoft 为 SQL Server 2017 / SSDT 17.0 提供了一组新的客户端库，而这些库与面向 SQL Server 2016 构建的 Tabular Editor 不兼容。这些新库可通过新版 [SSDT](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt) 获取（需 Visual Studio 2015）。
 
 如果你不需要兼容级别 1400 的功能，仍然可以使用面向 SQL Server 2016 构建的 [Tabular Editor](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5)。
 
@@ -30,6 +30,6 @@ Please note, however, that you need to download the [proper build of Tabular Edi
 
 ![image](~/content/assets/images/sql-server-2017-support-04.png)
 
-**Detail Row Expressions** can be set directly on tables and measures. At this time, however, no syntax highlighting or IntelliSense is available.
+**明细行表达式**可以直接在表和度量值上设置。不过，目前还没有语法高亮或 IntelliSense 支持。
 
 层级对象新增了**隐藏成员**属性，对参差层级很有用。
