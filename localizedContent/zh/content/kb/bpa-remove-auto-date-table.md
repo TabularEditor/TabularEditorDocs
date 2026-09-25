@@ -10,7 +10,7 @@ description: 用于识别并移除会增大模型体积、降低性能的自动�
 
 ## 概览
 
-此最佳实践规则用于识别由 Power BI Desktop 自动生成的日期表。 These auto-generated tables (`DateTableTemplate_` and `LocalDateTable_`) should be removed in favor of a single, explicit date table to optimize model size and performance.
+此最佳实践规则用于识别由 Power BI Desktop 自动生成的日期表。应删除这些自动生成的表（`DateTableTemplate_` 和 `LocalDateTable_`），改用单个显式日期表，以优化模型大小和性能。
 
 - 类别：性能
 
@@ -23,7 +23,7 @@ description: 用于识别并移除会增大模型体积、降低性能的自动�
 
 ## 为何这很重要
 
-当启用“自动日期/时间”时，Power BI 会为每个日期/日期时间列自动创建隐藏的日期表。 This causes issues:
+当启用“自动日期/时间”时，Power BI 会为每个日期/日期时间列自动创建隐藏的日期表。这会导致以下问题：
 
 - **模型大小增加**：每个自动生成的表都会添加不必要的数据
 - **内存开销增加**：多个日期表比共享同一个日期表占用更多内存
