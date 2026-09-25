@@ -11,120 +11,120 @@ applies_to:
 
 # 主模型模式
 
-在一个组织中同时存在多个 Tabular 模型并不罕见，而且它们之间往往有大量功能重叠。对开发团队来说，让这些模型在共享功能上保持同步更新，往往是个痛点。本文将介绍一种替代思路：在合适的场景下，将这些模型合并为一个“主”模型，并在部署时按需拆分，分别发布为多个不同的子集模型。 Tabular Editor 通过以一种特殊方式利用透视来支持这种做法（同时也让透视按常规方式工作）。
+It is not uncommon to have several Tabular models in an organisation, with a substantial amount of functional overlap. For the development team, keeping these models up to date with shared features can be a pain point. In this article, we'll see an alternate approach that may be suitable in situations where it makes sense to combine all these models into a single "Master" model, that is then deployed partially into several different subset models. Tabular Editor enables this approach by utilising perspectives in a special way (while still allowing perspectives to work the usual way).
 
-**免责声明：** 虽然这种方法确实可行，但不受 Microsoft 支持，并且需要投入不少学习成本、脚本编写以及一些“hack”式的变通操作。是否适合你的团队，请自行评估。
+**免责声明：** 虽然这种方法确实可行，但不受 Microsoft 支持，并且需要投入不少学习成本、脚本编写以及一些“hack”式的变通操作。 Decide for yourself whether you think it's the right approach for your team.
 
 为简化说明，我们以 AdventureWorks 示例模型为例：
 
-![图片](~/content/assets/images/master-model-pattern-01.png)
+![image](~/content/assets/images/master-model-pattern-01.png)
 
-假设出于某种原因，你需要将所有与 Internet Sales 相关的内容部署为一个模型，将所有与 Reseller Sales 相关的内容部署为另一个模型。原因可能是安全、性能、可扩展性；也可能是因为你的团队需要服务多个外部客户，而每个客户都需要一份自己的模型副本，其中既包含共享功能，也包含其专属功能。
+假设出于某种原因，你需要将所有与 Internet Sales 相关的内容部署为一个模型，将所有与 Reseller Sales 相关的内容部署为另一个模型。 This could be for security reasons, performance, scalability, or maybe even because your team is servicing a number of external clients, where each client needs their own copy of the model, containing both shared and specific functionality.
 
 与其为每个不同版本各自维护一个开发分支，本文介绍的方法可以让你只维护一个模型，并通过元数据来指示部署时应如何拆分该模型。
 
 ## （滥）用透视
 
-思路其实很简单。首先，在模型中新增若干个透视，数量与需要部署的目标模型数量对应。记得用一致的方式为这些透视添加前缀，好把它们与面向用户的透视区分开：
+The idea is quite simple. 首先，在模型中新增若干个透视，数量与需要部署的目标模型数量对应。 Make sure to prefix these perspectives in a consistent way, to separate them from user-oriented perspectives:
 
-![图片](~/content/assets/images/master-model-pattern-02.png)
+![image](~/content/assets/images/master-model-pattern-02.png)
 
-这里我们在透视名称前使用 `-` 号作为前缀。稍后我们会看到如何从模型中剥离这些透视，从而确保最终用户不会看到它们。它们仅供模型开发人员使用。
+Here, we use a `$`-sign as the prefix on the perspective names. 稍后我们会看到如何从模型中剥离这些透视，从而确保最终用户不会看到它们。 They are only used by the model developers.
 
-接下来，只需把各个独立模型所需的所有对象添加到对应的透视中即可。在 Tabular Editor 中使用“透视”下拉列表，确认模型包含所需对象。下面这段实用脚本可用于确保透视中也包含所有依赖项：
+Now, simply add all objects needed in the individual models to these perspectives. 在 Tabular Editor 中使用“透视”下拉列表，确认模型包含所需对象。 Here's a handy script that can be used to ensure that all dependencies are included in the perspective as well:
 
 ```csharp
-// 遍历当前透视中的所有层次结构：
+// Look through all hierarchies in the current perspective:
 foreach(var h in Model.AllHierarchies.Where(h => h.InPerspective[Selected.Perspective]))
 {
-    // 确保层次级别使用到的列也包含在透视中：
+    // Make sure columns used in hierarchy levels are included in the perspective:
     foreach(var level in h.Levels) {
         level.Column.InPerspective[Selected.Perspective] = true;
     }
 }
 
-// 遍历当前透视中的所有度量值和列：
+// Loop through all measures and columns in the current perspective:
 foreach(var obj in Model.AllMeasures.Cast<ITabularPerspectiveObject>()
     .Concat(Model.AllColumns).Where(m => m.InPerspective[Selected.Perspective])
     .OfType<IDaxDependantObject>().ToList())
 {
-    // 遍历当前对象所依赖的所有对象：
+    // Loop through all objects that the current object depends on:
     foreach(var dep in obj.DependsOn.Deep())
     {
-        // 包含对列、度量值和表的依赖：
+        // Include columns, measure and table dependencies:
         var columnDep = dep as Column; if(columnDep != null) columnDep.InPerspective[Selected.Perspective] = true;
         var measureDep = dep as Measure; if(measureDep != null) measureDep.InPerspective[Selected.Perspective] = true;
         var tableDep = dep as Table; if(tableDep != null) tableDep.InPerspective[Selected.Perspective] = true;
     }    
 }
 
-// 遍历当前透视中设置了 SortByColumn 的所有列：
+// Look through all columns that have a SortByColumn in the current perspective:
 foreach(var c in Model.AllColumns.Where(c => c.InPerspective[Selected.Perspective] && c.SortByColumn != null))
 {
     c.SortByColumn.InPerspective[Selected.Perspective] = true;   
 }
 ```
 
-**说明：** 首先，脚本会遍历当前透视（即屏幕顶部下拉列表中当前选中的透视）中的所有层次结构。对于每个此类层次结构，它会确保所有用作层次级别的列都包含在透视中。接着，脚本会遍历当前透视中的所有列和度量值。对于这些对象中的每一个，透视中还会包含其所有 DAX 依赖项，例如对度量值、列或表的引用。注意，诸如 `DISTINCTCOUNT('Customer'[CustomerId])` 这样的表达式，会导致 'Customer' 表的所有列都被包含在透视中，因为 Tabular Editor 会将此类表达式视为同时依赖于 [CustomerId] 列本身以及 'Customer' 表。最后，脚本会确保任何用作“Sort By”列的列也包含在透视中。
+**Explanation:** First, the script loops through all hierarchies in the current perspective (the perspective currently selected in the dropdown at the top of the screen). For every such hierarchy, it ensures that all columns used as hierarchy levels appear in the perspective. Next, the script loops through all columns and measures of the current perspective. For each of these objects, all DAX dependencies in the form of measure-, column- or table references are also included in the perspective. Please note that expressions such as `DISTINCTCOUNT('Customer'[CustomerId])` will result in all columns of the 'Customer' table being included in the perspective, as Tabular Editor treats such an expression as having a dependency both on the [CustomerId] column itself, and on the 'Customer' table. Lastly, the script ensures that any columns that are used as a "Sort By"-column, are also included in the perspective.
 
 我建议将此脚本在模型级别保存为一个自定义操作，方便以后随时调用。
 
-顺便说一句，如果你想复制某个透视，现在已经可以直接在 UI 中完成。在资源管理器树中点击“透视”节点，然后在属性网格中点击省略号按钮：
+By the way, if you want to make a copy of a perspective, you can already do that through the UI. Click on the "Perspectives" node in the explorer tree, and then click the ellipsis button in the property grid:
 
-![图片](~/content/assets/images/master-model-pattern-03.png)
+![image](~/content/assets/images/master-model-pattern-03.png)
 
 这会打开一个对话框，你可以在其中创建和删除透视，也可以克隆现有透视：
 
-![图片](~/content/assets/images/master-model-pattern-04.png)
+![image](~/content/assets/images/master-model-pattern-04.png)
 
 作为补充，下面这段脚本会从透视中移除所有不可见且未使用的对象，便于你做一些清理：
 
 ```csharp
-// 遍历当前透视中的所有列：
+// Loop through all columns of the current perspective:
 foreach(var c in Model.AllColumns.Where(c => c.InPerspective[Selected.Perspective])) {
     if(
-        // 如果该列已隐藏（或其父表已隐藏）：
+        // If the column is hidden (or the parent table is hidden):
         (c.IsHidden || c.Table.IsHidden) 
 
-        // 且未用于任何关系：
+        // And not used in any relationships:
         && !c.UsedInRelationships.Any()
         
-        // 且未在透视中被用作其他任何列的 SortByColumn：
+        // And not used as the SortByColumn for any other columns in the perspective:
         && !c.UsedInSortBy.Any(sb => !sb.IsHidden && sb.InPerspective[Selected.Perspective])
         
-        // 且未在透视中的任何层次结构里使用：
+        // And not used in any hierarchies in the perspective:
         && !c.UsedInHierarchies.Any(h => h.InPerspective[Selected.Perspective])
         
-        // 且未在透视中其他可见对象的任何 DAX 表达式里被引用：
+        // And not referenced in any DAX expression for other visible objects in the perspective:
         && !c.ReferencedBy.Deep().OfType<ITabularPerspectiveObject>()
             .Any(obj => obj.InPerspective[Selected.Perspective] && !(obj as IHideableObject).IsHidden)
             
-        // 且未被任何角色引用：
+        // And not referenced by any roles:
         && !c.ReferencedBy.Roles.Any()    )
     {
-        // 如果满足以上所有条件，则可以将该列从当前透视中移除：
+        // If all of the above, then the column can be removed from the current perspective:
         c.InPerspective[Selected.Perspective] = false; 
     }
 }
 
-// 遍历当前透视中的所有度量值：
+// Loop through all measures of the current perspective:
 foreach(var m in Model.AllMeasures.Where(m => m.InPerspective[Selected.Perspective])) {
     if(
-        // 如果该度量值已隐藏（或其父表已隐藏）：
+        // If the measure is hidden (or the parent table is hidden):
         (m.IsHidden || m.Table.IsHidden) 
 
-        // 且未在透视中其他可见对象的任何 DAX 表达式里被引用：
+        // And not referenced in any DAX expression for other visible objects in the perspective:
         && !m.ReferencedBy.Deep().OfType<ITabularPerspectiveObject>()
             .Any(obj => obj.InPerspective[Selected.Perspective] && !(obj as IHideableObject).IsHidden)
     )
     {
-        // 如果满足以上所有条件，则可以将该度量值从当前透视中移除：
+        // If all of the above, then the column can be removed from the current perspective:
         m.InPerspective[Selected.Perspective] = false; 
     }
 }
 ```
 
-**说明：** 脚本首先会遍历当前选中的透视中的所有列。只有在满足以下所有条件时，它才会将某列从透视中移除：
+**说明：** 脚本首先会遍历当前选中的透视中的所有列。 It removes a column from the perspective only if all of the following are true:
 
 - 该列已隐藏（或该列所在的表已隐藏）
 - 该列不参与任何关系
@@ -138,29 +138,29 @@ foreach(var m in Model.AllMeasures.Where(m => m.InPerspective[Selected.Perspecti
 - 度量值已隐藏（或该度量值所在的表已隐藏）
 - 在透视中，度量值未被其他任何可见对象上的 DAX 表达式直接或间接引用
 
-如果你们是一个共同开发该模型的团队，那么应该已经在使用 Tabular Editor 的[“保存到文件夹”功能](xref:folder-serialization)，并配合 Git 等版本控制系统。请务必在 **工具 > 偏好 > 文件格式 > 保存到文件夹**（Tabular Editor 2 中为 **文件 > 偏好 > 保存到文件夹**）下勾选“Serialize perspectives per-object”选项，以避免在透视定义中产生大量合并冲突。
+如果你们是一个共同开发该模型的团队，那么应该已经在使用 Tabular Editor 的[“保存到文件夹”功能](xref:folder-serialization)，并配合 Git 等版本控制系统。 Make sure to check the "Serialize perspectives per-object" option under **Tools > Preferences > File Formats > Save-to-folder** (**File > Preferences > Save to Folder** in Tabular Editor 2), to avoid getting heaps of merge conflicts on your perspective definitions.
 
-![图片](~/content/assets/images/master-model-pattern-05.png)
+![image](~/content/assets/images/master-model-pattern-05.png)
 
 ## 增加更精细的控制
 
-到这里，你大概已经猜到了：我们会用脚本为每一个带前缀的开发者透视生成一个模型版本。脚本会直接从模型中移除所有不包含在指定开发者透视中的对象。不过在开始之前，还有几种情况需要先处理。
+By now, you've probably guessed that we're going to use scripting to create one version of the model for every of our prefixed developer perspectives. 脚本会直接从模型中移除所有不包含在指定开发者透视中的对象。 However, before we do that, there are a couple more situations we need to handle.
 
 ### 控制非透视对象
 
-有些对象，例如透视、数据源和角色，本身并不会被透视包含或排除，但我们可能仍然需要一种方式来指定它们应归属到哪些模型版本中。为此，我们将使用注解。回到我们的 Adventure Works 模型，我们可能希望让“Inventory”和“Internet Operation”透视出现在“$InternetModel”和“$ManagementModel”中，而“Reseller Operation”则出现在“$ResellerModel”和“$ManagementModel”中。
+Some objects, such as perspectives, data sources and roles, are not included nor excluded from perspectives themselves, but we may still need a way to specify which of our model versions they should belong to. For this, we're going to use annotations. 回到我们的 Adventure Works 模型，我们可能希望让“Inventory”和“Internet Operation”透视出现在“$InternetModel”和“$ManagementModel”中，而“Reseller Operation”则出现在“$ResellerModel”和“$ManagementModel”中。
 
 那么我们就在这 3 个原始透视上各新增一个名为“DevPerspectives”的注释，并把开发者透视的名称以逗号分隔的字符串形式填进去：
 
-![图片](~/content/assets/images/master-model-pattern-06.png)
+![image](~/content/assets/images/master-model-pattern-06.png)
 
-在模型中新增 _用户_ 透视时，记得也添加同样的注释，并填写你希望该 _用户_ 透视被包含到哪些开发者透视中。后面在脚本生成最终模型版本时，我们会使用这些注释中的信息来包含所需的透视。数据源和角色也可以用同样的方法。
+在模型中新增 _用户_ 透视时，记得也添加同样的注释，并填写你希望该 _用户_ 透视被包含到哪些开发者透视中。 When scripting the final model versions later on, we will use the information in these annotations to include the perspectives needed. We can do the same thing for data sources and roles.
 
 ### 控制对象元数据
 
-在某些情况下，同一个度量值在不同模型版本中可能需要略有不同的表达式或格式字符串。同样地，我们可以用注释按开发者透视提供元数据，然后在脚本生成最终模型时应用这些元数据。
+There may also be situations where the same measure should have slightly different expressions or format strings across the different model versions. Again, we can use annotation to provide the metadata per developer perspective, and then apply the metadata when we script out the final model.
 
-如果要把所有对象属性序列化为文本，最简单的方式大概是使用 [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) 脚本函数。不过对我们的场景来说有点“杀鸡用牛刀”，所以我们直接指定要作为注释存储的属性即可。创建以下脚本：
+The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](xref:useful-script-snippets#export-object-properties-to-a-file) script function. However, that's a little overkill for our use case, so let's just specify directly which properties we want to store as annotations. Create the following script:
 
 ```csharp
 foreach(var m in Selected.Measures) { 
@@ -172,7 +172,7 @@ foreach(var m in Selected.Measures) {
 
 并将其保存为名为“Save Metadata as Annotations”的自定义操作：
 
-![图片](~/content/assets/images/master-model-pattern-07.png)
+![image](~/content/assets/images/master-model-pattern-07.png)
 
 同样，将以下脚本保存为名为“Load Metadata from Annotations”的自定义操作：
 
@@ -185,40 +185,40 @@ foreach(Measure m in Selected.Measures) {
 }
 ```
 
-我们的思路是：针对每个开发者透视，为需要维护不同版本的每个属性各创建一条注释。如果你需要像脚本中所示的这些属性（Expression、FormatString、Description）之外，还要分别维护其他属性，直接把它们加到脚本里即可。其他对象类型也可以用同样的方法，但多数情况下意义不大；通常只有度量值，以及可能的计算列和分区才比较适用（例如，为每个模型版本维护不同的查询表达式）。
+The idea is that we create one annotation for each of the properties we would like to maintain different versions of, per developer perspective. If you need to maintain other properties than those shown in the script (Expression, FormatString, Description) separately, just add them to the script. You can do the same thing for other object types, but it probably won't make sense for much other than measures and perhaps calculated columns and partitions (to maintain different query expressions per model version, for example).
 
-使用你新建的自定义操作，将特定于模型版本的更改应用到开发者透视（或手动添加注释）。例如，在我们的 Adventure Works 示例中，我们希望 [Day Count] 度量值在 $ResellerModel 透视中使用不同的表达式。因此我们先对该度量值应用更改，然后在下拉框中选中“$ResellerModel”透视的情况下，调用“Save Metadata as Annotations”操作：
+Use your new custom actions to apply model version specific changes to the developer perspectives (or add the annotations by hand). 例如，在我们的 Adventure Works 示例中，我们希望 [Day Count] 度量值在 $ResellerModel 透视中使用不同的表达式。因此我们先对该度量值应用更改，然后在下拉框中选中“$ResellerModel”透视的情况下，调用“Save Metadata as Annotations”操作：
 
-![图片](~/content/assets/images/master-model-pattern-08.png)
+![image](~/content/assets/images/master-model-pattern-08.png)
 
-在上面的截图中，我们为每个开发者透视都创建了 3 条注释。但在实际使用中，我们只需要为那些属性值应该不同于其默认值的开发者透视创建这些注释。
+In the screenshot above, we have 3 annotations for each of the developer perspectives. In reality, though, we would only need to create these annotations for those developer perspectives where the properties should differ from their native values.
 
 ## 修改分区查询
 
-我们也可以用类似的方法，在不同版本之间对分区查询应用不同的更改。例如，根据版本不同，我们可能希望在某些分区查询中使用不同的 SQL `WHERE` 条件。我们先在表对象上创建一组新的注释，用来为每个版本指定分区要使用的基础 SQL 查询。比如在这里，我们希望在三个版本中的两个版本中，限制 Product 表包含哪些记录：
+We can use a similar technique to apply changes to partition queries between the different versions. 例如，根据版本不同，我们可能希望在某些分区查询中使用不同的 SQL `WHERE` 条件。我们先在表对象上创建一组新的注释，用来为每个版本指定分区要使用的基础 SQL 查询。 Here, for example, we want to restrict which records are included in the Product table on two of our three versions:
 
-![图片](~/content/assets/images/master-model-pattern-09.png)
+![image](~/content/assets/images/master-model-pattern-09.png)
 
 对于包含多个分区的表，我们使用“占位符”来指定 WHERE 条件，后续会再替换为实际值：
 
-![图片](~/content/assets/images/master-model-pattern-10.png)
+![image](~/content/assets/images/master-model-pattern-10.png)
 
 在每个分区中定义占位符的值（注意：必须使用 [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) 或更高版本，才能通过 UI 编辑分区注释）：
 
-![图片](~/content/assets/images/master-model-pattern-11.png)
+![image](~/content/assets/images/master-model-pattern-11.png)
 
-在动态分区场景中，别忘了在你用来创建新分区的脚本里，也把这些注释包含进去。下一节我们会看看如何在部署过程中应用这些占位符值。
+在动态分区场景中，别忘了在你用来创建新分区的脚本里，也把这些注释包含进去。 In the next section, we'll see how to apply these placeholder values during deployment.
 
 ## 部署不同的版本
 
-最后，我们准备将模型部署为 3 个不同的版本。遗憾的是，Tabular Editor 中的 Deployment Wizard UI 无法根据我们创建的透视和注释自动拆分模型，因此我们需要额外编写一个脚本，将模型裁剪为某个特定版本。然后，这个脚本可以作为命令行部署的一部分来执行，这样就能把整个部署过程打包成一个组件，封装到一个命令文件、PowerShell 可执行文件中，甚至集成到你的构建/自动化部署流程里？
+Finally, we are ready to deploy our model as 3 different versions. 遗憾的是，Tabular Editor 中的 Deployment Wizard UI 无法根据我们创建的透视和注释自动拆分模型，因此我们需要额外编写一个脚本，将模型裁剪为某个特定版本。 This script can then be executed as part of a command-line deployment, so that the whole deployment process can be packaged in a command file, a PowerShell executable or maybe even integrated in your build/automated deployment process?
 
-我们需要的脚本如下所示。思路是：为每个开发者透视分别写一个脚本。将脚本保存为文本文件，并命名为类似 `ResellerModel.cs`：
+The script we need looks like the following. The idea is that we create one script per developer perspective. 将脚本保存为文本文件，并命名为类似 `ResellerModel.cs`：
 
 ```csharp
-var version = "ResellerModel"; // TODO: 将此替换为你的开发者透视的名称
+var version = "`$`ResellerModel"; // TODO: Replace this with the name of your developer perspective
 
-// 删除不属于该透视的表、度量值、列和层级结构：
+// Remove tables, measures, columns and hierarchies that are not part of the perspective:
 foreach(var t in Model.Tables.ToList()) {
     if(!t.InPerspective[version]) t.Delete();
     else {
@@ -228,29 +228,29 @@ foreach(var t in Model.Tables.ToList()) {
     }
 }
 
-// 基于注释移除用户透视，并移除所有开发者透视：
+// Remove user perspectives based on annotations and all developer perspectives:
 foreach(var p in Model.Perspectives.ToList()) {
-    if(p.Name.StartsWith("Dev")) p.Delete();
+    if(p.Name.StartsWith("`$`")) p.Delete();
 
-    // 保留所有不带 "DevPerspectives" 注释的其他透视，同时移除
-    // 带有该注释、且注释中未指定 <version> 的透视：
+    // Keep all other perspectives that do not have the "DevPerspectives" annotation, while removing
+    // those that have the annotation, if <version> is not specified in the annotation:
     if(p.GetAnnotation("DevPerspectives") != null && !p.GetAnnotation("DevPerspectives").Contains(version)) 
         p.Delete();
 }
 
-// 基于注释移除数据源：
+// Remove data sources based on annotations:
 foreach(var ds in Model.DataSources.ToList()) {
     if(ds.GetAnnotation("DevPerspectives") == null) continue;
     if(!ds.GetAnnotation("DevPerspectives").Contains(version)) ds.Delete();
 }
 
-// 基于注释移除角色：
+// Remove roles based on annotations:
 foreach(var r in Model.Roles.ToList()) {
     if(r.GetAnnotation("DevPerspectives") == null) continue;
     if(!r.GetAnnotation("DevPerspectives").Contains(version)) r.Delete();
 }
 
-// 基于注释修改度量值：
+// Modify measures based on annotations:
 foreach(Measure m in Model.AllMeasures) {
     var expr = m.GetAnnotation(version + "_Expression"); if(expr == null) continue;
     m.Expression = expr;
@@ -258,16 +258,16 @@ foreach(Measure m in Model.AllMeasures) {
     m.Description = m.GetAnnotation(version + "_Description");    
 }
 
-// 根据注释设置分区查询：
+// Set partition queries according to annotations:
 foreach(Table t in Model.Tables) {
     var queryWithPlaceholders = t.GetAnnotation(version + "_PartitionQuery"); if(queryWithPlaceholders == null) continue;
     
-    // 遍历此表中的所有分区：
+    // Loop through all partitions in this table:
     foreach(Partition p in t.Partitions) {
         
         var finalQuery = queryWithPlaceholders;
 
-        // 替换所有占位符值：
+        // Replace all placeholder values:
         foreach(var placeholder in p.Annotations.Keys) {
             finalQuery = finalQuery.Replace("%" + placeholder + "%", p.GetAnnotation(placeholder));
         }
@@ -276,14 +276,14 @@ foreach(Table t in Model.Tables) {
     }
 }
 
-// TODO: 如适用，基于注释修改其他对象……
+// TODO: Modify other objects based on annotations, if applicable...
 ```
 
-**说明：** 首先，我们会删除脚本第 1 行所定义的透视之外的所有表、列、度量值和层级结构。然后，我们会删除所有此前按说明加了 "DevPerspectives" 注释的额外对象，并同时移除所有开发者透视本身。之后，如果存在相关注释，我们会根据注释对度量值表达式、格式字符串或说明进行相应更新。最后，我们会应用注释中定义的分区查询（如果有），并将占位符值替换为注释里提供的值（如果有）。
+**Explanation:** First, we remove all tables, columns, measures and hierarchies, that are not part of the perspective defined in line 1 of the script. Then, we remove any additional objects where we may have applied the "DevPerspectives" annotation as described previously, along with all the developer perspectives themselves. Afterwards, we apply any changes to measure expressions, format strings or descriptions based on the annotations, if any. Finally, we apply partition queries as defined in annotations (if any), while also replacing placeholder values with the annotated values (if any).
 
-注意：如果愿意，我们也可以直接在这个脚本里加入更多针对模型的特定改动；但本练习的重点是：如何直接在 Tabular Editor 内维护多个模型。无论要部署哪个版本，上面的脚本都是一样的（当然，除了第 1 行）。
+注意：如果愿意，我们也可以直接在这个脚本里加入更多针对模型的特定改动；但本练习的重点是：如何直接在 Tabular Editor 内维护多个模型。 The script above is the same, regardless of which version we want to deploy (except, of course, for line 1).
 
-最后，我们可以加载 Model.bim 文件、执行脚本，并使用以下 [命令行语法](xref:command-line-options) 一次性部署修改后的模型：
+Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](xref:command-line-options):
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ResellerModel.cs -D localhost AdventureWorksReseller -O -R
@@ -296,11 +296,11 @@ start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.b
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ManagementModel.cs -D localhost AdventureWorksManagement -O -R
 ```
 
-这里假设你是在 Model.bim 文件所在目录中执行命令行（如果使用“保存到文件夹”功能，则是在 Database.json 文件所在目录）。 -S 参数用于指示 Tabular Editor 将提供的脚本应用到模型上，-D 参数则用于执行部署。 -O 参数允许覆盖同名的现有数据库，-R 参数表示我们也要覆盖目标数据库中的角色。
+这里假设你是在 Model.bim 文件所在目录中执行命令行（如果使用“保存到文件夹”功能，则是在 Database.json 文件所在目录）。 The -S switch instructs Tabular Editor to apply the supplied script to the model, and the -D switch performs the deployment. The -O switch allows overwriting an existing database with the same name, and the -R switch indicates that we also want to overwrite roles of the target database.
 
 ## 主模型处理
 
-如果你有专用的处理服务器，并且各个独立模型之间有大量数据重叠，那么可以先把数据处理到主模型中，再进行拆分。这样可以避免对相同数据在各个独立模型中重复处理多次。**不过，这样做的前提是：你不会处理任何在不同版本之间分区查询发生过更改的表，如 [本节](#altering-partition-queries) 所示。** 具体做法如下：
+If you have a dedicated processing server and large amounts of data overlap between the individual models, it may make sense for you to process the data into the master model first, before splitting it up. This way, you can avoid processing the same data several times, into individual models. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](#altering-partition-queries).** The recipe for this is outlined below:
 
 1. （可选：如元数据有变更）将主模型部署到处理服务器
 2. 对主模型执行所需的处理（不要处理包含特定版本分区查询的表）。
@@ -309,12 +309,12 @@ start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.b
 
 ## 技巧与窍门
 
-当你开始大量使用自定义注释时，可能会遇到想列出所有带有某个特定注释的对象的情况。这时，筛选框中的 Dynamic LINQ 表达式就派上用场了。
+When you're starting to use custom annotations a lot, there may be situations where you want to list all objects with a specific annotation. This is where the Dynamic LINQ expressions of the Filter-box comes in handy.
 
-首先，假设我们想找出所有添加了名为 "$InternetModel_Expression" 的注释的对象。在筛选文本框中输入以下内容，然后按下 ENTER 键：
+首先，假设我们想找出所有添加了名为 "$InternetModel_Expression" 的注释的对象。 Type the following into the filter textbox and hit ENTER:
 
 ```
-:GetAnnotation("$InternetModel_Expression")<>null
+:GetAnnotation("`$`InternetModel_Expression")<>null
 ```
 
 或者，如果你想找出所有注释名以“_Expression”结尾的对象，请使用：
@@ -323,14 +323,14 @@ start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.b
 :GetAnnotations().Any(EndsWith("_Expression"))
 ```
 
-注意，这些函数区分大小写。因此，如果你的注释是用小写写的，上面的筛选条件就匹配不到。
+Note that these functions are case-sensitive, so if your annotation was written in lowercase, the above filter would not catch it.
 
 你也可以查找注释具有特定值的对象：
 
 ```
-:GetAnnotation("$InternetModel_Description").Contains("TODO")
+:GetAnnotation(`$`InternetModel_Description).Contains("TODO")
 ```
 
 ## 结论
 
-当你需要维护许多相似且共享大量功能的模型，例如日历表和其他常见维度时，这里介绍的技巧会非常有帮助。这些脚本可以在 Tabular Editor 中作为自定义操作 Custom Actions 方便地复用；而实际部署也可以通过多种方式实现自动化。
+The technique described here can be very helpful when maintaining many similar models with a lots of shared functionality, such as Calendar tables and other common dimensions. The scripts used can be neatly reused as Custom Actions within Tabular Editor, while the actual deployment can be automated in various ways.
