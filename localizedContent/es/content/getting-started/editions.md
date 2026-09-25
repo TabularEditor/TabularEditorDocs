@@ -18,14 +18,14 @@ Este documento ofrece una visión general y una comparación de las distintas ed
 > [!NOTE]
 > Las licencias de Tabular Editor 3 son **por desarrollador**. En otras palabras, solo las personas que usan el producto Tabular Editor 3 necesitarán una licencia.
 
-The editions differ in two ways: **which data modeling scenarios** they support - that is, where the model you are editing may live - and **which features** are available once it is open. The two sections below cover each in turn. Anything not listed in either is available in every edition.
+Las ediciones se diferencian en dos aspectos: **qué escenarios de modelado de datos** admiten —es decir, dónde puede residir el Data model que estás editando— y **qué funciones** están disponibles una vez que se abre. Las dos secciones siguientes tratan cada aspecto por separado. Todo lo que no figure en ninguna de ellas está disponible en todas las ediciones.
 
 > [!TIP]
-> Upgrading a license takes effect straight away. Activate the new key under **Help > About Tabular Editor**, and the features it unlocks are available without restarting Tabular Editor 3.
+> La actualización de una licencia surte efecto de inmediato. Activa la nueva clave en **Ayuda > Acerca de Tabular Editor**; las funciones que desbloquea estarán disponibles sin reiniciar Tabular Editor 3.
 
 ## Escenarios compatibles de modelado de Data model
 
-The first difference between the editions is which types of tabular data modeling scenarios they support. Para entender esta diferencia, tenga en cuenta que Analysis Services (Tabular) existe en varias “variantes”:
+La primera diferencia entre las ediciones es qué tipos de escenarios de modelado de datos tabulares, es decir, de Data model, admiten. Para entender esta diferencia, tenga en cuenta que Analysis Services (Tabular) existe en varias “variantes”:
 
 - Power BI Desktop (asegúrate de entender las [limitaciones](xref:desktop-limitations))
 - Power BI Premium a través del punto de conexión XMLA (Premium Per User, **Premium Capacity [SKUs A, EM o P]**, **Fabric Capacity [SKUs F]**)
@@ -34,19 +34,19 @@ The first difference between the editions is which types of tabular data modelin
 
 Consideramos que las variantes **resaltadas** de Analysis Services son de nivel Enterprise y, por tanto, solo se pueden usar con la Edición Enterprise de Tabular Editor 3.
 
-We draw that line where Microsoft draws its own, between per-user and capacity-based licensing:
+Trazamos esa línea donde Microsoft traza la suya: entre las licencias por usuario y las basadas en capacidad:
 
-- **Premium Per User is a per-seat license.** The person editing the model is the person who paid for the seat. That matches how Business Edition is licensed: a personal, non-transferable key tied to a single user. See [Personal vs. Transferable licenses](#personal-vs-transferable-licenses).
-- **Premium Capacity (P SKUs), Embedded Capacity (A/EM SKUs) and Fabric Capacity (F SKUs) are shared, organization-scale deployments.** Models hosted there are team-owned and serve many consumers, which is the scenario Enterprise Edition is built and priced for.
+- **Premium Per User es una licencia por puesto.** La persona que edita el modelo es la misma que ha adquirido la licencia. Esto coincide con la licencia de la Edición Business: una clave personal, intransferible y vinculada a un único usuario. Consulta [Licencias personales frente a licencias transferibles](#personal-vs-transferable-licenses).
+- **Premium Capacity (P SKUs), Embedded Capacity (A/EM SKUs) y Fabric Capacity (F SKUs) son implementaciones compartidas a escala de toda la organización.** Los modelos alojados allí son propiedad del equipo y dan servicio a muchos consumidores; este es el escenario para el que se ha diseñado la Edición Enterprise y en el que se basa su precio.
 
-The same logic applies outside Power BI. Business Edition covers the SQL Server Analysis Services Developer and Standard editions along with the Azure Analysis Services Developer and Basic tiers. Those tiers serve a single developer or a small-scale deployment. SQL Server Analysis Services Enterprise Edition and Azure Analysis Services Standard tier host organization-scale models, so they require Enterprise Edition.
+La misma lógica se aplica fuera de Power BI. La Edición Business cubre las ediciones Developer y Standard de SQL Server Analysis Services, junto con los niveles Developer y Basic de Azure Analysis Services. Esos niveles están pensados para un solo desarrollador o para una implementación a pequeña escala. SQL Server Analysis Services Enterprise Edition y Azure Analysis Services Standard tier alojan modelos a escala de toda la organización, por lo que requieren la Edición Enterprise.
 
 > [!IMPORTANT]
 > Tabular Editor solo permite editar Data models con un nivel de compatibilidad 1200 o superior. Este es el valor predeterminado en cualquier instancia de Analysis Services a partir de SQL Server 2016. Por el mismo motivo, Tabular Editor no es compatible con Excel PowerPivot, ya que usa un nivel de compatibilidad anterior.
 
 Consulta la matriz siguiente para ver el resumen completo de escenarios compatibles:
 
-| Escenario / Edición                                           | Desktop                                                 | Business                                                  | Enterprise                                              |
+| Escenario / Edición                                           | Desktop                                                 | Edición Business                                          | Edición Enterprise                                      |
 | ------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
 | Herramienta externa para Power BI Desktop                     | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
 | Cargar/guardar los metadatos del modelo en disco\*\*          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
@@ -68,71 +68,71 @@ Consulta la matriz siguiente para ver el resumen completo de escenarios compatib
 
 \*\*\***Nota:** El modo del área de trabajo permite a Tabular Editor 3 guardar simultáneamente los metadatos del modelo en disco y sincronizar una base de datos en cualquiera de las ediciones de Analysis Services o Power BI compatibles con la edición de Tabular Editor 3 adquirida.
 
-## Feature availability
+## Disponibilidad de funciones
 
-Beyond the scenarios above, these are the features whose availability depends on the edition. Trial and Consultancy licenses carry the Enterprise Edition feature set.
+Además de los escenarios anteriores, estas son las funciones cuya disponibilidad depende de la edición. Las licencias Trial y Consultancy incluyen el conjunto de funciones de la Edición Enterprise.
 
-### Editing and refreshing
+### Edición y actualización
 
-| Funcionalidad                                                                                            | Desktop                                                 | Business                                                | Enterprise                                              |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| [Save with supporting files](xref:save-with-supporting-files) for Fabric                                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| [Advanced Refresh dialog](xref:advanced-refresh) and [refresh override profiles](xref:refresh-overrides) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Automatic metadata backups on save and deploy                                                            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Funcionalidad                                                                                                                 | Desktop                                                 | Business                                                | Enterprise                                              |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| [Guardar con archivos de soporte](xref:save-with-supporting-files) para Fabric                                                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| [Diálogo de actualización avanzada](xref:advanced-refresh) y [perfiles de anulación de actualización](xref:refresh-overrides) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Copias de seguridad automáticas de metadatos al guardar y desplegar                                                           | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 
-Ordinary refresh commands, and everything else in the refresh menu, are available in every edition. The three rows above are unavailable in Desktop Edition because that edition works only against a live Power BI Desktop model, with no model files of its own.
+Los comandos habituales de actualización, así como el resto del menú de actualización, están disponibles en todas las ediciones. Las tres filas anteriores no están disponibles en la Edición de escritorio, porque esa edición solo funciona con un modelo activo de Power BI Desktop y no tiene sus propios archivos de modelo.
 
-### Modeling features
+### Funciones de modelado
 
-| Funcionalidad                                                       | Desktop                                                 | Business                                                | Enterprise                                              |
-| ------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Perspectives in an Analysis Services model\*                        | N/D                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Tables with multiple partitions in an Analysis Services model\*     | N/D                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Perspectives and multiple partitions in a Power BI model            | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Direct Lake tables                                                  | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| [Semantic Bridge](xref:semantic-bridge) for Databricks Metric Views | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Funcionalidad                                                        | Desktop                                                 | Business                                                | Enterprise                                              |
+| -------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Perspectivas en un modelo de Analysis Services\*                     | N/D                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Tablas con múltiples particiones en un modelo de Analysis Services\* | N/D                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Perspectivas y múltiples particiones en un modelo de Power BI        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Tablas de Direct Lake                                                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| [Semantic Bridge](xref:semantic-bridge) para Databricks Metric Views | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
-\***Note:** Desktop Edition cannot open Analysis Services models at all, which is why these two rows do not apply to it. See [Modeling Restrictions](#modeling-restrictions) below for what happens when a model uses one of these features on an edition that does not allow it.
+\***Nota:** La Edición de escritorio no puede abrir en absoluto modelos de Analysis Services, por lo que estas dos filas no se le aplican. Consulta [Restricciones de modelado](#modeling-restrictions) más abajo para saber qué ocurre cuando un modelo usa una de estas características en una edición que no la permite.
 
-The Semantic Bridge row covers the **Import from Metric View YAML...** command and the `SemanticBridge` object in [C# scripts](xref:csharp-scripts); on a lower edition the menu item is not shown, and a script that reaches for the service reports that it is unavailable at your license level.
+La fila de Semantic Bridge abarca el comando **Importar desde YAML de vista de métricas...** y el objeto `SemanticBridge` en los [C# Scripts](xref:csharp-scripts); en una edición inferior, la opción de menú no se muestra y un script que intenta acceder al servicio genera un Report indicando que no está disponible para tu nivel de licencia.
 
-### AI Assistant, MCP server and administrator policies
+### Asistente de IA, servidor MCP y políticas de administrador
 
-The [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) themselves are available in every edition. What Enterprise Edition adds is the ability to govern them centrally, and a record of what they did.
+El [Asistente de IA](xref:ai-assistant) y el [servidor MCP](xref:mcp-server) están disponibles en todas las ediciones. Lo que aporta la Edición Enterprise es la capacidad de gestionarlos de forma centralizada y disponer de un registro de lo que han hecho.
 
-| Funcionalidad                                                                                                           | Desktop                                                 | Business                                                | Enterprise                                              |
-| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| AI Assistant and MCP server                                                                                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| General administrator [policies](xref:policies), such as turning off updates, telemetry, scripts, macros or AI entirely | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Capping what the AI Assistant and the MCP server may reach, per resource                                                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Locking the AI provider, endpoint, model, organization and project, or restricting them to an allowlist                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Publishing Custom Instructions for the organization, and ruling out the ones a user keeps                               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Withholding individual MCP tools, and fixing the MCP server port                                                        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Allowing only C# scripts and macros that stay within the model (`BlockUnsafeScripts`)                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| A local audit record of AI Assistant and MCP server activity                                                            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Funcionalidad                                                                                                                                           | Desktop                                                 | Business                                                | Enterprise                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Asistente de IA y servidor MCP                                                                                                                          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| [Políticas](xref:policies) generales de administrador, como desactivar por completo las actualizaciones, la telemetría, los scripts, las macros o la IA | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Limitar, por recurso, a qué pueden acceder el Asistente de IA y el servidor MCP                                                                         | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Bloquear el proveedor de IA, el punto de conexión, el modelo, la organización y el proyecto, o restringirlos a una lista de elementos permitidos        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Publicar instrucciones personalizadas para la organización y excluir las que un usuario conserve                                                        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Restringir herramientas MCP individuales y fijar el puerto del servidor MCP                                                                             | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Permitir únicamente C# Scripts y macros que se limiten al modelo (`BlockUnsafeScripts`)                                              | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Un registro de auditoría local de la actividad del AI Assistant y del servidor MCP                                                                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
 > [!IMPORTANT]
-> The Enterprise policies are never quietly ignored on an edition that is not licensed for them. If any of their values is set on a machine running Desktop or Business Edition, the AI Assistant and the MCP server refuse to start and name the values that require Enterprise Edition, and a `BlockUnsafeScripts` value stops every script and macro from running until an Enterprise license is activated. Roll them out against the licenses you actually have. See @policies.
+> Las políticas de Enterprise nunca se ignoran silenciosamente en una edición que no tenga licencia para ellas. Si alguno de sus valores se configura en un equipo que ejecute Desktop o la Edición Business, el AI Assistant y el servidor MCP se niegan a iniciarse y señalan los valores que requieren la Edición Enterprise; además, un valor de `BlockUnsafeScripts` impide que se ejecute ningún script ni macro hasta que se active una licencia Enterprise. Impleméntalas según las licencias que realmente tengas. Consulta @policies.
 
-### Licensing and support
+### Licencias y soporte
 
-| Funcionalidad                                                         | Desktop                                                 | Business                                                | Enterprise                                              |
-| --------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| [Free DAX Optimizer access](xref:dax-optimizer-integration)           | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| **Help > Dedicated Support** for contacting our support team directly | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Simultaneous installations per user                                   | 1                                                       | 2                                                       | 3                                                       |
+| Funcionalidad                                                                                    | Desktop                                                 | Business                                                | Enterprise                                              |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| [Acceso gratuito al Optimizador de DAX](xref:dax-optimizer-integration)                          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| **Ayuda > Soporte dedicado** para ponerte en contacto directamente con nuestro equipo de soporte | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Instalaciones simultáneas por usuario                                                            | 1                                                       | 2                                                       | 3                                                       |
 
-The DAX Optimizer _integration_ itself is in every edition; what Enterprise Edition adds is eligibility for a redemption code that gives you DAX Optimizer access at no extra cost.
+La propia _integración_ del Optimizador de DAX está incluida en todas las ediciones; lo que añade la Edición Enterprise es la posibilidad de canjear un código que te da acceso al Optimizador de DAX sin coste adicional.
 
-### Available in every edition
+### Disponible en todas las ediciones
 
-Everything else is the same whichever edition you hold, including the DAX editor and IntelliSense-like [code assist](xref:code-actions), [DAX queries](xref:dax-query) and the [DAX debugger](xref:dax-debugger), [DAX scripts](xref:dax-scripts) and [user-defined functions](xref:udfs), [C# scripts](xref:csharp-scripts) and [macros](xref:macros), the [Best Practice Analyzer](xref:using-bpa) with its [built-in rules](xref:built-in-bpa-rules), the [Perspective Editor](xref:perspective-editor), the [Metadata Translation Editor](xref:metadata-translation-editor), the [Calendar Editor](xref:calendars), [table groups](xref:table-groups), [diagrams](xref:diagram-view), [data preview](xref:table-preview) and [pivot grids](xref:pivot-grid), the VertiPaq Analyzer integration, the [DAX Package Manager](xref:dax-package-manager), the [Table Import Wizard](xref:import-tables) and [unsaved change indicators](xref:unsaved-changes).
+Todo lo demás es igual, independientemente de la edición que tengas, incluido el editor de DAX y [Code Assist](xref:code-actions), similar a IntelliSense; las [consultas DAX](xref:dax-query) y el [Depurador de DAX](xref:dax-debugger); los [scripts DAX](xref:dax-scripts) y las [funciones definidas por el usuario](xref:udfs); los [C# Script](xref:csharp-scripts) y las [macro](xref:macros); el [Best Practice Analyzer](xref:using-bpa) con sus [reglas integradas](xref:built-in-bpa-rules); el [Editor de perspectiva](xref:perspective-editor); el [Editor de traducción de metadatos](xref:metadata-translation-editor); el [Editor de calendario](xref:calendars); los [grupos de tablas](xref:table-groups); los [diagramas](xref:diagram-view); la [vista previa de datos](xref:table-preview) y las [Pivot Grid](xref:pivot-grid); la integración del Analizador VertiPaq; el [Administrador de paquetes DAX](xref:dax-package-manager); el [Asistente para importar tablas](xref:import-tables) y los [indicadores de cambios no guardados](xref:unsaved-changes).
 
 ## Restricciones de modelado
 
 También restringimos algunas operaciones de modelado de datos dentro de Tabular Editor 3, en línea con las limitaciones de algunos niveles de servicio de Microsoft (Azure Analysis Services _Basic Tier_, SQL Server Analysis Services _Standard Edition_ y Power BI _Premium-Per-User_).
 
-Specifically, [Azure AS Basic Tier and SQL Server Standard Edition do not support perspectives or multiple partitions](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), and as such, SSAS/Azure AS models using these features require TE3 Enterprise Edition. DirectQuery is not restricted by your Tabular Editor 3 edition at all: whether you can use it depends on the server the model is hosted on.
+En concreto, [Azure AS Basic Tier y SQL Server Standard Edition no admiten perspectivas ni múltiples particiones](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), por lo que los modelos de SSAS/Azure AS que usan estas funciones requieren la Edición Enterprise de TE3. DirectQuery no está restringido en absoluto por tu edición de Tabular Editor 3: que puedas usarlo depende del servidor en el que esté alojado el modelo.
 
 Del mismo modo, [los Workspaces de Power BI Premium-Per-User no admiten los Datasets de Direct Lake](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites), por eso los modelos de Power BI que usan esta función también requieren la Edición Enterprise de TE3.
 
@@ -151,13 +151,13 @@ Del mismo modo, [los Workspaces de Power BI Premium-Per-User no admiten los Data
 
 \*\***Nota:** Las perspectivas y las múltiples particiones están disponibles en la Edición Business para modelos de Power BI, pero el `CompatibilityMode` del modelo debe establecerse en `PowerBI`. Consulte [Cambiar el modo de compatibilidad](xref:change-compatibility-mode) para obtener instrucciones.
 
-Desktop Edition works only against a live Power BI Desktop model, which is why the Analysis Services rows do not apply to it.
+La edición de escritorio solo funciona con un modelo de Power BI Desktop en vivo, por lo que las filas de Analysis Services no le aplican.
 
 Si intentas abrir un modelo que utiliza una o más de las restricciones de modelado indicadas anteriormente con una licencia TE3 de Edición Business, verás los siguientes mensajes de error:
 
-![This edition of Tabular Editor 3 does not support Enterprise-tier semantic models](~/content/assets/images/editions-01.png)
+![Esta edición de Tabular Editor 3 no admite modelos semánticos de nivel Enterprise](~/content/assets/images/editions-01.png)
 
-A model that acquires one of these while you are editing it is not silently mangled either: the save is refused, and the message names the feature and, for multiple partitions, the tables in question. Adding a perspective to an Analysis Services model is prevented up front - the **Perspectives** folder is not shown in the TOM Explorer and the command to create one is unavailable.
+Un modelo que incorpore una de estas características mientras lo editas tampoco se estropea sin avisar: se rechaza el guardado y en Mensajes se indica la característica y, si hay varias particiones, las tablas en cuestión. Se bloquea de entrada la posibilidad de agregar una perspectiva a un modelo de Analysis Services: la carpeta **Perspectives** no se muestra en el Explorador TOM y el comando para crear una no está disponible.
 
 > [!IMPORTANT]
 > Tabular Editor solo puede usarse como herramienta externa para Power BI Desktop cuando el archivo de Report de Power BI (.pbix, .pbip o .pbit) contiene un Data model (Importación, DirectQuery o compuesto). **No se admiten los Report que usan Live connection** porque estos Report no incluyen un Data model. [Más información](xref:desktop-limitations).
@@ -172,12 +172,12 @@ Nuestra Edición Enterprise usa un modelo de licencias **transferible**. El admi
 
 Cada usuario de Tabular Editor 3 puede instalar la herramienta en varias máquinas, según el tipo de licencia que tenga:
 
-|                           | Desktop | Business | Enterprise |
-| ------------------------- | ------- | -------- | ---------- |
-| Instalaciones simultáneas | 1       | 2        | 3          |
+|                           | Desktop | Negocios | Corporativo |
+| ------------------------- | ------- | -------- | ----------- |
+| Instalaciones simultáneas | 1       | 2        | 3           |
 
 > [!NOTE]
-> Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/eula-te3).
+> Compartir una sola licencia entre varios usuarios va en contra de nuestros [términos de licencia](https://tabulareditor.com/eula-te3).
 
 Puedes desactivar una instalación existente en cualquier momento desde la propia herramienta; para ello, elige la opción "Change license key..." en "Help > About Tabular Editor". También puedes desactivar una instalación a través de nuestro [portal de autoservicio](https://tabulareditor.com/sign-in) yendo a la pestaña "Licenses".
 
@@ -187,7 +187,7 @@ Si necesitas más instalaciones simultáneas de Tabular Editor 3 de las indicada
 
 Nuestra Edición Enterprise tiene precios por niveles, según la siguiente tabla (también se aplican tasas de descuento similares para los compromisos mensuales):
 
-| Tier                      | Precio anual por puesto |
+| Nivel                     | Precio anual por puesto |
 | ------------------------- | ----------------------- |
 | Primeros 5 puestos        | $950,00 USD             |
 | Siguientes 6-10 asientos  | $900,00 USD             |
@@ -208,11 +208,11 @@ Total                      $ 10,950.00
 
 Si necesitas más de 100 puestos, <a href="mailto:sales@tabulareditor.com">contacta con ventas</a> para solicitar un presupuesto.
 
-## Command-line and CI/CD licensing
+## Licencias para la línea de comandos y CI/CD
 
-Tabular Editor 3 is a desktop application. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the [Tabular Editor 2 command line](xref:command-line-options)) or the cross-platform [Tabular Editor CLI](xref:te-cli) (`te`). Both are separate from the Tabular Editor 3 desktop application.
+Tabular Editor 3 es una aplicación de escritorio. No tiene una interfaz de línea de comandos propia. Para implementaciones automatizadas y canalizaciones de CI/CD, utilice `TabularEditor.exe` (la [línea de comandos de Tabular Editor 2](xref:command-line-options)) o el [Tabular Editor CLI](xref:te-cli) (`te`), que es multiplataforma. Ambos son independientes de la aplicación de escritorio Tabular Editor 3.
 
-> **Do I need a license to run CI/CD pipelines?**
-> No. `TabularEditor.exe` (TE2 CLI) and the Tabular Editor CLI (`te`, during preview) do not require a Tabular Editor 3 license. Only developers using the Tabular Editor 3 desktop application need a license.
+> **¿Necesito una licencia para ejecutar canalizaciones de CI/CD?**
+> No. `TabularEditor.exe` (TE2 CLI) y el Tabular Editor CLI (`te`, en versión preliminar) no requieren una licencia de Tabular Editor 3. Solo los desarrolladores que usan la aplicación de escritorio Tabular Editor 3 necesitan una licencia.
 
-At General Availability the Tabular Editor CLI will require a license; pricing is still being finalized and will be announced ahead of GA.
+En la disponibilidad general (GA), el Tabular Editor CLI requerirá una licencia; los precios aún se están ultimando y se anunciarán antes de la GA.
