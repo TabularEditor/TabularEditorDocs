@@ -33,7 +33,7 @@ Más información en [la entrada oficial del blog](https://powerbi.microsoft.com
 
 Al usar Power BI, encontrarás tres tipos de archivo habituales:
 
-- **.pbix** (Power BI Report)
+- **.pbix** (Report de Power BI)
 - **.pbit** (Plantilla de Power BI)
 - **.pbip** (Proyecto de Power BI)
 
