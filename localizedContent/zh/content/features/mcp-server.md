@@ -1,6 +1,6 @@
 ---
 uid: mcp-server
-title: MCP 服务器
+title: MCP Server
 author: Morten Lønskov
 updated: 2026-09-22
 applies_to:
@@ -18,75 +18,75 @@ applies_to:
           full: true
 ---
 
-# MCP 服务器
+# MCP Server
 
-Tabular Editor 3 可以充当 MCP（Model Context Protocol）服务器。任何支持 MCP 的智能体，例如 Claude Code、GitHub Copilot、VS Code agent 模式、Codex 或 Cursor，都可以连接到正在运行的实例，并直接处理你当前打开的语义模型：读取、查询、分析，以及在你允许的情况下进行修改。
+Tabular Editor 3 can act as an MCP (Model Context Protocol) server. Any agent that speaks MCP, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, connects to the running instance and works on the semantic model you have open: reading it, querying it, analyzing it and, if you allow it, changing it.
 
-使用此功能时，你无需在 Tabular Editor 中配置 AI 提供程序。不用粘贴 API 密钥，也不用再购买第二份订阅。智能来自你已经在付费使用的智能体，而 Tabular Editor 则提供它以前从未真正拥有过的东西：真实的模型——已加载、已验证，随时可编辑。
+You don't configure an AI provider in Tabular Editor to use this. There's no API key to paste and no second subscription to buy. The intelligence comes from the agent you're already paying for, and Tabular Editor supplies what that agent has never had: the real model, loaded, validated and ready to edit.
 
-## 为什么要让智能体对接 Tabular Editor
+## Why run the agent against Tabular Editor
 
-直接编辑磁盘上模型文件的智能体，其实是在盲操作。它只有 `.bim` 文件或 TMDL 文件夹中的文本，无法知道结果能否加载、度量值的 DAX 能否正确解析，也不知道这些更改会对模型其余部分造成什么影响。 Tabular Editor 弥合了这个缺口，因为交给智能体的不是文件。而是模型本身。
+An agent that edits model files on disk is working blind. It has the text of a `.bim` or a TMDL folder and no way to know whether the result loads, whether a measure's DAX resolves, or what the change did to the rest of the model. Tabular Editor closes that gap, because the agent isn't handed files. It's handed the model.
 
-- **你眼前模型的实际状态**，包括未保存的编辑。 Tabular Editor 当前打开什么，智能体就看到什么：Power BI Desktop 模型、PBIP 项目、TMDL 文件夹、`.bim` 文件、Workspace 数据库，或与 Analysis Services、Azure Analysis Services 或 Fabric 的实时连接。无论联机还是脱机，智能体对这些对象的处理方式都一样。
-- **与你使用的同一套引擎。** 智能体所做的更改会通过 [Tabular Object Model wrapper](xref:csharp-scripts) 和同一个 C# Script 引擎执行，具备相同的验证、相同的公式自动修复，以及相同的撤销堆栈。智能体不可能生成一个你手动做不出来的模型状态。
-- **智能体无法独立完成的分析。** [Best Practice Analyzer](xref:best-practice-analyzer) 的结果、VertiPaq分析器统计信息、针对实时数据的 DAX 查询结果，以及 Tabular Editor 知识库，都是智能体可以调用的工具。它不再靠猜测理解你的模型，而是开始实际测量它。
-- **你看得见的审阅步骤。** 智能体所做的一切都会以未保存的更改进入当前会话，并在 [TOM Explorer 和属性视图](xref:unsaved-changes) 中标记出来。你可以在 UI 中查看差异，撤销不想保留的部分，确认满意后再保存。在你保存之前，任何更改都不会写回源内容。
+- **The model as it stands in front of you**, unsaved edits included. Whatever Tabular Editor has open is what the agent sees: a Power BI Desktop model, a PBIP project, a TMDL folder, a `.bim` file, a workspace database or a live connection to Analysis Services, Azure Analysis Services or Fabric. The agent works the same way against all of them, online or offline.
+- **The same engine you use.** Agent changes go through the [Tabular Object Model wrapper](xref:csharp-scripts) and the same C# scripting engine, with the same validation, the same formula fixup and the same undo stack. An agent can't produce a model state you couldn't have produced by hand.
+- **Analysis the agent can't do on its own.** [Best Practice Analyzer](xref:best-practice-analyzer) results, VertiPaq Analyzer statistics, DAX query results against live data and the Tabular Editor knowledge base are all tools the agent can call. It stops guessing about your model and starts measuring it.
+- **A review step you can see.** Everything the agent does lands in your session as unsaved changes, marked in the [TOM Explorer and the Properties view](xref:unsaved-changes). You read the diff in the UI, revert the parts you don't want and save when you're happy. Nothing reaches the source until you save it.
 
-最后这一点，正是委派工作与失去控制之间的区别。代理负责提出建议，结果保留在你的会话中，而由你来检查、测试并保存。
+That last point is the difference between delegating work and losing control of it. The agent proposes, your session holds the result, and you're the one who checks, test and save it.
 
 ## 开始之前
 
-- Tabular Editor 3.27.0 或更高版本，任何版本均可。
-- 已安装 **AI 功能** 组件。从 3.27.0 开始，它已包含在默认安装中。如果你以集中方式部署 Tabular Editor，请参阅 @installation-activation-basic；如果管理员已关闭 AI 功能，请参阅 @policies。
-- 支持通过可流式传输的 HTTP 使用 MCP 的代理。
+- Tabular Editor 3.27.0 or later, any edition.
+- The **AI features** component installed. It's part of a default installation from 3.27.0 onwards. See @installation-activation-basic if you deploy Tabular Editor centrally, and @policies if your administrator has turned AI features off.
+- An agent that supports MCP over streamable HTTP.
 
-## 启动服务器
+## Start the server
 
-1. 选择 **工具 > MCP 服务器...**。
-2. 检查权限（请参阅下文的 [决定代理可以执行哪些操作](#deciding-what-the-agent-may-do)）。默认设置允许代理读取你的模型、运行 Best Practice Analyzer，并使用你已打开的文档选项卡，同时阻止它读取你的数据或更改模型。
-3. 点击 **启动服务器**。
+1. Choose **Tools > MCP Server...**.
+2. Check the permissions (see [Deciding what the agent may do](#deciding-what-the-agent-may-do) below). The defaults let an agent read your model, run the Best Practice Analyzer and work with your open document tabs, and stop it from reading your data or changing the model.
+3. Click **Start server**.
 
-该对话框会显示服务器正在侦听的地址；除非你更改了端口，否则为 `http://127.0.0.1:42100/`。状态栏指示器会从 **MCP 已停止** 切换为 **MCP 已启动**，并在其工具提示中显示该地址。
+The dialog shows the address the server is listening on, `http://127.0.0.1:42100/` unless you've changed the port. A status bar indicator switches from **MCP Stopped** to **MCP Started**, with the address in its tooltip.
 
-![MCP 服务器对话框，显示服务器 URL、已遮蔽的访问令牌，以及五项代理权限](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
+![The MCP Server dialog, showing the server URL, a masked access token and the five agent permission rows](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
 
-![MCP 状态栏指示器显示 MCP Started，其工具提示显示 "MCP 服务器正在侦听 http://127.0.0.1:42100/。点击以打开连接对话框。"](~/content/assets/images/features/mcp-server/status-bar-menu.png)
+![The MCP status bar indicator reading MCP Started, with its tooltip showing "MCP server listening on http://127.0.0.1:42100/. Click to open the connection dialog."](~/content/assets/images/features/mcp-server/status-bar-menu.png)
 
-无论是否打开模型，服务器都能工作。如果代理在未加载模型时连接，它会收到相应提示而不是错误；之后你也可以打开模型，而无需重启 MCP 服务器。
+The server works with or without a model open. An agent that connects while no model is loaded gets told so rather than getting an error, and you can open a model afterwards without restarting the MCP server.
 
-右键单击状态栏指示器，就能使用你平时最常用的功能：启动和停止服务器、复制注册配置，以及打开偏好页面。左键单击则会打开该对话框，而不会改变服务器的运行状态。
+Right-click the status bar indicator for the things you'll want day to day: starting and stopping the server, copying a registration configuration and the preferences page. Left-clicking it opens the dialog without changing whether the server is running.
 
-![MCP 状态栏指示器及其已打开的右键菜单，菜单项包括“MCP 服务器详细信息...”、“停止 MCP 服务器”、“复制 MCP 配置”和“MCP 服务器偏好...”，其中“复制 MCP 配置”子菜单已展开，列出 Claude Code、VS Code、Copilot CLI、Codex 和 Cursor](~/content/assets/images/features/mcp-server/status-bar-context-menu.png)
+![The MCP status bar indicator with its right-click menu open on MCP Server details..., Stop MCP server, Copy MCP configuration and MCP Server preferences..., and the Copy MCP configuration submenu expanded to list Claude Code, VS Code, Copilot CLI, Codex and Cursor](~/content/assets/images/features/mcp-server/status-bar-context-menu.png)
 
-### MCP 偏好
+### MCP preferences
 
-打开 **工具 > 偏好 > AI 功能 > MCP 服务器**。你可以在这里设置 MCP 服务器的偏好，例如让它在应用启动时自动启动。
+Open **Tools > Preferences > AI Features > MCP Server**. Here you can set the preferences for the MCP server to for example start it automatically at start up.
 
-![MCP 服务器偏好，显示“启用 MCP 服务器”“自动启动 MCP 服务器”“需要访问令牌”和端口](~/content/assets/images/pref-mcp-server.png)
+![MCP Server preferences, showing Enable MCP Server, Start MCP server automatically, Require access token and the port](~/content/assets/images/pref-mcp-server.png)
 
-| 偏好               | 默认值   | 作用                                                                |
-| ---------------- | ----- | ----------------------------------------------------------------- |
-| **启用 MCP 服务器**   | 开     | 取消勾选后，会停止正在运行的服务器，并移除菜单项和状态栏指示器                                   |
-| **自动启动 MCP 服务器** | 关     | Tabular Editor 启动时会启动服务器，这样你的代理无需你操心即可连接                          |
-| **需要访问令牌**       | 关     | 要求代理提供服务器对话框中显示的访问令牌。参见 [在共享计算机上运行](#running-on-a-shared-machine) |
-| **端口**           | 42100 | 服务器监听的本地回环端口。可设置为 1024 到 49151 之间的任意值。更改后会使现有的代理注册失效              |
+| 偏好                                 | 默认值   | What it does                                                                                                                                               |
+| ---------------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Enable MCP Server**              | On    | Clearing it stops a running server and removes the menu item and the status bar indicator                                                                  |
+| **Start MCP server automatically** | Off   | Starts the server when Tabular Editor starts, so your agent can connect without you thinking about it                                                      |
+| **Require access token**           | Off   | Makes agents present the access token shown in the server dialog. See [Running on a shared machine](#running-on-a-shared-machine)          |
+| **Port**                           | 42100 | The loopback port the server listens on. Anything from 1024 to 49151. Changing it invalidates existing agent registrations |
 
-完成试用/测试后，勾选 **自动启动 MCP 服务器**。代理注册指向固定地址，因此服务器保持常驻后，你就再也不用操心它了。
+Tick **Start MCP server automatically** once you're past experimenting. An agent registration points at a fixed address, so a server that's always there is a server you never have to think about again.
 
-## 注册代理
+## Register your agent
 
-你只需在代理中注册一次 Tabular Editor。在服务器对话框中，在 **导出配置** 里选择你的代理，然后将复制到剪贴板的内容粘贴进去。该配置包含地址；如果你已启用访问令牌，还会包含访问令牌。服务器会以 `tabular-editor` 为名注册。
+You register Tabular Editor with your agent once. In the server dialog, pick your agent from **Export configuration** and paste what lands on the clipboard. The configuration carries the address, and the access token if you've turned that on. The server registers itself under the name `tabular-editor`.
 
-![导出配置下拉菜单已展开，其中列出了 Claude Code、VS Code、Copilot CLI、Codex 和 Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
+![The Export configuration dropdown, expanded to list Claude Code, VS Code, Copilot CLI, Codex and Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
 
-**Claude Code。** 在终端中运行刚复制的命令：
+**Claude Code.** Run the copied command in a terminal:
 
 ```bash
 claude mcp add --transport http tabular-editor http://127.0.0.1:42100/
 ```
 
-**VS Code**：在 MCP 配置中：
+**VS Code**, in your MCP configuration:
 
 ```json
 {
@@ -99,7 +99,7 @@ claude mcp add --transport http tabular-editor http://127.0.0.1:42100/
 }
 ```
 
-**Copilot CLI**：在 `~/.copilot/mcp-config.json` 中：
+**Copilot CLI**, in `~/.copilot/mcp-config.json`:
 
 ```json
 {
@@ -112,14 +112,14 @@ claude mcp add --transport http tabular-editor http://127.0.0.1:42100/
 }
 ```
 
-**Codex**：在 `~/.codex/config.toml` 中：
+**Codex**, in `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.tabular-editor]
 url = "http://127.0.0.1:42100/"
 ```
 
-**Cursor**：在 `~/.cursor/mcp.json` 中：
+**Cursor**, in `~/.cursor/mcp.json`:
 
 ```json
 {
@@ -131,202 +131,202 @@ url = "http://127.0.0.1:42100/"
 }
 ```
 
-启用 **Require access token** 后，上述每种配置都会按各自格式要求一并携带该令牌。请从对话框中复制配置，而不要手动编写，这样才能确保正确。
+With **Require access token** on, each of these carries the token too, in the shape its own format wants.Copy the configuration from the dialog rather than writing it by hand and you get the right one.
 
-任何其他 MCP 客户端也都可以。通过可流式传输的 HTTP 将其指向 `http://127.0.0.1:42100/`；如果你已要求使用令牌，也请添加相同的标头。
+Any other MCP client works too. Point it at `http://127.0.0.1:42100/` over streamable HTTP, and add the same header if you've required the token.
 
-### 检查是否成功
+### Check that it worked
 
-问你的代理 _我在 Tabular Editor 中连接到了哪个模型？_ 它会回答模型名称、模型的加载方式、是否有未保存的更改，以及它的兼容级别。如果没有打开任何模型，它也会如实说明，这同样是正确答案。
+Ask your agent _what model am I connected to in Tabular Editor?_ It answers with the model name, how the model is loaded, whether it has unsaved changes and its compatibility level. With no model open it says so, which is also a correct answer.
 
-Tabular Editor 中不会弹出任何提示。这正是关键：代理连接之前，权限就已经确定好了。
+Nothing prompts you in Tabular Editor. That's the point: the permissions were settled before the agent connected.
 
-## 决定代理可以做什么
+## Deciding what the agent may do
 
-通过 MCP 连接的代理会在无人值守的情况下运行，而你可以预先决定它能通过 Tabular Editor 执行哪些操作。同一组授权决定了 MCP 服务器和 AI Assistant 可以执行哪些操作。这些选项就在 **工具 > MCP 服务器...** 对话框里，因此你在启动服务器时就可以顺手设置；也可以在 **工具 > 偏好设置 > AI 功能 > 权限** 中设置——两处其实是同一项设置。代理只会获得你的授权所涵盖的工具。其他任何工具都不会提供给它。
+An agent connecting over MCP works unattended and you decide up front what the agent can do through Tabular Editor. The same grants decide what the MCP server and the AI Assistant can do. They sit on the **Tools > MCP Server...** dialog itself, so you can set them on your way to starting the server, and on **Tools > Preferences > AI Features > Permissions**, which is the same setting in both places. The agent is handed exactly the tools your grants cover. Anything else is never offered to it.
 
-把鼠标悬停在某项权限的标签或下拉框上，就会说明该级别会赋予代理什么能力。如果管理员已通过[策略](xref:policies)对某项资源设置了上限，该下拉框就会变成只读，并会明确说明这一点。
+Hovering a permission, either its label or its dropdown, describes what that level gives the agent. Where an administrator has capped a resource by [policy](xref:policies), the dropdown is read-only and says so.
 
-共有五类资源，每类资源各有一个访问级别：
+There are five resources, each with one access level:
 
-| 资源                         | 默认值 | 代理获得的内容                                                          |
-| -------------------------- | --- | ---------------------------------------------------------------- |
-| **模型元数据**                  | 读取  | 读取：表、列、度量值、表达式、描述、关系，以及 VertiPaq分析器统计信息。写入：能够通过 C# Script 脚本更改模型 |
-| **模型数据**                   | 禁止  | 读取：DAX 查询结果，也就是模型中的实际值。需要实时连接                                    |
-| **Best Practice Analyzer** | 读取  | 读取：规则集和分析结果。写入：添加和修改规则                                           |
-| **文档**                     | 写入  | 读取：你已打开的 C# Script 和 DAX 查询选项卡内容。写入：创建和修改它们                      |
-| **宏**                      | 写入  | 读取：你的宏库，包括名称、说明和代码。写入级别仅为尚未推出的宏编辑工具预留                            |
+| Resource                   | 默认值   | What the agent gets                                                                                                                                                                                                   |
+| -------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Model metadata**         | Read  | Read: tables, columns, measures, expressions, descriptions, relationships and VertiPaq Analyzer statistics. Write: the ability to change the model through C# scripts |
+| **Model data**             | Deny  | Read: DAX query results, so actual values from your model. Needs a live connection                                                                                                    |
+| **Best Practice Analyzer** | Read  | Read: the rule set and the analysis results. Write: adding and modifying rules                                                                                        |
+| **Documents**              | Write | Read: the contents of your open C# script and DAX query tabs. Write: creating and modifying them                                                                      |
+| **Macros**                 | Write | Read: your macro library, with names, descriptions and code. Write is reserved for macro-editing tools that don't exist yet                                                           |
 
-授予 **写入** 权限时也包含读取，因此对话框将该级别标记为 **读取/写入**，以明确这一点。**模型数据** 没有写入级别，因为无法将数据值写回模型。
+A **Write** grant covers Read, and the dialog labels that level **Read/Write** to make the point. **Model data** has no Write level, because there's no way to write data values back into a model.
 
-默认情况下，代理会读取你的模型并运行 Best Practice Analyzer。它无法读取任何数据值，也无法更改模型。这两项权限需要你主动提升。
+Out of the box the agent reads your model and runs the Best Practice Analyzer. It can't read a single data value and it can't change the model. Those are the two grants you raise deliberately.
 
-注意默认设&#x7F6E;_&#x786E;&#x5B9E;_&#x5141;许做什么。**文档** 的默认级别是写入，因此代理可以在你的会话中创建脚本和查询选项卡，并覆盖你已经打开的选项卡内容。不会执行任何内容，也不会影响模型，但这仍属于写入；如果你在这些选项卡里保留进行中的工作，这是唯一值得调低的默认权限。
+Note what the defaults _do_ allow. **Documents** starts at Write, so an agent can create script and query tabs in your session and overwrite the contents of ones you already have open. Nothing is executed and nothing reaches the model, but it is a write, and it is the one default worth lowering if you keep work in progress in those tabs.
 
-而那两项需要你主动提升的权限，值得稍作考虑：
+The two you raise deliberately are worth a moment's thought:
 
-- **模型数据 > 读取** 会将模型中的值发送给代理，并通过它传递给代理所使用的提供方。元数据描述你的模型，数&#x636E;_&#x5C31;&#x662F;_&#x4F60;的模型。在你希望代理用真实数字核对其工作时，再授予这项权限，并清楚自己是在这么做。
-- **模型元数据 > 写入** 会让代理从顾问变成编辑。这也是收益最大的一项授权，而 [代理如何更改你的模型](#how-an-agent-changes-your-model) 中介绍的保护措施旨在让授予这项权限变得合理。
+- **Model data > Read** is what sends values from your model to your agent, and through it to whichever provider your agent uses. Metadata describes your model, data _is_ your model. Grant it when you want the agent to check its work against real numbers, and know that's what you're doing.
+- **Model metadata > Write** is what turns the agent from an advisor into an editor. It's also the grant that gives you the most back, and the safeguards described in [How an agent changes your model](#how-an-agent-changes-your-model) exist to make it a reasonable thing to grant.
 
-![AI 功能权限页面：每个资源各有一个下拉菜单，均处于默认级别](~/content/assets/images/pref-ai-permissions.png)
+![The AI Features Permissions page, with one dropdown per resource at its default level](~/content/assets/images/pref-ai-permissions.png)
 
 > [!IMPORTANT]
-> 服务器启动时会读取权限设置，代理连接时会收到自己的工具列表。更改授权后，先停止并重新启动服务器，再重新连接代理。在此之前，代理会继续按它连接时生效的权限运行。
+> Permissions are read when the server starts, and an agent is handed its tool list when it connects. After changing a grant, stop and start the server, then reconnect the agent. Until you do, the agent keeps working under the permissions that were in force when it connected.
 
-## 代理可以做什么
+## What the agent can do
 
-代理连接时，Tabular Editor 会基于你的授权为其提供一组能力。这些都不需要你亲自调用。关键是要知道你可以提出什么请求，以及每个请求依赖哪项授权，因为不在你授权范围内的能力，从一开始就不会被提供，而不是等任务做到一半才被拒绝。
+When an agent connects, Tabular Editor offers it a set of capabilities shaped by your grants. You never invoke any of this yourself. What matters is knowing what you can ask for, and which grant a request depends on, because a capability your grants don't cover is never offered in the first place rather than being refused halfway through a task.
 
-**熟悉环境。** 每个代理都能识别它正在交互的实例，以及该实例当前打开的模型；搜索 Tabular Editor 文档、博客、GitHub 议题和讨论；并查阅脚本 API，也就是模型对象上可用的属性、方法和签名。这些都不会触及你的模型，因此不需要任何授权。
+**Finding its way around.** Every agent can identify the instance it is talking to and the model that instance has open, search the Tabular Editor documentation, blog, GitHub issues and discussions, and look up the scripting API: the properties, methods and signatures available on the model objects. None of that touches your model, so none of it needs a grant.
 
-最后这一点比听上去更重要。这就是为什么代理在编写 Tabular Editor 脚本时，不必凭记忆去猜属性、函数或 API。它会在你当前运行的版本中查出对应的签名。
+That last part matters more than it sounds. It's why an agent writing a Tabular Editor script doesn't have to invent properties, functions or APIs from memory. It looks the signature up, in the version you're running.
 
-**读取模型。** **模型元数据 > 读取** 是默认设置。有了这个权限，代理可以概览你的各个表、每个表的列数和度量值数量，以及所有关系；获取它指定对象的完整详情，包括表达式、说明、格式字符串和数据类型；还可以按名称、说明、DAX 或 M 表达式、格式字符串或注释搜索模型。它也可以请求完整模型，不过这项操作开销较大，而且系统会明确告知它这一点。
+**Reading the model.** With **Model metadata > Read**, which is the default, an agent can take an overview of your tables, their column and measure counts and every relationship; pull full detail for objects it names, including expressions, descriptions, format strings and data types; and search the model by name, description, DAX or M expression, format string or annotation. It can also ask for the model in full, though that is expensive and it is told so.
 
-它还可以看到你在 TOM Explorer 中选择了什么。这点值得注意：选中三个度量值，然后说 _把这些的格式统一一下_，代理就知道“这些”指的是什么。
+It can also see what you have selected in the TOM Explorer. That one is worth knowing about: select three measures, say _format these consistently_, and the agent knows what "these" means.
 
-**评估模型。** **Best Practice Analyzer > 读取** 允许代理列出生效的规则，包括你自定义的规则，并运行分析以返回实际的违规结果。 **Best Practice Analyzer > 写入** 允许它在你的本地规则集中新增或修改规则。 VertiPaq分析器统计信息——即表大小、列基数和内存使用情况——属于 **模型元数据 > 读取**。运行 DAX 查询并返回行数据，除了元数据访问外，还需要 **模型数据 > 读取**；返回的是有上限的行数，而不是无限制的结果集。
+**Measuring the model.** **Best Practice Analyzer > Read** lets an agent list the effective rules, your own included, and run the analysis to get real violations back. **Best Practice Analyzer > Write** lets it add or change rules in your local collection. VertiPaq Analyzer statistics, meaning table sizes, column cardinalities and memory use, fall under **Model metadata > Read**. Running a DAX query and getting rows back needs **Model data > Read** on top of metadata access, and returns a bounded number of rows rather than an unbounded result set.
 
-在这里，最值得委托的一件事就是 _运行 Best Practice Analyzer 并修复它发现的问题_，因为代理拿到的是你模型中真实问题的具体清单，而不是关于语义模型的泛泛建议。
+_Run the Best Practice Analyzer and fix what it finds_ is the single most useful thing to delegate here, because the agent gets a concrete list of real problems in your model instead of generic advice about semantic models.
 
 > [!NOTE]
-> 查询数据需要实时连接，而 VertiPaq 统计信息则需要连接，或使用你已事先收集的统计信息。两者都会在代理连接时就已确定，因此如果你是在之后才连接模型，就需要重新连接代理才能获取它们。
+> Querying data needs a live connection, and VertiPaq statistics need either a connection or statistics you have already collected. Both are settled when the agent connects, so if you connect the model afterwards, reconnect the agent to pick them up.
 
-**你的文档和宏。** 列出你当前打开的脚本和查询标签页只需要元数据访问权限。读取其中的内容需要 **文档 > 读取** 权限。编辑标签页，或新建一个 C# Script 或 DAX 查询供你查看，都需要 **文档 > 写入**。代理以这种方式交给你的任何内容，都会在你看到之前先完成编译，或针对当前打开的模型进行验证，因此它已经有机会纠正自己的错误；而 DAX 查询要完成这种验证，则要求 Tabular Editor 已连接到 Analysis Services 或 Power BI。你的宏库是单独的资源，读取它需要 **宏 > 读取** 权限。
+**Your documents and macros.** Listing your open script and query tabs needs only metadata access. Reading what is in them needs **Documents > Read**. Editing a tab, or putting a new C# script or DAX query in front of you to look at, needs **Documents > Write**. Anything an agent hands you this way is compiled, or validated against the open model, before you see it, so it has already had the chance to correct its own mistakes; a DAX query needs Tabular Editor connected to Analysis Services or Power BI for that validation to happen. Your macro library is a separate resource, read under **Macros > Read**.
 
-**更改模型。** 这需要 **模型元数据 > 写入**，而且它与上面的所有内容差异足够大，值得单独说明。见下文的 [代理如何更改你的模型](#how-an-agent-changes-your-model)。
+**Changing the model.** That takes **Model metadata > Write**, and it works differently enough from everything above to be worth its own section. See [How an agent changes your model](#how-an-agent-changes-your-model) below.
 
-## 代理如何更改你的模型
+## How an agent changes your model
 
-借助 **模型元数据 > 写入**，代理可以直接更改你的模型。它的实现方式是：在后台创建一个 [C# Script](xref:csharp-scripts)，由 Tabular Editor 对其进行编译、安全检查，并针对当前打开的模型运行。
+With **Model metadata > Write**, an agent can change your model directly, and it does this by creating a [C# script](xref:csharp-scripts) in the background that Tabular Editor compiles, checks for safety and runs against the open model.
 
-没有第二条路径，而且这是有意为之。只要 C# Script API 能对模型执行的操作，都可以用这种方式提出，所以没有一份固定的“受支持操作”清单：度量值、列、计算组、透视、翻译、关系、刷新策略、批量重命名、格式化处理。而且，由于每项更改都以同一种方式进入，因此安全性和审核是在同一个位置统一实施，而不是为每种操作各管一套。正是这种间接方式，让代理所做的编辑可以被审查：
+There is no second route, and that is deliberate. Anything the C# scripting API can do to a model can be asked for this way, so there's no list of supported operations to run out of: measures, columns, calculation groups, perspectives, translations, relationships, refresh policies, bulk renames, formatting passes. And because every change arrives the same way, there is one place where safety and review are enforced rather than one per operation. That indirection is what makes agent edits reviewable:
 
-- **一个撤销步骤。** 无论脚本改了什么，它所做的一切都会合并为撤销堆栈中的一个条目。按一次 **Ctrl+Z** 就能把模型恢复原状。见 @undo-redo。
-- **要么全部完成，要么全部不做。** 如果脚本执行到一半抛出异常，所有更改都会被完全回滚。你不会接手一半完成的更改。
-- **结构化摘要。** 代理会收到一份说明，列出它新增、更改或删除的每个对象，以及脚本输出的所有内容。它可以不靠猜测就告诉你它做了什么，也能判断自己是否做了与原本意图不同的事。
-- **不会停下来等你。** 脚本通常会通过 `Output`、`Info`、`Warning` 或 `Error` 显示在屏幕上的信息，会作为结果的一部分返回给代理，而不是弹出一个没人盯着看的对话框来中断调用。在较长时间的调用执行期间，Tabular Editor 会显示 **请稍候** 指示并忽略点击，因此当模型在后台被更改时，你无法继续在该窗口中操作；点击也不会排队，更不会在代理完成时一股脑生效。
-- **在 UI 中有标记。** 在 [TOM Explorer 和属性视图](xref:unsaved-changes) 中，更改过的对象和属性会被着色并加上徽章，直到你保存为止。使用 **显示更改**，把这两个视图筛选为仅显示代理所做的更改；右键单击 **还原**，即可撤销单个属性、单个对象或整个分支，而不影响其他内容。
+- **One undo step.** Everything a script did collapses into a single entry on the undo stack, whatever it touched. One **Ctrl+Z** puts the model back. See @undo-redo.
+- **All or nothing.** A script that throws part-way through is rolled back completely. You never inherit half an edit.
+- **A structured summary.** The agent gets back a description of every object it added, changed or removed, plus anything the script printed. It can tell you what it did without guessing, and it can tell when it did something other than what it intended.
+- **Nothing waits for you.** A message a script would normally put on screen, through `Output`, `Info`, `Warning` or `Error`, is returned to the agent as part of the result instead of stopping the call on a dialog nobody is watching. While a long call runs, Tabular Editor shows a **Please wait** indicator and ignores clicks, so the window cannot be worked in against a model that is being changed underneath you, and clicks do not queue up and land the moment the agent finishes.
+- **Marked in the UI.** Changed objects and properties are tinted and badged in the [TOM Explorer and the Properties view](xref:unsaved-changes) until you save. Use **Show changes** to filter both views down to the agent's work, and right-click **Revert** to undo a single property, a single object or a whole branch without touching the rest.
 
-![编辑菜单已打开，显示单个“撤销 C# Script (MCP)”条目；旁边的 TOM Explorer 以绿色标记新增的度量值、以橙色标记已更改的度量值，并将已删除的度量值用红色删除线标出；属性视图已筛选为仅显示代理更改的那一项属性](~/content/assets/images/features/mcp-server/agent-change-review.png)
+![The Edit menu open on a single Undo C# script (MCP) entry, with the TOM Explorer beside it marking an added measure in green, a changed measure in orange and a deleted measure struck through in red, and the Properties view filtered to the one property the agent changed](~/content/assets/images/features/mcp-server/agent-change-review.png)
 
-这就是评审流程：提出请求，看它落地，筛选出变更内容，撤销你不同意的部分，然后保存。你是在自己早已熟悉的工具中审查差异，而不是读一段摘要然后碰运气。
+That's the review loop: ask, watch it land, filter to what changed, revert what you disagree with, save. You're reviewing a diff in the tool you already know, not reading a summary and hoping.
 
-[AI Assistant](xref:ai-assistant) 聊天也能以同样的方式运行脚本，并且同样只有一步撤销，也同样支持回滚。有两点仍然是代理特有的。它不会弹出提示，因此没有预览对话框，也没有可供你退回的 **取消** 按钮；树中标记出的更改就是你的审查步骤，只不过是在事后，而不是事前。而且，它的撤销记录名为 _C# Script (MCP)_，因此你可以在撤销下拉列表中把代理的操作与聊天的操作区分开来。
+The [AI Assistant](xref:ai-assistant) chat can run scripts the same way, and gets the same single undo step and the same rollback. Two things stay particular to an agent. It is never prompted, so there's no preview dialog and no **Cancel** to fall back on; the marked changes in the tree are your review step, after the fact rather than before it. And its undo entry is named _C# script (MCP)_, so you can tell an agent's work from the chat's in the undo dropdown.
 
-### 代理绝不允许做的事
+### What an agent is never allowed to do
 
-有些事无论你授予了什么权限，都不在允许范围内：
+Some things are off the table regardless of your grants:
 
-- **直接执行 TMSL 和 XMLA。** 对于代理运行的脚本，`ExecuteCommand` 始终会失败。它绕过了对象模型，因此既不能撤消，也不能回滚，所以与上面的所有保证都不兼容。
-- **模型之外的任何操作。** 涉及文件系统、发起 Web 请求或引用外部程序集的脚本，代理一律不会执行。取而代之，它会在 Tabular Editor 中作为 **代理脚本（审查）** 文档打开，并且代理会被告知：你必须自行审查并运行它。这需要 **文档 > 写入** 权限；没有它，脚本会被直接拒绝。这里的检查是对已编译脚本做语义分析，而不是扫描它的文本，所以通过反射、表达式树、`Activator`、`AppDomain`、XML 读取器或反序列化等间接方式达到同样目的，也一样会被拒绝。
-- **查询未获授权的数据。** 脚本中的 DAX 帮助程序与查询工具一样，严格受 **模型数据 > 读取** 权限控制，因此代理无法通过把查询包进脚本来访问数据。
+- **Raw TMSL and XMLA execution.** `ExecuteCommand` always fails for an agent-run script. It bypasses the object model, so it can't be undone or rolled back, which makes it incompatible with every guarantee above.
+- **Anything outside the model.** A script that touches the file system, makes a web request or references an external assembly is never executed for an agent. It opens as an **Agent script (review)** document in Tabular Editor instead, and the agent is told you have to review and run it yourself. This needs the **Documents > Write** grant; without it the script is refused outright. The check is a semantic analysis of the compiled script rather than a scan of its text, so indirect routes to the same places, through reflection, expression trees, `Activator`, `AppDomain`, XML readers or deserialization, are refused too.
+- **Querying data it wasn't granted.** The DAX helpers inside a script are gated on **Model data > Read** exactly like the query tool, so an agent can't reach data by wrapping a query in a script.
 
-### 请求草稿，而不是直接更改
+### Asking for a draft instead of a change
 
-代理不必执行任何操作。有了 **文档 > 写入** 权限，它可以将 C# Script 或 DAX 查询写入 Tabular Editor 的文档中，供你阅读并自行运行。在你看到脚本之前，系统会先编译脚本，并根据你的模型验证查询；如果有错误，会返回给代理，代理可以就地修正文档。
+An agent doesn't have to execute anything. With **Documents > Write** it can put a C# script or a DAX query into a document in Tabular Editor for you to read and run yourself. The script is compiled and the query validated against your model before you see it, and errors go back to the agent, which can correct the document in place.
 
-如果你希望在变更发生前先检查一遍，或者更愿意稍后在其他模型上运行，这就是合适的模式。
+This is the right mode for a change you want to inspect before it happens, or for work you'd rather run against a different model later.
 
-## 一次工作会话
+## A working session
 
-这个闭环是这样的：打开模型，提出需求，看它落地，审查结果，然后保存。实际操作大致就是这样。
+The loop is: open the model, ask for something, watch it land, review it, save it. Here's what that looks like in practice.
 
-**先从问题入手。** 打开一个你接手的模型，然后这样问：
+**Start from what's wrong.** Open a model you inherited and ask:
 
-> 运行 Best Practice Analyzer，告诉我哪些问题值得优先修复，按严重程度从高到低排列。
+> Run the Best Practice Analyzer and tell me what's worth fixing, worst first.
 
-代理会运行分析，获取包含真实对象名称的实际违规项，并基于你的模型进行推理，而不是泛泛而谈语义模型。接着再说 _修复格式字符串违规项_；在已授予 **Model metadata > Write** 的情况下，它会生成一个脚本并运行。 TOM Explorer 中会显示橙色徽章。在[属性视图](xref:unsaved-changes)中单击 **显示更改**，查看每个属性的更改前后值；对你不同意的那两项右键单击 **还原**，然后保存。
+The agent runs the analysis, gets real violations with real object names, and reasons about your model instead of about semantic models in general. Follow up with _fix the format string violations_, and with **Model metadata > Write** granted it writes one script and runs it. The TOM Explorer fills with orange badges. Click **Show changes** in the [Properties view](xref:unsaved-changes) to read the before and after per property, right-click **Revert** on the two you disagree with and save.
 
-**从需求出发。** 把规范、工单或度量值定义表格交给代理：
+**Start from a requirement.** Point the agent at a specification, a ticket or a spreadsheet of measure definitions:
 
-> 把 requirements.md 中的度量值添加到 Sales 表。沿用那里已有的命名和格式字符串。
+> Add the measures in requirements.md to the Sales table. Follow the naming and format strings already used there.
 
-它会先读取现有度量值，因此新增的度量值会与模型中已有的内容保持一致，而不是套用它自己定的一套约定。
+It reads the existing measures first, so the new ones match what's already in the model rather than a convention it invented.
 
-需求文件来自代理自身的 Workspace，并非通过 Tabular Editor 传入。这就是整个分工：你的代理带来它已掌握的项目上下文，而 Tabular Editor 提供代理原本无法看到的模型。
+The requirements file comes from your agent's own workspace, not through Tabular Editor. That split is the whole arrangement: your agent brings the context it already has about your project, and Tabular Editor brings the model it could never see.
 
-**让它检查自己的工作。** 授予 **Model data > Read** 后，代理就能做验证，而不只是声称：
+**Ask it to check its own work.** Grant **Model data > Read** and the agent can verify instead of assert:
 
-> 确认新的 Margin % 度量值在 2025 年得出的总计与旧计算相同。
+> Confirm the new Margin % measure gives the same total as the old calculation for 2025.
 
-它会编写 DAX、运行并进行比较。这项授权会把 _我已经添加了该度量值_ 变成 _我已经添加了该度量值，数字如下_。
+It writes the DAX, runs it and compares. This is the grant that turns _I've added the measure_ into _I've added the measure and here are the numbers_.
 
-**不想直接更改时，就先让它出个草稿。** 只要你想先看一眼：
+**Ask for a draft when you don't want a change.** Any time you'd rather read it first:
 
-> 帮我写一个脚本，把每个度量值重命名为句首大写的 sentence case 格式，但不要运行它。
+> Write me a script that renames every measure to sentence case, but don't run it.
 
-脚本会以文档的形式出现在 Tabular Editor 中，并且已经过编译和安全检查；等你读完后再由你自己运行。
+The script arrives as a document in Tabular Editor, compiled and safety-checked, and you run it yourself when you've read it.
 
-养成两个习惯，这一切都会更顺畅。同时打开多个实例时，要明确你指的是哪一个：代理可以询问某个实例当前加载了哪个模型，但它猜不到你说的是哪一个。另外，在任务之间记得保存，或者至少先检查一下：未保存的更改会越积越多，而差异越小，检查起来就越快。
+Two habits make all of this go better. Say which instance you mean when more than one is open: the agent can ask an instance which model it has, but it can't read your mind about which one you meant. And save, or at least review, between tasks: unsaved changes accumulate, and a smaller diff is a faster review.
 
-## 同时运行多个实例
+## Running several instances
 
-每个 Tabular Editor 实例都会在各自的端口上托管自己的服务器，因此你可以让一个代理对应一个模型，再让第二个代理对应另一个模型。
+Each Tabular Editor instance hosts its own server on its own port, so you can run one agent against one model and a second agent against another.
 
-启动第二个实例，打开 **工具 > MCP 服务器...**，然后单击 **启动服务器**。配置的端口已被占用，因此 Tabular Editor 会在后续 20 个端口中查找，并提供它找到的下一个可用端口。如果这些端口都被占用，它就会改为 Report 冲突，然后你需要在偏好设置中手动选择一个端口。它绝不会在不提示的情况下切换到其他端口，因为你的代理注册指向固定地址，悄悄切换会让它们失效。
+Start the second instance, open **Tools > MCP Server...** and click **Start server**. The configured port is already taken, so Tabular Editor offers the next free one it finds within the following 20 ports. If all of those are busy it reports the conflict instead and you pick a port yourself in preferences. It never moves to a different port silently, because your agent registrations point at a fixed address and a silent move would break them.
 
-以其自身名称在你的代理中注册第二个端口，并在提示中明确你指的是哪一个。
+Register the second port with your agent under its own name, and be explicit in your prompts about which one you mean.
 
-## 在共享计算机上运行
+## Running on a shared machine
 
-服务器绑定到 `127.0.0.1`，因此另一台机器上的任何程序都无法访问它。此外，带有非本地 `Origin` 标头的浏览器请求也会被拒绝，以防御 DNS 重绑定攻击。
+The server binds to `127.0.0.1`, so nothing on another machine can reach it. Browser requests carrying a non-local `Origin` header are rejected on top of that, as a defense against DNS rebinding.
 
-不过，回环隔离并没有听起来那么牢靠。在未启用令牌的情况下，这台计算机上运行的任何进程都可以在无需凭据的情况下连接；而在多名用户同时登录的主机上，例如 Remote Desktop 或 Citrix 服务器，这也包括其他人的会话。
+Loopback is a weaker boundary than it sounds, though. While the token is off, any process running on the machine can connect without credentials, and on a host where several people are signed in at once, a Remote Desktop or Citrix server for instance, that includes other people's sessions.
 
-在 **工具 > 偏好 > AI 功能 > MCP 服务器** 下勾选 **需要访问令牌**，然后重启服务器。之后，代理必须提供服务器对话框中显示的令牌，而你从该对话框复制的注册配置也会包含它。不带该令牌的请求会被拒绝。
+Tick **Require access token** under **Tools > Preferences > AI Features > MCP Server** and restart the server. Agents must then present the token shown in the server dialog, and the registration configurations you copy from the dialog include it. Requests without it are rejected.
 
-令牌旁边的刷新按钮，工具提示为 **重新生成令牌**，会签发一个新的令牌。这会有意让所有现有注册全部失效，并重启正在运行的服务器。因此，当你怀疑令牌已被不该看到的人获知时再使用它，并在之后重新注册你的代理。
+The refresh button beside the token, tooltip **Regenerate token**, issues a new one. That invalidates every existing registration on purpose and restarts a running server, so use it when you think a token has been seen by someone it shouldn't have, and re-register your agents afterwards.
 
-管理员可以通过 `RequireMcpAccessToken` 策略强制所有人都使用令牌，同时也会锁定该偏好设置。参见 @policies。
+Administrators can make the token mandatory for everyone with the `RequireMcpAccessToken` policy, which also locks the preference. See @policies.
 
-## 哪些内容会离开你的计算机
+## What leaves your machine
 
-以这种方式工作时，Tabular Editor 不会与任何 AI 服务提供商通信。它通过回环连接响应你本机上某个进程发起的工具调用，而代理搜索的知识库是应用程序随附的本地数据库，并由 Tabular Editor 自有服务刷新。
+Tabular Editor doesn't contact an AI provider when you work this way. It answers tool calls from a process on your own machine, over a loopback connection, and the knowledge base the agent searches is a local database that ships with the application and is refreshed from Tabular Editor's own service.
 
-与服务提供商通信的是你的代理；使用的是你自己的订阅，并受该服务提供商的条款约束。因此，发送哪些内容、发送给谁的问题，仍然由你在代理处理其他任何 repository 时使用的同一处设置来决定。在 Tabular Editor 这一侧，你可以控制的是权限授予：默认值 **模型数据 > 拒绝** 表示无论代理请求什么，你的模型中的任何值一开始都不会传到代理那里。
+Your agent is what talks to a provider, under your own subscription and that provider's terms. So the question of what gets sent, and to whom, is answered where you already answer it for every other repository your agent works in. The lever you have on the Tabular Editor side is the permission grants: **Model data > Deny**, the default, means no value from your model can reach the agent in the first place, whatever it asks for.
 
-更全面的说明请参阅 @security-privacy，其中包括 [AI 助手](xref:ai-assistant)；它确实会直接调用提供程序，并且需要单独配置。
+See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which does call a provider directly and is configured separately.
 
-## 管理员控制
+## Administrator controls
 
-MCP 服务器默认开启，任何用户都可以将其关闭。管理员能做的不止这些：
+The MCP server is on by default and any user can turn it off. Administrators have more than that:
 
-- `DisableMcpServer` 会彻底移除此功能，仅保留 AI Assistant 聊天功能。
-- `DisableAi` 会关闭所有 AI 功能（包括 MCP 服务器），并确保安装程序运行时不会在本机安装 AI 组件。
-- `RequireMcpAccessToken` 会强制使用令牌身份验证。
-- `DisableCSharpScripts` 会阻止代理运行 C# Script，也不会让它替你起草 C# Script 并插入文档。编写 DAX 查询以及所有仅执行读取的操作都不受影响。
-- `BlockUnsafeScripts` 会保留代理运行脚本的能力，但只允许那些仅限于模型内部的脚本。这与代理本就遵守的界限相同，只是将其应用到 Tabular Editor 中的所有脚本，而不仅限于代理脚本；无论代理提出什么要求，都会强制执行。企业级。
-- 一组企业级策略会对 AI Assistant 和 MCP 服务器在各类资源上的可访问范围设定上限。 `Max...` 上限同时适用于两个通道；`McpMax...` 上限仅适用于 MCP 服务器，并且只能在共享上限的基础上进一步收紧，因此无人值守的代理绝不会被允许拥有超过交互式聊天的权限。同一层级还规定审核日志的位置与保留期，以及 AI 提供程序锁定。
+- `DisableMcpServer` removes the feature entirely, leaving the AI Assistant chat alone.
+- `DisableAi` turns off all AI functionality, the MCP server included, and keeps the AI component off the machine when the installer runs.
+- `RequireMcpAccessToken` forces token authentication.
+- `DisableCSharpScripts` stops an agent both running a C# script and drafting one into a document for you. Writing a DAX query, and everything that only reads, is unaffected.
+- `BlockUnsafeScripts` keeps agent-run scripts but allows only the ones that stay within the model. It is the same line the agent already works to, applied to every script in Tabular Editor rather than to agent scripts alone, and it is enforced whatever the agent asks for. Enterprise tier.
+- A set of Enterprise-tier policies caps what the AI Assistant and the MCP server may reach per resource. The `Max...` ceilings apply to both surfaces; the `McpMax...` ceilings apply to the MCP server alone and can only lower the shared one, so an unattended agent is never allowed more than the interactive chat. The same tier carries the audit log's location and retention, and the AI provider lock.
 
 > [!WARNING]
-> 企业级策略采用“失败即关闭”机制。如果这些值名中的任意一个出现在许可证并非 Enterprise、Consultancy 或 Trial 的计算机上，AI Assistant 和 MCP 服务器将拒绝启动，菜单项和状态栏指示器也会消失。在混合设备环境中，只要统一设置了其中一个值，使用非对应版本的所有人都会被禁用该功能，因此部署这些策略前，请先核对你实际拥有的许可证。参见 @policies。
+> The Enterprise-tier policies fail closed. If any of their value names is present on a machine whose license is not Enterprise, Consultancy or Trial, the AI Assistant and the MCP server refuse to start, and the menu item and the status bar indicator disappear. One value set across a mixed fleet turns the feature off for everyone on the wrong edition, so roll these out against the licenses you actually have. See @policies.
 
-在企业版中，Tabular Editor 还会在本地记录 AI Assistant 和 MCP 服务器执行过的操作，包括代理调用的每个工具，以及代理运行的任何 C# Script 的完整文本。提示词、回复和数据值都不会被记录。服务器对话框中的 **打开审核文件夹**，以及 **工具 > 偏好 > AI 功能** 中的 **打开审核文件夹**，都会带你打开该文件夹。在 Desktop 和 Business 版中，不会记录任何内容，这两个按钮也都不会显示。参见 @ai-audit-log。
+On Enterprise Edition, Tabular Editor also keeps a local record of what the AI Assistant and the MCP server did, including every tool an agent called and the full text of any C# script it ran. Prompts, replies and data values are never recorded. **Open audit folder**, in the server dialog and on **Tools > Preferences > AI Features**, takes you to it. On Desktop and Business nothing is recorded and neither button is shown. See @ai-audit-log.
 
-完整列表、注册表结构和管理模板见 @policies；想了解哪些内容会离开你的电脑，参见 @security-privacy。
+See @policies for the full list, the registry layout and the administrative templates, and @security-privacy for what leaves your machine.
 
 ## 故障排查
 
-| 你看到的现象                                                                    | 实际情况                                                                                                                                                        |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 代理提示它没有可用于 Tabular Editor 的工具                                             | 服务器没有运行，或者代理在服务器启动前就已连接。检查状态栏是否显示 **MCP Started**，然后重新连接智能体                                                                                                 |
-| 智能体看不到你刚授予的权限                                                             | 授权会在服务器启动时读取，工具列表会在连接时确定。停止并重新启动服务器，然后重新连接智能体                                                                                                               |
-| 长时间没有活动后，智能体不再响应                                                          | 20 分钟内没有任何通信的会话会被关闭。重新连接智能体                                                                                                                                 |
-| 智能体报告未打开任何模型                                                              | 服务器独立于你的模型运行。在 Tabular Editor 中打开一个模型后再试一次；无需重启任何内容                                                                                                         |
-| 智能体无法运行 DAX 查询                                                            | **模型数据** 默认设置为 **Deny**。它还需要实时连接：对于从磁盘打开的模型，无论授权怎么写，查询工具都不可用                                                                                                |
-| 连接被 401 拒绝                                                                | **要求访问令牌** 已开启，但智能体没有发送该令牌。从对话框中重新复制注册配置，其中包含它                                                                                                              |
-| 端口已被占用                                                                    | 另一个 Tabular Editor 实例或其他应用程序正在使用该端口。接受 Tabular Editor 提供的下一个可用端口，并更新智能体的注册信息。启用 **Start MCP server automatically** 后，启动时发生冲突不会有任何提示：指示器只会显示 **MCP Stopped** |
-| 菜单中没有 **工具 > MCP 服务器...** | 在偏好设置中未勾选 **启用 MCP 服务器**、AI 功能组件未安装、管理员设置了 `DisableMcpServer` 或 `DisableAi`，或者在未获得相应许可的计算机上设置了 Enterprise 级别的策略值。见 @policies                   |
+| What you see                                                                                | What's happening                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The agent says it has no tools for Tabular Editor                                           | The server isn't running, or the agent connected before it was. Check the status bar reads **MCP Started**, then reconnect the agent                                                                                                                                                                       |
+| The agent can't see a permission you just granted                                           | Grants are read at server start and the tool list is fixed at connect time. Stop and start the server, then reconnect the agent                                                                                                                                                                            |
+| The agent goes quiet after a long break                                                     | A session with no traffic for 20 minutes is closed. Reconnect the agent                                                                                                                                                                                                                                    |
+| The agent reports no model is open                                                          | The server runs independently of your model. Open a model in Tabular Editor and ask again; you don't need to restart anything                                                                                                                                                                              |
+| The agent can't run DAX queries                                                             | **Model data** is **Deny** by default. It also needs a live connection: against a model opened from disk, the query tool is unavailable whatever the grant says                                                                                                                            |
+| Connections are rejected with 401                                                           | **Require access token** is on and the agent isn't sending the token. Re-copy the registration configuration from the dialog, which includes it                                                                                                                                                            |
+| The port is already in use                                                                  | Another Tabular Editor instance or another application has it. Accept the next free port Tabular Editor offers, and update the agent's registration. With **Start MCP server automatically** on, a conflict at startup is silent: the indicator just reads **MCP Stopped** |
+| **Tools > MCP Server...** isn't in the menu | **Enable MCP Server** is unticked in preferences, the AI features component isn't installed, an administrator has set `DisableMcpServer` or `DisableAi`, or an Enterprise-tier policy value is set on a machine that isn't licensed for it. See @policies                                     |
 
 ## 后续步骤
 
-- 完整的权限模型见 @ai-assistant；如果你不想自带智能体，也可以在那里聊天。
+- @ai-assistant for the permission model in full, and for the chat if you'd rather not bring your own agent.
 
-- 通过 @unsaved-changes 查看并撤销智能体所做的更改。
+- @unsaved-changes for reviewing and reverting what an agent did.
 
-- 如需了解脚本能做什么——也就是代理对你的模型能做什么的上限——请参阅 @csharp-scripts。
+- @csharp-scripts for what a script can do, which is the ceiling on what an agent can do to your model.
 
-- 如需了解如何在组织范围内对服务器进行治理，请参阅 @policies。
+- @policies for governing the server across an organization.
 
-- 如果你的代理处理的是 repository 或管道中的模型文件，而不是你当前打开的模型，请参阅 @te-cli-skill。
+- @te-cli-skill if your agent works on model files in a repository or a pipeline rather than on a model you have open.
