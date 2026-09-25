@@ -45,7 +45,7 @@ Los calltips de DAX se actualizan al alternar entre las opciones de sintaxis con
 
 La mayoría de los aspectos de Code Assist se pueden configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Code Assist**](xref:preferences#dax-editor--code-assist).
 
-## Peek Definition
+## Ver la definición
 
 Con el cursor sobre una referencia a un objeto, como una variable o una referencia a una medida, pulsa [Alt+F12] para mostrar un editor en línea con la definición de ese objeto, debajo del cursor. Esto resulta útil cuando desea ver el código DAX de un objeto al que se hace referencia sin salir de la posición actual del documento.
 
@@ -65,9 +65,9 @@ En los scripts DAX y las consultas DAX, a veces es útil incluir la definición 
 
 ## Medida en línea
 
-Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Right-click a measure reference in the DAX editor and choose **Inline Measure**.
+Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Haz clic con el botón derecho en una referencia de medida en el editor de DAX y selecciona **Medida en línea**.
 
-A measure reference implicitly turns the current row into a filter before the measure's expression is evaluated. Pasting the expression in as-is would therefore change the result, so when the reference sits inside a row context, for example as the second argument of an iterator such as [`SUMX`](https://dax.guide/sumx) or [`FILTER`](https://dax.guide/filter), Tabular Editor wraps the inlined expression in [`CALCULATE`](https://dax.guide/calculate) to preserve that behavior:
+Una referencia de medida convierte implícitamente la fila actual en un filtro antes de que se evalúe la expresión de la medida. Por tanto, pegar la expresión tal cual cambiaría el resultado. Así, cuando la referencia está dentro de un contexto de fila —por ejemplo, como segundo argumento de un iterador como [`SUMX`](https://dax.guide/sumx) o [`FILTER`](https://dax.guide/filter)—, Tabular Editor envuelve la expresión en línea con [`CALCULATE`](https://dax.guide/calculate) para conservar ese comportamiento:
 
 ```dax
 // Before using inline measure on the [Margin] measure
@@ -77,13 +77,13 @@ SUMX ( 'Sales', [Margin] )
 SUMX ( 'Sales', CALCULATE ( 'Sales'[Amount] - 'Sales'[Cost] ) )
 ```
 
-The wrap is only added where it can make a difference. The expression is inserted unwrapped when:
+El encapsulado solo se agrega cuando puede marcar la diferencia. La expresión se inserta sin encapsular cuando:
 
-- the reference is **not inside a row context**, including when it already sits inside a `CALCULATE( ... )` of its own
-- the measure's expression **reads nothing from the model** (a constant, a reference to another measure or a call to a function such as `TODAY()`). A reference to a table, a column, a calendar or a [user-defined function](xref:udfs) does count as reading from the model, and does get the wrap
-- the expression **already performs the transition itself**, through a `CALCULATE( ... )` or `CALCULATETABLE( ... )` with no filter arguments. With a filter argument the wrap is still added, because filter arguments are evaluated before the transition
+- la referencia **no está dentro de un contexto de fila**, incluido cuando ya está dentro de su propio `CALCULATE( ... )` propio
+- la expresión de la medida **no lee nada del modelo** (una constante, una referencia a otra medida o una llamada a una función como `TODAY()`). Una referencia a una tabla, una columna, un calendario o una [función definida por el usuario](xref:udfs) sí se considera una lectura del modelo y, por tanto, sí se encapsula
+- la expresión **ya realiza la transición por sí misma**, mediante un `CALCULATE( ... )` o `CALCULATETABLE( ... )` sin argumentos de filtro. Con un argumento de filtro, el envoltorio se sigue agregando, porque los argumentos de filtro se evalúan antes de la transición
 
-If the measure's expression cannot be analyzed, the wrap is added, on the principle that a wrap that was not needed is harmless where a missing one is not.
+Si no se puede analizar la expresión de la medida, se agrega el encapsulado, partiendo del principio de que un encapsulado innecesario no hace daño, mientras que uno ausente sí.
 
 ## Dar formato a DAX
 
