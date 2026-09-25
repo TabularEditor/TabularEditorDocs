@@ -23,15 +23,15 @@ applies_to:
 Este procedimiento explica cómo volver a serializar una Metric View al formato YAML, ya sea como una cadena o guardándola en un archivo.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías están pensadas para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Serializar como cadena
 
-Use `Serialize()` to get the YAML representation.
-This simply re-serializes the YAML you loaded above.
+Use `Serialize()` para obtener la representación en YAML.
+Esto simplemente vuelve a serializar el YAML que cargó anteriormente.
 
 ```csharp {run id=serialize setup=mv-sample after=none output=true}
 var yaml = SemanticBridge.MetricView.Serialize();
@@ -107,8 +107,8 @@ measures:
 
 ## Guardar en un archivo
 
-Use `Save(path)` to write the YAML directly to disk.
-This will write the Metric View you loaded above to disk.
+Use `Save(path)` para escribir el YAML directamente en disco.
+Esto escribirá en disco la vista de métricas que cargó anteriormente.
 
 ```csharp {compile}
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
@@ -202,8 +202,8 @@ measures:
 
 ## Pasos a seguir
 
-- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
-- [Import a Metric View to Tabular](xref:semantic-bridge-import)
+- [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
+- [Importar una vista de métricas a Tabular](xref:semantic-bridge-import)
 
 ## Ver también
 
