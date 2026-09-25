@@ -1,5 +1,5 @@
 ---
-uid: how-to-filter-query-objects-linq
+uid: como-filtrar-objetos-de-consulta-con-linq
 title: Cómo filtrar y consultar objetos con LINQ
 author: Morten Lønskov
 updated: 2026-04-10
@@ -163,7 +163,7 @@ En las expresiones de reglas de BPA, la sintaxis difiere de la de LINQ en C#. Dy
 
 ## Ver también
 
-- @advanced-scripting
-- @using-bpa-sample-rules-expressions
-- @how-to-navigate-tom-hierarchy
-- @how-to-dynamic-linq-vs-csharp-linq
+- @scripting-avanzado
+- @como-usar-expresiones-de-reglas-de-ejemplo-bpa
+- @como-navegar-por-la-jerarquia-de-tom
+- @como-usar-dynamic-linq-frente-a-csharp-linq
