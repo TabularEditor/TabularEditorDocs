@@ -60,7 +60,7 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 3. (Opcional) Agrega una o varias columnas al Pivot Grid en el área de Filtro, el área de Columnas o el área de Filas.
 4. Haz clic con el botón derecho en la celda de valor dentro del Pivot Grid y elige **Depurar este valor**.
 
-![Debug From Pivot](~/content/assets/images/features/debug-from-pivot.png)
+![Depurar desde tabla dinámica](~/content/assets/images/features/debug-from-pivot.png)
 
 # Depuración mediante una Consulta DAX
 
@@ -72,14 +72,14 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 
 3. Pulsa F5 para ejecutar la consulta en Tabular Editor 3. Localiza el valor que quieras depurar, haz clic con el botón derecho en la celda y elige **Depurar**.
 
-![Debug From Query](~/content/assets/images/features/debug-from-query.png)
+![Depurar desde consulta](~/content/assets/images/features/debug-from-query.png)
 
 # Vistas de depuración
 
 El depurador proporciona las siguientes vistas (si están ocultas, puedes acceder a ellas mediante el menú **Depurar > Ventanas**).
 
 - Variables locales
-- Watch
+- Inspección
 - Contexto de evaluación
 - Árbol de llamadas
 
@@ -97,7 +97,7 @@ Si prefiere inspeccionar el valor de variables locales en una ventana de Consult
 
 ![Configuración del depurador de Dax](~/content/assets/images/features/dax-debugger-settings.png)
 
-## Watch
+## Inspección
 
 Esta vista le permite introducir cualquier expresión DAX, que se calculará dentro del contexto de evaluación actual. Puede introducir expresiones escalares y de tabla, puede usar todas las funciones DAX disponibles y hacer referencia a variables dentro del ámbito de evaluación actual. Los valores de seguimiento se actualizan automáticamente al avanzar a otra subexpresión o cuando se cambia el contexto de evaluación. **Los valores de seguimiento siempre se evalúan en el ámbito del elemento actualmente seleccionado en la pila del contexto de evaluación**.
 
@@ -113,7 +113,7 @@ Para añadir, duplicar o eliminar expresiones de Inspección, utilice el menú c
 
 La opción **Generar consulta** es idéntica al botón de la lupa de la columna **Valor**, como se resalta en la captura de pantalla siguiente. Al hacer clic en esto, el depurador abrirá un nuevo documento de Consulta DAX, que define tanto el contexto del cálculo como el propio cálculo, lo que te permitirá inspeccionar los resultados con más detalle. Esto resulta especialmente útil cuando la expresión de seguimiento es una expresión de tabla, como se muestra a continuación:
 
-![Inspect Watch](~/content/assets/images/inspect-watch.png)
+![Inspeccionar la ventana de inspección](~/content/assets/images/inspect-watch.png)
 
 > [!TIP]
 > ¿Cuál es la diferencia entre la vista **Locals** y la vista **Watch**?
@@ -125,19 +125,19 @@ La opción **Generar consulta** es idéntica al botón de la lupa de la columna 
 
 Esta vista proporciona información sobre el contexto de evaluación de DAX de la subexpresión actual. Por ejemplo, una expresión `CALCULATE` puede realizar una transición de contexto o agregar un filtro al contexto de evaluación, o un iterador `SUMX` puede agregar un contexto de fila.
 
-![Evaluation Context](~/content/assets/images/evaluation-context.png)
+![contexto de evaluación](~/content/assets/images/evaluation-context.png)
 
 Puede hacer doble clic en un elemento de la pila de contexto de evaluación, para llevar el foco a ese elemento. Esto hará que todas las expresiones de **Watch** se vuelvan a evaluar en el nuevo contexto (es decir, todos los contextos desde la parte inferior de la pila hasta e incluyendo el elemento actualmente enfocado). Esto se ilustra en la animación siguiente. Fíjese también en cómo puede inspeccionar el valor de columnas individuales en el contexto de fila activo desplazándose por las filas dentro de cualquier iteración activa:
 
-![Call Tree](~/content/assets/images/navigating-evaluation-context.gif)
+![Árbol de llamadas](~/content/assets/images/navigating-evaluation-context.gif)
 
 También puedes activar o desactivar filtros individuales del contexto de filtro externo (por ejemplo, las columnas de agrupación en la llamada a [`SUMMARIZECOLUMNS`](https://dax.guide/summarizecolumns) que generó la consulta o los filtros especificados en un Pivot Grid). Esto se ilustra en la animación siguiente. Los filtros activados o desactivados de esta manera se aplicarán tanto a Watch como a Locals.
 
-![Call Tree](~/content/assets/images/toggle-filters.gif)
+![Árbol de llamadas](~/content/assets/images/toggle-filters.gif)
 
 Por último, puede examinar las primeras 1000 filas de cualquier iterador y establecer el contexto de fila actual en una fila específica dentro de esas primeras 1000 haciendo clic en el botón Zoom de la columna **Fila**.
 
-![Browse Row Contexts](~/content/assets/images/browse-row-contexts.png)
+![Explorar contextos de fila](~/content/assets/images/browse-row-contexts.png)
 
 ## Árbol de llamadas
 
