@@ -13,16 +13,16 @@ applies_to:
 
 # Crear grupos de tablas
 
-## Propósito del script
+## Objetivo del script
 
 Este script crea grupos de tablas predeterminados en Tabular Editor 3.
 
-## Secuencia de comandos
+## Script
 
 ### Título del script
 
 ```csharp
-// Recorrer todas las tablas:
+// Loop through all tables:
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
@@ -31,27 +31,27 @@ foreach(var table in Model.Tables)
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tablas que contienen medidas visibles, pero sin relaciones con otras tablas
+        // Tables containing visible measures, but no relationships to other tables
         table.TableGroup = "Measure Groups";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tablas exclusivamente en el lado "muchos" de las relaciones:
+        // Tables exclusively on the "many" side of relationships:
         table.TableGroup = "Facts";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tablas sin ninguna relación, que son tablas calculadas y no tienen medidas:
+        // Tables without any relationships, that are Calculated Tables and do not have measures:
         table.TableGroup = "Parameter Tables";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tablas en el lado "uno" de las relaciones:
+        // Tables on the "one" side of relationships:
         table.TableGroup = "Dimensions";
     }
     else
     {
-        // Todas las demás tablas:
+        // All other tables:
         table.TableGroup = "Misc";
     }
 }
