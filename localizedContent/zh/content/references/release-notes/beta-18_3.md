@@ -1,7 +1,7 @@
 # Tabular Editor 3 BETA-18.3
 
 > [!IMPORTANT]
-> Tabular Editor 已推出新版本。 You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
+> Tabular Editor 已推出新版本。你可以在[这里](https://docs.tabulareditor.com/references/release-notes)找到最新版本。
 
 - 下载 [Tabular Editor 3 BETA-18.3](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.3.x86.msi)
 - 下载 [Tabular Editor 3 BETA-18.3（64 位）](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.3.x64.msi)
@@ -30,22 +30,22 @@
 
 ## 从 Power Query 源更新表架构
 
-Tabular Editor 3 beta 发布新版本了。 And I'm really excited about this one, for one particular reason:
+Tabular Editor 3 beta 发布新版本了。而我之所以对这个功能特别兴奋，是因为一个特别的原因：
 
-Tabular Editor 首次能够检测 Power Query 数据源和分区的架构更改。 And not just for relational data sources, but for ANY Power Query expression that can be evaluated by your Analysis Services engine. "How on earth is that even possible?!?", you might be thinking. Well, pay close attention to that last sentence: "ANY Power Query expression that can be evaluated by your Analysis Services engine".
+Tabular Editor 首次能够检测 Power Query 数据源和分区的架构更改。而且不仅适用于关系型数据源，也适用于你的 Analysis Services 引擎可计算的任何 Power Query 表达式。“这怎么可能？！”你可能会这么想。那么，请特别留意最后这句话：“你的 Analysis Services 引擎可计算的任何 Power Query 表达式”。
 
-关于 Analysis Services 引擎，有一个鲜为人知的事实：它实际上是一个事务型系统。 This means that we can start a transaction against a database that is already deployed on Analysis Services, make some metadata changes, refresh some data, query some data and then finally roll back the transaction, leaving the database in the original state as if we didn't even touch it at all.
+关于 Analysis Services 引擎，有一个鲜为人知的事实：它实际上是一个事务型系统。这意味着，我们可以针对一个已经部署到 Analysis Services 的数据库启动事务，进行一些元数据更改、刷新一些数据、查询一些数据，最后再回滚事务，让数据库恢复到原始状态，仿佛我们根本没有动过它。
 
-因此，为了检测 Power Query 分区的架构变化，Tabular Editor 3 现在会在模型中添加一个隐藏的临时表，并对我们要检测其架构的源查询使用 M 函数 [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema) 来填充该表。 Then, that temporary table is refreshed on the server (using the credentials that are already present on the server to access the data source) - this refresh only takes a split second, thanks to query folding happening inside the M engine. Finally, Tabular Editor will query the table to read the schema, before rolling back the entire transaction. The result:
+因此，为了检测 Power Query 分区的架构变化，Tabular Editor 3 现在会在模型中添加一个隐藏的临时表，并对我们要检测其架构的源查询使用 M 函数 [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema) 来填充该表。随后，这个临时表会在服务器上刷新（使用服务器上已有的凭据访问数据源）——由于 M 引擎内部发生了查询折叠，这次刷新只需一瞬间。最后，Tabular Editor 会查询该表以读取架构，然后回滚整个事务。结果如下：
 
-![image](~/content/assets/images/beta-18-3-01.gif)
+![图片](~/content/assets/images/beta-18-3-01.gif)
 
-唯一需要注意的是：Tabular Editor 3 必须连接到一个 Analysis Services 实例。不过，你正在处理的模型是否包含任何数据并不重要——只要数据源的凭据存储在 AS 中（并且 AS 确实能够访问该数据源）即可。 This technique is particularly useful if you use Tabular Editor 3's [workspace mode](https://docs.tabulareditor.com/Workspace-Database.html).
+唯一需要注意的是：Tabular Editor 3 必须连接到一个 Analysis Services 实例。不过，你正在处理的模型是否包含任何数据并不重要——只要数据源的凭据存储在 AS 中（并且 AS 确实能够访问该数据源）即可。如果你使用 Tabular Editor 3 的[工作区模式](https://docs.tabulareditor.com/Workspace-Database.html)，这项技术尤其有用。
 
-In addition to detecting column names and data types, Tabular Editor 3 will also let you update the Description property from the source (if present). On SQL Server sources, this would be the MS_Description extended property. If a column is renamed in the source, it will show up in the Apply Schema Changes dialog as a column import and a column remove. However, as shown in the GIF above, if you Ctrl+Right Click on these two schema changes, you can combine them as a single "rename source column" schema change. The advantage of this approach, is that Tabular Editor 3 will automatically fix up any DAX expressions that reference the renamed column.
+除了检测列名和数据类型外，Tabular Editor 3 还允许你从源端更新 Description 属性（如果有）。对于 SQL Server 源，这就是 MS_Description 扩展属性。如果源中的某列被重命名，它会在“应用架构更改”对话框中显示为“导入列”和“删除列”两项架构更改。不过，正如上面的 GIF 所示，如果你对这两项架构更改执行 Ctrl+右键单击，就可以把它们合并为一项“重命名源列”的架构更改。这种方法的好处是，Tabular Editor 3 会自动修复所有引用该重命名列的 DAX 表达式。
 
 ### 此版本的限制：
 
 - 只有当 Tabular Editor 连接到 Analysis Services 实例时，“架构比较”选项才适用于 Power Query 分区
-- Schema compare while offline will only be available for Legacy (Provider) partitions, similar to Tabular Editor 2.X. However, this functionality is not included in BETA-18.1, as I am initially looking for feedback on schema compare for Power Query partitions. Both this feature and the Import Tables Wizard will be available in the next beta release.
-- 该功能也可用于 Power BI Desktop 模型，但要注意，对表执行添加/修改/删除列，并不在[外部工具受支持的建模操作](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)之列。 Also, be aware that Power BI Desktop may be caching metadata for certain types of data sources, so you may have to run a refresh within Power BI Desktop before Tabular Editor can pick up the schema changes.
+- 脱机状态下的架构比较将仅适用于 Legacy（提供程序）分区，这与 Tabular Editor 2.X 类似。不过，BETA-18.1 还不包含此功能，因为现阶段我想先收集大家对 Power Query 分区架构比较功能的反馈。该功能和“导入表向导”都会在下一个 Beta 版本中提供。
+- 该功能也可用于 Power BI Desktop 模型，但要注意，对表执行添加/修改/删除列，并不在[外部工具受支持的建模操作](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)之列。另外，要注意，Power BI Desktop 可能会缓存某些类型数据源的元数据，因此你可能需要先在 Power BI Desktop 中刷新一次，Tabular Editor 才能检测到这些架构更改。
