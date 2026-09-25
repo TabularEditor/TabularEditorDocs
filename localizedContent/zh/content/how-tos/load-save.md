@@ -1,6 +1,6 @@
 ---
 uid: load-save-model
-title: 加载与保存模型元数据
+title: Load and save model metadata
 author: Morten Lønskov
 updated: 2026-09-22
 applies_to:
@@ -11,63 +11,63 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "桌面版无法打开或保存模型元数据文件。"
+          note: "Desktop Edition cannot open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
           full: true
 ---
 
-# 加载与保存模型元数据
+# Load and save model metadata
 
-Tabular Editor 可将模型元数据从文件、文件夹或服务器读取到内存中，并将其写回原位置或另存到新位置。
+Tabular Editor reads model metadata into memory from a file, a folder or a server, and writes it back to the same place or to a new one.
 
 > [!NOTE]
-> 元数据指的是表、度量值、关系等的定义，而不是数据本身。加载模型不会加载其表中的行数据。如需处理数据，请参阅[表格预览](xref:pivot-grid)和[高级刷新](xref:advanced-refresh)。
+> Metadata is the definition of your tables, measures, relationships and so on, not your data. Loading a model doesn't load the rows in its tables. See [Table Preview](xref:pivot-grid) and [Advanced refresh](xref:advanced-refresh) for working with data.
 
-## 加载模型
+## Loading a model
 
-![“文件”菜单，其中“打开”子菜单已展开，列出了“从文件打开模型”、“从数据库打开模型”、“从文件夹打开模型”、“文件”以及“从 Metric View YAML 导入”，并包含“保存”、“另存为”和“保存到文件夹”命令](~/content/assets/images/file-menu-open.png)
+![The File menu with the Open submenu expanded, listing Model from File, Model from DB, Model from Folder, File and Import from Metric View YAML alongside the Save, Save As and Save to Folder commands](~/content/assets/images/file-menu-open.png)
 
-| 来源                                                                 | 命令                                                                                                                            |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| `Model.bim` 或 `.bim` 文件                                            | **文件 > 打开 > 从文件打开模型...**                                                      |
-| 采用 JSON 或 [表格模型定义语言 (TMDL)](xref:tmdl) 格式的文件夹结构 | **文件 > 打开 > 从文件夹打开模型...**                                                     |
-| Analysis Services 或 Power BI XMLA 数据库                              | **文件 > 打开 > 从数据库打开模型...** (**Ctrl+Shift+O**)               |
-| Power BI Desktop 的运行实例                                             | **文件 > 打开 > 从数据库打开模型...**，或从 Power BI Desktop 的 **外部工具** 功能区启动 Tabular Editor |
+| Source                                                                                                                        | 命令                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A `Model.bim` or `.bim` file                                                                                                  | **File > Open > Model from file...**                                                                          |
+| A folder structure, in either the JSON or the [Tabular Model Definition Language (TMDL)](xref:tmdl) format | **File > Open > Model from folder...**                                                                        |
+| An Analysis Services or Power BI XMLA database                                                                                | **File > Open > Model from DB...** (**Ctrl+Shift+O**)                                      |
+| A running instance of Power BI Desktop                                                                                        | **File > Open > Model from DB...**, or start Tabular Editor from Power BI Desktop's **External Tools** ribbon |
 
-`.bim` 文件的兼容级别必须为 1200 或更高。更早的级别使用较旧的基于 XML 的格式，Tabular Editor 无法打开此类格式。
+A `.bim` file must be Compatibility Level 1200 or newer. Earlier levels use the older XML-based format, which Tabular Editor doesn't open.
 
-有关 Tabular Editor 可识别的所有内容(包括并非模型元数据的受支持文件类型)，可查看[支持的文件类型](xref:supported-files)。
+For everything Tabular Editor recognises, including the supporting file types that aren't model metadata, see [Supported file types](xref:supported-files).
 
 > [!TIP]
-> **文件 > 最近使用的表格模型** 可重新打开您之前打开过的模型，无论它来自文件、文件夹还是数据库。
+> **File > Recent tabular models** reopens a model you had open before, whether it came from a file, a folder or a database.
 
-## 保存模型
+## Saving a model
 
-**文件 > 保存** (**Ctrl+S**) 会将模型保存回您加载它的位置。从文件加载的模型会写回到该文件。从文件夹加载的模型会以该文件夹当前使用的格式保存回该文件夹。从数据库加载的模型会部署回该数据库。
+**File > Save** (**Ctrl+S**) writes the model back where you loaded it from. A model loaded from a file goes back to that file. A model loaded from a folder goes back into that folder, in the format it already uses. A model loaded from a database is deployed back to that database.
 
-若要将模型写入其他位置，或改用其他格式：
+To write a model somewhere else, or in a different format:
 
-- **文件 > 另存为...** 会将模型元数据保存为单个 `.bim` 文件。
-- **文件 > 保存到文件夹...** 会将模型元数据保存为[文件夹结构](xref:save-to-folder)，格式可以是 JSON 或 TMDL，具体取决于 **工具 > 偏好 > 文件格式 > 保存到文件夹** 下设置的序列化模式。
+- **File > Save As...** saves the model metadata as a single `.bim` file.
+- **File > Save to folder...** saves the model metadata as a [folder structure](xref:save-to-folder), in either the JSON or the TMDL format, depending on the serialization mode under **Tools > Preferences > File Formats > Save-to-folder**.
 
 > [!IMPORTANT]
-> 从旧版 JSON 文件夹结构加载的模型，在使用 **文件 > 保存** 时会按相同格式保存，即使你的偏好中设置的是 TMDL。只有在你明确使用 **文件 > 保存到文件夹...** 时，格式才会发生变化。参见 [TMDL](xref:tmdl)。
+> A model loaded from a legacy JSON folder structure is saved in that same format when you use **File > Save**, even if your preferences say TMDL. The format changes only when you explicitly use **File > Save to folder...**. See [TMDL](xref:tmdl).
 
-## 重新加载
+## Reloading
 
-**文件 > 从磁盘重新加载** 会丢弃自上次保存以来所做的所有更改，并从源位置重新加载元数据。对于从服务器打开的模型，该命令会显示为 **从服务器重新加载**；而对于源尚未确定的模型，则显示为 **从源重新加载**。在 Tabular Editor 3.26 及更早版本，以及 Tabular Editor 2 中，该命令名为 **文件 > 还原**。
+**File > Reload from disk** discards everything you've changed since your last save and reloads the metadata from the source. For a model you opened from a server, the command reads **Reload from server** instead, and for a model whose source is not yet known, **Reload from source**. In Tabular Editor 3.26 and earlier, and in Tabular Editor 2, the command is called **File > Revert**.
 
-只有在可能丢失内容时才会要求你确认：如果存在未保存的更改，会先出现 **重新加载模型元数据？** 提示。重新加载运行期间，状态栏会报告相关信息；完成后也会提示已完成。
+You are asked to confirm only when there is something to lose: with unsaved changes, a **Reload model metadata?** prompt appears first. The status bar reports the reload while it runs, and says so when it is done.
 
-如果在你打开模型期间，某个代理、脚本或 `git pull` 改写了元数据文件，Tabular Editor 会检测到并为你重新加载模型，这样两个副本就能保持同步，无需手动还原。参见 [从磁盘自动重新加载](xref:auto-reload)。
+If an agent, a script or a `git pull` rewrites the metadata files while you have the model open, Tabular Editor notices and reloads the model for you, so the two copies stay in step without a manual revert. See [Auto-reload from disk](xref:auto-reload).
 
 > [!WARNING]
-> 在让任何工具写入模型元数据之前（包括 Tabular Editor），请先备份。保存会覆盖源，重新加载无法找回你已保存的更改。
+> Back up your model metadata before you let any tool write to it, Tabular Editor included. A save overwrites the source, and reloading can't bring back changes you've already saved.
 
 ## 后续步骤
 
-- [保存到文件夹](xref:save-to-folder)：了解文件夹格式，以及控制如何将模型拆分到多个文件中的序列化设置。
-- 如果有多人共同处理这个模型，参见 [使用 Git 和保存到文件夹启用并行开发](xref:parallel-development)。
-- [部署](xref:deployment)：将模型写入 Analysis Services 服务器，而不是磁盘。
+- [Save to folder](xref:save-to-folder) for the folder formats and the serialization settings that control how a model is split across files.
+- [Enabling parallel development using Git and Save to Folder](xref:parallel-development) if more than one person works on the model.
+- [Deployment](xref:deployment) to write the model to an Analysis Services server rather than to disk.
