@@ -26,7 +26,7 @@ applies_to:
 **La actualización incremental se modifica ajustando las propiedades de la política de actualización.** Según lo que desee cambiar, ajustará una propiedad distinta. Encontrarás una descripción completa de estas propiedades [aquí](xref:incremental-refresh-about#overview-of-all-properties).
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 solo está disponible para Datasets alojados en el servicio Power BI Datasets. En Analysis Services se requiere la [creación de particiones](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
+> La configuración de la actualización incremental con Tabular Editor 3 solo se admite para Datasets alojados en el servicio Power BI Datasets. Para Analysis Services, se requiere [particionado](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado.
 
 ---
 
@@ -40,7 +40,7 @@ A continuación se muestra una descripción general de cómo modificar una polí
 
 3. **Busque las propiedades de "política de actualización":** En la ventana _Propiedades_, vaya a la sección _política de actualización_.
 
-    <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
+   <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
 4. **Cambiar la propiedad:** Cambie la **Propiedad** indicada en las secciones siguientes, según lo que desee cambiar. Para ver un resumen de todas las propiedades de la política de actualización y lo que hacen, consulta [aquí](xref:incremental-refresh-about#overview-of-all-properties).
 
@@ -48,11 +48,11 @@ A continuación se muestra una descripción general de cómo modificar una polí
 
 6. **Aplicar política de actualización:** Haga clic con el botón derecho en la tabla y seleccione _Aplicar política de actualización_.
 
-    <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
 7. **Actualizar todas las particiones:** Haga clic mientras mantiene pulsada la tecla Mayús para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
-    <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 
@@ -134,14 +134,14 @@ A continuación se muestra una descripción general de los cambios habituales qu
 2. Copia la siguiente expresión M y sustituye _LastUpdate_ por el nombre de columna que quieras.
 
 ```M
-// Recupera el valor máximo de la columna [LastUpdate]
-// Sustituye LastUpdate por el nombre de tu propia columna
-// Los datos se actualizarán para cualquier registro donde el valor de esta columna
-//    sea igual al valor máximo de la columna en toda la tabla
+// Retrieves the maximum value of the column [LastUpdate]
+// Replace LastUpdate with your own column name
+// The data will refresh for any records where the value in this column
+//    equals the maximum value in the column across the entire table
 let
     #"maxLastUpdate" =
         List.Max(
-            // Sustituye lo siguiente por el nombre de tu columna y de tu tabla
+            // Replace the below with your column and table name
             Orders[LastUpdate] 
         ),
 
@@ -173,7 +173,7 @@ Si quieres generar particiones sustituyendo la fecha actual (para generar distin
 Con la tabla de actualización incremental seleccionada, ejecuta el siguiente script en el panel _'Nuevo C# Script'_ de Tabular Editor, en lugar de aplicar la política de actualización haciendo clic con el botón derecho en la tabla.
 
 ```csharp
-// Todo: reemplaza por tu fecha efectiva
+// Todo: replace with your effective date
 var effectiveDate = new DateTime(2020, 1, 1);  
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
