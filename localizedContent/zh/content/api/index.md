@@ -13,18 +13,18 @@ updated: 2026-01-27
 
 ## 开始使用
 
-在 Tabular Editor 中编写脚本时，最常用的两个对象是 [`Selected`](xref:TabularEditor.Shared.Interaction.Selection) 和 [`Model`](xref:TabularEditor.TOMWrapper.Model)。前者可让你访问当前在 TOM Explorer 中选中的对象，后者可让你访问当前已加载的 Data model 中的任何对象。这两个对象都可作为全局 [`ScriptHost`](xref:TabularEditor.Shared.Scripting.ScriptHost) 对象的成员属性使用。
+在 Tabular Editor 中编写脚本时，最常用的两个对象是 [`Selected`](xref:TabularEditor.Shared.Interaction.Selection) 和 [`Model`](xref:TabularEditor.TOMWrapper.Model)。前者可让你访问当前在 TOM Explorer 中选中的对象，后者可让你访问当前已加载的 Data model 中的任何对象。这两个对象都可作为全局 [`ScriptHost`](xref:TabularEditor.Shared.Scripting.ScriptHost) 对象的成员属性进行访问。
 
-此外，`ScriptHost` 对象还包含一些静态方法，这些方法会作为全局方法向脚本公开（也就是说，无需加上 `ScriptHost` 前缀即可调用）。这些方法也称为 @script-helper-methods。
+此外，`ScriptHost` 对象还包含一些静态方法，这些方法会作为全局方法向脚本公开（也就是说，无需加上 `ScriptHost` 前缀即可调用）。这些方法也被称为 @script-helper-methods。
 
 ## 示例
 
 ```csharp
-// 显示一个对话框，提示用户选择一个度量值：
+// Displays a dialog to the user prompting them to select a measure:
 var myMeasure = SelectMeasure();
 
-// 在模型的第一张表上创建一个新的度量值，其名称和表达式
-// 与先前选中的度量值相同：
+// Creates a new measure on the first table of the model, with the same name and expression
+// as the previously selected measure:
 Model.Tables.First().AddMeasure(myMeasure.Name + " copy", myMeasure.Expression);
 ```
 
