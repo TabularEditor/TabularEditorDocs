@@ -19,12 +19,12 @@ applies_to:
 
 # Fragmentos de script útiles
 
-Aquí tienes una colección de pequeños fragmentos de código para que empieces a usar la [funcionalidad de scripting avanzado](xref:advanced-scripting) de Tabular Editor. Muchos de estos scripts te resultarán útiles si los guardas como [Acciones personalizadas](xref:custom-actions), para que puedas reutilizarlos fácilmente desde el menú contextual.
+Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](xref:advanced-scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](xref:custom-actions), so that you can easily reuse them from the context menu.
 
 Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
 
 > [!TIP]
-> Si buscas material de referencia estructurado, organizado por patrones, sobre C# Script y Dynamic LINQ, consulta la serie de guías prácticas [Patrones de scripting](xref:how-to-navigate-tom-hierarchy). Para consultar la API completa del wrapper de TOM, ve a @api-index.
+> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](xref:how-to-navigate-tom-hierarchy) how-to series. Para consultar la API completa del wrapper de TOM, ve a @api-index.
 
 ***
 
@@ -73,7 +73,7 @@ foreach(var m in Selected.Measures) {
 Aquí usamos la propiedad `DaxObjectName` para generar una referencia sin calificar y usarla en la expresión DAX, ya que se trata de una medida: `[MeasureName]`. Guarda esto como una Acción personalizada llamada "Inteligencia temporal\Crear medida YTD" que se aplique a las medidas. Crea acciones similares para MTD, LY y lo que necesites. Después, crea lo siguiente como una nueva acción:
 
 ```csharp
-// Invoca todas las Acciones personalizadas de inteligencia temporal:
+// Invoke all Time Intelligence Custom Actions:
 CustomAction(@"Time Intelligence\Create YTD measure");
 CustomAction(@"Time Intelligence\Create MTD measure");
 CustomAction(@"Time Intelligence\Create LY measure");
@@ -88,48 +88,48 @@ Por supuesto, también puedes poner todos tus cálculos de inteligencia temporal
 ```csharp
 var dateColumn = "'Date'[Date]";
 
-// Crea medidas de inteligencia temporal para cada medida seleccionada:
+// Creates time intelligence measures for every selected measure:
 foreach(var m in Selected.Measures) {
-    // Acumulado del año:
+    // Year-to-date:
     m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Nombre
-        "TOTALYTD(" + m.DaxObjectName + ", " + dateColumn + ")",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " YTD",                                       // Name
+        "TOTALYTD(" + m.DaxObjectName + ", " + dateColumn + ")",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
     
-    // Año anterior:
+    // Previous year:
     m.Table.AddMeasure(
-        m.Name + " PY",                                       // Nombre
-        "CALCULATE(" + m.DaxObjectName + ", SAMEPERIODLASTYEAR(" + dateColumn + "))",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " PY",                                       // Name
+        "CALCULATE(" + m.DaxObjectName + ", SAMEPERIODLASTYEAR(" + dateColumn + "))",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );    
     
-    // Variación interanual
+    // Year-over-year
     m.Table.AddMeasure(
-        m.Name + " YoY",                                       // Nombre
-        m.DaxObjectName + " - [" + m.Name + " PY]",            // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " YoY",                                       // Name
+        m.DaxObjectName + " - [" + m.Name + " PY]",            // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
     
-    // Variación interanual %:
+    // Year-over-year %:
     m.Table.AddMeasure(
-        m.Name + " YoY%",                                       // Nombre
-        "DIVIDE([" + m.Name + " YoY], [" + m.Name + " PY])",    // Expresión DAX
-        m.DisplayFolder                                         // Carpeta de visualización
-    ).FormatString = "0.0 %";                                   // Establecer la cadena de formato como porcentaje
+        m.Name + " YoY%",                                       // Name
+        "DIVIDE([" + m.Name + " YoY], [" + m.Name + " PY])",    // DAX expression
+        m.DisplayFolder                                         // Display Folder
+    ).FormatString = "0.0 %";                                   // Set format string as percentage
     
-    // Acumulado del trimestre:
+    // Quarter-to-date:
     m.Table.AddMeasure(
-        m.Name + " QTD",                                            // Nombre
-        "TOTALQTD(" + m.DaxObjectName + ", " + dateColumn + ")",    // Expresión DAX
-        m.DisplayFolder                                             // Carpeta de visualización
+        m.Name + " QTD",                                            // Name
+        "TOTALQTD(" + m.DaxObjectName + ", " + dateColumn + ")",    // DAX expression
+        m.DisplayFolder                                             // Display Folder
     );
     
-    // Acumulado del mes:
+    // Month-to-date:
     m.Table.AddMeasure(
-        m.Name + " MTD",                                       // Nombre
-        "TOTALMTD(" + m.DaxObjectName + ", " + dateColumn + ")",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " MTD",                                       // Name
+        "TOTALMTD(" + m.DaxObjectName + ", " + dateColumn + ")",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
 }
 ```
@@ -139,17 +139,17 @@ foreach(var m in Selected.Measures) {
 Si quieres establecer propiedades adicionales en la medida recién creada, el script anterior se puede modificar así:
 
 ```csharp
-// Crea una medida TOTALYTD para cada medida seleccionada.
+// Creates a TOTALYTD measure for every selected measure.
 foreach(var m in Selected.Measures) {
     var newMeasure = m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Nombre
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " YTD",                                       // Name
+        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
-    newMeasure.FormatString = m.FormatString;               // Copiar la cadena de formato de la medida original
+    newMeasure.FormatString = m.FormatString;               // Copy format string from original measure
     foreach(var c in Model.Cultures) {
-        newMeasure.TranslatedNames[c] = m.TranslatedNames[c] + " YTD"; // Copiar los nombres traducidos para cada configuración regional
-        newMeasure.TranslatedDisplayFolders[c] = m.TranslatedDisplayFolders[c]; // Copiar las carpetas de visualización traducidas
+        newMeasure.TranslatedNames[c] = m.TranslatedNames[c] + " YTD"; // Copy translated names for every culture
+        newMeasure.TranslatedDisplayFolders[c] = m.TranslatedDisplayFolders[c]; // Copy translated display folders
     }
 }
 ```
@@ -163,7 +163,7 @@ A veces es útil tener traducciones predeterminadas aplicadas a todos los objeto
 El script siguiente recorrerá todas las configuraciones regionales del modelo y, para cada objeto visible que aún no tenga una traducción, asignará los valores predeterminados:
 
 ```csharp
-// Aplicar traducciones predeterminadas a todos los objetos traducibles (visibles) en todas las configuraciones regionales del modelo:
+// Apply default translations to all (visible) translatable objects, across all cultures in the model:
 foreach(var culture in Model.Cultures)
 {
     ApplyDefaultTranslation(Model, culture);
@@ -183,13 +183,13 @@ foreach(var culture in Model.Cultures)
 
 void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
 {
-    // Solo aplicar la traducción predeterminada cuando todavía no exista una traducción:
+    // Only apply the default translation when a translation does not already exist:
     if(string.IsNullOrEmpty(obj.TranslatedNames[culture]))
     {
-        // Traducción predeterminada del nombre:
+        // Default name translation:
         obj.TranslatedNames[culture] = obj.Name;
 
-        // Traducción predeterminada de la descripción:
+        // Default description translation:
         var dObj = obj as IDescriptionObject;
         if(dObj != null && string.IsNullOrEmpty(obj.TranslatedDescriptions[culture])
             && !string.IsNullOrEmpty(dObj.Description))
@@ -197,7 +197,7 @@ void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
             obj.TranslatedDescriptions[culture] = dObj.Description;
         }
 
-        // Traducción predeterminada de la carpeta de visualización:
+        // Default display folder translation:
         var fObj = obj as IFolderObject;
         if(fObj != null && string.IsNullOrEmpty(fObj.TranslatedDisplayFolders[culture])
             && !string.IsNullOrEmpty(fObj.DisplayFolder))
@@ -238,8 +238,8 @@ var baseMeasure = Model.Tables["Reseller Sales"].Measures["Reseller Total Sales"
 
 foreach(var measure in Selected.Measures)
 {
-    /* Quita el comentario de la línea siguiente si quieres que 'measure' quede oculta
-       en las perspectivas en las que 'baseMeasure' está oculta: */
+    /* Uncomment the line below, if you want 'measure' to be hidden
+       from perspectives that 'baseMeasure' is hidden in: */
     // measure.InPerspective.None();
 
     measure.InPerspective.CopyFrom(baseMeasure.InPerspective);
@@ -249,14 +249,14 @@ foreach(var measure in Selected.Measures)
 Esta técnica también se puede usar al generar nuevos objetos desde código. Por ejemplo, si queremos asegurarnos de que las medidas de inteligencia temporal generadas automáticamente solo sean visibles en las mismas perspectivas que su medida base, podemos ampliar el script de la sección anterior así:
 
 ```csharp
-// Crea una medida TOTALYTD para cada medida seleccionada.
+// Creates a TOTALYTD measure for every selected measure.
 foreach(var m in Selected.Measures) {
     var newMeasure = m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Nombre
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " YTD",                                       // Name
+        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
-    newMeasure.InPerspective.CopyFrom(m.InPerspective);        // Aplicar las perspectivas de la medida base
+    newMeasure.InPerspective.CopyFrom(m.InPerspective);        // Apply perspectives from the base measure
 }
 ```
 
@@ -271,8 +271,8 @@ Si necesitas proporcionar una partición personalizada para una tabla, un C# Scr
 Este ejemplo genera una partición por mes. Selecciona una tabla que tenga asignada la anotación `PartitionTemplateSQL` y luego ejecuta el script.
 
 ```csharp
-var firstPartition = new DateTime(2018,1,1); // Fecha de la primera partición
-var lastPartition = new DateTime(2020,12,1); // Fecha de la última partición
+var firstPartition = new DateTime(2018,1,1); // First partition date
+var lastPartition = new DateTime(2020,12,1); // Last partition date
 
 var templateSql = Selected.Table.GetAnnotation("PartitionTemplateSQL");
 if(string.IsNullOrEmpty(templateSql)) throw new Exception("No partition template!");
@@ -280,20 +280,20 @@ if(string.IsNullOrEmpty(templateSql)) throw new Exception("No partition template
 var currentPartition = firstPartition;
 while(currentPartition <= lastPartition)
 {
-    // Calcula los CalendarID "desde" y "hasta" (valores enteros) en función de la fecha de currentPartition:
+    // Calculate the from and to CalendarID's (integer values) based on the currentPartition date:
     var calendarIdFrom = currentPartition.ToString("yyyyMMdd");
     var calendarIdTo = currentPartition.AddMonths(1).AddDays(-1).ToString("yyyyMMdd");
     
-    // Determina un nombre único para la partición; como particionamos a nivel mensual, usamos yyyyMM:
+    // Determine a unique name for the partition - since we're partitioning at a monthly level, we just use yyyyMM:
     var partitionName = Selected.Table.Name + "_" + currentPartition.ToString("yyyyMM");
     
-    // Sustituye los valores de los marcadores de posición en la plantilla SQL de partición:
+    // Swap in the placeholder values in the partition template SQL:
     var partitionQuery = string.Format(templateSql, calendarIdFrom, calendarIdTo);
     
-    // Crea la partición (usa .AddMPartition si usaste una plantilla de consulta M en lugar de SQL):
+    // Create the partition (use .AddMPartition if you used an M query template instead of SQL):
     Selected.Table.AddPartition(partitionName, partitionQuery);
     
-    // Avanza al mes siguiente (cambia esto a .AddDays, .AddYears, etc. si necesitas más o menos particiones):
+    // Increment to next month (change this to .AddDays, .AddYears, etc. if you need more or fewer partitions):
     currentPartition = currentPartition.AddMonths(1);
 }
 ```
@@ -305,14 +305,14 @@ while(currentPartition <= lastPartition)
 En algunos flujos de trabajo, puede ser útil editar en bloque varias propiedades de los objetos con Excel. Usa el siguiente fragmento para exportar un conjunto estándar de propiedades a un archivo .TSV, que después se puede importar (ver más abajo).
 
 ```csharp
-// Exporta propiedades de los objetos seleccionados actualmente:
+// Export properties for the currently selected objects:
 var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
 
-El archivo .TSV resultante se ve así al abrirlo en Excel:
+The resulting .TSV file looks like this, when opened in Excel:
 ![image](~/content/assets/images/useful-script-snippets-03.png)
-El contenido de la primera columna (Object) es una referencia al objeto. Si se cambia el contenido de esta columna, es posible que la importación posterior de las propiedades no funcione correctamente. Para cambiar el nombre de un objeto, cambia solo el valor de la segunda columna (Name).
+The contents of the first column (Object) is a reference to the object. Si se cambia el contenido de esta columna, es posible que la importación posterior de las propiedades no funcione correctamente. Para cambiar el nombre de un objeto, cambia solo el valor de la segunda columna (Name).
 
 De forma predeterminada, el archivo se guarda en la misma carpeta donde se encuentra TabularEditor.exe. De forma predeterminada, solo se exportan las siguientes propiedades (cuando corresponda, según el tipo de objeto exportado):
 
@@ -326,7 +326,7 @@ De forma predeterminada, el archivo se guarda en la misma carpeta donde se encue
 Para exportar propiedades diferentes, proporciona una lista de nombres de propiedades separados por comas, que se exportarán como segundo argumento de `ExportProperties`:
 
 ```csharp
-// Exporta los nombres y las expresiones de filas de detalle de todas las medidas de la tabla seleccionada actualmente:
+// Export the names and Detail Rows Expressions for all measures on the currently selected table:
 var tsv = ExportProperties(Selected.Table.Measures, "Name,DetailRowsExpression");
 SaveFile("Exported Properties 2.tsv", tsv);
 ```
@@ -336,7 +336,7 @@ Los nombres de propiedad disponibles se encuentran en la [documentación de la A
 Para importar propiedades, usa el siguiente fragmento:
 
 ```csharp
-// Importa y aplica las propiedades del archivo especificado:
+// Imports and applies the properties in the specified file:
 var tsv = ReadFile("Exported Properties 1.tsv");
 ImportProperties(tsv);
 ```
@@ -440,7 +440,7 @@ foreach(var row in tsvRows.Skip(1))
 }
 ```
 
-Si necesitas automatizar este proceso, guarda el script anterior en un archivo y usa la [Tabular Editor CLI](xref:command-line-options) de la siguiente manera:
+If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](xref:command-line-options) as follows:
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
@@ -489,7 +489,7 @@ Esto supone que las particiones de la tabla 'Reseller Sales' utilizan un origen 
 
 ## Dar formato a expresiones DAX
 
-Consulta [FormatDax](xref:script-helper-methods) para obtener más información.
+Please see [FormatDax](xref:script-helper-methods) for more information.
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
@@ -722,7 +722,7 @@ Están disponibles los siguientes métodos:
 | `DataSet ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
 | `object EvaluateDax(string dax)`                              | Ejecuta la _expresión_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto que representa el resultado. Si la expresión DAX es escalar, se devuelve un objeto del tipo correspondiente (string, long, decimal, double, DateTime). Si la expresión DAX es de tipo tabla, se devuelve un [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6).                                                                                                                                                                       |
 
-Llama a estos métodos directamente, sin ningún prefijo. Hasta Tabular Editor 3.26.x, también se podía acceder a ellos a través del objeto `Model.Database`; a partir de la versión 3.27.0 ya no, por lo que `Model.Database.ExecuteCommand(tmsl)` deja de compilar y la forma correcta es `ExecuteCommand(tmsl)`.
+Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
 
 Darren Gosbell presenta [aquí](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/) un caso de uso interesante: generar medidas basadas en datos mediante el método `ExecuteDax`.
 
@@ -745,7 +745,7 @@ ExecuteCommand(tmsl);
 A partir de Tabular Editor 2.16.6 o Tabular Editor 3.2.3, puede usar la siguiente sintaxis para enviar comandos XMLA sin procesar a Analysis Services. El siguiente ejemplo muestra cómo se puede usar para vaciar la caché del motor de AS:
 
 ```csharp
-var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">
+var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">  
   <Object>
     <DatabaseID>{0}</DatabaseID>
   </Object>
@@ -803,7 +803,7 @@ Puedes usar el siguiente script para evaluar una consulta DAX y volcar los resul
 ```csharp
 using System.IO;
 
-// Este script evalúa una consulta DAX y escribe los resultados en un archivo usando un formato separado por tabulaciones:
+// This script evaluates a DAX query and writes the results to file using a tab-separated format:
 
 var dax = "EVALUATE 'Customer'";
 var file = @"c:\temp\file.csv";
@@ -812,7 +812,7 @@ var columnSeparator = "\t";
 using(var daxReader = ExecuteReader(dax))
 using(var fileWriter = new StreamWriter(file))
 {
-    // Escribir encabezados de columna:
+    // Write column headers:
     fileWriter.WriteLine(string.Join(columnSeparator, Enumerable.Range(0, daxReader.FieldCount - 1).Select(f => daxReader.GetName(f))));
 
     while(daxReader.Read())
@@ -845,15 +845,15 @@ in
 El siguiente script sustituirá la primera aparición de un valor entre comillas dobles por un nombre de servidor y la segunda aparición de un valor entre comillas dobles por un nombre de base de datos. Ambos valores de sustitución se leen desde variables de entorno:
 
 ```csharp
-// Este script se usa para sustituir los nombres del servidor y la base de datos en
-// todas las particiones de Power Query, por los proporcionados mediante variables
-// de entorno:
+// This script is used to replace the server and database names across
+// all power query partitions, with the ones provided through environment
+// variables:
 var server = "\"" + Environment.GetEnvironmentVariable("SQLServerName") + "\"";
 var database = "\"" + Environment.GetEnvironmentVariable("SQLDatabaseName") + "\"";
 
-// Esta función extraerá todos los valores entre comillas de la expresión M y devolverá una lista de cadenas
-// con los valores extraídos (en orden), ignorando cualquier valor entre comillas cuando una almohadilla (#)
-// preceda a la comilla:
+// This function will extract all quoted values from the M expression, returning a list of strings
+// with the values extracted (in order), but ignoring any quoted values where a hashtag (#) precedes
+// the quotation mark:
 var split = new Func<string, List<string>>(m => { 
     var result = new List<string>();
     var i = 0;
@@ -864,11 +864,11 @@ var split = new Func<string, List<string>>(m => {
     }
     return result;
 });
-var GetServer = new Func<string, string>(m => split(m)[0]);    // El nombre del servidor suele ser la primera cadena encontrada
-var GetDatabase = new Func<string, string>(m => split(m)[1]);  // El nombre de la base de datos suele ser la segunda cadena encontrada
+var GetServer = new Func<string, string>(m => split(m)[0]);    // Server name is usually the 1st encountered string
+var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name is usually the 2nd encountered string
 
-// Recorre todas las particiones del modelo y sustituye los nombres del servidor y de la base de datos de las particiones
-// por los especificados en las variables de entorno:
+// Loop through all partitions on the model, replacing the server and database names from the partitions
+// with the ones specified in environment variables:
 foreach(var p in Model.AllPartitions.OfType<MPartition>())
 {
     if (p.Expression.Contains("Source = Sql.Database"))
@@ -895,20 +895,20 @@ Versión MSOLEDBSQL, que lee la información de conexión de las particiones M y
 ```csharp
 #r "Microsoft.VisualBasic"
 
-// Este script sustituye todas las particiones de Power Query de este modelo por una
-// partición legacy usando la cadena de conexión proporcionada con autenticación
-// AAD INTERACTIVE. El script asume que todas las particiones de Power Query
-// cargan datos desde el mismo origen de datos basado en SQL Server.
+// This script replaces all Power Query partitions on this model with a
+// legacy partition using the provided connection string with INTERACTIVE
+// AAD authentication. The script assumes that all Power Query partitions
+// load data from the same SQL Server-based data source.
 
-// Proporciona la siguiente información:
+// Provide the following information:
 var authMode = "ActiveDirectoryInteractive";
-var userId = Microsoft.VisualBasic.Interaction.InputBox("Escribe tu nombre de usuario de AAD", "Nombre de usuario", "name@domain.com", 0, 0);
+var userId = Microsoft.VisualBasic.Interaction.InputBox("Type your AAD user name", "User name", "name@domain.com", 0, 0);
 if(userId == "") return;
-var password = ""; // Déjalo en blanco cuando uses la autenticación ActiveDirectoryInteractive
+var password = ""; // Leave blank when using ActiveDirectoryInteractive authentication
 
-// Esta función extraerá todos los valores entre comillas de la expresión M y devolverá una lista de cadenas
-// con los valores extraídos (en orden), ignorando cualquier valor entre comillas cuando una almohadilla (#) preceda
-// a la comilla:
+// This function will extract all quoted values from the M expression, returning a list of strings
+// with the values extracted (in order), but ignoring any quoted values where a hashtag (#) precedes
+// the quotation mark:
 var split = new Func<string, List<string>>(m => { 
     var result = new List<string>();
     var i = 0;
@@ -919,15 +919,15 @@ var split = new Func<string, List<string>>(m => {
     }
     return result;
 });
-var GetServer = new Func<string, string>(m => split(m)[0]);    // El nombre del servidor suele ser la primera cadena encontrada
-var GetDatabase = new Func<string, string>(m => split(m)[1]);  // El nombre de la base de datos suele ser la segunda cadena encontrada
-var GetSchema = new Func<string, string>(m => split(m)[2]);    // El nombre del esquema suele ser la tercera cadena encontrada
-var GetTable = new Func<string, string>(m => split(m)[3]);     // El nombre de la tabla suele ser la cuarta cadena encontrada
+var GetServer = new Func<string, string>(m => split(m)[0]);    // Server name is usually the 1st encountered string
+var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name is usually the 2nd encountered string
+var GetSchema = new Func<string, string>(m => split(m)[2]);    // Schema name is usually the 3rd encountered string
+var GetTable = new Func<string, string>(m => split(m)[3]);     // Table name is usually the 4th encountered string
 
 var server = GetServer(Model.AllPartitions.OfType<MPartition>().First().Expression);
 var database = GetDatabase(Model.AllPartitions.OfType<MPartition>().First().Expression);
 
-// Agrega un origen de datos legacy al modelo:
+// Add a legacy data source to the model:
 var ds = Model.AddDataSource("AzureSQL");
 ds.Provider = "System.Data.OleDb";
 ds.ConnectionString = string.Format(
@@ -938,7 +938,7 @@ ds.ConnectionString = string.Format(
     userId,
     password);
 
-// Quita las particiones de Power Query de todas las tablas y las sustituye por una única partición legacy:
+// Remove Power Query partitions from all tables and replace them with a single Legacy partition:
 foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()))
 {
     var mPartitions = t.Partitions.OfType<MPartition>();
@@ -953,19 +953,20 @@ foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()
 Versión SQLNCLI que lee la información de conexión desde variables de entorno:
 
 ```csharp
-// Este script sustituye todas las particiones de Power Query de este modelo por una
-// partición legacy, leyendo el nombre del servidor SQL, el nombre de la base de datos, el nombre de usuario
-// y la contraseña desde las variables de entorno correspondientes. El script asume
-// que todas las particiones de Power Query cargan datos desde el mismo origen de datos basado en SQL Server.
+// This script replaces all Power Query partitions on this model with a
+// legacy partition, reading the SQL server name, database name, user name
+// and password from corresponding environment variables. The script assumes
+// that all Power Query partitions load data from the same SQL Server-based
+// data source.
 
 var server = Environment.GetEnvironmentVariable("SQLServerName");
 var database = Environment.GetEnvironmentVariable("SQLDatabaseName");
 var userId = Environment.GetEnvironmentVariable("SQLUserName");
 var password = Environment.GetEnvironmentVariable("SQLUserPassword");
 
-// Esta función extraerá todos los valores entre comillas de la expresión M y devolverá una lista de cadenas
-// con los valores extraídos (en orden), ignorando cualquier valor entre comillas cuando una almohadilla (#) preceda
-// a la comilla:
+// This function will extract all quoted values from the M expression, returning a list of strings
+// with the values extracted (in order), but ignoring any quoted values where a hashtag (#) precedes
+// the quotation mark:
 var split = new Func<string, List<string>>(m => { 
     var result = new List<string>();
     var i = 0;
@@ -976,12 +977,12 @@ var split = new Func<string, List<string>>(m => {
     }
     return result;
 });
-var GetServer = new Func<string, string>(m => split(m)[0]);    // El nombre del servidor suele ser la primera cadena encontrada
-var GetDatabase = new Func<string, string>(m => split(m)[1]);  // El nombre de la base de datos suele ser la segunda cadena encontrada
-var GetSchema = new Func<string, string>(m => split(m)[2]);    // El nombre del esquema suele ser la tercera cadena encontrada
-var GetTable = new Func<string, string>(m => split(m)[3]);     // El nombre de la tabla suele ser la cuarta cadena encontrada
+var GetServer = new Func<string, string>(m => split(m)[0]);    // Server name is usually the 1st encountered string
+var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name is usually the 2nd encountered string
+var GetSchema = new Func<string, string>(m => split(m)[2]);    // Schema name is usually the 3rd encountered string
+var GetTable = new Func<string, string>(m => split(m)[3]);     // Table name is usually the 4th encountered string
 
-// Agrega un origen de datos legacy al modelo:
+// Add a legacy data source to the model:
 var ds = Model.AddDataSource("AzureSQL");
 ds.Provider = "System.Data.SqlClient";
 ds.ConnectionString = string.Format(
@@ -991,7 +992,7 @@ ds.ConnectionString = string.Format(
     userId,
     password);
 
-// Quita las particiones de Power Query de todas las tablas y las sustituye por una única partición legacy:
+// Remove Power Query partitions from all tables and replace them with a single Legacy partition:
 foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()))
 {
     var mPartitions = t.Partitions.OfType<MPartition>();
