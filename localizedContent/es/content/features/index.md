@@ -34,24 +34,24 @@ Esta sección contiene documentación sobre las características de Tabular Edit
 ### Exploración de datos y conectividad
 
 - @import-tables - Funcionalidad de importación de tablas
-- @connectivity - Conectarse a Data sources y elegir el autenticador adecuado
+- @connectivity - Connecting to data sources, and which authenticator to choose
   - @connect-sql-server, @connect-snowflake, @connect-databricks, @connect-oracle
   - @connect-odbc, @connect-oledb, @connect-onelake, @connect-dataflows
-- @table-preview - Inspeccionar el contenido de una tabla fila por fila
+- @table-preview - Inspect a table's contents row by row
 - @pivot-grid - Análisis y visualización de datos
 - @tipos-de-modelo-semantico
   - @modelo-sql-de-direct-lake
   - @limitaciones-de-dq-over-as
 
-### Características de IA
+### AI Features
 
-- @ai-assistant - Desarrollo de modelos mediante chat usando la clave de tu proveedor de IA
-- @mcp-server - Deja que un agente externo, como Claude Code, GitHub Copilot o Cursor, trabaje en el modelo que tienes abierto
-- @ai-audit-log - Consulta lo que hicieron el Asistente de IA y el servidor MCP
+- @ai-assistant - Chat-based model development using your own AI provider key
+- @mcp-server - Let an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open
+- @ai-audit-log - See what the AI Assistant and the MCP server did
 
 ### Funciones avanzadas de modelado
 
-- @user-context-calculated-columns - Columnas calculadas evaluadas por usuario y qué puede hacer referencia a ellas
+- @user-context-calculated-columns - Calculated columns evaluated per user, and what can reference them
 - @metadata-translation-editor - Compatibilidad multilingüe
 - @perspective-editor - Gestión de perspectivas del modelo
 
@@ -68,7 +68,7 @@ Esta sección contiene documentación sobre las características de Tabular Edit
 - @workspace-mode - Modo de desarrollo colaborativo
 - @tmdl - Compatibilidad con Tabular Model Definition Language
 - @save-to-folder - Serializar modelos en estructuras de carpetas
-- @auto-reload - Mantener sincronizados el modelo cargado y los archivos en disco
+- @auto-reload - Keeping the loaded model and the files on disk in step
 
 ### Línea de comandos e integración
 
