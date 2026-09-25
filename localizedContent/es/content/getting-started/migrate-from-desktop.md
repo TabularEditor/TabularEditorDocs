@@ -131,7 +131,7 @@ Para obtener más información sobre las capacidades del Editor de expresiones a
 
 Con una medida seleccionada en el **Explorador TOM**, usa la opción **Measure > Show dependencies** (SHIFT+F12). Esto hace que se abra una nueva ventana que muestra el árbol de dependencias de la expresión DAX de esa medida. Puedes alternar entre ver las dependencias ascendentes y descendentes.
 
-![Show Dependencies](~/content/assets/images/show-dependencies.png)
+![Mostrar dependencias](~/content/assets/images/show-dependencies.png)
 
 Al hacer doble clic en un elemento de la vista de dependencias, se navegará hasta ese objeto en el **Explorador TOM**.
 
@@ -141,7 +141,7 @@ Busca la medida que quieres modificar en el **Explorador TOM** y selecciónala. 
 
 Una vez seleccionada la medida, busca la propiedad `Format String` en la cuadrícula de **Properties**, expándela y ajusta la cadena de formato según tus preferencias. Fíjate en el botón desplegable a la derecha de la propiedad `Format`. También puedes escribir libremente una cadena de formato directamente en la propiedad `Format String`.
 
-![Format String](~/content/assets/images/format-string.png)
+![Cadena de formato](~/content/assets/images/format-string.png)
 
 ### Cómo modificar la expresión DAX de varias medidas
 
