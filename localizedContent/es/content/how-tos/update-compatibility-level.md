@@ -40,7 +40,7 @@ Si necesita cambiar la plataforma de destino en lugar de habilitar nuevas caract
 Actualiza cuando:
 
 - Existe una característica en Power BI Desktop, pero falta la propiedad TOM relacionada en Tabular Editor
-- Necesitas funcionalidades incorporadas recientemente, como **calendarios personalizados** (1701+), **funciones definidas por el usuario en DAX** (1702+), **columnas calculadas con contexto de usuario** (1705+) o **Comportamiento de indexación de cadenas** (1706+)
+- You need newly introduced capabilities like **custom calendars** (1701+), **DAX user-defined functions** (1702+), **user-context calculated columns** (1705+) or **String Indexing Behavior** (1706+)
 - Estás estandarizando el desarrollo entre entornos y quieres conjuntos mínimos de características coherentes
 
 ## Antes de empezar
@@ -84,11 +84,11 @@ Establece el nivel de compatibilidad en el mínimo necesario para tu funcionalid
 
 Ejemplos:
 
-- **Grupos de cálculo:** 1500+
+- **Calculation groups:** 1500+
 - **Calendarios personalizados:** 1701+
 - **UDFs de DAX:** 1702+
-- **Columnas calculadas con contexto de usuario** (la propiedad _Expression Context_ de la columna): 1705+
-- **Comportamiento de indexación de cadenas** en una columna: 1706+
+- **User-context calculated columns** (the column's _Expression Context_ property): 1705+
+- **String Indexing Behavior** on a column: 1706+
 
 > [!NOTE]
 > Los niveles mínimos necesarios para las funcionalidades pueden cambiar a medida que evoluciona la plataforma. Verifica siempre los requisitos previos en la documentación actual. Algunos niveles/funcionalidades son exclusivos de Power BI y es posible que no estén disponibles en SSAS/AAS.
