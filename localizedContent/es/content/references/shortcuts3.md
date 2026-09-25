@@ -21,7 +21,7 @@ applies_to:
 
 ## General
 
-| Comando                               | Atajo        |
+| Comando                               | Shortcut     |
 | ------------------------------------- | ------------ |
 | Nuevo modelo                          | Ctrl+N       |
 | Abrir archivo                         | Ctrl+O       |
@@ -35,48 +35,48 @@ applies_to:
 
 ## Editar
 
-| Comando          | Atajo  |
-| ---------------- | ------ |
-| Seleccionar todo | Ctrl+A |
-| Copiar           | Ctrl+C |
-| Cortar           | Ctrl+X |
-| Pegar            | Ctrl+V |
-| Deshacer         | Ctrl+Z |
-| Rehacer          | Ctrl+Y |
-| Buscar           | Ctrl+F |
-| Reemplazar       | Ctrl+H |
+| Comando          | Shortcut |
+| ---------------- | -------- |
+| Seleccionar todo | Ctrl+A   |
+| Copiar           | Ctrl+C   |
+| Cortar           | Ctrl+X   |
+| Paste            | Ctrl+V   |
+| Deshacer         | Ctrl+Z   |
+| Rehacer          | Ctrl+Y   |
+| Buscar           | Ctrl+F   |
+| Reemplazar       | Ctrl+H   |
 
 ## Modelado de Data model
 
-| Comando                                           | Atajo de teclado |
-| ------------------------------------------------- | ---------------- |
-| Propiedades                                       | F4               |
-| Editar el nombre del objeto / renombrar por lotes | F2               |
-| Renombrar elementos secundarios por lotes         | Shift+F2         |
-| Mostrar dependencias                              | Shift+F12        |
-| Ocultar                                           | Ctrl+I           |
-| Mostrar                                           | Ctrl+U           |
-| Crear medida                                      | Alt+1            |
-| Crear columna calculada                           | Alt+2            |
-| Crear jerarquía                                   | Alt+3            |
-| Crear columna de datos                            | Alt+4            |
-| Crear tabla                                       | Alt+5            |
-| Crear tabla calculada                             | Alt+6            |
-| Crear grupo de cálculo                            | Alt+7            |
-| Aceptar cambio de expresión                       | F5               |
+| Comando                                           | Shortcut  |
+| ------------------------------------------------- | --------- |
+| Propiedades                                       | F4        |
+| Editar el nombre del objeto / renombrar por lotes | F2        |
+| Batch rename children                             | Shift+F2  |
+| Mostrar dependencias                              | Shift+F12 |
+| Ocultar                                           | Ctrl+I    |
+| Mostrar                                           | Ctrl+U    |
+| Crear medida                                      | Alt+1     |
+| Crear columna calculada                           | Alt+2     |
+| Crear jerarquía                                   | Alt+3     |
+| Crear columna de datos                            | Alt+4     |
+| Crear tabla                                       | Alt+5     |
+| Crear tabla calculada                             | Alt+6     |
+| Crear grupo de cálculo                            | Alt+7     |
+| Aceptar cambio de expresión                       | F5        |
 
 ## Explorador TOM
 
-| Comando                                                 | Atajo                                        |
+| Comando                                                 | Shortcut                                     |
 | ------------------------------------------------------- | -------------------------------------------- |
 | Navegar hacia arriba o hacia abajo                      | Flecha arriba / abajo                        |
 | Expandir / contraer el nodo actual                      | Flecha derecha / izquierda                   |
 | Expandir / contraer el nodo actual y todos los subnodos | Ctrl+Flecha derecha / Flecha izquierda       |
 | Expandir / contraer todo el árbol                       | Ctrl+Shift+Flecha derecha / Flecha izquierda |
-| Mostrar/ocultar medidas                                 | Ctrl+1                                       |
-| Mostrar/ocultar columnas                                | Ctrl+2                                       |
-| Mostrar/ocultar jerarquías                              | Ctrl+3                                       |
-| Mostrar/ocultar particiones                             | Ctrl+4                                       |
+| Alternar medidas                                        | Ctrl+1                                       |
+| Alternar columnas                                       | Ctrl+2                                       |
+| Alternar jerarquías                                     | Ctrl+3                                       |
+| Toggle partitions                                       | Ctrl+4                                       |
 | Mostrar/ocultar carpetas de visualización               | Ctrl+5                                       |
 | Mostrar/ocultar objetos ocultos                         | Ctrl+6                                       |
 | Mostrar/ocultar columnas de información                 | Ctrl+7                                       |
@@ -85,7 +85,7 @@ applies_to:
 
 ## Edición de texto/código (general)
 
-| Comando                         | Atajo             |
+| Comando                         | Shortcut          |
 | ------------------------------- | ----------------- |
 | Cortar línea                    | Ctrl+L            |
 | Eliminar línea                  | Ctrl+Shift+L      |
@@ -99,13 +99,13 @@ applies_to:
 
 ## Código DAX
 
-| Comando                                              | Atajo                                  |
+| Comando                                              | Shortcut                               |
 | ---------------------------------------------------- | -------------------------------------- |
 | Ir a definición                                      | F12                                    |
 | Ver la definición                                    | Alt+F12                                |
 | Refactorizar                                         | Ctrl+R                                 |
 | Mostrar autocompletado                               | Ctrl+Space                             |
-| Mostrar sugerencia de parámetros                     | Ctrl+Shift+Space                       |
+| Show calltip                                         | Ctrl+Shift+Space                       |
 | Formatear DAX                                        | F6                                     |
 | Dar formato a DAX (líneas cortas) | Shift+F6                               |
 | Comentar líneas                                      | Ctrl+K                                 |
@@ -122,19 +122,19 @@ applies_to:
 
 ## Consulta DAX
 
-| Comando                         | Atajo                  |
+| Comando                         | Shortcut               |
 | ------------------------------- | ---------------------- |
 | Ejecutar consulta               | F5                     |
-| Ejecutar la selección           | Mayús+F5               |
+| Ejecutar la selección           | Shift+F5               |
 | Aplicar                         | F7                     |
 | Aplicar y sincronizar           | Mayús+F7               |
 | Aplicar selección               | F8                     |
-| Aplicar selección y sincronizar | Mayús+F8               |
+| Aplicar selección y sincronizar | Shift+F8               |
 | Mostrar acciones de código      | Ctrl+. |
 
 ## Script DAX
 
-| Comando                               | Atajo    |
+| Comando                               | Shortcut |
 | ------------------------------------- | -------- |
 | Aplicar script                        | F5       |
 | Aplicar selección                     | F8       |
@@ -143,10 +143,10 @@ applies_to:
 
 ## Depurador de DAX
 
-| Comando                                                          | Atajo     |
+| Comando                                                          | Shortcut  |
 | ---------------------------------------------------------------- | --------- |
 | Pasar por encima                                                 | F10       |
-| Retroceder                                                       | Shift+F10 |
+| Step back                                                        | Shift+F10 |
 | Entrar                                                           | F11       |
 | Salir                                                            | Shift+F11 |
 | Fila siguiente (contexto de fila más interna) | F9        |
@@ -154,9 +154,9 @@ applies_to:
 
 ## C# Script
 
-| Comando         | Atajo |
-| --------------- | ----- |
-| Ejecutar script | F5    |
+| Comando         | Shortcut |
+| --------------- | -------- |
+| Ejecutar script | F5       |
 
 # Personalización de atajos
 
