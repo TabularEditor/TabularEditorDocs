@@ -35,13 +35,13 @@ Se abrirá el cuadro de diálogo **Cargar modelo semántico desde la base de dat
 
 ![Cuadro de diálogo de conexión](~/content/assets/images/connect-dialog.png)
 
-### Color de la barra de estado
+### Status bar color
 
-En **Opciones avanzadas** hay un selector de **Color de la barra de estado**. El color que elijas se guarda con la conexión y Tabular Editor pinta la barra de estado con ese color siempre que haya un modelo abierto en ese servidor.
+**Advanced Options** includes a **Status bar color** picker. The color you choose is remembered with the connection, and Tabular Editor paints the status bar with it whenever a model is open on that server.
 
-Ningún color concreto significa nada por sí mismo; lo que importa es asignar uno. Asignar al entorno de producción un color que no usarías para nada más hace evidente, de un vistazo y sin leer el nombre del servidor, a qué entorno está conectada la ventana actual. Déjalo en **Predeterminado** para conservar la barra de estado del tema.
+No particular color means anything in itself; assigning one is what matters. Giving production a color you would not choose for anything else makes it obvious, at a glance and without reading the server name, which environment the window in front of you is connected to. Leave it on **Default** to keep the theme's own status bar.
 
-Al cerrar el modelo, la barra de estado vuelve al tema activo.
+Closing the model restores the status bar to the active theme.
 
 ## Seleccionar base de datos
 
@@ -54,7 +54,7 @@ En todas las versiones de Tabular Editor, puedes especificar una cadena de conex
 Una cadena de conexión OLAP típica tiene este aspecto:
 
 ```
-Provider=MSOLAP;Data source=servername;Initial Catalog=databasename;Seguridad Integrada=SSPI;
+Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated Security=SSPI;
 ```
 
 > [!NOTE]
@@ -69,7 +69,7 @@ Además de las propiedades enumeradas en la documentación, las cadenas de conex
 Puedes especificar el idioma que se usará para la conexión estableciendo la propiedad `Locale Identifier`. El valor es un número que corresponde a un idioma específico. Por ejemplo, `1033` corresponde a inglés (Estados Unidos).
 
 ```
-Provider=MSOLAP;Data source=servername;Initial Catalog=databasename;Seguridad Integrada=SSPI;Locale Identifier=1033;
+Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated Security=SSPI;Locale Identifier=1033;
 ```
 
 Esto es útil si quieres que los mensajes de error y otros mensajes del servidor estén en un idioma específico. Si no se especifica la propiedad `Locale Identifier`, se usa el idioma del sistema operativo del cliente.
@@ -78,28 +78,28 @@ La mayoría de las instancias de Analysis Services admiten varios idiomas. Consu
 
 ## Configuración de XMLA de Fabric/Power BI
 
-La lectura/escritura de XMLA está habilitada de forma predeterminada en todas las capacidades de Fabric y Power BI desde junio de 2025. Si no puedes conectarte a través del punto de conexión XMLA, comprueba que un administrador no haya deshabilitado una de estas dos configuraciones.
+XMLA read/write is enabled by default on all Fabric and Power BI capacities since June 2025. If you can't connect through the XMLA endpoint, verify that an admin hasn't disabled one of these two settings.
 
-### Configuración del punto de conexión XMLA del inquilino
+### Tenant XMLA endpoint setting
 
-En el portal de administración de Fabric/Power BI, se debe habilitar la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales".
+In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled.
 
 A nivel de inquilino, la configuración puede estar restringida a ciertos usuarios. Si en tu organización esta configuración está restringida, asegúrate de que todos los usuarios necesarios tengan permiso para usar el punto de conexión XMLA a nivel de inquilino.
 
-![Configuración de administrador del inquilino](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Tenant admin setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### Lectura/escritura de XMLA en la capacidad
+### XMLA read/write on the capacity
 
-Para usar el punto de conexión XMLA, asigna el Workspace que aloja el modelo semántico a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU). La capacidad debe tener el punto de conexión XMLA configurado como [**Lectura y escritura** en la configuración de la capacidad](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). Es la configuración predeterminada desde junio de 2025.
+To use the XMLA endpoint, assign the workspace that hosts the semantic model to a Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license. The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). This is the default since June 2025.
 
-![Configuración del administrador de la capacidad](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Capacity admin setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-Si la lectura/escritura se ha desactivado, pide al administrador de la capacidad que la vuelva a habilitar en el portal de administración:
+If read/write has been switched off, ask your capacity admin to re-enable it in the Admin Portal:
 
-1. Abre **Configuración de capacidad**.
-2. Elige el tipo de capacidad.
-3. Selecciona la capacidad correspondiente.
-4. Ve a **Cargas de trabajo de Power BI** y establece **punto de conexión XMLA** en **Lectura y escritura**.
+1. Open **Capacity Settings**.
+2. Choose the type of capacity.
+3. Select the relevant capacity.
+4. Navigate to **Power BI Workloads** and set **XMLA Endpoint** to **Read Write**.
 
 ### Permisos de usuario a nivel de Workspace
 
@@ -129,7 +129,7 @@ Para garantizar la mejor experiencia al editar modelos usando el punto de conexi
 
 Si un usuario distinto del propietario del modelo semántico necesita editar el modelo a través del punto de conexión XMLA, debe deshabilitarse la configuración de administración de seguridad de Fabric/Power BI denominada "Bloquear la republicación y deshabilitar la actualización del paquete".
 
-![Configuración para bloquear la republicación y desactivar la actualización del paquete](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Block republish and disable package refresh setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 ## Tipos de modelo no compatibles
 
@@ -214,29 +214,29 @@ Para usar el script:
 4. En el Bloc de notas, ajusta la URL XMLA del script siguiente para que coincida con el punto de conexión al que intentas acceder. Luego, copia el script modificado en la ventana de PowerShell y presiona [Enter] para ejecutarlo.
 
 ```powershell
-# Ejecuta este script desde la carpeta de instalación de Tabular Editor 3, ya que esta carpeta
-# contiene todas las DLL necesarias.
+# Run this script from the Tabular Editor 3 installation folder, since this folder
+# contains all of the DLLs required.
 
-# Configuración
-# TODO: Actualiza la URL de XMLA a continuación y modifica las propiedades de la cadena de conexión según sea necesario
+# Config
+# TODO: Update the XMLA URL below and modify connection string properties as needed
 $xmla = "powerbi://api.powerbi.com/v1.0/myorg/workspace-name"
 $connectionString = "Provider=MSOLAP;Data Source=$xmla;Interactive Login=Always;Identity Mode=Connection"
 
-# Cargar DLLs
+# Load DLLs
 Add-Type -Path "Microsoft.AnalysisServices.Tabular.dll"
 
-# Crear el objeto Microsoft.AnalysisServices.Tabular.Server:
+# Create Microsoft.AnalysisServices.Tabular.Server object:
 $server = New-Object Microsoft.AnalysisServices.Tabular.Server
 
 try {
-	# Conectar
+	# Connect
 	$server.Connect($connectionString)
 
-	Write-Host "Conexión establecida." -ForegroundColor Green
-	Write-Host "Conectado a: $($server.Name)"
+	Write-Host "Connection succeeded." -ForegroundColor Green
+	Write-Host "Connected to: $($server.Name)"
 }
 catch {
-	Write-Host "Error de conexión:" -ForegroundColor Red
+	Write-Host "Connection failed:" -ForegroundColor Red
 	Write-Host $_.Exception.Message -ForegroundColor Red
 }
 ```
