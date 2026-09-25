@@ -13,7 +13,7 @@ applies_to:
 
 # Crear un nuevo parámetro M y agregarlo a las particiones M existentes
 
-## Propósito del script
+## Objetivo del script
 
 Si quieres reemplazar una cadena en las particiones M del modelo (por ejemplo, la cadena de conexión, la condición de filtro, el nombre de una columna, etc.) por el valor de un parámetro. <br></br>
 
@@ -192,12 +192,12 @@ using (Form prompt = new Form())
 Este fragmento abre un cuadro de diálogo para que el usuario introduzca el nombre y el valor del parámetro y, después, crea el parámetro como una 'expresión compartida' en el modelo.
 Luego buscará el valor predeterminado en todas las particiones M y lo reemplazará por `#"ParameterName"`.
 
-## Ejemplo de salida
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> El cuadro de diálogo emergente que aparece al ejecutar el script y solicita el nombre y el valor del parámetro.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Cuadro de diálogo de confirmación que muestra que se ha creado el parámetro y que la subcadena de valor correspondiente se ha reemplazado en todas las expresiones de las particiones M. Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Cuadro de diálogo de confirmación que muestra que se ha creado el parámetro y que la subcadena de valor correspondiente se ha reemplazado en todas las expresiones de las particiones M. For parameters of other types, adjust the C# code, appropriately.</figcaption>
 </figure>
