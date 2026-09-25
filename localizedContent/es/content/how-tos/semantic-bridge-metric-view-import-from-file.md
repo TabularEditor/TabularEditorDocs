@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-metric-view-import-from-file
-title: Import a Metric View from a File
+title: Importar una vista de métricas desde un archivo
 author: Greg Baldini
 updated: 2026-07-02
 applies_to:
@@ -18,27 +18,27 @@ applies_to:
           full: true
 ---
 
-# Import a Metric View from a file
+# Importar una vista de métricas desde un archivo
 
-This how-to demonstrates importing a Metric View into a Tabular model directly from a YAML file.
+En esta guía práctica se muestra cómo importar una vista de métricas en un modelo tabular directamente desde un archivo YAML.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías prácticas están dirigidas a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
-## Get the sample Metric View
+## Obtener la vista de métricas de ejemplo
 
-Save the sample Metric View (below) to a local file.
-You will need to replace the placeholder in the example below with this path.
-For this how-to, specifically, you only need to save the file; you do not need to run `Load` or `Deserialize`.
+Guarda la vista de métricas de ejemplo (a continuación) en un archivo local.
+Tendrás que reemplazar el marcador de posición del ejemplo siguiente con esta ruta.
+Para esta guía práctica, solo tienes que guardar el archivo; no necesitas ejecutar `Load` ni `Deserialize`.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Importar desde archivo
 
-`ImportToTabularFromFile` loads the YAML from disk and imports it into the open model in one step.
-Update the placeholder in the script below (`<PLACEHOLDER>`) with the path where you saved the YAML.
-The Databricks hostname and HTTP path are used to build the M partition expressions; for a quick test you can pass placeholder values and fix them before refreshing data.
+`ImportToTabularFromFile` carga el YAML desde el disco y lo importa al modelo abierto en un solo paso.
+Actualiza el marcador de posición del script siguiente (`<PLACEHOLDER>`) con la ruta donde guardaste el YAML.
+El nombre de host de Databricks y la ruta HTTP se usan para construir las expresiones M de las particiones; para una prueba rápida, puedes proporcionar valores de marcador de posición y corregirlos antes de actualizar los datos.
 
 ```csharp {compile}
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -57,8 +57,8 @@ Output(sb.ToString());
 
 ## Pasos a seguir
 
-- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
-- [Import a Metric View and view diagnostics](xref:semantic-bridge-import)
+- [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
+- [Importar una vista de métricas y ver diagnósticos](xref:semantic-bridge-import)
 
 ## Ver también
 
