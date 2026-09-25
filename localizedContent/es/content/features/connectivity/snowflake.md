@@ -1,6 +1,6 @@
 ---
 uid: connect-snowflake
-title: Connect to Snowflake
+title: Conectar con Snowflake
 author: Morten Lønskov
 updated: 2026-09-21
 applies_to:
@@ -17,31 +17,31 @@ applies_to:
           full: true
 ---
 
-# Connect to Snowflake
+# Conectar con Snowflake
 
-Start from **Model > Import tables...** and choose a Snowflake source. Every authenticator needs the server (your account URL) and the warehouse.
+Empieza en **Modelo > Importar tablas...** y elige Snowflake como origen. En todos los casos, necesitas el servidor (la URL de tu cuenta) y el Warehouse.
 
-![The Connect to Snowflake dialog, with External browser chosen in the Authenticator list and the user name and password fields disabled](~/content/assets/images/features/connectivity/snowflake-connection.png)
+![El cuadro de diálogo Conectar con Snowflake, con Navegador externo seleccionado en la lista de autenticadores y los campos de nombre de usuario y contraseña deshabilitados](~/content/assets/images/features/connectivity/snowflake-connection.png)
 
-## Authenticators
+## Autenticadores
 
-| Authenticator        | What you supply                                                               | Reconnects unattended         |
-| -------------------- | ----------------------------------------------------------------------------- | ----------------------------- |
-| **Snowflake**        | User name and password                                                        | Sí                            |
-| **External browser** | A browser sign-in against your identity provider                              | No                            |
-| **OAuth**            | A token from your OAuth provider                                              | Yes, while the token is valid |
-| **Key pair**         | User name and an RSA private key file, plus its passphrase if the key has one | Sí                            |
+| Autenticador          | Qué debes proporcionar                                                                                | Se reconecta sin intervención    |
+| --------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Snowflake**         | Nombre de usuario y contraseña                                                                        | Sí                               |
+| **Navegador externo** | Un inicio de sesión en el navegador a través de tu proveedor de identidad                             | No                               |
+| **OAuth**             | Un token de tu proveedor de OAuth                                                                     | Sí, mientras el token sea válido |
+| **Par de claves**     | Nombre de usuario y un archivo de clave privada RSA, además de su frase de paso, si la clave la tiene | Sí                               |
 
-## Key pair authentication
+## Autenticación mediante par de claves
 
-Key pair is the authenticator to choose for unattended work now that Snowflake enforces multi-factor authentication for service accounts. It needs no interactive sign-in, so a saved connection reconnects on its own.
+El autenticador **Par de claves** es la opción recomendada para el trabajo desatendido, ahora que Snowflake exige autenticación multifactor para las cuentas de servicio. No requiere inicio de sesión interactivo, así que una conexión guardada se vuelve a conectar por sí sola.
 
-Choose **Key pair**, enter your user name and browse to your private key file. The password field is relabelled **Passphrase** while this authenticator is selected. **OK** stays disabled until the server, warehouse, user name and private key file are all filled in.
+Elige **Par de claves**, introduce tu nombre de usuario y selecciona el archivo de tu clave privada. Mientras este autenticador esté seleccionado, el campo **Contraseña** pasa a llamarse **Frase de contraseña**. **OK** sigue deshabilitado hasta que se hayan completado el servidor, el Warehouse, el nombre de usuario y el archivo de la clave privada.
 
-Supported key formats are unencrypted PKCS#1 and PKCS#8, and passphrase-encrypted PKCS#8, which is what [Snowflake's own key-pair instructions](https://docs.snowflake.com/en/user-guide/key-pair-auth) produce.
+Los formatos de clave compatibles son PKCS#1 y PKCS#8 sin cifrar, y PKCS#8 cifrado con frase de contraseña; este es el formato que generan las [instrucciones de Snowflake sobre autenticación mediante par de claves](https://docs.snowflake.com/en/user-guide/key-pair-auth).
 
 > [!IMPORTANT]
-> A key encrypted with the legacy OpenSSL scheme is not supported. These begin `-----BEGIN RSA PRIVATE KEY-----` and carry `Proc-Type` and `DEK-Info` headers. Convert it with a single `openssl pkcs8 -topk8` command. This does not require generating a new key pair, so the public key already registered on your Snowflake user stays valid.
+> No se admite una clave cifrada con el esquema heredado de OpenSSL. Estas empiezan por `-----BEGIN RSA PRIVATE KEY-----` y llevan los encabezados `Proc-Type` y `DEK-Info`. Conviértela con un único comando `openssl pkcs8 -topk8`. Esto no requiere generar un nuevo par de claves, así que la clave pública ya registrada en tu usuario de Snowflake sigue siendo válida.
 
 <!-- IMAGE NEEDED: connectivity/snowflake-key-pair.png
      The Snowflake connection dialog with Key pair selected, so the Private key file field
@@ -49,18 +49,18 @@ Supported key formats are unencrypted PKCS#1 and PKCS#8, and passphrase-encrypte
      House border, 100% DPI.
      Alt text: "The Snowflake connection dialog with Key pair authentication selected" -->
 
-## External browser sign-ins
+## Inicios de sesión con navegador externo
 
-A browser sign-in is cached so you are not prompted for every operation. From Tabular Editor 3.27.0, a cached sign-in that your identity provider has expired or revoked no longer blocks the connection: Tabular Editor discards it as soon as Snowflake rejects it and reopens the browser sign-in.
+El inicio de sesión en el navegador se almacena en caché para que no se te pida en cada operación. A partir de Tabular Editor 3.27.0, un inicio de sesión almacenado en caché que haya caducado o que tu proveedor de identidades haya revocado ya no bloquea la conexión: Tabular Editor lo descarta en cuanto Snowflake lo rechaza y vuelve a abrir el inicio de sesión en el navegador.
 
-Previously every later operation failed without reopening the browser, the wizard showed empty tables and columns instead of an error, and the only recovery was restarting Tabular Editor. A sign-in you abandon, or that times out, now counts as a cancellation rather than an error that blocks later work.
+Antes, todas las operaciones posteriores fallaban a menos que se volviera a abrir el navegador; el asistente mostraba tablas y columnas vacías en lugar de un error, y la única forma de solucionarlo era reiniciar Tabular Editor. Un inicio de sesión que abandones, o que caduque por tiempo de espera, ahora cuenta como una cancelación en lugar de como un error que bloquea el trabajo posterior.
 
-## Switching authenticator
+## Cambiar de autenticador
 
-Switching back to **Snowflake** clears the private key path and the passphrase rather than carrying the passphrase over as an account password.
+Al volver a **Snowflake**, se borran la ruta de la clave privada y la frase de contraseña, en lugar de reutilizar la frase de contraseña como contraseña de la cuenta.
 
-## Where the credentials are stored
+## Dónde se almacenan las credenciales
 
-Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
+Las credenciales que escribes aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, así que no se registran en el control de código fuente y cualquier compañero que abra el mismo modelo usará las suyas.
 
-The generated M expression names the server and the object only. It never contains a password, a token or a key.
+La expresión M generada solo especifica el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
