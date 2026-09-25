@@ -13,32 +13,32 @@ applies_to:
 
 # 支持撤销/重做
 
-你在 Tabular Editor 中所做的任何更改，都可以用 **Ctrl+Z** 撤销，并用 **Ctrl+Y** 重做。可撤销的操作次数不设上限；但当你加载另一个模型时，无论来自文件还是数据库，撤销栈都会被重置。
+Any change you make in Tabular Editor can be undone with **Ctrl+Z** and redone with **Ctrl+Y**. There's no limit to how many operations you can undo, but the stack is reset when you load a different model, whether from a file or from a database.
 
-涉及多个对象的一次操作，在撤销时只算一步。把装满度量值的显示文件夹拖到新的父级、批量重命名一组对象，或应用 Best Practice Analyzer 的修复脚本，都只需按一次 **Ctrl+Z** 就能撤销。
+An operation that touches many objects undoes as one step. Dragging a display folder full of measures to a new parent, renaming a batch of objects, or applying a Best Practice Analyzer fix script each undo in a single **Ctrl+Z**.
 
 ## 删除对象
 
-删除对象时，也会一并删除依赖于它的内容。对于列来说，这意味着会删除它参与的关系、基于它构建的层次结构级别，以及它的翻译和透视成员资格。在 Tabular Editor 3 中，它也会从所有使用它的日历和变体中移除，并会清除指向它的 _按列排序_ 设置。
+Deleting an object also removes what depended on it. For a column, that means the relationships it takes part in, the hierarchy levels built on it, and its translations and perspective memberships. In Tabular Editor 3 it's also dropped from any calendars and variations that used it, and a _Sort by column_ pointing at it is cleared.
 
-撤销会一步恢复该对象 _以及_ 与其一同删除的所有内容。
+Undo restores the object _and_ everything that was removed alongside it, as one step.
 
-在删除会带来连带影响的对象前，Tabular Editor 会先警告你。删除被其他对象引用的单个对象时，系统会提示你，并列出将发生的情况，要求你确认：
+Tabular Editor warns you before a delete that has consequences. Deleting a single object that other objects reference tells you so and asks you to confirm, naming what will happen:
 
-- 其他对象通过 DAX 表达式引用了该对象，因此这些表达式将失效。
-- 该列被用于一个或多个层次结构，因此相应的级别将被删除。
-- 该列被用于一个或多个关系中，因此这些关系将被移除。
-- 在 Tabular Editor 3 中，该列用于一个或多个日历，因此系统会将其从这些日历中移除。
+- The object is referenced by other objects through DAX expressions, so those expressions will stop working.
+- The column is used in one or more hierarchies, so the corresponding levels will be deleted.
+- The column is used in one or more relationships, so those relationships will be removed.
+- In Tabular Editor 3, the column is used in one or more calendars, so it will be removed from them.
 
-一次删除多个对象时，系统总会要求确认，但不会逐项说明是哪个对象触发了哪项警告。
+Deleting several objects at once always asks for confirmation, though it doesn't itemise which object raises which concern.
 
-对于没有任何对象依赖的单个对象，系统会直接删除而不提示，因为撤销只需一次按键。如果你希望每次都收到提示，请在 Tabular Editor 3 中前往 **Tools > 偏好 > TOM Explorer > Delete**，勾选 **Always show delete warnings**。
+A single object that nothing depends on is deleted without a prompt, on the grounds that undo is one keystroke away. If you would rather be asked every time, tick **Always show delete warnings** under **Tools > Preferences > TOM Explorer > Delete** in Tabular Editor 3.
 
 > [!NOTE]
-> 删除对象不会改写引用它的 DAX 表达式。依赖它的表达式会保留这个现已悬空的引用，并在 @messages-view 中以错误形式进行 Report。这与重命名不同，重命名时，[公式修复](xref:formula-fix-up-dependencies) 会为你更新引用它的表达式。
+> Deleting an object doesn't rewrite the DAX that referenced it. The dependent expressions keep the now-dangling reference and are reported as errors in the @messages-view. This is different from renaming, where [formula fix-up](xref:formula-fix-up-dependencies) updates the referencing expressions for you.
 
-## 撤销与未保存的更改
+## Undo and unsaved changes
 
-在 Tabular Editor 3 中，撤销与“未保存更改”指示器都以同一个参考点为准。将操作撤销回模型上次保存时的状态后，所有指示器都会清除；重做则会让它们重新出现。如果撤销 _越过_ 上次保存点，已回退的对象上会重新出现指示器。
+In Tabular Editor 3, undo and the unsaved-change indicators work against the same reference point. Undoing back to the state the model was last saved in clears every indicator; redoing brings them back. Undoing _past_ the last save point makes indicators reappear for the objects that were rolled back.
 
-当你想丢弃某个特定更改，而不是一路回退撤销栈直到该更改时，**还原**是更直接的工具。它会在一次可撤销的操作中，将单个属性、对象、表或整个模型恢复到上次保存的状态，同时不影响其他未保存的编辑。参见 @unsaved-changes。
+**Revert** is the more direct tool when you want to discard a specific change rather than walk the undo stack back to it. It puts a single property, an object, a table or the whole model back to its last saved state in one undoable step, leaving every other unsaved edit alone. See @unsaved-changes.
