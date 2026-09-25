@@ -35,16 +35,16 @@ applies_to:
 
 ## 编辑
 
-| 命令 | 快捷键    |
-| -- | ------ |
-| 全选 | Ctrl+A |
-| 复制 | Ctrl+C |
-| 剪切 | Ctrl+X |
-| 粘贴 | Ctrl+V |
-| 撤销 | Ctrl+Z |
-| 重做 | Ctrl+Y |
-| 查找 | Ctrl+F |
-| 替换 | Ctrl+H |
+| 命令    | 快捷键    |
+| ----- | ------ |
+| 全选    | Ctrl+A |
+| 复制    | Ctrl+C |
+| 剪切    | Ctrl+X |
+| Paste | Ctrl+V |
+| 撤销    | Ctrl+Z |
+| 重做    | Ctrl+Y |
+| 查找    | Ctrl+F |
+| 替换    | Ctrl+H |
 
 ## Data model 建模
 
@@ -67,35 +67,35 @@ applies_to:
 
 ## TOM Explorer
 
-| 命令               | 快捷键               |
-| ---------------- | ----------------- |
-| 向上/向下移动          | 上/下方向键            |
-| 展开/折叠当前节点        | 右/左方向键            |
-| 展开/折叠当前节点及其所有子节点 | Ctrl+右/左方向键       |
-| 展开/折叠整棵树         | Ctrl+Shift+右/左方向键 |
-| 显示/隐藏度量值         | Ctrl+1            |
-| 显示/隐藏列           | Ctrl+2            |
-| 显示/隐藏层次结构        | Ctrl+3            |
-| 显示/隐藏分区          | Ctrl+4            |
-| 显示/隐藏显示文件夹       | Ctrl+5            |
-| 显示/隐藏隐藏对象        | Ctrl+6            |
-| 显示/隐藏信息列         | Ctrl+7            |
-| 后退               | Alt+左箭头           |
-| 前进               | Alt+右箭头           |
+| 命令                  | 快捷键               |
+| ------------------- | ----------------- |
+| 向上/向下移动             | 上/下方向键            |
+| 展开/折叠当前节点           | 右/左方向键            |
+| 展开/折叠当前节点及其所有子节点    | Ctrl+右/左方向键       |
+| 展开/折叠整棵树            | Ctrl+Shift+右/左方向键 |
+| 切换度量值               | Ctrl+1            |
+| 切换列                 | Ctrl+2            |
+| 切换层次结构              | Ctrl+3            |
+| Toggle partitions   | Ctrl+4            |
+| 显示/隐藏显示文件夹          | Ctrl+5            |
+| 显示/隐藏隐藏对象           | Ctrl+6            |
+| Toggle info columns | Ctrl+7            |
+| 后退                  | Alt+左箭头           |
+| 前进                  | Alt+右箭头           |
 
 ## 文本/代码编辑（通用）
 
-| 命令     | 快捷键          |
-| ------ | ------------ |
-| 剪切行    | Ctrl+L       |
-| 删除行    | Ctrl+Shift+L |
-| 复制行    | Ctrl+Shift+T |
-| 交换行    | Ctrl+T       |
-| 重复当前行  | Ctrl+D       |
-| 将行转为小写 | Ctrl+U       |
-| 将行转为大写 | Ctrl+Shift+U |
-| 上移行    | Alt+上箭头      |
-| 下移行    | Alt+向下箭头     |
+| 命令              | 快捷键          |
+| --------------- | ------------ |
+| 剪切行             | Ctrl+L       |
+| 删除行             | Ctrl+Shift+L |
+| 复制行             | Ctrl+Shift+T |
+| 交换行             | Ctrl+T       |
+| 重复当前行           | Ctrl+D       |
+| 将行转为小写          | Ctrl+U       |
+| 将行转为大写          | Ctrl+Shift+U |
+| Move lines up   | Alt+上箭头      |
+| Move lines down | Alt+向下箭头     |
 
 ## DAX 代码
 
@@ -145,10 +145,10 @@ applies_to:
 
 | 命令          | 快捷键       |
 | ----------- | --------- |
-| 单步跳过        | F10       |
+| Step over   | F10       |
 | 单步回退        | Shift+F10 |
 | 单步进入        | F11       |
-| 单步跳出        | Shift+F11 |
+| Step out    | Shift+F11 |
 | 下一行（最内层行语境） | F9        |
 | 上一行（最内层行语境） | Shift+F9  |
 
@@ -162,7 +162,7 @@ applies_to:
 
 Tabular Editor 3 支持通过重新绑定现有快捷键或添加新快捷键来自定义快捷键。
 
-可通过 **工具 -> 偏好设置 -> 键盘** 来设置快捷键：找到需要绑定快捷键的命令，然后在界面中设置相应绑定。
+Setting shortcuts can be done through **Tools -> Preferences -> Keyboard** and locating the command that should have a shortcut binding and setting the binding in the menu.
 Tabular Editor 3 的许多部分都可以设置快捷键，包括 [宏](xref:creating-macros)，让 C# Script 触手可及。
 
 ![Dax 脚本](~/content/assets/images/SetShortcuts.png)
