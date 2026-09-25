@@ -2,12 +2,12 @@
 
 本节包含 Tabular Editor 的参考资料。
 
-## 本节中
+## 本节内容
 
 ### 下载与版本发布
 
 - @downloads - Tabular Editor 3 的下载链接和安装组件
-- @system-requirements - 支持的 Windows 版本、运行时、体系结构和组件格式
+- @system-requirements - Supported Windows versions, runtimes, architectures and package formats
 - @release-history - 完整的版本历史记录，包含下载链接
 
 ### 技术参考
@@ -18,8 +18,8 @@
 - @shortcuts3 - Tabular Editor 3 的键盘快捷键参考
 - @shortcuts2 - Tabular Editor 2 的键盘快捷键参考
 - @user-options - 表格模型用户选项（.tmuo）文件
-- @supported-files - Tabular Editor 可打开和保存的文件格式
-- @accessibility - 色盲模式、键盘访问、缩放和主题
+- @supported-files - File formats Tabular Editor can open and save
+- @accessibility - Color blindness mode, keyboard access, scaling and themes
 
 ### 开发与规划
 
