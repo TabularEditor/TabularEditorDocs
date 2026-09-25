@@ -1,5 +1,5 @@
 ---
-uid: perspective-editor
+uid: perspectiva-editor
 title: Editor de perspectivas
 author: Šarūnas Jučius
 updated: 2022-03-16
