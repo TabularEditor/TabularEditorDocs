@@ -39,7 +39,7 @@ description: 最佳实践规则：确保为所有已定义的区域设置提供�
 1. 该对象对终端用户**可见**（未隐藏）
 2. 在模型中，至少有一个区域设置**缺少该对象名称的翻译**
 
-In other words visible objects with multiple cultures defined should have their names translated for each culture.
+换句话说，对于定义了多个区域设置的可见对象，应为每个区域设置分别翻译其名称。
 
 ```csharp
 IsVisible 
@@ -63,7 +63,7 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 ### 原因 2：后续添加了区域设置
 
-Culture added to model after objects were created.
+在对象创建后才添加到模型中的区域设置。
 
 ### 原因 3：翻译流程不完整
 
