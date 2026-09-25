@@ -24,8 +24,8 @@ Esta guía práctica muestra cómo cargar una Metric View de Databricks en Tabul
 Esta es la habilidad fundamental para todas las demás operaciones con una Metric View.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías prácticas están orientadas a Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
@@ -94,9 +94,9 @@ Join: date
   Cardinality: ManyToOne
 ```
 
-## Inspect Metric View fields
+## Inspeccionar los campos de la vista de métricas
 
-The Metric View `Fields` property contains all field definitions.
+La propiedad `Fields` de la vista de métricas contiene todas las definiciones de campos.
 
 ```csharp {run id=fields setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
@@ -240,11 +240,11 @@ MEASURES (6)
 
 Ahora que puedes cargar e inspeccionar una Metric View, puedes:
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Validate the Metric View](xref:semantic-bridge-validate-default)
-- [Import the Metric View to Tabular](xref:semantic-bridge-import)
+- [Agregar objetos a una vista de métricas](xref:semantic-bridge-add-object)
+- [Quitar objetos de una vista de métricas](xref:semantic-bridge-remove-object)
+- [Cambiar el nombre de un campo](xref:semantic-bridge-rename-objects)
+- [Validar la vista de métricas](xref:semantic-bridge-validate-default)
+- [Importar la vista de métricas a un modelo tabular](xref:semantic-bridge-import)
 
 ## Ver también
 
