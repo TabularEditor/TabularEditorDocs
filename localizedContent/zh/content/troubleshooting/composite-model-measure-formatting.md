@@ -19,7 +19,7 @@ applies_to:
 
 # 复合模型中的度量值格式属性
 
-在使用通过实时连接连接到 Analysis Services (SSAS/AAS) 的复合模型时，你在编辑度量值的格式属性时可能会遇到验证错误，或出现令人困惑的行为。常见的错误信息是：
+在使用通过实时连接连接到 Analysis Services (SSAS/AAS) 的复合模型时，你在编辑度量值的格式属性时可能会遇到验证错误，或出现令人困惑的行为。 A common error message is:
 
 **"度量值不允许同时具有 FormatString 和 Format Expression。"**
 
@@ -29,7 +29,7 @@ applies_to:
 
 ## 了解问题
 
-复合模型通过实时连接，将本地 Power BI 表与 SSAS/AAS 语义模型中的远程表组合在一起。在这种架构下，度量值的格式设置可能会产生歧义：
+复合模型通过实时连接，将本地 Power BI 表与 SSAS/AAS 语义模型中的远程表组合在一起。 In this architecture, measure formatting can be ambiguous:
 
 - **FormatString**：静态格式定义（例如，用于货币的“0.00”）。
 - **格式字符串表达式**：在查询时计算的动态格式字符串。
@@ -40,17 +40,17 @@ applies_to:
 
 在复合模型中：
 
-1. **所有权模糊**：远程度量值归远程 SSAS/AAS 模型所有。当你在 Tabular Editor 中编辑格式设置时，可能是在试图覆盖远程元数据，从而产生冲突。
+1. **Ownership ambiguity**: Remote measures are owned by the remote SSAS/AAS model. When you edit formatting in Tabular Editor, you may be trying to override remote metadata, which creates conflicts.
 
-2. **元数据同步**：当度量值上存在格式字符串表达式时，FormatString 通常会显示为“自定义”，用来表示已启用动态格式。如果你随后又尝试同时设置静态的 FormatString，这两个属性都会被填充，从而触发验证错误。
+2. **元数据同步**：当度量值上存在格式字符串表达式时，FormatString 通常会显示为“自定义”，用来表示已启用动态格式。 If you then try to set a static FormatString simultaneously, both properties become populated, triggering the validation error.
 
-3. **持久化限制**：对远程度量值元数据的更改可能无法可靠地保存，因为远程模型保留最终控制权。这会让本地复合模型处于不一致的状态。
+3. **持久化限制**：对远程度量值元数据的更改可能无法可靠地保存，因为远程模型保留最终控制权。 This leaves the local composite model in an inconsistent state.
 
 ---
 
 ## 根本原因
 
-### 远程度量值格式设置
+### Remote measure formatting
 
 如果问题度量值是在远程 SSAS/AAS 模型中定义的：
 
@@ -63,7 +63,7 @@ applies_to:
 
 ### 带格式表达式的计算组
 
-- 计算组可以定义格式字符串表达式，用于覆盖度量值格式。如果某个计算项的格式表达式处于生效状态，UI 可能仍会显示度量值的静态 FormatString，从而看起来像是两者都已设置。
+- Calculation groups can define Format String Expressions that override measure formats. 如果某个计算项的格式表达式处于生效状态，UI 可能仍会显示度量值的静态 FormatString，从而看起来像是两者都已设置。
 
 ### 版本或环境限制
 
@@ -78,7 +78,7 @@ applies_to:
 
 ### 如果度量值是远程的（来自 SSAS/AAS）
 
-这是最常见的场景。远程度量值归源语义模型所有。
+This is the most common scenario. Remote measures are owned by the source semantic model.
 
 **推荐做法：**
 
@@ -86,7 +86,7 @@ applies_to:
 
 2. **如需 Report 专属格式，** 请在 Power BI 复合模型中创建一个本地“包装器”度量值：
 
-   - 在本地模型中新建一个度量值，用来引用远程度量值。
+   - Define a new measure in the local model that references the remote measure.
    - 为包装器度量值应用所需的格式字符串。
    - 在 Report 中使用包装器度量值，而不是远程度量值。
 
@@ -113,7 +113,7 @@ applies_to:
 ## 快速故障排查清单
 
 - [ ] **确定度量值归属**：该度量值是远程的（SSAS/AAS）还是本地的（复合模型）？
-- [ ] **检查格式字符串表达式**：即使你没设置，也要确认它是否已被填充。在属性网格中，查找非空的“格式字符串表达式”字段。
+- [ ] **检查格式字符串表达式**：即使你没设置，也要确认它是否已被填充。 In the property grid, look for a non-empty "Format String Expression" field.
 - [ ] **检查脚本和规则**：如果你使用 C# Script 或 BPA 规则来设置度量值格式，确保它们不会在同一次执行中同时设置 FormatString 和 格式字符串表达式。
 - [ ] **检查计算组**：确认是否有任何计算组项定义了格式字符串表达式，可能会覆盖或与该度量值的格式冲突。
 - [ ] **确认环境版本**：确认你的 Power BI Desktop（2025 或更高版本）或 Power BI Report Server（2025 年一月及以后版本）的版本，尤其是在使用动态格式时。
@@ -177,7 +177,7 @@ applies_to:
 
 1. **尽早确定格式策略**：决定每个度量值要用静态格式还是动态格式，并且每个度量值只选一种方式并保持一致。
 
-2. **检查远程度量值**：在复合模型中编辑格式之前，先确认该度量值是否为远程度量值。如果是这样，就在源 SSAS/AAS 模型中管理格式设置。
+2. **Audit remote measures**: Before editing formatting in a composite model, check whether the measure is remote. If so, manage formatting in the source SSAS/AAS model.
 
 3. **使用与版本相匹配的功能**：如果你使用动态格式字符串，请确保所有相关环境（Power BI Desktop、Report Server、Analysis Services）都支持你所用的 Power BI 版本中的该功能。
 
