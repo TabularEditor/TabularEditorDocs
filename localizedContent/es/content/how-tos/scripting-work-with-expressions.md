@@ -1,5 +1,5 @@
 ---
-uid: how-to-work-with-expressions
+uid: como-trabajar-con-expresiones
 title: Cómo trabajar con expresiones y propiedades DAX
 author: Morten Lønskov
 updated: 2026-04-10
