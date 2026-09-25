@@ -191,5 +191,5 @@ En las expresiones de reglas de BPA, se accede directamente a las propiedades de
 
 - @csharp-scripts
 - @using-bpa-sample-rules-expressions
-- @how-to-filter-query-objects-linq
+- @como-filtrar-objetos-de-consulta-con-linq
 - @script-find-replace
