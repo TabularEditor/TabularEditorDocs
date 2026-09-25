@@ -52,7 +52,7 @@ Si quieres incluir la definición de una medida a la que se hace referencia en e
 
 ![Definir medida con dependencias](~/content/assets/images/define-measure-with-deps.png)
 
-## Atajos
+## Shortcuts
 
 Para aplicar el script al modelo, usa los siguientes atajos:
 
@@ -76,16 +76,16 @@ La sintaxis de los Scripts DAX es la siguiente:
 
 ```dax
 <DAX script>:
-MEASURE 'Nombre de tabla'[Nombre de medida] = <DAX expression>
+MEASURE 'Table name'[Measure name] = <DAX expression>
     [<Measure properties>]
 
-COLUMN 'Nombre de tabla'[Nombre de columna] = <DAX expression>
+COLUMN 'Table name'[Column name] = <DAX expression>
     [<Column properties>]
 
-TABLE 'Nombre de tabla' = <DAX expression>
+TABLE 'Table name' = <DAX expression>
     [<Table properties>]
 
-CALCULATIONGROUP 'Nombre de tabla'[Nombre de columna]
+CALCULATIONGROUP 'Table name'[Column name]
     [<Calculation Group properties>]
     CALCULATIONITEM "Item 1" = <DAX expression>
         [<Calculation Item properties>]
@@ -138,11 +138,11 @@ Como ejemplo, el script siguiente define la medida `[Internet Total Sales]` en l
 
 ```dax
 ----------------------------------
--- Medida: [Internet Total Sales]
+-- Measure: [Internet Total Sales]
 ----------------------------------
 MEASURE 'Internet Sales'[Internet Total Sales] = SUM('Internet Sales'[Sales Amount])
-    Description = "Devuelve la suma de todas las ventas por Internet"
-    FormatString = "\$#,0,00;(\$#,0,00);\$#,0,00"
+    Description = "Returns the sum of all Internet Sales"
+    FormatString = "\$#,0.00;(\$#,0.00);\$#,0.00"
 ```
 
 ## Ejemplo 2: Medida con KPI de estado y objetivo
@@ -151,7 +151,7 @@ El Script DAX siguiente define la medida `[Internet Current Quarter Sales Perfor
 
 ```dax
 --------------------------------------------------------
--- Medida: [Internet Current Quarter Sales Performance]
+-- Measure: [Internet Current Quarter Sales Performance]
 --------------------------------------------------------
 MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     IFERROR(
@@ -164,10 +164,10 @@ MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
             IF(
                 ISBLANK( x ),
                 BLANK(),
-                IF(x < 1, -1, IF(x < 1.07, 0, 1)) -- 1,07
+                IF(x < 1, -1, IF(x < 1.07, 0, 1))
             )
     , KpiStatusGraphic = "Shapes"
-    , KpiTargetExpression = 1.1 -- 1,1
+    , KpiTargetExpression = 1.1
 ```
 
 ## Ejemplo 3: grupo de cálculo
@@ -176,10 +176,10 @@ El script DAX siguiente define el grupo de cálculo `'Time Intelligence'` con la
 
 ```dax
 -----------------------------------------
--- grupo de cálculo: 'Time Intelligence'
+-- Calculation Group: 'Time Intelligence'
 -----------------------------------------
 CALCULATIONGROUP 'Time Intelligence'[Period]
-    Description = "Usa esta tabla para realizar cálculos de inteligencia temporal"
+    Description = "Use this table to perform time calculations"
 
     CALCULATIONITEM "Current" = SELECTEDMEASURE()
         Ordinal = 0
