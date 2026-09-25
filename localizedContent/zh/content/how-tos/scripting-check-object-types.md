@@ -13,7 +13,7 @@ applies_to:
 
 # 如何检查对象类型
 
-TOM 层级结构采用继承机制。 `Column` 是一个抽象基类，其子类型包括 `DataColumn`、`CalculatedColumn` 和 `CalculatedTableColumn`。 `Table` 的子类型包括 `CalculatedTable` 和 `CalculationGroupTable`。在处理 `Name`、`Description`、`IsHidden`、`FormatString` 或 `DisplayFolder` 等共享属性时，请使用基类型。当需要特定类型的属性时，请将其强制转换为具体子类型，例如 `CalculatedColumn` 的 `Expression` 或 `DataColumn` 的 `SourceColumn`。
+The TOM hierarchy uses inheritance. `Column` is an abstract base with subtypes `DataColumn`, `CalculatedColumn` and `CalculatedTableColumn`. `Table` has subtypes `CalculatedTable` and `CalculationGroupTable`. Use the base type when working with shared properties like `Name`, `Description`, `IsHidden`, `FormatString` or `DisplayFolder`. Cast to a concrete subtype when you need type-specific properties, such as `Expression` on `CalculatedColumn` or `SourceColumn` on `DataColumn`.
 
 ## 快速参考
 
@@ -31,7 +31,7 @@ var typeName = obj.GetType().Name;   // "DataColumn", "Measure", etc.
 ```
 
 > [!NOTE]
-> 在 Tabular Editor 2 中，带变量声明的模式匹配（`col is CalculatedColumn cc`）需要 Roslyn 编译器。在 **File > 偏好 > General > Compiler path** 下进行配置。详情请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。 Tabular Editor 3 默认支持此功能。
+> 在 Tabular Editor 2 中，带变量声明的模式匹配（`col is CalculatedColumn cc`）需要 Roslyn 编译器。 Configure it under **File > Preferences > General > Compiler path**. See [Compiling with Roslyn](xref:advanced-scripting#compiling-with-roslyn) for details. Tabular Editor 3 supports this by default.
 
 ## 类型层次结构
 
@@ -46,7 +46,7 @@ TOMWrapper 中的关键继承关系如下：
 
 ## 按类型筛选集合
 
-`OfType<T>()` 可用于任何集合，并返回一个经过筛选的序列，其中只包含指定类型的项。如果没有匹配项，它会返回空序列。
+`OfType<T>()` 可用于任何集合，并返回一个经过筛选的序列，其中只包含指定类型的项。 It returns an empty sequence if no items match.
 
 ```csharp
 // All calculated columns in the model (empty if model has none)
@@ -64,7 +64,7 @@ var regularTables = Model.Tables.Where(t => t is not CalculationGroupTable && t 
 
 ## 使用 is 进行模式匹配
 
-模式匹配会做两件事：检查某个值是否为给定类型，并可选择将其转换后赋给一个新变量。 `x is Type xx` 这种形式会判断“`x` 是否为 `Type` 类型？”，如果为真，就会将 `xx` 作为该确切类型的变量供你使用。
+Pattern matching does two things: it checks whether a value is a given type and optionally casts it into a new variable. `x is Type xx` 这种形式会判断“`x` 是否为 `Type` 类型？”，如果为真，就会将 `xx` 作为该确切类型的变量供你使用。
 
 这等同于：
 
@@ -76,7 +76,7 @@ if (col is CalculatedColumn)
 }
 ```
 
-如果你只需要布尔判断，使用不带变量的 `x is Type`。如果你还需要访问子类型特有的属性，用 `x is Type xx`。
+如果你只需要布尔判断，使用不带变量的 `x is Type`。 If you also need subtype-specific properties, use `x is Type xx`.
 
 ```csharp
 foreach (var col in Model.AllColumns)
@@ -91,17 +91,17 @@ foreach (var col in Model.AllColumns)
 
 ## Dynamic LINQ 中的等效写法
 
-在 BPA 规则中，类型筛选是通过规则的 **Applies to** 范围来处理的。把它设置为目标对象类型（例如 **计算列**），不要在表达式中按类型筛选。 Dynamic LINQ 不支持 C# 风格的类型转换。
+In BPA rules, type filtering is handled by the rule's **Applies to** scope. Set it to the target object type (e.g., **Calculated Columns**) rather than filtering by type in the expression. Dynamic LINQ 不支持 C# 风格的类型转换。
 
 ## 常见陷阱
 
 > [!IMPORTANT]
 >
-> - `Column` 是抽象类型，但你无需进行类型转换，也可以访问基类型上定义的所有属性（`Name`、`DataType`、`FormatString`、`IsHidden`、`Description`、`DisplayFolder`）。只有在你需要子类型特有的属性（例如 `CalculatedColumn` 上的 `Expression`）时，才将其转换为该子类型。
-> - `OfType<T>()` 会同时进行筛选和类型转换。 `Where(x => x is T)` 只会筛选，结果仍然是基类型。当你需要访问子类型属性时，优先使用 `OfType<T>()`。
-> - 计算表格的列会自动管理。要添加或更改列，就编辑计算表格的 `Expression`。你不能直接添加这些列。
+> - `Column` 是抽象类型，但你无需进行类型转换，也可以访问基类型上定义的所有属性（`Name`、`DataType`、`FormatString`、`IsHidden`、`Description`、`DisplayFolder`）。 Only cast to a subtype when you need subtype-specific properties like `Expression` on `CalculatedColumn`.
+> - `OfType<T>()` both filters and casts. `Where(x => x is T)` 只会筛选，结果仍然是基类型。 Prefer `OfType<T>()` when you need access to subtype properties.
+> - 计算表格的列会自动管理。 Edit the calculated table's `Expression` to add or change columns. You cannot add them directly.
 
-## 另见
+## 另请参阅
 
 - @C# 脚本
 - @using-bpa-sample-rules-expressions
