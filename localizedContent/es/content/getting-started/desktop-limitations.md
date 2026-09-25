@@ -124,7 +124,7 @@ Se puede acceder a todos los metadatos del Tabular Object Model (TOM) en modo de
 
 Cuando usas Tabular Editor (cualquier edición) como herramienta externa para Power BI Desktop, todas las operaciones no compatibles según la lista anterior se deshabilitan de forma predeterminada. En otras palabras, Tabular Editor no te permitirá agregar o cambiar el nombre de tablas o columnas, realizar actualizaciones, etc. en un modelo de Power BI Desktop.
 
-Aunque no sea compatible, resulta que se pueden aplicar varias operaciones sin causar problemas. Por este motivo, Tabular Editor incluye una opción que permite a los usuarios avanzados experimentar habilitando todas las operaciones de modelado de datos, incluso cuando se conecta a un Data model de Power BI Desktop. Puedes habilitar esta opción en **Herramientas > Preferencia > Power BI > Permitir operaciones de modelado _no admitidas_**, pero asegúrate de entender los riesgos antes de hacerlo.
+Aunque no esté admitido, resulta que aún se pueden aplicar varias operaciones sin causar problemas. Por este motivo, Tabular Editor incluye una opción que permite a los usuarios avanzados experimentar, habilitando todas las operaciones de modelado de datos incluso al estar conectados a un Data model de Power BI Desktop. Puedes habilitar esta opción en **Herramientas > Preferencias > Power BI > Permitir operaciones de modelado _no compatibles_**, pero asegúrate de comprender los riesgos antes de hacerlo.
 
 > [!NOTE]
 > En Tabular Editor 2.x, esta configuración está disponible en **Archivo > Preferencia > Permitir características no admitidas de Power BI (experimental)**
