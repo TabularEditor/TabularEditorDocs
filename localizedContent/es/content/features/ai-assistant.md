@@ -314,122 +314,122 @@ Your instruction content goes here. This is the text that will be
 injected into the AI's system prompt when the instruction is activated.
 ```
 
-| Campo           | Obligatorio | Predeterminado              | Descripción                                                                                                           |
-| --------------- | ----------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `id`            | No          | Nombre de archivo sin `.md` | Identificador único; también se usa como `/id` para la invocación explícita                                           |
-| `name`          | No          | Title-cased `id`            | Nombre para mostrar en el autocompletado                                                                              |
-| `description`   | No          | Falls back to `name`        | Say what the instruction covers and when it applies                                                                   |
-| `priority`      | No          | 100                         | Higher values are injected first when several Custom Instructions are in effect                                       |
-| `always_inject` | No          | false                       | If true, always included in the system prompt. Such an instruction is not offered in `/` autocomplete |
-| `hidden`        | No          | false                       | Si es `true`, no se muestra en el autocompletado de `/command`                                                        |
+| Campo           | Obligatorio | Predeterminado                     | Descripción                                                                                                                                 |
+| --------------- | ----------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`            | No          | Nombre de archivo sin `.md`        | Identificador único; también se usa como `/id` para la invocación explícita                                                                 |
+| `name`          | No          | Title-cased `id`                   | Nombre para mostrar en el autocompletado                                                                                                    |
+| `description`   | No          | Si no se especifica, se usa `name` | Indica qué cubre la instrucción y cuándo se aplica                                                                                          |
+| `priority`      | No          | 100                                | Los valores más altos se inyectan primero cuando hay varias instrucciones personalizadas en vigor                                           |
+| `always_inject` | No          | false                              | Si es `true`, siempre se incluye en el prompt del sistema. Este tipo de instrucción no aparece en el autocompletado de `/.` |
+| `hidden`        | No          | false                              | Si es `true`, no se muestra en el autocompletado de `/command`                                                                              |
 
 Las instrucciones personalizadas con un `id` que coincida con el de una instrucción integrada sustituirán la versión integrada.
 
-Notes on how files are read:
+Notas sobre cómo se leen los archivos:
 
-- Frontmatter must start with `---` on the very first line of the file and end with a `---` line. If it does not, or if the YAML cannot be parsed, the whole file is treated as instruction content and every default above applies
-- Keys that are not in the table above are ignored. This is what makes a leftover `triggers:` section harmless
-- `{{version}}` anywhere in the body is replaced with the Tabular Editor AI component's version
-- Only `.md` files directly in the folder are read; subfolders are not searched
+- El frontmatter debe empezar con `---` en la primera línea del archivo y terminar con una línea `---`. Si no es así, o si no se puede analizar el YAML, todo el archivo se trata como contenido de la instrucción y se aplican todos los valores predeterminados anteriores
+- Las claves que no estén en la tabla anterior se ignoran. Esto es lo que hace que una sección `triggers:` sobrante sea inofensiva
+- Cualquier `{{version}}` en el cuerpo se reemplaza por la versión del componente de IA de Tabular Editor
+- Solo se leen los archivos `.md` que estén directamente en la carpeta; no se buscan subcarpetas
 
-### Custom Instructions from your organization
+### Instrucciones personalizadas de tu organización
 
-An administrator can publish a folder of Custom Instructions for everyone, with the `AiCustomInstructionsPath` [policy](xref:policies). It can be a read-only network share. Those instructions load for every user in addition to the built-in ones, and they are used exactly like any other: offered in `/` autocomplete, chosen by their description, invoked by `/id`.
+Un administrador puede publicar una carpeta de instrucciones personalizadas para todos mediante la directiva `AiCustomInstructionsPath` [directiva](xref:policies). Puede ser un recurso compartido de red de solo lectura. Esas instrucciones se cargan para cada usuario, además de las integradas, y se usan exactamente igual que cualquier otra: se ofrecen en el autocompletado de `/`, se eligen por su descripción y se invocan con `/id`.
 
-Where the same `id` exists in more than one place, the one that wins is:
+Si el mismo `id` existe en más de un lugar, el que prevalece es:
 
-1. Your organization's folder
-2. Your own folder
-3. The built-in instructions
+1. La carpeta de tu organización
+2. Tu propia carpeta
+3. Las instrucciones integradas
 
-So an organization instruction overrides both a built-in one and a user's own file of the same name. A separate policy, `DisableUserCustomInstructions`, makes Tabular Editor ignore the instructions in your own folder altogether and disables **Open Custom Instructions Folder**; the built-in and organization instructions keep loading.
+Así, una instrucción de la organización prevalece sobre una integrada y sobre el archivo propio del usuario con el mismo nombre. Una directiva independiente, `DisableUserCustomInstructions`, hace que Tabular Editor ignore por completo las instrucciones de tu propia carpeta y deshabilita **Abrir carpeta de instrucciones personalizadas**; las instrucciones integradas y de la organización se siguen cargando.
 
-Both policies require Tabular Editor 3 Enterprise Edition.
+Ambas directivas requieren Tabular Editor 3 Edición Enterprise.
 
-## Permissions and consent
+## Permisos y consentimiento
 
-What the AI Assistant may touch is governed by _five resources_, each carrying one access level. The same five grants govern the [MCP server](xref:mcp-server), so there is one place to look and one place to change your mind.
+Lo que el Asistente de IA puede tocar se rige por _cinco recursos_, cada uno con un nivel de acceso. Las mismas cinco autorizaciones rigen el [servidor MCP](xref:mcp-server), así que hay un único lugar que consultar y un único lugar donde cambiar de opinión.
 
-| Resource                   | What it covers                                                                                                                                           | Niveles             | Predeterminado |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | -------------- |
-| **Model metadata**         | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics                    | Deny / Read / Write | **Read**       |
-| **Model data**             | Data values from your model, such as DAX query results. Requires a live connection                                                       | Deny / Read         | **Deny**       |
-| **Best Practice Analyzer** | Read lists rules and runs the analysis; Write adds or modifies rules                                                                                     | Deny / Read / Write | **Read**       |
-| **Documents**              | Your open document editors: C# scripts and DAX queries. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | **Write**      |
-| **Macros**                 | Your macro library. Read lists and reads macros; Write is reserved for future macro-editing tools                                        | Deny / Read / Write | **Write**      |
+| Recurso                    | Qué abarca                                                                                                                                                                                        | Niveles                       | Predeterminado |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | -------------- |
+| **Metadatos del modelo**   | Nombres de tablas, columnas y medidas, expresiones, descripciones y elementos similares. El permiso de lectura también incluye las estadísticas del Analizador VertiPaq           | Denegar / Leer / Escribir     | **Leer**       |
+| **Datos del modelo**       | Valores de datos de tu modelo, como los resultados de consultas DAX. Requiere una conexión activa                                                                                 | Denegar / Leer                | **Denegar**    |
+| **Best Practice Analyzer** | Leer enumera las reglas y ejecuta el análisis; Escribir agrega o modifica reglas                                                                                                                  | Denegar / Lectura / Escritura | **Lectura**    |
+| **Documentos**             | Los editores de documentos que tienes abiertos: C# Scripts y consultas DAX. Lectura permite ver su contenido; Escritura es necesaria para crearlos o modificarlos | Denegar / Lectura / Escritura | **Escritura**  |
+| **macros**                 | Tu biblioteca de macros. Lectura permite listar y leer macros; Escritura se reserva para futuras herramientas de edición de macros                                                | Denegar / Lectura / Escritura | **Escritura**  |
 
-A **Write** grant covers Read, so there is no need to grant both. **Model data** is read-only by nature (the assistant can query your data but has no way to write values back), so it offers only Deny and Read.
-
-> [!NOTE]
-> **Model data** is the one resource denied by default. Metadata describes your model; data _is_ your model's contents, so sending it to an AI provider is a decision worth making deliberately rather than inheriting from a default.
-
-Three grants are worth a closer look:
-
-- **Model metadata > Write** lets the assistant change your model. On its own, that means writing a C# script and handing it to you to run. It is also the grant that makes [direct execution](#letting-the-assistant-change-your-model) possible, but the assistant only runs scripts itself once you have turned that on separately. Either way, only scripts that are statically determined to be safe ever run, and a script that reaches outside the model, to the file system or the network, is never executed for you.
-- **Best Practice Analyzer > Read** lets the assistant run the analysis, but running it also needs **Model metadata > Read**, since the analysis reads the model.
-- **Model data > Read** is not sufficient on its own to run a DAX query: that needs **Model metadata > Read** as well, because a query can read metadata through `INFO` functions, DMVs and the column names in its own result.
-
-### Setting the permission grants
-
-Open **Tools > Preferences > AI Features > Permissions**. Each resource has a dropdown carrying its available levels.
-
-![AI Features > Permissions preferences, one dropdown per resource at its default](~/content/assets/images/pref-ai-permissions.png)
-
-There is no separate "ask me" level. **Deny** is what asking looks like: in the chat, a resource you have not granted produces a permission card at the moment it is needed. Over MCP, where there is nobody to ask, a denied resource's tools are unavailable.
+Un permiso de **Escritura** incluye **Lectura**, así que no hace falta conceder ambos. Los **datos del modelo** son de solo lectura por naturaleza (el asistente puede consultar tus datos, pero no puede escribir valores en ellos), así que solo ofrece Denegar y Lectura.
 
 > [!NOTE]
-> If you used the AI Assistant before 3.27.0 you will notice fewer prompts. Model metadata, Documents and Macros now start at Read or above, so the chat no longer asks for them. Only DAX query results and Best Practice Analyzer rule edits still raise a card out of the box. Set a resource to **Deny** to get its prompt back.
+> Los **datos del modelo** son el único recurso que se deniega de forma predeterminada. Los metadatos describen tu modelo; los datos _son_ el contenido de tu modelo, así que enviarlos a un proveedor de IA es una decisión que conviene tomar de forma deliberada, en lugar de heredar una configuración predeterminada.
+
+Conviene examinar más de cerca tres permisos:
+
+- **Metadatos del modelo > Escritura** permite que el asistente cambie tu modelo. Por sí solo, eso significa escribir un C# Script y dártelo para que lo ejecutes. También es el permiso que hace posible la [ejecución directa](#letting-the-assistant-change-your-model), pero el asistente solo ejecuta scripts por sí mismo una vez que lo has activado por separado. En cualquier caso, solo se ejecutan scripts cuya seguridad puede determinarse estáticamente, y nunca se ejecuta por ti un script que salga del modelo, acceda al sistema de archivos o a la red.
+- **Best Practice Analyzer > Lectura** permite que el asistente ejecute el análisis, pero para hacerlo también necesita **Metadatos del modelo > Lectura**, ya que el análisis lee el modelo.
+- **Datos del modelo > Lectura** no basta por sí solo para ejecutar una consulta DAX: para eso también hace falta **Metadatos del modelo > Lectura**, porque una consulta puede leer metadatos mediante funciones `INFO`, DMVs y los nombres de columna de su propio resultado.
+
+### Configurar los permisos
+
+Abre **Herramientas > Preferencias > Funciones de IA > Permisos**. Cada recurso tiene un menú desplegable con sus niveles disponibles.
+
+![Funciones de IA > Preferencias de permisos, un menú desplegable por recurso con su configuración predeterminada](~/content/assets/images/pref-ai-permissions.png)
+
+No existe un nivel independiente de "Pregúntame". **Denegar** es, en la práctica, lo que equivale a pedir permiso: en el chat, un recurso al que no le hayas concedido acceso genera una tarjeta de permiso justo cuando se necesita. En MCP, donde no hay nadie a quien preguntar, las herramientas de un recurso denegado no están disponibles.
 
 > [!NOTE]
-> In the Enterprise Edition, IT administrators can set policies that determine these permissions. See @policies.
+> Si usaste el Asistente de IA antes de la versión 3.27.0, verás menos avisos. Los metadatos del modelo, los documentos y las macros ahora empiezan en el nivel Lectura o superior, por lo que el chat ya no los solicita. Solo los resultados de consultas DAX y las ediciones de reglas del Best Practice Analyzer siguen generando una tarjeta de forma predeterminada. Establece un recurso en **Denegar** para que vuelva a mostrarse su solicitud.
 
-### Permission cards in the chat
+> [!NOTE]
+> En la Edición Enterprise, los administradores de TI pueden establecer directivas que determinen estos permisos. Consulta @policies.
 
-When the assistant needs a resource your standing grant does not cover, a **Permission Required** card appears in the conversation, naming what it wants to do, for instance "The AI would like to access the metadata of your semantic model", or the DAX query it proposes to run.
+### Tarjetas de permiso en el chat
 
-![A Permission Required card in the chat, naming the DAX query the assistant wants to run, with Allow, Allow for session, Allow for this model, Always allow and Deny buttons](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
+Cuando el asistente necesita un recurso que tus permisos actuales no cubren, aparece en la conversación una tarjeta de **Permiso requerido** que indica lo que quiere hacer, por ejemplo: "La IA desea acceder a los metadatos de tu modelo semántico", o la consulta DAX que propone ejecutar.
 
-| Button                   | Qué hace                                                                                                                                                                                                                  |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Allow**                | This turn only. The assistant may repeat the same request while it finishes what you asked, and nothing is remembered afterwards                                                                          |
-| **Allow for session**    | Until Tabular Editor is restarted. Held in memory, never written to disk                                                                                                                                  |
-| **Allow for this model** | Recorded in the model's [user options](xref:user-options) file, so it applies the next time you open this model. Offered for **Model metadata** and **Model data** only, and only while a model is loaded |
-| **Always allow**         | Raises the standing grant on the Permissions page, for every model and every session                                                                                                                                      |
-| **Deny**                 | Refuses this request. The assistant carries on without that access and asks again next time                                                                                                               |
+![Una tarjeta de Permiso requerido en el chat, que muestra la consulta DAX que el asistente quiere ejecutar, con los botones Permitir, Permitir para esta sesión, Permitir para este modelo, Permitir siempre y Denegar](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
 
-**Always allow** only ever raises a grant, never lowers one: allowing a read cannot narrow a Write grant you already had.
+| Botón                         | Qué hace                                                                                                                                                                                                                                                                 |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Permitir**                  | Solo esta vez. El asistente puede repetir la misma solicitud mientras termina lo que le pediste, y después no se guarda nada                                                                                                                             |
+| **Permitir para esta sesión** | Hasta que se reinicie Tabular Editor. Se mantiene en memoria; nunca se escribe en disco                                                                                                                                                                  |
+| **Permitir para este modelo** | Se registra en el archivo de [opciones de usuario](xref:user-options) del modelo, por lo que se aplica la próxima vez que abras este modelo. Solo se ofrece para **Metadatos del modelo** y **Datos del modelo**, y solo mientras haya un modelo cargado |
+| **Permitir siempre**          | Aumenta el permiso permanente en la página Permisos, para todos los modelos y todas las sesiones                                                                                                                                                                         |
+| **Denegar**                   | Deniega esta solicitud. El asistente continúa sin ese acceso y vuelve a pedirlo la próxima vez                                                                                                                                                           |
 
-You do not have to answer the card at all. See [Stopping a turn while permission is pending](#stopping-a-turn-while-permission-is-pending) below.
+**Permitir siempre** solo aumenta un permiso; nunca lo reduce: permitir el acceso de lectura no puede restringir un permiso de escritura que ya tenías.
 
-### What the MCP server shares, and what it does not
+No tienes que responder a la tarjeta en absoluto. Consulta [Detener un turno mientras hay un permiso pendiente](#stopping-a-turn-while-permission-is-pending) más abajo.
 
-The [MCP server](xref:mcp-server) reads the _same five grants_, but it does not use the card flow. An agent connecting over MCP is unattended, so there is nobody to prompt:
+### Lo que comparte el servidor MCP y lo que no
 
-- Grants are _snapshotted when the server starts_ and govern its tool surface for the server's lifetime. Changing a grant while the server is running has no effect until you restart it.
-- Only the _global_ grants are read. A grant you gave with **Allow for this model**, and a session grant, apply to the chat alone and never reach an MCP agent.
-- A denied resource's tools are not offered to the agent at all, rather than being offered and then refused.
+El [servidor MCP](xref:mcp-server) lee los _mismos cinco permisos_, pero no usa el flujo de tarjetas. Un agente que se conecta por MCP se ejecuta sin supervisión, así que no hay nadie a quien preguntar:
 
-### Withdrawing permission
+- Los permisos se _capturan en una instantánea al iniciar el servidor_ y determinan qué herramientas expone durante toda su ejecución. Cambiar un permiso mientras el servidor está en ejecución no surte efecto hasta que lo reinicies.
+- Solo se leen los permisos _globales_. Tanto un permiso que hayas concedido con **Permitir para este modelo** como un permiso de sesión se aplican solo al chat y nunca llegan a un agente MCP.
+- Las herramientas de un recurso denegado ni siquiera se ofrecen al agente; no se ofrecen primero para luego denegarse.
 
-Set the resource back to **Deny** on the Permissions page. The chat asks again the next time it needs that resource; a running MCP server keeps the access it started with until you restart it.
+### Retirar permisos
 
-Lowering a global grant does not clear a per-model grant. To withdraw one of those, delete the model's `.tmuo` file, or the `Permissions` entry within it. See details in @user-options.
+Configura de nuevo el recurso en **Denegar** en la página Permisos. El chat volverá a pedirlo la próxima vez que necesite ese recurso; un servidor MCP en ejecución mantiene el acceso con el que se inició hasta que lo reinicies.
 
-### Audit record
+Reducir un permiso global no elimina un permiso por modelo. Para retirar uno de ellos, elimina el archivo `.tmuo` del modelo o la entrada `Permissions` dentro de él. Consulta los detalles en @user-options.
 
-On Tabular Editor 3 Enterprise Edition, a local record is kept of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** takes you to the files.
+### Registro de auditoría
 
-On Desktop and Business Edition, and before a license is activated, nothing is recorded, no folder is created and the button is not shown.
+En la Edición Enterprise de Tabular Editor 3, se conserva un registro local de lo que hicieron el Asistente de IA y el [servidor MCP](xref:mcp-server): qué permisos se solicitaron y cómo respondiste, qué herramientas se ejecutaron y si cada una se completó correctamente, falló o fue denegada, y el texto completo de cualquier C# Script que se ejecutó o se te entregó para revisión. Tus indicaciones, las respuestas del asistente y los valores de datos de tu modelo nunca se registran. La opción **Abrir carpeta de auditoría** en **Herramientas > Preferencias > Funciones de IA** te lleva a los archivos.
 
-See @ai-audit-log for what each record holds, where the files live and the policies that redirect them.
+En Desktop y en la Edición Business, y antes de activar una licencia, no se registra nada, no se crea ninguna carpeta ni se muestra el botón.
 
-### Stopping a turn while permission is pending
+Consulta @ai-audit-log para saber qué incluye cada registro, dónde se almacenan los archivos y qué directivas los redirigen.
 
-A **Permission Required** card waits for an answer before the assistant can carry on. You do not have to answer it: pressing **Stop** ends the turn, removes the card and treats the request as denied. The panel returns to its normal state and you can carry on in the same conversation with a new message.
+### Detener un turno mientras el permiso está pendiente
+
+Una tarjeta de **Permiso requerido** espera una respuesta antes de que el asistente pueda continuar. No tienes que responderla: al pulsar **Detener**, el turno finaliza, se elimina la tarjeta y la solicitud se considera denegada. El panel vuelve a su estado normal y puedes continuar en la misma conversación con un mensaje nuevo.
 
 ## Preferencias
 
-Configure AI Assistant display and behavior options under **Tools > Preferences > AI Features > AI Assistant > Preferences**.
+Configura las opciones de visualización y comportamiento del Asistente de IA en **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Preferencias**.
 
 ### Visualización del chat
 
@@ -441,51 +441,51 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 
 ### Compactación de contexto
 
-| Preferencia                         | Predeterminado | Descripción                                                                                                                                         |
-| ----------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Compactación automática             | true           | Resumir automáticamente los mensajes antiguos al acercarse al límite del contexto                                                                   |
-| Umbral de compactación automática % | 80             | Percentage of the model's own context window at which auto-compaction is triggered. Values outside 50-100 have no additional effect |
+| Preferencia                         | Predeterminado | Descripción                                                                                                                                                                                             |
+| ----------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Compactación automática             | true           | Resumir automáticamente los mensajes antiguos al acercarse al límite del contexto                                                                                                                       |
+| Umbral de compactación automática % | 80             | Porcentaje de la ventana de contexto del propio modelo a partir del cual se activa la compactación automática. Los valores fuera del intervalo 50-100 no tienen ningún efecto adicional |
 
 ### C# Script
 
-| Preferencia                                   | Predeterminado | Descripción                                                                                                                                                                                                                                                                                                                                                                             |
-| --------------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Allow AI assistant to run C# scripts directly | false          | Let the assistant carry out model changes itself instead of opening a script for you to run. Unavailable until **Model metadata** is set to **Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). See [Letting the assistant change your model](#letting-the-assistant-change-your-model) |
-| Previsualizar cambios                         | true           | Mostrar el cuadro de diálogo de vista previa de cambios al ejecutar C# Scripts generados por IA desde el chat                                                                                                                                                                                                                                                                           |
+| Preferencia                                                     | Predeterminado | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Permitir que el Asistente de IA ejecute C# Scripts directamente | false          | Permite que el asistente aplique por sí mismo los cambios en el modelo, en lugar de abrir un script para que lo ejecutes. No estará disponible hasta que configures **Metadatos del modelo** en **Escritura** dentro de **Permisos**, y no estará disponible en absoluto con la `DisableCSharpScripts` [policy](xref:policies). Consulta [Dejar que el asistente cambie tu modelo](#letting-the-assistant-change-your-model) |
+| Previsualizar cambios                                           | true           | Mostrar el cuadro de diálogo de vista previa de cambios al ejecutar C# Scripts generados por IA desde el chat                                                                                                                                                                                                                                                                                                                                                |
 
-Two further settings sit on the **AI Features** page itself, above **AI Assistant**, because they apply to the MCP server as well: _Check for knowledge base updates on startup_, and the **Open audit folder** button. See @preferences.
+Hay otros dos ajustes en la propia página **Funciones de IA**, encima de **Asistente de IA**, porque también se aplican al servidor MCP: _Buscar actualizaciones de la base de conocimientos al iniciar_ y el botón **Abrir carpeta de auditoría**. Consulta @preferencias.
 
-![The AI Assistant preferences page, with the three chat display indicators, Auto compact and its threshold, and the two C# script settings: Allow AI assistant to run C# scripts directly, cleared, and Preview changes, ticked](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+![La página de preferencias del Asistente de IA, con los tres indicadores de visualización del chat, Compactación automática y su umbral, y los dos ajustes de C# Script: Permitir que el asistente de IA ejecute C# Scripts directamente, desmarcado, y Vista previa de los cambios, marcado](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
 ## Uso de tokens
 
 Cada mensaje al Asistente de IA consume tokens de entrada. El coste en tokens de un solo mensaje depende de qué contexto se incluya:
 
 - **Prompt del sistema e instrucciones personalizadas**: Se envían con cada mensaje. Normalmente, entre 5.000 y 15.000 tokens, según las instrucciones personalizadas que estén activas.
-- **Model metadata**: when the assistant needs to understand your model, it retrieves metadata through tool calls. To stay within provider rate limits on large models, the assistant uses a progressive-disclosure approach. That is, it first fetches a lightweight overview (table and measure names, relationships), then searches for relevant objects by name, description or DAX expression and only drills into full details for the specific tables or objects that the question requires. Los resultados de las herramientas que, de otro modo, serían muy grandes se truncan e incluyen indicaciones sobre cómo el asistente puede recuperar los datos restantes.
+- **Metadatos del modelo**: cuando el asistente necesita entender tu modelo, recupera los metadatos mediante llamadas a herramientas. Para mantenerse dentro de los límites de tasa del proveedor en modelos grandes, el asistente usa un enfoque de divulgación progresiva. Es decir, primero obtiene un resumen ligero (nombres de tablas y medidas, relaciones); luego busca objetos relevantes por nombre, descripción o expresión DAX, y solo profundiza en los detalles completos de las tablas u objetos específicos que requiera la pregunta. Los resultados de las herramientas que, de otro modo, serían muy grandes se truncan e incluyen indicaciones sobre cómo el asistente puede recuperar los datos restantes.
 
 ### Contador de tokens
 
-The token counter sits in the status strip above the message box, next to the [active model indicator](#choosing-a-model). The bar reads _used_ / _total_ in thousands of tokens and is colored green, amber or red as the context fills up. A `±` in front of the figure means an exact count is not available yet.
+El contador de tokens está en la franja de estado situada encima del cuadro de mensaje, junto al [indicador de modelo activo](#choosing-a-model). La barra muestra _usado_ / _total_ en miles de tokens y se colorea en verde, ámbar o rojo a medida que se llena el contexto. Un `±` delante de la cifra significa que todavía no hay un recuento exacto disponible.
 
-Hover over it for a breakdown in three labeled sections:
+Pasa el cursor por encima para ver un desglose en tres secciones etiquetadas:
 
-| Section                                           | What it covers                                                                                                                                          |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Last turn**                                     | What the most recent exchange cost: fresh input, tokens served from the provider's prompt cache, tokens written to the cache and output |
-| **This conversation (billed)** | The same four figures accumulated across every request in the conversation, tool round-trips included                                                   |
-| **Context**                                       | Tokens currently in the context window, against the window's real size                                                                                  |
+| Sección                                              | Qué incluye                                                                                                                                                            |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Último intercambio**                               | Lo que costó el intercambio más reciente: entrada nueva, tokens servidos desde la caché de prompts del proveedor, tokens escritos en la caché y salida |
+| **Esta conversación (facturada)** | Las mismas cuatro cifras acumuladas en todas las solicitudes de la conversación, incluidas las interacciones de ida y vuelta con las herramientas                      |
+| **Contexto**                                         | Tokens que hay actualmente en la ventana de contexto, frente al tamaño real de la ventana                                                                              |
 
-A line reads, for example, `37,588 input + 131,744 cached · write 37,558 · output 2,866`. The cache parts are left out for providers that do not support prompt caching, and a section is left out entirely when it has nothing to report.
+Una línea dice, por ejemplo, `37,588 input + 131,744 cached · write 37,558 · output 2,866`. Las partes relacionadas con la caché se omiten en los proveedores que no admiten la caché de prompts, y una sección se omite por completo cuando no tiene nada que Report.
 
 > [!TIP]
-> Separating the last turn from the conversation total is what tells you whether a short follow-up question was actually expensive. A large **This conversation (billed)** figure next to a small **Last turn** figure is normal in a long conversation.
+> Separar el último intercambio del total de la conversación es lo que te indica si una breve pregunta de seguimiento salió realmente cara. Que aparezca una cifra alta en **Esta conversación (facturada)** junto a una cifra baja en **Último intercambio** es normal en una conversación larga.
 
-### Context window
+### Ventana de contexto
 
-The context usage bar, the auto-compaction point and the maximum length of a single reply all follow the _real context window of the model in use_, not one fixed figure. A model with a one-million-token window is measured against a million tokens.
+La barra de uso del contexto, el punto de compactación automática y la longitud máxima de una sola respuesta dependen de la _ventana de contexto real del modelo en uso_, no de una cifra fija. Un modelo con una ventana de un millón de tokens se mide con respecto a un millón de tokens.
 
-Where the model's real window is not known (an Azure OpenAI or Custom deployment name, or a machine where the model catalog has never been retrieved), Tabular Editor falls back to 200,000 tokens.
+Cuando no se conoce la ventana real del modelo (por ejemplo, con un nombre de implementación de Azure OpenAI o Custom, o en un equipo en el que nunca se ha recuperado el catálogo de modelos), Tabular Editor recurre a 200.000 tokens.
 
 ### Reducir el uso de tokens
 
@@ -501,19 +501,19 @@ Otras formas de reducir el uso de tokens:
 
 - Requiere una clave de API proporcionada por el usuario. No se incluye ninguna clave de API integrada
 - Las respuestas de la IA dependen del modelo seleccionado y de las capacidades del proveedor
-- The usable context window is the selected model's own; where Tabular Editor cannot determine it, 200,000 tokens is assumed
+- La ventana de contexto utilizable es la del modelo seleccionado; cuando Tabular Editor no puede determinarla, se asume un valor de 200.000 tokens
 - El Asistente de IA no sustituye la comprensión de los fundamentos de DAX y del diseño de modelos semánticos
 - La calidad de las respuestas varía según el proveedor y el modelo seleccionado
 - El Asistente de IA no puede conectarse a archivos o servicios externos ni buscar en la web
-- The AI Assistant cannot connect to external MCP servers to extend its own tools. This is about the chat only: Tabular Editor 3 itself acts as an MCP server, so your own agent can work on the open model. See @mcp-server
+- El Asistente de IA no puede conectarse a servidores MCP externos para ampliar sus propias herramientas. Esto solo se refiere al chat: Tabular Editor 3 sí actúa como servidor MCP, así que tu propio agente puede trabajar con el modelo abierto. Consulta @mcp-server
 - El Asistente de IA no puede conectarse a otro modelo desde el chat. Usa la interfaz de usuario de Tabular Editor para cambiar las conexiones del modelo
 - El Asistente de IA no puede administrar las preferencias
 
 ## Desactivar el Asistente de IA
 
-The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Puedes modificar una instalación existente de Tabular Editor 3 para incluir o excluir el componente del Asistente de IA volviendo a ejecutar el instalador de Tabular Editor 3. Si usas la versión portable de Tabular Editor 3, puedes quitar el componente del Asistente de IA eliminando el archivo `TabularEditor3.AI.dll` del directorio de instalación.
+El Asistente de IA es un componente opcional, instalado de forma predeterminada a partir de Tabular Editor 3.27.0. Puedes modificar una instalación existente de Tabular Editor 3 para incluir o excluir el componente del Asistente de IA volviendo a ejecutar el instalador de Tabular Editor 3. Si usas la versión portable de Tabular Editor 3, puedes quitar el componente del Asistente de IA eliminando el archivo `TabularEditor3.AI.dll` del directorio de instalación.
 
-The AI Assistant and the MCP server ship in the same component, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off the chat while keeping the MCP server, leave the component in place and use the `DisableAiChat` policy.
+El Asistente de IA y el servidor MCP vienen en el mismo componente, por lo que, si lo excluyes o eliminas `TabularEditor3.AI.dll`, se eliminan ambos. Para desactivar el chat y mantener el servidor MCP, deje el componente instalado y use la directiva `DisableAiChat`.
 
 > [!NOTE]
-> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3, the MCP server included, by specifying the [`DisableAi` policy](xref:policies). `DisableAiChat` turns off the chat alone, and `DisableMcpServer` the MCP server alone. See @policies.
+> Independientemente de que el componente del Asistente de IA esté instalado o no, un administrador del sistema puede desactivar toda la funcionalidad de IA en Tabular Editor 3, incluido el servidor MCP, especificando la [directiva `DisableAi`](xref:policies). `DisableAiChat` desactiva solo el chat, y `DisableMcpServer` desactiva solo el servidor MCP. Consulta @policies.
