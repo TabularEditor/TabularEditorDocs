@@ -24,8 +24,8 @@ Esta guía muestra cómo crear reglas de validación sencillas basadas en predic
 Estas reglas se incluyen solo con fines ilustrativos y no reflejan necesariamente requisitos técnicos estrictos ni de Metric Views ni del Semantic Bridge.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> Estas guías prácticas están pensadas para Tabular Editor 3.26.2 y versiones posteriores.
+> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
 
 ## Los cuatro métodos auxiliares para reglas
 
@@ -33,7 +33,7 @@ Hay un método auxiliar para cada tipo de objeto de Metric View:
 
 - `MakeValidationRuleForView`: reglas para el objeto View raíz
 - `MakeValidationRuleForJoin`: reglas para objetos Join
-- `MakeValidationRuleForField` - rules for Field objects
+- `MakeValidationRuleForField` - reglas para objetos Field
 - `MakeValidationRuleForMeasure`: reglas para objetos de medida
 
 Cada método auxiliar acepta cuatro parámetros:
@@ -69,9 +69,9 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
 );
 ```
 
-## Rule for Metric View Field
+## Regla para el campo de Metric View
 
-Check that Metric View field names do not contain underscores:
+Compruebe que los nombres de los campos de Metric View no contengan guiones bajos:
 
 ```csharp {compile}
 var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
@@ -95,12 +95,12 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 );
 ```
 
-## Rules for specific Metric View versions
+## Reglas para versiones específicas de Metric View
 
-Each helper has an overload that takes a final `minVersion` argument, a string such as "0.1" or "1.1".
-Rules defined with a `minVersion` only run against Metric Views at or above that version.
-This is useful for a rule that checks a property introduced in a later version,
-such as `display_name` (added in v1.1):
+Cada método auxiliar tiene una sobrecarga que acepta un argumento final `minVersion`, una cadena como "0.1" o "1.1".
+Las reglas definidas con `minVersion` solo se ejecutan con Metric Views de esa versión o superior.
+Esto resulta útil para una regla que comprueba una propiedad introducida en una versión posterior,
+como `display_name` (agregada en v1.1):
 
 ```csharp {compile}
 var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
@@ -213,7 +213,7 @@ Found 5 issue(s):
 
 ## Pasos a seguir
 
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
+- [Crear reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules)
 
 ## Ver también
 
