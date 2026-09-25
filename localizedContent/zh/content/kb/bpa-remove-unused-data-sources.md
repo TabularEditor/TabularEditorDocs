@@ -10,7 +10,7 @@ description: 用于删除孤立数据源的最佳实践规则，可降低模型�
 
 ## 概览
 
-此最佳实践规则用于识别未被任何分区或表表达式引用的数据源。 Removing unused data sources reduces model complexity, improves maintainability, and prevents confusion.
+此最佳实践规则用于识别未被任何分区或表表达式引用的数据源。移除未使用的数据源可以降低模型复杂度、提升可维护性，并避免引起混淆。
 
 - 类别：维护
 - 严重性：低 (1)
@@ -107,7 +107,7 @@ Data Sources:
 
 **结果**：模型更简洁，只保留必要的数据源
 
-## False Positives
+## 误报
 
 该规则可能会标记以下类型的数据源：
 
