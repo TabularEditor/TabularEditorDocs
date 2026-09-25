@@ -33,11 +33,11 @@ Sin embargo, con el archivo de Proyecto de Power BI, es posible crear un archivo
 
 El primer paso es crear un nuevo Report de Power BI y guardarlo como un archivo de Proyecto de Power BI (.pbip) vacío, como se muestra en el siguiente diagrama.
 
-![Save PBIP file](~/content/assets/images/power-bi/save-pbip-file.png)
+![Guardar el archivo PBIP](~/content/assets/images/power-bi/save-pbip-file.png)
 
 Esto crea una estructura de carpetas que contiene un archivo _model_ vacío. Este archivo _model_ contiene los metadatos del modelo. En el siguiente paso sobrescribirás estos metadatos con los del modelo publicado que quieres guardar en .pbix.
 
-![PBIP with Model file](~/content/assets/images/power-bi/pbip-file-bim-model.png)
+![PBIP con el archivo de modelo](~/content/assets/images/power-bi/pbip-file-bim-model.png)
 
 Cierra Power BI Desktop y continúa con el siguiente paso en Tabular Editor.
 
