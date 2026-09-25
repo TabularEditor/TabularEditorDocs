@@ -35,13 +35,13 @@ Se abrirá el cuadro de diálogo **Cargar modelo semántico desde la base de dat
 
 ![Cuadro de diálogo de conexión](~/content/assets/images/connect-dialog.png)
 
-### Status bar color
+### Color de la barra de estado
 
-**Advanced Options** includes a **Status bar color** picker. The color you choose is remembered with the connection, and Tabular Editor paints the status bar with it whenever a model is open on that server.
+**Opciones avanzadas** incluye un selector de **Color de la barra de estado**. El color que elijas se guarda con la conexión y Tabular Editor pinta la barra de estado con ese color siempre que haya un modelo abierto en ese servidor.
 
-No particular color means anything in itself; assigning one is what matters. Giving production a color you would not choose for anything else makes it obvious, at a glance and without reading the server name, which environment the window in front of you is connected to. Leave it on **Default** to keep the theme's own status bar.
+Por sí solo, ningún color significa nada; lo importante es asignar uno. Asignar a producción un color que no usarías para nada más hace evidente, de un vistazo y sin leer el nombre del servidor, a qué entorno está conectada la ventana que tienes delante. Déjalo en **Predeterminado** para mantener la barra de estado del tema.
 
-Closing the model restores the status bar to the active theme.
+Al cerrar el modelo, la barra de estado vuelve al tema activo.
 
 ## Seleccionar base de datos
 
@@ -78,28 +78,28 @@ La mayoría de las instancias de Analysis Services admiten varios idiomas. Consu
 
 ## Configuración de XMLA de Fabric/Power BI
 
-XMLA read/write is enabled by default on all Fabric and Power BI capacities since June 2025. If you can't connect through the XMLA endpoint, verify that an admin hasn't disabled one of these two settings.
+La lectura/escritura de XMLA está habilitada de forma predeterminada en todas las capacidades de Fabric y Power BI desde junio de 2025. Si no puedes conectarte a través del punto de conexión XMLA, comprueba que un administrador no haya deshabilitado una de estas dos opciones.
 
-### Tenant XMLA endpoint setting
+### Configuración del punto de conexión XMLA del inquilino
 
-In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled.
+En el portal de administración de Fabric/Power BI, la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales" debe estar habilitada.
 
 A nivel de inquilino, la configuración puede estar restringida a ciertos usuarios. Si en tu organización esta configuración está restringida, asegúrate de que todos los usuarios necesarios tengan permiso para usar el punto de conexión XMLA a nivel de inquilino.
 
-![Tenant admin setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Configuración de administración del inquilino](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### XMLA read/write on the capacity
+### Lectura/escritura de XMLA en la capacidad
 
-To use the XMLA endpoint, assign the workspace that hosts the semantic model to a Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license. The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). This is the default since June 2025.
+Para usar el punto de conexión XMLA, asigna el Workspace que hospeda el modelo semántico a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU). La capacidad debe tener el punto de conexión XMLA configurado como [**Lectura y escritura** en la configuración de la capacidad](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). Este es el valor predeterminado desde junio de 2025.
 
-![Capacity admin setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Configuración de administración de la capacidad](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-If read/write has been switched off, ask your capacity admin to re-enable it in the Admin Portal:
+Si se ha desactivado la lectura/escritura, pide al administrador de la capacidad que la vuelva a habilitar en el portal de administración:
 
-1. Open **Capacity Settings**.
-2. Choose the type of capacity.
-3. Select the relevant capacity.
-4. Navigate to **Power BI Workloads** and set **XMLA Endpoint** to **Read Write**.
+1. Abre **Configuración de capacidad**.
+2. Elija el tipo de capacidad.
+3. Seleccione la capacidad correspondiente.
+4. Vaya a **Cargas de trabajo de Power BI** y establezca el **punto de conexión XMLA** en **Lectura y escritura**.
 
 ### Permisos de usuario a nivel de Workspace
 
@@ -129,7 +129,7 @@ Para garantizar la mejor experiencia al editar modelos usando el punto de conexi
 
 Si un usuario distinto del propietario del modelo semántico necesita editar el modelo a través del punto de conexión XMLA, debe deshabilitarse la configuración de administración de seguridad de Fabric/Power BI denominada "Bloquear la republicación y deshabilitar la actualización del paquete".
 
-![Block republish and disable package refresh setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Configuración para bloquear la republicación y desactivar la actualización del paquete](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 ## Tipos de modelo no compatibles
 
@@ -161,17 +161,17 @@ Copia y pega la cadena de conexión directamente desde el Workspace, en lugar de
 
 3. Según tu equipo (si tu inicio de sesión de Windows está vinculado a Entra ID o a tu proveedor de identidades), es posible que se te solicite iniciar sesión. Es importante que la cuenta que uses sea la que tenga permisos para acceder al Workspace. Si tu organización tiene varios tenants o si tienes varios inicios de sesión, puede que esto no coincida con tu inicio de sesión de Windows. Debes usar exactamente la credencial que se muestra en la interfaz web de Fabric para tu usuario.
 
-![Authenticate to FabricPowerBI](~/content/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
+![Autentíquese en FabricPowerBI](~/content/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
 
 4. Después de autenticarte correctamente, verás el cuadro de diálogo "Choose database". Selecciona una y haz clic en "Ok".
 
-![Choose Database](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
+![Elegir base de datos](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
 
 ### Establece el tipo de autenticación en Microsoft Entra ID
 
 En algunos casos, la opción de seguridad "Integrada" puede ser distinta de la cuenta de usuario que debería usarse para autenticarse frente al servicio de Fabric/Power BI. El siguiente paso es elegir la opción **Microsoft Entra MFA** en el cuadro de diálogo de apertura del modelo.
 
-![Microsoft Entra MFA](~/content/assets/images/common/XMLASettings/LoadModelFromDatabaseMicrosoftEntraID.png)
+![MFA de Microsoft Entra](~/content/assets/images/common/XMLASettings/LoadModelFromDatabaseMicrosoftEntraID.png)
 
 Al elegir la opción "Microsoft Entra MFA" se obliga a usar la autenticación multifactor y te permite seleccionar la cuenta específica necesaria para conectarte al Workspace.
 
