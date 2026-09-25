@@ -8,13 +8,13 @@ description: 用于隐藏外键列的最佳实践规则，可为最终用户简�
 
 # 隐藏外键列
 
-## 概述
+## 概览
 
-此最佳实践规则会识别对最终用户可见的外键列（关系的多方）。 外键应隐藏，因为它们仅用于建立关系连接，展示出来没有分析价值。
+此最佳实践规则会识别对最终用户可见的外键列（关系的多方）。 Foreign keys should be hidden because they serve only as relationship connectors and provide no analytical value when displayed.
 
-- 类别：格式设置
+- 类别：格式化
 
-- 严重性：中（2）
+- 严重级别：中等（2）
 
 ## 适用于
 
@@ -32,9 +32,9 @@ description: 用于隐藏外键列的最佳实践规则，可为最终用户简�
 - **误用风险**：用户可能按键值分组，而不是按正确的维度属性分组
 - **可视化效果差**：图表显示的是键值，而不是易读的名称
 
-外键的存在仅用于在表之间建立关系。 一旦关系建立完成，用户就应使用维度属性，而不是外键本身。
+Foreign keys exist only to create relationships between tables. 一旦关系建立完成，用户就应使用维度属性，而不是外键本身。
 
-## 何时触发此规则
+## 该规则何时触发
 
 当某列满足以下条件时，将触发该规则：
 
@@ -58,7 +58,7 @@ IsHidden == false
 IsHidden = true
 ```
 
-应用步骤：
+应用方法：
 
 1. 在 **Best Practice Analyzer** 中选择被标记的外键列
 2. 点击 **Apply Fix**
@@ -88,26 +88,26 @@ IsHidden = true
 ### 修复前
 
 ```
-Sales 表字段 (可见):
+Sales Table Fields (visible):
   - OrderDate
-  - CustomerKey  ← 外键 (应隐藏)
-  - ProductKey   ← 外键 (应隐藏)
+  - CustomerKey  ← Foreign key (should be hidden)
+  - ProductKey   ← Foreign key (should be hidden)
   - SalesAmount
   - Quantity
 ```
 
-**用户体验**：字段列表显得很杂乱。 用户可能会误用 `Sales[CustomerKey]`，而不是 `Customer[CustomerName]`。
+**用户体验**：字段列表显得很杂乱。用户可能会误用 `Sales[CustomerKey]`，而不是 `Customer[CustomerName]`。
 
 ### 修复后
 
 ```
-Sales 表字段 (可见):
+Sales Table Fields (visible):
   - OrderDate
   - SalesAmount
   - Quantity
 ```
 
-**用户体验**：字段列表很清晰。 用户会自然使用维度属性，关系筛选会自动生效。
+**User experience**: Clean field list. Users naturally use dimension attributes, relationship filtering works automatically.
 
 ## 兼容级别
 

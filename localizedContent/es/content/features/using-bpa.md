@@ -2,7 +2,7 @@
 uid: using-bpa
 title: Uso del Best Practice Analyzer
 author: Morten Lønskov
-updated: 2023-02-09
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -53,7 +53,7 @@ La ventana del Best Practice Analyzer enumera continuamente todas las **reglas e
 - **Ir al objeto...**: Al elegir esta opción o hacer doble clic en un objeto de la lista, se te llevará al mismo objeto en la interfaz principal.
 - **Ignorar elemento/elementos**: Si seleccionas uno o varios objetos de la lista y eliges esta opción, se aplicará una anotación a los objetos seleccionados que indica que Best Practice Analyzer debe ignorarlos en adelante. Si ignoraste un objeto por error, activa el botón "Mostrar ignorados" en la parte superior de la pantalla. Esto te permitirá dejar de ignorar un objeto que se había ignorado previamente.
 - **Ignorar regla**: Si has seleccionado una o varias reglas en la lista, esta opción agregará una anotación a nivel de modelo que indica que la regla seleccionada siempre debe ignorarse. De nuevo, activando el botón "Mostrar ignorados" también puedes dejar de ignorar reglas.
-- **Generar script de corrección**: En las reglas que tengan una corrección sencilla (es decir, cuando el problema se puede resolver simplemente estableciendo una única propiedad en el objeto), esta opción estará habilitada. Al hacer clic, se copiará un C# Script en el portapapeles. Luego puedes pegar este script en el área de [Scripting avanzado](/Advanced-Scripting) de Tabular Editor, donde podrás revisarlo antes de ejecutarlo para aplicar la corrección.
+- **Generar script de corrección**: En las reglas que tengan una corrección sencilla (es decir, cuando el problema se puede resolver simplemente estableciendo una única propiedad en el objeto), esta opción estará habilitada. Al hacer clic, se copiará un C# Script en el portapapeles. This script can then be subsequently pasted into the [Advanced Scripting](xref:advanced-scripting) area of Tabular Editor, where you can review it before executing it to apply the fix.
 - **Aplicar corrección**: Esta opción también está disponible para las reglas que tengan una corrección sencilla, como se mencionó anteriormente. En lugar de copiar el script al portapapeles, se ejecutará de inmediato.
 
 ## Gestión de reglas de mejores prácticas
@@ -63,5 +63,20 @@ Si necesitas agregar, quitar o modificar las reglas que se aplican a tu modelo, 
 ![Administrar reglas de BPA](~/content/assets/images/common/BPAOverviewManageRules.png)
 
 La ventana Administrar reglas de BPA contiene dos listas: la lista superior representa las **colecciones** de reglas que están cargadas actualmente. Al seleccionar una colección en esta lista, se mostrarán todas las reglas definidas dentro de esa colección en la lista inferior.
+
+The collections are:
+
+| Collection                                  | Where its rules live                                                                                                                     | Editable                                 |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **(Effective rules)**    | Not a store of its own; the merged, deduplicated set of every rule below, which is what actually runs against your model                 | No                                       |
+| **Built-in Best Practices**                 | Shipped with Tabular Editor 3; a curated set maintained by the Tabular Editor team. See @built-in-bpa-rules | No, but individual rules can be disabled |
+| One entry per **external rule file or URL** | Wherever the file or URL points                                                                                                          | Depends on the source                    |
+| **Rules within the current model**          | An annotation on the model itself, so they travel with it                                                                                | Sí                                       |
+| **Rules for the local user**                | `%LocalAppData%\TabularEditor3\BPARules.json`; only you see them                                                                       | Sí                                       |
+| **Rules on the local machine**              | `%ProgramData%`; every user of this machine sees them                                                                                    | Sí                                       |
+
+The built-in collection is only listed while _Enable built-in best practice rules_ is on under @preferences. Its rule IDs are reserved: defining your own rule with one of them is refused.
+
+Use **Enable All** and **Disable All** to switch a whole collection on or off without deleting anything.
 
 ![Interfaz de Administrar reglas de BPA](~/content/assets/images/common/PBAOverviewManageRulesPopUp.png)

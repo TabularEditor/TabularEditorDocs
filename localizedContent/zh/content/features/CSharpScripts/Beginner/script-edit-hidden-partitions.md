@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-在 Tabular Editor 中，计算表格、计算组和字段参数不会显示分区。 这是有意为之，因为这些对象通常不应或无法进行编辑。 不过，你仍然可以通过下面的脚本片段访问并编辑分区的属性。
+在 Tabular Editor 中，计算表格、计算组和字段参数不会显示分区。 This is on purpose as these should/can not generally be edited. The partition's properties can however still be accessed and edited with below script snippet.
 
 ## 脚本
 

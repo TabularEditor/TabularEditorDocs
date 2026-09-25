@@ -1,19 +1,19 @@
 ---
 uid: kb.bpa-translate-descriptions
-title: Traducir las descripciones para todas las configuraciones regionales
+title: Translate Descriptions for All Cultures
 author: Morten Lønskov
 updated: 2026-01-09
 description: Regla de buenas prácticas que garantiza que las descripciones de los objetos estén traducidas para todas las configuraciones regionales definidas.
 ---
 
-# Traducir las descripciones para todas las configuraciones regionales
+# Translate Descriptions for All Cultures
 
 ## Resumen
 
 Esta regla identifica objetos con descripciones a las que les faltan traducciones para una o varias configuraciones regionales.
 
 - Categoría: Diseño del modelo
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -33,7 +33,7 @@ Esta regla identifica objetos con descripciones a las que les faltan traduccione
 - **Localización incompleta**: Las descripciones solo se muestran en el idioma predeterminado
 - **Texto de ayuda incoherente**: Los usuarios ven una mezcla de idiomas
 - **Confusión de los usuarios**: La documentación parece incompleta
-- **Apariencia profesional**: Las traducciones faltantes reducen la calidad del modelo
+- **Imagen profesional**: La falta de traducciones reduce la calidad del modelo
 
 ## Cuándo se activa esta regla
 
@@ -49,13 +49,13 @@ Esta regla se activa cuando un objeto cumple ambas condiciones:
 
 En otras palabras, si tienes descripciones y varias configuraciones regionales definidas, todas las descripciones deben estar traducidas para todas las configuraciones regionales.
 
-## Cómo solucionarlo
+## Cómo corregir
 
-### Solución manual
+### Corrección manual
 
 1. En el **Explorador TOM**, selecciona el objeto
 2. En el panel **Propiedades**, expande la sección **Descripciones traducidas**
-3. Introduce una traducción para cada configuración regional
+3. Introduce la traducción de cada configuración regional
 
 ## Causas comunes
 
@@ -63,9 +63,9 @@ En otras palabras, si tienes descripciones y varias configuraciones regionales d
 
 Descripciones creadas sin traducciones.
 
-### Causa 2: Se añadió una configuración regional posteriormente
+### Causa 2: Configuración regional agregada más tarde
 
-Se añadió una configuración regional después de escribir las descripciones.
+Culture added after descriptions were written.
 
 ### Causa 3: Traducción incompleta
 
@@ -73,25 +73,25 @@ El proceso de traducción no cubrió las descripciones.
 
 ## Ejemplo
 
-### Antes de la corrección
+### Antes de la solución
 
 ```
-Medida: [Total Revenue]
-Descripción (inglés): "Sum of all revenue"
-Descripción (español): (falta)
+Measure: [Total Revenue]
+Description (English): "Sum of all revenue"
+Description (Spanish): (missing)
 ```
 
-### Después de la corrección
+### Después de corregir
 
 ```
-Medida: [Total Revenue]
-Descripción (inglés): "Sum of all revenue"
-Descripción (español): "Suma de todos los ingresos"
+Measure: [Total Revenue]
+Description (English): "Sum of all revenue"
+Description (Spanish): "Suma de todos los ingresos"
 ```
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
 ## Reglas relacionadas
 

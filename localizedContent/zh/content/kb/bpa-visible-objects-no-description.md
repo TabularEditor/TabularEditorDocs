@@ -8,13 +8,13 @@ description: 一条最佳实践规则：确保可见的模型对象都有描述�
 
 # 可见对象应有描述
 
-## 概述
+## 概览
 
-此最佳实践规则会识别缺少描述的可见表、列、度量值、计算组以及用户定义函数。 添加描述可提升模型的易用性、文档质量和用户体验。
+此最佳实践规则会识别缺少描述的可见表、列、度量值、计算组以及用户定义函数。 Adding descriptions improves model usability, documentation quality, and user experience.
 
 - 类别：**维护**
 
-- 严重性：低（1）
+- 严重性：低 (1)
 
 ## 适用于
 
@@ -27,7 +27,7 @@ description: 一条最佳实践规则：确保可见的模型对象都有描述�
 - 计算组
 - 用户定义函数（兼容级别 1702+）
 
-## 为何重要
+## 为何这很重要
 
 描述可为模型用户提供关键背景信息：
 
@@ -38,7 +38,7 @@ description: 一条最佳实践规则：确保可见的模型对象都有描述�
 - **文档基础**：描述是自动化文档的基础
 - **治理与合规**：描述可包含数据血缘和业务定义
 - **AI 使用**：如果对象包含说明，AI 代理能更准确地推断其用途。
-  如果没有描述，用户只能猜测字段含义，导致分析错误，并增加支持请求。
+  Without descriptions, users guess at field meanings, leading to incorrect analysis and increased support requests.
 
 ## 此规则何时触发
 
@@ -80,8 +80,8 @@ IsHidden == false
 ### 修复前
 
 ```
-度量值：[Total Revenue]
-描述：（空）
+Measure: [Total Revenue]
+Description: (empty)
 ```
 
 **用户体验**：工具提示不显示任何内容，用户必须猜测该度量值的用途。
@@ -89,8 +89,8 @@ IsHidden == false
 ### 修复后
 
 ```
-度量值: [Total Revenue]
-说明: "不含税费和折扣的总收入。计算为 SUM(Sales[UnitPrice] * Sales[Quantity])。用于财务报告。"
+Measure: [Total Revenue]
+Description: "Total revenue excluding taxes and discounts. Calculated as SUM(Sales[UnitPrice] * Sales[Quantity]). Use for financial reporting."
 ```
 
 **用户体验**：清晰的工具提示可帮助用户理解并正确使用该度量值。

@@ -1,6 +1,6 @@
 ---
-uid: semantic-bridge-metric-view-tabular-traducción
-title: Traducción de Metric View a Tabular
+uid: semantic-bridge-metric-view-tabular-translation
+title: Metric View to Tabular translation
 author: Greg Baldini
 updated: 2026-06-30
 applies_to:
@@ -18,18 +18,18 @@ applies_to:
           full: true
 ---
 
-# Traducción de Metric View a Tabular
+# Metric View to Tabular translation
 
 <!--
 SUMMARY: Describes the process and specifics of translating a Metric View to a TOM model.
 -->
 
 > [!NOTE]
-> El Semantic Bridge está en versión preliminar pública.
-> La versión 3.25.0 admite metadatos de Metric View v0.1 y la versión 3.26.2 admite metadatos de Metric View v1.1.
-> Las limitaciones se describen a continuación.
+> The Semantic Bridge is in public preview.
+> The 3.25.0 release supports Metric View v0.1 metadata, and the 3.26.2 release supports Metric View v1.1 metadata.
+> Limitations are described below.
 
-Esta página describe cómo funciona la traducción al importar una definición de Metric View a un modelo tabular.
+This page describes how translation works when importing a Metric View definition into a Tabular model.
 
 ## Proceso de traducción
 
@@ -38,119 +38,119 @@ La traducción de una Metric View a un modelo tabular se realiza en varios pasos
 1. Leer el YAML del disco
 2. Deserializar el YAML
 3. Validar que el YAML deserializado represente una Metric View válida
-4. Si es una Metric View válida, se almacena como la Metric View cargada actualmente, de forma similar a como existe un modelo tabular cargado con el que interactúas.
-   Si no es una Metric View válida, el proceso se detiene aquí y hay mensajes de diagnóstico disponibles.
+4. If it is a valid Metric View, store it as the currently loaded Metric View, similar to how there is a loaded Tabular model that you interact with.
+   If it is not a valid Metric View, the process stops here and diagnostic messages are available.
 5. Analizar la Metric View e intentar transformarla en una representación intermedia
 6. Intentar transformar la representación intermedia en un modelo tabular
 
-La interfaz de importación se encarga de todo por ti, pero también puedes usar C# Scripts para personalizar distintos pasos del proceso y trabajar con Metric View de forma programática, de manera similar a como lo haces con un modelo tabular.
+The import GUI handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programmatically, similarly to how you are used to doing with a Tabular model.
 En concreto, puedes
 
-- cargar una Metric View desde el disco con [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A): la carga la pone a disposición en C# Scripts como [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), pero no importa la estructura en el modelo tabular
-- deserializar una Metric View desde una cadena con [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A): al igual que al cargarla, el modelo queda disponible como [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), pero no se importa
-- guardar una Metric View en el disco con [`SemanticBridge.MetricView.Save`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Save%2A)
-- serializar una Metric View a una cadena con [`SemanticBridge.MetricView.Serialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Serialize%2A).
-- validar una Metric View usando un sistema similar al [Best Practice Analyzer](xref:best-practice-analyzer) con [`SemanticBridge.MetricView.Validate`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate%2A)
-  - puedes crear tus propias reglas de validación personalizadas con [`SemanticBridge.MetricView.MakeValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule%2A) y sus versiones simplificadas
-- importar una Metric View a Tabular con [`SemanticBridge.MetricView.ImportToTabularFromFile`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabularFromFile%2A), que hace exactamente lo mismo que la GUI de importación, o [`SemanticBridge.MetricView.ImportToTabular`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular%2A), que es similar, pero opera sobre la Metric View cargada actualmente, en lugar de leer una desde el disco.
+- load a Metric View from disk with [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A): loading makes it available in C# scripts as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but does not import the structure into the Tabular model
+- deserialize a Metric View from a string with [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A): similar to loading, the model is available as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but is not imported
+- save a Metric View to disk with [`SemanticBridge.MetricView.Save`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Save%2A)
+- serialize a Metric View to a string with [`SemanticBridge.MetricView.Serialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Serialize%2A).
+- validate a Metric View using a system that is similar to the [Best Practice Analyzer](xref:best-practice-analyzer) with [`SemanticBridge.MetricView.Validate`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate%2A)
+  - you can create your own custom validation rules with [`SemanticBridge.MetricView.MakeValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule%2A) and its simpler versions
+- import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabularFromFile%2A), which does the exact same as the import GUI, or [`SemanticBridge.MetricView.ImportToTabular`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular%2A), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
 
-### Notas de traducción por objeto
+### Per object translation notes
 
-Los cuatro elementos siguientes, `View`, `Join`, `Field` y `medida`, son los objetos principales de una definición de Metric View que se convierten en objetos TOM.
-El resto de los metadatos de la definición de Metric View se ignoran o bien modifican con precisión la forma en que se traducen estos objetos.
+The four items below, `View`, `Join`, `Field`, and `Measure`, are the core objects of a Metric View definition that become TOM objects.
+Other metadata in the Metric View definition are either ignored or modify exactly how these objects are translated.
 
 > [!NOTE]
-> La traducción se realiza sobre el modelo de objetos de Metric View, por lo que describimos todo en esos términos.
-> Consulta [la documentación del modelo de objetos de Metric View](xref:semantic-bridge-metric-view-object-model) para conocer los detalles del modelo de objetos y cómo se ajusta a la especificación YAML.
+> The translation is performed upon the Metric View object model, so we discuss everything in these terms.
+> See [the Metric View object model docs](xref:semantic-bridge-metric-view-object-model) for specifics of the object model and how it aligns to the YAML spec.
 
-#### Traducción de `View`
+#### `View` translation
 
-- traducir
-  - `Source`: se convierte en la única tabla de hechos, llamada 'Fact', en el modelo TOM
-  - `Comment`: se convierte en `Model.Description` en TOM
-  - `Joins`: consulta `Join`
-  - `Fields`: consulta `Field`
-  - `Measures`: consulta `medida`
-- no traducir
+- translate
+  - `Source`: becomes the single fact table, named 'Fact' in the TOM model
+  - `Comment`: becomes TOM `Model.Description`
+  - `Joins`: see `Join`
+  - `Fields`: see `Field`
+  - `Measures`: see `Measure`
+- do not translate
   - `Filter`
   - `Materialization`
 
 Si `Source` es una referencia de tabla o vista de 3 partes, se traduce a una partición M que accede al objeto SQL por su nombre.
 Si `Source` no es una referencia de tabla o vista de 3 partes, se traduce a una partición M con una consulta SQL incrustada, siendo la totalidad de la cadena `Source` la propia consulta SQL.
 
-La propiedad `Filter` se ignora a efectos de la traducción;
-si necesitas incluir la lógica de `Filter`, tendrás que agregarla manualmente.
-La expresión `Filter` se aplica a todas las consultas contra la Metric View y, por lo tanto, una traducción totalmente automatizada requeriría unir todas las tablas indicadas en `Joins` en el código M generado en TOM.
+The `Filter` property is ignored for purposes of translation;
+if you need the logic included in `Filter`, you will have to manually add this.
+The `Filter` expression applies to all queries against the Metric View, and so a full automated translation would require joining all tables named in `Joins` in generated M code in TOM.
 
-Se ignora cualquier `Materialization` definida a efectos de la traducción;
-se trata de metadatos de optimización de consultas para ejecutar consultas en Databricks y no son relevantes para un modelo TOM.
+Any defined `Materialization` is ignored for the purposes of translation;
+these are query optimization metadata for executing queries on Databricks and not relevant to a TOM model.
 
-#### Traducción de `Join`
+#### `Join` translation
 
-- traducido
-  - `Name`: se convierte en el nombre de la tabla en TOM
-  - `Source`: se convierte en una partición M de la tabla
-  - `On`: se convierte en una relación en TOM
-  - `Joins`: se convierten en tablas TOM adicionales
+- translated
+  - `Name`: becomes TOM table name
+  - `Source`: becomes M partition on table
+  - `On`: becomes a TOM relationship
+  - `Joins`: become additional TOM tables
   - `Cardinality`
-- sin traducir
+- untranslated
   - `Using`
   - `Rely`
 
-Cada `Join` se convierte en una tabla TOM, con una partición M definida según las mismas reglas que para la propiedad `View.Source`.
+`Join`s each become a TOM table, with an M partition defined according to the same rules as for the `View.Source` property.
 
-Los equijoins de `On` (por ejemplo, `source.fk = dimTable.pk`) se convierten en relaciones TOM.
-Cualquier otro predicado de la propiedad `On` no se traduce en una relación.
+`On` equijoins (e.g., `source.fk = dimTable.pk`) become TOM relationships.
+Any other predicate in an `On` property is not translated as a relationship.
 
-Los árboles de `Join` en una Metric View se traducen como tablas TOM en una cadena de relaciones N:1, siempre que se admitan las cardinalidades (consulta la nota sobre la cardinalidad más abajo).
-Esto representa un esquema de copo de nieve.
+Trees of `Join`s in a Metric View are translated as TOM tables in a chain of N:1 relationships, where the cardinalities are supported (see note on cardinality below).
+This represents a snowflake model schema.
 
-El valor `ManyToOne` de `Cardinality` se traduce como una relación TOM N:1.
-Una `Cardinality` sin valor, o un `Join` sin esta propiedad configurada, se considera `ManyToOne` de forma predeterminada, según la [documentación de Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#joins).
-Otros valores de `Cardinality` aún no se admiten para su traducción como una relación.
+`Cardinality` of `ManyToOne` is translated as a TOM N:1 relationship.
+An unpopulated `Cardinality` or a `Join` without this property set is treated as `ManyToOne` by default, in accordance with [Metric View docs](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#joins).
+Other values for `Cardinality` are not yet supported for translation as a relationship.
 
-Los joins `Using` no se admiten para la traducción; no generan una relación TOM.
+`Using` joins are not supported for translation; these do not yield a TOM relationship.
 
-`Rely` no se propaga al modelo TOM de ninguna manera.
+`Rely` is not propagated into the TOM model in any way.
 
-En los casos en que no se crea una relación TOM, aun así creamos una tabla TOM y traducimos todos los `Fields` de Metric View a columnas TOM, como se describe en otras secciones.
+In cases where a TOM relationship is not created, we still create a TOM table and translate all Metric View `Fields` to TOM columns as described elsewhere.
 
 > [!NOTE]
-> Databricks ha introducido recientemente un nuevo patrón que usa la cardinalidad `OneToMany` en varios subárboles de `Join` para implementar un modelo de múltiples hechos.
-> Aún no traducimos este patrón por completo: incorporamos todas las tablas, campos y medidas, pero no creamos todas las relaciones.
-> Se muestra una advertencia de diagnóstico al importar un modelo que sigue este patrón.
+> Databricks has recently introduced a new pattern using `OneToMany` cardinality against multiple `Join` sub-trees to implement a multi-fact model.
+> We do not yet translate this pattern fully: we bring over all tables, fields, and measures, but do not create all relationships.
+> A diagnostic warning is shown when importing a model following this pattern.
 
-#### Traducción de `Field`
+#### `Field` translation
 
-- traducidos
+- translated
   - `Name`
   - `DisplayName`
   - `Expr`
-  - `Comment`: se convierte en la propiedad `Description` de la columna TOM
-  - `Format`: se convierte en la propiedad `FormatString` de la columna TOM; consulta la sección siguiente sobre la traducción de `Format`
-- sin traducir
+  - `Comment`: becomes TOM column's `Description` property
+  - `Format`: becomes TOM column's `FormatString` property; see section below on `Format` translation
+- untranslated
   - `Synonyms`
 
-Cada `Field` se convierte en una columna del modelo tabular.
+Each `Field` becomes a column in the Tabular model.
 
-El `Name` de la columna TOM es `Field.DisplayName` si está definido;
-de lo contrario, es `Field.Name`.
+The TOM column's `Name` is `Field.DisplayName` if it is populated,
+otherwise it is `Field.Name`.
 
 Si `Expr` es una referencia de campo no calificada, se agrega a la tabla de hechos.
-Si `Expr` es una referencia calificada (por ejemplo, `table.field`),
-entonces se agrega a la tabla creada para el `Join` con el mismo nombre que la parte de tabla de la referencia calificada;
-si la parte de tabla es `source`, se agrega a la tabla de hechos.
-Tanto si la referencia de campo es calificada como si no lo es,
-el campo se agrega como una [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn).
-Si `Expr` es una expresión SQL,
-se agrega como [`TOMWrapper.CalculatedColumn`](xref:TabularEditor.TOMWrapper.CalculatedColumn).
-Cuando `Expr` es una expresión SQL, extraemos todas las referencias de campo;
-si todas las referencias de campo comparten la misma parte de tabla,
-la agregamos a la tabla creada para ese `Join`;
-de lo contrario, la agregamos a la tabla de hechos.
-Identificamos todas las referencias de campo en la expresión SQL y las agregamos al modelo tabular como `DataColumn`s si todavía no existen como un `Field` de Metric View.
-No traducimos las expresiones SQL de las propiedades `Field.Expr`;
-la expresión SQL se incluye como un comentario en la expresión DAX de la `CalculatedColumn`.
+If the `Expr` is a qualified reference (e.g., `table.field`),
+then it is added to the table created for the `Join` with the same name as the table-part of the qualified reference;
+if the table-part is `source`, it is added to the fact table.
+In both the qualified and unqualified field reference cases,
+the field is added as a [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn).
+If the `Expr` is a SQL expression,
+then it is added as [`TOMWrapper.CalculatedColumn`](xref:TabularEditor.TOMWrapper.CalculatedColumn).
+When the `Expr` is a SQL expression, we extract all field references;
+if all field references share the same table-part,
+then we add it to the table created for that `Join`,
+otherwise we add it to the fact table.
+We identify all field references in the SQL expression and add those to the Tabular model as `DataColumn`s if they do not already exist as a Metric View `Field`.
+We do not translate SQL expressions for `Field.Expr` properties;
+the SQL expression is included as a comment in the DAX expression for the `CalculatedColumn`.
 Depende del usuario traducir estas expresiones.
 
 Algunos ejemplos:
@@ -163,55 +163,56 @@ Algunos ejemplos:
 | `CONCAT(dimCustomer.FirstName, dimCustomer.LastName)` | `CalculatedColumn`  | `'dimCustomer'`    | todas las partes de tabla del nombre cualificado se refieren al mismo nombre                      |
 | `CONCAT(dimGeo.Country, dimCustomer.Address)`         | `CalculatedColumn`  | `'Fact'`           | hay varias partes de tabla diferentes                                                             |
 
-#### Traducción de `Measure`
+#### `Measure` translation
 
-- traducido
+- translated
   - `Name`
   - `DisplayName`
-  - `Expr`: se convierte en la propiedad `Expression` de la medida TOM; consulta la sección siguiente sobre la traducción de SQL a DAX
-  - `Comment`: se convierte en la propiedad `Description` de la medida TOM
-  - `Format`: se convierte en la propiedad `FormatString` de la medida TOM; consulta la sección siguiente sobre la traducción de `Format`
-- sin traducir
+  - `Expr`: becomes TOM measure's `Expression` property; see section below on SQL -> DAX translation
+  - `Comment`: becomes TOM measure's `Description` property
+  - `Format`: becomes TOM measure's `FormatString` property; see section below on `Format` translation
+- untranslated
   - `Synonyms`
   - `Window`
 
 Todas las medidas se agregan a la tabla de hechos.
 
-El `Name` de la medida TOM es el `Measure.DisplayName` de la Metric View si existe; de lo contrario, es el `Measure.Name` de la Metric View.
+The TOM measure's `Name` is the Metric View's `Measure.DisplayName` if it exists,
+otherwise it is the Metric View's `Measure.Name`.
 
-`Expr` se traduce a DAX o se pasa como comentario en los casos en que no podemos traducir automáticamente la medida.
-Identificamos todas las referencias a campos en la expresión SQL y las agregamos al modelo tabular como `DataColumn`s si aún no existen como `Field` en la Metric View.
+`Expr` is translated to DAX or passed through as a comment in cases where we cannot automatically translate the measure.
+We identify all field references in the SQL expression and add those to the Tabular model as `DataColumn`s if they do not already exist as a Metric View `Field`.
 
-Las especificaciones de ventana no se traducen y hacen que se recurra a un comentario DAX, independientemente del SQL de `Expr`.
+Window specifications are not translated and cause fallback to a DAX comment, regardless of the SQL in `Expr`.
 
-### Traducción de `Format`
+### `Format` translation
 
-El `Format` de una Metric View se traduce a un `FormatString` de TOM en el objeto que lo contiene.
-El destino es una cadena de formato de estilo VBA, como la que se usa en los modelos TOM.
-La traducción se hace con el mejor esfuerzo posible:
-si podemos crear una cadena de formato que coincida exactamente con la configuración de `Format`, lo hacemos;
-si no podemos crear un equivalente exacto, recurrimos a un equivalente aproximado y emitimos una advertencia que podrás revisar después de la importación.
+A Metric View `Format` is translated to a TOM `FormatString` on the object that carries it.
+The target is a VBA-style format string, as used in TOM models.
+The translation is best-effort:
+if we can create a format string that exactly matches the configuration of the `Format`, then we do so;
+if we cannot create an exact equivalent, then we fall back to an approximate equivalent and emit a warning you can review after import.
 
-Los formatos de moneda, porcentaje y número se traducen sin problemas:
-la moneda se convierte en un prefijo con símbolo monetario en un formato numérico con separador de miles,
-el porcentaje se convierte en un formato de porcentaje que respeta el número de decimales declarado,
-y el número respeta el número de decimales declarado y el separador de miles, y la abreviatura científica se convierte en un formato exponencial.
+Currency, percentage, and number formats translate cleanly:
+currency becomes a currency-symbol prefix on a grouped numeric format,
+percentage becomes a percent format that honors the declared decimal places,
+and number honors the declared decimal places and group separator, with the scientific abbreviation becoming an exponential format.
 
-Las fechas de año-mes-día se traducen sin problemas a un formato de fecha ISO;
-las fechas según la configuración regional con mes largo y con mes numérico se traducen sin problemas a los formatos con nombre `Long Date` y `Short Date`;
-y los formatos de hora con hora-minuto y con hora-minuto-segundo se traducen sin problemas a los formatos con nombre `Short Time` y `Long Time`.
+Year-month-day dates translate cleanly to an ISO date format;
+locale long-month and locale numeric-month dates translate cleanly to the `Long Date` and `Short Date` named formats;
+and hour-minute and hour-minute-second times translate cleanly to the `Short Time` and `Long Time` named formats.
 
-Los formatos restantes no pueden traducirse con precisión y generan una advertencia:
-la abreviatura numérica compacta y el formato de bytes recurren a un formato numérico simple;
-la fecha según la configuración regional con mes corto recurre a `Long Date`;
-la fecha de año-semana recurre a una fecha ISO;
-y un formato combinado de fecha y hora recurre a un formato ISO compuesto.
+The remaining formats cannot be precisely translated and emit a warning:
+the compact number abbreviation and the byte format fall back to a plain numeric format;
+the locale short-month date falls back to `Long Date`;
+the year-week date falls back to an ISO date;
+and a combined date-and-time format falls back to an ISO composite.
 
-### Traducción de SQL a DAX
+### SQL -> DAX translation
 
 Las Metric Views proporcionan una capa estructurada sobre expresiones SQL, por lo que parte de traducir una Metric View consiste en traducir SQL a DAX y M en el modelo tabular.
 Las agregaciones admitidas son sum, count, distinct count, max, min y average.
-La aritmética básica, los patrones de recuento habituales, las referencias a medidas y la precedencia de los paréntesis son compatibles con la traducción de SQL a DAX.
+Basic arithmetic, common counting patterns, measure references, and parenthesis precedence are all supported for SQL->DAX translation.
 
 > [!WARNING]
 > Tenga en cuenta que SQL y DAX son lenguajes diferentes con semánticas distintas.
@@ -232,10 +233,10 @@ Nos referimos a los nombres de los objetos de Metric View en función de su repr
 | medida          | medida            | medida                                               | Un valor cuantitativo que se agrega conforme a la lógica de negocio del modelo                                                      | Las medidas en un modelo tabular se escriben en DAX y, en una Metric View, en SQL                                                                                                                                                                                                                                                      |
 | join o relación | relación          | join.on o join.using | Una correspondencia entre los campos clave de dos tablas: una clave externa en una y una clave principal en la otra | Las relaciones son objetos explícitos en un modelo tabular y se definen implícitamente como una propiedad del objeto `join` en el YAML de Metric View                                                                                                                                                                                  |
 
-## Referencias adicionales
+## Additional references
 
 - @semantic-bridge
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation
 - @semantic-bridge-how-tos
-- [Documentación de la API de Metric View](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)
+- [Metric View API docs](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)

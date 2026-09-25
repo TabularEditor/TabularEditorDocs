@@ -13,7 +13,7 @@ description: Regla de buenas prácticas que garantiza que los nombres de las per
 Esta regla identifica las perspectivas del modelo cuyo nombre no tiene traducción en una o más configuraciones regionales.
 
 - Categoría: Diseño del modelo
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -51,9 +51,9 @@ Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 Perspectivas creadas sin traducciones.
 
-### Causa 2: La configuración regional se agregó más tarde
+### Causa 2: Configuración regional agregada más tarde
 
-La configuración regional se agregó después de que se definieran las perspectivas.
+Culture added after perspectives were defined.
 
 ### Causa 3: Traducción incompleta
 
@@ -64,17 +64,17 @@ El flujo de trabajo de traducción no incluyó las perspectivas.
 ### Antes de la corrección
 
 ```
-Perspectiva: "Sales Analysis"
-Inglés: "Sales Analysis"
-Alemán: (sin traducir)
+Perspective: "Sales Analysis"
+English: "Sales Analysis"
+German: (missing)
 ```
 
 ### Después de la corrección
 
 ```
-Perspectiva: "Sales Analysis"
-Inglés: "Sales Analysis"
-Alemán: "Vertriebsanalyse"
+Perspective: "Sales Analysis"
+English: "Sales Analysis"
+German: "Vertriebsanalyse"
 ```
 
 ## Nivel de compatibilidad

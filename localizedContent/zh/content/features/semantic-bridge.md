@@ -25,22 +25,22 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> Semantic Bridge 目前处于公开预览阶段。
-> 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
+> The Semantic Bridge is in public preview.
+> It has limitations as documented below, and the API and feature surface area are subject to change.
 
 Semantic Bridge 是一个语义模型编译器，能够将语义模型的结构和表达式从一个平台转换到另一个平台。
-这样你就能在多个数据平台上复用业务逻辑，支持终端用户，并在他们使用数据的场景中为其提供支持。
-它还支持平台间迁移。
+This allows you to reuse business logic on multiple data platforms, supporting end users and meeting them where they consume the data.
+It also allows for migrations from one platform to another.
 
 ## 界面
 
 ### 导入 Metric View YAML
 
-可通过 **文件 > 打开 > 从 Metric View YAML 导入** 使用语义桥。
-这会打开一个对话框，引导你把 Metric View 导入当前 Tabular 模型，并根据 Metric View 的结构添加表、列、度量值和关系。
-你必须先在 Tabular Editor 里打开一个 Tabular 模型。
-这可以是一个新的空模型，也可以是你希望通过 Metric View 中的对象来增强的现有模型。
-在你打开或新建 Tabular 模型之前，这个菜单按钮不会启用。
+The Semantic Bridge is available through **File > Open > Import from Metric View YAML**.
+This will launch a dialogue to guide you through importing a Metric View into the current Tabular model, adding tables, columns, measures, and relationships based on the structure of the Metric View.
+You must have a Tabular model open in Tabular Editor.
+This can be a new, empty model or an existing model you want to enhance with the objects from the Metric View.
+The menu button will not be enabled until you open or create a new Tabular model.
 
 ![从文件菜单导入 Metric View：文件 > 打开 > 从 Metric View YAML 导入](~/content/assets/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
 
@@ -49,15 +49,14 @@ Semantic Bridge 是一个语义模型编译器，能够将语义模型的结构�
 你需要在此对话框中提供三项信息：
 
 1. Metric View YAML 文件的路径。
-   你可以粘贴该文件的路径，或使用 **浏览** 按钮来查找。
-2. Databricks 主机名。
-   用于在为 Databricks 源系统生成的 M 分区中提供正确的参数。
-3. Databricks 的 HTTP 路径。
+   You can paste the path to the file or use the **Browse** button to find it.
+2. The Databricks hostname.
    这是为了在为 Databricks 源系统生成的 M 分区中提供正确的参数。
+3. Databricks 的 HTTP 路径。这是为了在为 Databricks 源系统生成的 M 分区中提供正确的参数。
 
 如果你只是测试翻译功能，最后两项可以先用占位值填写，但在将数据刷新到你的 Tabular 模型之前，需要先修正 M 分区定义。
 
-填写完详细信息后，点击 **确定**。
+After filling out the details, click **OK**.
 Semantic Bridge 会将您的 Metric View 转换为 Tabular，并为您创建所有 TOM 对象。
 
 ![导入对话框中的 Databricks 详细信息](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
@@ -81,10 +80,10 @@ Semantic Bridge 会将您的 Metric View 转换为 Tabular，并为您创建所�
 ![包含问题的导入成功通知](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
 
 如果您点击 **查看诊断信息**，就会看到一份信息列表，用于描述翻译中存在的问题。
-这些诊断信息也可以在之后通过 C# Script 输出出来查看：
+These diagnostics are available for review later by outputting them from a C# script:
 
 ```csharp {compile}
-// 显示上次尝试导入 Metric View 时的所有诊断信息
+// Show all diagnostic messages from the last attempted import of a Metric View
 var sb = new System.Text.StringBuilder();
 foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
 {
@@ -111,44 +110,44 @@ Output(sb.ToString());
 
 ### 连接
 
-公共预览版仅支持连接 Fabric、Power BI 和 Analysis Services，不支持连接其他平台。
-使用来自其他平台的模型，例如 Databricks Metric Views，是基于本地源文件进行的，例如 Metric View 的 YAML 定义文件。
+The public preview does not connect to any platforms besides Fabric, Power BI, and Analysis Services.
+Working with models from other platforms, e.g., Databricks Metric Views, is based on local source files, such as a Metric View YAML definition.
 
 ## 命名法附录
 
-在讨论 Semantic Bridge 时很容易产生困惑：许多词既有通用含义，也有特定含义，取决于我们所处的抽象层级以及正在讨论的平台。
-例如，“语义模型”这个术语既可以是通用概念——指以某种形式组织的数据集合及业务逻辑，用于支撑业务报表与分析需求；也同时是 Microsoft 在 Power BI 和 Fabric 中用来指代其对该通用概念的具体实现的名称。
-因此，从通用意义上说，语义模型可以泛指 Databricks Metric View、OLAP / 多维立方体 Multidimensional Cube、Power BI 语义模型，或托管在其他平台语义层中的模型。
-正因如此，我们在文档中采用了以下定义和规范，以保持表述清晰并避免混淆。
+It can be confusing to discuss things when talking about the Semantic Bridge, as there are many words that have both generic and specific meanings, depending what level of abstraction we are talking about and which platform we are discussing.
+For example, the term "semantic model" is both generic, referring to the concept of a collection of data and business logic in some form suitable for supporting business reporting and analytical needs, and also the name Microsoft has adopted for referring to their specific implementation of this generic concept in Power BI and Fabric.
+Thus, a semantic model might generically refer to a Databricks Metric View, an OLAP / Multidimensional Cube, a Power BI semantic model, or a model hosted in another platform's semantic layer.
+Because of this, we have adopted the following definitions and standards in our documentation to maintain clarity and sanity.
 
 > [!NOTE]
 > 这些约定只用于介绍 Semantic Bridge 功能的文档。
 
 ### 定义
 
-- _语义模型_：单独使用时，始终指通用概念——用于支撑报表与分析的数据、元数据与业务逻辑的集合。
-  只有在它前面紧跟 "Fabric" 或 "Power BI" 时，才指该平台中的那种工件类型：具体来说，是以 TMDL 或 BIM 保存、并使用 M 和 DAX 的 Tabular 模型。为尽可能避免这种混淆，我们通常更倾向于用“Tabular 模型”来指代 Power BI / Fabric 的语义模型，因为 Tabular 模型不仅在 Power BI / Fabric 中共享，也同样用于 Analysis Services Tabular。
-- _平台_：具有语义层、并承载通用语义模型的技术解决方案。
+- _Semantic model_: when used on its own always refers to the generic concept of a collection of data, metadata, and business logic to support reporting and analytics.
+  If and only if it is immediately preceded by "Fabric" or "Power BI", then it is referring to that artifact type in that platform, specifically a Tabular model that is saved as TMDL or BIM and using M and DAX; we tend to prefer to use the term Tabular model to refer to the Power BI / Fabric semantic model to avoid this confusion where possible, because the Tabular model is shared across Power BI / Fabric as well as Analysis Services Tabular.
+- _Platform_: a technology solution that has a semantic layer, on which a generic semantic model is hosted.
   Databricks Metric Views 是一种平台；Fabric / Power BI 是一种平台；Analysis Services Tabular 是一种平台；Analysis Services Multidimensional 也是一种平台，但 Semantic Bridge 目前不支持它。
-- _序列化格式_：一种将语义模型以文本形式表示并存储到磁盘上的方式。
+- _Serialization format_: a way to represent a semantic model on disk in a textual format.
   TMDL 和 TMSL (.bim) 是 Power BI 语义模型的两种序列化格式；YAML 是 Databricks Metric View 的序列化格式。
 - _对象模型_：语义模型在内存中的表示形式。我们通过 Semantic Bridge 在 Tabular Editor 中对它进行操作——既可以通过 GUI 操作，也可以通过 C# Script。
-  TOM 或 Tabular Object Model 对现有 Tabular Editor 用户来说应该并不陌生。
-  我们还为 Databricks Metric Views 创建了一个对象模型，以便在我们的工具中操作它们。
+  The TOM or Tabular Object Model should be familiar to existing users of Tabular Editor.
+  We have also created an object model for Databricks Metric Views, to allow manipulation of these in our tool.
 
 ### 通用维度建模术语
 
-在讨论维度模型或语义模型时，有许多术语既是通用概念，同时也出现在特定平台的对象模型与序列化格式中。
+There are many terms that exist generally in discussion of a dimensional model or semantic model and also in a specific platform's object model and serialization formats.
 例如，“度量值”一词从通用意义上指维度模型中被聚合的定量数值，用来表示关注的业务指标；但它在 Databricks Metric Views 和 Tabular 模型中也指一种特定对象：在 Metric View 中，度量值是一个已命名的 SQL 表达式，用于定义 Metric View 中的聚合；在 Tabular 模型中，度量值是一个已命名的 DAX 表达式，用于定义 Tabular 模型中的聚合。
-如果不同时谈这些词的多重含义，就无法讨论 Semantic Bridge 的工作。
-例如，我们会谈到将 Metric View 度量值翻译为 Tabular 度量值。
-因此，**我们总是通过“平台 + 对象”的方式来指代特定平台模型中的对象，例如“Metric View 度量值”或“Tabular 度量值”；“Metric View 字段”或“TOM 列”。**
-如果术语在使用时没有带上平台名称，则表示我们是在泛指这一概念。
+It is impossible to discuss the work of the Semantic Bridge without talking about multiple meanings of such words at once.
+For example, we talk about translating a Metric View measure to a Tabular measure.
+As such, **we always refer to an object in a specific platform's model by saying the platform and the object, e.g., "Metric View measure" or "Tabular measure"; "Metric View field" or "TOM column".**
+If the term is ever used without being accompanied by a platform's name, then we are discussing the idea generically.
 
-## 更多资源
+## 其他资源
 
-- [Metric View 文档](https://learn.microsoft.com/azure/databricks/business-semantics/)
-- [Metric View YAML 参考](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)
+- [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
+- [Metric View YAML reference](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)
 - @semantic-bridge-metric-view-tabular-translation
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation

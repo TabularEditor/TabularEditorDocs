@@ -13,14 +13,14 @@ applies_to:
 
 # 如何在脚本中构建自定义 WinForms 对话框
 
-对于 `SelectTable()`、`SelectMeasure()` 等内置辅助函数无法覆盖的输入场景，可直接在 C# Script 中编写自定义 WinForms 对话框。 使用 `TableLayoutPanel` 和 `FlowLayoutPanel` 并启用 `AutoSize`，以便在不同 DPI 设置下正确缩放。
+对于 `SelectTable()`、`SelectMeasure()` 等内置辅助函数无法覆盖的输入场景，可直接在 C# Script 中编写自定义 WinForms 对话框。 Use `TableLayoutPanel` and `FlowLayoutPanel` with `AutoSize` for proper scaling across DPI settings.
 
 > [!WARNING]
-> 在自定义对话框中，不要使用 `Location = new Point(x, y)` 进行手动像素定位。 这种做法在非标准 DPI 设置下会失效。 改用布局面板。
+> 在自定义对话框中，不要使用 `Location = new Point(x, y)` 进行手动像素定位。 This approach breaks at non-standard DPI settings. Use layout panels instead.
 
 ## 简单提示对话框
 
-包含“确定/取消”按钮的单字段输入对话框。 当你只需要用户提供一项输入时，可使用这种模式。
+A single-field prompt with OK/Cancel buttons. Use this pattern when you need one piece of user input.
 
 ```csharp
 using System.Windows.Forms;
@@ -72,7 +72,7 @@ using (var form = new Form())
 
 ## 带验证的多字段表单
 
-将该提示对话框模式扩展到多个字段。 使用变更事件，只有当所有必填字段都有内容时才启用“确定”按钮。
+Extend the prompt pattern to multiple fields. 使用变更事件，只有当所有必填字段都有内容时才启用“确定”按钮。
 
 下面的代码块结构对应你编写对话框脚本时应遵循的顺序：窗体设置、输入字段、按钮、验证和结果处理。
 
@@ -243,7 +243,7 @@ using (var dialog = new ScopeDialog(Selected.Measures.Count(), Model.AllMeasures
 - 设置 `StartPosition = FormStartPosition.CenterParent`。
 - 始终设置 `AcceptButton` 和 `CancelButton`，以支持键盘快捷键（Enter/Escape）。
 - 在显示对话框之前，先将 `WaitFormVisible = false`，以隐藏“正在运行宏”旋转指示器。
-- 用 `using` 语句包裹窗体，以确保正确释放资源。
+- Wrap the form in a `using` statement for proper disposal.
 
 ## 另见
 

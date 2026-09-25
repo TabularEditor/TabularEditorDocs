@@ -22,36 +22,36 @@ applies_to:
 ### 查看并删除有错误的度量值
 
 ```csharp
-// 此脚本会扫描模型并显示所有包含错误的度量值，同时提供删除选项。
+// This script scans the model and shows all measures with errors, giving the option to remove them.
 //
-// .GetCachedSemantics(...) 方法仅在 TE3 中可用
+// .GetCachedSemantics(...) method is only available in TE3
 using System.Windows.Forms;
 
-// 隐藏“运行宏”微调框
+// Hide the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = false;
 
-// 获取所有包含错误的度量值
+// Get all the measures that have errors
 var measuresWithError = Model.AllMeasures.Where(m => m.GetCachedSemantics(ExpressionProperty.Expression).HasError).ToList();
-// 在 Tabular Editor 3.12.0 之前，必须使用 GetSemantics 方法。
+//Prior to Tabular Editor 3.12.0 the GetSemantics method must be used.
 //var measuresWithError = Model.AllMeasures.Where(m => m.GetSemantics(ExpressionProperty.Expression).HasError).ToList();
 
-// 如果没有包含错误的度量值，则以错误结束脚本。
+// If no measures with errors, end script with error.
 if ( measuresWithError.Count == 0 )
 { 
-Info ( "没有包含错误的度量值！ 👍" );
+Info ( "No measures with errors! 👍" );
 }
 
-// 处理有问题的度量值
+// Handle erroneous measures
 else 
 {
 
-// 查看包含错误的度量值列表
+// View the list of measures with an error
 measuresWithError.Output();
 
-//   你可以从列表中选择 1 个或多个度量值进行删除
-var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "选择要删除的度量值。\n稍后你可以导出备份。");
+//   From the list, you can select 1 or more measures to delete
+var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select measures to delete.\nYou will be able to export a back-up, later.");
 
-    // 删除所选度量值
+    // Delete the selected measures
     try
     {
         foreach ( var _m in _ToDelete ) 
@@ -60,47 +60,47 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "选择要�
             }
     
         Info ( 
-            "已删除 " + 
+            "Deleted " + 
             Convert.ToString(_ToDelete.Count()) + 
-            " 个包含错误的度量值。" 
+            " measures with errors." 
         );
     
-        // 创建 FolderBrowserDialog 类的实例
+        // Create an instance of the FolderBrowserDialog class
         FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
         
-        // 设置对话框标题
-        folderBrowserDialog.Description = "选择一个目录，用于输出已删除度量值的备份。";
+        // Set the title of the dialog box
+        folderBrowserDialog.Description = "Select a directory to output a backup of the deleted measures.";
         
-        // 设置对话框的根文件夹
+        // Set the root folder of the dialog box
         folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
         
-        // 显示对话框并获取结果
+        // Show the dialog box and get the result
         DialogResult result = folderBrowserDialog.ShowDialog();
         
-        // 检查用户是否单击“确定”按钮并获取所选路径
+        // Check if the user clicked the OK button and get the selected path
         if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
             {
-                // 将输出路径作为字符串获取
+                // Get the output path as a string
                 string _outputPath = folderBrowserDialog.SelectedPath;
                 
-                // 获取已删除度量值的属性
+                // Get the properties of the deleted measures
                 var _backup = ExportProperties( _ToDelete );
     
-                // 保存已删除度量值的备份
+                // Save a backup of the deleted measures
                 SaveFile( _outputPath + "/DeletedMeasures-" + Model.Name + DateTime.Today.ToString("-yyyy-MM-dd") + ".tsv", _backup);
     
                 Info ( 
-                    "已导出 " + 
+                    "Exported a backup of " + 
                     Convert.ToString(_ToDelete.Count()) +
-                    " 个度量值的备份到 " + 
+                    " Measures to " + 
                     _outputPath
                 );
             }
     }
     catch
-    // 如果未选择任何度量值，则显示信息框
+    // Display an info box if no measure was selected
     {
-    Info ( "未选择任何度量值。" );
+    Info ( "No measure selected." );
     }
 }
 
@@ -108,9 +108,9 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "选择要�
 
 ### 说明
 
-此代码片段会根据 Tabular Editor 的语义分析，获取所有包含错误的度量值。 随后会在输出框中显示这些度量值，你可以手动浏览它们或进行修改。 之后，你可以选择要删除的度量值。 被删除的度量值可以保存为 .tsv 备份文件，方便你之后需要时再导入。
+This snippet gets all the measures that have errors according to the Tabular Editor Semantic Analysis. It then will display them in an output box where you can manually browse them or make changes. Thereafter, measures can be selected for removal. The removed measures can be saved as a back-up .tsv file in case you want to import them, later.
 
-## 示例输出
+## 输出示例
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/script-view-error-measures.png" alt="An output dialog that lets the user view and edit any measures with errors in Tabular Editor" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>该输出对话框允许你查看并编辑根据 Analysis Services 语义分析判定为“有错误”的度量值。</figcaption>

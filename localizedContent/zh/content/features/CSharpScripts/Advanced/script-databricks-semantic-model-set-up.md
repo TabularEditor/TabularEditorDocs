@@ -1,6 +1,6 @@
 ---
 uid: script-databricks-semantic-model-set-up
-title: Databricks 语义模型设置
+title: Databricks Semantic Model Set-Up
 author: Johnny Winter
 updated: 2025-09-04
 applies_to:
@@ -11,63 +11,63 @@ applies_to:
       full: true
 ---
 
-# Databricks 语义模型设置
+# Databricks Semantic Model Set-Up
 
 ## 脚本用途
 
-此脚本作为 Tabular Editor x Databricks 系列的一部分创建。 在 Databricks Unity Catalog 中，表名不能使用大写字母。 在不使用大写字母的前提下，让表名更易读的一种常见做法是采用 snake_case。 另外，虽然列名可以包含空格，但通常不建议这样做，因为用起来很麻烦；因此数据工程师多半会使用 snake_case、camelCase 或 PascalCase。
+该脚本作为 Tabular Editor x Databricks 系列的一部分编写。 In Databricks Unity Catalog it is not possible to use capital letters in table names. A common way to make tables names more readable without using capital letters is to adopt snake_case. Also, whilst column names can contain spaces, it is often advised against as these can be cumbersome to work with, meaning data engineers most often use snake_case, camelCase or PascalCase.
 
-不过，我们希望语义模型的用户在模型中看到业务友好的名称。
+However, we want users of our Semantic Model to see business friendly names in our model.
 
-下面的脚本会遍历模型中的所有表，并确保应用友好的 Proper Case 格式。
+The following script will loop through all tables in the model and make sure friendly, Proper Case formatting is applied.
 
-在此过程中，它还会遵循一些最佳实践建议：将所有列的默认汇总方式设为“无”，并为所有 DateTime 类型字段设置格式字符串（脚本当前使用格式 'yyyy-mm-dd'；如果你更偏好其他格式，可在第 61 行修改脚本） <br></br>
+Whilst doing this, it will also apply some best practice recommendations, setting default summarisation for all columns to none and also setting format strings for DateTime type fields (this script is set up to use format ‘yyyy-mm-dd' but you can alter the script at line 61 if you prefer) <br></br>
 
 > [!NOTE]
-> 此脚本并非仅供 Databricks 使用——你可以把它用于任何你喜欢的模型，不管数据源是什么；只是它在设计时考虑了 Databricks 的一些限制。 <br></br>
+> This script is not strictly for use with only Databricks – use it with any model you like, regardless of data source, but it has been built with some of the limitations of Databricks in mind. <br></br>
 
 ## 脚本
 
-### Databricks 语义模型设置
+### Databricks Semantic Model Set-Up
 
 ```csharp
 /*
- * Title: Databricks 语义模型设置
+ * Title: Databricks Semantic Model Set-Up
  * Author: Johnny Winter, greyskullanalytics.com
  *
- *  此脚本执行后，将遍历模型中的所有表和列，并将其重命名为更友好的名称。
- *  采用 snake_case、camelCase 或 PascalCase 的名称都会转换为 Proper Case。
- *  无需选择表，因为会处理模型中的所有表；只需运行脚本即可。
- *  在遍历列的同时，还会将默认汇总设置为 none，并为所有 DateTime 类型字段设置格式字符串
- *  (目前设置的格式为 'yyyy-mm-dd'，如有需要可在第 61 行更改)。
+ *  This script, when executed, will loop through all tables and columns in the model and rename with friendly names. 
+ *  Names in snake_case, camelCase or PascalCase will all be converted to Proper Case.
+ *  No table selections are required as all tables in the model will be processed, simply run the script.
+ *  Whilst looping though columns it also sets default summarization to none and sets a format string for all DateTime type fields 
+ *  (currently it sets format 'yyyy-mm-dd' but you can change this on line 61 if you wish).
  *
  */
 using System;
 using System.Globalization;
 
-//将脚本创建为类，以便复用 
+//create script as class so it can be reused 
 class p {
 
     public static void ConvertCase(dynamic obj)
     {
         TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-        //将下划线替换为空格
+        //replace underscores with a space
         var oldName = obj.Name.Replace("_", " ");
         var newName = new System.Text.StringBuilder();
         for(int i = 0; i < oldName.Length; i++) {
-            //首字母始终大写:
+            // First letter should always be capitalized:
             if(i == 0) newName.Append(Char.ToUpper(oldName[i]));
 
-            //当出现两个大写字母后跟一个小写字母时
-            //在第一个字母后插入空格:
+            // A sequence of two uppercase letters followed by a lowercase letter should have a space inserted
+            // after the first letter:
             else if(i + 2 < oldName.Length && char.IsLower(oldName[i + 2]) && char.IsUpper(oldName[i + 1]) && char.IsUpper(oldName[i]))
             {
                 newName.Append(oldName[i]);
                 newName.Append(" ");
             }
 
-            //其他情况下，当小写字母后跟大写字母时，应在第一个字母后
-            //插入空格:
+            // All other sequences of a lowercase letter followed by an uppercase letter, should have a space
+            // inserted after the first letter:
             else if(i + 1 < oldName.Length && char.IsLower(oldName[i]) && char.IsUpper(oldName[i+1]))
             {
                 newName.Append(oldName[i]);
@@ -78,15 +78,15 @@ class p {
                 newName.Append(oldName[i]);
             }
         }
-        //若上述步骤尚未处理，则应用 Proper Case
+        //apply Proper Case where this has not already been taken care of above
         obj.Name = textInfo.ToTitleCase(newName.ToString());
     }
 }
 
 foreach(var t in Model.Tables) {
-//转换表名
+//convert table names
     p.ConvertCase(t);
-//转换列名
+//convert column names
     foreach(var c in t.Columns) {
         p.ConvertCase(c);
         c.SummarizeBy = AggregateFunction.None;
@@ -98,5 +98,5 @@ foreach(var t in Model.Tables) {
 
 ### 说明
 
-此脚本执行后，会遍历模型中的所有表和列，并将其重命名为更友好的名称。 以 snake_case、camelCase 或 PascalCase 命名的名称都会转换为 Proper Case。 无需选择表，因为会处理模型中的所有表；直接运行脚本即可。 在遍历列的同时，它还会将默认汇总设置为“无”，并为所有 DateTime 类型字段设置格式字符串。
+This script, when executed, will loop through all tables and columns in the model and rename with friendly names. Names in snake_case, camelCase or PascalCase will all be converted to Proper Case. No table selections are required as all tables in the model will be processed, simply run the script. Whilst looping though columns it also sets default summarization to none and sets a format string for all DateTime type fields.
 

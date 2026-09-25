@@ -1,6 +1,6 @@
 ---
-uid: semantic-bridge-metric-view-tabular-翻译
-title: 从 Metric View 到 Tabular 的翻译
+uid: semantic-bridge-metric-view-tabular-translation
+title: Metric View to Tabular translation
 author: Greg Baldini
 updated: 2026-06-30
 applies_to:
@@ -18,18 +18,18 @@ applies_to:
           full: true
 ---
 
-# 从 Metric View 到 Tabular 的翻译
+# Metric View to Tabular translation
 
 <!--
 SUMMARY: Describes the process and specifics of translating a Metric View to a TOM model.
 -->
 
 > [!NOTE]
-> Semantic Bridge 目前处于公共预览阶段。
-> 3.25.0 版本支持 Metric View v0.1 元数据，3.26.2 版本支持 Metric View v1.1 元数据。
-> 相关限制如下。
+> The Semantic Bridge is in public preview.
+> The 3.25.0 release supports Metric View v0.1 metadata, and the 3.26.2 release supports Metric View v1.1 metadata.
+> Limitations are described below.
 
-本页介绍在将 Metric View 定义导入 Tabular 模型时，翻译机制如何运作。
+This page describes how translation works when importing a Metric View definition into a Tabular model.
 
 ## 翻译过程
 
@@ -38,120 +38,120 @@ SUMMARY: Describes the process and specifics of translating a Metric View to a T
 1. 从磁盘读取 YAML 文件
 2. 对 YAML 进行反序列化
 3. 验证反序列化后的 YAML 是否为有效的 Metric View
-4. 如果它是有效的 Metric View，就将其保存为当前加载的 Metric View，就像你与已加载的 Tabular 模型交互一样。
-   如果它不是有效的 Metric View，流程会在此停止，并提供诊断信息。
+4. If it is a valid Metric View, store it as the currently loaded Metric View, similar to how there is a loaded Tabular model that you interact with.
+   If it is not a valid Metric View, the process stops here and diagnostic messages are available.
 5. 分析 Metric View，并尝试将其转换为一种中间表示
 6. 尝试将中间表示转换为 Tabular 模型
 
-导入 GUI 会替你处理这一切。不过，你也可以使用 C# Script 来自定义流程中的不同步骤，并以编程方式操作 Metric View，就像你平时操作 Tabular 模型一样。
-具体来说，你可以
+The import GUI handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programmatically, similarly to how you are used to doing with a Tabular model.
+Specifically, you can
 
-- 使用 [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A) 从磁盘加载 Metric View：加载后可在 C# Script 中通过 [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model) 访问，但不会将结构导入 Tabular 模型
-- 使用 [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A) 从字符串反序列化 Metric View：与加载类似，模型可通过 [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model) 访问，但不会导入到 Tabular 模型中
-- 使用 [`SemanticBridge.MetricView.Save`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Save%2A) 将 Metric View 保存到磁盘
-- 使用 [`SemanticBridge.MetricView.Serialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Serialize%2A) 将 Metric View 序列化为字符串。
-- 使用与 [Best Practice Analyzer](xref:best-practice-analyzer) 类似的系统，通过 [`SemanticBridge.MetricView.Validate`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate%2A) 验证 Metric View
-  - 你可以使用 [`SemanticBridge.MetricView.MakeValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule%2A) 及其更简化的版本创建你自己的验证规则
-- 使用 [`SemanticBridge.MetricView.ImportToTabularFromFile`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabularFromFile%2A) 将 Metric View 导入 Tabular，它执行的操作与导入 GUI 完全相同；或者使用 [`SemanticBridge.MetricView.ImportToTabular`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular%2A)，其方式类似，但它作用于当前已加载的 Metric View，而不是从磁盘读取。
+- load a Metric View from disk with [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A): loading makes it available in C# scripts as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but does not import the structure into the Tabular model
+- deserialize a Metric View from a string with [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A): similar to loading, the model is available as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but is not imported
+- save a Metric View to disk with [`SemanticBridge.MetricView.Save`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Save%2A)
+- serialize a Metric View to a string with [`SemanticBridge.MetricView.Serialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Serialize%2A).
+- validate a Metric View using a system that is similar to the [Best Practice Analyzer](xref:best-practice-analyzer) with [`SemanticBridge.MetricView.Validate`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate%2A)
+  - you can create your own custom validation rules with [`SemanticBridge.MetricView.MakeValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule%2A) and its simpler versions
+- import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabularFromFile%2A), which does the exact same as the import GUI, or [`SemanticBridge.MetricView.ImportToTabular`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular%2A), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
 
-### 按对象的翻译说明
+### Per object translation notes
 
-下面这四项：`View`、`Join`、`Field` 和 `Measure`，是 Metric View 定义中的核心对象，最终会成为 TOM 对象。
-Metric View 定义中的其他元数据要么会被忽略，要么会影响这些对象的具体翻译方式。
+The four items below, `View`, `Join`, `Field`, and `Measure`, are the core objects of a Metric View definition that become TOM objects.
+Other metadata in the Metric View definition are either ignored or modify exactly how these objects are translated.
 
 > [!NOTE]
-> 本文的翻译以 Metric View 对象模型为基础，因此下文将一律以该术语体系进行说明。
-> 有关对象模型的详细信息，以及它与 YAML 规范的对应关系，请参阅 [Metric View 对象模型文档](xref:semantic-bridge-metric-view-object-model)。
+> The translation is performed upon the Metric View object model, so we discuss everything in these terms.
+> See [the Metric View object model docs](xref:semantic-bridge-metric-view-object-model) for specifics of the object model and how it aligns to the YAML spec.
 
-#### `View` 翻译
+#### `View` translation
 
-- 将被翻译
-  - `Source`：变为单个事实表，在 TOM 模型中名为“Fact”
-  - `Comment`：变为 TOM `Model.Description`
-  - `Joins`：请参阅 `Join`
-  - `Fields`：请参阅 `Field`
-  - `Measures`: 请参阅 `Measure`
-- 不翻译
+- translate
+  - `Source`: becomes the single fact table, named 'Fact' in the TOM model
+  - `Comment`: becomes TOM `Model.Description`
+  - `Joins`: see `Join`
+  - `Fields`: see `Field`
+  - `Measures`: see `Measure`
+- do not translate
   - `Filter`
   - `Materialization`
 
-如果 `Source` 是由 3 个部分组成的表或视图引用，它会被转换为一个按名称访问 SQL 对象的 M 分区。
-如果 `Source` 不是由 3 个部分组成的表或视图引用，它会被转换为一个嵌入 SQL 查询的 M 分区，其中整个 `Source` 字符串都会作为 SQL 查询。
+If the `Source` is a 3-part table or view reference, it is translated to an M partition that accesses the SQL object by name.
+If the `Source` is not a 3-part table or view reference, it is translated to an M partition with an embedded SQL query, with the entirety of the `Source` string as the SQL query.
 
-出于翻译目的，`Filter` 属性将被忽略；
-如果需要包含 `Filter` 中的逻辑，则需手动添加。
-`Filter` 表达式会应用于针对 Metric View 的所有查询，因此，要实现完全自动的翻译，需要在 TOM 中生成的 M 代码里联接 `Joins` 中列出的所有表。
+The `Filter` property is ignored for purposes of translation;
+if you need the logic included in `Filter`, you will have to manually add this.
+The `Filter` expression applies to all queries against the Metric View, and so a full automated translation would require joining all tables named in `Joins` in generated M code in TOM.
 
-出于翻译目的，任何已定义的 `Materialization` 都会被忽略；
-这些是用于在 Databricks 上执行查询的查询优化元数据，与 TOM 模型无关。
+Any defined `Materialization` is ignored for the purposes of translation;
+these are query optimization metadata for executing queries on Databricks and not relevant to a TOM model.
 
-#### `Join` 翻译
+#### `Join` translation
 
-- 将被翻译
-  - `Name`：变为 TOM 表名
-  - `Source`：变为该表的 M 分区
-  - `On`：变为 TOM 关系
-  - `Joins`：变为额外的 TOM 表
+- translated
+  - `Name`: becomes TOM table name
+  - `Source`: becomes M partition on table
+  - `On`: becomes a TOM relationship
+  - `Joins`: become additional TOM tables
   - `Cardinality`
-- 不翻译
+- untranslated
   - `Using`
   - `Rely`
 
-每个 `Join` 都会转换为一个 TOM 表，并按照与 `View.Source` 属性相同的规则定义一个 M 分区。
+`Join`s each become a TOM table, with an M partition defined according to the same rules as for the `View.Source` property.
 
-`On` 等值连接（例如 `source.fk = dimTable.pk`）会转换为 TOM 关系。
-`On` 属性中的其他任何谓词都不会被转换为关系。
+`On` equijoins (e.g., `source.fk = dimTable.pk`) become TOM relationships.
+Any other predicate in an `On` property is not translated as a relationship.
 
-Metric View 中的 `Join` 树会转换为 TOM 表，并形成一条 N:1 关系链（前提是相应的基数受支持；请参阅下文关于基数的说明）。
-这表示一个雪花模型架构。
+Trees of `Join`s in a Metric View are translated as TOM tables in a chain of N:1 relationships, where the cardinalities are supported (see note on cardinality below).
+This represents a snowflake model schema.
 
-`Cardinality` 为 `ManyToOne` 时，会转换为 TOM 的 N:1 关系。
-未填充的 `Cardinality`，或未设置此属性的 `Join`，默认按 `ManyToOne` 处理，这与 [Metric View 文档](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#joins) 一致。
-`Cardinality` 的其他值目前还不支持翻译为关系。
+`Cardinality` of `ManyToOne` is translated as a TOM N:1 relationship.
+An unpopulated `Cardinality` or a `Join` without this property set is treated as `ManyToOne` by default, in accordance with [Metric View docs](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#joins).
+Other values for `Cardinality` are not yet supported for translation as a relationship.
 
-`Using` 连接不支持翻译；因此不会生成 TOM 关系。
+`Using` joins are not supported for translation; these do not yield a TOM relationship.
 
-`Rely` 不会以任何方式传递到 TOM 模型中。
+`Rely` is not propagated into the TOM model in any way.
 
-在未创建 TOM 关系的情况下，我们仍会创建 TOM 表，并按其他部分所述将所有 Metric View `Fields` 转换为 TOM 列。
+In cases where a TOM relationship is not created, we still create a TOM table and translate all Metric View `Fields` to TOM columns as described elsewhere.
 
 > [!NOTE]
-> Databricks 最近引入了一种新模式，在多个 `Join` 子树上使用 `OneToMany` 基数来实现多事实模型。
-> 我们尚未完全支持这种模式的转换：会带入所有表、字段和度量值，但不会创建全部关系。
-> 导入遵循此模式的模型时，会显示一条诊断警告。
+> Databricks has recently introduced a new pattern using `OneToMany` cardinality against multiple `Join` sub-trees to implement a multi-fact model.
+> We do not yet translate this pattern fully: we bring over all tables, fields, and measures, but do not create all relationships.
+> A diagnostic warning is shown when importing a model following this pattern.
 
-#### `Field` 翻译
+#### `Field` translation
 
-- 已翻译
+- translated
   - `Name`
   - `DisplayName`
   - `Expr`
-  - `Comment`：将映射为 TOM 列的 `Description` 属性
-  - `Format`：将映射为 TOM 列的 `FormatString` 属性；有关 `Format` 的翻译，请参阅下文相应部分
-- 未翻译
+  - `Comment`: becomes TOM column's `Description` property
+  - `Format`: becomes TOM column's `FormatString` property; see section below on `Format` translation
+- untranslated
   - `Synonyms`
 
-每个 `Field` 都会成为 Tabular 模型中的一列。
+Each `Field` becomes a column in the Tabular model.
 
-如果 `Field.DisplayName` 有值，
-则 TOM 列的 `Name` 为 `Field.DisplayName`；否则为 `Field.Name`。
+The TOM column's `Name` is `Field.DisplayName` if it is populated,
+otherwise it is `Field.Name`.
 
-如果 `Expr` 是不带限定符的字段引用，则将其添加到事实表中。
-如果 `Expr` 是带限定符的引用（例如 `table.field`），
-则将其添加到为 `Join` 创建的表中，该表的名称与该限定引用的表名部分相同；
-如果表名部分为 `source`，则将其添加到事实表中。
-无论是带限定符还是不带限定符的字段引用，
-该字段都会作为 [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn) 添加。
-如果 `Expr` 是 SQL 表达式，
-则会将其作为 [`TOMWrapper.CalculatedColumn`](xref:TabularEditor.TOMWrapper.CalculatedColumn) 添加。
-当 `Expr` 是 SQL 表达式时，我们会提取其中所有字段引用；
-如果所有字段引用的表名部分都相同，
-则会将其添加到为该 `Join` 创建的表中；
-否则会将其添加到事实表。
-我们会识别 SQL 表达式中的所有字段引用；如果这些引用尚未在 Metric View 中作为 `Field` 存在，则将其作为 `DataColumn` 添加到 Tabular 模型中。
-我们不会转换 `Field.Expr` 属性中的 SQL 表达式；
-该 SQL 表达式会作为注释包含在 `CalculatedColumn` 的 DAX 表达式中。
-这些表达式需由用户自行翻译。
+If the `Expr` is an unqualified field reference, it is added to the fact table.
+If the `Expr` is a qualified reference (e.g., `table.field`),
+then it is added to the table created for the `Join` with the same name as the table-part of the qualified reference;
+if the table-part is `source`, it is added to the fact table.
+In both the qualified and unqualified field reference cases,
+the field is added as a [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn).
+If the `Expr` is a SQL expression,
+then it is added as [`TOMWrapper.CalculatedColumn`](xref:TabularEditor.TOMWrapper.CalculatedColumn).
+When the `Expr` is a SQL expression, we extract all field references;
+if all field references share the same table-part,
+then we add it to the table created for that `Join`,
+otherwise we add it to the fact table.
+We identify all field references in the SQL expression and add those to the Tabular model as `DataColumn`s if they do not already exist as a Metric View `Field`.
+We do not translate SQL expressions for `Field.Expr` properties;
+the SQL expression is included as a comment in the DAX expression for the `CalculatedColumn`.
+It is up to the user to translate these expressions.
 
 一些示例：
 
@@ -163,80 +163,80 @@ Metric View 中的 `Join` 树会转换为 TOM 表，并形成一条 N:1 关系�
 | `CONCAT(dimCustomer.FirstName, dimCustomer.LastName)` | `CalculatedColumn` | `'dimCustomer'` | 限定名称中的所有表部分都指向同一个名称                      |
 | `CONCAT(dimGeo.Country, dimCustomer.Address)`         | `CalculatedColumn` | `'Fact'`        | 存在多个彼此不同的表部分                             |
 
-#### `度量值` 的翻译
+#### `Measure` translation
 
-- 已翻译
+- translated
   - `Name`
   - `DisplayName`
-  - `Expr`：将成为 TOM 度量值的 `Expression` 属性；请参阅下文关于 SQL -> DAX 翻译的部分
-  - `Comment`：会成为 TOM 度量值的 `Description` 属性
-  - `Format`：将成为 TOM 度量值的 `FormatString` 属性；请参阅下文关于 `Format` 翻译的部分
-- 未翻译
+  - `Expr`: becomes TOM measure's `Expression` property; see section below on SQL -> DAX translation
+  - `Comment`: becomes TOM measure's `Description` property
+  - `Format`: becomes TOM measure's `FormatString` property; see section below on `Format` translation
+- untranslated
   - `Synonyms`
   - `Window`
 
-所有度量值都会添加到事实表中。
+All measures are added to the fact table.
 
-如果 Metric View 中存在 `Measure.DisplayName`，那么 TOM 度量值的 `Name` 就是 Metric View 的 `Measure.DisplayName`；
-否则就是 Metric View 的 `Measure.Name`。
+The TOM measure's `Name` is the Metric View's `Measure.DisplayName` if it exists,
+otherwise it is the Metric View's `Measure.Name`.
 
-`Expr` 会被翻译为 DAX；如果我们无法自动翻译该度量值，则会以注释形式原样传递。
-我们会识别 SQL 表达式中的所有字段引用；如果这些字段尚未作为 Metric View 的 `Field` 存在，则会将它们作为 `DataColumn` 添加到 Tabular 模型中。
+`Expr` is translated to DAX or passed through as a comment in cases where we cannot automatically translate the measure.
+We identify all field references in the SQL expression and add those to the Tabular model as `DataColumn`s if they do not already exist as a Metric View `Field`.
 
-窗口规范不会被翻译；无论 `Expr` 中的 SQL 如何，都会回退为 DAX 注释。
+Window specifications are not translated and cause fallback to a DAX comment, regardless of the SQL in `Expr`.
 
-### `Format` 翻译
+### `Format` translation
 
-Metric View 的 `Format` 会被翻译为其所在对象上的 TOM `FormatString`。
-目标格式是 TOM 模型中使用的 VBA 风格格式字符串。
-该翻译尽力而为：
-如果我们能创建与 `Format` 配置完全匹配的格式字符串，就会这样做；
-如果无法创建完全等效的格式字符串，则会回退为近似等效格式，并发出一条警告，供你在导入后查看。
+A Metric View `Format` is translated to a TOM `FormatString` on the object that carries it.
+The target is a VBA-style format string, as used in TOM models.
+The translation is best-effort:
+if we can create a format string that exactly matches the configuration of the `Format`, then we do so;
+if we cannot create an exact equivalent, then we fall back to an approximate equivalent and emit a warning you can review after import.
 
-货币、百分比和数字格式都能顺利翻译：
-货币会转换为带分组的数字格式，并以货币符号作为前缀；
-百分比会转换为遵循所声明小数位数的百分比格式；
-数字会遵循所声明的小数位数和分组分隔符，而科学计数法缩写会转换为指数格式。
+Currency, percentage, and number formats translate cleanly:
+currency becomes a currency-symbol prefix on a grouped numeric format,
+percentage becomes a percent format that honors the declared decimal places,
+and number honors the declared decimal places and group separator, with the scientific abbreviation becoming an exponential format.
 
-年-月-日日期可以顺利翻译为 ISO 日期格式；
-本地化的长月份日期和本地化的数字月份日期可以顺利翻译为 `Long Date` 和 `Short Date` 命名格式；
-时:分和时:分:秒时间可以顺利翻译为 `Short Time` 和 `Long Time` 命名格式。
+Year-month-day dates translate cleanly to an ISO date format;
+locale long-month and locale numeric-month dates translate cleanly to the `Long Date` and `Short Date` named formats;
+and hour-minute and hour-minute-second times translate cleanly to the `Short Time` and `Long Time` named formats.
 
-其余格式无法精确翻译，并会发出警告：
-紧凑数字缩写形式和字节格式会回退为普通数字格式；
-本地化的短月份日期会回退为 `Long Date`；
-年-周日期会回退为 ISO 日期；
-组合日期时间格式会回退为 ISO 组合格式。
+The remaining formats cannot be precisely translated and emit a warning:
+the compact number abbreviation and the byte format fall back to a plain numeric format;
+the locale short-month date falls back to `Long Date`;
+the year-week date falls back to an ISO date;
+and a combined date-and-time format falls back to an ISO composite.
 
-### SQL -> DAX 翻译
+### SQL -> DAX translation
 
 Metric View 在 SQL 表达式之上提供了一个结构化层，因此翻译 Metric View 的一部分工作是在 Tabular 模型中将 SQL 转换为 DAX 和 M。
-支持的聚合包括求和、计数、非重复计数、最大值、最小值和平均值。
-SQL->DAX 翻译支持基本算术运算、常见计数模式、度量值引用以及括号优先级。
+Supported aggregations are sum, count, distinct count, max, min, and average.
+Basic arithmetic, common counting patterns, measure references, and parenthesis precedence are all supported for SQL->DAX translation.
 
 > [!WARNING]
-> 注意，SQL 和 DAX 是不同的语言，语义也不同。
+> Note that SQL and DAX are different languages with different semantics.
 > 我们无法保证转换后的度量值在 Metric View SQL 与我们生成的 Tabular DAX 中的行为完全一致。
-> 定义在事实表字段上的基本聚合通常表现相同，而定义在维度表字段上的聚合则更可能产生非预期结果。
+> Basic aggregates defined on fact table fields should behave the same, whereas aggregates defined on fields in dimension tables are more likely to produce undesired results.
 
 ## Metric Views 与 Tabular 模型中的常见通用术语
 
-为可能不熟悉 Metric Views 或表格模型的用户，我们在下方提供了一份不完整的对照速查表。
+For those of our users who may be unfamiliar with either Metric Views or Tabular models, we provide an incomplete rosetta stone below.
 我们对 Metric View 对象的称呼基于它们在 YAML 中的表示；对 Tabular 对象的称呼则基于该对象类型在 TMDL/TMSL 中的名称。
 
-| 通用术语  | Tabular 中的名称 | Metric View 中的名称                                     | 说明                             | 注意                                                                                                  |
-| ----- | ------------ | ---------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------- |
-| 事实表   | 表            | `source`                                             | 用于存放维度外键以及可聚合的数值字段的表           | 一个 Metric View 只有一个未命名的事实表，并在 YAML 中表示为根级 `source` 属性。 表格模型不区分表的类型：某个表是否为事实表只能推断出来                  |
-| 维度    | 表            | `join`                                               | 用于存放描述性属性以及一个主键的表，事实表通过该主键与其关联 | Tabular 模型同样不会区分，因此“维度”的角色也只能像事实表一样通过推断得出。                                                          |
-| 分区    | 分区           | `source`（仅用于 `join`）                                 | 用于数据管理的对象，保存表中的一部分数据           | 表格模型中的表可以有多个分区，并且必须至少有一个。 如上所述，Metric View 的事实仅被定义为一个源，但 Metric View 的联接也有一个 `source` 属性，其作用大致类似于分区 |
-| 字段    | 列            | 字段                                                   | 表格中的一列                         |                                                                                                     |
-| 度量值   | 度量值          | 度量值                                                  | 在模型中按业务逻辑进行汇总的定量值              | 表格模型中的度量值使用 DAX 编写，而在 Metric View 中使用 SQL 编写                                                        |
-| 联接或关系 | 关系           | join.on 或 join.using | 一个表中的外键与另一个表中的主键之间的对应关系        | 在表格模型中，关系是显式对象；而在 Metric View YAML 中，它被隐式定义为 `join` 对象的一个属性                                         |
+| 通用术语  | Tabular 中的名称 | Metric View 中的名称                                     | 说明                             | 注意                                                                                                                                                                                                                                                         |
+| ----- | ------------ | ---------------------------------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 事实表   | 表            | `source`                                             | 用于存放维度外键以及可聚合的数值字段的表           | 一个 Metric View 只有一个未命名的事实表，并在 YAML 中表示为根级 `source` 属性。 Tabular models do not differentiate between types of tables: whether a table is a fact can only be inferred                                                                         |
+| 维度    | 表            | `join`                                               | 用于存放描述性属性以及一个主键的表，事实表通过该主键与其关联 | Tabular 模型同样不会区分，因此“维度”的角色也只能像事实表一样通过推断得出。                                                                                                                                                                                                                 |
+| 分区    | 分区           | `source`（仅用于 `join`）                                 | 用于数据管理的对象，保存表中的一部分数据           | Tabular model tables can have many partitions and must have at least one. The Metric View fact, as mentioned above is defined purely as a source, but Metric View joins also have a `source` property, which acts roughly like a partition |
+| 字段    | 列            | 字段                                                   | 表格中的一列                         |                                                                                                                                                                                                                                                            |
+| 度量值   | 度量值          | 度量值                                                  | 在模型中按业务逻辑进行汇总的定量值              | 表格模型中的度量值使用 DAX 编写，而在 Metric View 中使用 SQL 编写                                                                                                                                                                                                               |
+| 联接或关系 | 关系           | join.on 或 join.using | 一个表中的外键与另一个表中的主键之间的对应关系        | 在表格模型中，关系是显式对象；而在 Metric View YAML 中，它被隐式定义为 `join` 对象的一个属性                                                                                                                                                                                                |
 
-## 其他参考资料
+## Additional references
 
 - @semantic-bridge
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation
 - @semantic-bridge-how-tos
-- [Metric View API 文档](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)
+- [Metric View API docs](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)

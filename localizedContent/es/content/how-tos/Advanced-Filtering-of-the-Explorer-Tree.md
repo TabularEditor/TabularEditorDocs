@@ -17,45 +17,45 @@ Este artículo explica cómo usar el cuadro de texto "Filter" en Tabular Editor,
 
 Desde la versión [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4), Tabular Editor te permite decidir cómo se aplica el filtro a los objetos de la jerarquía y cómo se muestran los resultados de búsqueda. Esto se controla con los tres botones más a la derecha de la barra de herramientas, junto al botón "Filter":
 
-![image](https://user-images.githubusercontent.com/8976200/46567931-08a4b480-c93d-11e8-96fd-e197e87a0587.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-01.png)
 
-- ![image](https://user-images.githubusercontent.com/8976200/46567944-44d81500-c93d-11e8-91e2-d9822078dba7.png) **Jerárquico por padre**: La búsqueda se aplicará a los objetos _padre_, es decir, tablas y carpetas de visualización (si están habilitadas). Cuando un elemento padre cumpla los criterios de búsqueda, se mostrarán todos los elementos hijos.
-- ![image](https://user-images.githubusercontent.com/8976200/46567940-2ffb8180-c93d-11e8-9fba-84fbb79b6bb3.png) **Jerárquico por hijos**: La búsqueda se aplicará a los objetos _hijos_, es decir, medidas, columnas, jerarquías, etc. Los objetos padre solo se mostrarán si tienen al menos un objeto hijo que cumpla los criterios de búsqueda.
-- ![image](https://user-images.githubusercontent.com/8976200/46567941-37bb2600-c93d-11e8-9c02-86502f41bce8.png) **Plano**: La búsqueda se aplicará a todos los objetos y los resultados se mostrarán en una lista plana. Los objetos que contengan elementos secundarios seguirán mostrándolos de forma jerárquica.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Hierarchical by parent**: The search will apply to _parent_ objects, that is Tables and Display Folders (if those are enabled). Cuando un elemento padre cumpla los criterios de búsqueda, se mostrarán todos los elementos hijos.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Hierarchical by children**: The search will apply to _child_ objects, that is Measures, Columns, Hierarchies, etc. Los objetos padre solo se mostrarán si tienen al menos un objeto hijo que cumpla los criterios de búsqueda.
+- ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Flat**: The search will apply to all objects, and results will be displayed in a flat list. Los objetos que contengan elementos secundarios seguirán mostrándolos de forma jerárquica.
 
 ## Búsqueda simple
 
 Escribe lo que quieras en el cuadro de texto "Filter" y pulsa [Enter] para realizar una búsqueda sencilla sin distinguir entre mayúsculas y minúsculas en los nombres de los objetos. Por ejemplo, si escribes "sales" en el cuadro de texto "Filter" y usas el modo de filtrado "By Parent", obtendrás los siguientes resultados:
 
-![image](https://user-images.githubusercontent.com/8976200/46568002-5f5ebe00-c93e-11e8-997b-7f89dfd92076.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-05.png)
 
 Al expandir cualquiera de las tablas, se mostrarán todas las medidas, columnas, jerarquías y particiones de la tabla. Si cambiamos el modo de filtrado a "By Child", los resultados se verán así:
 
-![image](https://user-images.githubusercontent.com/8976200/46568016-9f25a580-c93e-11e8-9bc2-c0a16a890256.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-06.png)
 
 Observa que la tabla "Employee" ahora aparece en la lista, ya que tiene un par de elementos secundarios (columnas, en este caso) que contienen la palabra "sales".
 
-## Búsqueda con comodines
+## Wildcard search
 
 Al escribir una cadena en el cuadro de texto del filtro, puedes usar el comodín `?` para indicar cualquier carácter y `*` para indicar cualquier secuencia de caracteres (cero o más). Así, escribir `*sales*` produciría exactamente los mismos resultados que se muestran más arriba; sin embargo, si escribes `sales*`, solo se mostrarán los objetos cuyo nombre _empieza_ por la palabra "sales" (de nuevo, no distingue entre mayúsculas y minúsculas).
 
 Búsqueda de `sales*` por elemento padre:
 
-![image](https://user-images.githubusercontent.com/8976200/46568043-19eec080-c93f-11e8-8d81-2a6214bfa572.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-07.png)
 
 Búsqueda de `sales*` por elemento hijo:
 
-![image](https://user-images.githubusercontent.com/8976200/46568117-f9733600-c93f-11e8-96ab-f87769b8097c.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-08.png)
 
 Búsqueda plana de `sales*` (pulsa [Ctrl]+[F1] para mostrar u ocultar las columnas de información y ver información detallada de cada objeto):
 
-![image](https://user-images.githubusercontent.com/8976200/46568118-042dcb00-c940-11e8-82d1-516207450559.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-09.png)
 
 Los comodines se pueden colocar en cualquier parte de la cadena y puedes incluir tantos como necesites. Si eso no te parece lo bastante complejo, sigue leyendo...
 
 ## Búsqueda con LINQ dinámico
 
-También puedes usar [LINQ dinámico](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) para buscar objetos, lo mismo que cuando creas reglas del [Best Practice Analyzer](/Best-Practice-Analyzer). Para habilitar el modo LINQ dinámico en el cuadro de texto Filtro, solo tienes que poner un `:` (dos puntos) delante de tu cadena de búsqueda. Por ejemplo, para ver todos los objetos cuyo nombre termina en "Key" (distingue entre mayúsculas y minúsculas), escribe:
+You can also use [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) to search for objects, which is the same thing you do when creating [Best Practice Analyzer rules](xref:best-practice-analyzer). Para habilitar el modo LINQ dinámico en el cuadro de texto Filtro, solo tienes que poner un `:` (dos puntos) delante de tu cadena de búsqueda. Por ejemplo, para ver todos los objetos cuyo nombre termina en "Key" (distingue entre mayúsculas y minúsculas), escribe:
 
 ```
 :Name.EndsWith("Key")
@@ -63,7 +63,7 @@ También puedes usar [LINQ dinámico](https://github.com/kahanu/System.Linq.Dyna
 
 ...y pulsa [Enter]. En el modo de filtrado "Flat", el resultado se ve así:
 
-![image](https://user-images.githubusercontent.com/8976200/46568130-33dcd300-c940-11e8-903c-193e1acde0ad.png)
+![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-10.png)
 
 Para una búsqueda sin distinción entre mayúsculas y minúsculas en LINQ dinámico, puedes convertir la cadena de entrada con algo como:
 
@@ -86,7 +86,7 @@ No estás limitado a buscar solo en los nombres de los objetos. Las cadenas de b
 Como otro ejemplo, lo siguiente mostrará todas las medidas ocultas del modelo que no estén referenciadas por ningún otro objeto:
 
 ```
-:ObjectType="medida" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
+:ObjectType="Measure" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
 ```
 
 También puedes usar expresiones regulares. Lo siguiente encontrará todas las columnas cuyo nombre contenga la palabra "Number" o "Amount":

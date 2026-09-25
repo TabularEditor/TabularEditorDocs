@@ -160,7 +160,7 @@ RLS y OLS solo se pueden probar mediante suplantación una vez que se hayan agre
 
 ---
 
-### ¿Qué aspecto tiene?
+### How Does it Look?
 
 En función de cómo hayas diseñado y configurado la seguridad de datos, la experiencia puede variar para los usuarios.
 A continuación se muestran ejemplos típicos de escenarios comunes de implementación de RLS y/o OLS en un Dataset
@@ -186,7 +186,7 @@ _En el ejemplo, tanto Jack como Janet pueden ver todos los datos._
 Los permisos de tabla más sencillos son _estáticos_:
 
 ```dax
-// permiso de tabla para la tabla 'Regions' y el rol 'CTG'
+// Table Permission for 'Regions' table and 'CTG' role
 'Regions'[Territory] = "Central Transit Gate"
 ```
 
@@ -215,9 +215,9 @@ A esto se le llama RLS _dinámico_ porque el resultado cambiará en función del
 A continuación se muestra un ejemplo de permiso de tabla de RLS dinámico:
 
 ```dax
-// permiso de tabla para 'Regions' y el rol 'Territory Directors'.
+// Table Permission for 'Regions' table and 'Territory Directors' role.
 
-// Obtener el usuario actual
+// Get Current User
 VAR _CurrentUser = 
 SELECTCOLUMNS (
 	FILTER ( 

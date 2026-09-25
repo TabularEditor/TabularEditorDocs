@@ -79,7 +79,7 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 El depurador proporciona las siguientes vistas (si están ocultas, puedes acceder a ellas mediante el menú **Depurar > Ventanas**).
 
 - Variables locales
-- Inspección
+- Watch
 - Contexto de evaluación
 - Árbol de llamadas
 
@@ -97,7 +97,7 @@ Si prefiere inspeccionar el valor de variables locales en una ventana de Consult
 
 ![Configuración del depurador de Dax](~/content/assets/images/features/dax-debugger-settings.png)
 
-## Inspección
+## Watch
 
 Esta vista le permite introducir cualquier expresión DAX, que se calculará dentro del contexto de evaluación actual. Puede introducir expresiones escalares y de tabla, puede usar todas las funciones DAX disponibles y hacer referencia a variables dentro del ámbito de evaluación actual. Los valores de seguimiento se actualizan automáticamente al avanzar a otra subexpresión o cuando se cambia el contexto de evaluación. **Los valores de seguimiento siempre se evalúan en el ámbito del elemento actualmente seleccionado en la pila del contexto de evaluación**.
 

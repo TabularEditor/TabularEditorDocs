@@ -8,28 +8,28 @@ description: 最佳实践规则：确保可见的度量值设置了合适的格�
 
 # 为度量值提供格式字符串
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别数据类型为数值或日期、但缺少格式字符串的可见度量值。 所有度量值都应显式设置格式字符串，以实现专业且一致的显示效果。
+此最佳实践规则用于识别数据类型为数值或日期、但缺少格式字符串的可见度量值。 All measures should have explicit format strings for professional, consistent display.
 
 - 类别：格式化
 
 - 严重级别：中等（2）
 
-## 适用范围
+## 适用于
 
 - 度量值
 
-## 为何重要
+## 为何这很重要
 
-没有格式字符串的度量值会显示原始值，容易让用户困惑，并导致 Report 展示不一致。 格式字符串可确保：
+没有格式字符串的度量值会显示原始值，容易让用户困惑，并导致 Report 展示不一致。 Format strings ensure:
 
 - **专业呈现**：以恰当的货币、百分比或数字格式显示数值
 - **一致性**：所有 Report 都以相同格式显示数值
 - **用户信心**：格式正确的数字更易阅读和理解
 - **符合公司规范**：格式符合企业标准
 
-## 触发条件
+## 此规则何时触发
 
 ```csharp
 IsVisible
@@ -49,21 +49,21 @@ and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataT
 ### 常见格式模式
 
 ```dax
-总收入 = 
+Total Revenue = 
 SUM('Sales'[Amount])
-// 格式字符串: "$#,0"
+// Format String: "$#,0"
 
-平均价格 = 
+Average Price = 
 AVERAGE('Sales'[UnitPrice])
-// 格式字符串: "$#,0.00"
+// Format String: "$#,0.00"
 
-同比增长 = 
+YoY Growth = 
 DIVIDE([This Year] - [Last Year], [Last Year], 0)
-// 格式字符串: "0.0%"
+// Format String: "0.0%"
 
-订单数量 = 
+Order Count = 
 COUNTROWS('Orders')
-// 格式字符串: "#,0"
+// Format String: "#,0"
 ```
 
 ## 常见原因
@@ -81,8 +81,8 @@ COUNTROWS('Orders')
 ### 修复前
 
 ```dax
-总收入 = SUM('Sales'[Amount])
-// 未设置格式字符串
+Total Revenue = SUM('Sales'[Amount])
+// No Format String
 ```
 
 **显示**：1234567.89（难以阅读，没有货币符号）
@@ -90,15 +90,15 @@ COUNTROWS('Orders')
 ### 修复后
 
 ```dax
-总收入 = SUM('Sales'[Amount])
-// 格式字符串: "$#,0"
+Total Revenue = SUM('Sales'[Amount])
+// Format String: "$#,0"
 ```
 
 **显示**：$1,234,568（清晰、专业的格式）
 
 ## 兼容级别
 
-这个规则适用于兼容级别为 **1200** 及以上的模型。
+该规则适用于兼容级别为 **1200** 及以上的模型。
 
 ## 相关规则
 

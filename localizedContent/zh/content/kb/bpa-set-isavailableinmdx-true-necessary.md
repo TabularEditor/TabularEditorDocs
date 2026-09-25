@@ -8,22 +8,22 @@ description: 一条最佳实践规则：通过确保用于层次结构和关系�
 
 # 必要时将 IsAvailableInMDX 设置为 True
 
-## 概述
+## 概览
 
-此最佳实践规则会识别那些将 `IsAvailableInMDX` 设为 `false`，但实际用于需要 MDX 访问场景的列。 这些列必须启用 MDX 可用性，才能在层次结构、关系和排序操作中正常工作。
+此最佳实践规则会识别那些将 `IsAvailableInMDX` 设为 `false`，但实际用于需要 MDX 访问场景的列。 These columns must have MDX availability enabled to function correctly in hierarchies, relationships, and sort operations.
 
 - 类别：错误预防
 - 严重性：高（3）
 
-## 适用对象
+## 适用于
 
 - 数据列
 - 计算列
 - 计算表格列
 
-## 为什么这很重要
+## 为何这很重要
 
-当某列用于特定的模型结构时，Analysis Services 引擎需要通过 MDX 访问该列。 对需要 MDX 的列禁用 MDX 访问会导致：
+当某列用于特定的模型结构时，Analysis Services 引擎需要通过 MDX 访问该列。 Disabling MDX access for columns that need it causes:
 
 - **查询失败**：层次结构和排序操作会失败并报错
 - **可视化出错**：使用受影响层次结构的图表和表格会显示错误
@@ -101,7 +101,7 @@ IsAvailableInMDX = true
 Hierarchy: Geography
   Levels:
     - Country
-    - State (IsAvailableInMDX = false)  ← 问题
+    - State (IsAvailableInMDX = false)  ← Problem
     - City
 ```
 
@@ -116,7 +116,7 @@ Hierarchy: Geography
 ```
 Month Name column:
   - SortByColumn = MonthNumber
-  - MonthNumber.IsAvailableInMDX = false  ← 问题
+  - MonthNumber.IsAvailableInMDX = false  ← Problem
 ```
 
 **错误**：月份按字母顺序显示，而不是按日历顺序
@@ -129,8 +129,8 @@ Month Name column:
 
 ```
 DateTable:
-  - Calendar 使用 DateKey 列
-  - DateKey.IsAvailableInMDX = false  ← 问题
+  - Calendar uses DateKey column
+  - DateKey.IsAvailableInMDX = false  ← Problem
 ```
 
 **错误**：时间智能函数失败

@@ -39,16 +39,16 @@ La regla se activa cuando una partición cumple todas estas condiciones:
 
 Esta combinación indica una incompatibilidad estructural que Power BI no puede procesar.
 
-## Cómo solucionarlo
+## Cómo corregir
 
-### Solución manual
+### Corrección manual
 
 1. En el **Explorador TOM**, selecciona la partición afectada
 2. En el panel **Propiedades**, toma nota de la consulta existente
 3. Crea una nueva partición de **Power Query** con una expresión M
 4. Después de verificar que la nueva partición funciona, elimina la partición del proveedor anterior
 
-## Causas habituales
+## Causas comunes
 
 ### Causa 1: Migración desde Analysis Services
 
@@ -60,10 +60,10 @@ Mezclar tipos de partición durante el desarrollo del modelo crea configuracione
 
 ## Ejemplo
 
-### Antes de la solución
+### Antes de la corrección
 
 ```
-Partición: Sales_Partition
+Partition: Sales_Partition
   SourceType: Query
   Query: SELECT * FROM Sales
   DataSource: PowerQuerySource (Type: Structured)
@@ -71,10 +71,10 @@ Partición: Sales_Partition
 
 **Error**: La implementación en Power BI Service falla
 
-### Después de la solución
+### Después de la corrección
 
 ```
-Partición: Sales_Partition
+Partition: Sales_Partition
   SourceType: M
   Expression: 
     let

@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Agregar medidas y otros objetos calculados
 author: Daniel Otykier
-updated: 2021-10-08
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -121,9 +121,25 @@ Puedes usar los botones de flecha de la esquina superior derecha del **Editor de
 
 ## Dependencias de DAX
 
-Para ver las dependencias de DAX entre objetos, selecciona un objeto en el **Explorador TOM**; luego, haz clic con el botón derecho y elige **Mostrar dependencias** (SHIFT+F12). Esto abrirá una ventana que muestra las dependencias (en ambas direcciones) del objeto seleccionado. Haz doble clic en un objeto en esta ventana para navegar rápidamente hasta él.
+To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (**Shift+F12**). This opens the **DAX Dependencies** view, which displays the dependencies of the selected object. Double-click an object in the tree to navigate to it, or right-click for **Go to item**, **Copy as text** and **Copy as JSON**.
 
 ![Dependencias de Dax y Explorador Tom](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
+
+The view shows one direction at a time. Choose which with the radio buttons:
+
+| Opción                                     | Shows                                                                                                                                        |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Objects that depend on this**            | What would break if you changed or deleted the selected object                                                                               |
+| **Objects on which this depends**          | What the selected object reads from                                                                                                          |
+| **Relationships starting from this table** | The relationships leaving the selected table. With a column selected, this reads **Relationships starting from this column** |
+
+Tick **Show inactive** to include inactive relationships.
+
+### Following the TOM Explorer
+
+Rather than invoking **Show dependencies** for each object in turn, tick **Track TOM Explorer** and the view follows whatever is selected in the tree. Ticking it shows the dependencies of the object that is _already_ selected straight away, rather than waiting for the next selection change.
+
+Tracking applies to a single selected object. Selecting several objects, or none, clears the view rather than showing a partial answer.
 
 # Carpetas de visualización
 
@@ -131,7 +147,7 @@ Cuando tu modelo empieza a tener un número considerable de medidas, una buena p
 
 También puedes cortar/copiar/pegar o arrastrar y soltar objetos entre carpetas de visualización.
 
-# Próximos pasos
+# Pasos a seguir
 
 - @dax-script-introduction
 - @bpa

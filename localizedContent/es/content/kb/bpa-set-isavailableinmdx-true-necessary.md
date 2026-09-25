@@ -8,7 +8,7 @@ description: Regla de práctica recomendada que evita errores de consulta al gar
 
 # Establecer IsAvailableInMDX en True cuando sea necesario
 
-## Descripción general
+## Resumen
 
 Esta regla de práctica recomendada identifica columnas que tienen `IsAvailableInMDX` establecido en `false`, pero que en realidad se usan en escenarios que requieren acceso a MDX. Estas columnas deben tener habilitada la disponibilidad de MDX para funcionar correctamente en jerarquías, relaciones y operaciones de ordenación.
 
@@ -98,11 +98,11 @@ Para aplicar:
 **Problema**: una columna usada como nivel de jerarquía tiene MDX deshabilitado
 
 ```dax
-Jerarquía: Geografía
-  Niveles:
-    - País
-    - Estado (IsAvailableInMDX = false)  ← Problema
-    - Ciudad
+Hierarchy: Geography
+  Levels:
+    - Country
+    - State (IsAvailableInMDX = false)  ← Problem
+    - City
 ```
 
 **Error**: "La jerarquía 'Geografía' no se puede usar porque uno de sus niveles no está disponible en MDX."
@@ -114,9 +114,9 @@ Jerarquía: Geografía
 **Problema**: una columna que sirve como destino de «Ordenar por» tiene MDX deshabilitado
 
 ```
-Columna Nombre del mes:
+Month Name column:
   - SortByColumn = MonthNumber
-  - MonthNumber.IsAvailableInMDX = false  ← Problema
+  - MonthNumber.IsAvailableInMDX = false  ← Problem
 ```
 
 **Error**: los meses se muestran en orden alfabético en lugar de en orden de calendario
@@ -129,8 +129,8 @@ Columna Nombre del mes:
 
 ```
 DateTable:
-  - Calendar usa la columna DateKey
-  - DateKey.IsAvailableInMDX = false  ← Problema
+  - Calendar uses DateKey column
+  - DateKey.IsAvailableInMDX = false  ← Problem
 ```
 
 **Error**: Las funciones de inteligencia temporal fallan

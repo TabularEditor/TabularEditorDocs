@@ -15,46 +15,46 @@ applies_to:
 
 ## 脚本用途
 
-此脚本会输出引用所选显式（旧版）数据源的表。 这将更容易确定所选数据源的使用位置。
+此脚本会输出引用所选显式（旧版）数据源的表。 This will make it easier to determine where a selected data source is used.
 
 ## 脚本
 
 ### 显示数据源依赖项
 
 ```csharp
-//此脚本会输出引用所选显式（旧版）数据源的表。
+//The script outputs the tables that reference the selected explicit (legacy) data source.
 if (Model.DataSources.Count == 0)
 {
-    Info("此模型不包含任何数据源；它可能是空模型，或使用的是隐式数据源");
+    Info("This model doesn't contain any data sources, it is either empty or using implicit datasources");
     return;
 }
-// 检查是否已选择数据源
+// Checks that a data source is selected
 DataSource selectedDatasource = null;
 
 if (Selected.DataSources.Count == 1)
     selectedDatasource = Selected.DataSource;
 else
-    selectedDatasource = SelectObject<DataSource>(Model.DataSources, null, "选择要查看其依赖关系的数据源");
+    selectedDatasource = SelectObject<DataSource>(Model.DataSources, null, "Select which datasource to see dependencies for");
 
-// 旧版数据源
+// Legacy sources
 var legacyTables = Model.Tables.Where(t => t.Source == selectedDatasource.Name).ToList();
 
-// M 数据源
+// M sources
 var mTables = Model.Tables.Where(t => t.Partitions.Any(p => p.Expression.Contains($"= #\"{selectedDatasource.Name}\","))).ToList();
 
-// 合并列表
+// join arrays
 var allTables = legacyTables.Union(mTables).OrderBy(t => t.Name);
 
-// 展示结果
+// Present result
 var tableString = string.Join("\r\n", allTables.Select(t => t.Name));
-Info($"数据源 {selectedDatasource.Name} 被以下表引用：\r\n" + tableString);
+Info($"Datasource {selectedDatasource.Name} is referenced from the following tables:\r\n" + tableString);
 ```
 
 ### 说明
 
 此代码片段会获取所选数据源，并遍历模型，找出使用该数据源的分区。
 
-## 示例输出
+## 输出示例
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/script-show-data-source-dependencies-output.png" alt="Example of the dialog pop-up that informs the user which tables use the selected data source" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>弹出对话框示例，用于告知用户哪些表使用了所选数据源。</figcaption>

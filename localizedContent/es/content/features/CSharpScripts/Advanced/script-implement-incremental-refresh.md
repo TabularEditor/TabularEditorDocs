@@ -13,7 +13,7 @@ applies_to:
 
 # Configurar la actualización incremental
 
-## Propósito del script
+## Objetivo del script
 
 Si quieres configurar la actualización incremental para una tabla de importación basada en un campo de fecha específico.
 Este script funciona con columnas de fecha `datetime`, `date` o `integer` en las que quieras configurar la actualización incremental.

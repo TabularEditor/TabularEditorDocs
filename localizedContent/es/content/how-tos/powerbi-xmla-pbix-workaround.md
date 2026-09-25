@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creación de un archivo PBIX a partir de un punto de conexión XMLA.
 author: Morten Lønskov
-updated: 2023-10-18
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Solo puntos de conexión XMLA Premium por usuario"
+          note: "Solo puntos de conexión XMLA de Premium por usuario"
         - edition: Enterprise
           full: true
 ---
@@ -82,17 +82,17 @@ foreach (var t in Model.Tables)
 {
     if(t.EnableRefreshPolicy)
     {
-        //Recopilaremos el SourceExpression de la expresión de origen de la actualización incremental de la tabla
+        //We will collect the SourceExpression from the Incremental Refresh Source Expression of the table
         string m_expression = t.SourceExpression.ToString();
          
-        //Generaremos un nuevo nombre de partición
+        //We will generate a new partition name
         string partition_name = t.Name + "-" + Guid.NewGuid();
 
-        //Ahora crearemos una nueva partición
+        //Now we will create a new partition
         var partition = t.AddMPartition(partition_name, m_expression);
         partition.Mode = ModeType.Import;
         
-        //A continuación eliminaremos todas las particiones de actualización incremental de la tabla
+        //Next we will delete all the incremental refresh partitions of the table
         foreach (var p in t.Partitions.OfType<PolicyRangePartition>().ToList())
         {
             p.Delete();

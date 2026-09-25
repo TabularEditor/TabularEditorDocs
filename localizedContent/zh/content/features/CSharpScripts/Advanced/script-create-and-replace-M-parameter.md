@@ -15,11 +15,11 @@ applies_to:
 
 ## 脚本用途
 
-若要在模型的 M 分区中替换某个字符串（即连接字符串、筛选条件、列名等） 替换为参数值。 <br></br>
+若要在模型的 M 分区中替换某个字符串（即连接字符串、筛选条件、列名等） with a parameter value. <br></br>
 
 > [!NOTE]
 > 此脚本仅适用于 `string` 数据类型的参数。
-> 对于其他数据类型，请相应修改变量类型和参数值。 <br></br>
+> For other data types, please modify the variable types & parameter value appropriately. <br></br>
 
 ## 脚本
 
@@ -189,7 +189,7 @@ using (Form prompt = new Form())
 
 ### 说明
 
-这段代码会打开一个对话框，让你输入参数名称和值，然后在模型中以“共享表达式”的形式创建该参数。
+This snippet opens a dialogue box for the user to enter the parameter name and value, then creates the parameter as a 'Shared Expression' in the model.
 随后，它会在所有 M 分区中搜索默认值，并将其替换为 `#"ParameterName"`。
 
 ## 输出示例
@@ -199,5 +199,5 @@ using (Form prompt = new Form())
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2:</strong> 确认对话框显示参数已创建，并且已在所有 M 分区表达式中替换了对应的值子串。 如需使用其他类型的参数，请相应调整 C# 代码。</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2:</strong> 确认对话框显示参数已创建，并且已在所有 M 分区表达式中替换了对应的值子串。 For parameters of other types, adjust the C# code, appropriately.</figcaption>
 </figure>

@@ -32,17 +32,17 @@ applies_to:
 
 1. **Detectar cambios de esquema:** Haz clic con el botón derecho en la tabla y selecciona _'Actualizar esquema de tabla...'_.
 
-  <img src="~/content/assets/images/tutorials/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
 
 2. **Aplicar cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema que quieras aplicar.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
 4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
 
-  <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
 5. **Actualizar todas las particiones:** Haz Mayús + clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
-  <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 

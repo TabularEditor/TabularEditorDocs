@@ -13,7 +13,7 @@ applies_to:
 
 # Crear una tabla de fechas
 
-## Propósito del script
+## Objetivo del script
 
 Puedes usar este script para crear una tabla de fechas nueva, organizada y configurada, a partir de 1-2 columnas de fecha seleccionadas en el modelo.
 La primera columna seleccionada debe contener la fecha más antigua y la segunda, la fecha más reciente. Ambas deben estar seleccionadas antes de ejecutar el script o la macro.

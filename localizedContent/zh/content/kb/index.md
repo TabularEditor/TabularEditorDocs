@@ -2,7 +2,7 @@
 
 本节收录有关 Tabular Editor 和 Power BI 模型的最佳实践、代码分析规则以及 DAX 优化模式的文章。
 
-## 本节包含
+## 本节内容
 
 ### 最佳实践规则 (BPA)
 
@@ -41,7 +41,7 @@
 
 ### DAX 代码分析（DI）
 
-针对 DAX 代码结构和效率的改进建议。 这些规则有助于你发现简化和优化表达式的机会。
+针对 DAX 代码结构和效率的改进建议。 These rules identify opportunities to simplify and optimize your expressions.
 
 - @DI001 - 移除未使用的变量
 - @DI002 - 移除未使用的变量
@@ -61,10 +61,10 @@
 
 ### DAX 重构 (DR)
 
-针对复杂或低效 DAX 模式的重构建议。 这些规则可帮助你使 DAX 代码更现代化，并提升可读性。
+Refactoring suggestions for complex or inefficient DAX patterns. 这些规则可帮助你使 DAX 代码更现代化，并提升可读性。
 
 - @DR001 - 转换为标量谓词
-- @DR002 - 用聚合函数替代迭代器
+- @DR002 - Use aggregator instead of iterator
 - @DR003 - 用 VALUES 替代 SUMMARIZE
 - @DR004 - 为变量添加前缀
 - @DR005 - 为临时列添加前缀

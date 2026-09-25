@@ -8,7 +8,7 @@ description: Regla de prácticas recomendadas para evitar problemas de rendimien
 
 # Las relaciones de muchos a muchos deberían ser unidireccionales
 
-## Descripción general
+## Resumen
 
 Esta regla de prácticas recomendadas identifica relaciones de muchos a muchos que usan filtrado cruzado bidireccional. Las relaciones de muchos a muchos con filtrado en ambas direcciones provocan una degradación significativa del rendimiento.
 
@@ -35,7 +35,7 @@ La regla se activa cuando una relación cumple todas estas condiciones:
 2. `ToCardinality = "Many"`
 3. `CrossFilteringBehavior = "BothDirections"`
 
-## Cómo solucionarlo
+## Cómo corregirlo
 
 ### Corrección manual
 
@@ -77,15 +77,15 @@ Se usó el filtrado en ambas direcciones para resolver un problema concreto sin 
 ### Antes de la corrección
 
 ```
-'Sales' (Muchos) <--> (Muchos) 'ProductBridge'
-Dirección de filtro cruzado: Ambos  ← Problema
+'Sales' (Many) <--> (Many) 'ProductBridge'
+Cross Filter Direction: Both  ← Problem
 ```
 
 ### Después de la corrección
 
 ```
-'Sales' (Muchos) --> (Muchos) 'ProductBridge'
-Dirección de filtro cruzado: Único
+'Sales' (Many) --> (Many) 'ProductBridge'
+Cross Filter Direction: Single
 ```
 
 Si 'Products' debe filtrar 'Sales', usa DAX:

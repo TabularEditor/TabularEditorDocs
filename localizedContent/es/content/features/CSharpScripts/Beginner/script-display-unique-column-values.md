@@ -13,7 +13,7 @@ applies_to:
 
 # Valores únicos de la columna
 
-## Propósito del script
+## Objetivo del script
 
 Muestra los valores distintos de una columna para perfilar datos rápidamente y acceder a ellos.
 Guárdalo como una macro a nivel de columna para tenerlo disponible rápidamente.
@@ -25,13 +25,13 @@ Guárdalo como una macro a nivel de columna para tenerlo disponible rápidamente
 ### Título del script
 
 ```csharp
-// Construye la expresión DAX para obtener todos los valores distintos de la columna, a partir de la columna seleccionada:
+// Construct the DAX expression to get all distinct column values, from the selected column:
 var dax = string.Format("ALL({0})", Selected.Column.DaxObjectFullName);
 
-// Evalúa la expresión DAX contra el modelo conectado:
+// Evaluate the DAX expression against the connected model:
 var result = EvaluateDax(dax);
 
-// Muestra el DataTable que contiene el resultado de la expresión DAX:
+// Output the DataTable containing the result of the DAX expression:
 Output(result);
 ```
 

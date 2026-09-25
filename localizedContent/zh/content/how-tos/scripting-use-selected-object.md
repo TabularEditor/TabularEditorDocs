@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用 Selected 对象
 
-`Selected` 对象可用于访问 @tom-explorer-view-reference 树中当前选中的内容。 用它来编写脚本，使脚本操作用户选中的对象，而不是写死对象名称。
+`Selected` 对象可用于访问 @tom-explorer-view-reference 树中当前选中的内容。 Use it to write scripts that operate on user-selected objects rather than hardcoded names.
 
 ## 快速参考
 
@@ -46,20 +46,20 @@ Selected.Measures.ForEach(m => m.DisplayFolder = "KPIs");
 - `Selected.Roles`
 - `Selected.DataSources`
 
-## 单数与复数访问器
+## Singular vs plural accessors
 
 `Selected` 对象为每种对象类型同时提供单数和复数访问器。
 
-| 访问器                 | 返回                           | 当数量不为 1 时的行为                    |
-| ------------------- | ---------------------------- | ------------------------------- |
-| `Selected.Measure`  | 单个 `Measure`：度量值             | 如果选中了 0 个或 2 个以上度量值，则引发异常       |
-| `Selected.Measures` | `IEnumerable<Measure>`：度量值集合 | 返回的集合可能为空，但绝不会为 null。 可直接安全地迭代。 |
+| 访问器                 | 返回                           | 当数量不为 1 时的行为                                                    |
+| ------------------- | ---------------------------- | --------------------------------------------------------------- |
+| `Selected.Measure`  | 单个 `Measure`：度量值             | 如果选中了 0 个或 2 个以上度量值，则引发异常                                       |
+| `Selected.Measures` | `IEnumerable<Measure>`：度量值集合 | 返回的集合可能为空，但绝不会为 null。 Safe to iterate directly. |
 
-当脚本要求恰好一个对象时，使用 **单数** 形式。 当脚本需要处理零个或多个对象时，请使用 **复数** 形式。
+Use the **singular** form when your script requires exactly one object. 当脚本需要处理零个或多个对象时，请使用 **复数** 形式。
 
-## 卫语句
+## Guard clauses
 
-复数访问器会返回零个或多个对象。 集合为空时，脚本可能什么也不做；也可能要求至少选中一定数量的对象。 对于后者，请使用卫语句。
+The plural accessor returns zero or more objects. A script may silently do nothing with an empty collection, or require a minimum count. Use a guard clause for the latter.
 
 ```csharp
 // Require at least one measure
@@ -117,7 +117,7 @@ t.AddMeasure("Row Count", "COUNTROWS(" + t.DaxObjectFullName + ")");
 
 ## 混合选择
 
-当你需要处理所选内容中的多种对象类型时，可以直接遍历 `Selected`。 `Selected` 变量本身实现了 `IEnumerable<ITabularNamedObject>`。
+When you need to handle multiple object types from the selection, iterate `Selected` directly. `Selected` 变量本身实现了 `IEnumerable<ITabularNamedObject>`。
 
 ```csharp
 foreach (var desc in Selected.OfType<IDescriptionObject>())
@@ -145,7 +145,7 @@ catch
 ```
 
 > [!NOTE]
-> `Selected` 对象仅在交互式上下文中可用（Tabular Editor UI 和宏）。 通过带有 `-S` 标志的 CLI 运行脚本时，`Selected` 表示由 `-O` 参数指定的对象；如果未指定任何对象，则为空。
+> `Selected` 对象仅在交互式上下文中可用（Tabular Editor UI 和宏）。 When running scripts via the CLI with the `-S` flag, `Selected` reflects the objects specified by `-O` arguments or is empty if none are specified.
 
 ## 另见
 

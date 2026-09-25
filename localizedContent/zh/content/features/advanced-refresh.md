@@ -20,9 +20,9 @@ applies_to:
 
 # 高级刷新对话框
 
-**高级刷新**对话框可对数据刷新操作进行精细控制，使你能够配置刷新类型、并行度、增量刷新设置，以及覆盖配置文件。 当你需要比标准刷新菜单选项提供的更精细的控制时，它会很有帮助。
+**高级刷新**对话框可对数据刷新操作进行精细控制，使你能够配置刷新类型、并行度、增量刷新设置，以及覆盖配置文件。 This is useful when you need more control than the standard refresh menu options provide.
 
-要打开“高级刷新”对话框，请依次选择 **模型 > 刷新模型 > 高级...**，或使用键盘快捷键 **Ctrl+Shift+F5**。
+To open the Advanced Refresh dialog, go to **Model > Refresh model > Advanced...** or use the keyboard shortcut **Ctrl+Shift+F5**.
 
 > [!Note]
 > “高级刷新”对话框仅在商业版和企业版中可用。
@@ -31,7 +31,7 @@ applies_to:
 
 ## 刷新范围
 
-刷新范围表示将刷新哪些对象。 该范围取决于打开对话框时在 TOM Explorer 中选择的对象：
+The refresh scope indicates which objects will be refreshed. 该范围取决于打开对话框时在 TOM Explorer 中选择的对象：
 
 - **整个模型**：未选择任何特定的表或分区时
 - **所选表**：选择一个或多个表时
@@ -43,7 +43,7 @@ applies_to:
 
 ### 刷新类型
 
-“**刷新类型**”下拉列表用于选择要执行的刷新操作类型。 可用选项取决于刷新范围：
+“**刷新类型**”下拉列表用于选择要执行的刷新操作类型。 Available options depend on the refresh scope:
 
 | 刷新类型     | 说明                                      | 可用性      |
 | -------- | --------------------------------------- | -------- |
@@ -57,20 +57,20 @@ applies_to:
 
 ### 最大并行度
 
-**最大并行度** 设置用于控制在刷新操作期间可同时处理的对象数量。 **0** 表示并行度不受限制；Analysis Services 会在资源允许的情况下尽可能并行处理对象。 设置一个具体值可限制并行操作；当你希望降低服务器资源消耗时，这会很有用。
+The **Max Parallelism** setting controls how many objects can be processed simultaneously during the refresh operation. **0** 表示并行度不受限制；Analysis Services 会在资源允许的情况下尽可能并行处理对象。 Set a specific value to limit parallel operations, which can be useful when you want to reduce resource consumption on the server.
 
 ## 增量刷新设置
 
 ![增量刷新设置](~/content/assets/images/advanced-refresh-incremental-effective-date.png)
 
-当刷新范围包含至少一个已配置 [增量刷新策略](xref:incremental-refresh-about) 的表时，就会显示 **增量刷新设置** 部分。 此部分在分区范围内不可用。
+当刷新范围包含至少一个已配置 [增量刷新策略](xref:incremental-refresh-about) 的表时，就会显示 **增量刷新设置** 部分。 This section is not available at partition scope.
 
 - **应用刷新策略**：选中后，刷新操作将遵循表(s)上定义的增量刷新策略，并根据该策略的滚动窗口设置创建和管理分区。
-- **生效日期**：指定评估增量刷新策略时要使用的日期。 默认情况下为当前日期，但你可以选择其他日期，以模拟在不同时间点刷新时的行为。 这对测试增量刷新配置很有用。
+- **生效日期**：指定评估增量刷新策略时要使用的日期。 By default, this is the current date, but you can select a different date to simulate how the refresh would behave at a different point in time. This is useful for testing incremental refresh configurations.
 
 ## 刷新覆盖设置
 
-刷新覆盖允许你在一次刷新操作期间临时修改某些属性，而无需更改实际的模型元数据。 这样可以避免不小心将临时修改留在模型中的风险。
+Refresh overrides allow you to temporarily modify certain properties for the duration of a refresh operation without changing the actual model metadata. This eliminates the risk of accidentally leaving temporary modifications in your model.
 
 ### 刷新覆盖的使用场景
 
@@ -78,13 +78,13 @@ applies_to:
 - **从替代来源刷新**：从测试或开发数据库加载数据，而不是使用模型中配置的生产数据源
 - **使用修改后的表达式进行测试**：覆盖共享表达式（M 参数）以测试不同配置
 
-### 覆盖配置文件
+### Override profiles
 
 覆盖配置文件会保存命名的 TMSL 覆盖配置，方便你在不同刷新操作中重复使用。
 
 ![覆盖配置文件编辑器](~/content/assets/images/advanced-refresh-edit-profile.png)
 
-- **新建...**：创建新的覆盖配置文件。 你需要提供配置文件名称，以及用于指定覆盖项的 TMSL 定义。
+- **New...**: Creates a new override profile. You provide a profile name and the TMSL definition specifying the overrides.
 - **编辑...**：修改所选覆盖配置文件。
 - **删除**：删除所选覆盖配置文件。
 
@@ -100,11 +100,11 @@ applies_to:
 
 ### 配置文件存储
 
-覆盖配置文件按模型存储在 `UserOptions.tmuo` 文件中。 在处理保存在磁盘上的模型元数据时，`.tmuo` 文件会与模型文件放在同一目录下。 通过 XMLA endpoint 直接连接到模型时，`.tmuo` 文件存储在 `%LocalAppData%\\TabularEditor3\\UserOptions` 下。
+Override profiles are stored per-model in the `UserOptions.tmuo` file. When working with model metadata saved on disk, the `.tmuo` file is stored alongside the model files. 通过 XMLA endpoint 直接连接到模型时，`.tmuo` 文件存储在 `%LocalAppData%\\TabularEditor3\\UserOptions` 下。
 
 ## 导出 TMSL 脚本
 
-点击 **导出 TMSL 脚本...** 按钮会打开一个对话框，你可以在里面查看并复制生成的 TMSL 刷新命令。 在以下情况下很有用：
+点击 **导出 TMSL 脚本...** 按钮会打开一个对话框，你可以在里面查看并复制生成的 TMSL 刷新命令。 This is useful when you want to:
 
 - 通过其他工具（例如 SQL Server Management Studio）执行刷新命令
 - 将刷新命令纳入自动化脚本或 CI/CD 管道

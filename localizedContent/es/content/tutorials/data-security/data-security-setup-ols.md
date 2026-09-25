@@ -27,10 +27,10 @@ applies_to:
 
 ---
 
-- [**Acerca de la seguridad de datos y RLS/OLS:**](data-security-about.md) Una visión general funcional de <span style="color:#01a99d">RLS</span> y <span style="color:#8d7bae">OLS</span>.
+- [**Acerca de la seguridad de datos y RLS/OLS:**](data-security-about.md) Una descripción general funcional de <span style="color:#01a99d">RLS</span> y <span style="color:#8d7bae">OLS</span>.
 - [**Modificar/configurar una configuración de RLS:**](data-security-setup-rls.md) Cómo configurar <span style="color:#01a99d">RLS</span> en un Dataset.
 - **Modificar/configurar la configuración de OLS (este artículo):** Cómo configurar <span style="color:#8d7bae">OLS</span> en un Dataset.
-- [**Probar RLS/OLS con suplantación:**](data-security-testing.md) Cómo validar fácilmente la seguridad de datos con Tabular Editor.
+- [**Pruebas de RLS/OLS con suplantación:**](data-security-testing.md) Cómo validar fácilmente la seguridad de datos con Tabular Editor.
 
 ---
 
@@ -42,14 +42,14 @@ _A continuación se ofrece una visión general de los cambios habituales que se 
 
 ### 1. Eliminar un rol
 
-Para quitar un rol del modelo, basta con eliminar el objeto de rol pulsando `Del` o haciendo clic con el botón derecho y seleccionando "Eliminar".
+Para eliminar un rol del modelo, basta con eliminar el objeto de rol con `Del` o haciendo clic con el botón derecho y seleccionando "Delete".
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Eliminación de un rol del modelo.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Eliminación de un rol en el modelo.</figcaption>
 </figure>
 
 > [!NOTE]
-> Los usuarios asignados a este rol ya no podrán ver los datos del modelo, mientras exista al menos otro rol.
+> Todos los usuarios asignados a este rol ya no podrán ver los datos del modelo, siempre que exista al menos otro rol.
 
 ---
 
@@ -57,8 +57,8 @@ Para quitar un rol del modelo, basta con eliminar el objeto de rol pulsando `Del
 
 Para agregar un rol al modelo:
 
-1. **Haz clic con el botón derecho en el tipo de objeto "Roles":** Se abrirá el cuadro de diálogo para crear un nuevo rol.
-2. **Selecciona "Crear" > "Rol":** Asigna un nombre al nuevo rol.
+1. **Haz clic con el botón derecho en el tipo de objeto 'Roles':** Esto abrirá el cuadro de diálogo para que puedas crear un nuevo rol.
+2. **Selecciona 'Crear' > 'rol':** Asigna un nombre al nuevo rol.
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Creación de un nuevo rol en el modelo.</figcaption>
@@ -70,13 +70,13 @@ Para agregar un rol al modelo:
   <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Establecer la propiedad Model Permission es necesario para Power BI.</figcaption>
 </figure>
 
-4. **Configura los permisos:** Establece los permisos de tabla de RLS y/o los permisos de objeto de OLS, como se describe a continuación.
+4. **Establece permisos:** Configura los permisos de tabla de RLS y/o los permisos de objeto de OLS, como se describe a continuación.
 
 ---
 
 ### 3. Eliminar OLS
 
-Para eliminar OLS del modelo, todas las columnas y tablas deben tener la propiedad `Object Level Security` configurada en `Default` para todos los roles. Para quitar la seguridad de datos del modelo, tienes que eliminar todos los roles.
+Para eliminar OLS del modelo, todas las columnas y tablas deben tener la propiedad `Object Level Security` configurada en `Default` para todos los roles. Para quitar la seguridad de datos del modelo, se deben eliminar todos los roles.
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> La propiedad de seguridad a nivel de objetos se encuentra en el panel de <i>Propiedades</i> al seleccionar una columna o tabla. La propiedad no existe para medidas, relaciones y otros tipos de objetos.</figcaption>

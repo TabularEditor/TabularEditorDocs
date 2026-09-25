@@ -16,40 +16,40 @@ applies_to:
 ## 脚本用途
 
 如果你想查看某个表加载了多少行，或快速检查该表是否根本已加载。
-此脚本需要连接到远程模型，或通过工作区模式进行连接。
+This script requires connection to a remote model or connection via Workspace Mode.
 
 ## 脚本
 
 ### 统计所选表中的行数
 
 ```csharp
-// 此脚本会统计所选表中的行数，并在弹出信息框中显示结果。
-// 它不会对该模型做任何更改。
+// This script counts rows in a selected table and displays the result in a pop-up info box.
+// It does not write any changes to this model.
 //
-// 当你想检查某个表是否已加载，或想知道它有多少行时，可用此脚本。
+// Use this script when you want to check whether a table was loaded or how many rows it has.
 //
-// 获取表名
+// Get table name
 string _TableName = 
     Selected.Table.DaxObjectFullName;
 
-// 统计表行数
+// Count table rows
 string _dax = 
     "{ FORMAT( COUNTROWS (" + _TableName + "), \"#,##0\" ) }";
 
-// 评估 DAX
+// Evaluate DAX
 string _TableRows = 
     Convert.ToString(EvaluateDax( _dax ));
 
-// 返回弹出窗口中的输出
-Info ( "表 " + _TableName + " 的行数: " + _TableRows);
+// Return output in pop-up
+Info ( "Number of rows in " + _TableName + ": " + _TableRows);
 ```
 
 ### 说明
 
 此代码片段会遍历模型并统计不同对象类型的数量，然后以手动构建的分层“节点和树”格式显示出来。
-你可以将其注释掉
+You can comment out
 
-## 示例输出
+## 输出示例
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/script-count-rows-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>运行此脚本后会弹出信息框，用于告知用户所选表中的行数示例。</figcaption>

@@ -75,7 +75,7 @@ Nuestras bases legales para el tratamiento de tus datos personales con los fines
 
 #### ¿Compartimos la información que recopilamos con terceros?
 
-Encargados del tratamiento:
+Data processors:
 
 No compartimos la información que recopilamos con terceros, salvo en los siguientes casos:
 
@@ -178,6 +178,6 @@ No dudes en ponerte en contacto con nosotros si tienes alguna pregunta.
 - Por correo electrónico: contact@tabulareditor.com
 - A través de este enlace: https://tabulareditor.com/contact
 
-#### Reclamaciones
+#### Complaints
 
 Si deseas presentar una reclamación sobre el tratamiento de tus datos personales, escríbenos a [contact@tabulareditor.com](mailto:contact@tabulareditor.com). También puedes ponerte en contacto con la Agencia de Protección de Datos, Borgergade 28, 5., 1300 Copenhague K.

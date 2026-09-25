@@ -19,12 +19,12 @@ applies_to:
 
 ## 开发中
 
-- **Semantic Bridge 增强**：导入界面优化，支持多事实模式
+- **Semantic Bridge enhancements**: Enhanced import UI, support for multi-fact pattern
 - **本地化改进**：扩展语言支持，并优化现有翻译
 - **Power Query (M) 自动格式化**：为 M 表达式提供更高级的格式化能力
 - **图形化模型比较**：查看将要应用的更改
 
-## 即将推出
+## Up Next
 
 - Tabular Editor 中的 AI 助手
 - 支持.NET 10
@@ -52,7 +52,7 @@ applies_to:
 
 ✅ [**内置 Best Practice Analyzer 规则**](xref:built-in-bpa-rules) — 一套全面的 BPA 规则，覆盖格式化、元数据、模型布局、DAX 表达式和翻译（v3.25.0）
 
-✅ **Semantic Bridge** - 从 Databricks Metric Views 创建语义模型（企业版，v3.25.0）；支持 Metric View v1.1 规范
+✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0); support for Metric View v1.1 spec
 
 ✅ [**保存时附带 Fabric 支持文件**](xref:save-with-supporting-files) — 支持 .platform 和 definition.pbism 文件，以匹配 Fabric repository 结构（v3.25.0）
 
@@ -90,7 +90,7 @@ applies_to:
 
 ✅ **原生 ARM64 版本** - 在 ARM64 处理器上提供更优性能（v3.23.0）
 
-## 2024 年发布
+## Shipped in 2024
 
 ✅ DAX 调试器 Locals 增强
 
@@ -114,9 +114,9 @@ applies_to:
 
 ✅ Power Query (M) 语法高亮
 
-## 已于 2023 年发布
+## Shipped in 2023
 
-✅ “保存到文件夹”默认使用 TMDL 作为文件格式。 （取决于 Microsoft 发布 TMDL 的时间）
+✅ “保存到文件夹”默认使用 TMDL 作为文件格式。 (Depending on release of TMDL by Microsoft)
 
 ✅ 导入表向导支持 Databricks（待用于获取元数据/架构的 REST 端点可用）
 
@@ -163,4 +163,4 @@ applies_to:
 # Tabular Editor 2 路线图
 
 > [!NOTE]
-> Tabular Editor 2 已不再进行积极开发，我们将不再添加或改进任何重大功能。 不过，我们还是会让它保持最新：确保支持 Microsoft 发布的新的语义模型功能，并修复任何关键或阻断性问题。 由于该项目基于 MIT 协议开源，任何人都可以提交 Pull Request，我们团队会审核并批准。
+> abular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team.

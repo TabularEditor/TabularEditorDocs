@@ -10,13 +10,13 @@ description: 一条最佳做法规则，用于确保度量值、计算列和计�
 
 ## 概览
 
-此最佳做法规则会识别缺少 DAX 表达式的度量值、计算列和计算项。 所有计算对象都必须包含有效且非空的表达式，才能正常运行，并避免在模型部署和查询执行期间发生错误。
+此最佳做法规则会识别缺少 DAX 表达式的度量值、计算列和计算项。 All calculated objects must have a valid, non-empty expression to function correctly and prevent errors during model deployment and query execution.
 
 - 类别：错误预防
 
 - 严重性：高（3）
 
-## 适用范围
+## 适用于
 
 - 度量值
 - 计算列
@@ -76,7 +76,7 @@ string.IsNullOrWhiteSpace(Expression)
 ### 修复前
 
 ```
-度量值: [Total Revenue]
+Measure: [Total Revenue]
   Expression: [empty]
   FormatString: $#,0.00
 ```
@@ -86,7 +86,7 @@ string.IsNullOrWhiteSpace(Expression)
 ### 修复后
 
 ```
-度量值: [Total Revenue]
+Measure: [Total Revenue]
   Expression: SUM('Sales'[Revenue])
   FormatString: $#,0.00
 ```
@@ -95,5 +95,5 @@ string.IsNullOrWhiteSpace(Expression)
 
 ## 兼容级别
 
-本规则适用于兼容级别为 **1200** 及以上的模型。
+这个规则适用于兼容级别为 **1200** 及以上的模型。
 

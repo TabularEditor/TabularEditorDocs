@@ -8,18 +8,18 @@ description: 最佳实践规则：在多对多关系上使用单向筛选，以�
 
 # 多对多关系应采用单向交叉筛选
 
-## 概述
+## 概览
 
-此最佳实践规则用于识别使用双向交叉筛选的多对多关系。 采用双向筛选的多对多关系会导致性能显著下降。
+此最佳实践规则用于识别使用双向交叉筛选的多对多关系。 Many-to-many relationships with both-directions filtering cause significant performance degradation.
 
 - 类别：性能
-- 严重性：中等（2）
+- 严重级别：中等（2）
 
-## 适用范围
+## 适用于
 
 - 关系
 
-## 为什么这很重要
+## 为何这很重要
 
 - **性能影响严重**：引擎必须在两个方向上评估筛选条件
 - **内存消耗**：需要维护额外的筛选语境
@@ -27,7 +27,7 @@ description: 最佳实践规则：在多对多关系上使用单向筛选，以�
 - **DAX 逻辑更复杂**：调试 FILTER 的筛选语境变得困难
 - **循环依赖风险**：可能导致无限评估循环
 
-## 何时触发此规则
+## 此规则何时会触发
 
 当某个关系同时满足以下所有条件时，就会触发这个规则：
 
@@ -78,7 +78,7 @@ CALCULATE(
 
 ```
 'Sales' (Many) <--> (Many) 'ProductBridge'
-Cross Filter Direction: Both  ← 问题
+Cross Filter Direction: Both  ← Problem
 ```
 
 ### 修复后

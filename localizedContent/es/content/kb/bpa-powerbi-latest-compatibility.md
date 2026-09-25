@@ -2,7 +2,7 @@
 uid: kb.bpa-powerbi-latest-compatibility
 title: Usar el nivel de compatibilidad más reciente para los modelos de Power BI
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-09-14
 description: Regla de buenas prácticas que garantiza que los modelos de Power BI usen el nivel de compatibilidad más reciente para obtener funciones y rendimiento óptimos.
 ---
 
@@ -43,7 +43,7 @@ La regla de prácticas recomendadas incluye una corrección automática que esta
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 ```
 
-### Corrección manual
+### Solución manual
 
 1. En Tabular Editor, ve a las propiedades de **Model**
 2. Establece el **nivel de compatibilidad** en el nivel más reciente disponible
@@ -69,17 +69,17 @@ Política del equipo: retrasar las actualizaciones.
 ### Antes de la corrección
 
 ```
-Nivel de compatibilidad del modelo: 1500
-Nivel máximo actual: 1700
+Model Compatibility Level: 1500
+Current Maximum Level: 1706
 ```
 
 ### Después de la corrección
 
 ```
-Nivel de compatibilidad del modelo: 1700 (la más reciente)
+Model Compatibility Level: 1706 (Latest)
 ```
 
-Acceso a nuevas funcionalidades, como grupos de cálculo mejorados y parámetros de campo.
+Access to newer capabilities such as [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), @user-context-calculated-columns (1705+) and String Indexing Behavior on a column (1706+).
 
 ## Nivel de compatibilidad
 

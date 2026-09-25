@@ -2,7 +2,7 @@
 
 本节包含有关 Tabular Editor 功能的文档。
 
-## 本节将介绍
+## 本节内容
 
 ### DAX 功能
 
@@ -34,13 +34,24 @@
 ### 数据探索与连接
 
 - @import-tables - 表格导入功能
+- @connectivity - Connecting to data sources, and which authenticator to choose
+  - @connect-sql-server, @connect-snowflake, @connect-databricks, @connect-oracle
+  - @connect-odbc, @connect-oledb, @connect-onelake, @connect-dataflows
+- @table-preview - Inspect a table's contents row by row
 - @pivot-grid - 数据分析与可视化
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
 
+### AI Features
+
+- @ai-assistant - Chat-based model development using your own AI provider key
+- @mcp-server - Let an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open
+- @ai-audit-log - See what the AI Assistant and the MCP server did
+
 ### 高级建模功能
 
+- @user-context-calculated-columns - Calculated columns evaluated per user, and what can reference them
 - @metadata-translation-editor - 多语言翻译支持
 - @perspective-editor - 管理模型透视
 
@@ -57,6 +68,7 @@
 - @workspace-mode - Workspace 协作开发模式
 - @tmdl - Tabular Model Definition Language 支持
 - @save-to-folder - 将模型序列化为文件夹结构
+- @auto-reload - Keeping the loaded model and the files on disk in step
 
 ### 命令行与集成
 

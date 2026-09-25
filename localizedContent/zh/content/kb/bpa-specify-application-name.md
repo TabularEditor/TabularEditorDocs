@@ -8,25 +8,25 @@ description: 最佳实践规则：在 SQL Server 连接字符串中包含应用�
 
 # 在连接字符串中指定应用程序名称
 
-## 概述
+## 概览
 
-此规则用于识别其连接字符串中缺少 Application Name 参数的 SQL Server Provider数据源。 包含应用程序名称可提升监控与故障排查的效果。
+此规则用于识别其连接字符串中缺少 Application Name 参数的 SQL Server Provider数据源。 Including the application name enables better monitoring and troubleshooting.
 
 - 类别：性能
-- 严重性：低（1）
+- 严重性：低 (1)
 
 ## 适用于
 
 - Provider数据源
 
-## 为什么重要
+## 为何这很重要
 
 - **查询跟踪**：DBA 可以识别生成查询的应用程序
 - **性能监控**：隔离表格模型查询以便分析
 - **故障排查**：快速定位问题查询的来源
 - **审计**：按应用程序跟踪数据访问
 
-## 此规则何时触发
+## 此规则何时会触发
 
 当某个数据源同时满足以下两个条件时，此规则会触发：
 

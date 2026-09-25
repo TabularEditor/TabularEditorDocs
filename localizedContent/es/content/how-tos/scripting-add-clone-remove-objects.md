@@ -190,7 +190,7 @@ Model.AllMeasures
     .ForEach(m => m.Delete());
 ```
 
-## Errores comunes
+## Errores habituales
 
 > [!WARNING]
 >

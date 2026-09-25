@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Tabular Editor 3 内置 28 条精选最佳实践规则，并集成知识库。
+description: 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # 内置 BPA 规则
 
-## 概述
+## 概览
 
-Tabular Editor 3 包含 28 条内置最佳实践规则。 这些规则覆盖语义模型开发中的常见问题，并会随每次发布自动更新。
+Tabular Editor 3 includes 28 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
 
 与存储在 JSON 文件中的自定义规则不同，内置规则：
 
@@ -47,7 +47,7 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。 这些规则覆盖语�
 ### 全局控制与按规则控制
 
 ![屏幕截图：BPA 偏好设置，包含全局启用/禁用开关以及按规则的复选框](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
-你可以全局或按规则单独启用或禁用内置规则。 这些设置会在会话之间保留，并且与自定义规则相互独立。
+你可以全局或按规则单独启用或禁用内置规则。 Settings persist across sessions and work independently from your custom rules.
 
 要管理内置规则：
 
@@ -60,25 +60,25 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。 这些规则覆盖语�
 
 ![首次运行通知对话框屏幕截图：介绍 BPA 内置规则](~/content/assets/images/features/bpa-built-in-rules-notification.png)
 
-升级到包含内置规则的版本后，你首次打开模型时，会看到一条通知，说明该功能，并提供前往“偏好”的链接。 此通知只会出现一次。
+升级到包含内置规则的版本后，你首次打开模型时，会看到一条通知，说明该功能，并提供前往“偏好”的链接。 This notification only appears once.
 
 ### 知识库集成
 
 ![屏幕截图：BPA 窗口中选中了某条规则，并高亮显示“查看文档”按钮](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
 
-每条内置规则都会通过 `KnowledgeBaseArticle` 属性链接到一篇知识库文章。 每篇文章都会说明该规则检查什么、为什么重要，以及如何修复违规项。
+每条内置规则都会通过 `KnowledgeBaseArticle` 属性链接到一篇知识库文章。 Each article explains what the rule checks, why it matters, and how to fix violations.
 
 要查看文档，请在 Best Practice Analyzer 窗口中选择一条规则。
 
 ### 只读保护
 
-内置规则无法编辑、克隆或删除。 这可确保所有用户使用相同的规则定义。 你可以禁用单个规则，但规则定义本身保持不变。
+内置规则无法编辑、克隆或删除。 This ensures all users have the same rule definitions. You can disable individual rules, but the rule definitions themselves remain unchanged.
 
 ![屏幕截图：BPA 窗口中的内置规则，带有只读标记/图标](~/content/assets/images/features/bpa-built-in-rules-readonly.png)
 
 ### 防止 ID 冲突
 
-内置规则使用保留的 ID 前缀。 当你创建自定义规则时，Tabular Editor 会验证你的 ID 是否与内置规则冲突；若发生冲突，将显示错误提示。
+Built-in rules use reserved ID prefixes. 当你创建自定义规则时，Tabular Editor 会验证你的 ID 是否与内置规则冲突；若发生冲突，将显示错误提示。
 
 ## 内置规则目录
 
@@ -120,13 +120,13 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。 这些规则覆盖语�
 
 内置规则与自定义规则可并行使用：
 
-| 功能     | 内置规则      | 自定义规则        |
-| ------ | --------- | ------------ |
-| **存储** | 在应用中硬编码   | JSON 文件或模型注释 |
-| **更新** | 随版本发布自动更新 | 需要手动编辑       |
-| **修改** | 只读        | 完全可编辑        |
-| **文档** | 集成的 KB 文章 | 用户提供的说明      |
-| **共享** | 跨团队保持一致   | 需要手动分发       |
+| 功能     | 内置规则      | 自定义规则                        |
+| ------ | --------- | ---------------------------- |
+| **存储** | 在应用中硬编码   | JSON 文件或模型注释                 |
+| **更新** | 随版本发布自动更新 | 需要手动编辑                       |
+| **修改** | 只读        | 完全可编辑                        |
+| **文档** | 集成的 KB 文章 | 用户提供的说明                      |
+| **共享** | 跨团队保持一致   | Requires manual distribution |
 
 ### 推荐工作流程
 
@@ -167,18 +167,18 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。 这些规则覆盖语�
 
 如果 BPA 窗口中未显示内置规则：
 
-1. 请确认你使用的是 Tabular Editor 3.24.0 或更高版本
+1. Check that you're using Tabular Editor 3.24.0 or later
 2. 确认已在 **工具** > **偏好** > **Best Practice Analyzer** 中启用内置规则
 3. 如果你刚更改了偏好，重启 Tabular Editor
 4. 确认你的许可证处于激活状态
 
 ### 无法修改内置规则
 
-这是正常现象。 内置规则为只读。 如果你需要不同的逻辑，请使用你的表达式创建自定义规则，并禁用对应的内置规则。
+This is expected. Built-in rules are read-only. 如果你需要不同的逻辑，请使用你的表达式创建自定义规则，并禁用对应的内置规则。
 
 ### ID 冲突错误
 
-内置规则会保留某些 ID 前缀。 选择一个不以 `TE3_BUILT_IN` 开头的其他 ID。
+Built-in rules reserve certain ID prefixes. 选择一个不以 `TE3_BUILT_IN` 开头的其他 ID。
 
 ## 兼容性
 

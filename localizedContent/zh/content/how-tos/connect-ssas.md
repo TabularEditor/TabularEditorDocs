@@ -1,22 +1,47 @@
 ---
 uid: connect-ssas
-title: 连接并部署到 SSAS
+title: Connect and deploy to Analysis Services
+author: Morten Lønskov
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
-      full: true
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
-# 连接/部署到 SSAS 表格数据库
+# Connect and deploy to Analysis Services
 
-按下 CTRL+SHIFT+O，即可直接从已部署的表格数据库中打开表格模型。 输入服务器地址，并（可选）提供用户名和密码。 点击“确定”后，会显示该服务器上的数据库列表。 选择要加载的数据库，然后再次点击“确定”。
+You can open a semantic model straight from a server rather than from a file, work on it, and write your changes back. This covers SQL Server Analysis Services, Azure Analysis Services, and the Power BI / Fabric XMLA endpoint.
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
+## Opening a model from a server
 
-该对话框也支持连接到 Azure Analysis Services 实例：只要提供 Azure AS 实例的完整名称，并以“azureas://”开头即可。 “本地实例”下拉列表可用于浏览并连接到任何正在运行的 Power BI Desktop 或 Visual Studio 集成工作区实例。 **注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但这不受 Microsoft 支持，而且可能会损坏你的 .pbix 文件。 请自行承担风险！**
+Choose **File > Open > Model from DB...** (**Ctrl+Shift+O**) and enter the server address. Tabular Editor then lists the databases on that server so you can pick the one to load.
 
-在数据库加载完成后，只要你按下 CTRL+S，Tabular Editor 就会将你所做的更改更新到数据库中。 客户端工具（Excel、Power BI、DAX Studio 等） 这些工具随后应能立即在数据库中看到这些更改。 注意：根据你做的更改，你可能需要手动重新计算模型中的对象，才能成功查询模型。
+- For **SQL Server Analysis Services**, use the instance name, for example `localhost` or `myserver\tabular`.
+- For **Azure Analysis Services**, use the full instance name beginning with `asazure://`.
+- For the **Power BI / Fabric XMLA endpoint**, use the workspace connection string beginning with `powerbi://`.
+- The **Local Instance** dropdown lists running instances of Power BI Desktop and Visual Studio integrated workspaces, so you can attach to one without knowing its port.
 
-如果你想将连接模式下的模型保存为 Model.bim 文件，请在“文件”菜单中选择“另存为...”。
+@xmla-as-connectivity covers the connection dialog in full, including authentication modes, advanced connection string properties, the per-connection status bar colour, and what to check when a connection fails. @load-save-model lists every way a model can be opened.
+
+## Saving changes back
+
+**File > Save** (**Ctrl+S**) writes your changes to the connected database. Client tools such as Excel, Power BI and DAX Studio see them immediately. Depending on what you changed, objects may need recalculating before the model can be queried again.
+
+To take a copy of a connected model onto disk instead, use **File > Save As...** or **File > Save to Folder...**.
+
+## Deploying to a different database
+
+Saving updates the database you're connected to. To push the loaded model to a _different_ server or database, use the deployment wizard instead, described in @deployment.
+
+## Editing a Power BI Desktop model
+
+Tabular Editor can attach to a running instance of Power BI Desktop through the **Local Instance** dropdown. As of the June 2025 Power BI Desktop update there are no longer any unsupported write operations, so third-party tools may freely modify the semantic model hosted in Desktop. On earlier versions some operations are restricted; see @desktop-limitations and @desktop-integration.

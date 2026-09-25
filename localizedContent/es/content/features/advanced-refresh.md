@@ -29,7 +29,7 @@ Para abrir el cuadro de diálogo **Actualización avanzada**, ve a **Modelo > Ac
 
 ![Menú de actualización avanzada](~/content/assets/images/advanced-refresh-menu.png)
 
-## Ámbito de actualización
+## Refresh scope
 
 El ámbito de actualización indica qué objetos se actualizarán. El ámbito depende de lo que esté seleccionado en el Explorador TOM cuando abres el cuadro de diálogo:
 
@@ -78,7 +78,7 @@ Las anulaciones de actualización permiten modificar temporalmente determinadas 
 - **Actualizar desde orígenes alternativos**: Cargar datos desde una base de datos de prueba o de desarrollo en lugar del origen de producción configurado en el modelo
 - **Probar con expresiones modificadas**: Anular expresiones compartidas (parámetros M) para probar distintas configuraciones
 
-### Perfiles de anulación
+### Override profiles
 
 Los perfiles de anulación almacenan configuraciones con nombre de anulaciones de TMSL que se pueden reutilizar en distintas operaciones de actualización.
 

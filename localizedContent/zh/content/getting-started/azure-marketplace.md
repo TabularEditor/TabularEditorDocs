@@ -7,7 +7,7 @@ updated: 2026-01-05
 
 # 通过 Azure Marketplace 购买 Tabular Editor 3
 
-Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。 本文档概述了如何直接通过 Azure Marketplace 获取 Tabular Editor 3，从而简化您的采购流程。
+Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。 This document provides an overview of how to streamline your purchase by acquiring Tabular Editor 3 directly through the Azure Marketplace.
 
 访问 [Azure Marketplace 上的 Tabular Editor 3 产品页](https://marketplace.microsoft.com/en-us/marketplace/apps?search=tabular%20editor%203) 即可开始。
 
@@ -36,7 +36,7 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。 本文档�
 
    > [!TIP]> 在采购流程的后续步骤中，也可以更改订阅和计划。
 
-5. 选择用于管理 Tabular Editor 3 订阅资源及其成本的订阅。 将该资源分配到现有资源组，或为此创建新的资源组。
+5. 选择用于管理 Tabular Editor 3 订阅资源及其成本的订阅。 Assign the resource to an existing resource group or create a new group for this purpose.
 
 6. 为资源命名，然后通过选择计划、合同期限、席位数量以及自动续订偏好来配置您的订阅。
 
@@ -50,27 +50,27 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。 本文档�
 
    ![Azure Marketplace subscribe to offer](~/content/assets/images/azuremarketplace-subscribe.png)
 
-9. 等待订阅创建完成，然后点击 **立即配置账户** 以完成订阅。 这将把你重定向到 Tabular Editor 自助服务页面。
+9. Wait until the subscription creation is complete, then click **Configure account now** to complete your subscription. This will redirect you to the Tabular Editor self-service page.
 
    ![Azure Marketplace configure purchase](~/content/assets/images/azuremarketplace-configure-purchase.png)
 
 > [!NOTE]
-> Tabular Editor 3 的每个版本都必须单独购买。 你无法在单笔 Azure Marketplace 交易中组合购买不同版本。
+> Tabular Editor 3 的每个版本都必须单独购买。 You cannot combine different editions in a single Azure Marketplace transaction.
 
 更多详情，请参阅：[在 Azure 门户中购买 SaaS 产品](https://learn.microsoft.com/en-us/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
 
 ## 激活 Azure Marketplace 订阅
 
-要最终完成购买，你需要在 Tabular Editor 自助服务门户中激活订阅。 激活订阅需要一个 Tabular Editor 用户账户。
+要最终完成购买，你需要在 Tabular Editor 自助服务门户中激活订阅。 Activating the subscription requires a Tabular Editor user account.
 
 > [!IMPORTANT]
-> 你必须使用 Azure 门户中的 **立即配置账户** 链接来完成激活。 该链接包含激活所需的关键订阅详细信息。 如果你在登录前离开或关闭页面，请返回 Azure 门户并再次点击 **立即配置账户**，以确保正确激活。
+> 你必须使用 Azure 门户中的 **立即配置账户** 链接来完成激活。 This link contains essential subscription details required for activation. If you navigate away or close the page before signing in, return to the Azure Portal and click **Configure account now** again to ensure proper activation.
 
 按以下步骤完成购买的激活：
 
 1. 从 Azure 门户跳转后，系统会要求你使用现有账户登录 Tabular Editor 自助服务门户，或创建一个新账户。
 
-   > [!IMPORTANT]> Tabular Editor 账户请使用与你在 Azure 门户购买时填写的购买者或受益人邮箱相同的电子邮件地址。 邮箱不一致会导致 Azure Marketplace 订阅无法关联到你的账户。
+   > [!IMPORTANT]> Tabular Editor 账户请使用与你在 Azure 门户购买时填写的购买者或受益人邮箱相同的电子邮件地址。 Mismatched emails will prevent the Azure Marketplace subscription from linking to your account.
 
    > [!TIP]> 在自助服务门户创建新账户时，你需要进行授权并接受权限请求。
 
@@ -80,16 +80,16 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。 本文档�
 
    > [!NOTE]> 如果未在列表中看到待处理订阅，请返回 Azure 门户并再次点击 **立即配置账户** 按钮，以便使用正确的订阅信息重新跳转。
 
-2. 点击你要激活的订阅上的 **激活** 按钮。 这将显示订阅的详细信息。
+2. 点击你要激活的订阅上的 **激活** 按钮。 This will display the subscription details.
 
    ![Azure Marketplace activate subscription](~/content/assets/images/azuremarketplace-activate-subscription.png)
 
-3. 最后再核对一遍详细信息，然后点击 **确认激活**。
+3. Review the details one final time and click **Confirm Activation**.
 
-4. 订阅将被激活，并创建所需的许可证。 激活完成后：
+4. 订阅将被激活，并创建所需的许可证。 Once activation is complete:
    - Azure 中的订阅状态将从“Pending account configuration”变为“Subscribed”
    - 你将收到一封包含许可证密钥（可能有多个）的电子邮件
-   - 该订阅将显示在 Tabular Editor 自助服务门户的 **Subscriptions** 下。 点击省略号菜单（三个点），然后选择 **查看订阅详细信息**，就能查看包括订阅期限在内的订阅信息。
+   - 该订阅将显示在 Tabular Editor 自助服务门户的 **Subscriptions** 下。 Click the ellipsis menu (three dots) and select **View subscription details** to view subscription information including the subscription period.
 
      ![Azure Marketplace subscription activated](~/content/assets/images/azuremarketplace-subscription-activated.png)
 
@@ -115,9 +115,9 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。 本文档�
    - **更改资源组**：将订阅资源移动到其他资源组
 
 > [!NOTE]
-> **不支持降级**：在当前订阅周期内，你无法降级到更低版本，也无法减少用户数。 要切换到更低级别的计划或减少席位，请先关闭当前订阅的 **自动续订**，然后在当前期限结束前按所需配置购买新的订阅。
+> **不支持降级**：在当前订阅周期内，你无法降级到更低版本，也无法减少用户数。 To move to a lower-tier plan or reduce seats, turn off **Auto-renew** for your current subscription and purchase a new subscription with your desired configuration before the current term ends.
 
 > [!IMPORTANT]
-> 取消订阅会立即撤销该订阅下所有许可证的使用权限，且此操作无法撤销。 若要将访问权限保留到当前计费周期结束，请点击 **编辑自动续订**，然后关闭自动续订。 退款将按退款政策处理。 想了解更多信息，可以查看 Microsoft Marketplace 的 [退款政策](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers)。
+> Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead. Refunds are processed according to the refund policy. For more information, see [Refund policies](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
 
 想了解在 Azure 中管理 SaaS 订阅的更多信息，可以查看：[SaaS 订阅生命周期管理](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)

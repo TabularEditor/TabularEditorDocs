@@ -2,7 +2,7 @@
 uid: semantic-bridge-rename-objects
 title: Renombrar objetos en una Metric View
 author: Greg Baldini
-updated: 2026-07-02
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,32 +20,23 @@ applies_to:
 
 # Renombrar objetos en una Metric View
 
-Esta guía práctica muestra cómo cambiar el nombre de un campo de una vista de métricas.
-Los mismos patrones se aplican a todas las colecciones de una Metric View.
+This how-to demonstrates renaming a Metric View field.
+The same pattern applies to every collection in a Metric View: `Fields`, `Measures`, `Dimensions` and `Joins`.
 
 > [!NOTE]
-> Estas guías prácticas están orientadas a Tabular Editor 3.26.2 y versiones posteriores.
-> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
-## Cambiar el nombre de un campo
+## Rename a field
 
-Cambie el nombre de un campo agregando uno nuevo con el nombre nuevo, copiando sus demás propiedades y, después, eliminando el original.
-[`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) solo establece el nombre y la expresión, por lo que debe copiar manualmente las propiedades restantes (`Comment`, `DisplayName`, `Synonyms`, `Format`).
+Assign to the object's `Name` property. Everything else about the object (its expression, comment, display name, synonyms and format) is left alone, and it keeps its place in the collection.
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
-var old = view.Fields["order_month"];
-
-// add the replacement, copy the remaining properties, then remove the original
-var renamed = view.AddField("Order Month", old.Expr);
-renamed.Comment = old.Comment;
-renamed.DisplayName = old.DisplayName;
-renamed.Synonyms = old.Synonyms;
-renamed.Format = old.Format;
-old.Delete();
+view.Fields["order_month"].Name = "Order Month";
 
 var sb = new System.Text.StringBuilder();
 sb.AppendLine("Fields:");
@@ -68,14 +59,25 @@ Fields:
   Order Month
 ```
 
-El campo que se vuelve a agregar pasa al final de la colección.
+The collection's name index is updated with the object, so the field is reachable under its new name straight away:
 
-## Siguientes pasos
+```csharp
+var field = view.Fields["Order Month"];
+```
 
-- [Agregar objetos a una vista de métricas](xref:semantic-bridge-add-object)
-- [Eliminar objetos de una vista de métricas](xref:semantic-bridge-remove-object)
-- [Serializar una vista de métricas en YAML](xref:semantic-bridge-serialize)
+## Rules
+
+- **Names must stay unique within their collection.** Renaming a field to a name another field already uses throws an `ArgumentException`, and neither the object nor the collection is changed.
+- **Name matching is case-insensitive**, following Databricks SQL. `view.Fields["ORDER MONTH"]` finds the field renamed above. A rename that only changes casing is still worth doing, since it refreshes the stored name.
+- **The rename applies to the object model in memory.** Serialize the view to write it out.
+
+## Pasos a seguir
+
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
 
 ## Ver también
 
 - [Modelo de objetos de la Metric View](xref:semantic-bridge-metric-view-object-model)
+- @semantic-bridge-metric-view-validation

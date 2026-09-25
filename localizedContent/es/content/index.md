@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-09-14
 ---
 
 # Tabular Editor
@@ -62,8 +62,8 @@ Tabular Editor 2.x es una aplicación liviana que permite modificar rápidamente
 - Soporte para editar las perspectivas del modelo y las traducciones de metadatos
 - Cambio de nombre en lote
 - Cuadro de búsqueda para moverse rápidamente por modelos grandes y complejos
-- Asistente para la implementación
-- Analizador de prácticas recomendadas
+- Asistente de implementación
+- Best Practice Analyzer
 - Scripting avanzado mediante scripts de estilo C# para automatizar tareas repetitivas
 - Interfaz de línea de comandos (puede usarse para integrar Tabular Editor con canalizaciones de DevOps)
 
@@ -91,9 +91,9 @@ Por último, gracias a la funcionalidad "Save-to-folder", un nuevo formato de ar
 
 Si eres nuevo en el modelado tabular en general, te recomendamos que uses las herramientas estándar hasta que te familiarices con conceptos como tablas calculadas, medidas, relaciones, DAX, etc. En ese punto, prueba Tabular Editor 2.x y comprueba lo mucho más rápido que te permite realizar determinadas tareas. ¡Si te gusta y quieres más, considera Tabular Editor 3.x!
 
-## Siguientes pasos
+## Pasos a seguir
 
 - [Primeros pasos con Tabular Editor 2](xref:getting-started-te2)
-- [Primeros pasos con Tabular Editor 3](xref:getting-started)
+- [Install and activate Tabular Editor 3](xref:getting-started)
 - [Plan de ruta de Tabular Editor 3](xref:roadmap)
 

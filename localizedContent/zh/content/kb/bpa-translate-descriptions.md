@@ -13,9 +13,9 @@ description: 一条最佳实践规则，用于确保所有已定义的区域设�
 此规则会识别在一个或多个区域设置中缺少描述翻译的对象。
 
 - 类别：模型布局
-- 严重性：低（1）
+- 严重性：低 (1)
 
-## 适用对象
+## 适用于
 
 - 模型
 - 表
@@ -28,19 +28,18 @@ description: 一条最佳实践规则，用于确保所有已定义的区域设�
 - 计算表格
 - 计算表格列
 
-## 为何重要
+## 为何这很重要
 
 - **本地化不完整**：描述只会以默认语言显示
 - **帮助文本不一致**：用户会看到多种语言混用
 - **用户困惑**：文档看起来不完整
-- **专业形象**：缺少翻译会降低模型质量
+- **专业形象**：缺失翻译会降低模型质量
 
-## 此规则何时触发
+## 此规则何时会触发
 
 ```csharp
 not string.IsNullOrEmpty(Description) 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
-// Culture：区域设置
 ```
 
 当某个对象同时满足下面两个条件时，这个规则就会触发：
@@ -48,13 +47,13 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
 1. 该对象有说明（不为空）
 2. 模型中至少有一个区域设置缺少该说明的翻译
 
-换句话说，如果定义了说明并设置了多个区域设置，那么所有说明都应该为每个区域设置提供翻译。
+In other words, if you have descriptions and multiple cultures defined, all descriptions should be translated for all cultures.
 
 ## 如何修复
 
 ### 手动修复
 
-1. 在 **TOM Explorer** 中，选中该对象
+1. 在 **TOM Explorer** 中，选择该对象
 2. 在 **Properties** 窗格中，展开 **Translated Descriptions**
 3. 为每个区域设置输入翻译
 
@@ -66,7 +65,7 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
 
 ### 原因 2：后续添加了区域设置
 
-说明写好之后才添加区域设置。
+Culture added after descriptions were written.
 
 ### 原因 3：翻译不完整
 
@@ -77,22 +76,22 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
 ### 修复前
 
 ```
-度量值：[Total Revenue]
-说明（英语）："所有收入的总和"
-说明（西班牙语）：（缺失）
+Measure: [Total Revenue]
+Description (English): "Sum of all revenue"
+Description (Spanish): (missing)
 ```
 
 ### 修复后
 
 ```
-度量值：[Total Revenue]
-说明（英语）："所有收入的总和"
-说明（西班牙语）："Suma de todos los ingresos"
+Measure: [Total Revenue]
+Description (English): "Sum of all revenue"
+Description (Spanish): "Suma de todos los ingresos"
 ```
 
 ## 兼容级别
 
-此规则适用于兼容级别为 **1200** 或更高的模型。
+该规则适用于兼容级别为 **1200** 及以上的模型。
 
 ## 相关规则
 

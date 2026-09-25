@@ -8,14 +8,14 @@ applies_to:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
-      partial: true
+      none: true
 ---
 
 # Importación de tablas en Tabular Editor 2
 
 Si ya tienes un Data source heredado en tu modelo, haz clic con el botón derecho sobre él y elige "Importar tablas...". Tabular Editor intentará conectarse mediante el proveedor de datos y las credenciales especificados en el Data source. Si la conexión se establece correctamente, deberías ver una lista de todas las bases de datos, tablas y vistas accesibles a través del Data source:
 
-![image](https://user-images.githubusercontent.com/8976200/49701892-35ea3900-fbf2-11e8-951a-8858179426c6.png)
+![image](~/content/assets/images/importing-tables-01.png)
 
 Al hacer clic en una tabla o vista en el lado izquierdo, se mostrará una vista previa de los datos a la derecha. Puedes desmarcar las columnas que no quieras incluir, aunque [la práctica recomendada de importación de datos](https://www.sqlbi.com/articles/data-import-best-practices-in-power-bi/) sugiere usar siempre vistas e incluir en esas vistas solo las columnas necesarias en el modelo tabular. La interfaz de usuario te mostrará la consulta SQL resultante. De forma predeterminada, Tabular Editor importará una tabla/vista usando `SELECT * FROM ...`, pero si activas o desactivas cualquier columna en la vista previa, la consulta resultante incluirá una lista explícita de columnas. Para volver a `SELECT * FROM ...`, marca la casilla "Seleccionar todas las columnas" en la esquina superior derecha.
 
@@ -25,7 +25,7 @@ Puedes seleccionar varias tablas/vistas para importarlas a la vez. Cuando hagas 
 
 ## Una nota sobre los Data sources heredados frente a los orígenes de datos estructurados
 
-Como actualmente no hay forma de que Tabular Editor infiera los metadatos devueltos por las expresiones M (Power Query), esta interfaz de usuario solo admite Data sources heredados (también llamados Provider). Si necesitas usar orígenes de datos estructurados, aún puedes usar una conexión heredada temporal para importar inicialmente el esquema de la tabla (siempre que se pueda acceder a tu Data source mediante SQL, OLE DB u ODBC) y, después, cambiar manualmente las particiones de las tablas importadas para que usen los orígenes de datos estructurados. Si estás importando datos desde Data sources "poco habituales", como servicios web, Azure Data Lake Storage, etc., los metadatos del esquema no se pueden importar automáticamente, pero [hay una opción para proporcionar la información de metadatos a través del portapapeles](/Importing-Tables#power-query-data-sources).
+As there is currently no way for Tabular Editor 2 to infer the metadata returned from M (Power Query) expressions, this UI only supports Legacy (aka. Provider) Data Sources. Si necesitas usar orígenes de datos estructurados, aún puedes usar una conexión heredada temporal para importar inicialmente el esquema de la tabla (siempre que se pueda acceder a tu Data source mediante SQL, OLE DB u ODBC) y, después, cambiar manualmente las particiones de las tablas importadas para que usen los orígenes de datos estructurados. If you are importing data from "exotic" data sources, such as web services, Azure Data Lake Storage, etc. schema metadata can not be imported automatically, but [there is an option for providing the metadata information through the clipboard](#power-query-data-sources).
 
 En general, sin embargo, se recomienda usar siempre una conexión Legacy para los siguientes tipos de orígenes:
 
@@ -42,23 +42,23 @@ Para la autenticación con Azure Active Directory y MFA, consulta aquí.
 
 Si tu modelo aún no contiene ningún Data source, puedes importar tablas yendo al menú "Model" y haciendo clic en "Import Tables...". La IU resultante se ve así:
 
-![image](https://user-images.githubusercontent.com/8976200/49702141-74cdbe00-fbf5-11e8-8a88-5bc2a0a6c80d.png)
+![image](~/content/assets/images/importing-tables-02.png)
 
 Si dejas la selección en "Create a new Data source and add it to the model", al hacer clic en "Next" se mostrará el cuadro de diálogo de conexión. Este cuadro de diálogo te permite especificar los detalles de la conexión:
 
-![image](https://user-images.githubusercontent.com/8976200/49702167-a5adf300-fbf5-11e8-8d06-d6670ad456d4.png)
+![image](~/content/assets/images/importing-tables-03.png)
 
 Al hacer clic en "OK", se creará en tu modelo un Data source (Legacy) con la conexión especificada y se te llevará a la página de importación mostrada arriba.
 
 La siguiente opción de la lista, "Use a temporary connection", no hará que se agregue un nuevo Data source al modelo. Esto significa que eres responsable de asignar un Data source a las particiones de la tabla recién importada antes de implementar el modelo.
 
-La última opción, "Manually import metadata from another application", se usa cuando quieres importar una nueva tabla a partir de una lista de metadatos de columnas. Esto resulta útil para Data sources estructurados (Power Query); [consulta a continuación](/Importing-Tables#power-query-data-sources).
+La última opción, "Manually import metadata from another application", se usa cuando quieres importar una nueva tabla a partir de una lista de metadatos de columnas. This is useful for Structured (Power Query) Data Sources, [see below](#power-query-data-sources).
 
 ## Capacidades de SQL
 
 Para los Data sources que no sean de SQL Server (o, más precisamente, los Data sources que no usan el controlador Native SQL Client), presta atención a los dos menús desplegables cerca de la parte inferior de la pantalla:
 
-![image](https://user-images.githubusercontent.com/8976200/51613859-b952b600-1f24-11e9-8fd7-7c5269aaab26.png)
+![image](~/content/assets/images/importing-tables-04.png)
 
 El menú desplegable "Reduce rows using" te permite especificar qué cláusula de reducción de filas se debe usar al consultar el origen para obtener datos de vista previa, ya que el Asistente de importación de tablas solo recuperará 200 filas de datos de la tabla o vista de origen. Puedes elegir entre las cláusulas de reducción de filas más comunes, como "TOP", "LIMIT", "FETCH FIRST", etc.
 
@@ -72,7 +72,7 @@ Otra forma de abrir la página de importación es hacer clic con el botón derec
 
 Desde la versión 2,8, Tabular Editor incorpora una nueva función en la interfaz de usuario que te permite comprobar fácilmente la deriva del esquema. Es decir, permite detectar columnas cuyo tipo de datos haya cambiado o que se hayan añadido o eliminado en las tablas y vistas de origen. Esta comprobación puede ejecutarse a nivel de modelo (de nuevo, esto solo se aplica a Legacy Data Sources), a nivel de Data source, a nivel de tabla o a nivel de partición. Para ello, haz clic con el botón derecho en el objeto y elige "Actualizar metadatos de la tabla..."
 
-![image](https://user-images.githubusercontent.com/8976200/49702346-7e582580-fbf7-11e8-9a62-04c6963179e5.png)
+![image](~/content/assets/images/importing-tables-05.png)
 
 Los cambios se detectan en función de las propiedades "Columna de origen" y "Tipo de datos" de todas las columnas de datos en las tablas correspondientes. Si se detecta algún cambio, Tabular Editor mostrará la interfaz anterior, detallando los cambios. Puedes desmarcar los cambios que no quieras aplicar al modelo, aunque ten en cuenta que algunos cambios pueden provocar errores de procesamiento (por ejemplo, columnas de origen que no existen en la tabla/vista/consulta de origen).
 
@@ -138,20 +138,20 @@ Si estás usando un Data source que no es compatible con el Import Tables Wizard
 
 Al analizar el texto del lado izquierdo, Tabular Editor busca ciertas palabras clave para determinar cómo está estructurada la información. Es bastante tolerante al interpretar los datos; por ejemplo, puedes pegar una lista de columnas de un script SQL CREATE TABLE o la salida de la función de Power Query `Table.Schema(...)`, tal como se describe a continuación. El único requisito es que cada línea de texto represente una columna de los datos de origen.
 
-![image](https://user-images.githubusercontent.com/8976200/70419758-6f07f400-1a66-11ea-838d-9a587c8021ca.png)
+![image](~/content/assets/images/importing-tables-06.png)
 
 ## Data sources de Power Query
 
 Como no existe una forma oficialmente admitida de ejecutar o validar una expresión de Power Query/M, Tabular Editor solo ofrece compatibilidad limitada con los Data sources de Power Query. A partir de la versión 2.9.0, puedes usar la opción "Importar metadatos manualmente desde otra aplicación" del Asistente para importar tablas, como se describió anteriormente, para importar un esquema desde una consulta de Power Query en Excel o Power BI Desktop. El flujo de trabajo es el siguiente:
 
 - En primer lugar, asegúrate de que tu modelo contiene un Data source de Power Query. Haz clic con el botón derecho en Data Sources > New Data Source (Power Query). Si vas a cargar datos desde SQL Server, especifica "tds" como protocolo y completa las propiedades Database, Server y AuthenticationKind.
-  ![image](https://user-images.githubusercontent.com/8976200/70418811-6dd5c780-1a64-11ea-8332-d074c6b2d5c2.png)
+  ![image](~/content/assets/images/importing-tables-07.png)
 - Para otros tipos de Data sources, puede resultarte más fácil crear el modelo inicial y las primeras tablas en SSDT para averiguar cómo debe configurarse el Data source, y luego usar la técnica que se describe a continuación solo al añadir tablas adicionales.
 - Usa Power Query en Excel o Power BI Desktop para conectarte a tus datos de origen y aplicar las transformaciones necesarias.
-- En el Editor avanzado de Power Query, añade un paso que use la [función M](https://docs.microsoft.com/en-us/powerquery-m/table-schema) `Table.Schema(...)` sobre el resultado anterior:
-  ![image](https://user-images.githubusercontent.com/8976200/70416018-5562ae80-1a5e-11ea-8962-529304ce83f0.png)
-- Selecciona toda la vista previa de la salida, cópiala al portapapeles (CTRL+A, CTRL+C) y pégala en el cuadro de texto de esquema/metadatos del Asistente para importar tablas:
-  ![image](https://user-images.githubusercontent.com/8976200/70416817-2e0ce100-1a60-11ea-9e2b-430cecf88d0a.png)
+- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the previous output:
+  ![image](~/content/assets/images/importing-tables-08.png)
+- Select the full output preview, copy it into the clipboard (CTRL+A, CTRL+C) and paste it into the schema/metadata textbox in the Import Tables Wizard:
+  ![image](~/content/assets/images/importing-tables-09.png)
 - Haz clic en "Import!" y ponle un nombre adecuado a tu tabla.
-- Por último, pega en la partición de la tabla recién creada la expresión M original que usaste en Excel/Power BI, la que tenías antes de modificarla con la función `Table.Schema(...)`. Modifica la expresión M para que apunte al origen que especificaste en el primer paso:
-  ![image](https://user-images.githubusercontent.com/8976200/70418985-dae95d00-1a64-11ea-8bfb-8dda16c33742.png)
+- Por último, pega en la partición de la tabla recién creada la expresión M original que usaste en Excel/Power BI, la que tenías antes de modificarla con la función `Table.Schema(...)`. Modify the M expression to point to the source you specified in the first step:
+  ![image](~/content/assets/images/importing-tables-10.png)

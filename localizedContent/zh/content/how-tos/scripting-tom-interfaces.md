@@ -13,7 +13,7 @@ applies_to:
 
 # 关键 TOM 接口
 
-TOMWrapper 封装器定义了若干跨领域接口，可由多种对象类型实现。 在编写对具备特定能力的任意对象执行操作的通用代码时(例如设置描述、检查可见性或读取注释)，可以使用这些接口。
+The TOM wrapper defines several cross-cutting interfaces that multiple object types implement. Use these interfaces when writing generic code that operates on any object with a given capability, such as setting descriptions, checking visibility or reading annotations.
 
 ## 快速参考
 
@@ -33,7 +33,7 @@ foreach (var obj in Model.AllMeasures.OfType<IAnnotationObject>())
 
 ## 接口参考
 
-| 界面                                                                                                                           | 关键成员                                                                                               | 由以下对象实现                      |
+| 界面                                                                                                                           | 关键成员                                                                                               | Implemented by               |
 | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------- |
 | (xref:TabularEditor.TOMWrapper.IDescriptionObject)        | `Description`                                                                                      | 表、列、度量值、层次结构、分区、关系、透视、角色、数据源 |
 | (xref:TabularEditor.TOMWrapper.IHideableObject)           | `IsHidden`、`IsVisible`                                                                             | 表、列、度量值、层次结构、级别              |
@@ -48,7 +48,7 @@ foreach (var obj in Model.AllMeasures.OfType<IAnnotationObject>())
 
 ## 何时使用接口
 
-当你需要编写适用于多种对象类型的通用代码时，应使用接口。 与其逐个检查每种类型，不如这样：
+当你需要编写适用于多种对象类型的通用代码时，应使用接口。 Instead of checking each type individually:
 
 ```csharp
 // Without interfaces -- repetitive

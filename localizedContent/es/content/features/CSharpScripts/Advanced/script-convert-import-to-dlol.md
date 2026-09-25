@@ -13,7 +13,7 @@ applies_to:
 
 # Convertir de modo Import a Direct Lake en OneLake
 
-## Propósito del script
+## Objetivo del script
 
 Este script convierte tablas en modo Import a Direct Lake en OneLake (DL/OL). Tal y como se indica en el [artículo de guía de Direct Lake](xref:direct-lake-guidance), debemos reemplazar la partición (o particiones) de estas tablas por una única [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), que especifica el nombre y el esquema de la tabla/vista materializada en el Lakehouse o Warehouse de Fabric, a la vez que hace referencia a una expresión compartida que usa el conector [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) (OneLake).
 
@@ -36,25 +36,24 @@ Si se conecta a un Warehouse de Fabric o a un Lakehouse que admita esquemas, tam
 
 ```csharp
 // ==================================================================
-// Convertir Import a Direct Lake en OneLake
+// Convert Import to Direct Lake on OneLake
 // ----------------------------------------
 // 
-// Este script convierte las tablas seleccionadas (Import) o, si no hay
-// ninguna seleccionada, todas las tablas del modelo, a tablas
-// Direct Lake en OneLake.
+// This script converts the selected (import) tables, or all tables
+// in the model, if nothing is selected, to Direct Lake on OneLake
+// tables.
 //
-// ADVERTENCIA: El script asume que las tablas tienen el mismo nombre
-// en el Warehouse o Lakehouse de Fabric que en el modelo semántico.
-// Además, cualquier transformación (basada en M o SQL) en las
-// particiones en modo Import se perderá, ya que las tablas en modo Direct Lake
-// deben contener 1:1 las mismas columnas que la tabla/vista
-// materializada de origen.
+// WARNING: The script assumes that tables have the same name in the
+// Fabric Warehouse or Lakehouse, as they do in the semantic model.
+// Moreover, any transformations (M or SQL based) in the import
+// partitions, will be lost, as Direct Lake mode tables must contain
+// 1:1 the same columns as the source table/materialized view.
 //
-// Necesitará el Workspace ID y el ID de su Warehouse o Lakehouse de
-// Fabric (ambos son GUID).
+// You will need the Workspace ID and the ID of your Fabric Warehouse
+// or Lakehouse (both are GUIDs).
 // ==================================================================
 
-// Buscar la expresión compartida que usan las EntityPartitions en el modelo:
+// Find the Shared Expression that is being used by EntityPartitions on the model:
 using System.Windows.Forms;
 using System.Drawing;
 using System.Data;
@@ -70,14 +69,14 @@ Application.UseWaitCursor = false;
 
 if(importTables.Count == 0)
 {
-    Warning("El modelo o la selección no contiene ninguna tabla en modo Import");
+    Warning("Model or selection does not contain any tables in import mode");
     return;
 }
 else
 {
-    var result = MessageBox.Show("Se convertirán las siguientes tablas:\r\n\r\n" + string.Join("\r\n", importTables.Select(t => "  - " + t.Name)) +
-        "\r\n\r\n¿Continuar?",
-        "¿Confirmar conversión?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+    var result = MessageBox.Show("The following tables will be converted:\r\n\r\n" + string.Join("\r\n", importTables.Select(t => "  - " + t.Name)) +
+        "\r\n\r\nProceed?",
+        "Confirm conversion?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
     if (result == DialogResult.Cancel) return;
 }
 
@@ -86,7 +85,7 @@ string resourceId = string.Empty;
 var sharedExpression = Model.Expressions.FirstOrDefault(e => e.Expression.Contains("AzureStorage.DataLake"));
 if(sharedExpression != null)
 {
-    // Extraer el Workspace ID y el Resource ID existentes
+    // Extract existing workspace ID and resource ID
     var ix = sharedExpression.Expression.IndexOf("onelake.dfs.fabric.microsoft.com");
     var url = sharedExpression.Expression.Substring(ix + 33, 73);
     var guids = url.Split('/');
@@ -123,7 +122,7 @@ foreach(var table in importTables)
     ep.Name = table.Name;
 }
 
-Info("Tablas convertidas a Direct Lake en OneLake.");
+Info("Tables converted to Direct Lake on OneLake mode.");
 
 public class UrlNameDialog : Form
 {
@@ -134,7 +133,7 @@ public class UrlNameDialog : Form
 
     public UrlNameDialog(string workspaceId, string resourceId)
     {
-        Text = "Convertir Direct Lake sobre SQL a OneLake";
+        Text = "Convert Direct Lake on SQL to OneLake";
         AutoSize = true;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
@@ -156,12 +155,12 @@ public class UrlNameDialog : Form
         mainLayout.Controls.Add(WorkspaceId);
 
         // Resource ID
-        mainLayout.Controls.Add(new Label { Text = "ID de Fabric Warehouse / Lakehouse (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        mainLayout.Controls.Add(new Label { Text = "Fabric Warehouse / Lakehouse ID (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         ResourceId = new TextBox { Width = 1000, Text = resourceId };
         mainLayout.Controls.Add(ResourceId);
 
         // Schema
-        mainLayout.Controls.Add(new Label { Text = "Esquema (opcional):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        mainLayout.Controls.Add(new Label { Text = "Schema (optional):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         Schema = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(Schema);
 
@@ -175,8 +174,8 @@ public class UrlNameDialog : Form
             AutoSize = true
         };
 
-        okButton = new Button { Text = "Aceptar", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
-        var cancelButton = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, AutoSize = true };
+        okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
+        var cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
         buttonPanel.Controls.Add(okButton);
         buttonPanel.Controls.Add(cancelButton);
 

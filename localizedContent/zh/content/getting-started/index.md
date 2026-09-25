@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: 欢迎
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 ---
 
 # 欢迎
@@ -13,16 +13,16 @@ updated: 2026-05-19
 
 **感谢你选择 Tabular Editor 3！**
 
-为了帮助你充分利用这款工具，我们已将所有上手资料汇总到本入门部分。 我们建议所有 Tabular Editor 3 新用户通读本指南，并跳过你已经熟悉的主题。
+To help you get the most out of the tool, we have collected all of our onboarding material in this getting started section. 我们建议所有 Tabular Editor 3 新用户通读本指南，并跳过你已经熟悉的主题。
 
 > [!NOTE]
-> 本指南中的部分文章会引用 Tabular Editor 2，尤其是其命令行界面 (CLI)，用于自动化部署和测试。 我们计划在稍后发布一款可与 Tabular Editor 3 配套使用的独立 CLI 应用程序。
+> 本指南中的部分文章会引用 Tabular Editor 2，尤其是其命令行界面 (CLI)，用于自动化部署和测试。 A standalone CLI application to accompany Tabular Editor 3 is planned for release at a later time.
 
-本培训资料侧重于 Tabular Editor 产品，因此我们假设你已经具备表格数据建模的基本知识（例如使用 Power BI Desktop、Visual Studio 或 Tabular Editor 2.x）。 如果你刚接触表格数据建模，我们推荐第三方（如 [sqlbi.com](https://sqlbi.com)）提供的培训资料和课程。
+本培训资料侧重于 Tabular Editor 产品，因此我们假设你已经具备表格数据建模的基本知识（例如使用 Power BI Desktop、Visual Studio 或 Tabular Editor 2.x）。 If you are new to tabular data modeling, we recommend the training material and courses offered by third parties such as [sqlbi.com](https://sqlbi.com).
 
 **本指南涵盖的主题：**
 
-**Tabular Editor 3 入门**
+**Getting Started with Tabular Editor 3**
 
 - @general-introduction
 - @getting-started
@@ -38,7 +38,7 @@ updated: 2026-05-19
 
 - @getting-started-te2
 
-**Power BI Desktop 与 Tabular Editor**
+**Power BI Desktop & Tabular Editor**
 
 - @desktop-integration
 - @desktop-limitations
@@ -54,13 +54,14 @@ updated: 2026-05-19
 - @properties-view-reference
 - @tom-explorer-view-reference
 - @diagram-view-reference
+- @table-preview-reference
 
-**并行开发**
+**Parallel development**
 
 - @并行开发
 - @在工作区模式下优化工作流程
 
-**使用 Tabular Editor 更快构建模型**
+**Build models faster with Tabular Editor**
 
 - @boosting-productivity-te3
 - @导入表并进行数据建模
@@ -73,8 +74,8 @@ updated: 2026-05-19
 
 **更多资源：**
 
-- [Tabular Editor 3 入门](xref:getting-started)
-- [高级安装和激活](xref:installation-activation-basic)
+- [Install and activate Tabular Editor 3](xref:getting-started)
+- [Advanced installation and activation](xref:installation-activation-basic)
 - [下载 Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn 学习中心](https://tabulareditor.com/learn)
 - [专属支持（仅限企业版客户）](mailto:support@tabulareditor.com)

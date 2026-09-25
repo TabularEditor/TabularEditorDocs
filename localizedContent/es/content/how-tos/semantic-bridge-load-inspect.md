@@ -24,8 +24,8 @@ Esta guía práctica muestra cómo cargar una Metric View de Databricks en Tabul
 Esta es la habilidad fundamental para todas las demás operaciones con una Metric View.
 
 > [!NOTE]
-> Estas guías están dirigidas a Tabular Editor 3.26.2 y versiones posteriores.
-> Las versiones anteriores no admiten las características de Metric View v1.1 que se muestran aquí.
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
@@ -46,8 +46,8 @@ Output(sb.ToString());
 **Salida**
 
 ```
-Versión: 1.1
-Fuente (tabla de hechos): sales.fact.orders
+Version: 1.1
+Source (fact table): sales.fact.orders
 ```
 
 ## Inspeccionar las uniones de la Metric View (tablas de dimensiones)
@@ -58,15 +58,15 @@ La propiedad `Joins` de la Metric View contiene las tablas de dimensiones unidas
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Número de uniones: {view.Joins.Count}");
+sb.AppendLine($"Number of joins: {view.Joins.Count}");
 sb.AppendLine("");
 
 foreach (var join in view.Joins)
 {
-    sb.AppendLine($"Unión: {join.Name}");
-    sb.AppendLine($"  Fuente: {join.Source}");
-    sb.AppendLine($"  Condición: {join.On}");
-    sb.AppendLine($"  Cardinalidad: {join.Cardinality?.ToString() ?? "ManyToOne (predeterminado)"}");
+    sb.AppendLine($"Join: {join.Name}");
+    sb.AppendLine($"  Source: {join.Source}");
+    sb.AppendLine($"  On: {join.On}");
+    sb.AppendLine($"  Cardinality: {join.Cardinality?.ToString() ?? "ManyToOne (default)"}");
     sb.AppendLine("");
 }
 
@@ -76,33 +76,33 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-Número de uniones: 3
+Number of joins: 3
 
-Unión: product
-  Fuente: sales.dim.product
-  Condición: source.product_id = product.product_id
-  Cardinalidad: ManyToOne
+Join: product
+  Source: sales.dim.product
+  On: source.product_id = product.product_id
+  Cardinality: ManyToOne
 
-Unión: customer
-  Fuente: sales.dim.customer
-  Condición: source.customer_id = customer.customer_id
-  Cardinalidad: ManyToOne
+Join: customer
+  Source: sales.dim.customer
+  On: source.customer_id = customer.customer_id
+  Cardinality: ManyToOne
 
-Unión: date
-  Fuente: sales.dim.date
-  Condición: source.order_date = date.date_key
-  Cardinalidad: ManyToOne
+Join: date
+  Source: sales.dim.date
+  On: source.order_date = date.date_key
+  Cardinality: ManyToOne
 ```
 
-## Inspeccionar los campos de Metric View
+## Inspect Metric View fields
 
-La propiedad `Fields` de Metric View contiene todas las definiciones de campos.
+The Metric View `Fields` property contains all field definitions.
 
 ```csharp {run id=fields setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Número de campos: {view.Fields.Count}");
+sb.AppendLine($"Number of fields: {view.Fields.Count}");
 sb.AppendLine("");
 
 foreach (var field in view.Fields)
@@ -116,7 +116,7 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-Número de campos: 6
+Number of fields: 6
 
 product_name         <- product.product_name
 product_category     <- product.category
@@ -134,7 +134,7 @@ La propiedad `Measures` de la Metric View contiene todas las definiciones de med
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Número de medidas: {view.Measures.Count}");
+sb.AppendLine($"Number of measures: {view.Measures.Count}");
 sb.AppendLine("");
 
 foreach (var measure in view.Measures)
@@ -148,7 +148,7 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-Número de medidas: 6
+Number of measures: 6
 
 total_revenue        = SUM(revenue)
 gross_margin         = SUM(revenue) - SUM(cost)
@@ -166,15 +166,15 @@ Aquí tienes un script completo que genera un resumen con formato de la Metric V
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine("RESUMEN DE METRIC VIEW");
-sb.AppendLine("======================");
+sb.AppendLine("METRIC VIEW SUMMARY");
+sb.AppendLine("===================");
 sb.AppendLine("");
-sb.AppendLine($"Versión: {view.Version}");
-sb.AppendLine($"Fuente de hechos: {view.Source}");
+sb.AppendLine($"Version: {view.Version}");
+sb.AppendLine($"Fact Source: {view.Source}");
 sb.AppendLine("");
 
-// Uniones
-sb.AppendLine($"UNIONES ({view.Joins.Count})");
+// Joins
+sb.AppendLine($"JOINS ({view.Joins.Count})");
 sb.AppendLine("---------");
 foreach (var join in view.Joins)
 {
@@ -182,8 +182,8 @@ foreach (var join in view.Joins)
 }
 sb.AppendLine("");
 
-// Campos
-sb.AppendLine($"CAMPOS ({view.Fields.Count})");
+// Fields
+sb.AppendLine($"FIELDS ({view.Fields.Count})");
 sb.AppendLine("--------------");
 foreach (var field in view.Fields)
 {
@@ -191,8 +191,8 @@ foreach (var field in view.Fields)
 }
 sb.AppendLine("");
 
-// Medidas
-sb.AppendLine($"MEDIDAS ({view.Measures.Count})");
+// Measures
+sb.AppendLine($"MEASURES ({view.Measures.Count})");
 sb.AppendLine("------------");
 foreach (var measure in view.Measures)
 {
@@ -205,19 +205,19 @@ Output(sb.ToString());
 **Salida**
 
 ```
-RESUMEN DE METRIC VIEW
-======================
+METRIC VIEW SUMMARY
+===================
 
-Versión: 1.1
-Fuente de hechos: sales.fact.orders
+Version: 1.1
+Fact Source: sales.fact.orders
 
-UNIONES (3)
+JOINS (3)
 ---------
   product         -> sales.dim.product
   customer        -> sales.dim.customer
   date            -> sales.dim.date
 
-CAMPOS (6)
+FIELDS (6)
 --------------
   product_name         <- product.product_name
   product_category     <- product.category
@@ -226,7 +226,7 @@ CAMPOS (6)
   order_year           <- date.year
   order_month          <- date.month_name
 
-MEDIDAS (6)
+MEASURES (6)
 ------------
   total_revenue        = SUM(revenue)
   gross_margin         = SUM(revenue) - SUM(cost)
@@ -240,11 +240,11 @@ MEDIDAS (6)
 
 Ahora que puedes cargar e inspeccionar una Metric View, puedes:
 
-- [Agregar objetos a Metric View](xref:semantic-bridge-add-object)
-- [Quitar objetos de Metric View](xref:semantic-bridge-remove-object)
-- [Cambiar el nombre de un campo](xref:semantic-bridge-rename-objects)
-- [Validar Metric View](xref:semantic-bridge-validate-default)
-- [Importar Metric View a un modelo tabular](xref:semantic-bridge-import)
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Rename a field](xref:semantic-bridge-rename-objects)
+- [Validate the Metric View](xref:semantic-bridge-validate-default)
+- [Import the Metric View to Tabular](xref:semantic-bridge-import)
 
 ## Ver también
 

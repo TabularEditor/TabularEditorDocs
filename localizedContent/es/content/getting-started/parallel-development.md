@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Habilitar el desarrollo en paralelo con Git y Guardar en carpeta
 author: Daniel Otykier
-updated: 2026-07-03
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,7 +30,7 @@ Este artículo describe los principios del desarrollo en paralelo de modelos (es
 - El destino de su Data model debe ser uno de los siguientes:
   - SQL Server 2016 (o posterior) Analysis Services Tabular
   - Azure Analysis Services
-  - un Workspace de Power BI asignado a una capacidad de Fabric, Power BI Embedded, Premium heredada o a una licencia Premium Per User, con la [lectura y escritura de XMLA habilitada](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (la opción predeterminada desde junio de 2025)
+  - a Power BI workspace assigned to a Fabric capacity, Power BI Embedded capacity, legacy Premium capacity or Premium Per User license, with [XMLA read/write enabled](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (the default since June 2025)
 - Repositorio Git accesible para todos los miembros del equipo (en las instalaciones o alojado en Azure DevOps, GitHub, etc.)
 
 ## TOM como código fuente
@@ -56,6 +56,8 @@ Como se mencionó anteriormente, los metadatos de un modelo tabular se almacenan
 ![Guardar en carpeta](~/content/assets/images/save-to-folder.png)
 
 Los nombres de cada uno de los archivos que representan objetos TOM individuales se basan simplemente en la propiedad `Name` del propio objeto. El nombre del archivo "raíz" es **Database.json**, por eso a veces nos referimos al formato de almacenamiento basado en carpetas simplemente como **Database.json**.
+
+Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**/ See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Ventajas de usar Guardar en carpeta
 
@@ -105,7 +107,7 @@ Estas limitaciones son:
 Para habilitar el desarrollo en paralelo, debemos poder almacenar los metadatos del modelo en uno de los formatos basados en texto (JSON) mencionados anteriormente (Model.bim o Database.json). No hay forma de "recrear" un archivo .pbix o .pbit a partir del formato basado en texto, así que **una vez que decidamos seguir esta ruta, ya no podremos usar Power BI Desktop para editar el Data model**. En su lugar, tendremos que apoyarnos en herramientas que puedan usar el formato basado en JSON, que es precisamente el propósito de Tabular Editor.
 
 > [!WARNING]
-> Si no tiene acceso a un Workspace de Power BI asignado a una capacidad o a una licencia Premium Per User, no podrá publicar los metadatos del modelo almacenados en los archivos JSON, ya que esta operación requiere acceso al [punto de conexión XMLA](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
+> If you do not have access to a workspace assigned to a capacity or Premium Per User license, you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
 
 > [!NOTE]
 > Power BI Desktop sigue siendo necesario para crear la parte Visual del Report. Es una [buena práctica separar siempre los Report de los modelos](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model). Si tienes un archivo de Power BI existente que incluye ambos, [esta entrada de blog](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([vídeo](https://www.youtube.com/watch?v=PlrtBm9YN_Q)) describe cómo dividirlo en un archivo de modelo y un archivo de Report.
@@ -127,72 +129,72 @@ A continuación, se analiza qué estrategias de ramificación conviene usar al d
 
 La estrategia de ramificación determinará cómo será el flujo de trabajo diario de desarrollo y, en muchos casos, las ramas se alinearán directamente con las metodologías que utilice tu equipo. Por ejemplo, al usar el [proceso ágil en Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops), tu backlog constaría de **Épicas**, **Características**, **Historias de usuario**, **Tareas** y **Defectos**.
 
-En la terminología ágil, una **Historia de usuario** es una unidad de trabajo entregable y comprobable. Una historia de usuario puede constar de varias **tareas** —unidades de trabajo más pequeñas que un desarrollador realiza antes de poder entregar la historia de usuario. En un mundo ideal, todas las historias de usuario se desglosan en tareas manejables; cada una requiere solo un par de horas para completarse y, en total, no suman más que unos pocos días para toda la historia de usuario. Esto convierte a una historia de usuario en una candidata ideal para una rama de funcionalidad de corta duración, donde el desarrollador hace uno o varios commits por tarea antes de fusionar la rama y desplegar el código para su prueba.
+En la terminología ágil, una **Historia de usuario** es una unidad de trabajo entregable y comprobable. The User Story may consist of several **Tasks** — smaller pieces of work performed by a developer before the User Story can be delivered. In an ideal world, all User Stories are broken down into manageable tasks, each taking only a couple of hours to complete, adding up to no more than a handful of days for the entire User Story. This makes a User Story an ideal candidate for a short-lived feature branch, where the developer makes one or more commits per task before the branch is merged and the code deployed for testing.
 
-Determinar una estrategia de ramificación adecuada depende de muchos factores: el tamaño del equipo, la cadencia de lanzamientos, las restricciones regulatorias, cuántos modelos semánticos mantienes y lo madura que sea ya tu configuración de CI/CD. Este artículo presenta tres estrategias:
+Determining a suitable branching strategy depends on many different factors: team size, release cadence, regulatory constraints, how many semantic models you maintain, and how mature your CI/CD setup already is. This article presents three strategies:
 
-- **[GitHub Flow + Octopus Merge](#github-flow--octopus-merge)** — nuestro enfoque recomendado para la mayoría de los equipos de modelos semánticos y el tema principal de este artículo.
-- **[GitFlow](#gitflow-branching-and-deployment-environments)** — una alternativa válida, especialmente adecuada para equipos con ciclos de lanzamiento formales y poco frecuentes o con requisitos de aprobación regulatoria.
-- **[Desarrollo basado en trunk puro](#trunk-based-development)** — el enfoque más simple. Conviene entenderlo como referencia, aunque la mayoría de los equipos de BI querrán la estructura adicional que ofrece GitHub Flow.
+- **[GitHub Flow + Octopus Merge](#github-flow--octopus-merge)** — our recommended approach for most semantic model teams, and the primary focus of this article.
+- **[GitFlow](#gitflow-branching-and-deployment-environments)** — a valid alternative, particularly suited to teams with formal, infrequent release cycles or regulatory sign-off requirements.
+- **[Plain trunk-based development](#trunk-based-development)** — the simplest approach, worth understanding as a baseline even if most BI teams will want the additional structure GitHub Flow provides.
 
 > [!NOTE]
-> Tabular Editor es independiente de la estrategia de ramificación. Guardar en carpeta y el modo del área de trabajo funcionan igual, elijas la estrategia que elijas a continuación; la recomendación de este artículo se basa en patrones que hemos visto funcionar en implementaciones empresariales, no en una limitación impuesta por la herramienta.
+> Tabular Editor is agnostic to branching strategy. Save to Folder and Workspace Mode work identically regardless of which of the strategies below you choose — the recommendation in this article is based on patterns we've seen succeed across enterprise engagements, not a constraint imposed by the tool.
 
 ## GitHub Flow + Octopus Merge
 
-Para los equipos que crean modelos semánticos con Tabular Editor y Power BI, recomendamos **[GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)** combinado con un patrón de **Octopus Merge** para las pruebas de integración continua.
+For teams building semantic models with Tabular Editor and Power BI, we recommend **[GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)** combined with an **Octopus Merge** pattern for continuous integration testing.
 
-GitHub Flow es un modelo de ramificación ligero con una única regla innegociable: **`main` siempre se puede desplegar.** Todo el trabajo se realiza en una rama de funcionalidad de corta duración creada a partir de `main`; nadie hace commits directamente en `main`; las ramas se fusionan de nuevo mediante una pull request tras la revisión y cuando las comprobaciones automatizadas hayan pasado. A diferencia de GitFlow, no hay una rama `develop` ni una rama independiente por entorno: la promoción entre entornos (dev → test → UAT → producción) la gestiona el pipeline de despliegue, no las ramas de larga duración.
+GitHub Flow is a lightweight branching model with a single hard rule: **`main` is always deployable.** All work happens on a short-lived feature branch created off `main`; nobody commits directly to `main`; branches are merged back via pull request after review and automated checks pass. Unlike GitFlow, there's no `develop` branch and no separate branch per environment — environment promotion (dev → test → UAT → production) is handled by the deployment pipeline, not by long-lived branches.
 
 ```mermaid
 gitGraph
-    commit id: "inicial"
+    commit id: "initial"
     branch "feature/add-tax-calculation"
-    commit id: "agregar medida"
-    commit id: "agregar columna"
+    commit id: "add measure"
+    commit id: "add column"
     checkout main
-    merge "feature/add-tax-calculation" id: "PR fusionada: cálculo de impuestos"
+    merge "feature/add-tax-calculation" id: "PR merged: tax calculation"
     branch "feature/fix-rls"
-    commit id: "corregir rol"
+    commit id: "fix role"
     checkout main
-    merge "feature/fix-rls" id: "PR fusionada: corregir RLS"
+    merge "feature/fix-rls" id: "PR merged: fix RLS"
     branch "feature/new-report-page"
     commit id: "wip"
     checkout main
     commit id: "hotfix"
-    merge "feature/new-report-page" id: "PR fusionada: nueva página del Report"
+    merge "feature/new-report-page" id: "PR merged: new report page"
 ```
 
-`main` se mantiene en una sola línea y siempre se puede desplegar; las ramas de funcionalidad de corta duración parten de ella y se fusionan de nuevo directamente mediante una pull request. Contrástalo con el diagrama de GitFlow más abajo en la página, que tiene cinco líneas paralelas de larga duración.
+`main` stays on a single line and is always deployable; short feature branches fork off it and merge straight back via pull request. Contrast this with the GitFlow diagram further down the page, which has five parallel, long-lived lines.
 
-Por sí solo, GitHub Flow no responde a una pregunta específica de los equipos de BI: cuando varios desarrolladores tienen cada uno una pull request abierta, ¿qué refleja tu entorno de prueba compartido en cada momento? **Octopus Merge** responde a esto: un pipeline de CI fusiona continuamente todas las pull requests abiertas en ese momento en una rama desechable y despliega el resultado en un entorno de prueba compartido, de modo que los usuarios de negocio siempre validan la combinación de todo lo que está en curso, no solo una funcionalidad aislada. Consulta [GitHub Flow y el patrón Octopus Merge](xref:github-flow) para ver cómo funciona el patrón y cómo implementarlo.
+On its own, GitHub Flow doesn't answer a question specific to BI teams: what does your shared test environment reflect at any given moment, when several developers each have an open pull request? **Octopus Merge** answers this: a CI pipeline continuously merges every currently open pull request into a disposable branch and deploys the result to a shared test environment — so business users always validate the combination of everything in progress, not just one feature in isolation. See [GitHub Flow and the Octopus Merge pattern](xref:github-flow) for how the pattern works and how to build it.
 
-Algunas razones por las que esta combinación encaja especialmente bien con el desarrollo de modelos semánticos:
+A few reasons this combination fits semantic model development particularly well:
 
-- **Modelo mental más simple.** Tener dos conceptos de rama en lugar de los cinco de GitFlow reduce la carga de incorporación, especialmente en equipos que incluyen autores de Reports y analistas de negocio junto con desarrolladores de modelos.
-- **`main` siempre se puede desplegar.** Si necesitas publicar una corrección urgente —una medida rota, un cambio de RLS relacionado con la seguridad—, no tienes que averiguar cuál de varias ramas de larga duración refleja la producción en ese momento.
-- **La promoción entre entornos se gestiona en el pipeline, no en la estructura de ramas.** Agregar un nuevo entorno es un cambio en el pipeline, no una nueva rama permanente en la que cada desarrollador tenga que recordar fusionar sus cambios.
-- **Las ramas de corta duración reducen los conflictos de fusión** — algo importante para Octopus Merge, ya que fusiona todas las ramas abiertas a la vez para las pruebas de integración. Cuanto menos tiempo dure cada rama, menor será la superficie expuesta a conflictos.
-- **Encaja mejor con la entrega continua de productos de datos** que el modelo de "release train" versionado de GitFlow, ya que los modelos semánticos tienden a evolucionar de forma incremental en lugar de lanzarse en entregas discretas.
+- **Simpler mental model.** Two branch concepts instead of GitFlow's five means less onboarding overhead, particularly on teams that include report authors and business analysts alongside model developers.
+- **`main` is always deployable.** If you need to ship an urgent fix — a broken measure, a security-related RLS change — you don't need to reason about which of several long-lived branches currently reflects production.
+- **Environment promotion lives in the pipeline, not the branch structure.** Adding a new environment is a pipeline change, not a new permanent branch every developer has to remember to merge into.
+- **Short-lived branches reduce merge conflicts** — important for Octopus Merge, since it merges every open branch together for integration testing. The shorter each branch lives, the smaller the surface area for conflicts.
+- **Better fit for continuous delivery of data products** than GitFlow's versioned release-train model, since semantic models tend to evolve incrementally rather than ship in discrete releases.
 
-Nada de esto significa que GitFlow sea incorrecto — consulta [ramificación de GitFlow y entornos de implementación](#gitflow-branching-and-deployment-environments) más abajo para ver cuándo sigue siendo una buena opción.
+None of this means GitFlow is wrong — see [GitFlow branching and deployment environments](#gitflow-branching-and-deployment-environments) below for when it's still a good fit.
 
-### Principios clave
+### Key principles
 
-- `main` siempre está listo para desplegarse.
-- Las ramas de funcionalidad son de vida corta e independientes.
-- El entorno de pruebas siempre refleja la combinación de todo lo que está actualmente en curso, no solo una funcionalidad aislada. Consulta [GitHub Flow y el patrón Octopus Merge](xref:github-flow) para ver cómo hacerlo.
-- La integración de Git de Fabric **no** debe habilitarse en ningún Workspace que se use para las bases de datos de Workspace de Tabular Editor — Tabular Editor escribe directamente en las bases de datos de Workspace a través del punto de conexión XMLA, y esas escrituras no guardan relación con tus ramas en Git. Esto también se menciona en la [documentación del modo del área de trabajo](xref:workspace-mode).
+- `main` is always in a deployable state.
+- Feature branches are short-lived and independent.
+- The test environment always reflects the combination of everything currently in progress — not just one feature in isolation. See [GitHub Flow and the Octopus Merge pattern](xref:github-flow) for how.
+- Fabric Git integration should **not** be enabled on any workspace used for Tabular Editor workspace databases — Tabular Editor writes to workspace databases directly through the XMLA endpoint, and those writes have no relationship to your Git branches. This is also called out in the [Workspace Mode documentation](xref:workspace-mode).
 
 ## Ramificación de GitFlow y entornos de despliegue
 
-GitFlow sigue siendo una opción sólida para equipos con una necesidad real de la estructura que aporta; por ejemplo, lanzamientos formales versionados, puertas de aprobación regulatoria vinculadas a ramas específicas o ciclos de lanzamiento poco frecuentes (p. ej., mensuales o trimestrales) en los que una rama `develop` persistente y las ramas de lanzamiento encajan de forma natural con tu proceso. Si eso describe a tu equipo, merece mucho la pena usar el enfoque que se presenta a continuación.
+GitFlow remains a solid choice for teams with a genuine need for the structure it provides — for example, formal versioned releases, regulatory sign-off gates tied to specific branches, or infrequent (e.g. monthly or quarterly) release cycles where a persistent `develop` branch and release branches map naturally onto your process. If that describes your team, the approach below is well worth using.
 
 La estrategia descrita a continuación se basa en [GitFlow de Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/).
 
 ![Gitflow](~/content/assets/images/gitflow.png)
 
-Implementar una estrategia de ramificación similar a esta puede ayudar a resolver algunos de los problemas de DevOps habituales en equipos de BI, siempre que dediques algo de tiempo a definir cómo se correlacionan las ramas con tus entornos de despliegue. En un mundo ideal, necesitarías al menos 4 entornos distintos para dar soporte completo a GitFlow:
+Implementing a branching strategy similar to this can help solve some of the DevOps problems typically encountered by BI teams, provided you put some thought into how the branches correlate to your deployment environments. En un mundo ideal, necesitarías al menos 4 entornos distintos para dar soporte completo a GitFlow:
 
 - El entorno de **producción**, que siempre debería contener el código del HEAD de la rama master.
 - Un entorno **canary**, que siempre debería contener el código del HEAD de la rama develop. Aquí es donde normalmente programas despliegues nocturnos y ejecutas las pruebas de integración para asegurarte de que las funcionalidades que entrarán en la próxima versión para producción funcionen bien juntas.
@@ -201,33 +203,33 @@ Implementar una estrategia de ramificación similar a esta puede ayudar a resolv
 
 Tenemos que recalcar que, en realidad, no existe una solución que sirva para todo. Quizá no estés construyendo tu solución en la nube y, por tanto, no tengas la escalabilidad o flexibilidad para aprovisionar nuevos recursos en segundos o minutos. O quizá tus volúmenes de datos sean muy grandes, lo que hace poco práctico replicar entornos por limitaciones de recursos, coste o tiempo.
 
-Aunque necesites dar soporte al desarrollo en paralelo, es posible que varios desarrolladores compartan sin problema el mismo entorno de desarrollo o sandbox, sin demasiadas complicaciones. En particular, para modelos tabulares, recomendamos que los desarrolladores sigan usando [bases de datos de Workspace](xref:workspace-mode) individuales para evitar "pisarse el trabajo" entre ellos.
+Aunque necesites dar soporte al desarrollo en paralelo, es posible que varios desarrolladores compartan sin problema el mismo entorno de desarrollo o sandbox, sin demasiadas complicaciones. Specifically for tabular models, though, we recommend that developers still use individual [workspace databases](xref:workspace-mode) to avoid "stepping over each others toes."
 
 > [!NOTE]
-> Si estás evaluando GitFlow principalmente porque necesitas un entorno de pruebas compartido y siempre actualizado que refleje el trabajo en curso, plantéate si [GitHub Flow + Octopus Merge](#github-flow--octopus-merge) podría darte el mismo resultado con menos sobrecarga de gestión de ramas. La rama `develop`/canary de GitFlow y la rama de pruebas desechable de Octopus Merge resuelven un problema parecido de formas distintas.
+> If you're evaluating GitFlow primarily because you need a shared, always-current test environment reflecting in-progress work, consider whether [GitHub Flow + Octopus Merge](#github-flow--octopus-merge) might achieve the same outcome with less branch-management overhead. GitFlow's `develop`/canary branch and Octopus Merge's disposable test branch solve a similar problem in different ways.
 
-## Desarrollo basado en trunk
+## Trunk-based development
 
-El desarrollo basado en trunk es el modelo de ramificación más simple posible: los desarrolladores hacen commits de cambios pequeños y frecuentes directamente en `main`, o mediante ramas de funcionalidad de vida muy corta que se fusionan de nuevo en cuestión de horas. En general, Microsoft recomienda [Trunk-based Development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([vídeo](https://youtu.be/t_4lLR6F_yk?t=232)) para la entrega ágil y continua de incrementos pequeños.
+Trunk-based development is the simplest possible branching model: developers commit small, frequent changes either directly to `main`, or via very short-lived feature branches that are merged back within hours. Microsoft recommends [trunk-based development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) generally for agile, continuous delivery of small increments.
 
 ![Trunk Based Development](~/content/assets/images/trunk-based-development.png)
 
-En su forma más pura, el desarrollo basado en trunk puede generar fricciones reales en equipos de BI:
+In its purest form, trunk-based development can run into real friction for BI teams:
 
-- Las nuevas funcionalidades suelen requerir pruebas y validación prolongadas por parte de los usuarios de negocio, lo que puede llevar varias semanas; por eso necesitas algún lugar donde validar el trabajo en curso que no sea `main`.
-- Las soluciones de BI son multicapa (Warehouse/ETL, Master Data Management, capa semántica, Reports), con dependencias entre capas que complican las pruebas y el despliegue.
-- Un equipo de BI puede mantener varios modelos semánticos en distintas etapas de madurez y con ritmos diferentes.
-- Hay que cargar, pasar por ETL y procesar los datos — no solo el código — para que un cambio se pueda probar. Incluir actualizaciones completas de datos en cada compilación podría hacer que los tiempos de ejecución de la canalización pasen de minutos a horas y, en tablas de hechos muy grandes, a veces ni siquiera es viable.
+- New features often require prolonged testing and validation by business users, which may take several weeks — so you need somewhere for in-progress work to be validated that isn't `main` itself.
+- BI solutions are multi-tiered (Data Warehouse/ETL, Master Data Management, semantic layer, reports), with dependencies between layers that complicate testing and deployment.
+- A BI team may maintain several semantic models at different maturity stages and paces.
+- Data — not just code — has to be loaded, ETL'd, and processed to make a change testable. Including full data refreshes in every build could blow up pipeline runtimes from minutes to hours, and isn't always feasible at all for very large fact tables.
 
-**GitHub Flow + Octopus Merge, como se ha descrito arriba, se entiende mejor como un refinamiento de trunk-based development que aborda directamente estas preocupaciones** — en lugar de una desviación de este enfoque. Mantiene la simplicidad fundamental de trunk-based development (una única rama de larga duración, ramas de características de corta duración, sin release trains) y añade justo la pieza que les falta a los equipos de BI: un entorno de pruebas compartido, poblado por la canalización en lugar de por una rama de larga duración, que siempre refleja el estado combinado actual del trabajo en curso. Si estás eligiendo entre las tres estrategias de esta página, por lo general recomendaríamos GitHub Flow + Octopus Merge a un equipo al que le gusta la simplicidad de trunk-based development, pero que se ha topado con las limitaciones anteriores.
+**GitHub Flow + Octopus Merge, described above, is best understood as a refinement of trunk-based development that directly addresses these concerns** — rather than a departure from it. It keeps trunk-based development's core simplicity (one long-lived branch, short-lived feature branches, no release trains) while adding exactly the missing piece BI teams need: a shared test environment, populated by the pipeline rather than by a long-lived branch, that always reflects the current combined state of in-progress work. If you're choosing between the three strategies on this page, GitHub Flow + Octopus Merge is generally where we'd point a team that likes the simplicity of trunk-based development but has run into the limitations above.
 
 ## Flujo de trabajo habitual
 
-Suponiendo que ya tienes un repositorio Git configurado y alineado con tu estrategia de ramificación, añadir el "código fuente" de tu modelo tabular al repositorio consiste simplemente en usar Tabular Editor para guardar los metadatos en una nueva rama de un repositorio local. Luego, preparas y haces commit de los nuevos archivos, haces push de tu rama al repositorio remoto y creas un pull request para que tu rama se fusione con la rama principal.
+Suponiendo que ya tienes un repositorio Git configurado y alineado con tu estrategia de ramificación, añadir el "código fuente" de tu modelo tabular al repositorio consiste simplemente en usar Tabular Editor para guardar los metadatos en una nueva rama de un repositorio local. Then, you stage and commit the new files, push your branch to the remote repository, and create a pull request to get your branch merged into the main branch.
 
-Los comandos exactos son los mismos independientemente de la estrategia anterior que elijas; lo que cambia es lo que ocurre _después_ de abrir el pull request (consulta [GitHub Flow y el patrón Octopus Merge](xref:github-flow) para el caso de GitHub Flow, o tu proceso de release/canary para GitFlow). En general, el flujo de trabajo es así:
+The exact commands are the same regardless of which strategy above you choose — what differs is what happens _after_ the pull request is opened (see [GitHub Flow and the Octopus Merge pattern](xref:github-flow) for the GitHub Flow case, or your release/canary process for GitFlow). In general, the workflow looks like this:
 
-1. Antes de empezar a trabajar en una nueva funcionalidad, crea una nueva rama de características en Git:
+1. Before starting work on a new feature, create a new feature branch in git:
 
    ```cmd
    git checkout main
@@ -249,11 +251,11 @@ Los comandos exactos son los mismos independientemente de la estrategia anterior
 
 5. Cuando hayas terminado y todo el código se haya confirmado y enviado al repositorio remoto, envía una solicitud de incorporación de cambios para que tu código quede integrado con la rama principal. Si se produce un conflicto de fusión, tendrás que resolverlo localmente; por ejemplo, con Visual Studio Team Explorer o simplemente abriendo los archivos .json en un editor de texto para resolver los conflictos (Git inserta marcadores de conflicto para indicar qué partes del código tienen conflictos).
 
-6. Una vez resueltos todos los conflictos, puede haber un proceso de revisión de código y de ejecución automatizada de compilaciones y pruebas —incluido, si usas el enfoque de GitHub Flow anterior, el despliegue de pruebas de Octopus Merge— antes de que se pueda completar el pull request.
+6. Once all conflicts are resolved, there may be a process of code review and automated build/test execution — including, if you're using the GitHub Flow approach above, the Octopus Merge test deployment — before the pull request can be completed.
 
-En los siguientes artículos ofrecemos más detalles sobre cómo configurar las políticas de rama de Git, establecer canalizaciones automatizadas de compilación y despliegue, etc., con Azure DevOps y GitHub Actions. Se pueden usar técnicas similares en otros entornos de compilación automatizada y de alojamiento de Git, como TeamCity, GitLab, etc.
+We present more details about how to configure git branch policies, set up automated build and deployment pipelines, etc. using Azure DevOps and GitHub Actions in the following articles. Similar techniques can be used in other automated build and git hosting environments, such as TeamCity, GitLab, etc.
 
-## Siguientes pasos
+## Pasos a seguir
 
 - @sharing-macros-bpa-rules
 - @powerbi-cicd

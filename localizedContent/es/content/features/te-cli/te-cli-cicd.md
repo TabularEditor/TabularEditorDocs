@@ -22,7 +22,7 @@ La CLI de Tabular Editor está diseñada para ejecutarse sin supervisión en pip
 > [!WARNING]
 > **No uses la CLI en pipelines de producción durante la versión preliminar pública limitada.** Hay dos riesgos específicos de esta versión preliminar que afectan a los propietarios de pipelines:
 >
-> - **Caducidad estricta.** El binario preliminar deja de funcionar el **2026-10-31**; cualquier pipeline que dependa de él fallará en esa fecha, independientemente de tu calendario de versiones.
+> - **Hard expiry.** The preview binary stops functioning on **2026-10-31** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **Sin garantía de compatibilidad con versiones anteriores.** Los comandos, las opciones, los formatos de salida y los códigos de salida pueden cambiar entre compilaciones preliminares, así que quizá tengas que actualizar los pasos del pipeline cuando actualices el binario incluido en el repositorio.
 >
 > Compila y evalúa en pipelines que no sean de producción, y comparte tus comentarios en el repositorio público [TabularEditor/CLI](https://github.com/TabularEditor/CLI) para que la versión GA se ajuste a tus necesidades.
@@ -31,12 +31,12 @@ La CLI de Tabular Editor está diseñada para ejecutarse sin supervisión en pip
 
 - **Un único binario autocontenido.** Sin necesidad de instalar un entorno de ejecución, sin `TabularEditor.exe`, sin `start /wait`.
 - **Opción global `--non-interactive`.** Desactiva todas las indicaciones; falla de inmediato con errores claros y útiles.
-- **Simulación por defecto.** `te deploy` y `te refresh` imprimen el TMSL exacto que enviarían; añade `--execute` para que el comando se ejecute de verdad. Ambos piden confirmación en la terminal, así que `--execute --force` es obligatorio en CI, donde no se puede responder a una solicitud interactiva.
-- **Si falla, falla.** `te deploy` sale con un código distinto de cero cuando el servidor acepta los metadatos pero deja objetos con errores, y `te script` sale con un código distinto de cero cuando un script emite un Report de error; un control basado en el código de salida no puede dar por buena una ejecución con errores.
-- **`--ci vsts` / `--ci github`.** Emite anotaciones nativas del pipeline en stderr, con el código del hallazgo (`code=` en Azure DevOps, `title=` en GitHub). `azdo` / `azure-devops` y `gh` son alias aceptados; `none` significa que no se emiten anotaciones, y un valor mal escrito se rechaza antes de que se ejecute el comando, en lugar de no emitir nada en silencio.
+- **Dry run by default.** `te deploy` and `te refresh` print the exact TMSL they would send; add `--execute` to act. Both ask for confirmation at a terminal, so `--execute --force` is required in CI, where a prompt cannot be answered.
+- **Failure is failure.** `te deploy` exits non-zero when the server accepts the metadata but parks objects with errors, and `te script` exits non-zero when a script reports an error - a gate on the exit code cannot pass a broken run.
+- **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub). `azdo` / `azure-devops` and `gh` are accepted aliases, `none` means no annotations, and a mistyped value is rejected before the command runs instead of silently emitting nothing.
 - **`--trx <file>`.** Genera resultados VSTEST que Azure DevOps puede consumir al publicar los resultados de pruebas.
-- **Errores estructurados.** `--error-format json` emite `{"error": "...", "hint": "..."}` en stderr para que los pasos del pipeline puedan fallar con un mensaje útil.
-- **Un único JSON de hallazgos.** `te validate`, `te bpa run`, `te test run` y `te query` comparten un único documento JSON legible por máquina con `--output-format json`: un `summary`, un array plano `findings[]` con `severity`/`source`/`code`/`message` y, cuando sea posible, un `objectPath` que puedes volver a pasar a `te get`. Consulta @te-cli-findings.
+- **Structured errors.** `--error-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
+- **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable JSON document under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
 
 ## Agregar la CLI a tu repositorio
 
@@ -55,7 +55,7 @@ your-repo/
 Coloca el binario **extraído** —no el archivo comprimido— para que el pipeline pueda invocarlo directamente. Elige la compilación que coincida con el SO y la arquitectura de tu runner; consulta @te-cli-install para ver la tabla de nombres de archivo. El binario autocontenido ocupa ~70 MB; considera usar Git LFS si tu repositorio es sensible al tamaño.
 
 > [!NOTE]
-> Al hacer commit del binario, también dejas fijada la versión de la CLI que hayas incluido en el repositorio, lo cual es deseable para la reproducibilidad de la CI. Para actualizar, sustituye el binario en `tools/te/` y haz commit: los mensajes del commit serán tu registro de versiones. Ten en cuenta que el binario preliminar caduca el **2026-10-31** independientemente de cuándo lo hayas incorporado al repositorio, así que una copia incluida en el repositorio no es una dependencia permanente; planifica actualizarla (y volver a validar tu pipeline con la nueva superficie de la API) siguiendo la cadencia de las compilaciones preliminares.
+> Al hacer commit del binario, también dejas fijada la versión de la CLI que hayas incluido en el repositorio, lo cual es deseable para la reproducibilidad de la CI. Para actualizar, sustituye el binario en `tools/te/` y haz commit: los mensajes del commit serán tu registro de versiones. Keep in mind that the preview binary still expires on **2026-10-31** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
 
 ## GitHub Actions
 
@@ -168,9 +168,9 @@ steps:
 
 ## Patrones de compuerta del BPA
 
-`te deploy` y `te save-as` ejecutan el Best Practice Analyzer como comprobación previa por defecto. Hay tres comportamientos que conviene definir de antemano:
+`te deploy` and `te save-as` run the Best Practice Analyzer as a pre-flight gate by default. Hay tres comportamientos que conviene definir de antemano:
 
-- **Aplicar**: el valor predeterminado. El pipeline falla si BPA detecta infracciones con severidad >= error. Combínalo con `--fail-on warning` en un paso independiente de `te bpa run` si quieres que las advertencias también hagan fallar el pipeline.
+- **Aplicar**: el valor predeterminado. Pipeline fails if BPA finds violations at severity >= error. Combínalo con `--fail-on warning` en un paso independiente de `te bpa run` si quieres que las advertencias también hagan fallar el pipeline.
 - **Corrección automática**: `--fix-bpa` aplica las `fixExpression`s en memoria al artefacto desplegado. Los archivos de origen no se modifican. Es útil cuando la fuente de verdad está en el modelo y quieres que los despliegues normalicen el estilo sin intervención del desarrollador.
 - **Omitir**: `--skip-bpa` desactiva el control para un solo comando. Útil para correcciones urgentes de emergencia; no se recomienda como valor predeterminado.
 
@@ -187,9 +187,9 @@ te deploy --model ./model --target-server my-ws --target-database my-model --ski
 
 Consulta @te-cli-config para controlar globalmente el control del BPA mediante las claves de configuración `bpa.onDeploy` / `bpa.onSave`.
 
-## Validación de scripts
+## Script validation
 
-Los C# Script pueden comprobarse en compilación sin cargar ningún modelo: un paso de lint sin conexión para validar PR:
+C# scripts can be compile-checked without loading any model - an offline lint step for PR validation:
 
 ```bash
 # Compile-check C# scripts without a model (offline lint)
@@ -198,7 +198,7 @@ te script --file ./scripts/fix.csx --validate
 
 ## Patrones de actualización
 
-La actualización en los pipelines suele ser un paso posterior al despliegue. Añade `--execute --force` (sin `--execute`, el comando solo imprime el TMSL que ejecutaría; sin `--force`, se detiene para pedir una confirmación que nadie puede dar), usa `--non-interactive` y elige un `--type` determinista:
+La actualización en los pipelines suele ser un paso posterior al despliegue. Add `--execute --force` (without `--execute` the command only prints the TMSL it would run; without `--force` it stops to ask for a confirmation nobody can give), use `--non-interactive`, and pick a deterministic `--type`:
 
 ```bash
 # Full refresh of the whole model after deploy
@@ -211,7 +211,7 @@ te refresh -s my-ws -d my-model --table Sales --type full --execute --force --no
 te refresh -s my-ws -d my-model --type calculate --execute --force --non-interactive
 ```
 
-En los flujos de trabajo de actualización incremental, usa `--apply-refresh-policy` (pasa `true`, `false` o el nombre de una tabla para limitar la actualización a esa tabla) junto con `--effective-date <yyyy-MM-dd>` y `--execute --force`. Consulta @te-cli-commands para más detalles.
+For incremental refresh workflows, use `--apply-refresh-policy` (pass `true`, `false`, or a table name to scope the refresh to that table) together with `--effective-date <yyyy-MM-dd>` and `--execute --force`. Consulta @te-cli-commands para más detalles.
 
 ## Patrones de artefactos
 
@@ -229,7 +229,7 @@ Confirma estos artefactos en git, súbelos al almacenamiento de artefactos del p
 
 ## Gestión de secretos
 
-| Enfoque                                                                                                                                              | Cuándo usarlo                                                       | Notas                                                                                                                                                                                                                                                                                                     |
+| Approach                                                                                                                                             | Cuándo usarlo                                                       | Notas                                                                                                                                                                                                                                                                                                     |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Principal de servicio mediante variables de entorno (`AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`, `--auth env`) | CI/CD general                                                       | Asigna los secretos del pipeline a variables de entorno a nivel de paso o de trabajo. Nunca pases secretos en los argumentos de comandos.                                                                                                                                 |
 | Entidad de servicio mediante `te auth login`, una vez por trabajo (`echo $SECRET \| te auth login -u $ID -p - -t $TENANT`)        | Trabajos de varios pasos                                            | El inicio de sesión se almacena en caché, así que los comandos `te` posteriores obtienen tokens de forma silenciosa; no hace falta establecer `AZURE_CLIENT_*` en cada paso ni volver a pasar `-u/-p/-t`. Canaliza el secreto a través de stdin en lugar de interpolarlo. |

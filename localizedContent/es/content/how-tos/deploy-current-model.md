@@ -1,6 +1,8 @@
 ---
 uid: deploy-current-model
-title: Implementar el modelo cargado actualmente
+title: Deploy the loaded model
+author: Morten Lønskov
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,18 +11,24 @@ applies_to:
       full: true
 ---
 
-# Implementar el modelo cargado actualmente
+# Deploy the loaded model
 
-## Implementación
+Deployment pushes the model you have open to a server, either creating a new database or overwriting an existing one. It's how you get a model held in a `.bim` file or a folder onto a server, and how you promote a model from one environment to the next.
 
-Si quieres implementar el modelo cargado actualmente en una nueva base de datos o sobrescribir una base de datos existente con los cambios del modelo (por ejemplo, al cargarlo desde un archivo Model.bim), usa el Asistente de implementación en "Model" > "Deploy...".
+Open the wizard with **Model > Deploy...**, choose the destination server and database, then choose how much of the model to send.
 
-Tabular Editor incluye un Asistente de implementación que ofrece varias ventajas frente a la implementación desde SSDT, especialmente al implementar en una base de datos existente. Después de elegir un servidor y una base de datos de destino, tienes las siguientes opciones para esta implementación:
+## What each option controls
 
-![Asistente de implementación](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
+The wizard's value is in what it lets you _leave alone_ on the destination. Each option is a decision about whether the destination keeps its own version of something:
 
-Si dejas desmarcada la casilla "Deploy Connections", te aseguras de que todos los Data sources de la base de datos de destino permanezcan intactos. Recibirás un error si tu modelo contiene una o más tablas con un Data source que no exista ya en la base de datos de destino.
+- **Deploy Model Structure** sends the model metadata. This is the deployment itself; clearing it leaves nothing to do.
+- **Deploy Data Sources** sends explicit data sources. Clear it to keep the destination's own connection strings and credentials, which is usually what you want when promoting from development to test.
+- **Deploy Table Partitions** synchronizes partitions with the model metadata. Clear it to leave existing partitions, and the data in them, untouched. With it enabled, partitions on the destination that aren't in the model are removed along with their data.
+  - **Deploy partitions governed by Incremental Refresh Policies** appears when the option above is enabled, and lets you deploy every partition _except_ those an incremental refresh policy generates.
+- **Deploy Model Roles** sends the roles defined in the model. Clear it to keep the destination's roles as they are.
+  - **Deploy Model Role Members** sends role membership. Role members are commonly managed on the server rather than in the metadata, so clearing this is normal.
 
-Del mismo modo, si dejas desmarcada la casilla "Deploy Table Partitions", te aseguras de que las particiones existentes de tus tablas no se modifiquen y de que los datos de las particiones se mantengan intactos.
+@deployment covers all of this in detail, along with the TMSL script the wizard generates, what a deployment does to data already in the destination, and how to deploy from the command line or a pipeline.
 
-Cuando la casilla "Deploy Roles" está marcada, los roles de la base de datos de destino se actualizarán para reflejar los del modelo cargado; sin embargo, si la casilla "Deploy Role Members" está desmarcada, los miembros de cada rol permanecerán sin cambios en la base de datos de destino.
+> [!NOTE]
+> Deploying is not the same as saving. If you opened the model from a server, **File > Save** writes back to _that_ database, as described in @connect-ssas. Use deployment when the destination is somewhere else.

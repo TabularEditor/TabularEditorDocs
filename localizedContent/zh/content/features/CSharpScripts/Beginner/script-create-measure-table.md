@@ -22,7 +22,7 @@ applies_to:
 ### 创建度量值表
 
 ```csharp
-// 创建一个仅包含一列且该列被隐藏的计算表格：
+// Create a calculated table with a single column which is hidden:
 var table = Model.AddCalculatedTable("Model Measures", "{0}");
 table.Columns[0].IsHidden = true;
 ```

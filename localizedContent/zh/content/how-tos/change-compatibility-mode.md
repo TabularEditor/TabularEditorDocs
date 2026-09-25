@@ -19,7 +19,7 @@ applies_to:
 
 # 更改兼容模式
 
-模型的 **兼容模式** 决定模型以哪个平台为目标。 该属性决定：
+模型的 **兼容模式** 决定模型以哪个平台为目标。 This property determines:
 
 - 可用的 Tabular Object Model (TOM) 对象和属性
 - Tabular Editor 将应用哪些版本限制
@@ -30,17 +30,17 @@ applies_to:
 
 `Database.CompatibilityMode` 属性可取以下值，这些值由 [Microsoft.AnalysisServices.CompatibilityMode](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.compatibilitymode?view=analysisservices-dotnet) 枚举定义：
 
-| 值                  | 含义                                                                                                                                                                                                                                                                                                |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Unknown`          | 未指定具体模式。 当未显式设置模式时的默认值。 AS 客户端库会根据所使用的 TOM 功能自动检测实际模式（例如，如果存在任何 Power BI 特有功能）。                                                                                                                                                                                                                   |
-| `AnalysisServices` | 模型以 SQL Server Analysis Services 或 Azure Analysis Services 为目标。                                                                                                                                                                                                                                   |
-| `PowerBI`          | 模型以 Power BI（Desktop、Premium Per User、Premium Capacity、Fabric）为目标。 某些 TOM 属性仅在此模式下可用。 有关详细信息，请参阅 [Microsoft.AnalysisServices.Tabular 命名空间参考](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) 中各属性的“备注”部分。 |
-| `Excel`            | 该模型源自 Excel Power Pivot Data model。 Tabular Editor 不支持 Power Pivot 模型。                                                                                                                                                                                                                            |
+| 值                  | 含义                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Unknown`          | No specific mode. Default when the mode has not been explicitly set. AS 客户端库会根据所使用的 TOM 功能自动检测实际模式（例如，如果存在任何 Power BI 特有功能）。                                                                                                                                                                                                                                                                                                           |
+| `AnalysisServices` | 模型以 SQL Server Analysis Services 或 Azure Analysis Services 为目标。                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `PowerBI`          | Model targets Power BI (Desktop, Premium Per User, Premium Capacity, Fabric). Certain TOM properties are only available in this mode. See the Remarks section of each property in the [Microsoft.AnalysisServices.Tabular namespace reference](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) for details. |
+| `Excel`            | Model originates from an Excel Power Pivot data model. Tabular Editor 不支持 Power Pivot 模型。                                                                                                                                                                                                                                                                                                                                                              |
 
-Azure Analysis Services 和 SQL Server Analysis Services 仅支持 `AnalysisServices` 模式。 Power BI 和 Fabric 同时支持 `AnalysisServices` 和 `PowerBI` 模式。
+Azure Analysis Services 和 SQL Server Analysis Services 仅支持 `AnalysisServices` 模式。 Power BI and Fabric support both `AnalysisServices` and `PowerBI` modes.
 
 > [!IMPORTANT]
-> Tabular Editor 使用兼容模式来确定版本限制。 将模型设置为 `AnalysisServices` 模式后，即使部署到 Power BI，透视和多个分区等功能也会受到“仅企业版可用”的限制。
+> Tabular Editor uses Compatibility Mode to determine edition restrictions. 将模型设置为 `AnalysisServices` 模式后，即使部署到 Power BI，透视和多个分区等功能也会受到“仅企业版可用”的限制。
 
 ## 何时更改兼容模式
 
@@ -63,5 +63,5 @@ Azure Analysis Services 和 SQL Server Analysis Services 仅支持 `AnalysisServ
 ![更改兼容模式](~/content/assets/images/how-to/change-compatibility-mode.png)
 
 > [!NOTE]
-> 更改兼容模式会影响可用的 TOM 属性以及模型的验证方式。 保存前，先确认部署目标与所选模式一致。
+> 更改兼容模式会影响可用的 TOM 属性以及模型的验证方式。 Verify that your deployment target matches the selected mode before saving.
 

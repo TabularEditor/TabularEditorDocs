@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-metric-view-import-from-file
-title: 从文件导入指标视图
+title: Import a Metric View from a File
 author: Greg Baldini
 updated: 2026-07-02
 applies_to:
@@ -18,27 +18,27 @@ applies_to:
           full: true
 ---
 
-# 从文件导入指标视图
+# Import a Metric View from a file
 
-本操作指南演示如何直接从 YAML 文件将指标视图导入到 Tabular 模型中。
+This how-to demonstrates importing a Metric View into a Tabular model directly from a YAML file.
 
 > [!NOTE]
-> 本系列操作指南适用于 Tabular Editor 3.26.2 及更高版本。
-> 更早版本不支持此处展示的 v1.1 指标视图功能。
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
-## 获取示例指标视图
+## Get the sample Metric View
 
-将下面的示例指标视图(如下)保存到本地文件中。
-你需要用此路径替换下面示例中的占位符。
-就本操作而言，你只需保存文件；无需运行 `Load` 或 `Deserialize`。
+Save the sample Metric View (below) to a local file.
+You will need to replace the placeholder in the example below with this path.
+For this how-to, specifically, you only need to save the file; you do not need to run `Load` or `Deserialize`.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## 从文件导入
 
-`ImportToTabularFromFile` 会从磁盘加载 YAML，并在一步操作中将其导入到当前打开的模型中。
-将下面脚本中的占位符 (`<PLACEHOLDER>`) 替换为你保存 YAML 的路径。
-Databricks 主机名和 HTTP 路径用于构建 M 分区表达式；如果只是快速测试，可以先传入占位值，并在刷新数据前修正。
+`ImportToTabularFromFile` loads the YAML from disk and imports it into the open model in one step.
+Update the placeholder in the script below (`<PLACEHOLDER>`) with the path where you saved the YAML.
+The Databricks hostname and HTTP path are used to build the M partition expressions; for a quick test you can pass placeholder values and fix them before refreshing data.
 
 ```csharp {compile}
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -57,8 +57,8 @@ Output(sb.ToString());
 
 ## 后续步骤
 
-- [加载并检查指标视图](xref:semantic-bridge-load-inspect)
-- [导入指标视图并查看诊断信息](xref:semantic-bridge-import)
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Import a Metric View and view diagnostics](xref:semantic-bridge-import)
 
 ## 另见
 

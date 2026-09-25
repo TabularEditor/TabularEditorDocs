@@ -20,23 +20,23 @@ applies_to:
 
 # 刷新覆盖配置文件
 
-刷新覆盖配置文件允许你在刷新过程中临时修改某些模型属性，而无需更改实际的模型元数据。 这可以通过[高级刷新对话框](xref:advanced-refresh)进行配置。
+Refresh override profiles allow you to temporarily modify certain model properties during a refresh operation without changing the actual model metadata. This is configured through the [Advanced Refresh dialog](xref:advanced-refresh).
 
 ## 为什么要使用刷新覆盖？
 
-在开发和测试语义模型时，你经常需要使用与模型元数据中定义不同的配置来刷新数据。 常见场景包括：
+在开发和测试语义模型时，你经常需要使用与模型元数据中定义不同的配置来刷新数据。 Common scenarios include:
 
 - **只加载一部分数据**，以加快开发阶段的刷新操作
 - **连接到不同的数据源**（例如开发或测试数据库）
 - **使用不同的参数值进行测试**，再提交对模型的更改
 
-如果没有刷新覆盖，你就需要临时修改模型元数据，执行刷新，然后记得再将这些更改还原。 这种方式很容易出错——你可能会忘记还原某项更改，从而将错误的元数据部署到生产环境。
+Without refresh overrides, you would need to temporarily modify the model metadata, perform the refresh, and then remember to revert the changes. This approach is error-prone—it's easy to forget to revert a change, potentially resulting in incorrect metadata being deployed to production.
 
 刷新覆盖通过将临时刷新配置与模型元数据分离，解决了这个问题。
 
 ## 覆盖配置文件结构
 
-覆盖配置文件使用符合[TMSL 刷新命令规范](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)的 JSON。 该 JSON 是一个由覆盖对象组成的数组，其中每个对象可以包含以下一项或多项内容：
+覆盖配置文件使用符合[TMSL 刷新命令规范](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)的 JSON。 The JSON is an array of override objects, where each object can contain one or more of the following:
 
 - `scope` - 将覆盖范围限定为特定的表或分区（可选）
 - `dataSources` - 覆盖数据源连接属性
@@ -48,7 +48,7 @@ applies_to:
 
 ### 覆盖范围
 
-默认情况下，覆盖对刷新操作全局生效。 不过，你可以用 `scope` 属性把覆盖限制为只影响某个特定的表或分区。 当你想刷新整个模型，但需要某些表以不同于模型元数据中配置的方式获取数据时，这会很有用。
+By default, overrides apply globally to the refresh operation. However, you can use the `scope` property to limit an override to only affect a specific table or partition. This is useful when you want to refresh the entire model but need specific tables to source data differently than what's configured in the model metadata.
 
 `scope` 对象可以包含：
 
@@ -236,7 +236,7 @@ applies_to:
 
 ### 使用 scope 指定特定表
 
-刷新整个模型时，你可以使用 `scope` 属性，使重写仅应用于特定表。 此示例会重写数据源连接字符串，但仅在刷新“Sales”表时生效：
+刷新整个模型时，你可以使用 `scope` 属性，使重写仅应用于特定表。 This example overrides the data source connection string, but only when refreshing the "Sales" table:
 
 ```json
 [
@@ -261,7 +261,7 @@ applies_to:
 
 ### 多个作用域重写
 
-你可以在单个配置文件中组合多个作用域重写。 此示例为不同表使用不同的数据源：
+You can combine multiple scoped overrides in a single profile. This example uses different data sources for different tables:
 
 ```json
 [
@@ -298,11 +298,11 @@ applies_to:
 
 ## 创建重写配置文件的提示
 
-1. **查找对象名称**：`originalObject` 属性要求数据库、表、分区、数据源和表达式的名称与它们在模型中显示的完全一致。 你可以在 TOM Explorer 中找到这些名称。
+1. **查找对象名称**：`originalObject` 属性要求数据库、表、分区、数据源和表达式的名称与它们在模型中显示的完全一致。 You can find these names in the TOM Explorer.
 
 2. **从简单开始**：先从单个覆盖开始，测试通过后再逐步增加复杂度。
 
-3. **使用导出 TMSL 脚本**：配置好覆盖配置文件后，在“高级刷新”对话框中点击 **导出 TMSL 脚本...** 按钮，即可查看将生成的完整 TMSL 命令。 这有助于验证你所做的覆盖是否已正确应用。
+3. **使用导出 TMSL 脚本**：配置好覆盖配置文件后，在“高级刷新”对话框中点击 **导出 TMSL 脚本...** 按钮，即可查看将生成的完整 TMSL 命令。 This helps verify your overrides are correctly applied.
 
 4. **数据库名称**：`originalObject` 中的数据库名称应与你在服务器上看到的语义模型名称一致（或部署后将显示的名称）。
 
@@ -313,4 +313,4 @@ applies_to:
 - **适用于保存在磁盘上的模型**：`.tmuo` 文件与模型文件存放在同一位置（例如与你的 `.bim` 文件或 Database.tmdl 位于同一文件夹中）
 - **对于通过 XMLA 连接的模型**：`.tmuo` 文件存放在 `%LocalAppData%\TabularEditor3\UserOptions` 下
 
-这意味着覆盖配置文件会在 Tabular Editor 的不同会话之间保留。 由于不建议将 .tmuo 文件纳入版本控制，你可以通过手动编辑 .tmuo 文件，在团队成员之间共享覆盖配置文件。
+This means override profiles are preserved across Tabular Editor sessions. As it's not recommended to add the .tmuo files to source control, you can share override profiles among team members by manually editing the .tmuo files.

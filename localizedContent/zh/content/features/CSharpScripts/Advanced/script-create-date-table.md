@@ -16,11 +16,11 @@ applies_to:
 ## 脚本用途
 
 你可以使用此脚本，基于模型中所选的 1-2 个日期列创建一张新的、结构清晰且已配置好的日期表。
-第一个选中的列应包含最早日期，第二个选中的列应包含最晚日期。 运行脚本/宏之前，请先同时选中这两列。
+The first selected column should be the earliest date and the second selected column should be the latest date. Both should be selected before running the script / macro.
 
 此脚本将在模型中创建以下对象：
 
-1. 一个度量值 `[RefDate]`，其值为模型范围内的最新日期；例如：最后一个销售日。 你可以手动调整该度量值，然后重新处理日期表，以便基于不同的参考日期重新生成（即如果你想将其改为 TODAY() 或添加筛选器）
+1. A measure `[RefDate]`, which will have the latest date in the model scope; i.e. last day of sales. 你可以手动调整该度量值，然后重新处理日期表，以便基于不同的参考日期重新生成（即如果你想将其改为 TODAY() 或添加筛选器）
 2. `'Date'` 表——如果你有其他需求，可以在单独的 DAX 查询窗口中配置该表，然后将内容复制回脚本。
    - 所有列都会归入显示文件夹中
    - 将设置“排序依据”等列属性
@@ -32,68 +32,68 @@ applies_to:
 ### 创建日期表
 
 ```csharp
-// 要使用此 C# Script：
+// To use this C# Script:
 //
-// 1. 运行脚本
-// 2. 选择包含最早日期的列
-// 3. 选择包含最晚日期的列
+// 1. Run the script
+// 2. Select the column that has the earliest date
+// 3. Select the column that has the latest date
 
-// 模型中所有 DateTime 列的列表
+// List of all DateTime columns in the model
 var _dateColumns = Model.AllColumns.Where(c => c.DataType == DataType.DateTime ).ToList();
 
-// 在模型中选择包含最早日期的列
+// Select the column with the earliest date in the model
 try
 {
     string _EarliestDate = 
         SelectColumn(
             _dateColumns, 
             null, 
-            "请选择包含最早日期的列："
+            "Select the Column with the Earliest Date:"
         ).DaxObjectFullName;
     
     try
     {
-        // 在模型中选择包含最晚日期的列
+        // Select the column with the latest date in the model
         string _LatestDate = 
             SelectColumn(
                 _dateColumns, 
                 null, 
-                "请选择包含最晚日期的列："
+                "Select the Column with the Latest Date:"
             ).DaxObjectFullName;
         
         
-        // 创建参考日期度量值
+        // Create measure for reference date
         var _RefDateMeasure = _dateColumns[0].Table.AddMeasure(
             "RefDate",
             "CALCULATE ( MAX ( " + _LatestDate + " ), REMOVEFILTERS ( ) )"
         );
         
         
-        // 格式化的日期表 DAX
-        // 基于 https://www.sqlbi.com/topics/date-table/ 中的日期表
-        // 如需调整，将 @" 之后的所有内容复制到 DAX 查询窗口并替换
+        // Formatted date table DAX
+        // Based on date table from https://www.sqlbi.com/topics/date-table/
+        // To adjust, copy everything after the @" into a DAX query window & replace
         
-        var _DateDaxExpression = @"-- Report 中最新日期的参考日期
-        -- 业务希望在 Report 中查看数据的截止日期
+        var _DateDaxExpression = @"-- Reference date for the latest date in the report
+        -- Until when the business wants to see data in reports
         VAR _Refdate_Measure = [RefDate]
         VAR _Today = TODAY ( )
         
-        -- 如果 [RefDate] 结果为空，则替换为 ""Today""
+        -- Replace with ""Today"" if [RefDate] evaluates blank
         VAR _Refdate = IF ( ISBLANK ( _Refdate_Measure ), _Today, _Refdate_Measure )
             VAR _RefYear        = YEAR ( _Refdate )
             VAR _RefQuarter     = _RefYear * 100 + QUARTER(_Refdate)
             VAR _RefMonth       = _RefYear * 100 + MONTH(_Refdate)
             VAR _RefWeek_EU     = _RefYear * 100 + WEEKNUM(_Refdate, 2)
         
-        -- 模型范围内的最早日期
+        -- Earliest date in the model scope
         VAR _EarliestDate       = DATE ( YEAR ( MIN ( " + _EarliestDate + @" ) ) - 2, 1, 1 )
         VAR _EarliestDate_Safe  = MIN ( _EarliestDate, DATE ( YEAR ( _Today ) + 1, 1, 1 ) )
         
-        -- 模型范围内的最晚日期
+        -- Latest date in the model scope
         VAR _LatestDate_Safe    = DATE ( YEAR ( _Refdate ) + 2, 12, 1 )
         
         ------------------------------------------
-        -- 基础日历表
+        -- Base calendar table
         VAR _Base_Calendar      = CALENDAR ( _EarliestDate_Safe, _LatestDate_Safe )
         ------------------------------------------
         
@@ -262,7 +262,7 @@ try
         RETURN 
             _Result";
         
-        // 创建日期表
+        // Create date table
         var _date = Model.AddCalculatedTable(
             "Date",
             _DateDaxExpression
@@ -270,39 +270,39 @@ try
         
         //-------------------------------------------------------------------------------------------//
         
-        // 设置排序依据...
+        // Sort by...
         
-        // 排序：星期
+        // Sort Weekdays
         (_date.Columns["Weekday Name (i.e. Monday)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Weekday Number EU (i.e. 1)"] as CalculatedTableColumn);
         (_date.Columns["Weekday Short (i.e. Mon)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Weekday Number EU (i.e. 1)"] as CalculatedTableColumn);
         
-        // 排序：周
+        // Sort Weeks
         (_date.Columns["Calendar Week EU (ie WK25)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Week Number EU (ie 25)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Week ISO (ie WK25)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Week Number ISO (ie 25)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Week US (ie WK25)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Week Number US (ie 25)"] as CalculatedTableColumn);
         
-        // 排序：月
+        // Sort Months
         (_date.Columns["Calendar Month (ie Jan)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Month # (ie 1)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Month Day (i.e. Jan 05)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Month Day (i.e. 0105)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Month Year (ie Jan 21)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Year Month (ie 202101)"] as CalculatedTableColumn);
         
-        // 排序：季度
+        // Sort Quarters
         (_date.Columns["Calendar Quarter Year (ie Q1 2021)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Year Quarter (ie 202101)"] as CalculatedTableColumn);
         
-        // 排序：年
+        // Sort Years
         (_date.Columns["Calendar Year (ie 2021)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Year Number (ie 2021)"] as CalculatedTableColumn);
         
         
         //-------------------------------------------------------------------------------------------//
         
         
-        // 针对日期表中的所有列：
+        // For all the columns in the date table:
         foreach (var c in _date.Columns )
         {
         c.DisplayFolder = "7. Boolean Fields";
         c.IsHidden = true;
         
-        // 将日期表整理到文件夹中
+        // Organize the date table into folders
             if ( ( c.DataType == DataType.DateTime & c.Name.Contains("Date") ) )
                 {
                 c.DisplayFolder = "6. Calendar Date";
@@ -348,17 +348,17 @@ try
         
         }
         
-        // 标记为日期表格
+        // Mark as date table
         _date.DataCategory = "Time";
         
         
         //-------------------------------------------------------------------------------------------//
         
         
-        // 创建 Workdays MTD、QTD、YTD 的逻辑
-        //      (拆分为度量值和计算列，便于维护)
+        // Create Workdays MTD, QTD, YTD logic 
+        //      (separate into measures & calc. column to be easier to maintain)
         //
-        // 添加 Workdays MTD、QTD、YTD 的计算列
+        // Add calculated columns for Workdays MTD, QTD, YTD
         
         string _WorkdaysDax = @"VAR _Holidays =
             CALCULATETABLE (
@@ -410,7 +410,7 @@ try
         //-------------------------------------------------------------------------------------------//
         
         
-        // 创建用于显示已过去多少个工作日的度量值
+        // Create measures for showing how many workdays passed
         _WorkdaysDax = @"CALCULATE(
             MAX( 'Date'[Workdays MTD] ),
             'Date'[IsDateInScope] = TRUE
@@ -434,7 +434,7 @@ try
             "5. Weekday / Workday\\Measures\\# Workdays"
         );
         
-        // 创建用于显示所选期间内包含多少个工作日的度量值
+        // Create measures showing how many workdays are in the selected period
         
         _WorkdaysDax = @"IF (
             HASONEVALUE ('Date'[Calendar Month Year (ie Jan 21)]),
@@ -463,7 +463,7 @@ try
         );
         
         
-        // 创建用于显示已过去工作日占比的度量值
+        // Create measures showing how many workdays passed as a %
         
         _WorkdaysDax = @"IF (
             HASONEVALUE ('Date'[Calendar Month Year (ie Jan 21)]),
@@ -495,7 +495,7 @@ try
         //-------------------------------------------------------------------------------------------//
         
         
-        // 将参考度量值移到新创建的 'Date' 表。
+        // Move the reference measure to the newly created 'Date' table.
         _RefDateMeasure.Delete();
         _RefDateMeasure = Model.Tables["Date"].AddMeasure(
             "RefDate",
@@ -505,24 +505,24 @@ try
         
         _RefDateMeasure.IsHidden = true;
         
-        Info ( "已根据 C# Script 中的模板创建并整理新的 'Date' 表。\n最早日期取自 " + _EarliestDate + "\n最晚日期取自 " + _LatestDate );
+        Info ( "Created a new, organized 'Date' table based on the template in the C# Script.\nThe Earliest Date is taken from " + _EarliestDate + "\nThe Latest Date is taken from " + _LatestDate );
     
         }
         catch
         {
-            Error( "未选择最晚日期列！脚本结束，不做任何更改。" );
+            Error( "Latest column not selected! Ending script without making changes." );
         }
 }
 catch
 {
-    Error( "未选择最早日期列！脚本结束，不做任何更改。" );
+    Error( "Earliest column not selected! Ending script without making changes." );
 }
 
 ```
 
 ### 说明
 
-此代码段会获取你所选的列，并创建一个度量值，用于在 Report 中显示最大日期。 随后会创建一张格式化的 Date 表，其中包含用于制作 Report 的常用列。 该日期表仅包含日历日期，不包含财务期间。
+此代码段会获取你所选的列，并创建一个度量值，用于在 Report 中显示最大日期。 It then creates a formatted Date table with common columns used for reporting. The date table only contains calendar dates and not fiscal periods.
 
 ## 示例输出
 

@@ -55,9 +55,9 @@ Esto se aplica a:
 1. En el **Explorador TOM**, localiza la medida, la columna calculada o el elemento de cálculo
 2. Haz doble clic para abrir el **Editor de DAX**
 3. Introduce una expresión DAX válida
-4. Valida la sintaxis y guarda los cambios
+4. Validate the syntax and save
 
-## Causas comunes
+## Causas habituales
 
 ### Causa 1: Creación incompleta
 
@@ -76,9 +76,9 @@ Copiaste un objeto, pero la expresión no se transfirió.
 ### Antes de la corrección
 
 ```
-Medida: [Total Revenue]
-  Expresión: [empty]
-  FormatString: $#.0,00
+Measure: [Total Revenue]
+  Expression: [empty]
+  FormatString: $#,0.00
 ```
 
 **Error al consultar**: "La expresión de la medida '[Total Revenue]' no es válida."
@@ -86,14 +86,14 @@ Medida: [Total Revenue]
 ### Después de la corrección
 
 ```
-Medida: [Total Revenue]
-  Expresión: SUM('Sales'[Revenue])
-  FormatString: $#.0,00
+Measure: [Total Revenue]
+  Expression: SUM('Sales'[Revenue])
+  FormatString: $#,0.00
 ```
 
 **Resultado**: La medida funciona correctamente y devuelve los ingresos agregados.
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a los modelos con un nivel de compatibilidad **1200** o superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 

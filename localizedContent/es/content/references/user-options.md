@@ -2,7 +2,7 @@
 uid: user-options
 title: Archivo de opciones de usuario (.tmuo)
 author: Daniel Otykier
-updated: 2021-09-27
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,55 +21,169 @@ applies_to:
 
 Tabular Editor 3 presenta un nuevo archivo basado en JSON para almacenar preferencias específicas del desarrollador y del modelo. Este archivo se denomina **Tabular Model User Options** y utiliza la extensión **.tmuo**.
 
-Cuando abras un archivo Model.bim o Database.json en Tabular Editor 3, se creará el archivo con el nombre del archivo que cargaste y tu nombre de usuario de Windows. Por ejemplo, si un usuario abre un archivo llamado `AdventureWorks.bim`, el archivo de opciones de usuario se guardará como `AdventureWorks.<UserName>.tmuo`, donde `<UserName>` es el nombre de usuario de Windows del usuario actual. Tabular Editor busca un archivo con ese nombre cada vez que se carga un modelo desde el disco.
+When you open a model from disk, the file is created next to it, named after it and after your Windows user name. Tabular Editor looks for a file with that name every time a model is loaded from disk.
+
+| What you opened                                                                             | User options file                          |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `SpaceParts.bim`, or any `.bim` / `.pbit` / `database.json` file                            | `SpaceParts.<UserName>.tmuo`, beside it    |
+| A `model.tmdl` or `database.tmdl` file                                                      | `model.<UserName>.tmuo`, beside it         |
+| A folder containing `database.json`                                                         | `database.<UserName>.tmuo`, in that folder |
+| A folder containing Tabular Model Definition Language (TMDL) model files | `model.<UserName>.tmuo`, in that folder    |
+
+TMDL always uses the `model` prefix, for continuity with versions that predate `database.tmdl`.
+
+For a model opened over a connection rather than from disk there is nowhere beside the model to put the file, so it is kept per server and database under `%LocalAppData%\TabularEditor3\UserOptions\`.
+
+Whether the file is created for a new model at all is governed by _Create user options (.tmuo) file_ under @preferences.
 
 > [!IMPORTANT]
 > El archivo **.tmuo** contiene preferencias específicas del usuario y, por lo tanto, no debe incluirse en un entorno compartido de control de versiones. Si usas Git para el control de versiones, asegúrate de incluir la extensión `.tmuo` en tu archivo `.gitignore`.
 
 ## Contenido del archivo
 
-A continuación se muestra un ejemplo del contenido del archivo:
+The file is JSON and every property is optional. Tabular Editor writes one only when there's something to store, so a real file carries a handful of the blocks below rather than all of them. If nothing needs storing, no file is written at all.
+
+A minimal file, for a model that does nothing but connect to a workspace database:
 
 ```json
 {
   "UseWorkspace": true,
-  "WorkspaceConnection": "provider=MSOLAP;data source=localhost",
-  "WorkspaceDatabase": "WorkspaceDB_DanielOtykier_20210904_222118",
-  "DataSourceOverrides": {
-    "SQLDW": {
-      "ConnectionString": {
-        "Encryption": "UserKey",
-        "EncryptedString": "..."
-      },
-      "PrivacySetting": "NA"
-    }
+  "WorkspaceConnection": {
+    "ConnectionString": "data source=localhost",
+    "EncryptedCredentials": "AQAAANCMnd8BFdERjHoAwE..."
   },
-  "TableImportSettings": {
-    "SQLDW": {
-      "ServerType": "Sql",
-      "UserId": "sqladmin",
-      "Password": {
-        "Encryption": "UserKey",
-        "EncryptedString": "..."
-      },
-      "Server": "localhost",
-      "Database": "AdventureWorksDW2019",
-      "Authentication": 0
-    }
+  "WorkspaceDatabase": "WorkspaceDB_MyUser_20260915"
+}
+```
+
+### Top-level properties
+
+| Propiedad                     | Type             | Written when                                                                                                                                             |
+| ----------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `UseWorkspace`                | Boolean          | You've answered the workspace question for this model. While it's absent, Tabular Editor asks each time the model loads. |
+| `WorkspaceConnection`         | String or object | A workspace connection is set. Object form when the connection string carries a password.                                |
+| `WorkspaceConnectionAuthMode` | String           | Legacy, and only when it isn't `Integrated`. The authentication mode is now implied by the connection string.            |
+| `WorkspaceDatabase`           | String           | A workspace database name is set.                                                                                                        |
+| `Deployment`                  | Objeto           | The deployment wizard has run against this model.                                                                                        |
+| `DataSourceOverrides`         | Objeto           | At least one data source override is defined.                                                                                            |
+| `TableImportSettings`         | Objeto           | At least one data source has import settings.                                                                                            |
+| `RefreshOverrides`            | Objeto           | At least one refresh override profile is defined.                                                                                        |
+| `AIConsent`                   | Objeto           | Legacy. Read when present, never written back.                                                                           |
+| `Permissions`                 | Objeto           | At least one per-model AI grant has been given.                                                                                          |
+
+They appear in that order.
+
+### Workspace database
+
+- `UseWorkspace` decides whether Tabular Editor connects to a workspace database when it loads the model. The workspace database is overwritten with the metadata of the loaded file or folder structure.
+- `WorkspaceConnection` is the Analysis Services instance or Power BI XMLA endpoint the workspace database is deployed to.
+- `WorkspaceDatabase` is the name of that database. Make it unique per developer and per model, since the whole point is that each developer gets their own.
+
+### Data source overrides
+
+`DataSourceOverrides` is usedto give the workspace database different connection details from the ones in the model file, so Analysis Services refreshes from somewhere other than what the model says.
+
+| Propiedad           | Type             | Written when                                                                                                                                                                                          |
+| ------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ImpersonationMode` | String           | Not `Default`. One of `Default`, `ImpersonateAccount`, `ImpersonateAnonymous`, `ImpersonateCurrentUser`, `ImpersonateServiceAccount`, `ImpersonateUnattendedAccount`. |
+| `Username`          | String           | Set.                                                                                                                                                                                  |
+| `ConnectionString`  | Encrypted object | Set.                                                                                                                                                                                  |
+| `Password`          | Encrypted object | Set.                                                                                                                                                                                  |
+| `AccountKey`        | Encrypted object | Set. Used for blob storage sources.                                                                                                                                   |
+| `PrivacySetting`    | String           | Set.                                                                                                                                                                                  |
+
+An override whose data source no longer exists in the model is dropped the next time the file is written, and one whose data source was renamed follows the rename.
+
+### Table import settings
+
+`TableImportSettings` is used when you run [Import Table or Schema Update](xref:importing-tables), to browse the available tables and views and to pick up source schema changes.
+
+| Propiedad                             | Type              | Written when                                                                                                                                                                                                        |
+| ------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ServerType`                          | String            | Always. One of `Sql`, `Oracle`, `Odbc`, `OleDb`, `Snowflake`, `Dataflow`, `PostgreSql`, `MySql`, `MariaDb`, `Db2`, `Databricks`, `OneLake`.                                         |
+| `Options`                             | Object of strings | The bag isn't empty.                                                                                                                                                                                |
+| `UserId`                              | String            | Set.                                                                                                                                                                                                |
+| `Password`                            | Encrypted object  | Set, _and_ you chose to save it.                                                                                                                                                                    |
+| `Provider`                            | String            | `ServerType` is `OleDb`.                                                                                                                                                                            |
+| `PasswordKey`, `UserIdKey`            | String            | `ServerType` is `OleDb` and the corresponding value is set.                                                                                                                                         |
+| `Server`                              | String            | `ServerType` isn't `Odbc`, and it's set.                                                                                                                                                            |
+| `ServerKey`, `DatabaseKey`            | String            | `ServerType` isn't `Sql`, and the value is set.                                                                                                                                                     |
+| `Database`                            | String            | Set.                                                                                                                                                                                                |
+| `Authentication`                      | String            | `ServerType` is `Sql`, `OleDb` or `Databricks`. One of `Sql`, `WindowsIntegrated`, `AadInteractive`, `AadPassword`, `AadIntegrated`, `AadServicePrincipal`, `AccessToken`, `OAuth`. |
+| `Encrypt`                             | Boolean           | Set either way.                                                                                                                                                                                     |
+| `Dsn`                                 | String            | Set. Used for ODBC.                                                                                                                                                                 |
+| `RowLimitClause`, `IdentifierQuoting` | Number            | Not at their defaults.                                                                                                                                                                              |
+| `Schema`                              | String            | Set.                                                                                                                                                                                                |
+
+`Options` is where anything specific to one provider ends up, as plain strings: a Snowflake warehouse is `Options.warehouse`, a OneLake workspace is `Options.workspaceid`. The `…Key` properties are the _names_ of connection string keys, such as `PWD`, not secrets.
+
+`Password` is the only encrypted value here. `UserId`, `Server`, `Database`, `Dsn` and everything in `Options` are stored as plain text, so treat the file as sensitive even when it holds no password. A Power BI access token is stored as `Password`, and is encrypted.
+
+### Implementación
+
+`Deployment` holds what the deployment wizard last used for this model. The six Boolean options are always written once the block exists, whether they're true or false:
+
+| Propiedad                       | Type             | Written when                                                                                                        |
+| ------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `DeployDataSources`             | Boolean          | Siempre                                                                                                             |
+| `DeployPartitions`              | Boolean          | Siempre                                                                                                             |
+| `DeployRefreshPolicyPartitions` | Boolean          | Siempre                                                                                                             |
+| `DeployModelRoles`              | Boolean          | Siempre                                                                                                             |
+| `DeployModelRoleMembers`        | Boolean          | Siempre                                                                                                             |
+| `DeploySharedExpressions`       | Boolean          | Siempre                                                                                                             |
+| `TargetConnectionString`        | String or object | Always, `null` if unset. Object form when the connection string carries a password. |
+| `TargetDatabase`                | String           | Always, `null` if unset.                                                                            |
+| `TargetCredentials`             | Objeto           | Both a user name and a password are set.                                                            |
+
+### Refresh overrides
+
+`RefreshOverrides` is keyed by profile name, and that key is the only place the name is stored. Each profile holds a single `Overrides` array describing what the profile changes when it runs. See @refresh-overrides for what the profiles do and how to define them.
+
+```json
+"RefreshOverrides": {
+  "Nightly": {
+    "Overrides": [
+      {
+        "scope": { "table": "Sales" },
+        "partitions": [
+          {
+            "originalObject": { "table": "Sales", "partition": "Sales-2025" },
+            "source": { "query": "SELECT * FROM dbo.FactSales WHERE Year = 2025" }
+          }
+        ]
+      }
+    ]
   }
 }
 ```
 
-En este ejemplo, las propiedades JSON mostradas tienen el siguiente significado:
+### Per-model AI permissions
 
-- `UseWorkspace`: Indica si Tabular Editor debe conectarse a una base de datos del Workspace al cargar el modelo. La base de datos del Workspace se sobrescribirá con los metadatos del archivo cargado o de la estructura de carpetas cargada. Si este valor no está presente, Tabular Editor te preguntará al cargar el modelo si quieres usar una base de datos del Workspace.
-- `WorkspaceConnection`: Nombre del servidor de la instancia de Analysis Services o del punto de conexión XMLA de Power BI en el que se implementará la base de datos del Workspace.
-- `WorkspaceDatabase`: Nombre de la base de datos del Workspace que se va a implementar. Lo ideal es que sea único para cada desarrollador y modelo.
-- `DataSourceOverrides`: Esta estructura puede usarse para especificar propiedades y credenciales alternativas del Data source, que se utilizarán cada vez que se implemente la base de datos del Workspace. Esto es útil si el archivo Model.bim incluye detalles de conexión del Data source que desea sobrescribir para la base de datos de su Workspace; por ejemplo, cuando desea que Analysis Services actualice los datos desde un origen distinto del especificado en el archivo Model.bim.
-- `TableImportSettings`: Esta estructura se usa cada vez que se utiliza la funcionalidad [Importar tabla o actualizar esquema](xref:importing-tables) de Tabular Editor. Tabular Editor utiliza las credenciales y la configuración especificadas aquí al establecer una conexión con el origen para explorar las tablas y vistas disponibles, y actualizar el esquema de la tabla importada cuando se hayan realizado cambios en el origen.
+`Permissions` records the AI permission grants that apply to this model alone, written when you answer **Allow for this model** on a permission card in the @ai-assistant.
 
-Todas las credenciales y cadenas de conexión del archivo .tmuo se cifran con la clave de usuario de Windows. En otras palabras, un archivo .tmuo que contiene datos cifrados no se puede compartir entre varios usuarios.
+```json
+"Permissions": {
+  "Grants": { "ModelMetadata": "Write", "ModelData": "Read" },
+  "LastGrantedAt": "2026-09-15T08:12:44.117Z"
+}
+```
 
-## Siguientes pasos
+`Grants` carries one entry per resource you've granted: `ModelMetadata`, `ModelData`, `Bpa`, `Documents` or `Macros`, each set to `Deny`, `Read` or `Write`. These raise your standing grant for the chat while this model is open. The MCP server reads the global grants only, so nothing here reaches it.
+
+### How credentials are encrypted
+
+Everything sensitive is encrypted with the Windows Data Protection API under your own user account, so a file containing encrypted data can't be shared with another user or moved to another machine. Three shapes appear, depending on what's being protected:
+
+A connection string with no password in it isn't encrypted at all and stays a plain JSON string, which is why `WorkspaceConnection` appears both ways in practice.
+
+If a value can't be decrypted, for instance because the file came from another user, the value is read as empty rather than failing the load.
+
+## When the file cannot be read
+
+A model opens with or without a `.tmuo` file.
+
+If the file cannot be deserialized, for instance because it was hand-edited into invalid JSON, Tabular Editor shows a warning titled _Error loading User Options file (.tmuo)_ carrying the underlying error, and then opens the model with default options. Nothing is lost from the model itself; you lose the settings the file held, and the next save writes a fresh one.
+
+## Pasos a seguir
 
 - @Workspace-mode

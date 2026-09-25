@@ -11,7 +11,7 @@ applies_to:
 
 # 编辑属性
 
-屏幕右下角的“属性网格”会显示资源管理器树中所选对象(们)的大多数属性。 如果你一次选择多个对象，“属性网格”可让你同时编辑这些对象的属性。 例如在设置“格式字符串”属性时，这会很有用。 你可以通过“属性网格”设置的属性示例：
+The Property Grid on the lower right side of the screen, shows most of the properties for the object(s) selected in the Explorer Tree. If you select multiple objects at once, the Property Grid lets you simultaneously edit properties for the selected objects. This is useful for example when setting the Format String property. Examples of properties you can set through the Property Grid:
 
 - 名称（在资源管理器树中按 F2 可直接重命名对象）
 - 描述

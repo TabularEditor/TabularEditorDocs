@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-09-14
 ---
 
 # Tabular Editor
@@ -16,11 +16,11 @@ Tabular Editor 是一款工具，可让你在 Analysis Services 表格和 Power 
 
 ## 文档
 
-本网站包含两个版本的文档。 请在屏幕顶部的导航栏中选择你的版本，以查看对应产品的专属文档。
+本网站包含两个版本的文档。 Select your version in the navigation bar at the top of the screen for product specific documentation.
 
 ## 如何在 TE3 和 TE2 之间做选择
 
-Tabular Editor 3 是 Tabular Editor 2 的演进版本。 它专为那些在 Tabular 数据建模与开发中寻求“一款工具搞定一切”解决方案的用户而设计。
+Tabular Editor 3 是 Tabular Editor 2 的演进版本。 It has been designed for those who seek a "one-tool-to-rule-them-all" solution for Tabular data modeling and development.
 
 ### [Tabular Editor 3](#tab/TE3)
 
@@ -51,7 +51,7 @@ Tabular Editor 3 是一款更高级的应用，提供高端体验和众多便捷
 
 ### [Tabular Editor 2.x](#tab/TE2)
 
-Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Services 或 Power BI 数据模型的 TOM（Tabular Object Model）。 该工具最初于 2016 年发布，并会定期更新和修复缺陷。
+Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Services 或 Power BI 数据模型的 TOM（Tabular Object Model）。 The tool was originally released in 2016 and receives regular updates and bugfixes.
 
 ![Tabular Editor 2.x](assets/images/te2.png)
 
@@ -77,9 +77,9 @@ Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Ser
 
 ### 常见功能
 
-在可用的数据建模选项方面，两款工具提供的功能相同：它们通过直观且响应迅速的用户界面，基本上公开了 [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 的所有对象和属性。 你可以编辑标准工具中无法设置的高级对象属性。 这些工具可以从文件或任何 Analysis Services 实例中加载模型元数据。 更改只会在你按下 Ctrl+S（保存）时才会同步，从而带来一种“离线”编辑体验；大多数人认为这比标准工具的“始终同步”模式更好。 在处理大型且复杂的数据模型时，这一点尤为明显。
+在可用的数据建模选项方面，两款工具提供的功能相同：它们通过直观且响应迅速的用户界面，基本上公开了 [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 的所有对象和属性。 You can edit advanced object properties that are not available through the standard tools. The tools can load model metadata from files or from any instance of Analysis Services. Changes are only synchronized when you hit Ctrl+S (save) thus providing an "offline" editing experience which most people consider to be superior to the "always synchronized"-mode of the standard tools. This is especially noticeable when working on large and complex data models.
 
-此外，两款工具都支持批量修改模型元数据、批量重命名对象、复制/粘贴对象，以及在表和显示文件夹之间拖放对象等。 这些工具甚至支持撤消/重做。
+此外，两款工具都支持批量修改模型元数据、批量重命名对象、复制/粘贴对象，以及在表和显示文件夹之间拖放对象等。 The tools even have undo/redo support.
 
 两款工具都提供 Best Practice Analyzer，它会持续扫描模型元数据，并按你自行定义的规则进行检查，例如强制特定的命名规范、确保非维度属性列始终隐藏等。
 
@@ -89,11 +89,11 @@ Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Ser
 
 ## 结论
 
-如果你刚开始接触表格建模，我们建议你先使用标准工具，等你熟悉计算表格、度量值、关系、DAX 等概念后再进一步尝试。 到那时，不妨试用一下 Tabular Editor 2.x，看看它能让你完成某些任务快上多少。 如果你喜欢，并且还想要更多功能，可以考虑 Tabular Editor 3.x！
+If you are new to tabular modeling in general, we recommend that you use the standard tools until you familiarize yourself with concepts such as calculated tables, measures, relationships, DAX, etc. At that point, try to give Tabular Editor 2.x a spin, and see how much faster it enables you to achieve certain tasks. If you like it and want more, consider Tabular Editor 3.x!
 
 ## 后续步骤
 
 - [开始使用 Tabular Editor 2](xref:getting-started-te2)
-- [开始使用 Tabular Editor 3](xref:getting-started)
+- [Install and activate Tabular Editor 3](xref:getting-started)
 - [Tabular Editor 3 路线图](xref:roadmap)
 

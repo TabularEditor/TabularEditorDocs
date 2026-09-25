@@ -1,7 +1,7 @@
 # Tabular Editor 3 BETA-18.3
 
-> [!IMPORTANT]
-> Hay disponible una versión más reciente de Tabular Editor. Puedes encontrar la versión más reciente [aquí](https://docs.tabulareditor.com/references/release-notes).
+> [!IMPORTANTE]
+> Hay disponible una versión más reciente de Tabular Editor. Puedes encontrar la última versión [aquí](https://docs.tabulareditor.com/references/release-notes).
 
 - Descargar [Tabular Editor 3 BETA-18.3](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.3.x86.msi)
 - Descargar [Tabular Editor 3 BETA-18.3 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.3.x64.msi)
@@ -38,7 +38,7 @@ Un dato poco conocido sobre el motor de Analysis Services es que, en realidad, e
 
 Así que, para detectar cambios de esquema en particiones de Power Query, Tabular Editor 3 ahora agregará una tabla temporal oculta al modelo y la rellenará mediante la función M [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema) sobre la consulta de origen cuyo esquema queremos detectar. Luego, esa tabla temporal se actualiza en el servidor (usando las credenciales que ya están presentes en el servidor para acceder al Data source). Esta actualización solo tarda una fracción de segundo, gracias al plegado de consultas que ocurre dentro del motor M. Por último, Tabular Editor consultará la tabla para leer el esquema, antes de revertir toda la transacción. El resultado:
 
-![imagen](~/content/assets/images/beta-18-3-01.gif)
+![image](~/content/assets/images/beta-18-3-01.gif)
 
 La única salvedad, por supuesto, es que Tabular Editor 3 tiene que estar conectado a una instancia de Analysis Services, pero no importa si el modelo con el que estás trabajando contiene datos o no, siempre que las credenciales de los Data sources estén almacenadas en AS (y que AS pueda acceder realmente al Data source). Esta técnica es especialmente útil si usas el [modo del área de trabajo](https://docs.tabulareditor.com/Workspace-Database.html) de Tabular Editor 3.
 

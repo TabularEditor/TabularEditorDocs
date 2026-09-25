@@ -13,41 +13,41 @@ applies_to:
 
 # Mostrar las dependencias del origen de datos
 
-## Propósito del script
+## Objetivo del script
 
 El script devuelve las tablas que hacen referencia al origen de datos explícito (heredado) seleccionado. Esto facilita determinar dónde se utiliza el origen de datos seleccionado.
 
-## Secuencia de comandos
+## Script
 
 ### Mostrar las dependencias del origen de datos
 
 ```csharp
-//El script devuelve las tablas que hacen referencia al origen de datos explícito (heredado) seleccionado.
+//The script outputs the tables that reference the selected explicit (legacy) data source.
 if (Model.DataSources.Count == 0)
 {
-    Info("Este modelo no contiene ningún origen de datos; está vacío o usa orígenes de datos implícitos");
+    Info("This model doesn't contain any data sources, it is either empty or using implicit datasources");
     return;
 }
-// Comprueba que se haya seleccionado un origen de datos
+// Checks that a data source is selected
 DataSource selectedDatasource = null;
 
 if (Selected.DataSources.Count == 1)
     selectedDatasource = Selected.DataSource;
 else
-    selectedDatasource = SelectObject<DataSource>(Model.DataSources, null, "Selecciona el origen de datos del que quieres ver las dependencias");
+    selectedDatasource = SelectObject<DataSource>(Model.DataSources, null, "Select which datasource to see dependencies for");
 
-// Orígenes heredados
+// Legacy sources
 var legacyTables = Model.Tables.Where(t => t.Source == selectedDatasource.Name).ToList();
 
-// Orígenes M
+// M sources
 var mTables = Model.Tables.Where(t => t.Partitions.Any(p => p.Expression.Contains($"= #\"{selectedDatasource.Name}\","))).ToList();
 
-// unir listas
+// join arrays
 var allTables = legacyTables.Union(mTables).OrderBy(t => t.Name);
 
-// Mostrar el resultado
+// Present result
 var tableString = string.Join("\r\n", allTables.Select(t => t.Name));
-Info($"El origen de datos {selectedDatasource.Name} se usa en las siguientes tablas:\r\n" + tableString);
+Info($"Datasource {selectedDatasource.Name} is referenced from the following tables:\r\n" + tableString);
 ```
 
 ### Explicación

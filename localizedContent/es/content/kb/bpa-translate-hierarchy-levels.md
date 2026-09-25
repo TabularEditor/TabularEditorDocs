@@ -8,12 +8,12 @@ description: Regla de buenas prácticas que garantiza que los nombres de los niv
 
 # Traducir los nombres de los niveles de jerarquía para todas las configuraciones regionales
 
-## Descripción general
+## Resumen
 
 Esta regla identifica niveles de jerarquía en jerarquías visibles cuyos nombres carecen de traducciones para una o varias configuraciones regionales.
 
 - Categoría: Diseño del modelo
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -40,23 +40,23 @@ Hierarchy.IsVisible
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## Cómo solucionarlo
+## Cómo corregir
 
-### Solución manual
+### Corrección manual
 
 1. En el **Explorador TOM**, selecciona el nivel
-2. En el panel **Propiedades**, expande **Nombres traducidos**
-3. Introduce la traducción para cada configuración regional
+2. En el panel de **Propiedades**, expande **Nombres traducidos**
+3. Introduce la traducción de cada configuración regional
 
-## Causas habituales
+## Causas comunes
 
 ### Causa 1: Se añadieron nuevos niveles
 
 Niveles creados sin traducción.
 
-### Causa 2: La configuración regional se añadió más tarde
+### Causa 2: Configuración regional agregada más tarde
 
-Se agregó la configuración regional después de crear la jerarquía.
+Culture added after hierarchy was created.
 
 ### Causa 3: Traducción incompleta
 
@@ -64,22 +64,22 @@ El proceso de traducción no cubrió todos los niveles de la jerarquía.
 
 ## Ejemplo
 
-### Antes de corregir
+### Antes de la solución
 
 ```
-Jerarquía: Geografía
-  Nivel: País
-    Inglés: "Country"
-    Español: (sin traducir)
+Hierarchy: Geography
+  Level: Country
+    English: "Country"
+    Spanish: (missing)
 ```
 
 ### Después de corregir
 
 ```
-Jerarquía: Geografía
-  Nivel: País
-    Inglés: "Country"
-    Español: "País"
+Hierarchy: Geography
+  Level: Country
+    English: "Country"
+    Spanish: "País"
 ```
 
 ## Nivel de compatibilidad

@@ -8,7 +8,7 @@ description: Regla de buenas prácticas que garantiza que tu modelo incluya una 
 
 # Debe existir una tabla de fechas
 
-## Descripción general
+## Resumen
 
 Esta regla de buenas prácticas verifica que tu modelo tabular contenga al menos una tabla de fechas configurada correctamente. Las tablas de fechas son esenciales para los cálculos de inteligencia temporal y para garantizar un filtrado coherente basado en fechas en todo tu modelo.
 
@@ -41,7 +41,7 @@ La regla se activa cuando **todas** las tablas de tu modelo cumplen las siguient
 
 Esto indica que al modelo le falta una dimensión de fechas adecuada.
 
-## Cómo solucionarlo
+## Cómo corregir
 
 ### Opción 1: Crear una tabla de fechas con DAX
 
@@ -87,8 +87,8 @@ Una estructura típica de tabla de fechas:
 
 | Fecha                                               | Año                                                 | Trimestre                                           | Mes                                                 | Número de mes                                       | Día                                                 |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| 2025-01-01                                          | 2025                                                | Q1                                                  | Enero                                               | 1                                                   | 1                                                   |
-| 2025-01-02                                          | 2025                                                | Q1                                                  | Enero                                               | 1                                                   | 2                                                   |
+| 2025-01-01                                          | 2025                                                | Q1                                                  | January                                             | 1                                                   | 1                                                   |
+| 2025-01-02                                          | 2025                                                | Q1                                                  | January                                             | 1                                                   | 2                                                   |
 | ... | ... | ... | ... | ... | ... |
 
 Una vez creada, establezca las relaciones:
@@ -100,7 +100,7 @@ Una vez creada, establezca las relaciones:
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
 ## Reglas relacionadas
 

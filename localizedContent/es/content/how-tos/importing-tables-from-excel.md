@@ -17,9 +17,9 @@ Tabular Editor 2.x es una aplicación de 32 bits, y la mayoría de la gente suel
 2. Descomprime el archivo AccessDatabaseEngine.exe
 3. Dentro encontrarás el archivo aceredist.msi, que debe ejecutarse desde la línea de comandos con el modificador /passive:
 
-  ```shell
-  aceredist.msi /passive
-  ```
+```shell
+aceredist.msi /passive
+```
 
 4. Confirma la instalación en la configuración de ODBC Data source (32 bits) (botón Inicio de Windows, busca "ODBC"; la plataforma debe indicar "32/64 bit", como en la captura de pantalla siguiente):
    ![ODBC de Excel 32/64](~/content/assets/images/excel-odbc-32-64.png)
@@ -34,9 +34,9 @@ Después de asegurarte de que tienes instalado el controlador ODBC de Excel de 3
    ![Propiedades de conexión Odbc de Excel](~/content/assets/images/odbc-connection-properties-excel.png)
 4. Busca el archivo de Excel del que quieres cargar las tablas y pulsa "Aceptar". Esto debería generar una cadena de conexión parecida a esta:
 
-  ```connectionstring
-  Dsn=Excel Files;dbq=C:\Users\DanielOtykier\Documents\A Beer Dataset Calculation.xlsx;defaultdir=C:\Users\DanielOtykier\Documents;driverid=1046;maxbuffersize=2048;pagetimeout=5
-  ```
+```connectionstring
+Dsn=Excel Files;dbq=C:\Users\DanielOtykier\Documents\A Beer Dataset Calculation.xlsx;defaultdir=C:\Users\DanielOtykier\Documents;driverid=1046;maxbuffersize=2048;pagetimeout=5
+```
 
 5. Después de hacer clic en "OK", Tabular Editor debería mostrar la lista de hojas de cálculo y áreas de datos del archivo de Excel. Lamentablemente, el Asistente para importar tablas no puede previsualizar los datos en este momento, porque genera una instrucción SQL no válida:
    ![Import Tables Excel](~/content/assets/images/import-tables-excel.png)
@@ -47,14 +47,14 @@ Después de asegurarte de que tienes instalado el controlador ODBC de Excel de 3
    ![Refresh Metadata Excel](~/content/assets/images/refresh-metadata-excel.png)
 9. (Opcional) Si no quieres usar ODBC para actualizar los datos en la tabla, tienes que sustituir la partición para usar una expresión basada en M que cargue los mismos datos de la hoja de cálculo. Para ello, agrega una nueva partición de Power Query a la tabla (haz clic con el botón derecho en "Partitions" y elige "New Partition (Power Query")). Elimina la partición heredada. A continuación, establece la expresión M de la nueva partición como sigue:
 
-  ```M
-  let
-      Source = Excel.Workbook(File.Contents("<excel file path>"), null, true),
-      Customer_Sheet = Source{[Item="<sheet name>",Kind="Sheet"]}[Data],
-      #"Promoted Headers" = Table.PromoteHeaders(Customer_Sheet, [PromoteAllScalars=true])
-  in
-      #"Promoted Headers"
-  ```
+```M
+let
+    Source = Excel.Workbook(File.Contents("<excel file path>"), null, true),
+    Customer_Sheet = Source{[Item="<sheet name>",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Customer_Sheet, [PromoteAllScalars=true])
+in
+    #"Promoted Headers"
+```
 
 Sustituye los marcadores de posición `<excel file path>` y `<sheet name>` por sus valores reales.
 

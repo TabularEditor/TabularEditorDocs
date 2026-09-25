@@ -8,7 +8,7 @@ description: Regla de mejores prácticas que evita agregaciones predeterminadas 
 
 # Establece SummarizeBy en None para columnas numéricas
 
-## Descripción general
+## Resumen
 
 Esta regla de mejores prácticas identifica las columnas numéricas visibles (Int64, Decimal, Double) cuyo comportamiento de agregación predeterminado (`SummarizeBy`) es distinto de `None`. La mayoría de las columnas numéricas no deberían agregarse automáticamente, ya que sumar valores como IDs, cantidades en contextos no aditivos o códigos produce resultados sin sentido.
 

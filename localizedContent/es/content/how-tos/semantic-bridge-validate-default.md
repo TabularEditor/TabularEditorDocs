@@ -20,38 +20,38 @@ applies_to:
 
 # Validar una vista de métricas con las reglas predeterminadas
 
-Esta guía muestra cómo validar una vista de métricas cargada con las reglas de validación integradas e interpretar los mensajes de diagnóstico.
+This how-to demonstrates validating a loaded Metric View using the built-in validation rules and interpreting the diagnostic messages.
 
 > [!NOTE]
-> Estas guías están dirigidas a Tabular Editor 3.26.2 y versiones posteriores.
-> Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Reglas de validación predeterminadas
 
-El Semantic Bridge incluye reglas integradas que validan la definición de una vista de métricas según las reglas establecidas en [la documentación de Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/).
-Estas reglas se ejecutan automáticamente durante la deserialización, ya sea llamando directamente a `Deserialize` o mediante cualquier método que lea una vista de métricas, como `Load` o `ImportToTabularFromFile`.
-Los diagnósticos de esas ejecuciones automáticas siguen estando disponibles después, a través de `SemanticBridge.MetricView.ImportDiagnostics`.
-También puedes ejecutar estas reglas a demanda sobre la vista de métricas cargada, que es lo que se describe en este documento.
+The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/).
+These rules are automatically run upon deserialization, whether via `Deserialize` directly or any method that reads a Metric View, such as `Load` or `ImportToTabularFromFile`.
+Diagnostics from those automatic runs remain available afterward through `SemanticBridge.MetricView.ImportDiagnostics`.
+You can also run these rules on demand against the loaded Metric View, which this document covers.
 
 ## Ejecutar la validación con las reglas predeterminadas
 
-Ejecuta [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) sin argumentos para aplicar las reglas integradas a la vista de métricas cargada.
+Run [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) with no arguments to run the built-in rules against the loaded Metric View.
 
 ```csharp {run id=validate-count setup=mv-sample after=none output=true}
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
-Output($"Validación completada: se encontraron {diagnostics.Count} problema(s)");
+Output($"Validation complete: {diagnostics.Count} issue(s) found");
 ```
 
 **Salida**
 
 ```
-Validación completada: se han encontrado 0 problema(s)
+Validation complete: 0 issue(s) found
 ```
 
-La vista de métricas de ejemplo es válida, por lo que el Report no indica ningún problema.
+The sample Metric View is valid, so this reports no issues.
 
 ## Interpreta los mensajes de diagnóstico
 
@@ -65,20 +65,20 @@ Cada mensaje de diagnóstico contiene:
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("RESULTADOS DE LA VALIDACIÓN");
+sb.AppendLine("VALIDATION RESULTS");
 sb.AppendLine("------------------");
 sb.AppendLine("");
 
 if (diagnostics.Count == 0)
 {
-    sb.AppendLine("No se encontraron problemas.");
+    sb.AppendLine("No issues found.");
 }
 else
 {
     foreach (var diag in diagnostics)
     {
         sb.AppendLine($"[{diag.Severity}] {diag.Message}");
-        sb.AppendLine($"  Ruta: {diag.Path}");
+        sb.AppendLine($"  Path: {diag.Path}");
         sb.AppendLine("");
     }
 }
@@ -89,16 +89,16 @@ Output(sb.ToString());
 **Salida**
 
 ```
-RESULTADOS DE LA VALIDACIÓN
+VALIDATION RESULTS
 ------------------
 
-No se encontraron problemas.
+No issues found.
 ```
 
-## Ejemplo con un error de validación
+## Example with a validation error
 
-La validación siempre se ejecuta sobre la vista de métricas cargada en ese momento, por lo que puedes introducir una infracción en un script y ver cómo se detecta.
-Aquí vaciamos la expresión de un campo para desencadenar `FieldExprRequired`:
+Validation always runs against the currently loaded Metric View, so you can introduce a violation in a script and see it caught.
+Here we clear a field's expression to trigger `FieldExprRequired`:
 
 ```csharp {run id=error-example setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -107,20 +107,20 @@ view.Fields["order_year"].Expr = "";
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("RESULTADOS DE LA VALIDACIÓN");
+sb.AppendLine("VALIDATION RESULTS");
 sb.AppendLine("------------------");
 sb.AppendLine("");
 
 if (diagnostics.Count == 0)
 {
-    sb.AppendLine("No se encontraron problemas.");
+    sb.AppendLine("No issues found.");
 }
 else
 {
     foreach (var diag in diagnostics)
     {
         sb.AppendLine($"[{diag.Severity}] {diag.Message}");
-        sb.AppendLine($"  Ruta: {diag.Path}");
+        sb.AppendLine($"  Path: {diag.Path}");
         sb.AppendLine("");
     }
 }
@@ -131,11 +131,11 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-RESULTADOS DE LA VALIDACIÓN
+VALIDATION RESULTS
 ------------------
 
-[Error] La expresión del campo 'order_year' no puede estar vacía
-  Ruta: Model.Fields["order_year"].Expr
+[Error] Field 'order_year' expr cannot be empty
+  Path: Model.Fields["order_year"].Expr
 ```
 
 ## Filtrar diagnósticos por gravedad
@@ -150,22 +150,22 @@ var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 var errors = diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Errores: {errors.Count}");
-sb.AppendLine($"Total de problemas: {diagnostics.Count}");
+sb.AppendLine($"Errors: {errors.Count}");
+sb.AppendLine($"Total issues: {diagnostics.Count}");
 Output(sb.ToString());
 ```
 
 **Salida**
 
 ```
-Errores: 0
-Problemas totales: 0
+Errors: 0
+Total issues: 0
 ```
 
-## Siguientes pasos
+## Pasos a seguir
 
-- [Crear reglas de validación sencillas](xref:semantic-bridge-validate-simple-rules)
-- [Crear reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules)
+- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules)
+- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
 
 ## Ver también
 

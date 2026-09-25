@@ -8,7 +8,7 @@ description: Regla de prácticas recomendadas que evita problemas de visualizaci
 
 # Evitar caracteres no válidos en las descripciones
 
-## Información general
+## Resumen
 
 Esta regla de buenas prácticas identifica objetos cuyas descripciones contienen caracteres de control no válidos (caracteres no imprimibles, excepto los espacios en blanco estándar). Estos caracteres pueden provocar problemas de visualización, corrupción de metadatos y fallos de implementación.
 
@@ -52,9 +52,9 @@ La regla se activa cuando la descripción de un objeto contiene caracteres de co
 Description.ToCharArray().Any(char.IsControl(it) and !char.IsWhiteSpace(it))
 ```
 
-Esto detecta caracteres problemáticos y, al mismo tiempo, permite el espaciado legítimo.
+Esto detecta caracteres problemáticos y, a la vez, permite un formato de espacio en blanco válido.
 
-## Cómo corregirlo
+## Cómo corregir
 
 ### Corrección automática
 
@@ -68,9 +68,9 @@ Description = string.Concat(
 )
 ```
 
-Para aplicarlo:
+Para aplicarla:
 
-1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+1. En **Best Practice Analyzer**, selecciona los objetos marcados
 2. Haz clic en **Aplicar corrección**
 
 ### Corrección manual
@@ -80,7 +80,7 @@ Para aplicarlo:
 3. Edita la descripción para eliminar los caracteres no válidos
 4. Guarda los cambios
 
-## Causas comunes
+## Causas habituales
 
 ### Causa 1: Copiar y pegar desde texto enriquecido
 
@@ -92,15 +92,15 @@ Los scripts que generan descripciones pueden incluir caracteres de control proce
 
 ### Causa 3: Importación de datos desde orígenes externos
 
-La importación de metadatos que contienen artefactos de codificación o códigos de control.
+Importación de metadatos que contienen artefactos de codificación o códigos de control.
 
 ## Ejemplo
 
 ### Antes de la corrección
 
 ```
-Medida: [Total Revenue]
-Descripción: "Calcula\x00ingresos\x0Btotales"  (contiene NULL y tabulación vertical)
+Measure: [Total Revenue]
+Description: "Calculates\x00total\x0Brevenue"  (contains NULL and vertical tab)
 ```
 
 La información sobre herramientas muestra: "Calcula□los□ingresos totales" (con corrupción visible)
@@ -108,15 +108,15 @@ La información sobre herramientas muestra: "Calcula□los□ingresos totales" (
 ### Después de la corrección
 
 ```
-Medida: [Total Revenue]
-Descripción: "Calcula los ingresos totales"  (los caracteres de control se sustituyen por espacios)
+Measure: [Total Revenue]
+Description: "Calculates total revenue"  (control characters replaced with spaces)
 ```
 
 El tooltip se muestra correctamente: "Calcula los ingresos totales"
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a los modelos con nivel de compatibilidad **1200** y superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
 ## Reglas relacionadas
 

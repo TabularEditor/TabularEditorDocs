@@ -8,12 +8,12 @@ description: Regla de buenas prácticas que garantiza que los nombres visibles d
 
 # Traducir los nombres visibles de los objetos en todas las configuraciones regionales
 
-## Descripción general
+## Resumen
 
 Esta regla identifica objetos visibles cuyos nombres no tienen traducción para una o más configuraciones regionales definidas en el modelo.
 
 - Categoría: Diseño del modelo
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -46,7 +46,7 @@ IsVisible
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## Cómo corregirlo
+## Cómo corregir
 
 ### Corrección manual
 
@@ -55,7 +55,7 @@ and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 3. Introduce la traducción de cada configuración regional
 4. Guarda los cambios
 
-## Causas habituales
+## Causas comunes
 
 ### Causa 1: Se agregaron objetos nuevos
 
@@ -71,27 +71,27 @@ El flujo de trabajo de traducción no cubrió todos los objetos.
 
 ## Ejemplo
 
-### Antes de la corrección
+### Antes de la solución
 
 ```
-Medida: [Total Sales]
-Inglés: "Total Sales"
-Español: (falta)
-Francés: (falta)
+Measure: [Total Sales]
+English: "Total Sales"
+Spanish: (missing)
+French: (missing)
 ```
 
-### Después de la corrección
+### Después de corregir
 
 ```
-Medida: [Total Sales]
-Inglés: "Total Sales"
-Español: "Total de Ventas"
-Francés: "Total des Ventes"
+Measure: [Total Sales]
+English: "Total Sales"
+Spanish: "Total de Ventas"
+French: "Total des Ventes"
 ```
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
 ## Reglas relacionadas
 

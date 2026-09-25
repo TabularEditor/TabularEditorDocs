@@ -14,7 +14,7 @@ Esta regla de buenas prácticas identifica tablas, columnas, medidas, grupos de 
 
 - Categoría: **Mantenimiento**
 
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -52,9 +52,9 @@ IsHidden == false
 
 **Nota**: Se excluyen los objetos ocultos porque no están pensados para el consumo de los usuarios finales.
 
-## Cómo solucionarlo
+## Cómo corregir
 
-### Solución manual
+### Corrección manual
 
 1. En el **Explorador TOM**, selecciona el objeto
 2. En el panel de **Propiedades**, localiza el campo **Descripción**
@@ -80,8 +80,8 @@ Modelos antiguos creados antes de que se establecieran los estándares de descri
 ### Antes de la solución
 
 ```
-Medida: [Total Revenue]
-Descripción: (vacía)
+Measure: [Total Revenue]
+Description: (empty)
 ```
 
 **Experiencia de usuario**: La información sobre herramientas no muestra información; los usuarios deben adivinar para qué sirve la medida.
@@ -89,8 +89,8 @@ Descripción: (vacía)
 ### Después de la corrección
 
 ```
-Medida: [Total Revenue]
-Descripción: "Ingresos totales excluyendo impuestos y descuentos. Se calcula como SUM(Sales[UnitPrice] * Sales[Quantity]). Úsela para informes financieros."
+Measure: [Total Revenue]
+Description: "Total revenue excluding taxes and discounts. Calculated as SUM(Sales[UnitPrice] * Sales[Quantity]). Use for financial reporting."
 ```
 
 **Experiencia de usuario**: Una información sobre herramientas clara ayuda a los usuarios a comprender y a usar correctamente la medida.

@@ -8,9 +8,9 @@ description: 这条最佳实践规则通过识别对象名称中的控制字符�
 
 # 避免在对象名称中使用无效字符
 
-## 概述
+## 概览
 
-这条最佳实践规则用于识别名称中包含无效控制字符的对象（即不包括标准空白字符的不可打印字符）。 这些字符可能导致部署失败、呈现问题以及数据损坏。
+这条最佳实践规则用于识别名称中包含无效控制字符的对象（即不包括标准空白字符的不可打印字符）。 These characters can cause deployment failures, rendering issues, and data corruption.
 
 - 类别：错误预防
 - 严重性：高（3）
@@ -31,7 +31,7 @@ description: 这条最佳实践规则通过识别对象名称中的控制字符�
 - 计算组
 - 计算项
 
-## 为什么这很重要
+## 为何这很重要
 
 对象名称中的控制字符会引发严重问题：
 
@@ -44,7 +44,7 @@ description: 这条最佳实践规则通过识别对象名称中的控制字符�
 
 允许使用标准空白字符（空格、换行、回车），但要移除控制字符。
 
-## 何时会触发此规则
+## 该规则何时触发
 
 当对象名称包含非标准空白字符的控制字符时，此规则会触发：
 
@@ -68,10 +68,10 @@ Name = string.Concat(
 )
 ```
 
-操作步骤：
+应用方法：
 
 1. 在 **Best Practice Analyzer** 中选择被标记的对象
-2. 单击 **Apply Fix**
+2. 点击 **Apply Fix**
 
 ### 手动修复
 
@@ -99,7 +99,7 @@ Name = string.Concat(
 ### 修复前
 
 ```
-度量值名称：“Total\x00Sales”（包含 NULL 字符）
+Measure Name: "Total\x00Sales"  (contains NULL character)
 ```
 
 部署失败，提示“对象名称中包含无效字符”
@@ -107,14 +107,14 @@ Name = string.Concat(
 ### 修复后
 
 ```
-度量值名称：“Total Sales”（将 NULL 替换为空格）
+Measure Name: "Total Sales"  (NULL replaced with space)
 ```
 
 部署成功，并在所有工具中正确显示。
 
 ## 兼容级别
 
-本规则适用于兼容级别为 **1200** 及以上的模型。
+这个规则适用于兼容级别 **1200** 及以上的模型。
 
 ## 相关规则
 

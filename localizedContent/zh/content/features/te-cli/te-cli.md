@@ -15,22 +15,22 @@ applies_to:
 
 # Tabular Editor CLI（有限公开预览）
 
-Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模型的跨平台命令行工具。 它以单个自包含的可执行文件形式在 Windows、macOS 和 Linux 上运行，并基于驱动 Tabular Editor 3 的同一基础构建。
+Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模型的跨平台命令行工具。 It runs on Windows, macOS, and Linux as a single self-contained executable and is based on the same foundation that powers Tabular Editor 3.
 
 使用 Tabular Editor CLI，你可以在终端中检查、编辑、验证、部署、刷新和测试语义模型——可针对本地 TMDL 或 BIM 文件、Power BI Desktop，或 Fabric 和 Power BI Service Workspace 中的语义模型。
 
-与仅限 Windows 的 `TabularEditor.exe` 命令行选项（TE2）不同——后者主要用于从桌面端二进制文件自动执行 C# Script 和宏——`te` 是专为跨平台打造的 CLI，提供结构化输出、可预测的退出代码以及交互式 shell。 这让现有的 [TE2 CLI](xref:command-line-options) 难以很好覆盖的场景成为可能：在 macOS 和 Linux 上通过终端完成模型工作、由 AI 代理直接驱动模型更改，以及无缝接入任何现代 CI 运行器。
+与仅限 Windows 的 `TabularEditor.exe` 命令行选项（TE2）不同——后者主要用于从桌面端二进制文件自动执行 C# Script 和宏——`te` 是专为跨平台打造的 CLI，提供结构化输出、可预测的退出代码以及交互式 shell。 This unlocks scenarios that our existing [TE2 CLI](xref:command-line-options) can't cover well: terminal-driven model work on macOS and Linux, AI agents driving model changes directly, and clean drop-in for any modern CI runner.
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-## 设计支柱与目标受众
+## Design pillars and target audiences
 
-每个命令都围绕四大设计支柱构建：
+Four design pillars shape every command:
 
-- **结构化输出** — 除默认的易读文本外，还可输出 JSON、CSV、TMDL 和 TMSL。
-- **非交互模式** — 全局 `--non-interactive` 标志会禁用交互提示，并在出错时快速失败。
-- **默认安全**：`te set`、`te add` 和 `te remove` 等编辑命令会以差异对比的形式显示更改，在你添加 `--save` 之前不会写入任何内容；如果添加 `--force`，即使更改会引入验证错误，也会照样保存。 `te deploy` 和 `te refresh` 在你添加 `--execute` 之前，会打印将要发送的确切 TMSL；添加后，除非再加上 `--force`，否则会先让你确认。
-- **清晰的错误信息** — 写入 stderr，并返回可预测的退出码。
+- **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
+- **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
+- **Safe by default** - editing commands such as `te set`, `te add` and `te remove` show their change as a diff and write nothing until you add `--save`; adding `--force` saves even when the change introduces validation errors. `te deploy` and `te refresh` print the exact TMSL they would send until you add `--execute`, and then ask for confirmation first unless you add `--force`.
+- **Clear errors** - written to stderr with predictable exit codes.
 
 这三者结合起来，让同一个二进制文件能够很好地服务于三类截然不同的用户：
 
@@ -39,36 +39,36 @@ Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模�
 - **CI/CD 管道** — 非交互式执行、GitHub Actions 和 Azure DevOps 注释，以及兼容 VSTEST 的测试结果。
 
 > [!Note]
-> 当与代理配合使用 TE CLI 时，请使用 TE CLI 的[面向 AI 编码代理的技能](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli)，它对 TE CLI 进行了端到端封装。 有关如何安装该技能，请参见 [AI Agent Skill](xref:te-cli-skill)。
+> When using the TE CLI with agents use the TE CLI [skill for AI coding agents](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli) that wraps the TE CLI end-to-end. See [AI Agent Skill](xref:te-cli-skill) for how to install the skill.
 
 ## CLI 可以做什么
 
-CLI 将命令分为 10 类。 每个命令族都对应语义模型生命周期中的一个具体阶段。
+The CLI organizes its commands into 10 families. Each family maps to a concrete stage of the semantic-model lifecycle.
 
-有关每个命令的语法、选项和示例的完整命令参考，请参阅 @te-cli-commands。 点击表中的任意示例命令，直接跳转到对应的参考条目。
+有关每个命令的语法、选项和示例的完整命令参考，请参阅 @te-cli-commands。 Click any example command in the table to jump straight to its reference entry.
 
-| 命令族                                                            | 功能                         | 示例命令                                                                                                                                                                                   |
-| -------------------------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [模型初始化和保存](xref:te-cli-commands#model-initialization-and-save) | 保存、转换和初始化模型                | [`te save-as`](xref:te-cli-commands#save-as)、[`te init`](xref:te-cli-commands#init)                                                                                                    |
-| [模型编辑](xref:te-cli-commands#model-editing)                     | 获取/设置属性，添加/删除/移动对象         | [`te set`](xref:te-cli-commands#set)、[`te add`](xref:te-cli-commands#add)、[`te remove`](xref:te-cli-commands#remove)、[`te move`](xref:te-cli-commands#move)                            |
-| [检视](xref:te-cli-commands#inspection)                          | 列出对象、搜索、比较差异、分析依赖关系        | [`te list`](xref:te-cli-commands#list)、[`te find`](xref:te-cli-commands#find)、[`te diff`](xref:te-cli-commands#diff)、[`te deps`](xref:te-cli-commands#deps)                            |
-| [分析与质量](xref:te-cli-commands#analysis-and-quality)             | 验证、运行 BPA、格式化 DAX 和 M、分析存储 | [`te validate`](xref:te-cli-commands#validate)、[`te bpa run`](xref:te-cli-commands#bpa-run)、[`te util`](xref:te-cli-commands#utilities)、[`te vertipaq`](xref:te-cli-commands#vertipaq) |
-| [执行](xref:te-cli-commands#execution)                           | 运行 DAX 查询、C# Script 和宏     | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te 宏`](xref:te-cli-commands#macro)                                                             |
-| [部署与刷新](xref:te-cli-commands#deployment-and-refresh)           | 部署到 Workspace，触发刷新，应用刷新策略  | [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)                                                                                                |
-| [测试](xref:te-cli-commands#testing)                             | 断言测试、快照、A/B 比较             | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                         |
-| [连接与身份验证](xref:te-cli-commands#connection-and-authentication)  | 连接到 Workspace，管理身份验证和配置文件  | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)       |
-| [配置](xref:te-cli-commands#configuration)                       | CLI 设置和默认值                 | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                      |
-| [Shell](xref:te-cli-commands#shell)                            | 交互模式、会话状态、Shell 自动补全       | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                 |
+| Family                                                                                                | What it does                                                 | 示例命令                                                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Model initialization and save](xref:te-cli-commands#model-initialization-and-save)                   | Save, convert, initialize models                             | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init)                                                                                                      |
+| [模型编辑](xref:te-cli-commands#model-editing)                                                            | 获取/设置属性，添加/删除/移动对象                                           | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move)                            |
+| [检视](xref:te-cli-commands#inspection)                                                                 | 列出对象、搜索、比较差异、分析依赖关系                                          | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps)                            |
+| [分析与质量](xref:te-cli-commands#analysis-and-quality)                                                    | Validate, run BPA, format DAX and M, analyze storage         | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [执行](xref:te-cli-commands#execution)                                                                  | 运行 DAX 查询、C# Script 和宏                                       | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te 宏`](xref:te-cli-commands#macro)                                                                |
+| [部署与刷新](xref:te-cli-commands#deployment-and-refresh)                                                  | Deploy to workspace, trigger refresh, apply refresh policies | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh)                                                                                                  |
+| [测试](xref:te-cli-commands#testing)                                                                    | 断言测试、快照、A/B 比较                                               | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                            |
+| [Connection & Authentication](xref:te-cli-commands#connection-and-authentication) | 连接到 Workspace，管理身份验证和配置文件                                    | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)          |
+| [配置](xref:te-cli-commands#configuration)                                                              | CLI settings and defaults                                    | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                         |
+| [Shell](xref:te-cli-commands#shell)                                                                   | Interactive mode, session state, shell completions           | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                    |
 
 > [!TIP]
-> 文档中使用规范的长形式动词（`list`、`remove`、`move`），但传统的短形式仍可作为别名使用（`ls`、`rm`、`mv`、`rename`）。 这既适用于顶层命令，也适用于 `te bpa rules`、`te macro`、`te config`、`te profile`、`te session` 和 `te test` 等命令组下的 `remove` / `list` 子命令。 完整映射请参见 @te-cli-commands#command-aliases。
+> The docs use canonical long-form verbs (`list`, `remove`, `move`), but the classic short forms still work as aliases (`ls`, `rm`, `mv`, `rename`). This applies to top-level commands and to `remove` / `list` subcommands under groups like `te bpa rules`, `te macro`, `te config`, `te profile`, `te session`, and `te test`. See @te-cli-commands#command-aliases for the full mapping.
 
-## 开始使用
+## 快速入门
 
 1. **注册或登录**：前往 [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) 注册 Tabular Editor 帐户或登录。
 2. **下载并安装**：Windows、macOS 和 Linux 的说明见 @te-cli-install。
-3. **进行身份验证**：运行 `te auth login`，即可连接到 Power BI 或 Fabric。 见 @te-cli-auth。
-4. **运行第一个命令**：`te --help` 会列出所有命令；`te <command> --help` 会显示详细选项。 提示：在终端中单独运行 `te` 会进入交互式 REPL，这是探索模型的一种更友好的方式。 参见 @te-cli-interactive。
+3. **进行身份验证**：运行 `te auth login`，即可连接到 Power BI 或 Fabric。 See @te-cli-auth.
+4. **运行第一个命令**：`te --help` 会列出所有命令；`te <command> --help` 会显示详细选项。 Tip: running `te` on its own in a terminal drops you into the interactive REPL - a friendly way to explore a model. See @te-cli-interactive.
 
 初次查看实时模型只需两条命令：
 
@@ -77,7 +77,7 @@ te auth login
 te list -s MyWorkspace -d MyModel
 ```
 
-![Tabular Editor CLI te list 命令示例输出](~/content/assets/images/features/cli/cli-command-ls.png)
+![Tabular Editor CLI te list example output](~/content/assets/images/features/cli/cli-command-ls.png)
 
 ## 预览提示
 
@@ -92,11 +92,11 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 在预览结束日期（2026-10-31）前 14 天内，无论 `hidePreviewNotice` 如何设置，每次执行命令时该横幅都会再次出现。 这可确保在 CLI 停止运行之前，你能提前看到醒目的警告。
+> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## 许可概览
 
-在有限公开预览期间，CLI 无需许可证；你只需要一个 Tabular Editor 账户即可下载。 在正式发布 (GA) 时，CLI 将需要许可证；定价仍在最终敲定中，并会在 GA 前公布。
+在有限公开预览期间，CLI 无需许可证；你只需要一个 Tabular Editor 账户即可下载。 At General Availability (GA) the CLI will require a license; pricing is still being finalized and will be announced ahead of GA.
 
 ## 反馈与社区
 
@@ -111,7 +111,7 @@ te config set hidePreviewNotice true
 
 - @te-cli-install - 下载、安装、验证。
 - @te-cli-auth - 对 Power BI、Fabric 和 Azure Analysis Services 进行身份验证。
-- @te-cli-commands - 完整命令参考。
+- @te-cli-commands - 完整的命令参考。
 - @te-cli-config - 配置文件和路径覆盖。
 - @te-cli-interactive - 面向新用户的引导式 REPL 模式。
 - @te-cli-automation - 结构化输出，以及适用于 Python、PowerShell 和 Bash 的脚本编写模式。

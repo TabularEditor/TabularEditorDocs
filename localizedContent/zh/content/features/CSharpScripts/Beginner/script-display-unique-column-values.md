@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-显示某列的去重值，便于快速进行数据概览和查阅。
+Display the distinct values in a column for quick data profiling and access.
 可在列级别将其另存为宏，方便快速调用。
 
 <br></br>
@@ -25,13 +25,13 @@ applies_to:
 ### 脚本标题
 
 ```csharp
-// 构造 DAX 表达式，从所选列获取所有不重复的列值：
+// Construct the DAX expression to get all distinct column values, from the selected column:
 var dax = string.Format("ALL({0})", Selected.Column.DaxObjectFullName);
 
-// 针对已连接的模型评估该 DAX 表达式：
+// Evaluate the DAX expression against the connected model:
 var result = EvaluateDax(dax);
 
-// 输出包含 DAX 表达式结果的 DataTable：
+// Output the DataTable containing the result of the DAX expression:
 Output(result);
 ```
 

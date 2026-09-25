@@ -17,20 +17,20 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Tabular Editor CLI 以单个自包含的可执行文件形式发布，名为 `te`（在 Windows 上为 `te.exe`）。 它无需任何外部运行时依赖。
+Tabular Editor CLI 以单个自包含的可执行文件形式发布，名为 `te`（在 Windows 上为 `te.exe`）。 It has no external runtime dependencies.
 
 ## 下载
 
 1. 使用 Tabular Editor 帐户在 [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) 登录。
 2. 下载适用于你的平台和架构的压缩包：
 
-   | 平台      | 64 位（Intel/AMD）            | ARM64                                | 压缩包       |
+   | 平台      | 64 位（Intel/AMD）            | ARM64                                | Archive   |
    | ------- | -------------------------- | ------------------------------------ | --------- |
    | Windows | `te-win-x64.zip`           | `te-win-arm64.zip`                   | `.zip`    |
    | macOS   | `te-osx-x64.tar.gz`（Intel） | `te-osx-arm64.tar.gz`（Apple Silicon） | `.tar.gz` |
    | Linux   | `te-linux-x64.tar.gz`      | `te-linux-arm64.tar.gz`              | `.tar.gz` |
 
-   在 Apple Silicon Mac（M1 及更新机型）、Windows on ARM 设备以及基于 ARM 的 Linux 服务器（包括 AWS Graviton、Azure Ampere 和 64 位 Raspberry Pi）上，请选择 ARM64 版本。 其他情况都选 `x64` 版本。
+   在 Apple Silicon Mac（M1 及更新机型）、Windows on ARM 设备以及基于 ARM 的 Linux 服务器（包括 AWS Graviton、Azure Ampere 和 64 位 Raspberry Pi）上，请选择 ARM64 版本。 Pick the `x64` build on everything else.
 
 ## 安装
 
@@ -78,7 +78,7 @@ chmod +x ~/.local/bin/te
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc   # or ~/.bashrc
 ```
 
-在 macOS 上，二进制文件使用我们的 Apple Developer ID 进行签名，并已通过 Apple 公证，因此首次运行时不会出现“无法验证开发者”的 Gatekeeper 警告。 建议首次运行时保持联网，以便 Gatekeeper 获取公证票证；如果首次运行时处于离线状态，可能会短暂弹出提示，待网络恢复后即可放行。
+在 macOS 上，二进制文件使用我们的 Apple Developer ID 进行签名，并已通过 Apple 公证，因此首次运行时不会出现“无法验证开发者”的 Gatekeeper 警告。 Network access on first run is recommended so Gatekeeper can fetch the notarization ticket; offline first-runs may briefly prompt before being unblocked once network returns.
 
 ### Linux
 
@@ -101,7 +101,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc   # or ~/.zshrc
 ```
 
 > [!NOTE]
-> PATH 的更改会在**新的** shell 会话中生效。 要在执行安装命令的同一 shell 中运行 `te`，请打开一个新终端，或重新加载你的配置文件：在 macOS/Linux 上运行 `source ~/.bashrc` / `source ~/.zshrc`，或者在 Windows 上关闭并重新打开 PowerShell。
+> PATH 的更改会在**新的** shell 会话中生效。 To run `te` in the shell where you ran the install, open a new terminal, or reload your profile: `source ~/.bashrc` / `source ~/.zshrc` on macOS/Linux, or close and reopen PowerShell on Windows.
 
 ## 验证
 
@@ -112,7 +112,7 @@ te --version
 te --help
 ```
 
-`te --help` 会输出带颜色的帮助索引，并按命令类别分组显示。 每个子命令都支持 `--help`，用于查看详细用法：
+`te --help` 会输出带颜色的帮助索引，并按命令类别分组显示。 Every subcommand accepts `--help` for detailed usage:
 
 ```bash
 te deploy --help
@@ -121,18 +121,18 @@ te bpa run --help
 
 ## 隐藏预览版横幅
 
-CLI 默认会向 stderr 输出黄色的预览横幅提示。 要隐藏它，运行：
+CLI 默认会向 stderr 输出黄色的预览横幅提示。 To suppress it run:
 
 ```bash
 te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 在**预览结束日期前后 14 天内**（2026-10-31），无论如何设置 `hidePreviewNotice`，每次运行命令都会再次显示该横幅。 这样可确保在 CLI 停止工作前，你能看到明确的警告。
+> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## Shell 自动补全
 
-CLI 提供适用于 **Bash**、**Zsh**、**PowerShell** 和 **Fish** 的 Tab 自动补全脚本。 选择与你所用的 shell 相匹配的代码块——每个代码块都会为后续的新 shell 会话持久安装自动补全。
+The CLI provides tab-completion scripts for **Bash**, **Zsh**, **PowerShell** and **Fish**. Pick the block that matches your shell - each one installs the completion persistently for new shell sessions.
 
 ### Bash（macOS/Linux）
 
@@ -155,37 +155,37 @@ echo 'fpath=(~/.zfunc $fpath); autoload -U compinit; compinit' >> ~/.zshrc
 Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
 ```
 
-### Fish（macOS/Linux）
+### Fish (macOS/Linux)
 
 ```bash
 te completion fish > ~/.config/fish/completions/te.fish
 ```
 
-打开新的 shell 会话后，自动补全才会生效。
+Open a new shell session for completion to take effect.
 
-自动补全涵盖子命令、全局标志以及模型路径（在需要针对文件系统进行 tab 补全时）。
+Completion covers subcommands, global flags, and model paths (where tab-completion against the filesystem is meaningful).
 
 ## 跨平台功能矩阵
 
-大多数功能在各个平台上都相同。 少数功能依赖仅 Windows 支持的传输机制：
+Most features are identical across platforms. 少数功能依赖仅 Windows 支持的传输机制：
 
-| 功能                                              | Windows | macOS / Linux |
-| ----------------------------------------------- | ------- | ------------- |
-| 使用本地 TMDL 和 BIM 模型文件                            | 是的      | 是             |
-| 部署到 Power BI / Fabric / Azure Analysis Services | 是的      | 是             |
-| Best Practice Analyzer 和 VertiPaq分析器            | 是的      | 是             |
-| C# Script 脚本编写                                  | 是的      | 是             |
-| 针对云端模型的 DAX 查询                                  | 是的      | 是             |
-| 身份验证方式：浏览器（交互式）、服务主体、环境变量、托管标识                  | 是的      | 是             |
-| 连接到本地 SSAS 实例（TCP 传输）                           | 是       | **否**         |
-| 连接到 Power BI Desktop（命名管道传输）                    | 是       | **否**         |
+| 功能                                                                                                                                   | Windows | macOS / Linux |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- |
+| Work with local TMDL and BIM model files                                                                                             | 是的      | 是的            |
+| 部署到 Power BI / Fabric / Azure Analysis Services                                                                                      | 是的      | 是的            |
+| Best Practice Analyzer 和 VertiPaq分析器                                                                                                 | 是的      | 是的            |
+| C# Script 脚本编写                                                                                                                       | 是的      | 是的            |
+| 针对云端模型的 DAX 查询                                                                                                                       | 是的      | 是的            |
+| Authentication: browser (interactive), service principal, environment variables, managed identity | 是的      | 是的            |
+| 连接到本地 SSAS 实例（TCP 传输）                                                                                                                | 是的      | **否**         |
+| 连接到 Power BI Desktop（命名管道传输）                                                                                                         | 是的      | **否**         |
 
 > [!IMPORTANT]
-> 本地 SSAS 和 Power BI Desktop 连接依赖于仅限 Windows 的传输协议。 所有基于云的工作流（Power BI Service、Fabric、Azure Analysis Services）均可在所有平台上运行。
+> 本地 SSAS 和 Power BI Desktop 连接依赖于仅限 Windows 的传输协议。 All cloud-based workflows (Power BI Service, Fabric, Azure Analysis Services) work on every platform.
 
 ## 更新
 
-若要更新到较新的预览构建版本，请下载最新压缩包并覆盖之前的安装。 配置和缓存的凭据存储在安装文件夹之外（见 <xref:te-cli-config> 和 <xref:te-cli-auth>），更新时会保留。
+To update to a newer preview build, download the latest archive and overwrite the previous installation. 配置和缓存的凭据存储在安装文件夹之外（见 <xref:te-cli-config> 和 <xref:te-cli-auth>），更新时会保留。
 
 ## 卸载
 

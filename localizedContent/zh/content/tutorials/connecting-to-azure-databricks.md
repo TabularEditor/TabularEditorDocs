@@ -20,7 +20,7 @@ applies_to:
 
 # （教程）连接到 Azure Databricks
 
-Tabular Editor 3 支持连接到 Azure Databricks，并将其用作语义模型的数据源。 本教程将引导你完成设置与 Azure Databricks 的连接并从中导入数据的流程。
+Tabular Editor 3 支持连接到 Azure Databricks，并将其用作语义模型的数据源。 This tutorial will guide you through the process of setting up a connection to Azure Databricks and importing data from it.
 
 ## 先决条件
 
@@ -32,28 +32,28 @@ Tabular Editor 3 支持连接到 Azure Databricks，并将其用作语义模型�
 - 你电脑上安装的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)
 
 > [!IMPORTANT]
-> Databricks 已发布一款新的 ODBC 驱动程序，用以取代旧版 Simba Spark ODBC Driver。 我们建议安装新的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)。 Tabular Editor 3.26.0 及更高版本支持这两种驱动程序，但从今往后建议优先使用新驱动程序。 旧版 Simba 驱动程序可从 [Databricks ODBC 驱动程序存档](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc) 下载。
+> Databricks 已发布一款新的 ODBC 驱动程序，用以取代旧版 Simba Spark ODBC Driver。 We recommend installing the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 and later supports both drivers, but the new driver is the recommended option going forward. The legacy Simba driver is available from the [Databricks ODBC driver archive](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
 
 ## 连接器实现方式
 
-Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databricks。 此函数支持两种连接器实现：
+Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databricks。 This function supports two connector implementations:
 
-- **实现 2.0 (ADBC)：** 使用 [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 驱动程序。 这是 Tabular Editor 3.26.1 及更高版本中的默认实现，也与 Power BI Desktop 使用的默认设置一致。 较新的 Databricks Workspace 需要使用此实现。
-- **实现 1.0（旧版）：** 原始的连接器实现。 它在较旧的 Databricks Workspace 中仍可运行，但在较新的 Workspace 中会因“目录为空”错误而失败。
+- **实现 2.0 (ADBC)：** 使用 [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 驱动程序。 This is the default in Tabular Editor 3.26.1 and later, and matches the default used by Power BI Desktop. Newer Databricks workspaces require this implementation.
+- **Implementation 1.0 (legacy):** The original connector implementation. 它在较旧的 Databricks Workspace 中仍可运行，但在较新的 Workspace 中会因“目录为空”错误而失败。
 
 > [!NOTE]
-> 运行 Tabular Editor 的计算机上无需安装 ADBC 驱动程序。 仅需 Databricks ODBC 驱动程序即可。
+> 运行 Tabular Editor 的计算机上无需安装 ADBC 驱动程序。 Only the Databricks ODBC Driver is required.
 
 > [!IMPORTANT]
-> 如果你已有使用 Tabular Editor 3.26.0 或更早版本创建的 M 查询，这些查询使用旧版实现（`Databricks.Catalogs()` 的第三个参数为 `null`）。 如果您在较新的 Databricks Workspace 中遇到刷新错误，请将这些查询更新为使用实现 2.0。 有关分步说明，请参阅 [Databricks 刷新因目录为空错误而失败](xref:databricks-refresh-empty-catalog)。
+> 如果你已有使用 Tabular Editor 3.26.0 或更早版本创建的 M 查询，这些查询使用旧版实现（`Databricks.Catalogs()` 的第三个参数为 `null`）。 If you encounter refresh errors on a newer Databricks workspace, update these queries to use Implementation 2.0. See [Databricks Refresh Fails with Empty Catalog Error](xref:databricks-refresh-empty-catalog) for step-by-step instructions.
 
 ## 身份验证方式
 
 连接到 Azure Databricks 时，您可以使用以下几种身份验证方法：
 
-### 1。 Microsoft Entra ID（前身为 Azure AD）身份验证
+### 1. Microsoft Entra ID（前身为 Azure AD）身份验证
 
-如果你的组织使用 Microsoft Entra ID，这是连接到 Azure Databricks 的推荐方法。 这种方法可提供无缝的单点登录，并通过托管身份提升安全性。
+如果你的组织使用 Microsoft Entra ID，这是连接到 Azure Databricks 的推荐方法。 This method provides seamless single sign-on and better security through managed identities.
 
 #### 关于 Tabular Editor 企业应用
 
@@ -62,22 +62,22 @@ Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databr
 此企业应用需要以下 API 权限：
 
 - **Microsoft Graph** (`00000003-0000-0000-c000-000000000000`)
-  - `offline_access`（委托）- 此权限允许 Tabular Editor 在你未主动使用应用程序时，仍能持续访问你已授权给它的数据。 这是维持与 Databricks 持续连接所必需的。
+  - `offline_access`（委托）- 此权限允许 Tabular Editor 在你未主动使用应用程序时，仍能持续访问你已授权给它的数据。 This is needed for maintaining a persistent connection to Databricks.
   - `openid`（委托）- 允许用户使用其工作或学校账户登录该应用，并允许该应用查看基本的用户个人资料信息。
   - `profile`（委托）- 允许该应用查看基本个人资料信息，例如姓名、电子邮件地址、照片和用户名。
   - `User.Read`（委托）- 允许该应用读取您的个人资料，并在访问 Databricks API 时识别您的身份。
 
 - **Azure Databricks API** (`2ff814a6-3304-4ab8-85cb-cd0e6f879c1d`)
-  - `user_impersonation`（委托）- 代表已登录用户访问 Azure Databricks。 这使 Tabular Editor 能够使用你的凭据连接到你的 Databricks Workspace。
+  - `user_impersonation`（委托）- 代表已登录用户访问 Azure Databricks。这使 Tabular Editor 能够使用你的凭据连接到你的 Databricks Workspace。
 
 有关 Microsoft Entra ID 权限的更多信息，请参阅 [Microsoft 关于权限类型的文档](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent) 和 [应用同意体验](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-consent-experience)。
 
 > [!IMPORTANT]
-> Tabular Editor 需要这些权限，才能通过您的 Microsoft Entra ID 凭据安全访问您的 Azure Databricks 数据。 如果没有这些权限，Tabular Editor 将无法对你的 Azure Databricks Workspace 正确进行身份验证。
+> These permissions are required for Tabular Editor to access your Azure Databricks data securely through your Microsoft Entra ID credentials. 如果没有这些权限，Tabular Editor 将无法对你的 Azure Databricks Workspace 正确进行身份验证。
 
 #### Microsoft Entra ID 身份验证的同意流程
 
-当你首次尝试使用 Microsoft Entra ID 身份验证连接到 Azure Databricks 时，系统可能会提示你同意所需的权限。 同意流程取决于您组织的 Microsoft Entra ID 策略：
+当你首次尝试使用 Microsoft Entra ID 身份验证连接到 Azure Databricks 时，系统可能会提示你同意所需的权限。 The consent process depends on your organization's Microsoft Entra ID policies:
 
 ##### 用户同意
 
@@ -88,7 +88,7 @@ Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databr
 3. 点击 **Accept** 以授予同意
 
 > [!NOTE]
-> 是否需要管理员同意取决于你所在组织的 Microsoft Entra ID 策略，不一定取决于所请求的具体 API 权限。 许多组织允许用户自行同意委托权限，而另一些组织则要求所有第三方应用程序无论权限级别如何都必须由管理员批准。
+> 是否需要管理员同意取决于你所在组织的 Microsoft Entra ID 策略，不一定取决于所请求的具体 API 权限。 Many organizations allow users to consent to delegated permissions themselves, while others require administrator approval for all third-party applications regardless of permission level.
 
 ##### 需要管理员同意
 
@@ -131,7 +131,7 @@ https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0f
 > [!NOTE]
 > 你的 Databricks Workspace URL 应采用 `https://<region>.azuredatabricks.net` 格式——例如：`https://westeurope.azuredatabricks.net`。
 
-### 2。 个人访问令牌（PAT）身份验证
+### 2. 个人访问令牌（PAT）身份验证
 
 如果 Microsoft Entra ID 集成不可用，或你更偏好基于令牌的身份验证，则可以使用个人访问令牌。
 
@@ -156,9 +156,9 @@ https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0f
    - 将令牌粘贴到 Token 字段中
    - 在 HTTP Path 中，指定你的 Databricks Warehouse 路径（例如 `/sql/1.0/warehouses/<warehouse-id>`）
 
-### 3) OAuth 机器到机器（M2M）身份验证
+### 3。 OAuth 机器到机器（M2M）身份验证
 
-从 Tabular Editor 3.26.1 起，你可以使用 OAuth 机器到机器（M2M）流，通过 Databricks 服务主体进行身份验证。 这对于无人值守场景很有用——例如计划刷新或 CI/CD 管道——因为您不希望连接绑定到某个特定用户的凭据。 OAuth (M2M) 适用于所有 Databricks 云平台（Azure、AWS 和 GCP）。
+从 Tabular Editor 3.26.1 起，你可以使用 OAuth 机器到机器（M2M）流，通过 Databricks 服务主体进行身份验证。 This is useful for unattended scenarios — such as scheduled refresh or CI/CD pipelines — where you don't want the connection bound to an individual user's credentials. OAuth (M2M) is available across all Databricks clouds (Azure, AWS, and GCP).
 
 #### 先决条件
 
@@ -180,7 +180,7 @@ https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0f
 
 ## 查找你的 HTTP Path
 
-HTTP Path 参数对于连接到你的 Databricks SQL Warehouse 至关重要。 查找该值的方法：
+HTTP Path 参数对于连接到你的 Databricks SQL Warehouse 至关重要。 To find this value:
 
 1. 前往你的 Databricks Workspace
 2. 依次选择 **SQL** > **SQL Warehouse**
@@ -241,7 +241,7 @@ HTTP Path 参数对于连接到你的 Databricks SQL Warehouse 至关重要。 �
 2. 请他们将 Tabular Editor 企业应用程序（ID：`ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`）添加到你组织的允许应用程序列表中
 
 > [!TIP]
-> 在某些组织中，IT 部门在批准新的企业应用程序之前，可能需要提交正式申请或进行安全审查。 请准备好解释：此应用程序由 Tabular Editor 3 使用，借助你所在组织现有的 Microsoft Entra ID 身份验证基础设施，安全连接到 Azure Databricks 资源。
+> In some organizations, IT departments may require a formal request or security review before approving new enterprise applications. 请准备好解释：此应用程序由 Tabular Editor 3 使用，借助你所在组织现有的 Microsoft Entra ID 身份验证基础设施，安全连接到 Azure Databricks 资源。
 
 ## 在 Databricks 中使用“更新表架构”
 

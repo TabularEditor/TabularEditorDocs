@@ -13,7 +13,7 @@ applies_to:
 
 # Dar formato a Power Query
 
-## Propósito del script
+## Objetivo del script
 
 Si quieres dar formato a consultas complejas de Power Query para que sean más legibles y fáciles de modificar. <br></br>
 
@@ -26,8 +26,8 @@ Si quieres dar formato a consultas complejas de Power Query para que sean más l
 ### Dar formato a Power Query
 
 ```csharp
-// Este script da formato a Power Query (código M) de cualquier partición M seleccionada (no Shared Expression ni Source Expression).
-// Enviará una solicitud HTTPS POST de la expresión a la API de Power Query Formatter y reemplazará el código por el resultado.
+// This script formats the Power Query (M Code) of any selected M Partition (not Shared Expression or Source Expression).
+// It will send an HTTPS POST request of the expression to the Power Query Formatter API and replace the code with the result.
 //
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -35,17 +35,17 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-// URL de la API de powerqueryformatter.com
+// URL of the powerqueryformatter.com API
 string powerqueryformatterAPI = "https://m-formatter.azurewebsites.net/api/v2";
 
-// Método HttpClient para iniciar la llamada a la API mediante el método POST para la URL
+// HttpClient method to initiate the API call POST method for the URL
 HttpClient client = new HttpClient();
 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, powerqueryformatterAPI);
 
-// Obtener la expresión M de la partición seleccionada
+// Get the M Expression of the selected partition
 string partitionExpression = Selected.Partition.Expression;
 
-// Serializar el cuerpo de la solicitud como un objeto JSON
+// Serialize the request body as a JSON object
 var requestBody = JsonConvert.SerializeObject(
     new { 
         code = partitionExpression, 
@@ -55,62 +55,62 @@ var requestBody = JsonConvert.SerializeObject(
         includeComments = true
     });
 
-// Establecer el encabezado "Content-Type" de la solicitud en "application/json" y la codificación en UTF-8
+// Set the "Content-Type" header of the request to "application/json" and the encoding to UTF-8
 var content = new StringContent(requestBody, Encoding.UTF8, "application/json");
 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-// Recuperar la respuesta
+// Retrieve the response
 var response = client.PostAsync(powerqueryformatterAPI, content).Result;
 
-// Si la respuesta es correcta
+// If the response is successful
 if (response.IsSuccessStatusCode)
 {
-    // Obtener el resultado de la respuesta
+    // Get the result of the response
     var result = response.Content.ReadAsStringAsync().Result;
 
-    // Analizar el objeto JSON de respuesta desde la cadena
+    // Parse the response JSON object from the string
     JObject data = JObject.Parse(result.ToString());
 
-    // Obtener la respuesta de Power Query con formato
+    // Get the formatted Power Query response
     string formattedPowerQuery = (string)data["result"];
 
     ///////////////////////////////////////////////////////////////////////
-    // FORMATEO MANUAL OPCIONAL
-    // Añadir manualmente una nueva línea y un comentario a cada paso
+    // OPTIONAL MANUAL FORMATTING
+    // Manually add a new line and comment to each step
     var replace = new Dictionary<string, string> 
     { 
         { " //", "\n\n//" }, 
-        { "\n  #", "\n\n  // Paso\n  #" }, 
-        { "\n  Source", "\n\n  // Fuente de datos\n  Source" }, 
-        { "\n  Dataflow", "\n\n  // Información de conexión de Dataflow\n  Dataflow" }, 
-        {"\n  Data =", "\n\n  // Paso\n  Data ="}, 
-        {"\n  Navigation =", "\n\n  // Paso\n  Navigation ="}, 
-        {"in\n\n  // Paso\n  #", "in\n  #"}, 
-        {"\nin", "\n\n// Resultado\nin"} 
+        { "\n  #", "\n\n  // Step\n  #" }, 
+        { "\n  Source", "\n\n  // Data Source\n  Source" }, 
+        { "\n  Dataflow", "\n\n  // Dataflow Connection Info\n  Dataflow" }, 
+        {"\n  Data =", "\n\n  // Step\n  Data ="}, 
+        {"\n  Navigation =", "\n\n  // Step\n  Navigation ="}, 
+        {"in\n\n  // Step\n  #", "in\n  #"}, 
+        {"\nin", "\n\n// Result\nin"} 
     };
 
-    // Reemplazar la primera cadena del diccionario por la segunda
+    // Replace the first string in the dictionary with the second
     var manuallyformattedPowerQuery = replace.Aggregate(
         formattedPowerQuery, 
         (before, after) => before.Replace(after.Key, after.Value));
 
-    // Reemplazar el código autoformateado por la versión con formato manual
+    // Replace the auto-formatted code with the manually formatted version
     formattedPowerQuery = manuallyformattedPowerQuery;
     ////////////////////////////////////////////////////////////////////////
 
-    // Reemplazar la expresión M sin formato por la expresión con formato
+    // Replace the unformatted M expression with the formatted expression
     Selected.Partition.Expression = formattedPowerQuery;
 
-    // Ventana emergente para informar de la finalización
-    Info("Formateado " + Selected.Partition.Name);
+    // Pop-up to inform of completion
+    Info("Formatted " + Selected.Partition.Name);
 }
 
-// En caso contrario, devolver un mensaje de error
+// Otherwise return an error message
 else
 {
 Info(
-    "Llamada a la API sin éxito." +
-    "\nCompruebe que está seleccionando una partición con una expresión M válida."
+    "API call unsuccessful." +
+    "\nCheck that you are selecting a partition with a valid M Expression."
     );
 }
 ```

@@ -22,37 +22,37 @@ applies_to:
 ### 脚本标题
 
 ```csharp
-// 遍历所有表：
+// Loop through all tables:
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
     {
-        table.TableGroup = "计算组";
+        table.TableGroup = "Calculation Groups";
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // 包含可见度量值但与其他表没有关系的表
-        table.TableGroup = "度量值组";
+        // Tables containing visible measures, but no relationships to other tables
+        table.TableGroup = "Measure Groups";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // 仅位于关系“多”端的表：
-        table.TableGroup = "事实";
+        // Tables exclusively on the "many" side of relationships:
+        table.TableGroup = "Facts";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // 没有任何关系的表，属于计算表格且不包含度量值：
-        table.TableGroup = "参数表";
+        // Tables without any relationships, that are Calculated Tables and do not have measures:
+        table.TableGroup = "Parameter Tables";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // 位于关系“一”端的表：
-        table.TableGroup = "维度";
+        // Tables on the "one" side of relationships:
+        table.TableGroup = "Dimensions";
     }
     else
     {
-        // 其他所有表：
-        table.TableGroup = "杂项";
+        // All other tables:
+        table.TableGroup = "Misc";
     }
 }
 ```

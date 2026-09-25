@@ -2,7 +2,7 @@
 uid: getting-started
 title: 安装与激活
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,31 +17,33 @@ applies_to:
           full: true
 ---
 
-# 快速入门
+# 安装与激活
 
 ## 安装
 
 从我们的[下载页面](xref:downloads)下载最新版本的 Tabular Editor 3。
 
-我们建议在大多数情况下使用 64 位 MSI 安装程序。 下载完成后，双击 MSI 文件，并按安装向导的各步骤完成安装。
+We recommend the 64-bit `.exe` installer on .NET 10 for most scenarios. Once downloaded, double-click it and complete the installer pages.
 
 ![Install](~/content/assets/images/getting-started/install.png)
 
 ### 先决条件
 
-无。
+For the `.exe` installer, the matching **.NET Desktop Runtime**: [10](https://dotnet.microsoft.com/download/dotnet/10.0) for the recommended build, or [8](https://dotnet.microsoft.com/download/dotnet/8.0) for the .NET 8 build. The installer offers to download and install it for you, so in practice there is nothing to do beforehand.
+
+The other two packages differ. The `.msi` does not bring the runtime along, so install it yourself when deploying centrally, and the portable `.zip` is self-contained and needs no runtime at all.
 
 ### 系统要求
 
 - **操作系统：** Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
 - **架构：** x64、ARM64（自 3.23.0 起原生支持）
-- **.NET 运行时：** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- **.NET Runtime:** .NET Desktop Runtime 10 or 8, matching the build you install
 
-有关各运行时当前支持的 Windows 版本，请参阅 .NET 支持的 OS 策略。
+See @system-requirements for the full matrix and for how to choose between the builds.
 
 ## 激活安装
 
-Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。
+Tabular Editor 3 是商业软件。 Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。
 
 首次在新设备上启动 Tabular Editor 3 时，系统会提示进行产品激活。
 
@@ -49,32 +51,32 @@ Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabularedito
 
 ### 使用现有许可证密钥进行激活
 
-购买 Tabular Editor 3 的许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，这就是你的许可证密钥。 出现提示时，输入许可证密钥，然后点击 **下一步 >** 以激活产品。
+购买 Tabular Editor 3 的许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，这就是你的许可证密钥。 When prompted, enter the license key and click **Next >** to activate the product.
 
 ![输入许可证密钥](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> 对于多用户许可证类型，除了许可证密钥之外，你还需要输入电子邮件地址。 如果该许可证密钥对应多用户许可证，Tabular Editor 3 会提示你这样做。
+> 对于多用户许可证类型，除了许可证密钥之外，你还需要输入电子邮件地址。如果该许可证密钥对应多用户许可证，Tabular Editor 3 会提示你这样做。
 
-Tabular Editor 3 的安装是按 **用户** 激活的。 如果多个用户共享同一台计算机，则每个用户都需要在各自的 Windows 用户配置文件中激活该产品。
+Tabular Editor 3 installations are activated **per user**. If multiple users share the same machine, each user activates the product on their own Windows user profile.
 
-### Windows 帐户与 Power BI / Entra 帐户
+### Windows account vs Power BI / Entra account
 
-安装 Tabular Editor 3 的 Windows 帐户与用于对 Power BI / Fabric Workspace 进行身份验证的 Microsoft Entra 帐户彼此独立。
+The Windows account on which Tabular Editor 3 is installed is independent from the Microsoft Entra account used to authenticate against a Power BI / Fabric workspace.
 
-- **许可证激活** 信息存储在激活该产品的 Windows 用户的注册表 `HKEY_CURRENT_USER` 下。 许可证不绑定到任何云身份。
-- **Workspace 身份验证** 会在连接时于 **从数据库加载语义模型** 对话框中进行。 你需要使用对该 Workspace 拥有权限的 Microsoft Entra 帐户登录。
+- **License activation** is stored in the Windows Registry under `HKEY_CURRENT_USER` of the Windows user that activated the product. The license is not tied to any cloud identity.
+- **Workspace authentication** happens at connection time in the **Load Semantic Model from Database** dialog. You sign in with the Microsoft Entra account that has permission on the workspace.
 
-即使你使用单独的 Entra 帐户（例如未启用电子邮件的管理员帐户）来管理 Power BI Workspace，也无需因此在其他 Windows 帐户下通过 **以其他用户身份运行** 启动 Tabular Editor 3。 在你平时使用的 Windows 帐户下启动 Tabular Editor 3，在该帐户下用许可证密钥激活它，并在连接对话框中输入你的管理员 Entra 凭据。
+You do not need to launch Tabular Editor 3 with **Run as** under a different Windows account just because you use a separate Entra account (for example a non-mail-enabled admin account) to manage the Power BI workspace. Launch Tabular Editor 3 under your normal Windows account, activate it with your license key under that account, and provide your admin Entra credentials in the connection dialog.
 
-有关 Tabular Editor 连接到 XMLA endpoint 时如何进行身份验证，以及如何选择正确的身份验证模式（例如，当 Windows 登录与 Power BI 帐户不一致时使用 **Microsoft Entra MFA**），参见 @xmla-as-connectivity。
+For details on how Tabular Editor authenticates to the XMLA endpoint and how to pick the right authentication mode (for example **Microsoft Entra MFA** when your Windows login does not match your Power BI account), see @xmla-as-connectivity.
 
 ### 申请试用许可证
 
-如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 选择这个选项后，系统会提示你输入电子邮件地址。 我们会使用这个电子邮件地址来验证你是否已有 Tabular Editor 3 的激活记录。
+If you have not used Tabular Editor 3 before, you are eligible for a free 30-day trial. When you choose this option, you are prompted for an e-mail address. We use the e-mail address to validate whether you have an existing activation of Tabular Editor 3.
 
 > [!NOTE]
-> 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。 查看我们的 @privacy-policy 以了解更多信息。
+> 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。 View our @privacy-policy for more information.
 
 ### 更改许可证密钥
 
@@ -82,9 +84,9 @@ Tabular Editor 3 的安装是按 **用户** 激活的。 如果多个用户共�
 
 ![关于 Te3](~/content/assets/images/getting-started/about-te3.png)
 
-在对话框中，选择 **更改许可证密钥**。 只有在 Tabular Editor 中未加载任何模型时，此选项才可用。 如果模型已打开，请通过 **文件 > 关闭模型** 将其关闭。 点击 **更改许可证密钥** 后，Tabular Editor 会提示你是否要移除当前许可证：
+In the dialog, select **Change license key**. This option is only available when no model is loaded in Tabular Editor. If a model is open, close it under **File > Close model**. Once you click **Change license key**, Tabular Editor prompts you whether you want to remove the current license:
 
-![图片](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+![image](~/content/assets/images/getting-started-01.png)
 
 如果选择确定，当前许可证将被移除，你需要重新输入许可证密钥才能使用该产品。
 
@@ -93,40 +95,40 @@ Tabular Editor 3 的安装是按 **用户** 激活的。 如果多个用户共�
 
 ## 安装后配置
 
-Tabular Editor 3 提供了许多配置选项。 默认设置已足以满足大多数开发场景，但仍建议查看以下选项。
+Tabular Editor 3 provides many configuration options. The default settings are sufficient for most development scenarios, but review the options below.
 
-### 启动时检查更新
+### Check for updates on start-up
 
-默认情况下，每次启动 Tabular Editor 3 时，工具都会联机检查是否有新版本可用。 你可以在 **工具 > 偏好设置 > 更新和反馈** 中控制此更新检查的执行方式。
+By default, whenever Tabular Editor 3 is launched, the tool checks online to see if a newer version is available. You control how this update check is performed under **Tools > Preferences > Updates and Feedback**.
 
 > [!NOTE]
-> 请始终使用最新版本的 Tabular Editor 3。 在提交 Bug Report 前，请确保你使用的是最新版本；我们的支持团队会以此为前提。
+> 请始终使用最新版本的 Tabular Editor 3。 Our support team assumes you are on the latest version before submitting a bug report.
 
-### 选择退出遥测数据收集
+### Opting out of telemetry collection
 
-Tabular Editor 3 会收集匿名使用数据和遥测信息，用来帮助我们改进产品。 你可以随时启动 Tabular Editor 3，并前往 **工具 > 偏好设置 > 更新和反馈** 选择退出。 要退出，请取消选中 **通过收集匿名使用数据帮助改进 Tabular Editor** 复选框。
+Tabular Editor 3 会收集匿名使用数据和遥测信息，用来帮助我们改进产品。 You opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
 
-![收集遥测数据](~/content/assets/images/getting-started/collect-telemetry.png)
+![Collect Telemetry](~/content/assets/images/getting-started/collect-telemetry.png)
 
 ### 代理设置
 
-如果你所在的网络互联网连接受限，请在 **工具 > 偏好设置 > 代理设置** 中指定代理服务器的地址、用户名和密码。 要让 Tabular Editor 3 使用任何依赖出站 Web 请求的功能，必须先完成此设置。 具体包括：
+If you are on a network with limited internet connectivity, specify the address, username, and password of a proxy server under **Tools > Preferences > Proxy Settings**. This is required before Tabular Editor 3 can use any features that rely on outgoing web requests. Specifically:
 
-- 更新检查
-- 产品激活
-- DAX 格式设置
-- 从外部 URL 下载最佳实践规则
+- Update checks
+- Product activation
+- DAX Formatting
+- Download of Best Practice Rules from external URLs
 
 > [!TIP]
-> 代理设置有时会干扰身份验证对话框或其他外部提示。 尝试在 **System** 和 **None** 之间切换代理设置，然后关闭并重新打开 Tabular Editor 3 进行验证。
+> The proxy settings can at times interfere with authentication dialog boxes or other external prompts. 尝试在 **System** 和 **None** 之间切换代理设置，然后关闭并重新打开 Tabular Editor 3 进行验证。
 
-### 其他偏好设置
+### Other preferences
 
-Tabular Editor 3 还提供许多其他设置，用于控制应用程序行为。 要了解更多信息，请参阅 @preferences。
+Tabular Editor 3 contains many other settings for controlling application behavior. To learn more, see @preferences.
 
-## 高级场景
+## Advanced scenarios
 
-有关手动（无网络）激活、基于注册表的许可证管理、静默部署以及 Enterprise 席位管理，请参阅 @installation-activation-basic。
+For manual (no-internet) activation, registry-based license management, silent deployment, and Enterprise seat administration, see @installation-activation-basic.
 
 ## 后续步骤
 

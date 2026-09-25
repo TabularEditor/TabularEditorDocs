@@ -25,7 +25,7 @@ Puede crear un script del código DAX para cualquier objeto del Explorador TOM q
 
 Para usar esta funcionalidad, localice en el Explorador TOM los objetos para los que desee generar un único documento. Seleccione varios objetos y, a continuación, haga clic con el botón derecho y elija **Script DAX**. Se crea un documento nuevo que contiene las expresiones DAX y las propiedades básicas de todos los objetos seleccionados. También puede generar un Script DAX para todos los objetos de una tabla o para todos los objetos del modelo, seleccionando, respectivamente, el objeto de tabla o el objeto de modelo.
 
-![Dax Script](~/content/assets/images/dax-script.png)
+![Script Dax](~/content/assets/images/dax-script.png)
 
 Editar objetos mediante un Script DAX es ligeramente diferente a hacerlo mediante el **Editor de expresiones**. Con este último, los cambios se aplican de inmediato cuando navega a otro objeto. En un Script DAX, sin embargo, los cambios no se aplican hasta que lo haga explícitamente con la opción **Script > Aplicar** (F5). Si está conectado a una instancia de Analysis Services, puede usar la opción **Script > Aplicar y sincronizar** (SHIFT+F5) para aplicar los cambios y guardar a la vez los metadatos del modelo actualizados en Analysis Services.
 
@@ -56,7 +56,7 @@ Si quieres incluir la definición de una medida a la que se hace referencia en e
 
 ![Definir medida con dependencias](~/content/assets/images/define-measure-with-deps.png)
 
-## Atajos
+## Shortcuts
 
 Para aplicar el script al modelo, usa los siguientes atajos:
 
@@ -145,10 +145,10 @@ Como ejemplo, el siguiente script define la medida `[Internet Total Sales]` en l
 
 ```dax
 ----------------------------------
--- Medida: [Internet Total Sales]
+-- Measure: [Internet Total Sales]
 ----------------------------------
 MEASURE 'Internet Sales'[Internet Total Sales] = SUM('Internet Sales'[Sales Amount])
-    Description = "Devuelve la suma de todas las ventas por Internet"
+    Description = "Returns the sum of all Internet Sales"
     FormatString = "\$#,0.00;(\$#,0.00);\$#,0.00"
 ```
 
@@ -158,7 +158,7 @@ El siguiente Script DAX define la medida `[Internet Current Quarter Sales Perfor
 
 ```dax
 --------------------------------------------------------
--- Medida: [Internet Current Quarter Sales Performance]
+-- Measure: [Internet Current Quarter Sales Performance]
 --------------------------------------------------------
 MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     IFERROR(
@@ -183,10 +183,10 @@ El siguiente Script DAX define el grupo de cálculo `'Time Intelligence'` con la
 
 ```dax
 -----------------------------------------
--- Grupo de cálculo: 'Time Intelligence'
+-- Calculation Group: 'Time Intelligence'
 -----------------------------------------
 CALCULATIONGROUP 'Time Intelligence'[Period]
-    Description = "Utilice esta tabla para realizar cálculos de tiempo"
+    Description = "Use this table to perform time calculations"
 
     CALCULATIONITEM "Current" = SELECTEDMEASURE()
         Ordinal = 0
@@ -225,7 +225,7 @@ Por ejemplo, el siguiente script creará una medida con una expresión DAX vací
 
 ```dax
 MEASURE 'Internet Sales'[Internet Total Sales] =
-    , Description = "TODO: Consultar con el área de negocio cómo debe implementarse y formatearse."
+    , Description = "TODO: Ask business how this should be implemented and formatted."
     , FormatString =
     , DisplayFolder =
 ```

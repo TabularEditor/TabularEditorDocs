@@ -53,9 +53,9 @@ El siguiente script muestra el nombre del modelo cargado actualmente. Si no hay 
 
 ```csharp
 if(Model != null)
-    Info("El nombre del modelo actual es: " + Model.Name);
+    Info("The name of the current model is: " + Model.Name);
 else
-    Warning("No hay ningún modelo cargado actualmente!");
+    Warning("No model is currently loaded!");
 ```
 
 El objeto `Model` es un contenedor de la clase [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx), que expone un subconjunto de sus propiedades, con algunos métodos y propiedades adicionales para mayor comodidad.
@@ -64,7 +64,7 @@ Para acceder a una medida específica, necesitarás conocer el nombre de esa med
 
 ```csharp
 var myMeasure = Model.Tables["Internet Sales"].Measures["Internet Total Sales"];
-myMeasure.Description = "La fórmula de esta medida es: " + myMeasure.Expression;
+myMeasure.Description = "The formula for this measure is: " + myMeasure.Expression;
 ```
 
 La línea 1 del script anterior localiza la medida "Internet Total Sales" en la tabla "Internet Sales" y, a continuación, guarda una referencia a esa medida en la variable `myMeasure`.
@@ -82,7 +82,7 @@ La mayoría de los objetos TOM (tablas, columnas, medidas, etc.) en Tabular Edit
 Para que los scripts sean reutilizables, rara vez basta con poder hacer referencia a los objetos del modelo directamente por su nombre, como se muestra arriba. En su lugar, es útil hacer referencia al/los objeto(s) seleccionados actualmente en la **vista del Explorador TOM** de Tabular Editor. Esto es posible mediante el uso del objeto `Selected`.
 
 ```csharp
-Info("Actualmente has seleccionado: " + Selected.Measures.Count + " medida(s).");
+Info("You have currently selected: " + Selected.Measures.Count + " measure(s).");
 ```
 
 El objeto `Selected` por sí solo es una colección de todos los objetos seleccionados actualmente, incluidos los objetos que hay dentro de las carpetas de visualización seleccionadas. Además, el objeto `Selected` contiene varias propiedades que facilitan hacer referencia a tipos de objeto específicos, como la propiedad `.Measures` mostrada en el ejemplo anterior. En general, estas propiedades existen tanto en plural (`.Measures`, medidas) como en singular (`.Measure`, medida). El primero es una colección que puedes recorrer y que estará vacía si la selección actual no contiene ningún objeto de ese tipo, mientras que el segundo es una referencia al objeto seleccionado actualmente, si y solo si se ha seleccionado exactamente un objeto de ese tipo.
@@ -98,7 +98,7 @@ En los ejemplos anteriores, usamos los métodos globales `Info(...)` y `Warning(
 - `string ReadFile(string filePath)` - forma práctica de cargar datos de texto desde un archivo.
 - `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - forma práctica de exportar un conjunto de propiedades de varios objetos como una cadena TSV.
 - `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos a partir de una cadena TSV.
-- `string ConvertDax(dax, useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y las que no son de EE. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido a un formato no EE. Es decir, las comas (separadores de lista) se convierten en punto y coma y los puntos (separadores decimales) se convierten en comas. Y viceversa si `useSemicolons` se establece en `false`.
+- `string ConvertDax(dax, useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y las que no son de EE. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido a un formato no EE. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Y viceversa si `useSemicolons` se establece en `false`.
 - `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX en todos los objetos de la colección proporcionada
 - `void FormatDax(IDaxDependantObject obj)` - pone un objeto en cola para el formateo de expresiones DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
 - `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos que se hayan puesto en cola hasta el momento
@@ -139,7 +139,7 @@ Puedes ver todas las macros guardadas anteriormente en la **Vista de macros**. P
 - **Eliminar una macro.** Selecciónala y haz clic en el botón rojo "X" encima de la lista de macros.
 - **Editar una macro.** Haz doble clic en la macro de la lista (haz doble clic en la columna "Id" de la lista). Esto abrirá la macro en una nueva vista de C# Script, donde podrás modificar el código. Pulsa Ctrl+S para guardar los cambios de código. Si necesitas editar otras propiedades de la macro (descripción emergente, contexto de la macro, etc.), usa la opción de menú **C# Script > Edit Macro...**.
 
-# Próximos pasos
+# Siguientes pasos
 
 - @personalizing-te3
 - @boosting-productivity-te3

@@ -2,7 +2,7 @@
 uid: save-to-folder
 title: Guardar en carpeta
 author: Morten Lønskov
-updated: 2023-08-08
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -51,6 +51,29 @@ Las pestañas General y Guardar en carpeta contienen ajustes relacionados con la
 Tabular Editor 3 tiene una configuración predeterminada para la serialización JSON y debes seleccionar explícitamente otra opción en el modo de serialización, donde también puedes cambiar al formato TMDL.
 
 ***
+
+### User Defined Functions (UDFs)
+
+Since Tabular Editor 3.27.0, the JSON folder format can store each [DAX User-Defined Function](xref:udfs) in its own file, the same way it already does for tables, measures and columns. The functions go in a `functions` subfolder at the model root:
+
+```
+MyModel/
+├── database.json
+├── functions/
+│   ├── Sales.MarginPct.json
+│   └── Time.SameDayLastYear.json
+├── tables/
+└── ...
+```
+
+The benefit is the same as for every other object type: two developers editing two different functions change two different files, so Git has nothing to merge. Without it every function lives inline in `database.json`, and any two parallel edits collide in that one file.
+
+Turn it on with the **User Defined Functions (UDFs)** level, under **Tools > Preferences > File Formats > Save-to-folder** or, for the model you have open, under **Model > Serialization options...**.
+
+![Model > Serialization options, with the User Defined Functions (UDFs) level ticked](~/content/assets/images/serialization-options-udf.png)
+
+> [!IMPORTANT]
+> Tabular Editor selects this level by default only for a model you save to a folder for the _first_ time. A model that's already folder-serialized keeps the levels stored in its own serialization annotation, so its functions stay inline until you select **User Defined Functions (UDFs)** under **Model > Serialization options...** and save the model again.
 
 ### Anotación de serialización del modelo
 

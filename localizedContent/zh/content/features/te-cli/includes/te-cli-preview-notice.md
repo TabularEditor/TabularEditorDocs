@@ -1,2 +1,2 @@
 > [!IMPORTANT]
-> Tabular Editor CLI 目前为 **有限公开预览版**。 可使用 Tabular Editor 账户进行评估；预览期间无需许可证。 在正式发布之前，命令、标志位和输出都可能会发生变化。 **预览版本将在 2026-10-31 之后停止工作。** 在预览阶段，我们不建议在生产环境的 CI/CD 流水线中使用 CLI。
+> Tabular Editor CLI 目前为 **有限公开预览版**。 It is offered for evaluation with a Tabular Editor account; no license is required during preview. Commands, flags, and outputs may change before general availability. **The preview build stops functioning after 2026-10-31.** We recommend against using the CLI in production CI/CD pipelines during preview.

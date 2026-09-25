@@ -13,31 +13,31 @@ applies_to:
 
 # Crear una medida SUM a partir de una columna
 
-## Propósito del script
+## Objetivo del script
 
 Si quieres crear rápidamente varias medidas que hagan SUM sobre las columnas que selecciones, este script lo hace por ti.
 
-## Secuencia de comandos
+## Script
 
 ### Crear medidas a partir de columnas
 
 ```csharp
-// Crea una medida SUM para cada columna seleccionada actualmente y oculta la columna.
+// Creates a SUM measure for every currently selected column and hide the column.
 foreach(var c in Selected.Columns)
 {
     var newMeasure = c.Table.AddMeasure(
-        "Suma de " + c.Name,                    // Nombre
-        "SUM(" + c.DaxObjectFullName + ")",    // Expresión DAX
-        c.DisplayFolder                        // Carpeta de visualización
+        "Sum of " + c.Name,                    // Name
+        "SUM(" + c.DaxObjectFullName + ")",    // DAX expression
+        c.DisplayFolder                        // Display Folder
     );
     
-    // Establece la cadena de formato de la nueva medida:
+    // Set the format string on the new measure:
     newMeasure.FormatString = "0.00";
 
-    // Añade documentación:
-    newMeasure.Description = "Esta medida es la suma de la columna " + c.DaxObjectFullName;
+    // Provide some documentation:
+    newMeasure.Description = "This measure is the sum of column " + c.DaxObjectFullName;
 
-    // Oculta la columna base:
+    // Hide the base column:
     c.IsHidden = true;
 }
 ```

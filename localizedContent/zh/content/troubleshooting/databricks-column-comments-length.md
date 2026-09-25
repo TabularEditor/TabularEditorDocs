@@ -20,9 +20,9 @@ applies_to:
 # Databricks 列注释长度超限错误
 
 > [!TIP]
-> Databricks 已发布新的 ODBC 驱动程序，用于替代旧版 Simba Spark ODBC Driver。 新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) 可能没有下文所述的 `MaxCommentLen` 限制。 如果你遇到此问题，建议切换到新驱动程序，Tabular Editor 3.26.0 及更高版本已支持该驱动程序。
+> Databricks 已发布新的 ODBC 驱动程序，用于替代旧版 Simba Spark ODBC Driver。 The new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) may not have the `MaxCommentLen` limitation described below. If you experience this issue, consider switching to the new driver, which Tabular Editor 3.26.0 and later supports.
 
-使用“导入表向导”从 Databricks 导入表时，如果列注释（说明）超过 512 个字符，可能会遇到连接错误。 这一限制来自 Simba Spark ODBC Driver，尽管 Databricks Unity Catalog 允许更长的列注释。
+使用“导入表向导”从 Databricks 导入表时，如果列注释（说明）超过 512 个字符，可能会遇到连接错误。 This limitation exists in the Simba Spark ODBC Driver, even though Databricks Unity Catalog allows longer column comments.
 
 典型的错误信息如下：
 
@@ -34,7 +34,7 @@ applies_to:
 
 ## 了解问题
 
-Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动对列注释的默认长度限制为 512 个字符。 无论 Databricks Unity Catalog 允许的长度是多少，这个限制都会被强制执行。
+Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动对列注释的默认长度限制为 512 个字符。 This limit is enforced regardless of what Databricks Unity Catalog allows.
 
 ### 为什么会这样
 
@@ -42,7 +42,7 @@ Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动�
 
 2. **Unity Catalog 支持更长的注释**：Databricks Unity Catalog 允许列描述超过 512 个字符，因此可能会超出驱动程序的限制。
 
-3. **导入向导读取元数据**：当“导入表向导”查询表元数据时，会尝试读取所有列注释。 只要有任意注释超过驱动程序限制，连接就会因调用异常而失败。
+3. **Import wizard retrieval**: When the Import Table Wizard queries table metadata, it attempts to retrieve all column comments. If any comment exceeds the driver's limit, the connection fails with an invocation exception.
 
 ---
 
@@ -79,7 +79,7 @@ Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动�
 如果需要保留超过 512 个字符的列注释，你可以配置 Simba Spark ODBC Driver，使其支持更长的注释。
 
 > [!NOTE]
-> 在继续之前，请确保已安装适用于 Databricks 的最新版 Simba Spark ODBC Driver。 你可以从 [Microsoft Azure Databricks ODBC 下载页面](https://learn.microsoft.com/azure/databricks/integrations/odbc/download) 下载。
+> Before proceeding, ensure you have the latest version of the Simba Spark ODBC Driver for Databricks installed. 你可以从 [Microsoft Azure Databricks ODBC 下载页面](https://learn.microsoft.com/azure/databricks/integrations/odbc/download) 下载该驱动程序。
 
 **步骤：**
 
@@ -120,7 +120,7 @@ Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动�
 
 6. **重试导入。**
 
-   再次使用“导入表向导”导入 Databricks 表。 提高注释长度上限后，连接应可成功建立。
+   Use the Import Table Wizard again to import your Databricks tables. The connection should now succeed with the increased comment length limit.
 
 **优势：**
 
@@ -202,13 +202,13 @@ Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动�
 
 如果以上步骤未能解决你的问题：
 
-1. **检查 ODBC 驱动程序版本**：确保已安装最新版本的 Simba Spark ODBC Driver。 你可以从 [Microsoft Azure Databricks ODBC 下载页面](https://learn.microsoft.com/azure/databricks/integrations/odbc/download) 下载该驱动程序。
+1. **Verify ODBC driver version**: Ensure you have the latest version of the Simba Spark ODBC Driver installed. 你可以从 [Microsoft Azure Databricks ODBC 下载页面](https://learn.microsoft.com/azure/databricks/integrations/odbc/download) 下载该驱动程序。
 
 2. **检查 ODBC 数据源配置**：打开 Windows 的 ODBC 数据源管理器 (odbcad32.exe)，确认你的 Databricks 连接已正确配置。
 
 3. **用更简单的表测试**：尝试导入一张你确定列注释很短（或没有注释）的 Databricks 表，先确认连接本身是否正常。
 
-4. **查看 ODBC 驱动程序日志**：Simba Spark ODBC Driver 可以生成详细的日志。 参考驱动程序文档，按说明启用日志记录；日志可能会提供更多诊断信息。
+4. **查看 ODBC 驱动程序日志**：Simba Spark ODBC Driver 可以生成详细的日志。 Refer to the driver documentation for instructions on enabling logging, which may provide additional diagnostic information.
 
 5. **联系支持**：联系 Tabular Editor 支持团队，并提供：
    - 完整的错误信息文本
