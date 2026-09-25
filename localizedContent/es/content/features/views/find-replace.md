@@ -1,5 +1,5 @@
 ---
-uid: find-replace
+uid: buscar-y-reemplazar
 title: Buscar/Reemplazar
 author: Morten Lønskov
 updated: 2023-03-22
