@@ -96,7 +96,7 @@ Si tu organización restringe el consentimiento del usuario (algo habitual en en
 
 1. Recibirás un mensaje de error en 'mensajes' que indica que se requiere el consentimiento del administrador
 2. Tendrás que ponerte en contacto con tu departamento de TI o con el administrador de Microsoft Entra ID
-3. Facilítales lo siguiente:
+3. Provide them with:
    - Nombre de la aplicación: "Tabular Editor 3 - User Delegated Access to Azure Databricks"
    - ID de la aplicación: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
    - Permisos necesarios: Microsoft Graph (offline_access, openid, profile, User.Read) y Azure Databricks API (user_impersonation)
