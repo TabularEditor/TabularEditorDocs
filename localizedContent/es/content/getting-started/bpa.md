@@ -49,7 +49,7 @@ Si la misma regla (por ID) se encuentra en más de una colección, el orden de p
 
 En la parte superior de la lista, verás una colección especial llamada **(Reglas efectivas)**. Al seleccionar esta colección, verás la lista de reglas que realmente se aplican al modelo cargado actualmente, respetando la precedencia de las reglas con el mismo ID, como se mencionó anteriormente. La lista inferior indicará a qué colección pertenece una regla. Además, verás que el nombre de una regla aparece tachado si existe una regla con un ID similar en una colección con mayor prioridad:
 
-![Rule Overrides](~/content/assets/images/rule-overrides.png)
+![Reemplazos de reglas](~/content/assets/images/rule-overrides.png)
 
 ## Agregar colecciones adicionales
 
@@ -71,7 +71,7 @@ La parte inferior de la pantalla te permitirá agregar, editar, clonar y elimina
 
 Para agregar una nueva regla a una colección, haz clic en el botón **Nueva regla...**. Esto abre el editor de reglas de prácticas recomendadas (consulta la captura de pantalla a continuación).
 
-![Bpa Rule Editor](~/content/assets/images/bpa-rule-editor.png)
+![Editor de reglas de Bpa](~/content/assets/images/bpa-rule-editor.png)
 
 Al crear una nueva regla, debes especificar los siguientes detalles:
 
