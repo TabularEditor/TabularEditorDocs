@@ -1,5 +1,5 @@
 ---
-uid: calendars
+uid: 日历
 title: 日历（增强时间智能）
 author: Daniel Otykier 和 Maria José Ferreira
 updated: 2026-01-22
@@ -20,9 +20,9 @@ applies_to:
 
 # 日历（增强时间智能）
 
-Power BI Desktop 2025 年九月版引入了一项新的公共预览功能：**增强型时间智能**（也称为 **基于日历的时间智能**）。 This feature lets you define custom calendars in your semantic model, enabling time intelligence calculations across diverse calendar systems such as fiscal, retail (4-4-5, 4-5-4, 5-4-4), ISO, and other non-Gregorian calendars.
+Power BI Desktop 2025 年九月版引入了一项新的公共预览功能：**增强型时间智能**（也称为 **基于日历的时间智能**）。该功能允许你在语义模型中定义自定义日历，从而支持在财年、零售（4-4-5、4-5-4、5-4-4）、ISO 以及其他非公历日历体系下进行时间智能计算。
 
-与默认假设使用标准公历的经典时间智能函数不同，新的基于日历的函数会根据你在日期表中定义的明确列映射来确定其行为。 This approach also introduces week-level time intelligence calculations that were difficult to perform previously.
+与默认假设使用标准公历的经典时间智能函数不同，新的基于日历的函数会根据你在日期表中定义的明确列映射来确定其行为。这种方法还引入了周级别的时间智能计算，而这类计算此前很难实现。
 
 有关基于日历的时间智能工作原理的更多信息，请参阅：
 
@@ -44,7 +44,7 @@ Power BI Desktop 2025 年九月版引入了一项新的公共预览功能：**�
 
 ## 日历编辑器
 
-Tabular Editor 3 2026 年一月版引入了专用的 **日历编辑器**，提供用于配置日历的完整界面。 The editor displays all time unit categories in a structured grid with helpful tooltips, and performs real-time validation to help you avoid configuration errors.
+Tabular Editor 3 2026 年一月版引入了专用的 **日历编辑器**，提供用于配置日历的完整界面。编辑器会以结构化网格显示所有时间单位类别，并提供实用的工具提示，同时进行实时验证，帮助避免配置错误。
 
 ### 打开日历编辑器
 
@@ -61,8 +61,8 @@ Tabular Editor 3 2026 年一月版引入了专用的 **日历编辑器**，提�
 
 日历编辑器分为两个主要区域：
 
-1. **Calendars grid (left panel)**
-   A vertical grid where each calendar is displayed as a column and time unit categories are displayed as rows. The rows are organized hierarchically by Year, Quarter, Month, Week, and Day. In this grid you can:
+1. **日历网格（左侧面板）**
+   一个垂直布局的网格，其中每个日历显示为一列，时间单位类别显示为各行。各行按年、季度、月、周和日分层组织。在此网格中，可以：
 
    - 在 **表** 行中选择日历应从中获取列的表（通常为日期表）。
    - 在每个单元格中通过下拉列表进行选择，将列映射到时间单位类别。
@@ -81,13 +81,13 @@ Tabular Editor 3 2026 年一月版引入了专用的 **日历编辑器**，提�
 
 ### 将列映射到时间单位
 
-The calendars grid displays all available time unit categories. To map a column to a time unit, click on a time-unit cell under a calendar column in the grid. This opens a dropdown where you can select the **primary column** for that time unit.
+日历网格会显示所有可用的时间单位类别。要将某列映射到某个时间单位，点击网格中某个日历列下对应的时间单位单元格。这会打开一个下拉列表，可在其中为该时间单位选择**主列**。
 
 ![从下拉列表选择列](~/content/assets/images/tutorials/calendar-dropdown-column-selection.png)
 
 你不需要映射每个时间单位——只需映射适用于你的日历结构、且你的表中有相应列的那些即可。
 
-时间单位分为 **完整** 类别（单独即可唯一标识一个周期）和 **部分** 类别（需要先映射其父时间单位）。 Hover over any time unit row to see a tooltip describing the expected data format and examples.
+时间单位分为 **完整** 类别（单独即可唯一标识一个周期）和 **部分** 类别（需要先映射其父时间单位）。将鼠标悬停在任意时间单位行上，即可查看工具提示，其中会说明预期的数据格式并提供示例。
 
 ![完整时间单位的工具提示，显示说明和示例](~/content/assets/images/tutorials/calendar-complete-time-unit-tooltip.png)
 
@@ -97,9 +97,9 @@ The calendars grid displays all available time unit categories. To map a column 
 
 #### 示例：使用部分时间单位
 
-In some cases, your Date table may not have columns that uniquely identify complete time units like Quarter or Month (e.g., "Q1 2024" or "January 2024"). 相反，你可能有类似 `QuarterOfYear`（1-4）和 `MonthOfYear`（1-12）这样的列，它们只有与“年”列组合使用时才有意义。
+在某些情况下，你的日期表可能没有能够唯一标识“季度”或“月份”等完整时间单位的列 (例如 "Q1 2024" 或 "2024 年一月")。相反，你可能有类似 `QuarterOfYear`（1-4）和 `MonthOfYear`（1-12）这样的列，它们只有与“年”列组合使用时才有意义。
 
-在这种情况下，你可以将部分时间单位（`Quarter of Year`、`Month of Year`）与完整时间单位 `Year` 一起映射。 This is a valid configuration because the partial time units can derive their full context from the Year mapping.
+在这种情况下，你可以将部分时间单位（`Quarter of Year`、`Month of Year`）与完整时间单位 `Year` 一起映射。这是有效的配置，因为这些不完整的时间单位可以从“年”的映射中获得完整上下文。
 
 ![使用部分时间单位的日历配置](~/content/assets/images/tutorials/calendar-simple-example.png)
 
@@ -120,34 +120,34 @@ In some cases, your Date table may not have columns that uniquely identify compl
 
 **完整时间单位：**
 
-| 时间单位 | 说明      | 示例                   |
-| ---- | ------- | -------------------- |
-| 年    | 年份      | 2024、2025            |
-| 季度   | 包含年份的季度 | Q1 2024, Q2 2025     |
-| 月    | 包含年份的月份 | 2023 年一月，2024 年二月    |
-| 周    | 包含年份的周次 | 2023年第50周，W50-2023   |
-| 日期   | 日期      | 12/31/2025, 4/3/2023 |
+| 时间单位 | 说明      | 示例                  |
+| ---- | ------- | ------------------- |
+| 年    | 年份      | 2024、2025           |
+| 季度   | 包含年份的季度 | Q1 2024、Q2 2025     |
+| 月    | 包含年份的月份 | 2023 年一月，2024 年二月   |
+| 周    | 包含年份的周次 | 2023年第50周，W50-2023  |
+| 日期   | 日期      | 12/31/2025、4/3/2023 |
 
 **部分时间单位**（需要先映射一个父时间单位）：
 
-| 时间单位            | 说明                       | 示例          | 需要 | 或需要以下之一                                                                                                                                                            |
-| --------------- | ------------------------ | ----------- | -- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 年度季度            | 一年中的季度                   | Q1，第2季度，YQ1 | 年  |                                                                                                                                                                    |
-| 年度月份            | 一年中的月份                   | 一月，M11，11   | 年  |                                                                                                                                                                    |
-| 季度内月份           | 季度内的月份                   | 1，QM2       | 季度 | <ul><li>年度季度 + 年</li></ul>                                                                                                                                         |
-| 年度周次            | 一年中的周次                   | 第50周，W50，50 | 年  |                                                                                                                                                                    |
-| Week of Quarter | 当季的第几周                   | QW10，10     | 季度 | <ul><li>年度季度 + 年</li></ul>                                                                                                                                         |
-| 当月第几周           | 当月的第几周                   | MW2，2       | 月  | <ul><li>年度月份 + 年</li><li>季度内月份 + 季度</li><li>季度内月份 + 年度季度 + 年</li></ul>                                                                                             |
-| Day of Year     | 当年的第几天                   | 365，D1      | 年  |                                                                                                                                                                    |
-| Day of Quarter  | The day within a quarter | QD2，50      | 季度 | <ul><li>年度季度 + 年</li></ul>                                                                                                                                         |
-| 当月第几天           | 当月的第几天                   | MD10，30     | 月  | <ul><li>年内月份 + 年</li><li>季度内月份 + 季度</li><li>季度内月份 + 年内季度 + 年</li></ul>                                                                                             |
-| 星期几             | 一周中的某一天                  | WD5, 5      | 周  | <ul><li>年内周 + 年</li><li>季度内周 + 季度</li><li>季度内周 + 年内季度 + 年</li><li>月内周 + 月</li><li>月内周 + 年内月份 + 年</li><li>月内周 + 季度内月份 + 季度</li><li>月内周 + 季度内月份 + 年内季度 + 年</li></ul> |
+| 时间单位   | 说明      | 示例          | 需要 | 或需要以下之一                                                                                                                                                            |
+| ------ | ------- | ----------- | -- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 年度季度   | 一年中的季度  | Q1，第2季度，YQ1 | 年  |                                                                                                                                                                    |
+| 年度月份   | 一年中的月份  | 一月，M11，11   | 年  |                                                                                                                                                                    |
+| 季度内月份  | 季度内的月份  | 1，QM2       | 季度 | <ul><li>年度季度 + 年</li></ul>                                                                                                                                         |
+| 年度周次   | 一年中的周次  | 第50周，W50，50 | 年  |                                                                                                                                                                    |
+| 季度内第几周 | 当季的第几周  | QW10，10     | 季度 | <ul><li>年度季度 + 年</li></ul>                                                                                                                                         |
+| 当月第几周  | 当月的第几周  | MW2，2       | 月  | <ul><li>年度月份 + 年</li><li>季度内月份 + 季度</li><li>季度内月份 + 年度季度 + 年</li></ul>                                                                                             |
+| 年内第几天  | 当年的第几天  | 365，D1      | 年  |                                                                                                                                                                    |
+| 季度内第几天 | 当季的第几天  | QD2，50      | 季度 | <ul><li>年度季度 + 年</li></ul>                                                                                                                                         |
+| 当月第几天  | 当月的第几天  | MD10，30     | 月  | <ul><li>年内月份 + 年</li><li>季度内月份 + 季度</li><li>季度内月份 + 年内季度 + 年</li></ul>                                                                                             |
+| 星期几    | 一周中的某一天 | WD5、5       | 周  | <ul><li>年内周 + 年</li><li>季度内周 + 季度</li><li>季度内周 + 年内季度 + 年</li><li>月内周 + 月</li><li>月内周 + 年内月份 + 年</li><li>月内周 + 季度内月份 + 季度</li><li>月内周 + 季度内月份 + 年内季度 + 年</li></ul> |
 
 ### 关联列
 
-当你将某列映射到一个时间单位时，该列会成为该时间单位的**主列**。 You can optionally add **associated columns** that represent the same time unit in a different format.
+当你将某列映射到一个时间单位时，该列会成为该时间单位的**主列**。也可以按需添加**关联列**，以不同格式表示同一时间单位。
 
-例如，如果你将数值列 `MonthNumber`（包含值 1-12）映射到“年内月份”，你可能还想关联 `MonthName` 列（包含“January”“February”等） with the same time unit. Both columns represent the same concept, but in different formats.
+例如，如果你将数值列 `MonthNumber`（包含值 1-12）映射到“年内月份”，你可能还想关联 `MonthName` 列（包含“January”“February”等）使用同一时间单位。两列表示的是同一概念，只是格式不同。
 
 要添加关联列：
 
@@ -160,13 +160,13 @@ In some cases, your Date table may not have columns that uniquely identify compl
 
 #### 按列排序列
 
-当主时间单位列定义了一个 **按列排序** 列时，该 **按列排序** 列会自动被视为关联列。 This ensures that both columns receive the same filter behavior during time intelligence calculations, aligning with how Analysis Services processes calendar configurations.
+当主时间单位列定义了一个 **按列排序** 列时，该 **按列排序** 列会自动被视为关联列。这可确保两列在进行时间智能计算时具有相同的筛选行为，并与 Analysis Services 处理日历配置的方式保持一致。
 
-例如，如果你将 `MonthName` 列映射为“Month of Year”，且 `MonthName` 按 `MonthNumber` 列排序，则 `MonthNumber` 列会自动与该时间单位关联。 You don't need to manually add the Sort By column to the Associated Columns panel—the Calendar Editor handles this automatically.
+例如，如果你将 `MonthName` 列映射为“Month of Year”，且 `MonthName` 按 `MonthNumber` 列排序，则 `MonthNumber` 列会自动与该时间单位关联。你不需要手动将“按列排序”列添加到“关联列”面板中——日历编辑器会自动完成此操作。
 
 ### 时间相关列
 
-In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. 时间相关列是指日期表中不属于某个特定时间单位类别，但在进行时间智能计算时仍应获得特殊处理的列。
+除了将列映射到特定的时间单位类别外，你还可以将列标记为**时间相关**。时间相关列是指日期表中不属于某个特定时间单位类别，但在进行时间智能计算时仍应获得特殊处理的列。
 
 时间相关列的示例包括：
 
@@ -186,7 +186,7 @@ In addition to mapping columns to specific time unit categories, you can mark co
 1. 在日历网格底部，选择 **时间相关列** 行。
 2. 在右侧的 **时间相关列** 面板中，勾选你想标记为时间相关的列。
 
-![Time-Related Columns panel](~/content/assets/images/tutorials/calendar-time-related-columns.png)
+![时间相关列面板](~/content/assets/images/tutorials/calendar-time-related-columns.png)
 
 ### 应用更改
 
@@ -201,20 +201,20 @@ In addition to mapping columns to specific time unit categories, you can mark co
 
 ## 实时验证
 
-The Calendar Editor performs real-time validation as you configure your calendars. Validation feedback is displayed via icons and tooltips directly in the grid, helping you identify and resolve issues before saving.
+在配置日历时，日历编辑器会执行实时验证。验证反馈会通过网格中的图标和工具提示直接显示，帮助你在保存前识别并解决问题。
 
 将强制执行以下规则：
 
 1. **日历名称必须唯一**
-   在语义模型中，每个日历的名称都必须唯一。 If you create a calendar with a duplicate name, the editor automatically appends a suffix (e.g., "(1)") to ensure uniqueness.
+   在语义模型中，每个日历的名称都必须唯一。如果你创建的日历名称重复，编辑器会自动追加后缀（例如“(1)”）以确保唯一性。
 
-2. **Time unit dependency validation**
-   Partial time units require their parent time units to be mapped. For example, if you map a column to "Day of Month", you must also map a column to "Month" (or to "Month of Year" + "Year", etc.). The editor highlights cells with missing dependencies and displays a tooltip explaining which parent time units are required.
+2. **时间单位依赖关系验证**
+   部分时间单位要求其父时间单位也必须映射。例如，如果你将某列映射为“月中的日期”，则还必须将某列映射为“月”（或映射为“年中的月份” + “年”等）。编辑器会高亮显示缺少依赖项的单元格，并通过工具提示说明需要哪些父时间单位。
 
    ![依赖项错误，显示缺少父级时间单位](~/content/assets/images/tutorials/calendar-dependency-error.png)
 
 3. **跨日历类别一致性**
-   如果你的模型包含多个日历，则同一列在所有日历中必须关联到相同的时间单位类别。 For example, if you map a `FiscalYear` column as "Year" in one calendar, you cannot map the same column as "Week of Year" in another calendar.
+   如果你的模型包含多个日历，则同一列在所有日历中必须关联到相同的时间单位类别。例如，如果你在一个日历中将 `FiscalYear` 列映射为“年”，则不能在另一个日历中将同一列映射为“年中的周”。
 
    ![跨日历类别冲突，显示“时间单位冲突”错误](~/content/assets/images/tutorials/calendar-cross-category-validation.png)
 
@@ -224,13 +224,13 @@ The Calendar Editor performs real-time validation as you configure your calendar
 
 ![编辑日历列映射](~/content/assets/images/edit-calendar-mappings.png)
 
-此对话框允许你逐个添加列关联。 Click **Add Column Association** and choose **Column Association** to add a new mapping. For each association, you select a column and assign it to a time unit category. You can also add additional associated columns for each mapping by expanding the **Columns** property.
+此对话框允许你逐个添加列关联。点击 **Add Column Association**，然后选择 **Column Association**，以添加新的映射。对于每个关联，你都需要选择一列并将其分配给某个时间单位类别。你还可以通过展开 **Columns** 属性，为每个映射添加更多关联列。
 
 ![集合编辑器中的列关联](~/content/assets/images/tutorials/calendar-example.png)
 
 #### 在“列映射”对话框中添加与时间相关的列
 
-要通过这个对话框添加与时间相关的列，请点击 **添加列关联** 并选择 **列组**。 This creates a Time Related Column Group where you can add columns that should be treated as time-related (see [Time-Related Columns](#time-related-columns) for more information about how these columns behave).
+要通过这个对话框添加与时间相关的列，请点击 **添加列关联** 并选择 **列组**。这会创建一个时间相关列组，你可以在其中添加应视为时间相关的列（有关这些列行为方式的更多信息，请参阅[时间相关列](#time-related-columns)）。
 
 ![为与时间相关的列添加列组](~/content/assets/images/tutorials/calendar-collection-editor-column-group.png)
 
@@ -238,9 +238,9 @@ The Calendar Editor performs real-time validation as you configure your calendar
 
 ## 在 DAX 中使用日历
 
-Once you've defined a calendar and mapped its columns, you can use it in your DAX calculations. 日历可与现有的 DAX 时间智能函数配合使用，这些函数以日期列作为输入（例如 [`TOTALYTD`](https://dax.guide/totalytd)、[`CLOSINGBALANCEMONTH`](https://dax.guide/closingbalancemonth) 和 [`DATEADD`](https://dax.guide/dateadd)）。
+定义好日历并映射其列后，你就可以在 DAX 计算中使用它。日历可与现有的 DAX 时间智能函数配合使用，这些函数以日期列作为输入（例如 [`TOTALYTD`](https://dax.guide/totalytd)、[`CLOSINGBALANCEMONTH`](https://dax.guide/closingbalancemonth) 和 [`DATEADD`](https://dax.guide/dateadd)）。
 
-此外，还引入了 8 个用于按周的时间智能的新 DAX 函数。 These functions exclusively work with calendars:
+此外，还引入了 8 个用于按周的时间智能的新 DAX 函数。以下函数仅适用于日历：
 
 - [`CLOSINGBALANCEWEEK`](https://dax.guide/closingbalanceweek)
 - [`OPENINGBALANCEWEEK`](https://dax.guide/openingbalanceweek)
