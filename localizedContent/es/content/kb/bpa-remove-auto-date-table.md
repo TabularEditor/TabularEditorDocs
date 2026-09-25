@@ -8,7 +8,7 @@ description: Regla de buenas prácticas para identificar y eliminar tablas de fe
 
 # Eliminar tablas de fechas automáticas
 
-## Descripción general
+## Resumen
 
 Esta regla de buenas prácticas identifica las tablas de fechas generadas automáticamente por Power BI Desktop. Estas tablas generadas automáticamente (`DateTableTemplate_` y `LocalDateTable_`) deben eliminarse y sustituirse por una única tabla de fechas explícita para optimizar el tamaño y el rendimiento del modelo.
 
@@ -40,7 +40,7 @@ La regla se activa cuando encuentra tablas calculadas cuyos nombres:
 
 Estos prefijos indican las tablas de fechas generadas automáticamente por Power BI.
 
-## Cómo solucionarlo
+## Cómo corregir
 
 ### Solución manual
 
@@ -69,12 +69,12 @@ Los modelos nuevos usan la configuración predeterminada, que habilita las tabla
 ### Antes de la corrección
 
 ```
-Tablas:
+Tables:
   - Sales
-  - LocalDateTable_OrderDate (oculta, generada automáticamente)
-  - LocalDateTable_ShipDate (oculta, generada automáticamente)
+  - LocalDateTable_OrderDate (hidden, auto-generated)
+  - LocalDateTable_ShipDate (hidden, auto-generated)
   - Products
-  - LocalDateTable_ReleaseDate (oculta, generada automáticamente)
+  - LocalDateTable_ReleaseDate (hidden, auto-generated)
 ```
 
 **Resultado**: Varias tablas ocultas aumentan el tamaño del modelo
@@ -82,18 +82,18 @@ Tablas:
 ### Después de la corrección
 
 ```
-Tablas:
+Tables:
   - Sales
   - Products
-  - DateTable (explícita, marcada mediante Marcar como tabla de fechas)
-    -> Relaciones con Sales[OrderDate], Sales[ShipDate], Products[ReleaseDate]
+  - DateTable (explicit, marked as date table)
+    -> Relationships to Sales[OrderDate], Sales[ShipDate], Products[ReleaseDate]
 ```
 
 **Resultado**: Una única tabla de fechas eficiente sirve para todas las relaciones de fechas
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
 ## Reglas relacionadas
 
