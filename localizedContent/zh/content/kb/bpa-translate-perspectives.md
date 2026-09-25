@@ -53,7 +53,7 @@ Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 ### 原因 2：后续添加了区域设置
 
-Culture added after perspectives were defined.
+区域设置是在透视定义完成后才添加的。
 
 ### 原因 3：翻译不完整
 
