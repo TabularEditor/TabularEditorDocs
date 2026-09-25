@@ -10,7 +10,7 @@ description: 一条最佳实践规则：通过确保用于层次结构和关系�
 
 ## 概览
 
-此最佳实践规则会识别那些将 `IsAvailableInMDX` 设为 `false`，但实际用于需要 MDX 访问场景的列。 These columns must have MDX availability enabled to function correctly in hierarchies, relationships, and sort operations.
+此最佳实践规则会识别那些将 `IsAvailableInMDX` 设为 `false`，但实际用于需要 MDX 访问场景的列。这些列必须启用 MDX 可用性，才能在层级结构、关系和排序操作中正常工作。
 
 - 类别：错误预防
 - 严重性：高（3）
@@ -23,7 +23,7 @@ description: 一条最佳实践规则：通过确保用于层次结构和关系�
 
 ## 为何这很重要
 
-当某列用于特定的模型结构时，Analysis Services 引擎需要通过 MDX 访问该列。 Disabling MDX access for columns that need it causes:
+当某列用于特定的模型结构时，Analysis Services 引擎需要通过 MDX 访问该列。为需要 MDX 访问的列禁用 MDX 访问将导致：
 
 - **查询失败**：层次结构和排序操作会失败并报错
 - **可视化出错**：使用受影响层次结构的图表和表格会显示错误
