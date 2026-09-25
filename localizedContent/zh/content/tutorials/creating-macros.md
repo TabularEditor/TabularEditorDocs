@@ -1,5 +1,5 @@
 ---
-uid: creating-macros
+uid: 创建宏
 title: 创建宏
 author: Morten Lønskov
 updated: 2023-12-07
@@ -20,8 +20,7 @@ applies_to:
 
 # （教程）创建宏
 
-宏是保存在 Tabular Editor 中的 C# Script，可以在不同语义模型之间轻松复用。
-Saving a script as a  Macro will allow that macro to be used when right clicking on the objects in the TOM Explorer making it simple to apply the script to your model.
+宏是保存在 Tabular Editor 中的 C# Script，可以在不同语义模型之间轻松复用。将脚本另存为宏后，右键单击 TOM Explorer 中的对象时即可使用该宏，从而轻松将脚本应用到你的模型。
 
 > [!NOTE]
 > 在 Tabular Editor 2 中，用于复用 C# Script 的功能叫做 @custom-actions。
@@ -31,10 +30,7 @@ Saving a script as a  Macro will allow that macro to be used when right clicking
 创建宏的第一步是编写并测试一个 C# Script。
 
 > [!TIP]
-> 开始进行 C# Script 编写的一个简单方法是使用内置的录制功能，它会记录你在 TOM Explorer 中执行的操作。
-> his way you can see how to interact with the different model objects and create reusable scripts.
-> nother way is to reuse existing scripts such as those in our [script library](xref:csharp-script-library).
-> n this tutorial we use the script [Format Numeric Measures](xref:script-format-numeric-measures) to showcase the Macro functionality.
+> 开始进行 C# Script 编写的一个简单方法是使用内置的录制功能，它会记录你在 TOM Explorer 中执行的操作。这样，你就可以了解如何与不同的模型对象交互，并创建可重复使用的脚本。另一种方式是重用现有脚本，比如我们的[脚本库](xref:csharp-script-library)中的脚本。在本教程中，我们使用脚本 [Format Numeric Measures](xref:script-format-numeric-measures)（即“格式化数值度量值”）来演示宏功能。
 
 当脚本满足要求并正常运行后，可点击工具栏中的“另存为宏”按钮保存脚本，这将打开“保存宏”窗口。
 
@@ -48,13 +44,13 @@ Saving a script as a  Macro will allow that macro to be used when right clicking
 
 ![宏保存信息框](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
 
-在上面的示例中，宏将保存到名为 Formatting\Beginner 的文件夹中，脚本名为“格式化数字度量值”。 It will be saved in the context of measures.
+在上面的示例中，宏将保存到名为 Formatting\Beginner 的文件夹中，脚本名为“格式化数字度量值”。它会以“度量值”上下文保存。
 
 ### 宏上下文
 
 宏会保存在一个“有效上下文”中，该上下文决定脚本可以应用到模型中的哪些对象。
 
-之后，在 TOM Explorer 中右键单击某个度量值时即可使用该宏。 The context given while saving the Macro determines which objects will show the Macro when right clicking on that object.
+之后，在 TOM Explorer 中右键单击某个度量值时即可使用该宏。保存宏时指定的上下文决定了你右键单击哪些对象时会看到该宏。
 
 Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
@@ -68,10 +64,10 @@ Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
 ## 宏 JSON 文件
 
-宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。 For more information on file types in Tabular Editor please see [Supported File Types](xref:supported-files#macroactionsjson)
+宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。想了解 Tabular Editor 中文件类型的更多信息，可以查看[支持的文件类型](xref:supported-files#macroactionsjson)
 
 ## 宏文件示例
 
-An example of a MacroActions.JSON file can be found here. 其中包含我们脚本库中的多个 C# Script: [下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+MacroActions.json 文件示例可在此处找到。其中包含我们脚本库中的多个 C# Script: [下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 
