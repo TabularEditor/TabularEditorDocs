@@ -23,7 +23,7 @@ applies_to:
 本页将带你从零开始，使用 Tabular Editor 3 创建一个全新的 Power BI 语义模型。
 
 > [!IMPORTANT]
-> Tabular Editor 3 Business Edition is limited to [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq). For Fabric, Power BI Premium or Embedded capacity, you must upgrade to Tabular Editor 3 Enterprise Edition. In either case, the target workspace must allow [XMLA read/write access](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) - the default on all capacity SKUs since June 2025.
+> Tabular Editor 3 商业版仅限于 [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq)。如果使用 Fabric、Power BI Premium 或 Embedded 容量，则必须升级到 Tabular Editor 3 企业版。无论哪种情况，目标 Workspace 都必须启用 [XMLA 读/写访问](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)——自 2025 年六月起，这已是所有容量 SKU 的默认设置。
 >
 > Tabular Editor 3 桌面版不支持 Power BI 语义模型。
 >
@@ -35,8 +35,8 @@ applies_to:
 
 ![新建模型](~/content/assets/images/tutorials/new-pbi-model.png)
 
-- Provide a name for your model or use the default value. Then, set the compatibility level to "1706 (Power BI / Fabric)".
-- For the best development experience, check the "Use workspace database" option. This requires that you have a development workspace available in Power BI, with XMLA read/write enabled. 单击“确定”后，系统会提示你输入 Power BI Workspace 的连接字符串，以便在该 Power BI Workspace 中创建 Workspace 数据库。
+- 为模型提供一个名称，或使用默认值。然后，将兼容级别设置为“1706（Power BI / Fabric）”。
+- 为了获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。这要求在 Power BI 中有一个可用的开发 Workspace，并已启用 XMLA 读/写。单击“确定”后，系统会提示你输入 Power BI Workspace 的连接字符串，以便在该 Power BI Workspace 中创建 Workspace 数据库。
 
 > [!NOTE]
-> 使用 Workspace 数据库，你可以验证 Power Query（M 表达式），并从 Power Query 表达式中导入表架构。 You can also refresh and query data in the workspace database, making it easier to debug and test your DAX expressions.
+> 使用 Workspace 数据库，你可以验证 Power Query（M 表达式），并从 Power Query 表达式中导入表架构。此外，还可以在 Workspace 数据库中刷新和查询数据，从而更轻松地调试和测试 DAX 表达式。
