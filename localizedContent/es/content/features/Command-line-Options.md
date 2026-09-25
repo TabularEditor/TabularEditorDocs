@@ -1,6 +1,6 @@
 ---
 uid: command-line-options
-title: Línea de comandos (Tabular Editor 2)
+title: Command Line (Tabular Editor 2)
 author: Daniel Otykier
 updated: 2026-06-09
 applies_to:
@@ -9,95 +9,95 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       none: true
-    - product: CLI de Tabular Editor
+    - product: Tabular Editor CLI
       none: true
 ---
 
-# Línea de comandos (Tabular Editor 2)
+# Command Line (Tabular Editor 2)
 
 Tabular Editor se puede ejecutar desde la línea de comandos para realizar diversas tareas, lo que puede ser útil en escenarios de compilación e implementación automatizadas, etc.
 
-## Cómo encajan las herramientas
+## How the tools fit together
 
-Tabular Editor 3 es una aplicación de escritorio para desarrolladores. No tiene su propia interfaz de línea de comandos. Para implementaciones automatizadas y canalizaciones de CI/CD, usa `TabularEditor.exe` (la CLI de Tabular Editor 2 documentada en esta página) o la nueva [CLI de Tabular Editor](xref:te-cli) multiplataforma (`te`).
+Tabular Editor 3 is a desktop application for developers. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the Tabular Editor 2 CLI documented on this page) or the new cross-platform [Tabular Editor CLI](xref:te-cli) (`te`).
 
-Ejecutar `TabularEditor.exe` en una canalización de CI/CD no requiere una licencia de Tabular Editor 3. Solo los usuarios de la aplicación Tabular Editor 3 necesitan una licencia.
+Running `TabularEditor.exe` in a CI/CD pipeline does not require a Tabular Editor 3 license. Only users of the Tabular Editor 3 application need a license.
 
 > [!TIP]
-> ¿Busca la nueva CLI multiplataforma? Consulte @te-cli para obtener la CLI de Tabular Editor (versión preliminar pública limitada), su sucesora que se ejecuta en Windows, macOS y Linux.
+> Looking for the new cross-platform CLI? See @te-cli for the Tabular Editor CLI (Limited Public Preview), a successor that runs on Windows, macOS, and Linux.
 
-## TabularEditor.exe frente a la CLI de Tabular Editor
+## TabularEditor.exe vs. the Tabular Editor CLI
 
-La CLI de Tabular Editor (`te`) es la sucesora multiplataforma de `TabularEditor.exe`. No es solo una reescritura para macOS y Linux: incorpora la edición, la inspección, la comparación de diferencias de modelos, las pruebas, la activación de actualizaciones y el análisis de VertiPaq como operaciones de canalización de primera clase; nada de esto era posible con `TabularEditor.exe`. La CLI `te` está en versión preliminar pública limitada (expira el 2026-10-31); por ahora, usa `TabularEditor.exe` para las canalizaciones de producción hoy.
+The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.exe`. It's not just a rewrite for macOS and Linux - it adds model editing, inspection, diffing, testing, refresh triggering, and VertiPaq analysis as first-class pipeline operations, none of which were possible with `TabularEditor.exe`. The `te` CLI is in Limited Public Preview (expires 2026-10-31); use `TabularEditor.exe` for production pipelines today.
 
-#### De un vistazo
+#### At a glance
 
-| Aspecto           | CLI de TE2 (`TabularEditor.exe`)    | CLI de TE (`te`)                                            |
-| ----------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| Estado            | Estable y lista para producción                        | Versión preliminar pública limitada (expira el 2026-10-31)  |
-| Plataforma        | Solo para Windows                                      | Windows, macOS, Linux                                                          |
-| Requiere licencia | No                                                     | No (versión preliminar); por determinar cuando llegue a GA  |
-| Binario           | Aplicación WinForms; requiere el wrapper `start /wait` | Binario de consola diseñado específicamente para este fin; no requiere wrapper |
+| Aspect           | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                               |
+| ---------------- | ------------------------------------------------ | -------------------------------------------------------------- |
+| Estado           | Stable, production-ready                         | Limited Public Preview (expires 2026-10-31) |
+| Plataforma       | Windows only                                     | Windows, macOS, Linux                                          |
+| License required | No                                               | No (preview); TBD at GA                     |
+| Binary           | WinForms app, requires `start /wait` wrapper     | Purpose-built console binary, no wrapper needed                |
 
 #### Autenticación
 
-| Capacidad                                    | CLI de TE2 (`TabularEditor.exe`) | CLI de TE (`te`)                                                                                                                                                                              |
-| -------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Entidad de servicio                          | Mediante una cadena de conexión de MSOLAP           | Compatibilidad nativa con `--auth spn`, `--auth env`, `--auth managed-identity`; credenciales a través de variables de entorno, stdin o certificado; almacén seguro de credenciales nativo del sistema operativo |
-| Identidad administrada                       | No                                                  | Sí (`--auth managed-identity`), para runners alojados en Azure                                                                                                                                |
-| Inicio de sesión interactivo en el navegador | No                                                  | Sí (`te auth login`)                                                                                                                                                                          |
+| Capability                | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                                                 |
+| ------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Service Principal         | Via MSOLAP connection string                     | Native `--auth spn`, `--auth env`, `--auth managed-identity`; credentials via env vars, stdin, or certificate; OS-native secure credential store |
+| Identidad administrada    | No                                               | Yes (`--auth managed-identity`), for Azure-hosted runners                                                                     |
+| Interactive browser login | No                                               | Yes (`te auth login`)                                                                                                         |
 
 #### CI/CD
 
-| Capacidad                     | CLI de TE2 (`TabularEditor.exe`)                      | CLI de TE (`te`)                                                                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Anotaciones de CI             | `-V` (Azure DevOps), `-G` (GitHub) | `--ci vsts`, `--ci github` en cada comando                                                                                                           |
-| Modo no interactivo           | Sin opción explícita; si hay errores, puede solicitarte datos            | Opción global `--non-interactive`: falla de inmediato, sin solicitar datos                                                           |
-| Códigos de salida predecibles | Parcial                                                                  | `0` = éxito, `1` = fallo (para `te diff`: se encontraron diferencias), `2` = error en la comparación de `te diff` |
-| Salida estructurada           | No                                                                       | `--output-format json/csv/tmdl/tmsl` en cada comando                                                                                                 |
-| Resultados de VSTEST          | Opción `-T`                                                              | `--trx <file>` en `validate`, `bpa run`, `test run`                                                                                                  |
+| Capability             | TE2 CLI (`TabularEditor.exe`)                         | TE CLI (`te`)                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| CI annotations         | `-V` (Azure DevOps), `-G` (GitHub) | `--ci vsts`, `--ci github` on every command                                                                                          |
+| Modo no interactivo    | No explicit flag; errors may prompt                                      | `--non-interactive` global flag - fails fast, no prompts                                                                             |
+| Predictable exit codes | Partial                                                                  | `0` = success, `1` = failure (for `te diff`: differences found), `2` = `te diff` comparison error |
+| Salida estructurada    | No                                                                       | `--output-format json/csv/tmdl/tmsl` on every command                                                                                |
+| VSTEST results         | `-T` flag                                                                | `--trx <file>` en `validate`, `bpa run`, `test run`                                                                                  |
 
 #### Implementación
 
-| Capacidad                                    | CLI de TE2 (`TabularEditor.exe`) | CLI de TE (`te`)                                                                                                                             |
-| -------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Implementar el modelo                        | Opción `-D`                                         | `te deploy` con opciones detalladas (`--deploy-roles`, `--deploy-partitions`, `--deploy-connections`, `--deploy-full`, etc.) |
-| Generar XMLA/TMSL sin realizar el despliegue | opción `-X`                                         | De forma predeterminada: `te deploy` sin `--execute` imprime el TMSL en stdout                                                                  |
-| Comprobación de BPA antes del despliegue     | No                                                  | Integrado; usa `--skip-bpa` o `--fix-bpa` para anularlo                                                                                                         |
-| Perfiles de conexión                         | No                                                  | `te profile set/list/show` - perfiles reutilizables con nombre por entorno                                                                                      |
+| Capability                           | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                                                                |
+| ------------------------------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Deploy model                         | `-D` flag                                        | `te deploy` with fine-grained flags (`--deploy-roles`, `--deploy-partitions`, `--deploy-connections`, `--deploy-full`, etc.) |
+| Generate XMLA/TMSL without deploying | `-X` flag                                        | The default: `te deploy` without `--execute` prints the TMSL to stdout                                                                          |
+| BPA gate before deploy               | No                                               | Built-in; `--skip-bpa` or `--fix-bpa` to override                                                                                                               |
+| Perfiles de conexión                 | No                                               | `te profile set/list/show` - reusable named profiles per environment                                                                                            |
 
-#### Best Practice Analyzer y edición de modelos
+#### Best Practice Analyzer and model editing
 
-| Capacidad                        | CLI de TE2 (`TabularEditor.exe`) | CLI de TE (`te`)                                                                                                                                        |
-| -------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ejecutar BPA                     | opciones `-A` / `-AX`                               | `te bpa run` con `--fail-on warning/error`, `--fix`, delimitación mediante `--path` y `--vpax` para reglas compatibles con VPA                                             |
-| Gestión de reglas de BPA         | No                                                  | `te bpa rules add/rm/set/list/disable/enable/init`                                                                                                                         |
-| Ejecutar C# Script               | opción `-S`                                         | `te script`: varios scripts, código en línea, stdin, comprobación de compilación con `--validate`, símbolos del preprocesador (`TECLI`) |
-| Ejecutar macros                  | No                                                  | `te macro run` con contexto `--on <object>`                                                                                                                                |
-| Establecer/consultar propiedades | No                                                  | `te get`, `te set`, `te add`, `te rm`, `te mv`                                                                                                                             |
-| Formato DAX                      | No                                                  | `te set --format` para objetos del modelo, `te util format-dax` / `format-m` para expresiones sueltas                                                                      |
+| Capability          | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                                  |
+| ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| Run BPA             | `-A` / `-AX` flags                               | `te bpa run` with `--fail-on warning/error`, `--fix`, `--path` scoping, `--vpax` for VPA-aware rules                              |
+| BPA rule management | No                                               | `te bpa rules add/rm/set/list/disable/enable/init`                                                                                |
+| Run C# scripts      | `-S` flag                                        | `te script` - multiple scripts, inline code, stdin, `--validate` compile check, preprocessor symbols (`TECLI`) |
+| Run macros          | No                                               | `te macro run` with `--on <object>` context                                                                                       |
+| Set/get properties  | No                                               | `te get`, `te set`, `te add`, `te rm`, `te mv`                                                                                    |
+| DAX formatting      | No                                               | `te set --format` for model objects, `te util format-dax` / `format-m` for loose expressions                                      |
 
-#### Inspección, actualización, pruebas y análisis de VertiPaq
+#### Inspection, refresh, testing and VertiPaq analysis
 
-| Capacidad                      | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                                                           |
-| ------------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Listar objetos del modelo      | No                                               | `te ls` con filtros de ruta con comodines, `--type`, `--paths-only`, `--output-format bim`                                                                 |
-| Buscar expresiones/nombres     | No                                               | `te find` con expresiones regulares y ámbito (`--in expressions/names/descriptions`)                                                    |
-| Comparar dos modelos           | No                                               | `te diff` - comparación estructural con código de salida `1` si hay alguna diferencia                                                                      |
-| Análisis de dependencias       | No                                               | `te deps` - dependencias ascendentes y descendentes para cualquier objeto; `--unused` para encontrar código muerto                                         |
-| Iniciar una actualización      | No                                               | `te refresh` con `--type`, `--table`, `--partition`, `--apply-refresh-policy`; simulación en seco de forma predeterminada; usa `--execute` para ejecutarlo |
-| Pruebas de aserción de DAX     | No                                               | `te test run` con `--tag`, `--trx`, `--ci`; `te test init/snapshot/compare`                                                                                |
-| Estadísticas de almacenamiento | No                                               | `te vertipaq` - columnas, relaciones, particiones; `--export`/`--import` VPAX                                                                              |
+| Capability               | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                       |
+| ------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| List model objects       | No                                               | `te ls` with wildcard path filters, `--type`, `--paths-only`, `--output-format bim`                                    |
+| Search expressions/names | No                                               | `te find` with regex and scope (`--in expressions/names/descriptions`)                              |
+| Diff two models          | No                                               | `te diff` - structural comparison with exit code `1` on any difference                                                 |
+| Dependency analysis      | No                                               | `te deps` - upstream/downstream for any object; `--unused` to find dead code                                           |
+| Trigger refresh          | No                                               | `te refresh` with `--type`, `--table`, `--partition`, `--apply-refresh-policy`; dry run by default, `--execute` to run |
+| DAX assertion tests      | No                                               | `te test run` with `--tag`, `--trx`, `--ci`; `te test init/snapshot/compare`                                           |
+| Storage statistics       | No                                               | `te vertipaq` - columns, relationships, partitions; `--export`/`--import` VPAX                                         |
 
-#### Otros
+#### Other
 
-| Capacidad                                      | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                           |
-| ---------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| REPL interactivo                               | No                                               | `te interactive` - shell con conocimiento del modelo, historial persistente y ediciones por etapas                         |
-| Autocompletado con Tab en el shell             | No                                               | `te completion bash/zsh/pwsh`                                                                                              |
-| Compatibilidad con versiones anteriores de TE2 | Nativa                                           | Capa de compatibilidad integrada: las invocaciones existentes de `TabularEditor.exe` funcionan sin cambios |
+| Capability                 | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                       |
+| -------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| Interactive REPL           | No                                               | `te interactive` - model-aware shell with persistent history and staged edits          |
+| Shell tab completion       | No                                               | `te completion bash/zsh/pwsh`                                                          |
+| TE2 backward compatibility | Native                                           | Built-in compatibility layer - existing `TabularEditor.exe` invocations work unchanged |
 
-Para ver una correspondencia opción por opción entre la sintaxis de TE2 y la nueva CLI, consulta @te-cli-migrate.
+For a flag-by-flag mapping from TE2 syntax to the new CLI, see @te-cli-migrate.
 
 **Nota:** Dado que TabularEditor.exe es una aplicación WinForms, si la ejecutas directamente desde un símbolo del sistema de Windows, el hilo volverá inmediatamente al símbolo del sistema. Esto puede provocar problemas en scripts de comandos, etc. Para esperar a que TabularEditor.exe termine sus tareas de línea de comandos, ejecútalo siempre así: `start /wait TabularEditor ...`
 
@@ -118,7 +118,7 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru -Arg
 Salida:
 
 ```cmd
-Uso:
+Usage:
 
 TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]]
     [-SC] [-A [rules] | -AX rules] [(-B | -F | -TMDL) output [id]] [-V | -G] [-T resultsfile]
@@ -126,63 +126,63 @@ TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]
         [-P [-Y]] [-S] [-R [-M]]]
         [-X xmla_script]] [-W] [-E]]
 
-file                Ruta completa del archivo Model.bim o de la carpeta del modelo database.json que se va a cargar.
-server              Nombre del servidor\instancia o cadena de conexión desde la que se cargará el modelo.
-database            Id de la base de datos del modelo que se va a cargar. Si se deja en blanco ("), se selecciona la primera
-                      base de datos disponible en el servidor.
--L / -LOCAL         Se conecta a una instancia (local) de Analysis Services de Power BI Desktop. Si no se
-                      especifica ningún nombre, se asume que hay exactamente 1 instancia en ejecución. En caso contrario,
-                      el nombre debe coincidir con el nombre del archivo .pbix cargado en Power BI Desktop.
--S / -SCRIPT        Ejecuta el script especificado en el modelo después de cargarlo.
-  scriptN             Ruta completa de uno o varios archivos que contienen un C# Script para ejecutar o un
-                      script en línea.
--SC / -SCHEMACHECK  Intenta conectarse a todos los orígenes de datos del proveedor para detectar cambios en el esquema
-                    de las tablas. Genera...
-                      ...advertencias por tipos de datos no coincidentes y columnas de origen no asignadas
-                      ...errores por columnas del modelo no asignadas.
--A / -ANALYZE       Ejecuta Best Practice Analyzer y muestra el resultado en la consola.
-  rules               Ruta opcional de un archivo o la URL de reglas BPA adicionales que se van a analizar. Si
-                      se especifica, el modelo no se analiza con las reglas del usuario local ni de la máquina local,
-                      pero las reglas definidas dentro del modelo se siguen aplicando.
--AX / -ANALYZEX     Igual que -A / -ANALYZE, pero excluye las reglas especificadas en las anotaciones del modelo.
--B / -BIM / -BUILD  Guarda el modelo (después de la ejecución opcional del script) como un archivo Model.bim.
-  output              Ruta completa del archivo Model.bim donde se guardará.
-  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
--F / -FOLDER        Guarda el modelo (después de la ejecución opcional del script) como una estructura de carpetas.
-  output              Ruta completa de la carpeta donde se guardará. La carpeta se crea si no existe.
-  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
--TMDL               Guarda el modelo (después de la ejecución opcional del script) como una estructura de carpetas TMDL.
-  output              Ruta completa de la carpeta TMDL donde se guardará. La carpeta se crea si no existe.
-  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
--V / -VSTS          Genera comandos de registro de Visual Studio Team Services.
--G / -GITHUB        Genera comandos de flujo de trabajo para GitHub Actions.
--T / -TRX         Genera un archivo VSTEST (trx) con detalles de la ejecución.
-  resultsfile       Nombre del archivo XML de VSTEST.
--D / -DEPLOY        Despliegue desde la línea de comandos
-                      Si no se especifican parámetros adicionales, este modificador guardará los metadatos del modelo
-                      de nuevo en el origen (archivo o base de datos).
-  server              Nombre del servidor donde se realizará el despliegue o cadena de conexión a Analysis Services.
-  database            Id de la base de datos que se va a desplegar (crear/sobrescribir).
-  -L / -LOGIN         Desactiva la seguridad integrada al conectarse al servidor. Especifica:
-    user                Nombre de usuario (debe ser un usuario con derechos de administrador en el servidor)
-    pass                Contraseña
-  -F / -FULL          Despliega todos los metadatos del modelo, permitiendo sobrescribir una base de datos existente.
-  -O / -OVERWRITE     Permite desplegar (sobrescribir) una base de datos existente.
-    -C / -CONNECTIONS   Despliega (sobrescribe) los Data sources existentes en el modelo. Después del modificador -C,
-                        puedes especificar, opcionalmente, cualquier cantidad de pares marcador de posición/valor. Al hacerlo,
-                        se reemplazará cualquier aparición de los marcadores de posición especificados (plch1, plch2, ...) en las
-                        cadenas de conexión de cada Data source del modelo por los valores especificados
+file                Full path of the Model.bim file or database.json model folder to load.
+server              Server\instance name or connection string from which to load the model
+database            Database ID of the model to load. If blank (") picks the first available
+                      database on the server.
+-L / -LOCAL         Connects to a Power BI Desktop (local) instance of Analysis Services. If no
+                      name is specified, this assumes that exactly 1 instance is running. Otherwise,
+                      name should match the name of the .pbix file loaded in Power BI Desktop.
+-S / -SCRIPT        Execute the specified script on the model after loading.
+  scriptN             Full path of one or more files containing a C# script to execute or an inline
+                      script.
+-SC / -SCHEMACHECK  Attempts to connect to all Provider Data Sources in order to detect table schema
+                    changes. Outputs...
+                      ...warnings for mismatched data types and unmapped source columns
+                      ...errors for unmapped model columns.
+-A / -ANALYZE       Runs Best Practice Analyzer and outputs the result to the console.
+  rules               Optional path of file or URL of additional BPA rules to be analyzed. If
+                      specified, model is not analyzed against local user/local machine rules,
+                      but rules defined within the model are still applied.
+-AX / -ANALYZEX     Same as -A / -ANALYZE but excludes rules specified in the model annotations.
+-B / -BIM / -BUILD  Saves the model (after optional script execution) as a Model.bim file.
+  output              Full path of the Model.bim file to save to.
+  id                  Optional id/name to assign to the Database object when saving.
+-F / -FOLDER        Saves the model (after optional script execution) as a Folder structure.
+  output              Full path of the folder to save to. Folder is created if it does not exist.
+  id                  Optional id/name to assign to the Database object when saving.
+-TMDL               Saves the model (after optional script execution) as a TMDL folder structure.
+  output              Full path of the TMDL folder to save to. Folder is created if it does not exist.
+  id                  Optional id/name to assign to the Database object when saving.
+-V / -VSTS          Output Visual Studio Team Services logging commands.
+-G / -GITHUB        Output GitHub Actions workflow commands.
+-T / -TRX         Produces a VSTEST (trx) file with details on the execution.
+  resultsfile       File name of the VSTEST XML file.
+-D / -DEPLOY        Command-line deployment
+                      If no additional parameters are specified, this switch will save model metadata
+                      back to the source (file or database).
+  server              Name of server to deploy to or connection string to Analysis Services.
+  database            ID of the database to deploy (create/overwrite).
+  -L / -LOGIN         Disables integrated security when connecting to the server. Specify:
+    user                Username (must be a user with admin rights on the server)
+    pass                Password
+  -F / -FULL          Deploy the full model metadata, allowing overwrite of an existing database.
+  -O / -OVERWRITE     Allow deploy (overwrite) of an existing database.
+    -C / -CONNECTIONS   Deploy (overwrite) existing data sources in the model. After the -C switch, you
+                        can (optionally) specify any number of placeholder-value pairs. Doing so, will
+                        replace any occurrence of the specified placeholders (plch1, plch2, ...) in the
+                        connection strings of every data source in the model, with the specified values
                         (value1, value2, ...).
-    -P / -PARTITIONS    Despliega (sobrescribe) las particiones de tabla existentes en el modelo.
-      -Y / -SKIPPOLICY    No sobrescribe las particiones que tengan definidas políticas de actualización incremental.
-    -S / -SHARED        Despliega (sobrescribe) expresiones compartidas.
-    -R / -ROLES         Despliega roles.
-      -M / -MEMBERS       Despliega miembros del rol.
-  -X / -XMLA        No realiza ningún despliegue. En su lugar, genera un script XMLA/TMSL para desplegarlo más tarde.
-    xmla_script       Nombre del archivo de salida del nuevo script XMLA/TMSL.
-  -W / -WARN        Muestra información sobre objetos sin procesar en forma de advertencias.
-  -E / -ERR         Devuelve un código de salida distinto de cero si Analysis Services devuelve mensajes de error después de que
-                      se hayan desplegado o actualizado los metadatos.
+    -P / -PARTITIONS    Deploy (overwrite) existing table partitions in the model.
+      -Y / -SKIPPOLICY    Do not overwrite partitions that have Incremental Refresh Policies defined.
+    -S / -SHARED        Deploy (overwrite) shared expressions.
+    -R / -ROLES         Deploy roles.
+      -M / -MEMBERS       Deploy role members.
+  -X / -XMLA        No deployment. Generate XMLA/TMSL script for later deployment instead.
+    xmla_script       File name of the new XMLA/TMSL script output.
+  -W / -WARN        Outputs information about unprocessed objects as warnings.
+  -E / -ERR         Returns a non-zero exit code if Analysis Services returns any error messages after
+                      the metadata was deployed / updated.
 ```
 
 > [!WARNING]
@@ -248,9 +248,9 @@ Durante el despliegue, quieres modificar la cadena para que apunte a una base de
 Coloca el siguiente script en un archivo llamado "ClearConnectionStrings.cs" o similar:
 
 ```csharp
-// Esto reemplazará la cadena de conexión de todos los orígenes de datos del proveedor (heredados) del modelo
-// por un marcador de posición basado en el nombre del Data source. Por ejemplo, si tu Data source se llama
-// "SQLDW", la cadena de conexión después de ejecutar este script sería "SQLDW":
+// This will replace the connection string of all Provider (legacy) data sources in the model
+// with a placeholder based on the name of the data source. E.g., if your data source is called
+// "SQLDW", the connection string after running this script would be "SQLDW":
 
 foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
     ds.ConnectionString = ds.Name;
@@ -296,7 +296,7 @@ start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sal
 
 La figura siguiente muestra el aspecto de este tipo de compilación en Azure DevOps:
 
-![imagen](~/content/assets/images/command-line-options-01.png)
+![image](~/content/assets/images/command-line-options-01.png)
 
 Si el despliegue falla por cualquier motivo, Tabular Editor devuelve el estado "Fallido" a Azure DevOps, independientemente de si está usando o no el modificador "-W".
 
@@ -325,7 +325,7 @@ variables:
 
 steps:
 - script: TabularEditor.exe "Model.bim" -S "UpdateModel.csx" -D "$(serverName)" "MyDatabase" -O -V -E -W
-  displayName: 'Despliegue con parámetros de script'
+  displayName: 'Deploy with Script Parameters'
   env:
     DEPLOY_ENV: $(deployEnv)
     SERVER_NAME: $(serverName)
@@ -335,7 +335,7 @@ steps:
 
 ```yaml
 - task: PowerShell@2
-  displayName: 'Ejecutar script de Tabular Editor'
+  displayName: 'Run Tabular Editor Script'
   env:
     DEPLOY_ENV: 'UAT'
     CONNECTION_STRING: $(sqldwConnectionString)
@@ -353,9 +353,9 @@ steps:
 var deployEnv = Environment.GetEnvironmentVariable("DEPLOY_ENV");
 var serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
 
-Info($"Configurando el modelo para el entorno {deployEnv} en {serverName}");
+Info($"Configuring model for {deployEnv} environment on {serverName}");
 
-// Aplicar cambios específicos del entorno
+// Apply environment-specific changes
 foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 {
     ds.ConnectionString = ds.ConnectionString.Replace("{SERVER}", serverName);
