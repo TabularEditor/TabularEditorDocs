@@ -81,7 +81,7 @@ var otherCol = m.Table.Model.Tables["Product"].Columns.First();
 > [!NOTE]
 > El último ejemplo muestra que puedes subir hasta `Model` desde cualquier objeto hijo y volver a bajar hasta cualquier tabla del modelo.
 
-## Navigating table children
+## Navegar por los elementos secundarios de la tabla
 
 Cada `Table` expone colecciones tipadas para sus objetos secundarios.
 
@@ -143,7 +143,7 @@ En las expresiones de reglas de Best Practice Analyzer (BPA) y en los filtros de
 
 | C# Script                            | LINQ dinámico (BPA) |
 | ------------------------------------ | -------------------------------------- |
-| `measure.Table.Name`                 | `Table.Name`                           |
+| `medida.Table.Name`                  | `Table.Name`                           |
 | `column.Table.IsHidden`              | `Table.IsHidden`                       |
 | `table.Columns.Count()`              | `Columns.Count()`                      |
 | `table.Medidas.Any(m => m.IsHidden)` | `Medidas.Any(IsHidden)`                |
