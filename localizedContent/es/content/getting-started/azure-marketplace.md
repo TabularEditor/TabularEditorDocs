@@ -32,7 +32,7 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 
 4. Selecciona tu suscripción y el plan de licencias, y luego haz clic en **Suscribirse**.
 
-   ![Azure Marketplace Subscribe to offer](~/content/assets/images/azuremarketplace-offer-page.png)
+   ![Suscribirse a la oferta de Azure Marketplace](~/content/assets/images/azuremarketplace-offer-page.png)
 
    > [!TIP]> La suscripción y el plan se pueden cambiar más adelante durante el proceso de compra.
 
@@ -40,7 +40,7 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 
 6. Proporciona un nombre para el recurso y configura tu suscripción seleccionando el plan, la duración del contrato, el número de puestos y la preferencia de renovación automática.
 
-   ![Azure Marketplace purchase details](~/content/assets/images/azuremarketplace-setup-purchase.png)
+   ![Detalles de la compra en Azure Marketplace](~/content/assets/images/azuremarketplace-setup-purchase.png)
 
    > [!IMPORTANT]> Si no activas la renovación automática, tu suscripción se cancelará después del primer período de facturación.
 
@@ -82,7 +82,7 @@ Sigue el procedimiento que se indica a continuación para finalizar la activaci�
 
 2. Haz clic en el botón **Activar** de la suscripción que quieres activar. Esto mostrará los detalles de la suscripción.
 
-   ![Azure Marketplace activate subscription](~/content/assets/images/azuremarketplace-activate-subscription.png)
+   ![Activar la suscripción en Azure Marketplace](~/content/assets/images/azuremarketplace-activate-subscription.png)
 
 3. Revisa los detalles por última vez y haz clic en **Confirmar activación**.
 
@@ -91,7 +91,7 @@ Sigue el procedimiento que se indica a continuación para finalizar la activaci�
    - Recibirás un correo electrónico con tu clave(s) de licencia
    - La suscripción aparecerá en **Subscriptions** en el portal de autoservicio de Tabular Editor. Haz clic en el menú de tres puntos (puntos suspensivos) y selecciona **Ver detalles de la suscripción** para ver la información de la suscripción, incluido el período de suscripción.
 
-     ![Azure Marketplace subscription activated](~/content/assets/images/azuremarketplace-subscription-activated.png)
+     ![Suscripción activada en Azure Marketplace](~/content/assets/images/azuremarketplace-subscription-activated.png)
 
 ## Instalación y activación de licencias
 
