@@ -1,7 +1,7 @@
 # 路线图
 
 > [!IMPORTANT]
-> abular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team. The following list should therefore be considered deprecated.
+> Tabular Editor 2 已不再进行积极开发，我们这边也不会再为其新增或改进任何重大功能。不过，我们仍致力于让它保持最新状态，确保在 Microsoft 发布新的语义模型功能时提供支持，并修复任何严重或阻塞性问题。由于该项目基于 MIT 许可证开源，欢迎任何人提交 Pull Request（PR），我们的团队会进行审核并批准。因此，以下列表应视为已弃用。
 
 - 将对象脚本化为 TMSL 或 DAX（兼容 DAX编辑器）
 - 为 DAX 表达式编辑器提供 IntelliSense
@@ -17,9 +17,9 @@
 
 ## 将对象脚本化为 TMSL 或 DAX
 
-It should be possible, when selecting one or more objects in the explorer tree, to generate a script for these objects. In fact, this is already possible by dragging and dropping the objects into another text editor (or SSMS), but there should be a similar right-click option to more clearly communicate to end-users what's going on. 应支持生成 TMSL 脚本（用于 SSMS）以及可在 [DAX编辑器](https://github.com/DaxEditor/) 中使用的 DAX 风格代码。
+在资源管理器树中选择一个或多个对象时，应能为这些对象生成脚本。实际上，这已经可以通过将对象拖放到另一个文本编辑器（或 SSMS）中来实现，但还应提供类似的右键选项，以便让最终用户更清楚了解正在执行的操作。应支持生成 TMSL 脚本（用于 SSMS）以及可在 [DAX编辑器](https://github.com/DaxEditor/) 中使用的 DAX 风格代码。
 
-Today, measures and calculated columns can be dragged between instances of Tabular Editor to copy them between models, but to better expose this functionality, there should be an UI option for importing a provided piece of TMSL, either from the clipboard or from a file. See [this issue](https://github.com/TabularEditor/TabularEditor/issues/69). Lastly, the standard copy-paste shortcuts should be enabled.
+目前，度量值和计算列可以在不同的 Tabular Editor 实例之间拖放，以便在模型之间复制；但为了更好地呈现此功能，界面中还应提供一个选项，用于导入提供的 TMSL 片段，来源可以是剪贴板或文件。参见 [这个问题](https://github.com/TabularEditor/TabularEditor/issues/69)。最后，还应启用标准的复制和粘贴快捷键。
 
 ## 为 Visual Studio 创建插件，用于启动 Tabular Editor
 
@@ -33,7 +33,7 @@ Today, measures and calculated columns can be dragged between instances of Tabul
 
 ## 面向开发者的 Tabular Editor 插件架构 / 公共 API
 
-偏好使用 C# 以脚本方式编写表格模型的用户，现在就已经可以改用 TOMWrapper.dll，而无需直接使用 Analysis Services TOM API。 This provides some benefits, for example, the TOMWrapper namespace makes it easier to work with perspectives and translations, thanks to the convenient methods and properties available.
+偏好使用 C# 以脚本方式编写表格模型的用户，现在就已经可以改用 TOMWrapper.dll，而无需直接使用 Analysis Services TOM API。这带来了一些好处。例如，借助现成的便捷方法和属性，TOMWrapper 命名空间让处理透视和翻译变得更容易。
 
 更进一步，如果能向开发者开放更多 Tabular Editor 功能，会很有意思：
 
@@ -45,7 +45,7 @@ Today, measures and calculated columns can be dragged between instances of Tabul
 
 使用 VSTS 进行 DevOps，并对 Tabular Editor 源代码进行整体清理。
 
-## Formula fix-up
+## 公式修复
 
 当任何模型对象被重命名时，应更新所有引用该对象的 DAX 表达式，以反映名称变更。
 
@@ -53,43 +53,43 @@ Today, measures and calculated columns can be dragged between instances of Tabul
 
 ## 用于显示对象依赖关系的 UI
 
-右键单击度量值或计算列，就会在弹出对话框中显示依赖关系树。 It should be possible to show either objects that depend on the chosen object, or objects on which the chosen object depend.
+右键单击度量值或计算列，就会在弹出对话框中显示依赖关系树。应能显示依赖所选对象的对象，或所选对象所依赖的对象。
 
-**Update**: As of 2.2, this feature is available. Simply right-click an object and choose "Show dependencies...".
+**更新**：自 2.2 起，此功能已可用。只需右键单击某个对象，然后选择“显示依赖项...”即可。
 
 ## 通过命令行以脚本方式应用更改
 
-Today, it is possible to deploy a model directly from the command-line. 同样，你也应该能够通过管道传入一个包含要在模型上执行的 C# Script 的 .cs 文件。 After script execution, it should be possible to save or deploy the updated model. This requires a few changes to the current command-line options.
+目前，已可以直接通过命令行部署模型。同样，你也应该能够通过管道传入一个包含要在模型上执行的 C# Script 的 .cs 文件。执行脚本后，应能保存或部署更新后的模型。这需要对当前的命令行选项做一些调整。
 
-**Update**: As of 2.3, scripts can be executed from the command-line, by using the "-S" switch. Deployment works as usual, but if you want to save the modified model as a .bim, you can use the "-B" switch.
+**更新**：自 2.3 起，可通过命令行使用 "-S" 开关执行脚本。部署方式与以往相同；但如果你想将修改后的模型保存为 .bim，可以使用 "-B" 开关。
 
 ## 支持读取/编辑更多对象类型
 
-Tabular Editor currently only lets end-users read and edit a subset of the objects in the Tabular Object Model. 理想情况下，应允许在 Tabular Editor 中访问模型树中的所有对象：关系、KPI、计算表格和角色都应可直接编辑。 Data Sources, tables, data columns and table partitions should be editable with some constraints (for example, we should not expect Tabular Editor to be able to fetch data schemas from arbitrary data sources and queries).
+Tabular Editor 目前仅允许最终用户读取和编辑 Tabular Object Model 中的一部分对象。理想情况下，应允许在 Tabular Editor 中访问模型树中的所有对象：关系、KPI、计算表格和角色都应可直接编辑。数据源、表、数据列和表分区都应可编辑，但会有一些限制（例如，我们不应期望 Tabular Editor 能够从任意数据源和查询中获取数据架构）。
 
-**更新**：从 2.1 版本起，许多新的对象类型现在会直接显示在 Tree Explorer 中。 Using the right-click menu, you can create, duplicate and delete many of these objects (roles, perspectives, translations). We're still lacking support for creating/deleting relationships and data sources, but this will come in a future release.
+**更新**：从 2.1 版本起，许多新的对象类型现在会直接显示在 Tree Explorer 中。通过右键菜单，你可以创建、复制和删除其中许多对象（角色、透视、翻译）。我们目前仍不支持创建或删除关系和数据源，但这一功能会在未来版本中加入。
 
-**更新**：从 2.2 版本起，我们现在可以创建和删除关系。 More object types coming later.
+**更新**：从 2.2 版本起，我们现在可以创建和删除关系。后续会支持更多对象类型。
 
-**Update**: As of 2.3, tables, partitions and data columns can now be edited. 现在，Visual Studio 只在创建空白模型本身时才需要——其他所有操作都可以在 Tabular Editor 中完成。
+**更新**：自 2.3 起，表、分区和数据列现已可编辑。现在，Visual Studio 只在创建空白模型本身时才需要——其他所有操作都可以在 Tabular Editor 中完成。
 
-**Update**: Previous update was a lie! 我忘了 KPI——不过从 2.4 版本起，它们现在也可以创建/编辑/删除了。
+**更新**：之前那次更新是谎话！我忘了 KPI——不过从 2.4 版本起，它们现在也可以创建/编辑/删除了。
 
 ## 将 Model.bim 拆分为多个 json 文件
 
-Model.bim 文件的布局和结构非常不利于源代码管理和版本控制。 Not only is the entire Tabular Object Model written into just one file, the file also contains "ModifiedTime" information everywhere in the structure, making source control DIFF operations useless.
+Model.bim 文件的布局和结构非常不利于源代码管理和版本控制。整个 Tabular Object Model 不仅被写进同一个文件，这个文件还在结构中到处包含“ModifiedTime”信息，导致源代码管理中的 DIFF 操作形同虚设。
 
-为了让 Tabular 模型的发布管理流程更顺畅，如果 Tabular Editor 能将 Model.bim 文件以文件夹结构保存/加载，并为度量值、计算列等使用独立文件，会很有价值。 There should be command-line options available for exporting/importing Model.bim files from/to this format, and it should be possible to deploy directly from this format (in cases where you don't need the Model.bim file itself). These individual files should contain the same JSON as the Model.bim file, but without the "ModifiedTime" information, so that they can easily be used in a version control system, allowing multiple developers to work on the same model at once.
+为了让 Tabular 模型的发布管理流程更顺畅，如果 Tabular Editor 能将 Model.bim 文件以文件夹结构保存/加载，并为度量值、计算列等使用独立文件，会很有价值。应该提供命令行选项，用于将 Model.bim 文件导出为这种格式，或从这种格式导入回 Model.bim 文件；也应该可以直接从这种格式进行部署（在不需要 Model.bim 文件本身的情况下）。这些独立文件应包含与 Model.bim 文件相同的 JSON，但不包含“ModifiedTime”信息，以便能轻松用于版本控制系统，让多位开发人员可以同时协作开发同一个模型。
 
 **更新**：[在 2.2 中可用](/Advanced-features#folder-serialization)。
 
-**Update**: As of 2.3, options exist to store Perspective and Translation metadata as annotations on the individual objects. This is useful for source control scenarios with multiple developers, to avoid having single files that gets lots of edits when developers change translations, perspective memberships, etc.
+**更新**：从 2.3 版本开始，已可通过选项将透视和翻译元数据存储为各个对象上的注释。这对于有多个开发人员参与的版本控制场景很有用，可以避免开发人员更改翻译、透视成员关系等内容时，导致某个单一文件频繁出现大量改动。
 
 ## Power BI 兼容性
 
-目前已经可以将 Tabular Editor 连接到托管在 Power BI Desktop 中的模型。 The approach is similar to what is [described here for Excel and SSMS](http://biinsight.com/connect-to-power-bi-desktop-model-from-excel-and-ssms/). Doing this, it is actually possible to add Display Folders to the Power BI Desktop model, and they actually stay in Power BI, even after saving and reopening the .pbix file. However, it seems that there are some compatibility level issues, which should be looked into before proceeding.
+目前已经可以将 Tabular Editor 连接到托管在 Power BI Desktop 中的模型。这种做法类似于[这里针对 Excel 和 SSMS 的说明](http://biinsight.com/connect-to-power-bi-desktop-model-from-excel-and-ssms/)。这样就可以将显示文件夹添加到 Power BI Desktop 模型中，并且即使保存并重新打开 .pbix 文件，它们仍会保留在 Power BI 中。不过，似乎存在一些兼容级别问题，在继续之前应该先弄清楚。
 
-**更新**：从 2.1 版本起，Tabular Editor 现在会检测正在运行的 Power BI Desktop 实例以及 Visual Studio 集成 Workspace。 You can connect to these instances and make changes as you would normal instances, although this approach of changing Power BI and Integrated Workspace models is not supported by Microsoft.
+**更新**：从 2.1 版本起，Tabular Editor 现在会检测正在运行的 Power BI Desktop 实例以及 Visual Studio 集成 Workspace。你可以连接到这些实例，并像操作普通实例一样进行更改；不过，这种修改 Power BI 和集成 Workspace 模型的方法不受 Microsoft 支持。
 
 ## 导入/导出翻译
 
