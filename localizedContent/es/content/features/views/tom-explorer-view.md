@@ -51,8 +51,8 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
 - **Crear**:
   Muestra un submenú que permite crear nuevas medidas, columnas, jerarquías, carpetas de visualización o elementos de cálculo bajo el objeto seleccionado. Las opciones disponibles dependen del tipo de objeto seleccionado.
 
-- **Move to group**:
-  Expands to a submenu for organizing the selected tables into a Table Group for easier model navigation. The submenu lists existing Table Groups, a **(New...)** entry that creates a new group from the selected tables and opens its name editor, and a **(None)** entry that removes the Table Group assignment. Esta opción solo está disponible para tablas.
+- **Mover a un grupo**:
+  Se despliega un submenú para organizar las tablas seleccionadas en un grupo de tablas y facilitar la navegación por el modelo. El submenú enumera los grupos de tablas existentes, una entrada **(New...)** que crea un grupo nuevo a partir de las tablas seleccionadas y abre el editor de nombre, y una entrada **(None)** que quita la asignación del grupo de tablas. Esta opción solo está disponible para tablas.
 
 - **Hacer invisible**:
   Marca el objeto como no visible en las herramientas cliente. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, puedes usar el atajo **Ctrl+I** para ocultar el objeto.
@@ -78,29 +78,29 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Exporta los objetos seleccionados como un script TMSL o TMDL para usarlo en la implementación o el control de código fuente.
 
 - **Menús de macros**:
-  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. If you have created macros for the given object type, they appear as additional menu items or folders in the right-click menu.
+  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. Si has creado macros para el tipo de objeto indicado, aparecerán como elementos de menú o carpetas adicionales en el menú contextual.
 
-- **Revert**:
-  Puts the selected object, and everything beneath it, back to the way it was when the model was last saved, leaving all other unsaved changes in place. Only shown for objects with [unsaved changes](xref:unsaved-changes), and for tables, display folders, table groups and the **Model** node when something beneath them has changed.
+- **Revertir**:
+  Devuelve el objeto seleccionado y todo lo que cuelga de él al estado en que estaba la última vez que se guardó el modelo, sin afectar al resto de cambios no guardados. Solo se muestra para objetos con [cambios no guardados](xref:unsaved-changes) y, en el caso de las tablas, carpetas de visualización, grupos de tablas y el nodo **Modelo**, cuando ha cambiado algo debajo de ellos.
 
-- **Restore**:
-  Brings back a deleted object, exactly as it was the moment before it was deleted. Only shown when right-clicking objects that were [deleted since the last save](xref:unsaved-changes#deleted-objects), which remain visible in the TOM Explorer with a struck-through name.
+- **Restaurar**:
+  Recupera un objeto eliminado exactamente como estaba justo antes de que se eliminara. Solo se muestra al hacer clic con el botón derecho en objetos que se han [eliminado desde el último guardado](xref:unsaved-changes#deleted-objects), que siguen visibles en el Explorador TOM con el nombre tachado.
 
 - **Cortar / Copiar / Pegar / Eliminar**:
-  Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo. Deleted objects stay visible in the TOM Explorer, struck through, until the model is saved. See @unsaved-changes.
+  Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo. Los objetos eliminados siguen visibles en el Explorador TOM, tachados, hasta que se guarda el modelo. Consulta @unsaved-changes.
 
 - **Propiedades**:
   Abre el panel de Propiedades del objeto seleccionado. Atajo: **Alt+Enter**. Sirve para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
 
-### Copying and moving objects
+### Copiar y mover objetos
 
-Pasting an object (**Edit > Paste**, or **Ctrl+V**) selects the pasted object, gives it focus and scrolls it into view, so you can rename or edit it straight away. The original is left unselected.
+Al pegar un objeto (**Editar > Pegar** o **Ctrl+V**), se selecciona el objeto pegado, recibe el foco y se desplaza hasta dejarlo a la vista, para que puedas cambiarle el nombre o editarlo de inmediato. El original queda sin seleccionar.
 
-Moving an object to another table by drag and drop, and duplicating one, both keep whatever error and warning indicators the object already carried. An expression that was invalid before the move is still marked as invalid afterwards, without needing to be edited again.
+Tanto al mover un objeto a otra tabla mediante arrastrar y soltar como al duplicarlo, se conservan todos los indicadores de error y advertencia que el objeto ya tuviera. Una expresión que no era válida antes de moverla seguirá marcada como no válida después, sin necesidad de volver a editarla.
 
-### Selecting a partition
+### Seleccionar una partición
 
-Selecting a partition shows its expression in the **Expression Editor**. For a partition with no query expression of its own, such as a Direct Lake partition or one generated by an incremental refresh policy, the editor shows the **Data Coverage Definition Expression** where one is defined, and is empty otherwise.
+Al seleccionar una partición, su expresión se muestra en el **Editor de expresiones**. En una partición que no tiene una expresión de consulta propia, como una partición Direct Lake o una generada por una política de actualización incremental, el editor muestra la **Data Coverage Definition Expression** cuando está definida; en caso contrario, aparece vacío.
 
 ### Mostrar columnas de información
 
@@ -108,19 +108,19 @@ El Explorador TOM permite activar o desactivar columnas de información adiciona
 Esta información adicional también está disponible en la ventana de propiedades, pero permite ver rápidamente el tipo de objeto, la cadena de formato, el tipo de datos, la expresión y la descripción.
 ![Explorador TOM: mostrar/ocultar columnas](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
 
-## Unsaved changes
+## Cambios no guardados
 
-Objects that differ from the last saved version of the model are tinted and badged: orange for edited objects, green for added objects and red for deleted objects, which also stay in the tree, struck through, until the model is saved. Tables, folders and groups that contain changed objects get a hatched fill. Deleted objects can be brought back with the right-click **Restore** option, and the **Show changes** toolbar button filters the tree down to the changed objects. See @unsaved-changes for details, including how to revert individual changes and how to adjust the indicators under **Tools > Preferences**.
+Los objetos que difieren de la última versión guardada del modelo se muestran resaltados y con indicadores: naranja para los objetos editados, verde para los objetos añadidos y rojo para los objetos eliminados, que además permanecen en el árbol, tachados, hasta que se guarda el modelo. Las tablas, carpetas y grupos que contienen objetos modificados se muestran con un relleno tramado. Los objetos eliminados se pueden recuperar con la opción **Restaurar** del menú contextual, y el botón **Mostrar cambios** de la barra de herramientas filtra el árbol para mostrar solo los objetos modificados. Consulta @unsaved-changes para obtener más información, incluido cómo revertir cambios individuales y cómo ajustar los indicadores en **Herramientas > Preferencias**.
 
-![Tom Explorer Unsaved Changes](~/content/assets/images/user-interface/TOMExplorerUnsavedChanges.png)
+![Cambios sin guardar en el Explorador TOM](~/content/assets/images/user-interface/TOMExplorerUnsavedChanges.png)
 
-## Keeping your place in the tree
+## Mantener la ubicación en el árbol
 
-The TOM Explorer keeps its state when the model underneath it changes. Expanded nodes stay expanded, the focused object stays focused, your selection is preserved and the tree does not scroll away from where you were looking.
+El Explorador TOM conserva su estado cuando cambia el modelo subyacente. Los nodos expandidos siguen expandidos, el foco se mantiene en el mismo objeto, tu selección se conserva y el árbol no se desplaza de la posición que estabas viendo.
 
-This applies when you revert the model, whether it is loaded from a file, from a folder or from a server in [workspace mode](xref:workspace-mode), and when the model is reloaded because its files changed on disk. See @auto-reload.
+Esto se aplica al revertir el modelo, tanto si se carga desde un archivo, una carpeta o un servidor en [modo del área de trabajo](xref:workspace-mode), como cuando el modelo se vuelve a cargar porque sus archivos cambiaron en disco. Consulta @auto-reload.
 
-It applies to ordinary editing too. Semantic analysis runs continuously as you edit DAX, and the tree now updates in place as it completes rather than rebuilding, so a long expression no longer costs you your position in a large model.
+También se aplica a la edición normal. El análisis semántico se ejecuta continuamente mientras editas DAX, y ahora el árbol se actualiza en su lugar conforme se completa el análisis, en lugar de reconstruirse, por lo que una expresión larga ya no te hace perder la posición en un modelo grande.
 
 ## Barra de herramientas del Explorador TOM
 
@@ -158,15 +158,15 @@ La barra de herramientas te permite mostrar y ocultar distintos tipos de objetos
    Activa o desactiva si se muestran los objetos ocultos.
    **Acceso directo:** **Ctrl+6**
 
-9. **Show/Hide Info Columns**
-   Shows or hides metadata columns, such as data types or object status.
+9. **Mostrar/ocultar columnas de información**
+   Muestra u oculta columnas de metadatos, como los tipos de datos o el estado de los objetos.
    **Acceso directo:** **Ctrl+7**
 
-10. **Show/Hide Table Groups**
-    Toggle the visibility of table groups in the TOM Explorer tree. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
+10. **Mostrar/ocultar grupos de tablas**
+    Activa o desactiva la visibilidad de los grupos de tablas en el árbol del Explorador TOM. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
 
-11. **Show changes**
-    Filters the tree down to objects with [unsaved changes](xref:unsaved-changes), together with the tables, folders and groups needed to reach them. While the filter is active, the title of the view reads **TOM Explorer (Changed)**.
+11. **Mostrar cambios**
+    Filtra el árbol para mostrar los objetos con [cambios sin guardar](xref:unsaved-changes), junto con las tablas, carpetas y grupos necesarios para llegar a ellos. Mientras el filtro está activo, el título de la vista muestra **Explorador TOM (Changed)**.
 
 12. **Selector de perspectiva**
     Lista desplegable para seleccionar una perspectiva específica. Solo se mostrarán en el Explorador TOM los objetos de la perspectiva seleccionada.
