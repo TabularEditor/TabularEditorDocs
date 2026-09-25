@@ -10,7 +10,7 @@ description: 最佳实践规则：对未用于关系或层次结构的隐藏列�
 
 ## 概览
 
-此最佳实践规则用于识别已隐藏但 `IsAvailableInMDX` 属性仍设置为 `true`、且无需通过 MDX 查询访问的列。 Setting this property to `false` for unused hidden columns can improve query performance and reduce memory overhead.
+此最佳实践规则用于识别已隐藏但 `IsAvailableInMDX` 属性仍设置为 `true`、且无需通过 MDX 查询访问的列。对于未使用的隐藏列，将此属性设置为 `false` 可以提升查询性能并减少内存开销。
 
 - 类别：性能
 - 严重级别：中等（2）
@@ -23,7 +23,7 @@ description: 最佳实践规则：对未用于关系或层次结构的隐藏列�
 
 ## 为何这很重要
 
-当某列的 `IsAvailableInMDX` 设置为 `true` 时，Analysis Services 引擎会维护额外的元数据和结构，以支持针对该列的 MDX 查询。 For hidden columns that aren't used in relationships, hierarchies, variations, calendars, or as sort-by columns, this overhead is unnecessary and can:
+当某列的 `IsAvailableInMDX` 设置为 `true` 时，Analysis Services 引擎会维护额外的元数据和结构，以支持针对该列的 MDX 查询。对于未用于关系、层次结构、变体、日历，且不作为排序依据列的隐藏列，这种开销没有必要，并且可能会：
 
 - 增加内存消耗
 - 降低查询处理速度
@@ -32,7 +32,7 @@ description: 最佳实践规则：对未用于关系或层次结构的隐藏列�
 对这些列显式地将 `IsAvailableInMDX` 设置为 `false`，即可针对仅使用 DAX 的场景优化模型；而 DAX 是 Power BI 和现代 Analysis Services 模型的主要查询语言。
 
 > [!WARNING]
-> **Excel 数据透视表兼容性**：将 `IsAvailableInMDX` 设为 `false` 会导致无法将列拖到 Excel 数据透视表的“行”或“列”区域。 Excel PivotTables generate MDX queries when connecting to Analysis Services Tabular models, and they require attribute hierarchies (which are only built when `IsAvailableInMDX = true`) to function properly. If your users need to analyze data using Excel PivotTables or other MDX-based tools, **do not** apply this rule to columns they need to access. For more details, see [Chris Webb's article on IsAvailableInMDX](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/).
+> **Excel 数据透视表兼容性**：将 `IsAvailableInMDX` 设为 `false` 会导致无法将列拖到 Excel 数据透视表的“行”或“列”区域。当 Excel 数据透视表连接到 Analysis Services 表格模型时，会生成 MDX 查询，并且需要属性层次结构（仅当 `IsAvailableInMDX = true` 时才会构建）才能正常工作。如果你的用户需要使用 Excel 数据透视表或其他基于 MDX 的工具分析数据，**不要**将此规则应用于他们需要访问的列。更多详情，请参阅 [Chris Webb 关于 IsAvailableInMDX 的文章](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/)。
 
 ## 该规则何时触发
 
@@ -50,7 +50,7 @@ description: 最佳实践规则：对未用于关系或层次结构的隐藏列�
 
 ### 自动修复
 
-This rule includes an automatic fix expression. 当您在 Best Practice Analyzer 中应用此修复时：
+此规则包含自动修复表达式。当您在 Best Practice Analyzer 中应用此修复时：
 
 ```csharp
 IsAvailableInMDX = false
