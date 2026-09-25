@@ -11,9 +11,9 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-        - edition: Business
+        - edition: Empresarial
           full: true
-        - edition: Enterprise
+        - edition: Corporativo
           full: true
 ---
 
