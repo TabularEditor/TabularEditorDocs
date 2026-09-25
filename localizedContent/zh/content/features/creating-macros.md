@@ -19,14 +19,18 @@ applies_to:
 
 # （教程）创建宏
 
-宏是在 Tabular Editor 中保存的 C# Script，可在不同语义模型间轻松复用。将脚本保存为宏后，你就可以在 TOM Explorer 中右键单击对象时使用该宏，从而轻松将脚本应用到你的模型中。
+宏是保存在 Tabular Editor 中的 C# Script，可以在不同语义模型之间轻松复用。
+Saving a script as a  Macro will allow that macro to be used when right clicking on the objects in the TOM Explorer making it simple to apply the script to your model.
 
 ## 创建宏
 
 创建宏的第一步是编写并测试一个 C# Script。
 
 > [!TIP]
-> 开始使用 C# 脚本编写的一个简单方法是使用内置的录制功能，它可以录制你在 TOM Explorer 中执行的操作。通过这种方式，你可以了解如何与不同的模型对象交互，并创建可复用的脚本。另一种方法是复用现有脚本，例如我们[脚本库](xref:csharp-script-library)中的脚本。在本教程中，我们使用脚本 [Format Numeric Measures](xref:script-format-numeric-measures) 来演示宏功能。
+> 开始使用 C# 脚本编写的一个简单方法是使用内置的录制功能，它可以录制你在 TOM Explorer 中执行的操作。
+> his way you can see how to interact with the different model objects and create reusable scripts.
+> nother way is to reuse existing scripts such as those in our [script library](xref:csharp-script-library).
+> n this tutorial we use the script [Format Numeric Measures](xref:script-format-numeric-measures) to showcase the Macro functionality.
 
 当脚本按要求运行后，可以使用工具栏按钮“保存为宏”保存脚本，这会打开“保存宏”窗口。
 
@@ -40,13 +44,13 @@ applies_to:
 
 ![宏保存提示框](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
 
-在上面的示例中，宏将保存在名为 Formatting\Beginner 的文件夹中，脚本名为 "Format Numeric Measures"。它将保存在“度量值”上下文中。
+在上面的示例中，宏将保存在名为 Formatting\Beginner 的文件夹中，脚本名为 "Format Numeric Measures"。 It will be saved in the context of measures.
 
 ### 宏上下文
 
 宏会保存在一个“有效上下文”中，该上下文决定脚本可以应用到模型中的哪些对象。
 
-然后，您可以在 TOM Explorer 中右键单击度量值时使用此宏。保存宏时指定的上下文决定了右键单击哪些对象时会显示该宏。
+然后，您可以在 TOM Explorer 中右键单击度量值时使用此宏。 The context given while saving the Macro determines which objects will show the Macro when right clicking on that object.
 
 Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
@@ -58,20 +62,20 @@ Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
 ![宏编辑信息框](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
-## 管理员策略
+## Administrator policies
 
-宏可通过 IT 部门部署的注册表策略进行集中管控。 `DisableMacros` 会完全阻止宏被保存或运行，并且 Tabular Editor 启动时不会加载存储在 `%LocalAppData%` 中的宏。
+Macros can be governed centrally, through the registry policies an IT department deploys. `DisableMacros` stops them being saved or run at all, and macros stored in `%LocalAppData%` are not loaded when Tabular Editor starts.
 
-在 Tabular Editor 3 中，`BlockUnsafeScripts` 仅允许宏保持在语义模型范围内。会读取或写入文件、访问网络、启动其他程序或引用外部程序集的宏仍可保存，但不会出现在任何菜单中，因此无法被误运行。你会在 **View > Macros** 下找到它，此时它的 **Blocked** 列会被填上标记；你仍然可以打开并编辑它。把它移回到该行内，它的菜单项就会恢复，无需重启 Tabular Editor。保存此类宏时，会提示你该宏已保存，但无法运行。
+In Tabular Editor 3, `BlockUnsafeScripts` allows macros only where they stay within the semantic model. A macro that reads or writes a file, reaches the network, starts another program or references an outside assembly is saved, but left out of every menu so it cannot be run by accident. You will find it under **View > Macros** with its **Blocked** column filled in, where it can still be opened and edited; bring it back inside the line and its menu item returns without restarting Tabular Editor. Saving such a macro tells you it is saved but will not run.
 
-有关哪些情况算作在语义模型范围内，请参阅 [C# Script](xref:csharp-scripts#administrator-policies)；有关注册表值本身，请参阅 @policies。
+See [C# Scripts](xref:csharp-scripts#administrator-policies) for what counts as staying within the model, and @policies for the registry values themselves.
 
 ## 宏 JSON 文件
 
-宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。有关 Tabular Editor 中文件类型的更多信息，请参阅 [支持的文件类型](xref:supported-files#macroactionsjson)
+宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。 For more information on file types in Tabular Editor please see [Supported File Types](xref:supported-files#macroactionsjson)
 
 ## 宏文件示例
 
-此处提供了一个 MacroActions.JSON 文件示例。其中包含我们脚本库中的多个 C# Script：[下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+An example of a MacroActions.JSON file can be found here. 其中包含我们脚本库中的多个 C# Script: [下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 
