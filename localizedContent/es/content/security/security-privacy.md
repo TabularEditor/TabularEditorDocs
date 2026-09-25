@@ -145,7 +145,7 @@ Para permitir el tráfico de las solicitudes web mencionadas anteriormente, debe
 
 ## Seguridad de la aplicación
 
-Tabular Editor no requiere ningún privilegio elevado en el equipo Windows donde está instalado, ni accede a ningún recurso restringido del equipo. Una excepción a esta regla es si se usa el archivo del instalador de Tabular Editor (.msi); en ese caso, el ejecutable y los archivos de soporte necesarios para la herramienta se copian, de forma predeterminada, en la carpeta `Program Files`, que normalmente requiere permisos elevados. Tanto los archivos binarios de Tabular Editor como el archivo del instalador se han firmado con un certificado de firma de código emitido a Kapacity A/S, lo cual garantiza que el código no ha sido manipulado por terceros.
+Tabular Editor no requiere ningún privilegio elevado en el equipo Windows donde está instalado, ni accede a ningún recurso restringido del equipo. Una excepción a esta regla es si se usa el archivo del instalador de Tabular Editor (.msi); en ese caso, el ejecutable y los archivos de soporte necesarios para la herramienta se copian, de forma predeterminada, en la carpeta `Program Files`, que normalmente requiere permisos elevados. Both the Tabular Editor binary files as well as the installer file, have been signed with a code signing certificate issued to Tabular Editor ApS, which is your guarantee that the code has not been tampered with by any 3rd party.
 
 Mientras la aplicación se está ejecutando, todo el acceso a recursos externos se realiza a través de la biblioteca cliente AMO/TOM o de las solicitudes web mencionadas anteriormente.
 
