@@ -1,5 +1,5 @@
 ---
-uid: roadmap
+uid: 路线图
 title: 路线图
 author: Morten Lønskov
 updated: 2025-10-29
@@ -19,12 +19,12 @@ applies_to:
 
 ## 开发中
 
-- **Semantic Bridge enhancements**: Enhanced import UI, support for multi-fact pattern
+- **Semantic Bridge 增强功能**：改进导入 UI，并支持多事实模式
 - **本地化改进**：扩展语言支持，并优化现有翻译
 - **Power Query (M) 自动格式化**：为 M 表达式提供更高级的格式化能力
 - **图形化模型比较**：查看将要应用的更改
 
-## Up Next
+## 接下来
 
 - Tabular Editor 中的 AI 助手
 - 支持.NET 10
@@ -52,7 +52,7 @@ applies_to:
 
 ✅ [**内置 Best Practice Analyzer 规则**](xref:built-in-bpa-rules) — 一套全面的 BPA 规则，覆盖格式化、元数据、模型布局、DAX 表达式和翻译（v3.25.0）
 
-✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0); support for Metric View v1.1 spec
+✅ **Semantic Bridge** - 从 Databricks Metric Views 创建语义模型（企业版，v3.25.0）；并支持 Metric View v1.1 规范
 
 ✅ [**保存时附带 Fabric 支持文件**](xref:save-with-supporting-files) — 支持 .platform 和 definition.pbism 文件，以匹配 Fabric repository 结构（v3.25.0）
 
@@ -90,7 +90,7 @@ applies_to:
 
 ✅ **原生 ARM64 版本** - 在 ARM64 处理器上提供更优性能（v3.23.0）
 
-## Shipped in 2024
+## 2024 年发布
 
 ✅ DAX 调试器 Locals 增强
 
@@ -114,9 +114,9 @@ applies_to:
 
 ✅ Power Query (M) 语法高亮
 
-## Shipped in 2023
+## 2023 年发布
 
-✅ “保存到文件夹”默认使用 TMDL 作为文件格式。 (Depending on release of TMDL by Microsoft)
+✅ “保存到文件夹”默认使用 TMDL 作为文件格式。（取决于 Microsoft 何时发布 TMDL）
 
 ✅ 导入表向导支持 Databricks（待用于获取元数据/架构的 REST 端点可用）
 
@@ -163,4 +163,4 @@ applies_to:
 # Tabular Editor 2 路线图
 
 > [!NOTE]
-> abular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team.
+> Tabular Editor 2 已不再处于积极开发状态，我们不会再为其添加任何重大功能或改进。不过，我们仍会持续更新它，确保在 Microsoft 发布新的语义模型功能时提供支持，并修复任何严重或阻塞性问题。由于该项目基于 MIT 许可证开源，欢迎任何人提交 Pull Request，我们的团队会进行审核，并在通过后予以批准。
