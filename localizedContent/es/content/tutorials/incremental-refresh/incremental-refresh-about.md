@@ -34,7 +34,7 @@ _La actualización incremental se puede configurar y modificar fácilmente desde
 > - Disfruta de actualizaciones programadas más cortas y fiables
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 se limita a Datasets alojados en el servicio de Datasets de Power BI. Para Analysis Services, se requiere un [particionamiento](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. Para Analysis Services, se requiere un [particionamiento](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado.
 
 ---
 
@@ -47,8 +47,8 @@ A continuación se muestra un ejemplo. La actualización incremental se aplica a
 # [Solo el paso de filtro](#tab/filterstep)
 
 ```M
-// Idealmente, el paso de filtro debería poder plegarse de nuevo al Data source
-// Ningún paso anterior a este debería interrumpir el plegado de consultas
+// The filter step should ideally be able to fold back to the data source
+// No steps before this should break query folding
 #"Incremental Refresh Filter Step" = 
     Table.SelectRows(
         Navigation,
@@ -62,7 +62,7 @@ A continuación se muestra un ejemplo. La actualización incremental se aplica a
 
 ```M
 let
-    // Idealmente, el Data source debería admitir el plegado de consultas
+    // The data source should ideally support Query Folding
     Source = Sql.Database(#"ServerParameter", #"DatabaseParameter"),
 
     Navigation = 
@@ -70,8 +70,8 @@ let
             [ Schema="DW_fact", Item="Internet Sales" ] 
         } [Data],
 
-    // Idealmente, el paso de filtro debería poder plegarse de nuevo al Data source
-    // Ningún paso anterior a este debería interrumpir el plegado de consultas
+    // The filter step should ideally be able to fold back to the data source
+    // No steps before this should break query folding
     #"Incremental Refresh Filter Step" = 
         Table.SelectRows(
             Navigation,
@@ -86,8 +86,8 @@ in
 # [RangeStart](#tab/rangestart)
 
 ```M
-// No importa cuál sea el valor inicial del parámetro RangeStart
-// El parámetro debe ser del tipo de datos "datetime"
+// It does not matter what the initial value is for the RangeStart parameter
+// The parameter must be of data type "datetime"
 #datetime(2022, 12, 01, 0, 0, 0) 
     meta 
         [
@@ -100,8 +100,8 @@ in
 # [RangeEnd](#tab/rangend)
 
 ```M
-// No importa cuál sea el valor inicial del parámetro RangeEnd
-// El parámetro debe ser del tipo de datos "datetime"
+// It does not matter what the initial value is for the RangeEnd parameter
+// The parameter must be of data type "datetime"
 #datetime(2022, 12, 31, 0, 0, 0) 
     meta 
         [
@@ -324,7 +324,7 @@ _A continuación se muestra un resumen de las propiedades de TOM de un Data mode
             </tr>
             <tr>
                 <td class="formatting"><b><em>PolicyType</b></td>
-                <td class="formatting">N/A</td>
+                <td class="formatting">N/D</td>
                 <td class="formatting">Especifica el tipo de política de actualización.</td>
                 <td class="formatting">Solo puede contener un único valor: <code>Basic</code>.</td>
             </tr>
