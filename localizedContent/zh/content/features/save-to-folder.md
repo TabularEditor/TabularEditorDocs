@@ -19,7 +19,7 @@ applies_to:
 
 # 保存到文件夹
 
-使用“保存到文件夹”，你可以将模型元数据存储为独立文件，便于用版本控制系统进行管理。你不必再使用一个包含 Data model 中所有对象（例如表、度量值、关系等）的单一文件 (.bim 或 .pbix)，而是可以将它们拆分为多个独立文件，并存放在一个文件夹中。这样一来，你就可以使用版本控制系统来跟踪更改、比较版本，并与其他开发者协作开发你的 Data model。
+Save to Folder allows you to store your model metadata as individual files, which can be easily managed by version control systems. Instead of having a single file (.bim or .pbix) that contains all the objects of your data model, such as tables, measures, relationships, etc., you can split them into separate files and store them in a folder. This way, you can use source control tools to track the changes, compare versions, and collaborate with other developers on your data model.
 
 > [!NOTE]
 > 你可以使用两种不同的格式将 Data model 保存到文件夹：JSON 或 [TMDL](tmdl.md)。
@@ -28,12 +28,12 @@ applies_to:
 
 1. 点击“文件 > 保存到文件夹”
 2. 选择用于保存模型文件的文件夹。
-3. 点击“保存”。 Tabular Editor 会在所选文件夹中创建或更新文件，并根据序列化设置以指定的 JSON 或 TMDL 格式保存。
+3. Click on Save. Tabular Editor 会在所选文件夹中创建或更新文件，并根据序列化设置以指定的 JSON 或 TMDL 格式保存。
 4. 现在，你可以将该文件夹中的文件用于版本控制、部署或备份。
 
 ## 序列化设置
 
-序列化设置用于定义如何将模型对象拆分为单独的文件。在这些设置中，你还可以选择使用 JSON 或 TMDL 格式。
+序列化设置用于定义如何将模型对象拆分为单独的文件。 In these settings you can also define if you wish to use JSON or TMDL formats.
 
 ### [Tabular Editor 2 偏好](#tab/TE2Preferences)
 
@@ -44,17 +44,17 @@ applies_to:
 
 ### [Tabular Editor 3 偏好](#tab/TE3Preferences)
 
-序列化设置位于“工具 > 偏好 > 文件格式”下。
-“常规”和“保存到文件夹”选项卡包含与模型序列化相关的设置。 <br></br>
+Serialization settings are found under Tools > Preferences > File Formats
+The tabs General and Save-to-folder contains settings regarding the serialization of the model. <br></br>
 ![TE3 偏好](~/content/assets/images/common/TE3SaveToFolderSerializationSettings.png)
 
 Tabular Editor 3 对 JSON 序列化有一套默认设置；如果要使用不同设置，你必须在序列化模式中主动选择。在那里也可以切换到 TMDL 格式。
 
 ***
 
-### 用户自定义函数（UDFs）
+### User Defined Functions (UDFs)
 
-自 Tabular Editor 3.27.0 起，JSON 文件夹格式可将每个 [DAX 用户自定义函数](xref:udfs) 分别存储为独立文件，与表、度量值和列的存储方式一致。这些函数位于模型根目录下的 `functions` 子文件夹中：
+Since Tabular Editor 3.27.0, the JSON folder format can store each [DAX User-Defined Function](xref:udfs) in its own file, the same way it already does for tables, measures and columns. The functions go in a `functions` subfolder at the model root:
 
 ```
 MyModel/
@@ -63,24 +63,25 @@ MyModel/
 │   ├── Sales.MarginPct.json
 │   └── Time.SameDayLastYear.json
 ├── tables/
-└── ……
+└── ...
 ```
 
-好处与其他任何对象类型相同：两位开发人员分别编辑两个不同的函数时，会修改两个不同的文件，因此 Git 没有任何需要合并的内容。如果不启用它，每个函数都会以内联方式保存在 `Database.json` 中，任何两项并行编辑都会在这一个文件里发生冲突。
+The benefit is the same as for every other object type: two developers editing two different functions change two different files, so Git has nothing to merge. Without it every function lives inline in `database.json`, and any two parallel edits collide in that one file.
 
-可在 **工具 > 偏好 > 文件格式 > 保存到文件夹** 下启用 **用户自定义函数（UDFs）** 级别；对于当前打开的模型，也可在 **模型 > 序列化选项...** 中启用。
+Turn it on with the **User Defined Functions (UDFs)** level, under **Tools > Preferences > File Formats > Save-to-folder** or, for the model you have open, under **Model > Serialization options...**.
 
-![模型 > 序列化选项，其中已勾选“用户定义函数（UDFs）”级别](~/content/assets/images/serialization-options-udf.png)
+![Model > Serialization options, with the User Defined Functions (UDFs) level ticked](~/content/assets/images/serialization-options-udf.png)
 
 > [!IMPORTANT]
-> 只有在&#x4F60;_&#x9996;&#x6B21;_&#x5C06;模型保存到文件夹时，Tabular Editor 才会默认选中此级别。已采用文件夹序列化的模型会在自身的序列化注释中保留已存储的级别，因此在你于 **模型 > 序列化选项...** 中选择 **用户自定义函数（UDFs）** 并再次保存模型之前，这些函数仍会继续以内联方式存储。
+> Tabular Editor selects this level by default only for a model you save to a folder for the _first_ time. A model that's already folder-serialized keeps the levels stored in its own serialization annotation, so its functions stay inline until you select **User Defined Functions (UDFs)** under **Model > Serialization options...** and save the model again.
 
 ### 序列化模型注释
 
-Tabular Editor 会将序列化设置保存在模型中，这样无论谁在处理该模型，这些设置都会保持一致。这可确保开发者的本地偏好不会覆盖模型的设置，从而避免在源代码管理中出现难以处理的合并冲突。你可以在 TOM Explorer 的“Model”对象属性中找到这些注释，路径为：Model > Annotations > TabularEditor_SerializeOptions <br></br>
+Tabular Editor 会将序列化设置保存在模型中，这样无论谁在处理该模型，这些设置都会保持一致。 This ensures that a developer's local preferences do not overwrite model's setting and lead to an unmanageable merge in your source control. 你可以在 TOM Explorer 的“Model”对象属性中找到这些注释，路径为：Model > Annotations > TabularEditor_SerializeOptions <br></br>
 ![TE3 偏好](~/content/assets/images/common/SaveToFolderModelAnnotation.png)
 
 #### 覆盖模型序列化设置
 
-如果需要，可以覆盖模型上的注释。先在 Tabular Editor 中设置好序列化偏好，然后选择“文件 > 保存到文件夹”。这会打开 Windows 资源管理器，此处需要取消勾选该复选框。 <br></br>
-![TE3 偏好](~/content/assets/images/common/SaveToFolderOverwriteModelAnnotation.png)
+The model's annotation can be overwritten if so desired. First set up the serialization preferences inside Tabular Editor and go to File > Save to Folder.
+This open up Windows Explorer and here the ticket button needs to be unselected. <br></br>
+![TE3 Preferences](~/content/assets/images/common/SaveToFolderOverwriteModelAnnotation.png)
