@@ -17,9 +17,9 @@ Los C# Scripts usan LINQ estándar de C# con expresiones lambda. Las reglas de B
 
 ## Dónde se usa cada uno
 
-| Contexto                                                                   | Sintaxis                                                                     |
+| Contexto                                                                   | Syntax                                                                       |
 | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| C# Scripts y macros                                                        | LINQ de C#                                                                   |
+| C# Scripts y macros                                                        | C# LINQ                                                                      |
 | Expresiones de reglas de BPA                                               | Dynamic LINQ                                                                 |
 | Expresiones de corrección del BPA                                          | Dynamic LINQ (con el prefijo `it.` para las asignaciones) |
 | Filtro del árbol del **Explorador TOM** (prefijo `:`)\* | Dynamic LINQ                                                                 |
@@ -34,9 +34,9 @@ En Dynamic LINQ, el objeto es implícito: no hay ningún parámetro lambda como 
 | ---------------------------------- | ------------------------------------------ | ---------------------------------------------- |
 | AND lógico                         | `&&`                                       | `and`                                          |
 | OR lógico                          | `\|\|`                                     | `or`                                           |
-| Negación lógica                    | `!`                                        | `not`                                          |
-| Igual a                            | `==`                                       | `=`                                            |
-| Distinto de                        | `!=`                                       | `!=` o `<>`                                    |
+| Boolean NOT                        | `!`                                        | `not`                                          |
+| Equals                             | `==`                                       | `=`                                            |
+| Not equals                         | `!=`                                       | `!=` o `<>`                                    |
 | Mayor/menor que                    | `>`, `<`, `>=`, `<=`                       | `>`, `<`, `>=`, `<=`                           |
 | La cadena contiene                 | `m.Name.Contains("Sales")`                 | `Name.Contains("Sales")`                       |
 | La cadena empieza con              | `m.Name.StartsWith("Sum")`                 | `Name.StartsWith("Sum")`                       |
@@ -118,7 +118,7 @@ Model.Tables.Where(t => t.Columns.Any(c => c.Name == t.Name));
 
 C# usa `OfType<T>()` o `is`. En BPA, el ámbito **Se aplica a** de la regla se encarga del filtrado por tipo. No necesitas comprobaciones de tipo en la propia expresión.
 
-| LINQ de C#                                     | Enfoque de LINQ dinámico                                               |
+| C# LINQ                                        | Enfoque de LINQ dinámico                                               |
 | ---------------------------------------------- | ---------------------------------------------------------------------- |
 | `Model.AllColumns.OfType<CalculatedColumn>()`  | Establece el ámbito de la regla BPA en **Columnas calculadas**         |
 | `Model.Tables.OfType<CalculationGroupTable>()` | Establece el ámbito de la regla BPA en **Tablas de grupos de cálculo** |
@@ -127,7 +127,7 @@ C# usa `OfType<T>()` o `is`. En BPA, el ámbito **Se aplica a** de la regla se e
 
 Funcionan igual en ambas sintaxis, pero LINQ dinámico omite el prefijo del objeto.
 
-| LINQ de C#                    | LINQ dinámico               |
+| C# LINQ                       | Dynamic LINQ                |
 | ----------------------------- | --------------------------- |
 | `m.ReferencedBy.Count == 0`   | `ReferencedBy.Count = 0`    |
 | `m.DependsOn.Any()`           | `DependsOn.Any()`           |
@@ -146,7 +146,7 @@ Model.AllMeasures.Where(m => m.HasAnnotation("AUTOGEN"));
 HasAnnotation("AUTOGEN")
 ```
 
-| C# LINQ                             | LINQ dinámico                    |
+| C# LINQ                             | Dynamic LINQ                     |
 | ----------------------------------- | -------------------------------- |
 | `m.GetAnnotation("key") == "value"` | `GetAnnotation("key") = "value"` |
 | `m.HasAnnotation("key")`            | `HasAnnotation("key")`           |
@@ -163,7 +163,7 @@ Model.AllMeasures.Where(m => m.InPerspective["Sales"]);
 InPerspective["Sales"]
 ```
 
-| C# LINQ                                            | LINQ dinámico                                    |
+| C# LINQ                                            | Dynamic LINQ                                     |
 | -------------------------------------------------- | ------------------------------------------------ |
 | `m.InPerspective["Sales"]`                         | `InPerspective["Sales"]`                         |
 | `!m.InPerspective["Sales"]`                        | `not InPerspective["Sales"]`                     |
@@ -219,4 +219,4 @@ IsHidden and ReferencedBy.Count = 0 and String.IsNullOrWhitespace(Description)
 - @using-bpa-sample-rules-expressions
 - @advanced-filtering-explorer-tree
 - @bpa
-- @how-to-filter-query-objects-linq
+- @como-filtrar-objetos-de-consulta-con-linq
