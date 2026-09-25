@@ -8,26 +8,26 @@ description: 最佳实践规则：确保为所有已定义的区域设置翻译�
 
 # 为所有区域设置翻译透视名称
 
-## 概述
+## 概览
 
 此规则用于识别在一个或多个区域设置中缺少名称翻译的模型透视。
 
 - 类别：模型布局
-- 严重性：低（1）
+- 严重性：低 (1)
 
-## 适用对象
+## 适用于
 
 - 模型
 - 透视
 
-## 为什么这很重要
+## 为何这很重要
 
 - **本地化不完整**：透视仅以默认语言显示
 - **体验不一致**：透视名称中既有已翻译的，也有未翻译的
 - **用户困惑**：无法获得预期的语言支持
 - **专业形象**：翻译不完整会降低模型质量
 
-## 何时触发此规则
+## 此规则何时会触发
 
 当透视存在以下情况时，此规则会触发：
 
@@ -43,7 +43,7 @@ Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 1. 在 **TOM Explorer** 中选择该透视
 2. 在 **Properties** 窗格中，展开 **Translated Names**
-3. 为每个区域设置输入相应的翻译
+3. 为每个区域设置输入翻译
 
 ## 常见原因
 
@@ -53,7 +53,7 @@ Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 
 ### 原因 2：后续添加了区域设置
 
-在定义透视之后才添加区域设置。
+Culture added after perspectives were defined.
 
 ### 原因 3：翻译不完整
 
@@ -64,17 +64,17 @@ Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ### 修复前
 
 ```
-透视: "Sales Analysis"
-英语: "Sales Analysis"
-德语:（缺失）
+Perspective: "Sales Analysis"
+English: "Sales Analysis"
+German: (missing)
 ```
 
 ### 修复后
 
 ```
-透视: "Sales Analysis"
-英语: "Sales Analysis"
-德语: "Vertriebsanalyse"
+Perspective: "Sales Analysis"
+English: "Sales Analysis"
+German: "Vertriebsanalyse"
 ```
 
 ## 兼容级别
