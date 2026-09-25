@@ -19,27 +19,27 @@ applies_to:
 
 # Conectividad
 
-Tabular Editor 3 connects to two different kinds of thing, and they authenticate differently.
+Tabular Editor 3 se conecta a dos tipos distintos de elementos, y cada uno se autentica de forma diferente.
 
-- **The model you are editing**, on Analysis Services, Azure Analysis Services or a Power BI or Fabric workspace, reached over XMLA. See @xmla-as-connectivity.
-- **The data sources your model imports from**, reached through the [Table Import Wizard](xref:import-tables). That is what the pages below cover.
+- **El modelo que estás editando**, en Analysis Services, Azure Analysis Services o en un Workspace de Power BI o de Fabric, accesible a través de XMLA. Consulta @xmla-as-connectivity.
+- **Los Data sources desde los que importa el modelo**, a los que accedes mediante el [Asistente para importar tablas](xref:import-tables). Eso es lo que cubren las páginas siguientes.
 
-## Where credentials live
+## Dónde se almacenan las credenciales
 
-Credentials are stored per user and per model in the [user options](xref:user-options) file (`.tmuo`), encrypted with your Windows account key. They are not part of the model metadata and they never reach source control. See @supported-files.
+Las credenciales se almacenan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`), cifradas con la clave de tu cuenta de Windows. No forman parte de los metadatos del modelo y nunca llegan al control de código fuente. Consulta @supported-files.
 
-This has one consequence worth knowing up front: a colleague who opens the same model supplies their own credentials, and so does the same person on a different machine.
+Esto tiene una consecuencia que conviene conocer desde el principio: un compañero que abra el mismo modelo deberá proporcionar sus propias credenciales, y también la misma persona si lo abre en otro equipo.
 
-## Legacy, structured and implicit data sources
+## Data sources heredados, estructurados e implícitos
 
-Which authenticators you are offered also depends on how the model stores the data source, and the model decides that rather than you.
+Los autenticadores que se te ofrecen también dependen de cómo almacena el modelo el Data source, y eso lo decide el modelo, no tú.
 
-- **Legacy (provider)** data sources are available to every model, whatever its compatibility level. Credentials are stored server-side in the Tabular Object Model.
-- **Structured (Power Query)** data sources are available at compatibility level 1400 and above. Credentials have to be supplied again on every deployment to Analysis Services.
-- **Implicit** data sources are what Power BI and Fabric models use, and a Direct Lake model can use nothing else. There is no data source object in the metadata at all: the M expression on the partition names the source, and credentials are held by Power BI Desktop or the Power BI service rather than by the model.
+- **Los Data sources heredados (provider)** están disponibles para todos los modelos, sea cual sea su nivel de compatibilidad. Las credenciales se almacenan en el servidor, en el Tabular Object Model.
+- **Los Data sources estructurados (Power Query)** están disponibles a partir del nivel de compatibilidad 1400 en adelante. Las credenciales deben proporcionarse de nuevo en cada despliegue a Analysis Services.
+- **Los Data sources implícitos** son los que usan los modelos de Power BI y Fabric, y un modelo Direct Lake no puede usar ningún otro. No hay ningún objeto de Data source en los metadatos: la expresión M de la partición nombra el origen, y Power BI Desktop o el servicio de Power BI guardan las credenciales, no el modelo.
 
-Where more than one kind is available, the wizard prefers implicit, then structured, then legacy.
+Cuando hay más de un tipo disponible, el asistente prefiere el implícito, luego el estructurado y después el heredado.
 
-This is also why the source list is shorter outside Power BI. Snowflake, Databricks and Power BI dataflows are only reachable as implicit data sources, so the wizard leaves them out when the model is on Analysis Services. See [Types of TOM data sources](xref:import-tables#types-of-tom-data-sources).
+Por eso la lista de orígenes también es más corta fuera de Power BI. Solo se puede acceder a Snowflake, Databricks y los Dataflows de Power BI como Data sources implícitos, por lo que el asistente los omite cuando el modelo está en Analysis Services. Consulta [Tipos de Data sources de TOM](xref:import-tables#types-of-tom-data-sources).
 
-Whichever kind the model ends up with, the credentials _Tabular Editor_ uses to browse the source and read its schema are the ones you type into the connection dialog, and they go in the `.tmuo` file described above. They are separate from the credentials Analysis Services or Power BI uses at refresh time.
+Sea cual sea el tipo con el que acabe el modelo, las credenciales que _Tabular Editor_ usa para examinar el origen y leer su esquema son las que escribes en el cuadro de diálogo de conexión, y se guardan en el archivo `.tmuo` descrito antes. Son independientes de las credenciales que Analysis Services o Power BI usan en el momento de la actualización.
