@@ -39,6 +39,20 @@ Son las siguientes:
 - **Implementar roles del modelo**: Esta opción indica si se deben implementar los roles definidos en el modelo. Al desmarcar esta opción, se mantendrán tal cual los roles existentes en el modelo. Si va a implementar cambios en tablas o columnas del modelo, quizá tenga que revisar la [configuración de RLS u OLS](xref:data-security-about) para asegurarse de que siga siendo válida.
   - **Implementar miembros de roles del modelo**: Esta opción indica si se deben implementar los miembros de los roles. Es habitual administrar los miembros de rol directamente en el servidor, en lugar de hacerlo en los metadatos del modelo. Al desmarcar esta opción, se evitará que la implementación modifique los miembros de rol existentes en el servidor de destino.
 
+## Data source credentials
+
+By default, Tabular Editor doesn't save passwords, account keys and other secrets when it saves a model to disk. A model loaded from a file may therefore have data sources with a missing secret. The deployment wizard checks for this before it deploys. A secret counts as missing when it's empty or `********`. The wizard checks:
+
+- a provider data source whose connection string contains a password keyword, such as `Password` or `Pwd`,
+- a provider data source that impersonates a specific Windows account,
+- a structured data source that uses Windows or username/password authentication, or an account key.
+
+For each missing secret, the wizard asks you for the credentials the server should use when it refreshes the model. Tabular Editor stores what you enter, encrypted, as a data source override in the @user-options file, and uses it on the next deployment instead of asking again.
+
+When you clear **Deploy Data Sources**, the wizard runs the same check on the data sources that already exist on the target. If the server doesn't return a secret that one of them needs, the wizard asks for it on every deployment, because these answers aren't stored.
+
+Power BI and Fabric semantic models don't store credentials in the model. You set them on the semantic model in the Power BI service instead.
+
 ## Script de implementación
 
 Durante la implementación, Tabular Editor genera un [script TMSL CreateOrReplace](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), que luego se ejecuta en el motor de Analysis Services. El script CreateOrReplace contiene todos los metadatos necesarios para volver a crear el modelo, incluidas tablas, columnas, medidas, relaciones, perspectivas, traducciones, etc. Si el modelo aún no existe en el servidor de destino, se creará. Si el modelo ya existe, los objetos existentes se reemplazarán por los nuevos metadatos especificados en el script.
