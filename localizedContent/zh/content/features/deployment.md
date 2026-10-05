@@ -39,19 +39,19 @@ These are:
 - **Deploy Model Roles**: This option indicates whether roles defined in the model should be deployed. Unchecking this option will retain existing roles on the model as-is. 如果你正在部署对模型中的表或列所做的更改，可能需要重新检查 [RLS 或 OLS 设置](xref:data-security-about)，以确保它们仍然有效。
   - **Deploy Model Role Members**: This option indicates whether role members should be deployed. It is common to manage role members directly on the server, rather than in the model metadata. Unchecking this option will prevent the deployment from modifying any existing role members on the destination server.
 
-## Data source credentials
+## 数据源凭据
 
-By default, Tabular Editor doesn't save passwords, account keys and other secrets when it saves a model to disk. A model loaded from a file may therefore have data sources with a missing secret. The deployment wizard checks for this before it deploys. A secret counts as missing when it's empty or `********`. The wizard checks:
+默认情况下，Tabular Editor 在将模型保存到磁盘时，不会保存密码、账户密钥和其他机密信息。因此，从文件加载的模型中，某些数据源的机密信息可能缺失。 Deployment Wizard 会在部署前检查这一点。机密信息为空或为 `********` 时，即视为缺失。向导会检查：
 
-- a provider data source whose connection string contains a password keyword, such as `Password` or `Pwd`,
-- a provider data source that impersonates a specific Windows account,
-- a structured data source that uses Windows or username/password authentication, or an account key.
+- 连接字符串中包含密码关键字（如 `Password` 或 `Pwd`）的 Provider数据源，
+- 模拟特定 Windows 帐户的 Provider数据源，
+- 使用 Windows 身份验证或用户名/密码身份验证，或使用帐户密钥的 Structured数据源。
 
-For each missing secret, the wizard asks you for the credentials the server should use when it refreshes the model. Tabular Editor stores what you enter, encrypted, as a data source override in the @user-options file, and uses it on the next deployment instead of asking again.
+对于每个缺失的机密信息，向导都会要求你提供服务器在刷新模型时应使用的凭据。 Tabular Editor 会将你输入的内容加密后存储在 @user-options 文件中，作为数据源覆盖设置，并在下次部署时直接使用，而无需再次询问。
 
-When you clear **Deploy Data Sources**, the wizard runs the same check on the data sources that already exist on the target. If the server doesn't return a secret that one of them needs, the wizard asks for it on every deployment, because these answers aren't stored.
+取消选中 **部署数据源** 后，向导会对目标中已存在的数据源执行相同的检查。如果服务器没有返回其中某个数据源所需的机密信息，向导会在每次部署时都要求你提供，因为这些信息不会被存储。
 
-Power BI and Fabric semantic models don't store credentials in the model. You set them on the semantic model in the Power BI service instead.
+Power BI 和 Fabric 语义模型不会在模型中存储凭据。你需要改为在 Power BI 服务中的语义模型里设置这些凭据。
 
 ## 部署脚本
 
