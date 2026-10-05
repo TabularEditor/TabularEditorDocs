@@ -2,7 +2,7 @@
 uid: object-properties
 title: Object properties reference
 author: Jeroen ter Heerdt
-updated: 2026-09-23
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,15 +22,15 @@ applies_to:
 SUMMARY: Reference for every property that Tabular Editor shows in the Properties view, grouped by object type.
 -->
 
-Every object in a semantic model, such as a table, a column or a measure, is described by a set of properties. These properties come from the Tabular Object Model (TOM), the object model that Analysis Services, Power BI and Fabric use to define semantic models. Tabular Editor shows them in the @properties-view, and C# scripts read and write them through the @api-index.
+Every object in a semantic model, such as a table, a column or a measure, has a set of properties. These properties come from the Tabular Object Model (TOM), the object model that Analysis Services, Power BI and Fabric use to define semantic models. The @properties-view shows them, and C# scripts read and write them through the @api-index.
 
-This reference covers every property that the Properties view shows, what it does, and when you would change it. Where Tabular Editor has a feature that helps you work with a property, such as an editor, a Best Practice Analyzer rule or a C# script, the property links to it.
+This reference describes each property that the Properties view shows. When Tabular Editor has a feature for a property, such as an editor, a Best Practice Analyzer (BPA) rule or a C# script, the entry links to it.
 
-To change a property, select one or more objects in the @tom-explorer-view and edit the value in the Properties view. When you select several objects, you can change a property for all of them at once. See @editing-properties.
+To change a property, select one or more objects in the @tom-explorer-view and edit the value in the Properties view. When you select several objects, the new value applies to all of them. See @editing-properties.
 
 ## How this reference is organized
 
-Properties that almost every object has, such as **Name**, **Description** and **Annotations**, are described once on @object-properties-common. The other pages cover one family of related objects each:
+@object-properties-common describes the properties that most objects have, such as `Name`, `Description` and `Annotations`. Each of the other pages covers one family of related objects:
 
 | Page | Objects |
 |---|---|
@@ -49,37 +49,50 @@ Properties that almost every object has, such as **Name**, **Description** and *
 | @object-properties-calendars | Calendar, time-related column group, time unit column association |
 | @object-properties-functions | User-defined function, set |
 
-On each page, properties are grouped by the category they appear under in the Properties view when **Categorized** is selected:
+Each page has a section per object. The section starts with links to the common properties of the object, followed by one entry per property. Within each object, the properties are listed by category, in the order the Properties view shows them when **Categorized** is selected. The categories are:
 
-- **Basic**: the properties you change most often, such as name, description and format string.
-- **Metadata**: information about the object. Most of these are read-only, such as the object type or the error message.
+- **Basic**: the properties you change most often, such as the name, the description and the format string.
+- **Metadata**: information about the object, such as the object type or the error message. Most of these properties are read-only.
 - **Options**: properties that change how the object behaves, such as expressions, summarization or sort order.
 - **Translations, Perspectives, Security**: per-culture translations, perspective membership and per-role security settings.
 
-Each property lists its name as shown in the Properties view, its name in TOM (the name you use in a C# script), and its type:
+Some objects have other categories, such as **Data Access Options** on the model.
+
+The heading of each entry is the property's name as shown in the Properties view. The line under the heading gives the property's TOM name, its type and its category:
 
 > **Display name**
-> `TomName` · type
+> `TomName` · type · Category
 
-When the display name and the TOM name are the same, only the TOM name is shown. The TOM name is the one Tabular Editor's scripting API uses. For a few properties, the underlying TOM object is nested differently, for example a measure's **Format String Expression** is saved as `formatStringDefinition` in TMDL.
+The TOM name is the name you use in a C# script. For a few properties, the Tabular Model Definition Language (TMDL) uses another name, for example TMDL saves a measure's `FormatStringExpression` as `formatStringDefinition`.
+
+When they apply, these parts follow the category, in this order:
+
+- **read-only**: you can't change the value.
+- **compatibility level NNNN+**: the minimum compatibility level of the model, for example `compatibility level 1540+`.
+- a marker for a property that Tabular Editor adds. See [Properties that Tabular Editor adds](#properties-that-tabular-editor-adds).
+
+For example, the entry for Lineage Tag starts with:
+
+> **Lineage Tag**
+> `LineageTag` · string · Options · compatibility level 1540+
 
 ## Properties that depend on the model
 
-The Properties view hides properties that don't apply to the current model. What you see depends on:
+The Properties view hides the properties that don't apply to the current model. Which properties appear depends on:
 
-- **Compatibility level.** Many properties need a minimum compatibility level of the model, for example **Lineage Tag** needs 1540 or higher. This reference lists the minimum level where one applies. To see or change the compatibility level, select the model and look at **Compatibility Level** under the **Database** property.
-- **Compatibility mode.** Some properties exist only for Power BI and Fabric models, or only for Analysis Services models.
-- **Object state.** Some properties only appear when another property has a certain value. For example, the properties of a refresh policy only appear when the table has one.
+- the compatibility level of the model. Many properties need a minimum level, for example `LineageTag` needs 1540 or higher. To see or change the compatibility level, select the model and expand `Database` in the Properties view.
+- the compatibility mode of the model. Some properties exist only for Power BI and Fabric models, or only for Analysis Services models.
+- the state of the object. Some properties appear only when another property has a certain value. For example, the properties of a refresh policy appear only when the table has one.
 
 ## Properties that Tabular Editor adds
 
-Almost every property in the Properties view is a TOM property, saved in the model and visible to every tool that reads it. A few properties are added by Tabular Editor to make the model easier to work with. These properties are marked with:
+Almost every property in the Properties view is a TOM property, which is saved in the model and visible to every tool that reads the model. Tabular Editor adds a few properties of its own. The meta line marks them as follows:
 
 | Marker | Meaning | Saved in the model? |
 |---|---|---|
-| *computed* | Tabular Editor works the value out for display, for example **DAX identifier** or **Object Type**. | No |
-| *shortcut to …* | Shows or edits a TOM property that belongs to another object, so you don't have to select that object first. For example, **Source Type** on a table shows the source type of the table's first partition. | Yes, as the TOM property it points to |
-| *stored as an annotation* | Tabular Editor saves the value in an annotation on the object, for example **Table Group**. | Yes, but only Tabular Editor uses it |
+| *computed* | Tabular Editor calculates the value for display, for example `DaxObjectFullName` or `ObjectTypeName`. | No |
+| *shortcut to …* | Shows or edits a TOM property of another object. For example, `SourceType` on a table shows the source type of the table's first partition. | Yes, as the TOM property it points to |
+| *stored as an annotation* | Tabular Editor saves the value in an annotation on the object, for example `TableGroup`. | Yes, as an annotation that only Tabular Editor reads |
 
 ## See also
 
