@@ -40,8 +40,8 @@ description: 最佳实践规则：在多对多关系上使用单向筛选，以�
 ### 手动修复
 
 1. 在 **TOM Explorer** 中，找到被标记的关系
-2. 在 **属性** 窗格中，找到 `Cross Filter Direction` 设置
-3. 将其从 **双向** 改为 **单向**
+2. In **Properties** pane, find **Cross Filtering Behavior**
+3. Change from **BothDirections** to **OneDirection**
 
 根据典型的筛选流向选择方向：
 
@@ -78,14 +78,14 @@ CALCULATE(
 
 ```
 'Sales' (Many) <--> (Many) 'ProductBridge'
-Cross Filter Direction: Both  ← Problem
+Cross Filtering Behavior: BothDirections  ← Problem
 ```
 
 ### 修复后
 
 ```
 'Sales' (Many) --> (Many) 'ProductBridge'
-Cross Filter Direction: Single
+Cross Filtering Behavior: OneDirection
 ```
 
 当需要让 Products 筛选 Sales 时，可使用 DAX：
