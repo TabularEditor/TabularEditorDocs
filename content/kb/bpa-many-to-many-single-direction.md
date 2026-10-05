@@ -1,8 +1,8 @@
 ---
 uid: kb.bpa-many-to-many-single-direction
 title: Many-to-Many Relationships Should Use Single Direction
-author: Morten Lønskov
-updated: 2026-01-09
+author: Jeroen ter Heerdt
+updated: 2026-10-05
 description: Best practice rule to avoid performance issues by using single-direction filtering on many-to-many relationships.
 ---
 

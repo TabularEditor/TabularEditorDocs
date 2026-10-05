@@ -1,8 +1,8 @@
 ---
 uid: creating-and-testing-dax
 title: Adding measures and other calculated objects
-author: Daniel Otykier
-updated: 2026-09-14
+author: Jeroen ter Heerdt
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2

@@ -1,8 +1,8 @@
 ---
 uid: incremental-refresh-modify
 title: Modify an Existing Refresh Policy
-author: Kurt Buhler
-updated: 2023-01-09
+author: Jeroen ter Heerdt
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2

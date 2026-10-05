@@ -1,8 +1,8 @@
 ---
 uid: data-security-testing
 title: Testing RLS/OLS
-author: Kurt Buhler
-updated: 2023-03-02
+author: Jeroen ter Heerdt
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2
