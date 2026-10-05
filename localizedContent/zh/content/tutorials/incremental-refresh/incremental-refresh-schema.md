@@ -36,7 +36,7 @@ applies_to:
 
 2. **应用检测到的架构更改：** 在 _“应用架构更改”_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击该表，然后选择 _“应用刷新策略”_。
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="应用刷新策略" style="width:450px !important"/>
 
@@ -72,7 +72,7 @@ applies_to:
 1. **检测架构更改：** 右键单击该表，然后选择 _'更新表架构...'_。
 2. **应用检测到的架构更改：** 在 _'应用架构更改'_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. __刷新所有分区：__按住 Shift 键单击以选中所有分区。右键单击并选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表，然后选择 _“预览数据”_ 查看结果。
 
 # [Power Query](#tab/removingfrompq)
@@ -82,7 +82,7 @@ applies_to:
 1. **检测架构更改：** 右键单击该表，然后选择 _'更新表架构...'_。
 2. **应用检测到的架构更改：** 在 _'应用架构更改'_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. __刷新所有分区：__按住 Shift 键单击以选中所有分区。右键单击并选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 # [不受支持的数据源](#tab/removingfromunsupportedsource)
@@ -93,7 +93,7 @@ applies_to:
 2. **更新 Power Query 表达式：** 如适用，检查并删除对已移除列的所有命名引用。如果该列是通过 Power Query 排除的，可在此进行相应更改。
 3. **手动更新架构：** 从表中删除该数据列对象。
 4. **应用更改：** 部署模型更改。
-5. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+5. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 6. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 ***
@@ -116,7 +116,7 @@ applies_to:
 1. **检测架构更改：** 右键单击该表，然后选择 _“更新表架构...”_。
 2. **应用检测到的架构更改：** 在 _“应用架构更改”_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 # [Power Query](#tab/addingfrompq)
@@ -126,7 +126,7 @@ applies_to:
 1. **检测架构更改：** 右键单击表，然后选择 _“更新表架构...”_。
 2. **应用检测到的架构更改：** 在 _“应用架构更改”_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 # [不支持的数据源](#tab/addingfromunsupportedsource)
@@ -138,7 +138,7 @@ applies_to:
 3. **手动更新架构：** 右键单击表，然后选择 _创建 > 数据列_。为该列指定合适的名称。
 4. **配置新列：** 将该列的 `data type` 属性设置为合适的值。将 `Source Column` 属性设置为与源列一致。也可以配置其他属性（例如 `Format String`、`SummarizeBy`、`Data Category` 等）并可将该列添加到相应的显示文件夹中。
 5. **应用更改：** 部署模型的更改。
-6. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
+6. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 7. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 ***
