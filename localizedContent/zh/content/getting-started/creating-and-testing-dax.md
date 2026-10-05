@@ -81,7 +81,7 @@ To add a calculated table, right-click on the model or on the "Tables" folder, a
 要添加[计算组](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions)，在模型或“表”文件夹上右键点击，然后选择 **创建 > 计算组** (ALT+7)。 Give the Calculation Group a name. Also consider a different name for the default **Name** column.
 
 > [!IMPORTANT]
-> 此选项仅适用于兼容级别为 1500 或更高的模型。
+> This option is only available on models at compatibility level 1470 or higher. Analysis Services supports calculation groups from compatibility level 1500.
 
 To add calculation items, right-click on the newly created calculation group and choose **Create > Calculation Item**. 为计算项命名，并使用 **表达式编辑器** 编辑其 DAX 表达式，方式与我们在上面创建度量值时类似。
 
