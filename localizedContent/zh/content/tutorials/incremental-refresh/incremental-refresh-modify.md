@@ -46,7 +46,7 @@ applies_to:
 
 5. **应用更改：** 部署模型更改。
 
-6. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+6. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 
    <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="应用刷新策略" style="width:450px !important"/>
 
@@ -109,7 +109,7 @@ applies_to:
 **注意：** 按以下流程更改增量刷新模式：
 
 1. 将 _Mode_ 设置为所需的 `Import` 或 `Hybrid` 值
-2. 右键单击该表，然后选择 _应用刷新策略_
+2. Right-click the table and select _Apply refresh policy_
 3. 部署模型更改
 4. 按住 Shift 键单击以选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表，然后选择 _“预览数据”_ 查看结果。
 
@@ -153,7 +153,7 @@ in
     accountForNu11
 ```
 
-3. 右键单击该表，然后选择 _应用刷新策略_
+3. Right-click the table and select _Apply refresh policy_
 4. 部署模型更改
 5. 按住 Shift 键单击即可选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表，然后选择 _“预览数据”_ 查看结果。
 
