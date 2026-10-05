@@ -25,6 +25,8 @@ applies_to:
 SUMMARY: Reference for the properties of DAX user-defined functions and of sets.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page lists the properties of DAX user-defined functions and of sets. For properties that most objects share, see @object-properties-common.
 
 ## Function

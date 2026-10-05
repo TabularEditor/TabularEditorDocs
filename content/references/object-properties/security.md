@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of roles, table permissions and role members, which define row-level and object-level security.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of roles, table permissions and role members. A table permission holds a role's security settings for one table. For properties that most objects share, see @object-properties-common.
 
 Security in a semantic model is defined by roles. A role grants its members a level of access to the model and restricts what they see with:

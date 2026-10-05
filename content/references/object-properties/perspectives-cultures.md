@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of perspectives and cultures (translations), including linguistic metadata and translation statistics.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of perspectives and cultures. For properties that most objects share, see @object-properties-common.
 
 To add or remove perspectives and cultures, use the **Perspectives** and **Cultures** collections on the model (see @object-properties-model), or right-click the **Perspectives** or **Translations** folder in the **TOM Explorer**. Tabular Editor 2 uses the same folder names. See @perspectives-translations. To create and change perspectives and cultures with a C# script, see @how-to-work-with-perspectives-translations.

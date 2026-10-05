@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of calculation groups and calculation items.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of calculation groups and calculation items. A calculation group always belongs to a calculation group table. The properties of that table, including shortcuts to the calculation group's own properties, are on @object-properties-tables. For properties that most objects share, see @object-properties-common.
 
 ## Calculation group

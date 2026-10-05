@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of relationships, such as cardinality, cross filtering behavior and security filtering behavior.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of relationships. For properties that most objects share, see @object-properties-common.
 
 ## Relationship

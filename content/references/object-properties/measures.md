@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of measures and KPIs.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of measures and of the KPIs attached to them. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. For properties that most objects share, see @object-properties-common.
 
 ## Measure
