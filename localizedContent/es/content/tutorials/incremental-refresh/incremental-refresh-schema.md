@@ -36,7 +36,7 @@ applies_to:
 
 2. **Aplicar cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema que quieras aplicar.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
-4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
@@ -72,7 +72,7 @@ Para las columnas eliminadas en el **Data source** (es decir, eliminadas de la v
 1. **Detectar cambios de esquema:** Haz clic con el botón derecho en la tabla y selecciona _'Actualizar esquema de tabla...'_.
 2. **Aplicar cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
-4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. **Actualizar todas las particiones:** Haz Mayús+clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Power Query](#tab/removingfrompq)
@@ -82,7 +82,7 @@ Para columnas eliminadas a través de **Power Query** (es decir, usando `Table.R
 1. **Detectar cambios de esquema:** Haz clic con el botón derecho en la tabla y selecciona _'Actualizar esquema de tabla...'_.
 2. **Aplicar cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
-4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. **Actualizar todas las particiones:** Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Data source no compatible](#tab/removingfromunsupportedsource)
@@ -93,7 +93,7 @@ Si **no puedes actualizar automáticamente el esquema de la tabla** con _'Actual
 2. **Actualiza las expresiones de Power Query:** Comprueba y quita cualquier referencia con nombre a la columna eliminada, si corresponde. Si la columna se está excluyendo mediante Power Query, puedes hacer los cambios correspondientes aquí.
 3. **Actualiza manualmente el esquema:** Elimina el objeto de columna de datos de la tabla.
 4. **Aplicar cambios:** Implementa los cambios del modelo.
-5. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+5. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 6. **Actualizar todas las particiones:** Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 ***
@@ -116,7 +116,7 @@ Para las columnas agregadas en el **Data source** (es decir, añadidas a la vist
 1. **Detectar cambios de esquema:** Haz clic con el botón derecho en la tabla y selecciona _'Actualizar el esquema de la tabla...'_.
 2. **Aplicar los cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
-4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. **Actualizar todas las particiones:** Mantén pulsada la tecla Shift y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Power Query](#tab/addingfrompq)
@@ -126,7 +126,7 @@ Para las columnas eliminadas mediante **Power Query** (es decir, usando `Table.A
 1. **Detectar cambios de esquema:** Haz clic con el botón derecho en la tabla y selecciona _'Actualizar esquema de tabla...'_.
 2. **Aplicar los cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
-4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+4. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 5. **Actualizar todas las particiones:** Mantén pulsada la tecla Shift y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Data source no compatible](#tab/addingfromunsupportedsource)
@@ -138,7 +138,7 @@ Si **no puedes actualizar automáticamente el esquema de la tabla** mediante _'A
 3. **Actualizar manualmente el esquema:** Haz clic con el botón derecho en la tabla y selecciona _Crear > Columna de datos_. Asigna un nombre adecuado a la columna.
 4. **Configurar la nueva columna:** Configura la propiedad `data type` de la columna según corresponda. Configura la propiedad `Source Column` para que coincida con el origen. También se pueden configurar propiedades adicionales (p. ej., `Format String`, `SummarizeBy`, `Data Category`...) y la columna se puede agregar a la carpeta de visualización correspondiente.
 5. **Aplicar cambios:** Implementa los cambios del modelo.
-6. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
+6. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 7. **Actualizar todas las particiones:** Mantén pulsada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 ***
