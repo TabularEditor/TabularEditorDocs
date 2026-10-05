@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of partitions (legacy, calculated, M, entity and policy range partitions), incremental refresh policies and data coverage definitions.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of partitions, incremental refresh policies and data coverage definitions. For properties that most objects share, see @object-properties-common.
 
 A partition defines where one part of a table's data comes from. Every table except a calculation group has at least one partition, and most tables have exactly one. Each kind of partition describes its source differently:

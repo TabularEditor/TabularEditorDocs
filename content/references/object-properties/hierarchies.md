@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of hierarchies and their levels.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of user-defined hierarchies and of the levels in them. For properties that most objects share, see @object-properties-common.
 
 ## Hierarchy

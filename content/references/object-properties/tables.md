@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of tables, calculated tables and calculation group tables.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of the three kinds of tables in a semantic model: regular tables, calculated tables and calculation group tables. The [Table](#table) section describes the properties all three share. The sections for calculated tables and calculation group tables list what they add and which table properties the **Properties** view hides for them. For properties that most objects share, see @object-properties-common.
 
 ## Table

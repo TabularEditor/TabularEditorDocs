@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of data columns, calculated columns, calculated table columns, and the Alternate Of and Variation objects that belong to columns.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page lists the properties of the three kinds of columns and of the two objects that belong to a column, Alternate Of and Variation. For properties that most objects share, see @object-properties-common.
 
 A table contains three kinds of columns:

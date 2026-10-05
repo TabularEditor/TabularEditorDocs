@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of legacy and structured data sources, shared expressions (including M parameters), query groups and data binding hints.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the objects that describe where a model's data comes from: data sources, shared expressions, query groups and data binding hints. For properties that most objects share, see @object-properties-common. For the partitions that use these objects, see @object-properties-partitions.
 
 A model connects to its sources through one of these kinds of data source:

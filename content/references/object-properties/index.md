@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for every property that Tabular Editor shows in the Properties view, grouped by object type.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 Every object in a semantic model, such as a table, a column or a measure, has a set of properties. These properties come from the Tabular Object Model (TOM), the object model that Analysis Services, Power BI and Fabric use to define semantic models. The @properties-view shows them, and C# scripts read and write them through the @api-index.
 
 This reference describes each property that the Properties view shows. When Tabular Editor has a feature for a property, such as an editor, a Best Practice Analyzer (BPA) rule or a C# script, the entry links to it.

@@ -22,6 +22,8 @@ applies_to:
 SUMMARY: Reference for the properties of the model object, such as culture, collation, default storage mode and Direct Lake behavior.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page covers the properties of the model object. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. For properties that most objects share, see @object-properties-common.
 
 ## Model

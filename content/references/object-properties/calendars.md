@@ -23,6 +23,8 @@ applies_to:
 SUMMARY: Reference for the properties of calendars, time unit column associations and time-related column groups, used by calendar-based time intelligence.
 -->
 
+[!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
 This page lists the properties of calendars and of the two kinds of column groups that make up a calendar. For properties that most objects share, see @object-properties-common.
 
 Calendars are the objects behind *calendar-based time intelligence*, also called *enhanced time intelligence*. A calendar tells DAX time intelligence functions which columns of a date table hold the year, the quarter, the month, the week and so on. With a calendar, functions such as `TOTALYTD` and `DATEADD` work with fiscal, retail (4-4-5) and other non-Gregorian calendars, and week-based functions such as `TOTALWTD` become available.
