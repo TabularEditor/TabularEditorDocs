@@ -81,7 +81,7 @@ Para agregar una tabla calculada, haz clic con el botón derecho en el modelo o 
 Para agregar un [grupo de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Grupo de cálculo** (ALT+7). Asigna un nombre al grupo de cálculo. Considera también usar un nombre diferente para la columna **Name** predeterminada.
 
 > [!IMPORTANT]
-> Esta opción solo está disponible en modelos con nivel de compatibilidad 1500 o superior.
+> This option is only available on models at compatibility level 1470 or higher. Analysis Services supports calculation groups from compatibility level 1500.
 
 Para agregar elementos de cálculo, haz clic con el botón derecho en el grupo de cálculo recién creado y elige **Crear > Elemento de cálculo**. Asigna un nombre al elemento de cálculo y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas.
 
