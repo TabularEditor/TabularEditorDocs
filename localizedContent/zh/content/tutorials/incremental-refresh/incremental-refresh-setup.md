@@ -33,7 +33,7 @@ applies_to:
 1. **连接到模型：** 连接到 Workspace 的 Power BI XMLA endpoint，并打开要配置增量刷新的 Dataset。
 2. **创建 `RangeStart` 和 `RangeEnd` 参数：** 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[了解详情](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。在 Tabular Editor 中新增两个共享表达式：
 
-<img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="应用刷新策略" style="width:400px !important"/>
+<img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Create a shared expression" style="width:400px !important"/>
 
 3. **配置 `RangeStart` 和 `RangeEnd` 参数：** 分别将它们命名为 `RangeStart` 和 `RangeEnd`，把它们的 `Kind` 属性设置为 "M"，并将表达式设置为以下内容（你填写的实际日期/时间值无关紧要，因为在开始数据刷新时，Power BI Service 会设置它）：
 
@@ -47,13 +47,13 @@ applies_to:
    ]
 ```
 
-<img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="应用刷新策略" style="width:400px !important"/>
+<img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="Set the kind of the shared expression" style="width:400px !important"/>
 
 4. **复制分区 M 代码：** 导航到要配置增量刷新的表。展开该表，然后选择包含 Power Query M 表达式的分区。将代码复制到记事本中，第 6 步会用到。
 
 5. **启用表刷新策略：** 在 _“Properties”_ 窗口中，将该表的 `EnableRefreshPolicy` 属性设置为 `True`：
 
-<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="应用刷新策略" style="width:400px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Enable the refresh policy" style="width:400px !important"/>
 
 6. **配置表刷新：** 接下来，选择要配置增量刷新的表。在 **表达式编辑器** 窗口中，从下拉列表中选择 **'源表达式'**，插入第 4 步中的 Power Query M 表达式，并修改该 Power Query M 表达式，使其包含针对你要启用增量刷新的日期列的筛选步骤。
 
@@ -86,7 +86,7 @@ applies_to:
 
 8. **Apply Model Changes:** 保存模型（Ctrl+S）。
 
-9. **应用刷新策略：** 右键单击该表，然后选择“应用刷新策略”。
+9. **Apply Refresh Policy:** Right-click on the table and choose "Apply refresh policy".
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="应用刷新策略" style="width:400px !important"/>
 
