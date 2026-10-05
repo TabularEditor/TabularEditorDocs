@@ -40,8 +40,8 @@ La regla se activa cuando una relación cumple todas estas condiciones:
 ### Corrección manual
 
 1. En el **Explorador TOM**, localiza la relación marcada
-2. En el panel de **Propiedades**, busca `Dirección de filtro cruzado`
-3. Cambia de **Ambos** a **Único**
+2. In **Properties** pane, find **Cross Filtering Behavior**
+3. Change from **BothDirections** to **OneDirection**
 
 Elige la dirección según el flujo típico del filtro:
 
@@ -78,14 +78,14 @@ Se usó el filtrado en ambas direcciones para resolver un problema concreto sin 
 
 ```
 'Sales' (Many) <--> (Many) 'ProductBridge'
-Cross Filter Direction: Both  ← Problem
+Cross Filtering Behavior: BothDirections  ← Problem
 ```
 
 ### Después de la corrección
 
 ```
 'Sales' (Many) --> (Many) 'ProductBridge'
-Cross Filter Direction: Single
+Cross Filtering Behavior: OneDirection
 ```
 
 Si 'Products' debe filtrar 'Sales', usa DAX:
