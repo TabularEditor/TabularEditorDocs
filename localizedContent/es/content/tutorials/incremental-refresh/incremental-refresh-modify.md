@@ -46,7 +46,7 @@ A continuación se muestra una descripción general de cómo modificar una polí
 
 5. **Aplicar cambios:** Implemente los cambios en el modelo.
 
-6. **Aplicar política de actualización:** Haga clic con el botón derecho en la tabla y seleccione _Aplicar política de actualización_.
+6. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
 
    <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
@@ -109,7 +109,7 @@ A continuación se muestra una descripción general de los cambios habituales qu
 **Nota:** Sigue el proceso que se indica a continuación para cambiar el modo de actualización incremental:
 
 1. Cambia _Mode_ al valor deseado: `Import` o `Hybrid`
-2. Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_
+2. Right-click the table and select _Apply refresh policy_
 3. Implementa los cambios en el modelo
 4. Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
@@ -153,7 +153,7 @@ in
     accountForNu11
 ```
 
-3. Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_
+3. Right-click the table and select _Apply refresh policy_
 4. Implementa los cambios en el modelo
 5. Mayús + clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
