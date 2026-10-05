@@ -185,28 +185,7 @@ Our Enterprise Edition uses a **transferable** licensing model. The license admi
 
 ## 企业版批量折扣
 
-我们的企业版采用分级定价，具体如下表所示（按月承诺也适用类似的折扣率）：
-
-| Tier           | 每席年度价格                      |
-| -------------- | --------------------------- |
-| 前 5 个席位        | $950.00 USD |
-| 接下来的 6-10 个席位  | $900.00 USD |
-| 接下来的 11-20 个席位 | $850.00 USD |
-| 接下来的 21-50 个席位 | $800.00 USD |
-| 51 个席位及以上      | $750.00 USD |
-
-例如，如果您需要 12 个席位，价格构成如下：
-
-```text
-Seats 1-5:    5 x 950.00 = $  4,750.00
-Seats 6-10:   5 x 900.00 = $  4,500.00
-Seats 11-12:  2 x 850.00 = $  1,700.00
---------------------------------------
-Total                      $ 10,950.00
-======================================
-```
-
-如果您需要超过 100 个席位，请 <a href="mailto:sales@tabulareditor.com">联系销售</a> 获取报价。
+If you require more than 25 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
 
 ## Command-line and CI/CD licensing
 
