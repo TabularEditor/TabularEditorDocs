@@ -185,28 +185,7 @@ Si necesitas más instalaciones simultáneas de Tabular Editor 3 de las indicada
 
 ## Descuentos por volumen para la Edición Enterprise
 
-Nuestra Edición Enterprise tiene precios por niveles, según la siguiente tabla (también se aplican tasas de descuento similares para los compromisos mensuales):
-
-| Nivel                     | Precio anual por puesto |
-| ------------------------- | ----------------------- |
-| Primeros 5 puestos        | $950,00 USD             |
-| Siguientes 6-10 asientos  | $900,00 USD             |
-| Siguientes 11-20 asientos | $850,00 USD             |
-| Siguientes 21-50 asientos | $800,00 USD             |
-| Puestos 51 y en adelante  | $750,00 USD             |
-
-Por ejemplo, si necesitas 12 licencias, el precio se desglosa de la siguiente manera:
-
-```text
-Seats 1-5:    5 x 950.00 = $  4,750.00
-Seats 6-10:   5 x 900.00 = $  4,500.00
-Seats 11-12:  2 x 850.00 = $  1,700.00
---------------------------------------
-Total                      $ 10,950.00
-======================================
-```
-
-Si necesitas más de 100 puestos, <a href="mailto:sales@tabulareditor.com">contacta con ventas</a> para solicitar un presupuesto.
+If you require more than 25 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
 
 ## Licencias para la línea de comandos y CI/CD
 
