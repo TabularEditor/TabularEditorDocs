@@ -1,8 +1,8 @@
 ﻿---
 uid: properties-view
 title: Properties view
-author: Daniel Otykier
-updated: 2026-09-16
+author: Jeroen ter Heerdt
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2
