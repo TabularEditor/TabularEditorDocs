@@ -6,11 +6,13 @@ updated: 2023-03-02
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      none: true
+      note: "Testing with impersonation uses DAX queries, Pivot Grids and Preview Data, which are only available in Tabular Editor 3."
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
-          full: true
+          none: true
+          note: "Impersonation requires a model hosted in Analysis Services or the Power BI service."
         - edition: Business
           full: true
         - edition: Enterprise
