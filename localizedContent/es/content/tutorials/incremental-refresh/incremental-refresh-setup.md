@@ -34,7 +34,7 @@ Para configurar la actualización incremental, debe definir una nueva política 
 1. **Conéctese al modelo:** Conéctese al punto de conexión XMLA de Power BI de su Workspace y abra el Dataset en el que desea configurar la actualización incremental.
 2. **Crea los parámetros `RangeStart` y `RangeEnd`:** La actualización incremental requiere que se creen los parámetros `RangeStart` y `RangeEnd` ([más información](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Agregue dos nuevas expresiones compartidas en Tabular Editor:
 
-<img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Create a shared expression" style="width:400px !important"/>
 
 3. **Configure los parámetros `RangeStart` y `RangeEnd`:** Asígneles los nombres `RangeStart` y `RangeEnd`, respectivamente; establezca su propiedad `Kind` en "M" y defina su expresión como se indica a continuación (el valor real de fecha y hora que especifique no importa, ya que el servicio de Power BI lo establecerá al iniciar la actualización de datos):
 
@@ -48,13 +48,13 @@ Para configurar la actualización incremental, debe definir una nueva política 
    ]
 ```
 
-<img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="Set the kind of the shared expression" style="width:400px !important"/>
 
 4. **Copie el código M de la partición:** Vaya a la tabla para la que desea configurar la actualización incremental. Despliegue la tabla y seleccione la partición que contiene su expresión M de Power Query. Copia el código en el Bloc de notas; lo necesitarás en el paso 6.
 
 5. **Habilite la política de actualización de la tabla:** En la ventana _Propiedades_, establezca la propiedad `EnableRefreshPolicy` de la tabla en `True`:
 
-<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Enable the refresh policy" style="width:400px !important"/>
 
 6. **Configura la actualización de la tabla:** A continuación, selecciona la tabla en la que quieres configurar la actualización incremental. En la ventana del **Editor de expresiones**, selecciona **'Source Expression'** en la lista desplegable, inserta tu expresión de Power Query M del paso 4 y modifícala para que incluya un paso de filtrado en la columna de fecha para la que habilitarás la actualización incremental.
 
@@ -87,7 +87,7 @@ Las columnas de tipo fecha, cadena o entero también se pueden filtrar mantenien
 
 8. **Aplicar cambios al modelo:** Guarda el modelo (Ctrl+S).
 
-9. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y elige "Aplicar política de actualización".
+9. **Apply Refresh Policy:** Right-click on the table and choose "Apply refresh policy".
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
