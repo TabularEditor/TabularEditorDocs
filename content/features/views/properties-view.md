@@ -1,7 +1,7 @@
 ﻿---
 uid: properties-view
 title: Properties view
-author: Jeroen ter Heerdt
+author: Daniel Otykier
 updated: 2026-10-05
 applies_to:
   products:
