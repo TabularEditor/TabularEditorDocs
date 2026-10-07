@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: Vista del Explorador TOM
 author: Morten Lønskov
-updated: 2026-06-24
+updated: 2026-08-18
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -78,7 +78,7 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Exporta los objetos seleccionados como un script TMSL o TMDL para usarlo en la implementación o el control de código fuente.
 
 - **Menús de macros**:
-  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. En el ejemplo anterior, el usuario tiene una carpeta de Modelado y análisis para scripts de macros aplicados a objetos de tabla.
+  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. Si has creado macros para el tipo de objeto especificado, aparecerán como elementos de menú o carpetas adicionales en el menú contextual al hacer clic con el botón derecho.
 
 - **Cortar / Copiar / Pegar / Eliminar**:
   Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo.
@@ -124,16 +124,16 @@ La barra de herramientas te permite mostrar y ocultar distintos tipos de objetos
 7. **Agrupar funciones definidas por el usuario por espacio de nombres**
    Cuando está habilitado, las funciones DAX definidas por el usuario se agrupan jerárquicamente por [espacio de nombres](xref:udfs#namespaces), en lugar de mostrarse como una lista plana.
 
-8. **Mostrar/ocultar grupos de tablas**
-   Activa o desactiva la visibilidad de los grupos de tablas en el árbol del Explorador TOM. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
-
-9. **Mostrar/ocultar objetos ocultos**
+8. **Mostrar/ocultar objetos ocultos**
    Activa o desactiva si se muestran los objetos ocultos.
    **Acceso directo:** **Ctrl+6**
 
-10. **Mostrar/ocultar columnas de información**
-    Muestra u oculta columnas de metadatos, como los tipos de datos o el estado de los objetos.
-    **Acceso directo:** **Ctrl+7**
+9. **Mostrar/ocultar columnas de información**
+   Muestra u oculta columnas de metadatos, como el tipo de datos o el estado del objeto.
+   **Acceso directo:** **Ctrl+7**
+
+10. **Mostrar/ocultar grupos de tablas**
+    Activa o desactiva la visibilidad de los grupos de tablas en el árbol del Explorador TOM. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
 
 11. **Selector de perspectiva**
     Lista desplegable para seleccionar una perspectiva específica. Solo se mostrarán en el Explorador TOM los objetos de la perspectiva seleccionada.

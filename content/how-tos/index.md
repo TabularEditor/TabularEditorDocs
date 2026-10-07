@@ -11,7 +11,7 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 ### Model Management and Deployment
 - [Deployment](../features/deployment.md) - Deploy models to Analysis Services databases
 - [Connect to SSAS](connect-ssas.md) - Connect to and work with SSAS Tabular databases
-- [Load and Save](load-save.md) - Loading and saving model files
+- [Load and save model metadata](load-save.md) - Where model metadata can be loaded from, and the formats it can be saved to
 - [Folder Serialization](folder-serialization.md) - Save models as folder structures for version control
 - [Master Model Pattern](Master-model-pattern.md) - Managing multiple models with perspectives
 
@@ -50,7 +50,7 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 - @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks
 - @semantic-bridge-add-object - Add a new object to a Metric View
 - @semantic-bridge-remove-object - Remove objects from a Metric View
-- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
+- @semantic-bridge-rename-objects - Rename a field, measure, dimension or join in place
 - @semantic-bridge-serialize - Serialize a Metric View back to YAML
 
 ---

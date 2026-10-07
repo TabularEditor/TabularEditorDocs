@@ -2,7 +2,7 @@
 uid: supported-files
 title: Supported file types
 author: Morten Lønskov
-updated: 2023-10-17
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -171,6 +171,9 @@ The .platform file contains metadata about the semantic model item, including:
 
 This file is a JSON file that should not be manually edited unless you understand the Fabric item format.
 
+> [!NOTE]
+> This synchronization applies to a model whose metadata carries a name or a description. A Power BI Project (PBIP) semantic model authored by Power BI Desktop carries neither in its TMDL: both live only in the `.platform` file.
+
 ### definition.pbism
 
 The definition.pbism file contains the overall definition and core settings of the semantic model. This file works alongside the model metadata (stored as either model.bim or in the definition/ folder) to provide complete semantic model information required by Microsoft Fabric.
@@ -184,6 +187,14 @@ For complete documentation on this feature, see [Save with supporting files](xre
 Supporting files are files which are not used by Analysis Services or Power BI. Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
 
 All supporting files can be saved individually using either Ctrl+S or 'File > Save' while having the corresponding document or window open and focused. 
+
+### User Options (.tmuo)
+
+A `.tmuo` file holds your own, machine-local settings for one model: the workspace database, data source credential overrides, table import settings, refresh overrides and AI permission grants. It sits next to the model and is named after it and your Windows user name, so several developers can work on the same model without treading on one another.
+
+Credentials inside it are encrypted with your Windows user key, which means the file cannot usefully be shared. Add `*.tmuo` to `.gitignore`.
+
+See @user-options for the full contents and where the file is written for each model format.
 
 ### Diagram file (.te3diag)
 
@@ -266,6 +277,14 @@ It can be helpful to share these files across a team so that all developers have
 > Store the required files in Git or OneDrive and create a Symlink to the "%localappdata%\TabularEditor3" folder, but be aware that this could end up with synchronization issues, if multiple users update the same file version.
 > However, this is not supported by Tabular Editor directly, so implement it at your own discretion. 
 
+
+### AI audit log
+
+Present only when the AI features component is installed. Tabular Editor writes a record of what the [AI Assistant](xref:ai-assistant) and the [MCP server](xref:mcp-server) did: which permissions were asked for and how they were answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed over for review. Prompts, replies and data values from your model are never recorded.
+
+Files are written one per day and kept for 30 days by default. Reach the folder with **Open audit folder** under **Tools > Preferences > AI Features**. Administrators can move it and change the retention period by [policy](xref:policies). See @ai-audit-log for what each record holds.
+
+Unlike the other files in this folder, this one is a record rather than a setting. Do not share or sync it: it is a per-machine log, and the scripts it contains may reveal the structure of models you have worked on.
 
 ### MacroActions.json
 This file stores all the macros that you have created or imported. It can be useful to share this file with your colleagues or backup it in a version control system and can also be configured to sync with a remote repository that contains macros (See tip above).

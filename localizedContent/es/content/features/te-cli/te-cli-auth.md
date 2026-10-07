@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Autenticación y conexiones
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,6 +36,9 @@ La CLI admite la cadena completa de credenciales de Azure Identity:
 > `--auth` es una opción **global**, disponible en todos los comandos `te`, no solo en `te auth login`. Úsalo en [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect) o en cualquier otro comando que se conecte a un punto de conexión remoto para sustituir la cadena predeterminada en esa ejecución. La opción predeterminada (`auto`) intenta primero las credenciales del entorno y, si no están disponibles, recurre al inicio de sesión en caché o interactivo en el navegador.
 
 En escenarios sin interfaz gráfica, con SSH, WSL o devcontainer, usa una entidad de servicio: `te auth login -u <id> -p <secret> -t <tenant>` (o `--certificate`). El inicio de sesión se guarda en caché, por lo que los comandos posteriores obtienen tokens de forma silenciosa con `--auth auto`.
+
+> [!NOTE]
+> Las opciones de detección de esquema de `te add -t Table` y `te set --update-schema` (`--source sql`, `--endpoint`) usan Entra ID para iniciar sesión en los puntos de conexión SQL de la familia de Azure (`*.database.windows.net`, `*.datawarehouse.fabric.microsoft.com`, `*.sql.azuresynapse.net`) y respetan `--auth`. Los servidores locales usan la autenticación integrada de Windows; `--connection-string` se respeta literalmente.
 
 ## `te auth login`
 
@@ -108,11 +111,12 @@ te connect my-workspace my-model
 # Local TMDL folder, .bim file, or .SemanticModel container
 te connect ./my-model
 
-# Connect to a running Power BI Desktop instance (Windows only)
+# Connect to a locally running Analysis Services instance
+# (Power BI Desktop, Visual Studio workspace, standalone SSAS - Windows only)
 te connect --local
 
-# Filter by report name when multiple Power BI Desktop instances are running
-te connect --local my-report
+# Match an instance (e.g. an open report's window title) or a database name
+te connect --local my-model
 
 # Show the active connection
 te connect
@@ -121,7 +125,9 @@ te connect
 te connect --clear
 ```
 
-El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspecciona o limpia el estado de la sesión con [`te session`](xref:te-cli-commands#session).
+Cuando se encuentran varias instancias o bases de datos locales, la CLI solicita la selección en dos pasos (primero la instancia y luego la base de datos); con `--non-interactive`, falla con la lista de candidatos en lugar de elegir de forma silenciosa.
+
+El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspecciona o limpia el estado de la sesión con [`te session`](xref:te-cli-commands#session). En `te deploy`, la conexión activa también se usa como valor predeterminado para `--target-server`/`--target-database` cuando el origen del modelo es local.
 
 ### Modo del área de trabajo (`-w` / `--workspace`)
 
@@ -171,7 +177,7 @@ te profile show prod
 te connect --profile prod
 
 # One-shot use without changing the active connection
-te deploy ./model --profile staging --force
+te deploy --model ./model --profile staging --execute --force
 ```
 
 Los perfiles también pueden incluir sobrescrituras de comportamiento que se aplican siempre que el perfil esté activo:
@@ -193,6 +199,8 @@ En canalizaciones de CI/CD, agentes o cualquier contexto desatendido, evita los 
 - La opción global `--non-interactive` (falla de inmediato en lugar de pedir datos).
 - Uno de los métodos de autenticación no interactiva: `env`, `managed-identity` o credenciales explícitas de una entidad de servicio.
 
+Con `--non-interactive` y sin nada con lo que iniciar sesión —sin un inicio de sesión en caché, sin variables `AZURE_CLIENT_*` ni una identidad administrada—, un comando que se conecta a un Workspace o a un servidor se detiene de inmediato, no abre nunca un navegador, muestra un Report que indica que no hay credenciales disponibles y enumera todas las formas de proporcionarlas: `te auth login`, una entidad de servicio almacenada en caché con `te auth login -u <client-id> -p <secret> -t <tenant>`, `--auth env` o `--auth managed-identity`. Una entidad de servicio almacenada en caché se usa de forma silenciosa, por lo que solo fallan así las ejecuciones en las que realmente no hay nada con lo que iniciar sesión.
+
 Ejemplo basado en variables de entorno para una canalización:
 
 ```bash
@@ -200,9 +208,11 @@ export AZURE_CLIENT_ID="your-app-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-te deploy ./model -s my-workspace -d my-model \
+te deploy --model ./model \
+  --target-server my-workspace --target-database my-model \
   --auth env \
   --non-interactive \
+  --execute \
   --force \
   --ci github
 ```

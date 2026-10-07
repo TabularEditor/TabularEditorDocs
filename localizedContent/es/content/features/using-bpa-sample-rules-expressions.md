@@ -21,15 +21,15 @@ applies_to:
 
 En esta sección verás algunos ejemplos de expresiones de LINQ dinámico que se pueden usar para definir reglas. La expresión que se escribe en el Editor de expresiones se evaluará cada vez que el foco abandone el cuadro de texto, y cualquier error de sintaxis se mostrará en la parte superior de la pantalla:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25380170/9f01634e-29af-11e7-952e-e10a1f28df32.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-01.png)
 
 Sus expresiones de reglas pueden acceder a cualquier propiedad pública de los objetos del TOM. Si intenta acceder a una propiedad que no existe en ese tipo de objeto, también se mostrará un error:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25381302/798bab98-29b3-11e7-931e-789e5286fc45.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-02.png)
 
 "Expression" no existe en el objeto "Column", pero si cambiamos el menú desplegable a "Columnas calculadas", la instrucción anterior funciona sin problema:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25380451/87b160da-29b0-11e7-8e2e-c4e47593007d.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-03.png)
 
 LINQ dinámico admite todos los operadores aritméticos, lógicos y de comparación estándar y, mediante la notación ".", puede acceder a subpropiedades y -métodos de todos los objetos.
 
@@ -49,7 +49,7 @@ Cada vez que usamos un método LINQ para iterar sobre una colección, la expresi
 
 Aquí vemos esta regla en acción en el modelo tabular Adventure Works. Observa cómo la tabla "Reseller" aparece como incumpliendo la regla, mientras que "Reseller Sales" no aparece (las columnas de esta última se han organizado en carpetas de visualización):
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25380809/d9d1c3a4-29b1-11e7-839e-29450ad39c8a.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-04.png)
 
 Para hacer referencia al objeto padre dentro de un método LINQ, usa la sintaxis especial "outerIt". Esta regla, aplicada a tablas, encontrará aquellas que contienen columnas cuyo nombre no empieza por el nombre de la tabla:
 
@@ -121,6 +121,6 @@ En algunos casos, es posible corregir automáticamente los problemas en los obje
 
 Esta regla encuentra todas las columnas que se usan en una relación (en el lado "Many"/"From"), pero en las que ni la columna ni su tabla principal están ocultas. Se recomienda que estas columnas nunca se muestren, ya que los usuarios deberían filtrar los datos usando la tabla relacionada (de dimensión). Así, la corrección en este caso sería establecer la propiedad IsHidden de las columnas en true, que es exactamente lo que hace la cadena "FixExpression" anterior. Para verlo en acción, haz clic con el botón derecho en cualquier objeto que incumpla la regla y elige "Generar script de corrección". Esto coloca un pequeño script en el portapapeles, que se puede pegar en el Editor avanzado de scripts, desde donde puedes revisar el código fácilmente y ejecutarlo:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25298489/9035bab6-26f5-11e7-8134-8502daaf4132.png)
+![image](~/content/assets/images/using-bpa-sample-rules-expressions-05.png)
 
 Recuerda que siempre puedes deshacer (CTRL+Z) los cambios realizados en un modelo después de ejecutar el script.

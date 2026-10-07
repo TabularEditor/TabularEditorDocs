@@ -125,7 +125,7 @@ def find_latest_release_notes(site_dir: str = "_site", default_lang: str = "en")
     """Find the filename of the latest versioned release notes in the built site.
 
     Scans {site_dir}/{default_lang}/references/release-notes/ for files matching
-    the pattern {major}_{minor}_{patch}.html, sorts them by semantic version,
+    the pattern {major}_{minor}_{patch}[_{build}].html, sorts them by semantic version,
     and returns the filename of the newest one (e.g. '3_25_5.html').
     Returns None if the directory doesn't exist or contains no versioned files.
     """
@@ -134,13 +134,12 @@ def find_latest_release_notes(site_dir: str = "_site", default_lang: str = "en")
     if not release_notes_dir.exists():
         return None
 
-    version_pattern = re.compile(r"^(\d+)_(\d+)_(\d+)\.html$")
-    versioned: list[tuple[tuple[int, int, int], str]] = []
+    version_pattern = re.compile(r"^\d+(?:_\d+){2,3}\.html$")
+    versioned: list[tuple[tuple[int, ...], str]] = []
 
     for html_file in release_notes_dir.glob("*.html"):
-        m = version_pattern.match(html_file.name)
-        if m:
-            version = (int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        if version_pattern.match(html_file.name):
+            version = tuple(int(p) for p in html_file.stem.split("_"))
             versioned.append((version, html_file.name))
 
     if not versioned:

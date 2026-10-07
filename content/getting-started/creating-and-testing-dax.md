@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Adding measures and other calculated objects
 author: Daniel Otykier
-updated: 2021-10-08
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -81,7 +81,7 @@ To add a calculated table, right-click on the model or on the "Tables" folder, a
 To add a [calculation group](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Give the Calculation Group a name. Also consider a different name for the default **Name** column.
 
 > [!IMPORTANT]
-> This option is only available on models at compatibility level 1500 or higher.
+> This option is only available on models at compatibility level 1470 or higher. Analysis Services supports calculation groups from compatibility level 1500.
 
 To add calculation items, right-click on the newly created calculation group and choose **Create > Calculation Item**. Give the Calculation Item a name and edit its DAX expression using the **Expression Editor** similar to how we did for measures above.
 
@@ -121,9 +121,25 @@ You can use the arrow buttons in the top right corner of the **Expression Editor
 
 ## DAX Dependencies
 
-To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (SHIFT+F12). This will open a window that displays the dependencies (in both directions) of the selected object. Double-click on an object in this window to quickly navigate to that object.
+To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (**Shift+F12**). This opens the **DAX Dependencies** view, which displays the dependencies of the selected object. Double-click an object in the tree to navigate to it, or right-click for **Go to item**, **Copy as text** and **Copy as JSON**.
 
 ![Dax Dependencies And Tom Explorer](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
+
+The view shows one direction at a time. Choose which with the radio buttons:
+
+| Option | Shows |
+|---|---|
+| **Objects that depend on this** | What would break if you changed or deleted the selected object |
+| **Objects on which this depends** | What the selected object reads from |
+| **Relationships starting from this table** | The relationships leaving the selected table. With a column selected, this reads **Relationships starting from this column** |
+
+Tick **Show inactive** to include inactive relationships.
+
+### Following the TOM Explorer
+
+Rather than invoking **Show dependencies** for each object in turn, tick **Track TOM Explorer** and the view follows whatever is selected in the tree. Ticking it shows the dependencies of the object that is *already* selected straight away, rather than waiting for the next selection change.
+
+Tracking applies to a single selected object. Selecting several objects, or none, clears the view rather than showing a partial answer.
 
 # Display folders
 

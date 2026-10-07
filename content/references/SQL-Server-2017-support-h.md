@@ -11,22 +11,22 @@ Here is a quick rundown of how the new features are used in Tabular Editor:
 ## Date Relationships
 All relationships now expose the "Join on Date Behavior" property in the property grid:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297821/9dd46be0-26f0-11e7-92bf-10a921ed20dc.png)
+![image](~/content/assets/images/sql-server-2017-support-01.png)
 
 ## Variations (column/hierarchy reuse)
 You can set up variations on a column, by expanding the "Variations" property in the property grid:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297845/c69ecc5a-26f0-11e7-93af-b7a2a0cc9310.png)
+![image](~/content/assets/images/sql-server-2017-support-02.png)
 
 Note that you can also specify **Object Level Security** at the column level.
 
 Clicking the ellipsis button opens the Variations Collection Editor, from where you can set up how columns and hierarchies are resurfaced in Power BI:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297884/fd4faf58-26f0-11e7-9a1a-df7a1b05f663.png)
+![image](~/content/assets/images/sql-server-2017-support-03.png)
 
 Remember to set the "Show As Variations Only" property to "True" at the table level:
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297917/2c1e4b64-26f1-11e7-8ce6-a62aef2b7d8a.png)
+![image](~/content/assets/images/sql-server-2017-support-04.png)
 
 **Detail Row Expressions** can be set directly on tables and measures. At this time, however, no syntax highlighting or IntelliSense is available.
 

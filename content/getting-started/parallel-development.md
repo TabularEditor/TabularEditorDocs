@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Enabling parallel development using Git and Save to Folder
 author: Daniel Otykier
-updated: 2026-07-03
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,6 +54,8 @@ As mentioned above, the model metadata for a tabular model is traditionally stor
 ![Save To Folder](~/content/assets/images/save-to-folder.png)
 
 The names of each of the files representing individual TOM objects are simply based on the `Name` property of the object itself. The name of the "root" file is **Database.json**, which is why we sometimes refer to the folder-based storage format as simply **Database.json**.
+
+Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**/ See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Pros of using Save to Folder
 

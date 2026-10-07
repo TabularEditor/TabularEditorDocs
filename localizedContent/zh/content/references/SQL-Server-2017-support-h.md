@@ -12,23 +12,23 @@
 
 现在，所有关系都会在属性网格中显示“Join on Date Behavior”属性：
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297821/9dd46be0-26f0-11e7-92bf-10a921ed20dc.png)
+![图片](~/content/assets/images/sql-server-2017-support-01.png)
 
 ## 变体（列/层级重用）
 
 你可以通过在属性网格中展开“Variations”属性来设置列的变体：
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297845/c69ecc5a-26f0-11e7-93af-b7a2a0cc9310.png)
+![图片](~/content/assets/images/sql-server-2017-support-02.png)
 
 另外，你也可以在列级别指定 **对象级安全性**。
 
 点击省略号按钮将打开“变体集合编辑器”，你可以在其中配置列和层级在 Power BI 中的呈现方式：
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297884/fd4faf58-26f0-11e7-9a1a-df7a1b05f663.png)
+![图片](~/content/assets/images/sql-server-2017-support-03.png)
 
 别忘了在表级别将“Show As Variations Only”属性设置为“True”：
 
-![image](https://cloud.githubusercontent.com/assets/8976200/25297917/2c1e4b64-26f1-11e7-8ce6-a62aef2b7d8a.png)
+![图片](~/content/assets/images/sql-server-2017-support-04.png)
 
 可直接在表和度量值上设置**详细信息行表达式**。 不过，目前还不支持语法高亮或 IntelliSense。
 

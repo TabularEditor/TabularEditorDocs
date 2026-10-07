@@ -79,7 +79,7 @@ flowchart LR
 ```
 
 > [!NOTE]
-> Tabular Editor 现已提供跨平台 CLI（`te`），目前处于有限公开预览阶段，专为 CI/CD 场景打造——支持非交互模式、原生 GitHub Actions/Azure DevOps 注解、VSTEST 输出，以及用于在管道中运行回归测试的 `te test run` 命令。 它与下文描述的这类管道天然契合，值得关注。 在撰写本文时，Tabular Editor 自身的文档仍建议不要在预览期间将其用于生产管道（文档说明该预览版本会于 2026-09-30 过期），因此本文中的参考实现改用已成熟的 `TabularEditor.exe` CLI。 有关这个新 CLI 当前具备的能力和示例，可以查看 [CI/CD 集成](xref:te-cli-cicd)。
+> Tabular Editor 现已提供跨平台 CLI（`te`），目前处于有限公开预览阶段，专为 CI/CD 场景打造——支持非交互模式、原生 GitHub Actions/Azure DevOps 注解、VSTEST 输出，以及用于在管道中运行回归测试的 `te test run` 命令。 它与下文描述的这类管道天然契合，值得关注。 截至本文撰写时，Tabular Editor 的官方文档仍建议在预览阶段不要将其用于生产管道（文档称该预览版将于 2026-10-31 到期），因此本文中的参考实现改用成熟的 `TabularEditor.exe` CLI。 有关这个新 CLI 当前具备的能力和示例，可以查看 [CI/CD 集成](xref:te-cli-cicd)。
 
 <!-- FUTURE SPLIT POINT: everything from "Reference implementation" onward is a candidate to become its own page once it grows further (e.g. once release/production deployment past the test environment is added). -->
 

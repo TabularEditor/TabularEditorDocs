@@ -14,7 +14,7 @@ applies_to:
 
 你可以在资源管理器树中单击“模型”节点，然后在属性网格底部找到相关属性，以添加/编辑现有的透视和翻译（区域设置）。 另外，当你的资源管理器树设置为[显示所有对象类型](../features/hierarchical-display.md)时，你可以直接在树中查看和编辑透视、区域设置和角色。
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
+![](~/content/assets/images/perspectives-translations-01.png)
 
 你可以通过右键菜单选择“Duplicate”来复制现有的透视、角色或翻译。 这会创建该对象的完全副本，然后你可以按需进行修改。
 

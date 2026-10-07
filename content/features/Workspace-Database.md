@@ -23,7 +23,7 @@ This makes the development workflow a lot simpler, since you only need to hit Sa
 
 When you load a model from a Model.bim file or folder structure, you will see the following prompt:
 
-![image](https://user-images.githubusercontent.com/8976200/58166683-a65db180-7c8a-11e9-9df3-be9a716b3ad1.png)
+![image](~/content/assets/images/workspace-database-01.png)
 
 * **Yes**: Model metadata is loaded from disk and then immediately deployed to an instance of Analysis Services. Tabular Editor will then connect to the newly deployed database. The next time the same model is loaded from disk, Tabular Editor will redeploy and connect to the database automatically.
 * **No**: Model metadata is loaded from disk into Tabular Editor as usual, without connecting to an instance of Analysis Services.
@@ -33,7 +33,7 @@ When you load a model from a Model.bim file or folder structure, you will see th
 
 When you select the "Yes" option in the prompt shown above, you will be asked for a servername and (optional) credentials to an instance of Analysis Services. Hitting "OK" will show you a list of databases already on the instance. Tabular Editor assumes that you want to deploy a new database and provides a default name for the new database, based on your Windows username and the current date and time:
 
-![image](https://user-images.githubusercontent.com/8976200/58179509-a10f5f80-7ca8-11e9-9764-4cb76b9d1a8b.png)
+![image](~/content/assets/images/workspace-database-02.png)
 
 If you want to use and existing database as your workspace database, simply select it on the list. **Warning: If you choose an existing database, it will be overwritten with the metadata of the model loaded from disk. For this reason it is not recommended to set up workspace databases on a production instance!**
 

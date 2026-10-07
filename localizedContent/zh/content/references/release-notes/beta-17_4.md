@@ -39,7 +39,7 @@
 
 ## BETA-17.1 中的更新：
 
-![image](https://user-images.githubusercontent.com/8976200/112887423-762b9900-90d3-11eb-8248-d9da55fe8fe3.png)
+![图片](~/content/assets/images/beta-17-4-01.png)
 
 - 新增 [VertiPaq分析器](https://www.sqlbi.com/tools/vertipaq-analyzer/)（如果新视图未在界面中显示，你可能需要删除 %LocalAppData%\TabularEditor3 下的 Layout.gz 文件，并/或将窗口 Workspace 重置为默认窗口 Workspace）
   - 收集统计信息（列和表的基数与大小），这些信息会显示在 TOM Explorer 的工具提示中；在任意 DAX 编辑器中将鼠标悬停在列或表引用上时也会显示。

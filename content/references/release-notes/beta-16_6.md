@@ -80,7 +80,7 @@ A rather big list of bug fixes and minor improvements incoming:
 - Added "Define Measure" and "Inline Measure" refactoring options
 - Improved auto-complete behaviour around DEFINE / EVALUATE statements of DAX queries. For example, autocomplete can now also suggest measures, columns and tables defined inside the query.
 - Auto-complete now also suggests measures for the Name parameter of functions such as SUMMARIZECOLUMNS, ADDCOLUMNS, etc., completing both the Name and the Expression parameter at once: 
-![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
+![autocomplete names](~/content/assets/images/beta-16-6-01.gif)
 - Revisited #42.
 - Deployment Wizard now stores deployment preferences (destination + options) to the .tmuo file sitting next to the Model.bim or Database.json file on disk. This makes it easier to perform deployments when switching between different models, if each model is always deployed to the same destination.
 - Updated TOM to 19.16.3. Should fix issue #63.

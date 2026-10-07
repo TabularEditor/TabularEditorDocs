@@ -2,7 +2,7 @@
 uid: how-to-work-with-dependencies
 title: How to Work with Dependencies
 author: Morten Lønskov
-updated: 2026-04-10
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 The TOM wrapper tracks which objects reference which other objects through the `DependsOn` and `ReferencedBy` properties. Use these for impact analysis, finding unused objects and understanding DAX lineage.
 
 > [!NOTE]
-> The `DependsOn` and `ReferencedBy` properties expose the same dependency information shown in the **Dependency View** in Tabular Editor's UI.
+> The `DependsOn` and `ReferencedBy` properties expose the same dependency information shown in the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) in Tabular Editor's UI.
 
 ## Quick reference
 

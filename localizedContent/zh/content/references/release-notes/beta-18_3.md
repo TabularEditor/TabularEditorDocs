@@ -38,7 +38,7 @@ Tabular Editor 3 beta 发布新版本了。 而我对这个版本格外期待，
 
 因此，为了检测 Power Query 分区的架构变化，Tabular Editor 3 现在会在模型中添加一个隐藏的临时表，并对我们要检测其架构的源查询使用 M 函数 [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema) 来填充该表。 然后，这个临时表会在服务器上刷新（使用服务器上现有的凭据来访问数据源）——由于在 M 引擎内部进行了查询折叠，这次刷新只需瞬间即可完成。 最后，Tabular Editor 会查询该表以读取架构，然后回滚整个事务。 结果如下：
 
-![image](https://github.com/TabularEditor/TabularEditor3/blob/master/media/update%20schema.gif?raw=true)
+![图片](~/content/assets/images/beta-18-3-01.gif)
 
 唯一需要注意的是：Tabular Editor 3 必须连接到一个 Analysis Services 实例。不过，你正在处理的模型是否包含任何数据并不重要——只要数据源的凭据存储在 AS 中（并且 AS 确实能够访问该数据源）即可。 如果你使用 Tabular Editor 3 的[工作区模式](https://docs.tabulareditor.com/Workspace-Database.html)，这种技术尤其有用。
 

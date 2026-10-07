@@ -10,11 +10,11 @@ title: 自定义操作
 
 假设你使用 `Selected` 对象创建了一个很实用的脚本，并且希望能在资源管理器树中对不同对象重复执行该脚本。 无需每次执行脚本都点击“播放”按钮，Tabular Editor 允许你将其保存为自定义操作：
 
-![图片](https://user-images.githubusercontent.com/8976200/33581673-0db35ed0-d952-11e7-90cd-e3164e198865.png)
+![图片](~/content/assets/images/custom-actions-01.png)
 
 保存自定义操作后，你会发现它会直接出现在资源管理器树的右键上下文菜单中，这样就能非常方便地对树中选中的任意对象调用该脚本。 你可以按需创建任意数量的自定义操作。 在名称中使用反斜杠（\\）可在上下文菜单中创建子菜单结构。
 
-![自定义操作会直接显示在上下文菜单中](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
+![自定义操作会直接显示在上下文菜单中](~/content/assets/images/custom-actions-02.png)
 
 自定义操作存储在 %AppData%\Local\TabularEditor 下的 CustomActions.json 文件中。 在上面的示例中，该文件的内容如下：
 

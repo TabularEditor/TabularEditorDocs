@@ -35,7 +35,7 @@ applies_to:
 
 通过选择“打开 > 从文件...”加载 Model.bim 文件…… （位于“文件”菜单中，CTRL+O）；或通过选择“打开 > 从数据库...”从 Analysis Services 实例打开现有数据库…… 选项即可。 在后一种情况下，程序会提示你输入服务器名称以及可选的凭据：
 
-![连接到已部署的表格模型](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
+![连接到已部署的表格模型](~/content/assets/images/getting-started-te-01.png)
 
 这也适用于新版 Azure Analysis Services PaaS。 可使用“本地实例”下拉列表浏览并连接到任何正在运行的 Power BI Desktop 实例或 Visual Studio 集成工作区。 **注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但并非所有建模操作都受 Microsoft 支持。 [更多信息](Power-BI-Desktop-Integration.md)**
 
@@ -43,11 +43,11 @@ applies_to:
 
 模型加载到 Tabular Editor 后，界面如下所示：
 
-![Tabular Editor 的主 UI](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Main%20UI.png)
+![Tabular Editor 的主界面](~/content/assets/images/getting-started-te-02.png)
 
 屏幕左侧的树状视图显示 Tabular 模型中的所有表。 展开某个表会显示该表中的所有列、度量值和层次结构，并按其显示文件夹进行分组。 使用树状视图上方的按钮，可切换显示文件夹、隐藏对象、特定类型的对象，或按名称筛选对象。 在树状视图中的任意位置右键单击，会弹出包含常用操作的上下文菜单，例如添加新度量值、将对象设为隐藏、复制对象、删除对象等。 按 F2 可重命名当前选中的对象；或多选后右键单击，以批量重命名多个对象。
 
-![批量重命名可让你同时重命名多个对象](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/BatchRename.png)
+![批量重命名可让你同时重命名多个对象](~/content/assets/images/getting-started-te-03.png)
 
 在主 UI 的右上角，你会看到 DAX编辑器，可用于编辑模型中任意度量值或计算列的 DAX 表达式。 单击“DAX Formatter”按钮，通过 www.daxformatter.com 自动格式化代码。
 
@@ -55,7 +55,7 @@ applies_to:
 
 要编辑透视或翻译（区域设置），请在树状视图中选择“Model”对象，然后在属性网格中找到“Model Perspectives”或“Model Cultures”属性。 点击小省略号按钮，打开集合编辑器，以添加、删除或编辑透视和区域设置。
 
-![编辑透视——点击右侧的省略号按钮](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
+![编辑透视——点击右侧的省略号按钮](~/content/assets/images/getting-started-te-04.png)
 
 要将更改保存回 Model.bim 文件，单击保存按钮或按 CTRL+S。 如果你打开的是现有 Tabular 数据库，更改将直接保存回该数据库。 如果自你将数据库加载到 Tabular Editor 后该数据库发生过更改，系统会提示你。 你始终可以按 CTRL+Z 撤销更改。
 
@@ -65,7 +65,7 @@ applies_to:
 
 Tabular Editor 自带部署向导 Deployment Wizard，相比从 SSDT 部署有一些优势——尤其是在部署到现有数据库时。 在选择要部署到的服务器和数据库后，本次部署你可以选择以下选项：
 
-![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
+![Deployment Wizard](~/content/assets/images/getting-started-te-05.png)
 
 不勾选“Deploy Connections”复选框，将确保目标数据库中的所有数据源保持不变。 如果你的模型中有一个或多个表所使用的数据源在目标数据库中不存在，则会报错。
 
@@ -110,6 +110,6 @@ Tabular Editor 允许你使用 C# 通过脚本方式修改已加载的模型。 
 
 高级脚本编辑器提供有限的 IntelliSense 功能，帮助你快速上手：
 
-![IntelliSense 帮助你为 Tabular Editor 创建脚本](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
+![IntelliSense 帮助你为 Tabular Editor 创建脚本](~/content/assets/images/getting-started-te-06.png)
 
 有关高级脚本编写的更多文档和示例，可在[此处](../how-tos/Advanced-Scripting.md)找到。

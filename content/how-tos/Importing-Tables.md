@@ -8,13 +8,13 @@ applies_to:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
-      partial: true
+      none: true
 ---
 # Importing Tables in Tabular Editor 2
 
 If you already have a Legacy Data Source in your model, you can right click it, and choose "Import Tables...". Tabular Editor will attempt to connect using the data provider and credentials specified in the Data Source. If successful, you should get a list of all the databases, tables and views accessible through the Data Source:
 
-![image](https://user-images.githubusercontent.com/8976200/49701892-35ea3900-fbf2-11e8-951a-8858179426c6.png)
+![image](~/content/assets/images/importing-tables-01.png)
 
 Clicking a table or view on the left-hand side will display a preview of the data on the right. You can deselect columns that you do not want to include, although [the data import best practice](https://www.sqlbi.com/articles/data-import-best-practices-in-power-bi/) suggests to always use views, and include only columns in those views that are needed in the Tabular Model. The UI will show you the resulting SQL query. By default, Tabular Editor will import a table/view using `SELECT * FROM ...`, but if you toggle any column in the preview, the resulting query will include an explicit list of columns. To switch back to `SELECT * FROM ...`, toggle the "Select all columns" checkbox in the upper right corner.
 
@@ -23,7 +23,7 @@ You can select multiple tables/views to import at once. When you click "Import",
 That's it! No more going back and forth between Tabular Editor and SSDT.
 
 ## A note on Legacy vs. Structured Data Sources
-As there is currently no way for Tabular Editor to infer the metadata returned from M (Power Query) expressions, this UI only supports Legacy (aka. Provider) Data Sources. If you must use Structured Data Sources, you can still use a temporary Legacy connection to import the table schema initially (assuming your data source can be accessed through SQL, OLE DB or ODBC), and then manually switch the partitions on the imported tables, to use the Structured Data Sources. If you are importing data from "exotic" data sources, such as web services, Azure Data Lake Storage, etc. schema metadata can not be imported automatically, but [there is an option for providing the metadata information through the clipboard](/Importing-Tables#power-query-data-sources).
+As there is currently no way for Tabular Editor 2 to infer the metadata returned from M (Power Query) expressions, this UI only supports Legacy (aka. Provider) Data Sources. If you must use Structured Data Sources, you can still use a temporary Legacy connection to import the table schema initially (assuming your data source can be accessed through SQL, OLE DB or ODBC), and then manually switch the partitions on the imported tables, to use the Structured Data Sources. If you are importing data from "exotic" data sources, such as web services, Azure Data Lake Storage, etc. schema metadata can not be imported automatically, but [there is an option for providing the metadata information through the clipboard](#power-query-data-sources).
 
 In general, though, it is recommended to always use a Legacy connection for the following types of sources:
 
@@ -40,22 +40,22 @@ For authentication using Azure Active Directory with MFA, please see here.
 
 If your model does not yet contain any data sources, you can import tables by going to the "Model" menu and clicking "Import Tables...". The resulting UI looks like this:
 
-![image](https://user-images.githubusercontent.com/8976200/49702141-74cdbe00-fbf5-11e8-8a88-5bc2a0a6c80d.png)
+![image](~/content/assets/images/importing-tables-02.png)
 
 Leaving the selection at "Create a new Data Source and add it to the model" will display the Connection Dialog UI when clicking "Next". This dialog lets you specify the connection details:
 
-![image](https://user-images.githubusercontent.com/8976200/49702167-a5adf300-fbf5-11e8-8d06-d6670ad456d4.png)
+![image](~/content/assets/images/importing-tables-03.png)
 
 When clicking "OK", a (Legacy) Data Source using the specified connection will be created in your model, and you will be taken to the import page shown above.
 
 The next option on the list, "Use a temporary connection", will not cause a new Data Source to be added to the model. This means that you are responsible for assigning a Data Source to the partitions of the newly imported table, before deploying the model.
 
-The last option, "Manually import metadata from another application", is used when you want to import a new table based on a list of column metadata. This is useful for Structured (Power Query) Data Sources, [see below](/Importing-Tables#power-query-data-sources).
+The last option, "Manually import metadata from another application", is used when you want to import a new table based on a list of column metadata. This is useful for Structured (Power Query) Data Sources, [see below](#power-query-data-sources).
 
 ## SQL capabilities
 For non-SQL Server data sources (or more precisely, data sources that do not use the Native SQL Client driver), please pay attention to the two dropdown-boxes near the bottom of the screen:
 
-![image](https://user-images.githubusercontent.com/8976200/51613859-b952b600-1f24-11e9-8fd7-7c5269aaab26.png)
+![image](~/content/assets/images/importing-tables-04.png)
 
 The "Reduce rows using"-dropdown lets you specify which row reduction clause to use, when querying the source for preview data, since the Table Import Wizard will only retrieve 200 rows of data from the source table or view. You can choose between the most common row reduction clauses, such as "TOP", "LIMIT", "FETCH FIRST", etc.
 
@@ -69,7 +69,7 @@ Another way to bring up the import page, is to right-click on an existing table 
 
 As of version 2.8, Tabular Editor has a new UI feature that lets you easily check for schema drift. That is, detecting columns that had their data type changed, or were added or removed to source tables and views. This check may be invoked at the Model level (again, this only applies to Legacy Data Sources), at the Data Source level, at the Table level or at the Partition level. This is done by right-clicking the object and choosing "Refresh Table Metadata..."
 
-![image](https://user-images.githubusercontent.com/8976200/49702346-7e582580-fbf7-11e8-9a62-04c6963179e5.png)
+![image](~/content/assets/images/importing-tables-05.png)
 
 Changes are detected based on the "Source Column" and "Data Type" properties of all data columns on the respective tables. If any changes are detected, Tabular Editor will display the above UI, detailing the changes. You may deselect changes that you do not want to apply to your model, although keep in mind that some changes may cause processing errors (for example, source columns that do not exist in the source table/view/query).
 
@@ -130,20 +130,20 @@ If you're using a data source not supported by the Import Tables Wizard, you hav
 
 When parsing the text on the left hand side, Tabular Editor searches for certain keywords, in order to determine how the information is structured. It's pretty liberal in the way it interprets data, so you can, for example, paste in a list of columns from a CREATE TABLE SQL script, or the output of the Power Query `Table.Schema(...)` function as described below. The only requirements is that each line of text represents one column of source data.
 
-![image](https://user-images.githubusercontent.com/8976200/70419758-6f07f400-1a66-11ea-838d-9a587c8021ca.png)
+![image](~/content/assets/images/importing-tables-06.png)
 
 ## Power Query data sources
 
 Since there is no officially supported way to execute or validate a Power Query/M expression, Tabular Editor only has limited support for Power Query data sources. As of 2.9.0, you may use the "Manually import metadata from another application"-option of the Import Table Wizard, as described above, to import a schema from a Power Query query in Excel or Power BI Desktop. The workflow is the following:
 
 - First, make sure your model contains a Power Query Data Source. Right-click Data Sources > New Data Source (Power Query). If you're going to load data from a SQL Server, specify "tds" as the protocol and fill out the Database, Server and AuthenticationKind properties.
-![image](https://user-images.githubusercontent.com/8976200/70418811-6dd5c780-1a64-11ea-8332-d074c6b2d5c2.png)
+![image](~/content/assets/images/importing-tables-07.png)
 - For other types of data sources, it may be easier to create the initial model and first few tables in SSDT, to figure out how the Data Source should be configured, and then use the technique below only when adding additional tables.
 - Use Power Query within Excel or Power BI Desktop to connect to your source data and apply any transformations needed.
 - Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the previous output:
-![image](https://user-images.githubusercontent.com/8976200/70416018-5562ae80-1a5e-11ea-8962-529304ce83f0.png)
+![image](~/content/assets/images/importing-tables-08.png)
 - Select the full output preview, copy it into the clipboard (CTRL+A, CTRL+C) and paste it into the schema/metadata textbox in the Import Tables Wizard:
-![image](https://user-images.githubusercontent.com/8976200/70416817-2e0ce100-1a60-11ea-9e2b-430cecf88d0a.png)
+![image](~/content/assets/images/importing-tables-09.png)
 - Click "Import!" and provide a proper name for your table.
 - Lastly, paste the original M expression you used in Excel/Power BI, from before you modified it with the `Table.Schema(...)` function, into the partition on the newly created table. Modify the M expression to point to the source you specified in the first step:
-![image](https://user-images.githubusercontent.com/8976200/70418985-dae95d00-1a64-11ea-8bfb-8dda16c33742.png)
+![image](~/content/assets/images/importing-tables-10.png)

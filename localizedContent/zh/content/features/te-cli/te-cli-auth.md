@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: 身份验证与连接
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,6 +36,9 @@ Tabular Editor CLI 使用与 Tabular Editor 3 相同的 Power BI Desktop 客户�
 > `--auth` 是一个**全局**选项，所有 `te` 命令都可用，而不只是 `te auth login`。 将其传递给 [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)、[`te query`](xref:te-cli-commands#query)、[`te connect`](xref:te-cli-commands#connect)，或任何其他需要连接远程端点的命令，以覆盖该次调用的默认身份验证链。 默认值 (`auto`) 会先尝试环境凭据，然后再回退到缓存的登录信息或交互式浏览器登录。
 
 对于无界面、SSH、WSL 或 devcontainer 场景，可使用服务主体：`te auth login -u <id> -p <secret> -t <tenant>`（或 `--certificate`）。 登录会被缓存，因此后续命令可通过 `--auth auto` 静默获取令牌。
+
+> [!NOTE]
+> `te add -t Table` 和 `te set --update-schema` 中用于架构检测的标志（`--source sql`、`--endpoint`）在连接 Azure 系列 SQL 端点（`*.database.windows.net`、`*.datawarehouse.fabric.microsoft.com`、`*.sql.azuresynapse.net`）时会使用 Entra ID 登录，并遵循 `--auth` 设置。 本地部署服务器使用 Windows 集成身份验证；`--connection-string` 会按原样生效。
 
 ## `te auth login`
 
@@ -108,11 +111,12 @@ te connect my-workspace my-model
 # Local TMDL folder, .bim file, or .SemanticModel container
 te connect ./my-model
 
-# Connect to a running Power BI Desktop instance (Windows only)
+# Connect to a locally running Analysis Services instance
+# (Power BI Desktop, Visual Studio workspace, standalone SSAS - Windows only)
 te connect --local
 
-# Filter by report name when multiple Power BI Desktop instances are running
-te connect --local my-report
+# Match an instance (e.g. an open report's window title) or a database name
+te connect --local my-model
 
 # Show the active connection
 te connect
@@ -121,7 +125,9 @@ te connect
 te connect --clear
 ```
 
-活动连接状态按终端会话分别保存：打开新的终端会话后将重新开始。 通过 [`te session`](xref:te-cli-commands#session) 查看或清理会话状态。
+找到多个本地实例或数据库时，CLI 会分两步提示（先选实例，再选数据库）；使用 `--non-interactive` 时，命令会直接失败并列出候选项，而不会静默选择其一。
+
+活动连接状态按终端会话分别保存：打开新的终端会话后将重新开始。 通过 [`te session`](xref:te-cli-commands#session) 查看或清理会话状态。 对于 `te deploy`，如果模型源位于本地，当前活动连接也会用作默认的 `--target-server`/`--target-database`。
 
 ### 工作区模式（Workspace，`-w` / `--workspace`）
 
@@ -171,7 +177,7 @@ te profile show prod
 te connect --profile prod
 
 # One-shot use without changing the active connection
-te deploy ./model --profile staging --force
+te deploy --model ./model --profile staging --execute --force
 ```
 
 配置文件还可以包含行为覆盖项，并在配置文件激活时生效：
@@ -193,6 +199,8 @@ te profile set prod --auto-format true
 - `--non-interactive` 全局标志（不会提示，而是立即失败）。
 - 以下任一非交互式身份验证方法：`env`、`managed-identity`，或显式提供的服务主体凭据。
 
+在使用 `--non-interactive` 且没有任何可用于登录的方式——没有缓存的登录信息、没有 `AZURE_CLIENT_*` 变量、也没有托管身份——时，任何连接到 Workspace 或服务器的命令都会立即停止，不会打开浏览器，并报告没有可用凭据，同时列出提供凭据的所有方式：`te auth login`、通过 `te auth login -u <client-id> -p <secret> -t <tenant>` 缓存的服务主体、`--auth env` 或 `--auth managed-identity`。 缓存的服务主体会被静默使用，因此只有在确实没有任何可用于登录的方式时，才会以这种方式失败。
+
 适用于管道的基于环境变量的示例：
 
 ```bash
@@ -200,9 +208,11 @@ export AZURE_CLIENT_ID="your-app-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-te deploy ./model -s my-workspace -d my-model \
+te deploy --model ./model \
+  --target-server my-workspace --target-database my-model \
   --auth env \
   --non-interactive \
+  --execute \
   --force \
   --ci github
 ```

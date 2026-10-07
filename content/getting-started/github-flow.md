@@ -79,7 +79,7 @@ flowchart LR
 ```
 
 > [!NOTE]
-> Tabular Editor now has a cross-platform CLI (`te`) in Limited Public Preview, purpose-built for CI/CD use — non-interactive mode, native GitHub Actions/Azure DevOps annotations, VSTEST output, and a `te test run` command for running regression tests as part of a pipeline. It's a natural fit for the kind of pipeline described below, and worth watching. As of this writing, Tabular Editor's own documentation advises against using it in production pipelines during preview (the preview build is stated to expire 2026-09-30), so the reference implementation in this article uses the established `TabularEditor.exe` CLI instead. See [CI/CD Integration](xref:te-cli-cicd) for the new CLI's current capabilities and examples.
+> Tabular Editor now has a cross-platform CLI (`te`) in Limited Public Preview, purpose-built for CI/CD use — non-interactive mode, native GitHub Actions/Azure DevOps annotations, VSTEST output, and a `te test run` command for running regression tests as part of a pipeline. It's a natural fit for the kind of pipeline described below, and worth watching. As of this writing, Tabular Editor's own documentation advises against using it in production pipelines during preview (the preview build is stated to expire 2026-10-31), so the reference implementation in this article uses the established `TabularEditor.exe` CLI instead. See [CI/CD Integration](xref:te-cli-cicd) for the new CLI's current capabilities and examples.
 
 <!-- FUTURE SPLIT POINT: everything from "Reference implementation" onward is a candidate to become its own page once it grows further (e.g. once release/production deployment past the test environment is added). -->
 

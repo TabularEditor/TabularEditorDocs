@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI（有限公开预览）
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,12 +23,13 @@ Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模�
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-## 面向三类受众打造
+## 设计支柱与目标受众
 
-每个命令都围绕三大设计支柱构建：
+每个命令都围绕四大设计支柱构建：
 
 - **结构化输出** — 除默认的易读文本外，还可输出 JSON、CSV、TMDL 和 TMSL。
 - **非交互模式** — 全局 `--non-interactive` 标志会禁用交互提示，并在出错时快速失败。
+- **默认安全**：`te set`、`te add` 和 `te remove` 等编辑命令会以差异对比的形式显示更改，在你添加 `--save` 之前不会写入任何内容；如果添加 `--force`，即使更改会引入验证错误，也会照样保存。 `te deploy` 和 `te refresh` 在你添加 `--execute` 之前，会打印将要发送的确切 TMSL；添加后，除非再加上 `--force`，否则会先让你确认。
 - **清晰的错误信息** — 写入 stderr，并返回可预测的退出码。
 
 这三者结合起来，让同一个二进制文件能够很好地服务于三类截然不同的用户：
@@ -42,22 +43,22 @@ Tabular Editor CLI (`te`) 是适用于 Power BI 和 Analysis Services 语义模�
 
 ## CLI 可以做什么
 
-CLI 将 50 多个命令划分为 10 个类别。 每个命令族都对应语义模型生命周期中的一个具体阶段。
+CLI 将命令分为 10 类。 每个命令族都对应语义模型生命周期中的一个具体阶段。
 
 有关每个命令的语法、选项和示例的完整命令参考，请参阅 @te-cli-commands。 点击表中的任意示例命令，直接跳转到对应的参考条目。
 
-| 命令族                                                           | 功能                        | 示例命令                                                                                                                                                                                  |
-| ------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [模型 I/O](xref:te-cli-commands#model-io)                       | 加载、保存、转换和初始化模型            | [`te load`](xref:te-cli-commands#load)、[`te save`](xref:te-cli-commands#save)、[`te init`](xref:te-cli-commands#init)                                                                  |
-| [模型编辑](xref:te-cli-commands#model-editing)                    | 获取/设置属性，添加/删除/移动对象        | [`te set`](xref:te-cli-commands#set)、[`te add`](xref:te-cli-commands#add)、[`te remove`](xref:te-cli-commands#remove)、[`te move`](xref:te-cli-commands#move)                           |
-| [检视](xref:te-cli-commands#inspection)                         | 列出对象、搜索、比较差异、分析依赖关系       | [`te list`](xref:te-cli-commands#list)、[`te find`](xref:te-cli-commands#find)、[`te diff`](xref:te-cli-commands#diff)、[`te deps`](xref:te-cli-commands#deps)                           |
-| [分析与质量](xref:te-cli-commands#analysis-and-quality)            | 验证、运行 BPA、格式化 DAX、分析存储    | [`te validate`](xref:te-cli-commands#validate)、[`te bpa run`](xref:te-cli-commands#bpa-run)、[`te format`](xref:te-cli-commands#format)、[`te vertipaq`](xref:te-cli-commands#vertipaq) |
-| [执行](xref:te-cli-commands#execution)                          | 运行 DAX 查询、C# Script 和宏    | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te 宏`](xref:te-cli-commands#macro)                                                            |
-| [部署与刷新](xref:te-cli-commands#deployment-and-refresh)          | 部署到 Workspace、触发刷新、执行增量刷新 | [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)、[`te incremental-refresh`](xref:te-cli-commands#incremental-refresh)                          |
-| [测试](xref:te-cli-commands#testing)                            | 断言测试、快照、A/B 比较            | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                        |
-| [连接与身份验证](xref:te-cli-commands#connection-and-authentication) | 连接到 Workspace，管理身份验证和配置文件 | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)      |
-| [配置](xref:te-cli-commands#configuration)                      | 设置与许可                     | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                     |
-| [Shell](xref:te-cli-commands#shell)                           | 交互模式、会话状态、Shell 自动补全      | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                |
+| 命令族                                                            | 功能                         | 示例命令                                                                                                                                                                                   |
+| -------------------------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [模型初始化和保存](xref:te-cli-commands#model-initialization-and-save) | 保存、转换和初始化模型                | [`te save-as`](xref:te-cli-commands#save-as)、[`te init`](xref:te-cli-commands#init)                                                                                                    |
+| [模型编辑](xref:te-cli-commands#model-editing)                     | 获取/设置属性，添加/删除/移动对象         | [`te set`](xref:te-cli-commands#set)、[`te add`](xref:te-cli-commands#add)、[`te remove`](xref:te-cli-commands#remove)、[`te move`](xref:te-cli-commands#move)                            |
+| [检视](xref:te-cli-commands#inspection)                          | 列出对象、搜索、比较差异、分析依赖关系        | [`te list`](xref:te-cli-commands#list)、[`te find`](xref:te-cli-commands#find)、[`te diff`](xref:te-cli-commands#diff)、[`te deps`](xref:te-cli-commands#deps)                            |
+| [分析与质量](xref:te-cli-commands#analysis-and-quality)             | 验证、运行 BPA、格式化 DAX 和 M、分析存储 | [`te validate`](xref:te-cli-commands#validate)、[`te bpa run`](xref:te-cli-commands#bpa-run)、[`te util`](xref:te-cli-commands#utilities)、[`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [执行](xref:te-cli-commands#execution)                           | 运行 DAX 查询、C# Script 和宏     | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te 宏`](xref:te-cli-commands#macro)                                                             |
+| [部署与刷新](xref:te-cli-commands#deployment-and-refresh)           | 部署到 Workspace，触发刷新，应用刷新策略  | [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)                                                                                                |
+| [测试](xref:te-cli-commands#testing)                             | 断言测试、快照、A/B 比较             | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                         |
+| [连接与身份验证](xref:te-cli-commands#connection-and-authentication)  | 连接到 Workspace，管理身份验证和配置文件  | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)       |
+| [配置](xref:te-cli-commands#configuration)                       | CLI 设置和默认值                 | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                      |
+| [Shell](xref:te-cli-commands#shell)                            | 交互模式、会话状态、Shell 自动补全       | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                 |
 
 > [!TIP]
 > 文档中使用规范的长形式动词（`list`、`remove`、`move`），但传统的短形式仍可作为别名使用（`ls`、`rm`、`mv`、`rename`）。 这既适用于顶层命令，也适用于 `te bpa rules`、`te macro`、`te config`、`te profile`、`te session` 和 `te test` 等命令组下的 `remove` / `list` 子命令。 完整映射请参见 @te-cli-commands#command-aliases。
@@ -91,7 +92,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 在预览结束日期（2026-09-30）前 14 天内，无论 `hidePreviewNotice` 如何设置，每次执行命令时该横幅都会再次出现。 这可确保在 CLI 停止运行之前，你能提前看到醒目的警告。
+> 在预览结束日期（2026-10-31）前 14 天内，无论 `hidePreviewNotice` 如何设置，每次执行命令时该横幅都会再次出现。 这可确保在 CLI 停止运行之前，你能提前看到醒目的警告。
 
 ## 许可概览
 

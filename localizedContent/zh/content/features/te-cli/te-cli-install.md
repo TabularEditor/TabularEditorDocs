@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: 安装与设置
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-04
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -128,7 +128,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 无论是否设置 `hidePreviewNotice`，在预览结束日期（2026-09-30）**前 14 天内**，每次执行命令都会再次显示该横幅。 这样可确保在 CLI 停止工作前，你能看到明确的警告。
+> 在**预览结束日期前后 14 天内**（2026-10-31），无论如何设置 `hidePreviewNotice`，每次运行命令都会再次显示该横幅。 这样可确保在 CLI 停止工作前，你能看到明确的警告。
 
 ## Shell 自动补全
 
@@ -171,12 +171,12 @@ te completion fish > ~/.config/fish/completions/te.fish
 
 | 功能                                              | Windows | macOS / Linux |
 | ----------------------------------------------- | ------- | ------------- |
-| 加载/保存 BIM 和 TMDL                                | 是的      | 是             |
+| 使用本地 TMDL 和 BIM 模型文件                            | 是的      | 是             |
 | 部署到 Power BI / Fabric / Azure Analysis Services | 是的      | 是             |
 | Best Practice Analyzer 和 VertiPaq分析器            | 是的      | 是             |
 | C# Script 脚本编写                                  | 是的      | 是             |
 | 针对云端模型的 DAX 查询                                  | 是的      | 是             |
-| 身份验证：浏览器、设备代码、服务主体、环境变量、托管身份                    | 是的      | 是             |
+| 身份验证方式：浏览器（交互式）、服务主体、环境变量、托管标识                  | 是的      | 是             |
 | 连接到本地 SSAS 实例（TCP 传输）                           | 是       | **否**         |
 | 连接到 Power BI Desktop（命名管道传输）                    | 是       | **否**         |
 

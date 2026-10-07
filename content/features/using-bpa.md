@@ -2,7 +2,7 @@
 uid: using-bpa
 title: Using the Best Practice Analyzer
 author: Morten Lønskov
-updated: 2023-02-09
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,7 +52,7 @@ The Best Practice Analyzer window continuously lists all the **effective rules**
 * **Go to object...**: Choosing this option or double-clicking on an object in the list, takes you to the same object in the main UI.
 * **Ignore item/items**: Selecting one or more objects in the list and choosing this option, will apply an annotation to the chosen objects indicating that the Best Practice Analyzer should ignore the objects going forward. If you ignored an object by mistake, toggle the "Show ignored" button at the top of the screen. This will let you unignore an object that was previously ignored.
 * **Ignore rule**: If you've selected one or more rules in the list, this option will put an annotation at the model level that indicates, that the selected rule should always be ignored. Again, by toggling the "Show ignored" button, you can unignore rules as well.
-* **Generate fix script**: Rules that have an easy fix (meaning the issue can be resolved simply by setting a single property on the object), will have this option enabled. By clicking, you will get a C# script copied into your clipboard. This script can then be subsequently pasted into the [Advanced Scripting](/Advanced-Scripting) area of Tabular Editor, where you can review it before executing it to apply the fix.
+* **Generate fix script**: Rules that have an easy fix (meaning the issue can be resolved simply by setting a single property on the object), will have this option enabled. By clicking, you will get a C# script copied into your clipboard. This script can then be subsequently pasted into the [Advanced Scripting](xref:advanced-scripting) area of Tabular Editor, where you can review it before executing it to apply the fix.
 * **Apply fix**: This option is also available for rules than have an easy fix, as mentioned above. Instead of copying the script to the clipboard, it will be executed immediately.
 
 ## Managing Best Practice Rules
@@ -61,5 +61,20 @@ If you need to add, remove or modify the rules applying to your model, there's a
 ![BPA Manage Rules](~/content/assets/images/common/BPAOverviewManageRules.png)
 
 The Manage BPA rules window contains two lists: The top list represents the **collections** of rules that are currently loaded. Selecting a collection in this list, will display all the rules that are defined within this collection in the bottom list.
+
+The collections are:
+
+| Collection | Where its rules live | Editable |
+|---|---|---|
+| **(Effective rules)** | Not a store of its own; the merged, deduplicated set of every rule below, which is what actually runs against your model | No |
+| **Built-in Best Practices** | Shipped with Tabular Editor 3; a curated set maintained by the Tabular Editor team. See @built-in-bpa-rules | No, but individual rules can be disabled |
+| One entry per **external rule file or URL** | Wherever the file or URL points | Depends on the source |
+| **Rules within the current model** | An annotation on the model itself, so they travel with it | Yes |
+| **Rules for the local user** | `%LocalAppData%\TabularEditor3\BPARules.json`; only you see them | Yes |
+| **Rules on the local machine** | `%ProgramData%`; every user of this machine sees them | Yes |
+
+The built-in collection is only listed while *Enable built-in best practice rules* is on under @preferences. Its rule IDs are reserved: defining your own rule with one of them is refused.
+
+Use **Enable All** and **Disable All** to switch a whole collection on or off without deleting anything.
 
 ![BPA Manage Rules UI](~/content/assets/images/common/PBAOverviewManageRulesPopUp.png)
