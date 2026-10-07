@@ -2,7 +2,7 @@
 uid: auto-reload
 title: 从磁盘自动重新加载
 author: Morten Lønskov
-updated: 2026-09-22
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,7 +12,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "桌面版无法从文件或文件夹中打开模型元数据，因此磁盘上也没有可与其保持同步的内容。"
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -21,78 +21,61 @@ applies_to:
 
 # 从磁盘自动重新加载
 
-在你工作时，模型会同时存在两份副本：一份是 Tabular Editor 保存在内存中的副本，另一份是最初从磁盘加载的元数据文件。只改其中一方而不更新另一方，两者就会脱节。
+When the metadata files of a model you loaded from a file or folder change on disk, Tabular Editor reloads the model automatically. If you have unsaved changes, a prompt appears where you choose to reload or keep your changes. Typical sources of external changes are an AI agent, a script, another editor, a `git pull` or a colleague editing a shared folder.
 
-![Tabular Editor 在内存中保存模型，磁盘上的文件保存同一个模型；File > Save 会将内容从内存写入磁盘，自动重新加载则会把更改反向带回内存，而其他工具（如代理、脚本或 Git pull）会直接写入这些文件](~/content/assets/images/features/auto-reload-sync.png)
-
-Tabular Editor 会在两个方向上保持二者同步：
-
-| 方向    | 由什么触发                                              |
-| ----- | -------------------------------------------------- |
-| 内存到磁盘 | **文件 > 保存**（**Ctrl+S**），可随时执行。                     |
-| 磁盘到内存 | 自动进行，因为 Tabular Editor 会监视这些文件，并在它们被其他工具更改时重新加载模型。 |
-
-另一个工具通常是 AI 代理或脚本，也可能是另一个编辑器、一次 `git pull`，或者一位在共享文件夹中工作的同事。
+![Diagram: File > Save writes the model in Tabular Editor to the files on disk; another tool writes to the files; an automatic reload loads the changed files back into Tabular Editor](~/content/assets/images/features/auto-reload-sync.png)
 
 > [!NOTE]
-> 这是文件级同步。这不同于 [工具 > 偏好 > 杂项](xref:preferences#miscellaneous) 下与其并列的 **跟踪外部模型更改** 和 **自动刷新本地 Tabular Object Model 元数据**；后两者会启动 Analysis Services 跟踪，用来检测&#x5BF9;_&#x5DF2;连接数据&#x5E93;_&#x6240;做的更改。这两种机制彼此独立，覆盖的变更来源也不同。
+> Auto-reload monitors files and is independent of **Track external model changes** and **Refresh local Tabular Object Model metadata automatically** under [Tools > Preferences > Tabular Editor > Miscellaneous](xref:preferences#miscellaneous). Those settings use an Analysis Services trace to detect changes to a connected database.
 
-## Tabular Editor 监视的内容
+## Monitored files
 
-| 模型加载来源                                                                               | 是否监视                                                         |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| 一个`.bim`文件                                                                           | 就那一个文件。同一文件夹中的其他文件会被忽略。                                      |
-| 一个采用 JSON（Database.json）格式的文件夹                                       | 模型根目录下的每个 `.json` 文件，包括子文件夹中的文件。                             |
-| 一个采用 [Tabular Model Definition Language (TMDL)](xref:tmdl) 格式的文件夹 | 模型根目录下的每个 `.tmdl` 文件，包括子文件夹。                                 |
-| 一个 Workspace 数据库                                                                     | 在[工作区模式](xref:workspace-mode)下为该模型提供支持的文件，会按照与上面两行相同的规则进行监视。 |
-| 工作区模式之外的数据库或 Power BI Desktop                                                        | 无。这个模型在磁盘上没有文件，所以不存在需要协调的两个副本。                               |
-| 一个 `.pbit` 模板，或一个你从未保存过的模型                                                           | 无。 `.pbit` 是二进制文件，外部工具不会对它进行就地编辑。                            |
+| 模型加载来源                                                                               | Monitored files                                                                                                            |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 一个`.bim`文件                                                                           | That file. 同一文件夹中的其他文件会被忽略。                                                                                |
+| 一个采用 JSON（Database.json）格式的文件夹                                       | 模型根目录下的每个 `.json` 文件，包括子文件夹中的文件。                                                                                           |
+| 一个采用 [Tabular Model Definition Language (TMDL)](xref:tmdl) 格式的文件夹 | 模型根目录下的每个 `.tmdl` 文件，包括子文件夹。                                                                                               |
+| 一个 Workspace 数据库                                                                     | The files backing the model in [workspace mode](xref:workspace-mode), by the same rules as the rows above. |
+| 工作区模式之外的数据库或 Power BI Desktop                                                        | 无。 The model has no files on disk.                                                                         |
+| 一个 `.pbit` 模板，或一个你从未保存过的模型                                                           | 无。                                                                                                                         |
 
-## 仅文件发生更改时
+## Reload with unsaved changes
 
-如果你没有未保存的更改，那么只有一个副本发生了变化，因此无需再做取舍。 Tabular Editor 会重新加载模型，两者就会再次保持一致。
+If you have unsaved changes, the **External changes detected** prompt appears and you choose which version to keep, because Tabular Editor doesn't merge them.
 
-## 两个副本都发生更改时
+![External changes detected prompt with the Reload and Ignore buttons, Reload focused](~/content/assets/images/features/external-changes-prompt.png)
 
-如果你也有未保存的更改，那么两个副本都发生了变化，而且内容不一致。 Tabular Editor 无法合并模型元数据，因此会询问你以哪个副本为准。
+- **Reload** discards your unsaved changes and loads the version on disk.
+- **Ignore** keeps your changes. The files on disk keep the external changes, and your next save overwrites them.
 
-![当 Tabular Editor 检测到两个副本都已更改时显示的提示](~/content/assets/images/features/external-changes-prompt.png)
-
-- **重新加载**会丢弃你未保存的更改，并采用磁盘上的版本。
-- **忽略**会保留你的更改，并使模型保持当前状态。磁盘上的文件不会被改动，因此两个副本会一直处于分离状态，直到你下次保存时覆盖磁盘上的文件为止。
-
-默认最安全的选项是 **忽略**。按下 Esc，或使用窗口上的关闭按钮关闭该提示，效果与选择 **忽略** 完全相同：你的更改会原样保留。
+Pressing **Esc** or closing the prompt has the same effect as **Ignore**.
 
 > [!WARNING]
-> 如果你选择 **重新加载**，Tabular Editor 会直接丢弃你未保存的更改，不会再次确认，而且你无法撤销这次重新加载。
+> **Reload** is the default button, so pressing **Enter** at the prompt also reloads. A reload discards your unsaved changes without further confirmation, and you can't undo it.
 
-### 典型流程
+### 示例
 
-1. 你打开一个 TMDL 文件夹模型，并重命名一个度量值。内存中的副本已经比磁盘上的文件更新。
-2. 在同一文件夹中工作的 AI 代理重写了四个 `.tmdl` 文件。现在两个副本都发生了变化，但方向不同。
-3. Tabular Editor 会等待代理的写入稳定下来，然后弹出一次 **检测到外部更改** 提示。
-4. 你选择 **重新加载**。你的度量值重命名已消失，代理改写的四个文件已加载，两份副本重新同步，而 TOM Explorer 仍展开在你刚才操作的那张表上。
+1. 你打开一个 TMDL 文件夹模型，并重命名一个度量值。
+2. 在同一文件夹中工作的 AI 代理重写了四个 `.tmdl` 文件。
+3. After the agent's writes finish, one **External changes detected** prompt appears.
+4. You choose **Reload**, which discards the rename and loads the agent's changes. The TOM Explorer keeps its expanded nodes.
 
-如果你当时选择的是 **忽略**，你的重命名会被保留，两个副本会继续不同步，而代理修改的四个文件会在你下次按 **Ctrl+S** 时被覆盖。
+## Multiple writes and background changes
 
-## 合并与后台更改
+When a tool rewrites a folder-serialized model, it changes many files in quick succession, and Tabular Editor reloads once, after the writes finish.
 
-重写以文件夹方式序列化的模型的工具，往往会在短时间内连续修改许多文件。 Tabular Editor 会等待这些写入稳定下来，然后只重新加载一次，而不是每个文件都重新加载一次。
-
-当 Tabular Editor 处于后台时到达的更改会先被暂存，而不是立刻弹出提示。当你切回 Tabular Editor 时，系统只会询问一次，因此即使你刚结束一个重写了十几个文件的代理会话，也只会看到一个提示。
+If Tabular Editor isn't the active window when the files change, the reload or prompt happens when you switch back to it. All changes made while it was inactive produce one prompt.
 
 ## 工作区模式
 
-[工作区模式](xref:workspace-mode) 会增加第三个副本：服务器上的 Workspace 数据库。重新加载时也会重新部署它，这样三个副本都能保持同步，而不会让服务器继续使用那些文件已不再描述的元数据。
+In [workspace mode](xref:workspace-mode), a reload also redeploys the model to the workspace database.
 
 ## 关闭此功能
 
-默认启用自动重新加载。若要将“从磁盘到内存”的同步方向改回手动，请在 **Tools > 偏好 > Miscellaneous** 下清除 **Automatically reload from disk**。
+Auto-reload is enabled by default, and you turn it off by clearing **Automatically reload from disk (hot reload)** under **Tools > Preferences > Tabular Editor > Miscellaneous**.
 
-![Tools > 偏好 > Miscellaneous，显示 Metadata Synchronization 下的自动重新加载设置](~/content/assets/images/pref-miscellaneous.png)
+![Tools > Preferences > Tabular Editor > Miscellaneous, showing the automatic reload setting under Metadata Synchronization](~/content/assets/images/pref-miscellaneous.png)
 
-如果还有持续运行的程序会写入模型文件夹，例如文件同步客户端，或者会在后台刷新的 CI 检出目录，就应关闭此功能。这个提示是模态的，所以如果文件夹经常变化，它只会不断打断你，而帮不上什么忙。
+Turn it off if a continuously running process also writes to the model folder, such as a file sync client or a CI checkout that refreshes in the background. Each change triggers a reload, or the modal prompt when you have unsaved changes.
 
-清除该设置后，Tabular Editor 将不再监视任何内容，只有在你使用 **文件 > 从磁盘重新加载** 或 **文件 > 保存** 时，这两个副本才会重新合并。
-
-有关该页面上的其他设置，请参阅[偏好](xref:preferences#miscellaneous)。
+With the setting cleared, use **File > Reload from disk** to load external changes, or **File > Save** to overwrite them with the model in Tabular Editor. See [Preferences](xref:preferences#miscellaneous) for the other settings on that page.
