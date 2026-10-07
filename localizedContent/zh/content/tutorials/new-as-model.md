@@ -2,7 +2,7 @@
 uid: new-as-model
 title: 创建 Analysis Services 模型
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,7 +31,7 @@ applies_to:
 
 ![新建模型](~/content/assets/images/new-as-model-new-model.png)
 
-- 为模型指定名称，或使用默认名称。然后，根据你要面向的 Analysis Services 版本选择相应的兼容级别。可选项如下：
+- 为模型指定名称，或使用默认名称。 Then, choose the compatibility level for the version of Analysis Services you target. The dialog lists these options:
 
   - 1200（Azure Analysis Services / SQL Server 2016+）
   - 1400（Azure Analysis Services / SQL Server 2017+）
@@ -40,7 +40,7 @@ applies_to:
   - 1700（Azure Analysis Services / SQL Server 2025+）
   - 1706（Power BI / Fabric）
 
-  1700 是 Analysis Services 支持的最高级别。 1706 仅适用于 Power BI 和 Fabric；当你通过 Power BI XMLA endpoint 部署模型时，请选择此级别。
+  1700 是 Analysis Services 支持的最高级别。 Use 1706 only for Power BI and Fabric, for example when you deploy the model through the Power BI XMLA endpoint.
 
 - 为获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。这要求你拥有一个可用的 Analysis Services 实例，以便将 Workspace 数据库部署到其上。这可以是 SQL Server Analysis Services 的本地或远程实例，也可以是 Azure Analysis Services 实例。单击“确定”后，系统会提示你输入要在其中创建 Workspace 数据库的 Analysis Services 实例的连接字符串。
 
