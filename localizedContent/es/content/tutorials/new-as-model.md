@@ -2,7 +2,7 @@
 uid: new-as-model
 title: Crear un modelo de Analysis Services
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,7 +31,7 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
 
 ![New model](~/content/assets/images/new-as-model-new-model.png)
 
-- Indica un nombre para tu modelo o usa el valor predeterminado. Luego, elige el nivel de compatibilidad en función de la versión de Analysis Services a la que apuntas. Tus opciones son las siguientes:
+- Indica un nombre para tu modelo o usa el valor predeterminado. Then, choose the compatibility level for the version of Analysis Services you target. The dialog lists these options:
 
   - 1200 (Azure Analysis Services / SQL Server 2016+)
   - 1400 (Azure Analysis Services / SQL Server 2017+)
@@ -40,7 +40,7 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
   - 1700 (Azure Analysis Services / SQL Server 2025+)
   - 1706 (Power BI / Fabric)
 
-  1700 is the highest level Analysis Services supports. 1706 is for Power BI and Fabric only, and is the level to choose when you deploy the model through the Power BI XMLA endpoint.
+  1700 is the highest level Analysis Services supports. Use 1706 only for Power BI and Fabric, for example when you deploy the model through the Power BI XMLA endpoint.
 
 - Para obtener la mejor experiencia de desarrollo, marca la opción "Usar base de datos del Workspace". Esto requiere que tengas disponible una instancia de Analysis Services en la que se implementará la base de datos del Workspace. Puede ser una instancia local o remota de SQL Server Analysis Services, o una instancia de Azure Analysis Services. Al hacer clic en Aceptar, se te solicitará que introduzcas la cadena de conexión de la instancia de Analysis Services en la que quieres que se cree la base de datos del Workspace.
 
