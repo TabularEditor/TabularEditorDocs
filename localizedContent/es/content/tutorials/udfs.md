@@ -2,7 +2,7 @@
 uid: udfs
 title: Funciones DAX definidas por el usuario
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ Para obtener más información sobre cómo funcionan las UDF de DAX, recomendamo
 
 Antes de poder crear y usar UDFs en Tabular Editor 3, asegúrate de que:
 
-- Your model compatibility level is **1702 or higher**.
+- El nivel de compatibilidad de tu modelo es **1702 o superior**
 
 ## Crear tu primera UDF
 
@@ -133,7 +133,7 @@ Además de especificar el modo de evaluación, también puedes restringir el tip
 
 Estas especificaciones de tipo son opcionales, pero si se indican, realizarán una conversión de tipo implícita en los argumentos que se pasen a la función y también afectarán a las sugerencias de autocompletado en Tabular Editor 3 al escribir código DAX que llame a la función.
 
-Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that does not match its parameter type, for example passing a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
 Consulta la [especificación de Microsoft para las UDF](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) para ver la lista completa de restricciones disponibles.
 
@@ -204,7 +204,7 @@ Los administradores del sistema pueden desactivar el acceso al Administrador de 
 
 ## Características avanzadas
 
-### Corrección de fórmulas
+### Corrección automática de fórmulas
 
 Cuando cambias el nombre de una UDF, Tabular Editor 3 actualiza automáticamente todas las referencias en tu modelo, al igual que con las medidas y otros objetos.
 
@@ -238,9 +238,9 @@ En Tabular Editor, las UDFs también tienen una _propiedad_ "Namespace", que te 
 
 ## UDFs and source control
 
-If you store your model as a folder structure, Tabular Editor can write each UDF to its own file instead of keeping them all inside `database.json`. Two developers editing two different functions then change two different files, and Git has nothing to merge.
+If you store your model as a folder structure, Tabular Editor can write each UDF to its own file. Without this serialization level, all functions are stored in `database.json`, which causes merge conflicts when several developers edit functions.
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**, or under **Tools > Preferences > File Formats > Save-to-folder** for a model you save to a folder for the first time. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder**. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Buenas prácticas
 
@@ -328,12 +328,14 @@ Tabular Editor 3 detecta automáticamente cualquier comentario y lo muestra corr
 
 **La función no aparece en el autocompletado**
 
-Tabular Editor decides what to offer from the function's own definition and from where your cursor is. Work through these in order:
+Check the following, in order:
 
-1. **The function's definition has a semantic error.** A UDF whose body does not analyze cleanly, one that needs a row context it has not been given or misuses `MATCHBY`, cannot be validly invoked, so it is left out of the suggestion list entirely. Open the function and clear the error. Its calltip still works, which is why this is easy to miss.
-2. **The return type does not fit the argument you are completing.** The return type is inferred from the body, not declared. A UDF that returns a table is not offered where a scalar is expected, and one that returns a scalar is not offered where a table is expected. Filter arguments, for instance the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either. A function whose body is an untyped `EXPR` parameter fits everywhere.
-3. **Visual calculation mismatch.** A UDF written for visual calculations is only offered inside another visual calculation, and vice versa.
-4. **It is the function you are editing.** A function is not offered inside its own definition.
+1. **The function's definition has a semantic error.** Autocomplete hides UDFs with semantic errors, such as a missing row context or invalid `MATCHBY`, but still shows their calltip. Fix the error in the function.
+2. **The return type doesn't fit the argument you're completing.** The return type is inferred from the function body. A UDF that returns a table isn't offered where a scalar is expected, and a UDF that returns a scalar isn't offered where a table is expected. Exceptions:
+   - Filter arguments, such as the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either.
+   - A function whose body is an untyped `EXPR` parameter is offered everywhere.
+3. **Visual calculation mismatch.** Visual calculation UDFs appear only in visual calculations, and other UDFs appear only outside them.
+4. **It's the function you're editing.** A function isn't offered inside its own definition.
 
 **Errores de restricción de parámetros**
 
