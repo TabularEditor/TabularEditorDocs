@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-09-17
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,40 +19,36 @@ applies_to:
 ---
 # AI Assistant
 
-The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With an enterprise-ready design, full control of what is sent to the AI, and built-in consent management, you can use the AI Assistant with confidence. The AI Assistant has undergone independent security penetration testing. For details, visit the [Tabular Editor Trust Center](https://trust.tabulareditor.com). It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
+The AI Assistant is a chat panel for semantic model development. It explores your model metadata, writes and runs DAX queries, generates C# scripts, runs Best Practice Analyzer checks, queries VertiPaq Analyzer statistics and searches the Tabular Editor knowledge base. [Permission settings](#permissions-and-consent) control what it sends to your AI provider. The AI Assistant has undergone independent penetration testing; see the [Tabular Editor Trust Center](https://trust.tabulareditor.com).
 
-The AI Assistant uses a bring-your-own-key model. You provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
+The AI Assistant uses a bring-your-own-key model, where you provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
 
-There is a second way in that needs no key at all. From 3.27.0 Tabular Editor 3 can act as an MCP server, so an agent you already subscribe to, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, works on the open model through the same tools and the same permissions as the chat. See @mcp-server. The two share one permission record, so whichever you use, you set the boundaries once.
-
-> [!NOTE]
-> The AI Assistant is in public preview starting with Tabular Editor 3.26.0. We welcome feedback on the experience as we continue to refine it.
+You can also use your own agent through the [MCP server](xref:mcp-server), with no API key. An agent such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor works on the open model with the same tools and permission settings as the chat, except for session and per-model grants, which apply to the chat only. See [MCP server and AI Assistant differences](#mcp-server-and-ai-assistant-differences).
 
 
-![The AI Assistant pane as it first opens, with the assistant's greeting listing what it can do - answer questions, query the model, write and execute C# scripts, change the model - and what it cannot, above an empty message box](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
 
-## Getting Started
+![The AI Assistant pane as it first opens, with the assistant's greeting listing what it can do (answer questions, query the model, write and execute C# scripts, change the model) and what it cannot, above an empty message box](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
 
-1. Open **Tools > Preferences > AI Features > AI Assistant**
+## Getting started
+
+1. Open **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 2. Select your AI provider (on a fresh install this defaults to **None (AI disabled)**), then enter your API key
 3. Open the AI Assistant panel from **View > AI Assistant**
 4. Type a message and press **Enter** to start a conversation
 
-The model the assistant is using is shown in the status strip directly above the message box. See [Choosing a model](#choosing-a-model) to change it without leaving the chat.
-
 > [!TIP]
-> Use our [interactive demo of the AI Assistant](https://demos.tabulareditor.com/psl/of150vcy?) to see how to set up and use it.
+> The [interactive demo of the AI Assistant](https://demos.tabulareditor.com/psl/of150vcy?) walks through setup and use.
 
 > [!NOTE]
 > API keys are stored encrypted on your local machine.
 
-## Supported Providers
+## Supported providers
 
 Configure your AI provider under **Tools > Preferences > AI Features > AI Assistant > AI Provider**. Select a provider from the dropdown (the default is **None (AI disabled)** until you configure one), enter your API key and optionally override the default model.
 
-Leave the model field blank to use the provider's default model. For OpenAI and Anthropic the defaults are listed in the table below; Azure OpenAI and the Custom provider have no default, so those two always need a value.
+Leave the model field blank to use the provider's default model. OpenAI and Anthropic have defaults; Azure OpenAI and the Custom provider always need a value.
 
-| Provider | Default Model | Configuration Required |
+| Provider | Default model | Configuration required |
 | -- | -- | -- |
 | OpenAI | gpt-5.5 | API key. Optional base URL, Organization ID and Project ID |
 | Anthropic | claude-sonnet-4-6 | API key. Optional base URL |
@@ -63,219 +59,202 @@ Leave the model field blank to use the provider's default model. For OpenAI and 
 
 ### Choosing a model
 
-The active model is shown in the status strip above the message box, next to the context usage bar. Click it to open a picker listing the models currently available for the configured provider; choosing one applies to every request that follows, with no dialog and no restart. The last entry, **Preferences...**, opens **Tools > Preferences > AI Features > AI Assistant** for anything not on the list.
+The active model is shown in the status strip above the message box, next to the context usage bar. Click it to open a picker listing the models available for the configured provider; a model you pick applies from the next request. The last entry, **Preferences...**, opens **Tools > Preferences > AI Features > AI Assistant > AI Provider** for anything not on the list. For the Azure OpenAI and Custom providers, or before the model list has been retrieved, the model name is a link that opens those preferences.
 
 ![The model picker open above the message box, listing claude-sonnet-5, claude-fable-5-1, claude-fable-5, claude-opus-5, claude-haiku-4-5, claude-opus-4-8 and the active claude-sonnet-4-6 in bold, with Preferences... beneath a separator](~/content/assets/images/ai-assistant/ui-model-picker.png)
 
-Where there is no list to offer (a Custom or Azure OpenAI deployment name, or a machine where the model list has never been retrieved), the model name is a plain link to those same preferences instead of a picker.
-
 > [!NOTE]
-> The indicator is hidden until a provider, an API key and a model are all in place.
+> The model indicator is hidden until a provider, an API key and a model are all set.
 
 ### OpenAI
 
-Select **OpenAI** as the provider and enter your API key. You can optionally specify an Organization ID and Project ID if your OpenAI account uses these. The default model is **gpt-5.5**, but you can change it to any model available on your account.
+Select **OpenAI** as the provider and enter your API key. If your OpenAI account uses an Organization ID or a Project ID, enter those too. The model name accepts any model available on your account.
 
-![The AI Provider preferences page with OpenAI selected, a masked API key, empty Organization ID and Project ID fields, and the model name](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
+![The AI Provider preferences page from an earlier version, with OpenAI selected, a masked API key, empty Organization ID and Project ID fields and gpt-4o as the model name](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
 
 ### Anthropic
 
-Select **Anthropic** as the provider and enter your API key. The default model is **claude-sonnet-4-6**. You can change the model name to any Anthropic model available on your account.
+Select **Anthropic** as the provider and enter your API key. The model name accepts any Anthropic model available on your account.
 
-![The AI Assistant preferences page with Anthropic selected as the provider, the base URL https://api.anthropic.com, a masked API key and claude-sonnet-4-6 as the model name](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![The AI Provider preferences page with Anthropic selected as the provider, the base URL https://api.anthropic.com, a masked API key and claude-sonnet-4-6 as the model name](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
 > Anthropic enforces input token per minute (ITPM) rate limits based on your account tier. A new API key starts at Tier 1 with 30,000 ITPM for Claude Sonnet 4.x. A single request against a large model can exceed this limit. Purchase $40 or more in API credits to reach Tier 2 (450,000 ITPM). See the [Anthropic rate limits documentation](https://docs.anthropic.com/en/api/rate-limits) for full tier details.
 
 ### Azure OpenAI
 
-Select **Azure OpenAI** as the provider and configure three fields:
+Select **Azure OpenAI** as the provider and configure these fields:
 
 - **API key**: the access key for your Azure OpenAI resource
-- **Service endpoint**: the endpoint URL for your resource, for example `https://your-resource.openai.azure.com`. Use the resource URL, not the `privatelink` alias; the SSL certificate is issued for `*.openai.azure.com` and connecting directly to `*.privatelink.openai.azure.com` fails certificate validation
-- **Deployment**: the **deployment name**, not the underlying model name and not the resource name
+- **Service endpoint**: the resource URL, for example `https://your-resource.openai.azure.com`. The SSL certificate is issued for `*.openai.azure.com`, so a `*.privatelink.openai.azure.com` address fails certificate validation
+- **Deployment**: the deployment name shown in the **Name** column of **Deployments**
 
-Azure OpenAI requires the deployment name in every API call. A deployment name is chosen when the deployment is created, so it can be any string. Deployments are often named after the model they serve (for example `gpt-4o`), but that is a convention, not a requirement. If you enter the resource name or a raw model name that does not exist as a deployment, the request fails.
+Azure OpenAI requires the deployment name in every API call. The name is set when the deployment is created and often matches the model it serves, for example `gpt-4o`, but it can differ. If you enter the resource name or a model name that doesn't exist as a deployment, the request fails.
 
-#### Finding your deployment name
-
-In the [Azure AI Foundry portal](https://ai.azure.com):
+Find the deployment name in the [Azure AI Foundry portal](https://ai.azure.com):
 
 1. Sign in and select your Azure OpenAI resource
 2. Open **Deployments** (or **Models + endpoints** if the resource has been upgraded to Foundry)
 3. Copy the value from the **Name** column
 
-Deployments created before your organization adopted Azure AI Foundry may not appear in the portal. List them from the Azure CLI:
+If a deployment created before your organization adopted Azure AI Foundry doesn't appear in the portal, list the deployments with the Azure CLI:
 
 ```bash
 az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table
 ```
 
-See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model) for more details.
+See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model).
 
-For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors.
-
-> [!NOTE]
-> The **Azure OpenAI** provider is for classic Azure OpenAI resources that use the `api-version` query parameter. If you are using the new **Microsoft Foundry**, see [Using Microsoft Foundry](#using-microsoft-foundry) below.
+For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors. For models deployed in Microsoft Foundry, see [Using Microsoft Foundry](#using-microsoft-foundry).
 
 ### Custom (OpenAI-compatible)
 
-The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. Enter your API key and the custom endpoint URL. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
+The Custom provider connects to any LLM that exposes an OpenAI-compatible API endpoint, such as a model on your own machine or one hosted on your organization's network. Enter your API key and the endpoint URL. With a self-hosted model, all data stays within your own infrastructure and nothing is sent to a third-party cloud provider. See [Using a local or organizational LLM](#using-a-local-or-organizational-llm).
 
-### Using a local or organizational LLM
+## Using a local or organizational LLM
 
 You can run the AI Assistant against a self-hosted LLM by using the Custom provider. This keeps all data within your own infrastructure, whether that is a model running on your local machine or a centrally hosted LLM within your organization's network. Either way, no data is sent to a third-party cloud provider.
-
-Several tools can host models with an OpenAI-compatible API:
+These tools host models with an OpenAI-compatible API, on a developer's workstation or on a shared server that serves as a team endpoint:
 
 - [Ollama](https://ollama.com): lightweight CLI for downloading and running models locally
 - [LM Studio](https://lmstudio.ai): desktop application with a graphical interface for managing and running local models
 - [LocalAI](https://localai.io): self-hosted, community-driven alternative with broad model support
 
-These tools can run on a developer's workstation for individual use, or be deployed on a shared server within your organization to provide a centrally managed LLM endpoint for your team.
-
-#### Example: Ollama
+### Example: Ollama
 
 1. [Download and install Ollama](https://ollama.com/download)
-2. Pull a model, for example: `ollama pull llama3.1`
-3. Start the Ollama server (it runs automatically after installation, by default on port 11434)
+2. Pull a model, for example `ollama pull llama3.1`
+3. Start the Ollama server. It starts automatically after installation, by default on port 11434
 4. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 5. Set **Choose provider** to **Custom (OpenAI-compatible)**
 6. Set **Service Endpoint** to `http://localhost:11434/v1`
-7. Set **Model name** to the model you pulled (e.g. `llama3.1`)
-8. The **API Key** field can be set to any non-empty value (e.g. `ollama`). Ollama does not require authentication, but the field cannot be left blank
+7. Set **Model name** to the model you pulled, for example `llama3.1`
+8. Set **API Key** to any non-empty value, for example `ollama`. Ollama doesn't require authentication, but the field can't be blank
 
-#### Example: LM Studio
+### Example: LM Studio
 
-1. [Download and LM Studio](https://lmstudio.ai/download)
-2. Pull a model. Either through the model search page on the left panel or the CLI. For example: `lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
-3. Start the LM Studio server. Either through the developer page on the left panel or through the CLI. for example `lms server start`
-   Note, you will have to configure it to use OpenAI compatible mode. Additionally, you may have to change the default context size to be over 100,000 tokens.
+1. [Download and install LM Studio](https://lmstudio.ai/download)
+2. Download a model from the model search page in the left panel, or with the CLI, for example `lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
+3. Start the LM Studio server from the developer page in the left panel, or with `lms server start`. Turn on OpenAI-compatible mode. If the context size is below 100,000 tokens, raise it above 100,000
 4. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 5. Set **Choose provider** to **Custom (OpenAI-compatible)**
 6. Set **Service Endpoint** to `http://localhost:1234/v1`
-7. Set **Model name** to the model you pulled (e.g. `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`)
-8. The **API Key** field can be set to any non-empty value (e.g. `lms`). LM Studio does not require authentication, but the field cannot be left blank
+7. Set **Model name** to the model you downloaded, for example `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
+8. Set **API Key** to any non-empty value, for example `lms`. LM Studio doesn't require authentication, but the field can't be blank
 
 
 > [!NOTE]
-> Response quality with local models depends on the model size and your hardware. Larger models generally produce better results but require more RAM and a capable GPU. The AI Assistant's tool-calling capabilities require a model that supports function calling in the OpenAI-compatible format.
+> Response quality with local models depends on the model size and your hardware. Larger models give better results and need more RAM and a capable GPU. The AI Assistant's tool calling requires a model that supports function calling in the OpenAI-compatible format.
 
 > [!TIP]
-> We recommend a model with a *minimum* of 30 billion parameters but ideally at least 100 billion parameters. For example, the Qwen3.5-122B-A10B model performed well in our internal testing.
+> Use a model with at least 30 billion parameters, and preferably 100 billion or more. Qwen3.5-122B-A10B performed well in internal testing.
 
-### Using Microsoft Foundry
+## Using Microsoft Foundry
 
-[Microsoft Foundry](https://ai.azure.com) (formerly Azure AI Foundry) lets you deploy OpenAI and Anthropic models in your Azure environment. These models are accessed through the **OpenAI** or **Anthropic** provider in Tabular Editor, not the **Azure OpenAI** provider, which is for classic Azure OpenAI resources.
+[Microsoft Foundry](https://ai.azure.com) (formerly Azure AI Foundry) deploys OpenAI and Anthropic models in your Azure environment. Connect to these models with the **OpenAI** or **Anthropic** provider in Tabular Editor.
 
 > [!IMPORTANT]
-> Do not use the **Azure OpenAI** provider for Microsoft Foundry models. The **Azure OpenAI** provider is only compatible with classic Azure OpenAI resources.
+> Don't use the **Azure OpenAI** provider for Microsoft Foundry models. It works only with classic Azure OpenAI resources that use the `api-version` query parameter.
 
-#### OpenAI models on Microsoft Foundry
+### OpenAI models on Microsoft Foundry
 
-To use an OpenAI model (such as GPT-4o or GPT-5.4-mini) deployed in Microsoft Foundry:
+Configure an OpenAI model deployed in Microsoft Foundry, such as GPT-4o or GPT-5.4-mini:
 
 1. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 2. Set **Choose provider** to **OpenAI**
-3. Set **Base URL** to your Foundry resource endpoint with `/openai/v1` appended. The URL follows one of these formats:
+3. Set **Base URL** to your Foundry resource endpoint with `/openai/v1` appended, in one of these formats:
    - `https://your-resource.services.ai.azure.com/openai/v1`
    - `https://your-resource.openai.azure.com/openai/v1`
 4. Enter your Foundry **API Key**
-5. Set **Model name** to your deployment name (e.g. `gpt-5.4-mini`)
+5. Set **Model name** to your deployment name, for example `gpt-5.4-mini`
 
 > [!NOTE]
-> The base URL is not shown directly in the Microsoft Foundry portal. The portal shows a **Target URI** that includes the full API path (e.g. `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`). For the base URL, use just `https://your-resource.services.ai.azure.com/openai/v1`.
+> The Microsoft Foundry portal doesn't show the base URL. It shows a **Target URI** with the full API path, for example `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`. For the base URL, use only `https://your-resource.services.ai.azure.com/openai/v1`.
 
-#### Anthropic models on Microsoft Foundry
+### Anthropic models on Microsoft Foundry
 
-To use an Anthropic model (such as Claude Sonnet 4.6) deployed in Microsoft Foundry:
+For an Anthropic model deployed in Microsoft Foundry, such as Claude Sonnet 4.6:
 
 1. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
 2. Set **Choose provider** to **Anthropic**
-3. Set **Base URL** to your Foundry resource endpoint with `/anthropic` appended, e.g. `https://your-resource.services.ai.azure.com/anthropic`
+3. Set **Base URL** to your Foundry resource endpoint with `/anthropic` appended, for example `https://your-resource.services.ai.azure.com/anthropic`
 4. Enter your Foundry **API Key**
-5. Set **Model name** to the model identifier (e.g. `claude-sonnet-4-6`)
+5. Set **Model name** to the model identifier, for example `claude-sonnet-4-6`
 
 > [!NOTE]
-> The portal shows a **Target URI** like `https://your-resource.services.ai.azure.com/anthropic/v1/messages`. For the base URL, use the part up to and including `/anthropic` only.
+> The portal shows a **Target URI** such as `https://your-resource.services.ai.azure.com/anthropic/v1/messages`. For the base URL, use the part up to and including `/anthropic`.
 
 ## Capabilities
 
-The AI Assistant has access to your model context and can perform the following actions:
+Within your [permission grants](#permissions-and-consent), the AI Assistant works with your model context:
 
-- **Model exploration**: Query model metadata including tables, columns, measures, relationships and their properties
-- **DAX query writing**: Generate DAX queries and execute them against your connected model, returning result sets directly in the chat
-- **C# script generation**: Create C# scripts for model modifications. The assistant either opens the script in a new editor window for you to run, or carries the change out itself, depending on your settings. See [Letting the assistant change your model](#letting-the-assistant-change-your-model). Model metadata changes can be undone with **Ctrl+Z**
-- **Best Practice Analyzer**: Run BPA analysis, view rule violations and create or modify BPA rules
-- **VertiPaq Analyzer**: Query memory usage statistics and column cardinality
-- **Document access**: Read and modify open documents such as DAX scripts and DAX queries
-- **Knowledge base search**: Search the embedded Tabular Editor documentation for answers
-- **UI navigation**: Generate `te3://` action links that open specific Tabular Editor dialogs and features
+- **Model exploration**: queries model metadata, including tables, columns, measures, relationships and their properties
+- **DAX query writing**: generates DAX queries, runs them against your connected model and returns the result sets in the chat
+- **C# script generation**: creates C# scripts for model changes. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model). **Ctrl+Z** undoes model metadata changes
+- **Best Practice Analyzer**: runs BPA analysis, lists rule violations and creates or modifies BPA rules
+- **VertiPaq Analyzer**: queries memory usage statistics and column cardinality
+- **Document access**: reads and modifies open documents: DAX queries, C# scripts and DAX scripts
+- **Knowledge base search**: searches the embedded Tabular Editor documentation
+- **UI navigation**: generates `te3://` action links that open specific Tabular Editor dialogs and features
 
-An agent connected over the [MCP server](xref:mcp-server) is offered the same capabilities, with one exception: UI navigation is chat-only. Both surfaces can change your model by running a C# script, and both do it as a single undoable step. What differs is how the change is put to you, and how permission is settled. See [What the MCP server shares, and what it does not](#what-the-mcp-server-shares-and-what-it-does-not).
+An agent connected over the [MCP server](xref:mcp-server) has the same capabilities except UI navigation. Both change your model by running a C# script as a single undoable step. They differ in how you review changes and grant permissions; see [MCP server and AI Assistant differences](#mcp-server-and-ai-assistant-differences).
 
 > [!NOTE]
-> Tools that require an active database connection, including DAX query execution and VertiPaq Analyzer statistics, are automatically hidden when working with a model file (for example a `.bim` or `.tmdl` folder) that is not connected to Analysis Services or Power BI. The assistant still writes DAX queries for you, but the **Execute** button on DAX query artifacts is disabled until a connection is established. VertiPaq Analyzer statistics remain available if they were previously loaded from a `.vpax` file.
+> When the model is loaded from a file, such as a `.bim` file or a TMDL folder, and isn't connected to Analysis Services or Power BI, tools that need a connection are hidden, including DAX query execution and VertiPaq Analyzer statistics. The assistant still writes DAX queries, but **Execute** on DAX query artifacts is disabled until you connect. VertiPaq Analyzer statistics loaded from a `.vpax` file stay available.
 
 ## Letting the assistant change your model
 
-By default the assistant writes a C# script and opens it in an editor window for you to read and run. From Tabular Editor 3.27.0 it can carry the change out itself instead.
+By default, the assistant writes a C# script and opens it in an editor window, where you read and run it. It can also run the script itself when you select **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant > Preferences**.
 
-Tick **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant**. The setting is off until you turn it on, and the checkbox is unavailable until **Model metadata** is set to **Write** under **Tools > Preferences > AI Features > Permissions**. 
+The setting is off by default and unavailable until **Model metadata** is set to **Read/Write** under **Tools > Preferences > AI Features > Permissions**.
 
 ### What happens when the assistant runs a script
 
-- **You see the change first.** With **Preview changes** on, which is the default, the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before anything stands. Choosing **Cancel** puts the model back and tells the assistant you rejected the change, so it asks what to do differently rather than trying the same thing again. With the preference off, the change is applied without a dialog.
-- **One undo step.** Everything the script did collapses into a single entry named *C# script (AI Assistant)*. One **Ctrl+Z** puts the model back.
-- **All or nothing.** A script that fails part way through leaves the model untouched, and the assistant reports the error rather than leaving you with half an edit.
-- **Only model work runs this way.** A script that reaches for files, the network or an external assembly is never executed for you. It comes back as a script artifact carrying an **Unsafe** badge with **Execute** disabled, and the assistant tells you what it used.
+- If **Preview changes** is on (the default), the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before the changes are applied. **Cancel** reverts them and reports the rejection to the assistant. If **Preview changes** is off, the changes are applied without a dialog.
+- The script's changes are one undo entry, **C# script (AI Assistant)**. **Ctrl+Z** undoes the whole script.
+- If the script fails part-way through, the model is left unchanged and the assistant reports the error.
+- A script that accesses files, the network or external assemblies doesn't run. It opens as a script artifact with an **Unsafe** badge and **Execute** disabled, and the assistant's reply names what the script used.
 
-Asking for a script rather than for the change still gives you a script. *Write me a script that renames every measure to sentence case* opens a script document for you to run yourself, whatever this setting says.
+If you ask for a script, for example "Write me a script that renames every measure to sentence case", the assistant opens it as a script document that you run yourself, even with this setting on.
 
-Administrators can prevent this entirely with the `DisableCSharpScripts` [policy](xref:policies), which also stops the assistant writing scripts for you to run.
+The `DisableCSharpScripts` [policy](xref:policies) applies in every edition and turns off both direct execution and the scripts the assistant hands you to run.
 
-They can also allow scripting but keep it inside the model, with the `BlockUnsafeScripts` policy. Under it a script that reaches for files, the network or an external assembly is refused outright rather than handed to you for review, wherever it came from. See [Administrator policies](xref:csharp-scripts#administrator-policies).
+The `BlockUnsafeScripts` policy requires Enterprise Edition and applies to every script in Tabular Editor, including scripts run over the [MCP server](xref:mcp-server). When it's set, the assistant can still write a script that accesses files, the network or external assemblies, but the script doesn't run and no artifact opens for review. See [Administrator policies](xref:csharp-scripts#administrator-policies).
 
 ## Conversations
 
-The AI Assistant supports multiple simultaneous conversations. Each conversation maintains its own message history and context.
+The AI Assistant supports multiple simultaneous conversations, each with its own message history and context.
 
-- Conversations persist across sessions, stored locally in `%LocalAppData%\TabularEditor3\AI\Conversations\`
-- Titles are generated automatically after the first exchange. You can rename conversations manually
-- **Auto-compaction**: when the conversation approaches the context window limit, older messages are automatically summarized to free up space. A snapshot of the full conversation is archived before compaction. The threshold is set under [Context Compaction](#context-compaction), and is a percentage of the model's own context window
+- conversations persist across sessions and are stored locally in `%LocalAppData%\TabularEditor3\AI\Conversations\`
+- titles are generated automatically after the first exchange, and you can rename a conversation
+- **Auto-compaction**: when a conversation approaches the context window limit, older messages are summarized to free up space, after a snapshot of the full conversation is archived. The threshold is a percentage of the model's own context window, set under [Context compaction](#context-compaction)
 
 ### Deleting a conversation
 
-**Delete conversation** sits at the left-hand end of the AI Assistant toolbar, next to **New conversation**. It asks for confirmation first.
-
-The conversation and its history are removed from disk and cannot be recovered. To hide the AI Assistant panel instead of deleting anything, use the close button on the panel's title bar, or **View > AI Assistant**.
+**Delete conversation** is at the left end of the AI Assistant toolbar, next to **New conversation**. After you confirm the prompt, the conversation and its history are removed from disk and can't be recovered. The close button on the panel's title bar, or **View > AI Assistant**, hides the panel without deleting anything.
 
 ## Artifacts
 
-When the AI Assistant generates code, it creates **artifacts** that open directly in editor windows:
+Code that the AI Assistant generates opens as an *artifact* in an editor window:
 
-- **C# Scripts**: Open in a new C# script editor with syntax highlighting, compilation and execution support
-- **DAX Queries**: Open in a new DAX query editor with syntax highlighting and execution support
+- **C# scripts**: a C# script editor with syntax highlighting, compilation and execution
+- **DAX queries**: a DAX query editor with syntax highlighting and execution
 
-
-Artifacts stream in real-time as the AI generates them. C# script artifacts include safety analysis that flags potentially unsafe code (e.g. file system access or network operations).
+Artifacts stream in as the AI generates them, and C# script artifacts include a safety analysis that flags unsafe code, such as file system access or network operations.
 
 ![The AI Assistant pane showing a generated C# script artifact with an Execute button, and the assistant's explanation of what the script does and the case-sensitivity caveat it comes with](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
-When you execute a C# script from the chat, the **Script Preview** dialog shows a side-by-side diff of all model metadata changes made by the script. You can accept the changes or revert them. See [Running scripts with preview](xref:csharp-scripts#run-c-scripts-with-preview) for details.
+If **Preview changes** is on, running a C# script from the chat opens the **Script Preview** dialog with a side-by-side diff of all model metadata changes the script made, where you accept or revert the changes. See [Running scripts with preview](xref:csharp-scripts#run-c-scripts-with-preview).
 
 ![The Script Preview - Model Changes dialog, the model before and after side by side, with the Internet Total Freight measure's format string changed and a description and a display folder added, each marked against its original](~/content/assets/images/preview-script-changes.png)
 
 ## Custom Instructions
 
-Custom Instructions are instruction sets that guide the AI Assistant's behavior for specific tasks. The assistant is given a list of every available instruction and only loads the full text of the ones it judges relevant to your request. Once an instruction has been loaded it stays in effect for the rest of the conversation.
-
-> [!IMPORTANT]
-> The `description` is now the only thing the assistant reads when deciding if an instruction should be used, so keep yours accurate and specific.
+*Custom Instructions* are instruction sets that guide the AI Assistant on specific tasks. The assistant receives a list of every available instruction with its `description`, and loads the full text only of those relevant to your request, so keep descriptions accurate and specific. A loaded instruction stays in effect for the rest of the conversation.
 
 ### Built-in Custom Instructions
 
-The AI Assistant includes the following built-in Custom Instructions:
+The AI Assistant includes these Custom Instructions:
 
 | Custom Instruction | Invoke with | Covers |
 | -- | -- | -- |
@@ -288,19 +267,17 @@ The AI Assistant includes the following built-in Custom Instructions:
 | DAX User-Defined Functions | `/udf` | Writing DAX UDFs: syntax, `VAL`/`EXPR` parameter modes, type hints, namespaces, DaxLib |
 | Best Practice Analyzer | `/bpa` | Reviewing violations and writing custom rules as LINQ Dynamic expressions |
 
-Custom Instructions are shown as indicators above assistant responses, indicating which instructions influenced the response. You can toggle this display in **Tools > Preferences > AI Features > AI Assistant > Preferences > Show custom instructions indicator**.
+With **Show custom instructions indicator** selected under **Tools > Preferences > AI Features > AI Assistant > Preferences**, indicators above each response show which instructions influenced it.
 
 ### Invoking a Custom Instruction
 
-Type `/` to browse available custom instructions, or type the full `/instruction-id` at the start of your message to explicitly invoke a specific instruction. For example, `/dax-querying` forces the DAX querying instruction regardless of message content. If you type nothing after the `/id`, the assistant is just asked to use that instruction.
-
-Explicit invocation is still worth using when you want to be certain the instruction is applied. An explicitly invoked instruction stays in effect for the rest of the conversation, just as an automatically loaded one does.
+Type `/` to browse available Custom Instructions. Start your message with an instruction's `/id` to load it regardless of the message content; for example, `/dax-querying` loads the DAX querying instruction. A `/id` with no message loads the instruction without making a request. An explicitly loaded instruction stays in effect for the rest of the conversation, like one the assistant loads itself.
 
 ### Add your own Custom Instructions
 
-You can create custom instructions by placing `.md` files in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. The folder is created the first time the AI Assistant runs, with an `example.md` file in it to copy from. Use **Open Custom Instructions Folder** on the AI Assistant toolbar to get there.
+Create a Custom Instruction by placing a `.md` file in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. The folder is created the first time the AI Assistant runs, with an `example.md` file in it to copy from. **Open Custom Instructions Folder** on the AI Assistant toolbar opens it.
 
-Each file may open with YAML frontmatter defining the instruction metadata. None of it is required:
+The YAML frontmatter that defines the instruction metadata is optional:
 
 ```yaml
 ---
@@ -325,152 +302,152 @@ injected into the AI's system prompt when the instruction is activated.
 | `always_inject` | No | false | If true, always included in the system prompt. Such an instruction is not offered in `/` autocomplete |
 | `hidden` | No | false | If true, not shown in `/command` autocomplete |
 
-Custom Instructions with an `id` matching a built-in instruction will override the built-in version.
+A Custom Instruction whose `id` matches a built-in instruction overrides the built-in version.
 
-Notes on how files are read:
+Tabular Editor reads the files as follows:
 
-- Frontmatter must start with `---` on the very first line of the file and end with a `---` line. If it does not, or if the YAML cannot be parsed, the whole file is treated as instruction content and every default above applies
-- Keys that are not in the table above are ignored. This is what makes a leftover `triggers:` section harmless
+- frontmatter must start with `---` on the very first line of the file and end with a `---` line. If it doesn't, or if the YAML can't be parsed, the whole file is treated as instruction content and every default above applies
+- keys that aren't in the table above are ignored. Files from earlier versions that still have a `triggers:` section load unchanged
 - `{{version}}` anywhere in the body is replaced with the Tabular Editor AI component's version
-- Only `.md` files directly in the folder are read; subfolders are not searched
+- only `.md` files directly in the folder are read; subfolders aren't searched
 
 ### Custom Instructions from your organization
 
-An administrator can publish a folder of Custom Instructions for everyone, with the `AiCustomInstructionsPath` [policy](xref:policies). It can be a read-only network share. Those instructions load for every user in addition to the built-in ones, and they are used exactly like any other: offered in `/` autocomplete, chosen by their description, invoked by `/id`.
+An administrator can publish a folder of Custom Instructions for everyone with the `AiCustomInstructionsPath` [policy](xref:policies), and the folder can be a read-only network share. Those instructions load for every user in addition to the built-in ones and work like other instructions: offered in `/` autocomplete, chosen by their description, invoked by `/id`.
 
-Where the same `id` exists in more than one place, the one that wins is:
+Where the same `id` exists in more than one place, precedence is:
 
-1. Your organization's folder
-2. Your own folder
-3. The built-in instructions
+1. your organization's folder
+2. your own folder
+3. the built-in instructions
 
-So an organization instruction overrides both a built-in one and a user's own file of the same name. A separate policy, `DisableUserCustomInstructions`, makes Tabular Editor ignore the instructions in your own folder altogether and disables **Open Custom Instructions Folder**; the built-in and organization instructions keep loading.
-
-Both policies require Tabular Editor 3 Enterprise Edition.
+A separate policy, `DisableUserCustomInstructions`, makes Tabular Editor ignore the instructions in your own folder and disables **Open Custom Instructions Folder**; the built-in and organization instructions still load. Both policies require Tabular Editor 3 Enterprise Edition.
 
 ## Permissions and consent
 
-What the AI Assistant may touch is governed by *five resources*, each carrying one access level. The same five grants govern the [MCP server](xref:mcp-server), so there is one place to look and one place to change your mind.
+Set an access level for each resource to control what the AI Assistant can access, and the [MCP server](xref:mcp-server) uses the same settings.
 
 | Resource | What it covers | Levels | Default |
 | -- | -- | -- | -- |
 | **Model metadata** | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics | Deny / Read / Write | **Read** |
 | **Model data** | Data values from your model, such as DAX query results. Requires a live connection | Deny / Read | **Deny** |
 | **Best Practice Analyzer** | Read lists rules and runs the analysis; Write adds or modifies rules | Deny / Read / Write | **Read** |
-| **Documents** | Your open document editors: C# scripts and DAX queries. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | **Write** |
+| **Documents** | Your open documents: DAX queries, C# scripts and DAX scripts. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | **Write** |
 | **Macros** | Your macro library. Read lists and reads macros; Write is reserved for future macro-editing tools | Deny / Read / Write | **Write** |
 
-A **Write** grant covers Read, so there is no need to grant both. **Model data** is read-only by nature (the assistant can query your data but has no way to write values back), so it offers only Deny and Read.
+**Write** (labeled **Read/Write** in the dropdowns) includes Read.
 
 > [!NOTE]
-> **Model data** is the one resource denied by default. Metadata describes your model; data *is* your model's contents, so sending it to an AI provider is a decision worth making deliberately rather than inheriting from a default.
+> Granting **Model data** sends data values from your model to your AI provider.
 
-Three grants are worth a closer look:
+Some grants depend on others:
 
-- **Model metadata > Write** lets the assistant change your model. On its own, that means writing a C# script and handing it to you to run. It is also the grant that makes [direct execution](#letting-the-assistant-change-your-model) possible, but the assistant only runs scripts itself once you have turned that on separately. Either way, only scripts that are statically determined to be safe ever run, and a script that reaches outside the model, to the file system or the network, is never executed for you.
-- **Best Practice Analyzer > Read** lets the assistant run the analysis, but running it also needs **Model metadata > Read**, since the analysis reads the model.
-- **Model data > Read** is not sufficient on its own to run a DAX query: that needs **Model metadata > Read** as well, because a query can read metadata through `INFO` functions, DMVs and the column names in its own result.
+- **Model metadata > Write** is required for [direct execution](#letting-the-assistant-change-your-model), which you turn on separately.
+- Running the Best Practice Analyzer needs **Model metadata > Read** in addition to **Best Practice Analyzer > Read**.
+- Running a DAX query needs **Model metadata > Read** in addition to **Model data > Read**. A query can read metadata through `INFO` functions, DMVs and the column names in its result.
 
 ### Setting the permission grants
 
-Open **Tools > Preferences > AI Features > Permissions**. Each resource has a dropdown carrying its available levels.
+Open **Tools > Preferences > AI Features > Permissions**, where each resource has a dropdown with its available levels.
 
 ![AI Features > Permissions preferences, one dropdown per resource at its default](~/content/assets/images/pref-ai-permissions.png)
 
-There is no separate "ask me" level. **Deny** is what asking looks like: in the chat, a resource you have not granted produces a permission card at the moment it is needed. Over MCP, where there is nobody to ask, a denied resource's tools are unavailable.
+The chat has no separate "ask" level and shows a [permission card](#permission-cards-in-the-chat) when it needs a resource set to **Deny**.
 
 > [!NOTE]
-> If you used the AI Assistant before 3.27.0 you will notice fewer prompts. Model metadata, Documents and Macros now start at Read or above, so the chat no longer asks for them. Only DAX query results and Best Practice Analyzer rule edits still raise a card out of the box. Set a resource to **Deny** to get its prompt back.
+> From 3.27.0, **Model metadata**, **Documents** and **Macros** default to Read or higher, and the chat no longer prompts for them. By default, only DAX query results and Best Practice Analyzer rule edits show a card. Set a resource to **Deny** to get its prompt back.
 
 > [!NOTE]
-> In the Enterprise Edition, IT administrators can set policies that determine these permissions. See @policies.
+> In Enterprise Edition, administrators can cap these permissions by policy. See @policies.
 
 ### Permission cards in the chat
 
-When the assistant needs a resource your standing grant does not cover, a **Permission Required** card appears in the conversation, naming what it wants to do, for instance "The AI would like to access the metadata of your semantic model", or the DAX query it proposes to run.
+When the assistant needs a resource your standing grant doesn't cover, a **Permission Required** card appears in the conversation. The card names what the assistant wants to do, for example "The AI would like to access the metadata of your semantic model", or shows the DAX query it proposes to run.
 
 ![A Permission Required card in the chat, naming the DAX query the assistant wants to run, with Allow, Allow for session, Allow for this model, Always allow and Deny buttons](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
 
 | Button | What it does |
 | -- | -- |
-| **Allow** | This turn only. The assistant may repeat the same request while it finishes what you asked, and nothing is remembered afterwards |
-| **Allow for session** | Until Tabular Editor is restarted. Held in memory, never written to disk |
-| **Allow for this model** | Recorded in the model's [user options](xref:user-options) file, so it applies the next time you open this model. Offered for **Model metadata** and **Model data** only, and only while a model is loaded |
+| **Allow** | Applies to this turn only. The assistant can repeat the same request while it finishes your task, and nothing is remembered afterwards |
+| **Allow for session** | Applies until Tabular Editor is restarted. The grant is held in memory and never written to disk |
+| **Allow for this model** | Recorded in the model's [user options](xref:user-options) file and applied the next time you open this model. Offered for **Model metadata** and **Model data** only, and only while a model is loaded |
 | **Always allow** | Raises the standing grant on the Permissions page, for every model and every session |
-| **Deny** | Refuses this request. The assistant carries on without that access and asks again next time |
+| **Deny** | Denies this request. The assistant continues without that access, and the card appears again the next time it needs it |
 
-**Always allow** only ever raises a grant, never lowers one: allowing a read cannot narrow a Write grant you already had.
-
-You do not have to answer the card at all. See [Stopping a turn while permission is pending](#stopping-a-turn-while-permission-is-pending) below.
-
-### What the MCP server shares, and what it does not
-
-The [MCP server](xref:mcp-server) reads the *same five grants*, but it does not use the card flow. An agent connecting over MCP is unattended, so there is nobody to prompt:
-
-- Grants are *snapshotted when the server starts* and govern its tool surface for the server's lifetime. Changing a grant while the server is running has no effect until you restart it.
-- Only the *global* grants are read. A grant you gave with **Allow for this model**, and a session grant, apply to the chat alone and never reach an MCP agent.
-- A denied resource's tools are not offered to the agent at all, rather than being offered and then refused.
-
-### Withdrawing permission
-
-Set the resource back to **Deny** on the Permissions page. The chat asks again the next time it needs that resource; a running MCP server keeps the access it started with until you restart it.
-
-Lowering a global grant does not clear a per-model grant. To withdraw one of those, delete the model's `.tmuo` file, or the `Permissions` entry within it. See details in @user-options.
-
-### Audit record
-
-On Tabular Editor 3 Enterprise Edition, a local record is kept of what the AI Assistant and the [MCP server](xref:mcp-server) did: which permissions were asked for and how you answered, which tools ran and whether each one succeeded, failed or was refused, and the full text of any C# script that was run or handed to you for review. Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** takes you to the files.
-
-On Desktop and Business Edition, and before a license is activated, nothing is recorded, no folder is created and the button is not shown.
-
-See @ai-audit-log for what each record holds, where the files live and the policies that redirect them.
+**Always allow** never lowers an existing grant; allowing a read on a resource at Write leaves it at Write.
 
 ### Stopping a turn while permission is pending
 
-A **Permission Required** card waits for an answer before the assistant can carry on. You do not have to answer it: pressing **Stop** ends the turn, removes the card and treats the request as denied. The panel returns to its normal state and you can carry on in the same conversation with a new message.
+The turn pauses until you answer a **Permission Required** card. **Stop** ends the turn without an answer, removes the card and counts the request as denied. Send a new message to continue the conversation.
+
+### MCP server and AI Assistant differences
+
+The [MCP server](xref:mcp-server) uses the same five grants but shows no permission cards:
+
+- grants are read when the server starts and apply until it stops, so a changed grant takes effect only after you restart the server
+- only global grants apply. Grants given with **Allow for this model** or **Allow for session** apply to the chat only
+- a denied resource's tools aren't in the agent's tool list
+
+### Withdrawing permission
+
+Set a resource back to **Deny** on the Permissions page to withdraw its grant. The chat then shows a permission card the next time it needs that resource.
+
+Lowering a global grant doesn't clear a per-model grant. Delete the model's `.tmuo` file, or the `Permissions` entry in it, to withdraw per-model grants. See @user-options.
+
+### Audit record
+
+In Enterprise Edition, including Consultancy and Trial licenses, Tabular Editor writes a local log of AI Assistant and [MCP server](xref:mcp-server) activity. It records:
+
+- which permissions were requested and how you answered
+- which tools ran and whether each one succeeded, failed or was blocked
+- the full text of any C# script the assistant or an MCP agent ran, or handed to you for review
+
+Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
+
+Without an Enterprise license, and before a license is activated, nothing is recorded, no folder is created and the button isn't shown. See @ai-audit-log for what each record holds, where the files are stored and the policies that redirect them.
 
 ## Preferences
 
 Configure AI Assistant display and behavior options under **Tools > Preferences > AI Features > AI Assistant > Preferences**.
 
-### Chat Display
+### Chat display
 
 | Preference | Default | Description |
 | -- | -- | -- |
-| Show selection context indicator | true | Display the currently selected model object in the chat |
-| Show custom instructions indicator | true | Show Custom Instruction indicators above assistant responses |
-| Show knowledge base search indicator | true | Display progress when searching the knowledge base |
+| Show selection context indicator | Off | Display the currently selected model object in the chat |
+| Show custom instructions indicator | Off | Show Custom Instruction indicators above assistant responses |
+| Show knowledge base search indicator | Off | Display progress when searching the knowledge base |
 
-### Context Compaction
-
-| Preference | Default | Description |
-| -- | -- | -- |
-| Auto compact | true | Automatically summarize old messages when approaching the context limit |
-| Auto compact threshold % | 80 | Percentage of the model's own context window at which auto-compaction is triggered. Values outside 50-100 have no additional effect |
-
-### C# Script
+### Context compaction
 
 | Preference | Default | Description |
 | -- | -- | -- |
-| Allow AI assistant to run C# scripts directly | false | Let the assistant carry out model changes itself instead of opening a script for you to run. Unavailable until **Model metadata** is set to **Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). See [Letting the assistant change your model](#letting-the-assistant-change-your-model) |
-| Preview changes | true | Show the preview changes dialog when executing AI-generated C# scripts from the chat |
+| Auto compact | On | Automatically summarize old messages when approaching the context limit |
+| Auto compact threshold % | 80 | Percentage of the model's own context window at which auto-compaction is triggered. The field accepts 25 to 100. Values below 50 act as 50 and values above 90 act as 90 |
 
-Two further settings sit on the **AI Features** page itself, above **AI Assistant**, because they apply to the MCP server as well: *Check for knowledge base updates on startup*, and the **Open audit folder** button. See @preferences.
+### C# script
 
-![The AI Assistant preferences page, with the three chat display indicators, Auto compact and its threshold, and the two C# script settings: Allow AI assistant to run C# scripts directly, cleared, and Preview changes, ticked](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+| Preference | Default | Description |
+| -- | -- | -- |
+| Allow AI assistant to run C# scripts directly | Off | Lets the assistant run its C# scripts itself. When off, the assistant opens each script and you run it. Unavailable until **Model metadata** is set to **Read/Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). See [Letting the assistant change your model](#letting-the-assistant-change-your-model) |
+| Preview changes | On | Show the preview changes dialog when executing AI-generated C# scripts from the chat |
 
-## Token Usage
+**Check for knowledge base updates on startup** and the **Open audit folder** button are on the **AI Features** page, above **AI Assistant**, and both also apply to the MCP server. See @preferences.
 
-Each message to the AI Assistant consumes input tokens. The token cost of a single message depends on what context is included:
+![The AI Assistant preferences page, with the three chat display indicators cleared (the default), Auto compact selected with a threshold of 80, Allow AI assistant to run C# scripts directly cleared and Preview changes selected](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
-- **System prompt and custom instructions**: Sent with every message. Typically 5,000 to 15,000 tokens depending on which custom instructions are active.
-- **Model metadata**: when the assistant needs to understand your model, it retrieves metadata through tool calls. To stay within provider rate limits on large models, the assistant uses a progressive-disclosure approach. That is, it first fetches a lightweight overview (table and measure names, relationships), then searches for relevant objects by name, description or DAX expression and only drills into full details for the specific tables or objects that the question requires. Tool results that would otherwise be very large are truncated with guidance on how the assistant can retrieve the remaining data.
+## Token usage
 
-### Token Counter
+Each message to the AI Assistant consumes input tokens. The token cost of a single message depends on the context it includes:
 
-The token counter sits in the status strip above the message box, next to the [active model indicator](#choosing-a-model). The bar reads *used* / *total* in thousands of tokens and is colored green, amber or red as the context fills up. A `±` in front of the figure means an exact count is not available yet.
+- **System prompt and Custom Instructions**: sent with every message, typically 5,000 to 15,000 tokens depending on which Custom Instructions are active
+- **Model metadata**: retrieved through tool calls, in stages. The assistant first fetches a lightweight overview (table and measure names, relationships), then searches for relevant objects by name, description or DAX expression, and retrieves full details only for the tables or objects the question requires. A very large tool result is truncated, with guidance on how the assistant can retrieve the rest
 
-Hover over it for a breakdown in three labeled sections:
+### Token counter
+
+The token counter is in the status strip above the message box, next to the [active model indicator](#choosing-a-model). The bar reads used / total in thousands of tokens and is colored green, amber or red as the context fills up. A `±` in front of the figure means an exact count isn't available yet.
+
+Hover over the counter to see a breakdown:
 
 | Section | What it covers |
 | -- | -- |
@@ -478,44 +455,40 @@ Hover over it for a breakdown in three labeled sections:
 | **This conversation (billed)** | The same four figures accumulated across every request in the conversation, tool round-trips included |
 | **Context** | Tokens currently in the context window, against the window's real size |
 
-A line reads, for example, `37,588 input + 131,744 cached · write 37,558 · output 2,866`. The cache parts are left out for providers that do not support prompt caching, and a section is left out entirely when it has nothing to report.
+A line reads, for example, `37,588 input + 131,744 cached · write 37,558 · output 2,866`. The cache parts are left out for providers that don't support prompt caching, and a section is left out when it has nothing to report.
 
 > [!TIP]
-> Separating the last turn from the conversation total is what tells you whether a short follow-up question was actually expensive. A large **This conversation (billed)** figure next to a small **Last turn** figure is normal in a long conversation.
+> Compare **Last turn** with **This conversation (billed)** to see what a single question cost. In a long conversation, a large **This conversation (billed)** figure next to a small **Last turn** figure is normal.
 
 ### Context window
 
-The context usage bar, the auto-compaction point and the maximum length of a single reply all follow the *real context window of the model in use*, not one fixed figure. A model with a one-million-token window is measured against a million tokens.
+The context usage bar, the auto-compaction point and the maximum length of a single reply use the selected model's context window. For example, a model with a one-million-token window is measured against a million tokens. If the model's window isn't known (an Azure OpenAI or Custom deployment name, or a machine where the model catalog has never been retrieved), Tabular Editor uses 200,000 tokens.
 
-Where the model's real window is not known (an Azure OpenAI or Custom deployment name, or a machine where the model catalog has never been retrieved), Tabular Editor falls back to 200,000 tokens.
+### Reducing token usage
 
-### Reducing Token Usage
-
-Select specific objects in the **TOM Explorer** before asking your question. When objects are selected, the assistant scopes its context to those objects instead of retrieving metadata for the entire model. This is the most effective way to reduce both token usage and API cost.
+Select specific objects in the **TOM Explorer** before asking your question. The assistant then scopes its context to the selected objects and doesn't retrieve metadata for the entire model, which reduces both token usage and API cost the most.
 
 Other ways to reduce token usage:
 
-- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model. A vague prompt such as *"Set display folders on all measures"* forces the assistant to retrieve metadata for the entire model. A specific prompt such as *"Set display folders on the measures I have selected"* limits the context to the current selection and uses far fewer tokens
-- Start new conversations when switching topics to avoid accumulating long conversation histories
+- Ask focused questions about specific tables, measures or columns. A vague prompt such as "Set display folders on all measures" makes the assistant retrieve metadata for the entire model. A specific prompt such as "Set display folders on the measures I have selected" limits the context to the current selection and uses far fewer tokens
+- Start a new conversation when you switch topics, so long histories don't accumulate
 - Use a smaller or less expensive model for exploratory questions
 
 ## Limitations
 
-- Requires a user-provided API key. No built-in API key is included
-- AI responses depend on the selected model and provider capabilities
-- The usable context window is the selected model's own; where Tabular Editor cannot determine it, 200,000 tokens is assumed
-- The AI Assistant is not a replacement for understanding DAX and semantic model design fundamentals
-- Response quality varies by provider and model selection
-- The AI Assistant cannot connect to external files, services or search the web
-- The AI Assistant cannot connect to external MCP servers to extend its own tools. This is about the chat only: Tabular Editor 3 itself acts as an MCP server, so your own agent can work on the open model. See @mcp-server
-- The AI Assistant cannot connect to a different model from within the chat. Use the Tabular Editor user interface to change model connections
-- The AI Assistant cannot manage preferences
+- requires your own API key; no API key is built in
+- response quality depends on the provider and model you select
+- the AI Assistant doesn't replace knowledge of DAX and semantic model design fundamentals
+- the AI Assistant can't access external files or services, or search the web
+- the AI Assistant can't connect to external MCP servers to extend its own tools. To use your own agent with Tabular Editor 3, see @mcp-server
+- the AI Assistant can't connect to a different model from the chat. Change model connections in the Tabular Editor user interface
+- the AI Assistant can't manage preferences
 
 ## Disabling the AI Assistant
 
-The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. You can modify an existing Tabular Editor 3 installation, to include or exclude the AI Assistant component, by running the Tabular Editor 3 installer again. If using the portable build of Tabular Editor 3, you can remove the AI Assistant component by deleting the file named `TabularEditor3.AI.dll` from the installation directory.
+The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again to include or exclude it in an existing installation. In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
 
-The AI Assistant and the MCP server ship in the same component, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off the chat while keeping the MCP server, leave the component in place and use the `DisableAiChat` policy.
+The same component contains the MCP server, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off only the chat, keep the component and set the `DisableAiChat` policy.
 
 > [!NOTE]
-> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3, the MCP server included, by specifying the [`DisableAi` policy](xref:policies). `DisableAiChat` turns off the chat alone, and `DisableMcpServer` the MCP server alone. See @policies.
+> Whether or not the component is installed, a system administrator can turn off all AI functionality in Tabular Editor 3, the MCP server included, with the [`DisableAi` policy](xref:policies). `DisableMcpServer` turns off the MCP server alone. See @policies.
