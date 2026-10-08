@@ -1,8 +1,8 @@
 ---
 uid: direct-lake-guidance
 title: Guía de Direct Lake
-author: Daniel Otykier
-updated: 2026-09-23
+author: Morten Lønskov
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,7 +46,7 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 
 Sin embargo, igual que con Direct Lake en SQL, aún hay algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las principales limitaciones se incluyen:
 
-- Las columnas calculadas no se admiten en ninguno de los dos modos de Direct Lake.
+- Calculated columns on Direct Lake on OneLake tables are supported in preview, but only in _user context_: the value is evaluated at query time for the current user rather than materialized. This means a Direct Lake calculated column respects row-level and object-level security, but it cannot be used as a relationship key and does not respond to report filters or slicers. Use a measure instead when the result must react to filter context. Direct Lake on SQL still does not support calculated columns at all. See [Develop Direct Lake semantic models](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop) for details.
 - Las tablas calculadas no pueden hacer referencia a columnas ni tablas en el modo de almacenamiento Direct Lake. Se admiten los grupos de cálculo, los parámetros de tipo what-if y los parámetros de campo, porque crean tablas calculadas implícitas que no hacen referencia a columnas de Direct Lake.
 - Las vistas SQL no materializadas no se admiten como Data sources para tablas de Direct Lake en OneLake. Usa vistas materializadas o asegúrate de que la tabla Delta de origen contenga las columnas que necesitas.
 - Los accesos directos en un Lakehouse no se admiten como Data sources durante la versión preliminar pública de Direct Lake en OneLake.
@@ -55,7 +55,7 @@ Para obtener una lista completa y actualizada de las limitaciones, consulta la [
 
 ### Modelos compuestos
 
-Una forma de sortear la limitación de las columnas calculadas es crear un **modelo compuesto** combinando tablas de Direct Lake con tablas en modo Import. Esto se admite con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente mantienes las tablas de hechos más grandes en modo Direct Lake y usas el modo Import para las tablas de dimensiones más pequeñas en las que necesitas columnas calculadas o agrupaciones personalizadas.
+If you need a calculated column that is materialized, usable as a relationship key, or responsive to report filters and slicers, the preview calculated column feature above is not enough. In that case, create a **composite model** by combining Direct Lake tables with Import tables. Esto se admite con Direct Lake en OneLake, pero no con Direct Lake en SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need full calculated columns or custom groupings.
 
 Direct Lake en OneLake también admite la combinación con tablas DirectQuery mediante herramientas basadas en XMLA, como Tabular Editor. Las tablas en modo Import se pueden agregar mediante el modelado web de Power BI, Power BI Desktop (edición en vivo) o mediante herramientas XMLA.
 
