@@ -4,9 +4,10 @@
 Generate staticwebapp.config.json for Azure Static Web Apps.
 
 This script creates server-side redirects for:
-1. Root URLs (/, /index.html) → /en/ (301)
+1. Root URLs (/, /index.html) → /en/index.html (301)
 2. Release notes aliases → /en/references/release-notes/{latest}.html (302, auto-detected)
 3. Legacy shortcut URLs (/tmdl, /roslyn, etc.) → /en/... (301)
+4. Folder URLs (/en/features, /en/features/) → /en/features/index.html (301), except EMBEDDED_FOLDERS
 
 Note: Legacy directory wildcards (/features/*, etc.) are NOT handled here.
 They fall through to 404.html which performs client-side meta-refresh redirects.
@@ -30,6 +31,11 @@ from config_loader import get_legacy_shortcuts, get_default_language, get_client
 # Load from centralized config
 LEGACY_SHORTCUTS = get_legacy_shortcuts()
 DEFAULT_LANGUAGE = get_default_language()
+
+# Loaded by the TE3 embedded browser (TE3 GetStartedView.cs) at the folder URL with a query string
+# (e.g. getting-started/app?style=..&edition=..). SWA redirects drop the query string.
+# See also copy_as_is_dirs in generate_lang_prefix_redirect_pages.
+EMBEDDED_FOLDERS = ("whats-new", "getting-started/app")
 
 
 def generate_client_redirect_pages(site_dir: str = "_site") -> int:
@@ -85,7 +91,7 @@ def generate_lang_prefix_redirect_pages(site_dir: str = "_site", default_lang: s
 
     # Directories whose files should be copied as-is (not redirected).
     # Old clients load /whats-new/index.html directly inside an embedded browser;
-    # a meta-refresh redirect would open the system browser instead.
+    # a meta-refresh redirect would open the system browser instead. See also EMBEDDED_FOLDERS.
     copy_as_is_dirs = {"whats-new"}
 
     count = 0
@@ -149,6 +155,21 @@ def find_latest_release_notes(site_dir: str = "_site", default_lang: str = "en")
     return versioned[0][1]
 
 
+def find_index_folders(site_dir: str, languages: list[str]) -> list[str]:
+    """Return URL paths (no trailing slash) of every folder under /{lang}/ that has an index.html."""
+    folders: list[str] = []
+    for lang in languages:
+        lang_dir = Path(site_dir) / lang
+        if not lang_dir.exists():
+            continue
+        for index_file in lang_dir.rglob("index.html"):
+            rel = index_file.parent.relative_to(lang_dir).as_posix()
+            if any(rel == f or rel.startswith(f"{f}/") for f in EMBEDDED_FOLDERS):
+                continue
+            folders.append(f"/{lang}" if rel == "." else f"/{lang}/{rel}")
+    return sorted(folders)
+
+
 def generate_config(languages: list[str], default_lang: str | None = None, site_dir: str = "_site") -> dict[str, Any]:
     """Generate the staticwebapp.config.json content."""
     if default_lang is None:
@@ -165,12 +186,12 @@ def generate_config(languages: list[str], default_lang: str | None = None, site_
     # 1. Root redirects (301 for SEO)
     routes.append({
         "route": "/",
-        "redirect": f"/{default_lang}/",
+        "redirect": f"/{default_lang}/index.html",
         "statusCode": 301
     })
     routes.append({
         "route": "/index.html",
-        "redirect": f"/{default_lang}/",
+        "redirect": f"/{default_lang}/index.html",
         "statusCode": 301
     })
 
@@ -203,7 +224,18 @@ def generate_config(languages: list[str], default_lang: str | None = None, site_
             "statusCode": 301
         })
     
-    # 4. Directory wildcard migration (fallback to 404.html)
+    # 4. Folder URLs -> explicit index.html (301)
+    # SWA serves /x/index.html at /x without redirecting, so the page's relative asset
+    # paths (../logo.svg, CSS, JS) resolve one level too high and 404. An exact route
+    # matches both /x and /x/ but not /x/index.html, so targeting index.html cannot loop.
+    for folder in find_index_folders(site_dir, languages):
+        routes.append({
+            "route": folder,
+            "redirect": f"{folder}/index.html",
+            "statusCode": 301
+        })
+
+    # 5. Directory wildcard migration (fallback to 404.html)
     # Note: Azure SWA doesn't support wildcard capture in redirect targets.
     # Non-prefixed URLs like /features/x.html will fall through to 404.html,
     # which uses redirects.json to perform meta-refresh redirects.
@@ -285,6 +317,7 @@ def main():
     print(f"  - Root redirects: 2")
     print(f"  - Release notes: {release_notes_count} -> {rn_target}")
     print(f"  - Legacy shortcuts: {len(LEGACY_SHORTCUTS)}")
+    print(f"  - Folder index redirects: {len(find_index_folders(args.output, languages))}")
     
     if args.dry_run:
         print("\n--- DRY RUN: Config preview ---")
