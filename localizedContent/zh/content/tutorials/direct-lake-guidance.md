@@ -1,8 +1,8 @@
 ---
 uid: direct-lake-guidance
 title: Direct Lake 指南
-author: Daniel Otykier
-updated: 2026-09-23
+author: Morten Lønskov
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,7 +46,7 @@ applies_to:
 
 不过，与 SQL 上的 Direct Lake 一样，仍然存在一些[确实适用的限制](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。主要限制包括：
 
-- 两种 Direct Lake 模式都不支持计算列。
+- Calculated columns on Direct Lake on OneLake tables are supported in preview, but only in _user context_: the value is evaluated at query time for the current user rather than materialized. This means a Direct Lake calculated column respects row-level and object-level security, but it cannot be used as a relationship key and does not respond to report filters or slicers. Use a measure instead when the result must react to filter context. Direct Lake on SQL still does not support calculated columns at all. See [Develop Direct Lake semantic models](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop) for details.
 - 计算表格不能引用 Direct Lake 存储模式中的列或表。支持计算组、What-if 参数和字段参数，因为它们会创建不引用 Direct Lake 列的隐式计算表格。
 - 不支持将非物化 SQL 视图用作 OneLake 上的 Direct Lake 表的数据源。使用物化视图，或确保源 Delta 表包含所需的列。
 - 在 Direct Lake on OneLake 公开预览期间，不支持将 Lakehouse 中的快捷方式用作数据源。
@@ -55,7 +55,7 @@ applies_to:
 
 ### 复合模型
 
-针对计算列限制，一种变通方案是将 Direct Lake 表与导入表组合起来，创建一个 **复合模型**。 OneLake 上的 Direct Lake 支持这一点，但 SQL 上的 Direct Lake 不支持。在复合模型中，通常会将较大的事实表保留在 Direct Lake 模式下，同时对需要计算列或自定义分组的较小维度表使用导入模式。
+If you need a calculated column that is materialized, usable as a relationship key, or responsive to report filters and slicers, the preview calculated column feature above is not enough. In that case, create a **composite model** by combining Direct Lake tables with Import tables. OneLake 上的 Direct Lake 支持这一点，但 SQL 上的 Direct Lake 不支持。 In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need full calculated columns or custom groupings.
 
 OneLake 上的 Direct Lake 还支持通过 Tabular Editor 等基于 XMLA 的工具与 DirectQuery 表组合使用。可以通过 Power BI 网页建模、Power BI Desktop（实时编辑）或 XMLA 工具添加导入表。
 
