@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Power BI 语义模型类型
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,7 +30,7 @@ Tabular Editor can work with several different model types. 下面概述了哪�
 | 创建和编辑分区                                | ✔️ | ✔️          | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup>              | ✔️                    | ✔️                    |
 | 创建和编辑列                                 | ✔️ | ✔️          | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup>              | ✔️                    | ✔️                    |
 | 创建和编辑计算表格                              | ✔️ | ✔️          | ✔️<sup>[2](#DirectLakeCalculated)</sup> | ✔️<sup>[4](#DirectLakeSQLCalculated)</sup> | ✔️                    | ✔️                    |
-| 创建和编辑计算列                               | ✔️ | ✔️          | ❌                                       | ❌                                          | ✔️                    | ✔️                    |
+| 创建和编辑计算列                               | ✔️ | ✔️          | ✔️<sup>[5](#DirectLakeCalcColumn)</sup> | ❌                                          | ✔️                    | ✔️                    |
 | 创建和编辑计算组                               | ✔️ | ✔️          | ✔️                                      | ✔️                                         | ✔️                    |                       |
 | 创建和编辑关系                                | ✔️ | ✔️          | ✔️                                      | ✔️                                         | ✔️                    |                       |
 | 创建和编辑角色                                | ✔️ | ✔️          | ✔️                                      | ✔️                                         | ✔️                    | ✔️                    |
@@ -54,7 +54,7 @@ Tabular Editor can work with several different model types. 下面概述了哪�
 
 <a name="DirectLake">1</a> - The table partition must be an Entity Partition to work correctly. Direct Lake models can only have one partition per table. <a name="DirectLakeCalculated">2</a> - 计算表格不能引用 OneLake 上的 Direct Lake 表或列。 Calculation groups, what-if parameters and field parameters are supported.
 
-<a name="TE3Prem">3</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [更多信息](xref:editions)。 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake on SQL only supports calculation groups, what-if parameters and field parameters, which implicitly create calculated tables. General calculated tables are not supported.
+<a name="TE3Prem">3</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [更多信息](xref:editions)。 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake on SQL only supports calculation groups, what-if parameters and field parameters, which implicitly create calculated tables. General calculated tables are not supported. <a name="DirectLakeCalcColumn">5</a> - Preview feature. Calculated columns on Direct Lake on OneLake evaluate in the current user's query context rather than being materialized: they respect row-level and object-level security, but cannot be used as relationship keys and do not respond to report filters or slicers. See [Direct Lake Guidance](xref:direct-lake-guidance) for details.
 
 > [!NOTE]
 > 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。 Prior to that, various modeling operations were not supported. See [Power BI Desktop Limitations](xref:desktop-limitations).
