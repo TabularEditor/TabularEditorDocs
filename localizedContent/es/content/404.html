@@ -122,7 +122,7 @@
                     </div>
 
                     <div style="margin-top: 20px;">
-                        <a id="home-link" href="/en/" class="link_404">Inicio</a>
+                        <a id="home-link" href="/en/index.html" class="link_404">Inicio</a>
                         <a href="javascript:history.back()" class="link_404 secondary">Volver</a>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                 const homeLink = document.getElementById('home-link');
                 
                 // Set home link: supported language → that language, otherwise → English
-                homeLink.href = isSupported ? `/${requestedLang.toLowerCase()}/` : '/en/';
+                homeLink.href = isSupported ? `/${requestedLang.toLowerCase()}/index.html` : '/en/index.html';
                 
                 // Check if requested language is NOT supported - show message and language options
                 if (isValidLangFormat && !isSupported) {
