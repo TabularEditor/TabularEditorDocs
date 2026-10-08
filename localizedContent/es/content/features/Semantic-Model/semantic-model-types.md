@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Tipos de modelos semánticos de Power BI
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,7 +30,7 @@ Tabular Editor puede trabajar con varios tipos de modelos. A continuación encon
 | Crear y editar particiones                              | ✔️     | ✔️          | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup>              | ✔️                    | ✔️                    |
 | Crear y editar columnas                                 | ✔️     | ✔️          | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup>              | ✔️                    | ✔️                    |
 | Crear y editar tablas calculadas                        | ✔️     | ✔️          | ✔️<sup>[2](#DirectLakeCalculated)</sup> | ✔️<sup>[4](#DirectLakeSQLCalculated)</sup> | ✔️                    | ✔️                    |
-| Crear y editar columnas calculadas                      | ✔️     | ✔️          | ❌                                       | ❌                                          | ✔️                    | ✔️                    |
+| Crear y editar columnas calculadas                      | ✔️     | ✔️          | ✔️<sup>[5](#DirectLakeCalcColumn)</sup> | ❌                                          | ✔️                    | ✔️                    |
 | Crear y editar grupos de cálculo                        | ✔️     | ✔️          | ✔️                                      | ✔️                                         | ✔️                    |                       |
 | Crear y editar relaciones                               | ✔️     | ✔️          | ✔️                                      | ✔️                                         | ✔️                    |                       |
 | Crear y editar roles                                    | ✔️     | ✔️          | ✔️                                      | ✔️                                         | ✔️                    | ✔️                    |
@@ -54,7 +54,7 @@ Tabular Editor puede trabajar con varios tipos de modelos. A continuación encon
 
 <a name="DirectLake">1</a> - La partición de la tabla debe ser una partición de entidad para funcionar correctamente. Los modelos Direct Lake solo pueden tener una partición por tabla. <a name="DirectLakeCalculated">2</a> - Las tablas calculadas no pueden hacer referencia a Direct Lake en tablas o columnas de OneLake. Se admiten los grupos de cálculo, los parámetros de hipótesis y los parámetros de campo.
 
-<a name="TE3Prem">3</a> - Solo funciones de Tabular Editor 3. Las operaciones realizadas a través del punto de conexión XMLA requieren una licencia Business o Enterprise. [Más información](xref:editions). <a name="DirectLakeSQLCalculated">4</a> - Direct Lake en SQL solo admite grupos de cálculo, parámetros de hipótesis y parámetros de campo, que crean implícitamente tablas calculadas. No se admiten las tablas calculadas de uso general.
+<a name="TE3Prem">3</a> - Solo funciones de Tabular Editor 3. Las operaciones realizadas a través del punto de conexión XMLA requieren una licencia Business o Enterprise. [Más información](xref:editions). <a name="DirectLakeSQLCalculated">4</a> - Direct Lake en SQL solo admite grupos de cálculo, parámetros de hipótesis y parámetros de campo, que crean implícitamente tablas calculadas. No se admiten las tablas calculadas de uso general. <a name="DirectLakeCalcColumn">5</a> - Preview feature. Calculated columns on Direct Lake on OneLake evaluate in the current user's query context rather than being materialized: they respect row-level and object-level security, but cannot be used as relationship keys and do not respond to report filters or slicers. See [Direct Lake Guidance](xref:direct-lake-guidance) for details.
 
 > [!NOTE]
 > En la versión de junio de 2025 de Power BI Desktop se eliminaron todas las limitaciones de modelado para las herramientas de terceros. Antes de eso, no se admitían varias operaciones de modelado. Consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations).
