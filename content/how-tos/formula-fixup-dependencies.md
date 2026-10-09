@@ -1,6 +1,8 @@
 ---
 uid: formula-fix-up-dependencies
 title: Formula Fix-up and Formula Dependencies
+author: Morten Lønskov
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,8 +12,8 @@ applies_to:
 ---
 
 # Formula Fix-up and Formula Dependencies
-Tabular Editor continuously parses the DAX expressions of all measures, calculated columns and calculated tables in your model, to construct a dependency tree of these objects. This dependency tree is used for the Formula Fix-up functionality, which may be enabled under **Tools > Preferences** (**File > Preferences** in Tabular Editor 2). Formula Fix-up automatically updates the DAX expression of any measure, calculated column or calculated table, whenever an object that was referenced in the expression is renamed.
+Tabular Editor continuously parses the DAX expressions of all measures, calculated columns and calculated tables in the model and builds a dependency tree of these objects. *Formula fix-up* uses the tree: when you rename an object, it updates the DAX expressions that reference it. Enable it with **Automatic DAX formula fix-up** under **Tools > Preferences > Tabular Editor > Modeling Operations** (**File > Preferences** in Tabular Editor 2).
 
-To visualize the dependency tree, right-click the object in the explorer tree and choose "Show dependencies..."
+Right-click an object in the TOM Explorer and choose **Show dependencies...** to see its dependency tree.
 
-![image](~/content/assets/images/formula-fixup-dependencies-01.png)
+![Object Dependencies dialog showing the objects a measure depends on](~/content/assets/images/formula-fixup-dependencies-01.png)
