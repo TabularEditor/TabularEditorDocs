@@ -2,7 +2,7 @@
 uid: drag-drop
 title: Drag and drop objects
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,13 +13,11 @@ applies_to:
 
 # Drag and drop objects
 
-You reorganise a model in the @tom-explorer-view, the same tree you use to browse it. Pick objects up where you find them, drop them where they belong. There's no separate modelling surface to switch into first, and nothing is out of reach because the view you're in doesn't happen to draw it.
+Drag and drop in the @tom-explorer-view moves objects between display folders, tables, hierarchies, calculation groups and table groups. A drag always moves an object, and no modifier key turns it into a copy. While you drag, the move cursor shows where a drop is allowed and the no-drop cursor shows where it isn't. **Duplicate**, described in @duplicate-and-batch, copies an object.
 
-The gesture is always a move. Tabular Editor shows the move cursor when a drop is allowed and the no-drop cursor when it isn't, and there's no modifier key that turns a drag into a copy. To copy an object, use **Duplicate** instead, described in @duplicate-and-batch.
+## Move display folders
 
-## Reorganising display folders
-
-Drag a display folder and every object underneath it comes along, including nested subfolders, which keep their shape. This is the reason the feature exists: restructuring the folder layout of a large model is one gesture per folder rather than one edit per measure.
+Drag a display folder onto another folder to move it. Every object and subfolder in it moves with it, and the subfolder structure is kept.
 
 <!-- IMAGE NEEDED: drag-drop-display-folders.gif
      An animation of a display folder being dragged onto another folder in the TOM Explorer,
@@ -27,72 +25,82 @@ Drag a display folder and every object underneath it comes along, including nest
      levels of nesting so the shape is visibly preserved.
      Alt text: "A display folder being dragged onto another folder in the TOM Explorer" -->
 
-Everything else in the tree moves the same way:
+You can also:
 
-- Select several objects with **Ctrl+click** or **Shift+click** and drag them together. You can mix measures, columns, hierarchies and folders as long as they're in the same table.
-- Drop objects on the **table node** itself to take them out of their folder and back to the top level of the table.
-- Drop a folder into a folder to nest it. Tabular Editor refuses a drop into the folder's own subfolder, so you can't lose a branch inside itself.
+- Select several objects with **Ctrl+click** or **Shift+click** and drag them together. You can mix measures, columns, hierarchies and folders if they're in the same table.
+- Drop objects on the table node to move them out of their folder to the top level of the table.
+- Drop a folder onto another folder to nest it. You can't drop a folder into one of its own subfolders.
 
-Each drop is a single **Edit > Undo** step, however many objects it touched.
+Each drop is one undo step (**Ctrl+Z**), however many objects it moves.
 
-Display folders are nothing more than a string property on each object, with `\` separating the levels, so `Sales\Ratios` is the *Ratios* folder inside *Sales*. An object can sit in more than one folder at once by separating the paths with `;`.
+A display folder is a string property on each object, with `\` separating the levels: `Sales\Ratios` is the Ratios folder inside Sales. To show an object in more than one folder, separate the paths with `;`.
 
-## Moving an object to another table
+## Move an object to another table
 
-Measures and calculated columns can be dragged to a different table, either onto the table node or straight into one of its display folders. No other object type can cross tables this way.
+Drag measures and calculated columns onto another table or, in Tabular Editor 3, onto a display folder in that table to move them there, which isn't possible for other object types.
 
-What comes with the object:
+In Tabular Editor 3, the move keeps the object's:
 
-- **Translations** of its name and description.
-- **Perspective membership.** By default the object keeps the perspectives it was in. Tick *Inherit table membership when object pasted or moved to table* under **Tools > Preferences > Tabular Editor** to have it adopt the destination table's membership instead.
-- **The KPI**, for a measure that has one.
-- **Error and warning indicators.** An expression that was invalid before the move is still marked as invalid afterwards, rather than looking clean until you next edit it.
+- translations of its name and description
+- perspective membership, unless you select **Inherit table membership when an object is pasted/moved to a table** under **Tools > Preferences > Tabular Editor > Modeling Operations**, which gives the object the destination table's perspective membership
+- KPI, for a measure that has one
+- error and warning indicators, so an invalid expression stays marked as invalid after the move
 
 > [!WARNING]
-> Moving a **calculated column** to another table removes the things that depended on it in its old position. Any relationship it takes part in is deleted, any hierarchy level built on it is deleted, it's dropped from calendars and variations, and a *Sort by column* pointing at it is cleared. You aren't asked to confirm this. **Edit > Undo** puts all of it back as one step, so check the model before you do anything else.
+> When you move a calculated column to another table, no confirmation appears, and the following are changed:
+>
+> - relationships that use the column are deleted
+> - hierarchy levels based on the column are deleted
+> - the column is removed from calendars and variations
+> - `SortByColumn` references to the column are cleared
+>
+> Press **Ctrl+Z** to undo the move and all of these changes in one step.
 
-DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and keeps pointing at the table the column has left. Measure references are written as `[Measure]` without a table, so they're unaffected. Run @using-bpa or check the @messages-view after a move to catch what broke.
+DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and returns an error. Measure references are written as `[Measure]` without a table and aren't affected. After a move, run the [Best Practice Analyzer](xref:using-bpa) or check the @messages-view to find the broken references.
 
-## Building hierarchies and ordering calculation items
+## Build hierarchies and order calculation items
 
-- Drag one or more **columns onto a hierarchy** to add them as levels. Drop between two existing levels to choose the position. A column that's already a level of that hierarchy is refused.
-- Drag **levels** within a hierarchy to reorder them, or onto another hierarchy in the same table to move them there.
-- Drag **calculation items** to reorder them inside their calculation group, or onto another calculation group to move them.
+- Drag one or more columns onto a hierarchy to add them as levels. Drop between two existing levels to choose the position. You can't add a column that's already a level of that hierarchy.
+- Drag levels within a hierarchy to reorder them, or onto another hierarchy in the same table to move them there.
+- Drag calculation items to reorder them in their calculation group, or onto another calculation group to move them.
 
-## Grouping tables
+## Group tables
 
-In Tabular Editor 3 you can drag one or more tables onto a **table group** to put them in it. Dropping tables onto another table gives them whatever group that table is in, which is also how you take tables out of a group: drop them on a table that isn't in one.
+> [!NOTE]
+> Table groups are available in Tabular Editor 3 only.
 
-Table groups are a Tabular Editor convenience for organising the tree. They're stored as an annotation and aren't part of the model metadata, so they don't appear in Power BI or Analysis Services.
+Drag one or more tables onto a table group to move them into it, or onto another table to move them into that table's group. Dropping tables onto a table that isn't in a group removes them from their group. Table groups organize the TOM Explorer and are stored as an annotation, which Power BI and Analysis Services ignore.
 
 ## Display folders and translations
 
-A drag changes the display folder *for the translation you're currently viewing* in the TOM Explorer, and only that one.
+A drag changes the display folder only for the translation selected in the TOM Explorer:
 
-- With no translation selected, which is the default, the drag writes the untranslated display folder. Translated display folder names are left exactly as they were, so in those cultures the objects stay in the old folder.
-- With a culture selected in the TOM Explorer's translation dropdown, the drag writes that culture's translated display folder and leaves the untranslated one alone.
+- With no translation selected (the default), the drag changes the untranslated display folder. Translated display folders aren't changed, so translated views still show the objects in the old folder.
+- With a culture selected in the TOM Explorer's translation dropdown, the drag changes that culture's translated display folder and leaves the untranslated display folder unchanged.
 
-So reorganising folders in the default view doesn't carry the translations with it. Bring them back into line in the @metadata-translation-editor, or run the built-in Best Practice Analyzer rule for objects that have a display folder but no translated display folder, whose fix copies the untranslated value into every culture.
-
-Moving an object to another table is the exception: its own translations are preserved across the move.
+Update the translations in the @metadata-translation-editor, or with the fix of the [Translate display folders for all cultures](xref:kb.bpa-translate-display-folders) Best Practice Analyzer rule, which copies the untranslated value into every culture.
 
 ## What can be dragged, and where it can go
 
 | Drag | Onto | Result |
 |---|---|---|
 | Measures, columns, hierarchies, folders | A display folder in the same table | Objects move into that folder |
-| The same | The table node | Objects leave their folder |
-| Measures, calculated columns | Another table, or a folder in it | Objects move to that table |
+| Measures, columns, hierarchies, folders | The table node | Objects leave their folder |
+| Measures, calculated columns | Another table, or a folder in it (folder: Tabular Editor 3 only) | Objects move to that table |
 | Columns | A hierarchy or one of its levels | Columns are added as levels |
 | Levels | The same hierarchy, or another one in the table | Levels are reordered or moved |
 | Calculation items | Their group, or another calculation group | Items are reordered or moved |
-| Tables | A table group, or another table | Tables take on that group |
+| Tables (Tabular Editor 3 only) | A table group, or another table | Tables move to that group |
 
-Partitions, roles, perspectives, relationships, data sources and shared expressions can't be dragged. Objects deleted since the last save, shown struck through in the tree, can't be dragged either, and can't be used as a drop target. Objects only appear where the tree is set up to show them, so display folders and table groups have to be switched on in the toolbar before you can drop onto them.
+The following limits apply:
 
-## Doing the same from a script
+- Partitions, roles, perspectives, relationships, data sources and shared expressions can't be dragged.
+- In Tabular Editor 3.27.0 and later, objects deleted since the last save are shown struck through in the tree, and you can't drag them or drop onto them.
+- Display folders and table groups accept drops only while they're switched on in the TOM Explorer toolbar.
 
-Display folders are a property, so a script sets the string directly. Use `\\` in a regular C# string, or a verbatim string:
+## Make the same changes from a script
+
+A script moves objects between display folders by setting the `DisplayFolder` string. Use `\\` in a regular C# string, or a verbatim string:
 
 ```csharp
 Selected.Measures.SetDisplayFolder(@"Sales\Ratios");
@@ -100,25 +108,20 @@ Model.Tables["Sales"].Measures["Margin %"].DisplayFolder = @"Sales\Ratios";
 Model.Tables["Sales"].Measures["Margin %"].TranslatedDisplayFolders["da-DK"] = @"Salg\Nøgletal";
 ```
 
-A measure moves between tables with `MoveTo`, which keeps its error indicators exactly as the drag does:
+`MoveTo` moves a measure to another table and keeps its error indicators:
 
 ```csharp
 Model.Tables["Sales"].Measures["Margin %"].MoveTo(Model.Tables["Reseller Sales"]);
 ```
 
-Calculated columns have no `MoveTo`. Use the same action the tree uses:
+The scripting API has no method to move a calculated column to another table. In Tabular Editor 3, setting `TableGroup` moves a table to a table group: `Model.Tables["Sales"].TableGroup = "Facts";`, in a script you run as described in @csharp-scripts.
 
-```csharp
-var column = Model.Tables["Sales"].Columns["Margin"];
-column.Handler.Actions.MoveObject(column, Model.Tables["Reseller Sales"], false, null);
-```
+## Drag to other views
 
-Table groups are a property too: `Model.Tables["Sales"].TableGroup = "Facts";`. See @csharp-scripts for how to run any of this.
+You can also drag objects from the TOM Explorer to:
 
-## Dragging elsewhere in the application
+- the DAX or C# editor, to insert the object's fully qualified name. See @dax-editor.
+- an open model diagram, to add tables to it. In the diagram, drag a column onto a column in another table to create a relationship. See @diagram-view.
+- a [pivot grid](xref:pivot-grid), to add columns, measures or hierarchies as fields.
 
-The TOM Explorer is the only place a drag changes model structure, but it's the source for several other drops:
-
-- Drag an object into the DAX or C# editor to insert its fully qualified name, rather than typing it. See @dax-editor.
-- Drag tables from the tree onto an open model diagram to add them to it. Inside the diagram, drag a column onto a column in another table to create a relationship between them. See @diagram-view.
-- Drag columns, measures or hierarchies onto a pivot grid to add them as fields.
+The model diagram and pivot grid are available in Tabular Editor 3 only.

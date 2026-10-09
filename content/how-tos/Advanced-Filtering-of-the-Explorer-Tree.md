@@ -1,6 +1,8 @@
 ﻿---
 uid: advanced-filtering-explorer-tree
 title: Advanced Object Filtering
+author: Morten Lønskov
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -11,84 +13,88 @@ applies_to:
 
 # Advanced Object Filtering
 
-This article describes how to use the "Filter" textbox within Tabular Editor - an incredibly useful feature when navigating complex models.
+The **Filter** textbox in the Explorer Tree filters the objects shown in the tree by name, by wildcard pattern or by a Dynamic LINQ expression.
 
 ## Filtering Mode
-As of [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4), Tabular Editor now lets you decide how the filter should apply to objects in the hierarchy, and how search results are displayed. This is controlled using the three right-most toolbar buttons next to the Filter button:
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-01.png)
+The three right-most toolbar buttons next to the **Filter** button, added in [Tabular Editor 2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4), set how the filter applies to the object hierarchy and how the results are displayed.
 
-* ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Hierarchical by parent**: The search will apply to _parent_ objects, that is Tables and Display Folders (if those are enabled). All child items will be displayed, when a parent item matches the search criteria.
-* ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Hierarchical by children**: The search will apply to _child_ objects, that is Measures, Columns, Hierarchies, etc. Parent objects will only be displayed if they have at least one child object matching the search criteria.
-* ![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Flat**: The search will apply to all objects, and results will be displayed in a flat list. Objects that contain child items will still display these in a hierarchical manner.
+![Filter textbox and filter mode buttons in the Explorer toolbar](~/content/assets/images/advanced-filtering-of-the-explorer-tree-01.png)
+
+* ![Hierarchical by parent button](~/content/assets/images/advanced-filtering-of-the-explorer-tree-02.png) **Hierarchical by parent**: the search applies to parent objects, that is tables, and display folders if they're shown. When a parent matches, all its children are shown.
+* ![Hierarchical by children button](~/content/assets/images/advanced-filtering-of-the-explorer-tree-03.png) **Hierarchical by children**: the search applies to child objects, such as measures, columns and hierarchies. A parent is shown only if at least one of its children matches.
+* ![Flat button](~/content/assets/images/advanced-filtering-of-the-explorer-tree-04.png) **Flat**: the search applies to all objects, and the results are shown as a flat list. Objects with children still show them hierarchically.
 
 ## Simple search
-Type anything into the Filter textbox and hit [Enter] to do a simple case-insensitive search within object names. For example, typing "sales" in the Filter textbox, using the "By Parent" filtering mode, will produce the following results:
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-05.png)
+Type text in the **Filter** textbox and press **Enter** for a case-insensitive search of object names. For example, "sales" in the "By Parent" mode gives these results:
 
-Expanding any of the tables will reveal all measures, columns, hierarchies and partitions of the table. If we change the filtering mode to "By Child", the results will look like this:
+![Search results for sales in By Parent mode](~/content/assets/images/advanced-filtering-of-the-explorer-tree-05.png)
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-06.png)
+Expanding a table shows all its measures, columns, hierarchies and partitions. In the "By Child" mode, the same search gives these results:
 
-Notice how the "Employee" table now appears in the list, since it has a couple of child items (columns in this case), that contain the word "sales".
+![Search results for sales in By Child mode](~/content/assets/images/advanced-filtering-of-the-explorer-tree-06.png)
+
+The "Employee" table now appears, because some of its columns contain the word "sales".
 
 ## Wildcard search
-When typing in a string in the Filter textbox, you can use the wildcard `?` to denote any single character, and `*` to denote any sequence of characters (zero or more). So typing `*sales*` would produce exactly the same results as shown above, however typing `sales*` will only show objects whose name _starts_ with the word "sales" (again, this is case-insensitive).
 
-Searching for `sales*` by parent:
+In the **Filter** textbox, `?` matches any single character and `*` matches any sequence of zero or more characters, and matching is case-insensitive as in simple search. `*sales*` gives the same results as above, and `sales*` shows only objects whose names start with "sales".
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-07.png)
+A search for `sales*` in the "By Parent" mode gives these results:
 
-Searching for `sales*` by child:
+![Search results for sales* in By Parent mode](~/content/assets/images/advanced-filtering-of-the-explorer-tree-07.png)
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-08.png)
+The same search in the "By Child" mode gives these results:
 
-Flat search for `sales*` (toggle info columns [Ctrl]+[F1] to show detailed information about each object):
+![Search results for sales* in By Child mode](~/content/assets/images/advanced-filtering-of-the-explorer-tree-08.png)
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-09.png)
+Flat search for `sales*`, with the info columns shown (**Ctrl+F1**) for details about each object:
 
-Wildcards can be placed anywhere in the string, and you can include as many as you need. If that's not complex enough, read on...
+![Flat search results for sales* with info columns showing parent and type](~/content/assets/images/advanced-filtering-of-the-explorer-tree-09.png)
+
+You can place any number of wildcards anywhere in the string.
 
 ## Dynamic LINQ search
-You can also use [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) to search for objects, which is the same thing you do when creating [Best Practice Analyzer rules](xref:best-practice-analyzer). To enable Dynamic LINQ mode in the filter box, simply put a `:` (colon) in front of your search string. For example, to view all objects whose name end with "Key" (case-sensitive) write:
 
-```
+The filter also accepts [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) expressions, the syntax that [Best Practice Analyzer rules](xref:best-practice-analyzer) use. Start the search string with `:` (colon) to switch to Dynamic LINQ mode. For example, this filter shows all objects whose name ends with "Key" (case-sensitive):
+
+```text
 :Name.EndsWith("Key")
 ```
 
-...and hit [Enter]. In "Flat" filtering mode, the result looks like this:
+Press **Enter** to apply the filter, which in the "Flat" mode gives this result:
 
-![image](~/content/assets/images/advanced-filtering-of-the-explorer-tree-10.png)
+![Flat results for a Dynamic LINQ filter on names ending in Key](~/content/assets/images/advanced-filtering-of-the-explorer-tree-10.png)
 
-For case-insensitive search in Dynamic LINQ, you can either convert the input string using something like:
+For a case-insensitive search in Dynamic LINQ, convert the string:
 
-```
+```text
 :Name.ToUpper().EndsWith("KEY")
 ```
 
-or you can supply the [StringComparison](https://docs.microsoft.com/en-us/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) argument, like:
+or supply the [StringComparison](https://docs.microsoft.com/en-us/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) argument:
 
-```
+```text
 :Name.EndsWith("Key", StringComparison.InvariantCultureIgnoreCase)
 ```
 
-You are not restricted to searching within the names of objects. Dynamic LINQ search strings can be as complex as you like, to evaluate any property (as well as sub-properties) of an object. So if you want to find all objects having an expression that contains the word "TODO", you would use the following search filter:
+A Dynamic LINQ filter can evaluate any property of an object, including sub-properties. For example, this filter finds all objects whose expression contains the word "TODO":
 
-```
+```text
 :Expression.ToUpper().Contains("TODO")
 ```
 
-As another example, the following will display all hidden measures in the model that are not referenced by anything else:
+This filter shows all hidden measures in the model that no other object references:
 
-```
+```text
 :ObjectType="Measure" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
-````
-
-You can also use Regular Expressions. The following will find all columns whose name contains the word "Number" OR "Amount":
-
 ```
+
+Regular expressions work too, as in this filter that finds all columns whose name contains "Number" or "Amount":
+
+```text
 :ObjectType="Column" and RegEx.IsMatch(Name,"(Number)|(Amount)")
 ```
 
-Note, that the display options (the toolbar buttons directly above the tree), may affect the results when using "By Parent" and "By Child" filtering mode. For example, the above LINQ filter only returns columns, but if your display options are currently set to not show columns, nothing will be displayed.
+In the "By Parent" and "By Child" modes, the display options, the toolbar buttons directly above the tree, also filter the results. For example, the filter above returns only columns, so if the display options hide columns, the tree shows nothing.
