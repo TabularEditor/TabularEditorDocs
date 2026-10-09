@@ -2,7 +2,7 @@
 uid: accessibility
 title: Accessibility
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,38 +19,30 @@ applies_to:
 
 # Accessibility
 
-This page collects the settings in Tabular Editor 3 that affect how readable and how operable the application is, and says what each one does. Most of them live under **Tools > Preferences > User Interface**.
+Most accessibility settings in Tabular Editor 3 are on the **Tools > Preferences > Tabular Editor > User Interface** page, which is described under [User Interface](xref:preferences#tabular-editor--user-interface) in the preferences reference.
 
 ## Color blindness mode
 
-Tabular Editor uses color to tell you what changed. [Unsaved changes](xref:unsaved-changes) mark added objects green, deleted objects red and edited objects orange, and the model comparison view uses the same three.
+[Unsaved changes](xref:unsaved-changes) and the model comparison view mark added objects green, deleted objects red and edited objects orange. When you select **Color blindness mode** in the **Accessibility** group under **Tools > Preferences > Tabular Editor > User Interface**, added objects are marked teal, and deleted and edited objects keep their colors.
 
-Check **Color blindness mode** under **Tools > Preferences > User Interface**, in the **Accessibility** group. Added objects are then marked teal instead of green, which moves them onto a channel that can be seen, and leaves deleted and edited where they are, since those two were already far apart. The setting applies to the TOM Explorer and to the model comparison view, and it changes both the row tint and the badge on the object's icon.
+**Color blindness mode** is off by default, is stored per Windows user and applies to row tints and icon badges in the TOM Explorer and the model comparison view.
 
-The setting is off by default and is remembered per user.
+## Keyboard shortcuts
 
-## Keyboard access
+Under **Tools > Preferences > Tabular Editor > Keyboard**, you can assign your own shortcuts to commands and see the shortcuts already assigned, and @shortcuts3 lists the default shortcuts.
 
-Every action in Tabular Editor is reachable from the menus, and the menus are reachable from the keyboard. Commands you use often can be given a shortcut of your own under **Tools > Preferences > Keyboard**, which also lists the shortcuts already assigned.
+## Display scaling
 
-See @shortcuts3 for the full list of default shortcuts.
+Tabular Editor follows the display scaling set in Windows under **Settings > System > Display**.
 
-## Text size and display scaling
+## Themes
 
-Tabular Editor follows the display scaling set in Windows, so raising the scaling factor in **Settings > System > Display** enlarges the whole interface rather than only part of it.
-
-The DAX, M, SQL and C# editors take their own font and size, under **Tools > Preferences > DAX Editor > General** and the equivalent pages for the other languages. Raising the editor font is usually a better first step than scaling the whole application, since expressions are where most reading happens.
-
-## Themes and contrast
-
-Tabular Editor ships several themes, including dark ones. Choose one under **Tools > Preferences > User Interface**, or from **Window > Theme**. See [Changing themes and palettes](xref:user-interface#changing-themes-and-palettes).
-
-Themes change the application's own chrome. The syntax coloring inside the code editors is set separately, under **Tools > Preferences > DAX Editor**, so a dark theme and a light editor palette can be combined if that reads better for you.
+Tabular Editor 3 ships several themes, including dark themes, which you choose from **Window > Theme** (see [Changing themes and palettes](xref:user-interface#changing-themes-and-palettes)).
 
 ## Language
 
-The interface is available in several languages. Choose one under **Tools > Preferences > User Interface**, in the **Language** group. The setting takes effect after a restart. See @personalizing-te3.
+Choose the interface language in the **Language** group under **Tools > Preferences > Tabular Editor > User Interface**. The change takes effect after you restart Tabular Editor. See @personalizing-te3.
 
-## Reporting an accessibility problem
+## Reporting an accessibility issue
 
-If something in Tabular Editor 3 is unusable for you, tell us: the settings above are the ones we have, and the list grows from what people report. Use **Help > Community Support**, or **Help > Dedicated Support** if your license includes it.
+Report accessibility issues through **Help > Community Support**, or through **Help > Dedicated Support** if your license includes it.
