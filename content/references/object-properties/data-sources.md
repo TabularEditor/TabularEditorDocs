@@ -463,6 +463,7 @@ Query groups need compatibility level 1480 or higher. When you delete a query gr
 - [Name](xref:object-properties-common#name)
 - [Description](xref:object-properties-common#description)
 - [Annotations](xref:object-properties-common#annotations)
+- [Object Type](xref:object-properties-common#object-type)
 
 ### Folder
 `Folder` · string · Options
