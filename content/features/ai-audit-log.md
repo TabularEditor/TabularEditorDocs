@@ -2,7 +2,7 @@
 uid: ai-audit-log
 title: AI audit log
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -65,13 +65,12 @@ A `tool_call` record ends with one of these outcomes:
 
 - `ok`
 - `error`
-- `denied`: the permission it needed wasn't granted
-- `policy`: an administrator's limit blocked it
+- `denied`: the permission it needed wasn't granted, or an administrator's policy blocked it. Only `mcp` records use this outcome; in the AI Assistant, a tool blocked this way ends as `error`
 - `cancelled`: you stopped the turn, or the client disconnected before the tool finished
 
 ### Scripts are saved in full
 
-Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran.
+Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran. A script that fails to compile isn't saved.
 
 ## What is never recorded
 
@@ -92,7 +91,7 @@ These [policies](xref:policies), both of which require Enterprise Edition, contr
 | `AiAuditLogPath` | Path | Writes the log to another folder for central collection, such as a UNC path to a network share. The path must be absolute; a relative path is ignored and the default folder is used |
 | `AiAuditLogRetentionDays` | Number, 0 to 3650 | How many days to keep. `0` keeps everything. The default is 30 |
 
-Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder.
+Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder. File names don't include the user or machine name, so give each user a separate folder. Environment variables such as `%USERNAME%` are expanded only in a `REG_EXPAND_SZ` value; the administrative template writes `REG_SZ`, which is used as written.
 
 If the log can't be written, for example because a network share is unreachable, Tabular Editor writes one information entry to its application log for the session and doesn't log later failures. The AI Assistant and the MCP server keep working.
 
