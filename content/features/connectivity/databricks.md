@@ -2,7 +2,7 @@
 uid: connect-databricks
 title: Connect to Databricks
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,27 +19,36 @@ applies_to:
 
 # Connect to Databricks
 
-Start from **Model > Import tables...** and choose a Databricks source. Every authenticator needs the **Host** and the **HTTP Path** of the SQL warehouse or cluster, both of which Databricks shows on the connection details page of the compute resource.
+The Databricks connector connects to SQL warehouses and clusters in Azure Databricks and in Databricks workspaces on other clouds. It's available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
 
-![The Connect to Databricks dialog, with Azure AD chosen as the authentication type and a Sign in button beside it](~/content/assets/images/features/connectivity/databricks-connection.png)
+Select **Model > Import tables...** and choose a Databricks source to open the dialog. @connecting-to-azure-databricks walks through an Azure Databricks import step by step.
 
-## Authenticators
+![The Connect to Databricks dialog, with Azure AD selected as the authentication type and a Sign in button beside it](~/content/assets/images/features/connectivity/databricks-connection.png)
 
-| Authentication | What you supply | Reconnects unattended |
+## Prerequisites
+
+Install the [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) on your machine (see [Prerequisites](xref:connecting-to-azure-databricks#prerequisites) in the tutorial for the supported drivers).
+
+## Connection fields
+
+| Field | Description |
+| -- | -- |
+| **Server Hostname** | The host name from the **Connection details** tab of the compute resource in Databricks. Required |
+| **HTTP Path** | The HTTP path from the same tab. Required |
+| **Type** | The authentication option. See [Authentication](#authentication) |
+| **Username** and **Password**, or **Sign in...** | The credentials for the selected authentication option. The fields change with the option |
+| **Advanced** | Optional settings: **Default catalog**, **Database**, **Automatic Proxy Discovery**, **Query tags**, **Implementation** and **Metric View BI Compatibility Mode** |
+
+## Authentication
+
+| Authentication | What you supply | Interactive sign-in |
 | -- | -- | -- |
-| **Access Token** | A Databricks personal access token | Yes, until the token expires |
-| **Username / Password** | User name and password | Yes |
-| **Azure AD** | A Microsoft Entra ID sign-in | Azure Databricks only |
-| **OAuth (OIDC)** | A browser sign-in | No |
-| **OAuth (M2M)** | A service principal client ID and secret | Yes |
+| **Access Token** | A Databricks personal access token. When it expires, enter a new one | No |
+| **Username / Password** | User name and password | No |
+| **Azure AD** | A Microsoft Entra ID sign-in. Available only for Azure Databricks | Yes |
+| **OAuth (OIDC)** | A browser sign-in | Yes |
+| **OAuth (M2M)** | A service principal client ID and client secret | No |
 
-> [!NOTE]
-> **Azure AD** is offered only for Azure Databricks. On a Databricks workspace hosted anywhere else, use one of the other four.
+For unattended connections, use **OAuth (M2M)**, which authenticates as a service principal.
 
-For a scheduled refresh, **OAuth (M2M)** is the usual choice: it is a service principal, so nothing expires with a person leaving.
-
-## Where the credentials are stored
-
-Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
-
-The generated M expression names the server and the object only. It never contains a password, a token or a key.
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
