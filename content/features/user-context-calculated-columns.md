@@ -1,8 +1,8 @@
-﻿---
+---
 uid: user-context-calculated-columns
 title: User-context calculated columns
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,49 +19,47 @@ applies_to:
 ---
 # User-context calculated columns
 
-A calculated column is normally evaluated once, when the table is processed, and every user who queries the model sees the same value. A *user-context calculated column* is evaluated per user instead, so its expression can call functions such as [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) or [`USERNAME`](https://dax.guide/username) and give each user a different answer.
+A *user-context calculated column* is a calculated column that's evaluated per user. Its expression can call functions such as [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) or [`USERNAME`](https://dax.guide/username) and return a different value for each user. A standard calculated column is evaluated once, when the table is processed, and returns the same value for all users.
 
-This is controlled by the calculated column's **Expression Context** property.
+The calculated column's `ExpressionContext` property sets whether the column is evaluated once or per user:
 
 | Expression Context | Meaning |
 |---|---|
-| **Standard** | The default. The expression can use only standard functions, and the column has one value per row for everybody |
-| **User Context** | The expression can call user-context functions, and is evaluated per user |
+| **Standard** | The default. The expression can use only standard functions. The column has one value per row for all users. |
+| **User Context** | The expression can call user-context functions. The column is evaluated per user. |
 
 Select a calculated column in the @tom-explorer-view and set **Expression Context** under **Options** in the @properties-view.
 
 > [!NOTE]
-> **Expression Context** requires compatibility level 1705 or above. Below that, a calculated column is always Standard.
+> `ExpressionContext` requires compatibility level 1705 or higher, and below 1705 calculated columns are always **Standard**.
 
-## What a user-context column cannot be used for
+## What a user-context column can't be used for
 
-Because the value depends on who is asking, a user-context calculated column cannot be read by anything that is evaluated once for the whole model. Tabular Editor's Semantic Analyzer checks the four cases and reports an error for each:
+Objects evaluated once for the whole model can't reference a user-context calculated column. The Tabular Editor Semantic Analyzer reports an error for each of these cases:
 
-| A user-context column cannot be referenced by | Message |
+| A user-context column can't be referenced by | Message |
 |---|---|
-| A **standard** calculated column | *This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a standard calculated column.* |
-| A **calculated table** | *This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a calculated table.* |
-| A **row-level security filter** | *This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a row-level security filter.* |
-| A **relationship**, as an endpoint | *A relationship cannot use the user-context-aware calculated column `Table[Column]` as an endpoint.* |
+| A standard calculated column | "This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a standard calculated column." |
+| A calculated table | "This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a calculated table." |
+| A row-level security filter | "This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a row-level security filter." |
+| A relationship, as an endpoint | "A relationship cannot use the user-context-aware calculated column `Table[Column]` as an endpoint." |
 
-The first three apply *indirectly as well as directly*. Reaching the column through a measure is still reaching it, and is reported the same way.
-
-Two things are explicitly allowed: a *measure* can reference a user-context column, and so can *another user-context calculated column*.
+The first three rules also apply to indirect references, for example through a measure. Measures and other user-context calculated columns can reference a user-context column.
 
 ## Where the errors appear
 
-| How the column is referenced | DAX editor | @messages-view | `te validate` |
+| How the column is referenced | DAX editor | @messages-view | [`te validate`](xref:te-cli-commands#validate) |
 |---|---|---|---|
 | Directly | Yes | Yes | Yes |
 | Indirectly, for example through a measure | No | Yes | Yes |
 | As a relationship endpoint | No | Yes | Yes |
 
-An indirect violation has no squiggle in the editor, because the expression you are looking at is perfectly valid on its own. The chain is what breaks. Check the @messages-view before deploying.
+The DAX editor doesn't underline indirect violations, so check the @messages-view for them before you deploy.
 
-A relationship-endpoint violation also appears as the relationship's **Error Message** property, and is reported once per offending endpoint, so a relationship with user-context columns on both sides produces two errors. Inactive relationships are checked too.
+A relationship-endpoint violation also appears in the relationship's **Error Message** property. Active and inactive relationships are both checked, with errors reported per endpoint, so a relationship with user-context columns on both sides has two.
 
-> [!IMPORTANT]
-> `te validate --errors-only` does *not* suppress these. They are errors, not warnings, and `--errors-only` only hides warnings and anti-patterns.
+> [!NOTE]
+> `te validate --errors-only` still reports these violations, because the option hides only warnings and anti-patterns.
 
 ## Next steps
 

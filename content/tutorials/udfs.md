@@ -21,57 +21,50 @@ applies_to:
 
 DAX User-Defined Functions (UDFs) are a capability of semantic models. The feature entered preview with the September 2025 update of Power BI Desktop and is [generally available](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) since the June 2026 release of Power BI.
 
-The feature lets you create reusable DAX functions that you can invoke from within any DAX expression of your model, even other functions. This powerful feature helps you maintain consistency, reduce code duplication, and create more maintainable DAX expressions.
-
-Tabular Editor 3 supports UDFs starting from version 3.23.0, although we recommend using [3.23.1](xref:release-3-23-1) (or newer) to benefit from various bug fixes and improvements.
-
-For a more detailed introduction to UDFs in Tabular Editor 3, check out [this blog post](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3).
+A UDF is a reusable DAX function that you can call from any DAX expression in the model, including other functions.
+For an introduction to UDFs in Tabular Editor 3, see the blog post [How to get started using UDFs in Tabular Editor 3](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3).
 
 ## Understanding UDFs
 
-UDFs can be thought of as custom DAX functions that you define once and can use throughout your model. You define which parameters the function accepts, which can be both scalar- or table-valued, or even references to objects, and then you provide the DAX expression that uses those parameters to compute a result, which can also be scalar- or table-valued.
+A UDF has a list of parameters and a DAX expression that computes a result from them. Parameters can be scalar values, tables or references to model objects, and the result can be a scalar value or a table.
 
-To learn more about how DAX UDFs work, we recommend [this article by SQLBI](https://www.sqlbi.com/articles/introducing-user-defined-functions-in-dax/).
+For how DAX UDFs work, see the SQLBI article [Introducing user-defined functions in DAX](https://www.sqlbi.com/articles/introducing-user-defined-functions-in-dax/).
 
 ## Prerequisites
 
-Before you can create and use UDFs in Tabular Editor 3, ensure that:
-
-- Your model compatibility level is **1702 or higher**
+UDFs require a model at compatibility level **1702 or higher**.
 
 ## Creating Your First UDF
 
 ### Step 1: Set Up the Model
 
-First, verify your model's compatibility level is appropriate for UDFs:
+Check the model's compatibility level:
 
-1. Open your model in Tabular Editor 3
-2. Select the root node ("Model") in the **TOM Explorer**
-3. In the **Properties** panel, expand the **Database** property, then check that the **Compatibility Level** is set to **1702** or higher
-4. If needed, update the compatibility level and save your model
+1. Open your model in Tabular Editor 3.
+2. Select the root node (**Model**) in the **TOM Explorer**.
+3. In the **Properties** view, expand the **Database** property and check that **Compatibility Level** is **1702** or higher.
+4. If it's lower, update the compatibility level and save the model.
 
 ![Setting Compatibility Level](~/content/assets/images/tutorials/udfs-cl1702.png)
 
 ### Step 2: Add a New Function
 
-1. In the **TOM Explorer**, locate the **Functions** folder under your model
-2. Right-click on the **Functions** folder
-3. Select **Create > User-Defined Function**
-4. Give your function a descriptive name (spaces and special characters are not allowed; underscores and periods are permitted)
+1. In the **TOM Explorer**, locate the **Functions** folder under your model.
+2. Right-click the **Functions** folder.
+3. Select **Create > User-Defined Function**.
+4. Name the function. Names can contain underscores and periods, but no spaces or other special characters.
 
 ![Creating a UDF](~/content/assets/images/tutorials/new-udf.png)
 
-You can also add a UDFs through the **Model > Add User-Defined Function** menu option.
+**Model > Add User-Defined Function** also adds a UDF.
 
-Alternatively, you can create UDFs directly from the **DEFINE** section of a DAX query, by hitting F7 (Apply) or using the **Query > Apply** menu option. If your query contains multiple query-scoped definitions, you can also select just a subset of them and hit F8 (Apply Selection).
+You can also create UDFs from the **DEFINE** section of a DAX query with **Query > Apply** (**F7**). To apply only some of the query's definitions, select them and press **F8** (**Apply Selection**).
 
 ![Creating a UDF from DAX Query](~/content/assets/images/tutorials/udf-from-query.png)
 
 ### Step 3: Define Your Function
 
-In the **Expression Editor**, define your function using proper UDF syntax.
-
-Here's a basic example that adds two numbers together:
+Enter the function definition in the **Expression Editor**, for example this function, which adds two numbers:
 
 ```dax
 // Adds two numbers together
@@ -83,13 +76,13 @@ Here's a basic example that adds two numbers together:
 ```
 
 > [!TIP]
-> Use the **"Use correct UDF syntax"** code action in the Expression Editor if you need help with the proper syntax structure.
+> The **Use correct UDF syntax** code action in the Expression Editor rewrites the expression into valid UDF syntax.
 
 ## UDF Syntax and Structure
 
 ### Basic Syntax
 
-UDFs follow this general structure:
+A UDF definition has this structure:
 
 ```dax
 FUNCTION FunctionName =
@@ -104,11 +97,13 @@ FUNCTION FunctionName =
 
 ### Parameter Evaluation Mode
 
-A key aspect of UDFs is that parameters can be defined in one of two modes, **pass-by-value** and **pass-by-reference**. By default, and unless you specify otherwise, a parameter will by **pass-by-value**. This essentially means that the parameter behaves just like a DAX variable (i.e. one that is defined using the `VAR` keyword) inside the UDF expression. In other words, when the UDF is called, the parameter values are "copied" into the function and any reference to that parameter inside the function will always return the same value.
+Each parameter is either **pass-by-value** or **pass-by-reference**, and is pass-by-value unless you specify otherwise.
 
-In contrast, **pass-by-reference** parameters behave more like measures. That is, the result of evaluating the parameter *inside the function* may differ depending on the evaluation context.
+A pass-by-value parameter behaves like a DAX variable defined with `VAR`: the argument is evaluated once when the function is called, and every reference to the parameter inside the function returns that value.
 
-To specify the evaluation mode, include a parameter specification after the parameter name, separated by a colon (`:`). The specification can be either `VAL` or `EXPR` for "pass-by-value" and "pass-by-reference", respectively. As mentioned above, "pass-by-value" is the default, so `VAL` is implicit if not specified. For example:
+A pass-by-reference parameter behaves like a measure: each reference to the parameter inside the function is evaluated in the evaluation context where it appears.
+
+Set the mode with a colon (`:`) after the parameter name, followed by `VAL` (pass-by-value) or `EXPR` (pass-by-reference), and if you omit it, the parameter is `VAL`:
 
 ```dax
 (
@@ -124,21 +119,19 @@ ROW(
 )
 ```
 
-Calling the above function with a measure reference for each parameter, e.g. `MyFunction([Some Measure], [Some Measure])`, will yield different results for the `y` parameter depending on the current filter context, as shown in the screenshot below:
+If you call this function with the same measure reference for both parameters, for example `MyFunction([Some Measure], [Some Measure])`, only the `y` results change with the filter context:
 
 ![Pass-by-value vs Pass-by-reference](~/content/assets/images/tutorials/udf-pass-by-ref.png)
 
-In addition to specifying the evaluation mode, you can also constrain the parameter type by specifying a data type before the evaluation mode, e.g. `x: INT64 VAL` or `y: TABLE EXPR`.
-
-These type specifications are optional, but if specified they will perform an implicit type conversion on arguments passed to the function, and will also affect the autocomplete suggestions in Tabular Editor 3 when writing DAX code that calls the function.
+To constrain the parameter type, which is optional, put a data type before the evaluation mode, for example `x: INT64 VAL` or `y: TABLE EXPR`. If a type is present, arguments are implicitly converted to the type, and Tabular Editor 3 uses the type in autocomplete suggestions for code that calls the function.
 
 Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
-Check the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
+For the complete list of constraints, see the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions).
 
 ### Optional Parameters with Default Expressions
 
-Starting from version 3.26.2, Tabular Editor 3 supports optional parameters with default expressions. Append `= expression` after the parameter name (and after any type or evaluation-mode hints) to make the parameter optional. When the caller omits the argument, the default expression supplies the value.
+Tabular Editor 3.26.2 and later support optional parameters with default expressions. To make a parameter optional, append `= expression` after the parameter name and any type or evaluation-mode hints. If the caller omits the argument, the default expression supplies the value.
 
 ```dax
 FUNCTION AddTax =
@@ -151,7 +144,7 @@ FUNCTION AddTax =
 
 Calling `AddTax(10)` returns `11`, while `AddTax(10, 0.25)` returns `12.5`.
 
-A few rules govern optional parameters:
+Optional parameters follow these rules:
 
 - Callers can leave an argument empty to fall back to its default, e.g. `MyFunc(1,,3)` omits the second argument. The minimum number of arguments is determined by the position of the rightmost required parameter.
 - A default expression can only reference names (columns, tables, measures, functions) visible where the function is defined, and it can't reference another parameter of the same function.
@@ -161,11 +154,11 @@ A few rules govern optional parameters:
 
 ### In Object Expressions
 
-Once you've created a UDF, you can use it in any DAX expression throughout your model. Tabular Editor 3's autocomplete will suggest your UDFs as you type.
+You can call a UDF from any DAX expression in the model, and autocomplete suggests UDFs as you type.
 
 ### In DAX Scripts
 
-UDFs are also available when working with DAX Scripts:
+DAX scripts can define and call UDFs:
 
 ```dax
 -- Function: MyFuncRenamed
@@ -183,21 +176,21 @@ MEASURE 'Date'[New Measure] = MyFuncRenamed(1,2)
 
 ### In DAX Queries
 
-Tabular Editor 3 adds powerful new features for working with UDFs in DAX queries. We already mentioned above how you can "apply" a UDF from the **DEFINE** section of a DAX query, to have it become a permanent part of your model. In addition, if using a UDF inside a DAX query, you can right-click on the function invocation and choose **Define Function** to automatically generate the function definition in the **DEFINE** section of your query:
+Besides applying a UDF from the **DEFINE** section of a query to the model, you can right-click a function call in a DAX query and choose **Define Function** to add the function definition to the **DEFINE** section:
 
 ![Define Function from Query](~/content/assets/images/tutorials/udf-define.png)
 
-As can be seen from the screen above, the following options are available when right-clicking on a UDF invocation:
+The right-click menu of a UDF call has these commands:
 
-- **Peek Definition** (Alt+F12): Opens a nested, read-only editor below the current cursor position, showing you the function definition
-- **Go To Definition** (F12): Navigates to the function definition in the **Functions** folder of your model, or, if the function is defined in the current query or script, to the function definition inside the editor
-- **Inline Function**: Replaces the function invocation with the actual function definition, substituting parameters with the actual arguments passed to the function
-- **Define Function** (DAX scripts or DAX queries only): Generates the function definition in the **DEFINE** section of your query, if it doesn't already exist there
-- **Define Function with dependencies** (DAX scripts or DAX queries only): Similar to the above, but also generates definitions for any other UDFs that the function depends on
+- **Peek Definition** (**Alt+F12**): opens a read-only editor with the function definition below the cursor.
+- **Go To Definition** (**F12**): goes to the function definition in the editor if the current query or script defines it, and to the function in the **Functions** folder otherwise.
+- **Inline Function**: replaces the call with the function body, with the parameters replaced by the arguments.
+- **Define Function** (DAX scripts and DAX queries only): adds the function definition to the **DEFINE** section, if it isn't there already.
+- **Define Function with dependencies** (DAX scripts and DAX queries only): also adds the definitions of the UDFs the function calls.
 
 ## DAX Package Manager
 
-Tabular Editor 3.24.0 introduces a new feature called the **DAX Package Manager**, which allows you to easily discover, install, and manage DAX UDF libraries from within Tabular Editor. At launch, the package manager supports the popular [DaxLib](https://daxlib.org) feed, which contains a wide range of useful UDFs for various scenarios.
+The [DAX Package Manager](xref:dax-package-manager), available in Tabular Editor 3.24.0 and later, finds, installs and manages DAX UDF libraries and supports the [DaxLib](https://daxlib.org) feed.
 
 System administrators can disable access to the DAX Package Manager by specifying a [group policy](xref:policies).
 
@@ -205,53 +198,52 @@ System administrators can disable access to the DAX Package Manager by specifyin
 
 ### Formula fix-up
 
-When you rename a UDF, Tabular Editor 3 automatically updates all references throughout your model, just like with measures and other objects.
+When you rename a UDF, Tabular Editor 3 updates all references to it in the model, as it does for measures and other objects.
 
 ### Peek Definition
 
-The **Peek Definition** feature works with UDFs, allowing you to quickly view the function's implementation without navigating away from your current context.
+**Peek Definition** shows a UDF's definition below the cursor without leaving the current document.
 
 ![Peek Definition for UDFs](~/content/assets/images/tutorials/udf-peek-definition.png)
 
 ### Dependencies View
 
-UDFs appear in the **DAX Dependencies** (Shift+F12) view, showing both:
-- **Objects that depend on the function**: Which measures, columns, etc. use the UDF
-- **Objects the function depends on**: Which measures, columns, etc. the UDF references
+The **DAX Dependencies** view (**Shift+F12**) shows, for a UDF:
+- **Objects that depend on the function**: the measures, columns and other objects that call the UDF
+- **Objects the function depends on**: the measures, columns and other objects the UDF references
 
 ### Batch Rename
 
-When you select multiple UDFs in the TOM Explorer, you can use the **Batch Rename** (F2) option from the right-click context menu to rename them all at once, using search-and-replace patterns, and optionally regular expressions.
+**Batch Rename** (**F2**) on the right-click menu of the TOM Explorer renames several selected UDFs at once, with search-and-replace patterns and optional regular expressions.
 
 ### Namespaces
 
-The concept of "namespace" doesn't exist in DAX, yet the recommendation is to name UDFs in such a way that ambiguities are avoided and that the origin of the UDF is clear. For example `DaxLib.Convert.CelsiusToFahrenheit` (using '.' as namespace separators). When a UDF is named this way, the TOM Explorer will display the UDF in a hierarchy based on the names. You can toggle the display of UDFs by namespace using the **Group User-Defined Functions by namespace** toggle button in the toolbar above the TOM Explorer (note, this button is only visible when working with a model using Compatibility Level 1702 or higher).
+DAX has no namespaces, so give UDFs names that are unambiguous and show where the UDF comes from, using `.` as a namespace separator, for example `DaxLib.Convert.CelsiusToFahrenheit`. The TOM Explorer displays UDFs named this way in a hierarchy. To switch the hierarchy on or off, use **Group User-Defined Functions by namespace** in the toolbar above the TOM Explorer. The button appears only for models at compatibility level 1702 or higher.
 
 ![DAX UDFs grouped by namespace](~/content/assets/images/udf-namespaces-tom-explorer.png)
 
-In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to customize the namespace of each UDF individually, without changing the actual UDF object name. This is very similar to Display Folders for measures. Setting a different value for the "Namespace" property, than would could be inferred from the UDF name, is useful for example if you want to batch rename (F2) multiple UDFs to get rid of the namespaces in their names, but you still want to keep them nicely organized in the TOM Explorer.
+Each UDF also has a `Namespace` property that sets its place in the TOM Explorer hierarchy without changing its name, similar to display folders for measures. For example, if you batch rename UDFs to remove the namespace from their names, set `Namespace` to keep them grouped in the TOM Explorer.
 
 > [!NOTE]
-> This organizational feature in Tabular Editor doesn't affect DAX code. You still need to type out the full UDF name when calling a UDF, including any namespace parts.
+> The `Namespace` property doesn't affect DAX code, so to call a UDF, use its full name, including any namespace parts.
 
 ## UDFs and source control
 
-If you store your model as a folder structure, Tabular Editor can write each UDF to its own file. Without this serialization level, all functions are stored in `database.json`, which causes merge conflicts when several developers edit functions.
+If you store your model as a folder structure, Tabular Editor can write each UDF to its own file. Without this serialization level, all functions are stored in `database.json`, and parallel edits to different functions can conflict in that file.
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder**. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder** (see [Save to folder](xref:save-to-folder#user-defined-functions-udfs)).
 
 ## Best Practices
 
 ### Naming Conventions
-- Use descriptive names that clearly indicate the function's purpose
-- Consider prefixing UDFs with your organization's initials (e.g., `ACME.CalculateDiscount`)
-- Avoid generic names that might conflict with future DAX functions
-- Use compound names with a separator character (`.` or `_`). For example, `Finance.CalcProfit` or `My_CalcProfit`. This prevents your UDF from breaking if Microsoft introduces a built-in DAX function with the same name. See the [built-in BPA rule](xref:kb.bpa-udf-use-compound-names) for more details
+- use names that describe the function's purpose
+- prefix UDFs with your organization's initials, for example `ACME.CalculateDiscount`
+- use compound names with a separator character (`.` or `_`), for example `Finance.CalcProfit` or `My_CalcProfit`. A compound name can't collide with a built-in DAX function that Microsoft adds later. See the [built-in BPA rule](xref:kb.bpa-udf-use-compound-names)
 
 ### Documentation
-- Always include comments describing what the function does
-- Document each parameter's purpose and expected data type
-- Include usage examples in your comments
+- add a comment that describes what the function does
+- document each parameter's purpose and expected data type
+- include usage examples in the comments
 
 ```dax
 // Calculates the percentage change between two values
@@ -263,7 +255,7 @@ Select the **User Defined Functions (UDFs)** level under **Model > Serialization
 => DIVIDE(newValue - oldValue, oldValue)
 ```
 
-Tabular Editor 3 automatically picks up any comments and displays them appropriately in autocomplete suggestions and tooltips.
+Tabular Editor 3 shows these comments in autocomplete suggestions and tooltips.
 
 ![UDF Autocomplete with Comments](~/content/assets/images/tutorials/udf-comment-tooltips.png)
 
@@ -322,29 +314,25 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 
 Check the following, in order:
 
-1. **The function's definition has a semantic error.** Autocomplete hides UDFs with semantic errors, such as a missing row context or invalid `MATCHBY`, but still shows their calltip. Fix the error in the function.
-2. **The return type doesn't fit the argument you're completing.** The return type is inferred from the function body. A UDF that returns a table isn't offered where a scalar is expected, and a UDF that returns a scalar isn't offered where a table is expected. Exceptions:
-   - Filter arguments, such as the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either.
-   - A function whose body is an untyped `EXPR` parameter is offered everywhere.
-3. **Visual calculation mismatch.** Visual calculation UDFs appear only in visual calculations, and other UDFs appear only outside them.
-4. **It's the function you're editing.** A function isn't offered inside its own definition.
+1. If the function's definition has a semantic error, such as a missing row context or an invalid `MATCHBY`, autocomplete hides the function but still shows its calltip. Fix the error in the function.
+2. Autocomplete offers a UDF only where its return type fits the argument you're completing. The return type is inferred from the function body: a UDF that returns a table isn't offered where a scalar is expected, and the reverse. Exceptions:
+   - filter arguments, such as the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either
+   - a function whose body is an untyped `EXPR` parameter is offered everywhere
+3. Visual calculation UDFs appear only in visual calculations, and other UDFs appear only outside them.
+4. A function isn't offered inside its own definition.
 
 **Parameter constraint errors**
-- Review the parameter types you've specified
-- Make sure you're passing compatible values to the function
-- Check the Microsoft documentation for supported constraint types
+- review the parameter types you've specified
+- check that the arguments match the parameter types
+- check the Microsoft documentation for supported constraint types
 
 **Function not working after deployment**
-- Verify your target environment supports UDFs (compatibility level 1702+). The Power BI Service supports UDFs as of the June 2026 release. Azure Analysis Services and SQL Server Analysis Services don't support UDFs.
+- check that the target supports UDFs, which the Power BI Service supports from the June 2026 release (see [Limitations](#limitations)).
 
 ## Limitations
 
-- UDFs require compatibility level 1702 or higher; Azure Analysis Services and SQL Server Analysis Services don't support them
-- UDFs cannot be recursive (call themselves)
+- UDFs require compatibility level 1702 or higher. Azure Analysis Services and SQL Server Analysis Services don't support them.
+- UDFs can't be recursive (call themselves).
 
 > [!NOTE]
-> With the [general availability](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) of UDFs in June 2026, UDFs support optional parameters with default expressions. Tabular Editor 3 supports this syntax since version 3.26.2. Older versions display a false error message when you use the default expression syntax.
-
----
-
-UDFs in Tabular Editor 3 provide a powerful way to create reusable, maintainable DAX code. By following these guidelines and best practices, you can build a library of functions that will improve your model's consistency and reduce development time.
+> Optional parameters with default expressions arrived with the [general availability](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) of UDFs in June 2026. Tabular Editor 3 versions before 3.26.2 show a false error for the default expression syntax.
