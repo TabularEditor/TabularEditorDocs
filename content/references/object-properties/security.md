@@ -2,7 +2,7 @@
 uid: object-properties-security
 title: Role and security properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,7 +50,7 @@ Members of the model's administrator roles and users with write access to the wo
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Table Permissions
-`MetadataPermission` · per table · Security · read-only · *shortcut to* the role's table permissions
+`MetadataPermission` · per table · Security · read-only · compatibility level 1400+ · *shortcut to* the role's table permissions
 
 The object-level security (OLS) permission of each table in this role. Expand the property to see one entry per table, and pick a value for each:
 
@@ -181,14 +181,14 @@ Use column-level OLS to hide sensitive columns, such as salaries or personal dat
 This is the same setting as `ObjectLevelSecurity` on the column (see @object-properties-columns).
 
 ### Filter Expression
-`FilterExpression` · string · Security
+`FilterExpression` · string · Translations, Perspectives, Security
 
 The row-level security filter for the table in this role: a DAX expression that returns `TRUE` for the rows that members of the role can see. An empty filter leaves the table unfiltered for this role. Edit it in the **Expression Editor**, or through `RowLevelSecurity` on the role or on the table. For examples, see [Row Level Security](#row-level-security).
 
 The expression is evaluated in the context of each row of the table, so you refer to its columns directly, for example `'Region'[Country] = "Denmark"`. To use values from other tables, use `RELATED` or `LOOKUPVALUE`. To look up the current user, use `USERPRINCIPALNAME ()` or `USERNAME ()`.
 
 ### OLS Table Permission
-`MetadataPermission` · MetadataPermission · Security · compatibility level 1400+
+`MetadataPermission` · MetadataPermission · Translations, Perspectives, Security · compatibility level 1400+
 
 The object-level security (OLS) permission of the table in this role.
 

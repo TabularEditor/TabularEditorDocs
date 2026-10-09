@@ -2,7 +2,7 @@
 uid: object-properties-data-sources
 title: Data source and expression properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -495,7 +495,7 @@ Data binding hints need compatibility level 1608 or higher. Add and edit them in
 The ID of the Fabric data connection to bind to, usually a GUID. You find it in the settings of the connection under **Manage connections and gateways** in Fabric.
 
 ### Type
-`Type` · BindingInfoType · Options
+`Type` · BindingInfoType · Options · read-only
 
 The kind of binding information.
 

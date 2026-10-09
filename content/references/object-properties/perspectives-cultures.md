@@ -2,7 +2,7 @@
 uid: object-properties-perspectives-cultures
 title: Perspective and culture properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -71,7 +71,7 @@ The translation statistics properties show how much of the model is translated i
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Altered
-`Altered` · bool (empty when mixed) · Basic · *shortcut to* the **Altered** flag of every translation in the culture
+`Altered` · bool (empty when mixed) · Basic · compatibility level 1571+ · *shortcut to* the **Altered** flag of every translation in the culture
 
 Each translation in a culture carries an *altered* flag in the Tabular Object Model (TOM), which translation tools use to mark translations that a person has reviewed or changed. This property sums up the flags of all translations in the culture:
 
@@ -91,7 +91,7 @@ When you set the flag through a live connection to a server, the server keeps it
 <!-- TODO (not verifiable from TE3 source): confirm which tools set and read the Altered flag. -->
 
 ### Content
-`Content` · string · Linguistic Metadata
+`Content` · string · Linguistic Metadata · compatibility level 1465+
 
 The linguistic schema of the culture: the natural-language metadata that Power BI Q&A used before it was retired. It contains the synonyms for tables, columns and measures, and phrasings that describe how objects relate, for example that customers buy products. The `Synonyms` property on each object reads and writes the synonyms stored here.
 
@@ -100,7 +100,7 @@ The content is a large JSON or XML document, depending on `ContentType`, and Pow
 In Tabular Editor 3, select **...** on the property to edit the content in a multi-line text editor. Tabular Editor doesn't validate the document, and it sets `ContentType` from the first character: content that starts with `{` is JSON, anything else is XML. Clearing the content removes the linguistic metadata from the culture. Tabular Editor reads and writes `Synonyms` only from JSON content.
 
 ### Content Type
-`ContentType` · ContentType · Linguistic Metadata · read-only
+`ContentType` · ContentType · Linguistic Metadata · read-only · compatibility level 1465+
 
 The format of `Content`, `Json` for models created by Power BI or `Xml` for the older format. It's empty when the culture has no linguistic metadata. Tabular Editor sets it when you edit `Content`. The **Properties** view shows this property at compatibility level 1465 and higher.
 

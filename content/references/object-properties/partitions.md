@@ -2,7 +2,7 @@
 uid: object-properties-partitions
 title: Partition properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -93,7 +93,7 @@ When the **Ignore timestamps** serialization option is on (the default, see @pre
 In Tabular Editor 3, refresh a single partition by right-clicking it in the **TOM Explorer** and choosing **Refresh partition** and the type of refresh. The @data-refresh-view shows the progress of the refresh.
 
 ### DataCoverageDefinition
-`DataCoverageDefinition` · DataCoverageDefinition · Options
+`DataCoverageDefinition` · DataCoverageDefinition · Options · compatibility level 1603+
 
 The optional [data coverage definition](#data-coverage-definition) of the partition, which describes the rows a DirectQuery partition holds. When a query only asks for rows outside that range, the engine skips querying the source. Hybrid tables use it on the DirectQuery partition that holds the recent data, next to the imported partitions with older data.
 
@@ -238,7 +238,7 @@ Tabular Editor tells the two kinds apart by the M function in this shared expres
 To point a Direct Lake model to a different lakehouse or warehouse, for example when you move it from development to production, change the M expression of that shared expression. The partitions keep pointing to it. The @script-convert-dlsql-to-dlol script switches a model from Direct Lake on SQL to Direct Lake on OneLake by changing the same M expression.
 
 ### Schema Name
-`SchemaName` · string · Options
+`SchemaName` · string · Options · compatibility level 1604+
 
 The schema of the source object, for lakehouses and warehouses that use schemas, for example `dbo` or `sales`. Leave it empty when the source has no schemas. Together with `EntityName`, it identifies the source table.
 
@@ -338,7 +338,7 @@ Whether the most recent period is imported too or kept in DirectQuery to show re
 A hybrid table sends queries for the current period to the source. A [data coverage definition](#data-coverage-definition) on the DirectQuery partition avoids source queries for rows outside the current period. Microsoft recommends Dual storage mode for the tables related to a hybrid table.
 
 ### Policy Type
-`PolicyType` · RefreshPolicyType · Options
+`PolicyType` · RefreshPolicyType · Options · read-only
 
 The kind of refresh policy. The only value is `Basic`, the policy described on this page, and you can't change it in Tabular Editor.
 
