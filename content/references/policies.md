@@ -1,8 +1,8 @@
 ---
 uid: policies
 title: Policies
-author: Daniel Otykier
-updated: 2026-09-22
+author: Morten Lønskov
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -62,7 +62,8 @@ Value names are not case sensitive.
 | Kind of setting | Registry type | Notes |
 |--|--|--|
 | On/off policy | `REG_DWORD` | Any non-zero value enforces the policy. `0`, and the absence of the value, both mean it is not enforced. |
-| Choice | `REG_SZ` | The name of the choice, for example `Read`. A `REG_DWORD` holding the position of the choice in the list is also accepted, which is what the administrative template writes. |
+| Choice | `REG_SZ` | The name of the choice, for example `Read`, which is what the administrative template writes. A `REG_DWORD` holding the position of the choice in the list is also accepted. |
+| Number | `REG_DWORD` | What the administrative template writes. A `REG_SZ` holding the number is also accepted. |
 | List | `REG_MULTI_SZ` | One entry per line. A `REG_SZ` whose entries are separated by semicolons is also accepted. |
 | Path, address or name | `REG_SZ` | |
 
