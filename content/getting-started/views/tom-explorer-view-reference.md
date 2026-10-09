@@ -7,7 +7,7 @@ applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Works differently than showed in this article"
+      note: "Works differently than shown in this article"
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
