@@ -2,7 +2,7 @@
 uid: object-properties-model
 title: Model properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -318,22 +318,22 @@ Whether the model has changes that haven't been saved to the engine yet. This is
 In Tabular Editor 3, the @unsaved-changes show which objects and properties differ from the last saved version of the model.
 
 ### Expressions
-`Expressions` · collection of shared expressions · Options · read-only
+`Expressions` · collection of shared expressions · Options · read-only · compatibility level 1400+
 
 The shared expressions of the model, such as Power Query parameters and queries that other queries refer to. Select **...** to edit the collection, or work with them in the **Shared Expressions** folder of the **TOM Explorer**. See @object-properties-data-sources. The @script-create-m-parameter script adds a Power Query parameter with a C# script.
 
 ### Query Groups
-`QueryGroups` · collection of query groups · Options · read-only
+`QueryGroups` · collection of query groups · Options · read-only · compatibility level 1480+
 
 The folders that group Power Query queries and parameters, as shown in the **Queries** pane of Power BI Desktop. See @object-properties-data-sources.
 
 ### Binding Info Collection
-`BindingInfoCollection` · collection of binding info objects · Options · read-only
+`BindingInfoCollection` · collection of binding info objects · Options · read-only · compatibility level 1608+
 
 Hints that tell Fabric which data connection to use for a data source in the model, for example after the model is deployed to another workspace. See **Data binding hint** on @object-properties-data-sources.
 
 ### Functions
-`Functions` · collection of functions · Options · read-only
+`Functions` · collection of functions · Options · read-only · compatibility level 1702+
 
 The DAX User-Defined Functions (UDFs) of the model. See @object-properties-functions and @udfs. The BPA rule @kb.bpa-udf-use-compound-names flags functions whose names don't contain a `.` or `_` separator.
 

@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: Column properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -141,7 +141,7 @@ The horizontal alignment of the column's values in client tools that support it.
 Power BI ignores this property. Table and matrix visuals always align text to the left and numbers to the right, and you set other alignments in the formatting options of the visual. In an Excel PivotTable connected to the model, right- and center-aligned columns also show with the default alignment.
 
 ### Alternate Of
-`AlternateOf` · AlternateOf · Options
+`AlternateOf` · AlternateOf · Options · compatibility level 1460+
 
 Makes this column part of a user-defined aggregation. An aggregation table holds pre-aggregated data, for example sales per customer and product. `AlternateOf` maps this column to the column of the detail table that it stands in for and sets how the values were aggregated, and the engine then answers queries from the smaller aggregation table when it can.
 
@@ -203,7 +203,7 @@ A hint to the engine about how to compress a numeric column in memory. Without a
 The engine can still choose a different encoding, and text columns always use hash encoding. Set a hint only when you've seen, for example in VertiPaq Analyzer, that the engine's encoding makes refresh slow or the model large.
 
 ### Group By Columns
-`GroupByColumns` · GroupingColumnCollection · Options · read-only
+`GroupByColumns` · GroupingColumnCollection · Options · read-only · compatibility level 1400+
 
 Other columns in the same table that the engine also groups by whenever a query uses this column. Rows that have the same value in this column stay separate when their values in a group-by column differ.
 
@@ -303,7 +303,7 @@ Excel no longer uses it for drill-through: **Show Details** in an Excel PivotTab
 The variations of this column. A variation is something else that a client tool shows when a user picks this column. Power BI uses variations for *auto date/time*. See [Variation](#variation).
 
 ### Object Level Security
-`ObjectLevelSecurity` · ColumnOLSIndexer · Translations, Perspectives, Security · read-only · *shortcut to* the column permissions of each role
+`ObjectLevelSecurity` · ColumnOLSIndexer · Translations, Perspectives, Security · read-only · compatibility level 1400+ · *shortcut to* the column permissions of each role
 
 The object-level security (OLS) setting of this column in each role of the model. The property appears at compatibility level 1400 or higher when the model has at least one role. Expand it to see one entry per role, with one of these values:
 

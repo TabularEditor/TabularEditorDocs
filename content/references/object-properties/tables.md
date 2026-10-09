@@ -2,7 +2,7 @@
 uid: object-properties-tables
 title: Table properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,7 +73,7 @@ Incremental refresh is available for Power BI and Fabric models only. The **Prop
 For Analysis Services models, you create and manage the partitions yourself. See @incremental-refresh-about and @incremental-refresh-setup. The @script-implement-incremental-refresh script sets up a refresh policy based on a date column you select, including the `RangeStart` and `RangeEnd` parameters.
 
 ### Refresh Policy
-`RefreshPolicy` · BasicRefreshPolicy · Incremental Refresh
+`RefreshPolicy` · BasicRefreshPolicy · Incremental Refresh · compatibility level 1450+
 
 The incremental refresh policy of the table. Expand it in the **Properties** view to set how much history to keep, how much to refresh, the source expression and the other policy settings. The settings are described under refresh policy on @object-properties-partitions. See also @incremental-refresh-policy.
 
@@ -118,7 +118,7 @@ The order in which the engine considers this table when it looks for an aggregat
 In Power BI Desktop, this is the **Precedence** setting in **Manage aggregations**. To set up an aggregation table in Tabular Editor, see @user-defined-aggregations. The @script-implement-user-defined-aggregations script automates those steps for a fact table you select.
 
 ### Calendars
-`Calendars` · collection of Calendar · Options · read-only
+`Calendars` · collection of Calendar · Options · compatibility level 1701+
 
 The custom calendars defined on the table. A calendar maps the columns of a date table that hold the year, quarter, month, week and date, and calendar-based time intelligence functions use it to work with fiscal, retail or other non-standard calendars. Custom calendars need compatibility level 1701 or higher. See @object-properties-calendars.
 
@@ -195,7 +195,7 @@ Click the ellipsis button to open the collection editor, where you add, remove a
 The **Properties** view shows `Partitions` only when the table's first partition is an M partition or a query partition. It's hidden for calculated tables (including field parameters), calculation group tables, Direct Lake tables and tables with policy range partitions. To view and edit the partitions of calculated tables and calculation group tables, run the @script-edit-hidden-partitions script.
 
 ### Private
-`IsPrivate` · bool · Options · compatibility level 1400+
+`IsPrivate` · bool · Options
 
 When `true`, client tools don't show the table, even to developers who turn on hidden objects. Power BI Desktop sets it on the date table template of the auto date/time feature (the table named `DateTableTemplate_` followed by a GUID). It's always available in Power BI models and needs compatibility level 1400 or higher in Analysis Services models.
 
@@ -207,14 +207,14 @@ In Power BI Desktop, a private table doesn't appear in the **Data** pane at all,
 The BPA rule @kb.bpa-remove-auto-date-table flags the `DateTableTemplate_` and `LocalDateTable_` tables that auto date/time creates, so you can replace them with a single date table.
 
 ### Sets
-`Sets` · collection of Set · Options · read-only
+`Sets` · collection of Set · Options · read-only · compatibility level 1400+
 
 The calculated sets defined on the table. A set is a named DAX expression that returns a set of members, which client tools can show as a predefined selection. Sets are supported in Power BI models only: the **Properties** view shows `Sets` when the model's compatibility mode is Power BI and the compatibility level is 1400 or higher. Sets don't appear as objects in the **TOM Explorer**, so you add and edit them in the collection editor of this property. See @object-properties-functions.
 
 <!-- TODO (not verifiable from TE3 source): what calculated sets are used for, and which client tools support them. -->
 
 ### Show As Variations Only
-`ShowAsVariationsOnly` · bool · Options · compatibility level 1400+
+`ShowAsVariationsOnly` · bool · Options
 
 When `true`, client tools show the table in the field list only through a column variation that points to it. Power BI Desktop sets it on the date tables that auto date/time creates (the tables named `LocalDateTable_` followed by a GUID), which appear as the date hierarchy under a date column. See `Variations` on @object-properties-columns.
 
@@ -346,12 +346,12 @@ BLANK ()
 In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info.
 
 ### Multiple or Empty Selection Expression Description
-`MultipleOrEmptySelectionDescription` · string · Options · *shortcut to* the calculation group
+`MultipleOrEmptySelectionDescription` · string · Options · compatibility level 1605+ · *shortcut to* the calculation group
 
 A description of the multiple or empty selection expression, for other developers. Client tools don't show it to report authors.
 
 ### Multiple or Empty Selection Format String Expression
-`MultipleOrEmptySelectionFormatStringExpression` · string · Options · *shortcut to* the calculation group
+`MultipleOrEmptySelectionFormatStringExpression` · string · Options · compatibility level 1605+ · *shortcut to* the calculation group
 
 A DAX expression that returns the format string to use when the multiple or empty selection expression applies. It works like `FormatStringExpression` on a calculation item. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the format string of the measure.
 
@@ -374,11 +374,11 @@ IF (
 ```
 
 ### No-selection Expression Description
-`NoSelectionExpressionDescription` · string · Options · *shortcut to* the calculation group
+`NoSelectionExpressionDescription` · string · Options · compatibility level 1605+ · *shortcut to* the calculation group
 
 A description of the no-selection expression, for other developers. Client tools don't show it to report authors.
 
 ### No-selection Format String Expression
-`NoSelectionFormatStringExpression` · string · Options · *shortcut to* the calculation group
+`NoSelectionFormatStringExpression` · string · Options · compatibility level 1605+ · *shortcut to* the calculation group
 
 A DAX expression that returns the format string to use when the no-selection expression applies. It works like `FormatStringExpression` on a calculation item. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the format string of the measure.
