@@ -1,7 +1,7 @@
 ﻿# Tabular Editor 3 BETA-18.1
 
 > [!IMPORTANT]
-> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
+> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/en/references/release-notes).
 
 - Download [Tabular Editor 3 BETA-18.1](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.1.x86.msi)
 - Download [Tabular Editor 3 BETA-18.1 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.1.x64.msi)
@@ -30,7 +30,7 @@ So, in order to detect schema changes for Power Query partitions, Tabular Editor
 
 ![image](https://github.com/TabularEditor3/PublicPreview/blob/master/update%20schema.gif?raw=true)
 
-The only caveat is of course that Tabular Editor 3 has to be connected to an instance of Analysis Services, but it doesn't matter whether or not the model you're working with holds any data - as long as the credentials to the data sources are stored in AS (and AS can actually access the data source). This technique is particularly useful if you use Tabular Editor 3's [workspace mode](https://docs.tabulareditor.com/Workspace-Database.html).
+The only caveat is of course that Tabular Editor 3 has to be connected to an instance of Analysis Services, but it doesn't matter whether or not the model you're working with holds any data - as long as the credentials to the data sources are stored in AS (and AS can actually access the data source). This technique is particularly useful if you use Tabular Editor 3's [workspace mode](xref:workspace-mode-wt).
 
 In addition to detecting column names and data types, Tabular Editor 3 will also let you update the Description property from the source (if present). On SQL Server sources, this would be the MS_Description extended property. If a column is renamed in the source, it will show up in the Apply Schema Changes dialog as a column import and a column remove. However, as shown in the GIF above, if you Ctrl+Right Click on these two schema changes, you can combine them as a single "rename source column" schema change. The advantage of this approach, is that Tabular Editor 3 will automatically fix up any DAX expressions that reference the renamed column.
 
