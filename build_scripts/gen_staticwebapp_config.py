@@ -198,15 +198,17 @@ def generate_config(languages: list[str], default_lang: str | None = None, site_
     # 2. Release notes special handling (302 - dynamic target)
     # These point to the latest release notes which changes over time
     # Generate explicit routes per language since Azure SWA doesn't support segment capture
+    # Translations lag behind English, so fall back to the English page until it is translated.
     for lang in languages:
+        rn_lang = lang if (Path(site_dir) / lang / rn_rel_path).exists() else default_lang
         routes.append({
             "route": f"/{lang}/references/release-notes",
-            "redirect": f"/{lang}/{rn_rel_path}",
+            "redirect": f"/{rn_lang}/{rn_rel_path}",
             "statusCode": 302
         })
         routes.append({
             "route": f"/{lang}/te3/other/release-notes",
-            "redirect": f"/{lang}/{rn_rel_path}",
+            "redirect": f"/{rn_lang}/{rn_rel_path}",
             "statusCode": 302
         })
     # Also handle non-prefixed paths
