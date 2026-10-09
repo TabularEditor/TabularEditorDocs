@@ -2,7 +2,7 @@
 uid: mcp-server
 title: MCP server
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -281,7 +281,7 @@ Select **Regenerate token** (the refresh button beside the token) to issue a new
 
 When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no data values from Tabular Editor.
+Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**.
 
 See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
 

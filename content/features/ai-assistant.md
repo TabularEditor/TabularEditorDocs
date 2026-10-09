@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -400,9 +400,9 @@ In Enterprise Edition, including Consultancy and Trial licenses, Tabular Editor 
 
 - which permissions were requested and how you answered
 - which tools ran and whether each one succeeded, failed or was blocked
-- the full text of any C# script the assistant or an MCP agent ran, or handed to you for review
+- the full text of any C# script the assistant or an MCP agent ran or submitted to run, including scripts that failed at run time or were refused
 
-Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
+Your prompts, the assistant's replies and data values from your model are never recorded. A script that fails to compile isn't saved, and neither is the text of a script the assistant writes into a document for you to run yourself. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
 
 Without an Enterprise license, and before a license is activated, nothing is recorded, no folder is created and the button isn't shown. See @ai-audit-log for what each record holds, where the files are stored and the policies that redirect them.
 
