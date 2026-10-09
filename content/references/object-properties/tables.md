@@ -268,7 +268,7 @@ Field parameters in Power BI are calculated tables. The @create-field-parameter 
 The same as on [tables](#table).
 
 ### Expression
-`Expression` · string · Options
+`Expression` · string · Options · *shortcut to* the expression of the table's calculated partition
 
 The DAX expression that returns the table's rows. It must return a table, for example:
 
@@ -305,6 +305,11 @@ A calculation group table has the properties below in addition to the common pro
 - [Translated Names](xref:object-properties-common#translated-names)
 - [Translated Descriptions](xref:object-properties-common#translated-descriptions)
 - [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
+
+### Table Group
+`TableGroup` · string · Basic · *stored as an annotation* (`TabularEditor_TableGroup`)
+
+The same as [Table Group](#table-group) on a table.
 
 ### Calculation Group Description
 `CalculationGroupDescription` · string · Basic · *shortcut to* **Description** of the calculation group

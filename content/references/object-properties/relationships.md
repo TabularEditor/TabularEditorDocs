@@ -2,7 +2,7 @@
 uid: object-properties-relationships
 title: Relationship properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,6 +38,7 @@ You can create and edit relationships in the **Properties** view or, in Tabular 
 
 ### Common properties
 
+- [Name](xref:object-properties-common#name)
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)

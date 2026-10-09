@@ -288,7 +288,21 @@ Whether the engine builds an index on a text column, and whether it saves that i
 
 In Power BI Desktop, whose engine supports compatibility level 1706, the engine accepts `Off` and `Auto` and rejects `Explicit` and `Full` with the error "Persist String Index feature is disabled". Recent versions of the TOM library only allow values other than `Auto` from compatibility level 1707.
 
-<!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. TOM also has a separate FullTextIndexingBehavior property (for TEXTCONTAINS and TEXTSIMILARITY), which TE3 currently hides in the Properties view. -->
+<!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. -->
+
+### Full Text Indexing Behavior
+`FullTextIndexingBehavior` · IndexingBehavior · Options · compatibility level 1708+
+
+Whether the engine builds a full-text index on a text column and saves it. The full-text index enables the DAX functions `TEXTCONTAINS` and `TEXTSIMILARITY`. The default is `Off`.
+
+| Value | Meaning |
+|---|---|
+| `Off` | The default. Don't build a full-text index. |
+| `Auto` | The TOM library doesn't describe this value for full-text indexing. |
+| `Explicit` | Build and save the index only when you run a refresh of type `RefreshIndex`. |
+| `Full` | Build and save the index during refresh. |
+
+<!-- TODO (not verifiable from TE3 source): what Auto does for full-text indexing, and which engines support compatibility level 1708. -->
 
 ### Table Detail Position
 `TableDetailPosition` · int · Options
@@ -408,6 +422,7 @@ Alternate Of needs compatibility level 1460 or higher. It doesn't appear as a se
 ### Common properties
 
 - [Annotations](xref:object-properties-common#annotations)
+- [Object Type](xref:object-properties-common#object-type)
 
 ### Base Column
 `BaseColumn` · Column · Options
