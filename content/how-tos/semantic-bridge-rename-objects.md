@@ -2,7 +2,7 @@
 uid: semantic-bridge-rename-objects
 title: Rename Objects in a Metric View
 author: Greg Baldini
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,18 +19,17 @@ applies_to:
 ---
 # Rename objects in a Metric View
 
-This how-to demonstrates renaming a Metric View field.
-The same pattern applies to every collection in a Metric View: `Fields`, `Measures`, `Dimensions` and `Joins`.
+This how-to demonstrates renaming a Metric View field, and the same pattern applies to every collection in a Metric View: `Fields`, `Measures`, `Dimensions` and `Joins`.
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> These how-tos target Tabular Editor 3.26.2 and later, as earlier versions do not support the v1.1 Metric View features shown here.
+> Renaming in place requires Tabular Editor 3.27.0 or later.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Rename a field
 
-Assign to the object's `Name` property. Everything else about the object (its expression, comment, display name, synonyms and format) is left alone, and it keeps its place in the collection.
+Assigning to the object's `Name` property renames it and keeps the object's other properties (expression, comment, display name, synonyms and format) and its position in the collection.
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -48,7 +47,7 @@ Output(sb.ToString());
 
 **Output:**
 
-```
+```text
 Fields:
   product_name
   product_category
@@ -58,16 +57,17 @@ Fields:
   Order Month
 ```
 
-The collection's name index is updated with the object, so the field is reachable under its new name straight away:
+The collection index updates immediately:
 
 ```csharp
 var field = view.Fields["Order Month"];
 ```
-## Rules
 
-- **Names must stay unique within their collection.** Renaming a field to a name another field already uses throws an `ArgumentException`, and neither the object nor the collection is changed.
-- **Name matching is case-insensitive**, following Databricks SQL. `view.Fields["ORDER MONTH"]` finds the field renamed above. A rename that only changes casing is still worth doing, since it refreshes the stored name.
-- **The rename applies to the object model in memory.** Serialize the view to write it out.
+## Naming rules
+
+- Names must be unique within their collection. Renaming a field to a name another field already uses throws an `ArgumentException` and leaves the object and the collection unchanged.
+- Name matching is case-insensitive, following Databricks SQL. `view.Fields["ORDER MONTH"]` finds the field renamed above, and a case-only rename updates the stored name.
+- The rename changes the object model in memory. Serialize the view to write it out.
 
 ## Next steps
 
