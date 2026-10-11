@@ -8,6 +8,12 @@ name: Deploy to Staging (manual)
 
 on:
   workflow_dispatch:
+  # TEMP: lets this run from the feature branch before it exists on main
+  # (workflow_dispatch only registers once the file is on the default branch).
+  # Remove this push trigger when merging to main.
+  push:
+    branches:
+      - feature/docs-migration
 
 jobs:
   build_job:
