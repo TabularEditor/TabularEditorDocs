@@ -74,7 +74,7 @@ jobs:
       - name: Deploy to Azure Static Web Apps (staging)
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_TEST }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_PROD }}
           action: "upload"
           app_location: "_site"
           api_location: ""
