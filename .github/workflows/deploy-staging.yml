@@ -1,0 +1,76 @@
+name: Deploy to Staging (manual)
+
+# One-off / on-demand deploy of the full site to the staging Static Web App (tedocstestswa).
+# Build steps mirror deploy.yml exactly. Manual trigger only for now - in the pipeline
+# hardening stage this becomes the automatic deploy target for merges to main.
+#
+# Requires the AZURE_SWA_TOKEN_TEST repository secret (the staging SWA's deployment token).
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_job:
+    runs-on: windows-latest
+    name: Build Documentation
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Cache DocFX
+        uses: actions/cache@v4
+        with:
+          path: ~/.dotnet/tools
+          key: docfx-${{ runner.os }}
+      - name: Install DocFX
+        run: dotnet tool install -g docfx --ignore-failed-sources
+      - name: Generate configs
+        run: |
+          python build_scripts/gen_redirects.py
+          python build_scripts/gen_languages.py
+      - name: Generate API metadata
+        run: docfx metadata localizedContent/en/docfx.json
+      - name: Verify API files generated
+        run: |
+          if (!(Test-Path "content/api/toc.yml")) {
+            Write-Error "API metadata generation failed - toc.yml not found"
+            exit 1
+          }
+          Write-Host "API files generated: $((Get-ChildItem content/api/*.yml).Count) YAML files"
+        shell: pwsh
+      - name: Build all documentation
+        run: python build-docs.py --all --skip-gen
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7
+
+  deploy_job:
+    needs: build_job
+    runs-on: ubuntu-latest
+    name: Deploy to Staging
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+      - name: Deploy to Azure Static Web Apps (staging)
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_TEST }}
+          action: "upload"
+          app_location: "_site"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
