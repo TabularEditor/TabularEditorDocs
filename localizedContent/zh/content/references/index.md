@@ -1,6 +1,6 @@
 # 参考资料
 
-本节包含 Tabular Editor 的参考资料。
+This section contains reference material for Tabular Editor.
 
 ## 本节内容
 
@@ -14,12 +14,12 @@
 
 - @faq - 常见问题解答
 - @preferences - 应用偏好设置和配置选项
-- @policies - 组策略的使用
+- @policies - Registry policies that disable features and lock AI settings
 - @shortcuts3 - Tabular Editor 3 的键盘快捷键参考
 - @shortcuts2 - Tabular Editor 2 的键盘快捷键参考
 - @user-options - 表格模型用户选项（.tmuo）文件
 - @supported-files - Tabular Editor 可打开和保存的文件格式
-- @accessibility - 色盲模式、键盘访问、缩放和主题
+- @accessibility - Color blindness mode, keyboard shortcuts, display scaling, themes and language
 
 ### 对象属性参考
 
@@ -32,8 +32,4 @@
 ### 已弃用的功能
 
 - @formatdax - 有关已弃用的 DAX 格式化功能的信息
-
----
-
-_使用本节查找详细的参考信息、下载内容和技术文档。_
 
