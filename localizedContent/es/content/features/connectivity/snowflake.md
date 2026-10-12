@@ -2,7 +2,7 @@
 uid: connect-snowflake
 title: Conectar con Snowflake
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,29 +19,59 @@ applies_to:
 
 # Conectar con Snowflake
 
-Empieza en **Modelo > Importar tablas...** y elige Snowflake como origen. En todos los casos, necesitas el servidor (la URL de tu cuenta) y el Warehouse.
+The Snowflake connector connects to Snowflake data warehouses and is available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
 
-![El cuadro de diálogo Conectar con Snowflake, con Navegador externo seleccionado en la lista de autenticadores y los campos de nombre de usuario y contraseña deshabilitados](~/content/assets/images/features/connectivity/snowflake-connection.png)
+Select **Model > Import tables...** and choose a Snowflake source to open the dialog.
 
-## Autenticadores
+![The Connect to Snowflake dialog, with External browser selected in the Authenticator list and the user name and password fields disabled](~/content/assets/images/features/connectivity/snowflake-connection.png)
 
-| Autenticador          | Qué debes proporcionar                                                                                | Se reconecta sin intervención    |
-| --------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **Snowflake**         | Nombre de usuario y contraseña                                                                        | Sí                               |
-| **Navegador externo** | Un inicio de sesión en el navegador a través de tu proveedor de identidad                             | No                               |
-| **OAuth**             | Un token de tu proveedor de OAuth                                                                     | Sí, mientras el token sea válido |
-| **Par de claves**     | Nombre de usuario y un archivo de clave privada RSA, además de su frase de paso, si la clave la tiene | Sí                               |
+## Connection fields
+
+| Campo                                                                     | Descripción                                                                                              |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Server**                                                                | Your Snowflake account URL. Obligatorio                                                  |
+| **Warehouse**                                                             | The warehouse to run queries on. Obligatorio                                             |
+| **Database (optional)**                                | The database to import from                                                                              |
+| **Authenticator**                                                         | The authentication option. See [Authentication](#authentication)                         |
+| **Username**, **Password** and **Private key file**                       | The credentials for the selected authenticator. The labels change with the authenticator |
+| **Additional connection string properties (optional)** | Extra connection string settings                                                                         |
+
+## Autenticación
+
+| Autenticación         | Qué debes proporcionar                                                                                                          | Interactive sign-in |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| **Snowflake**         | Nombre de usuario y contraseña                                                                                                  | No                  |
+| **Navegador externo** | Un inicio de sesión en el navegador a través de tu proveedor de identidad                                                       | Sí                  |
+| **OAuth**             | An OAuth access token from your OAuth provider, in the **Token** field. When the token expires, enter a new one | No                  |
+| **Par de claves**     | User name and an RSA private key file, plus the key's passphrase if it's encrypted                                              | No                  |
+
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
 
 ## Autenticación mediante par de claves
 
-El autenticador **Par de claves** es la opción recomendada para el trabajo desatendido, ahora que Snowflake exige autenticación multifactor para las cuentas de servicio. No requiere inicio de sesión interactivo, así que una conexión guardada se vuelve a conectar por sí sola.
+Snowflake service users (`TYPE = SERVICE`) can't sign in with a password, so use **Key pair** for them. See [Planning for the deprecation of single-factor password sign-ins](https://docs.snowflake.com/en/user-guide/security-mfa-rollout).
 
-Elige **Par de claves**, introduce tu nombre de usuario y selecciona el archivo de tu clave privada. Mientras este autenticador esté seleccionado, el campo **Contraseña** pasa a llamarse **Frase de contraseña**. **OK** sigue deshabilitado hasta que se hayan completado el servidor, el Warehouse, el nombre de usuario y el archivo de la clave privada.
+1. Select **Key pair** in the **Authenticator** list. The **Password** field changes to **Passphrase**.
+2. Enter your username.
+3. Browse to your private key file.
+4. If the key is encrypted, enter its passphrase.
 
-Los formatos de clave compatibles son PKCS#1 y PKCS#8 sin cifrar, y PKCS#8 cifrado con frase de contraseña; este es el formato que generan las [instrucciones de Snowflake sobre autenticación mediante par de claves](https://docs.snowflake.com/en/user-guide/key-pair-auth).
+**OK** is enabled once **Server**, **Warehouse**, **Username** and **Private key file** are filled in. The private key file must use one of these formats:
+
+- unencrypted PKCS#1
+- unencrypted PKCS#8
+- passphrase-encrypted PKCS#8, the format [Snowflake's key-pair instructions](https://docs.snowflake.com/en/user-guide/key-pair-auth) produce
+
+When you switch between **Key pair** and another authenticator, the **Password** or **Passphrase** field is cleared. Tabular Editor saves the private key file path only while **Key pair** is selected.
 
 > [!IMPORTANT]
-> No se admite una clave cifrada con el esquema heredado de OpenSSL. Estas empiezan por `-----BEGIN RSA PRIVATE KEY-----` y llevan los encabezados `Proc-Type` y `DEK-Info`. Conviértela con un único comando `openssl pkcs8 -topk8`. Esto no requiere generar un nuevo par de claves, así que la clave pública ya registrada en tu usuario de Snowflake sigue siendo válida.
+> Keys encrypted with the legacy OpenSSL scheme, which begin with `-----BEGIN RSA PRIVATE KEY-----` and carry `Proc-Type` and `DEK-Info` headers, aren't supported. Convert such a key to encrypted PKCS#8:
+>
+> ```bash
+> openssl pkcs8 -topk8 -v2 aes256 -in rsa_key.pem -out rsa_key.p8
+> ```
+>
+> Conversion keeps the key pair, and the public key registered on your Snowflake user stays valid.
 
 <!-- IMAGE NEEDED: connectivity/snowflake-key-pair.png
      The Snowflake connection dialog with Key pair selected, so the Private key file field
@@ -51,16 +81,4 @@ Los formatos de clave compatibles son PKCS#1 y PKCS#8 sin cifrar, y PKCS#8 cifra
 
 ## Inicios de sesión con navegador externo
 
-El inicio de sesión en el navegador se almacena en caché para que no se te pida en cada operación. A partir de Tabular Editor 3.27.0, un inicio de sesión almacenado en caché que haya caducado o que tu proveedor de identidades haya revocado ya no bloquea la conexión: Tabular Editor lo descarta en cuanto Snowflake lo rechaza y vuelve a abrir el inicio de sesión en el navegador.
-
-Antes, todas las operaciones posteriores fallaban a menos que se volviera a abrir el navegador; el asistente mostraba tablas y columnas vacías en lugar de un error, y la única forma de solucionarlo era reiniciar Tabular Editor. Un inicio de sesión que abandones, o que caduque por tiempo de espera, ahora cuenta como una cancelación en lugar de como un error que bloquea el trabajo posterior.
-
-## Cambiar de autenticador
-
-Al volver a **Snowflake**, se borran la ruta de la clave privada y la frase de contraseña, en lugar de reutilizar la frase de contraseña como contraseña de la cuenta.
-
-## Dónde se almacenan las credenciales
-
-Las credenciales que escribes aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, así que no se registran en el control de código fuente y cualquier compañero que abra el mismo modelo usará las suyas.
-
-La expresión M generada solo especifica el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
+Tabular Editor caches the browser sign-in. From Tabular Editor 3.27.0, if Snowflake rejects the cached sign-in, for example because your identity provider expired or revoked it, Tabular Editor discards it and opens the browser sign-in again. If you close the browser sign-in or it times out, the operation is canceled.
