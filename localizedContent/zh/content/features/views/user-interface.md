@@ -23,252 +23,252 @@ applies_to:
 
 ## 基本用户界面元素
 
-With a semantic model loaded, Tabular Editor 3 shows the default layout below.
+加载语义模型后，Tabular Editor 3 会显示如下默认布局。
 
 ![基本用户界面](~/content/assets/images/basic-ui.png)
 
-1. **Title bar**: the name of the loaded file, or of the Analysis Services database or Power BI semantic model you're connected to.
-2. **Menu bar**: all features of Tabular Editor 3. See [Menus](#menus) for each menu.
-3. **Toolbars**: the most used features. Every toolbar command is also in the menus. Customize the toolbars and their buttons under **Tools > Customize...**.
-4. **TOM Explorer view**: a tree of the model's objects, built from the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata. The toggle buttons at the top filter which object types are shown, and the search box filters objects by name.
-5. **Expression Editor**: edits the DAX, SQL or M expressions of the object selected in the TOM Explorer. If you close it, double-click an object in the TOM Explorer to open it again. If the object has more than one expression property, the dropdown at the top switches between them. For example, a KPI has a target, a status and a trend expression.
-6. **Properties view**: all TOM properties of the objects selected in the TOM Explorer. You can edit most properties in the grid, also with several objects selected. Some properties, such as **Format String**, **Connection String** and **Role Members**, open a dialog or collection editor from the ellipsis button in the value cell.
-7. **Messages view**: semantic errors found by the continuous analysis of the model's DAX expressions, plus messages from C# scripts and errors reported by Analysis Services.
-8. **Status bar**: information about the current selection, Best Practice Analyzer findings and more. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, and its tooltip shows the address the server listens on. Click the indicator to open the **MCP Server** dialog, or right-click it to start or stop the server, copy a registration configuration for your agent or open the preferences page.
+1. **标题栏**：已加载文件的名称，或所连接的 Analysis Services 数据库或 Power BI 语义模型的名称。
+2. **菜单栏**：Tabular Editor 3 的所有功能。有关各个菜单，请参阅 [菜单](#menus)。
+3. **工具栏**：最常用的功能。工具栏上的每个命令在菜单中也都能找到。可在 **工具 > 自定义...** 中自定义工具栏及其按钮。
+4. **TOM Explorer 视图**：根据 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据构建的模型对象树。顶部的切换按钮用于筛选显示哪些对象类型，搜索框则按名称筛选对象。
+5. **表达式编辑器**：编辑 TOM Explorer 中所选对象的 DAX、SQL 或 M 表达式。如果你关闭了它，双击 TOM Explorer 中的对象即可再次打开。如果对象有多个表达式属性，可使用顶部的下拉列表在它们之间切换。例如，KPI 具有目标、状态和趋势表达式。
+6. **属性视图**：TOM Explorer 中所选对象的所有 TOM 属性。该网格中大多数属性都可编辑；即使选中了多个对象，也可以同时编辑。某些属性，如 **格式字符串**、**连接字符串** 和 **角色成员**，可通过值单元格中的省略号按钮打开对话框或集合编辑器。
+7. **信息视图**：对模型的 DAX 表达式进行持续分析时发现的语义错误，以及来自 C# Script 的信息和 Analysis Services 报告的错误。
+8. **状态栏**：显示当前所选内容、Best Practice Analyzer 的检测结果等信息。当 [MCP 服务器](xref:mcp-server) 可用时，右端的指示器会显示 **MCP Started** 或 **MCP Stopped**，其工具提示会显示服务器正在侦听的地址。单击该指示器可打开 **MCP Server** 对话框；右键单击可启动或停止服务器、复制供代理使用的注册配置，或打开偏好设置页面。
 
-The [View menu](#view) opens the other views.
+[视图菜单](#view) 可打开其他视图。
 
 ## 自定义用户界面
 
-You can resize and rearrange all UI elements, and drag views out of the main window, for example onto another monitor. Tabular Editor 3 saves the layout when you close the application and restores it at the next launch.
+你可以调整并重新排列所有 UI 元素，还可以将视图拖出主窗口，例如拖到另一台显示器上。关闭应用程序时，Tabular Editor 3 会保存布局，并在下次启动时恢复。
 
 ### 选择不同的布局
 
-Choose **Window > Default layout** to reset the application to the default layout, or **Window > Classic layout** to place the TOM Explorer on the left and the Properties view below the Expression Editor, as in Tabular Editor 2.x.
+选择 **窗口 > 默认布局** 可将应用程序重置为默认布局；或者选择 **窗口 > 经典布局**，将 TOM Explorer 放在左侧，并将属性视图放在表达式编辑器下方，就像 Tabular Editor 2.x 一样。
 
-To switch between your own layouts, save the current one with **Window > Capture Layout**, and it becomes an option in the **Window** menu. **Window > Layouts...** lists all layouts, where you apply, load, remove and save them. A layout saved to disk is an .xml file that you can share with other Tabular Editor 3 users.
+要在自己保存的布局之间切换，请通过 **窗口 > 捕获布局** 保存当前布局，这样它就会出现在 **窗口** 菜单中供你选择。**窗口 > 布局...** 会列出所有布局，你可以在这里应用、加载、删除和保存布局。保存到磁盘的布局会以 .xml 文件形式存储，你可以与其他 Tabular Editor 3 用户共享。
 
 ![管理布局](~/content/assets/images/manage-layouts.png)
 
 ### 窗口停靠选项
 
-When you drag a view or document, docking indicators show where you can dock it.
+拖动视图或文档时，停靠指示器会显示可停靠的位置。
 
 ![窗口停靠选项](~/content/assets/images/window-docking-options.png)
 
-Where you drop the window decides how it behaves:
+将窗口放到哪里，决定了它的停靠方式：
 
-**Document tab docking (center indicator)**: a window dropped on the center indicator becomes a document tab in the main document area, next to documents such as DAX queries, scripts and diagrams. Document tabs:
+**文档选项卡停靠（中心指示器）**：将窗口拖放到中心指示器上后，它会成为主文档区域中的一个文档选项卡，与 DAX 查询、脚本和关系图等文档并列。文档选项卡：
 
-- are included when you cycle with **Ctrl+Tab**
-- have no auto-hide
+- 使用 **Ctrl+Tab** 循环切换时会包含在内
+- 不支持自动隐藏
 
-**Tool window docking (edge indicators)**: a window dropped on the left, right, top or bottom indicator is docked as a tool window, like the TOM Explorer and the Messages view. 工具窗口：
+**工具窗口停靠（边缘指示器）**：将窗口拖放到左侧、右侧、顶部或底部指示器上后，它会作为工具窗口停靠，例如 TOM Explorer 和信息视图。工具窗口：
 
-- aren't included in **Ctrl+Tab**
-- have a pin icon that turns on auto-hide, which collapses the window when it isn't in use
-- dock at any side of the main document area
+- 使用 **Ctrl+Tab** 切换时不会包含在内
+- 带有可启用自动隐藏的图钉图标；窗口未使用时会自动折叠
+- 可停靠在主文档区域的任意一侧
 
 > [!TIP]
-> The size of a docked window depends on the space available where you dock it, and you resize it by dragging the dividers between windows.
+> 停靠窗口的大小取决于停靠位置的可用空间，你可以拖动窗口之间的分隔条来调整其大小。
 
 ### 更改主题和调色板
 
-Choose a theme under **Window > Theme**:
+在 **窗口 > 主题** 中选择主题：
 
-- Basic and Bezier are vector-based and scale on high-DPI displays.
-- Blue, Dark and Light are raster-based and don't scale well on high-DPI displays.
+- Basic 和 Bezier 是基于矢量的，可在高 DPI 显示器上缩放。
+- Blue、Dark 和 Light 是基于位图的，在高 DPI 显示器上缩放效果不佳。
 
-For Basic and Bezier, **Window > Default palette** changes the theme's colors.
+对于 Basic 和 Bezier，**窗口 > 默认调色板** 可更改主题颜色。
 
 ![Palettes](~/content/assets/images/palettes.png)
 
 ## 菜单
 
-This section describes each menu.
+本节介绍各个菜单。
 
-The _active document_ is the document that has the cursor, such as the Expression Editor or the "DAX Script 1" tab in the screenshot below. Some shortcuts and menu items depend on whether a document is active, and on its type.
+_活动文档_ 是指当前光标所在的文档，比如表达式编辑器或下方截图中的“DAX脚本 1”选项卡。某些快捷键和菜单项取决于当前是否有活动文档，以及该文档的类型。
 
 > [!NOTE]
-> Menus and toolbars are locked in place by default. To unlock them, clear **Lock menus and toolbars** under **Tools > Customize... > Options**.
+> 默认情况下，菜单和工具栏会锁定在原位。要解锁，请取消选中 **锁定菜单和工具栏**，位于 **工具 > 自定义…… > 选项**。
 
 ![Active Document](~/content/assets/images/active-document.png)
 
 ### 文件
 
-The **File** menu loads and saves model metadata, supporting files and documents.
+**文件** 菜单用于加载和保存模型元数据、相关支持文件以及文档。
 
 ![File Menu](~/content/assets/images/file-menu.png)
 
-- **New**: creates a new blank model (**Ctrl+N**), or a [supporting file](xref:supported-files#supported-file-types) such as a DAX query, a DAX script (text files) or a diagram (JSON file). Supporting files other than C# scripts require a loaded model.
+- **新建**：创建新的空白模型（**Ctrl+N**），或创建一个[支持文件](xref:supported-files#supported-file-types)，例如 DAX 查询、DAX脚本（文本文件）或关系图（JSON 文件）。除 C# Script 外，其他支持文件在使用前都需要先加载模型。
 
   ![File Menu New](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> **New > Model...** isn't available in Tabular Editor 3 Desktop Edition, which works only as an External Tool for Power BI Desktop. See @editions.
+> **新建 > 模型...** 选项在 Tabular Editor 3 桌面版中不可用；该版本只能作为 Power BI Desktop 的外部工具使用。参见 @editions。
 
-- **Open**: loads a model from one of these sources, or opens any other supported file:
+- **打开**：从以下来源之一加载模型，或打开任何其他支持的文件：
 
   ![File Menu Open](~/content/assets/images/file-menu-open.png)
 
-  - **Model from file...** opens model metadata from a file such as a .bim or .pbit file.
-  - **Model from DB...** loads the metadata of a deployed model. Enter Analysis Services or Power BI XMLA connection details, or connect to a local instance such as Visual Studio's Integrated Workspace server or Power BI Desktop.
-  - **Model from folder...** opens model metadata from a folder structure saved by any version of Tabular Editor.
-  - **File...** opens any file type Tabular Editor 3 supports, by file name extension. See [Supported file types](xref:supported-files).
-  - **Import from Metric View YAML...** imports model metadata from a Databricks Metric View YAML file.
+  - **从文件加载模型...**：从 .bim 或 .pbit 等文件打开模型元数据。
+  - **从数据库加载模型...**：加载已部署模型的元数据。输入 Analysis Services 或 Power BI 的 XMLA 连接信息，或连接到本地实例，例如 Visual Studio 的集成 Workspace 服务器或 Power BI Desktop。
+  - **从文件夹加载模型...**：从由任意版本的 Tabular Editor 保存的文件夹结构中打开模型元数据。
+  - **文件...**：根据文件扩展名打开 Tabular Editor 3 支持的任意文件类型。参见[支持的文件类型](xref:supported-files)。
+  - **从 Metric View YAML 导入...**：从 Databricks Metric View YAML 文件导入模型元数据。
 
     ![支持的文件类型](~/content/assets/images/supported-file-types.png)
 
 > [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition, **Open > Model from file...** and **Open > Model from folder...** aren't available, and **Open > File...** opens only [supporting files](xref:supported-files#supported-file-types).
+> 在 Tabular Editor 3 桌面版中，**打开 > 从文件加载模型...** 和 **打开 > 从文件夹加载模型...** 不可用，且 **打开 > 文件...** 只能打开[支持文件](xref:supported-files#supported-file-types)。
 
-- **Reload from disk** / **Reload from server**: reloads the model metadata from its source and discards all unsaved changes. The command reads **Reload from disk** for a model loaded from a file or folder, and **Reload from server** for a model opened from Analysis Services or Power BI. If Tabular Editor 3 runs as an External Tool for Power BI Desktop and the model changes in Power BI Desktop, use this command to reload the model metadata without reconnecting. Models loaded from a file or folder reload automatically when the files change. 参见 [从磁盘自动重新加载](xref:auto-reload)。
-- **Close Document** (**Ctrl+W**): closes the active document or panel in the main area, such as a DAX query, a C# script or a diagram. If the document has unsaved changes, a prompt to save them appears.
-- **Close model**: unloads the model metadata. If you changed the metadata, a prompt to save the changes appears.
-- **Save**: saves the active document to its source file. If no document is active, it saves the model metadata to its source: a Model.bim file, a Database.json folder structure, an Analysis Services instance (including Power BI Desktop) or the Power BI XMLA endpoint.
-- **Save as...** saves the active document as a new file. If no document is active, it saves the model metadata as a new .bim (JSON) file.
-- **Save to folder...** saves the model metadata as a [folder structure](xref:save-to-folder).
-- **Save all**: saves all unsaved documents and the model metadata.
-- **Recent files**: lists recently used supporting files.
-- **Recent tabular models**: lists recently used model metadata files and folders.
+- **从磁盘重新加载** / **从服务器重新加载**：从源重新加载模型元数据，并丢弃所有未保存的更改。对于从文件或文件夹加载的模型，此命令显示为 **从磁盘重新加载**；对于从 Analysis Services 或 Power BI 打开的模型，则显示为 **从服务器重新加载**。如果 Tabular Editor 3 作为 Power BI Desktop 的外部工具运行，并且模型在 Power BI Desktop 中发生更改，可使用此命令重新加载模型元数据，而无需重新连接。从文件或文件夹加载的模型会在文件发生更改时自动重新加载。参见 [从磁盘自动重新加载](xref:auto-reload)。
+- **关闭文档**（**Ctrl+W**）：关闭主区域中当前活动的文档或面板，例如 DAX 查询、C# Script 或关系图。如果文档有未保存的更改，系统会提示你保存这些更改。
+- **关闭模型**：卸载模型元数据。如果你修改了元数据，系统会提示你保存这些更改。
+- **保存**：将活动文档保存到其源文件。如果当前没有活动文档，则会将模型元数据保存回其源：Model.bim 文件、Database.json 文件夹结构、Analysis Services 实例（包括 Power BI Desktop）或 Power BI XMLA endpoint。
+- **另存为...**：将活动文档另存为新文件。如果当前没有活动文档，则将模型元数据另存为新的 .bim（JSON）文件。
+- **保存到文件夹...**：将模型元数据以[文件夹结构](xref:save-to-folder)的形式保存。
+- **全部保存**：一次性保存所有未保存的文档和模型元数据。
+- **最近文件**：列出最近使用的支持文件。
+- **最近的表格模型**：列出最近使用的模型元数据文件和文件夹。
 
 > [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition, **Save to folder** and **Recent tabular models** are disabled, and **Save as** is enabled only for [supporting files](xref:supported-files#supported-file-types).
+> 在 Tabular Editor 3 桌面版中，**保存到文件夹**和**最近的表格模型**已禁用，而**另存为**仅可用于[支持文件](xref:supported-files#supported-file-types)。
 
-- **Exit**: closes Tabular Editor 3. A prompt to save unsaved files or model metadata appears first.
+- **退出**：关闭 Tabular Editor 3。此时会先提示你保存未保存的文件或模型元数据。
 
 ### 编辑
 
-The **Edit** menu edits the active document or the loaded model metadata.
+**编辑**菜单用于编辑活动文档或已加载的模型元数据。
 
 ![编辑菜单](~/content/assets/images/edit-menu.png)
 
-- **Undo**: undoes the last change to the model metadata. With no active document, **Ctrl+Z** runs this command.
-- **Redo**: redoes the last undone change to the model metadata. With no active document, **Ctrl+Y** runs this command.
-- **Find**: opens the "Find and replace" dialog on the "Find" tab. See [Find](xref:find-replace#find).
-- **Replace**: opens the "Find and replace" dialog on the "Replace" tab. See [Replace](xref:find-replace#replace).
-- **Cut / Copy / Paste**: with an active document, these apply to the selected text. Otherwise, they apply to the objects selected in the TOM Explorer. For example, to duplicate several measures, select them with **Shift** or **Ctrl** in the TOM Explorer and press **Ctrl+C**, then **Ctrl+V**.
-- **Delete**: deletes the selected text in the active document or, with no active document, the objects selected in the TOM Explorer.
+- **撤销**：撤销对模型元数据的上一次更改。在没有活动文档时，按 **Ctrl+Z** 会执行此命令。
+- **重做**：重做上一次对模型元数据的撤销操作。在没有活动文档时，按 **Ctrl+Y** 会执行此命令。
+- **查找**：打开“查找和替换”对话框，并切换到“查找”选项卡。参见[查找](xref:find-replace#find)。
+- **替换**：打开“查找和替换”对话框，并切换到“替换”选项卡。参见[替换](xref:find-replace#replace)。
+- **剪切 / 复制 / 粘贴**：在有活动文档时，这些命令作用于所选文本。否则，它们作用于 TOM Explorer 中所选的对象。例如，要复制多个度量值，请在 TOM Explorer 中按住 **Shift** 或 **Ctrl** 选择它们，然后按 **Ctrl+C**，再按 **Ctrl+V**。
+- **删除**：删除活动文档中的所选文本；如果没有活动文档，则删除 TOM Explorer 中所选的对象。
 
 > [!NOTE]
-> A deletion prompt appears only when several objects are selected, or when other objects depend on the ones you delete. **Undo** (**Ctrl+Z**) restores deleted objects.
+> 只有在选中了多个对象，或其他对象依赖于你要删除的对象时，才会出现删除提示。**撤销**（**Ctrl+Z**）可还原已删除的对象。
 
-- **Select all**: selects all text in the active document, or all objects with the same parent in the TOM Explorer.
-- **Code assist**: shortcuts to the code assist features for DAX. Available while you edit DAX. See [DAX editor](xref:dax-editor#code-assist-features).
-- **Word Wrap**: toggles word wrap in the active text document.
+- **全选**：选中活动文档中的所有文本，或选中 TOM Explorer 中具有相同父级的所有对象。
+- **Code Assist**：用于 DAX 的 Code Assist 功能的快捷方式。在编辑 DAX 时可用。请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
+- **自动换行**：在当前活动的文本文档中切换是否启用自动换行。
 
 ### 视图
 
-The **View** menu opens and focuses the views of Tabular Editor 3, including hidden ones. Documents aren't listed; switch between them with the [Window menu](#window).
+**视图**菜单用于打开并聚焦 Tabular Editor 3 的各个视图，包括隐藏的视图。这里不会列出文档；可通过 [窗口菜单](#window) 在它们之间切换。
 
 ![视图菜单](~/content/assets/images/view-menu.png)
 
-- **TOM Explorer**: a tree of the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the loaded model. See @tom-explorer-view.
-- **AI Assistant**: a chat with an AI assistant for modeling tasks.
-- **DAX Package Manager**: browses DAX user-defined function packages and installs them into the model.
-- **Best Practice Analyzer**: validates the model against best practice rules that you define. See @bpa-view.
-- **Messages**: errors, warnings and informational messages from sources such as the Tabular Editor 3 Semantic Analyzer. See @messages-view.
-- **Data Refresh**: tracks refresh operations running in the background. See @data-refresh-view.
-- **Expression Editor**: edits the DAX, M or SQL expressions of the object selected in the TOM Explorer. 见 @dax-editor。
-- **Macros**: manages the macros you created from @csharp-scripts. See @creating-macros.
-- **VertiPaq Analyzer**: collects, imports and exports statistics about the data in the model, for DAX performance tuning. VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。 See the [GitHub project page](https://github.com/sql-bi/VertiPaq-Analyzer).
-- **Dependencies**: the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) shows the dependencies between the selected object and other objects in the model. Select **Track TOM Explorer** to make it follow the TOM Explorer selection.
-- **DAX Optimizer**: analyzes the model for DAX performance issues with [DAX Optimizer](https://www.daxoptimizer.com).
-- **Calendar Editor**: defines and manages calendars for the modern time intelligence feature.
-- **Perspective Editor**: a matrix of which objects each perspective of the model includes.
-- **Metadata Translation Editor**: a grid for editing the metadata translations (cultures) of model objects.
-- **Toolbars / Properties**: toggles toolbar visibility and opens the Properties view (**F4**).
+- **TOM Explorer**：以树形结构显示已加载模型的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。请参阅 @tom-explorer-view。
+- **AI 助手**：用于建模任务的 AI 助手聊天界面。
+- **DAX 组件管理器**：浏览 DAX 用户定义函数组件，并将其安装到模型中。
+- **Best Practice Analyzer**：根据你定义的最佳实践规则验证模型。请参阅 @bpa-view。
+- **信息**：显示来自 Tabular Editor 3 语义分析器等来源的错误、警告和提示信息。请参阅 @messages-view。
+- **数据刷新**：跟踪在后台运行的刷新操作。请参阅 @data-refresh-view。
+- **表达式编辑器**：编辑 TOM Explorer 中所选对象的 DAX、M 或 SQL 表达式。见 @dax-editor。
+- **宏**：管理你通过 @csharp-scripts 创建的宏。请参阅 @creating-macros。
+- **VertiPaq分析器**：收集、导入和导出模型中数据的统计信息，用于 DAX 性能调优。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
+- **依赖关系**：[**DAX 依赖关系** 视图](xref:creating-and-testing-dax#dax-dependencies)显示所选对象与模型中其他对象之间的依赖关系。选择 **跟踪 TOM Explorer**，让它跟随 TOM Explorer 中的选中项。
+- **DAX优化器**：使用 [DAX优化器](https://www.daxoptimizer.com) 分析模型中的 DAX 性能问题。
+- **日历编辑器**：为现代时间智能功能定义和管理日历。
+- **透视编辑器**：以矩阵形式显示模型中每个透视包含哪些对象。
+- **元数据翻译编辑器**：提供一个表格，用于编辑模型对象的元数据翻译（区域设置）。
+- **工具栏 / 属性**：切换工具栏的可见性并打开属性视图（**F4**）。
 
 ### 模型
 
-The **Model** menu has actions on the Model object, the root of the TOM Explorer.
+**模型**菜单包含针对 Model 对象的操作；该对象是 TOM Explorer 的根节点。
 
 ![模型菜单](~/content/assets/images/model-menu.png)
 
-- **Deploy...**: opens the Tabular Editor Deployment wizard. See [Model deployment](xref:deployment).
+- **Deploy...**：打开 Tabular Editor Deployment Wizard。参见 [模型部署](xref:deployment)。
 
 > [!IMPORTANT]
-> **Deploy** isn't available in Tabular Editor 3 Desktop Edition. See @editions.
+> **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。参见 @editions。
 
-- **Serialization options...** sets how model metadata is serialized when saved to a file or folder structure.
-- **Import tables...** opens the Tabular Editor 3 Import Table Wizard. See @importing-tables.
-- **Update schema (all tables)...** compares the columns of all tables with their data sources and detects schema changes. See [Updating table schema](xref:importing-tables#updating-table-schema).
-- **Script DAX**: generates a DAX script for the selected objects, or for all DAX objects in the model if nothing is selected. See @dax-scripts.
-- **Refresh model**: starts a background refresh of the model when Tabular Editor is connected to Analysis Services. See [Refresh command (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request). The submenu has these options:
-  - **Automatic (model)**: Analysis Services refreshes only the objects that aren't in the "Ready" state.
+- **序列化选项...**：设置将模型元数据保存为文件或文件夹结构时的序列化方式。
+- **导入表...**：打开 Tabular Editor 3 导入表向导。参见 @importing-tables。
+- **更新架构（所有表）...**：将所有表的列与其数据源进行比较，并检测架构更改。参见 [更新表架构](xref:importing-tables#updating-table-schema)。
+- **Script DAX**：为所选对象生成 DAX脚本；如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX脚本。参见 @dax-scripts。
+- **刷新模型**：当 Tabular Editor 连接到 Analysis Services 时，在后台启动模型刷新。参见 [刷新命令 (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。此子菜单包含以下选项：
+  - **自动（模型）**：Analysis Services 仅刷新未处于“Ready”状态的对象。
   - **完全刷新（模型）**：Analysis Services 对模型执行完全刷新。
-  - **Calculate (model)**: Analysis Services recalculates all calculated tables, calculated columns, calculation groups and relationships. 不会从数据源读取任何数据。
-- **Add [object type]**: the remaining items create model child objects, such as tables, data sources and perspectives.
+  - **计算（模型）**：Analysis Services 将重新计算所有计算表格、计算列、计算组和关系。不会从数据源读取任何数据。
+- **添加 [对象类型]**：其余项用于创建模型的子对象，例如表、数据源和透视。
 
 ### 工具
 
-The **Tools** menu has the Tabular Editor 3 preferences and customizations.
+**工具**菜单包含用于设置 Tabular Editor 3 偏好设置和自定义项的选项。
 
 ![视图菜单](~/content/assets/images/tools-menu.png)
 
-- **Customize...** opens the User Interface Layout customization dialog, where you create toolbars and rearrange and edit menus and toolbar buttons.
-- **Preferences...** opens the Preferences dialog, with settings such as update checks, proxy settings, query row limits and request timeouts. 见 @preferences。
-- **Manage BPA rules...** opens the Best Practice Analyzer rule manager, where you view and edit rules and rule collections. See @bpa-view.
-- **MCP Server...** opens the **MCP Server** dialog, where you start and stop the server that lets an external AI agent work on the open model, review the permissions the agent gets and copy a registration configuration for your agent. See @mcp-server. The item is hidden when the AI features component isn't installed, when **Enable MCP Server** is cleared or when an administrator has disabled it by policy.
+- **自定义...**：打开“用户界面布局”自定义对话框，可在其中创建工具栏、重新排列并编辑菜单和工具栏按钮。
+- **偏好...**：打开“偏好”对话框，其中包含更新检查、代理设置、查询行数限制和请求超时等设置。见 @preferences。
+- **管理 BPA 规则...**：打开 Best Practice Analyzer 规则管理器，可在其中查看和编辑规则及规则集。参见 @bpa-view。
+- **MCP Server...**：打开 **MCP Server** 对话框，可在其中启动或停止服务器，使外部 AI 代理能够处理当前打开的模型，查看该代理获得的权限，并复制用于代理的注册配置。请参阅 @mcp-server。如果未安装 AI 功能组件、未勾选 **启用 MCP 服务器**，或者管理员已通过策略将其禁用，则该项会被隐藏。
 
 ### 窗口
 
-The **Window** menu manages and switches between the views and documents of the application, together called _windows_, and also has the [theme and palette](#changing-themes-and-palettes) settings.
+**窗口**菜单用于管理和切换应用中的视图和文档，这些统称&#x4E3A;_&#x7A97;口_；此外，该菜单还包含[主题和调色板](#changing-themes-and-palettes)设置。
 
 ![查看菜单](~/content/assets/images/window-menu.png)
 
-- **New...** creates [supporting files](xref:supported-files#supported-file-types). The options are the same as under **File > New**.
+- **新建...**：用于创建[支持文件](xref:supported-files#supported-file-types)。这些选项与 **文件 > 新建** 中的选项相同。
 
 - **浮动**：将当前视图或文档从停靠状态解除，并在浮动窗口中显示。
 
-- **Pin tab** pins a tab to the left end of the document tabs. The tab right-click menu has commands that close only unpinned tabs.
+- **固定选项卡**：将选项卡固定在文档选项卡区域的最左侧。选项卡的右键菜单中包含仅关闭未固定选项卡的命令。
 
   ![标签页上下文菜单](~/content/assets/images/tab-context-menu.png)
 
-- **New Horizontal/Vertical Tab Group**: divides the main document area into tab groups, to show several documents side by side or one above the other.
+- **新建水平/垂直选项卡组**：将主文档区域拆分为多个选项卡组，以并排或上下显示多个文档。
 
-- **Close All**: closes all document tabs. A prompt to save unsaved changes appears first.
+- **全部关闭**：关闭所有文档选项卡。如果存在未保存的更改，会先提示你保存。
 
-- **Reset Window Layout**: resets all customization of the main document area.
+- **重置窗口布局**：重置对主文档区域应用的所有自定义设置。
 
-- **1..N [document]**: the first 10 open documents. **Ctrl+Tab** also switches between open documents and views:
+- **1..N [document]**：前 10 个已打开的文档。 **Ctrl+Tab** 也可在打开的文档和视图之间切换：
 
   ![Ctrl+Tab 快捷键](~/content/assets/images/ctrl-tab.png)
 
-- **Windows...**: opens a dialog that lists all open documents, where you switch to or close each one.
+- **窗口...**：打开一个列出所有打开文档的对话框，你可以在其中切换到某个文档或将其关闭。
 
   ![窗口管理器](~/content/assets/images/windows-manager.png)
 
-- **Capture Layout** / **Layouts...** / **Default layout** / **Classic layout**: see [Choosing a different layout](#choosing-a-different-layout).
+- **捕获布局** / **布局...** / **默认布局** / **经典布局**：参见[选择其他布局](#choosing-a-different-layout)。
 
-- **Theme** / **Default palette**: see [Changing themes and palettes](#changing-themes-and-palettes).
+- **主题** / **默认调色板**：参见[更改主题和调色板](#changing-themes-and-palettes)。
 
-- **Language**: changes the display language of the Tabular Editor 3 user interface.
+- **语言**：可以更改 Tabular Editor 3 用户界面的显示语言。
 
 ### 帮助
 
-The **Help** menu links to online resources.
+**帮助**菜单提供联机资源的入口。
 
 ![帮助菜单](~/content/assets/images/help-menu.png)
 
-- **Online Documentation**: opens [docs.tabulareditor.com](https://docs.tabulareditor.com) in your default web browser.
-- **Onboarding Guide**: opens the Tabular Editor 3 onboarding guide for new users.
-- **Community Support**: opens the [public community support site](https://github.com/TabularEditor/TabularEditor3).
-- **Dedicated Support**: sends an e-mail to the dedicated support hotline.
-- **Get Started**: opens the **Get Started** page, which collects courses, demos and documentation for Tabular Editor. Before Tabular Editor 3.27.0, this item was called **What's New**. For release notes, see @release-history.
+- **联机文档**：在默认 Web 浏览器中打开文档站点 [docs.tabulareditor.com](https://docs.tabulareditor.com)。
+- **入门指南**：打开面向新用户的 Tabular Editor 3 入门指南。
+- **社区支持**：打开我们的[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)。
+- **专属支持**：发送电子邮件至专属支持热线。
+- **开始使用**：这个菜单项会打开 **开始使用** 页面，其中汇集了 Tabular Editor 的课程、演示和文档。在 Tabular Editor 3.27.0 之前，此项名为 **What's New**。有关发布说明，请参阅 @release-history。
 
 > [!NOTE]
-> Dedicated support is for Tabular Editor 3 Enterprise Edition customers. Other customers use the [public community support site](https://github.com/TabularEditor/TabularEditor3) for technical and product questions.
+> 专属支持仅面向 Tabular Editor 3 企业版客户。其他客户如果有技术或产品相关问题，可以前往[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)寻求帮助。
 
-- **About Tabular Editor**: shows the version, installation and licensing details, and lets you change your license key.
+- **关于 Tabular Editor**：显示版本、安装和许可详细信息，并可更改许可证密钥。
 
 ### 动态菜单（取决于上下文）
 
-Extra menus appear depending on which UI element has focus and which object is selected in the TOM Explorer. For example, if you select a table, a **Table** menu appears with the same items as the table's right-click menu in the TOM Explorer.
+额外的菜单会根据当前获得焦点的 UI 元素以及在 TOM Explorer 中选中的对象而显示。例如，如果你选择一个表，就会出现一个 **表** 菜单，其中的菜单项与在 TOM Explorer 中右键单击该表时显示的菜单相同。
 
-Each document type, such as DAX queries, Pivot Grids and diagrams, also adds a menu while a document of that type has focus. For example, a focused diagram adds a **Diagram** menu with an item for adding tables to the diagram.
+每种文档类型(如 DAX 查询、Pivot Grid 和图表)在该类型文档获得焦点时，也会添加一个菜单。例如，当关系图获得焦点时，会添加一个 **关系图** 菜单，其中包含“向关系图添加表”的命令。
 
-Set the behavior of these dynamic menus under **Tools > Preferences > Tabular Editor > User Interface**.
+你可以在 **工具 > 偏好 > Tabular Editor > 用户界面** 中设置这些动态菜单的行为。
 
 ## 后续步骤
 
