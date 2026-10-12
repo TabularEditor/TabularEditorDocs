@@ -10,7 +10,7 @@ description: 最佳做法规则：确保你的模型包含专用日期表，以�
 
 ## 概览
 
-此最佳做法规则会验证你的表格模型是否包含至少一个已正确配置的日期表。 Date tables are essential for time intelligence calculations and ensuring consistent date-based filtering across your model.
+此最佳做法规则会验证你的表格模型是否包含至少一个已正确配置的日期表。日期表对于时间智能计算至关重要，并确保整个模型中基于日期的筛选一致性。
 
 - 类别：性能
 
