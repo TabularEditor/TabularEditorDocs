@@ -19,31 +19,31 @@ applies_to:
 
 # Conectar mediante OLE DB
 
-The OLE DB connector connects to sources that have an OLE DB provider but no usable ODBC driver. Selecting **Model > Import tables...** and choosing **OLE DB** opens the Windows **Data Link Properties** dialog.
+El conector OLE DB se conecta a fuentes que tienen un proveedor OLE DB, pero no tienen un controlador ODBC que se pueda usar. Al seleccionar **Modelo > Importar tablas...** y elegir **OLE DB**, se abre el cuadro de diálogo **Propiedades de vínculo de datos** de Windows.
 
 ![Cuadro de diálogo Propiedades de vínculo de datos en la pestaña Proveedor, con la lista de proveedores OLE DB instalados en el equipo](~/content/assets/images/features/connectivity/oledb-connection.png)
 
 ## Requisitos previos
 
-Install an OLE DB provider for the source that matches the architecture of your Tabular Editor build.
+Instala un proveedor OLE DB para el origen que coincida con la arquitectura de tu versión de Tabular Editor.
 
 > [!WARNING]
-> Analysis Services supports fewer OLE DB providers than Windows. If Analysis Services doesn't support the provider, the source imports in Tabular Editor but refresh fails on the server. Use a dedicated connection dialog where one exists, and [ODBC](xref:connect-odbc) where it doesn't.
+> Analysis Services admite menos proveedores OLE DB que Windows. Si Analysis Services no admite el proveedor, el origen se importa en Tabular Editor, pero la actualización falla en el servidor. Usa un cuadro de diálogo de conexión específico cuando lo haya y [ODBC](xref:connect-odbc) cuando no lo haya.
 
-## Connection fields
+## Campos de conexión
 
-The **Data Link Properties** dialog has these tabs:
+El cuadro de diálogo **Propiedades de vínculo de datos** tiene estas pestañas:
 
-| Campo                         | Descripción                                                                                        |
-| ----------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Provider** tab              | The OLE DB providers installed on this machine. Select the provider for the source |
-| **Connection** tab            | The data source, credentials and other settings the selected provider needs                        |
-| **Advanced** and **All** tabs | Further provider-specific connection string properties                                             |
+| Campo                              | Descripción                                                                                              |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Pestaña **Proveedor**              | Los proveedores OLE DB instalados en este equipo. Selecciona el proveedor para el origen |
+| Pestaña **Conexión**               | El Data source, las credenciales y otros ajustes que necesita el proveedor seleccionado                  |
+| Pestañas **Avanzadas** y **Todas** | Más propiedades de la cadena de conexión específicas del proveedor                                       |
 
-If a saved connection string names a provider that isn't installed, a warning appears. Install the provider or select another one.
+Si una cadena de conexión guardada especifica un proveedor que no está instalado, aparece una advertencia. Instala el proveedor o selecciona otro.
 
 ## Autenticación
 
-The provider determines how you sign in, so enter its sign-in settings, such as a user name and password or integrated security, on the **Connection** tab.
+El proveedor determina cómo inicias sesión, así que introduce en la pestaña **Conexión** la configuración de inicio de sesión correspondiente, como un nombre de usuario y una contraseña o seguridad Integrada.
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor guarda la configuración de conexión y las credenciales en tu archivo de opciones de usuario (consulta [Dónde se almacenan las credenciales](xref:connectivity#where-credentials-are-stored)).
