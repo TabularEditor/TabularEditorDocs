@@ -2,7 +2,7 @@
 uid: connect-oledb
 title: 通过 OLE DB 连接
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,28 +19,31 @@ applies_to:
 
 # 通过 OLE DB 连接
 
-OLE DB 是另一种通用连接方式；如果某个数据源提供 OLE DB 提供程序，但没有可用的 ODBC 驱动程序，就应使用这种方式。
+The OLE DB connector connects to sources that have an OLE DB provider but no usable ODBC driver. Selecting **Model > Import tables...** and choosing **OLE DB** opens the Windows **Data Link Properties** dialog.
 
 ![“数据链接属性”对话框的“提供程序”选项卡，其中列出了此计算机上安装的 OLE DB 提供程序](~/content/assets/images/features/connectivity/oledb-connection.png)
 
-## 身份验证方式
+## 先决条件
 
-与 ODBC 一样，由提供程序而不是 Tabular Editor 决定登录方式。
+Install an OLE DB provider for the source that matches the architecture of your Tabular Editor build.
 
-| 字段               | 含义                    |
-| ---------------- | --------------------- |
-| **提供程序**         | 此计算机上安装的 OLE DB 提供程序  |
-| **服务器**          | 用于标识数据源的内容，按提供程序的要求填写 |
-| **用户名** 和 **密码** | 在需要时提供给提供程序           |
-| **附加选项**         | 额外的连接字符串设置，会原样传递      |
+> [!WARNING]
+> Analysis Services supports fewer OLE DB providers than Windows. If Analysis Services doesn't support the provider, the source imports in Tabular Editor but refresh fails on the server. Use a dedicated connection dialog where one exists, and [ODBC](xref:connect-odbc) where it doesn't.
 
-提供程序列表是从本机读取的，因此只会显示已安装的提供程序，而不是所有可用的提供程序。如果列表中缺少某个提供程序，需要先安装它，并确保其体系结构与 Tabular Editor 相同。
+## Connection fields
 
-> [!TIP]
-> 如有专用对话框，优先使用；否则优先选择 ODBC，而不是 OLE DB。 Analysis Services 支持的 OLE DB 提供程序范围比 Windows 更窄，因此，即使某个数据源能在向导中连接成功，仍可能在服务器上刷新失败。
+The **Data Link Properties** dialog has these tabs:
 
-## 凭据存储位置
+| 字段                            | 说明                                                                                                 |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Provider** tab              | The OLE DB providers installed on this machine. Select the provider for the source |
+| **Connection** tab            | The data source, credentials and other settings the selected provider needs                        |
+| **Advanced** and **All** tabs | Further provider-specific connection string properties                                             |
 
-你在此处输入的凭据会按用户和模型分别保存在模型旁边的 [用户选项](xref:user-options) 文件 (`.tmuo`) 中，并经过加密，只有你的 Windows 帐户可以读取。它们不属于模型元数据，因此不会提交到源代码版本控制中；其他同事打开同一模型时需要提供各自的。
+If a saved connection string names a provider that isn't installed, a warning appears. Install the provider or select another one.
 
-生成的 M 表达式仅包含服务器和对象名称。其中绝不会包含密码、令牌或密钥。
+## 身份验证
+
+The provider determines how you sign in, so enter its sign-in settings, such as a user name and password or integrated security, on the **Connection** tab.
+
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
