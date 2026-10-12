@@ -19,7 +19,7 @@ applies_to:
 
 # Conectar a Oracle
 
-The Oracle connector connects to Oracle databases through the Oracle OLE DB provider. Select **Model > Import tables...** and choose an Oracle source to open the dialog.
+El conector de Oracle se conecta a bases de datos Oracle a través del proveedor OLE DB de Oracle. Selecciona **Modelo > Importar tablas...** y elige un origen de Oracle para abrir el cuadro de diálogo.
 
 <!-- IMAGE NEEDED: connectivity/oracle-connect-dialog.png
      The Connect to Oracle dialog with Server, Username, Password and
@@ -29,24 +29,24 @@ The Oracle connector connects to Oracle databases through the Oracle OLE DB prov
 
 ## Requisitos previos
 
-Install the Oracle OLE DB provider (`OraOLEDB.Oracle`), part of Oracle Data Access Components (ODAC), on your machine. If the provider is missing, Tabular Editor shows this warning:
+Instala el proveedor Oracle OLE DB (`OraOLEDB.Oracle`), que forma parte de Oracle Data Access Components (ODAC), en tu equipo. Si falta el proveedor, Tabular Editor muestra esta advertencia:
 
 ![Advertencia de que el controlador ODAC no está instalado; indica que Tabular Editor 3 requiere el proveedor OraOLEDB.Oracle de Oracle Data Access Components](~/content/assets/images/features/connectivity/oracle-connection.png)
 
-## Connection fields
+## Campos de conexión
 
-| Campo                                                                     | Descripción                                                                               |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **Server**                                                                | The TNS name, Easy Connect string or full connect descriptor. Obligatorio |
-| **Username** and **Password**                                             | An Oracle database account. **Username** is required                      |
-| **Additional connection string properties (optional)** | Extra connection string settings                                                          |
+| Campo                                                                              | Descripción                                                                                                |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Servidor**                                                                       | El nombre TNS, la cadena de Easy Connect o el descriptor de conexión completo. Obligatorio |
+| **Nombre de usuario** y **Contraseña**                                             | Una cuenta de base de datos de Oracle. **Nombre de usuario** es obligatorio                |
+| **Propiedades adicionales de la cadena de conexión (opcional)** | Configuración adicional de la cadena de conexión                                                           |
 
 ## Autenticación
 
-You authenticate with the user name and password of an Oracle database account. The dialog has no integrated or directory-based authentication option.
+Te autenticas con el nombre de usuario y la contraseña de una cuenta de base de datos de Oracle. El cuadro de diálogo no tiene ninguna opción de autenticación integrada ni basada en directorio.
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor guarda la configuración de conexión y las credenciales en tu archivo de opciones de usuario (consulta [Dónde se almacenan las credenciales](xref:connectivity#where-credentials-are-stored)).
 
 ## Identificadores
 
-In the SQL it generates, Tabular Editor quotes Oracle schema and table names with double quotes. Oracle stores unquoted names in upper case, so a table created as `sales` without quotes appears as `SALES`. Quoted names in a native query must match the stored case. If the wizard doesn't list a table you expect, check the case of its name in Oracle before you check permissions.
+En el SQL que genera, Tabular Editor encierra entre comillas dobles los nombres de esquema y de tabla de Oracle. Oracle almacena los nombres sin comillas en mayúsculas, por lo que una tabla creada como `sales` sin comillas aparece como `SALES`. Los nombres entre comillas en una consulta nativa deben respetar exactamente las mayúsculas y minúsculas con las que se almacenaron. Si el asistente no muestra una tabla que esperas, comprueba las mayúsculas y minúsculas de su nombre en Oracle antes de revisar los permisos.
