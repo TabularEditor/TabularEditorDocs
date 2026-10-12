@@ -130,7 +130,7 @@ Una _política de actualización_ determina cómo se particionan los datos y cu�
 
 ### Propiedades de la política de actualización
 
-<img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
+<img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Propiedades de la actualización incremental"  style="width:704px !important"/>
 
 Una política de actualización básica se compone de cuatro tipos distintos de propiedades:
 
