@@ -26,7 +26,7 @@ Esta regla de prácticas recomendadas identifica columnas ocultas que tienen la 
 Cuando una columna tiene `IsAvailableInMDX` establecido en `true`, el motor de Analysis Services mantiene metadatos y estructuras adicionales para admitir consultas MDX sobre esa columna. En el caso de columnas ocultas que no se usan en relaciones, jerarquías, variaciones, calendarios o como columnas de ordenación, esta sobrecarga es innecesaria y puede:
 
 - Aumentar el consumo de memoria
-- Slow down query processing
+- Ralentizar el procesamiento de consultas
 - Añadir complejidad a los metadatos del modelo
 
 Al establecer explícitamente `IsAvailableInMDX` en `false` para estas columnas, optimizas el modelo para escenarios solo con DAX, el principal lenguaje de consulta de Power BI y de los modelos modernos de Analysis Services.
