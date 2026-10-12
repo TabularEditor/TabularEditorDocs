@@ -1,6 +1,6 @@
 ---
 uid: user-context-calculated-columns
-title: User-context calculated columns
+title: 用户上下文计算列
 author: Morten Lønskov
 updated: 2026-09-14
 applies_to:
@@ -18,54 +18,54 @@ applies_to:
           full: true
 ---
 
-# User-context calculated columns
+# 用户上下文计算列
 
-A calculated column is normally evaluated once, when the table is processed, and every user who queries the model sees the same value. A _user-context calculated column_ is evaluated per user instead, so its expression can call functions such as [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) or [`USERNAME`](https://dax.guide/username) and give each user a different answer.
+计算列通常只在处理表时计算一次，因此查询模型的每个用户看到的值都相同。&#x800C;_&#x7528;户上下文计算&#x5217;_&#x4F1A;按用户分别计算，因此其表达式可以调用 [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) 或 [`USERNAME`](https://dax.guide/username) 等函数，并为每个用户返回不同的结果。
 
-This is controlled by the calculated column's **Expression Context** property.
+这由计算列的 **表达式上下文** 属性控制。
 
-| Expression Context | 含义                                                                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| **Standard**       | The default. The expression can use only standard functions, and the column has one value per row for everybody |
-| **User Context**   | The expression can call user-context functions, and is evaluated per user                                                       |
+| 表达式上下文    | 含义                                   |
+| --------- | ------------------------------------ |
+| **标准**    | 默认选项。表达式只能使用标准函数，并且该列对所有用户而言每行都只有一个值 |
+| **用户上下文** | 表达式可以调用用户上下文函数，并按用户分别计算              |
 
-Select a calculated column in the @tom-explorer-view and set **Expression Context** under **Options** in the @properties-view.
+在 @tom-explorer-view 中选择一个计算列，然后在 @properties-view 的 **选项** 下设置 **表达式上下文**。
 
 > [!NOTE]
-> **Expression Context** requires compatibility level 1705 or above. Below that, a calculated column is always Standard.
+> **表达式上下文** 需要 1705 或更高的兼容级别。低于该级别时，计算列始终为“标准”。
 
-## What a user-context column cannot be used for
+## 用户上下文计算列不能用于哪些场景
 
-Because the value depends on who is asking, a user-context calculated column cannot be read by anything that is evaluated once for the whole model. Tabular Editor's Semantic Analyzer checks the four cases and reports an error for each:
+由于其值取决于发起查询的用户，用户上下文计算列无法被任何在整个模型范围内只计算一次的对象读取。 Tabular Editor 的语义分析器会检查以下四种情况，并针对每种情况报告一个错误：
 
-| A user-context column cannot be referenced by | 信息                                                                                                                                                           |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| A **standard** calculated column              | _This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a standard calculated column._ |
-| A **calculated table**                        | _This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a calculated table._           |
-| A **row-level security filter**               | _This expression references the user-context-aware calculated column `Table[Column]`, which is not allowed in a row-level security filter._  |
-| A **relationship**, as an endpoint            | _A relationship cannot use the user-context-aware calculated column `Table[Column]` as an endpoint._                                         |
+| 用户上下文计算列不能被以下对象引用 | 信息                                                      |
+| ----------------- | ------------------------------------------------------- |
+| **标准**计算列         | _此表达式引用了用户上下文计算列 `Table[Column]`，而这在标准计算列中是不允许的。_       |
+| **计算表格**          | _此表达式引用了用户上下文感知的计算列 `Table[Column]`，而这在计算表格中是不允许的。_     |
+| **行级安全性筛选器**      | _此表达式引用了用户上下文感知的计算列 `Table[Column]`，而这在行级安全性筛选器中是不允许的。_ |
+| 作为端点的**关系**       | _关系不能将用户上下文感知的计算列 `Table[Column]` 用作端点。_                |
 
-The first three apply _indirectly as well as directly_. Reaching the column through a measure is still reaching it, and is reported the same way.
+前面三种情&#x51B5;_&#x65E2;适用于直接引用，也适用于间接引用_。通过度量值引用该列仍然算引用，并且会以相同方式在 Report 中报告。
 
-Two things are explicitly allowed: a _measure_ can reference a user-context column, and so can _another user-context calculated column_.
+明确允许两种情况：_度量&#x503C;_&#x53EF;以引用用户上下文列，_另一个用户上下文感知的计算&#x5217;_&#x4E5F;可以引用。
 
-## Where the errors appear
+## 错误显示位置
 
-| How the column is referenced              | DAX editor | @messages-view | `te validate` |
-| ----------------------------------------- | ---------- | --------------------------- | ------------- |
-| Directly                                  | 是的         | 是的                          | 是的            |
-| Indirectly, for example through a measure | 否          | 是的                          | 是的            |
-| As a relationship endpoint                | 否          | 是的                          | 是的            |
+| 列的引用方式       | DAX 编辑器 | @信息视图 | `te validate` |
+| ------------ | ------- | ------------------ | ------------- |
+| 直接           | 是的      | 是的                 | 是的            |
+| 间接引用，例如通过度量值 | 否       | 是的                 | 是的            |
+| 作为关系端点       | 否       | 是的                 | 是的            |
 
-An indirect violation has no squiggle in the editor, because the expression you are looking at is perfectly valid on its own. The chain is what breaks. Check the @messages-view before deploying.
+间接违规在编辑器中不会出现波浪线，因为你正在查看的表达式本身完全有效。真正出问题的是整条引用链。部署前请先查看 @信息视图。
 
-A relationship-endpoint violation also appears as the relationship's **Error Message** property, and is reported once per offending endpoint, so a relationship with user-context columns on both sides produces two errors. Inactive relationships are checked too.
+关系端点违规还会显示在该关系的 **错误消息** 属性中，并且会按每个违规端点各在 Report 中报告一次，因此如果一个关系的两端都是用户上下文列，就会产生两条错误。非活动关系也会被检查。
 
 > [!IMPORTANT]
-> `te validate --errors-only` does _not_ suppress these. They are errors, not warnings, and `--errors-only` only hides warnings and anti-patterns.
+> `te validate --errors-only` &#x5E76;_&#x4E0D;&#x4F1A;_&#x6291;制这些错误。这些都是错误，不是警告；而 `--errors-only` 只会隐藏警告和反模式。
 
 ## 后续步骤
 
-- @messages-view
+- @信息视图
 - @dax-editor
 - @偏好
