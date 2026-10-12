@@ -198,39 +198,6 @@ Before a C# script or DAX query from the agent opens as a document, Tabular Edit
 > [!NOTE]
 > Querying data needs a live connection, and VertiPaq statistics need a connection or statistics you've already collected. Tool availability is set when the agent connects, so if you connect the model afterwards, reconnect the agent.
 
-### Tool reference
-
-The MCP server offers these tools to a connected agent. A tool appears in the agent's tool list only when your grants cover it, and an administrator can withhold individual tools with the `McpDisabledTools` [policy](xref:policies).
-
-| Tool | What it does | Grant needed |
-| -- | -- | -- |
-| `get_workspace_info` | Identifies the Tabular Editor instance and the open model | None |
-| `search_knowledge_base` | Searches the Tabular Editor documentation, blog, GitHub issues and discussions | None |
-| `get_full_content` | Returns the full text of a knowledge base search result | None |
-| `lookup_api_documentation` | Looks up properties, methods and signatures in the C# scripting API | None |
-| `get_model_overview` | Lists the tables, their column and measure counts and every relationship | **Model metadata > Read** |
-| `get_object_details` | Returns full detail for named objects | **Model metadata > Read** |
-| `search_model` | Searches the model by name, description, expression, format string or annotation | **Model metadata > Read** |
-| `get_full_model_metadata` | Returns the full model metadata | **Model metadata > Read** |
-| `get_selected_objects` | Describes the objects selected in the TOM Explorer | **Model metadata > Read** |
-| `get_vpax_stats` | Returns VertiPaq Analyzer statistics. Needs a connection or statistics you've collected | **Model metadata > Read** |
-| `get_model_messages` | Lists the model's errors, warnings and Analysis Services messages, root causes first | **Model metadata > Read** |
-| `get_open_documents` | Lists open documents with the active document and each document's error and warning counts. Including document content needs **Documents > Read** | **Model metadata > Read** |
-| `get_document_content` | Returns the content of one open DAX query, C# script or DAX script | **Documents > Read** |
-| `get_document_messages` | Lists the errors and warnings of one open document | **Documents > Read** |
-| `update_document_content` | Replaces the content of an open DAX query, C# script or DAX script | **Documents > Write** |
-| `write_dax_query` | Opens a DAX query as a document for you to review and run | **Documents > Write** |
-| `write_csharp_script` | Opens a C# script as a document for you to review and run | **Documents > Write** |
-| `execute_dax_query` | Runs a DAX query and returns the rows. Needs a live connection | **Model data > Read** and **Model metadata > Read** |
-| `execute_csharp_script` | Runs a C# script against the open model. See [How an agent changes your model](#how-an-agent-changes-your-model) | **Model metadata > Write** |
-| `get_bpa_rules` | Lists the effective Best Practice Analyzer rules | **Best Practice Analyzer > Read** |
-| `get_bpa_rule_results` | Runs the Best Practice Analyzer and returns the violations | **Best Practice Analyzer > Read** and **Model metadata > Read** |
-| `add_bpa_rule` | Adds a rule to your local rule collection | **Best Practice Analyzer > Write** |
-| `update_bpa_rule` | Changes a rule in your local rule collection | **Best Practice Analyzer > Write** |
-| `get_macros` | Returns your macro library with names, descriptions and code | **Macros > Read** |
-
-The `DisableCSharpScripts` policy removes `execute_csharp_script` and `write_csharp_script`.
-
 ## How an agent changes your model
 
 With **Model metadata > Write**, an agent changes your model by creating a [C# script](xref:csharp-scripts) in the background. Tabular Editor compiles the script, checks it for safety and runs it against the open model.
@@ -318,7 +285,7 @@ Select **Regenerate token** (the refresh button beside the token) to issue a new
 
 When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor, and the text of Analysis Services errors is replaced with a fixed sentence. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**. To keep file paths and server names out of what the agent receives, set **Model source detail** under **Tools > Preferences > Tabular Editor > User Interface** to **Name only** or **Hidden**.
+Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no data values from Tabular Editor, and the text of Analysis Services errors is replaced with a fixed sentence. To keep file paths and server names out of what the agent receives, set **Model source detail** under **Tools > Preferences > Tabular Editor > User Interface** to **Name only** or **Hidden**.
 
 See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
 

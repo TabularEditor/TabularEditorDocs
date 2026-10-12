@@ -2,7 +2,7 @@
 uid: new-pbi-model
 title: Create a Power BI Semantic Model
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ This page walks you through the process of creating a new Power BI semantic mode
 > 
 > [More information](xref:editions).
 
-##### Creating a new semantic model
+## Creating a new semantic model
 
 1. From the File menu, choose New > Model... or hit `CTRL+N`
 

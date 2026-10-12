@@ -2,7 +2,7 @@
 uid: ai-compliance
 title: AI features compliance guide
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -61,7 +61,7 @@ Your organization's agreement with the provider governs retention, the region da
 
 The MCP server is an HTTP listener bound to `127.0.0.1`, on port 42100 by default. It has no API key, makes no outbound requests and rejects browser requests with a non-local `Origin` header.
 
-The connected agent sends what it reads from Tabular Editor 3 to its own provider, under the agent's configuration and the provider's terms. Tabular Editor 3 has no setting for the agent's provider, so govern the agent through its own administrative controls. The agent's own tools, such as file and shell access, are outside Tabular Editor 3 as well. Model files on disk, conversation files and audit files are readable by any agent running as the user.
+The connected agent sends what it reads from Tabular Editor 3 to its own provider, under the agent's configuration and the provider's terms. Tabular Editor 3 has no setting for the agent's provider, so govern the agent through its own administrative controls. The agent's own tools, such as file and shell access, are outside Tabular Editor 3 as well. The **Model source detail** preference sets how much of the model's file path or server the agent receives with the model name, and it doesn't change the connection details in the model metadata. See [Check that it worked](xref:mcp-server#check-that-it-worked). Model files on disk, conversation files and audit files are readable by any agent running as the user.
 
 **Require access token** is off by default. While it's off, any process on the machine can connect to the server without credentials, including processes in other users' sessions on a Remote Desktop or Citrix host. The `RequireMcpAccessToken` policy enforces the token for every user. Agent registration files store the token in plain text, and **Regenerate token** in the **Tools > MCP Server...** dialog invalidates every existing registration. See [Running on a shared machine](xref:mcp-server#running-on-a-shared-machine).
 
@@ -88,7 +88,7 @@ All paths are under `%LocalAppData%\TabularEditor3` unless stated otherwise.
 | MCP access token | `Preferences.json` | Encrypted with the Windows Data Protection API for the current user |
 | Standing permission grants | `Preferences.json` | JSON |
 | Per-model permission grants | The model's [user options](xref:user-options) (`.tmuo`) file: next to a model loaded from files, or under `UserOptions` for a model opened from a server | JSON |
-| Conversations | `AI\Conversations` | Unencrypted JSON. Holds prompts, replies and tool results, including DAX query rows when **Model data** is at **Read**. Archived copies are written before each compaction. Files stay until the user deletes the conversation |
+| Conversations | `AI\Conversations` | Unencrypted JSON. Holds prompts, replies and tool results, including DAX query rows and Analysis Services error text when **Model data** is at **Read**. Archived copies are written before each compaction. Files stay until the user deletes the conversation |
 | User Custom Instructions | `AI\CustomInstructions` | Markdown |
 | Knowledge base | `kb.sqlite` | SQLite database |
 | AI model catalog | `AiModels.json` | JSON |
@@ -101,9 +101,9 @@ Permission grants control what the AI Assistant and the MCP server reach, with o
 | Resource | What the AI features reach | Default | Limit for both features | Limit for the MCP server only |
 | -- | -- | -- | -- | -- |
 | Model metadata | Read: the model definition and VertiPaq Analyzer statistics. Write: changing the model through C# scripts | Read | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess` |
-| Model data | Read: DAX query results, which are data values from the model | Deny | `MaxModelDataAccess` | `McpMaxModelDataAccess` |
+| Model data | Read: DAX query results and the text of errors returned by Analysis Services, which can contain data values from the model | Deny | `MaxModelDataAccess` | `McpMaxModelDataAccess` |
 | Best Practice Analyzer | Read: rules and analysis results. Write: adding and changing rules | Read | `MaxBpaAccess` | `McpMaxBpaAccess` |
-| Documents | Read: the contents of open C# script, DAX query and DAX script documents. Write: creating and overwriting them | Write | `MaxDocumentsAccess` | `McpMaxDocumentsAccess` |
+| Documents | Read: the contents of open C# script, DAX query and DAX script documents and the errors and warnings of open documents, including Pivot Grids. Write: creating and overwriting them | Write | `MaxDocumentsAccess` | `McpMaxDocumentsAccess` |
 | Macros | Read: the user's macro library, including macro code | Write | `MaxMacrosAccess` | `McpMaxMacrosAccess` |
 
 At the default levels, the AI features read the model definition, run the Best Practice Analyzer, read the macro library and read and overwrite open script and query documents. They don't read data values and they don't change the model. Macro code and open documents can contain connection strings and other credentials. Set `MaxMacrosAccess` and `MaxDocumentsAccess` if they do in your organization.
@@ -223,7 +223,7 @@ The following baseline is guidance for an organization that allows AI-assisted m
 | Control | Setting | Effect |
 | -- | -- | -- |
 | Provider | `AiProvider`, `AiEndpoint`, `AiModel` and `AiAllowedEndpointHosts` set to a resource your organization owns and has a data processing agreement for | The AI Assistant sends requests only to that endpoint, with keys your organization issues |
-| Model data | `MaxModelDataAccess` set to `Deny` | No DAX query result reaches the AI Assistant or an MCP agent |
+| Model data | `MaxModelDataAccess` set to `Deny` | No DAX query result or Analysis Services error text reaches the AI Assistant or an MCP agent |
 | Macros | `MaxMacrosAccess` set to `Deny` | Macro code isn't sent to an AI provider |
 | Scripts | `BlockUnsafeScripts` set to `1` | No script or macro writes files, reaches the network, starts other programs or loads outside code |
 | MCP authentication | `RequireMcpAccessToken` set to `1` | Only clients with the user's access token connect to the MCP server |
@@ -275,7 +275,7 @@ They run scripts on the loaded model only with **Model metadata** at **Write**, 
 
 ### Can the AI features read data from our models?
 
-DAX query results require **Model data** at **Read**, and the default is **Deny**. Values typed into the model definition are part of the metadata. See [Data flow](#data-flow).
+DAX query results and the text of Analysis Services errors require **Model data** at **Read**, and the default is **Deny**. Below **Read**, error text from the server is replaced with a fixed sentence. Values typed into the model definition are part of the metadata. See [Data flow](#data-flow).
 
 ### Can an MCP agent use a provider we haven't approved?
 

@@ -1,7 +1,7 @@
 ﻿---
 uid: metadata-translation-editor
 title: Metadata Translation Editor
-author: Šarūnas Jučius
+author: Morten Lønskov
 updated: 2026-10-11
 applies_to:
   products:
