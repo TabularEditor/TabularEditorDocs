@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Referencia de comandos
 author: Peer Grønnerup
-updated: 2026-06-11
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,8 +31,8 @@ te bpa run --help           # Help for a command with subcommands
 
 El direccionamiento de objetos en la CLI usa una única gramática compartida por todos los comandos. En la referencia siguiente aparecen dos tipos de ruta:
 
-- **`<path>`**: identifica **exactamente un** objeto o contenedor. Los utilizan los comandos que operan sobre un único destino: `te get`, `te set`, `te add`, `te remove`, `te move`, `te format -p`, `te deps`, `te macro run --on`.
-- **`<path-filter>`**: identifica **cero o más** objetos y admite comodines. Los utilizan los comandos que operan sobre un conjunto: `te list`, `te bpa run --path` y otros comandos de inspección.
+- **`<path>`**: identifica **exactamente un** objeto o contenedor. Lo usan los comandos que cambian el modelo o necesitan un único destino: `te set`, `te add`, `te remove`, `te move`, `te deps`, `te macro run --on` y `te get` con `-p`, `--deps` o `--properties`.
+- **`<path-filter>`**: identifica **cero o más** objetos y admite comodines. Lo usan los comandos que operan sobre un conjunto: `te list`, `te get` a secas (una ruta con comodines o de contenedor enumera todas las coincidencias), `te bpa run --path` y otros comandos de tipo inspección.
 
 Ambas formas de ruta comparten las mismas reglas de sintaxis; solo se diferencian en dos puntos:
 
@@ -61,6 +61,8 @@ La mayoría de los nombres de segmentos funcionan tal cual. Pon un segmento entr
 
 Dentro de los segmentos entre comillas, `*` se trata como un carácter literal, no como un comodín. Por tanto, `'Sa*'` coincide con una tabla cuyo nombre es exactamente `Sa*`.
 
+Los caracteres reservados en las rutas son `/ [ ] ' " * ? { }`. Un segmento que contenga cualquiera de `* ? { }` debe ir entre comillas (`te get "Tables/'{foo}'"`, `te get 'Sales/"my*name"'`); si se usa sin comillas, se rechaza con un error que indica el carácter y muestra la forma entrecomillada. `?` es un carácter reservado y no tiene significado de comodín. Toda ruta que la CLI imprima —en errores, sugerencias, la salida de `--paths-only` y el campo `objectPath` del JSON— se cita de forma canónica y se puede pegar tal cual en `te get`. Las formas con comillas mixtas requieren PowerShell o bash; cmd.exe no puede expresarlas.
+
 ### Referencias al estilo DAX (solo rutas de objeto)
 
 Se aceptan dos formas con sintaxis DAX en cualquier lugar donde se admita un `<path>`:
@@ -80,11 +82,13 @@ Varios nombres funcionan como palabras clave de contenedor. Una palabra clave pu
 
 | Palabra clave                                                                                                                    | Ámbito    | Significado                                                      |
 | -------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------- |
-| `Tables`, `Medidas`, `Columns`, `Hierarchies`, `Particiones`                                                                     | Modelo    | Todos los objetos de ese tipo en todo el modelo. |
+| `Tables`, `Medidas`, `Columns`, `Hierarchies`, `Particiones`, `KPIs`, `Sets`                                                     | Modelo    | Todos los objetos de ese tipo en todo el modelo. |
 | `Relaciones`, `Roles`, `Perspectives`, `Cultures`, `DataSources`, `Expressions`, `CalculationGroups`, `Functions`, `Annotations` | Modelo    | Contenedores a nivel de modelo.                  |
-| `Medidas`, `Columns`, `Hierarchies`, `Particiones`, `Calendars`, `CalculationItems`                                              | Tabla     | Subcontenedores dentro de una tabla.             |
+| `Medidas`, `Columns`, `Hierarchies`, `Particiones`, `Calendars`, `CalculationItems`, `KPIs`, `Sets`                              | Tabla     | Subcontenedores dentro de una tabla.             |
 | `Levels`                                                                                                                         | Jerarquía | Niveles de una jerarquía.                        |
 | `Members`, `TablePermissions` (alias `Permissions`)                                                           | Rol       | Elementos hijos de un rol.                       |
+
+Los conjuntos calculados solo se pueden referenciar en forma de contenedor (`<table>/Sets/<name>`); un KPI individual es `<table>/<measure>/KPI`; los calendarios se resuelven en `<table>/Calendars/<name>`; las relaciones se resuelven en `Relationships/<name>` (el propio nombre de la relación en el modelo: un GUID o una etiqueta como `Relationship 1`; `--paths-only` lo imprime y también se acepta el nombre para mostrar).
 
 Algunos ejemplos muestran en qué se diferencian las rutas simples y las rutas con ámbito de contenedor:
 
@@ -94,10 +98,10 @@ te get Sales/Measures/Revenue              # Same, container-scoped - disambigua
 te get Sales/Geography/Levels/Year         # Specific level of a hierarchy
 te get Roles/Admin/Members/bob@example.com # Role member
 te get Sales/refreshPolicy                 # Refresh-policy sub-object on a table
-te get "Measures/Revenue/KPI"              # KPI sub-object of a measure
+te get Sales/Revenue/KPI                   # KPI sub-object of a measure
 ```
 
-Pon un segmento entre comillas para forzar la coincidencia literal del nombre cuando el nombre real de un objeto coincide con una palabra clave. La tabla cuyo nombre literal es `Tables` es `'Tables'` y se accede con `te get "'Tables'"`.
+Pon un segmento entre comillas para forzar la coincidencia literal del nombre cuando el nombre real de un objeto coincide con una palabra clave. La tabla cuyo nombre literal es `Tables` es `'Tables'` y se accede con `te get "'Tables'"`. Lo mismo se aplica a las tablas llamadas `KPIs` o `Sets`.
 
 ### Comodines en rutas de filtro
 
@@ -116,27 +120,27 @@ El sufijo entre corchetes de DAX se rechaza en las rutas de filtro; pon entre co
 
 ### Errores y sugerencias
 
-Los segmentos mal escritos generan un error contextual con una sugerencia de "quizás quisiste decir" cuando la CLI puede deducir lo que querías decir. Las rutas a las que les falta el elemento padre fallan antes de la comprobación del elemento hoja, así que los mensajes señalan el segmento que realmente está mal. Los contenedores vacíos (por ejemplo, `te list Hierarchies` en un modelo sin jerarquías) devuelven una sencilla indicación de "no hay nada aquí" en lugar de un error.
+Los segmentos mal escritos generan un error contextual con una sugerencia de "quizás quisiste decir" cuando la CLI puede deducir lo que querías decir. La lista ofrece tablas, medidas, columnas y jerarquías, cada una como una ruta completa `Table/Object` que puedes pegar directamente en el siguiente comando. Un nombre escrito entre comillas simples es una referencia a una tabla (`te deps 'Revenue'` busca una tabla llamada Revenue), y el error te indica las formas `Table/Object` y `"[Object]"` para todo lo que no sea una tabla. Las rutas a las que les falta el elemento padre fallan antes de la comprobación del elemento hoja, así que los mensajes señalan el segmento que realmente está mal. Toda ruta que aparezca en un error o sugerencia se toma de tu modelo y se entrecomilla para que se resuelva tal como se muestra; si algo se rechaza, nunca se sugiere una ruta que no exista. Los contenedores vacíos (por ejemplo, `te list Hierarchies` en un modelo sin jerarquías) muestran un simple mensaje de "no hay nada aquí" en lugar de un error.
 
 ## Alias de comandos
 
 La mayoría de los verbos en formato largo también aceptan un alias corto. Cada fila muestra el comando canónico y el comando equivalente en formato corto que admite como alias.
 
-| Canónico                        | Forma(s) con alias |
-| ------------------------------- | ------------------------------------- |
-| `te list`                       | `te ls`                               |
-| `te remove`                     | `te rm`                               |
-| `te move`                       | `te mv`, `te rename`                  |
-| `te bpa rules list`             | `te bpa rules ls`                     |
-| `te bpa rules remove`           | `te bpa rules rm`                     |
-| `te config list`                | `te config ls`                        |
-| `te macro list`                 | `te macro ls`                         |
-| `te macro remove`               | `te macro rm`                         |
-| `te incremental-refresh remove` | `te incremental-refresh rm`           |
-| `te profile list`               | `te profile ls`                       |
-| `te profile remove`             | `te profile rm`                       |
-| `te session list`               | `te session ls`                       |
-| `te test list`                  | `te test ls`                          |
+| Canónico              | Forma(s) con alias |
+| --------------------- | ------------------------------------- |
+| `te save-as`          | `te save`                             |
+| `te list`             | `te ls`                               |
+| `te remove`           | `te rm`                               |
+| `te move`             | `te mv`, `te rename`                  |
+| `te bpa rules list`   | `te bpa rules ls`                     |
+| `te bpa rules remove` | `te bpa rules rm`                     |
+| `te config list`      | `te config ls`                        |
+| `te macro list`       | `te macro ls`                         |
+| `te macro remove`     | `te macro rm`                         |
+| `te profile list`     | `te profile ls`                       |
+| `te profile remove`   | `te profile rm`                       |
+| `te session list`     | `te session ls`                       |
+| `te test list`        | `te test ls`                          |
 
 ## Opciones globales
 
@@ -147,7 +151,7 @@ Estas opciones están disponibles en todos los comandos y se pueden usar antes o
 | `-m, --model <path>`       | Ruta al modelo semántico (carpeta TMDL, archivo `.bim`, carpeta `Database.json` o carpeta `.SemanticModel`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `-s, --server <endpoint>`  | Punto de conexión de Analysis Services o un Workspace de Power BI. Un nombre de servidor/FQDN (`MY.SERVER.COM`), una dirección IP (`192.168.1.1`), `host:port`, `localhost`, `SERVER\INSTANCE`, `asazure://...` o una cadena de conexión de MSOLAP se conecta directamente a Analysis Services/AAS. Un nombre sencillo de un solo token (`MyWorkspace`), una ruta de Fabric `Name.Workspace[/Model.SemanticModel]` o una URL `powerbi://...` apunta a un Workspace de Power BI. Un nombre de Workspace que contiene un punto no se puede distinguir de un nombre de servidor, por lo que se trata como un servidor y la CLI muestra una advertencia; usa su forma `.Workspace` o la URL completa `powerbi://` para dirigirte a Power BI. |
 | `-d, --database <name>`    | Nombre del modelo semántico en el Workspace.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `--local`                  | Conecta a una instancia de Power BI Desktop en ejecución local (solo Windows).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `--local`                  | Conéctate a una instancia de Analysis Services en ejecución en tu equipo: Power BI Desktop, Workspaces de Visual Studio o SSAS independiente (solo Windows).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `--auth <method>`          | Método de autenticación: `auto`, `interactive`, `spn`, `env`, `managed-identity` (predeterminado: `auto`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `--output-format <format>` | Formato de Stdout: `text` (predeterminado), `json`, `csv`, `tmsl` (alias `bim`), `tmdl`. `csv` se respeta en los comandos que emiten datos tabulares; `tmsl`/`tmdl` solo se respetan en `te get` y `te list` para la serialización de objetos completos. Los comandos rechazan los formatos que no admiten.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `--error-format <format>`  | Formato de stderr para errores, advertencias y sugerencias: `text` (predeterminado) o `json`. Para cualquier otro valor, se usa `text`. Es independiente de `--output-format`, así que puedes combinar stdout en JSON con errores en texto sin formato (o viceversa).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -159,7 +163,9 @@ Estas opciones están disponibles en todos los comandos y se pueden usar antes o
 
 En los comandos que leen un modelo, el orden de resolución es:
 
-el argumento posicional `<model>` → la opción global `--model` → `--server`/`--database` (remoto) → conexión activa de `te connect` → `--recent`.
+`--recent` → `--local` → `--server`/`--database` (remoto) → `--model` → conexión activa de `te connect`.
+
+El modelo nunca es un argumento posicional: una ruta suelta en la línea de comandos se rechaza con un error de "unrecognized command or argument". (Los argumentos posicionales de `te connect`, `te init`, `te diff` y `te query` corresponden a esos comandos, no al modelo.)
 
 > [!NOTE]
 > **Las opciones mal escritas se rechazan de entrada.** Si pasas un `--flag` que no se reconoce en el comando que invocaste, la CLI finaliza con un error claro en lugar de interpretarlo silenciosamente como un argumento posicional. Esto detecta errores tipográficos como, por ejemplo, que `--force ` se convierta accidentalmente en `--forec` en scripts de CI.
@@ -167,26 +173,16 @@ el argumento posicional `<model>` → la opción global `--model` → `--server`
 > [!NOTE]
 > **Nombres de servidor con puntos.** `-s`/`--server` trata un nombre con puntos (por ejemplo, `Sales.2026`) como el nombre de host de un servidor de Analysis Services, no como un Workspace de Power BI. Se muestra una advertencia cuando la CLI tiene que hacer esta interpretación, con una sugerencia para agregar `.Workspace` (por ejemplo, `Sales.2026.Workspace`) o usar una URL `powerbi://` completa si en realidad te referías al Workspace de Power BI. Se aplica a `te connect`, `te deploy`, `te refresh`, `te query`, `te vertipaq` y `te test run`.
 
-## E/S del modelo
+## Inicialización y guardado del modelo
 
-### load
+### save-as
 
-Carga un modelo semántico y muestra un resumen del modelo: nombre, nivel de compatibilidad y recuentos generales de objetos (tablas, medidas, columnas).
+Re-serializa un modelo en un formato o una ubicación diferentes. Úsalo para escribir en archivos locales un modelo de un Workspace remoto, convertir formatos o guardar de nuevo las ediciones en el origen. (Alias: `save`.)
 
-```bash
-te load ./model                            # TMDL folder
-te load model.bim                          # BIM file
-te load -s MyWorkspace -d MyModel          # Remote workspace
-```
+`te save-as` acepta:
 
-### save
-
-Guarda un modelo en disco. Úsalo para escribir en archivos locales un modelo de un Workspace remoto, convertir formatos o guardar de nuevo las ediciones en el origen.
-
-`te save` acepta:
-
-- `-o, --output-path <path>` - archivo o carpeta de destino. **Opcional** - si se omite, `te save` vuelve a escribir en la ubicación de origen y conserva el formato original. La extensión del archivo también sirve para inferir el formato: `.bim` escribe un BIM en un solo archivo, `.json` escribe una carpeta `Database.json` y una ruta sin extensión escribe una carpeta TMDL.
-- `--serialization <fmt>` - `tmdl`, `bim` (alias `tmsl`), `Database.json`, `pbip`. Si se omite, el formato se infiere a partir de la extensión de la ruta `-o` (o del modelo cargado cuando `-o` se omite por completo).
+- `-o, --output-path <path>` - archivo o carpeta de destino. **Opcional** - si se omite, `te save-as` vuelve a escribir en la ubicación de origen y conserva el formato original.
+- `--serialization <fmt>` - `tmdl`, `bim` (alias `tmsl`), `Database.json`, `pbip`. Si se omite, el formato es el del modelo cargado; con `-o`, se infiere a partir de la ruta de salida (`.bim` escribe un BIM de un solo archivo y `.json`, una carpeta `Database.json`).
 - `--force` - omite la validación y sobrescribe la salida existente. Algunos rechazos (contenedores ambiguos, raíces de proyecto con varios `SemanticModel`) siguen ocurriendo incluso con `--force`.
 - `--skip-bpa` - omite por completo el control de BPA.
 - `--fix-bpa` - corrige automáticamente las infracciones de BPA cuando las reglas definen una expresión de corrección.
@@ -195,94 +191,126 @@ Guarda un modelo en disco. Úsalo para escribir en archivos locales un modelo de
 - `--supporting-files` - genera archivos auxiliares de Fabric (`.platform`, `definition.pbism`).
 
 ```bash
-te save                                    # Save back to source (no -o needed)
-te save ./model.bim -o ./tmdl-out          # Convert BIM to TMDL
-te save -o ./project --serialization pbip         # Save as a PBIP project
-te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
+te save-as                                    # Save back to source (no -o needed)
+te save-as -m ./model.bim -o ./tmdl-out       # Convert BIM to TMDL
+te save-as -o ./project --serialization pbip         # Save as a PBIP project
+te save-as -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
+
+La salida de `--serialization pbip` se abre directamente en Power BI Desktop y toma el nombre del modelo de origen (`SpaceParts.pbip`, no `Model.pbip`). Guardar en una carpeta que ya contiene un proyecto agrega solo los archivos que faltan y deja intacto todo lo que ya está allí —las páginas del Report, el tema, la conexión y la identidad del elemento— exactamente como estaba, de modo que un guardado que no cambia nada deja el proyecto sin cambios en el control de código fuente.
+
+La validación impide el guardado: un modelo con una colisión de nombres que Analysis Services rechazaría (`TE0012` / `TE0013`, ver [validate](#validate)) no se escribe a menos que se pase `--force` o `--skip-validation`.
 
 > [!TIP]
-> Use `te save -o <path> -s <Workspace> -d <model>` para descargar un modelo remoto a disco. Combínalo con `--skip-validation` para obtener el passthrough más rápido cuando solo necesites los bytes (sin análisis semántico de DAX).
-
-### open
-
-Abre un modelo en la aplicación de escritorio de Tabular Editor 3. **Solo para Windows** (requiere que TE3 esté instalado). Sin argumentos, inicia TE3 con un Workspace en blanco.
-
-```bash
-te open                  # Launch TE3 with a blank workspace
-te open ./my-model       # Open a TMDL folder in TE3
-te open ./model.bim      # Open a BIM file in TE3
-```
+> Use `te save-as -o <path> -s <Workspace> -d <model>` para descargar un modelo remoto en disco. Combínalo con `--skip-validation` para obtener el passthrough más rápido cuando solo necesites los bytes (sin análisis semántico de DAX).
 
 ### init
 
-Crea un nuevo modelo semántico vacío en la ruta especificada. De forma predeterminada, usa un modelo TMDL en modo de compatibilidad `PowerBI`, con nivel de compatibilidad 1702.
+Crea un nuevo modelo semántico vacío en la ruta especificada. De forma predeterminada, usa un modelo TMDL en modo de compatibilidad `PowerBI` con nivel de compatibilidad 1705.
 
 `te init` acepta:
 
 - `<output-path>` - argumento posicional: directorio donde se creará el modelo (omítelo para usar la ruta global `--model`).
 - `--compatibility-mode <mode>` - `PowerBI` (predeterminado) o `AnalysisServices`.
-- `--compatibility-level <N>` (alias `--compat`) - nivel de compatibilidad. De forma predeterminada, usa `1702` cuando el modo es `PowerBI`; `1500` en caso contrario. Consulta @update-compatibility-level.
+- `--compatibility-level <N>` (alias `--compat`) - nivel de compatibilidad. El valor predeterminado es `1705` cuando el modo es `PowerBI`; en caso contrario, `1500`. Consulta @update-compatibility-level.
 - `--name <name>` - nombre del modelo o de la base de datos (predeterminado: el nombre del directorio).
 - `--serialization <fmt>` - `tmdl` (predeterminado), `bim` (alias `tmsl`), `Database.json`, `pbip`.
 - `--force` - reemplaza cualquier archivo o directorio existente en la ruta de destino.
 
 ```bash
-te init ./new-model                                       # TMDL, PowerBI mode, compat 1702
+te init ./new-model                                       # TMDL, PowerBI mode, compat 1705
 te init ./new-model --serialization bim                   # Single-file BIM model
 te init ./as-model --compatibility-mode AnalysisServices  # AS model, compat 1500
 te init ./existing-dir --force                            # Overwrite non-empty directory
 ```
 
+`te init` es idempotente: volver a ejecutarlo sobre un modelo que ya creó muestra `Already exists` y termina con `0` (con `--output-format json`: `{"created": false, "reason": "already_exists", ...}`). Los conflictos reales siguen devolviendo `1`; `--force` lo vuelve a crear desde cero.
+
 ## Edición del modelo
+
+Los comandos que modifican (`set`, `add`, `remove`, `move` y también `script`, `macro run`, `bpa run --fix`) son **ejecuciones de prueba de forma predeterminada**: sin `--save`, el comando informa de lo que cambiaría y lo descarta (`Dry run - nothing saved. Agrega --save para conservar los cambios.`). Agrega `--save` para guardar en la ubicación de origen, o `--save-to <path>` para escribir en otra ubicación. En `set`, `add`, `remove`, `move`, `script` y `bpa run`, la salida de cambios se muestra como un diff unificado por cada objeto modificado; cámbiala con `--stat` o `--name-only` (mutuamente excluyentes con `--diff`, la opción predeterminada), o establece un valor predeterminado permanente con `te config set mutationOutput diff|stat|name-only|none`. La salida JSON siempre incluye el array completo de cambios. Se rechaza el guardado cuando la modificación introduce nuevos errores de validación de DAX, salvo que se use `--force`.
 
 ### set
 
-Establece una propiedad en un objeto del modelo. Acepta un argumento `<path>`.
+Establece propiedades en un objeto del modelo, da formato a sus expresiones o sincroniza una tabla con su esquema de origen. Acepta un argumento `<path>`.
 
 `te set` acepta:
 
-- `-q <property>` - nombre de la propiedad (por ejemplo, `expression`, `formatString`, `description`, `isHidden`). **Se puede repetir** — empareja cada `-q` con el `-i` siguiente para establecer varias propiedades en un solo comando.
-- `-i <value>` - valor (usa `-` para leer desde stdin). Un `-i` por cada `-q`.
+- `-p, --property <Name=Value>` - asignación de propiedades (p. ej., `-p expression="SUM(Sales[Amt])"`, `-p isHidden=true`). **Repetible** - todo lo que va después del primer `=` es el valor. Las asignaciones posicionales sin prefijo también funcionan: `te set Sales/Amount formatString="#,0" --save`. Los nombres de las propiedades no distinguen entre mayúsculas y minúsculas, aceptan ambas grafías cuando la etiqueta de la cuadrícula y el nombre de TOM difieren (`Hidden` e `IsHidden`), y aceptan rutas con puntos e indexadores: `-p KPI.StatusGraphic=...`, `-p "Annotations[Tabular Editor]=..."`, `-p "TranslatedNames[fr-FR]=..."`. Ejecuta `te get <path> --properties` para enumerar todos los nombres que acepta un objeto; consulta [get](#get). La expresión de una partición es `-p Expression`, sea cual sea el tipo de partición (`MExpression` y `Query` siguen funcionando). Usa `-p Name=-` para leer el valor desde la entrada estándar, stdin (una asignación por flujo; un valor canalizado se toma literalmente, así que canalizar el texto `null` almacena la palabra `null`). `-p Name=` asigna una cadena vacía.
+- `--unset <Name>`: limpia el valor de una propiedad; se puede repetir (`--unset description --unset displayFolder`). `-p Name=null` es la forma abreviada. Funciona con cualquier propiedad que pueda quedar sin valor —incluidas las propiedades de texto— y también con las que tienen valores de objeto (`SortByColumn`, `RefreshPolicy`); `-p "Annotations[key]=null"` elimina una anotación. Las propiedades numéricas, booleanas y de opción fija no se pueden limpiar y se rechazan.
+- `--format <PropertyName>`: da formato a esa propiedad de expresión (se puede repetir; DAX o M se detecta a partir de la propiedad). Las opciones `--long` (menos saltos de línea) y `--no-space-after-function` son ajustes del formateador y requieren usar `--format` con una propiedad DAX. `--semicolons` no se admite junto con `--format`: una expresión almacenada en un modelo siempre va separada por comas, así que la variante con punto y coma nunca podrá analizarla; en su lugar, da formato al DAX escrito con punto y coma con [`te util format-dax --semicolons`](#util-format-dax).
+- `--update-schema`: sincroniza las columnas de una tabla con su esquema de origen: añade nuevas columnas del origen con los tipos detectados, corrige el tipo de las que hayan cambiado y conserva todo lo demás de cada columna existente (nombre, descripción, cadena de formato, carpeta de visualización, columna de ordenación, visibilidad, anotaciones, traducciones, pertenencia a perspectivas). Las columnas de origen eliminadas solo generan una advertencia, salvo que uses `--drop-removed-columns` (destructivo). Una columna de origen renombrada parece una eliminación + una adición; remapéala primero con `-p SourceColumn=<newName>`. No se admite en tablas calculadas ni grupos de cálculo; no se puede combinar con `-p` ni con `--format`. Si no se especifica ninguna opción de conexión, la conexión se toma del propio modelo: el Data source al que están vinculadas las particiones de la tabla, la conexión escrita en la consulta de la propia tabla o el único Data source utilizable del modelo; y la tabla de origen se toma de la vinculación de la partición, recurriendo al nombre de la tabla del modelo si hace falta. `--data-source <name>` te permite elegir cuando el modelo tiene varios Data source utilizables. Si nombras una conexión explícitamente con las opciones de detección de esquema compartidas con `te add` (`--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`), eso siempre prevalece. Cuando no se puede determinar ningún origen, o no se puede encontrar la tabla de origen, el error indica cuál de los dos casos se aplica y qué tabla buscó.
 - `-t, --type <kind>` - desambiguación cuando la misma ruta podría referirse a varios tipos de objeto (`medida`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `partición`, `CalculationItem`).
 - `--save` / `--save-to <path>` - guarda los cambios.
+- `--diff` / `--stat` / `--name-only`: cambian cómo se representa la salida de cambios (consulta la nota anterior).
 - `--serialization <fmt>` - sobrescribe la serialización al guardar (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 - `--force` - guarda incluso si la modificación introduce errores de validación de DAX.
 
 ```bash
-te set Sales/Amount -q expression -i "SUM(Sales[Amt])" --save
-te set "'Net Sales'[Sales Amount]" -q formatString -i "#,0" --save   # DAX form with spaced names
-te set Sales -q isHidden -i true --save
-te set Sales/Amount -q formatString -i "#,0" -q description -i "Net sales" --save   # Multi-property
+te set Sales/Amount -p expression="SUM(Sales[Amt])" --save
+te set "'Net Sales'[Sales Amount]" -p formatString="#,0" --save        # DAX form with spaced names
+te set Sales -p isHidden=true --save
+te set Sales/Amount -p formatString="#,0" -p description="Net sales" --save   # Multiple properties, one atomic change
+te set "Sales/Total Sales" --unset description --save                   # Clear a property (same as -p description=null)
+te set Sales/Amount --format Expression --save                          # Format one expression property
+te set Sales --update-schema --save                                     # Sync columns with the source schema (connection inferred from the model)
+te set Sales --update-schema --data-source "Sales DW" --save            # Pick the data source when the model has several
 ```
+
+#### Políticas de actualización incremental
+
+Las políticas de actualización son propiedades normales del subobjeto `RefreshPolicy` de una tabla, así que `te get` y `te set` las gestionan como cualquier otra propiedad. Nombres de propiedad: `Mode`, `RollingWindowPeriods`/`RollingWindowGranularity`, `IncrementalPeriods`/`IncrementalGranularity`, `IncrementalPeriodsOffset`, `SourceExpression`, `PollingExpression` (entrada desde archivo: `-p SourceExpression=- < src.m`).
+
+```bash
+te get Sales/RefreshPolicy                                              # Inspect a table's refresh policy
+te set Sales/RefreshPolicy -p RollingWindowPeriods=5 -p RollingWindowGranularity=Day -p IncrementalPeriods=1 -p IncrementalGranularity=Day --save
+te set Sales -p RefreshPolicy=null --save                               # Remove the policy
+```
+
+La política se crea implícitamente en el primer `set`. Eliminar una política deja las particiones generadas por la política en su sitio y no se permite cuando son las únicas particiones de la tabla. Para aplicar una política en el servidor, consulta [`te refresh --apply-refresh-policy`](#refresh); para aplicarla solo a nivel de metadatos, usa `te script --inline "Model.Tables[\"Sales\"].ApplyRefreshPolicy();" --save`.
 
 ### add
 
-Agrega un objeto al modelo. Especifica un `<path>` para el nuevo objeto (el elemento padre ya debe existir; el segmento final es el nuevo nombre) y el tipo mediante `-t` / `--type`. Las relaciones mantienen su sintaxis abreviada (`Sales[Key]->Dim[Key]`).
+Agrega un objeto al modelo. Especifica un `<path>` para el nuevo objeto (el elemento padre ya debe existir; el segmento final es el nuevo nombre) y el tipo mediante `-t` / `--type`. Las relaciones mantienen su sintaxis abreviada (`Sales[Key]->Dim[Key]`). Las rutas en formato de contenedor son objetivos válidos para `add` (`Sales/Measures/Margin`, `Sales/Partitions/Q1`, `Sales/Calendars/Fiscal`, `Roles/Admin/TablePermissions/Sales`, `Roles/Admin/Members/user@x.com`) - cualquier ruta que muestre la CLI puede volver a pasarse a `te add`.
 
 `te add` acepta:
 
-- `-t, --type <type>`: tipo de objeto. Valores comunes: `Table`, `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Role`, `Perspective`, `Culture`, `CalculationGroup`, `CalculationItem`. Se admite el autocompletado con la tecla Tab; la lista completa se puede obtener ejecutando `te add --help`.
-- `-i <value>` - expresión o valor que se asignará al nuevo objeto (DAX para medidas/columnas calculadas, M para particiones, etc.). Combínalo con `-q` para establecer propiedades adicionales en el nuevo objeto en el mismo comando.
-- `-q <property>` - propiedad adicional que se establecerá en el nuevo objeto (se puede repetir; se combina con `-i`).
-- `--file <path>` - lee la expresión de `-i` desde un archivo en lugar de incluirla directamente en el comando.
-- `--mode <mode>` - modo de almacenamiento para tablas nuevas: `import` (predeterminado), `directQuery`, `dual`, `directLake`.
+- `-t, --type <type>`: tipo de objeto. Valores habituales: `Table`, `CalculatedTable`, `CalcGroup`, `medida`, `CalculatedColumn`, `DataColumn`, `Hierarchy`, `Level`, `Calendar`, `CalcItem`, `KPI`, `partición`, `Expression`, `Function`, `perspectiva`, `Culture`, `rol`, `TablePermission`, `Member`. Se admite el autocompletado con la tecla Tab; la lista completa se puede obtener ejecutando `te add --help`.
+- `-p, --property <Name=Value>` - asignación de propiedades al nuevo objeto (repetible). La expresión va en `-p Expression="..."`, o usa `--file`, o `-p Expression=-` para leerla desde stdin.
+- `--file <path>` - lee la expresión de un archivo en lugar de incluirla en línea.
+- `--mode <mode>` - modo de almacenamiento para tablas nuevas: `import` (predeterminado), `directquery` (alias `dq`), `dual`, `directlake` (alias `dl`).
 - `--if-not-exists` - sale con código `0` sin error si el objeto ya existe. Úsalo en canalizaciones de CI/CD idempotentes.
 - `--save` / `--save-to <path>` - guarda los cambios.
-- `--serialization <fmt>` - sobrescribe la serialización al guardar (`tmdl`, `bim` (alias `tmsl`), `database.json`).
-- `--source-type <kind>` - tipo de origen inicial de la partición en una tabla nueva: `m`, `query` o `calculated`. Anula la detección heurística. `calculated` solo es válido con `-t CalculatedTable`.
+- `--diff` / `--stat` / `--name-only` - formato de la salida de cambios (consulta la nota sobre [edición del modelo](#model-editing)).
+- `--serialization <fmt>` - sobrescribe la serialización al guardar (`tmdl`, `bim` (alias `tmsl`), `database.json`, `pbip`).
+- `--source-type <kind>` - tipo de origen inicial de la partición en una tabla nueva: `m`, `query` o `calculated`. Anula la detección heurística. `query` crea una partición heredada de SQL `SELECT`, vinculada al origen de datos del proveedor del modelo, y se rechaza con orígenes Lakehouse/Warehouse o cuando no existe ningún origen de proveedor; `calculated` solo es válido con `-t CalculatedTable`.
+- `--partition-expression <m>` - expresión M sin procesar para la partición inicial de la tabla nueva.
 - `--force` - guarda incluso si la modificación introduce errores de validación de DAX.
 
+Para agregar una sola columna de datos a una tabla existente se usa `-t DataColumn`, con `SourceColumn` y `DataType` obligatorios (se rechaza en tablas calculadas y grupos de cálculo):
+
 ```bash
-te add Sales/Revenue -t Measure -i "SUM(Sales[Amount])" --save
-te add Sales -t Table --save
-te add "Sales[ProdKey]->Product[ProdKey]" --save                           # Relationship shorthand
-te add Sales/MarketingFlag -t CalculatedColumn -i "Sales[Amount] > 1000" --if-not-exists --save
-te add Perspectives/Default/Sales --save                                   # Include Sales in the Default perspective
-te add Roles/Reader -t Role --save                                         # New role at the model level
+te add Sales/Quantity -t DataColumn -p SourceColumn=Qty -p DataType=Int64 --save
 ```
 
-En las tablas vinculadas a datos, `te add` también admite la detección del esquema desde orígenes SQL, Lakehouse o Warehouse. Consulta `te add --help` para ver `--source`, `--endpoint`, `--source-table`, `--columns`, etc.
+Las tablas pueden crearse de una sola vez a partir del **propio** Data source del modelo; no hacen falta opciones de conexión. La CLI toma la conexión del Data source del modelo, detecta las columnas de la tabla de origen y sus tipos, y crea la tabla con una partición ya vinculada a ese Data source. Con un Data source heredado (basado en proveedor), la partición es una consulta SQL heredada que contiene el `SELECT` generado, igual que el que genera el asistente de escritorio **Importar tablas**; pasa `--source-type m` para usar en su lugar una partición de Power Query (M). Con un Data source estructurado (Power Query), la partición siempre es M. Los rechazos son claros y no se crea nada: varios Data sources utilizables y sin `--data-source`; ningún Data source que la CLI pueda leer (se admiten orígenes de SQL Server, Azure SQL y Fabric SQL); un Data source cuya contraseña el modelo no almacena; o una tabla de origen que la conexión no puede encontrar. El error indica la tabla que buscó y de dónde salió ese nombre.
+
+- `--source-table <schema.table>` - crea la tabla a partir de esta tabla de origen.
+- `--query "SELECT ..."` - crea la tabla a partir de una consulta: la consulta se analiza sobre la conexión sin ejecutarse, la tabla nueva recibe exactamente las columnas que devuelve y la consulta se conserva como contenido de la partición. Funciona tanto con una conexión inferida como con una indicada explícitamente. `--source-type query` coloca el SQL en una partición Query heredada vinculada al Data source heredado del modelo. Se rechaza si se usa junto con `--mode directlake` (una partición Direct Lake no contiene ninguna consulta), con `--columns` y con una expresión propia (`-p Expression=` o `--file`).
+- `--data-source "<name>"` - elimina la ambigüedad cuando el modelo tiene varios Data sources.
+
+La detección de esquema sobre un origen explícito también funciona, y siempre prevalece sobre la inferencia: `--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`, o una especificación manual de columnas `--columns "Id:Int64,Name:String"`. `te add "<table>" -t Table` sin ningún origen sigue creando una tabla vacía para que la completes tú mismo.
+
+```bash
+te add Sales/Revenue -t Measure -p Expression="SUM(Sales[Amount])" --save
+te add Sales/Quantity -t DataColumn -p SourceColumn=Qty -p DataType=Int64 --save
+te add "Sales[ProdKey]->Product[ProdKey]" --save                        # Relationship shorthand
+te add Sales/MarketingFlag -t CalculatedColumn -p Expression="Sales[Amount] > 1000" --if-not-exists --save
+te add Perspectives/Default/Sales --save                                # Include Sales in the Default perspective
+te add Roles/Reader -t Role --save                                      # New role at the model level
+te add Inventory -t Table --source-table dbo.Inventory --save           # Table from the model's own data source
+te add TopCustomers -t Table --query "SELECT TOP 100 * FROM dbo.Customers" --save
+```
 
 ### remove
 
@@ -296,6 +324,7 @@ Elimina un objeto. De forma predeterminada, comprueba las dependencias para evit
 - `--if-exists` - sale con código `0` sin error si el objeto no existe. Úsalo en canalizaciones de CI/CD idempotentes.
 - `--dry-run` - muestra una vista previa de la eliminación sin aplicarla.
 - `--save` / `--save-to <path>` - guarda el cambio.
+- `--diff` / `--stat` / `--name-only` - formato de la salida de cambios (consulta la nota sobre [edición del modelo](#model-editing)).
 - `--serialization <fmt>` - sobrescribe la serialización al guardar (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 
 ```bash
@@ -313,44 +342,17 @@ Mueve o renombra un objeto del modelo. Tanto el origen como el destino son argum
 
 - `-t, --type <kind>` - desambigua cuando la ruta de origen coincide con varios tipos de objeto (p. ej., una columna y una jerarquía con el mismo nombre).
 - `--save` / `--save-to <path>` - guarda el cambio.
+- `--diff` / `--stat` / `--name-only` - formato de la salida de cambios (consulta la nota sobre [edición del modelo](#model-editing)).
 - `--serialization <fmt>` - sobrescribe la serialización al guardar (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 - `--force` - guarda incluso si la mutación introduce errores de validación de DAX.
+
+Se rechaza cambiar el nombre de un objeto cuyo nombre no tienes permiso para establecer, devolviendo un código de salida distinto de cero en lugar de informar `No changes.`: una relación (su nombre siempre describe las columnas que une), el KPI de una medida o el permiso de tabla de un rol.
 
 ```bash
 te move Sales/Revenue Finance/Revenue --save                # Move measure to another table
 te move Sales/Revenue Sales/TotalRevenue --save             # Rename measure
 te move Sales/Date Sales/CalendarDate -t Hierarchy --save   # Disambiguate hierarchy from column
-```
-
-### replace
-
-Busca y reemplaza texto en los objetos del modelo. Simulación de forma predeterminada; añade `--save` para aplicar.
-
-`te replace` acepta:
-
-- `--in <scope>` — ámbito: `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all` (predeterminado: `all`).
-- `--regex` — trata el patrón de búsqueda como una expresión regular.
-- `--case-sensitive` — habilita la coincidencia que distingue entre mayúsculas y minúsculas.
-- `--dry-run` - previsualiza los cambios sin aplicarlos. Comportamiento predeterminado.
-- `--save` - guarda la modificación en la ubicación de origen. Incompatible con `--revert` y `--stage`.
-- `--save-to <path>` - guarda en una ruta diferente (implica `--save`).
-- `--serialization <fmt>` - serialización del modelo: `tmdl`, `bim` (alias `tmsl`), `database.json`.
-- `--force` - guarda incluso si la sustitución introduce errores de validación de DAX.
-
-`--in expressions` recorre todas las propiedades que contienen expresiones:
-
-- **Medida**: `Expression`, `DetailRowsExpression`
-- **KPI**: `TargetExpression`, `StatusExpression`, `TrendExpression`
-- **Partición**: M de origen y M de sondeo
-- **Permiso de tabla**: `FilterExpression`
-- **Grupo de cálculo**: expresiones de selección
-- **Columna calculada**: expresión DAX
-
-Al añadir al modelo nuevas propiedades basadas en expresiones, se muestran automáticamente.
-
-```bash
-te replace "OldTable" "NewTable" --in expressions --save
-te replace "SUM" "SUMX" --regex --in expressions --save
+te move "Sales/Partitions/Old" "Sales/Partitions/New" --save   # Container-form paths work too
 ```
 
 ## Inspección
@@ -361,7 +363,7 @@ Enumera objetos con una navegación similar a la del sistema de archivos. Acepta
 
 `te list` acepta:
 
-- `--type <kind>` - limita a un tipo de objeto (`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`). Sin `<path-filter>`, esto equivale a escribir la palabra clave del contenedor correspondiente.
+- `--type <kind>` - limita a un tipo de objeto (`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`, `calculationitem`, `kpi`, `set`, `function`). Sin `<path-filter>`, esto equivale a escribir la palabra clave del contenedor correspondiente.
 - `--paths-only` - emite una ruta de objeto por línea, ideal para pasarlo a `xargs`, `te get` o `te set`.
 - `--no-multiline` - contrae las celdas multilínea (normalmente expresiones DAX o M) a una sola línea y las trunca para que las filas sigan siendo fáciles de recorrer en tablas anchas. Solo afecta a la salida de texto; la salida JSON/CSV/TMSL no se ve afectada.
 - `--output-format tmsl` (alias `bim`) - genera los objetos coincidentes como un script TMSL/BIM. Útil para `te list Tables --output-format bim > tables.json`. `--output-format tmdl` no es compatible con `ls` (TMDL solo admite un único objeto; usa `te get`).
@@ -375,6 +377,10 @@ te list 'Sa*'                               # Tables whose name starts with Sa (
 te list '*/Amount'                          # An Amount column/measure across every table
 te list 'Roles/Re*/Members'                 # Members of every role matching Re*
 te list Sales/Geography/Levels              # All levels of the Geography hierarchy
+te list KPIs                                # All KPIs (with parent measure)
+te list Sales/KPIs                          # KPIs on measures of Sales
+te list Sets                                # Calculated sets
+te list Functions                           # DAX user-defined functions
 te list "'Net Sales'/'Sales Amount'"        # Quote names containing spaces
 te list Measures --paths-only               # One Table/Measure per line for piping
 te list --type measure                      # Same as `te list Measures`
@@ -382,51 +388,72 @@ te list Measures --no-multiline             # Wide table with column dividers, s
 te list Tables --output-format bim > tables.json   # All tables emitted as TMSL/BIM
 ```
 
+En la salida JSON, cada objeto listado empieza con su `objectPath`: una ruta canónica que se resuelve con `te get`.
+
 ### get
 
-Obtiene las propiedades de un objeto del modelo. Acepta un `<path>`.
+Obtén propiedades de un objeto del modelo, filtra y lista conjuntos de objetos, y analiza dependencias: `get` es el único pipeline de lectura de la CLI (`te list` y `te deps` se mantienen como accesos directos). Acepta un `<path>`; omítelo para listar el modelo (igual que `te list`) o pasa `.` para la raíz del modelo. Una ruta con comodines (`te get "Sa*"`) o una ruta de contenedor (`te get Sales/Measures`) lista todas las coincidencias sin necesidad de `--ls`; `-p`, `--deps` y `--properties` requieren exactamente un objeto, así que en una ruta con comodines lo indican y sugieren quitar la opción.
 
 `te get` acepta:
 
-- `-q, --query <property>` - obtiene una única propiedad (por ejemplo, `expression`, `formatString`).
+- `-p, --property <property>` - proyecta una única propiedad (p. ej., `expression`, `formatString`).
+- `--where <Prop=Value>` - filtra el conjunto de resultados; se puede repetir (AND), sin distinguir mayúsculas de minúsculas. Un valor sin `*` es una coincidencia exacta; `*` es un comodín, así que para buscar por contenido se usa `--where Name=*margin*`. Sin ruta, `--where` filtra las **tablas de nivel superior** del modelo; pasa un contenedor para buscar otros tipos (`te get Measures --where Name=*margin*`). Un resultado vacío indica qué se buscó y cómo se hizo coincidir el patrón, y ofrece comandos para ampliar la búsqueda.
+- `--properties` - lista los nombres de propiedad que `-p` acepta en el objeto resuelto, con el tipo de cada propiedad, si se puede escribir, qué contiene y, cuando una propiedad admite un conjunto fijo de valores, los valores que acepta. Se muestran ambas grafías cuando difieren (`Hidden` / `IsHidden`), y las anotaciones y las traducciones aparecen en el formato entre corchetes en el que deben escribirse. Se omiten las propiedades internas de control; `--all` las agrega. Solo salida de texto y JSON; requiere una ruta de un solo objeto y no se puede combinar con `-p`, `--ls`, `--where`, `--deps` ni `--unused`.
+- `--ls` - disposición compacta en tabla (la misma representación que `te list`).
+- `--deps [upstream|downstream]` - análisis de dependencias (predeterminado: ambas direcciones); `--deep` para el árbol recursivo, `--max-depth <N>` (valor predeterminado `10`).
+- `--unused` / `--hidden` - muestra los objetos no usados, como en `te deps`.
+- `--paths-only` - una ruta canónica de objeto por línea, para usar en canalizaciones.
+- `--no-multiline` - contrae las celdas multilínea (con `--ls`/`--where`). Solo para la salida de texto.
 - `-t, --type <kind>` - desambigua cuando la ruta coincide con varios elementos secundarios de una tabla (p. ej., una columna y una jerarquía con el mismo nombre). Valores: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
 - `--output-format tmsl` (alias `bim`) - genera el objeto resuelto como JSON TMSL/BIM.
 - `--output-format tmdl` - genera el objeto resuelto como TMDL (solo objetos con nombre).
 
 `te get` y `te list` comparten un único catálogo de descriptores, de modo que todas las propiedades se muestran igual en todos los formatos: la tabla de texto, JSON y CSV ven el mismo conjunto, y al agregar una propiedad nueva al modelo, esta queda expuesta en todos ellos.
 
+La línea `Settable:` debajo del resultado de `te get <path>` enumera las propiedades que `te set` acepta en ese objeto (`SortByColumn` entre ellas) y termina con una referencia a `--properties` para la lista completa; un nombre de propiedad desconocido en `te get -p` o `te set -p` remite al mismo listado. `te get -p` resalta la sintaxis de todas las propiedades con valor de expresión, incluidas las filas de detalle y las expresiones de cadena de formato dinámicas. En la salida JSON, un solo objeto empieza con `objectPath` (la ruta canónica, que puede resolverse tal cual con `te get`, `te set` o `te remove`), seguido de `type` y `properties`; un listado que no coincide con nada imprime un array vacío.
+
 ```bash
-te get Sales/Amount -q expression                # Print DAX
+te get Sales/Amount -p expression                # Print DAX
 te get "'Sales'[Amount]"                         # DAX form: same as Sales/Amount
 te get "[Total Sales]"                           # Lone-bracket: model-wide measure-or-column
-te get "'Net Sales'[Sales Amount]" -q expression # DAX form with spaced names
-te get "Sales/Revenue/KPI"                       # KPI sub-object of a measure
-te get Sales --output-format tmdl                       # Emit the table as TMDL
-te get Sales --output-format bim                        # Emit the table as TMSL/BIM
-te get Model -q description
+te get "'Net Sales'[Sales Amount]" -p expression # DAX form with spaced names
+te get Sales/Revenue/KPI                         # KPI sub-object of a measure
+te get Sales --output-format tmdl                # Emit the table as TMDL
+te get Sales --output-format bim                 # Emit the table as TMSL/BIM
+te get . -p description                          # Model-level property
+te get "Sa*"                                     # Every table matching the wildcard, no --ls needed
+te get Measures --where IsHidden=true --ls       # Filter + list rendering
+te get Measures --where Name=*margin*            # Contains-search across all measures
+te get Sales/Amount --properties                 # Property names -p accepts, with types and allowed values
+te get Sales/Revenue --deps downstream --deep    # Recursive dependents
 ```
 
 ### find
 
-Busca texto en todos los objetos del modelo.
+Busca texto en propiedades de cadena y muestra cada ubicación donde haya una coincidencia. De forma predeterminada, el patrón es una **subcadena literal sin distinción entre mayúsculas y minúsculas**; `te find "Gross*"` busca un asterisco literal, así que pasa `--regex` para la coincidencia de patrones. Usa `te get --where Name=*Gross*` cuando quieras filtrar objetos por el valor de una propiedad en lugar de hacer una búsqueda de texto. Un resultado vacío indica el ámbito en el que se buscó y el modo de coincidencia utilizado, y ofrece comandos para ampliar la búsqueda; si el patrón `--regex` no es una expresión regular válida, se rechaza con un error que indica la opción y el patrón.
 
 `te find` acepta:
 
-- `--in <scope>` - igual que en `te replace` (valor predeterminado: `all`).
+- `--in <scope>` — ámbito: `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all` (predeterminado: `all`).
 - `--regex`, `--case-sensitive`, `--paths-only`.
-- `--no-multiline` - contrae el contexto de coincidencia multilínea a una sola línea. Solo para la salida de texto.
+- `--no-multiline` - contrae el contexto de coincidencia multilínea a una sola línea. Solo salida de texto.
 
 `--in expressions` abarca todos los `IExpressionObject` del modelo, incluidas las `TargetExpression` / `StatusExpression` / `TrendExpression` de los KPI, la `DetailRowsExpression` de la medida, el M de origen/sondeo de la partición, la `FilterExpression` de los permisos de tabla y las expresiones `MultipleOrEmptySelection` / `NoSelection` del grupo de cálculo; así, un literal como `123` definido en el objetivo de un KPI aparece igual que el cuerpo de una medida.
 
 ```bash
 te find "CALCULATE" --in expressions
 te find "Revenue" --in names
-te find "CALCULATE" --in expressions --paths-only | xargs -I{} te get {} -q expression
+te find "CALCULATE" --in expressions --paths-only | xargs -I{} te get {} -p expression
+te find "Gross.*Margin" --in names --regex
 ```
+
+Con `--output-format json`, `te find` emite un Report del ámbito que buscó y del modo de coincidencia que usó junto con las coincidencias.
 
 ### diff
 
 Compara dos modelos para detectar diferencias estructurales. Devuelve los siguientes códigos de salida: `0` = idéntico, `1` = diferencias encontradas, `2` = error.
+
+Los cambios se incluyen en el Report del mismo modo que los comandos que realizan modificaciones: una entrada consolidada por cada objeto cambiado, con líneas `-`/`+` por propiedad en la salida de texto. En JSON, las entradas del array `changes` incluyen `objectPath` (la ruta canónica, que puede pasarse por una tubería a `te get`), `objectType` (el mismo vocabulario cerrado que el JSON de hallazgos: `KPI`, `Member`, ...), `changeKind` (`created`, `deleted`, `modified` o `moved`; un objeto renombrado que lleva una etiqueta de linaje es una única entrada `moved` con `movedFromObjectPath`) y un array `properties` de `{property, before, after}` con nombres de propiedad en PascalCase. Un objeto que existe solo en uno de los dos modelos se lista junto con su contenido —los filtros de seguridad a nivel de filas de un rol nuevo, las columnas, medidas y particiones de una tabla nueva, los niveles de una jerarquía nueva—, cada elemento como una entrada independiente, y los recuentos del resumen los incluyen.
 
 ```bash
 te diff ./model-v1 ./model-v2
@@ -441,7 +468,7 @@ te diff ./a ./b; switch ($LASTEXITCODE) { 0 { 'same' } 1 { 'different' } default
 
 ### deps
 
-Analiza las dependencias ascendentes y descendentes de un objeto, o detecta objetos sin usar en todo el modelo. La forma de un solo objeto acepta un `<path>`.
+Analiza las dependencias ascendentes y descendentes de un objeto, o detecta objetos sin usar en todo el modelo. Un atajo para `te get --deps` / `te get --unused`. La forma de un solo objeto acepta un `<path>`.
 
 `te deps` admite:
 
@@ -452,6 +479,8 @@ Analiza las dependencias ascendentes y descendentes de un objeto, o detecta obje
 - `-t, --type <kind>` - desambigua cuando la ruta coincide con varios elementos secundarios de una tabla (p. ej., una columna y una jerarquía con el mismo nombre).
 - `--unused` - enumera las medidas, las columnas calculadas y **todas las columnas de datos** a las que no hace referencia ninguna expresión DAX y que no se usan en ninguna relación, nivel de jerarquía, ordenación por columna, variación, base de AlternateOf ni rol de tiempo de calendario. Cada resultado muestra `(hidden)` en modo de texto y un campo `isHidden` en JSON.
 - `--hidden` - limita `--unused` a solo los objetos ocultos. Los objetos ocultos y sin usar son los candidatos más seguros para eliminar, porque ningún elemento visible para el usuario depende de ellos.
+
+En la salida JSON, cada entrada —y cada nodo de árbol `upstream`, `downstream` y `--deep`— se nombra igual que el resto de la CLI nombra los objetos: `objectPath` (ruta canónica, que se puede canalizar a `te get`), `object` (nombre simple) y `objectType`.
 
 ```bash
 te deps Sales/Revenue                     # Upstream + downstream for one object
@@ -469,19 +498,23 @@ Valida las expresiones del modelo, la integridad del esquema y los errores de TO
 
 `te validate` admite:
 
-- `--ci <fmt>` - emite anotaciones de CI en stderr: `vsts` o `github`.
+- `--ci <fmt>` - emite anotaciones de CI a stderr: `vsts` (alias `azdo`, `azure-devops`) o `github` (alias `gh`). `none` o un valor vacío indican que no hay anotaciones; cualquier otro valor se rechaza antes de ejecutar el comando.
 - `--trx <PATH>` - escribe los resultados en un archivo `.trx` de VSTEST.
 - `--errors-only` - forma abreviada de `--no-warnings --no-antipatterns`: muestra solo errores.
 - `--no-warnings` - oculta las advertencias del analizador semántico.
 - `--no-antipatterns` - oculta las sugerencias de antipatrones (recomendaciones de buenas prácticas de DAX).
 - `--server-only` - muestra solo los errores notificados por el servidor conectado; omite el análisis semántico local.
-- `--no-multiline` - contrae el contenido de varias líneas de las celdas (mensajes de error, expresiones) en una sola línea. Solo salida de texto.
+- `--no-multiline` - contrae el contenido de varias líneas de las celdas (mensajes de error, expresiones) en una sola línea. Solo para la salida de texto.
 
 ```bash
-te validate ./model
+te validate -m ./model
 te validate --ci github --trx results.trx
 te validate --errors-only                 # Hide warnings and anti-pattern hints
 ```
+
+Cada hallazgo lleva un código estable, que se muestra en la columna **Código** de las tablas de Errores, Advertencias y Antipatrones, así como en JSON, en las anotaciones `--ci` y en `--trx`. Hay tres códigos que conviene conocer cuando se trabaja con un modelo escrito a mano: `TE0012` (una columna y una medida, o dos columnas, comparten nombre dentro de una misma tabla) y `TE0013` (el nombre de una medida se repite entre tablas) son errores: Analysis Services se niega a cargar ese modelo y `te save-as` se niega a escribirlo, salvo que se pase `--force` o `--skip-validation`; `TE0014` es una advertencia de que una carpeta TMDL no tiene `database.tmdl`, de modo que el nivel de compatibilidad en vigor sustituye al que declaró el modelo. La carpeta sigue cargándose y `te validate` sigue terminando con `0` para `TE0014`; oculta esta advertencia como cualquier otra con `--no-warnings` o `--errors-only`.
+
+Con `--output-format json`, `te validate` emite el documento JSON compartido de hallazgos (`summary` más una matriz plana `findings[]`), el mismo que usan `te bpa run`, `te test run` y `te query`; consulta @te-cli-findings.
 
 > [!NOTE]
 > `te validate` no admite `--output-format csv`: CSV se rechaza desde el principio con un error claro, en lugar de producir un resultado parcial. Usa `text` o `json` para la salida de validación.
@@ -492,21 +525,20 @@ Ejecuta reglas de Best Practice Analyzer contra un modelo.
 
 `te bpa run` admite:
 
-- `<model>` - argumento posicional: ruta al modelo (alternativa a la opción global `--model`).
 - `-r, --rules <rules>` - ruta(s) o URL(s) a archivo(s) de reglas BPA en formato JSON. Se puede repetir. Sustituye la capa de reglas de usuario en esta invocación: consulta [Orígenes y resolución de reglas](#rule-sources-and-resolution) más abajo.
 - `--no-model-rules` - excluye las reglas de BPA incrustadas en las anotaciones del modelo.
 - `--no-defaults` - excluye las reglas predeterminadas de BPA integradas.
 - `--vpax <file>` - carga estadísticas del Analizador VertiPaq desde un archivo `.vpax` para habilitar reglas compatibles con VPA.
-- `--vpa-rules` - incluir reglas integradas compatibles con VPA (requiere `--vpax` o un modelo preanotado).
 - `--allow-external-rules` - permitir obtener archivos de reglas de BPA desde direcciones URL incrustadas en las anotaciones del modelo.
 - `--rule <id>` - ejecutar solo regla(s) específicas por ID. Se puede repetir.
 - `--path <path-filter>` - limitar el análisis a las tablas que contengan los objetos coincidentes. Acepta nombres literales, palabras clave de contenedor y comodines (por ejemplo, `'Sales'`, `'Sa*'`, `'Sales/Medidas'`, `'*/Amount'`).
 - `--fix` - aplicar expresiones de corrección para corregir automáticamente las infracciones cuando sea posible.
 - `--save` - volver a guardar el modelo en el origen después de aplicar las correcciones.
 - `--save-to <path>` - guardar el modelo en una ruta diferente después de aplicar las correcciones.
+- `--diff` / `--stat` / `--name-only` - controlan cómo se representa la salida de cambios en la pasada de corrección (consulta la nota [Edición del modelo](#model-editing)).
 - `--serialization <fmt>` - serialización del modelo: `tmdl`, `bim` (alias `tmsl`), `database.json`.
 - `--fail-on <severity>` - umbral de fallo: `error` (predeterminado) o `warning`. Sale con el código `1` cuando las infracciones alcanzan el umbral. Los errores al cargar o evaluar reglas (expresiones no válidas, archivos de reglas ilegibles) también provocan un código de salida distinto de cero, independientemente de `--fail-on`.
-- `--ci <fmt>` - emitir comandos de registro de CI a stderr: `vsts` (Azure DevOps), `github` (GitHub Actions).
+- `--ci <fmt>` - emite comandos de registro de CI a stderr: `vsts` (Azure DevOps; alias `azdo`, `azure-devops`), `github` (GitHub Actions; alias `gh`). Los valores no reconocidos se rechazan de entrada.
 - `--trx <path>` - escribir los resultados como un archivo `.trx` de VSTEST en la PATH especificada.
 - `--no-multiline` - contraer el contenido de varias líneas de las celdas de la tabla de infracciones en una sola línea. Solo para la salida de texto.
 
@@ -519,6 +551,8 @@ te bpa run --path 'Sa*'            # Wildcard - every table starting with Sa
 te bpa run --path Sales/Measures   # Path filter applied to the matched tables
 ```
 
+Con `--output-format json`, `te bpa run` emite el documento JSON compartido de hallazgos (consulta @te-cli-findings); con `--fix`, el JSON es un único documento que también incluye el conjunto de cambios `fix`.
+
 #### Orígenes de las reglas y su resolución
 
 Cada invocación de `te bpa run` reúne reglas de tres capas independientes:
@@ -530,12 +564,14 @@ Cada invocación de `te bpa run` reúne reglas de tres capas independientes:
 2. **Reglas integradas predeterminadas** - se cargan a menos que se pase `--no-defaults` o que [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) sea `false` en la configuración. Se omiten las reglas integradas individuales incluidas en `bpa.disabledBuiltInRuleIds`.
 3. **Reglas integradas en el modelo** - reglas en la anotación `BestPracticeAnalyzer_Rules` del modelo; se cargan a menos que se pase `--no-model-rules`. Se omiten las anotaciones de URL externas, a menos que también pases `--allow-external-rules`.
 
-Se eliminan los ID de reglas duplicados (las reglas del usuario prevalecen sobre las integradas). Después se eliminan los ID de reglas de la anotación `BestPracticeAnalyzer_IgnoreRules` del modelo.
+Los valores predeterminados integrados son exactamente el [conjunto de reglas integrado](xref:built-in-bpa-rules) documentado de Tabular Editor 3 (los identificadores `TE3_BUILT_IN_*`), por lo que `te bpa run` y TE3 Desktop coinciden en lo que marcan las reglas integradas. Las seis reglas del Analizador VertiPaq (`VPA_*`) que las versiones preliminares anteriores presentaban como integradas no forman parte de ese conjunto, y la opción `--vpa-rules` ya no existe; si una canalización depende de alguna de ellas para bloquearse, copia su definición en tu propio archivo de reglas y haz referencia a él con `--rules`, `bpa.rules` o `TE_BPA_RULES`. `--vpax` no cambia y sigue proporcionando las estadísticas que lee una regla propia compatible con VPA. Los C# Scripts y las macros (`te script`, `te macro run`) ven el mismo conjunto de reglas a través de `Bpa.Rules` y `Bpa.Analyze()`.
+
+Cada identificador de regla se evalúa una vez. Cuando el mismo ID aparece en más de una capa, en `te bpa run` prevalece la definición de un archivo `--rules` explícito, mientras que en los controles de implementación y guardado prevalece la definición integrada. Después se eliminan los ID de reglas de la anotación `BestPracticeAnalyzer_IgnoreRules` del modelo.
 
 La línea `Rules loaded:` de la salida atribuye cada capa que contribuye, por ejemplo:
 
 ```
-Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + model annotations
+Rules loaded: 38 from 1 file(s) from bpa.rules config + built-in defaults + model annotations
 ```
 
 ### bpa rules
@@ -544,17 +580,17 @@ Administra colecciones de reglas de BPA: enumera, inspecciona, inicializa y acti
 
 Subcomandos:
 
-| Subcomando                                                 | Propósito                                                                                   |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `add <id> [model]`                                         | Agrega una nueva regla de BPA.                                              |
-| [`disable`](#bpa-rules-disable)                            | Desactiva una regla de BPA integrada para el usuario actual.                |
-| [`enable`](#bpa-rules-enable)                              | Vuelve a activar una regla de BPA integrada que se había desactivado antes. |
-| `ignore <rule-id> [model]`                                 | Agrega una regla a la lista de ignorados del modelo.                        |
-| [`init`](#bpa-rules-init)                                  | Crea un archivo vacío de reglas de BPA en la ruta PATH resuelta.            |
-| [`list`](#bpa-rules-list) (alias `ls`)  | Enumera las reglas de BPA de todos los orígenes con su estado.              |
-| `remove <rule-id> [model]` (alias `rm`) | Elimina una regla de BPA.                                                   |
-| `set <rule-id> [model]`                                    | Actualiza las propiedades de una regla del BPA.                             |
-| `unignore <rule-id> [model]`                               | Elimina una regla de la lista de reglas ignoradas del modelo.               |
+| Subcomando                                                | Propósito                                                                                   |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `add <id>`                                                | Agrega una nueva regla de BPA.                                              |
+| [`disable`](#bpa-rules-disable)                           | Desactiva una regla de BPA integrada para el usuario actual.                |
+| [`enable`](#bpa-rules-enable)                             | Vuelve a activar una regla de BPA integrada que se había desactivado antes. |
+| `ignore <rule-id>`                                        | Agrega una regla a la lista de ignorados del modelo.                        |
+| [`init`](#bpa-rules-init)                                 | Crea un archivo vacío de reglas de BPA en la ruta PATH resuelta.            |
+| [`list`](#bpa-rules-list) (alias `ls`) | Enumera las reglas de BPA de todos los orígenes con su estado.              |
+| `remove <rule-id>` (alias `rm`)        | Elimina una regla de BPA.                                                   |
+| `set <rule-id>`                                           | Actualiza las propiedades de una regla del BPA.                             |
+| `unignore <rule-id>`                                      | Elimina una regla de la lista de reglas ignoradas del modelo.               |
 
 Todos los subcomandos de `te bpa rules` aceptan:
 
@@ -618,7 +654,7 @@ Modifica el archivo de reglas (`add`, `set`, `remove` (alias `rm`)) o la lista d
   - `--severity <1|2|3>` - `1` (información), `2` (advertencia, valor predeterminado), `3` (error).
   - `--description <text>` - descripción orientada al usuario que se muestra cuando se activa la regla.
   - `--fix-expression <text>` - expresión de Dynamic LINQ que utiliza `te bpa run --fix` para corregir automáticamente.
-- `te bpa rules set <id>` - actualiza las propiedades de una regla existente. Utiliza pares `-q <property> -i <value>` (repetibles). Nombres de propiedades: `name`, `expression`, `scope`, `category`, `severity`, `description`, `fixExpression`.
+- `te bpa rules set <id>` - actualiza las propiedades de una regla existente. Usa `-p, --property <name=value>` (se puede repetir; `-` lee el valor desde stdin). Nombres de propiedades: `name`, `expression`, `scope`, `category`, `severity`, `description`, `fixExpression`.
 - `te bpa rules remove <id>` - elimina una regla.
 - `te bpa rules ignore <id>` - añade un ID de regla a la anotación `BestPracticeAnalyzer_IgnoreRules` del modelo.
 - `te bpa rules unignore <id>` - elimina un ID de regla de la lista de reglas ignoradas del modelo.
@@ -633,7 +669,7 @@ te bpa rules add MEASURE_NEEDS_DESCRIPTION \
     --category Metadata
 
 # Update severity on an existing rule
-te bpa rules set MEASURE_NEEDS_DESCRIPTION -q severity -i 3
+te bpa rules set MEASURE_NEEDS_DESCRIPTION -p severity=3
 
 # Remove the rule
 te bpa rules remove MEASURE_NEEDS_DESCRIPTION
@@ -681,27 +717,15 @@ te vertipaq --export stats.vpax
 te vertipaq --import stats.vpax  # Analyze offline
 ```
 
-### format
+### Formato de expresiones
 
-Da formato a expresiones DAX o M/Power Query.
+El formato de expresiones está en tres lugares, según lo que estés formateando:
 
-`te format` acepta:
+- **Una expresión del modelo**: `te set <path> --format <PropertyName> --save` - consulta [set](#set).
+- **Una expresión independiente** (que no está en ningún modelo): `te util format-dax` / `te util format-m` - consulta [Utilidades](#utilities).
+- **Un barrido de todas las medidas del modelo**: `te script --inline "Model.AllMeasures.FormatDax();" --save`.
 
-- `-e, --expression <text>` - da formato a una sola expresión en línea.
-- `-p, --path <path>` - da formato a una medida o columna específica mediante su ruta.
-- `-t, --type <kind>` - desambigua cuando la ruta coincide con varios elementos secundarios de la tabla.
-- `--lang <lang>` - lenguaje de expresión: `dax` (predeterminado) o `m`/`pq` para Power Query.
-- `--semicolons` - usa el punto y coma como separador de listas (configuración regional europea).
-- `--long` - usa el formato largo (más saltos de línea). De forma predeterminada se usa el formato corto.
-- `--no-space-after-function` - omite el espacio después de los nombres de función.
-- `--save` / `--save-to` - guarda las expresiones formateadas.
-
-```bash
-te format --save                                           # Format all DAX
-te format -p Sales/Amount --save                           # Single measure
-te format -e "SUM ( Sales[Amount] )"                       # Inline
-te format --lang m --save                                  # Format M
-```
+El DAX en un modelo siempre va separado por comas, así que `--semicolons` solo existe en `te util format-dax`, para el DAX que hayas escrito tú mismo con punto y coma.
 
 ## Ejecución
 
@@ -712,7 +736,7 @@ Ejecuta una consulta DAX contra un modelo implementado.
 `te query` admite:
 
 - `<dax>` - argumento posicional: la consulta DAX que se va a ejecutar. Equivale a pasar `-q`. Utiliza la forma que se lea mejor; el `-q` explícito tiene prioridad si se proporcionan ambas.
-- `-q, --query <dax>` - consulta en línea (variante con opción con nombre del argumento posicional anterior).
+- `-q, --query <dax>` - consulta en línea (variante con opción con nombre del argumento posicional anterior). `-q -` lee la consulta desde stdin; si hay entrada redirigida y no se proporciona ninguna consulta, stdin se lee implícitamente.
 - `--file <file.dax>` - consulta desde un archivo.
 - `--limit <N>` - valor predeterminado: 100.
 - `-o, --output-file <path>` - escribe los resultados en un archivo (`.csv`, `.tsv`, `.json`, `.dax`).
@@ -731,16 +755,24 @@ Ejecuta uno o varios C# Scripts contra un modelo semántico. La CLI usa el mismo
 
 `te script` admite:
 
-- `-S, --script <file>` - archivo `.cs` / `.csx` (repetible).
-- `-e, --expression <code>` - C# en línea (usa `-` para stdin).
+- `--file <path>` - archivo `.cs` / `.csx` (repetible). También se aceptan argumentos posicionales `.cs`/`.csx` sin prefijo.
+- `--inline <code>` - C# en línea (repetible; usa `-` para stdin).
+- `--validate` - compila el/los script(s) e informa de los errores sin ejecutarlos. No necesita ningún modelo, así que funciona sin conexión como linter de CI.
 - `--save` / `--save-to` / `--serialization`.
-- `--dry-run` - compila el/los script(s) y genera un Report de errores sin ejecutarlos.
+- `--diff` / `--stat` / `--name-only` - representación de la salida de cambios (consulta la nota [Edición del modelo](#model-editing)).
+- `--force` - guarda incluso si la mutación introduce errores de validación de DAX.
+
+Los archivos y los fragmentos en línea se ejecutan en el orden en que se escriben en la línea de comandos.
 
 ```bash
-te script --script fix.cs --save
-te script -e "Info(Model.Tables.Count)"
-echo "Info(Model.Name);" | te script -e -
+te script --file fix.cs --save
+te script fix.cs cleanup.csx --save              # Bare positionals, run in order
+te script --inline "Info(Model.Tables.Count);"
+echo "Info(Model.Name);" | te script --inline -
+te script --file fix.cs --validate               # Compile-only, no model needed
 ```
+
+Una ejecución en la que cualquier script llama a `Error(...)` finaliza con un código distinto de cero, indica `"success": false` en JSON y termina indicando que la ejecución se completó con errores; los cambios que el script ya haya hecho se siguen guardando cuando se usa `--save`. `Warning(...)` e `Info(...)` nunca hacen que falle una ejecución. En Windows, la directiva administrativa `DisableCSharpScripts` rechaza `te script` de plano; consulta [Directivas de administrador](xref:te-cli-config#administrator-policies).
 
 > [!IMPORTANT]
 > Dos detalles de comportamiento que conviene conocer si vas a portar un script antiguo:
@@ -772,7 +804,7 @@ echo "Info(Model.Name);" | te script -e -
 
 ### macro
 
-Administra y ejecuta macros desde un archivo JSON de macros (normalmente `MacroActions.json`). El archivo de macros se determina en este orden: `--macros <PATH>` → la variable de entorno `TE_MACROS_PATH` → `macros` en la configuración de la CLI → `./MacroActions.json`.
+Administra y ejecuta macros desde un archivo JSON de macros (normalmente `MacroActions.json`). El archivo de macros se determina en este orden: `--macros <PATH>` → la variable de entorno `TE_MACROS_PATH` → `macros` en la configuración de la CLI → `./MacroActions.json`. En Windows, la directiva administrativa `DisableMacros` rechaza todos los comandos `te macro`; consulta [Directivas de administrador](xref:te-cli-config#administrator-policies).
 
 Subcomandos:
 
@@ -791,12 +823,12 @@ Subcomandos:
 Modifica el archivo de macros (`add`, `set`, `remove` (alias `rm`)). Los tres operan sobre `--macros <path>` (o el archivo de macros resultante).
 
 - `te macro add <name>` - crea una nueva macro. Indica el cuerpo del script mediante `-e "<code>"` (en línea) o `-s <file.cs>` (archivo de script). Opcional: `--tooltip <text>`, `--contexts <list>` (donde se aplica la macro; por ejemplo, `Table,Medida`), `--enabled true|false`.
-- `te macro set <name-or-id>`: actualiza las propiedades de la macro. Usa pares `-q <property> -i <value>` (se pueden repetir). Nombres de las propiedades: `name`, `execute`, `enabled`, `tooltip`, `validContexts`.
+- `te macro set <name-or-id>`: actualiza las propiedades de la macro. Usa `-p, --property <name=value>` (se puede repetir; `-` lee el valor desde stdin). Nombres de las propiedades: `name`, `execute`, `enabled`, `tooltip`, `validContexts`.
 - `te macro remove <name-or-id>`: elimina una macro.
 
 ```bash
 te macro add MyMacro -e "Info(Selected.Measure.Name);" --tooltip "Print measure name" --contexts Measure
-te macro set MyMacro -q tooltip -i "Updated tooltip"
+te macro set MyMacro -p tooltip="Updated tooltip"
 te macro remove MyMacro
 ```
 
@@ -822,7 +854,8 @@ Ejecuta una macro. Las macros que emiten tablas mediante `dataTable.Output()` mu
 `te macro run` acepta:
 
 - `--on <path>` - establece el contexto de selección de la macro en un único objeto con nombre (una tabla, una medida, una columna, …). Equivale a hacer clic con el botón derecho en ese objeto en TE3 e invocar la macro desde el menú contextual.
-- `--save` / `--save-to` - guarda cualquier cambio que realice la macro.
+- `--save` / `--save-to` - guarda cualquier cambio que realice la macro. Como todos los comandos que modifican el estado, `te macro run` realiza una simulación si no se usa `--save`.
+- `--serialization <fmt>` / `--force` - igual que en los demás comandos que modifican el estado.
 
 ```bash
 te macro run "Hide all measures"
@@ -836,9 +869,13 @@ te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form w
 
 Implementa un modelo semántico en Power BI, Fabric, Azure Analysis Services o en SQL Server Analysis Services en local.
 
+**Simulación por defecto**: `te deploy` se conecta en modo de solo lectura e imprime en stdout el TMSL exacto que enviaría. Añade `--execute` para realizar el despliegue.
+
 `te deploy` acepta:
 
-- `-s, --server` / `-d, --database`: servidor/Workspace y modelo de destino. Un nombre de servidor, FQDN, dirección IP o una cadena de conexión de MSOLAP implementa en Analysis Services (autenticación integrada de Windows para entornos locales); un nombre de Workspace o una URL `powerbi://...` implementa en Power BI. Consulta la tabla de [opciones globales](#global-options) para ver cómo se interpreta `-s`.
+- `-s, --server` / `-d, --database` - el **origen** del modelo, exactamente igual que en cualquier otro comando.
+- `--target-server <target>` / `--target-database <name>` - el **destino** del despliegue: el nombre de un Workspace, un endpoint o un servidor, y el nombre del modelo semántico que se va a crear o sobrescribir. Un nombre de servidor, FQDN, dirección IP o una cadena de conexión de MSOLAP implementa en Analysis Services (autenticación integrada de Windows para entornos locales); un nombre de Workspace o una URL `powerbi://...` implementa en Power BI. Si el origen del modelo es local, el destino usa como valor predeterminado la conexión activa de `te connect`; cuando el origen es remoto, las opciones de destino son obligatorias. No se permite desplegar un modelo sobre sí mismo.
+- `--execute` - hace el despliegue de verdad. En modo interactivo, esto muestra un resumen y pide confirmación, con **`n` como opción segura predeterminada**; `--execute --force` omite el aviso (obligatorio en CI, donde un aviso sin `--force` es un error).
 - `--deploy-full` - sobrescribir + conexiones + particiones + expresiones compartidas + roles + miembros de roles.
 - `--deploy-connections`
 - `--deploy-partitions`
@@ -847,57 +884,60 @@ Implementa un modelo semántico en Power BI, Fabric, Azure Analysis Services o e
 - `--deploy-role-members`
 - `--deploy-shared-expressions`
 - `--create-only`
-- `--xmla <file>` - genera un script XMLA/TMSL en lugar de realizar el despliegue (`-` para stdout).
 - `--skip-bpa` - omite por completo el control de BPA.
 - `--fix-bpa` - corrige automáticamente las infracciones de BPA cuando las reglas definan una expresión de corrección.
 - `--bpa-rules <PATH>` - se puede repetir; anula `bpa.rules` de la configuración de tu CLI solo para este despliegue. Las reglas integradas siguen aplicándose a menos que `bpa.builtInRules` sea `false`.
-- `--force` - omite la confirmación interactiva (necesario para CI).
-- `--ci <fmt>` - `vsts` o `github`.
+- `--force` - omite la confirmación interactiva.
+- `--ci <fmt>` - `vsts` (alias `azdo`, `azure-devops`) o `github` (alias `gh`); los valores no reconocidos se rechazan de entrada.
 - `-p, --profile <name>` - uso puntual de un perfil de @te-cli-auth guardado.
 
+`--output-format bim|tmdl` no se admite con `te deploy`. Para capturar el script de despliegue y revisarlo, redirige la salida de la simulación: `te deploy ... > deploy.tmsl`.
+
 ```bash
-te deploy ./model -s my-workspace -d my-model --force --ci github
-te deploy ./model -s MY.SERVER.COM -d my-model --force    # On-prem SSAS (Integrated auth)
-te deploy ./model --xmla script.tmsl    # Generate TMSL only
-te deploy ./model --profile staging --force
+te deploy -m ./model --target-server my-workspace --target-database my-model --execute --force --ci github
+te deploy -m ./model --target-server MY.SERVER.COM --target-database my-model --execute --force    # On-prem SSAS
+te deploy -m ./model --target-server my-workspace --target-database my-model > deploy.tmsl         # Dry run: TMSL only
+te deploy -s src-workspace -d src-model --target-server dst-workspace --target-database copy --execute   # Remote to remote
+te deploy --local --target-server my-workspace --target-database my-model --execute                # Publish a Desktop model
 ```
 
 > [!IMPORTANT]
-> `te deploy` ejecuta el Best Practice Analyzer como control previo antes de realizar el despliegue. En modo interactivo, se muestran un resumen y un mensaje de confirmación, con **`n` como opción segura predeterminada**. En CI, pasa `--force` para omitir la confirmación. Consulta @te-cli-config para la configuración del control de BPA.
+> `te deploy` ejecuta el Best Practice Analyzer como control previo antes de realizar el despliegue. Consulta @te-cli-config para la configuración del control de BPA.
+
+Un despliegue **falla** cuando el servidor informa de errores en uno o más objetos, aunque se hayan escrito los metadatos: el código de salida no es cero, el JSON indica `"success": false` con el motivo en `error`, el encabezado indica que el despliegue terminó con errores y `--ci` reporta los errores de los objetos como errores. Los objetos sin procesar no constituyen un fallo: un despliegue solo de metadatos puede dejar legítimamente objetos sin datos. La réplica del Workspace configurada con `te connect -w` aplica la misma regla.
 
 > [!NOTE]
-> Cuando se establece `--output-format json`, la carga JSON de `te deploy` siempre incluye los valores resueltos de `server` y `database`, incluso cuando se han resuelto a partir de la conexión activa o de un perfil, en lugar de pasarse explícitamente. Las canalizaciones pueden usar estos campos para confirmar el destino del despliegue sin volver a analizar la línea de comandos. `te deploy` y `te format` también devuelven un código de salida distinto de cero si fallan con `--output-format json`, igual que en modo texto: la carga JSON es el registro del error, no una señal de éxito.
+> Cuando se establece `--output-format json`, la carga JSON de `te deploy` siempre incluye los valores resueltos de `server` y `database`, incluso cuando se han resuelto a partir de la conexión activa o de un perfil, en lugar de pasarse explícitamente. Las canalizaciones pueden usar estos campos para confirmar el destino del despliegue sin volver a analizar la línea de comandos. `te deploy` también devuelve un código distinto de cero cuando falla con `--output-format json`, igual que en modo texto: la carga JSON es el registro del fallo, no una señal de éxito.
 
 ### refresh
 
 Inicia una actualización de datos en un modelo implementado.
+
+**Simulación por defecto**: `te refresh` imprime en stdout el TMSL que enviaría la actualización. Añade `--execute` para ejecutarla.
 
 `te refresh` admite:
 
 - `--type <type>` - `full`, `dataonly` (alias `data-only`, `data`), `automatic` (alias `auto`), `calculate` (alias `calc`), `clearvalues` (alias `clear`), `defragment` (alias `defrag`), `add` (predeterminado: `automatic`).
 - `--table <name>` - actualiza tabla(s) específicas; se puede repetir.
 - `--partition <Table.Partition>` - actualiza partición(es) específicas.
-- `--apply-refresh-policy` - aplica la política de actualización para determinar qué particiones se actualizan con la actualización incremental.
-- `--effective-date <yyyy-MM-dd>` - establece la fecha efectiva que usa la política de actualización.
+- `--execute` - ejecuta realmente la actualización. En un terminal pide confirmación, con **`n` como opción segura predeterminada**; añade `--force` para omitir la pregunta. Una ejecución desatendida (salida redirigida, `--output-format json` o `--non-interactive`) se detiene con un error si no se indica `--force`, así que `te refresh --type full --execute --force` es la forma que se usa en CI.
+- `--force` - omite el aviso de confirmación.
+- `--apply-refresh-policy <true|false|table>` - aplica las políticas de actualización incremental para determinar qué particiones se actualizan; indica el nombre de una tabla para limitar la actualización a esa tabla. Las políticas se aplican de forma predeterminada cuando el tipo y el ámbito de la actualización son compatibles, excepto en los modelos alojados en Power BI Desktop. Un valor explícito prevalece (con advertencias cuando no puede surtir efecto).
+- `--effective-date <yyyy-MM-dd>` - establece la fecha efectiva que usa la política de actualización (se omite, con una advertencia, cuando no se aplica ninguna política).
 - `--max-parallelism <N>` - establece el número máximo de particiones que se pueden actualizar en paralelo. Encapsula la actualización en un comando TMSL `sequence`.
-- `--dry-run` - muestra el script TMSL sin ejecutarlo.
-- `--no-progress`, `--trace [path]`.
+- `--no-progress`, `--trace [path]`. `--trace` sin `--execute` muestra una advertencia e imprime el TMSL. Las marcas de tiempo de la traza provienen del reloj del servidor; el registro se conserva hasta que el servidor termina de entregar los eventos almacenados en búfer, y las trazas `te-refresh-*` de más de una hora que hayan quedado de ejecuciones interrumpidas se detienen y se descartan al inicio de una actualización con traza (las trazas de otras herramientas nunca se modifican).
+
+Las actualizaciones ejecutadas con `--output-format json` siempre incluyen una matriz `progress`; con la clave de configuración `vertipaqOnRefresh` habilitada, también se incluye una matriz `vertipaq` por tabla (filas, tamaño, columnas); no hace falta `--trace`.
 
 ```bash
-te refresh --type full                                 # Full refresh
-te refresh --table Sales --type full                    # Single table
-te refresh --type full --dry-run > refresh.tmsl         # Emit TMSL only
+te refresh --type full --execute                        # Full refresh (asks for confirmation at a terminal)
+te refresh --type full --execute --force                # Unattended: skip the confirmation
+te refresh --table Sales --type full --execute          # Single table
+te refresh --type full > refresh.tmsl                   # Dry run: emit TMSL only
+te refresh --apply-refresh-policy Sales --execute       # Apply Sales' incremental refresh policy
 ```
 
-### incremental-refresh
-
-Gestiona las políticas de actualización para la actualización incremental de las tablas.
-
-```bash
-te incremental-refresh show <table>
-```
-
-Los subcomandos adicionales (`set`, `remove` (alias `rm`), `apply`) están documentados en `te incremental-refresh --help`.
+Las políticas de actualización incremental se definen con [`te set`](#incremental-refresh-policies) en el subobjeto `RefreshPolicy` de una tabla.
 
 ## Pruebas
 
@@ -916,6 +956,8 @@ Ejecuta un conjunto de pruebas de aserción de DAX contra un modelo desplegado.
 te test run --ci github --trx results.trx
 te test run --tag revenue
 ```
+
+Las suites se validan antes de establecer cualquier conexión; una suite que no supera la validación (por ejemplo, si falta `query_file`) finaliza con `1` sin ejecutar nada. Con `--output-format json`, `te test run` emite el documento JSON compartido de hallazgos con campos adicionales específicos de las pruebas (`suites`, `invalidSuites`, `testSummary`); consulta @te-cli-findings.
 
 ### test init / spec / use / list / snapshot / compare
 
@@ -940,11 +982,13 @@ te connect                                # Show current active connection
 te connect my-workspace my-model          # Remote (positional)
 te connect -s my-workspace -d my-model    # Remote (named-flag form)
 te connect ./model                        # Local
-te connect --local                        # Power BI Desktop (Windows)
-te connect --local my-report              # Filter by report name (multiple PBI Desktop instances)
+te connect --local                        # Local Analysis Services instance (Windows)
+te connect --local my-model               # Match an instance (e.g. an open report's window title) or a database name
 te connect --profile prod                 # Activate a saved profile
 te connect --clear                        # Clear the active connection (and any workspace mirror)
 ```
+
+`te connect --local` enumera todas las instancias locales de Analysis Services: Power BI Desktop (versiones de Store y del instalador), Workspaces de Visual Studio y SSAS independiente; cuando una instancia aloja varias bases de datos, muestra un mensaje en dos pasos (primero la instancia y luego la base de datos). El modo no interactivo falla con la lista de candidatos en lugar de elegir en silencio; acótala con `te connect --local <database>`.
 
 #### Modo del área de trabajo (`-w` / `--workspace`)
 
@@ -975,23 +1019,56 @@ Administra perfiles de conexión con nombre. (`te profile list` tiene como alias
 
 ### config list / paths / init / set
 
-Consulta y administra la configuración de la CLI y las sobrescrituras de PATH de TE3. (`te config list`, alias: `ls`.) Consulta @te-cli-config.
+Ver y administrar la configuración de la CLI. (`te config list`, alias: `ls`.) Consulta @te-cli-config.
+
+`te config set` acepta un par posicional `key value` o el equivalente `-p key=value`.
 
 ```bash
 te config list                          # Display all settings
-te config paths                         # Resolved TE3 file paths
+te config paths                         # Resolved macros and BPA rules file paths
 te config init                          # Create default config
 te config set autoFormat true
+te config set -p spinner=false          # -p form
 ```
 
-### migrate
+## Utilidades
+
+Herramientas auxiliares que no requieren modelo. Los subcomandos de `te util` nunca actúan sobre un modelo: `--model`, `-s`/`-d`, `--local`, `--recent` y `--auth` se rechazan.
+
+### util format-dax
+
+Dar formato a una expresión DAX aislada.
+
+- `<expression>` - la expresión que se va a formatear; `-` la lee de stdin.
+- `--semicolons` - da formato a DAX escrito con punto y coma como separador de listas (configuración regional europea). La opción selecciona el dialecto con punto y coma tanto para la expresión que se lee como para la salida, así que está pensada para DAX que hayas escrito con punto y coma; el DAX separado por comas da un error de sintaxis si la usas. Solo se acepta aquí: `te set --format` lo rechaza, porque una expresión almacenada en un modelo siempre va separada por comas.
+- `--long` - formato largo con menos saltos de línea. De forma predeterminada se usa el formato corto.
+- `--no-space-after-function` - omite el espacio después de los nombres de función.
+
+```bash
+te util format-dax "SUM ( Sales[Amount] )"
+cat query.dax | te util format-dax -
+te util format-dax "CALCULATE(SUM(Sales[Amt]); Sales[Region] = \"EU\")" --semicolons   # Semicolon-authored DAX
+```
+
+La salida JSON incluye `success`, `formatted` y `errors`. Para las expresiones que ya estén en el modelo, usa `te set <path> --format <PropertyName>`; para un barrido de todas las medidas del modelo, `te script --inline "Model.AllMeasures.FormatDax();" --save`.
+
+### util format-m
+
+Da formato a una expresión M/Power Query independiente. `-` lee desde stdin; no hay opciones específicas del lenguaje. Una expresión mal formada —por ejemplo, una cadena sin cerrar— se reporta como un fallo con un código de salida distinto de cero y se devuelve el texto original sin cambios; nunca se devuelve en silencio un resultado truncado.
+
+```bash
+te util format-m "let x = 1 in x"
+cat partition.m | te util format-m -
+```
+
+### util migrate
 
 Guía de referencia que muestra cómo las opciones heredadas de la CLI de Tabular Editor 2 se corresponden con la nueva CLI. Útil como referencia rápida mientras migras una canalización basada en TE2. Consulta @te-cli-migrate para ver la guía de migración completa.
 
 ```bash
-te migrate                   # Full flag mapping table
-te migrate -A                # Look up a single TE2 flag
-te migrate --output-format json     # Machine-readable mapping
+te util migrate                   # Full flag mapping table
+te util migrate -A                # Look up a single TE2 flag
+te util migrate --output-format json     # Machine-readable mapping
 ```
 
 ## Shell
@@ -1005,7 +1082,6 @@ Inicia una sesión REPL guiada con un prompt adaptado al modelo. Consulta @te-cl
 
 `te interactive` admite:
 
-- `<model>` - argumento posicional opcional: inicia la sesión con un modelo local, un archivo `.bim` o una carpeta `.SemanticModel` ya cargados.
 - `--no-banner` - omite el banner de bienvenida al iniciar. Útil si controlas el REPL desde scripts.
 - `--echo` - muestra en stdout cada comando ejecutado antes de su salida. Útil cuando canalizas comandos por stdin para que el registro muestre qué se ejecutó.
 - `--batch` - modo por lotes no interactivo: lee comandos de stdin línea a línea, ejecuta cada uno y sale al llegar al EOF. Se habilita automáticamente cuando stdin se redirige.
@@ -1013,10 +1089,12 @@ Inicia una sesión REPL guiada con un prompt adaptado al modelo. Consulta @te-cl
 
 ```bash
 te interactive                                # Connect later
-te interactive ./model                        # Start with a local model
+te interactive --model ./model                # Start with a local model
 te interactive -s MyWorkspace -d MyModel      # Start with a remote model
-printf "list Measures\nexit\n" | te interactive ./model   # Pipe commands via stdin
+printf "list Measures\nexit\n" | te interactive --model ./model   # Pipe commands via stdin
 ```
+
+Dentro de la sesión, los comandos que modifican dejan los cambios en preparación en memoria: `save` (sin argumentos) confirma las ediciones preparadas y `revert` las descarta, mientras que `save-as` vuelve a serializar en un formato o una ubicación. Al cerrar una sesión que aún tiene cambios pendientes, se pide confirmación (o, cuando nadie puede responder, se muestra una advertencia y se sale con un código distinto de cero); `exit --force` los descarta de forma deliberada; consulta @te-cli-interactive.
 
 Las comillas y las referencias de estilo DAX funcionan igual que fuera de la sesión - consulta la sección [Rutas de objetos](#object-paths) de arriba y @te-cli-interactive para más detalles sobre la división de argv con reconocimiento de corchetes dentro del REPL.
 
@@ -1059,11 +1137,11 @@ te completion fish
 
 ## Códigos de salida
 
-| Código de salida | Significado                                                                                                                                                                                                                                                              |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `0`              | Éxito.                                                                                                                                                                                                                                                   |
-| `1`              | Fallo genérico (argumentos no válidos, fallo del comando, errores de validación, fallo de autenticación, el gate de BPA falló con una gravedad >= error). Para `te diff`: se encontraron diferencias. |
-| `2`              | Solo en `te diff`: se produjo un error durante la comparación, por lo que se desconoce el estado de las diferencias.                                                                                                                     |
+| Código de salida | Significado                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `0`              | Éxito.                                                                                                                                                                                                                                                                                                                                                                                 |
+| `1`              | Error genérico (argumentos no válidos, fallo del comando, errores de validación, error de autenticación, control de BPA fallido con gravedad >= error, una ejecución de `te script` en la que un script reportó un error, un `te deploy` que el servidor aceptó con errores de objeto). Para `te diff`: se encontraron diferencias. |
+| `2`              | Solo en `te diff`: se produjo un error durante la comparación, por lo que se desconoce el estado de las diferencias.                                                                                                                                                                                                                                                   |
 
 Para un control detallado en las canalizaciones de CI, combina los códigos de salida con las anotaciones `--ci <vsts/github>` y los archivos de resultados `--trx`; consulta @te-cli-cicd.
 
@@ -1073,4 +1151,5 @@ Para un control detallado en las canalizaciones de CI, combina los códigos de s
 - @te-cli-install - instalación y configuración de la CLI.
 - @te-cli-auth - autenticación y administración de conexiones.
 - @te-cli-config - archivo de configuración, BPA gate y comportamiento tras la mutación.
+- @te-cli-findings - el JSON de hallazgos compartido por validate, bpa run, test run y query.
 - @te-cli-migrate - mapeo de opciones TE2 → TE3.

@@ -25,7 +25,7 @@ Tabular Editor 3 支持在编辑从磁盘加载的模型元数据时，同时连
 
 当你从 Model.bim 文件或文件夹结构加载模型时，会看到以下提示：
 
-![image](https://user-images.githubusercontent.com/8976200/58166683-a65db180-7c8a-11e9-9df3-be9a716b3ad1.png)
+![图片](~/content/assets/images/workspace-database-01.png)
 
 - **是**：从磁盘加载模型元数据，然后立即部署到某个 Analysis Services 实例。 随后，Tabular Editor 将连接到新部署的数据库。 下次从磁盘加载同一模型时，Tabular Editor 会自动重新部署并连接到该数据库。
 - **否**：模型元数据会像往常一样从磁盘加载到 Tabular Editor 中，不会连接到 Analysis Services 实例。
@@ -35,7 +35,7 @@ Tabular Editor 3 支持在编辑从磁盘加载的模型元数据时，同时连
 
 当在上面的提示中选择“是”选项时，系统将要求输入 Analysis Services 实例的服务器名称以及（可选的）凭据。 点击“确定”后，将显示该实例上已有的数据库列表。 Tabular Editor 会默认你要部署一个新数据库，并会根据你的 Windows 用户名以及当前日期和时间，为新数据库提供一个默认名称：
 
-![image](https://user-images.githubusercontent.com/8976200/58179509-a10f5f80-7ca8-11e9-9764-4cb76b9d1a8b.png)
+![图片](~/content/assets/images/workspace-database-02.png)
 
 如果要将现有数据库用作 Workspace 数据库，只需在列表中选择它即可。 **警告：如果选择现有数据库，该数据库将被从磁盘加载的模型的元数据覆盖。 因此，不建议在生产实例上设置 workspace 数据库!**
 

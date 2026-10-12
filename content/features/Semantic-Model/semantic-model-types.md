@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Power BI Semantic model Types
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -32,7 +32,7 @@ Tabular Editor can work with several different model types. Below is an overview
 |Create & Edit Partitions|✔️|✔️|✔️<sup>[1](#DirectLake)</sup>|✔️<sup>[1](#DirectLake)</sup>|✔️|✔️|
 |Create & Edit Columns|✔️|✔️|✔️<sup>[1](#DirectLake)</sup>|✔️<sup>[1](#DirectLake)</sup>|✔️|✔️|
 |Create & Edit Calculated Tables|✔️|✔️|✔️<sup>[2](#DirectLakeCalculated)</sup>|✔️<sup>[4](#DirectLakeSQLCalculated)</sup>|✔️|✔️|
-|Create & Edit Calculated Columns|✔️|✔️|❌|❌|✔️|✔️|
+|Create & Edit Calculated Columns|✔️|✔️|✔️<sup>[5](#DirectLakeCalcColumn)</sup>|❌|✔️|✔️|
 |Create & Edit Calculation Groups|✔️|✔️|✔️|✔️|✔️| |
 |Create & Edit Relationships|✔️|✔️|✔️|✔️|✔️| |
 |Create & Edit Roles|✔️|✔️|✔️|✔️|✔️|✔️|
@@ -59,6 +59,7 @@ Tabular Editor can work with several different model types. Below is an overview
 
 <a name="TE3Prem">3</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake on SQL only supports calculation groups, what-if parameters and field parameters, which implicitly create calculated tables. General calculated tables are not supported.
+<a name="DirectLakeCalcColumn">5</a> - Preview feature. Calculated columns on Direct Lake on OneLake evaluate in the current user's query context rather than being materialized: they respect row-level and object-level security, but cannot be used as relationship keys and do not respond to report filters or slicers. See [Direct Lake Guidance](xref:direct-lake-guidance) for details.
 
 >[!NOTE]
 > The June 2025 release of Power BI Desktop lifted all modeling limitations for third-party tools. Prior to that, various modeling operations were not supported. See [Power BI Desktop Limitations](xref:desktop-limitations).

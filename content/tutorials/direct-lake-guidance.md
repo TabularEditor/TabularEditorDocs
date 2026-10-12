@@ -1,8 +1,8 @@
 ﻿---
 uid: direct-lake-guidance
 title: Direct Lake Guidance
-author: Daniel Otykier
-updated: 2026-03-27
+author: Morten Lønskov
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,7 +45,7 @@ The following table summarizes the storage modes available in Power BI semantic 
 
 However, as with Direct Lake on SQL, there are still some [limitations that *do* apply](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Key limitations include:
 
-- Calculated columns are not supported in either Direct Lake mode.
+- Calculated columns on Direct Lake on OneLake tables are supported in preview, but only in *user context*: the value is evaluated at query time for the current user rather than materialized. This means a Direct Lake calculated column respects row-level and object-level security, but it cannot be used as a relationship key and does not respond to report filters or slicers. Use a measure instead when the result must react to filter context. Direct Lake on SQL still does not support calculated columns at all. See [Develop Direct Lake semantic models](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop) for details.
 - Calculated tables cannot reference columns or tables in Direct Lake storage mode. Calculation groups, what-if parameters and field parameters are supported because they create implicit calculated tables that do not reference Direct Lake columns.
 - Non-materialized SQL views are not supported as data sources for Direct Lake on OneLake tables. Use materialized views or ensure the source Delta table contains the columns you need.
 - Shortcuts in a lakehouse are not supported as data sources during the public preview of Direct Lake on OneLake.
@@ -54,7 +54,7 @@ For a full and up-to-date list of limitations, see the [Microsoft documentation 
 
 ### Composite models
 
-One workaround for the calculated column limitation is to create a **composite model** by combining Direct Lake tables with Import tables. This is supported with Direct Lake on OneLake, but not with Direct Lake on SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need calculated columns or custom groupings.
+If you need a calculated column that is materialized, usable as a relationship key, or responsive to report filters and slicers, the preview calculated column feature above is not enough. In that case, create a **composite model** by combining Direct Lake tables with Import tables. This is supported with Direct Lake on OneLake, but not with Direct Lake on SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need full calculated columns or custom groupings.
 
 Direct Lake on OneLake also supports combining with DirectQuery tables through XMLA-based tools such as Tabular Editor. Import tables can be added through Power BI web modeling, Power BI Desktop (live editing) or through XMLA tools.
 
@@ -82,19 +82,19 @@ For a **Direct Lake on SQL** model, the collation is case-insensitive for querie
 
 To add Direct Lake tables using Tabular Editor 3's Table Import Wizard, choose **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database** as the source:
 
-![Import Table Wizard Fabric](../assets/images/import-table-wizard-fabric.png)
+![Table Import Wizard Fabric](../assets/images/import-table-wizard-fabric.png)
 
 After signing in, you will be presented with a list of all available Fabric Lakehouses/Warehouses in workspaces you have access to. Select the one you want to connect to and hit **OK**:
 
-![Import Table Wizard Select Lakehouse](../assets/images/import-table-wizard-select-lakehouse.png)
+![Table Import Wizard Select Lakehouse](../assets/images/import-table-wizard-select-lakehouse.png)
 
 Unless you want to specify a custom SQL query, or configure the tables for DirectQuery mode, simply hit **Next** to select the tables from a list of tables/views in the source:
 
-![Import Table Wizard Select Vs Custom Query](../assets/images/import-table-wizard-select-vs-custom-query.png)
+![Table Import Wizard Select Vs Custom Query](../assets/images/import-table-wizard-select-vs-custom-query.png)
 
 Select the tables/views you wish to import. Note that **non-materialized views** are not supported in Direct Lake on OneLake mode. Attempting to add such a view to the model will result in an error upon saving the model metadata.
 
-![Import Table Wizard Select Objects](../assets/images/import-table-wizard-select-objects.png)
+![Table Import Wizard Select Objects](../assets/images/import-table-wizard-select-objects.png)
 
 On the last page, choose which mode you want the table partition to be configured with:
 
@@ -108,6 +108,12 @@ The choices are:
 
 > [!NOTE]
 > If you're working on a model that already contains tables, one or more of the choices mentioned above may not be available, if the model does not support combining tables in different storage modes. For example, if the model contains a table in Direct Lake on SQL mode, you cannot add tables in other modes.
+
+The imported table already has its columns, in the same order as in the source, and you don't need to run **Update Table Schema** after the import. If Tabular Editor can't determine the SQL analytics endpoint of the Lakehouse or Warehouse, and the import settings don't specify one, the import fails with an error that names the missing setting, and no table is created.
+
+## Inspecting a Direct Lake partition
+
+A Direct Lake partition has no query expression. When you select one in the @tom-explorer-view, the **Expression Editor** shows its `Data Coverage Definition Expression`, or nothing if the partition has no data coverage definition. Partitions generated by an incremental refresh policy behave the same way.
 
 ## Power Query (M) expressions
 
@@ -194,7 +200,7 @@ Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoi
 
 Replace `<schema-name>` with the schema name in the Warehouse/Lakehouse, and `<table/view-name>` with the name of the table or view you want to import. Note that tables in Import Mode can use non-materialized views as the data source, since the data is queried through the SQL endpoint during refresh operations.
 
-3. **Update column metadata**: Use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. This will automatically retrieve the column names and data types from the Lakehouse/Warehouse. Alternatively, create Data Columns manually (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
+3. **Update column metadata** (manual setup only): Because a partition you configured by hand has no columns, use Tabular Editor's **Update Table Schema** feature to retrieve the column names and data types from the Lakehouse/Warehouse. Alternatively, create Data Columns manually (**Alt+4**) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
 
 ## Converting between storage modes
 

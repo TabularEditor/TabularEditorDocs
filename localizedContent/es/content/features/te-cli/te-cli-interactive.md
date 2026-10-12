@@ -2,7 +2,7 @@
 uid: te-cli-interactive
 title: Modo interactivo
 author: Peer Grønnerup
-updated: 2026-06-26
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ Para iniciar una sesión, ejecuta cualquiera de estos comandos:
 
 ```bash
 te interactive                              # Start and connect to a model later
-te interactive ./model                      # Start with a local model
+te interactive --model ./model              # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
@@ -48,7 +48,7 @@ Una vez iniciado un REPL, todos los subcomandos de `te` están disponibles **sin
 
 ```
 ls tables
-get "Sales/Revenue" -q expression
+get Sales/Revenue -p expression
 query -q "EVALUATE TOPN(5, 'Sales')"
 bpa run --fail-on error
 ```
@@ -78,31 +78,58 @@ Los grupos sin cerrar abarcan hasta el final de la línea, por lo que una comill
 
 Estos comandos los gestiona el propio REPL, no el árbol de comandos habitual:
 
-| Comando              | Propósito                                               |
-| -------------------- | ------------------------------------------------------- |
-| `help` o `?`         | Lista los comandos disponibles.         |
-| `status` o `pwd`     | Muestra el modelo o la conexión en uso. |
-| `clear` o `cls`      | Limpia la pantalla.                     |
-| `exit`, `quit` o `q` | Sale del modo interactivo.              |
+| Comando              | Propósito                                                                                                                                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `help` o `?`         | Lista los comandos disponibles.                                                                                                                                                                             |
+| `status` o `pwd`     | Muestra el modelo o la conexión en uso.                                                                                                                                                                     |
+| `save`               | Aplica al origen del modelo todas las ediciones preparadas en memoria.                                                                                                                                      |
+| `revert`             | Descarta todos los cambios preparados realizados desde el último guardado.                                                                                                                                  |
+| `clear` o `cls`      | Limpia la pantalla.                                                                                                                                                                                         |
+| `exit`, `quit` o `q` | Sale del modo interactivo. Si hay cambios preparados sin guardar, se te pedirá confirmación (`n` es el valor predeterminado); `exit --force` los descarta sin preguntar. |
+
+`save` dentro de la sesión no acepta argumentos: para volver a serializar el modelo en otro formato o ubicación se usa `save-as` (por ejemplo, `save-as -o ./out --serialization bim`), exactamente igual que fuera de la sesión.
+
+## Cambios preparados
+
+Dentro de la sesión, los comandos que modifican el modelo (`set`, `add`, `remove`, `move`, `script`, `macro run`, ...) preparan sus cambios en memoria en lugar de escribirlos en el origen, y el prompt muestra un indicador mientras existan cambios preparados sin guardar. El comando integrado `save` confirma todo lo preparado; `revert` descarta todo lo preparado.
+
+Cada comando que modifica el modelo también puede decidir por sí mismo: `--save` guarda de inmediato el cambio de ese comando, `--stage` lo mantiene en memoria (la opción predeterminada) y `--revert` revierte el cambio del comando después de mostrar su efecto; útil para una prueba de "¿qué haría esto?". Los tres son mutuamente excluyentes, y `--stage`/`--revert` solo existen dentro de la sesión.
+
+El comportamiento predeterminado por comando lo define la clave de configuración `interactiveEditMode` (`stage` | `save` | `revert`); consulta @te-cli-config.
+
+Los cambios preparados nunca se descartan en silencio. Al cerrar una sesión que todavía los contiene —con `exit`, **Ctrl+D** o al llegar al final de la entrada por tubería—, primero se comprueba si hay cambios sin guardar. Si existen cambios sin guardar y hay un terminal activo, se te pedirá confirmación, con "no" como valor predeterminado; si respondes que no, volverás al prompt con las ediciones intactas. Cuando nadie puede responder (stdin por tubería o redirigida, o con `--non-interactive`), la sesión muestra una advertencia indicando qué cambios no se han guardado y sale con un código de error en lugar de uno de éxito. Al salir, en ningún caso se guarda nada: ejecuta `save` primero, o usa `exit --force` para descartar los cambios deliberadamente.
+
+## Edición de línea y teclas
+
+El prompt ofrece edición de una sola línea:
+
+- **Izquierda/Derecha** mueven el cursor; **Inicio/Fin** (también **Ctrl+A**/**Ctrl+E**) saltan a los extremos; **Retroceso/Supr** editan en el mismo lugar.
+- **Arriba/Abajo** recorren el historial de comandos, que se conserva entre sesiones.
+- **Ctrl+C** cancela el comando actual sin salir de la sesión y descarta definitivamente la línea a medio escribir: nunca se ejecuta, **Arriba** no la recupera y no se añade al historial.
+- **Ctrl+D** en un prompt vacío cierra la sesión (**Ctrl+Z** y luego **Enter** en Windows).
+
+Dentro de la sesión no hay autocompletado con la tecla Tab; el autocompletado de la shell mediante `te completion` solo se aplica a la shell externa.
 
 ## Indicaciones guiadas
 
-Cuando el modo interactivo está activo, los comandos que necesitan información faltante la solicitan en lugar de fallar. Ejecutar `auth` sin un subcomando abre un menú para Iniciar sesión / Estado / Cerrar sesión; ejecutar `deploy` sin `--force` muestra un resumen y pide confirmación (`n` es la opción predeterminada más segura).
+Cuando el modo interactivo está activo, los comandos que necesitan información faltante la solicitan en lugar de fallar. Al ejecutar `auth` sin subcomando, se abre un selector para Inicio de sesión / Estado / Cierre de sesión; al ejecutar `deploy --execute` o `refresh --execute` sin `--force`, se muestra un resumen y se pide confirmación (`n` es la opción predeterminada más segura). Un `deploy` o `refresh` sin `--execute` es una simulación que imprime el TMSL que enviaría, así que nunca solicita confirmación.
 
 Para desactivar las indicaciones en un único comando dentro de la sesión, pasa `--non-interactive`.
 
 ## Entrada canalizada y redirigida
 
-El modo interactivo también acepta stdin canalizado o redirigido, de modo que puedes controlar la misma REPL desde un script en lugar de introducir los comandos a mano. Cada línea de entrada se ejecuta como un comando, exactamente igual que si la hubieras introducido en el prompt, y la sesión termina cuando se agota la entrada (o cuando llega a una línea `exit`).
+El modo interactivo también acepta stdin canalizado o redirigido, de modo que puedes controlar la misma REPL desde un script en lugar de introducir los comandos a mano. Cada línea de entrada se ejecuta como un comando, exactamente igual que si la hubieras introducido en el prompt, y la sesión termina cuando se agota la entrada (o cuando llega a una línea `exit`). Si en ese momento todavía hay cambios en fase de preparación sin guardar, la sesión avisa y termina con un código de salida distinto de cero; finaliza un script con cambios con `save` (o usa `exit --force` para descartarlos a propósito).
 
 ```bash
-printf "ls\nexit\n" | te interactive ./model        # bash / git-bash
-te interactive ./model < script.te                  # redirected file
+printf "ls\nexit\n" | te interactive --model ./model    # bash / git-bash
+te interactive --model ./model < script.te              # redirected file
 ```
 
 ```bat
-(echo ls & echo exit) | te interactive .\model      :: Windows cmd.exe
+(echo ls & echo exit) | te interactive --model .\model  :: Windows cmd.exe
 ```
+
+La convención de stdin con `-` (`set -p Expression=-`, `query -q -`, etc.) se rechaza dentro de la sesión interactiva, porque la propia sesión es la dueña de stdin; úsala desde la shell externa.
 
 Las líneas que empiezan por `#` se tratan como comentarios y se omiten, así que puedes anotar un archivo de script:
 
@@ -119,10 +146,10 @@ Cuando stdin está canalizado, `--batch` es el valor **predeterminado**: la sesi
 
 ```bash
 # Default when piped: stop at the first failing command, exit non-zero
-printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model
+printf "bpa run --fail-on error\ndeploy --execute --force\nexit\n" | te interactive --model ./model
 
 # Run every line regardless of failures
-printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model --no-batch
+printf "bpa run --fail-on error\ndeploy --execute --force\nexit\n" | te interactive --model ./model --no-batch
 ```
 
 ### Transcripciones legibles
@@ -130,7 +157,7 @@ printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./mode
 `--echo` escribe cada línea de entrada en stdout antes de su salida, lo que resulta práctico al capturar una transcripción de una ejecución canalizada. Las líneas de comentario no se muestran.
 
 ```bash
-printf "ls tables\nexit\n" | te interactive ./model --echo
+printf "ls tables\nexit\n" | te interactive --model ./model --echo
 ```
 
 ### Opciones
@@ -155,11 +182,11 @@ Ejecutar `te` en una terminal sin argumentos te lleva directamente al REPL inter
 
 Este comportamiento se controla con la clave de configuración `launchInteractiveMode`, que admite tres valores:
 
-| Valor                                      | Efecto                                                                                                                                                                           |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auto` (predeterminado) | Inicia el REPL solo cuando los tres flujos están adjuntos a un TTY. De lo contrario, pasa al análisis normal.                                    |
-| `always`                                   | Inicia el REPL aunque haya redirección de flujos. Útil si siempre quieres una sesión interactiva.                                                |
-| `never`                                    | No inicia nunca el REPL automáticamente. `te` por sí solo muestra la ayuda, igual que antes de la versión 0.6.0. |
+| Valor                                      | Efecto                                                                                                                                        |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `auto` (predeterminado) | Inicia el REPL solo cuando los tres flujos están adjuntos a un TTY. De lo contrario, pasa al análisis normal. |
+| `always`                                   | Inicia el REPL aunque haya redirección de flujos. Útil si siempre quieres una sesión interactiva.             |
+| `never`                                    | No inicia nunca el REPL automáticamente. `te` por sí solo muestra la ayuda.                                   |
 
 Cámbialo globalmente con:
 

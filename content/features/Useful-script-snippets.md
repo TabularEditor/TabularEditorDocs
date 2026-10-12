@@ -18,12 +18,12 @@ applies_to:
 ---
 # Useful Script Snippets
 
-Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](/Advanced-Scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](/Custom-Actions), so that you can easily reuse them from the context menu.'
+Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](xref:advanced-scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](xref:custom-actions), so that you can easily reuse them from the context menu.
 
 Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](/how-tos/scripting-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
+> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](xref:how-to-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
 
 ***
 
@@ -74,7 +74,7 @@ CustomAction(@"Time Intelligence\Create LY measure");
 ```
 This illustrates how you can execute one (or more) Custom Actions from within another action (beware of circular references - that will cause Tabular Editor to crash). Save this as a new Custom Action "Time Intelligence\All of the above", and you will have an easy way to generate all your Time Intelligence measures with a single click:
 
-![image](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
+![image](~/content/assets/images/useful-script-snippets-01.png)
 
 Of course, you may also put all your time intelligence calculations into a single script such as the following:
 
@@ -258,7 +258,7 @@ foreach(var m in Selected.Measures) {
 
 If you need to provide custom partitioning for a table, C# scripting can help you quickly generate many partitions. The basic idea is to add an annotation to your table, containing the SQL or M query to use as a template for each partition. The script will then swap in filter parameters as needed. For example, using SQL partitions, we could add an annotation named `PartitionTemplateSQL` and set its value to `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`. The `{0}` and `{1}` placeholders will be replaced by our script, when generating the final partitions. In this case, `CalendarID` is an integer, but in general, it is your job to ensure that the resulting string is a valid SQL (or M) query.
 
-![](https://user-images.githubusercontent.com/8976200/70135273-07c6fa00-168a-11ea-84f6-90f0b3498ed8.png)
+![](~/content/assets/images/useful-script-snippets-02.png)
 
 The example here generates one partition per month. Select a table that has the `PartitionTemplateSQL` annotation assigned, then run the script.
 
@@ -300,7 +300,7 @@ var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
 The resulting .TSV file looks like this, when opened in Excel:
-![image](https://user-images.githubusercontent.com/8976200/36632472-e8e96ef6-197e-11e8-8285-6816b09ad036.png)
+![image](~/content/assets/images/useful-script-snippets-03.png)
 The contents of the first column (Object) is a reference to the object. If the contents of this column is changed, subsequent import of the properties might not work correctly. To change the name of an object, only change the value in the second column (Name).
 
 By default, the file is saved to the same folder as TabularEditor.exe is located. By default, only the following properties are exported (where applicable, depending on the type of object exported):
@@ -342,7 +342,7 @@ SaveFile(@"c:\Project\MeasurePerspectives.tsv", tsv);
 
 The TSV file looks like this, when opened in Excel:
 
-![image](https://user-images.githubusercontent.com/8976200/85208532-956dec80-b331-11ea-8568-32dbd4cc5516.png)
+![image](~/content/assets/images/useful-script-snippets-04.png)
 
 And just as shown above, you can make changes in Excel, hit save, and then load the updated values back into Tabular Editor using `ImportProperties`.
 
@@ -424,7 +424,7 @@ foreach(var row in tsvRows.Skip(1))
 }
 ```
 
-If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](/Command-line-Options) as follows:
+If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](xref:command-line-options) as follows:
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
@@ -468,7 +468,7 @@ This assumes that the partitions of the 'Reseller Sales' table is using a Provid
 ***
 
 ## Format DAX expressions
-Please see [FormatDax](/FormatDax) for more information.
+Please see [FormatDax](xref:script-helper-methods) for more information.
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
@@ -679,7 +679,7 @@ foreach(var col in aggTable.Columns)
 
 After running the script, you should see that the `AlternateOf` property has been assigned on all columns on your agg table (see screenshot below). Keep in mind, that the base table partition must use DirectQuery for aggregations to work.
 
-![image](https://user-images.githubusercontent.com/8976200/85851134-6ed70800-b7ae-11ea-82eb-37fcaa2ca9c4.png)
+![image](~/content/assets/images/useful-script-snippets-05.png)
 
 ***
 
@@ -696,7 +696,7 @@ The following methods are available:
 | `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
 | `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
 
-The methods are scoped to the `Model.Database` object, but they can also be executed directly without any prefix.
+Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
 
 Darren Gosbell presents an interesting use-case of generating data-driven measures using the `ExecuteDax` method [here](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/).
 
@@ -738,7 +738,7 @@ EvaluateDax("\"Hello from AS\"").Output(); // A string
 EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638299-bbd59580-ea0e-11ea-882b-55bff73c30fb.png)
+![image](~/content/assets/images/useful-script-snippets-06.png)
 
 ...or, if you want to return the value of the currently selected measure:
 
@@ -746,7 +746,7 @@ EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 EvaluateDax(Selected.Measure.DaxObjectFullName).Output();
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638367-6f3e8a00-ea0f-11ea-90cd-7d2e4cff6e31.png)
+![image](~/content/assets/images/useful-script-snippets-07.png)
 
 And here's a more advanced example that allows you to select and evaluate multiple measures at once:
 
@@ -754,7 +754,7 @@ And here's a more advanced example that allows you to select and evaluate multip
 var dax = "ROW(" + string.Join(",", Selected.Measures.Select(m => "\"" + m.Name + "\", " + m.DaxObjectFullName).ToArray()) + ")";
 EvaluateDax(dax).Output();
 ```
-![image](https://user-images.githubusercontent.com/8976200/91638356-546c1580-ea0f-11ea-8302-3e40829e00dd.png)
+![image](~/content/assets/images/useful-script-snippets-08.png)
 
 If you're really advanced, you could use SUMMARIZECOLUMNS or some other DAX function to visualize the selected measure sliced by some column:
 
@@ -763,11 +763,11 @@ var dax = "SUMMARIZECOLUMNS('Product'[Color], " + string.Join(",", Selected.Meas
 EvaluateDax(dax).Output();
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638389-9b5a0b00-ea0f-11ea-819f-d3eee3ddfa71.png)
+![image](~/content/assets/images/useful-script-snippets-09.png)
 
 Remember you can save these scripts as Custom Actions by clicking the "+" icon just above the script editor. This way, you get an easily reusable collection of DAX queries that you can execute and visualize directly from inside the Tabular Editor context menu:
 
-![image](https://user-images.githubusercontent.com/8976200/91638790-305e0380-ea12-11ea-9d84-313f4388496f.png)
+![image](~/content/assets/images/useful-script-snippets-10.png)
 
 ### Exporting data
 

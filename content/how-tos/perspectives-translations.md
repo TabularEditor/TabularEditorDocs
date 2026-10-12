@@ -13,7 +13,7 @@ applies_to:
 # Working with Perspectives and Translations
 You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](../features/hierarchical-display.md), you can view and edit perspectives, cultures and roles directly in the tree.
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
+![](~/content/assets/images/perspectives-translations-01.png)
 
 You can duplicate an existing perspective, role or translation by opening the right-click menu and choose "Duplicate". This will create an exact copy of the object, which you can then modify to your needs.
 
