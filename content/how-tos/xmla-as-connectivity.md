@@ -45,7 +45,7 @@ Closing the model restores the status bar to the active theme.
 
 ### Recent and pinned servers
 
-The **Server** list holds the servers you've connected to. When you select a server in the list, its authentication type, user name, **Mode** and **Status bar color** are filled in. Passwords aren't saved. In Tabular Editor 3, a change to any of these settings is saved for the selected server when you select another server or connect.
+The **Server** list holds the servers you've connected to. When you select a server in the list, its authentication type, user name, **Mode** and **Status bar color** are filled in. Passwords aren't saved. A change to any of these settings is saved for the selected server when you select another server or connect.
 
 In Tabular Editor 3, right-click a server in the list to manage it:
 
@@ -53,8 +53,7 @@ In Tabular Editor 3, right-click a server in the list to manage it:
 - **Unpin** returns a pinned server to the ordinary list.
 - **Delete** removes the server and its saved settings from the list.
 
-<!-- SCREENSHOT PLACEHOLDER (3.27.1): new image of the Server list with a pinned server and the right-click menu (Pin, Unpin, Delete) open. -->
-
+![Open model from DB allows for pinning and deleting entries through its right click menu](~/content/assets/images/common/XMLASettings/OpenModelPinDeleteOption.png)
 **Number of recent servers displayed** under **Tools > Preferences > Tabular Editor > User Interface** limits only the unpinned servers, and **Clear recent servers** on the same page leaves pinned servers in place. The same list and menu are available on the **Destination Server** page of the [deployment wizard](xref:deployment).
 
 ## Select database
