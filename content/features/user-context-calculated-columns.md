@@ -2,7 +2,7 @@
 uid: user-context-calculated-columns
 title: User-context calculated columns
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 ---
 # User-context calculated columns
 
-A *user-context calculated column* is a calculated column that's evaluated per user. Its expression can call functions such as [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) or [`USERNAME`](https://dax.guide/username) and return a different value for each user. A standard calculated column is evaluated once, when the table is processed, and returns the same value for all users.
+A *user-context calculated column* is a calculated column that's evaluated per user. Its expression can call functions such as [`USERPRINCIPALNAME`](https://dax.guide/userprincipalname) or [`USERNAME`](https://dax.guide/username) and return a different value for each user. In contrast, a standard calculated column is evaluated once, when the table is processed, and returns the same value for all users.
 
 The calculated column's `ExpressionContext` property sets whether the column is evaluated once or per user:
 
