@@ -1,0 +1,87 @@
+name: Translation PoC (temporary)
+
+# TEMPORARY proof of concept for the synchronous /translate/ai flow - DELETE THIS FILE
+# once it has been validated. On every push to feature/switching-to-translated it
+# translates ONE file (features/toc.md -> Spanish) against PRODUCTION (a real, billed
+# AI translation of roughly one cent) and force-pushes the result to the throwaway
+# branch `test/localisation` for inspection. Never touches main or localization.
+#
+# Required repository settings:
+#   TRANSLATED_API_KEY   secret   must hold the PRODUCTION TranslationOS key (the
+#                                 sandbox account has no AI-enabled service type).
+# The repository variable TRANSLATED_ENV stays `sandbox` (or unset) so translate.yml's
+# automatic triggers remain inert; this workflow hardcodes production for itself.
+
+on:
+  push:
+    branches: [feature/switching-to-translated]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  poc:
+    name: One-file production dry run
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: translate-poc
+      cancel-in-progress: false
+    env:
+      # Hardcoded on purpose, see the header; vars.TRANSLATED_ENV is NOT used here.
+      TRANSLATED_ENV: production
+      HAS_KEY: ${{ secrets.TRANSLATED_API_KEY != '' }}
+    steps:
+      - name: Check secret
+        run: |
+          if [ "$HAS_KEY" != "true" ]; then
+            echo "::error::Secret TRANSLATED_API_KEY is not set; it must hold the PRODUCTION key for this PoC."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Self-test (offline)
+        run: python build_scripts/translate-content.py --self-test
+
+      - name: Translate one file (production, billed)
+        env:
+          TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_API_KEY }}
+        run: |
+          python build_scripts/translate-content.py --run --force --limit 1 \
+            --file "features/toc.md" --lang es --report "$RUNNER_TEMP/report.md"
+
+      - name: Push the result to test/localisation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A localizedContent
+          git diff --cached --stat
+          if git diff --cached --quiet; then
+            echo "Nothing changed; not pushing."
+            exit 0
+          fi
+          git commit -m "PoC: one-file AI translation via POST /translate/ai"
+          # Force push: the branch is a throwaway inspection area, rebuilt from the
+          # pushed commit on every run.
+          git push --force origin HEAD:refs/heads/test/localisation
+
+      - name: Step summary
+        if: always()
+        run: |
+          {
+            echo "## Translation PoC (production, one file)"
+            echo
+            if [ -f "$RUNNER_TEMP/report.md" ]; then
+              cat "$RUNNER_TEMP/report.md"
+            else
+              echo "No report was produced; see the job log."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

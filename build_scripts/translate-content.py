@@ -2585,9 +2585,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--lang", action="append", help="limit to a language folder (repeatable)")
     parser.add_argument("--file", action="append", default=[], help="glob relative to content/ (repeatable)")
     parser.add_argument("--limit", type=int, default=0, help="submit at most N files per language")
-    parser.add_argument(
-        "--force", action="store_true", help="retranslate matched files even when they are current"
-    )
+    parser.add_argument("--force", action="store_true", help="retranslate matched files even when they are current")
     parser.add_argument("--lenient", action="store_true", help="write translations that fail structural verification")
     parser.add_argument("--allow-unbounded", action="store_true", help="lift the sandbox per-run caps")
     parser.add_argument(
