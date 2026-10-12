@@ -20,7 +20,7 @@ applies_to:
 
 # Funciones DAX definidas por el usuario
 
-DAX User-Defined Functions (UDFs) are a capability of semantic models. The feature entered preview with the September 2025 update of Power BI Desktop and is [generally available](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) since the June 2026 release of Power BI.
+Las UDF de DAX (funciones DAX definidas por el usuario) son una característica de los modelos semánticos. La característica pasó a versión preliminar con la actualización de septiembre de 2025 de Power BI Desktop y está [disponible de forma general](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) desde la versión de junio de 2026 de Power BI.
 
 La característica te permite crear funciones DAX reutilizables que puedes invocar desde cualquier expresión DAX de tu modelo, incluso desde otras funciones. Esta potente característica te ayuda a mantener la coherencia, reducir la duplicación de código y crear expresiones DAX más fáciles de mantener.
 
@@ -133,13 +133,13 @@ Además de especificar el modo de evaluación, también puedes restringir el tip
 
 Estas especificaciones de tipo son opcionales, pero si se indican, realizarán una conversión de tipo implícita en los argumentos que se pasen a la función y también afectarán a las sugerencias de autocompletado en Tabular Editor 3 al escribir código DAX que llame a la función.
 
-Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
 Consulta la [especificación de Microsoft para las UDF](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) para ver la lista completa de restricciones disponibles.
 
-### Optional Parameters with Default Expressions
+### Parámetros opcionales con expresiones predeterminadas
 
-Starting from version 3.26.2, Tabular Editor 3 supports optional parameters with default expressions. Append `= expression` after the parameter name (and after any type or evaluation-mode hints) to make the parameter optional. When the caller omits the argument, the default expression supplies the value.
+A partir de la versión 3.26.2, Tabular Editor 3 admite parámetros opcionales con expresiones predeterminadas. Añade `= expression` después del nombre del parámetro (y después de cualquier indicación de tipo o modo de evaluación) para que el parámetro sea opcional. Cuando quien llama omite el argumento, la expresión predeterminada proporciona el valor.
 
 ```dax
 FUNCTION AddTax =
@@ -150,13 +150,13 @@ FUNCTION AddTax =
     => amount * (1 + taxRate)
 ```
 
-Calling `AddTax(10)` returns `11`, while `AddTax(10, 0.25)` returns `12.5`.
+Si llamas a `AddTax(10)`, obtienes `11`, mientras que si llamas a `AddTax(10, 0.25)`, obtienes `12.5`.
 
-A few rules govern optional parameters:
+Los parámetros opcionales se rigen por algunas reglas:
 
-- Callers can leave an argument empty to fall back to its default, e.g. `MyFunc(1,,3)` omits the second argument. The minimum number of arguments is determined by the position of the rightmost required parameter.
-- A default expression can only reference names (columns, tables, measures, functions) visible where the function is defined, and it can't reference another parameter of the same function.
-- Type checking against a parameter's type hint is enforced only when the default expression is used; an explicitly passed argument is checked against the hint instead.
+- Puedes dejar vacío un argumento para usar su valor predeterminado; por ejemplo, `MyFunc(1,,3)` omite el segundo argumento. El número mínimo de argumentos lo determina la posición del parámetro obligatorio situado más a la derecha.
+- Una expresión predeterminada solo puede hacer referencia a nombres (columnas, tablas, medidas, funciones) visibles donde se define la función, y no puede hacer referencia a otro parámetro de la misma función.
+- La comprobación de tipos con respecto a la indicación de tipo de un parámetro solo se aplica cuando se usa la expresión predeterminada; en cambio, un argumento pasado explícitamente se comprueba con respecto a esa indicación.
 
 ## Uso de las UDF en tu modelo
 
@@ -208,7 +208,7 @@ Los administradores del sistema pueden desactivar el acceso al Administrador de 
 
 Cuando cambias el nombre de una UDF, Tabular Editor 3 actualiza automáticamente todas las referencias en tu modelo, al igual que con las medidas y otros objetos.
 
-### Peek Definition
+### Ver la definición
 
 La característica **Ver la definición** funciona con las UDF, permitiéndote ver rápidamente la implementación de la función sin salir de tu contexto actual.
 
@@ -221,7 +221,7 @@ Las UDF aparecen en la vista **Dependencias de DAX** (Shift+F12), mostrando lo s
 - **Objetos que dependen de la función**: Qué medidas, columnas, etc. usan la UDF
 - **Objetos de los que depende la función**: A qué medidas, columnas, etc. hace referencia la UDF
 
-### Batch Rename
+### Cambio de nombre por lotes
 
 Cuando seleccionas varias UDFs en el Explorador TOM, puedes usar la opción **Renombrar en lote** (F2) desde el menú contextual de clic derecho para cambiarles el nombre a todas de una sola vez, mediante patrones de búsqueda y sustitución y, opcionalmente, expresiones regulares.
 
@@ -236,11 +236,11 @@ En Tabular Editor, las UDFs también tienen una _propiedad_ "Namespace", que te 
 > [!NOTE]
 > Esta característica de organización en Tabular Editor no afecta al código DAX. Aun así, cuando llames a una UDF tendrás que escribir el nombre completo, incluidas las partes del espacio de nombres.
 
-## UDFs and source control
+## UDFs y control de código fuente
 
 If you store your model as a folder structure, Tabular Editor can write each UDF to its own file. Without this serialization level, all functions are stored in `database.json`, which causes merge conflicts when several developers edit functions.
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder**. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder**. Consulta [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Buenas prácticas
 
@@ -345,15 +345,15 @@ Check the following, in order:
 
 **La función no funciona tras el despliegue**
 
-- Comprueba que tu entorno de destino admite UDFs (nivel de compatibilidad 1702 o superior). The Power BI Service supports UDFs as of the June 2026 release. Azure Analysis Services and SQL Server Analysis Services don't support UDFs.
+- Comprueba que tu entorno de destino admite UDFs (nivel de compatibilidad 1702 o superior). El servicio Power BI admite las UDF a partir de la versión de junio de 2026. Azure Analysis Services y SQL Server Analysis Services no admiten las UDF.
 
 ## Limitaciones
 
-- UDFs require compatibility level 1702 or higher; Azure Analysis Services and SQL Server Analysis Services don't support them
+- Las UDF requieren un nivel de compatibilidad 1702 o superior; Azure Analysis Services y SQL Server Analysis Services no las admiten
 - Las UDFs no pueden ser recursivas (llamarse a sí mismas)
 
 > [!NOTE]
-> With the [general availability](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) of UDFs in June 2026, UDFs support optional parameters with default expressions. Tabular Editor 3 supports this syntax since version 3.26.2. Older versions display a false error message when you use the default expression syntax.
+> Con la [disponibilidad general](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) de las UDF en junio de 2026, las UDF admiten parámetros opcionales con expresiones predeterminadas. Tabular Editor 3 admite esta sintaxis desde la versión 3.26.2. Las versiones anteriores muestran un mensaje de error incorrecto cuando usas la sintaxis de expresión predeterminada.
 
 ---
 
