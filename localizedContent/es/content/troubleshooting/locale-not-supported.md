@@ -1,6 +1,6 @@
 ---
 uid: locale-not-supported
-title: Locale Not Supported
+title: Configuración regional no admitida
 author: Morten Lønskov
 updated: 2025-09-02
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Locale Not Supported
+# Configuración regional no admitida
 
 Puede que se muestre alguno de los siguientes mensajes de advertencia:
 
