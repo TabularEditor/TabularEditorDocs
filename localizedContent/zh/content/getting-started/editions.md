@@ -185,7 +185,7 @@ DAX优化器的 _集成_ 在所有版本中都提供；企业版额外提供的�
 
 ## 企业版批量折扣
 
-If you require more than 25 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
+如需超过 25 个席位，请 <a href="mailto:sales@tabulareditor.com">联系销售</a> 获取报价。
 
 ## 命令行与 CI/CD 授权许可
 
