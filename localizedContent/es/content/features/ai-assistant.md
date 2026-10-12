@@ -31,7 +31,7 @@ You can also use your own agent through the [MCP server](xref:mcp-server), with 
 ## Primeros pasos
 
 1. Open **Tools > Preferences > AI Features > AI Assistant > AI Provider**
-2. Select your AI provider (on a fresh install this defaults to **None (AI disabled)**), then enter your API key
+2. Selecciona tu proveedor de IA (en una instalación limpia, el valor predeterminado es **Ninguno (IA deshabilitada)**) y luego introduce tu clave de API
 3. Abre el panel del Asistente de IA desde **Vista > Asistente de IA**
 4. Escribe mensajes y pulsa **Enter** para iniciar una conversación
 
@@ -43,24 +43,24 @@ You can also use your own agent through the [MCP server](xref:mcp-server), with 
 
 ## Supported providers
 
-Configure your AI provider under **Tools > Preferences > AI Features > AI Assistant > AI Provider**. Select a provider from the dropdown (the default is **None (AI disabled)** until you configure one), enter your API key and optionally override the default model.
+Configura tu proveedor de IA en **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**. Selecciona un proveedor en la lista desplegable (el valor predeterminado es **Ninguno (IA deshabilitada)** hasta que configures uno), introduce tu clave de API y, si lo deseas, reemplaza el modelo predeterminado.
 
-Leave the model field blank to use the provider's default model. OpenAI and Anthropic have defaults; Azure OpenAI and the Custom provider always need a value.
+Deja en blanco el campo del modelo para usar el modelo predeterminado del proveedor. OpenAI and Anthropic have defaults; Azure OpenAI and the Custom provider always need a value.
 
-| Proveedor                                                | Default model                                          | Configuration required                                                                 |
-| -------------------------------------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| OpenAI                                                   | gpt-5.5                                | Clave de API. URL base, ID de organización e ID de proyecto opcionales |
-| Anthropic                                                | claude-sonnet-4-6                                      | Clave de API. URL base opcional                                        |
-| Azure OpenAI                                             | Ninguno. A deployment name is required | Clave de API, URL del punto de conexión y nombre de la implementación                  |
-| Personalizado (compatible con OpenAI) | Ninguno. A model name is required      | Clave de API y URL personalizada del punto de conexión                                 |
+| Proveedor                                                | Default model                                                    | Configuration required                                                                 |
+| -------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| OpenAI                                                   | gpt-5.5                                          | Clave de API. URL base, ID de organización e ID de proyecto opcionales |
+| Anthropic                                                | claude-sonnet-4-6                                                | Clave de API. URL base opcional                                        |
+| Azure OpenAI                                             | Ninguno. Se requiere un nombre de implementación | Clave de API, URL del punto de conexión y nombre de la implementación                  |
+| Personalizado (compatible con OpenAI) | Ninguno. Se requiere un nombre de modelo         | Clave de API y URL personalizada del punto de conexión                                 |
 
-![The AI Provider preferences page with the Choose provider dropdown open on None (AI disabled), OpenAI, Anthropic, Azure OpenAI and Custom (OpenAI-compatible), and a URL and API Key field beneath it](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+![La página de preferencias del Proveedor de IA con la lista desplegable Elegir proveedor abierta en Ninguno (IA deshabilitada), OpenAI, Anthropic, Azure OpenAI y Personalizado (compatible con OpenAI), y debajo un campo de URL y otro de clave de API](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
-### Choosing a model
+### Elegir un modelo
 
-The active model is shown in the status strip above the message box, next to the context usage bar. Click it to open a picker listing the models available for the configured provider; a model you pick applies from the next request. The last entry, **Preferences...**, opens **Tools > Preferences > AI Features > AI Assistant > AI Provider** for anything not on the list. For the Azure OpenAI and Custom providers, or before the model list has been retrieved, the model name is a link that opens those preferences.
+El modelo activo se muestra en la barra de estado situada encima del cuadro de mensajes, junto a la barra de uso del contexto. Click it to open a picker listing the models available for the configured provider; a model you pick applies from the next request. The last entry, **Preferences...**, opens **Tools > Preferences > AI Features > AI Assistant > AI Provider** for anything not on the list. For the Azure OpenAI and Custom providers, or before the model list has been retrieved, the model name is a link that opens those preferences.
 
-![The model picker open above the message box, listing claude-sonnet-5, claude-fable-5-1, claude-fable-5, claude-opus-5, claude-haiku-4-5, claude-opus-4-8 and the active claude-sonnet-4-6 in bold, with Preferences... beneath a separator](~/content/assets/images/ai-assistant/ui-model-picker.png)
+![El selector de modelos abierto encima del cuadro de mensajes, con claude-sonnet-5, claude-fable-5-1, claude-fable-5, claude-opus-5, claude-haiku-4-5, claude-opus-4-8 y el claude-sonnet-4-6 activo en negrita, con Preferencias... debajo de un separador](~/content/assets/images/ai-assistant/ui-model-picker.png)
 
 > [!NOTE]
 > The model indicator is hidden until a provider, an API key and a model are all set.
@@ -84,7 +84,7 @@ Selecciona **Anthropic** como proveedor e introduce tu clave de API. The model n
 
 Select **Azure OpenAI** as the provider and configure these fields:
 
-- **API key**: the access key for your Azure OpenAI resource
+- **Clave de API**: la clave de acceso de tu recurso de Azure OpenAI
 - **Service endpoint**: the resource URL, for example `https://your-resource.openai.azure.com`. The SSL certificate is issued for `*.openai.azure.com`, so a `*.privatelink.openai.azure.com` address fails certificate validation
 - **Deployment**: the deployment name shown in the **Name** column of **Deployments**
 
@@ -112,19 +112,19 @@ The Custom provider connects to any LLM that exposes an OpenAI-compatible API en
 
 ## Uso de un LLM local o de tu organización
 
-Puedes ejecutar el Asistente de IA con un LLM autoalojado mediante el proveedor Personalizado. This keeps all data within your own infrastructure, whether that is a model running on your local machine or a centrally hosted LLM within your organization's network. En cualquier caso, no se envía ningún dato a un proveedor de nube de terceros.
+Puedes ejecutar el Asistente de IA con un LLM autoalojado mediante el proveedor Personalizado. Esto mantiene todos los datos dentro de tu propia infraestructura, ya sea un modelo que se ejecuta en tu equipo local o un LLM alojado de forma centralizada dentro de la red de tu organización. En cualquier caso, no se envía ningún dato a un proveedor de nube de terceros.
 These tools host models with an OpenAI-compatible API, on a developer's workstation or on a shared server that serves as a team endpoint:
 
-- [Ollama](https://ollama.com): lightweight CLI for downloading and running models locally
-- [LM Studio](https://lmstudio.ai): desktop application with a graphical interface for managing and running local models
-- [LocalAI](https://localai.io): self-hosted, community-driven alternative with broad model support
+- [Ollama](https://ollama.com): CLI ligera para descargar y ejecutar modelos localmente
+- [LM Studio](https://lmstudio.ai): aplicación de escritorio con interfaz gráfica para administrar y ejecutar modelos locales
+- [LocalAI](https://localai.io): alternativa autoalojada e impulsada por la comunidad, con amplio soporte para modelos
 
 ### Ejemplo: Ollama
 
 1. [Descarga e instala Ollama](https://ollama.com/download)
 2. Pull a model, for example `ollama pull llama3.1`
 3. Start the Ollama server. It starts automatically after installation, by default on port 11434
-4. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
+4. En Tabular Editor, ve a **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**
 5. Configura **Elegir proveedor** como **Personalizado (compatible con OpenAI)**
 6. Establece **Punto de conexión del servicio** en `http://localhost:11434/v1`
 7. Set **Model name** to the model you pulled, for example `llama3.1`
@@ -135,7 +135,7 @@ These tools host models with an OpenAI-compatible API, on a developer's workstat
 1. [Download and install LM Studio](https://lmstudio.ai/download)
 2. Download a model from the model search page in the left panel, or with the CLI, for example `lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
 3. Start the LM Studio server from the developer page in the left panel, or with `lms server start`. Turn on OpenAI-compatible mode. If the context size is below 100,000 tokens, raise it above 100,000
-4. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
+4. En Tabular Editor, ve a **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**
 5. Configura **Elegir proveedor** como **Personalizado (compatible con OpenAI)**
 6. Establece **Punto de conexión del servicio** en `http://localhost:1234/v1`
 7. Set **Model name** to the model you downloaded, for example `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
@@ -158,7 +158,7 @@ These tools host models with an OpenAI-compatible API, on a developer's workstat
 
 Configure an OpenAI model deployed in Microsoft Foundry, such as GPT-4o or GPT-5.4-mini:
 
-1. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
+1. En Tabular Editor, ve a **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**
 2. Selecciona **OpenAI** en **Elegir proveedor**
 3. Set **Base URL** to your Foundry resource endpoint with `/openai/v1` appended, in one of these formats:
    - `https://your-resource.services.ai.azure.com/openai/v1`
@@ -173,7 +173,7 @@ Configure an OpenAI model deployed in Microsoft Foundry, such as GPT-4o or GPT-5
 
 For an Anthropic model deployed in Microsoft Foundry, such as Claude Sonnet 4.6:
 
-1. In Tabular Editor, go to **Tools > Preferences > AI Features > AI Assistant > AI Provider**
+1. En Tabular Editor, ve a **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**
 2. Configura **Elegir proveedor** como **Anthropic**
 3. Set **Base URL** to your Foundry resource endpoint with `/anthropic` appended, for example `https://your-resource.services.ai.azure.com/anthropic`
 4. Introduce tu **Clave de API** de Foundry
@@ -200,13 +200,13 @@ An agent connected over the [MCP server](xref:mcp-server) has the same capabilit
 > [!NOTE]
 > When the model is loaded from a file, such as a `.bim` file or a TMDL folder, and isn't connected to Analysis Services or Power BI, tools that need a connection are hidden, including DAX query execution and VertiPaq Analyzer statistics. The assistant still writes DAX queries, but **Execute** on DAX query artifacts is disabled until you connect. VertiPaq Analyzer statistics loaded from a `.vpax` file stay available.
 
-## Letting the assistant change your model
+## Permitir que el asistente cambie tu modelo
 
 By default, the assistant writes a C# script and opens it in an editor window, where you read and run it. It can also run the script itself when you select **Allow AI assistant to run C# scripts directly** under **Tools > Preferences > AI Features > AI Assistant > Preferences**.
 
 The setting is off by default and unavailable until **Model metadata** is set to **Read/Write** under **Tools > Preferences > AI Features > Permissions**.
 
-### What happens when the assistant runs a script
+### Qué ocurre cuando el asistente ejecuta un script
 
 - If **Preview changes** is on (the default), the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before the changes are applied. **Cancel** reverts them and reports the rejection to the assistant. If **Preview changes** is off, the changes are applied without a dialog.
 - The script's changes are one undo entry, **C# script (AI Assistant)**. **Ctrl+Z** undoes the whole script.
@@ -217,7 +217,7 @@ If you ask for a script, for example "Write me a script that renames every measu
 
 The `DisableCSharpScripts` [policy](xref:policies) applies in every edition and turns off both direct execution and the scripts the assistant hands you to run.
 
-The `BlockUnsafeScripts` policy requires Enterprise Edition and applies to every script in Tabular Editor, including scripts run over the [MCP server](xref:mcp-server). When it's set, the assistant can still write a script that accesses files, the network or external assemblies, but the script doesn't run and no artifact opens for review. See [Administrator policies](xref:csharp-scripts#administrator-policies).
+The `BlockUnsafeScripts` policy requires Enterprise Edition and applies to every script in Tabular Editor, including scripts run over the [MCP server](xref:mcp-server). When it's set, the assistant can still write a script that accesses files, the network or external assemblies, but the script doesn't run and no artifact opens for review. Consulta [Directivas de administrador](xref:csharp-scripts#administrator-policies).
 
 ## Conversaciones
 
@@ -227,7 +227,7 @@ The AI Assistant supports multiple simultaneous conversations, each with its own
 - titles are generated automatically after the first exchange, and you can rename a conversation
 - **Auto-compaction**: when a conversation approaches the context window limit, older messages are summarized to free up space, after a snapshot of the full conversation is archived. The threshold is a percentage of the model's own context window, set under [Context compaction](#context-compaction)
 
-### Deleting a conversation
+### Eliminar una conversación
 
 **Delete conversation** is at the left end of the AI Assistant toolbar, next to **New conversation**. After you confirm the prompt, the conversation and its history are removed from disk and can't be recovered. The close button on the panel's title bar, or **View > AI Assistant**, hides the panel without deleting anything.
 
@@ -240,11 +240,11 @@ Code that the AI Assistant generates opens as an _artifact_ in an editor window:
 
 Artifacts stream in as the AI generates them, and C# script artifacts include a safety analysis that flags unsafe code, such as file system access or network operations.
 
-![The AI Assistant pane showing a generated C# script artifact with an Execute button, and the assistant's explanation of what the script does and the case-sensitivity caveat it comes with](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
+![El panel de AI Assistant muestra un artefacto de C# Script generado con un botón Execute y la explicación del asistente sobre lo que hace el script, además de la advertencia sobre la distinción entre mayúsculas y minúsculas](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
 If **Preview changes** is on, running a C# script from the chat opens the **Script Preview** dialog with a side-by-side diff of all model metadata changes the script made, where you accept or revert the changes. See [Running scripts with preview](xref:csharp-scripts#run-c-scripts-with-preview).
 
-![The Script Preview - Model Changes dialog, the model before and after side by side, with the Internet Total Freight measure's format string changed and a description and a display folder added, each marked against its original](~/content/assets/images/preview-script-changes.png)
+![El cuadro de diálogo Vista previa del script: cambios en el modelo, con el modelo antes y después uno junto al otro, con la cadena de formato de la medida Internet Total Freight modificada y con una descripción y una carpeta de visualización añadidas, cada una marcada respecto de su valor original](~/content/assets/images/preview-script-changes.png)
 
 ## Instrucciones personalizadas
 
@@ -254,16 +254,16 @@ _Custom Instructions_ are instruction sets that guide the AI Assistant on specif
 
 The AI Assistant includes these Custom Instructions:
 
-| Instrucción personalizada              | Invoke with           | Covers                                                                                                                                               |
-| -------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Consulta DAX                           | `/dax-querying`       | Writing and executing DAX queries: column and measure qualification, verifying filter values, validating and updating queries        |
-| Modificación del modelo                | `/model-modification` | C# scripts that create or change model objects: TOMWrapper API patterns, execution order, idempotent updates, naming rules           |
-| Semantic Model Design                  | `/model-design`       | Star schema, relationships and cross-filtering, date tables, measures versus calculated columns, calculation groups, naming                          |
-| Semantic Model Organization            | `/organize-model`     | Auditing and tidying model metadata: naming conventions, table groups, display folders, hidden columns, format strings, descriptions |
-| Semantic Model Size Optimization       | `/optimize-model`     | Reducing model memory and size: VertiPaq measurement, column removal, data type tuning, structural changes, SKU limits               |
-| Macros                                 | `/macros`             | Reusable C# macros for the Macros window: selection contexts, generic-code rules                                                     |
-| Funciones DAX definidas por el usuario | `/udf`                | Writing DAX UDFs: syntax, `VAL`/`EXPR` parameter modes, type hints, namespaces, DaxLib                                               |
-| Best Practice Analyzer                 | `/bpa`                | Reviewing violations and writing custom rules as LINQ Dynamic expressions                                                                            |
+| Instrucción personalizada                    | Invocar con           | Cubre                                                                                                                                                                                            |
+| -------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Consulta DAX                                 | `/dax-querying`       | Escritura y ejecución de consultas DAX: referencias completas de columnas y medidas, comprobación de valores de filtro, validación y actualización de consultas                  |
+| Modificación del modelo                      | `/model-modification` | C# Scripts para crear o cambiar objetos del modelo: patrones de la API de TOMWrapper, orden de ejecución, actualizaciones idempotentes, reglas de nomenclatura                   |
+| Diseño del modelo semántico                  | `/model-design`       | Esquema en estrella, relaciones y filtrado cruzado, tablas de fechas, medidas frente a columnas calculadas, grupos de cálculo, nomenclatura                                                      |
+| Organización del modelo semántico            | `/organize-model`     | Auditoría y limpieza de los metadatos del modelo: convenciones de nomenclatura, grupos de tablas, carpetas de visualización, columnas ocultas, cadenas de formato, descripciones |
+| Optimización del tamaño del modelo semántico | `/optimize-model`     | Reducción de la memoria y del tamaño del modelo: medida de VertiPaq, eliminación de columnas, ajuste de tipos de datos, cambios estructurales, límites de SKU                    |
+| Macros                                       | `/macros`             | Macros de C# reutilizables para la ventana de macros: contextos de selección, reglas de código genérico                                                                          |
+| Funciones DAX definidas por el usuario       | `/udf`                | Creación de UDFs de DAX: sintaxis, modos de parámetro `VAL`/`EXPR`, sugerencias de tipo, espacios de nombres, DaxLib                                                             |
+| Best Practice Analyzer                       | `/bpa`                | Revisión de infracciones y creación de reglas personalizadas mediante expresiones de LINQ Dynamic                                                                                                |
 
 With **Show custom instructions indicator** selected under **Tools > Preferences > AI Features > AI Assistant > Preferences**, indicators above each response show which instructions influenced it.
 
@@ -273,7 +273,7 @@ Type `/` to browse available Custom Instructions. Start your message with an ins
 
 ### Añade tus propias instrucciones personalizadas
 
-Create a Custom Instruction by placing a `.md` file in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. The folder is created the first time the AI Assistant runs, with an `example.md` file in it to copy from. **Open Custom Instructions Folder** on the AI Assistant toolbar opens it.
+Create a Custom Instruction by placing a `.md` file in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. La carpeta se crea la primera vez que se ejecuta el Asistente de IA, con un archivo `example.md` que puedes usar como base. **Open Custom Instructions Folder** on the AI Assistant toolbar opens it.
 
 The YAML frontmatter that defines the instruction metadata is optional:
 
@@ -294,7 +294,7 @@ injected into the AI's system prompt when the instruction is activated.
 | Campo           | Obligatorio | Predeterminado                     | Descripción                                                                                                                                 |
 | --------------- | ----------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`            | No          | Nombre de archivo sin `.md`        | Identificador único; también se usa como `/id` para la invocación explícita                                                                 |
-| `name`          | No          | Title-cased `id`                   | Nombre para mostrar en el autocompletado                                                                                                    |
+| `name`          | No          | `id` con mayúsculas iniciales      | Nombre para mostrar en el autocompletado                                                                                                    |
 | `description`   | No          | Si no se especifica, se usa `name` | Indica qué cubre la instrucción y cuándo se aplica                                                                                          |
 | `priority`      | No          | 100                                | Los valores más altos se inyectan primero cuando hay varias instrucciones personalizadas en vigor                                           |
 | `always_inject` | No          | false                              | Si es `true`, siempre se incluye en el prompt del sistema. Este tipo de instrucción no aparece en el autocompletado de `/.` |
@@ -398,9 +398,9 @@ In Enterprise Edition, including Consultancy and Trial licenses, Tabular Editor 
 
 - which permissions were requested and how you answered
 - which tools ran and whether each one succeeded, failed or was blocked
-- the full text of any C# script the assistant or an MCP agent ran or submitted to run, including scripts that failed at run time or were refused
+- el texto completo de cualquier C# Script que el asistente o un agente de MCP haya ejecutado o haya enviado a ejecutar, incluidos los que fallaron durante la ejecución o cuya ejecución fue rechazada
 
-Tus indicaciones, las respuestas del asistente y los valores de datos de tu modelo nunca se registran. A script that fails to compile isn't saved, and neither is the text of a script the assistant writes into a document for you to run yourself. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
+Tus indicaciones, las respuestas del asistente y los valores de datos de tu modelo nunca se registran. Un script que no llega a compilarse no se guarda, y tampoco se guarda el texto de un script que el asistente escribe en un documento para que lo ejecutes tú mismo. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
 
 Without an Enterprise license, and before a license is activated, nothing is recorded, no folder is created and the button isn't shown. See @ai-audit-log for what each record holds, where the files are stored and the policies that redirect them.
 
@@ -412,23 +412,23 @@ Configura las opciones de visualización y comportamiento del Asistente de IA en
 
 | Preferencia                                               | Predeterminado | Descripción                                                                                    |
 | --------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------- |
-| Mostrar indicador de contexto de selección                | Off            | Muestra el objeto del modelo seleccionado actualmente en el chat                               |
-| Mostrar indicador de instrucciones personalizadas         | Off            | Muestra los indicadores de instrucciones personalizadas encima de las respuestas del asistente |
-| Mostrar indicador de búsqueda en la base de conocimientos | Off            | Muestra el progreso al buscar en la base de conocimientos                                      |
+| Mostrar indicador de contexto de selección                | Desactivado    | Muestra el objeto del modelo seleccionado actualmente en el chat                               |
+| Mostrar indicador de instrucciones personalizadas         | Desactivado    | Muestra los indicadores de instrucciones personalizadas encima de las respuestas del asistente |
+| Mostrar indicador de búsqueda en la base de conocimientos | Desactivado    | Muestra el progreso al buscar en la base de conocimientos                                      |
 
 ### Context compaction
 
 | Preferencia                         | Predeterminado | Descripción                                                                                                                                                                                                                         |
 | ----------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Compactación automática             | On             | Resumir automáticamente los mensajes antiguos al acercarse al límite del contexto                                                                                                                                                   |
+| Compactación automática             | Activado       | Resumir automáticamente los mensajes antiguos al acercarse al límite del contexto                                                                                                                                                   |
 | Umbral de compactación automática % | 80             | Porcentaje de la ventana de contexto del propio modelo a partir del cual se activa la compactación automática. The field accepts 25 to 100. Values below 50 act as 50 and values above 90 act as 90 |
 
 ### C# Script
 
 | Preferencia                                                     | Predeterminado | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | --------------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Permitir que el Asistente de IA ejecute C# Scripts directamente | Off            | Lets the assistant run its C# scripts itself. When off, the assistant opens each script and you run it. Unavailable until **Model metadata** is set to **Read/Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). Consulta [Dejar que el asistente cambie tu modelo](#letting-the-assistant-change-your-model) |
-| Previsualizar cambios                                           | On             | Mostrar el cuadro de diálogo de vista previa de cambios al ejecutar C# Scripts generados por IA desde el chat                                                                                                                                                                                                                                                                                                                |
+| Permitir que el Asistente de IA ejecute C# Scripts directamente | Desactivado    | Lets the assistant run its C# scripts itself. When off, the assistant opens each script and you run it. Unavailable until **Model metadata** is set to **Read/Write** under **Permissions**, and unavailable entirely under the `DisableCSharpScripts` [policy](xref:policies). Consulta [Dejar que el asistente cambie tu modelo](#letting-the-assistant-change-your-model) |
+| Previsualizar cambios                                           | Activado       | Mostrar el cuadro de diálogo de vista previa de cambios al ejecutar C# Scripts generados por IA desde el chat                                                                                                                                                                                                                                                                                                                |
 
 **Check for knowledge base updates on startup** and the **Open audit folder** button are on the **AI Features** page, above **AI Assistant**, and both also apply to the MCP server. Consulta @preferencias.
 
