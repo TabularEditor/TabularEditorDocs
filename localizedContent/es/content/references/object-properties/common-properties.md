@@ -1,6 +1,6 @@
 ---
 uid: object-properties-common
-title: Common properties
+title: Propiedades comunes
 author: Jeroen ter Heerdt
 updated: 2026-10-05
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Common properties
+# Propiedades comunes
 
 <!--
 SUMMARY: Properties that most objects in a semantic model share, such as Name, Description, Annotations and Lineage Tag.
@@ -25,25 +25,25 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-The properties on this page appear on many object types and work the same way on every object that has them. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. The object-specific pages link to these entries. For the other pages, see @object-properties.
+Las propiedades de esta página aparecen en muchos tipos de objetos y funcionan igual en todos los objetos que las tienen. Cada entrada indica el nombre de la propiedad en el Tabular Object Model (TOM), su tipo y su categoría. Las páginas específicas de cada objeto enlazan a estas entradas. Para las demás páginas, consulta @object-properties.
 
 ## Básico
 
 ### Nombre
 
-`Name` · string · Basic
+`Name` · string · Básico
 
-The name of the object. DAX references tables, columns, measures, hierarchies and user-defined functions by their name. Names must be unique among siblings, so two measures can't share a name. In most models, a measure also can't share a name with any column (see `ForceUniqueNames` on @object-properties-model). A KPI or a calculation group has no name of its own and takes its name from the object it belongs to.
+El nombre del objeto. DAX hace referencia a tablas, columnas, medidas, jerarquías y funciones definidas por el usuario por su nombre. Los nombres deben ser únicos entre elementos del mismo nivel, por lo que dos medidas no pueden compartir un nombre. En la mayoría de los modelos, una medida tampoco puede compartir nombre con ninguna columna (consulta `ForceUniqueNames` en @object-properties-model). Un KPI o un grupo de cálculo no tiene nombre propio y toma su nombre del objeto al que pertenece.
 
-When **Formula Fix-up** is enabled under **Tools > Preferences**, renaming an object updates the DAX expressions that refer to it. When it's disabled, a rename breaks the expressions that use the old name. See @formula-fix-up-dependencies.
+Cuando la **Corrección de fórmulas** está habilitada en **Herramientas > Preferencia**, cambiar el nombre de un objeto actualiza las expresiones DAX que hacen referencia a él. Cuando está deshabilitada, cambiar el nombre rompe las expresiones que usan el nombre anterior. Consulta @formula-fix-up-dependencies.
 
-To rename many objects at once, select them in the **TOM Explorer** and use batch rename, which supports regular expressions. See @duplicate-and-batch. The Best Practice Analyzer (BPA) rules @kb.bpa-trim-object-names and @kb.bpa-avoid-invalid-characters-names flag names with leading or trailing spaces and names with control characters.
+Para cambiar el nombre de muchos objetos a la vez, selecciónalos en el **Explorador TOM** y usa el renombrado por lotes, que admite expresiones regulares. Consulta @duplicate-and-batch. Las reglas del Best Practice Analyzer (BPA) @kb.bpa-trim-object-names y @kb.bpa-avoid-invalid-characters-names señalan los nombres con espacios al principio o al final, así como los nombres con caracteres de control.
 
 ### Descripción
 
-`Description` · string · Basic
+`Description` · string · Básico
 
-Free text that explains what the object is for. Power BI shows the description as a tooltip in the **Data** pane. Excel's PivotTable field list doesn't show descriptions. To translate descriptions, use `TranslatedDescriptions`.
+Texto libre que explica para qué sirve el objeto. Power BI muestra la descripción como información sobre herramientas en el panel **Datos**. Excel's PivotTable field list doesn't show descriptions. To translate descriptions, use `TranslatedDescriptions`.
 
 In Tabular Editor 3, the **TOM Explorer** has a **Description** column where you read and edit descriptions, and DAX code assist shows the description of a table, column or measure in its tooltip. When a measure, calculated column or calculated table has no description, the tooltip shows the first lines of its expression.
 
@@ -182,8 +182,8 @@ In Tabular Editor 3, the property only appears when at least one culture has a l
 
 ### Shown in Perspective
 
-`InPerspective` · per perspective · Translations, Perspectives, Security
+`InPerspective` · por perspectiva · Traducciones, Perspectivas, Seguridad
 
-Whether the object is included in each perspective of the model. A perspective shows a smaller part of the model to a group of users. Like `IsHidden`, perspectives aren't a security feature.
+Indica si el objeto está incluido en cada perspectiva del modelo. Una perspectiva muestra una parte más reducida del modelo a un grupo de usuarios. Al igual que `IsHidden`, las perspectivas no son una función de seguridad.
 
-When you select several objects, you can change their perspective membership at once in the Properties view. See @perspectives-translations. In Tabular Editor 3, the @perspective-editor shows the perspective membership of all tables, columns, hierarchies and measures as check boxes.
+Cuando seleccionas varios objetos, puedes cambiar de una sola vez su pertenencia a las perspectivas desde la vista de propiedades. Consulta @perspectivas-traducciones. En Tabular Editor 3, el @perspective-editor muestra la pertenencia a las perspectivas de todas las tablas, columnas, jerarquías y medidas en forma de casillas de verificación.
