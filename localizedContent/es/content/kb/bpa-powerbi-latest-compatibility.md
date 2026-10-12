@@ -2,7 +2,7 @@
 uid: kb.bpa-powerbi-latest-compatibility
 title: Usar el nivel de compatibilidad más reciente para los modelos de Power BI
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-09-23
 description: Regla de buenas prácticas que garantiza que los modelos de Power BI usen el nivel de compatibilidad más reciente para obtener funciones y rendimiento óptimos.
 ---
 
@@ -10,7 +10,7 @@ description: Regla de buenas prácticas que garantiza que los modelos de Power B
 
 ## Resumen
 
-Esta regla identifica los modelos de Power BI que no están usando el nivel de compatibilidad más reciente disponible. Usar el nivel más reciente garantiza el acceso a las funciones más nuevas, optimizaciones de rendimiento y correcciones de errores.
+This rule flags Power BI models below the highest compatibility level that your Tabular Editor 3 version supports. New model features, such as new DAX functions and TOM properties, require the newer levels.
 
 - Categoría: Gobernanza
 - Gravedad: Alta (3)
@@ -21,12 +21,12 @@ Esta regla identifica los modelos de Power BI que no están usando el nivel de c
 
 ## Por qué es importante
 
-- **Funciones ausentes**: nuevas funciones de DAX y capacidades del modelo no disponibles
-- **Compatibilidad futura**: actualizaciones más sencillas al usar niveles recientes
+- new DAX functions and model features aren't available below the level that introduces them
+- a model kept at a recent level needs smaller upgrades later
 
 ## Cuándo se activa esta regla
 
-En los modelos de Power BI, se activa cuando el nivel de compatibilidad está por debajo del máximo actual:
+The rule triggers for Power BI models whose compatibility level isn't the current maximum:
 
 ```csharp
 Model.Database.CompatibilityMode=="PowerBI" 
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### Corrección automática
 
-La regla de prácticas recomendadas incluye una corrección automática que establece el nivel de compatibilidad en el nivel más alto disponible en la instalación actual de Tabular Editor 3. Si tienes instalada una versión antigua de Tabular Editor 3, deberías actualizarla.
+The rule's automatic fix sets the compatibility level to the highest level your installed version of Tabular Editor 3 supports. To get a newer level, update Tabular Editor 3.
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -45,41 +45,43 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### Solución manual
 
-1. En Tabular Editor, ve a las propiedades de **Model**
-2. Establece el **nivel de compatibilidad** en el nivel más reciente disponible
-3. Prueba todas las expresiones y funcionalidades de DAX
-4. Implementa en el servicio Power BI
+1. In the TOM Explorer, select **Model** and expand **Database** in the **Properties** view.
+2. Set **Compatibility Level** to the latest level.
+3. Test the DAX expressions and features of the model.
+4. Deploy to the Power BI Service.
+
+See @update-compatibility-level.
 
 ## Causas habituales
 
 ### Causa 1: Modelo creado en Power BI Desktop
 
-Un modelo creado en Power BI Desktop no necesariamente tiene el nivel de compatibilidad más reciente.
+Power BI Desktop doesn't always create models at the latest compatibility level.
 
 ### Causa 2: Modelo creado con un nivel de compatibilidad inferior
 
-Modelo creado con una versión anterior de Power BI Desktop.
+An older version of Power BI Desktop created the model.
 
 ### Causa 3: Enfoque conservador
 
-Política del equipo: retrasar las actualizaciones.
+A team policy delays upgrades.
 
 ## Ejemplo
 
 ### Antes de la corrección
 
-```
+```text
 Model Compatibility Level: 1500
 Current Maximum Level: 1706
 ```
 
 ### Después de la corrección
 
-```
+```text
 Model Compatibility Level: 1706 (Latest)
 ```
 
-Acceso a nuevas capacidades, como [calendarios personalizados](xref:calendars) (1701+), [funciones definidas por el usuario en DAX](xref:udfs) (1702+), @user-context-calculated-columns (1705+) y el comportamiento de indexación de cadenas en una columna (1706+).
+The model can use [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), [user-context calculated columns](xref:user-context-calculated-columns) (1705+) and the `StringIndexingBehavior` column property (1706+).
 
 ## Nivel de compatibilidad
 
