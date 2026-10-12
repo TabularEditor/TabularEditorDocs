@@ -19,54 +19,54 @@ applies_to:
 
 # Requisitos del sistema
 
-Tabular Editor 3 is a Windows desktop application. From version 3.27.0 it is published on two .NET runtimes, for two processor architectures, in three package formats.
+Tabular Editor 3 es una aplicación de escritorio para Windows. A partir de la versión 3.27.0, se publica para dos runtimes de .NET, dos arquitecturas de procesador y en tres formatos de paquete.
 
-## Operating system
+## Sistema operativo
 
-- Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
+- Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
 
-Which Windows versions are supported at any given moment follows Microsoft's .NET supported OS policy for the runtime you install, so it can narrow over time independently of Tabular Editor.
+Las versiones de Windows compatibles en cada momento se rigen por la política de Microsoft sobre sistemas operativos compatibles con .NET para el runtime que instales; por lo tanto, la lista de sistemas compatibles puede reducirse con el tiempo, independientemente de Tabular Editor.
 
-## What is published
+## Qué se publica
 
-| Runtime                                                    | Arquitectura | Formats                                   |
-| ---------------------------------------------------------- | ------------ | ----------------------------------------- |
-| .NET 10 _(recommended)_ | x64, ARM64   | `.exe` installer, `.msi`, portable `.zip` |
-| .NET 8                                     | x64, ARM64   | `.exe` installer, `.msi`, portable `.zip` |
+| Runtime                                                    | Arquitectura | Formatos                                    |
+| ---------------------------------------------------------- | ------------ | ------------------------------------------- |
+| .NET 10 _(recomendado)_ | x64, ARM64   | instalador `.exe`, `.msi` y `.zip` portátil |
+| .NET 8                                     | x64, ARM64   | instalador `.exe`, `.msi` y `.zip` portátil |
 
-The .NET 10 and .NET 8 builds are _functionally identical_. Nothing is available in one and missing from the other, and the two can be installed side by side.
+Las compilaciones de .NET 10 y .NET 8 son _funcionalmente idénticas_. No hay nada disponible en una que falte en la otra, y ambas pueden instalarse una junto a la otra.
 
-ARM64 builds are native, from version 3.23.0 onwards.
+Las compilaciones ARM64 son nativas a partir de la versión 3.23.0.
 
 ## Entorno de ejecución para «.NET»
 
-| Build            | Needs                                                                                                                                                                                                                                                                                                        |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `.exe` installer | The matching [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet): [10](https://dotnet.microsoft.com/download/dotnet/10.0) or [8](https://dotnet.microsoft.com/download/dotnet/8.0). The installer offers to download and install it for you |
-| `.msi`           | The matching .NET Desktop Runtime, installed beforehand. The MSI does _not_ bring it along, which is what makes it suitable for unattended deployment                                                                                                                        |
-| Portable `.zip`  | Nothing. It is self-contained                                                                                                                                                                                                                                                                |
+| Compilación       | Necesita                                                                                                                                                                                                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Instalador `.exe` | El [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet) correspondiente: [10](https://dotnet.microsoft.com/download/dotnet/10.0) o [8](https://dotnet.microsoft.com/download/dotnet/8.0). El instalador se ofrece a descargarlo e instalarlo por ti |
+| `.msi`            | El .NET Desktop Runtime correspondiente, ya instalado. El MSI _no_ lo incluye, lo que lo hace adecuado para el despliegue sin supervisión                                                                                                                                           |
+| `.zip` portátil   | Nada. Es autónomo                                                                                                                                                                                                                                                                                   |
 
-It must be the _Desktop_ runtime. The ASP.NET Core runtime and the plain .NET runtime do not carry the Windows Forms and WPF libraries the application needs.
+Debe ser el runtime _Desktop_. El runtime de ASP.NET Core y el runtime base de .NET no incluyen las bibliotecas de Windows Forms y WPF que necesita la aplicación.
 
-## Choosing a build
+## Elegir una compilación
 
-Take the **.NET 10 x64 `.exe` installer** unless you have a reason not to. The reasons are:
+Elige el **instalador `.exe` x64 de .NET 10** salvo que tengas una razón para no hacerlo. Las razones son:
 
-- **ARM64**: you are on an ARM-based PC
-- **.NET 8**: your organization cannot install the .NET 10 desktop runtime yet
-- **`.msi`**: you are deploying centrally. See [silent installation](xref:installation-activation-basic)
-- **portable `.zip`**: you cannot install software on the machine, or you want several versions side by side
+- **ARM64**: usas un PC basado en ARM
+- **.NET 8**: tu organización aún no puede instalar el .NET Desktop Runtime de .NET 10
+- **`.msi`**: vas a realizar un despliegue centralizado. Consulta la [instalación silenciosa](xref:installation-activation-basic)
+- **`.zip` portátil**: no puedes instalar software en el equipo o quieres varias versiones en paralelo
 
-## Optional components
+## Componentes opcionales
 
-| Component                                                                                   | Needed for                                                                 | Notas                                                                                                                                                                                                      |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Microsoft Edge WebView2 runtime](https://developer.microsoft.com/microsoft-edge/webview2/) | The in-application **Get Started** page and the @ai-assistant | Present on current Windows installations. Where it is missing, Tabular Editor falls back to the built-in browser control or offers a link to open the page in your default browser         |
-| AI features                                                                                 | The @ai-assistant and the MCP server                          | An installer component, selected by default. It can be deselected during installation, and an administrator can disable AI features regardless with the `DisableAi` @policies |
+| Componente                                                                                     | Necesario para                                                                | Notas                                                                                                                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [runtime de Microsoft Edge WebView2](https://developer.microsoft.com/microsoft-edge/webview2/) | La página **Primeros pasos** de la aplicación y el @ai-assistant | Viene incluido en las instalaciones actuales de Windows. Si no está disponible, Tabular Editor recurre al control de navegador integrado o ofrece un enlace para abrir la página en tu navegador predeterminado                                     |
+| Funciones de IA                                                                                | El @ai-assistant y el servidor MCP                               | Un componente del instalador, seleccionado de forma predeterminada. Se puede desmarcar durante la instalación, y un administrador puede deshabilitar las funciones de IA de todos modos mediante la directiva `DisableAi` en @policies |
 
-## Where the downloads are
+## Dónde encontrar las descargas
 
-See @downloads for the current version, and @release-history for previous ones.
+Consulta @downloads para la versión actual y @release-history para las anteriores.
 
 ## Pasos a seguir
 
