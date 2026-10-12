@@ -2,7 +2,7 @@
 uid: te-cli-config
 title: Custom Configuration
 author: Peer Grønnerup
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -254,7 +254,7 @@ A machine-wide value (`HKEY_LOCAL_MACHINE`) takes precedence over a per-user one
 | `DisableMacros` | Blocks every `te macro` command. |
 | `DisableBpaDownload` | Blocks Best Practice Analyzer rules given as a URL. Rule files on disk and the built-in rules are unaffected. |
 | `DisableTelemetry` | Turns anonymous usage statistics off, whatever `disableTelemetry` in config says. |
-| `BlockUnsafeScripts` | Blocks `te script`, `te macro run` and `te bpa run --fix` when the code accesses files, the network, processes or external assemblies. See [What BlockUnsafeScripts blocks](xref:csharp-scripts#what-blockunsafescripts-blocks) for the blocked APIs. JSON output reports `blockedByPolicy`. |
+| `BlockUnsafeScripts` | Blocks `te script`, `te macro run` and `te bpa run --fix` when the code accesses files, the network, processes or external assemblies. See [What counts as staying within the model](xref:csharp-scripts#what-counts-as-staying-within-the-model) for the blocked APIs. JSON output reports `blockedByPolicy`. |
 
 Policies for update checks, error reports, DAX Optimizer, the DAX Package Manager, the AI Assistant and the MCP server don't affect the CLI. See @policies for the full list of policies and how to deploy them.
 
