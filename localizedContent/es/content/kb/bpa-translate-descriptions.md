@@ -1,12 +1,12 @@
 ---
 uid: kb.bpa-translate-descriptions
-title: Translate Descriptions for All Cultures
+title: Traducir las descripciones para todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
 description: Regla de buenas prácticas que garantiza que las descripciones de los objetos estén traducidas para todas las configuraciones regionales definidas.
 ---
 
-# Translate Descriptions for All Cultures
+# Traducir las descripciones para todas las configuraciones regionales
 
 ## Resumen
 
@@ -65,7 +65,7 @@ Descripciones creadas sin traducciones.
 
 ### Causa 2: Configuración regional agregada más tarde
 
-Culture added after descriptions were written.
+Se añadió una configuración regional después de escribir las descripciones.
 
 ### Causa 3: Traducción incompleta
 
