@@ -1,6 +1,6 @@
 ---
 uid: object-properties-security
-title: Role and security properties
+title: 角色与安全属性
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Role and security properties
+# 角色与安全属性
 
 <!--
 SUMMARY: Reference for the properties of roles, table permissions and role members, which define row-level and object-level security.
@@ -25,302 +25,302 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of roles, table permissions and role members. A table permission holds a role's security settings for one table. For properties that most objects share, see @object-properties-common.
+本页介绍角色、表格权限和角色成员的属性。表格权限包含角色针对单个表的安全设置。有关大多数对象共有的属性，请参见 @object-properties-common。
 
-Security in a semantic model is defined by roles. A role grants its members a level of access to the model and restricts what they see with:
+语义模型中的安全性由角色定义。角色会授予成员一定级别的模型访问权限，并通过以下方式限制他们能看到的内容：
 
-- **row-level security (RLS)**, which filters the rows of a table with a DAX expression per table, for example to show a sales manager only the sales of their own region
-- **object-level security (OLS)**, which hides whole tables or columns, including their metadata, for example a salary column that only HR can see. OLS needs compatibility level 1400 or higher.
+- **行级安全性 (RLS)**，它会按表使用 DAX 表达式筛选表中的行，例如让销售经理只能看到自己所在区域的销售数据
+- **对象级安全性 (OLS)**，它会隐藏整个表或列，包括其元数据，例如只有 HR 才能看到的薪资列。 OLS 需要 1400 或更高的兼容级别。
 
-The Tabular Object Model (TOM) stores both per table, in a _table permission_ of the role. You can also edit them from the table side: on a table, `RowLevelSecurity` and `ObjectLevelSecurity` show the settings for every role (see @object-properties-tables), and on a column, `ObjectLevelSecurity` does the same (see @object-properties-columns). Whichever way you edit them, Tabular Editor creates the table permissions when they're needed.
+在 Tabular Object Model (TOM) 中，这两种设置都会按表存储在角色的 _表格权限_ 中。你也可以从表端进行编辑：在表对象上，`RowLevelSecurity` 和 `ObjectLevelSecurity` 会显示所有角色的设置（参见 @object-properties-tables）；在列对象上，`ObjectLevelSecurity` 也同样如此（参见 @object-properties-columns）。无论你通过哪种方式编辑，Tabular Editor 都会在需要时创建表格权限。
 
-See @data-security-about, @data-security-setup-rls, @data-security-setup-ols, @data-security-testing and @roles-and-rls.
+参见 @data-security-about、@data-security-setup-rls、@data-security-setup-ols、@data-security-testing 和 @roles-and-rls。
 
 ## 角色
 
-A role is a named set of permissions, together with the users and groups who get them. A user who is a member of several roles gets the union of what the roles allow: if one role filters a table and another doesn't, the user sees all rows. Adding a user to an extra role can only widen what they see.
+角色是一个命名的权限集合，并包含被授予这些权限的用户和组。属于多个角色的用户会获得各角色允许内容的并集：如果一个角色对某个表进行了筛选，而另一个没有，则该用户会看到所有行。把用户添加到其他角色只会扩大他们能看到的范围。
 
-Members of the model's administrator roles and users with write access to the workspace in Power BI aren't restricted by RLS or OLS. In Power BI, RLS and OLS apply only to users with the workspace **Viewer** role, and not to the **Admin**, **Member** and **Contributor** roles, which have edit permission on the semantic model (see Microsoft's [Row-level security (RLS) with Power BI](https://learn.microsoft.com/fabric/security/service-admin-row-level-security)). Test security with a user who only has read access, or with the role impersonation features in @data-security-testing.
+模型的管理员角色成员，以及在 Power BI 中对 Workspace 具有写入权限的用户，不受 RLS 或 OLS 的限制。在 Power BI 中，RLS 和 OLS 仅适用于在 Workspace 中具有 **Viewer** 角色的用户，而不适用于具有 **Admin**、**Member** 和 **Contributor** 角色的用户，因为这些角色对语义模型拥有编辑权限 (参见 Microsoft 的 [使用 Power BI 的行级安全性 (RLS)](https://learn.microsoft.com/fabric/security/service-admin-row-level-security))。请使用仅具读取权限的用户进行安全性测试，或使用 @data-security-testing 中的角色模拟功能。
 
-### Common properties
+### 通用属性
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [名称](xref:object-properties-common#name)
+- [描述](xref:object-properties-common#description)
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [对象类型](xref:object-properties-common#object-type)
 
-### Table Permissions
+### 表格权限
 
-`MetadataPermission` · per table · Security · read-only · compatibility level 1400+ · _shortcut to_ the role's table permissions
+`MetadataPermission` · 每个表 · 安全性 · 只读 · 兼容级别 1400+ · _作为该角色表格权限的快捷方式_
 
-The object-level security (OLS) permission of each table in this role. Expand the property to see one entry per table, and pick a value for each:
+此角色中每个表的对象级安全性 (OLS) 权限。展开该属性，即可看到每个表对应的一项，并为每项选择一个值：
 
-| 值         | 含义                                                                                                                                                                                                   |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default` | No permission is set. Members of the role can see the table if `ModelPermission` allows reading.                                                                     |
-| `Read`    | Members of the role can see and query the table.                                                                                                                                     |
-| `None`    | The table is hidden from members of the role, together with its columns, measures and relationships. Queries and measures that refer to it return an error for them. |
+| 值    | 含义                                           |
+| ---- | -------------------------------------------- |
+| `默认` | 未设置权限。如果 `ModelPermission` 允许读取，角色成员就可以看到该表。 |
+| `读取` | 角色成员可以看到并查询该表。                               |
+| `无`  | 该表及其列、度量值和关系都会对角色成员隐藏。任何引用该表的查询和度量值都会返回错误。   |
 
-Calculation group tables aren't listed. Tabular Editor shows this property at compatibility level 1400 and higher. The collapsed value summarizes the settings, for example "OLS enabled on 2 out of 15 tables".
+不会列出计算组表。 Tabular Editor 会在兼容级别 1400 及更高级别时显示此属性。折叠后的值会汇总这些设置，例如“15 个表中有 2 个已启用 OLS”。
 
-To secure individual columns, use [OLS Column Permissions](#ols-column-permissions) on the table permission or `ObjectLevelSecurity` on the column.
+要保护单个列，可在表格权限中使用 [OLS 列权限](#ols-column-permissions)，或在列上使用 `ObjectLevelSecurity`。
 
 > [!NOTE]
-> The role also has a collection of table permission objects with the same display name. See [Table Permissions](#table-permissions-1) below.
+> 该角色还包含一个显示名称相同的表格权限对象集合。请参阅下方的[表格权限](#table-permissions-1)。
 
-### Row Level Security
+### 行级安全性
 
-`RowLevelSecurity` · per table · Security · read-only · _shortcut to_ the role's table permissions
+`RowLevelSecurity` · 每张表 · 安全性 · 只读 · _角色的表格权限的快捷入口_
 
-The row-level security (RLS) filter of each table in this role. Expand the property to see one entry per table. Each entry is a DAX expression that returns `TRUE` for the rows that members of the role can see, and an empty entry leaves that table unfiltered. Calculation group tables aren't listed. The collapsed value summarizes the settings, for example "RLS enabled on 1 out of 15 tables".
+此角色中每个表的行级安全性（RLS）筛选器。展开此属性可查看每个表对应的一个条目。每个条目都是一个 DAX 表达式：对于角色成员可以看到的行，它返回 `TRUE`；如果条目为空，则该表不应用筛选。此处不会列出计算组表。折叠后的值会汇总这些设置，例如“15 个表中有 1 个启用了 RLS”。
 
-A static filter hard-codes the allowed values:
+静态筛选器将允许的值硬编码为：
 
 ```dax
 'Region'[Country] = "Denmark"
 ```
 
-A dynamic filter looks up the current user, so one role serves all users:
+动态筛选器会查找当前用户，因此一个角色就能适用于所有用户：
 
 ```dax
 'Salesperson'[Email] = USERPRINCIPALNAME ()
 ```
 
-Filters flow along relationships from the one side to the many side, so filtering a dimension such as `Region` also filters the fact tables related to it. To make a filter flow in both directions of a relationship, set `SecurityFilteringBehavior` on the relationship (see @object-properties-relationships). The expression is evaluated for every row of the table it's on, so filter the smallest table you can, usually a dimension.
+筛选器会沿着关系从“一”端传播到“多”端，因此对 `Region` 这样的维度进行筛选时，也会筛选与其相关的事实表。若要让筛选器沿关系的两个方向传播，请在该关系上设置 `SecurityFilteringBehavior`（参见 @object-properties-relationships）。表达式会针对其所在表的每一行进行计算，因此应尽量筛选最小的表，通常是维度表。
 
-Setting a filter creates a table permission for the table if there isn't one. Clearing it removes the table permission again, unless the table permission also holds OLS settings. The filter itself is stored in `FilterExpression` of the table permission.
+设置筛选器时，如果该表还没有表格权限，则会为其创建一个。清除后会移除该表格权限，除非该表格权限还包含 OLS 设置。筛选器本身存储在表格权限的 `FilterExpression` 中。
 
-In Tabular Editor 3, check a filter by impersonating a user or role in a @table-preview or a @pivot-grid.
+在 Tabular Editor 3 中，可在 @table-preview 或 @pivot-grid 中模拟某个用户或角色，以检查筛选器效果。
 
-### Members
+### 成员
 
-`Members` · collection of role members · Translations, Perspectives, Security · read-only
+`Members` · 角色成员集合 · 翻译、透视、安全性 · 只读
 
-The users and groups who are members of the role. Click the ellipsis button to add, remove and edit members in the collection editor, or right-click the role and choose **Edit members...** (see @data-security-setup-rls). The collection holds two kinds of members:
+属于该角色的用户和组。单击省略号按钮，在集合编辑器中添加、删除和编辑成员；或者右键单击该角色并选择 **编辑成员...**（参见 @data-security-setup-rls）。该集合包含两类成员：
 
-- **Windows AD members** for SQL Server Analysis Services with on-premises Active Directory (see [Windows role member](#windows-role-member))
-- **Azure AD members** (external members) for Azure Analysis Services and Power BI, identified through Microsoft Entra ID (see [External role member](#external-role-member))
+- **Windows AD 成员**：适用于使用本地 Active Directory 的 SQL Server Analysis Services（参见 [Windows 角色成员](#windows-role-member)）
+- **Azure AD 成员**（外部成员）：适用于 Azure Analysis Services 和 Power BI，通过 Microsoft Entra ID 标识（参见 [外部角色成员](#external-role-member)）
 
-In Power BI and Fabric, role membership is often managed in the semantic model's security settings in the service. In Analysis Services, many teams manage members directly on the server. Tabular Editor deploys role members only if you select **Deploy Model Role Members**. If you clear the option, the roles in the target database keep their members, and a new database gets roles without members (see @deployment).
+在 Power BI 和 Fabric 中，角色成员资格通常通过服务端的语义模型安全设置进行管理。在 Analysis Services 中，许多团队直接在服务器上管理成员。 Tabular Editor 仅在你选中 **部署模型角色成员** 时才会部署角色成员。如果清除此选项，目标数据库中的角色会保留其成员，而新数据库中的角色将不包含成员（见 @deployment）。
 
-In Power BI, you can't add service principals as role members.
+在 Power BI 中，不能将服务主体添加为角色成员。
 
-Members that someone adds on the semantic model's **Security** page in the Power BI service are ordinary role members in the model. Through the XMLA endpoint, they're identical to members added in Tabular Editor: external members with `IdentityProvider` `AzureAD` and the user's object ID as `MemberID`. When you deploy with **Deploy Model Role Members**, the members in your model replace them. To keep the members added in the service, deploy without that option.
+在 Power BI 服务中，通过语义模型的 **安全性** 页面添加的成员，在模型中会被视为普通角色成员。通过 XMLA endpoint，它们与在 Tabular Editor 中添加的成员完全相同：都是外部成员，`IdentityProvider` 为 `AzureAD`，并以用户的对象 ID 作为 `MemberID`。使用 **部署模型角色成员** 进行部署时，模型中的成员会替换它们。想保留在服务中添加的成员，就在不选中该选项的情况下部署。
 
-### Model Permission
+### 模型权限
 
-`ModelPermission` · ModelPermission · Translations, Perspectives, Security
+`ModelPermission` · ModelPermission · 翻译、透视图和安全性
 
-The level of access the role gives its members to the whole model.
+角色授予其成员对整个模型的访问级别。
 
-| 值               | 含义                                                                                                                                                                                     |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `None`          | No access. Members can't connect to the model, whatever the other settings in the role allow.                                                          |
-| `Read`          | Members can read the model's metadata and query its data, subject to the role's RLS and OLS. This is the value for almost every role for report users. |
-| `ReadRefresh`   | Like `Read`, and members can also refresh the model.                                                                                                                   |
-| `Refresh`       | Members can refresh the model and can't query it, for example accounts that only run refreshes.                                                                        |
-| `Administrator` | Members have full control over the model, including changing it, and RLS and OLS don't apply to them. Analysis Services only.                          |
+| 值               | 含义                                                                  |
+| --------------- | ------------------------------------------------------------------- |
+| `None`          | 无访问权限。无论角色中的其他设置如何，成员都无法连接到模型。                                      |
+| `Read`          | 成员可以读取模型的元数据并查询其数据，但会受该角色的 RLS 和 OLS 约束。这是几乎所有面向 Report 用户的角色所使用的值。 |
+| `ReadRefresh`   | 与 `Read` 类似，但成员还可以刷新模型。                                             |
+| `Refresh`       | 成员可以刷新模型，但不能查询模型；例如，仅用于执行刷新的账户。                                     |
+| `Administrator` | 成员对模型拥有完全控制权，包括更改模型；并且 RLS 和 OLS 不对其生效。仅适用于 Analysis Services。      |
 
-A new role has no access until you set this property. If you add a row-level filter to a role whose `ModelPermission` is `None` and that has no table permissions yet, Tabular Editor sets it to `Read`.
+新角色在设置此属性之前没有任何访问权限。如果你为 `ModelPermission` 为 `None` 且尚未设置任何表格权限的角色添加行级筛选器，Tabular Editor 会将其 `ModelPermission` 设为 `Read`。
 
-Power BI and Fabric only support `Read` for roles in the model: Microsoft documents it as the only role permission you can set through the XMLA endpoint. Refresh, build and other permissions are managed with workspace roles and semantic model permissions in the service, and model roles in Power BI are only used for RLS and OLS. In the Power BI service, deploying a role with any other value fails with the error "Please set the permission level for your row-level security (RLS) roles to 'Read'".
+对于模型中的角色，Power BI 和 Fabric 仅支持 `Read`：Microsoft 文档指出，这是唯一可以通过 XMLA endpoint 设置的角色权限。刷新、构建及其他权限由服务中的 Workspace 角色和语义模型权限进行管理，而 Power BI 中的模型角色仅用于 RLS 和 OLS。在 Power BI 服务中，如果部署角色时使用了任何其他值，部署都会失败，并显示错误：“请将行级安全性 (RLS) 角色的权限级别设为 'Read'”。
 
-### Table Permissions
+### 表格权限
 
-`TablePermissions` · collection of table permissions · Translations, Perspectives, Security · read-only
+`TablePermissions` · 表格权限的集合 · 翻译、透视、安全性 · 只读
 
-The table permission objects of the role, one per table that has an RLS filter or OLS setting in this role (see [Table permission](#table-permission)).
+该角色的表格权限对象集合；在此角色中，每个具有 RLS 筛选器或 OLS 设置的表各对应一个对象（参见 [表格权限](#table-permission)）。
 
-The **Properties** view doesn't show this collection. Edit the same settings through [Row Level Security](#row-level-security) and [Table Permissions](#table-permissions) (OLS) above, and Tabular Editor adds and removes the table permissions. In a C# script, use the collection to loop over the secured tables of a role:
+**属性**视图不显示此集合。这些设置可通过上面的 [行级安全性](#row-level-security) 和 [表格权限](#table-permissions) (OLS) 进行编辑，Tabular Editor 会自动添加和删除表格权限。在 C# Script 中，可使用此集合遍历角色中受保护的表：
 
 ```csharp
 foreach (var tp in Selected.Role.TablePermissions)
     Output(tp.Table.Name + ": " + tp.FilterExpression);
 ```
 
-In Tabular Editor 3, the **TOM Explorer** shows the table permissions of a role under the role. A table permission whose settings are all back at their defaults has no effect and is shown dimmed.
+在 Tabular Editor 3 中，**TOM Explorer** 会在该角色下显示其表格权限。如果某个表格权限的所有设置都恢复为默认值，它就不会生效，并会以灰显方式显示。
 
-## Table permission
+## 表格权限
 
-A table permission holds the security settings of one role for one table: the RLS filter and the OLS permissions of the table and its columns. The table permission is named after its table, and you can't rename it.
+表格权限保存一个角色针对一张表的安全设置：包括 RLS 筛选器，以及该表及其列的 OLS 权限。表格权限以其所属表命名，且不能重命名。
 
-Tabular Editor creates a table permission when you set an RLS filter or an OLS permission for a table in a role. When you clear the RLS filter and the table permission holds no OLS settings, Tabular Editor removes it. Setting an OLS permission back to `Default` keeps the table permission in place, without effect, until you delete it. In Tabular Editor 3, you can also add one yourself: right-click the role and choose **Add table permission...**. @data-security-setup-rls describes this, and how to test a filter expression in a DAX query before you use it.
+当你在角色中为某个表设置 RLS 筛选器或 OLS 权限时，Tabular Editor 会创建一个表格权限。当你清除 RLS 筛选器，且该表格权限不包含任何 OLS 设置时，Tabular Editor 会将其移除。将 OLS 权限设回 `Default` 后，表格权限会保留，但不会生效，直到你将其删除。在 Tabular Editor 3 中，你也可以手动添加：右键单击该角色，然后选择 **添加表格权限...**。 @data-security-setup-rls 介绍了这一点，以及如何在使用前先在 DAX 查询中测试筛选表达式。
 
-### Common properties
+### 通用属性
 
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Error Message](xref:object-properties-common#error-message)
-- [State](xref:object-properties-common#state)
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [错误消息](xref:object-properties-common#error-message)
+- [状态](xref:object-properties-common#state)
 
-The **Properties** view doesn't show `Name` or `ObjectType` for table permissions. `RoleName` and `TableName` in the **Metadata** category identify the table permission.
+对于表格权限，**属性**视图不显示 `Name` 或 `ObjectType`。**元数据** 类别中的 `RoleName` 和 `TableName` 用于标识此表格权限。
 
 ### 角色
 
-`RoleName` · string · Metadata · read-only · _shortcut to_ the name of the role
+`RoleName` · string · 元数据 · 只读 · _指向角色名称的快捷方式_
 
-The name of the role this table permission belongs to.
+此表格权限所属角色的名称。
 
 ### 表
 
-`TableName` · string · Metadata · read-only · _shortcut to_ the name of the table
+`TableName` · string · 元数据 · 只读 · _指向表名称的快捷方式_
 
-The name of the table this table permission secures.
-
-### 角色
-
-`Role` · ModelRole · Options · read-only
-
-The role this table permission belongs to, for C# scripts that go from a table permission back to its role. The **Properties** view doesn't show it and shows `RoleName` in the **Metadata** category.
-
-### OLS Column Permissions
-
-`ColumnPermissions` · per column · Security · read-only · compatibility level 1400+
-
-The object-level security (OLS) permission of each column of the table in this role. Expand the property to see one entry per column. The values are the same as for a table:
-
-| 值         | 含义                                                                                                                                             |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default` | No permission is set. The column follows the table's permission.                                               |
-| `Read`    | Members of the role can see and query the column.                                                                              |
-| `None`    | The column is hidden from members of the role. Queries and measures that refer to it return an error for them. |
-
-Use column-level OLS to hide sensitive columns, such as salaries or personal data, while the rest of the table stays available. Measures that refer to a secured column fail for members of the role. To see which objects refer to a column, right-click it in the **TOM Explorer** and choose **Show dependencies...** (see @formula-fix-up-dependencies).
-
-This is the same setting as `ObjectLevelSecurity` on the column (see @object-properties-columns).
-
-### Filter Expression
-
-`FilterExpression` · string · Translations, Perspectives, Security
-
-The row-level security filter for the table in this role: a DAX expression that returns `TRUE` for the rows that members of the role can see. An empty filter leaves the table unfiltered for this role. Edit it in the **Expression Editor**, or through `RowLevelSecurity` on the role or on the table. For examples, see [Row Level Security](#row-level-security).
-
-The expression is evaluated in the context of each row of the table, so you refer to its columns directly, for example `'Region'[Country] = "Denmark"`. To use values from other tables, use `RELATED` or `LOOKUPVALUE`. To look up the current user, use `USERPRINCIPALNAME ()` or `USERNAME ()`.
-
-### OLS Table Permission
-
-`MetadataPermission` · MetadataPermission · Translations, Perspectives, Security · compatibility level 1400+
-
-The object-level security (OLS) permission of the table in this role.
-
-| 值         | 含义                                                                                                                   |
-| --------- | -------------------------------------------------------------------------------------------------------------------- |
-| `Default` | No permission is set. Members of the role can see the table.                         |
-| `Read`    | Members of the role can see and query the table.                                                     |
-| `None`    | The table is hidden from members of the role, together with its columns, measures and relationships. |
-
-This is the same setting as [Table Permissions](#table-permissions) on the role and `ObjectLevelSecurity` on the table.
-
-You can't combine RLS and OLS from different roles. A user who is a member of such a combination of roles gets an error at query time, in SQL Server Analysis Services, Azure Analysis Services and Power BI alike. See @data-security-about, [Combine OLS with RLS](xref:data-security-setup-ols#5-combine-ols-with-rls) and Microsoft's [object-level security restrictions](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions).
-
-You also can't hide a table with OLS if that breaks a chain of relationships between other tables. The engine rejects it with an error.
-
-## Windows role member
-
-A Windows role member is a Windows user or group from Active Directory, for example `CONTOSO\SalesManagers`. SQL Server Analysis Services uses Windows members, and Azure Analysis Services and Power BI use [external role members](#external-role-member). The Power BI service rejects a Windows member at deployment with the error "Only Microsoft Entra users or groups are supported. Use 'AzureAD' as the value of the identity provider".
-
-Add groups where you can: adding and removing people from a group doesn't require changing or redeploying the model.
-
-### Common properties
-
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
-
-The **Properties** view doesn't show `Name` for role members. `MemberName` identifies the member.
-
-### Member ID
-
-`MemberID` · string · Options
-
-The security identifier (SID) of the user or group, for example `S-1-5-21-...`. You can leave it empty and only fill in `MemberName`. In Tabular Editor 3, when you pick the member with the Windows object picker (the ellipsis button on `MemberName`), Tabular Editor fills in both the name and the SID.
-
-When you deploy to SQL Server Analysis Services, Tabular Editor deploys `MemberID` as it is. It only removes member IDs when the target is Azure Analysis Services or Power BI (see `MemberID` under [External role member](#external-role-member)).
-
-When you deploy a Windows member with only `MemberName` set, SQL Server Analysis Services looks up the account and stores its SID in `MemberID`. It rejects an account that doesn't exist with an error like "The 'Sales' role includes domain account that does not exist". This was observed on SQL Server 2025 Analysis Services.
-
-### Member Name
-
-`MemberName` · string · Options
-
-The name of the Windows user or group in `DOMAIN\name` format, for example `CONTOSO\SalesManagers`. If the account doesn't exist in a domain the server trusts, deployment fails.
+此表格权限所保护的表名称。
 
 ### 角色
 
-`Role` · ModelRole · Options · read-only
+`Role` · ModelRole · 选项 · 只读
 
-The role this member belongs to, for C# scripts that go from a member back to its role. The **Properties** view doesn't show it.
+此表格权限所属的角色，供 C# Script 在从表格权限回溯到其角色时使用。**属性**视图不会显示它，而会在 **元数据** 类别中显示 `RoleName`。
 
-## External role member
+### OLS 列权限
 
-An external role member is a user or group identified by an external identity provider, which in practice is Microsoft Entra ID (formerly Azure Active Directory). Azure Analysis Services and Power BI use external members. In Tabular Editor, add them as **Azure AD Member** in the role's `Members` collection (see @data-security-setup-rls).
+`ColumnPermissions` · 每列 · 安全性 · 只读 · 兼容级别 1400+
 
-### Common properties
+该角色中此表每一列的对象级安全性 (OLS) 权限。展开此属性可查看每列一个条目。其取值与表的设置相同：
 
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+| 值         | 含义                                  |
+| --------- | ----------------------------------- |
+| `Default` | 未设置任何权限。该列遵循表的权限设置。                 |
+| `Read`    | 角色成员可以查看并查询该列。                      |
+| `None`    | 该列对角色成员隐藏。对角色成员而言，引用该列的查询和度量值将返回错误。 |
 
-The **Properties** view doesn't show `Name` for role members. `MemberName` identifies the member.
+使用列级 OLS 隐藏敏感列，例如工资或个人数据，同时保持表的其余部分仍可用。对于角色成员，引用受保护列的度量值会失败。要查看哪些对象引用了某列，请在 **TOM Explorer** 中右键单击该列，然后选择 **显示依赖项...**（参见 @formula-fix-up-dependencies）。
 
-### Identity Provider
+这与列上的 `ObjectLevelSecurity` 设置相同（参见 @object-properties-columns）。
 
-`IdentityProvider` · string · Options
+### 筛选表达式
 
-The identity provider that authenticates the member. Tabular Editor sets it to `AzureAD` when you add an external member. That's the only value Azure Analysis Services and Power BI use.
+`FilterExpression` · string · 翻译、透视、安全性
 
-### Member ID
+这是此角色中该表的行级安全性筛选器：一个会对角色成员可见的行返回 `TRUE` 的 DAX 表达式。空筛选器会使该表在此角色中不受筛选。你可以在 **表达式编辑器** 中编辑它，也可以通过角色或表的 `RowLevelSecurity` 属性进行编辑。示例见 [行级安全性](#row-level-security)。
 
-`MemberID` · string · Options
+该表达式会在表的每一行上下文中进行求值，因此可直接引用其列，例如 `'Region'[Country] = "Denmark"`。如果要使用其他表中的值，可以用 `RELATED` 或 `LOOKUPVALUE`。如果要查找当前用户，可以用 `USERPRINCIPALNAME ()` 或 `USERNAME ()`。
 
-The object ID of the user or group in Microsoft Entra ID. SQL Server Analysis Services requires it: SQL Server 2025 Analysis Services rejects an external member without a member ID with the error "MemberID must be specified when creating an External RoleMembership object". For Azure Analysis Services and Power BI, leave it empty. Microsoft's examples add external members with only `MemberName` and `IdentityProvider`.
+### OLS 表格权限
 
-Member IDs must not be set when you deploy to Azure Analysis Services or Power BI. When the deployment target is Azure Analysis Services or the Power BI service, Tabular Editor removes the member IDs of all role members, including the members it keeps from the target database. Deployments to SQL Server Analysis Services keep them. You can't turn this behavior on or off.
+`MetadataPermission` · MetadataPermission · 翻译、透视、安全性 · 兼容级别 1400+
 
-### Member Name
+此角色中该表的对象级安全性 (OLS) 权限。
 
-`MemberName` · string · Options
+| 值     | 含义                          |
+| ----- | --------------------------- |
+| `默认值` | 未设置任何权限。角色成员可以看到该表。         |
+| `读取`  | 角色成员可以看到并查询该表。              |
+| `无`   | 该表会对角色成员隐藏，其列、度量值和关系也会一并隐藏。 |
 
-The name that identifies the user or group. For a user, it's the user principal name, usually the email address, for example `anna@contoso.com`. The accepted formats for groups and other members depend on the target.
+这与角色上的 [表格权限](#table-permissions) 以及表上的 `ObjectLevelSecurity` 是同一项设置。
 
-In Azure Analysis Services:
+不能将来自不同角色的 RLS 和 OLS 组合使用。属于这类角色组合的用户在查询时会报错，在 SQL Server Analysis Services、Azure Analysis Services 和 Power BI 中均是如此。另见 @data-security-about、[将 OLS 与 RLS 结合使用](xref:data-security-setup-ols#5-combine-ols-with-rls) 以及 Microsoft 的 [对象级安全性限制](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions)。
 
-- add a security group as `obj:<group object ID>@<tenant ID>` or by its email address, and a Microsoft 365 group by its email address
-- add a service principal as `app:<application ID>@<tenant ID>`
-- every name is checked in Microsoft Entra ID at deployment, and a display name of a user or group, or a user who doesn't exist, fails with the error "was not found in your organization's Microsoft Entra ID"
-- the name is stored as you typed it, so an `obj:` name stays an `obj:` name, and `MemberID` stays empty
+如果使用 OLS 隐藏某个表会破坏其他表之间的关系链，则也不能这样做。引擎会返回错误并拒绝该操作。
 
-In the Power BI service:
+## Windows 角色成员
 
-- a user's user principal name works, and so does `obj:<object ID>@<tenant ID>`, which the service rewrites to the user principal name
-- add a security group as `obj:<group object ID>@<tenant ID>`, which the service keeps as typed, or a mail-enabled security group by its email address
-- a display name of a user or group, the address of a user who doesn't exist or a Microsoft 365 group fails with the error "There are invalid rolememberships in roles"
-- the service fills in `MemberID` with the user's object ID
+Windows 角色成员是来自 Active Directory 的 Windows 用户或组，例如 `CONTOSO\SalesManagers`。 SQL Server Analysis Services 使用 Windows 成员，而 Azure Analysis Services 和 Power BI 使用 [外部角色成员](#external-role-member)。 Power BI 服务在部署时会拒绝 Windows 成员，并显示错误：“仅支持 Microsoft Entra 用户或组。请将标识提供者的值设为 'AzureAD'。"
 
-In the Power BI service's security settings, you add users and groups by email address or name. Those settings support distribution groups, mail-enabled groups and Microsoft Entra security groups, and don't support Microsoft 365 groups.
+尽可能添加组：向组中添加或移除人员无需更改或重新部署模型。
 
-### Member Type
+### 常见属性
 
-`MemberType` · RoleMemberType · Options
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [对象类型](xref:object-properties-common#object-type)
 
-Whether the member is a single user or a group.
+**属性** 视图不会显示角色成员的 `Name`。 `MemberName` 用于标识该成员。
 
-| 值       | 含义                                                                                |
-| ------- | --------------------------------------------------------------------------------- |
-| `Auto`  | The server works out whether the member is a user or a group.     |
-| `User`  | The member is an individual user.                                 |
-| `Group` | The member is a security group, and all its members get the role. |
+### 成员 ID
 
-Windows role members don't have this property: the server works out from the account whether it's a user or a group.
+`MemberID` · 字符串 · 选项
 
-Azure Analysis Services and the Power BI service ignore the value you set:
+用户或组的安全标识符 (SID)，例如 `S-1-5-21-...`。可以将其留空，只填写 `MemberName`。在 Tabular Editor 3 中，使用 Windows 对象选取器选择成员时（`MemberName` 上的省略号按钮），Tabular Editor 会同时填入名称和 SID。
 
-- Azure Analysis Services stores every external member as `Auto`, whether you set `Auto`, `User` or `Group`, for users and groups alike.
-- the Power BI service works out the type itself and stores a user as `User` and a group as `Group`, whether you set `Auto`, `User` or `Group`. It also fills in `MemberID` for both. In Power BI, leave this property at `Auto`.
+部署到 SQL Server Analysis Services 时，Tabular Editor 会按原样部署 `MemberID`。只有当目标是 Azure Analysis Services 或 Power BI 时，它才会移除成员 ID（请参阅[外部角色成员](#external-role-member)中的 `MemberID`）。
+
+部署仅设置了 `MemberName` 的 Windows 成员时，SQL Server Analysis Services 会查找该账户，并将其 SID 存储在 `MemberID` 中。如果账户不存在，它会拒绝该账户，并显示类似于“'Sales' 角色包含一个不存在的域账户”这样的错误。这是在 SQL Server 2025 Analysis Services 上观察到的行为。
+
+### 成员名称
+
+`MemberName` · 字符串 · 选项
+
+Windows 用户或组的名称，采用 `DOMAIN\name` 格式，例如 `CONTOSO\SalesManagers`。如果该帐户不存在于服务器信任的域中，部署将失败。
 
 ### 角色
 
-`Role` · ModelRole · Options · read-only
+`角色` · ModelRole · 选项 · 只读
 
-The role this member belongs to, for C# scripts that go from a member back to its role. The **Properties** view doesn't show it.
+此成员所属的角色，供 C# Script 从成员反查到其角色时使用。在 **属性** 视图中不会显示该项。
+
+## 外部角色成员
+
+外部角色成员是由外部标识提供者标识的用户或组；在实际场景中，这通常是 Microsoft Entra ID（前称 Azure Active Directory）。 Azure Analysis Services 和 Power BI 使用外部成员。在 Tabular Editor 中，将其作为 **Azure AD Member** 添加到角色的 `Members` 集合中（参见 @data-security-setup-rls）。
+
+### 通用属性
+
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [对象类型](xref:object-properties-common#object-type)
+
+**属性**视图中不显示角色成员的 `Name`。 `MemberName` 用于标识该成员。
+
+### 标识提供者
+
+`IdentityProvider` · string · 选项
+
+对该成员进行身份验证的标识提供者。添加外部成员时，Tabular Editor 会将其设置为 `AzureAD`。这是 Azure Analysis Services 和 Power BI 使用的唯一值。
+
+### 成员 ID
+
+`MemberID` · string · 选项
+
+Microsoft Entra ID 中用户或组的对象 ID。 SQL Server Analysis Services 要求这样：SQL Server 2025 Analysis Services 会拒绝未设置成员 ID 的外部成员，并报错“MemberID must be specified when creating an External RoleMembership object”，即在创建 External RoleMembership 对象时必须指定 MemberID。对于 Azure Analysis Services 和 Power BI，把它留空即可。 Microsoft 的示例仅使用 `MemberName` 和 `IdentityProvider` 添加外部成员。
+
+部署到 Azure Analysis Services 或 Power BI 时，不得设置成员 ID。当部署目标为 Azure Analysis Services 或 Power BI 服务时，Tabular Editor 会移除所有角色成员的成员 ID，包括它从目标数据库中保留下来的那些成员的成员 ID。部署到 SQL Server Analysis Services 时会保留这些 ID。你无法启用或关闭此行为。
+
+### 成员名称
+
+`MemberName` · string · 选项
+
+用于标识用户或组的名称。对于用户，它是用户主体名称，通常就是电子邮件地址，例如 `anna@contoso.com`。组和其他成员支持的格式取决于目标。
+
+在 Azure Analysis Services 中：
+
+- 可将安全组以 `obj:<group object ID>@<tenant ID>` 的形式添加，或通过其电子邮件地址添加；Microsoft 365 组则通过其电子邮件地址添加
+- 可将服务主体以 `app:<application ID>@<tenant ID>` 的形式添加
+- 部署时会在 Microsoft Entra ID 中检查每个名称；如果使用用户或组的显示名称，或使用不存在的用户，则会失败，并显示错误 "was not found in your organization's Microsoft Entra ID"
+- 名称会按你输入的内容原样存储，因此 `obj:` 名称仍会保持为 `obj:`，而 `MemberID` 仍为空
+
+在 Power BI 服务中：
+
+- 用户的用户主体名称可用，`obj:<object ID>@<tenant ID>` 也可用，但服务会将其改写为用户主体名称
+- 可将安全组以 `obj:<group object ID>@<tenant ID>` 的形式添加，服务会按输入原样保留；也可通过其电子邮件地址添加启用邮件的安全组
+- 使用用户或组的显示名称、使用不存在的用户地址，或使用 Microsoft 365 组都会失败，并显示错误 "There are invalid rolememberships in roles"
+- 服务会用用户的对象 ID 填充 `MemberID`
+
+在 Power BI 服务的安全设置中，你可以按电子邮件地址或名称添加用户和组。这些设置支持通讯组、启用邮件的组和 Microsoft Entra 安全组，不支持 Microsoft 365 组。
+
+### 成员类型
+
+`MemberType` · RoleMemberType · 选项
+
+指定成员是单个用户还是组。
+
+| 值       | 含义                    |
+| ------- | --------------------- |
+| `Auto`  | 服务器会判断该成员是用户还是组。      |
+| `User`  | 该成员是单个用户。             |
+| `Group` | 该成员是安全组，其所有成员都会获得该角色。 |
+
+Windows 角色成员没有此属性：服务器会根据账户判断其是用户还是组。
+
+Azure Analysis Services 和 Power BI 服务会忽略你设置的值：
+
+- Azure Analysis Services 会将每个外部成员都存储为 `Auto`，无论你将其设置为 `Auto`、`User` 还是 `Group`，对用户和组都一样。
+- the Power BI 服务会自行判断类型，并将用户存储为 `User`、将组存储为 `Group`，无论你将其设置为 `Auto`、`User` 还是 `Group`。它还会为两者填入 `MemberID`。在 Power BI 中，将此属性保留为 `Auto`。
+
+### 角色
+
+`角色` · ModelRole · 选项 · 只读
+
+此成员所属的角色，供在 C# Script 中从成员反查其角色时使用。**属性** 视图不会显示该项。
