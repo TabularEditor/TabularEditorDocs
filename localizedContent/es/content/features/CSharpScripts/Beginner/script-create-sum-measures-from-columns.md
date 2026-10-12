@@ -17,7 +17,7 @@ applies_to:
 
 Si quieres crear rápidamente varias medidas que hagan SUM sobre las columnas que selecciones, este script lo hace por ti.
 
-## Script
+## Secuencia de comandos
 
 ### Crear medidas a partir de columnas
 
