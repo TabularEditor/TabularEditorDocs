@@ -1,6 +1,6 @@
 ---
 uid: object-properties-perspectives-cultures
-title: Perspective and culture properties
+title: Propiedades de las perspectivas y configuraciones regionales
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Perspective and culture properties
+# Propiedades de las perspectivas y configuraciones regionales
 
 <!--
 SUMMARY: Reference for the properties of perspectives and cultures (translations), including linguistic metadata and translation statistics.
@@ -25,133 +25,133 @@ SUMMARY: Reference for the properties of perspectives and cultures (translations
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of perspectives and cultures. For properties that most objects share, see @object-properties-common.
+En esta página se describen las propiedades de las perspectivas y las configuraciones regionales. Para ver las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
-To add or remove perspectives and cultures, use the **Perspectives** and **Cultures** collections on the model (see @object-properties-model), or right-click the **Perspectives** or **Translations** folder in the **TOM Explorer**. Tabular Editor 2 uses the same folder names. See @perspectives-translations. To create and change perspectives and cultures with a C# script, see @how-to-work-with-perspectives-translations.
+Para agregar o quitar perspectivas y configuraciones regionales, usa las colecciones **Perspectivas** y **Configuraciones regionales** del modelo (consulta @object-properties-model), o haz clic con el botón derecho en la carpeta **Perspectivas** o **Traducciones** del **Explorador TOM**. Tabular Editor 2 usa los mismos nombres de carpeta. Consulta @perspectivas-traducciones. Para crear y cambiar perspectivas y configuraciones regionales mediante un C# Script, consulta @how-to-work-with-perspectives-translations.
 
 ## Perspectiva
 
-A perspective is a named subset of the model: a selection of tables, columns, measures and hierarchies for a group of users. For example, a `Sales` perspective shows only the objects that the sales team needs. In client tools that support perspectives, such as Excel, users pick a perspective and see only the objects in it. Power BI report authors can't pick a perspective in the field list, but you can use one when you connect to the model through the XMLA endpoint or in a personalized visual.
+Una perspectiva es un subconjunto con nombre del modelo: una selección de tablas, columnas, medidas y jerarquías para un grupo de usuarios. Por ejemplo, una perspectiva `Sales` muestra solo los objetos que necesita el equipo de ventas. En las herramientas cliente que admiten perspectivas, como Excel, los usuarios eligen una perspectiva y solo ven los objetos que contiene. Los autores de Report de Power BI no pueden elegir una perspectiva en la lista de campos, pero puedes usar una al conectarte al modelo a través del punto de conexión XMLA o en un Visual personalizado.
 
-In the Power BI service, you connect to a perspective through the XMLA endpoint by adding `Cube=<perspective name>` to the connection string. That only changes which objects the schema information lists, and DAX queries can still use every table and measure in the model.
+En el servicio de Power BI, te conectas a una perspectiva a través del punto de conexión XMLA agregando `Cube=<perspective name>` a la cadena de conexión. Eso solo cambia qué objetos enumera la información del esquema; las consultas DAX pueden seguir usando todas las tablas y medidas del modelo.
 
 <!-- TODO (not verifiable from TE3 source): whether personalized visuals in the Power BI service still use perspectives. -->
 
 > [!NOTE]
-> Perspectives don't restrict access. A user can query every object in the model, whichever perspective they use. To restrict access, use @roles-and-rls.
+> Las perspectivas no restringen el acceso. Un usuario puede consultar cualquier objeto del modelo, independientemente de la perspectiva que utilice. Para restringir el acceso, usa @roles-and-rls.
 
-A perspective has no properties of its own beyond the common ones. You choose which objects it contains on the objects themselves, with `InPerspective` (see [Shown in Perspective](xref:object-properties-common#shown-in-perspective)), or, in Tabular Editor 3, for many objects at once in the @perspective-editor.
+Una perspectiva no tiene propiedades propias, aparte de las comunes. Eliges qué objetos contiene la perspectiva en los propios objetos, con `InPerspective` (consulta [Mostrado en perspectiva](xref:object-properties-common#shown-in-perspective)) o, en Tabular Editor 3, para muchos objetos a la vez, en el @perspective-editor.
 
-The Best Practice Analyzer (BPA) rule @kb.bpa-perspectives-no-objects flags perspectives that contain no tables, and @kb.bpa-translate-perspectives flags perspectives whose name isn't translated in every culture.
+La regla del Best Practice Analyzer (BPA) @kb.bpa-perspectives-no-objects marca las perspectivas que no contienen tablas, y @kb.bpa-translate-perspectives marca las perspectivas cuyo nombre no está traducido en todas las configuraciones regionales.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
-- [Translated Names](xref:object-properties-common#translated-names)
-- [Translated Descriptions](xref:object-properties-common#translated-descriptions)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Nombres traducidos](xref:object-properties-common#translated-names)
+- [Descripciones traducidas](xref:object-properties-common#translated-descriptions)
 
-## Culture
+## Configuración regional
 
-A culture holds the translations of the model for one language: the translated names, descriptions and display folders of its objects, and the linguistic metadata for that language. Client tools show the culture that matches the user's language settings, and the untranslated names when no culture matches.
+Una configuración regional contiene las traducciones del modelo para un idioma: los nombres traducidos, las descripciones traducidas y las carpetas de visualización traducidas de sus objetos, así como los metadatos lingüísticos de ese idioma. Las herramientas cliente muestran la configuración regional que coincide con la configuración de idioma del usuario y, cuando no hay ninguna que coincida, los nombres sin traducir.
 
-The `Name` of a culture is the culture code, for example `da-DK` or `fr-FR`. It must be a valid culture name, and each culture can only appear once in the model. In Tabular Editor 3, the **Properties** view labels it **Language** and lists the cultures to pick from.
+El `Name` de una configuración regional es el código de la configuración regional, por ejemplo `da-DK` o `fr-FR`. Debe ser un nombre de configuración regional válido, y cada configuración regional solo puede aparecer una vez en el modelo. En Tabular Editor 3, la vista **Propiedades** lo etiqueta como **Idioma** y muestra una lista de configuraciones regionales para elegir.
 
-Translations are edited on each object, with `TranslatedNames`, `TranslatedDescriptions` and `TranslatedDisplayFolders`, or, in Tabular Editor 3, for many objects at once in the @metadata-translation-editor. To exchange translations with translators, see @import-export-translations.
+Las traducciones se editan en cada objeto, con `TranslatedNames`, `TranslatedDescriptions` y `TranslatedDisplayFolders`, o, en Tabular Editor 3, para muchos objetos a la vez en @metadata-translation-editor. Para intercambiar traducciones con traductores, consulta @import-export-translations.
 
-The translation statistics properties show how much of the model is translated in this culture, for each type of object. Tabular Editor computes them, and they aren't stored in the model. Each value has the form `12 of 40`, the number of translations out of the total number of objects of that type in the model, hidden objects included. For names, a translation only counts when it isn't empty and differs from the object's untranslated name. To find the objects that are missing a translation, use the BPA rules @kb.bpa-translate-visible-names, @kb.bpa-translate-descriptions and @kb.bpa-translate-display-folders.
+Las propiedades de estadísticas de traducción muestran qué parte del modelo está traducida en esta configuración regional, para cada tipo de objeto. Tabular Editor las calcula y no se almacenan en el modelo. Cada valor tiene el formato `12 of 40`: el número de traducciones sobre el total de objetos de ese tipo en el modelo, incluidos los objetos ocultos. En el caso de los nombres, una traducción solo cuenta si no está vacía y es distinta del nombre sin traducir del objeto. Para encontrar los objetos a los que les falta una traducción, usa las reglas de BPA @kb.bpa-translate-visible-names, @kb.bpa-translate-descriptions y @kb.bpa-translate-display-folders.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [Nombre](xref:object-properties-common#name)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Altered
 
-`Altered` · bool (empty when mixed) · Basic · compatibility level 1571+ · _shortcut to_ the **Altered** flag of every translation in the culture
+`Altered` · bool (vacío cuando hay valores mixtos) · Básico · nivel de compatibilidad 1571+ · _acceso directo al_ indicador **Altered** de cada traducción de la configuración regional
 
-Each translation in a culture carries an _altered_ flag in the Tabular Object Model (TOM), which translation tools use to mark translations that a person has reviewed or changed. This property sums up the flags of all translations in the culture:
+Cada traducción de una configuración regional lleva un indicador _altered_ en el Tabular Object Model (TOM), que las herramientas de traducción utilizan para marcar las traducciones que una persona ha revisado o modificado. Esta propiedad resume los indicadores de todas las traducciones de la configuración regional:
 
-- `true`: every translation has the flag set
-- `false`: no translation has the flag set
-- empty: some translations have it and some don't
+- `true`: todas las traducciones tienen el indicador activado
+- `false`: ninguna traducción tiene el indicador activado
+- vacío: algunas traducciones lo tienen y otras no
 
-Set it to `true` or `false` to set or clear the flag on every translation in the culture at once. The **Properties** view shows this property at compatibility level 1571 and higher.
+Establece `true` o `false` para activar o desactivar el indicador en todas las traducciones de la configuración regional a la vez. La vista de **Propiedades** muestra esta propiedad en el nivel de compatibilidad 1571 o superior.
 
 > [!WARNING]
-> You can't undo a change to `Altered`.
+> No puedes deshacer un cambio en la propiedad `Altered`.
 
-The flag isn't saved in model files. Microsoft's TOM library doesn't write it to Tabular Model Scripting Language (TMSL), which covers `.bim` files, folders in the JSON format and deployment scripts, or to Tabular Model Definition Language (TMDL). The flag is lost when you save the model to a file and open it again.
+El indicador no se guarda en los archivos del modelo. La biblioteca TOM de Microsoft no lo escribe en Tabular Model Scripting Language (TMSL), que abarca los archivos `.bim`, las carpetas en formato JSON y los scripts de implementación, ni en Tabular Model Definition Language (TMDL). El indicador se pierde cuando guardas el modelo en un archivo y lo vuelves a abrir.
 
-When you set the flag through a live connection to a server, the server keeps it. On SQL Server 2025 Analysis Services, it survives a reconnect and shows in the `TMSCHEMA_OBJECT_TRANSLATIONS` DMV. A TMSL script generated from that server still leaves it out, so the flag is lost as soon as the model is saved to a file or deployed from one.
+Cuando estableces la marca mediante una conexión activa a un servidor, el servidor la conserva. En SQL Server 2025 Analysis Services, se mantiene tras una reconexión y aparece en la DMV `TMSCHEMA_OBJECT_TRANSLATIONS` de traducciones. Un script TMSL generado desde ese servidor sigue sin incluirlo, así que el indicador se pierde en cuanto el modelo se guarda en un archivo o se implementa desde uno.
 
 <!-- TODO (not verifiable from TE3 source): confirm which tools set and read the Altered flag. -->
 
-### Content
+### Contenido
 
-`Content` · string · Linguistic Metadata · compatibility level 1465+
+`Content` · string · Metadatos lingüísticos · nivel de compatibilidad 1465+
 
-The linguistic schema of the culture: the natural-language metadata that Power BI Q&A used before it was retired. It contains the synonyms for tables, columns and measures, and phrasings that describe how objects relate, for example that customers buy products. The `Synonyms` property on each object reads and writes the synonyms stored here.
+El esquema lingüístico de la configuración regional: los metadatos en lenguaje natural que usaba Power BI Q&A antes de que se retirara. Contiene los sinónimos de tablas, columnas y medidas, y formulaciones que describen cómo se relacionan los objetos; por ejemplo, que los clientes compran productos. La propiedad `Synonyms` de cada objeto lee y escribe los sinónimos almacenados aquí.
 
-The content is a large JSON or XML document, depending on `ContentType`, and Power BI Desktop maintains it. The **Properties** view shows this property at compatibility level 1465 and higher.
+El contenido es un documento JSON o XML de gran tamaño, según `ContentType`, y Power BI Desktop lo mantiene. La vista **Propiedades** muestra esta propiedad a partir del nivel de compatibilidad 1465.
 
-In Tabular Editor 3, select **...** on the property to edit the content in a multi-line text editor. Tabular Editor doesn't validate the document, and it sets `ContentType` from the first character: content that starts with `{` is JSON, anything else is XML. Clearing the content removes the linguistic metadata from the culture. Tabular Editor reads and writes `Synonyms` only from JSON content.
+En Tabular Editor 3, seleccione **...** en la propiedad para editar el contenido en un editor de texto de varias líneas. Tabular Editor no valida el documento y establece `ContentType` en función del primer carácter: el contenido que comienza con `{` es JSON; cualquier otra cosa es XML. Al borrar el contenido se eliminan los metadatos lingüísticos de la configuración regional. Tabular Editor solo lee y escribe `Synonyms` desde contenido JSON.
 
-### Content Type
+### Tipo de contenido
 
-`ContentType` · ContentType · Linguistic Metadata · read-only · compatibility level 1465+
+`ContentType` · ContentType · Metadatos lingüísticos · solo lectura · nivel de compatibilidad 1465+
 
-The format of `Content`, `Json` for models created by Power BI or `Xml` for the older format. It's empty when the culture has no linguistic metadata. Tabular Editor sets it when you edit `Content`. The **Properties** view shows this property at compatibility level 1465 and higher.
+El formato de `Content`: `Json` para modelos creados por Power BI o `Xml` para el formato anterior. Está vacío cuando la configuración regional no tiene metadatos lingüísticos. Tabular Editor lo establece cuando edita `Content`. La vista **Propiedades** muestra esta propiedad a partir del nivel de compatibilidad 1465.
 
-### Translated Table Names
+### Nombres de tablas traducidos
 
-`StatsTableCaptions` · string · Translation Statistics · read-only · _computed_
+`StatsTableCaptions` · cadena · Estadísticas de traducción · solo lectura · _calculado_
 
-How many table names are translated.
+Cuántos nombres de tablas están traducidos.
 
-### Translated Column Names
+### Nombres de columnas traducidos
 
-`StatsColumnCaptions` · string · Translation Statistics · read-only · _computed_
+`StatsColumnCaptions` · cadena · Estadísticas de traducción · solo lectura · _calculado_
 
-How many column names are translated.
+Cuántos nombres de columnas están traducidos.
 
-### Translated Column Folders
+### Carpetas de visualización de columnas traducidas
 
-`StatsColumnDisplayFolders` · string · Translation Statistics · read-only · _computed_
+`StatsColumnDisplayFolders` · cadena · Estadísticas de traducción · solo lectura · _calculado_
 
-How many column display folders are translated. The total is the number of columns in the model, including columns that have no display folder, so the first number is usually lower than the second, even when every display folder is translated.
+Cuántas carpetas de visualización de columnas están traducidas. El total es el número de columnas del modelo, incluidas las columnas que no tienen carpeta de visualización, por lo que el primer número suele ser menor que el segundo, incluso cuando todas las carpetas de visualización están traducidas.
 
-### Translated Measure Names
+### Nombres de medidas traducidos
 
-`StatsMeasureCaptions` · string · Translation Statistics · read-only · _computed_
+`StatsMeasureCaptions` · cadena · Estadísticas de traducción de medidas · solo lectura · _calculado_
 
-How many measure names are translated.
+Cuántos nombres de medidas están traducidos.
 
-### Translated Measure Folders
+### Carpetas de visualización de medidas traducidas
 
-`StatsMeasureDisplayFolders` · string · Translation Statistics · read-only · _computed_
+`StatsMeasureDisplayFolders` · string · Estadísticas de traducción de medidas · solo lectura · _calculado_
 
-How many measure display folders are translated. The total is the number of measures in the model, including measures that have no display folder.
+Número de carpetas de visualización de medidas traducidas. El total es el número de medidas del modelo, incluidas las medidas que no tienen carpeta de visualización.
 
-### Translated Hierarchy Names
+### Nombres de jerarquías traducidos
 
-`StatsHierarchyCaptions` · string · Translation Statistics · read-only · _computed_
+`StatsHierarchyCaptions` · string · Estadísticas de traducción · solo lectura · _calculado_
 
-How many hierarchy names are translated.
+Número de nombres de jerarquía traducidos.
 
-### Translated Hierarchy Folders
+### Carpetas de visualización de jerarquías traducidas
 
-`StatsHierarchyDisplayFolders` · string · Translation Statistics · read-only · _computed_
+`StatsHierarchyDisplayFolders` · string · Estadísticas de traducción · solo lectura · _calculado_
 
-How many hierarchy display folders are translated. The total is the number of hierarchies in the model, including hierarchies that have no display folder.
+Número de carpetas de visualización de jerarquías traducidas. El total es el número de jerarquías del modelo, incluidas las jerarquías que no tienen carpeta de visualización.
 
-### Translated Level Names
+### Nombres de niveles traducidos
 
-`StatsLevelCaptions` · string · Translation Statistics · read-only · _computed_
+`StatsLevelCaptions` · string · Estadísticas de traducción · solo lectura · _calculado_
 
-How many hierarchy level names are translated. The BPA rule @kb.bpa-translate-hierarchy-levels flags the levels of visible hierarchies that have no translated name.
+Número de nombres de nivel de jerarquía traducidos. La regla BPA @kb.bpa-translate-hierarchy-levels señala los niveles de las jerarquías visibles que no tienen un nombre traducido.
