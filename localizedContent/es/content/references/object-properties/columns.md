@@ -49,81 +49,81 @@ These properties apply to data columns, calculated columns and calculated table 
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
 - [DAX identifier](xref:object-properties-common#dax-identifier)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
-- [Lineage Tag](xref:object-properties-common#lineage-tag)
-- [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
-- [Translated Names](xref:object-properties-common#translated-names)
-- [Translated Descriptions](xref:object-properties-common#translated-descriptions)
-- [Translated Display Folders](xref:object-properties-common#translated-display-folders)
-- [Synonyms](xref:object-properties-common#synonyms)
-- [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
+- [Etiqueta de linaje](xref:object-properties-common#lineage-tag)
+- [Etiqueta de linaje de origen](xref:object-properties-common#source-lineage-tag)
+- [Nombres traducidos](xref:object-properties-common#translated-names)
+- [Descripciones traducidas](xref:object-properties-common#translated-descriptions)
+- [Carpetas de visualización traducidas](xref:object-properties-common#translated-display-folders)
+- [Sinónimos](xref:object-properties-common#synonyms)
+- [Mostrado en perspectiva](xref:object-properties-common#shown-in-perspective)
 
-### Data Type
+### Tipo de datos
 
-`DataType` · DataType · Basic
+`DataType` · DataType · Básico
 
-The data type of the column's values. It determines how the engine stores the values and which DAX functions and operators accept them. Both columns of a relationship must have the same data type.
+El tipo de datos de los valores de la columna. Determina cómo el motor almacena los valores y qué funciones y operadores DAX los admiten. Ambas columnas de una relación deben tener el mismo tipo de datos.
 
-| Valor       | Significado                                                                                                                                                              |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `String`    | Text. Called **Text** in Power BI.                                                                                                       |
-| `Int64`     | A 64-bit whole number. Called **Whole number** in Power BI.                                                                              |
-| `Double`    | A 64-bit floating-point number. Called **Decimal number** in Power BI. Totals can show small rounding differences.       |
-| `Decimal`   | A fixed-point number with four decimal places. Called **Fixed decimal number** in Power BI. Use it for currency amounts. |
-| `DateTime`  | A date and time. Power BI shows it as **Date**, **Time** or **Date/time**, depending on the format string.                               |
-| `Boolean`   | `TRUE` or `FALSE`.                                                                                                                                       |
-| `Binary`    | Binary data, such as the bytes of an image. DAX can't use binary values and Power BI doesn't load binary columns.                        |
-| `Automatic` | For internal use only.                                                                                                                                   |
-| `Unknown`   | The initial value of a new column. The engine replaces it with the actual data type when the column is saved to the server.              |
-| `Variant`   | A value that can be of different types. Used for measures only.                                                                          |
+| Valor        | Significado                                                                                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `String`     | Texto. Se denomina **Texto** en Power BI.                                                                                                                        |
+| `Int64`      | Un número entero de 64 bits. Se denomina **Número entero** en Power BI.                                                                                          |
+| `Double`     | Un número de punto flotante de 64 bits. Se denomina **Número decimal** en Power BI. Los totales pueden mostrar pequeñas diferencias de redondeo. |
+| `Decimal`    | Un número de punto fijo con cuatro cifras decimales. Se llama **Número decimal fijo** en Power BI. Úsalo para importes monetarios.               |
+| `DateTime`   | Una fecha y una hora. Power BI lo muestra como **Fecha**, **Hora** o **Fecha/hora**, según la cadena de formato.                                                 |
+| `Boolean`    | `TRUE` o `FALSE`.                                                                                                                                                                |
+| `Binario`    | Datos binarios, como los bytes de una imagen. DAX no puede usar valores binarios y Power BI no carga columnas binarias.                                          |
+| `Automático` | Solo para uso interno.                                                                                                                                                           |
+| `Unknown`    | El valor inicial de una columna nueva. El motor lo reemplaza por el tipo de datos real cuando la columna se guarda en el servidor.                               |
+| `Variant`    | Un valor que puede ser de distintos tipos. Se usa solo para medidas.                                                                                             |
 
-The **Properties view** shows some values with a longer name, for example `Int64` as **Integer / Whole Number (int64)** and `Decimal` as **Currency / Fixed Decimal Number (decimal)**. The dropdown lists every value in the table, including `Automatic`, `Unknown` and `Variant`, and accepts all of them. For a data column, pick one of the first seven values.
+La **vista de propiedades** muestra algunos valores con un nombre más largo; por ejemplo, `Int64` como **Entero / Número entero (int64)** y `Decimal` como **Moneda / Número decimal fijo (decimal)**. La lista desplegable enumera todos los valores de la tabla, incluidos `Automático`, `Desconocido` y `Variant`, y los acepta todos. Para una columna de datos, elige uno de los siete primeros valores.
 
-For a data column, the data type must match the data that the partition query returns, or the engine converts the values during refresh. If a conversion fails, for example on text that isn't a number, the refresh fails. Changing the data type in Tabular Editor leaves the partition query unchanged: if you change a column from `String` to `Int64`, also make the query return whole numbers, for example by changing the type in Power Query.
+Para una columna de datos, el tipo de datos debe coincidir con los datos que devuelve la consulta de la partición; de lo contrario, el motor convierte los valores durante la actualización. Si una conversión falla, por ejemplo, con un texto que no es un número, la actualización falla. Cambiar el tipo de datos en Tabular Editor no modifica la consulta de la partición: si cambias una columna de `String` a `Int64`, haz también que la consulta devuelva números enteros, por ejemplo, cambiando el tipo en Power Query.
 
-For calculated columns and calculated table columns, the data type follows from the expression. See [Data Type Inferred](#data-type-inferred).
+En las columnas calculadas y las columnas de tablas calculadas, el tipo de datos viene determinado por la expresión. Consulta [Tipo de datos inferido](#data-type-inferred).
 
-The Best Practice Analyzer (BPA) rule @kb.bpa-relationship-same-datatype flags relationships between columns that have different data types.
+La regla @kb.bpa-relationship-same-datatype del Best Practice Analyzer (BPA) marca las relaciones entre columnas que tienen tipos de datos diferentes.
 
 ### Cadena de formato
 
-`FormatString` · string · Basic
+`FormatString` · cadena · Básico
 
-The format that client tools apply when they display the column's values, for example `#,0`, `0.00%` or `yyyy-mm-dd`. The syntax is the same as for the DAX [FORMAT](https://dax.guide/format) function. DAX queries return the unformatted value. The format also applies to the implicit measures that Power BI creates when a report author drags a numeric column into a visual.
+El formato que las herramientas cliente aplican cuando muestran los valores de la columna, por ejemplo, `#,0`, `0.00%` o `yyyy-mm-dd`. La sintaxis es la misma que la de la función DAX [FORMAT](https://dax.guide/format). Las consultas DAX devuelven el valor sin formato. El formato también se aplica a las medidas implícitas que Power BI crea cuando el autor del Report arrastra una columna numérica a un Visual.
 
-Visible numeric and date columns without a format string show raw values such as `1234567.891` or a date with a time part. See @kb.bpa-format-string-columns.
+Las columnas numéricas y de fecha visibles sin una cadena de formato muestran valores sin procesar, como `1234567.891` o una fecha con un componente de hora. Consulta @kb.bpa-format-string-columns.
 
-### Sort By Column
+### Ordenar por columna
 
-`SortByColumn` · Column · Basic
+`SortByColumn` · Columna · Básico
 
-Another column in the same table whose values set the order of this column's values. For example, sort a `Month Name` column by a `Month Number` column to show the months in calendar order.
+Otra columna de la misma tabla cuyos valores establecen el orden de los valores de esta columna. Por ejemplo, ordena la columna `Month Name` por la columna `Month Number` para mostrar los meses en orden de calendario.
 
-Each value of this column must have exactly one value in the sort column. For example, `January` must always have month number `1`. If a value has more than one sort value, the engine reports an error when the column is refreshed or recalculated.
+Cada valor de esta columna debe tener exactamente un valor en la columna de ordenación. Por ejemplo, `January` debe tener siempre el número de mes `1`. Si un valor tiene más de un valor de ordenación, el motor informa de un error cuando la columna se actualiza o se recalcula.
 
 > [!NOTE]
-> When a report groups by a column that has a sort column, Power BI also groups by the sort column. As a result, `CALCULATE ( [Sales], REMOVEFILTERS ( 'Date'[Month Name] ) )` keeps the filter on `'Date'[Month Number]` and returns an unchanged result. Remove the filter on both columns, or on the whole table.
+> Cuando un Report agrupa por una columna que tiene una columna de ordenación, Power BI también agrupa por la columna de ordenación. Como resultado, `CALCULATE ( [Sales], REMOVEFILTERS ( 'Date'[Month Name] ) )` mantiene el filtro en `'Date'[Month Number]` y devuelve un resultado sin cambios. Quita el filtro de ambas columnas o de toda la tabla.
 
-The C# script @script-create-date-table creates a date table and sets `SortByColumn` on its name columns.
+El C# Script @script-create-date-table crea una tabla de fechas y establece `SortByColumn` en las columnas de nombres.
 
-### Summarize By
+### Resumir por
 
-`SummarizeBy` · AggregateFunction · Basic
+`SummarizeBy` · Función de agregado · Básico
 
-The aggregation that client tools apply when a report author drags the column into a visual as a value, without a measure. Power BI calls this _default summarization_, and the measure it creates on the fly an _implicit measure_.
+La agregación que las herramientas cliente aplican cuando el autor del Report arrastra la columna a un Visual como valor, sin una medida. Power BI lo denomina _resumen predeterminado_ y la medida que crea sobre la marcha, _medida implícita_.
 
-| Valor           | Significado                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `Default`       | The client tool decides. Numeric columns are summed and other columns aren't summarized. |
-| `None`          | Don't summarize. Power BI shows it as **Don't summarize**.                               |
-| `Sum`           | The sum of the values.                                                                                   |
-| `Min`           | The smallest value.                                                                                      |
-| `Max`           | The largest value.                                                                                       |
-| `Count`         | The number of values.                                                                                    |
-| `Average`       | The average of the values.                                                                               |
-| `DistinctCount` | The number of distinct values.                                                                           |
+| Valor            | Significado                                                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Predeterminado` | La herramienta cliente lo decide. Las columnas numéricas se suman y las demás no se resumen. |
+| `None`           | Don't summarize. Power BI shows it as **Don't summarize**.                                   |
+| `Sum`            | The sum of the values.                                                                                       |
+| `Min`            | The smallest value.                                                                                          |
+| `Max`            | The largest value.                                                                                           |
+| `Count`          | The number of values.                                                                                        |
+| `Average`        | The average of the values.                                                                                   |
+| `DistinctCount`  | The number of distinct values.                                                                               |
 
 In Power BI Desktop, a numeric column with `Default` behaves like `Sum`: it shows with the Σ icon in the **Data** pane and is added to a visual as **Sum of** the column. A text column with `Default` isn't summarized. Excel ignores this property, and a PivotTable only aggregates through measures.
 
@@ -160,83 +160,83 @@ The C# script @script-implement-user-defined-aggregations sets up the detail tab
 
 `DataCategory` · string · Options
 
-The kind of value the column holds, which client tools use to treat the column in a special way. For example, Power BI puts a column with category `City` on a map, shows a column with category `ImageUrl` as an image and shows a column with category `WebUrl` as a clickable link. Leave it empty for a regular column.
+El tipo de valor que contiene la columna, que las herramientas cliente utilizan para tratar la columna de forma especial. Por ejemplo, Power BI coloca en un mapa una columna con la categoría `City`, muestra como imagen una columna con la categoría `ImageUrl` y muestra como un enlace en el que se puede hacer clic una columna con la categoría `WebUrl`. Déjalo vacío para una columna normal.
 
-In Tabular Editor 3, the dropdown lists all the categories that the protocol defines, in alphabetical order, and you can also type any other value. The value isn't validated, so spell it exactly as listed. Power BI uses these categories:
+En Tabular Editor 3, la lista desplegable muestra todas las categorías que define el protocolo, en orden alfabético, y también puedes escribir cualquier otro valor. El valor no se valida, así que escríbelo exactamente como aparece en la lista. Power BI usa estas categorías:
 
-| Valor             | Shown in Power BI as | Uso                                                                                  |
-| ----------------- | -------------------- | ------------------------------------------------------------------------------------ |
-| `Address`         | Dirección            | Street addresses.                                                    |
-| `City`            | City                 | City names.                                                          |
-| `County`          | County               | County names.                                                        |
-| `StateOrProvince` | State or Province    | State or province names.                                             |
-| `PostalCode`      | Postal code          | Postal or ZIP codes.                                                 |
-| `Country`         | Country/Region       | Country or region names or codes.                                    |
-| `Continent`       | Continent            | Continent names.                                                     |
-| `Place`           | Place                | Names or descriptions of a location that don't fit another category. |
-| `Latitude`        | Latitude             | Latitude in decimal degrees, for example `51.5072`.                  |
-| `Longitude`       | Longitude            | Longitude in decimal degrees, for example `-0.1276`.                 |
-| `WebUrl`          | Web URL              | Links that users can click.                                          |
-| `ImageUrl`        | Image URL            | URLs of images that visuals show as images.                          |
-| `Barcode`         | Barcode              | Barcodes that the Power BI mobile app scans to filter a report.      |
+| Valor             | Se muestra en Power BI como | Uso                                                                                                            |
+| ----------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `Address`         | Dirección                   | Direcciones de calle.                                                                          |
+| `City`            | Ciudad                      | Nombres de ciudades.                                                                           |
+| `County`          | Condado                     | Nombres de condados.                                                                           |
+| `StateOrProvince` | Estado o provincia          | Nombres de estados o provincias.                                                               |
+| `PostalCode`      | Código postal               | Códigos postales o ZIP.                                                                        |
+| `Country`         | País/región                 | Nombres o códigos de países o regiones.                                                        |
+| `Continent`       | Continente                  | Nombres de continentes.                                                                        |
+| `Place`           | Lugar                       | Nombres o descripciones de una ubicación que no encajan en ninguna otra categoría.             |
+| `Latitude`        | Latitud                     | Latitud en grados decimales, por ejemplo `51.5072`.                                            |
+| `Longitude`       | Longitud                    | Longitud en grados decimales, por ejemplo `-0.1276`.                                           |
+| `WebUrl`          | URL web                     | Enlaces en los que los usuarios pueden hacer clic.                                             |
+| `ImageUrl`        | URL de imagen               | Las direcciones URL de imágenes que los Visual muestran como imágenes.                         |
+| `Barcode`         | Código de barras            | Códigos de barras que la aplicación móvil de Power BI escanea para aplicar FILTER a un Report. |
 
-Geographic categories tell map visuals what kind of location a value is, for example that `Paris` is a `City`.
+Las categorías geográficas indican a los Visual de mapa qué tipo de ubicación es un valor; por ejemplo, que `Paris` es una `City`.
 
-The dropdown spells two of the categories as `WebURL` and `ImageURL` and has no `Barcode` entry. Power BI ignores case, so `ImageUrl` and `ImageURL` both show the value as an image in a table visual, and `WebUrl` and `WebURL` both show it as a link. The Tabular Object Model (TOM) stores the value exactly as you type it. Power BI accepts `Barcode`, but a table visual shows the value as plain text; only the Power BI mobile apps use it.
+La lista desplegable muestra dos de las categorías como `WebURL` e `ImageURL` y no tiene ninguna entrada de `Barcode`. Power BI no distingue entre mayúsculas y minúsculas, por lo que tanto `ImageUrl` como `ImageURL` muestran el valor como una imagen en un Visual de tabla, y tanto `WebUrl` como `WebURL` lo muestran como un enlace. El Tabular Object Model (TOM) almacena el valor exactamente como lo escribe. Power BI acepta `Barcode`, pero un Visual de tabla muestra el valor como texto sin formato; solo lo usan las aplicaciones móviles de Power BI.
 
-The protocol defines many more categories, for example `Id`, `Image` and time categories such as `Years` and `Months`, which older tools used. Power BI ignores most of them. The dropdown also lists `PaddedDateTableDates`, a category that Power BI uses and the protocol doesn't define. Power BI Desktop writes the time categories on the columns of its auto date/time tables: `PaddedDateTableDates` on the date column, and `Years`, `Quarters`, `QuarterOfYear`, `Months`, `MonthOfYear` and `DayOfMonth` on the other columns.
+El protocolo define muchas más categorías, por ejemplo `Id`, `Image` y categorías de tiempo como `Years` y `Months`, que usaban las herramientas más antiguas. Power BI ignora la mayoría de ellas. La lista desplegable también muestra `PaddedDateTableDates`, una categoría que usa Power BI y que el protocolo no define. Power BI Desktop escribe las categorías de tiempo en las columnas de sus tablas automáticas de fecha/hora: `PaddedDateTableDates` en la columna de fecha, y `Years`, `Quarters`, `QuarterOfYear`, `Months`, `MonthOfYear` y `DayOfMonth` en las demás columnas.
 
 <!-- TODO (not verifiable from TE3 source): whether Power BI uses these column categories for anything, or only writes them. -->
 
-To mark a table as a date table, set `DataCategory` on the table to `Time` (see @object-properties-tables) and set `IsKey` to `true` on the table's date column.
+Para marcar una tabla como tabla de fechas, establece la propiedad `DataCategory` de la tabla en `Time` (consulta @object-properties-tables) y establece `IsKey` en `true` en la columna de fecha de la tabla.
 
-### Display Ordinal
+### Orden de visualización
 
-`DisplayOrdinal` · int · Options
+`DisplayOrdinal` · int · Opciones
 
-A number that client tools can use to order the columns of a table, for example `10`, `20`, `30`. Only the relative order counts, so gaps leave room to insert a column later.
+Un número que las herramientas cliente pueden usar para ordenar las columnas de una tabla, por ejemplo `10`, `20`, `30`. Solo importa el orden relativo, así que dejar huecos permite insertar una columna más adelante.
 
-Power BI ignores it, and the **Data** pane in Power BI Desktop lists columns alphabetically whatever their `DisplayOrdinal`. To group columns there, use display folders.
+Power BI lo ignora y el panel **Datos** de Power BI Desktop muestra las columnas en orden alfabético, independientemente de su `DisplayOrdinal`. Para agrupar columnas allí, usa carpetas de visualización.
 
-### Encoding Hint
+### Sugerencia de codificación
 
-`EncodingHint` · EncodingHintType · Options · compatibility level 1400+
+`EncodingHint` · EncodingHintType · Opciones · nivel de compatibilidad 1400+
 
-A hint to the engine about how to compress a numeric column in memory. Without a hint, the engine picks an encoding when it first loads data and can later re-encode the column during refresh, which takes time. With a hint, the engine starts with the hinted encoding.
+Una sugerencia para el motor sobre cómo comprimir una columna numérica en memoria. Sin una sugerencia, el motor elige una codificación cuando carga los datos por primera vez y más tarde puede volver a codificar la columna durante la actualización, lo que lleva tiempo. Con una sugerencia, el motor empieza con la codificación sugerida.
 
-| Valor     | Significado                                                                                                                                                                                                      |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default` | The engine decides.                                                                                                                                                                              |
-| `Hash`    | Store each distinct value once, in a dictionary, and refer to it by its position. Suits columns with few distinct values or with values that are far apart, such as key columns. |
-| `Value`   | Store the values themselves, made smaller with a little arithmetic. Suits numeric columns that you aggregate and whose values are close together, such as quantities or amounts. |
+| Valor     | Significado                                                                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Default` | Lo decide el motor.                                                                                                                                                                                                                    |
+| `Hash`    | Almacena cada valor distinto una sola vez, en un diccionario, y hace referencia a él por su posición. Va bien para columnas con pocos valores distintos o con valores muy separados entre sí, como las columnas clave. |
+| `Value`   | Almacena los propios valores, reducidos mediante un poco de aritmética. Va bien para columnas numéricas que agregas y cuyos valores están próximos entre sí, como cantidades o importes.                               |
 
-The engine can still choose a different encoding, and text columns always use hash encoding. Set a hint only when you've seen, for example in VertiPaq Analyzer, that the engine's encoding makes refresh slow or the model large.
+El motor aún puede elegir una codificación distinta, y las columnas de texto siempre usan codificación hash. Establece una sugerencia solo cuando hayas visto, por ejemplo en el Analizador VertiPaq, que la codificación del motor ralentiza la actualización o hace que el modelo sea grande.
 
-### Group By Columns
+### Columnas de «Agrupar por»
 
-`GroupByColumns` · GroupingColumnCollection · Options · read-only · compatibility level 1400+
+`GroupByColumns` · GroupingColumnCollection · Opciones · de solo lectura · nivel de compatibilidad 1400+
 
-Other columns in the same table that the engine also groups by whenever a query uses this column. Rows that have the same value in this column stay separate when their values in a group-by column differ.
+Otras columnas de la misma tabla que el motor también usa para agrupar cada vez que una consulta utiliza esta columna. Las filas que tienen el mismo valor en esta columna permanecen separadas cuando sus valores en una columna de agrupación son distintos.
 
-Power BI uses this for field parameters. The column with the field names is grouped by the column with the field references, which keeps two fields with the same display name in separate rows. See @create-field-parameter.
+Power BI usa esto para los parámetros de campo. La columna con los nombres de campo se agrupa por la columna con las referencias de campo, lo que mantiene en filas separadas dos campos con el mismo nombre para mostrar. Consulta @create-field-parameter.
 
-MDX clients such as Excel treat these columns as a composite key, so you can't put a column with group-by columns in a PivotTable without the columns it's grouped by.
+Los clientes MDX, como Excel, tratan estas columnas como una clave compuesta, por lo que no puedes colocar en una tabla dinámica una columna con columnas de agrupación sin las columnas por las que está agrupada.
 
-The property appears for Power BI and Fabric models at compatibility level 1400 or higher. You can change the columns in the collection: in Tabular Editor 3, click the **...** button to open a dialog with the other columns of the table, and select the columns to group by. TOM saves the columns in the column's `RelatedColumnDetails` object, and Tabular Editor removes that object when you remove the last column.
+La propiedad aparece en los modelos de Power BI y Fabric con nivel de compatibilidad 1400 o superior. Puedes cambiar las columnas de la colección: en Tabular Editor 3, haz clic en el botón **...** para abrir un cuadro de diálogo con las demás columnas de la tabla y seleccionar las columnas por las que agrupar. TOM guarda las columnas en el objeto `RelatedColumnDetails` de la columna, y Tabular Editor elimina ese objeto cuando quitas la última columna.
 
-### Available In MDX
+### Disponible en MDX
 
-`IsAvailableInMDX` · bool · Options
+`IsAvailableInMDX` · bool · Opciones
 
-Whether the engine builds an _attribute hierarchy_ for the column, which MDX queries need. The default is `true`. Excel PivotTables use MDX and can only put a column on rows or columns when it's `true`. Power BI uses DAX and works without attribute hierarchies.
+Si el motor crea una _jerarquía de atributos_ para la columna, necesaria para las consultas MDX. El valor predeterminado es `true`. Las tablas dinámicas de Excel usan MDX y solo pueden colocar una columna en filas o columnas cuando esta propiedad es `true`. Power BI usa DAX y funciona sin jerarquías de atributos.
 
-Setting it to `false` on hidden columns that MDX queries don't use, such as foreign keys and columns only used in measures, saves memory and refresh time. Keep it `true` for columns used in hierarchies, as a sort column, in variations or in calendars, and for columns that Excel users need. See @kb.bpa-set-isavailableinmdx-false and @kb.bpa-set-isavailableinmdx-true-necessary. The rule @kb.bpa-hide-foreign-keys flags foreign key columns that aren't hidden.
+Establecerlo en `false` en columnas ocultas que las consultas MDX no usan, como las claves externas y las columnas que solo se usan en medidas, ahorra memoria y tiempo de actualización. Manténlo en `true` para las columnas usadas en jerarquías, como columna de ordenación, en variaciones o en calendarios, y para las columnas que necesitan los usuarios de Excel. Consulta @kb.bpa-set-isavailableinmdx-false y @kb.bpa-set-isavailableinmdx-true-necessary. La regla @kb.bpa-hide-foreign-keys marca las columnas de clave externa que no están ocultas.
 
-### Data Type Inferred
+### Tipo de datos inferido
 
-`IsDataTypeInferred` · bool · Options
+`IsDataTypeInferred` · bool · Opciones
 
-Whether the engine derives the column's data type itself and ignores the value of `DataType`. It mostly matters for calculated columns and calculated table columns, whose data type follows from the DAX expression.
+Si el motor deduce por sí mismo el tipo de datos de la columna e ignora el valor de `DataType`. It mostly matters for calculated columns and calculated table columns, whose data type follows from the DAX expression.
 
 In Tabular Editor 3, while this is `true` on a calculated column or calculated table column, `DataType` is read-only and Tabular Editor updates it from the expression as you edit it, without a connection to a server. Set it to `false` to pick a data type yourself. When you set it back to `true` on a calculated table column, `DataType` resets to the data type of the column that the expression gets its values from.
 
@@ -268,89 +268,89 @@ The BPA rule @kb.bpa-date-table-exists flags a model that has no calendar, no ta
 
 `IsNullable` · bool · Options
 
-Whether the column can contain blank (null) values. The default is `true`. If you set it to `false`, a refresh fails when the source returns a blank value, which works as a data quality check. A key column never allows blanks, whatever the value of this property.
+Whether the column can contain blank (null) values. The default is `true`. Si se establece en `false`, la actualización falla cuando el origen devuelve un valor vacío, lo que sirve como comprobación de la calidad de los datos. Una columna clave nunca permite valores en blanco, sea cual sea el valor de esta propiedad.
 
-### Unique
+### Único
 
-`IsUnique` · bool · Options
+`IsUnique` · bool · Opciones
 
-Whether the column contains only unique values. The engine enforces it, and a duplicate value makes a refresh of a data column fail. For a column of a calculated table, the save itself fails, because the engine recalculates the table right away. The error reads "Column 'Key' in Table 'Sales' contains a duplicate value 'a' and this is not allowed for columns on the one side of a many-to-one relationship or for columns that are used as the primary key of a table". Set it only on columns that are guaranteed to be unique, such as the key of a dimension table.
+Indica si la columna contiene solo valores únicos. El motor lo aplica y un valor duplicado hace que falle la actualización de una columna de datos. En una columna de una tabla calculada, el propio guardado falla, porque el motor vuelve a calcular la tabla de inmediato. El error dice "La columna 'Key' de la tabla 'Sales' contiene un valor duplicado 'a' y esto no está permitido en columnas del lado uno de una relación de varios a uno ni en columnas que se usan como clave principal de una tabla". Actívala solo en columnas cuya unicidad esté garantizada, como la clave de una tabla de dimensiones.
 
-To see the distinct values of a column in a connected model, run the C# script @script-display-unique-column-values.
+Para ver los valores distintos de una columna en un modelo en modo conectado, ejecuta el C# Script @script-display-unique-column-values.
 
-### Keep Unique Rows
+### Mantener filas únicas
 
-`KeepUniqueRows` · bool · Options
+`KeepUniqueRows` · bool · Opciones
 
-A table behavior setting from Power View, meant to keep rows that share a value in this column separate when their keys differ, for example two customers with the same name. When it's `false`, those rows are grouped by value.
+Una configuración de comportamiento de tabla de Power View pensada para mantener separadas las filas que comparten un valor en esta columna cuando sus claves difieren; por ejemplo, dos clientes con el mismo nombre. Cuando es `false`, esas filas se agrupan por valor.
 
-No current client acts on it. Power BI ignores it, and in an Excel PivotTable on SQL Server 2025 Analysis Services, two customers with the same name show as one row whether `KeepUniqueRows` is `true` or `false`. To show them separately, make the values unique, for example by adding the customer number to the name.
+Ningún cliente actual la tiene en cuenta. Power BI la ignora y, en una tabla dinámica de Excel sobre SQL Server 2025 Analysis Services, dos clientes con el mismo nombre se muestran en una sola fila tanto si `KeepUniqueRows` es `true` como si es `false`. Para mostrarlos por separado, haz que los valores sean únicos, por ejemplo añadiendo el número de cliente al nombre.
 
-### Source Provider Type
+### Tipo de proveedor del origen
 
-`SourceProviderType` · string · Options
+`SourceProviderType` · string · Opciones
 
-The column's data type in the data source, in the source's own terms, for example `nvarchar` or `WChar`. The engine can use it to generate queries against the source in DirectQuery mode. Tabular Editor 3 never fills it in, also not when it imports a table, so it only has a value when you or another tool set one. Most models, Power BI models included, leave it empty.
+El tipo de datos de la columna en el Data source, en los términos propios del Data source, por ejemplo `nvarchar` o `WChar`. El motor puede usarlo para generar consultas contra el origen en modo DirectQuery. Tabular Editor 3 nunca lo rellena, tampoco cuando importa una tabla, así que solo tiene un valor si se lo asignas tú o alguna otra herramienta. La mayoría de los modelos, incluidos los de Power BI, lo dejan vacío.
 
 <!-- TODO (not verifiable from TE3 source): confirm which other tools fill in Source Provider Type (for example the Visual Studio table import wizard) and in which format (OLE DB type names or SQL type names). -->
 
-### String Indexing Behavior
+### Comportamiento de indexación de cadenas
 
-`StringIndexingBehavior` · IndexingBehavior · Options · compatibility level 1706+
+`StringIndexingBehavior` · IndexingBehavior · Opciones · nivel de compatibilidad 1706+
 
-Whether the engine builds an index on a text column, and whether it saves that index for reuse after a restart.
+Indica si el motor crea un índice en una columna de texto y si lo guarda para reutilizarlo después de reiniciar.
 
-| Valor      | Significado                                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `Off`      | Don't build an index.                                                                        |
-| `Auto`     | La opción predeterminada. Build the index when needed, without saving it.    |
-| `Explicit` | Build and save the index only when you run a refresh of type `RefreshIndex`.                 |
-| `Full`     | Build and save the index during a full refresh, a recalculation or a `RefreshIndex` refresh. |
+| Valor      | Significado                                                                                                                          |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `Off`      | No se crea ningún índice.                                                                                            |
+| `Auto`     | La opción predeterminada. Crea el índice cuando sea necesario, sin guardarlo.                        |
+| `Explicit` | Crea y guarda el índice solo cuando se ejecuta una actualización de tipo `RefreshIndex`.                             |
+| `Full`     | Crea y guarda el índice durante una actualización completa, un recálculo o una actualización de tipo `RefreshIndex`. |
 
-In Power BI Desktop, whose engine supports compatibility level 1706, the engine accepts `Off` and `Auto` and rejects `Explicit` and `Full` with the error "Persist String Index feature is disabled". Recent versions of the TOM library only allow values other than `Auto` from compatibility level 1707.
+En Power BI Desktop, cuyo motor admite el nivel de compatibilidad 1706, el motor acepta `Off` y `Auto` y rechaza `Explicit` y `Full` con el error "Persist String Index feature is disabled". Las versiones recientes de la biblioteca TOM solo permiten valores distintos de `Auto` a partir del nivel de compatibilidad 1707.
 
 <!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. -->
 
-### Full Text Indexing Behavior
+### Comportamiento de la indexación de texto completo
 
-`FullTextIndexingBehavior` · IndexingBehavior · Options · compatibility level 1708+
+`FullTextIndexingBehavior` · IndexingBehavior · Opciones · nivel de compatibilidad 1708+
 
-Whether the engine builds a full-text index on a text column and saves it. The full-text index enables the DAX functions `TEXTCONTAINS` and `TEXTSIMILARITY`. The default is `Off`.
+Indica si el motor crea un índice de texto completo en una columna de texto y lo guarda. El índice de texto completo habilita las funciones DAX `TEXTCONTAINS` y `TEXTSIMILARITY`. El valor predeterminado es `Off`.
 
-| Valor      | Significado                                                                                  |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| `Off`      | La opción predeterminada. Don't build a full-text index.     |
-| `Auto`     | The TOM library doesn't describe this value for full-text indexing.          |
-| `Explicit` | Build and save the index only when you run a refresh of type `RefreshIndex`. |
-| `Full`     | Build and save the index during refresh.                                     |
+| Valor      | Significado                                                                                              |
+| ---------- | -------------------------------------------------------------------------------------------------------- |
+| `Off`      | La opción predeterminada. No se crea ningún índice de texto completo.    |
+| `Auto`     | La biblioteca TOM no describe este valor para la indexación de texto completo.           |
+| `Explicit` | Crea y guarda el índice solo cuando se ejecuta una actualización de tipo `RefreshIndex`. |
+| `Full`     | Crea y guarda el índice durante la actualización.                                        |
 
 <!-- TODO (not verifiable from TE3 source): what Auto does for full-text indexing, and which engines support compatibility level 1708. -->
 
-### Table Detail Position
+### Posición del detalle de la tabla
 
-`TableDetailPosition` · int · Options
+`TableDetailPosition` · int · Opciones
 
-Adds the column to the table's _default field set_, the columns that a client tool shows when a user adds the whole table to a report or drills through to details. A positive number includes the column, and the columns appear in ascending order of this number. The default is `-1`, which leaves the column out. Power View and **Show Details** in Excel used the default field set.
+Agrega la columna al _conjunto de campos predeterminado_ de la tabla; es decir, las columnas que una herramienta cliente muestra cuando un usuario agrega toda la tabla a un Report o profundiza para ver los detalles. Un número positivo incluye la columna y las columnas aparecen en orden ascendente según este número. El valor predeterminado es `-1`, lo que excluye la columna. Power View y **Mostrar detalles** en Excel usaban el conjunto de campos predeterminado.
 
-Excel no longer uses it for drill-through: **Show Details** in an Excel PivotTable returns the table's columns whatever `TableDetailPosition` says. To choose the drill-through columns, set `DefaultDetailRowsExpression` on the table (see @object-properties-tables) or `DetailRowsExpression` on a measure (see @object-properties-measures).
+Excel ya no lo usa para el desglose: **Mostrar detalles** en una tabla dinámica de Excel devuelve las columnas de la tabla independientemente del valor de `TableDetailPosition`. Para elegir las columnas del desglose, establece `DefaultDetailRowsExpression` en la tabla (consulta @object-properties-tables) o `DetailRowsExpression` en una medida (consulta @object-properties-measures).
 
-### Variations
+### Variaciones
 
-`Variations` · VariationCollection · Options · read-only
+`Variations` · VariationCollection · Opciones · de solo lectura
 
-The variations of this column. A variation is something else that a client tool shows when a user picks this column. Power BI uses variations for _auto date/time_. See [Variation](#variation).
+Las variaciones de esta columna. Una variación es otro elemento que una herramienta cliente muestra cuando un usuario selecciona esta columna. Power BI usa variaciones para _fecha y hora automáticas_. Consulta [Variation](#variation).
 
-### Object Level Security
+### Seguridad a nivel de objeto
 
-`ObjectLevelSecurity` · ColumnOLSIndexer · Translations, Perspectives, Security · read-only · compatibility level 1400+ · _shortcut to_ the column permissions of each role
+`ObjectLevelSecurity` · ColumnOLSIndexer · Traducciones, Perspectivas, Seguridad · de solo lectura · nivel de compatibilidad 1400+ · _acceso directo a_ los permisos de columna de cada rol
 
-The object-level security (OLS) setting of this column in each role of the model. The property appears at compatibility level 1400 or higher when the model has at least one role. Expand it to see one entry per role, with one of these values:
+La configuración de seguridad a nivel de objetos (OLS) de esta columna en cada rol del modelo. La propiedad aparece en el nivel de compatibilidad 1400 o superior cuando el modelo tiene al menos un rol. Expándela para ver una entrada por rol, con uno de estos valores:
 
-| Valor     | Significado                                                                                                                                                                                    |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default` | No column-specific setting. The column follows the setting of its table in the role. In TOM, the role has no column permission for the column. |
-| `None`    | Users in the role can't see or query the column. For them the column doesn't exist, and visuals that use it show an error.                                     |
-| `Read`    | Users in the role can see and query the column.                                                                                                                                |
+| Valor     | Significado                                                                                                                                                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Default` | Ninguna configuración específica para la columna. La columna sigue la configuración de su tabla en el rol. En TOM, el rol no tiene ningún permiso de columna para esta columna. |
+| `None`    | Los usuarios del rol no pueden ver ni consultar la columna. Para ellos, la columna no existe y los Visuales que la usen muestran un error.                                                      |
+| `Read`    | Users in the role can see and query the column.                                                                                                                                                                 |
 
 You can change the value for each role. When you pick `None` or `Read`, Tabular Editor adds a column permission for the column to the role's table permission for the column's table, and creates that table permission if the role doesn't have one yet. When you pick `Default`, Tabular Editor removes the column permission. You can also set the same values on the role, under **OLS Column Permissions** (see @object-properties-security). See @data-security-setup-ols.
 
@@ -412,32 +412,32 @@ Whether the column has one value for everyone or is evaluated per user.
 | `Standard`    | La opción predeterminada. The column is calculated during refresh and has one value per row for all users. |
 | `UserContext` | The column is evaluated per user, and the expression can call functions such as `USERPRINCIPALNAME`.                       |
 
-Standard calculated columns, calculated tables, row-level security filters and relationships can't use a user-context column. See @user-context-calculated-columns.
+Las columnas calculadas estándar, las tablas calculadas, los filtros de seguridad a nivel de filas y las relaciones no pueden usar una columna de contexto de usuario. Consulta @user-context-calculated-columns.
 
-## Calculated table column
+## Columna de tabla calculada
 
-A calculated table column is a column of a calculated table. The table's DAX expression defines which columns exist, their data types and their values, and you add or remove columns by changing that expression.
+Una columna de tabla calculada es una columna de una tabla calculada. La expresión DAX de la tabla define qué columnas existen, sus tipos de datos y sus valores; para agregar o quitar columnas, cambia esa expresión.
 
-Tabular Editor 3 analyzes the expression as soon as you change it and adds, removes and updates the columns to match. This works without a connection to a server, so the columns are also up to date in a model that you edit offline. Tabular Editor 2 only updates the columns when you save the model to a database you're connected to, by reloading the table's columns from the server after the save. When you edit a model file in Tabular Editor 2, the columns stay as they are, you can add one with **Create New > Calculated Table Column** and you can't delete them.
+Tabular Editor 3 analiza la expresión en cuanto la cambias y agrega, quita y actualiza las columnas para que coincidan con ella. Esto funciona sin conexión a un servidor, por lo que las columnas también se mantienen actualizadas en un modelo que editas sin conexión. Tabular Editor 2 solo actualiza las columnas cuando guardas el modelo en una base de datos a la que estás conectado; después de guardar, recarga desde el servidor las columnas de la tabla. Cuando editas un archivo de modelo en Tabular Editor 2, las columnas se mantienen tal como están; puedes agregar una con **Crear nuevo > Columna de tabla calculada** y no puedes eliminarlas.
 
-You can change the column's display properties, such as `FormatString`, `IsHidden` and `SortByColumn`. To rename the column, first set `IsNameInferred` to `false`. The column has the properties under [Properties of all columns](#properties-of-all-columns) and the ones below.
+Puedes cambiar las propiedades de visualización de la columna, como `FormatString`, `IsHidden` y `SortByColumn`. Para cambiar el nombre de la columna, primero establece `IsNameInferred` en `false`. La columna tiene las propiedades descritas en [Properties of all columns](#properties-of-all-columns) y las que se indican a continuación.
 
-### Source Column
+### Columna de origen
 
-`SourceColumn` · string · Basic · read-only
+`SourceColumn` · string · Básico · de solo lectura
 
-The name of the column in the result of the calculated table's expression that this column gets its values from. Tabular Editor 3 sets it when it analyzes the expression, and the engine sets it when the model is saved to a server. Renaming the column leaves it unchanged, which keeps the link between the column and the expression.
+El nombre de la columna en el resultado de la expresión de la tabla calculada de la que esta columna obtiene sus valores. Tabular Editor 3 la establece cuando analiza la expresión, y el motor la establece cuando el modelo se guarda en un servidor. Cambiar el nombre de la columna no cambia este valor, lo que mantiene el vínculo entre la columna y la expresión.
 
-The value has one of two formats:
+El valor tiene uno de estos dos formatos:
 
-- `Table[Column]`, without quotes around the table name, for a column that the expression takes from another table, for example `Date[Year]` for `SUMMARIZE ( 'Date', 'Date'[Year] )`
-- `[Column]` for a column that the expression creates, for example `[Sales Amount]` for `ADDCOLUMNS ( ..., "Sales Amount", ... )`, or `[Value]` for a table constructor or `UNION`
+- `Table[Column]`, sin comillas alrededor del nombre de la tabla, para una columna que la expresión toma de otra tabla; por ejemplo, `Date[Year]` para `SUMMARIZE ( 'Date', 'Date'[Year] )`
+- `[Column]` para una columna que crea la expresión; por ejemplo, `[Sales Amount]` para `ADDCOLUMNS ( ..., "Sales Amount", ... )`, o `[Value]` para un constructor de tablas o `UNION`
 
-### Name Inferred
+### Nombre inferido
 
-`IsNameInferred` · bool · Options
+`IsNameInferred` · bool · Opciones
 
-Whether the column's name follows the name in the calculated table's expression. When it's `true`, the engine and Tabular Editor 3 rename the column to match the expression, for example when the expression changes. Set it to `false` to keep a name that you gave the column yourself.
+Si el nombre de la columna sigue el nombre definido en la expresión de la tabla calculada. Cuando es `true`, el motor y Tabular Editor 3 cambian el nombre de la columna para que coincida con la expresión, por ejemplo, cuando cambia la expresión. Set it to `false` to keep a name that you gave the column yourself.
 
 In Tabular Editor 3, `Name` is read-only while `IsNameInferred` is `true`. When you set it back to `true`, the column gets the name of the column that the expression takes it from, if there is one.
 
