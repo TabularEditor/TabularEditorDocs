@@ -7,7 +7,7 @@ name: Translate content (Translated)
 #
 # Jobs:
 #   dry_run    pull requests only; fully offline (--self-test, --plan, --dump-orders).
-#   translate  push to main / schedule (only while the TRANSLATED_ENV variable is
+#   translate  push to main (only while the TRANSLATED_ENV variable is
 #              'production') and workflow_dispatch (any environment). Folds the open
 #              translation branch into main's tree, runs --run (synchronous: translate,
 #              verify, write in one pass), pushes to `localization` (production) or
@@ -25,8 +25,6 @@ on:
       - 'build_scripts/translate-content.py'
       - 'build_scripts/config_loader.py'
       - '.github/workflows/translate.yml'
-  schedule:
-    - cron: '17 */6 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -178,7 +176,7 @@ jobs:
           INPUT_TARGET_BRANCH: ${{ inputs.target_branch }}
           INPUT_MODE: ${{ inputs.mode }}
         run: |
-          # Empty (the default, and always on push/schedule) means auto by environment.
+          # Empty (the default, and always on push) means auto by environment.
           target="$INPUT_TARGET_BRANCH"
           if [ -z "$target" ]; then
             if [ "$TRANSLATED_ENV" = "production" ]; then
