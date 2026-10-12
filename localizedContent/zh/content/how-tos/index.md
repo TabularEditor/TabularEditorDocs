@@ -13,7 +13,7 @@
 
 - [部署](../features/deployment.md) - 将模型部署到 Analysis Services 数据库
 - [连接到 SSAS](connect-ssas.md) - 连接并使用 SSAS Tabular 数据库
-- [Load and save model metadata](load-save.md) - Where model metadata can be loaded from, and the formats it can be saved to
+- [加载和保存模型元数据](load-save.md) - 介绍模型元数据可从何处加载，以及可保存为何种格式
 - [文件夹序列化](folder-serialization.md) - 将模型保存为文件夹结构，便于版本控制
 - [主模型模式](Master-model-pattern.md) - 使用透视来管理多个模型
 
@@ -59,7 +59,7 @@
 - @semantic-bridge-validate-contextual-rules - 创建带有跨对象检查的规则
 - @semantic-bridge-add-object - 向指标视图添加新对象
 - @semantic-bridge-remove-object - 从指标视图移除对象
-- @semantic-bridge-rename-objects - Rename a field, measure, dimension or join in place
+- @semantic-bridge-rename-objects - 就地重命名字段、度量值、维度或联接
 - @semantic-bridge-serialize - 将指标视图序列化回 YAML
 
 ---
