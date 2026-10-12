@@ -1,6 +1,6 @@
 ---
 uid: mcp-server
-title: MCP server
+title: Servidor MCP
 author: Morten Lønskov
 updated: 2026-10-09
 applies_to:
@@ -18,7 +18,7 @@ applies_to:
           full: true
 ---
 
-# MCP server
+# Servidor MCP
 
 Tabular Editor 3 puede actuar como servidor MCP (Model Context Protocol). Agents that support MCP, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, connect to the running instance to read, query and analyze the semantic model you have open, and to change it if you grant write access. To start, select **Tools > MCP Server...** and register your agent.
 
@@ -63,7 +63,7 @@ Open **Tools > Preferences > AI Features > MCP Server** to set the server's star
 | **Habilitar servidor MCP**               | Activado       | Al desmarcarlo, se detiene el servidor en ejecución y se eliminan el elemento del menú y el indicador de la barra de estado                                 |
 | **Iniciar servidor MCP automáticamente** | Desactivado    | Starts the server when Tabular Editor starts                                                                                                                |
 | **Requerir token de acceso**             | Desactivado    | Agents must present the access token shown in the server dialog. Consulta [Ejecución en un equipo compartido](#running-on-a-shared-machine) |
-| **Puerto**                               | 42100          | The loopback port the server listens on, from 1024 to 49151. Cambiarlo invalida los registros de agentes existentes                         |
+| **Puerto**                               | 42100          | El puerto de loopback en el que escucha el servidor, entre 1024 y 49151. Cambiarlo invalida los registros de agentes existentes             |
 
 ## Registra tu agente
 
@@ -282,7 +282,7 @@ Select **Regenerate token** (the refresh button beside the token) to issue a new
 
 When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**.
+Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. Con **Datos del modelo** en su valor predeterminado, **Denegar**, el agente no recibe ningún resultado de consultas DAX desde Tabular Editor. Los valores introducidos en la definición del modelo, como una expresión `DATATABLE` o una tabla de **Introducir datos**, son metadatos del modelo y llegan al agente en **Metadatos del modelo > Leer**.
 
 See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
 
@@ -290,7 +290,7 @@ See @security-privacy for the wider picture, including the [AI Assistant](xref:a
 
 The MCP server is on by default, and any user can turn it off. Administrators can use these [policies](xref:policies) to control how the MCP operates:
 
-| Policy                                      | Edition    | Qué hace                                                                                                                                                                                                                               |
+| Directiva                                   | Edition    | Qué hace                                                                                                                                                                                                                               |
 | ------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DisableMcpServer`                          | All        | Removes the MCP server. The AI Assistant chat is unaffected                                                                                                                                                            |
 | `DisableAi`                                 | All        | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component off the machine                                                                   |
@@ -310,21 +310,21 @@ See @policies for the full list, the registry layout and the administrative temp
 
 ## Solución de problemas
 
-| Lo que ves                                                                                  | Qué ocurre                                                                                                                                                                                                                                                                                               |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| El agente dice que no tiene herramientas para Tabular Editor                                | El servidor no está en ejecución, o el agente se conectó antes de que arrancara. Check that the status bar reads **MCP Started**, then reconnect the agent                                                                                                                               |
-| El agente no puede ver un permiso que acabas de conceder                                    | Los permisos se leen al iniciar el servidor y la lista de herramientas queda fijada en el momento de la conexión. Detén el servidor y vuelve a iniciarlo; luego vuelve a conectar el agente                                                                                              |
-| The agent loses the connection after a long break                                           | The server closes a session after 20 minutes with no requests and no open stream. Vuelve a conectar el agente                                                                                                                                                                            |
-| El agente reporta que no hay ningún modelo abierto                                          | El servidor se ejecuta de forma independiente de tu modelo. Open a model in Tabular Editor and ask again. You don't need to restart anything                                                                                                                             |
-| El agente no puede ejecutar consultas DAX                                                   | De forma predeterminada, **Datos del modelo** está configurado como **Denegar**. Queries also need a live connection: against a model opened from disk, the query tool is unavailable whatever the grant                                                                 |
-| Las conexiones se rechazan con un 401                                                       | **Requerir token de acceso** está activada y el agente no está enviando el token. Copy the registration configuration from the dialog again. It includes the token                                                                                                       |
-| The port is already in use                                                                  | Another Tabular Editor instance or another application uses it. Accept the next free port in the prompt, and update the agent's registration. If **Start MCP server automatically** is on, a conflict at startup shows no prompt and the indicator reads **MCP Stopped** |
-| **Tools > MCP Server...** isn't in the menu | **Enable MCP Server** is cleared in preferences, the AI features component isn't installed, an administrator has set `DisableMcpServer` or `DisableAi`, or an Enterprise policy value is set on a machine that isn't licensed for it. See @policies                         |
+| Lo que ves                                                                                               | Qué ocurre                                                                                                                                                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| El agente dice que no tiene herramientas para Tabular Editor                                             | El servidor no está en ejecución, o el agente se conectó antes de que arrancara. Check that the status bar reads **MCP Started**, then reconnect the agent                                                                                                                               |
+| El agente no puede ver un permiso que acabas de conceder                                                 | Los permisos se leen al iniciar el servidor y la lista de herramientas queda fijada en el momento de la conexión. Detén el servidor y vuelve a iniciarlo; luego vuelve a conectar el agente                                                                                              |
+| The agent loses the connection after a long break                                                        | The server closes a session after 20 minutes with no requests and no open stream. Vuelve a conectar el agente                                                                                                                                                                            |
+| El agente reporta que no hay ningún modelo abierto                                                       | El servidor se ejecuta de forma independiente de tu modelo. Open a model in Tabular Editor and ask again. You don't need to restart anything                                                                                                                             |
+| El agente no puede ejecutar consultas DAX                                                                | De forma predeterminada, **Datos del modelo** está configurado como **Denegar**. Queries also need a live connection: against a model opened from disk, the query tool is unavailable whatever the grant                                                                 |
+| Las conexiones se rechazan con un 401                                                                    | **Requerir token de acceso** está activada y el agente no está enviando el token. Copy the registration configuration from the dialog again. It includes the token                                                                                                       |
+| El puerto ya está en uso                                                                                 | Another Tabular Editor instance or another application uses it. Accept the next free port in the prompt, and update the agent's registration. If **Start MCP server automatically** is on, a conflict at startup shows no prompt and the indicator reads **MCP Stopped** |
+| **Herramientas > Servidor MCP...** no aparece en el menú | **Enable MCP Server** is cleared in preferences, the AI features component isn't installed, an administrator has set `DisableMcpServer` or `DisableAi`, or an Enterprise policy value is set on a machine that isn't licensed for it. Consulta @policies                    |
 
 ## Pasos a seguir
 
 - @ai-assistant for the full permission model and the built-in chat.
-- @unsaved-changes for reviewing and reverting what an agent did.
+- @unsaved-changes para revisar y revertir lo que hizo un agente.
 - @csharp-scripts for what a script, and therefore an agent, can change.
-- @policies for governing the server across an organization.
+- @policies para gestionar el servidor a nivel de toda la organización.
 - @te-cli-skill if your agent works on model files in a repository or a pipeline.
