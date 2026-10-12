@@ -35,7 +35,7 @@ To change a property, select one or more objects in the @tom-explorer-view and e
 
 @object-properties-common describes the properties that most objects have, such as `Name`, `Description` and `Annotations`. Each of the other pages covers one family of related objects:
 
-| Page                                                  | 对象                                                                                                         |
+| 页面                                                    | 对象                                                                                                         |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | @object-properties-common                | Properties shared by most objects                                                                          |
 | @object-properties-model                 | 模型                                                                                                         |
@@ -44,7 +44,7 @@ To change a property, select one or more objects in the @tom-explorer-view and e
 | @object-properties-measures              | Measure, KPI                                                                                               |
 | @object-properties-calculation-groups    | Calculation group, calculation item                                                                        |
 | @object-properties-hierarchies           | Hierarchy, level                                                                                           |
-| @object-properties-relationships         | Relationship                                                                                               |
+| @object-properties-relationships         | 关系                                                                                                         |
 | @object-properties-partitions            | Partition, M partition, entity partition, policy range partition, refresh policy, data coverage definition |
 | @object-properties-data-sources          | Provider and structured data sources, shared expression, query group, data binding hint                    |
 | @object-properties-security              | Role, table permission, role members                                                                       |
@@ -99,7 +99,7 @@ Almost every property in the Properties view is a TOM property, which is saved i
 
 ## 另见
 
-- @properties-view
+- @属性视图
 - @tom-explorer-view
 - @editing-properties
 - @best-practice-analyzer
