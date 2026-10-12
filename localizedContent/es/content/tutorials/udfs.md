@@ -133,7 +133,7 @@ Además de especificar el modo de evaluación, también puedes restringir el tip
 
 Estas especificaciones de tipo son opcionales, pero si se indican, realizarán una conversión de tipo implícita en los argumentos que se pasen a la función y también afectarán a las sugerencias de autocompletado en Tabular Editor 3 al escribir código DAX que llame a la función.
 
-Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. Si llamas a una UDF con un argumento que no coincide con el tipo de su parámetro, como un valor escalar cuando se espera un parámetro `TABLEREF`, el Analizador semántico reporta una advertencia o un error.
 
 Consulta la [especificación de Microsoft para las UDF](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) para ver la lista completa de restricciones disponibles.
 
@@ -238,9 +238,9 @@ En Tabular Editor, las UDFs también tienen una _propiedad_ "Namespace", que te 
 
 ## UDFs y control de código fuente
 
-If you store your model as a folder structure, Tabular Editor can write each UDF to its own file. Without this serialization level, all functions are stored in `database.json`, which causes merge conflicts when several developers edit functions.
+Si almacenas el modelo como una estructura de carpetas, Tabular Editor puede escribir cada UDF en su propio archivo. Sin este nivel de serialización, todas las funciones se almacenan en `Database.json`, lo que provoca conflictos de combinación cuando varios desarrolladores editan funciones.
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder**. Consulta [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs).
+Selecciona el nivel **Funciones definidas por el usuario (UDFs)** en **Modelo > opciones de serialización...**. Para un modelo que guardas en una carpeta por primera vez, selecciónalo en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta**. Consulta [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Buenas prácticas
 
@@ -328,14 +328,14 @@ Tabular Editor 3 detecta automáticamente cualquier comentario y lo muestra corr
 
 **La función no aparece en el autocompletado**
 
-Check the following, in order:
+Comprueba lo siguiente, en este orden:
 
-1. **The function's definition has a semantic error.** Autocomplete hides UDFs with semantic errors, such as a missing row context or invalid `MATCHBY`, but still shows their calltip. Fix the error in the function.
-2. **The return type doesn't fit the argument you're completing.** The return type is inferred from the function body. A UDF that returns a table isn't offered where a scalar is expected, and a UDF that returns a scalar isn't offered where a table is expected. Exceptions:
-   - Filter arguments, such as the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either.
-   - A function whose body is an untyped `EXPR` parameter is offered everywhere.
-3. **Visual calculation mismatch.** Visual calculation UDFs appear only in visual calculations, and other UDFs appear only outside them.
-4. **It's the function you're editing.** A function isn't offered inside its own definition.
+1. **La definición de la función tiene un error semántico.** El autocompletado oculta las UDF con errores semánticos, como la falta de contexto de fila o un `MATCHBY` no válido, pero sigue mostrando su información de llamada. Corrige el error en la función.
+2. **El tipo de retorno no coincide con el argumento que estás completando.** El tipo de retorno se infiere a partir del cuerpo de la función. Una UDF que devuelve una tabla no se sugiere donde se espera un escalar, y una UDF que devuelve un escalar no se sugiere donde se espera una tabla. Excepciones:
+   - Los argumentos de filtro, como el segundo argumento y los posteriores de [`CALCULATE`](https://dax.guide/calculate), aceptan ambos tipos.
+   - Una función cuyo cuerpo es un parámetro `EXPR` sin tipo se sugiere en todas partes.
+3. **Incompatibilidad con el cálculo Visual.** Las UDF de cálculo Visual solo aparecen en los cálculos Visuales, y las demás UDF solo aparecen fuera de ellos.
+4. **Es la función que estás editando.** Una función no se sugiere dentro de su propia definición.
 
 **Errores de restricción de parámetros**
 
