@@ -1,6 +1,6 @@
 ---
 uid: object-properties-relationships
-title: Relationship properties
+title: Propiedades de la relación
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Relationship properties
+# Propiedades de la relación
 
 <!--
 SUMMARY: Reference for the properties of relationships, such as cardinality, cross filtering behavior and security filtering behavior.
@@ -25,164 +25,164 @@ SUMMARY: Reference for the properties of relationships, such as cardinality, cro
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of relationships. For properties that most objects share, see @object-properties-common.
+Esta página describe las propiedades de las relaciones. Para ver las propiedades comunes a la mayoría de los objetos, consulta @object-properties-common.
 
 ## Relación
 
-A relationship connects a column in one table to a column in another table, and a filter on one table then also filters the other. For example, a relationship from `Sales[ProductKey]` to `Product[ProductKey]` makes a filter on `Product[Color]` filter the rows of `Sales`.
+Una relación conecta una columna de una tabla con una columna de otra tabla, y un filtro aplicado a una tabla también filtra la otra. Por ejemplo, una relación de `Sales[ProductKey]` a `Product[ProductKey]` hace que un filtro en `Product[Color]` filtre las filas de `Sales`.
 
-Every relationship has a _from_ side and a _to_ side. In a typical one-to-many relationship, the from side is the table with many rows per key, such as a fact table, and the to side is the table with one row per key, such as a dimension table.
+Toda relación tiene un lado _de origen_ y un lado _de destino_. En una relación típica de uno a varios, el lado de origen es la tabla con muchas filas por clave, como una tabla de hechos, y el lado de destino es la tabla con una fila por clave, como una tabla de dimensiones.
 
-Tabular Editor 3 shows a relationship in the **TOM Explorer** with the from column on the left and the to column on the right, for example `'Sales'[ProductKey] ∞←1 'Product'[ProductKey]`. The symbols in the middle show the cardinality of each side (`∞` for `Many`, `1` for `One`) and the filter direction (`←` for a single direction, `↔` for both directions). The name updates when you change the columns, the cardinalities or the cross filtering behavior. Tabular Editor 2 uses the same column order without cardinality symbols, and its arrow shows the filter direction as `-->` for a single direction or `<-->` for both directions, for example `'Sales'[ProductKey] --> 'Product'[ProductKey]`.
+Tabular Editor 3 muestra una relación en el **Explorador TOM** con la columna de origen a la izquierda y la columna de destino a la derecha, por ejemplo `'Sales'[ProductKey] ∞←1 'Product'[ProductKey]`. Los símbolos del centro muestran la cardinalidad de cada lado (`∞` para `Many`, `1` para `One`) y la dirección del filtro (`←` para una sola dirección, `↔` para ambas direcciones). El nombre se actualiza cuando cambias las columnas, las cardinalidades o el comportamiento de filtrado cruzado. Tabular Editor 2 usa el mismo orden de columnas sin símbolos de cardinalidad, y su flecha muestra la dirección del filtro como `-->` para una sola dirección o `<-->` para ambas direcciones; por ejemplo, `'Sales'[ProductKey] --> 'Product'[ProductKey]`.
 
-You can create and edit relationships in the **Properties** view or, in Tabular Editor 3, in the @diagram-view. To create relationships from the primary and foreign keys defined in Databricks Unity Catalog, use the @script-create-databricks-relationships script.
+Puedes crear y editar relaciones en la vista **Propiedades** o, en Tabular Editor 3, en @diagram-view. Para crear relaciones a partir de las claves primarias y externas definidas en Databricks Unity Catalog, usa el script @script-create-databricks-relationships.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Changed Properties](xref:object-properties-common#changed-properties)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
+- [Nombre](xref:object-properties-common#name)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Propiedades modificadas](xref:object-properties-common#changed-properties)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
 
-### From Column
+### Columna de origen
 
-`FromColumn` · Column · Basic
+`FromColumn` · Columna · Básico
 
-The column on the from side of the relationship. In a one-to-many relationship, this is usually the foreign key column in the fact table, for example `Sales[ProductKey]`. Choosing a column also sets `FromTable`.
+La columna del lado de origen de la relación. En una relación de uno a varios, suele ser la columna de clave externa de la tabla de hechos, por ejemplo `Sales[ProductKey]`. Al elegir una columna, también se establece `FromTable`.
 
-### From Cardinality
+### Cardinalidad de origen
 
-`FromCardinality` · RelationshipEndCardinality · Basic
+`FromCardinality` · Cardinalidad de extremo de relación · Básico
 
-How many rows on the from side can have the same value in `FromColumn`.
+Cuántas filas del lado de origen pueden tener el mismo valor en `FromColumn`.
 
-| Valor  | Significado                                                                                                                                                                                                          |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Many` | Several rows can have the same value. The usual setting for the from side.                                                                                                           |
-| `One`  | Each value appears at most once in the column.                                                                                                                                                       |
-| `None` | The cardinality is unspecified. Don't use it. The relationship dialog in Tabular Editor 3 lists only `One` and `Many`, and the **TOM Explorer** shows `None` as `0`. |
+| Valor  | Significado                                                                                                                                                                                                                            |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Many` | Varias filas pueden tener el mismo valor. Es la configuración habitual para el lado de origen.                                                                                                         |
+| `One`  | Cada valor aparece como máximo una vez en la columna.                                                                                                                                                                  |
+| `None` | La cardinalidad no está especificada. No lo use. El cuadro de diálogo de la relación en Tabular Editor 3 solo muestra `One` y `Many`, y el **Explorador TOM** muestra `None` como `0`. |
 
-### To Column
+### Columna de destino
 
-`ToColumn` · Column · Basic
+`ToColumn` · Columna · Básico
 
-The column on the to side of the relationship. In a one-to-many relationship, this is the key column of the dimension table, for example `Product[ProductKey]`. Choosing a column also sets `ToTable`.
+La columna del lado de destino de la relación. En una relación de uno a muchos, esta es la columna clave de la tabla de dimensiones, por ejemplo `Product[ProductKey]`. Al elegir una columna, también se establece `ToTable`.
 
-The Best Practice Analyzer (BPA) rule @kb.bpa-relationship-same-datatype flags relationships where `FromColumn` and `ToColumn` have different data types.
+La regla @kb.bpa-relationship-same-datatype del Best Practice Analyzer (BPA) señala las relaciones en las que `FromColumn` y `ToColumn` tienen tipos de datos diferentes.
 
-### To Cardinality
+### Cardinalidad de destino
 
-`ToCardinality` · RelationshipEndCardinality · Basic
+`ToCardinality` · RelationshipEndCardinality · Básico
 
-How many rows on the to side can have the same value in `ToColumn`. The values are the same as for `FromCardinality`, and `One` is the usual setting. The two cardinalities together set the type of relationship:
+Cuántas filas del lado de destino pueden tener el mismo valor en `ToColumn`. Los valores son los mismos que en `FromCardinality`, y `One` es la configuración habitual. Las dos cardinalidades juntas definen el tipo de relación:
 
-| From   | To     | Relación                                                                                                                                    |
-| ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Many` | `One`  | Many-to-one. The standard relationship between a fact table and a dimension table.                          |
-| `One`  | `One`  | One-to-one. Both columns must contain unique values.                                                        |
-| `Many` | `Many` | Many-to-many. Neither column needs unique values. Needs compatibility level 1500 or higher. |
+| Desde  | Hasta  | Relación                                                                                                                                                               |
+| ------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Many` | `One`  | Muchos a uno. La relación estándar entre una tabla de hechos y una tabla de dimensiones.                                               |
+| `One`  | `One`  | Uno a uno. Ambas columnas deben contener valores únicos.                                                                               |
+| `Many` | `Many` | Muchos a muchos. Ninguna de las columnas necesita valores únicos. Requiere un nivel de compatibilidad 1500 o superior. |
 
-When a column on a `One` side contains duplicate values, refresh fails with an error. Many-to-many relationships are _limited_ relationships: they don't add a blank row for missing keys, and they're often slower than many-to-one relationships. Use them only when the data has no unique key.
+Cuando una columna del lado `One` contiene valores duplicados, la actualización falla con un error. Las relaciones de muchos a muchos son relaciones _limitadas_: no agregan una fila en blanco para las claves que faltan y a menudo son más lentas que las relaciones de muchos a uno. Úsalas solo cuando los datos no tengan una clave única.
 
-In the Tabular Object Model (TOM), the from side is always the many side of a one-to-many relationship. Tabular Editor accepts `FromCardinality` `One` with `ToCardinality` `Many`, and the engine rejects it when you save, with the error "From end cardinality must always be set to Many, unless the relationship is One-To-One". To relate the tables the other way, swap the from and to columns.
+En el Tabular Object Model (TOM), el extremo "from" siempre es el lado "muchos" en una relación de uno a varios. Tabular Editor acepta `FromCardinality` `One` con `ToCardinality` `Many`, pero el motor lo rechaza al guardar con el error "From end cardinality must always be set to Many, unless la relación is One-To-One". Para relacionar las tablas en el otro sentido, intercambia las columnas de origen y de destino.
 
-### Active
+### Activo
 
-`IsActive` · bool · Basic
+`IsActive` · bool · Básico
 
-Whether the relationship filters data automatically. The engine rejects a model where active relationships create more than one path between two tables. This happens most often when several relationships use bidirectional cross filtering.
+Si la relación filtra los datos automáticamente. El motor rechaza un modelo en el que las relaciones activas crean más de una ruta entre dos tablas. Esto ocurre con más frecuencia cuando varias relaciones usan filtrado cruzado bidireccional.
 
-For a second relationship between the same tables, for example from `Sales[ShipDate]` to `Date[Date]` next to the active one from `Sales[OrderDate]`, set `IsActive` to `false` and turn the relationship on in a measure with [USERELATIONSHIP](https://dax.guide/userelationship):
+Para una segunda relación entre las mismas tablas, por ejemplo de `Sales[ShipDate]` a `Date[Date]` junto a la activa de `Sales[OrderDate]`, establece `IsActive` en `false` y activa la relación en una medida con [USERELATIONSHIP](https://dax.guide/userelationship):
 
 ```dax
 Sales by Ship Date =
 CALCULATE ( [Total Sales], USERELATIONSHIP ( Sales[ShipDate], 'Date'[Date] ) )
 ```
 
-In the Tabular Editor 3 diagram view, you can also right-click a relationship to activate or deactivate it.
+En la Vista de diagrama de Tabular Editor 3, también puedes hacer clic con el botón derecho en una relación para activarla o desactivarla.
 
 ### ID
 
-`ID` · string · Basic · read-only
+`ID` · string · Básico · solo de lectura
 
-The internal identifier of the relationship, which is the relationship's name in TOM. Power BI Desktop uses a GUID. Tabular Editor 3 and Tabular Editor 2 give a new relationship a unique name that starts with `New Single Column Relationship`. Use the ID to refer to a specific relationship in a C# script or a Tabular Model Scripting Language (TMSL) command.
+El identificador interno de la relación, que en TOM es el nombre de la relación. Power BI Desktop usa un GUID. Tabular Editor 3 y Tabular Editor 2 asignan a una relación nueva un nombre único que comienza por `New Single Column Relationship`. Usa el ID para referirte a una relación concreta en un C# Script o en un comando de Tabular Model Scripting Language (TMSL).
 
-### From Table
+### Tabla de origen
 
-`FromTable` · Table · Options · read-only
+`FromTable` · Tabla · Opciones · solo lectura
 
-The table that contains `FromColumn`. To change it, choose a different `FromColumn`. Tabular Editor 3 hides this property in the **Properties** view, where `FromColumn` already shows the table. You can still read it in a C# script.
+La tabla que contiene `FromColumn`. Para cambiarla, elige otra `FromColumn`. Tabular Editor 3 oculta esta propiedad en la vista **Propiedades**, donde `FromColumn` ya muestra la tabla. Aun así, puedes consultarla en un C# Script.
 
-### To Table
+### Tabla de destino
 
-`ToTable` · Table · Options · read-only
+`ToTable` · Tabla · Opciones · solo de lectura
 
-The table that contains `ToColumn`. To change it, choose a different `ToColumn`. Tabular Editor 3 hides this property in the **Properties** view. You can still read it in a C# script.
+La tabla que contiene `ToColumn`. Para cambiarla, selecciona otra `ToColumn`. Tabular Editor 3 oculta esta propiedad en la vista **Properties**. Aún puedes leerla en un C# Script.
 
-### Cross Filtering Behavior
+### Comportamiento del filtrado cruzado
 
-`CrossFilteringBehavior` · CrossFilteringBehavior · Options
+`CrossFilteringBehavior` · CrossFilteringBehavior · Opciones
 
-The direction filters flow through the relationship.
+La dirección en la que los filtros fluyen a través de la relación.
 
-| Valor            | Significado                                                                                                                                                                             |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OneDirection`   | A filter on the to table filters the from table. For example, a filter on `Product` filters `Sales`. The default.                       |
-| `BothDirections` | Filters flow both ways. A filter on `Sales` also filters `Product`, so a slicer on `Product` shows only products that have sales in the current filter. |
-| `Automatic`      | The engine analyzes the relationships and picks one of the other behaviors by using heuristics.                                                                         |
+| Valor            | Significado                                                                                                                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OneDirection`   | Un filtro en la tabla de destino filtra la tabla de origen. Por ejemplo, un filtro en `Product` filtra `Sales`. El valor predeterminado.                                                                   |
+| `BothDirections` | Los filtros se propagan en ambas direcciones. Un filtro en `Sales` también filtra `Product`, por lo que un segmentador de datos en `Product` solo muestra los productos que tienen ventas en el contexto de filtro actual. |
+| `Automatic`      | El motor analiza las relaciones y elige uno de los otros comportamientos mediante heurísticas.                                                                                                                                             |
 
-SQL Server 2025 Analysis Services and Power BI Desktop both store a relationship saved with `Automatic` as `BothDirections`. In Power BI Desktop, a filter on the from table then filters the to table, as with `BothDirections`. Set `BothDirections` explicitly when you want filters to flow both ways.
+SQL Server 2025 Analysis Services y Power BI Desktop almacenan una relación guardada con `Automatic` como `BothDirections`. En Power BI Desktop, un filtro en la tabla de origen también filtra la tabla de destino, igual que con `BothDirections`. Establece `BothDirections` explícitamente cuando quieras que los filtros se propaguen en ambas direcciones.
 
-`BothDirections` makes queries slower and makes it more likely that active relationships create more than one path between two tables, which the engine rejects. To filter in both directions for one measure, keep the relationship one-directional and use [CROSSFILTER](https://dax.guide/crossfilter) in the measure, for example `CROSSFILTER ( Sales[ProductKey], Product[ProductKey], BOTH )`.
+`BothDirections` ralentiza las consultas y aumenta la probabilidad de que las relaciones activas creen más de una ruta entre dos tablas, algo que el motor rechaza. Para filtrar en ambas direcciones en una sola medida, mantén la relación unidireccional y usa [CROSSFILTER](https://dax.guide/crossfilter) en la medida, por ejemplo `CROSSFILTER ( Sales[ProductKey], Product[ProductKey], BOTH )`.
 
-Bidirectional filtering applies to row-level security only when you also set `SecurityFilteringBehavior`. The BPA rule @kb.bpa-many-to-many-single-direction flags many-to-many relationships that filter in both directions.
+El filtrado bidireccional solo se aplica a la seguridad a nivel de filas cuando también estableces `SecurityFilteringBehavior`. La regla de BPA @kb.bpa-many-to-many-single-direction marca las relaciones de muchos a muchos que filtran en ambas direcciones.
 
-### Security Filtering Behavior
+### Comportamiento del filtrado de seguridad
 
-`SecurityFilteringBehavior` · SecurityFilteringBehavior · Options
+`SecurityFilteringBehavior` · SecurityFilteringBehavior · Opciones
 
-The direction the filters of row-level security flow through the relationship. It matches **Apply security filter in both directions** in Power BI Desktop.
+La dirección en la que los filtros de seguridad a nivel de filas se propagan a través de la relación. Corresponde a **Aplicar filtro de seguridad en ambas direcciones** en Power BI Desktop.
 
-| Valor            | Significado                                                                                                                                                                                                                                                                                                                                                   |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OneDirection`   | Security filters flow from the to table to the from table only, even when `CrossFilteringBehavior` is `BothDirections`. The default.                                                                                                                                                                                          |
-| `BothDirections` | Security filters flow both ways. Valid only when `CrossFilteringBehavior` is `BothDirections`.                                                                                                                                                                                                                                |
-| `None`           | Blocks security filters from flowing from the one side to the many side. Applies only to limited relationships in a composite model, where one table comes from a Power BI semantic model or Analysis Services database and the other from a different data source. Needs compatibility level 1561 or higher. |
+| Valor            | Significado                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OneDirection`   | Los filtros de seguridad se propagan solo de la tabla de destino a la tabla de origen, incluso cuando `CrossFilteringBehavior` es `BothDirections`. El valor predeterminado.                                                                                                                                                                                            |
+| `BothDirections` | Los filtros de seguridad se propagan en ambas direcciones. Válido solo cuando `CrossFilteringBehavior` es `BothDirections`.                                                                                                                                                                                                                                             |
+| `None`           | Impide que los filtros de seguridad se propaguen del lado uno al lado muchos. Se aplica solo a relaciones limitadas en un modelo compuesto, donde una tabla procede de un modelo semántico de Power BI o de una base de datos de Analysis Services, y la otra procede de un Data source diferente. Requiere el nivel de compatibilidad 1561 o superior. |
 
-Tabular Editor accepts `BothDirections` when `CrossFilteringBehavior` is `OneDirection`, and the engine rejects it when you save, with the error "cannot have SecurityFilterBehavior set to BothDirections when the CrossFilterBehavior is set to OneDirection". The same error occurs when you change `CrossFilteringBehavior` back to `OneDirection` on a relationship that filters security in both directions, so change `SecurityFilteringBehavior` first.
+Tabular Editor acepta `BothDirections` cuando `CrossFilteringBehavior` es `OneDirection`, pero el motor lo rechaza al guardar, con el error "cannot have SecurityFilterBehavior set to BothDirections when the CrossFilterBehavior is set to OneDirection". El mismo error se produce cuando vuelves a cambiar `CrossFilteringBehavior` a `OneDirection` en una relación que filtra la seguridad en ambas direcciones, así que cambia primero `SecurityFilteringBehavior`.
 
-A typical use of `BothDirections` is dynamic row-level security, where a filter on a user table reaches a dimension table through a bridge table. See @roles-and-rls and @data-security-setup-rls. To check that security filters reach the right tables, test the role with impersonation. See @data-security-testing.
+Un uso típico de `BothDirections` es la seguridad a nivel de filas dinámica, donde un filtro de una tabla de usuarios llega a una tabla de dimensiones a través de una tabla puente. Consulta @roles-and-rls y @data-security-setup-rls. Para comprobar que los filtros de seguridad llegan a las tablas correctas, prueba el rol mediante suplantación de identidad. Consulta @data-security-testing.
 
-### Join On Date Behavior
+### Comportamiento de combinación por fecha
 
-`JoinOnDateBehavior` · DateTimeRelationshipBehavior · Options
+`JoinOnDateBehavior` · DateTimeRelationshipBehavior · Opciones
 
-How the engine matches values when both columns have the `DateTime` data type.
+Cómo el motor hace coincidir los valores cuando ambas columnas tienen el tipo de datos `DateTime`.
 
-| Valor          | Significado                                                                                                                                                                 |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DateAndTime`  | Values must match on both date and time. The default.                                                                                       |
-| `DatePartOnly` | The engine compares only the date part and ignores the time. For example, `2026-09-23 14:30` matches the date `2026-09-23` in a date table. |
+| Valor          | Significado                                                                                                                                                                             |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DateAndTime`  | Los valores deben coincidir tanto en la fecha como en la hora. El valor predeterminado.                                                                 |
+| `DatePartOnly` | El motor compara solo la parte de la fecha e ignora la hora. Por ejemplo, `2026-09-23 14:30` coincide con la fecha `2026-09-23` en una tabla de fechas. |
 
-Use `DatePartOnly` when the from column contains a date and time and the to column is a date table with one row per day. With `DateAndTime`, only the values at exactly midnight match. Power BI Desktop uses `DatePartOnly` for the relationships between a date/time column and its auto date/time table.
+Use `DatePartOnly` cuando la columna de origen contenga una fecha y una hora, y la columna de destino sea una tabla de fechas con una fila por día. Con `DateAndTime`, solo coinciden los valores que sean exactamente a medianoche. Power BI Desktop usa `DatePartOnly` para las relaciones entre una columna de fecha/hora y su tabla automática de fecha/hora.
 
 <!-- TODO (not verifiable from TE3 source): whether DatePartOnly works in DirectQuery. -->
 
-### Rely On Referential Integrity
+### Confiar en la integridad referencial
 
-`RelyOnReferentialIntegrity` · bool · Options
+`RelyOnReferentialIntegrity` · bool · Opciones
 
-For DirectQuery: when `true`, the engine assumes that every value in `FromColumn` exists in `ToColumn`, and the SQL queries it sends to the source use `INNER JOIN`. When `false`, they use `OUTER JOIN`. `INNER JOIN` is usually faster. It matches **Assume referential integrity** in Power BI Desktop. The property has no effect on import tables.
+Para DirectQuery: cuando `true`, el motor asume que todos los valores de `FromColumn` existen en `ToColumn`, y las consultas SQL que envía al origen usan `INNER JOIN`. Cuando `false`, se utiliza `OUTER JOIN`. `INNER JOIN` suele ser más rápido. Coincide con **Asumir integridad referencial** en Power BI Desktop. La propiedad no tiene efecto en las tablas de importación.
 
-Enable it only when the source guarantees that every key has a match, for example through a foreign key constraint. If rows on the from side have no match, they're missing from the results without an error.
+Habilítela solo cuando el origen garantice que cada clave tenga una coincidencia, por ejemplo, mediante una restricción de clave externa. Si hay filas en el lado de origen sin coincidencia, faltarán en los resultados sin que se produzca ningún error.
 
 <!-- TODO (not verifiable from TE3 source): Microsoft's TOM documentation says this property is "unused; reserved for future use", while the TOM library's own description (shown in Tabular Editor) says DirectQuery queries use INNER JOIN when it's true. Confirm which engines and storage modes honor it. -->
 
-### Type
+### Tipo
 
-`Type` · RelationshipType · Options · read-only
+`Type` · RelationshipType · Opciones · de solo lectura
 
-The kind of relationship. The only value is `SingleColumn`, a relationship between one column on each side. Tabular Editor 3 hides this property in the **Properties** view.
+El tipo de relación. El único valor es `SingleColumn`, una relación entre una columna de cada lado. Tabular Editor 3 oculta esta propiedad en la vista **Propiedades**.
