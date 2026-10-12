@@ -65,12 +65,12 @@ A `tool_call` record ends with one of these outcomes:
 
 - `ok`
 - `error`
-- `denied`: the permission it needed wasn't granted, or an administrator's policy blocked it. Only `mcp` records use this outcome; in the AI Assistant, a tool blocked this way ends as `error`
-- `cancelled`: you stopped the turn, or the client disconnected before the tool finished
+- `denied`: no se concedió el permiso necesario o una política del administrador lo bloqueó. Solo los registros `mcp` usan este resultado; en el Asistente de IA, una herramienta bloqueada de esta forma termina como `error`
+- `cancelled`: interrumpiste el turno o el cliente se desconectó antes de que la herramienta terminara
 
 ### Scripts are saved in full
 
-Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran. A script that fails to compile isn't saved.
+Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran. Un script que no compila no se guarda.
 
 ## Lo que nunca se registra
 
@@ -82,7 +82,7 @@ Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `
 
 Log files and `scripts\<date>` folders older than 30 days are deleted by a cleanup that runs once per Tabular Editor session, before the first record is written. Administrators can change the retention period, or keep everything. See [Policies](#policies).
 
-## Policies
+## Directivas
 
 These [policies](xref:policies), both of which require Enterprise Edition, control the log:
 
@@ -91,7 +91,7 @@ These [policies](xref:policies), both of which require Enterprise Edition, contr
 | `AiAuditLogPath`          | Ruta                | Writes the log to another folder for central collection, such as a UNC path to a network share. The path must be absolute; a relative path is ignored and the default folder is used |
 | `AiAuditLogRetentionDays` | Número, de 0 a 3650 | Cuántos días se conserva. `0` conserva todo. El valor predeterminado es 30                                                                                           |
 
-Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder. File names don't include the user or machine name, so give each user a separate folder. Environment variables such as `%USERNAME%` are expanded only in a `REG_EXPAND_SZ` value; the administrative template writes `REG_SZ`, which is used as written.
+Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder. Los nombres de archivo no incluyen el nombre de usuario ni el del equipo, así que asigna a cada usuario una carpeta independiente. Las variables de entorno como `%USERNAME%` solo se expanden en un valor `REG_EXPAND_SZ`; la plantilla administrativa escribe `REG_SZ`, que se usa tal cual.
 
 If the log can't be written, for example because a network share is unreachable, Tabular Editor writes one information entry to its application log for the session and doesn't log later failures. The AI Assistant and the MCP server keep working.
 
