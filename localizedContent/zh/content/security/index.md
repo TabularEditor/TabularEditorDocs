@@ -5,7 +5,7 @@
 ## 本节内容
 
 - @security-privacy - Tabular Editor 3 的安全与隐私注意事项
-- @ai-compliance - What IT and compliance teams need to know to approve the AI Assistant and the MCP server
+- @ai-compliance - IT 与合规团队在批准 AI 助手和 MCP 服务器之前需要了解的内容
 - @privacy-policy - 隐私政策与数据处理
 - @gdpr-delete - 用户数据删除
 - @terms - 我们最新版本的《条款与条件》
