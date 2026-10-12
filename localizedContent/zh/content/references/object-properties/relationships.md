@@ -1,6 +1,6 @@
 ---
 uid: object-properties-relationships
-title: Relationship properties
+title: 关系属性
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Relationship properties
+# 关系属性
 
 <!--
 SUMMARY: Reference for the properties of relationships, such as cardinality, cross filtering behavior and security filtering behavior.
@@ -25,164 +25,164 @@ SUMMARY: Reference for the properties of relationships, such as cardinality, cro
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of relationships. For properties that most objects share, see @object-properties-common.
+本页介绍关系的属性。有关大多数对象共有的属性，请参阅 @object-properties-common。
 
-## Relationship
+## 关系
 
-A relationship connects a column in one table to a column in another table, and a filter on one table then also filters the other. For example, a relationship from `Sales[ProductKey]` to `Product[ProductKey]` makes a filter on `Product[Color]` filter the rows of `Sales`.
+关系将一个表中的列连接到另一个表中的列，因此对其中一个表的筛选也会应用到另一个表。例如，从 `Sales[ProductKey]` 到 `Product[ProductKey]` 的关系会使对 `Product[Color]` 的筛选也会筛选 `Sales` 的行。
 
-Every relationship has a _from_ side and a _to_ side. In a typical one-to-many relationship, the from side is the table with many rows per key, such as a fact table, and the to side is the table with one row per key, such as a dimension table.
+每个关系都有一个 _from_ 端和一个 _to_ 端。在典型的一对多关系中，from 端是每个键对应多行的表(如事实表)，to 端则是每个键对应单行的表(如维度表)。
 
-Tabular Editor 3 shows a relationship in the **TOM Explorer** with the from column on the left and the to column on the right, for example `'Sales'[ProductKey] ∞←1 'Product'[ProductKey]`. The symbols in the middle show the cardinality of each side (`∞` for `Many`, `1` for `One`) and the filter direction (`←` for a single direction, `↔` for both directions). The name updates when you change the columns, the cardinalities or the cross filtering behavior. Tabular Editor 2 uses the same column order without cardinality symbols, and its arrow shows the filter direction as `-->` for a single direction or `<-->` for both directions, for example `'Sales'[ProductKey] --> 'Product'[ProductKey]`.
+Tabular Editor 3 在 **TOM Explorer** 中显示关系时，会将 from 列放在左侧、to 列放在右侧，例如 `'Sales'[ProductKey] ∞←1 'Product'[ProductKey]`。中间的符号表示各端的基数（`∞` 表示 `Many`，`1` 表示 `One`）以及筛选方向（`←` 表示单向，`↔` 表示双向）。当你更改列、基数或交叉筛选行为时，名称会自动更新。 Tabular Editor 2 使用相同的列顺序，但不显示基数符号；其箭头使用 `-->` 表示单向筛选，使用 `<-->` 表示双向筛选，例如 `'Sales'[ProductKey] --> 'Product'[ProductKey]`。
 
-You can create and edit relationships in the **Properties** view or, in Tabular Editor 3, in the @diagram-view. To create relationships from the primary and foreign keys defined in Databricks Unity Catalog, use the @script-create-databricks-relationships script.
+你可以在 **属性**视图中创建和编辑关系；如果使用 Tabular Editor 3，也可以在 @diagram-view 中进行操作。要根据 Databricks Unity Catalog 中定义的主键和外键创建关系，可以使用 @script-create-databricks-relationships 脚本。
 
-### Common properties
+### 常见属性
 
-- [Name](xref:object-properties-common#name)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Changed Properties](xref:object-properties-common#changed-properties)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
+- [名称](xref:object-properties-common#name)
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [已更改的属性](xref:object-properties-common#changed-properties)
+- [错误消息](xref:object-properties-common#error-message)
+- [对象类型](xref:object-properties-common#object-type)
+- [状态](xref:object-properties-common#state)
 
-### From Column
+### 源端列
 
-`FromColumn` · Column · Basic
+`FromColumn` · 列 · 基本
 
-The column on the from side of the relationship. In a one-to-many relationship, this is usually the foreign key column in the fact table, for example `Sales[ProductKey]`. Choosing a column also sets `FromTable`.
+关系源端的列。在一对多关系中，这通常是事实表中的外键列，例如 `Sales[ProductKey]`。选择列也会设置 `FromTable`。
 
-### From Cardinality
+### 源端基数
 
-`FromCardinality` · RelationshipEndCardinality · Basic
+`FromCardinality` · RelationshipEndCardinality · 基本
 
-How many rows on the from side can have the same value in `FromColumn`.
+源端在 `FromColumn` 中允许有多少行具有相同的值。
 
-| 值      | 含义                                                                                                                                                                                                                   |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Many` | Several rows can have the same value. The usual setting for the from side.                                                                                                           |
-| `One`  | Each value appears at most once in the column.                                                                                                                                                       |
-| `None` | The cardinality is unspecified. Don't use it. The relationship dialog in Tabular Editor 3 lists only `One` and `Many`, and the **TOM Explorer** shows `None` as `0`. |
+| 值      | 含义                                                                                            |
+| ------ | --------------------------------------------------------------------------------------------- |
+| `Many` | 多行可以具有相同的值。这是源端的常用设置。                                                                         |
+| `One`  | 每个值在该列中最多出现一次。                                                                                |
+| `None` | 基数未指定。不要使用此值。 Tabular Editor 3 的关系对话框只列出 `One` 和 `Many`，而 **TOM Explorer** 会将 `None` 显示为 `0`。 |
 
-### To Column
+### 目标端列
 
-`ToColumn` · Column · Basic
+`ToColumn` · 列 · 基本
 
-The column on the to side of the relationship. In a one-to-many relationship, this is the key column of the dimension table, for example `Product[ProductKey]`. Choosing a column also sets `ToTable`.
+关系目标端的列。在一对多关系中，这是维度表的键列，例如 `Product[ProductKey]`。选择列时也会设置 `ToTable`。
 
-The Best Practice Analyzer (BPA) rule @kb.bpa-relationship-same-datatype flags relationships where `FromColumn` and `ToColumn` have different data types.
+Best Practice Analyzer (BPA) 的 @kb.bpa-relationship-same-datatype 规则会标记 `FromColumn` 与 `ToColumn` 数据类型不同的关系。
 
-### To Cardinality
+### 目标端基数
 
-`ToCardinality` · RelationshipEndCardinality · Basic
+`ToCardinality` · RelationshipEndCardinality · 基本
 
-How many rows on the to side can have the same value in `ToColumn`. The values are the same as for `FromCardinality`, and `One` is the usual setting. The two cardinalities together set the type of relationship:
+在目标端，`ToColumn` 中同一值最多可以出现在多少行中。可用值与 `FromCardinality` 相同，通常使用 `One`。这两个基数共同决定关系类型：
 
-| From   | To     | Relationship                                                                                                                                |
-| ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Many` | `One`  | Many-to-one. The standard relationship between a fact table and a dimension table.                          |
-| `One`  | `One`  | One-to-one. Both columns must contain unique values.                                                        |
-| `Many` | `Many` | Many-to-many. Neither column needs unique values. Needs compatibility level 1500 or higher. |
+| 源端     | 目标端    | 关系                              |
+| ------ | ------ | ------------------------------- |
+| `Many` | `One`  | 多对一。这是事实表和维度表之间的标准关系。           |
+| `One`  | `One`  | 一对一。两列都必须包含唯一值。                 |
+| `Many` | `Many` | 多对多。两列都不需要唯一值。需要兼容级别为 1500 或更高。 |
 
-When a column on a `One` side contains duplicate values, refresh fails with an error. Many-to-many relationships are _limited_ relationships: they don't add a blank row for missing keys, and they're often slower than many-to-one relationships. Use them only when the data has no unique key.
+如果 `One` 端的列包含重复值，刷新会报错并失败。多对多关系&#x662F;_&#x53D7;&#x9650;_&#x5173;系：它们不会为缺失的键添加空白行，而且通常比多对一关系更慢。仅当数据没有唯一键时才使用它们。
 
-In the Tabular Object Model (TOM), the from side is always the many side of a one-to-many relationship. Tabular Editor accepts `FromCardinality` `One` with `ToCardinality` `Many`, and the engine rejects it when you save, with the error "From end cardinality must always be set to Many, unless the relationship is One-To-One". To relate the tables the other way, swap the from and to columns.
+在 Tabular Object Model (TOM) 中，From 端始终是一对多关系中的“多”端。 Tabular Editor 会接受将 `FromCardinality` 设为 `One` 且将 `ToCardinality` 设为 `Many` 的设置，但在保存时引擎会拒绝，并报错：“From 端基数必须始终设置为 Many，除非该关系为 One-To-One”。如果要按相反方向关联这些表，请交换 From 列和 To 列。
 
-### Active
+### 启用
 
-`IsActive` · bool · Basic
+`IsActive` · bool · 基本
 
-Whether the relationship filters data automatically. The engine rejects a model where active relationships create more than one path between two tables. This happens most often when several relationships use bidirectional cross filtering.
+关系是否自动筛选数据。如果活动关系在两个表之间创建了多于一条路径，引擎会拒绝该模型。这种情况最常见于多个关系使用双向交叉筛选时。
 
-For a second relationship between the same tables, for example from `Sales[ShipDate]` to `Date[Date]` next to the active one from `Sales[OrderDate]`, set `IsActive` to `false` and turn the relationship on in a measure with [USERELATIONSHIP](https://dax.guide/userelationship):
+对于同一对表之间的第二个关系，例如在从 `Sales[OrderDate]` 出发的活动关系旁边，再建立一个从 `Sales[ShipDate]` 到 `Date[Date]` 的关系，请将 `IsActive` 设为 `false`，并在度量值中使用 [USERELATIONSHIP](https://dax.guide/userelationship) 启用该关系：
 
 ```dax
 Sales by Ship Date =
 CALCULATE ( [Total Sales], USERELATIONSHIP ( Sales[ShipDate], 'Date'[Date] ) )
 ```
 
-In the Tabular Editor 3 diagram view, you can also right-click a relationship to activate or deactivate it.
+在 Tabular Editor 3 的图表视图中，你也可以右键单击某个关系来将其激活或停用。
 
 ### ID
 
-`ID` · string · Basic · read-only
+`ID` · string · 基本 · 只读
 
-The internal identifier of the relationship, which is the relationship's name in TOM. Power BI Desktop uses a GUID. Tabular Editor 3 and Tabular Editor 2 give a new relationship a unique name that starts with `New Single Column Relationship`. Use the ID to refer to a specific relationship in a C# script or a Tabular Model Scripting Language (TMSL) command.
+关系的内部标识符，在 TOM 中就是该关系的名称。 Power BI Desktop 使用 GUID。 Tabular Editor 3 和 Tabular Editor 2 会为新关系分配一个唯一名称，名称以 `New Single Column Relationship` 开头。在 C# Script 或 Tabular Model Scripting Language (TMSL) 命令中，可以使用 ID 来引用特定关系。
 
-### From Table
+### 源表
 
-`FromTable` · Table · Options · read-only
+`FromTable` · 表 · 选项 · 只读
 
-The table that contains `FromColumn`. To change it, choose a different `FromColumn`. Tabular Editor 3 hides this property in the **Properties** view, where `FromColumn` already shows the table. You can still read it in a C# script.
+包含 `FromColumn` 的表。要更改它，请选择其他 `FromColumn`。 Tabular Editor 3 会在 **属性** 视图中隐藏此属性，因为 `FromColumn` 已经显示了该表。不过，你仍然可以在 C# Script 中读取它。
 
-### To Table
+### 目标表
 
-`ToTable` · Table · Options · read-only
+`ToTable` · 表 · 选项 · 只读
 
-The table that contains `ToColumn`. To change it, choose a different `ToColumn`. Tabular Editor 3 hides this property in the **Properties** view. You can still read it in a C# script.
+包含 `ToColumn` 的表。若要更改，请选择其他 `ToColumn`。 Tabular Editor 3 会在 **Properties** 视图中隐藏此属性。你仍然可以在 C# Script 中读取该属性。
 
-### Cross Filtering Behavior
+### 交叉筛选行为
 
-`CrossFilteringBehavior` · CrossFilteringBehavior · Options
+`CrossFilteringBehavior` · CrossFilteringBehavior · 选项
 
-The direction filters flow through the relationship.
+筛选沿关系传播的方向。
 
-| 值                | 含义                                                                                                                                                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OneDirection`   | A filter on the to table filters the from table. For example, a filter on `Product` filters `Sales`. The default.                       |
-| `BothDirections` | Filters flow both ways. A filter on `Sales` also filters `Product`, so a slicer on `Product` shows only products that have sales in the current filter. |
-| `Automatic`      | The engine analyzes the relationships and picks one of the other behaviors by using heuristics.                                                                         |
+| 值                | 含义                                                                           |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `OneDirection`   | 对 to 表的筛选会传递到 from 表。例如，对 `Product` 的筛选会传递到 `Sales`。默认值。                     |
+| `BothDirections` | 筛选会双向传播。对 `Sales` 的筛选也会传递到 `Product`，因此 `Product` 上的切片器只会显示在当前筛选条件下有销售记录的产品。 |
+| `Automatic`      | 引擎会分析这些关系，并通过启发式方法从其他行为中选择一种。                                                |
 
-SQL Server 2025 Analysis Services and Power BI Desktop both store a relationship saved with `Automatic` as `BothDirections`. In Power BI Desktop, a filter on the from table then filters the to table, as with `BothDirections`. Set `BothDirections` explicitly when you want filters to flow both ways.
+SQL Server 2025 Analysis Services 和 Power BI Desktop 都会将以 `Automatic` 保存的关系存储为 `BothDirections`。在 Power BI Desktop 中，和 `BothDirections` 一样，对 from 表的筛选也会传递到 to 表。如果你希望筛选双向传播，请显式将其设置为 `BothDirections`。
 
-`BothDirections` makes queries slower and makes it more likely that active relationships create more than one path between two tables, which the engine rejects. To filter in both directions for one measure, keep the relationship one-directional and use [CROSSFILTER](https://dax.guide/crossfilter) in the measure, for example `CROSSFILTER ( Sales[ProductKey], Product[ProductKey], BOTH )`.
+`BothDirections` 会降低查询速度，还会增加活动关系在两个表之间创建多条路径的可能性，而这是引擎不接受的。对于单个度量值，如需双向筛选，请将关系保持为单向，并在该度量值中使用 [CROSSFILTER](https://dax.guide/crossfilter)，例如 `CROSSFILTER ( Sales[ProductKey], Product[ProductKey], BOTH )`。
 
-Bidirectional filtering applies to row-level security only when you also set `SecurityFilteringBehavior`. The BPA rule @kb.bpa-many-to-many-single-direction flags many-to-many relationships that filter in both directions.
+只有同时设置 `SecurityFilteringBehavior` 时，双向筛选才会应用于行级安全性。 BPA 规则 @kb.bpa-many-to-many-single-direction 会标记双向筛选的多对多关系。
 
-### Security Filtering Behavior
+### 安全筛选行为
 
-`SecurityFilteringBehavior` · SecurityFilteringBehavior · Options
+`SecurityFilteringBehavior` · SecurityFilteringBehavior · 选项
 
-The direction the filters of row-level security flow through the relationship. It matches **Apply security filter in both directions** in Power BI Desktop.
+行级安全性筛选器通过关系传播的方向。它对应于 Power BI Desktop 中的 **在两个方向上应用安全筛选器** 选项。
 
-| 值                | 含义                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OneDirection`   | Security filters flow from the to table to the from table only, even when `CrossFilteringBehavior` is `BothDirections`. The default.                                                                                                                                                                                          |
-| `BothDirections` | Security filters flow both ways. Valid only when `CrossFilteringBehavior` is `BothDirections`.                                                                                                                                                                                                                                |
-| `None`           | Blocks security filters from flowing from the one side to the many side. Applies only to limited relationships in a composite model, where one table comes from a Power BI semantic model or Analysis Services database and the other from a different data source. Needs compatibility level 1561 or higher. |
+| 值                | 含义                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| `OneDirection`   | 安全筛选器只会从 to 表传播到 from 表，即使 `CrossFilteringBehavior` 为 `BothDirections` 也是如此。默认值。                              |
+| `BothDirections` | 安全筛选器双向传播。仅当 `CrossFilteringBehavior` 为 `BothDirections` 时有效。                                                 |
+| `None`           | 阻止安全筛选器从“一”侧传播到“多”侧。仅适用于复合模型中的受限关系，其中一个表来自 Power BI 语义模型或 Analysis Services 数据库，另一个表来自不同的数据源。需要兼容级别 1561 或更高。 |
 
-Tabular Editor accepts `BothDirections` when `CrossFilteringBehavior` is `OneDirection`, and the engine rejects it when you save, with the error "cannot have SecurityFilterBehavior set to BothDirections when the CrossFilterBehavior is set to OneDirection". The same error occurs when you change `CrossFilteringBehavior` back to `OneDirection` on a relationship that filters security in both directions, so change `SecurityFilteringBehavior` first.
+当 `CrossFilteringBehavior` 为 `OneDirection` 时，Tabular Editor 会接受 `BothDirections`，但在保存时引擎会拒绝，并报错“cannot have SecurityFilterBehavior set to BothDirections when the CrossFilterBehavior is set to OneDirection”。如果某个关系当前以双向方式传播安全筛选器，而你将 `CrossFilteringBehavior` 改回 `OneDirection`，也会出现同样的错误，因此请先更改 `SecurityFilteringBehavior`。
 
-A typical use of `BothDirections` is dynamic row-level security, where a filter on a user table reaches a dimension table through a bridge table. See @roles-and-rls and @data-security-setup-rls. To check that security filters reach the right tables, test the role with impersonation. See @data-security-testing.
+`BothDirections` 的典型用法之一是动态行级安全性：用户表上的筛选器通过桥接表传播到维度表。见 @roles-and-rls 和 @data-security-setup-rls。要检查安全筛选器是否传播到正确的表，请使用模拟身份来测试该角色。见 @data-security-testing。
 
-### Join On Date Behavior
+### 基于日期的联接行为
 
-`JoinOnDateBehavior` · DateTimeRelationshipBehavior · Options
+`JoinOnDateBehavior` · DateTimeRelationshipBehavior · 选项
 
-How the engine matches values when both columns have the `DateTime` data type.
+当两列都具有 `DateTime` 数据类型时，引擎如何匹配值。
 
-| 值              | 含义                                                                                                                                                                          |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DateAndTime`  | Values must match on both date and time. The default.                                                                                       |
-| `DatePartOnly` | The engine compares only the date part and ignores the time. For example, `2026-09-23 14:30` matches the date `2026-09-23` in a date table. |
+| 值              | 含义                                                            |
+| -------------- | ------------------------------------------------------------- |
+| `DateAndTime`  | 日期和时间都必须匹配。默认值。                                               |
+| `DatePartOnly` | 引擎只比较日期部分，忽略时间。例如，`2026-09-23 14:30` 会匹配日期表中的日期 `2026-09-23`。 |
 
-Use `DatePartOnly` when the from column contains a date and time and the to column is a date table with one row per day. With `DateAndTime`, only the values at exactly midnight match. Power BI Desktop uses `DatePartOnly` for the relationships between a date/time column and its auto date/time table.
+当 From 列包含日期和时间，而 To 列是每天一行的日期表时，使用 `DatePartOnly`。使用 `DateAndTime` 时，只有恰好在午夜的值才会匹配。 Power BI Desktop 对日期/时间列与其自动日期/时间表之间的关系使用 `DatePartOnly`。
 
 <!-- TODO (not verifiable from TE3 source): whether DatePartOnly works in DirectQuery. -->
 
-### Rely On Referential Integrity
+### 依赖参照完整性
 
-`RelyOnReferentialIntegrity` · bool · Options
+`RelyOnReferentialIntegrity` · bool · 选项
 
-For DirectQuery: when `true`, the engine assumes that every value in `FromColumn` exists in `ToColumn`, and the SQL queries it sends to the source use `INNER JOIN`. When `false`, they use `OUTER JOIN`. `INNER JOIN` is usually faster. It matches **Assume referential integrity** in Power BI Desktop. The property has no effect on import tables.
+对于 DirectQuery：当 `true` 时，引擎会假定 `FromColumn` 中的每个值都存在于 `ToColumn` 中，并且发送到数据源的 SQL 查询会使用 `INNER JOIN`。当 `false` 时，这些查询会使用 `OUTER JOIN`。 `INNER JOIN` 通常更快。它对应于 Power BI Desktop 中的 **假定参照完整性**。此属性对导入表没有影响。
 
-Enable it only when the source guarantees that every key has a match, for example through a foreign key constraint. If rows on the from side have no match, they're missing from the results without an error.
+仅当数据源保证每个键都有匹配项时才启用它，例如通过外键约束。如果 From 端的行没有匹配项，它们将不会出现在结果中，且不会报错。
 
 <!-- TODO (not verifiable from TE3 source): Microsoft's TOM documentation says this property is "unused; reserved for future use", while the TOM library's own description (shown in Tabular Editor) says DirectQuery queries use INNER JOIN when it's true. Confirm which engines and storage modes honor it. -->
 
-### Type
+### 类型
 
-`Type` · RelationshipType · Options · read-only
+`Type` · RelationshipType · 选项 · 只读
 
-The kind of relationship. The only value is `SingleColumn`, a relationship between one column on each side. Tabular Editor 3 hides this property in the **Properties** view.
+关系的类型。唯一的值是 `SingleColumn`，表示两端各一列之间的关系。 Tabular Editor 3 会在 **属性** 视图中隐藏此属性。
