@@ -2,7 +2,7 @@
 uid: connect-databricks
 title: Conectar a Databricks
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,27 +19,36 @@ applies_to:
 
 # Conectar a Databricks
 
-Empiece por **Modelo > Importar tablas...** y elija un origen de Databricks. Todos los métodos de autenticación requieren el **Host** y el **HTTP Path** del SQL Warehouse o del clúster. Databricks muestra ambos en la página de detalles de conexión del recurso de computación.
+The Databricks connector connects to SQL warehouses and clusters in Azure Databricks and in Databricks workspaces on other clouds. It's available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
 
-![Cuadro de diálogo Conectar a Databricks, con Azure AD seleccionado como tipo de autenticación y un botón Iniciar sesión a su lado](~/content/assets/images/features/connectivity/databricks-connection.png)
+Select **Model > Import tables...** and choose a Databricks source to open the dialog. @connecting-to-azure-databricks walks through an Azure Databricks import step by step.
 
-## Métodos de autenticación
+![The Connect to Databricks dialog, with Azure AD selected as the authentication type and a Sign in button beside it](~/content/assets/images/features/connectivity/databricks-connection.png)
 
-| Autenticación                       | Lo que debe proporcionar                                  | Se reconecta sin supervisión   |
-| ----------------------------------- | --------------------------------------------------------- | ------------------------------ |
-| **Token de acceso**                 | Un token de acceso personal de Databricks                 | Sí, hasta que caduque el token |
-| **Nombre de usuario / Contraseña**  | Nombre de usuario y contraseña                            | Sí                             |
-| **Azure AD**                        | Inicio de sesión con Microsoft Entra ID                   | Solo para Azure Databricks     |
-| **OAuth (OIDC)** | Inicio de sesión mediante el navegador                    | No                             |
-| **OAuth (M2M)**  | Un ID de cliente y un secreto de un principal de servicio | Sí                             |
+## Requisitos del sistema
 
-> [!NOTE]
-> **Azure AD** solo está disponible para Azure Databricks. En un Workspace de Databricks hospedado en cualquier otro lugar, usa cualquiera de las otras cuatro.
+Install the [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) on your machine (see [Prerequisites](xref:connecting-to-azure-databricks#prerequisites) in the tutorial for the supported drivers).
 
-Para una actualización programada, **OAuth (M2M)** suele ser la opción habitual: es un principal de servicio, así que nada caduca cuando una persona deja la empresa.
+## Connection fields
 
-## Dónde se almacenan las credenciales
+| Campo                                                                                            | Descripción                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Server Hostname**                                                                              | The host name from the **Connection details** tab of the compute resource in Databricks. Obligatorio                                                              |
+| **HTTP Path**                                                                                    | The HTTP path from the same tab. Obligatorio                                                                                                                      |
+| **Type**                                                                                         | The authentication option. See [Authentication](#authentication)                                                                                                  |
+| **Username** and **Password**, or **Sign in...** | The credentials for the selected authentication option. The fields change with the option                                                                         |
+| **Advanced**                                                                                     | Optional settings: **Default catalog**, **Database**, **Automatic Proxy Discovery**, **Query tags**, **Implementation** and **Metric View BI Compatibility Mode** |
 
-Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, así que no se guardan en el control de versiones y cualquier compañero que abra el mismo modelo tendrá que introducir las suyas.
+## Autenticación
 
-La expresión M generada solo especifica el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
+| Autenticación                       | Lo que debe proporcionar                                                             | Interactive sign-in |
+| ----------------------------------- | ------------------------------------------------------------------------------------ | ------------------- |
+| **Token de acceso**                 | A Databricks personal access token. When it expires, enter a new one | No                  |
+| **Nombre de usuario / Contraseña**  | Nombre de usuario y contraseña                                                       | No                  |
+| **Azure AD**                        | A Microsoft Entra ID sign-in. Available only for Azure Databricks    | Sí                  |
+| **OAuth (OIDC)** | Inicio de sesión mediante el navegador                                               | Sí                  |
+| **OAuth (M2M)**  | A service principal client ID and client secret                                      | No                  |
+
+For unattended connections, use **OAuth (M2M)**, which authenticates as a service principal.
+
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
