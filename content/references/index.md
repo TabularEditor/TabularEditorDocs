@@ -1,6 +1,6 @@
 # References
 
-This section contains reference materials for Tabular Editor.
+This section contains reference material for Tabular Editor.
 
 ## In this section
 
@@ -12,12 +12,12 @@ This section contains reference materials for Tabular Editor.
 ### Technical Reference
 - @faq - Frequently asked questions and answers
 - @preferences - Application settings and configuration options
-- @policies - The use of group policies
+- @policies - Registry policies that disable features and lock AI settings
 - @shortcuts3 - Keyboard shortcuts reference with Tabular Editor 3
 - @shortcuts2 - Keyboard shortcuts reference with Tabular Editor 2
 - @user-options - Tabular Model User Options (.tmuo) File
 - @supported-files - File formats Tabular Editor can open and save
-- @accessibility - Color blindness mode, keyboard access, scaling and themes
+- @accessibility - Color blindness mode, keyboard shortcuts, display scaling, themes and language
 
 ### Object Properties Reference
 - @object-properties - What every property in the Properties view does, grouped by object type
@@ -27,8 +27,4 @@ This section contains reference materials for Tabular Editor.
 
 ### Deprecated Features
 - @formatdax - Information about deprecated DAX formatting functionality
-
----
-
-*Use this section to find detailed reference information, downloads, and technical documentation.*
 
