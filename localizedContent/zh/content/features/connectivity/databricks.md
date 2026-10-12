@@ -19,36 +19,36 @@ applies_to:
 
 # 连接到 Databricks
 
-The Databricks connector connects to SQL warehouses and clusters in Azure Databricks and in Databricks workspaces on other clouds. It's available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+Databricks 连接器可连接到 Azure Databricks 中的 SQL Warehouse 和群集，以及其他云端 Databricks Workspace 中的 SQL Warehouse 和群集。它仅以隐式数据源形式提供（参阅 [旧版、结构化和隐式数据源](xref:connectivity#legacy-structured-and-implicit-data-sources)）。
 
-Select **Model > Import tables...** and choose a Databricks source to open the dialog. @connecting-to-azure-databricks walks through an Azure Databricks import step by step.
+选择 **模型 > 导入表...**，然后选择 Databricks 数据源以打开对话框。 @connecting-to-azure-databricks 会逐步演示 Azure Databricks 导入过程。
 
-![The Connect to Databricks dialog, with Azure AD selected as the authentication type and a Sign in button beside it](~/content/assets/images/features/connectivity/databricks-connection.png)
+![“连接到 Databricks”对话框，其中身份验证类型选择为 Azure AD，旁边有一个“登录”按钮](~/content/assets/images/features/connectivity/databricks-connection.png)
 
 ## 前提条件
 
-Install the [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) on your machine (see [Prerequisites](xref:connecting-to-azure-databricks#prerequisites) in the tutorial for the supported drivers).
+在你的计算机上安装 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)（支持的驱动程序请参阅教程中的[先决条件](xref:connecting-to-azure-databricks#prerequisites)）。
 
-## Connection fields
+## 连接字段
 
-| 字段                                                                                               | 说明                                                                                                                                                                                |
-| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Server Hostname**                                                                              | The host name from the **Connection details** tab of the compute resource in Databricks. 必需                                                                       |
-| **HTTP Path**                                                                                    | The HTTP path from the same tab. 必需                                                                                                                               |
-| **Type**                                                                                         | The authentication option. See [Authentication](#authentication)                                                                                                  |
-| **Username** and **Password**, or **Sign in...** | The credentials for the selected authentication option. The fields change with the option                                                                         |
-| **Advanced**                                                                                     | Optional settings: **Default catalog**, **Database**, **Automatic Proxy Discovery**, **Query tags**, **Implementation** and **Metric View BI Compatibility Mode** |
+| 字段                                                                           | 说明                                                                 |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **服务器主机名**                                                                   | Databricks 中计算资源的 **连接详细信息** 选项卡中的主机名。必需                           |
+| **HTTP 路径**                                                                  | 同一选项卡中的 HTTP 路径。必需                                                 |
+| **类型**                                                                       | 身份验证选项。参阅 [身份验证](#authentication)                                  |
+| **用户名** 和 **密码**，或 **登录...** | 所选身份验证选项的凭据。这些字段会随所选选项而变化                                          |
+| **高级**                                                                       | 可选设置：**默认目录**、**数据库**、**自动代理发现**、**查询标记**、**实现**以及**指标视图 BI 兼容模式** |
 
 ## 身份验证
 
-| 身份验证                                | 需要提供的内容                                                                              | Interactive sign-in |
-| ----------------------------------- | ------------------------------------------------------------------------------------ | ------------------- |
-| **访问令牌**                            | A Databricks personal access token. When it expires, enter a new one | 否                   |
-| **用户名 / 密码**                        | 用户名和密码                                                                               | 否                   |
-| **Azure AD**                        | A Microsoft Entra ID sign-in. Available only for Azure Databricks    | 是的                  |
-| **OAuth (OIDC)** | 通过浏览器登录                                                                              | 是的                  |
-| **OAuth (M2M)**  | A service principal client ID and client secret                                      | 否                   |
+| 身份验证                                | 需要提供的内容                                     | 交互式登录 |
+| ----------------------------------- | ------------------------------------------- | ----- |
+| **访问令牌**                            | Databricks 个人访问令牌。过期后，请输入新的令牌               | 否     |
+| **用户名 / 密码**                        | 用户名和密码                                      | 否     |
+| **Azure AD**                        | Microsoft Entra ID 登录。仅适用于 Azure Databricks | 是的    |
+| **OAuth (OIDC)** | 通过浏览器登录                                     | 是的    |
+| **OAuth (M2M)**  | 服务主体的客户端 ID 和客户端密钥                          | 否     |
 
-For unattended connections, use **OAuth (M2M)**, which authenticates as a service principal.
+对于无人值守连接，请使用 **OAuth (M2M)**，它会以服务主体的身份进行身份验证。
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor 会将连接设置和凭据保存到您的用户选项文件中（请参阅[凭据的存储位置](xref:connectivity#where-credentials-are-stored)）。
