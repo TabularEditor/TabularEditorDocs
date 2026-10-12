@@ -19,59 +19,59 @@ applies_to:
 
 # 连接到 Snowflake
 
-The Snowflake connector connects to Snowflake data warehouses and is available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+Snowflake 连接器可连接到 Snowflake Warehouse，并且仅可作为隐式数据源使用（参见 [旧版、结构化和隐式数据源](xref:connectivity#legacy-structured-and-implicit-data-sources)）。
 
-Select **Model > Import tables...** and choose a Snowflake source to open the dialog.
+选择 **模型 > 导入表...**，然后选择 Snowflake 数据源以打开对话框。
 
-![The Connect to Snowflake dialog, with External browser selected in the Authenticator list and the user name and password fields disabled](~/content/assets/images/features/connectivity/snowflake-connection.png)
+![“连接到 Snowflake”对话框：在“身份验证方式”列表中选择了“外部浏览器”，且“用户名”和“密码”字段已禁用](~/content/assets/images/features/connectivity/snowflake-connection.png)
 
-## Connection fields
+## 连接字段
 
-| 字段                                                                        | 说明                                                                                                       |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **服务器**                                                                   | Your Snowflake account URL. 必需                                                           |
-| **Warehouse**                                                             | The warehouse to run queries on. 必需                                                      |
-| **Database (optional)**                                | The database to import from                                                                              |
-| **Authenticator**                                                         | The authentication option. See [Authentication](#authentication)                         |
-| **Username**, **Password** and **Private key file**                       | The credentials for the selected authenticator. The labels change with the authenticator |
-| **Additional connection string properties (optional)** | Extra connection string settings                                                                         |
+| 字段                      | 说明                                |
+| ----------------------- | --------------------------------- |
+| **服务器**                 | 你的 Snowflake 账户 URL。必需            |
+| **Warehouse**           | 用于运行查询的 Warehouse。必需              |
+| **数据库（可选）**             | 要导入的数据库                           |
+| **身份验证方式**              | 身份验证选项。参见 [身份验证](#authentication) |
+| **用户名**、**密码**和**私钥文件** | 所选身份验证方式的凭据。标签会随身份验证器而变化          |
+| **附加连接字符串属性（可选）**       | 附加连接字符串设置                         |
 
 ## 身份验证
 
-| 身份验证          | 你需要提供的内容                                                                                                                        | Interactive sign-in |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| **Snowflake** | 用户名和密码                                                                                                                          | 否                   |
-| **外部浏览器**     | 通过浏览器向你的身份提供程序登录                                                                                                                | 是的                  |
-| **OAuth**     | An OAuth access token from your OAuth provider, in the **Token** field. When the token expires, enter a new one | 否                   |
-| **密钥对**       | User name and an RSA private key file, plus the key's passphrase if it's encrypted                                              | 否                   |
+| 身份验证          | 你需要提供的内容                                              | 交互式登录 |
+| ------------- | ----------------------------------------------------- | ----- |
+| **Snowflake** | 用户名和密码                                                | 否     |
+| **外部浏览器**     | 通过浏览器向你的身份提供程序登录                                      | 是的    |
+| **OAuth**     | 在 **令牌** 字段中输入 OAuth 提供程序提供的 OAuth 访问令牌。令牌过期后，请输入新的令牌 | 否     |
+| **密钥对**       | 用户名和 RSA 私钥文件；如果该密钥已加密，还需提供其密码短语                      | 否     |
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor 会将连接设置和凭据保存在你的用户选项文件中（参见 [凭据的存储位置](xref:connectivity#where-credentials-are-stored)）。
 
 ## 密钥对身份验证
 
-Snowflake service users (`TYPE = SERVICE`) can't sign in with a password, so use **Key pair** for them. See [Planning for the deprecation of single-factor password sign-ins](https://docs.snowflake.com/en/user-guide/security-mfa-rollout).
+Snowflake 服务用户（`TYPE = SERVICE`）不能使用密码登录，因此应为此类用户选择 **密钥对**。参见 [单因素密码登录弃用规划](https://docs.snowflake.com/en/user-guide/security-mfa-rollout)。
 
-1. Select **Key pair** in the **Authenticator** list. The **Password** field changes to **Passphrase**.
-2. Enter your username.
-3. Browse to your private key file.
-4. If the key is encrypted, enter its passphrase.
+1. 在 **身份验证器** 列表中选择 **密钥对**。**密码** 字段会变为 **密码短语**。
+2. 输入用户名。
+3. 浏览并选择私钥文件。
+4. 如果密钥已加密，请输入对应的密码短语。
 
-**OK** is enabled once **Server**, **Warehouse**, **Username** and **Private key file** are filled in. The private key file must use one of these formats:
+填写完 **服务器**、**Warehouse**、**用户名** 和 **私钥文件** 后，**确定** 按钮才会启用。私钥文件必须采用以下格式之一：
 
-- unencrypted PKCS#1
-- unencrypted PKCS#8
-- passphrase-encrypted PKCS#8, the format [Snowflake's key-pair instructions](https://docs.snowflake.com/en/user-guide/key-pair-auth) produce
+- 未加密的 PKCS#1
+- 未加密的 PKCS#8
+- 使用密码短语加密的 PKCS#8；这也是 [Snowflake 官方密钥对说明](https://docs.snowflake.com/en/user-guide/key-pair-auth) 生成的格式
 
-When you switch between **Key pair** and another authenticator, the **Password** or **Passphrase** field is cleared. Tabular Editor saves the private key file path only while **Key pair** is selected.
+当你在 **密钥对** 和其他 **身份验证器** 之间切换时，**密码** 或 **密码短语** 字段会被清空。只有在选择 **密钥对** 时，Tabular Editor 才会保存私钥文件路径。
 
 > [!IMPORTANT]
-> Keys encrypted with the legacy OpenSSL scheme, which begin with `-----BEGIN RSA PRIVATE KEY-----` and carry `Proc-Type` and `DEK-Info` headers, aren't supported. Convert such a key to encrypted PKCS#8:
+> 不支持采用旧版 OpenSSL 方案加密的密钥：这类密钥以 `-----BEGIN RSA PRIVATE KEY-----` 开头，并包含 `Proc-Type` 和 `DEK-Info` 标头。可将这类密钥转换为加密的 PKCS#8：
 >
 > ```bash
 > openssl pkcs8 -topk8 -v2 aes256 -in rsa_key.pem -out rsa_key.p8
 > ```
 >
-> Conversion keeps the key pair, and the public key registered on your Snowflake user stays valid.
+> 转换不会改变密钥对，已为你的 Snowflake 用户注册的公钥仍然有效。
 
 <!-- IMAGE NEEDED: connectivity/snowflake-key-pair.png
      The Snowflake connection dialog with Key pair selected, so the Private key file field
@@ -81,4 +81,4 @@ When you switch between **Key pair** and another authenticator, the **Password**
 
 ## 外部浏览器登录
 
-Tabular Editor caches the browser sign-in. From Tabular Editor 3.27.0, if Snowflake rejects the cached sign-in, for example because your identity provider expired or revoked it, Tabular Editor discards it and opens the browser sign-in again. If you close the browser sign-in or it times out, the operation is canceled.
+Tabular Editor 会缓存浏览器登录状态。从 Tabular Editor 3.27.0 起，如果 Snowflake 拒绝使用已缓存的登录状态(例如你的身份提供商已使其过期或已将其撤销)，Tabular Editor 会丢弃该缓存，并重新打开浏览器登录窗口。如果你关闭浏览器登录窗口，或登录超时，操作将被取消。
