@@ -17,7 +17,7 @@ applies_to:
 
 Este script crea grupos de tablas predeterminados en Tabular Editor 3.
 
-## Script
+## Secuencia de comandos
 
 ### Título del script
 
