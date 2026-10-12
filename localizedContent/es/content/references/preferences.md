@@ -1068,4 +1068,4 @@ Lista de direcciones que deben omitir el proxy (p. ej., `localhost;*.company.loc
 
 ## Próximos pasos
 
-For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide [Personalizing TE3](xref:personalizing-te3).
+Para consultar una guía fácil de usar sobre las preferencias que se modifican con más frecuencia, consulta la guía de primeros pasos [Personalizing TE3](xref:personalizing-te3).
