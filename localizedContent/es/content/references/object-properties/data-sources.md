@@ -174,7 +174,7 @@ Set it to `-1` to use the model's [Data Source Default Max Connections](xref:obj
 
 <!-- TODO (not verifiable from TE3 source): what the engine does with Max Connections 0 during refresh. SSAS 2025 accepts 0 and negative values on save without validation. -->
 
-### Type
+### Tipo
 
 `Type` · DataSourceType · Options · read-only
 
@@ -230,7 +230,7 @@ The value is free text. The TOM `DataSourceProtocol` class lists the names TOM k
 
 The storage account name, for protocols that connect to an Azure storage account, such as Azure Blob Storage or Azure Table Storage. Together with `Domain`, it forms the address of the account, for example the account `contosodata` and the domain `blob.core.windows.net`.
 
-### Address
+### Dirección
 
 `Address` · Address · Connection Details · read-only
 
@@ -286,7 +286,7 @@ An email address, for protocols that identify the connection by the user's email
 
 The name of an object in the source, for protocols that address a single object.
 
-### Path
+### Ruta
 
 `Path` · string · Connection Details
 
@@ -304,7 +304,7 @@ A protocol-specific address value.
 
 A native query, typically SQL, that the connection sends to the source, for example `SELECT * FROM dbo.Customer`. Most models leave it empty and filter in the M expressions of the partitions.
 
-### Resource
+### Recurso
 
 `Resource` · string · Connection Details
 
@@ -415,7 +415,7 @@ Protocol-specific connection options. Click the ellipsis button to edit them in 
 
 For example, the `hierarchicalNavigation` option sets whether the source is navigated as a hierarchy of database, schema and table. When you import tables from ODBC into a structured data source, Tabular Editor 3 sets it to `true`. If the option isn't set when Tabular Editor 3 generates the M expression for an imported table, Tabular Editor 3 uses `true` for the `ole-db` protocol and `false` for the others.
 
-### Type
+### Tipo
 
 `Type` · DataSourceType · Options · read-only
 
@@ -461,7 +461,7 @@ In a composite model that uses DirectQuery over another semantic model, the shar
 
 <!-- TODO (not verifiable from TE3 source; the TOM reference only says "A reference to the NamedExpression where the parameter associated with the remote model"): confirm the scenario for Expression Source and Remote Parameter Name on shared expressions, that is, proxy parameters for a remote model in a composite model. -->
 
-### Kind
+### Tipo
 
 `Kind` · ExpressionKind · Options
 
@@ -512,7 +512,7 @@ Query groups need compatibility level 1480 or higher. When you delete a query gr
 - [Annotations](xref:object-properties-common#annotations)
 - [Object Type](xref:object-properties-common#object-type)
 
-### Folder
+### Carpeta
 
 `Folder` · string · Options
 
@@ -544,7 +544,7 @@ Data binding hints need compatibility level 1608 or higher. Add and edit them in
 
 The ID of the Fabric data connection to bind to, usually a GUID. You find it in the settings of the connection under **Manage connections and gateways** in Fabric.
 
-### Type
+### Tipo
 
 `Type` · BindingInfoType · Options · read-only
 
