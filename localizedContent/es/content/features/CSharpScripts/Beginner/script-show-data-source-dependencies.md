@@ -17,7 +17,7 @@ applies_to:
 
 El script devuelve las tablas que hacen referencia al origen de datos explícito (heredado) seleccionado. Esto facilita determinar dónde se utiliza el origen de datos seleccionado.
 
-## Script
+## Secuencia de comandos
 
 ### Mostrar las dependencias del origen de datos
 
