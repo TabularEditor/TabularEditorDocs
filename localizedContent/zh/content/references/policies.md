@@ -58,13 +58,13 @@ HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor
 
 ## 值类型
 
-| 设置类型     | 注册表类型          | 说明                                                                                                                                                                                                           |
-| -------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 开/关策略    | `REG_DWORD`    | 任何非零值都会强制执行该策略。 `0` 以及该值不存在，都表示不强制实施该策略。                                                                                                                                                                     |
-| 选项       | `REG_SZ`       | The name of the choice, for example `Read`, which is what the administrative template writes. A `REG_DWORD` holding the position of the choice in the list is also accepted. |
-| Number   | `REG_DWORD`    | What the administrative template writes. A `REG_SZ` holding the number is also accepted.                                                                                     |
-| 列表       | `REG_MULTI_SZ` | 每行一个条目。也接受使用分号分隔各条目的 `REG_SZ`。                                                                                                                                                                               |
-| 路径、地址或名称 | `REG_SZ`       |                                                                                                                                                                                                              |
+| 设置类型     | 注册表类型          | 说明                                                            |
+| -------- | -------------- | ------------------------------------------------------------- |
+| 开/关策略    | `REG_DWORD`    | 任何非零值都会强制执行该策略。 `0` 以及该值不存在，都表示不强制实施该策略。                      |
+| 选项       | `REG_SZ`       | 选项的名称，例如 `Read`；这也是管理模板写入的内容。也可以使用 `REG_DWORD` 来存储该选项在列表中的位置。 |
+| 数值       | `REG_DWORD`    | 管理模板写入的内容。也可以使用 `REG_SZ` 来存储该数值。                              |
+| 列表       | `REG_MULTI_SZ` | 每行一个条目。也接受使用分号分隔各条目的 `REG_SZ`。                                |
+| 路径、地址或名称 | `REG_SZ`       |                                                               |
 
 Tabular Editor 只会在启动时读取一次策略值。更改会在下次启动应用程序时生效。
 
@@ -75,10 +75,10 @@ Tabular Editor 只会在启动时读取一次策略值。更改会在下次启�
 | 值                              | 产品            | 启用后……                                                                                                             |
 | ------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------- |
 | DisableUpdates                 | TE3, TE2      | Tabular Editor 不会在线检查是否有新版本可用。用户也无法手动检查更新。                                                                        |
-| DisableCSharpScripts           | TE3, TE2      | Tabular Editor 不允许用户创建或执行 C# Script。                                                                              |
+| DisableCSharpScripts           | TE3、TE2       | Tabular Editor 不允许用户创建或执行 C# Script。                                                                              |
 | DisableMacros                  | TE3, TE2      | Tabular Editor 不允许用户保存或运行宏。应用启动时不会加载存储在 `%LocalAppData%` 文件夹中的宏。                                                  |
 | DisableBpaDownload             | TE3, CLI, TE2 | 无法从网络下载 Best Practice Analyzer 规则。保存在本地或随模型一起存放的规则仍可正常使用。                                                         |
-| DisableWebDaxFormatter         | TE3, CLI, TE2 | 会将代码发送到 daxformatter.com 的 DAX 格式化程序已被禁用。 Tabular Editor 3 仍提供其内置格式化程序，不会通过网络发送任何数据。              |
+| DisableWebDaxFormatter         | TE3、CLI、TE2   | 会将代码发送到 daxformatter.com 的 DAX 格式化程序已被禁用。 Tabular Editor 3 仍提供其内置格式化程序，不会通过网络发送任何数据。              |
 | DisableErrorReports            | TE3           | 用户无法向 Tabular Editor 支持团队发送错误或崩溃 Report。                                                                          |
 | DisableTelemetry               | TE3, CLI      | 不会收集匿名使用数据，也不会将其发送给 Tabular Editor 支持团队。                                                                          |
 | DisableDaxOptimizer            | TE3           | DAX优化器集成功能不可用。                                                                                                    |
@@ -128,11 +128,11 @@ CLI 没有版本之分，因此，在桌面应用中要求使用 Tabular Editor 
 | MaxModelDataAccess        | Deny, Read        | 模型中的数据值，也就是 DAX 查询的结果。                                                                                                                                             |
 | MaxBpaAccess              | Deny, Read, Write | Best Practice Analyzer 规则。 `Read` 允许列出规则并运行分析；`Write` 还允许添加和修改规则。                                                                                                  |
 | MaxDocumentsAccess        | Deny, Read, Write | 用户当前打开的文档，例如 C# Script 脚本和 DAX 查询。 `Read` 允许读取其内容；`Write` 还允许对其进行修改。                                                                                               |
-| 最大宏访问权限                   | Deny, Read, Write | 用户的宏库。                                                                                                                                                             |
+| 最大宏访问权限                   | 拒绝、读取、写入          | 用户的宏库。                                                                                                                                                             |
 | McpMaxModelMetadataAccess | Deny, Read, Write | 同样的五类资源，但仅适用于 MCP 服务器。                                                                                                                                             |
 | McpMaxModelDataAccess     | Deny, Read        |                                                                                                                                                                    |
 | McpMaxBpaAccess           | Deny, Read, Write |                                                                                                                                                                    |
-| McpMaxDocumentsAccess     | Deny, Read, Write |                                                                                                                                                                    |
+| McpMaxDocumentsAccess     | 拒绝、读取、写入          |                                                                                                                                                                    |
 | Mcp 最大宏访问权限               | Deny, Read, Write |                                                                                                                                                                    |
 
 这五个 `McpMax...` 值仅适用于 MCP 服务器。当其中某个值未设置时，MCP 服务器会继承对应的 `Max...` 限制。它们只能降低该限制，不能提高，因此无人值守代理的权限绝不会超过交互式助手。
