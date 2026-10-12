@@ -2,7 +2,7 @@
 uid: connect-oledb
 title: Conectar mediante OLE DB
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,28 +19,31 @@ applies_to:
 
 # Conectar mediante OLE DB
 
-OLE DB es la otra opción de propósito general y la que conviene usar cuando un origen ofrece un proveedor OLE DB, pero no un controlador ODBC utilizable.
+The OLE DB connector connects to sources that have an OLE DB provider but no usable ODBC driver. Selecting **Model > Import tables...** and choosing **OLE DB** opens the Windows **Data Link Properties** dialog.
 
 ![Cuadro de diálogo Propiedades de vínculo de datos en la pestaña Proveedor, con la lista de proveedores OLE DB instalados en el equipo](~/content/assets/images/features/connectivity/oledb-connection.png)
 
-## Métodos de autenticación
+## Requisitos previos
 
-Al igual que con ODBC, el proveedor —y no Tabular Editor— decide cómo debes iniciar sesión.
+Install an OLE DB provider for the source that matches the architecture of your Tabular Editor build.
 
-| Campo                                  | Qué es                                                                         |
-| -------------------------------------- | ------------------------------------------------------------------------------ |
-| **Proveedor**                          | Un proveedor OLE DB instalado en este equipo                                   |
-| **Servidor**                           | Lo que el proveedor requiera para identificar el origen                        |
-| **Nombre de usuario** y **Contraseña** | Se proporcionan al proveedor cuando los necesita                               |
-| **Opciones adicionales**               | Configuración adicional de la cadena de conexión, que se transmite sin cambios |
+> [!WARNING]
+> Analysis Services supports fewer OLE DB providers than Windows. If Analysis Services doesn't support the provider, the source imports in Tabular Editor but refresh fails on the server. Use a dedicated connection dialog where one exists, and [ODBC](xref:connect-odbc) where it doesn't.
 
-La lista de proveedores se lee del equipo, por lo que muestra lo que está instalado, no todo lo que existe. Si un proveedor no aparece en la lista, primero debe instalarse con la misma arquitectura que Tabular Editor.
+## Connection fields
 
-> [!TIP]
-> Siempre que exista, utiliza un cuadro de diálogo específico y, en caso contrario, prefiere ODBC a OLE DB. Analysis Services admite una gama más limitada de proveedores OLE DB que Windows, por lo que un origen que se conecta en el asistente puede aun así fallar al actualizarse en el servidor.
+The **Data Link Properties** dialog has these tabs:
 
-## Dónde se guardan las credenciales
+| Campo                         | Descripción                                                                                        |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Provider** tab              | The OLE DB providers installed on this machine. Select the provider for the source |
+| **Connection** tab            | The data source, credentials and other settings the selected provider needs                        |
+| **Advanced** and **All** tabs | Further provider-specific connection string properties                                             |
 
-Las credenciales que introduzcas aquí se guardan, por usuario y por modelo, en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se incluyen en el control de versiones, y un compañero que abra el mismo modelo deberá proporcionar las suyas.
+If a saved connection string names a provider that isn't installed, a warning appears. Install the provider or select another one.
 
-La expresión M generada solo especifica el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
+## Autenticación
+
+The provider determines how you sign in, so enter its sign-in settings, such as a user name and password or integrated security, on the **Connection** tab.
+
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
