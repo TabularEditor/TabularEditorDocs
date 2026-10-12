@@ -90,7 +90,7 @@ A level is one step in a hierarchy. Each level points to a column of the hierarc
 
 Levels have no `IsHidden` or `DisplayFolder` of their own and follow their hierarchy in perspectives. If you translate the hierarchy's name, translate its level names too. The Best Practice Analyzer (BPA) rule @kb.bpa-translate-hierarchy-levels flags levels of visible hierarchies that have no translated name in one or more of the model's cultures.
 
-### Column
+### 列
 
 `Column` · Column · Basic
 
@@ -98,7 +98,7 @@ The column that provides the values of the level. It must be a column of the sam
 
 A hidden column still works in a hierarchy. Hide the level columns to have users browse the data through the hierarchy.
 
-### Ordinal
+### 序号
 
 `Ordinal` · int · Basic
 
