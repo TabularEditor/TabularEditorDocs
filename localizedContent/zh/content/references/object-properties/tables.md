@@ -61,7 +61,7 @@ Tabular Editor 3 的 **TOM Explorer** 中该表所属的表格组。表格组的
 
 在 **TOM Explorer** 中，你还可以右键单击表并选择 **移动到组**，或将表拖到某个表格组上（请参阅 @drag-drop）。 @script-create-table-groups 脚本会根据表的类型和关系将所有表放入相应的组中。
 
-### 启用
+### 启用刷新策略
 
 `EnableRefreshPolicy` · bool · 增量刷新 · _快捷方式_：添加或移除表的 **刷新策略**
 
