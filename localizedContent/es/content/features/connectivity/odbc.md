@@ -2,7 +2,7 @@
 uid: connect-odbc
 title: Conectar mediante ODBC
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,31 +19,40 @@ applies_to:
 
 # Conectar mediante ODBC
 
-ODBC es la opción general para conectarse a un origen que no tiene un cuadro de diálogo específico en Tabular Editor. Así se accede a PostgreSQL, MySQL, MariaDB e IBM Db2, y Tabular Editor reconoce cada uno de ellos lo bastante bien como para generar la expresión M correcta y entrecomillar los identificadores de la forma que espera cada base de datos.
+The ODBC connector connects to any source that has an ODBC driver and no dedicated connection dialog in Tabular Editor. For PostgreSQL, MySQL, MariaDB and IBM Db2, Tabular Editor generates database-specific M expressions and identifier quoting. Select **Model > Import tables...** and choose **ODBC** to open the dialog.
 
-![El cuadro de diálogo "Elegir origen ODBC", con un DSN del sistema seleccionado y el nombre de usuario y la contraseña rellenados](~/content/assets/images/features/connectivity/odbc-connection.png)
+![The Choose ODBC source dialog, with a system DSN selected and a user name and password filled in](~/content/assets/images/features/connectivity/odbc-connection.png)
 
-## Métodos de autenticación
+## Requisitos previos
 
-ODBC no tiene una lista propia de métodos de autenticación. La forma de iniciar sesión la decide el controlador y el DSN que selecciones.
+- An ODBC driver for the source that matches the architecture of your Tabular Editor build (x64 or ARM64). See [Driver architecture](#driver-architecture).
+- A data source name (DSN) for the source, created in the 64-bit ODBC Data Source Administrator.
 
-| Campo                                               | Qué es                                                                                   |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Nombre del Data source (DSN)** | Un DSN configurado en el Administrador de orígenes de datos ODBC de Windows              |
-| **Nombre de usuario** y **contraseña**              | Se proporcionan al controlador cuando el DSN no incluye ya las credenciales              |
-| **Opciones adicionales**                            | Configuración adicional de la cadena de conexión, que se pasa al controlador sin cambios |
+> [!IMPORTANT]
+> A DSN exists only on the machine where you create it, and a model that imports through a DSN refreshes only on machines that have a DSN with the same name. If a service account runs the connection, use a System DSN.
 
-Por lo tanto, que la conexión pueda restablecerse sin que haya una persona presente depende del controlador, no de Tabular Editor. Un DSN con autenticación Integrada o con una cuenta de servicio almacenada se reconecta por sí solo; uno que solicita credenciales, no.
+## Connection fields
 
-> [!NOTE]
-> Un DSN es específico de cada equipo. Un modelo que importa a través de un DSN solo se actualiza en un equipo donde exista un DSN con el mismo nombre, algo que conviene planificar antes de involucrar a un agente de compilación. Usa un DSN de sistema en lugar de un DSN de usuario cuando una cuenta de servicio vaya a ejecutar la actualización.
+| Campo                                                                     | Descripción                                                                                                                              |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Data Source Name (DSN)**                             | A System DSN or User DSN configured on this machine. Obligatorio                                                         |
+| **Username** and **Password**                                             | Credentials passed to the driver, if the DSN requires them                                                                               |
+| **Additional connection string properties (optional)** | Extra connection string settings, passed to the driver unchanged                                                                         |
+| **Row reduction clause** and **Identifier quoting**                       | The SQL syntax Tabular Editor uses to limit preview rows and quote names. Select **Detect** to read both from the driver |
 
-## Los controladores deben coincidir con la arquitectura
+## Autenticación
 
-Tabular Editor 3 es una aplicación de 64 bits en x64 y ARM64, por lo que solo ve controladores ODBC de 64 bits y DSN de 64 bits. Un DSN creado en el administrador ODBC de 32 bits no aparece en la lista. Windows incluye ambos administradores, así que comprueba cuál utilizaste si no aparece un DSN que acabas de crear.
+The driver and DSN determine how you sign in:
 
-## Dónde se almacenan las credenciales
+| Autenticación              | What you supply                                                                       | Interactive sign-in |
+| -------------------------- | ------------------------------------------------------------------------------------- | ------------------- |
+| **DSN credentials**        | Nada. The DSN carries integrated authentication or stored credentials | No                  |
+| **User name and password** | **Username** and **Password** in the dialog, passed to the driver                     | No                  |
 
-Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se incluyen en el control de versiones, y un compañero que abra el mismo modelo proporcionará sus propias credenciales.
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
 
-La expresión M generada solo nombra el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
+## Driver architecture
+
+Tabular Editor 3 lists only 64-bit DSNs, so a DSN created in the 32-bit ODBC Data Source Administrator doesn't appear. If a DSN is missing, create it in the 64-bit ODBC Data Source Administrator (`odbcad32.exe` in `C:\Windows\System32`).
+
+The x64 build loads only x64 ODBC drivers, and the ARM64 build loads only ARM64 ODBC drivers.
