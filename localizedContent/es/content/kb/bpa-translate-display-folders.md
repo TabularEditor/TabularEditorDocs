@@ -1,12 +1,12 @@
 ---
 uid: kb.bpa-translate-display-folders
-title: Translate Display Folders for All Cultures
+title: Traducir las carpetas de visualización para todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
 description: Regla de buenas prácticas que garantiza que las carpetas de visualización estén traducidas para todas las configuraciones regionales definidas.
 ---
 
-# Translate Display Folders for All Cultures
+# Traducir las carpetas de visualización para todas las configuraciones regionales
 
 ## Resumen
 
@@ -70,7 +70,7 @@ Carpetas de visualización creadas sin traducciones.
 
 ### Causa 2: Configuración regional agregada más tarde
 
-Culture added after display folders were defined.
+Se añadió una configuración regional después de definir las carpetas de visualización.
 
 ### Causa 3: Traducción incompleta
 
