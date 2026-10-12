@@ -65,12 +65,12 @@ A `tool_call` record ends with one of these outcomes:
 
 - `ok`
 - `error`
-- `denied`: the permission it needed wasn't granted, or an administrator's policy blocked it. Only `mcp` records use this outcome; in the AI Assistant, a tool blocked this way ends as `error`
-- `cancelled`: you stopped the turn, or the client disconnected before the tool finished
+- `denied`：未授予它所需的权限，或被管理员策略阻止。只有 `mcp` 记录会使用此结果；在 AI Assistant 中，以这种方式被阻止的工具最终会以 `error` 结束
+- `cancelled`：你中止了本轮操作，或客户端在工具完成前已断开连接
 
 ### Scripts are saved in full
 
-Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran. A script that fails to compile isn't saved.
+Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran. 编译失败的脚本不会被保存。
 
 ## 绝不会记录的内容
 
@@ -91,7 +91,7 @@ These [policies](xref:policies), both of which require Enterprise Edition, contr
 | `AiAuditLogPath`          | 路径          | Writes the log to another folder for central collection, such as a UNC path to a network share. The path must be absolute; a relative path is ignored and the default folder is used |
 | `AiAuditLogRetentionDays` | 数值，0 到 3650 | 保留天数。 `0` 表示全部保留。默认值为 30                                                                                                                                                                             |
 
-Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder. File names don't include the user or machine name, so give each user a separate folder. Environment variables such as `%USERNAME%` are expanded only in a `REG_EXPAND_SZ` value; the administrative template writes `REG_SZ`, which is used as written.
+Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder. 文件名不包含用户名或计算机名，因此要为每个用户单独创建文件夹。如 `%USERNAME%` 之类的环境变量仅会在 `REG_EXPAND_SZ` 值中展开；管理模板写入的是 `REG_SZ`，因此会按原样使用。
 
 If the log can't be written, for example because a network share is unreachable, Tabular Editor writes one information entry to its application log for the session and doesn't log later failures. The AI Assistant and the MCP server keep working.
 
