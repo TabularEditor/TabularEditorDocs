@@ -39,19 +39,19 @@ Son las siguientes:
 - **Implementar roles del modelo**: Esta opción indica si se deben implementar los roles definidos en el modelo. Al desmarcar esta opción, se mantendrán tal cual los roles existentes en el modelo. Si va a implementar cambios en tablas o columnas del modelo, quizá tenga que revisar la [configuración de RLS u OLS](xref:data-security-about) para asegurarse de que siga siendo válida.
   - **Implementar miembros de roles del modelo**: Esta opción indica si se deben implementar los miembros de los roles. Es habitual administrar los miembros de rol directamente en el servidor, en lugar de hacerlo en los metadatos del modelo. Al desmarcar esta opción, se evitará que la implementación modifique los miembros de rol existentes en el servidor de destino.
 
-## Data source credentials
+## Credenciales del Data source
 
-By default, Tabular Editor doesn't save passwords, account keys and other secrets when it saves a model to disk. A model loaded from a file may therefore have data sources with a missing secret. The deployment wizard checks for this before it deploys. A secret counts as missing when it's empty or `********`. The wizard checks:
+De forma predeterminada, Tabular Editor no guarda contraseñas, claves de cuenta ni otros secretos cuando guarda un modelo en disco. Por lo tanto, un modelo cargado desde un archivo puede tener Data source con un secreto faltante. El asistente de implementación lo comprueba antes de realizar la implementación. Un secreto se considera ausente si está vacío o es `********`. El asistente comprueba:
 
-- a provider data source whose connection string contains a password keyword, such as `Password` or `Pwd`,
-- a provider data source that impersonates a specific Windows account,
-- a structured data source that uses Windows or username/password authentication, or an account key.
+- un origen de datos del proveedor cuya cadena de conexión contiene una palabra clave de contraseña, como `Password` o `Pwd`,
+- un origen de datos del proveedor que suplanta la identidad de una cuenta de Windows específica,
+- un origen de datos estructurado que usa autenticación de Windows o de nombre de usuario y contraseña, o una clave de cuenta.
 
-For each missing secret, the wizard asks you for the credentials the server should use when it refreshes the model. Tabular Editor stores what you enter, encrypted, as a data source override in the @user-options file, and uses it on the next deployment instead of asking again.
+Para cada secreto ausente, el asistente te pide las credenciales que el servidor debe usar para actualizar el modelo. Tabular Editor almacena lo que introduces, cifrado, como una sobrescritura del Data source en el archivo @user-options y lo usa en la siguiente implementación en lugar de volver a pedírtelo.
 
-When you clear **Deploy Data Sources**, the wizard runs the same check on the data sources that already exist on the target. If the server doesn't return a secret that one of them needs, the wizard asks for it on every deployment, because these answers aren't stored.
+Si desmarcas **Implementar Data source**, el asistente ejecuta la misma comprobación en los Data source que ya existen en el destino. Si el servidor no devuelve un secreto que uno de ellos necesita, el asistente lo pide en cada implementación, porque esas respuestas no se almacenan.
 
-Power BI and Fabric semantic models don't store credentials in the model. You set them on the semantic model in the Power BI service instead.
+Los modelos semánticos de Power BI y Fabric no almacenan credenciales en el modelo. En su lugar, las configuras en el modelo semántico en el servicio de Power BI.
 
 ## Script de implementación
 
