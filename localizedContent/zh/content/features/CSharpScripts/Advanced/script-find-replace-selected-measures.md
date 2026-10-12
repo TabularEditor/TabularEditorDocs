@@ -1,6 +1,6 @@
 ---
 uid: script-find-replace
-title: Find/Replace Measure DAX
+title: 查找/替换度量值 DAX
 author: Kurt Buhler
 updated: 2023-03-01
 applies_to:
@@ -11,12 +11,11 @@ applies_to:
       full: true
 ---
 
-# Find & Replace Substring in Measures
+# 在度量值中查找并替换子字符串
 
 ## 脚本用途
 
-Will find & replace a substring in the model's measures DAX expression. I.e. if you want to replace `'Customers'[Key Account]` with `'Products'[Type]` in many measures.
-An input box lets the user enter the text to find and a subsequent input lets the user define the replacement text.
+在模型的度量值 DAX 表达式中查找并替换子字符串。即例如，你想在多个度量值中将 `'Customers'[Key Account]` 替换为 `'Products'[Type]`。一个输入框让用户输入要查找的文本，另一个输入框让用户定义替换文本。
 
 ## 脚本
 
@@ -156,14 +155,14 @@ using (Form prompt = new Form())
 
 ### 说明
 
-This snippet will create a pop-up dialogue with WinForms that will let you input a substring to search the selected measures and replace with a different substring. A success box dialogue will inform you that the find/replace was successful.
+此代码片段会使用 WinForms 创建一个弹出对话框，让你输入要在所选度量值中搜索的子字符串，并将其替换为另一个子字符串。成功提示框会告知你查找/替换已成功完成。
 
 ### 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 弹出的查找/替换对话框示例，允许用户输入要搜索/替换的子字符串。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong> 信息提示框示例：用于告知用户查找/替换已成功，并显示脚本影响了多少/哪些度量值。</figcaption>
 </figure>
