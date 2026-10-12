@@ -11,7 +11,7 @@ applies_to:
       full: true
 ---
 
-# Count Things in the Model
+# 统计模型中的各类对象
 
 ## 脚本用途
 
@@ -20,7 +20,7 @@ applies_to:
 - 模型中有多少个度量值。
 - 模型中有多少列和计算列。
 - 模型中有多少个表和计算表格。
-- How many relationships, inactive relationships, etc.
+- 模型中有多少个关系、非活动关系等。
 
 ## 脚本
 
@@ -196,11 +196,10 @@ Info ( "In the model, we see the below objects:\n\n"
 
 ### 说明
 
-这段代码会遍历模型并统计不同类型对象的数量，然后以手动构造的分层“节点树”格式展示出来。
-You can comment out the parts that you do not need for your purposes.
+这段代码会遍历模型并统计不同类型对象的数量，然后以手动构造的分层“节点树”格式展示出来。你可以把不需要的部分注释掉。
 
 ## 输出示例
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>Info 信息框输出示例。脚本执行后，会向用户显示模型中各类对象的数量。 If particular objects are not of interest, the user can comment them out or remove them from the script, and re-run it.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>Info 信息框输出示例。脚本执行后，会向用户显示模型中各类对象的数量。如果对某些对象不感兴趣，用户可以在脚本中将其注释掉或删除，然后重新运行。</figcaption>
 </figure>
