@@ -19,26 +19,26 @@ applies_to:
 
 # 连接到 Fabric 和 OneLake
 
-The Fabric connector lists the Lakehouse, Warehouse, SQL database and mirrored database items in the Fabric workspaces you can access, and imports tables from them. Mirrored Azure Databricks catalogs are listed as mirrored databases. Open the dialog from **Model > Import tables...** by choosing **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database**.
+Fabric 连接器会列出你可访问的 Fabric Workspace 中的 Lakehouse、Warehouse、SQL 数据库和镜像数据库项目，并从这些项目中导入表。已镜像的 Azure Databricks 目录会显示为镜像数据库。在 **模型 > 导入表...** 中选择 **Microsoft Fabric Lakehouse**、**Microsoft Fabric Warehouse**、**Microsoft Fabric SQL Database** 或 **Microsoft Fabric Mirrored Database**，即可打开此对话框。
 
 ![“连接到 Lakehouse”对话框，按名称、类型、所有者和位置列出 OneLake catalog 中的项目](~/content/assets/images/features/connectivity/onelake-connection.png)
 
-## Connection fields
+## 连接字段
 
-| 字段                                                             | 说明                                                                                                                                                          |
-| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID                                                                                                    |
-| **OneLake Catalog items**                                      | The items of the selected type in the workspaces you can access, with their **Name**, **Type**, **Owner** and **Location**. Select one item |
+| 字段                                                        | 说明                                                                  |
+| --------------------------------------------------------- | ------------------------------------------------------------------- |
+| **登录...** | 使用 Microsoft Entra ID 登录 Power BI 服务                                |
+| **OneLake 目录项**                                           | 列出你可访问的 Workspace 中所选类型的项目，并显示其 **名称**、**类型**、**所有者** 和 **位置**。选择一项 |
 
 ## 身份验证
 
-**Sign in...** starts a Microsoft Entra ID browser sign-in. If no items appear after you sign in, your account has no access to a workspace that contains them, and a workspace admin grants that access in Fabric.
+**登录...** 会启动 Microsoft Entra ID 浏览器登录流程。如果你登录后仍未看到任何项目，说明你的帐户无权访问包含这些项目的 Workspace。Workspace 管理员需要在 Fabric 中授予你相应的访问权限。
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor 会将连接设置和凭据保存到你的用户选项文件中（请参阅[凭据的存储位置](xref:connectivity#where-credentials-are-stored)）。
 
-## Import and Direct Lake
+## 导入与 Direct Lake
 
-On the last page of the Table Import Wizard, you choose whether the selected tables are created in Import mode or Direct Lake mode:
+在表导入向导的最后一页，你可以选择将所选表创建为导入模式还是 Direct Lake 模式：
 
-- Import tables read their schema through the item's SQL analytics endpoint. See [Choosing objects to import](xref:import-tables#choosing-objects-to-import).
-- Direct Lake tables read directly from OneLake. 参见 @direct-lake-sql-model。
+- 导入表会通过该项的 SQL analytics endpoint 读取其架构。请参阅[选择要导入的对象](xref:import-tables#choosing-objects-to-import)。
+- Direct Lake 表直接从 OneLake 读取。参见 @direct-lake-sql-model。
