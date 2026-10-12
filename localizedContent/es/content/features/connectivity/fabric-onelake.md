@@ -2,7 +2,7 @@
 uid: connect-onelake
 title: Conectar con Fabric y OneLake
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,25 +19,26 @@ applies_to:
 
 # Conectar con Fabric y OneLake
 
-Tabular Editor se conecta a Microsoft Fabric para listar los Workspaces y los Lakehouse, Warehouse y otros elementos que contienen, e importar desde OneLake.
+The Fabric connector lists the Lakehouse, Warehouse, SQL database and mirrored database items in the Fabric workspaces you can access, and imports tables from them. Mirrored Azure Databricks catalogs are listed as mirrored databases. Open the dialog from **Model > Import tables...** by choosing **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database**.
 
 ![El cuadro de diálogo "Conectar a un Lakehouse", que muestra elementos del catálogo de OneLake por nombre, tipo, propietario y ubicación](~/content/assets/images/features/connectivity/onelake-connection.png)
 
-## Métodos de autenticación
+## Connection fields
 
-Fabric y OneLake se autentican con Microsoft Entra ID. El inicio de sesión interactivo es la opción predeterminada y cubre el trabajo de modelado habitual. Para una actualización desatendida, usa un principal de servicio y concédele acceso al Workspace en Fabric.
+| Campo                                                          | Descripción                                                                                                                                                 |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID                                                                                                    |
+| **OneLake Catalog items**                                      | The items of the selected type in the workspaces you can access, with their **Name**, **Type**, **Owner** and **Location**. Select one item |
 
-Los permisos de Fabric se conceden en Fabric, no en Tabular Editor. Una cuenta que puede iniciar sesión pero no ve Workspaces no ha recibido acceso a ellos; es un tema de permisos de Fabric, no un problema de conexión.
+## Autenticación
 
-## Direct Lake
+**Sign in...** starts a Microsoft Entra ID browser sign-in. If no items appear after you sign in, your account has no access to a workspace that contains them, and a workspace admin grants that access in Fabric.
 
-Un modelo Direct Lake lee desde OneLake en lugar de importar, por lo que la conexión forma parte del modelo y no de un paso de importación. Consulta @direct-lake-sql-model.
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
 
-> [!NOTE]
-> Cuando no se puede determinar el punto de conexión de análisis SQL de un Lakehouse o Warehouse, Tabular Editor lo indica en lugar de crear una tabla sin columnas. Si ves ese error, comprueba que el elemento haya terminado de aprovisionar su punto de conexión en Fabric.
+## Import and Direct Lake
 
-## Dónde se almacenan las credenciales
+On the last page of the Table Import Wizard, you choose whether the selected tables are created in Import mode or Direct Lake mode:
 
-Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo [opciones de usuario](xref:user-options) (`.tmuo`) situado junto al modelo, cifradas de modo que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se registran en el control de código fuente, y un colega que abra el mismo modelo deberá proporcionar sus propias credenciales.
-
-La expresión M generada solo especifica el servidor y el objeto. Nunca contiene contraseñas, tokens ni claves.
+- Import tables read their schema through the item's SQL analytics endpoint. See [Choosing objects to import](xref:import-tables#choosing-objects-to-import).
+- Direct Lake tables read directly from OneLake. Consulta @direct-lake-sql-model.
