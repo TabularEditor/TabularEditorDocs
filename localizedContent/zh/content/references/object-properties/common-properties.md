@@ -1,6 +1,6 @@
 ---
 uid: object-properties-common
-title: Common properties
+title: 通用属性
 author: Jeroen ter Heerdt
 updated: 2026-10-05
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Common properties
+# 通用属性
 
 <!--
 SUMMARY: Properties that most objects in a semantic model share, such as Name, Description, Annotations and Lineage Tag.
@@ -25,165 +25,165 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-The properties on this page appear on many object types and work the same way on every object that has them. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. The object-specific pages link to these entries. For the other pages, see @object-properties.
+本页所列属性适用于多种对象类型，并且在所有包含这些属性的对象上行为一致。每个条目都会列出该属性在 Tabular Object Model (TOM) 中的名称、类型和类别。各对象的专属页面都链接到这些条目。其他页面请参见 @object-properties。
 
 ## 基本
 
 ### 姓名
 
-`Name` · string · Basic
+`Name` · string · 基本
 
-The name of the object. DAX references tables, columns, measures, hierarchies and user-defined functions by their name. Names must be unique among siblings, so two measures can't share a name. In most models, a measure also can't share a name with any column (see `ForceUniqueNames` on @object-properties-model). A KPI or a calculation group has no name of its own and takes its name from the object it belongs to.
+对象的名称。 DAX 通过名称引用表、列、度量值、层次结构和用户定义函数。名称在同级对象中必须唯一，因此两个度量值不能同名。在大多数模型中，度量值也不能与任何列同名（见 @object-properties-model 中的 `ForceUniqueNames`）。 KPI 或计算组本身没有自己的名称，而是采用其所属对象的名称。
 
-When **Formula Fix-up** is enabled under **Tools > Preferences**, renaming an object updates the DAX expressions that refer to it. When it's disabled, a rename breaks the expressions that use the old name. See @formula-fix-up-dependencies.
+在 **工具 > 偏好** 中启用 **公式修正** 后，重命名对象会更新引用它的 DAX 表达式。禁用后，重命名会使使用旧名称的表达式失效。见 @formula-fix-up-dependencies。
 
-To rename many objects at once, select them in the **TOM Explorer** and use batch rename, which supports regular expressions. See @duplicate-and-batch. The Best Practice Analyzer (BPA) rules @kb.bpa-trim-object-names and @kb.bpa-avoid-invalid-characters-names flag names with leading or trailing spaces and names with control characters.
+要一次重命名多个对象，请在 **TOM Explorer** 中选择它们，然后使用支持正则表达式的批量重命名功能。见 @duplicate-and-batch。 Best Practice Analyzer (BPA) 规则 @kb.bpa-trim-object-names 和 @kb.bpa-avoid-invalid-characters-names 会标记带有前导或尾随空格的名称，以及包含控制字符的名称。
 
 ### 说明
 
-`Description` · string · Basic
+`Description` · string · 基本
 
-Free text that explains what the object is for. Power BI shows the description as a tooltip in the **Data** pane. Excel's PivotTable field list doesn't show descriptions. To translate descriptions, use `TranslatedDescriptions`.
+用于说明对象用途的自由文本。 Power BI 会在 **数据** 窗格中将该说明显示为工具提示。 Excel 的数据透视表字段列表不显示描述。要翻译这些描述，请使用 `TranslatedDescriptions`。
 
-In Tabular Editor 3, the **TOM Explorer** has a **Description** column where you read and edit descriptions, and DAX code assist shows the description of a table, column or measure in its tooltip. When a measure, calculated column or calculated table has no description, the tooltip shows the first lines of its expression.
+在 Tabular Editor 3 中，**TOM Explorer** 有一个 **描述** 列，你可以在这里查看和编辑描述；DAX Code Assist 还会在工具提示中显示表、列或度量值的描述。如果度量值、计算列或计算表格没有描述，工具提示会显示其表达式的前几行。
 
-The BPA rule @kb.bpa-visible-objects-no-description flags visible objects without a description, and @kb.bpa-avoid-invalid-characters-descriptions flags descriptions that contain control characters.
+BPA 规则 @kb.bpa-visible-objects-no-description 会标记没有描述的可见对象，而 @kb.bpa-avoid-invalid-characters-descriptions 会标记包含控制字符的描述。
 
-### Display Folder
+### 显示文件夹
 
-`DisplayFolder` · string · Basic
+`DisplayFolder` · 字符串 · 基本
 
-The folder that the object appears in, in the field list of client tools. A backslash (`\`) creates a subfolder, for example `Sales\Year to date`, and a semicolon (`;`) shows the object in more than one folder, for example `Sales;Finance`. Display folders don't affect DAX or security. Tabular Editor also uses them to group objects in the **TOM Explorer**.
+对象在客户端工具字段列表中显示的文件夹。反斜杠（`\\`）会创建子文件夹，例如 `Sales\\Year to date`；分号（`;`）会让对象显示在多个文件夹中，例如 `Sales;Finance`。显示文件夹不会影响 DAX 或安全性。 Tabular Editor 也会用它们在 **TOM Explorer** 中对对象进行分组。
 
-To move a display folder with its objects and subfolders, drag it onto another folder in the **TOM Explorer**. See @drag-drop.
+要连同其中的对象和子文件夹一起移动显示文件夹，在 **TOM Explorer** 中将其拖到另一个文件夹上即可。见 @drag-drop。
 
-### Hidden
+### 隐藏
 
-`IsHidden` · bool · Basic
+`IsHidden` · 布尔值 · 基本
 
-When `true`, client tools such as Power BI hide the object from report authors. The object stays in the model, and DAX expressions can still refer to it. Anyone who can query the model can also query a hidden object. To secure data, see @roles-and-rls.
+当值为 `true` 时，Power BI 等客户端工具会对 Report 作者隐藏该对象。该对象仍保留在模型中，DAX 表达式仍可引用它。任何能查询该模型的人也都能查询隐藏对象。要保护数据，见 @roles-and-rls。
 
-The BPA rule @kb.bpa-hide-foreign-keys flags visible columns on the many side of a relationship. Its automatic fix hides them.
+BPA 规则 @kb.bpa-hide-foreign-keys 会标记关系中“多”侧的可见列。它的自动修复会隐藏这些列。
 
 ## 元数据
 
 ### 注释
 
-`Annotations` · collection of name/value pairs · Metadata
+`Annotations` · 名称/值对集合 · 元数据
 
-Custom name/value pairs stored with the object. Analysis Services and Power BI ignore annotations, and tools use them to store their own information. For example, Power BI Desktop stores layout information in annotations, and many C# scripts and BPA rules store settings in them.
+与对象一同存储的自定义名称/值对。 Analysis Services 和 Power BI 会忽略这些注释，而各类工具会用它们来存储自身信息。例如，Power BI Desktop 会将布局信息存储在注释中，许多 C# Script 和 BPA 规则也会将设置存储在其中。
 
-In a C# script, use `GetAnnotation`, `SetAnnotation` and `RemoveAnnotation`. See @how-to-annotations-extended-properties.
+在 C# Script 中，使用 `GetAnnotation`、`SetAnnotation` 和 `RemoveAnnotation`。请参阅 @how-to-annotations-extended-properties。
 
-### Extended Properties
+### 扩展属性
 
-`ExtendedProperties` · collection of name/value pairs · Metadata
+`ExtendedProperties` · 名称/值对集合 · 元数据
 
-Name/value pairs like annotations, where the value is either a string or a JSON document. Power BI uses extended properties, for example to store query information about parameters. For your own metadata, use annotations.
+与注释类似的名称/值对，其中值可以是字符串或 JSON 文档。 Power BI 会使用扩展属性，例如用于存储有关参数的查询信息。对于你自己的元数据，请使用注释。
 
-In a C# script, use `GetExtendedProperty` and `SetExtendedProperty`.
+在 C# Script 中，使用 `GetExtendedProperty` 和 `SetExtendedProperty`。
 
-### Changed Properties
+### 已更改的属性
 
-`ChangedPropertiesCollection` · collection · Metadata
+`ChangedPropertiesCollection` · 集合 · 元数据
 
-The names of the properties that you changed on an object that comes from another source, such as a table in a composite model or an object that Power BI generates. When the engine synchronizes the object from its source, it doesn't overwrite the properties in this list.
+你在来自其他来源的对象上更改过的属性名称，例如复合模型中的表，或 Power BI 生成的对象。当引擎从源同步该对象时，不会覆盖此列表中的属性。
 
-Tabular Editor 3 doesn't add entries to this list. When you change such a property, add its name yourself. Type a comma-separated list of TOM property names, for example `Name,FormatString`, or expand the property and select the check box next to a property name. Duplicates and names that aren't properties of the object are ignored. The expanded list always includes `Name`, plus the properties already in the list. To empty the list, right-click the property and select **Clear Changed Properties**.
+Tabular Editor 3 不会向此列表添加条目。更改这类属性时，需要你手动添加其名称。输入以逗号分隔的 TOM 属性名称列表，例如 `Name,FormatString`；或者展开该属性，并选中属性名称旁边的复选框。重复项以及不是该对象属性的名称都会被忽略。展开后的列表始终包含 `Name`，以及列表中已有的属性。要清空该列表，右键单击该属性，然后选择 **清除已更改的属性**。
 
-### DAX identifier
+### DAX 标识符
 
-`DaxObjectFullName` · string · Metadata · read-only · _computed_
+`DaxObjectFullName` · 字符串 · 元数据 · 只读 · _计算得出_
 
-The fully qualified name that DAX uses to reference the object, for example `'Sales'[Amount]` for a column or `[Total Sales]` for a measure. C# scripts use it to build DAX expressions. See @how-to-work-with-expressions.
+DAX 用于引用该对象的完全限定名称，例如列的 `'Sales'[Amount]`，或度量值的 `[Total Sales]`。 C# Script 会用它来构建 DAX 表达式。请参阅 @how-to-work-with-expressions。
 
-### Error Message
+### 错误信息
 
-`ErrorMessage` · string · Metadata · read-only
+`ErrorMessage` · 错误信息 · 字符串 · 元数据 · 只读
 
-The error that the engine reported for the object, for example a syntax error in a DAX expression or a refresh error on a partition. It's empty when the object has no error.
+引擎针对该对象报告的错误，例如 DAX 表达式中的语法错误或分区的刷新错误。如果对象没有错误，该值为空。
 
-In Tabular Editor 3, errors in DAX expressions also appear while you type, before the model is saved to the engine. The @messages-view lists all errors and warnings in the model. Double-click a message to go to its object.
+在 Tabular Editor 3 中，DAX 表达式的错误也会在你输入时就显示出来，无需等到模型保存到引擎之后。 @messages-view 视图会列出模型中的所有错误和警告。双击一条信息即可转到其对应的对象。
 
 ### 对象类型
 
-`ObjectTypeName` · string · Metadata · read-only · _computed_
+`ObjectTypeName` · 字符串 · 元数据 · 只读 · _计算所得_
 
-The kind of object, for example `Measure`, `Calculated Column` or `Table`.
+对象的类型，例如 `度量值`、`计算列` 或 `Table`。
 
 ### State
 
-`State` · ObjectState · Metadata · read-only
+`State` · ObjectState · 元数据 · 只读
 
-Whether the object is ready to be queried. The engine sets the value.
+对象是否已准备好接受查询。该值由引擎设置。
 
-| 值                        | 含义                                                                                                                              |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `Ready`                  | The object is valid and, where it holds data, the data is up to date.                                           |
-| `NoData`                 | The object is valid but holds no data yet. Refresh the table or partition.                      |
-| `CalculationNeeded`      | The object is valid but must be recalculated, for example a calculated column after a change to its expression. |
-| `SemanticError`          | The expression refers to something that doesn't exist or is invalid. See `ErrorMessage`.        |
-| `EvaluationError`        | The expression is valid but failed when it was evaluated.                                                       |
-| `DependencyError`        | An object this one depends on is in an error state.                                                             |
-| `Incomplete`             | Some of the object's data is missing, for example when a partition failed to refresh.                           |
-| `ForceCalculationNeeded` | The object must be recalculated even though it seems up to date.                                                |
+| 值                        | 含义                                           |
+| ------------------------ | -------------------------------------------- |
+| `Ready`                  | 该对象有效；如果包含数据，则数据也是最新的。                       |
+| `NoData`                 | 该对象有效，但尚未包含数据。刷新表或分区。                        |
+| `CalculationNeeded`      | 该对象有效，但必须重新计算；例如，计算列在其表达式更改后需要重新计算。          |
+| `SemanticError`          | 该表达式引用了不存在的内容，或引用的内容无效。查看 `ErrorMessage` 信息。 |
+| `EvaluationError`        | 该表达式本身有效，但在求值时失败。                            |
+| `DependencyError`        | 该对象所依赖的某个对象处于错误状态。                           |
+| `Incomplete`             | 对象的部分数据缺失，例如某个分区刷新失败时。                       |
+| `ForceCalculationNeeded` | 即使对象看起来已是最新状态，也必须重新计算。                       |
 
-`State` only has a meaningful value when you're connected to a server or working in @workspace-mode. A model that you open from a file isn't connected to an engine.
+只有在连接到服务器或以 @workspace-mode 方式工作时，`State` 才有实际意义。从文件打开的模型不会连接到任何引擎。
 
-In Tabular Editor 3, you can refresh a table from the **TOM Explorer** and follow the progress in the @data-refresh-view.
+在 Tabular Editor 3 中，你可以从 **TOM Explorer** 刷新表，并在 @data-refresh-view 中跟踪进度。
 
 ## 选项
 
-### Lineage Tag
+### Lineage tag
 
-`LineageTag` · string · Options · compatibility level 1540+
+`LineageTag` · string · 选项 · 兼容级别 1540+
 
-A stable ID for the object, usually a GUID. Power BI uses lineage tags to follow an object through renames, so a report or a composite model that depends on a column keeps working after the column is renamed.
+对象的稳定 ID，通常是 GUID。 Power BI 会使用 Lineage tag 在对象重命名时持续跟踪其身份，因此依赖某个列的 Report 或复合模型在该列重命名后仍能正常工作。
 
-Power BI Desktop assigns lineage tags automatically. Don't change or copy them: the tools that depend on lineage tags can't tell apart two objects with the same tag. When Tabular Editor creates an object in a model that uses lineage tags, it assigns a new lineage tag.
+Power BI Desktop 会自动分配 Lineage tag。不要更改或复制它们：依赖 Lineage tag 的工具无法区分两个具有相同 Lineage tag 的对象。当 Tabular Editor 在使用 Lineage tag 的模型中创建对象时，它会分配一个新的 Lineage tag。
 
-### Source Lineage Tag
+### 源 Lineage tag
 
-`SourceLineageTag` · string · Options · compatibility level 1550+
+`SourceLineageTag` · string · 选项 · 兼容级别 1550+
 
-The lineage tag of the object that this object comes from. Models built on top of another source, such as a composite model or a Direct Lake model, use it to link the object to the source column or table. For Direct Lake, it holds the name of the source column or table in the lakehouse or warehouse.
+此对象所源自的对象的 Lineage tag。构建在其他源之上的模型(例如复合模型或 Direct Lake 模型)会使用它将对象链接到源列或源表。对于 Direct Lake，该值保存 Lakehouse 或 Warehouse 中源列或源表的名称。
 
-Tabular Editor 3 sets `SourceLineageTag` when you import Direct Lake tables, and on the columns it adds when you update the table schema of a Direct Lake model. On a table, the value is the schema and name of the source table, for example `[dbo].[Sales]`, or `[Sales]` when the source doesn't use schemas. On a column, the value is the name of the source column.
+Tabular Editor 3 会在导入 Direct Lake 表时设置 `SourceLineageTag`，并在更新 Direct Lake 模型的表架构时，为其新增的列设置该值。对于表，该值是源表的架构和名称，例如 `[dbo].[Sales]`；当源不使用架构时，则为 `[Sales]`。对于列，该值是源列的名称。
 
-## Translations, Perspectives, Security
+## 翻译、透视和安全性
 
-### Translated Names
+### 翻译后的名称
 
-`TranslatedNames` · per culture · Translations, Perspectives, Security
+`TranslatedNames` · 按区域设置 · 翻译、透视和安全性
 
-The object's name in each culture of the model. Client tools show the translation that matches the user's language. When a culture has no translation, the untranslated name appears. See @how-to-work-with-perspectives-translations.
+对象在模型各个区域设置中的名称。客户端工具会显示与用户所用语言相匹配的翻译。如果某个区域设置没有对应翻译，则会显示未翻译的名称。参见 @how-to-work-with-perspectives-translations。
 
-In Tabular Editor 3, the @metadata-translation-editor shows the translated names, descriptions and display folders of many objects side by side. To exchange translations with translators as a JSON file, see @import-export-translations. The BPA rule @kb.bpa-translate-visible-names flags visible objects with a missing name translation.
+在 Tabular Editor 3 中，@metadata-translation-editor 会并排显示许多对象的翻译名称、说明和显示文件夹。要以 JSON 文件形式与翻译人员交换翻译，参见 @import-export-translations。 BPA 规则 @kb.bpa-translate-visible-names 会标记缺少名称翻译的可见对象。
 
-### Translated Descriptions
+### 翻译后的描述
 
-`TranslatedDescriptions` · per culture · Translations, Perspectives, Security
+`TranslatedDescriptions` · 按区域设置 · 翻译、透视、安全性
 
-The object's description in each culture of the model. The BPA rule @kb.bpa-translate-descriptions flags descriptions with a missing translation.
+模型中该对象在各区域设置下的描述。 BPA 规则 @kb.bpa-translate-descriptions 会标记缺少翻译的描述。
 
-### Translated Display Folders
+### 翻译后的显示文件夹
 
-`TranslatedDisplayFolders` · per culture · Translations, Perspectives, Security
+`TranslatedDisplayFolders` · 按区域设置 · 翻译、透视、安全性
 
-The object's display folder in each culture of the model, with the same backslash and semicolon syntax as `DisplayFolder`. The BPA rule @kb.bpa-translate-display-folders flags visible objects with a missing display folder translation.
+模型中该对象在每个区域设置下的显示文件夹，使用与 `DisplayFolder` 相同的反斜杠和分号语法。 BPA 规则 @kb.bpa-translate-display-folders 会标记缺少显示文件夹翻译的可见对象。
 
-### Synonyms
+### 同义词
 
-`Synonyms` · per culture · Translations, Perspectives, Security
+`Synonyms` · 按区域设置 · 翻译、透视、安全性
 
-Other words that users type to find the object in natural-language features, such as Q&A in Power BI. Tables, columns, measures, hierarchies and levels can have synonyms. They're stored in the linguistic schema of each culture (see `Content` on @object-properties-perspectives-cultures).
+用户在自然语言功能中（例如 Power BI 中的 Q&A）为查找该对象而输入的其他词语。表、列、度量值、层次结构和级别都可以设置同义词。它们存储在每个区域设置的语言架构中(请参见 @object-properties-perspectives-cultures 中的 `Content`)。
 
-In Tabular Editor 3, the property only appears when at least one culture has a linguistic schema in JSON format. The collapsed property shows how many linguistic schemas are defined. Expand it to see one entry per culture, with the synonyms as a comma-separated list, for example `revenue, turnover`, and edit the list to add or remove synonyms. A removed synonym is marked as deleted in the linguistic schema. Deleted and suggested synonyms don't appear in the list.
+在 Tabular Editor 3 中，仅当至少有一个区域设置具有 JSON 格式的语言架构时，此属性才会显示。折叠状态下，该属性会显示已定义的语言架构数量。展开后，每个区域设置会显示一条记录，同义词以逗号分隔的列表呈现，例如 `revenue, turnover`。你可以编辑该列表以添加或删除同义词。被删除的同义词会在语言架构中标记为已删除。已删除和建议的同义词不会显示在列表中。
 
-### Shown in Perspective
+### 在透视中显示
 
-`InPerspective` · per perspective · Translations, Perspectives, Security
+`InPerspective` · 按透视 · 翻译、透视与安全
 
-Whether the object is included in each perspective of the model. A perspective shows a smaller part of the model to a group of users. Like `IsHidden`, perspectives aren't a security feature.
+该对象是否包含在模型的各个透视中。透视会向一组用户展示模型中较小的一部分。与 `IsHidden` 一样，透视不是安全功能。
 
-When you select several objects, you can change their perspective membership at once in the Properties view. See @perspectives-translations. In Tabular Editor 3, the @perspective-editor shows the perspective membership of all tables, columns, hierarchies and measures as check boxes.
+当你同时选中多个对象时，可以在属性视图中一次性更改它们在透视中的归属。参见 @perspectives-translations。在 Tabular Editor 3 中，@perspective-editor 会以复选框的形式显示所有表、列、层次结构和度量值在各透视中的归属情况。
