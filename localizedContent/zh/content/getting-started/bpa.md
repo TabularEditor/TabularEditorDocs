@@ -19,104 +19,104 @@ applies_to:
 
 # 使用 Best Practice Analyzer 提升代码质量
 
-The **Best Practice Analyzer** (BPA) scans the Tabular Object Model (TOM) of the loaded model in the background for objects that violate the best practice rules you define. TOM has many [object types and properties](xref:TabularEditor.TOMWrapper), and the right value for a property often depends on the model design. BPA rules check that each property has the value your conventions require.
+**Best Practice Analyzer** (BPA) 会在后台扫描已加载模型的 Tabular Object Model (TOM)，查找违反你定义的最佳实践规则的对象。 TOM 有许多[对象类型和属性](xref:TabularEditor.TOMWrapper)，而属性的正确取值通常取决于模型设计。 BPA 规则用于检查每个属性的值是否符合你的约定要求。
 
-Use Best Practice Analyzer rules to check:
+使用 Best Practice Analyzer 规则检查以下内容：
 
-- **DAX expressions**: warn when certain DAX functions or constructs are used.
-- **Formatting**: require format strings, descriptions and similar properties.
-- **Naming conventions**: check that types of objects, such as key columns or hidden columns, follow name patterns.
-- **Performance**: check performance-related aspects of the model, for example the number of calculated columns.
+- **DAX 表达式**：在使用特定 DAX 函数或写法时发出警告。
+- **格式设置**：要求提供格式字符串、描述等类似属性。
+- **命名约定**：检查键列、隐藏列等对象是否遵循命名模式。
+- **性能**：检查模型中与性能相关的方面，例如计算列的数量。
 
-Rules have access to the full model metadata and to VertiPaq Analyzer statistics.
+规则可以访问完整的模型元数据以及 VertiPaq分析器的统计信息。
 
 > [!NOTE]
-> Tabular Editor 3 includes [built-in Best Practice Analyzer rules](xref:built-in-bpa-rules), enabled by default. They appear in the **Best Practice Analyzer view** alongside your custom rules and in the **(Built-in rules)** collection under **Tools > Manage BPA Rules...**.
+> Tabular Editor 3 包含[内置 Best Practice Analyzer 规则](xref:built-in-bpa-rules)，并默认启用。它们会显示在 **Best Practice Analyzer 视图**中，与自定义规则一起列出；同时也会显示在 **工具 > 管理 BPA 规则...** 下的 **（内置规则）** 集合中。
 
 ## 管理最佳实践规则
 
-Open **Tools > Manage BPA Rules...** to add, remove or modify the rules that apply to your model.
+打开 **工具 > 管理 BPA 规则...**，以添加、删除或修改应用于你的模型的规则。
 
-![Manage Best Practice Rules dialog with the list of rule collections at the top and the rules of the selected collection below](~/content/assets/images/bpa-manager.png)
+![“管理最佳实践规则”对话框，顶部是规则集列表，下方是所选规则集的规则](~/content/assets/images/bpa-manager.png)
 
-The top list shows the loaded rule **collections**, and the bottom list shows the rules in the collection you select. When a model is loaded, these collections are listed:
+上方列表显示已加载的**规则集**，下方列表显示所选规则集中的规则。加载模型后，会列出以下规则集：
 
-- **Rules within the current model**: rules defined in the current model, stored as an annotation on the Model object.
-- **Rules for the local user**: rules stored in `%LocalAppData%\TabularEditor3\BPARules.json`. They apply to every model the current Windows user loads in Tabular Editor.
-- **Rules on the local machine**: rules stored in `%ProgramData%\TabularEditor\BPARules.json`. They apply to every model loaded in Tabular Editor on the machine.
+- **当前模型中的规则**：在当前模型中定义的规则，作为 Model 对象上的注解存储。
+- **本地用户的规则**：存储在 `%LocalAppData%\TabularEditor3\BPARules.json` 中的规则。这些规则适用于当前 Windows 用户在 Tabular Editor 中加载的每个模型。
+- **本地计算机上的规则**：存储在 `%ProgramData%\TabularEditor\BPARules.json` 中的规则。这些规则适用于在这台计算机上通过 Tabular Editor 加载的每个模型。
 
-If a rule with the same ID exists in more than one collection, the collection higher in the list takes precedence. A rule defined in the model overrides a rule with the same ID on the local machine, so you can adjust a shared rule to model-specific conventions.
+如果多个规则集中存在相同 ID 的规则，则列表中位置更高的规则集优先。模型中定义的规则会覆盖本地计算机上具有相同 ID 的规则，因此你可以根据特定模型的约定调整共享规则。
 
-The **(Effective rules)** collection at the top of the list shows the rules that apply to the loaded model after precedence is resolved. The lower list shows which collection each rule belongs to. A rule's name is struck out if a rule with the same ID exists in a collection of higher precedence:
+列表顶部的 **（生效规则）** 集合显示在确定优先级后实际应用于已加载模型的规则。下方列表显示每条规则所属的规则集。如果在更高优先级的集合中存在 ID 相同的规则，该规则名称会以删除线划掉：
 
-![Effective rules list with an overridden rule shown in strikethrough](~/content/assets/images/rule-overrides.png)
+![生效规则列表，其中被覆盖的规则会以删除线显示](~/content/assets/images/rule-overrides.png)
 
 ### 添加其他规则集
 
-You can add a rule file, for example one on a network share, to the current model as a rule collection. If you have write access to the file, you can add, modify and remove its rules. Collections added this way take precedence over the rules defined in the model. If you add several, move them up and down to set their precedence.
+你可以将规则文件，例如位于网络共享上的文件，作为规则集添加到当前模型中。如果你有该文件的写入权限，就可以添加、修改和删除其中的规则。以这种方式添加的规则集，其优先级高于模型中定义的规则。如果你添加了多个规则集，可以上下移动它们来设置优先级。
 
-Click **Add...** to add a rule collection to the model:
+点击 **添加...** 将规则集添加到模型中：
 
 ![添加最佳实践规则集](~/content/assets/images/add-rule-file.png)
 
-- **Create new Rule File**: creates an empty .json file at the location you specify. The file dialog has an option for a relative file path, which lets you store the rule file in the same repository as the model. A relative reference works only when the model is loaded from disk. A model loaded from an Analysis Services instance has no working directory.
-- **Include local Rule File**: includes an existing .json rule file. You can use a relative path if the file is on the same drive as the model metadata. A file on a network share or another drive requires an absolute path.
-- **Include Rule File from URL**: includes the rules returned by an HTTP or HTTPS URL, for example the [standard BPA rules](https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-standard.json) from the [BestPracticeRules GitHub site](https://github.com/TabularEditor/BestPracticeRules). Collections added from a URL are read-only.
+- **创建新规则文件**：在你指定的位置创建一个空的 .json 文件。在文件对话框中，可以选择“相对文件路径”选项，这样即可将规则文件与模型存放在同一 repository 中。只有在模型从磁盘加载时，相对引用才有效。从 Analysis Services 实例加载的模型没有工作目录。
+- **包含本地规则文件**：包含一个现有的 .json 规则文件。如果文件和模型元数据在同一驱动器上，你就可以使用相对路径。位于网络共享或其他驱动器上的文件必须使用绝对路径。
+- **从 URL 包含规则文件**：包含通过 HTTP 或 HTTPS URL 获取的规则，例如来自 [BestPracticeRules GitHub 站点](https://github.com/TabularEditor/BestPracticeRules) 的 [标准 BPA 规则](https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-standard.json)。从 URL 添加的规则集是只读的。
 
 ### 修改规则集中的规则
 
-The lower part of the dialog adds, edits, clones and deletes rules in the selected collection if you have write access to its location. **Move to...** moves or copies the selected rule to another collection.
+如果你对所选规则集的存储位置有写入权限，则可在对话框下半部分对该规则集中的规则进行添加、编辑、克隆和删除。**移动到...**：将所选规则移动或复制到另一个规则集中。
 
 ### 添加规则
 
-Click **New rule...** to open the Best Practice Rule editor:
+点击 **新建规则...** 来打开最佳实践规则编辑器：
 
-![Best Practice Rule editor with the name, ID, severity, category, description, applies-to and expression fields](~/content/assets/images/bpa-rule-editor.png)
+![最佳实践规则编辑器，包含名称、ID、严重性、类别、说明、适用对象和表达式字段](~/content/assets/images/bpa-rule-editor.png)
 
-A rule has these properties:
+规则具有以下属性：
 
-- **Name**: the name of the rule shown in Tabular Editor.
-- **ID**: an internal ID, unique within a rule collection. If rules in different collections share an ID, only the rule in the collection with the highest precedence applies.
-- **Severity**: not used in the Tabular Editor UI. When you run a Best Practice analysis from the [command line](xref:command-line-options), the number sets how severe a violation is:
-  - 1 = information only
-  - 2 = warning
-  - 3 (or above) = error
-- **Category**: groups related rules.
-- **Description** (optional): a description of the rule, shown as a tooltip in the **Best Practice Analyzer view**. The description accepts these placeholders:
+- **名称**：在 Tabular Editor 中显示的规则名称。
+- **ID**：内部 ID，在同一规则集中必须唯一。如果不同规则集中的规则共用同一个 ID，则只有优先级最高的规则集中的规则会生效。
+- **严重性**：在 Tabular Editor 界面中未使用。当你从[命令行](xref:command-line-options)运行最佳做法分析时，该数字用于指示违规的严重程度：
+  - 1 = 仅供参考
+  - 2 = 警告
+  - 3（及以上）= 错误
+- **类别**：用于将相关规则归为一组。
+- **描述**（可选）：规则的说明，会在 **Best Practice Analyzer 视图** 中显示为工具提示。描述支持以下占位符：
   - `%object%` 返回对当前对象的完全限定的 DAX 引用（如适用）
   - `%objectname%` 仅返回当前对象的名称
   - `%objecttype%` 返回当前对象的类型
-- **Applies to**: the object types the rule checks.
-- **Expression**: a [Dynamic LINQ](https://dynamic-linq.net/expression-language) expression that evaluates to `true` for the objects, among the types selected in **Applies to**, that violate the rule. The expression can use the TOM properties of the selected object types and a wide range of standard .NET methods and properties.
-- **Minimum compatibility level**: the lowest compatibility level of models the rule applies to. Some TOM properties don't exist at every compatibility level.
+- **适用范围**：规则检查的对象类型。
+- **表达式**：一个 [Dynamic LINQ](https://dynamic-linq.net/expression-language) 表达式，用于对 **适用范围** 中所选类型里违反该规则的对象求值，并返回 `true`。该表达式可以使用所选对象类型的 TOM 属性，以及大量标准 .NET 方法和属性。
+- **最低兼容级别**：规则适用的模型的最低兼容级别。某些 TOM 属性并非在所有兼容级别中都存在。
 
-A rule collection on disk stores these properties as JSON. You can also add, edit and delete rules in the JSON file directly. In the file, you can set a rule's `FixExpression` property: a string that generates a [C# script](xref:cs-scripts-and-macros) that fixes the violation.
+磁盘上的规则集会以 JSON 格式存储这些属性。你也可以直接在 JSON 文件中添加、编辑和删除规则。在该文件中，你可以设置规则的 `FixExpression` 属性：它是一个字符串，用于生成用于修复该违规的 [C# Script](xref:cs-scripts-and-macros)。
 
 ## 使用 Best Practice Analyzer 视图
 
-The **Best Practice Analyzer view** lists rule violations, and the status bar at the bottom of the main window shows their count. Open the view with **View > Best Practice Analyzer** or the **# BP issues** button in the status bar.
+**Best Practice Analyzer 视图**会列出规则的违规情况，主窗口底部的状态栏会显示其数量。可通过 **视图 > Best Practice Analyzer** 或状态栏中的 **# BP issues** 按钮打开该视图。
 
 ![Best Practice Analyzer 视图](~/content/assets/images/best-practice-analyzer-view.png)
 
-The view lists each rule that has violating objects, with the objects below it. Double-click an object to select it in the **TOM Explorer**.
+该视图会列出每条存在违规对象的规则，并在其下方显示这些对象。双击对象可在 **TOM Explorer** 中选中它。
 
-![Context menu for an object in the Best Practice Analyzer view](~/content/assets/images/bpa-options.png)
+![Best Practice Analyzer 视图中对象的上下文菜单](~/content/assets/images/bpa-options.png)
 
-Right-click an object for these options:
+右键单击对象可使用以下选项：
 
-- **Go to object**: selects the object in the **TOM Explorer**, the same as double-clicking it.
-- **Ignore object**: adds an annotation to the object that makes the Best Practice Analyzer skip this rule for it. The annotation stores the rule ID.
-- **Generate fix script**: creates a C# script from the `FixExpression` of the selected rules. Available only if the rule has a `FixExpression`.
-- **Apply fix**: runs the `FixExpression` of the selected rules. Available only if the rule has a `FixExpression`.
+- **转到对象**：在 **TOM Explorer** 中选中该对象，与双击效果相同。
+- **忽略对象**：在对象上添加一条注释，使 Best Practice Analyzer 在该对象上跳过这条规则。该注释会存储规则 ID。
+- **生成修复脚本**：根据所选规则的 `FixExpression` 生成 C# Script。仅当规则具有 `FixExpression` 时可用。
+- **应用修复**：对所选规则执行其 `FixExpression`。仅当规则具有 `FixExpression` 时可用。
 
 > [!NOTE]
-> Hold down Shift or Ctrl to select several objects in the Best Practice Analyzer view.
+> 按住 Shift 或 Ctrl 键，即可在 Best Practice Analyzer 视图中选择多个对象。
 
-The toolbar at the top of the view has the same options, plus buttons to expand or collapse all items, show ignored rules and objects, and refresh the scan manually.
+视图顶部的工具栏提供相同的选项，另外还包含用于展开或折叠所有项、显示已忽略的规则和对象，以及手动刷新扫描的按钮。
 
 ## 禁用 Best Practice Analyzer
 
-Turn off the background scan if some rules take a long time to evaluate or the model is very large: clear **Scan for Best Practice violations in the background** in the **Best Practice Analyzer** section of **Tools > Preferences > Tabular Editor > Miscellaneous**. With background scans off, click **Refresh** in the **Best Practice Analyzer view** to scan.
+如果某些规则评估耗时较长，或模型非常大，可以关闭后台扫描：在 **工具 > 偏好 > Tabular Editor > 杂项** 的 **Best Practice Analyzer** 部分，清除 **在后台扫描 Best Practice 违规** 的勾选。关闭后台扫描后，点击 **Best Practice Analyzer 视图** 中的 **刷新** 即可扫描。
 
 ## 后续步骤
 
