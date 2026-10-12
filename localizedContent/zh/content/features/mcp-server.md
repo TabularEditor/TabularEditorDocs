@@ -217,7 +217,7 @@ The [AI Assistant](xref:ai-assistant) chat runs scripts the same way, with the s
 These are blocked regardless of your grants:
 
 - `ExecuteCommand`, which runs raw TMSL or XMLA, always fails in an agent-run script.
-- An agent script that accesses the file system, makes a web request or references an external assembly doesn't run. The check is the same analysis of the compiled script that the `BlockUnsafeScripts` policy uses; see [What BlockUnsafeScripts blocks](xref:csharp-scripts#what-blockunsafescripts-blocks) for the full list. What happens to the script depends on your grants and policies:
+- An agent script that accesses the file system, makes a web request or references an external assembly doesn't run. The check is the same analysis of the compiled script that the `BlockUnsafeScripts` policy uses; see [What counts as staying within the model](xref:csharp-scripts#what-counts-as-staying-within-the-model) for the full list. What happens to the script depends on your grants and policies:
   - With **Documents > Write**, the script opens as an **Agent script (review)** document, and the tool result tells the agent to have you review and run it.
   - Without **Documents > Write**, the script doesn't run and no document opens.
   - With the `BlockUnsafeScripts` [policy](xref:policies) set, the script doesn't run and no document opens.
