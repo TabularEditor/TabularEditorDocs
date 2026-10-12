@@ -23,15 +23,13 @@ applies_to:
 本操作指南演示如何将 Metric View 序列化回 YAML 格式：既可以作为字符串获取，也可以保存到文件中。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。较早的版本不支持此处展示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## 序列化为字符串
 
-Use `Serialize()` to get the YAML representation.
-This simply re-serializes the YAML you loaded above.
+使用 `Serialize()` 获取 YAML 表示形式。这只是将上面加载的 YAML 重新序列化。
 
 ```csharp {run id=serialize setup=mv-sample after=none output=true}
 var yaml = SemanticBridge.MetricView.Serialize();
@@ -107,8 +105,7 @@ measures:
 
 ## 保存到文件
 
-Use `Save(path)` to write the YAML directly to disk.
-This will write the Metric View you loaded above to disk.
+使用 `Save(path)` 将 YAML 直接写入磁盘。这会将上面加载的指标视图写入磁盘。
 
 ```csharp {compile}
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
@@ -202,8 +199,8 @@ measures:
 
 ## 后续步骤
 
-- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
-- [Import a Metric View to Tabular](xref:semantic-bridge-import)
+- [加载并检查指标视图](xref:semantic-bridge-load-inspect)
+- [将指标视图导入到 Tabular](xref:semantic-bridge-import)
 
 ## 另请参阅
 
