@@ -63,7 +63,7 @@ Tabular Editor 2.x es una aplicación liviana que permite modificar rápidamente
 - Cambio de nombre en lote
 - Cuadro de búsqueda para moverse rápidamente por modelos grandes y complejos
 - Asistente de implementación
-- Best Practice Analyzer
+- Analizador de prácticas recomendadas
 - Scripting avanzado mediante scripts de estilo C# para automatizar tareas repetitivas
 - Interfaz de línea de comandos (puede usarse para integrar Tabular Editor con canalizaciones de DevOps)
 
@@ -94,6 +94,6 @@ Si eres nuevo en el modelado tabular en general, te recomendamos que uses las he
 ## Pasos a seguir
 
 - [Primeros pasos con Tabular Editor 2](xref:getting-started-te2)
-- [Install and activate Tabular Editor 3](xref:getting-started)
+- [Instale y active Tabular Editor 3](xref:getting-started)
 - [Plan de ruta de Tabular Editor 3](xref:roadmap)
 
