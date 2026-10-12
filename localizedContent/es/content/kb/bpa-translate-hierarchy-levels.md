@@ -56,7 +56,7 @@ Niveles creados sin traducción.
 
 ### Causa 2: Configuración regional agregada más tarde
 
-Culture added after hierarchy was created.
+Se agregó la configuración regional después de crear la jerarquía.
 
 ### Causa 3: Traducción incompleta
 
