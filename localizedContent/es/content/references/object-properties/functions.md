@@ -1,16 +1,16 @@
 ---
 uid: object-properties-functions
-title: Function and set properties
+title: Propiedades de funciones y conjuntos
 author: Jeroen ter Heerdt
 updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Supports functions and sets, but not Namespace, PackageId or PackageVersion"
+      note: "Admite funciones y conjuntos, pero no Namespace, PackageId ni PackageVersion"
     - product: Tabular Editor 3
       since: 3.23.0
-      note: "User-defined functions need 3.23.0 or later. Sets are supported in all versions."
+      note: "Las funciones definidas por el usuario requieren la versión 3.23.0 o posterior. Los conjuntos se admiten en todas las versiones."
       editions:
         - edition: Desktop
           full: true
@@ -20,7 +20,7 @@ applies_to:
           full: true
 ---
 
-# Function and set properties
+# Propiedades de funciones y conjuntos
 
 <!--
 SUMMARY: Reference for the properties of DAX user-defined functions and of sets.
@@ -28,70 +28,70 @@ SUMMARY: Reference for the properties of DAX user-defined functions and of sets.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page lists the properties of DAX user-defined functions and of sets. For properties that most objects share, see @object-properties-common.
+En esta página se enumeran las propiedades de las funciones DAX definidas por el usuario y de los conjuntos. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
-## Function
+## Función
 
-A User-Defined Function (UDF) is a reusable DAX function that you define once in the model and call from any DAX expression, including other functions. It takes parameters, which can be values, tables or references to columns and measures, and returns a value or a table. UDFs belong to the model, and the **TOM Explorer** lists them under the **Functions** folder.
+Una función definida por el usuario (UDF) es una función DAX reutilizable que defines una vez en el modelo y a la que puedes llamar desde cualquier expresión DAX, incluidas otras funciones. Acepta parámetros, que pueden ser valores, tablas o referencias a columnas y medidas, y devuelve un valor o una tabla. Las UDF pertenecen al modelo y el **Explorador TOM** las muestra en la carpeta **Funciones**.
 
-UDFs need compatibility level 1702 or higher. Azure Analysis Services and SQL Server Analysis Services don't support them. For a full introduction, see @udfs.
+Las UDF requieren un nivel de compatibilidad de 1702 o superior. Azure Analysis Services y SQL Server Analysis Services no las admiten. Para una introducción completa, consulta @udfs.
 
-Tabular Editor 2 also supports UDFs and lists them under the **Functions** folder. To add one in Tabular Editor 2, right-click the folder and choose **New User-Defined Function**. Tabular Editor 2 doesn't have the `Namespace`, `PackageId` and `PackageVersion` properties.
+Tabular Editor 2 también admite las UDF y las muestra en la carpeta **Funciones**. Para agregar una en Tabular Editor 2, haz clic con el botón derecho en la carpeta y elige **Nueva función definida por el usuario**. Tabular Editor 2 no tiene las propiedades `Namespace`, `PackageId` y `PackageVersion`.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Changed Properties](xref:object-properties-common#changed-properties)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
-- [Lineage Tag](xref:object-properties-common#lineage-tag)
-- [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Oculto](xref:object-properties-common#hidden)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Propiedades modificadas](xref:object-properties-common#changed-properties)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
+- [Etiqueta de linaje](xref:object-properties-common#lineage-tag)
+- [Etiqueta de linaje de origen](xref:object-properties-common#source-lineage-tag)
 
-You call a function by its name in DAX, so the name can't contain spaces. It can contain periods and underscores. Use a compound name such as `Finance.Margin` or `ACME_Margin` to avoid a clash with a built-in DAX function that Microsoft adds later. See @kb.bpa-udf-use-compound-names. When you rename a function, Tabular Editor 3 updates the references to it throughout the model, as @formula-fix-up-dependencies does for measures and columns.
+En DAX, llamas a una función por su nombre, así que el nombre no puede contener espacios. Puede contener puntos y guiones bajos. Usa un nombre compuesto, como `Finance.Margin` o `ACME_Margin`, para evitar conflictos con una función DAX integrada que Microsoft pueda agregar más adelante. Consulta @kb.bpa-udf-use-compound-names. Cuando cambias el nombre de una función, Tabular Editor 3 actualiza las referencias a ella en todo el modelo, igual que @formula-fix-up-dependencies hace con las medidas y las columnas.
 
-### Namespace
+### Espacio de nombres
 
-`Namespace` · string · Basic · _stored as an annotation_ (`TE_Group`)
+`Namespace` · string · Básico · _almacenado como una anotación_ (`TE_Group`)
 
-The group that the function appears under in the @tom-explorer-view when grouping of user-defined functions by namespace is on. Turn the grouping on with the toggle button above the **TOM Explorer**. Tabular Editor determines the namespace in this order:
+El grupo en el que aparece la función en @tom-explorer-view cuando está activada la agrupación de funciones definidas por el usuario por espacio de nombres. Activa la agrupación con el interruptor situado encima del **Explorador TOM**. Tabular Editor determina el espacio de nombres en este orden:
 
-1. if the function has a `TE_Group` annotation, that's the namespace
-2. otherwise, if the function's name contains a dot, the namespace is the part before the last dot, so `DaxLib.Convert.CelsiusToFahrenheit` is in namespace `DaxLib.Convert`
-3. otherwise, if the function has a `DAXLIB_PackageId` annotation (see [PackageId](#packageid)), the namespace is the package ID
-4. otherwise, the namespace is empty
+1. si la función tiene una anotación `TE_Group`, ese es el espacio de nombres
+2. de lo contrario, si el nombre de la función contiene un punto, el espacio de nombres es la parte anterior al último punto; por ejemplo, `DaxLib.Convert.CelsiusToFahrenheit` está en el espacio de nombres `DaxLib.Convert`
+3. de lo contrario, si la función tiene una anotación `DAXLIB_PackageId` (consulta [PackageId](#packageid)), el espacio de nombres es el identificador del paquete
+4. de lo contrario, el espacio de nombres está vacío
 
-You can set a different namespace without renaming the function. Tabular Editor stores it in the `TE_Group` annotation on the function, which is saved with the model. To go back to the namespace from the name, reset the property or clear the value. Like a display folder, the namespace only organizes the **TOM Explorer**, and in DAX you always call the function by its full name.
+Puedes establecer un espacio de nombres distinto sin cambiar el nombre de la función. Tabular Editor lo almacena en la anotación `TE_Group` de la función, que se guarda con el modelo. Para volver a usar el espacio de nombres derivado del nombre, restablece la propiedad o borra el valor. Al igual que una carpeta de visualización, el espacio de nombres solo organiza el **Explorador TOM** y, en DAX, siempre llamas a la función por su nombre completo.
 
-For example, if you [batch rename](xref:duplicate-and-batch) a set of functions to remove the `DaxLib.Convert.` prefix from their names, set their namespace to `DaxLib.Convert` to keep them grouped.
+Por ejemplo, si [cambias el nombre en lote](xref:duplicate-and-batch) de un conjunto de funciones para quitar el prefijo `DaxLib.Convert.` de sus nombres, establece su espacio de nombres en `DaxLib.Convert` para mantenerlas agrupadas.
 
-### PackageId
+### Id. de paquete
 
-`PackageId` · string · Metadata · read-only · _stored as an annotation_ (`DAXLIB_PackageId`)
+`PackageId` · string · Metadatos · solo lectura · _almacenado como anotación_ (`DAXLIB_PackageId`)
 
-The ID of the [DaxLib](https://daxlib.org) package that the function comes from, read from the function's `DAXLIB_PackageId` annotation. DaxLib packages put this annotation on their functions. The **Properties view** only shows `PackageId` and `PackageVersion` when the function has this annotation, so functions that you wrote yourself don't show them.
+El identificador del paquete de [DaxLib](https://daxlib.org) del que procede la función, leído de la anotación `DAXLIB_PackageId` de la función. Los paquetes de DaxLib colocan esta anotación en sus funciones. La **vista de propiedades** solo muestra `PackageId` y `PackageVersion` cuando la función tiene esta anotación, por lo que las funciones que has escrito tú no los muestran.
 
-The DAX Package Manager in Tabular Editor 3 removes the `DAXLIB_` annotations when it installs a function and tracks the package with extended properties, described under [PackageVersion](#packageversion). You see these properties on functions from a DaxLib package that were added to the model without the DAX Package Manager. See @dax-package-manager.
+El DAX Package Manager de Tabular Editor 3 quita las anotaciones `DAXLIB_` cuando instala una función y realiza el seguimiento del paquete mediante propiedades extendidas, como se describe en [PackageVersion](#packageversion). Verás estas propiedades en las funciones de un paquete de DaxLib que se añadieron al modelo sin el DAX Package Manager. Consulta @dax-package-manager.
 
-### PackageVersion
+### Versión del paquete
 
-`PackageVersion` · string · Metadata · read-only · _stored as an annotation_ (`DAXLIB_PackageVersion`)
+`PackageVersion` · string · Metadatos · solo lectura · _almacenado como anotación_ (`DAXLIB_PackageVersion`)
 
-The version of the DaxLib package that the function comes from, read from the function's `DAXLIB_PackageVersion` annotation.
+La versión del paquete de DaxLib del que procede la función, leída de la anotación `DAXLIB_PackageVersion` de la función.
 
-The DAX Package Manager doesn't use `PackageId` and `PackageVersion`. It tracks installed packages in extended properties. On the model, `TabularEditor_ModelDaxPkgTable` and `TabularEditor_ModelDaxPkgSeq` list the installed packages. On each function, `TabularEditor_ObjDaxPkgHandle` records which package the function belongs to and `TabularEditor_ObjDaxPkgContentHash` records what its expression looked like when it was installed. If you change the expression of a function that came from a package, a prompt appears when you later update or remove the package, asking what to do with the changed function.
+El DAX Package Manager no usa `PackageId` ni `PackageVersion`. Realiza el seguimiento de los paquetes instalados en propiedades extendidas. En el modelo, `TabularEditor_ModelDaxPkgTable` y `TabularEditor_ModelDaxPkgSeq` enumeran los paquetes instalados. En cada función, `TabularEditor_ObjDaxPkgHandle` registra a qué paquete pertenece la función y `TabularEditor_ObjDaxPkgContentHash` registra cuál era su expresión cuando se instaló. Si cambias la expresión de una función que procede de un paquete, cuando más tarde actualices o quites el paquete aparecerá un mensaje preguntando qué hacer con la función modificada.
 
-To stop the DAX Package Manager from tracking a function, remove both its `TabularEditor_ObjDaxPkgHandle` and `TabularEditor_ObjDaxPkgContentHash` extended properties. Removing the package then no longer deletes the function, and the package still shows as installed. If you later update or reinstall the package, a prompt appears for the conflict with the existing function of the same name. If you remove only `TabularEditor_ObjDaxPkgContentHash`, the function counts as changed and every update prompts about it. The DAX Package Manager documentation warns that changing these extended properties by hand can lead to unexpected behavior.
+Para que el DAX Package Manager deje de realizar el seguimiento de una función, elimina sus dos propiedades extendidas: `TabularEditor_ObjDaxPkgHandle` y `TabularEditor_ObjDaxPkgContentHash`. Al quitar el paquete, la función ya no se elimina y el paquete sigue apareciendo como instalado. Si más tarde actualizas o reinstalas el paquete, aparecerá un mensaje sobre el conflicto con la función existente del mismo nombre. Si quitas solo `TabularEditor_ObjDaxPkgContentHash`, la función se considera modificada y cada actualización mostrará un mensaje al respecto. La documentación del DAX Package Manager advierte de que cambiar manualmente estas propiedades extendidas puede provocar un comportamiento inesperado.
 
 ### Expresión
 
-`Expression` · string · Options
+`Expression` · string · Opciones
 
-The function's parameter list and body in lambda notation: the parameters in parentheses, then `=>`, then the DAX expression that uses them. Por ejemplo:
+La lista de parámetros y el cuerpo de la función en notación lambda: los parámetros entre paréntesis, luego `=>` y después la expresión DAX que los usa. Por ejemplo:
 
 ```dax
 // Returns the relative change between two values
@@ -102,45 +102,45 @@ The function's parameter list and body in lambda notation: the parameters in par
 => DIVIDE ( newValue - oldValue, oldValue )
 ```
 
-Each parameter can have a type, such as `NUMERIC`, `STRING` or `TABLE`, and an evaluation mode. `VAL`, the default, evaluates the argument once before the function runs, like a variable. `EXPR` passes the expression itself, which is evaluated in the context where the function uses it, like a measure. A parameter followed by `= expression` is optional. See @udfs for the full syntax.
+Cada parámetro puede tener un tipo, como `NUMERIC`, `STRING` o `TABLE`, y un modo de evaluación. `VAL`, el valor predeterminado, evalúa el argumento una vez antes de que se ejecute la función, como una variable. `EXPR` pasa la expresión en sí, que se evalúa en el contexto en el que la función la usa, como una medida. Un parámetro seguido de `= expression` es opcional. Consulta @udfs para ver la sintaxis completa.
 
-Tabular Editor 3 shows the comments in the expression in autocomplete suggestions and tooltips when you call the function.
+Tabular Editor 3 muestra los comentarios de la expresión en las sugerencias de autocompletado y en las descripciones emergentes cuando llamas a la función.
 
-In Tabular Editor 3, you can edit functions together with other objects in a @dax-scripts document, with the `FUNCTION` keyword. You can also write a function in the `DEFINE` section of a @dax-query and apply the query to add the function to the model.
+En Tabular Editor 3, puedes editar funciones junto con otros objetos en un documento @dax-scripts, con la palabra clave `FUNCTION`. También puedes escribir una función en la sección `DEFINE` de una @dax-query y aplicar la consulta para agregar la función al modelo.
 
-## Set
+## Conjunto
 
-A set belongs to a table and holds a DAX expression. The Tabular Object Model (TOM) describes it as a _calculated set_. Sets are only supported in Power BI and Fabric models, at compatibility level 1400 or higher. In a model in Analysis Services compatibility mode, the TOM library rejects a new set with the error "is not supported at AnalysisServices mode".
+Un conjunto pertenece a una tabla y contiene una expresión DAX. El Tabular Object Model (TOM) lo describe como un _conjunto calculado_. Los conjuntos solo se admiten en modelos de Power BI y Fabric, con nivel de compatibilidad 1400 o superior. En un modelo en modo de compatibilidad de Analysis Services, la biblioteca TOM rechaza un nuevo conjunto con el error "is not supported at AnalysisServices mode".
 
-Sets don't appear in the **TOM Explorer**. To add, edit or remove the sets of a table, select the table and click the **...** button of its `Sets` property (see @object-properties-tables). The **Properties view** only shows that property for models in Power BI compatibility mode at compatibility level 1400 or higher.
+Los conjuntos no aparecen en el **Explorador TOM**. Para agregar, editar o quitar los conjuntos de una tabla, selecciona la tabla y haz clic en el botón **...** de la propiedad `Sets` (consulta @object-properties-tables). La **vista de propiedades** solo muestra esa propiedad para modelos en modo de compatibilidad de Power BI con nivel de compatibilidad 1400 o superior.
 
 <!-- TODO (not verifiable from TE3 source): what a Set is used for. TOM only describes it as a "calculated set" on a table with a DAX expression that can be static or dynamic. It looks like the equivalent of an MDX named set (for example for Excel PivotTables), but that isn't documented. Confirm with the TE/TOM team. -->
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Display Folder](xref:object-properties-common#display-folder)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
-- [Translated Display Folders](xref:object-properties-common#translated-display-folders)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Carpeta de visualización](xref:object-properties-common#display-folder)
+- [Oculto](xref:object-properties-common#hidden)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
+- [Carpetas de visualización traducidas](xref:object-properties-common#translated-display-folders)
 
 ### Expresión
 
-`Expression` · string · Options
+`Expression` · string · Opciones
 
-The DAX expression that defines the set.
+La expresión DAX que define el conjunto.
 
 <!-- TODO (not verifiable from TE3 source): what kind of DAX expression a set expects (a table expression that returns the members of the set?); add an example. TOM only says "The DAX expression that is evaluated for the calculated set." -->
 
-### Dynamic
+### Dinámico
 
-`IsDynamic` · bool · Options
+`IsDynamic` · bool · Opciones
 
-Whether the set is static or dynamic. A static set is evaluated once, and its members don't change with the filters in a query. A dynamic set is evaluated for each query, in the context of that query, and its members can change with the filters.
+Indica si el conjunto es estático o dinámico. Un conjunto estático se evalúa una vez, y sus miembros no cambian en función de los filtros de una consulta. Un conjunto dinámico se evalúa para cada consulta, en su contexto, y sus miembros pueden cambiar en función de los filtros.
 
 <!-- TODO (not verifiable from TE3 source): the static/dynamic behavior. It's based on how named sets work in MDX; TOM only says "Indicates whether the set is static or dynamic". -->
