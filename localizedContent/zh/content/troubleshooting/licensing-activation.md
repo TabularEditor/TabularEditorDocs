@@ -41,7 +41,7 @@ Tabular Editor 3 会将激活详细信息存储在 Windows 注册表 `HKEY_CURRE
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also inspect and edit the values directly using `regedit.exe`. See [Registry details](xref:installation-activation-basic#registry-details) for every value in the key.
+你也可以使用 `regedit.exe` 直接查看和编辑这些值。有关该键中每个值的说明，参见[注册表详细信息](xref:installation-activation-basic#registry-details)。
 
 ![注册表编辑器](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -75,17 +75,17 @@ Tabular Editor 3 会在启动时以及随后定期连接 `https://api.tabularedi
 
 ## 无法通过 UI 更改许可证密钥
 
-The **Change license key** option under **Help > About Tabular Editor** appears only when no model is loaded. If the option is missing while a model is open, close the model under **File > Close model** and try again.
+只有在未加载任何模型时，**帮助 > 关于 Tabular Editor** 下的 **更改许可证密钥** 选项才会显示。如果在打开模型时看不到该选项，请在 **文件 > 关闭模型** 中关闭模型后重试。
 
-If the UI option still fails, reset the license through the Registry Editor::
+如果界面上的该选项仍然无效，请通过注册表编辑器重置许可证::
 
 1. 关闭所有 Tabular Editor 3 实例。
-2. Open the Registry Editor (Start > Run > regedit.exe).
+2. 打开注册表编辑器（开始 > 运行 > regedit.exe）。
 3. 定位到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`。
-4. Delete the `LicenseKey`, `User`, `ActivationKey` and `Activation` values.
+4. 删除 `LicenseKey`、`User`、`ActivationKey` 和 `Activation` 值。
 5. 重新启动 Tabular Editor 3。
 
-Alternatively, run the following in a Windows Command Prompt. A command reports an error if its value doesn't exist, and the remaining commands still run:
+或者，在 Windows 命令提示符中运行以下命令。如果某个值不存在，相应命令会报告 Report 错误，但其余命令仍会继续执行：
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
@@ -94,7 +94,7 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-The next launch prompts for a license key. Deleting the registry values leaves the installation activated on the licensing service; use the [Tabular Editor Self-service portal](https://tabulareditor.com/my-account/) to manage your activated licenses. .
+下次启动时会提示输入许可证密钥。删除这些注册表值后，该安装在许可服务中仍会保持激活状态；可以使用 [Tabular Editor 自助门户](https://tabulareditor.com/my-account/) 管理已激活的许可证。。
 
 > [!IMPORTANT]
 > 一旦移除许可证密钥，在输入新的许可证密钥之前，该计算机上的当前 Windows 用户将无法使用该产品。
