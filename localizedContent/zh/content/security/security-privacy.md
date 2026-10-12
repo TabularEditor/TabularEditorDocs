@@ -77,7 +77,7 @@ AI 助手采用 **自备密钥** 模式。您需要提供来自受支持的 AI �
 
 **管理员上限。** 在企业版、咨询版和试用版中，管理员可以通过 [策略](xref:policies) 为每项资源分别设置上限，并分别应用于聊天和 MCP 服务器；MCP 的上限只能更低。上限优先于任何授权，包括用户已经给出的授权，并且对应选项会显示为只读。这些策略采用默认拒绝机制：如果某台机器上存在任何企业级策略值，但该机器并未获得相应许可，AI 助手和 MCP 服务器将拒绝启动，而不是忽略该策略。
 
-**Audit record.** Tabular Editor 3 writes a local record of what the AI Assistant and the MCP server did: which permissions were requested and how they were answered, which tools ran and whether each succeeded, failed or was refused, and the full text of any C# script the AI Assistant or an agent ran or submitted to run, including scripts that failed at run time or were refused. Prompts, replies and data values are not recorded, and neither is a script that fails to compile or the text of a script written into a document for the user to run. 每日文件会保留 30 天，在 **工具 > 偏好 > AI 功能** 下选择 **打开审计文件夹** 可打开它们所在的文件夹。管理员可以重定向存储位置并更改保留期限。
+**审计记录。** Tabular Editor 3 会在本地记录 AI Assistant 和 MCP 服务器执行过的操作：请求了哪些权限以及这些请求如何得到回应；调用了哪些工具，以及每个工具是成功、失败还是被拒绝；以及 AI Assistant 或代理运行或提交运行的任何 C# Script 的完整文本，包括在运行时失败或被拒绝的脚本。提示词、回复和数据值不会被记录；编译失败的脚本，以及写入文档供你运行的脚本文本，也不会被记录。每日文件会保留 30 天，在 **工具 > 偏好 > AI 功能** 下选择 **打开审计文件夹** 可打开它们所在的文件夹。管理员可以重定向存储位置并更改保留期限。
 
 **API 密钥存储。** API 密钥会以加密方式存储在本地计算机的偏好文件 Preferences.json 中。如果 AI 模块未加载（例如在安装期间被排除，或因策略而被禁用），之前存储的 API 密钥配置会自动清除。
 
@@ -95,11 +95,11 @@ Tabular Editor 3 可以充当 MCP（Model Context Protocol）服务器，使在�
 
 **身份验证。** 回环绑定是默认的安全边界，因此服务器默认会在无需凭据的情况下接受本地连接。但在一个同时有多名用户登录的主机上（例如远程桌面或 Citrix 服务器），这还不够：该机器上的任何会话都可以访问 `127.0.0.1`。未启用访问令牌时，该机器上的任何进程都可以在无凭据的情况下连接。在 **工具 > 偏好 > AI 功能 > MCP 服务器** 下启用 **要求访问令牌**，客户端就必须提供 Bearer 令牌；该令牌会以加密形式存储在本地的 Preferences.json 文件中。管理员可以通过 `RequireMcpAccessToken` [策略](xref:policies) 强制实施此要求。
 
-**数据流。** Tabular Editor 不会为此功能联系任何 AI 提供程序，也不会为其保存任何 API 密钥。只有代理会与提供程序通信，并使用其自身的配置和订阅。代理可从模型中读取的内容，受与 AI 助手相同的五项权限授予所限制；这些授予会在服务器启动时进行快照保存，任何不在授予范围内的工具都不会提供给代理。 Model data is denied by default, so no DAX query results leave the model unless you grant that explicitly. Values typed into the model definition, such as a `DATATABLE` expression or an Enter data table, are model metadata and are covered by the Model metadata grant.
+**数据流。** Tabular Editor 不会为此功能联系任何 AI 提供程序，也不会为其保存任何 API 密钥。只有代理会与提供程序通信，并使用其自身的配置和订阅。代理可从模型中读取的内容，受与 AI 助手相同的五项权限授予所限制；这些授予会在服务器启动时进行快照保存，任何不在授予范围内的工具都不会提供给代理。默认禁止访问模型数据，因此除非你明确授予该权限，否则任何 DAX 查询结果都不会离开模型。在模型定义中输入的值，例如 `DATATABLE` 表达式或“输入数据”表，属于模型元数据，并受“模型元数据”授权涵盖。
 
 **对模型的更改。** 代理只能通过 C# Script 脚本引擎更改模型；更改会以原子方式执行，并作为单个撤销步骤记录，而且仅在模型元数据权限被授予“写入”时才允许这样做。代理永远无法执行原始 TMSL 和 XMLA；此外，任何会访问模型之外内容的脚本也不会为代理执行。
 
-**Audit record.** Permission decisions, tool calls and the full text of any C# script an agent ran or submitted to run are written to a local audit log. 提示词、回复和数据值不会被记录。
+**审计记录。** 权限决策、工具调用，以及代理运行或提交运行的任何 C# Script 的完整文本，都会写入本地审计日志中。提示词、回复和数据值不会被记录。
 
 **禁用 MCP 服务器。** 在 **工具 > 偏好 > AI 功能 > MCP 服务器** 中取消勾选 **启用 MCP 服务器**，或强制执行 `DisableMcpServer` 或 `DisableAi` [策略](xref:policies)。该服务器属于 AI 功能组件，因此在安装时排除该组件也会一并移除它。
 
@@ -120,7 +120,7 @@ Tabular Editor 仅会在以下情况下向在线资源（Web URL）发起请求�
   - https://westeurope.api.daxoptimizer.com/api
 - **AI 助手。** 当 AI 助手已完成配置并在使用时，Tabular Editor 3 会将请求直接发送到所配置的 AI 提供商 API。具体端点取决于所选提供商（例如：OpenAI 使用 `https://api.openai.com`，Anthropic 使用 `https://api.anthropic.com`；Azure OpenAI 和自定义提供商则使用用户指定的端点）。这些请求中仅包含权限授予范围内的数据。有关这些资源及其默认值，请查看上文的 [AI 助手](#ai-assistant) 部分。
 - **AI 知识库更新。** AI 助手搜索的知识库是随 AI 功能组件一同提供的本地数据库。 Tabular Editor 3 会检查是否有新版本，并从 `https://cdn.tabulareditor.com` 下载。该请求不会携带任何关于用户或其模型的数据。
-- **AI model catalog.** When a user opens the model list for the OpenAI or Anthropic provider, Tabular Editor 3 downloads the list of available models from `https://api.tabulareditor.com/AiModels` and caches it in `%LocalAppData%\TabularEditor3\AiModels.json` for 24 hours. The request is anonymous and carries no data about you, your API key or your model. The `DisableUpdates` policy turns it off.
+- **AI 模型目录。** 当你打开 OpenAI 或 Anthropic 提供商的模型列表时，Tabular Editor 3 会从 `https://api.tabulareditor.com/AiModels` 下载可用模型列表，并将其缓存在 `%LocalAppData%\TabularEditor3\AiModels.json` 中 24 小时。该请求是匿名的，不会携带关于你、你的 API 密钥或你的模型的任何数据。 `DisableUpdates` 策略可将其关闭。
 - **MCP 服务器。** MCP 服务器不会发起任何出站请求。它只接受来自回环接口的连接，而与其连接的代理会按照其自身配置与 AI 提供程序通信。请查看上文的 [MCP 服务器](#mcp-server) 部分。
 - **导入最佳实践规则。** Tabular Editor 提供一项功能，让你可以指定一个 URL，从中获取以 JSON 格式提供的最佳实践规则列表。此类请求只会从该 URL 下载 JSON 数据，不会向该 URL 传输任何数据。
 - **使用 C# Script。** Tabular Editor 允许用户编写并执行用 C# 编写的代码，以实现自动化。此类脚本可利用 C# 语言功能和 .NET 运行时连接到联机资源。用户始终有责任确保所执行的代码不会导致任何非预期的数据共享。对于因使用 C# Script 功能而造成的任何损害、损失或泄露，Tabular Editor ApS 概不负责。如果没有用户的明确操作，Tabular Editor 绝不会执行 C# Script。
@@ -130,7 +130,7 @@ Tabular Editor 仅会在以下情况下向在线资源（Web URL）发起请求�
 **防火墙允许列表 / 接受列表**
 如需允许上述 Web 请求的流量，请将以下地址加入允许列表：
 
-- License activation / upgrade checks / AI model catalog: **https://api.tabulareditor.com**
+- 许可证激活 / 升级检查 / AI 模型目录：**https://api.tabulareditor.com**
 - 使用情况遥测 / 错误 Report：**https://\*.in.applicationinsights.azure.com**
 - DAX Formatter（仅 Tabular Editor 2.x）：**https://www.daxformatter.com**
 - 导入最佳实践规则 / C# Script：视具体情况而定
