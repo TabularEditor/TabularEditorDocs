@@ -10,7 +10,7 @@ description: 此最佳实践规则通过识别 Power BI 中与 Structured数据�
 
 ## 概览
 
-此最佳实践规则用于识别 Power BI 模型中与 Structured数据源配合使用旧版基于提供程序的查询（SourceType = Query）的分区。 This combination is not supported in Power BI Service and will cause deployment failures.
+此最佳实践规则用于识别 Power BI 模型中与 Structured数据源配合使用旧版基于提供程序的查询（SourceType = Query）的分区。 Power BI Service 不支持这种组合，因而会导致部署失败。
 
 - 类别：错误预防
 
@@ -22,7 +22,7 @@ description: 此最佳实践规则通过识别 Power BI 中与 Structured数据�
 
 ## 为何这很重要
 
-Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。 Using provider partitions with structured data sources causes:
+Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。在 Structured数据源中使用提供程序分区会导致：
 
 - **部署失败**：模型无法发布到 Power BI Service
 - **刷新错误**：在服务中执行的计划刷新会失败
