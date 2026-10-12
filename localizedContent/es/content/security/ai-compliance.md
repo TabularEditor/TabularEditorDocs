@@ -1,6 +1,6 @@
 ---
 uid: ai-compliance
-title: AI features compliance guide
+title: Guía de cumplimiento de las funciones de IA
 author: Morten Lønskov
 updated: 2026-10-09
 applies_to:
@@ -12,225 +12,225 @@ applies_to:
       editions:
         - edition: Desktop
           partial: true
-          note: "General policies only. No permission limits, provider lock or audit log"
+          note: "Solo políticas generales. Sin límites de permisos, bloqueo de proveedor ni registro de auditoría"
         - edition: Business
           partial: true
-          note: "General policies only. No permission limits, provider lock or audit log"
+          note: "Solo políticas generales. Sin límites de permisos, bloqueo de proveedor ni registro de auditoría"
         - edition: Enterprise
           full: true
 ---
 
-# AI features compliance guide
+# Guía de cumplimiento de las funciones de IA
 
-The [AI Assistant](xref:ai-assistant) and the [Model Context Protocol (MCP) server](xref:mcp-server) in Tabular Editor 3 give AI models access to the open semantic model, within permission grants that administrators limit by group policy and that Enterprise Edition records in an audit log. This page is for the IT, security and compliance teams that approve these features for an organization.
+El [Asistente de IA](xref:ai-assistant) y el [servidor de Model Context Protocol (MCP)](xref:mcp-server) de Tabular Editor 3 dan a los modelos de IA acceso al modelo semántico abierto, dentro de los permisos que los administradores limitan mediante directiva de grupo y que la Edición Enterprise registra en un registro de auditoría. Esta página está dirigida a los equipos de TI, seguridad y cumplimiento que aprueban estas funciones para una organización.
 
-## The AI features
+## Funciones de IA
 
-| Funcionalidad   | Qué hace                                                                                                                                                                                                    | What calls the AI provider                                                 | Network traffic                              |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
-| Asistente de IA | A chat panel in Tabular Editor 3 that reads, queries and changes the open semantic model                                                                                                                    | Tabular Editor 3, from the user's machine, with an API key the user enters | Outbound to the configured provider endpoint |
-| MCP server      | A local server that an AI agent the user already runs, such as Claude Code, GitHub Copilot, Codex or Cursor, connects to. The agent then reads, queries and changes the open semantic model | The agent, under its own configuration and subscription                    | Inbound on `127.0.0.1` only                  |
+| Funcionalidad   | Qué hace                                                                                                                                                                                                               | Qué realiza la llamada al proveedor de IA                                                    | Tráfico de red                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Asistente de IA | Un panel de chat de Tabular Editor 3 que lee, consulta y modifica el modelo semántico abierto                                                                                                                          | Tabular Editor 3, desde el equipo del usuario, con una clave de API que el usuario introduce | Saliente hacia el punto de conexión del proveedor configurado |
+| Servidor MCP    | Un servidor local al que se conecta un agente de IA que el usuario ya ejecuta, como Claude Code, GitHub Copilot, Codex o Cursor. Luego, el agente lee, consulta y modifica el modelo semántico abierto | El agente, con su propia configuración y suscripción                                         | Solo tráfico entrante en `127.0.0.1`                          |
 
-Both features ship in the AI features component, which is part of a default installation from Tabular Editor 3.27.0. They share the permission grants, the administrator policies and the audit log, with the differences described under [Permission grants](#permission-grants).
+Ambas funciones se incluyen en el componente de funciones de IA, que forma parte de la instalación predeterminada desde Tabular Editor 3.27.0. Comparten las concesiones de permisos, las políticas de administrador y el registro de auditoría. Las diferencias se describen en [Concesiones de permisos](#permission-grants).
 
-Tabular Editor ApS doesn't operate an AI service and doesn't include an API key. Prompts, replies, model metadata and model data from either feature never pass through Tabular Editor servers. With telemetry on, Tabular Editor 3 sends AI usage events to Tabular Editor ApS with the provider, the model name, a conversation ID and token counts. The `DisableTelemetry` policy turns them off.
+Tabular Editor ApS no opera ningún servicio de IA ni incluye una clave de API. Los prompts, las respuestas, los metadatos del modelo y los datos del modelo de cualquiera de las funciones nunca pasan por los servidores de Tabular Editor. Con la telemetría activada, Tabular Editor 3 envía a Tabular Editor ApS eventos de uso de la IA con el proveedor, el nombre del modelo, un ID de conversación y los recuentos de tokens. La directiva `DisableTelemetry` los desactiva.
 
-The [Tabular Editor Trust Center](https://trust.tabulareditor.com/) publishes the independent penetration test report for the AI Assistant, the SOC 2 audit report and the list of sub-processors.
+El [Centro de confianza de Tabular Editor](https://trust.tabulareditor.com/) publica el Report independiente de pruebas de penetración del Asistente de IA, el Report de auditoría SOC 2 y la lista de subencargados del tratamiento.
 
-## Data flow
+## Flujo de datos
 
 ### Asistente de IA
 
-The AI Assistant sends requests directly from the user's machine to the provider configured under **Tools > Preferences > AI Features > AI Assistant**: OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint, including a model hosted on your own network. Authentication is by API key only. See [Supported providers](xref:ai-assistant#supported-providers).
+El Asistente de IA envía solicitudes directamente desde tu equipo al proveedor configurado en **Herramientas > Preferencias > Funciones de IA > Asistente de IA**: OpenAI, Anthropic, Azure OpenAI o cualquier punto de conexión compatible con OpenAI, incluido un modelo alojado en tu propia red. La autenticación se realiza únicamente mediante clave de API. Consulta [Proveedores compatibles](xref:ai-assistant#supported-providers).
 
-A request to the provider contains:
+Una solicitud al proveedor contiene:
 
-- the system prompt and the Custom Instructions in effect, including any your organization publishes
-- the user's messages and the conversation history
-- context about the open model added to the user's messages: the database name, object counts, the current selection, the title of the active document, model errors and recent changes. A user's **Model metadata** setting doesn't withhold it; a `MaxModelMetadataAccess` limit of `Deny` does
-- the results of the tools the assistant called, within the [permission grants](#permission-grants)
-- passages from the Tabular Editor knowledge base, a local database built from the Tabular Editor documentation, blog, GitHub issues and discussions
+- el prompt del sistema y las Instrucciones personalizadas vigentes, incluidas las que publique tu organización
+- tus mensajes y el historial de la conversación
+- contexto sobre el modelo abierto añadido a tus mensajes: el nombre de la base de datos, el recuento de objetos, la selección actual, el título del documento activo, los errores del modelo y los cambios recientes. Tu configuración de **Metadatos del modelo** no impide su envío; sí lo hace un límite `MaxModelMetadataAccess` de `Deny`
+- los resultados de las herramientas que invocó el asistente, dentro de las [concesiones de permisos](#permission-grants)
+- pasajes de la base de conocimiento de Tabular Editor, una base de datos local creada a partir de la documentación, el blog, las incidencias y los debates de GitHub
 
-Model metadata covers the whole model definition: object names, descriptions and annotations, DAX and M expressions, partition source queries, data source connection details, roles, role members and row-level security filters. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are part of the metadata.
+Los metadatos del modelo abarcan toda la definición del modelo: nombres de objetos, descripciones y anotaciones, expresiones DAX y M, consultas de origen de las particiones, detalles de conexión del Data source, roles, miembros de los roles y filtros de seguridad a nivel de filas. Los valores escritos en la definición del modelo, como una expresión `DATATABLE` o una tabla de **Introducir datos**, forman parte de los metadatos.
 
-Text from these sources becomes part of the request and influences what the assistant does. Restrict write access to an organization Custom Instructions folder to the people who approve its content.
+El texto de estas fuentes pasa a formar parte de la solicitud e influye en lo que hace el asistente. Restringe el acceso de escritura a la carpeta de Instrucciones personalizadas de tu organización a las personas que aprueban su contenido.
 
-Your organization's agreement with the provider governs retention, the region data is processed in and whether the provider uses requests for model training. To keep processing in an Azure tenant or a network your organization governs, use Azure OpenAI, [Microsoft Foundry](xref:ai-assistant#using-microsoft-foundry) or a [self-hosted model](xref:ai-assistant#using-a-local-or-organizational-llm), and lock the configuration by [policy](#restrict-the-ai-provider).
+El acuerdo de tu organización con el proveedor rige la retención, la región en la que se procesan los datos y si el proveedor usa las solicitudes para entrenar modelos. Para mantener el procesamiento dentro de un inquilino de Azure o de una red gobernada por tu organización, usa Azure OpenAI, [Microsoft Foundry](xref:ai-assistant#using-microsoft-foundry) o un [modelo autoalojado](xref:ai-assistant#using-a-local-or-organizational-llm), y bloquea la configuración mediante [directiva](#restrict-the-ai-provider).
 
-### MCP server
+### Servidor MCP
 
-The MCP server is an HTTP listener bound to `127.0.0.1`, on port 42100 by default. It has no API key, makes no outbound requests and rejects browser requests with a non-local `Origin` header.
+El servidor MCP es un listener HTTP enlazado a `127.0.0.1`, con el puerto 42100 como valor predeterminado. No tiene clave de API, no realiza solicitudes salientes y rechaza las solicitudes del navegador con un encabezado `Origin` no local.
 
-The connected agent sends what it reads from Tabular Editor 3 to its own provider, under the agent's configuration and the provider's terms. Tabular Editor 3 has no setting for the agent's provider, so govern the agent through its own administrative controls. The agent's own tools, such as file and shell access, are outside Tabular Editor 3 as well. Model files on disk, conversation files and audit files are readable by any agent running as the user.
+El agente conectado envía lo que lee de Tabular Editor 3 a su propio proveedor, conforme a la configuración del agente y a las condiciones del proveedor. Tabular Editor 3 no tiene ninguna configuración para el proveedor del agente, así que gestiona el agente mediante sus propios controles administrativos. Las propias herramientas del agente, como el acceso a archivos y al shell, también quedan fuera de Tabular Editor 3. Los archivos de modelo en disco, los archivos de conversación y los archivos de auditoría pueden leerse por cualquier agente que se ejecute con la cuenta del usuario.
 
-**Require access token** is off by default. While it's off, any process on the machine can connect to the server without credentials, including processes in other users' sessions on a Remote Desktop or Citrix host. The `RequireMcpAccessToken` policy enforces the token for every user. Agent registration files store the token in plain text, and **Regenerate token** in the **Tools > MCP Server...** dialog invalidates every existing registration. See [Running on a shared machine](xref:mcp-server#running-on-a-shared-machine).
+**Requerir token de acceso** está desactivado de forma predeterminada. Mientras esté desactivado, cualquier proceso del equipo puede conectarse al servidor sin credenciales, incluidos los procesos en las sesiones de otros usuarios en un host de Escritorio remoto o de Citrix. La directiva `RequireMcpAccessToken` exige el token para todos los usuarios. Los archivos de registro del agente almacenan el token en texto sin formato, y la opción **Regenerar token** del cuadro de diálogo **Herramientas > Servidor MCP...** invalida todos los registros existentes. Consulta [Ejecución en un equipo compartido](xref:mcp-server#running-on-a-shared-machine).
 
-### Network endpoints
+### Puntos de conexión de red
 
-Allow these endpoints through your firewall or proxy for the AI features:
+Permite el acceso a estos puntos de conexión a través del firewall o proxy para las funciones de IA:
 
-| Traffic                   | Endpoint                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AI Assistant requests     | The configured provider endpoint, for example `https://api.openai.com`, `https://api.anthropic.com`, an Azure OpenAI resource or your own gateway                                                                                                                                                                                                             |
-| AI model catalog          | `https://api.tabulareditor.com/AiModels`. An anonymous request for the list of models, made when a user opens the model list for OpenAI or Anthropic. The list is cached for 24 hours. `DisableUpdates` turns it off                                                                                          |
-| AI knowledge base updates | `https://cdn.tabulareditor.com`. A check at most once a day while the AI Assistant is configured, with no data about the user or the model. No policy turns it off except `DisableAi`. Users clear **Check for knowledge base updates on startup** under **Tools > Preferences > AI Features > AI Assistant** |
-| MCP server                | None                                                                                                                                                                                                                                                                                                                                                          |
+| Tráfico                                           | Punto de conexión                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Solicitudes del Asistente de IA                   | El punto de conexión del proveedor configurado, por ejemplo `https://api.openai.com`, `https://api.anthropic.com`, un recurso de Azure OpenAI o tu propio Gateway                                                                                                                                                                                                                                                                               |
+| Catálogo de modelos de IA                         | `https://api.tabulareditor.com/AiModels`. Una solicitud anónima para obtener la lista de modelos, que se realiza cuando un usuario abre la lista de modelos de OpenAI o Anthropic. La lista se almacena en caché durante 24 horas. `DisableUpdates` lo desactiva                                                                                                                                |
+| Actualizaciones de la base de conocimientos de IA | `https://cdn.tabulareditor.com`. Una comprobación como máximo una vez al día mientras el Asistente de IA esté configurado, sin datos sobre el usuario ni el modelo. Ninguna directiva lo desactiva salvo `DisableAi`. Los usuarios desmarcan **Comprobar si hay actualizaciones de la base de conocimientos al iniciar** en **Herramientas > Preferencias > Funciones de IA > Asistente de IA** |
+| Servidor MCP                                      | Ninguno                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-License validation, update checks and telemetry use separate requests. See [Web requests](xref:security-privacy#web-requests).
+La validación de la licencia, la comprobación de actualizaciones y la telemetría usan solicitudes independientes. Consulta [Solicitudes web](xref:security-privacy#web-requests).
 
-### Data stored on the user's machine
+### Datos almacenados en el equipo del usuario
 
-All paths are under `%LocalAppData%\TabularEditor3` unless stated otherwise.
+Todas las rutas están en `%LocalAppData%\TabularEditor3`, salvo que se indique lo contrario.
 
-| Item                        | Ubicación                                                                                                                                                                                   | Formato                                                                                                                                                                                                                                                                        |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Provider API key            | `Preferences.json`                                                                                                                                                                          | Encrypted with the Windows Data Protection API for the current user. Cleared when the AI component isn't loaded or `DisableAi` is set                                                                                                                          |
-| MCP access token            | `Preferences.json`                                                                                                                                                                          | Encrypted with the Windows Data Protection API for the current user                                                                                                                                                                                                            |
-| Standing permission grants  | `Preferences.json`                                                                                                                                                                          | JSON                                                                                                                                                                                                                                                                           |
-| Per-model permission grants | The model's [user options](xref:user-options) (`.tmuo`) file: next to a model loaded from files, or under `UserOptions` for a model opened from a server | JSON                                                                                                                                                                                                                                                                           |
-| Conversaciones              | `AI\Conversations`                                                                                                                                                                         | Unencrypted JSON. Holds prompts, replies and tool results, including DAX query rows when **Model data** is at **Read**. Archived copies are written before each compaction. Files stay until the user deletes the conversation |
-| User Custom Instructions    | `AI\CustomInstructions`                                                                                                                                                                    | Markdown                                                                                                                                                                                                                                                                       |
-| Knowledge base              | `kb.sqlite`                                                                                                                                                                                 | SQLite database                                                                                                                                                                                                                                                                |
-| AI model catalog            | `AiModels.json`                                                                                                                                                                             | JSON                                                                                                                                                                                                                                                                           |
-| Audit log                   | `AI\audit`, or the folder set by `AiAuditLogPath`                                                                                                                                          | See [Audit log](#audit-log)                                                                                                                                                                                                                                                    |
+| Elemento                                 | Ubicación                                                                                                                                                                                                            | Formato                                                                                                                                                                                                                                                                                                                                                         |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Clave de API del proveedor               | `Preferences.json`                                                                                                                                                                                                   | Cifrada con la API de protección de datos de Windows para el usuario actual. Se borra cuando el componente de IA no está cargado o se establece `DisableAi`                                                                                                                                                                                     |
+| Token de acceso de MCP                   | `Preferences.json`                                                                                                                                                                                                   | Cifrado con la API de protección de datos de Windows para el usuario actual                                                                                                                                                                                                                                                                                     |
+| Permisos concedidos de forma permanente  | `Preferences.json`                                                                                                                                                                                                   | JSON                                                                                                                                                                                                                                                                                                                                                            |
+| Permisos concedidos por modelo           | El archivo de [opciones de usuario](xref:user-options) (`.tmuo`) del modelo: junto a un modelo cargado desde archivos o en `UserOptions` para un modelo abierto desde un servidor | JSON                                                                                                                                                                                                                                                                                                                                                            |
+| Conversaciones                           | `AI\Conversations`                                                                                                                                                                                                  | JSON sin cifrar. Contiene prompts, respuestas y resultados de herramientas, incluidas las filas de las consultas DAX cuando **Datos del modelo** está configurado en **Lectura**. Se crean copias archivadas antes de cada compactación. Los archivos se conservan hasta que el usuario elimine la conversación |
+| Instrucciones personalizadas del usuario | `AI\\CustomInstructions`                                                                                                                                                                                           | Markdown                                                                                                                                                                                                                                                                                                                                                        |
+| Base de conocimientos                    | `kb.sqlite`                                                                                                                                                                                                          | Base de datos SQLite                                                                                                                                                                                                                                                                                                                                            |
+| Catálogo de modelos de IA                | `AiModels.json`                                                                                                                                                                                                      | JSON                                                                                                                                                                                                                                                                                                                                                            |
+| Registro de auditoría                    | `AI\\audit`, o la carpeta configurada por `AiAuditLogPath`                                                                                                                                                         | Consulta [Registro de auditoría](#audit-log)                                                                                                                                                                                                                                                                                                                    |
 
-## Permission grants
+## Permisos otorgados
 
-Permission grants control what the AI Assistant and the MCP server reach, with one access level per resource. The user sets each level under **Tools > Preferences > AI Features > Permissions**. On Enterprise Edition, an administrator can set a permission limit for each resource by policy:
+Los permisos otorgados controlan a qué pueden acceder el Asistente de IA y el servidor MCP, con un nivel de acceso por recurso. El usuario configura cada nivel en **Herramientas > Preferencias > Funciones de IA > Permisos**. En la Edición Enterprise, un administrador puede establecer un límite de permiso para cada recurso mediante una directiva:
 
-| Resource               | What the AI features reach                                                                                                                                     | Predeterminado | Limit for both features  | Limit for the MCP server only |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------ | ----------------------------- |
-| Metadatos del modelo   | Read: the model definition and VertiPaq Analyzer statistics. Write: changing the model through C# scripts      | Read           | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess`   |
-| Model data             | Read: DAX query results, which are data values from the model                                                                                  | Deny           | `MaxModelDataAccess`     | `McpMaxModelDataAccess`       |
-| Best Practice Analyzer | Read: rules and analysis results. Write: adding and changing rules                                             | Read           | `MaxBpaAccess`           | `McpMaxBpaAccess`             |
-| Documents              | Read: the contents of open C# script, DAX query and DAX script documents. Write: creating and overwriting them | Write          | `MaxDocumentsAccess`     | `McpMaxDocumentsAccess`       |
-| Macros                 | Read: the user's macro library, including macro code                                                                                           | Write          | `MaxMacrosAccess`        | `McpMaxMacrosAccess`          |
+| Recurso                | A qué pueden acceder las funciones de IA                                                                                                                                                | Predeterminado | Límite para ambas funciones | Límite solo para el servidor MCP |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | --------------------------- | -------------------------------- |
+| Metadatos del modelo   | Lectura: la definición del modelo y las estadísticas del Analizador VertiPaq. Escritura: modificar el modelo mediante C# Scripts        | Leer           | `MaxModelMetadataAccess`    | `McpMaxModelMetadataAccess`      |
+| Datos del modelo       | Lectura: resultados de consultas DAX, es decir, valores de datos del modelo                                                                                             | Denegar        | `MaxModelDataAccess`        | `McpMaxModelDataAccess`          |
+| Best Practice Analyzer | Lectura: reglas y resultados del análisis. Escritura: agregar y cambiar reglas                                                          | Leer           | `MaxBpaAccess`              | `McpMaxBpaAccess`                |
+| Documentos             | Lectura: el contenido de los documentos abiertos de C# Script, de consultas DAX y de scripts DAX. Escritura: crearlos y sobrescribirlos | Escribir       | `MaxDocumentsAccess`        | `McpMaxDocumentsAccess`          |
+| Macros                 | Lectura: la biblioteca de macros del usuario, incluido el código de las macros                                                                                          | Escribir       | `MaxMacrosAccess`           | `McpMaxMacrosAccess`             |
 
-At the default levels, the AI features read the model definition, run the Best Practice Analyzer, read the macro library and read and overwrite open script and query documents. They don't read data values and they don't change the model. Macro code and open documents can contain connection strings and other credentials. Set `MaxMacrosAccess` and `MaxDocumentsAccess` if they do in your organization.
+En los niveles predeterminados, las funcionalidades de IA leen la definición del modelo, ejecutan el Best Practice Analyzer, leen la biblioteca de macros y leen y sobrescriben los documentos de scripts y consultas abiertos. No leen valores de datos ni cambian el modelo. El código de macros y los documentos abiertos pueden contener cadenas de conexión y otras credenciales. Configura `MaxMacrosAccess` y `MaxDocumentsAccess` si eso ocurre en tu organización.
 
-The AI Assistant and the MCP server apply the grants as follows:
+El Asistente de IA y el servidor MCP aplican los permisos de la siguiente manera:
 
-- **AI Assistant.** When a request needs access the standing grant doesn't cover, a permission card appears in the chat. The user allows it for the turn, for the session or always, and for **Model metadata** and **Model data** also for the current model. No card appears for access above a permission limit.
-- **MCP server.** No prompt appears. The server reads the standing grants when it starts, and tools a grant doesn't cover aren't offered to the agent. Grants given for one model or one session apply to the chat only.
+- **Asistente de IA.** Cuando una solicitud necesita un acceso que el permiso permanente no cubre, aparece una tarjeta de permisos en el chat. El usuario puede permitirlo para este turno, para la sesión o siempre; y, en **Metadatos del modelo** y **Datos del modelo**, también para el modelo actual. No aparece ninguna tarjeta para un acceso que supere un límite de permisos.
+- **Servidor MCP.** No aparece ningún aviso. El servidor lee los permisos permanentes al iniciarse, y las herramientas que esos permisos no cubren no se ofrecen al agente. Los permisos que concedas para un modelo o una sesión se aplican solo al chat.
 
-A permission limit outranks every user grant, including grants given for one model and grants given before the policy was set, and the matching setting offers only the levels up to the limit. An `McpMax...` limit only lowers the shared limit for the MCP server. See [Permissions and consent](xref:ai-assistant#permissions-and-consent).
+Un límite de permisos tiene prioridad sobre cualquier permiso que concedas, incluidos los que concedas para un modelo y los que hayas concedido antes de establecer la directiva; además, la configuración correspondiente solo ofrece los niveles hasta ese límite. Un límite `McpMax...` solo reduce el límite compartido para el servidor MCP. Consulta [Permisos y consentimiento](xref:ai-assistant#permissions-and-consent).
 
-## Safeguards on model changes
+## Protecciones para los cambios del modelo
 
-The AI features run scripts that change a model only when **Model metadata** is at **Write**. Every change runs through the [C# scripting engine](xref:csharp-scripts) against the model loaded in Tabular Editor 3:
+Las funciones de IA ejecutan scripts que cambian un modelo solo cuando **Metadatos del modelo** están en **Escritura**. Todos los cambios pasan por el [motor de C# Script](xref:csharp-scripts) sobre el modelo cargado en Tabular Editor 3:
 
-- A script's changes form one undo entry, named **C# script (AI Assistant)** or **C# script (MCP)**.
-- A script that fails part-way is rolled back completely.
-- The AI Assistant runs scripts only when the user turns on **Allow AI assistant to run C# scripts directly**, which is off by default. With **Preview changes** on, the default, a preview dialog shows the changes from each script run and the user accepts or cancels them. Both settings are user preferences, with no policy to lock them.
-- **Execute** on a script the AI Assistant writes in the chat runs it as the user's own script, at any **Model metadata** level. The safety check applies; the restrictions on `ReadFile` and the DAX helper methods below don't.
-- An MCP agent's scripts run without a preview dialog. The user reviews the changes afterwards in the **TOM Explorer** and the **Properties** view, which mark every unsaved change.
-- Changes stay unsaved in the loaded model until the user saves. No AI tool saves or deploys a model. Links in the assistant's replies can start Tabular Editor commands, including **Save** and **Deploy**, when the user selects them. If the user opened the model through a live connection to Analysis Services or a Power BI workspace, saving writes the changes to that server.
-- A script that uses the file system, the network or an external assembly isn't run. The AI Assistant shows it with an **Unsafe** badge and **Execute** disabled. For an MCP agent it opens as a review document, or is refused when **Documents** is below **Write**.
-- The safety check analyzes the compiled script. Reflection, expression trees, `Activator`, `AppDomain`, XML readers and deserialization count as unsafe.
-- In a script the AI Assistant or an MCP agent runs, `ReadFile`, `SaveFile`, `Bpa.ExportCsv`, `ExecuteCommand`, calls that run a macro and Semantic Bridge calls always fail. `ExecuteCommand` sends Tabular Model Scripting Language (TMSL) and XML for Analysis (XMLA) commands to the server.
-- In the same scripts, the DAX helper methods require **Model data** at **Read**, like the DAX query tool.
+- Los cambios de un script forman una sola entrada de deshacer, llamada **C# Script (AI Assistant)** o **C# Script (MCP)**.
+- Un script que falla a mitad de ejecución se revierte por completo.
+- El Asistente de IA ejecuta scripts solo cuando el usuario activa **Permitir que el asistente de IA ejecute C# Scripts directamente**, que está desactivada de forma predeterminada. Con **Vista previa de los cambios** activada, que es la opción predeterminada, un cuadro de diálogo de vista previa muestra los cambios de cada ejecución del script, y el usuario los acepta o los cancela. Ambas opciones son preferencias del usuario y no hay ninguna directiva para bloquearlas.
+- Al seleccionar **Ejecutar** en un script que el Asistente de IA escribe en el chat, este se ejecuta como si fuera un script tuyo, con cualquier nivel de **Metadatos del modelo**. Se aplica la comprobación de seguridad; no se aplican las restricciones sobre `ReadFile` ni sobre los métodos auxiliares de DAX que se indican a continuación.
+- Los scripts de un agente MCP se ejecutan sin cuadro de diálogo de vista previa. Después, el usuario revisa los cambios en el **Explorador TOM** y en la vista **Propiedades**, que marcan todos los cambios no guardados.
+- Los cambios permanecen sin guardar en el modelo cargado hasta que el usuario los guarde. Ninguna herramienta de IA guarda ni implementa un modelo. Los enlaces en las respuestas del asistente pueden iniciar comandos de Tabular Editor, incluidos **Save** y **Deploy**, cuando el usuario los selecciona. Si el usuario abrió el modelo mediante una conexión en vivo a Analysis Services o a un Workspace de Power BI, al guardar se escriben los cambios en ese servidor.
+- No se ejecuta ningún script que use el sistema de archivos, la red o un ensamblado externo. El Asistente de IA lo muestra con una insignia **Unsafe** y el comando **Execute** deshabilitado. Para un agente MCP, se abre como un documento de revisión o se rechaza cuando **Documents** está por debajo de **Write**.
+- La comprobación de seguridad analiza el script compilado. La reflexión, los árboles de expresiones, `Activator`, `AppDomain`, los lectores XML y la deserialización se consideran inseguros.
+- En un script que ejecute el Asistente de IA o un agente MCP, `ReadFile`, `SaveFile`, `Bpa.ExportCsv`, `ExecuteCommand`, las llamadas que ejecutan una macro y las llamadas a Semantic Bridge siempre fallan. `ExecuteCommand` envía comandos de Tabular Model Scripting Language (TMSL) y XML for Analysis (XMLA) al servidor.
+- En esos mismos scripts, los métodos auxiliares de DAX requieren **Model data** en **Read**, igual que la herramienta de consultas DAX.
 
-The `BlockUnsafeScripts` policy applies the same safety check to every script and macro: from the user, the Best Practice Analyzer, the AI Assistant, the MCP server or the Tabular Editor CLI. `DisableCSharpScripts` turns off C# script documents and removes the tool that runs scripts from the AI Assistant and both script tools from the MCP server. Macros keep running unless `DisableMacros` is also set. See [How an agent changes your model](xref:mcp-server#how-an-agent-changes-your-model).
+La directiva `BlockUnsafeScripts` aplica la misma comprobación de seguridad a todos los scripts y macros: del usuario, del Best Practice Analyzer, del Asistente de IA, del servidor MCP o de la CLI de Tabular Editor. `DisableCSharpScripts` desactiva los documentos de C# Script y elimina del Asistente de IA la herramienta que ejecuta scripts, y del servidor MCP ambas herramientas de scripts. Las macros siguen ejecutándose a menos que también se establezca `DisableMacros`. Consulta [Cómo un agente cambia tu modelo](xref:mcp-server#how-an-agent-changes-your-model).
 
-## Administrator controls
+## Controles del administrador
 
-Administrators enforce the controls through Windows group policy, with the administrative templates that ship with Tabular Editor 3 or by writing registry values directly. See @policies for the registry keys, value types and template setup.
+Los administradores aplican estos controles mediante la directiva de grupo de Windows, con las plantillas administrativas incluidas en Tabular Editor 3 o escribiendo directamente valores del Registro. Consulta @policies para conocer las claves del Registro, los tipos de valor y la configuración de las plantillas.
 
-A policy under `HKEY_LOCAL_MACHINE` outranks the same value under `HKEY_CURRENT_USER`. Standard users can't change either `Software\Policies` key. Tabular Editor 3 reads policies when it starts, and the MCP server reads permission grants when it starts, so a policy change reaches a running session after the user restarts Tabular Editor 3.
+Una directiva en `HKEY_LOCAL_MACHINE` tiene prioridad sobre el mismo valor en `HKEY_CURRENT_USER`. Los usuarios estándar no pueden cambiar ninguna de las dos claves `Software\\Policies`. Tabular Editor 3 lee las directivas al iniciarse, y el servidor MCP lee las concesiones de permisos al iniciarse, por lo que un cambio de directiva surte efecto en una sesión en ejecución después de que el usuario reinicie Tabular Editor 3.
 
-Enterprise Edition policies apply on Enterprise, Consultancy and Trial licenses. On Desktop and Business Edition, administrators can turn the AI features off, enforce the MCP access token, turn off C# scripts and macros and turn off telemetry. In the tables below, **All** means every edition of Tabular Editor 3.
+Las directivas de la Edición Enterprise se aplican a las licencias Enterprise, Consultancy y Trial. En Desktop y en la Edición Business, los administradores pueden desactivar las funciones de IA, exigir el token de acceso de MCP, desactivar los scripts de C# Script y las macros, y desactivar la telemetría. En las tablas siguientes, **All** significa todas las ediciones de Tabular Editor 3.
 
-### Turn the AI features off
+### Desactivar las funciones de IA
 
-| Requirement                                          | Policy             | Edition |
-| ---------------------------------------------------- | ------------------ | ------- |
-| No AI features, and the AI component isn't installed | `DisableAi`        | All     |
-| No AI Assistant, MCP server allowed                  | `DisableAiChat`    | All     |
-| No MCP server, AI Assistant allowed                  | `DisableMcpServer` | All     |
+| Requisito                                               | Directiva          | Edición |
+| ------------------------------------------------------- | ------------------ | ------- |
+| Sin funciones de IA y sin el componente de IA instalado | `DisableAi`        | Todas   |
+| Sin asistente de IA; se permite el servidor MCP         | `DisableAiChat`    | Todas   |
+| Sin servidor MCP; se permite el asistente de IA         | `DisableMcpServer` | Todas   |
 
-`DisableAi` also clears any stored provider configuration, including the API key. See [Deploying without the AI features](xref:installation-activation-basic#deploying-without-the-ai-features).
+`DisableAi` también borra cualquier configuración del proveedor almacenada, incluida la clave de la API. Consulta [Implementación sin funciones de IA](xref:installation-activation-basic#deploying-without-the-ai-features).
 
-The portable build of Tabular Editor 3 has no installer step. It honors `DisableAi` at runtime. Use application control, such as AppLocker or Windows Defender Application Control, if users must not run older versions.
+La versión portátil de Tabular Editor 3 no tiene ningún paso de instalación. Respeta `DisableAi` en tiempo de ejecución. Use el control de aplicaciones, como AppLocker o Windows Defender Application Control, si los usuarios no deben ejecutar versiones anteriores.
 
-### Limit what the AI features reach
+### Limitar el alcance de las funciones de IA
 
-| Requirement                                       | Policy                                                                                                                 | Edition    |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------- |
-| A limit per resource for both features            | `MaxModelMetadataAccess`, `MaxModelDataAccess`, `MaxBpaAccess`, `MaxDocumentsAccess`, `MaxMacrosAccess`                | Enterprise |
-| A lower limit per resource for MCP agents         | `McpMaxModelMetadataAccess`, `McpMaxModelDataAccess`, `McpMaxBpaAccess`, `McpMaxDocumentsAccess`, `McpMaxMacrosAccess` | Enterprise |
-| Withhold individual tools from MCP agents         | `McpDisabledTools`                                                                                                     | Enterprise |
-| No C# script documents, AI script tools or macros | `DisableCSharpScripts` and `DisableMacros`                                                                             | All        |
-| C# scripts that pass the safety check only        | `BlockUnsafeScripts`                                                                                                   | Enterprise |
+| Requisito                                                            | Directiva                                                                                                              | Edición    |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------- |
+| Un límite por recurso para ambas funciones                           | `MaxModelMetadataAccess`, `MaxModelDataAccess`, `MaxBpaAccess`, `MaxDocumentsAccess`, `MaxMacrosAccess`                | Enterprise |
+| Un límite mínimo por recurso para los agentes MCP                    | `McpMaxModelMetadataAccess`, `McpMaxModelDataAccess`, `McpMaxBpaAccess`, `McpMaxDocumentsAccess`, `McpMaxMacrosAccess` | Enterprise |
+| Impedir que los agentes MCP usen herramientas concretas              | `McpDisabledTools`                                                                                                     | Enterprise |
+| Sin documentos de C# Script, herramientas de scripts de IA ni macros | `DisableCSharpScripts` y `DisableMacros`                                                                               | Todas      |
+| Solo C# Scripts que superen la comprobación de seguridad             | `BlockUnsafeScripts`                                                                                                   | Enterprise |
 
-Take the tool names for `McpDisabledTools` from the `tool_call` records in the audit log.
+Extrae los nombres de las herramientas para `McpDisabledTools` de los registros `tool_call` del registro de auditoría.
 
-### Restrict the AI provider
+### Restringir el proveedor de IA
 
-| Requirement                                           | Policy                            | Edition    |
-| ----------------------------------------------------- | --------------------------------- | ---------- |
-| One approved provider                                 | `AiProvider`                      | Enterprise |
-| One approved endpoint or gateway                      | `AiEndpoint`                      | Enterprise |
-| One approved model or Azure OpenAI deployment         | `AiModel`                         | Enterprise |
-| Billing to an approved OpenAI organization or project | `AiOrganizationId`, `AiProjectId` | Enterprise |
-| A list of approved providers                          | `AiAllowedProviders`              | Enterprise |
-| A list of approved endpoint hosts                     | `AiAllowedEndpointHosts`          | Enterprise |
+| Requisito                                                        | Directiva                         | Edición    |
+| ---------------------------------------------------------------- | --------------------------------- | ---------- |
+| Un proveedor aprobado                                            | `AiProvider`                      | Enterprise |
+| Un punto de conexión o un Gateway aprobados                      | `AiEndpoint`                      | Enterprise |
+| Un modelo aprobado o una implementación de Azure OpenAI aprobada | `AiModel`                         | Enterprise |
+| Facturación a una organización o proyecto de OpenAI aprobados    | `AiOrganizationId`, `AiProjectId` | Enterprise |
+| Una lista de proveedores aprobados                               | `AiAllowedProviders`              | Enterprise |
+| Una lista de hosts de endpoints aprobados                        | `AiAllowedEndpointHosts`          | Enterprise |
 
-`AiProvider`, `AiEndpoint`, `AiModel`, `AiOrganizationId` and `AiProjectId` replace the user's setting, and `AiProvider` set to `None` turns the AI Assistant off. If the configuration breaks `AiAllowedProviders` or `AiAllowedEndpointHosts`, the AI Assistant doesn't send the request and an error names the provider or endpoint host. `AiAllowedEndpointHosts` checks only an endpoint the user enters, so OpenAI and Anthropic without a custom endpoint reach their public API whatever the list holds. Pair it with `AiProvider` or `AiAllowedProviders`. No policy requires HTTPS; lock `AiEndpoint` to an `https://` address. Policies don't distribute API keys. With the endpoint locked to a resource your organization owns, such as an Azure OpenAI resource or an internal gateway, only keys your organization issues work. With a public endpoint such as `api.openai.com`, users can enter a personal key. These policies apply to the AI Assistant only.
+`AiProvider`, `AiEndpoint`, `AiModel`, `AiOrganizationId` y `AiProjectId` sustituyen la configuración del usuario, y `AiProvider` establecido en `None` desactiva el Asistente de IA. Si la configuración infringe `AiAllowedProviders` o `AiAllowedEndpointHosts`, el Asistente de IA no envía la solicitud y se muestra un error que indica el proveedor o el host del endpoint. `AiAllowedEndpointHosts` solo valida el endpoint que introduce el usuario, por lo que OpenAI y Anthropic, sin un endpoint personalizado, acceden a su API pública independientemente de lo que contenga la lista. Combínalo con `AiProvider` o `AiAllowedProviders`. Ninguna directiva exige HTTPS; restringe `AiEndpoint` a una dirección `https://`. Las directivas no distribuyen claves de API. Con el endpoint restringido a un recurso propiedad de su organización, como un recurso de Azure OpenAI o un Gateway interno, solo funcionan las claves emitidas por su organización. Con un endpoint público como `api.openai.com`, los usuarios pueden introducir una clave personal. Estas directivas se aplican solo al Asistente de IA.
 
-### Custom Instructions and the MCP port
+### Instrucciones personalizadas y el puerto MCP
 
-| Requirement                                              | Policy                          | Edition    |
-| -------------------------------------------------------- | ------------------------------- | ---------- |
-| Organization-approved Custom Instructions for every user | `AiCustomInstructionsPath`      | Enterprise |
-| Ignore Custom Instructions users write themselves        | `DisableUserCustomInstructions` | Enterprise |
-| MCP agents authenticate with an access token             | `RequireMcpAccessToken`         | All        |
-| A fixed MCP server port                                  | `McpPort`                       | Enterprise |
+| Requisito                                                                          | Directiva                       | Edición    |
+| ---------------------------------------------------------------------------------- | ------------------------------- | ---------- |
+| Instrucciones personalizadas aprobadas por la organización para todos los usuarios | `AiCustomInstructionsPath`      | Enterprise |
+| Ignorar las instrucciones personalizadas escritas por los propios usuarios         | `DisableUserCustomInstructions` | Enterprise |
+| Los agentes MCP se autentican con un token de acceso                               | `RequireMcpAccessToken`         | Todas      |
+| Un puerto fijo para el servidor MCP                                                | `McpPort`                       | Enterprise |
 
-### Enterprise policies on other editions
+### Directivas de la edición Enterprise en otras ediciones
 
-If any Enterprise policy value is present on a machine whose license isn't Enterprise, the AI Assistant and the MCP server don't start, and a `BlockUnsafeScripts` value stops every script and macro from running. A value Tabular Editor 3 can't interpret denies the resource for a permission limit, makes the AI Assistant unavailable for `AiProvider` and enforces `BlockUnsafeScripts`. Any other invalid value is ignored, and the setting it controls stays unrestricted. Roll out Enterprise policies only to machines with a matching license. See [What happens without Enterprise Edition](xref:policies#what-happens-without-enterprise-edition).
+Si hay algún valor de directiva de Enterprise presente en un equipo cuya licencia no sea Enterprise, el Asistente de IA y el servidor MCP no se inician, y un valor de `BlockUnsafeScripts` impide que se ejecute cualquier script o macro. Un valor que Tabular Editor 3 no pueda interpretar deniega el recurso cuando existe un límite de permisos, hace que el Asistente de IA no esté disponible para `AiProvider` y aplica `BlockUnsafeScripts`. Cualquier otro valor no válido se ignora y la configuración que controla permanece sin restricciones. Implementa las directivas Enterprise solo en equipos que tengan la licencia correspondiente. Consulta [Qué ocurre sin la Edición Enterprise](xref:policies#what-happens-without-enterprise-edition).
 
-To check which policies apply on a machine, open **Tools > Preferences > Tabular Editor > Updates and Feedback**. The **Managed by your organization** section lists every policy value found, its source key and any value marked **(invalid)**.
+Para comprobar qué directivas se aplican en un equipo, abre **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**. La sección **Administrado por tu organización** enumera todos los valores de directiva encontrados, su clave de origen y cualquier valor marcado como **(no válido)**.
 
-## Audit log
+## Registro de auditoría
 
-On Enterprise Edition, Tabular Editor 3 writes a local record of AI Assistant and MCP server activity to one JSON Lines file per day. Each record carries a UTC timestamp, the feature (`chat` or `mcp`), the session and the open model's name where they apply, and the Windows user name. Nothing is recorded before a license is activated.
+En la Edición Enterprise, Tabular Editor 3 escribe un registro local de la actividad del Asistente de IA y del servidor MCP en un archivo JSON Lines distinto cada día. Cada registro incluye una marca de tiempo UTC, la característica (`chat` o `mcp`), la sesión y, cuando corresponda, el nombre del modelo abierto, así como el nombre de usuario de Windows. No se registra nada antes de que se active una licencia.
 
-The log records:
+El registro incluye:
 
-- permission requests and the user's answer
-- every tool call, with the tool name, the permissions it needed, its outcome (`ok`, `error`, `denied` or `cancelled`), its duration and the names and total size of its arguments
-- every C# script sent to be run, including scripts that failed at run time, were refused or were handed back for review, saved as a `.csx` file with its SHA-256 hash
-- the provider, model, endpoint host and token counts for each chat turn
-- AI configuration changes
-- MCP server start and stop, with the permission level of each resource
-- MCP agent connections, with the name and version the client reports
+- las solicitudes de permisos y la respuesta del usuario
+- cada llamada a una herramienta, con el nombre de la herramienta, los permisos que necesitó, su resultado (`ok`, `error`, `denied` o `cancelled`), su duración y los nombres y el tamaño total de sus argumentos
+- cada C# Script enviado para ejecutarse —incluidos los C# Scripts que fallaron en tiempo de ejecución, los que se rechazaron o los que se devolvieron para revisión— se guarda como un archivo `.csx` con su hash SHA-256
+- el proveedor, el modelo, el host del punto de conexión y el recuento de tokens de cada turno del chat
+- Cambios en la configuración de la IA
+- Inicio y detención del servidor MCP, con el nivel de permisos de cada recurso
+- Conexiones del agente MCP, con el nombre y la versión que informa el cliente
 
-Prompt text, reply text, argument values, data values from the model, API keys and access tokens aren't recorded. Scripts that fail to compile and scripts the AI features write into a document for the user to run aren't saved.
+No se registran el texto del prompt, el texto de la respuesta, los valores de los argumentos, los valores de datos del modelo, las claves de API ni los tokens de acceso. No se guardan los scripts que no se pueden compilar ni los scripts que las funciones de IA escriben en un documento para que los ejecutes.
 
-Files older than 30 days are deleted unless `AiAuditLogRetentionDays` sets another period, and `0` keeps every file. Each copy of Tabular Editor 3 deletes expired files from the folder it writes to before it writes its first record in a session.
+Los archivos con más de 30 días se eliminan, a menos que `AiAuditLogRetentionDays` establezca otro período; `0` conserva todos los archivos. Cada copia de Tabular Editor 3 elimina los archivos caducados de la carpeta en la que escribe antes de escribir su primer registro en una sesión.
 
-The log is written by the user's own Tabular Editor 3 process, so the user has write and delete access to it, including on a redirected share. If the log can't be written, for example because the share is unreachable, the AI Assistant and the MCP server keep running and the failure is written once to Tabular Editor's application log.
+El registro lo escribe tu propio proceso de Tabular Editor 3, por lo que tienes permisos de escritura y eliminación, incluso en un recurso compartido redirigido. Si no se puede escribir el registro, por ejemplo, porque no se puede acceder al recurso compartido, el AI Assistant y el servidor MCP siguen funcionando, y el error se registra una sola vez en el registro de la aplicación de Tabular Editor.
 
-`AiAuditLogPath` redirects the log. A relative path is ignored. Daily file names and script file names don't include the user or machine name, so give each user a separate folder. Environment variables such as `%USERNAME%` are expanded only in a `REG_EXPAND_SZ` value; the administrative template writes `REG_SZ`, which is used as written.
+`AiAuditLogPath` redirige el registro. Se omite una ruta relativa. Los nombres de archivo diarios y los nombres de archivo de scripts no incluyen el nombre del usuario ni el del equipo, así que asigna una carpeta independiente a cada usuario. Las variables de entorno, como `%USERNAME%`, se expanden solo en un valor `REG_EXPAND_SZ`; la plantilla administrativa escribe `REG_SZ`, que se usa tal cual.
 
-See @ai-audit-log for the record format.
+Consulta @ai-audit-log para ver el formato del registro.
 
-## Recommended baseline
+## Línea de base recomendada
 
-The following baseline is guidance for an organization that allows AI-assisted model development and keeps model data away from AI providers. Adjust it to your own risk assessment.
+La siguiente línea de base sirve de orientación para una organización que permite el desarrollo de modelos asistido por IA y mantiene los datos del modelo fuera del alcance de los proveedores de IA. Ajústala a tu propia evaluación de riesgos.
 
-| Control            | Setting                                                                                                                                             | Effect                                                                                            |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Proveedor          | `AiProvider`, `AiEndpoint`, `AiModel` and `AiAllowedEndpointHosts` set to a resource your organization owns and has a data processing agreement for | The AI Assistant sends requests only to that endpoint, with keys your organization issues         |
-| Model data         | `MaxModelDataAccess` set to `Deny`                                                                                                                  | No DAX query result reaches the AI Assistant or an MCP agent                                      |
-| Macros             | `MaxMacrosAccess` set to `Deny`                                                                                                                     | Macro code isn't sent to an AI provider                                                           |
-| Scripts            | `BlockUnsafeScripts` set to `1`                                                                                                                     | No script or macro writes files, reaches the network, starts other programs or loads outside code |
-| MCP authentication | `RequireMcpAccessToken` set to `1`                                                                                                                  | Only clients with the user's access token connect to the MCP server                               |
-| Audit retention    | `AiAuditLogRetentionDays` set to your retention requirement                                                                                         | Audit files are kept for that period                                                              |
-| Audit location     | `AiAuditLogPath` set per user to a folder on a share                                                                                                | Audit files are collected centrally                                                               |
+| Control                   | Configuración                                                                                                                                                                                               | Efecto                                                                                                                  |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Proveedor                 | `AiProvider`, `AiEndpoint`, `AiModel` y `AiAllowedEndpointHosts` configurados para apuntar a un recurso propiedad de tu organización y para el que tu organización tenga un acuerdo de tratamiento de datos | El AI Assistant envía solicitudes solo a ese punto de conexión, con claves emitidas por tu organización                 |
+| Datos del modelo          | `MaxModelDataAccess` establecido en `Deny`                                                                                                                                                                  | Ningún resultado de consulta DAX llega al Asistente de IA ni a un agente MCP                                            |
+| Macros                    | `MaxMacrosAccess` establecido en `Deny`                                                                                                                                                                     | El código de la macro no se envía a un proveedor de IA                                                                  |
+| Secuencias de comandos    | `BlockUnsafeScripts` establecido en `1`                                                                                                                                                                     | Ninguna secuencia de comandos ni macro escribe archivos, accede a la red, inicia otros programas o carga código externo |
+| Autenticación de MCP      | `RequireMcpAccessToken` establecido en `1`                                                                                                                                                                  | Solo los clientes con el token de acceso del usuario se conectan al servidor MCP                                        |
+| Retención de auditoría    | `AiAuditLogRetentionDays` establecido según tus requisitos de retención                                                                                                                                     | Los archivos de auditoría se conservan durante ese período                                                              |
+| Ubicación de la auditoría | `AiAuditLogPath` establecido por usuario en una carpeta de un recurso compartido                                                                                                                            | Los archivos de auditoría se recopilan de forma centralizada                                                            |
 
-The following registry file applies the machine-wide part of the baseline. It locks the AI Assistant to an Azure OpenAI resource and keeps audit files for 365 days. Replace the endpoint and deployment name with your own, and apply the file only to machines licensed for Enterprise Edition:
+El siguiente archivo del Registro aplica la parte de la línea base para toda la máquina. Restringe el Asistente de IA a un recurso de Azure OpenAI y conserva los archivos de auditoría durante 365 días. Sustituye el punto de conexión y el nombre de la implementación por los tuyos, y aplica el archivo solo a equipos con licencia para la Edición Enterprise:
 
 ```ini
 Windows Registry Editor Version 5.00
@@ -249,45 +249,45 @@ Windows Registry Editor Version 5.00
 "AiAuditLogRetentionDays"=dword:0000016d
 ```
 
-`BlockUnsafeScripts` sits in the shared key, so the Tabular Editor CLI enforces it as well. Set `AiAuditLogPath` to a folder for each user: either a `REG_EXPAND_SZ` value such as `\\fileserver\te-audit$\%USERNAME%` under the `HKEY_LOCAL_MACHINE` key, or a `REG_SZ` value per user under `HKEY_CURRENT_USER\SOFTWARE\Policies\Tabular Editor ApS\TE3`.
+`BlockUnsafeScripts` está en la clave compartida, por lo que la CLI de Tabular Editor también lo aplica. Configura `AiAuditLogPath` en una carpeta para cada usuario: ya sea un valor `REG_EXPAND_SZ`, como `\\fileserver\te-audit$\%USERNAME%`, en la clave `HKEY_LOCAL_MACHINE`, o un valor `REG_SZ` por usuario en `HKEY_CURRENT_USER\SOFTWARE\Policies\Tabular Editor ApS\TE3`.
 
-## Common questions
+## Preguntas frecuentes
 
-### Does Tabular Editor ApS receive our prompts, metadata or data?
+### ¿Recibe Tabular Editor ApS nuestros prompts, metadatos o datos?
 
-No. See [Data flow](#data-flow).
+No. Consulta [Flujo de datos](#data-flow).
 
-### Is our data used to train AI models?
+### ¿Se utilizan nuestros datos para entrenar modelos de IA?
 
-Tabular Editor ApS receives no prompts, replies or model content. Your agreement with the AI provider decides whether the provider trains on requests.
+Tabular Editor ApS no recibe solicitudes, respuestas ni contenido del modelo. El acuerdo con el proveedor de IA determina si el proveedor entrena con las solicitudes.
 
-### Where is our data processed?
+### ¿Dónde se procesan nuestros datos?
 
-At the AI Assistant's configured endpoint, and wherever an MCP agent's provider runs. See [Restrict the AI provider](#restrict-the-ai-provider).
+En el punto de conexión configurado del Asistente de IA y allí donde se ejecute el proveedor de un agente MCP. Consulta [Restringir el proveedor de IA](#restrict-the-ai-provider).
 
-### Can users get around a policy?
+### ¿Pueden los usuarios eludir una directiva?
 
-A user can't change a policy without local administrator rights. Versions before 3.27.0, including older portable builds, read only `HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor` and ignore every policy on this page. See [Turn the AI features off](#turn-the-ai-features-off).
+Un usuario no puede cambiar una directiva sin derechos de administrador local. Las versiones anteriores a 3.27.0, incluidas las compilaciones portátiles antiguas, solo leen `HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor` e ignoran todas las directivas de esta página. Consulta [Desactivar las funciones de IA](#turn-the-ai-features-off).
 
-### Can the AI features change or deploy a production model?
+### ¿Pueden las funciones de IA modificar o desplegar un modelo en producción?
 
-They run scripts on the loaded model only with **Model metadata** at **Write**, and only the user saves or deploys. See [Safeguards on model changes](#safeguards-on-model-changes).
+Solo ejecutan scripts en el modelo cargado si **Model metadata** está en **Write**, y solo el usuario puede guardar o desplegar. Consulta [Medidas de protección para los cambios del modelo](#safeguards-on-model-changes).
 
-### Can the AI features read data from our models?
+### ¿Pueden las funciones de IA leer datos de nuestros modelos?
 
-DAX query results require **Model data** at **Read**, and the default is **Deny**. Values typed into the model definition are part of the metadata. See [Data flow](#data-flow).
+Los resultados de las consultas DAX requieren que **Model data** esté en **Read**, y el valor predeterminado es **Deny**. Los valores escritos en la definición del modelo forman parte de los metadatos. Consulta [Flujo de datos](#data-flow).
 
-### Can an MCP agent use a provider we haven't approved?
+### ¿Puede un agente MCP usar un proveedor que no hayamos aprobado?
 
-Yes. Govern the agent through its own administrative controls, or set `DisableMcpServer`. See [MCP server](#mcp-server).
+Sí. Administra el agente mediante sus propios controles administrativos o establece `DisableMcpServer`. Consulta [Servidor MCP](#mcp-server).
 
-### How do we stop the AI features in an incident?
+### ¿Cómo podemos detener las funciones de IA durante un incidente?
 
-Set `DisableAi` and have users restart Tabular Editor 3. Revoke the affected API keys at the provider. See [Turn the AI features off](#turn-the-ai-features-off).
+Establece `DisableAi` y pide a los usuarios que reinicien Tabular Editor 3. Revoca las claves de API afectadas en el proveedor. Consulta [Desactivar las funciones de IA](#turn-the-ai-features-off).
 
-### Is the audit log tamper-evident?
+### ¿El registro de auditoría permite detectar si se ha manipulado?
 
-No. The user can change and delete their own audit files. See [Audit log](#audit-log).
+No. El usuario puede modificar y eliminar sus propios archivos de auditoría. Consulta el [registro de auditoría](#audit-log).
 
 ## Ver también
 
