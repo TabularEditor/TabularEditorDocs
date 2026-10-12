@@ -52,23 +52,23 @@ applies_to:
 
 ## 注册表详细信息
 
-Tabular Editor 3 stores activation details for each Windows user under `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
+Tabular Editor 3 会在 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` 下为每个 Windows 用户保存激活详细信息。
 
-| 值                  | 类型          | Content                                                                                                                                        |
-| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LicenseKey`       | `REG_SZ`    | The license key                                                                                                                                |
-| `User`             | `REG_SZ`    | The e-mail address of the licensed user, for multi-user licenses                                                                               |
-| `ActivationKey`    | `REG_SZ`    | The activation returned by the licensing service                                                                                               |
-| `Activation`       | `REG_SZ`    | An activation written by older versions of Tabular Editor 3. Tabular Editor 3 deletes it the next time it stores an activation |
-| `InstallationDate` | `REG_QWORD` | The first launch of Tabular Editor 3 for this Windows user. Tabular Editor 3 creates it on launch if it's missing              |
+| 值                  | 类型          | 内容                                                                   |
+| ------------------ | ----------- | -------------------------------------------------------------------- |
+| `LicenseKey`       | `REG_SZ`    | 许可证密钥                                                                |
+| `User`             | `REG_SZ`    | 多用户许可证的授权用户电子邮件地址                                                    |
+| `ActivationKey`    | `REG_SZ`    | 许可服务返回的激活信息                                                          |
+| `Activation`       | `REG_SZ`    | 由旧版 Tabular Editor 3 写入的激活信息。 Tabular Editor 3 会在下次存储激活信息时将其删除       |
+| `InstallationDate` | `REG_QWORD` | 此 Windows 用户首次启动 Tabular Editor 3 的时间。如果缺失，Tabular Editor 3 会在启动时创建它 |
 
-To view the current license key for the active Windows user, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+若要查看当前 Windows 用户的许可证密钥，请在 Windows 命令提示符（开始 > 运行 > cmd.exe）中运行以下命令：
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the values.
+你也可以使用 `regedit.exe`（Windows 注册表编辑器），导航到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` 以查看和修改这些值。
 
 ![注册表编辑器](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -76,15 +76,15 @@ You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_C
 
 ## 在注册表中更改许可证密钥
 
-The **Change license key** option in **Help > About Tabular Editor** removes the `LicenseKey`, `User`, `ActivationKey` and `Activation` values and deactivates the installation on the licensing service. The option appears only when no model is loaded and the license is activated or its seat reservation has expired. If it isn't shown, for example because activation failed, reset the license through the Registry Editor:
+在 **帮助 > 关于 Tabular Editor** 中，**更改许可证密钥** 选项会删除 `LicenseKey`、`User`、`ActivationKey` 和 `Activation` 值，并在许可服务上停用该安装。仅当未加载任何模型，且许可证已激活或其席位预留已过期时，才会显示该选项。如果未显示该选项 (例如由于激活失败)，请通过注册表编辑器重置许可证：
 
 1. 关闭所有 Tabular Editor 3 实例。
-2. Open the Registry Editor in Windows (Start > Run > regedit.exe).
+2. 打开 Windows 注册表编辑器（开始 > 运行 > regedit.exe）。
 3. 定位到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`（见上方屏幕截图）。
-4. Delete the `LicenseKey`, `User`, `ActivationKey` and `Activation` values. Leave `InstallationDate` in place.
+4. 删除 `LicenseKey`、`User`、`ActivationKey` 和 `Activation` 值。保留 `InstallationDate` 值。
 5. 关闭注册表编辑器，然后重新启动 Tabular Editor 3。
 
-Alternatively, run the following commands in a Windows Command Prompt (Start > Run > cmd.exe). A command reports an error if its value doesn't exist, and the remaining commands still run:
+或者，在 Windows 命令提示符 (开始 > 运行 > cmd.exe) 中运行以下命令。当某个命令的值不存在时，该命令会报告错误，其余命令仍会继续执行：
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
@@ -93,10 +93,10 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-The next time you launch Tabular Editor 3, you're prompted for a license key.
+下次启动 Tabular Editor 3 时，系统会提示你输入许可证密钥。
 
 > [!NOTE]
-> Deleting the registry values doesn't deactivate the installation, use the [Tabular Editor Self-service portal](https://tabulareditor.com/my-account/) to manage your activated licenses.
+> 删除这些注册表值并不会停用该安装；要管理已激活的许可证，请使用 [Tabular Editor 自助服务门户](https://tabulareditor.com/my-account/)。
 
 ## 静默安装与许可证预配置
 
