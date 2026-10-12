@@ -1,6 +1,6 @@
 ---
 uid: object-properties-tables
-title: Table properties
+title: 表属性
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Table properties
+# 表属性
 
 <!--
 SUMMARY: Reference for the properties of tables, calculated tables and calculation group tables.
@@ -25,132 +25,132 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of the three kinds of tables in a semantic model: regular tables, calculated tables and calculation group tables. The [Table](#table) section describes the properties all three share. The sections for calculated tables and calculation group tables list what they add and which table properties the **Properties** view hides for them. For properties that most objects share, see @object-properties-common.
+本页介绍语义模型中三种表的属性：常规表、计算表格和计算组表。[表](#table)部分介绍这三类表共有的属性。计算表格和计算组表章节会列出它们新增的属性，并说明 **属性**视图对它们隐藏了哪些表属性。有关大多数对象共有的属性，见 @object-properties-common。
 
 ## 表
 
-A table holds rows of data in columns and contains the measures and hierarchies that belong to it. A regular table gets its data from one or more partitions, each with a query against a data source, for example a Power Query (M) expression or a SQL query. The partition's mode sets how the data is loaded: import, DirectQuery or Direct Lake.
+表以列的形式组织数据行，并包含属于它的度量值和层次结构。常规表从一个或多个分区获取数据，每个分区都包含针对某个数据源的查询，例如 Power Query (M) 表达式或 SQL 查询。分区的模式决定数据的加载方式：导入、DirectQuery 或 Direct Lake。
 
-In Tabular Editor 3, you add tables from a data source with @import-tables and view a table's data with @table-preview.
+在 Tabular Editor 3 中，你可以使用 @import-tables 从数据源添加表，并用 @table-preview 查看表数据。
 
-### Common properties
+### 通用属性
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Changed Properties](xref:object-properties-common#changed-properties)
-- [DAX identifier](xref:object-properties-common#dax-identifier)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [Lineage Tag](xref:object-properties-common#lineage-tag)
-- [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
-- [Translated Names](xref:object-properties-common#translated-names)
-- [Translated Descriptions](xref:object-properties-common#translated-descriptions)
-- [Synonyms](xref:object-properties-common#synonyms)
-- [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
+- [名称](xref:object-properties-common#name)
+- [描述](xref:object-properties-common#description)
+- [隐藏](xref:object-properties-common#hidden)
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [已更改的属性](xref:object-properties-common#changed-properties)
+- [DAX 标识符](xref:object-properties-common#dax-identifier)
+- [错误信息](xref:object-properties-common#error-message)
+- [对象类型](xref:object-properties-common#object-type)
+- [Lineage tag](xref:object-properties-common#lineage-tag)
+- [Source Lineage tag](xref:object-properties-common#source-lineage-tag)
+- [翻译后的名称](xref:object-properties-common#translated-names)
+- [翻译描述](xref:object-properties-common#translated-descriptions)
+- [同义词](xref:object-properties-common#synonyms)
+- [在透视中显示](xref:object-properties-common#shown-in-perspective)
 
-### Table Group
+### 表格组
 
-`TableGroup` · string · Basic · _stored as an annotation_ (`TabularEditor_TableGroup`)
+`TableGroup` · 字符串 · 基本 · _存储为注释_ (`TabularEditor_TableGroup`)
 
-The table group that contains the table in the **TOM Explorer** of Tabular Editor 3. Table groups work like folders for tables, for example to keep fact tables, dimension tables and calculation groups apart. Leave it empty to show the table at the top level. Table groups can't be nested, and client tools such as Power BI and Excel ignore them.
+Tabular Editor 3 的 **TOM Explorer** 中该表所属的表格组。表格组的作用类似于表的文件夹，例如可用来区分事实表、维度表和计算组。将其留空可在顶层显示该表。表格组不能嵌套，Power BI 和 Excel 等客户端工具也会忽略它们。
 
-The group is saved with the model in the `TabularEditor_TableGroup` annotation, so other developers see the same groups. The **Properties** view shows `TableGroup` only while table groups are turned on in the **TOM Explorer**. See @table-groups.
+该组会随模型一起保存在 `TabularEditor_TableGroup` 注释中，因此其他开发人员也会看到相同的分组。**属性**视图仅在 **TOM Explorer** 中启用表格组时显示 `TableGroup`。参见 @table-groups。
 
-In the **TOM Explorer**, you can also right-click tables and choose **Move to group**, or drag tables onto a table group (see @drag-drop). The @script-create-table-groups script puts all tables in groups based on their type and relationships.
+在 **TOM Explorer** 中，你还可以右键单击表并选择 **移动到组**，或将表拖到某个表格组上（请参阅 @drag-drop）。 @script-create-table-groups 脚本会根据表的类型和关系将所有表放入相应的组中。
 
-### Enabled
+### 启用
 
-`EnableRefreshPolicy` · bool · Incremental Refresh · _shortcut_: adds or removes the table's **Refresh Policy**
+`EnableRefreshPolicy` · bool · 增量刷新 · _快捷方式_：添加或移除表的 **刷新策略**
 
-Turns incremental refresh on or off for the table. Setting it to `true` adds a refresh policy to the table and shows the `RefreshPolicy` property. Setting it to `false` removes the refresh policy object and leaves the table's partitions as they are, including any policy range partitions the policy created. To turn the table back into a table with a regular M partition, follow the steps in [Removing Incremental Refresh](xref:incremental-refresh-policy#removing-incremental-refresh-using-tabular-editor).
+为该表启用或关闭增量刷新。将其设置为 `true` 会为该表添加刷新策略，并显示 `RefreshPolicy` 属性。将其设置为 `false` 会删除刷新策略对象，并保留该表现有的分区，包括该策略创建的任何策略范围内的分区。要将该表恢复为具有常规 M 分区的表，请按照[移除增量刷新](xref:incremental-refresh-policy#removing-incremental-refresh-using-tabular-editor)中的步骤操作。
 
-Incremental refresh is available for Power BI and Fabric models only. The **Properties** view shows `EnableRefreshPolicy` and `RefreshPolicy` when all of these are true:
+增量刷新仅适用于 Power BI 和 Fabric 模型。在同时满足以下所有条件时，**属性**视图会显示 `EnableRefreshPolicy` 和 `RefreshPolicy`：
 
-- the model's compatibility mode is Power BI
-- the compatibility level is 1450 or higher
-- the table has no partitions yet, or has M or query partitions in import or dual mode
+- 模型的兼容模式为 Power BI
+- 兼容级别为 1450 或更高
+- 该表尚无分区，或包含处于导入模式或双重模式的 M 分区或查询分区
 
-For Analysis Services models, you create and manage the partitions yourself. See @incremental-refresh-about and @incremental-refresh-setup. The @script-implement-incremental-refresh script sets up a refresh policy based on a date column you select, including the `RangeStart` and `RangeEnd` parameters.
+对于 Analysis Services 模型，你需要自行创建和管理分区。参见 @incremental-refresh-about 和 @incremental-refresh-setup。脚本 @script-implement-incremental-refresh 会根据你选择的日期列设置刷新策略，其中包括 `RangeStart` 和 `RangeEnd` 参数。
 
-### Refresh Policy
+### 刷新策略
 
-`RefreshPolicy` · BasicRefreshPolicy · Incremental Refresh · compatibility level 1450+
+`RefreshPolicy` · BasicRefreshPolicy · 增量刷新 · 兼容级别 1450+
 
-The incremental refresh policy of the table. Expand it in the **Properties** view to set how much history to keep, how much to refresh, the source expression and the other policy settings. The settings are described under refresh policy on @object-properties-partitions. See also @incremental-refresh-policy.
+该表的增量刷新策略。在 **属性**视图中展开它，以设置要保留多少历史数据、要刷新多少数据、源表达式以及其他策略设置。这些设置在 @object-properties-partitions 的“刷新策略”下有说明。另见 @incremental-refresh-policy。
 
-The engine creates the policy range partitions the first time the policy is applied, for example when you refresh the table in the Power BI service. To apply the policy from Tabular Editor 3, right-click the table in the **TOM Explorer** and choose **Apply refresh policy**. In Tabular Editor 2, the menu option is **Apply Refresh Policy**. Both versions apply the policy only when they're connected to the model and you've saved all changes first.
+首次应用该策略时，例如在 Power BI 服务中刷新该表时，引擎会创建该策略范围的分区。要在 Tabular Editor 3 中应用该策略，请在 **TOM Explorer** 中右键单击该表，然后选择 **应用刷新策略**。在 Tabular Editor 2 中，该菜单选项是 **应用刷新策略**。只有在连接到模型且已先保存所有更改后，这两个版本才会应用该策略。
 
-To change an existing policy, see @incremental-refresh-modify. In Tabular Editor 3, you can apply the refresh policy with an effective date other than today in the @advanced-refresh dialog, to test how the policy behaves at a different point in time.
+要更改现有策略，参见 @incremental-refresh-modify。在 Tabular Editor 3 中，你可以在 @advanced-refresh 对话框中使用今天以外的生效日期来应用刷新策略，以测试该策略在不同时间点的行为。
 
-### Source
+### 源
 
-`Source` · string · Metadata · read-only · _computed_
+`Source` · string · 元数据 · 只读 · _计算得出_
 
-The name of the legacy (provider) data source that the table's first partition queries. If the partitions use different data sources, you see only the one of the first partition.
+该表第一个分区查询所使用的旧式（提供程序）数据源名称。如果各分区使用不同的数据源，你只能看到第一个分区的数据源。
 
-The **Properties** view shows `Source` only when the first partition is a query partition or an M partition. For an M partition the value is empty, because the connection is part of the M expression. `Source` isn't shown for calculated tables, calculation group tables, Direct Lake tables or tables with policy range partitions.
+只有当第一个分区是查询分区或 M 分区时，**属性**视图才会显示 `Source`。对于 M 分区，该值为空，因为连接是 M 表达式的一部分。在计算表格、计算组表、Direct Lake 表或包含策略范围分区的表中，不会显示 `Source`。
 
-To list the tables that use an explicit (legacy) data source, run the @script-show-data-source-dependencies script.
+若要列出使用显式（旧版）数据源的表，请运行 @script-show-data-source-dependencies 脚本。
 
-### Source Type
+### 源类型
 
-`SourceType` · PartitionSourceType · Metadata · read-only · _shortcut to_ **Source Type** of the first partition
+`SourceType` · PartitionSourceType · 元数据 · 只读 · _指向_ 第一个分区 **源类型** 的快捷方式
 
-The kind of source the table's first partition uses. For a table with partitions of different kinds, you see the kind of the first one. A table without partitions shows `None`.
+该表的第一个分区所使用的源类型。对于分区类型不同的表，你看到的是第一个分区的类型。没有分区的表会显示 `None`。
 
-The **Properties** view hides `SourceType` on calculated tables and calculation group tables. In a C# script, those return `Calculated` and `CalculationGroup`.
+在计算表格和计算组表中，**属性** 视图会隐藏 `SourceType`。在 C# 脚本中，它们会返回 `Calculated` 和 `CalculationGroup`。
 
-| 值                  | 含义                                                                                                                                                                                      |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Query`            | The partitions run a query, for example SQL, against a legacy (provider) data source.                                                                |
-| `Calculated`       | The table is a calculated table and gets its data from a DAX expression.                                                                                                |
-| `None`             | No source is defined. The data is pushed into the table, for example in a push semantic model in Power BI.                                              |
-| `M`                | The partitions use a Power Query (M) expression. Most common in Power BI models. Compatibility level 1400+.          |
-| `Entity`           | The partitions read a named entity, such as a table in a lakehouse or warehouse. Used by Direct Lake tables. Compatibility level 1400+. |
-| `PolicyRange`      | An incremental refresh policy created the partitions. Compatibility level 1450+.                                                                        |
-| `CalculationGroup` | The table is a calculation group table. Compatibility level 1470+.                                                                                      |
-| `Inferred`         | The engine generates the query that fills the partition. Compatibility level 1563+.                                                                     |
+| 值                  | 含义                                                                          |
+| ------------------ | --------------------------------------------------------------------------- |
+| `Query`            | 这些分区会针对旧版（提供程序）数据源运行查询，例如 SQL。                                              |
+| `Calculated`       | 该表是计算表格，其数据来自 DAX 表达式。                                                      |
+| `None`             | 未定义任何源。数据会推送到该表中，例如在 Power BI 的推送语义模型中。                                     |
+| `M`                | 这些分区使用 Power Query (M) 表达式。在 Power BI 模型中最常见。兼容级别 1400+。 |
+| `Entity`           | 这些分区会读取命名实体，例如 Lakehouse 或 Warehouse 中的表。 Direct Lake 表使用此类型。兼容级别 1400+。    |
+| `PolicyRange`      | 这些分区由增量刷新策略创建。兼容级别 1450+。                                                   |
+| `CalculationGroup` | 该表是计算组表。兼容级别 1470+。                                                         |
+| `Inferred`         | 引擎生成用于填充分区的查询。兼容级别 1563+。                                                   |
 
 <!-- TODO (not verifiable from TE3 source): which kind of partition uses Inferred. TOM only says "The data in this partition is populated by executing a query generated by the system." -->
 
-### Alternate Source Precedence
+### 备用源优先级
 
-`AlternateSourcePrecedence` · int · Options · compatibility level 1460+
+`AlternateSourcePrecedence` · int · 选项 · 兼容级别 1460+
 
-The order in which the engine considers this table when it looks for an aggregation table that can answer a query. It applies only to aggregation tables, that is, tables with columns whose `AlternateOf` points to a column in a detail table. When more than one aggregation table can answer a query, the engine uses the one with the highest value. The default is `0`.
+引擎在查找可用于回答查询的聚合表时，考虑此表的优先顺序。它仅适用于聚合表，也就是其列的 `AlternateOf` 指向明细表中某一列的表。当多个聚合表都能回答查询时，引擎会使用值最高的那个。默认值为 `0`。
 
-In Power BI Desktop, this is the **Precedence** setting in **Manage aggregations**. To set up an aggregation table in Tabular Editor, see @user-defined-aggregations. The @script-implement-user-defined-aggregations script automates those steps for a fact table you select.
+在 Power BI Desktop 中，这对应于 **管理聚合** 中的 **优先级** 设置。要在 Tabular Editor 中设置聚合表，参阅 @user-defined-aggregations。 @script-implement-user-defined-aggregations 脚本会为你选择的事实表自动执行这些步骤。
 
 ### 日历
 
-`Calendars` · collection of Calendar · Options · compatibility level 1701+
+`Calendars` · Calendar 集合 · 选项 · 兼容级别 1701+
 
-The custom calendars defined on the table. A calendar maps the columns of a date table that hold the year, quarter, month, week and date, and calendar-based time intelligence functions use it to work with fiscal, retail or other non-standard calendars. Custom calendars need compatibility level 1701 or higher. See @object-properties-calendars.
+在该表上定义的自定义日历。日历会映射日期表中存放年、季度、月、周和日期的列；基于日历的时间智能函数会使用它来处理财务、零售或其他非标准日历。自定义日历需要兼容级别 1701 或更高。参阅 @object-properties-calendars。
 
-In Tabular Editor 3, right-click a table and choose **Create > Calendar...** to add a calendar, then map its columns in the **Calendar Editor**. See @calendars.
+在 Tabular Editor 3 中，右键单击某个表并选择 **创建 > 日历...** 以添加日历，然后在 **日历编辑器** 中映射其列。参阅 @calendars。
 
-### Data Category
+### 数据类别
 
-`DataCategory` · string · Options
+`DataCategory` · string · 选项
 
-The kind of data the table holds, for client tools. In Power BI, the value `Time` marks the table as a date table: Power BI uses the table's date column (the column with `IsKey` set to `true`) for time intelligence and turns off the auto date/time table for it. **Mark as date table** in Power BI Desktop sets this value.
+表所包含的数据类型，供客户端工具使用。在 Power BI 中，`Time` 值会将该表标记为日期表：Power BI 会使用表的日期列（即 `IsKey` 设置为 `true` 的列）进行时间智能分析，并为该表关闭自动日期/时间表。在 Power BI Desktop 中，可通过 **标记为日期表格** 来设置该值。
 
-Leave it empty or set it to `Regular` for all other tables. The other values come from multidimensional models, and only some Excel features and older client tools use them: `Geography`, `Organization`, `BillOfMaterials`, `Accounts`, `Customers`, `Products`, `Scenario`, `Quantitative`, `Utility`, `Currency`, `Rates`, `Channel` and `Promotion`. The dropdown in the **Properties** view lists these values and `Unknown`, and you can also type a value.
+对于其他所有表，请留空或将其设置为 `Regular`。其他值来自多维模型，只有部分 Excel 功能和较旧的客户端工具会使用它们：`Geography`、`Organization`、`BillOfMaterials`、`Accounts`、`Customers`、`Products`、`Scenario`、`Quantitative`、`Utility`、`Currency`、`Rates`、`Channel` 和 `Promotion`。**属性**视图中的下拉列表会列出这些值以及 `Unknown`，你也可以手动输入一个值。
 
 <!-- TODO (not verifiable from TE3 source): whether an empty value and "Regular" behave the same in the engine and client tools, and which client tools use the values other than Time. -->
 
-In Tabular Editor, you can also right-click the table in the @tom-explorer-view and choose **Mark as date table...**. The Best Practice Analyzer (BPA) rule @kb.bpa-date-table-exists flags models that have no date table. The @script-create-date-table script creates a date table from the date columns in your model and sets `DataCategory` to `Time`.
+在 Tabular Editor 中，你也可以在 @tom-explorer-view 里右键单击该表，然后选择 **标记为日期表格...**。 Best Practice Analyzer (BPA) 规则 @kb.bpa-date-table-exists 会标记没有日期表格的模型。 @script-create-date-table 脚本会根据模型中的日期列创建日期表格，并将 `DataCategory` 设为 `Time`。
 
 ### 默认详细信息行表达式
 
-`DefaultDetailRowsExpression` · string · Options · compatibility level 1400+
+`DefaultDetailRowsExpression` · string · 选项 · 兼容级别 1400+
 
-A DAX table expression that returns the rows a user sees when they drill through on a measure in this table, for example with **Show Details** in an Excel PivotTable. It applies to every measure in the table that has no `DetailRowsExpression` of its own (see @object-properties-measures). Power BI doesn't use this property.
+一个 DAX 表表达式，用于返回用户对该表中的某个度量值执行钻取时看到的行，例如在 Excel 数据透视表中使用 **显示详细信息** 时。它适用于表中所有未定义自身 `DetailRowsExpression` 的度量值（见 @object-properties-measures）。 Power BI 不使用此属性。
 
-This expression shows the order number, customer and amount for each sales row:
+此表达式会显示每个销售行的订单号、客户和金额：
 
 ```dax
 SELECTCOLUMNS (
@@ -161,137 +161,137 @@ SELECTCOLUMNS (
 )
 ```
 
-See @detail-rows-expression. In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info. To remove the expression, clear the value.
+见 @detail-rows-expression。在 Tabular Editor 3 中，你可以在 @dax-editor 的 **表达式编辑器** 中编写该表达式，并使用自动补全和参数信息。要删除该表达式，清空该值即可。
 
-### Direct Lake Indexing Behavior
+### Direct Lake 索引行为
 
-`DirectLakeIndexingBehavior` · DirectLakeIndexingBehavior · Options · Preview compatibility level
+`DirectLakeIndexingBehavior` · DirectLakeIndexingBehavior · 选项 · 预览兼容级别
 
-When the engine builds and saves the indexes it uses for a Direct Lake table. Building indexes during a refresh makes the first queries after the refresh faster, and building them on demand makes refreshes faster. It applies only to tables in Direct Lake mode.
+引擎何时为 Direct Lake 表生成并保存其使用的索引。在刷新期间生成索引可以让刷新后的首次查询更快，而按需生成索引可以让刷新更快。它仅适用于 Direct Lake 模式下的表。
 
-The Tabular Object Model (TOM) doesn't assign this property a released compatibility level yet, so the **Properties** view in the current version of Tabular Editor 3 hides it for every model.
+Tabular Object Model (TOM) 目前还没有为此属性分配正式发布的兼容级别，因此在当前版本的 Tabular Editor 3 中，**属性**视图会对所有模型隐藏该属性。
 
-| 值          | 含义                                                                                                                                     |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default`  | Uses the model's default, set with **Default Direct Lake Indexing Behavior** on @object-properties-model. |
-| `Auto`     | Build in-memory indexes during data load or query execution when needed, as the TOM library describes it.              |
-| `Full`     | The engine builds and saves the indexes as part of a full refresh, a calculate refresh and a refresh of type indexes.  |
-| `Explicit` | The engine builds and saves the indexes only when you run a refresh of type indexes.                                   |
+| 值          | 含义                                                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| `Default`  | 使用模型的默认设置，可在 @object-properties-model 中通过 **Default Direct Lake Indexing Behavior** 进行设置。 |
+| `Auto`     | 如 TOM 库所述，在需要时会在数据加载或查询执行过程中构建内存索引。                                                                    |
+| `Full`     | 引擎会在完整刷新、计算刷新以及类型为 indexes 的刷新中构建并保存这些索引。                                                              |
+| `Explicit` | 引擎仅在运行类型为 indexes 的刷新时才会构建并保存这些索引。                                                                     |
 
 <!-- TODO (not verifiable from TE3 source): the behavior of each value and which indexes this covers; check the Microsoft documentation once the feature is out of preview. -->
 
-### Exclude From Automatic Aggregations
+### 从自动聚合中排除
 
-`ExcludeFromAutomaticAggregations` · bool · Options · compatibility level 1572+
+`ExcludeFromAutomaticAggregations` · bool · 选项 · 兼容级别 1572+
 
-When `true`, Power BI leaves the table out when it builds automatic aggregations. Automatic aggregations are a Power BI Premium and Fabric feature for DirectQuery models, where the service creates aggregation tables based on the queries it receives. Set it on a table whose data changes too often for a cached aggregation to be useful.
+当为 `true` 时，Power BI 在构建自动聚合时会排除此表。自动聚合是 Power BI Premium 和 Fabric 面向 DirectQuery 模型提供的一项功能，服务会根据其接收到的查询创建聚合表。可将它用于数据变化过于频繁、以至于缓存聚合难以发挥作用的表。
 
 <!-- TODO (not verifiable from TE3 source): the exact effect. TOM only says "An indication whether the table is excluded from the automatic aggregations feature." Is the table excluded as a source for aggregations, or are queries against it never answered from aggregations? -->
 
-### Exclude From Model Refresh
+### 从模型刷新中排除
 
-`ExcludeFromModelRefresh` · bool · Options · compatibility level 1480+
+`ExcludeFromModelRefresh` · bool · 选项 · 兼容级别 1480+
 
-When `true`, a refresh of the whole model skips this table's partitions if they already hold data. Partitions without data are still refreshed, so a new or cleared table gets loaded. You can still refresh the table by selecting it explicitly. Use it for tables that rarely change or are expensive to load, such as a large historical table or a table that a separate process fills.
+当为 `true` 时，如果此表的分区已包含数据，则整个模型的刷新会跳过这些分区。没有数据的分区仍会刷新，因此新建或已清空的表仍会被加载。你仍可通过显式选择该表来刷新它。适用于很少更改或加载成本较高的表，例如大型历史表，或由单独流程填充的表。
 
-On SQL Server 2025 Analysis Services, the model-level refresh types **Full**, **Automatic**, **Data only** and **Calculate** all skip the table when its partitions hold data. **Clear values** does clear the table's data, and the next model refresh then loads the table again.
+在 SQL Server 2025 Analysis Services 中，当该表的分区包含数据时，模型级刷新类型 **Full**、**Automatic**、**Data only** 和 **Calculate** 都会跳过此表。 **Clear values** 确实会清除该表的数据，随后下一次模型刷新会再次加载该表。
 
-In Tabular Editor 3, you refresh a single table by right-clicking it in the **TOM Explorer** and choosing **Refresh table**. See @refresh-preview-query.
+在 Tabular Editor 3 中，你可以在 **TOM Explorer** 中右键单击某个表，然后选择 **Refresh table** 来刷新单个表。参见 @refresh-preview-query。
 
 ### 分区
 
-`Partitions` · collection of Partition · Options · read-only
+`Partitions` · 分区集合 · 选项 · 只读
 
-The partitions of the table. Each partition defines where a part of the table's data comes from, for example an M expression, and you can refresh each one separately. Most tables have a single partition. Large import tables often have one partition per period, created by you or by an incremental refresh policy.
+该表的分区。每个分区都定义了表中部分数据的来源，例如某个 M 表达式；你也可以分别刷新每个分区。大多数表只有一个分区。大型导入表通常每个时间段对应一个分区，这些分区由你创建，或由增量刷新的刷新策略创建。
 
-Click the ellipsis button to open the collection editor, where you add, remove and edit partitions. See @object-properties-partitions.
+点击省略号按钮打开集合编辑器，你可以在其中添加、删除和编辑分区。参见 @object-properties-partitions。
 
-The **Properties** view shows `Partitions` only when the table's first partition is an M partition or a query partition. It's hidden for calculated tables (including field parameters), calculation group tables, Direct Lake tables and tables with policy range partitions. To view and edit the partitions of calculated tables and calculation group tables, run the @script-edit-hidden-partitions script.
+只有当表的第一个分区为 M 分区或查询分区时，**属性**视图才会显示 `Partitions`。对于计算表格（包括字段参数）、计算组表、Direct Lake 表以及包含策略范围分区的表，该属性将被隐藏。要查看和编辑计算表格和计算组表的分区，请运行 @script-edit-hidden-partitions 脚本。
 
-### Private
+### 私有
 
-`IsPrivate` · bool · Options
+`IsPrivate` · bool · 选项
 
-When `true`, client tools don't show the table, even to developers who turn on hidden objects. Power BI Desktop sets it on the date table template of the auto date/time feature (the table named `DateTableTemplate_` followed by a GUID). It's always available in Power BI models and needs compatibility level 1400 or higher in Analysis Services models.
+当 `true` 时，客户端工具不会显示该表，即使是启用了隐藏对象的开发人员也看不到。 Power BI Desktop 会在“自动日期/时间”功能的日期表模板上设置此属性（表名为 `DateTableTemplate_`，后跟一个 GUID）。它在 Power BI 模型中始终可用；在 Analysis Services 模型中则需要 1400 或更高的兼容级别。
 
-In Power BI Desktop, a private table doesn't appear in the **Data** pane at all, while a hidden table can still be shown there. SQL Server 2025 Analysis Services stores the flag and doesn't act on it. In both, the table is still listed in the schema information the engine returns, you can query it with DAX and measures in other tables can use it.
+在 Power BI Desktop 中，私有表完全不会出现在 **数据** 窗格中，而隐藏表仍可在其中显示。 SQL Server 2025 Analysis Services 会存储此标志，但不会根据它执行任何操作。在这两种情况下，该表仍会列在引擎返回的架构信息中；你可以用 DAX 查询它，其他表中的度量值也可以使用它。
 
 > [!NOTE]
-> `IsPrivate` and `IsHidden` aren't security features. To secure a table, use object-level security (see [Object Level Security](#object-level-security)).
+> `IsPrivate` 和 `IsHidden` 不是安全功能。要保护表，请使用对象级安全性（参见 [对象级安全性](#object-level-security)）。
 
-The BPA rule @kb.bpa-remove-auto-date-table flags the `DateTableTemplate_` and `LocalDateTable_` tables that auto date/time creates, so you can replace them with a single date table.
+BPA 规则 @kb.bpa-remove-auto-date-table 会标记“自动日期/时间”创建的 `DateTableTemplate_` 和 `LocalDateTable_` 表，这样你就可以用一个单独的日期表替换它们。
 
-### Sets
+### 集
 
-`Sets` · collection of Set · Options · read-only · compatibility level 1400+
+`Sets` · Set 的集合 · 选项 · 只读 · 兼容级别 1400+
 
-The calculated sets defined on the table. A set is a named DAX expression that returns a set of members, which client tools can show as a predefined selection. Sets are supported in Power BI models only: the **Properties** view shows `Sets` when the model's compatibility mode is Power BI and the compatibility level is 1400 or higher. Sets don't appear as objects in the **TOM Explorer**, so you add and edit them in the collection editor of this property. See @object-properties-functions.
+在表上定义的计算集。集是一个命名的 DAX 表达式，返回一组成员，客户端工具可将其显示为预定义的选择项。只有 Power BI 模型支持集：当模型的兼容模式为 Power BI 且兼容级别为 1400 或更高时，**属性**视图会显示 `Sets`。集不会作为对象显示在 **TOM Explorer** 中，因此你需要在此属性的集合编辑器中添加和编辑它们。参见 @object-properties-functions。
 
 <!-- TODO (not verifiable from TE3 source): what calculated sets are used for, and which client tools support them. -->
 
-### Show As Variations Only
+### 仅显示为变体
 
-`ShowAsVariationsOnly` · bool · Options
+`ShowAsVariationsOnly` · bool · 选项
 
-When `true`, client tools show the table in the field list only through a column variation that points to it. Power BI Desktop sets it on the date tables that auto date/time creates (the tables named `LocalDateTable_` followed by a GUID), which appear as the date hierarchy under a date column. See `Variations` on @object-properties-columns.
+当值为 `true` 时，客户端工具在字段列表中仅通过指向该表的列变体来显示它。 Power BI Desktop 会在自动日期/时间功能创建的日期表上设置此属性（这些表名为 `LocalDateTable_`，后跟 GUID），这些表会在日期列下方显示为日期层次结构。参见 @object-properties-columns 中的 `Variations`。
 
-It's always available in Power BI models and needs compatibility level 1400 or higher in Analysis Services models. SQL Server 2025 Analysis Services stores the flag and doesn't act on it: the table is still listed in the schema information that client tools read, you can query it with DAX and measures in other tables can use it.
+它在 Power BI 模型中始终可用；在 Analysis Services 模型中则需要 1400 或更高的兼容级别。 SQL Server 2025 Analysis Services 会存储此标志，但不会据此执行任何操作：客户端工具读取的架构信息中仍会列出该表，你仍可用 DAX 查询它，其他表中的度量值也可以使用它。
 
-### System Managed
+### 系统托管
 
-`SystemManaged` · bool · Options · compatibility level 1562+
+`SystemManaged` · bool · 选项 · 兼容级别 1562+
 
-When `true`, the engine or the service creates and deletes the table. Don't set this property on your own tables, and don't edit a system-managed table: Tabular Editor doesn't block those edits.
+当值为 `true` 时，由引擎或服务创建并删除该表。不要在自己的表上设置此属性，也不要编辑系统托管的表：Tabular Editor 不会阻止你进行这些编辑。
 
-The auto date/time tables that Power BI Desktop creates aren't system-managed. Desktop sets `IsHidden` and `IsPrivate` on the template table, and `IsHidden` and `ShowAsVariationsOnly` on each local date table.
+Power BI Desktop 创建的自动日期/时间表不是系统托管的。 Desktop 会在模板表上设置 `IsHidden` 和 `IsPrivate`，并在每个本地日期表上设置 `IsHidden` 和 `ShowAsVariationsOnly`。
 
 <!-- TODO (not verifiable from TE3 source): which features create system-managed tables, for example automatic aggregations. -->
 
-### Object Level Security
+### 对象级安全性
 
-`ObjectLevelSecurity` · per role · Translations, Perspectives, Security · compatibility level 1400+ · _shortcut to_ the table permissions of each role
+`ObjectLevelSecurity` · 按角色 · 翻译、透视、安全性 · 兼容级别 1400+ · _指向各角色表格权限的快捷方式_
 
-The object-level security (OLS) permission of the table in each role of the model. Expand the property to see one entry per role. The **Properties** view shows the property only when the model has at least one role. Tabular Editor stores the permission in the table permission of each role.
+模型中每个角色对该表的对象级安全性（OLS）权限。展开此属性后，可看到每个角色各有一个条目。**属性** 视图仅在模型至少包含一个角色时才显示该属性。 Tabular Editor 会将该权限存储在每个角色的表格权限中。
 
-| 值         | 含义                                                                                                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default` | No permission is set for this role. Members of the role can see the table.                                                                              |
-| `Read`    | Members of the role can see and query the table.                                                                                                                        |
-| `None`    | The table and everything that depends on it are hidden from members of the role. Queries and measures that refer to the table return an error for them. |
+| 值         | 含义                                               |
+| --------- | ------------------------------------------------ |
+| `Default` | 未为此角色设置任何权限。该角色的成员可以看到该表。                        |
+| `Read`    | 该角色的成员可以看到并查询该表。                                 |
+| `None`    | 该表及所有依赖它的内容都会对该角色成员隐藏。对该角色成员而言，引用该表的查询和度量值会返回错误。 |
 
-With `None`, the table and its metadata don't exist for members of the role, so every measure that refers to the table fails for them. See @data-security-setup-ols and @object-properties-security. To check that OLS and row-level security work as intended, test them with impersonation in Tabular Editor 3. See @data-security-testing.
+选择 `None` 时，该表及其元数据对该角色成员而言都不存在，因此所有引用该表的度量值都会对他们报错。参见 @data-security-setup-ols 和 @object-properties-security。要检查 OLS 和行级安全性是否按预期工作，可以在 Tabular Editor 3 中使用身份模拟进行测试。参见 @data-security-testing。
 
-### Row Level Security
+### 行级安全性
 
-`RowLevelSecurity` · per role · Translations, Perspectives, Security · read-only · _shortcut to_ the table permissions of each role
+`RowLevelSecurity` · 按角色 · 翻译、透视、安全性 · 只读 · _指向每个角色的表格权限的快捷方式_
 
-The row-level security (RLS) filter of the table in each role of the model. Expand the property to see one entry per role. Each entry is a DAX expression that returns `TRUE` for the rows that members of the role can see, for example:
+模型中每个角色里该表的行级安全性（RLS）筛选器。展开该属性即可看到每个角色对应的一个条目。每个条目都是一个 DAX 表达式，它会对角色成员可以看到的行返回 `TRUE`，例如：
 
 ```dax
 Customer[Country] = "Denmark"
 ```
 
-The property itself is read-only, and you edit each role's entry, which accepts multi-line expressions. The **Properties** view shows the property only when the model has at least one role. Tabular Editor stores the filter in the table permission of each role.
+该属性本身是只读的，你需要编辑各角色的条目，而这些条目支持多行表达式。只有当模型至少有一个角色时，**属性**视图才会显示该属性。 Tabular Editor 会将该筛选器存储在各角色的表格权限中。
 
-An empty entry doesn't filter the table for that role. Filters flow along relationships, so a filter on a dimension table also filters the fact tables related to it. See @roles-and-rls, @data-security-setup-rls and @object-properties-security.
+空条目不会对该角色的该表应用筛选。筛选器会沿着关系传播，因此维度表上的筛选器也会筛选与之相关的事实表。参见 @roles-and-rls、@data-security-setup-rls 和 @object-properties-security。
 
-## Calculated table
+## 计算表格
 
-A calculated table gets its data from a DAX expression, for example a date table built with [CALENDAR](https://dax.guide/calendar) or a table that summarizes another table. The engine evaluates the expression when you refresh the table or the model and stores the result like any other imported table.
+计算表格的数据来自 DAX 表达式，例如使用 [CALENDAR](https://dax.guide/calendar) 构建的日期表，或对另一张表进行汇总的表。当你刷新该表或模型时，引擎会计算该表达式，并像其他任何导入表一样存储结果。
 
-A calculated table has all the properties of a [table](#table), plus `Expression`. It has exactly one partition, which Tabular Editor manages, and it can't have an incremental refresh policy. The **Properties** view hides `Partitions`, `Source`, `SourceType`, `EnableRefreshPolicy` and `RefreshPolicy` on calculated tables and shows `AlternateSourcePrecedence`.
+计算表格拥有 [表](#table) 的所有属性，另加 `Expression`。它只有一个分区，由 Tabular Editor 管理，并且不能配置增量刷新策略。对于计算表格，**属性**视图会隐藏 `Partitions`、`Source`、`SourceType`、`EnableRefreshPolicy` 和 `RefreshPolicy`，并显示 `AlternateSourcePrecedence`。
 
-Field parameters in Power BI are calculated tables. The @create-field-parameter script creates one from the columns or measures you select.
+Power BI 中的字段参数属于计算表格。 @create-field-parameter 脚本会根据你选择的列或度量值创建一个。
 
-### Common properties
+### 通用属性
 
-The same as on [tables](#table).
+与[表](#table)相同。
 
 ### 表达式
 
-`Expression` · string · Options · _shortcut to_ the expression of the table's calculated partition
+`Expression` · string · 选项 · _快捷方式，用于引用_ 该表计算分区的表达式
 
-The DAX expression that returns the table's rows. It must return a table, for example:
+返回表行的 DAX 表达式。它必须返回一个表，例如：
 
 ```dax
 ADDCOLUMNS (
@@ -301,100 +301,100 @@ ADDCOLUMNS (
 )
 ```
 
-Each column the expression returns becomes a calculated table column (see @object-properties-columns). Adding, removing or renaming columns this way affects other DAX expressions that refer to the table and hierarchies that use its columns.
+表达式返回的每一列都会成为计算表格列（参见 @object-properties-columns）。以这种方式添加、删除或重命名列，会影响引用该表的其他 DAX 表达式，以及使用其列的层次结构。
 
-In Tabular Editor 3, the columns change as soon as you change the expression. Tabular Editor 3 works them out with its own DAX semantic analysis, which also works when you edit a model file without a connection to Analysis Services or Power BI (see @creating-and-testing-dax). Tabular Editor 2 updates the columns only when you save the model to a database you're connected to, by reloading the table's columns from the server after the save. When you edit a model file in Tabular Editor 2, the columns don't change with the expression.
+在 Tabular Editor 3 中，只要你更改表达式，列就会立即更新。 Tabular Editor 3 会通过自身的 DAX 语义分析解析出这些列；即使你在未连接到 Analysis Services 或 Power BI 的情况下编辑模型文件，也同样适用（参见 @creating-and-testing-dax）。在 Tabular Editor 2 中，只有当你将模型保存到当前连接的数据库时，列才会更新；保存后，它会从服务器重新加载该表的列。在 Tabular Editor 2 中编辑模型文件时，列不会随着表达式变化。
 
-Edit the expression in the **Expression Editor**. In Tabular Editor 3, the **Expression Editor** of the @dax-editor has auto-complete and parameter info. The engine recalculates the table's data when the table is refreshed and when a table it depends on is refreshed. After you change the expression, refresh the table before you use it in a report. See [Refreshing data](xref:refresh-preview-query#refreshing-data).
+在 **表达式编辑器** 中编辑表达式。在 Tabular Editor 3 中，@dax-editor 的 **表达式编辑器** 提供自动完成和参数信息。在刷新该表以及刷新其依赖的表时，引擎会重新计算该表的数据。更改表达式后，先刷新该表，再在 Report 中使用它。参见 [刷新数据](xref:refresh-preview-query#refreshing-data)。
 
-## Calculation group table
+## 计算组表
 
-A calculation group table holds a calculation group. It has one column with the names of the calculation items, and usually an ordinal column that sets the order of the items. Report authors use the column like any other column, for example in a slicer, and the selected calculation item changes how the measures in the report are calculated. See @object-properties-calculation-groups for the properties of the calculation group and its items.
+计算组表包含一个计算组。它有一列包含计算项的名称，通常还会有一个序号列，用于设置这些项的顺序。 Report 的作者会像使用其他任何列一样使用该列，例如在切片器中；所选的计算项会改变 Report 中度量值的计算方式。有关计算组及其计算项的属性，请参见 @object-properties-calculation-groups。
 
-Microsoft documents calculation groups for compatibility level 1500 or higher, which includes all Power BI semantic models. Tabular Editor 3 shows **Create > Calculation Group** from compatibility level 1470, the level at which TOM added calculation groups.
+Microsoft 文档将计算组定位为兼容级别 1500 及以上的功能——这涵盖所有 Power BI 语义模型。从兼容级别 1470 开始，Tabular Editor 3 会显示 **创建 > 计算组**；这是 TOM 添加计算组支持的级别。
 
-A calculation group table has the properties below in addition to the common properties. Most of them are shortcuts to properties of the calculation group in the table, which you can't select in the **TOM Explorer**. Of the other table properties, the **Properties** view shows only `TableGroup` and `DefaultDetailRowsExpression`. Calculation groups don't support detail rows expressions, row-level security or object-level security, so leave `DefaultDetailRowsExpression` empty.
+除了通用属性外，计算组表还具有以下属性。其中大多数是该表中计算组属性的快捷方式，因为你无法在 **TOM Explorer** 中选中该计算组。对于其他表属性，**属性**视图仅显示 `TableGroup` 和 `DefaultDetailRowsExpression`。计算组不支持明细行表达式、行级安全性或对象级安全性，因此把 `DefaultDetailRowsExpression` 留空。
 
-### Common properties
+### 通用属性
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
-- [Translated Names](xref:object-properties-common#translated-names)
-- [Translated Descriptions](xref:object-properties-common#translated-descriptions)
-- [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
+- [名称](xref:object-properties-common#name)
+- [描述](xref:object-properties-common#description)
+- [隐藏](xref:object-properties-common#hidden)
+- [注释](xref:object-properties-common#annotations)
+- [扩展属性](xref:object-properties-common#extended-properties)
+- [对象类型](xref:object-properties-common#object-type)
+- [已翻译的名称](xref:object-properties-common#translated-names)
+- [已翻译的描述](xref:object-properties-common#translated-descriptions)
+- [在透视中显示](xref:object-properties-common#shown-in-perspective)
 
-### Table Group
+### 表格组
 
-`TableGroup` · string · Basic · _stored as an annotation_ (`TabularEditor_TableGroup`)
+`TableGroup` · string · 基本 · _以注释形式存储_ (`TabularEditor_TableGroup`)
 
-The same as [Table Group](#table-group) on a table.
+与表上的 [表格组](#table-group) 相同。
 
-### Calculation Group Description
+### 计算组描述
 
-`CalculationGroupDescription` · string · Basic · _shortcut to_ **Description** of the calculation group
+`CalculationGroupDescription` · string · 基本 · _快捷方式，对应于_ 计算组的 **Description**
 
-The description stored on the calculation group, separate from the table's own `Description`. Client tools don't show it. When you hover over a calculation group table in the **Data** pane of Power BI Desktop, the table's `Description` appears, and Excel's field list shows no descriptions. Put the text for report authors in the table's `Description` and use this property for notes to other developers.
+这是存储在计算组上的描述，与表自身的 `Description` 分开。客户端工具不会显示它。在 Power BI Desktop 的 **数据** 窗格中将鼠标悬停在计算组表上时，会显示该表的 `Description`；而 Excel 的字段列表不显示任何描述。将面向 Report 作者的文本放在表的 `Description` 中，并用此属性记录给其他开发人员的备注。
 
-### Calculation Group Precedence
+### 计算组优先级
 
-`CalculationGroupPrecedence` · int · Basic · _shortcut to_ **Precedence** of the calculation group
+`CalculationGroupPrecedence` · int · 基本 · _快捷方式，对应于_ 计算组的 **Precedence**
 
-The order in which the calculation group is applied when a query uses more than one calculation group. See `Precedence` on @object-properties-calculation-groups.
+当查询使用多个计算组时，这是应用计算组的顺序。参见 @object-properties-calculation-groups 中的 `Precedence`。
 
-### Calculation Group Annotations
+### 计算组注释
 
-`CalculationGroupAnnotations` · collection of name/value pairs · Metadata · read-only · _shortcut to_ **Annotations** of the calculation group
+`CalculationGroupAnnotations` · 名称/值对集合 · 元数据 · 只读 · _快捷方式，指向_ 计算组的 **注释**
 
-The annotations stored on the calculation group. The table has its own annotations (see [Annotations](xref:object-properties-common#annotations)). The property itself is read-only. Click the ellipsis button to open the annotation editor, where you add, change and remove the annotations. This works with one calculation group table selected at a time.
+存储在计算组上的注释。该表也有自己的注释（参见 [注释](xref:object-properties-common#annotations)）。这个属性本身是只读的。点击省略号按钮，打开注释编辑器，你可以在其中添加、更改和删除注释。此功能一次只能作用于一个选定的计算组表。
 
-### Multiple or Empty Selection Expression
+### 多选或空选择表达式
 
-`MultipleOrEmptySelectionExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`MultipleOrEmptySelectionExpression` · 字符串 · 选项 · 兼容级别 1605+ · _快捷方式，指向_ 计算组
 
-A DAX expression that the engine evaluates in place of the measure when the filter on the calculation group selects more than one calculation item, or selects none because the filter matches no item. Use [SELECTEDMEASURE](https://dax.guide/selectedmeasure) to refer to the measure. Below compatibility level 1605, the **Properties** view hides this property and the other selection expression properties below. To remove the expression, clear the value.
+这是一个 DAX 表达式：当计算组上的筛选器选择了多个计算项，或者由于筛选器未匹配任何项而未选择任何计算项时，引擎会用它来代替度量值进行求值。使用 [SELECTEDMEASURE](https://dax.guide/selectedmeasure) 引用该度量值。在兼容级别低于 1605 时，**属性**视图会隐藏此属性以及下面的其他选择表达式属性。要删除这个表达式，清空这个值即可。
 
-When the expression is empty, the calculation group isn't applied in those cases, and [Selection Expression Behavior](xref:object-properties-model#selection-expression-behavior) on the model sets what measures return:
+当这个表达式为空时，这些情况下不会应用计算组，而模型上的 [选择表达式行为](xref:object-properties-model#selection-expression-behavior) 会决定度量值返回什么：
 
-- `Automatic` or `NonVisual`: the measure's normal value
-- `Visual`: a blank value
+- `Automatic` 或 `NonVisual`：度量值的正常值
+- `Visual`：空白值
 
-A normal value can mislead users, for example when a user selects two currencies in a currency conversion calculation group and sees a total that's in neither currency. This expression returns an error message:
+正常值可能会误导用户。例如，在货币转换计算组中，用户同时选择两种货币时，看到的总计可能既不属于这两种货币中的任何一种。这个表达式返回一条错误信息：
 
 ```dax
 ERROR ( "Select a single currency." )
 ```
 
-This expression returns a blank value:
+这个表达式返回空白值：
 
 ```dax
 BLANK ()
 ```
 
-In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info.
+在 Tabular Editor 3 中，可在 @dax-editor 的 **表达式编辑器** 中编写该表达式，并获得自动补全和参数信息提示。
 
-### Multiple or Empty Selection Expression Description
+### 多选或空选择表达式描述
 
-`MultipleOrEmptySelectionDescription` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`MultipleOrEmptySelectionDescription` · 字符串 · 选项 · 兼容级别 1605+ · _快捷方式，指向_ 计算组
 
-A description of the multiple or empty selection expression, for other developers. Client tools don't show it to report authors.
+这是对多选或空选择表达式的说明，供其他开发人员查看。客户端工具不会向报表作者显示它。
 
-### Multiple or Empty Selection Format String Expression
+### 多选或空选择格式字符串表达式
 
-`MultipleOrEmptySelectionFormatStringExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`MultipleOrEmptySelectionFormatStringExpression` · 字符串 · 选项 · 兼容级别 1605+ · _计算组的快捷方式_
 
-A DAX expression that returns the format string to use when the multiple or empty selection expression applies. It works like `FormatStringExpression` on a calculation item. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the format string of the measure.
+一个 DAX 表达式，在多选或空选择表达式生效时，返回要使用的格式字符串。它的作用类似于计算项上的 `FormatStringExpression`。在该表达式中，[SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) 返回度量值的格式字符串。
 
-### No-selection Expression
+### 无选择表达式
 
-`NoSelectionExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`NoSelectionExpression` · 字符串 · 选项 · 兼容级别 1605+ · _计算组的快捷方式_
 
-A DAX expression that the engine evaluates in place of the measure when there's no filter on the calculation group, that is, when the user hasn't selected a calculation item. When it's empty, measures return their normal value when nothing is selected. Use it to set a default calculation that users can override by selecting a calculation item. No-selection expressions need compatibility level 1605 or higher.
+当计算组上没有筛选器时，也就是用户尚未选择计算项时，引擎会用此 DAX 表达式替代度量值进行计算。当该表达式为空时，在未选择任何内容的情况下，度量值将返回其正常值。可用于设置默认计算；用户通过选择计算项即可覆盖该默认计算。无选择表达式要求兼容级别为 1605 或更高版本。
 
-In this currency conversion example, sales amounts are stored in US dollars and a `Currency Rate` table holds the daily exchange rates. The expression converts amounts to the currency selected in a `Currency` table, without the user picking a calculation item:
+在这个货币换算示例中，销售金额以美元存储，`Currency Rate` 表保存每日汇率。该表达式会将金额转换为 `Currency` 表中所选的货币，而无需用户选择计算项：
 
 ```dax
 IF (
@@ -407,14 +407,14 @@ IF (
 )
 ```
 
-### No-selection Expression Description
+### 无选择表达式说明
 
-`NoSelectionExpressionDescription` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`NoSelectionExpressionDescription` · 字符串 · 选项 · 兼容级别 1605+ · _计算组的快捷方式_
 
-A description of the no-selection expression, for other developers. Client tools don't show it to report authors.
+供其他开发者参考的无选择表达式说明。客户端工具不会向 Report 作者显示此项。
 
-### No-selection Format String Expression
+### 无选择格式字符串表达式
 
-`NoSelectionFormatStringExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`NoSelectionFormatStringExpression` · 字符串 · 选项 · 兼容级别 1605+ · _计算组的快捷方式_
 
-A DAX expression that returns the format string to use when the no-selection expression applies. It works like `FormatStringExpression` on a calculation item. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the format string of the measure.
+一个 DAX 表达式，在无选择表达式生效时，返回要使用的格式字符串。它的作用类似于计算项上的 `FormatStringExpression`。在该表达式中，[SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) 返回度量值的格式字符串。
