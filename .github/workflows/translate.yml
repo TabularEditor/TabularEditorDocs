@@ -1,71 +1,26 @@
 name: Translate content (Translated)
 
-# AI-translates the English docs with Translated (TranslationOS POST /translate/ai,
-# service type 'AI') and hands the result over as a review PR.
-# build_scripts/translate-content.py does the work; this file only decides WHEN it
-# runs, in WHICH environment, and WHERE the output goes.
+# AI-translates the English docs with Translated (TranslationOS POST /translate/ai)
+# and hands the result over as a review PR. build_scripts/translate-content.py does
+# the work; this file decides WHEN it runs, in WHICH environment, and WHERE the
+# output goes. Full documentation: README.md > "The workflow (translate.yml)".
 #
-# Jobs
-#   dry_run    pull_request only. Runs the PR's own copy of the script offline
-#              (--self-test, --plan, --dump-orders) and uploads the dumped orders.
-#              Never pushes, never opens a PR, never talks to the API; real sandbox
-#              validation is done locally (see README > Translating Content > Local use).
-#   translate  push / schedule / workflow_dispatch. Folds the open translation
-#              branch into main's tree, runs --self-test, then --run (or --probe),
-#              commits localizedContent, pushes to the target branch and opens or
-#              updates the review PR. Holds the `translate-content` concurrency slot.
-#              The AI endpoint is synchronous: --run translates, verifies and writes
-#              every file in one pass; there is no polling and nothing stays pending.
+# Jobs:
+#   dry_run    pull requests only; fully offline (--self-test, --plan, --dump-orders).
+#   translate  push to main / schedule (only while the TRANSLATED_ENV variable is
+#              'production') and workflow_dispatch (any environment). Folds the open
+#              translation branch into main's tree, runs --run (synchronous: translate,
+#              verify, write in one pass), pushes to `localization` (production) or
+#              `localization-sandbox` (draft PR), and opens/updates the review PR.
+#              The sandbox account has no AI-enabled service type, so a sandbox
+#              --run fails at the first submission.
 #
-# Gating (event x TRANSLATED_ENV)
-#   pull_request       -> dry_run only (offline)
-#   push / schedule    -> translate, ONLY when the variable TRANSLATED_ENV == production;
-#                         otherwise the job is skipped (no sandbox spam, no sandbox MT PRs)
-#   workflow_dispatch  -> translate in whatever environment TRANSLATED_ENV names.
-#                         Sandbox runs push to `localization-sandbox` as a DRAFT PR titled
-#                         "New translations (sandbox - do not merge)" labelled `sandbox`;
-#                         only production runs may target `localization`. NOTE: the sandbox
-#                         account has no AI-enabled service type (checked 2026-10-12), so a
-#                         sandbox --run fails at the first submission until Translated adds one.
-#
-# Secrets / variables (repository settings)
-#   TRANSLATED_API_KEY           secret    TranslationOS key matching TRANSLATED_ENV
-#   TRANSLATED_ENV               variable  sandbox | production; selects
-#                                          translation.environments[...] in metadata/build-config.json
-#   TRANSLATED_SERVICE_TYPE      variable  optional override of the environment's serviceType
-#                                          (both default to 'AI'; list the names with mode=probe)
-# Missing key or TRANSLATED_ENV: a dispatch fails with ::error::; push/schedule end green
-# with a ::warning:: so the schedule does not go red four times a day.
-#
-# workflow_dispatch inputs
-#   mode           translate (default): --run, then commit/push/PR.
-#                  probe: --probe only (key, languages, service types); nothing pushed.
-#                  dry-run: --plan and --dump-orders only (nothing is submitted: the AI
-#                  endpoint translates and bills synchronously, so a dry run that is never
-#                  pushed would be paid for and then re-billed by the next real run).
-#   target_branch  default '' = auto: `localization` when TRANSLATED_ENV == production,
-#                  `localization-sandbox` otherwise. An explicit `localization` is refused
-#                  (exit 1) for mode=translate unless TRANSLATED_ENV == production; for
-#                  probe/dry-run it is remapped to `localization-sandbox` with a ::notice::.
-#                  Any other value must start with `localization-`; the bot never pushes
-#                  to main or to a feature branch.
-#   limit / force / file  passed through as --limit / --force / --file.
-# The script refuses sandbox submissions without --limit/--file and caps files and
-# characters per run (translation.sandboxLimits); this workflow never passes
-# --allow-unbounded and never passes --lenient.
-#
-# Repository settings an admin must enable (Settings > Actions > General / Settings > General)
-#   "Allow GitHub Actions to create and approve pull requests" - needed by the PR step
-#     (it warns instead of failing when off; the push has already landed)
-#   "Automatically delete head branches" - keeps `localization` from going stale after a
-#     squash merge (the merge step also deletes a stale branch whose PR is merged/closed)
-#
-# Failure safety: the push and PR steps run even when the translate step fails
-# (`!cancelled()`), so translations that were already billed and written are committed
-# and never re-bought; the PR body/comment then starts with a warning line. The merge
-# step is the opposite: when the open translation branch cannot be folded into main it
-# fails the run BEFORE anything is submitted, because continuing from main would lose
-# the unmerged translations on that branch and retranslate (and pay for) their files.
+# Repository settings:
+#   TRANSLATED_API_KEY       secret    TranslationOS key matching TRANSLATED_ENV
+#   TRANSLATED_ENV           variable  sandbox | production
+#   TRANSLATED_SERVICE_TYPE  variable  optional serviceType override (default 'AI')
+#   Enable "Allow GitHub Actions to create and approve pull requests" and
+#   "Automatically delete head branches".
 
 on:
   push:
@@ -214,8 +169,7 @@ jobs:
       - uses: actions/checkout@v4
         if: steps.preflight.outputs.ready == 'true'
         with:
-          # Always main, whatever branch the dispatch was started from (the script
-          # version under test on a PR is covered by the dry_run job).
+          # Always main, whatever branch the dispatch was started from.
           ref: main
           fetch-depth: 0
 
@@ -252,8 +206,7 @@ jobs:
           if [ "$target" = "localization" ] && [ "$TRANSLATED_ENV" != "production" ]; then
             case "${INPUT_MODE:-translate}" in
               probe|dry-run)
-                # Nothing is pushed in these modes; fall back so the merge step can still
-                # pick up in-flight records instead of failing the run.
+                # Nothing is pushed in these modes; fall back instead of failing the run.
                 echo "::notice::TRANSLATED_ENV=$TRANSLATED_ENV; using localization-sandbox instead of localization (nothing is pushed in mode $INPUT_MODE)"
                 target=localization-sandbox
                 ;;
@@ -267,12 +220,10 @@ jobs:
           echo "branch=$target" >> "$GITHUB_OUTPUT"
 
       - name: Continue from the open translation branch
-        # Unmerged translations (already billed) live on the target branch. Fold them into
-        # main's tree so this run builds on them instead of retranslating.
-        # A stale branch (tip already in main, or its PR merged/closed at that tip - the
-        # squash-merge case) is deleted instead, so no empty PR is opened afterwards.
-        # If the branch can neither be merged nor taken as-is, the run FAILS here:
-        # continuing from main would retranslate (and pay for) the files on the branch.
+        # Unmerged translations (already billed) live on the target branch; fold them into
+        # main's tree so they are not bought again. A stale branch (tip in main, or its PR
+        # merged/closed) is deleted instead. A branch that cannot be folded FAILS the run
+        # before anything is submitted.
         if: steps.preflight.outputs.ready == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -353,8 +304,8 @@ jobs:
               python build_scripts/translate-content.py --probe
               ;;
             dry-run)
-              # Nothing is submitted: the AI endpoint bills synchronously, so a run whose
-              # results are never pushed would be paid for and re-billed by the next run.
+              # Nothing is submitted: a billed run whose results are never pushed would
+              # be paid for twice.
               python build_scripts/translate-content.py --plan
               python build_scripts/translate-content.py --dump-orders "$RUNNER_TEMP/orders"
               ;;
@@ -365,7 +316,7 @@ jobs:
 
       - name: Push to the translation branch
         id: push
-        # Runs even when the translate step failed so accepted job records are kept.
+        # Runs even when the translate step failed, so billed translations are kept.
         if: ${{ !cancelled() && steps.translate.outcome != 'skipped' && inputs.mode != 'dry-run' && inputs.mode != 'probe' }}
         env:
           TARGET: ${{ steps.target.outputs.branch }}
@@ -398,8 +349,8 @@ jobs:
           echo "pushed=$pushed" >> "$GITHUB_OUTPUT"
 
       - name: Open or update the review PR
-        # No implicit success(): after a failed translate step the pushed records still
-        # deserve a PR (or a comment), flagged with a warning line.
+        # No implicit success(): pushed translations get a PR (with a warning line)
+        # even when the translate step failed.
         if: ${{ !cancelled() && steps.push.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}

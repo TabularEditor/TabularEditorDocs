@@ -105,7 +105,7 @@ The full report, including the list of external URLs to verify by hand, is attac
 Fix or remove genuinely dead external links as part of normal maintenance.
 
 **Translation build warnings are visible but not blocking.**
-Only English DocFX warnings fail the build; the es and zh builds are Crowdin-managed translations and may carry warnings such as broken bookmarks or missing includes.
+Only English DocFX warnings fail the build; the es and zh builds are machine translations (Translated) and may carry warnings such as broken bookmarks or missing includes.
 The "Build Documentation" job summary lists every DocFX warning per language, so translation problems can be spotted and fed back without blocking a deploy.
 
 **Executing the doctests needs the te CLI.**
@@ -185,7 +185,7 @@ The `translation` section of `metadata/build-config.json` defines what is transl
 
 - **`sources`** - globs relative to `content/`: every `**/*.md` (including the sidebar `toc.md` files), `404.html`, `getting-started/app/**/*.html`, `toc.yml` and `_ui-strings.json`. Files under the shared directories (`assets`, `api`) are always skipped.
 - **`passthrough`** - `whats-new/**/*.html`. The release-note pages are not translated: every run copies them from English byte-for-byte when their hash differs (or the target is missing) and records them in the status file with status `copied`.
-- **`environments`** - the two endpoints the script can talk to: `sandbox` is `https://api-mt.sandbox.translated.com/v2/` and `production` is `https://api-mt.translated.com/v2/` (AI translation lives on the dedicated `api-mt.*` hosts, not the classic `api.*` hosts), both with service type `AI`. `TRANSLATED_ENV` selects which one is active (see below). Note: the sandbox account has no AI-enabled service type (checked 2026-10-12; its only type, `economy`, is human-only), so sandbox runs fail at the first submission - production is validated locally with `--limit`/`--file` instead.
+- **`environments`** - the two endpoints the script can talk to: `sandbox` is `https://api-mt.sandbox.translated.com/v2/` and `production` is `https://api-mt.translated.com/v2/` (AI translation lives on the dedicated `api-mt.*` hosts, not the classic `api.*` hosts), both with service type `AI`. `TRANSLATED_ENV` selects which one is active (see below). Note: the sandbox account has no AI-enabled service type (its only type, `economy`, is human-only), so sandbox runs fail at the first submission - production is validated locally with `--limit`/`--file` instead.
 - **`sandboxLimits`** (`maxFilesPerRun`: 20, `maxCharsPerRun`: 200000; see [Sandbox caps](#sandbox-caps)).
 - **`instructions`** - file-level notes attached to every order as context for the translation. Glossaries and do-not-translate lists are configured by Translated on the service type itself, not per request.
 

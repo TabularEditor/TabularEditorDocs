@@ -2,54 +2,31 @@
 """
 Translate documentation content with Translated's AI translation (TranslationOS POST /translate/ai).
 
-English sources live in content/, translations land at
-localizedContent/{lang}/content/{same path} using two-letter folder codes, and
-translation PRs arrive on the `localization` branch (see .github/workflows/translate.yml).
-
-The AI endpoint is synchronous: one POST per file and language returns the translation in
-the response (data[].translation, billed per character), so there are no pending jobs,
-no polling and nothing to cancel. Every delivery is repaired against the English source
-(code, markers, link targets restored), verified, and written in the same step.
+English sources live in content/; translations land at localizedContent/{lang}/content/{same
+path} and arrive as review PRs on the `localization` branch (.github/workflows/translate.yml).
+The endpoint is synchronous: one POST per file and language returns the translation (billed
+per character), so nothing is pending between runs. Every delivery is repaired against the
+English source (code, markers, link targets restored), verified, and written in the same step.
 
 Actions (exactly one per invocation):
+  --plan         list missing/outdated/orphaned/pinned/unscoped files (offline)
+  --run          translate every missing/outdated file, verify and write the results
+  --baseline     seed the status file from the existing translations (offline)
+  --self-test    offline test suite (no key, no network)
+  --probe        check service types and languages against the API
+  --dump-orders  write the exact request bodies to a directory instead of sending
 
-  --plan         compare English source hashes with localizedContent/{lang}/.translation-status.json
-                 and list what is missing, outdated, orphaned, pinned or unscoped (offline)
-  --run          POST /translate/ai for every missing/outdated file (one request per file and
-                 language), repair-verify-write each translation, and record the outcome
-  --baseline     one-time migration step: run every existing translation through the same
-                 repair-then-verify path as a delivery, mark the valid ones as current so only future
-                 changes are sent, and mark the rest untranslated (offline; repairs are only written
-                 back with --repair-existing)
-  --self-test    offline proof that extraction, repair, verification and bookkeeping work
-  --probe        GET service types and languages from the API and check the configuration
-  --dump-orders  write the exact /translate/ai request bodies to a directory instead of sending them
+Scope comes from the "translation" section of metadata/build-config.json, locales from
+"translatedLocale" in metadata/language-metadata.json; target languages are the folders
+under localizedContent/ with a content/ directory.
 
-Scope (which files are translated and how) comes from the "translation" section of
-metadata/build-config.json; locales come from "translatedLocale" in
-metadata/language-metadata.json. Target languages are the folders under
-localizedContent/ that contain a content/ directory (same rule as gen_languages.py).
+Environment: TRANSLATED_ENV (sandbox | production; the sandbox account has no AI-enabled
+service type, so only production can run), TRANSLATED_API_KEY, and
+TRANSLATED_SERVICE_TYPE (optional override; both environments default to 'AI').
 
-Usage (run from the docs repo root):
-    python build_scripts/translate-content.py --plan [--lang es] [--file "features/*.md"]
-    python build_scripts/translate-content.py --run --lang es --limit 3 [--force] [--report report.md]
-    python build_scripts/translate-content.py --baseline [--baseline-ref d376766] [--overwrite-baseline] [--repair-existing]
-    python build_scripts/translate-content.py --self-test
-    python build_scripts/translate-content.py --probe
-    python build_scripts/translate-content.py --dump-orders /tmp/orders
-
-Environment:
-    TRANSLATED_ENV            sandbox | production: selects translation.environments[...] in
-                              build-config.json; required for --run/--probe. The sandbox account
-                              has no AI-enabled service type (checked 2026-10-12), so only
-                              production can actually run the AI endpoint.
-    TRANSLATED_API_KEY        required for --run/--probe
-    TRANSLATED_SERVICE_TYPE   overrides the environment's serviceType (both environments default to 'AI')
-
-Exit code is 1 for configuration errors and when any /translate/ai request failed with an API
-error. Individual files that fail verification do not fail the run; they are recorded under
-"failures" in the status file (at the source hash they failed for, so they are not
-resubmitted until the English changes or --retry-failed is given) and listed in the report.
+Exit code 1 on configuration errors or failed API requests. Files that fail verification do
+not fail the run: they are recorded under "failures" in the status file and skipped until
+the English changes or --retry-failed. Full reference: README.md > Translating Content.
 """
 
 from __future__ import annotations
@@ -99,10 +76,8 @@ IDENTITY_MIN_LETTERS = 200
 REPAIR_KINDS = ("fences", "inline code", "markers", "links")  # order used in "repaired: ..." lines
 WARNING_KINDS = frozenset({"inline code"})  # count mismatches of these kinds are warnings, not problems
 
-# content_type values accepted by POST /translate/ai (text/markdown and application/json are
-# rejected by its schema, verified 2026-10-12), so Markdown and the JSON-shaped payloads
-# (toc.yml name maps, _ui-strings.json) are sent as text/plain; structure is restored and
-# verified against the English source on delivery anyway.
+# /translate/ai accepts text/plain and text/html but rejects text/markdown and
+# application/json, so everything non-HTML is sent as text/plain.
 CONTENT_TYPES = {
     ".md": "text/plain",
     ".html": "text/html",
@@ -326,7 +301,7 @@ def load_status(lang: str) -> dict[str, Any]:
         status = {"language": lang, "sourceBaseline": str(CONTENT_DIR), "files": {}}
     status.setdefault("files", {})
     status.setdefault("failures", {})
-    # Legacy key from the asynchronous flow; the AI endpoint is synchronous, nothing is pending.
+    # Legacy key from the old asynchronous flow.
     status.pop("pendingJobs", None)
     return status
 
@@ -917,10 +892,8 @@ class TranslatedClient:
         return self._request("GET", endpoint)
 
     def translate_ai(self, order: dict[str, Any]) -> list[dict[str, Any]]:
-        """Synchronous AI translation of one file: the response's data[] holds the translated
-        segments, positionally aligned with the request's content[]. One idempotency id per
-        request, reused on every retry, so a timeout after server-side processing cannot bill
-        the same content twice."""
+        """Synchronous AI translation of one file; data[] is positionally aligned with content[].
+        The idempotency id is reused on retries so a timeout cannot bill the same content twice."""
         result = self._post("translate/ai", order, {"x-idempotency-id": str(uuid.uuid4())})
         data = result.get("data") if isinstance(result, dict) else None
         if not isinstance(data, list):
@@ -1275,10 +1248,8 @@ class LanguageSubmission:
 def build_order(
     config: TranslationConfig, id_content: str, content: str, content_type: str, locale: str
 ) -> dict[str, Any]:
-    # POST /translate/ai body (schema verified 2026-10-12): a single object per file with
-    # target_language (singular) and content as a list of {text, translatable} segments;
-    # the whole file is one translatable segment. id_content is not part of the schema but
-    # is tolerated and kept for transaction tracing.
+    # /translate/ai body: one object per file, target_language singular,
+    # content a list of {text, translatable} segments; the whole file is one segment.
     order: dict[str, Any] = {
         "id_content": id_content,
         "source_language": config.source_locale,
@@ -1419,8 +1390,7 @@ def translate_language(
     report: RunReport,
 ) -> None:
     """One synchronous /translate/ai request per planned file: translate, repair, verify, write.
-    The status file is saved after every file so an interrupted run never loses the record of a
-    translation that was already billed and written."""
+    The status file is saved after every file so an interrupted run loses no billed work."""
     lang, status = sub.lang, sub.status
     r = report.lang(lang)
     apply_local_changes(sub, sources, passthrough, r)
