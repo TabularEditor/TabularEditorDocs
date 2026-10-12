@@ -1,6 +1,6 @@
 ---
 uid: object-properties-calculation-groups
-title: Calculation group properties
+title: Propiedades del grupo de cálculo
 author: Jeroen ter Heerdt
 updated: 2026-10-05
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Calculation group properties
+# Propiedades del grupo de cálculo
 
 <!--
 SUMMARY: Reference for the properties of calculation groups and calculation items.
@@ -25,86 +25,86 @@ SUMMARY: Reference for the properties of calculation groups and calculation item
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of calculation groups and calculation items. A calculation group always belongs to a calculation group table. The properties of that table, including shortcuts to the calculation group's own properties, are on @object-properties-tables. For properties that most objects share, see @object-properties-common.
+Esta página describe las propiedades de los grupos de cálculo y los elementos de cálculo. Un grupo de cálculo siempre pertenece a una tabla de grupos de cálculo. Las propiedades de esa tabla, incluidos los accesos directos a las propiedades del propio grupo de cálculo, se describen en @object-properties-tables. Para ver las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
-## Calculation group
+## Grupo de cálculo
 
-A calculation group is a set of calculation items that change how measures are calculated. For example, a time intelligence calculation group can have the items `Current`, `YTD` and `Prior year`. When a report author puts the calculation group's column in a slicer and selects `YTD`, every measure in the visual shows its year-to-date value, without a separate YTD measure for each measure.
+Un grupo de cálculo es un conjunto de elementos de cálculo que cambia la forma en que se calculan las medidas. Por ejemplo, un grupo de cálculo de inteligencia temporal puede tener los elementos `Current`, `YTD` y `Prior year`. Cuando el autor de un Report coloca la columna del grupo de cálculo en un segmentador y selecciona `YTD`, cada medida del Visual muestra su valor acumulado en el año, sin necesidad de crear una medida YTD independiente para cada medida.
 
-A calculation group has no name of its own and is identified by its calculation group table. You can't select the calculation group in the **TOM Explorer**. Select the calculation group table, where the **Properties** view shows the calculation group's properties as `CalculationGroupDescription`, `CalculationGroupAnnotations` and `CalculationGroupPrecedence` (see @object-properties-tables). In C# scripts, you reach the calculation group object through `CalculationGroupTable.CalculationGroup`.
+Un grupo de cálculo no tiene nombre propio y se identifica por su tabla de grupos de cálculo. No puedes seleccionar el grupo de cálculo en el **Explorador TOM**. Selecciona la tabla de grupos de cálculo, donde la vista **Propiedades** muestra las propiedades del grupo de cálculo como `CalculationGroupDescription`, `CalculationGroupAnnotations` y `CalculationGroupPrecedence` (consulta @object-properties-tables). En C# Script, accedes al objeto de grupo de cálculo a través de `CalculationGroupTable.CalculationGroup`.
 
-In Tabular Editor 3, you create a calculation group by right-clicking the model or the **Tables** folder and choosing **Create > Calculation Group**. Microsoft documents calculation groups for compatibility level 1500 or higher, which includes all Power BI semantic models. Tabular Editor 3 shows the menu option from compatibility level 1470, the level at which the Tabular Object Model (TOM) added calculation groups. See @creating-and-testing-dax.
+En Tabular Editor 3, creas un grupo de cálculo haciendo clic con el botón derecho en el modelo o en la carpeta **Tablas** y eligiendo **Crear > Grupo de cálculo**. Microsoft documenta los grupos de cálculo para el nivel de compatibilidad 1500 o superior, que incluye todos los modelos semánticos de Power BI. Tabular Editor 3 muestra la opción de menú a partir del nivel de compatibilidad 1470, que es cuando el Tabular Object Model (TOM) incorporó los grupos de cálculo. Consulta @creating-and-testing-dax.
 
-### Common properties
+### Propiedades comunes
 
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Object Type](xref:object-properties-common#object-type)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
-### Precedence
+### Precedencia
 
-`Precedence` · int · Options
+`Precedence` · int · Opciones
 
-The order in which calculation groups are applied when a query uses items from more than one calculation group, for example a time intelligence group and a currency conversion group. The calculation group with the highest precedence is applied first, which makes its calculation item the outermost one. Where that item calls [SELECTEDMEASURE](https://dax.guide/selectedmeasure), the engine uses the result of the calculation item from the group with the next lower precedence, and so on down to the measure.
+El orden en que se aplican los grupos de cálculo cuando una consulta usa elementos de más de un grupo de cálculo, por ejemplo, un grupo de inteligencia temporal y un grupo de conversión de divisas. El grupo de cálculo con la precedencia más alta se aplica primero, lo que hace que su elemento de cálculo sea el más externo. Cuando ese elemento llama a [SELECTEDMEASURE](https://dax.guide/selectedmeasure), el motor usa el resultado del elemento de cálculo del grupo con la siguiente precedencia inferior, y así sucesivamente hasta llegar a la medida.
 
-The order changes the result when the calculation items don't commute. With a time intelligence group that has a `YTD` item and a group that has an `Average per day` item, the year-to-date of the daily average differs from the daily average of the year-to-date value. In this example, a calculation group at precedence `200` has the item `SELECTEDMEASURE () * 2` and one at precedence `100` has the item `SELECTEDMEASURE () + 2`. Selecting both items on a measure that returns `10` gives `( 10 + 2 ) * 2 = 24`.
+El orden cambia el resultado cuando los elementos de cálculo no son conmutativos. Con un grupo de inteligencia temporal que tiene un elemento `YTD` y un grupo que tiene un elemento `Average per day`, el acumulado en el año del promedio diario difiere del promedio diario del valor acumulado en el año. En este ejemplo, un grupo de cálculo con precedencia `200` tiene el elemento `SELECTEDMEASURE () * 2` y otro con precedencia `100` tiene el elemento `SELECTEDMEASURE () + 2`. Al seleccionar ambos elementos en una medida que devuelve `10`, se obtiene `( 10 + 2 ) * 2 = 24`.
 
-The TOM default is `0`. Give each calculation group in the model a different precedence of `0` or higher. The engine rejects a model in which two calculation groups have the same precedence, with an error like "Calculation Group precedence must be greater or equal zero and unique within Model".
+El valor predeterminado de TOM es `0`. Asigna a cada grupo de cálculo del modelo una precedencia distinta de `0` o superior. El motor rechaza un modelo en el que dos grupos de cálculo tienen la misma precedencia, con un error como "Calculation Group precedence must be greater or equal zero and unique within Model".
 
-When you add or paste a calculation group whose precedence another calculation group in the model already uses, Tabular Editor sets it to one more than the highest precedence in the model. You can also set it on the calculation group table as `CalculationGroupPrecedence`. In a Tabular Editor 3 @dax-scripts document, you set it with the `Precedence` property of the calculation group.
+Cuando agregas o pegas un grupo de cálculo cuya precedencia ya la usa otro grupo de cálculo del modelo, Tabular Editor la establece en un valor superior en uno a la precedencia más alta del modelo. También puedes establecerla en la tabla del grupo de cálculo como `CalculationGroupPrecedence`. En un documento @dax-scripts de Tabular Editor 3, la estableces con la propiedad `Precedence` del grupo de cálculo.
 
-## Calculation item
+## Elemento de cálculo
 
-A calculation item is one entry of a calculation group, for example `YTD`. Report authors see its name as a value in the calculation group's column, and its expression sets how the measure changes when the item is selected. Inside the expression, [SELECTEDMEASURE](https://dax.guide/selectedmeasure) returns the measure that's being evaluated.
+Un elemento de cálculo es una entrada de un grupo de cálculo, por ejemplo, `YTD`. Los autores de Report ven su nombre como un valor en la columna del grupo de cálculo, y su expresión define cómo cambia la medida cuando se selecciona el elemento. Dentro de la expresión, [SELECTEDMEASURE](https://dax.guide/selectedmeasure) devuelve la medida que se está evaluando.
 
-A calculation group without calculation items has no effect. The Best Practice Analyzer (BPA) rule @kb.bpa-calculation-groups-no-items flags calculation groups that contain no items.
+Un grupo de cálculo sin elementos de cálculo no tiene ningún efecto. La regla @kb.bpa-calculation-groups-no-items del Best Practice Analyzer (BPA) marca los grupos de cálculo que no contienen elementos.
 
-The `Description` of a calculation item is for developers only. Power BI Desktop doesn't show it, for example when a report author hovers over the item in a slicer.
+La propiedad `Description` de un elemento de cálculo es solo para desarrolladores. Power BI Desktop no la muestra, por ejemplo, cuando un autor de Report pasa el cursor sobre el elemento en un segmentador.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
 
 ### Ordinal
 
-`Ordinal` · int · Basic · compatibility level 1500+
+`Ordinal` · int · Básico · nivel de compatibilidad 1500+
 
-The position of the calculation item within its calculation group, starting at `0`. Client tools sort the items by it, for example to show `Current`, `MTD`, `QTD` and `YTD` in that order in a slicer. The engine exposes it through the ordinal column of the calculation group table.
+La posición del elemento de cálculo dentro de su grupo de cálculo, a partir de `0`. Las herramientas cliente ordenan los elementos según este valor; por ejemplo, para mostrar `Current`, `MTD`, `QTD` y `YTD` en ese orden en un segmentador. El motor lo expone a través de la columna ordinal de la tabla del grupo de cálculo.
 
-The value `-1` means the item has no position. According to Microsoft, items with `-1` aren't included in the ordering and appear before the ordered items in a report. If no item has an ordinal, client tools sort the items alphabetically.
+El valor `-1` significa que el elemento no tiene posición. Según Microsoft, los elementos con `-1` no se incluyen en la ordenación y aparecen antes que los elementos ordenados en un Report. Si ningún elemento tiene un ordinal, las herramientas cliente ordenan los elementos alfabéticamente.
 
-Tabular Editor 3 keeps the ordinals of a calculation group numbered `0`, `1`, `2` and so on, without gaps or duplicates:
+Tabular Editor 3 mantiene los ordinales de un grupo de cálculo numerados `0`, `1`, `2` y así sucesivamente, sin huecos ni duplicados:
 
-- when you drag calculation items into a different order in the **TOM Explorer**, Tabular Editor renumbers all items in the group
-- when you type a new `Ordinal` in the **Properties** view, Tabular Editor moves the item to that position and renumbers the other items
-- when you type `-1`, Tabular Editor sets the ordinal of every item in the group to `-1`, which removes the custom order
-- when you add a calculation item, it gets the next number after the highest ordinal in the group, unless no item in the group has an ordinal yet
+- cuando arrastras elementos de cálculo para reordenarlos en el **Explorador TOM**, Tabular Editor renumera todos los elementos del grupo
+- cuando escribes un nuevo `Ordinal` en la vista de **Propiedades**, Tabular Editor mueve el elemento a esa posición y renumera los demás elementos
+- cuando escribes `-1`, Tabular Editor establece el ordinal de todos los elementos del grupo a `-1`, lo que elimina el orden personalizado
+- cuando agregas un elemento de cálculo, recibe el número siguiente al ordinal más alto del grupo, a menos que aún no haya ningún elemento del grupo con ordinal
 
-You can set `Ordinal` for one calculation item at a time. Tabular Editor 2 renumbers the ordinals in the same way when you drag calculation items into a different order in the **TOM Explorer** or type a new `Ordinal`.
+Solo puedes establecer `Ordinal` para un elemento de cálculo a la vez. Tabular Editor 2 renumera los ordinales de la misma forma cuando arrastras elementos de cálculo para reordenarlos en el **Explorador TOM** o escribes un nuevo `Ordinal`.
 
-You can also drag calculation items onto another calculation group to move them there. See @drag-drop.
+También puedes arrastrar elementos de cálculo a otro grupo de cálculo para moverlos allí. Consulta @drag-drop.
 
 ### Expresión
 
-`Expression` · string · Options
+`Expression` · string · Opciones
 
-The DAX expression that the engine evaluates in place of the measure when this calculation item is selected. Use [SELECTEDMEASURE](https://dax.guide/selectedmeasure) to refer to the measure. This is a year-to-date item:
+La expresión DAX que el motor evalúa en lugar de la medida cuando se selecciona este elemento de cálculo. Usa [SELECTEDMEASURE](https://dax.guide/selectedmeasure) para referirte a la medida. Este es un elemento de acumulado hasta la fecha:
 
 ```dax
 CALCULATE ( SELECTEDMEASURE (), DATESYTD ( 'Date'[Date] ) )
 ```
 
-This item leaves the measure unchanged and works as a default:
+Este elemento deja la medida sin cambios y funciona como valor predeterminado:
 
 ```dax
 SELECTEDMEASURE ()
 ```
 
-The expression applies to every measure in the query, including measures that return text. To limit it to some measures, test the measure with [ISSELECTEDMEASURE](https://dax.guide/isselectedmeasure) or [SELECTEDMEASURENAME](https://dax.guide/selectedmeasurename), for example:
+La expresión se aplica a todas las medidas de la consulta, incluidas las medidas que devuelven texto. Para limitarla a algunas medidas, comprueba la medida con [ISSELECTEDMEASURE](https://dax.guide/isselectedmeasure) o [SELECTEDMEASURENAME](https://dax.guide/selectedmeasurename), por ejemplo:
 
 ```dax
 IF (
@@ -114,24 +114,24 @@ IF (
 )
 ```
 
-Calculation items apply to measures only, and columns that are aggregated implicitly aren't affected. Power BI turns on `DiscourageImplicitMeasures` on the model when you add a calculation group (see @object-properties-model).
+Los elementos de cálculo se aplican solo a las medidas, y las columnas que se agregan de forma implícita no se ven afectadas. Power BI activa `DiscourageImplicitMeasures` en el modelo cuando agregas un grupo de cálculo (consulta @object-properties-model).
 
-In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info.
+En Tabular Editor 3, escribe la expresión en el **Editor de expresiones** del @dax-editor, con autocompletado e información de parámetros.
 
-### Format String Expression
+### Expresión de cadena de formato dinámica
 
-`FormatStringExpression` · string · Options
+`FormatStringExpression` · string · Opciones
 
-A DAX expression that returns the format string for the measure when this calculation item is selected. Leave it empty to keep the measure's own format. Set it when the item changes the kind of value the measure returns, for example a year-over-year percentage:
+Una expresión DAX que devuelve la cadena de formato de la medida cuando se selecciona este elemento de cálculo. Déjalo vacío para conservar el formato propio de la medida. Configúralo cuando el elemento cambie el tipo de valor que devuelve la medida, por ejemplo, un porcentaje interanual:
 
 ```dax
 "0.0%"
 ```
 
-You can also make the format depend on the context, for example a currency symbol. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the measure's own format string, which you can use as a fallback. This example uses a `Currency` table with a `Format` column:
+También puedes hacer que el formato dependa del contexto, por ejemplo, de un símbolo de moneda. Dentro de la expresión, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) devuelve la propia cadena de formato de la medida, que puedes usar como valor de reserva. En este ejemplo se usa una tabla `Currency` con una columna `Format`:
 
 ```dax
 SELECTEDVALUE ( 'Currency'[Format], SELECTEDMEASUREFORMATSTRING () )
 ```
 
-The expression must return a single text value. Format string expressions on calculation items have no separate compatibility level requirement and are available wherever calculation groups are. When several calculation groups apply to a measure, the engine uses only the format string expression of the calculation group with the highest precedence. To remove the expression, clear the value.
+La expresión debe devolver un único valor de texto. Las expresiones de cadena de formato dinámicas en los elementos de cálculo no requieren un nivel de compatibilidad independiente y están disponibles en cualquier lugar donde lo estén los grupos de cálculo. Cuando varios grupos de cálculo se aplican a una medida, el motor usa solo la expresión de cadena de formato dinámica del grupo de cálculo con mayor precedencia. Para quitar la expresión, borra el valor.
