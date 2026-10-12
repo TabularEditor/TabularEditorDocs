@@ -20,13 +20,13 @@ applies_to:
 
 # AI 审计日志
 
-Tabular Editor 3 [Enterprise Edition](xref:editions), including Trial licenses, writes a local log of [AI Assistant](xref:ai-assistant) and [MCP server](xref:mcp-server) activity on your computer. It records:
+Tabular Editor 3 [企业版](xref:editions)，包括试用许可证，会在你的电脑上本地记录 [AI Assistant](xref:ai-assistant) 和 [MCP 服务器](xref:mcp-server) 的活动日志。记录内容包括：
 
-- which permissions were requested and how they were answered
-- which tools ran and how each one ended
-- the full text of any C# script the AI Assistant or an MCP agent ran or submitted to run
+- 请求了哪些权限，以及这些请求得到了怎样的回应
+- 运行了哪些工具，以及每个工具如何结束
+- 任何由 AI Assistant 或 MCP 代理运行，或提交运行的 C# Script 的全文
 
-## Log location
+## 日志位置
 
 除非管理员把它移到了别处，否则日志会写入：
 
@@ -34,66 +34,66 @@ Tabular Editor 3 [Enterprise Edition](xref:editions), including Trial licenses, 
 %LocalAppData%\TabularEditor3\AI\audit
 ```
 
-**Open audit folder** on **Tools > Preferences > AI Features** and in the **Tools > MCP Server...** dialog opens it. The folder is created when the first record is written and holds one `ai-audit-<date>.jsonl` file per UTC day, with saved scripts under `scripts\<date>`.
+在 **工具 > 偏好 > AI 功能** 中，或在 **工具 > MCP 服务器...** 对话框中，点击 **打开审计文件夹** 即可打开该文件夹。该文件夹会在写入第一条记录时创建，其中每个 UTC 日期对应一个 `ai-audit-<date>.jsonl` 文件，保存的脚本位于 `scripts\\<date>` 下。
 
 ## 记录了什么
 
-Each line is one JSON object, and every record starts with the same fields:
+每一行都是一个 JSON 对象，并且每条记录都以相同的字段开头：
 
-| 字段          | 内容                                                |
-| ----------- | ------------------------------------------------- |
-| `ts`        | 发生时间，UTC，精确到毫秒                                    |
-| `event`     | Which kind of record this is, from the next table |
-| `surface`   | AI 助手使用 `chat`，通过 MCP 服务器连接的外部代理使用 `mcp`          |
-| `sessionId` | 该操作所属的对话或 MCP 会话。若两者都不属于，则不包含该字段                  |
-| `model`     | 当时打开的语义模型名称。 Absent when no model was open        |
-| `user`      | Windows 账户名称                                      |
+| 字段          | 内容                                       |
+| ----------- | ---------------------------------------- |
+| `ts`        | 发生时间，UTC，精确到毫秒                           |
+| `event`     | 此记录的类型，取值见下表                             |
+| `surface`   | AI 助手使用 `chat`，通过 MCP 服务器连接的外部代理使用 `mcp` |
+| `sessionId` | 该操作所属的对话或 MCP 会话。若两者都不属于，则不包含该字段         |
+| `model`     | 当时打开的语义模型名称。未打开模型时不存在该字段                 |
+| `user`      | Windows 账户名称                             |
 
-The fields that follow the common ones depend on the event:
+通用字段之后的字段取决于事件类型：
 
-| `event`       | 在以下情况下写入                                                              | 包含内容                                                                                                                                                                                 |
-| ------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `consent`     | A permission is requested                                             | 资源、访问级别、它是一次性授权还是持续授权、你是批准还是拒绝，以及授权时长                                                                                                                                                |
-| `tool_call`   | 工具运行时                                                                 | The tool's name, the permissions it needed as `Resource:Access`, how it ended, how many milliseconds it took, the names of its arguments and the total size of their values in bytes |
-| `script`      | The AI Assistant or an MCP agent runs, or submits to run, a C# script | 工具、状态、结果、已保存副本的路径、其 SHA-256 哈希，以及它对模型做出的更改次数                                                                                                                                         |
-| `turn`        | 一次聊天轮次结束时                                                             | 提供方、模型名称、端点主机、结果、轮次编号以及 Token 数量，包括缓存量和计费量                                                                                                                                           |
-| `config`      | AI 配置变更                                                               | 提供方、模型名称和端点主机                                                                                                                                                                        |
-| `mcp_server`  | MCP 服务器启动或停止                                                          | 端口、是否需要访问令牌，以及在启动时为五类资源分别授予的权限                                                                                                                                                       |
-| `mcp_session` | 智能体连接或断开连接                                                            | 客户端名称和版本，以及协商确定的 MCP 协议版本                                                                                                                                                            |
+| `event`       | 在以下情况下写入                                       | 包含内容                                                                   |
+| ------------- | ---------------------------------------------- | ---------------------------------------------------------------------- |
+| `consent`     | 请求某项权限                                         | 资源、访问级别、它是一次性授权还是持续授权、你是批准还是拒绝，以及授权时长                                  |
+| `tool_call`   | 工具运行时                                          | 工具名称、其所需的权限，格式为 `Resource:Access`、结束方式、耗时多少毫秒、其参数名称，以及这些参数值的总大小，以字节为单位 |
+| `script`      | AI Assistant 或 MCP 代理运行某个 C# Script，或提交该脚本以供运行 | 工具、状态、结果、已保存副本的路径、其 SHA-256 哈希，以及它对模型做出的更改次数                           |
+| `turn`        | 一次聊天轮次结束时                                      | 提供方、模型名称、端点主机、结果、轮次编号以及 Token 数量，包括缓存量和计费量                             |
+| `config`      | AI 配置变更                                        | 提供方、模型名称和端点主机                                                          |
+| `mcp_server`  | MCP 服务器启动或停止                                   | 端口、是否需要访问令牌，以及在启动时为五类资源分别授予的权限                                         |
+| `mcp_session` | 智能体连接或断开连接                                     | 客户端名称和版本，以及协商确定的 MCP 协议版本                                              |
 
-A `tool_call` record ends with one of these outcomes:
+`tool_call` 记录会以下列结果之一结束：
 
 - `ok`
 - `error`
 - `denied`：未授予它所需的权限，或被管理员策略阻止。只有 `mcp` 记录会使用此结果；在 AI Assistant 中，以这种方式被阻止的工具最终会以 `error` 结束
 - `cancelled`：你中止了本轮操作，或客户端在工具完成前已断开连接
 
-### Scripts are saved in full
+### 脚本会完整保存
 
-Each script is saved verbatim as a `.csx` file under `scripts\<date>`, and the `script` record holds only the file's path and SHA-256 hash. Use the hash to verify that the file matches the script that ran. 编译失败的脚本不会被保存。
+每个脚本都会原样保存为 `scripts\\<date>` 下的 `.csx` 文件，而 `script` 记录中只包含该文件的路径和 SHA-256 哈希值。可使用该哈希值验证文件是否与实际运行的脚本一致。编译失败的脚本不会被保存。
 
 ## 绝不会记录的内容
 
-- the text of your prompts and the assistant's replies
-- any value from your model (a `tool_call` records only argument names and their total size)
-- API keys and access tokens
+- 你的提示词文本和助手的回复内容
+- 来自你的模型的任何值（`tool_call` 只记录参数名称及其总大小）
+- API 密钥和访问令牌
 
 ## 保留期
 
-Log files and `scripts\<date>` folders older than 30 days are deleted by a cleanup that runs once per Tabular Editor session, before the first record is written. Administrators can change the retention period, or keep everything. See [Policies](#policies).
+超过 30 天的日志文件和 `scripts\\<date>` 文件夹，会在每次 Tabular Editor 会话中、写入第一条记录之前运行的一次清理过程中删除。管理员可以更改保留期限，或保留全部内容。参见 [策略](#policies)。
 
 ## 策略
 
-These [policies](xref:policies), both of which require Enterprise Edition, control the log:
+以下两项均需企业版的[策略](xref:policies)，用于控制日志：
 
-| 值                         | 类型          | 作用                                                                                                                                                                                                   |
-| ------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AiAuditLogPath`          | 路径          | Writes the log to another folder for central collection, such as a UNC path to a network share. The path must be absolute; a relative path is ignored and the default folder is used |
-| `AiAuditLogRetentionDays` | 数值，0 到 3650 | 保留天数。 `0` 表示全部保留。默认值为 30                                                                                                                                                                             |
+| 值                         | 类型          | 作用                                                               |
+| ------------------------- | ----------- | ---------------------------------------------------------------- |
+| `AiAuditLogPath`          | 路径          | 将日志写入另一个文件夹，以便集中收集，例如指向网络共享的 UNC 路径。该路径必须是绝对路径；相对路径会被忽略，并改用默认文件夹 |
+| `AiAuditLogRetentionDays` | 数值，0 到 3650 | 保留天数。 `0` 表示全部保留。默认值为 30                                         |
 
-Redirecting the log also moves the saved scripts, and because the log is written with the signed-in user's Windows account, that account needs write access to a redirected folder. 文件名不包含用户名或计算机名，因此要为每个用户单独创建文件夹。如 `%USERNAME%` 之类的环境变量仅会在 `REG_EXPAND_SZ` 值中展开；管理模板写入的是 `REG_SZ`，因此会按原样使用。
+重定向日志时，也会一并移动已保存的脚本。由于日志是使用已登录用户的 Windows 帐户写入的，因此该帐户必须对重定向后的文件夹具有写入权限。文件名不包含用户名或计算机名，因此要为每个用户单独创建文件夹。如 `%USERNAME%` 之类的环境变量仅会在 `REG_EXPAND_SZ` 值中展开；管理模板写入的是 `REG_SZ`，因此会按原样使用。
 
-If the log can't be written, for example because a network share is unreachable, Tabular Editor writes one information entry to its application log for the session and doesn't log later failures. The AI Assistant and the MCP server keep working.
+如果日志无法写入（例如网络共享不可达），Tabular Editor 会在该会话的应用程序日志中写入一条信息记录，并且不会记录后续失败。 AI 助手和 MCP 服务器仍会继续工作。
 
 ## 后续步骤
 
