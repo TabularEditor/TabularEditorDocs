@@ -1,6 +1,6 @@
 ---
 uid: object-properties-data-sources
-title: Data source and expression properties
+title: Propiedades de los Data sources y de las expresiones
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Data source and expression properties
+# Propiedades de los Data sources y de las expresiones
 
 <!--
 SUMMARY: Reference for the properties of legacy and structured data sources, shared expressions (including M parameters), query groups and data binding hints.
@@ -25,176 +25,176 @@ SUMMARY: Reference for the properties of legacy and structured data sources, sha
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the objects that describe where a model's data comes from: data sources, shared expressions, query groups and data binding hints. For properties that most objects share, see @object-properties-common. For the partitions that use these objects, see @object-properties-partitions.
+Esta página describe los objetos que indican de dónde provienen los datos de un modelo: Data sources, expresiones compartidas, Query Groups y sugerencias de enlace de datos. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common. Para las particiones que usan estos objetos, consulta @object-properties-partitions.
 
-A model connects to its sources through one of these kinds of data source:
+Un modelo se conecta a sus orígenes mediante uno de estos tipos de Data source:
 
-- **legacy (provider) data sources** hold a connection string for an OLE DB, ODBC or managed provider. Legacy partitions run a native query against them, usually SQL. They work at every compatibility level. See [Provider data source](#provider-data-source).
-- **structured (Power Query) data sources** describe a connection in Power Query terms, such as a protocol and a server, and M partitions refer to them by name. They exist in Analysis Services models at compatibility level 1400 and higher. See [Structured data source](#structured-data-source).
-- **implicit data sources** are what Power BI and Fabric models use. They have no data source object: the M expression of a partition or a shared expression names the source, and Power BI manages the credentials.
+- **Los Data sources heredados (de proveedor)** contienen una cadena de conexión para un proveedor OLE DB, ODBC o administrado. Las particiones heredadas ejecutan una consulta nativa sobre ellos, normalmente SQL. Funcionan en cualquier nivel de compatibilidad. Consulta [origen de datos del proveedor](#provider-data-source).
+- **Los Data sources estructurados (Power Query)** describen una conexión en términos de Power Query, como un protocolo y un servidor, y las particiones M hacen referencia a ellos por nombre. Existen en los modelos de Analysis Services con nivel de compatibilidad 1400 y superior. Consulta [origen de datos estructurado](#structured-data-source).
+- **Los Data sources implícitos** son los que usan los modelos de Power BI y Fabric. No tienen ningún objeto de Data source: la expresión M de una partición o una expresión compartida nombra el Data source, y Power BI administra las credenciales.
 
-See @connectivity and @import-tables for how to create each kind. The @script-show-data-source-dependencies script lists the tables that use a legacy or structured data source. The Best Practice Analyzer (BPA) rule @kb.bpa-remove-unused-data-sources flags data sources that no partition or expression refers to.
+Consulta @connectivity y @import-tables para ver cómo crear cada tipo. El script @script-show-data-source-dependencies enumera las tablas que usan un Data source heredado o un origen de datos estructurado. La regla de Best Practice Analyzer (BPA) @kb.bpa-remove-unused-data-sources marca los Data sources a los que no hace referencia ninguna partición ni expresión.
 
-When you rename a legacy or structured data source, Tabular Editor 3 updates the references to it in the M expressions of shared expressions and M partitions, and in the polling and source expressions of incremental refresh policies. You can't delete a data source while partitions still use it.
+Al cambiar el nombre de un Data source heredado o de un origen de datos estructurado, Tabular Editor 3 actualiza las referencias a este en las expresiones M de las expresiones compartidas y de las particiones M, así como en las expresiones de sondeo y de origen de las políticas de actualización incremental. No puedes eliminar un Data source mientras las particiones sigan usándolo.
 
-## Credentials and saving
+## Credenciales y guardado
 
-Data sources can hold secrets, such as a password in a connection string, the password of an impersonated account or an account key.
+Los Data sources pueden contener secretos, como una contraseña en una cadena de conexión, la contraseña de una cuenta suplantada o una clave de cuenta.
 
-In the **Properties** view of Tabular Editor 2 and 3, `Password` properties show as dots, and in a connection string the value of a `Password`, `Pwd`, `Secret` or `Key` keyword shows as `********`. In Tabular Editor 3, if you edit a connection string and leave the `********` in place, the stored password stays in the model.
+En la vista **Properties** de Tabular Editor 2 y 3, las propiedades `Password` se muestran como puntos; y, en una cadena de conexión, el valor asociado a las palabras clave `Password`, `Pwd`, `Secret` o `Key` se muestra como `********`. En Tabular Editor 3, si editas una cadena de conexión y dejas `********` tal cual, la contraseña almacenada permanece en el modelo.
 
-When you save the model to a `.bim` file or a folder in the JSON format, Tabular Editor 2 and 3 remove the `password`, `pwd`, `key` and `secret` properties of every data source. They also remove the password keyword (`Password`, `Pwd`, `Secret` or `Key`) from connection strings, both the `ConnectionString` of a provider data source and the one in the address of a structured data source. This keeps secrets out of source control.
+Cuando guardas el modelo en un archivo `.bim` o en una carpeta en formato JSON, Tabular Editor 2 y 3 eliminan las propiedades `password`, `pwd`, `key` y `secret` de cada Data source. También eliminan la palabra clave de contraseña (`Password`, `Pwd`, `Secret` o `Key`) de las cadenas de conexión, tanto la `ConnectionString` de un origen de datos del proveedor como la que aparece en la dirección de un origen de datos estructurado. Así, los secretos quedan fuera del control de versiones.
 
-When you save to Tabular Model Definition Language (TMDL), Tabular Editor 2 and 3 set the Tabular Object Model (TOM) serializer to leave out restricted information, such as passwords. The TMDL serializer writes every password as `********`, including a password inside a connection string, for example `connectionString: data source=srv;user id=u;password=********`.
+Al guardar en Tabular Model Definition Language (TMDL), Tabular Editor 2 y 3 configuran el serializador de Tabular Object Model (TOM) para omitir información restringida, como las contraseñas. El serializador de TMDL escribe todas las contraseñas como `********`, incluida una contraseña dentro de una cadena de conexión; por ejemplo, `connectionString: Data source=srv;user id=u;password=********`.
 
-To include secrets in the saved files, enable **Include sensitive** in one of these places:
+Para incluir secretos en los archivos guardados, habilita **Incluir datos confidenciales** en uno de estos lugares:
 
-- in Tabular Editor 3, under **Tools > Preferences > File Formats** (see @preferences), or in **Model > Serialization options...** for the current model, which takes precedence over the preferences
-- in Tabular Editor 2, under **File > Preferences...** on the **Serialization** tab, under **General Serialization Settings**, or for the model you have open on the **Current Model** tab, under **Current Model Serialization Settings**
+- en Tabular Editor 3, en **Herramientas > Preferencias > Formatos de archivo** (consulta @preferences), o en **Modelo > Opciones de serialización...** para el modelo actual, lo cual tiene prioridad sobre las preferencias
+- en Tabular Editor 2, en **Archivo > Preferencias...**, en la pestaña **Serialización**, en **Configuración general de serialización**, o, para el modelo abierto, en la pestaña **Modelo actual**, en **Configuración de serialización del modelo actual**
 
-Including sensitive data isn't recommended.
+No se recomienda incluir datos confidenciales.
 
-When you deploy with the deployment wizard of Tabular Editor 3, a prompt appears for each missing secret of the data sources you deploy, for example after you load the model from a file saved without sensitive data. A secret is missing when it's empty or `********`. The wizard covers these secrets:
+Cuando implementas con el Asistente de implementación de Tabular Editor 3, aparece una solicitud para cada secreto que falte en los Data sources que implementas, por ejemplo, después de cargar el modelo desde un archivo guardado sin datos confidenciales. Se considera que falta un secreto cuando está vacío o es `********`. El asistente contempla estos secretos:
 
-- the password keyword in the `ConnectionString` of a provider data source
-- the password of a provider data source with `ImpersonationMode` `ImpersonateAccount`
-- the secret of a structured data source with `AuthenticationKind` `Windows`, `UsernamePassword` or `Key` (an account key)
+- la palabra clave de contraseña en la `ConnectionString` de un origen de datos del proveedor
+- la contraseña de un origen de datos del proveedor con `ImpersonationMode` `ImpersonateAccount`
+- el secreto de un origen de datos estructurado con `AuthenticationKind` `Windows`, `UsernamePassword` o `Key` (una clave de cuenta)
 
-Enter the credentials the server uses for refresh. Tabular Editor 3 stores them, encrypted, as a data source override in the @user-options file and uses them on later deployments without a prompt. A connection string password only gets a prompt when the password keyword is in the connection string. Saving without sensitive data removes the whole keyword, so after such a save no prompt appears for it.
+Introduce las credenciales que usa el servidor para la actualización. Tabular Editor 3 las almacena cifradas como una anulación del Data source en el archivo @user-options y las usa en implementaciones posteriores sin mostrar ningún aviso. Solo aparece un aviso para la contraseña de una cadena de conexión cuando la palabra clave de contraseña está en la cadena de conexión. Al guardar sin datos confidenciales se elimina toda la palabra clave, así que tras un guardado de este tipo no aparece ningún aviso para ella.
 
-If you clear [Deploy Data Sources](xref:deployment#deployment-options) in the deployment wizard, Tabular Editor 3 deploys the target's own data sources again, for example to keep a separate source per environment. The same check runs on them: when the server doesn't return a password or key that one of them needs, a prompt appears. These answers aren't stored in the user options file, so the prompt appears again on the next deployment.
+Si desactivas [Implementar orígenes de datos](xref:deployment#deployment-options) en el Asistente de implementación, Tabular Editor 3 vuelve a implementar los propios Data sources del destino, por ejemplo, para mantener un Data source independiente por entorno. Se ejecuta la misma comprobación sobre ellos: cuando el servidor no devuelve una contraseña o una clave que uno de ellos necesita, aparece un aviso. Estas respuestas no se almacenan en el archivo de opciones de usuario, así que el aviso vuelve a aparecer en la siguiente implementación.
 
-The credentials Tabular Editor uses to browse a source and read its schema, for example in the **Import Tables** wizard, are stored per user in the @user-options file and aren't part of the model. At refresh time, the server uses the credentials of the data source.
+Las credenciales que Tabular Editor usa para explorar un origen y leer su esquema, por ejemplo en el asistente **Importar tablas**, se almacenan por cada usuario en el archivo @user-options y no forman parte del modelo. Durante la actualización, el servidor usa las credenciales del Data source.
 
-Power BI and Fabric models never contain credentials. Set them on the semantic model in the Power BI service, or on a Fabric connection (see [Data binding hint](#data-binding-hint)).
+Los modelos de Power BI y Fabric nunca contienen credenciales. Configúralas en el modelo semántico en el servicio de Power BI o en una conexión de Fabric (consulta [Sugerencia sobre el enlace de datos](#data-binding-hint)).
 
-## Provider data source
+## Origen de datos del proveedor
 
-A provider (legacy) data source connects to a source through an OLE DB, ODBC or managed .NET provider, using a connection string. Legacy partitions run a native query against it, for example a SQL `SELECT` statement. It's the only kind of data source below compatibility level 1400.
+Un Data source del proveedor (heredado) se conecta a un origen mediante un proveedor OLE DB, ODBC o .NET administrado, usando una cadena de conexión. Las particiones heredadas ejecutan una consulta nativa contra él, por ejemplo, una instrucción SQL `SELECT`. Es el único tipo de Data source por debajo del nivel de compatibilidad 1400.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
-Some provider data sources wrap a Power BI mashup: the `Provider=` keyword in the connection string names a Power BI or Mashup provider, and the `Mashup` or `Extended Properties` keyword holds the Power Query definition as a base64-encoded zip archive. Some older Power BI Desktop models describe their sources this way. For these data sources, `Name` shows the `Location` from the connection string, the stored name is in [Source ID](#source-id), and the **Properties** view shows the **Power BI Source Details** category with the decoded M query. For other provider data sources, the **Properties** view hides this category.
+Algunos orígenes de datos del proveedor encapsulan un mashup de Power BI: la palabra clave `Provider=` en la cadena de conexión nombra un proveedor de Power BI o Mashup, y la palabra clave `Mashup` o `Extended Properties` contiene la definición de Power Query como un archivo ZIP codificado en base64. Algunos modelos antiguos de Power BI Desktop describen sus orígenes de esta manera. Para estos Data sources, `Name` muestra el valor de `Location` de la cadena de conexión, el nombre guardado se encuentra en [ID de origen](#source-id) y la vista **Propiedades** muestra la categoría **Detalles del origen de Power BI** con la consulta M decodificada. Para otros orígenes de datos del proveedor, la vista **Propiedades** oculta esta categoría.
 
 <!-- TODO (not verifiable from TE3 source): which versions of Power BI Desktop, or which scenarios, produce provider data sources with an embedded mashup. -->
 
 ### Account
 
-`Account` · string · Connection Details
+`Account` · string · Detalles de conexión
 
-The Windows account the server uses to connect to the source when `ImpersonationMode` is `ImpersonateAccount`, for example `CONTOSO\svc-ssas-reader`. Enter its password in `Password`. For the other impersonation modes, leave it empty.
+La cuenta de Windows que el servidor usa para conectarse al origen cuando `ImpersonationMode` es `ImpersonateAccount`, por ejemplo `CONTOSO\svc-ssas-reader`. Introduce su contraseña en `Password`. Para los demás modos de suplantación, déjalo vacío.
 
-### Connection String
+### Cadena de conexión
 
-`ConnectionString` · string · Connection Details
+`ConnectionString` · string · Detalles de conexión
 
-The connection string the server uses to open the connection. The keywords depend on the provider, for example:
+La cadena de conexión que el servidor usa para abrir la conexión. Las palabras clave dependen del proveedor, por ejemplo:
 
 ```text
 Provider=MSOLEDBSQL;Data Source=myserver;Initial Catalog=AdventureWorks;Integrated Security=SSPI
 ```
 
-Click the ellipsis button to edit the connection string in a dialog. Tabular Editor 3 opens its SQL Server connection dialog when `Provider` is `System.Data.SqlClient` or `Microsoft.Data.SqlClient`, and the OLE DB Data Link dialog otherwise. A password in the connection string is masked in the **Properties** view and removed when you save to file (see [Credentials and saving](#credentials-and-saving)).
+Haz clic en el botón de puntos suspensivos para editar la cadena de conexión en un cuadro de diálogo. Tabular Editor 3 abre su cuadro de diálogo de conexión de SQL Server cuando `Provider` es `System.Data.SqlClient` o `Microsoft.Data.SqlClient`; en caso contrario, abre el cuadro de diálogo de Vínculo de datos OLE DB. La contraseña de una cadena de conexión se enmascara en la vista **Propiedades** y se elimina al guardar en un archivo (consulta [Credenciales y guardado](#credentials-and-saving)).
 
-When you import tables or update the table schema, Tabular Editor can connect with its own local connection details (see @import-tables).
+Al importar tablas o actualizar el esquema de la tabla, Tabular Editor puede conectarse usando sus propios datos de conexión locales (consulta @import-tables).
 
-To point the model to a different server per environment, change the connection string with a C# script or the command line before you deploy, or clear **Deploy Data Sources** in the deployment wizard to keep the target's data sources (see @deployment). In Tabular Editor 3, a data source override in the @user-options file gives your workspace database its own connection details.
+Para que el modelo apunte a un servidor distinto según el entorno, cambia la cadena de conexión con un C# Script o desde la línea de comandos antes de implementar, o desmarca **Implementar Data Sources** en el Asistente de implementación para conservar los Data sources del destino (consulta @deployment). En Tabular Editor 3, una anulación de Data source en el archivo @user-options hace que la base de datos de tu Workspace tenga sus propios datos de conexión.
 
-The BPA rule @kb.bpa-specify-application-name flags SQL Server connection strings without an `Application Name`. With an application name, database administrators can tell which queries come from the model.
+La regla BPA @kb.bpa-specify-application-name marca las cadenas de conexión de SQL Server que no incluyen `Application Name`. Con un nombre de aplicación, los administradores de bases de datos pueden identificar qué consultas provienen del modelo.
 
-### Impersonation Mode
+### Modo de suplantación
 
-`ImpersonationMode` · ImpersonationMode · Connection Details
+`ImpersonationMode` · ImpersonationMode · Detalles de conexión
 
-The Windows identity the server uses to connect to the source during refresh, for providers that use Windows authentication. With SQL authentication, the server uses the user name and password in the connection string.
+La identidad de Windows que usa el servidor para conectarse al origen durante la actualización, en los proveedores que usan autenticación de Windows. Con autenticación SQL, el servidor usa el nombre de usuario y la contraseña de la cadena de conexión.
 
-| Valor                          | Significado                                                                                                                                                                                                                                            |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ImpersonateServiceAccount`    | The account the Analysis Services service runs as. That account needs read access to every source.                                                                                                                     |
-| `ImpersonateAccount`           | A specific Windows account, set in `Account` and `Password`.                                                                                                                                                                           |
-| `ImpersonateCurrentUser`       | The identity of the user who sends the query. Applies to DirectQuery only. Azure Analysis Services doesn't support it for on-premises sources.                                                         |
-| `ImpersonateAnonymous`         | An anonymous connection without a Windows identity. The Microsoft TOM reference lists this mode as not supported.                                                                                                      |
-| `ImpersonateUnattendedAccount` | An unattended account that's preconfigured on the server.                                                                                                                                                                              |
-| `Default`                      | No explicit mode. The server uses the impersonation setting it inherits from the database. When Tabular Editor loads a provider data source with `Default`, it sets it to `ImpersonateServiceAccount`. |
+| Valor                          | Significado                                                                                                                                                                                                                                                                   |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ImpersonateServiceAccount`    | La cuenta bajo la que se ejecuta el servicio de Analysis Services. Esa cuenta necesita acceso de lectura a todos los orígenes.                                                                                                                |
+| `ImpersonateAccount`           | Una cuenta de Windows específica, definida en `Account` y `Password`.                                                                                                                                                                                         |
+| `ImpersonateCurrentUser`       | La identidad del usuario que envía la consulta. Solo se aplica a DirectQuery. Azure Analysis Services no lo admite para orígenes locales.                                                                                     |
+| `ImpersonateAnonymous`         | Una conexión anónima sin una identidad de Windows. La referencia de Microsoft TOM enumera este modo como no compatible.                                                                                                                       |
+| `ImpersonateUnattendedAccount` | Una cuenta desatendida preconfigurada en el servidor.                                                                                                                                                                                                         |
+| `Predeterminado`               | Sin modo explícito. El servidor usa la configuración de suplantación que hereda de la base de datos. Cuando Tabular Editor carga un origen de datos del proveedor con `Default`, lo establece en `ImpersonateServiceAccount`. |
 
-In Azure Analysis Services, most sources use SQL or Microsoft Entra authentication in the connection string. See [Impersonation in Analysis Services tabular models](https://learn.microsoft.com/analysis-services/tabular-models/impersonation-ssas-tabular) for the options each environment supports.
+En Azure Analysis Services, la mayoría de los orígenes utiliza autenticación SQL o de Microsoft Entra en la cadena de conexión. Consulta [Suplantación en modelos tabulares de Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/impersonation-ssas-tabular) para ver las opciones que admite cada entorno.
 
 ### Isolation
 
-`Isolation` · DatasourceIsolation · Connection Details
+`Isolation` · DatasourceIsolation · Detalles de la conexión
 
-The transaction isolation level of the queries the server runs against a relational source.
+El nivel de aislamiento de las transacciones de las consultas que el servidor ejecuta contra un origen relacional.
 
-| Valor           | Significado                                                                                                                                                                                                               |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ReadCommitted` | Reads only data from committed transactions. This is the default.                                                                                                                         |
-| `Snapshot`      | Reads a transactionally consistent snapshot of the data as it was when the query started, without being blocked by other transactions. The source database must allow snapshot isolation. |
+| Valor           | Significado                                                                                                                                                                                                                                                                              |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ReadCommitted` | Lee solo datos de transacciones confirmadas. Es la opción predeterminada.                                                                                                                                                                                |
+| `Snapshot`      | Lee una instantánea coherente desde el punto de vista transaccional de los datos tal y como estaban cuando se inició la consulta, sin quedar bloqueada por otras transacciones. La base de datos de origen debe permitir el aislamiento de instantáneas. |
 
-With `Snapshot`, each partition sees a consistent state of the data while an ETL process writes to the same database.
+Con `Snapshot`, cada partición ve un estado coherente de los datos mientras un proceso ETL escribe en la misma base de datos.
 
 ### Password
 
-`Password` · string · Connection Details
+`Password` · string · Detalles de la conexión
 
-The password of the Windows account in `Account`, used when `ImpersonationMode` is `ImpersonateAccount`. It's masked in the **Properties** view, and Tabular Editor 3 leaves it out when you save to file unless you include sensitive data (see [Credentials and saving](#credentials-and-saving)). If it's missing when you deploy with the deployment wizard of Tabular Editor 3, a prompt appears for it.
+La contraseña de la cuenta de Windows indicada en `Account`, que se usa cuando `ImpersonationMode` es `ImpersonateAccount`. Está enmascarada en la vista **Properties**, y Tabular Editor 3 no la incluye al guardar en un archivo, a menos que incluyas datos confidenciales (consulta [Credenciales y guardado](#credentials-and-saving)). Si falta al implementar con el Asistente de implementación de Tabular Editor 3, se te pedirá que la introduzcas.
 
 ### Proveedor
 
-`Provider` · string · Connection Details
+`Provider` · string · Detalles de la conexión
 
-The name of the managed .NET data provider, for example `System.Data.SqlClient`. For OLE DB providers, leave it empty and name the provider with the `Provider=` keyword in the connection string.
+El nombre del proveedor de datos administrado de .NET, por ejemplo `System.Data.SqlClient`. Para proveedores OLE DB, déjalo en blanco e indica el proveedor con la palabra clave `Provider=` en la cadena de conexión.
 
-When you import tables from SQL Server or a Fabric SQL endpoint into a legacy data source, Tabular Editor 3 sets `Provider` to `System.Data.SqlClient`. For ODBC and Oracle, it leaves `Provider` empty and starts the connection string with `Provider=MSDASQL` or `Provider=OraOLEDB.Oracle`.
+Cuando importas tablas desde SQL Server o un punto de conexión SQL de Fabric a un Data source heredado, Tabular Editor 3 establece `Provider` en `System.Data.SqlClient`. Para ODBC y Oracle, deja vacío `Provider` e inicia la cadena de conexión con `Provider=MSDASQL` o `Provider=OraOLEDB.Oracle`.
 
 <!-- TODO (not verifiable from TE3 source): list which managed provider names Analysis Services accepts in Provider, besides System.Data.SqlClient. -->
 
-Analysis Services supports fewer OLE DB providers than Windows does. A provider that connects in Tabular Editor 3 fails at refresh on the server if the server doesn't support it (see @connect-oledb).
+Analysis Services admite menos proveedores OLE DB que Windows. Un proveedor que se conecta en Tabular Editor 3 falla durante la actualización en el servidor si el servidor no lo admite (consulta @connect-oledb).
 
 ### Timeout
 
-`Timeout` · int · Connection Details
+`Timeout` · int · Detalles de la conexión
 
-The time in seconds that the server waits for a command against the source to complete. A new data source has a `Timeout` of `0`. Increase it for slow sources or large partitions whose queries take long to return their first rows.
+El tiempo, en segundos, que el servidor espera a que se complete un comando contra el origen. Un Data source nuevo tiene un `Timeout` de `0`. Auméntalo para orígenes lentos o particiones grandes cuyas consultas tardan en devolver sus primeras filas.
 
 <!-- TODO (not verifiable from TE3 source): whether a Timeout of 0 means no timeout or the server's default timeout. SSAS 2025 accepts any value on save without validation, so this needs a slow source to observe. -->
 
-### Max Connections
+### Conexiones máximas
 
-`MaxConnections` · int · Options
+`MaxConnections` · int · Opciones
 
-The maximum number of connections the server opens to this source at the same time. During a refresh, the server processes partitions in parallel, one connection each. A new data source has a `MaxConnections` of `10`. Lower the value to protect a source that can't handle many concurrent queries, or raise it to refresh more partitions in parallel.
+El número máximo de conexiones que el servidor abre a este origen al mismo tiempo. Durante una actualización, el servidor procesa las particiones en paralelo, una conexión por cada una. Un Data source nuevo tiene un `MaxConnections` de `10`. Reduce el valor para proteger un origen que no puede manejar muchas consultas simultáneas, o auméntalo para actualizar más particiones en paralelo.
 
-Set it to `-1` to use the model's [Data Source Default Max Connections](xref:object-properties-model#data-source-default-max-connections) (compatibility level 1510 and higher).
+Establécelo en `-1` para usar las [conexiones máximas predeterminadas del Data source](xref:object-properties-model#data-source-default-max-connections) del modelo (nivel de compatibilidad 1510 y superior).
 
 <!-- TODO (not verifiable from TE3 source): what the engine does with Max Connections 0 during refresh. SSAS 2025 accepts 0 and negative values on save without validation. -->
 
 ### Tipo
 
-`Type` · DataSourceType · Options · read-only
+`Type` · DataSourceType · Opciones · solo lectura
 
-The kind of data source: `Provider` for a provider data source, or `Structured` for a [structured data source](#structured-data-source). It's set when the data source is created.
+El tipo de Data source: `Provider` para un origen de datos del proveedor, o `Structured` para un [origen de datos estructurado](#structured-data-source). Se establece cuando se crea el Data source.
 
-### M Query
+### Consulta M
 
-`MQuery` · string · Power BI Source Details · read-only · _computed_
+`MQuery` · string · Detalles del origen de Power BI · solo lectura · _calculado_
 
-The Power Query (M) expression embedded in the connection string, read from the `.m` file inside the archive. To change the query, change it in Power BI Desktop.
+La expresión de Power Query (M) integrada en la cadena de conexión, leída del archivo `.m` dentro del archivo comprimido. Para cambiar la consulta, cámbiala en Power BI Desktop.
 
-### Source ID
+### ID de origen
 
-`SourceID` · string · Power BI Source Details · read-only · _shortcut to_ the data source's name in TOM
+`SourceID` · string · Detalles del origen de Power BI · solo lectura · _acceso directo al_ nombre del Data source en TOM
 
-The data source's name as it's stored in the model, typically a generated ID.
+El nombre del Data source tal como se almacena en el modelo, normalmente un identificador generado.
 
-## Structured data source
+## Origen de datos estructurado
 
-A structured data source describes a connection in Power Query terms, with a protocol (such as SQL Server or Azure Blob Storage), an address (such as a server and database) and a credential. M partitions and shared expressions refer to it by name, for example:
+Un origen de datos estructurado describe una conexión en términos de Power Query, con un protocolo (como SQL Server o Azure Blob Storage), una dirección (como un servidor y una base de datos) y una credencial. Las particiones de M y las expresiones compartidas hacen referencia a él por su nombre, por ejemplo:
 
 ```m
 let
@@ -204,355 +204,355 @@ in
     Sales
 ```
 
-Structured data sources exist in Analysis Services models at compatibility level 1400 and higher. Power BI and Fabric models use implicit data sources.
+Los orígenes de datos estructurados existen en los modelos de Analysis Services con nivel de compatibilidad 1400 o superior. Los modelos de Power BI y Fabric usan Data sources implícitos.
 
-Most of the properties below are shortcuts to a value in the data source's connection details or credential, which TOM stores as JSON. Only the ones that apply to the `Protocol` are used, for example `Server` and `Database` for a SQL Server source and `Path` for a file source. The others stay empty.
+La mayoría de las propiedades siguientes son accesos directos a un valor de los detalles de conexión o de la credencial del Data source, que TOM almacena como JSON. Solo se usan las que se aplican a `Protocol`; por ejemplo, `Server` y `Database` para un origen de SQL Server y `Path` para un origen de archivo. Las demás quedan vacías.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Protocolo
 
-`Protocol` · string · Basic
+`Protocol` · string · Básico
 
-The kind of connection, for example `tds` for SQL Server and Azure SQL, `oracle` for Oracle, `odbc`, `ole-db`, `file` for a local or network file, `azure-blobs` for Azure Blob Storage or `odata` for an OData feed. The protocol sets which of the **Connection Details** and **Credential** properties are used.
+El tipo de conexión, por ejemplo `tds` para SQL Server y Azure SQL, `oracle` para Oracle, `odbc`, `ole-db`, `file` para un archivo local o de red, `azure-blobs` para Azure Blob Storage o `odata` para un feed OData. El protocolo determina cuáles de las propiedades de **Detalles de conexión** y **Credencial** se usan.
 
-The value is free text. The TOM `DataSourceProtocol` class lists the names TOM knows, such as `analysis-services`, `azure-tables`, `db2`, `folder`, `http`, `mysql`, `postgresql`, `sap-hana-sql`, `sharepoint-list` and `teradata` (see [DataSourceProtocol](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.datasourceprotocol) for the full list). When you import tables into a structured data source, Tabular Editor 3 sets it to `tds` for SQL Server and Fabric SQL endpoints, or to `odbc`, `ole-db` or `oracle`.
+El valor es texto libre. La clase `DataSourceProtocol` de TOM enumera los nombres que TOM conoce, como `analysis-services`, `azure-tables`, `db2`, `folder`, `http`, `mysql`, `postgresql`, `sap-hana-sql`, `sharepoint-list` y `teradata` (consulta [DataSourceProtocol](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.datasourceprotocol) para ver la lista completa). Cuando importas tablas a un origen de datos estructurado, Tabular Editor 3 lo establece en `tds` para SQL Server y los puntos de conexión SQL de Fabric, o en `odbc`, `ole-db` u `oracle`.
 
 ### Account
 
-`Account` · string · Connection Details
+`Account` · string · Detalles de conexión
 
-The storage account name, for protocols that connect to an Azure storage account, such as Azure Blob Storage or Azure Table Storage. Together with `Domain`, it forms the address of the account, for example the account `contosodata` and the domain `blob.core.windows.net`.
+El nombre de la cuenta de almacenamiento, para los protocolos que se conectan a una cuenta de almacenamiento de Azure, como Azure Blob Storage o Azure Table Storage. Junto con `Domain`, forma la dirección de la cuenta; por ejemplo, la cuenta `contosodata` y el dominio `blob.core.windows.net`.
 
 ### Dirección
 
-`Address` · Address · Connection Details · read-only
+`Address` · Dirección · Detalles de conexión · solo lectura
 
-All connection address values of the data source. Click the ellipsis button to edit them in a collection editor, including values without their own shortcut property. The properties below, such as `Server` and `Database`, are shortcuts to individual values in the address.
+Todos los valores de dirección de conexión del Data source. Haz clic en el botón de puntos suspensivos para editarlos en un editor de colecciones, incluidos los valores que no tienen su propia propiedad de acceso directo. Las propiedades siguientes, como `Server` y `Database`, son atajos para acceder a valores individuales dentro de la dirección.
 
 <!-- TODO (not verifiable from TE3 source or the TOM reference, which only names each ConnectionAddress property): which protocols use Model, ContentType, EmailAddress, Object, Property, Resource and View, with an example value for each. The examples below for Model (analysis-services), EmailAddress (Exchange) and Resource (web URL) are unconfirmed. -->
 
 ### Modelo
 
-`AddressModel` · string · Connection Details
+`AddressModel` · string · Detalles de la conexión
 
-The name of the model, for protocols that connect to a semantic model or cube, such as `analysis-services`.
+El nombre del modelo para protocolos que se conectan a un modelo semántico o a un cubo, como `analysis-services`.
 
-### Connection String
+### Cadena de conexión
 
-`ConnectionString` · string · Connection Details
+`ConnectionString` · string · Detalles de la conexión
 
-A connection string, for protocols that take one, such as `odbc` and `ole-db`. Por ejemplo:
+Una cadena de conexión para protocolos que la admiten, como `odbc` y `ole-db`. Por ejemplo:
 
 ```text
 Driver={Snowflake};Server=contoso.snowflakecomputing.com;Warehouse=COMPUTE_WH
 ```
 
-A password in the connection string is masked in the **Properties** view and removed when you save to file (see [Credentials and saving](#credentials-and-saving)).
+La contraseña incluida en la cadena de conexión se enmascara en la vista **Propiedades** y se elimina al guardar el archivo (consulta [Credenciales y guardado](#credentials-and-saving)).
 
-### ContentType
+### Tipo de contenido
 
-`ContentType` · string · Connection Details
+`ContentType` · string · Detalles de la conexión
 
-The content type of the source, for protocols that need to know the format of what they read.
+El tipo de contenido del origen, para protocolos que necesitan conocer el formato de lo que leen.
 
 ### Base de datos
 
-`Database` · string · Connection Details
+`Database` · string · Detalles de la conexión
 
-The name of the database on the server, for example `AdventureWorks` for the `tds` protocol.
+El nombre de la base de datos en el servidor; por ejemplo, `AdventureWorks` para el protocolo `tds`.
 
-### Domain
+### Dominio
 
-`Domain` · string · Connection Details
+`Domain` · string · Detalles de la conexión
 
-The domain part of the address, for example `blob.core.windows.net` for Azure Blob Storage. It's used together with `Account`.
+La parte del dominio de la dirección; por ejemplo, `blob.core.windows.net` para Azure Blob Storage. Se usa junto con `Account`.
 
-### EmailAddress
+### Dirección de correo electrónico
 
-`EmailAddress` · string · Connection Details
+`EmailAddress` · string · Detalles de la conexión
 
-An email address, for protocols that identify the connection by the user's email address, such as Exchange.
+Una dirección de correo electrónico, para protocolos que identifican la conexión por el correo electrónico del usuario, como Exchange.
 
 ### Objeto
 
-`Object` · string · Connection Details
+`Object` · string · Detalles de la conexión
 
-The name of an object in the source, for protocols that address a single object.
+El nombre de un objeto en el origen, para protocolos que hacen referencia a un único objeto.
 
 ### Ruta
 
-`Path` · string · Connection Details
+`Path` · string · Detalles de la conexión
 
-The path of a file or folder, for protocols such as `file` and `folder`, for example `\\fileserver\data\sales.csv`. The server that refreshes the model must be able to reach the path.
+La ruta de un archivo o carpeta, para protocolos como `file` y `folder`; por ejemplo, `\\fileserver\data\sales.csv`. El servidor que actualiza el modelo debe poder acceder a la ruta.
 
 ### Propiedad
 
-`Property` · string · Connection Details
+`Property` · string · Detalles de la conexión
 
-A protocol-specific address value.
+Un valor de dirección específico del protocolo.
 
 ### Query
 
-`Query` · string · Connection Details
+`Query` · cadena · Detalles de la conexión
 
-A native query, typically SQL, that the connection sends to the source, for example `SELECT * FROM dbo.Customer`. Most models leave it empty and filter in the M expressions of the partitions.
+Una consulta nativa, normalmente SQL, que la conexión envía al origen, por ejemplo `SELECT * FROM dbo.Customer`. La mayoría de los modelos lo dejan vacío y aplican el filtro en las expresiones M de las particiones.
 
 ### Recurso
 
-`Resource` · string · Connection Details
+`Resource` · cadena · Detalles de la conexión
 
-A protocol-specific resource identifier, such as the URL of a web resource.
+Un identificador de recurso específico del protocolo, como la URL de un recurso web.
 
-### Schema
+### Esquema
 
-`Schema` · string · Connection Details
+`Schema` · cadena · Detalles de la conexión
 
-The schema in the database, for protocols that address a schema.
+El esquema de la base de datos, para los protocolos que hacen referencia a un esquema.
 
 ### Servidor
 
-`Server` · string · Connection Details
+`Server` · cadena · Detalles de la conexión
 
-The server to connect to, for example `myserver.database.windows.net` for the `tds` protocol. It's the value you usually change when you deploy the same model to a different environment.
+El servidor al que se conecta, por ejemplo `myserver.database.windows.net` para el protocolo `tds`. Es el valor que normalmente cambias al implementar el mismo modelo en otro entorno.
 
 ### Url
 
-`Url` · string · Connection Details
+`Url` · cadena · Detalles de la conexión
 
-The URL of the source, for protocols such as `odata` and `http`, for example `https://services.odata.org/V4/Northwind/Northwind.svc`.
+La URL del origen, para protocolos como `odata` y `http`, por ejemplo `https://services.odata.org/V4/Northwind/Northwind.svc`.
 
 ### Vista
 
-`View` · string · Connection Details
+`View` · cadena · Detalles de la conexión
 
-The name of a view in the source, for protocols that address one.
+El nombre de una vista en el origen, para los protocolos que permiten especificar una.
 
 ### AuthenticationKind
 
-`AuthenticationKind` · string · Credential
+`AuthenticationKind` · cadena · Credencial
 
-How the server authenticates to the source. Pick a value from the dropdown or type one:
+Cómo se autentica el servidor con el origen. Elige un valor de la lista desplegable o escribe uno:
 
-| Valor              | Significado                                                                                                                                                                                                     |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Windows`          | A Windows account, set in `Username` and `Password`.                                                                                                                                            |
-| `UsernamePassword` | A user name and password that the source knows, such as a SQL Server login. The **Import Tables** wizard of Tabular Editor 3 uses this kind when you choose a specific account. |
-| `Key`              | An account key, for example for Azure Blob Storage, stored as the `Key` value in `Credential`.                                                                                                  |
-| `OAuth2`           | An OAuth 2.0 token, for example for Microsoft Entra ID sources.                                                                                                                 |
-| `ServiceAccount`   | The account the Analysis Services service runs as.                                                                                                                                              |
-| `CurrentUser`      | The identity of the user who runs the query.                                                                                                                                                    |
-| `Unattended`       | An unattended account that's preconfigured on the server. The **Import Tables** wizard uses this kind when you choose the unattended account.                                   |
-| `Implicit`         | No explicit credential. The **Import Tables** wizard uses this kind when you choose anonymous access.                                                                           |
+| Valor              | Significado                                                                                                                                                                                                                                   |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Windows`          | Una cuenta de Windows, configurada en `Username` y `Password`.                                                                                                                                                                |
+| `UsernamePassword` | Un nombre de usuario y una contraseña que el origen reconoce, como un inicio de sesión en SQL Server. El asistente **Importar tablas** de Tabular Editor 3 usa este tipo cuando eliges una cuenta específica. |
+| `Clave`            | Una clave de cuenta, por ejemplo, para Azure Blob Storage, almacenada como el valor `Key` en `Credential`.                                                                                                                    |
+| `OAuth2`           | Un token de OAuth 2.0, por ejemplo, para fuentes de Microsoft Entra ID.                                                                                                                                       |
+| `ServiceAccount`   | La cuenta con la que se ejecuta el servicio de Analysis Services.                                                                                                                                                             |
+| `CurrentUser`      | La identidad del usuario que ejecuta la consulta.                                                                                                                                                                             |
+| `Unattended`       | Una cuenta desatendida preconfigurada en el servidor. El asistente **Importar tablas** usa este tipo cuando se elige la cuenta desatendida.                                                                   |
+| `Implicit`         | Sin credencial explícita. El asistente **Importar tablas** usa este tipo cuando se elige el acceso anónimo.                                                                                                   |
 
-The valid kinds depend on the `Protocol`. TOM defines four more kinds: `Exchange`, `KerberosS4U`, `SapBasic` and `WebApi`.
+Los tipos válidos dependen de `Protocol`. TOM define cuatro tipos más: `Exchange`, `KerberosS4U`, `SapBasic` y `WebApi`.
 
-When `AuthenticationKind` is `Windows`, `UsernamePassword` or `Key` and the secret is missing, a prompt appears for it when you deploy with the deployment wizard of Tabular Editor 3 (see [Credentials and saving](#credentials-and-saving)).
+Cuando `AuthenticationKind` es `Windows`, `UsernamePassword` o `Key` y falta el secreto, se le pedirá que lo introduzca al implementar con el Asistente de implementación de Tabular Editor 3 (consulta [Credenciales y guardado](#credentials-and-saving)).
 
 <!-- TODO (not verifiable from TE3 source): confirm that CurrentUser on a structured data source, like ImpersonateCurrentUser on a provider data source, only applies to DirectQuery. -->
 
 ### Credential
 
-`Credential` · Credential · Credential · read-only
+`Credential` · Credential · Credential · de solo lectura
 
-All credential values of the data source. Click the ellipsis button to edit them in a collection editor, including values without their own shortcut property, such as `Key` for an account key. `AuthenticationKind`, `Username`, `Password`, `PrivacySetting` and `EncryptConnection` are shortcuts to individual values in the credential.
+Todos los valores de la credencial del Data source. Haga clic en el botón de puntos suspensivos para editarlos en un editor de colecciones, incluidos los valores sin su propia propiedad de acceso directo, como `Key` para una clave de cuenta. `AuthenticationKind`, `Username`, `Password`, `PrivacySetting` y `EncryptConnection` son accesos directos a valores individuales de la credencial.
 
-Tabular Editor 3 removes secret values, such as a password or a key, when you save to file, unless you include sensitive data (see [Credentials and saving](#credentials-and-saving)).
+Tabular Editor 3 elimina los valores secretos, como una contraseña o una clave, al guardar en un archivo, a menos que se incluyan datos confidenciales (consulta [Credenciales y guardado](#credentials-and-saving)).
 
 ### EncryptConnection
 
 `EncryptConnection` · bool · Credential
 
-When `true`, the connection to the source must be encrypted, for example with TLS. Set it to `false` only for sources that don't support encryption, such as some on-premises servers without a certificate.
+Cuando es `true`, la conexión al origen debe estar cifrada, por ejemplo con TLS. Configúralo en `false` solo para orígenes que no admitan cifrado, como algunos servidores locales sin un certificado.
 
 ### Password
 
-`Password` · string · Credential
+`Password` · string · Credencial
 
-The password for `Username`, when `AuthenticationKind` is `Windows` or `UsernamePassword`. It's masked in the **Properties** view, and Tabular Editor 3 leaves it out when you save to file unless you include sensitive data. If the password is missing when you deploy with the deployment wizard, a prompt appears for it, together with `Username` and `PrivacySetting` (see [Credentials and saving](#credentials-and-saving)).
+La contraseña de `Username`, cuando `AuthenticationKind` es `Windows` o `UsernamePassword`. Se muestra enmascarada en la vista **Propiedades**, y Tabular Editor 3 la omite al guardar en un archivo, salvo que incluyas datos confidenciales. Si falta la contraseña al implementar con el Asistente de implementación, aparecerá un aviso para que la introduzcas, junto con `Username` y `PrivacySetting` (consulta [Credenciales y guardado](#credentials-and-saving)).
 
-Analysis Services doesn't return the password when you connect to a deployed model, so a model you open from a server has no password. For data sources you deploy from the model, Tabular Editor 3 stores what you enter in the @user-options file, so you enter it once per model.
+Analysis Services no devuelve la contraseña al conectarte a un modelo implementado, por lo que un modelo que abras desde un servidor no tiene contraseña. Para los Data sources que implementes desde el modelo, Tabular Editor 3 almacena lo que introduzcas en el archivo @user-options, así que solo tienes que introducirlo una vez por modelo.
 
 ### PrivacySetting
 
-`PrivacySetting` · string · Credential
+`PrivacySetting` · string · Credencial
 
-The Power Query privacy level of the source: `None`, `Public`, `Organizational` or `Private`. An empty value is the same as `None`. When Power Query combines sources, the privacy levels set whether data from one source can go to another, for example as a filter value in a query to a second source. Mismatched privacy levels can stop query folding or make a refresh fail with a firewall error.
+El nivel de privacidad de Power Query del origen: `None`, `Public`, `Organizational` o `Private`. Un valor vacío equivale a `None`. Cuando Power Query combina orígenes, los niveles de privacidad determinan si los datos de un origen pueden pasar a otro, por ejemplo, como valor de filtro en una consulta a un segundo origen. Los niveles de privacidad incompatibles pueden impedir el plegado de consultas o hacer que una actualización falle con un error del firewall.
 
-To ignore privacy levels for the whole model, set [Enable Fast Combine](xref:object-properties-model#enable-fast-combine) on the model.
+Para ignorar los niveles de privacidad en todo el modelo, establece [Habilitar combinación rápida](xref:object-properties-model#enable-fast-combine) en el modelo.
 
-In Tabular Editor 3, the **Ignore privacy settings** serialization option in @preferences removes every `PrivacySetting` value from the model when you save it to a `.bim` file or a folder in the JSON format. The model you have open keeps the values. Use this option if you deploy the saved model with an older version of `Microsoft.AnalysisServices.Deployment`, which doesn't support the property.
+En Tabular Editor 3, la opción **Ignorar configuración de privacidad** dentro de las opciones de serialización en @preferences elimina todos los valores de `PrivacySetting` del modelo al guardarlo en un archivo `.bim` o en una carpeta en formato JSON. El modelo que tienes abierto conserva los valores. Usa esta opción si implementas el modelo guardado con una versión anterior de `Microsoft.AnalysisServices.Deployment`, que no admite la propiedad.
 
 ### Username
 
-`Username` · string · Credential
+`Username` · string · Credencial
 
-The user name the server uses to connect, when `AuthenticationKind` is `Windows` or `UsernamePassword`, for example `CONTOSO\svc-reader` or a SQL Server login.
+El nombre de usuario que usa el servidor para conectarse, cuando `AuthenticationKind` es `Windows` o `UsernamePassword`, por ejemplo `CONTOSO\\svc-reader` o un inicio de sesión de SQL Server.
 
-### Context Expression
+### Expresión de contexto
 
-`ContextExpression` · string · Options
+`ContextExpression` · string · Opciones
 
-Additional information about the structure or metadata of the source, such as content type, content shape and format, as defined in the Analysis Services tabular protocol specification. The location itself is in the connection details. Most models leave it empty.
+Información adicional sobre la estructura o los metadatos del origen, como el tipo de contenido, la forma del contenido y el formato, según se definen en la especificación del protocolo tabular de Analysis Services. La propia ubicación está en los detalles de la conexión. La mayoría de los modelos lo dejan vacío.
 
-### Max Connections
+### Máximo de conexiones
 
 `MaxConnections` · int · Options
 
-The maximum number of connections the server opens to this source at the same time. See [Max Connections](#max-connections) on a provider data source.
+El número máximo de conexiones que el servidor abre a este origen al mismo tiempo. Consulta [Máximo de conexiones](#max-connections) en un origen de datos del proveedor.
 
 ### Opciones
 
-`Options` · Options · Options · read-only
+`Options` · Options · Options · solo lectura
 
-Protocol-specific connection options. Click the ellipsis button to edit them in a collection editor. Tabular Editor 3 reads each value as JSON when it can, so `true` is stored as a boolean and `{...}` as an object. The available options depend on the `Protocol`.
+Opciones de conexión específicas del protocolo. Haz clic en el botón de tres puntos para editarlas en un editor de colecciones. Tabular Editor 3 lee cada valor como JSON cuando puede, por lo que `true` se almacena como un valor booleano y `{...}` como un objeto. Las opciones disponibles dependen del `Protocol`.
 
-For example, the `hierarchicalNavigation` option sets whether the source is navigated as a hierarchy of database, schema and table. When you import tables from ODBC into a structured data source, Tabular Editor 3 sets it to `true`. If the option isn't set when Tabular Editor 3 generates the M expression for an imported table, Tabular Editor 3 uses `true` for the `ole-db` protocol and `false` for the others.
+Por ejemplo, la opción `hierarchicalNavigation` determina si el origen se recorre como una jerarquía de base de datos, esquema y tabla. Cuando importas tablas desde ODBC a un origen de datos estructurado, Tabular Editor 3 la establece en `true`. Si la opción no está establecida cuando Tabular Editor 3 genera la expresión M para una tabla importada, Tabular Editor 3 usa `true` para el protocolo `ole-db` y `false` para los demás.
 
 ### Tipo
 
-`Type` · DataSourceType · Options · read-only
+`Type` · DataSourceType · Options · solo lectura
 
-The kind of data source: `Structured` for this kind, or `Provider` for a [provider data source](#provider-data-source).
+El tipo de Data source: `Structured` para este tipo, o `Provider` para un [origen de datos del proveedor](#provider-data-source).
 
-## Shared expression
+## Expresión compartida
 
-A shared expression is a named Power Query (M) expression at the model level that partitions and other shared expressions refer to by name, for example a connection that several tables share, a helper function or a common transformation step. In Power BI Desktop, every query that isn't loaded into a table becomes a shared expression. Shared expressions need compatibility level 1400 or higher.
+Una expresión compartida es una expresión de Power Query (M) con nombre a nivel de modelo, a la que las particiones y otras expresiones compartidas hacen referencia por su nombre; por ejemplo, una conexión que comparten varias tablas, una función auxiliar o un paso de transformación común. En Power BI Desktop, toda consulta que no se carga en una tabla se convierte en una expresión compartida. Las expresiones compartidas requieren un nivel de compatibilidad 1400 o superior.
 
-An _M parameter_ is a shared expression with a `meta` record that marks it as a parameter, for example:
+Un _parámetro M_ es una expresión compartida con un registro `meta` que la marca como parámetro; por ejemplo:
 
 ```m
 "myserver.database.windows.net" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
 ```
 
-You can change a parameter's value in the Power BI service without editing the model, for example to switch the model between environments. In Tabular Editor 3, a refresh override profile gives a parameter a different value for a single refresh and leaves the model unchanged (see @refresh-overrides). Incremental refresh needs the parameters `RangeStart` and `RangeEnd`, and @incremental-refresh-setup shows how to create them. In a Direct Lake model, a shared expression holds the connection to the lakehouse or warehouse (see `ExpressionSource` on @object-properties-partitions).
+Puedes cambiar el valor de un parámetro en el servicio Power BI sin editar el modelo, por ejemplo, para cambiar el modelo de un entorno a otro. En Tabular Editor 3, un perfil de anulación de actualización asigna a un parámetro un valor distinto para una sola actualización y deja el modelo sin cambios (consulta @refresh-overrides). La actualización incremental necesita los parámetros `RangeStart` y `RangeEnd`, y @incremental-refresh-setup muestra cómo crearlos. En un modelo Direct Lake, una expresión compartida contiene la conexión al Lakehouse o al Warehouse (consulta `ExpressionSource` en @object-properties-partitions).
 
-See @how-to-work-with-expressions, @script-create-m-parameter and @script-create-and-replace-parameter.
+Consulta @how-to-work-with-expressions, @script-create-m-parameter y @script-create-and-replace-parameter.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
-- [Lineage Tag](xref:object-properties-common#lineage-tag)
-- [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Etiqueta de linaje](xref:object-properties-common#lineage-tag)
+- [Etiqueta de linaje de origen](xref:object-properties-common#source-lineage-tag)
 
 ### Expresión
 
-`Expression` · string · Options
+`Expression` · cadena · Opciones
 
-The M expression. Edit it in the **Expression Editor**. Other expressions refer to it by the shared expression's name, for example `Source = ServerName`, or `Source = #"Server Name"` for a name with spaces.
+La expresión M. Edítala en el **Editor de expresiones**. Otras expresiones hacen referencia a ella por el nombre de la expresión compartida; por ejemplo, `Source = ServerName` o `Source = #"Server Name"` si el nombre tiene espacios.
 
-When you rename a shared expression, Tabular Editor 3 doesn't update the M expressions that refer to it. Update them yourself, for example with find and replace.
+Cuando cambias el nombre de una expresión compartida, Tabular Editor 3 no actualiza las expresiones M que hacen referencia a ella. Actualízalas manualmente; por ejemplo, con Buscar y reemplazar.
 
 ### Origen de la expresión
 
-`ExpressionSource` · NamedExpression · Options · compatibility level 1570+
+`ExpressionSource` · NamedExpression · Opciones · nivel de compatibilidad 1570 o superior
 
-In a composite model that uses DirectQuery over another semantic model, the shared expression that holds the connection to that remote model. It's set together with `RemoteParameterName` on a shared expression that stands for a parameter of the remote model. When you delete the shared expression it points to, Tabular Editor clears `ExpressionSource`.
+En un modelo compuesto que usa DirectQuery sobre otro modelo semántico, la expresión compartida que contiene la conexión a ese modelo remoto. Se establece junto con `RemoteParameterName` en una expresión compartida que representa un parámetro del modelo remoto. Cuando eliminas la expresión compartida a la que apunta, Tabular Editor borra `ExpressionSource`.
 
 <!-- TODO (not verifiable from TE3 source; the TOM reference only says "A reference to the NamedExpression where the parameter associated with the remote model"): confirm the scenario for Expression Source and Remote Parameter Name on shared expressions, that is, proxy parameters for a remote model in a composite model. -->
 
 ### Tipo
 
-`Kind` · ExpressionKind · Options
+`Kind` · ExpressionKind · Opciones
 
-The language of the expression. The only value is `M`, for Power Query. Tabular Editor sets it when it creates the shared expression.
+El lenguaje de la expresión. El único valor es `M`, para Power Query. Tabular Editor lo establece cuando crea la expresión compartida.
 
-### M Attributes
+### Atributos M
 
-`MAttributes` · string · Options · compatibility level 1535+
+`MAttributes` · cadena · Opciones · nivel de compatibilidad 1535 o superior
 
-The `meta` record of an M parameter, stored separately from the expression, for example `[IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]`.
+El registro `meta` de un parámetro M, almacenado por separado de la expresión; por ejemplo, `[IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]`.
 
-Power BI Desktop leaves `MAttributes` empty. It keeps the parameter's metadata record at the end of `Expression`, for example `#datetime(2026, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]`.
+Power BI Desktop deja `MAttributes` vacío. Mantiene el registro de metadatos del parámetro al final de `Expression`, por ejemplo `#datetime(2026, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]`.
 
 <!-- TODO (not verifiable from TE3 source): what happens when both M Attributes and a meta record in Expression are set. -->
 
-### Parameter Values Column
+### Columna de valores del parámetro
 
-`ParameterValuesColumn` · Column · Options · compatibility level 1545+
+`ParameterValuesColumn` · Columna · Opciones · nivel de compatibilidad 1545+
 
-Binds an M parameter to a column, so a report filter on that column sets the parameter's value. Power BI calls this _dynamic M query parameters_: when a user selects a value in a slicer on the column, the value goes to the parameter and the DirectQuery source query uses it.
+Vincula un parámetro M a una columna para que, al aplicar un filtro en esa columna en el Report, se establezca el valor del parámetro. Power BI llama a esto _parámetros dinámicos de consulta M_: cuando un usuario selecciona un valor en una segmentación de datos sobre esa columna, el valor pasa al parámetro y la consulta del origen de DirectQuery lo usa.
 
-Setting this property allows DAX queries to override the parameter. The column's data type must match the `Type` in the parameter's `meta` record. The column is usually in a small, disconnected table that lists the allowed values.
+Al configurar esta propiedad, se permite que las consultas DAX sobrescriban el parámetro. El tipo de datos de la columna debe coincidir con el valor `Type` del registro `meta` del parámetro. La columna suele estar en una tabla pequeña y desconectada que enumera los valores permitidos.
 
-The value comes from the report user, so only bind parameters that your source queries handle safely.
+El valor lo proporciona el usuario del Report, así que vincula solo parámetros que las consultas del origen puedan manejar de forma segura.
 
 ### Query Group
 
-`QueryGroup` · QueryGroup · Options · compatibility level 1480+
+`QueryGroup` · QueryGroup · Opciones · nivel de compatibilidad 1480+
 
-The query group (folder) the shared expression appears in, in the Power Query editor of Power BI Desktop. Power BI Desktop, for example, puts parameters in a group named `Parameters`. See the query group section below.
+El Query Group (carpeta) en el que aparece la expresión compartida, en el editor de Power Query de Power BI Desktop. Por ejemplo, Power BI Desktop coloca los parámetros en un grupo llamado `Parameters`. Consulta la sección de Query Group más abajo.
 
-### Remote Parameter Name
+### Nombre del parámetro remoto
 
-`RemoteParameterName` · string · Options · compatibility level 1570+
+`RemoteParameterName` · cadena · Opciones · nivel de compatibilidad 1570+
 
-In a composite model that uses DirectQuery over another semantic model, the name of the parameter in the remote model that this shared expression stands for. TOM describes it as applicable only to a proxy model. It's empty for ordinary shared expressions.
+En un modelo compuesto que usa DirectQuery sobre otro modelo semántico, el nombre del parámetro en el modelo remoto al que corresponde esta expresión compartida. TOM lo describe como aplicable solo a un modelo proxy. Está vacío en las expresiones compartidas normales.
 
-## Query group
+## Query Group
 
-A query group is a folder for queries in the Power Query editor of Power BI Desktop. Shared expressions and M partitions can each belong to a query group. Query groups only organize the Power Query editor: refresh, DAX and the field list don't use them, and Analysis Services ignores them.
+Un Query Group es una carpeta de consultas en el editor de Power Query de Power BI Desktop. Las expresiones compartidas y las particiones M pueden pertenecer a un Query Group. Los Query Group solo organizan el editor de Power Query: la actualización, DAX y la lista de campos no los usan, y Analysis Services los ignora.
 
-Query groups need compatibility level 1480 or higher. When you delete a query group, Tabular Editor removes it from the shared expressions and partitions that used it.
+Los Query Group requieren un nivel de compatibilidad 1480 o superior. Cuando se elimina un Query Group, Tabular Editor lo quita de las expresiones compartidas y de las particiones que lo usaban.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Object Type](xref:object-properties-common#object-type)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Carpeta
 
-`Folder` · string · Options
+`Folder` · cadena · Opciones
 
-The path of the query group, for example `Parameters`, or `Staging\Sales` for a group inside another group. The name of a query group is the same as its folder, and changing one changes the other.
+La ruta del Query Group, por ejemplo `Parameters` o `Staging\\Sales`, para un grupo dentro de otro grupo. El nombre de un Query Group coincide con el de su carpeta; cambiar uno cambia el otro.
 
-Power BI Desktop separates nested query groups with a backslash and writes a query group for each level. For a group `Dates` inside a group `Staging`, the model contains the query groups `Staging` and `Staging\Dates`, and the queries in the inner group have `QueryGroup` `Staging\Dates`.
+Power BI Desktop separa los Query Groups anidados con una barra invertida y crea un Query Group para cada nivel. Para un grupo `Dates` dentro de un grupo `Staging`, el modelo contiene los Query Groups `Staging` y `Staging\\Dates`, y las consultas del grupo interno tienen `QueryGroup` `Staging\\Dates`.
 
-## Data binding hint
+## Sugerencia de vinculación de datos
 
-A data binding hint tells Fabric which data connection to use for a data source reference in the model. For example, when you deploy a model to a Fabric workspace, a binding hint binds the model's connection to a SQL server to a specific cloud connection or gateway connection in Fabric, and you don't bind it by hand in the semantic model's settings.
+Una sugerencia de vinculación de datos indica a Fabric qué conexión de datos debe usar para una referencia a un Data source en el modelo. Por ejemplo, cuando implementas un modelo en un Workspace de Fabric, una sugerencia de vinculación vincula la conexión del modelo a un servidor SQL con una conexión en la nube específica o una conexión de Gateway en Fabric, y no es necesario vincularla manualmente en la configuración del modelo semántico.
 
-Fabric ignores the hint when the data source is already bound, or when the data connection doesn't exist in Fabric.
+Fabric ignora la sugerencia cuando el Data source ya está vinculado o cuando la conexión de datos no existe en Fabric.
 
-Data binding hints need compatibility level 1608 or higher. Add and edit them in the [Binding Info Collection](xref:object-properties-model#binding-info-collection) property of the model.
+Las sugerencias de vinculación de datos requieren el nivel de compatibilidad 1608 o superior. Agréguelas y edítelas en la propiedad [Colección de información de vinculación](xref:object-properties-model#binding-info-collection) del modelo.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
 <!-- TODO (not verifiable from TE3 source or the TOM reference): how Fabric matches a data binding hint to a data source reference in the model (by Name?), and where users find the connection ID in Fabric (settings of the connection under Manage connections and gateways?). -->
 
-### Connection Id
+### Id. de conexión
 
-`ConnectionId` · string · Options
+`ConnectionId` · cadena · Opciones
 
-The ID of the Fabric data connection to bind to, usually a GUID. You find it in the settings of the connection under **Manage connections and gateways** in Fabric.
+El identificador de la conexión de datos de Fabric a la que se va a vincular, normalmente un GUID. Lo encontrarás en la configuración de la conexión, en **Manage connections and Gateways**, en Fabric.
 
 ### Tipo
 
-`Type` · BindingInfoType · Options · read-only
+`Type` · BindingInfoType · Opciones · de solo lectura
 
-The kind of binding information.
+El tipo de información de enlace.
 
-| Valor             | Significado                                                                                                                       |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `DataBindingHint` | A hint to bind a data source reference to a Fabric data connection. This is the only kind in use. |
-| `Unknown`         | The kind isn't set.                                                                                               |
+| Valor             | Significado                                                                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DataBindingHint` | Una sugerencia para vincular una referencia de Data source a una conexión de datos de Fabric. Este es el único tipo que se usa. |
+| `Unknown`         | No se ha establecido el tipo.                                                                                                                   |
 
-Tabular Editor sets the value, and you can't change it.
+Tabular Editor establece el valor y no puedes cambiarlo.
