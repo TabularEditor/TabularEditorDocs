@@ -2,7 +2,7 @@
 uid: conectividad
 title: Conectividad
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,27 +19,46 @@ applies_to:
 
 # Conectividad
 
-Tabular Editor 3 se conecta a dos tipos distintos de elementos, y cada uno se autentica de forma diferente.
+Tabular Editor 3 authenticates each of these connections separately:
 
-- **El modelo que estás editando**, en Analysis Services, Azure Analysis Services o en un Workspace de Power BI o de Fabric, accesible a través de XMLA. Consulta @xmla-as-connectivity.
-- **Los Data sources desde los que importa el modelo**, a los que accedes mediante el [Asistente para importar tablas](xref:import-tables). Eso es lo que cubren las páginas siguientes.
+- **The semantic model you edit**, on SQL Server Analysis Services, Azure Analysis Services or a Power BI or Fabric workspace, over XMLA. See @xmla-as-connectivity and @connect-ssas.
+- **The data sources the model imports from**, through the [Table Import Wizard](xref:import-tables). The pages in this section cover these connections.
 
-## Dónde se almacenan las credenciales
+## Fuentes de datos
 
-Las credenciales se almacenan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`), cifradas con la clave de tu cuenta de Windows. No forman parte de los metadatos del modelo y nunca llegan al control de código fuente. Consulta @supported-files.
+Each source has its own connection dialog:
 
-Esto tiene una consecuencia que conviene conocer desde el principio: un compañero que abra el mismo modelo deberá proporcionar sus propias credenciales, y también la misma persona si lo abre en otro equipo.
+- @connect-sql-server: SQL Server, Azure SQL Database, Azure SQL Managed Instance and Azure Synapse Analytics
+- @connect-snowflake: Snowflake, including key pair authentication
+- @connect-databricks: Azure Databricks and Databricks on other clouds
+- @connect-oracle: Oracle databases through the Oracle OLE DB provider
+- @connect-odbc: any source with an ODBC driver, including PostgreSQL, MySQL, MariaDB and IBM Db2
+- @connect-oledb: any source with an OLE DB provider
+- @connect-onelake: Fabric Lakehouse, Warehouse, SQL database and mirrored database items
+- @connect-dataflows: Power BI dataflows
+
+## Where credentials are stored
+
+Tabular Editor saves the connection settings and credentials you enter in a connection dialog in the [user options](xref:user-options) file (`.tmuo`). This file is per user and per model, and the credentials in it are encrypted with the Windows Data Protection API under your Windows user account. Consulta @supported-files.
+
+- The credentials aren't part of the model metadata and aren't committed to source control.
+- Each user supplies their own credentials, on each machine.
+- Generated M expressions contain no credentials.
+
+## What the credentials are used for
+
+Tabular Editor uses the credentials from the connection dialog to connect to the source when you import tables, preview data and update table schema. If the authentication option has no interactive sign-in, Tabular Editor connects with the saved credentials without prompting.
+
+Data refreshes in Analysis Services and Power BI use the credentials configured for the data source in the model, on the server or in the Power BI service. You set the credentials Analysis Services uses in the data source properties after you import the tables (see [Creating a new data source](xref:import-tables#creating-a-new-data-source)).
 
 ## Data sources heredados, estructurados e implícitos
 
-Los autenticadores que se te ofrecen también dependen de cómo almacena el modelo el Data source, y eso lo decide el modelo, no tú.
+The data source types available in the wizard depend on the model:
 
-- **Los Data sources heredados (provider)** están disponibles para todos los modelos, sea cual sea su nivel de compatibilidad. Las credenciales se almacenan en el servidor, en el Tabular Object Model.
-- **Los Data sources estructurados (Power Query)** están disponibles a partir del nivel de compatibilidad 1400 en adelante. Las credenciales deben proporcionarse de nuevo en cada despliegue a Analysis Services.
-- **Los Data sources implícitos** son los que usan los modelos de Power BI y Fabric, y un modelo Direct Lake no puede usar ningún otro. No hay ningún objeto de Data source en los metadatos: la expresión M de la partición nombra el origen, y Power BI Desktop o el servicio de Power BI guardan las credenciales, no el modelo.
+- **Legacy (provider)** data sources are available to every model except Direct Lake models. Credentials are managed in the provider data source object in the Tabular Object Model (TOM) and are stored and encrypted server-side.
+- **Los Data sources estructurados (Power Query)** están disponibles a partir del nivel de compatibilidad 1400 en adelante. You supply credentials again each time you deploy to Analysis Services.
+- **Implicit** data sources are available to Power BI and Fabric models. Direct Lake models use only implicit data sources. With an implicit data source, the model has no data source object: import partitions carry an M expression that names the source, Direct Lake partitions reference a shared expression, and Power BI Desktop or the Power BI service holds the credentials.
 
-Cuando hay más de un tipo disponible, el asistente prefiere el implícito, luego el estructurado y después el heredado.
+When the model has no data sources, the wizard preselects implicit if it's available, then structured, then legacy.
 
-Por eso la lista de orígenes también es más corta fuera de Power BI. Solo se puede acceder a Snowflake, Databricks y los Dataflows de Power BI como Data sources implícitos, por lo que el asistente los omite cuando el modelo está en Analysis Services. Consulta [Tipos de Data sources de TOM](xref:import-tables#types-of-tom-data-sources).
-
-Sea cual sea el tipo con el que acabe el modelo, las credenciales que _Tabular Editor_ usa para examinar el origen y leer su esquema son las que escribes en el cuadro de diálogo de conexión, y se guardan en el archivo `.tmuo` descrito antes. Son independientes de las credenciales que Analysis Services o Power BI usan en el momento de la actualización.
+Snowflake, Databricks and Power BI dataflows are available only as implicit data sources. The wizard hides them for models that don't support implicit data sources, such as Analysis Services models (see [Types of TOM data sources](xref:import-tables#types-of-tom-data-sources)).
