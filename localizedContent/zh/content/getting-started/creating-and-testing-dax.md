@@ -81,7 +81,7 @@ Tabular Editor 3 使用的新 DAX 代码编辑器已将这些问题全部解决�
 要添加[计算组](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions)，在模型或“表”文件夹上右键点击，然后选择 **创建 > 计算组** (ALT+7)。为计算组命名。另外，建议为默认的 **Name** 列另取一个名称。
 
 > [!IMPORTANT]
-> This option is only available on models at compatibility level 1470 or higher. Analysis Services supports calculation groups from compatibility level 1500.
+> 此选项仅适用于兼容级别为 1470 或更高的模型。 Analysis Services 从兼容级别 1500 起支持计算组。
 
 要添加计算项，请在新建的计算组上右键单击，然后选择 **创建 > 计算项**。为计算项命名，并使用 **表达式编辑器** 编辑其 DAX 表达式，方式与我们在上面创建度量值时类似。
 
