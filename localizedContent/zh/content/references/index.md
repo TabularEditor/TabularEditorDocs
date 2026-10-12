@@ -21,9 +21,9 @@
 - @supported-files - Tabular Editor 可打开和保存的文件格式
 - @accessibility - 色盲模式、键盘访问、缩放和主题
 
-### Object Properties Reference
+### 对象属性参考
 
-- @object-properties - What every property in the Properties view does, grouped by object type
+- @object-properties - 介绍“属性视图”中各属性的作用，并按对象类型分组
 
 ### 开发与规划
 
