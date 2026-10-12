@@ -69,6 +69,5 @@ orderColumn.IsHidden = true;
 
 ### 说明
 
-在运行脚本之前，用户需要在 TOM Explorer 中选择他们希望包含在字段参数表中的度量值或列。
-The selected objects are then inserted into a calculated table which is then configured as a field parameter table automatically.
+在运行脚本之前，用户需要在 TOM Explorer 中选择他们希望包含在字段参数表中的度量值或列。随后，这些所选对象会被插入到一个计算表格中，并自动配置为字段参数表。
 
