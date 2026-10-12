@@ -27,7 +27,7 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 
 The properties on this page appear on many object types and work the same way on every object that has them. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. The object-specific pages link to these entries. For the other pages, see @object-properties.
 
-## Basic
+## Básico
 
 ### Nombre
 
