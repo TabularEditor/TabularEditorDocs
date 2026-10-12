@@ -17,25 +17,25 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-La CLI de Tabular Editor lee una configuración opcional desde un archivo JSON. The file sets:
+La CLI de Tabular Editor lee una configuración opcional desde un archivo JSON. El archivo define:
 
-- **File paths**: where the CLI reads macros and BPA rules, and where it writes the query log.
-- **Behavioral defaults**: BPA gates, auto-format and validation.
-- **Saved connection profiles**: the named profiles you switch between.
+- **Rutas de archivos**: donde la CLI lee las macros y las reglas de BPA, y donde escribe el registro de consultas.
+- **Valores predeterminados de comportamiento**: umbrales de BPA, formato automático y validación.
+- **Perfiles de conexión guardados**: los perfiles con nombre entre los que puedes alternar.
 
-The CLI doesn't read from or write to Tabular Editor 3 desktop install paths. Set the BPA rules and macros files in this config, or create them with `te bpa rules init` and `te macro init`.
+La CLI no lee ni escribe en las rutas de instalación de la versión de escritorio de Tabular Editor 3. En esta configuración, establece los archivos de reglas de BPA y de macros, o créalos con `te bpa rules init` y `te macro init`.
 
-`te config list`, `te config set <key> <value>` and `te profile set` cover the common operations without editing the file.
+`te config list`, `te config set <key> <value>` y `te profile set` cubren las operaciones habituales sin editar el archivo.
 
 ## Ubicación del archivo de configuración
 
-The CLI checks these locations in order:
+La CLI comprueba estas ubicaciones en este orden:
 
 1. La variable de entorno `$TE_CONFIG` (si está definida y el archivo existe).
 2. `~/.config/te/config.json` (en Windows, `%USERPROFILE%\.config\te\config.json`).
 3. Si no hay archivo de configuración, la CLI usa los valores predeterminados integrados.
 
-`te config list`, `te config set`, `te config init` and `te config paths` all read and write the file at the resolved path, including a path set by `TE_CONFIG`. Use `TE_CONFIG` for testing, scripted installs and per-environment configuration.
+`te config list`, `te config set`, `te config init` y `te config paths` leen y escriben el archivo en la ruta resuelta, incluida una ruta establecida mediante `TE_CONFIG`. Usa `TE_CONFIG` para pruebas, instalaciones mediante scripts y configuración por entorno.
 
 Para crear una configuración predeterminada:
 
@@ -52,10 +52,10 @@ te config list --output-format json    # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
-`te config paths` shows which files the CLI uses for macros and BPA rules. The output has two rows: `macros`, the resolved macros file path, and `bpa.rules`, the first existing BPA rules file. Either row shows `[not set]` if nothing resolves.
+`te config paths` muestra qué archivos usa la CLI para las macros y las reglas de BPA. La salida tiene dos filas: `macros`, la ruta resuelta del archivo de macros, y `bpa.rules`, el primer archivo de reglas de BPA existente. Cualquiera de las dos filas muestra `[not set]` si no se resuelve nada.
 
 > [!NOTE]
-> With `--output-format json`, `te config paths` writes unresolved paths as explicit `null` fields, for example `{"macros": null, "bpa": {"rules": null}}`. `te config list --output-format json` omits null fields by default, so parsers must handle missing keys.
+> Con `--output-format json`, `te config paths` escribe las rutas sin resolver como campos `null` explícitos, por ejemplo `{"macros": null, "bpa": {"rules": null}}`. `te config list --output-format json` omite los campos `null` de forma predeterminada, así que los analizadores deben manejar las claves ausentes.
 
 ## Configurar valores
 
@@ -72,11 +72,11 @@ Las claves pueden pasarse por posición (`te config set <key> <value>`) o como `
 Si no existe ningún archivo de configuración, `te config set` crea uno automáticamente en la ruta resuelta (`$TE_CONFIG` si está establecido; de lo contrario, `~/.config/te/config.json`) antes de aplicar el cambio.
 
 > [!NOTE]
-> `te config set` sets every key in the schema except `formatVersion`, which the CLI manages. Use dotted paths for nested keys, such as `bpa.onDeploy` or `formatOptions.useSqlBiDaxFormatter`. To edit the JSON directly, run `te config paths` to find the file.
+> `te config set` establece todas las claves del esquema excepto `formatVersion`, que gestiona la CLI. Usa rutas con puntos para las claves anidadas, como `bpa.onDeploy` o `formatOptions.useSqlBiDaxFormatter`. Para editar el JSON directamente, ejecuta `te config paths` para encontrar el archivo.
 
 ## Esquema completo
 
-The complete config schema, with every key at its default value:
+El esquema completo de configuración, con todas las claves en sus valores predeterminados:
 
 ```json
 {
@@ -118,13 +118,13 @@ The complete config schema, with every key at its default value:
 
 ### Rutas de archivo
 
-Paths set in the config apply to every command. Per-command flags and environment variables override them, as described in [Path resolution priority](#path-resolution-priority).
+Las rutas definidas en la configuración se aplican a todos los comandos. Las opciones específicas de cada comando y las variables de entorno prevalecen sobre ellas, como se describe en [Prioridad de resolución de rutas](#path-resolution-priority).
 
-| Clave       | Significado                                                                                                                                                                                                                                                                                                                                                                                          |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `macros`    | Ruta explícita a un archivo JSON de macros (normalmente `MacroActions.json`). La resuelve cualquier comando `te macro`. To use the same macros on several machines or in both the CLI and Tabular Editor 3, point it at a shared file, such as a file on a network share, in the repository or the Tabular Editor 3 desktop file. |
-| `bpa.rules` | Lista ordenada de rutas o URL a archivos de reglas de BPA. `te bpa run` y la compuerta de implementación/guardado cargan **todas** las entradas existentes; `te bpa rules list` y `te config paths` usan la primera entrada existente. Los valores separados por comas en `te config set bpa.rules ...` se separan en el arreglo.                    |
-| `queryLog`  | Ruta a un archivo de registro en el que cada invocación de `te query` añade el texto de la consulta y los metadatos de ejecución. Supports `~` for the home directory, for example `~/.config/te/queries.log`.                                                                                                                                                       |
+| Clave       | Significado                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `macros`    | Ruta explícita a un archivo JSON de macros (normalmente `MacroActions.json`). La resuelve cualquier comando `te macro`. Para usar las mismas macros en varios equipos, o tanto en la CLI como en Tabular Editor 3, indícale un archivo compartido; por ejemplo, uno en un recurso compartido de red, en el repositorio o en el archivo de Tabular Editor 3 para escritorio. |
+| `bpa.rules` | Lista ordenada de rutas o URL a archivos de reglas de BPA. `te bpa run` y la compuerta de implementación/guardado cargan **todas** las entradas existentes; `te bpa rules list` y `te config paths` usan la primera entrada existente. Los valores separados por comas en `te config set bpa.rules ...` se separan en el arreglo.                                                              |
+| `queryLog`  | Ruta a un archivo de registro en el que cada invocación de `te query` añade el texto de la consulta y los metadatos de ejecución. Admite `~` para el directorio personal, por ejemplo `~/.config/te/queries.log`.                                                                                                                                                                                              |
 
 ### Prioridad de resolución de rutas
 
@@ -134,28 +134,28 @@ Para cada archivo proporcionado por el usuario (macros, reglas de BPA), la CLI r
 2. **Variable de entorno** - `TE_MACROS_PATH` para macros, `TE_BPA_RULES` para reglas de BPA.
 3. **Configuración de la CLI** - `macros` para macros, la primera entrada existente de `bpa.rules[]` para reglas de BPA.
 
-The CLI doesn't detect Tabular Editor 3 install locations. To create a default file in the current directory, run `te macro init` (creates `./MacroActions.json`) or `te bpa rules init` (creates `./BPARules.json`).
+La CLI no detecta las ubicaciones de instalación de Tabular Editor 3. Para crear un archivo predeterminado en el directorio actual, ejecuta `te macro init` (crea `./MacroActions.json`) o `te bpa rules init` (crea `./BPARules.json`).
 
 Ejecuta `te config paths` para ver qué archivo resolvió realmente la CLI.
 
 ### Valores predeterminados de comportamiento
 
-BPA settings are under the `bpa` object, and you address them with dotted keys in `te config set`.
+La configuración de BPA está bajo el objeto `bpa` y se accede a ella mediante claves separadas por puntos en `te config set`.
 
 | Clave                        | Predeterminado | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ---------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `autoFormat`                 | `false`        | Da formato automáticamente a las expresiones DAX modificadas por un comando de modificación. El formato se limita a los objetos que el comando haya modificado, pero abarca todas las propiedades de expresiones DAX que contengan (expresiones, expresiones de cadena de formato dinámica, filas de detalle, objetivo/estado/tendencia del KPI, expresiones de grupo de cálculo y de permiso de tabla, etc.). Las consultas de partición de Power Query (M) y SQL nunca se reformatean. Siempre usa el formateador integrado sin conexión en el dialecto de comas; se aplican las claves de diseño de `formatOptions`. |
-| `validateOnMutation`         | `true`         | Después de un comando de modificación (`add`, `set`, `mv`, `macro run`), comprueba que todas las referencias `Table[Column]` del modelo sigan resolviéndose. This catches references broken by renames or removals before deployment.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `mutationOutput`             | `diff`         | How mutating commands (`add`, `set`, `move`, `remove`, `script`, `bpa run --fix`) render the resulting change set in text output: `diff` (full before/after diff), `stat` (per-object change counts), `name-only` (changed object paths), or `none` (no change set; config only, with no `--none` flag). The `--diff`, `--stat` and `--name-only` flags override it for one invocation. JSON output always contains the full `changes` array.                                                                                                                                  |
-| `bpa.onMutation`             | `false`        | Ejecuta un análisis de BPA acotado después de cada comando de modificación (`set`, `add`, `mv`, `rm`, `macro run`). Only the objects of the affected table are checked.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `validateOnMutation`         | `true`         | Después de un comando de modificación (`add`, `set`, `mv`, `macro run`), comprueba que todas las referencias `Table[Column]` del modelo sigan resolviéndose. Esto detecta referencias rotas por cambios de nombre o eliminaciones antes del despliegue.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `mutationOutput`             | `diff`         | Cómo los comandos que modifican (`add`, `set`, `move`, `remove`, `script`, `bpa run --fix`) muestran en la salida de texto el conjunto de cambios resultante: `diff` (diferencia completa antes/después), `stat` (recuentos de cambios por objeto), `name-only` (rutas de los objetos modificados) o `none` (sin conjunto de cambios; solo configuración, sin necesidad de usar la marca `--none`). Las marcas `--diff`, `--stat` y `--name-only` la anulan para una invocación. La salida JSON siempre contiene el array `changes` completo.                                  |
+| `bpa.onMutation`             | `false`        | Ejecuta un análisis de BPA acotado después de cada comando de modificación (`set`, `add`, `mv`, `rm`, `macro run`). Solo se comprueban los objetos de la tabla afectada.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `bpa.onDeploy`               | `true`         | Ejecuta el control de BPA antes de que se ejecute `te deploy`. El despliegue se cancela si alguna regla se activa con una gravedad >= error. Omítelo en una invocación concreta con `--skip-bpa`, o corrígelo automáticamente con `--fix-bpa`.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `bpa.onSave`                 | `true`         | Ejecuta el control de BPA antes de que `te save-as` escriba en disco. Omítelo en una invocación concreta con `--skip-bpa` o `--force`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `bpa.builtInRules`           | `true`         | Incluye el conjunto depurado de reglas integradas de BPA cada vez que se ejecute el control. If `false`, the gate runs only the rules in `bpa.rules` and rules embedded in the model.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `bpa.disabledBuiltInRuleIds` | `null`         | ID de reglas integradas individuales que se excluirán de la puerta de calidad. Change it with `te bpa rules disable <id>` and `te bpa rules enable <id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `vertipaqOnRefresh`          | `false`        | After a successful refresh (`full`, `dataonly`, `automatic`, or `add`), run VertiPaq analysis and show storage statistics for the refreshed tables.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `interactiveEditMode`        | `stage`        | Comportamiento predeterminado para las mutaciones en memoria dentro de `te interactive`. `stage` keeps mutations in memory until you run `save`. `save` writes to the source after every mutating command; on a remote source, every `set` is an XMLA write. `revert` discards mutations after each command unless you pass `--save` or `--stage`. The per-command `--save`, `--revert` and `--stage` flags override the setting.                                                                                                                                                                                                                             |
-| `launchInteractiveMode`      | `auto`         | Indica si ejecutar `te` en un terminal sin argumentos inicia el REPL interactivo. `auto` (default) launches the REPL only if stdin, stdout and stderr are all attached to a TTY, so scripts and CI pipelines get normal parsing. `always` launches the REPL even with redirection. `never` shows help instead. The global `--non-interactive` flag forces `never` for one invocation, and the `TE_INTERACTIVE` environment variable sets the mode for one invocation.                                                                                                                                                                      |
-| `disableTelemetry`           | `false`        | Desactiva la telemetría de uso anónima. Telemetry contains the command name, exit code and duration. It doesn't contain model content, paths or query text.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `bpa.builtInRules`           | `true`         | Incluye el conjunto depurado de reglas integradas de BPA cada vez que se ejecute el control. Si es `false`, la comprobación ejecuta solo las reglas de `bpa.rules` y las reglas incrustadas en el modelo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `bpa.disabledBuiltInRuleIds` | `null`         | ID de reglas integradas individuales que se excluirán de la puerta de calidad. Cámbialo con `te bpa rules disable <id>` y `te bpa rules enable <id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `vertipaqOnRefresh`          | `false`        | Tras una actualización correcta (`full`, `dataonly`, `automatic` o `add`), se ejecuta el análisis de VertiPaq y se muestran estadísticas de almacenamiento de las tablas actualizadas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `interactiveEditMode`        | `stage`        | Comportamiento predeterminado para las mutaciones en memoria dentro de `te interactive`. `stage` mantiene las modificaciones en memoria hasta que ejecutes `save`. `save` escribe en el origen después de cada comando que modifica; en un origen remoto, cada `set` es una operación de escritura XMLA. `revert` descarta las modificaciones después de cada comando, salvo que pases `--save` o `--stage`. Las marcas `--save`, `--revert` y `--stage` por comando prevalecen sobre esta opción.                                                                                                                                                            |
+| `launchInteractiveMode`      | `auto`         | Indica si ejecutar `te` en un terminal sin argumentos inicia el REPL interactivo. `auto` (predeterminado) inicia el REPL solo si stdin, stdout y stderr están todos conectados a un TTY, de modo que los scripts y las canalizaciones de CI usen el parseo normal. `always` inicia el REPL incluso con redirección. `never` muestra la ayuda en su lugar. La marca global `--non-interactive` fuerza `never` para una invocación, y la variable de entorno `TE_INTERACTIVE` establece el modo para una invocación.                                                                                                                         |
+| `disableTelemetry`           | `false`        | Desactiva la telemetría de uso anónima. La telemetría contiene el nombre del comando, el código de salida y la duración. No contiene el contenido del modelo, las rutas ni el texto de las consultas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ```bash
 te config set bpa.rules "/etc/te/team.json,/etc/te/strict.json"
@@ -166,22 +166,22 @@ te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUI
 
 ### Opciones de formato
 
-The CLI's built-in DAX formatter works offline.
+El formateador de DAX integrado de la CLI funciona sin conexión.
 
-- The layout keys `shortFormat` and `skipSpaceAfterFunction` apply when `autoFormat` reformats mutated expressions and when `te query` renders query text.
-- `te set <path> --format <Property>` and `te util format-dax` ignore the layout keys and take the flags `--long` and `--no-space-after-function`.
-- Config-driven formatting always uses commas as list separators. For DAX written with semicolons, use the `--semicolons` flag of `te util format-dax`.
-- `formatOptions.useSqlBiDaxFormatter` sends explicit formatting and `te query` rendering to the SQL BI [daxformatter.com](https://www.daxformatter.com) web service, which requires internet access. `autoFormat` always uses the built-in formatter.
+- Las claves de diseño `shortFormat` y `skipSpaceAfterFunction` se aplican cuando `autoFormat` vuelve a formatear expresiones modificadas y cuando `te query` muestra el texto de la consulta.
+- `te set <path> --format <Property>` y `te util format-dax` ignoran las claves de diseño y usan las marcas `--long` y `--no-space-after-function`.
+- El formato controlado por configuración siempre usa comas como separadores de lista. Para DAX escrito con punto y coma, usa la marca `--semicolons` de `te util format-dax`.
+- `formatOptions.useSqlBiDaxFormatter` envía el formateo explícito y el renderizado de `te query` al servicio web de SQL BI [daxformatter.com](https://www.daxformatter.com), que requiere acceso a Internet. `autoFormat` siempre usa el formateador integrado.
 
-| Clave                                  | Predeterminado | Descripción                                                                                                                                                                                                                                       |
-| -------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formatOptions.shortFormat`            | `false`        | Use short, single-line formatting where possible.                                                                                                                                                                                 |
-| `formatOptions.skipSpaceAfterFunction` | `false`        | Omit the space between a function name and its opening parenthesis, for example `SUM(x)`.                                                                                                                                         |
-| `formatOptions.useSqlBiDaxFormatter`   | `false`        | Format DAX with the [SQL BI daxformatter.com](https://www.daxformatter.com) web service. Requiere acceso a Internet. The built-in formatter matches the Tabular Editor 3 default. |
+| Clave                                  | Predeterminado | Descripción                                                                                                                                                                                                                                                                   |
+| -------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formatOptions.shortFormat`            | `false`        | Usa un formato corto, de una sola línea, cuando sea posible.                                                                                                                                                                                                  |
+| `formatOptions.skipSpaceAfterFunction` | `false`        | Omite el espacio entre el nombre de una función y su paréntesis de apertura, por ejemplo, `SUM(x)`.                                                                                                                                                           |
+| `formatOptions.useSqlBiDaxFormatter`   | `false`        | Formatea DAX con el servicio web de [SQL BI daxformatter.com](https://www.daxformatter.com). Requiere acceso a Internet. El formateador integrado coincide con el formato predeterminado de Tabular Editor 3. |
 
 ### Visualización
 
-These settings control terminal output and diagnostic logging.
+Estos ajustes controlan la salida del terminal y el registro de diagnóstico.
 
 | Clave               | Predeterminado | Descripción                                                                                                                                   |
 | ------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -191,34 +191,34 @@ These settings control terminal output and diagnostic logging.
 
 ### Perfiles
 
-Saved connection profiles are stored under the `profiles` key. Manage them with `te profile set`, `te profile remove` and `te profile list`, not by editing the file. Consulta @te-cli-auth.
+Los perfiles de conexión guardados se almacenan bajo la clave `profiles`. Adminístralos con `te profile set`, `te profile remove` y `te profile list`, y no editando el archivo. Consulta @te-cli-auth.
 
-A profile can override these behavioral defaults while it's active: `autoFormat`, `validateOnMutation`, `mutationOutput`, `bpa.onMutation`, `bpa.onDeploy`, `bpa.onSave`, `vertipaqOnRefresh`, `spinner` and `interactiveEditMode`. For example, a dev profile can turn off validation and the deploy gate while a prod profile formats DAX:
+Un perfil puede anular estos valores predeterminados de comportamiento mientras está activo: `autoFormat`, `validateOnMutation`, `mutationOutput`, `bpa.onMutation`, `bpa.onDeploy`, `bpa.onSave`, `vertipaqOnRefresh`, `spinner` e `interactiveEditMode`. Por ejemplo, un perfil de desarrollo puede desactivar la validación y el control de implementación, mientras que un perfil de producción formatea DAX:
 
 ```bash
 te profile set dev --validate-on-mutation false --bpa-on-deploy false
 te profile set prod --auto-format true
 ```
 
-`te profile set` has flags for `--auto-format`, `--validate-on-mutation`, `--bpa-on-mutation`, `--bpa-on-deploy`, `--vertipaq-on-refresh` and `--spinner`. Each accepts `true`, `false` or `null`, which clears the override.
+`te profile set` incluye opciones para `--auto-format`, `--validate-on-mutation`, `--bpa-on-mutation`, `--bpa-on-deploy`, `--vertipaq-on-refresh` y `--spinner`. Cada una acepta `true`, `false` o `null`, que elimina la sobrescritura.
 
 ## Control BPA
 
-The BPA gate stops a save or deployment if the model has rule violations at error severity. It runs on these commands:
+El control de BPA impide guardar o implementar si el modelo tiene infracciones de reglas con gravedad `error`. Se ejecuta con estos comandos:
 
 - `te deploy` ejecuta el control, a menos que se pase `--skip-bpa` o que `bpa.onDeploy` sea `false`.
 - `te save-as` ejecuta la validación, a menos que se pase `--skip-bpa` (o `--force`) o que `bpa.onSave` sea `false`.
 - `te add`, `te set`, `te move`, `te remove`, `te macro run` ejecutan la validación solo cuando `bpa.onMutation` es `true`.
 
-El control carga las reglas de BPA desde `bpa.rules` y, de forma predeterminada, el conjunto de reglas integrado (controlado por `bpa.builtInRules`). `te bpa rules disable <id>` excludes an individual built-in rule by adding it to `bpa.disabledBuiltInRuleIds`, and `te bpa rules enable <id>` removes it from the list.
+El control carga las reglas de BPA desde `bpa.rules` y, de forma predeterminada, el conjunto de reglas integrado (controlado por `bpa.builtInRules`). `te bpa rules disable <id>` excluye una regla integrada concreta añadiéndola a `bpa.disabledBuiltInRuleIds`, y `te bpa rules enable <id>` la quita de la lista.
 
-If the gate finds violations at severity `error` or higher, the command fails with exit code `1` and a summary of the violations. To proceed, use one of these options:
+Si el control encuentra infracciones con gravedad `error` o superior, el comando falla con el código de salida `1` y un resumen de las infracciones. Para continuar, usa una de estas opciones:
 
 - `--fix-bpa` - aplica en memoria la `fixExpression` de la regla al artefacto que se va a desplegar o guardar; los archivos fuente no se modifican.
 - `--skip-bpa` - desactiva el control solo para este comando.
 - `--bpa-rules <path>` - repetible; sobrescribe `bpa.rules` para esta única invocación de `te deploy` o `te save-as`. Las reglas integradas siguen aplicándose salvo que `bpa.builtInRules` sea `false`.
 
-To check the model against the rules without deploying, run `te bpa run`:
+Para comprobar el modelo con respecto a las reglas sin implementarlo, ejecuta `te bpa run`:
 
 ```bash
 te bpa run --model ./model --fail-on error
@@ -227,60 +227,60 @@ te bpa run --model ./model --fix --save     # Apply fixes to the source
 
 ### Reglas de BPA integradas
 
-The CLI includes a set of built-in BPA rules. Built-in rules are read-only: `te bpa rules set` and `te bpa rules remove` fail on built-in IDs and suggest `te bpa rules disable`. To change a built-in rule, copy it into your rules file with a new ID and disable the built-in rule.
+La CLI incluye un conjunto de reglas BPA integradas. Las reglas integradas son de solo lectura: `te bpa rules set` y `te bpa rules remove` fallan con IDs integrados y sugieren `te bpa rules disable`. Para cambiar una regla integrada, cópiala en tu archivo de reglas con un ID nuevo y deshabilita la regla integrada.
 
-`bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply to the gate and to `te bpa run`, so a rule disabled with `te bpa rules disable` is excluded everywhere.
+`bpa.builtInRules` y `bpa.disabledBuiltInRuleIds` se aplican al control y a `te bpa run`, por lo que una regla deshabilitada con `te bpa rules disable` queda excluida en todas partes.
 
 ## Comportamiento tras la mutación
 
-After a mutating command (`te add`, `te set`, `te move` or `te macro run`), the CLI runs these checks:
+Después de un comando de modificación (`te add`, `te set`, `te move` o `te macro run`), la CLI ejecuta estas comprobaciones:
 
-1. **TOM errors** always appear. Invalid DAX or M in measures, columns, partitions or calculation items fails the command.
-2. **Schema validation** (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve.
-3. **DAX auto-format** (`autoFormat`, default `false`) formats the expressions touched by the mutation with the built-in formatter.
-4. **BPA on mutation** (`bpa.onMutation`, default `false`) runs BPA after the mutation and warns or fails according to `--fail-on`.
+1. **Los errores de TOM** siempre se muestran. Las expresiones DAX o M no válidas en medidas, columnas, particiones o elementos de cálculo hacen que el comando falle.
+2. **Validación de esquema** (`validateOnMutation`, valor predeterminado `true`) comprueba que las referencias `Table[Column]` en DAX se sigan resolviendo.
+3. **Formato automático de DAX** (`autoFormat`, valor predeterminado `false`) da formato a las expresiones afectadas por la mutación con el formateador integrado.
+4. **BPA tras la mutación** (`bpa.onMutation`, valor predeterminado `false`) ejecuta BPA después de la mutación y, según `--fail-on`, muestra una advertencia o finaliza con error.
 
-`te config set <key> false` turns a check off. A profile can override the key for one environment.
+`te config set <key> false` desactiva una comprobación. Un perfil puede reemplazar la clave en un entorno.
 
 ## Políticas de administrador
 
-On Windows, `te` honors the same administrator policies as Tabular Editor 3 and reads them from these registry keys:
+En Windows, `te` respeta las mismas directivas administrativas que Tabular Editor 3 y las lee de estas claves del Registro:
 
-- `Software\Policies\Tabular Editor ApS`, for values shared by the CLI and the desktop application
-- its `TECLI` subkey, for values that apply to the CLI only
-- its `TE3` subkey, for values that apply to the desktop application only
-- the earlier `Software\Policies\Kapacity\Tabular Editor` key, which is still honored
+- `Software\\Policies\\Tabular Editor ApS`, para los valores compartidos por la CLI y la aplicación de escritorio
+- su subclave `TECLI`, para los valores que solo se aplican a la CLI
+- su subclave `TE3`, para los valores que solo se aplican a la aplicación de escritorio
+- la clave anterior `Software\\Policies\\Kapacity\\Tabular Editor`, que aún se respeta
 
-A machine-wide value (`HKEY_LOCAL_MACHINE`) takes precedence over a per-user one (`HKEY_CURRENT_USER`). Within a hive, a product-specific value takes precedence over a shared one. When a policy turns a feature off, the command names the policy, does nothing and exits with a failure, which fails any pipeline step that depends on the feature.
+Un valor para todo el equipo (`HKEY_LOCAL_MACHINE`) tiene prioridad sobre uno por usuario (`HKEY_CURRENT_USER`). Dentro de la misma rama del Registro, un valor específico del producto tiene prioridad sobre uno compartido. Cuando una directiva desactiva una característica, el comando indica la directiva, no hace nada y sale con error, lo que hace fallar cualquier paso de la canalización que dependa de esa característica.
 
-| Política               | Efecto en la CLI                                                                                                                                                                                                                                                                                                                                               |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DisableCSharpScripts` | Blocks `te script` and the automatic fixes of `te bpa run --fix`.                                                                                                                                                                                                                                                                              |
-| `DisableMacros`        | Blocks every `te macro` command.                                                                                                                                                                                                                                                                                                               |
-| `DisableBpaDownload`   | Blocks Best Practice Analyzer rules given as a URL. Los archivos de reglas en disco y las reglas integradas no se ven afectados.                                                                                                                                                                                               |
-| `DisableTelemetry`     | Desactiva las estadísticas anónimas de uso, independientemente de lo que indique `disableTelemetry` en la configuración.                                                                                                                                                                                                                       |
-| `BlockUnsafeScripts`   | Blocks `te script`, `te macro run` and `te bpa run --fix` when the code accesses files, the network, processes or external assemblies. See [What counts as staying within the model](xref:csharp-scripts#what-counts-as-staying-within-the-model) for the blocked APIs. JSON output reports `blockedByPolicy`. |
+| Política               | Efecto en la CLI                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DisableCSharpScripts` | Bloquea `te script` y las correcciones automáticas de `te bpa run --fix`.                                                                                                                                                                                                                                                                                         |
+| `DisableMacros`        | Bloquea todos los comandos `te macro`.                                                                                                                                                                                                                                                                                                                            |
+| `DisableBpaDownload`   | Bloquea las reglas de Best Practice Analyzer especificadas mediante una URL. Los archivos de reglas en disco y las reglas integradas no se ven afectados.                                                                                                                                                                                         |
+| `DisableTelemetry`     | Desactiva las estadísticas anónimas de uso, independientemente de lo que indique `disableTelemetry` en la configuración.                                                                                                                                                                                                                                          |
+| `BlockUnsafeScripts`   | Bloquea `te script`, `te macro run` y `te bpa run --fix` cuando el código accede a archivos, la red, procesos o ensamblados externos. Consulta [Qué cuenta como permanecer dentro del modelo](xref:csharp-scripts#what-counts-as-staying-within-the-model) para ver las API bloqueadas. La salida JSON reporta `blockedByPolicy`. |
 
-Policies for update checks, error reports, DAX Optimizer, the DAX Package Manager, the AI Assistant and the MCP server don't affect the CLI. Consulta @policies para ver la lista completa de directivas y cómo implementarlas.
+Las directivas sobre la comprobación de actualizaciones, los Reports de errores, el Optimizador de DAX, el Administrador de paquetes de DAX, el Asistente de IA y el servidor MCP no afectan a la CLI. Consulta @policies para ver la lista completa de directivas y cómo implementarlas.
 
-In the desktop application, `BlockUnsafeScripts` requires Tabular Editor 3 Enterprise Edition. The CLI has no editions and applies the policy wherever it's set.
+En la aplicación de escritorio, `BlockUnsafeScripts` requiere la Edición Enterprise de Tabular Editor 3. La CLI no tiene ediciones y aplica la directiva allí donde esté configurada.
 
 ## Variables de entorno
 
-The CLI reads these environment variables for paths, behavior and diagnostics. Para las variables de autenticación de Azure (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), consulta @te-cli-auth.
+La CLI lee estas variables de entorno para rutas, comportamiento y diagnósticos. Para las variables de autenticación de Azure (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), consulta @te-cli-auth.
 
-| Variable         | Propósito                                                                                                                                                                                                                                                                                                                               |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TE_CONFIG`      | Ruta de acceso a un archivo de configuración alternativo. Used by `te config list`, `set`, `init` and `paths`.                                                                                                                                                                                          |
-| `TE_MACROS_PATH` | Override the macros file path, second in the [resolution order](#path-resolution-priority). La leen los comandos `te macro`.                                                                                                                                                                            |
-| `TE_BPA_RULES`   | Anula la lista de archivos/URL de reglas de BPA utilizada por los subcomandos `te bpa run` y `te bpa rules`.                                                                                                                                                                                                            |
-| `TE_BPA_CONFIG`  | Anula la ruta de acceso a la configuración del gate de BPA (`.te-bpa.json`) que lee el gate de despliegue/guardado.                                                                                                                                                                                  |
-| `TE_DEBUG`       | Establece el valor en `1` para habilitar el registro de depuración globalmente (igual que `--debug` o `debug: true` en la configuración).                                                                                                                                                            |
-| `NO_SPINNER`     | Establece el valor en `1` o `true` para desactivar los indicadores de progreso animados (alternativa a `spinner: false` en la configuración).                                                                                                                                                        |
-| `CI`             | Se detecta automáticamente. Cuando vale `1` o `true`, la CLI desactiva el spinner y cambia a una salida de texto sin formato. Most CI runners set it.                                                                                                                                   |
-| `TE_SESSION`     | Sobrescribe el identificador de sesión por terminal que se usa para el estado de la conexión activa. Set it to run isolated CLI sessions in the same shell, for example in parallel CI matrix jobs. Inspeccione y administre sesiones con [`te session`](xref:te-cli-commands#session). |
-| `TE_INTERACTIVE` | Permite anular `launchInteractiveMode` para una sola invocación. Accepts `auto`, `always` or `never`. `TE_INTERACTIVE=always` launches the REPL, and `TE_INTERACTIVE=never` shows help.                                                                                                 |
-| `TE_COMPAT`      | Establécela en `te2` para forzar el modo de compatibilidad con TE2; consulta @te-cli-migrate.                                                                                                                                                                                                              |
+| Variable         | Propósito                                                                                                                                                                                                                                                                                                                                                                         |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TE_CONFIG`      | Ruta de acceso a un archivo de configuración alternativo. Se usa en `te config list`, `set`, `init` y `paths`.                                                                                                                                                                                                                                    |
+| `TE_MACROS_PATH` | Sobrescribe la ruta del archivo de macros; es la segunda en el [orden de resolución](#path-resolution-priority). La leen los comandos `te macro`.                                                                                                                                                                                                 |
+| `TE_BPA_RULES`   | Anula la lista de archivos/URL de reglas de BPA utilizada por los subcomandos `te bpa run` y `te bpa rules`.                                                                                                                                                                                                                                                      |
+| `TE_BPA_CONFIG`  | Anula la ruta de acceso a la configuración del gate de BPA (`.te-bpa.json`) que lee el gate de despliegue/guardado.                                                                                                                                                                                                                            |
+| `TE_DEBUG`       | Establece el valor en `1` para habilitar el registro de depuración globalmente (igual que `--debug` o `debug: true` en la configuración).                                                                                                                                                                                                      |
+| `NO_SPINNER`     | Establece el valor en `1` o `true` para desactivar los indicadores de progreso animados (alternativa a `spinner: false` en la configuración).                                                                                                                                                                                                  |
+| `CI`             | Se detecta automáticamente. Cuando vale `1` o `true`, la CLI desactiva el spinner y cambia a una salida de texto sin formato. La mayoría de los runners de CI lo configuran.                                                                                                                                                      |
+| `TE_SESSION`     | Sobrescribe el identificador de sesión por terminal que se usa para el estado de la conexión activa. Configura esta opción para ejecutar sesiones aisladas de la CLI en el mismo shell, por ejemplo, en trabajos de matriz de CI en paralelo. Inspeccione y administre sesiones con [`te session`](xref:te-cli-commands#session). |
+| `TE_INTERACTIVE` | Permite anular `launchInteractiveMode` para una sola invocación. Acepta `auto`, `always` o `never`. `TE_INTERACTIVE=always` inicia el REPL y `TE_INTERACTIVE=never` muestra la ayuda.                                                                                                                                             |
+| `TE_COMPAT`      | Establécela en `te2` para forzar el modo de compatibilidad con TE2; consulta @te-cli-migrate.                                                                                                                                                                                                                                                        |
 
 ## Pasos a seguir
 
