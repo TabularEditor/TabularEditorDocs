@@ -166,7 +166,7 @@ In Tabular Editor 3, the dropdown lists all the categories that the protocol def
 
 | Valor             | Shown in Power BI as | Uso                                                                                  |
 | ----------------- | -------------------- | ------------------------------------------------------------------------------------ |
-| `Address`         | Address              | Street addresses.                                                    |
+| `Address`         | Dirección            | Street addresses.                                                    |
 | `City`            | City                 | City names.                                                          |
 | `County`          | County               | County names.                                                        |
 | `StateOrProvince` | State or Province    | State or province names.                                             |
@@ -303,7 +303,7 @@ Whether the engine builds an index on a text column, and whether it saves that i
 | Valor      | Significado                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
 | `Off`      | Don't build an index.                                                                        |
-| `Auto`     | The default. Build the index when needed, without saving it.                 |
+| `Auto`     | La opción predeterminada. Build the index when needed, without saving it.    |
 | `Explicit` | Build and save the index only when you run a refresh of type `RefreshIndex`.                 |
 | `Full`     | Build and save the index during a full refresh, a recalculation or a `RefreshIndex` refresh. |
 
@@ -319,7 +319,7 @@ Whether the engine builds a full-text index on a text column and saves it. The f
 
 | Valor      | Significado                                                                                  |
 | ---------- | -------------------------------------------------------------------------------------------- |
-| `Off`      | The default. Don't build a full-text index.                  |
+| `Off`      | La opción predeterminada. Don't build a full-text index.     |
 | `Auto`     | The TOM library doesn't describe this value for full-text indexing.          |
 | `Explicit` | Build and save the index only when you run a refresh of type `RefreshIndex`. |
 | `Full`     | Build and save the index during refresh.                                     |
@@ -401,16 +401,16 @@ The expression is evaluated in a _row context_, so it refers to the columns of t
 
 The engine recalculates the column when the table is refreshed, or when you change the expression and save the model to a connected server. In Tabular Editor 3, you edit the expression in the **Expression Editor** of the @dax-editor. The @table-preview shows the calculated values, or **(Calculation needed)** when the column must be recalculated first.
 
-### Expression Context
+### Contexto de expresión
 
 `ExpressionContext` · ExpressionContext · Options · compatibility level 1705+
 
 Whether the column has one value for everyone or is evaluated per user.
 
-| Valor         | Significado                                                                                                                   |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `Standard`    | The default. The column is calculated during refresh and has one value per row for all users. |
-| `UserContext` | The column is evaluated per user, and the expression can call functions such as `USERPRINCIPALNAME`.          |
+| Valor         | Significado                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Standard`    | La opción predeterminada. The column is calculated during refresh and has one value per row for all users. |
+| `UserContext` | The column is evaluated per user, and the expression can call functions such as `USERPRINCIPALNAME`.                       |
 
 Standard calculated columns, calculated tables, row-level security filters and relationships can't use a user-context column. See @user-context-calculated-columns.
 
