@@ -15,13 +15,12 @@ applies_to:
 
 ## 脚本用途
 
-该脚本作为 Tabular Editor x Databricks 系列的一部分编写。 In Unity Catalog it is possible to define primary and foreign key relationships between tables. This script can re-use this information to automatically detect and create relationships in Tabular Editor. Whilst importing the relationships, the script will also hide primary and foreign keys and set IsAvailableInMDX to false (with the exception of DateTime type primary keys). Primary keys are also marked as IsKey = TRUE in the semantic model. <br></br>
+该脚本作为 Tabular Editor x Databricks 系列的一部分编写。在 Unity Catalog 中，可以在表之间定义主键和外键关系。此脚本可复用这些信息，在 Tabular Editor 中自动检测并创建关系。在导入这些关系时，脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。主键也会在语义模型中标记为 IsKey = TRUE。 <br></br>
 
 > [!NOTE]
-> 此脚本需要 Databricks ODBC 驱动程序。 We recommend the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download), which replaces the legacy Simba Spark ODBC Driver. The script auto-detects which driver is installed and uses it accordingly.
+> 此脚本需要 Databricks ODBC 驱动程序。我们推荐使用新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。该脚本会自动检测已安装的驱动程序，并自动使用相应的驱动程序。
 
-Each run of the script will prompt the user for a Databricks Personal Access Token. This is required to authenticate to Databricks.
-该脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此您可能需要再与 Databricks 管理员确认一下，确保您有权限查询这些表。 <br></br>
+每次运行该脚本时，都会提示用户输入 Databricks 个人访问令牌。这用于对 Databricks 进行身份验证。该脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此您可能需要再与 Databricks 管理员确认一下，确保您有权限查询这些表。 <br></br>
 
 ## 脚本
 
@@ -621,7 +620,7 @@ Please check the following prerequisites:
 
 ### 说明
 
-The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. It auto-detects whether the new Databricks ODBC Driver or the legacy Simba Spark ODBC Driver is installed. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the detected ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to find any foreign key relationships for the table that are defined in Unity Catalog. For each row returned in the SQL query, the script looks for matching table and column names in the model and where a relationship does not already exist, a new one is created. For role playing dimensions, where the same table might have multiple foreign keys relating to a single table, the first relationship detected will be the active one, and all other subsequent relationships are created as inactive. The script will also hide primary and foreign keys and set IsAvailableInMDX to false (with the exception of DateTime type primary keys). Primary keys are also marked as IsKey = TRUE in the semantic model. After the script has run for each selected table, a dialogue box will appear showing how many new relationships were created.
+脚本使用 WinForms 来提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。对于每个选中的表，脚本会从该表分区中的 M 查询获取 Databricks 连接字符串信息，以及 schema 和表名。随后，它会使用检测到的 ODBC 驱动程序向 Databricks 发送一条 SQL 查询，通过查询 information_schema 表来查找在 Unity Catalog 中为该表定义的任何外键关系。对于 SQL 查询返回的每一行，脚本都会在模型中查找匹配的表名和列名；如果尚未存在关系，则会创建一个新的关系。对于角色扮演维度，同一张表可能通过多个外键关联到同一目标表，脚本检测到的第一个关系将被设为活动关系，其他随后创建的关系均设为非活动。脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。主键也会在语义模型中标记为 IsKey = TRUE。脚本对所有选定表都运行完成后，会弹出一个对话框，显示新创建了多少个关系。
 
 ## 示例输出
 
