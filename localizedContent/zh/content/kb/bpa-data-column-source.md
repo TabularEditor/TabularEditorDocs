@@ -10,7 +10,7 @@ description: 一条最佳实践规则，确保数据列具有有效的源列映�
 
 ## 概览
 
-此最佳实践规则用于识别缺少有效的 `SourceColumn` 属性的数据列。 Every data column must reference a source column from the underlying data source to function correctly during refresh.
+此最佳实践规则用于识别缺少有效的 `SourceColumn` 属性的数据列。每个数据列都必须引用底层数据源中的某个源列，才能在刷新时正常工作。
 
 - 类别：错误预防
 - 严重性：高（3）
