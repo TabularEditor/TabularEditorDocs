@@ -2,7 +2,7 @@
 uid: connect-databricks
 title: 连接到 Databricks
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,27 +19,36 @@ applies_to:
 
 # 连接到 Databricks
 
-在 **模型 > 导入表...** 中开始，然后选择 Databricks 数据源。每种身份验证方式都需要 SQL Warehouse 或群集的 **Host** 和 **HTTP Path**，Databricks 会在该计算资源的连接详细信息页面上显示这两项。
+The Databricks connector connects to SQL warehouses and clusters in Azure Databricks and in Databricks workspaces on other clouds. It's available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
 
-![“连接到 Databricks”对话框，其中选择了 Azure AD 作为身份验证类型，旁边有一个“登录”按钮](~/content/assets/images/features/connectivity/databricks-connection.png)
+Select **Model > Import tables...** and choose a Databricks source to open the dialog. @connecting-to-azure-databricks walks through an Azure Databricks import step by step.
 
-## 身份验证方式
+![The Connect to Databricks dialog, with Azure AD selected as the authentication type and a Sign in button beside it](~/content/assets/images/features/connectivity/databricks-connection.png)
 
-| 身份验证                                | 需要提供的内容                  | 可自动重新连接             |
-| ----------------------------------- | ------------------------ | ------------------- |
-| **访问令牌**                            | Databricks 个人访问令牌        | 是，直到令牌过期为止          |
-| **用户名 / 密码**                        | 用户名和密码                   | 是的                  |
-| **Azure AD**                        | 使用 Microsoft Entra ID 登录 | 仅限 Azure Databricks |
-| **OAuth (OIDC)** | 通过浏览器登录                  | 否                   |
-| **OAuth (M2M)**  | 服务主体的客户端 ID 和客户端密钥       | 是的                  |
+## 前提条件
 
-> [!NOTE]
-> **Azure AD** 仅适用于 Azure Databricks。如果 Databricks Workspace 托管在其他位置，请使用其余四种方式之一。
+Install the [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) on your machine (see [Prerequisites](xref:connecting-to-azure-databricks#prerequisites) in the tutorial for the supported drivers).
 
-对于定时刷新，**OAuth (M2M)** 通常是首选：它使用服务主体，因此不会因人员离职而到期。
+## Connection fields
 
-## 凭据存储位置
+| 字段                                                                                               | 说明                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Server Hostname**                                                                              | The host name from the **Connection details** tab of the compute resource in Databricks. 必需                                                                       |
+| **HTTP Path**                                                                                    | The HTTP path from the same tab. 必需                                                                                                                               |
+| **Type**                                                                                         | The authentication option. See [Authentication](#authentication)                                                                                                  |
+| **Username** and **Password**, or **Sign in...** | The credentials for the selected authentication option. The fields change with the option                                                                         |
+| **Advanced**                                                                                     | Optional settings: **Default catalog**, **Database**, **Automatic Proxy Discovery**, **Query tags**, **Implementation** and **Metric View BI Compatibility Mode** |
 
-你在此输入的凭据会按用户、按模型分别保存到模型旁的 [用户选项](xref:user-options) 文件（`.tmuo`）中，并已加密，只有你的 Windows 帐户才能读取。它们不属于模型元数据，因此不会提交到源代码管理中；同事打开同一模型时需要提供自己的凭据。
+## 身份验证
 
-生成的 M 表达式只会指定服务器和对象的名称。其中绝不会包含密码、令牌或密钥。
+| 身份验证                                | 需要提供的内容                                                                              | Interactive sign-in |
+| ----------------------------------- | ------------------------------------------------------------------------------------ | ------------------- |
+| **访问令牌**                            | A Databricks personal access token. When it expires, enter a new one | 否                   |
+| **用户名 / 密码**                        | 用户名和密码                                                                               | 否                   |
+| **Azure AD**                        | A Microsoft Entra ID sign-in. Available only for Azure Databricks    | 是的                  |
+| **OAuth (OIDC)** | 通过浏览器登录                                                                              | 是的                  |
+| **OAuth (M2M)**  | A service principal client ID and client secret                                      | 否                   |
+
+For unattended connections, use **OAuth (M2M)**, which authenticates as a service principal.
+
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
