@@ -16,7 +16,7 @@ applies_to:
 ---
 # Power BI Desktop Integration
 
-[Power BI Desktop supports External Tools](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
+[Power BI Desktop supports External Tools](https://docs.microsoft.com/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
 
 ![image](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
@@ -25,7 +25,7 @@ applies_to:
 - [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494) (July 2020 or newer)
 - [Latest version of Tabular Editor](https://tabulareditor.com/downloads)
 
-Also, it is highly recommended that [automatic date/time](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-auto-date-time) is **disabled** (Power BI Desktop setting under "Data Load").
+Also, it is highly recommended that [automatic date/time](https://docs.microsoft.com/power-bi/transform-model/desktop-auto-date-time) is **disabled** (Power BI Desktop setting under "Data Load").
 
 ## External Tool architecture
 
@@ -41,7 +41,7 @@ External tools may connect to the instance of Analysis Services managed by Power
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
+Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
 
 ## Supported Modeling Operations
 

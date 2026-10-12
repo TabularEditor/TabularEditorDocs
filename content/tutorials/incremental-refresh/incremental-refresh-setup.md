@@ -2,7 +2,7 @@
 uid: incremental-refresh-setup
 title: Set Up a New Refresh Policy
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,12 +26,12 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. 
-> For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ### Configure a New Refresh Policy
 
 1. __Connect to the model:__ Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
-2. __Create the `RangeStart` and `RangeEnd` Parameters:__ Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Add two new Shared Expressions in Tabular Editor:
+2. __Create the `RangeStart` and `RangeEnd` Parameters:__ Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Add two new Shared Expressions in Tabular Editor:
 
 <img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Create a shared expression" style="width:400px !important"/>
 
@@ -71,7 +71,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
     )
 ```
 
-   Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+   Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 7. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partitions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
 
@@ -205,7 +205,7 @@ in
    #"Incremental Refresh" 
 ```
 
-See also the documentation for the `Date.FromText` function in Power Query [here](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext). Should it not be possible to convert the Date column in-line while preserving query folding, it is also possible to configure incremental refresh with a native query, as described in the section, below.
+See also the documentation for the `Date.FromText` function in Power Query [here](https://learn.microsoft.com/powerquery-m/date-fromtext). Should it not be possible to convert the Date column in-line while preserving query folding, it is also possible to configure incremental refresh with a native query, as described in the section, below.
 
 -------------
 

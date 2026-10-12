@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX User-Defined Functions
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -134,7 +134,7 @@ These type specifications are optional, but if specified they will perform an im
 
 Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
-Check the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
+Check the [Microsoft specification for UDFs](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
 
 ### Optional Parameters with Default Expressions
 

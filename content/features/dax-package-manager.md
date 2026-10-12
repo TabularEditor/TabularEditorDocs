@@ -2,7 +2,7 @@
 uid: dax-package-manager
 title: DAX Package Manager
 author: Daniel Otykier
-updated: 2025-11-03
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -29,7 +29,7 @@ As the name suggests, this feature acts like a package manager similar to how Nu
 You can use the DAX Package Manager with any model that supports DAX User-Defined Functions, that is, the Compatibility Level of the model must be 1702 or higher.
 
 > [!WARNING]
-> DAX User-Defined Functions is currently (as of November 2025) a preview feature of Power BI. Consider their [limitations](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) before use.
+> DAX User-Defined Functions is currently (as of November 2025) a preview feature of Power BI. Consider their [limitations](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) before use.
 
 ---
 
@@ -142,7 +142,7 @@ All associated UDFs will be removed from the model.
 
 ## Technical considerations
 
-The DAX Package Manager uses [extended properties](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) to keep track of installed packages. Extended properties are similar to annotations, but are better suited for storing custom metadata in JSON format.
+The DAX Package Manager uses [extended properties](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) to keep track of installed packages. Extended properties are similar to annotations, but are better suited for storing custom metadata in JSON format.
 
 The DAX Package Manager creates the following extended properties on the **Model** object:
 
@@ -194,5 +194,5 @@ You have the following options:
 
 - [DaxLib Project Site](https://daxlib.org)
 - [DaxLib GitHub Repository](https://github.com/daxlib/daxlib)
-- [DAX User-Defined Functions (Microsoft Learn)](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)
+- [DAX User-Defined Functions (Microsoft Learn)](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions)
 - [User-Defined Functions in Tabular Editor 3](xref:udfs)

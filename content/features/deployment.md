@@ -55,7 +55,7 @@ Power BI and Fabric semantic models don't store credentials in the model. You se
 
 ## Deployment script
 
-During deployment, Tabular Editor generates a [CreateOrReplace TMSL script](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), which is then executed against the Analysis Services engine. The CreateOrReplace script contains all the metadata required to recreate the model, including tables, columns, measures, relationships, perspectives, translations, etc. If the model does not already exist on the target server, it will be created. If the model already exists, existing objects will be replaced with the new metadata specified in the script.
+During deployment, Tabular Editor generates a [CreateOrReplace TMSL script](https://learn.microsoft.com/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), which is then executed against the Analysis Services engine. The CreateOrReplace script contains all the metadata required to recreate the model, including tables, columns, measures, relationships, perspectives, translations, etc. If the model does not already exist on the target server, it will be created. If the model already exists, existing objects will be replaced with the new metadata specified in the script.
 
 If any of the options on the **Deployment options** page were deselected, Tabular Editor will use the original metadata definition of those objects in the generated TMSL script, thus retaining their definitions as-is on the server.
 

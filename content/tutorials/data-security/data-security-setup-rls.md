@@ -2,7 +2,7 @@
 uid: data-security-setup-rls
 title: Setup or Modify RLS
 author: Kurt Buhler
-updated: 2023-03-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -191,6 +191,6 @@ You can assign and remove users/groups from roles through Tabular Editor.
 > If your organisation is using on-premises Active Directory with SQL Server Analysis Services, you will need to use the __Windows AD Member__ option instead of __Azure AD Member__.
 
 > [!NOTE]
-> Once a Power BI dataset has been published to the Power BI Service, you can also manage role members through the [Dataset Security settings](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Alternatively, you can manage role members through [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (this applies to AAS/SSAS models in addition to Power BI dataset).
+> Once a Power BI dataset has been published to the Power BI Service, you can also manage role members through the [Dataset Security settings](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Alternatively, you can manage role members through [SQL Server Management Studio](https://learn.microsoft.com/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (this applies to AAS/SSAS models in addition to Power BI dataset).
 
 ---

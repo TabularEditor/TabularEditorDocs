@@ -2,7 +2,7 @@
 uid: useful-script-snippets
 title: Useful script snippets
 author: Daniel Otykier
-updated: 2026-04-10
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -692,9 +692,9 @@ The following methods are available:
 | Method | Description |
 | ------ | ----------- |
 | `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | This methods passes the specified TMSL or XMLA script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. Set the `isXmla` parameter to `true` if  sending an XMLA script. |
-| `IDataReader ExecuteReader(string dax)` | Executes the specified DAX *query* against the connected AS database and returns the resulting [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) object. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader. |
-| `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
-| `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
+| `IDataReader ExecuteReader(string dax)` | Executes the specified DAX *query* against the connected AS database and returns the resulting [AmoDataReader](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) object. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader. |
+| `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
+| `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
 
 Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
 

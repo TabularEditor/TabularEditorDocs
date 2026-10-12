@@ -2,7 +2,7 @@
 uid: script-output-things
 title: Output Object Details in a Grid
 author: Daniel Otykier
-updated: 2024-12-13
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
 # Output Object Details in a Grid
 
 ## Script Purpose
-Another way to get an overview of objects in the model, and how they are configured, is to output them in a grid using the C# [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0) class. This is a very flexible technique, as you can add only the information you are interested in, as columns of the `DataTable`. Moreover, when passing a `DataTable` to the `Output()` method, Tabular Editor will automatically display it in a grid view, which is very convenient for inspecting the data.
+Another way to get an overview of objects in the model, and how they are configured, is to output them in a grid using the C# [`DataTable`](https://learn.microsoft.com/dotnet/api/system.data.datatable?view=net-8.0) class. This is a very flexible technique, as you can add only the information you are interested in, as columns of the `DataTable`. Moreover, when passing a `DataTable` to the `Output()` method, Tabular Editor will automatically display it in a grid view, which is very convenient for inspecting the data.
 
 ## Script
 

@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: Save with supporting files
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -100,7 +100,7 @@ Tabular Editor will create a new folder using the Database name with a **.Semant
 The **Save with supporting files** feature is designed to work seamlessly with Microsoft Fabric's Git integration capabilities. Git Integration is available on workspaces assigned to Microsoft Fabric F-SKU capacity, Power BI Premium capacity, or Power BI Premium Per User (PPU).
 
 > [!WARNING]
-> Git Integration for the Semantic Model item is currently in preview. For the latest information on supported items for Fabric Git Integration, see [Supported items in Fabric Git Integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
+> Git Integration for the Semantic Model item is currently in preview. For the latest information on supported items for Fabric Git Integration, see [Supported items in Fabric Git Integration](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
 
 > [!CAUTION]
 > Do **not** enable Git integration on the Fabric workspace that you use to host your Tabular Editor workspace databases.
@@ -124,7 +124,7 @@ When your model is synchronized to Microsoft Fabric/Power BI, the semantic model
 Tabular Editor automatically sets the model culture to **en-US** when saving with supporting files, if the model does not already have a culture specified. This ensures the model culture is present when synchronizing with Fabric, preventing uncommitted changes that can occur if the culture is not set during the initial synchronization.
 
 For more information, see:
-- [Microsoft Fabric Git integration documentation](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
+- [Microsoft Fabric Git integration documentation](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
 - [Tabular Editor and Fabric Git Integration blog post](https://tabulareditor.com/blog/tabular-editor-and-fabric-git-integration)
 
 ## Comparing serialization formats

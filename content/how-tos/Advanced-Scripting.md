@@ -2,7 +2,7 @@
 uid: advanced-scripting
 title: Advanced Scripting
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -254,7 +254,7 @@ If you use another edition of Visual Studio 2022, the path might be slightly dif
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\Roslyn
 ```
 
-The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
+The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
 
 ```
 -langversion:12.0

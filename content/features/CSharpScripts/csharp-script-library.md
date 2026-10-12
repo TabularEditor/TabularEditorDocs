@@ -2,7 +2,7 @@
 uid: csharp-script-library
 title: C# Script Library
 author: Morten Lønskov
-updated: 2023-02-23
+updated: 2026-10-12
 
 ---
 # C# Script Library
@@ -22,7 +22,7 @@ The top of each article denotes script compatibility in TE2.x (Tabular Editor 2)
 ### Scripting with Tabular Editor as a Power BI External Tool
 <br></br>
 > [!NOTE] 
-> Some scripts does not work when connected to a Power BI Desktop model, due to the limitations of Power BI Desktop External tools: [External Tool Limitations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). You can still experiment with the script by enabling unsupported modeling operations under preferences.
+> Some scripts does not work when connected to a Power BI Desktop model, due to the limitations of Power BI Desktop External tools: [External Tool Limitations](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations). You can still experiment with the script by enabling unsupported modeling operations under preferences.
 <br></br>
 
 ### [Tabular Editor 2 Preferences](#tab/TE2Preferences)

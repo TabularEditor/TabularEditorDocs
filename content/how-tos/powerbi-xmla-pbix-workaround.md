@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creating PBIX File from XMLA Endpoint.
 author: Morten Lønskov
-updated: 2026-09-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ However, with the Power BI Project file, it's possible to create a .pbix file fr
 ![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. See below for a script to handle incremental refresh partitions.
+> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. See below for a script to handle incremental refresh partitions.
 
 ## Step 1: Create and save an empty Power BI projects (.pbip) file
 

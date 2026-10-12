@@ -2,7 +2,7 @@
 uid: refresh-overrides
 title: Refresh Override Profiles
 author: Daniel Otykier
-updated: 2026-01-20
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -35,7 +35,7 @@ Refresh overrides solve this problem by keeping temporary refresh configurations
 
 ## Override profile structure
 
-Override profiles use JSON that follows the [TMSL refresh command specification](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). The JSON is an array of override objects, where each object can contain one or more of the following:
+Override profiles use JSON that follows the [TMSL refresh command specification](https://learn.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). The JSON is an array of override objects, where each object can contain one or more of the following:
 
 - `scope` - Limit the override to a specific table or partition (optional)
 - `dataSources` - Override data source connection properties

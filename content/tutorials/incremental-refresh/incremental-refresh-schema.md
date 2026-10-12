@@ -2,7 +2,7 @@
 uid: incremental-refresh-schema
 title: Add or Remove Columns in a Table that uses Incremental Refresh
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ---
 

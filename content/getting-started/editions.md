@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2026-09-22
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -133,7 +133,7 @@ We restrict a few data modeling operations inside Tabular Editor 3 as well, corr
 
 Specifically, [Azure AS Basic Tier and SQL Server Standard Edition do not support perspectives or multiple partitions](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), and as such, SSAS/Azure AS models using these features require TE3 Enterprise Edition. DirectQuery is not restricted by your Tabular Editor 3 edition at all: whether you can use it depends on the server the model is hosted on.
 
-Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
+Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
 
 |Model type|Feature|Desktop|Business|Enterprise|
 |---|---|---|---|---|
@@ -146,7 +146,7 @@ Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake data
 |Power BI|DirectQuery|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Power BI|Direct Lake|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
-\***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
+\***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
 
 \*\***Note:** Perspectives and multiple partitions are available in Business Edition for Power BI models, but the model's `CompatibilityMode` must be set to `PowerBI`. See [Change compatibility mode](xref:change-compatibility-mode) for instructions.
 

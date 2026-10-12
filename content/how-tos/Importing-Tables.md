@@ -2,7 +2,7 @@
 uid: importing-tables-te2
 title: Importing Tables in TE2
 author: Daniel Otykier
-updated: 2020-05-03
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,7 +73,7 @@ As of version 2.8, Tabular Editor has a new UI feature that lets you easily chec
 
 Changes are detected based on the "Source Column" and "Data Type" properties of all data columns on the respective tables. If any changes are detected, Tabular Editor will display the above UI, detailing the changes. You may deselect changes that you do not want to apply to your model, although keep in mind that some changes may cause processing errors (for example, source columns that do not exist in the source table/view/query).
 
-This mechanism (as well as the Import Table UI) uses the FormatOnly-flag, when querying the metadata from the source. This means that you can have table partitions that use Stored Procedures. The FormatOnly-flag ensures that the Stored Proc is never executed directly. Instead, static analysis is performed by the server, in order to return only metadata describing the result set that would be returned from the Stored Proc upon execution. Depending on your RDBMS, there may be some limitations of the FormatOnly-flag when used with Stored Procedures. For more information on this topic when using SQL Server as a data source, please see [this article](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
+This mechanism (as well as the Import Table UI) uses the FormatOnly-flag, when querying the metadata from the source. This means that you can have table partitions that use Stored Procedures. The FormatOnly-flag ensures that the Stored Proc is never executed directly. Instead, static analysis is performed by the server, in order to return only metadata describing the result set that would be returned from the Stored Proc upon execution. Depending on your RDBMS, there may be some limitations of the FormatOnly-flag when used with Stored Procedures. For more information on this topic when using SQL Server as a data source, please see [this article](https://docs.microsoft.com/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
 
 ### CLI support
 
@@ -105,7 +105,7 @@ Starting with Tabular Editor version 2.14.1, you can change the behaviour of the
 
 ## Azure Active Directory with MFA
 
-If you want to import tables from an Azure SQL Database or Azure Synapse SQL pool, you will likely need Azure Active Directory multi-factor authentication. Unfortunately, this is not supported by the SQL Native Client provider used in .NET Framework. Instead, use the MSOLEDBSQL provider (which also has the benefit that it is generally faster than the native client, when Analysis Services reads data from the table). Make sure you have the [latest (x86) version](https://docs.microsoft.com/en-us/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) of this driver installed, to make this work on your local machine.
+If you want to import tables from an Azure SQL Database or Azure Synapse SQL pool, you will likely need Azure Active Directory multi-factor authentication. Unfortunately, this is not supported by the SQL Native Client provider used in .NET Framework. Instead, use the MSOLEDBSQL provider (which also has the benefit that it is generally faster than the native client, when Analysis Services reads data from the table). Make sure you have the [latest (x86) version](https://docs.microsoft.com/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) of this driver installed, to make this work on your local machine.
 
 Here are step by step instructions to set up the data source to work with MFA:
 
@@ -140,7 +140,7 @@ Since there is no officially supported way to execute or validate a Power Query/
 ![image](~/content/assets/images/importing-tables-07.png)
 - For other types of data sources, it may be easier to create the initial model and first few tables in SSDT, to figure out how the Data Source should be configured, and then use the technique below only when adding additional tables.
 - Use Power Query within Excel or Power BI Desktop to connect to your source data and apply any transformations needed.
-- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the previous output:
+- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/powerquery-m/table-schema) on the previous output:
 ![image](~/content/assets/images/importing-tables-08.png)
 - Select the full output preview, copy it into the clipboard (CTRL+A, CTRL+C) and paste it into the schema/metadata textbox in the Import Tables Wizard:
 ![image](~/content/assets/images/importing-tables-09.png)

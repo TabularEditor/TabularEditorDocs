@@ -2,7 +2,7 @@
 uid: incremental-refresh-about
 title: What is a Refresh Policy?
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ applies_to:
 
 ---
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) configured for one or more data tables. __The purpose of Incremental Refresh is to achieve faster, more efficient refreshes by only retrieving recent/changing data, _incrementally refreshing_ the table.__ To do this, the table is automatically divided into partitions, such that only recent or changing data is <span style="color:#01a99d">refreshed ("hot" partitions)</span> or even <span style="color:#8d7bae">retrieved in real-time (["Direct Query" partitions in "Hybrid Tables"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span> while <span style="color:#939799">older, static data is archived ("cold" partitions).</span>
+Datasets hosted in the Power BI service can have [Incremental Refresh](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview) configured for one or more data tables. __The purpose of Incremental Refresh is to achieve faster, more efficient refreshes by only retrieving recent/changing data, _incrementally refreshing_ the table.__ To do this, the table is automatically divided into partitions, such that only recent or changing data is <span style="color:#01a99d">refreshed ("hot" partitions)</span> or even <span style="color:#8d7bae">retrieved in real-time (["Direct Query" partitions in "Hybrid Tables"](https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span> while <span style="color:#939799">older, static data is archived ("cold" partitions).</span>
 
 _Incremental refresh can be easily configured and modified from within Tabular Editor._
 
@@ -32,13 +32,13 @@ _Incremental refresh can be easily configured and modified from within Tabular E
 > - Experience shorter and more dependable scheduled refreshes
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ---
 
 ### How does it work?
 
-To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table datetime column. Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart`, `RangeEnd` or the date column to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table datetime column. Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart`, `RangeEnd` or the date column to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 An example is given below. Incremental Refresh is applied to a table _'Orders'_ upon the _[Order Date]_ column:
 
@@ -108,8 +108,8 @@ in
 ***
 
 > [!WARNING]
-> Incremental refresh is designed for data sources that support [Power Query query folding](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Ideally, [query folding shouldn't be broken](https://learn.microsoft.com/en-us/power-query/step-folding-indicators) before the filter step is applied.
-> There's no explicit requirement for the final query to fold, except when implementing [Hybrid Tables](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
+> Incremental refresh is designed for data sources that support [Power Query query folding](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Ideally, [query folding shouldn't be broken](https://learn.microsoft.com/power-query/step-folding-indicators) before the filter step is applied.
+> There's no explicit requirement for the final query to fold, except when implementing [Hybrid Tables](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
 
 
 
@@ -154,7 +154,7 @@ Depending on the configured properties, Incremental Refresh may function differe
 In the standard configuration of Incremental Refresh, all partitions are imported in-memory. Partitions in the <span style="color:#BC4A47">rolling window</span> are archived, while those in the <span style="color:#455C86">incremental window</span> are refreshed. 
 
 # [Hybrid](#tab/hybrid)
-In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#455C86">incremental window</span> is queried in real time using DirectQuery.
+In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#455C86">incremental window</span> is queried in real time using DirectQuery.
 
 This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
 
@@ -258,7 +258,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
             <tr>
                 <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
                 <td class="formatting">Get the latest data in real time with DirectQuery</td>
-                <td class="formatting">Specifies whether Incremental Refresh is configured with only import partitions or also a DirectQuery partition, to result in a <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"Hybrid Table"</a>.</td>
+                <td class="formatting">Specifies whether Incremental Refresh is configured with only import partitions or also a DirectQuery partition, to result in a <a href="https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"Hybrid Table"</a>.</td>
                 <td class="formatting"><code>Import</code> or <code>Hybrid</code>.</td>
             </tr>
             <tr>
