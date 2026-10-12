@@ -1068,4 +1068,4 @@ DAX formatter 请求的超时时间，单位为毫秒。如果使用 DAX Formatt
 
 ## 后续步骤
 
-For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide [Personalizing TE3](xref:personalizing-te3).
+如需查看有关最常调整的偏好设置的易用指南，请参阅入门指南 [Personalizing TE3](xref:personalizing-te3)。
