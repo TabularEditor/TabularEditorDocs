@@ -17,7 +17,7 @@ applies_to:
 
 Si quieres crear un nuevo parámetro M dinámico para usarlo en consultas de Power Query (particiones M o expresiones compartidas).
 
-## Script
+## Secuencia de comandos
 
 ### Crear una nueva partición M
 
