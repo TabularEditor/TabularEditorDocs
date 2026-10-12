@@ -20,12 +20,10 @@ applies_to:
 
 # 创建简单验证规则
 
-This how-to demonstrates how to create simple predicate-based validation rules to enforce naming conventions and structural requirements.
-这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的硬性技术要求。
+本操作指南演示如何创建基于谓词的简单验证规则，以强制遵循命名约定并满足结构要求。这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的硬性技术要求。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。更早的版本不支持此处所示的 v1.1 Metric View 功能。
 
 ## 四个规则帮助方法
 
@@ -33,7 +31,7 @@ This how-to demonstrates how to create simple predicate-based validation rules t
 
 - `MakeValidationRuleForView`：用于根 View 对象的规则
 - `MakeValidationRuleForJoin`：用于 Join 对象的规则
-- `MakeValidationRuleForField` - rules for Field objects
+- `MakeValidationRuleForField`：用于 Field 对象的规则
 - `MakeValidationRuleForMeasure`：用于度量值对象的规则
 
 每个辅助方法都接受四个参数：
@@ -69,9 +67,9 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
 );
 ```
 
-## Rule for Metric View Field
+## Metric View 字段规则
 
-Check that Metric View field names do not contain underscores:
+检查 Metric View 字段名称中是否包含下划线：
 
 ```csharp {compile}
 var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
@@ -95,12 +93,10 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 );
 ```
 
-## Rules for specific Metric View versions
+## 针对特定 Metric View 版本的规则
 
-Each helper has an overload that takes a final `minVersion` argument, a string such as "0.1" or "1.1".
-Rules defined with a `minVersion` only run against Metric Views at or above that version.
-This is useful for a rule that checks a property introduced in a later version,
-such as `display_name` (added in v1.1):
+每个辅助方法都有一个重载，可在最后接收一个 `minVersion` 参数，比如 "0.1" 或 "1.1" 这样的字符串。使用 `minVersion` 定义的规则只会对该版本或更高版本的 Metric View 运行。这对于检查在较新版本中引入的属性的规则很有用，
+例如 `display_name`（在 v1.1 中添加）：
 
 ```csharp {compile}
 var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
@@ -213,7 +209,7 @@ Found 5 issue(s):
 
 ## 后续步骤
 
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
+- [创建上下文验证规则](xref:semantic-bridge-validate-contextual-rules)
 
 ## 另见
 
