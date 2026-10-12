@@ -2,7 +2,7 @@
 uid: kb.bpa-powerbi-latest-compatibility
 title: 在 Power BI 模型中使用最新的兼容级别
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-09-23
 description: 最佳实践规则：确保 Power BI 模型使用最新的兼容级别，以获得最佳功能与性能。
 ---
 
@@ -10,7 +10,7 @@ description: 最佳实践规则：确保 Power BI 模型使用最新的兼容级
 
 ## 概览
 
-此规则用于识别未使用最新可用兼容级别的 Power BI 模型。使用最新级别可确保你获得最新功能、性能优化和错误修复。
+This rule flags Power BI models below the highest compatibility level that your Tabular Editor 3 version supports. New model features, such as new DAX functions and TOM properties, require the newer levels.
 
 - 类别：治理
 - 严重性：高（3）
@@ -21,12 +21,12 @@ description: 最佳实践规则：确保 Power BI 模型使用最新的兼容级
 
 ## 为何这很重要
 
-- **功能缺失**：无法使用新的 DAX 函数和模型能力
-- **面向未来的兼容性**：使用较新的级别可让升级更轻松
+- new DAX functions and model features aren't available below the level that introduces them
+- a model kept at a recent level needs smaller upgrades later
 
 ## 此规则何时会触发
 
-对于 Power BI 模型，当兼容级别低于当前最大值时会触发：
+The rule triggers for Power BI models whose compatibility level isn't the current maximum:
 
 ```csharp
 Model.Database.CompatibilityMode=="PowerBI" 
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### 自动修复
 
-该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。如果你安装的是较旧版本的 Tabular Editor 3，请更新到最新版本。
+The rule's automatic fix sets the compatibility level to the highest level your installed version of Tabular Editor 3 supports. To get a newer level, update Tabular Editor 3.
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -45,41 +45,43 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### 手动修复
 
-1. 在 Tabular Editor 中，转到 **Model** 属性页
-2. 将**兼容级别**设置为最新版本
-3. 测试所有 DAX 表达式和功能
-4. 部署到 Power BI 服务
+1. In the TOM Explorer, select **Model** and expand **Database** in the **Properties** view.
+2. Set **Compatibility Level** to the latest level.
+3. Test the DAX expressions and features of the model.
+4. Deploy to the Power BI Service.
+
+参见 @update-compatibility-level。
 
 ## 常见原因
 
 ### 原因 1：在 Power BI Desktop 中创建模型
 
-在 Power BI Desktop 中创建的模型未必使用最新的兼容级别。
+Power BI Desktop doesn't always create models at the latest compatibility level.
 
 ### 原因 2：模型以较低兼容级别创建
 
-模型使用较旧版本的 Power BI Desktop 创建。
+An older version of Power BI Desktop created the model.
 
 ### 原因 3：保守做法
 
-团队政策要求延后升级。
+A team policy delays upgrades.
 
 ## 示例
 
 ### 修复前
 
-```
+```text
 Model Compatibility Level: 1500
 Current Maximum Level: 1706
 ```
 
 ### 修复后
 
-```
+```text
 Model Compatibility Level: 1706 (Latest)
 ```
 
-可访问更新的功能，例如 [自定义日历](xref:calendars) (1701+)、[DAX 用户定义函数](xref:udfs) (1702+)、@user-context-calculated-columns (1705+) 以及列上的字符串索引行为 (1706+)。
+The model can use [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), [user-context calculated columns](xref:user-context-calculated-columns) (1705+) and the `StringIndexingBehavior` column property (1706+).
 
 ## 兼容级别
 
