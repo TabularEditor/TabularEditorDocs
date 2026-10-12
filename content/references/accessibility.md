@@ -2,7 +2,7 @@
 uid: accessibility
 title: Accessibility
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Accessibility
 
-Most accessibility settings in Tabular Editor 3 are on the **Tools > Preferences > Tabular Editor > User Interface** page, which is described under [User Interface](xref:preferences#tabular-editor--user-interface) in the preferences reference.
+Most accessibility settings in Tabular Editor 3 are on the **Tools > Preferences > Tabular Editor > User Interface** page. See [Preferences](xref:preferences).
 
 ## Color blindness mode
 
