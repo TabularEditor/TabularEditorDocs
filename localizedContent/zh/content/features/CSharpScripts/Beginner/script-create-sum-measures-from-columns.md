@@ -44,7 +44,7 @@ foreach(var c in Selected.Columns)
 
 ### 说明
 
-这个片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数，在表中创建一个新的度量值。 We use the `DaxObjectFullName` property to get the fully qualified name of the column for use in the DAX expression: `'TableName'[ColumnName]`.
+这个片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数，在表中创建一个新的度量值。我们使用 `DaxObjectFullName` 属性获取列的完全限定名称，用于 DAX 表达式：`'TableName'[ColumnName]`。
 
 ## 输出示例
 
