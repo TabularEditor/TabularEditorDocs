@@ -67,7 +67,7 @@ Tabular Editor（3.12.0 及更高版本）支持通过 DAX 查询窗口直接添
 
 “应用选择”和“应用选择并同步”只会应用查询编辑器当前所选范围内的度量值、列或表。
 
-与 [DAX脚本功能](xrefid:dax-scripts) 不同，由于 DAX 查询语法不支持指定说明、显示文件夹等其他属性，所以这种方式只能更新度量值的“表达式”属性。
+Unlike the [DAX Script feature](xref:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
 
 右键上下文菜单中也新增了“应用”选项。
 
@@ -118,7 +118,7 @@ Customers
 
 ## 调试 DAX 查询
 
-DAX 查询是可以运行 [DAX调试器](xrefid:dax-debugger) 的两个位置之一，另一个是 Pivot Grid。
+DAX queries are one of the two places where it is possible to run the [DAX Debugger](xref:dax-debugger), the other being the Pivot Grid.
 
 DAX调试器使你能够理解 DAX 在单个单元格中是如何工作的。要启动调试器，只需在目标单元格上右键单击并选择“调试单元格”，调试器将以所选单元格为上下文启动。
 
