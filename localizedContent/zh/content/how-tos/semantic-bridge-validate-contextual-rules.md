@@ -23,18 +23,17 @@ applies_to:
 本操作指南演示如何使用验证上下文创建验证规则，以检查跨多个对象的条件。这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的硬性技术要求。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。早期版本不支持此处所示的 v1.1 Metric View 功能。
 
 ## 何时使用上下文规则
 
 在需要执行以下操作时，请使用上下文规则：
 
-- Check that a name is not reused across different object types
+- 检查名称是否在不同对象类型之间重复使用
 - 访问先前已验证对象的信息
 
 > [!NOTE]
-> The validation process validates each Metric View object in order (joins, then fields, then measures), so the context consists only of those items already visited in the validation.
+> 验证过程会按顺序验证每个 Metric View 对象（先验证连接，再验证字段，最后验证度量值），因此上下文仅包含在本次验证中已访问过的项。
 
 ## MakeValidationRule 方法
 
@@ -55,11 +54,11 @@ SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // or Field, 
 
 `context` 参数提供以下内容：
 
-- `context.FieldNames` - names of fields already validated
+- `context.FieldNames` - 已验证的字段名称
 - `context.MeasureNames` - 已验证的度量值名称列表
 - `context.JoinNames` - 已验证的连接名称
-- `context.MakeError(code, message, object)` - create an error diagnostic for the given object
-- `context.MakeWarning(code, message, object)` - create a warning diagnostic for the given object
+- `context.MakeError(code, message, object)` - 为给定对象创建一条错误诊断信息
+- `context.MakeWarning(code, message, object)` - 为给定对象创建一条警告诊断信息
 
 由于诊断信息是在验证函数体内创建的，你可以在信息中加入当前正在验证对象的详细信息。
 
@@ -71,9 +70,9 @@ SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // or Field, 
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 ```
 
-## Rule: a Metric View Measure name must not duplicate a Metric View Field name
+## 规则：Metric View 度量值名称不得与 Metric View 字段名称重复
 
-Fields are validated before measures, so when a measure is checked, `context.FieldNames` already holds every field name.
+字段会先于度量值进行验证，因此在检查度量值时，`context.FieldNames` 已包含所有字段名称。
 
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -91,9 +90,9 @@ var measureNameRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Me
 );
 ```
 
-## Rule: a Metric View Measure name must not duplicate a Metric View Join name
+## 规则：Metric View 度量值名称不得与 Metric View 连接名称重复
 
-Joins are validated first, so `context.JoinNames` holds every join name by the time measures are checked.
+连接会最先进行验证，因此在检查度量值时，`context.JoinNames` 已包含所有连接名称。
 
 ```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -113,7 +112,7 @@ var measureNotJoinRule = SemanticBridge.MetricView.MakeValidationRule<MetricView
 
 ## 为什么拆分规则更好
 
-注意，我们创建了两条独立的规则，而不是把它们合并成一条规则。 This is the recommended approach because:
+注意，我们创建了两条独立的规则，而不是把它们合并成一条规则。推荐这样做，原因是：
 
 1. **更清晰的错误信息**：每条规则都会生成明确、可操作的信息
 2. **更易维护**：规则可以独立新增、移除或修改
@@ -214,7 +213,7 @@ Found 2 issue(s):
 
 ## 与默认规则组合
 
-You can run contextual rules alongside the default validation rules by calling `Validate` twice:
+你可以通过调用两次 `Validate`，将上下文规则与默认验证规则一起运行：
 
 ```csharp {run id=combined setup=mv-sample after=complete output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
