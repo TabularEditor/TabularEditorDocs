@@ -52,23 +52,23 @@ Para cambiar un puesto de la Edición Enterprise, anula el registro del usuario 
 
 ## Detalles del registro
 
-Tabular Editor 3 stores activation details for each Windows user under `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
+Tabular Editor 3 almacena los detalles de activación de cada usuario de Windows en `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
 
-| Valor              | Tipo        | Content                                                                                                                                        |
-| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LicenseKey`       | `REG_SZ`    | The license key                                                                                                                                |
-| `User`             | `REG_SZ`    | The e-mail address of the licensed user, for multi-user licenses                                                                               |
-| `ActivationKey`    | `REG_SZ`    | The activation returned by the licensing service                                                                                               |
-| `Activation`       | `REG_SZ`    | An activation written by older versions of Tabular Editor 3. Tabular Editor 3 deletes it the next time it stores an activation |
-| `InstallationDate` | `REG_QWORD` | The first launch of Tabular Editor 3 for this Windows user. Tabular Editor 3 creates it on launch if it's missing              |
+| Valor              | Tipo        | Contenido                                                                                                                                                    |
+| ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `LicenseKey`       | `REG_SZ`    | La clave de licencia                                                                                                                                         |
+| `User`             | `REG_SZ`    | La dirección de correo electrónico del usuario con licencia, para licencias multiusuario                                                                     |
+| `ActivationKey`    | `REG_SZ`    | La activación devuelta por el servicio de licencias                                                                                                          |
+| `Activation`       | `REG_SZ`    | Una activación guardada por versiones anteriores de Tabular Editor 3. Tabular Editor 3 la elimina la próxima vez que almacena una activación |
+| `InstallationDate` | `REG_QWORD` | La primera vez que este usuario de Windows inicia Tabular Editor 3. Tabular Editor 3 la crea al iniciarse si no existe                       |
 
-To view the current license key for the active Windows user, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+Para ver la clave de licencia actual del usuario de Windows activo, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the values.
+También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar hasta `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -76,15 +76,15 @@ Un administrador del sistema también puede asignar de forma proactiva licencias
 
 ## Cambiar una clave de licencia
 
-The **Change license key** option in **Help > About Tabular Editor** removes the `LicenseKey`, `User`, `ActivationKey` and `Activation` values and deactivates the installation on the licensing service. The option appears only when no model is loaded and the license is activated or its seat reservation has expired. If it isn't shown, for example because activation failed, reset the license through the Registry Editor:
+La opción **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`, y desactiva la instalación en el servicio de licencias. La opción solo aparece cuando no hay ningún modelo cargado y la licencia está activada o la reserva de asiento ha caducado. Si no aparece, por ejemplo porque la activación falló, restablece la licencia desde el Editor del Registro:
 
 1. Cierra todas las instancias de Tabular Editor 3.
-2. Open the Registry Editor in Windows (Start > Run > regedit.exe).
+2. Abre el Editor del Registro de Windows (Inicio > Ejecutar > regedit.exe).
 3. Localiza `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (consulta la captura de pantalla anterior).
-4. Delete the `LicenseKey`, `User`, `ActivationKey` and `Activation` values. Leave `InstallationDate` in place.
+4. Elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`. Deja `InstallationDate` tal cual.
 5. Cierra el Editor del Registro y reinicia Tabular Editor 3.
 
-Alternatively, run the following commands in a Windows Command Prompt (Start > Run > cmd.exe). A command reports an error if its value doesn't exist, and the remaining commands still run:
+Como alternativa, ejecuta los siguientes comandos en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe). Un comando Report informa de un error si su valor no existe, y los demás comandos siguen ejecutándose:
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
@@ -93,10 +93,10 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-The next time you launch Tabular Editor 3, you're prompted for a license key.
+La próxima vez que inicies Tabular Editor 3, se te pedirá una clave de licencia.
 
 > [!NOTE]
-> Deleting the registry values doesn't deactivate the installation, use the [Tabular Editor Self-service portal](https://tabulareditor.com/my-account/) to manage your activated licenses.
+> Eliminar los valores del registro no desactiva la instalación. Usa el [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/) para gestionar tus licencias activadas.
 
 ## Instalación desatendida y aprovisionamiento previo de la licencia
 
