@@ -2,7 +2,7 @@
 uid: accessibility
 title: 辅助功能
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,38 +19,30 @@ applies_to:
 
 # 辅助功能
 
-这个页面汇总了 Tabular Editor 3 中会影响应用程序可读性和可操作性的设置，并说明每项设置的作用。其中大多数位于 **工具 > 偏好 > 用户界面** 下。
+Most accessibility settings in Tabular Editor 3 are on the **Tools > Preferences > Tabular Editor > User Interface** page. See [Preferences](xref:preferences).
 
 ## 色觉障碍模式
 
-Tabular Editor 用颜色来标示哪些内容发生了变化。[未保存的更改](xref:unsaved-changes) 会将新增对象标记为绿色、已删除对象标记为红色、已编辑对象标记为橙色，模型比较视图也使用这三种颜色。
+[Unsaved changes](xref:unsaved-changes) and the model comparison view mark added objects green, deleted objects red and edited objects orange. When you select **Color blindness mode** in the **Accessibility** group under **Tools > Preferences > Tabular Editor > User Interface**, added objects are marked teal, and deleted and edited objects keep their colors.
 
-在 **工具 > 偏好 > 用户界面** 的 **辅助功能** 组中选中 **色觉障碍模式**。这样一来，新增对象会改用蓝绿色而不是绿色标记，更容易被识别；删除和编辑对象的颜色则保持不变，因为这两种颜色本来就有足够区分度。此设置适用于 TOM Explorer 和模型比较视图，并且会同时更改行的底色以及对象图标上的徽标。
+**Color blindness mode** is off by default, is stored per Windows user and applies to row tints and icon badges in the TOM Explorer and the model comparison view.
 
-此设置默认关闭，并会按用户单独保存。
+## 键盘快捷键
 
-## 键盘操作
+Under **Tools > Preferences > Tabular Editor > Keyboard**, you can assign your own shortcuts to commands and see the shortcuts already assigned, and @shortcuts3 lists the default shortcuts.
 
-Tabular Editor 里的每个操作都能从菜单中找到，菜单本身也能用键盘操作。你常用的命令可以在 **工具 > 偏好 > 键盘** 中自定义快捷键；该页面也会列出已分配的快捷键。
+## Display scaling
 
-默认快捷键的完整列表见 @shortcuts3。
+Tabular Editor follows the display scaling set in Windows under **Settings > System > Display**.
 
-## 文本大小和显示缩放
+## Themes
 
-Tabular Editor 会遵循 Windows 中设置的显示缩放，因此在 **设置 > 系统 > 显示** 中提高缩放比例时，放大的是整个界面，而不只是其中一部分。
-
-DAX、M、SQL 和 C# 编辑器的字体和字号可在各自页面中单独设置：例如 **工具 > 偏好 > DAX编辑器 > 常规**，其他语言也有对应页面。与缩放整个应用程序相比，通常更建议先调大编辑器字体，因为大多数阅读工作都发生在表达式里。
-
-## 主题和对比度
-
-Tabular Editor 提供了多个主题，其中包括深色主题。在 **工具 > 偏好 > 用户界面** 下选择其一，或通过 **窗口 > 主题** 进行选择。参见[更改主题和配色方案](xref:user-interface#changing-themes-and-palettes)。
-
-主题会更改应用程序自身的界面外观。代码编辑器内的语法高亮可在 **工具 > 偏好 > DAX编辑器** 中单独设置，因此如果更便于阅读，你可以将深色主题与浅色的编辑器配色组合使用。
+Tabular Editor 3 ships several themes, including dark themes, which you choose from **Window > Theme** (see [Changing themes and palettes](xref:user-interface#changing-themes-and-palettes)).
 
 ## 语言
 
-界面提供多种语言版本。在 **工具 > 偏好 > 用户界面** 的 **语言** 组中选择。该设置将在重启后生效。参见 @personalizing-te3。
+Choose the interface language in the **Language** group under **Tools > Preferences > Tabular Editor > User Interface**. The change takes effect after you restart Tabular Editor. 参见 @personalizing-te3。
 
-## Report 无障碍问题
+## Reporting an accessibility issue
 
-如果 Tabular Editor 3 中有任何内容对你来说无法使用，请告诉我们：以上就是我们目前提供的设置，而这个列表会根据大家反馈的内容不断扩展。请使用 **帮助 > 社区支持**，或在许可证包含该服务时使用 **帮助 > 专属支持**。
+Report accessibility issues through **Help > Community Support**, or through **Help > Dedicated Support** if your license includes it.
