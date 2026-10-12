@@ -1,6 +1,6 @@
 ---
 uid: ai-compliance
-title: AI features compliance guide
+title: AI 功能合规指南
 author: Morten Lønskov
 updated: 2026-10-09
 applies_to:
@@ -12,225 +12,225 @@ applies_to:
       editions:
         - edition: Desktop
           partial: true
-          note: "General policies only. No permission limits, provider lock or audit log"
+          note: "仅适用于通用策略。不含权限限制、提供程序锁定或审计日志"
         - edition: Business
           partial: true
-          note: "General policies only. No permission limits, provider lock or audit log"
+          note: "仅适用于通用策略。不含权限限制、提供程序锁定或审计日志"
         - edition: Enterprise
           full: true
 ---
 
-# AI features compliance guide
+# AI 功能合规指南
 
-The [AI Assistant](xref:ai-assistant) and the [Model Context Protocol (MCP) server](xref:mcp-server) in Tabular Editor 3 give AI models access to the open semantic model, within permission grants that administrators limit by group policy and that Enterprise Edition records in an audit log. This page is for the IT, security and compliance teams that approve these features for an organization.
+Tabular Editor 3 中的 [AI 助手](xref:ai-assistant) 和 [模型上下文协议 (MCP) 服务器](xref:mcp-server) 让 AI 模型能够在权限授予范围内访问打开的语义模型；管理员可通过组策略限制这些权限，企业版还会将相关活动记录到审计日志中。本页面面向负责批准组织使用这些功能的 IT、安全和合规团队。
 
-## The AI features
+## AI 功能
 
-| 功能         | What it does                                                                                                                                                                                                | What calls the AI provider                                                 | Network traffic                              |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
-| AI 助手      | A chat panel in Tabular Editor 3 that reads, queries and changes the open semantic model                                                                                                                    | Tabular Editor 3, from the user's machine, with an API key the user enters | Outbound to the configured provider endpoint |
-| MCP server | A local server that an AI agent the user already runs, such as Claude Code, GitHub Copilot, Codex or Cursor, connects to. The agent then reads, queries and changes the open semantic model | The agent, under its own configuration and subscription                    | Inbound on `127.0.0.1` only                  |
+| 功能      | 作用                                                                                                   | 调用 AI 提供程序的主体                               | 网络流量                    |
+| ------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------- |
+| AI 助手   | Tabular Editor 3 中的聊天面板，可读取、查询并修改当前打开的语义模型                                                           | 由用户计算机上的 Tabular Editor 3 调用，使用用户输入的 API 密钥 | 出站到已配置的提供程序端点           |
+| MCP 服务器 | 一个本地服务器，用户已在运行的 AI 代理，例如 Claude Code、GitHub Copilot、Codex 或 Cursor，可连接到该服务器。随后，该代理会读取、查询并修改当前打开的语义模型 | 由该代理按其自身的配置和订阅调用                            | 仅接受来自 `127.0.0.1` 的入站连接 |
 
-Both features ship in the AI features component, which is part of a default installation from Tabular Editor 3.27.0. They share the permission grants, the administrator policies and the audit log, with the differences described under [Permission grants](#permission-grants).
+这两项功能都随 AI 功能组件一同提供；自 Tabular Editor 3.27.0 起，该组件已包含在默认安装中。它们共用权限授予、管理员策略和审核日志；差异见[权限授予](#permission-grants)一节所述。
 
-Tabular Editor ApS doesn't operate an AI service and doesn't include an API key. Prompts, replies, model metadata and model data from either feature never pass through Tabular Editor servers. With telemetry on, Tabular Editor 3 sends AI usage events to Tabular Editor ApS with the provider, the model name, a conversation ID and token counts. The `DisableTelemetry` policy turns them off.
+Tabular Editor ApS 不运营 AI 服务，也不提供 API 密钥。任一功能中的提示、回复、模型元数据和模型数据都不会经过 Tabular Editor 服务器。启用遥测后，Tabular Editor 3 会将 AI 使用事件发送给 Tabular Editor ApS，其中包括提供方、模型名称、会话 ID 和令牌计数。可通过 `DisableTelemetry` 策略将其关闭。
 
-The [Tabular Editor Trust Center](https://trust.tabulareditor.com/) publishes the independent penetration test report for the AI Assistant, the SOC 2 audit report and the list of sub-processors.
+[Tabular Editor Trust Center](https://trust.tabulareditor.com/) 发布了 AI Assistant 的独立渗透测试 Report、SOC 2 审计 Report 以及子处理者列表。
 
-## Data flow
+## 数据流
 
 ### AI 助手
 
-The AI Assistant sends requests directly from the user's machine to the provider configured under **Tools > Preferences > AI Features > AI Assistant**: OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint, including a model hosted on your own network. Authentication is by API key only. See [Supported providers](xref:ai-assistant#supported-providers).
+AI Assistant 会将请求直接从用户的计算机发送到在 **工具 > 偏好 > AI 功能 > AI Assistant** 中配置的提供方：OpenAI、Anthropic、Azure OpenAI，或任何兼容 OpenAI 的端点，包括托管在你们自有网络中的模型。仅支持通过 API 密钥进行身份验证。参见[支持的提供方](xref:ai-assistant#supported-providers)。
 
-A request to the provider contains:
+发送给提供方的请求包含：
 
-- the system prompt and the Custom Instructions in effect, including any your organization publishes
-- the user's messages and the conversation history
-- context about the open model added to the user's messages: the database name, object counts, the current selection, the title of the active document, model errors and recent changes. A user's **Model metadata** setting doesn't withhold it; a `MaxModelMetadataAccess` limit of `Deny` does
-- the results of the tools the assistant called, within the [permission grants](#permission-grants)
-- passages from the Tabular Editor knowledge base, a local database built from the Tabular Editor documentation, blog, GitHub issues and discussions
+- 当前生效的系统提示和自定义说明，包括你所在组织发布的任何自定义说明
+- 用户的信息和对话历史记录
+- 附加到用户信息中的、有关当前打开模型的上下文：数据库名称、对象数量、当前选定内容、活动文档标题、模型错误以及最近的更改。用户的 **模型元数据** 设置并不会阻止发送这些内容；只有将 `MaxModelMetadataAccess` 限制为 `Deny` 才会阻止
+- 助手在[权限授予](#permission-grants)授权范围内调用工具所得的结果
+- 来自 Tabular Editor 知识库的片段；该知识库是一个基于 Tabular Editor 文档、博客、GitHub 问题和讨论构建的本地数据库
 
-Model metadata covers the whole model definition: object names, descriptions and annotations, DAX and M expressions, partition source queries, data source connection details, roles, role members and row-level security filters. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are part of the metadata.
+模型元数据涵盖整个模型定义：对象名称、说明和注释、DAX 和 M 表达式、分区源查询、数据源连接详细信息、角色、角色成员以及行级安全性筛选器。直接输入到模型定义中的值，例如 `DATATABLE` 表达式或 **输入数据** 表，也属于元数据的一部分。
 
-Text from these sources becomes part of the request and influences what the assistant does. Restrict write access to an organization Custom Instructions folder to the people who approve its content.
+来自这些来源的文本会成为请求的一部分，并影响助手的操作。仅将你所在组织“自定义说明”文件夹的写入权限授予负责审核并批准其内容的人员。
 
-Your organization's agreement with the provider governs retention, the region data is processed in and whether the provider uses requests for model training. To keep processing in an Azure tenant or a network your organization governs, use Azure OpenAI, [Microsoft Foundry](xref:ai-assistant#using-microsoft-foundry) or a [self-hosted model](xref:ai-assistant#using-a-local-or-organizational-llm), and lock the configuration by [policy](#restrict-the-ai-provider).
+你所在组织与提供方签订的协议决定了数据保留期限、数据处理所在区域，以及提供方是否会将请求用于模型训练。若要将处理限制在 Azure 租户或你所在组织管理的网络内，请使用 Azure OpenAI、[Microsoft Foundry](xref:ai-assistant#using-microsoft-foundry) 或[自托管模型](xref:ai-assistant#using-a-local-or-organizational-llm)，并通过[策略](#restrict-the-ai-provider)锁定该配置。
 
-### MCP server
+### MCP 服务器
 
-The MCP server is an HTTP listener bound to `127.0.0.1`, on port 42100 by default. It has no API key, makes no outbound requests and rejects browser requests with a non-local `Origin` header.
+MCP 服务器是一个绑定到 `127.0.0.1` 的 HTTP 侦听器，默认端口为 42100。它不使用 API 密钥，不发起出站请求，并且会拒绝带有非本地 `Origin` 标头的浏览器请求。
 
-The connected agent sends what it reads from Tabular Editor 3 to its own provider, under the agent's configuration and the provider's terms. Tabular Editor 3 has no setting for the agent's provider, so govern the agent through its own administrative controls. The agent's own tools, such as file and shell access, are outside Tabular Editor 3 as well. Model files on disk, conversation files and audit files are readable by any agent running as the user.
+已连接的代理会在代理配置及提供程序条款的约束下，将它从 Tabular Editor 3 读取的内容发送到其所使用的提供程序。 Tabular Editor 3 中没有用于设置代理提供程序的选项，因此应通过代理自身的管理控制来管控该代理。代理自身的工具，例如文件访问和 Shell 访问，也同样在 Tabular Editor 3 之外。任何以该用户身份运行的代理都可以读取磁盘上的模型文件、对话文件和审计文件。
 
-**Require access token** is off by default. While it's off, any process on the machine can connect to the server without credentials, including processes in other users' sessions on a Remote Desktop or Citrix host. The `RequireMcpAccessToken` policy enforces the token for every user. Agent registration files store the token in plain text, and **Regenerate token** in the **Tools > MCP Server...** dialog invalidates every existing registration. See [Running on a shared machine](xref:mcp-server#running-on-a-shared-machine).
+**要求访问令牌** 默认处于关闭状态。关闭时，这台计算机上的任何进程都可以在无需凭据的情况下连接到服务器，包括远程桌面或 Citrix 主机上其他用户会话中的进程。 `RequireMcpAccessToken` 策略会对每个用户强制要求使用令牌。代理注册文件会以纯文本存储该令牌，而在 **工具 > MCP 服务器...** 对话框中选择 **重新生成令牌** 会使所有现有注册失效。参见 [在共享计算机上运行](xref:mcp-server#running-on-a-shared-machine)。
 
-### Network endpoints
+### 网络端点
 
-Allow these endpoints through your firewall or proxy for the AI features:
+要使用 AI 功能，请在防火墙或代理中放行以下端点：
 
-| Traffic                   | Endpoint                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AI Assistant requests     | The configured provider endpoint, for example `https://api.openai.com`, `https://api.anthropic.com`, an Azure OpenAI resource or your own gateway                                                                                                                                                                                                             |
-| AI model catalog          | `https://api.tabulareditor.com/AiModels`. An anonymous request for the list of models, made when a user opens the model list for OpenAI or Anthropic. The list is cached for 24 hours. `DisableUpdates` turns it off                                                                                          |
-| AI knowledge base updates | `https://cdn.tabulareditor.com`. A check at most once a day while the AI Assistant is configured, with no data about the user or the model. No policy turns it off except `DisableAi`. Users clear **Check for knowledge base updates on startup** under **Tools > Preferences > AI Features > AI Assistant** |
-| MCP server                | None                                                                                                                                                                                                                                                                                                                                                          |
+| 流量       | 端点                                                                                                                                                         |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AI 助手请求  | 已配置的提供程序端点，例如 `https://api.openai.com`、`https://api.anthropic.com`、某个 Azure OpenAI 资源或你自己的 Gateway                                                         |
+| AI 模型目录  | `https://api.tabulareditor.com/AiModels`。当用户打开 OpenAI 或 Anthropic 的模型列表时，会发起一次匿名请求以获取模型列表。该列表会缓存 24 小时。 `DisableUpdates` 可将其关闭                             |
+| AI 知识库更新 | `https://cdn.tabulareditor.com`。在已配置 AI 助手的情况下，最多每天检查一次，不会发送任何有关用户或模型的数据。除了 `DisableAi` 外，没有任何策略会将其关闭。用户在 **工具 > 偏好 > AI 功能 > AI 助手** 下取消选中 **启动时检查知识库更新** |
+| MCP 服务器  | 无                                                                                                                                                          |
 
-License validation, update checks and telemetry use separate requests. See [Web requests](xref:security-privacy#web-requests).
+许可证验证、更新检查和遥测分别使用独立的请求。参见 [Web 请求](xref:security-privacy#web-requests)。
 
-### Data stored on the user's machine
+### 存储在用户计算机上的数据
 
-All paths are under `%LocalAppData%\TabularEditor3` unless stated otherwise.
+除非另有说明，所有路径都位于 `%LocalAppData%\TabularEditor3` 下。
 
-| Item                        | 地点                                                                                                                                                                                          | 格式                                                                                                                                                                                                                                                                             |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Provider API key            | `Preferences.json`                                                                                                                                                                          | Encrypted with the Windows Data Protection API for the current user. Cleared when the AI component isn't loaded or `DisableAi` is set                                                                                                                          |
-| MCP access token            | `Preferences.json`                                                                                                                                                                          | Encrypted with the Windows Data Protection API for the current user                                                                                                                                                                                                            |
-| Standing permission grants  | `Preferences.json`                                                                                                                                                                          | JSON                                                                                                                                                                                                                                                                           |
-| Per-model permission grants | The model's [user options](xref:user-options) (`.tmuo`) file: next to a model loaded from files, or under `UserOptions` for a model opened from a server | JSON                                                                                                                                                                                                                                                                           |
-| 对话                          | `AI\Conversations`                                                                                                                                                                         | Unencrypted JSON. Holds prompts, replies and tool results, including DAX query rows when **Model data** is at **Read**. Archived copies are written before each compaction. Files stay until the user deletes the conversation |
-| User Custom Instructions    | `AI\CustomInstructions`                                                                                                                                                                    | Markdown                                                                                                                                                                                                                                                                       |
-| Knowledge base              | `kb.sqlite`                                                                                                                                                                                 | SQLite database                                                                                                                                                                                                                                                                |
-| AI model catalog            | `AiModels.json`                                                                                                                                                                             | JSON                                                                                                                                                                                                                                                                           |
-| Audit log                   | `AI\audit`, or the folder set by `AiAuditLogPath`                                                                                                                                          | See [Audit log](#audit-log)                                                                                                                                                                                                                                                    |
+| Item       | 地点                                                                                        | 格式                                                                                          |
+| ---------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 提供商 API 密钥 | `Preferences.json`                                                                        | 已使用适用于当前用户的 Windows 数据保护 API 加密。在未加载 AI 组件或设置了 `DisableAi` 时会被清除                            |
+| MCP 访问令牌   | `Preferences.json`                                                                        | 已使用适用于当前用户的 Windows 数据保护 API 加密                                                             |
+| 长期权限授予     | `Preferences.json`                                                                        | JSON                                                                                        |
+| 按模型授予的权限   | 模型的[用户选项](xref:user-options)（`.tmuo`）文件：若模型从文件加载，该文件位于模型文件旁；若模型从服务器打开，则位于 `UserOptions` 下 | JSON                                                                                        |
+| 对话         | `AI\Conversations`                                                                       | 未加密的 JSON。保存提示、回复和工具结果；当 **模型数据** 设为 **读取** 时，也包括 DAX 查询行。在每次压缩之前都会写入归档副本。文件会一直保留，直到用户删除该对话 |
+| 用户自定义指令    | `AI\CustomInstructions`                                                                  | Markdown                                                                                    |
+| 知识库        | `kb.sqlite`                                                                               | SQLite 数据库                                                                                  |
+| AI 模型目录    | `AiModels.json`                                                                           | JSON                                                                                        |
+| 审计日志       | `AI\audit`，或 `AiAuditLogPath` 指定的文件夹                                                     | 参见 [审计日志](#audit-log)                                                                       |
 
-## Permission grants
+## 权限授予
 
-Permission grants control what the AI Assistant and the MCP server reach, with one access level per resource. The user sets each level under **Tools > Preferences > AI Features > Permissions**. On Enterprise Edition, an administrator can set a permission limit for each resource by policy:
+权限授予决定 AI 助手和 MCP 服务器可以访问哪些内容，每个资源都有一个访问级别。用户可在 **工具 > 偏好 > AI 功能 > 权限** 中设置各级别。在企业版中，管理员可通过策略为每个资源设置权限上限：
 
-| Resource   | What the AI features reach                                                                                                                                     | 默认值   | Limit for both features  | Limit for the MCP server only |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | ------------------------ | ----------------------------- |
-| 模型元数据      | Read: the model definition and VertiPaq Analyzer statistics. Write: changing the model through C# scripts      | Read  | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess`   |
-| Model data | Read: DAX query results, which are data values from the model                                                                                  | Deny  | `MaxModelDataAccess`     | `McpMaxModelDataAccess`       |
-| 最佳实践分析器    | Read: rules and analysis results. Write: adding and changing rules                                             | Read  | `MaxBpaAccess`           | `McpMaxBpaAccess`             |
-| Documents  | Read: the contents of open C# script, DAX query and DAX script documents. Write: creating and overwriting them | Write | `MaxDocumentsAccess`     | `McpMaxDocumentsAccess`       |
-| 宏          | Read: the user's macro library, including macro code                                                                                           | Write | `MaxMacrosAccess`        | `McpMaxMacrosAccess`          |
+| 资源      | AI 功能可访问的内容                                       | 默认值 | 两项功能的限制                  | 仅 MCP 服务器的限制                |
+| ------- | ------------------------------------------------- | --- | ------------------------ | --------------------------- |
+| 模型元数据   | 读取：模型定义和 VertiPaq分析器的统计信息。编写：通过 C# Script 更改模型    | 读取  | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess` |
+| 模型数据    | 读取：DAX 查询结果，即模型中的数据值                              | 拒绝  | `MaxModelDataAccess`     | `McpMaxModelDataAccess`     |
+| 最佳实践分析器 | 读取：规则和分析结果。写入：添加和修改规则                             | 读取  | `MaxBpaAccess`           | `McpMaxBpaAccess`           |
+| 文档      | 读取：已打开的 C# Script、DAX 查询和 DAX 脚本文档内容。写入：创建并覆盖这些文档 | 写入  | `MaxDocumentsAccess`     | `McpMaxDocumentsAccess`     |
+| 宏       | 读取：用户的宏库，包括宏代码                                    | 写入  | `MaxMacrosAccess`        | `McpMaxMacrosAccess`        |
 
-At the default levels, the AI features read the model definition, run the Best Practice Analyzer, read the macro library and read and overwrite open script and query documents. They don't read data values and they don't change the model. Macro code and open documents can contain connection strings and other credentials. Set `MaxMacrosAccess` and `MaxDocumentsAccess` if they do in your organization.
+在默认级别下，AI 功能会读取模型定义、运行 Best Practice Analyzer、读取宏库，并读取和覆盖已打开的脚本与查询文档。它们不会读取数据值，也不会更改模型。宏代码和打开的文档可能包含连接字符串及其他凭据。如果你的组织也需要这样做，请设置 `MaxMacrosAccess` 和 `MaxDocumentsAccess`。
 
-The AI Assistant and the MCP server apply the grants as follows:
+AI Assistant 和 MCP 服务器会按如下方式应用这些授权：
 
-- **AI Assistant.** When a request needs access the standing grant doesn't cover, a permission card appears in the chat. The user allows it for the turn, for the session or always, and for **Model metadata** and **Model data** also for the current model. No card appears for access above a permission limit.
-- **MCP server.** No prompt appears. The server reads the standing grants when it starts, and tools a grant doesn't cover aren't offered to the agent. Grants given for one model or one session apply to the chat only.
+- **AI Assistant。** 当某个请求需要的访问权限超出长期授权的范围时，聊天中会显示一张权限卡片。用户可以选择仅本轮、当前会话或始终允许；对于 **模型元数据** 和 **模型数据**，还可以选择仅对当前模型允许。如果所需访问高于权限上限，则不会显示卡片。
+- **MCP 服务器。** 不会出现提示。服务器启动时会读取长期授权，不在授权范围内的工具不会提供给代理。为单个模型或单个会话授予的授权仅适用于当前聊天。
 
-A permission limit outranks every user grant, including grants given for one model and grants given before the policy was set, and the matching setting offers only the levels up to the limit. An `McpMax...` limit only lowers the shared limit for the MCP server. See [Permissions and consent](xref:ai-assistant#permissions-and-consent).
+权限上限的优先级高于任何用户授权，包括针对单个模型授予的授权，以及在策略设置之前授予的授权；对应设置只会提供不超过该上限的级别。 `McpMax...` 上限只会降低 MCP 服务器的共享上限。请参阅 [权限和同意](xref:ai-assistant#permissions-and-consent)。
 
-## Safeguards on model changes
+## 模型更改的保护措施
 
-The AI features run scripts that change a model only when **Model metadata** is at **Write**. Every change runs through the [C# scripting engine](xref:csharp-scripts) against the model loaded in Tabular Editor 3:
+只有当 **模型元数据** 权限为 **写入** 时，AI 功能才会运行会更改模型的脚本。每项更改都会通过 [C# Script 引擎](xref:csharp-scripts) 在 Tabular Editor 3 中已加载的模型上执行：
 
-- A script's changes form one undo entry, named **C# script (AI Assistant)** or **C# script (MCP)**.
-- A script that fails part-way is rolled back completely.
-- The AI Assistant runs scripts only when the user turns on **Allow AI assistant to run C# scripts directly**, which is off by default. With **Preview changes** on, the default, a preview dialog shows the changes from each script run and the user accepts or cancels them. Both settings are user preferences, with no policy to lock them.
-- **Execute** on a script the AI Assistant writes in the chat runs it as the user's own script, at any **Model metadata** level. The safety check applies; the restrictions on `ReadFile` and the DAX helper methods below don't.
-- An MCP agent's scripts run without a preview dialog. The user reviews the changes afterwards in the **TOM Explorer** and the **Properties** view, which mark every unsaved change.
-- Changes stay unsaved in the loaded model until the user saves. No AI tool saves or deploys a model. Links in the assistant's replies can start Tabular Editor commands, including **Save** and **Deploy**, when the user selects them. If the user opened the model through a live connection to Analysis Services or a Power BI workspace, saving writes the changes to that server.
-- A script that uses the file system, the network or an external assembly isn't run. The AI Assistant shows it with an **Unsafe** badge and **Execute** disabled. For an MCP agent it opens as a review document, or is refused when **Documents** is below **Write**.
-- The safety check analyzes the compiled script. Reflection, expression trees, `Activator`, `AppDomain`, XML readers and deserialization count as unsafe.
-- In a script the AI Assistant or an MCP agent runs, `ReadFile`, `SaveFile`, `Bpa.ExportCsv`, `ExecuteCommand`, calls that run a macro and Semantic Bridge calls always fail. `ExecuteCommand` sends Tabular Model Scripting Language (TMSL) and XML for Analysis (XMLA) commands to the server.
-- In the same scripts, the DAX helper methods require **Model data** at **Read**, like the DAX query tool.
+- 一个脚本产生的所有更改会合并为一条撤销记录，名称为 **C# Script (AI Assistant)** 或 **C# Script (MCP)**。
+- 脚本如果在执行中途失败，其更改会被完全回滚。
+- 只有当用户开启默认处于关闭状态的 **Allow AI assistant to run C# scripts directly** 时，AI Assistant 才会运行脚本。默认情况下，**预览更改** 是开启的，此时预览对话框会显示每次脚本运行产生的更改，你可以选择接受或取消。这两个设置都是用户偏好，且没有可将其锁定的策略。
+- 在聊天中对 AI Assistant 编写的脚本点击 **Execute** 后，它会作为你自己的脚本运行，且不受 **模型元数据** 级别限制。安全检查仍然适用；但对 `ReadFile` 和下文 DAX 辅助方法的限制不适用。
+- MCP 代理的脚本运行时不会显示预览对话框。之后，你可以在 **TOM Explorer** 和 **属性** 视图中查看这些更改；两者都会标出每一项未保存的更改。
+- 在你保存之前，更改会一直以未保存状态保留在已加载的模型中。没有任何 AI 工具会保存或部署模型。用户点击助手回复中的链接后，这些链接可以触发 Tabular Editor 命令，包括 **Save** 和 **Deploy**。如果用户通过与 Analysis Services 或 Power BI Workspace 的实时连接打开模型，保存会将更改写入该服务器。
+- 使用文件系统、网络或外部程序集的脚本不会运行。 AI 助手会为其显示 **Unsafe** 徽章，并禁用 **Execute**。对于 MCP 代理，它会以审阅文档的形式打开；如果 **Documents** 权限低于 **Write**，则会被拒绝。
+- 安全检查会分析已编译的脚本。反射、表达式树、`Activator`、`AppDomain`、XML 读取器和反序列化都被视为不安全。
+- 在由 AI 助手或 MCP 代理运行的脚本中，`ReadFile`、`SaveFile`、`Bpa.ExportCsv`、`ExecuteCommand`、运行宏的调用以及 Semantic Bridge 调用始终会失败。 `ExecuteCommand` 会将 Tabular Model Scripting Language (TMSL) 和 XML for Analysis (XMLA) 命令发送到服务器。
+- 在这些脚本中，DAX 辅助方法与 DAX 查询工具一样，要求 **模型数据** 权限至少为 **读取**。
 
-The `BlockUnsafeScripts` policy applies the same safety check to every script and macro: from the user, the Best Practice Analyzer, the AI Assistant, the MCP server or the Tabular Editor CLI. `DisableCSharpScripts` turns off C# script documents and removes the tool that runs scripts from the AI Assistant and both script tools from the MCP server. Macros keep running unless `DisableMacros` is also set. See [How an agent changes your model](xref:mcp-server#how-an-agent-changes-your-model).
+`BlockUnsafeScripts` 策略会对每个脚本和宏应用相同的安全检查：无论它来自用户、Best Practice Analyzer、AI 助手、MCP 服务器还是 Tabular Editor CLI。 `DisableCSharpScripts` 会禁用 C# Script 文档，并从 AI 助手中移除用于运行脚本的工具，同时从 MCP 服务器中移除两个脚本工具。除非同时设置 `DisableMacros`，否则宏仍会继续运行。参见 [代理如何更改你的模型](xref:mcp-server#how-an-agent-changes-your-model)。
 
-## Administrator controls
+## 管理员控制
 
-Administrators enforce the controls through Windows group policy, with the administrative templates that ship with Tabular Editor 3 or by writing registry values directly. See @policies for the registry keys, value types and template setup.
+管理员可以通过 Windows 组策略、Tabular Editor 3 附带的管理模板，或直接写入注册表值来强制执行这些控制项。有关注册表项、值类型和模板设置，参见 @policies。
 
-A policy under `HKEY_LOCAL_MACHINE` outranks the same value under `HKEY_CURRENT_USER`. Standard users can't change either `Software\Policies` key. Tabular Editor 3 reads policies when it starts, and the MCP server reads permission grants when it starts, so a policy change reaches a running session after the user restarts Tabular Editor 3.
+`HKEY_LOCAL_MACHINE` 下的策略优先于 `HKEY_CURRENT_USER` 下的相同值。标准用户无法更改这两个 `Software\Policies` 键中的任何一个。 Tabular Editor 3 会在启动时读取策略，MCP 服务器会在启动时读取权限授权，因此，策略更改要等到用户重启 Tabular Editor 3 后才会对当前会话生效。
 
-Enterprise Edition policies apply on Enterprise, Consultancy and Trial licenses. On Desktop and Business Edition, administrators can turn the AI features off, enforce the MCP access token, turn off C# scripts and macros and turn off telemetry. In the tables below, **All** means every edition of Tabular Editor 3.
+企业版策略适用于企业版、咨询版和试用版许可证。在桌面版和商业版中，管理员可以关闭 AI 功能、强制使用 MCP 访问令牌、关闭 C# Script 和宏，以及关闭遥测。在下表中，**全部** 表示 Tabular Editor 3 的所有版本。
 
-### Turn the AI features off
+### 关闭 AI 功能
 
-| Requirement                                          | Policy             | Edition |
-| ---------------------------------------------------- | ------------------ | ------- |
-| No AI features, and the AI component isn't installed | `DisableAi`        | All     |
-| No AI Assistant, MCP server allowed                  | `DisableAiChat`    | All     |
-| No MCP server, AI Assistant allowed                  | `DisableMcpServer` | All     |
+| 要求                    | 策略                 | 版本 |
+| --------------------- | ------------------ | -- |
+| 不含 AI 功能，且未安装 AI 组件   | `DisableAi`        | 全部 |
+| 禁用 AI 助手，允许使用 MCP 服务器 | `DisableAiChat`    | 全部 |
+| 禁用 MCP 服务器，允许使用 AI 助手 | `DisableMcpServer` | 全部 |
 
-`DisableAi` also clears any stored provider configuration, including the API key. See [Deploying without the AI features](xref:installation-activation-basic#deploying-without-the-ai-features).
+`DisableAi` 还会清除所有已保存的提供商配置，包括 API 密钥。请参阅 [在不使用 AI 功能的情况下进行部署](xref:installation-activation-basic#deploying-without-the-ai-features)。
 
-The portable build of Tabular Editor 3 has no installer step. It honors `DisableAi` at runtime. Use application control, such as AppLocker or Windows Defender Application Control, if users must not run older versions.
+Tabular Editor 3 的便携版无需安装。它在运行时会遵循 `DisableAi` 设置。如果用户不得运行旧版本，请使用应用程序控制，例如 AppLocker 或 Windows Defender Application Control。
 
-### Limit what the AI features reach
+### 限制 AI 功能可访问的范围
 
-| Requirement                                       | Policy                                                                                                                 | Edition |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------- |
-| A limit per resource for both features            | `MaxModelMetadataAccess`, `MaxModelDataAccess`, `MaxBpaAccess`, `MaxDocumentsAccess`, `MaxMacrosAccess`                | 企业版     |
-| A lower limit per resource for MCP agents         | `McpMaxModelMetadataAccess`, `McpMaxModelDataAccess`, `McpMaxBpaAccess`, `McpMaxDocumentsAccess`, `McpMaxMacrosAccess` | 企业版     |
-| Withhold individual tools from MCP agents         | `McpDisabledTools`                                                                                                     | 企业版     |
-| No C# script documents, AI script tools or macros | `DisableCSharpScripts` and `DisableMacros`                                                                             | All     |
-| C# scripts that pass the safety check only        | `BlockUnsafeScripts`                                                                                                   | 企业版     |
+| 要求                           | 策略                                                                                                                     | 版本  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --- |
+| 为两项功能统一按资源设置限制               | `MaxModelMetadataAccess`, `MaxModelDataAccess`, `MaxBpaAccess`, `MaxDocumentsAccess`, `MaxMacrosAccess`                | 企业版 |
+| 为 MCP 代理按资源设置更低的限制           | `McpMaxModelMetadataAccess`, `McpMaxModelDataAccess`, `McpMaxBpaAccess`, `McpMaxDocumentsAccess`, `McpMaxMacrosAccess` | 企业版 |
+| 不向 MCP 代理开放个别工具              | `McpDisabledTools`                                                                                                     | 企业版 |
+| 不允许使用 C# Script 文档、AI 脚本工具或宏 | `DisableCSharpScripts` 和 `DisableMacros`                                                                               | 全部  |
+| 仅允许通过安全检查的 C# Script         | `BlockUnsafeScripts`                                                                                                   | 企业版 |
 
-Take the tool names for `McpDisabledTools` from the `tool_call` records in the audit log.
+从审计日志中的 `tool_call` 记录获取 `McpDisabledTools` 的工具名称。
 
-### Restrict the AI provider
+### 限制 AI 提供程序
 
-| Requirement                                           | Policy                            | Edition |
-| ----------------------------------------------------- | --------------------------------- | ------- |
-| One approved provider                                 | `AiProvider`                      | 企业版     |
-| One approved endpoint or gateway                      | `AiEndpoint`                      | 企业版     |
-| One approved model or Azure OpenAI deployment         | `AiModel`                         | 企业版     |
-| Billing to an approved OpenAI organization or project | `AiOrganizationId`, `AiProjectId` | 企业版     |
-| A list of approved providers                          | `AiAllowedProviders`              | 企业版     |
-| A list of approved endpoint hosts                     | `AiAllowedEndpointHosts`          | 企业版     |
+| 要求                        | 策略                                | 版本  |
+| ------------------------- | --------------------------------- | --- |
+| 一个经批准的提供程序                | `AiProvider`                      | 企业版 |
+| 一个经批准的端点或 Gateway         | `AiEndpoint`                      | 企业版 |
+| 一个经批准的模型或 Azure OpenAI 部署 | `AiModel`                         | 企业版 |
+| 向经批准的 OpenAI 组织或项目计费      | `AiOrganizationId`, `AiProjectId` | 企业版 |
+| 经批准的提供程序列表                | `AiAllowedProviders`              | 企业版 |
+| 经批准的端点主机列表                | `AiAllowedEndpointHosts`          | 企业版 |
 
-`AiProvider`, `AiEndpoint`, `AiModel`, `AiOrganizationId` and `AiProjectId` replace the user's setting, and `AiProvider` set to `None` turns the AI Assistant off. If the configuration breaks `AiAllowedProviders` or `AiAllowedEndpointHosts`, the AI Assistant doesn't send the request and an error names the provider or endpoint host. `AiAllowedEndpointHosts` checks only an endpoint the user enters, so OpenAI and Anthropic without a custom endpoint reach their public API whatever the list holds. Pair it with `AiProvider` or `AiAllowedProviders`. No policy requires HTTPS; lock `AiEndpoint` to an `https://` address. Policies don't distribute API keys. With the endpoint locked to a resource your organization owns, such as an Azure OpenAI resource or an internal gateway, only keys your organization issues work. With a public endpoint such as `api.openai.com`, users can enter a personal key. These policies apply to the AI Assistant only.
+`AiProvider`、`AiEndpoint`、`AiModel`、`AiOrganizationId` 和 `AiProjectId` 会替换用户的设置，而将 `AiProvider` 设置为 `None` 会关闭 AI 助手。如果配置不满足 `AiAllowedProviders` 或 `AiAllowedEndpointHosts`，AI 助手不会发送请求，并且错误消息会指出相关的提供程序或端点主机。 `AiAllowedEndpointHosts` 只检查用户输入的端点，因此 OpenAI 和 Anthropic 若未使用自定义端点，无论列表中写了什么，都会访问其公共 API。将其与 `AiProvider` 或 `AiAllowedProviders` 搭配使用。没有任何策略会强制使用 HTTPS；请将 `AiEndpoint` 锁定为 `https://` 地址。策略不会分发 API 密钥。如果将端点锁定为贵组织拥有的资源(例如 Azure OpenAI 资源或内部 Gateway)，则只有贵组织签发的密钥才可使用。如果使用 `api.openai.com` 这样的公共端点，用户可以输入个人密钥。这些策略仅适用于 AI 助手。
 
-### Custom Instructions and the MCP port
+### 自定义指令和 MCP 端口
 
-| Requirement                                              | Policy                          | Edition |
-| -------------------------------------------------------- | ------------------------------- | ------- |
-| Organization-approved Custom Instructions for every user | `AiCustomInstructionsPath`      | 企业版     |
-| Ignore Custom Instructions users write themselves        | `DisableUserCustomInstructions` | 企业版     |
-| MCP agents authenticate with an access token             | `RequireMcpAccessToken`         | All     |
-| A fixed MCP server port                                  | `McpPort`                       | 企业版     |
+| 要求                 | 策略                              | 版本  |
+| ------------------ | ------------------------------- | --- |
+| 为每位用户提供组织批准的自定义指令  | `AiCustomInstructionsPath`      | 企业版 |
+| 忽略用户自行编写的自定义指令     | `DisableUserCustomInstructions` | 企业版 |
+| MCP 代理使用访问令牌进行身份验证 | `RequireMcpAccessToken`         | 全部  |
+| 固定的 MCP 服务器端口      | `McpPort`                       | 企业版 |
 
-### Enterprise policies on other editions
+### 其他版本的 Enterprise 策略
 
-If any Enterprise policy value is present on a machine whose license isn't Enterprise, the AI Assistant and the MCP server don't start, and a `BlockUnsafeScripts` value stops every script and macro from running. A value Tabular Editor 3 can't interpret denies the resource for a permission limit, makes the AI Assistant unavailable for `AiProvider` and enforces `BlockUnsafeScripts`. Any other invalid value is ignored, and the setting it controls stays unrestricted. Roll out Enterprise policies only to machines with a matching license. See [What happens without Enterprise Edition](xref:policies#what-happens-without-enterprise-edition).
+如果在许可证非 Enterprise 的计算机上设置了任何 Enterprise 策略值，AI 助手和 MCP 服务器都不会启动；而 `BlockUnsafeScripts` 值会阻止所有脚本和宏运行。如果某个值无法被 Tabular Editor 3 解析，它会在权限限制中拒绝该资源，使 `AiProvider` 下的 AI 助手不可用，并强制启用 `BlockUnsafeScripts`。任何其他无效值都会被忽略，其所控制的设置将保持不受限制。仅向拥有对应许可证的计算机部署 Enterprise 策略。请参阅[未使用企业版时会发生什么](xref:policies#what-happens-without-enterprise-edition)。
 
-To check which policies apply on a machine, open **Tools > Preferences > Tabular Editor > Updates and Feedback**. The **Managed by your organization** section lists every policy value found, its source key and any value marked **(invalid)**.
+要查看某台计算机上适用哪些策略，请打开 **工具 > 偏好 > Tabular Editor > 更新和反馈**。**由组织管理** 部分会列出找到的每个策略值、其源键，以及所有标记为 **（无效）** 的值。
 
-## Audit log
+## 审计日志
 
-On Enterprise Edition, Tabular Editor 3 writes a local record of AI Assistant and MCP server activity to one JSON Lines file per day. Each record carries a UTC timestamp, the feature (`chat` or `mcp`), the session and the open model's name where they apply, and the Windows user name. Nothing is recorded before a license is activated.
+在企业版中，Tabular Editor 3 会在本地记录 AI 助手和 MCP 服务器的活动，并每天写入一个 JSON Lines 文件。每条记录都包含 UTC 时间戳、功能（`chat` 或 `mcp`）、对应的会话和当前打开模型的名称，以及 Windows 用户名。在许可证激活之前，不会记录任何内容。
 
-The log records:
+日志会记录以下内容：
 
-- permission requests and the user's answer
-- every tool call, with the tool name, the permissions it needed, its outcome (`ok`, `error`, `denied` or `cancelled`), its duration and the names and total size of its arguments
-- every C# script sent to be run, including scripts that failed at run time, were refused or were handed back for review, saved as a `.csx` file with its SHA-256 hash
-- the provider, model, endpoint host and token counts for each chat turn
-- AI configuration changes
-- MCP server start and stop, with the permission level of each resource
-- MCP agent connections, with the name and version the client reports
+- 权限请求及用户的响应
+- 每次工具调用，包括工具名称、所需权限、结果（`ok`、`error`、`denied` 或 `cancelled`）、持续时间，以及其参数的名称和总大小
+- 每个提交运行的 C# Script（包括运行时失败、被拒绝或退回供审查的脚本）都会连同其 SHA-256 哈希一起保存为 `.csx` 文件
+- 每轮聊天的提供方、模型、端点主机以及 token 数量
+- AI 配置更改
+- MCP 服务器的启动和停止，以及每个资源的权限级别
+- MCP 代理连接，以及客户端上报的名称和版本
 
-Prompt text, reply text, argument values, data values from the model, API keys and access tokens aren't recorded. Scripts that fail to compile and scripts the AI features write into a document for the user to run aren't saved.
+不会记录提示词文本、回复文本、参数值、来自模型的数据值、API 密钥和访问令牌。编译失败的脚本，以及 AI 功能写入文档供用户运行的脚本，都不会保存。
 
-Files older than 30 days are deleted unless `AiAuditLogRetentionDays` sets another period, and `0` keeps every file. Each copy of Tabular Editor 3 deletes expired files from the folder it writes to before it writes its first record in a session.
+除非 `AiAuditLogRetentionDays` 设置了其他保留期，否则超过 30 天的文件会被删除；设置为 `0` 则保留所有文件。每个 Tabular Editor 3 实例都会在会话中写入第一条记录前，从其写入的文件夹中删除已过期的文件。
 
-The log is written by the user's own Tabular Editor 3 process, so the user has write and delete access to it, including on a redirected share. If the log can't be written, for example because the share is unreachable, the AI Assistant and the MCP server keep running and the failure is written once to Tabular Editor's application log.
+日志由用户自己的 Tabular Editor 3 进程写入，因此用户对其具有写入和删除权限，即使日志被重定向到共享位置也是如此。如果日志无法写入，例如因为共享不可访问，AI 助手和 MCP 服务器会继续运行，并且该故障只会在 Tabular Editor 的应用程序日志中记录一次。
 
-`AiAuditLogPath` redirects the log. A relative path is ignored. Daily file names and script file names don't include the user or machine name, so give each user a separate folder. Environment variables such as `%USERNAME%` are expanded only in a `REG_EXPAND_SZ` value; the administrative template writes `REG_SZ`, which is used as written.
+`AiAuditLogPath` 用于重定向日志。相对路径会被忽略。每日文件名和脚本文件名都不包含用户名或计算机名，因此要为每个用户提供单独的文件夹。诸如 `%USERNAME%` 之类的环境变量只会在 `REG_EXPAND_SZ` 值中展开；管理模板写入的是 `REG_SZ`，因此会按原样使用。
 
-See @ai-audit-log for the record format.
+记录格式请参见 @ai-audit-log。
 
-## Recommended baseline
+## 推荐基线
 
-The following baseline is guidance for an organization that allows AI-assisted model development and keeps model data away from AI providers. Adjust it to your own risk assessment.
+以下基线为允许 AI 辅助模型开发、同时不让模型数据流向 AI 提供方的组织提供指导。请根据自身风险评估进行调整。
 
-| Control            | Setting                                                                                                                                             | Effect                                                                                            |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Provider           | `AiProvider`, `AiEndpoint`, `AiModel` and `AiAllowedEndpointHosts` set to a resource your organization owns and has a data processing agreement for | The AI Assistant sends requests only to that endpoint, with keys your organization issues         |
-| Model data         | `MaxModelDataAccess` set to `Deny`                                                                                                                  | No DAX query result reaches the AI Assistant or an MCP agent                                      |
-| 宏                  | `MaxMacrosAccess` set to `Deny`                                                                                                                     | Macro code isn't sent to an AI provider                                                           |
-| Scripts            | `BlockUnsafeScripts` set to `1`                                                                                                                     | No script or macro writes files, reaches the network, starts other programs or loads outside code |
-| MCP authentication | `RequireMcpAccessToken` set to `1`                                                                                                                  | Only clients with the user's access token connect to the MCP server                               |
-| Audit retention    | `AiAuditLogRetentionDays` set to your retention requirement                                                                                         | Audit files are kept for that period                                                              |
-| Audit location     | `AiAuditLogPath` set per user to a folder on a share                                                                                                | Audit files are collected centrally                                                               |
+| 控制项      | 设置                                                                                     | 效果                               |
+| -------- | -------------------------------------------------------------------------------------- | -------------------------------- |
+| Provider | 将 `AiProvider`、`AiEndpoint`、`AiModel` 和 `AiAllowedEndpointHosts` 设置为你组织拥有且已签订数据处理协议的资源 | AI 助手仅向该端点发送请求，并使用由你组织签发的密钥      |
+| 模型数据     | 将 `MaxModelDataAccess` 设置为 `Deny`                                                      | 任何 DAX 查询结果都不会发送到 AI 助手或 MCP 代理  |
+| 宏        | 将 `MaxMacrosAccess` 设置为 `Deny`                                                         | 宏代码不会发送给 AI 提供方                  |
+| 脚本       | 将 `BlockUnsafeScripts` 设置为 `1`                                                         | 任何脚本或宏都不能写入文件、访问网络、启动其他程序或加载外部代码 |
+| MCP 身份验证 | 将 `RequireMcpAccessToken` 设置为 `1`                                                      | 只有持有用户访问令牌的客户端才能连接到 MCP 服务器      |
+| 审计保留期    | 将 `AiAuditLogRetentionDays` 设置为满足你保留要求的期限                                              | 审计文件会在该期限内保留                     |
+| 审计存储位置   | 为每位用户将 `AiAuditLogPath` 设置为共享位置上的某个文件夹                                                 | 审计文件会集中收集                        |
 
-The following registry file applies the machine-wide part of the baseline. It locks the AI Assistant to an Azure OpenAI resource and keeps audit files for 365 days. Replace the endpoint and deployment name with your own, and apply the file only to machines licensed for Enterprise Edition:
+以下注册表文件会应用基线中适用于整台计算机的部分。它会将 AI Assistant 锁定到一个 Azure OpenAI 资源，并将审计文件保留 365 天。将终结点和部署名称替换为你自己的，并且仅将该文件应用于已获得企业版许可的计算机：
 
 ```ini
 Windows Registry Editor Version 5.00
@@ -249,45 +249,45 @@ Windows Registry Editor Version 5.00
 "AiAuditLogRetentionDays"=dword:0000016d
 ```
 
-`BlockUnsafeScripts` sits in the shared key, so the Tabular Editor CLI enforces it as well. Set `AiAuditLogPath` to a folder for each user: either a `REG_EXPAND_SZ` value such as `\\fileserver\te-audit$\%USERNAME%` under the `HKEY_LOCAL_MACHINE` key, or a `REG_SZ` value per user under `HKEY_CURRENT_USER\SOFTWARE\Policies\Tabular Editor ApS\TE3`.
+`BlockUnsafeScripts` 位于共享注册表项中，因此 Tabular Editor CLI 也会强制执行它。将 `AiAuditLogPath` 设置为每个用户对应的一个文件夹：可以是在 `HKEY_LOCAL_MACHINE` 项下设置 `REG_EXPAND_SZ` 值，例如 `\\fileserver\te-audit$\%USERNAME%`，也可以是在 `HKEY_CURRENT_USER\SOFTWARE\Policies\Tabular Editor ApS\TE3` 下为每个用户设置 `REG_SZ` 值。
 
-## Common questions
+## 常见问题
 
-### Does Tabular Editor ApS receive our prompts, metadata or data?
+### Tabular Editor ApS 会接收我们的提示词、元数据或数据吗？
 
-No. See [Data flow](#data-flow).
+不能。参见 [数据流](#data-flow)。
 
-### Is our data used to train AI models?
+### 我们的数据会被用于训练 AI 模型吗？
 
-Tabular Editor ApS receives no prompts, replies or model content. Your agreement with the AI provider decides whether the provider trains on requests.
+Tabular Editor ApS 不会接收任何提示词、回复或模型内容。你与 AI 提供程序签订的协议决定该提供程序是否会使用请求来训练模型。
 
-### Where is our data processed?
+### 我们的数据在哪里处理？
 
-At the AI Assistant's configured endpoint, and wherever an MCP agent's provider runs. See [Restrict the AI provider](#restrict-the-ai-provider).
+数据会在 AI Assistant 配置的终结点处理，也可能在 MCP 代理提供程序运行的任何位置处理。参见 [限制 AI 提供程序](#restrict-the-ai-provider)。
 
-### Can users get around a policy?
+### 用户能绕过策略吗？
 
-A user can't change a policy without local administrator rights. Versions before 3.27.0, including older portable builds, read only `HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor` and ignore every policy on this page. See [Turn the AI features off](#turn-the-ai-features-off).
+没有本地管理员权限，用户无法更改策略。 3.27.0 之前的版本（包括较旧的便携版构建）只会读取 `HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor`，并忽略此页面上的所有策略。参见 [关闭 AI 功能](#turn-the-ai-features-off)。
 
-### Can the AI features change or deploy a production model?
+### AI 功能能更改或部署生产模型吗？
 
-They run scripts on the loaded model only with **Model metadata** at **Write**, and only the user saves or deploys. See [Safeguards on model changes](#safeguards-on-model-changes).
+只有在 **Model metadata** 设为 **Write** 时，它们才会在已加载的模型上运行脚本；并且只有用户才能进行保存或部署。参见 [模型更改的保护措施](#safeguards-on-model-changes)。
 
-### Can the AI features read data from our models?
+### AI 功能能从我们的模型中读取数据吗？
 
-DAX query results require **Model data** at **Read**, and the default is **Deny**. Values typed into the model definition are part of the metadata. See [Data flow](#data-flow).
+DAX 查询结果需要 **模型数据** 权限为 **读取**，默认是 **拒绝**。在模型定义中键入的值属于元数据的一部分。见 [数据流](#data-flow)。
 
-### Can an MCP agent use a provider we haven't approved?
+### MCP 代理是否可以使用我们尚未批准的提供程序？
 
-Yes. Govern the agent through its own administrative controls, or set `DisableMcpServer`. See [MCP server](#mcp-server).
+是的。可以通过代理自身的管理设置来控制它，或者设置 `DisableMcpServer`。见 [MCP 服务器](#mcp-server)。
 
-### How do we stop the AI features in an incident?
+### 发生事件时，如何停用 AI 功能？
 
-Set `DisableAi` and have users restart Tabular Editor 3. Revoke the affected API keys at the provider. See [Turn the AI features off](#turn-the-ai-features-off).
+设置 `DisableAi`，并让用户重启 Tabular Editor 3。在提供程序端撤销受影响的 API 密钥。见 [关闭 AI 功能](#turn-the-ai-features-off)。
 
-### Is the audit log tamper-evident?
+### 审核日志是否可检测篡改？
 
-No. The user can change and delete their own audit files. See [Audit log](#audit-log).
+不能。用户可以修改或删除自己的审核文件。见 [审核日志](#audit-log)。
 
 ## 另请参阅
 
