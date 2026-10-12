@@ -19,12 +19,12 @@ applies_to:
 
 # 实用脚本片段
 
-Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](xref:advanced-scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](xref:custom-actions), so that you can easily reuse them from the context menu.
+这里汇总了一些小脚本片段，帮助你快速上手 Tabular Editor 的 [高级脚本功能](xref:advanced-scripting)。这些脚本中有很多都适合保存为 [自定义操作](xref:custom-actions)，这样你就可以在上下文菜单中轻松复用它们。
 
 另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实际场景的示例，展示了你可以如何利用 Tabular Editor 的脚本功能。
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](xref:how-to-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
+> 如需查阅按模式逐条整理的 C# Script 和 Dynamic LINQ 参考资料，请参阅 [脚本模式](xref:how-to-navigate-tom-hierarchy) 操作指南系列。完整的 TOM 包装器 API 请参阅 @api-index。
 
 ***
 
@@ -51,13 +51,13 @@ foreach(var c in Selected.Columns)
 }
 ```
 
-这个片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数，在表中创建一个新的度量值。 We use the `DaxObjectFullName` property to get the fully qualified name of the column for use in the DAX expression: `'TableName'[ColumnName]`.
+这个片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数，在表中创建一个新的度量值。我们使用 `DaxObjectFullName` 属性来获取列的完全限定名称，以便在 DAX 表达式中使用：`'TableName'[ColumnName]`。
 
 ***
 
 ## 生成时间智能度量值
 
-首先，为每项时间智能聚合创建自定义操作。 For example:
+首先，为每项时间智能聚合创建自定义操作。例如：
 
 ```csharp
 // Creates a TOTALYTD measure for every selected measure.
@@ -70,7 +70,7 @@ foreach(var m in Selected.Measures) {
 }
 ```
 
-这里我们使用 `DaxObjectName` 属性来生成用于 DAX 表达式的不带限定符的引用，因为这是一个度量值：`[MeasureName]`。 Save this as a Custom Action called "Time Intelligence\Create YTD measure" that applies to measures. Create similar actions for MTD, LY, and whatever else you need. Then, create the following as a new action:
+这里我们使用 `DaxObjectName` 属性来生成用于 DAX 表达式的不带限定符的引用，因为这是一个度量值：`[MeasureName]`。将其保存为一个适用于度量值的时间智能自定义操作，命名为 "Time Intelligence\Create YTD measure"。为 MTD、LY 以及其他你需要的类型创建类似的操作。然后，新建一个操作，并填入下面的脚本：
 
 ```csharp
 // Invoke all Time Intelligence Custom Actions:
@@ -79,7 +79,7 @@ CustomAction(@"Time Intelligence\Create MTD measure");
 CustomAction(@"Time Intelligence\Create LY measure");
 ```
 
-This illustrates how you can execute one (or more) Custom Actions from within another action (beware of circular references - that will cause Tabular Editor to crash). Save this as a new Custom Action "Time Intelligence\All of the above", and you will have an easy way to generate all your Time Intelligence measures with a single click:
+这展示了如何在一个操作中调用另一个操作来执行一个（或多个）自定义操作（注意避免循环引用，否则会导致 Tabular Editor 崩溃）。将其另存为新的自定义操作“Time Intelligence\All of the above”，即可通过一次单击轻松生成所有时间智能度量值：
 
 ![image](~/content/assets/images/useful-script-snippets-01.png)
 
@@ -158,7 +158,7 @@ foreach(var m in Selected.Measures) {
 
 ## 设置默认翻译
 
-Sometimes it is useful to have default translations applied to all (visible) objects. In this case, a default translation is just the original name/description/display folder of an object. 这样做的一个好处是：以 JSON 格式导出翻译时，会包含所有翻译对象，即可用于 [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/)。
+有时，为所有（可见）对象应用默认翻译会很有用。在这种情况下，默认翻译其实就是对象的原始名称/描述/显示文件夹。这样做的一个好处是：以 JSON 格式导出翻译时，会包含所有翻译对象，即可用于 [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/)。
 
 以下脚本会遍历模型中的所有区域设置；对于每个可见对象，若尚无翻译，则会为其赋予默认值：
 
@@ -212,7 +212,7 @@ void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
 
 ## 处理透视
 
-度量值、列、层次结构和表都公开了 `InPerspective` 属性。该属性会为模型中的每个透视保存一个 True/False 值，用于指示给定对象是否属于该透视。 So for example:
+度量值、列、层次结构和表都公开了 `InPerspective` 属性。该属性会为模型中的每个透视保存一个 True/False 值，用于指示给定对象是否属于该透视。比如：
 
 ```csharp
 foreach(var measure in Selected.Measures)
@@ -231,7 +231,7 @@ foreach(var measure in Selected.Measures)
 - `<<object>>.CopyFrom(string[] perspectives)` - 将对象加入所有指定的透视中（包含透视名称的字符串数组）。
 - `<<object>>.CopyFrom(perspectiveIndexer perspectives)` - 从另一个 `InPerspective` 属性复制透视包含关系。
 
-The latter may be used to copy perspective memberships from one object to another. For example, say have a base measure [Reseller Total Sales], and you want to make sure that all currently selected measures are visible in the same perspectives as this base measure. The following script does the trick:
+后一种方法可用于将透视成员关系从一个对象复制到另一个对象。例如，假设你有一个基础度量值 [Reseller Total Sales]，并希望确保当前选中的所有度量值在与该基础度量值相同的透视中都可见。下面的脚本即可实现这一点：
 
 ```csharp
 var baseMeasure = Model.Tables["Reseller Sales"].Measures["Reseller Total Sales"];
@@ -246,7 +246,7 @@ foreach(var measure in Selected.Measures)
 }
 ```
 
-This technique can be used also when generating new objects from code. 例如，如果我们希望确保自动生成的时间智能度量值只在与其基础度量值相同的透视中可见，可以在上一节的脚本基础上扩展如下：
+这种技巧也可用于通过代码生成新对象。例如，如果我们希望确保自动生成的时间智能度量值只在与其基础度量值相同的透视中可见，可以在上一节的脚本基础上扩展如下：
 
 ```csharp
 // Creates a TOTALYTD measure for every selected measure.
@@ -262,13 +262,13 @@ foreach(var m in Selected.Measures) {
 
 ***
 
-## Generating partitions
+## 生成分区
 
-如果你需要对某个表进行自定义分区，C# Script 可以帮你快速生成大量分区。 The basic idea is to add an annotation to your table, containing the SQL or M query to use as a template for each partition. The script will then swap in filter parameters as needed. For example, using SQL partitions, we could add an annotation named `PartitionTemplateSQL` and set its value to `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`. The `{0}` and `{1}` placeholders will be replaced by our script, when generating the final partitions. In this case, `CalendarID` is an integer, but in general, it is your job to ensure that the resulting string is a valid SQL (or M) query.
+如果你需要对某个表进行自定义分区，C# Script 可以帮你快速生成大量分区。基本思路是：为表添加一个注释，其中包含一个 SQL 或 M 查询，作为每个分区的模板。然后脚本会根据需要替换筛选参数。例如，使用 SQL 分区时，你可以添加一个名为 `PartitionTemplateSQL` 的注释，并将其值设置为 `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`。在生成最终分区时，我们的脚本会替换 `{0}` 和 `{1}` 占位符。在此例中，`CalendarID` 是整数；但一般来说，你需要确保最终得到的字符串是有效的 SQL（或 M）查询。
 
 ![](~/content/assets/images/useful-script-snippets-02.png)
 
-The example here generates one partition per month. 选择一个带有 `PartitionTemplateSQL` 分区注释的表，然后运行该脚本。
+这里的示例会按月生成分区。选择一个带有 `PartitionTemplateSQL` 分区注释的表，然后运行该脚本。
 
 ```csharp
 var firstPartition = new DateTime(2018,1,1); // First partition date
@@ -302,7 +302,7 @@ while(currentPartition <= lastPartition)
 
 ## 将对象属性导出到文件
 
-For some workflows, it may be useful to edit multiple object properties in bulk using Excel. Use the following snippet to export a standard set of properties to a .TSV file, which can then be subsequently imported (see below).
+在某些工作流中，使用 Excel 批量编辑多个对象的属性可能会很有帮助。使用以下代码片段可以将一组标准属性导出到 .TSV 文件，之后还可以再将其导入（见下文）。
 
 ```csharp
 // Export properties for the currently selected objects:
@@ -310,11 +310,11 @@ var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
 
-The resulting .TSV file looks like this, when opened in Excel:
+在 Excel 中打开后，生成的 .TSV 文件如下所示：
 ![image](~/content/assets/images/useful-script-snippets-03.png)
-The contents of the first column (Object) is a reference to the object. If the contents of this column is changed, subsequent import of the properties might not work correctly. To change the name of an object, only change the value in the second column (Name).
+第一列（Object）中的内容是对该对象的引用。如果更改了该列内容，后续导入这些属性时可能无法正常进行。如果你想修改对象名称，只需更改第二列（Name）中的值。
 
-默认情况下，文件会保存到 TabularEditor.exe 所在的文件夹中。 By default, only the following properties are exported (where applicable, depending on the type of object exported):
+默认情况下，文件会保存到 TabularEditor.exe 所在的文件夹中。默认情况下，仅导出以下属性（如适用，具体取决于所导出对象的类型）：
 
 - 名称
 - 描述
@@ -331,7 +331,7 @@ var tsv = ExportProperties(Selected.Table.Measures, "Name,DetailRowsExpression")
 SaveFile("Exported Properties 2.tsv", tsv);
 ```
 
-可用的属性名称可在 [TOM API 文档](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.aspx) 中找到。 These are mostly identical to the names shown in the Tabular Editor property grid in CamelCase and with spaces removed (with a few exceptions, for example, the "Hidden" property is called `IsHidden` in the TOM API).
+可用的属性名称可在 [TOM API 文档](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.aspx) 中找到。这些名称大多与 Tabular Editor 属性网格中显示的名称一致，只是采用 CamelCase 并去掉了空格（少数情况例外，例如，“Hidden” 属性在 TOM API 中称为 `IsHidden`）。
 
 要导入属性，请使用以下代码片段：
 
@@ -343,7 +343,7 @@ ImportProperties(tsv);
 
 ### 导出带索引的属性
 
-As of Tabular Editor 2.11.0, the `ExportProperties` and `ImportProperties` methods support indexed properties. Indexed properties are properties that take a key in addition to the property name. One example is `myMeasure.TranslatedNames`. This property represents the collection of all strings applied as name translations for `myMeasure`. In C#, you can access the translated caption of a specific culture using the indexing operator: `myMeasure.TranslatedNames["da-DK"]`.
+从 Tabular Editor 2.11.0 起，`ExportProperties` 和 `ImportProperties` 方法支持带索引的属性。带索引的属性是指除了属性名称外，还需要一个键值的属性。一个示例是 `myMeasure.TranslatedNames`。该属性表示应用于 `myMeasure` 的所有名称翻译字符串的集合。在 C# 中，你可以使用索引运算符访问特定区域设置的翻译后的标题：`myMeasure.TranslatedNames["da-DK"]`。
 
 简而言之，你现在可以导出 Tabular 模型中对象的所有翻译、透视信息、注释、扩展属性，以及行级和对象级安全性信息。
 
@@ -367,7 +367,7 @@ var tsv = ExportProperties(Model.AllMeasures, "Name,InPerspective[Inventory]");
 SaveFile(@"c:\Project\MeasurePerspectiveInventory.tsv", tsv);
 ```
 
-Similarly, for translations, annotations, etc. 例如，如果你想查看应用于表、列、层次结构、级别和度量值的所有丹麦语翻译：
+同理，翻译、注释等也是如此。例如，如果你想查看应用于表、列、层次结构、级别和度量值的所有丹麦语翻译：
 
 ```csharp
 // Construct a list of objects:
@@ -386,7 +386,7 @@ SaveFile(@"c:\Project\ObjectTranslations.tsv", tsv);
 
 ## 生成文档
 
-The `ExportProperties` method shown above, can also be used if you want to document all or parts of your model. 下面的代码片段会从 Tabular 模型中所有可见的度量值或列中提取一组属性，并将其保存为 TSV 文件：
+如果你想为模型的全部或部分内容生成文档，也可以使用上面展示的 `ExportProperties` 方法。下面的代码片段会从 Tabular 模型中所有可见的度量值或列中提取一组属性，并将其保存为 TSV 文件：
 
 ```csharp
 // Construct a list of all visible columns and measures:
@@ -407,9 +407,9 @@ SaveFile("documentation.tsv", tsv);
 
 ## 从文件生成度量值
 
-如果你想批量编辑模型中现有对象的属性，上述导出/导入属性的方法会很有用。 What if you want to import a list of measures that do not already exist?
+如果你想批量编辑模型中现有对象的属性，上述导出/导入属性的方法会很有用。如果你想导入一个尚不存在的度量值列表，该怎么办？
 
-假设你有一个 TSV（制表符分隔值）文件，其中包含要导入到现有 Tabular 模型中的度量值名称、说明和 DAX 表达式。 You can use the following script to read in the file, split it out into rows and columns, and generate the measures. The script also assigns a special annotation to each measure, so that it can delete measures that were previously created using the same script.
+假设你有一个 TSV（制表符分隔值）文件，其中包含要导入到现有 Tabular 模型中的度量值名称、说明和 DAX 表达式。你可以使用下面的脚本读取该文件，将其拆分为行和列，并生成这些度量值。该脚本还会为每个度量值分配一个特殊注释，这样它就能删除之前使用同一脚本创建的度量值。
 
 ```csharp
 var targetTable = Model.Tables["Program"];  // Name of the table that should hold the measures
@@ -440,7 +440,7 @@ foreach(var row in tsvRows.Skip(1))
 }
 ```
 
-If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](xref:command-line-options) as follows:
+如果你需要将此流程自动化，可以把上面的脚本保存到文件中，然后按如下方式使用 [Tabular Editor CLI](xref:command-line-options)：
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
@@ -463,7 +463,7 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 ## 根据分区源元数据创建数据列
 
 > [!NOTE]
-> 下文所述的 `RefreshDataColumns()` 方法仅在 **Tabular Editor 2** 中可用。 In Tabular Editor 3, use the **Import Table...** feature instead.
+> 下文所述的 `RefreshDataColumns()` 方法仅在 **Tabular Editor 2** 中可用。在 Tabular Editor 3 中，请改用 **Import Table...** 功能。
 
 如果某个表使用基于 OLE DB Provider数据源的查询分区，我们可以通过执行以下代码片段来自动刷新该表的列元数据：
 
@@ -471,7 +471,7 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 Model.Tables["Reseller Sales"].RefreshDataColumns();
 ```
 
-This is useful when adding new tables to a model, to avoid having to create every Data Column on the table manually. The snippet above assumes that the partition source can be accessed locally, using the existing connection string of the Partition Source for the 'Reseller Sales' table. The snippet above will extract the schema from the partition query, and add a Data Column to the table for every column in the source query.
+这在向模型添加新表时很有用，可避免需要在表上逐个手动创建数据列。上述代码片段假定可在本地访问该分区源，并使用“Reseller Sales”表分区源的现有连接字符串。上述代码片段会从分区查询中提取架构信息，并为源查询中的每一列在表中添加一个数据列。
 
 如果需要为此操作提供另一条连接字符串，也可以在该代码片段中进行设置：
 
@@ -489,7 +489,7 @@ source.ConnectionString = oldConnectionString;
 
 ## 格式化 DAX 表达式
 
-Please see [FormatDax](xref:script-helper-methods) for more information.
+有关详细信息，请参阅 [FormatDax](xref:script-helper-methods)。
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
@@ -508,7 +508,7 @@ foreach(var m in Selected.Measures)
 
 ## 生成表的源列列表
 
-下面的脚本会为当前选定的表输出一份格式良好的源列清单。 This may be useful if you want to replace partition queries that use `SELECT *` with explicit columns.
+下面的脚本会为当前选定的表输出一份格式良好的源列清单。如果你想将使用 `SELECT *` 的分区查询替换为显式列清单，这会很有用。
 
 ```csharp
 string.Join(",\r\n", 
@@ -524,7 +524,7 @@ string.Join(",\r\n",
 
 如果你的团队一直采用一套固定的命名约定，你很快就会发现脚本的威力会更大。
 
-The following script, when executed on one or more fact tables, will automatically create relationships to all relevant dimension tables, based on column names. 脚本会查找事实表中名称符合 `xxxyyyKey` 模式的列，其中 xxx 是用于角色扮演维度的可选限定符，yyy 是维度表名称。 On the dimension table, a column named `yyyKey` must exist and have the same data type as the column on the fact table. For example, a column named "ProductKey" will be related to the "ProductKey" column on the Product table. You can specify a different column name suffix to use in place of "Key".
+在一个或多个事实表上执行以下脚本后，脚本会根据列名自动创建与所有相关维度表的关系。脚本会查找事实表中名称符合 `xxxyyyKey` 模式的列，其中 xxx 是用于角色扮演维度的可选限定符，yyy 是维度表名称。在维度表中必须有一列名为 `yyyKey`，且其数据类型必须与事实表上的对应列相同。例如，名为“ProductKey”的列会与 Product 表中的“ProductKey”列建立关系。你也可以指定其他列名后缀来替换“Key”。
 
 如果事实表与维度表之间已经存在关系，脚本会将新关系创建为非活动状态。
 
@@ -600,7 +600,7 @@ Selected.Table.AddMeasure("DumpFilters", dax);
 
 ## 将 CamelCase 转换为 Proper Case
 
-在关系数据库中，列和表常用的一种命名方式是 CamelCase。 That is, names do not contain any spaces and individual words start with a capital letter. In a Tabular model, tables and columns that are not hidden, will be visible to business users, and so it would often be preferable to use a "prettier" naming scheme. The following script will convert CamelCased names to Proper Case. Sequences of uppercase letters are kept as-is (acronyms). For example, the script will convert the following:
+在关系数据库中，列和表常用的一种命名方式是 CamelCase。也就是说，名称中不含任何空格，且每个单词都以大写字母开头。在 Tabular 模型中，未隐藏的表和列会对业务用户可见，因此通常更适合使用更“易读”的命名方式。以下脚本会将 CamelCased 名称转换为 Proper Case。连续的大写字母会原样保留（作为首字母缩写）。例如，该脚本会将以下内容转换为：
 
 - `CustomerWorkZipcode` 转换为 `Customer Work Zipcode`
 - `CustomerAccountID` 转换为 `Customer Account ID`
@@ -646,7 +646,7 @@ foreach(var obj in Selected.OfType<ITabularNamedObject>()) {
 
 假设你有一个大型且复杂的模型，并希望了解哪些度量值可能会受到底层数据变更的影响。
 
-下面的脚本会遍历模型中的所有度量值，并针对每个度量值输出其依赖的表列表——包括直接依赖和间接依赖。 The list is outputted as a Tab-separated file.
+下面的脚本会遍历模型中的所有度量值，并针对每个度量值输出其依赖的表列表——包括直接依赖和间接依赖。该列表会输出为制表符分隔文件。
 
 ```csharp
 string tsv = "Measure\tDependsOnTable"; // TSV file header row
@@ -675,7 +675,7 @@ tsv.Output();
 
 ## 设置聚合（仅适用于 Power BI Dataset）
 
-As of [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.11.3), you can now set the `AlternateOf` property on a column, enabling you to define aggregation tables on your model. This feature is enabled for Power BI Datasets (Compatibility Level 1460 or higher) through the Power BI Service XMLA endpoint.
+从 [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.11.3) 起，你可以在列上设置 `AlternateOf` 属性，从而在模型中定义聚合表。此功能可通过 Power BI 服务的 XMLA endpoint 在 Power BI Dataset（兼容级别 1460 或更高）中启用。
 
 选择一组列并运行以下脚本，以初始化这些列的 `AlternateOf` 属性：
 
@@ -683,7 +683,7 @@ As of [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/rel
 foreach(var col in Selected.Columns) col.AddAlternateOf();
 ```
 
-Work your way through the columns one by one, to map them to the base column and set the summarization accordingly (Sum/Min/Max/GroupBy). 或者，如果你想自动化此流程，并且聚合表中的列与基础表中的列名称完全相同，可以使用下面的脚本，它会为你自动映射这些列：
+接下来逐列处理，将它们映射到基础列，并相应设置汇总方式（Sum/Min/Max/GroupBy）。或者，如果你想自动化此流程，并且聚合表中的列与基础表中的列名称完全相同，可以使用下面的脚本，它会为你自动映射这些列：
 
 ```csharp
 // Select two tables in the tree (ctrl+click). The aggregation table is assumed to be the one with fewest columns.
@@ -703,7 +703,7 @@ foreach(var col in aggTable.Columns)
 }
 ```
 
-运行脚本后，你应该会看到聚合表上的所有列都已设置了 `AlternateOf` 属性（见下方截图）。 Keep in mind, that the base table partition must use DirectQuery for aggregations to work.
+运行脚本后，你应该会看到聚合表上的所有列都已设置了 `AlternateOf` 属性（见下方截图）。请注意：要让聚合生效，基础表分区必须使用 DirectQuery。
 
 ![image](~/content/assets/images/useful-script-snippets-05.png)
 
@@ -715,18 +715,18 @@ foreach(var col in aggTable.Columns)
 
 以下方法可用：
 
-| 方法                                                            | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | This methods passes the specified TMSL or XMLA script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. Set the `isXmla` parameter to `true` if  sending an XMLA script. |
-| `IDataReader ExecuteReader(string dax)`                       | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回得到的 [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader.                                                                                               |
-| `Dataset ExecuteDax(string dax)`                              | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回一个 [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors.                                                                                              |
-| `object EvaluateDax(string dax)`                              | Executes the specified DAX _expression_ against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). 如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                                                                                                                           |
+| 方法                                                            | 描述                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | 这个方法会将指定的 TMSL 或 XMLA 脚本传递给已连接的 Analysis Services 实例。当你想要刷新 AS 实例中某个表的数据时，这会很有用。注意，如果你用这个方法更改模型元数据，本地模型元数据将与 AS 实例上的元数据不同步，并且下次尝试保存模型元数据时，你可能会收到版本冲突警告。如果要发送 XMLA 脚本，请将 `isXmla` 参数设为 `true`。                                                                                                    |
+| `IDataReader ExecuteReader(string dax)`                       | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回得到的 [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。注意，你不能同时打开多个数据读取器。如果你忘记显式关闭或释放读取器，Tabular Editor 会自动关闭它们。   |
+| `Dataset ExecuteDax(string dax)`                              | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回一个 [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。返回的 Dataset 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。不建议返回超大的数据表，因为这可能会导致内存不足或其他稳定性问题。 |
+| `object EvaluateDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示执行结果的对象。如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                             |
 
-Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
+直接调用这些方法，无需任何前缀。在 Tabular Editor 3.26.x 及更早版本中，也可以通过 `Model.Database` 对象调用它们；从 3.27.0 开始则不再支持，因此 `Model.Database.ExecuteCommand(tmsl)` 将无法再通过编译，应改用 `ExecuteCommand(tmsl)`。
 
 Darren Gosbell 在 [此处](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/) 介绍了一个有趣的用例：如何使用 `ExecuteDax` 方法生成数据驱动的度量值。
 
-另一种做法是创建一个可复用的脚本，用于刷新某个表。 For example, to perform a recalculation, use this:
+另一种做法是创建一个可复用的脚本，用于刷新某个表。例如，要执行重新计算，可使用下面的代码：
 
 ```csharp
 var type = "calculate";
@@ -742,7 +742,7 @@ ExecuteCommand(tmsl);
 
 ### 清除 Analysis Services 引擎的缓存
 
-从 Tabular Editor 2.16.6 或 Tabular Editor 3.2.3 起，你可以使用以下语法向 Analysis Services 发送原始 XMLA 命令。 The example below shows how this can be used to clear the AS engine cache:
+从 Tabular Editor 2.16.6 或 Tabular Editor 3.2.3 起，你可以使用以下语法向 Analysis Services 发送原始 XMLA 命令。下面的示例展示了如何使用它来清除 AS 引擎缓存：
 
 ```csharp
 var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">  
@@ -792,7 +792,7 @@ EvaluateDax(dax).Output();
 
 ![image](~/content/assets/images/useful-script-snippets-09.png)
 
-Remember you can save these scripts as Custom Actions by clicking the "+" icon just above the script editor. 这样，你就能拥有一套易于复用的 DAX 查询集合，可直接在 Tabular Editor 的上下文菜单中执行并可视化：
+别忘了点击脚本编辑器正上方的“+”图标，将这些脚本保存为自定义操作。这样，你就能拥有一套易于复用的 DAX 查询集合，可直接在 Tabular Editor 的上下文菜单中执行并可视化：
 
 ![image](~/content/assets/images/useful-script-snippets-10.png)
 
@@ -825,13 +825,13 @@ using(var fileWriter = new StreamWriter(file))
 }
 ```
 
-如果你想到了这些方法的其他有趣用法，欢迎在[社区脚本 repository](https://github.com/TabularEditor/Scripts)中分享。 Thanks!
+如果你想到了这些方法的其他有趣用法，欢迎在[社区脚本 repository](https://github.com/TabularEditor/Scripts)中分享。谢谢！
 
 ***
 
 ## 替换 Power Query 的服务器和数据库名称
 
-Power BI Dataset that import data from SQL Server-based datasources, often contain M expressions that look like the following. Tabular Editor does unfortunately not have any mechanism for "parsing" such an expression, but if we wanted to replace the server and database names in this expression with something else, without knowing the original values, we can exploit the fact that the values are enclosed in double quotes:
+从基于 SQL Server 的数据源导入数据的 Power BI Dataset，通常包含如下所示的 M 表达式。遗憾的是，Tabular Editor 没有任何机制来“解析”这类表达式。不过，如果我们想在不知道原始值的情况下，把这个表达式中的服务器和数据库名称替换成别的内容，可以利用这样一个事实：这些值都被双引号括起来：
 
 ```M
 let
@@ -842,7 +842,7 @@ in
     dbo_DimProduct
 ```
 
-以下脚本会将双引号中第一次出现的值替换为服务器名称，并将双引号中第二次出现的值替换为数据库名称。 Both replacement values are read from environment variables:
+以下脚本会将双引号中第一次出现的值替换为服务器名称，并将双引号中第二次出现的值替换为数据库名称。这两个替换值都从环境变量中读取：
 
 ```csharp
 // This script is used to replace the server and database names across
@@ -888,7 +888,7 @@ foreach(var p in Model.AllPartitions.OfType<MPartition>())
 
 要解决这个问题，你可以在模型上运行下面的脚本：它会将 Power Query 分区替换为对应的原生 SQL 查询分区，并在模型中创建一个 Legacy（提供程序）数据源，这样就能使用 Tabular Editor 2 的“数据导入”向导：
 
-There are two versions of the script: The first one uses the MSOLEDBSQL provider for the created legacy data source, and hardcoded credentials. This is useful for local development. The second one uses the SQLNCLI provider, which is available on Microsoft-hosted build agents on Azure DevOps, and reads credentials and server/database names from environment variables, making the script useful for integration in Azure Pipelines.
+这个脚本有两个版本：第一个版本会为创建的 Legacy 数据源使用 MSOLEDBSQL 提供程序，并使用硬编码的凭据。这对本地开发很有用。第二个脚本使用 SQLNCLI 提供程序。该提供程序在 Azure DevOps 的 Microsoft 托管构建代理上可用，并会从环境变量中读取凭据以及服务器/数据库名称，因此该脚本适合集成到 Azure Pipelines 中。
 
 MSOLEDBSQL 版本：从 M 分区读取连接信息，并通过 Azure AD 提示你输入用户名和密码：
 
