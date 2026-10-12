@@ -1,6 +1,6 @@
 ---
 uid: object-properties-columns
-title: Column properties
+title: Propiedades de las columnas
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Column properties
+# Propiedades de las columnas
 
 <!--
 SUMMARY: Reference for the properties of data columns, calculated columns, calculated table columns, and the Alternate Of and Variation objects that belong to columns.
@@ -25,30 +25,30 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page lists the properties of the three kinds of columns and of the two objects that belong to a column, Alternate Of and Variation. For properties that most objects share, see @object-properties-common.
+En esta página se enumeran las propiedades de los tres tipos de columnas y de los dos objetos que pertenecen a una columna: Alternate Of y Variation. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
-A table contains three kinds of columns:
+Una tabla contiene tres tipos de columnas:
 
-- a **data column** gets its values from the table's partitions, for example from a Power Query (M) query or a SQL query
-- a **calculated column** gets its values from a DAX expression that's evaluated for each row of the table
-- a **calculated table column** is a column of a calculated table, defined by the calculated table's DAX expression
+- una **columna de datos** obtiene sus valores de las particiones de la tabla, por ejemplo, de una consulta de Power Query (M) o de una consulta SQL
+- una **columna calculada** obtiene sus valores de una expresión DAX que se evalúa para cada fila de la tabla
+- una **columna de tabla calculada** es una columna de una tabla calculada, definida por la expresión DAX de la tabla calculada
 
-[Properties of all columns](#properties-of-all-columns) describes the properties that the three kinds share. The sections after it list the properties that are specific to one kind of column.
+En [Propiedades de todas las columnas](#properties-of-all-columns) se describen las propiedades que comparten los tres tipos. En las secciones siguientes se enumeran las propiedades específicas de cada tipo de columna.
 
-## Properties of all columns
+## Propiedades de todas las columnas
 
-These properties apply to data columns, calculated columns and calculated table columns.
+Estas propiedades se aplican a las columnas de datos, a las columnas calculadas y a las columnas de tablas calculadas.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Display Folder](xref:object-properties-common#display-folder)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Changed Properties](xref:object-properties-common#changed-properties)
-- [DAX identifier](xref:object-properties-common#dax-identifier)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Carpeta de visualización](xref:object-properties-common#display-folder)
+- [Oculto](xref:object-properties-common#hidden)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Propiedades modificadas](xref:object-properties-common#changed-properties)
+- [Identificador DAX](xref:object-properties-common#dax-identifier)
 - [Mensaje de error](xref:object-properties-common#error-message)
 - [Tipo de objeto](xref:object-properties-common#object-type)
 - [Estado](xref:object-properties-common#state)
@@ -117,48 +117,48 @@ La agregación que las herramientas cliente aplican cuando el autor del Report a
 | Valor            | Significado                                                                                                                  |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `Predeterminado` | La herramienta cliente lo decide. Las columnas numéricas se suman y las demás no se resumen. |
-| `None`           | Don't summarize. Power BI shows it as **Don't summarize**.                                   |
-| `Sum`            | The sum of the values.                                                                                       |
-| `Min`            | The smallest value.                                                                                          |
-| `Max`            | The largest value.                                                                                           |
-| `Count`          | The number of values.                                                                                        |
-| `Average`        | The average of the values.                                                                                   |
-| `DistinctCount`  | The number of distinct values.                                                                               |
+| `None`           | No resumas. Power BI lo muestra como **No resumir**.                                         |
+| `Sum`            | La suma de los valores.                                                                                      |
+| `Min`            | El valor más pequeño.                                                                                        |
+| `Max`            | El valor más grande.                                                                                         |
+| `Count`          | El número de valores.                                                                                        |
+| `Average`        | El promedio de los valores.                                                                                  |
+| `DistinctCount`  | El número de valores distintos.                                                                              |
 
-In Power BI Desktop, a numeric column with `Default` behaves like `Sum`: it shows with the Σ icon in the **Data** pane and is added to a visual as **Sum of** the column. A text column with `Default` isn't summarized. Excel ignores this property, and a PivotTable only aggregates through measures.
+En Power BI Desktop, una columna numérica con `Default` se comporta como `SUM`: se muestra con el icono Σ en el panel **Datos** y se agrega a un Visual como **SUM de** la columna. Una columna de texto con `Default` no se resume. Excel ignora esta propiedad y una tabla dinámica solo realiza agregaciones mediante medidas.
 
-Set `None` on numeric columns that aren't meaningful to add up, such as keys, years, phone numbers or unit prices, or report authors get totals such as the sum of all customer IDs. See @kb.bpa-do-not-summarize-numeric.
+Establece `None` en las columnas numéricas que no tengan sentido sumar, como claves, años, números de teléfono o precios unitarios; de lo contrario, los autores de Reports obtendrán totales como la suma de todos los ID de cliente. Consulta @kb.bpa-do-not-summarize-numeric.
 
-`SummarizeBy` has no effect on DAX or on explicit measures. When `DiscourageImplicitMeasures` is enabled on the model (see @object-properties-model), Power BI creates no implicit measures and this property has no effect. The C# script @script-create-sum-measures-from-columns creates a `SUM` measure for each selected column and hides the column.
+`SummarizeBy` no tiene efecto en DAX ni en las medidas explícitas. Cuando `DiscourageImplicitMeasures` está habilitado en el modelo (consulta @object-properties-model), Power BI no crea medidas implícitas y esta propiedad no tiene efecto. El C# Script @script-create-sum-measures-from-columns crea una medida `SUM` para cada columna seleccionada y oculta la columna.
 
 ### Alignment
 
-`Alignment` · Alignment · Options
+`Alignment` · Alineación · Opciones
 
-The horizontal alignment of the column's values in client tools that support it.
+La alineación horizontal de los valores de la columna en las herramientas cliente que la admitan.
 
-| Valor     | Significado                                                                                                          |
-| --------- | -------------------------------------------------------------------------------------------------------------------- |
-| `Default` | The client tool decides. Most tools align numbers to the right and text to the left. |
-| `Left`    | Align to the left.                                                                                   |
-| `Right`   | Align to the right.                                                                                  |
-| `Center`  | Center the values.                                                                                   |
+| Valor            | Significado                                                                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Predeterminado` | La herramienta cliente es quien decide. La mayoría de las herramientas alinean los números a la derecha y el texto a la izquierda. |
+| `Izquierda`      | Alinear a la izquierda.                                                                                                                            |
+| `Derecha`        | Alinear a la derecha.                                                                                                                              |
+| `Centro`         | Centrar los valores.                                                                                                                               |
 
-Power BI ignores this property. Table and matrix visuals always align text to the left and numbers to the right, and you set other alignments in the formatting options of the visual. In an Excel PivotTable connected to the model, right- and center-aligned columns also show with the default alignment.
+Power BI ignora esta propiedad. Los Visuales de tabla y matriz siempre alinean el texto a la izquierda y los números a la derecha; el resto de alineaciones se configuran en las opciones de formato del Visual. En una tabla dinámica de Excel conectada al modelo, las columnas alineadas a la derecha y al centro también se muestran con la alineación predeterminada.
 
-### Alternate Of
+### Alternativa de
 
-`AlternateOf` · AlternateOf · Options · compatibility level 1460+
+`AlternateOf` · AlternateOf · Opciones · nivel de compatibilidad 1460+
 
-Makes this column part of a user-defined aggregation. An aggregation table holds pre-aggregated data, for example sales per customer and product. `AlternateOf` maps this column to the column of the detail table that it stands in for and sets how the values were aggregated, and the engine then answers queries from the smaller aggregation table when it can.
+Hace que esta columna forme parte de una agregación definida por el usuario. Una tabla de agregación contiene datos preagregados, por ejemplo, ventas por cliente y producto. `AlternateOf` asigna esta columna a la columna de la tabla de detalle a la que sustituye y establece cómo se agregaron los valores; cuando puede, el motor responde a las consultas usando la tabla de agregación más pequeña.
 
-The property appears at compatibility level 1460 or higher and stays empty until you add an Alternate Of. In Tabular Editor 2 and Tabular Editor 3, click the **...** button of the empty property, or right-click the property and choose **Add Alternate Of**. The new Alternate Of has `Summarization` `Sum`. Expand the property to set the properties described under [Alternate Of](#alternate-of-1). To remove it, right-click the property and choose **Remove Alternate Of**. For a walkthrough, see @user-defined-aggregations.
+La propiedad aparece en el nivel de compatibilidad 1460 o superior y permanece vacía hasta que agregues una Alternativa de. En Tabular Editor 2 y Tabular Editor 3, haz clic en el botón **...** de la propiedad vacía o haz clic con el botón derecho en la propiedad y elige **Agregar Alternativa de**. El nuevo Alternate Of tiene `Summarization` `Sum`. Expande la propiedad para establecer las propiedades descritas en [Alternativa de](#alternate-of-1). Para quitarla, haz clic con el botón derecho en la propiedad y elige **Quitar Alternativa de**. Para ver una guía paso a paso, consulta @user-defined-aggregations.
 
-The C# script @script-implement-user-defined-aggregations sets up the detail table for a selected aggregation table and configures `AlternateOf` on its numeric columns.
+El C# Script @script-implement-user-defined-aggregations prepara la tabla de detalle de una tabla de agregación seleccionada y configura `AlternateOf` en sus columnas numéricas.
 
-### Data Category
+### Categoría de datos
 
-`DataCategory` · string · Options
+`DataCategory` · string · Opciones
 
 El tipo de valor que contiene la columna, que las herramientas cliente utilizan para tratar la columna de forma especial. Por ejemplo, Power BI coloca en un mapa una columna con la categoría `City`, muestra como imagen una columna con la categoría `ImageUrl` y muestra como un enlace en el que se puede hacer clic una columna con la categoría `WebUrl`. Déjalo vacío para una columna normal.
 
@@ -236,39 +236,39 @@ Establecerlo en `false` en columnas ocultas que las consultas MDX no usan, como 
 
 `IsDataTypeInferred` · bool · Opciones
 
-Si el motor deduce por sí mismo el tipo de datos de la columna e ignora el valor de `DataType`. It mostly matters for calculated columns and calculated table columns, whose data type follows from the DAX expression.
+Si el motor deduce por sí mismo el tipo de datos de la columna e ignora el valor de `DataType`. Importa sobre todo para las columnas calculadas y las columnas de tablas calculadas, cuyo tipo de datos se deriva de la expresión DAX.
 
-In Tabular Editor 3, while this is `true` on a calculated column or calculated table column, `DataType` is read-only and Tabular Editor updates it from the expression as you edit it, without a connection to a server. Set it to `false` to pick a data type yourself. When you set it back to `true` on a calculated table column, `DataType` resets to the data type of the column that the expression gets its values from.
+En Tabular Editor 3, cuando este valor es `true` en una columna calculada o en una columna de una tabla calculada, `DataType` es de solo lectura y Tabular Editor lo actualiza a partir de la expresión a medida que la editas, sin conexión a un servidor. Establécelo en `false` para elegir tú mismo el tipo de datos. Cuando vuelves a establecerlo en `true` en una columna de una tabla calculada, `DataType` se restablece al tipo de datos de la columna de la que la expresión obtiene sus valores.
 
 <!-- TODO (not verifiable from TE3 source): document the effect of this property on data columns. TE3 has no special handling for data columns. -->
 
-### Default Image
+### Imagen predeterminada
 
-`IsDefaultImage` · bool · Options
+`IsDefaultImage` · bool · Opciones
 
-Marks the column as the image that represents a row of the table, for example a product photo. It's one of the _table behavior_ settings that Power View used. No current client uses it: Power View is retired, Power BI ignores it and Excel PivotTables ignore table behavior settings.
+Marca la columna como la imagen que representa una fila de la tabla, por ejemplo, una foto del producto. Es una de las configuraciones de _comportamiento de tabla_ que usaba Power View. Ningún cliente actual lo usa: Power View se ha retirado, Power BI lo ignora y las tablas dinámicas de Excel ignoran la configuración de comportamiento de tabla.
 
-### Default Label
+### Etiqueta predeterminada
 
-`IsDefaultLabel` · bool · Options
+`IsDefaultLabel` · bool · Opciones
 
-Marks the column as the label that identifies a row of the table to users, for example the product name. It's a table behavior setting that Power View used. No current client uses it. Power View and Power BI Q&A both supported it and are both retired.
+Marca la columna como la etiqueta que identifica una fila de la tabla para los usuarios, por ejemplo, el nombre del producto. Es una configuración de comportamiento de tabla que usaba Power View. Ningún cliente actual lo usa. Power View y Power BI Q&A la admitían, y ambos han sido retirados.
 
 ### Clave
 
-`IsKey` · bool · Options
+`IsKey` · bool · Opciones
 
-Marks the column as the key of the table, the column whose values identify each row. A table has at most one key column: when you set `IsKey` to `true` on a column, Tabular Editor sets it to `false` on the other columns of the table and leaves `IsUnique` and `IsNullable` unchanged. The key column can't contain duplicate or blank values, so a refresh that loads duplicates fails.
+Marca la columna como la clave de la tabla, la columna cuyos valores identifican cada fila. Una tabla tiene como máximo una columna clave: cuando estableces `IsKey` en `true` en una columna, Tabular Editor lo establece en `false` en las demás columnas de la tabla y deja `IsUnique` e `IsNullable` sin cambios. La columna clave no puede contener valores duplicados ni en blanco, por lo que una actualización que cargue duplicados falla.
 
-When you mark a table as a date table in Power BI, `IsKey` is set on the date column and the table's `DataCategory` is `Time`.
+Cuando marcas una tabla como tabla de fechas en Power BI, `IsKey` se establece en la columna de fecha y la `DataCategory` de la tabla se establece en `Time`.
 
-The BPA rule @kb.bpa-date-table-exists flags a model that has no calendar, no table with `DataCategory` `Time` and no `DateTime` key column.
+La regla BPA @kb.bpa-date-table-exists marca un modelo que no tiene ningún calendario, ninguna tabla con `DataCategory` `Time` ni ninguna columna clave de tipo `DateTime`.
 
-### Nullable
+### Admite valores nulos
 
-`IsNullable` · bool · Options
+`IsNullable` · bool · Opciones
 
-Whether the column can contain blank (null) values. The default is `true`. Si se establece en `false`, la actualización falla cuando el origen devuelve un valor vacío, lo que sirve como comprobación de la calidad de los datos. Una columna clave nunca permite valores en blanco, sea cual sea el valor de esta propiedad.
+Indica si la columna puede contener valores en blanco (nulos). El valor predeterminado es `true`. Si se establece en `false`, la actualización falla cuando el origen devuelve un valor vacío, lo que sirve como comprobación de la calidad de los datos. Una columna clave nunca permite valores en blanco, sea cual sea el valor de esta propiedad.
 
 ### Único
 
@@ -350,67 +350,67 @@ La configuración de seguridad a nivel de objetos (OLS) de esta columna en cada 
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Default` | Ninguna configuración específica para la columna. La columna sigue la configuración de su tabla en el rol. En TOM, el rol no tiene ningún permiso de columna para esta columna. |
 | `None`    | Los usuarios del rol no pueden ver ni consultar la columna. Para ellos, la columna no existe y los Visuales que la usen muestran un error.                                                      |
-| `Read`    | Users in the role can see and query the column.                                                                                                                                                                 |
+| `Leer`    | Los usuarios asignados al rol pueden ver y consultar la columna.                                                                                                                                                |
 
-You can change the value for each role. When you pick `None` or `Read`, Tabular Editor adds a column permission for the column to the role's table permission for the column's table, and creates that table permission if the role doesn't have one yet. When you pick `Default`, Tabular Editor removes the column permission. You can also set the same values on the role, under **OLS Column Permissions** (see @object-properties-security). See @data-security-setup-ols.
+Puedes cambiar el valor de cada rol. Cuando eliges `None` o `Read`, Tabular Editor agrega un permiso de columna para esa columna al permiso de tabla del rol para la tabla de la columna, y crea ese permiso de tabla si el rol aún no tiene uno. Cuando eliges `Default`, Tabular Editor quita el permiso de columna. También puedes establecer los mismos valores en el rol, en **Permisos de columna de OLS** (consulta @object-properties-security). Consulta @data-security-setup-ols.
 
-You can't combine row-level security from one role with object-level security from another. When a user is a member of such a combination of roles, the engine returns an error at query time.
+No puedes combinar la seguridad a nivel de filas de un rol con la seguridad a nivel de objetos de otro. Cuando un usuario es miembro de una combinación de roles como esa, el motor devuelve un error en tiempo de consulta.
 
-Observed on SQL Server 2025 Analysis Services, the settings combine like this:
+En SQL Server 2025 Analysis Services, se ha observado que la configuración se combina así:
 
-- `Default` follows the table: when the role's table permission is `Read`, the column is visible, and when it's `None`, the whole table is hidden, including this column
-- a column can't be less restrictive than its table, and the engine rejects `Read` on a column whose table is `None`
-- when a user is a member of several roles that all use OLS, the permissions add up, and the user can see a table or column if any of the roles allows it
-- row-level and object-level security in the same role work together, for example a row filter on a table that the role hides with OLS still filters the related tables
+- `Default` sigue a la tabla: cuando el permiso de tabla del rol es `Read`, la columna es visible, y cuando es `None`, se oculta toda la tabla, incluida esta columna
+- una columna no puede ser menos restrictiva que su tabla, y el motor rechaza `Read` en una columna cuya tabla es `None`
+- cuando un usuario es miembro de varios roles que usan OLS, los permisos se acumulan, y el usuario puede ver una tabla o columna si alguno de los roles lo permite
+- la seguridad a nivel de filas y la seguridad a nivel de objetos en el mismo rol funcionan juntas; por ejemplo, un filtro de filas en una tabla que el rol oculta con OLS sigue filtrando las tablas relacionadas
 
-## Data column
+## Columna de datos
 
-A data column gets its values from the table's partitions, in a Power BI model usually a Power Query (M) query. The column has the properties under [Properties of all columns](#properties-of-all-columns) and the one below.
+Una columna de datos obtiene sus valores de las particiones de la tabla; en un modelo de Power BI, normalmente de una consulta de Power Query (M). La columna tiene las propiedades descritas en [Properties of all columns](#properties-of-all-columns) y la siguiente.
 
-In Tabular Editor 3, the @import-tables wizard creates data columns with their data types and source column mappings, and **Update table schema** updates them when the source changes.
+En Tabular Editor 3, el asistente @import-tables crea columnas de datos con sus tipos de datos y asignaciones de columnas de origen, y **Actualizar esquema de la tabla** las actualiza cuando cambia el origen.
 
-### Source Column
+### Columna de origen
 
-`SourceColumn` · string · Basic
+`SourceColumn` · cadena · Básico
 
-The name of the column in the result of the partition query that this column gets its values from. It must match the name that the query returns. If it doesn't, for example after someone renamed a column in Power Query, the refresh fails.
+El nombre de la columna en el resultado de la consulta de la partición de la que esta columna obtiene sus valores. Debe coincidir con el nombre que devuelve la consulta. Si no coincide, por ejemplo, después de que alguien haya cambiado el nombre de una columna en Power Query, la actualización falla.
 
-The column's `Name` and `SourceColumn` are separate, so you can rename the column in the model without changing the query and the other way round. Renaming a column in Tabular Editor leaves `SourceColumn` unchanged. With formula fix-up turned on, Tabular Editor updates the DAX expressions that refer to the renamed column. See @formula-fix-up-dependencies.
+Los valores de `Name` y `SourceColumn` de la columna son independientes, por lo que puedes cambiar el nombre de la columna en el modelo sin cambiar la consulta, y viceversa. Cambiar el nombre de una columna en Tabular Editor deja `SourceColumn` sin cambios. Con la corrección automática de fórmulas activada, Tabular Editor actualiza las expresiones DAX que hacen referencia a la columna renombrada. Consulta @formula-fix-up-dependencies.
 
-Every data column needs a source column. See @kb.bpa-data-column-source.
+Toda columna de datos necesita una columna de origen. Consulta @kb.bpa-data-column-source.
 
-When a column is renamed in the source, **Update table schema** in Tabular Editor 3 reports a removed and a new column. Combine the two into a single `SourceColumn` update to keep the DAX formulas that use the column working.
+Cuando se cambia el nombre de una columna en la fuente, **Actualizar esquema de tabla** en Tabular Editor 3 indica que se ha quitado una columna y se ha agregado otra nueva. Combina ambas en una sola actualización de `SourceColumn` para que las fórmulas DAX que usan la columna sigan funcionando.
 
-## Calculated column
+## Columna calculada
 
-A calculated column gets its values from a DAX expression that's evaluated once for each row of the table when the table is refreshed. The engine stores the result like the values of a data column, which takes memory and makes the values fast to read. Use a calculated column for values that you slice, filter or group by, and a measure for values that you only aggregate.
+Una columna calculada obtiene sus valores de una expresión DAX que se evalúa una vez por cada fila de la tabla al actualizarla. El motor almacena el resultado igual que los valores de una columna de datos, lo que consume memoria y permite leer los valores con rapidez. Usa una columna calculada para los valores por los que segmentas, filtras o agrupas, y una medida para los valores que solo agregas.
 
-The column has the properties under [Properties of all columns](#properties-of-all-columns) and the ones below. To add a calculated column in Tabular Editor 3, see @creating-and-testing-dax.
+La columna tiene las propiedades de [Propiedades de todas las columnas](#properties-of-all-columns) y las que se indican a continuación. Para agregar una columna calculada en Tabular Editor 3, consulta @creating-and-testing-dax.
 
 ### Expresión
 
-`Expression` · string · Options
+`Expression` · cadena · Opciones
 
-The DAX expression that calculates the value for each row, for example:
+La expresión DAX que calcula el valor de cada fila, por ejemplo:
 
 ```dax
 Sales[Quantity] * Sales[Unit Price]
 ```
 
-The expression is evaluated in a _row context_, so it refers to the columns of the current row directly. To get a value from a related table, use [RELATED](https://dax.guide/related), for example `RELATED ( Product[Category] )`.
+La expresión se evalúa en un _contexto de fila_, por lo que hace referencia directamente a las columnas de la fila actual. Para obtener un valor de una tabla relacionada, usa [RELATED](https://dax.guide/related), por ejemplo `RELATED ( Product[Category] )`.
 
-The engine recalculates the column when the table is refreshed, or when you change the expression and save the model to a connected server. In Tabular Editor 3, you edit the expression in the **Expression Editor** of the @dax-editor. The @table-preview shows the calculated values, or **(Calculation needed)** when the column must be recalculated first.
+El motor vuelve a calcular la columna cuando se actualiza la tabla o cuando cambias la expresión y guardas el modelo en un servidor conectado. En Tabular Editor 3, edita la expresión en el **Editor de expresiones** del @dax-editor. La @table-preview muestra los valores calculados o **(Es necesario recalcular)** cuando la columna debe recalcularse primero.
 
 ### Contexto de expresión
 
-`ExpressionContext` · ExpressionContext · Options · compatibility level 1705+
+`ExpressionContext` · ExpressionContext · Opciones · nivel de compatibilidad 1705+
 
-Whether the column has one value for everyone or is evaluated per user.
+Si la columna tiene un valor para todos o se evalúa por usuario.
 
-| Valor         | Significado                                                                                                                                |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Standard`    | La opción predeterminada. The column is calculated during refresh and has one value per row for all users. |
-| `UserContext` | The column is evaluated per user, and the expression can call functions such as `USERPRINCIPALNAME`.                       |
+| Valor         | Significado                                                                                                                                                 |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Standard`    | La opción predeterminada. La columna se calcula durante la actualización y tiene un valor por fila para todos los usuarios. |
+| `UserContext` | La columna se evalúa por usuario y la expresión puede llamar a funciones como `USERPRINCIPALNAME`.                                          |
 
 Las columnas calculadas estándar, las tablas calculadas, los filtros de seguridad a nivel de filas y las relaciones no pueden usar una columna de contexto de usuario. Consulta @user-context-calculated-columns.
 
@@ -437,103 +437,103 @@ El valor tiene uno de estos dos formatos:
 
 `IsNameInferred` · bool · Opciones
 
-Si el nombre de la columna sigue el nombre definido en la expresión de la tabla calculada. Cuando es `true`, el motor y Tabular Editor 3 cambian el nombre de la columna para que coincida con la expresión, por ejemplo, cuando cambia la expresión. Set it to `false` to keep a name that you gave the column yourself.
+Si el nombre de la columna sigue el nombre definido en la expresión de la tabla calculada. Cuando es `true`, el motor y Tabular Editor 3 cambian el nombre de la columna para que coincida con la expresión, por ejemplo, cuando cambia la expresión. Ponlo en `false` para conservar el nombre que tú mismo le asignaste a la columna.
 
-In Tabular Editor 3, `Name` is read-only while `IsNameInferred` is `true`. When you set it back to `true`, the column gets the name of the column that the expression takes it from, if there is one.
+En Tabular Editor 3, `Name` es de solo lectura cuando `IsNameInferred` es `true`. Cuando vuelves a establecerlo en `true`, la columna toma el nombre de la columna que la expresión usa como origen, si existe.
 
-A C# script that creates a field parameter, for example, sets `IsNameInferred` to `false` on its columns to keep the names it gives them. See @create-field-parameter.
+Por ejemplo, un C# Script que crea un parámetro de campo establece `IsNameInferred` en `false` en sus columnas para conservar los nombres que les asigna. Consulta @create-field-parameter.
 
-## Alternate Of
+## Alternativa de
 
-An Alternate Of object sits on a column of an aggregation table. It maps that column to a column, or to the whole table, of the detail table that it summarizes, and sets how the values were aggregated. With these mappings in place, the engine answers a query from the aggregation table when it can and skips the detail table, which is usually much larger and often in DirectQuery mode. This setup is called _user-defined aggregations_. For a walkthrough, see @user-defined-aggregations.
+Un objeto Alternate Of se encuentra en una columna de una tabla de agregación. Asigna esa columna a una columna, o a toda la tabla, de la tabla de detalle que resume, y define cómo se agregaron los valores. Con estas asignaciones configuradas, el motor responde a una consulta desde la tabla de agregación cuando puede y omite la tabla de detalle, que suele ser mucho más grande y a menudo está en modo DirectQuery. Esta configuración se denomina _agregaciones definidas por el usuario_. Para ver una guía paso a paso, consulta @user-defined-aggregations.
 
-Alternate Of needs compatibility level 1460 or higher. It doesn't appear as a separate object in the **TOM Explorer**. To set the properties below, expand the column's `AlternateOf` property in the **Properties view**.
+Alternate Of requiere un nivel de compatibilidad 1460 o superior. No aparece como un objeto independiente en el **Explorador TOM**. Para establecer las propiedades siguientes, expande la propiedad `AlternateOf` de la columna en la **vista de propiedades**.
 
-### Common properties
+### Propiedades comunes
 
-- [Annotations](xref:object-properties-common#annotations)
-- [Object Type](xref:object-properties-common#object-type)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
-### Base Column
+### Columna base
 
-`BaseColumn` · Column · Options
+`BaseColumn` · Columna · Opciones
 
-The column in the detail table that this column aggregates. For example, the `Sales Amount` column of a `Sales Agg` table has base column `Sales[Sales Amount]` with summarization `Sum`.
+La columna de la tabla de detalle que esta columna agrega. Por ejemplo, la columna `Sales Amount` de una tabla `Sales Agg` tiene como columna base `Sales[Sales Amount]` con la agregación `Sum`.
 
-Set either `BaseColumn` or `BaseTable`. Setting `BaseColumn` clears `BaseTable`.
+Establece `BaseColumn` o `BaseTable`. Al establecer `BaseColumn`, se borra `BaseTable`.
 
-### Base Table
+### Tabla base
 
-`BaseTable` · Table · Options
+`BaseTable` · Tabla · Opciones
 
-The detail table whose rows this column counts. Use it with `Summarization` `Count` for a column that holds the number of detail rows, which lets the engine answer `COUNTROWS ( Sales )` from the aggregation table.
+La tabla de detalles cuyas filas cuenta esta columna. Úsalo con `Summarization` `Count` para una columna que contenga el número de filas de detalle, lo que permite al motor responder a `COUNTROWS ( Sales )` desde la tabla de agregación.
 
-Set either `BaseColumn` or `BaseTable`. Setting `BaseTable` clears `BaseColumn` and sets `Summarization` to `Count`, and changing `Summarization` to any other value clears `BaseTable`. The **Properties view** only shows `BaseTable` when `Summarization` is `Count`.
+Establece `BaseColumn` o `BaseTable`. Al establecer `BaseTable`, se borra `BaseColumn` y se establece `Summarization` en `Count`, y cambiar `Summarization` a cualquier otro valor borra `BaseTable`. La **vista de propiedades** solo muestra `BaseTable` cuando `Summarization` es `Count`.
 
 ### Columna
 
-`Column` · Column · Options · read-only
+`Column` · Columna · Opciones · solo lectura
 
-The column of the aggregation table that this Alternate Of belongs to. The **Properties view** hides it, and you can use it in C# scripts.
+La columna de la tabla de agregación a la que pertenece este "Alternate Of". La **vista de propiedades** la oculta y puedes usarla en C# Script.
 
-### Summarization
+### Agregación
 
-`Summarization` · SummarizationType · Options
+`Summarization` · SummarizationType · Opciones
 
-How the values in this column were aggregated from the base column or base table.
+Cómo se agregaron los valores de esta columna a partir de la columna base o la tabla base.
 
-| Valor     | Significado                                                                                                                                                                                                                          |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `GroupBy` | A group-by column that holds the same values as the base column. Required when the aggregation table isn't related to the dimension tables, for example when the detail table is a wide, flat table. |
-| `Sum`     | The sum of the base column.                                                                                                                                                                                          |
-| `Count`   | The number of rows of the base table, or the number of non-blank values of the base column.                                                                                                                          |
-| `Min`     | The smallest value of the base column.                                                                                                                                                                               |
-| `Max`     | The largest value of the base column.                                                                                                                                                                                |
+| Valor     | Significado                                                                                                                                                                                                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GroupBy` | Una columna de agrupación que contiene los mismos valores que la columna base. Obligatorio cuando la tabla de agregación no está relacionada con las tablas de dimensiones; por ejemplo, cuando la tabla de detalle es una tabla ancha y plana. |
+| `Sum`     | La suma de la columna base.                                                                                                                                                                                                                                     |
+| `Count`   | El número de filas de la tabla base, o el número de valores no en blanco de la columna base.                                                                                                                                                                    |
+| `Min`     | El valor más pequeño de la columna base.                                                                                                                                                                                                                        |
+| `Max`     | El valor más grande de la columna base.                                                                                                                                                                                                                         |
 
-For all summarizations except `Count`, the column must have the same data type as its base column, so a `Sum` of a `Decimal` base column is also `Decimal`. A `Count` column must be a whole number (`Int64`), whatever the data type of the base column. To let the engine answer `DISTINCTCOUNT` from the aggregation table, add the column with `GroupBy`, which also works when the aggregation table is related to the dimension tables. No distinct count summarization exists.
+Para todos los tipos de agregación salvo `Count`, la columna debe tener el mismo tipo de datos que su columna base, por lo que un `Sum` de una columna base `Decimal` también es `Decimal`. Una columna `Count` debe ser un número entero (`Int64`), independientemente del tipo de datos de la columna base. Para que el motor pueda responder a `DISTINCTCOUNT` desde la tabla de agregación, agrega la columna con `GroupBy`, lo cual también funciona cuando la tabla de agregación está relacionada con las tablas de dimensiones. No existe un resumen de recuento distinto.
 
-## Variation
+## Variación
 
-A variation is something else that a client tool shows when a user picks a column. Power BI uses variations for auto date/time: for each date column, Power BI Desktop creates a hidden date table, a relationship to it and a variation on the date column. When a report author picks the date column, Power BI shows the **Date Hierarchy** of the hidden date table.
+Una variación es otro elemento que muestra una herramienta cliente cuando un usuario selecciona una columna. Power BI usa variaciones para la fecha/hora automática: para cada columna de fecha, Power BI Desktop crea una tabla de fechas oculta, una relación con ella y una variación para la columna de fecha. Cuando el autor de un Report selecciona la columna de fecha, Power BI muestra la **Jerarquía de fechas** de la tabla de fechas oculta.
 
-Variations mostly occur in Power BI and Fabric models. Tabular Editor shows the `Variations` property of a column at compatibility level 1400 or higher, in Analysis Services models too. If your model has its own date table, turn off auto date/time in Power BI Desktop to remove the hidden date tables and their variations. See @kb.bpa-remove-auto-date-table.
+Las variaciones aparecen sobre todo en modelos de Power BI y Fabric. Tabular Editor muestra la propiedad `Variations` de una columna con un nivel de compatibilidad 1400 o superior; también en los modelos de Analysis Services. Si tu modelo tiene su propia tabla de fechas, desactiva la fecha/hora automática en Power BI Desktop para eliminar las tablas de fechas ocultas y sus variaciones. Consulta @kb.bpa-remove-auto-date-table.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
-### Parent Column
+### Columna principal
 
-`Column` · Column · Basic · read-only
+`Column` · Columna · Básico · solo lectura
 
-The column this variation belongs to.
+La columna a la que pertenece esta variación.
 
-### Default Column
+### Columna predeterminada
 
-`DefaultColumn` · Column · Options
+`DefaultColumn` · Columna · Opciones
 
-A column of the related table that the client tool shows when a user picks the parent column. Set either this or `DefaultHierarchy`. The variations that Power BI Desktop creates for auto date/time use `DefaultHierarchy` and leave `DefaultColumn` empty.
+Una columna de la tabla relacionada que la herramienta cliente muestra cuando un usuario selecciona la columna principal. Establece esta propiedad o `DefaultHierarchy`. Las variaciones que Power BI Desktop crea para la fecha/hora automática usan `DefaultHierarchy` y dejan `DefaultColumn` en blanco.
 
 <!-- TODO (not verifiable from TE3 source): confirm whether Default Column and Default Hierarchy are mutually exclusive, and when Power BI uses Default Column. TE3 doesn't enforce either rule. -->
 
-### Default Hierarchy
+### Jerarquía predeterminada
 
-`DefaultHierarchy` · Hierarchy · Options
+`DefaultHierarchy` · Jerarquía · Opciones
 
-A hierarchy of the related table that the client tool shows when a user picks the parent column. For auto date/time, this is the **Date Hierarchy** of the hidden `LocalDateTable_...` table.
+Una jerarquía de la tabla relacionada que la herramienta cliente muestra cuando el usuario selecciona la columna principal. Para la fecha/hora automática, esta es la **Jerarquía de fechas** de la tabla oculta `LocalDateTable_...`.
 
 ### Predeterminado
 
-`IsDefault` · bool · Options
+`IsDefault` · bool · Opciones
 
-Whether this is the default variation of the column. When a column has more than one variation, the client tool shows the default one when a user picks the column.
+Indica si esta es la variación predeterminada de la columna. Cuando una columna tiene más de una variación, la herramienta cliente muestra la predeterminada cuando el usuario selecciona la columna.
 
 ### Relación
 
-`Relationship` · Relationship · Options
+`Relationship` · relación · Opciones
 
-The relationship from the parent column to the table that holds the default column or default hierarchy. For auto date/time, it's the relationship from the date column to its hidden date table.
+La relación desde la columna principal hasta la tabla que contiene la columna predeterminada o la jerarquía predeterminada. Para la fecha/hora automática, es la relación desde la columna de fecha hasta su tabla de fechas oculta.
