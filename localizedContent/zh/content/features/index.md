@@ -1,44 +1,44 @@
 # 功能
 
-本节包含有关 Tabular Editor 功能的文档。
+本节介绍 Tabular Editor 的各项功能。
 
 ## 本节内容
 
 ### DAX 功能
 
-- @dax-debugger - 逐步调试 DAX 表达式
-- @dax-editor - 高级 DAX 编辑功能
-- @dax-query - 查询执行与测试
-- @dax-scripts - 批量 DAX 操作与自动化
-- @code-actions - 自动化代码改进与重构
-- @dax-package-manager - DAX 组件管理器
+- @dax-debugger - 单步调试 DAX 表达式的求值过程
+- @dax-editor - 用于 DAX 表达式、查询和脚本的代码编辑器
+- @dax-query - 编写并运行 DAX 查询
+- @dax-scripts - 在一个文档中编辑多个对象的 DAX
+- @code-actions - 编辑器中建议的代码改进和重构
+- @dax-package-manager - 安装和管理 DAX 组件
 
 ### 脚本和自动化
 
-- @csharp-scripts - 自定义脚本功能概览
+- @csharp-scripts - C# Script 脚本概览
 - C# Script 库
   - @csharp-script-library
   - @script-library-beginner
   - @script-library-advanced
-- @script-helper-methods - 内置脚本工具
+- @script-helper-methods - 脚本的内置辅助方法
 - @useful-script-snippets - 常用脚本示例
-- @macros - 创建宏
+- @macros - 将脚本保存为宏
 
 ### 模型分析与质量
 
 - @best-practice-analyzer - 模型质量分析与规则
   - @using-bpa - 如何使用 Best Practice Analyzer
   - @using-bpa-sample-rules-expressions - BPA 规则示例
-- @dax-optimizer-integration - 通过 DAX 优化器进行性能优化
+- @dax-optimizer-integration - DAX优化器集成
 
 ### 数据探索与连接
 
 - @import-tables - 表格导入功能
-- @connectivity - 连接到数据源，以及应选择哪种身份验证器
+- @connectivity - 数据源连接器和身份验证
   - @connect-sql-server, @connect-snowflake, @connect-databricks, @connect-oracle
   - @connect-odbc, @connect-oledb, @connect-onelake, @connect-dataflows
-- @table-preview - 逐行查看表中内容
-- @pivot-grid - 数据分析与可视化
+- @table-preview - 浏览表中的行
+- @pivot-grid - 在数据透视表中浏览模型数据
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
@@ -46,8 +46,8 @@
 ### AI 功能
 
 - @ai-assistant - 使用您自己的 AI 提供商密钥，通过聊天方式进行模型开发
-- @mcp-server - 让 Claude Code、GitHub Copilot 或 Cursor 等外部代理在您当前打开的模型上工作
-- @ai-audit-log - 查看 AI 助手和 MCP 服务器执行了哪些操作
+- @mcp-server - 将 Claude Code、GitHub Copilot 或 Cursor 等外部代理连接到当前打开的模型
+- @ai-audit-log - AI 助手和 MCP 服务器执行的操作日志
 
 ### 高级建模功能
 
@@ -65,10 +65,10 @@
 - @supported-files - 文件格式支持
 - [模型部署](deployment.md) - 部署选项与策略
 - @workspace-databases - 使用 Workspace 数据库
-- @workspace-mode - Workspace 协作开发模式
+- @workspace-mode - 将模型文件与 Workspace 数据库同步
 - @tmdl - Tabular Model Definition Language 支持
 - @save-to-folder - 将模型序列化为文件夹结构
-- @auto-reload - 让已加载的模型与磁盘上的文件保持同步
+- @auto-reload - 当模型文件在磁盘上发生更改时重新加载模型
 
 ### 命令行与集成
 
