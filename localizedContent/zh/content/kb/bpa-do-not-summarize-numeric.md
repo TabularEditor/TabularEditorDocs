@@ -10,7 +10,7 @@ description: 最佳实践规则：防止对不应求和的数值列进行错误�
 
 ## 概览
 
-此最佳实践规则会识别可见的数值列（Int64、Decimal、Double），其默认聚合行为（`SummarizeBy`）不为 `None`。 Most numeric columns should not be automatically aggregated, as summing values like IDs, quantities in non-additive contexts, or codes produces meaningless results.
+此最佳实践规则会识别可见的数值列（Int64、Decimal、Double），其默认聚合行为（`SummarizeBy`）不为 `None`。大多数数值列不应被自动聚合，因为对 ID、非可加语境下的数量或代码等数值求和会产生毫无意义的结果。
 
 - 类别：格式化
 
