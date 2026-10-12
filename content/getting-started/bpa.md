@@ -2,7 +2,7 @@
 uid: bpa
 title: Improve code quality with the Best Practice Analyzer
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Improve code quality with the Best Practice Analyzer
 
-The **Best Practice Analyzer** (BPA) scans the Tabular Object Model (TOM) of the loaded model in the background for objects that violate the best practice rules you define. TOM has many object types and properties, and the right value for a property often depends on the model design. BPA rules check that each property has the value your conventions require.
+The **Best Practice Analyzer** (BPA) scans the Tabular Object Model (TOM) of the loaded model in the background for objects that violate the best practice rules you define. TOM has many [object types and properties](xref:TabularEditor.TOMWrapper), and the right value for a property often depends on the model design. BPA rules check that each property has the value your conventions require.
 
 Use Best Practice Analyzer rules to check:
 
