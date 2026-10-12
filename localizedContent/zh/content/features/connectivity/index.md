@@ -2,7 +2,7 @@
 uid: connectivity
 title: 连接
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,27 +19,46 @@ applies_to:
 
 # 连接
 
-Tabular Editor 3 可连接到两类不同的对象，而它们的身份验证方式也不同。
+Tabular Editor 3 authenticates each of these connections separately:
 
-- **你正在编辑的模型** 位于 Analysis Services、Azure Analysis Services 或 Power BI 或 Fabric Workspace 中，并通过 XMLA 连接访问。参见 @xmla-as-connectivity。
-- **模型导入数据所用的数据源**，通过 [表导入向导](xref:import-tables) 访问。以下页面介绍的就是这一部分内容。
+- **The semantic model you edit**, on SQL Server Analysis Services, Azure Analysis Services or a Power BI or Fabric workspace, over XMLA. See @xmla-as-connectivity and @connect-ssas.
+- **The data sources the model imports from**, through the [Table Import Wizard](xref:import-tables). The pages in this section cover these connections.
 
-## 凭据存放位置
+## 数据源
 
-凭据会按用户和模型分别存储在 [用户选项](xref:user-options) 文件（`.tmuo`）中，并使用你的 Windows 帐户密钥进行加密。它们不属于模型元数据，也绝不会进入源代码管理。参见 @supported-files。
+Each source has its own connection dialog:
 
-这会带来一个需要事先了解的结果：同事打开同一个模型时需要提供他们自己的凭据；同一个人换到另一台计算机上也是如此。
+- @connect-sql-server: SQL Server, Azure SQL Database, Azure SQL Managed Instance and Azure Synapse Analytics
+- @connect-snowflake: Snowflake, including key pair authentication
+- @connect-databricks: Azure Databricks and Databricks on other clouds
+- @connect-oracle: Oracle databases through the Oracle OLE DB provider
+- @connect-odbc: any source with an ODBC driver, including PostgreSQL, MySQL, MariaDB and IBM Db2
+- @connect-oledb: any source with an OLE DB provider
+- @connect-onelake: Fabric Lakehouse, Warehouse, SQL database and mirrored database items
+- @connect-dataflows: Power BI dataflows
+
+## Where credentials are stored
+
+Tabular Editor saves the connection settings and credentials you enter in a connection dialog in the [user options](xref:user-options) file (`.tmuo`). This file is per user and per model, and the credentials in it are encrypted with the Windows Data Protection API under your Windows user account. 参见 @supported-files。
+
+- The credentials aren't part of the model metadata and aren't committed to source control.
+- Each user supplies their own credentials, on each machine.
+- Generated M expressions contain no credentials.
+
+## What the credentials are used for
+
+Tabular Editor uses the credentials from the connection dialog to connect to the source when you import tables, preview data and update table schema. If the authentication option has no interactive sign-in, Tabular Editor connects with the saved credentials without prompting.
+
+Data refreshes in Analysis Services and Power BI use the credentials configured for the data source in the model, on the server or in the Power BI service. You set the credentials Analysis Services uses in the data source properties after you import the tables (see [Creating a new data source](xref:import-tables#creating-a-new-data-source)).
 
 ## 旧版、结构化和隐式数据源
 
-可用的身份验证方式还取决于模型如何存储数据源；这一点由模型决定，而不是由你决定。
+The data source types available in the wizard depend on the model:
 
-- **旧版（提供程序）** 数据源对所有模型都可用，与其兼容级别无关。凭据存储在服务器端的 Tabular Object Model 中。
-- **结构化（Power Query）** 数据源在兼容级别 1400 及以上可用。每次部署到 Analysis Services 时，都必须重新提供凭据。
-- **隐式** 数据源是 Power BI 和 Fabric 模型使用的类型，而 Direct Lake 模型只能使用这种类型。元数据中根本没有数据源对象：分区中的 M 表达式会指定数据源，凭据则由 Power BI Desktop 或 Power BI 服务保存，而不是由模型保存。
+- **Legacy (provider)** data sources are available to every model except Direct Lake models. Credentials are managed in the provider data source object in the Tabular Object Model (TOM) and are stored and encrypted server-side.
+- **结构化（Power Query）** 数据源在兼容级别 1400 及以上可用。 You supply credentials again each time you deploy to Analysis Services.
+- **Implicit** data sources are available to Power BI and Fabric models. Direct Lake models use only implicit data sources. With an implicit data source, the model has no data source object: import partitions carry an M expression that names the source, Direct Lake partitions reference a shared expression, and Power BI Desktop or the Power BI service holds the credentials.
 
-当多种类型都可用时，向导会优先选择隐式，其次是结构化，最后是旧版。
+When the model has no data sources, the wizard preselects implicit if it's available, then structured, then legacy.
 
-这也是为什么在 Power BI 之外，数据源列表会更短。 Snowflake、Databricks 和 Power BI Dataflow 只能作为隐式数据源访问，因此当模型位于 Analysis Services 上时，向导不会将它们列出。请参阅 [TOM 数据源类型](xref:import-tables#types-of-tom-data-sources)。
-
-无论模型最终采用哪一种，_Tabular Editor_ 用于浏览数据源并读取其架构的凭据，都是你在连接对话框中输入的那些，并会保存在上面提到的 `.tmuo` 文件中。这些凭据与 Analysis Services 或 Power BI 在刷新时使用的凭据相互独立。
+Snowflake, Databricks and Power BI dataflows are available only as implicit data sources. The wizard hides them for models that don't support implicit data sources, such as Analysis Services models (see [Types of TOM data sources](xref:import-tables#types-of-tom-data-sources)).
