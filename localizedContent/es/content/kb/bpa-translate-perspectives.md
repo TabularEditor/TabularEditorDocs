@@ -53,7 +53,7 @@ Perspectivas creadas sin traducciones.
 
 ### Causa 2: Configuración regional agregada más tarde
 
-Culture added after perspectives were defined.
+La configuración regional se agregó después de que se definieran las perspectivas.
 
 ### Causa 3: Traducción incompleta
 
