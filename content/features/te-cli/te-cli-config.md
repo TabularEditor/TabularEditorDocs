@@ -16,7 +16,11 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI reads optional configuration from a JSON file. The file sets the paths of the macros file, BPA rule files and query log, behavioral defaults such as BPA gates, auto-format and validation, and saved connection profiles.
+The Tabular Editor CLI reads optional configuration from a JSON file. The file sets:
+
+- **File paths**: where the CLI reads macros and BPA rules, and where it writes the query log.
+- **Behavioral defaults**: BPA gates, auto-format and validation.
+- **Saved connection profiles**: the named profiles you switch between.
 
 The CLI doesn't read from or write to Tabular Editor 3 desktop install paths. Set the BPA rules and macros files in this config, or create them with `te bpa rules init` and `te macro init`.
 
@@ -230,10 +234,10 @@ The CLI includes a set of built-in BPA rules. Built-in rules are read-only: `te 
 
 After a mutating command (`te add`, `te set`, `te move` or `te macro run`), the CLI runs these checks:
 
-1. TOM errors always appear. Invalid DAX or M in measures, columns, partitions or calculation items fails the command.
-2. Schema validation (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve.
-3. DAX auto-format (`autoFormat`, default `false`) formats the expressions touched by the mutation with the built-in formatter.
-4. BPA on mutation (`bpa.onMutation`, default `false`) runs BPA after the mutation and warns or fails according to `--fail-on`.
+1. **TOM errors** always appear. Invalid DAX or M in measures, columns, partitions or calculation items fails the command.
+2. **Schema validation** (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve.
+3. **DAX auto-format** (`autoFormat`, default `false`) formats the expressions touched by the mutation with the built-in formatter.
+4. **BPA on mutation** (`bpa.onMutation`, default `false`) runs BPA after the mutation and warns or fails according to `--fail-on`.
 
 `te config set <key> false` turns a check off. A profile can override the key for one environment.
 
