@@ -19,26 +19,26 @@ applies_to:
 
 # Conectar con Fabric y OneLake
 
-The Fabric connector lists the Lakehouse, Warehouse, SQL database and mirrored database items in the Fabric workspaces you can access, and imports tables from them. Mirrored Azure Databricks catalogs are listed as mirrored databases. Open the dialog from **Model > Import tables...** by choosing **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database**.
+El conector de Fabric enumera los elementos de Lakehouse, Warehouse, base de datos SQL y base de datos reflejada en los Workspaces de Fabric a los que puedes acceder, e importa tablas desde ellos. Los catálogos reflejados de Azure Databricks aparecen como bases de datos reflejadas. Abre el cuadro de diálogo desde **Modelo > Importar tablas...** y elige **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** o **Microsoft Fabric Mirrored Database**.
 
 ![El cuadro de diálogo "Conectar a un Lakehouse", que muestra elementos del catálogo de OneLake por nombre, tipo, propietario y ubicación](~/content/assets/images/features/connectivity/onelake-connection.png)
 
-## Connection fields
+## Campos de conexión
 
-| Campo                                                          | Descripción                                                                                                                                                 |
-| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID                                                                                                    |
-| **OneLake Catalog items**                                      | The items of the selected type in the workspaces you can access, with their **Name**, **Type**, **Owner** and **Location**. Select one item |
+| Campo                                                                 | Descripción                                                                                                                                                                                  |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Iniciar sesión...** | Inicia sesión en el servicio de Power BI con Microsoft Entra ID                                                                                                                              |
+| **Elementos del catálogo de OneLake**                                 | Los elementos del tipo seleccionado en los Workspaces a los que puedes acceder, con sus campos **Nombre**, **Tipo**, **Propietario** y **Ubicación**. Selecciona un elemento |
 
 ## Autenticación
 
-**Sign in...** starts a Microsoft Entra ID browser sign-in. If no items appear after you sign in, your account has no access to a workspace that contains them, and a workspace admin grants that access in Fabric.
+**Iniciar sesión...** inicia el proceso de inicio de sesión de Microsoft Entra ID en el navegador. Si no aparece ningún elemento después de iniciar sesión, tu cuenta no tiene acceso a ningún Workspace que los contenga, y un administrador del Workspace debe concederte ese acceso en Fabric.
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor guarda la configuración de conexión y las credenciales en el archivo de opciones de usuario (consulta [Dónde se almacenan las credenciales](xref:connectivity#where-credentials-are-stored)).
 
-## Import and Direct Lake
+## Import y Direct Lake
 
-On the last page of the Table Import Wizard, you choose whether the selected tables are created in Import mode or Direct Lake mode:
+En la última página del Asistente para importar tablas, eliges si las tablas seleccionadas se crean en modo Import mode o en modo Direct Lake:
 
-- Import tables read their schema through the item's SQL analytics endpoint. See [Choosing objects to import](xref:import-tables#choosing-objects-to-import).
-- Direct Lake tables read directly from OneLake. Consulta @direct-lake-sql-model.
+- Las tablas en modo Import leen su esquema a través del punto de conexión de análisis SQL del elemento. Consulta [Elegir objetos para importar](xref:import-tables#choosing-objects-to-import).
+- Las tablas en modo Direct Lake leen directamente desde OneLake. Consulta @direct-lake-sql-model.
