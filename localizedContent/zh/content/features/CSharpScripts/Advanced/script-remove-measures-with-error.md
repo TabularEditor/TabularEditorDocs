@@ -108,7 +108,7 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select meas
 
 ### 说明
 
-This snippet gets all the measures that have errors according to the Tabular Editor Semantic Analysis. It then will display them in an output box where you can manually browse them or make changes. Thereafter, measures can be selected for removal. The removed measures can be saved as a back-up .tsv file in case you want to import them, later.
+此代码片段会根据 Tabular Editor 的语义分析，获取所有包含错误的度量值。随后会在输出框中显示这些度量值，你可以手动浏览它们或进行修改。之后，你可以选择要删除的度量值。被删除的度量值可以保存为 .tsv 备份文件，方便你之后需要时再导入。
 
 ## 输出示例
 
