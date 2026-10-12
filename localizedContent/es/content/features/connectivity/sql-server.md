@@ -19,39 +19,39 @@ applies_to:
 
 # Conectar a SQL Server
 
-The SQL Server connector connects to SQL Server, Azure SQL Database, Azure SQL Managed Instance and Azure Synapse Analytics. Ve a **Modelo > Importar tablas...** y elige un origen de SQL Server.
+El conector de SQL Server permite conectarse a SQL Server, Azure SQL Database, Azure SQL Managed Instance y Azure Synapse Analytics. Ve a **Modelo > Importar tablas...** y elige un origen de SQL Server.
 
-![The Connect to SQL Server dialog, with Azure Active Directory - Universal with MFA selected in the Authentication list](~/content/assets/images/features/connectivity/sql-server-connection.png)
+![El cuadro de diálogo Conectarse a SQL Server, con Azure Active Directory - Universal con MFA seleccionado en la lista de autenticación](~/content/assets/images/features/connectivity/sql-server-connection.png)
 
-## Connection fields
+## Campos de conexión
 
-| Campo                                                           | Descripción                                                                                                                                                                               |
-| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Server name**                                                 | The server or instance to connect to                                                                                                                                                      |
-| **Authentication**                                              | The authentication option. See [Authentication](#authentication)                                                                                                          |
-| **User name** and **Password**                                  | The credentials for the selected authentication option                                                                                                                                    |
-| **Remember password**                                           | Saves the password for the next connection. If you clear it, you're prompted for the password the next time you import, preview or update the table schema                |
-| **Database**                                                    | The database to import from. Select **< Browse server... >** to list the databases on the server |
-| **Encrypt connection**                                          | Requires TLS for the connection. See [Encryption](#encryption)                                                                                                            |
-| **Advanced...** | Opens the full connection string properties                                                                                                                                               |
+| Campo                                                                     | Descripción                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Nombre del servidor**                                                   | El servidor o la instancia a la que deseas conectarte                                                                                                                                                                 |
+| **Autenticación**                                                         | La opción de autenticación. Consulta [Autenticación](#authentication)                                                                                                                                 |
+| **Nombre de usuario** y **contraseña**                                    | Las credenciales de la opción de autenticación seleccionada                                                                                                                                                           |
+| **Recordar contraseña**                                                   | Guarda la contraseña para la próxima conexión. Si lo desmarcas, se te pedirá la contraseña la próxima vez que importes, obtengas una vista previa o actualices el esquema de la tabla                 |
+| **Database**                                                              | La base de datos desde la que importar. Selecciona **< Examinar servidor... >** para mostrar las bases de datos del servidor |
+| **Cifrar la conexión**                                                    | Requiere TLS para la conexión. Consulta [Cifrado](#encryption)                                                                                                                                        |
+| **Opciones avanzadas...** | Abre las propiedades completas de la cadena de conexión                                                                                                                                                               |
 
 ## Autenticación
 
-| Autenticación                                      | Qué debes proporcionar                                                                                                  | Interactive sign-in |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| **Autenticación de SQL Server**                    | User name and password of a SQL login defined on the server                                                             | No                  |
-| **Autenticación de Windows**                       | Nada. Uses the Windows account Tabular Editor runs as                                                   | No                  |
-| **Azure Active Directory - Universal con MFA**     | Inicio de sesión mediante el navegador                                                                                  | Sí                  |
-| **Azure Active Directory - Contraseña**            | User name and password of a directory account. Fails if the account requires multifactor authentication | No                  |
-| **Azure Active Directory - Integrada**             | Nada. Uses the directory account you're signed in to Windows with, on a directory-joined machine        | No                  |
-| **Azure Active Directory - Principal de servicio** | ID de aplicación (cliente) y secreto                                                                 | No                  |
+| Autenticación                                      | Qué debes proporcionar                                                                                                               | Inicio de sesión interactivo |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| **Autenticación de SQL Server**                    | Nombre de usuario y contraseña de un inicio de sesión SQL definido en el servidor                                                    | No                           |
+| **Autenticación de Windows**                       | Nada. Usa la cuenta de Windows con la que se ejecuta Tabular Editor                                                  | No                           |
+| **Azure Active Directory - Universal con MFA**     | Inicio de sesión mediante el navegador                                                                                               | Sí                           |
+| **Azure Active Directory - Contraseña**            | Nombre de usuario y contraseña de una cuenta de directorio. Da error si la cuenta requiere autenticación multifactor | No                           |
+| **Azure Active Directory - Integrada**             | Nada. Usa la cuenta de directorio con la que has iniciado sesión en Windows, en un equipo unido al directorio        | No                           |
+| **Azure Active Directory - Principal de servicio** | ID de aplicación (cliente) y secreto                                                                              | No                           |
 
-For unattended use, select **Azure Active Directory - Service Principal**. When you select **Windows Authentication** or **Azure Active Directory - Integrated**, **User name**, **Password** and **Remember password** are disabled and **User name** shows your Windows account as `DOMAIN\user`.
+Para uso desatendido, selecciona **Azure Active Directory - Entidad de servicio**. Cuando seleccionas **Autenticación de Windows** o **Azure Active Directory - Integrada**, **Nombre de usuario**, **Contraseña** y **Recordar contraseña** se deshabilitan, y **Nombre de usuario** muestra tu cuenta de Windows como `DOMAIN\user`.
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor guarda la configuración de conexión y las credenciales en tu archivo de opciones de usuario (consulta [Dónde se almacenan las credenciales](xref:connectivity#where-credentials-are-stored)).
 
 ## Cifrado
 
-**Encrypt connection** is selected by default, and Azure SQL requires it.
+**Cifrar conexión** está seleccionado de forma predeterminada y Azure SQL lo requiere.
 
-If your machine doesn't trust the server's certificate, a **SQL Server certificate not trusted** prompt appears. Select **OK** to trust the certificate and connect. The prompt doesn't appear if the server has a certificate your machine trusts or if you clear **Encrypt connection**.
+Si tu equipo no confía en el certificado del servidor, aparece el mensaje **Certificado de SQL Server no es de confianza**. Selecciona **Aceptar** para confiar en el certificado y conectarte. El aviso no aparece si el servidor tiene un certificado en el que tu equipo confía o si desactivas **Cifrar conexión**.
