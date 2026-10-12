@@ -40,8 +40,8 @@ description: 最佳实践规则：在多对多关系上使用单向筛选，以�
 ### 手动修复
 
 1. 在 **TOM Explorer** 中，找到被标记的关系
-2. In **Properties** pane, find **Cross Filtering Behavior**
-3. Change from **BothDirections** to **OneDirection**
+2. 在 **属性** 窗格中，找到 **交叉筛选行为**
+3. 将 **BothDirections** 更改为 **OneDirection**
 
 根据典型的筛选流向选择方向：
 
