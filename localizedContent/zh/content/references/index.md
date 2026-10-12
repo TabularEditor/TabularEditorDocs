@@ -21,6 +21,10 @@
 - @supported-files - Tabular Editor 可打开和保存的文件格式
 - @accessibility - 色盲模式、键盘访问、缩放和主题
 
+### Object Properties Reference
+
+- @object-properties - What every property in the Properties view does, grouped by object type
+
 ### 开发与规划
 
 - @roadmap - 产品路线图与未来计划
