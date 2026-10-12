@@ -2,7 +2,7 @@
 uid: user-interface
 title: Interfaz de usuario básica
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,256 +23,254 @@ Este artículo describe la interfaz de usuario de Tabular Editor 3.
 
 ## Elementos básicos de la interfaz de usuario
 
-La primera vez que inicies Tabular Editor 3 y cargues un modelo semántico, se te mostrará una interfaz como la que aparece en la captura de pantalla siguiente.
+With a semantic model loaded, Tabular Editor 3 shows the default layout below.
 
 ![Interfaz de usuario básica](~/content/assets/images/basic-ui.png)
 
-1. **Barra de título**: Muestra el nombre del archivo cargado actualmente y, si está conectado, la base de datos de Analysis Services o el Dataset de Power BI.
-2. **Barra de menús**: La barra de menús te da acceso a todas las funciones de Tabular Editor 3. Consulta [Menús](#menus) para ver una guía detallada de todos los elementos del menú.
-3. **Barras de herramientas**: Las barras de herramientas te dan acceso rápido a las funciones más utilizadas. También puedes acceder desde los menús a todas las funciones disponibles en la barra de herramientas. Puedes personalizar las barras de herramientas y sus botones en **Herramientas > Personalizar...**
-4. **Vista del Explorador TOM**: Una vista jerárquica de tu modelo de datos, con todos los objetos disponibles.  de los metadatos del [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) que representan tu modelo de datos. Los botones de alternancia de la parte superior te permiten filtrar qué objetos se muestran. El cuadro de búsqueda te permite filtrar objetos por nombre.
-5. **Editor de expresiones**: El editor de expresiones ofrece una forma rápida de editar cualquier expresión DAX, SQL o M del objeto seleccionado actualmente en el Explorador TOM. Si cierras el editor de expresiones, puedes volver a abrirlo haciendo doble clic en un objeto del Explorador TOM. El menú desplegable de la parte superior te permite cambiar entre distintas propiedades de expresión, en caso de que el objeto seleccionado actualmente tenga más de una (por ejemplo, los KPI tienen Expresiones de objetivo, Expresiones de estado y Expresiones de tendencia, que son 3 expresiones DAX diferentes que pertenecen al mismo objeto KPI).
-6. **Vista de propiedades**: Una vista detallada de todas las propiedades TOM disponibles para el/los objeto(s) seleccionados actualmente en el Explorador TOM. La mayoría de las propiedades se pueden editar desde la cuadrícula, incluso cuando hay varios objetos seleccionados. Algunas propiedades (como "Format String", "Connection String" y "Miembros de rol") tienen cuadros de diálogo emergentes o editores de colecciones que puedes abrir haciendo clic en el botón de puntos suspensivos dentro de la celda del valor de la propiedad.
-7. **Vista de mensajes**: Tabular Editor 3 analiza continuamente las expresiones DAX de tu modelo para detectar errores semánticos. Cualquier error de este tipo se muestra aquí. Además, los mensajes que se muestran en esta vista pueden provenir de scripts de C# o de mensajes de error generados por Analysis Services.
-8. **Barra de estado**: La barra de estado ofrece diversa información contextual sobre la selección actual, los hallazgos de Best Practice Analyzer, etc. Cuando el [servidor MCP](xref:mcp-server) está disponible, un indicador en el extremo derecho muestra **MCP iniciado** o **MCP detenido**, y en su descripción emergente aparece la dirección en la que está escuchando el servidor. Haz clic en él para abrir el cuadro de diálogo del Servidor MCP, o haz clic con el botón derecho para iniciar y detener el servidor, copiar una configuración de registro para tu agente o ir a la página de preferencias.
+1. **Title bar**: the name of the loaded file, or of the Analysis Services database or Power BI semantic model you're connected to.
+2. **Menu bar**: all features of Tabular Editor 3. See [Menus](#menus) for each menu.
+3. **Toolbars**: the most used features. Every toolbar command is also in the menus. Customize the toolbars and their buttons under **Tools > Customize...**.
+4. **TOM Explorer view**: a tree of the model's objects, built from the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata. The toggle buttons at the top filter which object types are shown, and the search box filters objects by name.
+5. **Expression Editor**: edits the DAX, SQL or M expressions of the object selected in the TOM Explorer. If you close it, double-click an object in the TOM Explorer to open it again. If the object has more than one expression property, the dropdown at the top switches between them. For example, a KPI has a target, a status and a trend expression.
+6. **Properties view**: all TOM properties of the objects selected in the TOM Explorer. You can edit most properties in the grid, also with several objects selected. Some properties, such as **Format String**, **Connection String** and **Role Members**, open a dialog or collection editor from the ellipsis button in the value cell.
+7. **Messages view**: semantic errors found by the continuous analysis of the model's DAX expressions, plus messages from C# scripts and errors reported by Analysis Services.
+8. **Status bar**: information about the current selection, Best Practice Analyzer findings and more. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, and its tooltip shows the address the server listens on. Click the indicator to open the **MCP Server** dialog, or right-click it to start or stop the server, copy a registration configuration for your agent or open the preferences page.
 
-Hay varias vistas adicionales disponibles, con distintos propósitos. Más información en la sección del [menú Ver](#view).
+The [View menu](#view) opens the other views.
 
-# Personalización de la interfaz de usuario
+## Personalización de la interfaz de usuario
 
-Todos los elementos de la interfaz de usuario se pueden redimensionar o reorganizar para adaptarlos a tus necesidades. Incluso puedes arrastrar vistas individuales fuera de la vista principal, dividiendo así una instancia de Tabular Editor 3 entre varios monitores. Tabular Editor 3 guardará la personalización al cerrar la aplicación y la cargará automáticamente la próxima vez que se inicie.
+You can resize and rearrange all UI elements, and drag views out of the main window, for example onto another monitor. Tabular Editor 3 saves the layout when you close the application and restores it at the next launch.
 
 ### Elegir un diseño diferente
 
-Para restablecer la aplicación al diseño predeterminado, elige la opción **Ventana > Diseño predeterminado**. Los usuarios de Tabular Editor 2.x pueden preferir la opción **Ventana > Diseño clásico**, que coloca el Explorador TOM en el lado izquierdo de la pantalla y la vista de propiedades debajo del Editor de expresiones.
+Choose **Window > Default layout** to reset the application to the default layout, or **Window > Classic layout** to place the TOM Explorer on the left and the Properties view below the Expression Editor, as in Tabular Editor 2.x.
 
-Usa la opción **Ventana > Capturar diseño** para guardar un diseño personalizado, de modo que pase a estar disponible como una nueva opción de diseño en el menú Ventana, lo que te permite alternar rápidamente entre distintos diseños. Usa la opción **Ventana > Diseños...** para abrir una lista de todos los diseños disponibles, lo que te permite aplicar, cargar, eliminar y guardar diseños. Al guardar un diseño en disco, el resultado es un archivo .xml que puedes compartir con otros usuarios de Tabular Editor 3.
+To switch between your own layouts, save the current one with **Window > Capture Layout**, and it becomes an option in the **Window** menu. **Window > Layouts...** lists all layouts, where you apply, load, remove and save them. A layout saved to disk is an .xml file that you can share with other Tabular Editor 3 users.
 
 ![Administrar diseños](~/content/assets/images/manage-layouts.png)
 
 ### Opciones de acoplamiento de ventanas
 
-Al reorganizar vistas y documentos en Tabular Editor 3, puedes elegir acoplar ventanas en distintas áreas de la interfaz. Al arrastrar una ventana a una nueva posición, aparecerán indicadores de acoplamiento que te mostrarán las ubicaciones de acoplamiento disponibles.
+When you drag a view or document, docking indicators show where you can dock it.
 
 ![Opciones de acoplamiento de ventanas](~/content/assets/images/window-docking-options.png)
 
-Hay dos formas principales de acoplar ventanas, cada una con un propósito diferente:
+Where you drop the window decides how it behaves:
 
-**Acoplamiento como pestaña de documento (indicador central)**: Cuando arrastras una ventana al indicador de acoplamiento central, se colocará en el área principal de documentos. Las ventanas acopladas de esta forma se convierten en pestañas de documento que:
+**Document tab docking (center indicator)**: a window dropped on the center indicator becomes a document tab in the main document area, next to documents such as DAX queries, scripts and diagrams. Document tabs:
 
-- Puedes alternar entre ellos con **Ctrl+Tab**
-- Se muestran en el área principal de trabajo junto con otros documentos, como consultas DAX, scripts y diagramas
-- No admiten la función de ocultación automática
+- are included when you cycle with **Ctrl+Tab**
+- have no auto-hide
 
-**Acoplamiento como ventana de herramientas (indicadores de borde)**: Cuando arrastras una ventana a los indicadores de acoplamiento de la izquierda, derecha, arriba o abajo, se acoplará como una ventana de herramientas. Las ventanas de herramientas:
+**Tool window docking (edge indicators)**: a window dropped on the left, right, top or bottom indicator is docked as a tool window, like the TOM Explorer and the Messages view. Las ventanas de herramientas:
 
-- No son accesibles mediante **Ctrl+Tab**
-- Muestran un icono de chincheta que permite la ocultación automática (la ventana se contrae cuando no se está usando)
-- Se comportan de forma similar a otras ventanas de herramientas, como el Explorador TOM y la vista de mensajes
-- Se pueden acoplar en varias posiciones alrededor del área principal de documentos
+- aren't included in **Ctrl+Tab**
+- have a pin icon that turns on auto-hide, which collapses the window when it isn't in use
+- dock at any side of the main document area
 
 > [!TIP]
-> El tamaño de una ventana acoplada lo determina el espacio disponible en el área en la que decidas acoplarla, no la opción de acoplamiento en sí. Puedes cambiar el tamaño de las ventanas arrastrando los separadores entre ellas.
+> The size of a docked window depends on the space available where you dock it, and you resize it by dragging the dividers between windows.
 
 ### Cambiar temas y paletas
 
-Puedes cambiar el aspecto visual de Tabular Editor 3 eligiendo un tema o una paleta diferentes. Tabular Editor 3 incluye cinco temas diferentes (a veces llamados "skins"), disponibles en el menú **Ventana > Tema**:
+Choose a theme under **Window > Theme**:
 
-- Basic y Bezier (basados en vectores, funcionan bien en pantallas high-DPI)
-- Blue, Dark y Light (basados en ráster; no se recomiendan para pantallas de alto DPI)
+- Basic and Bezier are vector-based and scale on high-DPI displays.
+- Blue, Dark and Light are raster-based and don't scale well on high-DPI displays.
 
-Para los temas basados en vectores (Basic y Bezier), usa la opción de menú **Ventana > Paleta predeterminada** para cambiar los colores que usa el tema.
+For Basic and Bezier, **Window > Default palette** changes the theme's colors.
 
 ![Paletas](~/content/assets/images/palettes.png)
 
-# Menús
+## Menús
 
-La siguiente sección describe los menús de Tabular Editor 3 con más detalle.
+This section describes each menu.
 
-En la siguiente sección usamos el término **Documento activo** para indicar que el cursor está dentro de un documento, como el Editor de expresiones o la pestaña "Script DAX 1" de la captura de pantalla siguiente. Algunos atajos de teclado y elementos de menú se comportan de forma diferente dependiendo de si hay o no un documento activo, y de qué tipo de documento esté activo.
+The _active document_ is the document that has the cursor, such as the Expression Editor or the "DAX Script 1" tab in the screenshot below. Some shortcuts and menu items depend on whether a document is active, and on its type.
 
 > [!NOTE]
-> Los menús y las barras de herramientas están bloqueados de forma predeterminada para evitar cambios de posición accidentales. Para desbloquearlos, ve a **Herramientas > Personalizar... > Opciones** y desmarca la opción **Bloquear menús y barras de herramientas**
+> Menus and toolbars are locked in place by default. To unlock them, clear **Lock menus and toolbars** under **Tools > Customize... > Options**.
 
 ![Documento activo](~/content/assets/images/active-document.png)
 
-## Archivo
+### Archivo
 
-El menú **Archivo** contiene principalmente elementos de menú para cargar y guardar metadatos del modelo, así como archivos y documentos auxiliares.
+The **File** menu loads and saves model metadata, supporting files and documents.
 
 ![Menú Archivo](~/content/assets/images/file-menu.png)
 
-- **Nuevo**: Abre un submenú que te permite crear un Data model nuevo y en blanco (Ctrl+N) o crear varios [archivos auxiliares](xref:supported-files#supported-file-types), como una nueva Consulta DAX o un nuevo Script DAX (archivos de texto) o un diagrama del Data model (archivo JSON). Los archivos auxiliares (con la excepción de los C# Scripts) solo se pueden crear cuando ya hay un modelo cargado en Tabular Editor.
+- **New**: creates a new blank model (**Ctrl+N**), or a [supporting file](xref:supported-files#supported-file-types) such as a DAX query, a DAX script (text files) or a diagram (JSON file). Supporting files other than C# scripts require a loaded model.
 
   ![Menú Archivo: Nuevo](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> La opción **Nuevo > Modelo...** no está disponible en la Edición de escritorio de Tabular Editor 3, ya que esta edición solo puede usarse como herramienta externa para Power BI Desktop. [Más información](xref:editions).
+> **New > Model...** isn't available in Tabular Editor 3 Desktop Edition, which works only as an External Tool for Power BI Desktop. See @editions.
 
-- **Abrir**: Abre un submenú con opciones para cargar un Data model desde varias fuentes, así como una opción para cargar cualquier otro tipo de archivo. Los elementos del submenú son:
+- **Open**: loads a model from one of these sources, or opens any other supported file:
 
   ![Menú Archivo: Abrir](~/content/assets/images/file-menu-open.png)
 
-  - **Modelo desde archivo...** Abre los metadatos del modelo desde un archivo, como un .bim o .pbit.
-  - **Modelo desde BD...** Especifique los detalles de conexión XMLA de Analysis Services o Power BI, o conéctese a una instancia local de Analysis Services (como el servidor de Workspace Integrada de Visual Studio o Power BI Desktop), para cargar los metadatos del modelo desde un modelo tabular que ya se ha implementado.
-  - **Modelo desde carpeta...** Abre los metadatos del modelo desde una estructura de carpetas que se guardó previamente con cualquier versión de Tabular Editor.
-  - **Archivo...** muestra un cuadro de diálogo que permite abrir cualquier tipo de archivo compatible con Tabular Editor 3, según la extensión del nombre del archivo. Consulta [Tipos de archivo compatibles](xref:supported-files) para obtener más información.
-  - **Importar desde Metric View YAML...** Importa metadatos del modelo desde un archivo YAML de Metric View de Databricks.
+  - **Model from file...** opens model metadata from a file such as a .bim or .pbit file.
+  - **Model from DB...** loads the metadata of a deployed model. Enter Analysis Services or Power BI XMLA connection details, or connect to a local instance such as Visual Studio's Integrated Workspace server or Power BI Desktop.
+  - **Model from folder...** opens model metadata from a folder structure saved by any version of Tabular Editor.
+  - **File...** opens any file type Tabular Editor 3 supports, by file name extension. See [Supported file types](xref:supported-files).
+  - **Import from Metric View YAML...** imports model metadata from a Databricks Metric View YAML file.
 
     ![Tipos de archivo compatibles](~/content/assets/images/supported-file-types.png)
 
 > [!IMPORTANT]
-> En Tabular Editor 3 Edición de escritorio, las opciones **Open > Model from file...** y **Open > Model from folder...** no están disponibles y el cuadro de diálogo **Open > File...** solo permite abrir [archivos compatibles](xref:supported-files#supported-file-types), no archivos que contengan metadatos.
+> In Tabular Editor 3 Desktop Edition, **Open > Model from file...** and **Open > Model from folder...** aren't available, and **Open > File...** opens only [supporting files](xref:supported-files#supported-file-types).
 
-- **Revertir**: Esta opción te permite volver a cargar los metadatos del modelo desde el origen, descartando cualquier cambio realizado en Tabular Editor que aún no se haya guardado. Esta opción resulta útil cuando Tabular Editor 3 se usa como una herramienta externa para Power BI Desktop y se realiza un cambio en Power BI Desktop mientras Tabular Editor 3 está conectado. Al elegir **Revertir**, Tabular Editor 3 puede volver a cargar los metadatos del modelo desde Power BI Desktop sin tener que reconectarse. Si cargaste el modelo desde un archivo o una carpeta, rara vez necesitarás este comando, porque Tabular Editor vuelve a cargar el modelo automáticamente cuando esos archivos cambian en el disco. Consulta [Recarga automática desde el disco](xref:auto-reload).
-- **Cerrar documento** (Ctrl+W): Cierra el documento o panel activo en el área principal, como una Consulta DAX, un C# Script, un diagrama del modelo de datos o cualquier otra vista que tenga el foco. Si el documento tiene cambios sin guardar, Tabular Editor te pedirá que los guardes antes de cerrar. Este comando tiene en cuenta el contexto y cerrará el elemento que esté activo actualmente en el área de trabajo principal.
-- **Cerrar modelo**: Descarga de Tabular Editor los metadatos del modelo actualmente cargado. Si has realizado cambios en los metadatos, Tabular Editor te pedirá que los guardes antes de cerrar.
-- **Guardar**: Guarda el documento activo en el archivo de origen. Si no hay ningún documento activo, esta opción guarda los metadatos del modelo en el origen, que puede ser un archivo Model.bim, un archivo Database.json (estructura de carpetas), una instancia conectada de Analysis Services (incluido Power BI Desktop) o el punto de conexión XMLA de Power BI.
-- **Guardar como...**: Te permite guardar el documento activo como un archivo nuevo. Si no hay ningún documento activo, te permite guardar los metadatos del modelo como un archivo nuevo en formato .bim (basado en JSON).
-- **Guardar en carpeta...**: Te permite guardar los metadatos del modelo como una [estructura de carpetas](xref:save-to-folder).
-- **Guardar todo**: Guarda a la vez todos los documentos y metadatos del modelo que estén sin guardar.
-- **Archivos recientes**: Muestra una lista de archivos auxiliares usados recientemente, para que puedas volver a abrirlos rápidamente.
-- **Modelos tabulares recientes**: Muestra una lista de archivos o carpetas de metadatos de modelos usados recientemente, lo que te permite volver a cargar rápidamente los metadatos del modelo desde uno de ellos.
+- **Reload from disk** / **Reload from server**: reloads the model metadata from its source and discards all unsaved changes. The command reads **Reload from disk** for a model loaded from a file or folder, and **Reload from server** for a model opened from Analysis Services or Power BI. If Tabular Editor 3 runs as an External Tool for Power BI Desktop and the model changes in Power BI Desktop, use this command to reload the model metadata without reconnecting. Models loaded from a file or folder reload automatically when the files change. Consulta [Recarga automática desde el disco](xref:auto-reload).
+- **Close Document** (**Ctrl+W**): closes the active document or panel in the main area, such as a DAX query, a C# script or a diagram. If the document has unsaved changes, a prompt to save them appears.
+- **Close model**: unloads the model metadata. If you changed the metadata, a prompt to save the changes appears.
+- **Save**: saves the active document to its source file. If no document is active, it saves the model metadata to its source: a Model.bim file, a Database.json folder structure, an Analysis Services instance (including Power BI Desktop) or the Power BI XMLA endpoint.
+- **Save as...** saves the active document as a new file. If no document is active, it saves the model metadata as a new .bim (JSON) file.
+- **Save to folder...** saves the model metadata as a [folder structure](xref:save-to-folder).
+- **Save all**: saves all unsaved documents and the model metadata.
+- **Recent files**: lists recently used supporting files.
+- **Recent tabular models**: lists recently used model metadata files and folders.
 
 > [!IMPORTANT]
-> En Tabular Editor 3 Edición de escritorio, las opciones **Guardar en carpeta** y **Modelos tabulares recientes** están deshabilitadas. Además, la opción **Guardar como** solo está habilitada para [archivos auxiliares](xref:supported-files#supported-file-types).
+> In Tabular Editor 3 Desktop Edition, **Save to folder** and **Recent tabular models** are disabled, and **Save as** is enabled only for [supporting files](xref:supported-files#supported-file-types).
 
-- **Salir**: Cierra la aplicación Tabular Editor 3. Antes de cerrar la aplicación, se te pedirá que guardes cualquier archivo sin guardar o los metadatos del modelo que no se hayan guardado.
+- **Exit**: closes Tabular Editor 3. A prompt to save unsaved files or model metadata appears first.
 
-## Editar
+### Editar
 
-El menú **Editar** contiene los elementos de menú estándar de las aplicaciones de Windows para editar un documento o realizar cambios en los metadatos del modelo cargado actualmente.
+The **Edit** menu edits the active document or the loaded model metadata.
 
 ![Menú Editar](~/content/assets/images/edit-menu.png)
 
-- **Deshacer**: Esta opción deshace el último cambio realizado en los metadatos del modelo. Cuando no hay ningún documento activo, el conocido acceso directo CTRL+Z se asigna a esta opción.
-- **Rehacer**: Esta opción rehace el último deshacer aplicado a los metadatos del modelo. Cuando no hay ningún documento activo, el conocido acceso directo CTRL+Y se asigna a esta opción.
-- **Reemplazar**: Muestra el cuadro de diálogo "Buscar y reemplazar" con la pestaña "Reemplazar" seleccionada. [Más información](xref:find-replace#replace).
-- **Buscar**: Muestra el cuadro de diálogo "Buscar y reemplazar" con la pestaña "Buscar" seleccionada. [Más información](xref:find-replace#find).
-- **Cortar / Copiar / Pegar**: Son las conocidas operaciones de edición de Windows. Si hay un documento activo, se aplican a la selección de texto dentro de ese documento. En caso contrario, estas opciones se pueden usar para manipular objetos en el Explorador TOM. Por ejemplo, puede duplicar varias medidas manteniendo pulsada la tecla SHIFT o CTRL mientras selecciona las medidas en el Explorador TOM y, después, pulsando CTRL+C y luego CTRL+V.
-- **Eliminar**: Elimina el texto seleccionado en el documento activo o el/los objeto(s) seleccionados actualmente en el Explorador TOM si no hay ningún documento activo.
+- **Undo**: undoes the last change to the model metadata. With no active document, **Ctrl+Z** runs this command.
+- **Redo**: redoes the last undone change to the model metadata. With no active document, **Ctrl+Y** runs this command.
+- **Find**: opens the "Find and replace" dialog on the "Find" tab. See [Find](xref:find-replace#find).
+- **Replace**: opens the "Find and replace" dialog on the "Replace" tab. See [Replace](xref:find-replace#replace).
+- **Cut / Copy / Paste**: with an active document, these apply to the selected text. Otherwise, they apply to the objects selected in the TOM Explorer. For example, to duplicate several measures, select them with **Shift** or **Ctrl** in the TOM Explorer and press **Ctrl+C**, then **Ctrl+V**.
+- **Delete**: deletes the selected text in the active document or, with no active document, the objects selected in the TOM Explorer.
 
 > [!NOTE]
-> Por lo general, Tabular Editor solo solicita confirmación al eliminar objetos cuando hay varios objetos seleccionados o cuando existen dependencias del/de los objeto(s) que se están eliminando. La eliminación de objetos se puede deshacer mediante la opción **Deshacer** (CTRL+Z).
+> A deletion prompt appears only when several objects are selected, or when other objects depend on the ones you delete. **Undo** (**Ctrl+Z**) restores deleted objects.
 
-- **Seleccionar todo**: Selecciona todo el texto del documento activo o todos los objetos que pertenecen al mismo elemento padre en el Explorador TOM.
-- **Code Assist**: Esta opción está disponible cuando se edita código DAX. Proporciona un acceso directo a varias funciones de Code Assist relevantes para la edición de código DAX. Consulte [editor de DAX](xref:dax-editor#code-assist-features) para obtener más información.
-- **Ajuste de línea**: Activa o desactiva el ajuste de línea en el documento de texto activo.
+- **Select all**: selects all text in the active document, or all objects with the same parent in the TOM Explorer.
+- **Code assist**: shortcuts to the code assist features for DAX. Available while you edit DAX. See [DAX editor](xref:dax-editor#code-assist-features).
+- **Word Wrap**: toggles word wrap in the active text document.
 
-## Vista
+### Vista
 
-El menú **Vista** le permite navegar entre las distintas vistas de la interfaz de usuario de Tabular Editor 3. Si una vista está oculta, al hacer clic en el título de la vista en este menú se volverá a mostrar y pasará a primer plano. Ten en cuenta que los documentos no se muestran en el menú Ver. Para navegar entre documentos, usa el [menú Ventana](#window).
+The **View** menu opens and focuses the views of Tabular Editor 3, including hidden ones. Documents aren't listed; switch between them with the [Window menu](#window).
 
 ![Menú de vista](~/content/assets/images/model-menu.png)
 
-- **Explorador TOM**: El Explorador TOM presenta una vista jerárquica de todo el [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) de los metadatos del modelo cargado actualmente. Consulta @tom-explorer-view para obtener más información.
-- **Asistente de IA**: La vista Asistente de IA te permite interactuar con un asistente de IA que puede ayudarte con tareas de modelado.
-- **Administrador de paquetes DAX**: La vista Administrador de paquetes DAX te permite examinar e instalar paquetes de funciones DAX definidas por el usuario en tu modelo.
-- **Best Practice Analyzer**: Best Practice Analyzer le ayuda a mejorar la calidad de su modelo al permitirle especificar reglas para la validación de mejores prácticas. Consulta @bpa-view para obtener más información.
-- **Mensajes**: La vista de mensajes muestra errores, advertencias y mensajes informativos de varios orígenes, como el Analizador semántico de Tabular Editor 3. Consulta @messages-view para obtener más información.
-- **Actualización de datos**: La vista Actualización de datos le permite hacer un seguimiento de las operaciones de actualización de datos que se ejecutan en segundo plano. Consulta @data-refresh-view para obtener más información.
-- **Editor de expresiones**: Este es el "editor rápido" que le permite editar expresiones DAX, M o SQL en el objeto que esté seleccionado actualmente en el Explorador TOM. Consulta @dax-editor para obtener más información.
-- **Macros**: La vista de macros le permite administrar cualquier macro que haya creado. Las macros se pueden crear desde @csharp-scripts. Consulta @creating-macros para obtener más información.
-- **Analizador VertiPaq**: La vista Analizador VertiPaq le permite recopilar, importar y exportar estadísticas detalladas sobre los datos de su modelo para ayudarle a mejorar y depurar el rendimiento de DAX. El Analizador VertiPaq es creado y mantenido por [Marco Russo](https://twitter.com/marcorus) de [SQLBI](https://sqlbi.com) bajo la licencia MIT. Más información en la [página del proyecto en GitHub](https://github.com/sql-bi/VertiPaq-Analyzer).
-- **Dependencias**: La vista [**Dependencias de DAX**](xref:creating-and-testing-dax#dax-dependencies) muestra las dependencias entre el objeto seleccionado y otros objetos del modelo. Marca **Track Explorador TOM** para que siga la selección del árbol.
-- **Optimizador de DAX**: La vista **Optimizador de DAX** se integra con [Optimizador de DAX](https://www.daxoptimizer.com) para analizar tu modelo en busca de problemas de rendimiento de DAX.
-- **Editor de calendario**: La vista Editor de calendario te permite definir y administrar calendarios en modelos mediante la característica moderna de inteligencia temporal.
-- **Editor de perspectivas**: La vista Editor de perspectivas proporciona una visión general en forma de matriz de los objetos incluidos en cada perspectiva del modelo.
-- **Editor de traducción de metadatos**: La vista Editor de traducción de metadatos te ofrece una cuadrícula para editar las traducciones de metadatos (configuraciones regionales) de los objetos del modelo.
-- **Barras de herramientas / Propiedades**: Los elementos restantes te permiten alternar la visibilidad de las barras de herramientas y abrir la vista de propiedades (F4).
+- **TOM Explorer**: a tree of the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the loaded model. See @tom-explorer-view.
+- **AI Assistant**: a chat with an AI assistant for modeling tasks.
+- **DAX Package Manager**: browses DAX user-defined function packages and installs them into the model.
+- **Best Practice Analyzer**: validates the model against best practice rules that you define. See @bpa-view.
+- **Messages**: errors, warnings and informational messages from sources such as the Tabular Editor 3 Semantic Analyzer. See @messages-view.
+- **Data Refresh**: tracks refresh operations running in the background. See @data-refresh-view.
+- **Expression Editor**: edits the DAX, M or SQL expressions of the object selected in the TOM Explorer. See @dax-editor.
+- **Macros**: manages the macros you created from @csharp-scripts. See @creating-macros.
+- **VertiPaq Analyzer**: collects, imports and exports statistics about the data in the model, for DAX performance tuning. El Analizador VertiPaq es creado y mantenido por [Marco Russo](https://twitter.com/marcorus) de [SQLBI](https://sqlbi.com) bajo la licencia MIT. See the [GitHub project page](https://github.com/sql-bi/VertiPaq-Analyzer).
+- **Dependencies**: the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) shows the dependencies between the selected object and other objects in the model. Select **Track TOM Explorer** to make it follow the TOM Explorer selection.
+- **DAX Optimizer**: analyzes the model for DAX performance issues with [DAX Optimizer](https://www.daxoptimizer.com).
+- **Calendar Editor**: defines and manages calendars for the modern time intelligence feature.
+- **Perspective Editor**: a matrix of which objects each perspective of the model includes.
+- **Metadata Translation Editor**: a grid for editing the metadata translations (cultures) of model objects.
+- **Toolbars / Properties**: toggles toolbar visibility and opens the Properties view (**F4**).
 
-## Modelo
+### Modelo
 
-El menú **Modelo** muestra las acciones que se pueden realizar a nivel del objeto Modelo (el objeto raíz del Explorador TOM).
+The **Model** menu has actions on the Model object, the root of the TOM Explorer.
 
 ![Menú Herramientas](~/content/assets/images/tools-menu.png)
 
-- **Implementar...**: Inicia el Asistente de implementación de Tabular Editor. Para obtener más información, consulta [Implementación del modelo](../deployment.md).
+- **Deploy...**: opens the Tabular Editor Deployment wizard. See [Model deployment](xref:deployment).
 
 > [!IMPORTANT]
-> La opción **Deploy** no está disponible en la Edición de escritorio de Tabular Editor 3. Para más información, consulte @editions.
+> **Deploy** isn't available in Tabular Editor 3 Desktop Edition. See @editions.
 
-- **Opciones de serialización...** Te permite configurar cómo se serializan los metadatos del modelo al guardarlos en disco (archivo o estructura de carpetas).
-- **Importar tablas...** Inicia el Asistente de importación de tablas de Tabular Editor 3. Para más información, consulte @importing-tables.
-- **Actualizar esquema (todas las tablas)...** Detecta cambios de esquema en el/los Data source(s) de todas las tablas del modelo, en comparación con las columnas importadas actualmente. Consulta [Actualización del esquema de la tabla](xref:importing-tables#updating-table-schema) para obtener más información.
-- **Script DAX**: Genera un script DAX para el/los objeto(s) seleccionados actualmente (o para todos los objetos DAX del modelo, si no se ha seleccionado nada). Para más información, consulte @dax-scripts.
-- **Actualizar modelo**: Cuando Tabular Editor está conectado a una instancia de Analysis Services, este submenú contiene opciones para iniciar una operación de actualización en segundo plano a nivel de modelo. El submenú incluye las siguientes opciones. Para más información, consulte [Comando Refresh (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request).
-  - **Automático (modelo)**: Analysis Services determina qué objetos actualizar (solo los objetos que no están en el estado "Listo").
+- **Serialization options...** sets how model metadata is serialized when saved to a file or folder structure.
+- **Import tables...** opens the Tabular Editor 3 Import Table Wizard. See @importing-tables.
+- **Update schema (all tables)...** compares the columns of all tables with their data sources and detects schema changes. See [Updating table schema](xref:importing-tables#updating-table-schema).
+- **Script DAX**: generates a DAX script for the selected objects, or for all DAX objects in the model if nothing is selected. See @dax-scripts.
+- **Refresh model**: starts a background refresh of the model when Tabular Editor is connected to Analysis Services. See [Refresh command (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request). The submenu has these options:
+  - **Automatic (model)**: Analysis Services refreshes only the objects that aren't in the "Ready" state.
   - **Actualización completa (modelo)**: Analysis Services realiza una actualización completa del modelo.
-  - **Calcular (modelo)**: Analysis Services vuelve a calcular todas las tablas calculadas, columnas calculadas, grupos de cálculo y relaciones. No se leen datos de los Data sources.
-- **Agregar [object type]**: Los accesos directos restantes del menú **Modelo** te permiten crear nuevos tipos de objetos secundarios del modelo (tablas, Data sources, perspectivas, etc.).
+  - **Calculate (model)**: Analysis Services recalculates all calculated tables, calculated columns, calculation groups and relationships. No se leen datos de los Data sources.
+- **Add [object type]**: the remaining items create model child objects, such as tables, data sources and perspectives.
 
-## Herramientas
+### Herramientas
 
-El menú **Herramientas** contiene opciones para controlar las preferencias y personalizaciones de Tabular Editor 3.
+The **Tools** menu has the Tabular Editor 3 preferences and customizations.
 
 ![Menú Vista](~/content/assets/images/window-menu.png)
 
-- **Personalizar...** Abre el cuadro de diálogo de personalización del diseño de la interfaz de usuario de Tabular Editor 3, que permite crear nuevas barras de herramientas, reorganizar y editar menús y botones de la barra de herramientas, etc.
-- **Preferencias...** Abre el cuadro de diálogo de Preferencias de Tabular Editor 3, que funciona como un centro para administrar todos los demás aspectos de Tabular Editor y sus características, como la comprobación de actualizaciones, la configuración del proxy, los límites de filas de consulta, los tiempos de espera de las solicitudes, etc. Consulte @preferences para obtener más información.
-- **Administrar reglas de BPA...** Inicia el administrador de reglas del Best Practice Analyzer, que te permite ver y editar las reglas y las colecciones de reglas del Best Practice Analyzer. Consulta @bpa-view para obtener más información.
-- **Servidor MCP...** Abre el cuadro de diálogo Servidor MCP, desde el que puedes iniciar y detener el servidor que permite a un agente de IA externo trabajar con el modelo que tienes abierto, revisar los permisos que se le concederán y copiar una configuración de registro para tu agente. Consulta @mcp-server para obtener más información. El elemento está oculto cuando el componente de características de IA no está instalado, cuando **Habilitar servidor MCP** no está activado o cuando un administrador lo ha deshabilitado mediante una directiva.
+- **Customize...** opens the User Interface Layout customization dialog, where you create toolbars and rearrange and edit menus and toolbar buttons.
+- **Preferences...** opens the Preferences dialog, with settings such as update checks, proxy settings, query row limits and request timeouts. See @preferences.
+- **Manage BPA rules...** opens the Best Practice Analyzer rule manager, where you view and edit rules and rule collections. See @bpa-view.
+- **MCP Server...** opens the **MCP Server** dialog, where you start and stop the server that lets an external AI agent work on the open model, review the permissions the agent gets and copy a registration configuration for your agent. See @mcp-server. The item is hidden when the AI features component isn't installed, when **Enable MCP Server** is cleared or when an administrator has disabled it by policy.
 
-## Ventana
+### Ventana
 
-El menú **Ventana** proporciona accesos directos para administrar y navegar entre las distintas vistas y documentos (conocidos colectivamente como _ventanas_) de la aplicación. También incluye elementos de menú para controlar los temas y las paletas de colores, tal como se describe [arriba](#changing-themes-and-palettes).
+The **Window** menu manages and switches between the views and documents of the application, together called _windows_, and also has the [theme and palette](#changing-themes-and-palettes) settings.
 
 ![Menú Ver](~/content/assets/images/view-menu.png)
 
-- **Nuevo...** este submenú ofrece un acceso directo para crear nuevos [archivos auxiliares](xref:supported-files#supported-file-types). Las opciones aquí son idénticas a las de **Archivo > Nuevo**.
+- **New...** creates [supporting files](xref:supported-files#supported-file-types). The options are the same as under **File > New**.
 
 - **Flotar** desacopla la vista o el documento actual y lo coloca en una ventana flotante.
 
-- **Anclar pestaña** ancla una pestaña. Cuando una pestaña está anclada, se muestra en el extremo izquierdo de las pestañas del documento y, al hacer clic con el botón derecho sobre las pestañas, se muestran accesos directos para cerrar solo las pestañas no ancladas.
+- **Pin tab** pins a tab to the left end of the document tabs. The tab right-click menu has commands that close only unpinned tabs.
 
   ![Menú contextual de pestaña](~/content/assets/images/tab-context-menu.png)
 
-- **Nuevo grupo de pestañas horizontal/vertical**: Esta opción te permite dividir el área principal de documentos en varias secciones (también llamadas "grupos de pestañas"), para mostrar varios documentos simultáneamente, uno al lado del otro o uno encima del otro.
+- **New Horizontal/Vertical Tab Group**: divides the main document area into tab groups, to show several documents side by side or one above the other.
 
-- **Cerrar todo**: Cierra todas las pestañas de documentos. Se te pedirá que guardes los cambios no guardados, si los hay.
+- **Close All**: closes all document tabs. A prompt to save unsaved changes appears first.
 
-- **Restablecer el diseño de la ventana**: Restablece todas las personalizaciones aplicadas al área principal del documento.
+- **Reset Window Layout**: resets all customization of the main document area.
 
-- **1..N [documento]**: Aquí se muestran los primeros 10 documentos abiertos, lo que permite navegar entre ellos. También puedes usar el atajo CTRL+Tab para cambiar rápidamente entre documentos y vistas abiertos, como se muestra en la captura de pantalla siguiente:
+- **1..N [document]**: the first 10 open documents. **Ctrl+Tab** also switches between open documents and views:
 
   ![Menú Ver](~/content/assets/images/ctrl-tab.png)
 
-- **Ventanas...**: Abre un cuadro de diálogo que enumera TODOS los documentos abiertos, y te permite cambiar entre ellos o cerrarlos individualmente.
+- **Windows...**: opens a dialog that lists all open documents, where you switch to or close each one.
 
   ![Administrador de ventanas](~/content/assets/images/windows-manager.png)
 
-- **Capturar diseño** / **Diseños...** / **Diseño predeterminado** / **Diseño clásico**: Estos elementos del menú se trataron [antes en este artículo](#choosing-a-different-layout).
+- **Capture Layout** / **Layouts...** / **Default layout** / **Classic layout**: see [Choosing a different layout](#choosing-a-different-layout).
 
-- **Tema** / **Paleta predeterminada**: Estos elementos del menú se trataron [antes en este artículo](#changing-themes-and-palettes).
+- **Theme** / **Default palette**: see [Changing themes and palettes](#changing-themes-and-palettes).
 
-- **Idioma**: Te permite cambiar el idioma de visualización de la interfaz de usuario de Tabular Editor 3.
+- **Language**: changes the display language of the Tabular Editor 3 user interface.
 
-## Ayuda
+### Ayuda
 
-El menú **Ayuda** ofrece accesos directos a recursos en línea y mucho más.
+The **Help** menu links to online resources.
 
 ![Menú Ayuda](~/content/assets/images/help-menu.png)
 
-- **Documentación en línea**: Este elemento del menú abre [docs.tabulareditor.com](https://docs.tabulareditor.com), este sitio de documentación, en tu navegador web predeterminado.
-- **Guía de introducción**: Este elemento del menú abre la guía de introducción de Tabular Editor 3, que ayuda a los nuevos usuarios a empezar con la aplicación.
-- **Soporte de la comunidad**: Este elemento del menú enlaza a nuestro [sitio público de soporte comunitario](https://github.com/TabularEditor/TabularEditor3).
-- **Soporte dedicado**: Este elemento del menú te permite enviar un correo electrónico directamente a nuestra línea directa de soporte dedicado.
-- **Primeros pasos**: Este elemento del menú abre la página **Primeros pasos**, que reúne cursos, demostraciones y documentación de Tabular Editor. Antes de la versión 3.27.0 de Tabular Editor, este elemento se llamaba **Novedades** y mostraba las notas de la versión instalada; ahora las notas de la versión están en @release-history.
+- **Online Documentation**: opens [docs.tabulareditor.com](https://docs.tabulareditor.com) in your default web browser.
+- **Onboarding Guide**: opens the Tabular Editor 3 onboarding guide for new users.
+- **Community Support**: opens the [public community support site](https://github.com/TabularEditor/TabularEditor3).
+- **Dedicated Support**: sends an e-mail to the dedicated support hotline.
+- **Get Started**: opens the **Get Started** page, which collects courses, demos and documentation for Tabular Editor. Before Tabular Editor 3.27.0, this item was called **What's New**. For release notes, see @release-history.
 
 > [!NOTE]
-> El soporte dedicado está reservado a los clientes de la Edición Enterprise de Tabular Editor 3. El resto de los clientes debe ponerse en contacto a través del [sitio público de soporte de la comunidad](https://github.com/TabularEditor/TabularEditor3) para cualquier incidencia técnica, duda u otra consulta específica del producto.
+> Dedicated support is for Tabular Editor 3 Enterprise Edition customers. Other customers use the [public community support site](https://github.com/TabularEditor/TabularEditor3) for technical and product questions.
 
-- **Acerca de Tabular Editor**: Abre un cuadro de diálogo que muestra información detallada sobre la versión de Tabular Editor que se está utilizando, así como los detalles de instalación y licencia. El cuadro de diálogo también permite cambiar la clave de licencia.
+- **About Tabular Editor**: shows the version, installation and licensing details, and lets you change your license key.
 
-## Menús dinámicos (dependientes del contexto)
+### Menús dinámicos (dependientes del contexto)
 
-Además de los menús mencionados anteriormente, pueden aparecer otros en determinados momentos, según qué elemento de la interfaz tenga el foco y qué objeto esté seleccionado actualmente en el Explorador TOM. Por ejemplo, si selecciona un objeto de tipo tabla, aparecerá un menú **Tabla**, con los mismos accesos directos específicos del contexto que cuando hace clic con el botón derecho en ese objeto en el Explorador TOM.
+Extra menus appear depending on which UI element has focus and which object is selected in the TOM Explorer. For example, if you select a table, a **Table** menu appears with the same items as the table's right-click menu in the TOM Explorer.
 
-Si cambias el foco de entrada entre distintos tipos de documentos (es decir. Consultas DAX, Pivot Grids, diagramas, etc.), también deberías ver un menú que represente el tipo de documento que tiene el foco en ese momento. Ese menú contendrá los elementos relevantes para el documento actual. Por ejemplo, cuando un diagrama tiene el foco, aparecerá un menú **Diagrama** que incluye, entre otros, un elemento para agregar tablas al diagrama.
+Each document type, such as DAX queries, Pivot Grids and diagrams, also adds a menu while a document of that type has focus. For example, a focused diagram adds a **Diagram** menu with an item for adding tables to the diagram.
 
-Puede cambiar el comportamiento de estos menús dinámicos en **Herramientas > Preferencias > Interfaz de usuario**.
+Set the behavior of these dynamic menus under **Tools > Preferences > Tabular Editor > User Interface**.
 
-# Siguientes pasos
+## Siguientes pasos
 
 - @tom-explorer-view
 - @tipos de archivo compatibles
