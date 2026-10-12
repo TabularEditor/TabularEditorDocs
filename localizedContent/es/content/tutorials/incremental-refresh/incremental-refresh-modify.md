@@ -40,19 +40,19 @@ A continuación se muestra una descripción general de cómo modificar una polí
 
 3. **Busque las propiedades de "política de actualización":** En la ventana _Propiedades_, vaya a la sección _política de actualización_.
 
-   <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
+   <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Propiedades de la actualización incremental" style="width:704px !important"/>
 
 4. **Cambiar la propiedad:** Cambie la **Propiedad** indicada en las secciones siguientes, según lo que desee cambiar. Para ver un resumen de todas las propiedades de la política de actualización y lo que hacen, consulta [aquí](xref:incremental-refresh-about#overview-of-all-properties).
 
 5. **Aplicar cambios:** Implemente los cambios en el modelo.
 
-6. **Apply Refresh Policy:** Right-click the table and select _Apply refresh policy_.
+6. **Aplicar política de actualización:** Haga clic con el botón derecho en la tabla y seleccione _Aplicar política de actualización_.
 
-   <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Aplicar política de actualización" style="width:450px !important"/>
 
 7. **Actualizar todas las particiones:** Haga clic mientras mantiene pulsada la tecla Mayús para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
-   <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Actualizar todas las particiones" style="width:450px !important"/>
 
 ---
 
@@ -109,7 +109,7 @@ A continuación se muestra una descripción general de los cambios habituales qu
 **Nota:** Sigue el proceso que se indica a continuación para cambiar el modo de actualización incremental:
 
 1. Cambia _Mode_ al valor deseado: `Import` o `Hybrid`
-2. Right-click the table and select _Apply refresh policy_
+2. Haga clic con el botón derecho en la tabla y seleccione _Aplicar política de actualización_
 3. Implementa los cambios en el modelo
 4. Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
@@ -153,7 +153,7 @@ in
     accountForNu11
 ```
 
-3. Right-click the table and select _Apply refresh policy_
+3. Haga clic con el botón derecho en la tabla y seleccione _Aplicar política de actualización_
 4. Implementa los cambios en el modelo
 5. Mayús + clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
@@ -180,7 +180,7 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 <br></br>
 
-<img src="~/content/assets/images/effective-date-te3.png" class="noscale" alt="Effective Date" style="width:700px !important"/>
+<img src="~/content/assets/images/effective-date-te3.png" class="noscale" alt="Fecha de entrada en vigor" style="width:700px !important"/>
 
 <br></br>
 
