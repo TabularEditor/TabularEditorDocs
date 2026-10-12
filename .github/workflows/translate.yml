@@ -14,13 +14,6 @@ name: Translate content (Translated)
 #              `localization-sandbox` (draft PR), and opens/updates the review PR.
 #              The sandbox account has no AI-enabled service type, so a sandbox
 #              --run fails at the first submission.
-#
-# Repository settings:
-#   TRANSLATED_API_KEY       secret    TranslationOS key matching TRANSLATED_ENV
-#   TRANSLATED_ENV           variable  sandbox | production
-#   TRANSLATED_SERVICE_TYPE  variable  optional serviceType override (default 'AI')
-#   Enable "Allow GitHub Actions to create and approve pull requests" and
-#   "Automatically delete head branches".
 
 on:
   push:
