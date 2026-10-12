@@ -2,7 +2,7 @@
 uid: user-interface
 title: Basic user interface
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -33,7 +33,7 @@ With a semantic model loaded, Tabular Editor 3 shows the default layout below.
 5. **Expression Editor**: edits the DAX, SQL or M expressions of the object selected in the TOM Explorer. If you close it, double-click an object in the TOM Explorer to open it again. If the object has more than one expression property, the dropdown at the top switches between them. For example, a KPI has a target, a status and a trend expression.
 6. **Properties view**: all TOM properties of the objects selected in the TOM Explorer. You can edit most properties in the grid, also with several objects selected. Some properties, such as **Format String**, **Connection String** and **Role Members**, open a dialog or collection editor from the ellipsis button in the value cell.
 7. **Messages view**: semantic errors found by the continuous analysis of the model's DAX expressions, plus messages from C# scripts and errors reported by Analysis Services.
-8. **Status bar**: information about the current selection, Best Practice Analyzer findings and more. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, and its tooltip shows the address the server listens on. Click the indicator to open the **MCP Server** dialog, or right-click it to start or stop the server, copy a registration configuration for your agent or open the preferences page.
+8. **Status bar**: information about the current selection, Best Practice Analyzer findings and more. The connection item shows the database and server you're connected to as `<database>@<server>`, or `<host>:<port>` for Power BI Desktop, and **(No connection)** for a model loaded without a connection. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, and its tooltip shows the address the server listens on. Click the indicator to open the **MCP Server** dialog, or right-click it to start or stop the server, copy a registration configuration for your agent or open the preferences page.
 
 The [View menu](#view) opens the other views.
 
@@ -89,6 +89,7 @@ The *active document* is the document that has the cursor, such as the Expressio
 > [!NOTE]
 > Menus and toolbars are locked in place by default. To unlock them, clear **Lock menus and toolbars** under **Tools > Customize... > Options**.
 
+<!-- SCREENSHOT RESHOOT (3.27.1): active-document.png. Title bar uses the old format. Optional. -->
 ![Active Document](~/content/assets/images/active-document.png)
 
 ### File
@@ -109,7 +110,7 @@ The **File** menu loads and saves model metadata, supporting files and documents
   ![File Menu Open](~/content/assets/images/file-menu-open.png)
 
   - **Model from file...** opens model metadata from a file such as a .bim or .pbit file.
-  - **Model from DB...** loads the metadata of a deployed model. Enter Analysis Services or Power BI XMLA connection details, or connect to a local instance such as Visual Studio's Integrated Workspace server or Power BI Desktop.
+  - **Model from DB...** loads the metadata of a deployed model. Enter Analysis Services or Power BI XMLA connection details, or connect to a local instance such as Visual Studio's Integrated Workspace server or Power BI Desktop. Right-click a server in the **Server** list to pin it to the top of the list or delete it. See @xmla-as-connectivity.
   - **Model from folder...** opens model metadata from a folder structure saved by any version of Tabular Editor.
   - **File...** opens any file type Tabular Editor 3 supports, by file name extension. See [Supported file types](xref:supported-files).
   - **Import from Metric View YAML...** imports model metadata from a Databricks Metric View YAML file.
@@ -119,15 +120,17 @@ The **File** menu loads and saves model metadata, supporting files and documents
 > [!IMPORTANT]
 > In Tabular Editor 3 Desktop Edition, **Open > Model from file...** and **Open > Model from folder...** aren't available, and **Open > File...** opens only [supporting files](xref:supported-files#supported-file-types).
 
-- **Reload from disk** / **Reload from server**: reloads the model metadata from its source and discards all unsaved changes. The command reads **Reload from disk** for a model loaded from a file or folder, and **Reload from server** for a model opened from Analysis Services or Power BI. If Tabular Editor 3 runs as an External Tool for Power BI Desktop and the model changes in Power BI Desktop, use this command to reload the model metadata without reconnecting. Models loaded from a file or folder reload automatically when the files change. See [Auto-reload from disk](xref:auto-reload).
+- **Reload from disk** / **Reload from server**: reloads the model metadata from its source and discards all unsaved changes. The command reads **Reload from disk** for a model loaded from a file or folder, and **Reload from server** for a model opened from Analysis Services or Power BI. If Tabular Editor 3 runs as an External Tool for Power BI Desktop and the model changes in Power BI Desktop, use this command to reload the model metadata without reconnecting. Models loaded from a file or folder reload automatically when the files change. See [Auto-reload from disk](xref:auto-reload). Open DAX Query and Pivot Grid documents stay open during a reload and connect to the reloaded model.
 - **Close Document** (**Ctrl+W**): closes the active document or panel in the main area, such as a DAX query, a C# script or a diagram. If the document has unsaved changes, a prompt to save them appears.
-- **Close model**: unloads the model metadata. If you changed the metadata, a prompt to save the changes appears.
+- **Close Model**: unloads the model metadata. If you changed the metadata, a prompt to save the changes appears. Open DAX Query and Pivot Grid documents close with the model, and a save prompt appears for each one with unsaved changes.
 - **Save**: saves the active document to its source file. If no document is active, it saves the model metadata to its source: a Model.bim file, a Database.json folder structure, an Analysis Services instance (including Power BI Desktop) or the Power BI XMLA endpoint.
 - **Save as...** saves the active document as a new file. If no document is active, it saves the model metadata as a new .bim (JSON) file.
 - **Save to folder...** saves the model metadata as a [folder structure](xref:save-to-folder).
 - **Save all**: saves all unsaved documents and the model metadata.
 - **Recent files**: lists recently used supporting files.
 - **Recent tabular models**: lists recently used model metadata files and folders.
+
+With **Model source detail** set to **Name only** or **Hidden**, the hover text of the recent files and models menus shows file names without directories.
 
 > [!IMPORTANT]
 > In Tabular Editor 3 Desktop Edition, **Save to folder** and **Recent tabular models** are disabled, and **Save as** is enabled only for [supporting files](xref:supported-files#supported-file-types).

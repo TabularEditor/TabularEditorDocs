@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Adding measures and other calculated objects
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -85,7 +85,7 @@ To add a [calculation group](https://docs.microsoft.com/en-us/analysis-services/
 
 To add calculation items, right-click on the newly created calculation group and choose **Create > Calculation Item**. Give the Calculation Item a name and edit its DAX expression using the **Expression Editor** similar to how we did for measures above.
 
-You can arrange the display order of Calculation Items by dragging them around in the TOM Explorer, or by setting the `Ordinal` property within the **Properties** view.
+You can arrange the display order of Calculation Items by dragging them around in the TOM Explorer, or by setting the `Ordinal` property within the **Properties** view. Setting `Ordinal` moves the item to that position, and a value beyond the last position moves the item to the end.
 
 > [!NOTE]
 > When Calculation Items are added, renamed or removed from a Calculation Group, the Calculation Group has to be refreshed before it can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.

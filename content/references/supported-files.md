@@ -2,7 +2,7 @@
 uid: supported-files
 title: Supported file types
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -41,12 +41,13 @@ It's the original format for a semantic model that Microsoft supports.
 
 However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
 
-#### .bim file in a folder
+**.bim file in a folder**
+
 ![Supported File Types BIM](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
 [Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
 
-#### Save with supporting files for Fabric Git integration
+**Save with supporting files for Fabric Git integration**
 
 When using the **Save with supporting files** option (Business and Enterprise editions), Tabular Editor creates a folder structure compatible with Microsoft Fabric Git integration:
 
@@ -69,7 +70,8 @@ Tabular Editor can handle two types of Power BI storage formats:
 
 
 
-#### Power BI Project folders (.pbip ) *(Preview)*
+**Power BI Project folders (.pbip) (Preview)**
+
 Power BI Project folders were introduced in June 2023 and is available in Power BI Desktop as a preview feature (also known as "Developer Mode"). The storage format is an alternative way to store the contents of a .pbix file, in a format that is more friendly to version control and 3rd party reading/editing of the content.
 
 > [!WARNING]
@@ -82,7 +84,8 @@ To learn more about Power BI Project folders, please read [this official blog po
 > [!IMPORTANT]
 > Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring). Making other types of changes to the model metadata than those listed, may cause your model to become unloadable in Power BI Desktop, and in this case, Microsoft Support will not be able to help you.
 
-#### Power BI Template file (.pbit)
+**Power BI Template file (.pbit)**
+
 Power BI Template files are similar to .pbix files, with the exception that they do not contain any model **data** - only model **metadata**. As such, this model metadata can be opened and edited in Tabular Editor.
 
 > [!WARNING]
@@ -126,7 +129,7 @@ TMDL stands for Tabular Model Definition Language and it's a new format for defi
 Microsoft introduced TMDL as a preview feature in April 2023, aiming to provide a unified and consistent way of working with datasets across different platforms and tools. 
 
 TMDL is designed to support dataset source control, enabling users to track changes, collaborate, and automate workflows with semantic models. 
-> [!Note]
+> [!NOTE]
 > TMDL is in preview, which means that it's not fully stable and may have some limitations or issues. 
 
 ![Supported File Types TMDL](~/content/assets/images/file-types/te3-supported-file-tmdl.png)
@@ -139,7 +142,7 @@ For further reading please see: [TMDL](xref:tmdl)
 
 [Download example TMDL Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
 
-#### Save with supporting files for Fabric Git integration
+**Save with supporting files for Fabric Git integration**
 
 When using the **Save with supporting files** option (Business and Enterprise editions), Tabular Editor creates a folder structure compatible with Microsoft Fabric Git integration:
 
@@ -253,7 +256,7 @@ Unlike other supporting file types creating a .vpax file is done within the Vert
 > [!WARNING]
 > If your model metadata is confidential, a .vpax file should also be considered confidential and only shared with that in mind. If you are concerned about protecting IP, Tabular Editor 3 has an option to obfuscate VPAX files.
 
-#### Obfuscation
+### Obfuscated VPAX files (.ovpax)
 
 If you need to hand off the VPAX file to a 3rd party, such as a consultant or a tool vendor, you can obfuscate the file to hide the model metadata. This is done by selecting the 'Obfuscated Export...' option under the drop-down button next to the 'Export' button in the Vertipaq Analyzer window.
 
@@ -301,7 +304,7 @@ It is recommended to store the PBA rule file in version control, which also enab
 You can download the official Microsoft BPA rules here: [PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
 
 ### RecentServers.json
-Contains all the servers a user has been connected to. It can be advisable to edit it manually to 'forget' past servers no longer relevant.
+Contains the servers you've connected to, with the authentication type, user name, mode and status bar color saved for each, and the list of pinned servers. Passwords aren't stored. To remove or pin a server, right-click it in the **Server** list of the connection dialog. See [Recent and pinned servers](xref:xmla-as-connectivity#recent-and-pinned-servers).
 
 ### Layouts.json
 The Layouts file is automatically generated by Tabular Editor when starting the application. It contains all information to how Tabular Editor 3's UI layout is configured.

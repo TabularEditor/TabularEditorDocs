@@ -2,7 +2,7 @@
 uid: dax-debugger
 title: DAX debugger
 author: Daniel Otykier
-updated: 2022-01-19
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -53,7 +53,7 @@ Once the debugger is started, you are presented with a number of new views that 
   - Drag a measure from the TOM Explorer, or
   - Right-click on a measure in the TOM Explorer and choose **Add to pivot grid**, or
   - Select the measure from the Pivot Grid field list (**Pivot Grid > Show fields**)
-3. (Optional) Add one or more columns to the Pivot Grid in the Filter area, Columns area or Row area.
+3. (Optional) Add one or more columns or hierarchies to the Pivot Grid in the Filter area, Columns area or Row area.
 4. Right-click on the value cell within the Pivot Grid and choose **Debug this value**.
 
 ![Debug From Pivot](~/content/assets/images/features/debug-from-pivot.png)

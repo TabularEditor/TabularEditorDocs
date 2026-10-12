@@ -2,7 +2,7 @@
 uid: security-privacy
 title: Security overview
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -63,10 +63,10 @@ The AI Assistant uses a **bring-your-own-key** model. You provide an API key fro
 
 | Resource | What it covers | Levels | Default |
 | -- | -- | -- | -- |
-| Model metadata | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics | Deny / Read / Write | Read |
-| Model data | Data values from your model, such as DAX query results. Requires a live connection | Deny / Read | Deny |
+| Model metadata | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics and the model's error and warning messages | Deny / Read / Write | Read |
+| Model data | Data values from your model, such as DAX query results, and the text of errors returned by Analysis Services, which can contain data values. DAX queries require a live connection | Deny / Read | Deny |
 | Best Practice Analyzer | Read lists rules and runs the analysis; Write adds or modifies rules | Deny / Read / Write | Read |
-| Documents | Your open C# script and DAX query editors. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | Write |
+| Documents | Your open documents: DAX queries, C# scripts, DAX scripts and Pivot Grids. Read is their contents and their errors and warnings; Write is needed to create or modify them. Pivot Grid layouts can't be read or modified | Deny / Read / Write | Write |
 | Macros | Your macro library | Deny / Read / Write | Write |
 
 Write covers Read. Model data is denied by default, because metadata describes a model where data values are the model's contents.

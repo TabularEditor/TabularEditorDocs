@@ -2,7 +2,7 @@
 uid: messages-view
 title: Messages view
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -29,19 +29,41 @@ The Messages view in Tabular Editor 3 is a tool window that displays various typ
 </figure>
 
 
-The Messages view will tell you the Source and the object from which the message is being generated. 
+Messages are grouped by **Source**, such as the semantic analyzer, the expression editor or Analysis Services. Each row has these columns:
 
-There are two types of messages displayed Errors and Warnings
-- Errors: This tab shows any errors that prevent your model from being deployed or saved. For example, if you have an invalid expression in a calculation item or a circular dependency in a relationship. 
-- Warnings: This tab shows any warnings that does not concur with standards but does not prevent your model from being usable. This is for example having fully qualified measure references.
-- 
+| Column | Shows |
+| -- | -- |
+| **Object** | The object or document the message belongs to. |
+| **Type** | The severity of the message: error, warning or information. |
+| **Message** | The message text. |
+| **Caused by** | For a cascading error, the object whose error causes it. For a root error, the number of dependent errors it causes. |
+| **Line** and **Column** | The position of the message in the expression or document. |
+
+Errors are expressions or structures that Analysis Services rejects, such as an invalid expression in a calculation item or a circular dependency. Warnings flag expressions that work but don't follow recommended practice, such as fully qualified measure references.
+
+## Cascading errors and root causes
+
+When an expression has an error, every expression that references it also gets an error, such as a measure that fails only because a measure it references fails. These are *cascading errors*, and the error they trace back to is the *root error*.
+
+The **Caused by** column shows a different value for each kind of error:
+
+- on a cascading error, it names the object with the root error, followed by **+N** when the error traces back to more than one root error
+- on a root error, it shows **+N dependent errors**, counting the errors it causes directly and indirectly
+
+To work with cascading errors, right-click a row in the Messages view:
+
+- **Go to Root Cause** opens the root error in the expression editor with the error highlighted. The command appears only on cascading errors.
+- **Show Cascading Errors** shows or hides the cascading errors. Clear it to list only the root errors you need to fix. The setting is on by default and is saved between sessions.
+
+An object with an error of its own and a reference to a broken object shows two rows: a root error and a cascading error. Analysis Services errors and errors in DAX queries, DAX scripts and Pivot Grids are never cascading.
+
 ## Copying Messages
 The message view allows for copying out the error message using Ctrl+C.
  
 From Tabular Editor 3.23.0 Ctrl+C copies the selected cell by default. Use Ctrl+Shift+C (or Copy Row in right-click menu) for row-level copy.
 
 > [!TIP]
-> Right-click a cell to choose Copy Cell / Copy Row.
+> Right-click a cell to choose **Copy Cell** or **Copy Row**. The same menu has **Go to Root Cause** and **Show Cascading Errors**.
 
 
 ![Message View Copy](~/content/assets/images/messages-view-copy.png)

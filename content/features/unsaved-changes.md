@@ -2,7 +2,7 @@
 uid: unsaved-changes
 title: Unsaved change indicators
 author: Daniel Otykier
-updated: 2026-09-22
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,7 +46,7 @@ Tables, display folders, table groups and the **Model** node are marked too, whe
 When an object is selected, the normal selection highlight takes precedence over the tint, so a multi-selection stays readable. The badge on the icon still marks the changed objects within the selection. Error and warning badges also take precedence over the change badge, so an object with a semantic error keeps its error badge even when it has unsaved changes.
 
 > [!TIP]
-> If green and red rows are hard to tell apart, enable **Color blindness mode** under **Tools > Preferences > User Interface > Accessibility**. Added objects are then marked in teal instead of green, both here and in the model comparison view.
+> If green and red rows are hard to tell apart, enable **Color blindness mode** under **Tools > Preferences > Tabular Editor > User Interface > Accessibility**. Added objects are then marked in teal instead of green, both here and in the model comparison view.
 
 ### Show changes
 
@@ -114,7 +114,7 @@ C# scripts can reach the selected deleted objects through `Selected.Deleted`. Se
 
 ### Gathering deleted objects under one node
 
-If you prefer not to have deleted objects mixed in with live ones, check **Gather deleted objects under a "Deleted objects" node** under **Tools > Preferences > TOM Explorer > Unsaved changes**. The deleted objects of a table, hierarchy, role or table group are then shown together under a single **Deleted objects** node at the end of their container, regardless of the display folders they used to be in. The node takes the red highlight and a deleted badge of its own, and the objects beneath it are struck through. Right-click the node and choose **Restore** to bring back everything beneath it in one step.
+To group deleted objects, check **Gather deleted objects under a "Deleted objects" node** under **Tools > Preferences > Tabular Editor > TOM Explorer > Unsaved changes**. The deleted objects of a table, hierarchy, role or table group are then shown together under a single **Deleted objects** node at the end of their container, regardless of the display folders they used to be in. The node takes the red highlight and a deleted badge of its own, and the objects beneath it are struck through. Right-click the node and choose **Restore** to bring back everything beneath it in one step.
 
 ![Deleted objects gathered under one node](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
 
@@ -136,7 +136,7 @@ An object or property loses its mark when it no longer differs from the last sav
 
 ## Preferences
 
-The indicators can be adjusted under **Tools > Preferences > TOM Explorer**, in the **Unsaved changes** section:
+The indicators can be adjusted under **Tools > Preferences > Tabular Editor > TOM Explorer**, in the **Unsaved changes** section:
 
 ![Unsaved changes preferences](~/content/assets/images/unsaved-changes/preferences.png)
 
@@ -145,7 +145,7 @@ The indicators can be adjusted under **Tools > Preferences > TOM Explorer**, in 
 - **Gather deleted objects under a "Deleted objects" node** (disabled): Show a container's deleted objects together under one node instead of each where it used to be. See [Gathering deleted objects under one node](#gathering-deleted-objects-under-one-node).
 - **Mark properties with unsaved changes in the Properties pane** (enabled): Tint the rows of changed properties in the Properties view. When unchecked, the **Show changes** filter in the Properties view still works.
 
-See @preferences for the other settings on this page. The colors used for added objects can be adjusted for color blindness under **Tools > Preferences > User Interface > Accessibility**.
+See @preferences for the other settings on this page. The colors used for added objects can be adjusted for color blindness under **Tools > Preferences > Tabular Editor > User Interface > Accessibility**.
 
 ## Scripting
 

@@ -2,7 +2,7 @@
 uid: direct-lake-sql-model
 title: Direct Lake on SQL Semantic Models
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,7 +56,7 @@ Additionally, on import of new tables Tabular Editor 3 (3.15.0 or higher) frames
 
 
 ## Identifying a Direct Lake model
-The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currently, it is not possible for a Direct Lake on SQL model to contain tables in Import, DirectQuery or Dual mode.
+The Tabular Editor 3 title bar shows the storage mode of the open model after the model name, such as **(Direct Lake)**, **(DirectQuery)** or **(Import)**. If a model contains a mix of table modes, the title bar shows **(Composite)**. The TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). A Direct Lake on SQL model can't contain tables in Import, DirectQuery or Dual mode.
 
 
 ## Converting a Direct Lake model to Import Mode

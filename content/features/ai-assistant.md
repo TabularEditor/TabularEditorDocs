@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 ---
 # AI Assistant
 
-The AI Assistant is a chat panel for semantic model development. It explores your model metadata, writes and runs DAX queries, generates C# scripts, runs Best Practice Analyzer checks, queries VertiPaq Analyzer statistics and searches the Tabular Editor knowledge base. [Permission settings](#permissions-and-consent) control what it sends to your AI provider. The AI Assistant has undergone independent penetration testing; see the [Tabular Editor Trust Center](https://trust.tabulareditor.com).
+The AI Assistant is a chat panel for semantic model development. It explores your model metadata, writes and runs DAX queries, generates C# scripts, explains and fixes the errors in your model and open documents, runs Best Practice Analyzer checks, queries VertiPaq Analyzer statistics and searches the Tabular Editor knowledge base. [Permission settings](#permissions-and-consent) control what it sends to your AI provider. The AI Assistant has undergone independent penetration testing; see the [Tabular Editor Trust Center](https://trust.tabulareditor.com).
 
 The AI Assistant uses a bring-your-own-key model, where you provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
 
@@ -193,7 +193,8 @@ Within your [permission grants](#permissions-and-consent), the AI Assistant work
 - **C# script generation**: creates C# scripts for model changes. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model). **Ctrl+Z** undoes model metadata changes
 - **Best Practice Analyzer**: runs BPA analysis, lists rule violations and creates or modifies BPA rules
 - **VertiPaq Analyzer**: queries memory usage statistics and column cardinality
-- **Document access**: reads and modifies open documents: DAX queries, C# scripts and DAX scripts
+- **Model errors**: lists the model's errors, warnings and Analysis Services messages, the same ones the [Messages view](xref:messages-view) shows, with root causes first. The assistant is told when the model's errors change.
+- **Document access**: reads and modifies open DAX queries, C# scripts and DAX scripts, and reads the errors and warnings of every open document, Pivot Grids included. The active document is part of the assistant's context, so you can ask "why am I seeing this error in this query?". It can't read or change a Pivot Grid's layout
 - **Knowledge base search**: searches the embedded Tabular Editor documentation
 - **UI navigation**: generates `te3://` action links that open specific Tabular Editor dialogs and features
 
@@ -213,6 +214,7 @@ The setting is off by default and unavailable until **Model metadata** is set to
 - If **Preview changes** is on (the default), the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before the changes are applied. **Cancel** reverts them and reports the rejection to the assistant. If **Preview changes** is off, the changes are applied without a dialog.
 - The script's changes are one undo entry, **C# script (AI Assistant)**. **Ctrl+Z** undoes the whole script.
 - If the script fails part-way through, the model is left unchanged and the assistant reports the error.
+- If the script succeeds and introduces or resolves DAX errors, the assistant receives a list of those errors, grouped by root cause.
 - A script that accesses files, the network or external assemblies doesn't run. It opens as a script artifact with an **Unsafe** badge and **Execute** disabled, and the assistant's reply names what the script used.
 
 If you ask for a script, for example "Write me a script that renames every measure to sentence case", the assistant opens it as a script document that you run yourself, even with this setting on.
@@ -329,10 +331,10 @@ Set an access level for each resource to control what the AI Assistant can acces
 
 | Resource | What it covers | Levels | Default |
 | -- | -- | -- | -- |
-| **Model metadata** | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics | Deny / Read / Write | **Read** |
-| **Model data** | Data values from your model, such as DAX query results. Requires a live connection | Deny / Read | **Deny** |
+| **Model metadata** | Table, column and measure names, expressions, descriptions and similar. Read also covers VertiPaq Analyzer statistics and the model's error and warning messages | Deny / Read / Write | **Read** |
+| **Model data** | Data values from your model, such as DAX query results, and the text of errors returned by Analysis Services, which can contain data values. DAX queries require a live connection | Deny / Read | **Deny** |
 | **Best Practice Analyzer** | Read lists rules and runs the analysis; Write adds or modifies rules | Deny / Read / Write | **Read** |
-| **Documents** | Your open documents: DAX queries, C# scripts and DAX scripts. Read is their contents; Write is needed to create or modify them | Deny / Read / Write | **Write** |
+| **Documents** | Your open documents: DAX queries, C# scripts, DAX scripts and Pivot Grids. Read is their contents and their errors and warnings; Write is needed to create or modify them. Pivot Grid layouts can't be read or modified | Deny / Read / Write | **Write** |
 | **Macros** | Your macro library. Read lists and reads macros; Write is reserved for future macro-editing tools | Deny / Read / Write | **Write** |
 
 **Write** (labeled **Read/Write** in the dropdowns) includes Read.

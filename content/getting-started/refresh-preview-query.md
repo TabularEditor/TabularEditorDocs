@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Refreshing, previewing and querying data
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -168,6 +168,8 @@ Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https
 With Tabular Editor 3, you can collect VertiPaq Analyzer statistics while you are connected to any instance of Analysis Services. You can also export the statistics as a [.vpax file](https://www.youtube.com/watch?v=zRa9y01Ub30), or import statistics from a .vpax file.
 
 To collect statistics, simply hit the **Collect stats** button in the **VertiPaq Analyzer** view.
+
+If statistics can't be read from the model's data, for example when a high-cardinality column exceeds a Power BI capacity's per-query memory limit, the statistics are collected from model metadata only. A **Stats collected without reading data** warning appears with the server error, and cardinalities can be missing or inaccurate. To skip reading statistics from the data, clear **Read statistics from data** under **Tools > Preferences > File Formats > VertiPaq Analyzer**.
 
 ![Vertipaq Analyzer Collect Stats](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 

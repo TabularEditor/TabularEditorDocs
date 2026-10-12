@@ -2,7 +2,7 @@
 uid: mcp-server
 title: MCP server
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -133,6 +133,8 @@ Ask your agent:
 
 The agent answers with the model name, how the model is loaded, whether it has unsaved changes and its compatibility level, or reports that no model is open. No prompt appears in Tabular Editor.
 
+The model name the agent receives follows the **Model source detail** setting under **Tools > Preferences > Tabular Editor > User Interface**. With **Name only**, the agent receives no file paths or server names, and with **Hidden**, it receives `Model loaded` in place of the model name.
+
 ## Set agent permissions
 
 Permissions control which tools an agent gets, and the [AI Assistant](xref:ai-assistant) uses the same permissions. Set them in the **Tools > MCP Server...** dialog or under **Tools > Preferences > AI Features > Permissions**, which both edit the same setting.
@@ -145,10 +147,10 @@ Each resource has an access level:
 
 | Resource | Default | What the agent gets |
 | -- | -- | -- |
-| **Model metadata** | Read | Read: tables, columns, measures, expressions, descriptions, relationships and VertiPaq Analyzer statistics. Write: the ability to change the model through C# scripts |
-| **Model data** | Deny | Read: DAX query results (data values from your model). Needs a live connection |
+| **Model metadata** | Read | Read: tables, columns, measures, expressions, descriptions, relationships, VertiPaq Analyzer statistics and the model's error and warning messages. Write: the ability to change the model through C# scripts |
+| **Model data** | Deny | Read: DAX query results (data values from your model) and the text of errors returned by Analysis Services, which can contain data values. DAX queries need a live connection |
 | **Best Practice Analyzer** | Read | Read: the rule set and the analysis results. Write: adding and modifying rules |
-| **Documents** | Write | Read: the contents of your open DAX queries, C# scripts and DAX scripts. Write: modifying them, and creating C# scripts and DAX queries |
+| **Documents** | Write | Read: the contents of your open DAX queries, C# scripts and DAX scripts, and the errors and warnings of every open document, Pivot Grids included. Write: modifying them, and creating C# scripts and DAX queries. Pivot Grid layouts can't be read or modified |
 | **Macros** | Write | Read: your macro library, with names, descriptions and code. Write: no additional tools in this version |
 
 **Write** (labeled **Read/Write** in the dropdowns) includes Read, and **Model data** has no Write level.
@@ -181,18 +183,53 @@ The agent's tools depend on your grants, and the following table lists what you 
 | List the effective [Best Practice Analyzer](xref:best-practice-analyzer) rules, your own included, and run the analysis | **Best Practice Analyzer > Read** |
 | Add or change rules in your local collection | **Best Practice Analyzer > Write** |
 | Run a DAX query and get rows back. A query returns 100 rows by default and at most 500 | **Model data > Read** and **Model metadata > Read** |
-| List your open DAX queries, C# scripts and DAX scripts | **Model metadata > Read** |
-| Read the contents of open tabs | **Documents > Read** |
-| Edit a tab, or open a new C# script or DAX query for review | **Documents > Write** |
+| List the model's errors, warnings and Analysis Services messages, root causes first | **Model metadata > Read**. The text of Analysis Services errors also needs **Model data > Read** |
+| List your open DAX queries, C# scripts, DAX scripts and Pivot Grids, with the active document and each document's error and warning counts | **Model metadata > Read** |
+| Read the contents of an open DAX query, C# script or DAX script | **Documents > Read** |
+| Read the errors and warnings of one open document, including the errors the server returned when it last ran | **Documents > Read**. The text of server errors also needs **Model data > Read** |
+| Edit an open DAX query, C# script or DAX script, or open a new C# script or DAX query for review | **Documents > Write** |
 | Read your macro library | **Macros > Read** |
 | Change the model. See [How an agent changes your model](#how-an-agent-changes-your-model) | **Model metadata > Write** |
 
-Select objects in the TOM Explorer before you refer to them in a prompt, for example before asking "format these consistently".
+Select objects in the TOM Explorer before you refer to them in a prompt, for example before asking "format these consistently". To ask about an error in a query or script, make its tab the active document first, for example before asking "why am I seeing this error in this query?".
 
 Before a C# script or DAX query from the agent opens as a document, Tabular Editor compiles the script or validates the query against the open model, and returns any errors to the agent. DAX query validation needs Tabular Editor connected to Analysis Services or Power BI.
 
 > [!NOTE]
 > Querying data needs a live connection, and VertiPaq statistics need a connection or statistics you've already collected. Tool availability is set when the agent connects, so if you connect the model afterwards, reconnect the agent.
+
+### Tool reference
+
+The MCP server offers these tools to a connected agent. A tool appears in the agent's tool list only when your grants cover it, and an administrator can withhold individual tools with the `McpDisabledTools` [policy](xref:policies).
+
+| Tool | What it does | Grant needed |
+| -- | -- | -- |
+| `get_workspace_info` | Identifies the Tabular Editor instance and the open model | None |
+| `search_knowledge_base` | Searches the Tabular Editor documentation, blog, GitHub issues and discussions | None |
+| `get_full_content` | Returns the full text of a knowledge base search result | None |
+| `lookup_api_documentation` | Looks up properties, methods and signatures in the C# scripting API | None |
+| `get_model_overview` | Lists the tables, their column and measure counts and every relationship | **Model metadata > Read** |
+| `get_object_details` | Returns full detail for named objects | **Model metadata > Read** |
+| `search_model` | Searches the model by name, description, expression, format string or annotation | **Model metadata > Read** |
+| `get_full_model_metadata` | Returns the full model metadata | **Model metadata > Read** |
+| `get_selected_objects` | Describes the objects selected in the TOM Explorer | **Model metadata > Read** |
+| `get_vpax_stats` | Returns VertiPaq Analyzer statistics. Needs a connection or statistics you've collected | **Model metadata > Read** |
+| `get_model_messages` | Lists the model's errors, warnings and Analysis Services messages, root causes first | **Model metadata > Read** |
+| `get_open_documents` | Lists open documents with the active document and each document's error and warning counts. Including document content needs **Documents > Read** | **Model metadata > Read** |
+| `get_document_content` | Returns the content of one open DAX query, C# script or DAX script | **Documents > Read** |
+| `get_document_messages` | Lists the errors and warnings of one open document | **Documents > Read** |
+| `update_document_content` | Replaces the content of an open DAX query, C# script or DAX script | **Documents > Write** |
+| `write_dax_query` | Opens a DAX query as a document for you to review and run | **Documents > Write** |
+| `write_csharp_script` | Opens a C# script as a document for you to review and run | **Documents > Write** |
+| `execute_dax_query` | Runs a DAX query and returns the rows. Needs a live connection | **Model data > Read** and **Model metadata > Read** |
+| `execute_csharp_script` | Runs a C# script against the open model. See [How an agent changes your model](#how-an-agent-changes-your-model) | **Model metadata > Write** |
+| `get_bpa_rules` | Lists the effective Best Practice Analyzer rules | **Best Practice Analyzer > Read** |
+| `get_bpa_rule_results` | Runs the Best Practice Analyzer and returns the violations | **Best Practice Analyzer > Read** and **Model metadata > Read** |
+| `add_bpa_rule` | Adds a rule to your local rule collection | **Best Practice Analyzer > Write** |
+| `update_bpa_rule` | Changes a rule in your local rule collection | **Best Practice Analyzer > Write** |
+| `get_macros` | Returns your macro library with names, descriptions and code | **Macros > Read** |
+
+The `DisableCSharpScripts` policy removes `execute_csharp_script` and `write_csharp_script`.
 
 ## How an agent changes your model
 
@@ -202,7 +239,7 @@ A script can do anything the C# scripting API supports, for example add measures
 
 - its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. See @undo-redo.
 - if the script throws an exception part-way through, all its changes are rolled back.
-- the agent receives a list of every object the script added, changed or removed, plus anything the script printed.
+- the agent receives a list of every object the script added, changed or removed, plus anything the script printed. If the script introduced or resolved DAX errors, the result also lists them, grouped by root cause.
 - messages from `Output`, `Info`, `Warning` or `Error` are returned to the agent as part of the result, and no dialog opens.
 - while a long call runs, a **Please wait** indicator appears and clicks in Tabular Editor are discarded.
 - changed objects and properties are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) until you save. **Show changes** filters both views to the changes, and right-click **Revert** undoes a single property, a single object or a whole branch.
@@ -281,7 +318,7 @@ Select **Regenerate token** (the refresh button beside the token) to issue a new
 
 When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**.
+Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor, and the text of Analysis Services errors is replaced with a fixed sentence. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**. To keep file paths and server names out of what the agent receives, set **Model source detail** under **Tools > Preferences > Tabular Editor > User Interface** to **Name only** or **Hidden**.
 
 See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
 

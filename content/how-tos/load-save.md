@@ -2,7 +2,7 @@
 uid: load-save-model
 title: Load and save model metadata
 author: Morten Lønskov
-updated: 2026-09-22
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -61,6 +61,8 @@ To write a model somewhere else, or in a different format:
 You are asked to confirm only when there is something to lose: with unsaved changes, a **Reload model metadata?** prompt appears first. The status bar reports the reload while it runs, and says so when it is done.
 
 If an agent, a script or a `git pull` rewrites the metadata files while you have the model open, Tabular Editor notices and reloads the model for you, so the two copies stay in step without a manual revert. See [Auto-reload from disk](xref:auto-reload).
+
+Open DAX Query and Pivot Grid documents stay open through a manual or automatic reload and connect to the reloaded model.
 
 > [!WARNING]
 > Back up your model metadata before you let any tool write to it, Tabular Editor included. A save overwrites the source, and reloading can't bring back changes you've already saved.

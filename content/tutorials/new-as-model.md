@@ -2,7 +2,7 @@
 uid: new-as-model
 title: Create an Analysis Services Model
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,13 +24,13 @@ This page walks you through the process of creating a new Analysis Services tabu
 > [!NOTE]
 > Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Note that certain modeling features are not supported at these tiers.
 
-##### Creating a new model
+## Creating a new model
 
 - From the File menu, choose New > Model... or hit `CTRL+N` 
 
 ![New model](~/content/assets/images/new-as-model-new-model.png)
 
-- Provide a name for your model or use the default value. Then, choose the compatibility level for the version of Analysis Services you target. The dialog lists these options:
+- Provide a name for your model or use the default value. A name you enter is used for the database name, the database ID and the model name. Then, choose the compatibility level for the version of Analysis Services you target. The dialog lists these options:
   - 1200 (Azure Analysis Services / SQL Server 2016+)
   - 1400 (Azure Analysis Services / SQL Server 2017+)
   - 1500 (Azure Analysis Services / SQL Server 2019+)
@@ -49,7 +49,7 @@ This page walks you through the process of creating a new Analysis Services tabu
 
 Once your model is created, the next step is to add a data source and some tables.
 
-#### Adding a data source and tables
+## Adding a data source and tables
 
 Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
@@ -100,7 +100,7 @@ If the table you imported is a dimension table, we recommend setting the "Key" p
 
 Repeat this process for any table you wish to import to your Tabular model. You don't have to refresh the data in each table one by one - instead, you can run the refresh operation at the model level.
 
-#### Defining relationships
+## Defining relationships
 
 Once you have imported a number of tables, the easiest way to define the relationships between them with Tabular Editor 3, is to create a new diagram. Choose "File > New > Diagram". Then, multi-select and drag the tables into the diagram view or right-click on the tables and choose "Add to diagram":
 
@@ -112,7 +112,7 @@ To create a relationship between two tables, locate the foreign key column on th
 
 Close the diagram view (no need to save it, as you can always reconstruct the diagram later). Hit Ctrl+S once again to save the model. Now it's time to add some business logic. If you're using a Workspace Database, now is a good time to execute a refresh (automatic or calculate) at the model level, to ensure that the supporting structures for the relationships are created on the server, thus bringing the model into a queryable state.
 
-#### Adding measures
+## Adding measures
 
 Select one of the tables in the TOM Explorer and hit Alt+1 (or choose Create > New Measure) to add a measure to that table. Give the measure a name and provide a DAX expression for the measure.
 
@@ -126,7 +126,7 @@ If you're using a Workspace Database, you can now test your new measure directly
 
 If you didn't use a Workspace Database, you will have to deploy your model to an instance of Analysis Services, before you can perform data refreshes and query the model.
 
-#### Deploying the data model
+## Deploying the data model
 
 To deploy the model metadata to any instance of Analysis Services, click on the "Model" menu and choose "Deploy...". This brings up the Tabular Editor 3 Deployment Wizard which is similar to the Deployment Wizard of Tabular Editor 2.X. Follow the instructions on the various pages of the wizard, to deploy the model metadata to an instance of Analysis Services. You can also use the Deployment Wizard to generate a TMSL/XMLA script, that can be handed over to an Analysis Services server administrator for manual deployment.
 

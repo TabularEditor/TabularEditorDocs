@@ -2,7 +2,7 @@
 uid: dax-query
 title: DAX Queries
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,13 @@ The DAX query window has six different query options.
    - **When query is modified**: Sorting and filtering reset only when the query structure changes.
    - **Always**: Sorting and filtering persist as long as columns remain in the new query.
 
-The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
+The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. The **Keep documents open when switching models** section on the same page controls what happens to open DAX queries when you open a different model. See [Switching models](#switching-models).
+
+### Switching models
+
+When you open a different model, open DAX queries stay open and connect to the new model. If **Automatically execute DAX queries by default** is selected, the query runs again against the new model; otherwise, it runs against the new model the next time you execute it. If the new model has no database to run against, such as a model loaded from a file without a workspace database, the query stays open and can't be executed.
+
+To close DAX queries when you open a different model, clear **Keep DAX Queries open when a different model is opened** under **Tools > Preferences > Data Browsing > DAX Query**. The option is selected by default.
 
 ### Adding or Updating Measures, Columns and Tables with DAX Queries
 
