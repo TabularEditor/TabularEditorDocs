@@ -1,2 +1,2 @@
 > [!NOTE]
-> This page was created with the help of AI.
+> Esta página se creó con ayuda de la IA.
