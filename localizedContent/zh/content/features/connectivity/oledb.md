@@ -19,31 +19,31 @@ applies_to:
 
 # 通过 OLE DB 连接
 
-The OLE DB connector connects to sources that have an OLE DB provider but no usable ODBC driver. Selecting **Model > Import tables...** and choosing **OLE DB** opens the Windows **Data Link Properties** dialog.
+OLE DB 连接器可连接到具有 OLE DB 提供程序但没有可用 ODBC 驱动程序的数据源。选择 **模型 > 导入表...**，然后选择 **OLE DB**，即可打开 Windows **数据链接属性** 对话框。
 
 ![“数据链接属性”对话框的“提供程序”选项卡，其中列出了此计算机上安装的 OLE DB 提供程序](~/content/assets/images/features/connectivity/oledb-connection.png)
 
 ## 先决条件
 
-Install an OLE DB provider for the source that matches the architecture of your Tabular Editor build.
+为该数据源安装与 Tabular Editor 构建架构匹配的 OLE DB 提供程序。
 
 > [!WARNING]
-> Analysis Services supports fewer OLE DB providers than Windows. If Analysis Services doesn't support the provider, the source imports in Tabular Editor but refresh fails on the server. Use a dedicated connection dialog where one exists, and [ODBC](xref:connect-odbc) where it doesn't.
+> Analysis Services 支持的 OLE DB 提供程序少于 Windows。如果 Analysis Services 不支持该提供程序，则可以在 Tabular Editor 中导入该数据源，但在服务器上刷新会失败。如果有专用连接对话框，就使用它；如果没有，就使用 [ODBC](xref:connect-odbc)。
 
-## Connection fields
+## 连接字段
 
-The **Data Link Properties** dialog has these tabs:
+**数据链接属性** 对话框包含以下选项卡：
 
-| 字段                            | 说明                                                                                                 |
-| ----------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Provider** tab              | The OLE DB providers installed on this machine. Select the provider for the source |
-| **Connection** tab            | The data source, credentials and other settings the selected provider needs                        |
-| **Advanced** and **All** tabs | Further provider-specific connection string properties                                             |
+| 字段                  | 说明                                |
+| ------------------- | --------------------------------- |
+| **提供程序** 选项卡        | 此计算机上安装的 OLE DB 提供程序。选择数据源对应的提供程序 |
+| **连接** 选项卡          | 所选提供程序需要的数据源、凭据和其他设置              |
+| **高级** 和 **全部** 选项卡 | 更多提供程序特定的连接字符串属性                  |
 
-If a saved connection string names a provider that isn't installed, a warning appears. Install the provider or select another one.
+如果已保存的连接字符串指定了未安装的提供程序，则会显示警告。安装该提供程序，或选择其他提供程序。
 
 ## 身份验证
 
-The provider determines how you sign in, so enter its sign-in settings, such as a user name and password or integrated security, on the **Connection** tab.
+提供程序决定你的登录方式，因此请在 **连接** 选项卡中输入其登录设置，例如用户名和密码或集成安全性。
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor 会将连接设置和凭据保存到你的用户选项文件中（请参阅[凭据的存储位置](xref:connectivity#where-credentials-are-stored)）。
