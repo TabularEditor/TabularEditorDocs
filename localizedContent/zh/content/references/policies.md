@@ -1,8 +1,8 @@
 ---
 uid: 策略
 title: 策略
-author: Daniel Otykier
-updated: 2026-09-22
+author: Morten Lønskov
+updated: 2026-10-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -58,12 +58,13 @@ HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor
 
 ## 值类型
 
-| 设置类型     | 注册表类型          | 说明                                                               |
-| -------- | -------------- | ---------------------------------------------------------------- |
-| 开/关策略    | `REG_DWORD`    | 任何非零值都会强制执行该策略。 `0` 以及该值不存在，都表示不强制实施该策略。                         |
-| 选项       | `REG_SZ`       | 选项的名称，例如 `Read`。也接受一个 `REG_DWORD` 值，用于保存该选项在列表中的位置；这也是管理模板写入的形式。 |
-| 列表       | `REG_MULTI_SZ` | 每行一个条目。也接受使用分号分隔各条目的 `REG_SZ`。                                   |
-| 路径、地址或名称 | `REG_SZ`       |                                                                  |
+| 设置类型     | 注册表类型          | 说明                                                                                                                                                                                                           |
+| -------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 开/关策略    | `REG_DWORD`    | 任何非零值都会强制执行该策略。 `0` 以及该值不存在，都表示不强制实施该策略。                                                                                                                                                                     |
+| 选项       | `REG_SZ`       | The name of the choice, for example `Read`, which is what the administrative template writes. A `REG_DWORD` holding the position of the choice in the list is also accepted. |
+| Number   | `REG_DWORD`    | What the administrative template writes. A `REG_SZ` holding the number is also accepted.                                                                                     |
+| 列表       | `REG_MULTI_SZ` | 每行一个条目。也接受使用分号分隔各条目的 `REG_SZ`。                                                                                                                                                                               |
+| 路径、地址或名称 | `REG_SZ`       |                                                                                                                                                                                                              |
 
 Tabular Editor 只会在启动时读取一次策略值。更改会在下次启动应用程序时生效。
 
