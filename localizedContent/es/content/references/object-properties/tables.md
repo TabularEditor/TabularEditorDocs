@@ -1,6 +1,6 @@
 ---
 uid: object-properties-tables
-title: Table properties
+title: Propiedades de la tabla
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Table properties
+# Propiedades de la tabla
 
 <!--
 SUMMARY: Reference for the properties of tables, calculated tables and calculation group tables.
@@ -25,132 +25,132 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of the three kinds of tables in a semantic model: regular tables, calculated tables and calculation group tables. The [Table](#table) section describes the properties all three share. The sections for calculated tables and calculation group tables list what they add and which table properties the **Properties** view hides for them. For properties that most objects share, see @object-properties-common.
+Esta página trata las propiedades de los tres tipos de tablas en un modelo semántico: tablas normales, tablas calculadas y tablas de grupos de cálculo. La sección [Tabla](#table) describe las propiedades que comparten los tres tipos. Las secciones de las tablas calculadas y de las tablas de grupos de cálculo enumeran qué añaden y qué propiedades de tabla oculta para ellas la vista **Propiedades**. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 ## Tabla
 
-A table holds rows of data in columns and contains the measures and hierarchies that belong to it. A regular table gets its data from one or more partitions, each with a query against a data source, for example a Power Query (M) expression or a SQL query. The partition's mode sets how the data is loaded: import, DirectQuery or Direct Lake.
+Una tabla almacena filas de datos en columnas y contiene las medidas y jerarquías que le pertenecen. Una tabla normal obtiene sus datos de una o varias particiones, cada una con una consulta contra un Data source, por ejemplo, una expresión de Power Query (M) o una consulta SQL. El modo de la partición determina cómo se cargan los datos: Import, DirectQuery o Direct Lake.
 
-In Tabular Editor 3, you add tables from a data source with @import-tables and view a table's data with @table-preview.
+En Tabular Editor 3, puedes agregar tablas desde un Data source con @import-tables y ver los datos de una tabla con @table-preview.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Changed Properties](xref:object-properties-common#changed-properties)
-- [DAX identifier](xref:object-properties-common#dax-identifier)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [Lineage Tag](xref:object-properties-common#lineage-tag)
-- [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
-- [Translated Names](xref:object-properties-common#translated-names)
-- [Translated Descriptions](xref:object-properties-common#translated-descriptions)
-- [Synonyms](xref:object-properties-common#synonyms)
-- [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Oculto](xref:object-properties-common#hidden)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Propiedades modificadas](xref:object-properties-common#changed-properties)
+- [Identificador DAX](xref:object-properties-common#dax-identifier)
+- [Mensajes de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Etiqueta de linaje](xref:object-properties-common#lineage-tag)
+- [Etiqueta de linaje de origen](xref:object-properties-common#source-lineage-tag)
+- [Nombres traducidos](xref:object-properties-common#translated-names)
+- [Descripciones traducidas](xref:object-properties-common#translated-descriptions)
+- [Sinónimos](xref:object-properties-common#synonyms)
+- [Mostrado en la perspectiva](xref:object-properties-common#shown-in-perspective)
 
-### Table Group
+### Grupo de tablas
 
-`TableGroup` · string · Basic · _stored as an annotation_ (`TabularEditor_TableGroup`)
+`TableGroup` · string · Básico · _almacenado como una anotación_ (`TabularEditor_TableGroup`)
 
-The table group that contains the table in the **TOM Explorer** of Tabular Editor 3. Table groups work like folders for tables, for example to keep fact tables, dimension tables and calculation groups apart. Leave it empty to show the table at the top level. Table groups can't be nested, and client tools such as Power BI and Excel ignore them.
+El grupo de tablas que contiene la tabla en el **Explorador TOM** de Tabular Editor 3. Los grupos de tablas funcionan como carpetas para las tablas; por ejemplo, para mantener separadas las tablas de hechos, las tablas de dimensiones y los grupos de cálculo. Déjalo vacío para mostrar la tabla en el nivel superior. Los grupos de tablas no se pueden anidar y las herramientas cliente, como Power BI y Excel, los ignoran.
 
-The group is saved with the model in the `TabularEditor_TableGroup` annotation, so other developers see the same groups. The **Properties** view shows `TableGroup` only while table groups are turned on in the **TOM Explorer**. See @table-groups.
+El grupo se guarda con el modelo en la anotación `TabularEditor_TableGroup`, por lo que otros desarrolladores ven los mismos grupos. La vista **Propiedades** muestra `TableGroup` solo cuando los grupos de tablas están activados en el **Explorador TOM**. Consulta @table-groups.
 
-In the **TOM Explorer**, you can also right-click tables and choose **Move to group**, or drag tables onto a table group (see @drag-drop). The @script-create-table-groups script puts all tables in groups based on their type and relationships.
+En el **Explorador TOM**, también puedes hacer clic con el botón derecho en las tablas y elegir **Mover al grupo** o arrastrar tablas a un grupo de tablas (consulta @drag-drop). El script @script-create-table-groups coloca todas las tablas en grupos según su tipo y sus relaciones.
 
-### Enabled
+### Habilitado
 
-`EnableRefreshPolicy` · bool · Incremental Refresh · _shortcut_: adds or removes the table's **Refresh Policy**
+`EnableRefreshPolicy` · bool · Actualización incremental · _atajo_: agrega o quita la **política de actualización** de la tabla
 
-Turns incremental refresh on or off for the table. Setting it to `true` adds a refresh policy to the table and shows the `RefreshPolicy` property. Setting it to `false` removes the refresh policy object and leaves the table's partitions as they are, including any policy range partitions the policy created. To turn the table back into a table with a regular M partition, follow the steps in [Removing Incremental Refresh](xref:incremental-refresh-policy#removing-incremental-refresh-using-tabular-editor).
+Activa o desactiva la actualización incremental de la tabla. Al establecerlo en `true`, se agrega una política de actualización a la tabla y se muestra la propiedad `RefreshPolicy`. Al establecerlo en `false`, se quita el objeto de política de actualización y se dejan las particiones de la tabla tal como están, incluidas las particiones de intervalo creadas por la política. Para volver a dejar la tabla con una partición M normal, sigue los pasos de [Eliminar la actualización incremental](xref:incremental-refresh-policy#removing-incremental-refresh-using-tabular-editor).
 
-Incremental refresh is available for Power BI and Fabric models only. The **Properties** view shows `EnableRefreshPolicy` and `RefreshPolicy` when all of these are true:
+La actualización incremental solo está disponible para modelos de Power BI y Fabric. La vista **Propiedades** muestra `EnableRefreshPolicy` y `RefreshPolicy` cuando se cumplen todas estas condiciones:
 
-- the model's compatibility mode is Power BI
-- the compatibility level is 1450 or higher
-- the table has no partitions yet, or has M or query partitions in import or dual mode
+- el modo de compatibilidad del modelo es Power BI
+- el nivel de compatibilidad es 1450 o superior
+- la tabla aún no tiene particiones, o tiene particiones M o de consulta en modo de importación o dual
 
-For Analysis Services models, you create and manage the partitions yourself. See @incremental-refresh-about and @incremental-refresh-setup. The @script-implement-incremental-refresh script sets up a refresh policy based on a date column you select, including the `RangeStart` and `RangeEnd` parameters.
+En los modelos de Analysis Services, las particiones las creas y administras tú mismo. Consulta @incremental-refresh-about y @incremental-refresh-setup. El script @script-implement-incremental-refresh configura una política de actualización basada en una columna de fecha que selecciones, incluidos los parámetros `RangeStart` y `RangeEnd`.
 
-### Refresh Policy
+### Política de actualización
 
-`RefreshPolicy` · BasicRefreshPolicy · Incremental Refresh · compatibility level 1450+
+`RefreshPolicy` · BasicRefreshPolicy · actualización incremental · nivel de compatibilidad 1450+
 
-The incremental refresh policy of the table. Expand it in the **Properties** view to set how much history to keep, how much to refresh, the source expression and the other policy settings. The settings are described under refresh policy on @object-properties-partitions. See also @incremental-refresh-policy.
+La política de actualización incremental de la tabla. Expándela en la vista **Propiedades** para definir cuánto historial conservar, cuánto actualizar, la expresión de origen y el resto de la configuración de la política. La configuración se describe en la sección de política de actualización de @object-properties-partitions. Consulta también @incremental-refresh-policy.
 
-The engine creates the policy range partitions the first time the policy is applied, for example when you refresh the table in the Power BI service. To apply the policy from Tabular Editor 3, right-click the table in the **TOM Explorer** and choose **Apply refresh policy**. In Tabular Editor 2, the menu option is **Apply Refresh Policy**. Both versions apply the policy only when they're connected to the model and you've saved all changes first.
+El motor crea las particiones de rango de la política la primera vez que se aplica la política, por ejemplo, al actualizar la tabla en el servicio de Power BI. Para aplicar la política desde Tabular Editor 3, haz clic con el botón derecho en la tabla en el **Explorador TOM** y elige **Aplicar política de actualización**. En Tabular Editor 2, la opción del menú es **Aplicar política de actualización**. Ambas versiones aplican la política solo cuando están conectadas al modelo y ya has guardado todos los cambios.
 
-To change an existing policy, see @incremental-refresh-modify. In Tabular Editor 3, you can apply the refresh policy with an effective date other than today in the @advanced-refresh dialog, to test how the policy behaves at a different point in time.
+Para cambiar una política existente, consulta @incremental-refresh-modify. En Tabular Editor 3, puedes aplicar la política de actualización con una fecha efectiva distinta de la de hoy en el cuadro de diálogo @advanced-refresh, para probar cómo se comporta la política en otro momento.
 
-### Source
+### Fuente
 
-`Source` · string · Metadata · read-only · _computed_
+`Source` · cadena · Metadatos · solo lectura · _calculado_
 
-The name of the legacy (provider) data source that the table's first partition queries. If the partitions use different data sources, you see only the one of the first partition.
+El nombre del Data source heredado (del proveedor) que consulta la primera partición de la tabla. Si las particiones usan distintos Data sources, solo verás el de la primera partición.
 
-The **Properties** view shows `Source` only when the first partition is a query partition or an M partition. For an M partition the value is empty, because the connection is part of the M expression. `Source` isn't shown for calculated tables, calculation group tables, Direct Lake tables or tables with policy range partitions.
+La vista **Propiedades** muestra `Source` solo cuando la primera partición es una partición de consulta o una partición M. En una partición M, el valor está vacío porque la conexión forma parte de la expresión M. No se muestra `Source` para tablas calculadas, tablas de grupo de cálculo, tablas Direct Lake ni tablas con particiones de intervalo de directiva.
 
-To list the tables that use an explicit (legacy) data source, run the @script-show-data-source-dependencies script.
+Para enumerar las tablas que usan un Data source explícito (heredado), ejecuta el script @script-show-data-source-dependencies.
 
-### Source Type
+### Tipo de origen
 
-`SourceType` · PartitionSourceType · Metadata · read-only · _shortcut to_ **Source Type** of the first partition
+`SourceType` · PartitionSourceType · Metadatos · solo lectura · _acceso directo al_ **Tipo de origen** de la primera partición
 
-The kind of source the table's first partition uses. For a table with partitions of different kinds, you see the kind of the first one. A table without partitions shows `None`.
+El tipo de origen que usa la primera partición de la tabla. En una tabla con particiones de distintos tipos, se muestra el tipo de la primera. Una tabla sin particiones muestra `None`.
 
-The **Properties** view hides `SourceType` on calculated tables and calculation group tables. In a C# script, those return `Calculated` and `CalculationGroup`.
+La vista **Propiedades** oculta `SourceType` en las tablas calculadas y en las tablas de grupo de cálculo. En un C# Script, esos casos devuelven `Calculated` y `CalculationGroup`.
 
-| Valor              | Significado                                                                                                                                                                             |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Query`            | The partitions run a query, for example SQL, against a legacy (provider) data source.                                                                |
-| `Calculated`       | The table is a calculated table and gets its data from a DAX expression.                                                                                                |
-| `None`             | No source is defined. The data is pushed into the table, for example in a push semantic model in Power BI.                                              |
-| `M`                | The partitions use a Power Query (M) expression. Most common in Power BI models. Compatibility level 1400+.          |
-| `Entity`           | The partitions read a named entity, such as a table in a lakehouse or warehouse. Used by Direct Lake tables. Compatibility level 1400+. |
-| `PolicyRange`      | An incremental refresh policy created the partitions. Compatibility level 1450+.                                                                        |
-| `CalculationGroup` | The table is a calculation group table. Compatibility level 1470+.                                                                                      |
-| `Inferred`         | The engine generates the query that fills the partition. Compatibility level 1563+.                                                                     |
+| Valor              | Significado                                                                                                                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Query`            | Las particiones ejecutan una consulta, por ejemplo SQL, contra un Data source heredado (del proveedor).                                                                 |
+| `Calculated`       | La tabla es una tabla calculada y obtiene sus datos de una expresión DAX.                                                                                                                  |
+| `None`             | No hay ningún origen definido. Los datos se envían a la tabla, por ejemplo en un modelo semántico push de Power BI.                                                        |
+| `M`                | Las particiones usan una expresión de Power Query (M). Es lo más habitual en los modelos de Power BI. Nivel de compatibilidad 1400+.    |
+| `Entity`           | Las particiones leen una entidad con nombre, como una tabla en un Lakehouse o un Warehouse. Lo usan las tablas Direct Lake. Nivel de compatibilidad 1400+. |
+| `PolicyRange`      | Una política de actualización incremental creó las particiones. Nivel de compatibilidad 1450+.                                                                             |
+| `CalculationGroup` | La tabla es una tabla de grupo de cálculo. Nivel de compatibilidad 1470+.                                                                                                  |
+| `Inferred`         | El motor genera la consulta que rellena la partición. Nivel de compatibilidad 1563+.                                                                                       |
 
 <!-- TODO (not verifiable from TE3 source): which kind of partition uses Inferred. TOM only says "The data in this partition is populated by executing a query generated by the system." -->
 
-### Alternate Source Precedence
+### Precedencia de origen alternativo
 
-`AlternateSourcePrecedence` · int · Options · compatibility level 1460+
+`AlternateSourcePrecedence` · int · Opciones · nivel de compatibilidad 1460+
 
-The order in which the engine considers this table when it looks for an aggregation table that can answer a query. It applies only to aggregation tables, that is, tables with columns whose `AlternateOf` points to a column in a detail table. When more than one aggregation table can answer a query, the engine uses the one with the highest value. The default is `0`.
+El orden en que el motor tiene en cuenta esta tabla cuando busca una tabla de agregación que pueda responder a una consulta. Se aplica solo a las tablas de agregación; es decir, a tablas con columnas cuyo `AlternateOf` apunta a una columna de una tabla de detalle. Cuando más de una tabla de agregación puede responder a una consulta, el motor usa la que tiene el valor más alto. El valor predeterminado es `0`.
 
-In Power BI Desktop, this is the **Precedence** setting in **Manage aggregations**. To set up an aggregation table in Tabular Editor, see @user-defined-aggregations. The @script-implement-user-defined-aggregations script automates those steps for a fact table you select.
+En Power BI Desktop, esta es la configuración **Precedencia** de **Administrar agregaciones**. Para configurar una tabla de agregación en Tabular Editor, consulta @user-defined-aggregations. El script @script-implement-user-defined-aggregations automatiza esos pasos para una tabla de hechos que selecciones.
 
 ### Calendarios
 
-`Calendars` · collection of Calendar · Options · compatibility level 1701+
+`Calendars` · colección de objetos Calendar · Opciones · nivel de compatibilidad 1701+
 
-The custom calendars defined on the table. A calendar maps the columns of a date table that hold the year, quarter, month, week and date, and calendar-based time intelligence functions use it to work with fiscal, retail or other non-standard calendars. Custom calendars need compatibility level 1701 or higher. See @object-properties-calendars.
+Los calendarios personalizados definidos en la tabla. Un calendario asigna las columnas de una tabla de fechas que contienen el año, el trimestre, el mes, la semana y la fecha; y las funciones de inteligencia temporal basadas en calendarios lo usan para trabajar con calendarios fiscales, de retail u otros calendarios no estándar. Los calendarios personalizados requieren el nivel de compatibilidad 1701 o superior. Consulta @object-properties-calendars.
 
-In Tabular Editor 3, right-click a table and choose **Create > Calendar...** to add a calendar, then map its columns in the **Calendar Editor**. See @calendars.
+En Tabular Editor 3, haz clic con el botón derecho en una tabla y elige **Crear > Calendario...** para agregar un calendario; después, asigna sus columnas en el **Editor de calendarios**. Consulta @calendars.
 
-### Data Category
+### Categoría de datos
 
-`DataCategory` · string · Options
+`DataCategory` · string · Opciones
 
-The kind of data the table holds, for client tools. In Power BI, the value `Time` marks the table as a date table: Power BI uses the table's date column (the column with `IsKey` set to `true`) for time intelligence and turns off the auto date/time table for it. **Mark as date table** in Power BI Desktop sets this value.
+El tipo de datos que contiene la tabla, para las herramientas cliente. En Power BI, el valor `Time` marca la tabla como una tabla de fechas: Power BI usa la columna de fecha de la tabla (la columna con `IsKey` establecido en `true`) para la inteligencia temporal y desactiva la tabla automática de fecha y hora para esa tabla. **Marcar como tabla de fechas** en Power BI Desktop establece este valor.
 
-Leave it empty or set it to `Regular` for all other tables. The other values come from multidimensional models, and only some Excel features and older client tools use them: `Geography`, `Organization`, `BillOfMaterials`, `Accounts`, `Customers`, `Products`, `Scenario`, `Quantitative`, `Utility`, `Currency`, `Rates`, `Channel` and `Promotion`. The dropdown in the **Properties** view lists these values and `Unknown`, and you can also type a value.
+Déjalo vacío o configúralo como `Regular` para todas las demás tablas. Los demás valores proceden de modelos multidimensionales, y solo los usan algunas características de Excel y herramientas cliente antiguas: `Geography`, `Organization`, `BillOfMaterials`, `Accounts`, `Customers`, `Products`, `Scenario`, `Quantitative`, `Utility`, `Currency`, `Rates`, `Channel` y `Promotion`. La lista desplegable de la vista **Propiedades** muestra estos valores y `Unknown`, y también puedes escribir un valor.
 
 <!-- TODO (not verifiable from TE3 source): whether an empty value and "Regular" behave the same in the engine and client tools, and which client tools use the values other than Time. -->
 
-In Tabular Editor, you can also right-click the table in the @tom-explorer-view and choose **Mark as date table...**. The Best Practice Analyzer (BPA) rule @kb.bpa-date-table-exists flags models that have no date table. The @script-create-date-table script creates a date table from the date columns in your model and sets `DataCategory` to `Time`.
+En Tabular Editor, también puedes hacer clic con el botón derecho en la tabla en la vista @tom-explorer-view y elegir **Marcar como tabla de fechas...**. La regla @kb.bpa-date-table-exists del Best Practice Analyzer (BPA) señala los modelos que no tienen tabla de fechas. El script @script-create-date-table crea una tabla de fechas a partir de las columnas de fecha de tu modelo y establece `DataCategory` en `Time`.
 
 ### Expresión de filas de detalle predeterminada
 
-`DefaultDetailRowsExpression` · string · Options · compatibility level 1400+
+`DefaultDetailRowsExpression` · string · Opciones · nivel de compatibilidad 1400+
 
-A DAX table expression that returns the rows a user sees when they drill through on a measure in this table, for example with **Show Details** in an Excel PivotTable. It applies to every measure in the table that has no `DetailRowsExpression` of its own (see @object-properties-measures). Power BI doesn't use this property.
+Una expresión de tabla DAX que devuelve las filas que ve el usuario cuando realiza un drillthrough en una medida de esta tabla, por ejemplo con **Mostrar detalles** en una tabla dinámica de Excel. Se aplica a todas las medidas de la tabla que no tengan su propia `DetailRowsExpression` (consulta @object-properties-measures). Power BI no usa esta propiedad.
 
-This expression shows the order number, customer and amount for each sales row:
+Esta expresión muestra el número de pedido, el cliente y el importe de cada fila de ventas:
 
 ```dax
 SELECTCOLUMNS (
@@ -161,137 +161,137 @@ SELECTCOLUMNS (
 )
 ```
 
-See @detail-rows-expression. In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info. To remove the expression, clear the value.
+Consulta @detail-rows-expression. En Tabular Editor 3, escribe la expresión en el **Editor de expresiones** de @dax-editor, con autocompletado e información de parámetros. Para quitar la expresión, borra el valor.
 
-### Direct Lake Indexing Behavior
+### Comportamiento de indexación de Direct Lake
 
-`DirectLakeIndexingBehavior` · DirectLakeIndexingBehavior · Options · Preview compatibility level
+`DirectLakeIndexingBehavior` · DirectLakeIndexingBehavior · Opciones · nivel de compatibilidad de vista previa
 
-When the engine builds and saves the indexes it uses for a Direct Lake table. Building indexes during a refresh makes the first queries after the refresh faster, and building them on demand makes refreshes faster. It applies only to tables in Direct Lake mode.
+Indica cuándo el motor genera y guarda los índices que usa para una tabla Direct Lake. Generar índices durante una actualización acelera las primeras consultas posteriores a la actualización, y generarlos bajo demanda acelera las actualizaciones. Se aplica solo a las tablas en modo Direct Lake.
 
-The Tabular Object Model (TOM) doesn't assign this property a released compatibility level yet, so the **Properties** view in the current version of Tabular Editor 3 hides it for every model.
+El Tabular Object Model (TOM) todavía no ha asignado a esta propiedad un nivel de compatibilidad publicado; por eso, la vista **Properties** de la versión actual de Tabular Editor 3 la oculta en todos los modelos.
 
-| Valor      | Significado                                                                                                                            |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default`  | Uses the model's default, set with **Default Direct Lake Indexing Behavior** on @object-properties-model. |
-| `Auto`     | Build in-memory indexes during data load or query execution when needed, as the TOM library describes it.              |
-| `Full`     | The engine builds and saves the indexes as part of a full refresh, a calculate refresh and a refresh of type indexes.  |
-| `Explicit` | The engine builds and saves the indexes only when you run a refresh of type indexes.                                   |
+| Valor            | Significado                                                                                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Predeterminado` | Usa el valor predeterminado del modelo, configurado mediante **Default Direct Lake Indexing Behavior** en @object-properties-model. |
+| `Automático`     | Crea índices en memoria durante la carga de datos o la ejecución de consultas cuando es necesario, tal como lo describe la biblioteca TOM.       |
+| `Completo`       | El motor crea y guarda los índices como parte de una actualización completa, una actualización Calculate y una actualización de tipo indexes.    |
+| `Explícito`      | El motor crea y guarda los índices solo cuando ejecutas una actualización de tipo indexes.                                                       |
 
 <!-- TODO (not verifiable from TE3 source): the behavior of each value and which indexes this covers; check the Microsoft documentation once the feature is out of preview. -->
 
-### Exclude From Automatic Aggregations
+### Excluir de las agregaciones automáticas
 
-`ExcludeFromAutomaticAggregations` · bool · Options · compatibility level 1572+
+`ExcludeFromAutomaticAggregations` · bool · Opciones · nivel de compatibilidad 1572+
 
-When `true`, Power BI leaves the table out when it builds automatic aggregations. Automatic aggregations are a Power BI Premium and Fabric feature for DirectQuery models, where the service creates aggregation tables based on the queries it receives. Set it on a table whose data changes too often for a cached aggregation to be useful.
+Cuando es `true`, Power BI excluye la tabla al crear agregaciones automáticas. Las agregaciones automáticas son una característica de Power BI Premium y Fabric para modelos DirectQuery en la que el servicio crea tablas de agregación a partir de las consultas que recibe. Úsala en una tabla cuyos datos cambian con demasiada frecuencia para que una agregación en caché resulte útil.
 
 <!-- TODO (not verifiable from TE3 source): the exact effect. TOM only says "An indication whether the table is excluded from the automatic aggregations feature." Is the table excluded as a source for aggregations, or are queries against it never answered from aggregations? -->
 
-### Exclude From Model Refresh
+### Excluir de la actualización del modelo
 
-`ExcludeFromModelRefresh` · bool · Options · compatibility level 1480+
+`ExcludeFromModelRefresh` · bool · Opciones · nivel de compatibilidad 1480+
 
-When `true`, a refresh of the whole model skips this table's partitions if they already hold data. Partitions without data are still refreshed, so a new or cleared table gets loaded. You can still refresh the table by selecting it explicitly. Use it for tables that rarely change or are expensive to load, such as a large historical table or a table that a separate process fills.
+Cuando es `true`, una actualización del modelo completo omite las particiones de esta tabla si ya contienen datos. Las particiones sin datos se siguen actualizando, por lo que se cargará una tabla nueva o vaciada. Puedes seguir actualizando la tabla si la seleccionas explícitamente. Úsalo en tablas que cambian rara vez o que son costosas de cargar, como una tabla histórica grande o una tabla que un proceso independiente rellena.
 
-On SQL Server 2025 Analysis Services, the model-level refresh types **Full**, **Automatic**, **Data only** and **Calculate** all skip the table when its partitions hold data. **Clear values** does clear the table's data, and the next model refresh then loads the table again.
+En Analysis Services de SQL Server 2025, los tipos de actualización a nivel de modelo **Full**, **Automatic**, **Data only** y **Calculate** omiten la tabla cuando sus particiones contienen datos. **Clear values** sí borra los datos de la tabla, y la siguiente actualización del modelo vuelve a cargarla.
 
-In Tabular Editor 3, you refresh a single table by right-clicking it in the **TOM Explorer** and choosing **Refresh table**. See @refresh-preview-query.
+En Tabular Editor 3, puedes actualizar una sola tabla haciendo clic con el botón derecho sobre ella en el **Explorador TOM** y seleccionando **Refresh table**. Consulta @refresh-preview-query.
 
 ### Particiones
 
-`Partitions` · collection of Partition · Options · read-only
+`Partitions` · colección de particiones · Opciones · solo lectura
 
-The partitions of the table. Each partition defines where a part of the table's data comes from, for example an M expression, and you can refresh each one separately. Most tables have a single partition. Large import tables often have one partition per period, created by you or by an incremental refresh policy.
+Las particiones de la tabla. Cada partición define de dónde procede una parte de los datos de la tabla, por ejemplo, una expresión M, y puedes actualizar cada una por separado. La mayoría de las tablas tienen una sola partición. Las tablas de importación grandes suelen tener una partición por período, creada por ti o por una política de actualización incremental.
 
-Click the ellipsis button to open the collection editor, where you add, remove and edit partitions. See @object-properties-partitions.
+Haz clic en el botón de puntos suspensivos para abrir el editor de colecciones, donde puedes agregar, quitar y editar particiones. Consulta @object-properties-partitions sobre particiones.
 
-The **Properties** view shows `Partitions` only when the table's first partition is an M partition or a query partition. It's hidden for calculated tables (including field parameters), calculation group tables, Direct Lake tables and tables with policy range partitions. To view and edit the partitions of calculated tables and calculation group tables, run the @script-edit-hidden-partitions script.
+La vista **Propiedades** muestra `Partitions` solo cuando la primera partición de la tabla es una partición M o una partición de consulta. Se oculta para tablas calculadas (incluidos los parámetros de campo), tablas de grupos de cálculo, tablas Direct Lake y tablas con particiones de rango de la directiva. Para ver y editar las particiones de las tablas calculadas y de las tablas de grupos de cálculo, ejecuta el script @script-edit-hidden-partitions.
 
-### Private
+### Privado
 
-`IsPrivate` · bool · Options
+`IsPrivate` · bool · Opciones
 
-When `true`, client tools don't show the table, even to developers who turn on hidden objects. Power BI Desktop sets it on the date table template of the auto date/time feature (the table named `DateTableTemplate_` followed by a GUID). It's always available in Power BI models and needs compatibility level 1400 or higher in Analysis Services models.
+Cuando es `true`, las herramientas cliente no muestran la tabla, ni siquiera a los desarrolladores que activan los objetos ocultos. Power BI Desktop la establece en la plantilla de tabla de fechas de la característica de fecha/hora automática (la tabla llamada `DateTableTemplate_` seguida de un GUID). Siempre está disponible en los modelos de Power BI y requiere el nivel de compatibilidad 1400 o superior en los modelos de Analysis Services.
 
-In Power BI Desktop, a private table doesn't appear in the **Data** pane at all, while a hidden table can still be shown there. SQL Server 2025 Analysis Services stores the flag and doesn't act on it. In both, the table is still listed in the schema information the engine returns, you can query it with DAX and measures in other tables can use it.
+En Power BI Desktop, una tabla privada no aparece en absoluto en el panel **Datos**, mientras que una tabla oculta sí puede mostrarse allí. SQL Server 2025 Analysis Services almacena el indicador y no actúa en consecuencia. En ambos casos, la tabla sigue apareciendo en la información de esquema que devuelve el motor, puedes consultarla con DAX y las medidas de otras tablas pueden usarla.
 
 > [!NOTE]
-> `IsPrivate` and `IsHidden` aren't security features. To secure a table, use object-level security (see [Object Level Security](#object-level-security)).
+> `IsPrivate` e `IsHidden` no son características de seguridad. Para proteger una tabla, usa la seguridad a nivel de objetos (consulta [Seguridad a nivel de objetos](#object-level-security)).
 
-The BPA rule @kb.bpa-remove-auto-date-table flags the `DateTableTemplate_` and `LocalDateTable_` tables that auto date/time creates, so you can replace them with a single date table.
+La regla de BPA @kb.bpa-remove-auto-date-table marca las tablas `DateTableTemplate_` y `LocalDateTable_` que crea la característica de fecha/hora automática, para que puedas reemplazarlas por una única tabla de fechas.
 
-### Sets
+### Conjuntos
 
-`Sets` · collection of Set · Options · read-only · compatibility level 1400+
+`Sets` · colección de Set · Opciones · solo lectura · nivel de compatibilidad 1400+
 
-The calculated sets defined on the table. A set is a named DAX expression that returns a set of members, which client tools can show as a predefined selection. Sets are supported in Power BI models only: the **Properties** view shows `Sets` when the model's compatibility mode is Power BI and the compatibility level is 1400 or higher. Sets don't appear as objects in the **TOM Explorer**, so you add and edit them in the collection editor of this property. See @object-properties-functions.
+Los conjuntos calculados definidos en la tabla. Un conjunto es una expresión DAX con nombre que devuelve un conjunto de miembros, y las herramientas cliente pueden mostrarlo como una selección predefinida. Los conjuntos solo se admiten en modelos de Power BI: la vista **Propiedades** muestra `Sets` cuando el modo de compatibilidad del modelo es Power BI y el nivel de compatibilidad es 1400 o superior. Los conjuntos no aparecen como objetos en el **Explorador TOM**, por lo que se agregan y editan en el editor de colecciones de esta propiedad. Consulta @object-properties-functions.
 
 <!-- TODO (not verifiable from TE3 source): what calculated sets are used for, and which client tools support them. -->
 
-### Show As Variations Only
+### Mostrar solo como variaciones
 
-`ShowAsVariationsOnly` · bool · Options
+`ShowAsVariationsOnly` · bool · Opciones
 
-When `true`, client tools show the table in the field list only through a column variation that points to it. Power BI Desktop sets it on the date tables that auto date/time creates (the tables named `LocalDateTable_` followed by a GUID), which appear as the date hierarchy under a date column. See `Variations` on @object-properties-columns.
+Cuando es `true`, las herramientas cliente muestran la tabla en la lista de campos solo a través de una variación de columna que apunta a ella. Power BI Desktop lo establece en las tablas de fechas que crea la característica de fecha/hora automática (las tablas llamadas `LocalDateTable_` seguido de un GUID), que aparecen como la jerarquía de fechas bajo una columna de fecha. Consulta `Variations` en @object-properties-columns.
 
-It's always available in Power BI models and needs compatibility level 1400 or higher in Analysis Services models. SQL Server 2025 Analysis Services stores the flag and doesn't act on it: the table is still listed in the schema information that client tools read, you can query it with DAX and measures in other tables can use it.
+Siempre está disponible en los modelos de Power BI y requiere un nivel de compatibilidad 1400 o superior en los modelos de Analysis Services. SQL Server 2025 Analysis Services almacena la marca, pero no la aplica: la tabla sigue apareciendo en la información del esquema que leen las herramientas cliente, puedes consultarla con DAX y las medidas de otras tablas pueden usarla.
 
-### System Managed
+### Administrado por el sistema
 
-`SystemManaged` · bool · Options · compatibility level 1562+
+`SystemManaged` · bool · Opciones · nivel de compatibilidad 1562+
 
-When `true`, the engine or the service creates and deletes the table. Don't set this property on your own tables, and don't edit a system-managed table: Tabular Editor doesn't block those edits.
+Cuando es `true`, el motor o el servicio crea y elimina la tabla. No establezcas esta propiedad en tus propias tablas ni edites una tabla administrada por el sistema: Tabular Editor no bloquea esas ediciones.
 
-The auto date/time tables that Power BI Desktop creates aren't system-managed. Desktop sets `IsHidden` and `IsPrivate` on the template table, and `IsHidden` and `ShowAsVariationsOnly` on each local date table.
+Las tablas de fecha/hora automáticas que crea Power BI Desktop no están administradas por el sistema. Desktop establece `IsHidden` e `IsPrivate` en la tabla de plantilla, y `IsHidden` y `ShowAsVariationsOnly` en cada tabla de fecha local.
 
 <!-- TODO (not verifiable from TE3 source): which features create system-managed tables, for example automatic aggregations. -->
 
-### Object Level Security
+### Seguridad a nivel de objeto
 
-`ObjectLevelSecurity` · per role · Translations, Perspectives, Security · compatibility level 1400+ · _shortcut to_ the table permissions of each role
+`ObjectLevelSecurity` · por rol · traducciones, perspectivas, seguridad · nivel de compatibilidad 1400+ · _acceso directo a_ los permisos de tabla de cada rol
 
-The object-level security (OLS) permission of the table in each role of the model. Expand the property to see one entry per role. The **Properties** view shows the property only when the model has at least one role. Tabular Editor stores the permission in the table permission of each role.
+El permiso de seguridad a nivel de objetos (OLS) de la tabla en cada rol del modelo. Expande la propiedad para ver una entrada por rol. La vista **Propiedades** muestra la propiedad solo cuando el modelo tiene al menos un rol. Tabular Editor almacena este permiso en el permiso de tabla de cada rol.
 
-| Valor     | Significado                                                                                                                                                                             |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default` | No permission is set for this role. Members of the role can see the table.                                                                              |
-| `Read`    | Members of the role can see and query the table.                                                                                                                        |
-| `None`    | The table and everything that depends on it are hidden from members of the role. Queries and measures that refer to the table return an error for them. |
+| Valor            | Significado                                                                                                                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Predeterminado` | No hay ningún permiso establecido para este rol. Los miembros del rol pueden ver la tabla.                                                                                  |
+| `Lectura`        | Los miembros del rol pueden ver y consultar la tabla.                                                                                                                                       |
+| `Ninguno`        | La tabla y todo lo que depende de ella quedan ocultos para los miembros del rol. Las consultas y las medidas que hacen referencia a la tabla devuelven un error para ellos. |
 
-With `None`, the table and its metadata don't exist for members of the role, so every measure that refers to the table fails for them. See @data-security-setup-ols and @object-properties-security. To check that OLS and row-level security work as intended, test them with impersonation in Tabular Editor 3. See @data-security-testing.
+Con `Ninguno`, la tabla y sus metadatos no existen para los miembros del rol, por lo que cualquier medida que haga referencia a la tabla produce un error para ellos. Consulta @data-security-setup-ols y @object-properties-security. Para comprobar que OLS y la seguridad a nivel de filas funcionan según lo previsto, pruébalas mediante suplantación en Tabular Editor 3. Consulta @data-security-testing.
 
-### Row Level Security
+### Seguridad a nivel de filas
 
-`RowLevelSecurity` · per role · Translations, Perspectives, Security · read-only · _shortcut to_ the table permissions of each role
+`RowLevelSecurity` · por rol · Traducciones, Perspectivas, Seguridad · de solo lectura · _acceso directo a_ los permisos de tabla de cada rol
 
-The row-level security (RLS) filter of the table in each role of the model. Expand the property to see one entry per role. Each entry is a DAX expression that returns `TRUE` for the rows that members of the role can see, for example:
+El filtro de seguridad a nivel de filas (RLS) de la tabla en cada rol del modelo. Expande la propiedad para ver una entrada por rol. Cada entrada es una expresión DAX que devuelve `TRUE` para las filas que pueden ver los miembros del rol, por ejemplo:
 
 ```dax
 Customer[Country] = "Denmark"
 ```
 
-The property itself is read-only, and you edit each role's entry, which accepts multi-line expressions. The **Properties** view shows the property only when the model has at least one role. Tabular Editor stores the filter in the table permission of each role.
+La propiedad en sí es de solo lectura y editas la entrada de cada rol, que admite expresiones de varias líneas. La vista **Propiedades** muestra la propiedad solo cuando el modelo tiene al menos un rol. Tabular Editor almacena el filtro en el permiso de tabla de cada rol.
 
-An empty entry doesn't filter the table for that role. Filters flow along relationships, so a filter on a dimension table also filters the fact tables related to it. See @roles-and-rls, @data-security-setup-rls and @object-properties-security.
+Una entrada vacía no aplica ningún filtro a la tabla para ese rol. Los filtros se propagan a través de las relaciones, de modo que un filtro en una tabla de dimensiones también filtra las tablas de hechos relacionadas con ella. Consulta @roles-and-rls, @data-security-setup-rls y @object-properties-security para obtener más información sobre el rol.
 
-## Calculated table
+## Tabla calculada
 
-A calculated table gets its data from a DAX expression, for example a date table built with [CALENDAR](https://dax.guide/calendar) or a table that summarizes another table. The engine evaluates the expression when you refresh the table or the model and stores the result like any other imported table.
+Una tabla calculada obtiene sus datos de una expresión DAX; por ejemplo, una tabla de fechas creada con [CALENDAR](https://dax.guide/calendar) o una tabla que resume otra tabla. El motor evalúa la expresión al actualizar la tabla o el modelo y almacena el resultado como cualquier otra tabla importada.
 
-A calculated table has all the properties of a [table](#table), plus `Expression`. It has exactly one partition, which Tabular Editor manages, and it can't have an incremental refresh policy. The **Properties** view hides `Partitions`, `Source`, `SourceType`, `EnableRefreshPolicy` and `RefreshPolicy` on calculated tables and shows `AlternateSourcePrecedence`.
+Una tabla calculada tiene todas las propiedades de una [tabla](#table), además de `Expression`. Tiene exactamente una partición, que administra Tabular Editor, y no puede tener una política de actualización incremental. La vista **Propiedades** oculta `Partitions`, `Source`, `SourceType`, `EnableRefreshPolicy` y `RefreshPolicy` en las tablas calculadas y muestra `AlternateSourcePrecedence`.
 
-Field parameters in Power BI are calculated tables. The @create-field-parameter script creates one from the columns or measures you select.
+Los parámetros de campo de Power BI son tablas calculadas. El script @create-field-parameter crea uno a partir de las columnas o medidas que selecciones.
 
-### Common properties
+### Propiedades comunes
 
-The same as on [tables](#table).
+Lo mismo que en las [tablas](#table).
 
 ### Expresión
 
-`Expression` · string · Options · _shortcut to_ the expression of the table's calculated partition
+`Expression` · string · Opciones · _acceso directo a_ la expresión de la partición calculada de la tabla
 
-The DAX expression that returns the table's rows. It must return a table, for example:
+La expresión DAX que devuelve las filas de la tabla. Debe devolver una tabla, por ejemplo:
 
 ```dax
 ADDCOLUMNS (
@@ -301,100 +301,100 @@ ADDCOLUMNS (
 )
 ```
 
-Each column the expression returns becomes a calculated table column (see @object-properties-columns). Adding, removing or renaming columns this way affects other DAX expressions that refer to the table and hierarchies that use its columns.
+Cada columna que devuelve la expresión se convierte en una columna de una tabla calculada (consulta @object-properties-columns). Agregar, quitar o cambiar el nombre de las columnas de esta manera afecta a otras expresiones DAX que hacen referencia a la tabla y a las jerarquías que usan sus columnas.
 
-In Tabular Editor 3, the columns change as soon as you change the expression. Tabular Editor 3 works them out with its own DAX semantic analysis, which also works when you edit a model file without a connection to Analysis Services or Power BI (see @creating-and-testing-dax). Tabular Editor 2 updates the columns only when you save the model to a database you're connected to, by reloading the table's columns from the server after the save. When you edit a model file in Tabular Editor 2, the columns don't change with the expression.
+En Tabular Editor 3, las columnas cambian en cuanto cambias la expresión. Tabular Editor 3 las determina mediante su propio análisis semántico de DAX, que también funciona al editar un archivo de modelo sin conexión a Analysis Services o Power BI (consulta @creating-and-testing-dax). Tabular Editor 2 actualiza las columnas solo cuando guardas el modelo en una base de datos a la que estás conectado, recargando las columnas de la tabla desde el servidor después de guardar. Al editar un archivo de modelo en Tabular Editor 2, las columnas no cambian con la expresión.
 
-Edit the expression in the **Expression Editor**. In Tabular Editor 3, the **Expression Editor** of the @dax-editor has auto-complete and parameter info. The engine recalculates the table's data when the table is refreshed and when a table it depends on is refreshed. After you change the expression, refresh the table before you use it in a report. See [Refreshing data](xref:refresh-preview-query#refreshing-data).
+Edita la expresión en el **Editor de expresiones**. En Tabular Editor 3, el **Editor de expresiones** de @dax-editor incluye autocompletado e información de parámetros. El motor vuelve a calcular los datos de la tabla cuando se actualiza la tabla y cuando se actualiza cualquier tabla de la que dependa. Después de cambiar la expresión, actualiza la tabla antes de usarla en un Report. Consulta [Actualización de datos](xref:refresh-preview-query#refreshing-data).
 
-## Calculation group table
+## Tabla de grupo de cálculo
 
-A calculation group table holds a calculation group. It has one column with the names of the calculation items, and usually an ordinal column that sets the order of the items. Report authors use the column like any other column, for example in a slicer, and the selected calculation item changes how the measures in the report are calculated. See @object-properties-calculation-groups for the properties of the calculation group and its items.
+Una tabla de grupo de cálculo contiene un grupo de cálculo. Tiene una columna con los nombres de los elementos de cálculo y, normalmente, una columna ordinal que establece el orden de los elementos. Los autores usan la columna como cualquier otra, por ejemplo, en una segmentación de datos, y el elemento de cálculo seleccionado cambia la forma en que se calculan las medidas del Report. Consulta @object-properties-calculation-groups para ver las propiedades del grupo de cálculo y sus elementos de cálculo.
 
-Microsoft documents calculation groups for compatibility level 1500 or higher, which includes all Power BI semantic models. Tabular Editor 3 shows **Create > Calculation Group** from compatibility level 1470, the level at which TOM added calculation groups.
+Microsoft documenta los grupos de cálculo para el nivel de compatibilidad 1500 o superior, lo que incluye todos los modelos semánticos de Power BI. Tabular Editor 3 muestra **Crear > Grupo de cálculo** a partir del nivel de compatibilidad 1470, el nivel en el que TOM agregó los grupos de cálculo.
 
-A calculation group table has the properties below in addition to the common properties. Most of them are shortcuts to properties of the calculation group in the table, which you can't select in the **TOM Explorer**. Of the other table properties, the **Properties** view shows only `TableGroup` and `DefaultDetailRowsExpression`. Calculation groups don't support detail rows expressions, row-level security or object-level security, so leave `DefaultDetailRowsExpression` empty.
+Una tabla de grupo de cálculo tiene las siguientes propiedades, además de las propiedades comunes. La mayoría son accesos directos a las propiedades del grupo de cálculo de la tabla, que no puedes seleccionar en el **Explorador TOM**. De las demás propiedades de tabla, la vista **Propiedades** solo muestra `TableGroup` y `DefaultDetailRowsExpression`. Los grupos de cálculo no admiten expresiones de filas de detalle, seguridad a nivel de filas ni seguridad a nivel de objetos, así que deja `DefaultDetailRowsExpression` vacío.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
-- [Translated Names](xref:object-properties-common#translated-names)
-- [Translated Descriptions](xref:object-properties-common#translated-descriptions)
-- [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Oculto](xref:object-properties-common#hidden)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Nombres traducidos](xref:object-properties-common#translated-names)
+- [Descripciones traducidas](xref:object-properties-common#translated-descriptions)
+- [Mostrado en perspectiva](xref:object-properties-common#shown-in-perspective)
 
-### Table Group
+### Grupo de tablas
 
-`TableGroup` · string · Basic · _stored as an annotation_ (`TabularEditor_TableGroup`)
+`TableGroup` · cadena · Básico · _almacenado como anotación_ (`TabularEditor_TableGroup`)
 
-The same as [Table Group](#table-group) on a table.
+Igual que [Grupo de tablas](#table-group) en una tabla.
 
-### Calculation Group Description
+### Descripción del grupo de cálculo
 
-`CalculationGroupDescription` · string · Basic · _shortcut to_ **Description** of the calculation group
+`CalculationGroupDescription` · cadena · Básico · _acceso directo a_ la **Descripción** del grupo de cálculo
 
-The description stored on the calculation group, separate from the table's own `Description`. Client tools don't show it. When you hover over a calculation group table in the **Data** pane of Power BI Desktop, the table's `Description` appears, and Excel's field list shows no descriptions. Put the text for report authors in the table's `Description` and use this property for notes to other developers.
+La descripción almacenada en el grupo de cálculo, independiente de la `Description` de la propia tabla. Las herramientas cliente no la muestran. Al pasar el cursor sobre una tabla de grupo de cálculo en el panel **Datos** de Power BI Desktop, aparece la `Description` de la tabla, mientras que la lista de campos de Excel no muestra ninguna descripción. Pon el texto para los autores de Report en la `Description` de la tabla y usa esta propiedad para notas destinadas a otros desarrolladores.
 
-### Calculation Group Precedence
+### Precedencia del grupo de cálculo
 
-`CalculationGroupPrecedence` · int · Basic · _shortcut to_ **Precedence** of the calculation group
+`CalculationGroupPrecedence` · int · Básico · _acceso directo a_ la **Precedencia** del grupo de cálculo
 
-The order in which the calculation group is applied when a query uses more than one calculation group. See `Precedence` on @object-properties-calculation-groups.
+El orden en que se aplica el grupo de cálculo cuando una consulta utiliza más de un grupo de cálculo. Consulta `Precedence` en @object-properties-calculation-groups.
 
-### Calculation Group Annotations
+### Anotaciones del grupo de cálculo
 
-`CalculationGroupAnnotations` · collection of name/value pairs · Metadata · read-only · _shortcut to_ **Annotations** of the calculation group
+`CalculationGroupAnnotations` · colección de pares de nombre/valor · Metadatos · solo de lectura · _acceso directo a_ las **Annotations** del grupo de cálculo
 
-The annotations stored on the calculation group. The table has its own annotations (see [Annotations](xref:object-properties-common#annotations)). The property itself is read-only. Click the ellipsis button to open the annotation editor, where you add, change and remove the annotations. This works with one calculation group table selected at a time.
+Las anotaciones almacenadas en el grupo de cálculo. La tabla tiene sus propias anotaciones (consulta [Anotaciones](xref:object-properties-common#annotations)). La propiedad en sí es de solo lectura. Haz clic en el botón de puntos suspensivos para abrir el editor de anotaciones, donde puedes agregar, modificar y quitar las anotaciones. Esto solo funciona con una tabla de grupo de cálculo seleccionada a la vez.
 
-### Multiple or Empty Selection Expression
+### Expresión de selección múltiple o vacía
 
-`MultipleOrEmptySelectionExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`MultipleOrEmptySelectionExpression` · cadena · Opciones · nivel de compatibilidad 1605+ · _acceso directo al_ grupo de cálculo
 
-A DAX expression that the engine evaluates in place of the measure when the filter on the calculation group selects more than one calculation item, or selects none because the filter matches no item. Use [SELECTEDMEASURE](https://dax.guide/selectedmeasure) to refer to the measure. Below compatibility level 1605, the **Properties** view hides this property and the other selection expression properties below. To remove the expression, clear the value.
+Una expresión DAX que el motor evalúa en lugar de la medida cuando el filtro del grupo de cálculo selecciona más de un elemento de cálculo o no selecciona ninguno porque el filtro no coincide con ningún elemento. Usa [SELECTEDMEASURE](https://dax.guide/selectedmeasure) para hacer referencia a la medida. En niveles de compatibilidad inferiores a 1605, la vista **Propiedades** oculta esta propiedad y las demás propiedades de expresión de selección que aparecen a continuación. Para quitar la expresión, borra el valor.
 
-When the expression is empty, the calculation group isn't applied in those cases, and [Selection Expression Behavior](xref:object-properties-model#selection-expression-behavior) on the model sets what measures return:
+Cuando la expresión está vacía, el grupo de cálculo no se aplica en esos casos, y [Comportamiento de la expresión de selección](xref:object-properties-model#selection-expression-behavior) en el modelo define qué devuelven las medidas:
 
-- `Automatic` or `NonVisual`: the measure's normal value
-- `Visual`: a blank value
+- `Automatic` o `NonVisual`: el valor normal de la medida
+- `Visual`: un valor en blanco
 
-A normal value can mislead users, for example when a user selects two currencies in a currency conversion calculation group and sees a total that's in neither currency. This expression returns an error message:
+Un valor normal puede confundir a los usuarios; por ejemplo, cuando un usuario selecciona dos monedas en un grupo de cálculo de conversión de divisas y ve un total que no está en ninguna de las dos monedas. Esta expresión devuelve un mensaje de error:
 
 ```dax
 ERROR ( "Select a single currency." )
 ```
 
-This expression returns a blank value:
+Esta expresión devuelve un valor en blanco:
 
 ```dax
 BLANK ()
 ```
 
-In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info.
+En Tabular Editor 3, escribes la expresión en el **Editor de expresiones** del @dax-editor, con autocompletado e información de parámetros.
 
-### Multiple or Empty Selection Expression Description
+### Descripción de la expresión de selección múltiple o vacía
 
-`MultipleOrEmptySelectionDescription` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`MultipleOrEmptySelectionDescription` · cadena · Opciones · nivel de compatibilidad 1605+ · _acceso directo al_ grupo de cálculo
 
-A description of the multiple or empty selection expression, for other developers. Client tools don't show it to report authors.
+Una descripción de la expresión de selección múltiple o vacía para otros desarrolladores. Las herramientas de cliente no se lo muestran a los autores de Report.
 
-### Multiple or Empty Selection Format String Expression
+### Expresión de cadena de formato dinámica para selección múltiple o vacía
 
-`MultipleOrEmptySelectionFormatStringExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`MultipleOrEmptySelectionFormatStringExpression` · cadena · Opciones · nivel de compatibilidad 1605+ · _acceso directo al_ grupo de cálculo
 
-A DAX expression that returns the format string to use when the multiple or empty selection expression applies. It works like `FormatStringExpression` on a calculation item. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the format string of the measure.
+Una expresión DAX que devuelve la cadena de formato que se debe usar cuando se aplica la expresión de selección múltiple o vacía. Funciona como `FormatStringExpression` en un elemento de cálculo. Dentro de la expresión, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) devuelve la cadena de formato de la medida.
 
-### No-selection Expression
+### Expresión sin selección
 
-`NoSelectionExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`NoSelectionExpression` · cadena · Opciones · nivel de compatibilidad 1605+ · _acceso directo al_ grupo de cálculo
 
-A DAX expression that the engine evaluates in place of the measure when there's no filter on the calculation group, that is, when the user hasn't selected a calculation item. When it's empty, measures return their normal value when nothing is selected. Use it to set a default calculation that users can override by selecting a calculation item. No-selection expressions need compatibility level 1605 or higher.
+Una expresión DAX que el motor evalúa en lugar de la medida cuando no hay ningún filtro en el grupo de cálculo; es decir, cuando el usuario no ha seleccionado ningún elemento de cálculo. Cuando está vacía, las medidas devuelven su valor normal si no se selecciona nada. Úsala para establecer un cálculo predeterminado que los usuarios pueden reemplazar al seleccionar un elemento de cálculo. Las expresiones sin selección requieren el nivel de compatibilidad 1605 o superior.
 
-In this currency conversion example, sales amounts are stored in US dollars and a `Currency Rate` table holds the daily exchange rates. The expression converts amounts to the currency selected in a `Currency` table, without the user picking a calculation item:
+En este ejemplo de conversión de divisas, los importes de ventas se almacenan en dólares estadounidenses y una tabla `Currency Rate` contiene los tipos de cambio diarios. La expresión convierte los importes a la divisa seleccionada en una tabla `Currency`, sin que el usuario tenga que seleccionar un elemento de cálculo:
 
 ```dax
 IF (
@@ -407,14 +407,14 @@ IF (
 )
 ```
 
-### No-selection Expression Description
+### Descripción de la expresión sin selección
 
-`NoSelectionExpressionDescription` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`NoSelectionExpressionDescription` · cadena · Opciones · nivel de compatibilidad 1605+ · _acceso directo al_ grupo de cálculo
 
-A description of the no-selection expression, for other developers. Client tools don't show it to report authors.
+Una descripción de la expresión sin selección, para otros desarrolladores. Las herramientas de cliente no se lo muestran a los autores de Report.
 
-### No-selection Format String Expression
+### Expresión de cadena de formato dinámica sin selección
 
-`NoSelectionFormatStringExpression` · string · Options · compatibility level 1605+ · _shortcut to_ the calculation group
+`NoSelectionFormatStringExpression` · cadena · Opciones · nivel de compatibilidad 1605+ · _acceso directo al_ grupo de cálculo
 
-A DAX expression that returns the format string to use when the no-selection expression applies. It works like `FormatStringExpression` on a calculation item. Inside the expression, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) returns the format string of the measure.
+Una expresión DAX que devuelve la cadena de formato que se debe usar cuando se aplica la expresión sin selección. Funciona como `FormatStringExpression` en un elemento de cálculo. Dentro de la expresión, [SELECTEDMEASUREFORMATSTRING](https://dax.guide/selectedmeasureformatstring) devuelve la cadena de formato de la medida.
