@@ -41,7 +41,7 @@ Para ver la clave de licencia actual del usuario de Windows activo, ejecuta lo s
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also inspect and edit the values directly using `regedit.exe`. See [Registry details](xref:installation-activation-basic#registry-details) for every value in the key.
+También puedes inspeccionar y editar los valores directamente con `regedit.exe`. Consulta [Detalles del registro](xref:installation-activation-basic#registry-details) para ver todos los valores de la clave.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -75,17 +75,17 @@ Después, Tabular Editor 3 verifica la licencia.
 
 ## No se puede cambiar una clave de licencia desde la interfaz de usuario
 
-The **Change license key** option under **Help > About Tabular Editor** appears only when no model is loaded. If the option is missing while a model is open, close the model under **File > Close model** and try again.
+La opción **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** solo aparece cuando no hay ningún modelo cargado. Si la opción no aparece mientras hay un modelo abierto, cierra el modelo en **Archivo > Cerrar modelo** e inténtalo de nuevo.
 
-If the UI option still fails, reset the license through the Registry Editor::
+Si la opción de la interfaz de usuario sigue sin funcionar, restablece la licencia mediante el Editor del Registro::
 
 1. Cierra todas las instancias de Tabular Editor 3.
-2. Open the Registry Editor (Start > Run > regedit.exe).
+2. Abre el Editor del Registro (Inicio > Ejecutar > regedit.exe).
 3. Ubica `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
-4. Delete the `LicenseKey`, `User`, `ActivationKey` and `Activation` values.
+4. Elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`.
 5. Reinicia Tabular Editor 3.
 
-Alternatively, run the following in a Windows Command Prompt. A command reports an error if its value doesn't exist, and the remaining commands still run:
+Como alternativa, ejecuta lo siguiente en el Símbolo del sistema de Windows. Un comando realiza un Report de error si el valor no existe, y los demás comandos se ejecutan igualmente:
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
@@ -94,7 +94,7 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-The next launch prompts for a license key. Deleting the registry values leaves the installation activated on the licensing service; use the [Tabular Editor Self-service portal](https://tabulareditor.com/my-account/) to manage your activated licenses. .
+En el siguiente inicio, se te pedirá una clave de licencia. Eliminar los valores del Registro deja la instalación activada en el servicio de licencias; usa el [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/) para administrar tus licencias activadas. .
 
 > [!IMPORTANT]
 > Una vez que se elimine una clave de licencia, el producto no podrá usarse por el usuario actual de Windows en ese equipo hasta que se introduzca una nueva clave de licencia.
