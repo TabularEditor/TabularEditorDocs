@@ -24,26 +24,26 @@ applies_to:
 
 ## 入门
 
-- @semantic-bridge-load-inspect: Load a Metric View and explore its structure
-- @semantic-bridge-metric-view-import-from-file: Import a Metric View directly from a YAML file
-- @semantic-bridge-import: Import a loaded Metric View to Tabular and view diagnostics
+- @semantic-bridge-load-inspect: 加载 Metric View 并探索其结构
+- @semantic-bridge-metric-view-import-from-file: 直接从 YAML 文件导入 Metric View
+- @semantic-bridge-import: 将已加载的 Metric View 导入 Tabular，并查看诊断信息
 
 ## 验证
 
-- @semantic-bridge-validate-default: Validate with built-in rules
-- @semantic-bridge-validate-simple-rules: Create predicate-based validation rules for naming conventions
-- @semantic-bridge-validate-contextual-rules: Create rules with cross-object checks, such as names reused across object types
+- @semantic-bridge-validate-default: 使用内置规则进行验证
+- @semantic-bridge-validate-simple-rules: 创建基于谓词的验证规则，用于检查命名规范
+- @semantic-bridge-validate-contextual-rules: 创建包含跨对象检查的规则，例如检测在不同对象类型中重复使用的名称
 
 ## 操作对象模型
 
-- @semantic-bridge-add-object: Add objects to a Metric View and set their properties
-- @semantic-bridge-remove-object: Remove objects from a Metric View
-- @semantic-bridge-rename-objects: Rename a field in a Metric View
+- @semantic-bridge-add-object: 向 Metric View 添加对象并设置其属性
+- @semantic-bridge-remove-object: 从 Metric View 移除对象
+- @semantic-bridge-rename-objects: 在 Metric View 中重命名字段
 
 ## 序列化
 
-- @semantic-bridge-serialize: Serialize a Metric View back to YAML
+- @semantic-bridge-serialize: 将 Metric View 序列化回 YAML
 
 ## 故障排查
 
-- @semantic-bridge-metric-view-handle-failures: Handle invalid input, missing files, and imports that don't complete
+- @semantic-bridge-metric-view-handle-failures: 处理无效输入、文件缺失以及未能完成的导入操作
