@@ -40,8 +40,8 @@ La regla se activa cuando una relación cumple todas estas condiciones:
 ### Corrección manual
 
 1. En el **Explorador TOM**, localiza la relación marcada
-2. In **Properties** pane, find **Cross Filtering Behavior**
-3. Change from **BothDirections** to **OneDirection**
+2. En el panel de **Propiedades**, busca **Comportamiento del filtrado cruzado**
+3. Cambia de **BothDirections** a **OneDirection**
 
 Elige la dirección según el flujo típico del filtro:
 
