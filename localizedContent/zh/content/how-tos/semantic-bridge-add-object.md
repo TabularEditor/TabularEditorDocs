@@ -20,18 +20,16 @@ applies_to:
 
 # 向 Metric View 添加对象
 
-This how-to demonstrates adding new objects to a loaded Metric View and setting their properties.
-Similar patterns apply to all Metric View collections.
+这篇操作指南演示如何向已加载的指标视图添加新对象并设置其属性。类似的方法也适用于所有 Metric View 集合。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。较早版本不支持此处展示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
-## Add a field
+## 添加字段
 
-Use [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) to create and return a new `Field` you can manipulate.
+使用 [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) 创建并返回一个新的 `Field` 对象，供你进一步操作。
 
 ```csharp {run id=addfield setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
@@ -52,11 +50,10 @@ Fields before adding: 6
 Fields after adding: 7
 ```
 
-## Add and configure a `Join`
+## 添加并配置 `Join`
 
 [`AddJoin`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddJoin%2A)
-works similarly to `AddField`: it constructs the object, adds it to the Metric View, and returns it so you can set further properties.
-Set the cardinality with the [`JoinCardinality`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality) enum.
+与 `AddField` 的工作方式类似：它会构造该对象，将其添加到指标视图，并返回该对象，以便你设置更多属性。使用 [`JoinCardinality`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality) 枚举设置基数。
 
 ```csharp {run id=addjoin setup=mv-sample after=none output=false}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -69,16 +66,14 @@ supplier.On = "source.supplier_id = supplier.supplier_id";
 supplier.Cardinality = MetricView.JoinCardinality.ManyToOne;
 ```
 
-`AddJoin` is also a method on any existing `Join`.
-You would use this to create nested joins, for example, `supplier.AddJoin("region", "sales.dim.region")`,
-which models a snowflake dimension.
+在任何现有的 `Join` 上也可以调用 `AddJoin` 方法。你可以用它来创建嵌套联接，例如 `supplier.AddJoin("region", "sales.dim.region")`，
+用于对雪花维度建模。
 
-## Add and configure a `Measure`
+## 添加并配置 `度量值`
 
-[`AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A) works similarly to the other `Add` methods.
+[`AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A) 的工作方式与其他 `Add` 方法类似。
 
-Some properties, such as a field or measure `Format`, have their own types you need to construct to set the property.
-Create the [`Format`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format) variant you want, such as `Format.Currency` or `Format.Percentage`, and assign it.
+某些属性，例如字段或度量值的 `Format`，有各自的类型，你需要构造这些类型来设置该属性。创建你需要的 [`Format`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format) 变体，例如 `Format.Currency` 或 `Format.Percentage`，并将其赋值。
 
 ```csharp {run id=addmeasure setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -103,9 +98,9 @@ total_cost format: Currency { Type = Currency, DecimalPlaces = , HideGroupSepara
 
 ## 后续步骤
 
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+- [从指标视图中删除对象](xref:semantic-bridge-remove-object)
+- [重命名字段](xref:semantic-bridge-rename-objects)
+- [将指标视图序列化为 YAML](xref:semantic-bridge-serialize)
 
 ## 另请参阅
 
