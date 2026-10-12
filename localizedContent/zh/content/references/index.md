@@ -1,6 +1,6 @@
 # 参考资料
 
-This section contains reference material for Tabular Editor.
+本节包含 Tabular Editor 的参考资料。
 
 ## 本节内容
 
@@ -14,12 +14,12 @@ This section contains reference material for Tabular Editor.
 
 - @faq - 常见问题解答
 - @preferences - 应用偏好设置和配置选项
-- @policies - Registry policies that disable features and lock AI settings
+- @policies - 用于禁用功能并锁定 AI 设置的注册表策略
 - @shortcuts3 - Tabular Editor 3 的键盘快捷键参考
 - @shortcuts2 - Tabular Editor 2 的键盘快捷键参考
 - @user-options - 表格模型用户选项（.tmuo）文件
 - @supported-files - Tabular Editor 可打开和保存的文件格式
-- @accessibility - Color blindness mode, keyboard shortcuts, display scaling, themes and language
+- @accessibility - 色盲模式、键盘快捷方式、显示缩放、主题和语言
 
 ### 对象属性参考
 
