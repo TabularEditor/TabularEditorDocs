@@ -35,17 +35,12 @@ jobs:
         # `./run scripts check` runs ruff and mypy through uvx.
         uses: astral-sh/setup-uv@v10.0.1
       - name: Install shell tooling
-        # shellcheck ships on the ubuntu runner image; shfmt does not, so it
-        # is pinned and downloaded (formatting rules can drift between shfmt
-        # versions, and a moving version would make the check flaky).
         run: |
+          sudo apt-get update
           command -v shellcheck >/dev/null || sudo apt-get install -y shellcheck
-          curl -sSfL "https://github.com/mvdan/sh/releases/download/${SHFMT_VERSION}/shfmt_${SHFMT_VERSION}_linux_amd64" -o /usr/local/bin/shfmt
-          chmod +x /usr/local/bin/shfmt
+          command -v shfmt >/dev/null || sudo apt-get install -y shfmt
           shellcheck --version | head -2
           shfmt --version
-        env:
-          SHFMT_VERSION: v3.14.0
       - name: Check scripts
         # ruff lint + format diff + mypy --strict on the qualified Python
         # sources (pyproject.toml); shellcheck + shfmt diff on the run scripts.
@@ -173,7 +168,7 @@ jobs:
         # listed in the report and never fail the run, since third-party
         # outages and bot-blocking are outside our control.
         shell: bash
-        run: python build_scripts/check_links.py validate stats 2>&1 | tee link-check-report.txt
+        run: ./run check-links stats 2>&1 | tee link-check-report.txt
       - name: Publish link report
         # The report (including the external URLs to verify by hand) goes to
         # the job summary, so warnings are visible without opening the log.
