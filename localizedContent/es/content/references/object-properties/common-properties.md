@@ -43,144 +43,144 @@ Para cambiar el nombre de muchos objetos a la vez, selecciónalos en el **Explor
 
 `Description` · string · Básico
 
-Texto libre que explica para qué sirve el objeto. Power BI muestra la descripción como información sobre herramientas en el panel **Datos**. Excel's PivotTable field list doesn't show descriptions. To translate descriptions, use `TranslatedDescriptions`.
+Texto libre que explica para qué sirve el objeto. Power BI muestra la descripción como información sobre herramientas en el panel **Datos**. La lista de campos de la tabla dinámica de Excel no muestra descripciones. Para traducir descripciones, usa `TranslatedDescriptions`.
 
-In Tabular Editor 3, the **TOM Explorer** has a **Description** column where you read and edit descriptions, and DAX code assist shows the description of a table, column or measure in its tooltip. When a measure, calculated column or calculated table has no description, the tooltip shows the first lines of its expression.
+En Tabular Editor 3, el **Explorador TOM** tiene una columna **Descripción** donde puedes leer y editar descripciones, y el Code Assist de DAX muestra en su información sobre herramientas la descripción de una tabla, columna o medida. Cuando una medida, columna calculada o tabla calculada no tiene descripción, la información sobre herramientas muestra las primeras líneas de su expresión.
 
-The BPA rule @kb.bpa-visible-objects-no-description flags visible objects without a description, and @kb.bpa-avoid-invalid-characters-descriptions flags descriptions that contain control characters.
+La regla de BPA @kb.bpa-visible-objects-no-description marca los objetos visibles sin descripción, y @kb.bpa-avoid-invalid-characters-descriptions marca las descripciones que contienen caracteres de control.
 
-### Display Folder
+### Carpeta de visualización
 
-`DisplayFolder` · string · Basic
+`DisplayFolder` · string · Básico
 
-The folder that the object appears in, in the field list of client tools. A backslash (`\`) creates a subfolder, for example `Sales\Year to date`, and a semicolon (`;`) shows the object in more than one folder, for example `Sales;Finance`. Display folders don't affect DAX or security. Tabular Editor also uses them to group objects in the **TOM Explorer**.
+La carpeta en la que aparece el objeto, en la lista de campos de las herramientas cliente. Una barra invertida (`\`) crea una subcarpeta, por ejemplo `Sales\Year to date`, y un punto y coma (`;`) muestra el objeto en más de una carpeta, por ejemplo `Sales;Finance`. Las carpetas de visualización no afectan a DAX ni a la seguridad. Tabular Editor también las usa para agrupar objetos en el **Explorador TOM**.
 
-To move a display folder with its objects and subfolders, drag it onto another folder in the **TOM Explorer**. See @drag-drop.
+Para mover una carpeta de visualización con sus objetos y subcarpetas, arrástrala a otra carpeta en el **Explorador TOM**. Consulta @drag-drop.
 
-### Hidden
+### Oculto
 
-`IsHidden` · bool · Basic
+`IsHidden` · bool · Básico
 
-When `true`, client tools such as Power BI hide the object from report authors. The object stays in the model, and DAX expressions can still refer to it. Anyone who can query the model can also query a hidden object. To secure data, see @roles-and-rls.
+Cuando es `true`, las herramientas cliente como Power BI ocultan el objeto para los autores de Report. El objeto permanece en el modelo y las expresiones DAX pueden seguir haciendo referencia a él. Cualquiera que pueda consultar el modelo también puede consultar un objeto oculto. Para proteger los datos, consulta @roles-and-rls.
 
-The BPA rule @kb.bpa-hide-foreign-keys flags visible columns on the many side of a relationship. Its automatic fix hides them.
+La regla de BPA @kb.bpa-hide-foreign-keys marca las columnas visibles del lado de muchos de una relación. Su corrección automática las oculta.
 
 ## Metadatos
 
 ### Anotaciones
 
-`Annotations` · collection of name/value pairs · Metadata
+`Annotations` · colección de pares nombre/valor · Metadatos
 
-Custom name/value pairs stored with the object. Analysis Services and Power BI ignore annotations, and tools use them to store their own information. For example, Power BI Desktop stores layout information in annotations, and many C# scripts and BPA rules store settings in them.
+Pares nombre/valor personalizados almacenados junto con el objeto. Analysis Services y Power BI ignoran las anotaciones, y las herramientas las usan para almacenar su propia información. Por ejemplo, Power BI Desktop almacena información de diseño en las anotaciones, y muchos C# Scripts y reglas de BPA guardan allí su configuración.
 
-In a C# script, use `GetAnnotation`, `SetAnnotation` and `RemoveAnnotation`. See @how-to-annotations-extended-properties.
+En un C# Script, usa `GetAnnotation`, `SetAnnotation` y `RemoveAnnotation`. Consulta @how-to-annotations-extended-properties.
 
-### Extended Properties
+### Propiedades extendidas
 
-`ExtendedProperties` · collection of name/value pairs · Metadata
+`ExtendedProperties` · colección de pares nombre/valor · Metadatos
 
-Name/value pairs like annotations, where the value is either a string or a JSON document. Power BI uses extended properties, for example to store query information about parameters. For your own metadata, use annotations.
+Pares nombre/valor como las anotaciones, donde el valor es una cadena o un documento JSON. Power BI usa propiedades extendidas, por ejemplo, para almacenar información de consulta sobre los parámetros. Para tus propios metadatos, usa anotaciones.
 
-In a C# script, use `GetExtendedProperty` and `SetExtendedProperty`.
+En un C# Script, usa `GetExtendedProperty` y `SetExtendedProperty`.
 
-### Changed Properties
+### Propiedades modificadas
 
-`ChangedPropertiesCollection` · collection · Metadata
+`ChangedPropertiesCollection` · colección · Metadatos
 
-The names of the properties that you changed on an object that comes from another source, such as a table in a composite model or an object that Power BI generates. When the engine synchronizes the object from its source, it doesn't overwrite the properties in this list.
+Los nombres de las propiedades que modificaste en un objeto que viene de otra fuente, como una tabla de un modelo compuesto o un objeto que genera Power BI. Cuando el motor sincroniza el objeto desde su origen, no sobrescribe las propiedades de esta lista.
 
-Tabular Editor 3 doesn't add entries to this list. When you change such a property, add its name yourself. Type a comma-separated list of TOM property names, for example `Name,FormatString`, or expand the property and select the check box next to a property name. Duplicates and names that aren't properties of the object are ignored. The expanded list always includes `Name`, plus the properties already in the list. To empty the list, right-click the property and select **Clear Changed Properties**.
+Tabular Editor 3 no agrega entradas a esta lista. Cuando cambies una propiedad de este tipo, agrega tú mismo su nombre. Escribe una lista de nombres de propiedades TOM separados por comas, por ejemplo `Name,FormatString`, o expande la propiedad y activa la casilla situada junto al nombre de una propiedad. Los duplicados y los nombres que no son propiedades del objeto se ignoran. La lista expandida siempre incluye `Name`, además de las propiedades que ya están en la lista. Para vaciar la lista, haz clic con el botón derecho en la propiedad y selecciona **Borrar propiedades modificadas**.
 
-### DAX identifier
+### Identificador DAX
 
-`DaxObjectFullName` · string · Metadata · read-only · _computed_
+`DaxObjectFullName` · cadena · Metadatos · solo lectura · _calculado_
 
-The fully qualified name that DAX uses to reference the object, for example `'Sales'[Amount]` for a column or `[Total Sales]` for a measure. C# scripts use it to build DAX expressions. See @how-to-work-with-expressions.
+El nombre completo que usa DAX para hacer referencia al objeto; por ejemplo, `'Sales'[Amount]` para una columna o `[Total Sales]` para una medida. Los C# Scripts lo usan para crear expresiones DAX. Consulta @how-to-work-with-expressions.
 
-### Error Message
+### Mensaje de error
 
-`ErrorMessage` · string · Metadata · read-only
+`ErrorMessage` · cadena · Metadatos · solo lectura
 
-The error that the engine reported for the object, for example a syntax error in a DAX expression or a refresh error on a partition. It's empty when the object has no error.
+El error que el motor notificó para el objeto, por ejemplo, un error de sintaxis en una expresión DAX o un error de actualización en una partición. Está vacío cuando el objeto no tiene ningún error.
 
-In Tabular Editor 3, errors in DAX expressions also appear while you type, before the model is saved to the engine. The @messages-view lists all errors and warnings in the model. Double-click a message to go to its object.
+En Tabular Editor 3, los errores en las expresiones DAX también aparecen mientras escribes, antes de que el modelo se guarde en el motor. La vista @messages-view muestra todos los mensajes de error y advertencia del modelo. Haz doble clic en un mensaje para ir a su objeto.
 
 ### Tipo de objeto
 
-`ObjectTypeName` · string · Metadata · read-only · _computed_
+`ObjectTypeName` · string · Metadatos · solo de lectura · _calculado_
 
-The kind of object, for example `Measure`, `Calculated Column` or `Table`.
+El tipo de objeto, por ejemplo `medida`, `columna calculada` o `Table`.
 
 ### State
 
-`State` · ObjectState · Metadata · read-only
+`State` · ObjectState · Metadatos · solo de lectura
 
-Whether the object is ready to be queried. The engine sets the value.
+Indica si el objeto está listo para consultarse. El motor establece el valor.
 
-| Valor                    | Significado                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `Ready`                  | The object is valid and, where it holds data, the data is up to date.                                           |
-| `NoData`                 | The object is valid but holds no data yet. Refresh the table or partition.                      |
-| `CalculationNeeded`      | The object is valid but must be recalculated, for example a calculated column after a change to its expression. |
-| `SemanticError`          | The expression refers to something that doesn't exist or is invalid. See `ErrorMessage`.        |
-| `EvaluationError`        | The expression is valid but failed when it was evaluated.                                                       |
-| `DependencyError`        | An object this one depends on is in an error state.                                                             |
-| `Incomplete`             | Some of the object's data is missing, for example when a partition failed to refresh.                           |
-| `ForceCalculationNeeded` | The object must be recalculated even though it seems up to date.                                                |
+| Valor                    | Significado                                                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `Ready`                  | El objeto es válido y, cuando contiene datos, los datos están actualizados.                                   |
+| `NoData`                 | El objeto es válido, pero todavía no contiene datos. Actualiza la tabla o la partición.       |
+| `CalculationNeeded`      | El objeto es válido, pero debe recalcularse, por ejemplo, tras cambiar la expresión de una columna calculada. |
+| `SemanticError`          | La expresión hace referencia a algo que no existe o no es válido. Consulta `ErrorMessage`.    |
+| `EvaluationError`        | La expresión es válida, pero falló al evaluarse.                                                              |
+| `DependencyError`        | Un objeto del que depende este se encuentra en estado de error.                                               |
+| `Incomplete`             | Faltan algunos datos del objeto, por ejemplo, cuando una partición no se pudo actualizar.                     |
+| `ForceCalculationNeeded` | El objeto debe volver a calcularse aunque parezca estar actualizado.                                          |
 
-`State` only has a meaningful value when you're connected to a server or working in @workspace-mode. A model that you open from a file isn't connected to an engine.
+`State` solo tiene un valor significativo cuando se conecta a un servidor o trabaja en @workspace-mode. Un modelo que abres desde un archivo no está conectado a un motor.
 
-In Tabular Editor 3, you can refresh a table from the **TOM Explorer** and follow the progress in the @data-refresh-view.
+En Tabular Editor 3, puedes actualizar una tabla desde el **Explorador TOM** y seguir el progreso en la @data-refresh-view.
 
 ## Opciones
 
-### Lineage Tag
+### Etiqueta de linaje
 
-`LineageTag` · string · Options · compatibility level 1540+
+`LineageTag` · cadena · Opciones · nivel de compatibilidad 1540+
 
-A stable ID for the object, usually a GUID. Power BI uses lineage tags to follow an object through renames, so a report or a composite model that depends on a column keeps working after the column is renamed.
+Un identificador estable del objeto, normalmente un GUID. Power BI usa las etiquetas de linaje para seguir un objeto a través de cambios de nombre, de modo que un Report o un modelo compuesto que dependa de una columna siga funcionando después de que se cambie el nombre de la columna.
 
-Power BI Desktop assigns lineage tags automatically. Don't change or copy them: the tools that depend on lineage tags can't tell apart two objects with the same tag. When Tabular Editor creates an object in a model that uses lineage tags, it assigns a new lineage tag.
+Power BI Desktop asigna etiquetas de linaje automáticamente. No las cambie ni las copie: las herramientas que dependen de las etiquetas de linaje no pueden distinguir entre dos objetos con la misma etiqueta. Cuando Tabular Editor crea un objeto en un modelo que usa etiquetas de linaje, asigna una nueva etiqueta de linaje.
 
-### Source Lineage Tag
+### Etiqueta de linaje de origen
 
-`SourceLineageTag` · string · Options · compatibility level 1550+
+`SourceLineageTag` · cadena · Opciones · nivel de compatibilidad 1550+
 
-The lineage tag of the object that this object comes from. Models built on top of another source, such as a composite model or a Direct Lake model, use it to link the object to the source column or table. For Direct Lake, it holds the name of the source column or table in the lakehouse or warehouse.
+La etiqueta de linaje del objeto del que procede este objeto. Los modelos creados sobre otra fuente, como un modelo compuesto o un modelo Direct Lake, la usan para vincular el objeto con la columna o tabla de origen. En Direct Lake, contiene el nombre de la columna o tabla de origen en el Lakehouse o el Warehouse.
 
-Tabular Editor 3 sets `SourceLineageTag` when you import Direct Lake tables, and on the columns it adds when you update the table schema of a Direct Lake model. On a table, the value is the schema and name of the source table, for example `[dbo].[Sales]`, or `[Sales]` when the source doesn't use schemas. On a column, the value is the name of the source column.
+Tabular Editor 3 establece `SourceLineageTag` al importar tablas de Direct Lake y en las columnas que agrega al actualizar el esquema de tabla de un modelo Direct Lake. En una tabla, el valor es el esquema y el nombre de la tabla de origen; por ejemplo, `[dbo].[Sales]` o `[Sales]` cuando el origen no usa esquemas. En una columna, el valor es el nombre de la columna de origen.
 
-## Translations, Perspectives, Security
+## Traducciones, perspectivas y seguridad
 
-### Translated Names
+### Nombres traducidos
 
-`TranslatedNames` · per culture · Translations, Perspectives, Security
+`TranslatedNames` · por configuración regional · Traducciones, perspectivas y seguridad
 
-The object's name in each culture of the model. Client tools show the translation that matches the user's language. When a culture has no translation, the untranslated name appears. See @how-to-work-with-perspectives-translations.
+El nombre del objeto en cada configuración regional del modelo. Las herramientas de cliente muestran la traducción que coincide con el idioma del usuario. Cuando una configuración regional no tiene traducción, aparece el nombre sin traducir. Consulta @how-to-work-with-perspectives-translations.
 
-In Tabular Editor 3, the @metadata-translation-editor shows the translated names, descriptions and display folders of many objects side by side. To exchange translations with translators as a JSON file, see @import-export-translations. The BPA rule @kb.bpa-translate-visible-names flags visible objects with a missing name translation.
+En Tabular Editor 3, @metadata-translation-editor muestra, lado a lado, los nombres, las descripciones y las carpetas de visualización traducidos de muchos objetos. Para intercambiar traducciones con traductores en un archivo JSON, consulta @import-export-translations. La regla de BPA @kb.bpa-translate-visible-names señala los objetos visibles a los que les falta la traducción del nombre.
 
-### Translated Descriptions
+### Descripciones traducidas
 
-`TranslatedDescriptions` · per culture · Translations, Perspectives, Security
+`TranslatedDescriptions` · por configuración regional · traducciones, perspectivas, seguridad
 
-The object's description in each culture of the model. The BPA rule @kb.bpa-translate-descriptions flags descriptions with a missing translation.
+La descripción del objeto en cada configuración regional del modelo. La regla de BPA @kb.bpa-translate-descriptions señala las descripciones a las que les falta traducción.
 
-### Translated Display Folders
+### Carpetas de visualización traducidas
 
-`TranslatedDisplayFolders` · per culture · Translations, Perspectives, Security
+`TranslatedDisplayFolders` · por configuración regional · traducciones, perspectivas, seguridad
 
-The object's display folder in each culture of the model, with the same backslash and semicolon syntax as `DisplayFolder`. The BPA rule @kb.bpa-translate-display-folders flags visible objects with a missing display folder translation.
+La carpeta de visualización del objeto en cada configuración regional del modelo, con la misma sintaxis de barra invertida y punto y coma que `DisplayFolder`. La regla de BPA @kb.bpa-translate-display-folders señala los objetos visibles a los que les falta la traducción de la carpeta de visualización.
 
-### Synonyms
+### Sinónimos
 
-`Synonyms` · per culture · Translations, Perspectives, Security
+`Synonyms` · por configuración regional · traducciones, perspectivas, seguridad
 
-Other words that users type to find the object in natural-language features, such as Q&A in Power BI. Tables, columns, measures, hierarchies and levels can have synonyms. They're stored in the linguistic schema of each culture (see `Content` on @object-properties-perspectives-cultures).
+Otras palabras que los usuarios escriben para encontrar el objeto en funciones de lenguaje natural, como Q&A en Power BI. Las tablas, las columnas, las medidas, las jerarquías y los niveles pueden tener sinónimos. Se almacenan en el esquema lingüístico de cada configuración regional (consulta `Content` en @object-properties-perspectives-cultures).
 
-In Tabular Editor 3, the property only appears when at least one culture has a linguistic schema in JSON format. The collapsed property shows how many linguistic schemas are defined. Expand it to see one entry per culture, with the synonyms as a comma-separated list, for example `revenue, turnover`, and edit the list to add or remove synonyms. A removed synonym is marked as deleted in the linguistic schema. Deleted and suggested synonyms don't appear in the list.
+En Tabular Editor 3, la propiedad solo aparece cuando al menos una configuración regional tiene un esquema lingüístico en formato JSON. La propiedad colapsada muestra cuántos esquemas lingüísticos están definidos. Expándela para ver una entrada por configuración regional, con los sinónimos como una lista separada por comas, por ejemplo `revenue, turnover`, y edita la lista para agregar o quitar sinónimos. Un sinónimo eliminado se marca como borrado en el esquema lingüístico. Los sinónimos eliminados y sugeridos no aparecen en la lista.
 
-### Shown in Perspective
+### Mostrado en la perspectiva
 
 `InPerspective` · por perspectiva · Traducciones, Perspectivas, Seguridad
 
