@@ -19,30 +19,30 @@ applies_to:
 
 # Accesibilidad
 
-Most accessibility settings in Tabular Editor 3 are on the **Tools > Preferences > Tabular Editor > User Interface** page. See [Preferences](xref:preferences).
+La mayoría de las opciones de accesibilidad de Tabular Editor 3 están en la página **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**. Consulta [Preferencias](xref:preferences).
 
 ## Modo para daltónicos
 
-[Unsaved changes](xref:unsaved-changes) and the model comparison view mark added objects green, deleted objects red and edited objects orange. When you select **Color blindness mode** in the **Accessibility** group under **Tools > Preferences > Tabular Editor > User Interface**, added objects are marked teal, and deleted and edited objects keep their colors.
+[Cambios no guardados](xref:unsaved-changes) y la vista de comparación de modelos marcan en verde los objetos añadidos, en rojo los eliminados y en naranja los editados. Cuando seleccionas **Modo de daltonismo** en el grupo **Accesibilidad** de **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**, los objetos añadidos se marcan en verde azulado y los objetos eliminados y editados conservan sus colores.
 
-**Color blindness mode** is off by default, is stored per Windows user and applies to row tints and icon badges in the TOM Explorer and the model comparison view.
+**Modo de daltonismo** está desactivado de forma predeterminada, se guarda por usuario de Windows y se aplica al tinte de filas y a las insignias de icono en el Explorador TOM y en la vista de comparación de modelos.
 
 ## Atajos de teclado
 
-Under **Tools > Preferences > Tabular Editor > Keyboard**, you can assign your own shortcuts to commands and see the shortcuts already assigned, and @shortcuts3 lists the default shortcuts.
+En **Herramientas > Preferencias > Tabular Editor > Teclado**, puedes asignar tus propios atajos a los comandos, ver los atajos ya asignados y @shortcuts3 enumera los atajos predeterminados.
 
-## Display scaling
+## Escalado de pantalla
 
-Tabular Editor follows the display scaling set in Windows under **Settings > System > Display**.
+Tabular Editor usa el escalado de pantalla configurado en Windows en **Configuración > Sistema > Pantalla**.
 
-## Themes
+## Temas
 
-Tabular Editor 3 ships several themes, including dark themes, which you choose from **Window > Theme** (see [Changing themes and palettes](xref:user-interface#changing-themes-and-palettes)).
+Tabular Editor 3 incluye varios temas, entre ellos temas oscuros, que puedes seleccionar en **Ventana > Tema** (consulta [Cambiar temas y paletas](xref:user-interface#changing-themes-and-palettes)).
 
 ## Idioma
 
-Choose the interface language in the **Language** group under **Tools > Preferences > Tabular Editor > User Interface**. The change takes effect after you restart Tabular Editor. Consulta @personalizing-te3.
+Elige el idioma de la interfaz en el grupo **Idioma** de **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**. El cambio surte efecto después de reiniciar Tabular Editor. Consulta @personalizing-te3.
 
-## Reporting an accessibility issue
+## Enviar un Report de un problema de accesibilidad
 
-Report accessibility issues through **Help > Community Support**, or through **Help > Dedicated Support** if your license includes it.
+Envía un Report de los problemas de accesibilidad a través de **Ayuda > Soporte de la comunidad** o de **Ayuda > Soporte dedicado** si tu licencia lo incluye.
