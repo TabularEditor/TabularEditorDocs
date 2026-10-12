@@ -91,7 +91,7 @@ To stop the DAX Package Manager from tracking a function, remove both its `Tabul
 
 `Expression` · string · Options
 
-The function's parameter list and body in lambda notation: the parameters in parentheses, then `=>`, then the DAX expression that uses them. For example:
+The function's parameter list and body in lambda notation: the parameters in parentheses, then `=>`, then the DAX expression that uses them. 例如：
 
 ```dax
 // Returns the relative change between two values
