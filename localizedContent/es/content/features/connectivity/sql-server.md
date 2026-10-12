@@ -2,7 +2,7 @@
 uid: connect-sql-server
 title: Conectar a SQL Server
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,33 +19,39 @@ applies_to:
 
 # Conectar a SQL Server
 
-Incluye SQL Server, Azure SQL Database, Azure SQL Managed Instance y Azure Synapse. Ve a **Modelo > Importar tablas...** y elige un origen de SQL Server.
+The SQL Server connector connects to SQL Server, Azure SQL Database, Azure SQL Managed Instance and Azure Synapse Analytics. Ve a **Modelo > Importar tablas...** y elige un origen de SQL Server.
 
-![El cuadro de diálogo Conectar a SQL Server, con la opción Azure Active Directory - Universal con MFA seleccionada en la lista de Autenticación](~/content/assets/images/features/connectivity/sql-server-connection.png)
+![The Connect to SQL Server dialog, with Azure Active Directory - Universal with MFA selected in the Authentication list](~/content/assets/images/features/connectivity/sql-server-connection.png)
 
-## Métodos de autenticación
+## Connection fields
 
-| Autenticación                                      | Qué debes proporcionar                                  | Notas                                                                                                                     |
-| -------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **Autenticación de SQL Server**                    | Nombre de usuario y contraseña                          | Un inicio de sesión definido en el propio servidor, no en tu directorio                                                   |
-| **Autenticación de Windows**                       | Nada                                                    | Usa la cuenta de Windows con la que se está ejecutando Tabular Editor                                                     |
-| **Azure Active Directory - Universal con MFA**     | Inicio de sesión mediante el navegador                  | Es el único modo que solicita autenticación. Úsalo para trabajo interactivo, no para una tarea programada |
-| **Azure Active Directory - Contraseña**            | Nombre de usuario y contraseña                          | Una cuenta de directorio. No funciona si la cuenta requiere autenticación multifactor                     |
-| **Azure Active Directory - Integrada**             | Nada                                                    | Usa la cuenta del directorio con la que has iniciado sesión en Windows si el equipo está unido al directorio              |
-| **Azure Active Directory - Principal de servicio** | ID de aplicación (cliente) y secreto | La opción habitual para la actualización desatendida                                                                      |
+| Campo                                                           | Descripción                                                                                                                                                                               |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Server name**                                                 | The server or instance to connect to                                                                                                                                                      |
+| **Authentication**                                              | The authentication option. See [Authentication](#authentication)                                                                                                          |
+| **User name** and **Password**                                  | The credentials for the selected authentication option                                                                                                                                    |
+| **Remember password**                                           | Saves the password for the next connection. If you clear it, you're prompted for the password the next time you import, preview or update the table schema                |
+| **Database**                                                    | The database to import from. Select **< Browse server... >** to list the databases on the server |
+| **Encrypt connection**                                          | Requires TLS for the connection. See [Encryption](#encryption)                                                                                                            |
+| **Advanced...** | Opens the full connection string properties                                                                                                                                               |
 
-Los dos modos de autenticación Integrada no requieren nombre de usuario ni contraseña, y Tabular Editor borra ambos campos cuando seleccionas uno de ellos.
+## Autenticación
+
+| Autenticación                                      | Qué debes proporcionar                                                                                                  | Interactive sign-in |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| **Autenticación de SQL Server**                    | User name and password of a SQL login defined on the server                                                             | No                  |
+| **Autenticación de Windows**                       | Nada. Uses the Windows account Tabular Editor runs as                                                   | No                  |
+| **Azure Active Directory - Universal con MFA**     | Inicio de sesión mediante el navegador                                                                                  | Sí                  |
+| **Azure Active Directory - Contraseña**            | User name and password of a directory account. Fails if the account requires multifactor authentication | No                  |
+| **Azure Active Directory - Integrada**             | Nada. Uses the directory account you're signed in to Windows with, on a directory-joined machine        | No                  |
+| **Azure Active Directory - Principal de servicio** | ID de aplicación (cliente) y secreto                                                                 | No                  |
+
+For unattended use, select **Azure Active Directory - Service Principal**. When you select **Windows Authentication** or **Azure Active Directory - Integrated**, **User name**, **Password** and **Remember password** are disabled and **User name** shows your Windows account as `DOMAIN\user`.
+
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
 
 ## Cifrado
 
-**Cifrar conexión** controla si la conexión requiere TLS. Azure SQL lo requiere. Déjalo activado salvo que te conectes a un servidor local sin certificado; en ese caso, la conexión falla con un error de certificado hasta que instales un certificado o lo desactives.
+**Encrypt connection** is selected by default, and Azure SQL requires it.
 
-## Guardar la contraseña
-
-**Guardar contraseña** almacena la contraseña para la próxima vez. Si está desactivada, se te volverá a pedir la próxima vez que el modelo necesite el origen.
-
-## Dónde se almacenan las credenciales
-
-Las credenciales que introduzcas aquí se guardan por usuario y por modelo en el archivo de [opciones de usuario](xref:user-options) (`.tmuo`) situado junto al modelo, cifradas para que solo tu cuenta de Windows pueda leerlas. No forman parte de los metadatos del modelo, por lo que no se incluyen en el control de código fuente, y cualquier colega que abra el mismo modelo deberá proporcionar las suyas.
-
-La expresión M generada solo indica el servidor y el objeto. Nunca contiene una contraseña, un token ni una clave.
+If your machine doesn't trust the server's certificate, a **SQL Server certificate not trusted** prompt appears. Select **OK** to trust the certificate and connect. The prompt doesn't appear if the server has a certificate your machine trusts or if you clear **Encrypt connection**.
