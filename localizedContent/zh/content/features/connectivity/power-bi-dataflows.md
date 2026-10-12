@@ -19,23 +19,23 @@ applies_to:
 
 # 连接到 Power BI Dataflows
 
-The Power BI dataflows connector imports entities from dataflows in the Power BI workspaces you're a member of and is available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+Power BI Dataflow 连接器会从你所属的 Power BI Workspaces 中的 Dataflow 导入实体，并且仅作为隐式数据源提供（参见 [传统、结构化和隐式数据源](xref:connectivity#legacy-structured-and-implicit-data-sources)）。
 
-Open the dialog from **Model > Import tables...** by choosing **Power BI Dataflow**.
+在 **模型 > 导入表...** 中选择 **Power BI Dataflow** 以打开此对话框。
 
 ![“连接到 Power BI Workspace”对话框，其中列出了已登录账户所属的 Workspace](~/content/assets/images/features/connectivity/dataflows-connection.png)
 
-## Connection fields
+## 连接字段
 
-| 字段                                                             | 说明                                                                               |
-| -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID                         |
-| **Workspaces**                                                 | The workspaces your account is a member of. Select one workspace |
+| 字段                                                        | 说明                                   |
+| --------------------------------------------------------- | ------------------------------------ |
+| **登录...** | 使用 Microsoft Entra ID 登录 Power BI 服务 |
+| **Workspace**                                             | 你的账户所属的 Workspace。选择一个 Workspace     |
 
-If a workspace has no dataflows, it appears empty.
+如果某个 Workspace 没有 Dataflow，则会显示为空。
 
 ## 身份验证
 
-**Sign in...** starts a Microsoft Entra ID browser sign-in.
+**登录...** 会启动 Microsoft Entra ID 的浏览器登录流程。
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor 会将连接设置和凭据保存到你的用户选项文件中（参见 [凭据的存储位置](xref:connectivity#where-credentials-are-stored)）。
