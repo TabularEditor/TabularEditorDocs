@@ -7,12 +7,12 @@ applies_to:
   products:
     - product: Tabular Editor 2
       none: true
-      note: "Testing with impersonation uses DAX queries, Pivot Grids and Preview Data, which are only available in Tabular Editor 3."
+      note: "Las pruebas con suplantación utilizan consultas DAX, Pivot Grid y Preview Data, que solo están disponibles en Tabular Editor 3."
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
           none: true
-          note: "Impersonation requires a model hosted in Analysis Services or the Power BI service."
+          note: "La suplantación requiere un modelo hospedado en Analysis Services o en el servicio de Power BI."
         - edition: Business
           full: true
         - edition: Enterprise
