@@ -1,6 +1,6 @@
 # Referencias
 
-This section contains reference material for Tabular Editor.
+Esta sección contiene material de referencia para Tabular Editor.
 
 ## En esta sección
 
@@ -14,12 +14,12 @@ This section contains reference material for Tabular Editor.
 
 - @faq: preguntas frecuentes y respuestas
 - @preferences: preferencias de la aplicación y opciones de configuración
-- @policies - Registry policies that disable features and lock AI settings
+- @policies - Políticas del Registro que deshabilitan funciones y bloquean la configuración de IA
 - @shortcuts3: referencia de atajos de teclado para Tabular Editor 3
 - @shortcuts2: referencia de atajos de teclado para Tabular Editor 2
 - @user-options: archivo de opciones de usuario del modelo tabular (.tmuo)
 - @supported-files - Formatos de archivo que Tabular Editor puede abrir y guardar
-- @accessibility - Color blindness mode, keyboard shortcuts, display scaling, themes and language
+- @accessibility - Modo para personas con daltonismo, atajos de teclado, escalado de pantalla, temas e idioma
 
 ### Referencia de las propiedades de los objetos
 
