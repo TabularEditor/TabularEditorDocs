@@ -81,7 +81,7 @@ Model.bim 文件的布局和结构非常不利于源代码管理和版本控制�
 
 为了让 Tabular 模型的发布管理流程更顺畅，如果 Tabular Editor 能将 Model.bim 文件以文件夹结构保存/加载，并为度量值、计算列等使用独立文件，会很有价值。应该提供命令行选项，用于将 Model.bim 文件导出为这种格式，或从这种格式导入回 Model.bim 文件；也应该可以直接从这种格式进行部署（在不需要 Model.bim 文件本身的情况下）。这些独立文件应包含与 Model.bim 文件相同的 JSON，但不包含“ModifiedTime”信息，以便能轻松用于版本控制系统，让多位开发人员可以同时协作开发同一个模型。
 
-**Update**: [Available in 2.2](xref:folder-serialization).
+**更新**：[2.2 版本起可用](xref:folder-serialization)。
 
 **更新**：从 2.3 版本开始，已可通过选项将透视和翻译元数据存储为各个对象上的注释。这对于有多个开发人员参与的版本控制场景很有用，可以避免开发人员更改翻译、透视成员关系等内容时，导致某个单一文件频繁出现大量改动。
 
@@ -95,4 +95,4 @@ Model.bim 文件的布局和结构非常不利于源代码管理和版本控制�
 
 这是 SSDT 里的标准功能，在 Tabular Editor 里也会很有用。
 
-**Update**: [Available in 2.2](xref:import-export-translations).
+**更新**：[2.2 版本起可用](xref:import-export-translations)。
