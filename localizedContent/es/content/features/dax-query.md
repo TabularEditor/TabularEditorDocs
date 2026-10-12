@@ -67,7 +67,7 @@ La opción "Aplicar" sincroniza la expresión DAX de todas las medidas, columnas
 
 Las opciones "Aplicar selección" y "Aplicar selección y sincronizar" solo aplican las medidas, columnas o tablas incluidas en la selección actual del editor de consultas.
 
-A diferencia de la [funcionalidad de Script DAX](xrefid:dax-scripts), de este modo solo puede actualizarse la propiedad de expresión de una medida, ya que la sintaxis de la Consulta DAX no permite especificar otras propiedades, como la descripción, la carpeta de visualización, etc.
+Unlike the [DAX Script feature](xref:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
 
 La opción "Aplicar" también se ha añadido al menú contextual al hacer clic con el botón derecho.
 
@@ -118,7 +118,7 @@ Customers
 
 ## Depuración de Consulta DAX
 
-Las Consultas DAX son uno de los dos lugares donde es posible ejecutar el [Depurador de DAX](xrefid:dax-debugger); el otro es el Pivot Grid.
+DAX queries are one of the two places where it is possible to run the [DAX Debugger](xref:dax-debugger), the other being the Pivot Grid.
 
 El Depurador de DAX permite comprender cómo funciona DAX dentro de una sola celda. Para iniciar el depurador, basta con hacer clic con el botón derecho en la celda deseada y elegir "Depurar celda"; esto iniciará el depurador en el contexto de la celda seleccionada.
 
