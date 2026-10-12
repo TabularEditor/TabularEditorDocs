@@ -81,7 +81,7 @@ El diseño y la estructura del archivo Model.bim lo hacen terrible para el contr
 
 Para mejorar los flujos de trabajo de gestión de versiones con modelos tabulares, sería interesante que Tabular Editor pudiera guardar y cargar un archivo Model.bim como una estructura de carpetas con archivos individuales para medidas, columnas calculadas, etc. Debería haber opciones de línea de comandos disponibles para exportar e importar archivos Model.bim desde y hacia este formato, y debería ser posible implementar directamente desde este formato (en los casos en los que no necesites el propio archivo Model.bim). Estos archivos individuales deberían contener el mismo JSON que el archivo Model.bim, pero sin la información de "ModifiedTime", para que se puedan usar fácilmente en un sistema de control de versiones y permitir que varios desarrolladores trabajen a la vez en el mismo modelo.
 
-**Actualización**: [Disponible en 2,2](/Advanced-features#folder-serialization).
+**Update**: [Available in 2.2](xref:folder-serialization).
 
 **Actualización**: A partir de 2,3, existen opciones para almacenar los metadatos de Perspectiva y Traducción como anotaciones en los objetos individuales. Esto es útil en escenarios de control de código fuente con varios desarrolladores, para evitar que un único archivo acumule muchos cambios cuando se modifican traducciones, pertenencias a perspectivas, etc.
 
@@ -95,4 +95,4 @@ Hoy en día ya es posible conectar Tabular Editor a un modelo alojado en Power B
 
 Es una funcionalidad estándar de SSDT, y también sería útil tenerla en Tabular Editor.
 
-**Actualización**: [Disponible en 2,2](/Advanced-features#import-export-translations).
+**Update**: [Available in 2.2](xref:import-export-translations).
