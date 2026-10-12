@@ -34,24 +34,24 @@
 ### 数据探索与连接
 
 - @import-tables - 表格导入功能
-- @connectivity - Connecting to data sources, and which authenticator to choose
+- @connectivity - 连接到数据源，以及应选择哪种身份验证器
   - @connect-sql-server, @connect-snowflake, @connect-databricks, @connect-oracle
   - @connect-odbc, @connect-oledb, @connect-onelake, @connect-dataflows
-- @table-preview - Inspect a table's contents row by row
+- @table-preview - 逐行查看表中内容
 - @pivot-grid - 数据分析与可视化
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
 
-### AI Features
+### AI 功能
 
-- @ai-assistant - Chat-based model development using your own AI provider key
-- @mcp-server - Let an external agent such as Claude Code, GitHub Copilot or Cursor work on the model you have open
-- @ai-audit-log - See what the AI Assistant and the MCP server did
+- @ai-assistant - 使用您自己的 AI 提供商密钥，通过聊天方式进行模型开发
+- @mcp-server - 让 Claude Code、GitHub Copilot 或 Cursor 等外部代理在您当前打开的模型上工作
+- @ai-audit-log - 查看 AI 助手和 MCP 服务器执行了哪些操作
 
 ### 高级建模功能
 
-- @user-context-calculated-columns - Calculated columns evaluated per user, and what can reference them
+- @user-context-calculated-columns - 按用户进行求值的计算列，以及哪些对象可以引用它们
 - @metadata-translation-editor - 多语言翻译支持
 - @perspective-editor - 管理模型透视
 
@@ -68,7 +68,7 @@
 - @workspace-mode - Workspace 协作开发模式
 - @tmdl - Tabular Model Definition Language 支持
 - @save-to-folder - 将模型序列化为文件夹结构
-- @auto-reload - Keeping the loaded model and the files on disk in step
+- @auto-reload - 让已加载的模型与磁盘上的文件保持同步
 
 ### 命令行与集成
 
