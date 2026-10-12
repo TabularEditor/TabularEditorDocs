@@ -18,26 +18,22 @@ applies_to:
           full: true
 ---
 
-# Import a Metric View and view diagnostics
+# 导入指标视图并查看诊断信息
 
-This how-to demonstrates importing a loaded Metric View into a Tabular model with a C# script, and reviewing the diagnostic messages the import produces.
+这篇操作指南演示如何使用 C# Script 将已加载的指标视图导入到表格模型中，以及如何查看导入产生的诊断信息。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南面向 Tabular Editor 3.26.2 及更高版本。早期版本不支持此处展示的 v1.1 指标视图功能。
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 > [!NOTE]
-> Each example below imports into the open Tabular model.
-> To run more than one, we recommend that you undo the import after each example (Edit>Undo in the menu, or CTRL-z in the TOM Explorer).
-> If you run each import one after the other, you will get multiple translated copies of the Metric View.
+> 下面的每个示例都会导入到当前打开的表格模型中。如果要运行多个示例，建议在每个示例之后撤销导入（菜单中选择 Edit>Undo，或在 TOM Explorer 中按 CTRL-z）。如果依次执行每次导入，就会生成多个已转换的指标视图副本。
 
-## Import the loaded Metric View
+## 导入已加载的指标视图
 
-`ImportToTabular` translates the currently loaded Metric View into the open Tabular model.
-The Databricks hostname and HTTP path are used when we build the M partition expressions;
-for a quick test you can pass placeholder values and fix them before refreshing data.
+`ImportToTabular` 会将当前加载的指标视图转换为当前打开的表格模型。构建 M 分区表达式时会用到 Databricks 主机名和 HTTP 路径；
+如需快速测试，可以先传入占位值，再在刷新数据前修正。
 
 ```csharp {run id=import setup=mv-sample after=none output=true}
 var success = SemanticBridge.MetricView.ImportToTabular(
@@ -66,26 +62,25 @@ Import successful.
 Diagnostics: 0
 ```
 
-Note that the number of fields imported includes join keys and implicit column references from the Metric View definition,
-so it is larger than the number of explicit `Fields` in the Metric View definition.
+注意，导入的字段数包括联接键和指标视图定义中的隐式列引用，
+因此会大于指标视图定义中显式 `Fields` 的数量。
 
-## Review the last import's diagnostics
+## 查看最近一次导入的诊断信息
 
-The diagnostics from the most recent import are available at any time through `ImportDiagnostics`, including after an import done through the GUI.
+最近一次导入产生的诊断信息可随时通过 `ImportDiagnostics` 获取，即使该次导入是通过 GUI 执行的也一样。
 
 ```csharp {compile}
 foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
     Output($"[{d.Severity}] {d.Code}: {d.Message}");
 ```
 
-## See a translation diagnostic
+## 查看翻译诊断信息
 
-Some Metric View constructs cannot be translated to Tabular.
-A window measure, for example, is not translated to DAX:
-the import creates a placeholder TOM measure with the original Metric View definition in a comment
-and reports a diagnostic warning to you.
+某些指标视图中的结构无法转换为 Tabular。例如，窗口度量值不会转换为 DAX：
+导入时会创建一个占位 TOM 度量值，并在注释中保留原始指标视图定义，
+同时向你 Report 一条诊断警告。
 
-Add a window spec to a measure, then import to see the diagnostic:
+向某个度量值添加窗口规范，然后导入以查看诊断信息：
 
 ```csharp {run id=window-diagnostic setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -153,8 +148,8 @@ SUM('Fact'[revenue])
 
 ## 后续步骤
 
-- [Import a Metric View from a file](xref:semantic-bridge-metric-view-import-from-file)
-- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [从文件导入指标视图](xref:semantic-bridge-metric-view-import-from-file)
+- [加载并查看指标视图](xref:semantic-bridge-load-inspect)
 - [验证指标视图](xref:semantic-bridge-validate-default)
 
 ## 另请参阅
