@@ -14,10 +14,10 @@
     ]
   },
   "translation": {
-    "_comment": "Automated AI translation via Translated (TranslationOS), see build_scripts/translate-content.py and the 'Translating Content' section of README.md. 'sources' are globs relative to content/ (the previous provider's scope, plus the sidebar toc.md files); files under sharedDirectories are always skipped; 'passthrough' files are copied from English as-is (not translated) and tracked the same way. The active environment is selected with the TRANSLATED_ENV environment variable / repository variable (sandbox | production); TRANSLATED_SERVICE_TYPE overrides the environment's serviceType. Orders go to POST /translate/ai with service type 'AI' on both environments (from the Translated admin portal; confirm with --probe). 'instructions' are attached to every order as context; glossaries and do-not-translate lists are configured by Translated on the service type itself.",
+    "_comment": "Automated AI translation via Translated (TranslationOS), see build_scripts/translate-content.py and the 'Translating Content' section of README.md. 'sources' are globs relative to content/ (the previous provider's scope, plus the sidebar toc.md files); files under sharedDirectories are always skipped; 'passthrough' files are copied from English as-is (not translated) and tracked the same way. The active environment is selected with the TRANSLATED_ENV environment variable / repository variable (sandbox | production); TRANSLATED_SERVICE_TYPE overrides the environment's serviceType. Orders go to the synchronous POST /translate/ai endpoint with service type 'AI' on the dedicated api-mt.* hosts, not the classic api.* hosts (verified against production 2026-10-12; confirm with --probe). The sandbox account has no AI-enabled service type (its only type, 'economy', is human-only), so sandbox runs fail at the first submission until Translated enables one. 'instructions' are attached to every order as context; glossaries and do-not-translate lists are configured by Translated on the service type itself.",
     "environments": {
-      "sandbox": { "baseUrl": "https://api.sandbox.translated.com/v2/", "serviceType": "AI" },
-      "production": { "baseUrl": "https://api.translated.com/v2/", "serviceType": "AI" }
+      "sandbox": { "baseUrl": "https://api-mt.sandbox.translated.com/v2/", "serviceType": "AI" },
+      "production": { "baseUrl": "https://api-mt.translated.com/v2/", "serviceType": "AI" }
     },
     "sourceLocale": "en-US",
     "sources": [
@@ -31,7 +31,6 @@
       { "pattern": "whats-new/**/*.html" }
     ],
     "ignore": [],
-    "batchSize": 200,
     "sandboxLimits": {
       "_comment": "Translated warns that excessive sandbox use can get the sandbox key blocked. In sandbox mode a run refuses to exceed these unless --allow-unbounded is given.",
       "maxFilesPerRun": 20,

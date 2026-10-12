@@ -8,31 +8,28 @@ name: Translate content (Translated)
 # Jobs
 #   dry_run    pull_request only. Runs the PR's own copy of the script offline
 #              (--self-test, --plan, --dump-orders) and uploads the dumped orders.
-#              When the PR carries the label `translate-sandbox-dryrun` AND a key is
-#              present, it also submits ONE file (features/toc.md, es) to the sandbox
-#              with `--run --force --wait 5` and uploads the report plus a patch of
-#              localizedContent. Never pushes, never opens a PR.
+#              Never pushes, never opens a PR, never talks to the API; real sandbox
+#              validation is done locally (see README > Translating Content > Local use).
 #   translate  push / schedule / workflow_dispatch. Folds the open translation
 #              branch into main's tree, runs --self-test, then --run (or --probe),
 #              commits localizedContent, pushes to the target branch and opens or
 #              updates the review PR. Holds the `translate-content` concurrency slot.
+#              The AI endpoint is synchronous: --run translates, verifies and writes
+#              every file in one pass; there is no polling and nothing stays pending.
 #
 # Gating (event x TRANSLATED_ENV)
-#   pull_request       -> dry_run only (offline; sandbox mini-run needs label + key)
+#   pull_request       -> dry_run only (offline)
 #   push / schedule    -> translate, ONLY when the variable TRANSLATED_ENV == production;
 #                         otherwise the job is skipped (no sandbox spam, no sandbox MT PRs)
 #   workflow_dispatch  -> translate in whatever environment TRANSLATED_ENV names.
 #                         Sandbox runs push to `localization-sandbox` as a DRAFT PR titled
 #                         "New translations (sandbox - do not merge)" labelled `sandbox`;
-#                         only production runs may target `localization`.
+#                         only production runs may target `localization`. NOTE: the sandbox
+#                         account has no AI-enabled service type (checked 2026-10-12), so a
+#                         sandbox --run fails at the first submission until Translated adds one.
 #
 # Secrets / variables (repository settings)
 #   TRANSLATED_API_KEY           secret    TranslationOS key matching TRANSLATED_ENV
-#   TRANSLATED_SANDBOX_API_KEY   secret    optional; used by the pull_request dry run
-#                                          (falls back to TRANSLATED_API_KEY). Add it when
-#                                          TRANSLATED_API_KEY is switched to the production
-#                                          key so the label-gated PR run keeps hitting the
-#                                          sandbox.
 #   TRANSLATED_ENV               variable  sandbox | production; selects
 #                                          translation.environments[...] in metadata/build-config.json
 #   TRANSLATED_SERVICE_TYPE      variable  optional override of the environment's serviceType
@@ -43,20 +40,16 @@ name: Translate content (Translated)
 # workflow_dispatch inputs
 #   mode           translate (default): --run, then commit/push/PR.
 #                  probe: --probe only (key, languages, service types); nothing pushed.
-#                  dry-run: --plan and --dump-orders, then in sandbox --run with a report
-#                  (jobs are submitted and collected, the report is uploaded, nothing is
-#                  committed or pushed). In production the mode stops after --dump-orders,
-#                  because a production submission that is never pushed would be billed
-#                  and then resubmitted by the next run.
+#                  dry-run: --plan and --dump-orders only (nothing is submitted: the AI
+#                  endpoint translates and bills synchronously, so a dry run that is never
+#                  pushed would be paid for and then re-billed by the next real run).
 #   target_branch  default '' = auto: `localization` when TRANSLATED_ENV == production,
 #                  `localization-sandbox` otherwise. An explicit `localization` is refused
 #                  (exit 1) for mode=translate unless TRANSLATED_ENV == production; for
 #                  probe/dry-run it is remapped to `localization-sandbox` with a ::notice::.
 #                  Any other value must start with `localization-`; the bot never pushes
 #                  to main or to a feature branch.
-#   limit / wait / force / file  passed through as --limit / --wait / --force / --file.
-#                  `wait` must be a whole number of minutes <= 35: the job is killed at
-#                  45 minutes and the accepted job records must be pushed before that.
+#   limit / force / file  passed through as --limit / --force / --file.
 # The script refuses sandbox submissions without --limit/--file and caps files and
 # characters per run (translation.sandboxLimits); this workflow never passes
 # --allow-unbounded and never passes --lenient.
@@ -68,11 +61,11 @@ name: Translate content (Translated)
 #     squash merge (the merge step also deletes a stale branch whose PR is merged/closed)
 #
 # Failure safety: the push and PR steps run even when the translate step fails
-# (`!cancelled()`), so job records that Translated already accepted are committed and
-# never resubmitted; the PR body/comment then starts with a warning line. The merge
+# (`!cancelled()`), so translations that were already billed and written are committed
+# and never re-bought; the PR body/comment then starts with a warning line. The merge
 # step is the opposite: when the open translation branch cannot be folded into main it
 # fails the run BEFORE anything is submitted, because continuing from main would lose
-# the in-flight job records on that branch and resubmit (and pay for) their files.
+# the unmerged translations on that branch and retranslate (and pay for) their files.
 
 on:
   push:
@@ -89,7 +82,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: translate = submit/collect and push; probe = check key, languages and service types only; dry-run = plan, dump orders and (sandbox only) run without pushing
+        description: translate = translate and push; probe = check key, languages and service types only; dry-run = plan and dump orders, nothing submitted
         type: choice
         options: [translate, probe, dry-run]
         default: translate
@@ -101,10 +94,6 @@ on:
         description: Submit at most N files per language (0 = no limit; sandbox requires a limit or a file)
         type: string
         default: '0'
-      wait:
-        description: Minutes to wait for deliveries before pushing what has arrived (whole number, at most 35)
-        type: string
-        default: '25'
       force:
         description: Re-translate the matched files even when they are current (with --file/--limit; without either it means the whole corpus)
         type: boolean
@@ -114,7 +103,6 @@ on:
         type: string
         default: ''
   pull_request:
-    types: [opened, synchronize, reopened, labeled]
     paths:
       - '.github/workflows/translate.yml'
       - 'build_scripts/translate-content.py'
@@ -138,11 +126,6 @@ jobs:
     concurrency:
       group: translate-dry-run-${{ github.event.pull_request.number }}
       cancel-in-progress: true
-    env:
-      # `secrets` cannot be used in `if:`; fork PRs get no secrets, so this is 'false' there.
-      # Prefer the dedicated sandbox key so this run keeps working once TRANSLATED_API_KEY
-      # holds the production key.
-      HAS_KEY: ${{ (secrets.TRANSLATED_SANDBOX_API_KEY || secrets.TRANSLATED_API_KEY) != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -162,23 +145,6 @@ jobs:
       - name: Dump orders (offline)
         run: python build_scripts/translate-content.py --dump-orders "$RUNNER_TEMP/orders"
 
-      - name: Sandbox mini-run (label translate-sandbox-dryrun)
-        id: sandbox
-        if: env.HAS_KEY == 'true' && contains(github.event.pull_request.labels.*.name, 'translate-sandbox-dryrun')
-        env:
-          TRANSLATED_ENV: sandbox
-          TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_SANDBOX_API_KEY || secrets.TRANSLATED_API_KEY }}
-        run: |
-          python build_scripts/translate-content.py --run --force --limit 1 --file "features/toc.md" --lang es \
-            --wait 5 --report "$RUNNER_TEMP/report.md"
-
-      - name: Patch of localizedContent
-        if: ${{ !cancelled() && steps.sandbox.outcome != 'skipped' }}
-        run: |
-          git add -N localizedContent
-          git diff localizedContent > "$RUNNER_TEMP/translations.patch"
-          git diff --stat localizedContent
-
       - name: Upload artefacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -188,21 +154,14 @@ jobs:
           path: |
             ${{ runner.temp }}/plan.txt
             ${{ runner.temp }}/orders
-            ${{ runner.temp }}/report.md
-            ${{ runner.temp }}/translations.patch
 
       - name: Step summary
         if: always()
         run: |
           {
-            echo "## Translation dry run"
+            echo "## Translation dry run (offline)"
             echo
-            if [ -f "$RUNNER_TEMP/report.md" ]; then
-              head -c 60000 "$RUNNER_TEMP/report.md"
-              echo
-            elif [ -f "$RUNNER_TEMP/plan.txt" ]; then
-              echo 'No sandbox run (label `translate-sandbox-dryrun` missing or secret absent). Plan:'
-              echo
+            if [ -f "$RUNNER_TEMP/plan.txt" ]; then
               echo '```'
               head -c 60000 "$RUNNER_TEMP/plan.txt"
               echo '```'
@@ -230,23 +189,9 @@ jobs:
       TRANSLATED_SERVICE_TYPE: ${{ vars.TRANSLATED_SERVICE_TYPE }}
       HAS_KEY: ${{ secrets.TRANSLATED_API_KEY != '' }}
     steps:
-      - name: Check secret, environment and inputs
+      - name: Check secret and environment
         id: preflight
-        env:
-          INPUT_WAIT: ${{ inputs.wait }}
         run: |
-          # `wait` only exists on a dispatch; the job is killed after 45 minutes and the
-          # accepted job records must be committed and pushed before that.
-          if [ -n "$INPUT_WAIT" ]; then
-            if ! [[ "$INPUT_WAIT" =~ ^[0-9]+$ ]]; then
-              echo "::error::Input 'wait' must be a whole number of minutes (got '$INPUT_WAIT')."
-              exit 1
-            fi
-            if [ "$INPUT_WAIT" -gt 35 ]; then
-              echo "::error::Input 'wait' is $INPUT_WAIT minutes; the maximum is 35 (the job times out at 45 and must push the accepted job records first)."
-              exit 1
-            fi
-          fi
           ready=true
           problems=()
           if [ "$HAS_KEY" != "true" ]; then
@@ -322,12 +267,12 @@ jobs:
           echo "branch=$target" >> "$GITHUB_OUTPUT"
 
       - name: Continue from the open translation branch
-        # Unmerged translations and in-flight job records live on the target branch.
-        # Fold them into main's tree so this run builds on them instead of resubmitting.
+        # Unmerged translations (already billed) live on the target branch. Fold them into
+        # main's tree so this run builds on them instead of retranslating.
         # A stale branch (tip already in main, or its PR merged/closed at that tip - the
         # squash-merge case) is deleted instead, so no empty PR is opened afterwards.
         # If the branch can neither be merged nor taken as-is, the run FAILS here:
-        # continuing from main would resubmit files whose job records live on the branch.
+        # continuing from main would retranslate (and pay for) the files on the branch.
         if: steps.preflight.outputs.ready == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -389,14 +334,13 @@ jobs:
         env:
           TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_API_KEY }}
           INPUT_MODE: ${{ inputs.mode }}
-          INPUT_WAIT: ${{ inputs.wait }}
           INPUT_LIMIT: ${{ inputs.limit }}
           INPUT_FORCE: ${{ inputs.force }}
           INPUT_FILE: ${{ inputs.file }}
         run: |
           mode="${INPUT_MODE:-translate}"
           report="$RUNNER_TEMP/translation-report.md"
-          run_args=(--run --wait "${INPUT_WAIT:-25}" --limit "${INPUT_LIMIT:-0}" --report "$report")
+          run_args=(--run --limit "${INPUT_LIMIT:-0}" --report "$report")
           if [ "$INPUT_FORCE" = "true" ]; then
             run_args+=(--force)
           fi
@@ -409,15 +353,10 @@ jobs:
               python build_scripts/translate-content.py --probe
               ;;
             dry-run)
+              # Nothing is submitted: the AI endpoint bills synchronously, so a run whose
+              # results are never pushed would be paid for and re-billed by the next run.
               python build_scripts/translate-content.py --plan
               python build_scripts/translate-content.py --dump-orders "$RUNNER_TEMP/orders"
-              if [ "$TRANSLATED_ENV" = "production" ]; then
-                # A production --run whose results are never pushed would be billed and
-                # then resubmitted by the next run; plan + dumped orders are the dry run here.
-                echo "::warning::mode=dry-run in production stops after --plan/--dump-orders (nothing is submitted)."
-              else
-                python build_scripts/translate-content.py "${run_args[@]}"
-              fi
               ;;
             *)
               python build_scripts/translate-content.py "${run_args[@]}"

@@ -320,7 +320,7 @@ def init_language(lang: str, source_files: dict[str, str]) -> None:
     
     Marks all existing translations as 'translated' with current source hash.
     Prefer `translate-content.py --baseline`, which also verifies each
-    translation against its source and keeps the pendingJobs/failures sections.
+    translation against its source and keeps the failures section.
     """
     localized_content_dir = LOCALIZED_DIR / lang / "content"
     
