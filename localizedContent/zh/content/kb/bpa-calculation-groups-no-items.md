@@ -10,7 +10,7 @@ description: 此最佳做法规则用于识别未包含任何计算项的计算�
 
 ## 概览
 
-此最佳做法规则会识别不包含任何计算项的计算组。 Empty calculation groups serve no purpose and should be populated or removed.
+此最佳做法规则会识别不包含任何计算项的计算组。空的计算组没有实际作用，应补充计算项或直接移除。
 
 - 类别：维护
 - 严重级别：中等（2）
