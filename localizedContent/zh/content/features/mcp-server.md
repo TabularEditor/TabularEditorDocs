@@ -1,6 +1,6 @@
 ---
 uid: mcp-server
-title: MCP server
+title: MCP 服务器
 author: Morten Lønskov
 updated: 2026-10-09
 applies_to:
@@ -18,9 +18,9 @@ applies_to:
           full: true
 ---
 
-# MCP server
+# MCP 服务器
 
-Tabular Editor 3 can act as an MCP (Model Context Protocol) server. Agents that support MCP, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, connect to the running instance to read, query and analyze the semantic model you have open, and to change it if you grant write access. To start, select **Tools > MCP Server...** and register your agent.
+Tabular Editor 3 可以充当 MCP（Model Context Protocol）服务器。 Agents that support MCP, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, connect to the running instance to read, query and analyze the semantic model you have open, and to change it if you grant write access. To start, select **Tools > MCP Server...** and register your agent.
 
 The MCP server doesn't use an AI provider or API key configured in Tabular Editor, and your agent uses its own provider and subscription.
 
@@ -30,46 +30,46 @@ Agent changes go through the [Tabular Object Model (TOM) wrapper](xref:csharp-sc
 
 ## 开始之前
 
-- Tabular Editor 3.27.0 or later, any edition.
-- The **AI features** component installed. It's part of a default installation from 3.27.0 onwards. See @installation-activation-basic if you deploy Tabular Editor centrally, and @policies if your administrator has turned AI features off.
-- An agent that supports MCP over streamable HTTP.
+- Tabular Editor 3.27.0 或更高版本，任何版本均可。
+- 已安装 **AI 功能** 组件。从 3.27.0 开始，它已包含在默认安装中。如果你以集中方式部署 Tabular Editor，请参阅 @installation-activation-basic；如果管理员已关闭 AI 功能，请参阅 @policies。
+- 支持通过可流式传输的 HTTP 使用 MCP 的代理。
 
-## Start the server
+## 启动服务器
 
 1. Select **Tools > MCP Server...**.
 2. Review the permissions. See [Set agent permissions](#set-agent-permissions).
-3. Click **Start server**.
+3. 点击 **启动服务器**。
 
 The dialog shows the address the server listens on: `http://127.0.0.1:42100/` unless you've changed the port. The status bar indicator changes from **MCP Stopped** to **MCP Started**, with the address in its tooltip.
 
 ![The MCP Server dialog, showing the server URL, a masked access token and the five agent permission rows set to non-default levels](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
 
-![The MCP status bar indicator reading MCP Started, with its tooltip showing "MCP server listening on http://127.0.0.1:42100/. Click to open the connection dialog."](~/content/assets/images/features/mcp-server/status-bar-menu.png)
+![MCP 状态栏指示器显示 MCP Started，其工具提示显示 "MCP 服务器正在侦听 http://127.0.0.1:42100/。点击以打开连接对话框。"](~/content/assets/images/features/mcp-server/status-bar-menu.png)
 
 The server runs with or without a model open. If no model is open, the tool results say so, and you can open a model at any time without restarting the server.
 
 Right-click the status bar indicator to start or stop the server, copy a registration configuration or open the MCP Server preferences. Left-click it to open the dialog without starting or stopping the server.
 
-![The MCP status bar indicator with its right-click menu open on MCP Server details..., Stop MCP server, Copy MCP configuration and MCP Server preferences..., and the Copy MCP configuration submenu expanded to list Claude Code, VS Code, Copilot CLI, Codex and Cursor](~/content/assets/images/features/mcp-server/status-bar-context-menu.png)
+![MCP 状态栏指示器及其已打开的右键菜单，菜单项包括“MCP 服务器详细信息...”、“停止 MCP 服务器”、“复制 MCP 配置”和“MCP 服务器偏好...”，其中“复制 MCP 配置”子菜单已展开，列出 Claude Code、VS Code、Copilot CLI、Codex 和 Cursor](~/content/assets/images/features/mcp-server/status-bar-context-menu.png)
 
-### MCP preferences
+### MCP 偏好
 
 Open **Tools > Preferences > AI Features > MCP Server** to set the server's startup, authentication and port options.
 
-![MCP Server preferences, showing Enable MCP Server, Start MCP server automatically, Require access token and the port](~/content/assets/images/pref-mcp-server.png)
+![MCP 服务器偏好，显示“启用 MCP 服务器”“自动启动 MCP 服务器”“需要访问令牌”和端口](~/content/assets/images/pref-mcp-server.png)
 
-| 偏好                                 | 默认值   | What it does                                                                                                                                     |
-| ---------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Enable MCP Server**              | On    | Clearing it stops a running server and removes the menu item and the status bar indicator                                                        |
-| **Start MCP server automatically** | Off   | Starts the server when Tabular Editor starts                                                                                                     |
-| **Require access token**           | Off   | Agents must present the access token shown in the server dialog. See [Running on a shared machine](#running-on-a-shared-machine) |
-| **Port**                           | 42100 | The loopback port the server listens on, from 1024 to 49151. Changing it invalidates existing agent registrations                |
+| 偏好               | 默认值   | 作用                                                                                                                            |
+| ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **启用 MCP 服务器**   | 开     | 取消勾选后，会停止正在运行的服务器，并移除菜单项和状态栏指示器                                                                                               |
+| **自动启动 MCP 服务器** | 关     | Starts the server when Tabular Editor starts                                                                                  |
+| **需要访问令牌**       | 关     | Agents must present the access token shown in the server dialog. 参见 [在共享计算机上运行](#running-on-a-shared-machine) |
+| **端口**           | 42100 | 服务器侦听的回环端口，范围为 1024 到 49151。更改后会使现有的代理注册失效                                                                                    |
 
-## Register your agent
+## 注册代理
 
 In the server dialog, select your agent from **Export configuration** and paste the copied configuration into your agent. You register each agent once, and the configuration registers the server under the name `tabular-editor`.
 
-![The Export configuration dropdown, expanded to list Claude Code, VS Code, Copilot CLI, Codex and Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
+![导出配置下拉菜单已展开，其中列出了 Claude Code、VS Code、Copilot CLI、Codex 和 Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
 
 **Claude Code**: run the copied command in a terminal:
 
@@ -126,7 +126,7 @@ When **Require access token** is on, the exported configuration includes the tok
 
 Any other MCP client connects to `http://127.0.0.1:42100/` over streamable HTTP. If **Require access token** is on, send the token in an `Authorization: Bearer <token>` header.
 
-### Check that it worked
+### 检查是否成功
 
 Ask your agent:
 
@@ -138,19 +138,19 @@ The agent answers with the model name, how the model is loaded, whether it has u
 
 Permissions control which tools an agent gets, and the [AI Assistant](xref:ai-assistant) uses the same permissions. Set them in the **Tools > MCP Server...** dialog or under **Tools > Preferences > AI Features > Permissions**, which both edit the same setting.
 
-![The AI Features Permissions page, with one dropdown per resource at its default level](~/content/assets/images/pref-ai-permissions.png)
+![AI 功能权限页面：每个资源各有一个下拉菜单，均处于默认级别](~/content/assets/images/pref-ai-permissions.png)
 
 Hover over a permission's label or dropdown to see what each level allows. If an administrator has capped a resource by [policy](xref:policies), the dropdown is read-only and indicates the policy.
 
 Each resource has an access level:
 
-| Resource                   | 默认值   | What the agent gets                                                                                                                                                                                                   |
-| -------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Model metadata**         | Read  | Read: tables, columns, measures, expressions, descriptions, relationships and VertiPaq Analyzer statistics. Write: the ability to change the model through C# scripts |
-| **Model data**             | Deny  | Read: DAX query results (data values from your model). Needs a live connection                                                                                     |
-| **Best Practice Analyzer** | Read  | Read: the rule set and the analysis results. Write: adding and modifying rules                                                                                        |
-| **Documents**              | Write | Read: the contents of your open DAX queries, C# scripts and DAX scripts. Write: modifying them, and creating C# scripts and DAX queries                               |
-| **Macros**                 | Write | Read: your macro library, with names, descriptions and code. Write: no additional tools in this version                                                               |
+| 资源                         | 默认值 | 代理获得的内容                                                                                                                                                                                 |
+| -------------------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **模型元数据**                  | 读取  | 读取：表、列、度量值、表达式、描述、关系，以及 VertiPaq分析器统计信息。写入：能够通过 C# Script 脚本更改模型                                                                                                                        |
+| **模型数据**                   | 禁止  | Read: DAX query results (data values from your model). 需要实时连接                                                                        |
+| **Best Practice Analyzer** | 读取  | 读取：规则集和分析结果。写入：添加和修改规则                                                                                                                                                                  |
+| **文档**                     | 写入  | Read: the contents of your open DAX queries, C# scripts and DAX scripts. Write: modifying them, and creating C# scripts and DAX queries |
+| **宏**                      | 写入  | 读取：你的宏库，包括名称、说明和代码。 Write: no additional tools in this version                                                                                                          |
 
 **Write** (labeled **Read/Write** in the dropdowns) includes Read, and **Model data** has no Write level.
 
@@ -162,9 +162,9 @@ Raising these grants above their defaults gives the agent more access:
 - **Model metadata > Write** lets the agent change the model through C# scripts. See [How an agent changes your model](#how-an-agent-changes-your-model) for the safeguards.
 
 > [!IMPORTANT]
-> Permissions are read when the server starts, and an agent gets its tool list when it connects. After changing a grant, stop and start the server, then reconnect the agent. Until then, the agent keeps the permissions that were in force when it connected.
+> Permissions are read when the server starts, and an agent gets its tool list when it connects. 更改授权后，先停止并重新启动服务器，再重新连接代理。 Until then, the agent keeps the permissions that were in force when it connected.
 
-## What the agent can do
+## 代理可以做什么
 
 The agent's tools depend on your grants, and the following table lists what you can ask for and the grant each request needs.
 
@@ -195,13 +195,13 @@ Before a C# script or DAX query from the agent opens as a document, Tabular Edit
 > [!NOTE]
 > Querying data needs a live connection, and VertiPaq statistics need a connection or statistics you've already collected. Tool availability is set when the agent connects, so if you connect the model afterwards, reconnect the agent.
 
-## How an agent changes your model
+## 代理如何更改你的模型
 
 With **Model metadata > Write**, an agent changes your model by creating a [C# script](xref:csharp-scripts) in the background. Tabular Editor compiles the script, checks it for safety and runs it against the open model.
 
 A script can do anything the C# scripting API supports, for example add measures, columns, calculation groups, perspectives, translations, relationships and refresh policies, or bulk-rename and format objects. An agent-run script has these properties:
 
-- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. See @undo-redo.
+- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. 见 @undo-redo。
 - if the script throws an exception part-way through, all its changes are rolled back.
 - the agent receives a list of every object the script added, changed or removed, plus anything the script printed.
 - messages from `Output`, `Info`, `Warning` or `Error` are returned to the agent as part of the result, and no dialog opens.
@@ -229,7 +229,7 @@ These are blocked regardless of your grants:
 
 Open a model and ask:
 
-> Run the Best Practice Analyzer and tell me what's worth fixing, worst first.
+> 运行 Best Practice Analyzer，告诉我哪些问题值得优先修复，按严重程度从高到低排列。
 
 Follow up with "fix the format string violations". If **Model metadata > Write** is granted, the agent writes one script and runs it, and the changed objects are marked orange in the TOM Explorer. **Show changes** in the [Properties view](xref:unsaved-changes) shows the before and after values per property. Right-click **Revert** on any change you don't want, then save.
 
@@ -237,7 +237,7 @@ Follow up with "fix the format string violations". If **Model metadata > Write**
 
 Point the agent at a specification, a ticket or a spreadsheet of measure definitions:
 
-> Add the measures in requirements.md to the Sales table. Follow the naming and format strings already used there.
+> 把 requirements.md 中的度量值添加到 Sales 表。沿用那里已有的命名和格式字符串。
 
 The agent reads `requirements.md` from its own workspace.
 
@@ -245,7 +245,7 @@ The agent reads `requirements.md` from its own workspace.
 
 With **Model data > Read** granted, the agent can run DAX to check its work:
 
-> Confirm the new Margin % measure gives the same total as the old calculation for 2025.
+> 确认新的 Margin % 度量值在 2025 年得出的总计与旧计算相同。
 
 It writes the DAX query, runs it and compares the results.
 
@@ -253,14 +253,14 @@ It writes the DAX query, runs it and compares the results.
 
 With **Documents > Write**, the agent can put a C# script or DAX query into a document that you review and run yourself, for example to check a change before it runs or to run it against another model later:
 
-> Write me a script that renames every measure to sentence case, but don't run it.
+> 帮我写一个脚本，把每个度量值重命名为句首大写的 sentence case 格式，但不要运行它。
 
 The script opens as a document in Tabular Editor, compiled and safety-checked. Run it after you've read it.
 
 > [!TIP]
 > Review and save between tasks to keep each set of unsaved changes small.
 
-## Running several instances
+## 同时运行多个实例
 
 Each Tabular Editor instance hosts its own server on its own port. To work on two models at once, open each in its own instance and connect one agent to each.
 
@@ -268,7 +268,7 @@ For a second server, start the second instance, open **Tools > MCP Server...** a
 
 Register the second port with your agent under its own name, and name the instance you mean in your prompts.
 
-## Running on a shared machine
+## 在共享计算机上运行
 
 The server binds to `127.0.0.1`, which other machines can't reach. It also rejects browser requests with a non-local `Origin` header.
 
@@ -276,21 +276,21 @@ When **Require access token** is off, any process on the machine can connect wit
 
 Select **Require access token** under **Tools > Preferences > AI Features > MCP Server** and restart the server. Agents must then present the token shown in the server dialog, and requests without it are rejected.
 
-Select **Regenerate token** (the refresh button beside the token) to issue a new token, which invalidates existing registrations and restarts a running server. If the token is exposed, regenerate it and re-register your agents. Administrators can make the token mandatory for everyone with the `RequireMcpAccessToken` policy, which also locks the preference. See @policies.
+Select **Regenerate token** (the refresh button beside the token) to issue a new token, which invalidates existing registrations and restarts a running server. If the token is exposed, regenerate it and re-register your agents. 管理员可以通过 `RequireMcpAccessToken` 策略强制所有人都使用令牌，同时也会锁定该偏好设置。参见 @policies。
 
-## What leaves your machine
+## 哪些内容会离开你的计算机
 
 When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**.
+Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. 当 **Model data** 保持默认值 **Deny** 时，代理将无法从 Tabular Editor 获取任何 DAX 查询结果。在模型定义中输入的值，例如 `DATATABLE` 表达式或 **Enter data** 表，属于模型元数据，代理可通过 **Model metadata > Read** 访问这些内容。
 
 See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
 
-## Administrator controls
+## 管理员控制
 
 The MCP server is on by default, and any user can turn it off. Administrators can use these [policies](xref:policies) to control how the MCP operates:
 
-| Policy                                      | Edition | What it does                                                                                                                                                                                                                           |
+| 策略                                          | Edition | 作用                                                                                                                                                                                                                                     |
 | ------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DisableMcpServer`                          | All     | Removes the MCP server. The AI Assistant chat is unaffected                                                                                                                                                            |
 | `DisableAi`                                 | All     | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component off the machine                                                                   |
@@ -310,21 +310,21 @@ See @policies for the full list, the registry layout and the administrative temp
 
 ## 故障排查
 
-| What you see                                                                                | What's happening                                                                                                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The agent says it has no tools for Tabular Editor                                           | The server isn't running, or the agent connected before it was. Check that the status bar reads **MCP Started**, then reconnect the agent                                                                                                                                                |
-| The agent can't see a permission you just granted                                           | Grants are read at server start and the tool list is fixed at connect time. Stop and start the server, then reconnect the agent                                                                                                                                                          |
-| The agent loses the connection after a long break                                           | The server closes a session after 20 minutes with no requests and no open stream. Reconnect the agent                                                                                                                                                                                    |
-| The agent reports no model is open                                                          | The server runs independently of your model. Open a model in Tabular Editor and ask again. You don't need to restart anything                                                                                                                                            |
-| The agent can't run DAX queries                                                             | **Model data** is **Deny** by default. Queries also need a live connection: against a model opened from disk, the query tool is unavailable whatever the grant                                                                                                           |
-| Connections are rejected with 401                                                           | **Require access token** is on and the agent isn't sending the token. Copy the registration configuration from the dialog again. It includes the token                                                                                                                   |
-| The port is already in use                                                                  | Another Tabular Editor instance or another application uses it. Accept the next free port in the prompt, and update the agent's registration. If **Start MCP server automatically** is on, a conflict at startup shows no prompt and the indicator reads **MCP Stopped** |
-| **Tools > MCP Server...** isn't in the menu | **Enable MCP Server** is cleared in preferences, the AI features component isn't installed, an administrator has set `DisableMcpServer` or `DisableAi`, or an Enterprise policy value is set on a machine that isn't licensed for it. See @policies                         |
+| 你看到的现象                                                                    | 实际情况                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 代理提示它没有可用于 Tabular Editor 的工具                                             | 服务器没有运行，或者代理在服务器启动前就已连接。 Check that the status bar reads **MCP Started**, then reconnect the agent                                                                                                                                                                                                       |
+| 智能体看不到你刚授予的权限                                                             | 授权会在服务器启动时读取，工具列表会在连接时确定。停止并重新启动服务器，然后重新连接智能体                                                                                                                                                                                                                                                            |
+| The agent loses the connection after a long break                         | The server closes a session after 20 minutes with no requests and no open stream. 重新连接智能体                                                                                                                                                                                                |
+| 智能体报告未打开任何模型                                                              | 服务器独立于你的模型运行。 Open a model in Tabular Editor and ask again. You don't need to restart anything                                                                                                                                                                                           |
+| 智能体无法运行 DAX 查询                                                            | **模型数据** 默认设置为 **Deny**。 Queries also need a live connection: against a model opened from disk, the query tool is unavailable whatever the grant                                                                                                                                         |
+| 连接被 401 拒绝                                                                | **要求访问令牌** 已开启，但智能体没有发送该令牌。 Copy the registration configuration from the dialog again. It includes the token                                                                                                                                                                             |
+| 端口已被占用                                                                    | Another Tabular Editor instance or another application uses it. Accept the next free port in the prompt, and update the agent's registration. If **Start MCP server automatically** is on, a conflict at startup shows no prompt and the indicator reads **MCP Stopped** |
+| 菜单中没有 **工具 > MCP 服务器...** | **Enable MCP Server** is cleared in preferences, the AI features component isn't installed, an administrator has set `DisableMcpServer` or `DisableAi`, or an Enterprise policy value is set on a machine that isn't licensed for it. 见 @policies                           |
 
 ## 后续步骤
 
 - @ai-assistant for the full permission model and the built-in chat.
-- @unsaved-changes for reviewing and reverting what an agent did.
+- 通过 @unsaved-changes 查看并撤销智能体所做的更改。
 - @csharp-scripts for what a script, and therefore an agent, can change.
-- @policies for governing the server across an organization.
+- 如需了解如何在组织范围内对服务器进行治理，请参阅 @policies。
 - @te-cli-skill if your agent works on model files in a repository or a pipeline.
