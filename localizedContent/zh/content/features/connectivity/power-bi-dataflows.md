@@ -2,7 +2,7 @@
 uid: connect-dataflows
 title: 连接到 Power BI Dataflows
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,26 +19,23 @@ applies_to:
 
 # 连接到 Power BI Dataflows
 
-Tabular Editor 可以从 Power BI Dataflow 导入实体，使模型能够复用 Workspace 中已有的转换，而无需重复执行。
+The Power BI dataflows connector imports entities from dataflows in the Power BI workspaces you're a member of and is available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+
+Open the dialog from **Model > Import tables...** by choosing **Power BI Dataflow**.
 
 ![“连接到 Power BI Workspace”对话框，其中列出了已登录账户所属的 Workspace](~/content/assets/images/features/connectivity/dataflows-connection.png)
 
-## 身份验证方式
+## Connection fields
 
-Dataflows 通过 Microsoft Entra ID 向 Power BI 服务进行身份验证。
+| 字段                                                             | 说明                                                                               |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID                         |
+| **Workspaces**                                                 | The workspaces your account is a member of. Select one workspace |
 
-| 你需要提供的内容                  | 适用场景        |
-| ------------------------- | ----------- |
-| 交互式 Microsoft Entra ID 登录 | 常规交互式使用     |
-| 服务主体                      | 计划刷新或无人值守刷新 |
+If a workspace has no dataflows, it appears empty.
 
-你会看到你的账户所属的 Workspace。你未被添加到的 Workspace 中的 Dataflow 不会显示；没有任何 Dataflow 的 Workspace 会显示为空，而不会被隐藏。
+## 身份验证
 
-> [!NOTE]
-> 在服务主体能够列出任何 Workspace 之前，Power BI 管理员必须先在租户设置中启用对 Power BI REST API 的服务主体访问。在启用之前，服务主体即使登录成功，也看不到任何内容。
+**Sign in...** starts a Microsoft Entra ID browser sign-in.
 
-## 凭据的存储位置
-
-你在这里输入的凭据会按用户、按模型保存到模型旁边的 [用户选项](xref:user-options) 文件（`.tmuo`）中，并经过加密，只有你的 Windows 账户才能读取。它们不属于模型元数据，因此不会提交到源代码管理；打开同一模型的同事需要提供自己的凭据。
-
-生成的 M 表达式只包含服务器和对象的名称。其中绝不会包含密码、令牌或密钥。
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
