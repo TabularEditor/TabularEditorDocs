@@ -45,7 +45,7 @@ La barra de herramientas en la parte superior de la vista de propiedades contien
 - **Por categorías**: Agrupa las propiedades en categorías como _Básico_, _Metadatos_ y _Opciones_.
 - **Alfabético**: Muestra todas las propiedades en una única lista ordenada alfabéticamente.
 - **Mostrar cambios**: Oculta todas las propiedades que no han cambiado desde la última vez que se guardó el modelo, de modo que solo queden las propiedades con [cambios no guardados](xref:unsaved-changes). Mientras el filtro está activo, el título de la vista muestra **Propiedades (Modificadas)**.
-- **Property descriptions**: Shows or hides the description pane at the bottom of the view, which explains the currently selected property. For a full description of every property, see @object-properties.
+- **Descripciones de propiedades**: Muestra u oculta el panel de descripción en la parte inferior de la vista, que explica la propiedad seleccionada actualmente. Para obtener una descripción completa de cada propiedad, consulta @object-properties.
 - **Cuadro de búsqueda**: Filtra la lista de propiedades por nombre.
 
 ## Cambios no guardados
