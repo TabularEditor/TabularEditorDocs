@@ -1,6 +1,6 @@
 ---
 uid: object-properties-calendars
-title: Calendar properties
+title: Propiedades del calendario
 author: Jeroen ter Heerdt
 updated: 2026-10-05
 applies_to:
@@ -18,7 +18,7 @@ applies_to:
           full: true
 ---
 
-# Calendar properties
+# Propiedades del calendario
 
 <!--
 SUMMARY: Reference for the properties of calendars, time unit column associations and time-related column groups, used by calendar-based time intelligence.
@@ -26,133 +26,133 @@ SUMMARY: Reference for the properties of calendars, time unit column association
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page lists the properties of calendars and of the two kinds of column groups that make up a calendar. For properties that most objects share, see @object-properties-common.
+En esta página se enumeran las propiedades de los calendarios y de los dos tipos de grupos de columnas que componen un calendario. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
-Calendars are the objects behind _calendar-based time intelligence_, also called _enhanced time intelligence_. A calendar tells DAX time intelligence functions which columns of a date table hold the year, the quarter, the month, the week and so on. With a calendar, functions such as `TOTALYTD` and `DATEADD` work with fiscal, retail (4-4-5) and other non-Gregorian calendars, and week-based functions such as `TOTALWTD` become available.
+Los calendarios son los objetos que hay detrás de la _inteligencia temporal basada en calendarios_, también conocida como _inteligencia temporal mejorada_. Un calendario indica a las funciones de inteligencia temporal de DAX qué columnas de una tabla de fechas contienen el año, el trimestre, el mes, la semana, etc. Con un calendario, funciones como `TOTALYTD` y `DATEADD` funcionan con calendarios fiscales, minoristas (4-4-5) y otros calendarios no gregorianos, y se habilitan funciones basadas en semanas como `TOTALWTD`.
 
-A calendar is made up of column groups:
+Un calendario se compone de grupos de columnas:
 
-- a **time unit column association** maps one column, and optionally some associated columns, to a time unit such as **Year** or **Month of Year**
-- a **time-related column group** lists columns that relate to time without belonging to one time unit, such as an `IsHoliday` flag
+- una **asociación de columnas de unidad de tiempo** asigna una columna y, opcionalmente, algunas columnas asociadas a una unidad de tiempo como **Año** o **Mes del año**
+- un **grupo de columnas relacionadas con el tiempo** enumera columnas relacionadas con el tiempo sin pertenecer a una única unidad de tiempo, como un indicador `IsHoliday`
 
-All three objects need compatibility level 1701 or higher. In Tabular Editor 3, the **Calendar Editor** shows the whole calendar in one grid and shows errors in it while you work. See @calendars.
+Los tres objetos requieren un nivel de compatibilidad 1701 o superior. En Tabular Editor 3, el **Editor de calendario** muestra todo el calendario en una sola cuadrícula y resalta los errores en él mientras trabajas. Consulta @calendars.
 
-## Calendar
+## Calendario
 
-A calendar belongs to a table, usually the date table, and defines one way of dividing time, for example `Gregorian` or `Fiscal`. A table can have more than one calendar. In DAX, you refer to a calendar by name in place of a date column, for example:
+Un calendario pertenece a una tabla, normalmente la tabla de fechas, y define una forma de dividir el tiempo, por ejemplo `Gregorian` o `Fiscal`. Una tabla puede tener más de un calendario. En DAX, se hace referencia a un calendario por su nombre en lugar de una columna de fecha, por ejemplo:
 
 ```dax
 TOTALYTD ( [Sales Amount], 'Fiscal' )
 ```
 
-Calendar names must be unique in the whole model.
+Los nombres de los calendarios deben ser únicos en todo el modelo.
 
-The Best Practice Analyzer (BPA) rule @kb.bpa-date-table-exists flags a model that has no calendar and no marked date table.
+La regla @kb.bpa-date-table-exists del Best Practice Analyzer (BPA) señala un modelo que no tiene ningún calendario ni ninguna tabla de fechas marcada.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Object Type](xref:object-properties-common#object-type)
-- [Lineage Tag](xref:object-properties-common#lineage-tag)
-- [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Etiqueta de linaje](xref:object-properties-common#lineage-tag)
+- [Etiqueta de linaje de origen](xref:object-properties-common#source-lineage-tag)
 
-### Calendar Column Groups
+### Grupos de columnas del calendario
 
-`CalendarColumnGroups` · CalendarColumnGroupCollection · Basic · read-only
+`CalendarColumnGroups` · CalendarColumnGroupCollection · Básico · solo lectura
 
-The column groups that make up the calendar, which are its time unit column associations and its time-related column groups. This is the Tabular Object Model (TOM) name of the collection. The **Properties view** shows the same collection as `ColumnMappings`. In a C# script, you can use either name.
+Los grupos de columnas que componen el calendario; es decir, las asociaciones de columnas con unidades de tiempo y los grupos de columnas relacionados con el tiempo. Este es el nombre de la colección en el Tabular Object Model (TOM). La **vista de propiedades** muestra la misma colección con el nombre de `ColumnMappings`. En un C# Script, puedes usar cualquiera de los dos nombres.
 
-### Column Mappings
+### Asignaciones de columnas
 
-`ColumnMappings` · CalendarColumnGroupCollection · Basic · read-only · _shortcut to_ **Calendar Column Groups**
+`ColumnMappings` · CalendarColumnGroupCollection · Básico · solo lectura · _acceso directo a_ **Grupos de columnas del calendario**
 
-The same collection as `CalendarColumnGroups`, under the name that the **Properties view** shows. You can add, change and remove the groups in the collection. In Tabular Editor 3, double-click the calendar in the @tom-explorer-view to open the **Calendar Editor**. The **...** button of the property and **Edit Column Mappings...** on the right-click menu of the calendar in the **TOM Explorer** both open a collection editor.
+La misma colección que `CalendarColumnGroups`, con el nombre que muestra la **vista de propiedades**. Puedes agregar, modificar y quitar los grupos de la colección. En Tabular Editor 3, haz doble clic en el calendario en la @tom-explorer-view para abrir el **Editor de calendario**. Tanto el botón **...** de la propiedad como **Editar asignaciones de columnas...** en el menú contextual del calendario en el **Explorador TOM** abren un editor de colecciones.
 
-## Time unit column association
+## Asociación de columna con unidad de tiempo
 
-A time unit column association maps a column of the table to a time unit of the calendar, for example the `Fiscal Year` column to **Year** or the `Month Name` column to **Month of Year**. The mapped column is the _primary column_. You can add _associated columns_ that hold the same time unit in another format, such as a month number next to a month name.
+Una asociación de columna con unidad de tiempo vincula una columna de la tabla con una unidad de tiempo del calendario; por ejemplo, la columna `Fiscal Year` con **Año** o la columna `Month Name` con **Mes del año**. La columna asignada es la _columna principal_. Puedes agregar _columnas asociadas_ que contengan la misma unidad de tiempo en otro formato, como un número de mes junto a un nombre de mes.
 
-Each time unit can be mapped once per calendar. The **Calendar Editor** has one row per time unit, and the `AddTimeUnit` method in C# scripts fails when the calendar already maps that time unit. A column can belong to only one time unit in a calendar, and it must map to the same time unit in every calendar of the model. The **Calendar Editor** in Tabular Editor 3 shows an error when a column maps to different time units in two calendars, or when the sort column of one primary column is the primary column of another time unit.
+Cada unidad de tiempo solo puede asignarse una vez en cada calendario. El **Editor de calendario** tiene una fila por unidad de tiempo, y el método `AddTimeUnit` en C# Script falla cuando el calendario ya tiene asignada esa unidad de tiempo. Una columna solo puede pertenecer a una unidad de tiempo en un calendario, y debe asignarse a la misma unidad de tiempo en todos los calendarios del modelo. El **Editor de calendario** de Tabular Editor 3 muestra un error cuando una columna se asigna a distintas unidades de tiempo en dos calendarios, o cuando la columna de ordenación de una columna principal es la columna principal de otra unidad de tiempo.
 
-### Common properties
+### Propiedades comunes
 
-- [Object Type](xref:object-properties-common#object-type)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
-### Primary Column
+### Columna principal
 
-`PrimaryColumn` · Column · Basic
+`PrimaryColumn` · Columna · Básico
 
-The column that holds the values of this time unit. Its values must fit the time unit: a column mapped to **Month** identifies a month including its year, such as `January 2025`, and a column mapped to **Month of Year** only identifies the month, such as `January` or `1`.
+La columna que contiene los valores de esta unidad de tiempo. Sus valores deben ajustarse a la unidad de tiempo: una columna asignada a **Mes** identifica un mes junto con su año, como `January 2025`, y una columna asignada a **Mes del año** solo identifica el mes, como `January` o `1`.
 
-If the primary column has a `SortByColumn`, the engine also treats the sort column as an associated column, and you don't need to add it.
+Si la columna principal tiene una `SortByColumn`, el motor también trata la columna de ordenación como una columna asociada, por lo que no es necesario añadirla.
 
-To see the values of the columns while you map them, open a @table-preview of the date table and dock it next to the **Calendar Editor**.
+Para ver los valores de las columnas mientras las asignas, abre una @table-preview de la tabla de fechas y ancla la vista junto al **Editor de calendario**.
 
 ### Unidad de tiempo
 
-`TimeUnit` · TimeUnit · Basic
+`TimeUnit` · TimeUnit · Básico
 
-The time unit that the primary column represents. A _complete_ time unit identifies a period on its own. A _partial_ time unit only identifies a period together with a larger time unit, which the calendar must also map. For example, **Month of Year** needs **Year**.
+La unidad de tiempo que representa la columna principal. Una unidad de tiempo _completa_ identifica un período por sí sola. Una unidad de tiempo _parcial_ solo identifica un período junto con una unidad de tiempo mayor, que el calendario también debe asignar. Por ejemplo, **Mes del año** necesita **Año**.
 
-| Valor               | Tipo                      | Significado                                                              | Example values            |
-| ------------------- | ------------------------- | ------------------------------------------------------------------------ | ------------------------- |
-| `Year`              | Complete                  | The year.                                                | `2024`, `FY2025`          |
-| `Semester`          | Complete                  | The half-year including the year.                        | `H1 2024`                 |
-| `SemesterOfYear`    | Partial, needs `Year`     | The half-year within the year.                           | `H1`, `1`                 |
-| `Quarter`           | Complete                  | The quarter including the year.                          | `Q1 2024`                 |
-| `QuarterOfYear`     | Partial, needs `Year`     | The quarter within the year.                             | `Q1`, `1`                 |
-| `QuarterOfSemester` | Partial, needs `Semester` | The quarter within the half-year.                        | `1`, `2`                  |
-| `Month`             | Complete                  | The month including the year.                            | `January 2024`, `2024-01` |
-| `MonthOfYear`       | Partial, needs `Year`     | The month within the year.                               | `January`, `1`            |
-| `MonthOfSemester`   | Partial, needs `Semester` | The month within the half-year.                          | `1` to `6`                |
-| `MonthOfQuarter`    | Partial, needs `Quarter`  | The month within the quarter.                            | `1` to `3`                |
-| `Week`              | Complete                  | The week including the year.                             | `W50-2023`                |
-| `WeekOfYear`        | Partial, needs `Year`     | The week within the year.                                | `W50`, `50`               |
-| `WeekOfSemester`    | Partial, needs `Semester` | The week within the half-year.                           | `1` to `27`               |
-| `WeekOfQuarter`     | Partial, needs `Quarter`  | The week within the quarter.                             | `1` to `14`               |
-| `WeekOfMonth`       | Partial, needs `Month`    | The week within the month.                               | `1` to `6`                |
-| `Date`              | Complete                  | The date.                                                | `2025-12-31`              |
-| `DayOfYear`         | Partial, needs `Year`     | The day within the year.                                 | `1` to `366`              |
-| `DayOfSemester`     | Partial, needs `Semester` | The day within the half-year.                            | `1` to `184`              |
-| `DayOfQuarter`      | Partial, needs `Quarter`  | The day within the quarter.                              | `1` to `92`               |
-| `DayOfMonth`        | Partial, needs `Month`    | The day within the month.                                | `1` to `31`               |
-| `DayOfWeek`         | Partial, needs `Week`     | The day within the week.                                 | `1` to `7`                |
-| `Unknown`           |                           | No time unit is set. Not a valid choice. |                           |
+| Valor                  | Tipo                          | Significado                                                                                             | Valores de ejemplo         |
+| ---------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `Año`                  | Completa                      | El año.                                                                                 | `2024`, `FY2025`           |
+| `Semester`             | Completa                      | El semestre que incluye el año.                                                         | `H1 2024`                  |
+| `SemesterOfYear`       | Parcial; requiere `Año`       | El semestre dentro del año.                                                             | `H1`, `1`                  |
+| `Trimestre`            | Completo                      | El trimestre incluye el año.                                                            | `Q1 2024`                  |
+| `TrimestreDelAño`      | Parcial, requiere `Año`       | El trimestre dentro del año.                                                            | `Q1`, `1`                  |
+| `TrimestreDelSemestre` | Parcial, requiere `Semestre`  | El trimestre dentro del semestre.                                                       | `1`, `2`                   |
+| `Mes`                  | Completo                      | El mes incluye el año.                                                                  | `enero de 2024`, `2024-01` |
+| `MesDelAño`            | Parcial, requiere `Año`       | El mes dentro del año.                                                                  | `enero`, `1`               |
+| `MesDelSemestre`       | Parcial, requiere `Semestre`  | El mes dentro del semestre.                                                             | de `1` a `6`               |
+| `MesDelTrimestre`      | Parcial, necesita `Trimestre` | El mes dentro del trimestre.                                                            | de `1` a `3`               |
+| `Semana`               | Completo                      | La semana que incluye el año.                                                           | `W50-2023`                 |
+| `WeekOfYear`           | Parcial, necesita `Año`       | La semana dentro del año.                                                               | `W50`, `50`                |
+| `WeekOfSemester`       | Parcial, necesita `Semestre`  | La semana dentro del semestre.                                                          | de `1` a `27`              |
+| `WeekOfQuarter`        | Parcial, necesita `Trimestre` | La semana dentro del trimestre.                                                         | de `1` a `14`              |
+| `WeekOfMonth`          | Parcial, necesita `Mes`       | La semana dentro del mes.                                                               | de `1` a `6`               |
+| `Fecha`                | Completo                      | La fecha.                                                                               | `2025-12-31`               |
+| `DayOfYear`            | Parcial; requiere `Year`      | El día del año.                                                                         | De `1` a `366`             |
+| `DayOfSemester`        | Parcial; requiere `Semester`  | El día dentro del semestre.                                                             | De `1` a `184`             |
+| `DayOfQuarter`         | Parcial; requiere `Quarter`   | El día dentro del trimestre.                                                            | De `1` a `92`              |
+| `DayOfMonth`           | Parcial; requiere `Month`     | El día del mes.                                                                         | De `1` a `31`              |
+| `DayOfWeek`            | Parcial; requiere `Week`      | El día de la semana.                                                                    | De `1` a `7`               |
+| `Unknown`              |                               | No se ha establecido ninguna unidad de tiempo. No es una opción válida. |                            |
 
-A partial time unit can also get its larger unit from a combination of other partial units. For example, **Month of Year** together with **Year** is enough for **Day of Month**. See the table of dependencies in @calendars.
+Una unidad de tiempo parcial también puede obtener su unidad mayor a partir de una combinación de otras unidades parciales. Por ejemplo, **Mes del año** junto con **Año** es suficiente para **Día del mes**. Consulta la tabla de dependencias en @calendars.
 
-TOM defines the semester time units (`Semester`, `SemesterOfYear`, `QuarterOfSemester`, `MonthOfSemester`, `WeekOfSemester` and `DayOfSemester`), and Power BI doesn't list them among its calendar categories. Tabular Editor 3 hides them from the **Time Unit** dropdown of the **Properties view** and from the **Calendar Editor**, and it also hides `Unknown` from the dropdown. You only see these values when a C# script or another tool has set them.
+TOM define las unidades de tiempo de semestre (`Semester`, `SemesterOfYear`, `QuarterOfSemester`, `MonthOfSemester`, `WeekOfSemester` y `DayOfSemester`), y Power BI no las incluye entre sus categorías de calendario. Tabular Editor 3 las oculta en la lista desplegable **Unidad de tiempo** de la **vista de propiedades** y en el **Editor de calendario**; además, oculta `Unknown` de la lista desplegable. Solo verás estos valores cuando un C# Script u otra herramienta los haya establecido.
 
-The engine supports the semester units. In Power BI Desktop, calendars built with semester time units, for example **Year**, **Semester**, **Semester of Year**, **Month** and **Date**, are accepted, and time intelligence functions such as `DATESYTD` and `SAMEPERIODLASTYEAR` work with them. The engine rejects a calendar that maps the same time unit twice, and a column that is mapped to different time units in two calendars of the same table.
+El motor admite las unidades de tiempo de semestre. En Power BI Desktop, se aceptan los calendarios creados con unidades de tiempo de semestre, por ejemplo **Año**, **Semestre**, **Semestre del año**, **Mes** y **Fecha**, y las funciones de inteligencia temporal como `DATESYTD` y `SAMEPERIODLASTYEAR` funcionan con ellos. El motor rechaza un calendario que asigna la misma unidad de tiempo dos veces, y una columna asignada a unidades de tiempo distintas en dos calendarios de la misma tabla.
 
-The dependencies in the table apply to the semester units too. When you save, the engine accepts a calendar that doesn't meet them, for example a calendar with only **Semester of Year** and **Date**. The engine applies them when a query uses the calendar: a partial unit only counts when its larger unit is also mapped, so **Quarter of Semester** works as the calendar's quarter only together with **Semester**. A time intelligence function that needs a unit the calendar doesn't have fails with an error like "'DATESYTD' uses calendar 'Fiscal', which does not define all the categories that are required for this operation. At minimum, ensure the 'Year' category is tagged". Year-based functions such as `DATESYTD` and `SAMEPERIODLASTYEAR` always need a **Year** unit, and **Semester** doesn't count as one.
+Las dependencias de la tabla también se aplican a las unidades de tiempo de semestre. Al guardar, el motor acepta un calendario que no las cumple, por ejemplo, un calendario con solo **Semestre del año** y **Fecha**. El motor las aplica cuando una consulta usa el calendario: una unidad parcial solo cuenta cuando su unidad superior también está asignada, de modo que **Trimestre del semestre** funciona como el trimestre del calendario solo junto con **Semestre**. Una función de inteligencia temporal que necesita una unidad que el calendario no tiene produce un error como "'DATESYTD' usa el calendario 'Fiscal', que no define todas las categorías necesarias para esta operación. Como mínimo, asegúrate de que la categoría 'Año' esté etiquetada". Las funciones basadas en el año, como `DATESYTD` y `SAMEPERIODLASTYEAR`, siempre necesitan una unidad de **Año**, y **Semestre** no cuenta como tal.
 
 ### Columnas asociadas
 
-`AssociatedColumns` · AssociatedColumnCollection · Options · read-only
+`AssociatedColumns` · AssociatedColumnCollection · Opciones · solo de lectura
 
-Other columns that hold the same time unit as the primary column, in a different format. For example, when `Month Number` is the primary column for **Month of Year**, you can add `Month Name` and `Month Short Name` as associated columns. Time intelligence functions treat a filter on any of these columns like a filter on the primary column.
+Otras columnas que contienen la misma unidad de tiempo que la columna principal, en un formato distinto. Por ejemplo, cuando `Month Number` es la columna principal de **Mes del año**, puedes agregar `Month Name` y `Month Short Name` como columnas asociadas. Las funciones de inteligencia temporal tratan un filtro sobre cualquiera de estas columnas como si fuera un filtro sobre la columna principal.
 
-You can add and remove columns in the collection, for example in the **Associated Columns** panel of the **Calendar Editor**.
+Puedes agregar y quitar columnas de la colección, por ejemplo, en el panel **Columnas asociadas** del **Editor de calendario**.
 
-## Time-related column group
+## Grupo de columnas relacionadas con el tiempo
 
-A time-related column group lists columns that describe dates without mapping to one time unit, for example `IsHoliday`, `IsWorkingDay` or `Fiscal Period Name`. Time intelligence functions handle filters on these columns by the kind of shift they do:
+Un grupo de columnas relacionadas con el tiempo enumera columnas que describen fechas sin estar asignadas a una única unidad de tiempo, por ejemplo `IsHoliday`, `IsWorkingDay` o `Fiscal Period Name`. Las funciones de inteligencia temporal tratan los filtros sobre estas columnas según el tipo de desplazamiento que realizan:
 
-- a _lateral shift_, which only `DATEADD` and `SAMEPERIODLASTYEAR` do, keeps filters on them, so the working days of this month move to the working days of the same month last year
-- a _hierarchical shift_, which all other time intelligence functions do, for example `DATESYTD` or `NEXTMONTH`, removes filters on them
+- un _desplazamiento lateral_, que solo realizan `DATEADD` y `SAMEPERIODLASTYEAR`, conserva los filtros en ellas, de modo que los días laborables de este mes se trasladan a los días laborables del mismo mes del año pasado
+- un _desplazamiento jerárquico_, que realizan todas las demás funciones de inteligencia temporal, por ejemplo `DATESYTD` o `NEXTMONTH`, elimina sus filtros
 
-All time intelligence functions keep filters on columns of the table that the calendar doesn't mention at all, as a time unit or in a time-related group. Add a column to a time-related group only when you want hierarchical shifts to remove filters on it.
+Todas las funciones de inteligencia temporal mantienen los filtros sobre columnas de la tabla que el calendario no menciona en absoluto, ni como unidad de tiempo ni en un grupo relacionado con el tiempo. Agrega una columna a un grupo relacionado con el tiempo solo si quieres que los desplazamientos jerárquicos eliminen los filtros aplicados a ella.
 
-When a table has more than one calendar, the engine applies these rules for every calendar on the table, including the calendars that the function doesn't use.
+Cuando una tabla tiene más de un calendario, el motor aplica estas reglas a cada calendario de la tabla, incluidos los calendarios que la función no utiliza.
 
-### Common properties
+### Propiedades comunes
 
-- [Object Type](xref:object-properties-common#object-type)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Columnas
 
-`Columns` · AssociatedColumnCollection · Options · read-only
+`Columns` · AssociatedColumnCollection · Opciones · de solo lectura
 
-The columns in the group. You can add and remove columns in the collection, for example in the **Time-Related Columns** panel of the **Calendar Editor**.
+Las columnas del grupo. Puedes agregar y quitar columnas de la colección, por ejemplo en el panel **Columnas relacionadas con el tiempo** del **Editor de calendario**.
