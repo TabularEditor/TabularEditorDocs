@@ -1,57 +1,57 @@
 # Funciones
 
-Esta sección contiene documentación sobre las características de Tabular Editor.
+Esta sección documenta las características de Tabular Editor.
 
 ## En esta sección
 
 ### Características de DAX
 
-- @dax-debugger - Depura tus expresiones DAX paso a paso
-- @dax-editor - Capacidades avanzadas de edición de DAX
-- @dax-query - Ejecución y pruebas de consultas
-- @dax-scripts - Operaciones de DAX por lotes y automatización
-- @code-actions - Mejoras automáticas del código y refactorización
-- @dax-package-manager - Administrador de paquetes de DAX
+- @dax-debugger - Depurar paso a paso la evaluación de una expresión DAX
+- @dax-editor - Editor de código para expresiones, consultas y scripts de DAX
+- @dax-query - Escribir y ejecutar consultas DAX
+- @dax-scripts - Editar el DAX de varios objetos en un solo documento
+- @code-actions - Mejoras de código y refactorizaciones sugeridas en el editor
+- @dax-package-manager - Instalar y administrar paquetes DAX
 
 ### Secuencias de comandos y automatización
 
-- @csharp-scripts - Descripción general de las capacidades de creación de scripts personalizados
+- @csharp-scripts - Descripción general de C# Script
 - Biblioteca de C# Script
   - @csharp-script-library
   - @script-library-beginner
   - @script-library-advanced
-- @script-helper-methods - Utilidades de scripting incorporadas
+- @script-helper-methods - Métodos auxiliares integrados para scripts
 - @useful-script-snippets - Ejemplos de scripts habituales
-- @macros - Crear macros
+- @macros - Guardar scripts como macros
 
 ### Análisis y calidad del modelo
 
 - @best-practice-analyzer - Análisis de calidad del modelo y reglas
   - @using-bpa - Cómo usar el Best Practice Analyzer
   - @using-bpa-sample-rules-expressions - Ejemplos de reglas de BPA
-- @dax-optimizer-integration - Optimización del rendimiento con el optimizador de DAX
+- @dax-optimizer-integration - Integración con el Optimizador de DAX
 
 ### Exploración de datos y conectividad
 
 - @import-tables - Funcionalidad de importación de tablas
-- @connectivity - Conexión a Data source y elección del autenticador adecuado
+- @connectivity - Conectores de Data source y autenticación
   - @connect-sql-server, @connect-snowflake, @connect-databricks, @connect-oracle
   - @connect-odbc, @connect-oledb, @connect-onelake, @connect-dataflows
-- @table-preview - Inspeccionar el contenido de una tabla fila por fila
-- @pivot-grid - Análisis y visualización de datos
+- @table-preview - Examinar las filas de una tabla
+- @pivot-grid - Examinar los datos del modelo en una tabla dinámica
 - @tipos-de-modelo-semantico
   - @modelo-sql-de-direct-lake
   - @limitaciones-de-dq-over-as
 
 ### Características de IA
 
-- @ai-assistant - Desarrollo de modelos basado en chat con la clave de tu proveedor de IA
-- @mcp-server - Deja que un agente externo, como Claude Code, GitHub Copilot o Cursor, trabaje en el modelo que tienes abierto
-- @ai-audit-log - Consulta lo que hicieron el Asistente de IA y el servidor MCP
+- @ai-assistant - Desarrollo de modelos basado en chat con su propia clave de proveedor de IA
+- @mcp-server - Conectar un agente externo, como Claude Code, GitHub Copilot o Cursor, al modelo abierto
+- @ai-audit-log - Registro de las acciones realizadas por el Asistente de IA y el servidor MCP
 
 ### Funciones avanzadas de modelado
 
-- @user-context-calculated-columns - Columnas calculadas evaluadas por usuario y qué puede usarlas como referencia
+- @user-context-calculated-columns - Columnas calculadas evaluadas por usuario y los objetos que pueden hacer referencia a ellas
 - @metadata-translation-editor - Compatibilidad multilingüe
 - @perspective-editor - Gestión de perspectivas del modelo
 
@@ -65,10 +65,10 @@ Esta sección contiene documentación sobre las características de Tabular Edit
 - @supported-files - Compatibilidad con formatos de archivo
 - [Despliegue del modelo](deployment.md) - Opciones y estrategias de despliegue
 - @workspace-databases - Trabajar con bases de datos de Workspace
-- @workspace-mode - Modo de desarrollo colaborativo
+- @workspace-mode - Sincronizar un archivo de modelo con una base de datos de un Workspace
 - @tmdl - Compatibilidad con Tabular Model Definition Language
 - @save-to-folder - Serializar modelos en estructuras de carpetas
-- @auto-reload - Mantener el modelo cargado y los archivos en disco sincronizados
+- @auto-reload - Recargar el modelo cuando sus archivos cambien en el disco
 
 ### Línea de comandos e integración
 
