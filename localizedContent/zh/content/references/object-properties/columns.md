@@ -164,25 +164,25 @@ The kind of value the column holds, which client tools use to treat the column i
 
 In Tabular Editor 3, the dropdown lists all the categories that the protocol defines, in alphabetical order, and you can also type any other value. The value isn't validated, so spell it exactly as listed. Power BI uses these categories:
 
-| 值                 | Shown in Power BI as | 用途                                                                                   |
-| ----------------- | -------------------- | ------------------------------------------------------------------------------------ |
-| `Address`         | 地址                   | Street addresses.                                                    |
-| `City`            | City                 | City names.                                                          |
-| `County`          | County               | County names.                                                        |
-| `StateOrProvince` | State or Province    | State or province names.                                             |
-| `PostalCode`      | Postal code          | Postal or ZIP codes.                                                 |
-| `Country`         | Country/Region       | Country or region names or codes.                                    |
-| `Continent`       | Continent            | Continent names.                                                     |
-| `Place`           | Place                | Names or descriptions of a location that don't fit another category. |
-| `Latitude`        | Latitude             | Latitude in decimal degrees, for example `51.5072`.                  |
-| `Longitude`       | Longitude            | Longitude in decimal degrees, for example `-0.1276`.                 |
-| `WebUrl`          | Web URL              | Links that users can click.                                          |
-| `ImageUrl`        | Image URL            | URLs of images that visuals show as images.                          |
-| `Barcode`         | Barcode              | Barcodes that the Power BI mobile app scans to filter a report.      |
+| 值                 | Shown in Power BI as | 用途                                                |
+| ----------------- | -------------------- | ------------------------------------------------- |
+| `Address`         | 地址                   | Street addresses.                 |
+| `City`            | City                 | City names.                       |
+| `County`          | County               | County names.                     |
+| `StateOrProvince` | State or Province    | State or province names.          |
+| `PostalCode`      | Postal code          | Postal or ZIP codes.              |
+| `Country`         | Country/Region       | Country or region names or codes. |
+| `Continent`       | 大洲                   | 大洲名称。                                             |
+| `Place`           | 地点                   | 不适合归入其他类别的地点名称或描述。                                |
+| `Latitude`        | 纬度                   | 以十进制度数表示的纬度，例如 `51.5072`。                         |
+| `Longitude`       | 经度                   | 以十进制度数表示的经度，例如 `-0.1276`。                         |
+| `WebUrl`          | Web URL              | 用户可点击的链接。                                         |
+| `ImageUrl`        | 图像 URL               | 在 Visual 中以图像形式显示的图像 URL。                         |
+| `Barcode`         | 条形码                  | 供 Power BI 移动应用扫描，用于使用 FILTER 筛选 Report 的条形码。     |
 
-Geographic categories tell map visuals what kind of location a value is, for example that `Paris` is a `City`.
+地理类别会告诉地图 Visual 某个值代表哪类位置，例如 `Paris` 是 `City`。
 
-The dropdown spells two of the categories as `WebURL` and `ImageURL` and has no `Barcode` entry. Power BI ignores case, so `ImageUrl` and `ImageURL` both show the value as an image in a table visual, and `WebUrl` and `WebURL` both show it as a link. The Tabular Object Model (TOM) stores the value exactly as you type it. Power BI accepts `Barcode`, but a table visual shows the value as plain text; only the Power BI mobile apps use it.
+下拉列表将其中两个类别写作 `WebURL` 和 `ImageURL`，且没有 `Barcode` 项。 Power BI 不区分大小写，因此 `ImageUrl` 和 `ImageURL` 都会在表格 Visual 中将该值显示为图像，而 `WebUrl` 和 `WebURL` 都会将其显示为链接。 Tabular Object Model (TOM) 会按你输入的样子精确存储该值。 Power BI 接受 `Barcode`，但表格 Visual 会将该值显示为纯文本；只有 Power BI 移动应用会使用它。
 
 The protocol defines many more categories, for example `Id`, `Image` and time categories such as `Years` and `Months`, which older tools used. Power BI ignores most of them. The dropdown also lists `PaddedDateTableDates`, a category that Power BI uses and the protocol doesn't define. Power BI Desktop writes the time categories on the columns of its auto date/time tables: `PaddedDateTableDates` on the date column, and `Years`, `Quarters`, `QuarterOfYear`, `Months`, `MonthOfYear` and `DayOfMonth` on the other columns.
 
