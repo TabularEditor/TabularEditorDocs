@@ -185,7 +185,7 @@ Si necesitas más instalaciones simultáneas de Tabular Editor 3 de las indicada
 
 ## Descuentos por volumen para la Edición Enterprise
 
-If you require more than 25 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
+Si necesita más de 25 licencias, <a href="mailto:sales@tabulareditor.com">póngase en contacto con ventas</a> para solicitar un presupuesto.
 
 ## Licencias para la línea de comandos y CI/CD
 
