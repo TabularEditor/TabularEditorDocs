@@ -19,12 +19,12 @@ applies_to:
 
 # Fragmentos de script útiles
 
-Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](xref:advanced-scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](xref:custom-actions), so that you can easily reuse them from the context menu.
+Aquí tienes una colección de pequeños fragmentos de código para que empieces a usar la [funcionalidad de scripting avanzado](xref:advanced-scripting) de Tabular Editor. Muchos de estos scripts te resultarán útiles si los guardas como [Acciones personalizadas](xref:custom-actions), para que puedas reutilizarlos fácilmente desde el menú contextual.
 
 Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](xref:how-to-navigate-tom-hierarchy) how-to series. Para consultar la API completa del wrapper de TOM, ve a @api-index.
+> Si buscas material de referencia estructurado, organizado por patrones, sobre C# Script y Dynamic LINQ, consulta la serie de guías prácticas [Patrones de scripting](xref:how-to-navigate-tom-hierarchy). Para consultar la API completa del wrapper de TOM, ve a @api-index.
 
 ***
 
@@ -310,9 +310,9 @@ var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
 
-The resulting .TSV file looks like this, when opened in Excel:
+El archivo .TSV resultante se ve así al abrirlo en Excel:
 ![image](~/content/assets/images/useful-script-snippets-03.png)
-The contents of the first column (Object) is a reference to the object. Si se cambia el contenido de esta columna, es posible que la importación posterior de las propiedades no funcione correctamente. Para cambiar el nombre de un objeto, cambia solo el valor de la segunda columna (Name).
+El contenido de la primera columna (Object) es una referencia al objeto. Si se cambia el contenido de esta columna, es posible que la importación posterior de las propiedades no funcione correctamente. Para cambiar el nombre de un objeto, cambia solo el valor de la segunda columna (Name).
 
 De forma predeterminada, el archivo se guarda en la misma carpeta donde se encuentra TabularEditor.exe. De forma predeterminada, solo se exportan las siguientes propiedades (cuando corresponda, según el tipo de objeto exportado):
 
@@ -440,7 +440,7 @@ foreach(var row in tsvRows.Skip(1))
 }
 ```
 
-If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](xref:command-line-options) as follows:
+Si necesitas automatizar este proceso, guarda el script anterior en un archivo y usa la [Tabular Editor CLI](xref:command-line-options) de la siguiente manera:
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
@@ -489,7 +489,7 @@ Esto supone que las particiones de la tabla 'Reseller Sales' utilizan un origen 
 
 ## Dar formato a expresiones DAX
 
-Please see [FormatDax](xref:script-helper-methods) for more information.
+Consulta [FormatDax](xref:script-helper-methods) para obtener más información.
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
@@ -722,7 +722,7 @@ Están disponibles los siguientes métodos:
 | `DataSet ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
 | `object EvaluateDax(string dax)`                              | Ejecuta la _expresión_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto que representa el resultado. Si la expresión DAX es escalar, se devuelve un objeto del tipo correspondiente (string, long, decimal, double, DateTime). Si la expresión DAX es de tipo tabla, se devuelve un [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6).                                                                                                                                                                       |
 
-Call these methods directly, without any prefix. Up to Tabular Editor 3.26.x they could also be reached through the `Model.Database` object; from 3.27.0 they cannot, so `Model.Database.ExecuteCommand(tmsl)` no longer compiles and `ExecuteCommand(tmsl)` is the form to use.
+Llama a estos métodos directamente, sin ningún prefijo. Hasta Tabular Editor 3.26.x, también se podía acceder a ellos a través del objeto `Model.Database`; a partir de la versión 3.27.0 ya no, por lo que `Model.Database.ExecuteCommand(tmsl)` deja de compilar y la forma correcta es `ExecuteCommand(tmsl)`.
 
 Darren Gosbell presenta [aquí](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/) un caso de uso interesante: generar medidas basadas en datos mediante el método `ExecuteDax`.
 
