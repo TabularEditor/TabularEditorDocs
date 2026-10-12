@@ -95,7 +95,7 @@ To see the values of the columns while you map them, open a @table-preview of th
 
 The time unit that the primary column represents. A _complete_ time unit identifies a period on its own. A _partial_ time unit only identifies a period together with a larger time unit, which the calendar must also map. For example, **Month of Year** needs **Year**.
 
-| Valor               | Kind                      | Significado                                                              | Example values            |
+| Valor               | Tipo                      | Significado                                                              | Example values            |
 | ------------------- | ------------------------- | ------------------------------------------------------------------------ | ------------------------- |
 | `Year`              | Complete                  | The year.                                                | `2024`, `FY2025`          |
 | `Semester`          | Complete                  | The half-year including the year.                        | `H1 2024`                 |
