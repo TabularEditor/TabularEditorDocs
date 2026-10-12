@@ -1,8 +1,9 @@
 name: Translate content (Translated)
 
-# Machine-translates the English docs with Translated (TranslationOS) and hands the
-# result over as a review PR. build_scripts/translate-content.py does the work; this
-# file only decides WHEN it runs, in WHICH environment, and WHERE the output goes.
+# AI-translates the English docs with Translated (TranslationOS POST /translate/ai,
+# service type 'AI') and hands the result over as a review PR.
+# build_scripts/translate-content.py does the work; this file only decides WHEN it
+# runs, in WHICH environment, and WHERE the output goes.
 #
 # Jobs
 #   dry_run    pull_request only. Runs the PR's own copy of the script offline
@@ -35,7 +36,7 @@ name: Translate content (Translated)
 #   TRANSLATED_ENV               variable  sandbox | production; selects
 #                                          translation.environments[...] in metadata/build-config.json
 #   TRANSLATED_SERVICE_TYPE      variable  optional override of the environment's serviceType
-#                                          (production has none until it is set; find it with mode=probe)
+#                                          (both default to 'AI'; list the names with mode=probe)
 # Missing key or TRANSLATED_ENV: a dispatch fails with ::error::; push/schedule end green
 # with a ::warning:: so the schedule does not go red four times a day.
 #

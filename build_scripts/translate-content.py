@@ -10,7 +10,7 @@ Actions (exactly one per invocation):
 
   --plan         compare English source hashes with localizedContent/{lang}/.translation-status.json
                  and list what is missing, outdated, in flight, orphaned, pinned or unscoped (offline)
-  --submit       POST /translate for every missing/outdated file (one request per file and
+  --submit       POST /translate/ai for every missing/outdated file (one request per file and
                  language) and record the job under "pendingJobs" in the status file
   --poll         POST /status for all pending jobs; when delivered, repair what can be restored
                  from the English source (code, markers, link targets), verify the rest, write the
@@ -23,7 +23,7 @@ Actions (exactly one per invocation):
                  back with --repair-existing)
   --self-test    offline proof that extraction, repair, verification and bookkeeping work
   --probe        GET service types and languages from the API and check the configuration
-  --dump-orders  write the exact /translate request bodies to a directory instead of sending them
+  --dump-orders  write the exact /translate/ai request bodies to a directory instead of sending them
   --cancel-pending
                  POST /translate/cancel for every pending request of the active environment and drop
                  its "pendingJobs" record (translations and failures untouched; production needs --force)
@@ -48,9 +48,9 @@ Environment:
     TRANSLATED_ENV            sandbox | production: selects translation.environments[...] in
                               build-config.json; required for --submit/--poll/--run/--probe/--cancel-pending
     TRANSLATED_API_KEY        required for --submit/--poll/--run/--probe/--cancel-pending
-    TRANSLATED_SERVICE_TYPE   overrides the environment's serviceType (production has none until set)
+    TRANSLATED_SERVICE_TYPE   overrides the environment's serviceType (both environments default to 'AI')
 
-Exit code is 1 for configuration or API errors and when any /translate batch failed.
+Exit code is 1 for configuration or API errors and when any /translate/ai batch failed.
 Individual files that fail verification do not fail the run; they are recorded under
 "failures" in the status file (at the source hash they failed for, so they are not
 resubmitted until the English changes or --retry-failed is given) and listed in the report.
@@ -956,11 +956,12 @@ class TranslatedClient:
         return self._request("GET", endpoint)
 
     def translate(self, orders: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        # One idempotency id per batch, reused on every retry so a timeout after server-side
-        # creation cannot produce a second (billed) set of requests.
-        items = self._post("translate", orders, {"x-idempotency-id": str(uuid.uuid4())})
+        # AI translation endpoint (service type 'AI'); one idempotency id per batch, reused on
+        # every retry so a timeout after server-side creation cannot produce a second (billed)
+        # set of requests.
+        items = self._post("translate/ai", orders, {"x-idempotency-id": str(uuid.uuid4())})
         if not isinstance(items, list):
-            raise TranslatedApiError(f"POST translate returned an unexpected body: {str(items)[:300]}")
+            raise TranslatedApiError(f"POST translate/ai returned an unexpected body: {str(items)[:300]}")
         return [i for i in items if isinstance(i, dict)]
 
     def status_many(self, id_requests: list[int]) -> list[dict[str, Any]]:
@@ -1399,7 +1400,7 @@ def prepare_submission(
     passthrough: dict[str, str],
     options: PlanOptions,
 ) -> LanguageSubmission:
-    """Plan one language and build its /translate orders without touching anything."""
+    """Plan one language and build its /translate/ai orders without touching anything."""
     status = load_status(lang)
     plan = build_plan(lang, sources, passthrough, status, options)
     sub = LanguageSubmission(lang, locale, status, plan)
@@ -1483,9 +1484,9 @@ def record_receipts(
             continue
         item = by_id.get(job["idContent"])
         if item is None or item.get("id") is None:
-            record_failure(status, rel, "no job returned by POST translate", job["sourceHash"])
-            r["failed"].append((rel, "no job returned by POST translate"))
-            print(f"{lang}: FAILED {rel}: no job returned by POST translate")
+            record_failure(status, rel, "no job returned by POST translate/ai", job["sourceHash"])
+            r["failed"].append((rel, "no job returned by POST translate/ai"))
+            print(f"{lang}: FAILED {rel}: no job returned by POST translate/ai")
             continue
         old = status["pendingJobs"].get(rel)
         status["pendingJobs"][rel] = {
@@ -1535,8 +1536,10 @@ def submit_language(
                 print(f"{lang}: BATCH FAILED ({len(batch)} orders): {e}")
                 for rel, job in sub.jobs.items():
                     if any(str(o["id_content"]) == job["idContent"] for o in batch):
-                        record_failure(status, rel, f"POST translate failed: {e}", job["sourceHash"], apiError=details)
-                        r["failed"].append((rel, f"POST translate failed: {e}"))
+                        record_failure(
+                            status, rel, f"POST translate/ai failed: {e}", job["sourceHash"], apiError=details
+                        )
+                        r["failed"].append((rel, f"POST translate/ai failed: {e}"))
                 continue
             record_receipts(config, client, sub, batch, items, r)
             save_status(lang, status)
@@ -2498,7 +2501,7 @@ class FakeTranslatedClient:
         self.translate_calls += 1
         if self.raise_on_translate_call == self.translate_calls:
             raise TranslatedApiError(
-                "POST translate failed with 400: INVALID_PARAMS; boom",
+                "POST translate/ai failed with 400: INVALID_PARAMS; boom",
                 400,
                 {
                     "code": "INVALID_PARAMS",
@@ -3054,7 +3057,7 @@ def selftest_fake_client(t: SelfTest) -> None:
         h.client.raise_on_translate_call = 2
         h.submit()
         status = load_status("es")
-        failed = [rel for rel, f in status["failures"].items() if "POST translate failed" in f["error"]]
+        failed = [rel for rel, f in status["failures"].items() if "POST translate/ai failed" in f["error"]]
         t.check(
             "batch 2 failure recorded with api error details; batches 1, 3, 4 persisted",
             len(failed) == 1
@@ -3275,7 +3278,7 @@ def selftest_fake_client(t: SelfTest) -> None:
         t.check("dump-orders leaves the status file untouched", status_path("es").read_bytes() == before)
         dumped = json.loads((out_dir / "es" / "guide.md.json").read_text(encoding="utf-8"))
         t.check(
-            "dumped order has the /translate shape",
+            "dumped order has the /translate/ai shape",
             set(dumped)
             == {
                 "id_content",
@@ -3634,7 +3637,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     actions.add_argument("--self-test", action="store_true", help="offline self-test (no key, no network)")
     actions.add_argument("--probe", action="store_true", help="check service types and languages against the API")
-    actions.add_argument("--dump-orders", metavar="DIR", help="write the /translate bodies to DIR instead of sending")
+    actions.add_argument(
+        "--dump-orders", metavar="DIR", help="write the /translate/ai bodies to DIR instead of sending"
+    )
     actions.add_argument(
         "--cancel-pending",
         action="store_true",
