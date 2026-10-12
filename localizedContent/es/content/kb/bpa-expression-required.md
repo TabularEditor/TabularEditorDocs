@@ -55,7 +55,7 @@ Esto se aplica a:
 1. En el **Explorador TOM**, localiza la medida, la columna calculada o el elemento de cálculo
 2. Haz doble clic para abrir el **Editor de DAX**
 3. Introduce una expresión DAX válida
-4. Validate the syntax and save
+4. Valida la sintaxis y guarda los cambios
 
 ## Causas habituales
 
