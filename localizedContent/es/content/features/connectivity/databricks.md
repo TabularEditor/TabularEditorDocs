@@ -19,36 +19,36 @@ applies_to:
 
 # Conectar a Databricks
 
-The Databricks connector connects to SQL warehouses and clusters in Azure Databricks and in Databricks workspaces on other clouds. It's available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+El conector de Databricks se conecta a los SQL Warehouse y clústeres en Azure Databricks y a los Workspace de Databricks en otras nubes. Solo está disponible como un Data source implícito (consulta [Data sources heredados, estructurados e implícitos](xref:connectivity#legacy-structured-and-implicit-data-sources)).
 
-Select **Model > Import tables...** and choose a Databricks source to open the dialog. @connecting-to-azure-databricks walks through an Azure Databricks import step by step.
+Selecciona **Modelo > Importar tablas...** y elige un origen de Databricks para abrir el cuadro de diálogo. @connecting-to-azure-databricks explica paso a paso una importación desde Azure Databricks.
 
-![The Connect to Databricks dialog, with Azure AD selected as the authentication type and a Sign in button beside it](~/content/assets/images/features/connectivity/databricks-connection.png)
+![El cuadro de diálogo Conectar a Databricks, con Azure AD seleccionado como tipo de autenticación y un botón Iniciar sesión al lado](~/content/assets/images/features/connectivity/databricks-connection.png)
 
 ## Requisitos del sistema
 
-Install the [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) on your machine (see [Prerequisites](xref:connecting-to-azure-databricks#prerequisites) in the tutorial for the supported drivers).
+Instala el [controlador ODBC de Databricks](https://www.databricks.com/spark/odbc-drivers-download) en tu equipo (consulta [Requisitos previos](xref:connecting-to-azure-databricks#prerequisites) en el tutorial para ver los controladores compatibles).
 
-## Connection fields
+## Campos de conexión
 
-| Campo                                                                                            | Descripción                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Server Hostname**                                                                              | The host name from the **Connection details** tab of the compute resource in Databricks. Obligatorio                                                              |
-| **HTTP Path**                                                                                    | The HTTP path from the same tab. Obligatorio                                                                                                                      |
-| **Type**                                                                                         | The authentication option. See [Authentication](#authentication)                                                                                                  |
-| **Username** and **Password**, or **Sign in...** | The credentials for the selected authentication option. The fields change with the option                                                                         |
-| **Advanced**                                                                                     | Optional settings: **Default catalog**, **Database**, **Automatic Proxy Discovery**, **Query tags**, **Implementation** and **Metric View BI Compatibility Mode** |
+| Campo                                                                                                           | Descripción                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Nombre de host del servidor**                                                                                 | El nombre de host de la pestaña **Detalles de la conexión** del recurso de cómputo en Databricks. Obligatorio                                                                                               |
+| **Ruta HTTP**                                                                                                   | La ruta HTTP de la misma pestaña. Obligatorio                                                                                                                                                               |
+| **Tipo**                                                                                                        | La opción de autenticación. Consulta [Autenticación](#authentication)                                                                                                                                       |
+| **Nombre de usuario** y **Contraseña**, o **Iniciar sesión...** | Las credenciales de la opción de autenticación seleccionada. Los campos cambian según la opción                                                                                                             |
+| **Avanzado**                                                                                                    | Configuración opcional: **Catálogo predeterminado**, **Base de datos**, **Detección automática del proxy**, **Etiquetas de consulta**, **Implementación** y **Modo de compatibilidad de BI de Metric View** |
 
 ## Autenticación
 
-| Autenticación                       | Lo que debe proporcionar                                                             | Interactive sign-in |
-| ----------------------------------- | ------------------------------------------------------------------------------------ | ------------------- |
-| **Token de acceso**                 | A Databricks personal access token. When it expires, enter a new one | No                  |
-| **Nombre de usuario / Contraseña**  | Nombre de usuario y contraseña                                                       | No                  |
-| **Azure AD**                        | A Microsoft Entra ID sign-in. Available only for Azure Databricks    | Sí                  |
-| **OAuth (OIDC)** | Inicio de sesión mediante el navegador                                               | Sí                  |
-| **OAuth (M2M)**  | A service principal client ID and client secret                                      | No                  |
+| Autenticación                       | Lo que debe proporcionar                                                                       | Inicio de sesión interactivo |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------- |
+| **Token de acceso**                 | Un token de acceso personal de Databricks. Cuando caduque, introduce uno nuevo | No                           |
+| **Nombre de usuario / Contraseña**  | Nombre de usuario y contraseña                                                                 | No                           |
+| **Azure AD**                        | Inicio de sesión con Microsoft Entra ID. Disponible solo para Azure Databricks | Sí                           |
+| **OAuth (OIDC)** | Inicio de sesión mediante el navegador                                                         | Sí                           |
+| **OAuth (M2M)**  | Un ID de cliente y un secreto de cliente del principal de servicio                             | No                           |
 
-For unattended connections, use **OAuth (M2M)**, which authenticates as a service principal.
+Para conexiones desatendidas, usa **OAuth (M2M)**, que se autentica como un principal de servicio.
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor guarda la configuración de conexión y las credenciales en tu archivo de opciones de usuario (consulta [Dónde se almacenan las credenciales](xref:connectivity#where-credentials-are-stored)).
