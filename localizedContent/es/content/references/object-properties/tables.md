@@ -61,7 +61,7 @@ El grupo se guarda con el modelo en la anotación `TabularEditor_TableGroup`, po
 
 En el **Explorador TOM**, también puedes hacer clic con el botón derecho en las tablas y elegir **Mover al grupo** o arrastrar tablas a un grupo de tablas (consulta @drag-drop). El script @script-create-table-groups coloca todas las tablas en grupos según su tipo y sus relaciones.
 
-### Habilitado
+### Habilitar la política de actualización
 
 `EnableRefreshPolicy` · bool · Actualización incremental · _atajo_: agrega o quita la **política de actualización** de la tabla
 
