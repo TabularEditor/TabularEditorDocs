@@ -59,7 +59,7 @@ The group is saved with the model in the `TabularEditor_TableGroup` annotation, 
 
 In the **TOM Explorer**, you can also right-click tables and choose **Move to group**, or drag tables onto a table group (see @drag-drop). The @script-create-table-groups script puts all tables in groups based on their type and relationships.
 
-### Enabled
+### Enable Refresh Policy
 `EnableRefreshPolicy` · bool · Incremental Refresh · *shortcut*: adds or removes the table's **Refresh Policy**
 
 Turns incremental refresh on or off for the table. Setting it to `true` adds a refresh policy to the table and shows the `RefreshPolicy` property. Setting it to `false` removes the refresh policy object and leaves the table's partitions as they are, including any policy range partitions the policy created. To turn the table back into a table with a regular M partition, follow the steps in [Removing Incremental Refresh](xref:incremental-refresh-policy#removing-incremental-refresh-using-tabular-editor).
