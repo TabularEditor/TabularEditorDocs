@@ -1,6 +1,6 @@
 ---
 uid: object-properties-partitions
-title: Partition properties
+title: Propiedades de la partición
 author: Jeroen ter Heerdt
 updated: 2026-10-09
 applies_to:
@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-# Partition properties
+# Propiedades de la partición
 
 <!--
 SUMMARY: Reference for the properties of partitions (legacy, calculated, M, entity and policy range partitions), incremental refresh policies and data coverage definitions.
@@ -25,184 +25,184 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
-This page covers the properties of partitions, incremental refresh policies and data coverage definitions. For properties that most objects share, see @object-properties-common.
+Esta página describe las propiedades de las particiones, las políticas de actualización para la actualización incremental y las definiciones de cobertura de datos. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
-A partition defines where one part of a table's data comes from. Every table except a calculation group has at least one partition, and most tables have exactly one. Each kind of partition describes its source differently:
+Una partición define de dónde procede una parte de los datos de una tabla. Todas las tablas, salvo los grupos de cálculo, tienen al menos una partición, y la mayoría tienen exactamente una. Cada tipo de partición describe su origen de forma distinta:
 
-| Kind                                        | Source Type   | Where the data comes from                                                                                                            |
-| ------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Legacy (query) partition | `Query`       | A native query, usually SQL, against a legacy (provider) data source.                             |
-| Calculated partition                        | `Calculated`  | The DAX expression of a calculated table.                                                                            |
-| M partition                                 | `M`           | A Power Query (M) expression. Power BI and most modern models use this kind.      |
-| Entity partition                            | `Entity`      | A named entity, such as a Delta table in a lakehouse or warehouse. Direct Lake tables use this kind. |
-| Policy range partition                      | `PolicyRange` | A date range of the table's incremental refresh policy. The engine creates these partitions.         |
+| Tipo                                                | Tipo de origen | De dónde proceden los datos                                                                                                                            |
+| --------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Partición heredada (de consulta) | `Query`        | Una consulta nativa, normalmente SQL, sobre un Data source heredado (proveedor).                                    |
+| Partición calculada                                 | `Calculated`   | La expresión DAX de una tabla calculada.                                                                                               |
+| Partición de M                                      | `M`            | Una expresión de Power Query (M). Power BI y la mayoría de los modelos modernos usan este tipo.     |
+| Partición de entidad                                | `Entity`       | Una entidad con nombre, como una tabla Delta en un Lakehouse o en un Warehouse. Las tablas Direct Lake usan este tipo. |
+| Partición por intervalo de la política              | `PolicyRange`  | Un intervalo de fechas de la política de actualización incremental de la tabla. El motor crea estas particiones.       |
 
-All kinds share the properties under [Properties of all partitions](#properties-of-all-partitions). The later sections list the properties specific to one kind.
+Todos los tipos comparten las propiedades descritas en [Propiedades de todas las particiones](#propiedades-de-todas-las-particiones). Las secciones siguientes enumeran las propiedades específicas de cada tipo.
 
-## Properties of all partitions
+## Propiedades de todas las particiones
 
-These properties apply to every kind of partition. The **Properties** view only shows the ones that apply to the selected kind, for example `Query` only on legacy partitions and `QueryGroup` only on M partitions. When a table has a single partition with the same name as the table, renaming the table also renames the partition.
+Estas propiedades se aplican a cada tipo de partición. La vista **Propiedades** solo muestra las que se aplican al tipo seleccionado; por ejemplo, `Query` solo se muestra en las particiones heredadas y `QueryGroup` solo en las particiones M. Cuando una tabla tiene una sola partición con el mismo nombre que la tabla, al cambiar el nombre de la tabla también se cambia el nombre de la partición.
 
-### Common properties
+### Propiedades comunes
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
+- [Nombre](xref:object-properties-common#name)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
 
-### Data Source
+### Data source
 
-`DataSource` · DataSource · Basic
+`DataSource` · DataSource · Básico
 
-The data source that the partition's query runs against. Tabular Editor shows this property on legacy (query) partitions and on entity partitions, where you pick one of the model's data sources from the dropdown. Policy range partitions also list the property, but it's always empty there.
+El Data source contra el que se ejecuta la consulta de la partición. Tabular Editor muestra esta propiedad en las particiones heredadas (de consulta) y en las particiones de entidad, donde puedes elegir uno de los Data sources del modelo en el menú desplegable. Las particiones de rango de directiva también muestran la propiedad, pero ahí siempre está vacía.
 
-M partitions don't use this property. Their M expression names the source directly, for example `Sql.Database("myserver", "mydb")`, or refers to a structured data source or shared expression. See @object-properties-data-sources.
+Las particiones M no usan esta propiedad. Su expresión M nombra el Data source directamente, por ejemplo `Sql.Database("myserver", "mydb")`, o hace referencia a un origen de datos estructurado o a una expresión compartida. Consulta @object-properties-data-sources.
 
 ### Expresión
 
-`Expression` · string · Basic
+`Expression` · string · Básico
 
-The expression that fills the partition with data. The **Properties** view only shows it on calculated partitions, where it holds the DAX expression of the calculated table. On legacy partitions the same text appears as `Query`, and on M partitions as `MExpression`.
+La expresión que rellena la partición con datos. La vista **Propiedades** solo la muestra en las particiones calculadas, donde contiene la expresión DAX de la tabla calculada. En las particiones heredadas, el mismo texto aparece como `Query`, y en las particiones M como `MExpression`.
 
-The **TOM Explorer** doesn't show the partitions of calculated tables (field parameters included) or of calculation groups. Edit the DAX expression through `Expression` on the calculated table, or open the partition's properties with the @script-edit-hidden-partitions script.
+El **Explorador TOM** no muestra las particiones de las tablas calculadas (incluidos los parámetros de campo) ni de los grupos de cálculo. Edita la expresión DAX mediante `Expression` en la tabla calculada, o abre las propiedades de la partición con el script @script-edit-hidden-partitions.
 
-In a C# script, `Expression` reads and writes the expression of legacy, calculated and M partitions alike. Setting it on any other kind of partition, such as an entity partition, throws an error.
+En un script en C#, `Expression` lee y escribe la expresión de las particiones heredadas, calculadas y M. Al establecerla en cualquier otro tipo de partición, como una partición de entidad, se produce un error.
 
 ### Query
 
-`Query` · string · Basic
+`Query` · string · Básico
 
-The native query that the engine sends to the legacy data source to fill the partition, for example:
+La consulta nativa que el motor envía al Data source heredado para rellenar la partición, por ejemplo:
 
 ```sql
 SELECT * FROM dbo.FactSales WHERE OrderDate >= '2024-01-01'
 ```
 
-`Query` only appears on legacy (query) partitions. It's an alias for `Expression`, and both names read and write the same value. The engine sends the query as-is, so write it in the source's own dialect. If you split a large table into several legacy partitions and their `WHERE` clauses overlap or leave gaps, rows load twice or not at all.
+`Query` solo aparece en las particiones heredadas (de consulta). Es un alias de `Expression` y ambos nombres leen y escriben el mismo valor. El motor envía la consulta tal cual, así que escríbela en el dialecto propio del origen. Si divides una tabla grande en varias particiones heredadas y sus cláusulas `WHERE` se solapan o dejan huecos, algunas filas se cargan dos veces o no se cargan.
 
-In Tabular Editor 3, a refresh override profile replaces the query of a partition for a single refresh, for example to load only the top 10,000 rows during development. See @refresh-overrides.
+En Tabular Editor 3, un perfil de sobrescritura de actualización reemplaza la consulta de una partición durante una sola actualización, por ejemplo, para cargar solo las 10 000 primeras filas durante el desarrollo. Consulta @refresh-overrides.
 
-### Last Processed
+### Procesado por última vez
 
-`RefreshedTime` · DateTime · Metadata · read-only
+`RefreshedTime` · DateTime · Metadatos · solo lectura
 
-The date and time the engine last refreshed the partition. Use it to confirm that a refresh reached a partition, for example after a scheduled refresh or an incremental refresh that only refreshes the most recent partitions.
+La fecha y hora en que el motor actualizó por última vez la partición. Úsalo para confirmar que una actualización afectó a una partición, por ejemplo, después de una actualización programada o de una actualización incremental que solo actualiza las particiones más recientes.
 
-A model that you open from a file shows the value stored in the file, if any. The value is only reliable when you're connected to a server or working in @workspace-mode.
+Un modelo abierto desde un archivo muestra el valor almacenado en el archivo, si existe. El valor solo es fiable cuando estás conectado a un servidor o trabajas en el modo @workspace-mode.
 
-When the **Ignore timestamps** serialization option is on (the default, see @preferences), Tabular Editor leaves timestamps out when it saves the model to a `.bim` file or a folder in the JSON format. These timestamps are `RefreshedTime` and the modified times of the model and its objects. Tabular Model Definition Language (TMDL) never stores timestamps, so a model saved as TMDL has no `RefreshedTime` value, whatever the option is set to.
+Cuando la opción de serialización **Ignore timestamps** está activada (es la predeterminada; consulta las preferencias en @preferences), Tabular Editor omite las marcas de tiempo al guardar el modelo en un archivo `.bim` o en una carpeta en formato JSON. Estas marcas de tiempo son `RefreshedTime` y las marcas de tiempo de modificación del modelo y sus objetos. Tabular Model Definition Language (TMDL) nunca almacena marcas de tiempo, por lo que un modelo guardado como TMDL no tiene ningún valor de `RefreshedTime`, independientemente de cómo esté configurada la opción.
 
-In Tabular Editor 3, refresh a single partition by right-clicking it in the **TOM Explorer** and choosing **Refresh partition** and the type of refresh. The @data-refresh-view shows the progress of the refresh.
+En Tabular Editor 3, actualiza una sola partición haciendo clic con el botón derecho en ella en el **Explorador TOM**, eligiendo **Actualizar partición** y luego el tipo de actualización. La @data-refresh-view muestra el progreso de la actualización.
 
 ### DataCoverageDefinition
 
-`DataCoverageDefinition` · DataCoverageDefinition · Options · compatibility level 1603+
+`DataCoverageDefinition` · DataCoverageDefinition · Opciones · nivel de compatibilidad 1603+
 
-The optional [data coverage definition](#data-coverage-definition) of the partition, which describes the rows a DirectQuery partition holds. When a query only asks for rows outside that range, the engine skips querying the source. Hybrid tables use it on the DirectQuery partition that holds the recent data, next to the imported partitions with older data.
+La [definición de cobertura de datos](#data-coverage-definition) opcional de la partición, que describe las filas que contiene una partición de DirectQuery. Cuando una consulta solo solicita filas fuera de ese intervalo, el motor evita consultar el origen. Las tablas híbridas la usan en la partición de DirectQuery que contiene los datos recientes, junto a las particiones importadas con datos más antiguos.
 
-Tabular Editor shows this property at compatibility level 1603 and higher, on partitions in `DirectQuery` or `Dual` mode and on any partition that already has a data coverage definition. Use the property's actions to add or remove the definition or to edit its expression. On the same partitions, the **Expression Editor** lists the data coverage definition expression, and typing an expression there on a partition without a definition adds one.
+Tabular Editor muestra esta propiedad en el nivel de compatibilidad 1603 y superior, en las particiones en modo `DirectQuery` o `Dual` y en cualquier partición que ya tenga una definición de cobertura de datos. Usa las acciones de la propiedad para agregar o quitar la definición, o para editar su expresión. En esas mismas particiones, el **Editor de expresiones** muestra la expresión de la definición de cobertura de datos, y escribir allí una expresión en una partición sin definición agrega una.
 
-### Data View
+### Vista de datos
 
-`DataView` · DataViewType · Options
+`DataView` · DataViewType · Opciones
 
-For DirectQuery models in Analysis Services: whether the partition holds all data or a sample of it. A sample partition holds a small, imported subset of a DirectQuery table for designing the model in Visual Studio. Queries from client tools use the full data.
+Para los modelos de DirectQuery en Analysis Services: si la partición contiene todos los datos o una muestra de ellos. Una partición de muestra contiene un pequeño subconjunto importado de una tabla de DirectQuery para diseñar el modelo en Visual Studio. Las consultas de las herramientas cliente usan el conjunto completo de datos.
 
-| Valor     | Significado                                                                                  |
-| --------- | -------------------------------------------------------------------------------------------- |
-| `Full`    | The partition holds the complete data.                                       |
-| `Sample`  | The partition holds a sample of the data, for use while designing the model. |
-| `Default` | The partition uses `DefaultDataView` of the model.                           |
+| Valor            | Significado                                                                                              |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| `Full`           | La partición contiene todos los datos.                                                   |
+| `Muestra`        | La partición contiene una muestra de los datos para usarla mientras se diseña el modelo. |
+| `Predeterminado` | La partición usa el `DefaultDataView` del modelo.                                        |
 
-The Tabular Object Model (TOM) defines only these three values. According to Microsoft's documentation on DirectQuery mode, the **Set as Sample** feature of the Visual Studio model designer is currently not supported. Power BI doesn't use data views, so leave this property at its default in Power BI and Fabric models.
+El Tabular Object Model (TOM) solo define estos tres valores. Según la documentación de Microsoft sobre el modo DirectQuery, la característica **Establecer como muestra** del diseñador de modelos de Visual Studio no se admite actualmente. Power BI no usa vistas de datos, así que deje esta propiedad en su valor predeterminado en los modelos de Power BI y Fabric.
 
 ### Modo
 
-`Mode` · ModeType · Options
+`Mode` · ModeType · Opciones
 
-The storage mode of the partition, which sets how the engine gets to the data in it.
+El modo de almacenamiento de la partición, que determina cómo accede el motor a los datos que contiene.
 
-| Valor         | Significado                                                                                                                                                                                                                                                                                                                                                             |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Import`      | Data is loaded into the model's memory at refresh time. Queries don't go to the source.                                                                                                                                                                                                                                                 |
-| `DirectQuery` | Data stays in the source. Each query is translated into a query against the source, for example SQL.                                                                                                                                                                                                                                    |
-| `Dual`        | The partition acts as Import or DirectQuery, whichever gives the better query in a composite model. Typically used for dimension tables that relate to both imported and DirectQuery fact tables. Compatibility level 1455+.                                                                                            |
-| `DirectLake`  | Data is read directly from Delta tables in OneLake and loaded into memory on demand. Fabric only. Used with entity partitions. Compatibility level 1604+. Not available in Tabular Editor editions without Direct Lake support. See @direct-lake-guidance. |
-| `Push`        | Data is pushed into the partition through the Power BI REST API, as in a push semantic model. There is no source query. Only the Power BI service supports it.                                                                                                                                                          |
-| `Default`     | The partition uses `DefaultMode` of the model. See @object-properties-model.                                                                                                                                                                                                                                               |
+| Valor            | Significado                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Import`         | Los datos se cargan en la memoria del modelo durante la actualización. Las consultas no se envían al origen.                                                                                                                                                                                                                                                                    |
+| `DirectQuery`    | Los datos permanecen en el origen. Cada consulta se traduce en una consulta al origen, por ejemplo, en SQL.                                                                                                                                                                                                                                                                     |
+| `Dual`           | La partición actúa como Import o DirectQuery, según cuál produzca la mejor consulta en un modelo compuesto. Normalmente se usa para tablas de dimensiones relacionadas tanto con tablas de hechos importadas como con tablas de hechos en DirectQuery. Nivel de compatibilidad 1455+.                                                                           |
+| `DirectLake`     | Los datos se leen directamente de tablas Delta en OneLake y se cargan en memoria bajo demanda. Solo en Fabric. Se usa con particiones de entidad. Nivel de compatibilidad 1604+. No está disponible en las ediciones de Tabular Editor que no admiten Direct Lake. Consulta @direct-lake-guidance. |
+| `Push`           | Los datos se envían a la partición a través de la API REST de Power BI, como en un modelo semántico de tipo push. No hay ninguna consulta de origen. Solo el servicio de Power BI lo admite.                                                                                                                                                                    |
+| `Predeterminado` | La partición usa el `DefaultMode` del modelo. Consulta @object-properties-model.                                                                                                                                                                                                                                                                                   |
 
-The mode is set per partition, and all partitions of a table usually have the same mode. The main exception is a hybrid table, where an incremental refresh policy imports the historical partitions and keeps the most recent one in DirectQuery mode (see `Mode` under [Refresh policy](#refresh-policy)).
+El modo se establece por partición y normalmente todas las particiones de una tabla tienen el mismo modo. La principal excepción es una tabla híbrida, en la que una directiva de actualización incremental importa las particiones históricas y mantiene la más reciente en modo DirectQuery (consulta `Mode` en [política de actualización](#refresh-policy)).
 
-Switching a table from `Import` to `DirectQuery` removes its imported data, and some features, such as calculated columns that use certain DAX functions, don't work in DirectQuery. To convert a Direct Lake table to import or back, see @script-convert-dlol-to-import and @script-convert-import-to-dlol.
+Cambiar una tabla de `Import` a `DirectQuery` elimina sus datos importados, y algunas características, como las columnas calculadas que usan determinadas funciones DAX, no funcionan en DirectQuery. Para convertir una tabla de Direct Lake a importación o viceversa, consulta @script-convert-dlol-to-import y @script-convert-import-to-dlol.
 
-Tabular Editor accepts any combination of modes. When you save, the engine rejects the combinations it doesn't support, and SQL Server Analysis Services is much stricter than Power BI. SQL Server 2025 Analysis Services:
+Tabular Editor acepta cualquier combinación de modos. Al guardar, el motor rechaza las combinaciones que no admite, y SQL Server Analysis Services es mucho más estricto que Power BI. Analysis Services de SQL Server 2025:
 
-- rejects `Dual` partitions with the error `may not operate in Dual mode`
-- rejects models that mix imported data with DirectQuery, both within a table and across tables, so composite models and hybrid tables aren't possible
-- allows only one `DirectQuery` partition per table
+- rechaza las particiones `Dual` con el error `may not operate in Dual mode`
+- rechaza los modelos que mezclan datos importados con DirectQuery, tanto dentro de una tabla como entre tablas, por lo que no son posibles los modelos compuestos ni las tablas híbridas
+- solo permite una partición `DirectQuery` por tabla
 
-The one mix it accepts is the older DirectQuery pattern of one `DirectQuery` partition plus `Import` partitions with `DataView` set to `Sample`.
+La única combinación que acepta es el patrón antiguo de DirectQuery: una partición `DirectQuery` más particiones `Import` con `DataView` establecido en `Sample`.
 
-The Power BI service accepts an `Import` and a `DirectQuery` partition in the same table, even without a refresh policy. `Dual` tables and relationships between imported and DirectQuery tables in either direction also work there. The service keeps the rule of one `DirectQuery` partition per table, and it rejects a `DirectQuery` or `Dual` partition whose expression doesn't refer to a data source, such as one built from literal data with `#table`.
+El servicio de Power BI acepta una partición `Import` y una `DirectQuery` en la misma tabla, incluso sin una política de actualización. Las tablas `Dual` y las relaciones entre tablas importadas y tablas DirectQuery en ambos sentidos también funcionan allí. El servicio mantiene la regla de una partición `DirectQuery` por tabla y rechaza una partición `DirectQuery` o `Dual` cuya expresión no haga referencia a un Data source, como una construida a partir de datos literales con `#table`.
 
 ### Query Group
 
-`QueryGroup` · QueryGroup · Options · compatibility level 1480+
+`QueryGroup` · QueryGroup · Opciones · nivel de compatibilidad 1480+
 
-The query group (folder) that the partition's M query appears in, in the Power Query editor of Power BI Desktop. It only organizes queries in that editor and doesn't affect refresh or the field list. Tabular Editor shows this property on M partitions only, where you pick one of the model's query groups from the dropdown or leave it empty. For query groups, see @object-properties-data-sources.
+El Query Group (carpeta) en el que aparece la consulta M de la partición, en el editor de Power Query de Power BI Desktop. Solo organiza las consultas en ese editor y no afecta ni a la actualización ni a la lista de campos. Tabular Editor muestra esta propiedad solo en las particiones M, donde eliges uno de los Query Group del modelo en la lista desplegable o lo dejas vacío. Para los Query Group, consulta @object-properties-data-sources.
 
-### Source Type
+### Tipo de origen
 
-`SourceType` · PartitionSourceType · Options · read-only
+`SourceType` · PartitionSourceType · Opciones · solo lectura
 
-The kind of partition, set when the partition is created. To change the kind, create a new partition of the right kind and delete the old one.
+El tipo de partición, que se establece al crearla. Para cambiar el tipo, crea una partición nueva del tipo correcto y elimina la anterior.
 
-| Valor              | Significado                                                                                                                                     |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Query`            | A legacy partition with a native query against a provider data source.                                                          |
-| `Calculated`       | The partition of a calculated table, filled by a DAX expression.                                                                |
-| `None`             | The partition has no source. The data is pushed into it, for example in a push semantic model.                  |
-| `M`                | An M partition with a Power Query (M) expression.                                                            |
-| `Entity`           | An entity partition that reads a named entity, such as a table in a lakehouse. Direct Lake uses this kind.      |
-| `PolicyRange`      | A partition generated by an incremental refresh policy.                                                                         |
-| `CalculationGroup` | The partition of a calculation group table. It holds no source; the engine fills it from the calculation items. |
-| `Inferred`         | A partition for which the engine generates the query itself. Compatibility level 1563+.                         |
+| Valor              | Significado                                                                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Query`            | Una partición heredada con una consulta nativa contra un origen de datos del proveedor.                                                                |
+| `Calculated`       | La partición de una tabla calculada, rellenada mediante una expresión DAX.                                                                             |
+| `None`             | La partición no tiene origen. Los datos se insertan en ella, por ejemplo, en un modelo semántico push.                                 |
+| `M`                | Una partición M con una expresión de Power Query (M).                                                                               |
+| `Entity`           | Una partición de entidad que lee una entidad con nombre, como una tabla en un Lakehouse. Direct Lake usa este tipo.                    |
+| `PolicyRange`      | Una partición generada por una política de actualización incremental.                                                                                  |
+| `CalculationGroup` | La partición de una tabla de un grupo de cálculo. No contiene ningún origen; el motor la rellena a partir de los elementos de cálculo. |
+| `Inferida`         | Una partición para la que el motor genera la consulta automáticamente. Nivel de compatibilidad 1563+.                                  |
 
-TOM also defines the value `Parquet`, for an internal compatibility level that Microsoft doesn't release, so it doesn't appear in your models.
+TOM también define el valor `Parquet` para un nivel de compatibilidad interno que Microsoft no publica, por lo que no aparece en tus modelos.
 
 <!-- TODO (not verifiable from TE3 source): which kind of table or model feature creates Inferred partitions. TOM only says "populated by executing a query generated by the system" (CL 1563+), and TE3 has no special handling for it. Same open question as on @object-properties-tables. -->
 
-## Legacy and calculated partitions
+## Particiones heredadas y calculadas
 
-Legacy (query) partitions and calculated partitions have no properties beyond the ones under [Properties of all partitions](#properties-of-all-partitions).
+Las particiones heredadas (de consulta) y las particiones calculadas no tienen propiedades más allá de las que se indican en [Propiedades de todas las particiones](#properties-of-all-partitions).
 
-- a **legacy partition** (`Query`) uses `DataSource` and `Query`. Models use it with provider data sources, typically in Analysis Services models below compatibility level 1400. See @import-tables. The Best Practice Analyzer (BPA) rule @kb.bpa-avoid-provider-partitions-structured flags legacy partitions that use a structured data source, a combination that Power BI doesn't support.
-- a **calculated partition** (`Calculated`) belongs to a calculated table and uses `Expression`. Edit the DAX expression on the calculated table itself (see `Expression` on @object-properties-tables). The **TOM Explorer** doesn't show the partitions of calculated tables. To open one, use the @script-edit-hidden-partitions script.
+- una **partición heredada** (`Query`) usa `DataSource` y `Query`. Los modelos la usan con orígenes de datos del proveedor, normalmente en modelos de Analysis Services con un nivel de compatibilidad inferior a 1400. Consulta @import-tables. La regla @kb.bpa-avoid-provider-partitions-structured del Best Practice Analyzer (BPA) señala las particiones heredadas que usan un origen de datos estructurado, una combinación que Power BI no admite.
+- una **partición calculada** (`Calculated`) pertenece a una tabla calculada y usa `Expression`. Edita la expresión DAX en la propia tabla calculada (consulta `Expression` en @object-properties-tables). El **Explorador TOM** no muestra las particiones de las tablas calculadas. Para abrir una partición, usa el script @script-edit-hidden-partitions.
 
-## M partition
+## Partición de M
 
-An M partition fills the table with the result of a Power Query (M) expression. It's the default kind of partition in Power BI models and in Analysis Services models at compatibility level 1400 and higher. The M expression typically starts from a source function, such as `Sql.Database`, or from a shared expression, and ends with the table to load.
+Una partición de M rellena la tabla con el resultado de una expresión de Power Query (M). Es el tipo de partición predeterminado en los modelos de Power BI y en los modelos de Analysis Services con nivel de compatibilidad 1400 o superior. La expresión M normalmente parte de una función de origen, como `Sql.Database`, o de una expresión compartida, y termina con la tabla que se va a cargar.
 
-### Common properties
+### Propiedades comunes
 
-The same as on [all partitions](#properties-of-all-partitions).
+Las mismas que en [todas las particiones](#properties-of-all-partitions).
 
-### Attributes
+### Atributos
 
-`Attributes` · string · Options
+`Attributes` · cadena · Opciones
 
-Extra M attributes stored with the partition's source. Most models leave it empty, and Power BI Desktop leaves it empty, also on tables with an incremental refresh policy.
+Atributos M adicionales almacenados con el origen de la partición. La mayoría de los modelos lo dejan vacío, y Power BI Desktop también lo deja vacío, incluso en tablas con una política de actualización incremental.
 
 <!-- TODO (not verifiable from TE3 source): which tools or scenarios fill in Attributes on an M partition. -->
 
-### M Expression
+### Expresión M
 
-`MExpression` · string · Options
+`MExpression` · string · Opciones
 
-The Power Query (M) expression that returns the data for the partition. Edit it in the **Expression Editor**. Por ejemplo:
+La expresión de Power Query (M) que devuelve los datos de la partición. Edítala en el **Editor de expresiones**. Por ejemplo:
 
 ```m
 let
@@ -212,167 +212,167 @@ in
     Sales
 ```
 
-The expression must return a table whose columns match the `SourceColumn` values of the table's data columns (see @object-properties-columns). If a column is renamed or removed in the source, refresh fails until you update the table's columns, for example with **Update table schema** (see @import-tables).
+La expresión debe devolver una tabla cuyas columnas coincidan con los valores de `SourceColumn` de las columnas de datos de la tabla (consulta @object-properties-columns). Si en el origen se cambia el nombre de una columna o se elimina, la actualización fallará hasta que actualices las columnas de la tabla, por ejemplo con **Actualizar esquema de tabla** (consulta @import-tables).
 
-Parts that several partitions share, such as the server name, can go in a shared expression or an M parameter that the expressions refer to by name. See @script-create-m-parameter. In Tabular Editor 3, @script-create-and-replace-parameter also replaces the value with the new parameter in all M partitions.
+Las partes que comparten varias particiones, como el nombre del servidor, pueden ir en una expresión compartida o en un parámetro M al que las expresiones hagan referencia por nombre. Consulta @script-create-m-parameter. En Tabular Editor 3, @script-create-and-replace-parameter también reemplaza el valor por el nuevo parámetro en todas las particiones M.
 
-In Tabular Editor 3, the @script-format-power-query script formats the M expression of the selected partition through an external formatting service.
+En Tabular Editor 3, el script @script-format-power-query da formato a la expresión M de la partición seleccionada mediante un servicio de formato externo.
 
-## Entity partition
+## Partición de entidad
 
-An entity partition reads its data from a named object, an _entity_. Each Direct Lake table has one entity partition that points to a Delta table in a Fabric lakehouse or warehouse. A shared expression holds the connection to the lakehouse or warehouse, and the partition refers to it through `ExpressionSource`.
+Una partición de entidad lee sus datos de un objeto con nombre, una _entidad_. Cada tabla de Direct Lake tiene una partición de entidad que apunta a una tabla Delta en un Lakehouse o un Warehouse de Fabric. Una expresión compartida contiene la conexión al Lakehouse o al Warehouse, y la partición hace referencia a ella mediante `ExpressionSource`.
 
-See @direct-lake-sql-model and @direct-lake-guidance. In Tabular Editor 3, the @import-tables wizard creates Direct Lake tables from a Fabric lakehouse or warehouse.
+Consulta @direct-lake-sql-model y @direct-lake-guidance. En Tabular Editor 3, el asistente @import-tables crea tablas de Direct Lake a partir de un Lakehouse o un Warehouse de Fabric.
 
-### Common properties
+### Propiedades comunes
 
-The same as on [all partitions](#properties-of-all-partitions).
+Las mismas que en [todas las particiones](#properties-of-all-partitions).
 
 ### Nombre de entidad
 
-`EntityName` · string · Options
+`EntityName` · string · Opciones
 
-The name of the source object the partition reads, for example the Delta table `FactSales` in the lakehouse. Like a column's `SourceColumn`, it has to match the source exactly. Renaming the table in the model doesn't change the entity name, so the table can have a friendlier name than the source. If the source table is renamed, update `EntityName` to match, or the partition fails the next time the model is framed or refreshed.
+El nombre del objeto de origen que lee la partición; por ejemplo, la tabla Delta `FactSales` del Lakehouse. Al igual que el `SourceColumn` de una columna, debe coincidir exactamente con el nombre en el origen. Cambiar el nombre de la tabla en el modelo no cambia el nombre de la entidad, así que la tabla puede tener un nombre más descriptivo que el del origen. Si se cambia el nombre de la tabla de origen, actualiza `EntityName` para que coincida o la partición fallará la próxima vez que se procese o actualice el modelo.
 
 <!-- TODO (not verifiable from TE3 source): whether Entity Name is case-sensitive for Direct Lake. -->
 
-If your changes to `EntityName` revert after you refresh the model in Power BI, see @direct-lake-entity-updates-reverting.
+Si los cambios que haces en `EntityName` se revierten después de actualizar el modelo en Power BI, consulta @direct-lake-entity-updates-reverting.
 
 ### Origen de la expresión
 
-`ExpressionSource` · NamedExpression · Options
+`ExpressionSource` · NamedExpression · Opciones
 
-The shared expression that holds the connection to the source. In a Direct Lake model this is typically a shared expression named `DatabaseQuery`, the name that the Tabular Editor 3 import wizard gives it. Its M expression depends on the kind of Direct Lake:
+La expresión compartida que contiene la conexión al origen. En un modelo Direct Lake, normalmente es una expresión compartida llamada `DatabaseQuery`, el nombre que le asigna el asistente de importación de Tabular Editor 3. Su expresión M depende del tipo de Direct Lake:
 
-- **Direct Lake on SQL**: `Sql.Database("<SQL endpoint>", "<lakehouse or warehouse name>")`
-- **Direct Lake on OneLake**: `AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/<workspace ID>/<item ID>", [HierarchicalNavigation=true])`
+- **Direct Lake en SQL**: `Sql.Database("<SQL endpoint>", "<lakehouse or warehouse name>")`
+- **Direct Lake en OneLake**: `AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/<workspace ID>/<item ID>", [HierarchicalNavigation=true])`
 
-Tabular Editor tells the two kinds apart by the M function in this shared expression, and treats an entity partition without an expression source as Direct Lake on SQL. All Direct Lake tables of a model usually point to the same shared expression.
+Tabular Editor distingue ambos tipos por la función M de esa expresión compartida y considera que una partición de entidad sin un origen de expresión es Direct Lake en SQL. Todas las tablas Direct Lake de un modelo suelen apuntar a la misma expresión compartida.
 
-To point a Direct Lake model to a different lakehouse or warehouse, for example when you move it from development to production, change the M expression of that shared expression. The partitions keep pointing to it. The @script-convert-dlsql-to-dlol script switches a model from Direct Lake on SQL to Direct Lake on OneLake by changing the same M expression.
+Para que un modelo Direct Lake apunte a otro Lakehouse o Warehouse, por ejemplo, al pasarlo de desarrollo a producción, cambia la expresión M de esa expresión compartida. Las particiones siguen apuntando a ella. El script @script-convert-dlsql-to-dlol cambia un modelo de Direct Lake en SQL a Direct Lake en OneLake modificando esa misma expresión M.
 
 ### Nombre del esquema
 
-`SchemaName` · string · Options · compatibility level 1604+
+`SchemaName` · cadena · Opciones · nivel de compatibilidad 1604+
 
-The schema of the source object, for lakehouses and warehouses that use schemas, for example `dbo` or `sales`. Leave it empty when the source has no schemas. Together with `EntityName`, it identifies the source table.
+El esquema del objeto de origen, para Lakehouse y Warehouse que usan esquemas; por ejemplo, `dbo` o `sales`. Déjalo vacío cuando el origen no tenga esquemas. Junto con `EntityName`, identifica la tabla de origen.
 
-Microsoft's documentation describes this property as reserved for future use. Tabular Editor shows it at compatibility level 1604 and higher.
+La documentación de Microsoft describe esta propiedad como reservada para uso futuro. Tabular Editor la muestra en el nivel de compatibilidad 1604 y superior.
 
 <!-- TODO (not verifiable from TE3 source): whether Direct Lake now uses Schema Name for schema-enabled lakehouses, despite the "reserved for future use" description in TOM. -->
 
-## Policy range partition
+## Partición de rango de la política
 
-A policy range partition holds one date range of a table that uses incremental refresh. The engine creates, merges and removes these partitions when it applies the table's refresh policy, for example during a refresh in the Power BI service or when you choose **Apply Refresh Policy** in Tabular Editor. Each partition covers one period, such as a day, a month, a quarter or a year, and older periods are merged into bigger partitions as they age. The M query of a policy range partition is `SourceExpression` of the refresh policy, with the partition's `Start` and `End` as the values of `RangeStart` and `RangeEnd`.
+Una partición de rango de la política contiene un intervalo de fechas de una tabla que usa actualización incremental. El motor crea, combina y elimina estas particiones cuando aplica la política de actualización de la tabla; por ejemplo, durante una actualización en el servicio de Power BI o cuando seleccionas **Aplicar política de actualización** en Tabular Editor. Cada partición cubre un periodo, como un día, un mes, un trimestre o un año, y los periodos más antiguos se combinan en particiones más grandes con el tiempo. La consulta M de una partición de rango de la política es la `SourceExpression` de la política de actualización, usando `Start` y `End` de la partición como valores de `RangeStart` y `RangeEnd`.
 
-See @incremental-refresh-about, @incremental-refresh-setup and @incremental-refresh-modify. In Tabular Editor 3, the @advanced-refresh dialog applies the refresh policy as part of a refresh with an effective date that you pick, to test how the policy behaves at another point in time. When you deploy from Tabular Editor 3, you can leave out the partitions that a refresh policy governs. See @deployment.
+Consulta @incremental-refresh-about, @incremental-refresh-setup y @incremental-refresh-modify. En Tabular Editor 3, el cuadro de diálogo @advanced-refresh aplica la política de actualización como parte de una actualización con una fecha de vigencia que eliges, para probar cómo se comporta la política en otro momento. Al implementar desde Tabular Editor 3, puedes omitir las particiones regidas por una política de actualización. Consulta @deployment.
 
-### Common properties
+### Propiedades comunes
 
-The same as on [all partitions](#properties-of-all-partitions).
+Igual que en [todas las particiones](#properties-of-all-partitions).
 
 ### End
 
-`End` · DateTime · Refresh Policy
+`End` · DateTime · Política de actualización
 
-The end of the date range the partition covers. The partition holds the rows dated before `End`, and the engine passes the value as `RangeEnd` when it refreshes the partition. The engine sets it when it applies the refresh policy.
+El final del intervalo de fechas que cubre la partición. La partición contiene las filas con fecha anterior a `End`, y el motor pasa el valor como `RangeEnd` al actualizar la partición. El motor lo establece cuando aplica la política de actualización.
 
 ### Granularity
 
-`Granularity` · RefreshGranularityType · Refresh Policy
+`Granularity` · RefreshGranularityType · Política de actualización
 
-The size of the period the partition covers.
+El tamaño del período que cubre la partición.
 
-| Valor     | Significado                            |
-| --------- | -------------------------------------- |
-| `Day`     | One day.               |
-| `Month`   | One calendar month.    |
-| `Quarter` | One calendar quarter.  |
-| `Year`    | One calendar year.     |
-| `Invalid` | No granularity is set. |
+| Valor       | Significado                                                |
+| ----------- | ---------------------------------------------------------- |
+| `Día`       | Un día.                                    |
+| `Mes`       | Un mes natural.                            |
+| `Trimestre` | Un trimestre natural.                      |
+| `Año`       | Un año natural.                            |
+| `Inválido`  | No se ha establecido ninguna granularidad. |
 
-Recent periods are usually small (days or months) and are merged into larger ones (quarters, then years) as they move out of the incremental refresh window.
+Los períodos recientes suelen ser pequeños (días o meses) y se combinan en otros mayores (trimestres y, después, años) a medida que salen de la ventana de actualización incremental.
 
 ### RefreshBookmark
 
-`RefreshBookmark` · string · Refresh Policy · read-only
+`RefreshBookmark` · string · Política de actualización · de solo lectura
 
-The value that `PollingExpression` of the refresh policy returned for this partition at its last refresh, for example the latest modified date in the partition's range. It's empty when the policy has no polling expression. On the next refresh, the engine evaluates the polling expression again and only refreshes the partition if the value has changed. **Detect data changes** in Power BI Desktop works this way.
+El valor que `PollingExpression` de la política de actualización devolvió para esta partición en la última actualización; por ejemplo, la fecha de modificación más reciente dentro del intervalo de la partición. Está vacío cuando la política no tiene ninguna expresión de sondeo. En la siguiente actualización, el motor vuelve a evaluar la expresión de sondeo y solo actualiza la partición si el valor ha cambiado. Así es como funciona **Detectar cambios en los datos** en Power BI Desktop.
 
-The property is read-only in Tabular Editor and in the TOM library, but a Tabular Model Scripting Language (TMSL) `alter` command can set `refreshBookmark` on a partition, for example to an empty string. On the next refresh with the refresh policy applied, the engine compares the polling result with the stored bookmark and only refreshes the partitions where they differ, so changing the bookmark forces a refresh of that partition. A refresh with `applyRefreshPolicy` set to `false` refreshes the partitions without reading or updating the bookmarks.
+La propiedad es de solo lectura en Tabular Editor y en la biblioteca TOM, pero un comando `alter` de Tabular Model Scripting Language (TMSL) puede establecer `refreshBookmark` en una partición, por ejemplo, con el valor de una cadena vacía. En la siguiente actualización, con la política de actualización aplicada, el motor compara el resultado del sondeo con el Bookmark guardado y solo actualiza las particiones en las que difieren; por eso, cambiar el Bookmark fuerza la actualización de esa partición. Una actualización con `applyRefreshPolicy` establecido en `false` actualiza las particiones sin leer ni actualizar los Bookmarks.
 
-### Start
+### Inicio
 
-`Start` · DateTime · Refresh Policy
+`Start` · DateTime · política de actualización
 
-The start of the date range the partition covers. The partition holds the rows dated on or after `Start`, and the engine passes the value as `RangeStart` when it refreshes the partition. Like `End`, the engine sets it when it applies the refresh policy.
+El inicio del intervalo de fechas que cubre la partición. La partición contiene las filas con fecha igual o posterior a `Start`, y el motor pasa el valor como `RangeStart` cuando actualiza la partición. Al igual que `End`, el motor lo establece cuando aplica la política de actualización.
 
-## Refresh policy
+## Política de actualización
 
-A refresh policy defines how the engine partitions and refreshes a table incrementally: how much history to keep (the _rolling window_), how much of the most recent data to refresh each time (the _incremental window_) and the M query for each partition. The engine uses the policy to create and maintain the table's [policy range partitions](#policy-range-partition).
+Una política de actualización define cómo el motor particiona y actualiza una tabla de forma incremental: cuánto historial conservar (la _ventana deslizante_), cuánto de los datos más recientes actualizar cada vez (la _ventana incremental_) y la consulta M de cada partición. El motor usa la política para crear y mantener las [particiones de rango de la política](#policy-range-partition) de la tabla.
 
-The refresh policy is on its table, under **Incremental Refresh** in the **Properties** view. Set **Enabled** (`EnableRefreshPolicy`) to `true` on the table, then expand **Refresh Policy** to edit the properties below. See `RefreshPolicy` on @object-properties-tables.
+La política de actualización se encuentra en la tabla, en **actualización incremental**, en la vista **Propiedades**. Establece **Habilitado** (`EnableRefreshPolicy`) en `true` en la tabla y, después, expande **política de actualización** para editar las propiedades siguientes. Consulta `RefreshPolicy` en @object-properties-tables.
 
-With `RollingWindowPeriods` set to `5`, `RollingWindowGranularity` to `Year`, `IncrementalPeriods` to `10` and `IncrementalGranularity` to `Day`, the table keeps five years of history and each refresh only reloads the last ten days.
+Con `RollingWindowPeriods` establecido en `5`, `RollingWindowGranularity` en `Year`, `IncrementalPeriods` en `10` e `IncrementalGranularity` en `Day`, la tabla conserva cinco años de historial y cada actualización solo vuelve a cargar los últimos diez días.
 
-See @incremental-refresh-about, @incremental-refresh-policy, @incremental-refresh-setup, @incremental-refresh-modify and @incremental-refresh-schema. The @script-implement-incremental-refresh script sets up a refresh policy for an import table from a date column you select, including the `RangeStart` and `RangeEnd` parameters.
+Consulta @incremental-refresh-about, @incremental-refresh-policy, @incremental-refresh-setup, @incremental-refresh-modify y @incremental-refresh-schema. El script @script-implement-incremental-refresh configura una política de actualización para una tabla de importación a partir de una columna de fecha que selecciones, incluidos los parámetros `RangeStart` y `RangeEnd`.
 
-### Common properties
+### Propiedades comunes
 
-- [Annotations](xref:object-properties-common#annotations)
-- [Extended Properties](xref:object-properties-common#extended-properties)
-- [Object Type](xref:object-properties-common#object-type)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Propiedades extendidas](xref:object-properties-common#extended-properties)
+- [Tipo de objeto](xref:object-properties-common#object-type)
 
-### Incremental Granularity
+### Granularidad incremental
 
-`IncrementalGranularity` · RefreshGranularityType · Options
+`IncrementalGranularity` · RefreshGranularityType · Opciones
 
-The unit of `IncrementalPeriods`: `Day`, `Month`, `Quarter` or `Year`. `Invalid` means the policy isn't configured yet. The unit is also the size of the partitions in the incremental window, for example one partition per day of the refreshed range for `Day`.
+La unidad de `IncrementalPeriods`: `Day`, `Month`, `Quarter` o `Year`. `Invalid` significa que la política aún no está configurada. La unidad también es el tamaño de las particiones de la ventana incremental; por ejemplo, una partición por día del rango que se actualiza para `Day`.
 
-### Incremental Periods
+### Períodos incrementales
 
-`IncrementalPeriods` · int · Options
+`IncrementalPeriods` · int · Opciones
 
-How many periods, counted back from today, the engine refreshes on each refresh. With `IncrementalGranularity` set to `Day` and `IncrementalPeriods` to `10`, each refresh reloads the last ten days and leaves older partitions alone. A larger window makes refreshes slower, and a window that's too small misses changes to older rows.
+Cuántos períodos, contados hacia atrás desde hoy, actualiza el motor en cada actualización. Con `IncrementalGranularity` establecido en `Day` y `IncrementalPeriods` en `10`, cada actualización vuelve a cargar los últimos diez días y deja intactas las particiones más antiguas. Una ventana más amplia hace que las actualizaciones sean más lentas, y una ventana demasiado pequeña no detecta cambios en filas más antiguas.
 
-### Incremental Periods Offset
+### Desplazamiento de períodos incrementales
 
-`IncrementalPeriodsOffset` · int · Options
+`IncrementalPeriodsOffset` · int · Opciones
 
-Shifts the incremental window relative to today, in units of `IncrementalGranularity`:
+Desplaza la ventana incremental con respecto a hoy, en unidades de `IncrementalGranularity`:
 
-- `0` ends the window with the current period
-- a negative value moves it into the past, for example `-1` with `Day` refreshes up to and including yesterday, so the table only holds complete days
-- a positive value moves it into the future, for sources that contain future-dated rows such as forecasts
+- `0` hace que la ventana termine en el período actual
+- un valor negativo la desplaza al pasado; por ejemplo, `-1` con `Day` actualiza hasta e incluido ayer, por lo que la tabla solo contiene días completos
+- un valor positivo la desplaza al futuro, para orígenes que contienen filas con fechas futuras, como las previsiones
 
-The **Only refresh complete days** option in the incremental refresh dialog of Power BI Desktop sets `IncrementalPeriodsOffset` to `-1`.
+La opción **Actualizar solo días completos** del cuadro de diálogo de actualización incremental de Power BI Desktop establece `IncrementalPeriodsOffset` en `-1`.
 
 ### Modo
 
-`Mode` · RefreshPolicyMode · Options · compatibility level 1565+
+`Mode` · RefreshPolicyMode · Opciones · nivel de compatibilidad 1565+
 
-Whether the most recent period is imported too or kept in DirectQuery to show real-time data.
+Si el período más reciente también se importa o se mantiene en DirectQuery para mostrar datos en tiempo real.
 
-| Valor    | Significado                                                                                                                                                                                                                                                                                                                           |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Import` | All partitions, including the most recent one, are imported. Data is only as fresh as the last refresh.                                                                                                                                                                                               |
-| `Hybrid` | The historical partitions are imported, and the engine adds a DirectQuery partition for the rows after the incremental window. Queries always see the latest rows in the source, and the table becomes a hybrid table. Power BI Premium, Premium Per User and Power BI Embedded only. |
+| Valor    | Significado                                                                                                                                                                                                                                                                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Import` | Se importan todas las particiones, incluida la más reciente. Los datos estarán tan actualizados como la última actualización.                                                                                                                                                                                                             |
+| `Hybrid` | Se importan las particiones históricas y el motor agrega una partición de DirectQuery para las filas posteriores a la ventana incremental. Las consultas siempre ven las filas más recientes en el origen y la tabla se convierte en una tabla híbrida. Solo para Power BI Premium, Premium Per User y Power BI Embedded. |
 
-A hybrid table sends queries for the current period to the source. A [data coverage definition](#data-coverage-definition) on the DirectQuery partition avoids source queries for rows outside the current period. Microsoft recommends Dual storage mode for the tables related to a hybrid table.
+Una tabla híbrida envía al origen las consultas del período actual. Una [definición de cobertura de datos](#data-coverage-definition) en la partición de DirectQuery evita las consultas al origen para filas fuera del período actual. Microsoft recomienda el modo de almacenamiento dual para las tablas relacionadas con una tabla híbrida.
 
-### Policy Type
+### Tipo de política
 
-`PolicyType` · RefreshPolicyType · Options · read-only
+`PolicyType` · RefreshPolicyType · Opciones · solo de lectura
 
-The kind of refresh policy. The only value is `Basic`, the policy described on this page, and you can't change it in Tabular Editor.
+El tipo de política de actualización. El único valor es `Basic`, la política descrita en esta página, y no puedes cambiarlo desde Tabular Editor.
 
-### Polling Expression
+### Expresión de sondeo
 
-`PollingExpression` · string · Options
+`PollingExpression` · string · Opciones
 
-An optional M expression that the engine evaluates for each partition in the incremental window before it refreshes the partition. It usually returns the latest modified date or a row count for the partition's range. The engine stores the result in the partition's `RefreshBookmark` and only refreshes the partition when the value has changed since the last refresh. When the property is empty, every partition in the incremental window refreshes every time.
+Una expresión M opcional que el motor evalúa para cada partición en la ventana incremental antes de actualizarla. Normalmente devuelve la fecha de modificación más reciente o el recuento de filas del intervalo de la partición. El motor almacena el resultado en el `RefreshBookmark` de la partición y solo actualiza la partición cuando el valor ha cambiado desde la última actualización. Cuando la propiedad está vacía, todas las particiones de la ventana incremental se actualizan cada vez.
 
-The expression can use `RangeStart` and `RangeEnd`, like `SourceExpression`. This example returns the latest modified date in the partition's range:
+La expresión puede usar `RangeStart` y `RangeEnd`, igual que `SourceExpression`. Este ejemplo devuelve la última fecha de modificación en el intervalo de la partición:
 
 ```m
 let
@@ -384,27 +384,27 @@ in
     LastModified
 ```
 
-Power BI Desktop fills this property when you select **Detect data changes** in the incremental refresh dialog. In Tabular Editor, edit the polling expression in the **Expression Editor** by selecting the table and picking **Polling Expression** from the dropdown. See [Configure 'Detect Data Changes'](xref:incremental-refresh-modify#configure-detect-data-changes).
+Power BI Desktop rellena esta propiedad cuando seleccionas **Detectar cambios en los datos** en el cuadro de diálogo de actualización incremental. En Tabular Editor, edita la expresión de sondeo en el **Editor de expresiones** seleccionando la tabla y eligiendo **Expresión de sondeo** en la lista desplegable. Consulta [Configurar 'Detectar cambios en los datos'](xref:incremental-refresh-modify#configure-detect-data-changes).
 
-### Rolling Window Granularity
+### Granularidad de la ventana móvil
 
-`RollingWindowGranularity` · RefreshGranularityType · Options
+`RollingWindowGranularity` · RefreshGranularityType · Opciones
 
-The unit of `RollingWindowPeriods`: `Day`, `Month`, `Quarter` or `Year`. `Invalid` means the policy isn't configured yet.
+La unidad de `RollingWindowPeriods`: `Day`, `Month`, `Quarter` o `Year`. `Invalid` significa que la política aún no está configurada.
 
-### Rolling Window Periods
+### Períodos de la ventana móvil
 
-`RollingWindowPeriods` · int · Options
+`RollingWindowPeriods` · int · Opciones
 
-How many complete periods of history, counted back from today, the table keeps on top of the current, incomplete period. With `RollingWindowGranularity` set to `Year` and `RollingWindowPeriods` to `5`, the table holds the last five whole years in year partitions, plus the current year so far in quarter, month or day partitions. When a period falls out of the window, the engine removes its partition and the data in it at the next refresh.
+Cuántos períodos completos del historial, contados hacia atrás desde hoy, mantiene la tabla además del período actual, que está incompleto. Con `RollingWindowGranularity` establecido en `Year` y `RollingWindowPeriods` en `5`, la tabla conserva los últimos cinco años completos en particiones anuales, más el año actual hasta la fecha en particiones trimestrales, mensuales o diarias. Cuando un período sale de la ventana, el motor elimina su partición y los datos que contiene en la siguiente actualización.
 
-The rolling window must be larger than the incremental window, which is its most recent part.
+La ventana móvil debe ser mayor que la ventana incremental, que constituye su parte más reciente.
 
-### Source Expression
+### Expresión de origen
 
-`SourceExpression` · string · Options
+`SourceExpression` · string · Opciones
 
-The M expression that the engine uses as the query for every policy range partition it creates. It must filter the source on a date column with the M parameters `RangeStart` and `RangeEnd`, which the engine sets to each partition's `Start` and `End`. Por ejemplo:
+La expresión M que el motor usa como consulta para cada partición de rango de la directiva que crea. Debe filtrar el origen por una columna de fecha con los parámetros M `RangeStart` y `RangeEnd`, que el motor establece con los valores `Start` y `End` de cada partición. Por ejemplo:
 
 ```m
 let
@@ -415,46 +415,46 @@ in
     InRange
 ```
 
-Use `>=` on one parameter and `<` on the other. With `>=` and `<=`, a row that falls exactly on a boundary loads into two partitions.
+Use `>=` en un parámetro y `<` en el otro. Con `>=` y `<=`, una fila que cae exactamente en un límite se carga en dos particiones.
 
-`RangeStart` and `RangeEnd` must exist in the model as M parameters (shared expressions) of type `DateTime`. If the date column in the source is an integer key such as `20240131`, convert the parameters to that format inside the filter step. If the filter doesn't fold to the source, the source returns all rows for every partition.
+`RangeStart` y `RangeEnd` deben existir en el modelo como parámetros M (expresiones compartidas) de tipo `DateTime`. Si la columna de fecha del origen es una clave entera como `20240131`, convierta los parámetros a ese formato dentro del paso de filtro. Si el filtro no se pliega en el origen, el origen devuelve todas las filas para cada partición.
 
-Policy range partitions don't store a query of their own, and each refresh of one uses the current `SourceExpression`. A change takes effect on the next refresh, but only for the partitions that refresh reprocesses. A refresh with the refresh policy applied, which is what the Power BI service runs, only reprocesses the incremental partitions, and the historical partitions keep the data they loaded with the old expression. To reload all of them with the new expression, run a full refresh of the table with `applyRefreshPolicy` set to `false`.
+Las particiones de intervalo de la política no almacenan una consulta propia, y cada actualización de una de ellas usa la `SourceExpression` actual. Un cambio entra en vigor en la siguiente actualización, pero solo para las particiones que esa actualización reprocesa. Una actualización con la política de actualización aplicada, que es la que ejecuta el servicio Power BI, solo reprocesa las particiones incrementales y las particiones históricas conservan los datos que cargaron con la expresión anterior. Para recargarlas todas con la nueva expresión, ejecute una actualización completa de la tabla con `applyRefreshPolicy` establecido en `false`.
 
-## Data coverage definition
+## Definición de cobertura de datos
 
-A data coverage definition describes, as a DAX expression, which rows a partition holds. The engine uses it to skip a DirectQuery partition when a query only asks for rows that the partition can't contain. In a hybrid table without one, every query on the table also queries the source through the DirectQuery partition, even when the query only asks for last year's data that's already imported.
+Una definición de cobertura de datos describe, como expresión DAX, qué filas contiene una partición. El motor la usa para omitir una partición de DirectQuery cuando una consulta solo solicita filas que la partición no puede contener. En una tabla híbrida sin ella, cada consulta sobre la tabla también consulta el origen a través de la partición de DirectQuery, incluso cuando la consulta solo solicita datos del año pasado que ya están importados.
 
-The definition belongs to a single partition. Add it through [DataCoverageDefinition](#datacoveragedefinition) on the partition.
+La definición pertenece a una única partición. Agréguela mediante [DataCoverageDefinition](#datacoveragedefinition) en la partición.
 
-### Common properties
+### Propiedades comunes
 
-- [Description](xref:object-properties-common#description)
-- [Annotations](xref:object-properties-common#annotations)
-- [Error Message](xref:object-properties-common#error-message)
-- [Object Type](xref:object-properties-common#object-type)
-- [State](xref:object-properties-common#state)
+- [Descripción](xref:object-properties-common#description)
+- [Anotaciones](xref:object-properties-common#annotations)
+- [Mensaje de error](xref:object-properties-common#error-message)
+- [Tipo de objeto](xref:object-properties-common#object-type)
+- [Estado](xref:object-properties-common#state)
 
 ### Expresión
 
-`Expression` · string · Options
+`Expression` · cadena · Opciones
 
-A DAX expression that returns `TRUE` for the rows the partition covers. For example, for a DirectQuery partition that only holds the current year:
+Una expresión DAX que devuelve `TRUE` para las filas que abarca la partición. Por ejemplo, para una partición de DirectQuery que solo contiene el año actual:
 
 ```dax
 RELATED ( 'Date'[Year] ) = 2026
 ```
 
-The engine trusts the expression and doesn't check it against the data. If the expression excludes a row that the partition holds, queries silently leave that row out, so update the expression when the partition's query changes.
+El motor confía en la expresión y no la contrasta con los datos. Si la expresión excluye una fila que está en la partición, las consultas omiten esa fila sin avisar, así que actualiza la expresión cuando cambie la consulta de la partición.
 
-To edit it, select the partition in the **TOM Explorer** and pick the data coverage definition expression in the dropdown of the **Expression Editor**.
+Para editarla, selecciona la partición en el **Explorador TOM** y elige la expresión de definición de cobertura de datos en la lista desplegable del **Editor de expresiones**.
 
-The engine doesn't validate the expression when you save. SQL Server 2025 Analysis Services accepted every expression tried, including column filters, `IN` lists, `RELATED` and text that isn't DAX at all, and it also accepts a definition on an `Import` partition, where the definition has no purpose. Check the expression yourself before you deploy.
+El motor no valida la expresión al guardar. Analysis Services de SQL Server 2025 aceptó todas las expresiones que se probaron, incluidos los filtros de columna, las listas `IN`, `RELATED` y texto que no es DAX en absoluto; además, acepta una definición en una partición `Import`, donde la definición no tiene ningún propósito. Comprueba tú mismo la expresión antes de desplegar.
 
 <!-- TODO (not verifiable from TE3 source): which DAX constructs are honored at query time in Power BI hybrid tables, and that a wrong definition silently leaves rows out of query results (needs a real hybrid table, which SSAS doesn't support). -->
 
 ### Partición
 
-`Partition` · Partition · Options · read-only
+`Partition` · partición · Opciones · solo lectura
 
-The partition this data coverage definition belongs to. The **Properties** view doesn't show it. In C# scripts, use it to get from the definition back to its partition.
+La partición a la que pertenece esta definición de cobertura de datos. La vista de **Propiedades** no la muestra. En scripts de **C# Script**, úsalo para volver desde la definición a su partición.
