@@ -15,8 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-Display the distinct values in a column for quick data profiling and access.
-可在列级别将其另存为宏，方便快速调用。
+显示某列的去重值，便于快速进行数据概览和查阅。可在列级别将其另存为宏，方便快速调用。
 
 <br></br>
 
