@@ -160,7 +160,7 @@ RLS y OLS solo se pueden probar mediante suplantación una vez que se hayan agre
 
 ---
 
-### How Does it Look?
+### ¿Qué aspecto tiene?
 
 En función de cómo hayas diseñado y configurado la seguridad de datos, la experiencia puede variar para los usuarios.
 A continuación se muestran ejemplos típicos de escenarios comunes de implementación de RLS y/o OLS en un Dataset
