@@ -20,19 +20,16 @@ applies_to:
 
 # 加载并检查指标视图
 
-本操作指南演示如何将 Databricks Metric View 加载到 Tabular Editor 中，并使用 C# Script 探索其结构。
-This is the foundational skill for all other Metric View operations.
+本操作指南演示如何将 Databricks Metric View 加载到 Tabular Editor 中，并使用 C# Script 探索其结构。这是进行其他所有 Metric View 操作的基础。
 
 > [!NOTE]
-> These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not support the v1.1 Metric View features shown here.
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。较早版本不支持本文所示的 v1.1 指标视图功能。
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
 ## 访问已加载的 Metric View
 
-加载完成后，可在任何脚本中通过 `SemanticBridge.MetricView.Model` 访问该 Metric View。
-This returns a Metric View [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object, the root of the [Metric View object graph](xref:semantic-bridge-metric-view-object-model).
+加载完成后，可在任何脚本中通过 `SemanticBridge.MetricView.Model` 访问该 Metric View。这会返回一个 Metric View 的 [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) 对象，它是 [Metric View 对象图](xref:semantic-bridge-metric-view-object-model) 的根节点。
 
 ```csharp {run id=basic setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
@@ -94,9 +91,9 @@ Join: date
   Cardinality: ManyToOne
 ```
 
-## Inspect Metric View fields
+## 检查指标视图字段
 
-The Metric View `Fields` property contains all field definitions.
+指标视图的 `Fields` 属性包含所有字段定义。
 
 ```csharp {run id=fields setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
@@ -240,11 +237,11 @@ MEASURES (6)
 
 现在你已经能够加载并检查 Metric View 了，你还可以：
 
-- [Add objects to a Metric View](xref:semantic-bridge-add-object)
-- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
-- [Rename a field](xref:semantic-bridge-rename-objects)
-- [Validate the Metric View](xref:semantic-bridge-validate-default)
-- [Import the Metric View to Tabular](xref:semantic-bridge-import)
+- [向指标视图添加对象](xref:semantic-bridge-add-object)
+- [从指标视图中移除对象](xref:semantic-bridge-remove-object)
+- [重命名字段](xref:semantic-bridge-rename-objects)
+- [验证指标视图](xref:semantic-bridge-validate-default)
+- [将指标视图导入 Tabular](xref:semantic-bridge-import)
 
 ## 另见
 
