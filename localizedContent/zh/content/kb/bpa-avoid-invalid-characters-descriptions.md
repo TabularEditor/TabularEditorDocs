@@ -10,7 +10,7 @@ description: 一条最佳实践规则，通过识别对象描述中的控制字�
 
 ## 概览
 
-此最佳做法规则会识别描述中包含无效控制字符（不可打印字符，标准空白字符除外）的对象。 These characters can cause display problems, metadata corruption, and deployment failures.
+此最佳做法规则会识别描述中包含无效控制字符（不可打印字符，标准空白字符除外）的对象。这些字符可能导致显示问题、元数据损坏以及部署失败。
 
 - 类别：错误预防
 - 严重性：高（3）
