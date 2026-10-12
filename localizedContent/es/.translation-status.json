@@ -319,8 +319,8 @@
       "status": "translated"
     },
     "features/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:7dc2adbeda0cb31f2e08f9530d215f40d39da97a305b2d70c361c71377a687cf",
+      "status": "translated"
     },
     "features/Useful-script-snippets.md": {
       "sourceHash": "sha256:72e52b00b78c38dd76279535adbae7a80a1d2b755ecadd80c33b967d7998b988",
@@ -1692,108 +1692,13 @@
     }
   },
   "summary": {
-    "translated": 416,
+    "translated": 417,
     "outdated": 0,
-    "untranslated": 6,
+    "untranslated": 5,
     "copied": 0,
     "pinned": 0,
     "total": 422,
-    "completionPercent": 98.6,
-    "pendingJobs": 7,
+    "completionPercent": 98.8,
     "failures": 0
-  },
-  "pendingJobs": {
-    "features/Best-Practice-Analyzer.md": {
-      "mode": "raw",
-      "idContent": "es/features/Best-Practice-Analyzer.md",
-      "sourceHash": "sha256:253dba4e0485c6b8052ae8da292cece72490d32b7fea72112aada89dbd2b8264",
-      "reason": "forced",
-      "contentType": "text/markdown",
-      "chars": 9077,
-      "jobId": 7955658,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    },
-    "features/toc.md": {
-      "mode": "raw",
-      "idContent": "es/features/toc.md",
-      "sourceHash": "sha256:9de7b2b89d41288caf042ff23187fa805f19ec472f91d34541b555b5f20d6de7",
-      "reason": "forced",
-      "contentType": "text/markdown",
-      "chars": 2109,
-      "jobId": 7955659,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    },
-    "kb/bpa-set-isavailableinmdx-false.md": {
-      "mode": "raw",
-      "idContent": "es/kb/bpa-set-isavailableinmdx-false.md",
-      "sourceHash": "sha256:9a5934a34ee1b4c911d855a78e87163a5427422d1ee59093b47d9c407f3bc50d",
-      "reason": "forced",
-      "contentType": "text/markdown",
-      "chars": 3650,
-      "jobId": 7955660,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    },
-    "404.html": {
-      "mode": "raw",
-      "idContent": "es/404.html",
-      "sourceHash": "sha256:8e5748cfcc9ca6d991e8e65c36fb2b411cfec8c78e4f7c7be154ca6200c2f80e",
-      "reason": "forced",
-      "contentType": "text/html",
-      "chars": 8234,
-      "jobId": 7955661,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    },
-    "getting-started/app/index.html": {
-      "mode": "raw",
-      "idContent": "es/getting-started/app/index.html",
-      "sourceHash": "sha256:6a2a51cf6bd96a68cdbf553d4d8d5622899b22acca9623068a5dd06b16d00b78",
-      "reason": "forced",
-      "contentType": "text/html",
-      "chars": 27787,
-      "jobId": 7955662,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    },
-    "toc.yml": {
-      "mode": "yaml-names",
-      "units": 9,
-      "idContent": "es/toc.yml",
-      "sourceHash": "sha256:11d5df2671e45efed1baf56cd10c6634fc48f5f34b8f40d5b83456258a929108",
-      "reason": "forced",
-      "contentType": "application/json",
-      "chars": 194,
-      "jobId": 7955663,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    },
-    "_ui-strings.json": {
-      "mode": "json-placeholders",
-      "idContent": "es/_ui-strings.json",
-      "sourceHash": "sha256:01a51cba4185663722f9194cdaf9c8c61d9d65dac841e841120c8661b7485fbf",
-      "reason": "forced",
-      "contentType": "application/json",
-      "chars": 1935,
-      "jobId": 7955664,
-      "targetLanguage": "es-ES",
-      "serviceType": "premium",
-      "environment": "sandbox",
-      "submittedAt": "2026-09-07T07:26:25Z"
-    }
   }
 }
