@@ -133,7 +133,7 @@ ROW(
 
 这些类型说明是可选的，但一旦指定，它们会对传入函数的参数执行隐式类型转换；同时，也会影响在 Tabular Editor 3 中编写调用该函数的 DAX 代码时的自动完成建议。
 
-Tabular Editor 3 会根据声明的参数类型验证实参。 If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 会根据声明的参数类型验证实参。调用 UDF 时，如果实参与参数类型不匹配，例如在需要 `TABLEREF` 参数的位置传入标量值，语义分析器会 Report 警告或错误。
 
 可用约束的完整列表，请参阅 [Microsoft 的 UDF 规范](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)。
 
@@ -204,7 +204,7 @@ Tabular Editor 3.24.0 引入了一项名为 **DAX 组件管理器** 的新功能
 
 ## 高级功能
 
-### Formula fix-up
+### 公式自动修正
 
 当你重命名某个 UDF 时，Tabular Editor 3 会像处理度量值和其他对象一样，自动更新模型中所有相关引用。
 
@@ -238,9 +238,9 @@ DAX 中并不存在“命名空间”的概念，但我们仍建议为 UDF 命�
 
 ## UDF 与版本控制
 
-If you store your model as a folder structure, Tabular Editor can write each UDF to its own file. Without this serialization level, all functions are stored in `database.json`, which causes merge conflicts when several developers edit functions.
+如果将模型以文件夹结构存储，Tabular Editor 可以将每个 UDF 分别写入各自的文件中。如果不使用此序列化级别，所有函数都会存储在 `Database.json` 中，当多个开发者同时编辑函数时会导致合并冲突。
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder**. 见 [保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)。
+在 **模型 > 序列化选项...** 下选择 **用户定义函数（UDFs）** 级别。首次将模型保存到文件夹时，请在 **Tools > 偏好 > File Formats > Save-to-folder** 下进行选择。见 [保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)。
 
 ## 最佳实践
 
@@ -328,14 +328,14 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 
 **函数未出现在自动补全中**
 
-Check the following, in order:
+按顺序检查以下各项：
 
-1. **The function's definition has a semantic error.** Autocomplete hides UDFs with semantic errors, such as a missing row context or invalid `MATCHBY`, but still shows their calltip. Fix the error in the function.
-2. **The return type doesn't fit the argument you're completing.** The return type is inferred from the function body. A UDF that returns a table isn't offered where a scalar is expected, and a UDF that returns a scalar isn't offered where a table is expected. Exceptions:
-   - Filter arguments, such as the second and later arguments of [`CALCULATE`](https://dax.guide/calculate), accept either.
-   - A function whose body is an untyped `EXPR` parameter is offered everywhere.
-3. **Visual calculation mismatch.** Visual calculation UDFs appear only in visual calculations, and other UDFs appear only outside them.
-4. **It's the function you're editing.** A function isn't offered inside its own definition.
+1. **函数的定义存在语义错误。** 自动完成会隐藏存在语义错误的 UDF，例如缺少行语境或 `MATCHBY` 无效，但仍会显示其参数提示。修复函数中的错误。
+2. **返回类型与你当前要补全的参数不匹配。** 返回类型是根据函数体推断的。在需要标量的位置，不会提供返回表的 UDF；在需要表的位置，也不会提供返回标量的 UDF。例外：
+   - 筛选器参数，例如 [`CALCULATE`](https://dax.guide/calculate) 的第二个及后续参数，可接受这两种类型中的任一种。
+   - 函数体为未类型化的 `EXPR` 参数的函数，会在任何位置都作为候选项提供。
+3. **Visual 计算不匹配。** Visual 计算 UDF 只会在 Visual 计算中出现，其他 UDF 则只会在 Visual 计算之外出现。
+4. **这是你正在编辑的函数。** 函数不会在自己的定义内部作为候选项提供。
 
 **参数约束错误**
 
