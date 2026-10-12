@@ -19,104 +19,104 @@ applies_to:
 
 # Mejora la calidad del código con el Best Practice Analyzer
 
-The **Best Practice Analyzer** (BPA) scans the Tabular Object Model (TOM) of the loaded model in the background for objects that violate the best practice rules you define. TOM has many [object types and properties](xref:TabularEditor.TOMWrapper), and the right value for a property often depends on the model design. BPA rules check that each property has the value your conventions require.
+El **Best Practice Analyzer** (BPA) analiza en segundo plano el Tabular Object Model (TOM) del modelo cargado para detectar objetos que infringen las reglas de buenas prácticas que definas. TOM tiene muchos [tipos de objeto y propiedades](xref:TabularEditor.TOMWrapper), y el valor adecuado para una propiedad suele depender del diseño del modelo. Las reglas de BPA comprueban que cada propiedad tenga el valor que exigen tus convenciones.
 
-Use Best Practice Analyzer rules to check:
+Usa las reglas del Best Practice Analyzer para comprobar:
 
-- **DAX expressions**: warn when certain DAX functions or constructs are used.
-- **Formatting**: require format strings, descriptions and similar properties.
-- **Naming conventions**: check that types of objects, such as key columns or hidden columns, follow name patterns.
-- **Performance**: check performance-related aspects of the model, for example the number of calculated columns.
+- **Expresiones DAX**: avisan cuando se usan determinadas funciones o construcciones de DAX.
+- **Formato**: requieren cadenas de formato, descripciones y propiedades similares.
+- **Convenciones de nomenclatura**: comprueban que los tipos de objetos, como las columnas clave o las columnas ocultas, sigan patrones de nombres.
+- **Rendimiento**: comprueban aspectos del modelo relacionados con el rendimiento, por ejemplo el número de columnas calculadas.
 
-Rules have access to the full model metadata and to VertiPaq Analyzer statistics.
+Las reglas tienen acceso a todos los metadatos del modelo y a las estadísticas del Analizador VertiPaq.
 
 > [!NOTE]
-> Tabular Editor 3 includes [built-in Best Practice Analyzer rules](xref:built-in-bpa-rules), enabled by default. They appear in the **Best Practice Analyzer view** alongside your custom rules and in the **(Built-in rules)** collection under **Tools > Manage BPA Rules...**.
+> Tabular Editor 3 incluye [reglas integradas de Best Practice Analyzer](xref:built-in-bpa-rules), habilitadas de forma predeterminada. Aparecen en la **vista de Best Practice Analyzer**, junto con tus reglas personalizadas, y en la colección **(Reglas integradas)**, en **Herramientas > Administrar reglas de BPA...**.
 
 ## Administración de reglas de buenas prácticas
 
-Open **Tools > Manage BPA Rules...** to add, remove or modify the rules that apply to your model.
+Abre **Herramientas > Administrar reglas de BPA...** para agregar, quitar o modificar las reglas que se aplican a tu modelo.
 
-![Manage Best Practice Rules dialog with the list of rule collections at the top and the rules of the selected collection below](~/content/assets/images/bpa-manager.png)
+![Cuadro de diálogo Administrar reglas de prácticas recomendadas con la lista de colecciones de reglas en la parte superior y las reglas de la colección seleccionada en la parte inferior](~/content/assets/images/bpa-manager.png)
 
-The top list shows the loaded rule **collections**, and the bottom list shows the rules in the collection you select. When a model is loaded, these collections are listed:
+La lista superior muestra las **colecciones** de reglas cargadas, y la lista inferior muestra las reglas de la colección que selecciones. Cuando se carga un modelo, se muestran estas colecciones:
 
-- **Rules within the current model**: rules defined in the current model, stored as an annotation on the Model object.
-- **Rules for the local user**: rules stored in `%LocalAppData%\TabularEditor3\BPARules.json`. They apply to every model the current Windows user loads in Tabular Editor.
-- **Rules on the local machine**: rules stored in `%ProgramData%\TabularEditor\BPARules.json`. They apply to every model loaded in Tabular Editor on the machine.
+- **Reglas del modelo actual**: reglas definidas en el modelo actual, almacenadas como una anotación en el objeto Model.
+- **Reglas del usuario local**: reglas almacenadas en `%LocalAppData%\TabularEditor3\BPARules.json`. Se aplican a todos los modelos que el usuario actual de Windows cargue en Tabular Editor.
+- **Reglas en la máquina local**: reglas almacenadas en `%ProgramData%\TabularEditor\BPARules.json`. Se aplican a todos los modelos que se carguen en Tabular Editor en el equipo.
 
-If a rule with the same ID exists in more than one collection, the collection higher in the list takes precedence. A rule defined in the model overrides a rule with the same ID on the local machine, so you can adjust a shared rule to model-specific conventions.
+Si una regla con el mismo ID existe en más de una colección, la colección situada más arriba en la lista tiene precedencia. Una regla definida en el modelo prevalece sobre una regla con el mismo ID en la máquina local, por lo que puedes ajustar una regla compartida a las convenciones específicas del modelo.
 
-The **(Effective rules)** collection at the top of the list shows the rules that apply to the loaded model after precedence is resolved. The lower list shows which collection each rule belongs to. A rule's name is struck out if a rule with the same ID exists in a collection of higher precedence:
+La colección **(Reglas efectivas)** situada en la parte superior de la lista muestra las reglas que se aplican al modelo cargado una vez resuelta la precedencia. La lista inferior muestra a qué colección pertenece cada regla. El nombre de una regla aparece tachado si existe una regla con el mismo ID en una colección con mayor precedencia:
 
-![Effective rules list with an overridden rule shown in strikethrough](~/content/assets/images/rule-overrides.png)
+![Lista de reglas efectivas con una regla sobrescrita que aparece tachada](~/content/assets/images/rule-overrides.png)
 
 ### Agregar colecciones adicionales
 
-You can add a rule file, for example one on a network share, to the current model as a rule collection. If you have write access to the file, you can add, modify and remove its rules. Collections added this way take precedence over the rules defined in the model. If you add several, move them up and down to set their precedence.
+Puedes agregar un archivo de reglas, por ejemplo uno en un recurso compartido de red, al modelo actual como una colección de reglas. Si tienes acceso de escritura al archivo, puedes agregar, modificar y quitar sus reglas. Las colecciones agregadas de esta forma tienen precedencia sobre las reglas definidas en el modelo. Si agregas varias, muévelas hacia arriba y hacia abajo para establecer su precedencia.
 
-Click **Add...** to add a rule collection to the model:
+Haz clic en **Agregar...** para agregar una colección de reglas al modelo:
 
 ![Agregar colección de reglas de prácticas recomendadas](~/content/assets/images/add-rule-file.png)
 
-- **Create new Rule File**: creates an empty .json file at the location you specify. The file dialog has an option for a relative file path, which lets you store the rule file in the same repository as the model. A relative reference works only when the model is loaded from disk. A model loaded from an Analysis Services instance has no working directory.
-- **Include local Rule File**: includes an existing .json rule file. You can use a relative path if the file is on the same drive as the model metadata. A file on a network share or another drive requires an absolute path.
-- **Include Rule File from URL**: includes the rules returned by an HTTP or HTTPS URL, for example the [standard BPA rules](https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-standard.json) from the [BestPracticeRules GitHub site](https://github.com/TabularEditor/BestPracticeRules). Collections added from a URL are read-only.
+- **Crear nuevo archivo de reglas**: crea un archivo .json vacío en la ubicación que especifiques. El cuadro de diálogo de selección de archivo incluye una opción de ruta relativa, que te permite guardar el archivo de reglas en el mismo repositorio que el modelo. Una referencia relativa solo funciona cuando el modelo se carga desde el disco. Un modelo cargado desde una instancia de Analysis Services no tiene directorio de trabajo.
+- **Incluir archivo de reglas local**: incluye un archivo de reglas .json existente. Puedes usar una ruta relativa si el archivo está en la misma unidad que los metadatos del modelo. Un archivo en un recurso compartido de red o en otra unidad requiere una ruta absoluta.
+- **Incluir archivo de reglas desde una URL**: incluye las reglas que devuelve una URL HTTP o HTTPS; por ejemplo, las [reglas BPA estándar](https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-standard.json) del [repositorio de GitHub de BestPracticeRules](https://github.com/TabularEditor/BestPracticeRules). Las colecciones agregadas desde una URL son de solo lectura.
 
 ### Modificar reglas en una colección
 
-The lower part of the dialog adds, edits, clones and deletes rules in the selected collection if you have write access to its location. **Move to...** moves or copies the selected rule to another collection.
+En la parte inferior del cuadro de diálogo puedes agregar, editar, clonar y eliminar reglas de la colección seleccionada si tienes acceso de escritura a su ubicación. **Mover a...** mueve o copia la regla seleccionada a otra colección.
 
 ### Agregar reglas
 
-Click **New rule...** to open the Best Practice Rule editor:
+Haz clic en **Nueva regla...** para abrir el editor de reglas de mejores prácticas:
 
-![Best Practice Rule editor with the name, ID, severity, category, description, applies-to and expression fields](~/content/assets/images/bpa-rule-editor.png)
+![Editor de reglas de mejores prácticas con los campos de nombre, ID, gravedad, categoría, descripción, se aplica a y expresión](~/content/assets/images/bpa-rule-editor.png)
 
-A rule has these properties:
+Una regla tiene estas propiedades:
 
-- **Name**: the name of the rule shown in Tabular Editor.
-- **ID**: an internal ID, unique within a rule collection. If rules in different collections share an ID, only the rule in the collection with the highest precedence applies.
-- **Severity**: not used in the Tabular Editor UI. When you run a Best Practice analysis from the [command line](xref:command-line-options), the number sets how severe a violation is:
-  - 1 = information only
-  - 2 = warning
-  - 3 (or above) = error
-- **Category**: groups related rules.
-- **Description** (optional): a description of the rule, shown as a tooltip in the **Best Practice Analyzer view**. The description accepts these placeholders:
+- **Nombre**: el nombre de la regla que se muestra en Tabular Editor.
+- **ID**: un ID interno, único dentro de una colección de reglas. Si las reglas de distintas colecciones comparten un ID, solo se aplica la regla de la colección con mayor precedencia.
+- **Gravedad**: no se usa en la interfaz de usuario de Tabular Editor. Al ejecutar un análisis de prácticas recomendadas desde la [línea de comandos](xref:command-line-options), el número indica la gravedad de una infracción:
+  - 1 = solo informativo
+  - 2 = advertencia
+  - 3 (o superior) = error
+- **Categoría**: agrupa reglas relacionadas.
+- **Descripción** (opcional): una descripción de la regla, que se muestra como una ayuda emergente en la **vista del Best Practice Analyzer**. La descripción admite estos marcadores de posición:
   - `%object%` devuelve una referencia DAX totalmente calificada (si corresponde) al objeto actual
   - `%objectname%` devuelve solo el nombre del objeto actual
   - `%objecttype%` devuelve el tipo del objeto actual
-- **Applies to**: the object types the rule checks.
-- **Expression**: a [Dynamic LINQ](https://dynamic-linq.net/expression-language) expression that evaluates to `true` for the objects, among the types selected in **Applies to**, that violate the rule. The expression can use the TOM properties of the selected object types and a wide range of standard .NET methods and properties.
-- **Minimum compatibility level**: the lowest compatibility level of models the rule applies to. Some TOM properties don't exist at every compatibility level.
+- **Se aplica a**: los tipos de objeto que comprueba la regla.
+- **Expresión**: una expresión de [Dynamic LINQ](https://dynamic-linq.net/expression-language) que se evalúa como `true` para los objetos, entre los tipos seleccionados en **Se aplica a**, que infringen la regla. La expresión puede usar las propiedades de TOM de los tipos de objeto seleccionados y una amplia variedad de métodos y propiedades estándar de .NET.
+- **Nivel mínimo de compatibilidad**: el nivel de compatibilidad más bajo de los modelos a los que se aplica la regla. Algunas propiedades de TOM no existen en todos los niveles de compatibilidad.
 
-A rule collection on disk stores these properties as JSON. You can also add, edit and delete rules in the JSON file directly. In the file, you can set a rule's `FixExpression` property: a string that generates a [C# script](xref:cs-scripts-and-macros) that fixes the violation.
+Una colección de reglas en disco almacena estas propiedades como JSON. También puedes agregar, editar y eliminar reglas directamente en el archivo JSON. En el archivo, puedes establecer la propiedad `FixExpression` de una regla: una cadena que genera un [C# Script](xref:cs-scripts-and-macros) que corrige la infracción.
 
 ## Uso de la vista de Best Practice Analyzer
 
-The **Best Practice Analyzer view** lists rule violations, and the status bar at the bottom of the main window shows their count. Open the view with **View > Best Practice Analyzer** or the **# BP issues** button in the status bar.
+La **vista del Best Practice Analyzer** enumera las infracciones de las reglas, y la barra de estado en la parte inferior de la ventana principal muestra su número. Abre la vista desde **View > Best Practice Analyzer** o mediante el botón **# BP issues** de la barra de estado.
 
 ![Vista de Best Practice Analyzer](~/content/assets/images/best-practice-analyzer-view.png)
 
-The view lists each rule that has violating objects, with the objects below it. Double-click an object to select it in the **TOM Explorer**.
+La vista muestra cada regla con objetos que la incumplen, y debajo, los objetos. Haz doble clic en un objeto para seleccionarlo en el **Explorador TOM**.
 
-![Context menu for an object in the Best Practice Analyzer view](~/content/assets/images/bpa-options.png)
+![Menú contextual de un objeto en la vista del Best Practice Analyzer](~/content/assets/images/bpa-options.png)
 
-Right-click an object for these options:
+Haz clic con el botón derecho en un objeto para ver estas opciones:
 
-- **Go to object**: selects the object in the **TOM Explorer**, the same as double-clicking it.
-- **Ignore object**: adds an annotation to the object that makes the Best Practice Analyzer skip this rule for it. The annotation stores the rule ID.
-- **Generate fix script**: creates a C# script from the `FixExpression` of the selected rules. Available only if the rule has a `FixExpression`.
-- **Apply fix**: runs the `FixExpression` of the selected rules. Available only if the rule has a `FixExpression`.
+- **Ir al objeto**: selecciona el objeto en el **Explorador TOM**, igual que al hacer doble clic en él.
+- **Ignorar objeto**: agrega una anotación al objeto para que el Best Practice Analyzer omita esta regla para ese objeto. La anotación almacena el ID de la regla.
+- **Generar script de corrección**: crea un C# Script a partir de la `FixExpression` de las reglas seleccionadas. Disponible solo si la regla tiene una `FixExpression`.
+- **Aplicar corrección**: ejecuta la `FixExpression` de las reglas seleccionadas. Disponible solo si la regla tiene una `FixExpression`.
 
 > [!NOTE]
-> Hold down Shift or Ctrl to select several objects in the Best Practice Analyzer view.
+> Mantén pulsada la tecla Mayús o Ctrl para seleccionar varios objetos en la vista de Best Practice Analyzer.
 
-The toolbar at the top of the view has the same options, plus buttons to expand or collapse all items, show ignored rules and objects, and refresh the scan manually.
+La barra de herramientas situada en la parte superior de la vista tiene las mismas opciones, además de botones para expandir o contraer todos los elementos, mostrar las reglas y los objetos ignorados, y actualizar manualmente el análisis.
 
 ## Desactivar el Best Practice Analyzer
 
-Turn off the background scan if some rules take a long time to evaluate or the model is very large: clear **Scan for Best Practice violations in the background** in the **Best Practice Analyzer** section of **Tools > Preferences > Tabular Editor > Miscellaneous**. With background scans off, click **Refresh** in the **Best Practice Analyzer view** to scan.
+Desactiva el análisis en segundo plano si algunas reglas tardan mucho en evaluarse o el modelo es muy grande: desmarca **Buscar infracciones de mejores prácticas en segundo plano** en la sección **Best Practice Analyzer** de **Herramientas > Preferencia > Tabular Editor > Varios**. Con el análisis en segundo plano desactivado, haz clic en **Actualizar** en la **vista de Best Practice Analyzer** para ejecutar el análisis.
 
 ## Pasos siguientes
 
