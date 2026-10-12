@@ -54,7 +54,7 @@ Para cambiar un puesto de la Edición Enterprise, anula el registro del usuario 
 
 Tabular Editor 3 stores activation details for each Windows user under `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
 
-| Valor              | Type        | Content                                                                                                                                        |
+| Valor              | Tipo        | Content                                                                                                                                        |
 | ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `LicenseKey`       | `REG_SZ`    | The license key                                                                                                                                |
 | `User`             | `REG_SZ`    | The e-mail address of the licensed user, for multi-user licenses                                                                               |
