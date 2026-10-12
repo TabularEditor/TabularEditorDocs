@@ -10,7 +10,7 @@ description: Regla de buenas prácticas que garantiza que los modelos de Power B
 
 ## Resumen
 
-This rule flags Power BI models below the highest compatibility level that your Tabular Editor 3 version supports. New model features, such as new DAX functions and TOM properties, require the newer levels.
+Esta regla señala los modelos de Power BI que están por debajo del nivel de compatibilidad más alto que admite tu versión de Tabular Editor 3. Las nuevas características del modelo, como las nuevas funciones de DAX y las propiedades TOM, requieren niveles más recientes.
 
 - Categoría: Gobernanza
 - Gravedad: Alta (3)
@@ -21,12 +21,12 @@ This rule flags Power BI models below the highest compatibility level that your 
 
 ## Por qué es importante
 
-- new DAX functions and model features aren't available below the level that introduces them
-- a model kept at a recent level needs smaller upgrades later
+- las nuevas funciones DAX y las características del modelo no están disponibles por debajo del nivel que las incorpora
+- un modelo que se mantiene en un nivel reciente necesita actualizaciones menores más adelante
 
 ## Cuándo se activa esta regla
 
-The rule triggers for Power BI models whose compatibility level isn't the current maximum:
+La regla se activa para los modelos de Power BI cuyo nivel de compatibilidad no es el máximo actual:
 
 ```csharp
 Model.Database.CompatibilityMode=="PowerBI" 
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### Corrección automática
 
-The rule's automatic fix sets the compatibility level to the highest level your installed version of Tabular Editor 3 supports. To get a newer level, update Tabular Editor 3.
+La corrección automática de la regla establece el nivel de compatibilidad en el nivel más alto que admite tu versión instalada de Tabular Editor 3. Para obtener un nivel más reciente, actualiza Tabular Editor 3.
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -45,26 +45,26 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### Solución manual
 
-1. In the TOM Explorer, select **Model** and expand **Database** in the **Properties** view.
-2. Set **Compatibility Level** to the latest level.
-3. Test the DAX expressions and features of the model.
-4. Deploy to the Power BI Service.
+1. En el Explorador TOM, selecciona **Modelo** y expande **Base de datos** en la vista **Propiedades**.
+2. Establece el **nivel de compatibilidad** en el nivel más reciente disponible.
+3. Prueba las expresiones DAX y las características del modelo.
+4. Implementa en el servicio de Power BI.
 
-See @update-compatibility-level.
+Consulta @update-compatibility-level.
 
 ## Causas habituales
 
 ### Causa 1: Modelo creado en Power BI Desktop
 
-Power BI Desktop doesn't always create models at the latest compatibility level.
+Power BI Desktop no siempre crea modelos con el nivel de compatibilidad más reciente.
 
 ### Causa 2: Modelo creado con un nivel de compatibilidad inferior
 
-An older version of Power BI Desktop created the model.
+Una versión anterior de Power BI Desktop creó el modelo.
 
 ### Causa 3: Enfoque conservador
 
-A team policy delays upgrades.
+La política del equipo retrasa las actualizaciones.
 
 ## Ejemplo
 
@@ -81,7 +81,7 @@ Current Maximum Level: 1706
 Model Compatibility Level: 1706 (Latest)
 ```
 
-The model can use [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), [user-context calculated columns](xref:user-context-calculated-columns) (1705+) and the `StringIndexingBehavior` column property (1706+).
+El modelo puede usar [calendarios personalizados](xref:calendars) (1701+), [funciones definidas por el usuario en DAX](xref:udfs) (1702+), [columnas calculadas con contexto de usuario](xref:user-context-calculated-columns) (1705+) y la propiedad de columna `StringIndexingBehavior` (1706+).
 
 ## Nivel de compatibilidad
 
