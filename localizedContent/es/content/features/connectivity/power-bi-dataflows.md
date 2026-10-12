@@ -19,23 +19,23 @@ applies_to:
 
 # Conectarse a los Dataflows de Power BI
 
-The Power BI dataflows connector imports entities from dataflows in the Power BI workspaces you're a member of and is available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+El conector de Dataflow de Power BI importa entidades de los Dataflows en los Workspaces de Power BI de los que eres miembro y solo está disponible como un Data source implícito (consulta [Orígenes de datos heredados, estructurados e implícitos](xref:connectivity#legacy-structured-and-implicit-data-sources)).
 
-Open the dialog from **Model > Import tables...** by choosing **Power BI Dataflow**.
+Abre el cuadro de diálogo desde **Modelo > Importar tablas...** eligiendo **Power BI Dataflow**.
 
 ![El cuadro de diálogo para conectarse a un Workspace de Power BI, con la lista de Workspaces a los que pertenece la cuenta con la que has iniciado sesión](~/content/assets/images/features/connectivity/dataflows-connection.png)
 
-## Connection fields
+## Campos de conexión
 
-| Campo                                                          | Descripción                                                                      |
-| -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID                         |
-| **Workspaces**                                                 | The workspaces your account is a member of. Select one workspace |
+| Campo                                                                 | Descripción                                                                           |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Iniciar sesión...** | Inicia sesión en el servicio Power BI con Microsoft Entra ID                          |
+| **Workspaces**                                                        | Los Workspaces a los que pertenece tu cuenta. Selecciona un Workspace |
 
-If a workspace has no dataflows, it appears empty.
+Si un Workspace no tiene Dataflows, aparecerá vacío.
 
 ## Autenticación
 
-**Sign in...** starts a Microsoft Entra ID browser sign-in.
+**Iniciar sesión...** inicia el proceso de inicio de sesión en el navegador con Microsoft Entra ID.
 
-Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
+Tabular Editor guarda la configuración de conexión y las credenciales en tu archivo de opciones de usuario (consulta [Dónde se almacenan las credenciales](xref:connectivity#where-credentials-are-stored)).
