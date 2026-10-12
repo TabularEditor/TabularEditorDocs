@@ -20,13 +20,13 @@ applies_to:
 
 # Servidor MCP
 
-Tabular Editor 3 puede actuar como servidor MCP (Model Context Protocol). Agents that support MCP, such as Claude Code, GitHub Copilot, VS Code agent mode, Codex or Cursor, connect to the running instance to read, query and analyze the semantic model you have open, and to change it if you grant write access. To start, select **Tools > MCP Server...** and register your agent.
+Tabular Editor 3 puede actuar como servidor MCP (Model Context Protocol). Los agentes que admiten MCP, como Claude Code, GitHub Copilot, el modo de agente de VS Code, Codex o Cursor, se conectan a la instancia en ejecución para leer, consultar y analizar el modelo semántico que tienes abierto y modificarlo si concedes acceso de escritura. Para empezar, selecciona **Herramientas > Servidor MCP...** y registra tu agente.
 
-The MCP server doesn't use an AI provider or API key configured in Tabular Editor, and your agent uses its own provider and subscription.
+El servidor MCP no usa ningún proveedor de IA ni clave de API configurados en Tabular Editor, y tu agente usa su propio proveedor y su propia suscripción.
 
-The agent works on the model Tabular Editor has open, including unsaved changes. That can be a Power BI Desktop model, a PBIP project, a TMDL (Tabular Model Definition Language) folder, a `.bim` file, a workspace database or a live connection to Analysis Services, Azure Analysis Services or Fabric. The agent uses the same tools whether the model is connected or offline, except for tools that need a live connection, such as DAX queries.
+El agente trabaja con el modelo que Tabular Editor tiene abierto, incluidos los cambios no guardados. Puede ser un modelo de Power BI Desktop, un proyecto PBIP, una carpeta de TMDL (Tabular Model Definition Language), un archivo `.bim`, una base de datos de Workspace o una conexión en vivo a Analysis Services, Azure Analysis Services o Fabric. El agente usa las mismas herramientas tanto si el modelo está conectado como si está sin conexión, salvo las herramientas que necesitan una conexión en vivo, como las consultas DAX.
 
-Agent changes go through the [Tabular Object Model (TOM) wrapper](xref:csharp-scripts) and the C# scripting engine, with the same validation, formula fix-up and undo stack as your own edits. They appear as unsaved changes, marked in the [TOM Explorer and the Properties view](xref:unsaved-changes), and nothing is written to the source until you save.
+Los cambios del agente pasan por el [wrapper de Tabular Object Model (TOM)](xref:csharp-scripts) y el motor de C# Script, con la misma validación, el mismo ajuste de fórmulas y la misma pila de deshacer que tus propias ediciones. Aparecen como cambios no guardados, marcados en el [Explorador TOM y la vista de propiedades](xref:unsaved-changes), y no se escribe nada en el origen hasta que guardes.
 
 ## Antes de empezar
 
@@ -36,48 +36,48 @@ Agent changes go through the [Tabular Object Model (TOM) wrapper](xref:csharp-sc
 
 ## Inicia el servidor
 
-1. Select **Tools > MCP Server...**.
-2. Review the permissions. See [Set agent permissions](#set-agent-permissions).
+1. Selecciona **Herramientas > Servidor MCP...**.
+2. Revisa los permisos. Consulta [Configurar permisos del agente](#set-agent-permissions).
 3. Haz clic en **Iniciar servidor**.
 
-The dialog shows the address the server listens on: `http://127.0.0.1:42100/` unless you've changed the port. The status bar indicator changes from **MCP Stopped** to **MCP Started**, with the address in its tooltip.
+El cuadro de diálogo muestra la dirección en la que escucha el servidor: `http://127.0.0.1:42100/`, a menos que hayas cambiado el puerto. El indicador de la barra de estado cambia de **MCP detenido** a **MCP iniciado**, con la dirección en su descripción emergente.
 
-![The MCP Server dialog, showing the server URL, a masked access token and the five agent permission rows set to non-default levels](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
+![Cuadro de diálogo del servidor MCP que muestra la dirección URL del servidor, un token de acceso enmascarado y las cinco filas de permisos del agente establecidas en niveles no predeterminados](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
 
 ![El indicador de la barra de estado que muestra MCP iniciado, con su descripción emergente mostrando "El servidor MCP está escuchando en http://127.0.0.1:42100/. Haz clic para abrir el cuadro de diálogo de conexión."](~/content/assets/images/features/mcp-server/status-bar-menu.png)
 
-The server runs with or without a model open. If no model is open, the tool results say so, and you can open a model at any time without restarting the server.
+El servidor se ejecuta con o sin un modelo abierto. Si no hay ningún modelo abierto, los resultados de las herramientas lo indican, y puedes abrir un modelo en cualquier momento sin reiniciar el servidor.
 
-Right-click the status bar indicator to start or stop the server, copy a registration configuration or open the MCP Server preferences. Left-click it to open the dialog without starting or stopping the server.
+Haz clic con el botón derecho en el indicador de la barra de estado para iniciar o detener el servidor, copiar una configuración de registro o abrir las preferencias del servidor MCP. Haz clic con el botón izquierdo para abrir el cuadro de diálogo sin iniciar ni detener el servidor.
 
 ![El indicador de MCP en la barra de estado con el menú del clic derecho abierto, mostrando Detalles del servidor MCP..., Detener servidor MCP, Copiar configuración de MCP y Preferencias del servidor MCP..., y el submenú Copiar configuración de MCP desplegado con Claude Code, VS Code, Copilot CLI, Codex y Cursor](~/content/assets/images/features/mcp-server/status-bar-context-menu.png)
 
 ### Preferencias de MCP
 
-Open **Tools > Preferences > AI Features > MCP Server** to set the server's startup, authentication and port options.
+Abre **Herramientas > Preferencias > Características de IA > Servidor MCP** para configurar las opciones de inicio, autenticación y puerto del servidor.
 
 ![Preferencias del servidor MCP, mostrando Habilitar servidor MCP, Iniciar servidor MCP automáticamente, Requerir token de acceso y el puerto](~/content/assets/images/pref-mcp-server.png)
 
-| Preferencia                              | Predeterminado | Qué hace                                                                                                                                                    |
-| ---------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Habilitar servidor MCP**               | Activado       | Al desmarcarlo, se detiene el servidor en ejecución y se eliminan el elemento del menú y el indicador de la barra de estado                                 |
-| **Iniciar servidor MCP automáticamente** | Desactivado    | Starts the server when Tabular Editor starts                                                                                                                |
-| **Requerir token de acceso**             | Desactivado    | Agents must present the access token shown in the server dialog. Consulta [Ejecución en un equipo compartido](#running-on-a-shared-machine) |
-| **Puerto**                               | 42100          | El puerto de loopback en el que escucha el servidor, entre 1024 y 49151. Cambiarlo invalida los registros de agentes existentes             |
+| Preferencia                              | Predeterminado | Qué hace                                                                                                                                                                                          |
+| ---------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Habilitar servidor MCP**               | Activado       | Al desmarcarlo, se detiene el servidor en ejecución y se eliminan el elemento del menú y el indicador de la barra de estado                                                                       |
+| **Iniciar servidor MCP automáticamente** | Desactivado    | Inicia el servidor al iniciar Tabular Editor                                                                                                                                                      |
+| **Requerir token de acceso**             | Desactivado    | Los agentes deben proporcionar el token de acceso que se muestra en el cuadro de diálogo del servidor. Consulta [Ejecución en un equipo compartido](#running-on-a-shared-machine) |
+| **Puerto**                               | 42100          | El puerto de loopback en el que escucha el servidor, entre 1024 y 49151. Cambiarlo invalida los registros de agentes existentes                                                   |
 
 ## Registra tu agente
 
-In the server dialog, select your agent from **Export configuration** and paste the copied configuration into your agent. You register each agent once, and the configuration registers the server under the name `tabular-editor`.
+En el cuadro de diálogo del servidor, selecciona tu agente en **Exportar configuración** y pega la configuración copiada en tu agente. Solo tienes que registrar cada agente una vez, y la configuración registra el servidor con el nombre `tabular-editor`.
 
 ![La lista desplegable de configuración de exportación, expandida para mostrar Claude Code, VS Code, Copilot CLI, Codex y Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
 
-**Claude Code**: run the copied command in a terminal:
+**Claude Code**: ejecuta el comando copiado en una terminal:
 
 ```bash
 claude mcp add --transport http tabular-editor http://127.0.0.1:42100/
 ```
 
-**VS Code**: add to your MCP configuration:
+**VS Code**: añade esto a tu configuración de MCP:
 
 ```json
 {
@@ -90,7 +90,7 @@ claude mcp add --transport http tabular-editor http://127.0.0.1:42100/
 }
 ```
 
-**Copilot CLI**: add to `~/.copilot/mcp-config.json`:
+**Copilot CLI**: añade lo siguiente en `~/.copilot/mcp-config.json`:
 
 ```json
 {
@@ -103,14 +103,14 @@ claude mcp add --transport http tabular-editor http://127.0.0.1:42100/
 }
 ```
 
-**Codex**: add to `~/.codex/config.toml`:
+**Codex**: añade lo siguiente en `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.tabular-editor]
 url = "http://127.0.0.1:42100/"
 ```
 
-**Cursor**: add to `~/.cursor/mcp.json`:
+**Cursor**: añade lo siguiente en `~/.cursor/mcp.json`:
 
 ```json
 {
@@ -122,209 +122,209 @@ url = "http://127.0.0.1:42100/"
 }
 ```
 
-When **Require access token** is on, the exported configuration includes the token in each client's format. Copy the configuration from the dialog; don't write it by hand.
+Cuando está activado **Requerir token de acceso**, la configuración exportada incluye el token en el formato de cada cliente. Copia la configuración del cuadro de diálogo; no la escribas a mano.
 
-Any other MCP client connects to `http://127.0.0.1:42100/` over streamable HTTP. If **Require access token** is on, send the token in an `Authorization: Bearer <token>` header.
+Cualquier otro cliente MCP se conecta a `http://127.0.0.1:42100/` mediante HTTP con streaming. Si **Requerir token de acceso** está activado, envía el token en la cabecera `Authorization: Bearer <token>`.
 
 ### Comprueba que ha funcionado
 
-Ask your agent:
+Pregúntale a tu agente:
 
-> What model am I connected to in Tabular Editor?
+> ¿A qué modelo estoy conectado en Tabular Editor?
 
-The agent answers with the model name, how the model is loaded, whether it has unsaved changes and its compatibility level, or reports that no model is open. No prompt appears in Tabular Editor.
+El agente responde con el nombre del modelo, cómo se carga, si tiene cambios sin guardar y su nivel de compatibilidad, o reporta que no hay ningún modelo abierto. No aparece ningún mensaje en Tabular Editor.
 
-## Set agent permissions
+## Configurar los permisos del agente
 
-Permissions control which tools an agent gets, and the [AI Assistant](xref:ai-assistant) uses the same permissions. Set them in the **Tools > MCP Server...** dialog or under **Tools > Preferences > AI Features > Permissions**, which both edit the same setting.
+Los permisos controlan qué herramientas recibe un agente, y el [Asistente de IA](xref:ai-assistant) usa los mismos permisos. Configúralos en el cuadro de diálogo **Herramientas > Servidor MCP...** o en **Herramientas > Preferencias > Funciones de IA > Permisos**; ambas opciones modifican la misma configuración.
 
 ![La página Permisos de funciones de IA, con un menú desplegable por recurso en su nivel predeterminado](~/content/assets/images/pref-ai-permissions.png)
 
-Hover over a permission's label or dropdown to see what each level allows. If an administrator has capped a resource by [policy](xref:policies), the dropdown is read-only and indicates the policy.
+Pasa el cursor sobre la etiqueta o la lista desplegable de un permiso para ver qué permite cada nivel. Si un administrador ha limitado un recurso mediante una [directiva](xref:policies), la lista desplegable es de solo lectura e indica la directiva.
 
-Each resource has an access level:
+Cada recurso tiene un nivel de acceso:
 
 | Recurso                    | Predeterminado | Lo que obtiene el agente                                                                                                                                                                                                              |
 | -------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Metadatos del modelo**   | Lectura        | Lectura: tablas, columnas, medidas, expresiones, descripciones, relaciones y estadísticas del Analizador VertiPaq. Escritura: la capacidad de modificar el modelo mediante C# Scripts |
-| **Datos del modelo**       | Denegar        | Read: DAX query results (data values from your model). Requiere una conexión en vivo                                                                                               |
+| **Datos del modelo**       | Denegar        | Lectura: resultados de consultas DAX (valores de datos de tu modelo). Requiere una conexión en vivo                                                                                |
 | **Best Practice Analyzer** | Lectura        | Lectura: el conjunto de reglas y los resultados del análisis. Escritura: añadir y modificar reglas                                                                                    |
-| **Documentos**             | Escritura      | Read: the contents of your open DAX queries, C# scripts and DAX scripts. Write: modifying them, and creating C# scripts and DAX queries                                               |
-| **Macros**                 | Escritura      | Lectura: tu biblioteca de macros, con nombres, descripciones y código. Write: no additional tools in this version                                                                     |
+| **Documentos**             | Escritura      | Lectura: el contenido de tus consultas DAX abiertas, C# Scripts y scripts DAX. Escribir: modificarlos y crear scripts de C# y consultas DAX                                           |
+| **Macros**                 | Escritura      | Lectura: tu biblioteca de macros, con nombres, descripciones y código. Escritura: no hay herramientas adicionales en esta versión                                                     |
 
-**Write** (labeled **Read/Write** in the dropdowns) includes Read, and **Model data** has no Write level.
+**Escritura** (que aparece como **Lectura/escritura** en las listas desplegables) incluye **Lectura**, y **Datos del modelo** no tiene nivel de **Escritura**.
 
-**Documents** defaults to Write, which lets an agent create tabs and overwrite the contents of open DAX queries, C# scripts and DAX scripts. The agent doesn't run them, and the model doesn't change. If you keep unsaved work in those tabs, set **Documents** to **Read**.
+**Documentos** tiene **Escritura** de forma predeterminada, lo que permite a un agente crear pestañas y sobrescribir el contenido de los documentos abiertos: consultas DAX, C# Scripts y scripts DAX. El agente no los ejecuta y el modelo no cambia. Si tienes trabajo sin guardar en esas pestañas, establece **Documentos** en **Lectura**.
 
-Raising these grants above their defaults gives the agent more access:
+Aumentar estos permisos por encima de sus valores predeterminados le da al agente más acceso:
 
-- **Model data > Read** sends values from your model to your agent, and through it to your agent's provider. Grant it when the agent needs to check results against real values.
-- **Model metadata > Write** lets the agent change the model through C# scripts. See [How an agent changes your model](#how-an-agent-changes-your-model) for the safeguards.
+- **Datos del modelo > Leer** envía valores de tu modelo a tu agente y, a través de este, al proveedor del agente. Concédelo cuando el agente necesite contrastar los resultados con valores reales.
+- **Metadatos del modelo > Escribir** permite al agente cambiar el modelo mediante C# Scripts. Consulta [Cómo un agente cambia tu modelo](#how-an-agent-changes-your-model) para ver las medidas de protección.
 
 > [!IMPORTANT]
-> Permissions are read when the server starts, and an agent gets its tool list when it connects. Después de cambiar un permiso, detén el servidor, vuelve a iniciarlo y luego vuelve a conectar el agente. Until then, the agent keeps the permissions that were in force when it connected.
+> Los permisos se leen cuando se inicia el servidor, y un agente obtiene su lista de herramientas cuando se conecta. Después de cambiar un permiso, detén el servidor, vuelve a iniciarlo y luego vuelve a conectar el agente. Hasta entonces, el agente conserva los permisos que estaban en vigor cuando se conectó.
 
 ## Qué puede hacer el agente
 
-The agent's tools depend on your grants, and the following table lists what you can ask for and the grant each request needs.
+Las herramientas del agente dependen de los permisos que le concedas, y la siguiente tabla enumera lo que puedes pedir y el permiso que requiere cada solicitud.
 
-| Request                                                                                                                                               | Grant needed                                        |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| Identify the Tabular Editor instance and the model it has open                                                                                        | None                                                |
-| Search the Tabular Editor documentation, blog, GitHub issues and discussions                                                                          | None                                                |
-| Look up the scripting API: the properties, methods and signatures on the model objects, for the Tabular Editor version you're running | None                                                |
-| Get an overview of the tables, their column and measure counts and every relationship                                                                 | **Model metadata > Read**                           |
-| Get full detail for named objects, including expressions, descriptions, format strings and data types                                                 | **Model metadata > Read**                           |
-| Search the model by name, description, DAX or M expression, format string or annotation                                                               | **Model metadata > Read**                           |
-| Get the full model. This uses a lot of tokens, and the tool description warns the agent                                               | **Model metadata > Read**                           |
-| See the objects selected in the TOM Explorer                                                                                                          | **Model metadata > Read**                           |
-| Get VertiPaq Analyzer statistics: table sizes, column cardinalities and memory use                                                    | **Model metadata > Read**                           |
-| List the effective [Best Practice Analyzer](xref:best-practice-analyzer) rules, your own included, and run the analysis                               | **Best Practice Analyzer > Read**                   |
-| Add or change rules in your local collection                                                                                                          | **Best Practice Analyzer > Write**                  |
-| Run a DAX query and get rows back. A query returns 100 rows by default and at most 500                                                | **Model data > Read** and **Model metadata > Read** |
-| List your open DAX queries, C# scripts and DAX scripts                                                                                                | **Model metadata > Read**                           |
-| Read the contents of open tabs                                                                                                                        | **Documents > Read**                                |
-| Edit a tab, or open a new C# script or DAX query for review                                                                                           | **Documents > Write**                               |
-| Read your macro library                                                                                                                               | **Macros > Read**                                   |
-| Change the model. See [How an agent changes your model](#how-an-agent-changes-your-model)                                             | **Model metadata > Write**                          |
+| Solicitud                                                                                                                                                                  | Autorización necesaria                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Identificar la instancia de Tabular Editor y el modelo que tiene abierto                                                                                                   | Ninguna                                                             |
+| Buscar en la documentación, el blog, los issues y los debates de GitHub de Tabular Editor                                                                                  | Ninguna                                                             |
+| Consultar la API de scripting: las propiedades, los métodos y las firmas de los objetos del modelo, para la versión de Tabular Editor que estés ejecutando | Ninguna                                                             |
+| Obtener una visión general de las tablas, el recuento de columnas y medidas, y todas las relaciones                                                                        | **Metadatos del modelo > Leer**                                     |
+| Obtener todos los detalles de los objetos con nombre, incluidas las expresiones, las descripciones, las cadenas de formato y los tipos de datos                            | **Metadatos del modelo > Leer**                                     |
+| Buscar en el modelo por nombre, descripción, expresión DAX o M, cadena de formato o anotación                                                                              | **Metadatos del modelo > Leer**                                     |
+| Obtener el modelo completo. Esto consume muchos tokens, y la descripción de la herramienta advierte al agente                                              | **Metadatos del modelo > Leer**                                     |
+| Ver los objetos seleccionados en el Explorador TOM                                                                                                                         | **Metadatos del modelo > Lectura**                                  |
+| Obtener estadísticas del Analizador VertiPaq: tamaños de tablas, cardinalidades de columnas y uso de memoria                                               | **Metadatos del modelo > Lectura**                                  |
+| Listar las reglas efectivas del [Best Practice Analyzer](xref:best-practice-analyzer), incluidas las tuyas, y ejecutar el análisis                                         | **Best Practice Analyzer > Lectura**                                |
+| Agregar o cambiar reglas en tu colección local                                                                                                                             | **Best Practice Analyzer > Escritura**                              |
+| Ejecutar una consulta DAX y obtener filas como resultado. Una consulta devuelve 100 filas de forma predeterminada y como máximo 500                        | **Datos del modelo > Lectura** y **Metadatos del modelo > Lectura** |
+| Ver las consultas DAX, los C# Scripts y los scripts DAX que tienes abiertos                                                                                                | **Metadatos del modelo > Lectura**                                  |
+| Leer el contenido de las pestañas abiertas                                                                                                                                 | **Documentos > Lectura**                                            |
+| Editar una pestaña o abrir un nuevo C# Script o una nueva consulta DAX para su revisión                                                                                    | **Documentos > Escritura**                                          |
+| Leer tu biblioteca de macros                                                                                                                                               | **macros > Lectura**                                                |
+| Cambiar el modelo. Consulta [Cómo un agente cambia tu modelo](#how-an-agent-changes-your-model)                                                            | **Metadatos del modelo > Escritura**                                |
 
-Select objects in the TOM Explorer before you refer to them in a prompt, for example before asking "format these consistently".
+Selecciona objetos en el Explorador TOM antes de mencionarlos en un prompt; por ejemplo, antes de pedir "dales un formato coherente".
 
-Before a C# script or DAX query from the agent opens as a document, Tabular Editor compiles the script or validates the query against the open model, and returns any errors to the agent. DAX query validation needs Tabular Editor connected to Analysis Services or Power BI.
+Antes de que un C# Script o una consulta DAX del agente se abra como documento, Tabular Editor compila el script o valida la consulta contra el modelo abierto y devuelve al agente los errores que encuentre. La validación de consultas DAX requiere que Tabular Editor esté conectado a Analysis Services o Power BI.
 
 > [!NOTE]
-> Querying data needs a live connection, and VertiPaq statistics need a connection or statistics you've already collected. Tool availability is set when the agent connects, so if you connect the model afterwards, reconnect the agent.
+> Para consultar datos se necesita una conexión activa, y las estadísticas de VertiPaq requieren una conexión o estadísticas que ya hayas recopilado. La disponibilidad de las herramientas se establece cuando el agente se conecta, así que si conectas el modelo después, vuelve a conectar al agente.
 
 ## Cómo un agente cambia tu modelo
 
-With **Model metadata > Write**, an agent changes your model by creating a [C# script](xref:csharp-scripts) in the background. Tabular Editor compiles the script, checks it for safety and runs it against the open model.
+Con **Model metadata > Write**, un agente modifica tu modelo creando un [C# Script](xref:csharp-scripts) en segundo plano. Tabular Editor compila el script, comprueba que sea seguro y lo ejecuta en el modelo abierto.
 
-A script can do anything the C# scripting API supports, for example add measures, columns, calculation groups, perspectives, translations, relationships and refresh policies, or bulk-rename and format objects. An agent-run script has these properties:
+Un script puede hacer todo lo que permite la API de scripting de C#; por ejemplo, agregar medidas, columnas, grupos de cálculo, perspectivas, traducciones, relaciones y políticas de actualización, o renombrar y dar formato a objetos de forma masiva. Un script ejecutado por un agente tiene estas propiedades:
 
-- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. Ver @undo-redo.
-- if the script throws an exception part-way through, all its changes are rolled back.
-- the agent receives a list of every object the script added, changed or removed, plus anything the script printed.
-- messages from `Output`, `Info`, `Warning` or `Error` are returned to the agent as part of the result, and no dialog opens.
-- while a long call runs, a **Please wait** indicator appears and clicks in Tabular Editor are discarded.
-- changed objects and properties are marked in the [TOM Explorer and the Properties view](xref:unsaved-changes) until you save. **Show changes** filters both views to the changes, and right-click **Revert** undoes a single property, a single object or a whole branch.
+- sus cambios aparecen como una sola entrada de deshacer, **C# Script (MCP)**, y **Ctrl+Z** deshace todo el script. Ver @undo-redo.
+- si el script genera una excepción a mitad del proceso, se revierten todos sus cambios.
+- el agente recibe una lista de todos los objetos que el script agregó, cambió o quitó, además de cualquier salida que haya generado el script.
+- los mensajes de `Output`, `Info`, `Warning` o `Error` se devuelven al agente como parte del resultado y no se abre ningún cuadro de diálogo.
+- mientras se ejecuta una llamada prolongada, aparece un indicador de **Please wait** y se descartan los clics en Tabular Editor.
+- los objetos y propiedades modificados se marcan en el [Explorador TOM y la vista de propiedades](xref:unsaved-changes) hasta que guardes. **Mostrar cambios** filtra ambas vistas para mostrar solo los cambios, y al hacer clic con el botón derecho en **Revert** puedes deshacer una sola propiedad, un solo objeto o toda una rama.
 
-![The Edit menu open on a single Undo C# script (MCP) entry, with the TOM Explorer marking an added measure in green, a changed measure in orange and a deleted measure struck through in red, and the Properties view filtered to the one changed property](~/content/assets/images/features/mcp-server/agent-change-review.png)
+![El menú Editar abierto con una única entrada "Deshacer C# Script (MCP)", con el Explorador TOM marcando una medida agregada en verde, una medida modificada en naranja y una medida eliminada tachada en rojo, y la vista de propiedades filtrada para mostrar la única propiedad modificada](~/content/assets/images/features/mcp-server/agent-change-review.png)
 
-The [AI Assistant](xref:ai-assistant) chat runs scripts the same way, with the same single undo step and rollback, under the undo entry **C# script (AI Assistant)**. Agent scripts have no preview dialog and no **Cancel**. Review their changes afterwards in the TOM Explorer and the Properties view.
+El chat del [Asistente de IA](xref:ai-assistant) ejecuta scripts del mismo modo, con un único paso de deshacer y la misma reversión, en la entrada de deshacer **C# Script (AI Assistant)**. Los scripts de agente no tienen cuadro de diálogo de vista previa ni **Cancelar**. Revisa sus cambios después en el Explorador TOM y la vista de propiedades.
 
-### Blocked operations
+### Operaciones bloqueadas
 
-These are blocked regardless of your grants:
+Estas operaciones se bloquean independientemente de tus permisos:
 
-- `ExecuteCommand`, which runs raw TMSL or XMLA, always fails in an agent-run script.
-- An agent script that accesses the file system, makes a web request or references an external assembly doesn't run. The check is the same analysis of the compiled script that the `BlockUnsafeScripts` policy uses; see [What counts as staying within the model](xref:csharp-scripts#what-counts-as-staying-within-the-model) for the full list. What happens to the script depends on your grants and policies:
-  - With **Documents > Write**, the script opens as an **Agent script (review)** document, and the tool result tells the agent to have you review and run it.
-  - Without **Documents > Write**, the script doesn't run and no document opens.
-  - With the `BlockUnsafeScripts` [policy](xref:policies) set, the script doesn't run and no document opens.
-- The DAX helpers inside a script need **Model data > Read**, the same as the query tool.
+- `ExecuteCommand`, que ejecuta TMSL o XMLA sin procesar, siempre falla en un script ejecutado por un agente.
+- Un script de agente que accede al sistema de archivos, hace una solicitud web o hace referencia a un ensamblado externo no se ejecuta. La comprobación es el mismo análisis del script compilado que utiliza la directiva `BlockUnsafeScripts`; consulta [Qué cuenta como mantenerse dentro del modelo](xref:csharp-scripts#what-counts-as-staying-within-the-model) para ver la lista completa. Lo que ocurra con el script depende de tus permisos y políticas:
+  - Con **Documents > Write**, el script se abre como un documento **Agent script (review)** y el resultado de la herramienta indica al agente que te pida que lo revises y lo ejecutes.
+  - Sin **Documents > Write**, el script no se ejecuta y no se abre ningún documento.
+  - Si está establecida la [política](xref:policies) `BlockUnsafeScripts`, el script no se ejecuta y no se abre ningún documento.
+- Los asistentes de DAX dentro de un script requieren **Datos del modelo > Leer**, al igual que la herramienta de consultas.
 
-## Example tasks
+## Tareas de ejemplo
 
-### Fix Best Practice Analyzer violations
+### Corregir infracciones del Best Practice Analyzer
 
-Open a model and ask:
+Abre un modelo y pregunta:
 
 > Ejecuta el Best Practice Analyzer y dime qué merece la pena corregir, empezando por lo peor.
 
-Follow up with "fix the format string violations". If **Model metadata > Write** is granted, the agent writes one script and runs it, and the changed objects are marked orange in the TOM Explorer. **Show changes** in the [Properties view](xref:unsaved-changes) shows the before and after values per property. Right-click **Revert** on any change you don't want, then save.
+A continuación, escribe "corrige las infracciones de las cadenas de formato". Si se concede **Metadatos del modelo > Escribir**, el agente escribe un script y lo ejecuta, y los objetos modificados se marcan en naranja en el Explorador TOM. La opción **Mostrar cambios** en la [vista de propiedades](xref:unsaved-changes) muestra los valores anteriores y posteriores de cada propiedad. Haz clic con el botón derecho en **Revertir** sobre cualquier cambio que no quieras y, después, guarda.
 
-### Add measures from a specification
+### Agregar medidas a partir de una especificación
 
-Point the agent at a specification, a ticket or a spreadsheet of measure definitions:
+Indícale al agente una especificación, un ticket o una hoja de cálculo con definiciones de medidas:
 
 > Añade las medidas de requirements.md a la tabla Sales. Sigue la nomenclatura y las cadenas de formato que ya se usan allí.
 
-The agent reads `requirements.md` from its own workspace.
+El agente lee `requirements.md` en su propio Workspace.
 
-### Verify results with a query
+### Verificar los resultados con una consulta
 
-With **Model data > Read** granted, the agent can run DAX to check its work:
+Si se concede **Datos del modelo > Leer**, el agente puede ejecutar DAX para comprobar su trabajo:
 
 > Confirma que la nueva medida Margin % da el mismo total que el cálculo anterior para 2025.
 
-It writes the DAX query, runs it and compares the results.
+Escribe la consulta DAX, la ejecuta y compara los resultados.
 
-### Draft a script without running it
+### Preparar un script sin ejecutarlo
 
-With **Documents > Write**, the agent can put a C# script or DAX query into a document that you review and run yourself, for example to check a change before it runs or to run it against another model later:
+Con **Documentos > Escribir**, el agente puede incluir un C# Script o una consulta DAX en un documento para que lo revises y lo ejecutes tú mismo, por ejemplo, para comprobar un cambio antes de ejecutarlo o para ejecutarlo más adelante en otro modelo:
 
 > Escríbeme un script que renombre todas las medidas a tipo oración, pero no lo ejecutes.
 
-The script opens as a document in Tabular Editor, compiled and safety-checked. Run it after you've read it.
+El script se abre como documento en Tabular Editor, compilado y sometido a comprobaciones de seguridad. Ejecútalo después de leerlo.
 
 > [!TIP]
-> Review and save between tasks to keep each set of unsaved changes small.
+> Revisa y guarda entre tareas para mantener reducido cada conjunto de cambios sin guardar.
 
 ## Ejecutar varias instancias
 
-Each Tabular Editor instance hosts its own server on its own port. To work on two models at once, open each in its own instance and connect one agent to each.
+Cada instancia de Tabular Editor ejecuta su propio servidor en su propio puerto. Para trabajar con dos modelos a la vez, abre cada uno en su propia instancia y conecta un agente a cada instancia.
 
-For a second server, start the second instance, open **Tools > MCP Server...** and click **Start server**. If the configured port is taken, a prompt offers the first free port among the next 20, or an error appears if none is free. You can also set another port under **Tools > Preferences > AI Features > MCP Server**.
+Para un segundo servidor, inicia la segunda instancia, abre **Herramientas > Servidor MCP...** y haz clic en **Iniciar servidor**. Si el puerto configurado está ocupado, un aviso ofrece el primer puerto libre entre los 20 siguientes; si no hay ninguno libre, aparece un error. También puedes configurar otro puerto en **Herramientas > Preferencia > Funciones de IA > Servidor MCP**.
 
-Register the second port with your agent under its own name, and name the instance you mean in your prompts.
+Registra el segundo puerto en tu agente con su propio nombre y especifica en tus prompts el nombre de la instancia a la que te refieres.
 
 ## Ejecutar en un equipo compartido
 
-The server binds to `127.0.0.1`, which other machines can't reach. It also rejects browser requests with a non-local `Origin` header.
+El servidor escucha en `127.0.0.1`, al que otras máquinas no pueden acceder. También rechaza las solicitudes del navegador con un encabezado `Origin` no local.
 
-When **Require access token** is off, any process on the machine can connect without credentials. On a host where several people are signed in at once, such as a Remote Desktop or Citrix server, that includes processes in other people's sessions.
+Cuando **Requerir token de acceso** está desactivado, cualquier proceso de la máquina puede conectarse sin credenciales. En un host donde varias personas tienen sesión iniciada a la vez, como un servidor de Remote Desktop o Citrix, eso incluye los procesos de las sesiones de otras personas.
 
-Select **Require access token** under **Tools > Preferences > AI Features > MCP Server** and restart the server. Agents must then present the token shown in the server dialog, and requests without it are rejected.
+Selecciona **Requerir token de acceso** en **Herramientas > Preferencias > Funciones de IA > Servidor MCP** y reinicia el servidor. Los agentes deben presentar entonces el token que se muestra en el cuadro de diálogo del servidor, y las solicitudes que no lo incluyan se rechazan.
 
-Select **Regenerate token** (the refresh button beside the token) to issue a new token, which invalidates existing registrations and restarts a running server. If the token is exposed, regenerate it and re-register your agents. Los administradores pueden hacer que el token sea obligatorio para todos con la directiva `RequireMcpAccessToken`, que además bloquea esa preferencia. Consulta @policies.
+Selecciona **Regenerar token** (el botón de actualización junto al token) para generar un nuevo token, lo que invalida los registros existentes y reinicia el servidor si está en ejecución. Si el token queda expuesto, regénéralo y vuelve a registrar tus agentes. Los administradores pueden hacer que el token sea obligatorio para todos con la directiva `RequireMcpAccessToken`, que además bloquea esa preferencia. Consulta @policies.
 
 ## Qué sale de tu equipo
 
-When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
+Cuando usas el servidor MCP, Tabular Editor no se comunica con ningún proveedor de IA y solo responde a llamadas a herramientas de procesos de tu máquina, a través de una conexión de loopback. La base de conocimiento que consulta el agente es una base de datos local que se incluye con Tabular Editor y se actualiza desde el servicio de Tabular Editor.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. Con **Datos del modelo** en su valor predeterminado, **Denegar**, el agente no recibe ningún resultado de consultas DAX desde Tabular Editor. Los valores introducidos en la definición del modelo, como una expresión `DATATABLE` o una tabla de **Introducir datos**, son metadatos del modelo y llegan al agente en **Metadatos del modelo > Leer**.
+Tu agente envía datos a su proveedor conforme a tu suscripción y a las condiciones de ese proveedor, y la configuración de tu agente controla qué se envía. Con **Datos del modelo** en su valor predeterminado, **Denegar**, el agente no recibe ningún resultado de consultas DAX desde Tabular Editor. Los valores introducidos en la definición del modelo, como una expresión `DATATABLE` o una tabla de **Introducir datos**, son metadatos del modelo y llegan al agente en **Metadatos del modelo > Leer**.
 
-See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
+Consulta @security-privacy para obtener una visión más amplia, incluido el [Asistente de IA](xref:ai-assistant), que se comunica directamente con un proveedor y se configura por separado.
 
 ## Controles de administrador
 
-The MCP server is on by default, and any user can turn it off. Administrators can use these [policies](xref:policies) to control how the MCP operates:
+El servidor MCP está activado de forma predeterminada y cualquier usuario puede desactivarlo. Los administradores pueden usar estas [directivas](xref:policies) para controlar cómo funciona el MCP:
 
-| Directiva                                   | Edition    | Qué hace                                                                                                                                                                                                                               |
-| ------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DisableMcpServer`                          | All        | Removes the MCP server. The AI Assistant chat is unaffected                                                                                                                                                            |
-| `DisableAi`                                 | All        | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component off the machine                                                                   |
-| `RequireMcpAccessToken`                     | All        | Forces token authentication and locks the preference                                                                                                                                                                                   |
-| `DisableCSharpScripts`                      | All        | Stops an agent running a C# script and drafting one into a document. Drafting a DAX query, and every tool that only reads, is unaffected                                                                               |
-| `BlockUnsafeScripts`                        | Enterprise | Allows only scripts that stay within the model, for every script in Tabular Editor. An agent script that accesses files, the network, other processes or external assemblies doesn't run, and no review document opens |
-| `Max...` and `McpMax...` permission limits  | Enterprise | Cap each resource. The `Max...` limits apply to the AI Assistant and the MCP server. The `McpMax...` limits apply to the MCP server alone and can only lower the `Max...` limit                        |
-| `AiAuditLogPath`, `AiAuditLogRetentionDays` | Enterprise | Set the [audit log](xref:ai-audit-log) location and retention                                                                                                                                                                          |
-| `AiProvider` and related values             | Enterprise | Lock the AI Assistant's provider. The MCP server isn't affected                                                                                                                                                        |
+| Directiva                                   | Edición    | Qué hace                                                                                                                                                                                                                                                |
+| ------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DisableMcpServer`                          | Todas      | Elimina el servidor MCP. El chat del Asistente de IA no se ve afectado                                                                                                                                                                  |
+| `DisableAi`                                 | Todas      | Desactiva toda la funcionalidad de IA, incluido el servidor MCP. Con un valor `REG_DWORD` de `1`, el instalador también deja desactivado el componente de IA en el equipo                                                               |
+| `RequireMcpAccessToken`                     | Todas      | Fuerza la autenticación por token y bloquea la preferencia                                                                                                                                                                                              |
+| `DisableCSharpScripts`                      | Todos      | Impide que un agente ejecute un C# Script y lo inserte en un documento. La redacción de una consulta DAX y cualquier herramienta que solo lea no se ven afectadas                                                                       |
+| `BlockUnsafeScripts`                        | Enterprise | En Tabular Editor, solo se permiten scripts que se mantengan dentro del modelo. Un script de agente que acceda a archivos, a la red, a otros procesos o a ensamblados externos no se ejecuta, y no se abre ningún documento de revisión |
+| Límites de permisos `Max...` y `McpMax...`  | Enterprise | Establece un límite para cada recurso. Los límites `Max...` se aplican al Asistente de IA y al servidor MCP. Los límites `McpMax...` se aplican únicamente al servidor MCP y solo pueden reducir el límite `Max...`     |
+| `AiAuditLogPath`, `AiAuditLogRetentionDays` | Enterprise | Configura la ubicación y la retención del [registro de auditoría](xref:ai-audit-log)                                                                                                                                                                    |
+| `AiProvider` y valores relacionados         | Enterprise | Bloquea el proveedor del Asistente de IA. El servidor MCP no se ve afectado                                                                                                                                                             |
 
 > [!WARNING]
-> Without an Enterprise license, any Enterprise policy value stops the AI Assistant and the MCP server from starting and removes the menu item and the status bar indicator. A `BlockUnsafeScripts` value also blocks all scripts and macros, so deploy Enterprise policies only to Enterprise-licensed machines (see [What happens without Enterprise Edition](xref:policies#what-happens-without-enterprise-edition)).
+> Sin una licencia Enterprise, cualquier valor de directiva Enterprise impide que se inicien el Asistente de IA y el servidor MCP, y elimina el elemento de menú y el indicador de la barra de estado. Un valor de `BlockUnsafeScripts` también bloquea todos los scripts y las macros, así que implementa directivas Enterprise solo en equipos con licencia Enterprise (consulta [Qué ocurre sin la Edición Enterprise](xref:policies#what-happens-without-enterprise-edition)).
 
-On Enterprise Edition, Tabular Editor keeps a local [audit log](xref:ai-audit-log) of AI Assistant and MCP server activity, including every tool an agent called and the full text of any C# script it ran. Prompts, replies and data values aren't recorded. **Open audit folder** in the server dialog and on **Tools > Preferences > AI Features** opens the log folder. On Desktop and Business editions, nothing is logged and neither button appears.
+En la Edición Enterprise, Tabular Editor mantiene un [registro de auditoría](xref:ai-audit-log) local de la actividad del Asistente de IA y del servidor MCP, incluidas todas las herramientas que un agente invocó y el texto completo de cualquier C# Script que ejecutó. Los prompts, las respuestas y los valores de datos no se registran. El botón **Abrir carpeta de auditoría** en el cuadro de diálogo del servidor y en **Herramientas > Preferencias > Características de IA** abre la carpeta del registro. En las ediciones Desktop y Edición Business, no se registra nada y no aparece ninguno de los dos botones.
 
-See @policies for the full list, the registry layout and the administrative templates.
+Consulta @policies para ver la lista completa, la estructura del Registro y las plantillas administrativas.
 
 ## Solución de problemas
 
-| Lo que ves                                                                                               | Qué ocurre                                                                                                                                                                                                                                                                                               |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| El agente dice que no tiene herramientas para Tabular Editor                                             | El servidor no está en ejecución, o el agente se conectó antes de que arrancara. Check that the status bar reads **MCP Started**, then reconnect the agent                                                                                                                               |
-| El agente no puede ver un permiso que acabas de conceder                                                 | Los permisos se leen al iniciar el servidor y la lista de herramientas queda fijada en el momento de la conexión. Detén el servidor y vuelve a iniciarlo; luego vuelve a conectar el agente                                                                                              |
-| The agent loses the connection after a long break                                                        | The server closes a session after 20 minutes with no requests and no open stream. Vuelve a conectar el agente                                                                                                                                                                            |
-| El agente reporta que no hay ningún modelo abierto                                                       | El servidor se ejecuta de forma independiente de tu modelo. Open a model in Tabular Editor and ask again. You don't need to restart anything                                                                                                                             |
-| El agente no puede ejecutar consultas DAX                                                                | De forma predeterminada, **Datos del modelo** está configurado como **Denegar**. Queries also need a live connection: against a model opened from disk, the query tool is unavailable whatever the grant                                                                 |
-| Las conexiones se rechazan con un 401                                                                    | **Requerir token de acceso** está activada y el agente no está enviando el token. Copy the registration configuration from the dialog again. It includes the token                                                                                                       |
-| El puerto ya está en uso                                                                                 | Another Tabular Editor instance or another application uses it. Accept the next free port in the prompt, and update the agent's registration. If **Start MCP server automatically** is on, a conflict at startup shows no prompt and the indicator reads **MCP Stopped** |
-| **Herramientas > Servidor MCP...** no aparece en el menú | **Enable MCP Server** is cleared in preferences, the AI features component isn't installed, an administrator has set `DisableMcpServer` or `DisableAi`, or an Enterprise policy value is set on a machine that isn't licensed for it. Consulta @policies                    |
+| Lo que ves                                                                                               | Qué ocurre                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| El agente dice que no tiene herramientas para Tabular Editor                                             | El servidor no está en ejecución, o el agente se conectó antes de que arrancara. Comprueba que la barra de estado muestre **MCP iniciado** y, a continuación, vuelve a conectar el agente                                                                                                                                          |
+| El agente no puede ver un permiso que acabas de conceder                                                 | Los permisos se leen al iniciar el servidor y la lista de herramientas queda fijada en el momento de la conexión. Detén el servidor y vuelve a iniciarlo; luego vuelve a conectar el agente                                                                                                                                        |
+| El agente pierde la conexión tras una pausa larga                                                        | El servidor cierra una sesión tras 20 minutos sin solicitudes y sin ningún flujo abierto. Vuelve a conectar el agente                                                                                                                                                                                                              |
+| El agente reporta que no hay ningún modelo abierto                                                       | El servidor se ejecuta de forma independiente de tu modelo. Abre un modelo en Tabular Editor y vuelve a preguntar. No hace falta reiniciar nada                                                                                                                                                                    |
+| El agente no puede ejecutar consultas DAX                                                                | De forma predeterminada, **Datos del modelo** está configurado como **Denegar**. Las consultas también necesitan una conexión activa: con un modelo abierto desde el disco, la herramienta de consultas no está disponible, independientemente del permiso concedido                                               |
+| Las conexiones se rechazan con un 401                                                                    | **Requerir token de acceso** está activada y el agente no está enviando el token. Vuelve a copiar la configuración de registro desde el cuadro de diálogo. Incluye el token                                                                                                                                        |
+| El puerto ya está en uso                                                                                 | Otra instancia de Tabular Editor u otra aplicación lo está usando. Acepta el siguiente puerto libre cuando se te pida y actualiza el registro del agente. Si **Iniciar el servidor MCP automáticamente** está activado, un conflicto al iniciar no muestra ningún aviso y el indicador muestra **MCP Stopped**     |
+| **Herramientas > Servidor MCP...** no aparece en el menú | La opción **Habilitar servidor MCP** está desmarcada en las preferencias, el componente de funciones de IA no está instalado, un administrador ha establecido `DisableMcpServer` o `DisableAi`, o se ha configurado un valor de directiva Enterprise en un equipo que no tiene licencia para ello. Consulta @policies |
 
 ## Pasos a seguir
 
-- @ai-assistant for the full permission model and the built-in chat.
+- @ai-assistant para el modelo completo de permisos y el chat integrado.
 - @unsaved-changes para revisar y revertir lo que hizo un agente.
-- @csharp-scripts for what a script, and therefore an agent, can change.
+- @csharp-scripts para saber qué puede cambiar un script y, por tanto, un agente.
 - @policies para gestionar el servidor a nivel de toda la organización.
-- @te-cli-skill if your agent works on model files in a repository or a pipeline.
+- @te-cli-skill si tu agente trabaja con archivos de modelo en un repositorio o una canalización.
