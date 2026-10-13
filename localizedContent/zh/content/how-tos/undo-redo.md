@@ -13,37 +13,37 @@ applies_to:
 
 # 支持撤销/重做
 
-Press **Ctrl+Z** to undo a change and **Ctrl+Y** to redo it. The undo stack has no size limit and is cleared when you load another model, from a file or from a database. An operation that changes many objects, such as a folder drag, a batch rename or a Best Practice Analyzer (BPA) fix, is one undo step.
+按 **Ctrl+Z** 撤销更改，按 **Ctrl+Y** 重做。撤销栈没有大小限制；当你从文件或数据库加载另一个模型时，撤销栈会被清空。一次会更改多个对象的操作（例如拖动文件夹、批量重命名或 Best Practice Analyzer (BPA) 修复）只算一个撤销步骤。
 
 ## 删除对象
 
-Deleting an object also removes what depends on it. For a column, Tabular Editor removes:
+删除对象时，也会一并删除依赖于它的内容。对于列，Tabular Editor 会移除：
 
-- relationships that use the column
-- hierarchy levels based on the column
-- its translations and perspective memberships
-- in Tabular Editor 3, its entries in calendars and variations
+- 使用该列的关系
+- 基于该列的层次结构级别
+- 其翻译和透视成员关系
+- 在 Tabular Editor 3 中，该列在日历和变体中的条目
 
-In Tabular Editor 3, it also clears the `SortByColumn` property of columns sorted by the deleted column.
+在 Tabular Editor 3 中，还会清除由已删除列排序的列的 `SortByColumn` 属性。
 
-Undo restores the object and its dependents in one step.
+执行撤销时，会一步还原该对象及依赖它的对象。
 
-If other objects depend on the single object you delete, a confirmation dialog lists the consequences:
+如果你删除的单个对象有其他对象依赖它，确认对话框会列出可能的影响：
 
-- If DAX expressions reference the object, those expressions stop working.
-- If the column is used in hierarchies, the corresponding levels are deleted.
-- If the column is used in relationships, those relationships are removed.
-- In Tabular Editor 3, if the column is used in calendars, it's removed from them.
+- 如果 DAX 表达式引用了该对象，这些表达式就会失效。
+- 如果该列被用于层次结构，相应的级别也会被删除。
+- 如果某些关系使用了该列，这些关系也会被移除。
+- 在 Tabular Editor 3 中，如果该列用于某些日历，则会将其从这些日历中移除。
 
-Deleting several objects at once always shows a confirmation dialog, but the dialog doesn't list the consequences per object.
+一次删除多个对象时，总会显示确认对话框，但该对话框不会逐个列出每个对象的影响。
 
-If a single object has no dependents, it's deleted without a prompt. In Tabular Editor 3, select **Always show delete warnings** in the **Delete** section under **Tools > Preferences > Tabular Editor > TOM Explorer** to confirm every delete.
+如果某个对象没有其他对象依赖它，删除时不会出现提示。在 Tabular Editor 3 中，如需在每次删除时都进行确认，请在 **工具 > 偏好 > Tabular Editor > TOM Explorer** 下的 **删除** 部分勾选 **始终显示删除警告**。
 
 > [!NOTE]
-> Deleting an object doesn't rewrite the DAX that references it. The dependent expressions keep the reference and are reported as errors in the @messages-view. When you rename an object, [formula fix-up](xref:formula-fix-up-dependencies) updates the expressions that reference it.
+> 删除对象不会改写引用它的 DAX 表达式。依赖它的表达式会保留该引用，并在 @messages-view 中以错误形式进行 Report。重命名对象时，[公式修复](xref:formula-fix-up-dependencies) 会更新引用它的表达式。
 
 ## 撤销与未保存的更改
 
-In Tabular Editor 3, the unsaved-change indicators track the undo stack. Undoing back to the last saved state clears every indicator, and redoing shows them again. Undoing beyond the last save shows indicators on the objects that were rolled back.
+在 Tabular Editor 3 中，“未保存更改”指示器会与撤销栈保持同步。将操作撤销回上次保存的状态后，所有指示器都会消失；重做后又会重新显示。当撤销操作超过上次保存点时，被回退的对象上会显示指示标记。
 
-**Revert** discards one change and keeps later ones. It restores a property, object, table or the whole model to its last saved state while your other unsaved changes stay in place, and you can undo a revert. 参见 @unsaved-changes。
+**还原**会撤销一项更改，并保留之后的更改。它会将属性、对象、表或整个模型恢复到上次保存时的状态，同时保留其他未保存的更改；而且你还可以撤销还原操作。参见 @unsaved-changes。
