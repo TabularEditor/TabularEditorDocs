@@ -20,133 +20,133 @@ applies_to:
 
 # 未保存更改指示符
 
-Tabular Editor 3 marks objects and properties that differ from the last saved version of the model. This includes changes from [C# scripts](xref:csharp-scripts), macros and the [AI Assistant](xref:ai-assistant). A mark clears when you save, revert or undo the change.
+Tabular Editor 3 会标记与模型上次保存时相比发生变化的对象和属性。这包括来自 [C# Script](xref:csharp-scripts)、宏和 [AI Assistant](xref:ai-assistant) 的更改。保存、还原或撤销更改后，标记会被清除。
 
 这些指示器会显示在两个位置：
 
-- In the [TOM Explorer](xref:tom-explorer-view), changed objects get a colored row and an icon badge: orange (edited), green (added) and red (deleted). These are the colors of the model comparison view shown when deploying.
-- In the [Properties view](xref:properties-view), changed properties get a light orange row.
+- 在 [TOM Explorer](xref:tom-explorer-view) 中，已更改的对象所在行会以不同颜色显示，并带有图标徽章：橙色（已编辑）、绿色（已添加）和红色（已删除）。这些颜色与部署时显示的模型比较视图中的颜色一致。
+- 在 [属性视图](xref:properties-view) 中，已更改的属性所在行会显示为淡橙色。
 
-![TOM Explorer with edited, added and deleted measures highlighted, and the Properties view with the changed Description row highlighted](~/content/assets/images/unsaved-changes/overview.png)
+![TOM Explorer 中已编辑、新增和已删除的度量值已高亮显示，属性视图中已更改的“说明”行也已高亮显示](~/content/assets/images/unsaved-changes/overview.png)
 
-Both views have a **Show changes** toolbar button and a right-click **Revert** command.
+这两个视图都提供 **显示更改** 工具栏按钮，以及右键菜单中的 **还原** 命令。
 
 > [!NOTE]
-> 这些指示器会跟踪相对于模型的加载来源或上次保存目标所发生的更改。 Deploying the model to a different database doesn't clear them.
+> 这些指示器会跟踪相对于模型的加载来源或上次保存目标所发生的更改。将模型部署到其他数据库不会清除这些标记。
 
 ## TOM Explorer 中的更改指示器
 
-Each object in the tree is marked according to its change since the last save:
+树中的每个对象都会根据其自上次保存以来的变化进行标记：
 
-- **Edited** objects get a light orange row and an orange dot badge. This covers any modified property, including changes to a sub-object that has no node in the tree, such as a table's refresh policy or a column's `AlternateOf` settings.
-- **已添加** 对象所在行会显示淡绿色背景，并带有绿色 **+** 徽标。 A new table and all its new columns are green. Editing an added object doesn't change it from green to orange.
-- **Deleted** objects get a light red row, a red **−** badge and a struck-through name. See [Deleted objects](#deleted-objects).
+- **已编辑** 对象所在行会显示为淡橙色，并在图标上带有橙色圆点徽章。这包括任何被修改的属性，也包括在树中没有对应节点的子对象上的更改，例如表的刷新策略或列的 `AlternateOf` 设置。
+- **已添加** 对象所在行会显示淡绿色背景，并带有绿色 **+** 徽标。新表及其所有新列都会显示为绿色。编辑已添加的对象不会使其从绿色变为橙色。
+- **已删除** 对象所在行会显示为淡红色，并带有红色 **−** 徽章，同时其名称会显示删除线。请参见 [已删除对象](#deleted-objects)。
 
-Tables, display folders, table groups and the **Model** node get a hatched fill when something beneath them has changed. Their icon badge is green when everything changed beneath them is an addition, and orange otherwise.
+如果其下方的内容发生了更改，表、显示文件夹、表格组以及 **Model** 节点会显示斜线填充图案。如果其下方的所有更改都是新增，其图标徽章就是绿色；否则为橙色。
 
-Within a selection, the selection highlight takes precedence over the row color and the icon badge still marks changed objects. Error and warning badges take precedence over the change badge.
+在选中状态下，选中高亮会覆盖行颜色，但图标徽章仍会标记已更改的对象。错误和警告徽章的优先级高于更改徽章。
 
 > [!TIP]
-> If green and red rows are hard to tell apart, select **Color blindness mode** in the **Accessibility** group under **Tools > Preferences > Tabular Editor > User Interface**. Added objects are then teal instead of green, both here and in the model comparison view.
+> 如果绿色行和红色行不易区分，请在 **工具 > 偏好 > Tabular Editor > 用户界面** 下的 **辅助功能** 组中选择 **色盲模式**。此后，新增对象会以蓝绿色而非绿色标记，这里和模型比较视图中都会这样显示。
 
 ### 显示更改
 
-The **Show changes** button on the TOM Explorer toolbar filters the tree to objects with unsaved changes, plus the tables, folders and groups that contain them. While the filter is active, the view title reads **TOM Explorer (Changed)**.
+TOM Explorer 工具栏上的 **显示更改** 按钮会筛选树视图，仅显示有未保存更改的对象，以及包含这些对象的表、显示文件夹和表格组。启用此筛选器时，视图标题会显示为 **TOM Explorer (Changed)**。
 
-![TOM Explorer with the Show changes filter active, listing only changed objects and their containers](~/content/assets/images/unsaved-changes/tom-explorer-show-changes.png)
+![TOM Explorer 启用“显示更改”筛选器，仅列出已更改的对象及其所属容器](~/content/assets/images/unsaved-changes/tom-explorer-show-changes.png)
 
-The filter combines with the other toolbar toggles and the search box. 例如，使用 **Ctrl+2** 隐藏列时，已更改的列也会从筛选后的视图中隐藏。
+该筛选器可与工具栏上的其他切换按钮和搜索框配合使用。例如，使用 **Ctrl+2** 隐藏列时，已更改的列也会从筛选后的视图中隐藏。
 
 ## 属性视图中的更改指示器
 
-When you select a changed object, the changed properties get the same light orange row. 对于包含子对象的折叠行，例如度量值的 **KPI** 行或表的 **刷新策略** 行，只要子对象中的任何内容发生更改，该行就会被标记。 For indexed rows such as **Annotations**, only the changed annotation is marked. 选择多个对象时，只要所选对象中有任意一个更改了该属性，对应的属性行就会被标记。
+选择已更改的对象时，已更改的属性也会以同样的浅橙色行背景高亮显示。对于包含子对象的折叠行，例如度量值的 **KPI** 行或表的 **刷新策略** 行，只要子对象中的任何内容发生更改，该行就会被标记。对于 **注释** 这类带索引的行，仅会标记发生更改的那条注释。选择多个对象时，只要所选对象中有任意一个更改了该属性，对应的属性行就会被标记。
 
-The **Show changes** button on the Properties view toolbar hides unchanged rows. While the filter is active, the view title reads **Properties (Changed)**.
+属性视图工具栏上的 **显示更改** 按钮会隐藏未更改的行。启用该筛选器时，视图标题将显示为 **属性（已更改）**。
 
-![Properties view with the Show changes filter active, listing only changed properties](~/content/assets/images/unsaved-changes/properties-show-changes.png)
+![已启用“显示更改”筛选器的属性视图，仅列出已更改的属性](~/content/assets/images/unsaved-changes/properties-show-changes.png)
 
 ## 还原更改
 
-**File > Reload from disk** discards all unsaved changes and reloads the model from its source. For a model opened from a server, the command is **File > Reload from server**. **Revert** undoes individual changes and leaves all other unsaved changes in place.
+**文件 > 从磁盘重新加载** 会丢弃所有未保存的更改，并从其源重新加载模型。对于从服务器打开的模型，该命令为 **文件 > 从服务器重新加载**。**还原** 会撤销单个更改，其他所有未保存的更改则会保留。
 
-A revert works like entering the old value or recreating the deleted object by hand: Tabular Editor updates DAX references and dependent objects, and adds the revert to the undo stack as one step. To undo a revert, use **Edit > Undo** (**Ctrl+Z**).
+执行还原时，就像手动输入旧值或手动重新创建已删除对象一样：Tabular Editor 会更新 DAX 引用和依赖对象，并将这次还原作为一个步骤加入撤销堆栈。要撤销还原，使用 **编辑 > 撤销**（**Ctrl+Z**）。
 
 ### 还原单个属性
 
-Right-click a marked row in the Properties view and choose **Revert** to restore its saved value. The object's other unsaved changes stay in place.
+在属性视图中右键单击带标记的行，然后选择 **还原**，即可将该属性恢复为上次保存时的值。该对象的其他未保存的更改会保留不变。
 
-![Properties view with changed Description and Format String rows and the right-click Revert command](~/content/assets/images/unsaved-changes/revert-property.png)
+![属性视图，其中“描述”和“格式字符串”行已更改，并显示右键菜单中的“还原”命令](~/content/assets/images/unsaved-changes/revert-property.png)
 
-**Revert** is enabled only on rows with unsaved changes. With several objects selected, **Revert** on a merged row reverts the property on every selected object that changed it, as one undo step. **Revert** on a container row such as **Annotations** reverts all its annotations: edited annotations return to their saved values, added annotations are removed and deleted annotations are restored.
+**还原** 仅对包含未保存更改的行可用。选中多个对象时，在合并行上执行 **还原** 会将所有选中且更改了该属性的对象一并还原，并作为一个可撤销的步骤。在 **注释** 等容器行上执行 **还原**，会一次性还原其所有注释：已编辑的注释会恢复为保存时的值，新增的注释会被移除，而已删除的注释会被恢复。
 
 ### 还原对象或模型分支
 
-Right-click a marked object in the TOM Explorer and choose **Revert** to return the object and everything beneath it to its last saved state. **Revert** is also available on tables, display folders, table groups and the **Model** node when something beneath them has changed. **Revert** on the **Model** node discards all unsaved changes in the model, as one undo step.
+在 TOM Explorer 中右键单击带标记的对象，然后选择 **还原**，即可将该对象及其下所有内容恢复为上次保存时的状态。只要其下有内容发生更改，就可以在表、显示文件夹、表格组以及 **模型** 节点上使用 **还原**。在 **模型** 节点上执行 **还原** 会丢弃模型中所有未保存的更改，并作为一个可撤销的步骤加入撤销堆栈。
 
-![TOM Explorer right-click menu on an edited measure with Revert](~/content/assets/images/unsaved-changes/revert-object.png)
+![TOM Explorer 中已修改度量值的右键菜单，其中包含“还原”](~/content/assets/images/unsaved-changes/revert-object.png)
 
-When you revert an object or a branch:
+还原对象或模型分支时：
 
 - 已编辑的属性会恢复为保存时的值。
 - 自上次保存后新增的对象会被移除。
-- Objects deleted since the last save are restored as saved, including a deleted measure's KPI, or a deleted column's hierarchy levels and relationships.
+- 自上次保存后删除的对象会恢复为保存时的状态，包括已删除度量值的 KPI，或已删除列的层次结构级别和关系。
 - 模型中其他位置的对象会保留其未保存的更改。
 
-If part of a revert fails, a **Revert incomplete** message lists the failures and Tabular Editor applies the rest. For example, a deleted object can't be restored if another object now uses its name and can't be removed.
+如果还原的某些部分失败，会显示 **还原未完成** 信息，列出失败项，Tabular Editor 会继续应用其余部分。例如，如果另一个对象已经占用了它的名称且无法移除，那么该已删除对象将无法还原。
 
 ## 已删除的对象
 
-Deleting an object doesn't remove it from the TOM Explorer. Until you save the model, the object stays in its place with a struck-through name, a light red row and a red **−** badge. When the info columns are shown, the **Object Type** column reads, for example, **Measure (Deleted)**.
+删除对象并不会将其从 TOM Explorer 中移除。在保存模型之前，该对象会保留在原处，其名称带删除线，所在行显示为浅红色，并带有红色 **−** 标记。显示信息列时，**对象类型**列中会显示例如 **度量值（已删除）** 这样的内容。
 
-![TOM Explorer with a deleted measure struck through on a red row](~/content/assets/images/unsaved-changes/deleted-objects.png)
+![TOM Explorer 中，已删除的度量值所在行显示为红色，名称带有删除线](~/content/assets/images/unsaved-changes/deleted-objects.png)
 
-Right-click a deleted object and choose **Restore** to restore it as it was when you deleted it. If the object had unsaved edits before you deleted it, the edits are restored too and stay marked, and you can revert them separately. To restore several deleted objects in one step, select them all and choose **Restore**.
+右键单击已删除的对象并选择 **还原**，即可将其恢复到删除前一刻的状态。如果对象在删除前有尚未保存的编辑，这些编辑也会一并恢复并继续保留标记，方便你单独撤销。要一步还原多个已删除对象，请将它们全部选中，然后选择 **还原**。
 
-You can't edit, rename, drag or expand a deleted object, and it's never a drop or paste target. Selecting a deleted object doesn't select a model object, so the Properties view shows nothing and the right-click menu has only **Restore**. A selection that mixes deleted and live objects has neither **Restore** nor the normal object commands.
+你不能编辑、重命名、拖动或展开已删除的对象，它也不能作为拖放或粘贴的目标。选择已删除的对象并不会选中模型对象，因此属性视图不会显示任何内容，右键菜单中也只有 **还原**。如果所选内容同时包含已删除对象和现有对象，则既不会提供 **还原**，也不会提供常规对象命令。
 
-C# scripts access the selected deleted objects through `Selected.Deleted`, as described in [Scripting](#scripting).
+如 [脚本](#scripting) 中所述，C# Script 可通过 `Selected.Deleted` 访问所选的已删除对象。
 
 ### 将已删除对象集中到一个节点下
 
-If you select **Gather deleted objects under a "Deleted objects" node** in the **Unsaved changes** section under **Tools > Preferences > Tabular Editor > TOM Explorer**, the deleted objects of a table, hierarchy, role or table group are listed under one **Deleted objects** node at the end of their container, whichever display folders they were in. The node has a red row and a deleted badge, and the objects beneath it are struck through. Right-click the node and choose **Restore** to restore everything beneath it in one step.
+如果你在 **工具 > 偏好 > Tabular Editor > TOM Explorer** 下的 **未保存的更改** 部分选择 **将已删除对象收集到“已删除对象”节点下**，则表、层次结构、角色或表格组中的已删除对象会集中列在其容器末尾的同一个 **已删除对象** 节点下，而不管它们原先位于哪个显示文件夹中。该节点所在行会显示为红色，并带有删除标记；其下对象的名称会带有删除线。右键单击该节点并选择 **还原**，即可一步恢复其下的所有内容。
 
-![TOM Explorer with a deleted measure listed under a Deleted objects node at the end of its table](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
+![TOM Explorer，其中已删除的度量值列在其表末尾的“已删除对象”节点下](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
 
 ### 保存后仍保留已删除对象
 
-By default, deleted objects stay visible until you save. To change that, set the **Keep deleted objects visible** preference to one of its two other options:
+默认情况下，已删除对象在保存前会一直保持可见。如需更改，请将 **保留已删除对象可见** 这一偏好设置为另外两个选项之一：
 
-- **Never**: The TOM Explorer hides deleted objects immediately. To restore them, use **Revert** on their container, or **Edit > Undo**.
-- **Until the model is closed**: Deleted objects stay visible and restorable for the whole editing session, including across saves, while their deletion is still on the undo stack. Restoring an object deleted before the last save creates it again, and it's marked as added. An object you created and deleted in the same session appears only if you edited it or saved the model while it existed.
+- **从不**：TOM Explorer 会立即隐藏已删除对象。要恢复它们，请在其容器上使用 **Revert**，或选择 **编辑 > 撤销**。
+- **在模型关闭之前**：已删除对象在整个编辑会话期间都会保持可见并可还原，即使跨越多次保存也一样，只要其删除操作仍在撤销堆栈中。还原在上次保存前删除的对象时，会重新创建该对象，并将其标记为新增对象。在同一会话中创建又删除的对象，只有在其存在期间你编辑过它，或保存过模型时，才会显示出来。
 
 ## 指示标记何时会清除
 
-A mark reflects the current difference from the last saved state. Saving the model to a file, a folder or a database clears every mark at once. A mark also clears when you revert the change, when you undo back to the point of the last save, or when you set a property back to its saved value by hand. If you undo past the last save, the undone objects are marked as changed, and redoing a change restores its mark.
+标记反映的是当前状态与上次保存的状态之间的差异。将模型保存到文件、文件夹或数据库时，会一次性清除所有标记。标记也会在以下情况下清除：还原该更改、撤销到上次保存时的状态，或手动将属性设回其已保存的值。如果你撤销到了上次保存点之前，被撤销的对象会被标记为已更改；重新执行更改会恢复其标记。
 
 ## 偏好设置
 
-The indicator settings are in the **Unsaved changes** section under **Tools > Preferences > Tabular Editor > TOM Explorer**:
+相关指示器设置位于 **工具 > 偏好 > Tabular Editor > TOM Explorer** 下的 **未保存的更改** 部分：
 
-![Unsaved changes section of the TOM Explorer preferences page](~/content/assets/images/unsaved-changes/preferences.png)
+![TOM Explorer 偏好设置页面中的“未保存的更改”部分](~/content/assets/images/unsaved-changes/preferences.png)
 
-- **Mark objects with unsaved changes** (enabled): Colors the rows and badges the icons of added, edited and deleted objects in the TOM Explorer, and hatches their containers. Doesn't affect deleted-object visibility or **Show changes**.
+- **标记有未保存更改的对象**（已启用）：在 TOM Explorer 中为新增、已编辑和已删除对象的行着色，并为其图标添加角标，还会为其容器添加斜线填充。不影响已删除对象的可见性，也不影响 **显示更改**。
 - **保持已删除对象可见**（直到模型保存）：控制已删除对象在 TOM Explorer 中保留可见的时长。请参阅[跨保存保留已删除对象](#keeping-deleted-objects-across-saves)。
-- **Gather deleted objects under a "Deleted objects" node** (disabled): Lists a container's deleted objects under one node. 请参阅[将已删除对象集中到一个节点下](#gathering-deleted-objects-under-one-node)。
-- **Mark properties with unsaved changes in the Properties pane** (enabled): Colors the rows of changed properties in the Properties view. Doesn't affect **Show changes** in the Properties view.
+- **将已删除对象集中到“已删除对象”节点下**（已禁用）：将容器中已删除的对象统一列在一个节点下。请参阅[将已删除对象集中到一个节点下](#gathering-deleted-objects-under-one-node)。
+- **在“属性”窗格中标记有未保存更改的属性**（已启用）：在属性视图中对已更改属性的行着色。不影响属性视图中的 **显示更改**。
 
 本页的其他设置请参见 @preferences。
 
 ## 脚本
 
-[C# scripts](xref:csharp-scripts) and macros can read the same change information and run the same revert operations through these members, which every model object has:
+[C# Script](xref:csharp-scripts) 和宏可以通过每个模型对象都具备的以下成员读取相同的更改信息，并执行相同的还原操作：
 
-- 当该对象或其下任何内容与上次保存的状态不同时，`HasUnsavedChanges` 返回 `true`。 On the `Model` object, it returns whether the model has any unsaved changes.
-- `Revert()` reverts the object and its children as one undo step. The method also exists on collections such as `Selected.Measures`, and on `Model` for the whole model. If part of the revert fails, it throws an exception that lists the parts it couldn't revert.
-- `Revert("PropertyName")` reverts one property to its saved value, for example `Revert("Expression")` or `Revert("Annotations[MyAnnotation]")`. 如果该属性未更改，它不会执行任何操作。
+- 当该对象或其下任何内容与上次保存的状态不同时，`HasUnsavedChanges` 返回 `true`。在 `Model` 对象上，它会返回模型是否有任何未保存的更改。
+- `Revert()` 会将该对象及其子对象作为一次撤销操作还原。该方法也存在于 `Selected.Measures` 等集合中，也存在于整个模型的 `Model` 上。如果部分还原失败，它会引发一个异常，其中列出无法还原的部分。
+- `Revert("PropertyName")` 会将单个属性恢复为其已保存的值，例如 `Revert("Expression")` 或 `Revert("Annotations[MyAnnotation]")`。如果该属性未更改，它不会执行任何操作。
 
-Containers such as tables, hierarchies and roles have a `DeletedObjects` collection that lists the objects deleted from them in the current session. 每个条目都有 `Name`、`ObjectType` 和 `Parent`，以及一个 `Restore()` 方法。 `Restore()` on the collection restores all entries.
+表、层次结构和角色等容器会提供一个 `DeletedObjects` 集合，其中列出当前会话中从该容器删除的对象。每个条目都有 `Name`、`ObjectType` 和 `Parent`，以及一个 `Restore()` 方法。在该集合上调用 `Restore()` 会还原其中的所有条目。
 
-`Selected.Deleted` returns the deleted objects selected in the TOM Explorer. Deleted objects don't appear in `Selected.Measures`, `Selected.Columns` or the other accessors.
+`Selected.Deleted` 返回在 TOM Explorer 中选中的已删除对象。已删除的对象不会出现在 `Selected.Measures`、`Selected.Columns` 或其他访问器中。
 
 ```csharp
 // List the measures with unsaved changes in the selected tables:
