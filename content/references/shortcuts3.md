@@ -106,7 +106,6 @@ Some shortcuts run a different command depending on the part of the window that 
 |Copy line|Ctrl+Shift+T|
 |Transpose lines|Ctrl+T|
 |Duplicate line|Ctrl+D|
-|Lowercase line|Ctrl+U|
 |Uppercase line|Ctrl+Shift+U|
 |Move lines up|Alt+Up arrow|
 |Move lines down|Alt+Down arrow|
