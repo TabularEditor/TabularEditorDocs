@@ -13,37 +13,37 @@ applies_to:
 
 # Soporte para deshacer y rehacer
 
-Press **Ctrl+Z** to undo a change and **Ctrl+Y** to redo it. The undo stack has no size limit and is cleared when you load another model, from a file or from a database. An operation that changes many objects, such as a folder drag, a batch rename or a Best Practice Analyzer (BPA) fix, is one undo step.
+Presiona **Ctrl+Z** para deshacer un cambio y **Ctrl+Y** para rehacerlo. La pila de deshacer no tiene límite de tamaño y se vacía cuando cargas otro modelo, ya sea desde un archivo o desde una base de datos. Una operación que cambia muchos objetos, como arrastrar una carpeta, un cambio de nombre por lotes o una corrección del Best Practice Analyzer (BPA), cuenta como un solo paso de deshacer.
 
 ## Eliminar objetos
 
-Deleting an object also removes what depends on it. For a column, Tabular Editor removes:
+Al eliminar un objeto, también se elimina lo que depende de él. En el caso de una columna, Tabular Editor elimina:
 
-- relationships that use the column
-- hierarchy levels based on the column
-- its translations and perspective memberships
-- in Tabular Editor 3, its entries in calendars and variations
+- las relaciones que usan la columna
+- los niveles de jerarquía basados en la columna
+- sus traducciones y sus pertenencias a perspectivas
+- en Tabular Editor 3, sus entradas en calendarios y variaciones
 
-In Tabular Editor 3, it also clears the `SortByColumn` property of columns sorted by the deleted column.
+En Tabular Editor 3, también borra la propiedad `SortByColumn` de las columnas ordenadas por la columna eliminada.
 
-Undo restores the object and its dependents in one step.
+Deshacer restaura el objeto y los objetos que dependen de él en un solo paso.
 
-If other objects depend on the single object you delete, a confirmation dialog lists the consequences:
+Si el objeto que vas a eliminar tiene otros objetos que dependen de él, un cuadro de diálogo de confirmación enumera las consecuencias:
 
-- If DAX expressions reference the object, those expressions stop working.
-- If the column is used in hierarchies, the corresponding levels are deleted.
-- If the column is used in relationships, those relationships are removed.
-- In Tabular Editor 3, if the column is used in calendars, it's removed from them.
+- Si las expresiones DAX hacen referencia al objeto, esas expresiones dejan de funcionar.
+- Si la columna se usa en jerarquías, se eliminan los niveles correspondientes.
+- Si la columna se usa en relaciones, esas relaciones se eliminan.
+- En Tabular Editor 3, si la columna se usa en calendarios, se quita de ellos.
 
-Deleting several objects at once always shows a confirmation dialog, but the dialog doesn't list the consequences per object.
+Eliminar varios objetos a la vez siempre muestra un cuadro de diálogo de confirmación, pero el cuadro no enumera las consecuencias por objeto.
 
-If a single object has no dependents, it's deleted without a prompt. In Tabular Editor 3, select **Always show delete warnings** in the **Delete** section under **Tools > Preferences > Tabular Editor > TOM Explorer** to confirm every delete.
+Si un objeto no tiene objetos dependientes, se elimina sin pedir confirmación. En Tabular Editor 3, selecciona **Mostrar siempre las advertencias de eliminación** en la sección **Eliminación**, en **Herramientas > Preferencias > Tabular Editor > Explorador TOM**, para confirmar cada eliminación.
 
 > [!NOTE]
-> Deleting an object doesn't rewrite the DAX that references it. The dependent expressions keep the reference and are reported as errors in the @messages-view. When you rename an object, [formula fix-up](xref:formula-fix-up-dependencies) updates the expressions that reference it.
+> Eliminar un objeto no reescribe el DAX que hace referencia a él. Las expresiones dependientes conservan la referencia y se Reportan como errores en @messages-view. Cuando cambias el nombre de un objeto, la [corrección de fórmulas](xref:formula-fix-up-dependencies) actualiza las expresiones que hacen referencia a él.
 
 ## Deshacer y cambios sin guardar
 
-In Tabular Editor 3, the unsaved-change indicators track the undo stack. Undoing back to the last saved state clears every indicator, and redoing shows them again. Undoing beyond the last save shows indicators on the objects that were rolled back.
+En Tabular Editor 3, los indicadores de cambios no guardados reflejan la pila de deshacer. Al deshacer hasta el último estado guardado, todos los indicadores se borran y al rehacer vuelven a mostrarse. Al deshacer cambios anteriores al último guardado, se muestran indicadores en los objetos que se revirtieron.
 
-**Revert** discards one change and keeps later ones. It restores a property, object, table or the whole model to its last saved state while your other unsaved changes stay in place, and you can undo a revert. Consulta @unsaved-changes.
+**Revertir** descarta un cambio y conserva los posteriores. Restaura una propiedad, un objeto, una tabla o todo el modelo a su último estado guardado, sin afectar a tus otros cambios sin guardar, y puedes deshacer la reversión. Consulta @unsaved-changes.
