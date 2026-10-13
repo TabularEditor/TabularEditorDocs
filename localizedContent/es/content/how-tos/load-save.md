@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "Desktop Edition can't open or save model metadata files."
+          note: "La Edición de escritorio no puede abrir ni guardar archivos de metadatos del modelo."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -23,7 +23,7 @@ applies_to:
 Tabular Editor lee los metadatos del modelo desde un archivo, una carpeta o un servidor, los carga en memoria y luego los vuelve a escribir en la misma ubicación o en una nueva.
 
 > [!NOTE]
-> Metadata defines tables, measures and relationships but contains no data, and loading a model doesn't load the rows in its tables. See [Table Preview](xref:table-preview) and [Advanced refresh](xref:advanced-refresh) for working with data.
+> Los metadatos definen tablas, medidas y relaciones, pero no contienen datos, y al cargar un modelo no se cargan las filas de sus tablas. Consulta [Vista previa de tabla](xref:table-preview) y [Actualización avanzada](xref:advanced-refresh) para trabajar con datos.
 
 ## Cargar un modelo
 
@@ -31,17 +31,17 @@ Tabular Editor lee los metadatos del modelo desde un archivo, una carpeta o un s
 
 | Fuente                                                                                                                 | Comando                                                                                                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Un archivo `Model.bim` o `.bim`                                                                                        | **File > Open > Model from File...**                                                                                           |
-| Una estructura de carpetas, en formato JSON o [Tabular Model Definition Language (TMDL)](xref:tmdl) | **File > Open > Model from Folder...**                                                                                         |
+| Un archivo `Model.bim` o `.bim`                                                                                        | **Archivo > Abrir > Modelo desde archivo...**                                                                                  |
+| Una estructura de carpetas, en formato JSON o [Tabular Model Definition Language (TMDL)](xref:tmdl) | **Archivo > Abrir > Modelo desde carpeta...**                                                                                  |
 | Una base de datos XMLA de Analysis Services o Power BI                                                                 | **Archivo > Abrir > Modelo desde BD...** (**Ctrl+Shift+O**)                                                 |
 | Una instancia de Power BI Desktop en ejecución                                                                         | **Archivo > Abrir > Modelo desde BD...**, o inicie Tabular Editor desde la cinta **Herramientas externas** de Power BI Desktop |
 
 Un archivo `.bim` debe tener nivel de compatibilidad 1200 o posterior. Los niveles anteriores usan el formato antiguo basado en XML, que Tabular Editor no puede abrir.
 
-For everything Tabular Editor recognizes, including the supporting file types that aren't model metadata, see [Supported file types](xref:supported-files).
+Para todo lo que Tabular Editor reconoce, incluidos los tipos de archivo compatibles que no son metadatos de modelo, consulta [Tipos de archivo compatibles](xref:supported-files).
 
 > [!TIP]
-> **File > Recent Tabular Models** reopens a model you had open before.
+> **Archivo > Modelos tabulares recientes** reabre un modelo que tenías abierto anteriormente.
 
 ## Guardar un modelo
 
@@ -50,25 +50,25 @@ For everything Tabular Editor recognizes, including the supporting file types th
 Para guardar un modelo en otro lugar o en otro formato:
 
 - **Archivo > Guardar como...** guarda los metadatos del modelo en un único archivo `.bim`.
-- **File > Save to Folder...** saves the model metadata as a [folder structure](xref:save-to-folder), in either the JSON or the TMDL format, depending on the serialization mode under **Tools > Preferences > File Formats > Save-to-folder**.
+- **Archivo > Guardar en carpeta...** guarda los metadatos del modelo como una [estructura de carpetas](xref:save-to-folder), en formato JSON o TMDL, según el modo de serialización de **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta**.
 
 > [!IMPORTANT]
-> Un modelo cargado desde una estructura de carpetas JSON heredada se guarda en ese mismo formato cuando usas **Archivo > Guardar**, aunque la **preferencia** esté configurada en TMDL. The format changes only when you use **File > Save to Folder...**. Consulta [TMDL](xref:tmdl).
+> Un modelo cargado desde una estructura de carpetas JSON heredada se guarda en ese mismo formato cuando usas **Archivo > Guardar**, aunque la **preferencia** esté configurada en TMDL. El formato solo cambia cuando usas **Archivo > Guardar en carpeta...**. Consulta [TMDL](xref:tmdl).
 
 ## Recargar
 
-**File > Reload from disk** discards your changes since the last save and reloads the metadata from the source. If you have unsaved changes, a **Reload model metadata?** prompt appears first. The command label depends on the model source:
+**Archivo > Recargar desde disco** descarta los cambios realizados desde el último guardado y vuelve a cargar los metadatos desde el origen. Si tienes cambios sin guardar, primero aparece el mensaje **¿Recargar los metadatos del modelo?**. La etiqueta del comando depende del origen del modelo:
 
-| Model source                                          | Comando                                                                                                                         |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| A file or folder                                      | **Reload from disk**                                                                                                            |
-| A model in [workspace mode](xref:workspace-mode)      | **Reload from disk**. The model reloads from its files and redeploys to the workspace database. |
-| Analysis Services or Power BI, outside workspace mode | **Reload from server**                                                                                                          |
-| No model loaded                                       | **Reload from source**, disabled                                                                                                |
+| Origen del modelo                                                | Comando                                                                                                                                                              |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Un archivo o una carpeta                                         | **Recargar desde disco**                                                                                                                                             |
+| Un modelo en [modo del área de trabajo](xref:workspace-mode)     | **Recargar desde disco**. El modelo se vuelve a cargar desde sus archivos y se vuelve a desplegar en la base de datos del Workspace. |
+| Analysis Services o Power BI, fuera del modo del área de trabajo | **Recargar desde el servidor**                                                                                                                                       |
+| Ningún modelo cargado                                            | **Recargar desde el origen**, deshabilitado                                                                                                                          |
 
 En Tabular Editor 3.26 y versiones anteriores, y en Tabular Editor 2, el comando se llama **Archivo > Revertir**.
 
-In Tabular Editor 3.27.0 and later, when an agent, a script or a `git pull` changes the metadata files of the open model, the model is reloaded, after a prompt if you have unsaved changes. Consulta [Recarga automática desde el disco](xref:auto-reload).
+En Tabular Editor 3.27.0 y versiones posteriores, cuando un agente, un script o un `git pull` modifica los archivos de metadatos del modelo abierto, el modelo se vuelve a cargar, después de un aviso si tienes cambios sin guardar. Consulta [Recarga automática desde el disco](xref:auto-reload).
 
 > [!WARNING]
 > Haz una copia de seguridad de los metadatos del modelo antes de permitir que cualquier herramienta escriba en ellos, incluido Tabular Editor. Guardar sobrescribe el origen, y la recarga no puede recuperar los cambios que ya hayas guardado.
@@ -77,4 +77,4 @@ In Tabular Editor 3.27.0 and later, when an agent, a script or a `git pull` chan
 
 - Consulta [Guardar en carpeta](xref:save-to-folder) para conocer los formatos de carpeta y la configuración de serialización que determina cómo se divide un modelo entre archivos.
 - [Habilitar el desarrollo en paralelo con Git y la opción Guardar en carpeta](xref:parallel-development) si más de una persona trabaja en el modelo.
-- [Deployment](xref:deployment) to write the model to an Analysis Services server.
+- [Despliegue](xref:deployment) para escribir el modelo en un servidor de Analysis Services.
