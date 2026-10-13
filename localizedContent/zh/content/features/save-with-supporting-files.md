@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: 保存并包含支持文件
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,57 +19,47 @@ applies_to:
 
 # 保存并包含支持文件
 
-“保存并包含支持文件”是一项功能，可在保存语义模型时同时保存额外的支持文件，这些文件遵循 Microsoft Fabric 的 Git 集成所要求的源代码格式。该功能可确保你的 Tabular Editor 模型与 Fabric 的 Git 集成功能完全兼容，从而实现顺畅的版本控制与部署工作流。
-
-当你保存语义模型并包含支持文件时，Tabular Editor 会在保存路径中创建一个文件夹结构，其中包含 Microsoft Fabric 的 Git 集成所需的全部元数据文件。这让你可以使用 Fabric 的 Git 集成，在 Fabric Workspace 和 Git repository 之间同步你的语义模型。
+Save with supporting files saves a semantic model together with the metadata files that Microsoft Fabric Git integration requires. Use it to synchronize a model saved by Tabular Editor between a Fabric workspace and a Git repository.
 
 > [!NOTE]
-> “保存并包含支持文件”仅在保存为 .bim (TMSL) 时可用，或在将“保存到文件夹”的序列化模式设置为 TMDL 时可用。
+> Save with supporting files is available when you save to a .bim (TMSL) file, or to a folder with TMDL as the serialization mode.
 
 ## 文件结构和模型属性
 
-当你保存并包含支持文件时，Tabular Editor 会在保存路径中按以下命名约定创建一个新文件夹：**Database Name.SemanticModel**。文件夹名称源自 TOM Explorer 中 Database 对象的 `Name` 属性，并附加 **.SemanticModel** 后缀。 Microsoft Fabric 需要该后缀，才能将该文件夹识别为语义模型项。
+Tabular Editor creates a folder named **Database Name.SemanticModel** in the save path. The name comes from the `Name` property of the Database object in the TOM Explorer. Fabric recognizes a folder as a semantic model item only if its name ends in **.SemanticModel**.
 
-Database 的 `Name` 属性也会同步到 .platform 元数据文件中的 `displayName` 属性，该属性由 Microsoft Fabric 使用。
-
-> [!TIP]
-> TOM Explorer 中 Database 对象的 `Name` 属性有两个用途：
->
-> 1. 决定文件夹名称（附加 .SemanticModel 后缀）
-> 2. 设置 .platform 元数据文件中的 displayName
->
-> `Description` 属性也会同步到 .platform 元数据文件。
+Tabular Editor also writes the Database `Name` property to the `displayName` property in the .platform metadata file, and the Database `Description` property to its `description`.
 
 <a name="power-bi-desktop-authored-pbip-projects"></a>
 
 ### 在 Power BI Desktop 中创作的 PBIP 项目
 
-上述规则描述的是一种元数据包含名称和说明的模型。由 Power BI Desktop 创建的 [Power BI Project (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) 语义模型，其元数据不包含这两项：在这些项目中，项名称和说明仅保存在 `.platform` 文件中。
+In a [Power BI Project (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) semantic model authored by Power BI Desktop, the item name and description are stored only in the `.platform` file, and the model metadata has neither.
 
-Tabular Editor 会将 `.platform` 中现有的 `displayName` 和 `description` 原样保留，并以该项名称创建一个新文件夹，而不是创建名为 `.SemanticModel` 的文件夹
+For these models, Tabular Editor keeps the existing `displayName` and `description` in `.platform` and names a new folder after the item.
 
-> [!IMPORTANT]
-> Tabular Editor 3.27.0 之前的版本会在下一次 Git 同步时，在 Fabric Workspace 中重命名该项并清空其说明。
+> [!NOTE]
+> Before Tabular Editor 3.27.0, saving these models renamed the item and cleared its description in the Fabric workspace on the next Git sync.
 
-若要让 Tabular Editor 控制该项的名称和说明，请按上述说明在 Database 对象上设置 `Name` 和 `Description` 属性。一旦元数据中包含这些信息，Tabular Editor 就会在每次保存时将其同步到 `.platform`。
+If you set the `Name` and `Description` properties on the Database object, Tabular Editor synchronizes them to `.platform` on every save.
 
 ### 包含的文件
 
-每个已保存的模型都包含以下核心文件：
+Every saved model includes these files:
 
-- **.platform** - 有关该项目的元数据，包括其类型、显示名称和说明。还包含 logicalId 属性，这是一个自动生成的跨 Workspace 标识符。
-- **definition.pbism** - 语义模型的整体定义和核心设置。
+- **.platform**: item metadata, including its type, display name, description and `logicalId`, an automatically generated cross-workspace identifier.
+- **definition.pbism**: the definition and core settings of the semantic model.
 
-在创建的文件夹中，模型的文件结构取决于所选的序列化格式：
+The model itself is stored according to the serialization format:
 
-| 格式                                                 | 模型存储                                  |
-| -------------------------------------------------- | ------------------------------------- |
-| **TMDL**                                           | `definition` 文件夹，里面包含带有模型元数据的 TMDL 文件 |
-| **TMSL (.bim)** | `model.bim` 文件（自动保存，文件名固定）            |
+| 格式                                                 | 模型存储                                                         |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| **TMDL**                                           | `definition` 文件夹，里面包含带有模型元数据的 TMDL 文件                        |
+| **TMSL (.bim)** | `model.bim` file (the file name is fixed) |
 
-名为“Sales”的数据库文件夹结构示例如下：
+Folder structure for a database named "Sales":
 
-```
+```text
 Sales.SemanticModel/
 ├── .platform
 ├── definition.pbism
@@ -82,47 +72,42 @@ Sales.SemanticModel/
 
 ## 如何连同支持文件一起保存
 
-要将模型连同支持文件一起保存：
+1. Create or open a semantic model in Tabular Editor 3.
+2. Set the `Name` property of the Database object in the TOM Explorer. It sets the folder name and the `displayName` in the .platform file.
+   ![Set Database Name property](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
+3. If you save to a folder, set the serialization mode to TMDL under **Tools > Preferences > File Formats**.
+4. Select **File > Save As** or **File > Save to Folder**.
+5. Choose a folder and select **Save with supporting files**.
+   ![Save with supporting files dialog](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)
+6. Click **Save**.
 
-1. 在 Tabular Editor 3 中新建或打开现有语义模型
-2. **配置模型名称** - 在 TOM Explorer 中设置 Database 对象的 `Name` 属性
-   - 这会设置文件夹名称（带 .SemanticModel 后缀）以及 .platform 文件中的 displayName  
-     ![设置 Database Name 属性](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
-3. 确保序列化模式设置为 TMDL，或者将模型保存为 .bim 文件
-   - 前往 **工具 > 偏好 > 文件格式**，配置序列化设置
-4. 点击 **文件 > 另存为** 或 **文件 > 保存到文件夹**
-5. 选择要保存模型的文件夹
-   - 勾选 **与支持文件一起保存** 复选框
-     ![与支持文件一起保存对话框](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)
-6. 点击 **保存**
-
-Tabular Editor 会在保存位置以 Database 名称创建一个带 **.SemanticModel** 后缀的新文件夹（例如 `Sales.SemanticModel`），并以与 Microsoft Fabric Git 集成兼容的格式将所有必需文件写入其中。
+Tabular Editor creates the **.SemanticModel** folder, for example `Sales.SemanticModel`, in the save location and writes the files into it.
 
 ## Microsoft Fabric 中的 Git 集成
 
-**“保存并包含支持文件”** 功能旨在与 Microsoft Fabric 的 Git 集成功能无缝协同工作。 Git 集成适用于分配到 Microsoft Fabric F-SKU 容量、Power BI Premium 容量或 Power BI Premium Per User (PPU) 的 Workspace。
+Git integration is available on workspaces assigned to Microsoft Fabric F-SKU capacity, Power BI Premium capacity or Power BI Premium Per User (PPU).
 
 > [!WARNING]
-> 语义模型项的 Git 集成功能目前处于预览版。有关 Fabric Git 集成支持项的最新信息，可以查看 [Fabric Git 集成中支持的项](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items)。
+> Git Integration for the Semantic Model item is in preview. For the list of supported items, see [Supported items in Fabric Git Integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
 
 > [!CAUTION]
-> 不要在用于托管 Tabular Editor 工作区数据库的 Fabric Workspace 上启用 Git 集成。在启用 Git 集成的情况下，同时在托管的 Workspace 和 repository 文件中维护语义模型，会带来未提交更改和冲突的风险。当在 Tabular Editor 与 Workspace 之间同步模型时，更改可能无法与 Git repository 的状态保持一致，从而导致存在未提交的不同步更改，并可能引发 Git 冲突。
+> Don't enable Git integration on the Fabric workspace that hosts your Tabular Editor workspace databases. If Tabular Editor synchronizes a model to a Git-connected workspace, the workspace shows uncommitted changes that don't match the repository, and syncing them causes Git conflicts.
 >
-> 你可以改用部署工作流，通过 Tabular Editor、Fabric REST API、Fabric CLI 或 fabric-cicd Python 库将语义模型部署到 Workspace。这可确保 Git repository 与 Workspace 明确分离。
+> Keep the Git repository and the workspace separate, and deploy semantic models to workspaces with Tabular Editor, the Fabric REST APIs, Fabric CLI or the fabric-cicd Python library.
 
 ### 在 Tabular Editor 中使用 Git 集成
 
-当你的语义模型以“保存并包含支持文件”方式保存并同步到 Git repository 后，你就可以通过以下工作流将其同步到 Microsoft Fabric：
+After you save the model with supporting files, sync it to Microsoft Fabric:
 
-1. 在 Tabular Editor 中使用“保存并包含支持文件”选项 **保存模型**
-2. 将更改 **提交** 到你的 Git repository
-3. 将你的 Fabric Workspace **连接** 到 Git repository
-4. 在 Workspace 源代码管理窗格中使用 **全部更新** 按钮，在 Fabric 与 Git 之间 **同步** 模型
+1. Save the model in Tabular Editor with **Save with supporting files** selected.
+2. Commit the changes to your Git repository.
+3. Connect your Fabric workspace to the Git repository.
+4. Click **Update all** in the workspace source control pane.
    ![Synchronize workspace with Git](~/content/assets/images/common/WorkspaceGitSync.png)
 
-当你的模型同步到 Microsoft Fabric/Power BI 后，Workspace 中显示的语义模型名称由 .platform 文件中的 `displayName` 属性决定，而该属性会根据 Tabular Editor 中 Database 的 `Name` 属性自动设置。这意味着你在 Tabular Editor 中配置的名称，就是在 Fabric/Power BI 中显示的名称。
+The workspace shows the semantic model under the `displayName` from the .platform file, which is the Database `Name` you set in Tabular Editor.
 
-如果模型尚未指定区域设置，Tabular Editor 会在保存并包含支持文件时，自动将模型的区域设置设为 **en-US**。这可确保在与 Fabric 同步时包含模型区域设置，避免在初次同步时未设置区域设置而产生未提交的更改。
+If the model has no culture, Tabular Editor sets it to **en-US** when saving with supporting files. Without a culture, the initial synchronization with Fabric leaves uncommitted changes.
 
 更多信息见：
 
@@ -131,24 +116,12 @@ Tabular Editor 会在保存位置以 Database 名称创建一个带 **.SemanticM
 
 ## 对比序列化格式
 
-使用“保存并包含支持文件”时，你可以在两种序列化格式之间进行选择：
+Fabric Git integration supports both serialization formats:
 
-### TMDL（Tabular Model Definition Language，表格模型定义语言）
+- **[TMDL](xref:tmdl)** is a human-readable text format. Its diffs are easier to review in Git.
+- **TMSL (.bim)** stores the model as a single JSON file, which older tools and workflows read.
 
-- 易于阅读的文本格式
-- 在 Git diff 中更容易查看变更
-- 更适合代码评审与协作
-- 了解更多：[TMDL 文档](tmdl.md)
+## 后续步骤
 
-### TMSL/JSON（.bim）
-
-- 基于 JSON 的格式
-- 单文件形式
-- 兼容较旧的工具和工作流
-
-Microsoft Fabric Git 集成同时支持这两种格式，选择取决于团队的偏好和工作流需求。
-
-## 另请参阅
-
-- [保存到文件夹](save-to-folder.md)
-- [TMDL - 表格模型定义语言](tmdl.md)
+- [Save to folder](xref:save-to-folder)
+- [TMDL - Tabular Model Definition Language](xref:tmdl)
