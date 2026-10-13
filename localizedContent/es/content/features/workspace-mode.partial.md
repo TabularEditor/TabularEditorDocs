@@ -1,6 +1,8 @@
 ---
 uid: workspace-mode
 title: Modo del área de trabajo
+author: Morten Lønskov
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,94 +19,92 @@ applies_to:
 
 ## Modo del área de trabajo
 
-Tabular Editor 3 presenta el concepto de **modo del área de trabajo** al crear un nuevo modelo dentro de la herramienta o al cargar un archivo Model.bim o Database.json de un modelo existente.
+In **workspace mode**, Tabular Editor 3 connects a model loaded from a file to a **workspace database**. Workspace mode is available when you create a new model or load the Model.bim or Database.json file of an existing model.
 
-Al usar el modo del área de trabajo, Tabular Editor sincronizará los cambios en los metadatos del modelo con una **base de datos del área de trabajo**, cada vez que pulses Guardar (Ctrl+S), al mismo tiempo que guarda los cambios de metadatos en el/los archivo(s) del disco.
+When you save (**Ctrl+S**), Tabular Editor writes the metadata changes to the file(s) on disk and synchronizes them to the workspace database.
 
-Idealmente, cada desarrollador de modelos debería usar su propia base de datos del área de trabajo para evitar conflictos durante el desarrollo.
+Give each model developer their own workspace database, because a shared one causes conflicts between developers.
 
 > [!WARNING]
-> No habilites la integración con Git en el área de trabajo de Fabric que utilizas para alojar las bases de datos del área de trabajo de Tabular Editor. De este modo evitarás conflictos de Git mientras desarrollas el modelo, ya que Tabular Editor realiza cambios en la base de datos del área de trabajo a través del punto de conexión XMLA, y esos cambios no estarán sincronizados con ninguna rama de Git subyacente.
+> Don't enable Git integration on the Fabric workspace that hosts your Tabular Editor workspace databases. Tabular Editor changes the workspace database through the XMLA endpoint, and these changes cause Git conflicts with the connected branch.
 
 > [!NOTE]
-> Para modelos con nivel de compatibilidad 1200, 1400 o 1500, recomendamos usar una instancia local de Analysis Services para alojar la base de datos del área de trabajo, como la que se incluye con [SQL Server Developer Edition 2019](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+> For models at compatibility level 1200, 1400 or 1500, host the workspace database on a local instance of Analysis Services, such as the one included with [SQL Server Developer Edition 2019](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
-# Crear un nuevo modelo
+## Crear un nuevo modelo
 
-Cuando creas un nuevo modelo en Tabular Editor, la opción "Usar base de datos del área de trabajo" está marcada de forma predeterminada:
+When you create a new model in Tabular Editor, **Use workspace database** is selected by default:
 
 ![Nuevo modelo](~/content/assets/images/new-model.png)
 
-Si lo dejas seleccionado, después de hacer clic en "OK" se te pedirá que te conectes a una instancia de Analysis Services. Esta es la instancia de Analysis Services en la que se implementará tu base de datos del área de trabajo.
+With the option selected, a prompt to connect to an instance of Analysis Services appears after you click **OK**. Tabular Editor deploys the workspace database to this instance.
 
 > [!IMPORTANT]
-> Si planeas desplegar la base de datos de tu Workspace en el punto de conexión XMLA del Servicio de Power BI, asegúrate de seleccionar el nivel de compatibilidad 1706 (Power BI / Fabric) en el cuadro de diálogo anterior.
+> If you deploy your workspace database to the Power BI Service XMLA endpoint, select compatibility level **1706 (Power BI / Fabric)** in the dialog above.
 
-Después de introducir los datos del servidor de Analysis Services y las credenciales (opcionales), se muestra una lista de todas las bases de datos que residen actualmente en el servidor (o, para un área de trabajo de Power BI, la lista de conjuntos de datos implementados en el área de trabajo):
+After you enter the server details and, optionally, credentials, a list of the databases on the server appears. For a Power BI workspace, the list shows the semantic models deployed to the workspace:
 
 ![Seleccionar base de datos del área de trabajo](~/content/assets/images/select-workspace-database.png)
 
-Tabular Editor sugiere un nuevo nombre único para tu base de datos del área de trabajo, basado en tu nombre de usuario de Windows y la fecha y hora actuales, pero puedes cambiarlo por un nombre más descriptivo.
+Tabular Editor suggests a unique name for the workspace database, based on your Windows user name and the current date and time, which you can change.
 
-Después de hacer clic en Aceptar, se crea tu nuevo modelo y se implementa y conecta la base de datos del área de trabajo. En este punto, pulsa Guardar (Ctrl+S) para guardar el modelo como un archivo Model.bim. También puedes elegir Archivo > Guardar en carpeta... elemento de menú si tienes pensado almacenar los metadatos del modelo en un sistema de control de versiones como Git.
+Click **OK** to create the model and deploy and connect the workspace database. Then press **Ctrl+S** to save the model as a Model.bim file, or select **File > Save to Folder...** to store the metadata in a version control system such as Git.
 
 ![Guardar nuevo en carpeta](~/content/assets/images/save-new-to-folder.png)
 
-En este punto, ya está listo para definir fuentes de datos y agregar nuevas tablas a su modelo. Cada vez que vuelvas a pulsar Guardar (Ctrl+S), la base de datos de Workspace se actualizará con los cambios y también se actualizará el archivo o la carpeta que elegiste anteriormente.
+You can now define data sources and add tables to the model. Every save updates both the workspace database and the file or folder you chose.
 
-La información sobre la base de datos de Workspace asociada a este modelo se almacena en un archivo Tabular Model User Options (.tmuo) junto al archivo de metadatos del modelo. Vea @user-options para obtener más información.
+Tabular Editor stores the workspace database details for the model in a Tabular Model User Options (.tmuo) file next to the model metadata file. See @user-options.
 
-# Abrir un archivo Model.bim o Database.json
+## Abrir un archivo Model.bim o Database.json
 
-Si abres un archivo Model.bim o Database.json existente, Tabular Editor 3 te preguntará si quieres inicializar una base de datos de Workspace para ese archivo.
+When you open an existing Model.bim or Database.json file, a prompt asks whether to connect a workspace database to it.
 
 ![Conectar a la base de datos de Workspace](~/content/assets/images/connect-to-wsdb.png)
 
-Tus opciones son:
+The options are:
 
-- **Sí**: Conéctate a una instancia de Analysis Services y elige una base de datos de Workspace existente o crea una nueva. La próxima vez que cargues el mismo archivo Model.bim o Database.json, Tabular Editor se conectará a la misma base de datos de Workspace. Tabular Editor realizará un despliegue del archivo Model.bim o Database.json en la base de datos de Workspace seleccionada.
-- **No**: Tabular Editor cargará los metadatos del archivo sin conexión, sin conectividad con Analysis Services.
-- **No volver a preguntar**: Igual que arriba, pero Tabular Editor ya no te preguntará si quieres conectarte a una base de datos de Workspace la próxima vez que abras el mismo archivo Model.bim o Database.json.
-- **Cancelar**: El archivo no se cargará en absoluto.
+- **Yes**: connect to an instance of Analysis Services and choose an existing workspace database or create one. Tabular Editor deploys the file's metadata to the selected workspace database, and connects to the same database the next time you load the file.
+- **No**: load the metadata offline, with no connection to Analysis Services.
+- **Don't ask again**: load offline, and don't show the prompt again for this file.
+- **Cancel**: don't load the file.
 
-La información sobre si se debe conectar a una base de datos de Workspace para un modelo determinado, así como qué servidor y base de datos de Workspace se deben usar, se almacena en el [archivo Tabular Model User Options (.tmuo)](xref:user-options).
+Tabular Editor stores the choice, and the workspace server and database, in the [Tabular Model User Options (.tmuo) file](xref:user-options).
 
 > [!WARNING]
-> Al elegir una base de datos de Workspace, Tabular Editor 3 desplegará los metadatos del modelo cargado en esa base de datos de Workspace. Por este motivo, nunca debes usar una base de datos de producción como base de datos de Workspace. Además, recomendamos usar una instancia independiente de Analysis Services o un Workspace de Power BI aparte para las bases de datos de su Workspace.
+> Tabular Editor 3 deploys the loaded model metadata to the workspace database you choose. Never use a production database as a workspace database. Use a separate Analysis Services instance or Power BI workspace for workspace databases.
 
-# Ventajas del modo del área de trabajo
+## Ventajas del modo del área de trabajo
 
-La principal ventaja del modo del área de trabajo es que permite a Tabular Editor mantenerse conectado a una instancia de Analysis Services. En otras palabras, se habilitan las nuevas [funcionalidades conectadas](xref:migrate-from-te2#connected-features) de Tabular Editor 3. Pero incluso si decides no usar estas funcionalidades, es mucho más fácil sincronizar una instancia de Analysis Services con el objetivo de probar tus cambios. Solo tienes que pulsar Guardar (CTRL+S). Esto es similar a cuando Tabular Editor abre directamente los metadatos del modelo desde una instancia de Analysis Services; pero, con el modo del área de trabajo, los metadatos del modelo se guardan simultáneamente en disco.
+In workspace mode, Tabular Editor stays connected to an instance of Analysis Services, which enables the [connected features](xref:migrate-from-te2#connected-features) of Tabular Editor 3. Each save (**Ctrl+S**) also deploys your changes to the instance for testing. Opening a model directly from Analysis Services works the same way, except that workspace mode also saves the metadata to disk.
 
 > [!NOTE]
-> Cuando se está ejecutando una operación de actualización, Tabular Editor no puede sincronizar la instancia de Analysis Services (las operaciones de actualización bloquean otras operaciones de escritura). Sin embargo, al pulsar Guardar (CTRL+S) mientras una operación de este tipo está en curso, los metadatos del modelo se seguirán guardando en disco al usar el modo del área de trabajo.
+> While a refresh operation is in progress, Tabular Editor can't synchronize the Analysis Services instance, because refresh operations block other write operations. Saving during a refresh still writes the model metadata to disk.
 
-# Desactivar el modo del área de trabajo para un modelo
+## Desactivar el modo del área de trabajo para un modelo
 
-Si prefieres _deshabilitar el modo del área de trabajo_ y editar un archivo de modelo completamente sin conexión, elige uno de los métodos siguientes.
+You can disable workspace mode for a model permanently or for the current session, and edit the model file offline.
 
-## Desactivar permanentemente el modo del área de trabajo
+### Desactivar permanentemente el modo del área de trabajo
 
-1. Localiza el archivo de área de trabajo `.tmuo` del modelo (se encuentra junto a tu archivo `.bim`, `.tmdl` o `.json`) en el Explorador de archivos.
+1. In File Explorer, locate the model's `.tmuo` file next to your `.bim`, `.tmdl` or `.json` file.
 
-2. Realiza **cualquiera** de las siguientes acciones:
-   - **Elimina** el archivo `.tmuo`, **o bien**
-   - Ábrelo en un editor de texto y establece:
+2. Delete the `.tmuo` file, or open it in a text editor and set:
 
-     ```json
-     {
-       "UseWorkspaceDatabase": false
-     }
-     ```
+   ```json
+   {
+     "UseWorkspaceDatabase": false
+   }
+   ```
 
-3. Abre el modelo desde el archivo `.bim`, `.tmdl` o `.json` como de costumbre.
+3. Open the model from the `.bim`, `.tmdl` or `.json` file.
 
-A partir de ahora, Tabular Editor permanecerá sin conexión cada vez que cargues este modelo.
+Tabular Editor loads the model offline from then on.
 
-## Desactivar el modo del área de trabajo solo para la sesión actual
+### Desactivar el modo del área de trabajo solo para la sesión actual
 
-1. En el cuadro de diálogo **Abrir modelo semántico**, marca la opción **Cargar sin base de datos de Workspace**.
+1. In the **Open Semantic Model** dialog, select **Load without workspace database**.
 
 ![Cargar sin base de datos de Workspace](~/content/assets/images/load-without-wsdb.png)
 
-El modelo se carga sin conexión durante esta sesión; la próxima vez que lo abras, el modo del área de trabajo se volverá a activar a menos que repitas estos pasos.
+The model loads offline for this session, and workspace mode is enabled again the next time you open it.
