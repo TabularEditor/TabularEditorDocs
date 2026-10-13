@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: Migrating from Power BI Desktop
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -153,7 +153,7 @@ To create a DAX script based on existing measures, simply select the measures in
 
 You can add or modify properties such as `Description`, `FormatString`, `Visible`, `DetailRows` and more directly in the script.
 
-Hit F5 to apply the script to the data model. Note that unlike the **Expression Editor**, navigating to a different object will not automatically apply any changes made to the script. You can still use the **Edit > Undo** (CTRL+Z) option to roll back any changes applied by a DAX script.
+Hit F5 to apply the script to the data model. Note that unlike the **Expression Editor**, navigating to a different object will not automatically apply any changes made to the script. To roll back the changes a DAX script applied, click the TOM Explorer and press **Ctrl+Z**. In the script editor, **Ctrl+Z** undoes typing.
 
 See @dax-script-introduction for more information.
 

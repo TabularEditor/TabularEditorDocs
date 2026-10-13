@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Adding measures and other calculated objects
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -111,7 +111,7 @@ Whenever a change is made to an object or property in Tabular Editor, the comple
 - **Edit > Redo** (CTRL+Y)
 
 > [!NOTE]
-> All text editors in Tabular Editor 3 have their own undo/redo history, so if the cursor is currently within a text editor, the keyboard shortcuts will undo/redo the typing within that editor. You can use the options in the **Edit** menu to perform an undo/redo at the model level, or deactivate the current text editor by clicking on another element in the user interface (such as the TOM Explorer).
+> Text editors in Tabular Editor 3 have their own undo history. When the cursor is in a text editor, **Ctrl+Z** and **Ctrl+Y** undo and redo typing in that editor. To undo a model change, click the TOM Explorer first, or select the model undo entry in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 
 # Navigation
 
