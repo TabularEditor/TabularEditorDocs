@@ -2,7 +2,7 @@
 uid: script-convert-import-to-dlol
 title: 在 OneLake 上将导入模式表转换为 Direct Lake
 author: Daniel Otykier
-updated: 2025-06-20
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-此脚本将导入模式表转换为 OneLake 上的 Direct Lake（DL/OL）。正如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将这类表的分区替换为单个 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet)。该分区会指定 Fabric Lakehouse 或 Warehouse 中表/物化视图的名称和架构，并引用一个使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake)（OneLake）连接器的共享表达式（Shared Expression）。
+此脚本将导入模式表转换为 OneLake 上的 Direct Lake（DL/OL）。正如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将这类表上的分区替换为单个 [EntityPartition](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet)。该分区会指定 Fabric Lakehouse 或 Warehouse 中表或物化视图的名称和架构，同时引用一个使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/powerquery-m/azurestorage-datalake)（OneLake）连接器的共享表达式（Shared Expression）。
 
 ## 先决条件
 
