@@ -2,7 +2,7 @@
 uid: update-compatibility-level
 title: 更新兼容级别
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,7 +54,7 @@ applies_to:
 
 ### 确认目标端支持情况
 
-不同平台（SSAS、Azure Analysis Services、Fabric/Power BI Premium）对兼容级别的支持情况不同。如果你的部署目标不支持所选级别，将无法部署。请参阅 [Analysis Services 中表格模型的兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+不同平台（SSAS、Azure Analysis Services、Fabric/Power BI Premium）对兼容级别的支持情况不同。如果你的部署目标不支持所选级别，将无法部署。 See [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ## 更新兼容级别
 
@@ -106,7 +106,7 @@ applies_to:
 
 ### 适用于 SSAS/AAS 部署
 
-选择[服务器版本所支持的最新兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+Choose the [latest compatibility level supported by your server version](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ### 适用于 Power BI Desktop
 
@@ -125,7 +125,7 @@ WHERE [PropertyName] = 'ProviderVersion'
 
 你可能选择了目标服务器不支持的兼容级别。升级前先确认目标服务器是否支持。
 
-**参考：** [Analysis Services 中表格模型的兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+**Reference:** [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ### 我可以降级吗？
 
