@@ -26,7 +26,7 @@ applies_to:
 **La actualización incremental se modifica ajustando las propiedades de la política de actualización.** Según lo que desee cambiar, ajustará una propiedad distinta. Encontrarás una descripción completa de estas propiedades [aquí](xref:incremental-refresh-about#overview-of-all-properties).
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 solo se admite para Datasets alojados en el servicio Power BI Datasets. For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 solo se admite para Datasets alojados en el servicio Power BI Datasets. Para Analysis Services, se requieren [particiones](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizadas.
 
 ---
 
@@ -168,7 +168,7 @@ in
 
 ### Aplicación de políticas de actualización con `EffectiveDate`
 
-If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
+Si quieres generar particiones reemplazando la fecha actual (con el fin de generar distintos rangos de ventana móvil), puedes usar un pequeño script en Tabular Editor para aplicar la política de actualización con el parámetro [EffectiveDate](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters).
 
 Con la tabla de actualización incremental seleccionada, ejecuta el siguiente script en el panel _'Nuevo C# Script'_ de Tabular Editor, en lugar de aplicar la política de actualización haciendo clic con el botón derecho en la tabla.
 
