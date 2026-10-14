@@ -2,7 +2,7 @@
 uid: mcp-server
 title: Servidor MCP
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -293,7 +293,7 @@ El servidor MCP está activado de forma predeterminada y cualquier usuario puede
 | Directiva                                   | Edición    | Qué hace                                                                                                                                                                                                                                                |
 | ------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DisableMcpServer`                          | Todas      | Elimina el servidor MCP. El chat del Asistente de IA no se ve afectado                                                                                                                                                                  |
-| `DisableAi`                                 | Todas      | Desactiva toda la funcionalidad de IA, incluido el servidor MCP. Con un valor `REG_DWORD` de `1`, el instalador también deja desactivado el componente de IA en el equipo                                                               |
+| `DisableAi`                                 | Todas      | Desactiva toda la funcionalidad de IA, incluido el servidor MCP. With a `REG_DWORD` value of `1`, the installer also leaves the AI component out of new installations and removes it on upgrade                                         |
 | `RequireMcpAccessToken`                     | Todas      | Fuerza la autenticación por token y bloquea la preferencia                                                                                                                                                                                              |
 | `DisableCSharpScripts`                      | Todos      | Impide que un agente ejecute un C# Script y lo inserte en un documento. La redacción de una consulta DAX y cualquier herramienta que solo lea no se ven afectadas                                                                       |
 | `BlockUnsafeScripts`                        | Enterprise | En Tabular Editor, solo se permiten scripts que se mantengan dentro del modelo. Un script de agente que acceda a archivos, a la red, a otros procesos o a ensamblados externos no se ejecuta, y no se abre ningún documento de revisión |
