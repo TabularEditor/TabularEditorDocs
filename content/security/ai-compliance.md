@@ -2,7 +2,7 @@
 uid: ai-compliance
 title: AI features compliance guide
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -100,7 +100,7 @@ Permission grants control what the AI Assistant and the MCP server reach, with o
 
 | Resource | What the AI features reach | Default | Limit for both features | Limit for the MCP server only |
 | -- | -- | -- | -- | -- |
-| Model metadata | Read: the model definition and VertiPaq Analyzer statistics. Write: changing the model through C# scripts | Read | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess` |
+| Model metadata | Read: the model definition, VertiPaq Analyzer statistics and the model's errors and warnings. Server error text also needs **Model data > Read**. Write: changing the model through C# scripts | Read | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess` |
 | Model data | Read: DAX query results and the text of errors returned by Analysis Services, which can contain data values from the model | Deny | `MaxModelDataAccess` | `McpMaxModelDataAccess` |
 | Best Practice Analyzer | Read: rules and analysis results. Write: adding and changing rules | Read | `MaxBpaAccess` | `McpMaxBpaAccess` |
 | Documents | Read: the contents of open C# script, DAX query and DAX script documents and the errors and warnings of open documents, including Pivot Grids. Write: creating and overwriting them | Write | `MaxDocumentsAccess` | `McpMaxDocumentsAccess` |
