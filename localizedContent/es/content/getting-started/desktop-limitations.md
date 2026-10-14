@@ -2,7 +2,7 @@
 uid: desktop-limitations
 title: Limitaciones de Power BI Desktop (obsoletas)
 author: Morten Lønskov
-updated: 2023-08-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Limitaciones de Power BI Desktop
 
-Al usar Tabular Editor (cualquier edición) como [herramienta externa para Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), hay algunas limitaciones que debes tener en cuenta.
+When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
 
 Las limitaciones mencionadas en este artículo también se aplican a Tabular Editor 2.x.
 
@@ -58,11 +58,11 @@ Las herramientas externas pueden conectarse a la instancia de Analysis Services 
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Una vez conectada a la instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX sobre el Data model e incluso aplicar cambios a los metadatos del modelo mediante las [bibliotecas de cliente proporcionadas por Microsoft](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no difiere de cualquier otro tipo de instancia de Analysis Services.
+Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no difiere de cualquier otro tipo de instancia de Analysis Services.
 
 ## Operaciones de modelado del Data model
 
-Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis Services, existen algunas limitaciones importantes respecto al tipo de cambios que las herramientas externas pueden aplicar a los metadatos del modelo. Estas se enumeran [en la documentación oficial de herramientas externas](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) y se repiten aquí para mayor comodidad:
+Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis Services, existen algunas limitaciones importantes respecto al tipo de cambios que las herramientas externas pueden aplicar a los metadatos del modelo. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
 
 ### [Antes de junio de 2025](#tab/postjune2023)
 
@@ -87,7 +87,7 @@ Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis 
 
 <a name="columns">1</a> - Al usar herramientas externas para conectarse a la instancia de AS, se admite cambiar el tipo de datos de una columna; sin embargo, no se admite renombrar columnas.
 
-Los _archivos de proyecto_ de Power BI Desktop ofrecen un alcance más amplio de operaciones de escritura compatibles. Los objetos y las operaciones que no se admiten al usar Tabular Editor como herramienta externa pueden estar disponibles al editar los archivos de proyecto de Power BI Desktop. Consulta la documentación de Microsoft para obtener más información: [Proyectos de Power BI Desktop: creación del modelo](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
+Los _archivos de proyecto_ de Power BI Desktop ofrecen un alcance más amplio de operaciones de escritura compatibles. Los objetos y las operaciones que no se admiten al usar Tabular Editor como herramienta externa pueden estar disponibles al editar los archivos de proyecto de Power BI Desktop. Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring).
 
 ### [Antes de junio de 2023](#tab/prejune2023)
 
