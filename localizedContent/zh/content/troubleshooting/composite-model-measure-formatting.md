@@ -189,9 +189,9 @@ applies_to:
 
 ## 更多资源
 
-- **[Microsoft Docs - Measure Format Strings](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**: Official documentation on measure formatting in the Tabular Object Model.
-- **[Composite Models in Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**: Understanding Live connections and composite model architecture.
-- **[Dynamic Format Strings](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**: Feature availability and usage guidance.
+- **[Microsoft Docs - 度量值格式字符串](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**：关于 Tabular Object Model 中度量值格式设置的官方文档。
+- **[Power BI 中的复合模型](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**：了解实时连接和复合模型架构。
+- **[动态格式字符串](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**：功能可用性和使用指南。
 
 ---
 
