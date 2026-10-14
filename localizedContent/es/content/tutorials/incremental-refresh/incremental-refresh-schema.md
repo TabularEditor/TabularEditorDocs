@@ -24,7 +24,7 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 se limita a los Datasets hospedados en el servicio Power BI Datasets. For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita a los Datasets hospedados en el servicio Power BI Datasets. Para Analysis Services se requiere una [partición](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ---
 
