@@ -8,7 +8,7 @@ description: Regla de mejores prácticas que garantiza que las columnas de datos
 
 # La columna de datos debe tener una columna de origen
 
-## Descripción general
+## Resumen
 
 Esta regla de mejores prácticas identifica las columnas de datos que no tienen una propiedad `SourceColumn` válida. Cada columna de datos debe hacer referencia a una columna de origen en el Data source subyacente para funcionar correctamente durante la actualización.
 
@@ -49,7 +49,7 @@ El nombre de la columna de origen debe coincidir exactamente con:
 - Para SQL: nombre de la columna o alias en la instrucción SELECT
 - Para Direct Lake: nombre de la columna en la tabla de Delta Lake
 
-## Causas habituales
+## Causas comunes
 
 ### Causa 1: Columna de origen con nombre cambiado
 
@@ -65,21 +65,21 @@ Se copiaron columnas de otra tabla sin conservar los metadatos.
 
 ## Ejemplo
 
-### Antes de corregir
+### Antes de la solución
 
 ```
-Tabla: Sales
-Columna: ProductName (DataColumn)
+Table: Sales
+Column: ProductName (DataColumn)
   SourceColumn: [empty]
 ```
 
 Resultado: la actualización falla con "No se encuentra la columna 'ProductName' en la consulta de origen"
 
-### Después de corregir
+### Después de la corrección
 
 ```
-Tabla: Sales
-Columna: ProductName (DataColumn)
+Table: Sales
+Column: ProductName (DataColumn)
   SourceColumn: ProductName
 ```
 
@@ -87,7 +87,7 @@ Resultado: la columna se carga correctamente durante la actualización
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
 ## Reglas relacionadas
 

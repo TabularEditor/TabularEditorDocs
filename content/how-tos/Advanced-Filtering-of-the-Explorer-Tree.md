@@ -67,7 +67,7 @@ For case-insensitive search in Dynamic LINQ, you can either convert the input st
 :Name.ToUpper().EndsWith("KEY")
 ```
 
-or you can supply the [StringComparison](https://docs.microsoft.com/en-us/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) argument, like:
+or you can supply the [StringComparison](https://docs.microsoft.com/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) argument, like:
 
 ```
 :Name.EndsWith("Key", StringComparison.InvariantCultureIgnoreCase)

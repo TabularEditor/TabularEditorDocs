@@ -2,7 +2,7 @@
 uid: supported-files
 title: Tipos de archivo compatibles
 author: Morten Lønskov
-updated: 2023-10-17
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -173,6 +173,9 @@ El archivo .platform contiene metadatos sobre el elemento de modelo semántico, 
 
 Este archivo JSON no debe editarse manualmente a menos que entiendas el formato de elementos de Fabric.
 
+> [!NOTE]
+> Esta sincronización se aplica a un modelo cuyos metadatos incluyen un nombre o una descripción. Un modelo semántico de un Proyecto de Power BI (PBIP) creado con Power BI Desktop no incluye ninguno de los dos en su TMDL: ambos solo existen en el archivo `.platform`.
+
 ### definition.pbism
 
 El archivo definition.pbism contiene la definición general y la configuración principal del modelo semántico. Este archivo funciona junto con los metadatos del modelo (almacenados como model.bim o en la carpeta definition/) para proporcionar la información completa del modelo semántico que requiere Microsoft Fabric.
@@ -186,6 +189,14 @@ Para consultar la documentación completa de esta característica, consulta [Sav
 Los archivos de soporte son archivos que no utilizan Analysis Services ni Power BI. En su lugar, estos archivos sirven de apoyo a distintos flujos de trabajo de desarrollo en Tabular Editor 3 y otras herramientas.
 
 Todos los archivos auxiliares se pueden guardar individualmente con Ctrl+S o con 'Archivo > Guardar', siempre que tengas abierto y en primer plano el documento o la ventana correspondiente.
+
+### Opciones de usuario (.tmuo)
+
+Un archivo `.tmuo` guarda tu configuración local de tu equipo para un modelo: la base de datos del Workspace, las anulaciones de credenciales de Data source, la configuración de importación de tablas, las anulaciones de actualización y las concesiones de permisos de IA. Se guarda junto al modelo y se nombra a partir de este y de tu nombre de usuario de Windows, de modo que varios desarrolladores puedan trabajar en el mismo modelo sin interferir entre sí.
+
+Las credenciales que contiene se cifran con tu clave de usuario de Windows, por lo que no resulta útil compartir el archivo. Agrega `*.tmuo` a `.gitignore`.
+
+Consulta @user-options para ver el contenido completo y dónde se escribe el archivo para cada formato de modelo.
 
 ### Archivo de diagrama (.te3diag)
 
@@ -267,6 +278,14 @@ Te puede resultar útil compartir estos archivos con el equipo para que todos lo
 >
 > Guarda los archivos necesarios en Git u OneDrive y crea un Symlink a la carpeta "%localappdata%\TabularEditor3", pero ten en cuenta que esto puede acabar causando problemas de sincronización si varios usuarios actualizan la misma versión del archivo.
 > Sin embargo, Tabular Editor no lo admite directamente, así que impleméntalo bajo tu propia responsabilidad.
+
+### Registro de auditoría de IA
+
+Solo aparece cuando está instalado el componente de características de IA. Tabular Editor registra lo que hicieron el [Asistente de IA](xref:ai-assistant) y el [servidor MCP](xref:mcp-server): qué permisos se solicitaron y cómo se contestó a ellos, qué herramientas se ejecutaron y si cada una tuvo éxito, falló o fue rechazada, y el texto completo de cualquier C# Script que se ejecutó o se entregó para revisión. Los prompts, las respuestas y los valores de datos de tu modelo nunca se registran.
+
+Se escribe un archivo al día y, de forma predeterminada, se conservan durante 30 días. Accede a la carpeta con **Abrir carpeta de auditoría** en **Herramientas > Preferencias > Características de IA**. Los administradores pueden moverlo y cambiar el período de retención mediante una [directiva](xref:policies). Consulta @ai-audit-log para ver qué contiene cada registro.
+
+A diferencia de los demás archivos de esta carpeta, este es un registro, no una configuración. No lo compartas ni lo sincronices: es un registro por equipo, y los scripts que contiene pueden revelar la estructura de los modelos en los que has trabajado.
 
 ### MacroActions.json
 

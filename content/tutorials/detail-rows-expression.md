@@ -2,7 +2,7 @@
 uid: detail-rows-expression
 title: Detail Rows Expression
 author: Just Blindbæk
-updated: 2026-02-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -154,5 +154,5 @@ If you have defined both a table-level and a measure-level expression, the measu
 
 - [DAX Guide: SELECTCOLUMNS](https://dax.guide/selectcolumns/)
 - [DAX Guide: RELATED](https://dax.guide/related/)
-- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
+- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
 - [SQLBI: Controlling drillthrough in Excel PivotTables](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)

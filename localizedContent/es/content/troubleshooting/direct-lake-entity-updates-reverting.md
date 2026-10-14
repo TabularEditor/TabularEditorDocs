@@ -62,7 +62,7 @@ Cuando tienes muchas tablas Direct Lake que ajustar, puedes ejecutar el siguient
 > **Úsalo en TE3:** Selecciona las tablas Direct Lake relevantes, abre la ventana **C# Script**, pega el script y ejecútalo.
 
 ```csharp
-// -------- Espacios de nombres --------
+// -------- Namespaces --------
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -70,22 +70,22 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using TW = TabularEditor.TOMWrapper;
 
-// -------- Comprobación: se necesitan tablas seleccionadas --------
+// -------- Guard: need tables selected --------
 var tables = Selected.Tables.ToList();
 if (tables.Count == 0)
 {
-    Warning("Selecciona primero una o más tablas.");
+    Warning("Select one or more tables first.");
     return;
 }
 
-// -------- Crear filas editables a partir de las tablas seleccionadas --------
+// -------- Build editable rows from selected tables --------
 var candidates = tables
     .Select(table => new { Table = table, Partition = table.Partitions.OfType<TW.EntityPartition>().FirstOrDefault() })
     .ToList();
 
 foreach (var skipped in candidates.Where(c => c.Partition == null))
 {
-    Warning($"Se omite '{skipped.Table.Name}': no hay ninguna partición Entity.");
+    Warning($"Skipping '{skipped.Table.Name}': no Entity partition.");
 }
 
 var rows = new BindingList<EntityEditRow>(
@@ -96,21 +96,21 @@ var rows = new BindingList<EntityEditRow>(
 
 if (rows.Count == 0)
 {
-    Warning("Ninguna de las tablas seleccionadas tiene una partición Entity. No hay nada que editar.");
+    Warning("No selected tables have an Entity partition. Nothing to edit.");
     return;
 }
 
-// -------- Mostrar el cuadro de diálogo por lotes --------
+// -------- Show batch dialog --------
 using (var dialog = new BatchEntityEditor(rows))
 {
     if (dialog.ShowDialog() != DialogResult.OK)
     {
-        Info("Cancelado. No se aplicó ningún cambio.");
+        Info("Cancelled. No changes applied.");
         return;
     }
 }
 
-// -------- Aplicar cambios --------
+// -------- Apply changes --------
 const string ExtendedPropertyName = "Changed Property Name";
 var updated = 0;
 
@@ -122,18 +122,18 @@ foreach (var row in rows)
             continue;
 
         updated++;
-        Output($"Actualizada '{row.TableName}': Entity='{row.CurrentEntity}', Partición='{row.Partition.Name}', SourceLineageTag='{row.CurrentEntity}'.");
+        Output($"Updated '{row.TableName}': Entity='{row.CurrentEntity}', Partition='{row.Partition.Name}', SourceLineageTag='{row.CurrentEntity}'.");
     }
     catch (Exception ex)
     {
-        Error($"Error al procesar '{row.TableName}': {ex.Message}");
+        Error($"Failed on '{row.TableName}': {ex.Message}");
     }
 }
 
-Info($"Listo. Se actualizaron {updated} tabla(s).");
+Info($"Done. {updated} table(s) updated.");
 
 
-// ====================== Tipos auxiliares / IU ======================
+// ====================== Support types / UI ======================
 public class EntityEditRow
 {
     public EntityEditRow(TW.Table table, TW.EntityPartition partition)
@@ -174,7 +174,7 @@ public class EntityEditRow
 
             if (nameConflict)
             {
-                warn?.Invoke($"Cambio de nombre de la partición omitido para '{TableName}': ya existe otra partición llamada '{target}'.");
+                warn?.Invoke($"Partition rename skipped for '{TableName}': another partition already named '{target}'.");
             }
             else
             {
@@ -184,7 +184,7 @@ public class EntityEditRow
                 }
                 catch (Exception ex)
                 {
-                    warn?.Invoke($"No se pudo cambiar el nombre de la partición para '{TableName}': {ex.Message}");
+                    warn?.Invoke($"Partition rename failed for '{TableName}': {ex.Message}");
                 }
             }
         }
@@ -195,7 +195,7 @@ public class EntityEditRow
         }
         catch (Exception ex)
         {
-            warn?.Invoke($"SourceLineageTag no se estableció en '{TableName}': {ex.Message}");
+            warn?.Invoke($"SourceLineageTag not set on '{TableName}': {ex.Message}");
         }
 
         Table.SetExtendedProperty(extendedPropertyName, "true", TW.ExtendedPropertyType.String);
@@ -217,7 +217,7 @@ public class BatchEntityEditor : Form
 
     private void BuildUi()
     {
-        Text = "Editar los nombres de entidad de las tablas seleccionadas";
+        Text = "Edit Entity names for selected tables";
         TopMost = true;
         ShowInTaskbar = false;
         StartPosition = FormStartPosition.CenterScreen;
@@ -242,7 +242,7 @@ public class BatchEntityEditor : Form
 
         root.Controls.Add(new Label
         {
-            Text = "Edita el nombre de la entidad de cada tabla. Si dejas 'Nueva entidad' sin cambios, se omitirá.",
+            Text = "Edit the Entity name for each table. Leave 'New Entity' unchanged to skip.",
             AutoSize = true,
             Dock = DockStyle.Fill,
             Padding = new Padding(0, 0, 0, 6)
@@ -265,21 +265,21 @@ public class BatchEntityEditor : Form
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.TableName),
-                HeaderText = "Tabla",
+                HeaderText = "Table",
                 ReadOnly = true,
                 FillWeight = 28
             },
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.CurrentEntity),
-                HeaderText = "Entidad actual",
+                HeaderText = "Current Entity",
                 ReadOnly = true,
                 FillWeight = 36
             },
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.NewEntity),
-                HeaderText = "Nueva entidad",
+                HeaderText = "New Entity",
                 FillWeight = 36
             });
 
@@ -294,8 +294,8 @@ public class BatchEntityEditor : Form
             Padding = new Padding(0)
         };
 
-        var ok = new Button { Text = "Aceptar", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
-        var cancel = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
+        var ok = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
+        var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
 
         buttons.Controls.Add(ok);
         buttons.Controls.Add(cancel);

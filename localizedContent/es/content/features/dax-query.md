@@ -2,7 +2,7 @@
 uid: dax-query
 title: Consultas DAX
 author: Morten Lønskov
-updated: 2025-08-27
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,11 @@ Tabular Editor incluye una ventana integrada de Consulta DAX para escribir y eje
 
 Un caso de uso muy común de las Consultas DAX es la Consulta DAX generada por el [Analizador de rendimiento de Power BI](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/), que permite copiar la consulta de cada Visual para solucionar problemas, depurar o realizar un análisis de rendimiento detallado.
 
-La ventana se puede abrir mientras estás conectado a un modelo semántico desde el menú **Archivo > Nuevo > Consulta DAX** o mediante el acceso directo de la barra de herramientas.
+La ventana puede abrirse mientras estás conectado a un modelo semántico de cualquiera de estas tres formas:
+
+- el menú **Archivo > Nuevo > Consulta DAX**
+- el acceso directo de la barra de herramientas
+- **Mostrar la Consulta DAX real...** en el menú contextual con clic derecho de una @table-preview, lo que abre un nuevo documento de consulta que contiene la consulta detrás de la vista previa, con el filtro y la ordenación incluidos
 
 ![Consulta Dax Nueva](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
 
@@ -63,7 +67,7 @@ La opción "Aplicar" sincroniza la expresión DAX de todas las medidas, columnas
 
 Las opciones "Aplicar selección" y "Aplicar selección y sincronizar" solo aplican las medidas, columnas o tablas incluidas en la selección actual del editor de consultas.
 
-A diferencia de la [funcionalidad de Script DAX](xrefid:dax-scripts), de este modo solo puede actualizarse la propiedad de expresión de una medida, ya que la sintaxis de la Consulta DAX no permite especificar otras propiedades, como la descripción, la carpeta de visualización, etc.
+A diferencia de la [funcionalidad de Script DAX](xref:dax-scripts), de este modo solo puede actualizarse la propiedad de expresión de una medida, ya que la sintaxis de las consultas DAX no permite especificar otras propiedades, como la descripción, la carpeta de visualización, etc.
 
 La opción "Aplicar" también se ha añadido al menú contextual al hacer clic con el botón derecho.
 
@@ -114,7 +118,7 @@ Customers
 
 ## Depuración de Consulta DAX
 
-Las Consultas DAX son uno de los dos lugares donde es posible ejecutar el [Depurador de DAX](xrefid:dax-debugger); el otro es el Pivot Grid.
+Las consultas DAX son uno de los dos lugares donde es posible ejecutar el [Depurador de DAX](xref:dax-debugger); el otro es la Pivot Grid.
 
 El Depurador de DAX permite comprender cómo funciona DAX dentro de una sola celda. Para iniciar el depurador, basta con hacer clic con el botón derecho en la celda deseada y elegir "Depurar celda"; esto iniciará el depurador en el contexto de la celda seleccionada.
 

@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Enabling parallel development using Git and Save to Folder
 author: Daniel Otykier
-updated: 2026-09-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,12 +28,12 @@ This article describes the principles of parallel model development (that is, th
 - The destination of your data model must be one of the following:
   - SQL Server 2016 (or newer) Analysis Services Tabular
   - Azure Analysis Services
-  - a Power BI workspace assigned to a Fabric capacity, Power BI Embedded capacity, legacy Premium capacity or Premium Per User license, with [XMLA read/write enabled](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (the default since June 2025)
+  - a Power BI workspace assigned to a Fabric capacity, Power BI Embedded capacity, legacy Premium capacity or Premium Per User license, with [XMLA read/write enabled](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (the default since June 2025)
 - Git repository accessible by all team members (on-premises or hosted in Azure DevOps, GitHub, etc.)
 
 ## TOM as source code
 
-Parallel development has traditionally been difficult to implement on Analysis Services tabular models and Power BI datasets (in this article, we will call both types of models "tabular models" for brevity). With the introduction of the JSON-based model metadata used by the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), integrating model metadata in version control has certainly become easier.
+Parallel development has traditionally been difficult to implement on Analysis Services tabular models and Power BI datasets (in this article, we will call both types of models "tabular models" for brevity). With the introduction of the JSON-based model metadata used by the [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), integrating model metadata in version control has certainly become easier.
 
 The use of a text-based file format makes it possible to handle conflicting changes in a graceful way, by using various diff tools that are often included with the version control system. This type of change conflict resolution is very common in traditional software development, where all of the source code resides in a large number of small text files. For this reason, most popular version control systems are optimized for these types of files, for purposes of change detection and (automatic) conflict resolution.
 
@@ -43,13 +43,13 @@ Just like source code for traditional software development, we do not want this 
 
 When Tabular Editor was first created, there was no option to get rid of this information from the Model.bim file created by Visual Studio, but that has luckily changed in more recent versions. However, we still need to deal with a single, monolithic file (the Model.bim file) containing all of the "source code" that defines the model.
 
-Power BI dataset developers have it much worse, since they do not even have access to a text-based file containing the model metadata. The best they can do is export their Power BI report as a [Power BI Template (.pbit) file](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-templates#creating-report-templates) which is basically a zip file containing the report pages, the data model definitions and the query definitions. From the perspective of a version control system, a zip file is a binary file, and binary files cannot be diff'ed, compared and merged, the same way text files can. This forces Power BI developers to use 3rd party tools or come up with elaborate scripts or processes for properly versioning their data models - especially, if they want to be able to merge parallel tracks of development within the same file.
+Power BI dataset developers have it much worse, since they do not even have access to a text-based file containing the model metadata. The best they can do is export their Power BI report as a [Power BI Template (.pbit) file](https://docs.microsoft.com/power-bi/create-reports/desktop-templates#creating-report-templates) which is basically a zip file containing the report pages, the data model definitions and the query definitions. From the perspective of a version control system, a zip file is a binary file, and binary files cannot be diff'ed, compared and merged, the same way text files can. This forces Power BI developers to use 3rd party tools or come up with elaborate scripts or processes for properly versioning their data models - especially, if they want to be able to merge parallel tracks of development within the same file.
 
 Tabular Editor aims to simplify this process by providing an easy way to extract only the semantically meaningful metadata from the Tabular Object Model, regardless of whether that model is an Analysis Services tabular model or a Power BI dataset. Moreover, Tabular Editor can split up this metadata into several smaller files using its Save to Folder feature.
 
 ## What is Save to Folder?
 
-As mentioned above, the model metadata for a tabular model is traditionally stored in a single, monolithic JSON file, typically named **Model.bim**, which is not well suited for version control integration. Since the JSON in this file represents the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), it turns out that there is a straightforward way to break the file down into smaller pieces: The TOM contains arrays of objects at almost all levels, such as the list of tables within a model, the list of measures within a table, the list of annotations within a measure, etc. When using Tabular Editor's **Save to Folder** feature, these arrays are simply removed from the JSON, and instead, a subfolder is generated containing one file for each object in the original array. This process can be nested. The result is a folder structure, where each folder contains a set of smaller JSON files and subfolders, which semantically contains exactly the same information as the original Model.bim file:
+As mentioned above, the model metadata for a tabular model is traditionally stored in a single, monolithic JSON file, typically named **Model.bim**, which is not well suited for version control integration. Since the JSON in this file represents the [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), it turns out that there is a straightforward way to break the file down into smaller pieces: The TOM contains arrays of objects at almost all levels, such as the list of tables within a model, the list of measures within a table, the list of annotations within a measure, etc. When using Tabular Editor's **Save to Folder** feature, these arrays are simply removed from the JSON, and instead, a subfolder is generated containing one file for each object in the original array. This process can be nested. The result is a folder structure, where each folder contains a set of smaller JSON files and subfolders, which semantically contains exactly the same information as the original Model.bim file:
 
 ![Save To Folder](~/content/assets/images/save-to-folder.png)
 
@@ -100,15 +100,15 @@ These limitations are:
 
 - When using Tabular Editor as an external tool for Power BI Desktop, [not all modeling operations are supported](xref:desktop-limitations).
 - Tabular Editor can extract model metadata from a .pbix file loaded in Power BI Desktop, or directly from a .pbit file on disk, but there is **no supported way to update model metadata in a .pbix or .pbit file outside of Power BI Desktop**.
-- Once any changes are made to a Power BI dataset through the XMLA endpoint, [that dataset can no longer be downloaded as a .pbix file](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
+- Once any changes are made to a Power BI dataset through the XMLA endpoint, [that dataset can no longer be downloaded as a .pbix file](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
 
 To enable parallel development, we must be able to store the model metadata in one of the text-based (JSON) formats mentioned above (Model.bim or Database.json). There is no way to "recreate" a .pbix or .pbit file from the text-based format, so **once we decide to go this route, we will no longer be able to use Power BI Desktop for editing the data model**. Instead, we will have to rely on tools that can use the JSON-based format, which is exactly the purpose of Tabular Editor.
 
 > [!WARNING]
-> If you do not have access to a workspace assigned to a capacity or Premium Per User license, you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
+> If you do not have access to a workspace assigned to a capacity or Premium Per User license, you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools).
 
 > [!NOTE]
-> Power BI Desktop is still needed for purpose of creating the visual part of the report. It is a [best practice to always separate reports from models](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model). In case you have an existing Power BI file that contains both, [this blog post](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([video](https://www.youtube.com/watch?v=PlrtBm9YN_Q))  describes how to split it into a model file and a report file.
+> Power BI Desktop is still needed for purpose of creating the visual part of the report. It is a [best practice to always separate reports from models](https://docs.microsoft.com/power-bi/guidance/report-separate-from-model). In case you have an existing Power BI file that contains both, [this blog post](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([video](https://www.youtube.com/watch?v=PlrtBm9YN_Q))  describes how to split it into a model file and a report file.
 
 ## Tabular Editor and git
 
@@ -117,7 +117,7 @@ Git is a free and open source distributed version control system designed to han
 A detailed description of git is outside the scope of this article. There are, however, many resources available online if you want to learn more. We recommend the [Pro Git](https://git-scm.com/book/en/v2) book for reference.
 
 > [!NOTE]
-> Tabular Editor 3 does not currently have any integration with git or other version control systems. To manage your git repository, commit code changes, create branches, etc., you will have to use the git command line or another tool, such as the [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) or [TortoiseGit](https://tortoisegit.org/).
+> Tabular Editor 3 does not currently have any integration with git or other version control systems. To manage your git repository, commit code changes, create branches, etc., you will have to use the git command line or another tool, such as the [Visual Studio Team Explorer](https://docs.microsoft.com/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) or [TortoiseGit](https://tortoisegit.org/).
 
 As mentioned earlier, we recommend using Tabular Editor's [Save to Folder](#what-is-save-to-folder) option when saving model metadata to a git code repository.
 
@@ -125,7 +125,7 @@ As mentioned earlier, we recommend using Tabular Editor's [Save to Folder](#what
 
 What follows is a discussion of branching strategies to employ when developing tabular models.
 
-The branching strategy will dictate what the daily development workflow will be like, and in many cases, branches will tie directly into the project methods used by your team. For example, using the [agile process within Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops), your backlog would consist of **Epics**, **Features**, **User Stories**, **Tasks** and **Bugs**.
+The branching strategy will dictate what the daily development workflow will be like, and in many cases, branches will tie directly into the project methods used by your team. For example, using the [agile process within Azure DevOps](https://docs.microsoft.com/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops), your backlog would consist of **Epics**, **Features**, **User Stories**, **Tasks** and **Bugs**.
 
 In the agile terminology, a **User Story** is a deliverable, testable piece of work. The User Story may consist of several **Tasks** — smaller pieces of work performed by a developer before the User Story can be delivered. In an ideal world, all User Stories are broken down into manageable tasks, each taking only a couple of hours to complete, adding up to no more than a handful of days for the entire User Story. This makes a User Story an ideal candidate for a short-lived feature branch, where the developer makes one or more commits per task before the branch is merged and the code deployed for testing.
 
@@ -208,7 +208,7 @@ Even if you do need to support parallel development, you may find that multiple 
 
 ## Trunk-based development
 
-Trunk-based development is the simplest possible branching model: developers commit small, frequent changes either directly to `main`, or via very short-lived feature branches that are merged back within hours. Microsoft recommends [trunk-based development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) generally for agile, continuous delivery of small increments.
+Trunk-based development is the simplest possible branching model: developers commit small, frequent changes either directly to `main`, or via very short-lived feature branches that are merged back within hours. Microsoft recommends [trunk-based development](https://docs.microsoft.com/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) generally for agile, continuous delivery of small increments.
 
 ![Trunk Based Development](~/content/assets/images/trunk-based-development.png)
 

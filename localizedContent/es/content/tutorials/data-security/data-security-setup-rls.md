@@ -109,19 +109,19 @@ Para modificar un permiso de tabla existente para un rol específico:
 ```dax
 EVALUATE
 
-// Crea una tabla para probar tu RLS
+// Create a table to test your RLS
 ADDCOLUMNS ( 
   VALUES ( 'Regions'[Territory Directors] ),
   "@RLS-Validation",
 
-    // Código de RLS
+    // RLS Code
     VAR _CurrentUser = 
       SELECTCOLUMNS (
         FILTER ( 
           'Employees', 
           'Employees'[Employee Email]
 
-            // Reemplaza USERPRINCIPALNAME() por el correo de un usuario para probar
+            // Replace USERPRINCIPALNAME() with a user email to test
             = "gal.aehad@spaceparts.co" // USERPRINCIPALNAME ()
         ),
         "@Name", 'Employees'[Employee Name]
@@ -131,8 +131,8 @@ ADDCOLUMNS (
 
 )
 
-// Ordena de TRUE() a FALSE()
-// Cuando sea TRUE(), los datos serán visibles
+// Order from TRUE() to FALSE()
+// Where it is TRUE() the data will be visible
 ORDER BY [@RLS-Validation] DESC
 ```
 

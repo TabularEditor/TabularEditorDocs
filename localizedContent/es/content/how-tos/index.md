@@ -13,7 +13,7 @@ Esta sección contiene guías paso a paso para realizar tareas específicas con 
 
 - [Despliegue](../features/deployment.md) - Desplegar modelos en bases de datos de Analysis Services
 - [Conectar a SSAS](connect-ssas.md) - Conectarse a bases de datos tabulares de SSAS y trabajar con ellas
-- [Cargar y guardar](load-save.md) - Cargar y guardar archivos de modelo
+- [Cargar y guardar metadatos del modelo](load-save.md) - De dónde se pueden cargar los metadatos del modelo y en qué formatos se pueden guardar
 - [Serialización en carpetas](folder-serialization.md) - Guardar modelos como estructuras de carpetas para el control de versiones
 - [Patrón de modelo maestro](Master-model-pattern.md) - Administrar varios modelos con perspectivas
 
@@ -59,7 +59,7 @@ Esta sección contiene guías paso a paso para realizar tareas específicas con 
 - @semantic-bridge-validate-contextual-rules - Crea reglas con comprobaciones entre objetos
 - @semantic-bridge-add-object - Agrega un nuevo objeto a una vista de métricas
 - @semantic-bridge-remove-object - Quita objetos de una vista de métricas
-- @semantic-bridge-rename-objects - Cambia el nombre de objetos usando el patrón de copiar y modificar
+- @semantic-bridge-rename-objects - Cambiar el nombre de un campo, una medida, una dimensión o un join en el mismo lugar
 - @semantic-bridge-serialize - Serializa una vista de métricas de vuelta a YAML
 
 ---

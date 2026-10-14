@@ -13,7 +13,7 @@ applies_to:
 
 # Configuración del modelo semántico de Databricks
 
-## Propósito del script
+## Objetivo del script
 
 Este script se creó como parte de la serie Tabular Editor x Databricks. En Databricks Unity Catalog no es posible usar letras mayúsculas en los nombres de las tablas. Una forma habitual de hacer más legibles los nombres de las tablas sin usar mayúsculas es adoptar snake_case. Además, aunque los nombres de columna pueden contener espacios, a menudo se desaconseja porque pueden ser engorrosos de manejar; por eso, lo más habitual es que los ingenieros de datos usen snake_case, camelCase o PascalCase.
 
@@ -32,42 +32,42 @@ Al hacerlo, también aplicará algunas recomendaciones de buenas prácticas: est
 
 ```csharp
 /*
- * Title: Configuración del modelo semántico de Databricks
+ * Title: Databricks Semantic Model Set-Up
  * Author: Johnny Winter, greyskullanalytics.com
  *
- *  Este script, cuando se ejecuta, recorrerá todas las tablas y columnas del modelo y las renombrará con nombres descriptivos. 
- *  Los nombres en snake_case, camelCase o PascalCase se convertirán a Proper Case.
- *  No es necesario seleccionar tablas, ya que se procesarán todas las tablas del modelo; simplemente ejecuta el script.
- *  Mientras recorre las columnas, también establece el resumen predeterminado en ninguno y define una cadena de formato para todos los campos de tipo DateTime 
- *  (actualmente establece el formato 'yyyy-mm-dd', pero puedes cambiarlo en la línea 61 si lo deseas).
+ *  This script, when executed, will loop through all tables and columns in the model and rename with friendly names. 
+ *  Names in snake_case, camelCase or PascalCase will all be converted to Proper Case.
+ *  No table selections are required as all tables in the model will be processed, simply run the script.
+ *  Whilst looping though columns it also sets default summarization to none and sets a format string for all DateTime type fields 
+ *  (currently it sets format 'yyyy-mm-dd' but you can change this on line 61 if you wish).
  *
  */
 using System;
 using System.Globalization;
 
-//crear el script como clase para poder reutilizarlo 
+//create script as class so it can be reused 
 class p {
 
     public static void ConvertCase(dynamic obj)
     {
         TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-        //reemplazar guiones bajos por un espacio
+        //replace underscores with a space
         var oldName = obj.Name.Replace("_", " ");
         var newName = new System.Text.StringBuilder();
         for(int i = 0; i < oldName.Length; i++) {
-            // La primera letra siempre debe ir en mayúscula:
+            // First letter should always be capitalized:
             if(i == 0) newName.Append(Char.ToUpper(oldName[i]));
 
-            // Una secuencia de dos letras mayúsculas seguida de una letra minúscula debe insertar un espacio
-            // después de la primera letra:
+            // A sequence of two uppercase letters followed by a lowercase letter should have a space inserted
+            // after the first letter:
             else if(i + 2 < oldName.Length && char.IsLower(oldName[i + 2]) && char.IsUpper(oldName[i + 1]) && char.IsUpper(oldName[i]))
             {
                 newName.Append(oldName[i]);
                 newName.Append(" ");
             }
 
-            // En todas las demás secuencias de una letra minúscula seguida de una letra mayúscula, se debe insertar un espacio
-            // después de la primera letra:
+            // All other sequences of a lowercase letter followed by an uppercase letter, should have a space
+            // inserted after the first letter:
             else if(i + 1 < oldName.Length && char.IsLower(oldName[i]) && char.IsUpper(oldName[i+1]))
             {
                 newName.Append(oldName[i]);
@@ -78,15 +78,15 @@ class p {
                 newName.Append(oldName[i]);
             }
         }
-        //aplicar Proper Case cuando esto no se haya gestionado ya arriba
+        //apply Proper Case where this has not already been taken care of above
         obj.Name = textInfo.ToTitleCase(newName.ToString());
     }
 }
 
 foreach(var t in Model.Tables) {
-//convertir nombres de tablas
+//convert table names
     p.ConvertCase(t);
-//convertir nombres de columnas
+//convert column names
     foreach(var c in t.Columns) {
         p.ConvertCase(c);
         c.SummarizeBy = AggregateFunction.None;

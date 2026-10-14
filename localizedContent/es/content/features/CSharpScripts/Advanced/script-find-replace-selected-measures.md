@@ -13,7 +13,7 @@ applies_to:
 
 # Buscar y reemplazar una subcadena en las medidas
 
-## Propósito del script
+## Objetivo del script
 
 Buscará y reemplazará una subcadena en la expresión DAX de las medidas del modelo. es decir. si quieres reemplazar `'Customers'[Key Account]` por `'Products'[Type]` en muchas medidas.
 Un cuadro de entrada permite al usuario introducir el texto que se va a buscar, y un segundo cuadro permite definir el texto de reemplazo.

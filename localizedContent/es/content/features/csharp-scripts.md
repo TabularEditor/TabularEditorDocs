@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-05-27
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,19 +15,19 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-    - product: CLI de Tabular Editor
+    - product: Tabular Editor CLI
       full: true
 ---
 
 # C# Scripts
 
-Esta es una introducción a las capacidades de C# Scripts de Tabular Editor 3. La información de este documento está sujeta a cambios. Además, no dejes de consultar nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
+Esta es una introducción a las capacidades de C# Scripts de Tabular Editor 3. La información de este documento está sujeta a cambios. Además, no dejes de echar un vistazo a nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
 
 ## ¿Por qué scripting en C#?
 
-El objetivo de la interfaz de usuario de Tabular Editor es facilitar la realización de la mayoría de las tareas habituales al crear modelos tabulares. Por ejemplo, cambiar la carpeta de visualización de varias medidas a la vez es tan simple como seleccionar los objetos en el árbol del explorador y arrastrar y soltar. El menú contextual del árbol del explorador, al hacer clic con el botón derecho, ofrece una forma práctica de realizar muchas de estas tareas, como agregar o quitar objetos de perspectivas, cambiar el nombre de varios objetos, etc.
+El objetivo de la interfaz de usuario de Tabular Editor es facilitar la ejecución de la mayoría de las tareas habituales al crear modelos tabulares. Por ejemplo, cambiar la carpeta de visualización de varias medidas a la vez es tan sencillo como seleccionar los objetos en el árbol del explorador y arrastrarlos y soltarlos para reorganizarlos. El menú contextual al hacer clic con el botón derecho del árbol del explorador ofrece una forma práctica de realizar muchas de estas tareas, como agregar o quitar objetos de las perspectivas, cambiar el nombre de varios objetos, etc.
 
-Sin embargo, puede haber muchas otras tareas habituales del flujo de trabajo que no se realizan tan fácilmente desde la interfaz de usuario. Por este motivo, Tabular Editor ofrece scripting en C#, que permite a los usuarios avanzados escribir un script con sintaxis de C# para manipular de forma más directa los objetos del modelo tabular cargado.
+Aun así, hay muchas otras tareas habituales del flujo de trabajo que no se realizan con la misma facilidad desde la interfaz de usuario. Por este motivo, Tabular Editor ofrece scripting en C#, que permite a los usuarios avanzados escribir un script con sintaxis de C# para manipular de forma más directa los objetos del modelo tabular cargado.
 
 ## Code Assist
 
@@ -165,27 +165,29 @@ La siguiente tabla enumera todos los accesores singulares y plurales disponibles
 | `Selected.Function`                 | `Selected.Functions`                 | Funciones definidas por el usuario |
 | `Selected.DataSource`               | `Selected.DataSources`               | Fuentes de datos                   |
 | `Selected.SingleColumnRelationship` | `Selected.SingleColumnRelationships` | Relaciones                         |
-| `Selected.Perspective`              | `Selected.Perspectives`              | Perspectivas                       |
+| `Selected.Perspectiva`              | `Selected.Perspectives`              | Perspectivas                       |
 | `Selected.Culture`                  | `Selected.Cultures`                  | Traducciones                       |
 
 > [!NOTE]
 > Los accesores de Rol, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable y Partición se agregaron en Tabular Editor 3.26.0.
 
+A partir de Tabular Editor 3.27.0, los objetos que se hayan eliminado desde la última vez que se guardó el modelo siguen visibles en el Explorador TOM y se pueden seleccionar. Estos objetos no forman parte del modelo, por lo que nunca aparecen en los métodos de acceso anteriores. En su lugar, `Selected.Deleted` enumera los objetos eliminados seleccionados, cada uno con `Name`, `ObjectType`, `Parent` y el método `Restore()`. `Selected.Deleted.Restore()` los restaura todos a la vez. Los objetos del modelo también exponen `HasUnsavedChanges` y `Revert()`, que permiten a un script deshacer cambios en parte del modelo. Consulta @unsaved-changes para más detalles.
+
 ## Métodos auxiliares
 
-Tabular Editor proporciona un conjunto de métodos auxiliares especiales para facilitar la realización de determinadas tareas de scripting. Ten en cuenta que algunos de ellos pueden invocarse como métodos de extensión. Por ejemplo, `object.Output();` y `Output(object);` son equivalentes.
+Tabular Editor proporciona un conjunto de métodos auxiliares especiales para facilitar la realización de determinadas tareas de scripting. Ten en cuenta que algunos de estos pueden invocarse como métodos de extensión. Por ejemplo, `object.Output();` y `Output(object);` son equivalentes.
 
 - `void Output(object value)` - detiene la ejecución del script y muestra información sobre el objeto proporcionado. Cuando el script se ejecuta como parte de una ejecución desde la línea de comandos, se escribirá en la consola una representación en cadena del objeto.
 - `void SaveFile(string filePath, string content)` - forma práctica de guardar datos de texto en un archivo.
 - `string ReadFile(string filePath)` - forma práctica de cargar datos de texto desde un archivo.
 - `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties)` - forma práctica de exportar un conjunto de propiedades de varios objetos como una cadena TSV.
-- `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos desde una cadena TSV.
+- `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos a partir de una cadena TSV.
 - `void CustomAction(string name)` - invoca una macro por su nombre.
 - `void CustomAction(this IEnumerable<ITabularNamedObject> objects, string name)` - invoca una macro en los objetos especificados.
-- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es true (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. Es decir, las comas (separadores de lista) se convertirán en punto y coma, y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en false.
-- `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX en todos los objetos de la colección proporcionada
+- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. Es decir, las comas (separadores de lista) se convertirán en punto y coma, y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en `false`.
+- ¿`void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX de todos los objetos de la colección proporcionada
 - `void FormatDax(this IDaxDependantObject obj)` - pone un objeto en cola para dar formato a la expresión DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
-- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos puestos en cola hasta el momento
+- ¿`void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos que se hayan puesto en cola hasta el momento
 - `void Info(string)` - Escribe un mensaje informativo en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
 - `void Warning(string)` - Escribe un mensaje de advertencia en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
 - `void Error(string)` - Escribe un mensaje de error en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
@@ -197,27 +199,27 @@ Para ver la lista completa de métodos auxiliares disponibles y su sintaxis, con
 
 ### Depuración de scripts
 
-Como se mencionó anteriormente, puede usar el método `Output(object);` para pausar la ejecución del script y abrir un cuadro de diálogo con información sobre el objeto que se ha pasado. También puede usar este método como método de extensión, invocándolo como `object.Output();`. El script se reanuda cuando se cierra el cuadro de diálogo.
+Como se mencionó anteriormente, puedes usar el método `Output(object);` para pausar la ejecución del script y abrir un cuadro de diálogo con información sobre el objeto pasado como argumento. También puedes usar este método como método de extensión, invocándolo como `object.Output();`. El script se reanuda cuando se cierra el cuadro de diálogo.
 
-El cuadro de diálogo aparecerá de una de estas cuatro maneras, según el tipo de objeto que se esté enviando a la salida:
+El cuadro de diálogo aparecerá de una de estas cuatro formas, según el tipo de objeto que se envíe como salida:
 
-- Los objetos singulares (como strings, ints y DateTimes, excepto cualquier objeto que derive de TabularNamedObject) se mostrarán como un cuadro de diálogo de mensaje simple, invocando el método `.ToString()` sobre el objeto:
+- Los objetos individuales (como string, int y DateTime, excepto cualquier objeto que derive de TabularNamedObject) se mostrarán como un cuadro de diálogo de mensaje sencillo, invocando el método `.ToString()` del objeto:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-output-function.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-output-function.png)
 
-- Los TabularNamedObjects singulares (como Tablas, Medidas o cualquier otro TOM NamedMetadataObject disponible en Tabular Editor) se mostrarán en una cuadrícula de propiedades, de forma similar a cuando se ha seleccionado un objeto en el Explorador de árboles. Las propiedades del objeto se pueden editar en la cuadrícula, pero tenga en cuenta que, si se encuentra un error más adelante durante la ejecución del script, la edición se deshará automáticamente si "Auto-Rollback" está habilitado:
+- Los TabularNamedObjects individuales (como tablas, medidas o cualquier otro NamedMetadataObject de TOM disponible en Tabular Editor) se mostrarán en una cuadrícula de propiedades, similar a cuando se ha seleccionado un objeto en el Tree Explorer. Las propiedades del objeto se pueden editar en la cuadrícula, pero tenga en cuenta que, si se encuentra un error más adelante durante la ejecución del script, la edición se deshará automáticamente si "Auto-Rollback" está habilitado:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-auto-rollback.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-auto-rollback.png)
 
-- Cualquier IEnumerable de objetos (excepto TabularNamedObjects) se mostrará en una lista, donde cada elemento de la lista muestra el valor `.ToString()` y el tipo del objeto dentro del IEnumerable:
+- Cualquier IEnumerable de objetos (excepto TabularNamedObjects) se mostrará en una lista, donde cada elemento de la lista muestra el valor de `.ToString()` y el tipo del objeto en el IEnumerable:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-output-to-string-function.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-output-to-string-function.png)
 
-- Cualquier IEnumerable de TabularNamedObjects hará que el cuadro de diálogo muestre una lista de objetos a la izquierda y una cuadrícula de propiedades a la derecha. La cuadrícula de propiedades se rellenará a partir del objeto seleccionado en la lista, y las propiedades se podrán editar igual que cuando se envía a la salida un único TabularNamedObject:
+- Cualquier IEnumerable de TabularNamedObjects hará que el cuadro de diálogo muestre una lista de los objetos a la izquierda y una cuadrícula de propiedades a la derecha. La cuadrícula de propiedades se rellenará con el objeto seleccionado en la lista, y las propiedades se pueden editar igual que cuando se envía a la salida un único TabularNamedObject:
 
-![C-sharp Output](~/content/assets/images/c-sharp-script-output-function-enumerated.png)
+![Salida de C#](~/content/assets/images/c-sharp-script-output-function-enumerated.png)
 
-Puede marcar la casilla "No mostrar más salidas" en la esquina inferior izquierda para evitar que el script se detenga en futuras invocaciones de `.Output()`.
+Puedes marcar la casilla "Don't show more outputs" en la esquina inferior izquierda para evitar que el script se detenga en futuras invocaciones de `.Output()`.
 
 ## Ejecutar C# Scripts con vista previa
 
@@ -243,25 +245,28 @@ Todos los cambios de metadatos del modelo derivados de la ejecución de un scrip
 > Las funciones de vista previa y deshacer solo se aplican a los cambios de metadatos del modelo. Si un script realiza operaciones externas, como escribir en archivos, bases de datos o realizar solicitudes web, esas operaciones se ejecutan de inmediato y no se pueden revertir. El cuadro de diálogo de vista previa no intenta analizar el código del script; funciona comparando el estado de los metadatos del modelo antes y después de la ejecución.
 
 > [!TIP]
-> El [Asistente de IA](xref:ai-assistant) muestra automáticamente el cuadro de diálogo de vista previa de cambios cuando ejecuta C# Script desde el chat, de modo que siempre puede revisar los cambios del modelo generados por la IA antes de que se apliquen.
+> El [Asistente de IA](xref:ai-assistant) muestra este cuadro de diálogo cuando ejecuta un script por sí mismo, siempre que **Vista previa de cambios** esté activada en **Herramientas > Preferencia > Funciones de IA > Asistente de IA**. Está activada de forma predeterminada, por lo que siempre tendrás la oportunidad de revisar los cambios en el modelo generados por IA antes de que se apliquen.
 
-## Referencias de .NET
+> [!NOTE]
+> El cuadro de diálogo de vista previa no se aplica a un script ejecutado por un agente a través del [servidor MCP](xref:mcp-server). Esos scripts se compilan, se comprueban mediante el análisis de seguridad y se ejecutan de forma atómica en el modelo. El agente recibe un resumen estructurado de lo que cambió, y los cambios se marcan en el [Explorador TOM y la vista de propiedades](xref:unsaved-changes) para que puedas revisarlos o revertirlos después.
 
-Puede usar la palabra clave `using` para acortar nombres de clases, etc., igual que en el código fuente normal de C#. Además, puede incluir ensamblados externos utilizando la sintaxis `#r "<assembly name or DLL path>"`, similar a los scripts .csx usados en Azure Functions.
+## Referencias de «.NET»
+
+Puede usar la palabra clave `using` para acortar nombres de clases, etc., igual que en el código fuente normal de C#. Además, puedes incluir ensamblados externos mediante la sintaxis `#r "<assembly name or DLL path>"`, similar a los scripts .csx que se usan en Azure Functions.
 
 Por ejemplo, el siguiente script ahora funcionará como se espera:
 
 ```csharp
-// Las referencias de ensamblados deben estar al principio del archivo:
+// Assembly references must be at the very top of the file:
 #r "System.IO.Compression"
 
-// Las palabras clave using deben ir antes que cualquier otra instrucción:
+// Using keywords must come before any other statements:
 using System.IO.Compression;
 using System.IO;
 
 var xyz = 123;
 
-// Las instrucciones using siguen funcionando como deben:
+// Using statements still work the way they're supposed to:
 using(var data = new MemoryStream())
 using(var zip = new ZipArchive(data, ZipArchiveMode.Create)) 
 {
@@ -269,7 +274,7 @@ using(var zip = new ZipArchive(data, ZipArchiveMode.Create))
 }
 ```
 
-De forma predeterminada, Tabular Editor aplica las siguientes directivas `using` (aunque no se especifiquen en el script) para facilitar las tareas habituales:
+De forma predeterminada, Tabular Editor incluye automáticamente las siguientes directivas `using` (aunque no estén especificadas en el script) para facilitar las tareas más comunes:
 
 ```csharp
 using System;
@@ -296,6 +301,9 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 ## Acceso a variables de entorno
 
 Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
+
+> [!NOTE]
+> `Environment` es uno de los tipos que se rechazan cuando un administrador ha establecido la directiva `BlockUnsafeScripts`. Consulta las [Directivas de administrador](#administrator-policies).
 
 ### Lectura de variables de entorno
 
@@ -345,7 +353,7 @@ steps:
 
 En este ejemplo, el script `DeploymentScript.csx` puede acceder a `SERVER_NAME` y `DATABASE_NAME` mediante `Environment.GetEnvironmentVariable()`.
 
-### Casos de uso comunes
+### Casos de uso habituales
 
 Las variables de entorno son especialmente útiles para:
 
@@ -360,41 +368,72 @@ Las variables de entorno son especialmente útiles para:
 var environment = Environment.GetEnvironmentVariable("DEPLOY_ENV") ?? "Development";
 var refreshPolicy = Environment.GetEnvironmentVariable("ENABLE_REFRESH_POLICY") == "true";
 
-// Aplica configuración específica por entorno
+// Apply environment-specific settings
 foreach(var table in Model.Tables)
 {
     if(environment == "Production" && !refreshPolicy)
     {
-        // Deshabilita las políticas de actualización incremental en producción si se especifica
+        // Disable incremental refresh policies in production if specified
         table.EnableRefreshPolicy = false;
     }
 }
 
-Info($"Modelo configurado para el entorno {environment}");
+Info($"Configured model for {environment} environment");
 ```
+
+## Directivas de administrador
+
+La creación de scripts se puede controlar de forma centralizada, por lo que lo que un script puede hacer en tu equipo no siempre es lo que podrá hacer en un equipo administrado por tu departamento de TI. Dos [directivas](xref:policies) lo determinan.
+
+`DisableCSharpScripts` desactiva por completo los scripts: no se pueden crear ni ejecutar scripts, y lo mismo ocurre con las macros cuando se usa `DisableMacros`.
+
+`BlockUnsafeScripts` es el término medio, y conviene entenderla si escribes scripts. Los scripts y las macros siguen funcionando, pero solo mientras se mantengan dentro del modelo semántico. Un script que lea o escriba un archivo, haga una solicitud web, inicie otro programa, haga referencia a un ensamblado externo con `#r` o envíe un comando directamente al servidor se rechaza antes de que se ejecute nada.
+
+### Qué significa mantenerse dentro del modelo
+
+La decisión se toma analizando el script compilado, no buscando en su texto; por eso también se rechazan las vías indirectas para llegar al mismo resultado: la reflexión mediante `Type.GetType` o `InvokeMember`, los árboles de expresiones y la invocación de delegados, `Activator`, `AppDomain`, `Environment`, los lectores y escritores de XML que aceptan una ruta o una URL, y la deserialización basada en nombres de tipo.
+
+Entre los [métodos auxiliares](xref:script-helper-methods), los tres que escriben fuera del modelo se consideran inseguros:
+
+| Rechazado                                     | Aún disponible                                                               |
+| --------------------------------------------- | ---------------------------------------------------------------------------- |
+| `SaveFile`, `ExecuteCommand`, `Bpa.ExportCsv` | `ReadFile`, `ExecuteDax`, `EvaluateDax`, `ExecuteReader`, `ExportProperties` |
+
+Todo lo que forma parte del modelo de objetos TOM está permitido, al igual que `System`, `System.Linq`, `System.Collections.Generic` y `Newtonsoft.Json`. En la práctica, un script que crea y modifica objetos del modelo no se ve afectado, mientras que uno que exporta algo al disco sí.
+
+### Qué ves cuando se rechaza un script
+
+El cuadro de diálogo **Script not run** indica la directiva y lo que utilizó el script, y la barra de estado muestra _Script blocked by your organization's policy_. La lista de errores sigue vacía porque esto no es un error de compilación: el script es válido; simplemente no se permite ejecutarlo aquí. **Ejecutar con vista previa** se comporta del mismo modo y no muestra ningún cuadro de diálogo de vista previa.
+
+Una macro se analiza cuando se guarda. El guardado se completa correctamente y un cuadro de diálogo te indica que la macro se ha guardado, pero no se ejecutará. Una macro bloqueada queda fuera de todos los menús, por lo que no puede ejecutarse por accidente, y aparece en **Ver > Macros** con la columna **Bloqueado** rellena. Vuelve a editarla para que vuelva a quedar dentro de la línea y su elemento del menú reaparecerá, sin necesidad de reiniciar Tabular Editor.
+
+En la línea de comandos, `te script`, `te macro run` y `te bpa run --fix` se niegan del mismo modo, finalizan con un código distinto de cero e informan de `blockedByPolicy` en el Report de la salida JSON.
+
+> [!NOTE]
+> `BlockUnsafeScripts` requiere Tabular Editor 3, Edición Enterprise. Si el valor se establece en una copia que no tiene licencia para ello, no se ejecutará ningún script ni ninguna macro, sea seguro o no, hasta que se active una licencia Enterprise. La CLI de Tabular Editor no tiene ediciones y simplemente aplica la directiva.
 
 ## Compatibilidad
 
-Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de Tabular Editor son compatibles en su mayor parte, pero hay casos en los que conviene compilar el código de forma condicional según el host en el que se ejecute. El host de la CLI define un símbolo de preprocesador `TECLI`; TE3 Desktop define `TE3` (y símbolos dependientes de la versión, como `TE3_3_15_OR_GREATER`, para la versión secundaria activa); TE2 no define ninguno de los dos. Las directivas de preprocesador se introdujeron en Tabular Editor 3.10.0. Úsalas para escribir scripts portátiles:
+Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de Tabular Editor son compatibles en su mayor parte, pero hay casos en los que conviene compilar el código de forma condicional según el host en el que se ejecute. El host de la CLI define un símbolo de preprocesador `TECLI`; TE3 Desktop define `TE3` (y símbolos delimitados por versión, como `TE3_3_15_OR_GREATER`, para la versión secundaria activa); TE2 no define ninguno de los dos. Las directivas de preprocesador se introdujeron en Tabular Editor 3.10.0. Úsalos para escribir scripts portátiles:
 
 ```csharp
 #if TECLI
-    // Host de la CLI: no hay APIs de UI disponibles
-    Info($"Se está ejecutando en la CLI en {Environment.OSVersion.Platform}");
+    // CLI host - no UI APIs available
+    Info($"Running under the CLI on {Environment.OSVersion.Platform}");
 #elif TE3
-    // TE3 Desktop: hay APIs de UI disponibles
-    ShowMessage("Hola desde TE3");
+    // TE3 Desktop - UI APIs are available
+    ShowMessage("Hello from TE3");
 #else
-    // TE2 (heredado): no se define ni TECLI ni TE3
-    Info("Hola desde TE2");
+    // TE2 (legacy) - neither TECLI nor TE3 is defined
+    Info("Hello from TE2");
 #endif
 
 #if TE3_3_15_OR_GREATER
-    // Condicionado a una versión secundaria específica de TE3
+    // Gated on a specific TE3 minor version
 #endif
 ```
 
-Una salvedad específica de la CLI: los ayudantes de UI de TE3 Desktop `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()` y `SelectObjects()` lanzan `NotSupportedException` al ejecutar `te script`, ya que la CLI no tiene una interfaz de usuario para mostrar. Envuelve esas llamadas en `#if TE3` (o en `try/catch`) cuando compartas scripts entre distintos hosts.
+Una advertencia específica de la CLI: los asistentes de interfaz de usuario de TE3-Desktop `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()` y `SelectObjects()` lanzan `NotSupportedException` en `te script`, ya que la CLI no tiene interfaz de usuario para mostrar una ventana emergente. Encapsula este tipo de llamadas en `#if TE3` (o `try/catch`) cuando compartas scripts entre hosts.
 
 Si necesitas conocer la versión exacta de Tabular Editor en tiempo de ejecución del script, puedes inspeccionar la versión del ensamblado:
 
@@ -419,7 +458,7 @@ var majorVersion = Selected.GetType().Assembly.GetName().Version.Major;
 majorVersion.Output(); // majorVersion is an integer (2 or 3)
 ```
 
-## Problemas y limitaciones conocidos
+## Problemas conocidos y limitaciones
 
 - Algunas operaciones en los scripts pueden hacer que la aplicación Tabular Editor 3 se bloquee o deje de responder, debido a la forma en que se ejecutan los scripts. Por ejemplo, un script con un bucle infinito (`while(true) {}`) hará que la aplicación se quede colgada. Si esto ocurre, tendrás que finalizar el proceso de Tabular Editor desde el Administrador de tareas de Windows.
 

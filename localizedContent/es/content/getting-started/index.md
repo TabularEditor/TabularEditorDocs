@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: Te damos la bienvenida
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-09-14
 ---
 
 # Te damos la bienvenida
@@ -54,8 +54,9 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 - @properties-view-reference
 - @tom-explorer-view-reference
 - @diagram-view-reference
+- @table-preview-reference
 
-**Desarrollo paralelo**
+**Desarrollo en paralelo**
 
 - @parallel-development
 - @optimizing-workflow-workspace-mode
@@ -66,14 +67,14 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 - @importing-tables-data-modeling
 - @refresh-preview-query
 - @creating-and-testing-dax
-- @dax-script-introduction
+- @introduccion-al-script-de-dax
 - @bpa
-- @cs-scripts-and-macros
-- @personalizing-te3
+- @cs-scripts-y-macros
+- @personalizacion-de-te3
 
 **Recursos adicionales:**
 
-- [Primeros pasos con Tabular Editor 3](xref:getting-started)
+- [Instalar y activar Tabular Editor 3](xref:getting-started)
 - [Instalación y activación avanzadas](xref:installation-activation-basic)
 - [Descargar Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)

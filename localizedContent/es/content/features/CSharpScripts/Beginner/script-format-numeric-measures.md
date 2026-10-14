@@ -13,7 +13,7 @@ applies_to:
 
 # Formatear medidas numéricas
 
-## Propósito del script
+## Objetivo del script
 
 Te permite establecer rápidamente cadenas de formato predeterminadas para las medidas seleccionadas.
 
@@ -27,20 +27,20 @@ Te permite establecer rápidamente cadenas de formato predeterminadas para las m
 ### Título del script
 
 ```csharp
-// Este script está pensado para dar formato a todas las medidas con una cadena de formato predeterminada
+// This script is meant to format all measures with a default formatstring
 foreach (var ms in Selected.Measures) {
-//No establecer la cadena de formato en medidas ocultas
+//Don't set format string on hidden measures
 	if (ms.IsHidden) continue;
-// Si la cadena de formato está vacía, continuar. 
+// If the format string is empty continue. 
 	if (!string.IsNullOrWhiteSpace(ms.FormatString)) continue;
-//Si el tipo de datos es int, establecer una cadena de formato de número entero
+//If the data type is int set a whole number format string
 	if (ms.DataType == DataType.Int64) ms.FormatString = "#,##0";
-//Si el tipo de datos es double o decimal 
+//If the datatype is double or decimal 
 	if (ms.DataType == DataType.Double || ms.DataType == DataType.Decimal) {
-    //y el nombre contiene # o QTY, entonces establecer la cadena de formato como un número entero
+    //and the name contains # or QTY then set the format string to a whole number
 		if (ms.Name.Contains("#")
 			|| ms.Name.IndexOf("QTY", StringComparison.OrdinalIgnoreCase) >= 0) ms.FormatString = "#,##0";
-		//si no, establecer una cadena de formato decimal. 
+		//otherwise set it a decimal format string. 
     else ms.FormatString = "#,##0.00";
 	}
 }

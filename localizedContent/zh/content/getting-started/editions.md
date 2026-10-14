@@ -2,7 +2,7 @@
 uid: editions
 title: 比较版本
 author: Søren Toft Joensen
-updated: 2026-08-11
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,11 +16,16 @@ applies_to:
 本文档概述并对比 Tabular Editor 3 的不同版本。
 
 > [!NOTE]
-> Tabular Editor 3 许可证为**按开发者**授权。 换句话说，只有实际使用 Tabular Editor 3 产品的人才需要许可证。
+> Tabular Editor 3 许可证为**按开发者**授权。换句话说，只有实际使用 Tabular Editor 3 产品的人才需要许可证。
+
+各版本有两点区别：它们支持**哪些数据建模场景**——也就是你正在编辑的 Data model 可能位于何处——以及该模型打开后可用的**功能**有哪些。下面两个部分会分别介绍这两点。未在任一部分列出的内容，均适用于所有版本。
+
+> [!TIP]
+> 升级许可证会立即生效。在 **Help > About Tabular Editor** 中激活新密钥后，无需重启 Tabular Editor 3，即可使用该密钥解锁的功能。
 
 ## 支持的 Data model 建模场景
 
-Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的表格数据建模场景。 要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
+各版本之间的第一个区别在于它们支持哪些类型的表格式数据建模场景。要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
 
 - Power BI Desktop（请确保您了解[限制](xref:desktop-limitations)）
 - 通过 XMLA 终结点使用的 Power BI Premium（Premium Per User、**Premium 容量 [A、EM 或 P SKUs]**、**Fabric 容量 [F SKUs]**）
@@ -31,34 +36,31 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 
 我们与 Microsoft 一样，在按用户授权与按容量授权之间划定界线：
 
-- **Premium Per User 是按席位许可。** 编辑模型的人必须就是购买该席位的那位用户。 这与商业版的授权方式一致：个人、不可转让的密钥，绑定到单一用户。 请参阅 [个人许可证与可转让许可证](#personal-vs-transferable-licenses)。
+- **Premium Per User 是按席位许可。** 编辑模型的人必须就是购买该席位的那位用户。这与商业版的授权方式一致：个人、不可转让的密钥，绑定到单一用户。请参阅 [个人许可证与可转让许可证](#personal-vs-transferable-licenses)。
 - **Premium Capacity（P SKU）、Embedded Capacity（A/EM SKU）和 Fabric Capacity（F SKU）属于共享的组织级部署。** 托管在这些容量上的模型归团队所有，并服务于众多使用者——这正是企业版的设计与定价所针对的场景。
 
-同样的逻辑也适用于 Power BI 之外的场景。 商业版涵盖 SQL Server Analysis Services 的 Developer 和 Standard 版本，以及 Azure Analysis Services 的 Developer 和 Basic 层级。 这些版本和层级通常面向单个开发者或小规模部署。 SQL Server Analysis Services Enterprise Edition 和 Azure Analysis Services Standard 层用于托管组织级模型，因此需要企业版。
+同样的逻辑也适用于 Power BI 之外的场景。商业版涵盖 SQL Server Analysis Services 的 Developer 和 Standard 版本，以及 Azure Analysis Services 的 Developer 和 Basic 层级。这些版本和层级通常面向单个开发者或小规模部署。 SQL Server Analysis Services Enterprise Edition 和 Azure Analysis Services Standard 层用于托管组织级模型，因此需要企业版。
 
 > [!IMPORTANT]
-> Tabular Editor 仅允许编辑兼容级别为 1200 或更高的数据模型。 自 SQL Server 2016 起，Analysis Services 的所有实例默认都是如此。 出于同样的原因，Tabular Editor 不支持 Excel PowerPivot，因为它使用更早的兼容级别。
+> Tabular Editor 仅允许编辑兼容级别为 1200 或更高的数据模型。自 SQL Server 2016 起，Analysis Services 的所有实例默认都是如此。出于同样的原因，Tabular Editor 不支持 Excel PowerPivot，因为它使用更早的兼容级别。
 
 支持的场景完整概览见下方矩阵：
 
-| 场景 / 版本                                        | 桌面版                                                     | 商业版                                                       | 企业版                                                     |
-| ---------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
-| Power BI Desktop 外部工具                          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| 将模型元数据加载/保存到磁盘\*\*                             | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| 工作区模式\*\*\*                                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| Power BI Premium 按用户                           | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| SQL Server 开发者版                                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| SQL Server 标准版                                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| SQL Server 企业版                                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Azure AS 开发者层                                  | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| Azure AS 基础层                                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| Azure AS 标准层                                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Power BI Premium 容量（P SKU）                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Power BI Embedded 容量（A/EM SKU）                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Fabric 容量（F SKU）                               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Semantic Bridge（Databricks）                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| [高级刷新对话框](xref:advanced-refresh)               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| [免费 DAX优化器许可证](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| 场景 / 版本                        | 桌面版                                                     | 商业版                                                       | 企业版                                                     |
+| ------------------------------ | ------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| Power BI Desktop 外部工具          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| 将模型元数据加载/保存到磁盘\*\*             | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| 工作区模式\*\*\*                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Power BI Premium 按用户           | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| SQL Server 开发者版                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| SQL Server 标准版                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| SQL Server 企业版                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Azure AS 开发者层                  | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Azure AS 基础层                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| Azure AS 标准层                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Power BI Premium 容量（P SKU）     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Power BI Embedded 容量（A/EM SKU） | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Fabric 容量（F SKU）               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
 
 \***注：** 如果 Analysis Services Data model 包含透视或包含多个分区的表，则需要企业版（不适用于 Power BI Desktop 或 Power BI Premium Per User 模型）。
 
@@ -66,43 +68,105 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 
 \*\*\***注：** 工作区模式允许 Tabular Editor 3 同时将模型元数据保存到磁盘，并同步所购买的 Tabular Editor 3 版本支持的任意 Analysis Services 或 Power BI 版本上的数据库。
 
+## 功能可用情况
+
+除了上述场景外，以下功能是否可用也取决于版本。试用许可和咨询许可均提供企业版功能集。
+
+### 编辑和刷新
+
+| 功能                                                                    | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| 适用于 Fabric 的 [连同支持文件一起保存](xref:save-with-supporting-files)            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| [高级刷新对话框](xref:advanced-refresh) 和 [刷新覆盖配置文件](xref:refresh-overrides) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 保存和部署时自动备份元数据                                                         | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+
+常规刷新命令以及刷新菜单中的其他所有内容在所有版本中均可使用。上面的三行在桌面版中不可用，因为该版本只能针对实时的 Power BI Desktop 模型工作，自身不包含任何模型文件。
+
+### 建模功能
+
+| 功能                                                                   | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| -------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Analysis Services 模型中的透视\*                                           | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Analysis Services 模型中具有多个分区的表\*                                      | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Power BI 模型中的透视和多个分区                                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Direct Lake 表                                                        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 用于 Databricks Metric Views 的 [Semantic Bridge](xref:semantic-bridge) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+
+\***注意：** 桌面版完全无法打开 Analysis Services 模型，因此这两行不适用于它。请参阅下方的[建模限制](#modeling-restrictions)，了解当模型在不允许使用这些功能的版本中使用其中某项功能时会发生什么。
+
+Semantic Bridge 这一行涵盖 **从 Metric View YAML 导入...** 命令，以及 [C# 脚本](xref:csharp-scripts) 中的 `SemanticBridge` 对象；在较低版本中，该菜单项不会显示，而尝试访问该服务的脚本会报告该服务在你的许可级别不可用。
+
+### AI 助手、MCP 服务器和管理员策略
+
+[AI 助手](xref:ai-assistant) 和 [MCP 服务器](xref:mcp-server) 本身在所有版本中都可用。企业版额外提供的是集中管理它们的能力，以及它们执行过哪些操作的记录。
+
+| 功能                                              | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| ----------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| AI 助手和 MCP 服务器                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 常规管理员[策略](xref:policies)，例如完全关闭更新、遥测、脚本、宏或 AI   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| 按资源对 AI 助手和 MCP 服务器的可访问范围设定上限                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 锁定 AI 提供商、端点、模型、组织和项目，或将其限制在允许列表内               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 发布组织级自定义指令，并屏蔽用户保留的个人指令                         | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 屏蔽特定的 MCP 工具，并固定 MCP 服务器端口                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 仅允许在模型范围内运行的 C# Script 和宏（`BlockUnsafeScripts`） | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 用于记录 AI 助手和 MCP 服务器活动的本地审计日志                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+
+> [!IMPORTANT]
+> 在未获得相应许可的版本中，企业策略绝不会被悄悄忽略。如果在运行 Desktop 版或商业版的计算机上设置了其中任何一个值，AI Assistant 和 MCP 服务器将拒绝启动，并指出哪些值需要企业版；而 `BlockUnsafeScripts` 值会阻止所有脚本和宏运行，直到激活企业版许可证。请按你实际持有的许可证来部署这些策略。见 @policies。
+
+### 许可与支持
+
+| 功能                                                | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| ------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| [免费获取 DAX优化器访问权限](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 通过 **帮助 > 专属支持** 直接联系我们的支持团队                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 每位用户可同时安装的设备数                                     | 1                                                       | 2                                                       | 3                                                       |
+
+DAX优化器的 _集成_ 在所有版本中都提供；企业版额外提供的是兑换码领取资格，可让你无需额外付费即可使用 DAX优化器。
+
+### 所有版本均提供
+
+无论你使用哪个版本，其他所有功能都完全相同，包括 DAX 编辑器和类似 IntelliSense 的 [Code Assist](xref:code-actions)、[DAX 查询](xref:dax-query) 和 [DAX调试器](xref:dax-debugger)、[DAX 脚本](xref:dax-scripts) 和 [用户定义函数](xref:udfs)、[C# Script](xref:csharp-scripts) 和 [宏](xref:macros)、带有 [内置规则](xref:built-in-bpa-rules) 的 [Best Practice Analyzer](xref:using-bpa)、[透视编辑器](xref:perspective-editor)、[元数据翻译编辑器](xref:metadata-translation-editor)、[日历编辑器](xref:calendars)、[表格组](xref:table-groups)、[关系图](xref:diagram-view)、[数据预览](xref:table-preview) 和 [Pivot Grid](xref:pivot-grid)、VertiPaq分析器集成、[DAX 组件管理器](xref:dax-package-manager)、[表导入向导](xref:import-tables) 以及 [未保存更改指示器](xref:unsaved-changes)。
+
 ## 建模限制
 
 我们也会在 Tabular Editor 3 中限制部分 Data model 建模操作，以与 Microsoft 某些服务层级（Azure Analysis Services _Basic Tier_、SQL Server Analysis Services _Standard Edition_，以及 Power BI _Premium-Per-User_）的限制保持一致。
 
-具体来说，[Azure AS Basic 层级和 SQL Server Analysis Services 标准版不支持透视、多个分区或 DirectQuery](https://azure.microsoft.com/en-us/pricing/details/analysis-services/)。因此，使用这些功能的 SSAS/Azure AS 模型需要 TE3 企业版。
+具体来说，[Azure AS Basic 层和 SQL Server Analysis Services 标准版不支持透视或多个分区](https://azure.microsoft.com/en-us/pricing/details/analysis-services/)，因此，使用这些功能的 SSAS/Azure AS 模型需要 TE3 企业版。 DirectQuery 完全不受你所用 Tabular Editor 3 版本的限制：能否使用它取决于托管该模型的服务器。
 
 同样地，[Power BI Premium-Per-User Workspace 不支持 Direct Lake Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites)，所以使用该功能的 Power BI 模型也需要 TE3 企业版。
 
-| 模型类型            | 功能            | 商务版                                                     | 企业版                                                     |
-| --------------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Azure AS / SSAS | 透视            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | 多个分区          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | DirectQuery\* | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | Direct Lake   | 不适用                                                     | 不适用                                                     |
-| Power BI        | 透视\*\*        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | 多个分区\*\*      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | Direct Lake   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 模型类型            | 功能            | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
+| --------------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Azure AS / SSAS | 透视            | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | 多个分区          | 不适用                                                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | DirectQuery\* | 不适用                                                     | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | Direct Lake   | 不适用                                                     | 不适用                                                     | 不适用                                                     |
+| Power BI        | 透视\*\*        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | 多个分区\*\*      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | Direct Lake   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
-\***注：** SQL Server 标准版 2019 之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
+\***注：** SQL Server 标准版 2019 之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。[了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
 
-\*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
+\*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
+
+桌面版只能连接到正在运行的 Power BI Desktop 模型，因此与 Analysis Services 相关的那些行不适用于它。
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
 ![此版本的 Tabular Editor 3 不支持企业级语义模型](~/content/assets/images/editions-01.png)
 
-除了上面列出的内容之外，Tabular Editor 3 各版本之间没有其他功能差异。
+如果你在编辑模型时，它启用了其中某项功能，也不会在不提示的情况下被破坏：系统会拒绝保存，并在信息中注明具体是哪个功能；如果涉及多个分区，还会列出相关的表。在 Analysis Services 模型中添加透视会在一开始就被阻止——TOM Explorer 中不会显示 **Perspectives** 文件夹，创建透视的命令也不可用。
 
 > [!IMPORTANT]
-> 只有当 Power BI Report（.pbix、.pbip 或 .pbit）文件包含 Data model（Import、DirectQuery 或 Composite）时，Tabular Editor 才能在 Power BI Desktop 中作为外部工具使用。 **不支持使用 Live connection 的 Report**，因为这些 Report 不包含 Data model。 [更多信息](xref:desktop-limitations)。
+> 只有当 Power BI Report（.pbix、.pbip 或 .pbit）文件包含 Data model（Import、DirectQuery 或 Composite）时，Tabular Editor 才能在 Power BI Desktop 中作为外部工具使用。**不支持使用 Live connection 的 Report**，因为这些 Report 不包含 Data model。[更多信息](xref:desktop-limitations)。
 
 ## 个人许可证与可转让许可证
 
-我们的桌面版和商业版采用**个人**许可模式。 这意味着每位用户都会获得自己的个人许可证密钥，该密钥无法与其他用户共享或转让。 当用户不再需要该产品时，应取消订阅，以避免产生续费。
+我们的桌面版和商业版采用**个人**许可模式。这意味着每位用户都会获得自己的个人许可证密钥，该密钥无法与其他用户共享或转让。当用户不再需要该产品时，应取消订阅，以避免产生续费。
 
-我们的企业版采用**可转让**许可模式。 许可证管理员会收到一个许可证密钥，该密钥对一定数量的具名用户有效，数量上限为购买的席位数。 用户通过其电子邮件地址进行识别；该地址需要在用户首次激活 Tabular Editor 3 安装时输入。 用户首次使用许可证密钥激活 Tabular Editor 3 安装时，会在该许可证下被“锁定”30 天。 30 天锁定期结束后，可随时将用户从许可证中移除，从而释放许可证名额供其他用户使用。 许可证管理员可通过我们的[自助门户](https://tabulareditor.com/my-account)查看和管理用户。 你也可以<a href="mailto:support@tabulareditor.com?subject=Transferable%20License%20Rotation">联系支持团队</a>获取帮助。
+我们的企业版采用**可转让**许可模式。许可证管理员会收到一个许可证密钥，该密钥对一定数量的具名用户有效，数量上限为购买的席位数。用户通过其电子邮件地址进行识别；该地址需要在用户首次激活 Tabular Editor 3 安装时输入。用户首次使用许可证密钥激活 Tabular Editor 3 安装时，会在该许可证下被“锁定”30 天。 30 天锁定期结束后，可随时将用户从许可证中移除，从而释放许可证名额供其他用户使用。许可证管理员可通过我们的[自助门户](https://tabulareditor.com/my-account)查看和管理用户。你也可以<a href="mailto:support@tabulareditor.com?subject=Transferable%20License%20Rotation">联系支持团队</a>获取帮助。
 
 ## 多台设备安装
 
@@ -115,40 +179,19 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 > [!NOTE]
 > 在多个用户之间共享同一许可证违反我们的[许可条款](https://tabulareditor.com/eula-te3)。
 
-你可以随时在工具内停用现有安装：在“帮助 > 关于 Tabular Editor”下选择“更改许可证密钥...”选项。 你也可以通过我们的[自助门户](https://tabulareditor.com/sign-in)停用安装：进入“Licenses”选项卡。
+你可以随时在工具内停用现有安装：在“帮助 > 关于 Tabular Editor”下选择“更改许可证密钥...”选项。你也可以通过我们的[自助门户](https://tabulareditor.com/sign-in)停用安装：进入“Licenses”选项卡。
 
 如果您需要的 Tabular Editor 3 并发安装数量超过上述范围，请联系 [licensing@tabulareditor.com](mailto:licensing@tabulareditor.com)。
 
 ## 企业版批量折扣
 
-我们的企业版采用分级定价，具体如下表所示（按月承诺也适用类似的折扣率）：
-
-| 档位             | 每席年度价格                      |
-| -------------- | --------------------------- |
-| 前 5 个席位        | $950.00 USD |
-| 接下来的 6-10 个席位  | $900.00 USD |
-| 接下来的 11-20 个席位 | $850.00 USD |
-| 接下来的 21-50 个席位 | $800.00 USD |
-| 51 个席位及以上      | $750.00 USD |
-
-例如，如果您需要 12 个席位，价格构成如下：
-
-```text
-席位 1-5：    5 x 950.00 = $  4,750.00
-席位 6-10：   5 x 900.00 = $  4,500.00
-席位 11-12：  2 x 850.00 = $  1,700.00
---------------------------------------
-总计                      $ 10,950.00
-======================================
-```
-
-如果您需要超过 100 个席位，请 <a href="mailto:sales@tabulareditor.com">联系销售</a> 获取报价。
+如需超过 25 个席位，请 <a href="mailto:sales@tabulareditor.com">联系销售</a> 获取报价。
 
 ## 命令行与 CI/CD 授权许可
 
-Tabular Editor 3 是一款桌面应用程序。 它本身没有命令行界面。 对于自动化部署和 CI/CD 流水线，可使用 `TabularEditor.exe`（[Tabular Editor 2 命令行](xref:command-line-options)）或跨平台的 [Tabular Editor CLI](xref:te-cli)（`te`）。 两者都独立于 Tabular Editor 3 桌面应用程序。
+Tabular Editor 3 是一款桌面应用程序。它本身没有命令行界面。对于自动化部署和 CI/CD 流水线，可使用 `TabularEditor.exe`（[Tabular Editor 2 命令行](xref:command-line-options)）或跨平台的 [Tabular Editor CLI](xref:te-cli)（`te`）。两者都独立于 Tabular Editor 3 桌面应用程序。
 
 > **运行 CI/CD 管道需要许可证吗？**
-> 不需要。 `TabularEditor.exe`（TE2 CLI）和 Tabular Editor CLI（`te`，处于预览阶段）不需要 Tabular Editor 3 许可证。 只有使用 Tabular Editor 3 桌面应用程序的开发人员才需要许可证。
+> 不需要。 `TabularEditor.exe`（TE2 CLI）和 Tabular Editor CLI（`te`，处于预览阶段）不需要 Tabular Editor 3 许可证。只有使用 Tabular Editor 3 桌面应用程序的开发人员才需要许可证。
 
 Tabular Editor CLI 在正式发布（GA）时将需要许可证；定价仍在最终确定中，并会在 GA 之前公布。

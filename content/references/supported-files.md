@@ -2,7 +2,7 @@
 uid: supported-files
 title: Supported file types
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -82,7 +82,7 @@ At the root of the Power BI Project folders sits a .pbip file. The file is essen
 To learn more about Power BI Project folders, please read [this official blog post from Microsoft](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/).
 
 > [!IMPORTANT]
-> Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring). Making other types of changes to the model metadata than those listed, may cause your model to become unloadable in Power BI Desktop, and in this case, Microsoft Support will not be able to help you.
+> Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring). Making other types of changes to the model metadata than those listed, may cause your model to become unloadable in Power BI Desktop, and in this case, Microsoft Support will not be able to help you.
 
 **Power BI Template file (.pbit)**
 

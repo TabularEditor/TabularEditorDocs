@@ -1,5 +1,5 @@
 ---
-uid: deployment
+uid: implementación
 title: Implementación del modelo
 applies_to:
   products:
@@ -38,6 +38,20 @@ Son las siguientes:
   - **Implementar particiones regidas por las Políticas de actualización incremental**: Cuando la opción **Implementar particiones de tabla** está habilitada, tendrá la opción de evitar implementar particiones regidas por las Políticas de actualización incremental. Esto resulta útil cuando tiene un modelo con particiones que se crean automáticamente mediante la [política de actualización incremental](xref:incremental-refresh-about) y quiere implementar todas las particiones excepto las regidas por la política.
 - **Implementar roles del modelo**: Esta opción indica si se deben implementar los roles definidos en el modelo. Al desmarcar esta opción, se mantendrán tal cual los roles existentes en el modelo. Si va a implementar cambios en tablas o columnas del modelo, quizá tenga que revisar la [configuración de RLS u OLS](xref:data-security-about) para asegurarse de que siga siendo válida.
   - **Implementar miembros de roles del modelo**: Esta opción indica si se deben implementar los miembros de los roles. Es habitual administrar los miembros de rol directamente en el servidor, en lugar de hacerlo en los metadatos del modelo. Al desmarcar esta opción, se evitará que la implementación modifique los miembros de rol existentes en el servidor de destino.
+
+## Credenciales del Data source
+
+De forma predeterminada, Tabular Editor no guarda contraseñas, claves de cuenta ni otros secretos cuando guarda un modelo en disco. Por lo tanto, un modelo cargado desde un archivo puede tener Data source con un secreto faltante. El asistente de implementación lo comprueba antes de realizar la implementación. Un secreto se considera ausente si está vacío o es `********`. El asistente comprueba:
+
+- un origen de datos del proveedor cuya cadena de conexión contiene una palabra clave de contraseña, como `Password` o `Pwd`,
+- un origen de datos del proveedor que suplanta la identidad de una cuenta de Windows específica,
+- un origen de datos estructurado que usa autenticación de Windows o de nombre de usuario y contraseña, o una clave de cuenta.
+
+Para cada secreto ausente, el asistente te pide las credenciales que el servidor debe usar para actualizar el modelo. Tabular Editor almacena lo que introduces, cifrado, como una sobrescritura del Data source en el archivo @user-options y lo usa en la siguiente implementación en lugar de volver a pedírtelo.
+
+Si desmarcas **Implementar Data source**, el asistente ejecuta la misma comprobación en los Data source que ya existen en el destino. Si el servidor no devuelve un secreto que uno de ellos necesita, el asistente lo pide en cada implementación, porque esas respuestas no se almacenan.
+
+Los modelos semánticos de Power BI y Fabric no almacenan credenciales en el modelo. En su lugar, las configuras en el modelo semántico en el servicio de Power BI.
 
 ## Script de implementación
 

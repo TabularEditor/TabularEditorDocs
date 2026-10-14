@@ -8,7 +8,7 @@ description: Regla de mejores prácticas que evita errores de implementación al
 
 # Evite caracteres no válidos en los nombres de los objetos
 
-## Información general
+## Resumen
 
 Esta regla de mejores prácticas identifica objetos cuyos nombres contienen caracteres de control no válidos (caracteres no imprimibles, excepto los espacios en blanco estándar). Estos caracteres pueden provocar fallos de implementación, problemas de representación y corrupción de datos.
 
@@ -54,7 +54,7 @@ Name.ToCharArray().Any(char.IsControl(it) and !char.IsWhiteSpace(it))
 
 Esto detecta caracteres problemáticos y, a la vez, permite un formato de espacio en blanco válido.
 
-## Cómo solucionarlo
+## Cómo corregir
 
 ### Corrección automática
 
@@ -68,9 +68,9 @@ Name = string.Concat(
 )
 ```
 
-Para aplicarlo:
+Para aplicarla:
 
-1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+1. En **Best Practice Analyzer**, selecciona los objetos marcados
 2. Haz clic en **Aplicar corrección**
 
 ### Corrección manual
@@ -80,7 +80,7 @@ Para aplicarlo:
 3. Edita el nombre para eliminar los caracteres no válidos
 4. Guarda los cambios
 
-## Causas comunes
+## Causas habituales
 
 ### Causa 1: Copiar y pegar desde texto enriquecido
 
@@ -99,7 +99,7 @@ Importación de metadatos que contienen artefactos de codificación o códigos d
 ### Antes de la corrección
 
 ```
-Nombre de la medida: "Total\x00Sales"  (contiene un carácter NULL)
+Measure Name: "Total\x00Sales"  (contains NULL character)
 ```
 
 La implementación falla con el error "Invalid character in object name"
@@ -107,7 +107,7 @@ La implementación falla con el error "Invalid character in object name"
 ### Después de la corrección
 
 ```
-Nombre de la medida: "Total Sales"  (NULL sustituido por un espacio)
+Measure Name: "Total Sales"  (NULL replaced with space)
 ```
 
 Se implementa correctamente y se muestra correctamente en todas las herramientas.

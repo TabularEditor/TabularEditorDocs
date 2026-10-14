@@ -1,5 +1,5 @@
 ---
-uid: how-to-annotations-extended-properties
+uid: como-usar-anotaciones-y-propiedades-extendidas
 title: Cómo trabajar con anotaciones y propiedades extendidas
 author: Morten Lønskov
 updated: 2026-04-10
@@ -149,6 +149,6 @@ En las expresiones de reglas de BPA, los métodos de anotación se invocan direc
 
 ## Ver también
 
-- @useful-script-snippets
-- @create-field-parameter
-- @how-to-navigate-tom-hierarchy
+- @fragmentos-de-script-útiles
+- @crear-parámetro-de-campo
+- @cómo-navegar-por-la-jerarquía-tom
