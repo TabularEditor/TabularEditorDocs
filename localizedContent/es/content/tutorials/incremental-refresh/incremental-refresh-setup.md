@@ -27,12 +27,12 @@ Para configurar la actualización incremental, debe definir una nueva política 
 
 > [!IMPORTANT]
 > La configuración de la actualización incremental con Tabular Editor 3 solo se admite para Datasets alojados en el servicio Power BI Datasets.
-> For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> Para Analysis Services se requiere una [partición](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ### Configurar una nueva política de actualización
 
 1. **Conéctese al modelo:** Conéctese al punto de conexión XMLA de Power BI de su Workspace y abra el Dataset en el que desea configurar la actualización incremental.
-2. **Create the `RangeStart` and `RangeEnd` Parameters:** Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Agregue dos nuevas expresiones compartidas en Tabular Editor:
+2. **Crea los parámetros `RangeStart` y `RangeEnd`:** La actualización incremental requiere que se creen los parámetros `RangeStart` y `RangeEnd` ([más información](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Agregue dos nuevas expresiones compartidas en Tabular Editor:
 
 <img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Crear una expresión compartida" style="width:400px !important"/>
 
@@ -72,7 +72,7 @@ Para configurar la actualización incremental, debe definir una nueva política 
     )
 ```
 
-Las columnas de tipo fecha, cadena o entero también se pueden filtrar manteniendo el plegado de consultas, usando funciones que convierten `RangeStart` o `RangeEnd` al tipo de datos adecuado. For more information about this, see [here](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+Las columnas de tipo fecha, cadena o entero también se pueden filtrar manteniendo el plegado de consultas, usando funciones que convierten `RangeStart` o `RangeEnd` al tipo de datos adecuado. Para obtener más información, consulta [aquí](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 7. **Configura la política de actualización:** Configura las propiedades restantes según la política de actualización incremental que necesites. Recuerda especificar una expresión M para la propiedad `SourceExpression` (esta es la expresión que se añadirá a las particiones creadas por la política de actualización incremental y debe usar los parámetros `RangeStart` y `RangeEnd` para filtrar los datos en el origen). El operador = solo debe aplicarse a RangeStart o a RangeEnd, pero no a ambos, ya que podrían duplicarse los datos.
 
@@ -207,7 +207,7 @@ in
    #"Incremental Refresh" 
 ```
 
-See also the documentation for the `Date.FromText` function in Power Query [here](https://learn.microsoft.com/powerquery-m/date-fromtext). Si no es posible convertir la columna Date sobre la marcha manteniendo el plegado de consultas, también puedes configurar la actualización incremental con una consulta nativa, como se describe en la sección siguiente.
+Consulta también la documentación de la función `Date.FromText` en Power Query [aquí](https://learn.microsoft.com/powerquery-m/date-fromtext). Si no es posible convertir la columna Date sobre la marcha manteniendo el plegado de consultas, también puedes configurar la actualización incremental con una consulta nativa, como se describe en la sección siguiente.
 
 -------------
 
