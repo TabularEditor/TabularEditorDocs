@@ -40,7 +40,7 @@ La función de Power Query `Databricks.Catalogs()` acepta un tercer parámetro o
 
 2. **El Asistente de importación de tablas en versiones de Tabular Editor anteriores a la 3.26.1 genera consultas M con `null` como tercer parámetro.** Esto significa que se usa la implementación heredada, que falla en los Workspaces más recientes de Databricks.
 
-3. **Power BI Desktop already defaults to Implementation 2.0.** Microsoft has made the [Arrow Database Connectivity driver](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) the default for new Databricks connections in Power BI Desktop.
+3. **Power BI Desktop ya viene configurado de forma predeterminada con la implementación 2.0.** Microsoft ha establecido el [controlador Arrow Database Connectivity](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) como predeterminado para las nuevas conexiones a Databricks en Power BI Desktop.
 
 ---
 
@@ -120,7 +120,7 @@ Info($"Updated {updated} partition(s).");
 
 ## Recursos adicionales
 
-- [Arrow Database Connectivity driver (Microsoft documentation)](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
+- [Controlador Arrow Database Connectivity (documentación de Microsoft)](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
 - [Conectarse a Azure Databricks](xref:connecting-to-azure-databricks)
 - [Asistente para importar tablas](xref:importing-tables)
 - [Error de longitud en los comentarios de columnas de Databricks](xref:databricks-column-comments-length)
