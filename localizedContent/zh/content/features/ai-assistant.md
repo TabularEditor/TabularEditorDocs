@@ -483,7 +483,7 @@ Token 计数器位于信息框上方的状态栏中，紧挨着[当前模型指�
 
 ## 禁用 AI 助手
 
-AI 助手是一个可选组件，自 Tabular Editor 3.27.0 起默认随产品安装。 Run the Tabular Editor 3 installer again and select **Modify** to include or exclude it in an existing installation. An upgrade keeps the existing selection; see [Upgrades and the AI features component](xref:installation-activation-basic#upgrades-and-the-ai-features-component). 在便携版本中，从安装目录中删除 `TabularEditor3.AI.dll` 即可将其移除。
+AI 助手是一个可选组件，自 Tabular Editor 3.27.0 起默认随产品安装。再次运行 Tabular Editor 3 安装程序，然后选择 **Modify**，以在现有安装中包含或排除该组件。升级会保留现有选择；请参阅[升级与 AI 功能组件](xref:installation-activation-basic#upgrades-and-the-ai-features-component)。在便携版本中，从安装目录中删除 `TabularEditor3.AI.dll` 即可将其移除。
 
 同一个组件还包含 MCP 服务器，因此排除该组件或删除 `TabularEditor3.AI.dll` 会同时移除两者。如果只想关闭聊天功能，保留该组件并设置 `DisableAiChat` 策略。
 
