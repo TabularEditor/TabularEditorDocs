@@ -55,7 +55,7 @@ Power BI 和 Fabric 语义模型不会在模型中存储凭据。你需要改为
 
 ## 部署脚本
 
-在部署过程中，Tabular Editor 会生成一个 [CreateOrReplace TMSL 脚本](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions)，并在 Analysis Services 引擎上执行该脚本。 CreateOrReplace 脚本包含重新创建模型所需的全部元数据，包括表、列、度量值、关系、透视、翻译等。如果目标服务器上尚不存在该模型，将创建该模型。如果模型已存在，则现有对象将被脚本中指定的新元数据替换。
+在部署过程中，Tabular Editor 会生成一个 [CreateOrReplace TMSL 脚本](https://learn.microsoft.com/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions)，随后会针对 Analysis Services 引擎执行该脚本。 CreateOrReplace 脚本包含重新创建模型所需的全部元数据，包括表、列、度量值、关系、透视、翻译等。如果目标服务器上尚不存在该模型，将创建该模型。如果模型已存在，则现有对象将被脚本中指定的新元数据替换。
 
 如果在 **部署选项** 页面取消选择了某些选项，Tabular Editor 将在生成的 TMSL 脚本中使用这些对象的原始元数据定义，从而在服务器上按原样保留其定义。
 
