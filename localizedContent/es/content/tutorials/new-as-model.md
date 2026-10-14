@@ -2,7 +2,7 @@
 uid: new-as-model
 title: Crear un modelo de Analysis Services
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ applies_to:
 En esta página te guiamos paso a paso por el proceso de crear desde cero un nuevo modelo tabular de Analysis Services con Tabular Editor 3.
 
 > [!NOTE]
-> La Edición Business de Tabular Editor 3 se limita a la [edición Standard de SQL Server](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) y al [nivel Basic de Azure Analysis Services](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Ten en cuenta que algunas características de modelado no se admiten en estos niveles.
+> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier). Ten en cuenta que algunas características de modelado no se admiten en estos niveles.
 
 ##### Crear un nuevo modelo
 
@@ -53,7 +53,7 @@ Una vez creado el modelo, el siguiente paso es agregar un Data source y algunas 
 
 #### Agregar un Data source y tablas
 
-Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. Para obtener más información sobre las diferencias entre estos dos tipos de Data source, [consulta el blog de Microsoft Analysis Services](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
 ![Agregar un Data source](~/content/assets/images/new-as-model-add-data-source.png)
 
