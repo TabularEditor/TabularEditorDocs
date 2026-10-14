@@ -2,7 +2,7 @@
 uid: getting-started-te2
 title: Tabular Editor 2 快速入门
 author: Daniel Otykier
-updated: 2021-09-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ applies_to:
 无。
 
 > [!NOTE]
-> Tabular Editor 使用 [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 在 Model.bim 文件和现有数据库之间加载和保存元数据。该组件已包含在 .msi 安装包中。请参阅 Microsoft 官方文档：[Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers)。
+> Tabular Editor 使用 [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 从 Model.bim 文件或现有数据库中加载元数据，并将元数据保存回这些文件或数据库。该组件已包含在 .msi 安装包中。请参阅 Microsoft 官方文档中的 [Analysis Services Client Libraries](https://docs.microsoft.com/azure/analysis-services/analysis-services-data-providers)。
 
 ## 系统要求
 

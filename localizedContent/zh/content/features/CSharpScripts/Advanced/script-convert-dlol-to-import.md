@@ -2,7 +2,7 @@
 uid: script-convert-dlol-to-import
 title: 将 OneLake 上的 Direct Lake 表转换为导入模式
 author: Morten Lønskov
-updated: 2025-06-25
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-此脚本用于将 OneLake 上的 Direct Lake（DL/OL）表转换为导入模式表。如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将此类表上的 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) 替换为导入模式下相应的常规 M 分区。
+此脚本用于将 OneLake 上的 Direct Lake（DL/OL）表转换为导入模式表。按照 [Direct Lake 指导文章](xref:direct-lake-guidance) 中的说明，我们需要将这类表上的 [EntityPartition](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) 替换为在导入模式下对应的常规 M 分区。
 
 ## 先决条件
 

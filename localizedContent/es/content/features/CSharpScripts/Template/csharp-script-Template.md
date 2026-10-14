@@ -16,7 +16,7 @@ applies_to:
 <br></br>
 
 > [!NOTE]
-> Este script no funciona cuando se conecta a un modelo de Power BI Desktop, debido a las limitaciones de las herramientas externas de Power BI Desktop: [Limitaciones de herramientas externas](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Aun así, puede experimentar con el script habilitando las operaciones de modelado no compatibles en "Archivo > Preferencias" (TE2) o "Herramientas > Preferencias" (TE3)
+> Este script no funciona cuando se conecta a un modelo de Power BI Desktop, debido a las limitaciones de las herramientas externas de Power BI Desktop: [Limitaciones de herramientas externas](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Aun así, puede experimentar con el script habilitando las operaciones de modelado no compatibles en "Archivo > Preferencias" (TE2) o "Herramientas > Preferencias" (TE3)
 
 <br></br>
 

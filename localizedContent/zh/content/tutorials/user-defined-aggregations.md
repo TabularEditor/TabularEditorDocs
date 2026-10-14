@@ -2,7 +2,7 @@
 uid: user-defined-aggregations
 title: 用户自定义聚合
 author: Just Blindbæk
-updated: 2026-02-19
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,7 +50,7 @@ applies_to:
 只把表设置为 Dual 或 DirectQuery 存储模式并不会启用聚合路由——它只会创建一个复合模型，查询会根据存储模式被路由。启用用户自定义聚合的关键是 **Alternate Of** 属性：它会创建显式的列级映射，告诉引擎“当查询从明细表请求这一列时，可以改用这个预聚合列。”如果没有 `Alternate Of`，引擎就没有进行替换的依据，也不会将查询路由到聚合表。引擎会根据这些映射评估每个传入的查询，以确定聚合表是否能够回答该查询；只有在不能回答时，才会回退到 DirectQuery。
 
 > [!IMPORTANT]
-> DirectQuery 存在一些已知限制，会影响模型设计和 Report 功能。与此模式最相关的包括：针对 DirectQuery 列的查询依赖数据源响应时间；云数据源每个查询最多返回一百万行；DirectQuery 表无法使用自动日期/时间层次结构；并且部分 DAX 函数在 DirectQuery 模式下不受支持。继续前，先查看完整列表：[在 Power BI Desktop 中使用 DirectQuery](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery)。
+> DirectQuery 存在一些已知限制，会影响模型设计和 Report 功能。与此模式最相关的包括：针对 DirectQuery 列的查询依赖数据源响应时间；云数据源每个查询最多返回一百万行；DirectQuery 表无法使用自动日期/时间层次结构；并且部分 DAX 函数在 DirectQuery 模式下不受支持。在继续之前，请先查看完整列表：[在 Power BI Desktop 中使用 DirectQuery](https://learn.microsoft.com/power-bi/connect-data/desktop-use-directquery)。
 
 ## 步骤 1：将维度表设置为 Dual 存储模式
 
@@ -171,5 +171,5 @@ Tabular Editor 中的图表视图显示已完成的聚合架构。 `Orders` 和 
 
 ## 延伸阅读
 
-- [Microsoft 文档：Power BI 中的用户定义聚合](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
-- [Microsoft 文档：Power BI Desktop 中的存储模式](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
+- [Microsoft 文档：Power BI 中的用户定义聚合](https://learn.microsoft.com/power-bi/transform-model/aggregations-advanced)
+- [Microsoft 文档：Power BI Desktop 中的存储模式](https://learn.microsoft.com/power-bi/transform-model/desktop-storage-mode)

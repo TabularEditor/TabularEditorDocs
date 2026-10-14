@@ -2,7 +2,7 @@
 uid: databricks-refresh-empty-catalog
 title: Databricks 刷新失败：目录为空错误
 author: Morten Lønskov
-updated: 2026-04-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -40,7 +40,7 @@ applies_to:
 
 2. **Tabular Editor 3.26.1 之前版本中的表导入向导会生成第三个参数为 `null` 的 M 查询。** 这意味着会使用旧版实现，而旧版实现在较新的 Databricks Workspace 中会失败。
 
-3. **Power BI Desktop 已默认使用 Implementation 2.0。** Microsoft 已将 [Arrow Database Connectivity 驱动程序](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 设为 Power BI Desktop 中新 Databricks 连接的默认选项。
+3. **Power BI Desktop 现已默认采用 Implementation 2.0。** Microsoft 已将 [Arrow Database Connectivity 驱动程序](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 设为 Power BI Desktop 中新的 Databricks 连接的默认选项。
 
 ---
 
@@ -120,7 +120,7 @@ Info($"Updated {updated} partition(s).");
 
 ## 其他资源
 
-- [Arrow 数据库连接驱动程序（Microsoft 文档）](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
+- [Arrow Database Connectivity 驱动程序（Microsoft 文档）](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
 - [连接到 Azure Databricks](xref:connecting-to-azure-databricks)
 - [表导入向导](xref:importing-tables)
 - [Databricks 列注释长度错误](xref:databricks-column-comments-length)

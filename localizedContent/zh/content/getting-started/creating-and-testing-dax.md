@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: 添加度量值和其他计算对象
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ Tabular Editor 3 使用的新 DAX 代码编辑器已将这些问题全部解决�
 当你已将[一些表导入](xref:importing-tables-data-modeling#importing-new-tables)模型，并[在它们之间创建了关系](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram)之后，就该添加一些包含业务逻辑的显式度量值了。
 
 > [!TIP]
-> 从技术角度来说，在 Power BI Report 里可视化数据之前，你不必先在模型里添加显式度量值。不过，最佳实践是始终这样做，因为基于 MDX 的客户端工具（例如 Excel 和 Tabular Editor 3 的 Pivot Grid）要求显式定义度量值。此外，[计算组](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) 仅适用于显式度量值。
+> 从技术角度来说，在 Power BI Report 里可视化数据之前，你不必先在模型里添加显式度量值。不过，最佳实践是始终这样做，因为基于 MDX 的客户端工具（例如 Excel 和 Tabular Editor 3 的 Pivot Grid）要求显式定义度量值。此外，[计算组](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) 仅适用于显式度量值。
 
 要使用 Tabular Editor 添加新的度量值，请在要添加度量值的表上单击右键，然后选择 **创建 > 度量值**（ALT+1）。
 
@@ -46,7 +46,7 @@ Tabular Editor 3 使用的新 DAX 代码编辑器已将这些问题全部解决�
 
 ![添加度量值并编辑 Dax](~/content/assets/images/add-measure-edit-dax.png)
 
-**表达式编辑器** 左上角的下拉框用于在当前所选对象的不同 DAX 属性之间切换。例如，在较新版本的 Analysis Services 中，度量值既有 `Expression` 属性，也有 [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)。其他类型的对象可能有不同的属性用于承载 DAX 代码。例如，[KPI](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) 有三个不同的 DAX 属性。要在 Tabular Editor 中添加 KPI，右键单击某个度量值，然后选择 **创建 > KPI**。
+**表达式编辑器** 左上角的下拉框用于在当前所选对象的不同 DAX 属性之间切换。例如，在较新版本的 Analysis Services 中，度量值既有 `Expression` 属性，也有 [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)。其他类型的对象可能有不同的属性用于承载 DAX 代码。例如，[KPI](https://docs.microsoft.com/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) 有三个不同的 DAX 属性。要在 Tabular Editor 中添加 KPI，右键单击某个度量值，然后选择 **创建 > KPI**。
 
 ![编辑 Kpis](~/content/assets/images/editing-kpis.png)
 
@@ -78,7 +78,7 @@ Tabular Editor 3 使用的新 DAX 代码编辑器已将这些问题全部解决�
 
 # 添加计算组
 
-要添加[计算组](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions)，在模型或“表”文件夹上右键点击，然后选择 **创建 > 计算组** (ALT+7)。为计算组命名。另外，建议为默认的 **Name** 列另取一个名称。
+要添加[计算组](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions)，请在模型或“表”文件夹上单击右键，然后选择 **创建 > 计算组** (ALT+7)。为计算组命名。另外，建议为默认的 **Name** 列另取一个名称。
 
 > [!IMPORTANT]
 > 此选项仅适用于兼容级别为 1470 或更高的模型。 Analysis Services 从兼容级别 1500 起支持计算组。

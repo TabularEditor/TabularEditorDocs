@@ -71,7 +71,7 @@ Para una búsqueda sin distinción entre mayúsculas y minúsculas en LINQ diná
 :Name.ToUpper().EndsWith("KEY")
 ```
 
-o bien puedes proporcionar el argumento [StringComparison](https://docs.microsoft.com/en-us/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_), por ejemplo:
+o también puedes proporcionar el argumento [StringComparison](https://docs.microsoft.com/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_), por ejemplo:
 
 ```
 :Name.EndsWith("Key", StringComparison.InvariantCultureIgnoreCase)

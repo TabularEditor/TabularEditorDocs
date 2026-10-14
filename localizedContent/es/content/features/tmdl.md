@@ -2,7 +2,7 @@
 uid: tmdl
 title: Lenguaje de definición de modelo tabular (TMDL)
 author: Daniel Otykier
-updated: 2023-05-22
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,5 +52,5 @@ Para obtener información detallada sobre cómo usar esta característica, consu
 
 # Siguientes pasos
 
-- [Información general de TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview).
-- [Primeros pasos con TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-how-to)
+- [Información general de TMDL (Microsoft Learn)](https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview).
+- [Primeros pasos con TMDL (Microsoft Learn)](https://learn.microsoft.com/analysis-services/tmdl/tmdl-how-to)

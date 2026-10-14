@@ -2,7 +2,7 @@
 uid: data-refresh-view
 title: 数据刷新视图
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -48,7 +48,7 @@ applies_to:
 单击列标题一次按升序排序，再单击一次则按降序排序。在处理多个刷新队列时，这能让你轻松识别最新的刷新操作。
 
 > [!NOTE]
-> “数据刷新”窗口中显示的所有信息和持续时间仅为估算值。在处理过程中，Tabular Editor 会监听来自 SSAS 的[跟踪事件](https://learn.microsoft.com/en-us/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions)。 SSAS 不保证会将所有跟踪信息发送到客户端（例如，在 CPU/内存消耗达到峰值时，可能会对跟踪事件通知进行限流）。
+> “数据刷新”窗口中显示的所有信息和持续时间仅为估算值。在处理过程中，Tabular Editor 会监听来自 SSAS 的[跟踪事件](https://learn.microsoft.com/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions)。 SSAS 不保证会将所有跟踪信息发送到客户端（例如，在 CPU/内存消耗达到峰值时，可能会对跟踪事件通知进行限流）。
 
 > [!TIP]
-> 如果你需要关于刷新进度和持续时间的准确且可靠的信息，你可以将 [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) 连接到你的 SSAS 实例，并在处理期间手动收集相关信息。
+> 如果需要获取有关刷新进度和持续时间的准确可靠信息，建议将[SQL Server Profiler](https://learn.microsoft.com/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16)连接到 SSAS 实例，并在处理过程中手动收集这些信息。

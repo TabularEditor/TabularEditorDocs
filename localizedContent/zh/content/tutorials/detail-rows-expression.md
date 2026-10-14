@@ -2,7 +2,7 @@
 uid: detail-rows-expression
 title: 明细行表达式
 author: Just Blindbæk
-updated: 2026-02-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -155,5 +155,5 @@ SELECTCOLUMNS(
 
 - [DAX Guide：SELECTCOLUMNS](https://dax.guide/selectcolumns/)
 - [DAX Guide：RELATED](https://dax.guide/related/)
-- [Microsoft Docs：Detail Rows Expressions](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
+- [Microsoft 文档：详细信息行表达式](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
 - [SQLBI：在 Excel 数据透视表中控制钻取](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)

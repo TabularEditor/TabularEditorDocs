@@ -2,7 +2,7 @@
 uid: migrate-from-vs
 title: Migración desde Visual Studio
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ Este artículo da por hecho que estás familiarizado con el desarrollo de modelo
 
 Tabular Editor 3 incluye funciones que te permiten prescindir por completo de Visual Studio para el desarrollo de modelos tabulares. Esto contrasta con Tabular Editor 2.x, donde algunos usuarios seguían prefiriendo usar Visual Studio para tareas como importar tablas, visualizar relaciones y previsualizar datos.
 
-Sin embargo, a medida que te familiarices con Tabular Editor 3, puede que te siga resultando útil abrir tus modelos tabulares en Visual Studio de vez en cuando. Esto es posible en cualquier momento, ya que Tabular Editor 3 no modifica el formato del archivo **Model.bim** (también conocido como [TOM JSON](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) que utiliza Visual Studio, lo que garantiza la compatibilidad con Visual Studio.
+Sin embargo, a medida que te familiarices con Tabular Editor 3, puede que te siga resultando útil abrir tus modelos tabulares en Visual Studio de vez en cuando. Esto es posible en cualquier momento, ya que Tabular Editor 3 no modifica el formato del archivo **Model.bim** (también conocido como [TOM JSON](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) que utiliza Visual Studio, lo que garantiza su compatibilidad con Visual Studio.
 
 La única excepción es si decides usar la función [Guardar en carpeta](xref:save-to-folder) de Tabular Editor, ya que este formato de archivo no es compatible con Visual Studio. Sin embargo, puedes volver a crear fácilmente un archivo Model.bim para usarlo con Visual Studio, usando la opción **Archivo > Guardar como...** en Tabular Editor. También puedes hacer la conversión inversa cargando un archivo Model.bim en Tabular Editor y luego usando la opción **Archivo > Guardar en carpeta...**.
 
@@ -61,7 +61,7 @@ tabulareditor.exe database.json -B model.bim
 ***
 
 > [!NOTE]
-> El script de línea de comandos anterior asume que tienes instalado [Tabular Editor 2.x](xref:getting-started-te2). La ubicación de instalación de Tabular Editor 2.x también debe especificarse en tu [variable de entorno PATH](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/path).
+> El script de línea de comandos anterior asume que tienes instalado [Tabular Editor 2.x](xref:getting-started-te2). La ubicación de instalación de Tabular Editor 2.x también debe incluirse en la [variable de entorno PATH](https://learn.microsoft.com/windows-server/administration/windows-commands/path).
 
 ## Servidor de Workspace Integrada
 
@@ -173,7 +173,7 @@ En Tabular Editor, usamos la vista de mensajes para consolidar todos los mensaje
 
 En la captura anterior, fíjate en que hay tres fuentes diferentes que publican mensajes:
 
-- **Analysis Services**: Cuando se guardan cambios de metadatos en una instancia conectada de Analysis Services, el servidor actualiza los metadatos TOM para indicar si algún objeto está en un estado erróneo. En concreto, se actualizan las propiedades [State](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) y [ErrorMessage](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage). Tabular Editor muestra estos mensajes de error en la vista de mensajes. Estos mensajes no se muestran cuando Tabular Editor se usa sin conexión (es decir, sin conectarse a Analysis Services).
+- **Analysis Services**: Cuando se guardan cambios de metadatos en una instancia conectada de Analysis Services, el servidor actualiza los metadatos TOM para indicar si algún objeto está en un estado erróneo. En concreto, se actualizan las propiedades [State](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) y [ErrorMessage](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) de la medida. Tabular Editor muestra estos mensajes de error en la vista de mensajes. Estos mensajes no se muestran cuando Tabular Editor se usa sin conexión (es decir, sin conectarse a Analysis Services).
 - **Análisis semántico de Tabular Editor**: Además, Tabular Editor 3 realiza su propio análisis semántico de todas las expresiones DAX del modelo. Cualquier error de sintaxis o de semántica que se encuentre se informa aquí.
 - **Editor de expresiones**: Por último, si hay documentos abiertos en Tabular Editor 3, como el Editor de expresiones, cualquier error de sintaxis o de semántica de DAX que se encuentre en el documento se informa aquí.
 

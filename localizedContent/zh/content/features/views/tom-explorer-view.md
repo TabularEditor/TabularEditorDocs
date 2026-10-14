@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: TOM Explorer 视图
 author: Morten Lønskov
-updated: 2026-09-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,7 @@ applies_to:
 
 # 在 Tabular Editor 3 中使用 TOM Explorer
 
-TOM Explorer 是你与 Data model 对象交互的主窗口。表、列、度量值、安全组等对象都会以层次结构显示。 Tabular Data model 通过所谓的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 来表示，而 TOM Explorer 中显示的是该 TOM 的元数据。
+TOM Explorer 是你与 Data model 对象交互的主窗口。表、列、度量值、安全组等对象都会以层次结构显示。 Tabular Data model 由所谓的 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 表示；TOM Explorer 中显示的是该 TOM 的元数据。
 
 TOM Explorer 由两个主要区域组成：第一部分是 Data model 对象，第二部分是菜单栏，可用于筛选并更改主窗口中显示的内容。
 

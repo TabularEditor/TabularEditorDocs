@@ -2,7 +2,7 @@
 uid: script-output-things
 title: 以网格形式输出对象详细信息
 author: Daniel Otykier
-updated: 2024-12-13
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-另一种查看模型中对象及其配置概况的方法，是使用 C# 的 [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0) 类将它们以网格形式输出。这种技术非常灵活，你可以只把自己关心的信息作为 `DataTable` 的列添加进去。此外，将 `DataTable` 传给 `Output()` 方法时，Tabular Editor 会自动以网格视图显示它，这对检查数据非常方便。
+另一个概览模型中对象及其配置方式的方法，是使用 C# 的 [`DataTable`](https://learn.microsoft.com/dotnet/api/system.data.datatable?view=net-8.0) 类将它们以网格形式输出。这种技术非常灵活，你可以只把自己关心的信息作为 `DataTable` 的列添加进去。此外，将 `DataTable` 传给 `Output()` 方法时，Tabular Editor 会自动以网格视图显示它，这对检查数据非常方便。
 
 ## 脚本
 
