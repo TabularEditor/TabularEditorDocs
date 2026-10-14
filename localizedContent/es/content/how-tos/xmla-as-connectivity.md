@@ -20,7 +20,7 @@ applies_to:
 
 # Conectividad con XMLA / Analysis Services
 
-Tabular Editor uses the [AMO client library](https://learn.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) to connect to the Power BI / Fabric XMLA endpoint or instances of SQL Server or Azure Analysis Services (Tabular). La autenticación y la autorización las gestiona la biblioteca cliente de AMO, lo que significa que Tabular Editor no almacena credenciales ni tokens. Además, los usuarios deben tener permisos suficientes para conectarse al punto de conexión XMLA o a una instancia de Analysis Services. En la mayoría de los casos, el usuario debe ser miembro del rol de administrador del servidor de Analysis Services o tener permisos de administración en el Workspace de Power BI.
+Tabular Editor usa la [biblioteca cliente de AMO](https://learn.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) para conectarse al punto de conexión XMLA de Power BI / Fabric o a instancias de SQL Server o Azure Analysis Services (Tabular). La autenticación y la autorización las gestiona la biblioteca cliente de AMO, lo que significa que Tabular Editor no almacena credenciales ni tokens. Además, los usuarios deben tener permisos suficientes para conectarse al punto de conexión XMLA o a una instancia de Analysis Services. En la mayoría de los casos, el usuario debe ser miembro del rol de administrador del servidor de Analysis Services o tener permisos de administración en el Workspace de Power BI.
 
 En el siguiente artículo, usaremos el término "servidor de modelo semántico" para referirnos al servicio al que se accede a través del punto de conexión XMLA de Power BI / Fabric o de cualquier instancia de SQL Server Analysis Services Tabular (SSAS) o Azure Analysis Services (AAS).
 
@@ -60,7 +60,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 > [!NOTE]
 > Si se especifica la propiedad `Initial Catalog` en la cadena de conexión, no se mostrará el cuadro de diálogo **Select Database**, y Tabular Editor se conectará directamente a la base de datos especificada.
 
-Las cadenas de conexión OLAP admiten muchas propiedades además de las mostradas anteriormente. For a full list of properties, see the [Microsoft documentation](https://learn.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions).
+Las cadenas de conexión OLAP admiten muchas propiedades además de las mostradas anteriormente. Para ver la lista completa de propiedades, consulta la [documentación de Microsoft](https://learn.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions).
 
 Además de las propiedades enumeradas en la documentación, las cadenas de conexión de AMO también admiten las siguientes propiedades:
 
@@ -74,7 +74,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 Esto es útil si quieres que los mensajes de error y otros mensajes del servidor estén en un idioma específico. Si no se especifica la propiedad `Locale Identifier`, se usa el idioma del sistema operativo del cliente.
 
-La mayoría de las instancias de Analysis Services admiten varios idiomas. See [this page for a full list of locale identifiers (LCID)](https://learn.microsoft.com/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16).
+La mayoría de las instancias de Analysis Services admiten varios idiomas. Consulta [esta página para ver la lista completa de identificadores de configuración regional (LCID)](https://learn.microsoft.com/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16).
 
 ## Configuración de XMLA de Fabric/Power BI
 
@@ -90,7 +90,7 @@ A nivel de inquilino, la configuración puede estar restringida a ciertos usuari
 
 ### Lectura/escritura de XMLA en la capacidad
 
-Para usar el punto de conexión XMLA, asigna el Workspace que hospeda el modelo semántico a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU). The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). Este es el valor predeterminado desde junio de 2025.
+Para usar el punto de conexión XMLA, asigna el Workspace que hospeda el modelo semántico a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU). La capacidad debe tener el punto de conexión XMLA configurado como [**Lectura y escritura** en la configuración de la capacidad](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). Este es el valor predeterminado desde junio de 2025.
 
 ![Configuración de administración de la capacidad](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
@@ -103,7 +103,7 @@ Si se ha desactivado la lectura/escritura, pide al administrador de la capacidad
 
 ### Permisos de usuario a nivel de Workspace
 
-Para editar modelos usando el punto de conexión XMLA, la cuenta del usuario debe tener acceso al Workspace como **Colaborador**, **Miembro** o **Administrador**. En el Workspace, elige "Administrar acceso" y agrega la cuenta de usuario o un grupo de Entra ID al que pertenezca el usuario con el rol requerido. For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/fabric/fundamentals/roles-workspaces)
+Para editar modelos usando el punto de conexión XMLA, la cuenta del usuario debe tener acceso al Workspace como **Colaborador**, **Miembro** o **Administrador**. En el Workspace, elige "Administrar acceso" y agrega la cuenta de usuario o un grupo de Entra ID al que pertenezca el usuario con el rol requerido. Para obtener más información sobre los roles en Workspaces, consulta la documentación de Microsoft: [Roles in Workspaces](https://learn.microsoft.com/fabric/fundamentals/roles-workspaces)
 
 ### Lectura/escritura en el modelo semántico
 
@@ -133,7 +133,7 @@ Si un usuario distinto del propietario del modelo semántico necesita editar el 
 
 ## Tipos de modelo no compatibles
 
-Several types of models do not support XMLA connections, [listed below](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#unsupported-semantic-models).
+Varios tipos de modelos no admiten conexiones XMLA; [se enumeran a continuación](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#unsupported-semantic-models).
 
 No se puede acceder a los siguientes modelos semánticos mediante el punto de conexión XMLA. Estos modelos semánticos no aparecerán en el Workspace en Tabular Editor ni en ninguna otra herramienta.
 
@@ -143,7 +143,7 @@ No se puede acceder a los siguientes modelos semánticos mediante el punto de co
 - Modelos semánticos en Mi Workspace.
 - Modelos semánticos de libros de Excel
 
-In Fabric, the default semantic model of a lakehouse or warehouse can be opened/connected to in Tabular Editor, but [not edited](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations). Moreover, some operations that require read access to certain [DMVs](https://learn.microsoft.com/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions), such as collecting VertiPaq Analyzer statistics, may not be supported on default semantic models.
+En Fabric, el modelo semántico predeterminado de un Lakehouse o un Warehouse puede abrirse o conectarse desde Tabular Editor, pero [no se puede editar](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations). Además, algunas operaciones que requieren acceso de lectura a determinadas [DMVs](https://learn.microsoft.com/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions), como recopilar estadísticas del Analizador VertiPaq, podrían no estar admitidas en los modelos semánticos predeterminados.
 
 ## Solución de problemas de conexiones XMLA
 
@@ -153,7 +153,7 @@ Estos pasos muestran cómo conectarse de la forma más fiable a un modelo semán
 
 1. Para conectarse a un modelo semántico en Fabric, seleccione 'Archivo' > 'Abrir' > 'Modelo desde BD' (atajo predeterminado Ctrl+Shift+O)
 
-2. Se te mostrará un cuadro de diálogo (ver más abajo) y tendrás que pegar la cadena de conexión de Power BI en el cuadro de texto etiquetado como 'Servidor'. Deja el resto de opciones tal como aparecen en la captura de pantalla (son los valores predeterminados). La cadena de conexión tiene el formato que se muestra a continuación. You can find this connection string in the Service (more details here in this [Microsoft doc in the sections 'Connecting to a Premium Workspace' and 'To get the workspace connection URL'](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
+2. Se te mostrará un cuadro de diálogo (ver más abajo) y tendrás que pegar la cadena de conexión de Power BI en el cuadro de texto etiquetado como 'Servidor'. Deja el resto de opciones tal como aparecen en la captura de pantalla (son los valores predeterminados). La cadena de conexión tiene el formato que se muestra a continuación. Puedes encontrar esta cadena de conexión en el servicio (más detalles en este [documento de Microsoft, en las secciones 'Connecting to a Premium Workspace' y 'To get the workspace connection URL'](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
 
 ![Cargar modelo desde base de datos](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
 
@@ -188,7 +188,7 @@ A continuación tienes un ejemplo. Tu ID de tenant y el nombre de tu Workspace s
 - Anterior: `powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName`
 - Nuevo: `powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName`
 
-You can also use the tenant name (e.g. `fabrikam.com`) as shown in [this article](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace).
+También puedes usar el nombre del tenant (p. ej., `fabrikam.com`), como se muestra en [este artículo](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace).
 
 A continuación, intenta conectarte siguiendo al pie de la letra las instrucciones de la sección [Probar una conexión simple](#testing-a-simple-connection)
 
@@ -196,7 +196,7 @@ A continuación, intenta conectarte siguiendo al pie de la letra las instruccion
 
 Puede haber problemas al conectarte a un modelo si el nombre del Workspace está duplicado con el de otro Workspace o si el nombre del modelo está duplicado con el de otro modelo.
 
-If there are duplicate names, please refer to Microsoft's documentation in the sections ["Duplicate workspace names" and "Duplicate semantic model name"](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names) to learn how to modify the connection string to address these issues
+Si hay nombres duplicados, consulta la documentación de Microsoft en las secciones ["Nombres de Workspace duplicados" y "Nombre de modelo semántico duplicado"](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names) para saber cómo modificar la cadena de conexión y solucionar estos problemas
 
 ### Gestión de proxy
 
