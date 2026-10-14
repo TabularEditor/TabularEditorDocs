@@ -2,7 +2,7 @@
 uid: general-introduction
 title: 总体介绍和体系结构
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ Tabular Editor 是一款用于开发表格模型的 Windows 桌面应用程序�
 - 当使用 Visual Studio 创建表格模型时，用于表示 TOM 元数据的 JSON 会存储在名为 **Model.bim** 的文件中。
 - 当使用 Power BI Desktop 创建 Data model 时，TOM 元数据会嵌入在 .pbix 或 .pbit 文件中 (因为这种文件格式还包含许多其他细节，例如 Visual 的定义、Bookmark 等，而这些与 Data model 本身无关)。
 
-借助名为 [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 的客户端库，Tabular Editor 能够从这种基于 JSON 的格式加载元数据，并将其保存回该格式。此外，该客户端库还允许 Tabular Editor 直接连接到任何 Analysis Services 实例，以便从现有数据库获取模型元数据。下图对此进行了说明。
+Using a client library called [AMO/TOM](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor is able to load and save metadata to and from this JSON based format. 此外，该客户端库还允许 Tabular Editor 直接连接到任何 Analysis Services 实例，以便从现有数据库获取模型元数据。下图对此进行了说明。
 
 ![架构](~/content/assets/images/architecture.png)
 
@@ -42,7 +42,7 @@ Tabular Editor 可从以下来源加载模型元数据：
 - [6] 已分配到容量的 Power BI Workspace 中的语义模型\*
 - [7] Import/DirectQuery 模式下的 Power BI Desktop Report
 
-\*第三方工具通过 [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools) 连接到 Power BI 语义模型。这需要 Microsoft Fabric capacity（F SKU）、Power BI Embedded 容量（A 或 EM SKU）、旧版 Premium 容量（P SKU）或 Premium Per User 许可证。自 2025 年六月起，所有容量 SKU 默认已启用 XMLA 读取/写入；如果无法连接，请参阅 @xmla-as-connectivity。
+\*Third party tools connect to Power BI semantic models through the [XMLA endpoint](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools). 这需要 Microsoft Fabric capacity（F SKU）、Power BI Embedded 容量（A 或 EM SKU）、旧版 Premium 容量（P SKU）或 Premium Per User 许可证。自 2025 年六月起，所有容量 SKU 默认已启用 XMLA 读取/写入；如果无法连接，请参阅 @xmla-as-connectivity。
 
 > [!IMPORTANT]
 > Tabular Editor 2.x 支持以上 1-7 的所有来源。 Tabular Editor 3 仅支持其中部分来源，具体取决于你使用的是哪种 [Tabular Editor 3 版本](xref:editions)。
@@ -76,7 +76,7 @@ TOM **对象属性**示例：
 
 大多数属性都是简单值（文本、true/false、从选项中选择其一，也称为。枚举），但属性也可以引用其他对象（例如，`Sort By Column` 属性应引用一列）。属性也可以是对象数组，例如模型角色对象上的 `Members` 属性。
 
-Tabular Editor 通常沿用 [Microsoft.AnalysisServices.Tabular 命名空间](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) 中定义的对象和属性名称。如果你想进一步了解特定的 TOM 对象或属性，请始终查阅命名空间文档。例如，要了解“Summarize By”这一列属性的作用，先在 Microsoft 文档中找到“Column”类，然后展开“Properties”，再滚动到“SummarizeBy”。然后你会看到[这篇文章](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet)。
+Tabular Editor generally uses the same name for objects and properties as those defined in the [Microsoft.AnalysisServices.Tabular namespace](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). 如果你想进一步了解特定的 TOM 对象或属性，请始终查阅命名空间文档。例如，要了解“Summarize By”这一列属性的作用，先在 Microsoft 文档中找到“Column”类，然后展开“Properties”，再滚动到“SummarizeBy”。 You should then get to [this article](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
 
 ![Microsoft 文档中的 SummarizeBy](~/content/assets/images/asdocs-summarizyby.png)
 
