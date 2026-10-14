@@ -2,7 +2,7 @@
 uid: refresh-overrides
 title: 刷新覆盖配置文件
 author: Daniel Otykier
-updated: 2026-01-20
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,7 +36,7 @@ applies_to:
 
 ## 覆盖配置文件结构
 
-覆盖配置文件使用符合[TMSL 刷新命令规范](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)的 JSON。该 JSON 是一个由覆盖对象组成的数组，其中每个对象可以包含以下一项或多项内容：
+覆盖配置文件使用的 JSON 格式遵循 [TMSL 刷新命令规范](https://learn.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)。该 JSON 是一个由覆盖对象组成的数组，其中每个对象可以包含以下一项或多项内容：
 
 - `scope` - 将覆盖范围限定为特定的表或分区（可选）
 - `dataSources` - 覆盖数据源连接属性
