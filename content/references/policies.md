@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -246,6 +246,6 @@ If scripting is something your organization wants to keep, but not at the cost o
 
 If you want to prevent all AI functionality, specify the `DisableAi` policy. This prevents anything AI-related from loading at startup and clears any stored API key configuration. It applies in every edition and needs no Enterprise license.
 
-From 3.27.0 the installer reads the policy too, from all six keys and with the same precedence, and leaves the AI component out entirely, so the AI assemblies are never written to the installation folder on a machine whose policy disables AI. Set the value as a `REG_DWORD` of `1`: the installer treats `1` as *disable* and any other present value as *not disabled*, where the application accepts any non-zero number. See [Deploying without the AI features](xref:installation-activation-basic#deploying-without-the-ai-features) for deploying the feature selection and the policy together.
+From 3.27.0 the installer reads the policy too, from all six keys and with the same precedence. A new installation leaves the AI component out, and an upgrade removes it from a machine that has it. An existing installation keeps the AI files until the next upgrade, and Tabular Editor 3 doesn't load them while the policy is set. Set the value as a `REG_DWORD` of `1`: the installer treats `1` as *disable* and any other present value as *not disabled*, where the application accepts any non-zero number. See [Enforcing the decision with the DisableAi policy](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy) for deploying the feature selection and the policy together.
 
 To keep the AI Assistant available but confine what it may do, use the Enterprise policies above instead: set the permission limits to what your organization is comfortable with, lock the provider and endpoint to a gateway you operate, and use `McpDisabledTools` to withhold individual tools from connected agents.
