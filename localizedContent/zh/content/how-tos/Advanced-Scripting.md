@@ -2,7 +2,7 @@
 uid: advanced-scripting
 title: 高级脚本
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -261,7 +261,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Rosl
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\Roslyn
 ```
 
-VS2022 最新更新随附的编译器支持 [C# 12.0 语言特性](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12)，可通过在编译器选项中指定以下内容来启用：
+The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
 
 ```
 -langversion:12.0
