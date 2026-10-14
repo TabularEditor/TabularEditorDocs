@@ -155,5 +155,5 @@ Si has definido tanto una expresión a nivel de tabla como una a nivel de medida
 
 - [DAX Guide: SELECTCOLUMNS](https://dax.guide/selectcolumns/)
 - [DAX Guide: RELATED](https://dax.guide/related/)
-- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
+- [Microsoft Docs: Expresiones de filas de detalle](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
 - [SQLBI: Controlling drillthrough in Excel PivotTables](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)
