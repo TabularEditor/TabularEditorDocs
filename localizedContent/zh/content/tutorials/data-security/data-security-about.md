@@ -2,7 +2,7 @@
 uid: data-security-about
 title: 什么是数据安全？
 author: Kurt Buhler
-updated: 2023-03-02
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,9 +23,9 @@ applies_to:
 
 ---
 
-已发布的 Dataset 可以使用 <span style="color:#01a99d">[行级安全性 (RLS)](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls)</span>（用于表）或 <span style="color:#8d7bae">[对象级安全性 (OLS)](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-ols?tabs=table)</span>（用于表和列）来配置数据安全性。**数据安全旨在确保用户只能查看和使用其获准访问的数据——无论是在已发布的 Report 中，还是在构建自助式数据解决方案时。** 为此，系统会将用户分配到已配置 <span style="color:#01a99d">**RLS**</span> 或 <span style="color:#8d7bae">**OLS**</span> 规则的 **角色** 中；这些规则会对由 Report 以及 Power BI Desktop、Excel 等客户端工具生成的查询进行 <span style="color:#01a99d">**FILTER（RLS）**</span> 或 <span style="color:#8d7bae">**限制（OLS）**</span>。
+Published datasets can be configured with Data Security using <span style="color:#01a99d">[Row-Level Security (RLS)](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls)</span> (for Tables) or <span style="color:#8d7bae">[Object-Level Security (OLS)](https://learn.microsoft.com/power-bi/enterprise/service-admin-ols?tabs=table)</span> (for Tables & Columns). **数据安全旨在确保用户只能查看和使用其获准访问的数据——无论是在已发布的 Report 中，还是在构建自助式数据解决方案时。** 为此，系统会将用户分配到已配置 <span style="color:#01a99d">**RLS**</span> 或 <span style="color:#8d7bae">**OLS**</span> 规则的 **角色** 中；这些规则会对由 Report 以及 Power BI Desktop、Excel 等客户端工具生成的查询进行 <span style="color:#01a99d">**FILTER（RLS）**</span> 或 <span style="color:#8d7bae">**限制（OLS）**</span>。
 
-虽然[并非强制](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance#when-to-avoid-using-rls)，但[数据安全是健壮、安全且合规的企业级 BI 解决方案中的常见功能](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning#enforce-data-security-based-on-consumer-identity)。本系列将从功能角度介绍数据安全性，重点说明其在表格建模和 Tabular Editor 中的应用。
+While [not obligatory](https://learn.microsoft.com/power-bi/guidance/rls-guidance#when-to-avoid-using-rls), [Data Security is a common feature of a robust, secure & compliant enterprise BI solution](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning#enforce-data-security-based-on-consumer-identity). 本系列将从功能角度介绍数据安全性，重点说明其在表格建模和 Tabular Editor 中的应用。
 
 _在 Tabular Editor 中，可以轻松配置、修改并测试 RLS 和 OLS。_
 
@@ -52,7 +52,7 @@ _在 Tabular Editor 中，可以轻松配置、修改并测试 RLS 和 OLS。_
 
 #### 1. **创建角色：**
 
-_角色_ 是拥有相同权限或数据安全逻辑的用户组。此处的 _用户_ 通过其邮箱地址识别，也可以使用 [Azure AD 安全组](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#integration-with-azure-ad) 的邮箱地址进行识别。角色示例：
+_角色_ 是拥有相同权限或数据安全逻辑的用户组。 _Users_ in this case are identified by their email, or the email of an [Azure AD Security Group](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#integration-with-azure-ad). 角色示例：
 
 - 同一地区、团队或部门的用户（_EMEA_、_UA Sales Team_）。
 - 具有相同角色、职能或访问级别的用户（_Key Account Managers_、_SC Clearance_）。
@@ -92,9 +92,9 @@ _角色_ 是拥有相同权限或数据安全逻辑的用户组。此处的 _用
 
 在 Dataset 中完成配置后，需要将用户添加到其对应的角色中。
 
-- _Power BI:_ 可通过 Tabular Editor 或 **Power BI/Fabric 服务** 分配角色；操作入口在 Workspace 的 Dataset 设置中：[详见此处](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security#manage-security-on-your-model)。
+- _Power BI:_ Roles are assigned either via Tabular Editor or the **Power BI/Fabric service**, [in the dataset settings from the Workspace](https://learn.microsoft.com/fabric/security/service-admin-row-level-security#manage-security-on-your-model).
 - _SSAS / AAS:_ 在角色对象上右键单击并选择“编辑成员...”，即可分配角色成员……
-- _Power BI Embedded:_ 你必须[生成嵌入令牌](https://learn.microsoft.com/en-us/power-bi/developer/embedded/cloud-rls#generate-an-embed-token)。
+- _Power BI Embedded:_ You must [generate an embed token](https://learn.microsoft.com/power-bi/developer/embedded/cloud-rls#generate-an-embed-token).
 
 你可以通过 Tabular Editor 按以下方式将用户/组添加到角色中或从角色中移除：
 
@@ -118,18 +118,18 @@ _角色_ 是拥有相同权限或数据安全逻辑的用户组。此处的 _用
 > 如果你的组织在 SQL Server Analysis Services 中使用本地 Active Directory，则需要使用 **Windows AD Member** 选项，而不是 **Azure AD Member**。
 
 > [!NOTE]
-> [建议](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#strategy-for-using-groups)使用 [Azure Active Directory 组](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/how-to-manage-groups) 来管理数据安全与访问控制。<br>推荐采用这种方法，因为它可以让你集中管理安全性和用户分组。
+> It is [recommended](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#strategy-for-using-groups) to manage Data Security and Access with [Azure Active Directory Groups](https://learn.microsoft.com/azure/active-directory/fundamentals/how-to-manage-groups). <br>推荐采用这种方法，因为它可以让你集中管理安全性和用户分组。
 
 #### 4. **为用户开通 Dataset 访问权限：**
 
-_Power BI:_ 必须根据[使用场景](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-overview)为用户授予 Dataset 访问权限。
+_Power BI:_ Users must be given dataset access according to the [usage scenario](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-overview).
 
 - _App Audience:_ 将用户/其 Azure AD 组添加到相应的 [App Audience](https://data-goblins.com/power-bi/app-audiences)。
-- _Workspace Viewer:_ 将用户/其 Azure AD 组添加为 [Workspace Viewer](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-workspaces-workspace-level-planning#workspace-access)
-- _Dataset 读取者:_ 可通过 Dataset 或其依赖项向用户 / 其 Azure AD 组授予 [Dataset 专属权限](https://learn.microsoft.com/en-us/power-bi/connect-data/service-datasets-manage-access-permissions)（即。 Report)。
+- _Workspace Viewer:_ Users / their Azure AD Groups are added as [Workspace Viewers](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-workspaces-workspace-level-planning#workspace-access)
+- _Dataset Readers:_ Users / their Azure AD Groups are given [Dataset-specific permissions](https://learn.microsoft.com/power-bi/connect-data/service-datasets-manage-access-permissions) via a Dataset or dependent item (i.e. Report)。
 
 > [!WARNING]
-> 被分配为[管理员、成员或参与者 Workspace 角色](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces#workspace-roles)的用户对 Dataset 拥有___写入权限___。因此，对于具有这些角色的用户，RLS 和 OLS 等数据安全性机制不会筛选或阻止数据。 <br><br>
+> Users given [Admin, Member or Contributor Workspace Roles](https://learn.microsoft.com/power-bi/collaborate-share/service-roles-new-workspaces#workspace-roles) have **_write permissions_** to a dataset. 因此，对于具有这些角色的用户，RLS 和 OLS 等数据安全性机制不会筛选或阻止数据。 <br><br>
 > **_如果用户是管理员、成员或参与者，他们将能够看到所有数据_**。 <br><br>
 > 在合理可行的前提下，尽量通过 Power BI 应用分发和管理权限。
 
@@ -138,7 +138,7 @@ _Power BI:_ 必须根据[使用场景](https://learn.microsoft.com/en-us/power-b
 只有在添加用户组并授予其访问权限后，才能通过用户模拟来测试 RLS 和 OLS。你可以通过以下方式验证安全性：
 
 - _Tabular Editor：_ 使用[用户模拟](data-security-testing.md)。
-- _Power BI 服务：_ 在 [Dataset 安全设置](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#validating-the-role-within-the-power-bi-service) 中。
+- _Power BI Service:_ In the [Dataset Security settings](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#validating-the-role-within-the-power-bi-service).
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 5：</strong>使用 Tabular Editor 通过用户模拟来测试数据安全性，是最简单的方法。你可以在任何数据查询功能中使用“模拟”选项（DAX 查询、Pivot Grid、预览数据）。</figcaption>
@@ -373,12 +373,12 @@ _被授予 Dataset 构建权限的用户会被添加到 Build Azure AD 安全组
 
 某些 Report 或 Data model 功能在启用 RLS 或 OLS 后将无法使用。例如：
 
-1. [RLS 限制](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#considerations-and-limitations)
+1. [RLS Limitations](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#considerations-and-limitations)
    - 已添加到 RLS 角色的服务主体
    - 使用 SSO 测试 DirectQuery 模型
-   - [Power BI 中的“发布到 Web”](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance#when-to-avoid-using-rls)
+   - [Publish-to-Web in Power BI](https://learn.microsoft.com/power-bi/guidance/rls-guidance#when-to-avoid-using-rls)
 
-2. [OLS 限制](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-ols?tabs=table#considerations-and-limitations)
+2. [OLS Limitations](https://learn.microsoft.com/power-bi/enterprise/service-admin-ols?tabs=table#considerations-and-limitations)
    - 合并单独的 RLS 角色和 OLS 角色（如上所述）
    - 问答功能
    - 快速见解
@@ -391,8 +391,8 @@ _被授予 Dataset 构建权限的用户会被添加到 Build Azure AD 安全组
 
 如需进一步深入了解数据安全，请参阅以下资料：
 
-1. [Power BI 安全白皮书](https://learn.microsoft.com/en-us/power-bi/guidance/whitepaper-powerbi-security)
-2. [Power BI 文档 - 安全性](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-power-bi-security)
-3. [Analysis Services 文档 - 对象级安全性](https://learn.microsoft.com/en-us/analysis-services/tabular-models/object-level-security?view=asallproducts-allversions)
-4. [Power BI 实施规划 - 安全性](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning)
-5. [(相关) Power BI 实施规划 - 信息保护与数据丢失防护（DLP）](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-info-protection-data-loss-prevention-overview)
+1. [Power BI Security Whitepaper](https://learn.microsoft.com/power-bi/guidance/whitepaper-powerbi-security)
+2. [Power BI Docs - Security](https://learn.microsoft.com/power-bi/enterprise/service-admin-power-bi-security)
+3. [Analysis Services Docs - Object-Level Security](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security?view=asallproducts-allversions)
+4. [Power BI Implementation Planning - Security](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning)
+5. [(Related) Power BI Implementation Planning - Information Protection & Data Loss Prevention (DLP)](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-info-protection-data-loss-prevention-overview)
