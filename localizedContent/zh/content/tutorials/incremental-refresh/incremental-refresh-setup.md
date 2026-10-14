@@ -26,13 +26,12 @@ applies_to:
 要设置增量刷新，你必须为该表配置一项新的刷新策略。将 _EnableRefreshPolicy_ 设置为 `True` 后，只需配置刷新策略属性即可轻松完成：
 
 > [!IMPORTANT]
-> 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。
-> For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。对于 Analysis Services，需要进行自定义[分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ### 配置新的刷新策略
 
 1. **连接到模型：** 连接到 Workspace 的 Power BI XMLA endpoint，并打开要配置增量刷新的 Dataset。
-2. **Create the `RangeStart` and `RangeEnd` Parameters:** Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)). 在 Tabular Editor 中新增两个共享表达式：
+2. **创建 `RangeStart` 和 `RangeEnd` 参数：** 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[了解详情](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。在 Tabular Editor 中新增两个共享表达式：
 
 <img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="创建共享表达式" style="width:400px !important"/>
 
@@ -72,7 +71,7 @@ applies_to:
     )
 ```
 
-日期、字符串或整数类型的列仍可进行筛选，同时通过使用将 `RangeStart` 或 `RangeEnd` 转换为相应数据类型的函数来保持查询折叠。 For more information about this, see [here](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+日期、字符串或整数类型的列仍可进行筛选，同时通过使用将 `RangeStart` 或 `RangeEnd` 转换为相应数据类型的函数来保持查询折叠。有关详细信息，请参阅[此处](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 7. **配置刷新策略：** 根据所需的增量刷新策略配置其余属性。记得为 `SourceExpression` 属性指定一个 M 表达式（该表达式会添加到由增量刷新的刷新策略创建的分区中，并应使用 `RangeStart` 和 `RangeEnd` 参数在源中筛选数据）。 `=` 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能会导致数据重复。
 
@@ -207,7 +206,7 @@ in
    #"Incremental Refresh" 
 ```
 
-See also the documentation for the `Date.FromText` function in Power Query [here](https://learn.microsoft.com/powerquery-m/date-fromtext). 如果无法在保留查询折叠的同时以内联方式转换 Date 列，也可以使用本机查询来配置增量刷新，如下节所述。
+另请参阅 Power Query 中 `Date.FromText` 函数的文档：[此处](https://learn.microsoft.com/powerquery-m/date-fromtext)。如果无法在保留查询折叠的同时以内联方式转换 Date 列，也可以使用本机查询来配置增量刷新，如下节所述。
 
 -------------
 
