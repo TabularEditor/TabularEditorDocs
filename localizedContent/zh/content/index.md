@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 ---
 
 # Tabular Editor
@@ -77,7 +77,7 @@ Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Ser
 
 ### 常见功能
 
-在可用的数据建模选项方面，两款工具提供的功能相同：它们通过直观且响应迅速的用户界面，基本上公开了 [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 的所有对象和属性。你可以编辑标准工具中无法设置的高级对象属性。这些工具可以从文件或任何 Analysis Services 实例中加载模型元数据。更改只会在你按下 Ctrl+S（保存）时才会同步，从而带来一种“离线”编辑体验；大多数人认为这比标准工具的“始终同步”模式更好。在处理大型且复杂的数据模型时，这一点尤为明显。
+Both tools provide the same features in terms of which data modeling options are available, by basically exposing every object and property of the [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), in an intuitive and responsive user interface. 你可以编辑标准工具中无法设置的高级对象属性。这些工具可以从文件或任何 Analysis Services 实例中加载模型元数据。更改只会在你按下 Ctrl+S（保存）时才会同步，从而带来一种“离线”编辑体验；大多数人认为这比标准工具的“始终同步”模式更好。在处理大型且复杂的数据模型时，这一点尤为明显。
 
 此外，两款工具都支持批量修改模型元数据、批量重命名对象、复制/粘贴对象，以及在表和显示文件夹之间拖放对象等。这些工具甚至支持撤消/重做。
 
