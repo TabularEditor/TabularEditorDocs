@@ -2,7 +2,7 @@
 uid: editions
 title: Comparar ediciones
 author: Søren Toft Joensen
-updated: 2026-09-22
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -134,7 +134,7 @@ También restringimos algunas operaciones de modelado de datos dentro de Tabular
 
 En concreto, [Azure AS Basic Tier y SQL Server Standard Edition no admiten perspectivas ni múltiples particiones](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), por lo que los modelos de SSAS/Azure AS que usan estas funciones requieren la Edición Enterprise de TE3. DirectQuery no está restringido en absoluto por tu edición de Tabular Editor 3: que puedas usarlo depende del servidor en el que esté alojado el modelo.
 
-Del mismo modo, [los Workspaces de Power BI Premium-Per-User no admiten los Datasets de Direct Lake](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites), por eso los modelos de Power BI que usan esta función también requieren la Edición Enterprise de TE3.
+Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
 
 | Tipo de modelo  | Funcionalidad             | Desktop                                                 | Business                                                | Enterprise                                              |
 | --------------- | ------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
@@ -147,7 +147,7 @@ Del mismo modo, [los Workspaces de Power BI Premium-Per-User no admiten los Data
 | Power BI        | DirectQuery               | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 | Power BI        | Direct Lake               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
-\***Nota:** Analysis Services en SQL Server Standard Edition anterior a 2019 no admite DirectQuery. Tampoco lo admite el nivel Basic de Azure AS. [Más información](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
+\***Nota:** Analysis Services en SQL Server Standard Edition anterior a 2019 no admite DirectQuery. Tampoco lo admite el nivel Basic de Azure AS. [Learn more](https://learn.microsoft.com/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
 
 \*\***Nota:** Las perspectivas y las múltiples particiones están disponibles en la Edición Business para modelos de Power BI, pero el `CompatibilityMode` del modelo debe establecerse en `PowerBI`. Consulte [Cambiar el modo de compatibilidad](xref:change-compatibility-mode) para obtener instrucciones.
 
