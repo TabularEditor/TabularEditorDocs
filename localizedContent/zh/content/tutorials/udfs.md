@@ -125,9 +125,9 @@ ROW(
 
 如需约束可选的参数类型，请在评估模式前加上数据类型，例如 `x: INT64 VAL` 或 `y: TABLE EXPR`。如果指定了类型，参数会隐式转换为该类型，Tabular Editor 3 还会在编写调用该函数的代码时，根据该类型提供自动补全建议。
 
-Tabular Editor 3 会根据声明的参数类型验证实参。 If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 会根据声明的参数类型验证实参。如果调用 UDF 时传入的实参类型与形参类型不匹配，例如在需要 `TABLEREF` 参数的位置传入标量值，语义分析器会Report警告或错误。
 
-Check the [Microsoft specification for UDFs](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
+有关可用约束的完整列表，请参阅 [Microsoft UDF 规范](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions)。
 
 ### 带默认表达式的可选参数
 
