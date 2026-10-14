@@ -2,7 +2,7 @@
 uid: useful-script-snippets
 title: 实用脚本片段
 author: Daniel Otykier
-updated: 2026-04-10
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -715,12 +715,12 @@ foreach(var col in aggTable.Columns)
 
 以下方法可用：
 
-| 方法                                                            | 描述                                                                                                                                                                                                                                                                                               |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | 这个方法会将指定的 TMSL 或 XMLA 脚本传递给已连接的 Analysis Services 实例。当你想要刷新 AS 实例中某个表的数据时，这会很有用。注意，如果你用这个方法更改模型元数据，本地模型元数据将与 AS 实例上的元数据不同步，并且下次尝试保存模型元数据时，你可能会收到版本冲突警告。如果要发送 XMLA 脚本，请将 `isXmla` 参数设为 `true`。                                                                                                    |
-| `IDataReader ExecuteReader(string dax)`                       | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回得到的 [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。注意，你不能同时打开多个数据读取器。如果你忘记显式关闭或释放读取器，Tabular Editor 会自动关闭它们。   |
-| `Dataset ExecuteDax(string dax)`                              | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回一个 [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。返回的 Dataset 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。不建议返回超大的数据表，因为这可能会导致内存不足或其他稳定性问题。 |
-| `object EvaluateDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示执行结果的对象。如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                             |
+| 方法                                                            | 描述                                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | 这个方法会将指定的 TMSL 或 XMLA 脚本传递给已连接的 Analysis Services 实例。当你想要刷新 AS 实例中某个表的数据时，这会很有用。注意，如果你用这个方法更改模型元数据，本地模型元数据将与 AS 实例上的元数据不同步，并且下次尝试保存模型元数据时，你可能会收到版本冲突警告。如果要发送 XMLA 脚本，请将 `isXmla` 参数设为 `true`。                                                                                            |
+| `IDataReader ExecuteReader(string dax)`                       | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回得到的 [AmoDataReader](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。注意，你不能同时打开多个数据读取器。如果你忘记显式关闭或释放读取器，Tabular Editor 会自动关闭它们。 |
+| `Dataset ExecuteDax(string dax)`                              | 针对已连接的 AS 数据库执行指定的 DAX _查询_，并返回一个包含查询返回数据的 [Dataset](https://docs.microsoft.com/dotnet/api/system.data.dataset?view=netframework-4.6) 对象。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。返回的 Dataset 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。不建议返回超大的数据表，因为这可能会导致内存不足或其他稳定性问题。  |
+| `object EvaluateDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示执行结果的对象。如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                           |
 
 直接调用这些方法，无需任何前缀。在 Tabular Editor 3.26.x 及更早版本中，也可以通过 `Model.Database` 对象调用它们；从 3.27.0 开始则不再支持，因此 `Model.Database.ExecuteCommand(tmsl)` 将无法再通过编译，应改用 `ExecuteCommand(tmsl)`。
 
