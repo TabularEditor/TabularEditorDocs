@@ -23,7 +23,7 @@ applies_to:
 本页将指导您使用 Tabular Editor 3 从零开始创建一个新的 Analysis Services 表格模型。
 
 > [!NOTE]
-> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier). 请注意：在这些层级中，部分建模功能不受支持。
+> Tabular Editor 3 商业版仅支持 [SQL Server Standard Edition](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) 和 [Azure Analysis Services Basic Tier](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier)。请注意：在这些层级中，部分建模功能不受支持。
 
 ##### 创建新模型
 
@@ -53,7 +53,7 @@ applies_to:
 
 #### 添加数据源和表
 
-在将数据导入表格模型之前，你必须先设置一个或多个数据源。找到 TOM Explorer，右键单击“数据源”文件夹，然后选择“创建”。对于兼容级别为 1400 或更高的模型，有两种选择：Legacy 数据源和 Power Query 数据源。 To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+在将数据导入表格模型之前，你必须先设置一个或多个数据源。找到 TOM Explorer，右键单击“数据源”文件夹，然后选择“创建”。对于兼容级别为 1400 或更高的模型，有两种选择：Legacy 数据源和 Power Query 数据源。若要进一步了解这两类数据源之间的差异，请参阅 [Microsoft Analysis Services 博客](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400)。
 
 ![添加数据源](~/content/assets/images/new-as-model-add-data-source.png)
 
