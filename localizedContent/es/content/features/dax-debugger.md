@@ -2,7 +2,7 @@
 uid: dax-debugger
 title: Depurador de DAX
 author: Daniel Otykier
-updated: 2022-01-19
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ applies_to:
 
 No es ningún secreto que DAX es un lenguaje relativamente complejo y difícil de dominar. La mayoría de los desarrolladores de modelos de datos probablemente han experimentado una situación en la que el código DAX no devolvió el resultado esperado. En este caso, ayuda desglosar el código, variable por variable y llamada a función por llamada a función, para entender mejor qué está pasando.
 
-Hasta ahora, este “desglose” del código era una tarea tediosa y que consumía mucho tiempo, y a menudo implicaba capturar consultas DAX ejecutadas por herramientas cliente, para poder desglosarlas y ejecutar partes más pequeñas de las consultas en [DAX Studio](https://daxstudio.org/) o [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
+Hasta ahora, este «desglose» del código era una tarea tediosa y que llevaba mucho tiempo, y a menudo implicaba capturar consultas DAX ejecutadas por herramientas cliente para poder desglosarlas y ejecutar partes más pequeñas de las consultas en [DAX Studio](https://daxstudio.org/) o [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
 
 Tabular Editor 3 introduce el **Depurador de DAX**, una herramienta que hace que el proceso de depurar paso a paso el código DAX de tu modelo sea mucho, mucho más sencillo. A nivel conceptual, el depurador es similar a los depuradores tradicionales de los IDE, como el que se encuentra en Visual Studio al desarrollar aplicaciones C#.
 
@@ -68,7 +68,7 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 2. Escribe o pega la consulta DAX. Normalmente, se trata de una consulta compuesta por una llamada a `SUMMARIZECOLUMNS` con una o varias medidas (explícitas), como la que generan los objetos Visual en Power BI.
 
 > [!TIP]
-> Puedes usar el [Performance Analyzer](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-performance-analyzer) en Power BI Desktop para capturar la consulta generada por los objetos Visual.
+> Puedes usar el [Performance Analyzer](https://docs.microsoft.com/power-bi/create-reports/desktop-performance-analyzer) en Power BI Desktop para capturar la consulta generada por los objetos Visual.
 
 3. Pulsa F5 para ejecutar la consulta en Tabular Editor 3. Localiza el valor que quieras depurar, haz clic con el botón derecho en la celda y elige **Depurar**.
 
@@ -213,7 +213,7 @@ Actualmente, el Depurador de DAX tiene las siguientes limitaciones:
 - Actualmente no se admiten las consultas que contengan medidas implícitas o cálculos con ámbito de consulta.
 - Al examinar las primeras 1000 filas de un iterador que proviene de una expresión de tabla filtrada, la fila seleccionada en la ventana de exploración puede no corresponder siempre al contexto de fila actual en la pila de contexto de evaluación (escribe `CALCULATETABLE('<table name>')` en la ventana **Watch** para inspeccionar el contexto de fila actual).
 - Actualmente, el depurador solo permite depurar expresiones DAX en medidas.
-- Los [cálculos visuales](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview) no se pueden depurar, ya que se definen mediante columnas con alcance de consulta. Actualmente, el depurador no admite objetos con ámbito de consulta.
+- Los [cálculos Visual](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview) no se pueden depurar, ya que se definen mediante columnas con alcance de consulta. Actualmente, el depurador no admite objetos con ámbito de consulta.
 - Si una medida se modifica mediante un elemento de cálculo en el contexto de filtro, los resultados parciales mostrados en la vista Watch / Locals del depurador pueden ser incorrectos.
 
 Si encuentras un problema con el depurador, distinto de los indicados anteriormente, publícalo en nuestro [seguimiento de incidencias](https://github.com/TabularEditor/TabularEditor3/issues) en el sitio de soporte de la comunidad de TE3 en GitHub.
