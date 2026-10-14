@@ -19,7 +19,7 @@ applies_to:
 
 # Power BI Desktop 集成
 
-[Power BI Desktop supports External Tools](https://docs.microsoft.com/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
+[Power BI Desktop 支持外部工具](https://docs.microsoft.com/power-bi/create-reports/desktop-external-tools)，这使 Tabular Editor 在 Power BI Desktop 中处理导入模式或 DirectQuery 数据时能够执行建模操作。
 
 ![从 Power BI Desktop 的“外部工具”功能区启动的 Tabular Editor 3，表达式编辑器中打开了一个度量值](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
@@ -28,7 +28,7 @@ applies_to:
 - [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494)（2020 年七月或更高版本）
 - [最新版 Tabular Editor](https://tabulareditor.com/downloads)
 
-Also, it is highly recommended that [automatic date/time](https://docs.microsoft.com/power-bi/transform-model/desktop-auto-date-time) is **disabled** (Power BI Desktop setting under "Data Load").
+此外，强烈建议**禁用**[自动日期/时间](https://docs.microsoft.com/power-bi/transform-model/desktop-auto-date-time)（Power BI Desktop 中“数据加载”下的设置）。
 
 ## 外部工具架构
 
@@ -44,7 +44,7 @@ Power BI Desktop 会为该 Analysis Services 实例分配一个端口号。当�
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). 从这一点来看，由 Power BI Desktop 管理的 Analysis Services 实例与任何其他类型的 Analysis Services 实例并无不同。
+连接到 Analysis Services 实例后，外部工具可以获取模型元数据信息，针对 Data model 执行 DAX 或 MDX 查询，甚至可以通过[Microsoft 提供的客户端库](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions)对模型元数据进行更改。从这一点来看，由 Power BI Desktop 管理的 Analysis Services 实例与任何其他类型的 Analysis Services 实例并无不同。
 
 ## 支持的建模操作
 
