@@ -2,7 +2,7 @@
 uid: composite-model-measure-formatting
 title: Propiedades de formato de medidas en modelos compuestos
 author: Equipo de soporte
-updated: 2026-01-26
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -189,9 +189,9 @@ Si el formato sigue sin verse correcto en el Report, crea una medida envolvente 
 
 ## Recursos adicionales
 
-- **[Microsoft Docs - Cadenas de formato de medidas](https://learn.microsoft.com/en-us/analysis-services/tmsl/measures-object-tmsl)**: Documentación oficial sobre el formato de medidas en el Tabular Object Model.
-- **[Modelos compuestos en Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models)**: Cómo funcionan las conexiones en vivo y la arquitectura de modelos compuestos.
-- **[Cadenas de formato dinámicas](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-dynamic-format-strings)**: Disponibilidad de la funcionalidad y guía de uso.
+- **[Microsoft Docs - Measure Format Strings](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**: Official documentation on measure formatting in the Tabular Object Model.
+- **[Composite Models in Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**: Understanding Live connections and composite model architecture.
+- **[Dynamic Format Strings](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**: Feature availability and usage guidance.
 
 ---
 
