@@ -13,7 +13,7 @@ applies_to:
 
 # Implementar agregaciones definidas por el usuario
 
-## Propósito del script
+## Objetivo del script
 
 Este script automatiza por completo la configuración de agregaciones definidas por el usuario para una tabla de hechos seleccionada.
 
@@ -40,29 +40,29 @@ El script realiza los siguientes pasos, tal y como se describe en el tutorial [I
 
 ```csharp
 // ============================================================
-// Implementar agregaciones definidas por el usuario
+// Implement User-Defined Aggregations
 //
-// Selecciona la tabla de hechos (la tabla de agregación) en el
-// Explorador TOM y luego ejecuta este script. Todos los pasos están automatizados:
+// Select the fact table (the aggregation table) in the TOM
+// Explorer, then run this script. All steps are automated:
 //
-//   1. Clona la tabla de hechos como "<FactTableName> details"
-//   2. Establece las particiones de dimensiones relacionadas en modo de almacenamiento Dual
-//   3. Reduce la tabla de detalle a una sola partición (AS solo admite
-//      una partición DQ con Full DataView), la establece en DirectQuery,
-//      oculta todas las columnas y la tabla, elimina las medidas copiadas
-//   4. Crea relaciones desde la tabla de detalle a las
-//      tablas de dimensiones con Rely On Referential Integrity = true
-//   5. Quita las columnas de atributos de la tabla de agregación y
-//      oculta la tabla
-//   6. Actualiza las expresiones de las medidas para que hagan referencia a la tabla de detalle
-//   7. Configura Alternate Of en las columnas base numéricas
+//   1. Clones the fact table as "<FactTableName> details"
+//   2. Sets related dimension partitions to Dual storage mode
+//   3. Reduces the detail table to a single partition (AS only supports
+//      one DQ partition with Full DataView), sets it to DirectQuery,
+//      hides all columns and the table, deletes copied measures
+//   4. Creates relationships from the detail table to dimension
+//      tables with Rely On Referential Integrity = true
+//   5. Removes attribute columns from the aggregation table,
+//      hides the table
+//   6. Updates measure expressions to reference the detail table
+//   7. Configures Alternate Of on numeric base columns
 // ============================================================
 
-// ── Validar la selección ─────────────────────────────────────────────────────
+// ── Validate selection ────────────────────────────────────────────────────────
 
 if (Selected.Table == null)
 {
-    Error("Selecciona la tabla de hechos original (la tabla de agregación) en el Explorador TOM antes de ejecutar este script.");
+    Error("Select the original fact table (the aggregation table) in the TOM Explorer before running this script.");
     return;
 }
 
@@ -71,21 +71,21 @@ var _detailName = _aggTable.Name + " details";
 
 if (Model.Tables.Contains(_detailName))
 {
-    Error($"Ya existe una tabla llamada '{_detailName}'. Elimínala o cámbiale el nombre y vuelve a ejecutar el script.");
+    Error($"A table named '{_detailName}' already exists. Remove or rename it, then re-run the script.");
     return;
 }
 
 if (!Model.Relationships.Any(r => r.FromTable.Name == _aggTable.Name))
 {
-    Error($"No se encontraron relaciones salientes en '{_aggTable.Name}'. La tabla de hechos debe tener relaciones con las tablas de dimensiones antes de ejecutar este script.");
+    Error($"No outbound relationships found on '{_aggTable.Name}'. The fact table must have relationships to dimension tables before running this script.");
     return;
 }
 
-// ── Paso 1: Clonar la tabla de hechos para crear la tabla de detalle ─────────
+// ── Step 1: Clone the fact table to create the detail table ──────────────────
 
 var _detailTable = _aggTable.Clone(_detailName);
 
-// ── Paso 2: Establecer todas las particiones de dimensiones relacionadas en Dual ─
+// ── Step 2: Set all related dimension partitions to Dual ─────────────────────
 
 var _outboundRels = Model.Relationships
     .Where(r => r.FromTable.Name == _aggTable.Name)
@@ -100,9 +100,9 @@ foreach (var _dim in _dimTables)
     foreach (var _p in _dim.Partitions)
         _p.Mode = ModeType.Dual;
 
-// ── Paso 3: Configurar la tabla de detalle ───────────────────────────────────
-// AS solo admite una partición DirectQuery con Full DataView.
-// Conserva la primera partición y elimina el resto; después, configúrala como DirectQuery.
+// ── Step 3: Configure the detail table ───────────────────────────────────────
+// AS only supports one DirectQuery partition with Full DataView.
+// Keep the first partition and delete the rest, then set it to DirectQuery.
 
 var _allPartitions     = _detailTable.Partitions.ToList();
 var _keptPartition     = _allPartitions[0];
@@ -121,12 +121,12 @@ foreach (var _col in _detailTable.Columns)
 
 _detailTable.IsHidden = true;
 
-// Elimina cualquier medida que se haya copiado durante la clonación:
-// las medidas pertenecen a la tabla de agregación, no a la tabla de detalle.
+// Delete any measures that were copied during cloning —
+// measures belong on the aggregation table, not the detail table.
 foreach (var _m in _detailTable.Measures.ToList())
     _m.Delete();
 
-// ── Paso 4: Crear relaciones desde la tabla de detalle a las tablas de dimensiones ─
+// ── Step 4: Create relationships from detail table to dimension tables ─────────
 
 foreach (var _rel in _outboundRels)
 {
@@ -139,10 +139,10 @@ foreach (var _rel in _outboundRels)
     _newRel.RelyOnReferentialIntegrity = true;
 }
 
-// ── Paso 5: Quitar las columnas de atributos de la tabla de agregación ───────
-// Conservar: columnas clave (claves externas usadas en las relaciones)
-//            columnas numéricas (se asignarán como Alternate Of a columnas base)
-// Quitar:    columnas de atributos de tipo string, datetime, boolean y otras no numéricas
+// ── Step 5: Remove attribute columns from the aggregation table ───────────────
+// Keep:   key columns (foreign keys used in relationships)
+//         numeric columns (will be mapped as Alternate Of base columns)
+// Remove: string, datetime, boolean, and other non-numeric attribute columns
 
 var _keyCols = new HashSet<string>(
     _outboundRels.Select(r => r.FromColumn.Name));
@@ -158,17 +158,17 @@ var _colsToRemove = _aggTable.Columns
 foreach (var _col in _colsToRemove)
     _col.Delete();
 
-// Ocultar columnas clave — columnas estructurales, no pensadas para los consumidores de informes
+// Hide key columns — structural columns, not for report consumers
 foreach (var _col in _aggTable.Columns.Where(c => _keyCols.Contains(c.Name)).ToList())
 {
     _col.IsHidden         = true;
     _col.IsAvailableInMDX = false;
 }
 
-// Ocultar la propia tabla de agregación
+// Hide the aggregation table itself
 _aggTable.IsHidden = true;
 
-// ── Paso 6: Actualizar las expresiones de las medidas para que hagan referencia a la tabla de detalle ─
+// ── Step 6: Update measure expressions to reference the detail table ──────────
 
 var _oldRef = "'" + _aggTable.Name + "'[";
 var _newRef = "'" + _detailName    + "'[";
@@ -176,7 +176,7 @@ var _newRef = "'" + _detailName    + "'[";
 foreach (var _measure in _aggTable.Measures)
     _measure.Expression = _measure.Expression.Replace(_oldRef, _newRef);
 
-// ── Paso 7: Configurar Alternate Of en columnas base numéricas ───────────────
+// ── Step 7: Configure Alternate Of on numeric base columns ───────────────────
 
 var _numericTypes = new[] { DataType.Double, DataType.Int64, DataType.Decimal };
 
@@ -193,7 +193,7 @@ foreach (var _col in _numericCols)
 
     if (!_detailTable.Columns.Contains(_col.Name))
     {
-        _alternateOfWarnings.Add(_col.Name + " (no se encontró una columna coincidente en la tabla de detalle)");
+        _alternateOfWarnings.Add(_col.Name + " (no matching column found in detail table)");
         continue;
     }
 
@@ -203,34 +203,34 @@ foreach (var _col in _numericCols)
     }
     catch
     {
-        _alternateOfWarnings.Add(_col.Name + " (configura Alternate Of manualmente en el panel de Propiedades)");
+        _alternateOfWarnings.Add(_col.Name + " (configure Alternate Of manually in the Properties panel)");
     }
 }
 
-// ── Finalizado ───────────────────────────────────────────────────────────────
+// ── Done ─────────────────────────────────────────────────────────────────────
 
 var _summary =
-    $"Agregaciones definidas por el usuario configuradas para '{_aggTable.Name}'.\n\n" +
-    $"  Tabla de detalle:            {_detailName}\n" +
-    $"  Partición conservada:        {_keptPartition.Name}\n" +
-    $"  Particiones eliminadas:      {_removedPartitions.Count}\n" +
-    $"  Dimensiones en Dual:         {string.Join(", ", _dimTables.Select(t => t.Name))}\n" +
-    $"  Columnas de atributos eliminadas: {_colsToRemove.Count}\n" +
-    $"  Columnas base numéricas:     {_numericCols.Count}";
+    $"User-defined aggregations configured for '{_aggTable.Name}'.\n\n" +
+    $"  Detail table:                {_detailName}\n" +
+    $"  Partition retained:          {_keptPartition.Name}\n" +
+    $"  Partitions removed:          {_removedPartitions.Count}\n" +
+    $"  Dimensions set to Dual:      {string.Join(", ", _dimTables.Select(t => t.Name))}\n" +
+    $"  Attribute columns removed:   {_colsToRemove.Count}\n" +
+    $"  Numeric base columns:        {_numericCols.Count}";
 
 if (_removedPartitions.Count > 0)
-    _summary += $"\n\n⚠ IMPORTANTE: Revisa la expresión de partición en '{_keptPartition.Name}'.\n" +
-                "  La tabla de detalle debe cubrir todos los datos: elimina cualquier filtro de fecha/rango\n" +
-                "  que se utilizó para la actualización incremental en la tabla original.";
+    _summary += $"\n\n⚠ IMPORTANT: Review the partition expression on '{_keptPartition.Name}'.\n" +
+                "  The detail table must cover all data — remove any date/range filtering\n" +
+                "  that was used for incremental refresh on the original table.";
 
 if (_alternateOfWarnings.Any())
-    _summary += "\n\nNo se pudo establecer Alternate Of automáticamente en las siguientes columnas.\n" +
-                "Configúralas manualmente en el panel de Propiedades:\n  - " +
+    _summary += "\n\nThe following columns could not have Alternate Of set automatically.\n" +
+                "Configure them manually in the Properties panel:\n  - " +
                 string.Join("\n  - ", _alternateOfWarnings);
 
-_summary += "\n\nDespués de guardar, ejecuta Process Recalc en el modelo para recalcular\n" +
-            "las nuevas relaciones. No es necesario volver a importar datos.\n\n" +
-            "Revisa el modelo con cuidado antes de guardar.";
+_summary += "\n\nAfter saving, run Process Recalc on the model to recalculate\n" +
+            "the new relationships. No data reimport is needed.\n\n" +
+            "Review the model carefully before saving.";
 
 Info(_summary);
 ```

@@ -125,9 +125,9 @@ If you call this function with the same measure reference for both parameters, f
 
 To constrain the parameter type, which is optional, put a data type before the evaluation mode, for example `x: INT64 VAL` or `y: TABLE EXPR`. If a type is present, arguments are implicitly converted to the type, and Tabular Editor 3 uses the type in autocomplete suggestions for code that calls the function.
 
-Tabular Editor 3 validates arguments against the declared parameter types. If you call a DAX UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
+Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type, such as a scalar value where a `TABLEREF` parameter is expected, the Semantic Analyzer reports a warning or error.
 
-For the complete list of constraints, see the [Microsoft specification for DAX UDFs](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions).
+Check the [Microsoft specification for UDFs](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
 
 ### Optional Parameters with Default Expressions
 

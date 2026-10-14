@@ -8,12 +8,12 @@ description: Regla de buenas prácticas para eliminar perspectivas vacías que n
 
 # Las perspectivas deben contener objetos
 
-## Descripción general
+## Resumen
 
 Esta regla de buenas prácticas identifica las perspectivas que no contienen ninguna tabla visible. Las perspectivas vacías no tienen ninguna utilidad y se deben eliminar.
 
 - Categoría: Mantenimiento
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -47,7 +47,7 @@ Para aplicarlo:
 2. Selecciona las perspectivas vacías
 3. Haz clic en **Aplicar corrección**
 
-### Corrección manual
+### Solución manual
 
 1. En el **Explorador TOM**, expande el nodo **Perspectivas**
 2. Haz clic con el botón derecho en la perspectiva vacía
@@ -68,16 +68,16 @@ La perspectiva se creó durante el diseño, pero nunca se llegó a rellenar.
 ### Antes de la corrección
 
 ```
-Perspectivas:
-  - Ventas (contiene: tablas de Ventas, Cliente y Producto) ✓
-  - Marketing (no contiene tablas) ✗
+Perspectives:
+  - Sales (contains: Sales, Customer, Product tables) ✓
+  - Marketing (contains: NO TABLES) ✗
 ```
 
 ### Después de la corrección
 
 ```
-Perspectivas:
-  - Ventas (contiene: tablas de Ventas, Cliente y Producto) ✓
+Perspectives:
+  - Sales (contains: Sales, Customer, Product tables) ✓
 ```
 
 ## Nivel de compatibilidad

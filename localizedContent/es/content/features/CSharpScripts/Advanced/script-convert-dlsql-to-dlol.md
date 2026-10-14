@@ -13,17 +13,17 @@ applies_to:
 
 # Convertir Direct Lake sobre SQL a OneLake
 
-## Propósito del script
+## Objetivo del script
 
 Este script convierte un modelo que usa Direct Lake en SQL (DL/SQL) a Direct Lake en OneLake (DL/OL). Tal como se indica en el [artículo de directrices de Direct Lake](xref:direct-lake-guidance), esto consiste simplemente en actualizar la consulta M de la Shared Expression que usan las particiones de Direct Lake del modelo para que use el conector [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) en lugar del conector [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database).
 
 ## Requisitos previos
 
-Necesitarás el **ID del Workspace** y el **ID del recurso** de tu Warehouse o Lakehouse de Fabric. Ambos son GUID que aparecen en la URL cuando navegas al Warehouse o Lakehouse en el portal de Fabric:
+Necesitará el **Workspace ID**, así como el **Resource ID** de su Warehouse o Lakehouse de Fabric. Ambos son GUID que forman parte de la URL al navegar al Warehouse o Lakehouse en el portal de Fabric:
 
-![URL de Lakehouse y Warehouse](~/content/assets/images/lakehouse-warehouse-url.png)
+![URL de Lakehouse/Warehouse](~/content/assets/images/lakehouse-warehouse-url.png)
 
-En la captura de pantalla anterior, el **ID del Workspace** del Lakehouse está resaltado en azul, mientras que el **ID de recurso** está resaltado en verde.
+En la captura de pantalla anterior, el **Workspace ID** del Lakehouse se resalta en azul, mientras que el **Resource ID** se resalta en verde.
 
 ## Script
 
@@ -31,17 +31,17 @@ En la captura de pantalla anterior, el **ID del Workspace** del Lakehouse está 
 
 ```csharp
 // ==================================================================
-// Convertir Direct Lake en SQL a OneLake
+// Convert Direct Lake on SQL to OneLake
 // -------------------------------------
 // 
-// Este script detecta si el modelo actual usa Direct Lake sobre SQL
-// y sugiere actualizar el modelo a Direct Lake en OneLake.
+// This script detects if the current model uses Direct Lake on SQL
+// and suggests to upgrade the model to Direct Lake on OneLake.
 //
-// Necesitarás el ID del Workspace y el ID de tu Fabric Warehouse
-// o Lakehouse (ambos son GUID).
+// You will need the Workspace ID and the ID of your Fabric Warehouse
+// or Lakehouse (both are GUIDs).
 // ==================================================================
 
-// Busca la Shared Expression que usan las EntityPartitions del modelo:
+// Find the Shared Expression that is being used by EntityPartitions on the model:
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -51,13 +51,13 @@ var expressionSource = partition == null ? null : partition.ExpressionSource;
 
 if (expressionSource == null)
 {
-    Warning("Parece que tu modelo no contiene ninguna tabla en modo Direct Lake.");
+    Warning("Your model does not seem to contain any tables in Direct Lake mode.");
     return;
 }
 
 if (!expressionSource.Expression.Contains("Sql.Database"))
 {
-    Warning("Este modelo no está configurado para Direct Lake sobre SQL.");
+    Warning("This model is not configured for Direct Lake over SQL.");
     return;
 }
 
@@ -76,12 +76,12 @@ expressionSource.Expression = mTemplate.Replace("%workspaceId%", promptDialog.Wo
 if(!string.IsNullOrEmpty(Model.Collation))
 {
     Model.Collation = null;
-    Info("El modelo se convirtió correctamente a Direct Lake en OneLake. Quizá tengas que implementarlo como un nuevo modelo semántico, ya que se modificó la intercalación del modelo.");
+    Info("Model successfully converted to Direct Lake on OneLake. You may need to deploy it as a new semantic model, since the model collation was modified.");
 }
 else
-    Info("El modelo se convirtió correctamente a Direct Lake en OneLake.");
+    Info("Model successfully converted to Direct Lake on OneLake.");
 
-// Código de la interfaz de usuario a partir de aquí:
+// UI code below this line:
 public class UrlNameDialog : Form
 {
     public TextBox WorkspaceId { get; private set; }
@@ -90,7 +90,7 @@ public class UrlNameDialog : Form
 
     public UrlNameDialog()
     {
-        Text = "Convertir Direct Lake en SQL a OneLake";
+        Text = "Convert Direct Lake on SQL to OneLake";
         AutoSize = true;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
@@ -107,12 +107,12 @@ public class UrlNameDialog : Form
         Controls.Add(mainLayout);
 
         // Workspace ID
-        mainLayout.Controls.Add(new Label { Text = "ID del Workspace (GUID):", AutoSize = true });
+        mainLayout.Controls.Add(new Label { Text = "Workspace ID (GUID):", AutoSize = true });
         WorkspaceId = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(WorkspaceId);
 
         // Resource ID
-        mainLayout.Controls.Add(new Label { Text = "ID de Fabric Warehouse / Lakehouse (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        mainLayout.Controls.Add(new Label { Text = "Fabric Warehouse / Lakehouse ID (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         ResourceId = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(ResourceId);
 
@@ -126,7 +126,7 @@ public class UrlNameDialog : Form
         };
 
         okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
-        var cancelButton = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, AutoSize = true };
+        var cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
         buttonPanel.Controls.Add(okButton);
         buttonPanel.Controls.Add(cancelButton);
 

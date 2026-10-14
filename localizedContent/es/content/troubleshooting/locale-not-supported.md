@@ -22,11 +22,11 @@ applies_to:
 Puede que se muestre alguno de los siguientes mensajes de advertencia:
 
 ```plaintext
-La configuración regional XXXX no es compatible
+The XXXX locale is not supported
 ```
 
 ```plaintext
-XXXX no es un identificador de configuración regional válido
+XXXX is an invalid culture identifier
 ```
 
 en la vista de mensajes de Tabular Editor 3.
@@ -60,7 +60,7 @@ Configura explícitamente una configuración regional compatible (p. ej., inglé
 **Ejemplo (Azure AS):**
 
 ```plaintext
-Data source=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentifier=1033
+Data Source=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentifier=1033
 ```
 
 #### Opción B: Cambiar la configuración regional en tu equipo

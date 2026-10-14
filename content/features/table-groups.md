@@ -2,7 +2,7 @@
 uid: table-groups
 title: Table Groups
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -32,7 +32,7 @@ Tables can be moved around between Table Groups by dragging and dropping in the 
 Right-clicking on a Table Group in the TOM Explorer, gives you the same context menu options, as if you had selected the table(s) within that Table Group.
 
 > [!NOTE]
-> Table Groups is a Tabular Editor-exclusive feature. Client tools (such as Excel, Power BI Desktop, etc.) will not observe Table Groups, as the [CSDL format](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), which specifies the conceptual schema of the data model, does not support Table Groups.
+> Table Groups is a Tabular Editor-exclusive feature. Client tools (such as Excel, Power BI Desktop, etc.) will not observe Table Groups, as the [CSDL format](https://learn.microsoft.com/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), which specifies the conceptual schema of the data model, does not support Table Groups.
 
 ## Metadata and scripting
 

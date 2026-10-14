@@ -2,7 +2,7 @@
 uid: direct-lake-sql-model
 title: Direct Lake on SQL Semantic Models
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,7 +18,7 @@ applies_to:
 ---
 
 # Direct Lake Semantic Models
-Direct Lake on SQL semantic models connect directly to data sources stored in [OneLake in Fabric](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) through the SQL Endpoint. 
+Direct Lake on SQL semantic models connect directly to data sources stored in [OneLake in Fabric](https://learn.microsoft.com/fabric/onelake/onelake-overview) through the SQL Endpoint. 
 
 > [!IMPORTANT]
 > As of [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), Tabular Editor 3 supports Direct Lake on OneLake, which is recommended in most scenarios. See our [Direct Lake guidance](xref:direct-lake-guidance) article for more information.
@@ -30,7 +30,7 @@ Tabular Editor 2 can connect to Direct Lake semantic models, but does not have a
 
 > [!NOTE]
 > **Direct Lake limitations**
-> There are several limitations to the changes that can be made to a Direct Lake model. See [Direct Lake Considerations and Limitations](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) for the full list. See also [this article by SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) for an overview of choosing between Direct Lake and Import mode.
+> There are several limitations to the changes that can be made to a Direct Lake model. See [Direct Lake Considerations and Limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) for the full list. See also [this article by SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) for an overview of choosing between Direct Lake and Import mode.
 
 ## Creating a Direct Lake on SQL model in Tabular Editor 3
 

@@ -8,13 +8,13 @@ description: Regla de buenas prácticas que garantiza que las funciones definida
 
 # Use nombres compuestos para las funciones definidas por el usuario
 
-## Descripción general
+## Resumen
 
 Esta regla de buenas prácticas identifica funciones definidas por el usuario (UDFs) cuyos nombres no contienen un carácter separador (`.` o `_`). Los nombres compuestos evitan conflictos de nombres si Microsoft introduce una función de DAX integrada con el mismo nombre.
 
 - Categoría: Prevención de errores
 
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -61,7 +61,7 @@ Se aplicó una UDF desde la sección DEFINE de una consulta DAX, donde no se res
 ### Antes de la corrección
 
 ```dax
-// Función nombrada sin separador
+// Function named without separator
 FUNCTION CalcProfit =
     (
         revenue: DOUBLE,
@@ -73,7 +73,7 @@ FUNCTION CalcProfit =
 ### Después de la corrección
 
 ```dax
-// Función nombrada con separador de espacios de nombres
+// Function named with namespace separator
 FUNCTION Finance.CalcProfit =
     (
         revenue: DOUBLE,

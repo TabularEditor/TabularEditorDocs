@@ -1,6 +1,8 @@
 ---
 uid: import-tables
 title: Importar tablas
+author: Morten Lønskov
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,10 +58,10 @@ Actualmente, Tabular Editor 3 admite de forma nativa los siguientes orígenes de
 - Snowflake\*
 - Dataflow de Power BI\*
 - Databricks\*
-- Lakehouse de Fabric\*
-- Warehouse de Fabric\*
-- Base de datos SQL de Fabric\*
-- Base de datos reflejada de Fabric\*
+- Lakehouse de Fabric
+- Warehouse de Fabric
+- Base de datos SQL de Fabric
+- Base de datos reflejada de Fabric
 
 \*=Estos orígenes de datos solo se admiten como orígenes de datos implícitos en los modelos de datos de Power BI. No están disponibles en SSAS / Azure AS.
 
@@ -71,6 +73,23 @@ Después de elegir uno de los orígenes de datos de la lista, Tabular Editor mue
 ![Autenticación SQL](~/content/assets/images/sql-auth.png)
 
 Si desea que Analysis Services use credenciales diferentes al conectarse, puede especificarlo editando las propiedades del origen de datos en el Tabular Object Model después de importar las tablas.
+
+## Conexión a un Data source
+
+Cada tipo de origen tiene su propio cuadro de diálogo de conexión y los métodos de autenticación disponibles varían entre ellos. La elección importa incluso después de la primera conexión, porque algunos métodos de autenticación requieren que haya alguien delante del teclado y, por tanto, no se pueden usar para una actualización programada.
+
+Consulta @connectivity para ver la lista completa y la página de tu origen:
+
+- @connect-sql-server, que cubre Azure SQL y Synapse
+- @connect-snowflake, que incluye la autenticación mediante par de claves para trabajo desatendido
+- @connect-databricks
+- @connect-oracle
+- @connect-odbc, que también es la forma de conectarse a PostgreSQL, MySQL, MariaDB e IBM Db2
+- @connect-oledb
+- @connect-onelake
+- @connect-dataflows
+
+Las credenciales se almacenan, por usuario y por modelo, en el archivo de [opciones de usuario](xref:user-options), se cifran con la clave de tu cuenta de Windows y nunca pasan a formar parte de los metadatos del modelo.
 
 ## Seleccionar objetos para importar
 
@@ -97,38 +116,43 @@ Si cambia el modo de vista previa a "Solo esquema" usando el menú desplegable d
 
 En la última página, confirme su selección y elija qué tipo de particiones desea crear. Para los orígenes de datos del proveedor, el tipo de partición que se crea de forma predeterminada es `SQL`, mientras que para los orígenes de datos estructurados, es `M`.
 
-![Confirm Selection Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
+![Confirmar selección de Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
 
 Para los orígenes de datos de Fabric, en la última página hay una lista desplegable que le permite elegir si desea que su selección se cree como Direct Lake o modo de importación.
 
 En este punto, debería ver sus tablas importadas con todas las columnas, los tipos de datos y las asignaciones de columnas de origen aplicadas:
 
-![Import Complete](~/content/assets/images/import-complete.png)
+![Importación completa](~/content/assets/images/import-complete.png)
 
-# Actualización del esquema de tabla
+Las columnas se crean en el orden en que aparecen en la tabla de origen. Por lo tanto, importar la misma tabla dos veces produce el mismo orden de columnas en ambas ocasiones.
+
+> [!NOTE]
+> Al crear tablas en modo **Import** a partir de un **Fabric Lakehouse** o un **Fabric Warehouse**, se lee el esquema de la tabla a través del punto de conexión de análisis SQL del Data source. Cuando no se puede determinar ningún punto de conexión y no se especifica ninguno en la configuración de importación, Tabular Editor muestra un error indicando lo que necesita: el punto de conexión SQL como servidor, o un id de Workspace y un id de elemento. No crea una tabla sin columnas.
+
+## Actualización del esquema de tabla
 
 Si se agregan o cambian columnas en el origen, o si ha modificado recientemente una expresión de partición o una consulta, puede usar la característica **Actualizar esquema de tabla** de Tabular Editor para actualizar los metadatos de las columnas en su modelo.
 
-![Update Table Schema](~/content/assets/images/update-table-schema.png)
+![Actualizar el esquema de la tabla](~/content/assets/images/update-table-schema.png)
 
 Esta opción del menú se puede invocar a nivel de modelo, así como en una colección de tablas o incluso en particiones individuales de una tabla.
 
-Al usar esta opción, Tabular Editor se conectará a todos los orígenes de datos pertinentes (solicitando credenciales cuando sea necesario) para determinar si es necesario agregar nuevas columnas o si alguna columna existente debe modificarse o eliminarse.
+Al usar esta opción, Tabular Editor se conectará a todos los Data sources pertinentes (solicitando credenciales cuando sea necesario) para determinar si es necesario agregar, modificar o eliminar columnas. Las columnas siguen el orden de la propia tabla de origen, por lo que una actualización del esquema no las reordena.
 
 > [!IMPORTANT]
 > Si una columna que se importó anteriormente en su modelo semántico se ha quitado o se ha cambiado de nombre en el origen, debe actualizar el esquema de la tabla en su modelo semántico. De lo contrario, las operaciones de actualización de datos pueden fallar.
 
 ![Diálogo de comparación de esquema](~/content/assets/images/schema-compare-dialog.png)
 
-En la captura de pantalla anterior, Tabular Editor detectó dos columnas nuevas en el origen que aún no se han importado (`Color` y `Material`) y marcó para eliminar dos columnas existentes (`Colour` y `Substance Type`) porque sus nombres ya no coinciden con ninguna columna del origen. La detección del cambio de nombre de una columna solo funciona con cambios simples; en este caso, los nombres difieren lo suficiente como para que Tabular Editor haga un Report de una eliminación y una adición, en lugar de un cambio de nombre: en realidad, en el origen, `Colour` se ha renombrado a `Color` y `Substance Type` a `Material`.
+En la captura de pantalla anterior, Tabular Editor detectó dos columnas nuevas en el origen que todavía no se han importado (`Color` y `Material`) y marcó dos columnas existentes para eliminarlas (`Colour` y `Substance Type`) porque sus nombres ya no coinciden con ninguna columna del origen. La detección de cambios de nombre de columnas solo funciona con cambios simples; en este caso, los nombres difieren lo suficiente como para que Tabular Editor indique una eliminación y una adición en lugar de un cambio de nombre: en realidad, `Colour` se ha cambiado a `Color` en el origen, y `Substance Type` a `Material`.
 
-Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Colour]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las filas `Color` (importar) y `Colour` (eliminar) del cuadro de diálogo Schema Change; a continuación, haz clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
+Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Colour]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las filas `Color` (importar) y `Colour` (eliminar) del cuadro de diálogo Cambios de esquema y, a continuación, hacer clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
 
 ![Combinar actualización de SourceColumn](~/content/assets/images/combine-sourcecolumn-update.png)
 
 Si no quieres que el cambio de nombre se propague a la columna importada (y solo quieres actualizar la propiedad SourceColumn para reflejar el nombre cambiado en el origen de datos), puedes desmarcar la operación de actualización `Name` en el menú desplegable:
 
-![Deselect Name](~/content/assets/images/deselect-name.png)
+![Deseleccionar nombre](~/content/assets/images/deselect-name.png)
 
 ## Actualizar el esquema de la tabla mediante Analysis Services
 

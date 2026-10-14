@@ -2,7 +2,7 @@
 uid: diagram-view-reference
 title: Vista de diagrama
 author: Morten Lønskov
-updated: 2025-04-24
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2

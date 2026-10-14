@@ -2,7 +2,7 @@
 uid: macros
 title: Creación de macros
 author: Morten Lønskov
-updated: 2023-12-07
+updated: 2026-09-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,8 +19,8 @@ applies_to:
 
 # (Tutorial) Creación de macros
 
-Las macros son scripts de C# que se han guardado en Tabular Editor para poder reutilizarlas fácilmente en distintos modelos semánticos.
-Guardar un script como macro permite usar esa macro al hacer clic con el botón derecho en los objetos del Explorador TOM, lo que facilita aplicar el script a tu modelo.
+Las macros son C# Scripts que se han guardado en Tabular Editor para reutilizarlos fácilmente en distintos modelos semánticos.
+Guardar un script como macro permitirá usar esa macro al hacer clic con el botón derecho en los objetos del Explorador TOM, lo que facilita aplicar el script a tu modelo.
 
 ## Crear una macro
 
@@ -62,12 +62,20 @@ Una macro puede abrirse haciendo doble clic en ella en el panel de macros y, tra
 
 ![Cuadro de información de edición de macro](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
+## Directivas del administrador
+
+Las macros se pueden controlar de forma centralizada mediante las directivas del Registro que implemente el departamento de TI. `DisableMacros` impide por completo que se guarden o ejecuten, y las macros almacenadas en `%LocalAppData%` no se cargan al iniciar Tabular Editor.
+
+En Tabular Editor 3, `BlockUnsafeScripts` permite las macros únicamente si se mantienen dentro del modelo semántico. Una macro que lea o escriba un archivo, acceda a la red, inicie otro programa o haga referencia a un ensamblado externo se guarda, pero se deja fuera de todos los menús para que no pueda ejecutarse por accidente. La encontrará en **Ver > Macros** con la columna **Blocked** marcada; allí aún puede abrirla y editarla. Si la vuelve a situar dentro de esos límites, su elemento de menú reaparecerá sin reiniciar Tabular Editor. Al guardar una macro de este tipo, se te avisa de que se ha guardado, pero no se ejecutará.
+
+Consulte [C# Script](xref:csharp-scripts#administrator-policies) para saber qué se considera mantenerse dentro del modelo, y @policies para los propios valores del Registro.
+
 ## Archivo JSON de macros
 
-Las macros se almacenan en %LocalAppFolder%/TabularEditor3 como un archivo JSON llamado MacroActions.json. Para obtener más información sobre los tipos de archivo en Tabular Editor, consulte [Tipos de archivo compatibles](xref:supported-files#macroactionsjson)
+Las macros se almacenan en %LocalAppFolder%/TabularEditor3 como un archivo JSON llamado MacroActions.json. Para obtener más información sobre los tipos de archivo en Tabular Editor, consulta [Tipos de archivo compatibles](xref:supported-files#macroactionsjson)
 
 ## Ejemplo de archivo de macros
 
-Aquí se puede encontrar un ejemplo de un archivo MacroActions.json. Contiene varios C# Scripts de nuestra biblioteca de scripts: [Descargar archivo MacroActions.json de ejemplo](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+Aquí puedes encontrar un ejemplo de archivo MacroActions.json. Contiene varios de los C# Scripts de nuestra biblioteca: [Descargar archivo de ejemplo de MacroActions](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 

@@ -26,14 +26,14 @@ With a semantic model loaded, Tabular Editor 3 shows the default layout below.
 
 ![Basic user interface](~/content/assets/images/basic-ui.png)
 
-1. **Title bar**: the name of the loaded file, or of the Analysis Services database or Power BI semantic model you're connected to.
-2. **Menu bar**: all features of Tabular Editor 3. See [Menus](#menus) for each menu.
-3. **Toolbars**: the most used features. Every toolbar command is also in the menus. Customize the toolbars and their buttons under **Tools > Customize...**.
-4. **TOM Explorer view**: a tree of the model's objects, built from the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata. The toggle buttons at the top filter which object types are shown, and the search box filters objects by name.
-5. **Expression Editor**: edits the DAX, SQL or M expressions of the object selected in the TOM Explorer. If you close it, double-click an object in the TOM Explorer to open it again. If the object has more than one expression property, the dropdown at the top switches between them. For example, a KPI has a target, a status and a trend expression.
-6. **Properties view**: all TOM properties of the objects selected in the TOM Explorer. You can edit most properties in the grid, also with several objects selected. Some properties, such as **Format String**, **Connection String** and **Role Members**, open a dialog or collection editor from the ellipsis button in the value cell.
-7. **Messages view**: semantic errors found by the continuous analysis of the model's DAX expressions, plus messages from C# scripts and errors reported by Analysis Services.
-8. **Status bar**: information about the current selection, Best Practice Analyzer findings and more. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, and its tooltip shows the address the server listens on. Click the indicator to open the **MCP Server** dialog, or right-click it to start or stop the server, copy a registration configuration for your agent or open the preferences page.
+1. **Title bar**: This shows the name or the currently loaded file and Analysis Services database or Power BI dataset if connected.
+2. **Menu bar**: The menu bar provides access to all of the various features of Tabular Editor 3. See [Menus](#menus) for a detailed walkthrough of all menu items.
+3. **Toolbars**: The toolbars provide quick access to the most commonly used features. All features accessible through the toolbar can also be accessed through the menus. You may customize the toolbars and their buttons under **Tools > Customize...**
+4. **TOM Explorer view**: A hierarchical view of your data model, with all objects available .  of the metadata from the [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata that represents your data model. The toggle buttons at the top allow you to filter which objects are displayed. The search box allows you to filter objects by names.
+5. **Expression Editor**: The expression editor provides a quick way to edit any DAX, SQL or M expressions of the currently selected object in the TOM Explorer. If you close the expression editor, you can bring it back up by double-clicking on an object in the TOM Explorer. The dropdown at the top allows you to switch between different expression properties, in case the currently selected object has more than one such property (for example, KPIs have Target Expressions, Status Expressions and Trend Expressions, which are 3 different DAX expressions belonging to the same KPI object).
+6. **Properties view**: A detailed view of all TOM properties available on the currently selected object(s) in the TOM Explorer. Most properties can be edited through the grid, even when multiple objects are selected. Some properties (such as "Format String", "Connection String", "Role Members") have popup dialogs or collection editors that can be brought up by clicking on the ellipsis button within the property value cell.
+7. **Messages view**: Tabular Editor 3 continuously analyzes the DAX expressions on your model for semantic errors. Any such errors are outputted here. In addition, messages shown in this view, can originate from C# scripts or from error messages reported by Analysis Services.
+8. **Status bar**: The status bar provides various contextual information about the current selection, Best Practice Analyzer findings, etc. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, with the address the server is listening on in its tooltip. Click it to open the MCP Server dialog, or right-click it to start and stop the server, copy a registration configuration for your agent or jump to the preferences page.
 
 The [View menu](#view) opens the other views.
 
@@ -161,39 +161,39 @@ The **View** menu opens and focuses the views of Tabular Editor 3, including hid
 
 ![View Menu](~/content/assets/images/view-menu.png)
 
-- **TOM Explorer**: a tree of the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the loaded model. See @tom-explorer-view.
-- **AI Assistant**: a chat with an AI assistant for modeling tasks.
-- **DAX Package Manager**: browses DAX user-defined function packages and installs them into the model.
-- **Best Practice Analyzer**: validates the model against best practice rules that you define. See @bpa-view.
-- **Messages**: errors, warnings and informational messages from sources such as the Tabular Editor 3 Semantic Analyzer. See @messages-view.
-- **Data Refresh**: tracks refresh operations running in the background. See @data-refresh-view.
-- **Expression Editor**: edits the DAX, M or SQL expressions of the object selected in the TOM Explorer. See @dax-editor.
-- **Macros**: manages the macros you created from @csharp-scripts. See @creating-macros.
-- **VertiPaq Analyzer**: collects, imports and exports statistics about the data in the model, for DAX performance tuning. VertiPaq Analyzer is created and maintained by [Marco Russo](https://twitter.com/marcorus) of [SQLBI](https://sqlbi.com) under MIT license. See the [GitHub project page](https://github.com/sql-bi/VertiPaq-Analyzer).
-- **Dependencies**: the [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) shows the dependencies between the selected object and other objects in the model. Select **Track TOM Explorer** to make it follow the TOM Explorer selection.
-- **DAX Optimizer**: analyzes the model for DAX performance issues with [DAX Optimizer](https://www.daxoptimizer.com).
-- **Calendar Editor**: defines and manages calendars for the modern time intelligence feature.
-- **Perspective Editor**: a matrix of which objects each perspective of the model includes.
-- **Metadata Translation Editor**: a grid for editing the metadata translations (cultures) of model objects.
-- **Toolbars / Properties**: toggles toolbar visibility and opens the Properties view (**F4**).
+- **TOM Explorer**: The TOM Explorer presents a hierarchical view of the entire [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the currently loaded model metadata. See @tom-explorer-view for more information.
+- **AI Assistant**: The AI Assistant view lets you interact with an AI assistant that can help you with modeling tasks.
+- **DAX Package Manager**: The DAX Package Manager view lets you browse and install DAX user-defined function packages into your model.
+- **Best Practice Analyzer**: The Best Practice Analyzer helps improve the quality of your model by letting you specify rules for best practice validation. See @bpa-view for more information.
+- **Messages**: The Messages view displays errors, warnings and informational messages from various sources, such as the Tabular Editor 3 Semantic Analyzer. See @messages-view for more information.
+- **Data Refresh**: The Data Refresh view allows you to track data refresh operations that are running in the background. See @data-refresh-view for more information.
+- **Expression Editor**: This is the "quick editor" that lets you edit DAX, M or SQL expressions on whichever object is currently selected in the TOM Explorer. See @dax-editor for more information.
+- **Macros**: The Macros view allows you to manage any macros you have created. Macros can be created from @csharp-scripts. See @creating-macros for more information.
+- **VertiPaq Analyzer**: The VertiPaq Analyzer view allows you to collect, import and export detailed statistics about the data in your model, to help improve and debug DAX performance. VertiPaq Analyzer is created and maintained by [Marco Russo](https://twitter.com/marcorus) of [SQLBI](https://sqlbi.com) under MIT license. More information on the [GitHub project page](https://github.com/sql-bi/VertiPaq-Analyzer).
+- **Dependencies**: The [**DAX Dependencies** view](xref:creating-and-testing-dax#dax-dependencies) visualizes dependencies between the currently selected object and other objects in the model. Tick **Track TOM Explorer** to have it follow the tree selection.
+- **DAX Optimizer**: The DAX Optimizer view integrates with [DAX Optimizer](https://www.daxoptimizer.com) to analyze your model for DAX performance issues.
+- **Calendar Editor**: The Calendar Editor view lets you define and manage calendars in models using the modern time intelligence feature.
+- **Perspective Editor**: The Perspective Editor view provides a matrix overview of which objects are included in each perspective of the model.
+- **Metadata Translation Editor**: The Metadata Translation Editor view provides a grid for editing metadata translations (cultures) of model objects.
+- **Toolbars / Properties**: The remaining items let you toggle the visibility of toolbars and bring up the Properties view (F4).
 
-### Model
+## Model
 
-The **Model** menu has actions on the Model object, the root of the TOM Explorer.
+The **Model** menu displays actions that can be performed at the level of the Model object (the root object of the TOM Explorer).
 
 ![View Menu](~/content/assets/images/model-menu.png)
 
 - **Deploy...**: opens the Tabular Editor Deployment wizard. See [Model deployment](xref:deployment).
 
 > [!IMPORTANT]
-> **Deploy** isn't available in Tabular Editor 3 Desktop Edition. See @editions.
+> The **Deploy** option is not available in Tabular Editor 3 Desktop Edition. For more information see @editions.
 
-- **Serialization options...** sets how model metadata is serialized when saved to a file or folder structure.
-- **Import tables...** opens the Tabular Editor 3 Import Table Wizard. See @importing-tables.
-- **Update schema (all tables)...** compares the columns of all tables with their data sources and detects schema changes. See [Updating table schema](xref:importing-tables#updating-table-schema).
-- **Script DAX**: generates a DAX script for the selected objects, or for all DAX objects in the model if nothing is selected. See @dax-scripts.
-- **Refresh model**: starts a background refresh of the model when Tabular Editor is connected to Analysis Services. See [Refresh command (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request). The submenu has these options:
-  - **Automatic (model)**: Analysis Services refreshes only the objects that aren't in the "Ready" state.
+- **Serialization options...** Lets you configure how model metadata is serialized when saving to disk (file or folder structure).
+- **Import tables...** Launches the Tabular Editor 3 Import Table Wizard. For more information, see @importing-tables.
+- **Update schema (all tables)...** Detects schema changes in the data source(s) for all tables of the model compared to the currently imported columns. See [Updating table schema](xref:importing-tables#updating-table-schema) for more information.
+- **Script DAX**: Generates a DAX script for the currently selected object(s) (or all DAX objects in the model, if nothing is selected). See @dax-scripts for more information.
+- **Refresh model**: When Tabular Editor is connected to an instance of Analysis Services, this submenu contains options for starting a background refresh operation at the model level. The submenu has the options below. For more information, see [Refresh command (TMSL)](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request).
+  - **Automatic (model)**: Analysis Services determines which objects to refresh (only objects that are not in the "Ready" state).
   - **Full refresh (model)**: Analysis Services performs a full refresh of the model.
   - **Calculate (model)**: Analysis Services recalculates all calculated tables, calculated columns, calculation groups and relationships. No data is read from the data sources.
 - **Add [object type]**: the remaining items create model child objects, such as tables, data sources and perspectives.

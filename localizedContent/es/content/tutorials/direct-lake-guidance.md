@@ -1,8 +1,8 @@
 ---
 uid: direct-lake-guidance
 title: Guía de Direct Lake
-author: Daniel Otykier
-updated: 2026-03-27
+author: Morten Lønskov
+updated: 2026-08-28
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,7 +46,7 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 
 Sin embargo, igual que con Direct Lake en SQL, aún hay algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las principales limitaciones se incluyen:
 
-- Las columnas calculadas no se admiten en ninguno de los dos modos de Direct Lake.
+- Las columnas calculadas en Direct Lake sobre tablas de OneLake se admiten en versión preliminar, pero solo en _contexto de usuario_: el valor se evalúa en el momento de la consulta para el usuario actual, en lugar de materializarse. Esto significa que una columna calculada de Direct Lake respeta la seguridad de nivel de fila y la seguridad a nivel de objetos, pero no se puede usar como clave de relación y no responde a los filtros ni a las segmentaciones de un Report. Use una medida en su lugar cuando el resultado deba reaccionar al contexto de filtro. Direct Lake en SQL sigue sin admitir columnas calculadas en absoluto. Consulta [Desarrollar modelos semánticos de Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop) para obtener más información.
 - Las tablas calculadas no pueden hacer referencia a columnas ni tablas en el modo de almacenamiento Direct Lake. Se admiten los grupos de cálculo, los parámetros de tipo what-if y los parámetros de campo, porque crean tablas calculadas implícitas que no hacen referencia a columnas de Direct Lake.
 - Las vistas SQL no materializadas no se admiten como Data sources para tablas de Direct Lake en OneLake. Usa vistas materializadas o asegúrate de que la tabla Delta de origen contenga las columnas que necesitas.
 - Los accesos directos en un Lakehouse no se admiten como Data sources durante la versión preliminar pública de Direct Lake en OneLake.
@@ -55,7 +55,7 @@ Para obtener una lista completa y actualizada de las limitaciones, consulta la [
 
 ### Modelos compuestos
 
-Una forma de sortear la limitación de las columnas calculadas es crear un **modelo compuesto** combinando tablas de Direct Lake con tablas en modo Import. Esto se admite con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente mantienes las tablas de hechos más grandes en modo Direct Lake y usas el modo Import para las tablas de dimensiones más pequeñas en las que necesitas columnas calculadas o agrupaciones personalizadas.
+Si necesita una columna calculada que se materialice, pueda usarse como clave de relación o responda a los filtros y las segmentaciones de un Report, la característica de columnas calculadas en versión preliminar mencionada arriba no es suficiente. En ese caso, cree un **modelo compuesto** combinando tablas de Direct Lake con tablas en modo Import. Esto se admite con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente se mantienen las tablas de hechos más grandes en modo Direct Lake, mientras que se usa Import mode para las tablas de dimensiones más pequeñas en las que se necesitan columnas calculadas completas o agrupaciones personalizadas.
 
 Direct Lake en OneLake también admite la combinación con tablas DirectQuery mediante herramientas basadas en XMLA, como Tabular Editor. Las tablas en modo Import se pueden agregar mediante el modelado web de Power BI, Power BI Desktop (edición en vivo) o mediante herramientas XMLA.
 
@@ -83,19 +83,19 @@ En un modelo **Direct Lake en SQL**, la intercalación no distingue mayúsculas 
 
 Para agregar tablas Direct Lake con el Asistente para importar tablas de Tabular Editor 3, elige **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** o **Microsoft Fabric Mirrored Database** como origen:
 
-![Asistente para importar tablas en Fabric](../assets/images/import-table-wizard-fabric.png)
+![Asistente de importación de tablas: Fabric](../assets/images/import-table-wizard-fabric.png)
 
 Tras iniciar sesión, se te mostrará una lista de todos los Lakehouses y Warehouses de Fabric disponibles en los Workspaces a los que tengas acceso. Selecciona el que quieras para conectarte y pulsa **Aceptar**:
 
-![Asistente para importar tablas: seleccionar Lakehouse](../assets/images/import-table-wizard-select-lakehouse.png)
+![Asistente de importación de tablas: seleccionar Lakehouse](../assets/images/import-table-wizard-select-lakehouse.png)
 
 A menos que quieras especificar una consulta SQL personalizada o configurar las tablas para el modo DirectQuery, simplemente pulsa **Siguiente** para seleccionar las tablas desde una lista de tablas/vistas en el origen:
 
-![Asistente para importar tablas: seleccionar vs. consulta personalizada](../assets/images/import-table-wizard-select-vs-custom-query.png)
+![Asistente de importación de tablas: seleccionar frente a consulta personalizada](../assets/images/import-table-wizard-select-vs-custom-query.png)
 
 Selecciona las tablas/vistas que quieras importar. Ten en cuenta que las **vistas no materializadas** no se admiten en el modo Direct Lake en OneLake. Al intentar agregar una vista de este tipo al modelo, se producirá un error al guardar los metadatos del modelo.
 
-![Import Table Wizard Select Objects](../assets/images/import-table-wizard-select-objects.png)
+![Asistente de importación de tablas: seleccionar objetos](../assets/images/import-table-wizard-select-objects.png)
 
 En la última página, elige con qué modo quieres que se configure la partición de la tabla:
 
@@ -109,6 +109,12 @@ Las opciones son:
 
 > [!NOTE]
 > Si estás trabajando en un modelo que ya contiene tablas, es posible que una o varias de las opciones mencionadas anteriormente no estén disponibles si el modelo no admite combinar tablas con distintos modos de almacenamiento. Por ejemplo, si el modelo contiene una tabla en modo Direct Lake en SQL, no puedes agregar tablas en otros modos.
+
+La tabla importada ya incluye sus columnas, en el mismo orden que en el origen, y no es necesario ejecutar **Actualizar esquema de tabla** después de la importación. Si Tabular Editor no puede determinar el punto de conexión de análisis SQL del Lakehouse o del Warehouse, y la configuración de importación no especifica uno, la importación falla con un error que indica la configuración que falta y no se crea ninguna tabla.
+
+## Inspeccionar una partición de Direct Lake
+
+Una partición de Direct Lake no tiene expresión de consulta. Al seleccionar una en @tom-explorer-view, el **Editor de expresiones** muestra su `Data Coverage Definition Expression` o nada si la partición no tiene una definición de cobertura de datos. Las particiones generadas por una política de actualización incremental se comportan igual.
 
 ## Expresiones de Power Query (M)
 
@@ -195,7 +201,7 @@ Reemplaza `<sql-endpoint>` por la cadena de conexión del [punto de conexión de
 
 Reemplaza `<schema-name>` por el nombre del esquema en el Warehouse/Lakehouse y `<table/view-name>` por el nombre de la tabla o vista que quieras importar. Ten en cuenta que las tablas en Import mode pueden usar vistas no materializadas como Data source, ya que los datos se consultan a través del punto de conexión de análisis SQL durante las operaciones de actualización.
 
-3. **Actualizar metadatos de columnas**: Usa la función **Update Table Schema** de Tabular Editor para actualizar los metadatos de columnas de la tabla. Esto recuperará automáticamente los nombres de columna y los tipos de datos del Lakehouse/Warehouse. Como alternativa, crea columnas de datos manualmente (Alt+4) y especifica `Name`, `Data Type`, `Source Column` y cualquier otra propiedad relevante para cada columna.
+3. **Actualizar metadatos de columnas** (solo configuración manual): como una partición configurada manualmente no tiene columnas, puede usar la característica **Actualizar esquema de tabla** de Tabular Editor para recuperar los nombres de las columnas y los tipos de datos del Lakehouse/Warehouse. Como alternativa, crea columnas de datos manualmente (**Alt+4**) y especifica `Name`, `Data Type`, `Source Column` y cualquier otra propiedad relevante para cada columna.
 
 ## Conversión entre modos de almacenamiento
 

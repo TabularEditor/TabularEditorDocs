@@ -2,31 +2,31 @@
 uid: kb.bpa-powerbi-latest-compatibility
 title: 在 Power BI 模型中使用最新的兼容级别
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-09-23
 description: 最佳实践规则：确保 Power BI 模型使用最新的兼容级别，以获得最佳功能与性能。
 ---
 
 # 在 Power BI 模型中使用最新的兼容级别
 
-## 概述
+## 概览
 
-此规则用于识别未使用最新可用兼容级别的 Power BI 模型。 使用最新兼容级别可确保获得最新功能、性能优化以及错误修复。
+此规则会标记兼容级别低于你所用 Tabular Editor 3 版本支持的最高级别的 Power BI 模型。新的模型功能（如新的 DAX 函数和 TOM 属性）需要较新的级别。
 
 - 类别：治理
 - 严重性：高（3）
 
-## 适用范围
+## 适用于
 
 - 模型（仅限 Power BI 语义模型）
 
-## 为何重要
+## 为何这很重要
 
-- **功能缺失**：无法使用新的 DAX 函数和模型能力
-- **面向未来的兼容性**：使用较新的级别可让升级更轻松
+- 兼容级别低于引入这些功能的级别时，新的 DAX 函数和模型功能将不可用
+- 将模型保持在较新的级别，后续升级所需改动会更小
 
-## 何时触发此规则
+## 此规则何时会触发
 
-对于 Power BI 模型，当兼容级别低于当前最大值时会触发：
+当 Power BI 模型的兼容级别不是当前最高级别时，此规则会触发：
 
 ```csharp
 Model.Database.CompatibilityMode=="PowerBI" 
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### 自动修复
 
-该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。
+此规则的自动修复会将兼容级别设置为你已安装的 Tabular Editor 3 版本所支持的最高级别。如需使用更新的级别，请更新 Tabular Editor 3。
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -45,20 +45,22 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### 手动修复
 
-1. 在 Tabular Editor 中，转到 **Model** 属性页
-2. 将**兼容级别**设置为最新版本
-3. 测试所有 DAX 表达式和功能
-4. 部署到 Power BI 服务
+1. 在 TOM Explorer 中，选择 **Model**，然后在 **Properties** 视图中展开 **Database**。
+2. 将 **兼容级别** 设置为最新级别。
+3. 测试模型的 DAX 表达式和功能。
+4. 部署到 Power BI 服务。
+
+参见 @update-compatibility-level。
 
 ## 常见原因
 
 ### 原因 1：在 Power BI Desktop 中创建模型
 
-在 Power BI Desktop 中创建的模型未必使用最新的兼容级别。
+Power BI Desktop 并不总是按最新兼容级别创建模型。
 
 ### 原因 2：模型以较低兼容级别创建
 
-模型使用较旧版本的 Power BI Desktop 创建。
+该模型是由较旧版本的 Power BI Desktop 创建的。
 
 ### 原因 3：保守做法
 
@@ -68,18 +70,18 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### 修复前
 
-```
-模型兼容级别：1500
-当前最高级别：1700
+```text
+Model Compatibility Level: 1500
+Current Maximum Level: 1706
 ```
 
 ### 修复后
 
-```
-模型兼容级别：1700（最新）
+```text
+Model Compatibility Level: 1706 (Latest)
 ```
 
-可使用增强的计算组和字段参数等新功能。
+该模型可以使用 [自定义日历](xref:calendars)（1701+）、[DAX 用户定义函数](xref:udfs)（1702+）、[用户上下文计算列](xref:user-context-calculated-columns)（1705+）以及 `StringIndexingBehavior` 列属性（1706+）。
 
 ## 兼容级别
 

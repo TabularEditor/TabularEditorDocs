@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: 仅限高级每用户 XMLA 终结点
+          note: 仅适用于 Premium Per User XMLA 终结点
         - edition: Enterprise
           full: true
 ---
