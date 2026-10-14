@@ -76,7 +76,7 @@ applies_to:
 
 变更检测基于各表中所有数据列的“源列”和“数据类型”属性。如果检测到任何变更，Tabular Editor 将显示上述 UI，并详细列出这些变更。你可以取消勾选不想应用到模型中的变更，但要注意，某些变更可能会导致处理错误（例如源表/视图/查询中不存在的源列）。
 
-该机制（以及导入表 UI）在从数据源查询元数据时会使用 FormatOnly-flag。这意味着你可以让表分区使用存储过程。 FormatOnly-flag 可确保不会直接执行该存储过程。取而代之的是，服务器会执行静态分析，仅返回元数据，用于描述该存储过程在执行时会返回的结果集。取决于所使用的 RDBMS，FormatOnly-flag 与存储过程一起使用时可能存在一些限制。 For more information on this topic when using SQL Server as a data source, please see [this article](https://docs.microsoft.com/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
+该机制（以及导入表 UI）在从数据源查询元数据时会使用 FormatOnly-flag。这意味着你可以让表分区使用存储过程。 FormatOnly-flag 可确保不会直接执行该存储过程。取而代之的是，服务器会执行静态分析，仅返回元数据，用于描述该存储过程在执行时会返回的结果集。取决于所使用的 RDBMS，FormatOnly-flag 与存储过程一起使用时可能存在一些限制。如需了解在将 SQL Server 用作数据源时与此主题相关的更多信息，请参阅[这篇文章](https://docs.microsoft.com/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks)。
 
 ### CLI 支持
 
@@ -110,7 +110,7 @@ applies_to:
 
 ## 启用 MFA 的 Azure Active Directory
 
-如果你想从 Azure SQL 数据库或 Azure Synapse SQL 池导入表，很可能需要 Azure Active Directory 多因素身份验证。遗憾的是，.NET Framework 中使用的 SQL Native Client 提供程序不支持这种方式。请改用 MSOLEDBSQL 提供程序（另外一个好处是，当 Analysis Services 从表中读取数据时，它通常比 SQL Native Client 更快）。 Make sure you have the [latest (x86) version](https://docs.microsoft.com/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) of this driver installed, to make this work on your local machine.
+如果你想从 Azure SQL 数据库或 Azure Synapse SQL 池导入表，很可能需要 Azure Active Directory 多因素身份验证。遗憾的是，.NET Framework 中使用的 SQL Native Client 提供程序不支持这种方式。请改用 MSOLEDBSQL 提供程序（另外一个好处是，当 Analysis Services 从表中读取数据时，它通常比 SQL Native Client 更快）。为确保其在本地计算机上正常运行，请确保已安装该驱动程序的[最新（x86）版本](https://docs.microsoft.com/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15)。
 
 下面是将数据源设置为支持 MFA 的分步说明：
 
@@ -148,7 +148,7 @@ Provider=MSOLEDBSQL;Data Source=<sql server name>.database.windows.net;User ID=d
   ![image](~/content/assets/images/importing-tables-07.png)
 - 对于其他类型的数据源，可能更方便的做法是先在 SSDT 中创建初始模型和前几张表，以弄清楚数据源应如何配置；之后在添加更多表时再使用下面的技巧。
 - 在 Excel 或 Power BI Desktop 里使用 Power Query 连接到源数据，并应用需要的转换。
-- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/powerquery-m/table-schema) on the previous output:
+- 在 Power Query 的“高级编辑器”中，添加一个步骤，在上一步的输出结果上调用 `Table.Schema(...)` [M 函数](https://docs.microsoft.com/powerquery-m/table-schema)：
   ![image](~/content/assets/images/importing-tables-08.png)
 - 选择完整的输出预览，将其复制到剪贴板（CTRL+A、CTRL+C），然后粘贴到“导入表向导”中的架构/元数据文本框里：
   ![image](~/content/assets/images/importing-tables-09.png)
