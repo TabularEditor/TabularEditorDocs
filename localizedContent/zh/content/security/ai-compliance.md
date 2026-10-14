@@ -142,13 +142,13 @@ AI Assistant 和 MCP 服务器会按如下方式应用这些授权：
 
 ### 关闭 AI 功能
 
-| 要求                                                                                        | 策略                 | 版本 |
-| ----------------------------------------------------------------------------------------- | ------------------ | -- |
-| No AI features, and the AI component left out of new installations and removed on upgrade | `DisableAi`        | 全部 |
-| 禁用 AI 助手，允许使用 MCP 服务器                                                                     | `DisableAiChat`    | 全部 |
-| 禁用 MCP 服务器，允许使用 AI 助手                                                                     | `DisableMcpServer` | 全部 |
+| 要求                              | 策略                 | 版本 |
+| ------------------------------- | ------------------ | -- |
+| 不提供 AI 功能，新安装不包含 AI 组件，升级时会将其移除 | `DisableAi`        | 全部 |
+| 禁用 AI 助手，允许使用 MCP 服务器           | `DisableAiChat`    | 全部 |
+| 禁用 MCP 服务器，允许使用 AI 助手           | `DisableMcpServer` | 全部 |
 
-`DisableAi` 还会清除所有已保存的提供商配置，包括 API 密钥。 An installation the installer hasn't run on since the policy was set keeps the AI files on disk, and Tabular Editor 3 doesn't load them. See [Enforcing the decision with the DisableAi policy](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy).
+`DisableAi` 还会清除所有已保存的提供商配置，包括 API 密钥。如果在设置该策略后，安装程序尚未在某次安装上运行过，则 AI 文件仍会保留在磁盘上，但 Tabular Editor 3 不会加载它们。参见[使用 DisableAi 策略强制执行该决定](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy)。
 
 Tabular Editor 3 的便携版无需安装。它在运行时会遵循 `DisableAi` 设置。如果用户不得运行旧版本，请使用应用程序控制，例如 AppLocker 或 Windows Defender Application Control。
 
