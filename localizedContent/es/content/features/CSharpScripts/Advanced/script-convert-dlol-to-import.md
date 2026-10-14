@@ -2,7 +2,7 @@
 uid: script-convert-dlol-to-import
 title: Convertir Direct Lake en OneLake a modo Import
 author: Morten Lønskov
-updated: 2025-06-25
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 
 ## Objetivo del script
 
-Este script convierte las tablas de Direct Lake en OneLake (DL/OL) al modo Import mode. Tal como se indica en el [artículo de orientación de Direct Lake](xref:direct-lake-guidance), necesitamos reemplazar el [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) de este tipo de tablas por la partición M normal correspondiente en el modo Import mode.
+Este script convierte las tablas de Direct Lake en OneLake (DL/OL) al modo Import mode. Tal como se explica en el [artículo de orientación de Direct Lake](xref:direct-lake-guidance), debemos reemplazar la [EntityPartition](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) de este tipo de tablas por la partición M estándar correspondiente en el modo Import mode.
 
 ## Requisitos previos
 
