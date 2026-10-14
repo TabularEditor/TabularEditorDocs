@@ -2,7 +2,7 @@
 uid: load-save-model
 title: Load and save model metadata
 author: Morten Lønskov
-updated: 2026-09-22
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "Desktop Edition cannot open or save model metadata files."
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -22,7 +22,7 @@ applies_to:
 Tabular Editor reads model metadata into memory from a file, a folder or a server, and writes it back to the same place or to a new one.
 
 > [!NOTE]
-> Metadata is the definition of your tables, measures, relationships and so on, not your data. Loading a model doesn't load the rows in its tables. See [Table Preview](xref:pivot-grid) and [Advanced refresh](xref:advanced-refresh) for working with data.
+> Metadata defines tables, measures and relationships but contains no data, and loading a model doesn't load the rows in its tables. See [Table Preview](xref:table-preview) and [Advanced refresh](xref:advanced-refresh) for working with data.
 
 ## Loading a model
 
@@ -30,17 +30,17 @@ Tabular Editor reads model metadata into memory from a file, a folder or a serve
 
 | Source | Command |
 |---|---|
-| A `Model.bim` or `.bim` file | **File > Open > Model from file...** |
-| A folder structure, in either the JSON or the [Tabular Model Definition Language (TMDL)](xref:tmdl) format | **File > Open > Model from folder...** |
+| A `Model.bim` or `.bim` file | **File > Open > Model from File...** |
+| A folder structure, in either the JSON or the [Tabular Model Definition Language (TMDL)](xref:tmdl) format | **File > Open > Model from Folder...** |
 | An Analysis Services or Power BI XMLA database | **File > Open > Model from DB...** (**Ctrl+Shift+O**) |
 | A running instance of Power BI Desktop | **File > Open > Model from DB...**, or start Tabular Editor from Power BI Desktop's **External Tools** ribbon |
 
 A `.bim` file must be Compatibility Level 1200 or newer. Earlier levels use the older XML-based format, which Tabular Editor doesn't open.
 
-For everything Tabular Editor recognises, including the supporting file types that aren't model metadata, see [Supported file types](xref:supported-files).
+For everything Tabular Editor recognizes, including the supporting file types that aren't model metadata, see [Supported file types](xref:supported-files).
 
 > [!TIP]
-> **File > Recent tabular models** reopens a model you had open before, whether it came from a file, a folder or a database.
+> **File > Recent Tabular Models** reopens a model you had open before.
 
 ## Saving a model
 
@@ -49,18 +49,25 @@ For everything Tabular Editor recognises, including the supporting file types th
 To write a model somewhere else, or in a different format:
 
 - **File > Save As...** saves the model metadata as a single `.bim` file.
-- **File > Save to folder...** saves the model metadata as a [folder structure](xref:save-to-folder), in either the JSON or the TMDL format, depending on the serialization mode under **Tools > Preferences > File Formats > Save-to-folder**.
+- **File > Save to Folder...** saves the model metadata as a [folder structure](xref:save-to-folder), in either the JSON or the TMDL format, depending on the serialization mode under **Tools > Preferences > File Formats > Save-to-folder**.
 
 > [!IMPORTANT]
-> A model loaded from a legacy JSON folder structure is saved in that same format when you use **File > Save**, even if your preferences say TMDL. The format changes only when you explicitly use **File > Save to folder...**. See [TMDL](xref:tmdl).
+> A model loaded from a legacy JSON folder structure is saved in that same format when you use **File > Save**, even if your preferences say TMDL. The format changes only when you use **File > Save to Folder...**. See [TMDL](xref:tmdl).
 
 ## Reloading
 
-**File > Reload from disk** discards everything you've changed since your last save and reloads the metadata from the source. For a model you opened from a server, the command reads **Reload from server** instead, and for a model whose source is not yet known, **Reload from source**. In Tabular Editor 3.26 and earlier, and in Tabular Editor 2, the command is called **File > Revert**.
+**File > Reload from disk** discards your changes since the last save and reloads the metadata from the source. If you have unsaved changes, a **Reload model metadata?** prompt appears first. The command label depends on the model source:
 
-You are asked to confirm only when there is something to lose: with unsaved changes, a **Reload model metadata?** prompt appears first. The status bar reports the reload while it runs, and says so when it is done.
+| Model source | Command |
+|---|---|
+| A file or folder | **Reload from disk** |
+| A model in [workspace mode](xref:workspace-mode) | **Reload from disk**. The model reloads from its files and redeploys to the workspace database. |
+| Analysis Services or Power BI, outside workspace mode | **Reload from server** |
+| No model loaded | **Reload from source**, disabled |
 
-If an agent, a script or a `git pull` rewrites the metadata files while you have the model open, Tabular Editor notices and reloads the model for you, so the two copies stay in step without a manual revert. See [Auto-reload from disk](xref:auto-reload).
+In Tabular Editor 3.26 and earlier, and in Tabular Editor 2, the command is called **File > Revert**.
+
+In Tabular Editor 3.27.0 and later, when an agent, a script or a `git pull` changes the metadata files of the open model, the model is reloaded, after a prompt if you have unsaved changes. See [Auto-reload from disk](xref:auto-reload).
 
 > [!WARNING]
 > Back up your model metadata before you let any tool write to it, Tabular Editor included. A save overwrites the source, and reloading can't bring back changes you've already saved.
@@ -69,4 +76,4 @@ If an agent, a script or a `git pull` rewrites the metadata files while you have
 
 - [Save to folder](xref:save-to-folder) for the folder formats and the serialization settings that control how a model is split across files.
 - [Enabling parallel development using Git and Save to Folder](xref:parallel-development) if more than one person works on the model.
-- [Deployment](xref:deployment) to write the model to an Analysis Services server rather than to disk.
+- [Deployment](xref:deployment) to write the model to an Analysis Services server.
