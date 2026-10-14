@@ -290,16 +290,16 @@ url = "http://127.0.0.1:42100/"
 
 MCP 服务器默认启用，任何用户都可以将其关闭。管理员可以使用以下 [策略](xref:policies) 来控制 MCP 的运行方式：
 
-| 策略                                          | 版本   | 作用                                                                                                                                                    |
-| ------------------------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DisableMcpServer`                          | 所有版本 | 移除 MCP 服务器。 AI 助手聊天不受影响                                                                                                                               |
-| `DisableAi`                                 | 所有版本 | 关闭所有 AI 功能，包括 MCP 服务器。 With a `REG_DWORD` value of `1`, the installer also leaves the AI component out of new installations and removes it on upgrade |
-| `RequireMcpAccessToken`                     | 所有版本 | 强制使用令牌进行身份验证，并锁定该偏好                                                                                                                                   |
-| `DisableCSharpScripts`                      | 全部   | 阻止代理运行 C# Script，并禁止将脚本草拟到文档中。起草 DAX 查询以及所有只读工具都不受影响                                                                                                  |
-| `BlockUnsafeScripts`                        | 企业版  | 在 Tabular Editor 中，所有脚本都只能在模型内部运行。访问文件、网络、其他进程或外部程序集的代理脚本不会运行，也不会打开任何审阅文档                                                                             |
-| `Max...` 和 `McpMax...` 权限限制                 | 企业版  | 为每种资源设置上限。 `Max...` 限制适用于 AI Assistant 和 MCP 服务器。 `McpMax...` 限制仅适用于 MCP 服务器，并且只能将 `Max...` 限制调低                                                      |
-| `AiAuditLogPath`, `AiAuditLogRetentionDays` | 企业版  | 设置 [审计日志](xref:ai-audit-log) 的位置和保留期                                                                                                                  |
-| `AiProvider` 及相关值                           | 企业版  | 锁定 AI Assistant 的提供程序。 MCP 服务器不受影响                                                                                                                    |
+| 策略                                          | 版本   | 作用                                                                                               |
+| ------------------------------------------- | ---- | ------------------------------------------------------------------------------------------------ |
+| `DisableMcpServer`                          | 所有版本 | 移除 MCP 服务器。 AI 助手聊天不受影响                                                                          |
+| `DisableAi`                                 | 所有版本 | 关闭所有 AI 功能，包括 MCP 服务器。将 `REG_DWORD` 的值设为 `1` 后，安装程序在全新安装时也不会安装 AI 组件，并会在升级时将其移除                  |
+| `RequireMcpAccessToken`                     | 所有版本 | 强制使用令牌进行身份验证，并锁定该偏好                                                                              |
+| `DisableCSharpScripts`                      | 全部   | 阻止代理运行 C# Script，并禁止将脚本草拟到文档中。起草 DAX 查询以及所有只读工具都不受影响                                             |
+| `BlockUnsafeScripts`                        | 企业版  | 在 Tabular Editor 中，所有脚本都只能在模型内部运行。访问文件、网络、其他进程或外部程序集的代理脚本不会运行，也不会打开任何审阅文档                        |
+| `Max...` 和 `McpMax...` 权限限制                 | 企业版  | 为每种资源设置上限。 `Max...` 限制适用于 AI Assistant 和 MCP 服务器。 `McpMax...` 限制仅适用于 MCP 服务器，并且只能将 `Max...` 限制调低 |
+| `AiAuditLogPath`, `AiAuditLogRetentionDays` | 企业版  | 设置 [审计日志](xref:ai-audit-log) 的位置和保留期                                                             |
+| `AiProvider` 及相关值                           | 企业版  | 锁定 AI Assistant 的提供程序。 MCP 服务器不受影响                                                               |
 
 > [!WARNING]
 > 如果没有 Enterprise 许可证，任何 Enterprise 策略设置都会阻止 AI Assistant 和 MCP 服务器启动，并移除菜单项和状态栏指示器。 `BlockUnsafeScripts` 值还会阻止所有脚本和宏，因此只能将 Enterprise 策略部署到具有 Enterprise 许可证的计算机上（请参阅[没有企业版时会发生什么](xref:policies#what-happens-without-enterprise-edition)）。
