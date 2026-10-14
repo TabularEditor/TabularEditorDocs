@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 ---
 
 # Tabular Editor
@@ -77,7 +77,7 @@ En la tabla siguiente se muestran las principales características de ambas herr
 
 ### Características comunes
 
-Ambas herramientas ofrecen las mismas características en cuanto a las opciones de modelado de datos disponibles, ya que, básicamente, exponen todos los objetos y propiedades del [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) mediante una interfaz de usuario intuitiva y ágil. Puedes editar propiedades avanzadas de los objetos que no están disponibles en las herramientas estándar. Las herramientas pueden cargar los metadatos del modelo desde archivos o desde cualquier instancia de Analysis Services. Los cambios solo se sincronizan cuando pulsas Ctrl+S (guardar), lo que ofrece una experiencia de edición "sin conexión" que la mayoría considera superior al modo "siempre sincronizado" de las herramientas estándar. Esto se nota especialmente al trabajar con Data model grandes y complejos.
+Both tools provide the same features in terms of which data modeling options are available, by basically exposing every object and property of the [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), in an intuitive and responsive user interface. Puedes editar propiedades avanzadas de los objetos que no están disponibles en las herramientas estándar. Las herramientas pueden cargar los metadatos del modelo desde archivos o desde cualquier instancia de Analysis Services. Los cambios solo se sincronizan cuando pulsas Ctrl+S (guardar), lo que ofrece una experiencia de edición "sin conexión" que la mayoría considera superior al modo "siempre sincronizado" de las herramientas estándar. Esto se nota especialmente al trabajar con Data model grandes y complejos.
 
 Además, ambas herramientas permiten hacer varios cambios en los metadatos del modelo en lote, cambiar el nombre de objetos en lote, copiar y pegar objetos, arrastrar y soltar objetos entre tablas y carpetas de visualización, etc. Las herramientas incluso incluyen compatibilidad con deshacer/rehacer.
 
