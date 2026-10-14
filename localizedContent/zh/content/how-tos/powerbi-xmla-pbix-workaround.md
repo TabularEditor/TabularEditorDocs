@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: 从 XMLA endpoint 创建 PBIX 文件。
 author: Morten Lønskov
-updated: 2026-09-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ applies_to:
 ![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> 本文所述的变通方法并非 Microsoft 官方支持。无法保证它对每个模型都有效。具体而言，如果你添加了自定义分区或其他[此处列出的](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)对象，Power BI Desktop 可能无法通过这种方式正确打开该文件。下方提供了一个脚本，用于处理增量刷新分区。
+> 本文所述的变通方法并非 Microsoft 官方支持。无法保证它对每个模型都有效。 Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. 下方提供了一个脚本，用于处理增量刷新分区。
 
 ## 步骤 1：创建并保存一个空的 Power BI Project（.pbip）文件
 
