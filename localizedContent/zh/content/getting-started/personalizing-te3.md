@@ -36,7 +36,7 @@ Tabular Editor 3 提供了丰富的配置选项，让你可以根据具体需求
 
 ## Power BI
 
-These settings are mostly useful for developers who use Tabular Editor 3 as an [External Tool for Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools).
+这些设置主要适用于将 Tabular Editor 3 用作 [Power BI Desktop 的外部工具](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools) 的开发人员。
 
 ##### _允许执行不受支持的建模操作_（默认禁用）
 
