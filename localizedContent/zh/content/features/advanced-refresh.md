@@ -2,7 +2,7 @@
 uid: advanced-refresh
 title: 高级刷新对话框
 author: Daniel Otykier
-updated: 2026-01-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -88,7 +88,7 @@ applies_to:
 - **编辑...**：修改所选覆盖配置文件。
 - **删除**：删除所选覆盖配置文件。
 
-该 TMSL 定义遵循 [TMSL 刷新命令规范](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)，使你能够覆盖以下对象的属性：
+该 TMSL 定义遵循 [TMSL 刷新命令规范](https://learn.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)，使你能够覆盖以下对象的属性：
 
 - 数据源
 - 共享表达式
