@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: Asistente de IA
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -484,7 +484,7 @@ Otras formas de reducir el uso de tokens:
 
 ## Desactivar el Asistente de IA
 
-El Asistente de IA es un componente opcional, instalado de forma predeterminada a partir de Tabular Editor 3.27.0. Vuelve a ejecutar el instalador de Tabular Editor 3 para incluirlo o excluirlo de una instalación existente. En la versión portátil, elimina `TabularEditor3.AI.dll` del directorio de instalación para quitar este componente.
+El Asistente de IA es un componente opcional, instalado de forma predeterminada a partir de Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again and select **Modify** to include or exclude it in an existing installation. An upgrade keeps the existing selection; see [Upgrades and the AI features component](xref:installation-activation-basic#upgrades-and-the-ai-features-component). En la versión portátil, elimina `TabularEditor3.AI.dll` del directorio de instalación para quitar este componente.
 
 El mismo componente contiene el servidor MCP, por lo que excluirlo o eliminar `TabularEditor3.AI.dll` elimina ambos. Para desactivar solo el chat, mantén el componente y establece la directiva `DisableAiChat`.
 
