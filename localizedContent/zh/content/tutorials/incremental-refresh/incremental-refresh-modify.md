@@ -26,7 +26,7 @@ applies_to:
 **增量刷新可通过调整刷新策略属性来修改。** 根据你想更改的内容，需要调整的属性也会不同。这些属性的完整概览请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
 
 > [!IMPORTANT]
-> 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。 For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
@@ -168,7 +168,7 @@ in
 
 ### 使用 `EffectiveDate` 应用刷新策略
 
-If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
+如果你想在生成分区时覆盖当前日期（以便生成不同的滚动窗口范围），可以在 Tabular Editor 中使用一个小脚本，通过 [EffectiveDate](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) 参数来应用刷新策略。
 
 选中增量刷新表后，在 Tabular Editor 的 _“New C# Script”_ 窗格中运行以下脚本，而不是通过右键单击表来应用刷新策略。
 
