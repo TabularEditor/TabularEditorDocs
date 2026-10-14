@@ -36,7 +36,7 @@ La primera página que encontrarás en el cuadro de diálogo **Preferencias** es
 
 ## Power BI
 
-These settings are mostly useful for developers who use Tabular Editor 3 as an [External Tool for Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools).
+Estos ajustes son útiles sobre todo para los desarrolladores que usan Tabular Editor 3 como una [herramienta externa para Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools).
 
 ##### _Permitir operaciones de modelado no compatibles_ (deshabilitado)
 
