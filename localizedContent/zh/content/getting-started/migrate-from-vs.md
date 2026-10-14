@@ -2,7 +2,7 @@
 uid: migrate-from-vs
 title: 从 Visual Studio 迁移
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ applies_to:
 
 Tabular Editor 3 提供了一些功能，让你在表格模型开发中可以完全不再依赖 Visual Studio。相比之下，在 Tabular Editor 2.x 中，一些用户仍更喜欢用 Visual Studio 来做表导入、可视化关系以及预览数据等工作。
 
-不过，随着你逐渐熟悉 Tabular Editor 3，你可能仍会觉得时不时在 Visual Studio 中打开表格模型很有用。这随时都可以实现，因为 Tabular Editor 3 不会修改 Visual Studio 使用的 **Model.bim** 文件格式（也称为 [TOM JSON](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)），因此可确保与 Visual Studio 兼容。
+不过，随着你逐渐熟悉 Tabular Editor 3，你可能仍会觉得时不时在 Visual Studio 中打开表格模型很有用。 This is possible at any time, since Tabular Editor 3 does not modify the **Model.bim** file format (aka. the [TOM JSON](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) used by Visual Studio, thus ensuring compatibility with Visual Studio.
 
 唯一的例外情况是：如果你选择使用 Tabular Editor 的 [保存到文件夹](xref:save-to-folder) 功能，由于 Visual Studio 不支持这种文件格式，因此无法兼容。不过，你可以在 Tabular Editor 中通过 **File > Save As...** 选项，轻松重新生成供 Visual Studio 使用的 Model.bim 文件。反向转换也可以这样做：在 Tabular Editor 中加载 Model.bim 文件，然后使用 **File > 保存到文件夹...** 选项即可。
 
@@ -61,7 +61,7 @@ tabulareditor.exe database.json -B model.bim
 ***
 
 > [!NOTE]
-> 上述命令行脚本假定你已安装 [Tabular Editor 2.x](xref:getting-started-te2)。 Tabular Editor 2.x 的安装位置也应加入你的 [PATH 环境变量](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/path)。
+> 上述命令行脚本假定你已安装 [Tabular Editor 2.x](xref:getting-started-te2)。 The installation location of Tabular Editor 2.x should also be specified as part of your [PATH environment variable](https://learn.microsoft.com/windows-server/administration/windows-commands/path).
 
 ## 集成 Workspace 服务器
 
@@ -173,7 +173,7 @@ Tabular Editor 3 的 DAX 代码编辑器，是很多人选择这款工具的主�
 
 在上面的截图中，你可以看到有三个不同的信息发布来源：
 
-- **Analysis Services**：当元数据更改保存到已连接的 Analysis Services 实例时，服务器会更新 TOM 元数据，以标明是否有对象处于错误状态。具体来说，[State](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) 和 [ErrorMessage](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) 属性会被更新。 Tabular Editor 会在信息视图中显示这些错误信息。当 Tabular Editor 以脱机方式使用（即未连接到 Analysis Services）时，不会显示这些信息。
+- **Analysis Services**：当元数据更改保存到已连接的 Analysis Services 实例时，服务器会更新 TOM 元数据，以标明是否有对象处于错误状态。 Specifically, the [State](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) and [ErrorMessage](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) properties are updated. Tabular Editor 会在信息视图中显示这些错误信息。当 Tabular Editor 以脱机方式使用（即未连接到 Analysis Services）时，不会显示这些信息。
 - **Tabular Editor 语义分析**：此外，Tabular Editor 3 会对模型中的所有 DAX 表达式执行其自身的语义分析。遇到的任何语法或语义错误都会在此处的 Report 中报告。
 - **表达式编辑器**：最后，如果你在 Tabular Editor 3 中打开了任何文档（例如表达式编辑器），则文档中遇到的任何 DAX 语法或语义错误都会在此处的 Report 中报告。
 
