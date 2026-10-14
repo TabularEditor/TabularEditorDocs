@@ -76,7 +76,7 @@ Tabular Editor 3 支持对不同对象类型执行刷新操作。支持的刷新
 - **计算表格**（计算）
 - **计算组**（计算）
 
-See [Refresh Types](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
+有关 Analysis Services / Power BI 支持的刷新操作类型的更多信息，请参阅[刷新类型](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
 
 # 预览表格数据
 
@@ -132,7 +132,7 @@ Tabular Editor 3 中的 DAX 查询会在模型发生更改或刷新操作完成�
 在查询模型中的数据时，有时需要模拟某个特定用户或一组角色，以便从最终用户的透视角度查看模型的行为表现。 Tabular Editor 3 支持点击 **模拟身份...** 按钮，来模拟特定用户或一个或多个角色。这适用于 [表格预览](#previewing-table-data)、[Pivot Grid](#pivot-grids) 和 [DAX 查询](#dax-queries)。
 
 > [!NOTE]
-> To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. 这仅适用于指定了模拟身份的那个数据视图（即 DAX 查询、Pivot Grid 或表格预览）。
+> 为模拟用户，Tabular Editor 在连接到 Analysis Services 时，会将 [`EffectiveUserName` 属性](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) 添加到连接字符串中。为模拟角色，Tabular Editor 会将 [`Roles` 属性](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) 添加到连接字符串中。这仅适用于指定了模拟身份的那个数据视图（即 DAX 查询、Pivot Grid 或表格预览）。
 
 点击 **模拟身份..** 按钮后（根据当前激活的数据视图类型，也可以在 **查询**、**Pivot Grid** 或 **表格预览** 菜单中找到），会弹出一个窗口，让你指定用户或选择一个或多个角色。
 
@@ -150,7 +150,7 @@ CustomData 功能允许你传入一个自定义字符串值，可在 DAX 表达�
 
 ![选择模拟](~/content/assets/images/impersonation-customdata.png)
 
-When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. 然后，你可以在 DAX 表达式中通过 [`CUSTOMDATA()` 函数](https://dax.guide/customdata/) 取回该值。
+当你在 **CustomData** 输入字段中输入值时，Tabular Editor 3 会将 [`CustomData` 属性](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) 添加到连接字符串中。然后，你可以在 DAX 表达式中通过 [`CUSTOMDATA()` 函数](https://dax.guide/customdata/) 取回该值。
 
 当应用使用自定义身份验证时，CustomData 常用于实现动态行级安全性。你提供的值可用于角色筛选表达式，通过连接字符串传入的自定义数据来控制用户能够看到哪些行。
 
