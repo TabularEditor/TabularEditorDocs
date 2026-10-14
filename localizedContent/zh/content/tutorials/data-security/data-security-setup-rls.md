@@ -183,6 +183,6 @@ ORDER BY [@RLS-Validation] DESC
 > 如果您的组织在 SQL Server Analysis Services 中使用本地 Active Directory，则需要使用__Windows AD 成员__选项，而不是__Azure AD 成员__。
 
 > [!NOTE]
-> Once a Power BI dataset has been published to the Power BI Service, you can also manage role members through the [Dataset Security settings](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Alternatively, you can manage role members through [SQL Server Management Studio](https://learn.microsoft.com/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (this applies to AAS/SSAS models in addition to Power BI dataset).
+> Power BI Dataset 发布到 Power BI 服务后，还可以通过 [Dataset 安全设置](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#manage-security-on-your-model) 管理角色成员。另外，你还可以通过 [SQL Server Management Studio](https://learn.microsoft.com/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) 管理角色成员（该方法不仅适用于 Power BI Dataset，也适用于 AAS/SSAS 模型）。
 
 ---
