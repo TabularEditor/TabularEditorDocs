@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Agregar medidas y otros objetos calculados
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ El resto de este artículo describe cómo crear medidas y otros objetos calculad
 Una vez que hayas [importado algunas tablas](xref:importing-tables-data-modeling#importing-new-tables) a tu modelo y [creado relaciones entre ellas](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram), es el momento de agregar algunas medidas explícitas que contengan tu lógica de negocio.
 
 > [!TIP]
-> Técnicamente, no es obligatorio agregar medidas explícitas a tu modelo antes de visualizar datos en un Report de Power BI. Sin embargo, es una buena práctica hacerlo siempre, ya que las herramientas cliente basadas en MDX (como Excel y el Pivot Grid de Tabular Editor 3) requieren que las medidas se definan explícitamente. Además, los [grupos de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) solo se aplican a medidas explícitas.
+> Técnicamente, no es obligatorio agregar medidas explícitas a tu modelo antes de visualizar datos en un Report de Power BI. Sin embargo, es una buena práctica hacerlo siempre, ya que las herramientas cliente basadas en MDX (como Excel y el Pivot Grid de Tabular Editor 3) requieren que las medidas se definan explícitamente. In addition, [Calculation Groups](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
 
 Para agregar una nueva medida con Tabular Editor, haz clic con el botón derecho en la tabla en la que quieres agregar la medida y luego elige **Crear > Medida** (ALT+1).
 
@@ -46,7 +46,7 @@ La vista **Editor de expresiones** se usa para escribir la expresión DAX de la 
 
 ![Agregar Medida Editar Dax](~/content/assets/images/add-measure-edit-dax.png)
 
-El desplegable de la esquina superior izquierda del **Editor de expresiones** se usa para alternar entre distintas propiedades DAX del objeto actualmente seleccionado. Por ejemplo, en las versiones más recientes de Analysis Services, las medidas tienen una propiedad `Expression` además de una [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Otros tipos de objetos pueden tener propiedades diferentes que contengan código DAX. Por ejemplo, los [KPI](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) tienen tres propiedades de DAX diferentes. Para agregar un KPI en Tabular Editor, haz clic con el botón derecho en una medida y selecciona **Create > KPI**.
+El desplegable de la esquina superior izquierda del **Editor de expresiones** se usa para alternar entre distintas propiedades DAX del objeto actualmente seleccionado. Por ejemplo, en las versiones más recientes de Analysis Services, las medidas tienen una propiedad `Expression` además de una [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Otros tipos de objetos pueden tener propiedades diferentes que contengan código DAX. For example, [KPIs](https://docs.microsoft.com/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) have three different DAX properties. Para agregar un KPI en Tabular Editor, haz clic con el botón derecho en una medida y selecciona **Create > KPI**.
 
 ![Editar Kpis](~/content/assets/images/editing-kpis.png)
 
@@ -78,7 +78,7 @@ Para agregar una tabla calculada, haz clic con el botón derecho en el modelo o 
 
 # Agregar grupos de cálculo
 
-Para agregar un [grupo de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Grupo de cálculo** (ALT+7). Asigna un nombre al grupo de cálculo. Considera también usar un nombre diferente para la columna **Name** predeterminada.
+To add a [calculation group](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Asigna un nombre al grupo de cálculo. Considera también usar un nombre diferente para la columna **Name** predeterminada.
 
 > [!IMPORTANT]
 > Esta opción solo está disponible para modelos con un nivel de compatibilidad 1470 o superior. Analysis Services admite los grupos de cálculo a partir del nivel de compatibilidad 1500.
