@@ -2,7 +2,7 @@
 uid: import-tables
 title: 导入表
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -168,7 +168,7 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 启用“**使用 Analysis Services 进行更改检测**”选项后，当请求更新架构时，Tabular Editor 3 将使用以下技术：
 
 1. 针对已连接的 Analysis Services 实例创建一个新的事务
-2. 向模型添加一个新的临时表。该表使用一个 Power Query 分区表达式，用于返回原始表达式的架构，而该原始表达式已请求更新架构。这是通过 [`Table.Schema` M 函数](https://docs.microsoft.com/en-us/powerquery-m/table-schema)实现的。
+2. 向模型添加一个新的临时表。该表使用一个 Power Query 分区表达式，用于返回原始表达式的架构，而该原始表达式已请求更新架构。这是通过 [`Table.Schema` M 函数](https://docs.microsoft.com/powerquery-m/table-schema) 实现的。
 3. Analysis Services 刷新该临时表。 Analysis Services 负责连接到数据源，以检索更新后的架构。
 4. Tabular Editor 3 查询临时表的内容，以获取架构元数据。
 5. 回滚该事务，使 Analysis Services 数据库或 Power BI 语义模型回到步骤 1 之前的原始状态。
@@ -177,7 +177,7 @@ Tabular Editor 3 内置 **表导入向导**，可帮助你在模型中创建数�
 借助该技术，无论表背后的 M 查询有多复杂、使用了哪些函数，Tabular Editor 3 都可以从原本不受支持的数据源导入并更新表。
 
 > [!NOTE]
-> 如果你的 M 表达式通过 M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) 函数等方式组合了多个来源的数据，你可能需要在 Power BI 服务中的语义模型里，将[**隐私级别**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/)从“私有”更改为“组织”。否则，你可能会看到一条错误提示：`<Query> references other queries or steps, so it may not directly access a 数据源。请重建此数据组合`。即使未启用“**使用 Analysis Services 进行更改检测**”，也可能出现此错误，因为当 M 表达式复杂到超出 Tabular Editor 3 内置架构检测能力时，Tabular Editor 3 会自动回退到该检测机制。
+> 如果您的 M 表达式通过 M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin) 函数等方式合并了来自多个数据源的数据，您可能需要在 Power BI 服务中的语义模型上，将 [**隐私级别**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) 从“私有”更改为“组织”。否则，你可能会看到一条错误提示：`<Query> references other queries or steps, so it may not directly access a 数据源。请重建此数据组合`。即使未启用“**使用 Analysis Services 进行更改检测**”，也可能出现此错误，因为当 M 表达式复杂到超出 Tabular Editor 3 内置架构检测能力时，Tabular Editor 3 会自动回退到该检测机制。
 
 ### 通过 Analysis Services 导入新表
 

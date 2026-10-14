@@ -2,7 +2,7 @@
 uid: user-interface
 title: 基本用户界面
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,14 +27,14 @@ applies_to:
 
 ![基本用户界面](~/content/assets/images/basic-ui.png)
 
-1. **标题栏**：已加载文件的名称，或所连接的 Analysis Services 数据库或 Power BI 语义模型的名称。
-2. **菜单栏**：Tabular Editor 3 的所有功能。有关各个菜单，请参阅 [菜单](#menus)。
-3. **工具栏**：最常用的功能。工具栏上的每个命令在菜单中也都能找到。可在 **工具 > 自定义...** 中自定义工具栏及其按钮。
-4. **TOM Explorer 视图**：根据 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据构建的模型对象树。顶部的切换按钮用于筛选显示哪些对象类型，搜索框则按名称筛选对象。
-5. **表达式编辑器**：编辑 TOM Explorer 中所选对象的 DAX、SQL 或 M 表达式。如果你关闭了它，双击 TOM Explorer 中的对象即可再次打开。如果对象有多个表达式属性，可使用顶部的下拉列表在它们之间切换。例如，KPI 具有目标、状态和趋势表达式。
-6. **属性视图**：TOM Explorer 中所选对象的所有 TOM 属性。该网格中大多数属性都可编辑；即使选中了多个对象，也可以同时编辑。某些属性，如 **格式字符串**、**连接字符串** 和 **角色成员**，可通过值单元格中的省略号按钮打开对话框或集合编辑器。
-7. **信息视图**：对模型的 DAX 表达式进行持续分析时发现的语义错误，以及来自 C# Script 的信息和 Analysis Services 报告的错误。
-8. **状态栏**：显示当前所选内容、Best Practice Analyzer 的检测结果等信息。当 [MCP 服务器](xref:mcp-server) 可用时，右端的指示器会显示 **MCP Started** 或 **MCP Stopped**，其工具提示会显示服务器正在侦听的地址。单击该指示器可打开 **MCP Server** 对话框；右键单击可启动或停止服务器、复制供代理使用的注册配置，或打开偏好设置页面。
+1. **标题栏**：显示当前加载的文件名；如果已连接，还会显示 Analysis Services 数据库或 Power BI 数据集的名称。
+2. **菜单栏**：菜单栏用于访问 Tabular Editor 3 的各项功能。有关所有菜单项的详细说明，请参阅[菜单](#menus)。
+3. **工具栏**：工具栏提供对最常用功能的快速访问。工具栏中可用的所有功能也都可以通过菜单访问。你可以在 **工具 > 自定义...** 中自定义工具栏及其按钮
+4. **TOM Explorer 视图**：以层级结构展示您的数据模型，所有对象均可用 .  来自表示你的 Data model 的 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据中的元数据。顶部的切换按钮可让你筛选要显示的对象。搜索框可按名称筛选对象。
+5. **表达式编辑器**：表达式编辑器提供一种快捷方式，用于编辑 TOM Explorer 中当前选中对象的任意 DAX、SQL 或 M 表达式。如果你关闭了表达式编辑器，只需在 TOM Explorer 中双击某个对象，即可将其重新打开。顶部的下拉列表可让你在不同的表达式属性之间切换，以防当前选定对象包含多个此类属性（例如，KPI 具有目标表达式、状态表达式和趋势表达式，它们是同一个 KPI 对象下的 3 个不同 DAX 表达式）。
+6. **属性视图**：显示 TOM Explorer 中当前选定对象（一个或多个）的所有可用 TOM 属性的详细信息。大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。
+7. **信息视图**：Tabular Editor 3 会持续分析你模型中的 DAX 表达式，查找语义错误。任何此类错误都会在此处显示。此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。
+8. **状态栏**：状态栏会提供与当前选择相关的各种上下文信息、Best Practice Analyzer 的检测结果等。当 [MCP 服务器](xref:mcp-server) 可用时，右侧末端的指示器会显示 **MCP Started** 或 **MCP Stopped**，其工具提示中会显示服务器正在侦听的地址。单击可打开 MCP Server 对话框；右键单击可启动或停止服务器、复制供你的代理使用的注册配置，或跳转到偏好页面。
 
 [视图菜单](#view) 可打开其他视图。
 
@@ -163,39 +163,39 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 
 ![视图菜单](~/content/assets/images/view-menu.png)
 
-- **TOM Explorer**：以树形结构显示已加载模型的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。请参阅 @tom-explorer-view。
-- **AI 助手**：用于建模任务的 AI 助手聊天界面。
-- **DAX 组件管理器**：浏览 DAX 用户定义函数组件，并将其安装到模型中。
-- **Best Practice Analyzer**：根据你定义的最佳实践规则验证模型。请参阅 @bpa-view。
-- **信息**：显示来自 Tabular Editor 3 语义分析器等来源的错误、警告和提示信息。请参阅 @messages-view。
-- **数据刷新**：跟踪在后台运行的刷新操作。请参阅 @data-refresh-view。
-- **表达式编辑器**：编辑 TOM Explorer 中所选对象的 DAX、M 或 SQL 表达式。见 @dax-editor。
-- **宏**：管理你通过 @csharp-scripts 创建的宏。请参阅 @creating-macros。
-- **VertiPaq分析器**：收集、导入和导出模型中数据的统计信息，用于 DAX 性能调优。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
-- **依赖关系**：[**DAX 依赖关系** 视图](xref:creating-and-testing-dax#dax-dependencies)显示所选对象与模型中其他对象之间的依赖关系。选择 **跟踪 TOM Explorer**，让它跟随 TOM Explorer 中的选中项。
-- **DAX优化器**：使用 [DAX优化器](https://www.daxoptimizer.com) 分析模型中的 DAX 性能问题。
-- **日历编辑器**：为现代时间智能功能定义和管理日历。
-- **透视编辑器**：以矩阵形式显示模型中每个透视包含哪些对象。
-- **元数据翻译编辑器**：提供一个表格，用于编辑模型对象的元数据翻译（区域设置）。
-- **工具栏 / 属性**：切换工具栏的可见性并打开属性视图（**F4**）。
+- **TOM Explorer**：TOM Explorer 以分层视图显示当前已加载模型元数据的整个 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。更多信息见 @tom-explorer-view。
+- **AI 助手**：AI 助手视图可让你与 AI 助手交互，协助完成建模任务。
+- **DAX 组件管理器**：DAX 组件管理器视图可让你浏览 DAX 用户定义函数组件，并将其安装到模型中。
+- **Best Practice Analyzer**: 通过让你指定用于最佳实践验证的规则，帮助提升模型质量。更多信息见 @bpa-view。
+- **信息**: 信息视图显示来自各种来源的错误、警告和信息性消息，例如 Tabular Editor 3 语义分析器。更多信息见 @messages-view。
+- **数据刷新**：数据刷新视图用于跟踪后台运行的数据刷新操作。更多信息见 @data-refresh-view。
+- **表达式编辑器**：这是一个“快速编辑器”，可让你编辑 TOM Explorer 中当前选定对象的 DAX、M 或 SQL 表达式。更多信息请参见 @dax-editor。
+- **宏**: 宏视图允许你管理你创建的任何宏。可通过 @csharp-scripts 创建宏。更多信息请参见 @creating-macros。
+- **VertiPaq分析器**：VertiPaq分析器视图允许你收集、导入和导出有关模型数据的详细统计信息，用于优化和调试 DAX 性能。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。更多信息请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
+- **依赖关系**：[**DAX 依赖关系**](xref:creating-and-testing-dax#dax-dependencies) 视图会以可视化方式显示当前选中对象与模型中其他对象之间的依赖关系。勾选 **Track TOM Explorer**，即可让其跟随树形结构中的选中项。
+- **DAX优化器**：DAX优化器视图与 [DAX优化器](https://www.daxoptimizer.com) 集成，用于分析模型中的 DAX 性能问题。
+- **日历编辑器**：日历编辑器视图允许你使用现代时间智能功能在模型中定义和管理日历。
+- **透视编辑器**：透视编辑器视图提供一个矩阵概览，显示模型的每个透视中包含了哪些对象。
+- **元数据翻译编辑器**: 元数据翻译编辑器视图提供一个网格，用于编辑模型对象的元数据翻译(区域设置)。
+- **工具栏 / 属性**：其余项可让你切换工具栏的可见性，并打开属性视图（F4）。
 
-### 模型
+## 模型
 
-**模型**菜单包含针对 Model 对象的操作；该对象是 TOM Explorer 的根节点。
+**模型**菜单显示可在“模型”对象级别执行的操作（即 TOM Explorer 的根对象）。
 
 ![模型菜单](~/content/assets/images/model-menu.png)
 
 - **Deploy...**：打开 Tabular Editor Deployment Wizard。参见 [模型部署](xref:deployment)。
 
 > [!IMPORTANT]
-> **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。参见 @editions。
+> **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。有关详细信息，请参阅 @editions。
 
-- **序列化选项...**：设置将模型元数据保存为文件或文件夹结构时的序列化方式。
-- **导入表...**：打开 Tabular Editor 3 导入表向导。参见 @importing-tables。
-- **更新架构（所有表）...**：将所有表的列与其数据源进行比较，并检测架构更改。参见 [更新表架构](xref:importing-tables#updating-table-schema)。
-- **Script DAX**：为所选对象生成 DAX脚本；如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX脚本。参见 @dax-scripts。
-- **刷新模型**：当 Tabular Editor 连接到 Analysis Services 时，在后台启动模型刷新。参见 [刷新命令 (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。此子菜单包含以下选项：
-  - **自动（模型）**：Analysis Services 仅刷新未处于“Ready”状态的对象。
+- **序列化选项...**：可配置将模型元数据保存到磁盘时（文件或文件夹结构）的序列化方式。
+- **导入表...** 启动 Tabular Editor 3 导入表向导。有关详细信息，请参阅 @importing-tables。
+- **更新架构 (所有表)...** 检测模型中所有表的数据源中的架构更改，并与当前已导入的列进行比较。有关更多信息，请参阅[更新表架构](xref:importing-tables#updating-table-schema)。
+- **Script DAX**: 为当前选定的对象生成 DAX 脚本(如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX 脚本)。有关详细信息，请参阅 @dax-scripts。
+- **刷新模型**: 当 Tabular Editor 连接到 Analysis Services 实例时，此子菜单包含用于在模型级别启动后台刷新操作的选项。此子菜单包含以下选项。有关详细信息，请参阅 [刷新命令 (TMSL)](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
+  - **自动（模型）**：Analysis Services 将决定要刷新的对象（仅刷新不处于“Ready”状态的对象）。
   - **完全刷新（模型）**：Analysis Services 对模型执行完全刷新。
   - **计算（模型）**：Analysis Services 将重新计算所有计算表格、计算列、计算组和关系。不会从数据源读取任何数据。
 - **添加 [对象类型]**：其余项用于创建模型的子对象，例如表、数据源和透视。
@@ -208,7 +208,7 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 
 - **自定义...**：打开“用户界面布局”自定义对话框，可在其中创建工具栏、重新排列并编辑菜单和工具栏按钮。
 - **偏好...**：打开“偏好”对话框，其中包含更新检查、代理设置、查询行数限制和请求超时等设置。见 @preferences。
-- **管理 BPA 规则...**：打开 Best Practice Analyzer 规则管理器，可在其中查看和编辑规则及规则集。参见 @bpa-view。
+- **管理 BPA 规则...**：打开 Best Practice Analyzer 规则管理器，可在其中查看和编辑规则及规则集。请参阅 @bpa-view。
 - **MCP Server...**：打开 **MCP Server** 对话框，可在其中启动或停止服务器，使外部 AI 代理能够处理当前打开的模型，查看该代理获得的权限，并复制用于代理的注册配置。请参阅 @mcp-server。如果未安装 AI 功能组件、未勾选 **启用 MCP 服务器**，或者管理员已通过策略将其禁用，则该项会被隐藏。
 
 ### 窗口

@@ -2,7 +2,7 @@
 uid: dax-package-manager
 title: DAX 组件管理器
 author: Daniel Otykier
-updated: 2025-11-03
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -29,7 +29,7 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 只要模型支持 DAX 用户自定义函数，你就可以使用 DAX 组件管理器；也就是说，模型的兼容级别必须为 1702 或更高。
 
 > [!WARNING]
-> DAX 用户自定义函数目前（截至 2025 年十一月）是 Power BI 的预览功能。使用前请先了解其[限制](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations)。
+> DAX 用户自定义函数目前（截至 2025 年十一月）是 Power BI 的预览功能。使用前请先了解其[限制](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions#considerations-and-limitations)。
 
 ---
 
@@ -144,7 +144,7 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 
 ## 技术注意事项
 
-DAX 组件管理器使用 [扩展属性](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) 来跟踪已安装的组件。扩展属性类似于注释，但更适合以 JSON 格式存储自定义元数据。
+DAX 组件管理器使用[扩展属性](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet)来跟踪已安装的组件。扩展属性类似于注释，但更适合以 JSON 格式存储自定义元数据。
 
 DAX 组件管理器会在 **Model** 对象上创建以下扩展属性：
 
@@ -198,5 +198,5 @@ DAX 组件管理器会在 **Model** 对象上创建以下扩展属性：
 
 - [DaxLib 项目站点](https://daxlib.org)
 - [DaxLib GitHub repository](https://github.com/daxlib/daxlib)
-- [DAX 用户自定义函数（Microsoft Learn）](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)
+- [DAX 用户自定义函数（Microsoft Learn）](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions)
 - [Tabular Editor 3 中的用户自定义函数](xref:udfs)

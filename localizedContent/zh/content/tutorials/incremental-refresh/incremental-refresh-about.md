@@ -2,7 +2,7 @@
 uid: incremental-refresh-about
 title: 什么是刷新策略？
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ applies_to:
 
 ---
 
-托管在 Power BI 服务中的 Dataset 可为一个或多个数据表配置[增量刷新](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview)。**增量刷新的目的，是通过仅检索最近/发生变化的数据来实现更快、更高效的刷新，以“增量”的方式刷新表。** 为此，表会被自动划分为多个分区：只有最近或发生变化的数据会被 <span style="color:#01a99d">刷新（“热”分区）</span>，甚至还可以 <span style="color:#8d7bae">实时检索（[“混合表格”中的“Direct Query”分区](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)）</span>；而 <span style="color:#939799">较旧、静态的数据会被归档（“冷”分区）。</span>
+托管在 Power BI 服务中的 Dataset 可以为一个或多个数据表配置 [增量刷新](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview)。**增量刷新的目的，是通过仅检索最近/发生变化的数据来实现更快、更高效的刷新，以“增量”的方式刷新表。** 为此，Dataset 中的表会被自动划分为多个分区：只有最近或发生变化的数据会被 <span style="color:#01a99d">刷新（“热”分区）</span>，甚至还可以 <span style="color:#8d7bae">实时检索（[“混合表格”中的“Direct Query”分区](https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)）</span>；而 <span style="color:#939799">较旧、静态的数据会被归档（“冷”分区）。</span>
 
 _可在 Tabular Editor 中轻松配置并修改增量刷新。_
 
@@ -34,13 +34,13 @@ _可在 Tabular Editor 中轻松配置并修改增量刷新。_
 > - 计划刷新耗时更短、更可靠
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中设置增量刷新仅限于托管在 Power BI Dataset 服务中的数据集。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 在 Tabular Editor 3 中设置增量刷新仅限于托管在 Power BI Dataset 服务中的数据集。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
 ### 它是如何工作的？
 
-为创建这些分区，Power BI 会在 Power Query 中使用 `RangeStart` 和 `RangeEnd` 这两个 _datetime_ 参数。这些参数用于表分区 M 表达式中的筛选步骤，对表中的日期时间列进行筛选。对于日期、字符串或整数类型的列，仍可通过使用函数将 `RangeStart`、`RangeEnd` 或日期列转换为适当的数据类型来进行筛选，同时保持查询折叠。如需更多信息，请参阅[此处](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+为创建这些分区，Power BI 会在 Power Query 中使用 `RangeStart` 和 `RangeEnd` 这两个 _datetime_ 参数。这些参数用于表分区 M 表达式中的筛选步骤，对表中的日期时间列进行筛选。对于日期、字符串或整数类型的列，仍可通过使用函数将 `RangeStart`、`RangeEnd` 或日期列转换为适当的数据类型来进行筛选，同时保持查询折叠。有关此内容的更多信息，请参见 [此处](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 下面给出一个示例。已针对表 _'Orders'_ 的 _[Order Date]_ 列应用增量刷新：
 
@@ -114,7 +114,7 @@ in
 ***
 
 > [!WARNING]
-> 增量刷新专为支持 [Power Query 查询折叠](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding) 的数据源而设计。理想情况下，在应用筛选步骤之前，不应中断[查询折叠](https://learn.microsoft.com/en-us/power-query/step-folding-indicators)。除非在实现[混合表格](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.)时需要使用 DirectQuery 获取实时数据，否则并没有明确要求最终查询必须进行查询折叠。
+> 增量刷新专为支持 [Power Query 查询折叠](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding) 的数据源而设计。理想情况下，在应用筛选步骤之前，[查询折叠不应被中断](https://learn.microsoft.com/power-query/step-folding-indicators)。除在实现 [混合表格](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.) 时之外，最终查询并不要求必须进行查询折叠。
 
 ---
 
@@ -160,7 +160,7 @@ _刷新策略_ 决定数据如何分区，以及这些策略范围分区中哪�
 
 # [混合](#tab/hybrid)
 
-在增量刷新的 <span style="color:#01a99d">**_[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)_**</span> 配置中，会通过 DirectQuery 对 Dataset 的 <span style="color:#455C86">增量窗口</span>内策略范围中最新的分区进行实时查询。
+在增量刷新的 <span style="color:#01a99d">**_[hybrid](https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)_**</span> 配置中，会通过 DirectQuery 对 Dataset 的 <span style="color:#455C86">增量窗口</span>内策略范围中最新的分区进行实时查询。
 
 这通过将 <em>Mode</em> 属性设置为 <code>Hybrid</code> 来配置。
 
@@ -266,9 +266,9 @@ _下面概述了 Data model 中用于配置增量刷新的 TOM 属性：_
                 <td class="formatting">一个整数，表示将增量窗口按 <em>IncrementalGranularity</em> 的周期数进行平移。</td>
             </tr>
             <tr>
-                <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
+                <td class="formatting"><span id="refreshpolicymode"><b><em>模式</b></em></span></td>
                 <td class="formatting">使用 DirectQuery 实时获取最新数据</td>
-                <td class="formatting">指定增量刷新是仅配置导入分区，还是同时配置 DirectQuery 分区，从而形成 <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">“混合表格”</a>。</td>
+                <td class="formatting">指定 Dataset 的增量刷新是只配置导入分区，还是同时配置 DirectQuery 分区，从而形成 <a href="https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">“混合表格”</a>。</td>
                 <td class="formatting"><code>Import</code> 或 <code>Hybrid</code>。</td>
             </tr>
             <tr>
@@ -317,7 +317,7 @@ _下面概述了 Data model 中用于配置增量刷新的 TOM 属性：_
             <tr>
                 <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
                 <td class="formatting">使用 DirectQuery 实时获取最新数据</td>
-                <td class="formatting">指定增量刷新是只配置导入分区，还是同时配置 DirectQuery 分区，从而形成 <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">“混合表格”</a>。</td>
+                <td class="formatting">指定 Dataset 的增量刷新是只配置导入分区，还是同时配置 DirectQuery 分区，从而形成 <a href="https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">“混合表格”</a>。</td>
                 <td class="formatting"><code>Import</code> 或 <code>Hybrid</code>。</td>
             </tr>
             <tr>

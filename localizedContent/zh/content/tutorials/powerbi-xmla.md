@@ -2,7 +2,7 @@
 uid: powerbi-xmla
 title: 通过 XMLA endpoint 编辑
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,21 +20,21 @@ applies_to:
 
 # 通过 XMLA endpoint 编辑 Power BI 语义模型
 
-你可以使用 Tabular Editor 3，通过 [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools) 连接到已发布到 Power BI 服务的 Power BI 语义模型。分配到 Fabric capacity（F SKU）、Power BI Embedded capacity（A 或 EM SKU）、旧版 Premium capacity（P SKU）的 Workspace，或使用 Premium Per User（PPU）许可证时，即可使用 XMLA endpoint。
+你可以使用 Tabular Editor 3 通过 [XMLA endpoint](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools) 连接到发布在 Power BI 服务中的 Power BI 语义模型。分配到 Fabric capacity（F SKU）、Power BI Embedded capacity（A 或 EM SKU）、旧版 Premium capacity（P SKU）的 Workspace，或使用 Premium Per User（PPU）许可证时，即可使用 XMLA endpoint。
 
 > [!NOTE]
 > 仅凭 Power BI Pro 许可证不足以访问共享 Workspace 中的 Power BI 语义模型。要进行 XMLA 访问，需要 Fabric capacity、Embedded capacity、旧版 Premium capacity 或 Premium Per User 许可证。
 
 ## 先决条件
 
-Tabular Editor 要求 XMLA endpoint 同时允许读取和写入访问。 Microsoft 已于 2025 年六月在所有 Fabric 和 Power BI 容量 SKU 上默认启用 XMLA 读写功能。如果无法连接，请让[你的容量管理员](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)核实 @xmla-as-connectivity 中所述的设置。
+Tabular Editor 要求 XMLA endpoint 同时允许读取和写入访问。 Microsoft 已于 2025 年六月在所有 Fabric 和 Power BI 容量 SKU 上默认启用 XMLA 读写功能。如果你无法连接，请联系[你的容量管理员](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)，让其核实 @xmla-as-connectivity 中所述的设置。
 
 > [!IMPORTANT]
 > 如果你使用 Tabular Editor 3，请注意连接到 Power BI XMLA endpoint 的[许可证限制](xref:editions)。根据所使用的 Power BI Workspace 类型，你至少需要 Tabular Editor 3 Business 或企业版。
 
 ## 限制
 
-通过 XMLA endpoint 连接到语义模型时，可以编辑 [Tabular Object Model (TOM)](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 支持的所有 Data model 建模操作。换句话说，通过 Power BI 服务的 XMLA endpoint 编辑语义模型时，[Power BI Desktop 限制](xref:desktop-limitations) 不适用。
+通过 XMLA endpoint 连接到语义模型时，可编辑 [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 支持的所有 Data model 建模操作。换句话说，通过 Power BI 服务的 XMLA endpoint 编辑语义模型时，[Power BI Desktop 限制](xref:desktop-limitations) 不适用。
 
 ## 工作流
 

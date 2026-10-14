@@ -55,7 +55,7 @@ Los modelos semánticos de Power BI y Fabric no almacenan credenciales en el mod
 
 ## Script de implementación
 
-Durante la implementación, Tabular Editor genera un [script TMSL CreateOrReplace](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), que luego se ejecuta en el motor de Analysis Services. El script CreateOrReplace contiene todos los metadatos necesarios para volver a crear el modelo, incluidas tablas, columnas, medidas, relaciones, perspectivas, traducciones, etc. Si el modelo aún no existe en el servidor de destino, se creará. Si el modelo ya existe, los objetos existentes se reemplazarán por los nuevos metadatos especificados en el script.
+Durante la implementación, Tabular Editor genera un [script TMSL de CreateOrReplace](https://learn.microsoft.com/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), que posteriormente se ejecuta en el motor de Analysis Services. El script CreateOrReplace contiene todos los metadatos necesarios para volver a crear el modelo, incluidas tablas, columnas, medidas, relaciones, perspectivas, traducciones, etc. Si el modelo aún no existe en el servidor de destino, se creará. Si el modelo ya existe, los objetos existentes se reemplazarán por los nuevos metadatos especificados en el script.
 
 Si se desmarcó alguna de las opciones de la página **Opciones de implementación**, Tabular Editor usará la definición de metadatos original de esos objetos en el script TMSL generado, conservando así sus definiciones tal cual en el servidor.
 

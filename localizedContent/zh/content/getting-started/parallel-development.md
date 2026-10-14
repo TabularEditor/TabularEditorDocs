@@ -2,7 +2,7 @@
 uid: parallel-development
 title: 通过 Git 和“保存到文件夹”实现并行开发
 author: Daniel Otykier
-updated: 2026-09-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,12 +30,12 @@ applies_to:
 - 你的 Data model 的目标位置必须是以下之一：
   - SQL Server 2016（或更高版本）的 Analysis Services Tabular
   - Azure Analysis Services
-  - 已分配到 Fabric capacity、Power BI Embedded capacity、旧版 Premium capacity 或 Premium Per User 许可证，并已[启用 XMLA 读/写](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)（自 2025 年六月起默认为启用）的 Power BI Workspace
+  - 一个 Power BI Workspace，已分配给 Fabric capacity、Power BI Embedded capacity、旧版 Premium capacity 或 Premium Per User 许可证，并已[启用 XMLA 读/写](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)（自 2025 年六月起默认启用）
 - 所有团队成员都能访问的 Git repository（本地部署或托管在 Azure DevOps、GitHub 等）
 
 ## 将 TOM 视为源代码
 
-在 Analysis Services 表格模型和 Power BI Dataset 上实现并行开发，传统上一直很难（为简洁起见，本文将这两类模型统称为“表格模型”）。随着 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 采用基于 JSON 的模型元数据，将模型元数据纳入版本控制确实变得更容易了。
+在 Analysis Services 表格模型和 Power BI Dataset 上实现并行开发，传统上一直很难（为简洁起见，本文将这两类模型统称为“表格模型”）。随着 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 所采用的基于 JSON 的模型元数据引入，将模型元数据纳入版本控制无疑变得更容易了。
 
 使用基于文本的文件格式，可以借助版本控制系统中常见的各种差异对比工具，更优雅地处理冲突变更。这种变更冲突解决方式在传统软件开发中非常常见，因为所有源代码都分散在大量的小型文本文件中。因此，大多数主流版本控制系统都针对这类文件做了优化，用于变更检测和（自动）冲突解决。
 
@@ -45,13 +45,13 @@ applies_to:
 
 Tabular Editor 刚诞生时，还没法从 Visual Studio 生成的 Model.bim 文件中去除这些信息，不过在较新的版本里这点终于改了。不过，我们仍然要面对一个单一的、庞大的文件（Model.bim），其中包含定义模型的全部“源代码”。
 
-Power BI Dataset 开发者的处境更糟，因为他们甚至无法访问包含模型元数据的文本文件。他们能做的最好办法，是把 Power BI Report 导出为 [Power BI 模板（.pbit）文件](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-templates#creating-report-templates)；它本质上是一个 ZIP 文件，里面包含 Report 页面、Data model 定义以及查询定义。从版本控制系统的透视来看，zip 文件是二进制文件，而二进制文件无法像文本文件那样进行 diff、比较和合并。这就迫使 Power BI 开发者借助第三方工具，或编写复杂的脚本/流程，才能对 Data model 进行规范的版本管理——尤其是当你希望在同一个文件里合并并行的开发分支时。
+Power BI Dataset 开发者的处境更糟，因为他们甚至无法访问包含模型元数据的文本文件。他们所能做的最多是将 Power BI Report 导出为 [Power BI 模板（.pbit）文件](https://docs.microsoft.com/power-bi/create-reports/desktop-templates#creating-report-templates)；该文件本质上是一个 ZIP 文件，包含 Report 页面、Data model 定义以及查询定义。从版本控制系统的透视来看，zip 文件是二进制文件，而二进制文件无法像文本文件那样进行 diff、比较和合并。这就迫使 Power BI 开发者借助第三方工具，或编写复杂的脚本/流程，才能对 Data model 进行规范的版本管理——尤其是当你希望在同一个文件里合并并行的开发分支时。
 
 Tabular Editor 的目标是简化这一过程：无论模型是 Analysis Services 表格模型还是 Power BI Dataset，都能以一种简单的方式从 Tabular Object Model 中仅提取具有语义意义的元数据。此外，Tabular Editor 还能通过“保存到文件夹”功能，把这些元数据拆分成多个更小的文件。
 
 ## 什么是保存到文件夹？
 
-如上所述，表格模型的元数据传统上存放在一个单一的大型 JSON 文件中，通常名为 **Model.bim**，这并不适合与版本控制集成。由于此文件中的 JSON 表示 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)，因此可以用一种简单直接的方法将该文件拆分成更小的部分：TOM 在几乎所有层级都包含对象数组，例如模型中的表列表、表中的度量值列表、度量值中的注释列表等。使用 Tabular Editor 的 **保存到文件夹** 功能时，这些数组会从 JSON 中直接移除，取而代之的是生成一个子文件夹，其中为原数组中的每个对象创建一个文件。这个过程可以进行嵌套。最终会得到一个文件夹结构：每个文件夹都包含一组更小的 JSON 文件和子文件夹；从语义上看，它与原始的 Model.bim 文件包含完全相同的信息：
+如上所述，表格模型的元数据传统上存放在一个单一的大型 JSON 文件中，通常名为 **Model.bim**，这并不适合与版本控制集成。由于此文件中的 JSON 表示 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)，因此可以用一种简单直接的方法将该文件拆分成更小的部分：TOM 在几乎所有层级都包含对象数组，例如模型中的表列表、表中的度量值列表、度量值中的注释列表等。使用 Tabular Editor 的 **保存到文件夹** 功能时，这些数组会从 JSON 中直接移除，取而代之的是生成一个子文件夹，其中为原数组中的每个对象创建一个文件。这个过程可以进行嵌套。最终会得到一个文件夹结构：每个文件夹都包含一组更小的 JSON 文件和子文件夹；从语义上看，它与原始的 Model.bim 文件包含完全相同的信息：
 
 ![保存到文件夹](~/content/assets/images/save-to-folder.png)
 
@@ -102,15 +102,15 @@ Tabular Editor 也会采用同样的方式，将 [DAX 用户自定义函数](xre
 
 - 当将 Tabular Editor 作为 Power BI Desktop 的外部工具使用时，[并非所有建模操作都受支持](xref:desktop-limitations)。
 - Tabular Editor 可以从 Power BI Desktop 中已加载的 .pbix 文件提取模型元数据，或直接从磁盘上的 .pbit 文件提取，但**在 Power BI Desktop 之外，没有受支持的方法来更新 .pbix 或 .pbit 文件中的模型元数据**。
-- 一旦通过 XMLA endpoint 对某个 Power BI Dataset 做出任何更改，[该 Dataset 就无法再以 .pbix 文件形式下载](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets)。
+- 一旦通过 XMLA endpoint 对某个 Power BI Dataset 进行了任何更改，[该 Dataset 将无法再以 .pbix 文件形式下载](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets)。
 
 要实现并行开发，我们必须能够将模型元数据存储为上述某种基于文本的（JSON）格式（Model.bim 或 Database.json）。无法从这种基于文本的格式“重建” .pbix 或 .pbit 文件，因此**一旦决定走这条路线，就无法再使用 Power BI Desktop 来编辑 Data model**。取而代之的是，我们必须依赖能够使用基于 JSON 的格式的工具——这正是 Tabular Editor 的用途所在。
 
 > [!WARNING]
-> 如果你无法访问分配给容量或 Premium Per User 许可证的 Workspace，则无法发布存储在 JSON 文件中的模型元数据，因为此操作需要访问 [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools)。
+> 如果你无法访问已分配到容量或 Premium Per User 许可证的 Workspace，则无法发布存储在 JSON 文件中的模型元数据，因为此操作需要访问 [XMLA endpoint](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools)。
 
 > [!NOTE]
-> 创建 Report 的 Visual 部分仍然需要 Power BI Desktop。始终将 Report 与模型分离是一项[最佳实践](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model)。如果你现有的 Power BI 文件同时包含两者，[这篇博客](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/)（[视频](https://www.youtube.com/watch?v=PlrtBm9YN_Q)）介绍了如何将其拆分为一个模型文件和一个 Report 文件。
+> 创建 Report 的 Visual 部分仍然需要 Power BI Desktop。始终将 Report 与模型分离是一项[最佳实践](https://docs.microsoft.com/power-bi/guidance/report-separate-from-model)。如果你现有的 Power BI 文件同时包含两者，[这篇博客](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/)（[视频](https://www.youtube.com/watch?v=PlrtBm9YN_Q)）介绍了如何将其拆分为一个模型文件和一个 Report 文件。
 
 ## Tabular Editor 与 Git
 
@@ -119,7 +119,7 @@ Git 是一个免费开源的分布式版本控制系统，旨在以高速高效�
 本文不会详细介绍 Git。不过，如果你想进一步了解，网上有大量资源可供参考。我们推荐《[Pro Git](https://git-scm.com/book/en/v2)》一书作为参考。
 
 > [!NOTE]
-> Tabular Editor 3 目前尚未与 Git 或其他版本控制系统集成。要管理你的 Git repository、提交代码更改、创建分支等，你需要使用 Git 命令行或其他工具，例如 [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) 或 [TortoiseGit](https://tortoisegit.org/)。
+> Tabular Editor 3 目前尚未与 Git 或其他版本控制系统集成。要管理你的 Git repository、提交代码更改、创建分支等，你需要使用 Git 命令行或其他工具，例如 [Visual Studio Team Explorer](https://docs.microsoft.com/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) 或 [TortoiseGit](https://tortoisegit.org/)。
 
 如前所述，我们建议在将模型元数据保存到 Git repository 时，使用 Tabular Editor 的 [保存到文件夹](#what-is-save-to-folder) 选项。
 
@@ -127,7 +127,7 @@ Git 是一个免费开源的分布式版本控制系统，旨在以高速高效�
 
 下文将讨论在开发表格模型时可采用的分支策略。
 
-分支策略会决定日常开发工作流的具体方式；很多时候，分支还会与团队采用的项目管理方法直接对应。例如，在 Azure DevOps 中使用[敏捷过程](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops)时，你的待办项通常由 **史诗**、**功能**、**用户故事**、**任务** 和 **缺陷** 组成。
+分支策略会决定日常开发工作流的具体方式；很多时候，分支还会与团队采用的项目管理方法直接对应。例如，在 Azure DevOps 中使用[敏捷过程](https://docs.microsoft.com/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops)时，你的待办项通常由 **史诗**、**功能**、**用户故事**、**任务** 和 **缺陷** 组成。
 
 在敏捷术语中，**用户故事** 是一项可交付、可测试的工作成果。一个用户故事可能由多个**任务**组成——这些是开发人员在交付用户故事之前需要完成的较小工作项。理想情况下，所有用户故事都会被拆分为可管理的任务，每个任务只需几小时即可完成，整个用户故事合计也不超过几天。因此，用户故事非常适合使用短生命周期的功能分支：开发人员可以针对每个任务进行一次或多次提交，然后再合并分支并将代码部署到测试环境。
 
@@ -210,7 +210,7 @@ gitGraph
 
 ## 主干开发
 
-主干开发是最简单的分支模型：开发者要么直接向 `main` 提交小而频繁的更改，要么通过生命周期极短的功能分支提交，并在数小时内合并回去。通常，Microsoft 推荐采用 [主干开发](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops)（[视频](https://youtu.be/t_4lLR6F_yk?t=232)）策略，用于以敏捷方式持续交付小幅增量。
+主干开发是最简单的分支模型：开发者要么直接向 `main` 提交小而频繁的更改，要么通过生命周期极短的功能分支提交，并在数小时内合并回去。通常，Microsoft 推荐采用 [主干开发](https://docs.microsoft.com/azure/devops/repos/git/git-branching-guidance?view=azure-devops)（[视频](https://youtu.be/t_4lLR6F_yk?t=232)），以支持敏捷地持续交付小规模增量。
 
 ![主干开发](~/content/assets/images/trunk-based-development.png)
 

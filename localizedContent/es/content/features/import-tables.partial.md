@@ -2,7 +2,7 @@
 uid: import-tables
 title: Importar tablas
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -168,7 +168,7 @@ Cuando esta opción está habilitada y Tabular Editor 3 está conectado a Analys
 Cuando la opción **Usar Analysis Services para la detección de cambios** está habilitada, Tabular Editor 3 utilizará la siguiente técnica cuando se solicite una actualización del esquema:
 
 1. Se crea una nueva transacción en la instancia de Analysis Services a la que se está conectado
-2. Se agrega una nueva tabla temporal al modelo. Esta tabla usa una expresión de partición de Power Query que devuelve el esquema de la expresión original, para la que se solicitó una actualización del esquema. Esto se hace mediante la [función M `Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
+2. Se agrega una nueva tabla temporal al modelo. Esta tabla usa una expresión de partición de Power Query que devuelve el esquema de la expresión original, para la que se solicitó una actualización del esquema. Esto se hace mediante la [función M `Table.Schema`](https://docs.microsoft.com/powerquery-m/table-schema).
 3. La tabla temporal se actualiza mediante Analysis Services. Analysis Services se encarga de conectarse al origen de datos para obtener el esquema actualizado.
 4. Tabular Editor 3 consulta el contenido de la tabla temporal para obtener los metadatos del esquema.
 5. La transacción se revierte, dejando la base de datos de Analysis Services o el modelo semántico de Power BI en el estado original en el que se encontraba antes del paso 1.
@@ -177,7 +177,7 @@ Cuando la opción **Usar Analysis Services para la detección de cambios** está
 Con esta técnica, Tabular Editor 3 permite importar y actualizar tablas desde orígenes de datos que, de otro modo, no son compatibles, independientemente de la complejidad y del uso de funciones en las consultas M que hay detrás de las tablas.
 
 > [!NOTE]
-> Si sus expresiones M combinan datos de varios orígenes, por ejemplo, mediante la función M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin), es posible que tenga que cambiar el [**Nivel de privacidad**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) de "Privado" a "Organizacional" en el modelo semántico del servicio de Power BI. De lo contrario, es posible que vea un error que indique que `<Query> hace referencia a otras consultas o pasos, por lo que es posible que no pueda acceder directamente a un origen de datos. Por favor, vuelva a crear esta combinación de datos`. Este error también puede producirse aunque **Usar Analysis Services para la detección de cambios** no esté habilitado, ya que Tabular Editor 3 volverá automáticamente a este mecanismo de detección cuando la expresión M sea demasiado compleja para la detección de esquema integrada de Tabular Editor 3.
+> Si sus expresiones M combinan datos de varios orígenes, por ejemplo, mediante la función M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin), es posible que tenga que cambiar el [**Nivel de privacidad**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) de "Privado" a "Organizacional" en el modelo semántico del servicio de Power BI. De lo contrario, es posible que vea un error que indique que `<Query> hace referencia a otras consultas o pasos, por lo que es posible que no pueda acceder directamente a un origen de datos. Por favor, vuelva a crear esta combinación de datos`. Este error también puede producirse aunque **Usar Analysis Services para la detección de cambios** no esté habilitado, ya que Tabular Editor 3 volverá automáticamente a este mecanismo de detección cuando la expresión M sea demasiado compleja para la detección de esquema integrada de Tabular Editor 3.
 
 ### Importación de nuevas tablas a través de Analysis Services
 

@@ -2,7 +2,7 @@
 uid: dax-debugger
 title: DAX调试器
 author: Daniel Otykier
-updated: 2022-01-19
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ applies_to:
 
 众所周知，DAX 是一门相对复杂、很难精通的语言。大多数数据模型开发者可能都经历过这样一种情况：DAX 代码没有返回预期结果。在这种情况下，把代码按变量逐个拆开、按函数调用逐步拆开，会有助于更好地理解到底发生了什么。
 
-在此之前，这种对代码进行“拆解”的工作既繁琐又耗时，往往需要捕获客户端工具执行的 DAX 查询，然后在 [DAX Studio](https://daxstudio.org/) 或 [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) 中将查询拆开并执行其中较小的片段。
+在此之前，对代码进行这种“拆解”既繁琐又耗时，往往需要捕获客户端工具执行的 DAX 查询，然后在 [DAX Studio](https://daxstudio.org/) 或 [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) 中将查询拆分并执行其中较小的部分。
 
 Tabular Editor 3 引入了 **DAX调试器** 概念，这是一款工具，可让你更轻松地逐步深入模型中的 DAX 代码。从概念上讲，这个调试器类似于传统 IDE 的调试器，比如你在开发 C# 应用程序时 Visual Studio 自带的调试器。
 
@@ -68,7 +68,7 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 2. 输入或粘贴 DAX 查询。通常，这应是一条由 `SUMMARIZECOLUMNS` 调用构成的查询，并包含一个或多个（显式）度量值，例如 Power BI 中的 Visual 所生成的查询。
 
 > [!TIP]
-> 你可以在 Power BI Desktop 中使用 [Performance Analyzer](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-performance-analyzer) 来捕获由 Visual 生成的查询。
+> 你可以在 Power BI Desktop 中使用 [Performance Analyzer](https://docs.microsoft.com/power-bi/create-reports/desktop-performance-analyzer) 来捕获由各个 Visual 生成的查询。
 
 3. 按 F5 在 Tabular Editor 3 中执行查询。找到你要调试的值，右键单击该单元格并选择 **调试**。
 
@@ -213,7 +213,7 @@ DAX调试器当前有以下限制：
 - 目前不支持包含隐式度量值或查询范围内计算的查询。
 - 在浏览由筛选后的表表达式产生的迭代器的前 1000 行时，浏览窗口中选中的行并不总是与评估语境堆栈中的当前行语境相对应（在 **监视** 窗口中输入 `CALCULATETABLE('<table name>')` 以检查当前行语境）。
 - 调试器目前仅允许在度量值上调试 DAX 表达式。
-- 无法调试 [Visual 计算](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview)，因为它们是使用查询范围内的列定义的。调试器目前不支持查询范围内的对象。
+- 由于 [Visual 计算](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview) 是使用查询作用域的列来定义的，因此无法进行调试。调试器目前不支持查询范围内的对象。
 - 如果某个度量值在筛选语境中被计算项修改，那么调试器的“监视/本地变量”视图里显示的部分结果可能不正确。
 
 如果你遇到的调试器问题不在上面的列表中，请将其提交到 TE3 社区支持 GitHub 站点的 [问题跟踪器](https://github.com/TabularEditor/TabularEditor3/issues)。

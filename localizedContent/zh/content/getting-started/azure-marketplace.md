@@ -2,7 +2,7 @@
 uid: azure-marketplace
 title: 通过 Azure Marketplace 购买
 author: Peer Grønnerup
-updated: 2026-01-05
+updated: 2026-10-12
 ---
 
 # 通过 Azure Marketplace 购买 Tabular Editor 3
@@ -18,7 +18,7 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。本文档�
 - 一个 Azure 订阅（请确认您是否已有订阅，或创建新的订阅）
 - 一个 Azure AD 账户，并且在该 Azure 订阅中至少拥有“参与者”角色
 
-此外，在通过 Azure Marketplace 购买 Tabular Editor 3 之前，请确保已满足以下[先决条件](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/enable-marketplace-purchases)。
+此外，在通过 Azure Marketplace 购买 Tabular Editor 3 之前，请先确保已满足以下[先决条件](https://learn.microsoft.com/azure/cost-management-billing/manage/enable-marketplace-purchases)。
 
 ## 如何在 Azure Marketplace 上购买 Tabular Editor 3
 
@@ -57,7 +57,7 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。本文档�
 > [!NOTE]
 > Tabular Editor 3 的每个版本都必须单独购买。你无法在单笔 Azure Marketplace 交易中组合购买不同版本。
 
-更多详情，请参阅：[在 Azure 门户中购买 SaaS 产品](https://learn.microsoft.com/en-us/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
+更多详情，请参阅：[在 Azure 门户中购买 SaaS 产品](https://learn.microsoft.com/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
 
 ## 激活 Azure Marketplace 订阅
 
@@ -118,6 +118,6 @@ Tabular Editor 3 已作为公开产品在 Azure Marketplace 上架。本文档�
 > **不支持降级**：在当前订阅周期内，你无法降级到更低版本，也无法减少用户数。要切换到更低级别的计划或减少席位，请先关闭当前订阅的 **自动续订**，然后在当前期限结束前按所需配置购买新的订阅。
 
 > [!IMPORTANT]
-> 取消订阅会立即撤销该订阅下所有许可证的使用权限，且此操作无法撤销。若要将访问权限保留到当前计费周期结束，请点击 **编辑自动续订**，然后关闭自动续订。退款将按退款政策处理。想了解更多信息，可以查看 Microsoft Marketplace 的 [退款政策](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers)。
+> 取消订阅会立即撤销该订阅下所有许可证的使用权限，且此操作无法撤销。若要将访问权限保留到当前计费周期结束，请点击 **编辑自动续订**，然后关闭自动续订。退款将按退款政策处理。想了解更多信息，可以查看 Microsoft Marketplace 的 [退款政策](https://learn.microsoft.com/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers)。
 
-想了解在 Azure 中管理 SaaS 订阅的更多信息，可以查看：[SaaS 订阅生命周期管理](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)
+如需了解在 Azure 中管理 SaaS 订阅的更多信息，请参阅：[SaaS 订阅生命周期管理](https://learn.microsoft.com/marketplace/saas-subscription-lifecycle-management)

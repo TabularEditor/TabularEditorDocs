@@ -2,7 +2,7 @@
 uid: personalizing-te3
 title: Personalización y configuración de Tabular Editor 3 para adaptarlo a tus necesidades
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,7 +36,7 @@ La primera página que encontrarás en el cuadro de diálogo **Preferencias** es
 
 ## Power BI
 
-Estas configuraciones son especialmente útiles para los desarrolladores que usan Tabular Editor 3 como [herramienta externa para Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools).
+Estos ajustes son útiles sobre todo para los desarrolladores que usan Tabular Editor 3 como una [herramienta externa para Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools).
 
 ##### _Permitir operaciones de modelado no compatibles_ (deshabilitado)
 

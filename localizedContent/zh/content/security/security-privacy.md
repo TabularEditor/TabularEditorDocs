@@ -2,7 +2,7 @@
 uid: security-privacy
 title: 安全概述
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ applies_to:
 
 Microsoft 在此处说明其支持使用社区第三方工具：[用于开发企业级 Power BI 和 Analysis Services 模型的社区和第三方工具](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
 
-Microsoft 的 Power BI 实施规划文档在高级数据建模场景与企业级开发中明确提到 Tabular Editor：[Power BI 使用场景：高级 Data model 管理](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
+Microsoft的 Power BI 实施规划文档在高级数据建模场景与企业级开发中明确提及 Tabular Editor：[Power BI 使用场景：高级 Data model 管理](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 
 ## 信任中心
 
@@ -39,7 +39,7 @@ Tabular Editor 主要是一款离线工具，这意味着所有数据和元数�
 
 ### Analysis Services XMLA 协议
 
-与 Analysis Services 实例或 Power BI Premium Workspace 的所有通信，都通过 [Microsoft Analysis Management Objects (AMO)](https://docs.microsoft.com/en-us/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) 客户端库进行；更具体地说，是通过 [AMO 的 Tabular Object Model (TOM) 扩展](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。这些客户端库由 Microsoft 提供，可在 Tabular Editor 等第三方应用程序中再分发。有关许可的详细信息，见 [AMO EULA](https://go.microsoft.com/fwlink/?linkid=852989)。
+与 Analysis Services 实例或 Power BI Premium Workspace 的所有通信都通过 [Microsoft Analysis Management Objects (AMO)](https://docs.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) 客户端库完成；更具体地说，是通过 [用于 AMO 的 Tabular Object Model (TOM) 扩展](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。这些客户端库由 Microsoft 提供，可在 Tabular Editor 等第三方应用程序中再分发。有关许可的详细信息，见 [AMO EULA](https://go.microsoft.com/fwlink/?linkid=852989)。
 
 当 Tabular Editor 连接到 Analysis Services 实例（本地网络或云端）或 Power BI Premium Workspace（云端）时，会通过上述客户端库建立连接。按照设计，AMO 库负责处理用户的身份验证和授权。只有在 Analysis Services 实例或 Power BI Premium Workspace 中具有管理员权限的用户才能连接。这与使用 SQL Server Management Studio 或 SQL Server Data Tools 等 Microsoft 工具并无不同（它们使用相同的客户端库进行连接）。
 

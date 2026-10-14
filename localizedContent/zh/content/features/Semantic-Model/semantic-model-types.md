@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Power BI 语义模型类型
 author: Morten Lønskov
-updated: 2026-08-28
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -60,7 +60,7 @@ Tabular Editor 支持多种不同的模型类型。下面概述了哪些模型�
 > 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。在此之前，许多建模操作都不受支持。见 [Power BI Desktop 限制](xref:desktop-limitations)。
 
 > [!TIP]
-> 如需了解 Direct Lake 模型限制的更多详细信息，请参阅 Microsoft 的 [Direct Lake 文档](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
+> 如需进一步了解 Direct Lake 模型的限制，请参阅 Microsoft 的 [Direct Lake 文档](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview)
 
 ## 不受支持的语义模型类型
 

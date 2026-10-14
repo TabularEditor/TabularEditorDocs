@@ -2,7 +2,7 @@
 uid: csharp-script-library
 title: C# Script 库
 author: Morten Lønskov
-updated: 2023-02-23
+updated: 2026-10-12
 ---
 
 # C# Script 库
@@ -24,7 +24,7 @@ updated: 2023-02-23
 <br></br>
 
 > [!NOTE]
-> 由于 Power BI Desktop 外部工具的限制，部分脚本在连接到 Power BI Desktop 模型时无法工作：[外部工具限制](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。你仍然可以在偏好设置中启用“不受支持的建模操作”，以试用该脚本。 <br></br>
+> 由于 Power BI Desktop 外部工具的限制，某些脚本在连接到 Power BI Desktop 模型时将无法正常运行：[外部工具限制](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。你仍然可以在偏好设置中启用“不受支持的建模操作”，以试用该脚本。 <br></br>
 
 ### [Tabular Editor 2 偏好设置](#tab/TE2Preferences)
 

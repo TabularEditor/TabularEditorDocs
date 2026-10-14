@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: 保存并包含支持文件
 author: Peer Grønnerup
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -88,7 +88,7 @@ Tabular Editor 会在保存位置创建 **.SemanticModel** 文件夹，例如 `S
 Git 集成适用于分配了 Microsoft Fabric F-SKU 容量、Power BI Premium 容量或 Power BI Premium Per User (PPU) 的 Workspace。
 
 > [!WARNING]
-> 语义模型项的 Git 集成功能目前处于预览版。支持项列表见 [Fabric Git 集成中支持的项](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items)。
+> 语义模型项的 Git 集成功能目前处于预览版。有关 Fabric Git 集成所支持项目的最新信息，请参阅 [Fabric Git 集成中支持的项](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration#supported-items)。
 
 > [!CAUTION]
 > 不要在托管你的 Tabular Editor Workspace 数据库的 Fabric Workspace 中启用 Git 集成。如果 Tabular Editor 将模型同步到已连接 Git 的 Workspace，该 Workspace 会显示与 Git repository 不一致的未提交更改；同步这些更改会导致 Git 冲突。
@@ -111,7 +111,7 @@ Workspace 会使用 .platform 文件中的 `displayName` 来显示语义模型�
 
 更多信息见：
 
-- [Microsoft Fabric Git 集成文档](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
+- [Microsoft Fabric Git 集成文档](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
 - [Tabular Editor 与 Fabric Git 集成博客文章](https://tabulareditor.com/blog/tabular-editor-and-fabric-git-integration)
 
 ## 对比序列化格式

@@ -2,7 +2,7 @@
 uid: personalizing-te3
 title: 根据你的需求个性化定制并配置 Tabular Editor 3
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,7 +36,7 @@ Tabular Editor 3 提供了丰富的配置选项，让你可以根据具体需求
 
 ## Power BI
 
-这些设置主要适用于将 Tabular Editor 3 用作 [Power BI Desktop 的外部工具](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools) 的开发者。
+这些设置主要适用于将 Tabular Editor 3 用作 [Power BI Desktop 的外部工具](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools) 的开发人员。
 
 ##### _允许执行不受支持的建模操作_（默认禁用）
 

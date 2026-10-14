@@ -2,7 +2,7 @@
 uid: script-convert-import-to-dlol
 title: Convertir de modo Import a Direct Lake en OneLake
 author: Daniel Otykier
-updated: 2025-06-20
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 
 ## Objetivo del script
 
-Este script convierte tablas en modo Import a Direct Lake en OneLake (DL/OL). Tal y como se indica en el [artículo de guía de Direct Lake](xref:direct-lake-guidance), debemos reemplazar la partición (o particiones) de estas tablas por una única [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), que especifica el nombre y el esquema de la tabla/vista materializada en el Lakehouse o Warehouse de Fabric, a la vez que hace referencia a una expresión compartida que usa el conector [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) (OneLake).
+Este script convierte tablas en modo Import a Direct Lake en OneLake (DL/OL). Tal y como se indica en el [artículo de orientación sobre Direct Lake](xref:direct-lake-guidance), debemos reemplazar la partición (o particiones) de esas tablas por una única [EntityPartition](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), que especifica el nombre y el esquema de la tabla o vista materializada en el Lakehouse o Warehouse de Fabric, mientras hace referencia a una expresión compartida que usa el conector [`AzureStorage.DataLake`](https://learn.microsoft.com/powerquery-m/azurestorage-datalake) (OneLake).
 
 ## Requisitos previos
 

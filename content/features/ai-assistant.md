@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -488,7 +488,7 @@ Other ways to reduce token usage:
 
 ## Disabling the AI Assistant
 
-The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again to include or exclude it in an existing installation. In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
+The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again and select **Modify** to include or exclude it in an existing installation. An upgrade keeps the existing selection; see [Upgrades and the AI features component](xref:installation-activation-basic#upgrades-and-the-ai-features-component). In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
 
 The same component contains the MCP server, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off only the chat, keep the component and set the `DisableAiChat` policy.
 

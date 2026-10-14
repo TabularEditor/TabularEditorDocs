@@ -2,7 +2,7 @@
 uid: table-groups
 title: Grupos de tablas
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -32,7 +32,7 @@ Las tablas se pueden mover entre grupos de tablas arrastrando y soltando en el E
 Al hacer clic con el botón derecho en un grupo de tablas en el Explorador TOM, obtienes las mismas opciones del menú contextual que si hubieras seleccionado la tabla o las tablas dentro de ese grupo de tablas.
 
 > [!NOTE]
-> Los grupos de tablas son una característica exclusiva de Tabular Editor. Las herramientas cliente (como Excel, Power BI Desktop, etc.) no contemplarán los grupos de tablas, ya que el [formato CSDL](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), que especifica el esquema conceptual del modelo de datos, no admite los grupos de tablas.
+> Los grupos de tablas son una característica exclusiva de Tabular Editor. Las herramientas cliente (como Excel, Power BI Desktop, etc.) no tendrán en cuenta los grupos de tablas, ya que el [formato CSDL](https://learn.microsoft.com/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), que especifica el esquema conceptual del Data model, no los admite.
 
 ## Metadatos y scripts
 
