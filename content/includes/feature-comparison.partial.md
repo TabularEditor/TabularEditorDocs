@@ -6,19 +6,19 @@
 |Undo/redo data modeling operations|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
 |Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
 |Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
-|Built in DAX Formating||<span class="emoji">&#10004;</span>||
+|Built-in DAX formatting||<span class="emoji">&#10004;</span>||
 |Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
-|Syntax highlighting and automatic formula fixup|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
+|Syntax highlighting and automatic formula fix-up|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
 |View DAX dependencies between objects|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Import Table Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
+|Table Import Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
 |Deployment Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
 |Best Practice Analyzer|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |C# scripting and automation|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Use as External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
 |Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
 |Command-line interface|<span class="emoji">&#10004;</span>||<span class="emoji">&#10004;</span>|
-|Premium, customizable user-interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>||
-|World-class DAX editor with IntelliSense<sup>TM</sup>-like features, auto-complete, and more||<span class="emoji">&#10004;</span>||
+|Customizable user interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>||
+|DAX editor with IntelliSense<sup>TM</sup>-like auto-complete and parameter info||<span class="emoji">&#10004;</span>||
 |Offline DAX syntax checking and column/data type inference||<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Improved Table Import Wizard and Table Schema Update check with Power Query support||<span class="emoji">&#10004;</span>||
 |DAX querying||<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
@@ -42,14 +42,16 @@
 |[Save with supporting files for Fabric](xref:save-with-supporting-files)||<span class="emoji">&#10004;</span>||
 |Semantic Bridge for Databricks Metric Views (Enterprise Edition)||<span class="emoji">&#10004;</span>\*||
 |[Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)||<span class="emoji">&#10004;</span>||
-|[Administrator policies](xref:policies) for governing the product across an organization|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>\*|
+|[Administrator policies](xref:policies) for governing the product across an organization|<span class="emoji">&#10004;</span>\*\*|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>\*\*|
 |[AI Assistant](xref:ai-assistant) for model design, DAX authoring and scripted edits||<span class="emoji">&#10004;</span>||
-|[MCP Server](xref:mcp-server), letting agent tools such as Claude Code, GitHub Copilot and VS Code agent mode work on the open model||<span class="emoji">&#10004;</span>||
-|Unsaved change indicators, with per-property and per-object [Revert](xref:unsaved-changes)||<span class="emoji">&#10004;</span>||
+|[MCP server](xref:mcp-server) for AI agents||<span class="emoji">&#10004;</span>||
+|[Unsaved change indicators](xref:unsaved-changes) with per-property and per-object revert||<span class="emoji">&#10004;</span>||
 |[Semantic model testing](xref:te-cli-commands#testing) (assertions, snapshots, A/B comparison)|||<span class="emoji">&#10004;</span>|
 |Cross-platform (Windows, macOS, Linux)|||<span class="emoji">&#10004;</span>|
 |Structured output (JSON, CSV, TMDL, TMSL) for scripting and AI agents|||<span class="emoji">&#10004;</span>|
 |[CI/CD integration](xref:te-cli-cicd) with GitHub Actions and Azure DevOps annotations and VSTEST results|||<span class="emoji">&#10004;</span>|
 |[Interactive shell](xref:te-cli-interactive) (REPL) with shell completions|||<span class="emoji">&#10004;</span>|
 
-\***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
+\***Note:** Limitations apply depending on your Tabular Editor 3 [edition](xref:editions).
+
+\*\***Note:** Only some policies apply: Tabular Editor 2 reads only the legacy registry key, and the Tabular Editor CLI reads policies on Windows only. See [Policies](xref:policies).

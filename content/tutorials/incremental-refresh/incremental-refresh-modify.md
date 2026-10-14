@@ -45,7 +45,7 @@ Below is a general description of how you modify an existing Refresh Policy:
 
 4. __Change the property:__ Change the __Property__ specified in the below sections, depending on what you want to change. For an overview of all Refresh Policy properties and what they do, see [here](xref:incremental-refresh-about#overview-of-all-properties).
 5. __Apply Changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
@@ -108,7 +108,7 @@ __Property:__ _Mode_
 __Note:__ Follow the below process to change Incremental Refresh Mode:
 
 1. Change _Mode_ to the desired value `Import` or `Hybrid`
-2. Right-click the table and select _Apply Refresh Policy_
+2. Right-click the table and select _Apply refresh policy_
 3. Deploy the model changes
 4. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
@@ -152,7 +152,7 @@ in
     accountForNu11
 ```
 
-3. Right-click the table and select _Apply Refresh Policy_
+3. Right-click the table and select _Apply refresh policy_
 4. Deploy the model changes
 5. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 

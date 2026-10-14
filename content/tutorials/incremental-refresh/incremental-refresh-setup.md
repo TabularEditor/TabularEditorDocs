@@ -33,7 +33,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 1. __Connect to the model:__ Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
 2. __Create the `RangeStart` and `RangeEnd` Parameters:__ Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Add two new Shared Expressions in Tabular Editor:
 
-<img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Create a shared expression" style="width:400px !important"/>
 
 3. __Configure the `RangeStart` and `RangeEnd` Parameters:__ Name them `RangeStart` and `RangeEnd` respectively, set their `Kind` property to "M" and set their expression to the following (the actual date/time value you specify doesn't matter, as it will be set by Power BI Service when starting the data refresh):
 
@@ -47,13 +47,13 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
    ]
 ```
 
-<img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="Set the kind of the shared expression" style="width:400px !important"/>
   
 4. __Copy Partition M Code__: Navigate to the table for which you want to configure incremental refresh. Fold it out and select your partition containing your Power Query M Expression. Copy your code to Notepad, you will need it in step 6.
 
 5. __Enable the Table Refresh Policy:__ In the _'Properties'_ window, set the `EnableRefreshPolicy` property on the table to `True`:
 
-<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Enable the refresh policy" style="width:400px !important"/>
 
 6. __Configure the Table Refresh:__ Next, select the table for which you want to configure incremental refresh. In the **Expression Editor** window, Select __'Source Expression'__ from the dropdown, insert your Power Query M Expression from step 4 and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
 
@@ -85,7 +85,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
    - __PollingExpression:__ A valid M Expression configured to detect data changes. For more information about _Polling Expression_ or other Refresh Policy properties, see [here](xref:incremental-refresh-about#overview-of-all-properties).
   
 8. __Apply Model Changes:__ Save your model (Ctrl+S).
-9. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
+9. __Apply Refresh Policy:__ Right-click on the table and choose "Apply refresh policy".
   
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 

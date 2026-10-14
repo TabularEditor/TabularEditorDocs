@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: Advanced installation and activation
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,15 +52,23 @@ To change an Enterprise seat, deregister the existing user from the seat through
 
 ## Registry details
 
-Tabular Editor 3 uses the Windows Registry to store activation details.
+Tabular Editor 3 stores activation details for each Windows user under `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
 
-To view the current license key assigned to the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+| Value | Type | Content |
+|-------|------|---------|
+| `LicenseKey` | `REG_SZ` | The license key |
+| `User` | `REG_SZ` | The e-mail address of the licensed user, for multi-user licenses |
+| `ActivationKey` | `REG_SZ` | The activation returned by the licensing service |
+| `Activation` | `REG_SZ` | An activation written by older versions of Tabular Editor 3. Tabular Editor 3 deletes it the next time it stores an activation |
+| `InstallationDate` | `REG_QWORD` | The first launch of Tabular Editor 3 for this Windows user. Tabular Editor 3 creates it on launch if it's missing |
+
+To view the current license key for the active Windows user, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the **LicenseKey** and **User** values.
+You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the values.
 
 ![Registry Editor](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -68,21 +76,27 @@ A system administrator can also proactively assign Tabular Editor 3 licenses to 
 
 ## Changing a license key through the registry
 
-If, for any reason, you cannot change the license key using the standard **Change license key** option in the **About Tabular Editor** dialog, reset the license through the Registry Editor:
+The **Change license key** option in **Help > About Tabular Editor** removes the `LicenseKey`, `User`, `ActivationKey` and `Activation` values and deactivates the installation on the licensing service. The option appears only when no model is loaded and the license is activated or its seat reservation has expired. If it isn't shown, for example because activation failed, reset the license through the Registry Editor:
 
 1. Close all instances of Tabular Editor 3.
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).
+2. Open the Registry Editor in Windows (Start > Run > regedit.exe).
 3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).
-4. Delete all values within this key.
+4. Delete the `LicenseKey`, `User`, `ActivationKey` and `Activation` values. Leave `InstallationDate` in place.
 5. Close the Registry Editor and restart Tabular Editor 3.
 
-Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
+Alternatively, run the following commands in a Windows Command Prompt (Start > Run > cmd.exe). A command reports an error if its value doesn't exist, and the remaining commands still run:
 
 ```cmd
-REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v User /f
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-The next time you launch Tabular Editor 3, you are prompted for a license key, just as when the tool was first installed on the machine.
+The next time you launch Tabular Editor 3, you're prompted for a license key.
+
+> [!NOTE]
+> Deleting the registry values doesn't deactivate the installation, use the [Tabular Editor Self-service portal](https://tabulareditor.com/my-account/) to manage your activated licenses. 
 
 ## Silent installation and license pre-provisioning
 

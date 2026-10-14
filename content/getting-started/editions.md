@@ -184,28 +184,7 @@ If you need more simultaneous installations of Tabular Editor 3 than listed abov
 
 ## Enterprise Edition Volume Discounts
 
-Our Enterprise Edition is priced in tiers, according to the following table (similar discount rates apply to monthly commitment):
-
-|Tier|Yearly price per seat|
-|---|---|
-|First 5 seats|$950.00 USD|
-|Next 6-10 seats|$900.00 USD|
-|Next 11-20 seats|$850.00 USD|
-|Next 21-50 seats|$800.00 USD|
-|Seats 51 and above|$750.00 USD|
-
-As an example, if you need 12 seats, the price breaks down as follows:
-
-```text
-Seats 1-5:    5 x 950.00 = $  4,750.00
-Seats 6-10:   5 x 900.00 = $  4,500.00
-Seats 11-12:  2 x 850.00 = $  1,700.00
---------------------------------------
-Total                      $ 10,950.00
-======================================
-```
-
-If you require more than 100 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
+If you require more than 25 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
 
 
 ## Command-line and CI/CD licensing

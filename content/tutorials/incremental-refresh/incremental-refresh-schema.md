@@ -37,7 +37,7 @@ __When adding or removing columns from a table configured with Incremental Refre
 
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 
   <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
@@ -73,7 +73,7 @@ For columns removed in the __data source__ (i.e. removed from the view accessed 
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 # [Power Query](#tab/removingfrompq)
@@ -83,7 +83,7 @@ For columns removed via __Power Query__ (i.e. using `Table.RemoveColumns`), foll
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 # [Unsupported Data Source](#tab/removingfromunsupportedsource)
@@ -94,7 +94,7 @@ If you are __unable to automatically update the table schema__ using _'Update ta
 2. __Update the Power Query Expressions:__ Check and remove any named references to the removed column, if applicable. If the column is being excluded via Power Query, you can make the appropriate changes, here.
 3. __Manually update the schema:__ Delete the data column object from the table. 
 4. __Apply changes:__ Deploy the model changes.
-3. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+3. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 ***
@@ -116,7 +116,7 @@ For columns removed in the __data source__ (i.e. added to the view accessed by P
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 # [Power Query](#tab/addingfrompq)
@@ -126,7 +126,7 @@ For columns removed via __Power Query__ (i.e. using `Table.AddColumns`), follow 
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 # [Unsupported Data Source](#tab/addingfromunsupportedsource)
@@ -138,7 +138,7 @@ If you are __unable to automatically update the table schema__ using _'Update ta
 3. __Manually update the schema:__ Right-click the table and select _Create > Data column_. Name the column appropriately.
 4. __Configure the new column:__ Set the column's `data type` property, appropriately. Set the `Source Column` property such that it matches the source. Any additional properties can also be configured (i.e. `Format String`, `SummarizeBy`, `Data Category`...) and the column can be added to the appropriate display folder.
 5. __Apply changes:__ Deploy the model changes.
-6. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+6. __Apply Refresh Policy:__ Right-click the table and select _Apply refresh policy_.
 7. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 ***

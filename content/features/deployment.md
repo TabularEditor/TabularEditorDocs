@@ -39,6 +39,20 @@ These are:
 - **Deploy Model Roles**: This option indicates whether roles defined in the model should be deployed. Unchecking this option will retain existing roles on the model as-is. If you are deploying changes to tables or columns in the model, you may have to revisit [RLS or OLS settings](xref:data-security-about), to ensure that they are still valid.
   - **Deploy Model Role Members**: This option indicates whether role members should be deployed. It is common to manage role members directly on the server, rather than in the model metadata. Unchecking this option will prevent the deployment from modifying any existing role members on the destination server.
 
+## Data source credentials
+
+By default, Tabular Editor doesn't save passwords, account keys and other secrets when it saves a model to disk. A model loaded from a file may therefore have data sources with a missing secret. The deployment wizard checks for this before it deploys. A secret counts as missing when it's empty or `********`. The wizard checks:
+
+- a provider data source whose connection string contains a password keyword, such as `Password` or `Pwd`,
+- a provider data source that impersonates a specific Windows account,
+- a structured data source that uses Windows or username/password authentication, or an account key.
+
+For each missing secret, the wizard asks you for the credentials the server should use when it refreshes the model. Tabular Editor stores what you enter, encrypted, as a data source override in the @user-options file, and uses it on the next deployment instead of asking again.
+
+When you clear **Deploy Data Sources**, the wizard runs the same check on the data sources that already exist on the target. If the server doesn't return a secret that one of them needs, the wizard asks for it on every deployment, because these answers aren't stored.
+
+Power BI and Fabric semantic models don't store credentials in the model. You set them on the semantic model in the Power BI service instead.
+
 ## Deployment script
 
 During deployment, Tabular Editor generates a [CreateOrReplace TMSL script](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), which is then executed against the Analysis Services engine. The CreateOrReplace script contains all the metadata required to recreate the model, including tables, columns, measures, relationships, perspectives, translations, etc. If the model does not already exist on the target server, it will be created. If the model already exists, existing objects will be replaced with the new metadata specified in the script.

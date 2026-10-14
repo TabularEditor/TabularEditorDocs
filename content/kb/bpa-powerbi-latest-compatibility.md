@@ -2,7 +2,7 @@
 uid: kb.bpa-powerbi-latest-compatibility
 title: Use Latest Compatibility Level for Power BI Models
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-09-23
 description: Best practice rule ensuring Power BI models use the latest compatibility level for optimal features and performance.
 ---
 
@@ -10,7 +10,7 @@ description: Best practice rule ensuring Power BI models use the latest compatib
 
 ## Overview
 
-This rule identifies Power BI models not using the latest available compatibility level. Using the latest level ensures access to newest features, performance optimizations, and bug fixes.
+This rule flags Power BI models below the highest compatibility level that your Tabular Editor 3 version supports. New model features, such as new DAX functions and TOM properties, require the newer levels.
 
 - Category: Governance
 - Severity: High (3)
@@ -21,12 +21,12 @@ This rule identifies Power BI models not using the latest available compatibilit
 
 ## Why This Matters
 
-- **Missing features**: New DAX functions and model capabilities unavailable
-- **Future compatibility**: Easier upgrades when using recent levels
+- new DAX functions and model features aren't available below the level that introduces them
+- a model kept at a recent level needs smaller upgrades later
 
 ## When This Rule Triggers
 
-For Power BI models, triggers when compatibility level is below current maximum:
+The rule triggers for Power BI models whose compatibility level isn't the current maximum:
 
 ```csharp
 Model.Database.CompatibilityMode=="PowerBI" 
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### Automatic Fix
 
-The best practice rule includes an automatic fix that sets the Compatibility Level to the highest available that exists on the current installation of Tabular Editor 3. If you have an older version of Tabular Editor 3 installed you should update your installation. 
+The rule's automatic fix sets the compatibility level to the highest level your installed version of Tabular Editor 3 supports. To get a newer level, update Tabular Editor 3.
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -45,41 +45,43 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### Manual Fix
 
-1. In Tabular Editor, go to **Model** properties
-2. Set **Compatibility Level** to the latest version
-3. Test all DAX expressions and features
-4. Deploy to Power BI Service
+1. In the TOM Explorer, select **Model** and expand **Database** in the **Properties** view.
+2. Set **Compatibility Level** to the latest level.
+3. Test the DAX expressions and features of the model.
+4. Deploy to the Power BI Service.
+
+See @update-compatibility-level.
 
 ## Common Causes
 
 ### Cause 1: Model Created in Power BI Desktop
 
-Model created with in Power BI Desktop does not necessarily have the latest Compatibility Level. 
+Power BI Desktop doesn't always create models at the latest compatibility level.
 
 ### Cause 2: Model Created at Lower Level
 
-Model created with older version of Power BI Desktop.
+An older version of Power BI Desktop created the model.
 
 ### Cause 3: Conservative Approach
 
-Team policy to delay upgrades.
+A team policy delays upgrades.
 
 ## Example
 
 ### Before Fix
 
-```
+```text
 Model Compatibility Level: 1500
 Current Maximum Level: 1706
 ```
 
 ### After Fix
 
-```
+```text
 Model Compatibility Level: 1706 (Latest)
 ```
 
-Access to newer capabilities such as [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), @user-context-calculated-columns (1705+) and String Indexing Behavior on a column (1706+).
+The model can use [custom calendars](xref:calendars) (1701+), [DAX user-defined functions](xref:udfs) (1702+), [user-context calculated columns](xref:user-context-calculated-columns) (1705+) and the `StringIndexingBehavior` column property (1706+).
 
 ## Compatibility Level
 
