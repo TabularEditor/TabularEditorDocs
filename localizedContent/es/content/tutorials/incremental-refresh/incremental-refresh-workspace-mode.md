@@ -34,7 +34,7 @@ applies_to:
 La actualización incremental crea nuevas particiones en la primera actualización programada del día. Como resultado, cualquier metadato local (es decir, `.bim` o `Database.json`) quedará desincronizado respecto a los metadatos del modelo remoto después de la actualización. Como resultado, **al trabajar con un modelo que tenga tablas configuradas con actualización incremental, no se recomienda el _modo del área de trabajo_.**.
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. For Analysis Services, custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. Para Analysis Services, se requiere una [configuración de partición](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ---
 
