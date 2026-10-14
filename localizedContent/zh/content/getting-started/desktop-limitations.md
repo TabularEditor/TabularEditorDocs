@@ -2,7 +2,7 @@
 uid: desktop-limitations
 title: Power BI Desktop 限制（已过时）
 author: Morten Lønskov
-updated: 2023-08-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Power BI Desktop 的限制
 
-将 Tabular Editor（任意版本）作为 [Power BI Desktop 的外部工具](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools) 使用时，有一些限制需要注意。
+When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
 
 本文提到的限制同样适用于 Tabular Editor 2.x。
 
@@ -58,11 +58,11 @@ applies_to:
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-连接到 Analysis Services 实例后，外部工具可以获取模型元数据信息，对 Data model 执行 DAX 或 MDX 查询，甚至还能通过 [Microsoft 提供的客户端库](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions) 来更改模型元数据。从这一点来看，由 Power BI Desktop 管理的 Analysis Services 实例与任何其他类型的 Analysis Services 实例没有区别。
+Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). 从这一点来看，由 Power BI Desktop 管理的 Analysis Services 实例与任何其他类型的 Analysis Services 实例没有区别。
 
 ## Data model 建模操作
 
-不过，由于 Power BI Desktop 与 Analysis Services 的互操作方式所限，外部工具可对模型元数据应用的更改类型存在一些重要限制。这些限制已在[外部工具官方文档](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)中列出，这里为方便起见再次说明：
+不过，由于 Power BI Desktop 与 Analysis Services 的互操作方式所限，外部工具可对模型元数据应用的更改类型存在一些重要限制。 These are listed [in the official documentation for External Tools](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
 
 ### [2025 年六月之前](#tab/postjune2023)
 
@@ -87,7 +87,7 @@ applies_to:
 
 <a name="columns">1</a> - 使用外部工具连接到 AS 实例时，支持更改列的数据类型，但不支持重命名列。
 
-Power BI Desktop 的项目文件支持更广泛的写入操作。通过将 Tabular Editor 用作外部工具时不支持的那些对象和操作，可能可以通过编辑 Power BI Desktop 项目文件来实现。请参阅 Microsoft 文档了解更多信息：[Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring)。
+Power BI Desktop 的项目文件支持更广泛的写入操作。通过将 Tabular Editor 用作外部工具时不支持的那些对象和操作，可能可以通过编辑 Power BI Desktop 项目文件来实现。 Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring).
 
 ### [2023 年六月之前](#tab/prejune2023)
 
