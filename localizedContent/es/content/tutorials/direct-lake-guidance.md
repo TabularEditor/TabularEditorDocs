@@ -35,23 +35,23 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 | Direct Lake en SQL     | Versión anterior de Direct Lake que utiliza el punto de conexión de análisis SQL de un Warehouse o un Lakehouse de Fabric.                                                                            | No se recomienda para nuevos desarrollos (utilice Direct Lake en OneLake en su lugar).                                                          |
 
 > [!NOTE]
-> También es posible crear tablas que contengan una combinación de particiones en modo **Import** y **DirectQuery** (también conocidas como "tablas híbridas"). Esto se suele hacer en tablas de hechos grandes que requieren actualización incremental, mientras que parte de los datos se consulta directamente desde el origen. See [this article](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-xmla) for more information.
+> También es posible crear tablas que contengan una combinación de particiones en modo **Import** y **DirectQuery** (también conocidas como "tablas híbridas"). Esto se suele hacer en tablas de hechos grandes que requieren actualización incremental, mientras que parte de los datos se consulta directamente desde el origen. Consulta [este artículo](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-xmla) para obtener más información.
 
 ## Direct Lake en OneLake vs. Direct Lake en SQL
 
-[Direct Lake on OneLake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) was introduced in March 2025 as an alternative to Direct Lake on SQL. Con Direct Lake en OneLake, no hay dependencia del punto de conexión SQL ni se recurre al modo DirectQuery. This also means that the [usual restrictions that apply to DirectQuery models](https://learn.microsoft.com/power-bi/connect-data/desktop-directquery-about#modeling-limitations) do not apply to Direct Lake on OneLake models.
+[Direct Lake en OneLake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) se introdujo en marzo de 2025 como alternativa a Direct Lake en SQL. Con Direct Lake en OneLake, no hay dependencia del punto de conexión SQL ni se recurre al modo DirectQuery. Esto también significa que las [restricciones habituales de los modelos DirectQuery](https://learn.microsoft.com/power-bi/connect-data/desktop-directquery-about#modeling-limitations) no se aplican a los modelos Direct Lake en OneLake.
 
 > [!NOTE]
 > Direct Lake en OneLake está actualmente en vista previa pública. Debes habilitar la configuración del inquilino **User can create Direct Lake on OneLake semantic models (preview)** en el portal de administración de Fabric antes de poder crear modelos semánticos con este modo de almacenamiento de tablas.
 
-However, as with Direct Lake on SQL, there are still some [limitations that _do_ apply](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las principales limitaciones se incluyen:
+Sin embargo, al igual que con Direct Lake en SQL, siguen existiendo algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las principales limitaciones se incluyen:
 
-- Las columnas calculadas en Direct Lake sobre tablas de OneLake se admiten en versión preliminar, pero solo en _contexto de usuario_: el valor se evalúa en el momento de la consulta para el usuario actual, en lugar de materializarse. Esto significa que una columna calculada de Direct Lake respeta la seguridad de nivel de fila y la seguridad a nivel de objetos, pero no se puede usar como clave de relación y no responde a los filtros ni a las segmentaciones de un Report. Use una medida en su lugar cuando el resultado deba reaccionar al contexto de filtro. Direct Lake en SQL sigue sin admitir columnas calculadas en absoluto. See [Develop Direct Lake semantic models](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop) for details.
+- Las columnas calculadas en Direct Lake sobre tablas de OneLake se admiten en versión preliminar, pero solo en _contexto de usuario_: el valor se evalúa en el momento de la consulta para el usuario actual, en lugar de materializarse. Esto significa que una columna calculada de Direct Lake respeta la seguridad de nivel de fila y la seguridad a nivel de objetos, pero no se puede usar como clave de relación y no responde a los filtros ni a las segmentaciones de un Report. Use una medida en su lugar cuando el resultado deba reaccionar al contexto de filtro. Direct Lake en SQL sigue sin admitir columnas calculadas en absoluto. Consulta [Desarrollar modelos semánticos de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop) para obtener más detalles.
 - Las tablas calculadas no pueden hacer referencia a columnas ni tablas en el modo de almacenamiento Direct Lake. Se admiten los grupos de cálculo, los parámetros de tipo what-if y los parámetros de campo, porque crean tablas calculadas implícitas que no hacen referencia a columnas de Direct Lake.
 - Las vistas SQL no materializadas no se admiten como Data sources para tablas de Direct Lake en OneLake. Usa vistas materializadas o asegúrate de que la tabla Delta de origen contenga las columnas que necesitas.
 - Los accesos directos en un Lakehouse no se admiten como Data sources durante la versión preliminar pública de Direct Lake en OneLake.
 
-For a full and up-to-date list of limitations, see the [Microsoft documentation on Direct Lake considerations and limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
+Para obtener una lista completa y actualizada de las limitaciones, consulta la [documentación de Microsoft sobre consideraciones y limitaciones de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
 
 ### Modelos compuestos
 
@@ -60,7 +60,7 @@ Si necesita una columna calculada que se materialice, pueda usarse como clave de
 Direct Lake en OneLake también admite la combinación con tablas DirectQuery mediante herramientas basadas en XMLA, como Tabular Editor. Las tablas en modo Import se pueden agregar mediante el modelado web de Power BI, Power BI Desktop (edición en vivo) o mediante herramientas XMLA.
 
 > [!NOTE]
-> Direct Lake en SQL no admite modelos compuestos. No puedes combinar tablas de Direct Lake en SQL con tablas en modo de almacenamiento Import, DirectQuery o Dual en el mismo modelo semántico. Sin embargo, puedes usar Power BI Desktop para crear un modelo compuesto _sobre_ un modelo semántico de Direct Lake en SQL y ampliarlo con tablas nuevas. See [Build a composite model on a semantic model](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model) for more information.
+> Direct Lake en SQL no admite modelos compuestos. No puedes combinar tablas de Direct Lake en SQL con tablas en modo de almacenamiento Import, DirectQuery o Dual en el mismo modelo semántico. Sin embargo, puedes usar Power BI Desktop para crear un modelo compuesto _sobre_ un modelo semántico de Direct Lake en SQL y ampliarlo con tablas nuevas. Para más información, consulta [Crear un modelo compuesto en un modelo semántico](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model).
 
 ## Intercalación
 
@@ -177,7 +177,7 @@ in
     database
 ```
 
-Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+Reemplaza `<sql-endpoint>` por la cadena de conexión del [punto de conexión de análisis SQL del Warehouse de Fabric](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) o del [Lakehouse](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint), y `<warehouse/lakehouse name>` por el nombre del Warehouse o del Lakehouse.
 
 ### Importar desde Lakehouse / Warehouse
 
@@ -197,7 +197,7 @@ in
     Data
 ```
 
-Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+Reemplaza `<sql-endpoint>` por la cadena de conexión del [punto de conexión de análisis SQL del Warehouse de Fabric](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) o del [Lakehouse](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint), y `<warehouse/lakehouse name>` por el nombre del Warehouse o del Lakehouse.
 
 Reemplaza `<schema-name>` por el nombre del esquema en el Warehouse/Lakehouse y `<table/view-name>` por el nombre de la tabla o vista que quieras importar. Ten en cuenta que las tablas en Import mode pueden usar vistas no materializadas como Data source, ya que los datos se consultan a través del punto de conexión de análisis SQL durante las operaciones de actualización.
 
