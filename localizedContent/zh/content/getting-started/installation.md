@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: 高级安装与激活
 author: Morten Lønskov
-updated: 2026-10-05
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -110,37 +110,60 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
 ```
 
-| MSI 功能        | 在安装程序中显示为        | 说明                                   | 默认安装                                         |
-| ------------- | ---------------- | ------------------------------------ | -------------------------------------------- |
-| `MainFeature` | Tabular Editor 3 | Tabular Editor 3 核心应用程序              | 是（必需）                                        |
-| `AIAssistant` | AI 功能            | @ai-assistant 和 MCP 服务器 | 是，自 3.27.0 起 |
+| MSI feature   | 在安装程序中显示为        | 说明                                                              | 默认安装                                                                                                                  |
+| ------------- | ---------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `MainFeature` | Tabular Editor 3 | Tabular Editor 3 核心应用程序                                         | Yes (required)                                                                                     |
+| `AIAssistant` | AI 功能            | The @ai-assistant and the @mcp-server | Yes, from 3.27.0. Earlier versions install it only when it's selected |
 
 > [!IMPORTANT]
-> 上述命令会安装 **AI 功能** 组件。在 3.26.x 及更早版本中，必须手动选中它，默认安装不会包含它；从 3.27.0 起，它已成为默认安装的一部分。如果贵组织不希望在用户计算机上安装 AI Assistant 或 MCP 服务器，则必须按下一节所述进行明确指定。
+> From 3.27.0, a new installation includes the **AI features** component unless you exclude it. If your organization doesn't allow the AI Assistant or the MCP server, exclude the component and set the `DisableAi` policy as described below.
 
 ### 部署时不包含 AI 功能
 
-若要避免将 AI 文件安装到计算机上，请指定需要的功能，并省略 `AIAssistant`：
+Leave `AIAssistant` out of `ADDLOCAL` to install Tabular Editor 3 without the AI features:
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
 ```
 
-若要在已安装该组件的计算机上将其移除，请使用同一个组件并加上 `REMOVE`：
+Run the package with `REMOVE` to remove the component from machines that already have it:
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
 ```
 
-无论哪种方式，AI 程序集都不会写入安装文件夹；应用程序中不会出现 **AI Assistant** 窗格和 MCP 服务器；也不会向任何模型提供程序发起连接。 Tabular Editor 3 的其他所有功能都不受影响。
+Without the component, the AI assemblies aren't in the installation folder, the **AI Assistant** pane and the MCP server are absent from the application and no requests go to a model provider. Other features are unaffected.
 
-升级现有安装时，会保留该计算机原有的功能选择，因此，如果某台计算机在 3.27.0 之前部署时未包含 AI 功能，升级后也不会自动获得这些功能。对于全新安装，由于没有先前的选择可继承，请传入 `ADDLOCAL=MainFeature`。
-
-> [!IMPORTANT]
-> 命令行只控制 _你_ 要部署的内容，而不控制用户能安装什么：AI 功能默认包含在内，因此任何自行运行安装程序的人都会获得这些功能。要让该设置持续生效，还需要同时设置 `DisableAi` @policies。从 3.27.0 起，安装程序会读取该策略，并自动跳过 AI 组件；不管由谁运行、以何种方式运行都是如此。如果该组件已存在，该策略还会在运行时关闭 AI Assistant 和 MCP 服务器。请在整机范围内进行设置，即在 `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` 下设置，这样它会对所有用户生效，并且无法按用户进行覆盖。
+To change the selection on a single machine, run the installer again and select **Modify** in the maintenance dialog.
 
 > [!NOTE]
 > 使用 `ADDLOCAL` 时，除了任何可选功能外，也必须包含 `MainFeature`。如果仅指定 `AIAssistant` 而不包含 `MainFeature`，将导致安装不完整。
+
+### Upgrades and the AI features component
+
+When you install a newer version of the same package over an existing installation, the installer keeps the feature selection the machine already has. This applies to interactive and silent installations. A machine deployed without the AI features before 3.27.0 stays without them after the upgrade, and a machine where the AI features were selected keeps them.
+
+In these cases the installer applies the default selection or the selection on the command line:
+
+| Situation                                                                                                                                                            | 结果                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The command line sets `ADDLOCAL`, `REMOVE` or another feature property                                                                                               | The command line sets the selection. `ADDLOCAL=MainFeature` removes the AI features from machines that have them, and `ADDLOCAL=ALL` installs them on machines that don't         |
+| The deployment uninstalls the earlier version before it installs the new one, for example an Intune supersedence set to uninstall                                    | The installation is new and includes the AI features unless the command line excludes them                                                                                                        |
+| The package targets a different runtime than the installed one, for example the .NET 10 package on a machine with the .NET 8 package | The .NET 8 and .NET 10 packages are separate products. The installation is new and includes the AI features unless the command line excludes them |
+
+The `DisableAi` policy overrides the selection in every case.
+
+### Enforcing the decision with the DisableAi policy
+
+A user who runs the installer gets the default selection, which includes the AI features. Set the `DisableAi` @policies to `1` under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` to keep the AI features off every installation on the machine. Tabular Editor 3 reads the policy at startup and turns off the AI Assistant and the MCP server.
+
+From 3.27.0 the installer reads the policy as well:
+
+- a new installation leaves out the AI features component, and the installer doesn't show it
+- an upgrade removes the component from a machine that has it
+- an existing installation keeps the AI files until the next upgrade. Tabular Editor 3 doesn't load them while the policy is set
+
+A deployment tool that runs as the local system account doesn't read the `HKEY_CURRENT_USER` policies of the machine's users. Set the policy under `HKEY_LOCAL_MACHINE` for the installer to read it in a silent deployment.
 
 ### 组件名称和其他 MSI 选项
 
