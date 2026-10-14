@@ -2,7 +2,7 @@
 uid: direct-lake-sql-model
 title: SQL 语义模型上的 Direct Lake
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Direct Lake 语义模型
 
-SQL 语义模型上的 Direct Lake 可通过 SQL 端点直接连接到存储在 [Fabric 中的 OneLake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) 中的数据源。
+SQL 语义模型上的 Direct Lake 可通过 SQL 端点直接连接到存储在 [Fabric 中的 OneLake](https://learn.microsoft.com/fabric/onelake/onelake-overview) 中的数据源。
 
 > [!IMPORTANT]
 > 自 [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md) 起，Tabular Editor 3 支持在 OneLake 上使用 Direct Lake，且在大多数情况下建议采用此方式。更多信息请参阅我们的 [Direct Lake 指南](xref:direct-lake-guidance)。
@@ -31,7 +31,7 @@ Tabular Editor 2 可以连接到 Direct Lake 语义模型，但不提供用于�
 
 > [!NOTE]
 > **Direct Lake 的限制**
-> Direct Lake 模型可进行的更改存在一些限制。有关完整列表，请参阅 [Direct Lake 的注意事项和限制](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。另见 [SQLBI 的这篇文章](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/)，了解如何在 Direct Lake 和导入模式之间做出选择。
+> Direct Lake 模型可进行的更改存在一些限制。有关完整列表，请参阅 [Direct Lake 的注意事项和限制](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。另见 [SQLBI 的这篇文章](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/)，了解如何在 Direct Lake 和导入模式之间做出选择。
 
 ## 在 Tabular Editor 3 中创建基于 SQL 的 Direct Lake 模型
 
