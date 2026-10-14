@@ -2,7 +2,7 @@
 uid: ai-compliance
 title: AI features compliance guide
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -144,11 +144,11 @@ Enterprise Edition policies apply on Enterprise, Consultancy and Trial licenses.
 
 | Requirement | Policy | Edition |
 | -- | -- | -- |
-| No AI features, and the AI component isn't installed | `DisableAi` | All |
+| No AI features, and the AI component left out of new installations and removed on upgrade | `DisableAi` | All |
 | No AI Assistant, MCP server allowed | `DisableAiChat` | All |
 | No MCP server, AI Assistant allowed | `DisableMcpServer` | All |
 
-`DisableAi` also clears any stored provider configuration, including the API key. See [Deploying without the AI features](xref:installation-activation-basic#deploying-without-the-ai-features).
+`DisableAi` also clears any stored provider configuration, including the API key. An installation the installer hasn't run on since the policy was set keeps the AI files on disk, and Tabular Editor 3 doesn't load them. See [Enforcing the decision with the DisableAi policy](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy).
 
 The portable build of Tabular Editor 3 has no installer step. It honors `DisableAi` at runtime. Use application control, such as AppLocker or Windows Defender Application Control, if users must not run older versions.
 

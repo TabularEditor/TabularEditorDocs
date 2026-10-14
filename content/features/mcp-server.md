@@ -2,7 +2,7 @@
 uid: mcp-server
 title: MCP server
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -292,7 +292,7 @@ The MCP server is on by default, and any user can turn it off. Administrators ca
 | Policy | Edition | What it does |
 | -- | -- | -- |
 | `DisableMcpServer` | All | Removes the MCP server. The AI Assistant chat is unaffected |
-| `DisableAi` | All | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component off the machine |
+| `DisableAi` | All | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component out of new installations and removes it on upgrade |
 | `RequireMcpAccessToken` | All | Forces token authentication and locks the preference |
 | `DisableCSharpScripts` | All | Stops an agent running a C# script and drafting one into a document. Drafting a DAX query, and every tool that only reads, is unaffected |
 | `BlockUnsafeScripts` | Enterprise | Allows only scripts that stay within the model, for every script in Tabular Editor. An agent script that accesses files, the network, other processes or external assemblies doesn't run, and no review document opens |
