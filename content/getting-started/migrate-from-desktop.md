@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: Migrating from Power BI Desktop
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -75,7 +75,7 @@ The typical workflow in this scenario, is the following:
 As the model metadata "source of truth" in this scenario, is the file or folder structure stored on disk, this scenario not only enables parallel development with version control integration, but also continuous integration/continuous deployment (CI/CD) using an automated build server such as Azure DevOps. 
 
 > [!WARNING]
-> As soon as you apply changes to a Power BI dataset through the Power BI service XMLA endpoint, that dataset can no longer be downloaded as a .pbix file. See [Dataset connectivity with the XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) for more information.
+> As soon as you apply changes to a Power BI dataset through the Power BI service XMLA endpoint, that dataset can no longer be downloaded as a .pbix file. See [Dataset connectivity with the XMLA endpoint](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) for more information.
 
 When using Tabular Editor to connect to the dataset through the XMLA endpoint, there are no limitations to the types of write operations/model modifications that can be made.
 
@@ -159,7 +159,7 @@ See @dax-script-introduction for more information.
 
 ### How to preview data in a table
 
-To view the contents of a table (similar to the Data Tab in Power BI Desktop), simply right-click on a table and choose "Preview data". This will open a new tab containing a preview of the table content. You can scroll through all rows of the table, as well as apply sorting or filtering to columns. Unlike Power BI Desktop, you can open as many of these preview tabs as you like and arrange them next to each other in the user interface. The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
+To view the contents of a table (similar to the Data Tab in Power BI Desktop), simply right-click on a table and choose "Preview data". This will open a new tab containing a preview of the table content. You can scroll through all rows of the table, as well as apply sorting or filtering to columns. Unlike Power BI Desktop, you can open as many of these preview tabs as you like and arrange them next to each other in the user interface. The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
 
 ![Preview Data](~/content/assets/images/preview-data.png)
 
@@ -170,7 +170,7 @@ See @refresh-preview-query for more information.
 
 ### How to add a calculation group
 
-[Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) are useful for defining and reusing a modified DAX filter context or other type of business logic across all model measures. To add a calculation group using Tabular Editor, simply use the **Model > New Calculation Group** (ALT+7) option.
+[Calculation Groups](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) are useful for defining and reusing a modified DAX filter context or other type of business logic across all model measures. To add a calculation group using Tabular Editor, simply use the **Model > New Calculation Group** (ALT+7) option.
 
 ![Add Calculation Group](~/content/assets/images/add-calc-group.png)
 

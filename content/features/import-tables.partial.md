@@ -2,7 +2,7 @@
 uid: import-tables
 title: Import Tables
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -167,7 +167,7 @@ When this option is enabled and Tabular Editor 3 is connected to Analysis Servic
 When the **Use Analysis Services for change detection** option is enabled, Tabular Editor 3 will use the following technique when a schema update is requested:
 
 1. A new transaction is created against the connected Analysis Services instance
-2. A new temporary table is added to the model. This table uses a Power Query partition expression that returns the schema of the original expression, for which a schema update was requested. This is done using the [`Table.Schema` M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
+2. A new temporary table is added to the model. This table uses a Power Query partition expression that returns the schema of the original expression, for which a schema update was requested. This is done using the [`Table.Schema` M function](https://docs.microsoft.com/powerquery-m/table-schema).
 3. The temporary table is refreshed by Analysis Services. Analysis Services takes care of connecting to the data source in order to retrieve the updated schema.
 4. Tabular Editor 3 queries the content of the temporary table to obtain the schema metadata.
 5. The transaction is rolled back, leaving the Analysis Services database or Power BI Semantic Model in the original state it was in before step 1.
@@ -176,7 +176,7 @@ When the **Use Analysis Services for change detection** option is enabled, Tabul
 Using this technique, Tabular Editor 3 makes it possible to import and update tables from data sources that are otherwise not supported, regardless of the complexity and function usage of the M queries behind the tables.
 
 > [!NOTE]
-> If your M expressions combine data from multiple sources, such as through the M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) function, you may need to change the [**Privacy Level**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) from "Private" to "Organizational" on the Semantic Model in the Power BI service. Otherwise, you may see an error indicating that `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. This error may also occur even if **Use Analysis Services for change detection** is not enabled, as Tabular Editor 3 will automatically fall back to this detection mechanism when the M expression is too complex for Tabular Editor 3's built-in schema detection.
+> If your M expressions combine data from multiple sources, such as through the M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin) function, you may need to change the [**Privacy Level**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) from "Private" to "Organizational" on the Semantic Model in the Power BI service. Otherwise, you may see an error indicating that `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. This error may also occur even if **Use Analysis Services for change detection** is not enabled, as Tabular Editor 3 will automatically fall back to this detection mechanism when the M expression is too complex for Tabular Editor 3's built-in schema detection.
 
 ### Importing new tables through Analysis Services
 

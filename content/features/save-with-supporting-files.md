@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: Save with supporting files
 author: Peer Grønnerup
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -86,7 +86,7 @@ Tabular Editor creates the **.SemanticModel** folder, for example `Sales.Semanti
 Git integration is available on workspaces assigned to Microsoft Fabric F-SKU capacity, Power BI Premium capacity or Power BI Premium Per User (PPU).
 
 > [!WARNING]
-> Git Integration for the Semantic Model item is in preview. For the list of supported items, see [Supported items in Fabric Git Integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
+> Git Integration for the Semantic Model item is currently in preview. For the latest information on supported items for Fabric Git Integration, see [Supported items in Fabric Git Integration](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
 
 > [!CAUTION]
 > Don't enable Git integration on the Fabric workspace that hosts your Tabular Editor workspace databases. If Tabular Editor synchronizes a model to a Git-connected workspace, the workspace shows uncommitted changes that don't match the repository, and syncing them causes Git conflicts.
@@ -108,7 +108,7 @@ The workspace shows the semantic model under the `displayName` from the .platfor
 If the model has no culture, Tabular Editor sets it to **en-US** when saving with supporting files. Without a culture, the initial synchronization with Fabric leaves uncommitted changes.
 
 For more information, see:
-- [Microsoft Fabric Git integration documentation](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
+- [Microsoft Fabric Git integration documentation](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
 - [Tabular Editor and Fabric Git Integration blog post](https://tabulareditor.com/blog/tabular-editor-and-fabric-git-integration)
 
 ## Comparing serialization formats

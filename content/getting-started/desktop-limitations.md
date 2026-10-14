@@ -2,7 +2,7 @@
 uid: desktop-limitations
 title: Power BI Desktop Limitations (Outdated)
 author: Morten Lønskov
-updated: 2023-08-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Power BI Desktop limitations
 
-When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
+When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
 
 The limitations mentioned in this article apply to Tabular Editor 2.x as well.
 
@@ -58,11 +58,11 @@ External tools may connect to the instance of Analysis Services managed by Power
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
+Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
 
 ## Data modeling operations
 
-However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
+However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
 
 ### [Pre June 2025](#tab/postjune2023)
 
@@ -87,7 +87,7 @@ However, due to the way Power BI Desktop interoperates with Analysis Services, t
 
 <a name="columns">1</a> - When using external tools to connect to the AS instance, changing a column's data type is supported, however, renaming columns is not supported.
 
-Power BI Desktop *project files* offer a broader scope of supported write operations. Those objects and operations that are not supported through using Tabular Editor as an External Tool may be supported by editing Power BI Desktop project files. Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
+Power BI Desktop *project files* offer a broader scope of supported write operations. Those objects and operations that are not supported through using Tabular Editor as an External Tool may be supported by editing Power BI Desktop project files. Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring).
 
 
 ### [Pre June 2023](#tab/prejune2023)

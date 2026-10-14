@@ -2,7 +2,7 @@
 uid: advanced-refresh
 title: Advanced Refresh Dialog
 author: Daniel Otykier
-updated: 2026-01-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -87,7 +87,7 @@ Override profiles store named configurations of TMSL overrides that you can reus
 - **Edit...**: Modifies the selected override profile.
 - **Delete**: Removes the selected override profile.
 
-The TMSL definition follows the [TMSL refresh command specification](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions), allowing you to override properties on:
+The TMSL definition follows the [TMSL refresh command specification](https://learn.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions), allowing you to override properties on:
 
 - Data sources
 - Shared expressions

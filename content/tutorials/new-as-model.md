@@ -2,7 +2,7 @@
 uid: new-as-model
 title: Create an Analysis Services Model
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ applies_to:
 This page walks you through the process of creating a new Analysis Services tabular model from scratch using Tabular Editor 3.
 
 > [!NOTE]
-> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Note that certain modeling features are not supported at these tiers.
+> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier). Note that certain modeling features are not supported at these tiers.
 
 ##### Creating a new model
 
@@ -51,7 +51,7 @@ Once your model is created, the next step is to add a data source and some table
 
 #### Adding a data source and tables
 
-Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
 ![Add data source](~/content/assets/images/new-as-model-add-data-source.png)
 

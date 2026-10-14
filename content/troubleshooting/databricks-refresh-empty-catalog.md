@@ -2,7 +2,7 @@
 uid: databricks-refresh-empty-catalog
 title: Databricks Refresh Fails with Empty Catalog Error
 author: Morten Lønskov
-updated: 2026-04-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -40,7 +40,7 @@ The `Databricks.Catalogs()` Power Query function accepts an optional third param
 
 2. **The Table Import Wizard in Tabular Editor versions before 3.26.1 generates M-queries with `null` as the third parameter.** This means the legacy implementation is used, which fails on newer Databricks workspaces.
 
-3. **Power BI Desktop already defaults to Implementation 2.0.** Microsoft has made the [Arrow Database Connectivity driver](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) the default for new Databricks connections in Power BI Desktop.
+3. **Power BI Desktop already defaults to Implementation 2.0.** Microsoft has made the [Arrow Database Connectivity driver](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) the default for new Databricks connections in Power BI Desktop.
 
 ---
 
@@ -120,7 +120,7 @@ Info($"Updated {updated} partition(s).");
 
 ## Additional Resources
 
-- [Arrow Database Connectivity driver (Microsoft documentation)](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
+- [Arrow Database Connectivity driver (Microsoft documentation)](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
 - [Connecting to Azure Databricks](xref:connecting-to-azure-databricks)
 - [Import Table Wizard](xref:importing-tables)
 - [Databricks Column Comment Length Error](xref:databricks-column-comments-length)

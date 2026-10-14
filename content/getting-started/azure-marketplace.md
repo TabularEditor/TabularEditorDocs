@@ -2,7 +2,7 @@
 uid: azure-marketplace
 title: Purchase via Azure Marketplace
 author: Peer Grønnerup
-updated: 2026-01-05
+updated: 2026-10-12
 ---
 # Purchase Tabular Editor 3 through the Azure Marketplace
 
@@ -15,7 +15,7 @@ To purchase Tabular Editor via the Azure Marketplace, you need:
 - An Azure subscription (verify if you already have a subscription or create a new subscription)
 - An Azure AD account with at least Contributor role for the Azure subscription
 
-Also ensure these [prerequisites](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/enable-marketplace-purchases) are met before proceeding with the purchase of Tabular Editor 3 through the Azure Marketplace.
+Also ensure these [prerequisites](https://learn.microsoft.com/azure/cost-management-billing/manage/enable-marketplace-purchases) are met before proceeding with the purchase of Tabular Editor 3 through the Azure Marketplace.
 
 ## How to purchase Tabular Editor 3 in the Azure Marketplace
 
@@ -53,7 +53,7 @@ Follow this procedure to purchase Tabular Editor 3 licenses through the Azure Ma
 > [!NOTE]
 > Each edition of Tabular Editor 3 must be purchased separately. You cannot combine different editions in a single Azure Marketplace transaction.
 
-For more details, see: [Purchase a SaaS offer in Azure Portal](https://learn.microsoft.com/en-us/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
+For more details, see: [Purchase a SaaS offer in Azure Portal](https://learn.microsoft.com/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
 
 ## Activating your Azure Marketplace subscription
 
@@ -117,6 +117,6 @@ All modifications to Tabular Editor 3 subscriptions purchased through the Azure 
 > **Downgrades not supported**: You cannot downgrade to a lower edition or reduce the number of users during an active subscription period. To move to a lower-tier plan or reduce seats, turn off **Auto-renew** for your current subscription and purchase a new subscription with your desired configuration before the current term ends.
 
 > [!IMPORTANT]
-> Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead. Refunds are processed according to the refund policy. For more information, see [Refund policies](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
+> Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead. Refunds are processed according to the refund policy. For more information, see [Refund policies](https://learn.microsoft.com/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
 
-For more information about managing SaaS subscriptions in Azure, see: [SaaS subscription lifecycle management](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)
+For more information about managing SaaS subscriptions in Azure, see: [SaaS subscription lifecycle management](https://learn.microsoft.com/marketplace/saas-subscription-lifecycle-management)
