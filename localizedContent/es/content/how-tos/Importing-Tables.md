@@ -76,7 +76,7 @@ Desde la versión 2,8, Tabular Editor incorpora una nueva función en la interfa
 
 Los cambios se detectan en función de las propiedades "Columna de origen" y "Tipo de datos" de todas las columnas de datos en las tablas correspondientes. Si se detecta algún cambio, Tabular Editor mostrará la interfaz anterior, detallando los cambios. Puedes desmarcar los cambios que no quieras aplicar al modelo, aunque ten en cuenta que algunos cambios pueden provocar errores de procesamiento (por ejemplo, columnas de origen que no existen en la tabla/vista/consulta de origen).
 
-Este mecanismo (al igual que la interfaz de Importar tabla) usa el indicador FormatOnly al consultar los metadatos del origen. Esto significa que puedes tener particiones de tabla que usen procedimientos almacenados. El indicador FormatOnly-flag garantiza que el procedimiento almacenado nunca se ejecute directamente. En su lugar, el servidor realiza un análisis estático para devolver solo los metadatos que describen el conjunto de resultados que devolvería el procedimiento almacenado al ejecutarse. Según el RDBMS que utilices, el indicador FormatOnly puede tener algunas limitaciones cuando se usa con procedimientos almacenados. For more information on this topic when using SQL Server as a data source, please see [this article](https://docs.microsoft.com/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
+Este mecanismo (al igual que la interfaz de Importar tabla) usa el indicador FormatOnly al consultar los metadatos del origen. Esto significa que puedes tener particiones de tabla que usen procedimientos almacenados. El indicador FormatOnly-flag garantiza que el procedimiento almacenado nunca se ejecute directamente. En su lugar, el servidor realiza un análisis estático para devolver solo los metadatos que describen el conjunto de resultados que devolvería el procedimiento almacenado al ejecutarse. Según el RDBMS que utilices, el indicador FormatOnly puede tener algunas limitaciones cuando se usa con procedimientos almacenados. Para obtener más información sobre este tema al utilizar SQL Server como Data source, consulta [este artículo](https://docs.microsoft.com/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
 
 ### Soporte para la CLI
 
@@ -110,7 +110,7 @@ A partir de la versión 2.14.1 de Tabular Editor, puedes cambiar el comportamien
 
 ## Azure Active Directory con MFA
 
-Si quieres importar tablas desde una base de datos Azure SQL o desde un pool de SQL de Azure Synapse, probablemente necesites la autenticación multifactor de Azure Active Directory. Lamentablemente, el proveedor SQL Native Client usado en .NET Framework no admite esto. En su lugar, usa el proveedor MSOLEDBSQL (con la ventaja adicional de que, por lo general, es más rápido que el cliente nativo cuando Analysis Services lee datos de la tabla). Make sure you have the [latest (x86) version](https://docs.microsoft.com/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) of this driver installed, to make this work on your local machine.
+Si quieres importar tablas desde una base de datos Azure SQL o desde un pool de SQL de Azure Synapse, probablemente necesites la autenticación multifactor de Azure Active Directory. Lamentablemente, el proveedor SQL Native Client usado en .NET Framework no admite esto. En su lugar, usa el proveedor MSOLEDBSQL (con la ventaja adicional de que, por lo general, es más rápido que el cliente nativo cuando Analysis Services lee datos de la tabla). Asegúrate de tener instalada la [última versión (x86)](https://docs.microsoft.com/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) de este controlador para que esto funcione en tu equipo local.
 
 Aquí tienes instrucciones paso a paso para configurar el Data source y que funcione con MFA:
 
@@ -148,7 +148,7 @@ Como no existe una forma oficialmente admitida de ejecutar o validar una expresi
   ![image](~/content/assets/images/importing-tables-07.png)
 - Para otros tipos de Data sources, puede resultarte más fácil crear el modelo inicial y las primeras tablas en SSDT para averiguar cómo debe configurarse el Data source, y luego usar la técnica que se describe a continuación solo al añadir tablas adicionales.
 - Usa Power Query en Excel o Power BI Desktop para conectarte a tus datos de origen y aplicar las transformaciones necesarias.
-- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/powerquery-m/table-schema) on the previous output:
+- En el Editor avanzado de Power Query, agrega un paso que utilice la [función M `Table.Schema(...)`](https://docs.microsoft.com/powerquery-m/table-schema) en la salida anterior:
   ![image](~/content/assets/images/importing-tables-08.png)
 - Selecciona toda la vista previa de la salida, cópiala al portapapeles (CTRL+A, CTRL+C) y pégala en el cuadro de texto de esquema/metadatos del Asistente para importar tablas:
   ![image](~/content/assets/images/importing-tables-09.png)
