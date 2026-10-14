@@ -35,23 +35,23 @@ applies_to:
 | 在 SQL 上的 Direct Lake     | Direct Lake 的旧版本，使用 Fabric Warehouse 或 Lakehouse 的 SQL analytics endpoint。 | 不建议用于新开发（改用在 OneLake 上的 Direct Lake）。                 |
 
 > [!NOTE]
-> 还可以创建同时包含 **Import** 和 **DirectQuery** 模式分区的表（也称为“混合表格”）。这通常用于需要增量刷新的大型事实表，其中一部分数据会直接从数据源查询。 See [this article](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-xmla) for more information.
+> 还可以创建同时包含 **Import** 和 **DirectQuery** 模式分区的表（也称为“混合表格”）。这通常用于需要增量刷新的大型事实表，其中一部分数据会直接从数据源查询。有关更多信息，请参阅[这篇文章](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-xmla)。
 
 ## 在 OneLake 上的 Direct Lake 与在 SQL 上的 Direct Lake
 
-[Direct Lake on OneLake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) was introduced in March 2025 as an alternative to Direct Lake on SQL. 使用 OneLake 上的 Direct Lake 时，不依赖 SQL 终结点，也不会回退到 DirectQuery 模式。 This also means that the [usual restrictions that apply to DirectQuery models](https://learn.microsoft.com/power-bi/connect-data/desktop-directquery-about#modeling-limitations) do not apply to Direct Lake on OneLake models.
+[OneLake 上的 Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) 于 2025 年三月推出，用作 SQL 上 Direct Lake 的替代方案。使用 OneLake 上的 Direct Lake 时，不依赖 SQL 终结点，也不会回退到 DirectQuery 模式。这也意味着，[通常适用于 DirectQuery 模型的限制](https://learn.microsoft.com/power-bi/connect-data/desktop-directquery-about#modeling-limitations) 并不适用于 OneLake 上的 Direct Lake 模型。
 
 > [!NOTE]
 > OneLake 上的 Direct Lake 目前处于公开预览阶段。在使用此表存储模式创建语义模型之前，你必须先在 Fabric 管理门户中启用租户设置 **User can create Direct Lake on OneLake semantic models (preview)**。
 
-However, as with Direct Lake on SQL, there are still some [limitations that _do_ apply](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). 主要限制包括：
+不过，与 SQL 上的 Direct Lake 一样，仍然存在一些[确实适用的限制](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。主要限制包括：
 
-- OneLake 表上的 Direct Lake 计算列目前以预览版形式提供支持，但仅限&#x4E8E;_&#x7528;户上下文_：其值会在查询时针对当前用户求值，而不会被物化。这意味着 Direct Lake 计算列会遵循行级安全性和对象级安全性，但不能用作关系键，也不会响应 Report 中的筛选器或切片器。如果结果必须响应筛选语境，请改用度量值。 Direct Lake on SQL 仍然完全不支持计算列。 See [Develop Direct Lake semantic models](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop) for details.
+- OneLake 表上的 Direct Lake 计算列目前以预览版形式提供支持，但仅限&#x4E8E;_&#x7528;户上下文_：其值会在查询时针对当前用户求值，而不会被物化。这意味着 Direct Lake 计算列会遵循行级安全性和对象级安全性，但不能用作关系键，也不会响应 Report 中的筛选器或切片器。如果结果必须响应筛选语境，请改用度量值。 Direct Lake on SQL 仍然完全不支持计算列。详情见[开发 Direct Lake 语义模型](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop)。
 - 计算表格不能引用 Direct Lake 存储模式中的列或表。支持计算组、What-if 参数和字段参数，因为它们会创建不引用 Direct Lake 列的隐式计算表格。
 - 不支持将非物化 SQL 视图用作 OneLake 上的 Direct Lake 表的数据源。使用物化视图，或确保源 Delta 表包含所需的列。
 - 在 Direct Lake on OneLake 公开预览期间，不支持将 Lakehouse 中的快捷方式用作数据源。
 
-For a full and up-to-date list of limitations, see the [Microsoft documentation on Direct Lake considerations and limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
+如需查看完整且最新的限制列表，请参阅 [Microsoft 关于 Direct Lake 注意事项和限制的文档](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。
 
 ### 复合模型
 
@@ -60,7 +60,7 @@ For a full and up-to-date list of limitations, see the [Microsoft documentation 
 OneLake 上的 Direct Lake 还支持通过 Tabular Editor 等基于 XMLA 的工具与 DirectQuery 表组合使用。可以通过 Power BI 网页建模、Power BI Desktop（实时编辑）或 XMLA 工具添加导入表。
 
 > [!NOTE]
-> SQL 上的 Direct Lake 不支持复合模型。不能在同一个语义模型中，将 SQL 上的 Direct Lake 表与 Import、DirectQuery 或 Dual 存储模式表组合使用。但是，你可以使用 Power BI Desktop 在 SQL 上的 Direct Lake 语义模型 _之上_ 创建复合模型，并通过添加新表进行扩展。 See [Build a composite model on a semantic model](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model) for more information.
+> SQL 上的 Direct Lake 不支持复合模型。不能在同一个语义模型中，将 SQL 上的 Direct Lake 表与 Import、DirectQuery 或 Dual 存储模式表组合使用。但是，你可以使用 Power BI Desktop 在 SQL 上的 Direct Lake 语义模型 _之上_ 创建复合模型，并通过添加新表进行扩展。更多信息见[在语义模型上构建复合模型](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model)。
 
 ## 排序规则
 
@@ -177,7 +177,7 @@ in
     database
 ```
 
-Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+将 `<sql-endpoint>` 替换为 [Fabric Warehouse 的 SQL analytics endpoint](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) 或 [Lakehouse 的 SQL analytics endpoint](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint) 的连接字符串，并将 `<warehouse/lakehouse name>` 替换为相应 Warehouse 或 Lakehouse 的名称。
 
 ### 从 Lakehouse / Warehouse 导入
 
@@ -197,7 +197,7 @@ in
     Data
 ```
 
-Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+将 `<sql-endpoint>` 替换为 [Fabric Warehouse 的 SQL analytics endpoint](https://learn.microsoft.com/fabric/data-warehouse/query-warehouse) 或 [Lakehouse 的 SQL analytics endpoint](https://learn.microsoft.com/fabric/data-engineering/lakehouse-sql-analytics-endpoint) 的连接字符串，并将 `<warehouse/lakehouse name>` 替换为相应 Warehouse 或 Lakehouse 的名称。
 
 将 `<schema-name>` 替换为 Warehouse/Lakehouse 中的架构名称，并将 `<table/view-name>` 替换为你要导入的表或视图名称。请注意，导入模式中的表可以使用非物化视图作为数据源，因为在刷新期间，数据会通过 SQL endpoint 进行查询。
 
