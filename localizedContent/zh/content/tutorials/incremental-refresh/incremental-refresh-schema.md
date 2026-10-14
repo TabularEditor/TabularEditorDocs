@@ -2,7 +2,7 @@
 uid: incremental-refresh-schema
 title: 在使用增量刷新的表中添加或删除列
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,7 +24,7 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。对于 Analysis Services，必须进行自定义 [分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。 For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ---
 
