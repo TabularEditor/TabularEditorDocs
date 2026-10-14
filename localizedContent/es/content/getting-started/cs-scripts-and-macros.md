@@ -75,7 +75,7 @@ En Tabular Editor, puedes generar automáticamente el código que hace referenci
 
 ![Generar una referencia a un objeto arrastrando](~/content/assets/images/generate-csharp-code.gif)
 
-La mayoría de los objetos TOM (tablas, columnas, medidas, etc.) en Tabular Editor exponen el mismo conjunto de propiedades que están disponibles al usar directamente las bibliotecas de cliente AMO/TOM. For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
+La mayoría de los objetos TOM (tablas, columnas, medidas, etc.) en Tabular Editor exponen el mismo conjunto de propiedades que están disponibles al usar directamente las bibliotecas de cliente AMO/TOM. Por este motivo, puedes consultar la [documentación de AMO/TOM de Microsoft](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) para ver qué propiedades hay disponibles. Por ejemplo, [aquí](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) encontrarás la documentación sobre las propiedades disponibles de una medida.
 
 # Acceder a la selección actual del Explorador TOM
 
