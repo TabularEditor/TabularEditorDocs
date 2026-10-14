@@ -2,7 +2,7 @@
 uid: detail-rows-expression
 title: Expresión de filas de detalle
 author: Just Blindbæk
-updated: 2026-02-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -155,5 +155,5 @@ Si has definido tanto una expresión a nivel de tabla como una a nivel de medida
 
 - [DAX Guide: SELECTCOLUMNS](https://dax.guide/selectcolumns/)
 - [DAX Guide: RELATED](https://dax.guide/related/)
-- [Microsoft Docs: Expresiones de filas de detalle](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
+- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
 - [SQLBI: Controlling drillthrough in Excel PivotTables](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)
