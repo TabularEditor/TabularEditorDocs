@@ -75,7 +75,7 @@ El flujo de trabajo típico en este escenario es el siguiente:
 Dado que, en este escenario, la "fuente de verdad" de los metadatos del modelo es la estructura de archivos o carpetas almacenada en disco, este enfoque no solo permite el desarrollo en paralelo con integración del control de versiones, sino también la integración continua y la entrega/despliegue continuos (CI/CD) mediante un servidor de compilación automatizado como Azure DevOps.
 
 > [!WARNING]
-> En cuanto apliques cambios a un Dataset de Power BI a través del punto de conexión XMLA del servicio de Power BI, ese Dataset ya no se podrá descargar como archivo .pbix. See [Dataset connectivity with the XMLA endpoint](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) for more information.
+> En cuanto apliques cambios a un Dataset de Power BI a través del punto de conexión XMLA del servicio de Power BI, ese Dataset ya no se podrá descargar como archivo .pbix. Consulta [Conectividad del Dataset con el punto de conexión XMLA](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) para obtener más información.
 
 Cuando usas Tabular Editor para conectarte al Dataset mediante el punto de conexión XMLA, no hay limitaciones en cuanto a los tipos de operaciones de escritura o modificaciones del modelo que se pueden realizar.
 
@@ -159,7 +159,7 @@ Consulta @dax-script-introduction para obtener más información.
 
 ### Cómo previsualizar datos en una tabla
 
-Para ver el contenido de una tabla (similar a la pestaña Datos de Power BI Desktop), haz clic con el botón derecho en una tabla y elige "Preview data". Esto abrirá una nueva pestaña con una vista previa del contenido de la tabla. Puedes desplazarte por todas las filas de la tabla y aplicar ordenación o filtrado a las columnas. A diferencia de Power BI Desktop, puedes abrir tantas de estas pestañas de vista previa como quieras y organizarlas una junto a otra en la interfaz de usuario. The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
+Para ver el contenido de una tabla (similar a la pestaña Datos de Power BI Desktop), haz clic con el botón derecho en una tabla y elige "Preview data". Esto abrirá una nueva pestaña con una vista previa del contenido de la tabla. Puedes desplazarte por todas las filas de la tabla y aplicar ordenación o filtrado a las columnas. A diferencia de Power BI Desktop, puedes abrir tantas de estas pestañas de vista previa como quieras y organizarlas una junto a otra en la interfaz de usuario. La vista previa también funciona con tablas en [modo DirectQuery](https://docs.microsoft.com/power-bi/connect-data/desktop-use-directquery) (aunque la vista previa se limitará a los primeros 100 registros).
 
 ![Vista previa de datos](~/content/assets/images/preview-data.png)
 
@@ -170,7 +170,7 @@ Consulta @refresh-preview-query para obtener más información.
 
 ### Cómo agregar un grupo de cálculo
 
-[Calculation Groups](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) are useful for defining and reusing a modified DAX filter context or other type of business logic across all model measures. Para agregar un grupo de cálculo con Tabular Editor, usa la opción **Modelo > Nuevo grupo de cálculo** (ALT+7).
+Los [grupos de cálculo](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) son útiles para definir y reutilizar un contexto de filtro de DAX modificado u otro tipo de lógica de negocio en todas las medidas del modelo. Para agregar un grupo de cálculo con Tabular Editor, usa la opción **Modelo > Nuevo grupo de cálculo** (ALT+7).
 
 ![Agregar grupo de cálculo](~/content/assets/images/add-calc-group.png)
 
