@@ -20,7 +20,7 @@ applies_to:
 
 # XMLA / Analysis Services 连接性
 
-Tabular Editor uses the [AMO client library](https://learn.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) to connect to the Power BI / Fabric XMLA endpoint or instances of SQL Server or Azure Analysis Services (Tabular). 身份验证和授权由 AMO 客户端库处理，这意味着 Tabular Editor 不会存储任何凭据或令牌。此外，用户需要具备足够的权限，才能连接到 XMLA endpoint 或 Analysis Services 实例。在大多数情况下，用户必须是 Analysis Services 服务器管理员角色的成员，或在 Power BI Workspace 中拥有管理员权限。
+Tabular Editor 使用 [AMO 客户端库](https://learn.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) 连接到 Power BI / Fabric 的 XMLA endpoint，或连接到 SQL Server 或 Azure Analysis Services（Tabular）实例。身份验证和授权由 AMO 客户端库处理，这意味着 Tabular Editor 不会存储任何凭据或令牌。此外，用户需要具备足够的权限，才能连接到 XMLA endpoint 或 Analysis Services 实例。在大多数情况下，用户必须是 Analysis Services 服务器管理员角色的成员，或在 Power BI Workspace 中拥有管理员权限。
 
 在下文中，我们用“语义模型服务器”来指通过 Power BI / Fabric XMLA endpoint 访问的服务，或任意 SQL Server Analysis Services Tabular（SSAS）或 Azure Analysis Services（AAS）实例。
 
@@ -60,7 +60,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 > [!NOTE]
 > 如果在连接字符串中指定了 `Initial Catalog` 属性，则不会显示 **选择数据库** 对话框，Tabular Editor 将直接连接到指定的数据库。
 
-除上述属性外，OLAP 连接字符串还支持许多其他属性。 For a full list of properties, see the [Microsoft documentation](https://learn.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions).
+除上述属性外，OLAP 连接字符串还支持许多其他属性。如需完整的属性列表，请参阅 [Microsoft 文档](https://learn.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions)。
 
 除了文档中列出的属性外，AMO 连接字符串还支持以下属性：
 
@@ -74,7 +74,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 如果你希望错误信息和其他服务器信息以特定语言显示，这会很有用。如果未指定 `Locale Identifier` 属性，则使用客户端操作系统的语言。
 
-大多数 Analysis Services 实例支持多种语言。 See [this page for a full list of locale identifiers (LCID)](https://learn.microsoft.com/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16).
+大多数 Analysis Services 实例支持多种语言。完整的区域设置标识符（LCID）列表请参阅 [此页面](https://learn.microsoft.com/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16)。
 
 ## Fabric/Power BI XMLA 设置
 
@@ -90,7 +90,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 ### 容量级 XMLA 读/写
 
-要使用 XMLA endpoint，请将承载语义模型的 Workspace 分配给 Fabric capacity（F SKU）、Power BI Embedded 容量（A 或 EM SKU）或旧版 Premium 容量（P SKU），或使用 Premium Per User（PPU）许可证。 The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). 自 2025 年六月起，这就是默认设置。
+要使用 XMLA endpoint，请将承载语义模型的 Workspace 分配给 Fabric capacity（F SKU）、Power BI Embedded 容量（A 或 EM SKU）或旧版 Premium 容量（P SKU），或使用 Premium Per User（PPU）许可证。该容量必须在[容量设置中将 XMLA endpoint 设置为 **读写**](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)。自 2025 年六月起，这就是默认设置。
 
 ![容量管理员设置](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
@@ -103,7 +103,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 ### Workspace 级别的用户权限
 
-要使用 XMLA endpoint 编辑模型，用户账号需要在 Workspace 中拥有 **Contributor**、**Member** 或 **Admin** 权限。在 Workspace 中选择“Manage Access”，添加该用户账号，或添加该用户所属的 Entra ID 组，并分配所需角色。 For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/fabric/fundamentals/roles-workspaces)
+要使用 XMLA endpoint 编辑模型，用户账号需要在 Workspace 中拥有 **Contributor**、**Member** 或 **Admin** 权限。在 Workspace 中选择“Manage Access”，添加该用户账号，或添加该用户所属的 Entra ID 组，并分配所需角色。有关 Workspace 中角色的更多信息，请参阅 Microsoft 文档：[Roles in Workspaces](https://learn.microsoft.com/fabric/fundamentals/roles-workspaces)
 
 ### 语义模型的读/写权限
 
@@ -133,7 +133,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 ## 不支持的模型类型
 
-Several types of models do not support XMLA connections, [listed below](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#unsupported-semantic-models).
+有几种类型的模型不支持 XMLA 连接，详见[下方列表](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#unsupported-semantic-models)。
 
 以下语义模型无法通过 XMLA endpoint 访问。这些语义模型不会显示在 Tabular Editor 或任何其他工具的 Workspace 下。
 
@@ -143,7 +143,7 @@ Several types of models do not support XMLA connections, [listed below](https://
 - 我的 Workspace 中的语义模型。
 - Excel 工作簿语义模型
 
-In Fabric, the default semantic model of a lakehouse or warehouse can be opened/connected to in Tabular Editor, but [not edited](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations). Moreover, some operations that require read access to certain [DMVs](https://learn.microsoft.com/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions), such as collecting VertiPaq Analyzer statistics, may not be supported on default semantic models.
+在 Fabric 中，Lakehouse 或 Warehouse 的默认语义模型可以在 Tabular Editor 中打开或连接，但[不能编辑](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations)。此外，某些需要读取特定 [DMVs](https://learn.microsoft.com/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions) 的操作，例如收集 VertiPaq分析器统计信息，在默认语义模型上可能不受支持。
 
 ## XMLA 连接故障排除
 
@@ -153,7 +153,7 @@ In Fabric, the default semantic model of a lakehouse or warehouse can be opened/
 
 1. 在 Fabric 中连接到语义模型：通过“File”>“Open”>“Model from DB”（默认快捷键 Ctrl+Shift+O）
 
-2. 系统会弹出一个对话框（见下图），你需要将 Power BI 连接字符串填入标为“Server”的文本框中。其余选项保持与截图一致（这些是默认值）。连接字符串的格式如下所示。 You can find this connection string in the Service (more details here in this [Microsoft doc in the sections 'Connecting to a Premium Workspace' and 'To get the workspace connection URL'](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
+2. 系统会弹出一个对话框（见下图），你需要将 Power BI 连接字符串填入标为“Server”的文本框中。其余选项保持与截图一致（这些是默认值）。连接字符串的格式如下所示。你可以在 Power BI 服务中找到该连接字符串（更多详情请参阅这篇 [Microsoft 文档中的“Connecting to a Premium Workspace”和“To get the workspace connection URL”部分](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
 
 ![从数据库加载模型](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
 
@@ -188,7 +188,7 @@ In Fabric, the default semantic model of a lakehouse or warehouse can be opened/
 - 旧：`powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName`
 - 新：`powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName`
 
-You can also use the tenant name (e.g. `fabrikam.com`) as shown in [this article](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace).
+你也可以像[这篇文章](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace)中所示，使用租户名称（例如 `fabrikam.com`）。
 
 然后，严格按照[测试简单连接](#testing-a-simple-connection)部分的说明尝试连接
 
@@ -196,7 +196,7 @@ You can also use the tenant name (e.g. `fabrikam.com`) as shown in [this article
 
 如果 Workspace 名称与另一个 Workspace 重名，或模型名称与另一个模型重名，则连接到模型时可能会出现问题。
 
-If there are duplicate names, please refer to Microsoft's documentation in the sections ["Duplicate workspace names" and "Duplicate semantic model name"](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names) to learn how to modify the connection string to address these issues
+如果有重名，可以查看 Microsoft 文档中的[“重复 Workspace 名称”和“重复语义模型名称”](https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names)部分，了解如何通过修改连接字符串来解决这些问题
 
 ### 代理处理
 
