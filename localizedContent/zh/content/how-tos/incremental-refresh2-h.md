@@ -20,16 +20,16 @@ applies_to:
 
 # 增量刷新
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-overview) set up on one or more tables. To configure or modify Incremental Refresh on a Power BI dataset, you can either use the [XMLA endpoint of the Power BI service directly](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-xmla), or you can use Tabular Editor connected to the XMLA endpoint, as described below:
+托管在 Power BI 服务中的 Dataset 可以为一个或多个表配置 [增量刷新](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-overview)。要在 Power BI Dataset 上配置或修改增量刷新，你可以直接使用 Power BI 服务的 [XMLA endpoint](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-xmla)；也可以按下文所述，使用连接到该 XMLA endpoint 的 Tabular Editor：
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。 For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> 在 Tabular Editor 3 中设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。对于 Analysis Services，需要进行自定义 [分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ## 使用 Tabular Editor 从零开始设置增量刷新
 
 1. 连接到你的 Workspace 的 Power BI XMLA R/W 终结点，然后打开你要配置增量刷新的 Dataset。
-2. Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)), so let's start by adding two new Shared Expressions in Tabular Editor:
-   ![Add shared expressions](~/content/assets/images/incremental-refresh2-01.png)
+2. 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[更多信息](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。所以，先在 Tabular Editor 中添加两个新的共享表达式：
+   ![添加共享表达式](~/content/assets/images/incremental-refresh2-01.png)
 3. 分别将它们命名为 `RangeStart` 和 `RangeEnd`，将它们的 `Kind` 属性设置为 "M"，并将表达式设置为以下内容（你填写的实际日期/时间无关紧要，因为在开始数据刷新时会由 Power BI 服务设置）：
 
 ```M
@@ -50,11 +50,11 @@ Datasets hosted in the Power BI service can have [Incremental Refresh](https://d
 
 ![已生成的分区](~/content/assets/images/incremental-refresh2-06.png)
 
-下一步是刷新这些分区中的数据。 You can use the Power BI service for that, or you can refresh the partitions in batches using [XMLA/TMSL through SQL Server Management Studio](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), or even using [Tabular Editor's scripting](https://www.elegantbi.com/post/datarefreshintabulareditor).
+下一步是刷新这些分区中的数据。你可以使用 Power BI 服务完成这一步；也可以在 [SQL Server Management Studio 中通过 XMLA/TMSL](https://docs.microsoft.com/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms) 分批刷新分区；甚至还可以使用 [Tabular Editor 的脚本](https://www.elegantbi.com/post/datarefreshintabulareditor)。
 
 ### 应用增量刷新策略后的完全刷新
 
-If you have applied a refresh policy to your table and wish to perform a full refresh, you must ensure that you set [applyRefreshPolicy to false](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior) in your script. 这样可以确保对表中的所有分区执行完全刷新。在我们的示例中，TMSL 命令如下所示：
+如果你已经对表应用了刷新策略，并且想执行完整刷新，就必须确保在脚本中将 [applyRefreshPolicy 设置为 false](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior)。这样可以确保对表中的所有分区执行完全刷新。在我们的示例中，TMSL 命令如下所示：
 
 ```
 {
@@ -77,7 +77,7 @@ If you have applied a refresh policy to your table and wish to perform a full re
 
 ## 使用 `EffectiveDate` 应用刷新策略
 
-If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
+如果你想在生成分区时覆盖当前日期（用于生成不同的滚动窗口范围），可以在 Tabular Editor 中使用一个小脚本，通过 [EffectiveDate](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) 参数来应用刷新策略。
 
 选中启用增量刷新的表后，在 Tabular Editor 的“高级脚本”窗格中运行以下脚本，替代上面的步骤 8：
 
