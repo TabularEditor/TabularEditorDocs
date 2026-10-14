@@ -2,7 +2,7 @@
 uid: user-defined-aggregations
 title: Agregaciones definidas por el usuario
 author: Just Blindbæk
-updated: 2026-02-19
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,7 +50,7 @@ Las tablas de dimensiones se configuran en modo de almacenamiento **Dual** para 
 Configurar tablas en modo de almacenamiento Dual o DirectQuery por sí solo no habilita el enrutamiento de agregaciones; solo crea un modelo compuesto en el que las consultas se dirigen en función del modo de almacenamiento. La propiedad **Alternate Of** es la que activa las agregaciones definidas por el usuario: crea una asignación explícita a nivel de columna que le indica al motor: "cuando una consulta solicita esta columna de la tabla de detalle, puedes usar esta columna preagregada en su lugar". Sin `Alternate Of`, el motor no tiene fundamento para realizar la sustitución y no enrutará las consultas a la tabla de agregación. El motor evalúa cada consulta entrante con estas asignaciones para determinar si la tabla de agregación puede responderla, y recurre a DirectQuery solo cuando no puede.
 
 > [!IMPORTANT]
-> DirectQuery tiene limitaciones conocidas que afectan al diseño del modelo y a la funcionalidad de los Report. Las más relevantes para este patrón son: las consultas contra columnas DirectQuery dependen del tiempo de respuesta del origen; los orígenes en la nube tienen un límite de devolución de un millón de filas por consulta; la jerarquía automática de fecha/hora no está disponible para las tablas DirectQuery; y algunas funciones DAX no se admiten en modo DirectQuery. Revisa la lista completa antes de continuar: [Usar DirectQuery en Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery).
+> DirectQuery tiene limitaciones conocidas que afectan al diseño del modelo y a la funcionalidad de los Report. Las más relevantes para este patrón son: las consultas contra columnas DirectQuery dependen del tiempo de respuesta del origen; los orígenes en la nube tienen un límite de devolución de un millón de filas por consulta; la jerarquía automática de fecha/hora no está disponible para las tablas DirectQuery; y algunas funciones DAX no se admiten en modo DirectQuery. Review the full list before proceeding: [Use DirectQuery in Power BI Desktop](https://learn.microsoft.com/power-bi/connect-data/desktop-use-directquery).
 
 ## Paso 1: Configura las tablas de dimensiones en modo de almacenamiento Dual
 
@@ -171,5 +171,5 @@ En Power BI Desktop, la vista de modelo muestra la misma estructura con iconos d
 
 ## Lecturas adicionales
 
-- [Microsoft Docs: Agregaciones definidas por el usuario en Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
-- [Microsoft Docs: Modos de almacenamiento en Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
+- [Microsoft Docs: User-defined aggregations in Power BI](https://learn.microsoft.com/power-bi/transform-model/aggregations-advanced)
+- [Microsoft Docs: Storage modes in Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-storage-mode)
