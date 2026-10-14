@@ -2,7 +2,7 @@
 uid: data-refresh-view
 title: Vista de actualización de datos
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,7 @@ Puedes ordenar las operaciones de actualización haciendo clic en el encabezado 
 Haz clic una vez en el encabezado de una columna para ordenar de forma ascendente, y vuelve a hacer clic para ordenar de forma descendente. Esto facilita identificar las últimas operaciones de actualización cuando trabajas con varias colas de actualización.
 
 > [!NOTA]
-> Todos los mensajes y las duraciones que se muestran en la ventana de actualización de datos son solo estimaciones. Tabular Editor escucha los [eventos de seguimiento de SSAS](https://learn.microsoft.com/en-us/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) durante el procesamiento. SSAS no garantiza que envíe todos los mensajes de seguimiento al cliente (por ejemplo, puede limitar las notificaciones de eventos de seguimiento durante picos de consumo de CPU/memoria).
+> Todos los mensajes y las duraciones que se muestran en la ventana de actualización de datos son solo estimaciones. Tabular Editor escucha los [eventos de seguimiento de SSAS](https://learn.microsoft.com/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) durante el procesamiento. SSAS no garantiza que envíe todos los mensajes de seguimiento al cliente (por ejemplo, puede limitar las notificaciones de eventos de seguimiento durante picos de consumo de CPU/memoria).
 
 > [!TIP]
-> Si necesita información precisa y fiable sobre el progreso y la duración de la actualización, debe conectar [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) a su instancia de SSAS y recopilar la información manualmente durante el procesamiento.
+> Si necesita información precisa y fiable sobre el progreso y la duración de la actualización, debe conectar [SQL Server Profiler](https://learn.microsoft.com/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) a su instancia de SSAS y recopilar la información manualmente durante el procesamiento.
