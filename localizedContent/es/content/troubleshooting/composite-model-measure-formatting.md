@@ -189,9 +189,9 @@ Si el formato sigue sin verse correcto en el Report, crea una medida envolvente 
 
 ## Recursos adicionales
 
-- **[Microsoft Docs - Measure Format Strings](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**: Official documentation on measure formatting in the Tabular Object Model.
-- **[Composite Models in Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**: Understanding Live connections and composite model architecture.
-- **[Dynamic Format Strings](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**: Feature availability and usage guidance.
+- **[Microsoft Docs - Cadenas de formato de las medidas](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**: Documentación oficial sobre el formato de las medidas en el Tabular Object Model.
+- **[Modelos compuestos en Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**: Comprender las conexiones en directo y la arquitectura de los modelos compuestos.
+- **[Cadenas de formato dinámicas](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**: Disponibilidad de la funcionalidad y guía de uso.
 
 ---
 
