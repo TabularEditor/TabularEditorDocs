@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用 LINQ 筛选和查询对象
 
-C# Script 使用标准 LINQ 方法来筛选、搜索和转换 TOM 对象集合。 这些模式是一些基本构件。 在 `foreach` 循环中使用返回集合的方法，在 `if` 条件中使用返回布尔值的方法，在变量赋值中使用返回标量的方法。
+C# Script 使用标准 LINQ 方法来筛选、搜索和转换 TOM 对象集合。这些模式是一些基本构件。在 `foreach` 循环中使用返回集合的方法，在 `if` 条件中使用返回布尔值的方法，在变量赋值中使用返回标量的方法。
 
 ## 快速参考
 
@@ -50,7 +50,7 @@ table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 
 ## 使用 Where 进行筛选
 
-`Where()` 返回所有满足谓词条件的对象。 使用 `&&` 和 `||` 组合多个条件。
+`Where()` 返回所有满足谓词条件的对象。使用 `&&` 和 `||` 组合多个条件。
 
 ```csharp
 // Columns with no description in a specific table
@@ -59,7 +59,7 @@ var undocumented = Model.Tables["Sales"].Columns
 ```
 
 > [!WARNING]
-> 使用 `Contains()` 进行字符串匹配时，会在表达式中的任意位置查找文本，包括字符串字面量和注释内部。 若要检测实际使用的 DAX 函数，改为分析令牌化后的表达式。
+> 使用 `Contains()` 进行字符串匹配时，会在表达式中的任意位置查找文本，包括字符串字面量和注释内部。若要检测实际使用的 DAX 函数，改为分析令牌化后的表达式。
 
 > [!TIP]
 > 使用 `Contains()` 检查表达式内容时，可以考虑使用不区分大小写的比较：`m.Expression.Contains("calculate", StringComparison.OrdinalIgnoreCase)`。
@@ -89,7 +89,7 @@ var count = Model.AllColumns.Count(c => c.DataType == DataType.String);
 
 ## 使用 Select 进行投影
 
-`Select()` 会转换每个元素。 可以用它来提取属性值或构建新结构。
+`Select()` 会转换每个元素。可以用它来提取属性值或构建新结构。
 
 ```csharp
 // List of measure names only (returns List<string>)
@@ -115,7 +115,7 @@ Model.Tables["Sales"].Measures.ForEach(m => m.DisplayFolder = "Sales Metrics");
 
 ## 在修改集合之前先将其物化
 
-当你在循环中修改对象（删除、添加、移动）时，实际上是在改变正在迭代的集合。 一定要先调用 `.ToList()` 或 `.ToArray()` 来创建快照。
+当你在循环中修改对象（删除、添加、移动）时，实际上是在改变正在迭代的集合。一定要先调用 `.ToList()` 或 `.ToArray()` 来创建快照。
 
 ```csharp
 // WRONG: modifying collection during iteration
@@ -159,7 +159,7 @@ var tables = Selected.Measures
 | `string.IsNullOrEmpty(m.Description)`         | `String.IsNullOrEmpty(Description)` |
 
 > [!NOTE]
-> 动态 LINQ 表达式会针对上下文中的单个对象进行求值。 没有与 `Model.AllMeasures` 或跨表查询等效的功能。 每条 BPA 规则都会针对其作用域内的每个对象对其表达式求值一次。
+> 动态 LINQ 表达式会针对上下文中的单个对象进行求值。没有与 `Model.AllMeasures` 或跨表查询等效的功能。每条 BPA 规则都会针对其作用域内的每个对象对其表达式求值一次。
 
 ## 另见
 

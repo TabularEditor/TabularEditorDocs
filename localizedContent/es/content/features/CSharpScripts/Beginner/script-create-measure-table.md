@@ -13,7 +13,7 @@ applies_to:
 
 # Crear tabla de medidas
 
-## Propósito del script
+## Objetivo del script
 
 Los scripts crean una tabla de medidas oculta que contiene una columna oculta
 
@@ -22,7 +22,7 @@ Los scripts crean una tabla de medidas oculta que contiene una columna oculta
 ### Crear tabla de medidas
 
 ```csharp
-// Crear una tabla calculada con una sola columna que estará oculta:
-var table = Model.AddCalculatedTable("Medidas del modelo", "{0}");
+// Create a calculated table with a single column which is hidden:
+var table = Model.AddCalculatedTable("Model Measures", "{0}");
 table.Columns[0].IsHidden = true;
 ```

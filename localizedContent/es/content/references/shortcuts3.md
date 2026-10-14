@@ -73,9 +73,9 @@ applies_to:
 | Expandir / contraer el nodo actual                      | Flecha derecha / izquierda                   |
 | Expandir / contraer el nodo actual y todos los subnodos | Ctrl+Flecha derecha / Flecha izquierda       |
 | Expandir / contraer todo el árbol                       | Ctrl+Shift+Flecha derecha / Flecha izquierda |
-| Mostrar/ocultar medidas                                 | Ctrl+1                                       |
-| Mostrar/ocultar columnas                                | Ctrl+2                                       |
-| Mostrar/ocultar jerarquías                              | Ctrl+3                                       |
+| Alternar medidas                                        | Ctrl+1                                       |
+| Alternar columnas                                       | Ctrl+2                                       |
+| Alternar jerarquías                                     | Ctrl+3                                       |
 | Mostrar/ocultar particiones                             | Ctrl+4                                       |
 | Mostrar/ocultar carpetas de visualización               | Ctrl+5                                       |
 | Mostrar/ocultar objetos ocultos                         | Ctrl+6                                       |

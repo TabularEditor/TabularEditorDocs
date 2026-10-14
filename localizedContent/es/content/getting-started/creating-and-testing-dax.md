@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Agregar medidas y otros objetos calculados
 author: Daniel Otykier
-updated: 2021-10-08
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -81,7 +81,7 @@ Para agregar una tabla calculada, haz clic con el botón derecho en el modelo o 
 Para agregar un [grupo de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Grupo de cálculo** (ALT+7). Asigna un nombre al grupo de cálculo. Considera también usar un nombre diferente para la columna **Name** predeterminada.
 
 > [!IMPORTANT]
-> Esta opción solo está disponible en modelos con nivel de compatibilidad 1500 o superior.
+> Esta opción solo está disponible para modelos con un nivel de compatibilidad 1470 o superior. Analysis Services admite los grupos de cálculo a partir del nivel de compatibilidad 1500.
 
 Para agregar elementos de cálculo, haz clic con el botón derecho en el grupo de cálculo recién creado y elige **Crear > Elemento de cálculo**. Asigna un nombre al elemento de cálculo y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas.
 
@@ -121,9 +121,25 @@ Puedes usar los botones de flecha de la esquina superior derecha del **Editor de
 
 ## Dependencias de DAX
 
-Para ver las dependencias de DAX entre objetos, selecciona un objeto en el **Explorador TOM**; luego, haz clic con el botón derecho y elige **Mostrar dependencias** (SHIFT+F12). Esto abrirá una ventana que muestra las dependencias (en ambas direcciones) del objeto seleccionado. Haz doble clic en un objeto en esta ventana para navegar rápidamente hasta él.
+Para ver las dependencias de DAX entre objetos, selecciona un objeto en el **Explorador TOM** y, después, haz clic con el botón derecho y elige **Mostrar dependencias** (**Mayús+F12**). Esto abre la vista **Dependencias de DAX**, que muestra las dependencias del objeto seleccionado. Haz doble clic en un objeto del árbol para ir a ese elemento, o haz clic con el botón derecho para acceder a **Ir al elemento**, **Copiar como texto** y **Copiar como JSON**.
 
 ![Dependencias de Dax y Explorador Tom](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
+
+La vista muestra una dirección cada vez. Elige cuál con los botones de opción:
+
+| Opción                                       | Muestra                                                                                                                                               |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Objetos que dependen de este elemento**    | Qué se rompería si cambiaras o eliminaras el objeto seleccionado                                                                                      |
+| **Objetos de los que depende este elemento** | De qué objetos lee el objeto seleccionado                                                                                                             |
+| **Relaciones que parten de esta tabla**      | Las relaciones que salen de la tabla seleccionada. Con una columna seleccionada, se muestra **Relaciones que parten de esta columna** |
+
+Marca **Mostrar inactivas** para incluir las relaciones inactivas.
+
+### Seguimiento del Explorador TOM
+
+En lugar de ejecutar **Mostrar dependencias** para cada objeto por separado, marca **Seguir el Explorador TOM** y la vista seguirá lo que esté seleccionado en el árbol. Al marcarla, se muestran de inmediato las dependencias del objeto que _ya_ está seleccionado, en lugar de esperar al siguiente cambio de selección.
+
+El seguimiento se aplica a un único objeto seleccionado. Si seleccionas varios objetos, o ninguno, la vista se vacía en lugar de mostrar una respuesta parcial.
 
 # Carpetas de visualización
 
@@ -131,8 +147,8 @@ Cuando tu modelo empieza a tener un número considerable de medidas, una buena p
 
 También puedes cortar/copiar/pegar o arrastrar y soltar objetos entre carpetas de visualización.
 
-# Próximos pasos
+# Pasos a seguir
 
 - @dax-script-introduction
 - @bpa
-- @cs-scripts-and-macros
+- @Scripts y macros de C#

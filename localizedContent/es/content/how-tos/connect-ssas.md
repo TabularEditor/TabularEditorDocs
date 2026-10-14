@@ -1,22 +1,47 @@
 ---
 uid: connect-ssas
-title: Conectar e implementar en SSAS
+title: Conectar y desplegar en Analysis Services
+author: Morten Lønskov
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
-      full: true
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
-# Conectar/implementar en bases de datos tabulares de SSAS
+# Conectar y desplegar en Analysis Services
 
-Al pulsar CTRL+SHIFT+O, puedes abrir un modelo tabular directamente desde una base de datos tabular que ya se ha implementado. Introduce la dirección del servidor y (opcionalmente) proporciona un nombre de usuario y una contraseña. Después de hacer clic en "Aceptar", se te mostrará una lista de las bases de datos del servidor. Selecciona la que quieras cargar y haz clic en "Aceptar" de nuevo.
+Puedes abrir un modelo semántico directamente desde un servidor en lugar de desde un archivo, trabajar en él y guardar de nuevo los cambios en el servidor. Esto incluye SQL Server Analysis Services, Azure Analysis Services y el punto de conexión XMLA de Power BI / Fabric.
 
-![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
+## Abrir un modelo desde un servidor
 
-El cuadro de diálogo mostrado también te permite conectarte a instancias de Azure Analysis Services si proporcionas el nombre completo de la instancia de Azure AS, empezando por "azureas://". Puedes usar la lista desplegable "Instancia local" para buscar y conectarte a cualquier instancia en ejecución de Power BI Desktop o a áreas de trabajo Integradas de Visual Studio. **Ten en cuenta que, aunque Tabular Editor puede realizar cambios en un modelo de Power BI a través de TOM, Microsoft no lo admite y podría dañar el archivo .pbix. ¡Continúa bajo tu propia responsabilidad!**
+Selecciona **Archivo > Abrir > Modelo desde BD...** (**Ctrl+Mayús+O**) e introduce la dirección del servidor. Luego, Tabular Editor muestra las bases de datos de ese servidor para que puedas elegir cuál cargar.
 
-Cada vez que pulses CTRL+S después de cargar la base de datos, esta se actualizará con los cambios que hayas hecho en Tabular Editor. Herramientas cliente (Excel, Power BI, DAX Studio, etc.) deberían poder ver inmediatamente los cambios en la base de datos a partir de ese momento. Ten en cuenta que, según los cambios realizados, puede que necesites recalcular manualmente los objetos del modelo para poder consultarlo correctamente.
+- Para **SQL Server Analysis Services**, usa el nombre de la instancia; por ejemplo, `localhost` o `myserver\\tabular`.
+- Para **Azure Analysis Services**, usa el nombre completo de la instancia, que empieza por `asazure://`.
+- Para el **punto de conexión XMLA de Power BI / Fabric**, usa la cadena de conexión del Workspace, que empieza por `powerbi://`.
+- La lista desplegable **Instancia local** muestra las instancias en ejecución de Power BI Desktop y los Workspaces Integrados de Visual Studio, de modo que puedas conectarte a una sin conocer su puerto.
 
-Si quieres guardar el modelo en modo conectado en un archivo Model.bim, elige "Guardar como..." en el menú "Archivo".
+@xmla-as-connectivity explica en detalle el cuadro de diálogo de conexión, incluidos los modos de autenticación, las propiedades avanzadas de la cadena de conexión, el color de la barra de estado para cada conexión y qué comprobar cuando falla una conexión. @load-save-model enumera todas las formas de abrir un modelo.
+
+## Guardar los cambios
+
+**Archivo > Guardar** (**Ctrl+S**) guarda los cambios en la base de datos conectada. Las herramientas cliente, como Excel, Power BI y DAX Studio, los ven de inmediato. Según lo que hayas cambiado, puede que sea necesario recalcular algunos objetos antes de volver a consultar el modelo.
+
+Si prefieres guardar en disco una copia de un modelo en modo conectado, usa **Archivo > Guardar como...** o **Archivo > Guardar en carpeta...**.
+
+## Desplegar en otra base de datos
+
+Al guardar, se actualiza la base de datos a la que estás conectado. Para enviar el modelo cargado a un servidor o una base de datos diferentes, usa en su lugar el Asistente de implementación, descrito en @deployment.
+
+## Editar un modelo de Power BI Desktop
+
+Tabular Editor puede conectarse a una instancia en ejecución de Power BI Desktop mediante la lista desplegable **Instancia local**. A partir de la actualización de Power BI Desktop de junio de 2025, ya no hay operaciones de escritura no admitidas, por lo que las herramientas de terceros pueden modificar libremente el modelo semántico alojado en Power BI Desktop. En versiones anteriores, algunas operaciones están restringidas; consulta @desktop-limitations y @desktop-integration.

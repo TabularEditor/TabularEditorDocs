@@ -23,14 +23,14 @@ La CLI de Tabular Editor se autentica en Power BI Service, Microsoft Fabric y Az
 
 La CLI admite la cadena completa de credenciales de Azure Identity:
 
-| Método                                                        | Cuándo usarlo                                                                                                                                         | Valor de `--auth`                                        |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| Automático                                                    | Prueba primero las credenciales del entorno y luego recurre al inicio de sesión en el navegador, ya sea con la sesión en caché o de forma interactiva | `auto` (predeterminado)               |
-| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema                                                                                       | `interactive`                                            |
-| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL                                                                                               | `spn` (con `-u / -p / -t`) o `env`    |
-| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados                                                                                               | `spn` (con `-u / -t / --certificate`) |
-| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`                                                                                         | `env`                                                    |
-| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions                                                                                   | `managed-identity`                                       |
+| Método                                                        | Cuándo usarlo                                                                                                     | Valor de `--auth`                                        |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Automático                                                    | Prueba las credenciales del entorno y, a continuación, el inicio de sesión en caché o interactivo en el navegador | `auto` (predeterminado)               |
+| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema                                                   | `interactive`                                            |
+| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL                                                           | `spn` (con `-u / -p / -t`) o `env`    |
+| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados                                                           | `spn` (con `-u / -t / --certificate`) |
+| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`                                                     | `env`                                                    |
+| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions                                               | `managed-identity`                                       |
 
 > [!NOTE]
 > `--auth` es una opción **global**, disponible en todos los comandos `te`, no solo en `te auth login`. Úsalo en [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect) o en cualquier otro comando que se conecte a un punto de conexión remoto para sustituir la cadena predeterminada en esa ejecución. La opción predeterminada (`auto`) intenta primero las credenciales del entorno y, si no están disponibles, recurre al inicio de sesión en caché o interactivo en el navegador.
@@ -38,7 +38,7 @@ La CLI admite la cadena completa de credenciales de Azure Identity:
 En escenarios sin interfaz gráfica, con SSH, WSL o devcontainer, usa una entidad de servicio: `te auth login -u <id> -p <secret> -t <tenant>` (o `--certificate`). El inicio de sesión se guarda en caché, por lo que los comandos posteriores obtienen tokens de forma silenciosa con `--auth auto`.
 
 > [!NOTE]
-> Las opciones de detección de esquema de `te add -t Table` y `te set --update-schema` (`--source sql`, `--endpoint`) usan Entra ID para iniciar sesión en los puntos de conexión SQL de la familia de Azure (`*.database.windows.net`, `*.datawarehouse.fabric.microsoft.com`, `*.sql.azuresynapse.net`) y respetan `--auth`. Los servidores locales usan la autenticación integrada de Windows; `--connection-string` se respeta literalmente.
+> Los parámetros de detección de esquema de `te add -t Table` y `te set --update-schema` (`--source sql`, `--endpoint`) inician sesión con Entra ID en los puntos de conexión SQL de la familia Azure (`*.database.windows.net`, `*.datawarehouse.fabric.microsoft.com`, `*.sql.azuresynapse.net`) y respetan `--auth`. Los servidores locales usan la autenticación integrada de Windows; `--connection-string` se respeta literalmente.
 
 ## `te auth login`
 
@@ -125,9 +125,9 @@ te connect
 te connect --clear
 ```
 
-Cuando se encuentran varias instancias o bases de datos locales, la CLI solicita la selección en dos pasos (primero la instancia y luego la base de datos); con `--non-interactive`, falla con la lista de candidatos en lugar de elegir de forma silenciosa.
+Cuando se encuentran varias instancias o bases de datos locales, la CLI solicita la selección en dos pasos (primero la instancia y luego la base de datos); con `--non-interactive`, falla y muestra la lista de candidatos en lugar de elegir en silencio.
 
-El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspecciona o limpia el estado de la sesión con [`te session`](xref:te-cli-commands#session). En `te deploy`, la conexión activa también se usa como valor predeterminado para `--target-server`/`--target-database` cuando el origen del modelo es local.
+El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspeccione o limpie el estado de la sesión con [`te session`](xref:te-cli-commands#session). En `te deploy`, la conexión activa también sirve como valor predeterminado para `--target-server`/`--target-database` cuando el origen del modelo es local.
 
 ### Modo del área de trabajo (`-w` / `--workspace`)
 
@@ -141,7 +141,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. Consulta el [modo del área de trabajo](xref:te-cli-commands#workspace-mode--w----workspace) para conocer `--workspace-format`, el comportamiento de sobrescritura y cómo limpiar el espejo.
+El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. Consulta [modo del área de trabajo](xref:te-cli-commands#workspace-mode--w----workspace) para obtener información sobre `--workspace-format`, la semántica de sobrescritura y cómo limpiar el espejo.
 
 ## Conexión a distintas nubes
 
@@ -199,7 +199,7 @@ En canalizaciones de CI/CD, agentes o cualquier contexto desatendido, evita los 
 - La opción global `--non-interactive` (falla de inmediato en lugar de pedir datos).
 - Uno de los métodos de autenticación no interactiva: `env`, `managed-identity` o credenciales explícitas de una entidad de servicio.
 
-Con `--non-interactive` y sin nada con lo que iniciar sesión —sin un inicio de sesión en caché, sin variables `AZURE_CLIENT_*` ni una identidad administrada—, un comando que se conecta a un Workspace o a un servidor se detiene de inmediato, no abre nunca un navegador, muestra un Report que indica que no hay credenciales disponibles y enumera todas las formas de proporcionarlas: `te auth login`, una entidad de servicio almacenada en caché con `te auth login -u <client-id> -p <secret> -t <tenant>`, `--auth env` o `--auth managed-identity`. Una entidad de servicio almacenada en caché se usa de forma silenciosa, por lo que solo fallan así las ejecuciones en las que realmente no hay nada con lo que iniciar sesión.
+Con `--non-interactive` y sin ninguna forma de iniciar sesión —sin inicio de sesión en caché, sin variables `AZURE_CLIENT_*` ni identidad administrada—, un comando que se conecta a un Workspace o a un servidor se detiene de inmediato, no abre nunca un navegador e informa de que no hay credenciales disponibles, indicando todas las formas de proporcionarlas: `te auth login`, una entidad de servicio almacenada en caché con `te auth login -u <client-id> -p <secret> -t <tenant>`, `--auth env` o `--auth managed-identity`. Una entidad de servicio almacenada en caché se usa de forma silenciosa, por lo que solo fallan así las ejecuciones que realmente no tienen ninguna forma de iniciar sesión.
 
 Ejemplo basado en variables de entorno para una canalización:
 
@@ -233,7 +233,7 @@ La CLI tiene en cuenta las variables de entorno estándar de Azure.Identity cuan
 
 Para las variables de entorno específicas de la CLI (PATHs de configuración, registro de depuración, compatibilidad con TE2), consulta @te-cli-config.
 
-## Próximos pasos
+## Pasos a seguir
 
 - @te-cli-commands - qué puedes hacer una vez conectado.
 - @te-cli-config - configuración y comportamiento de los perfiles.

@@ -2,7 +2,7 @@
 uid: diagram-view
 title: Vista de diagrama
 author: Morten Lønskov
-updated: 2025-04-24
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,45 +28,7 @@ Después de cargar un modelo en Tabular Editor 3, selecciona la opción de menú
 
 ## Uso de la Vista de diagrama
 
-## Agregar tablas
-
-Agrega las tablas iniciales al diagrama de cualquiera de estas formas:
-
-- (Multi-)seleccione tablas en el Explorador TOM, luego haga clic con el botón derecho y elija **Agregar al diagrama**.
-- (Multi-)seleccione tablas en el Explorador TOM y, después, arrástrelas al diagrama
-- Use la opción de menú **Diagrama > Agregar tablas...** y, en el cuadro de diálogo, (multi-)seleccione las tablas que desea agregar.
-  ![Diagrama: Agregar tablas](~/content/assets/images/diagram-add-tables.png)
-
-  Para agregar tablas adicionales al diagrama, utilice de nuevo la técnica anterior o haga clic con el botón derecho en una tabla existente del diagrama y elija una de las siguientes opciones:
-
-  - **Agregar tablas que filtran esta tabla**: Agrega al diagrama todas las tablas que pueden filtrar, directa o indirectamente a través de otras tablas, la tabla seleccionada actualmente. Útil cuando empieza desde una tabla de hechos.
-  - **Agregar todas las tablas relacionadas**: Agrega al diagrama todas las tablas que están directamente relacionadas con la tabla seleccionada actualmente. Útil cuando empieza desde una tabla de dimensión.
-    ![Agregar tablas relacionadas](~/content/assets/images/add-related-tables.png)
-
-  Antes de continuar, reorganice y cambie el tamaño de las tablas del diagrama según sus preferencias, o use la función **Diagrama > Organizar automáticamente** para que Tabular Editor 3 disponga las tablas automáticamente.
-
-## Modificar relaciones utilizando el diagrama
-
-Para agregar una nueva relación entre dos tablas, localice la columna en la tabla de hechos (lado de muchos) de la relación y arrástrela hasta la columna correspondiente de la tabla de dimensión (lado de uno). Confirma la configuración de la relación y haz clic en **Aceptar**.
-
-![Crear relación](~/content/assets/images/create-relationship.png)
-
-Para editar una relación existente, haga clic con el botón derecho sobre ella y seleccione **Editar relación**. El menú contextual también incluye accesos directos para invertir o eliminar una relación, como se muestra en la captura de pantalla siguiente.
-
-![Editar diagrama de relaciones](~/content/assets/images/edit-relationship-diagram.png)
-
-> [!NOTE]
-> También puede crear relaciones sin usar un diagrama, mediante el Explorador TOM. Localiza la columna desde la que debe comenzar la relación (lado “muchos” / lado de la tabla de hechos), haz clic con el botón derecho y elige **Crear > Relación desde**. Especifique la columna de destino en el cuadro de diálogo Crear relación que aparece en la pantalla.
-
-## Guardar un diagrama
-
-Para guardar un diagrama, simplemente utilice la opción **Archivo > Guardar** (CTRL+S). Tabular Editor 3 le pedirá que guarde el diagrama si cierra el documento o la aplicación mientras el diagrama tenga cambios sin guardar.
-
-> [!TIP]
-> El mismo archivo de diagrama se puede cargar para diferentes modelos de datos. Los diagramas hacen referencia a las tablas por sus nombres. Las tablas que no estén presentes en el modelo al cargar el diagrama simplemente se eliminan del diagrama.
-
-> [!NOTE]
-> Cada vez que agregue o modifique una relación, deberá ejecutar una actualización de "cálculo" en el modelo de datos antes de que se puedan usar las relaciones al consultar el modelo.
+[!include[diagram-basics](diagram-basics.partial.md)]
 
 ## Características del diagrama
 

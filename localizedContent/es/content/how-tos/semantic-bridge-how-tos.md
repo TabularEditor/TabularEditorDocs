@@ -32,13 +32,13 @@ Estas guías prácticas se centran en interactuar con el [modelo de objetos de M
 
 - @semantic-bridge-validate-default: Validar con reglas integradas
 - @semantic-bridge-validate-simple-rules: Crear reglas de validación basadas en predicados para convenciones de nomenclatura
-- @semantic-bridge-validate-contextual-rules: Crear reglas con comprobaciones entre objetos, como nombres reutilizados en distintos tipos de objetos
+- @semantic-bridge-validate-contextual-rules: Crear reglas con comprobaciones entre objetos, como nombres reutilizados en distintos tipos de objeto
 
 ## Manipulación del modelo de objetos
 
-- @semantic-bridge-add-object: Agregar objetos a una Metric View y configurar sus propiedades
+- @semantic-bridge-add-object: Agregar objetos a una Metric View y establecer sus propiedades
 - @semantic-bridge-remove-object: Quitar objetos de una Metric View
-- @semantic-bridge-rename-objects: Renombrar un campo en una Metric View
+- @semantic-bridge-rename-objects: Cambiar el nombre de un campo en una Metric View
 
 ## Serialización
 
@@ -46,4 +46,4 @@ Estas guías prácticas se centran en interactuar con el [modelo de objetos de M
 
 ## Solución de problemas
 
-- @semantic-bridge-metric-view-handle-failures: Gestionar entradas no válidas, archivos faltantes e importaciones que no llegan a completarse
+- @semantic-bridge-metric-view-handle-failures: Gestionar entradas no válidas, archivos faltantes e importaciones que no se completan

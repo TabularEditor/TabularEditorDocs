@@ -2,7 +2,7 @@
 uid: user-interface
 title: 基本用户界面
 author: Daniel Otykier
-updated: 2026-08-18
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,256 +23,255 @@ applies_to:
 
 ## 基本用户界面元素
 
-首次启动 Tabular Editor 3 并加载语义模型时，你将看到如下截图所示的界面。
+加载语义模型后，Tabular Editor 3 会显示如下默认布局。
 
 ![基本用户界面](~/content/assets/images/basic-ui.png)
 
-1. **标题栏**：显示当前加载的文件名；如果已连接，还会显示 Analysis Services 数据库或 Power BI 数据集的名称。
-2. **菜单栏**：菜单栏用于访问 Tabular Editor 3 的各项功能。 有关所有菜单项的详细说明，请参阅[菜单](#menus)。
-3. **工具栏**：工具栏提供对最常用功能的快速访问。 工具栏中可用的所有功能也都可以通过菜单访问。 你可以在 **工具 > 自定义...** 中自定义工具栏及其按钮
-4. **TOM Explorer 视图**：以层级结构展示您的数据模型，所有对象均可用 .  这些对象来自表示您的数据模型的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据。 顶部的切换按钮可让你筛选要显示的对象。 搜索框可按名称筛选对象。
-5. **表达式编辑器**：表达式编辑器提供一种快捷方式，用于编辑 TOM Explorer 中当前选中对象的任意 DAX、SQL 或 M 表达式。 如果你关闭了表达式编辑器，只需在 TOM Explorer 中双击某个对象，即可将其重新打开。 顶部的下拉列表可让你在不同的表达式属性之间切换，以防当前选定对象包含多个此类属性（例如，KPI 具有目标表达式、状态表达式和趋势表达式，它们是同一个 KPI 对象下的 3 个不同 DAX 表达式）。
-6. **属性视图**：显示 TOM Explorer 中当前选定对象（一个或多个）的所有可用 TOM 属性的详细信息。 大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。 某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。
-7. **信息视图**：Tabular Editor 3 会持续分析你模型中的 DAX 表达式，查找语义错误。 任何此类错误都会在此处显示。 此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。
-8. **状态栏**：状态栏会提供与当前选择相关的各种上下文信息、Best Practice Analyzer 的检测结果等。
+1. **标题栏**：已加载文件的名称，或所连接的 Analysis Services 数据库或 Power BI 语义模型的名称。
+2. **菜单栏**：Tabular Editor 3 的所有功能。有关各个菜单，请参阅 [菜单](#menus)。
+3. **工具栏**：最常用的功能。工具栏上的每个命令在菜单中也都能找到。可在 **工具 > 自定义...** 中自定义工具栏及其按钮。
+4. **TOM Explorer 视图**：根据 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据构建的模型对象树。顶部的切换按钮用于筛选显示哪些对象类型，搜索框则按名称筛选对象。
+5. **表达式编辑器**：编辑 TOM Explorer 中所选对象的 DAX、SQL 或 M 表达式。如果你关闭了它，双击 TOM Explorer 中的对象即可再次打开。如果对象有多个表达式属性，可使用顶部的下拉列表在它们之间切换。例如，KPI 具有目标、状态和趋势表达式。
+6. **属性视图**：TOM Explorer 中所选对象的所有 TOM 属性。该网格中大多数属性都可编辑；即使选中了多个对象，也可以同时编辑。某些属性，如 **格式字符串**、**连接字符串** 和 **角色成员**，可通过值单元格中的省略号按钮打开对话框或集合编辑器。
+7. **信息视图**：对模型的 DAX 表达式进行持续分析时发现的语义错误，以及来自 C# Script 的信息和 Analysis Services 报告的错误。
+8. **状态栏**：显示当前所选内容、Best Practice Analyzer 的检测结果等信息。当 [MCP 服务器](xref:mcp-server) 可用时，右端的指示器会显示 **MCP Started** 或 **MCP Stopped**，其工具提示会显示服务器正在侦听的地址。单击该指示器可打开 **MCP Server** 对话框；右键单击可启动或停止服务器、复制供代理使用的注册配置，或打开偏好设置页面。
 
-还提供一些其他视图，用于不同用途。 更多信息请查看 [视图菜单](#view) 一节。
+[视图菜单](#view) 可打开其他视图。
 
-# 自定义用户界面
+## 自定义用户界面
 
-所有 UI 元素都可以调整大小和/或重新排列，以满足你的需求。 你甚至可以将某个视图从主窗口拖出，从而把同一个 Tabular Editor 3 实例分布到多个显示器上。 关闭应用时，Tabular Editor 3 会保存这些自定义设置，并在下次启动时自动恢复。
+你可以调整并重新排列所有 UI 元素，还可以将视图拖出主窗口，例如拖到另一台显示器上。关闭应用程序时，Tabular Editor 3 会保存布局，并在下次启动时恢复。
 
 ### 选择不同的布局
 
-要将应用重置为默认布局，请选择 **窗口 > 默认布局**。 Tabular Editor 2.x 用户可能更喜欢 **窗口 > 经典布局** 选项：TOM Explorer 位于屏幕左侧，属性视图位于表达式编辑器下方。
+选择 **窗口 > 默认布局** 可将应用程序重置为默认布局；或者选择 **窗口 > 经典布局**，将 TOM Explorer 放在左侧，并将属性视图放在表达式编辑器下方，就像 Tabular Editor 2.x 一样。
 
-使用 **窗口 > 捕获布局** 选项保存自定义布局，使其作为“窗口”菜单中的新布局选项提供，方便你在不同布局之间快速切换。 使用 **窗口 > 布局...** 选项可打开所有可用布局的列表，你可以应用、加载、删除和保存布局。 将布局保存到磁盘时，会生成一个 .xml 文件，你可以与其他 Tabular Editor 3 用户共享。
+要在自己保存的布局之间切换，请通过 **窗口 > 捕获布局** 保存当前布局，这样它就会出现在 **窗口** 菜单中供你选择。**窗口 > 布局...** 会列出所有布局，你可以在这里应用、加载、删除和保存布局。保存到磁盘的布局会以 .xml 文件形式存储，你可以与其他 Tabular Editor 3 用户共享。
 
 ![管理布局](~/content/assets/images/manage-layouts.png)
 
 ### 窗口停靠选项
 
-在 Tabular Editor 3 中重新排列视图和文档时，你可以选择将窗口停靠到界面的不同区域。 将窗口拖到新位置时，会出现停靠指示器，显示可用的停靠位置。
+拖动视图或文档时，停靠指示器会显示可停靠的位置。
 
 ![窗口停靠选项](~/content/assets/images/window-docking-options.png)
 
-停靠窗口主要有两种方式，各有不同用途：
+将窗口放到哪里，决定了它的停靠方式：
 
-**文档选项卡停靠（中心指示器）**：将窗口拖到中心停靠指示器时，它会被放置在主文档区域。 以这种方式停靠的窗口会成为文档选项卡，其特点包括：
+**文档选项卡停靠（中心指示器）**：将窗口拖放到中心指示器上后，它会成为主文档区域中的一个文档选项卡，与 DAX 查询、脚本和关系图等文档并列。文档选项卡：
 
-- 可使用 **Ctrl+Tab** 在选项卡之间切换
-- 会在主工作区与 DAX 查询、脚本和图表等其他文档并排显示
+- 使用 **Ctrl+Tab** 循环切换时会包含在内
 - 不支持自动隐藏
 
-**工具窗口停靠（边缘指示器）**：将窗口拖到左侧、右侧、顶部或底部的停靠指示器时，它会作为工具窗口停靠。 工具窗口：
+**工具窗口停靠（边缘指示器）**：将窗口拖放到左侧、右侧、顶部或底部指示器上后，它会作为工具窗口停靠，例如 TOM Explorer 和信息视图。工具窗口：
 
-- 无法通过 **Ctrl+Tab** 访问
-- 带有图钉图标，可用于启用自动隐藏（不使用时窗口会折叠）
-- 其行为与 TOM Explorer 和信息视图等其他工具窗口类似
-- 可停靠在主文档区域周围的不同位置
+- 使用 **Ctrl+Tab** 切换时不会包含在内
+- 带有可启用自动隐藏的图钉图标；窗口未使用时会自动折叠
+- 可停靠在主文档区域的任意一侧
 
 > [!TIP]
-> 停靠窗口的大小取决于你选择停靠区域中的可用空间，而不是停靠选项本身。 你可以拖动窗口之间的分隔线来调整大小。
+> 停靠窗口的大小取决于停靠位置的可用空间，你可以拖动窗口之间的分隔条来调整其大小。
 
 ### 更改主题和调色板
 
-你可以通过选择不同的主题和/或调色板来更改 Tabular Editor 3 的外观。 Tabular Editor 3 附带五种不同的主题（有时也称为“皮肤”），可通过 **窗口 > 主题** 菜单选择：
+在 **窗口 > 主题** 中选择主题：
 
-- Basic 与 Bezier（矢量主题，适用于高 DPI 显示器）
-- Blue、Dark 与 Light（位图主题，不推荐用于高 DPI 显示器）
+- Basic 和 Bezier 是基于矢量的，可在高 DPI 显示器上缩放。
+- Blue、Dark 和 Light 是基于位图的，在高 DPI 显示器上缩放效果不佳。
 
-对于基于矢量的主题（Basic 和 Bezier），可使用 **窗口 > 默认调色板** 菜单项更改主题使用的颜色。
+对于 Basic 和 Bezier，**窗口 > 默认调色板** 可更改主题颜色。
 
 ![Palettes](~/content/assets/images/palettes.png)
 
-# 菜单
+## 菜单
 
-以下部分将更详细地介绍 Tabular Editor 3 中的各个菜单。
+本节介绍各个菜单。
 
-在下文中，我们使用 **活动文档** 一词，指光标位于某个文档中，例如表达式编辑器或下方截图中的“DAX 脚本 1”选项卡。 某些键盘快捷键和菜单项的行为会因是否存在活动文档，以及当前活动文档的类型而有所不同。
+_活动文档_ 是指当前光标所在的文档，比如表达式编辑器或下方截图中的“DAX脚本 1”选项卡。某些快捷键和菜单项取决于当前是否有活动文档，以及该文档的类型。
 
 > [!NOTE]
-> 默认情况下，菜单和工具栏会被锁定在原位，防止误操作导致重新定位。 要解锁它们，请转到 **工具 > 自定义... > 选项**，并取消选中 **锁定菜单和工具栏** 选项
+> 默认情况下，菜单和工具栏会锁定在原位。要解锁，请取消选中 **锁定菜单和工具栏**，位于 **工具 > 自定义…… > 选项**。
 
 ![Active Document](~/content/assets/images/active-document.png)
 
-## 文件
+### 文件
 
-**文件** 菜单主要包含用于加载和保存模型元数据，以及相关支持文件和文档的菜单项。
+**文件** 菜单用于加载和保存模型元数据、相关支持文件以及文档。
 
 ![File Menu](~/content/assets/images/file-menu.png)
 
-- **新建**：打开一个子菜单，可创建新的空白数据模型 (Ctrl+N)，或创建各种 [支持文件](xref:supported-files#supported-file-types)，例如新的 DAX 查询或 DAX 脚本（文本文件），或数据模型图表（JSON 文件）。 支持文件（C# Script 除外）只能在 Tabular Editor 中已加载模型时创建。
+- **新建**：创建新的空白模型（**Ctrl+N**），或创建一个[支持文件](xref:supported-files#supported-file-types)，例如 DAX 查询、DAX脚本（文本文件）或关系图（JSON 文件）。除 C# Script 外，其他支持文件在使用前都需要先加载模型。
 
   ![File Menu New](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> **新建 > 模型...** 选项在 Tabular Editor 3 桌面版中不可用，因为该版本只能作为 Power BI Desktop 的外部工具使用。 [更多信息](xref:editions)。
+> **新建 > 模型...** 选项在 Tabular Editor 3 桌面版中不可用；该版本只能作为 Power BI Desktop 的外部工具使用。参见 @editions。
 
-- **打开**：打开一个子菜单，提供从多种来源加载数据模型的选项，以及一个用于加载任何其他类型文件的选项。 子菜单项包括：
+- **打开**：从以下来源之一加载模型，或打开任何其他支持的文件：
 
   ![File Menu Open](~/content/assets/images/file-menu-open.png)
 
-  - **从文件加载模型...** 从 .bim 或 .pbit 等文件打开模型元数据。
-  - **从 DB 加载模型...** 指定 Analysis Services 或 Power BI XMLA 连接详细信息，或连接到本地 Analysis Services 实例（例如 Visual Studio 的集成 Workspace 服务器或 Power BI Desktop），以便从已部署的表格模型加载模型元数据。
-  - **从文件夹加载模型...** 从文件夹结构中打开模型元数据，该结构此前使用任意版本的 Tabular Editor 保存。
-  - **文件...** 会显示一个对话框，可根据文件扩展名打开 Tabular Editor 3 支持的任意类型文件。 更多信息，请参阅 [支持的文件类型](xref:supported-files)。
-  - **从 Metric View YAML 导入...** 从 Databricks Metric View YAML 文件导入模型元数据。
+  - **从文件加载模型...**：从 .bim 或 .pbit 等文件打开模型元数据。
+  - **从数据库加载模型...**：加载已部署模型的元数据。输入 Analysis Services 或 Power BI 的 XMLA 连接信息，或连接到本地实例，例如 Visual Studio 的集成 Workspace 服务器或 Power BI Desktop。
+  - **从文件夹加载模型...**：从由任意版本的 Tabular Editor 保存的文件夹结构中打开模型元数据。
+  - **文件...**：根据文件扩展名打开 Tabular Editor 3 支持的任意文件类型。参见[支持的文件类型](xref:supported-files)。
+  - **从 Metric View YAML 导入...**：从 Databricks Metric View YAML 文件导入模型元数据。
 
     ![支持的文件类型](~/content/assets/images/supported-file-types.png)
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 桌面版中，**打开 > 从文件打开模型...** 和 **打开 > 从文件夹打开模型...** 选项不可用，并且 **打开 > 文件...** 对话框只允许打开[支持的文件](xref:supported-files#supported-file-types)，不允许打开包含元数据的文件。
+> 在 Tabular Editor 3 桌面版中，**打开 > 从文件加载模型...** 和 **打开 > 从文件夹加载模型...** 不可用，且 **打开 > 文件...** 只能打开[支持文件](xref:supported-files#supported-file-types)。
 
-- **还原**：此选项可让你从源重新加载模型元数据，并丢弃在 Tabular Editor 中所做但尚未保存的任何更改。 当 Tabular Editor 3 作为 Power BI Desktop 的外部工具使用，并且在 Tabular Editor 3 保持连接期间你在 Power BI Desktop 中进行了更改时，此选项非常有用。 选择 **还原** 后，Tabular Editor 3 无需重新连接即可从 Power BI Desktop 重新加载模型元数据。
-- **关闭文档** (Ctrl+W): 关闭主区域中当前处于活动状态的文档或面板，例如 DAX 查询、C# Script、Data model 图，或任何其他具有焦点的视图。 如果文档有未保存的更改，Tabular Editor 会在关闭前提示你保存这些更改。 此命令具有上下文感知能力，会关闭主 Workspace 区域中当前处于活动状态的项目。
-- **关闭模型**：会从 Tabular Editor 中卸载当前加载的模型元数据。 如果你更改了元数据，Tabular Editor 会在关闭前提示你保存这些更改。
-- **保存**：此操作会将当前活动文档保存回源文件。 如果当前没有活动文档，此操作会将模型元数据保存回源；源可以是 Model.bim 文件、Database.json（文件夹结构），也可以是已连接的 Analysis Services 实例（包括 Power BI Desktop）或 Power BI XMLA endpoint。
-- **另存为...**：允许你将活动文档另存为新文件。 如果当前没有活动文档，此操作允许你将模型元数据另存为新文件，使用 .bim (基于 JSON) 文件。
-- **保存到文件夹...**：允许你将模型元数据保存为[文件夹结构](xref:save-to-folder)。
+- **从磁盘重新加载** / **从服务器重新加载**：从源重新加载模型元数据，并丢弃所有未保存的更改。对于从文件或文件夹加载的模型，此命令显示为 **从磁盘重新加载**；对于从 Analysis Services 或 Power BI 打开的模型，则显示为 **从服务器重新加载**。如果 Tabular Editor 3 作为 Power BI Desktop 的外部工具运行，并且模型在 Power BI Desktop 中发生更改，可使用此命令重新加载模型元数据，而无需重新连接。从文件或文件夹加载的模型会在文件发生更改时自动重新加载。参见 [从磁盘自动重新加载](xref:auto-reload)。
+- **关闭文档**（**Ctrl+W**）：关闭主区域中当前活动的文档或面板，例如 DAX 查询、C# Script 或关系图。如果文档有未保存的更改，系统会提示你保存这些更改。
+- **关闭模型**：卸载模型元数据。如果你修改了元数据，系统会提示你保存这些更改。
+- **保存**：将活动文档保存到其源文件。如果当前没有活动文档，则会将模型元数据保存回其源：Model.bim 文件、Database.json 文件夹结构、Analysis Services 实例（包括 Power BI Desktop）或 Power BI XMLA endpoint。
+- **另存为...**：将活动文档另存为新文件。如果当前没有活动文档，则将模型元数据另存为新的 .bim（JSON）文件。
+- **保存到文件夹...**：将模型元数据以[文件夹结构](xref:save-to-folder)的形式保存。
 - **全部保存**：一次性保存所有未保存的文档和模型元数据。
-- **最近使用的文件**：显示最近使用的支持文件列表，便于你快速重新打开它们。
-- **最近使用的表格模型**：显示最近使用的模型元数据文件或文件夹列表，便于你从其中之一快速重新加载模型元数据。
+- **最近文件**：列出最近使用的支持文件。
+- **最近的表格模型**：列出最近使用的模型元数据文件和文件夹。
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 桌面版中，**保存到文件夹** 和 **最近使用的表格模型** 选项已禁用。 此外，**另存为** 选项仅对[支持的文件](xref:supported-files#supported-file-types)启用。
+> 在 Tabular Editor 3 桌面版中，**保存到文件夹**和**最近的表格模型**已禁用，而**另存为**仅可用于[支持文件](xref:supported-files#supported-file-types)。
 
-- **退出**：关闭 Tabular Editor 3 应用程序。 在应用程序关闭之前，系统会提示你保存所有未保存的文件或模型元数据。
+- **退出**：关闭 Tabular Editor 3。此时会先提示你保存未保存的文件或模型元数据。
 
-## 编辑
+### 编辑
 
-**编辑** 菜单包含标准的 Windows 应用程序菜单项，用于编辑文档或对当前加载的模型元数据进行更改。
+**编辑**菜单用于编辑活动文档或已加载的模型元数据。
 
 ![编辑菜单](~/content/assets/images/edit-menu.png)
 
-- **撤销**：此选项将撤销对模型元数据所做的最后一次更改。 当没有活动文档时，常用的 CTRL+Z 快捷键会执行此选项。
-- **重做**：这个选项会重新执行上一次对模型元数据的撤销操作。 当没有活动文档时，常用的 CTRL+Y 快捷键会执行此选项。
-- **查找**：显示“查找和替换”对话框，并选中“查找”选项卡。 [更多信息](xref:find-replace#find)。
-- **替换**：显示“查找和替换”对话框，并选中“替换”选项卡。 [更多信息](xref:find-replace#replace)。
-- **剪切 / 复制 / 粘贴**：这些都是熟悉的 Windows 编辑操作。 如果有活动文档，这些操作将作用于该文档中的文本选区。 否则，可以使用这些选项来操作 TOM Explorer 中的对象。 例如，在 TOM Explorer 中选择度量值时按住 SHIFT 或 CTRL 键进行多选，然后按 CTRL+C，再按 CTRL+V，即可复制这些度量值。
-- **删除**：删除活动文档中选定的文本；如果没有活动文档，则删除 TOM Explorer 中当前选定的一个或多个对象。
+- **撤销**：撤销对模型元数据的上一次更改。在没有活动文档时，按 **Ctrl+Z** 会执行此命令。
+- **重做**：重做上一次对模型元数据的撤销操作。在没有活动文档时，按 **Ctrl+Y** 会执行此命令。
+- **查找**：打开“查找和替换”对话框，并切换到“查找”选项卡。参见[查找](xref:find-replace#find)。
+- **替换**：打开“查找和替换”对话框，并切换到“替换”选项卡。参见[替换](xref:find-replace#replace)。
+- **剪切 / 复制 / 粘贴**：在有活动文档时，这些命令作用于所选文本。否则，它们作用于 TOM Explorer 中所选的对象。例如，要复制多个度量值，请在 TOM Explorer 中按住 **Shift** 或 **Ctrl** 选择它们，然后按 **Ctrl+C**，再按 **Ctrl+V**。
+- **删除**：删除活动文档中的所选文本；如果没有活动文档，则删除 TOM Explorer 中所选的对象。
 
 > [!NOTE]
-> Tabular Editor 通常仅在选择了多个对象，或要删除的对象存在依赖关系时，才会弹出删除确认对话框。 对象删除可通过使用 **撤销** 选项 (CTRL+Z) 来撤销。
+> 只有在选中了多个对象，或其他对象依赖于你要删除的对象时，才会出现删除提示。**撤销**（**Ctrl+Z**）可还原已删除的对象。
 
-- **全选**：选中当前活动文档中的所有文本，或选中 TOM Explorer 中属于同一父级的所有对象。
-- **Code Assist**：此选项仅在编辑 DAX 代码时可用。 它提供了一个快捷入口，可访问多种与编辑 DAX 代码相关的 Code Assist 功能。 更多信息，请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
+- **全选**：选中活动文档中的所有文本，或选中 TOM Explorer 中具有相同父级的所有对象。
+- **Code Assist**：用于 DAX 的 Code Assist 功能的快捷方式。在编辑 DAX 时可用。请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
 - **自动换行**：在当前活动的文本文档中切换是否启用自动换行。
 
-## 视图
+### 视图
 
-**视图** 菜单可让你在 Tabular Editor 3 用户界面的不同视图之间导航。 如果某个视图已被隐藏，在此菜单中点击该视图的标题即可取消隐藏，并将其置于焦点。 注意，“视图”菜单中不会显示文档。 要在文档之间切换，请使用[窗口菜单](#window)。
+**视图**菜单用于打开并聚焦 Tabular Editor 3 的各个视图，包括隐藏的视图。这里不会列出文档；可通过 [窗口菜单](#window) 在它们之间切换。
 
 ![视图菜单](~/content/assets/images/view-menu.png)
 
-- **TOM Explorer**: 以层次结构视图呈现当前加载的模型元数据的整个 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。 更多信息请参见 @tom-explorer-view。
-- **AI 助手**：AI 助手视图可让你与 AI 助手交互，协助完成建模任务。
-- **DAX 组件管理器**：DAX 组件管理器视图可让你浏览 DAX 用户定义函数组件，并将其安装到模型中。
-- **Best Practice Analyzer**: 通过让你指定用于最佳实践验证的规则，帮助提升模型质量。 更多信息见 @bpa-view。
-- **信息**: 信息视图显示来自各种来源的错误、警告和信息性消息，例如 Tabular Editor 3 语义分析器。 更多信息见 @messages-view。
-- **数据刷新**：数据刷新视图用于跟踪后台运行的数据刷新操作。 更多信息见 @data-refresh-view。
-- **表达式编辑器**：这是一个“快速编辑器”，可让你编辑 TOM Explorer 中当前选定对象的 DAX、M 或 SQL 表达式。 更多信息请参见 @dax-editor。
-- **宏**: 宏视图允许你管理你创建的任何宏。 可通过 @csharp-scripts 创建宏。 更多信息请参见 @creating-macros。
-- **VertiPaq分析器**：VertiPaq分析器视图允许你收集、导入和导出有关模型数据的详细统计信息，用于优化和调试 DAX 性能。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。 更多信息请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
-- **依赖关系**：依赖关系视图将当前所选对象与模型中其他对象之间的依赖关系可视化。
-- **DAX优化器**：DAX优化器视图与 [DAX优化器](https://www.daxoptimizer.com) 集成，用于分析模型中的 DAX 性能问题。
-- **日历编辑器**：日历编辑器视图允许你使用现代时间智能功能在模型中定义和管理日历。
-- **透视编辑器**：透视编辑器视图提供一个矩阵概览，显示模型的每个透视中包含了哪些对象。
-- **元数据翻译编辑器**: 元数据翻译编辑器视图提供一个网格，用于编辑模型对象的元数据翻译(区域设置)。
-- **工具栏 / 属性**：其余项可让你切换工具栏的可见性，并打开属性视图（F4）。
+- **TOM Explorer**：以树形结构显示已加载模型的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。请参阅 @tom-explorer-view。
+- **AI 助手**：用于建模任务的 AI 助手聊天界面。
+- **DAX 组件管理器**：浏览 DAX 用户定义函数组件，并将其安装到模型中。
+- **Best Practice Analyzer**：根据你定义的最佳实践规则验证模型。请参阅 @bpa-view。
+- **信息**：显示来自 Tabular Editor 3 语义分析器等来源的错误、警告和提示信息。请参阅 @messages-view。
+- **数据刷新**：跟踪在后台运行的刷新操作。请参阅 @data-refresh-view。
+- **表达式编辑器**：编辑 TOM Explorer 中所选对象的 DAX、M 或 SQL 表达式。见 @dax-editor。
+- **宏**：管理你通过 @csharp-scripts 创建的宏。请参阅 @creating-macros。
+- **VertiPaq分析器**：收集、导入和导出模型中数据的统计信息，用于 DAX 性能调优。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
+- **依赖关系**：[**DAX 依赖关系** 视图](xref:creating-and-testing-dax#dax-dependencies)显示所选对象与模型中其他对象之间的依赖关系。选择 **跟踪 TOM Explorer**，让它跟随 TOM Explorer 中的选中项。
+- **DAX优化器**：使用 [DAX优化器](https://www.daxoptimizer.com) 分析模型中的 DAX 性能问题。
+- **日历编辑器**：为现代时间智能功能定义和管理日历。
+- **透视编辑器**：以矩阵形式显示模型中每个透视包含哪些对象。
+- **元数据翻译编辑器**：提供一个表格，用于编辑模型对象的元数据翻译（区域设置）。
+- **工具栏 / 属性**：切换工具栏的可见性并打开属性视图（**F4**）。
 
-## 模型
+### 模型
 
-**模型**菜单显示可在“模型”对象级别执行的操作（即 TOM Explorer 的根对象）。
+**模型**菜单包含针对 Model 对象的操作；该对象是 TOM Explorer 的根节点。
 
 ![模型菜单](~/content/assets/images/model-menu.png)
 
-- **Deploy...**: 启动 Tabular Editor 部署向导。 更多信息请参见 [模型部署](../deployment.md)。
+- **Deploy...**：打开 Tabular Editor Deployment Wizard。参见 [模型部署](xref:deployment)。
 
 > [!IMPORTANT]
-> **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。 有关详细信息，请参阅 @editions。
+> **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。参见 @editions。
 
-- **序列化选项...**：可配置将模型元数据保存到磁盘时（文件或文件夹结构）的序列化方式。
-- **导入表...** 启动 Tabular Editor 3 导入表向导。 有关详细信息，请参阅 @importing-tables。
-- **更新架构 (所有表)...** 检测模型中所有表的数据源中的架构更改，并与当前已导入的列进行比较。 有关更多信息，请参阅[更新表架构](xref:importing-tables#updating-table-schema)。
-- **Script DAX**: 为当前选定的对象生成 DAX 脚本(如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX 脚本)。 有关详细信息，请参阅 @dax-scripts。
-- **刷新模型**: 当 Tabular Editor 连接到 Analysis Services 实例时，此子菜单包含用于在模型级别启动后台刷新操作的选项。 此子菜单包含以下选项。 有关详细信息，请参阅 [刷新命令 (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
-  - **自动（模型）**：Analysis Services 将决定要刷新的对象（仅刷新不处于“Ready”状态的对象）。
+- **序列化选项...**：设置将模型元数据保存为文件或文件夹结构时的序列化方式。
+- **导入表...**：打开 Tabular Editor 3 导入表向导。参见 @importing-tables。
+- **更新架构（所有表）...**：将所有表的列与其数据源进行比较，并检测架构更改。参见 [更新表架构](xref:importing-tables#updating-table-schema)。
+- **Script DAX**：为所选对象生成 DAX脚本；如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX脚本。参见 @dax-scripts。
+- **刷新模型**：当 Tabular Editor 连接到 Analysis Services 时，在后台启动模型刷新。参见 [刷新命令 (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。此子菜单包含以下选项：
+  - **自动（模型）**：Analysis Services 仅刷新未处于“Ready”状态的对象。
   - **完全刷新（模型）**：Analysis Services 对模型执行完全刷新。
-  - **计算（模型）**：Analysis Services 将对所有计算表格、计算列、计算组以及关系执行重新计算。 不会从数据源读取任何数据。
-- **添加 [对象类型]**: **模型** 菜单中其余的快捷方式可用于创建新的模型子对象类型(表、数据源、透视等)。
+  - **计算（模型）**：Analysis Services 将重新计算所有计算表格、计算列、计算组和关系。不会从数据源读取任何数据。
+- **添加 [对象类型]**：其余项用于创建模型的子对象，例如表、数据源和透视。
 
-## 工具
+### 工具
 
-**工具** 菜单包含用于设置 Tabular Editor 3 偏好和自定义项的选项。
+**工具**菜单包含用于设置 Tabular Editor 3 偏好设置和自定义项的选项。
 
 ![视图菜单](~/content/assets/images/tools-menu.png)
 
-- **自定义...** 启动 Tabular Editor 3 用户界面布局自定义对话框，可在其中创建新工具栏、重新排列并编辑菜单和工具栏按钮等。
-- **偏好...** 启动 Tabular Editor 3 偏好对话框。它是管理 Tabular Editor 及其各项功能的中心入口，例如更新检查、代理设置、查询行数限制、请求超时等。 有关详细信息，请参阅 @preferences。
-- **管理 BPA 规则...**：启动 Best Practice Analyzer 规则管理器，你可以查看和编辑 Best Practice Analyzer 规则及规则集。 更多信息见 @bpa-view。
+- **自定义...**：打开“用户界面布局”自定义对话框，可在其中创建工具栏、重新排列并编辑菜单和工具栏按钮。
+- **偏好...**：打开“偏好”对话框，其中包含更新检查、代理设置、查询行数限制和请求超时等设置。见 @preferences。
+- **管理 BPA 规则...**：打开 Best Practice Analyzer 规则管理器，可在其中查看和编辑规则及规则集。参见 @bpa-view。
+- **MCP Server...**：打开 **MCP Server** 对话框，可在其中启动或停止服务器，使外部 AI 代理能够处理当前打开的模型，查看该代理获得的权限，并复制用于代理的注册配置。请参阅 @mcp-server。如果未安装 AI 功能组件、未勾选 **启用 MCP 服务器**，或者管理员已通过策略将其禁用，则该项会被隐藏。
 
-## 窗口
+### 窗口
 
-**窗口** 菜单提供用于管理和在应用程序的各种视图与文档之间导航的快捷方式（统称为 _窗口_）。 它还包含用于控制主题和调色板的菜单项，如[上文](#changing-themes-and-palettes)所述。
+**窗口**菜单用于管理和切换应用中的视图和文档，这些统称&#x4E3A;_&#x7A97;口_；此外，该菜单还包含[主题和调色板](#changing-themes-and-palettes)设置。
 
 ![查看菜单](~/content/assets/images/window-menu.png)
 
-- **新建...**：此子菜单提供用于创建新[支持文件](xref:supported-files#supported-file-types)的快捷方式。 这里的选项与 **文件 > 新建** 下的选项完全相同。
+- **新建...**：用于创建[支持文件](xref:supported-files#supported-file-types)。这些选项与 **文件 > 新建** 中的选项相同。
 
 - **浮动**：将当前视图或文档从停靠状态解除，并在浮动窗口中显示。
 
-- **固定选项卡**：固定一个选项卡。 选项卡固定后，会显示在文档选项卡的最左侧；在选项卡上右键单击时，还会提供仅关闭未固定选项卡的快捷操作。
+- **固定选项卡**：将选项卡固定在文档选项卡区域的最左侧。选项卡的右键菜单中包含仅关闭未固定选项卡的命令。
 
   ![标签页上下文菜单](~/content/assets/images/tab-context-menu.png)
 
-- **新建水平/垂直选项卡组**：此选项可将主文档区域划分为多个区域（即“选项卡组”），以便同时并排或上下显示多个文档。
+- **新建水平/垂直选项卡组**：将主文档区域拆分为多个选项卡组，以并排或上下显示多个文档。
 
-- **全部关闭**：关闭所有文档选项卡。 如有未保存的更改，系统会提示你保存。
+- **全部关闭**：关闭所有文档选项卡。如果存在未保存的更改，会先提示你保存。
 
 - **重置窗口布局**：重置对主文档区域应用的所有自定义设置。
 
-- **1..N [文档]**：此处列出前 10 个已打开的文档，方便你在它们之间导航。 你也可以使用 CTRL+Tab 快捷键在已打开的文档和视图之间快速切换，如下图所示：
+- **1..N [document]**：前 10 个已打开的文档。 **Ctrl+Tab** 也可在打开的文档和视图之间切换：
 
   ![Ctrl+Tab 快捷键](~/content/assets/images/ctrl-tab.png)
 
-- **窗口...**：打开一个对话框，列出所有已打开的文档，使你可以在它们之间切换或逐个关闭。
+- **窗口...**：打开一个列出所有打开文档的对话框，你可以在其中切换到某个文档或将其关闭。
 
   ![窗口管理器](~/content/assets/images/windows-manager.png)
 
-- **捕获布局** / **布局...** / **默认布局** / **经典布局**：这些菜单项已在[本文前文](#choosing-a-different-layout)中介绍过。
+- **捕获布局** / **布局...** / **默认布局** / **经典布局**：参见[选择其他布局](#choosing-a-different-layout)。
 
-- **主题** / **默认调色板**：这些菜单项已在[本文前面](#changing-themes-and-palettes)讨论过。
+- **主题** / **默认调色板**：参见[更改主题和调色板](#changing-themes-and-palettes)。
 
 - **语言**：可以更改 Tabular Editor 3 用户界面的显示语言。
 
-## 帮助
+### 帮助
 
-**帮助**菜单提供在线资源等内容的快捷入口。
+**帮助**菜单提供联机资源的入口。
 
 ![帮助菜单](~/content/assets/images/help-menu.png)
 
-- **在线文档**：此菜单项链接到 [docs.tabulareditor.com](https://docs.tabulareditor.com/te3)。
-- **入门指南**：这个菜单项会打开 Tabular Editor 3 入门指南，帮助新用户快速上手这个应用。
-- **社区支持**：此菜单项链接到我们的[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)。
-- **专属支持**：此菜单项可让你直接向我们的专属支持热线发送电子邮件。
-- **新功能**：此菜单项会显示当前安装的 Tabular Editor 3 版本的发布说明。
+- **联机文档**：在默认 Web 浏览器中打开文档站点 [docs.tabulareditor.com](https://docs.tabulareditor.com)。
+- **入门指南**：打开面向新用户的 Tabular Editor 3 入门指南。
+- **社区支持**：打开我们的[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)。
+- **专属支持**：发送电子邮件至专属支持热线。
+- **开始使用**：这个菜单项会打开 **开始使用** 页面，其中汇集了 Tabular Editor 的课程、演示和文档。在 Tabular Editor 3.27.0 之前，此项名为 **What's New**。有关发布说明，请参阅 @release-history。
 
 > [!NOTE]
-> 专属支持仅提供给 Tabular Editor 3 企业版客户。 其他客户如有任何技术问题、疑问或其他产品相关问题，请前往[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)寻求帮助。
+> 专属支持仅面向 Tabular Editor 3 企业版客户。其他客户如果有技术或产品相关问题，可以前往[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)寻求帮助。
 
-- **关于 Tabular Editor**：打开一个对话框，显示当前使用的 Tabular Editor 版本的详细信息，以及安装与许可详情。 该对话框还允许你更改许可证密钥。
+- **关于 Tabular Editor**：显示版本、安装和许可详细信息，并可更改许可证密钥。
 
-## 动态菜单（取决于上下文）
+### 动态菜单（取决于上下文）
 
-除了上面提到的菜单外，还可能在特定情况下出现其他菜单，具体取决于当前获得焦点的 UI 元素，以及在 TOM Explorer 中当前选中的对象。 例如，如果你选择一个 Table 对象，就会出现一个 **Table** 菜单，其中包含与在 TOM Explorer 中右键单击该对象时相同的、与上下文相关的快捷菜单项。
+额外的菜单会根据当前获得焦点的 UI 元素以及在 TOM Explorer 中选中的对象而显示。例如，如果你选择一个表，就会出现一个 **表** 菜单，其中的菜单项与在 TOM Explorer 中右键单击该表时显示的菜单相同。
 
-如果你在不同类型的文档之间切换输入焦点（即。 DAX 查询、Pivot Grid、图表等），你也会看到一个表示当前处于焦点的文档类型的菜单。 该菜单将包含与当前文档相关的菜单项。 例如，当图表当前获得焦点时，会出现一个 **Diagram** 菜单，其中包含“将表添加到图表”等相关菜单项。
+每种文档类型(如 DAX 查询、Pivot Grid 和图表)在该类型文档获得焦点时，也会添加一个菜单。例如，当关系图获得焦点时，会添加一个 **关系图** 菜单，其中包含“向关系图添加表”的命令。
 
-你可以在 **工具 > 偏好 > 用户界面** 中更改这些动态菜单的行为。
+你可以在 **工具 > 偏好 > Tabular Editor > 用户界面** 中设置这些动态菜单的行为。
 
-# 后续步骤
+## 后续步骤
 
 - @tom-explorer-view
 - @supported-files
-- @preferences
+- @偏好

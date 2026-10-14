@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Solo puntos de conexión XMLA de Premium Per User
+          note: Solo puntos de conexión XMLA de Premium por usuario
         - edition: Enterprise
           full: true
 ---
@@ -50,5 +50,5 @@ El flujo de trabajo es el siguiente:
 ## Pasos siguientes
 
 - @new-pbi-model
-- @workspace-mode
+- @Workspace-mode
 - @importing-tables

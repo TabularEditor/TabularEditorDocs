@@ -1,5 +1,5 @@
 ---
-uid: editing-properties
+uid: edicion-de-propiedades
 title: Edición de propiedades
 applies_to:
   products:

@@ -38,7 +38,7 @@ applies_to:
 | 格式化 DAX     | F6           |
 | 格式化 DAX（短行） | Ctrl+F6      |
 | 注释行         | Ctrl+Shift+C |
-| 取消注释        | Ctrl+Shift+U |
+| 取消注释行       | Ctrl+Shift+U |
 
 | 脚本编辑器 | 快捷键    |
 | ----- | ------ |
