@@ -2,7 +2,7 @@
 uid: 复合模型度量值格式设置
 title: 复合模型中的度量值格式属性
 author: 支持团队
-updated: 2026-01-26
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -189,9 +189,9 @@ applies_to:
 
 ## 更多资源
 
-- **[Microsoft Docs - 度量值格式字符串](https://learn.microsoft.com/en-us/analysis-services/tmsl/measures-object-tmsl)**：关于在 Tabular Object Model 中进行度量值格式设置的官方文档。
-- **[Power BI 中的复合模型](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models)**：了解实时连接与复合模型架构。
-- **[动态格式字符串](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-dynamic-format-strings)**：功能可用性及使用指南。
+- **[Microsoft Docs - 度量值格式字符串](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**：关于 Tabular Object Model 中度量值格式设置的官方文档。
+- **[Power BI 中的复合模型](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**：了解实时连接和复合模型架构。
+- **[动态格式字符串](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**：功能可用性和使用指南。
 
 ---
 

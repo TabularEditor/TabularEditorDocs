@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: Guardar con archivos de apoyo
 author: Peer Grønnerup
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -88,7 +88,7 @@ Tabular Editor crea la carpeta **.SemanticModel** —por ejemplo, `Sales.Semanti
 La integración de Git está disponible en los Workspace asignados a la capacidad Microsoft Fabric F-SKU, a la capacidad Power BI Premium o a Power BI Premium Per User (PPU).
 
 > [!WARNING]
-> La integración de Git para el elemento de modelo semántico se encuentra en versión preliminar. Para ver la lista de elementos compatibles, consulta [Elementos compatibles en la integración de Git de Fabric](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
+> La integración de Git para el elemento de modelo semántico se encuentra actualmente en versión preliminar. Para obtener la información más reciente sobre los elementos compatibles con la integración de Git en Fabric, consulta [Elementos compatibles con la integración de Git en Fabric](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
 
 > [!CAUTION]
 > No habilites la integración de Git en el Workspace de Fabric que aloja las bases de datos del Workspace de Tabular Editor. Si Tabular Editor sincroniza un modelo con un Workspace conectado a Git, el Workspace muestra cambios sin confirmar que no coinciden con el repositorio, y al sincronizarlos se generan conflictos de Git.
@@ -111,7 +111,7 @@ Si el modelo no tiene configuración regional, Tabular Editor la establece en **
 
 Para obtener más información, consulta:
 
-- [Documentación de la integración de Git en Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
+- [Documentación de la integración de Git en Microsoft Fabric](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
 - [Entrada del blog sobre la integración de Git entre Tabular Editor y Fabric](https://tabulareditor.com/blog/tabular-editor-and-fabric-git-integration)
 
 ## Comparación de formatos de serialización

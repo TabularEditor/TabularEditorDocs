@@ -2,7 +2,7 @@
 uid: direct-lake-sql-model
 title: Direct Lake en modelos semánticos SQL
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Modelos semánticos de Direct Lake
 
-Los modelos semánticos de Direct Lake en SQL se conectan directamente a las fuentes de datos almacenadas en [OneLake en Fabric](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) a través del punto de conexión SQL.
+Los modelos semánticos SQL de Direct Lake se conectan directamente a los Data sources almacenados en [OneLake en Fabric](https://learn.microsoft.com/fabric/onelake/onelake-overview) mediante el punto de conexión SQL.
 
 > [!IMPORTANT]
 > A partir de [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), Tabular Editor 3 es compatible con Direct Lake en OneLake, lo cual se recomienda en la mayoría de los escenarios. Consulta nuestro artículo de [guía de Direct Lake](xref:direct-lake-guidance) para obtener más información.
@@ -31,7 +31,7 @@ Tabular Editor 2 puede conectarse a modelos semánticos de Direct Lake, pero no 
 
 > [!NOTE]
 > **Limitaciones de Direct Lake**
-> Hay varias limitaciones en cuanto a los cambios que se pueden realizar en un modelo de Direct Lake. Consulta [Direct Lake Considerations and Limitations](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) para ver la lista completa. Consulta también [este artículo de SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) para obtener una visión general a la hora de elegir entre Direct Lake e Import mode.
+> Hay varias limitaciones en cuanto a los cambios que se pueden realizar en un modelo de Direct Lake. Consulta [Direct Lake Considerations and Limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) para obtener la lista completa. Consulta también [este artículo de SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) para obtener una visión general a la hora de elegir entre Direct Lake e Import mode.
 
 ## Crear un modelo de Direct Lake en SQL en Tabular Editor 3
 

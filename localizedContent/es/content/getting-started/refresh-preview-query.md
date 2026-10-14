@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Actualización, vista previa y consulta de datos
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -76,7 +76,7 @@ Tabular Editor 3 admite operaciones de actualización en distintos tipos de obje
 - **Tabla calculada** (Calculate)
 - **Grupo de cálculo** (Calculate)
 
-Consulta [Tipos de actualización](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) para obtener más información sobre los tipos de operaciones de actualización compatibles con Analysis Services / Power BI.
+Consulta [Tipos de actualización](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) para obtener más información sobre los tipos de operaciones de actualización compatibles con Analysis Services / Power BI.
 
 # Vista previa de los datos de la tabla
 
@@ -132,7 +132,7 @@ Una Consulta DAX en Tabular Editor 3 se actualiza automáticamente cuando se rea
 Al consultar los datos del modelo, a veces resulta útil poder suplantar a un usuario específico o una combinación de roles, para ver cómo se comporta el modelo desde la perspectiva de un usuario final. Tabular Editor 3 te permite suplantar a un usuario específico o a uno o varios roles haciendo clic en el botón **Suplantar...**. Esto se aplica a las [Vistas previas de tabla](#previewing-table-data), los [Pivot Grid](#pivot-grids) y las [Consultas DAX](#dax-queries).
 
 > [!NOTE]
-> Para suplantar a un usuario, Tabular Editor agrega la propiedad [`EffectiveUserName`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) a la cadena de conexión al conectarse a Analysis Services. Para suplantar un rol, Tabular Editor agrega la propiedad [`Roles`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) a la cadena de conexión. Esto solo se aplica a la vista de datos (es decir, la Consulta DAX, el Pivot Grid o la Vista previa de tabla) en la que se especifica la suplantación.
+> Para suplantar a un usuario, Tabular Editor agrega la propiedad [`EffectiveUserName`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) a la cadena de conexión cuando se conecta a Analysis Services. Para suplantar un rol, Tabular Editor agrega la propiedad [`Roles`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) a la cadena de conexión. Esto solo se aplica a la vista de datos (es decir, la Consulta DAX, el Pivot Grid o la Vista previa de tabla) en la que se especifica la suplantación.
 
 Al hacer clic en el botón **Suplantación...** (que también puedes encontrar en el menú **Consulta**, **Pivot Grid** o **Vista previa de tabla**, según el tipo de vista de datos activa), se abre un cuadro de diálogo que te permite especificar un usuario o seleccionar uno o varios roles.
 
@@ -150,7 +150,7 @@ La característica CustomData permite pasar un valor de cadena personalizado que
 
 ![Seleccionar suplantación de identidad](~/content/assets/images/impersonation-customdata.png)
 
-Cuando introduces un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`función CUSTOMDATA()`](https://dax.guide/customdata/).
+Cuando se introduce un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`función CUSTOMDATA()`](https://dax.guide/customdata/).
 
 CustomData se usa habitualmente para implementar seguridad a nivel de filas dinámica cuando una aplicación utiliza autenticación personalizada. El valor que proporciones puede utilizarse en las expresiones de filtro del rol para controlar qué filas pueden ver los usuarios en función de los datos personalizados que se pasan a través de la cadena de conexión.
 

@@ -2,7 +2,7 @@
 uid: table-groups
 title: 表格组
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -32,7 +32,7 @@ applies_to:
 在 TOM Explorer 中右键点击某个表格组，会显示与你选中该表格组内表格(s)时相同的上下文菜单选项。
 
 > [!NOTE]
-> 表格组是 Tabular Editor 的专有功能。客户端工具（如 Excel、Power BI Desktop 等）不会识别表格组，因为用于定义 Data model 概念架构的 [CSDL 格式](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec) 不支持表格组。
+> 表格组是 Tabular Editor 的专有功能。客户端工具（如 Excel、Power BI Desktop 等）由于用于定义 Data model 概念架构的 [CSDL 格式](https://learn.microsoft.com/ef/ef6/modeling/designer/advanced/edmx/csdl-spec) 不支持表格组，因此将不会处理表格组。
 
 ## 元数据和脚本
 

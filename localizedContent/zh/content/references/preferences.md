@@ -2,7 +2,7 @@
 uid: 偏好
 title: 管理偏好设置
 author: Daniel Otykier
-updated: 2026-09-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -1056,7 +1056,7 @@ DAX formatter 请求的超时时间，单位为毫秒。如果使用 DAX Formatt
 
 ##### _使用默认凭据_（已启用）
 
-使用当前的 Windows 凭据进行代理身份验证。其行为与 [Power BI Desktop 一致](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy)。
+使用当前的 Windows 凭据进行代理身份验证。其行为与 [Power BI Desktop 一致](https://docs.microsoft.com/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy)。
 
 ##### _对本地地址绕过代理_（已启用）
 

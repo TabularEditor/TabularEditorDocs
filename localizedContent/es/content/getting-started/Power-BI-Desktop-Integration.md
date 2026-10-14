@@ -19,7 +19,7 @@ applies_to:
 
 # Integración con Power BI Desktop
 
-Tabular Editor se ejecuta como una [herramienta externa de Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools) y realiza operaciones de modelado en modelos en modo Import y DirectQuery abiertos en Power BI Desktop.
+[Power BI Desktop admite Herramientas externas](https://docs.microsoft.com/power-bi/create-reports/desktop-external-tools), lo que permite a Tabular Editor realizar operaciones de modelado al trabajar con datos importados o en modo DirectQuery en Power BI Desktop.
 
 ![Tabular Editor 3 iniciado desde la cinta de opciones Herramientas externas de Power BI Desktop, con una medida abierta en el Editor de expresiones](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
@@ -28,7 +28,7 @@ Tabular Editor se ejecuta como una [herramienta externa de Power BI Desktop](htt
 - [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494) (julio de 2020 o posterior)
 - [La versión más reciente de Tabular Editor](https://tabulareditor.com/downloads)
 
-Además, se recomienda encarecidamente que la opción [fecha/hora automática](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-auto-date-time) esté desactivada en **Carga de datos** dentro de las opciones de Power BI Desktop.
+Además, se recomienda encarecidamente que la opción [fecha/hora automática](https://docs.microsoft.com/power-bi/transform-model/desktop-auto-date-time) esté **desactivada** (configuración de Power BI Desktop en "Carga de datos").
 
 ## Arquitectura de herramientas externas
 
@@ -44,7 +44,7 @@ Power BI Desktop asigna un número de puerto a la instancia de Analysis Services
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Una herramienta externa conectada lee los metadatos del modelo, ejecuta consultas DAX o MDX sobre el modelo y modifica los metadatos del modelo mediante las [bibliotecas cliente proporcionadas por Microsoft](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions), igual que con cualquier otra instancia de Analysis Services.
+Una vez conectada a la instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX sobre el Data model e incluso aplicar cambios a los metadatos del modelo mediante las [bibliotecas cliente proporcionadas por Microsoft](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no se diferencia de cualquier otro tipo de instancia de Analysis Services.
 
 ## Operaciones de modelado compatibles
 

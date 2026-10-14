@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Tipos de modelos semánticos de Power BI
 author: Morten Lønskov
-updated: 2026-08-28
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -60,7 +60,7 @@ Tabular Editor puede trabajar con varios tipos de modelos. A continuación encon
 > En la versión de junio de 2025 de Power BI Desktop se eliminaron todas las limitaciones de modelado para las herramientas de terceros. Antes de eso, no se admitían varias operaciones de modelado. Consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations).
 
 > [!TIP]
-> Para más detalles sobre las restricciones de los modelos Direct Lake, consulta la [documentación de Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview) de Microsoft
+> Para obtener más información sobre las restricciones de los modelos Direct Lake, consulta la [documentación de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview) de Microsoft
 
 ## Tipos de modelos semánticos no compatibles
 

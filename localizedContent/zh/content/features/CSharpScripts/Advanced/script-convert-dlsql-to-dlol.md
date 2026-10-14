@@ -2,7 +2,7 @@
 uid: script-convert-dlsql-to-dlol
 title: 将 SQL 上的 Direct Lake 转换到 OneLake
 author: Daniel Otykier
-updated: 2025-06-20
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,7 +15,7 @@ applies_to:
 
 ## 脚本用途
 
-此脚本会将使用 Direct Lake on SQL (DL/SQL) 的模型转换为 Direct Lake on OneLake (DL/OL)。如 [Direct Lake 指南文章](xref:direct-lake-guidance) 所述，这只需更新模型中 Direct Lake 分区使用的共享表达式上的 M 查询，使其使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) 连接器，而不是 [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) 连接器。
+此脚本会将使用 Direct Lake on SQL (DL/SQL) 的模型转换为 Direct Lake on OneLake (DL/OL)。如 [Direct Lake 指南文章](xref:direct-lake-guidance) 所述，这只需更新模型中 Direct Lake 分区所用 Shared Expression 上的 M 查询，使其使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/powerquery-m/azurestorage-datalake) 连接器，而不是 [`Sql.Database`](https://learn.microsoft.com/powerquery-m/sql-database) 连接器。
 
 ## 先决条件
 

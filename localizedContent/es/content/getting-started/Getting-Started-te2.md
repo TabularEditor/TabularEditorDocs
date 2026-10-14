@@ -2,7 +2,7 @@
 uid: getting-started-te2
 title: Primeros pasos con Tabular Editor 2
 author: Daniel Otykier
-updated: 2021-09-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ Simplemente descarga el archivo .msi desde la [página de versiones](https://git
 Ninguno.
 
 > [!NOTE]
-> Tabular Editor usa el [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) para cargar metadatos desde archivos Model.bim o bases de datos existentes, y volver a guardarlos en ellos. Esto se incluye en el instalador .msi. Consulta la documentación oficial de Microsoft sobre [Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers).
+> Tabular Editor usa el [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) para cargar metadatos desde archivos Model.bim o bases de datos existentes, y guardarlos de nuevo en ellos. Esto se incluye en el instalador .msi. Consulta la documentación oficial de Microsoft sobre [Analysis Services Client Libraries](https://docs.microsoft.com/azure/analysis-services/analysis-services-data-providers).
 
 ## Requisitos del sistema
 

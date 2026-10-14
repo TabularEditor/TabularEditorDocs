@@ -2,7 +2,7 @@
 uid: tmdl
 title: 表格模型定义语言（TMDL）
 author: Daniel Otykier
-updated: 2023-05-22
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,5 +52,5 @@ TMDL 与 Microsoft Fabric 的 Git 集成功能完全兼容。在 Tabular Editor 
 
 # 后续步骤
 
-- [TMDL 概述（Microsoft Learn）](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview)。
-- [TMDL 入门（Microsoft Learn）](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-how-to)
+- [TMDL 概述（Microsoft Learn）](https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview)。
+- [TMDL 入门（Microsoft Learn）](https://learn.microsoft.com/analysis-services/tmdl/tmdl-how-to)

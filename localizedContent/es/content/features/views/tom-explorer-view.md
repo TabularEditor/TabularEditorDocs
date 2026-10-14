@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: Vista del Explorador TOM
 author: Morten Lønskov
-updated: 2026-09-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,7 @@ applies_to:
 
 # Uso del Explorador TOM en Tabular Editor 3
 
-El Explorador TOM es tu ventana principal para interactuar con los objetos de tu Data model. Objetos como tablas, columnas, medidas, grupos de seguridad, etc. se muestran en una estructura jerárquica. Un modelo de datos tabular se representa mediante el llamado [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), y los metadatos de su TOM son los que se muestran en el Explorador TOM.
+El Explorador TOM es tu ventana principal para interactuar con los objetos de tu Data model. Objetos como tablas, columnas, medidas, grupos de seguridad, etc. se muestran en una estructura jerárquica. Un Data model tabular se representa mediante el denominado [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), y en el Explorador TOM se muestran los metadatos de tu TOM.
 
 El Explorador TOM consta de dos áreas principales: en primer lugar, los objetos del modelo de datos y, en segundo lugar, la barra de menús, que permite filtrar y cambiar lo que se presenta en la ventana principal.
 

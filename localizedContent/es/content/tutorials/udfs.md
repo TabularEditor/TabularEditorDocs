@@ -126,9 +126,9 @@ Si llamas a esta función con la misma referencia de medida para ambos parámetr
 
 Para restringir el tipo del parámetro, que es opcional, escribe un tipo de datos antes del modo de evaluación, por ejemplo `x: INT64 VAL` o `y: TABLE EXPR`. Si se especifica un tipo, los argumentos se convierten implícitamente a ese tipo, y Tabular Editor 3 usa ese tipo en las sugerencias de autocompletado para el código que llama a la función.
 
-Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. Si llamas a una UDF de DAX con un argumento que no coincide con el tipo de su parámetro, como un valor escalar donde se espera un parámetro `TABLEREF`, el Analizador semántico informa de una advertencia o un error.
+Tabular Editor 3 valida los argumentos según los tipos de parámetro declarados. Si llamas a una UDF con un argumento que no coincide con el tipo de su parámetro, como un valor escalar cuando se espera un parámetro `TABLEREF`, el analizador semántico reporta una advertencia o un error.
 
-Para consultar la lista completa de restricciones, consulta la [especificación de Microsoft para las UDF de DAX](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions).
+Consulta la [especificación de Microsoft para las UDF](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions) para ver la lista completa de restricciones disponibles.
 
 ### Parámetros opcionales con expresiones predeterminadas
 

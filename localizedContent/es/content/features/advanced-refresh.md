@@ -2,7 +2,7 @@
 uid: advanced-refresh
 title: Cuadro de diálogo de actualización avanzada
 author: Daniel Otykier
-updated: 2026-01-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -88,7 +88,7 @@ Los perfiles de anulación almacenan configuraciones con nombre de anulaciones d
 - **Editar...**: Modifica el perfil de sustitución seleccionado.
 - **Eliminar**: Elimina el perfil de sustitución seleccionado.
 
-La definición de TMSL sigue la [especificación del comando de actualización de TMSL](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions), lo que permite sobrescribir propiedades en:
+La definición de TMSL sigue la [especificación del comando de actualización de TMSL](https://learn.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions), lo que permite sobrescribir propiedades en:
 
 - Fuentes de datos
 - Expresiones compartidas
