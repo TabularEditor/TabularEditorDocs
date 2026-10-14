@@ -2,7 +2,7 @@
 uid: connecting-to-azure-databricks
 title: Conexión a Azure Databricks
 author: David Bojsen
-updated: 2026-04-17
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ Antes de empezar, asegúrate de tener lo siguiente:
 
 Tabular Editor usa la función `Databricks.Catalogs()` de Power Query para conectarse a Databricks. Esta función admite dos implementaciones del conector:
 
-- **Implementación 2,0 (ADBC):** Usa el controlador [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview). Es la opción predeterminada en Tabular Editor 3.26.1 y versiones posteriores, y coincide con la opción predeterminada de Power BI Desktop. Los Workspaces de Databricks más recientes requieren esta implementación.
+- **Implementation 2.0 (ADBC):** Uses the [Arrow Database Connectivity](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) driver. Es la opción predeterminada en Tabular Editor 3.26.1 y versiones posteriores, y coincide con la opción predeterminada de Power BI Desktop. Los Workspaces de Databricks más recientes requieren esta implementación.
 - **Implementación 1,0 (heredada):** La implementación original del conector. Sigue funcionando en Workspaces antiguos de Databricks, pero falla en los más recientes con un error de catálogo vacío.
 
 > [!NOTE]
@@ -70,7 +70,7 @@ Esta aplicación empresarial requiere los siguientes permisos de API:
 - **API de Azure Databricks** (`2ff814a6-3304-4ab8-85cb-cd0e6f879c1d`)
   - `user_impersonation` (Delegado): permite acceder a Azure Databricks en nombre del usuario que ha iniciado sesión. Esto permite que Tabular Editor se conecte a tu Workspace de Databricks usando tus credenciales.
 
-Para más información sobre los permisos de Microsoft Entra ID, consulta la [documentación de Microsoft sobre los tipos de permisos](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent) y la [experiencia de consentimiento de aplicaciones](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-consent-experience).
+For more information about Microsoft Entra ID permissions, please refer to the [Microsoft documentation on permission types](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent) and [application consent experience](https://learn.microsoft.com/azure/active-directory/develop/application-consent-experience).
 
 > [!IMPORTANT]
 > Estos permisos son necesarios para que Tabular Editor acceda de forma segura a tus datos de Azure Databricks mediante tus credenciales de Microsoft Entra ID. Sin estos permisos, Tabular Editor no puede autenticarse correctamente en tu Workspace de Azure Databricks.
@@ -117,7 +117,7 @@ Los administradores pueden usar el siguiente enlace directo para conceder el con
 https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c&scope=https://graph.microsoft.com/offline_access%20https://graph.microsoft.com/openid%20https://graph.microsoft.com/profile%20https://graph.microsoft.com/User.Read%202ff814a6-3304-4ab8-85cb-cd0e6f879c1d/user_impersonation&redirect_uri=https://tabulareditor.com
 ```
 
-Para más información sobre el consentimiento del administrador, consulta la documentación de Microsoft sobre [Configurar cómo los usuarios dan su consentimiento a las aplicaciones](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/configure-user-consent).
+For more information about admin consent, see Microsoft's documentation on [Configure how users consent to applications](https://learn.microsoft.com/azure/active-directory/manage-apps/configure-user-consent).
 
 #### Pasos para la autenticación con Microsoft Entra ID:
 
