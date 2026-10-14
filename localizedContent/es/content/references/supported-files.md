@@ -81,7 +81,7 @@ En la raíz de las carpetas del Proyecto de Power BI se encuentra un archivo .pb
 Para obtener más información sobre las carpetas del Proyecto de Power BI, consulta [esta entrada oficial del blog de Microsoft](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/).
 
 > [!IMPORTANT]
-> Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring). Realizar cambios en los metadatos del modelo distintos de los enumerados puede hacer que el modelo deje de poder cargarse en Power BI Desktop; en ese caso, el Soporte técnico de Microsoft no podrá ayudarte.
+> El archivo de Proyecto de Power BI es el formato recomendado al usar Power BI con Tabular Editor, ya que admite la [gama más amplia de operaciones de modelado](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring). Realizar cambios en los metadatos del modelo distintos de los enumerados puede hacer que el modelo deje de poder cargarse en Power BI Desktop; en ese caso, el Soporte técnico de Microsoft no podrá ayudarte.
 
 #### Archivo de plantilla de Power BI (.pbit)
 
