@@ -155,5 +155,5 @@ SELECTCOLUMNS(
 
 - [DAX Guide：SELECTCOLUMNS](https://dax.guide/selectcolumns/)
 - [DAX Guide：RELATED](https://dax.guide/related/)
-- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
+- [Microsoft 文档：详细信息行表达式](https://learn.microsoft.com/analysis-services/tabular-models/detail-rows-expressions)
 - [SQLBI：在 Excel 数据透视表中控制钻取](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)
