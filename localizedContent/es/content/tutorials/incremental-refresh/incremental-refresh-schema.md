@@ -2,7 +2,7 @@
 uid: incremental-refresh-schema
 title: Agregar o quitar columnas en una tabla con actualización incremental
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,7 +24,7 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 se limita a los Datasets hospedados en el servicio Power BI Datasets. Para Analysis Services, se requiere un [particionamiento](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado de particiones.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita a los Datasets hospedados en el servicio Power BI Datasets. For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ---
 
