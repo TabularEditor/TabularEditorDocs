@@ -2,7 +2,7 @@
 uid: cs-scripts-and-macros
 title: C# Script 与宏简介
 author: Daniel Otykier
-updated: 2021-11-03
+updated: 2026-10-12
 ---
 
 # C# Script 与宏简介
@@ -75,7 +75,7 @@ Tabular Editor 可以自动生成引用特定对象的代码：将对象从 TOM 
 
 ![通过拖放生成对象引用](~/content/assets/images/generate-csharp-code.gif)
 
-Tabular Editor 中的大多数 TOM 对象（表、列、度量值等）公开的属性集与直接使用 AMO/TOM 客户端库时可用的属性集相同。因此，你可以参考 [Microsoft 的 AMO/TOM 文档](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet)，了解有哪些可用属性。例如，[此处](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) 提供了可用度量值属性的文档。
+Tabular Editor 中的大多数 TOM 对象（表、列、度量值等）公开的属性集与直接使用 AMO/TOM 客户端库时可用的属性集相同。 For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
 
 # 访问当前 TOM Explorer 的选中项
 
