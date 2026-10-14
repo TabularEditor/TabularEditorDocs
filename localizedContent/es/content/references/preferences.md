@@ -2,7 +2,7 @@
 uid: preferences
 title: Control de preferencias
 author: Daniel Otykier
-updated: 2026-09-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -1056,7 +1056,7 @@ Contraseña para la autenticación del proxy (se almacena cifrada).
 
 ##### _Usar credenciales predeterminadas_ (activado)
 
-Usa las credenciales actuales de Windows para la autenticación del proxy. Esto implementa el [mismo comportamiento que Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
+Usa las credenciales actuales de Windows para la autenticación del proxy. This implements the [same behavior as Power BI Desktop](https://docs.microsoft.com/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
 
 ##### _Omitir el proxy para direcciones locales_ (activado)
 
