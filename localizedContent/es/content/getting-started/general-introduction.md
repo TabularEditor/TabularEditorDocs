@@ -25,7 +25,7 @@ Un **Data model** se compone de varias tablas. Cada tabla tiene una o varias col
 - Cuando se crea un modelo tabular con Visual Studio, el JSON que representa los metadatos TOM se guarda en un archivo llamado **Model.bim**.
 - Cuando se crea un **Data model** con Power BI Desktop, los metadatos TOM se incrustan en el archivo .pbix o .pbit (ya que este formato de archivo también contiene muchos otros detalles, como definiciones de **Visual**, **Bookmark**, etc., que no están relacionados con el propio **Data model**).
 
-Using a client library called [AMO/TOM](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor is able to load and save metadata to and from this JSON based format. Además, la biblioteca cliente permite a Tabular Editor conectarse directamente a cualquier instancia de Analysis Services para obtener los metadatos del modelo desde una base de datos existente. Esto se ilustra en la figura siguiente.
+Con una biblioteca cliente llamada [AMO/TOM](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor puede cargar y guardar metadatos en este formato basado en JSON. Además, la biblioteca cliente permite a Tabular Editor conectarse directamente a cualquier instancia de Analysis Services para obtener los metadatos del modelo desde una base de datos existente. Esto se ilustra en la figura siguiente.
 
 ![Arquitectura](~/content/assets/images/architecture.png)
 
@@ -42,7 +42,7 @@ Tabular Editor puede cargar los metadatos del modelo desde las siguientes fuente
 - [6] Un modelo semántico en un Workspace de Power BI asignado a una capacidad\*
 - [7] Un Report de Power BI Desktop en modo Import/DirectQuery
 
-\*Third party tools connect to Power BI semantic models through the [XMLA endpoint](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools). Requiere una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium Per User. La lectura/escritura de XMLA está habilitada de forma predeterminada en todos los SKU de capacidad desde junio de 2025; consulta @xmla-as-connectivity si no puedes conectarte.
+\*Las herramientas de terceros se conectan a los modelos semánticos de Power BI a través del [punto de conexión XMLA](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools). Requiere una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium Per User. La lectura/escritura de XMLA está habilitada de forma predeterminada en todos los SKU de capacidad desde junio de 2025; consulta @xmla-as-connectivity si no puedes conectarte.
 
 > [!IMPORTANT]
 > Tabular Editor 2.x admite todas las fuentes 1-7 anteriores. Tabular Editor 3 solo admite algunas fuentes, en función de la [edición de Tabular Editor 3](xref:editions) que estés utilizando.
@@ -76,7 +76,7 @@ Ejemplos de **propiedades de objetos** de TOM:
 
 La mayoría de las propiedades son valores simples (texto, verdadero/falso, selecciones de una lista, también llamadas. enumeraciones), pero las propiedades también pueden hacer referencia a otros objetos (por ejemplo, la propiedad `Sort By Column` debería hacer referencia a una columna). Las propiedades también pueden ser arreglos de objetos, como la propiedad `Members` del objeto rol del modelo.
 
-Tabular Editor generally uses the same name for objects and properties as those defined in the [Microsoft.AnalysisServices.Tabular namespace](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). Si quieres saber más sobre objetos o propiedades específicas de TOM, consulta siempre la documentación del espacio de nombres. Por ejemplo, para saber qué hace la propiedad de columna "Summarize By", primero localiza la clase "Column" en la documentación de Microsoft; después, expande "Properties" y desplázate hasta "SummarizeBy". You should then get to [this article](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
+Tabular Editor suele usar los mismos nombres para los objetos y las propiedades que los definidos en el [espacio de nombres Microsoft.AnalysisServices.Tabular](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). Si quieres saber más sobre objetos o propiedades específicas de TOM, consulta siempre la documentación del espacio de nombres. Por ejemplo, para saber qué hace la propiedad de columna "Summarize By", primero localiza la clase "Column" en la documentación de Microsoft; después, expande "Properties" y desplázate hasta "SummarizeBy". A continuación, deberías ir a [este artículo](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
 
 ![SummarizeBy en la documentación de Microsoft](~/content/assets/images/asdocs-summarizyby.png)
 
