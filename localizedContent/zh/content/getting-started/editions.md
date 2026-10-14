@@ -134,7 +134,7 @@ DAX优化器的 _集成_ 在所有版本中都提供；企业版额外提供的�
 
 具体来说，[Azure AS Basic 层和 SQL Server Analysis Services 标准版不支持透视或多个分区](https://azure.microsoft.com/en-us/pricing/details/analysis-services/)，因此，使用这些功能的 SSAS/Azure AS 模型需要 TE3 企业版。 DirectQuery 完全不受你所用 Tabular Editor 3 版本的限制：能否使用它取决于托管该模型的服务器。
 
-Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
+同样，[Power BI Premium-Per-User Workspace 不支持 Direct Lake Dataset](https://learn.microsoft.com/power-bi/enterprise/directlake-overview#prerequisites)，因此使用该功能的 Power BI 模型也需要 TE3 企业版。
 
 | 模型类型            | 功能            | 桌面版                                                     | 商业版                                                     | 企业版                                                     |
 | --------------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
@@ -147,7 +147,7 @@ Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake data
 | Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 | Power BI        | Direct Lake   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
-\***注：** SQL Server 标准版 2019 之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [Learn more](https://learn.microsoft.com/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
+\***注：** SQL Server 标准版 2019 之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。[了解更多](https://learn.microsoft.com/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
 
 \*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
 
