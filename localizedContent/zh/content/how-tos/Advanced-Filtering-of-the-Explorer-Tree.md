@@ -71,7 +71,7 @@ applies_to:
 :Name.ToUpper().EndsWith("KEY")
 ```
 
-or you can supply the [StringComparison](https://docs.microsoft.com/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) argument, like:
+或者，你也可以像下面这样传入 [StringComparison](https://docs.microsoft.com/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) 参数：
 
 ```
 :Name.EndsWith("Key", StringComparison.InvariantCultureIgnoreCase)
