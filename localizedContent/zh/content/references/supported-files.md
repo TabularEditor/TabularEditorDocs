@@ -2,7 +2,7 @@
 uid: supported-files
 title: 支持的文件类型
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -81,7 +81,7 @@ Power BI Project 文件夹的根目录下有一个 .pbip 文件。该文件本�
 要详细了解 Power BI Project 文件夹，请阅读微软的这篇官方博客文章：[这篇官方博客](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/)。
 
 > [!IMPORTANT]
-> 在将 Power BI 与 Tabular Editor 搭配使用时，建议使用 Power BI Project 文件，因为它支持[最广泛的建模操作](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring)。对模型元数据进行上述列表之外的其他类型更改，可能会导致你的模型无法在 Power BI Desktop 中加载；在这种情况下，Microsoft 支持将无法为你提供帮助。
+> Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring). 对模型元数据进行上述列表之外的其他类型更改，可能会导致你的模型无法在 Power BI Desktop 中加载；在这种情况下，Microsoft 支持将无法为你提供帮助。
 
 #### Power BI 模板文件（.pbit）
 
