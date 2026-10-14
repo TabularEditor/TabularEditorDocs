@@ -25,7 +25,7 @@ Este documento describe las consideraciones de seguridad y privacidad de Tabular
 
 Microsoft respalda el uso de herramientas de terceros de la comunidad, tal y como se indica aquí: [Herramientas comunitarias y de terceros para desarrollar modelos empresariales de Power BI y Analysis Services](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
 
-Microsoft's Power BI implementation planning documentation specifically includes Tabular Editor in advanced data modeling scenarios and enterprise development: [Power BI usage scenarios: Advanced data model management](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
+La documentación de planificación de la implementación de Power BI de Microsoft menciona específicamente Tabular Editor en escenarios avanzados de modelado de datos y desarrollo en entornos empresariales: [Escenarios de uso de Power BI: Administración avanzada del Data model](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 
 ## Trust Center
 
@@ -39,7 +39,7 @@ Dicho esto, hay escenarios en los que Tabular Editor se conecta a servicios remo
 
 ### Protocolo XMLA de Analysis Services
 
-All communication with Analysis Services instances or Power BI Premium workspaces happens through the use of the [Microsoft Analysis Management Objects (AMO)](https://docs.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) client libraries, or more specifically, the [Tabular Object Model (TOM) extension for AMO](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions). Estas bibliotecas cliente las proporciona Microsoft para su redistribución en aplicaciones de terceros, como Tabular Editor. Para conocer los detalles de la licencia, consulta el [EULA de AMO](https://go.microsoft.com/fwlink/?linkid=852989).
+Toda la comunicación con instancias de Analysis Services o con los Workspaces de Power BI Premium se realiza mediante las bibliotecas cliente de [Microsoft Analysis Management Objects (AMO)](https://docs.microsoft.com/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) o, más concretamente, mediante la [extensión Tabular Object Model (TOM) para AMO](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions). Estas bibliotecas cliente las proporciona Microsoft para su redistribución en aplicaciones de terceros, como Tabular Editor. Para conocer los detalles de la licencia, consulta el [EULA de AMO](https://go.microsoft.com/fwlink/?linkid=852989).
 
 Cuando Tabular Editor se conecta a una instancia de Analysis Services (en la red local o en la nube) o a un Workspace de Power BI Premium (en la nube), esta conexión se realiza a través de las bibliotecas cliente mencionadas anteriormente. Por diseño, la biblioteca AMO se encarga de la autenticación y la autorización del usuario. Solo los usuarios con privilegios administrativos en la instancia de Analysis Services o en el Workspace de Power BI Premium pueden conectarse. Esto no difiere de lo que ocurre al usar herramientas de Microsoft como SQL Server Management Studio o SQL Server Data Tools (que usan las mismas bibliotecas cliente para conectarse).
 
