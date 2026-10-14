@@ -54,7 +54,7 @@ Como las actualizaciones son irreversibles:
 
 ### Confirma la compatibilidad del destino
 
-El soporte del nivel de compatibilidad varía según la plataforma (SSAS, Azure Analysis Services, Fabric/Power BI Premium). Si tu destino de implementación no admite el nivel seleccionado, no podrás implementar. See [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+El soporte del nivel de compatibilidad varía según la plataforma (SSAS, Azure Analysis Services, Fabric/Power BI Premium). Si tu destino de implementación no admite el nivel seleccionado, no podrás implementar. Consulta el [nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ## Actualiza el nivel de compatibilidad
 
@@ -106,7 +106,7 @@ Después de guardar, Tabular Editor muestra los objetos y propiedades que se aca
 
 ### Para implementaciones de SSAS/AAS
 
-Choose the [latest compatibility level supported by your server version](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+Elige el [nivel de compatibilidad más reciente compatible con la versión de tu servidor](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ### Para Power BI Desktop
 
@@ -125,7 +125,7 @@ WHERE [PropertyName] = 'ProviderVersion'
 
 Puede que hayas seleccionado un nivel de compatibilidad que no admite el servidor de destino. Valida la compatibilidad del servidor antes de actualizar.
 
-**Reference:** [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+**Referencia:** [nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ### ¿Puedo volver a una versión anterior?
 
