@@ -24,7 +24,7 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。 For Analysis Services custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
