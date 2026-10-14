@@ -2,7 +2,7 @@
 uid: policies
 title: Directivas
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -246,6 +246,6 @@ Si tu organización quiere seguir usando scripts, pero no a costa de permitir qu
 
 Si quieres impedir toda la funcionalidad de IA, especifica la directiva `DisableAi`. Esto evita que se cargue al inicio cualquier componente relacionado con la IA y borra cualquier configuración de clave de API almacenada previamente. Se aplica en todas las ediciones y no requiere una licencia Enterprise.
 
-A partir de la versión 3.27.0, el instalador también lee la directiva en las seis claves y con la misma precedencia, y omite por completo el componente de IA, de modo que los ensamblados de IA nunca se escriben en la carpeta de instalación de un equipo cuya directiva deshabilita la IA. Establece el valor como un `REG_DWORD` de `1`: el instalador interpreta `1` como _desactivar_ y cualquier otro valor presente como _no desactivado_, mientras que la aplicación acepta cualquier número distinto de cero. Consulta [Implementar sin las funciones de IA](xref:installation-activation-basic#deploying-without-the-ai-features) para implementar conjuntamente la selección de características y la directiva.
+From 3.27.0 the installer reads the policy too, from all six keys and with the same precedence. A new installation leaves the AI component out, and an upgrade removes it from a machine that has it. An existing installation keeps the AI files until the next upgrade, and Tabular Editor 3 doesn't load them while the policy is set. Establece el valor como un `REG_DWORD` de `1`: el instalador interpreta `1` como _desactivar_ y cualquier otro valor presente como _no desactivado_, mientras que la aplicación acepta cualquier número distinto de cero. See [Enforcing the decision with the DisableAi policy](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy) for deploying the feature selection and the policy together.
 
 Para mantener disponible AI Assistant, pero limitar lo que puede hacer, usa en su lugar las políticas Enterprise anteriores: ajusta los límites de permisos a lo que tu organización considere adecuado, bloquea el proveedor y el endpoint en un Gateway que administres y usa `McpDisabledTools` para impedir que los agentes conectados accedan a herramientas concretas.
