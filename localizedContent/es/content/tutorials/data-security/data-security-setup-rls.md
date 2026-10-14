@@ -183,6 +183,6 @@ Puedes asignar y quitar usuarios o grupos de los roles desde Tabular Editor.
 > Si tu organización usa Active Directory local con SQL Server Analysis Services, tendrás que usar la opción **Miembro de Windows AD** en lugar de **Miembro de Azure AD**.
 
 > [!NOTE]
-> Once a Power BI dataset has been published to the Power BI Service, you can also manage role members through the [Dataset Security settings](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Alternatively, you can manage role members through [SQL Server Management Studio](https://learn.microsoft.com/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (this applies to AAS/SSAS models in addition to Power BI dataset).
+> Una vez que se haya publicado un Dataset de Power BI en el Servicio de Power BI, también puedes administrar los miembros del rol a través de la [configuración de seguridad del Dataset](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Como alternativa, puedes administrar los miembros del rol a través de [SQL Server Management Studio](https://learn.microsoft.com/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (esto se aplica tanto a los modelos AAS/SSAS como al Dataset de Power BI).
 
 ---
