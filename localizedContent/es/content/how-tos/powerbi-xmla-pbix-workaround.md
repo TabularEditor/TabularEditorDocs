@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creación de un archivo PBIX a partir de un punto de conexión XMLA.
 author: Morten Lønskov
-updated: 2026-09-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ Sin embargo, con el archivo de Proyecto de Power BI, es posible crear un archivo
 ![Resumen de XMLA a PBIX](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> La solución alternativa descrita no está respaldada oficialmente por Microsoft. No hay garantía de que funcione con todos los modelos. En concreto, si has agregado particiones personalizadas u otros objetos [enumerados aquí](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), es posible que Power BI Desktop no pueda abrir correctamente el archivo siguiendo este enfoque. Consulta a continuación un script para gestionar las particiones de actualización incremental.
+> La solución alternativa descrita no está respaldada oficialmente por Microsoft. No hay garantía de que funcione con todos los modelos. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. Consulta a continuación un script para gestionar las particiones de actualización incremental.
 
 ## Paso 1: Crear y guardar un archivo de Proyecto de Power BI (.pbip) vacío
 
