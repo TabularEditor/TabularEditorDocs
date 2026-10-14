@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: 从 Power BI Desktop 迁移
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -75,7 +75,7 @@ Power BI Premium 提供 XMLA endpoint，使 Data model 开发者能够继续使�
 在此场景中，磁盘上存储的文件或文件夹结构是模型元数据的“事实来源”。这不仅支持与版本控制集成的并行开发，还支持使用 Azure DevOps 等自动化构建服务器进行持续集成/持续部署 (CI/CD)。
 
 > [!WARNING]
-> 一旦你通过 Power BI 服务的 XMLA endpoint 对 Power BI Dataset 应用更改，该 Dataset 将无法再下载为 .pbix 文件。有关详细信息，请参阅[使用 XMLA endpoint 的 Dataset 连接](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets)。
+> 一旦你通过 Power BI 服务的 XMLA endpoint 对 Power BI Dataset 应用更改，该 Dataset 将无法再下载为 .pbix 文件。 See [Dataset connectivity with the XMLA endpoint](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) for more information.
 
 使用 Tabular Editor 通过 XMLA endpoint 连接到 Dataset 时，可执行的写入操作或模型修改类型不受限制。
 
@@ -159,7 +159,7 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 
 ### 如何预览表中的数据
 
-要查看表的内容（类似于 Power BI Desktop 中的“数据”选项卡），只需右键单击表并选择“预览数据”。这会打开一个新选项卡，其中包含该表内容的预览。你可以滚动浏览表中的所有行，也可以对列进行排序或筛选。与 Power BI Desktop 不同，你可以打开任意数量的预览选项卡，并在用户界面中将它们并排排列。预览功能也适用于处于 [DirectQuery 模式](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) 的表（不过预览内容最多仅限前 100 条记录）。
+要查看表的内容（类似于 Power BI Desktop 中的“数据”选项卡），只需右键单击表并选择“预览数据”。这会打开一个新选项卡，其中包含该表内容的预览。你可以滚动浏览表中的所有行，也可以对列进行排序或筛选。与 Power BI Desktop 不同，你可以打开任意数量的预览选项卡，并在用户界面中将它们并排排列。 The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
 
 ![预览数据](~/content/assets/images/preview-data.png)
 
@@ -170,7 +170,7 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 
 ### 如何添加计算组
 
-[计算组](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) 可用于在模型的所有度量值中定义并复用修改后的 DAX 筛选语境或其他类型的业务逻辑。要使用 Tabular Editor 添加计算组，只需选择 **模型 > 新建计算组**（ALT+7）。
+[Calculation Groups](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) are useful for defining and reusing a modified DAX filter context or other type of business logic across all model measures. 要使用 Tabular Editor 添加计算组，只需选择 **模型 > 新建计算组**（ALT+7）。
 
 ![添加计算组](~/content/assets/images/add-calc-group.png)
 
