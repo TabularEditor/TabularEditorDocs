@@ -263,7 +263,7 @@ Si usa otra edición de Visual Studio 2022, la ruta puede variar ligeramente. Po
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\Roslyn
 ```
 
-The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
+El compilador que se incluye con la actualización más reciente de VS2022 admite las [características del lenguaje C# 12.0](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-12), que se pueden habilitar especificando lo siguiente como opciones del compilador:
 
 ```
 -langversion:12.0
