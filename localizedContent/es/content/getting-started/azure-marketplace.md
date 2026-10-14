@@ -18,7 +18,7 @@ Para comprar Tabular Editor a través de Azure Marketplace, necesitas:
 - Una suscripción de Azure (comprueba si ya tienes una suscripción o crea una nueva)
 - Una cuenta de Azure AD con al menos el rol de Colaborador en la suscripción de Azure
 
-Also ensure these [prerequisites](https://learn.microsoft.com/azure/cost-management-billing/manage/enable-marketplace-purchases) are met before proceeding with the purchase of Tabular Editor 3 through the Azure Marketplace.
+Asegúrate también de que se cumplan estos [requisitos previos](https://learn.microsoft.com/azure/cost-management-billing/manage/enable-marketplace-purchases) antes de continuar con la compra de Tabular Editor 3 en Azure Marketplace.
 
 ## Cómo comprar Tabular Editor 3 en Azure Marketplace
 
@@ -57,7 +57,7 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 > [!NOTE]
 > Cada edición de Tabular Editor 3 debe comprarse por separado. No puedes combinar ediciones diferentes en una sola transacción de Azure Marketplace.
 
-For more details, see: [Purchase a SaaS offer in Azure Portal](https://learn.microsoft.com/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
+Para más detalles, consulta: [Comprar una oferta SaaS en el portal de Azure](https://learn.microsoft.com/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
 
 ## Activar tu suscripción de Azure Marketplace
 
@@ -118,6 +118,6 @@ Todas las modificaciones de las suscripciones de Tabular Editor 3 adquiridas a t
 > **No se admiten los cambios a una edición inferior**: No puedes cambiar a una edición inferior ni reducir el número de usuarios durante un período de suscripción activo. Para pasar a un plan de un nivel inferior o reducir los puestos, desactiva la **Renovación automática** de tu suscripción actual y compra una nueva suscripción con la configuración que prefieras antes de que finalice el periodo actual.
 
 > [!IMPORTANT]
-> Cancelar una suscripción revoca inmediatamente el acceso a todas las licencias de esa suscripción y no se puede deshacer. Para mantener el acceso hasta el final de tu período de facturación actual, haz clic en **Editar renovación automática** y, en su lugar, desactiva la renovación automática. Los reembolsos se procesan según la política de reembolso. For more information, see [Refund policies](https://learn.microsoft.com/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
+> Cancelar una suscripción revoca inmediatamente el acceso a todas las licencias de esa suscripción y no se puede deshacer. Para mantener el acceso hasta el final de tu período de facturación actual, haz clic en **Editar renovación automática** y, en su lugar, desactiva la renovación automática. Los reembolsos se procesan según la política de reembolso. Para saber más, consulta [Políticas de reembolso](https://learn.microsoft.com/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) del Marketplace de Microsoft.
 
-For more information about managing SaaS subscriptions in Azure, see: [SaaS subscription lifecycle management](https://learn.microsoft.com/marketplace/saas-subscription-lifecycle-management)
+Para obtener más información sobre la administración de suscripciones SaaS en Azure, consulta: [Administración del ciclo de vida de suscripciones de SaaS](https://learn.microsoft.com/marketplace/saas-subscription-lifecycle-management)
