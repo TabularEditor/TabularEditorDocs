@@ -38,7 +38,7 @@ Tabular Editor 3 支持连接到 Azure Databricks，并将其用作语义模型�
 
 Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databricks。此函数支持两种连接器实现：
 
-- **Implementation 2.0 (ADBC):** Uses the [Arrow Database Connectivity](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) driver. 这是 Tabular Editor 3.26.1 及更高版本中的默认实现，也与 Power BI Desktop 使用的默认设置一致。较新的 Databricks Workspace 需要使用此实现。
+- **实现 2.0 (ADBC)：** 使用 [Arrow Database Connectivity](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 驱动程序。这是 Tabular Editor 3.26.1 及更高版本中的默认实现，也与 Power BI Desktop 使用的默认设置一致。较新的 Databricks Workspace 需要使用此实现。
 - **Implementation 1.0（旧版）：** 原始的连接器实现。它在较旧的 Databricks Workspace 中仍可运行，但在较新的 Workspace 中会因“目录为空”错误而失败。
 
 > [!NOTE]
@@ -70,7 +70,7 @@ Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databr
 - **Azure Databricks API** (`2ff814a6-3304-4ab8-85cb-cd0e6f879c1d`)
   - `user_impersonation`（委托）- 代表已登录用户访问 Azure Databricks。这使 Tabular Editor 能够使用你的凭据连接到你的 Databricks Workspace。
 
-For more information about Microsoft Entra ID permissions, please refer to the [Microsoft documentation on permission types](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent) and [application consent experience](https://learn.microsoft.com/azure/active-directory/develop/application-consent-experience).
+有关 Microsoft Entra ID 权限的更多信息，请参阅 [Microsoft 关于权限类型的文档](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent) 和 [应用程序同意体验](https://learn.microsoft.com/azure/active-directory/develop/application-consent-experience)。
 
 > [!IMPORTANT]
 > 这些权限是 Tabular Editor 通过你的 Microsoft Entra ID 凭据安全访问 Azure Databricks 数据所必需的。如果没有这些权限，Tabular Editor 将无法对你的 Azure Databricks Workspace 正确进行身份验证。
@@ -117,7 +117,7 @@ For more information about Microsoft Entra ID permissions, please refer to the [
 https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c&scope=https://graph.microsoft.com/offline_access%20https://graph.microsoft.com/openid%20https://graph.microsoft.com/profile%20https://graph.microsoft.com/User.Read%202ff814a6-3304-4ab8-85cb-cd0e6f879c1d/user_impersonation&redirect_uri=https://tabulareditor.com
 ```
 
-For more information about admin consent, see Microsoft's documentation on [Configure how users consent to applications](https://learn.microsoft.com/azure/active-directory/manage-apps/configure-user-consent).
+有关管理员同意的更多信息，请参阅 Microsoft 关于 [配置用户如何同意应用程序](https://learn.microsoft.com/azure/active-directory/manage-apps/configure-user-consent) 的文档。
 
 #### Microsoft Entra ID 身份验证步骤：
 
