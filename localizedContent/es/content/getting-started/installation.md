@@ -110,60 +110,60 @@ Sin interfaz de usuario, sin reinicio:
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
 ```
 
-| MSI feature   | Se muestra en el instalador como | Descripción                                                     | Activar la instalación                                                                                                |
-| ------------- | -------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `MainFeature` | Tabular Editor 3                 | Aplicación principal de Tabular Editor 3                        | Yes (required)                                                                                     |
-| `AIAssistant` | Funciones de IA                  | The @ai-assistant and the @mcp-server | Yes, from 3.27.0. Earlier versions install it only when it's selected |
+| Funcionalidad MSI | Se muestra en el instalador como | Descripción                                                 | Activar la instalación                                                                                                                        |
+| ----------------- | -------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MainFeature`     | Tabular Editor 3                 | Aplicación principal de Tabular Editor 3                    | Sí (obligatorio)                                                                                                           |
+| `AIAssistant`     | Funciones de IA                  | El @ai-assistant y el @mcp-server | Sí, a partir de la versión 3.27.0. Las versiones anteriores solo lo instalan si se selecciona |
 
 > [!IMPORTANT]
-> From 3.27.0, a new installation includes the **AI features** component unless you exclude it. If your organization doesn't allow the AI Assistant or the MCP server, exclude the component and set the `DisableAi` policy as described below.
+> A partir de la versión 3.27.0, una nueva instalación incluye el componente de **funciones de IA** a menos que lo excluyas. Si tu organización no permite el Asistente de IA ni el servidor MCP, excluye el componente y configura la directiva `DisableAi` como se describe a continuación.
 
 ### Desplegar sin las funciones de IA
 
-Leave `AIAssistant` out of `ADDLOCAL` to install Tabular Editor 3 without the AI features:
+No incluyas `AIAssistant` en `ADDLOCAL` para instalar Tabular Editor 3 sin las funciones de IA:
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
 ```
 
-Run the package with `REMOVE` to remove the component from machines that already have it:
+Ejecuta el paquete con `REMOVE` para quitar el componente de los equipos que ya lo tienen:
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
 ```
 
-Without the component, the AI assemblies aren't in the installation folder, the **AI Assistant** pane and the MCP server are absent from the application and no requests go to a model provider. Other features are unaffected.
+Sin el componente, los ensamblados de IA no están en la carpeta de instalación; el panel del **Asistente de IA** y el servidor MCP no están disponibles en la aplicación, y no se envía ninguna solicitud a un proveedor de modelos. Las demás funciones no se ven afectadas.
 
-To change the selection on a single machine, run the installer again and select **Modify** in the maintenance dialog.
+Para cambiar la selección en un solo equipo, vuelve a ejecutar el instalador y selecciona **Modificar** en el cuadro de diálogo de mantenimiento.
 
 > [!NOTE]
 > Cuando uses `ADDLOCAL`, incluye `MainFeature` en la lista junto con cualquier característica opcional. Si especificas solo `AIAssistant` sin `MainFeature`, la instalación quedará incompleta.
 
-### Upgrades and the AI features component
+### Actualizaciones y el componente de funciones de IA
 
-When you install a newer version of the same package over an existing installation, the installer keeps the feature selection the machine already has. This applies to interactive and silent installations. A machine deployed without the AI features before 3.27.0 stays without them after the upgrade, and a machine where the AI features were selected keeps them.
+Cuando instalas una versión más reciente del mismo paquete sobre una instalación existente, el instalador conserva la selección de funciones que ya tiene el equipo. Esto se aplica a las instalaciones interactivas y silenciosas. Un equipo implementado sin las funciones de IA antes de la versión 3.27.0 seguirá sin ellas después de la actualización, y un equipo en el que se seleccionaron las funciones de IA las conservará.
 
-In these cases the installer applies the default selection or the selection on the command line:
+En estos casos, el instalador aplica la selección predeterminada o la selección indicada en la línea de comandos:
 
-| Situation                                                                                                                                                            | Resultado                                                                                                                                                                                         |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The command line sets `ADDLOCAL`, `REMOVE` or another feature property                                                                                               | The command line sets the selection. `ADDLOCAL=MainFeature` removes the AI features from machines that have them, and `ADDLOCAL=ALL` installs them on machines that don't         |
-| The deployment uninstalls the earlier version before it installs the new one, for example an Intune supersedence set to uninstall                                    | The installation is new and includes the AI features unless the command line excludes them                                                                                                        |
-| The package targets a different runtime than the installed one, for example the .NET 10 package on a machine with the .NET 8 package | The .NET 8 and .NET 10 packages are separate products. The installation is new and includes the AI features unless the command line excludes them |
+| Situación                                                                                                                                                               | Resultado                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| La línea de comandos establece `ADDLOCAL`, `REMOVE` u otra propiedad de característica                                                                                  | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` quita las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen         |
+| La implementación desinstala la versión anterior antes de instalar la nueva; por ejemplo, una sustitución de Intune configurada para desinstalar                        | La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya                                                                                                                |
+| El paquete usa un entorno de ejecución distinto del instalado; por ejemplo, el paquete de .NET 10 en un equipo con el paquete de .NET 8 | Los paquetes de .NET 8 y .NET 10 son productos independientes. La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya |
 
-The `DisableAi` policy overrides the selection in every case.
+La directiva `DisableAi` prevalece sobre la selección en todos los casos.
 
-### Enforcing the decision with the DisableAi policy
+### Imponer la decisión con la directiva DisableAi
 
-A user who runs the installer gets the default selection, which includes the AI features. Set the `DisableAi` @policies to `1` under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` to keep the AI features off every installation on the machine. Tabular Editor 3 reads the policy at startup and turns off the AI Assistant and the MCP server.
+Un usuario que ejecuta el instalador obtiene la selección predeterminada, que incluye las funciones de IA. Establece `DisableAi` @policies en `1` bajo `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` para mantener desactivadas las funciones de IA en todas las instalaciones del equipo. Tabular Editor 3 lee la directiva al iniciarse y desactiva el Asistente de IA y el servidor MCP.
 
-From 3.27.0 the installer reads the policy as well:
+A partir de la versión 3.27.0, el instalador también lee la directiva:
 
-- a new installation leaves out the AI features component, and the installer doesn't show it
-- an upgrade removes the component from a machine that has it
-- an existing installation keeps the AI files until the next upgrade. Tabular Editor 3 doesn't load them while the policy is set
+- una nueva instalación omite el componente de funciones de IA y el instalador no lo muestra
+- una actualización elimina el componente de un equipo que lo tiene
+- una instalación existente conserva los archivos de IA hasta la siguiente actualización. Tabular Editor 3 no los carga mientras la directiva esté establecida
 
-A deployment tool that runs as the local system account doesn't read the `HKEY_CURRENT_USER` policies of the machine's users. Set the policy under `HKEY_LOCAL_MACHINE` for the installer to read it in a silent deployment.
+Una herramienta de implementación que se ejecuta con la cuenta del sistema local no lee las directivas de `HKEY_CURRENT_USER` de los usuarios del equipo. Configura la directiva en `HKEY_LOCAL_MACHINE` para que el instalador la lea en una implementación desatendida.
 
 ### Nombres de paquetes y otras opciones de MSI
 
