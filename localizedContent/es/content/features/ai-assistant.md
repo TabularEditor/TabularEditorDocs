@@ -188,7 +188,7 @@ En el marco de tus [concesiones de permisos](#permissions-and-consent), el Asist
 
 - **Exploración del modelo**: consulta los metadatos del modelo, incluidas tablas, columnas, medidas, relaciones y sus propiedades
 - **Redacción de consultas DAX**: genera consultas DAX, las ejecuta en tu modelo en modo conectado y devuelve los conjuntos de resultados en el chat
-- **Generación de C# Scripts**: crea C# Scripts para realizar cambios en el modelo. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model)
+- **Generación de C# Scripts**: crea C# Scripts para realizar cambios en el modelo. Según tu configuración, el asistente abre el script en una ventana del editor para que lo ejecutes, o lo ejecuta él mismo; consulta [Permitir que el asistente cambie tu modelo](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**: ejecuta el análisis de BPA, lista las infracciones de las reglas y crea o modifica reglas de BPA
 - **Analizador VertiPaq**: consulta estadísticas de uso de memoria y cardinalidad de columnas
 - **Acceso a documentos**: lee y modifica documentos abiertos: consultas DAX, C# Scripts y scripts DAX
@@ -209,7 +209,7 @@ La configuración está desactivada de forma predeterminada y no está disponibl
 ### Qué ocurre cuando el asistente ejecuta un script
 
 - Si **Vista previa de cambios** está activada (de forma predeterminada), aparece el [cuadro de diálogo de vista previa](xref:csharp-scripts#run-c-scripts-with-preview) antes de que se apliquen los cambios. **Cancelar** revierte los cambios y envía un Report del rechazo al asistente. Si **Vista previa de cambios** está desactivada, los cambios se aplican sin mostrar ningún cuadro de diálogo.
-- Los cambios del script quedan registrados como una única entrada de deshacer: **C# script (AI Assistant)**. Focus stays in the chat box, where **Ctrl+Z** doesn't undo model changes. To undo the whole script, click the TOM Explorer and press **Ctrl+Z**, or select **Undo C# script (AI Assistant)** in the **Edit** menu.
+- Los cambios del script quedan registrados como una única entrada de deshacer: **C# script (AI Assistant)**. El foco permanece en el cuadro de chat, donde **Ctrl+Z** no deshace los cambios del modelo. Para deshacer el C# Script completo, haz clic en el Explorador TOM y pulsa **Ctrl+Z**, o selecciona **Deshacer C# Script (Asistente de IA)** en el menú **Editar**.
 - Si el script falla a mitad de la ejecución, el modelo no se modifica y el asistente genera un Report del error.
 - No se ejecuta ningún script que acceda a archivos, la red o ensamblados externos. Se abre como un artefacto de script con la insignia **Inseguro** y **Ejecutar** deshabilitado, y la respuesta del asistente indica qué utilizaba el script.
 
