@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: 添加度量值和其他计算对象
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -111,7 +111,7 @@ TOM Explorer 中的所有对象都可以使用 Tabular Editor 进行复制和粘
 - **编辑 > 重做** (CTRL+Y)
 
 > [!NOTE]
-> Tabular Editor 3 中的所有文本编辑器都有各自的撤销/重做历史记录，因此如果光标当前位于某个文本编辑器中，键盘快捷键将撤销/重做该编辑器中的输入操作。你可以使用 **编辑** 菜单中的选项在模型级别执行撤销/重做，或者点击用户界面中的其他元素（例如 TOM Explorer）来停用当前文本编辑器。
+> Text editors in Tabular Editor 3 have their own undo history. When the cursor is in a text editor, **Ctrl+Z** and **Ctrl+Y** undo and redo typing in that editor. To undo a model change, click the TOM Explorer first, or select the model undo entry in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 
 # 导航
 
