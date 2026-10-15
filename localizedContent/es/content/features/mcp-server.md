@@ -201,7 +201,7 @@ Con **Model metadata > Write**, un agente modifica tu modelo creando un [C# Scri
 
 Un script puede hacer todo lo que permite la API de scripting de C#; por ejemplo, agregar medidas, columnas, grupos de cálculo, perspectivas, traducciones, relaciones y políticas de actualización, o renombrar y dar formato a objetos de forma masiva. Un script ejecutado por un agente tiene estas propiedades:
 
-- sus cambios aparecen como una sola entrada de deshacer, **C# Script (MCP)**, y **Ctrl+Z** deshace todo el script. Ver @undo-redo.
+- sus cambios aparecen como una sola entrada de deshacer, **C# Script (MCP)**, y **Ctrl+Z** deshace todo el script. If a document has focus, **Ctrl+Z** undoes typing in the document. Click the TOM Explorer first, or select **Undo C# script (MCP)** in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 - si el script genera una excepción a mitad del proceso, se revierten todos sus cambios.
 - el agente recibe una lista de todos los objetos que el script agregó, cambió o quitó, además de cualquier salida que haya generado el script.
 - los mensajes de `Output`, `Info`, `Warning` o `Error` se devuelven al agente como parte del resultado y no se abre ningún cuadro de diálogo.
