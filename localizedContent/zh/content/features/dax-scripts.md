@@ -29,7 +29,7 @@ applies_to:
 
 通过 DAX脚本编辑对象与通过 **表达式编辑器** 编辑略有不同。使用后者时，当你切换到其他对象时，改动会立即应用。但在 DAX脚本中，改动不会自动应用，只有在你手动使用 **脚本 > 应用**（F5）选项后才会生效。如果你已连接到某个 Analysis Services 实例，可以使用 **脚本 > 应用并同步**（SHIFT+F5）选项，同时应用改动并将更新后的模型元数据保存到 Analysis Services。
 
-To undo or redo the changes a DAX script applied, click the TOM Explorer and press **Ctrl+Z** or **Ctrl+Y**. In the script editor, these shortcuts undo and redo typing. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+要撤销或重做 DAX 脚本所做的更改，请单击 TOM Explorer，然后按 **Ctrl+Z** 或 **Ctrl+Y**。在脚本编辑器中，这些快捷键用于撤销和重做键入内容。请参阅 [文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。
 
 ## 多个 DAX脚本
 
