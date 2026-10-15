@@ -46,20 +46,20 @@ applies_to:
 | Buscar           | Ctrl+F |
 | Reemplazar       | Ctrl+H |
 
-## Shortcuts that depend on focus
+## Atajos que dependen del foco
 
-Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view.
+Algunos atajos ejecutan un comando diferente según la parte de la ventana que tenga el foco. Un control de texto puede ser un editor de documentos, el **Editor de expresiones** o una celda que estés editando en la vista **Propiedades**.
 
-| Atajo de teclado                     | Text control has focus        | TOM Explorer has focus                  |
-| ------------------------------------ | ----------------------------- | --------------------------------------- |
-| **Ctrl+Z** / **Ctrl+Y**              | undo or redo typing           | undo or redo the last model change      |
-| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cut, copy or paste text       | cut, copy or paste the selected objects |
-| **Delete**                           | delete the selected text      | delete the selected objects             |
-| **Ctrl+A**                           | select all text               | select all objects at the current level |
-| **Ctrl+D**                           | duplicate the current line    | duplicate the selected objects          |
-| **Ctrl+U**                           | uncomment lines in a document | make the selected objects visible       |
+| Atajo de teclado                     | El control de texto tiene el foco  | El Explorador TOM tiene el foco                  |
+| ------------------------------------ | ---------------------------------- | ------------------------------------------------ |
+| **Ctrl+Z** / **Ctrl+Y**              | deshacer o rehacer lo escrito      | deshacer o rehacer el último cambio del modelo   |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cortar, copiar o pegar texto       | cortar, copiar o pegar los objetos seleccionados |
+| **Delete**                           | eliminar el texto seleccionado     | eliminar los objetos seleccionados               |
+| **Ctrl+A**                           | seleccionar todo el texto          | seleccionar todos los objetos del nivel actual   |
+| **Ctrl+D**                           | duplicar la línea actual           | duplicar los objetos seleccionados               |
+| **Ctrl+U**                           | descomentar líneas en un documento | hacer visibles los objetos seleccionados         |
 
-**Ctrl+S** saves the document that has focus, such as a DAX query or a diagram. When the TOM Explorer has focus, **Ctrl+S** saves the model. To undo a model change from a text control, see @undo-redo.
+**Ctrl+S** guarda el documento que tiene el foco, como una consulta DAX o un diagrama. Cuando el Explorador TOM tiene el foco, **Ctrl+S** guarda el modelo. Para deshacer un cambio del modelo desde un control de texto, consulta @undo-redo.
 
 ## Modelado de Data model
 
