@@ -111,7 +111,7 @@ Cada vez que haces un cambio en un objeto o una propiedad en Tabular Editor, se 
 - **Editar > Rehacer** (CTRL+Y)
 
 > [!NOTE]
-> Text editors in Tabular Editor 3 have their own undo history. When the cursor is in a text editor, **Ctrl+Z** and **Ctrl+Y** undo and redo typing in that editor. To undo a model change, click the TOM Explorer first, or select the model undo entry in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+> Los editores de texto de Tabular Editor 3 tienen su propio historial de deshacer. Cuando el cursor está en un editor de texto, **Ctrl+Z** y **Ctrl+Y** deshacen y rehacen lo escrito en ese editor. Para deshacer un cambio en el modelo, haga clic primero en el Explorador TOM o seleccione la entrada de deshacer del modelo en el menú **Editar**. Consulte [Deshacer en los editores de texto](xref:undo-redo#undo-in-text-editors).
 
 # Navegación
 
