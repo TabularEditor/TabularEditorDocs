@@ -201,7 +201,7 @@ url = "http://127.0.0.1:42100/"
 
 脚本可以执行 C# Script API 支持的任何操作，例如添加度量值、列、计算组、透视、翻译、关系和刷新策略，或批量重命名并设置对象格式。由代理运行的脚本具有以下特性：
 
-- 其所有更改会合并为一条名为 **C# Script (MCP)** 的撤销记录；按 **Ctrl+Z** 会撤销整个脚本。 If a document has focus, **Ctrl+Z** undoes typing in the document. Click the TOM Explorer first, or select **Undo C# script (MCP)** in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+- 其所有更改会合并为一条名为 **C# Script (MCP)** 的撤销记录；按 **Ctrl+Z** 会撤销整个脚本。当文档处于焦点时，按 **Ctrl+Z** 可撤销在文档中输入的内容。请先单击 TOM Explorer，或在 **Edit** 菜单中选择 **Undo C# Script (MCP)**。请参阅[文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。
 - 如果脚本执行到一半时引发异常，其所有更改都会回滚。
 - 代理会收到一个列表，其中包含脚本新增、更改或删除的每个对象，以及脚本输出的所有内容。
 - 来自 `Output`、`Info`、`Warning` 或 `Error` 的信息会作为结果的一部分返回给代理，且不会弹出任何对话框。
