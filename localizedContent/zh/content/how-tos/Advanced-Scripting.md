@@ -28,7 +28,7 @@ Tabular Editor 的界面旨在让你在构建表格模型时，轻松完成大�
 
 `Model` 对象封装了 [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) 类，对外公开其部分属性，并额外提供一些方法和属性，以便更轻松地操作翻译、透视以及对象集合。其所有后代对象同样如此，例如 Table、度量值、Column 等，都有对应的封装对象。 Tabular Editor 封装库中对象、属性和方法的完整列表，请参阅 <xref:api-index>。
 
-通过该封装层进行操作的主要优势是：所有更改都可以在 Tabular Editor UI 中撤销。 Press **Ctrl+Z** after executing a script to undo all changes made by the script. In Tabular Editor 3, focus stays in the script editor after the script runs, so click the TOM Explorer before you press **Ctrl+Z**. See [Undo in text editors](xref:undo-redo#undo-in-text-editors). 此外，该封装还提供了便捷方法，可将许多常见任务简化为一行代码。下面我们会给出一些示例。我们假设读者已对 C# 和 LINQ 有一定了解，因此本文不会介绍这些内容；Tabular Editor 脚本功能中与之相关的部分也不在本文范围内。即使你不熟悉 C# 和 LINQ，也应该能看懂下面的示例。
+通过该封装层进行操作的主要优势是：所有更改都可以在 Tabular Editor UI 中撤销。执行脚本后，按 **Ctrl+Z** 可撤销脚本所做的所有更改。在 Tabular Editor 3 中，脚本运行后焦点会停留在脚本编辑器中，因此请在按 **Ctrl+Z** 之前先单击 TOM Explorer。参见 [文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。此外，该封装还提供了便捷方法，可将许多常见任务简化为一行代码。下面我们会给出一些示例。我们假设读者已对 C# 和 LINQ 有一定了解，因此本文不会介绍这些内容；Tabular Editor 脚本功能中与之相关的部分也不在本文范围内。即使你不熟悉 C# 和 LINQ，也应该能看懂下面的示例。
 
 ## 设置对象属性
 
