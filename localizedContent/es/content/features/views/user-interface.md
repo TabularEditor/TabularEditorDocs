@@ -143,13 +143,13 @@ El menú **Editar** permite editar el documento activo o los metadatos del model
 
 ![Menú Editar](~/content/assets/images/edit-menu.png)
 
-- **Undo**: undoes the last change in the part of the window that has focus. In a text control, such as a document or the **Expression Editor**, it undoes typing and reads **Undo typing**. Elsewhere, it undoes the last change to the model metadata. **Ctrl+Z** runs this command.
-- **Redo**: redoes the last undone change, following the same rules as **Undo**. **Ctrl+Y** runs this command.
-- **Undo** / **Redo** followed by the name of a model change, for example **Undo C# script (MCP)**: appear only when a text control has focus, and undo or redo the last change to the model metadata. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+- **Deshacer**: deshace el último cambio en la parte de la ventana que tiene el foco. En un control de texto, como un documento o el **Editor de expresiones**, deshace la escritura y se muestra como **Deshacer escritura**. En otros casos, deshace el último cambio en los metadatos del modelo. **Ctrl+Z** ejecuta este comando.
+- **Rehacer**: rehace el último cambio deshecho, siguiendo las mismas reglas que **Deshacer**. **Ctrl+Y** ejecuta este comando.
+- **Deshacer** / **Rehacer** seguidos del nombre de un cambio del modelo, por ejemplo **Deshacer C# Script (MCP)**: solo aparecen cuando un control de texto tiene el foco y deshacen o rehacen el último cambio en los metadatos del modelo. Consulta [Deshacer en editores de texto](xref:undo-redo#undo-in-text-editors).
 - **Buscar**: abre el cuadro de diálogo "Buscar y reemplazar" en la pestaña "Buscar". Consulta [Buscar](xref:find-replace#find).
 - **Reemplazar**: abre el cuadro de diálogo "Buscar y reemplazar" en la pestaña "Reemplazar". Consulta [Reemplazar](xref:find-replace#replace).
-- **Cut / Copy / Paste**: when a text control has focus, these apply to the selected text. When the TOM Explorer has focus, they apply to the selected objects. Por ejemplo, para duplicar varias medidas, selecciónalas con **Mayús** o **Ctrl** en el Explorador TOM y pulsa **Ctrl+C** y, a continuación, **Ctrl+V**.
-- **Delete**: deletes the selected text when a text control has focus, or the selected objects when the TOM Explorer has focus.
+- **Cortar / Copiar / Pegar**: cuando un control de texto tiene el foco, se aplican al texto seleccionado. Cuando el Explorador TOM tiene el foco, se aplican a los objetos seleccionados. Por ejemplo, para duplicar varias medidas, selecciónalas con **Mayús** o **Ctrl** en el Explorador TOM y pulsa **Ctrl+C** y, a continuación, **Ctrl+V**.
+- **Eliminar**: elimina el texto seleccionado cuando un control de texto tiene el foco, o los objetos seleccionados cuando el Explorador TOM tiene el foco.
 
 > [!NOTE]
 > Solo aparece una confirmación de eliminación cuando hay varios objetos seleccionados o cuando otros objetos dependen de los que eliminas. **Deshacer** (**Ctrl+Z**) restaura los objetos eliminados.
