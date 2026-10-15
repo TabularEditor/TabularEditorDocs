@@ -15,16 +15,16 @@ applies_to:
 
 Presiona **Ctrl+Z** para deshacer un cambio y **Ctrl+Y** para rehacerlo. La pila de deshacer no tiene límite de tamaño y se vacía cuando cargas otro modelo, ya sea desde un archivo o desde una base de datos. Una operación que cambia muchos objetos, como arrastrar una carpeta, un cambio de nombre por lotes o una corrección del Best Practice Analyzer (BPA), cuenta como un solo paso de deshacer.
 
-## Undo in text editors
+## Deshacer en editores de texto
 
-In Tabular Editor 3, **Ctrl+Z** and **Ctrl+Y** act on the part of the window that has focus. When focus is in a text control, the shortcuts undo and redo typing in that control. Text controls include DAX query, DAX script and C# script documents, the **Expression Editor** and a cell you're editing in the **Properties** view. Each text control has its own undo history, separate from the model undo stack. When focus is in the TOM Explorer or another view, the shortcuts undo and redo model changes. In the AI Assistant chat box, **Ctrl+Z** and **Ctrl+Y** don't undo or redo model changes.
+En Tabular Editor 3, **Ctrl+Z** y **Ctrl+Y** actúan sobre la parte de la ventana que tiene el foco. Cuando el foco está en un control de texto, estos atajos deshacen y rehacen lo escrito en ese control. Los controles de texto incluyen los documentos de consulta DAX, los documentos de script DAX y de **C# Script**, el **Editor de expresiones** y cualquier celda que estés editando en la vista de **Propiedades**. Cada control de texto tiene su propio historial de deshacer, independiente de la pila de deshacer del modelo. Cuando el foco está en el Explorador TOM o en otra vista, los atajos deshacen y rehacen los cambios del modelo. En el cuadro de chat de AI Assistant, **Ctrl+Z** y **Ctrl+Y** no deshacen ni rehacen los cambios del modelo.
 
-Focus stays in the script document after you run a C# script or apply a DAX script. Pressing **Ctrl+Z** there undoes typing in the script. If the script text was pasted or inserted in one step, **Ctrl+Z** removes all of it, and **Ctrl+Y** restores it.
+El foco permanece en el documento de script después de ejecutar un C# Script o aplicar un script DAX. Al pulsar **Ctrl+Z** allí, se deshace lo escrito en el script. Si el texto del script se pegó o insertó en un solo paso, **Ctrl+Z** lo elimina por completo y **Ctrl+Y** lo restaura.
 
-To undo a model change while a text control or the AI Assistant chat box has focus, do one of the following:
+Para deshacer un cambio en el modelo mientras un control de texto o el cuadro de chat de AI Assistant tiene el foco, haz una de las siguientes opciones:
 
-- click the TOM Explorer, then press **Ctrl+Z**
-- open the **Edit** menu and select the entry named after the last model change, such as **Undo C# script (MCP)**. When a text control has focus, this entry appears at the top of the menu, above **Undo typing**.
+- haz clic en el Explorador TOM y, después, pulsa **Ctrl+Z**
+- abre el menú **Editar** y selecciona la opción que lleva el nombre del último cambio del modelo, como **Deshacer C# Script (MCP)**. Cuando un control de texto tiene el foco, esta entrada aparece en la parte superior del menú, por encima de **Deshacer escritura**.
 
 ## Eliminar objetos
 
