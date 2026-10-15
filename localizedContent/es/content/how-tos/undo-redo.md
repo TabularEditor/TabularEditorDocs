@@ -2,7 +2,7 @@
 uid: undo-redo
 title: Soporte para deshacer y rehacer
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,6 +14,17 @@ applies_to:
 # Soporte para deshacer y rehacer
 
 Presiona **Ctrl+Z** para deshacer un cambio y **Ctrl+Y** para rehacerlo. La pila de deshacer no tiene límite de tamaño y se vacía cuando cargas otro modelo, ya sea desde un archivo o desde una base de datos. Una operación que cambia muchos objetos, como arrastrar una carpeta, un cambio de nombre por lotes o una corrección del Best Practice Analyzer (BPA), cuenta como un solo paso de deshacer.
+
+## Undo in text editors
+
+In Tabular Editor 3, **Ctrl+Z** and **Ctrl+Y** act on the part of the window that has focus. When focus is in a text control, the shortcuts undo and redo typing in that control. Text controls include DAX query, DAX script and C# script documents, the **Expression Editor** and a cell you're editing in the **Properties** view. Each text control has its own undo history, separate from the model undo stack. When focus is in the TOM Explorer or another view, the shortcuts undo and redo model changes. In the AI Assistant chat box, **Ctrl+Z** and **Ctrl+Y** don't undo or redo model changes.
+
+Focus stays in the script document after you run a C# script or apply a DAX script. Pressing **Ctrl+Z** there undoes typing in the script. If the script text was pasted or inserted in one step, **Ctrl+Z** removes all of it, and **Ctrl+Y** restores it.
+
+To undo a model change while a text control or the AI Assistant chat box has focus, do one of the following:
+
+- click the TOM Explorer, then press **Ctrl+Z**
+- open the **Edit** menu and select the entry named after the last model change, such as **Undo C# script (MCP)**. When a text control has focus, this entry appears at the top of the menu, above **Undo typing**.
 
 ## Eliminar objetos
 
