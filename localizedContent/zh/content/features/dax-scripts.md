@@ -2,7 +2,7 @@
 uid: dax-scripts
 title: DAX脚本
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -29,7 +29,7 @@ applies_to:
 
 通过 DAX脚本编辑对象与通过 **表达式编辑器** 编辑略有不同。使用后者时，当你切换到其他对象时，改动会立即应用。但在 DAX脚本中，改动不会自动应用，只有在你手动使用 **脚本 > 应用**（F5）选项后才会生效。如果你已连接到某个 Analysis Services 实例，可以使用 **脚本 > 应用并同步**（SHIFT+F5）选项，同时应用改动并将更新后的模型元数据保存到 Analysis Services。
 
-你可以使用常用的键盘快捷键（Ctrl+Z / Ctrl+Y）撤销/重做在 DAX脚本里做的改动。
+To undo or redo the changes a DAX script applied, click the TOM Explorer and press **Ctrl+Z** or **Ctrl+Y**. In the script editor, these shortcuts undo and redo typing. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 
 ## 多个 DAX脚本
 
