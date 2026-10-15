@@ -46,20 +46,20 @@ applies_to:
 | 查找 | Ctrl+F |
 | 替换 | Ctrl+H |
 
-## Shortcuts that depend on focus
+## 与焦点位置相关的快捷键
 
-Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view.
+某些快捷键会根据窗口中当前有焦点的部分执行不同的命令。文本控件包括文档编辑器、**表达式编辑器**，或在 **属性**视图中正在编辑的单元格。
 
-| 快捷键                                  | Text control has focus        | TOM Explorer has focus                  |
-| ------------------------------------ | ----------------------------- | --------------------------------------- |
-| **Ctrl+Z** / **Ctrl+Y**              | undo or redo typing           | undo or redo the last model change      |
-| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cut, copy or paste text       | cut, copy or paste the selected objects |
-| **Delete**                           | delete the selected text      | delete the selected objects             |
-| **Ctrl+A**                           | select all text               | select all objects at the current level |
-| **Ctrl+D**                           | duplicate the current line    | duplicate the selected objects          |
-| **Ctrl+U**                           | uncomment lines in a document | make the selected objects visible       |
+| 快捷键                                  | 焦点在文本控件上   | 焦点在 TOM Explorer 上 |
+| ------------------------------------ | ---------- | ------------------ |
+| **Ctrl+Z** / **Ctrl+Y**              | 撤销或重做键入内容  | 撤销或重做上一次模型更改       |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | 剪切、复制或粘贴文本 | 剪切、复制或粘贴所选对象       |
+| **Delete**                           | 删除所选文本     | 删除所选对象             |
+| **Ctrl+A**                           | 全选文本       | 选择当前层级的所有对象        |
+| **Ctrl+D**                           | 复制当前行      | 复制所选对象             |
+| **Ctrl+U**                           | 取消注释文档中的各行 | 使所选对象可见            |
 
-**Ctrl+S** saves the document that has focus, such as a DAX query or a diagram. When the TOM Explorer has focus, **Ctrl+S** saves the model. To undo a model change from a text control, see @undo-redo.
+**Ctrl+S** 会保存当前有焦点的文档，例如 DAX 查询或关系图。当 TOM Explorer 获得焦点时，按下 **Ctrl+S** 即可保存模型。若要撤销通过文本控件对模型所做的更改，请参阅 @undo-redo。
 
 ## Data model 建模
 
