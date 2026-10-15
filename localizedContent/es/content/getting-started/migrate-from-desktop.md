@@ -153,7 +153,7 @@ Para crear un Script DAX basado en medidas existentes, solo tienes que seleccion
 
 Puedes agregar o modificar propiedades como `Description`, `FormatString`, `Visible`, `DetailRows` y otras directamente en el script.
 
-Pulsa F5 para aplicar el script al Data model. Ten en cuenta que, a diferencia del **Editor de expresiones**, al navegar a otro objeto no se aplicarán automáticamente los cambios realizados en el script. To roll back the changes a DAX script applied, click the TOM Explorer and press **Ctrl+Z**. In the script editor, **Ctrl+Z** undoes typing.
+Pulsa F5 para aplicar el script al Data model. Ten en cuenta que, a diferencia del **Editor de expresiones**, al navegar a otro objeto no se aplicarán automáticamente los cambios realizados en el script. Para deshacer los cambios aplicados por un script DAX, haz clic en el Explorador TOM y pulsa **Ctrl+Z**. En el editor de scripts, **Ctrl+Z** deshace lo que has escrito.
 
 Consulta @dax-script-introduction para obtener más información.
 
