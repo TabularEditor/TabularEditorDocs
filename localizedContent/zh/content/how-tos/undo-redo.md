@@ -15,16 +15,16 @@ applies_to:
 
 按 **Ctrl+Z** 撤销更改，按 **Ctrl+Y** 重做。撤销栈没有大小限制；当你从文件或数据库加载另一个模型时，撤销栈会被清空。一次会更改多个对象的操作（例如拖动文件夹、批量重命名或 Best Practice Analyzer (BPA) 修复）只算一个撤销步骤。
 
-## Undo in text editors
+## 文本编辑器中的撤销
 
-In Tabular Editor 3, **Ctrl+Z** and **Ctrl+Y** act on the part of the window that has focus. When focus is in a text control, the shortcuts undo and redo typing in that control. Text controls include DAX query, DAX script and C# script documents, the **Expression Editor** and a cell you're editing in the **Properties** view. Each text control has its own undo history, separate from the model undo stack. When focus is in the TOM Explorer or another view, the shortcuts undo and redo model changes. In the AI Assistant chat box, **Ctrl+Z** and **Ctrl+Y** don't undo or redo model changes.
+在 Tabular Editor 3 中，**Ctrl+Z** 和 **Ctrl+Y** 会对当前获得焦点的窗口部分生效。当焦点位于文本控件中时，这两个快捷键会撤销和重做该控件中的输入。文本控件包括 DAX 查询、DAX 脚本和 C# Script 文档、**表达式编辑器**，以及在 **属性** 视图中正在编辑的单元格。每个文本控件都有自己的撤销历史记录，与模型撤销堆栈相互独立。当焦点位于 TOM Explorer 或其他视图中时，这两个快捷键会撤销和重做模型更改。在 AI Assistant 聊天框中，**Ctrl+Z** 和 **Ctrl+Y** 不会撤销或重做模型更改。
 
-Focus stays in the script document after you run a C# script or apply a DAX script. Pressing **Ctrl+Z** there undoes typing in the script. If the script text was pasted or inserted in one step, **Ctrl+Z** removes all of it, and **Ctrl+Y** restores it.
+运行 C# Script 或应用 DAX 脚本后，焦点仍会停留在脚本文档中。此时按 **Ctrl+Z** 会撤销你在脚本中的输入。如果脚本文本是一次性粘贴或插入的，按 **Ctrl+Z** 会一次撤销全部内容，而 **Ctrl+Y** 会将其恢复。
 
-To undo a model change while a text control or the AI Assistant chat box has focus, do one of the following:
+如果文本控件或 AI Assistant 聊天框当前具有焦点，而你想撤消模型更改，可以执行以下任一操作：
 
-- click the TOM Explorer, then press **Ctrl+Z**
-- open the **Edit** menu and select the entry named after the last model change, such as **Undo C# script (MCP)**. When a text control has focus, this entry appears at the top of the menu, above **Undo typing**.
+- 点击 TOM Explorer，然后按 **Ctrl+Z**
+- 打开 **编辑** 菜单，然后选择名称与最近一次模型更改对应的命令，例如 **撤销 C# Script (MCP)**。当文本控件具有焦点时，此项会显示在菜单顶部，位于 **撤销输入** 上方。
 
 ## 删除对象
 
