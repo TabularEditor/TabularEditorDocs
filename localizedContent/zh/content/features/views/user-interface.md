@@ -143,13 +143,13 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 
 ![编辑菜单](~/content/assets/images/edit-menu.png)
 
-- **Undo**: undoes the last change in the part of the window that has focus. In a text control, such as a document or the **Expression Editor**, it undoes typing and reads **Undo typing**. Elsewhere, it undoes the last change to the model metadata. **Ctrl+Z** runs this command.
-- **Redo**: redoes the last undone change, following the same rules as **Undo**. **Ctrl+Y** runs this command.
-- **Undo** / **Redo** followed by the name of a model change, for example **Undo C# script (MCP)**: appear only when a text control has focus, and undo or redo the last change to the model metadata. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+- **撤销**：撤销当前获得焦点的窗口区域中的上一项更改。在文本控件中（如文档或 **表达式编辑器**），它会撤销输入，命令名称显示为 **撤销输入**。在其他位置，它会撤销对模型元数据所做的最后一次更改。 **Ctrl+Z** 执行此命令。
+- **重做**：重做上一次已撤销的更改，规则与 **撤销** 相同。 **Ctrl+Y** 执行此命令。
+- **撤销** / **重做** 后跟模型更改名称，例如 **撤销 C# script (MCP)**：仅当文本控件获得焦点时才会出现，用于撤销或重做对模型元数据所做的最后一次更改。参见 [文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。
 - **查找**：打开“查找和替换”对话框，并切换到“查找”选项卡。参见[查找](xref:find-replace#find)。
 - **替换**：打开“查找和替换”对话框，并切换到“替换”选项卡。参见[替换](xref:find-replace#replace)。
-- **Cut / Copy / Paste**: when a text control has focus, these apply to the selected text. When the TOM Explorer has focus, they apply to the selected objects. 例如，要复制多个度量值，请在 TOM Explorer 中按住 **Shift** 或 **Ctrl** 选择它们，然后按 **Ctrl+C**，再按 **Ctrl+V**。
-- **Delete**: deletes the selected text when a text control has focus, or the selected objects when the TOM Explorer has focus.
+- **剪切 / 复制 / 粘贴**：当文本控件具有焦点时，这些命令作用于所选文本。当 TOM Explorer 获得焦点时，这些命令作用于所选对象。例如，要复制多个度量值，请在 TOM Explorer 中按住 **Shift** 或 **Ctrl** 选择它们，然后按 **Ctrl+C**，再按 **Ctrl+V**。
+- **删除**：当文本控件获得焦点时，删除所选文本；当 TOM Explorer 获得焦点时，删除所选对象。
 
 > [!NOTE]
 > 只有在选中了多个对象，或其他对象依赖于你要删除的对象时，才会出现删除提示。**撤销**（**Ctrl+Z**）可还原已删除的对象。
