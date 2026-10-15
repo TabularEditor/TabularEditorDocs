@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Tabular Editor 3 键盘快捷键
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,6 +45,21 @@ applies_to:
 | 重做 | Ctrl+Y |
 | 查找 | Ctrl+F |
 | 替换 | Ctrl+H |
+
+## Shortcuts that depend on focus
+
+Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view.
+
+| 快捷键                                  | Text control has focus        | TOM Explorer has focus                  |
+| ------------------------------------ | ----------------------------- | --------------------------------------- |
+| **Ctrl+Z** / **Ctrl+Y**              | undo or redo typing           | undo or redo the last model change      |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cut, copy or paste text       | cut, copy or paste the selected objects |
+| **Delete**                           | delete the selected text      | delete the selected objects             |
+| **Ctrl+A**                           | select all text               | select all objects at the current level |
+| **Ctrl+D**                           | duplicate the current line    | duplicate the selected objects          |
+| **Ctrl+U**                           | uncomment lines in a document | make the selected objects visible       |
+
+**Ctrl+S** saves the document that has focus, such as a DAX query or a diagram. When the TOM Explorer has focus, **Ctrl+S** saves the model. To undo a model change from a text control, see @undo-redo.
 
 ## Data model 建模
 
@@ -92,7 +107,6 @@ applies_to:
 | 复制行    | Ctrl+Shift+T |
 | 交换行    | Ctrl+T       |
 | 重复当前行  | Ctrl+D       |
-| 将行转为小写 | Ctrl+U       |
 | 将行转为大写 | Ctrl+Shift+U |
 | 向上移动行  | Alt+上箭头      |
 | 向下移动行  | Alt+向下箭头     |
