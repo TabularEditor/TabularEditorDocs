@@ -187,7 +187,7 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 
 - **模型探索**：查询模型元数据，包括表、列、度量值、关系及其属性
 - **DAX 查询编写**：生成 DAX 查询，对连接模式下连接的模型执行，并在聊天中返回结果集
-- **C# 脚本生成**：创建用于模型更改的 C# Script。根据你的设置，助手会在编辑器窗口中打开脚本供你运行，或自行运行该脚本；请参阅[让助手更改你的模型](#letting-the-assistant-change-your-model)。 **Ctrl+Z** 撤销对模型元数据的更改
+- **C# 脚本生成**：创建用于模型更改的 C# Script。 Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**：运行 BPA 分析，列出规则违规情况，并创建或修改 BPA 规则
 - **VertiPaq分析器**：查询内存使用统计信息和列的基数
 - **文档访问**：读取并修改已打开的文档：DAX 查询、C# Script 和 DAX 脚本
@@ -208,7 +208,7 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 ### 当助手运行脚本时会发生什么
 
 - 如果 **预览更改** 处于开启状态（默认值），则会在应用更改前显示[预览对话框](xref:csharp-scripts#run-c-scripts-with-preview)。**取消** 会还原这些更改，并将此次拒绝 Report 给助手。如果 **预览更改** 处于关闭状态，则会在不显示对话框的情况下应用更改。
-- 该脚本的更改会作为一个撤销条目显示为：**C# Script (AI Assistant)**。 **Ctrl+Z** 会撤销整个脚本所做的更改。
+- 该脚本的更改会作为一个撤销条目显示为：**C# Script (AI Assistant)**。 Focus stays in the chat box, where **Ctrl+Z** doesn't undo model changes. To undo the whole script, click the TOM Explorer and press **Ctrl+Z**, or select **Undo C# script (AI Assistant)** in the **Edit** menu.
 - 如果脚本在执行到一半时失败，模型将保持不变，助手会 Report 该错误。
 - 访问文件、网络或外部程序集的脚本不会运行。它会以脚本工件形式打开，带有 **Unsafe** 徽章，且 **Execute** 被禁用；助手的回复还会说明脚本使用了什么。
 
