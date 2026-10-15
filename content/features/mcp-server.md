@@ -200,7 +200,7 @@ With **Model metadata > Write**, an agent changes your model by creating a [C# s
 
 A script can do anything the C# scripting API supports, for example add measures, columns, calculation groups, perspectives, translations, relationships and refresh policies, or bulk-rename and format objects. An agent-run script has these properties:
 
-- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. See @undo-redo.
+- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. If a document has focus, **Ctrl+Z** undoes typing in the document. Click the TOM Explorer first, or select **Undo C# script (MCP)** in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 - if the script throws an exception part-way through, all its changes are rolled back.
 - the agent receives a list of every object the script added, changed or removed, plus anything the script printed.
 - messages from `Output`, `Info`, `Warning` or `Error` are returned to the agent as part of the result, and no dialog opens.

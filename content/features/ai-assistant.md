@@ -190,7 +190,7 @@ Within your [permission grants](#permissions-and-consent), the AI Assistant work
 
 - **Model exploration**: queries model metadata, including tables, columns, measures, relationships and their properties
 - **DAX query writing**: generates DAX queries, runs them against your connected model and returns the result sets in the chat
-- **C# script generation**: creates C# scripts for model changes. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model). **Ctrl+Z** undoes model metadata changes
+- **C# script generation**: creates C# scripts for model changes. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**: runs BPA analysis, lists rule violations and creates or modifies BPA rules
 - **VertiPaq Analyzer**: queries memory usage statistics and column cardinality
 - **Document access**: reads and modifies open documents: DAX queries, C# scripts and DAX scripts
@@ -211,7 +211,7 @@ The setting is off by default and unavailable until **Model metadata** is set to
 ### What happens when the assistant runs a script
 
 - If **Preview changes** is on (the default), the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before the changes are applied. **Cancel** reverts them and reports the rejection to the assistant. If **Preview changes** is off, the changes are applied without a dialog.
-- The script's changes are one undo entry, **C# script (AI Assistant)**. **Ctrl+Z** undoes the whole script.
+- The script's changes are one undo entry, **C# script (AI Assistant)**. Focus stays in the chat box, where **Ctrl+Z** doesn't undo model changes. To undo the whole script, click the TOM Explorer and press **Ctrl+Z**, or select **Undo C# script (AI Assistant)** in the **Edit** menu.
 - If the script fails part-way through, the model is left unchanged and the assistant reports the error.
 - A script that accesses files, the network or external assemblies doesn't run. It opens as a script artifact with an **Unsafe** badge and **Execute** disabled, and the assistant's reply names what the script used.
 
