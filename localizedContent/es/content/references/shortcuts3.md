@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Atajos de teclado de Tabular Editor 3
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,24 +46,39 @@ applies_to:
 | Buscar           | Ctrl+F |
 | Reemplazar       | Ctrl+H |
 
+## Shortcuts that depend on focus
+
+Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view.
+
+| Atajo de teclado                     | Text control has focus        | TOM Explorer has focus                  |
+| ------------------------------------ | ----------------------------- | --------------------------------------- |
+| **Ctrl+Z** / **Ctrl+Y**              | undo or redo typing           | undo or redo the last model change      |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cut, copy or paste text       | cut, copy or paste the selected objects |
+| **Delete**                           | delete the selected text      | delete the selected objects             |
+| **Ctrl+A**                           | select all text               | select all objects at the current level |
+| **Ctrl+D**                           | duplicate the current line    | duplicate the selected objects          |
+| **Ctrl+U**                           | uncomment lines in a document | make the selected objects visible       |
+
+**Ctrl+S** saves the document that has focus, such as a DAX query or a diagram. When the TOM Explorer has focus, **Ctrl+S** saves the model. To undo a model change from a text control, see @undo-redo.
+
 ## Modelado de Data model
 
-| Comando                                           | Atajo de teclado |
-| ------------------------------------------------- | ---------------- |
-| Propiedades                                       | F4               |
-| Editar el nombre del objeto / renombrar por lotes | F2               |
-| Renombrar elementos secundarios por lotes         | Shift+F2         |
-| Mostrar dependencias                              | Shift+F12        |
-| Ocultar                                           | Ctrl+I           |
-| Mostrar                                           | Ctrl+U           |
-| Crear medida                                      | Alt+1            |
-| Crear columna calculada                           | Alt+2            |
-| Crear jerarquía                                   | Alt+3            |
-| Crear columna de datos                            | Alt+4            |
-| Crear tabla                                       | Alt+5            |
-| Crear tabla calculada                             | Alt+6            |
-| Crear grupo de cálculo                            | Alt+7            |
-| Aceptar cambio de expresión                       | F5               |
+| Comando                                           | Atajo     |
+| ------------------------------------------------- | --------- |
+| Propiedades                                       | F4        |
+| Editar el nombre del objeto / renombrar por lotes | F2        |
+| Renombrar elementos secundarios por lotes         | Shift+F2  |
+| Mostrar dependencias                              | Shift+F12 |
+| Ocultar                                           | Ctrl+I    |
+| Mostrar                                           | Ctrl+U    |
+| Crear medida                                      | Alt+1     |
+| Crear columna calculada                           | Alt+2     |
+| Crear jerarquía                                   | Alt+3     |
+| Crear columna de datos                            | Alt+4     |
+| Crear tabla                                       | Alt+5     |
+| Crear tabla calculada                             | Alt+6     |
+| Crear grupo de cálculo                            | Alt+7     |
+| Aceptar cambio de expresión                       | F5        |
 
 ## Explorador TOM
 
@@ -92,7 +107,6 @@ applies_to:
 | Copiar línea                    | Ctrl+Shift+T      |
 | Transponer líneas               | Ctrl+T            |
 | Duplicar línea                  | Ctrl+D            |
-| Convertir la línea a minúsculas | Ctrl+U            |
 | Convertir la línea a mayúsculas | Ctrl+Shift+U      |
 | Mover líneas hacia arriba       | Alt+Flecha arriba |
 | Mover líneas hacia abajo        | Alt+Flecha abajo  |
@@ -154,9 +168,9 @@ applies_to:
 
 ## C# Script
 
-| Comando         | Atajo |
-| --------------- | ----- |
-| Ejecutar script | F5    |
+| Comando         | Atajo de teclado |
+| --------------- | ---------------- |
+| Ejecutar script | F5               |
 
 # Personalización de atajos
 
