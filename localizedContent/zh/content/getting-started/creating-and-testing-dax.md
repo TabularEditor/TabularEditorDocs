@@ -111,7 +111,7 @@ TOM Explorer 中的所有对象都可以使用 Tabular Editor 进行复制和粘
 - **编辑 > 重做** (CTRL+Y)
 
 > [!NOTE]
-> Text editors in Tabular Editor 3 have their own undo history. When the cursor is in a text editor, **Ctrl+Z** and **Ctrl+Y** undo and redo typing in that editor. To undo a model change, click the TOM Explorer first, or select the model undo entry in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+> Tabular Editor 3 中的每个文本编辑器都有各自的撤销历史记录。当光标位于文本编辑器中时，**Ctrl+Z** 和 **Ctrl+Y** 会分别撤销和重做该编辑器中的输入操作。要撤销对模型所做的更改，请先单击 TOM Explorer，或在 **Edit** 菜单中选择模型的撤销条目。另请参阅 [文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。
 
 # 导航
 
