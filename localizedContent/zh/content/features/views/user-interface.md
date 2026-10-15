@@ -2,7 +2,7 @@
 uid: user-interface
 title: 基本用户界面
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -143,12 +143,13 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 
 ![编辑菜单](~/content/assets/images/edit-menu.png)
 
-- **撤销**：撤销对模型元数据的上一次更改。在没有活动文档时，按 **Ctrl+Z** 会执行此命令。
-- **重做**：重做上一次对模型元数据的撤销操作。在没有活动文档时，按 **Ctrl+Y** 会执行此命令。
+- **Undo**: undoes the last change in the part of the window that has focus. In a text control, such as a document or the **Expression Editor**, it undoes typing and reads **Undo typing**. Elsewhere, it undoes the last change to the model metadata. **Ctrl+Z** runs this command.
+- **Redo**: redoes the last undone change, following the same rules as **Undo**. **Ctrl+Y** runs this command.
+- **Undo** / **Redo** followed by the name of a model change, for example **Undo C# script (MCP)**: appear only when a text control has focus, and undo or redo the last change to the model metadata. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 - **查找**：打开“查找和替换”对话框，并切换到“查找”选项卡。参见[查找](xref:find-replace#find)。
 - **替换**：打开“查找和替换”对话框，并切换到“替换”选项卡。参见[替换](xref:find-replace#replace)。
-- **剪切 / 复制 / 粘贴**：在有活动文档时，这些命令作用于所选文本。否则，它们作用于 TOM Explorer 中所选的对象。例如，要复制多个度量值，请在 TOM Explorer 中按住 **Shift** 或 **Ctrl** 选择它们，然后按 **Ctrl+C**，再按 **Ctrl+V**。
-- **删除**：删除活动文档中的所选文本；如果没有活动文档，则删除 TOM Explorer 中所选的对象。
+- **Cut / Copy / Paste**: when a text control has focus, these apply to the selected text. When the TOM Explorer has focus, they apply to the selected objects. 例如，要复制多个度量值，请在 TOM Explorer 中按住 **Shift** 或 **Ctrl** 选择它们，然后按 **Ctrl+C**，再按 **Ctrl+V**。
+- **Delete**: deletes the selected text when a text control has focus, or the selected objects when the TOM Explorer has focus.
 
 > [!NOTE]
 > 只有在选中了多个对象，或其他对象依赖于你要删除的对象时，才会出现删除提示。**撤销**（**Ctrl+Z**）可还原已删除的对象。
