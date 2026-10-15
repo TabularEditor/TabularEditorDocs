@@ -29,7 +29,7 @@ Para usar esta funcionalidad, localice en el Explorador TOM los objetos para los
 
 Editar objetos mediante un Script DAX es ligeramente diferente a hacerlo mediante el **Editor de expresiones**. Con este último, los cambios se aplican de inmediato cuando navega a otro objeto. En un Script DAX, sin embargo, los cambios no se aplican hasta que lo haga explícitamente con la opción **Script > Aplicar** (F5). Si está conectado a una instancia de Analysis Services, puede usar la opción **Script > Aplicar y sincronizar** (SHIFT+F5) para aplicar los cambios y guardar a la vez los metadatos del modelo actualizados en Analysis Services.
 
-To undo or redo the changes a DAX script applied, click the TOM Explorer and press **Ctrl+Z** or **Ctrl+Y**. In the script editor, these shortcuts undo and redo typing. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
+Para deshacer o rehacer los cambios que aplicó un script DAX, haga clic en el Explorador TOM y pulse **Ctrl+Z** o **Ctrl+Y**. En el editor de scripts, estos atajos deshacen y rehacen lo que escribe. Consulte [Deshacer en editores de texto](xref:undo-redo#undo-in-text-editors).
 
 ## Múltiples scripts DAX
 
