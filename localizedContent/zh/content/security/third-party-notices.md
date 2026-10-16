@@ -1,6 +1,6 @@
----
+﻿---
 uid: third-party-notices
-title: 第三方声明
+title: Third Party Notices
 author: Daniel Otykier
 updated: 2021-06-01
 applies_to:
@@ -16,549 +16,890 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+# Tabular Editor 3 Third Party Notices
 
-# Tabular Editor 3 第三方声明
+This product incorporates third party components from the projects
+listed below. The original copyright notices and the licenses under
+which Tabular Editor ApS received such third party components are set
+forth below for informational purposes. Tabular Editor ApS licenses
+these third party components to you under the Tabular Editor 3 software
+licensing terms; however, any third party components received under
+open source licenses that require such components to remain under their
+original license are provided to you by Tabular Editor ApS under their
+original license.  Tabular Editor ApS reserves all other rights not
+expressly granted herein, whether by implication, estoppel or
+otherwise.
 
-本产品包含来自下列项目的第三方组件。以下列出了原始版权声明，以及 Tabular Editor ApS 获取此类第三方组件时所依据的许可协议，仅供参考。 Tabular Editor ApS 根据 Tabular Editor 3 软件许可条款向您许可这些第三方组件；但对于依据开源许可证获取且该许可证要求此类组件继续适用其原始许可证的任何第三方组件，Tabular Editor ApS 将按其原始许可证向您提供。对于本文未明确授予的所有其他权利，无论基于默示、禁止反言或其他原因，Tabular Editor ApS 均予以保留。
+For third party components licensed under open source licenses with
+source code availability obligations, you may obtain the source code
+from us, if and as required under the relevant open source licenses,
+by sending an e-mail to licensing@tabulareditor.com. Please write
+"Third party open source code" in the subject line. We may also make
+a copy of the source code available at:
 
-对于按开源许可证授权且负有源代码提供义务的第三方组件，如相关开源许可证要求，您可发送电子邮件至 licensing@tabulareditor.com 向我们索取源代码。请在主题行中写明
-“Third party open source code”。我们还可能在以下位置提供
-源代码副本：
-
-https://github.com/TabularEditor/TabularEditor3。
-
------------------------------------------------------------------
-
-## Lexilla、Scintilla 和 SciTE 的许可协议
-
-版权所有 1998-2021 Neil Hodgson neilh@scintilla.org
-
-保留所有权利
-
-特此免费授予许可：可出于任何目的使用、复制、修改并分发本软件及其文档，前提是上述版权声明须出现在所有副本中，且该版权声明及本许可声明须出现在配套文档中。
-
-NEIL HODGSON 对本软件不作任何保证，包括但不限于对适销性及特定用途适用性的所有默示保证。在任何情况下，NEIL HODGSON 均不对因使用或本软件性能而产生或与之相关的任何特殊、间接或后果性损害承担责任，也不对因无法使用、数据或利润损失而造成的任何损害承担责任，无论该责任是基于合同之诉、过失或其他侵权行为。
-
------------------------------------------------------------------
-
-## Scintilla.NET 的许可协议
-
-MIT 许可证 (MIT)
-
-版权所有 (c) 2017, Jacob Slusser, https://github.com/jacobslusser
-
-特此免费向任何获得本软件及其相关文档文件（“软件”）副本的个人授予许可，
-允许其在不受限制的情况下处置本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售
-本软件副本，并允许向其提供本软件的人员同样如此行事，但须符合以下条件：
-
-上述版权声明和本许可声明必须包含在本软件的所有副本或其实质性部分中。
-
-本软件按“原样”提供，不作任何种类的明示或默示担保，包括但不限于对适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任源于合同之诉、侵权之诉或其他原因，或因本软件、本软件的使用或其他与本软件有关的交易而产生、由此引起或与之相关。
+https://github.com/TabularEditor/TabularEditor3.
 
 -----------------------------------------------------------------
 
-## ANTLR 许可证
+## License for Lexilla, Scintilla, and SciTE
 
-“BSD 3 条款许可证”
-版权所有 (c) 2012-2017 The ANTLR Project。保留所有权利。
+Copyright 1998-2021 by Neil Hodgson neilh@scintilla.org
 
-在满足以下条件的前提下，允许以源代码和二进制形式重新分发和使用，
-无论是否经过修改：
+All Rights Reserved
 
-1. 源代码形式的再分发必须保留上述版权
-   声明、本条件列表以及以下免责声明。
-2. 二进制形式的再分发必须在随分发提供的
-   文档和/或其他材料中复制上述版权
-   声明、本条件列表以及以下免责声明。
-3. 未经事先明确书面许可，不得使用版权持有人的名称或其贡献者的名称
-   为源自本软件的产品背书或进行推广。
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation.
 
-本软件由作者按“原样”提供，作者声明不提供任何明示或默示担保，包括但不限于对适销性和特定用途适用性的默示担保。在任何情况下，作者均不对因使用本软件而以任何方式产生的任何直接、间接、附带、特殊、惩罚性或后果性损害（包括但不限于购买替代商品或服务的费用；使用损失、数据或利润损失；或业务中断）承担责任。无论该等损害如何造成，也无论基于何种责任理论（合同、严格责任或侵权〔包括过失或其他〕），即使已被告知可能发生此类损害亦然。
-
-\=====
-
-来自 https://git.io/codepointat 的 codepointat.js 的 MIT 许可证
-来自 https://git.io/vDW1m 的 fromcodepoint.js 的 MIT 许可证
-
-版权所有 Mathias Bynens <https://mathiasbynens.be/>
-
-特此免费授予任何获得
-本软件及其相关文档文件（
-“软件”）副本的个人许可，允许其在不受限制的情况下处置本软件，包括
-但不限于使用、复制、修改、合并、发布、
-分发、再许可和/或销售本软件副本，并
-允许向其提供本软件的人员同样如此行事，但须符合
-以下条件：
-
-上述版权声明和本许可声明应包含在软件的
-所有副本或其实质性部分中。
-
-本软件按“原样”提供，不作任何种类的明示或默示担保，包括但不限于对适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任源于合同之诉、侵权之诉或其他原因，或因本软件、本软件的使用或其他与本软件有关的交易而产生、由此引起或与之相关。
+NEIL HODGSON DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS
+SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS, IN NO EVENT SHALL NEIL HODGSON BE LIABLE FOR ANY
+SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE
+OR PERFORMANCE OF THIS SOFTWARE.
 
 -----------------------------------------------------------------
 
-## Newtonsoft.Json 许可证
+## License for Scintilla.NET
+  
+The MIT License (MIT)
 
-MIT 许可证（MIT）
+Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 
-版权所有 (c) 2007 James Newton-King
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-特此免费授予任何获得
-本软件及其相关文档文件（“软件”）副本的个人许可，
-允许其在不受限制的情况下处置本软件，包括但不限于
-使用、复制、修改、合并、发布、分发、再许可、
-和/或销售本软件副本，并允许向其提供
-本软件的人员同样如此行事，但须符合以下条件：
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-上述版权声明和本许可声明应包含在本软件的所有副本或其重要部分中。
-
-本软件按“原样”提供，不作任何种类的明示或默示担保，包括但不限于对适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任源于合同之诉、侵权之诉或其他原因，或因本软件、本软件的使用或其他与本软件有关的交易而产生、由此引起或与之相关。
-
------------------------------------------------------------------
-
-## Dax.Formatter 许可证
-
-MIT 许可证
-
-版权所有 (c) SQLBI Corporation
-
-特此免费授予任何取得本软件及相关文档文件（“软件”）副本的人不受限制地处置本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售本软件副本的权利，并允许向其提供本软件的人员如此行事，但须符合以下条件：
-
-上述版权声明和本许可声明应包含在本软件的所有
-副本或其重要部分中。
-
-本软件按“原样”提供，不作任何种类的明示或默示担保，包括但不限于对适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任源于合同之诉、侵权之诉或其他原因，或因本软件、本软件的使用或其他与本软件有关的交易而产生、由此引起或与之相关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 -----------------------------------------------------------------
 
-## Roslyn 许可证
+## License for ANTLR
+
+The "BSD 3-clause license"
+Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the copyright holder nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=====
+
+MIT License for codepointat.js from https://git.io/codepointat
+MIT License for fromcodepoint.js from https://git.io/vDW1m
+
+Copyright Mathias Bynens <https://mathiasbynens.be/>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for Newtonsoft.Json
+
+The MIT License (MIT)
+
+Copyright (c) 2007 James Newton-King
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for Dax.Formatter
+
+MIT License
+
+Copyright (c) SQLBI Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for Roslyn
 
 https://github.com/dotnet/roslyn/blob/main/License.txt
 
-MIT 许可证（MIT）
+The MIT License (MIT)
 
-版权所有 (c) .NET Foundation 及其贡献者
+Copyright (c) .NET Foundation and Contributors
 
-保留所有权利。
+All rights reserved.
 
-特此免费授予任何取得本软件及相关文档文件（“软件”）副本的人不受限制地处置本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售本软件副本的权利，并允许向其提供本软件的人员如此行事，但须符合以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在本软件的所有
-副本或其重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按“原样”提供，不作任何种类的明示或默示担保，包括但不限于对适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任源于合同之诉、侵权之诉或其他原因，或因本软件、本软件的使用或其他与本软件有关的交易而产生、由此引起或与之相关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 -----------------------------------------------------------------
 
-## Windows-API-CodePack-NET 许可证
+## License for Windows-API-CodePack-NET
 
 https://github.com/Wagnerp/Windows-API-CodePack-NET/blob/main/LICENSE
 
-MIT 许可证
+MIT License
 
-Copyright (c) 2009-2010 Microsoft Corporation，之后由 Jacob Slusser 于 2014 年修改，Peter William Wagner 于 2017-2023 年修改
+Copyright (c) 2009 - 2010 Microsoft Corporation, then modifications by Jacob Slusser 2014, Peter William Wagner 2017 - 2023
 
-特此免费授予任何取得本软件及相关文档文件（“软件”）副本的人不受限制地处置本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售本软件副本的权利，并允许向其提供本软件的人员如此行事，但须符合以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在本软件的所有
-副本或其重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按“原样”提供，不作任何种类的明示或默示担保，包括但不限于对适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任源于合同之诉、侵权之诉或其他原因，或因本软件、本软件的使用或其他与本软件有关的交易而产生、由此引起或与之相关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 -----------------------------------------------------------------
 
-## Tulpep.ActiveDirectoryObjectPicker 的许可证
+## License for Tulpep.ActiveDirectoryObjectPicker
 
 https://github.com/Tulpep/Active-Directory-Object-Picker/blob/master/LICENSE
 
-Microsoft 公共许可证 (MS-PL)
+Microsoft Public License (MS-PL)
 
-该项目最初由 Armand du Plessis <armand@dotnet.org.za> 于 2004 年创建，目前由 Tulpep 扩展并维护。
+The initial project was originally created by Armand du Plessis <armand@dotnet.org.za>
+in 2004 and now is extended and maintained by Tulpep.
 
-本许可协议适用于随附软件的使用。如果您使用本软件，即表示您接受本许可证。如果你不接受本许可协议，请勿使用本软件。
+This license governs use of the accompanying software. If you use the software, you
+accept this license. If you do not accept the license, do not use the software.
 
-1. 定义
-   术语“reproduce”、“reproduction”、“derivative works”和“distribution”在此处的含义与 U.S. 下的含义相同。著作权法。“贡献”是指原始软件，或对该软件作出的任何添加或更改。“贡献者”是指任何根据本许可协议分发其贡献的人。“已获许可的专利”是指贡献者拥有的、可直接涵盖其贡献的专利权利要求。
+1. Definitions
+The terms "reproduce," "reproduction," "derivative works," and "distribution" have the
+same meaning here as under U.S. copyright law.
+A "contribution" is the original software, or any additions or changes to the software.
+A "contributor" is any person that distributes its contribution under this license.
+"Licensed patents" are a contributor's patent claims that read directly on its contribution.
 
-2. 权利授予
-   (A) 著作权授予——在遵守本许可证条款的前提下（该等条款包括第 3 条中的许可条件和限制），每位贡献者授予你一项非排他、全球范围、免版税的著作权许可，允许你复制其贡献内容、为其贡献内容制作衍生作品，并分发其贡献内容或你创建的任何衍生作品。
-   (B) 专利授权——在遵守本许可协议条款（包括第 3 节所述的许可条件和限制）的前提下，每位贡献者均根据其已获许可的专利，向你授予一项非独占、全球范围、免版税的许可，使你可以制造、委托制造、使用、销售、要约销售、进口和/或以其他方式处置其在本软件中的贡献，或该贡献在本软件中的衍生作品。
+2. Grant of Rights
+(A) Copyright Grant- Subject to the terms of this license, including the license conditions
+and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free
+copyright license to reproduce its contribution, prepare derivative works of its contribution, and
+distribute its contribution or any derivative works that you create.
+(B) Patent Grant- Subject to the terms of this license, including the license conditions and
+limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free
+license under its licensed patents to make, have made, use, sell, offer for sale, import, and/or
+otherwise dispose of its contribution in the software or derivative works of the contribution
+in the software.
 
-3. 条件与限制
-   (A) 无商标许可——本许可协议不授予你使用任何贡献者的名称、徽标或商标的权利。
-   (B) 如果你因声称本软件侵犯了你的专利而针对任何贡献者提出专利主张，则该贡献者就本软件授予你的专利许可将自动终止。
-   (C) 如果你分发软件的任何部分，则必须保留软件中包含的所有著作权、专利、商标和归属声明。
-   (D) 如果你以源代码形式分发软件的任何部分，则只有在分发时附上本许可协议的完整副本，才可以依据本许可协议进行分发。如果你以编译形式或目标代码形式分发软件的任何部分，则仅可在符合本许可协议的许可条款下进行分发。
-   (E) 本软件按“现状”提供许可。使用风险由你自行承担。贡献者不提供任何明示的保证、担保或条件。根据你所在地的法律，你可能享有本许可协议无法变更的其他消费者权利。在你所在地法律允许的范围内，贡献者排除关于适销性、特定用途适用性和不侵权的默示担保。
+3. Conditions and Limitations
+(A) No Trademark License- This license does not grant you rights to use any contributors' name,
+logo, or trademarks.
+(B) If you bring a patent claim against any contributor over patents that you claim are infringed
+by the software, your patent license from such contributor to the software ends automatically.
+(C) If you distribute any portion of the software, you must retain all copyright, patent,
+trademark, and attribution notices that are present in the software.
+(D) If you distribute any portion of the software in source code form, you may do so only
+under this license by including a complete copy of this license with your distribution. If
+you distribute any portion of the software in compiled or object code form, you may only do
+so under a license that complies with this license.
+(E) The software is licensed "as-is." You bear the risk of using it. The contributors give
+no express warranties, guarantees or conditions. You may have additional consumer rights
+under your local laws which this license cannot change. To the extent permitted under your
+local laws, the contributors exclude the implied warranties of merchantability, fitness for
+a particular purpose and non-infringement.
 
 -----------------------------------------------------------------
 
-## 许可证：dotNetCore.Data.OracleClient
+## License for dotNetCore.Data.OracleClient
 
 https://github.com/ericmend/oracleClientCore-2.0/blob/master/LICENSE
 
-MIT 许可证
+MIT License
 
-版权所有 (c) 2018 Eric Azevedo Mendonça
+Copyright (c) 2018 Eric Azevedo Mendonça
 
-特此免费授予任何获得本软件及相关文档文件（以下简称“软件”）副本的个人许可，使其可不受限制地处置本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售本软件副本的权利，并允许向其提供本软件的人员同样行使上述权利，但须符合以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在本软件的所有副本或其实质性部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按“现状”提供，不附带任何种类的明示或默示担保，包括但不限于适销性、特定用途适用性和不侵权的担保。在任何情况下，作者或著作权持有人均不对任何索赔、损害或其他责任承担责任，无论该等责任基于合同、侵权或其他原因，并且不论其因本软件或本软件的使用或其他交易而产生、源于或与之相关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 -----------------------------------------------------------------
 
-## Ninject 的许可证
+## License for Ninject
 
 https://github.com/ninject/Ninject?tab=License-1-ov-file#readme
 
-Microsoft 公共许可证 (Ms-PL)
+Microsoft Public License (Ms-PL)
 
-本许可协议适用于随附软件的使用。如果您使用本软件，即表示您接受本许可证。如果你不接受本许可协议，请勿使用本软件。
+This license governs use of the accompanying software. If you use the software, you
+accept this license. If you do not accept the license, do not use the software.
 
-1. 定义
-   术语“reproduce”、“reproduction”、“derivative works”和“distribution”在此处的含义与 U.S. 下的含义相同。著作权法。“贡献”是指原始软件，或对该软件作出的任何添加或修改。“贡献者”是指在本许可证下分发其贡献的任何人。“已获许可的专利”是指贡献者拥有的、直接涵盖其贡献的专利权利要求。
+1. Definitions
+The terms "reproduce," "reproduction," "derivative works," and "distribution" have the
+same meaning here as under U.S. copyright law.
+A "contribution" is the original software, or any additions or changes to the software.
+A "contributor" is any person that distributes its contribution under this license.
+"Licensed patents" are a contributor's patent claims that read directly on its contribution.
 
-2. 权利授予
-   (A) 版权授予 - 在遵守本许可证条款的前提下（其中包括第 3 节所述的许可条件与限制），每位贡献者授予你一项非独占、全球范围、免版税的版权许可，以复制其贡献、制作其贡献的衍生作品，并分发其贡献或你创建的任何衍生作品。
-   (B) 专利授权-在遵守本许可证条款（包括第 3 节规定的许可条件和限制）的前提下，各贡献者在其已获许可的专利权项下，授予你一项非独占、全球范围、免版税的许可，使你得以制作、委托制作、使用、销售、许诺销售、进口和/或以其他方式处置其在软件中的贡献，或该贡献在软件中的衍生作品。
+2. Grant of Rights
+(A) Copyright Grant- Subject to the terms of this license, including the license conditions and
+    limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free
+    copyright license to reproduce its contribution, prepare derivative works of its contribution,
+    and distribute its contribution or any derivative works that you create.
+(B) Patent Grant- Subject to the terms of this license, including the license conditions and limitations
+    in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free license under
+    its licensed patents to make, have made, use, sell, offer for sale, import, and/or otherwise dispose
+    of its contribution in the software or derivative works of the contribution in the software.
 
-3. 条件和限制
-   (A) 不授予商标许可——本许可证不授予你使用任何贡献者的名称、徽标或商标的权利。
-   (B) 如果你因声称该软件侵犯了你的专利而向任何贡献者提起专利诉讼，则该贡献者就该软件授予你的专利许可将自动终止。
-   (C) 如果你分发软件的任何部分，必须保留软件中现有的所有版权、专利、商标和归属声明。
-   (D) 如果你以源代码形式分发软件的任何部分，只有在随分发内容附上一份完整的本许可证副本时，方可依据本许可证进行分发。如果你以编译形式或目标代码形式分发软件的任何部分，则只能依据与本许可证相符的许可证进行分发。
-   (E) 本软件按“现状”许可。使用风险由你自行承担。贡献者不提供任何明示的保证、担保或条件。根据你所在地法律，你可能享有本许可证无法变更的其他消费者权利。在你所在地法律允许的范围内，贡献者排除有关适销性、特定用途适用性和不侵权的默示担保。
-
------------------------------------------------------------------
-
-## Snowflake.Data 许可证
-
-```
-                           Apache License
-                       Version 2.0, January 2004
-                    http://www.apache.org/licenses/
-```
-
-使用、复制和分发的条款与条件
-
-1. 定义。
-
-   "许可证" 指本文件第 1 至第 9 条所定义的关于使用、复制
-   和分发的条款与条件。
-
-   "许可方" 指授予本许可证的版权持有人，或经
-   版权持有人授权授予本许可证的实体。
-
-   “法律实体”是指行为主体以及所有控制该主体、受该主体控制或与该主体受共同控制的其他实体的合称。为本定义之目的，“控制”是指：(i) 通过合同或其他方式，直接或间接地指挥或管理该实体的权力；或 (ii) 持有该实体百分之五十（50%）或以上的已发行股份；或 (iii) 对该实体的受益所有权。
-
-   "你"（或 "你的"）指行使本许可证所授予权限的个人或法律实体。
-
-   "源代码"形式指进行修改时的首选形式，
-   包括但不限于软件源代码、文档
-   源文件和配置文件。
-
-   "目标代码"形式指源代码形式经机械
-   转换或翻译后产生的任何形式，包括但
-   不限于编译后的目标代码、生成的文档，
-   以及转换为其他媒体类型的形式。
-
-   "作品" 指著作，无论以源代码或
-   目标代码形式存在；该作品在本许可证项下提供，并以
-   包含在作品中或附于作品上的版权声明
-   为标识
-   （下方附录提供了示例）。
-
-   “衍生作品”是指任何基于本作品（或从本作品派生）的作品，无论其为源代码形式还是目标代码形式，只要其编辑性修订、注释、阐述或其他修改作为整体构成原创性作品。为本许可证之目的，衍生作品不包括仍可与本作品及其衍生作品分离的作品，亦不包括仅链接到（或按名称绑定到）本作品及其衍生作品接口的作品。
-
-   “贡献”是指任何作者作品，包括本作品的原始版本，以及对该作品或其衍生作品所作的任何修改或补充；该作品由版权所有人，或经版权所有人授权代表其提交的个人或法律实体，有意提交给许可方以纳入本作品。就本定义而言，“submitted”是指发送给许可方或其代表的任何形式的电子、口头或书面通信，包括但不限于在电子邮件列表、源代码控制系统以及问题跟踪系统中的通信；上述系统由许可方或代表许可方管理，目的在于讨论和改进本作品，但不包括著作权人以醒目标记或以书面方式另行指定为“Not a Contribution.”的通信。
-
-   "贡献者" 指许可方，以及其贡献已由许可方接收并
-   随后纳入作品的任何个人或法律实体。
-
-2. 版权许可授予。在遵守本许可的条款与条件的前提下，每位贡献者特此向你授予一项永久的、
-   全球范围的、非独占的、免费的、免版税的、不可撤销的版权许可，允许你以
-   源代码或目标代码形式复制、制作本作品的衍生作品、公开展示、公开表演、
-   再许可并分发本作品及其衍生作品。
-
-3. 专利许可授予。在遵守本许可的条款与条件的前提下，每位贡献者特此向你授予一项永久的、全球范围的、非独占的、无偿的、免版税的、不可撤销的(除本节另有规定外)专利许可，允许你制造、委托他人制造、使用、要约出售、出售、进口以及以其他方式转让本作品；但该许可仅适用于该贡献者可授权的、且仅因其 Contribution(s) 单独实施或其 Contribution(s) 与其所提交该 Contribution(s) 的作品相结合而必然被侵害的那些专利权利要求。如果你对任何实体提起专利诉讼（包括诉讼中的交叉诉讼或反诉），主张本作品或并入本作品的某项贡献构成直接专利侵权或帮助侵权，则根据本许可证就该作品授予你的任何专利许可，自该诉讼提起之日起终止。
-
-4. 再分发。你可以在任何介质中复制和分发本作品或其衍生作品的副本，无论是否作出修改，也无论采用源代码形式还是目标代码形式，但前提是你满足以下条件：
-
-   （a）你必须向本作品或衍生作品的任何其他接收方提供本许可证副本；并且
-
-   （b）你必须确保任何被修改的文件带有醒目的声明，说明你已更改这些文件；并且
-
-   （c）对于你分发的任何衍生作品的源代码形式，你必须保留本作品源代码形式中所有版权、专利、商标及署名声明，但不包括与衍生作品任何部分无关的声明；并且
-
-   (d) 如果本作品的分发中包含名为“NOTICE”的文本文件，则你分发的任何衍生作品必须包含该 NOTICE 文件中所载署名声明的可读副本，但不包括与衍生作品任何部分无关的声明；且该副本至少应出现在以下位置之一：作为衍生作品分发内容的一部分随附的 NOTICE 文本文件中；或如与衍生作品一同提供，则在源代码形式或文档中；或在由衍生作品生成的显示界面中，在通常会出现此类第三方声明的任何位置并以其通常方式呈现。 NOTICE 文件的内容仅供参考，不会修改本许可证。您可以在您分发的衍生作品中加入您自己的署名说明，可与本作品中的 NOTICE 文本并列放置或作为其附录，但该等附加署名说明不得被解释为对本许可的修改。
-
-   你可以在你的修改中加入你自己的版权声明，并可就你的修改的使用、复制或分发，或就任何此类衍生作品整体，提供附加或不同的许可条款与条件；但前提是你对本作品的使用、复制和分发在其他方面仍符合本许可证所述条件。
-
-5. 贡献的提交。除非您明确另有说明，否则，您为纳入本作品而有意向许可方提交的任何贡献，均应受本许可的条款和条件约束，且不附加任何其他条款或条件。尽管有上述规定，本文中的任何内容均不得取代或修改您可能已就该等贡献与许可方另行签订的任何单独许可协议的条款。
-
-6. 商标。本许可不授予你使用许可方的商号、商标、服务标志或产品名称的权限，
-   但为以合理且惯常的方式描述本作品的来源，以及复制 NOTICE 文件内容所必需的除外。
-
-7. 无担保声明。除非适用法律要求或经书面同意，许可方按“原样”提供本作品（且各贡献者按“原样”提供其贡献），不提供任何明示或默示的保证或条件，包括但不限于关于所有权、不侵权、适销性或特定用途适用性的任何保证或条件。您应自行判断使用或再分发本作品是否适当，并自行承担因行使本许可项下权限而产生的任何风险。
-
-8. 责任限制。在任何情况下且基于任何法律理论，
-   无论是侵权（包括过失）、合同还是其他，
-   除非适用法律要求（如故意或重大过失行为）
-   或经书面同意，任何贡献者均不对你承担损害赔偿责任，
-   包括因本许可或因使用或无法使用本作品而产生的任何性质的
-   直接、间接、特殊、附带或后果性损害（包括但不限于商誉损失、
-   停工、计算机故障或失灵，或任何其他商业损害或损失），
-   即使该贡献者已被告知可能发生此类损害。
-
-9. 接受担保或附加责任。在再分发本作品或其衍生作品时，您可以选择提供与本许可一致的支持、担保、赔偿或其他责任义务和/或权利，并就其接受收取费用。但是，在接受此类义务时，您只能代表您自己并由您独自承担责任，而不得代表任何其他贡献者；并且仅在您同意就任何贡献者因您接受任何此类担保或附加责任而承担的责任或遭受的索赔，对该贡献者进行赔偿、为其抗辩并使其免受损害的情况下，您方可如此行事。
-
-条款与条件至此结束
-
-附录：如何将 Apache 许可证应用于你的作品。
-
-```
-  To apply the Apache License to your work, attach the following
-  boilerplate notice, with the fields enclosed by brackets "{}"
-  replaced with your own identifying information. (Don't include
-  the brackets!)  The text should be enclosed in the appropriate
-  comment syntax for the file format. We also recommend that a
-  file or class name and description of purpose be included on the
-  same "printed page" as the copyright notice for easier
-  identification within third-party archives.
-```
-
-版权所有 (c) 2017 Snowflake Computing Inc. 保留所有权利。
-
-根据 Apache 许可证 2.0 版（“许可证”）获得许可；
-除非遵守该许可证，否则你不得使用此文件。您可以在以下位置获得本许可的副本
-
-```
-   http://www.apache.org/licenses/LICENSE-2.0
-```
-
-除非适用法律要求或经书面同意，否则按本许可证分发的软件
-按“原样”提供，
-不提供任何形式的担保或条件，无论明示或默示。有关本许可项下权限和限制的具体规定，请参见本许可文本。
+3. Conditions and Limitations
+(A) No Trademark License- This license does not grant you rights to use any contributors' name, logo,
+    or trademarks.
+(B) If you bring a patent claim against any contributor over patents that you claim are infringed by
+    the software, your patent license from such contributor to the software ends automatically.
+(C) If you distribute any portion of the software, you must retain all copyright, patent, trademark,
+    and attribution notices that are present in the software.
+(D) If you distribute any portion of the software in source code form, you may do so only under this
+    license by including a complete copy of this license with your distribution. If you distribute
+    any portion of the software in compiled or object code form, you may only do so under a license
+    that complies with this license.
+(E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express
+    warranties, guarantees or conditions. You may have additional consumer rights under your local laws
+    which this license cannot change. To the extent permitted under your local laws, the contributors
+    exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
 
 -----------------------------------------------------------------
 
-## Dynamic-LINQ.net 的许可证
+## License for Snowflake.Data
 
-```
-                             Apache License
-                       Version 2.0, January 2004
-                    http://www.apache.org/licenses/
-```
+                               Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
 
-使用、复制和分发的条款和条件
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
-1. 定义。
+   1. Definitions.
 
-   “许可证”系指本文件第 1 至第 9 节所定义的关于使用、复制
-   和分发的条款和条件。
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
 
-   “许可方”系指授予本许可证的版权所有者，或经
-   版权所有者授权授予本许可证的实体。
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
 
-   “法律实体”是指实施相关行为的实体与所有控制该实体、受该实体控制或与该实体受共同控制的其他实体的合称。就本定义而言，“控制”是指：（i）通过合同或其他方式，直接或间接指挥该实体的经营方向或管理的权力；或（ii）拥有百分之五十（50%）或以上的已发行股份；或（iii）对该实体享有受益所有权。
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
 
-   “你”（或“你的”）系指行使本许可证所授予权限的个人或法律实体。
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
 
-   “源形式”系指进行修改时的首选形式，
-   包括但不限于软件源代码、文档源文件
-   和配置文件。
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
 
-   “对象形式”系指由源形式经机械
-   转换或翻译而产生的任何形式，包括但
-   不限于编译后的对象代码、生成的文档，
-   以及转换为其他媒体类型的形式。
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
 
-   “作品”系指依据本许可证提供的、无论以源形式还是
-   对象形式存在的著作权作品，并以作品中包含或附加的
-   版权声明为准
-   （下方附录提供了示例）。
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
 
-   “衍生作品”是指任何基于本作品(或由本作品衍生)的作品，无论其为源代码形式还是目标代码形式，只要其中的编辑性修订、注释、阐述或其他修改作为整体构成一项原创的著作作品。就本许可而言，衍生作品不包括仍可与本作品及其衍生作品分离的作品，也不包括仅链接到本作品及其衍生作品接口(或按名称绑定到该等接口)的作品。
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
 
-   “贡献”是指任何著作作品，包括本作品的原始版本，以及对该作品或其衍生作品所作的任何修改或补充；该等作品由著作权人，或经著作权人授权可代表其提交的个人或法律实体，有意提交给许可方以纳入本作品。就本定义而言，“submitted”是指发送给许可方或其代表的任何形式的电子、口头或书面通信，包括但不限于在电子邮件列表、源代码控制系统以及问题跟踪系统中的通信；上述系统由许可方或代表许可方管理，目的在于讨论和改进本作品，但不包括著作权人以醒目标记或以书面方式另行指定为“Not a Contribution.”的通信。
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
 
-   “Contributor”应指许可方，以及任何个人或法律实体：许可方已代表其接收贡献并随后将该贡献纳入本作品。
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
 
-2. 著作权许可授予。在遵守本许可的条款与条件的前提下，每位贡献者特此向你授予一项永久的、
-   全球范围的、非独占的、免费的、免版税的、不可撤销的版权许可，允许你以
-   源代码或目标代码形式复制、制作本作品的衍生作品、公开展示、公开表演、
-   再许可并分发本作品及其衍生作品。
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
 
-3. 专利许可授予。在遵守本许可的条款与条件的前提下，每位贡献者特此向你授予一项永久的、全球范围的、非独占的、无偿的、免版税的、不可撤销的(除本节另有规定外)专利许可，允许你制造、委托他人制造、使用、要约出售、出售、进口以及以其他方式转让本作品；但该许可仅适用于该贡献者可授权的、且仅因其 Contribution(s) 单独实施或其 Contribution(s) 与其所提交该 Contribution(s) 的作品相结合而必然被侵害的那些专利权利要求。如果您对任何实体提起专利诉讼(包括诉讼中的交叉诉讼或反诉)，主张本作品或纳入本作品的某项贡献构成直接或间接的专利侵权，则本许可项下就该作品授予您的任何专利许可将自提起该诉讼之日起终止。
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
 
-4. 再分发。您可以在任何介质中复制并分发本作品或其衍生作品的副本，无论是否经过修改，也无论采用源代码形式还是目标代码形式，但前提是您满足以下条件：
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
 
-   (a) 你必须向本作品或其衍生作品的其他接收方提供本许可的副本；并且
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
 
-   (b) 你必须确保任何已修改的文件带有醒目的声明，说明你已更改这些文件；并且
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
 
-   (c) 对于你分发的任何衍生作品，其源代码形式中必须保留本作品源代码形式中的
-   所有版权、专利、商标以及署名声明，但不包括与衍生作品任何部分无关的声明；并且
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
 
-   (d) 如果本作品的分发中包含名为“NOTICE”的文本文件，则你分发的任何衍生作品必须包含该 NOTICE 文件中所载署名声明的可读副本，但不包括与衍生作品任何部分无关的声明；且该副本至少应出现在以下位置之一：作为衍生作品分发内容的一部分随附的 NOTICE 文本文件中；或如与衍生作品一同提供，则在源代码形式或文档中；或在由衍生作品生成的显示界面中，在通常会出现此类第三方声明的任何位置并以其通常方式呈现。 NOTICE 文件的内容仅供参考，不构成本许可的修改。你可以在你分发的衍生作品中添加自己的署名说明，与本作品的 NOTICE 文本并列或作为其附录，但这些额外的署名说明不得被视为对本许可的修改。
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
 
-   你可以就你的修改添加你自己的版权声明，并可就对你的修改内容的使用、复制或
-   分发，或就任何此类衍生作品整体，提供额外或不同的许可条款与条件；但前提是
-   你对本作品的使用、复制与分发在其他方面仍符合本许可所述条件。
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
 
-5. 贡献提交。除非你明确另行声明，
-   否则，你有意提交给许可方并拟纳入本作品的任何贡献内容，
-   均应受本许可的条款和条件约束，且不附带任何额外条款或条件。尽管有上述规定，本文中的任何内容均不得取代或修改
-   你可能已就这些贡献内容与许可方签订的任何单独许可协议
-   的条款。
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
 
-6. 商标。本许可不授予你使用许可方的商号、商标、服务标志或产品名称的权限，
-   但为以合理且惯常的方式描述本作品的来源，以及复制 NOTICE 文件内容所必需的除外。
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
 
-7. 无担保声明。除非适用法律要求或经书面同意，许可方按“原样”提供本作品（且每位
-   贡献者按“原样”提供其贡献内容），不作任何种类的明示或
-   默示保证或条件，包括但不限于有关所有权、非侵权、适销性或
-   特定用途适用性的任何保证或条件。你应自行负责判断使用或再分发本作品是否适当，并承担
-   因你行使本许可项下权限而产生的任何风险。
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
 
-8. 责任限制。在任何情况下且基于任何法律理论，
-   无论是侵权（包括过失）、合同还是其他，
-   除非适用法律要求（如故意或重大过失行为）
-   或经书面同意，任何贡献者均不对你承担损害赔偿责任，
-   包括因本许可或因使用或无法使用本作品而产生的任何性质的
-   直接、间接、特殊、附带或后果性损害（包括但不限于商誉损失、
-   停工、计算机故障或失灵，或任何其他商业损害或损失），
-   即使该贡献者已被告知可能发生此类损害。
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
 
-9. 接受担保或承担额外责任。在再分发
-   本作品或其衍生作品时，你可以选择就接受支持、担保、赔偿
-   或其他与本许可一致的责任义务及/或权利提供服务，并就此收取费用。但是，若要承担此类义务，你只能代表自己并由你自行负责，
-   不得代表任何其他贡献者；且仅在你同意就因你接受任何此类担保或额外责任而使该贡献者
-   承担的任何责任或遭受的任何索赔，对每位贡献者进行赔偿、为其抗辩并使其免受损害的情况下，方可承担该等义务。
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
 
-条款与条件结束
+   END OF TERMS AND CONDITIONS
 
-附录：如何将 Apache 许可证应用于你的作品。
+   APPENDIX: How to apply the Apache License to your work.
 
-```
-  To apply the Apache License to your work, attach the following
-  boilerplate notice, with the fields enclosed by brackets "[]"
-  replaced with your own identifying information. (Don't include
-  the brackets!)  The text should be enclosed in the appropriate
-  comment syntax for the file format. We also recommend that a
-  file or class name and description of purpose be included on the
-  same "printed page" as the copyright notice for easier
-  identification within third-party archives.
-```
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "{}"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
 
-版权所有 [2016] [Stef Heyenrath]
+   Copyright (c) 2017 Snowflake Computing Inc. All right reserved.
 
-根据 Apache 许可证 2.0 版（“许可证”）获得许可；
-除非遵守该许可证，否则你不得使用此文件。你可以在以下地址获取本许可的副本
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-```
-   http://www.apache.org/licenses/LICENSE-2.0
-```
+       http://www.apache.org/licenses/LICENSE-2.0
 
-除非适用法律要求或经书面同意，否则按本许可证分发的软件
-按“原样”提供，
-不提供任何形式的担保或条件，无论明示或默示。有关本许可项下权限和限制的具体条款，请参阅本许可。
-
------------------------------------------------------------------
-
-## VertiPaq-Analyzer 许可证
-
-MIT 许可证
-
-版权所有 (c) 2019 SQLBI
-
-特此免费授予任何获得本软件及相关文档文件（以下简称“软件”）副本的个人，
-可不受限制地处置本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售
-本软件的副本，并允许向其提供本软件的人员这样做，但须满足以下条件：
-
-上述版权声明和本许可声明应包含在本软件的所有副本或其实质性部分中。
-
-本软件按“原样”提供，不提供任何种类的明示或
-默示保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，
-作者或版权持有人均不对因软件或软件的使用或其他处理而产生、源于、
-或与之相关的任何索赔、损害或其他责任承担责任，无论该等责任是基于合同、
-侵权还是其他原因。
-
------------------------------------------------------------------
-
-## CliWrap 许可证
-
-MIT 许可证
-
-版权所有 (c) 2017-2024 Oleksii Holub
-
-特此免费授予任何获得本软件及相关文档文件（以下简称“软件”）副本的个人，
-可不受限制地处置本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售
-本软件的副本，并允许向其提供本软件的人员这样做，但须满足以下条件：
-
-上述版权声明和本许可声明应包含在本软件的所有副本或其实质性部分中。
-
-本软件按“原样”提供，不提供任何种类的明示或
-默示保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，
-作者或版权持有人均不对因软件或软件的使用或其他处理而产生、源于、
-或与之相关的任何索赔、损害或其他责任承担责任，无论该等责任是基于合同、
-侵权还是其他原因。
-
------------------------------------------------------------------
-
-## TOMWrapper（Tabular Editor 开源版本）的许可证
-
-MIT 许可证
-
-版权所有 (c) 2016 otykier
-
-特此免费授予任何获得本软件及相关文档文件（以下简称“软件”）副本的任何人
-许可，可不受限制地处置本软件，包括但不限于
-使用、复制、修改、合并、出版、分发、再许可和/或出售
-本软件副本的权利，并允许向其提供本软件的人员
-在遵守以下条件的前提下行使上述权利：
-
-以上版权声明及本许可声明应包含在
-本软件的所有副本或主要部分中。
-
-本软件按“原样”提供，不提供任何种类的明示或
-默示保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，
-作者或版权持有人均不对因软件或软件的使用或其他处理而产生、源于、
-或与之相关的任何索赔、损害或其他责任承担责任，无论该等责任是基于合同、
-侵权还是其他原因。
-
------------------------------------------------------------------
-
-## Microsoft.ApplicationInsights 客户端库的许可证
-
-MIT 许可证
-
-特此免费授予任何获得 Microsoft.ApplicationInsights（以下简称“软件”）副本的任何人
-许可，可不受限制地处置本软件，包括但不限于
-使用、复制、修改、合并、出版、分发、再许可和/或出售
-本软件副本的权利，并允许向其提供本软件的人员
-在遵守以下条件的前提下行使上述权利：
-
-以上版权声明及本许可声明（包括下一段）应包含在本软件的所有副本或主要部分中。
-
-本软件按“原样”提供，不提供任何种类的明示或
-默示保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，
-MICROSOFT均不对因软件或软件的使用或其他处理而产生、源于、
-或与之相关的任何索赔、损害或其他责任承担责任，无论该等责任是基于合同、
-侵权还是其他原因。
-
------------------------------------------------------------------
-
-## MICROSOFT ANALYSIS MANAGEMENT OBJECTS (AMO) 的许可证
-
-请访问以下链接查看更新后的 EULA：https://go.microsoft.com/fwlink/?linkid=852989
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 
 -----------------------------------------------------------------
 
-## DevExpress WinForms 控件的许可证
+## License for Dynamic-LINQ.net
 
-最终用户许可协议
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
 
-请访问以下链接查看更新后的 EULA：https://www.devexpress.com/Support/EULAs/winforms-controls.xml
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [2016] [Stef Heyenrath]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+-----------------------------------------------------------------
+
+## License for VertiPaq-Analyzer
+
+MIT License
+
+Copyright (c) 2019 SQLBI
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for CliWrap
+
+MIT License
+
+Copyright (c) 2017-2024 Oleksii Holub
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for TOMWrapper (Tabular Editor Open Source version)
+
+MIT License
+
+Copyright (c) 2016 otykier
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for Microsoft.ApplicationInsights client libraries
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of Microsoft.ApplicationInsights (the "Software"), to deal in the Software
+without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice (including the next
+paragraph) shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+MICROSOFT BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-----------------------------------------------------------------
+
+## License for MICROSOFT ANALYSIS MANAGEMENT OBJECTS (AMO)
+
+Please view the updated EULA at: https://go.microsoft.com/fwlink/?linkid=852989
+
+-----------------------------------------------------------------
+
+## License for DevExpress WinForms Controls
+
+End-User License Agreement
+
+Please view the updated EULA at: https://www.devexpress.com/Support/EULAs/winforms-controls.xml
