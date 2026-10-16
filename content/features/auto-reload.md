@@ -2,7 +2,7 @@
 uid: auto-reload
 title: Auto-reload from disk
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ When the metadata files of a model you loaded from a file or folder change on di
 ![Diagram: File > Save writes the model in Tabular Editor to the files on disk; another tool writes to the files; an automatic reload loads the changed files back into Tabular Editor](~/content/assets/images/features/auto-reload-sync.png)
 
 > [!NOTE]
-> Auto-reload monitors files and is independent of **Track external model changes** and **Refresh local Tabular Object Model metadata automatically** under [Tools > Preferences > Tabular Editor > Miscellaneous](xref:preferences#miscellaneous). Those settings use an Analysis Services trace to detect changes to a connected database.
+> Auto-reload monitors files and is independent of **Track external model changes** and **Refresh local Tabular Object Model metadata automatically** under [Tools > Preferences > Tabular Editor > Miscellaneous](xref:preferences#tabular-editor--miscellaneous). Those settings use an Analysis Services trace to detect changes to a connected database.
 
 ## Monitored files
 
@@ -77,4 +77,4 @@ Auto-reload is enabled by default, and you turn it off by clearing **Automatical
 
 Turn it off if a continuously running process also writes to the model folder, such as a file sync client or a CI checkout that refreshes in the background. Each change triggers a reload, or the modal prompt when you have unsaved changes.
 
-With the setting cleared, use **File > Reload from disk** to load external changes, or **File > Save** to overwrite them with the model in Tabular Editor. See [Preferences](xref:preferences#miscellaneous) for the other settings on that page.
+With the setting cleared, use **File > Reload from disk** to load external changes, or **File > Save** to overwrite them with the model in Tabular Editor. See [Preferences](xref:preferences#tabular-editor--miscellaneous) for the other settings on that page.

@@ -2,7 +2,7 @@
 uid: duplicate-and-batch
 title: Duplicating Objects and Batch Rename
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,3 +19,5 @@ The right-click context menu in the Explorer Tree lets you duplicate measures an
 You may use RegEx for your renamings, and optionally choose whether translations should be renamed as well.
 
 A duplicated object keeps whatever error and warning indicators the original carried, so a copy of an object with an invalid expression is marked as invalid straight away.
+
+If the original is shown in more than one display folder, the copy appears in every one of them and is selected after it's created. This also applies when you copy and paste an object.

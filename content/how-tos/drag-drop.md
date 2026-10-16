@@ -2,7 +2,7 @@
 uid: drag-drop
 title: Drag and drop objects
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -51,7 +51,7 @@ What comes with the object:
 > [!WARNING]
 > Moving a **calculated column** to another table removes the things that depended on it in its old position. Any relationship it takes part in is deleted, any hierarchy level built on it is deleted, it's dropped from calendars and variations, and a *Sort by column* pointing at it is cleared. You aren't asked to confirm this. **Edit > Undo** puts all of it back as one step, so check the model before you do anything else.
 
-DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and keeps pointing at the table the column has left. Measure references are written as `[Measure]` without a table, so they're unaffected. Run @using-bpa or check the @messages-view after a move to catch what broke.
+DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and keeps pointing at the table the column has left. Measure references are written as `[Measure]` without a table, so they're unaffected. Run @using-bpa or check the @messages-view after a move to catch what broke. In the Messages view, clear **Show Cascading Errors** to list only the expressions you need to fix.
 
 ## Building hierarchies and ordering calculation items
 

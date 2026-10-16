@@ -2,7 +2,7 @@
 uid: unsaved-changes
 title: Unsaved change indicators
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2

@@ -2,7 +2,7 @@
 uid: user-options
 title: User options (.tmuo) file
 author: Daniel Otykier
-updated: 2026-09-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -120,7 +120,7 @@ An override whose data source no longer exists in the model is dropped the next 
 
 ### Deployment
 
-`Deployment` holds what the deployment wizard last used for this model. The six Boolean options are always written once the block exists, whether they're true or false:
+`Deployment` holds what the deployment wizard last used for this model. The seven Boolean options are always written once the block exists, whether they're true or false:
 
 | Property | Type | Written when |
 |---|---|---|
@@ -130,6 +130,7 @@ An override whose data source no longer exists in the model is dropped the next 
 | `DeployModelRoles` | Boolean | Always |
 | `DeployModelRoleMembers` | Boolean | Always |
 | `DeploySharedExpressions` | Boolean | Always |
+| `DeployLinguisticMetadata` | Boolean | Always |
 | `TargetConnectionString` | String or object | Always, `null` if unset. Object form when the connection string carries a password. |
 | `TargetDatabase` | String | Always, `null` if unset. |
 | `TargetCredentials` | Object | Both a user name and a password are set. |
