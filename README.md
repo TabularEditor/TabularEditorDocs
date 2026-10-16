@@ -68,21 +68,22 @@ swa start _site
 | `--no-api-copy` | Skip copying API docs to localized sites |
 | `--skip-api` | Reuse existing API metadata in content/api, ~30-40% faster (local markdown iteration only, requires `--serve`/`--lang`; never for testing/CI/CD/releases) |
 | `--permissive` | Don't treat English DocFX warnings as build failures (for local iteration; full/CI builds stay strict) |
-| `--sync` | Sync English fallback for missing/outdated translations (for local dev) |
+| `--sync` | Copy English over missing/outdated translations for a local build. Fallback copies only: never commit them. The translation status file is not touched |
 | `--warnings-report PATH` | Write a markdown summary of the DocFX warnings per built language to `PATH` (CI appends it to the job summary); written even when the build fails |
 
 ## What the Build Script Does
 
 1. **Generates DocFX configurations** - Runs `gen_redirects.py` to create `docfx.json` for each language
 2. **Generates language manifest** - Creates `metadata/languages.json` for runtime language switching
-3. **Syncs content** - Copies English source to `localizedContent/en/`. For other languages, only shared directories (assets, api) are synced by default since Crowdin manages translations. Use `--sync` to enable full English fallback for missing/outdated translations (useful for local development).
-4. **Normalizes DocFX alerts** - Runs `normalize-localized-alerts.py` on each non-English language to repair Crowdin-collapsed Note/Tip/etc. alerts before building (see [DocFX Alerts and Translations](#docfx-alerts-and-translations))
+3. **Syncs content** - Copies English source to `localizedContent/en/`. For other languages, only shared directories (assets, api) are synced by default: the translations themselves are committed by the automated translation workflow (see [Translating Content](#translating-content)). Use `--sync` to copy English over missing/outdated translations for a local build; those fallback copies must never be committed, and the translation status file is left alone.
+4. **Normalizes DocFX alerts** - Runs `normalize-localized-alerts.py` on each non-English language as a safety net that repairs collapsed Note/Tip/etc. alerts in translator output before building (see [DocFX Alerts and Translations](#docfx-alerts-and-translations))
 5. **Stabilizes heading anchors** - Runs `normalize-localized-heading-anchors.py` on each non-English language to inject English-slug bookmark anchors before translated headings, so `#anchor` cross-references resolve even when the heading text is translated (see [Bookmark Links and Translations](#bookmark-links-and-translations))
 6. **Builds documentation** - Runs DocFX for each requested language
 7. **Fixes API docs** - Patches xref links in generated API documentation
 8. **Copies API docs** - Shares English API docs with localized sites
 9. **Injects SEO tags** - Adds hreflang and canonical tags to HTML files
 10. **Generates SWA config** - Creates `staticwebapp.config.json` for Azure Static Web Apps routing
+11. **Generates the sitemap index** - Runs `gen_sitemap_index.py` last, once every per-language sitemap exists, to write the site-wide sitemap index and `robots.txt`
 
 # Continuous integration
 
@@ -104,7 +105,7 @@ The full report, including the list of external URLs to verify by hand, is attac
 Fix or remove genuinely dead external links as part of normal maintenance.
 
 **Translation build warnings are visible but not blocking.**
-Only English DocFX warnings fail the build; the es and zh builds are Crowdin-managed translations and may carry warnings such as broken bookmarks or missing includes.
+Only English DocFX warnings fail the build; the es and zh builds are machine translations (Translated) and may carry warnings such as broken bookmarks or missing includes.
 The "Build Documentation" job summary lists every DocFX warning per language, so translation problems can be spotted and fed back without blocking a deploy.
 
 **Executing the doctests needs the te CLI.**
@@ -120,6 +121,9 @@ Run the same checks locally before pushing: `./run scripts check`, `./run doctes
 
 ```
 /
+├── .github/workflows/
+│   ├── deploy.yml             # Build and deploy the site
+│   └── translate.yml          # Automated translation workflow (Translated), see Translating Content
 ├── build-docs.py              # Main build script
 ├── run                        # Task runner for common dev tasks (see build_scripts/run_scripts/README.md)
 ├── build_scripts/             # Helper scripts
@@ -131,9 +135,10 @@ Run the same checks locally before pushing: `./run scripts check`, `./run doctes
 │   ├── gen_sitemap_index.py   # Post-processes the English sitemap; generates the sitemap index
 │   ├── gen_staticwebapp_config.py     # Generates Azure Static Web Apps routing config
 │   ├── inject_seo_tags.py     # Adds hreflang and canonical tags to built HTML
-│   ├── normalize-localized-alerts.py  # Repairs Crowdin-collapsed DocFX alerts
+│   ├── normalize-localized-alerts.py  # Repairs collapsed DocFX alerts in translations (safety net)
 │   ├── normalize-localized-heading-anchors.py  # Injects English-slug bookmark anchors into translations
-│   ├── sync-localized-content.py      # Syncs English content into localized build dirs
+│   ├── sync-localized-content.py      # Syncs English content into localized build dirs (local builds)
+│   ├── translate-content.py           # Submits changed English content to Translated, verifies and writes the translations
 │   ├── te_script_runner.py    # Runs C# snippets against a throwaway model via the te CLI
 │   ├── test-fixtures/         # Fixtures for the build-script tests
 │   └── run_scripts/           # ./run subcommand scripts and shared lib.sh (see its README)
@@ -142,14 +147,17 @@ Run the same checks locally before pushing: `./run scripts check`, `./run doctes
 ├── localizedContent/          # Build directories for all languages
 │   ├── en/                    # English build (generated, gitignored)
 │   └── {lang}/                # Translated content
+│       ├── .translation-status.json  # Per-file translation bookkeeping, owned by translate-content.py (tracked)
 │       ├── content/           # Translated markdown and UI strings (tracked)
 │       │   └── _ui-strings.json  # Translated UI strings for this language
 │       └── docfx.json         # Generated config (gitignored)
 ├── metadata/
+│   ├── build-config.json      # Content/shared dirs and the `translation` section (environments, sources, passthrough)
 │   ├── languages.json         # Language manifest (generated)
-│   ├── language-metadata.json # Language display names and RTL flags
+│   ├── language-metadata.json # Language display names, RTL flags and translatedLocale
 │   └── redirects.json         # URL redirects (server 301s and client meta-refresh)
 ├── docfx-template.json        # Base DocFX configuration template
+├── pyproject.toml             # ruff/mypy configuration for the checked build scripts
 ├── templates/                 # DocFX templates
 └── _site/                     # Generated output
     ├── en/
@@ -165,11 +173,119 @@ Run the same checks locally before pushing: `./run scripts check`, `./run doctes
 4. Add a translated `_ui-strings.json` to the content subdirectory (see [Translating UI Strings](#translating-ui-strings) below). If no translation is provided, an automatic fallback will be generated.
 5. Run `python build-docs.py --all` to generate configs and build. Language will be added dynamically to language picker.
 
-> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, Crowdin manages translations via PRs. Shared directories (assets, api) are always synced from English. To use English as fallback for missing/outdated translations during local development, add the `--sync` flag.
+> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, translations arrive as review PRs from the automated translation workflow (see [Translating Content](#translating-content)); add `"translatedLocale"` (e.g. `"fr-FR"`) to the language's entry in `metadata/language-metadata.json` so it is picked up (the first run submits every scoped file for the new language, so start with `--limit`). Shared directories (assets, api) are always synced from English. To use English as fallback for missing/outdated translations during local development, add the `--sync` flag; never commit those copies.
+
+# Translating Content
+
+Translations are produced by [Translated](https://translated.com)'s AI translation service through the TranslationOS API (`POST /translate/ai`, service type `AI`) and arrive as review PRs from the `localization` branch, driven by `.github/workflows/translate.yml` and `build_scripts/translate-content.py`. The endpoint is synchronous: each request returns the translation in its response (billed per character), so a run translates, verifies and writes every file in one pass - nothing is pending between runs and there is nothing to poll or cancel. English in `content/` is the only authored source. Hand edits to `localizedContent/{lang}/content/` - on the translation branch or on `main` - are fine, but they are overwritten the next time the English source changes unless the file is pinned (see [Runbook](#runbook)).
+
+## Scope and configuration
+
+The `translation` section of `metadata/build-config.json` defines what is translated and where:
+
+- **`sources`** - globs relative to `content/`: every `**/*.md` (including the sidebar `toc.md` files), `404.html`, `getting-started/app/**/*.html`, `toc.yml` and `_ui-strings.json`. Files under the shared directories (`assets`, `api`) are always skipped.
+- **`passthrough`** - `whats-new/**/*.html`. The release-note pages are not translated: every run copies them from English byte-for-byte when their hash differs (or the target is missing) and records them in the status file with status `copied`.
+- **`environments`** - the two endpoints the script can talk to: `sandbox` is `https://api-mt.sandbox.translated.com/v2/` and `production` is `https://api-mt.translated.com/v2/` (AI translation lives on the dedicated `api-mt.*` hosts, not the classic `api.*` hosts), both with service type `AI`. `TRANSLATED_ENV` selects which one is active (see below). Note: the sandbox account has no AI-enabled service type (its only type, `economy`, is human-only), so sandbox runs fail at the first submission - production is validated locally with `--limit`/`--file` instead.
+- **`sandboxLimits`** (`maxFilesPerRun`: 20, `maxCharsPerRun`: 200000; see [Sandbox caps](#sandbox-caps)).
+- **`instructions`** - file-level notes attached to every order as context for the translation. Glossaries and do-not-translate lists are configured by Translated on the service type itself, not per request.
+
+Every target language folder needs a `translatedLocale` (`es-ES`, `zh-CN`) in `metadata/language-metadata.json`. A run checks this up front and fails with the list of missing locales before submitting anything.
+
+## Environment variables
+
+| Variable | Where it lives | Meaning |
+|----------|----------------|---------|
+| `TRANSLATED_API_KEY` | repository secret / your shell | API key for the active environment. |
+| `TRANSLATED_ENV` | repository variable / your shell | `sandbox` or `production`; selects the entry of `translation.environments` to use. There is no default: every network action (`--run`, `--probe`) refuses to run while it is unset or unknown. |
+| `TRANSLATED_SERVICE_TYPE` | repository variable / your shell | Overrides the environment's `serviceType` (both environments default to `AI`); run `--probe` to list the account's service types. |
+
+Offline actions (`--plan`, `--self-test`, `--dump-orders`, `--baseline`) need neither variable nor key. Before any network call the script prints the resolved environment, base URL and service type - read that line before you continue.
+
+## Command-line reference
+
+`python build_scripts/translate-content.py <action> [options]`. Exactly one action per invocation:
+
+| Action | What it does | Network |
+|--------|--------------|---------|
+| `--plan` | Print what would happen per language: missing/outdated files to submit, recorded failures, pinned and unscoped entries, orphans, passthrough copies, character counts. | no |
+| `--run` | Translate missing/outdated files (one synchronous request per file and language), repair and verify each response against its English source, write the translations, copy passthrough files, delete orphaned translations - what CI runs. | yes |
+| `--baseline` | Seed the status file from the existing translations: accept those that verify (after repair) and mark only the unrepairable ones untranslated (see [Baseline](#baseline)). | no |
+| `--self-test` | Offline test suite: identity round-trip over the whole corpus, verifier/repair fixtures, and a fake-client end-to-end `--run` in a temporary mini repo. Exits 1 on any failure; the `pull_request` dry-run job runs it on PRs that touch the translation script or its config, and every `translate` run starts with it. | no |
+| `--probe` | Fetch the account's service-type names and language list, print them, and check `sourceLocale`, every `translatedLocale` and the resolved service type against them (exit 1 with the closest matches on a mismatch). | yes |
+| `--dump-orders DIR` | Build the exact `/translate/ai` request bodies through the same code path as `--run` and write them to `DIR/{lang}/{rel}.json` plus `DIR/summary.json` (counts, characters, environment). Nothing is sent and the status file is not modified. | no |
+
+Options:
+
+| Option | Meaning |
+|--------|---------|
+| `--lang X` | Restrict to one language (repeatable). |
+| `--file GLOB` | Restrict to files matching a glob relative to `content/` (repeatable). |
+| `--limit N` | Submit at most N files per language (`--plan` output honours it too). |
+| `--force` | Treat the files matched by `--file`/`--limit` as outdated even when they are current. With neither filter it means the whole corpus. |
+| `--retry-failed` | Re-plan files whose recorded failure is at the current source hash (otherwise they are skipped until the English source changes). |
+| `--lenient` | Write deliveries even when verification finds problems - except empty or otherwise unusable text, which is never written, and `toc.yml`/`_ui-strings.json` deliveries, which are always rejected on problems. For local inspection only; the workflow never passes it. |
+| `--allow-unbounded` | Lift the sandbox caps. The workflow never passes it. |
+| `--report PATH` | Write the Markdown run report (used as the PR body). |
+| `--baseline-ref REF` | With `--baseline`: hash the English sources at this git ref (via `git show`) instead of the working tree. The ref must resolve to a commit, otherwise the run exits 1. |
+| `--overwrite-baseline` | With `--baseline`: allow overwriting a status file that already has `files` entries. |
+| `--repair-existing` | With `--baseline`: also write the repaired text of existing translations that the repair step had to fix (fences, inline code, markers, link targets, HTML attributes restored from English). Without it only the status file changes. |
+
+## How a run works
+
+1. **Plan.** Each English file's SHA-256 (line endings normalized) is compared with the entry in `localizedContent/{lang}/.translation-status.json`. Missing and outdated files are submitted. Files with `"manual": true` are skipped and reported as *pinned*. Files whose recorded failure is at the current source hash are skipped until `--retry-failed` or `--force`. Status entries that are neither in `sources`, `passthrough` nor orphans are reported as *unscoped* and dropped. Translations whose English source no longer exists (*orphans*) are deleted - only when no `--file`/`--limit` filter is active.
+2. **Translate.** One synchronous `POST /translate/ai` request per file and language: the whole file goes as a single `translatable` segment (with `target_language`, `content_type` and `service_type`) and the response carries the translation and the billed character count. Every request has an `x-idempotency-id`, reused on retries after a timeout or 5xx, so the same content is never billed twice. Markdown and the JSON-shaped payloads are sent as `text/plain` (the endpoint rejects `text/markdown`); `toc.yml` is sent as a JSON map of its `name` values so hrefs never reach the translator; in `_ui-strings.json` every `{name}` placeholder is encoded as `{{name}}` and decoded on delivery. The status file is saved after every file, so an interrupted run never loses the record of a translation that was already billed and written. A failed request records its file under `failures` with the API error and the run continues with the next file, exiting 1 at the end.
+3. **Repair, then verify.** Every delivery is compared with its English source. Whatever can be aligned positionally is restored from English rather than trusted: fenced code blocks (fence lines and bodies), inline code spans, alert and include markers (`[!NOTE]`, `[!include]`), link targets, HTML `href`/`src` attributes, the BOM and the line-ending style, and every frontmatter key except `title`/`description`, which take the translated value (quoted when YAML needs it). What cannot be aligned is a verification problem: heading count differs; fence, marker or link counts differ; HTML tag set differs; JSON key set or per-key placeholder set differs; a `toc.yml` key is missing or a value contains a newline; the source has frontmatter and the delivery does not; or the delivered text is identical to the English source. The one exception is inline code: when the number of backtick spans differs from English, the delivery is still written with the spans as delivered and the drift is reported as a *warning* (`inline code spans 57 -> 59 (missing [...], added [...])`), not as a problem. MT routinely adds or drops a backtick pair around a word like `true` or a variable name; rejecting the delivery would resubmit (and bill) the whole page for one span, and the same MT would do it again on the next delivery. The report says what was repaired (`repaired: n fences, m inline code, k markers, j links`) and lists the files written with warnings.
+4. **What "failed" means.** A delivery with problems is *not* written: the existing translation stays untouched, the file is recorded under `failures` in the status file (with the reasons), listed in the report, and not resubmitted until the English source changes or `--retry-failed`/`--force` is given. `--lenient` (local inspection only) writes it anyway, except that empty or otherwise unusable text is never written and `toc.yml`/`_ui-strings.json` deliveries are never written leniently. Warnings are not failures: a delivery whose only finding is inline-code count drift is written and recorded `translated` like a clean one, and listed under *written with warnings* in the report so the reviewer can check the spans; `--baseline` likewise accepts such existing translations as current.
+5. **Commit and PR.** The workflow commits `localizedContent` to the target branch and opens the PR, or comments the run report on the open one - also when the translate step itself exited 1 (a failed request), in which case the PR body says so and whatever was translated is still reviewable. Production runs use `localization`; sandbox runs use `localization-sandbox` and open a *draft* PR titled "New translations (sandbox - do not merge)" labelled `sandbox`. The report shows, per language, the files translated, repaired (per kind), written with warnings, copied, failed and removed, plus submitted and billed character counts. `deploy.yml` builds a `localization` PR only when a review is requested, so review it, request a review to get a preview build, then merge.
+
+## The workflow (`translate.yml`)
+
+Two jobs:
+
+- **`dry_run`** runs on pull requests that touch the workflow, `translate-content.py`, `config_loader.py`, `build-config.json` or `language-metadata.json`. It checks out the PR head and runs `--self-test`, `--plan` and `--dump-orders` (uploaded as an artifact, appended to the job summary). It is fully offline: it never talks to the API, never pushes and never opens a PR. Real sandbox validation is done locally before the PR (see [Local use](#local-use)).
+- **`translate`** runs on `workflow_dispatch` always, and on `push` to `main` (paths `content/**`, `metadata/build-config.json`, `metadata/language-metadata.json`, `translate-content.py`, `config_loader.py`, the workflow itself) only when the repository variable `TRANSLATED_ENV` is `production`. Until then the push trigger is inert; there is no schedule - the synchronous endpoint finishes everything in the push-triggered run, and a failed run is recovered with a manual dispatch; a missing key or environment produces a warning, not a red run. Dispatch inputs: `mode` (`translate` | `probe` | `dry-run`), `target_branch` (default empty = auto: `localization` when `TRANSLATED_ENV` is `production`, `localization-sandbox` otherwise; an explicit `localization` is refused outside production in `translate` mode; any other name must start with `localization-`, so the bot can never push to `main` or a feature branch), `limit`, `force` and `file`. A sandbox dispatch must set `limit` or `file`, because the [sandbox caps](#sandbox-caps) refuse an unbounded run. The job first merges the open translation branch into main's tree (after deleting a stale branch whose PR was already merged or closed); a translation branch that cannot be merged stops the run with an error instead of silently continuing from `main`. It then runs `--self-test`, then `--run --limit <limit> [--force] [--file <glob>] --report ...`, then pushes and opens or updates the PR; the PR step also runs when the translate step failed, so translations that were already billed and written are committed, with a note in the PR body. In `probe` mode it runs `--probe` only. In `dry-run` mode it runs `--plan` and `--dump-orders`; nothing is submitted, committed or pushed (the AI endpoint bills synchronously, so a run that is never pushed would be paid for and then re-billed by the next real run). The full report is always uploaded as an artifact and appended to the job summary.
+
+Secrets and settings: `TRANSLATED_API_KEY` (repository secret; the key of the environment `TRANSLATED_ENV` names), `TRANSLATED_ENV` and `TRANSLATED_SERVICE_TYPE` (repository variables), *Allow GitHub Actions to create and approve pull requests* enabled under Settings > Actions > General, and *Automatically delete head branches* enabled under Settings > General. The `translate` job runs with `contents: write`, `pull-requests: write` and `issues: write` (the last one creates the `sandbox` label).
+
+## Sandbox caps
+
+With `TRANSLATED_ENV=sandbox` a run refuses (with the counts) to submit more than `sandboxLimits.maxFilesPerRun` files or `maxCharsPerRun` characters, and requires `--limit` or `--file`, unless `--allow-unbounded` is given. Translated blocks sandbox keys for excessive use, so keep sandbox runs small. Sandbox output is throwaway test translation: never merge a sandbox PR and never commit sandbox translations from a local run. (Currently moot: the sandbox account has no AI-enabled service type, so a sandbox `--run` fails at the first submission; the caps stay as a guard for when Translated enables one.)
+
+## Local use
+
+```bash
+python build_scripts/translate-content.py --self-test                       # offline checks (no key)
+python build_scripts/translate-content.py --plan                            # what would be sent, and how many characters
+python build_scripts/translate-content.py --dump-orders /tmp/orders         # the exact request bodies; nothing is sent
+export TRANSLATED_ENV=production TRANSLATED_API_KEY=...                     # PowerShell: $env:TRANSLATED_ENV = "production"
+python build_scripts/translate-content.py --probe                           # key, endpoint, locales and service type (read-only)
+python build_scripts/translate-content.py --run --force --limit 1 --file "features/toc.md" --lang es --report r.md   # one real (billed) file
+python build_scripts/translate-content.py --run --report r.md               # what CI does: translate everything missing/outdated
+python build_scripts/translate-content.py --baseline --baseline-ref <sha> --overwrite-baseline --lang es   # (re)seed the status file, see Baseline
+```
+
+Local runs use the production account (the sandbox has no AI-enabled service type), so every `--run` is real, billed translation. Inspect the result with `git diff --stat localizedContent`, then either commit it through a normal PR or discard it with `git checkout -- localizedContent` - a discarded translation is bought again the next time CI translates that file.
+
+## Baseline
+
+`--baseline` was used once when migrating from the previous provider, and is the way to (re)seed a status file. For every scoped source with an existing translation it runs the same repair-then-verify step a delivery goes through, between English and the existing translation: translations that verify, or whose problems the repair step can fix (fences, inline code, markers, link targets, HTML attributes restored from English), are recorded as `translated` at the English hash; only unrepairable ones are recorded as `untranslated` with an empty hash and the reason is printed, so they are submitted on the first run; missing targets are `untranslated`. By default the repaired text is *not* written - the file is accepted as it is and only the status file changes; pass `--repair-existing` to write the repaired text as well. The English hash is taken from `--baseline-ref REF` when given (via `git show`, so pages edited since that ref are re-translated on the first run); the ref must resolve to a commit or the run exits 1. Unscoped entries are dropped and passthrough entries are left alone. It refuses to run when the status file already has `files` entries unless `--overwrite-baseline` is given, and prints a per-language summary including the files it marked outdated and why. Existing translations whose only finding is inline-code count drift are accepted as current too (printed as `warning` lines and counted as *accepted with inline-code warnings*), for the same reason such deliveries are written: resubmitting a whole page for one backtick pair is not worth it.
+
+## Status file
+
+`localizedContent/{lang}/.translation-status.json` is owned by `translate-content.py` and committed with the translations. It holds `language`, `sourceBaseline`, `files` (per file: `sourceHash`, `status` = `translated` | `untranslated` | `copied`, and optionally `"manual": true`), `failures` (present only when non-empty), and `summary` (counts including `copied`, `pinned`, `failures`). `build-docs.py --sync` reads it but never writes it. (A legacy `pendingJobs` section from the earlier asynchronous flow is dropped on the next run; the AI endpoint leaves nothing pending.)
+
+## Runbook
+
+- **Fix a translation.** While the translation PR is open, push the fix to its branch (`localization`); the next run merges that branch before doing anything else, so the fix survives. After the PR is merged, edit the file on `main` through a normal PR. Either way the file is overwritten by the next machine translation when its English source changes, unless you pin it.
+- **Pin (skip) a file.** Add `"manual": true` to the file's entry in `localizedContent/{lang}/.translation-status.json`. Pinned files are reported and never submitted or overwritten; remove the flag to hand the file back to the workflow.
+- **Re-translate one file.** Dispatch `translate.yml` with `force=true` and `file=features/dax-query.md` (and `limit` as needed), or locally: `python build_scripts/translate-content.py --run --force --file "features/dax-query.md" --lang es --report r.md`. Local runs use whatever `TRANSLATED_ENV` says; only commit output from production.
+- **A file failed.** The report and the `failures` entry list the reasons (for example "heading count differs" or "delivered content identical to source"). Usually the English source has a structure the translator cannot preserve: fix the English, and the changed hash resubmits the file on the next run (or use `--retry-failed` to try again unchanged). If the delivery is acceptable despite the problems, fetch it locally with `--run --force --file <rel> --lang <lang> --lenient --report r.md`, review the written file, and commit it through a normal PR.
+- **Go live on production.** Both environments default to service type `AI` in `build-config.json`; set the repository variable `TRANSLATED_SERVICE_TYPE` only to override it. (1) Set the `TRANSLATED_API_KEY` secret to the production key. (2) Confirm the key, the locales and the `AI` service type locally first: `TRANSLATED_ENV=production TRANSLATED_API_KEY=<prod key> python build_scripts/translate-content.py --probe` (read-only; in PowerShell set `$env:TRANSLATED_ENV` and `$env:TRANSLATED_API_KEY` first), optionally followed by a one-file billed test run (see [Local use](#local-use)). (3) Set the repository variable `TRANSLATED_ENV` to `production`; from now on the automatic triggers are live. (4) Dispatch `translate.yml` with `mode=probe` to confirm the same from the workflow's secrets and variables. (5) Dispatch `mode=translate` with `limit=3`, `force=true`, `file=features/toc.md` and `target_branch` empty (auto = `localization`) for the first reviewed PR; request a review to get a preview build, merge. (6) Let the push trigger take over; watch the first couple of content merges.
+- **Stale-branch cleanup.** Before merging the translation branch into its tree, the workflow checks whether the branch tip is already contained in `main` or its PR is merged or closed (`gh pr list --head <branch> --state merged` / `--state closed`). Closing the translation PR - merged or not - marks the branch stale: the next run deletes the remote branch and starts from `main`, so a squash-merged translation PR never produces an empty follow-up PR (*Automatically delete head branches* makes this the normal path). Translations that lived only on that branch are lost with it, so those files are retranslated (and billed again) on the next run. To keep unmerged translations, leave the PR open or reopen it before the next run.
 
 # Bookmark Links and Translations
 
-When linking to a specific heading within a page (e.g., `#my-heading`), DocFX auto-generates the anchor ID from the heading **text**. Because Crowdin translates that text, the generated anchor changes per language (`#model-io` becomes `#es-del-modelo`, etc.), so a hardcoded English `#anchor` link breaks in every translated page and DocFX logs an `InvalidBookmark` warning. English builds stay clean because the anchors match there.
+When linking to a specific heading within a page (e.g., `#my-heading`), DocFX auto-generates the anchor ID from the heading **text**. Because translation changes that text, the generated anchor changes per language (`#model-io` becomes `#es-del-modelo`, etc.), so a hardcoded English `#anchor` link breaks in every translated page and DocFX logs an `InvalidBookmark` warning. English builds stay clean because the anchors match there.
 
 ## Automatic anchor stabilization (the build handles this)
 
@@ -180,9 +296,9 @@ When linking to a specific heading within a page (e.g., `#my-heading`), DocFX au
 ## E/S del modelo
 ```
 
-DocFX accepts the injected `id` as a valid bookmark, so `#model-io` resolves and the link lands on the right section while the heading keeps its translated text. Headings are aligned to the English source positionally (Crowdin preserves heading structure); if the heading counts differ, the file is skipped and reported rather than risk a misaligned anchor. The script is idempotent (it strips its own `data-loc-xref` anchors before recomputing) and never modifies English.
+DocFX accepts the injected `id` as a valid bookmark, so `#model-io` resolves and the link lands on the right section while the heading keeps its translated text. Headings are aligned to the English source positionally; this is safe because the translation script rejects deliveries whose heading count differs from the English source. If the heading counts differ anyway (a stale or hand-edited translation), the file is skipped and reported rather than risk a misaligned anchor. The script is idempotent (it strips its own `data-loc-xref` anchors before recomputing) and never modifies English.
 
-The build runs it automatically for each non-English language before DocFX (step 5 of [What the Build Script Does](#what-the-build-script-does)). You can also run it manually after a Crowdin pull:
+The build runs it automatically for each non-English language before DocFX (step 5 of [What the Build Script Does](#what-the-build-script-does)). You can also run it manually after merging a translation PR:
 
 ```bash
 python build_scripts/normalize-localized-heading-anchors.py            # all languages
@@ -194,7 +310,7 @@ python build_scripts/normalize-localized-heading-anchors.py es         # a singl
 ## Authoring guidance
 
 - **Prefer the bracketed link form** `[text](xref:uid#anchor)` over the bare `@uid#anchor` autolink. The closing `)` delimits the anchor, so trailing punctuation in any language can never leak into it.
-- **For a rename-proof anchor**, add an explicit `<a name="..."></a>` tag above the heading. Crowdin does not translate HTML `name` attributes, so the anchor stays stable across all languages *and* survives English heading renames — unlike an auto-generated slug. Only add these to headings actually linked to; there is no need to add them everywhere.
+- **For a rename-proof anchor**, add an explicit `<a name="..."></a>` tag above the heading. Translators and machine translation leave HTML `name` attributes alone (and the translation script restores HTML attributes from English), so the anchor stays stable across all languages *and* survives English heading renames — unlike an auto-generated slug. Only add these to headings actually linked to; there is no need to add them everywhere.
 
   ```markdown
   <a name="my-heading"></a>
@@ -210,11 +326,11 @@ DocFX renders styled alert boxes (Note, Tip, Important, Warning, Caution) from a
 > Your note text here.
 ```
 
-When an alert like this is nested inside a list item, Crowdin collapses the two lines into one on export, producing `> [!NOTE]> Your note text here.`. DocFX requires the marker to be alone on its line, so the collapsed form is downgraded to a plain `<blockquote>` — losing the styled box — and the build logs an `invalid-note-section` warning. Only list-nested alerts are affected; top-level alerts round-trip through Crowdin unchanged.
+Some translation exports collapse the two lines into one when an alert like this is nested inside a list item, producing `> [!NOTE]> Your note text here.`. DocFX requires the marker to be alone on its line, so the collapsed form is downgraded to a plain `<blockquote>` — losing the styled box — and the build logs an `invalid-note-section` warning. Only list-nested alerts are affected; top-level alerts round-trip unchanged.
 
-`build_scripts/normalize-localized-alerts.py` repairs this by splitting the collapsed form back into two lines, preserving the original indentation so the alert stays inside its list item. It is idempotent and only rewrites the exact collapsed pattern (text inside fenced code blocks is left untouched), so it is safe to run repeatedly.
+`build_scripts/normalize-localized-alerts.py` repairs this by splitting the collapsed form back into two lines, preserving the original indentation so the alert stays inside its list item. It is a safety net for translator output: the translation script already restores alert markers from English, but older translations and hand edits can still carry the collapsed form. It is idempotent and only rewrites the exact collapsed pattern (text inside fenced code blocks is left untouched), so it is safe to run repeatedly.
 
-The build runs it automatically for each non-English language before DocFX (step 4 of [What the Build Script Does](#what-the-build-script-does)). You can also run it manually after a Crowdin pull:
+The build runs it automatically for each non-English language before DocFX (step 4 of [What the Build Script Does](#what-the-build-script-does)). You can also run it manually after merging a translation PR:
 
 ```bash
 python build_scripts/normalize-localized-alerts.py            # fix all languages
@@ -227,7 +343,7 @@ python build_scripts/normalize-localized-alerts.py es         # fix a single lan
 
 The `_ui-strings.json` file controls the text of site-wide UI elements that are not part of the documentation content itself: the header navigation, header buttons, footer text, and the AI translation warning banner. These strings are applied at runtime by the JavaScript bundle for non-English pages.
 
-The English source is at `content/_ui-strings.json`. To provide translations for a language, create `localizedContent/{lang}/content/_ui-strings.json` with the same keys and translated values.
+The English source is at `content/_ui-strings.json`. For existing languages the translated file `localizedContent/{lang}/content/_ui-strings.json` is produced by the automated translation workflow like any other source file (see [Translating Content](#translating-content)): the run encodes `{placeholder}` tokens so the translator leaves them alone and rejects a delivery whose key set or placeholders differ from English. For a new language you can also seed the file by hand with the same keys and translated values.
 
 If a key is missing from a language's file, or no `_ui-strings.json` exists at all, the English value is used as fallback.
 

@@ -10,8 +10,8 @@ on:
       - main
 
 # Every job except close_pull_request_job carries the same `if`: run on pushes
-# to main and on open PRs, but only build the Crowdin `localization` branch
-# once a review is requested. GitHub Actions has no way to share a job
+# to main and on open PRs, but only build the translation `localization` branch
+# (Translated review PRs) once a review is requested. GitHub Actions has no way to share a job
 # condition, so the expression is repeated verbatim; keep the copies in sync.
 #
 # Job layout:
