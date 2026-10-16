@@ -60,7 +60,9 @@ te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx
 te auth login --identity     # Alias: -I
 ```
 
-After a successful service-principal login the CLI **caches the credentials** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
+After a successful service-principal login the CLI **caches the credentials** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Service-principal credentials passed to `te auth login` (client secret or certificate) are always cached. Run `te auth logout` to clear the cache.
+
+To authenticate a service principal without writing anything to the machine, skip `te auth login`: set `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET` and `AZURE_TENANT_ID`, and pass `--auth env` to each `te` command. The CLI authenticates per invocation and caches nothing - see [Non-interactive authentication](#non-interactive-authentication).
 
 > [!WARNING]
 > Passing secrets directly on the command line exposes them to process listings and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.

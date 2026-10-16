@@ -705,7 +705,9 @@ Analyze VertiPaq storage statistics.
 - `--export <file.vpax>` - export VertiPaq stats to a `.vpax` file for offline analysis.
 - `--import <file.vpax>` - load a previously exported `.vpax` file and analyze it offline.
 - `--obfuscate` - obfuscate names and expressions in exported VPAX.
-- `--top <N>`, `--stats`, `--annotate`, `--save`.
+- `--top <N>`, `--stats`.
+- `--annotate` - write stats as annotations on each model object (table size, column size, cardinality, etc.). Without `--push`, the annotations are only prepared, not written to the workspace.
+- `--push` - push the annotations prepared by `--annotate` back to the workspace. Requires `--annotate`; not available with `--import`.
 - `--auth <method>` - auth method override when connecting to a remote model.
 
 ```bash
@@ -714,6 +716,7 @@ te vertipaq Sales                # Stats limited to the Sales table
 te vertipaq --all                # Tables, columns, relationships, partitions
 te vertipaq --export stats.vpax
 te vertipaq --import stats.vpax  # Analyze offline
+te vertipaq --annotate --push    # Write stats as annotations and push them to the workspace
 ```
 
 ### Formatting expressions
