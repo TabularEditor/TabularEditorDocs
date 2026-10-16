@@ -2,7 +2,7 @@
 uid: te-cli-findings
 title: Machine-Readable Results (JSON)
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,7 +16,7 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-`te validate`, `te bpa run`, `te test run`, and `te query` report problems in one shared JSON shape. Under `--output-format json`, each of these commands emits a **single document** - there is no way for one of them to leave nothing to parse.
+`te validate`, `te bpa run`, `te schemacheck`, `te test run`, and `te query` report problems in one shared JSON shape. Under `--output-format json`, each of these commands emits a **single document** - there is no way for one of them to leave nothing to parse.
 
 > [!NOTE]
 > `te query` uses this JSON shape only when its pre-execution DAX validation produces at least one error. A successful query emits the query result instead: `{columns, rows, rowCount, truncated, durationMs, trace?}`.
@@ -57,8 +57,8 @@ Present on **every** finding:
 | Key | Values / meaning |
 | -- | -- |
 | `severity` | `error`, `warning`, or `info`. |
-| `source` | `validate`, `bpa`, `test`, or `query`. |
-| `code` | Stable finding code (a validation message ID, BPA rule ID, `TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID`, ...). |
+| `source` | `validate`, `bpa`, `schemaCheck`, `test`, or `query`. |
+| `code` | Stable finding code (a validation message ID, BPA rule ID, `TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID`, a `SCHEMA_*` code - see [Schema check codes](#schema-check-codes), ...). |
 | `message` | Human-readable description. |
 | `object` | Bare name of the object the finding is about. |
 | `objectType` | One of a closed vocabulary - see below. |
@@ -68,7 +68,7 @@ Present **only where the CLI knows them** - these keys are *absent* rather than 
 
 | Key | Populated by | Meaning |
 | -- | -- | -- |
-| `objectPath` | `validate` and `bpa` violations only | Canonical object path, resolvable as-is by `te get` or `te set`. Absent for test findings, query findings, and BPA rule errors. |
+| `objectPath` | `validate`, `bpa` violations and `schemaCheck` | Canonical object path, resolvable as-is by `te get` or `te set`. Absent for test findings, query findings, and BPA rule errors. |
 | `expressionPosition` | `validate` and `query` only | `{property, lineNumber, column}` inside the named expression property. **Optional on every source, including validate and query** - absent whenever the analyzer reported no usable position, and all-or-nothing (never a partial position). |
 | `ruleName`, `category` | `bpa` only | The violated rule's name and category. |
 
@@ -87,12 +87,28 @@ Each command keeps a few keys of its own at the top level of the document:
 | `te validate` | `valid` (boolean). |
 | `te bpa run` | `model`, `rulesEvaluated`, `violations`, `ruleErrors`, `ignoredRules`. Rule-evaluation errors appear in `findings` at severity `error` with `objectType: "BpaRule"` - `violations` and `ruleErrors` split the two counts. |
 | `te bpa run --fix` | A `fix` key inside the same single document: `changes`, `fixed`, `fixErrors`, `skipped`, `fixedItems`, `fixErrorItems`. If the fix pass itself fails, the document is still written with the reason in `fix.error`. Absent without `--fix`. |
+| `te schemacheck` | `tablesChecked`, `tablesSkipped`, `tablesWithDrift`. A table that was not checked appears in `findings` as one `info` finding with code `SCHEMA_TABLE_SKIPPED` and is counted in `tablesSkipped`, so "not checked" can never be mistaken for "clean". |
 | `te test run` | `suites`, `invalidSuites`, `testSummary` (per-status test tallies; `summary` remains the shared severity tally). |
 | `te query` | None - and only on validation errors; see the note above. |
 
+### Schema check codes
+
+`te schemacheck` findings have `objectType` `Column` when a model column can be named, and `Table` otherwise:
+
+| Code | Severity | Meaning |
+| -- | -- | -- |
+| `SCHEMA_SOURCE_COLUMN_ADDED` | `warning` | A source column that no model column reads. |
+| `SCHEMA_DATA_TYPE_CHANGED` | `warning` | A column's source data type no longer matches the model column's. |
+| `SCHEMA_MISSING_SOURCE_COLUMN` | `error` | A model column whose source column is gone. |
+| `SCHEMA_SOURCE_QUERY_ERROR` | `error` | The table's source could not be described, where Tabular Editor 2 would also have failed. |
+| `SCHEMA_DUPLICATE_SOURCE_COLUMN` | `info` | The source returned the same column name more than once; only the first occurrence was compared. |
+| `SCHEMA_TABLE_SKIPPED` | `info` | The table was not checked; the message gives the reason. |
+
+The two warning codes are reported as `error` when the model carries the `TabularEditor_SchemaCheckNoWarnings` annotation.
+
 ## CI annotations
 
-All four commands share one annotation writer for `--ci vsts` / `--ci github` (`azdo`, `azure-devops`, and `gh` are accepted aliases; `none` disables annotations; anything else is rejected before the command runs). Annotations go to stderr; stdout stays parseable:
+All five commands share one annotation writer for `--ci vsts` / `--ci github` (`azdo`, `azure-devops`, and `gh` are accepted aliases; `none` disables annotations; anything else is rejected before the command runs). Annotations go to stderr; stdout stays parseable:
 
 - Annotations carry the finding's code: `code=` on Azure DevOps, `title=` on GitHub.
 - Info-severity findings are not warnings: on GitHub they emit `::notice::`, on Azure DevOps a plain log line. An Azure DevOps run whose only findings are informational reports **Succeeded**.

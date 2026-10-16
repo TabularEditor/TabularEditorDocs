@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Command Reference
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -513,7 +513,7 @@ te validate --errors-only                 # Hide warnings and anti-pattern hints
 
 Every finding carries a stable code, shown in the **Code** column of the Errors, Warnings, and Anti-patterns tables as well as in JSON, `--ci` annotations, and `--trx`. Three codes are worth knowing when a hand-written model is involved: `TE0012` (a column and a measure, or two columns, share a name within one table) and `TE0013` (a measure name is repeated across tables) are errors - Analysis Services refuses to load such a model, and `te save-as` refuses to write one unless `--force` or `--skip-validation` is passed; `TE0014` is a warning that a TMDL folder has no `database.tmdl`, so the compatibility level in effect is a substitute for the one the model declared. The folder still loads and `te validate` still exits `0` for `TE0014`; hide it like any other warning with `--no-warnings` or `--errors-only`.
 
-Under `--output-format json`, `te validate` emits the shared findings JSON document (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te test run`, and `te query` - see @te-cli-findings.
+Under `--output-format json`, `te validate` emits the shared findings JSON document (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te schemacheck`, `te test run`, and `te query` - see @te-cli-findings.
 
 > [!NOTE]
 > `te validate` does not support `--output-format csv` - CSV is rejected up front with an actionable error rather than producing a partial result. Use `text` or `json` for validation output.
@@ -691,6 +691,45 @@ Re-enable a previously disabled built-in BPA rule by removing the rule ID from `
 ```bash
 te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
 ```
+
+### schemacheck
+
+Check the model's tables against their data sources for schema drift: source columns that no model column reads, columns whose source data type no longer matches, and model columns whose source column has disappeared. This is the new CLI's equivalent of Tabular Editor 2's `-SC` / `-SCHEMACHECK` - see @te-cli-migrate. The command is **read-only**: it never changes the model and has no `--save`. To act on what it reports, use [`te set <table> --update-schema`](#set) or remap a renamed column with `te set <table>/<column> -p SourceColumn=<newName>`.
+
+`te schemacheck` accepts:
+
+- `<path>` - optional positional argument: the table to check. Omitted, every table in the model is checked, each against the data source its own partition reads from - no connection flags are needed.
+- `--fail-on <severity>` - failure threshold: `error` (default) or `warning`. Any other value is rejected rather than read as the default.
+- `--ci <fmt>` - emit CI annotations to stderr: `vsts` (aliases `azdo`, `azure-devops`) or `github` (alias `gh`).
+- `--trx <path>` - write results as a VSTEST `.trx` file: one result per finding under the **Schema Checks** suite (failed for an error, warning for a warning, inconclusive for a table that was not checked), or a single passed `Schema check` result when nothing drifted.
+- `--source`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table` - override the source for **one named table**, with the same schema-detection flags as [`te add`](#add). `--source-table` on its own changes only the source table's name and keeps the connection of the data source that table reads from. The override reads SQL-family endpoints only (SQL Server, Azure SQL, Fabric Lakehouse and Warehouse); a table bound to any other kind of source is refused by name rather than compared against another server in the model.
+
+```bash
+te schemacheck                                        # Check every table against its own data source
+te schemacheck Sales                                  # Check one table
+te schemacheck --ci vsts                              # Azure DevOps annotations and task result
+te schemacheck --fail-on warning                      # Fail on any drift, not just removed columns
+te schemacheck --trx schema.trx                       # VSTEST results file
+te schemacheck Sales --source-table dbo.fact_sales    # Override the source table name for one table
+```
+
+What gets checked: legacy SQL query partitions, Power Query (M) partitions, and entity-bound Direct Lake and Fabric tables. A table that was not compared is never silently counted as clean - it is listed under **Not checked** with its reason (a calculated table or calculation group, a `TabularEditor_SkipSchemaCheck` annotation, no column bound to a source column, or a source the CLI cannot describe) and does not fail the run. Column matching is exact, case-insensitive and tolerant of square brackets (`[amount]` matches `amount`); a renamed source column is reported as one removal plus one addition. A source that returns the same column name more than once is reported under **Notes** as `SCHEMA_DUPLICATE_SOURCE_COLUMN` and never fails the run.
+
+Exit codes follow Tabular Editor 2, so a migrated pipeline keeps the result it has today:
+
+| Finding | Severity | Exit code (default) | `--ci vsts` result |
+| -- | -- | -- | -- |
+| Source column added, or source data type changed | Warning | `0` (`1` with `--fail-on warning`) | `SucceededWithIssues` |
+| Model column whose source column is gone | Error | `1` | `Failed` |
+| Legacy SQL query partition whose source cannot be read (blank query, unreachable server) | Error | `1` | `Failed` |
+| Table not checked, or duplicated source column | Info | `0` | `Succeeded` |
+
+The schema-check annotations from Tabular Editor 2 are honoured: `TabularEditor_SkipSchemaCheck` (and the historical misspelling `TabularEditor_SkipSkemaCheck`), `TabularEditor_IgnoreSourceColumnAdded`, `TabularEditor_IgnoreDataTypeChange`, `TabularEditor_IgnoreMissingSourceColumn`, `TabularEditor_AddFalseWhereClause`, and the model-level `TabularEditor_SchemaCheckNoWarnings`, which turns every warning into an error for every run - `--fail-on warning` does the same for a single run without changing the model. See [Ignoring objects](xref:importing-tables-te2#ignoring-objects) for what each annotation does.
+
+Under `--output-format json`, `te schemacheck` emits the shared findings JSON document with `tablesChecked`, `tablesSkipped` and `tablesWithDrift` counts - see @te-cli-findings. Only `text` and `json` output are supported.
+
+> [!NOTE]
+> Legacy partitions on an Oracle or ODBC data source, or on an OLE DB provider for anything other than SQL Server, are reported as **Not checked** - Tabular Editor 2 did check them. OLE DB sources can only be checked on Windows. See @te-cli-limitations#schema-check.
 
 ### vertipaq
 
@@ -1139,7 +1178,7 @@ te completion fish
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error, a `te script` run in which a script reported an error, a `te deploy` the server accepted with object errors). For `te diff`: differences found. |
+| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error, a `te schemacheck` run that found an error - or any drift with `--fail-on warning`, a `te script` run in which a script reported an error, a `te deploy` the server accepted with object errors). For `te diff`: differences found. |
 | `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 For fine-grained control in CI pipelines, combine exit codes with `--ci <vsts/github>` annotations and `--trx` results files - see @te-cli-cicd.
