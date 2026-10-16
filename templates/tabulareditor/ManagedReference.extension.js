@@ -42,7 +42,7 @@ exports.preTransform = function (model) {
             },
             {
               text: "Documentation",
-              url: "https://docs.tabulareditor.com/?tabs=TE3",
+              url: "https://docs.tabulareditor.com/en/index.html",
               uiStringKey: "header.nav.documentation"
             },
             {
