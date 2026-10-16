@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Tabular Editor 3 键盘快捷键
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,6 +45,21 @@ applies_to:
 | 重做 | Ctrl+Y |
 | 查找 | Ctrl+F |
 | 替换 | Ctrl+H |
+
+## 与焦点位置相关的快捷键
+
+某些快捷键会根据窗口中当前有焦点的部分执行不同的命令。文本控件包括文档编辑器、**表达式编辑器**，或在 **属性**视图中正在编辑的单元格。
+
+| 快捷键                                  | 焦点在文本控件上   | 焦点在 TOM Explorer 上 |
+| ------------------------------------ | ---------- | ------------------ |
+| **Ctrl+Z** / **Ctrl+Y**              | 撤销或重做键入内容  | 撤销或重做上一次模型更改       |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | 剪切、复制或粘贴文本 | 剪切、复制或粘贴所选对象       |
+| **Delete**                           | 删除所选文本     | 删除所选对象             |
+| **Ctrl+A**                           | 全选文本       | 选择当前层级的所有对象        |
+| **Ctrl+D**                           | 复制当前行      | 复制所选对象             |
+| **Ctrl+U**                           | 取消注释文档中的各行 | 使所选对象可见            |
+
+**Ctrl+S** 会保存当前有焦点的文档，例如 DAX 查询或关系图。当 TOM Explorer 获得焦点时，按下 **Ctrl+S** 即可保存模型。若要撤销通过文本控件对模型所做的更改，请参阅 @undo-redo。
 
 ## Data model 建模
 
@@ -92,7 +107,6 @@ applies_to:
 | 复制行    | Ctrl+Shift+T |
 | 交换行    | Ctrl+T       |
 | 重复当前行  | Ctrl+D       |
-| 将行转为小写 | Ctrl+U       |
 | 将行转为大写 | Ctrl+Shift+U |
 | 向上移动行  | Alt+上箭头      |
 | 向下移动行  | Alt+向下箭头     |

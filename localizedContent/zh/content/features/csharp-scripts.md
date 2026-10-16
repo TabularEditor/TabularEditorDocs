@@ -2,11 +2,11 @@
 uid: csharp-scripts
 title: C# Script
 author: Daniel Otykier
-updated: 2026-09-22
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
-      true: true
+      full: true
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
@@ -39,7 +39,7 @@ C# Script 编辑器支持基于 Roslyn 的代码补全和调用提示；从 Tabu
 
 `Model` 对象是 [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) 类的封装，仅公开其部分属性，并额外提供一些方法和属性，方便对翻译、透视和对象集合进行操作。同样也适用于任何派生对象，例如表、度量值、列等，它们都各自有对应的包装器对象。请参阅 <xref:api-index>，查看 Tabular Editor 包装器库中对象、属性和方法的完整列表。
 
-通过此包装器进行操作的主要优势在于：所有更改都可以在 Tabular Editor UI 中撤销。执行脚本后直接按 CTRL+Z，你会看到脚本所做的所有更改会立即被撤销。此外，包装器还提供了一些便捷方法，让许多常见任务都能用一行代码完成。下面我们会提供一些示例。我们假设你已经对 C# 和 LINQ 有一定了解，因为这里不会讲解 Tabular Editor 脚本功能中的这些内容。即使你不熟悉 C# 和 LINQ，也应该能跟上下面的示例。
+通过此包装器进行操作的主要优势在于：所有更改都可以在 Tabular Editor UI 中撤销。运行脚本后，按 **Ctrl+Z** 可撤销该脚本所做的所有更改。在 Tabular Editor 3 中，脚本运行后焦点仍会停留在脚本编辑器中，因此在按 **Ctrl+Z** 之前，请先单击 TOM Explorer。请参阅 [文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。此外，包装器还提供了一些便捷方法，让许多常见任务都能用一行代码完成。下面我们会提供一些示例。我们假设你已经对 C# 和 LINQ 有一定了解，因为这里不会讲解 Tabular Editor 脚本功能中的这些内容。即使你不熟悉 C# 和 LINQ，也应该能跟上下面的示例。
 
 ## 设置对象属性
 
@@ -237,7 +237,7 @@ Tabular Editor 提供了一组专用的辅助方法，便于完成某些脚本�
 
 如果脚本失败（编译或运行时错误），所有模型元数据更改都会自动回滚，并且不会显示预览对话框。如果脚本成功但未检测到任何元数据更改，则会改为显示一条信息。
 
-脚本执行产生的所有模型元数据更改都会封装在一次撤销事务中。即使在预览对话框中接受了更改，也仍可通过 **Ctrl+Z** 撤销整个操作。
+脚本执行产生的所有模型元数据更改都会封装在一次撤销事务中。即使在预览对话框中接受了更改，你仍然可以撤销整个操作。单击 TOM Explorer 并按 **Ctrl+Z**，或在 **编辑** 菜单中选择模型撤销条目。
 
 > [!IMPORTANT]
 > 预览与撤销功能仅适用于模型元数据更改。如果脚本执行写入文件、数据库或发起 Web 请求等外部操作，这些操作会立即执行，且无法撤销。预览对话框不会尝试分析脚本代码——其原理是比较执行前后的模型元数据状态。

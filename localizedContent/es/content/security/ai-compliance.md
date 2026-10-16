@@ -2,7 +2,7 @@
 uid: ai-compliance
 title: Guía de cumplimiento de las funciones de IA
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -142,13 +142,13 @@ Las directivas de la Edición Enterprise se aplican a las licencias Enterprise, 
 
 ### Desactivar las funciones de IA
 
-| Requisito                                               | Directiva          | Edición |
-| ------------------------------------------------------- | ------------------ | ------- |
-| Sin funciones de IA y sin el componente de IA instalado | `DisableAi`        | Todas   |
-| Sin asistente de IA; se permite el servidor MCP         | `DisableAiChat`    | Todas   |
-| Sin servidor MCP; se permite el asistente de IA         | `DisableMcpServer` | Todas   |
+| Requisito                                                                                                | Directiva          | Edición |
+| -------------------------------------------------------------------------------------------------------- | ------------------ | ------- |
+| Sin funciones de IA; el componente de IA se omite en las nuevas instalaciones y se elimina al actualizar | `DisableAi`        | Todas   |
+| Sin asistente de IA; se permite el servidor MCP                                                          | `DisableAiChat`    | Todas   |
+| Sin servidor MCP; se permite el asistente de IA                                                          | `DisableMcpServer` | Todas   |
 
-`DisableAi` también borra cualquier configuración del proveedor almacenada, incluida la clave de la API. Consulta [Implementación sin funciones de IA](xref:installation-activation-basic#deploying-without-the-ai-features).
+`DisableAi` también borra cualquier configuración del proveedor almacenada, incluida la clave de la API. Una instalación en la que el instalador no se ha ejecutado desde que se estableció la directiva conserva los archivos de IA en el disco, y Tabular Editor 3 no los carga. Consulta [Forzar la decisión con la directiva DisableAi](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy).
 
 La versión portátil de Tabular Editor 3 no tiene ningún paso de instalación. Respeta `DisableAi` en tiempo de ejecución. Use el control de aplicaciones, como AppLocker o Windows Defender Application Control, si los usuarios no deben ejecutar versiones anteriores.
 

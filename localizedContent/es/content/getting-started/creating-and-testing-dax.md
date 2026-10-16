@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Agregar medidas y otros objetos calculados
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -111,7 +111,7 @@ Cada vez que haces un cambio en un objeto o una propiedad en Tabular Editor, se 
 - **Editar > Rehacer** (CTRL+Y)
 
 > [!NOTE]
-> Todos los editores de texto de Tabular Editor 3 tienen su propio historial de deshacer/rehacer, por lo que, si el cursor está dentro de un editor de texto, los atajos de teclado desharán y rehacerán lo que hayas escrito en ese editor. Puedes usar las opciones del menú **Editar** para deshacer/rehacer a nivel de modelo, o desactivar el editor de texto actual haciendo clic en otro elemento de la interfaz de usuario (como el Explorador TOM).
+> Los editores de texto de Tabular Editor 3 tienen su propio historial de deshacer. Cuando el cursor está en un editor de texto, **Ctrl+Z** y **Ctrl+Y** deshacen y rehacen lo escrito en ese editor. Para deshacer un cambio en el modelo, haga clic primero en el Explorador TOM o seleccione la entrada de deshacer del modelo en el menú **Editar**. Consulte [Deshacer en los editores de texto](xref:undo-redo#undo-in-text-editors).
 
 # Navegación
 

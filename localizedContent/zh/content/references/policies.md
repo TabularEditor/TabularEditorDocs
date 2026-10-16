@@ -2,7 +2,7 @@
 uid: 策略
 title: 策略
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -245,6 +245,6 @@ Tabular Editor 3 与 CLI 共用的策略直接位于 **Tabular Editor** 下。�
 
 如果希望禁用所有 AI 功能，请设置 `DisableAi` 策略。这会阻止任何与 AI 相关的内容在启动时加载，并清除任何已存储的 API 密钥配置。它适用于所有版本，无需企业版许可证。
 
-从 3.27.0 开始，安装程序也会按相同的优先级从全部六个键读取该策略，并完全省略 AI 组件；因此，对于策略禁用了 AI 的计算机，AI 程序集永远不会写入其安装文件夹。将该值设置为 `1` 的 `REG_DWORD`：安装程序将 `1` 视为 _禁用_，将任何其他已存在的值视为 _未禁用_；而应用程序则接受任何非零值。有关同时部署功能选择和该策略的信息，请参阅[不带 AI 功能进行部署](xref:installation-activation-basic#deploying-without-the-ai-features)。
+从 3.27.0 起，安装程序也会从全部六个键读取该策略，并遵循相同的优先级顺序。全新安装将不包含 AI 组件，而升级会将其从已安装该组件的计算机中移除。现有安装会保留 AI 文件直到下一次升级；在设置该策略期间，Tabular Editor 3 不会加载它们。将该值设置为 `1` 的 `REG_DWORD`：安装程序将 `1` 视为 _禁用_，将任何其他已存在的值视为 _未禁用_；而应用程序则接受任何非零值。参见[使用 DisableAi 策略强制执行该决定](xref:installation-activation-basic#enforcing-the-decision-with-the-disableai-policy)，了解如何将功能选择与该策略一并部署。
 
 若要保留 AI 助手但限制其可执行的操作，请改用上述企业版策略：将权限上限设置为贵组织可接受的范围，将提供程序和终结点锁定到由贵方运营的 Gateway，并使用 `McpDisabledTools` 为已连接的代理禁用特定工具。
