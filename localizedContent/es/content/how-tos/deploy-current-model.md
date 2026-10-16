@@ -1,6 +1,8 @@
 ---
 uid: deploy-current-model
-title: Implementar el modelo cargado actualmente
+title: Implementar el modelo cargado
+author: Morten Lønskov
+updated: 2026-09-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,18 +11,24 @@ applies_to:
       full: true
 ---
 
-# Implementar el modelo cargado actualmente
+# Implementar el modelo cargado
 
-## Implementación
+La implementación envía el modelo que tienes abierto a un servidor, ya sea creando una base de datos nueva o sobrescribiendo una existente. Así es como llevas a un servidor un modelo almacenado en un archivo `.bim` o en una carpeta, y cómo lo promocionas de un entorno a otro.
 
-Si quieres implementar el modelo cargado actualmente en una nueva base de datos o sobrescribir una base de datos existente con los cambios del modelo (por ejemplo, al cargarlo desde un archivo Model.bim), usa el Asistente de implementación en "Model" > "Deploy...".
+Abre el asistente desde **Model > Deploy...**, elige el servidor y la base de datos de destino y, después, decide qué parte del modelo quieres enviar.
 
-Tabular Editor incluye un Asistente de implementación que ofrece varias ventajas frente a la implementación desde SSDT, especialmente al implementar en una base de datos existente. Después de elegir un servidor y una base de datos de destino, tienes las siguientes opciones para esta implementación:
+## Qué controla cada opción
 
-![Asistente de implementación](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
+La utilidad del asistente está en lo que te permite _dejar intacto_ en el destino. Cada opción implica decidir si el destino conserva su propia versión de algo:
 
-Si dejas desmarcada la casilla "Deploy Connections", te aseguras de que todos los Data sources de la base de datos de destino permanezcan intactos. Recibirás un error si tu modelo contiene una o más tablas con un Data source que no exista ya en la base de datos de destino.
+- **Implementar la estructura del modelo** envía los metadatos del modelo. Esta es la implementación en sí; si la desmarcas, no queda nada por hacer.
+- **Implementar Data sources** envía los Data sources explícitos. Desmárcala para que el destino conserve sus propias cadenas de conexión y credenciales, que suele ser lo que quieres al pasar de desarrollo a pruebas.
+- **Implementar particiones de tabla** sincroniza las particiones con los metadatos del modelo. Desmárcala para dejar intactas las particiones existentes y los datos que contienen. Si está activada, las particiones del destino que no estén en el modelo se eliminan junto con sus datos.
+  - **Implementar particiones regidas por políticas de actualización incremental** aparece cuando la opción anterior está activada y te permite implementar todas las particiones _excepto_ las que genera una política de actualización incremental.
+- **Implementar roles del modelo** envía los roles definidos en el modelo. Desmárcala para conservar los roles del destino tal como están.
+  - **Implementar miembros de roles del modelo** envía la asignación de miembros a los roles. Los miembros de los roles suelen administrarse en el servidor en lugar de en los metadatos, así que es normal desmarcar esta opción.
 
-Del mismo modo, si dejas desmarcada la casilla "Deploy Table Partitions", te aseguras de que las particiones existentes de tus tablas no se modifiquen y de que los datos de las particiones se mantengan intactos.
+@deployment cubre todo esto en detalle, junto con el script TMSL que genera el asistente, lo que una implementación hace con los datos que ya existen en el destino y cómo implementar desde la línea de comandos o desde un pipeline.
 
-Cuando la casilla "Deploy Roles" está marcada, los roles de la base de datos de destino se actualizarán para reflejar los del modelo cargado; sin embargo, si la casilla "Deploy Role Members" está desmarcada, los miembros de cada rol permanecerán sin cambios en la base de datos de destino.
+> [!NOTE]
+> Implementar no es lo mismo que guardar. Si abriste el modelo desde un servidor, **Archivo > Guardar** guarda los cambios en _esa_ base de datos, como se describe en @connect-ssas. Usa la implementación cuando el destino esté en otro lugar.

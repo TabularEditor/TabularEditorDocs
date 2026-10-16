@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-10-12
 ---
 
 # Tabular Editor
@@ -62,7 +62,7 @@ Tabular Editor 2.x es una aplicación liviana que permite modificar rápidamente
 - Soporte para editar las perspectivas del modelo y las traducciones de metadatos
 - Cambio de nombre en lote
 - Cuadro de búsqueda para moverse rápidamente por modelos grandes y complejos
-- Asistente para la implementación
+- Asistente de implementación
 - Analizador de prácticas recomendadas
 - Scripting avanzado mediante scripts de estilo C# para automatizar tareas repetitivas
 - Interfaz de línea de comandos (puede usarse para integrar Tabular Editor con canalizaciones de DevOps)
@@ -77,7 +77,7 @@ En la tabla siguiente se muestran las principales características de ambas herr
 
 ### Características comunes
 
-Ambas herramientas ofrecen las mismas características en cuanto a las opciones de modelado de datos disponibles, ya que, básicamente, exponen todos los objetos y propiedades del [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) mediante una interfaz de usuario intuitiva y ágil. Puedes editar propiedades avanzadas de los objetos que no están disponibles en las herramientas estándar. Las herramientas pueden cargar los metadatos del modelo desde archivos o desde cualquier instancia de Analysis Services. Los cambios solo se sincronizan cuando pulsas Ctrl+S (guardar), lo que ofrece una experiencia de edición "sin conexión" que la mayoría considera superior al modo "siempre sincronizado" de las herramientas estándar. Esto se nota especialmente al trabajar con Data model grandes y complejos.
+Ambas herramientas ofrecen las mismas funcionalidades en cuanto a las opciones de modelado del Data model disponibles, ya que básicamente exponen todos los objetos y propiedades del [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) mediante una interfaz de usuario intuitiva y ágil. Puedes editar propiedades avanzadas de los objetos que no están disponibles en las herramientas estándar. Las herramientas pueden cargar los metadatos del modelo desde archivos o desde cualquier instancia de Analysis Services. Los cambios solo se sincronizan cuando pulsas Ctrl+S (guardar), lo que ofrece una experiencia de edición "sin conexión" que la mayoría considera superior al modo "siempre sincronizado" de las herramientas estándar. Esto se nota especialmente al trabajar con Data model grandes y complejos.
 
 Además, ambas herramientas permiten hacer varios cambios en los metadatos del modelo en lote, cambiar el nombre de objetos en lote, copiar y pegar objetos, arrastrar y soltar objetos entre tablas y carpetas de visualización, etc. Las herramientas incluso incluyen compatibilidad con deshacer/rehacer.
 
@@ -91,9 +91,9 @@ Por último, gracias a la funcionalidad "Save-to-folder", un nuevo formato de ar
 
 Si eres nuevo en el modelado tabular en general, te recomendamos que uses las herramientas estándar hasta que te familiarices con conceptos como tablas calculadas, medidas, relaciones, DAX, etc. En ese punto, prueba Tabular Editor 2.x y comprueba lo mucho más rápido que te permite realizar determinadas tareas. ¡Si te gusta y quieres más, considera Tabular Editor 3.x!
 
-## Siguientes pasos
+## Pasos a seguir
 
 - [Primeros pasos con Tabular Editor 2](xref:getting-started-te2)
-- [Primeros pasos con Tabular Editor 3](xref:getting-started)
+- [Instale y active Tabular Editor 3](xref:getting-started)
 - [Plan de ruta de Tabular Editor 3](xref:roadmap)
 

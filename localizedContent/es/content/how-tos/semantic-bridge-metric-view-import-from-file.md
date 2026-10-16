@@ -20,25 +20,25 @@ applies_to:
 
 # Importar una vista de métricas desde un archivo
 
-Esta guía práctica muestra cómo importar una vista de métricas en un modelo tabular directamente desde un archivo YAML.
+En esta guía práctica se muestra cómo importar una vista de métricas en un modelo tabular directamente desde un archivo YAML.
 
 > [!NOTE]
-> Estas guías están dirigidas a Tabular Editor 3.26.2 y versiones posteriores.
+> Estas guías prácticas están dirigidas a Tabular Editor 3.26.2 y versiones posteriores.
 > Las versiones anteriores no admiten las características de la vista de métricas v1.1 que se muestran aquí.
 
 ## Obtener la vista de métricas de ejemplo
 
-Guarda la vista de métricas de ejemplo (más abajo) en un archivo local.
-Tendrás que sustituir el marcador de posición del ejemplo siguiente por esta ruta.
-En esta guía práctica en concreto, solo tienes que guardar el archivo; no hace falta ejecutar `Load` ni `Deserialize`.
+Guarda la vista de métricas de ejemplo (a continuación) en un archivo local.
+Tendrás que reemplazar el marcador de posición del ejemplo siguiente con esta ruta.
+Para esta guía práctica, solo tienes que guardar el archivo; no necesitas ejecutar `Load` ni `Deserialize`.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Importar desde archivo
 
 `ImportToTabularFromFile` carga el YAML desde el disco y lo importa al modelo abierto en un solo paso.
-Sustituye el marcador de posición del script siguiente (`<PLACEHOLDER>`) por la ruta donde guardaste el YAML.
-El nombre de host de Databricks y la ruta HTTP se usan para crear las expresiones M de las particiones; para una prueba rápida, puedes pasar valores provisionales y corregirlos antes de actualizar los datos.
+Actualiza el marcador de posición del script siguiente (`<PLACEHOLDER>`) con la ruta donde guardaste el YAML.
+El nombre de host de Databricks y la ruta HTTP se usan para construir las expresiones M de las particiones; para una prueba rápida, puedes proporcionar valores de marcador de posición y corregirlos antes de actualizar los datos.
 
 ```csharp {compile}
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -58,7 +58,7 @@ Output(sb.ToString());
 ## Pasos a seguir
 
 - [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
-- [Importar una vista de métricas y ver los diagnósticos](xref:semantic-bridge-import)
+- [Importar una vista de métricas y ver diagnósticos](xref:semantic-bridge-import)
 
 ## Ver también
 

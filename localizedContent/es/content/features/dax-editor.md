@@ -2,7 +2,7 @@
 uid: dax-editor
 title: Editor de DAX
 author: Daniel Otykier
-updated: 2023-02-03
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,7 +45,7 @@ Los calltips de DAX se actualizan al alternar entre las opciones de sintaxis con
 
 La mayoría de los aspectos de Code Assist se pueden configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Code Assist**](xref:preferences#dax-editor--code-assist).
 
-## Ver definición
+## Ver la definición
 
 Con el cursor sobre una referencia a un objeto, como una variable o una referencia a una medida, pulsa [Alt+F12] para mostrar un editor en línea con la definición de ese objeto, debajo del cursor. Esto resulta útil cuando desea ver el código DAX de un objeto al que se hace referencia sin salir de la posición actual del documento.
 
@@ -57,26 +57,44 @@ Usa la tecla Esc para volver a cerrar el panel de Ver la definición.
 
 En lugar de usar Ver la definición, también podemos saltar directamente a la ubicación donde está definido el objeto referenciado. Para ello, pulsa [F12]. Si el objeto referenciado no está definido en el documento actual, esta operación saltará a ese objeto en el Explorador TOM. Si lo necesita, puede volver atrás con [Alt+Flecha izquierda].
 
-# Definir medida
+## Definir medida
 
 En los scripts DAX y las consultas DAX, a veces es útil incluir la definición de una medida a la que se hace referencia en otra parte del código. La función **Definir medida** permite hacerlo cuando el cursor está sobre una referencia a una medida. También puede elegir la opción **Definir medida con dependencias** si desea incluir también todas las referencias posteriores a medidas.
 
 ![Definir medida con dependencias](~/content/assets/images/define-measure-with-deps.png)
 
-# Medida en línea
+## Medida en línea
 
-Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Cuando un contexto de fila envuelve la referencia a la medida original, Tabular Editor encierra automáticamente la expresión de la medida en [`CALCULATE`](https://dax.guide/calculate) (tal como ocurre implícitamente en las referencias a medidas).
+Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Haz clic con el botón derecho en una referencia de medida en el editor de DAX y selecciona **Medida en línea**.
 
-# Formatear DAX
+Una referencia de medida convierte implícitamente la fila actual en un filtro antes de que se evalúe la expresión de la medida. Por tanto, pegar la expresión tal cual cambiaría el resultado. Así, cuando la referencia está dentro de un contexto de fila —por ejemplo, como segundo argumento de un iterador como [`SUMX`](https://dax.guide/sumx) o [`FILTER`](https://dax.guide/filter)—, Tabular Editor envuelve la expresión en línea con [`CALCULATE`](https://dax.guide/calculate) para conservar ese comportamiento:
+
+```dax
+// Before using inline measure on the [Margin] measure
+SUMX ( 'Sales', [Margin] )
+
+// After using inline measure on the [Margin] measure
+SUMX ( 'Sales', CALCULATE ( 'Sales'[Amount] - 'Sales'[Cost] ) )
+```
+
+El encapsulado solo se agrega cuando puede marcar la diferencia. La expresión se inserta sin encapsular cuando:
+
+- la referencia **no está dentro de un contexto de fila**, incluido cuando ya está dentro de su propio `CALCULATE( ... )` propio
+- la expresión de la medida **no lee nada del modelo** (una constante, una referencia a otra medida o una llamada a una función como `TODAY()`). Una referencia a una tabla, una columna, un calendario o una [función definida por el usuario](xref:udfs) sí se considera una lectura del modelo y, por tanto, sí se encapsula
+- la expresión **ya realiza la transición por sí misma**, mediante un `CALCULATE( ... )` o `CALCULATETABLE( ... )` sin argumentos de filtro. Con un argumento de filtro, el envoltorio se sigue agregando, porque los argumentos de filtro se evalúan antes de la transición
+
+Si no se puede analizar la expresión de la medida, se agrega el encapsulado, partiendo del principio de que un encapsulado innecesario no hace daño, mientras que uno ausente sí.
+
+## Dar formato a DAX
 
 El Editor de DAX de Tabular Editor 3 formatea automáticamente su código mientras escribe; es decir, corrige las mayúsculas y minúsculas de las funciones y las referencias a objetos, añade la sangría adecuada y los espacios entre paréntesis, etc. Todo esto se puede configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Formato automático**](xref:preferences#dax-editor--auto-formatting).
 
 Sin embargo, a veces es necesario formatear todo el documento. Puedes hacerlo pulsando [F6] o [Shift+F6] si prefieres saltos de línea más frecuentes. Para las Consultas DAX, también puedes usar [Alt+F6] para reformatear el código y hacer que las comas se coloquen siempre al principio de cada línea, lo cual es útil al depurar.
 
-# Refactorización
+## Refactorización
 
 Si quieres cambiar el nombre de una variable o de una columna de extensión, puedes usar la opción **Refactor** (Ctrl+R) con el cursor situado sobre la referencia de la variable o de la columna de extensión. Esto seleccionará todas las apariciones de ese objeto, lo que te permite cambiarle el nombre en todas partes de una sola vez.
 
-# Atajos de teclado configurables
+## Atajos de teclado configurables
 
 El Editor de DAX y los editores de código en general son muy configurables y admiten muchos comandos adicionales para editar código de forma rápida y productiva. Puedes ver todos estos comandos, así como modificar y asignar atajos de teclado en **Herramientas > Preferencias > Tabular Editor > Teclado**.

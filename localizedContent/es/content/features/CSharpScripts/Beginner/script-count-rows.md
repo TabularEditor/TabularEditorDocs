@@ -23,25 +23,25 @@ Este script requiere una conexión a un modelo remoto o una conexión mediante e
 ### Contar las filas de la tabla seleccionada
 
 ```csharp
-// Este script cuenta las filas de una tabla seleccionada y muestra el resultado en un cuadro de información emergente.
-// No escribe ningún cambio en este modelo.
+// This script counts rows in a selected table and displays the result in a pop-up info box.
+// It does not write any changes to this model.
 //
-// Usa este script cuando quieras comprobar si una tabla se ha cargado o cuántas filas tiene.
+// Use this script when you want to check whether a table was loaded or how many rows it has.
 //
-// Obtener el nombre de la tabla
+// Get table name
 string _TableName = 
     Selected.Table.DaxObjectFullName;
 
-// Contar filas de la tabla
+// Count table rows
 string _dax = 
     "{ FORMAT( COUNTROWS (" + _TableName + "), \"#,##0\" ) }";
 
-// Evaluar DAX
+// Evaluate DAX
 string _TableRows = 
     Convert.ToString(EvaluateDax( _dax ));
 
-// Devolver el resultado en una ventana emergente
-Info ( "Número de filas en " + _TableName + ": " + _TableRows);
+// Return output in pop-up
+Info ( "Number of rows in " + _TableName + ": " + _TableRows);
 ```
 
 ### Explicación

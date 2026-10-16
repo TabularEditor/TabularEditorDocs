@@ -8,7 +8,7 @@ description: Regla de prácticas recomendadas que identifica grupos de cálculo 
 
 # Los grupos de cálculo deben contener elementos
 
-## Información general
+## Resumen
 
 Esta regla de prácticas recomendadas identifica grupos de cálculo que no contienen elementos de cálculo. Los grupos de cálculo vacíos no tienen ninguna utilidad y deben completarse o eliminarse.
 
@@ -34,7 +34,7 @@ La regla se activa cuando un grupo de cálculo no tiene ningún elemento de cál
 CalculationItems.Count == 0
 ```
 
-## Cómo solucionarlo
+## Cómo corregirlo
 
 ### Opción 1: Agregar elementos de cálculo
 
@@ -53,7 +53,7 @@ Si ya no lo necesitas:
 2. Haz clic con el botón derecho en la tabla
 3. Selecciona **Eliminar**
 
-## Causas comunes
+## Causas habituales
 
 ### Causa 1: Desarrollo incompleto
 
@@ -69,26 +69,26 @@ Se movieron todos los elementos de cálculo a un grupo de cálculo diferente.
 
 ## Ejemplo
 
-### Antes de corregir
+### Antes de la corrección
 
 ```
-Grupo de cálculo: Inteligencia temporal
-  Elementos: (ninguno)  ← Problema
+Calculation Group: Time Intelligence
+  Items: (none)  ← Problem
 ```
 
-### Después de corregir
+### Después de la corrección
 
 ```
-Grupo de cálculo: Inteligencia temporal
-  Elementos:
-    - Período actual: SELECTEDMEASURE()
-    - Acumulado del año: CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
-    - Año anterior: CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
+Calculation Group: Time Intelligence
+  Items:
+    - Current Period: SELECTEDMEASURE()
+    - Year-to-Date: CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
+    - Prior Year: CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
 ```
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a los modelos con nivel de compatibilidad **1200** y superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
 ## Reglas relacionadas
 

@@ -2,7 +2,7 @@
 uid: new-as-model
 title: Crear un modelo de Analysis Services
 author: Daniel Otykier
-updated: 2021-09-06
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ applies_to:
 En esta página te guiamos paso a paso por el proceso de crear desde cero un nuevo modelo tabular de Analysis Services con Tabular Editor 3.
 
 > [!NOTE]
-> La Edición Business de Tabular Editor 3 se limita a la [edición Standard de SQL Server](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) y al [nivel Basic de Azure Analysis Services](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Ten en cuenta que algunas características de modelado no se admiten en estos niveles.
+> La Edición Business de Tabular Editor 3 se limita a la [edición Standard de SQL Server](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) y al [nivel Basic de Azure Analysis Services](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier). Ten en cuenta que algunas características de modelado no se admiten en estos niveles.
 
 ##### Crear un nuevo modelo
 
@@ -31,25 +31,29 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
 
 ![Nuevo modelo](~/content/assets/images/new-as-model-new-model.png)
 
-- Proporciona un nombre para tu modelo o usa el valor predeterminado. Luego, elige el nivel de compatibilidad en función de la versión de Analysis Services a la que apuntas. Tus opciones son las siguientes:
-  - 1200 (Funciona con SQL Server 2016 o posterior y con Azure Analysis Services)
-  - 1400 (Funciona con SQL Server 2017 o posterior y con Azure Analysis Services)
-  - 1500 (Funciona con SQL Server 2019 o Azure Analysis Services)
-  - 1600 (Funciona con SQL Server 2022 o Azure Analysis Services)
-  - 1700 (Funciona con SQL Server 2025 o Azure Analysis Services)
+- Indica un nombre para tu modelo o usa el valor predeterminado. Luego, elige el nivel de compatibilidad para la versión de Analysis Services a la que te diriges. El cuadro de diálogo muestra estas opciones:
 
-- Para obtener la mejor experiencia de desarrollo, selecciona la opción "Usar base de datos del Workspace". Esto requiere que tengas disponible una instancia de Analysis Services en la que se implementará la base de datos del Workspace. Puede ser una instancia local o remota de SQL Server Analysis Services, o una instancia de Azure Analysis Services. Al hacer clic en Aceptar, se te solicitará que introduzcas la cadena de conexión de la instancia de Analysis Services en la que quieres que se cree la base de datos del Workspace.
+  - 1200 (Azure Analysis Services / SQL Server 2016+)
+  - 1400 (Azure Analysis Services / SQL Server 2017+)
+  - 1500 (Azure Analysis Services / SQL Server 2019+)
+  - 1600 (Azure Analysis Services / SQL Server 2022+)
+  - 1700 (Azure Analysis Services / SQL Server 2025+)
+  - 1706 (Power BI / Fabric)
+
+  1700 es el nivel más alto que admite Analysis Services. Usa 1706 solo para Power BI y Fabric, por ejemplo, al desplegar el modelo mediante el punto de conexión XMLA de Power BI.
+
+- Para obtener la mejor experiencia de desarrollo, marca la opción "Usar base de datos del Workspace". Esto requiere que tengas disponible una instancia de Analysis Services en la que se implementará la base de datos del Workspace. Puede ser una instancia local o remota de SQL Server Analysis Services, o una instancia de Azure Analysis Services. Al hacer clic en Aceptar, se te solicitará que introduzcas la cadena de conexión de la instancia de Analysis Services en la que quieres que se cree la base de datos del Workspace.
 
   [Más información sobre las bases de datos de Workspace](xref:workspace-mode).
 
 > [!NOTE]
-> Con una base de datos de Workspace, puedes validar Power Query (expresiones M) e importar el esquema de tablas a partir de expresiones de Power Query. También puedes actualizar y consultar datos en la base de datos de Workspace, lo que facilita la depuración y las pruebas de tus expresiones DAX.
+> Con una base de datos del Workspace, puedes validar Power Query (expresiones M) e importar el esquema de la tabla desde expresiones de Power Query. También puedes actualizar y consultar datos en la base de datos del Workspace, lo que facilita la depuración y las pruebas de tus expresiones DAX.
 
 Una vez creado el modelo, el siguiente paso es agregar un Data source y algunas tablas.
 
 #### Agregar un Data source y tablas
 
-Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. Para obtener más información sobre las diferencias entre estos dos tipos de Data source, [consulta el blog de Microsoft Analysis Services](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. Para obtener más información sobre las diferencias entre estos dos tipos de Data sources, [consulte el blog de Microsoft Analysis Services](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
 ![Agregar un Data source](~/content/assets/images/new-as-model-add-data-source.png)
 

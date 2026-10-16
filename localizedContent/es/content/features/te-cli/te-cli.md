@@ -23,14 +23,14 @@ A diferencia de las opciones de línea de comandos de `TabularEditor.exe` exclus
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-## Pilares de diseño y audiencias objetivo
+## Pilares de diseño y públicos objetivo
 
-Cuatro pilares de diseño dan forma a cada comando:
+Cuatro pilares de diseño guían todos los comandos:
 
-- **Salida estructurada** — JSON, CSV, TMDL y TMSL, junto con el texto predeterminado legible para humanos.
-- **Modo no interactivo** — una opción global `--non-interactive` que desactiva los avisos y hace que el comando falle inmediatamente.
-- **Seguro por defecto**: los comandos de edición como `te set`, `te add` y `te remove` muestran el cambio como un diff y no escriben nada hasta que agregues `--save`; si agregas `--force`, guardan incluso cuando el cambio introduce errores de validación. `te deploy` y `te refresh` imprimen el TMSL exacto que enviarían hasta que agregues `--execute`; después, piden confirmación primero, a menos que agregues `--force`.
-- **Errores claros** — se escriben en stderr con códigos de salida predecibles.
+- **Salida estructurada** - JSON, CSV, TMDL y TMSL, además del texto legible predeterminado.
+- **Modo no interactivo** - una opción global `--non-interactive` que desactiva las indicaciones y falla de inmediato.
+- **Seguro de forma predeterminada** - los comandos de edición, como `te set`, `te add` y `te remove`, muestran el cambio en forma de diff y no escriben nada hasta que agregues `--save`; si agregas `--force`, se guarda incluso cuando el cambio introduce errores de validación. `te deploy` y `te refresh` muestran el TMSL exacto que enviarían hasta que agregues `--execute`, y después piden confirmación, a menos que agregues `--force`.
+- **Errores claros** - se escriben en stderr con códigos de salida predecibles.
 
 En conjunto, hacen que el mismo binario funcione bien para tres perfiles muy distintos:
 
@@ -39,7 +39,7 @@ En conjunto, hacen que el mismo binario funcione bien para tres perfiles muy dis
 - **Canalizaciones de CI/CD** — ejecución no interactiva, anotaciones de GitHub Actions y Azure DevOps, y resultados de pruebas compatibles con VSTEST.
 
 > [!Note]
-> Al usar la TE CLI con agentes, utiliza la [skill de TE CLI para agentes de programación con IA](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), que encapsula la TE CLI de principio a fin. Consulta [Skill de agente de IA](xref:te-cli-skill) para saber cómo instalarla.
+> Cuando uses la TE CLI con agentes, utiliza la [skill del TE CLI para agentes de codificación con IA](https://github.com/TabularEditor/CLI/tree/main/skills/te-cli), que encapsula la TE CLI de principio a fin. Consulta [AI Agent Skill](xref:te-cli-skill) para saber cómo instalarla.
 
 ## Qué puede hacer la CLI
 
@@ -47,28 +47,28 @@ La CLI organiza sus comandos en 10 familias. Cada familia se corresponde con una
 
 Consulta @te-cli-commands para ver una referencia completa de los comandos, con la sintaxis, las opciones y ejemplos de cada uno. Haz clic en cualquier comando de ejemplo de la tabla para ir directamente a su entrada de referencia.
 
-| Familia                                                                                    | Qué hace                                                                                      | Comandos de ejemplo                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Inicialización y guardado de modelos](xref:te-cli-commands#model-initialization-and-save) | Guardar, convertir e inicializar modelos                                                      | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init)                                                                                                      |
-| [Edición del modelo](xref:te-cli-commands#model-editing)                                   | Obtener y establecer propiedades; añadir, quitar y mover objetos                              | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move)                            |
-| [Inspección](xref:te-cli-commands#inspection)                                              | Listar objetos, buscar, comparar y analizar dependencias                                      | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps)                            |
-| [Análisis y calidad](xref:te-cli-commands#analysis-and-quality)                            | Validar, ejecutar BPA, dar formato a DAX y M, analizar el almacenamiento                      | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
-| [Ejecución](xref:te-cli-commands#execution)                                                | Ejecutar consultas DAX, C# Scripts y macros                                                   | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro)                                                            |
-| [Implementación y actualización](xref:te-cli-commands#deployment-and-refresh)              | Desplegar en el Workspace, desencadenar una actualización, aplicar políticas de actualización | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh)                                                                                                  |
-| [Pruebas](xref:te-cli-commands#testing)                                                    | Pruebas de aserciones, instantáneas, comparación A/B                                          | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                            |
-| [Conexión y autenticación](xref:te-cli-commands#connection-and-authentication)             | Conéctate a los Workspace y gestiona la autenticación y los perfiles                          | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)          |
-| [Configuración](xref:te-cli-commands#configuration)                                        | Configuración y valores predeterminados de la CLI                                             | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                         |
-| [Shell](xref:te-cli-commands#shell)                                                        | Modo interactivo, estado de la sesión, completado automático del shell                        | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                    |
+| Familia                                                                                    | Qué hace                                                                                         | Comandos de ejemplo                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Inicialización y guardado de modelos](xref:te-cli-commands#model-initialization-and-save) | Guardar, convertir e inicializar modelos                                                         | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init)                                                                                                      |
+| [Edición del modelo](xref:te-cli-commands#model-editing)                                   | Obtener y establecer propiedades; añadir, quitar y mover objetos                                 | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move)                            |
+| [Inspección](xref:te-cli-commands#inspection)                                              | Listar objetos, buscar, comparar y analizar dependencias                                         | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps)                            |
+| [Análisis y calidad](xref:te-cli-commands#analysis-and-quality)                            | Validar, ejecutar BPA, dar formato a DAX y M, analizar el almacenamiento                         | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [Ejecución](xref:te-cli-commands#execution)                                                | Ejecutar consultas DAX, C# Scripts y macros                                                      | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro)                                                            |
+| [Implementación y actualización](xref:te-cli-commands#deployment-and-refresh)              | Implementar en el Workspace, desencadenar una actualización y aplicar políticas de actualización | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh)                                                                                                  |
+| [Pruebas](xref:te-cli-commands#testing)                                                    | Pruebas de aserciones, instantáneas, comparación A/B                                             | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                            |
+| [Conexión y autenticación](xref:te-cli-commands#connection-and-authentication)             | Conéctate a los Workspace y gestiona la autenticación y los perfiles                             | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)          |
+| [Configuración](xref:te-cli-commands#configuration)                                        | Configuración y valores predeterminados de la CLI                                                | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                         |
+| [Shell](xref:te-cli-commands#shell)                                                        | Modo interactivo, estado de la sesión y autocompletado del shell                                 | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                    |
 
 > [!TIP]
-> La documentación usa los verbos canónicos en formato largo (`list`, `remove`, `move`), pero las formas cortas clásicas siguen funcionando como alias (`ls`, `rm`, `mv`, `rename`). Esto se aplica a los comandos de nivel superior y a los subcomandos `remove` / `list` dentro de grupos como `te bpa rules`, `te macro`, `te config`, `te profile`, `te session` y `te test`. Consulta @te-cli-commands#command-aliases para ver el mapeo completo.
+> La documentación usa verbos canónicos en su forma larga (`list`, `remove`, `move`), pero las formas cortas clásicas siguen funcionando como alias (`ls`, `rm`, `mv`, `rename`). Esto se aplica a los comandos de nivel superior y a los subcomandos `remove` / `list` dentro de grupos como `te bpa rules`, `te macro`, `te config`, `te profile`, `te session` y `te test`. Consulta @te-cli-commands#command-aliases para ver la correspondencia completa.
 
 ## Primeros pasos
 
 1. **Regístrate o inicia sesión** en [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) con una cuenta de Tabular Editor.
 2. **Descarga e instala**: consulta @te-cli-install para ver las instrucciones para Windows, macOS y Linux.
 3. **Autentícate**: ejecuta `te auth login` para conectarte a Power BI o Fabric. Consulta @te-cli-auth.
-4. **Ejecuta tu primer comando**: `te --help` enumera todos los comandos; `te <command> --help` muestra las opciones detalladas. Consejo: si ejecutas `te` por sí solo en un terminal, entrarás en el REPL interactivo, una forma cómoda de explorar un modelo. Consulta @te-cli-interactive.
+4. **Ejecuta tu primer comando**: `te --help` enumera todos los comandos; `te <command> --help` muestra las opciones detalladas. Sugerencia: si ejecutas `te` sin más en una terminal, accederás a la REPL interactiva, una forma práctica de explorar un modelo. Consulta @te-cli-interactive.
 
 Para ver por primera vez un modelo en vivo, solo necesitas dos comandos:
 
@@ -92,7 +92,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> El banner vuelve a aparecer en cada comando en los **14 días previos a la fecha de finalización de la versión preliminar** (2026-10-31), independientemente de `hidePreviewNotice`. Esto garantiza que veas una advertencia antes de que la CLI deje de funcionar.
+> El banner vuelve a aparecer con cada comando durante los **14 días anteriores a la fecha de finalización de la versión preliminar** (2026-10-31), independientemente de `hidePreviewNotice`. Esto garantiza que veas una advertencia antes de que la CLI deje de funcionar.
 
 ## Perspectiva de licencias
 
@@ -107,7 +107,7 @@ Durante la vista previa, los Report de errores, las solicitudes de funcionalidad
 
 El repositorio no aloja el código fuente de la CLI; existe para dar a la comunidad un lugar público donde contactar con nosotros durante la vista previa.
 
-## Siguientes pasos
+## Pasos a seguir
 
 - @te-cli-install - descargar, instalar y verificar.
 - @te-cli-auth - autenticarse en Power BI, Fabric y Azure Analysis Services.

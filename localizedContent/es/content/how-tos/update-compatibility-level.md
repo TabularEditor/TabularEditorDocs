@@ -2,7 +2,7 @@
 uid: update-compatibility-level
 title: Actualizar el nivel de compatibilidad
 author: Morten Lønskov
-updated: 2026-01-12
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,10 +28,10 @@ El **nivel de compatibilidad** de un modelo controla qué características del T
 
 El nivel de compatibilidad y el modo de compatibilidad son propiedades independientes que cumplen finalidades distintas:
 
-| Propiedad                     | Lo que controla                                                                                                                    | Valores                                                      |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `Database.CompatibilityLevel` | Qué características de TOM están disponibles (por ejemplo, calendarios personalizados, UDFs de DAX)             | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
-| `Database.CompatibilityMode`  | A qué plataforma se dirige el modelo, qué objetos y propiedades de TOM están disponibles y qué restricciones de edición se aplican | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel`            |
+| Propiedad                     | Lo que controla                                                                                                                    | Valores                                                                |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `Database.CompatibilityLevel` | Qué características de TOM están disponibles (por ejemplo, calendarios personalizados, UDFs de DAX)             | `1200`, `1400`, `1500`, `1600`, `1700`, `1701`, `1702`, `1705`, `1706` |
+| `Database.CompatibilityMode`  | A qué plataforma se dirige el modelo, qué objetos y propiedades de TOM están disponibles y qué restricciones de edición se aplican | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel`                      |
 
 Si necesita cambiar la plataforma de destino en lugar de habilitar nuevas características de TOM, consulte [Cambiar el modo de compatibilidad](xref:change-compatibility-mode).
 
@@ -40,7 +40,7 @@ Si necesita cambiar la plataforma de destino en lugar de habilitar nuevas caract
 Actualiza cuando:
 
 - Existe una característica en Power BI Desktop, pero falta la propiedad TOM relacionada en Tabular Editor
-- Necesitas capacidades introducidas recientemente, como **calendarios personalizados** (1701+) o **funciones DAX definidas por el usuario** (1702+)
+- Necesitas capacidades incorporadas recientemente, como **calendarios personalizados** (1701+), **funciones definidas por el usuario en DAX** (1702+), **columnas calculadas con contexto de usuario** (1705+) o **String Indexing Behavior** (1706+)
 - Estás estandarizando el desarrollo entre entornos y quieres conjuntos mínimos de características coherentes
 
 ## Antes de empezar
@@ -54,7 +54,7 @@ Como las actualizaciones son irreversibles:
 
 ### Confirma la compatibilidad del destino
 
-El soporte del nivel de compatibilidad varía según la plataforma (SSAS, Azure Analysis Services, Fabric/Power BI Premium). Si tu destino de implementación no admite el nivel seleccionado, no podrás implementar. Consulta [Nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+El soporte del nivel de compatibilidad varía según la plataforma (SSAS, Azure Analysis Services, Fabric/Power BI Premium). Si tu destino de implementación no admite el nivel seleccionado, no podrás implementar. Consulta el [nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ## Actualiza el nivel de compatibilidad
 
@@ -84,8 +84,11 @@ Establece el nivel de compatibilidad en el mínimo necesario para tu funcionalid
 
 Ejemplos:
 
+- **Grupos de cálculo:** 1500+
 - **Calendarios personalizados:** 1701+
 - **UDFs de DAX:** 1702+
+- **Columnas calculadas con contexto de usuario** (propiedad _Expression Context_ de la columna): 1705+
+- **String Indexing Behavior** en una columna: 1706+
 
 > [!NOTE]
 > Los niveles mínimos necesarios para las funcionalidades pueden cambiar a medida que evoluciona la plataforma. Verifica siempre los requisitos previos en la documentación actual. Algunos niveles/funcionalidades son exclusivos de Power BI y es posible que no estén disponibles en SSAS/AAS.
@@ -103,7 +106,7 @@ Después de guardar, Tabular Editor muestra los objetos y propiedades que se aca
 
 ### Para implementaciones de SSAS/AAS
 
-Elige el [nivel de compatibilidad más reciente compatible con la versión de tu servidor](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+Elige el [nivel de compatibilidad más reciente compatible con la versión de tu servidor](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ### Para Power BI Desktop
 
@@ -122,7 +125,7 @@ WHERE [PropertyName] = 'ProviderVersion'
 
 Puede que hayas seleccionado un nivel de compatibilidad que no admite el servidor de destino. Valida la compatibilidad del servidor antes de actualizar.
 
-**Referencia:** [Nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+**Referencia:** [nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ### ¿Puedo volver a una versión anterior?
 

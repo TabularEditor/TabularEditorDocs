@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creación de un archivo PBIX a partir de un punto de conexión XMLA.
 author: Morten Lønskov
-updated: 2023-10-18
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Solo puntos de conexión XMLA Premium por usuario"
+          note: "Solo puntos de conexión XMLA de Premium por usuario"
         - edition: Enterprise
           full: true
 ---
@@ -27,17 +27,17 @@ Sin embargo, con el archivo de Proyecto de Power BI, es posible crear un archivo
 ![Resumen de XMLA a PBIX](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> La solución alternativa descrita no está respaldada oficialmente por Microsoft. No hay garantía de que funcione con todos los modelos. En concreto, si has agregado particiones personalizadas u otros objetos [enumerados aquí](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), es posible que Power BI Desktop no pueda abrir correctamente el archivo siguiendo este enfoque. Consulta a continuación un script para gestionar las particiones de actualización incremental.
+> La solución alternativa descrita no está respaldada oficialmente por Microsoft. No hay garantía de que funcione con todos los modelos. En concreto, si has agregado particiones personalizadas u otros objetos [enumerados aquí](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations), es posible que Power BI Desktop no pueda abrir correctamente el archivo siguiendo este enfoque. Consulta a continuación un script para gestionar las particiones de actualización incremental.
 
 ## Paso 1: Crear y guardar un archivo de Proyecto de Power BI (.pbip) vacío
 
 El primer paso es crear un nuevo Report de Power BI y guardarlo como un archivo de Proyecto de Power BI (.pbip) vacío, como se muestra en el siguiente diagrama.
 
-![Save PBIP file](~/content/assets/images/power-bi/save-pbip-file.png)
+![Guardar el archivo PBIP](~/content/assets/images/power-bi/save-pbip-file.png)
 
 Esto crea una estructura de carpetas que contiene un archivo _model_ vacío. Este archivo _model_ contiene los metadatos del modelo. En el siguiente paso sobrescribirás estos metadatos con los del modelo publicado que quieres guardar en .pbix.
 
-![PBIP with Model file](~/content/assets/images/power-bi/pbip-file-bim-model.png)
+![PBIP con el archivo de modelo](~/content/assets/images/power-bi/pbip-file-bim-model.png)
 
 Cierra Power BI Desktop y continúa con el siguiente paso en Tabular Editor.
 
@@ -82,17 +82,17 @@ foreach (var t in Model.Tables)
 {
     if(t.EnableRefreshPolicy)
     {
-        //Recopilaremos el SourceExpression de la expresión de origen de la actualización incremental de la tabla
+        //We will collect the SourceExpression from the Incremental Refresh Source Expression of the table
         string m_expression = t.SourceExpression.ToString();
          
-        //Generaremos un nuevo nombre de partición
+        //We will generate a new partition name
         string partition_name = t.Name + "-" + Guid.NewGuid();
 
-        //Ahora crearemos una nueva partición
+        //Now we will create a new partition
         var partition = t.AddMPartition(partition_name, m_expression);
         partition.Mode = ModeType.Import;
         
-        //A continuación eliminaremos todas las particiones de actualización incremental de la tabla
+        //Next we will delete all the incremental refresh partitions of the table
         foreach (var p in t.Partitions.OfType<PolicyRangePartition>().ToList())
         {
             p.Delete();

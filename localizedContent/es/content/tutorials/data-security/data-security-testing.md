@@ -6,11 +6,13 @@ updated: 2023-03-02
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      none: true
+      note: "Las pruebas con suplantación utilizan consultas DAX, Pivot Grid y Preview Data, que solo están disponibles en Tabular Editor 3."
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
-          full: true
+          none: true
+          note: "La suplantación requiere un modelo hospedado en Analysis Services o en el servicio de Power BI."
         - edition: Business
           full: true
         - edition: Enterprise

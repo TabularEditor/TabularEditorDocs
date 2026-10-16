@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Actualización, vista previa y consulta de datos
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -76,27 +76,19 @@ Tabular Editor 3 admite operaciones de actualización en distintos tipos de obje
 - **Tabla calculada** (Calculate)
 - **Grupo de cálculo** (Calculate)
 
-Consulta [Tipos de actualización](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) para obtener más información sobre los tipos de operaciones de actualización compatibles con Analysis Services / Power BI.
+Consulta [Tipos de actualización](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) para obtener más información sobre los tipos de operaciones de actualización compatibles con Analysis Services / Power BI.
 
 # Vista previa de los datos de la tabla
 
 En determinados momentos, durante la creación de DAX y el desarrollo del Data model, es posible que necesites inspeccionar el contenido de tus tablas fila por fila. Por supuesto, podrías escribir una consulta DAX para hacerlo, pero Tabular Editor 3 lo pone aún más fácil al permitirte previsualizar los datos de la tabla directamente. Para ello, haz clic con el botón derecho en una tabla y elige la opción **Vista previa de datos**.
 
-![Preview Data](~/content/assets/images/preview-data-big.png)
+![Vista previa de datos](~/content/assets/images/preview-data-big.png)
 
-Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Además, puedes ordenar o filtrar columnas individuales. Tabular Editor ejecuta una consulta DAX sobre el modelo para devolver solo un pequeño número de registros, suficiente para completar la vista actual, y luego va cargando más filas a medida que te desplazas.
+Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Tabular Editor ejecuta una consulta DAX en el modelo para devolver solo un pequeño número de registros, suficientes para rellenar la vista actual, y luego va cargando más filas a medida que te desplazas.
 
-El funcionamiento de la paginación depende del modo de almacenamiento y del motor:
+Cada encabezado de columna incorpora opciones de ordenación y filtrado; el menú contextual de la cuadrícula puede abrir la expresión de una columna calculada o recalcular la tabla; y **Show actual DAX query...** te muestra la consulta que hay detrás de la vista previa como un nuevo documento de consulta DAX. Al seleccionar una columna en el Explorador TOM, la vista previa se desplaza hasta ella.
 
-- En las tablas Import en motores que admiten la función [`WINDOW`](https://dax.guide/window), la paginación usa `WINDOW` sobre la clave principal de la tabla, por lo que puedes desplazarte por toda la tabla.
-- Si el motor no admite `WINDOW` o la tabla no tiene clave primaria, la vista previa muestra las primeras filas e indica que el desplazamiento está deshabilitado.
-- Las tablas DirectQuery solo muestran las primeras filas — no es posible paginar — junto con mensajes informativos.
-
-Los metadatos de la vista previa se almacenan en caché durante la sesión, por lo que volver a abrir una vista previa no vuelve a consultar el servidor. Haz clic en **Actualizar** para volver a leer los metadatos, por ejemplo, después de que el modelo se haya procesado fuera de Tabular Editor.
-
-Si una o más columnas calculadas están en un estado no válido, esas columnas contienen el texto _(Calculation needed)_. Puedes recalcular la tabla haciendo clic con el botón derecho en la columna y eligiendo la opción **Recalcular tabla...**.
-
-![Recalculate Table](~/content/assets/images/recalculate-table.png)
+Consulta @table-preview para ver la barra de herramientas, el menú contextual, hasta dónde puedes desplazarte en cada modo de almacenamiento y las preferencias que controlan el orden de las columnas y el desplegable de filtro.
 
 # Pivot Grid
 
@@ -104,7 +96,7 @@ Después de agregar o editar medidas DAX en un modelo, es habitual que los desar
 
 Para crear una nueva Pivot Grid, usa la opción **Archivo > Nuevo > Pivot Grid**. Desde aquí, puedes arrastrar medidas, columnas y jerarquías desde el Explorador TOM a la cuadrícula, o bien usar la opción de menú **Pivot Grid > Mostrar campos** para ver una lista emergente de todos los campos que se pueden arrastrar a la Pivot Grid (consulta la captura de pantalla a continuación).
 
-![Show Fields Pivot](~/content/assets/images/show-fields-pivot.png)
+![Mostrar campos de tabla dinámica](~/content/assets/images/show-fields-pivot.png)
 
 A medida que se arrastran campos a la Pivot Grid, Tabular Editor genera consultas MDX que se envían a Analysis Services para mostrar los datos resultantes. En este sentido, el comportamiento es muy similar al de las tablas dinámicas de Excel. Puedes reorganizar los campos del Pivot Grid arrastrándolos y soltándolos, y hay varias opciones en el menú contextual para personalizar la forma en que se muestran los datos.
 
@@ -135,12 +127,12 @@ Además, una consulta DAX puede contener varias instrucciones `EVALUATE`. En ese
 
 Una Consulta DAX en Tabular Editor 3 se actualiza automáticamente cuando se realiza un cambio en el modelo o cuando finaliza una operación de actualización. Puedes activar o desactivar esta función de actualización automática en el menú **Consulta**.
 
-# Suplantación
+# Suplantación de identidad
 
 Al consultar los datos del modelo, a veces resulta útil poder suplantar a un usuario específico o una combinación de roles, para ver cómo se comporta el modelo desde la perspectiva de un usuario final. Tabular Editor 3 te permite suplantar a un usuario específico o a uno o varios roles haciendo clic en el botón **Suplantar...**. Esto se aplica a las [Vistas previas de tabla](#previewing-table-data), los [Pivot Grid](#pivot-grids) y las [Consultas DAX](#dax-queries).
 
 > [!NOTE]
-> Para suplantar a un usuario, Tabular Editor agrega la propiedad [`EffectiveUserName`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) a la cadena de conexión al conectarse a Analysis Services. Para suplantar un rol, Tabular Editor agrega la propiedad [`Roles`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) a la cadena de conexión. Esto solo se aplica a la vista de datos (es decir, la Consulta DAX, el Pivot Grid o la Vista previa de tabla) en la que se especifica la suplantación.
+> Para suplantar a un usuario, Tabular Editor agrega la propiedad [`EffectiveUserName`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) a la cadena de conexión cuando se conecta a Analysis Services. Para suplantar un rol, Tabular Editor agrega la propiedad [`Roles`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) a la cadena de conexión. Esto solo se aplica a la vista de datos (es decir, la Consulta DAX, el Pivot Grid o la Vista previa de tabla) en la que se especifica la suplantación.
 
 Al hacer clic en el botón **Suplantación...** (que también puedes encontrar en el menú **Consulta**, **Pivot Grid** o **Vista previa de tabla**, según el tipo de vista de datos activa), se abre un cuadro de diálogo que te permite especificar un usuario o seleccionar uno o varios roles.
 
@@ -156,9 +148,9 @@ Cuando la actualización automática está habilitada en una vista de datos, cam
 
 La característica CustomData permite pasar un valor de cadena personalizado que puede usarse en expresiones DAX, normalmente para implementar escenarios dinámicos de seguridad a nivel de filas. Esta característica se puede combinar con cualquiera de las opciones de suplantación descritas anteriormente, incluida la opción **Sin suplantación**.
 
-![Menú desplegable de suplantación](~/content/assets/images/impersonation-dropdown.png)
+![Seleccionar suplantación de identidad](~/content/assets/images/impersonation-customdata.png)
 
-Cuando introduces un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`función CUSTOMDATA()`](https://dax.guide/customdata/).
+Cuando se introduce un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`función CUSTOMDATA()`](https://dax.guide/customdata/).
 
 CustomData se usa habitualmente para implementar seguridad a nivel de filas dinámica cuando una aplicación utiliza autenticación personalizada. El valor que proporciones puede utilizarse en las expresiones de filtro del rol para controlar qué filas pueden ver los usuarios en función de los datos personalizados que se pasan a través de la cadena de conexión.
 
@@ -190,6 +182,6 @@ Además, siempre que se hayan cargado estadísticas, Tabular Editor 3 mostrará 
 
 ![Estadísticas del Analizador VertiPaq en una expresión DAX](~/content/assets/images/vertipaq-analyzer-stats-dax.png)
 
-# Siguientes pasos
+# Pasos a seguir
 
 - @creating-and-testing-dax

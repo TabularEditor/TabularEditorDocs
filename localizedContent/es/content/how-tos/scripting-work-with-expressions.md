@@ -1,5 +1,5 @@
 ---
-uid: how-to-work-with-expressions
+uid: como-trabajar-con-expresiones
 title: Cómo trabajar con expresiones y propiedades DAX
 author: Morten Lønskov
 updated: 2026-04-10
@@ -191,5 +191,5 @@ En las expresiones de reglas de BPA, se accede directamente a las propiedades de
 
 - @csharp-scripts
 - @using-bpa-sample-rules-expressions
-- @how-to-filter-query-objects-linq
+- @como-filtrar-objetos-de-consulta-con-linq
 - @script-find-replace

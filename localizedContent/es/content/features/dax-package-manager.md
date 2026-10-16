@@ -2,7 +2,7 @@
 uid: dax-package-manager
 title: Administrador de paquetes de DAX
 author: Daniel Otykier
-updated: 2025-11-03
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Administrador de paquetes de DAX
 
-## Descripción general
+## Resumen
 
 El **Administrador de paquetes de DAX** (DPM) de Tabular Editor permite a los usuarios descubrir, instalar, actualizar y administrar bibliotecas de [funciones DAX definidas por el usuario (UDF)](xref:udfs) (llamadas paquetes de DAX), directamente en la aplicación.  
 Estas bibliotecas amplían sus capacidades de DAX con funciones reutilizables, lo que facilita crear modelos semánticos de Power BI coherentes y fáciles de mantener.
@@ -29,7 +29,7 @@ Como su nombre indica, esta función actúa como un administrador de paquetes, d
 Puede usar el Administrador de paquetes de DAX con cualquier modelo que admita funciones DAX definidas por el usuario; es decir, el nivel de compatibilidad del modelo debe ser 1702 o superior.
 
 > [!WARNING]
-> Las funciones DAX definidas por el usuario son actualmente (a fecha de noviembre de 2025) una característica en versión preliminar de Power BI. Considere sus [limitaciones](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) antes de usarlas.
+> Las funciones DAX definidas por el usuario son actualmente (a fecha de noviembre de 2025) una característica en versión preliminar de Power BI. Considere sus [limitaciones](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) antes de usarlas.
 
 ---
 
@@ -42,7 +42,7 @@ Puede usar el Administrador de paquetes de DAX con cualquier modelo que admita f
 Puede abrir el panel de DPM desde el menú **Ver**. También es posible asignar un atajo personalizado al comando `View.DaxPackageManager` desde **Herramientas > Preferencias > Teclado**.
 
 - **Menú:** `Ver → Administrador de paquetes de DAX`
-- **Atajo:** _(si se ha asignado en Preferencias)_
+- **Atajo:** _(si se asignó en Preferencias)_
 
 ---
 
@@ -50,7 +50,7 @@ Puede abrir el panel de DPM desde el menú **Ver**. También es posible asignar 
 
 A la izquierda de la pantalla, encontrarás las tres pestañas siguientes. Cada pestaña va acompañada de una lista de paquetes relevantes para su contexto:
 
-| Pestaña             | Descripción                                                                                                                                           |
+| Tab                 | Descripción                                                                                                                                           |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Explorar**        | Descubre los paquetes de DAX disponibles del proveedor (p. ej., `api.daxlib.org`). |
 | **Instalados**      | Consulta todos los paquetes instalados actualmente y sus versiones.                                                                   |
@@ -144,7 +144,7 @@ Todas las UDF asociadas se eliminarán del modelo.
 
 ## Consideraciones técnicas
 
-El DAX Package Manager usa [propiedades extendidas](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) para llevar un registro de los paquetes instalados. Las propiedades extendidas son similares a las anotaciones, pero se adaptan mejor al almacenamiento de metadatos personalizados en formato JSON.
+El DAX Package Manager usa [propiedades extendidas](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) para llevar un registro de los paquetes instalados. Las propiedades extendidas son similares a las anotaciones, pero se adaptan mejor al almacenamiento de metadatos personalizados en formato JSON.
 
 El DAX Package Manager crea las siguientes propiedades extendidas en el objeto **Modelo**:
 
@@ -198,5 +198,5 @@ Tienes las siguientes opciones:
 
 - [Sitio del proyecto DaxLib](https://daxlib.org)
 - [Repositorio de GitHub de DaxLib](https://github.com/daxlib/daxlib)
-- [Funciones DAX definidas por el usuario (Microsoft Learn)](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)
+- [Funciones DAX definidas por el usuario (Microsoft Learn)](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions)
 - [Funciones definidas por el usuario en Tabular Editor 3](xref:udfs)

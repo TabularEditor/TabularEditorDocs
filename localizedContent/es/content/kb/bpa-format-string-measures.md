@@ -8,7 +8,7 @@ description: Regla de mejores prácticas que garantiza que las medidas visibles 
 
 # Proporcionar una cadena de formato a las medidas
 
-## Información general
+## Resumen
 
 Esta regla de mejores prácticas identifica las medidas visibles con tipos de datos numéricos o de fecha que no tienen una cadena de formato. Todas las medidas deben tener cadenas de formato explícitas para una visualización profesional y coherente.
 
@@ -37,7 +37,7 @@ and string.IsNullOrWhitespace(FormatString)
 and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataType = "Decimal")
 ```
 
-## Cómo solucionarlo
+## Cómo corregirlo
 
 ### Corrección manual
 
@@ -49,24 +49,24 @@ and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataT
 ### Patrones de formato habituales
 
 ```dax
-Ingresos totales = 
+Total Revenue = 
 SUM('Sales'[Amount])
-// Cadena de formato: "$#,0"
+// Format String: "$#,0"
 
-Precio promedio = 
+Average Price = 
 AVERAGE('Sales'[UnitPrice])
-// Cadena de formato: "$#,0,00"
+// Format String: "$#,0.00"
 
-Crecimiento interanual = 
+YoY Growth = 
 DIVIDE([This Year] - [Last Year], [Last Year], 0)
-// Cadena de formato: "0,0%"
+// Format String: "0.0%"
 
-Recuento de pedidos = 
+Order Count = 
 COUNTROWS('Orders')
-// Cadena de formato: "#,0"
+// Format String: "#,0"
 ```
 
-## Causas habituales
+## Causas comunes
 
 ### Causa 1: Falta la definición de formato
 
@@ -82,7 +82,7 @@ Copia de medidas desde columnas que no requieren cadenas de formato.
 
 ```dax
 Total Revenue = SUM('Sales'[Amount])
-// Sin cadena de formato
+// No Format String
 ```
 
 **Visualización**: 1234567.89 (difícil de leer, sin símbolo de moneda)
@@ -91,14 +91,14 @@ Total Revenue = SUM('Sales'[Amount])
 
 ```dax
 Total Revenue = SUM('Sales'[Amount])
-// Cadena de formato: "$#,0"
+// Format String: "$#,0"
 ```
 
 **Visualización**: $1.234.568 (formato claro y profesional)
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
 ## Reglas relacionadas
 

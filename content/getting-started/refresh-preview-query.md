@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Refreshing, previewing and querying data
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -76,7 +76,7 @@ Tabular Editor 3 supports refresh operations on different object types. The supp
 - **Calculated Table** (Calculate)
 - **Calculation Group** (Calculate)
 
-See [Refresh Types](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
+See [Refresh Types](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
 
 # Previewing table data
 
@@ -132,7 +132,7 @@ A DAX query in Tabular Editor 3 is automatically refreshed when a change is made
 When querying the data in the model, it is sometimes useful to be able to impersonate a specific user or a combination of roles, to see what the behavior of the model from an end user perspective would be. Tabular Editor 3 allows you to impersonate a specific user or one or more roles, by clicking on the **Impersonate...** button. This applies to [Table previews](#previewing-table-data), [Pivot Grids](#pivot-grids) and [DAX queries](#dax-queries). 
 
 > [!NOTE]
-> To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. This only applies to the data view (i.e. the DAX query, the Pivot Grid or the Table Preview) where the impersonation is specified.
+> To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. This only applies to the data view (i.e. the DAX query, the Pivot Grid or the Table Preview) where the impersonation is specified.
 
 When clicking on the **Impersonation..** button (which can also be found through the **Query**, **Pivot Grid** or **Table Preview** menu, depending on which type of data view is active), a popup allows you to specify either a user, or select one or more roles.
 
@@ -150,7 +150,7 @@ The CustomData feature allows you to pass a custom string value that can be used
 
 ![Select Impersonation](~/content/assets/images/impersonation-customdata.png)
 
-When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. This value can then be retrieved within your DAX expressions using the [`CUSTOMDATA()` function](https://dax.guide/customdata/).
+When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. This value can then be retrieved within your DAX expressions using the [`CUSTOMDATA()` function](https://dax.guide/customdata/).
 
 CustomData is commonly used in implementing dynamic row-level security when an application uses custom authentication. The value you provide can be leveraged in role filter expressions to control which rows users can see based on the custom data passed through the connection string.
 

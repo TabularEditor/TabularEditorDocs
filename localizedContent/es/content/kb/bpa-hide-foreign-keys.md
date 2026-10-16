@@ -8,7 +8,7 @@ description: Regla de mejores prácticas para ocultar columnas de claves externa
 
 # Ocultar columnas de claves externas
 
-## Descripción general
+## Resumen
 
 Esta regla de mejores prácticas identifica las columnas de claves externas (el lado "muchos" de las relaciones) que son visibles para los usuarios finales. Las claves externas deberían ocultarse porque solo sirven para establecer relaciones y no aportan valor analítico cuando se muestran.
 
@@ -48,7 +48,7 @@ and
 IsHidden == false
 ```
 
-## Cómo corregirlo
+## Cómo corregir
 
 ### Corrección automática
 
@@ -58,7 +58,7 @@ Esta regla incluye una corrección automática:
 IsHidden = true
 ```
 
-Para aplicarlo:
+Para aplicarla:
 
 1. En el **Best Practice Analyzer**, selecciona las columnas de clave externa marcadas
 2. Haz clic en **Aplicar corrección**
@@ -69,7 +69,7 @@ Para aplicarlo:
 2. En el panel **Propiedades**, configura **IsHidden** como **true**
 3. Guarda los cambios
 
-## Causas comunes
+## Causas habituales
 
 ### Causa 1: Configuración incompleta del modelo
 
@@ -88,10 +88,10 @@ Modelos antiguos en los que no se exigía ocultar las claves externas.
 ### Antes de la corrección
 
 ```
-Campos de la tabla Sales (visibles):
+Sales Table Fields (visible):
   - OrderDate
-  - CustomerKey  ← Clave foránea (debería ocultarse)
-  - ProductKey   ← Clave foránea (debería ocultarse)
+  - CustomerKey  ← Foreign key (should be hidden)
+  - ProductKey   ← Foreign key (should be hidden)
   - SalesAmount
   - Quantity
 ```
@@ -101,7 +101,7 @@ Campos de la tabla Sales (visibles):
 ### Después de la corrección
 
 ```
-Campos de la tabla Sales (visibles):
+Sales Table Fields (visible):
   - OrderDate
   - SalesAmount
   - Quantity
@@ -111,7 +111,7 @@ Campos de la tabla Sales (visibles):
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a los modelos con nivel de compatibilidad **1200** y superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
 ## Reglas relacionadas
 

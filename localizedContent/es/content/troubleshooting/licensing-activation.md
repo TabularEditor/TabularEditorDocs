@@ -2,7 +2,7 @@
 uid: licensing-activation
 title: Instalar y activar Tabular Editor 3
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-10-05
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ Esta página explica los problemas habituales de instalación y activación de T
 Confirma que el equipo cumple los requisitos antes de seguir con la resolución de problemas:
 
 - **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
-- **Arquitectura:** x64, ARM64 (nativo a partir de la versión 3.23.0)
+- **Arquitectura:** x64, ARM64 (nativo desde la versión 3.23.0)
 - **.NET Runtime:** [.NET Runtime de Escritorio 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 Usa el MSI correspondiente a tu arquitectura de la [página de descargas](xref:downloads). Una incompatibilidad entre el instalador y la arquitectura es una causa frecuente de instalaciones fallidas y de errores por dependencias faltantes al primer inicio.
@@ -41,7 +41,7 @@ Para ver la clave de licencia actual del usuario de Windows activo, ejecuta lo s
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-También puedes inspeccionar y editar directamente los valores **LicenseKey** y **User** con `regedit.exe`.
+También puedes inspeccionar y editar los valores directamente con `regedit.exe`. Consulta [Detalles del registro](xref:installation-activation-basic#registry-details) para ver todos los valores de la clave.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -55,7 +55,7 @@ Si los avisos de activación siguen apareciendo:
 2. Configura el proxy en **Herramientas > Preferencias > Configuración de proxy**. Consulta @proxy-settings para la solución de problemas específicos del proxy, incluida la anulación en **AnalysisServices.AppSettings.json** que habilita la compatibilidad de MSAL con proxies externos.
 3. Si la red bloquea el tráfico saliente hacia el punto de conexión de activación, usa la [activación manual](#manual-activation-no-internet) que se indica a continuación.
 
-## Activación manual (sin conexión a Internet)
+## Activación manual (sin Internet)
 
 Si el equipo donde se ejecuta Tabular Editor no puede acceder al punto de conexión de activación, el mensaje de activación ofrece un flujo manual.
 
@@ -75,23 +75,26 @@ Después, Tabular Editor 3 verifica la licencia.
 
 ## No se puede cambiar una clave de licencia desde la interfaz de usuario
 
-El botón **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** solo está habilitado cuando no hay ningún modelo cargado. Si el botón aparece atenuado, cierra el modelo abierto en **Archivo > Cerrar modelo** e inténtalo de nuevo.
+La opción **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** solo aparece cuando no hay ningún modelo cargado. Si la opción no aparece mientras hay un modelo abierto, cierra el modelo en **Archivo > Cerrar modelo** e inténtalo de nuevo.
 
-Si la opción de la interfaz de usuario sigue fallando, restablece la licencia a través del Editor del Registro:
+Si la opción de la interfaz de usuario sigue sin funcionar, restablece la licencia mediante el Editor del Registro::
 
 1. Cierra todas las instancias de Tabular Editor 3.
-2. Abre el Editor del Registro (Inicio > Ejecutar > regedit.msc).
+2. Abre el Editor del Registro (Inicio > Ejecutar > regedit.exe).
 3. Ubica `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
-4. Elimina todos los valores de esta clave.
+4. Elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`.
 5. Reinicia Tabular Editor 3.
 
-Como alternativa, ejecuta lo siguiente en el Símbolo del sistema de Windows:
+Como alternativa, ejecuta lo siguiente en el Símbolo del sistema de Windows. Un comando realiza un Report de error si el valor no existe, y los demás comandos se ejecutan igualmente:
 
 ```cmd
-REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v User /f
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-En el siguiente inicio, se solicitará una clave de licencia como si la aplicación acabara de instalarse.
+En el siguiente inicio, se te pedirá una clave de licencia. Eliminar los valores del Registro deja la instalación activada en el servicio de licencias; usa el [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/) para administrar tus licencias activadas. .
 
 > [!IMPORTANT]
 > Una vez que se elimine una clave de licencia, el producto no podrá usarse por el usuario actual de Windows en ese equipo hasta que se introduzca una nueva clave de licencia.

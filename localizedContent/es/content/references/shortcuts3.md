@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Atajos de teclado de Tabular Editor 3
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,24 +46,39 @@ applies_to:
 | Buscar           | Ctrl+F |
 | Reemplazar       | Ctrl+H |
 
+## Atajos que dependen del foco
+
+Algunos atajos ejecutan un comando diferente según la parte de la ventana que tenga el foco. Un control de texto puede ser un editor de documentos, el **Editor de expresiones** o una celda que estés editando en la vista **Propiedades**.
+
+| Atajo de teclado                     | El control de texto tiene el foco  | El Explorador TOM tiene el foco                  |
+| ------------------------------------ | ---------------------------------- | ------------------------------------------------ |
+| **Ctrl+Z** / **Ctrl+Y**              | deshacer o rehacer lo escrito      | deshacer o rehacer el último cambio del modelo   |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cortar, copiar o pegar texto       | cortar, copiar o pegar los objetos seleccionados |
+| **Delete**                           | eliminar el texto seleccionado     | eliminar los objetos seleccionados               |
+| **Ctrl+A**                           | seleccionar todo el texto          | seleccionar todos los objetos del nivel actual   |
+| **Ctrl+D**                           | duplicar la línea actual           | duplicar los objetos seleccionados               |
+| **Ctrl+U**                           | descomentar líneas en un documento | hacer visibles los objetos seleccionados         |
+
+**Ctrl+S** guarda el documento que tiene el foco, como una consulta DAX o un diagrama. Cuando el Explorador TOM tiene el foco, **Ctrl+S** guarda el modelo. Para deshacer un cambio del modelo desde un control de texto, consulta @undo-redo.
+
 ## Modelado de Data model
 
-| Comando                                           | Atajo de teclado |
-| ------------------------------------------------- | ---------------- |
-| Propiedades                                       | F4               |
-| Editar el nombre del objeto / renombrar por lotes | F2               |
-| Renombrar elementos secundarios por lotes         | Shift+F2         |
-| Mostrar dependencias                              | Shift+F12        |
-| Ocultar                                           | Ctrl+I           |
-| Mostrar                                           | Ctrl+U           |
-| Crear medida                                      | Alt+1            |
-| Crear columna calculada                           | Alt+2            |
-| Crear jerarquía                                   | Alt+3            |
-| Crear columna de datos                            | Alt+4            |
-| Crear tabla                                       | Alt+5            |
-| Crear tabla calculada                             | Alt+6            |
-| Crear grupo de cálculo                            | Alt+7            |
-| Aceptar cambio de expresión                       | F5               |
+| Comando                                           | Atajo     |
+| ------------------------------------------------- | --------- |
+| Propiedades                                       | F4        |
+| Editar el nombre del objeto / renombrar por lotes | F2        |
+| Renombrar elementos secundarios por lotes         | Shift+F2  |
+| Mostrar dependencias                              | Shift+F12 |
+| Ocultar                                           | Ctrl+I    |
+| Mostrar                                           | Ctrl+U    |
+| Crear medida                                      | Alt+1     |
+| Crear columna calculada                           | Alt+2     |
+| Crear jerarquía                                   | Alt+3     |
+| Crear columna de datos                            | Alt+4     |
+| Crear tabla                                       | Alt+5     |
+| Crear tabla calculada                             | Alt+6     |
+| Crear grupo de cálculo                            | Alt+7     |
+| Aceptar cambio de expresión                       | F5        |
 
 ## Explorador TOM
 
@@ -73,9 +88,9 @@ applies_to:
 | Expandir / contraer el nodo actual                      | Flecha derecha / izquierda                   |
 | Expandir / contraer el nodo actual y todos los subnodos | Ctrl+Flecha derecha / Flecha izquierda       |
 | Expandir / contraer todo el árbol                       | Ctrl+Shift+Flecha derecha / Flecha izquierda |
-| Mostrar/ocultar medidas                                 | Ctrl+1                                       |
-| Mostrar/ocultar columnas                                | Ctrl+2                                       |
-| Mostrar/ocultar jerarquías                              | Ctrl+3                                       |
+| Alternar medidas                                        | Ctrl+1                                       |
+| Alternar columnas                                       | Ctrl+2                                       |
+| Alternar jerarquías                                     | Ctrl+3                                       |
 | Mostrar/ocultar particiones                             | Ctrl+4                                       |
 | Mostrar/ocultar carpetas de visualización               | Ctrl+5                                       |
 | Mostrar/ocultar objetos ocultos                         | Ctrl+6                                       |
@@ -92,7 +107,6 @@ applies_to:
 | Copiar línea                    | Ctrl+Shift+T      |
 | Transponer líneas               | Ctrl+T            |
 | Duplicar línea                  | Ctrl+D            |
-| Convertir la línea a minúsculas | Ctrl+U            |
 | Convertir la línea a mayúsculas | Ctrl+Shift+U      |
 | Mover líneas hacia arriba       | Alt+Flecha arriba |
 | Mover líneas hacia abajo        | Alt+Flecha abajo  |
@@ -154,9 +168,9 @@ applies_to:
 
 ## C# Script
 
-| Comando         | Atajo |
-| --------------- | ----- |
-| Ejecutar script | F5    |
+| Comando         | Atajo de teclado |
+| --------------- | ---------------- |
+| Ejecutar script | F5               |
 
 # Personalización de atajos
 

@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: Vista del Explorador TOM
 author: Morten Lønskov
-updated: 2026-08-18
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,7 @@ applies_to:
 
 # Uso del Explorador TOM en Tabular Editor 3
 
-El Explorador TOM es tu ventana principal para interactuar con los objetos de tu Data model. Objetos como tablas, columnas, medidas, grupos de seguridad, etc. se muestran en una estructura jerárquica. Un modelo de datos tabular se representa mediante el llamado [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), y los metadatos de su TOM son los que se muestran en el Explorador TOM.
+El Explorador TOM es tu ventana principal para interactuar con los objetos de tu Data model. Objetos como tablas, columnas, medidas, grupos de seguridad, etc. se muestran en una estructura jerárquica. Un Data model tabular se representa mediante el denominado [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), y en el Explorador TOM se muestran los metadatos de tu TOM.
 
 El Explorador TOM consta de dos áreas principales: en primer lugar, los objetos del modelo de datos y, en segundo lugar, la barra de menús, que permite filtrar y cambiar lo que se presenta en la ventana principal.
 
@@ -52,7 +52,7 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Muestra un submenú que permite crear nuevas medidas, columnas, jerarquías, carpetas de visualización o elementos de cálculo bajo el objeto seleccionado. Las opciones disponibles dependen del tipo de objeto seleccionado.
 
 - **Mover a un grupo**:
-  Abre un submenú para organizar las tablas seleccionadas en un grupo de tablas y facilitar la navegación por el modelo. El submenú muestra los grupos de tablas existentes, una entrada **(Nuevo...)** que crea un grupo a partir de las tablas seleccionadas y abre el editor para nombrarlo, y una entrada **(Ninguno)** que elimina la asignación al grupo de tablas. Esta opción solo está disponible para tablas.
+  Se despliega un submenú para organizar las tablas seleccionadas en un grupo de tablas y facilitar la navegación por el modelo. El submenú enumera los grupos de tablas existentes, una entrada **(New...)** que crea un grupo nuevo a partir de las tablas seleccionadas y abre el editor de nombre, y una entrada **(None)** que quita la asignación del grupo de tablas. Esta opción solo está disponible para tablas.
 
 - **Hacer invisible**:
   Marca el objeto como no visible en las herramientas cliente. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, puedes usar el atajo **Ctrl+I** para ocultar el objeto.
@@ -78,19 +78,49 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Exporta los objetos seleccionados como un script TMSL o TMDL para usarlo en la implementación o el control de código fuente.
 
 - **Menús de macros**:
-  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. Si has creado macros para el tipo de objeto especificado, aparecerán como elementos de menú o carpetas adicionales en el menú contextual al hacer clic con el botón derecho.
+  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. Si has creado macros para el tipo de objeto indicado, aparecerán como elementos de menú o carpetas adicionales en el menú contextual.
+
+- **Revertir**:
+  Devuelve el objeto seleccionado y todo lo que cuelga de él al estado en que estaba la última vez que se guardó el modelo, sin afectar al resto de cambios no guardados. Solo se muestra para objetos con [cambios no guardados](xref:unsaved-changes) y, en el caso de las tablas, carpetas de visualización, grupos de tablas y el nodo **Modelo**, cuando ha cambiado algo debajo de ellos.
+
+- **Restaurar**:
+  Recupera un objeto eliminado exactamente como estaba justo antes de que se eliminara. Solo se muestra al hacer clic con el botón derecho en objetos que se han [eliminado desde el último guardado](xref:unsaved-changes#deleted-objects), que siguen visibles en el Explorador TOM con el nombre tachado.
 
 - **Cortar / Copiar / Pegar / Eliminar**:
-  Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo.
+  Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo. Los objetos eliminados siguen visibles en el Explorador TOM, tachados, hasta que se guarda el modelo. Consulta @unsaved-changes.
 
 - **Propiedades**:
   Abre el panel de Propiedades del objeto seleccionado. Atajo: **Alt+Enter**. Sirve para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
+
+### Copiar y mover objetos
+
+Al pegar un objeto (**Editar > Pegar** o **Ctrl+V**), se selecciona el objeto pegado, recibe el foco y se desplaza hasta dejarlo a la vista, para que puedas cambiarle el nombre o editarlo de inmediato. El original queda sin seleccionar.
+
+Tanto al mover un objeto a otra tabla mediante arrastrar y soltar como al duplicarlo, se conservan todos los indicadores de error y advertencia que el objeto ya tuviera. Una expresión que no era válida antes de moverla seguirá marcada como no válida después, sin necesidad de volver a editarla.
+
+### Seleccionar una partición
+
+Al seleccionar una partición, su expresión se muestra en el **Editor de expresiones**. En una partición que no tiene una expresión de consulta propia, como una partición Direct Lake o una generada por una política de actualización incremental, el editor muestra la **Data Coverage Definition Expression** cuando está definida; en caso contrario, aparece vacío.
 
 ### Mostrar columnas de información
 
 El Explorador TOM permite activar o desactivar columnas de información adicional sobre los objetos del modelo de datos. Puedes hacerlo con el atajo **Ctrl+7**.
 Esta información adicional también está disponible en la ventana de propiedades, pero permite ver rápidamente el tipo de objeto, la cadena de formato, el tipo de datos, la expresión y la descripción.
 ![Explorador TOM: mostrar/ocultar columnas](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
+
+## Cambios no guardados
+
+Los objetos que difieren de la última versión guardada del modelo se muestran resaltados y con indicadores: naranja para los objetos editados, verde para los objetos añadidos y rojo para los objetos eliminados, que además permanecen en el árbol, tachados, hasta que se guarda el modelo. Las tablas, carpetas y grupos que contienen objetos modificados se muestran con un relleno tramado. Los objetos eliminados se pueden recuperar con la opción **Restaurar** del menú contextual, y el botón **Mostrar cambios** de la barra de herramientas filtra el árbol para mostrar solo los objetos modificados. Consulta @unsaved-changes para obtener más información, incluido cómo revertir cambios individuales y cómo ajustar los indicadores en **Herramientas > Preferencias**.
+
+![Cambios sin guardar en el Explorador TOM](~/content/assets/images/user-interface/TOMExplorerUnsavedChanges.png)
+
+## Mantener la ubicación en el árbol
+
+El Explorador TOM conserva su estado cuando cambia el modelo subyacente. Los nodos expandidos siguen expandidos, el foco se mantiene en el mismo objeto, tu selección se conserva y el árbol no se desplaza de la posición que estabas viendo.
+
+Esto se aplica al revertir el modelo, tanto si se carga desde un archivo, una carpeta o un servidor en [modo del área de trabajo](xref:workspace-mode), como cuando el modelo se vuelve a cargar porque sus archivos cambiaron en disco. Consulta @auto-reload.
+
+También se aplica a la edición normal. El análisis semántico se ejecuta continuamente mientras editas DAX, y ahora el árbol se actualiza en su lugar conforme se completa el análisis, en lugar de reconstruirse, por lo que una expresión larga ya no te hace perder la posición en un modelo grande.
 
 ## Barra de herramientas del Explorador TOM
 
@@ -129,20 +159,23 @@ La barra de herramientas te permite mostrar y ocultar distintos tipos de objetos
    **Acceso directo:** **Ctrl+6**
 
 9. **Mostrar/ocultar columnas de información**
-   Muestra u oculta columnas de metadatos, como el tipo de datos o el estado del objeto.
+   Muestra u oculta columnas de metadatos, como los tipos de datos o el estado de los objetos.
    **Acceso directo:** **Ctrl+7**
 
 10. **Mostrar/ocultar grupos de tablas**
     Activa o desactiva la visibilidad de los grupos de tablas en el árbol del Explorador TOM. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
 
-11. **Selector de perspectiva**
+11. **Mostrar cambios**
+    Filtra el árbol para mostrar los objetos con [cambios sin guardar](xref:unsaved-changes), junto con las tablas, carpetas y grupos necesarios para llegar a ellos. Mientras el filtro está activo, el título de la vista muestra **Explorador TOM (Changed)**.
+
+12. **Selector de perspectiva**
     Lista desplegable para seleccionar una perspectiva específica. Solo se mostrarán en el Explorador TOM los objetos de la perspectiva seleccionada.
 
-12. **Selector de idioma**
+13. **Selector de idioma**
     Permite cambiar entre diferentes idiomas para la localización de los metadatos del modelo.
 
-13. **Contraer todo**
+14. **Contraer todo**
     Contrae todos los nodos de la vista en árbol del Explorador TOM.
 
-14. **Barra de búsqueda**
+15. **Barra de búsqueda**
     Proporciona filtrado y navegación en tiempo real dentro del Explorador TOM. Escribe para buscar en todos los objetos visibles del modelo.

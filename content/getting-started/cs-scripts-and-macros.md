@@ -2,7 +2,7 @@
 uid: cs-scripts-and-macros
 title: Introduction to C# scripts and macros
 author: Daniel Otykier
-updated: 2021-11-03
+updated: 2026-10-12
 ---
 # Introduction to C# scripts and macros
 
@@ -74,7 +74,7 @@ Tabular Editor can auto-generate the code that references a specific object, by 
 
 ![Generate an object reference by dragging](~/content/assets/images/generate-csharp-code.gif)
 
-Most TOM objects (tables, columns, measures, etc.) in Tabular Editor, exposes the same set of properties that are available when using the AMO/TOM client libraries directly. For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
+Most TOM objects (tables, columns, measures, etc.) in Tabular Editor, exposes the same set of properties that are available when using the AMO/TOM client libraries directly. For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
 
 # Accessing current TOM Explorer selection
 

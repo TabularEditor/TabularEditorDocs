@@ -2,7 +2,7 @@
 uid: incremental-refresh-workspace-mode
 title: Uso del modo del área de trabajo en un modelo con actualización incremental
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ applies_to:
 La actualización incremental crea nuevas particiones en la primera actualización programada del día. Como resultado, cualquier metadato local (es decir, `.bim` o `Database.json`) quedará desincronizado respecto a los metadatos del modelo remoto después de la actualización. Como resultado, **al trabajar con un modelo que tenga tablas configuradas con actualización incremental, no se recomienda el _modo del área de trabajo_.**.
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. Para Analysis Services, se requiere una [creación de particiones](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. Para Analysis Services, se requiere una [configuración de partición](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ---
 

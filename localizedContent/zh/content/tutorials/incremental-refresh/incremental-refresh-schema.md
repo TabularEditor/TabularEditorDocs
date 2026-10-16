@@ -2,7 +2,7 @@
 uid: incremental-refresh-schema
 title: 在使用增量刷新的表中添加或删除列
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,7 +24,7 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。 在 Analysis Services 中，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
@@ -32,31 +32,31 @@ applies_to:
 
 1. **检测架构更改：** 右键单击该表，然后选择 _“更新表架构...”_。
 
-  <img src="~/content/assets/images/tutorials/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
 
 2. **应用检测到的架构更改：** 在 _“应用架构更改”_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击该表，然后选择 _“应用刷新策略”_。
+4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
 
-  <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="应用刷新策略" style="width:450px !important"/>
 
-5. **刷新所有分区：** 按住 Shift 键并单击，以选中所有分区。 右键单击并选择 _刷新 > 完全刷新（分区）_。 你可以右键单击该表并选择 _“预览数据”_ 来查看结果。
+5. __刷新所有分区：__按住 Shift 键单击以选中所有分区。右键单击并选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表，然后选择 _“预览数据”_ 查看结果。
 
-  <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="刷新所有分区" style="width:450px !important"/>
 
 ---
 
 ### 使用增量刷新时的架构更新注意事项
 
-- 对于增量刷新，最重要的一点是：**必须刷新所有分区**。<br />为此，**选中所有分区，然后右键单击。 选择 _刷新 > 完全刷新（分区）_**。
+- 对于增量刷新，首要考虑的是 **必须刷新所有分区**。<br />为此，**选中所有分区并右键单击。选择 _刷新 > 完全刷新（分区）_**。
 
-- 第二点需要注意的是：**可能需要更新 _源表达式_ 和 _轮询表达式_，以反映架构更改**。 如果不更新这些 M 表达式，可能会导致刷新错误。 示例：
+- 另一个要注意的是，**可能需要更新 _Source Expression_ 和 _Polling Expression_，以反映架构更改**。如果不更新这些 M 表达式，可能会导致刷新错误。示例：
   - `Table.TransformColumnTypes` 步骤引用了一个将在更新后的架构中被删除的列。
   - `Table.SelectColumns` 步骤列出了要保留的列；新列没有添加到该列表中。
 
 <div class="WARNING">
-  <h5>在更新表架构之前检查 M 表达式</h5>
-  <p>如果架构更改源自数据源，你可能仍需要修改 Power Query 的 <b><em>源表达式</em></b> 或 <b><em>轮询表达式</em></b>。 建议在使用 <em>'更新表架构...'</em> 之前仔细检查这些表达式</p>
+  <h5>更新表架构前请检查 M 表达式</h5>
+  <p>如果架构更改源自数据源，你可能仍需要修改 Power Query 的 <b><em>源表达式</em></b> 或 <b><em>轮询表达式</em></b>。建议你在使用 <em>“更新表架构...”</em> 之前，仔细检查这些表达式……</p>
 </div>
 
 ---
@@ -73,7 +73,7 @@ applies_to:
 2. **应用检测到的架构更改：** 在 _'应用架构更改'_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
 4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
-5. **刷新所有分区：** 按住 Shift 并单击以选择所有分区。 右键单击并选择 _刷新 > 完全刷新（分区）_。 你可以右键单击该表并选择 _'预览数据'_ 来查看结果。
+5. __刷新所有分区：__按住 Shift 键单击以选中所有分区。右键单击并选择 _刷新 > 完全刷新（分区）_。你可以右键单击该表，然后选择 _“预览数据”_ 查看结果。
 
 # [Power Query](#tab/removingfrompq)
 
@@ -83,24 +83,24 @@ applies_to:
 2. **应用检测到的架构更改：** 在 _'应用架构更改'_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
 4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
-5. **刷新所有分区：** 按住 Shift 键并单击，即可选中所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 你可以右键单击该表，然后选择 _“预览数据”_ 以查看结果。
+5. __刷新所有分区：__按住 Shift 键单击以选中所有分区。右键单击并选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 # [不受支持的数据源](#tab/removingfromunsupportedsource)
 
-如果你在表的上下文菜单中使用 _“更新表架构...”_ 时__无法自动更新表架构__，请按以下步骤操作。 无论列是在数据源中删除，还是在 Power Query 中删除，这些步骤都相同。
+如果无法通过表的上下文菜单中的 _“更新表架构...”_ 来 **自动更新表架构**，请按以下步骤操作。无论是在数据源中删除列，还是在 Power Query 中删除列，步骤都相同。
 
 1. **选择源表达式：** 选中该表后，在 _表达式编辑器_ 窗口中，从左上角的下拉列表中选择 _源表达式_。
-2. **更新 Power Query 表达式：** 如适用，请检查并删除对已移除列的任何命名引用。 如果该列是通过 Power Query 排除的，你可以在此进行相应更改。
+2. **更新 Power Query 表达式：** 如适用，检查并删除对已移除列的所有命名引用。如果该列是通过 Power Query 排除的，可在此进行相应更改。
 3. **手动更新架构：** 从表中删除该数据列对象。
 4. **应用更改：** 部署模型更改。
 5. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
-6. **刷新所有分区：** 按住 Shift 键并单击，即可选中所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 你可以右键单击该表，然后选择 _“预览数据”_ 以查看结果。
+6. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 ***
 
 <div class="NOTE">
-  <h5>已删除的列对象仍可能被查询</h5>
-  <p>从模型中删除列对象，并不会阻止它们被查询——只要它们仍存在于数据源中，且没有在 Native Query 或 <b><em>Source Expression</em></b> 中删除。 已查询但未使用的列会对刷新时间和资源使用产生负面影响。 建议同时从元数据中删除这些列，并在数据源（例如视图）或 <b><em>Source Expression</em></b> 中将其移除。</p>
+  <h5>已删除的列对象仍可能会被查询</h5>
+  <p>从模型中删除列对象，并不会阻止它们被查询——只要它们仍存在于数据源中，且没有在 Native Query 或 <b><em>Source Expression</em></b> 中删除。已查询但未使用的列会对刷新时间和资源使用产生负面影响。建议不仅从元数据中移除这些列，也要在数据源（即视图）或 <b><em>源表达式</em></b> 中将其删除。</p>
 </div>
 
 ---
@@ -116,8 +116,8 @@ applies_to:
 1. **检测架构更改：** 右键单击该表，然后选择 _“更新表架构...”_。
 2. **应用检测到的架构更改：** 在 _“应用架构更改”_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
-5. **刷新所有分区：** 按住 Shift 键并单击以选择所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 可右键单击该表并选择 _“预览数据”_ 查看结果。
+4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+5. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 # [Power Query](#tab/addingfrompq)
 
@@ -126,19 +126,19 @@ applies_to:
 1. **检测架构更改：** 右键单击表，然后选择 _“更新表架构...”_。
 2. **应用检测到的架构更改：** 在 _“应用架构更改”_ 对话框中，确认所需的架构更改。
 3. **应用更改：** 部署模型更改。
-4. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
-5. **刷新所有分区：** 按住 Shift 键并单击以选择所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 可右键单击该表并选择 _“预览数据”_ 查看结果。
+4. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+5. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 # [不支持的数据源](#tab/addingfromunsupportedsource)
 
-如果无法通过表的上下文菜单中的 _“更新表架构...”_ 来 **自动更新表架构**，请按以下步骤操作。 无论列是在数据源中删除还是在 Power Query 中删除，这些步骤都相同。
+如果无法通过表的上下文菜单中的 _“更新表架构...”_ 来 **自动更新表架构**，请按以下步骤操作。无论是在数据源中删除列，还是在 Power Query 中删除列，步骤都相同。
 
 1. **选择源表达式：** 选中表后，在 _表达式编辑器_ 窗口中，从左上角的下拉列表中选择 _源表达式_。
-2. **更新 Power Query 表达式：** 如适用，检查并删除对已移除列的所有命名引用。 如果该列是通过 Power Query 排除的，可在此进行相应更改。
-3. **手动更新架构：** 右键单击表，然后选择 _创建 > 数据列_。 为该列设置合适的名称。
-4. **配置新列：** 将该列的 `data type` 属性设置为合适的值。 将 `Source Column` 属性设置为与源一致。 还可以配置其他附加属性（例如 `Format String`、`SummarizeBy`、`Data Category`...） 并可将该列添加到相应的显示文件夹中。
+2. **更新 Power Query 表达式：** 如适用，检查并删除对已移除列的所有命名引用。如果该列是通过 Power Query 排除的，可在此进行相应更改。
+3. **手动更新架构：** 右键单击表，然后选择 _创建 > 数据列_。为该列指定合适的名称。
+4. **配置新列：** 将该列的 `data type` 属性设置为合适的值。将 `Source Column` 属性设置为与源列一致。也可以配置其他属性（例如 `Format String`、`SummarizeBy`、`Data Category` 等）并可将该列添加到相应的显示文件夹中。
 5. **应用更改：** 部署模型的更改。
-6. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
-7. **刷新所有分区：** 按住 Shift 键并单击，以选择所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 你可以右键单击表，然后选择 _'预览数据'_ 来查看结果。
+6. **应用刷新策略：** 右键单击该表，然后选择 _应用刷新策略_。
+7. **刷新所有分区：** 按住 Shift 键并单击，选择所有分区。右键单击，然后选择 _刷新 > 完全刷新（分区）_。你可以右键单击表格，然后选择 _“预览数据”_ 查看结果。
 
 ***

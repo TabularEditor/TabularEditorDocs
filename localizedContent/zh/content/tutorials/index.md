@@ -2,7 +2,7 @@
 
 本部分包含用于学习 Tabular Editor 的全面教程。
 
-## 本节将介绍
+## 本节内容
 
 - @calendars - 创建和管理日历表
 - @connecting-to-azure-databricks - 数据库连接
