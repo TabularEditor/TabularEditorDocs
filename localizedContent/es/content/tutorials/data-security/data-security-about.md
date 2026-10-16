@@ -2,7 +2,7 @@
 uid: data-security-about
 title: ¿Qué es la seguridad de los datos?
 author: Kurt Buhler
-updated: 2023-03-02
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,9 +23,9 @@ applies_to:
 
 ---
 
-Los Dataset publicados se pueden configurar con seguridad de datos mediante <span style="color:#01a99d">[seguridad a nivel de filas (RLS)](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls)</span> (para tablas) o <span style="color:#8d7bae">[seguridad a nivel de objetos (OLS)](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-ols?tabs=table)</span> (para tablas y columnas). **El objetivo de la seguridad de los datos es garantizar que los usuarios solo vean y usen los datos para los que tienen permiso, tanto en Report publicados como al crear sus propias soluciones de datos de autoservicio.** Para ello, a los usuarios se les asignan **roles** con reglas de <span style="color:#01a99d">**RLS**</span> u <span style="color:#8d7bae">**OLS**</span>, que <span style="color:#01a99d">**aplican FILTER (RLS)**</span> o <span style="color:#8d7bae">**restringen (OLS)**</span> las consultas generadas por Report y herramientas de cliente como Power BI Desktop o Excel.
+Los Dataset publicados pueden configurarse con seguridad de datos mediante <span style="color:#01a99d">[seguridad a nivel de filas (RLS)](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls)</span> (para tablas) o <span style="color:#8d7bae">[seguridad a nivel de objetos (OLS)](https://learn.microsoft.com/power-bi/enterprise/service-admin-ols?tabs=table)</span> (para tablas y columnas). **El objetivo de la seguridad de los datos es garantizar que los usuarios solo vean y usen los datos para los que tienen permiso, tanto en Report publicados como al crear sus propias soluciones de datos de autoservicio.** Para ello, a los usuarios se les asignan **roles** con reglas de <span style="color:#01a99d">**RLS**</span> u <span style="color:#8d7bae">**OLS**</span>, que <span style="color:#01a99d">**aplican FILTER (RLS)**</span> o <span style="color:#8d7bae">**restringen (OLS)**</span> las consultas generadas por Report y herramientas de cliente como Power BI Desktop o Excel.
 
-Aunque [no es obligatoria](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance#when-to-avoid-using-rls), [la seguridad de datos es una característica común de una solución de BI empresarial sólida, segura y conforme](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning#enforce-data-security-based-on-consumer-identity). Esta serie es una introducción práctica a la seguridad de datos, en lo que respecta al modelado tabular y Tabular Editor.
+Aunque [no es obligatoria](https://learn.microsoft.com/power-bi/guidance/rls-guidance#when-to-avoid-using-rls), [la seguridad de datos es una característica común de una solución de BI empresarial sólida, segura y que cumple la normativa](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning#enforce-data-security-based-on-consumer-identity). Esta serie es una introducción práctica a la seguridad de datos, en lo que respecta al modelado tabular y Tabular Editor.
 
 _Tanto RLS como OLS se pueden configurar, modificar y probar fácilmente desde Tabular Editor._
 
@@ -52,7 +52,7 @@ La seguridad de datos funciona a nivel de modelo. Se configura siguiendo los pas
 
 #### 1. **Crear roles:**
 
-Los _roles_ son grupos de usuarios que comparten los mismos permisos o la misma lógica de seguridad de datos. En este caso, los _usuarios_ se identifican por su correo electrónico, o por el correo electrónico de un [grupo de seguridad de Azure AD](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#integration-with-azure-ad). Ejemplos de roles:
+Los _roles_ son grupos de usuarios que comparten los mismos permisos o la misma lógica de seguridad de datos. En este caso, los _usuarios_ se identifican por su correo electrónico, o por el correo electrónico de un [grupo de seguridad de Azure AD](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#integration-with-azure-ad). Ejemplos de roles:
 
 - Usuarios de la misma región, equipo o departamento (_EMEA_, _UA Sales Team_).
 - Usuarios con el mismo rol, función o nivel de autorización de acceso (_Key Account Managers_, _SC Clearance_).
@@ -92,9 +92,9 @@ Las _reglas_ se aplican para cada rol a uno o varios objetos, en función del ti
 
 Una vez configurado el Dataset, debes asignar a los usuarios a sus roles correspondientes.
 
-- _Power BI:_ Los roles se asignan mediante Tabular Editor o a través del **servicio de Power BI/Fabric**, [en la configuración del Dataset del Workspace](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security#manage-security-on-your-model).
+- _Power BI:_ Los roles se asignan desde Tabular Editor o desde el **servicio de Power BI/Fabric**, [en la configuración del Dataset del Workspace](https://learn.microsoft.com/fabric/security/service-admin-row-level-security#manage-security-on-your-model).
 - _SSAS / AAS:_ Los roles se asignan mediante el objeto rol, haciendo clic con el botón derecho y seleccionando "Editar miembros..."
-- _Power BI Embedded:_ Debes [generar un token de inserción](https://learn.microsoft.com/en-us/power-bi/developer/embedded/cloud-rls#generate-an-embed-token).
+- _Power BI Embedded:_ Debes [generar un token de inserción](https://learn.microsoft.com/power-bi/developer/embedded/cloud-rls#generate-an-embed-token).
 
 Puedes asignar y quitar usuarios/grupos de los roles en Tabular Editor de la siguiente manera:
 
@@ -118,18 +118,18 @@ Puedes asignar y quitar usuarios/grupos de los roles en Tabular Editor de la sig
 > Si tu organización usa Active Directory local con SQL Server Analysis Services, tendrás que usar la opción **Miembro de Windows AD** en lugar de **Miembro de Azure AD**.
 
 > [!NOTE]
-> Se [recomienda](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#strategy-for-using-groups) gestionar la seguridad de los datos y el acceso con [grupos de Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/how-to-manage-groups). <br>Se prefiere este enfoque, ya que puedes centralizar la administración de la seguridad y la segmentación de usuarios.
+> Se [recomienda](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#strategy-for-using-groups) gestionar la seguridad de los datos y el acceso con [grupos de Azure Active Directory](https://learn.microsoft.com/azure/active-directory/fundamentals/how-to-manage-groups). <br>Se prefiere este enfoque, ya que puedes centralizar la administración de la seguridad y la segmentación de usuarios.
 
 #### 4. **Conceder a los usuarios acceso al Dataset:**
 
-_Power BI:_ Se debe conceder a los usuarios acceso al Dataset según el [escenario de uso](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-overview).
+_Power BI:_ Se debe conceder a los usuarios acceso al Dataset según el [escenario de uso](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-overview).
 
 - _App Audience:_ Los usuarios o sus grupos de Azure AD se agregan a la [App Audience](https://data-goblins.com/power-bi/app-audiences) adecuada.
-- _Workspace Viewer:_ Los usuarios o sus grupos de Azure AD se agregan como [visores del Workspace](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-workspaces-workspace-level-planning#workspace-access)
-- _Dataset Readers:_ A los usuarios o a sus grupos de Azure AD se les conceden [permisos específicos del Dataset](https://learn.microsoft.com/en-us/power-bi/connect-data/service-datasets-manage-access-permissions) mediante un Dataset o un elemento dependiente (es decir. Report).
+- _Workspace Viewer:_ Los usuarios o sus grupos de Azure AD se agregan como [visores del Workspace](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-workspaces-workspace-level-planning#workspace-access)
+- _Dataset Readers:_ A los usuarios o sus grupos de Azure AD se les conceden [permisos específicos del Dataset](https://learn.microsoft.com/power-bi/connect-data/service-datasets-manage-access-permissions) mediante un Dataset o un elemento dependiente (es decir. Report).
 
 > [!WARNING]
-> A los usuarios a los que se les asignen los [roles de Workspace de Administrador, Miembro o Colaborador](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces#workspace-roles) se les conceden **_permisos de escritura_** sobre un Dataset. Por lo tanto, la seguridad de datos, como RLS y OLS, no filtrará ni bloqueará datos para los usuarios con estos roles. <br><br>
+> Los usuarios a los que se asignen los [roles de Administrador, Miembro o Colaborador del Workspace](https://learn.microsoft.com/power-bi/collaborate-share/service-roles-new-workspaces#workspace-roles) tienen **_permisos de escritura_** en un Dataset. Por lo tanto, la seguridad de datos, como RLS y OLS, no filtrará ni bloqueará datos para los usuarios con estos roles. <br><br>
 > **_Si un usuario es Administrador, Miembro o Colaborador, podrá ver todos los datos_**. <br><br>
 > En la medida de lo posible, procura distribuir y administrar los permisos mediante Power BI Apps.
 
@@ -138,7 +138,7 @@ _Power BI:_ Se debe conceder a los usuarios acceso al Dataset según el [escenar
 RLS y OLS solo se pueden probar mediante suplantación una vez que se hayan agregado los grupos de usuarios y se les haya concedido acceso. Valida la seguridad mediante:
 
 - _Tabular Editor:_ Usando [Suplantación de usuario](data-security-testing.md).
-- _Servicio de Power BI:_ en la [configuración de seguridad del Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#validating-the-role-within-the-power-bi-service).
+- _Servicio de Power BI:_ En la [configuración de seguridad del Dataset](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#validating-the-role-within-the-power-bi-service).
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 5:</strong> La forma más sencilla de probar la seguridad de datos es mediante suplantación con Tabular Editor. La opción "Suplantación" está disponible en cualquier función de consulta de datos (Consultas DAX, Pivot Grid, Vista previa de datos).</figcaption>
@@ -186,7 +186,7 @@ _En el ejemplo, tanto Jack como Janet pueden ver todos los datos._
 Los permisos de tabla más sencillos son _estáticos_:
 
 ```dax
-// permiso de tabla para la tabla 'Regions' y el rol 'CTG'
+// Table Permission for 'Regions' table and 'CTG' role
 'Regions'[Territory] = "Central Transit Gate"
 ```
 
@@ -215,9 +215,9 @@ A esto se le llama RLS _dinámico_ porque el resultado cambiará en función del
 A continuación se muestra un ejemplo de permiso de tabla de RLS dinámico:
 
 ```dax
-// permiso de tabla para 'Regions' y el rol 'Territory Directors'.
+// Table Permission for 'Regions' table and 'Territory Directors' role.
 
-// Obtener el usuario actual
+// Get Current User
 VAR _CurrentUser = 
 SELECTCOLUMNS (
 	FILTER ( 
@@ -377,12 +377,12 @@ _Los usuarios a los que se conceden permisos de compilación en el Dataset se ag
 
 Algunas características de Report o de Data model no funcionarán con una configuración de RLS u OLS. Algunos ejemplos son:
 
-1. [Limitaciones de RLS](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#considerations-and-limitations)
+1. [Limitaciones de RLS](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#considerations-and-limitations)
    - Entidades de servicio agregadas a los roles de RLS
    - Pruebas con modelos de DirectQuery usando SSO
-   - [Publicar en la web en Power BI](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance#when-to-avoid-using-rls)
+   - [Publicar en la web en Power BI](https://learn.microsoft.com/power-bi/guidance/rls-guidance#when-to-avoid-using-rls)
 
-2. [Limitaciones de OLS](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-ols?tabs=table#considerations-and-limitations)
+2. [Limitaciones de OLS](https://learn.microsoft.com/power-bi/enterprise/service-admin-ols?tabs=table#considerations-and-limitations)
    - Combinar roles de RLS y de OLS independientes (como se comentó arriba)
    - Funciones de preguntas y respuestas
    - Información rápida
@@ -395,8 +395,8 @@ Algunas características de Report o de Data model no funcionarán con una confi
 
 Para obtener más información detallada sobre la seguridad de los datos, consulta las siguientes referencias:
 
-1. [Documento técnico de seguridad de Power BI](https://learn.microsoft.com/en-us/power-bi/guidance/whitepaper-powerbi-security)
-2. [Documentación de Power BI: seguridad](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-power-bi-security)
-3. [Documentación de Analysis Services: seguridad a nivel de objetos](https://learn.microsoft.com/en-us/analysis-services/tabular-models/object-level-security?view=asallproducts-allversions)
-4. [Planificación de la implementación de Power BI: seguridad del Report](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning)
-5. [(Relacionado) Planificación de la implementación de Power BI: protección de la información y prevención de pérdida de datos (DLP)](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-info-protection-data-loss-prevention-overview)
+1. [Documento técnico de seguridad de Power BI](https://learn.microsoft.com/power-bi/guidance/whitepaper-powerbi-security)
+2. [Documentación de Power BI: seguridad](https://learn.microsoft.com/power-bi/enterprise/service-admin-power-bi-security)
+3. [Documentación de Analysis Services: seguridad a nivel de objetos](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security?view=asallproducts-allversions)
+4. [Planificación de la implementación de Power BI: seguridad](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-security-report-consumer-planning)
+5. [(Relacionado) Planificación de la implementación de Power BI: protección de la información y prevención de pérdida de datos (DLP)](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-info-protection-data-loss-prevention-overview)

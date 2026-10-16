@@ -8,12 +8,12 @@ description: Regla de buenas prácticas que garantiza que las carpetas de visual
 
 # Traducir las carpetas de visualización para todas las configuraciones regionales
 
-## Descripción general
+## Resumen
 
 Esta regla identifica objetos visibles con carpetas de visualización a las que les faltan traducciones en una o varias configuraciones regionales.
 
 - Categoría: Diseño del modelo
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -46,7 +46,7 @@ and not string.IsNullOrEmpty(DisplayFolder)
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDisplayFolders[it]))
 ```
 
-## Cómo solucionarlo
+## Cómo corregir
 
 ### Solución automática
 
@@ -68,7 +68,7 @@ Restablece las traducciones para usar la carpeta de visualización predeterminad
 
 Carpetas de visualización creadas sin traducciones.
 
-### Causa 2: Se añadió una configuración regional más tarde
+### Causa 2: Configuración regional agregada más tarde
 
 Se añadió una configuración regional después de definir las carpetas de visualización.
 
@@ -81,17 +81,17 @@ El flujo de trabajo de traducción no incluía las carpetas de visualización.
 ### Antes de la corrección
 
 ```
-Medida: [Total Sales]
-Carpeta de visualización (inglés): "Sales Metrics"
-Carpeta de visualización (francés): (falta)
+Measure: [Total Sales]
+Display Folder (English): "Sales Metrics"
+Display Folder (French): (missing)
 ```
 
 ### Después de la corrección
 
 ```
-Medida: [Total Sales]
-Carpeta de visualización (inglés): "Sales Metrics"
-Carpeta de visualización (francés): "Métriques de Vente"
+Measure: [Total Sales]
+Display Folder (English): "Sales Metrics"
+Display Folder (French): "Métriques de Vente"
 ```
 
 ## Nivel de compatibilidad

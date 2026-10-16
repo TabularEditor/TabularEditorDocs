@@ -2,7 +2,7 @@
 uid: diagram-view-reference
 title: 图表视图
 author: Morten Lønskov
-updated: 2025-04-24
+updated: 2026-09-14
 applies_to:
   products:
     - product: Tabular Editor 2

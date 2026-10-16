@@ -2,7 +2,7 @@
 uid: incremental-refresh-about
 title: ¿Qué es una política de actualización?
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ applies_to:
 
 ---
 
-Los Datasets alojados en el servicio de Power BI pueden configurar la [actualización incremental](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) en una o varias tablas de datos. **El objetivo de la actualización incremental es lograr actualizaciones más rápidas y eficientes al recuperar solo los datos recientes o cambiantes y _actualizar la tabla de forma incremental_.** Para ello, la tabla se divide automáticamente en particiones, de modo que solo <span style="color:#01a99d">se actualizan los datos recientes o cambiantes (particiones "hot")</span> o incluso <span style="color:#8d7bae">se recuperan en tiempo real ([particiones "DirectQuery" en "tablas híbridas"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span>, mientras que <span style="color:#939799">los datos más antiguos y estáticos se archivan (particiones "cold").</span>
+Los Datasets alojados en el servicio de Power BI pueden tener configurada la [actualización incremental](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview) para una o varias tablas de datos. **El objetivo de la actualización incremental es lograr actualizaciones más rápidas y eficientes al recuperar solo los datos recientes o que cambian y _actualizar la tabla de forma incremental_.** Para ello, la tabla se divide automáticamente en particiones, de modo que solo <span style="color:#01a99d">se actualizan los datos recientes o que cambian (particiones "hot")</span> o incluso <span style="color:#8d7bae">se recuperan en tiempo real ([particiones "DirectQuery" en "tablas híbridas"](https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span>, mientras que <span style="color:#939799">los datos más antiguos y estáticos se archivan (particiones "cold").</span>
 
 _La actualización incremental se puede configurar y modificar fácilmente desde Tabular Editor._
 
@@ -34,21 +34,21 @@ _La actualización incremental se puede configurar y modificar fácilmente desde
 > - Disfruta de actualizaciones programadas más cortas y fiables
 
 > [!IMPORTANT]
-> La configuración de la actualización incremental con Tabular Editor 3 se limita a Datasets alojados en el servicio de Datasets de Power BI. Para Analysis Services, se requiere un [particionamiento](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. En Analysis Services se requiere una [creación de particiones](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ---
 
 ### ¿Cómo funciona?
 
-Para crear las particiones, Power BI usa los parámetros _datetime_ `RangeStart` y `RangeEnd` en Power Query. Estos parámetros se usan en un paso de filtrado de la expresión M de la partición de la tabla, filtrando una columna de fecha y hora de la tabla. Las columnas de tipo fecha, cadena o entero pueden seguir filtrándose manteniendo el plegado de consultas, query folding, mediante funciones que convierten `RangeStart`, `RangeEnd` o la columna de fecha al tipo de datos adecuado. Para más información sobre esto, consulta [aquí](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+Para crear las particiones, Power BI usa los parámetros _datetime_ `RangeStart` y `RangeEnd` en Power Query. Estos parámetros se usan en un paso de filtrado de la expresión M de la partición de la tabla, filtrando una columna de fecha y hora de la tabla. Las columnas de tipo fecha, cadena o entero pueden seguir filtrándose manteniendo el plegado de consultas, query folding, mediante funciones que convierten `RangeStart`, `RangeEnd` o la columna de fecha al tipo de datos adecuado. Para obtener más información, consulta [aquí](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 A continuación se muestra un ejemplo. La actualización incremental se aplica a la tabla _'Orders'_ en la columna _[Order Date]_:
 
 # [Solo el paso de filtro](#tab/filterstep)
 
 ```M
-// Idealmente, el paso de filtro debería poder plegarse de nuevo al Data source
-// Ningún paso anterior a este debería interrumpir el plegado de consultas
+// The filter step should ideally be able to fold back to the data source
+// No steps before this should break query folding
 #"Incremental Refresh Filter Step" = 
     Table.SelectRows(
         Navigation,
@@ -62,7 +62,7 @@ A continuación se muestra un ejemplo. La actualización incremental se aplica a
 
 ```M
 let
-    // Idealmente, el Data source debería admitir el plegado de consultas
+    // The data source should ideally support Query Folding
     Source = Sql.Database(#"ServerParameter", #"DatabaseParameter"),
 
     Navigation = 
@@ -70,8 +70,8 @@ let
             [ Schema="DW_fact", Item="Internet Sales" ] 
         } [Data],
 
-    // Idealmente, el paso de filtro debería poder plegarse de nuevo al Data source
-    // Ningún paso anterior a este debería interrumpir el plegado de consultas
+    // The filter step should ideally be able to fold back to the data source
+    // No steps before this should break query folding
     #"Incremental Refresh Filter Step" = 
         Table.SelectRows(
             Navigation,
@@ -86,8 +86,8 @@ in
 # [RangeStart](#tab/rangestart)
 
 ```M
-// No importa cuál sea el valor inicial del parámetro RangeStart
-// El parámetro debe ser del tipo de datos "datetime"
+// It does not matter what the initial value is for the RangeStart parameter
+// The parameter must be of data type "datetime"
 #datetime(2022, 12, 01, 0, 0, 0) 
     meta 
         [
@@ -100,8 +100,8 @@ in
 # [RangeEnd](#tab/rangend)
 
 ```M
-// No importa cuál sea el valor inicial del parámetro RangeEnd
-// El parámetro debe ser del tipo de datos "datetime"
+// It does not matter what the initial value is for the RangeEnd parameter
+// The parameter must be of data type "datetime"
 #datetime(2022, 12, 31, 0, 0, 0) 
     meta 
         [
@@ -114,8 +114,8 @@ in
 ***
 
 > [!WARNING]
-> La actualización incremental está diseñada para Data source que admiten el [plegado de consultas de Power Query](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Lo ideal es que el [plegado de consultas no se rompa](https://learn.microsoft.com/en-us/power-query/step-folding-indicators) antes de aplicar el paso de filtro.
-> No existe un requisito explícito de que la consulta final se pliegue, excepto al implementar [tablas híbridas](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
+> La actualización incremental está diseñada para Data sources que admiten el [plegado de consultas de Power Query](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Lo ideal es que el [plegado de consultas no se rompa](https://learn.microsoft.com/power-query/step-folding-indicators) antes de aplicar el paso de filtro.
+> No existe un requisito explícito de que la consulta final se pliegue, excepto al implementar [tablas híbridas](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
 
 ---
 
@@ -130,7 +130,7 @@ Una _política de actualización_ determina cómo se particionan los datos y cu�
 
 ### Propiedades de la política de actualización
 
-<img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
+<img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Propiedades de la actualización incremental"  style="width:704px !important"/>
 
 Una política de actualización básica se compone de cuatro tipos distintos de propiedades:
 
@@ -161,7 +161,7 @@ En la configuración estándar de actualización incremental, todas las particio
 
 # [Híbrida](#tab/hybrid)
 
-En la configuración <span style="color:#01a99d">**_[híbrida](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)_**</span> de la actualización incremental del Dataset, la partición más reciente del rango definido por la política en la <span style="color:#455C86">ventana incremental</span> se consulta en tiempo real mediante DirectQuery.
+En la configuración <span style="color:#01a99d">**_[híbrida](https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)_**</span> de la actualización incremental, la partición más reciente del rango definido por la directiva en la <span style="color:#455C86">ventana incremental</span> se consulta en tiempo real mediante DirectQuery.
 
 Esto se configura mediante la propiedad <em>Mode</em> cuando se establece en <code>Hybrid</code>.
 
@@ -268,8 +268,8 @@ _A continuación se muestra un resumen de las propiedades de TOM de un Data mode
             </tr>
             <tr>
                 <td class="formatting"><span id="refreshpolicymode"><b><em>Modo</b></em></span></td>
-                <td class="formatting">Obtenga los datos más recientes en tiempo real con DirectQuery</td>
-                <td class="formatting">Especifica si la actualización incremental se configura únicamente con particiones de importación o también con una partición de DirectQuery, para dar como resultado una <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
+                <td class="formatting">Obtener los datos más recientes en tiempo real con DirectQuery</td>
+                <td class="formatting">Especifica si la actualización incremental se configura solo con particiones de importación o también con una partición de DirectQuery, lo que da lugar a una <a href="https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
                 <td class="formatting"><code>Import</code> o <code>Hybrid</code>.</td>
             </tr>
             <tr>
@@ -319,12 +319,12 @@ _A continuación se muestra un resumen de las propiedades de TOM de un Data mode
             <tr>
                 <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
                 <td class="formatting">Obtenga los datos más recientes en tiempo real con DirectQuery</td>
-                <td class="formatting">Especifica si la actualización incremental se configura únicamente con particiones de importación o también con una partición de DirectQuery, para dar como resultado una <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
+                <td class="formatting">Especifica si la actualización incremental se configura solo con particiones de importación o también con una partición de DirectQuery, lo que da lugar a una <a href="https://learn.microsoft.com/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
                 <td class="formatting"><code>Import</code> o <code>Hybrid</code>.</td>
             </tr>
             <tr>
                 <td class="formatting"><b><em>PolicyType</b></td>
-                <td class="formatting">N/A</td>
+                <td class="formatting">N/D</td>
                 <td class="formatting">Especifica el tipo de política de actualización.</td>
                 <td class="formatting">Solo puede contener un único valor: <code>Basic</code>.</td>
             </tr>

@@ -2,7 +2,7 @@
 uid: script-output-things
 title: Mostrar los detalles de los objetos en una cuadrícula
 author: Daniel Otykier
-updated: 2024-12-13
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,16 +13,16 @@ applies_to:
 
 # Mostrar los detalles de los objetos en una cuadrícula
 
-## Propósito del script
+## Objetivo del script
 
-Otra forma de obtener una visión general de los objetos del modelo y de cómo están configurados es volcarlos en una cuadrícula mediante la clase C# [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0). Es una técnica muy flexible, porque puedes añadir solo la información que te interese como columnas del `DataTable`. Además, al pasar un `DataTable` al método `Output()`, Tabular Editor lo mostrará automáticamente en una vista de cuadrícula, lo que resulta muy cómodo para inspeccionar los datos.
+Otra forma de obtener una visión general de los objetos del modelo y de cómo están configurados es mostrarlos en una cuadrícula usando la clase C# [`DataTable`](https://learn.microsoft.com/dotnet/api/system.data.datatable?view=net-8.0). Es una técnica muy flexible, porque puedes añadir solo la información que te interese como columnas del `DataTable`. Además, al pasar un `DataTable` al método `Output()`, Tabular Editor lo mostrará automáticamente en una vista de cuadrícula, lo que resulta muy cómodo para inspeccionar los datos.
 
 ## Script
 
 ### Mostrar detalles de la complejidad de las medidas
 
 ```csharp
-// Este script muestra una cuadrícula con detalles sobre cada medida en el modelo.
+// This script displays a grid with details about each measure in the model.
 using System.Data;
 
 var result = new DataTable();
@@ -37,9 +37,9 @@ foreach(var m in Model.AllMeasures)
 {
     var row = new object[]
     {
-        m.DaxObjectName,    // Nombre
-        m.Table.Name,       // Tabla
-        m.Tokenize().Count, // Recuento de tokens
+        m.DaxObjectName,    // Name
+        m.Table.Name,       // Table
+        m.Tokenize().Count, // Token count
         m.Expression.Split(new []{'\n'}, StringSplitOptions.RemoveEmptyEntries).Length,
         m.Description.Split(new []{'\n'}, StringSplitOptions.RemoveEmptyEntries).Length,
         m.FormatStringExpression ?? m.FormatString

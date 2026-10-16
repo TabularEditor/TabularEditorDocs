@@ -8,12 +8,12 @@ description: Regla de prácticas recomendadas para eliminar los Data sources hu�
 
 # Eliminar Data sources sin usar
 
-## Información general
+## Resumen
 
 Esta regla de prácticas recomendadas identifica Data sources a los que no hace referencia ninguna partición ni ninguna expresión de tabla. Eliminar Data sources sin usar reduce la complejidad del modelo, mejora su mantenibilidad y evita confusiones.
 
 - Categoría: Mantenimiento
-- Gravedad: Baja (1)
+- Gravedad: baja (1)
 
 ## Se aplica a
 
@@ -64,9 +64,9 @@ Esta regla incluye una corrección automática que elimina el Data source no uti
 Delete()
 ```
 
-Para aplicarlo:
+Para aplicar:
 
-1. En **Best Practice Analyzer**, selecciona los objetos marcados
+1. En el **Best Practice Analyzer**, selecciona los objetos marcados
 2. Haz clic en **Aplicar corrección**
 
 ### Corrección manual
@@ -90,19 +90,19 @@ Comprueba que el Data source realmente no está en uso:
 ### Antes de la corrección
 
 ```
-Data sources:
-  - SQLServer_Production (Provider, usado por la partición Sales)
-  - SQLServer_Staging (Provider, NO SE UTILIZA)  ← Eliminar
-  - AzureSQL_Archive (Structured, NO SE UTILIZA)  ← Eliminar
-  - PowerQuery_Web (Structured, usado por la partición Product)
+Data Sources:
+  - SQLServer_Production (Provider, used by Sales partition)
+  - SQLServer_Staging (Provider, NOT USED)  ← Remove
+  - AzureSQL_Archive (Structured, NOT USED)  ← Remove
+  - PowerQuery_Web (Structured, used by Product partition)
 ```
 
 ### Después de la corrección
 
 ```
-Data sources:
-  - SQLServer_Production (Provider, usado por la partición Sales)
-  - PowerQuery_Web (Structured, usado por la partición Product)
+Data Sources:
+  - SQLServer_Production (Provider, used by Sales partition)
+  - PowerQuery_Web (Structured, used by Product partition)
 ```
 
 **Resultado**: Un modelo más sencillo con solo los Data sources necesarios

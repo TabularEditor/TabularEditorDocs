@@ -2,7 +2,7 @@
 uid: csharp-script-library
 title: Biblioteca de scripts de C#
 author: Morten Lønskov
-updated: 2023-02-23
+updated: 2026-10-12
 ---
 
 # Biblioteca de scripts de C\#
@@ -24,7 +24,7 @@ La parte superior de cada artículo indica la compatibilidad del script con TE2.
 <br></br>
 
 > [!NOTE]
-> Algunos scripts no funcionan cuando se conectan a un modelo de Power BI Desktop, debido a las limitaciones de las herramientas externas de Power BI Desktop: [Limitaciones de las herramientas externas](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Aun así, puede experimentar con el script habilitando las operaciones de modelado no compatibles en las preferencias. <br></br>
+> Algunos scripts no funcionan al conectarse a un modelo de Power BI Desktop, debido a las limitaciones de las herramientas externas de Power BI Desktop: [Limitaciones de las herramientas externas](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Aun así, puede experimentar con el script habilitando las operaciones de modelado no compatibles en las preferencias. <br></br>
 
 ### [Preferencias de Tabular Editor 2](#tab/TE2Preferences)
 

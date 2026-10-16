@@ -8,7 +8,7 @@ description: Regla de buenas prácticas para eliminar los espacios iniciales y f
 
 # Recortar espacios iniciales y finales de los nombres de los objetos
 
-## Descripción general
+## Resumen
 
 Esta regla de buenas prácticas identifica los objetos cuyos nombres contienen espacios al principio o al final. Estos espacios innecesarios provocan problemas de referencia en DAX, problemas de visualización y confusión en general.
 
@@ -78,9 +78,9 @@ Al duplicar objetos, el nombre llevará añadido el sufijo " copy". Es fácil pa
 ### Antes de la corrección
 
 ```
-Medidas:
+Measures:
   - Total Sales
-  -  Total Sales  (con espacios: ¡parece diferente!)
+  -  Total Sales  (with spaces - appears different!)
 ```
 
 DAX: `[ Total Sales]` - ¿Cuál de los dos?
@@ -88,15 +88,15 @@ DAX: `[ Total Sales]` - ¿Cuál de los dos?
 ### Después de la corrección
 
 ```
-Medidas:
-  - Total Sales (una única medida coherente)
+Measures:
+  - Total Sales (single consistent measure)
 ```
 
 DAX: `[Total Sales]` - Sin ambigüedades
 
 ## Nivel de compatibilidad
 
-Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
 ## Reglas relacionadas
 

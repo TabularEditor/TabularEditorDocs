@@ -66,13 +66,13 @@ Una vez que el análisis haya finalizado, se te mostrará un resumen con el núm
 
 Ve a la pestaña **Problemas** o **Medidas** para ver los resultados detallados. Usa los encabezados de las columnas para ordenar y filtrar los resultados.
 
-![Dax Optimizer Issues](~/content/assets/images/features/dax-optimizer-issues.png)
+![Problemas del optimizador de Dax](~/content/assets/images/features/dax-optimizer-issues.png)
 
 ## Navegar por problemas y medidas
 
 Cuando haces doble clic en un problema o una medida en la vista detallada mostrada arriba, se abrirá la vista **Resultados del Optimizador de DAX**, donde se muestra la expresión DAX original de la medida, junto con resaltados de las zonas problemáticas. La lista del lado izquierdo de la pantalla te permite activar o desactivar los problemas que se resaltan. Además, puedes marcar los problemas como **Corregido** o **Ignorado** usando las casillas de verificación de la lista.
 
-![Dax Optimizer Results](~/content/assets/images/features/dax-optimizer-results.png)
+![Resultados del optimizador de Dax](~/content/assets/images/features/dax-optimizer-results.png)
 
 Haz clic en el botón **Buscar en el Explorador TOM...** situado en la esquina superior derecha de la vista para ir a la medida correspondiente del modelo cargado actualmente.
 

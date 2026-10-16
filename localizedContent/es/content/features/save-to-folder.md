@@ -2,7 +2,7 @@
 uid: save-to-folder
 title: Guardar en carpeta
 author: Morten Lønskov
-updated: 2023-08-08
+updated: 2026-09-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -51,6 +51,29 @@ Las pestañas General y Guardar en carpeta contienen ajustes relacionados con la
 Tabular Editor 3 tiene una configuración predeterminada para la serialización JSON y debes seleccionar explícitamente otra opción en el modo de serialización, donde también puedes cambiar al formato TMDL.
 
 ***
+
+### Funciones definidas por el usuario (UDFs)
+
+Desde Tabular Editor 3.27.0, el formato de carpeta JSON puede almacenar cada [función DAX definida por el usuario](xref:udfs) en su propio archivo, igual que ya hace con las tablas, las medidas y las columnas. Las funciones se guardan en una subcarpeta `functions` en la raíz del modelo:
+
+```
+MyModel/
+├── database.json
+├── functions/
+│   ├── Sales.MarginPct.json
+│   └── Time.SameDayLastYear.json
+├── tables/
+└── ...
+```
+
+La ventaja es la misma que para cualquier otro tipo de objeto: si dos desarrolladores editan dos funciones distintas, cambian dos archivos distintos, por lo que Git no tiene nada que fusionar. Sin esta opción, todas las funciones quedan insertadas en `Database.json`, y cualquier edición en paralelo entra en conflicto en ese único archivo.
+
+Actívalo seleccionando el nivel **Funciones definidas por el usuario (UDFs)**, en **Herramientas > Preferencias > Formatos de archivo > Save-to-folder** o, para el modelo que tengas abierto, en **Modelo > Opciones de serialización...**.
+
+![Modelo > Opciones de serialización, con el nivel Funciones definidas por el usuario (UDFs) marcado](~/content/assets/images/serialization-options-udf.png)
+
+> [!IMPORTANT]
+> Tabular Editor selecciona este nivel de forma predeterminada solo cuando guardas un modelo en una carpeta por _primera_ vez. Un modelo que ya está serializado en una carpeta conserva los niveles almacenados en su propia anotación de serialización, por lo que sus funciones permanecen insertadas en línea hasta que selecciones **Funciones definidas por el usuario (UDFs)** en **Modelo > Opciones de serialización...** y vuelvas a guardar el modelo.
 
 ### Anotación de serialización del modelo
 

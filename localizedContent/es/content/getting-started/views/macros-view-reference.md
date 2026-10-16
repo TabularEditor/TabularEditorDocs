@@ -19,6 +19,6 @@ applies_to:
 
 [!include[macros-view](../../features/views/macros-view.md)]
 
-## Próximos pasos
+## Siguientes pasos
 
 - @creating-macros

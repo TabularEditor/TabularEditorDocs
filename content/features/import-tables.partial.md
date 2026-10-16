@@ -2,7 +2,7 @@
 uid: import-tables
 title: Import Tables
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -145,7 +145,7 @@ With the option enabled, a schema update runs these steps:
 6. If the schema changed, the **Apply Schema Changes** dialog shown above appears.
 
 > [!NOTE]
-> If your M expressions combine data from multiple sources, for example with the M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) function, this error can appear: `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.` Change the [**Privacy Level**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) of the semantic model in the Power BI service from "Private" to "Organizational" to fix it. The error also appears when **Use Analysis Services for change detection** is disabled, if Tabular Editor 3 falls back to this mechanism for an M expression that is too complex for the built-in schema detection.
+> If your M expressions combine data from multiple sources, such as through the M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin) function, you may need to change the [**Privacy Level**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) from "Private" to "Organizational" on the Semantic Model in the Power BI service. Otherwise, you may see an error indicating that `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. This error may also occur even if **Use Analysis Services for change detection** is not enabled, as Tabular Editor 3 will automatically fall back to this detection mechanism when the M expression is too complex for Tabular Editor 3's built-in schema detection.
 
 ### Importing new tables through Analysis Services
 

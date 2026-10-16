@@ -2,11 +2,11 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-09-22
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
-      true: true
+      full: true
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
@@ -36,7 +36,7 @@ The [scripting API](xref:api-index) provides access to two top-level objects, `M
 
 The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of it’s properties, with some additional methods and properties for easier operations on translations, perspectives and object collections. The same applies to any descendant objects, such as Table, Measure, Column, etc. which all have corresponding wrapper objects. Please see <xref:api-index> for a complete listing of objects, properties and methods in the Tabular Editor wrapper library.
 
-The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Simply press CTRL+Z after executing a script, and you will see that all changes made by the script are immediately undone. Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
+The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Press **Ctrl+Z** after executing a script to undo all changes made by the script. In Tabular Editor 3, focus stays in the script editor after the script runs, so click the TOM Explorer before you press **Ctrl+Z**. See [Undo in text editors](xref:undo-redo#undo-in-text-editors). Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
 
 ## Setting object properties
 If you want to change a property of one object in particular, obviously the easiest way to do so would be directly through the UI. But as an example, let us see how we could achieve the same thing through scripting.
@@ -230,7 +230,7 @@ To use this feature, click **Script > Run with preview** in the toolbar or menu.
 
 If the script fails (compilation or runtime error), all model metadata changes are automatically rolled back and no preview dialog is shown. If the script succeeds but makes no detectable metadata changes, an informational message is displayed instead.
 
-All model metadata changes from a script execution are wrapped in a single undo transaction. Even after accepting changes through the preview dialog, you can still undo the entire operation with **Ctrl+Z**.
+All model metadata changes from a script execution are wrapped in a single undo transaction. Even after accepting changes through the preview dialog, you can still undo the entire operation. Click the TOM Explorer and press **Ctrl+Z**, or select the model undo entry in the **Edit** menu.
 
 > [!IMPORTANT]
 > The preview and undo features only apply to model metadata changes. If a script performs external operations such as writing to files, databases or making web requests, those operations are executed immediately and cannot be reverted. The preview dialog does not attempt to analyze the script code — it works by comparing the model metadata state before and after execution.

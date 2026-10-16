@@ -2,7 +2,7 @@
 uid: dax-scripts
 title: DAX Scripts
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ To use this feature, locate the objects for which you would like to generate a s
 
 Editing objects through a DAX script is slightly different than editing through the **Expression Editor**. With the latter, changes are applied immediately when you navigate to a different object. In a DAX script, however, changes are not applied until you explicitly do so by using the **Script > Apply** (F5) option. If you are connected to an instance of Analysis Services, you can use the **Script > Apply & Sync** (SHIFT+F5) option to simultaneously apply the changes and save the updated model metadata to Analysis Services.
 
-You can undo/redo changes made by a DAX script using the usual keyboard shortcuts (Ctrl+Z / Ctrl+Y).
+To undo or redo the changes a DAX script applied, click the TOM Explorer and press **Ctrl+Z** or **Ctrl+Y**. In the script editor, these shortcuts undo and redo typing. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 
 ## Multiple DAX scripts
 

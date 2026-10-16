@@ -2,7 +2,7 @@
 uid: azure-marketplace
 title: Compra a través de Azure Marketplace
 author: Peer Grønnerup
-updated: 2026-01-05
+updated: 2026-10-12
 ---
 
 # Compra Tabular Editor 3 a través de Azure Marketplace
@@ -18,7 +18,7 @@ Para comprar Tabular Editor a través de Azure Marketplace, necesitas:
 - Una suscripción de Azure (comprueba si ya tienes una suscripción o crea una nueva)
 - Una cuenta de Azure AD con al menos el rol de Colaborador en la suscripción de Azure
 
-Asegúrate también de que se cumplan estos [requisitos previos](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/enable-marketplace-purchases) antes de continuar con la compra de Tabular Editor 3 a través de Azure Marketplace.
+Asegúrate también de que se cumplan estos [requisitos previos](https://learn.microsoft.com/azure/cost-management-billing/manage/enable-marketplace-purchases) antes de continuar con la compra de Tabular Editor 3 en Azure Marketplace.
 
 ## Cómo comprar Tabular Editor 3 en Azure Marketplace
 
@@ -32,7 +32,7 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 
 4. Selecciona tu suscripción y el plan de licencias, y luego haz clic en **Suscribirse**.
 
-   ![Azure Marketplace Subscribe to offer](~/content/assets/images/azuremarketplace-offer-page.png)
+   ![Suscribirse a la oferta de Azure Marketplace](~/content/assets/images/azuremarketplace-offer-page.png)
 
    > [!TIP]> La suscripción y el plan se pueden cambiar más adelante durante el proceso de compra.
 
@@ -40,7 +40,7 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 
 6. Proporciona un nombre para el recurso y configura tu suscripción seleccionando el plan, la duración del contrato, el número de puestos y la preferencia de renovación automática.
 
-   ![Azure Marketplace purchase details](~/content/assets/images/azuremarketplace-setup-purchase.png)
+   ![Detalles de la compra en Azure Marketplace](~/content/assets/images/azuremarketplace-setup-purchase.png)
 
    > [!IMPORTANT]> Si no activas la renovación automática, tu suscripción se cancelará después del primer período de facturación.
 
@@ -57,7 +57,7 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 > [!NOTE]
 > Cada edición de Tabular Editor 3 debe comprarse por separado. No puedes combinar ediciones diferentes en una sola transacción de Azure Marketplace.
 
-Para más detalles, consulta: [Comprar una oferta SaaS en el portal de Azure](https://learn.microsoft.com/en-us/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
+Para más detalles, consulta: [Comprar una oferta SaaS en el portal de Azure](https://learn.microsoft.com/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
 
 ## Activar tu suscripción de Azure Marketplace
 
@@ -82,7 +82,7 @@ Sigue el procedimiento que se indica a continuación para finalizar la activaci�
 
 2. Haz clic en el botón **Activar** de la suscripción que quieres activar. Esto mostrará los detalles de la suscripción.
 
-   ![Azure Marketplace activate subscription](~/content/assets/images/azuremarketplace-activate-subscription.png)
+   ![Activar la suscripción en Azure Marketplace](~/content/assets/images/azuremarketplace-activate-subscription.png)
 
 3. Revisa los detalles por última vez y haz clic en **Confirmar activación**.
 
@@ -91,7 +91,7 @@ Sigue el procedimiento que se indica a continuación para finalizar la activaci�
    - Recibirás un correo electrónico con tu clave(s) de licencia
    - La suscripción aparecerá en **Subscriptions** en el portal de autoservicio de Tabular Editor. Haz clic en el menú de tres puntos (puntos suspensivos) y selecciona **Ver detalles de la suscripción** para ver la información de la suscripción, incluido el período de suscripción.
 
-     ![Azure Marketplace subscription activated](~/content/assets/images/azuremarketplace-subscription-activated.png)
+     ![Suscripción activada en Azure Marketplace](~/content/assets/images/azuremarketplace-subscription-activated.png)
 
 ## Instalación y activación de licencias
 
@@ -118,6 +118,6 @@ Todas las modificaciones de las suscripciones de Tabular Editor 3 adquiridas a t
 > **No se admiten los cambios a una edición inferior**: No puedes cambiar a una edición inferior ni reducir el número de usuarios durante un período de suscripción activo. Para pasar a un plan de un nivel inferior o reducir los puestos, desactiva la **Renovación automática** de tu suscripción actual y compra una nueva suscripción con la configuración que prefieras antes de que finalice el periodo actual.
 
 > [!IMPORTANT]
-> Cancelar una suscripción revoca inmediatamente el acceso a todas las licencias de esa suscripción y no se puede deshacer. Para mantener el acceso hasta el final de tu período de facturación actual, haz clic en **Editar renovación automática** y, en su lugar, desactiva la renovación automática. Los reembolsos se procesan según la política de reembolso. Para saber más, consulta [Políticas de reembolso](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) de Microsoft Marketplace.
+> Cancelar una suscripción revoca inmediatamente el acceso a todas las licencias de esa suscripción y no se puede deshacer. Para mantener el acceso hasta el final de tu período de facturación actual, haz clic en **Editar renovación automática** y, en su lugar, desactiva la renovación automática. Los reembolsos se procesan según la política de reembolso. Para saber más, consulta [Políticas de reembolso](https://learn.microsoft.com/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) del Marketplace de Microsoft.
 
-Para saber más sobre cómo gestionar suscripciones de SaaS en Azure, consulta [Administración del ciclo de vida de suscripciones de SaaS](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)
+Para obtener más información sobre la administración de suscripciones SaaS en Azure, consulta: [Administración del ciclo de vida de suscripciones de SaaS](https://learn.microsoft.com/marketplace/saas-subscription-lifecycle-management)

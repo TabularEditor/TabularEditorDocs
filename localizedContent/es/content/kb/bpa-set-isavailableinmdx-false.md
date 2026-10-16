@@ -8,7 +8,7 @@ description: Regla de práctica recomendada para optimizar el rendimiento deshab
 
 # Establecer IsAvailableInMDX en False
 
-## Información general
+## Resumen
 
 Esta regla de prácticas recomendadas identifica columnas ocultas que tienen la propiedad `IsAvailableInMDX` establecida en `true`, pero que no necesitan estar accesibles mediante consultas MDX. Si estableces esta propiedad en `false` para columnas ocultas sin uso, puedes mejorar el rendimiento de las consultas y reducir la sobrecarga de memoria.
 
@@ -46,7 +46,7 @@ La regla se activa cuando se cumplen todas las condiciones siguientes:
 6. La columna NO se usa en ningún calendario
 7. La columna NO actúa como `SortByColumn` de otra columna
 
-## Cómo solucionarlo
+## Cómo corregir
 
 ### Corrección automática
 
@@ -56,9 +56,9 @@ Esta regla incluye una expresión de corrección automática. Cuando apliques la
 IsAvailableInMDX = false
 ```
 
-Para aplicarlo:
+Para aplicarla:
 
-1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+1. En **Best Practice Analyzer**, selecciona los objetos marcados
 2. Haz clic en **Aplicar corrección**
 
 ### Corrección manual

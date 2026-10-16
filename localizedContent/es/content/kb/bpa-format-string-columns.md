@@ -8,7 +8,7 @@ description: Regla de prácticas recomendadas que garantiza que las columnas num
 
 # Proporcionar una cadena de formato para columnas numéricas y de fecha
 
-## Descripción general
+## Resumen
 
 Esta regla de prácticas recomendadas identifica columnas visibles de tipo numérico o de fecha que no tienen definida ninguna cadena de formato. Las cadenas de formato garantizan una visualización de datos coherente y profesional en todas las herramientas de cliente.
 
@@ -40,12 +40,12 @@ and string.IsNullOrWhitespace(FormatString)
 and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataType = "Decimal")
 ```
 
-## Cómo solucionarlo
+## Cómo corregirlo
 
 ### Corrección manual
 
 1. En el **Explorador TOM**, selecciona la columna
-2. En el panel **Propiedades**, busca el campo **Cadena de formato**
+2. En el panel de **Propiedades**, busca el campo **Cadena de formato**
 3. Elige entre formatos estándar o introduce un formato personalizado
 4. Guarda los cambios
 
@@ -60,8 +60,8 @@ Las columnas no tienen una cadena de formato al importarlas.
 ### Antes de la corrección
 
 ```
-Columna: SalesAmount
-Cadena de formato: (vacío)
+Column: SalesAmount
+Format String: (empty)
 ```
 
 **Visualización**: 1234567.89 (difícil de leer, sin símbolo de moneda)
@@ -69,8 +69,8 @@ Cadena de formato: (vacío)
 ### Después de la corrección
 
 ```
-Columna: SalesAmount
-Cadena de formato: "$#,0,00"
+Column: SalesAmount
+Format String: "$#,0.00"
 ```
 
 **Visualización**: $1.234.567,89 (formato claro y profesional)

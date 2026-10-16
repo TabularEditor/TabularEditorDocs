@@ -1,23 +1,29 @@
 # Referencias
 
-Esta sección contiene materiales de referencia para Tabular Editor.
+Esta sección contiene material de referencia para Tabular Editor.
 
 ## En esta sección
 
 ### Descargas y versiones
 
 - @downloads: enlaces de descarga y paquetes de instalación para Tabular Editor 3
+- @system-requirements - Versiones compatibles de Windows, entornos de ejecución, arquitecturas y formatos de paquete
 - @release-history: historial completo de versiones con enlaces de descarga
-- @whats-new: novedades y actualizaciones más recientes
 
 ### Referencia técnica
 
 - @faq: preguntas frecuentes y respuestas
 - @preferences: preferencias de la aplicación y opciones de configuración
-- @policies: el uso de directivas de grupo
+- @policies - Políticas del Registro que deshabilitan funciones y bloquean la configuración de IA
 - @shortcuts3: referencia de atajos de teclado para Tabular Editor 3
 - @shortcuts2: referencia de atajos de teclado para Tabular Editor 2
 - @user-options: archivo de opciones de usuario del modelo tabular (.tmuo)
+- @supported-files - Formatos de archivo que Tabular Editor puede abrir y guardar
+- @accessibility - Modo para personas con daltonismo, atajos de teclado, escalado de pantalla, temas e idioma
+
+### Referencia de las propiedades de los objetos
+
+- @object-properties - qué hace cada una de las propiedades en la vista de propiedades, agrupadas por tipo de objeto
 
 ### Desarrollo y planificación
 
@@ -26,8 +32,4 @@ Esta sección contiene materiales de referencia para Tabular Editor.
 ### Funciones obsoletas
 
 - @formatdax: información sobre la funcionalidad de formato de DAX obsoleta
-
----
-
-_Utiliza esta sección para encontrar información de referencia detallada, descargas y documentación técnica._
 

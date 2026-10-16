@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -190,7 +190,7 @@ Within your [permission grants](#permissions-and-consent), the AI Assistant work
 
 - **Model exploration**: queries model metadata, including tables, columns, measures, relationships and their properties
 - **DAX query writing**: generates DAX queries, runs them against your connected model and returns the result sets in the chat
-- **C# script generation**: creates C# scripts for model changes. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model). **Ctrl+Z** undoes model metadata changes
+- **C# script generation**: creates C# scripts for model changes. Depending on your settings, the assistant opens the script in an editor window for you to run, or runs it itself; see [Letting the assistant change your model](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**: runs BPA analysis, lists rule violations and creates or modifies BPA rules
 - **VertiPaq Analyzer**: queries memory usage statistics and column cardinality
 - **Document access**: reads and modifies open documents: DAX queries, C# scripts and DAX scripts
@@ -211,7 +211,7 @@ The setting is off by default and unavailable until **Model metadata** is set to
 ### What happens when the assistant runs a script
 
 - If **Preview changes** is on (the default), the [preview dialog](xref:csharp-scripts#run-c-scripts-with-preview) appears before the changes are applied. **Cancel** reverts them and reports the rejection to the assistant. If **Preview changes** is off, the changes are applied without a dialog.
-- The script's changes are one undo entry, **C# script (AI Assistant)**. **Ctrl+Z** undoes the whole script.
+- The script's changes are one undo entry, **C# script (AI Assistant)**. Focus stays in the chat box, where **Ctrl+Z** doesn't undo model changes. To undo the whole script, click the TOM Explorer and press **Ctrl+Z**, or select **Undo C# script (AI Assistant)** in the **Edit** menu.
 - If the script fails part-way through, the model is left unchanged and the assistant reports the error.
 - A script that accesses files, the network or external assemblies doesn't run. It opens as a script artifact with an **Unsafe** badge and **Execute** disabled, and the assistant's reply names what the script used.
 
@@ -400,9 +400,9 @@ In Enterprise Edition, including Consultancy and Trial licenses, Tabular Editor 
 
 - which permissions were requested and how you answered
 - which tools ran and whether each one succeeded, failed or was blocked
-- the full text of any C# script the assistant or an MCP agent ran, or handed to you for review
+- the full text of any C# script the assistant or an MCP agent ran or submitted to run, including scripts that failed at run time or were refused
 
-Your prompts, the assistant's replies and data values from your model are never recorded. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
+Your prompts, the assistant's replies and data values from your model are never recorded. A script that fails to compile isn't saved, and neither is the text of a script the assistant writes into a document for you to run yourself. **Open audit folder** under **Tools > Preferences > AI Features** opens the log folder.
 
 Without an Enterprise license, and before a license is activated, nothing is recorded, no folder is created and the button isn't shown. See @ai-audit-log for what each record holds, where the files are stored and the policies that redirect them.
 
@@ -486,7 +486,7 @@ Other ways to reduce token usage:
 
 ## Disabling the AI Assistant
 
-The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again to include or exclude it in an existing installation. In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
+The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again and select **Modify** to include or exclude it in an existing installation. An upgrade keeps the existing selection; see [Upgrades and the AI features component](xref:installation-activation-basic#upgrades-and-the-ai-features-component). In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
 
 The same component contains the MCP server, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off only the chat, keep the component and set the `DisableAiChat` policy.
 

@@ -2,7 +2,7 @@
 uid: advanced-scripting
 title: Advanced Scripting
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ The [scripting API](xref:api-index) provides access to two top-level objects, `M
 
 The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of its properties, with some additional methods and properties for easier operations on translations, perspectives and object collections. The same applies to any descendant objects, such as Table, Measure, Column, etc. which all have corresponding wrapper objects. Please see <xref:api-index> for a complete listing of objects, properties and methods in the Tabular Editor wrapper library.
 
-The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Simply press CTRL+Z after executing a script, and you will see that all changes made by the script are immediately undone. Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
+The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Press **Ctrl+Z** after executing a script to undo all changes made by the script. In Tabular Editor 3, focus stays in the script editor after the script runs, so click the TOM Explorer before you press **Ctrl+Z**. See [Undo in text editors](xref:undo-redo#undo-in-text-editors). Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
 
 ## Setting object properties
 If you want to change a property of one object in particular, obviously the easiest way to do so would be directly through the UI. But as an example, let us see how we could achieve the same thing through scripting.
@@ -254,7 +254,7 @@ If you use another edition of Visual Studio 2022, the path might be slightly dif
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\Roslyn
 ```
 
-The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
+The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
 
 ```
 -langversion:12.0

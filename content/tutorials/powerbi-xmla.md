@@ -2,7 +2,7 @@
 uid: powerbi-xmla
 title: Editing through XMLA endpoint
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,21 +19,21 @@ applies_to:
 ---
 # Editing a Power BI semantic model through the XMLA endpoint
 
-You can use Tabular Editor 3 to connect to a Power BI semantic model published to the Power BI service through the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). The XMLA endpoint is available for workspaces assigned to a Microsoft Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license.
+You can use Tabular Editor 3 to connect to a Power BI semantic model published to the Power BI service through the [XMLA endpoint](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools). The XMLA endpoint is available for workspaces assigned to a Microsoft Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license.
 
 > [!NOTE]
 > Power BI Pro licenses are not sufficient for accessing Power BI semantic models in a shared workspace. A Fabric capacity, Embedded capacity, legacy Premium capacity or Premium Per User license is required for XMLA access.
 
 ## Prerequisites
 
-Tabular Editor requires the XMLA endpoint to allow both read and write access. Microsoft enabled XMLA read/write by default on all Fabric and Power BI capacity SKUs in June 2025. If you can't connect, ask [your capacity admin](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) to verify the settings described in @xmla-as-connectivity.
+Tabular Editor requires the XMLA endpoint to allow both read and write access. Microsoft enabled XMLA read/write by default on all Fabric and Power BI capacity SKUs in June 2025. If you can't connect, ask [your capacity admin](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) to verify the settings described in @xmla-as-connectivity.
 
 > [!IMPORTANT]
 > If using Tabular Editor 3 be aware of the [license limitations](xref:editions) for connecting to the Power BI XMLA endpoint. You need at least Tabular Editor 3 Business or Enterprise Edition depending on the type of Power BI Workspace used.
 
 ## Limitations
 
-When connecting to a semantic model through the XMLA endpoint, all data modeling operations supported by the [Tabular Object Model (TOM)](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) are available for editing. In other words, the [Power BI Desktop Limitations](xref:desktop-limitations) do not apply when editing a semantic model through the XMLA endpoint of the Power BI Service.
+When connecting to a semantic model through the XMLA endpoint, all data modeling operations supported by the [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) are available for editing. In other words, the [Power BI Desktop Limitations](xref:desktop-limitations) do not apply when editing a semantic model through the XMLA endpoint of the Power BI Service.
 
 
 ## Workflow

@@ -2,7 +2,7 @@
 uid: data-refresh-view
 title: Data Refresh view
 author: Daniel Otykier
-updated: 2026-09-23
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,7 +46,7 @@ Click a column header to sort by that column: once for ascending, again for desc
 - sort by **Object** to group refreshes by table or partition name
 
 > [!NOTE]
-> The messages and durations in the Data Refresh view are estimates. Tabular Editor builds them from [trace events from SSAS](https://learn.microsoft.com/en-us/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) received during processing. SSAS doesn't guarantee delivery of every trace event, and it can throttle trace event notifications during peak CPU or memory load.
+> All the messages and durations shown in the Data Refresh window are estimates only. Tabular Editor listens to [trace events from SSAS](https://learn.microsoft.com/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) during processing. SSAS is not guaranteed to send all trace messages to the client (for example it may throttle the trace event notifications during times of peak CPU/memory consumption). 
 
 > [!TIP]
-> For exact refresh progress and durations, connect [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) to your SSAS instance and collect the trace during processing.
+> If you need accurate and reliable information about refresh progress and durations, you should connect [SQL Server Profiler](https://learn.microsoft.com/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) to your SSAS instance, and collect the information manually during processing.

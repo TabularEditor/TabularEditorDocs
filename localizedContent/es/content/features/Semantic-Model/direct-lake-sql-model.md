@@ -2,7 +2,7 @@
 uid: direct-lake-sql-model
 title: Direct Lake en modelos semánticos SQL
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Modelos semánticos de Direct Lake
 
-Los modelos semánticos de Direct Lake en SQL se conectan directamente a las fuentes de datos almacenadas en [OneLake en Fabric](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) a través del punto de conexión SQL.
+Los modelos semánticos SQL de Direct Lake se conectan directamente a los Data sources almacenados en [OneLake en Fabric](https://learn.microsoft.com/fabric/onelake/onelake-overview) mediante el punto de conexión SQL.
 
 > [!IMPORTANT]
 > A partir de [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), Tabular Editor 3 es compatible con Direct Lake en OneLake, lo cual se recomienda en la mayoría de los escenarios. Consulta nuestro artículo de [guía de Direct Lake](xref:direct-lake-guidance) para obtener más información.
@@ -31,7 +31,7 @@ Tabular Editor 2 puede conectarse a modelos semánticos de Direct Lake, pero no 
 
 > [!NOTE]
 > **Limitaciones de Direct Lake**
-> Hay varias limitaciones en cuanto a los cambios que se pueden realizar en un modelo de Direct Lake. Consulta [Direct Lake Considerations and Limitations](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) para ver la lista completa. Consulta también [este artículo de SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) para obtener una visión general a la hora de elegir entre Direct Lake e Import mode.
+> Hay varias limitaciones en cuanto a los cambios que se pueden realizar en un modelo de Direct Lake. Consulta [Direct Lake Considerations and Limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) para obtener la lista completa. Consulta también [este artículo de SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) para obtener una visión general a la hora de elegir entre Direct Lake e Import mode.
 
 ## Crear un modelo de Direct Lake en SQL en Tabular Editor 3
 
@@ -71,25 +71,25 @@ Es posible ejecutar el script cuando Tabular Editor está conectado a un modelo 
 
 ```csharp
 // **********************************************************************************
-// Convertir un modelo en modo Direct Lake a modo Import
+// Convert Direct Lake-mode model to Import-mode
 // ---------------------------------------------
 //
-// Cuando este script se ejecute en un modelo semántico, hará lo siguiente:
+// When this script is executed on a semantic model, it will:
 //
-//   - Recorrer todas las tablas. Cualquier tabla que contenga exactamente 1 partición y que
-//     esté en modo Direct Lake, verá su partición reemplazada por una partición equivalente
-//     en modo Import.
-//   - Establecer la intercalación del modelo en null (predeterminado)
+//   - Loop through all tables. Any table that contains exactly 1 partition, which
+//     is in Direct Lake mode, will have its partition replaced by an equivalent
+//     Import-mode partition.
+//   - Set the collation of the model to null (default)
 // 
-// Observaciones:
+// Remarks:
 // 
-//   - Las particiones en modo Import usarán el endpoint SQL del Lakehouse.
-//   - El script asume que la expresión compartida que especifica el endpoint SQL
-//     se llama "DatabaseQuery".
-//   - Como TE2 no expone la propiedad "SchemaName" en los objetos EntityPartition,
-//     tenemos que usar reflexión para acceder a los objetos TOM subyacentes.
+//   - The Import-mode partitions will use the SQL endpoint of the Lakehouse.
+//   - The script assumes that the Shared Expression which specifies the SQL endpoint
+//     is called "DatabaseQuery".
+//   - Because TE2 does not expose the "SchemaName" property on EntityPartition
+//     objects, we have to use reflection to access the underlying TOM objects.
 //
-// Compatibilidad:
+// Compatibility:
 // TE2.x, TE3.x
 // **********************************************************************************
 
@@ -104,38 +104,38 @@ in
 
 foreach(var table in Model.Tables)
 {
-    // Las tablas en modo Direct Lake solo tienen 1 partición...
+    // Direct Lake-mode tables only have 1 partition...
     if(table.Partitions.Count != 1) continue;
     
-    // ...que debería estar en modo "DirectLake":
+    // ...which should be in "DirectLake" mode:
     var partition = table.Partitions[0];
     if(partition.Mode != ModeType.DirectLake) continue;
 
-    // Lamentablemente, Tabular Editor no expone la propiedad SchemaName de EntityPartitionSources,
-    // así que tendremos que usar reflexión para acceder al objeto TOM subyacente.
+    // Tabular Editor unfortunately doesn't expose the SchemaName property of EntityPartitionSources,
+    // so we'll have to use reflection to access the underlying TOM object.
     var pMetadataObjct = typeof(Partition).GetProperty("MetadataObject", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
     var tomPartition = pMetadataObjct.GetValue(partition) as Microsoft.AnalysisServices.Tabular.Partition;
     var tomPartitionSource = tomPartition.Source as Microsoft.AnalysisServices.Tabular.EntityPartitionSource;
     
-    // La tabla no tiene un EntityPartitionSource, lo que significa que no es una tabla de Direct Lake
-    // (no debería ocurrir, ya que comprobamos el modo DirectLake más arriba...)
+    // Table does not have an EntityPartitionSource, meaning it is not a Direct Lake table
+    // (shouldn't happen, since we already checked for DirectLake mode above...)
     if(tomPartitionSource == null) continue;
     
     var schemaName = tomPartitionSource.SchemaName;
     var tableName = tomPartitionSource.EntityName;
 
-    // Cambiar el nombre de la partición original (Direct Lake) (ya que no podemos tener dos particiones con el mismo nombre):
+    // Rename the original (Direct Lake) partition (as we can't have two partitions with the same name):
     var partitionName = partition.Name;
     partition.Name += "_old";
     
-    // Agregar la nueva partición (Import):
+    // Add the new (Import) partition:
     table.AddMPartition(partitionName, string.Format(mImportTemplate, schemaName, tableName));
     
-    // Eliminar la partición antigua (Direct Lake)):
+    // Delete the old (Direct Lake) partition):
     partition.Delete();
 }
 
-// Actualizar la intercalación del modelo:
+// Update model collation:
 Model.Collation = null;
 Model.DefaultMode = ModeType.Import;
 Model.RemoveAnnotation("TabularEditor_DirectLake");
