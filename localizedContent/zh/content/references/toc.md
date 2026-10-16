@@ -1,33 +1,39 @@
-# 下载与版本发布
-
+# 下载和版本
 ## @downloads
-
+## @系统要求
 ## @release-history
 
-## @whats-new
 
 # 技术参考
-
 ## @faq
-
 ## @preferences
-
 ## @policies
-
 ## @shortcuts3
-
 ## @shortcuts2
-
 ## @user-options
-
 ## @supported-files
-
+## @accessibility
 ## @user-setting-files-te2
 
-# 开发与规划
+# 对象属性参考
+## @object-properties
+## @object-properties-common
+## @object-properties-model
+## @object-properties-tables
+## @object-properties-columns
+## @object-properties-measures
+## @object-properties-calculation-groups
+## @object-properties-hierarchies
+## @object-properties-relationships
+## @object-properties-partitions
+## @object-properties-data-sources
+## @object-properties-security
+## @object-properties-perspectives-cultures
+## @object-properties-calendars
+## @object-properties-functions
 
+# 开发和规划
 ## @roadmap
 
-# 已弃用的功能
-
-## @formatdax
+# 已弃用功能
+## @formatdax 
