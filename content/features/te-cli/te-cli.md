@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Limited Public Preview)
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -51,7 +51,7 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 | [Model initialization and save](xref:te-cli-commands#model-initialization-and-save) | Save, convert, initialize models | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init) |
 | [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move) |
 | [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
-| [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX and M, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, check source schema drift, format DAX and M, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te schemacheck`](xref:te-cli-commands#schemacheck), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
 | [Execution](xref:te-cli-commands#execution) | Run DAX queries, C# scripts, macros | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro) |
 | [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, apply refresh policies | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh) |
 | [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |

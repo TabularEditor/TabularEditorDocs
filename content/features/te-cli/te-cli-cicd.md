@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: CI/CD Integration
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -35,7 +35,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 - **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub). `azdo` / `azure-devops` and `gh` are accepted aliases, `none` means no annotations, and a mistyped value is rejected before the command runs instead of silently emitting nothing.
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
 - **Structured errors.** `--error-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
-- **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable JSON document under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
+- **One findings JSON.** `te validate`, `te bpa run`, `te schemacheck`, `te test run`, and `te query` share a single machine-readable JSON document under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
 
 ## Adding the CLI to your repo
 
@@ -185,6 +185,20 @@ te deploy --model ./model --target-server my-ws --target-database my-model --ski
 ```
 
 See @te-cli-config for controlling the BPA gate globally via `bpa.onDeploy` / `bpa.onSave` config keys.
+
+## Schema drift check
+
+[`te schemacheck`](xref:te-cli-commands#schemacheck) compares every table with the data source it reads from, so a pipeline can catch a dropped or retyped source column before deployment. It connects to the model's own data sources, so the agent needs network access and credentials for them. A removed source column fails the step; added and retyped columns are warnings unless you pass `--fail-on warning`:
+
+```bash
+# Fail on removed source columns, report added/retyped ones as warnings
+te schemacheck --model ./model --non-interactive --ci vsts --trx schema.trx
+
+# Fail on any drift
+te schemacheck --model ./model --non-interactive --fail-on warning --ci github
+```
+
+Tables that were not checked (calculated tables, skipped tables, unsupported sources) are listed with the reason and never fail the step. In JSON output, `tablesSkipped` gives the count.
 
 ## Script validation
 

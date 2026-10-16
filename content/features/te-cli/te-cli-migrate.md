@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migrating from the TE2 Command Line
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -75,12 +75,12 @@ Below is a non-exhaustive summary of the most commonly used flags. Run `te util 
 | `-M` / `-MEMBERS` | `te deploy --deploy-role-members` | |
 | `-FULL` (after `-D`) | `te deploy --deploy-full` | Equivalent to overwrite + connections + partitions + shared + roles + role-members. |
 | `-X` / `-XMLA <file>` | `te deploy ... > <file>` (omit `--execute`) | Script emission is the default: without `--execute`, deploy connects read-only and prints the TMSL to stdout - redirect it to a file. |
-| `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `deploy`, `test run` | Emits `##vso[...]` annotations to stderr. `azdo` and `azure-devops` are accepted aliases. |
+| `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `schemacheck`, `deploy`, `test run` | Emits `##vso[...]` annotations to stderr. `azdo` and `azure-devops` are accepted aliases. |
 | `-G` / `-GITHUB` | `--ci github` (alias `gh`) | Emits `::error::` / `::warning::` / `::notice::` annotations. |
-| `-T` / `-TRX <file>` | `--trx <file>` on `validate`, `bpa run`, `test run` | VSTEST `.trx` file for Azure DevOps test publishing. |
+| `-T` / `-TRX <file>` | `--trx <file>` on `validate`, `bpa run`, `schemacheck`, `test run` | VSTEST `.trx` file for Azure DevOps test publishing. Each command writes its own file. |
 | `-W` / `-WARN` | (default) | Warnings always reported in deploy results. |
 | `-E` / `-ERR` | (default) | Deploy returns non-zero exit on DAX errors. |
-| `-SC` / `-SCHEMACHECK` | *Not yet implemented.* | TE2 schema check connects to actual data sources. Different from `te validate` (DAX semantic validation, no data source connection). |
+| `-SC` / `-SCHEMACHECK` | `te schemacheck` | Same exit-code rule as TE2, and read-only like TE2. Checks more than TE2 did - see [Schema check](#schema-check). Not the same as `te validate`, which checks DAX and does not connect to data sources. |
 | `-L` / `-LOGIN <user> <pass>` (after `-D`) | `te auth login -u <id> -p <secret> -t <tenant>` | Use service principal or env-based credentials. The login is cached, so subsequent commands acquire tokens silently - see @te-cli-auth. |
 
 ## Migration playbook
@@ -90,9 +90,10 @@ The recommended path from a TE2-based pipeline to the new CLI:
 1. **Drop-in replacement.** Replace `TabularEditor.exe` with `te` (or `te2`) in your existing pipeline. Verify the pipeline still runs - TE2 compatibility handles most invocations unchanged.
 2. **Replace flags incrementally.** Convert one flag group at a time:
    - Start with `-A` / `-AX` → `te bpa run` to pick up richer BPA output (`--fail-on`, `--fix`, `--trx`).
+   - Then `-SC` → `te schemacheck` for wider coverage (Power Query and Direct Lake tables) and JSON findings.
    - Then `-D` → `te deploy` for fine-grained deploy control.
    - Finally `-V` / `-G` → `--ci vsts` / `--ci github`.
-3. **Switch to non-interactive CI flags.** Add `--non-interactive` to every `te` command (and `--ci <vsts|github>` on `validate`, `bpa run`, `deploy`, and `test run`), pass `--execute --force` on `deploy`/`refresh` steps that must act, and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
+3. **Switch to non-interactive CI flags.** Add `--non-interactive` to every `te` command (and `--ci <vsts|github>` on `validate`, `bpa run`, `schemacheck`, `deploy`, and `test run`), pass `--execute --force` on `deploy`/`refresh` steps that must act, and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
 4. **Adopt service principal auth.** Replace `-D -L <user> <pass>` with `te auth login -u ... -p ... -t ...` or an environment-credential pipeline step. See @te-cli-auth.
 
 ## Important differences
@@ -102,6 +103,22 @@ The recommended path from a TE2-based pipeline to the new CLI:
 - **Structured output.** Every command supports `--output-format json` for machine-readable output - see @te-cli-automation.
 - **No `start /wait` needed.** The new CLI is a regular console binary; invoke it directly in shell scripts, PowerShell, and CI tasks.
 - **Cross-platform.** The CLI runs on Windows, macOS, and Linux. Local SSAS and Power BI Desktop connections remain Windows-only.
+
+## Schema check
+
+There are two ways to run TE2's schema check with the new CLI:
+
+- **`te2 <model> -SC`** keeps an existing pipeline behaving exactly as it did. It checks only what TE2 checked - legacy `Query` partitions bound to a provider data source - so a Power Query or Direct Lake table cannot change its result.
+- **`te schemacheck`** is the command for new pipelines. It also checks Power Query (M) partitions and entity-bound Direct Lake and Fabric tables, and supports `--output-format json` - see [schemacheck](xref:te-cli-commands#schemacheck).
+
+Both follow TE2's exit-code rule: an added or retyped source column is a warning and exits `0` (`SucceededWithIssues` under `--ci vsts` / `-V`), while a missing source column, or a legacy SQL query partition whose query cannot be read, is an error and exits `1`. `te schemacheck --fail-on warning` fails on any drift for one run; the model-level `TabularEditor_SchemaCheckNoWarnings` annotation does the same for every run, under both commands. All of TE2's schema-check annotations are honoured, including the historical misspelling `TabularEditor_SkipSkemaCheck`.
+
+Differences from TE2 worth knowing before you swap the step:
+
+- **Sources TE2 checked and the new CLI does not.** A legacy `Query` partition on an **Oracle** or **ODBC** data source, or on an **OLE DB provider for anything other than SQL Server**, is reported as **Not checked** and does not fail the run, so a pipeline that is green today stays green. If you rely on such a table being checked, gate on `tablesSkipped` or on the `SCHEMA_TABLE_SKIPPED` findings in the JSON output. The SQL Server OLE DB providers (`SQLOLEDB`, `MSOLEDBSQL`) are checked as before on Windows; on Linux and macOS such a table fails with a message saying it can only be checked on Windows.
+- **TRX files.** `te2 <model> -SC -T results.trx` writes the same test names and outcomes as TE2 (`Table '<name>' <assertion>`, four assertions per table, any change **Failed**), so Azure DevOps keeps the test history and `failTaskOnFailedTests` fails on the same drift as before. Tables in the gap above report all four assertions as **Inconclusive**. `te schemacheck --trx` writes a different file: one result per finding, with the severities shown on the console.
+- **Duplicated source columns.** TE2 showed a dialog box when a source returned the same column twice, which blocked a command-line run. The new CLI reports it once as an informational note and never fails the run.
+- **Not reproduced.** TE2's warning that partitions of the same table return different columns. A table is described from its first partition only.
 
 ## Related pages
 

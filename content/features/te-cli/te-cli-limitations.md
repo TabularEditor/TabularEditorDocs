@@ -2,7 +2,7 @@
 uid: te-cli-limitations
 title: Behavior Differences and Known Limitations
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,6 +52,16 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 | Limitation | Notes / Workaround |
 | -- | -- |
 | **`te validate` cannot auto-fix Code Action violations** | `te validate` reports Code Action violations but offers no CLI flag to apply the suggested fix. Apply the fix in Tabular Editor 3, or use `te bpa run --fix` for the subset of Code Actions that overlap with BPA rules. |
+
+## Schema check
+
+| Limitation | Notes / Workaround |
+| -- | -- |
+| **Oracle, ODBC and non-SQL-Server OLE DB sources are not checked** | Tabular Editor 2's `-SC` checked legacy `Query` partitions on these data sources; [`te schemacheck`](xref:te-cli-commands#schemacheck) and `te2 -SC` report such a table as **Not checked** and do not fail the run. Gate on `tablesSkipped` or the `SCHEMA_TABLE_SKIPPED` findings in the JSON output to notice them. |
+| **OLE DB sources can only be checked on Windows** | Legacy partitions on the SQL Server OLE DB providers (`SQLOLEDB`, `MSOLEDBSQL`) are checked on Windows. On Linux and macOS there is no OLE DB, so such a table is reported as an error saying it can only be checked on Windows. Run the schema check step on a Windows agent. |
+| **The single-table override reads SQL-family sources only** | `te schemacheck <table>` with `--source`, `--connection-string` or `--source-table` reads SQL Server, Azure SQL and Fabric SQL endpoints only. A table bound to Snowflake, Oracle, ODBC, OLE DB, Databricks or a dataflow is refused by name. Drop the override flags to check it with a model-wide run, which reaches more kinds of source. |
+| **Renamed source columns are reported as removed + added** | Matching is exact (case-insensitive, square brackets ignored); there is no fuzzy matching as in the Tabular Editor 3 Schema Compare dialog. Remap with `te set <table>/<column> -p SourceColumn=<newName>`. |
+| **Partitions are not compared with each other** | A table is described from its first partition. Tabular Editor 2's warning that partitions of the same table return different columns is not reproduced. |
 
 ## Model initialization and save
 
