@@ -239,8 +239,11 @@ def _glob_content(patterns: list[str], shared: set[str], ignore: list[str]) -> d
 
 
 def get_scoped_sources(config: TranslationConfig) -> dict[str, str]:
-    """Return {relative path -> sha256} for every English file in translation scope."""
-    return _glob_content(config.sources, set(config.shared_directories), config.ignore)
+    """Return {relative path -> sha256} for every English file in translation scope.
+    A file matched by a passthrough pattern is never in scope, even when a source pattern matches it."""
+    shared = set(config.shared_directories)
+    passthrough = _glob_content(config.passthrough, shared, config.ignore)
+    return {rel: h for rel, h in _glob_content(config.sources, shared, config.ignore).items() if rel not in passthrough}
 
 
 def get_passthrough_sources(config: TranslationConfig, sources: dict[str, str]) -> dict[str, str]:
@@ -2110,6 +2113,14 @@ def selftest_fake_client(t: SelfTest) -> None:
             == (CONTENT_DIR / "whats-new/1-0-0.html").read_bytes()
             and status["files"]["whats-new/1-0-0.html"]["status"] == STATUS_COPIED
             and r["copied"] == ["whats-new/1-0-0.html"],
+        )
+        md_passthrough = mini_build_config()
+        md_passthrough["translation"]["passthrough"].append("guide.md")
+        cfg = TranslationConfig(md_passthrough, "production", "mt-test")
+        scoped = get_scoped_sources(cfg)
+        t.check(
+            "a passthrough pattern takes a file out of sources even when a source pattern matches it",
+            "guide.md" not in scoped and "guide.md" in get_passthrough_sources(cfg, scoped),
         )
         t.check(
             "all 4 files translated at the current source hash",

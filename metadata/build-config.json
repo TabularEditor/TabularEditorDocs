@@ -28,7 +28,8 @@
       { "pattern": "_ui-strings.json" }
     ],
     "passthrough": [
-      { "pattern": "whats-new/**/*.html" }
+      { "pattern": "whats-new/**/*.html" },
+      { "pattern": "security/third-party-notices.md" }
     ],
     "ignore": [],
     "sandboxLimits": {
