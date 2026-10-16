@@ -2,7 +2,7 @@
 uid: databricks-refresh-empty-catalog
 title: Databricks 刷新失败：目录为空错误
 author: Morten Lønskov
-updated: 2026-04-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,11 +20,11 @@ applies_to:
 # Databricks 刷新失败：目录为空错误
 
 > [!NOTE]
-> 自 Tabular Editor 3.26.1 起，表导入向导在 Databricks 连接中默认使用 Implementation 2.0。 此问题只影响使用较早版本的 Tabular Editor 创建的 M 查询，或 `Databricks.Catalogs()` 的第三个参数为 `null` 的 M 查询。
+> 自 Tabular Editor 3.26.1 起，表导入向导在 Databricks 连接中默认使用 Implementation 2.0。此问题仅影响使用早期版本的 Tabular Editor 创建的 M 查询，或 `Databricks.Catalogs()` 的第三个参数为 `null` 的 M 查询。
 
 刷新从 Databricks 导入数据的语义模型时，可能会遇到以下错误：
 
-**"[Microsoft][ThriftExtension] (38) 试图将空字符串设为当前目录。 不允许进行此类操作。"**
+**"[Microsoft][ThriftExtension] (38) 试图将空字符串设为当前目录。不允许进行此类操作。"**
 
 当表导入向导生成的 M 查询在需要较新 Arrow Database Connectivity (ADBC) 驱动程序(也称为 Implementation 2.0)的 Databricks Workspace 中仍使用旧版连接器实现时，就会出现此错误。
 
@@ -32,7 +32,7 @@ applies_to:
 
 ## 了解问题
 
-`Databricks.Catalogs()` Power Query 函数接受一个可选的第三个参数，用于控制使用哪种连接器实现。 当此参数为 `null` 时，连接器默认使用旧版实现 (1.0)。
+`Databricks.Catalogs()` Power Query 函数接受一个可选的第三个参数，用于控制使用哪种连接器实现。当此参数为 `null` 时，连接器会默认使用旧版实现（1.0）。
 
 ### 为什么会这样
 
@@ -40,7 +40,7 @@ applies_to:
 
 2. **Tabular Editor 3.26.1 之前版本中的表导入向导会生成第三个参数为 `null` 的 M 查询。** 这意味着会使用旧版实现，而旧版实现在较新的 Databricks Workspace 中会失败。
 
-3. **Power BI Desktop 已默认使用 Implementation 2.0。** Microsoft 已将 [Arrow Database Connectivity 驱动程序](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 设为 Power BI Desktop 中新 Databricks 连接的默认选项。
+3. **Power BI Desktop 现已默认采用 Implementation 2.0。** Microsoft 已将 [Arrow Database Connectivity 驱动程序](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 设为 Power BI Desktop 中新的 Databricks 连接的默认选项。
 
 ---
 
@@ -84,7 +84,7 @@ in
 6. 保存模型后，再尝试刷新。
 
 > [!TIP]
-> 如果模型中有大量 Databricks 分区，可使用 **编辑 > 查找和替换** (**Ctrl+H**) 将所有表达式中的 `Catalogs("adb-` 批量替换。 或者，使用下面的 C# Script 一次性更新所有 Databricks 分区。
+> 如果模型中有大量 Databricks 分区，可使用 **编辑 > 查找和替换** (**Ctrl+H**) 将所有表达式中的 `Catalogs("adb-` 批量替换。或者，使用下面的 C# Script 一次性更新所有 Databricks 分区。
 
 ### 使用 C# Script 批量更新
 
@@ -113,14 +113,14 @@ Info($"Updated {updated} partition(s).");
 
 ## 预防措施
 
-- **Tabular Editor 3.26.1 及更高版本：** 表导入向导默认生成使用 Implementation 2.0 的 M 查询。 升级到 3.26.1 或更高版本，以避免在新导入时出现此问题。
-- **现有模型：** 升级后，检查 Databricks 分区表达式。 凡是第三个参数为 `null` 的表达式，都应更新。
+- **Tabular Editor 3.26.1 及更高版本：** 表导入向导默认生成使用 Implementation 2.0 的 M 查询。更新到 3.26.1 或更高版本，以避免在新导入时出现此问题。
+- **现有模型：** 升级后，检查 Databricks 分区表达式。所有第三个参数为 `null` 的表达式都应更新。
 
 ---
 
 ## 其他资源
 
-- [Arrow 数据库连接驱动程序（Microsoft 文档）](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
+- [Arrow Database Connectivity 驱动程序（Microsoft 文档）](https://learn.microsoft.com/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview)
 - [连接到 Azure Databricks](xref:connecting-to-azure-databricks)
 - [表导入向导](xref:importing-tables)
 - [Databricks 列注释长度错误](xref:databricks-column-comments-length)

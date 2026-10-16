@@ -18,9 +18,9 @@ applies_to:
           full: true
 ---
 
-# Importar una Vista de métricas y consultar los diagnósticos
+# Importar una vista de métricas y ver los diagnósticos
 
-Este procedimiento muestra cómo importar una Vista de métricas ya cargada en un modelo tabular mediante un C# Script y cómo revisar los mensajes de diagnóstico que genera la importación.
+Este procedimiento muestra cómo importar una vista de métricas ya cargada en un modelo tabular mediante un C# Script y revisar los mensajes de diagnóstico que produce la importación.
 
 > [!NOTE]
 > Estos procedimientos se aplican a Tabular Editor 3.26.2 y versiones posteriores.
@@ -29,15 +29,15 @@ Este procedimiento muestra cómo importar una Vista de métricas ya cargada en u
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 > [!NOTE]
-> Cada ejemplo siguiente se importa en el modelo tabular abierto.
-> Si va a ejecutar más de uno, le recomendamos deshacer la importación después de cada ejemplo (Editar > Deshacer en el menú, o CTRL-z en el Explorador TOM).
-> Si ejecuta cada importación una tras otra, obtendrá varias copias traducidas de la Vista de métricas.
+> Cada ejemplo a continuación se importa en el modelo tabular abierto.
+> Si va a ejecutar más de uno, recomendamos deshacer la importación después de cada ejemplo (Editar>Deshacer en el menú o CTRL-z en el Explorador TOM).
+> Si ejecutas cada importación una tras otra, obtendrás varias copias traducidas de la Vista de métricas.
 
-## Importar la Vista de métricas cargada
+## Importar la vista de métricas cargada
 
 `ImportToTabular` traduce la Vista de métricas cargada actualmente en el modelo tabular abierto.
-El nombre de host de Databricks y la ruta HTTP se usan al compilar las expresiones M de partición;
-para una prueba rápida, puedes pasar valores de marcador de posición y corregirlos antes de actualizar los datos.
+El nombre de host de Databricks y la ruta HTTP se usan al generar las expresiones M de las particiones;
+para una prueba rápida, puede pasar valores de marcador de posición y corregirlos antes de actualizar los datos.
 
 ```csharp {run id=import setup=mv-sample after=none output=true}
 var success = SemanticBridge.MetricView.ImportToTabular(
@@ -48,9 +48,9 @@ var success = SemanticBridge.MetricView.ImportToTabular(
 );
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Se importaron {Model.AllColumns.Count()} campos y {Model.AllMeasures.Count()} medidas.");
-sb.AppendLine(success ? "Importación correcta." : "Importación fallida.");
-sb.AppendLine($"Diagnósticos: {diagnostics.Count}");
+sb.AppendLine($"Imported {Model.AllColumns.Count()} fields and {Model.AllMeasures.Count()} measures.");
+sb.AppendLine(success ? "Import successful." : "Import failed.");
+sb.AppendLine($"Diagnostics: {diagnostics.Count}");
 foreach (var diag in diagnostics)
 {
     sb.AppendLine($"  [{diag.Severity}] {diag.Code}: {diag.Message}");
@@ -61,17 +61,17 @@ Output(sb.ToString());
 **Salida:**
 
 ```
-Se importaron 15 campos y 6 medidas.
-Importación correcta.
-Diagnósticos: 0
+Imported 15 fields and 6 measures.
+Import successful.
+Diagnostics: 0
 ```
 
-Tenga en cuenta que el número de campos importados incluye las claves de combinación y las referencias implícitas a columnas de la definición de la Vista de métricas,
+Ten en cuenta que el número de campos importados incluye las claves de unión y las referencias implícitas a columnas de la definición de la Vista de métricas,
 por lo que es mayor que el número de `Fields` explícitos en la definición de la Vista de métricas.
 
 ## Revisar los diagnósticos de la última importación
 
-Los diagnósticos de la importación más reciente están disponibles en cualquier momento mediante `ImportDiagnostics`, incluso después de una importación realizada desde la interfaz gráfica de usuario (GUI).
+Los diagnósticos de la importación más reciente están disponibles en cualquier momento mediante `ImportDiagnostics`, incluso después de una importación realizada mediante la interfaz gráfica GUI.
 
 ```csharp {compile}
 foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
@@ -80,19 +80,19 @@ foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
 
 ## Ver un diagnóstico de traducción
 
-Algunos elementos de una Vista de métricas no se pueden traducir a un modelo tabular.
-Por ejemplo, una medida de ventana no se traduce a DAX:
-la importación crea una medida TOM provisional con la definición original de la Vista de métricas en un comentario
-y le devuelve una advertencia de diagnóstico.
+Algunos elementos de la Vista de métricas no se pueden traducir a Tabular.
+Una medida de ventana, por ejemplo, no se traduce a DAX:
+la importación crea una medida TOM de marcador de posición con la definición original de la Vista de métricas en un comentario
+y genera un Report de advertencia de diagnóstico.
 
-Agregue una especificación de ventana a una medida y, después, impórtela para ver el diagnóstico:
+Agregue una especificación de ventana a una medida y luego importe para ver el diagnóstico:
 
 ```csharp {run id=window-diagnostic setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var view = SemanticBridge.MetricView.Model;
 
-// agregue una especificación de ventana
+// add a window spec
 view.Measures["total_revenue"].Window =
 [
     new MetricView.Window
@@ -111,38 +111,38 @@ var success = SemanticBridge.MetricView.ImportToTabular(
 );
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine(success ? "Importación completada con incidencias." : "Importación fallida.");
+sb.AppendLine(success ? "Import succeeded with issues." : "Import failed.");
 foreach (var diag in diagnostics)
 {
     sb.AppendLine($"  [{diag.Severity}] {diag.Code}: {diag.Message}");
 }
-// tenga en cuenta que buscamos por DisplayName, ya que es lo que se traduce a TOM
-sb.AppendLine($"Expresión TOM de la medida: {Model.AllMeasures.First(m => m.Name == "Total Revenue").Expression}");
+// note that we search for the DisplayName, as that is what is translated to TOM
+sb.AppendLine($"TOM measure expression: {Model.AllMeasures.First(m => m.Name == "Total Revenue").Expression}");
 Output(sb.ToString());
 ```
 
 **Salida:**
 
 ```
-Importación completada con incidencias.
-  [Warning] MEASURE_WINDOW_UNSUPPORTED: La medida 'Total Revenue' usa una especificación de ventana que actualmente no se admite; se ha dejado sin efecto y se ha conservado la definición original como comentario.
-Expresión TOM de la medida: // Esta medida usa una especificación de ventana (con ventana / acumulativa / semiadditiva),
-// que actualmente no se admite al importar Vistas de métricas de Databricks.
-// La medida se ha dejado vacía: revise los detalles siguientes y cree el DAX
-// manualmente. La traducción a DAX NO tiene en cuenta la especificación de ventana; muy
-// probablemente tendrá que encapsularla en CALCULATE (o algo similar) para aplicar la ventana.
+Import succeeded with issues.
+  [Warning] MEASURE_WINDOW_UNSUPPORTED: Measure 'Total Revenue' uses a window specification that is not currently supported; it has been left inert with the original definition preserved as a comment.
+TOM measure expression: // This measure uses a window specification (windowed / cumulative / semiadditive),
+// which is not currently supported when importing Databricks Metric Views.
+// The measure has been left blank - review the details below and author the DAX
+// manually. The translated DAX does NOT account for the window spec; you will most
+// likely need to wrap it in CALCULATE (or similar) to apply the windowing.
 //
-// Expresión original de origen (Databricks SQL):
+// Original source expression (Databricks SQL):
 /*
 SUM(revenue)
 */
 //
-// Traducción sugerida a DAX (la especificación de ventana NO se ha aplicado):
+// Suggested DAX translation (window spec NOT applied):
 /*
 SUM('Fact'[revenue])
 */
 //
-// Especificación de ventana:
+// Window specification:
 /*
 - order: order_date
   range: trailing 3 month
@@ -153,10 +153,10 @@ SUM('Fact'[revenue])
 
 ## Pasos a seguir
 
-- [Importar una Vista de métricas desde un archivo](xref:semantic-bridge-metric-view-import-from-file)
-- [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
+- [Importar una Metric View desde un archivo](xref:semantic-bridge-metric-view-import-from-file)
+- [Cargar e inspeccionar una Metric View](xref:semantic-bridge-load-inspect)
 - [Validar una vista de métricas](xref:semantic-bridge-validate-default)
 
 ## Ver también
 
-- [Descripción general de Semantic Bridge](xref:semantic-bridge)
+- [Información general de Semantic Bridge](xref:semantic-bridge)

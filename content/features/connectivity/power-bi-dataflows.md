@@ -2,7 +2,7 @@
 uid: connect-dataflows
 title: Connect to Power BI dataflows
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,26 +19,23 @@ applies_to:
 
 # Connect to Power BI dataflows
 
-Tabular Editor can import entities from a Power BI dataflow, so a model can reuse transformations that already exist in a workspace rather than repeating them.
+The Power BI dataflows connector imports entities from dataflows in the Power BI workspaces you're a member of and is available only as an implicit data source (see [Legacy, structured and implicit data sources](xref:connectivity#legacy-structured-and-implicit-data-sources)).
+
+Open the dialog from **Model > Import tables...** by choosing **Power BI Dataflow**.
 
 ![The Connect to a Power BI workspace dialog, listing the workspaces the signed-in account belongs to](~/content/assets/images/features/connectivity/dataflows-connection.png)
 
-## Authenticators
+## Connection fields
 
-Dataflows authenticate with Microsoft Entra ID, against the Power BI service.
-
-| What you supply | When |
+| Field | Description |
 | -- | -- |
-| An interactive Microsoft Entra ID sign-in | Normal interactive use |
-| A service principal | Scheduled or unattended refresh |
+| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID |
+| **Workspaces** | The workspaces your account is a member of. Select one workspace |
 
-You see the workspaces your account is a member of. A dataflow in a workspace you have not been added to does not appear, and a workspace with no dataflows in it is listed empty rather than hidden.
+If a workspace has no dataflows, it appears empty.
 
-> [!NOTE]
-> Service principal access to the Power BI REST API has to be enabled by a Power BI administrator in the tenant settings before a service principal can list workspaces at all. Until it is, a service principal signs in successfully and sees nothing.
+## Authentication
 
-## Where the credentials are stored
+**Sign in...** starts a Microsoft Entra ID browser sign-in.
 
-Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
-
-The generated M expression names the server and the object only. It never contains a password, a token or a key.
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).

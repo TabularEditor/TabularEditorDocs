@@ -2,7 +2,7 @@
 uid: composite-model-measure-formatting
 title: Propiedades de formato de medidas en modelos compuestos
 author: Equipo de soporte
-updated: 2026-01-26
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -110,7 +110,7 @@ Este es el escenario más común. Las medidas remotas pertenecen al modelo semá
 
 ---
 
-## Lista rápida de comprobación para solucionar problemas
+## Lista de comprobación rápida para la solución de problemas
 
 - [ ] **Determina la propiedad de la medida**: ¿La medida es remota (SSAS/AAS) o local (modelo compuesto)?
 - [ ] **Comprueba la expresión de cadena de formato dinámica**: Aunque no la hayas configurado, verifica si está rellenada. En la cuadrícula de propiedades, busca un campo "Expresión de cadena de formato dinámica" que no esté vacío.
@@ -189,9 +189,9 @@ Si el formato sigue sin verse correcto en el Report, crea una medida envolvente 
 
 ## Recursos adicionales
 
-- **[Microsoft Docs - Cadenas de formato de medidas](https://learn.microsoft.com/en-us/analysis-services/tmsl/measures-object-tmsl)**: Documentación oficial sobre el formato de medidas en el Tabular Object Model.
-- **[Modelos compuestos en Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models)**: Cómo funcionan las conexiones en vivo y la arquitectura de modelos compuestos.
-- **[Cadenas de formato dinámicas](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-dynamic-format-strings)**: Disponibilidad de la funcionalidad y guía de uso.
+- **[Microsoft Docs - Cadenas de formato de las medidas](https://learn.microsoft.com/analysis-services/tmsl/measures-object-tmsl)**: Documentación oficial sobre el formato de las medidas en el Tabular Object Model.
+- **[Modelos compuestos en Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-composite-models)**: Comprender las conexiones en directo y la arquitectura de los modelos compuestos.
+- **[Cadenas de formato dinámicas](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings)**: Disponibilidad de la funcionalidad y guía de uso.
 
 ---
 

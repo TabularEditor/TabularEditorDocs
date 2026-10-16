@@ -2,7 +2,7 @@
 uid: connect-onelake
 title: Connect to Fabric and OneLake
 author: Morten Lønskov
-updated: 2026-09-21
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,25 +19,26 @@ applies_to:
 
 # Connect to Fabric and OneLake
 
-Tabular Editor connects to Microsoft Fabric to list workspaces and the Lakehouse, Warehouse and other items in them, and to import from OneLake.
+The Fabric connector lists the Lakehouse, Warehouse, SQL database and mirrored database items in the Fabric workspaces you can access, and imports tables from them. Mirrored Azure Databricks catalogs are listed as mirrored databases. Open the dialog from **Model > Import tables...** by choosing **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database**.
 
 ![The Connect to a Lakehouse dialog, listing OneLake catalog items by name, type, owner and location](~/content/assets/images/features/connectivity/onelake-connection.png)
 
-## Authenticators
+## Connection fields
 
-Fabric and OneLake authenticate with Microsoft Entra ID. Signing in interactively is the default and covers ordinary modelling work. For an unattended refresh, use a service principal and grant it access to the workspace in Fabric.
+| Field | Description |
+| -- | -- |
+| **Sign in...** | Signs in to the Power BI service with Microsoft Entra ID |
+| **OneLake Catalog items** | The items of the selected type in the workspaces you can access, with their **Name**, **Type**, **Owner** and **Location**. Select one item |
 
-Fabric permissions are granted in Fabric, not in Tabular Editor. An account that can sign in but sees no workspaces has not been given access to them, which is a Fabric permissions question rather than a connection problem.
+## Authentication
 
-## Direct Lake
+**Sign in...** starts a Microsoft Entra ID browser sign-in. If no items appear after you sign in, your account has no access to a workspace that contains them, and a workspace admin grants that access in Fabric.
 
-A Direct Lake model reads from OneLake rather than importing, so the connection is part of the model rather than an import step. See @direct-lake-sql-model.
+Tabular Editor saves the connection settings and credentials in your user options file (see [Where credentials are stored](xref:connectivity#where-credentials-are-stored)).
 
-> [!NOTE]
-> Where the SQL analytics endpoint of a Lakehouse or Warehouse cannot be determined, Tabular Editor reports that rather than creating a table with no columns. If you see that error, check that the item has finished provisioning its endpoint in Fabric.
+## Import and Direct Lake
 
-## Where the credentials are stored
+On the last page of the Table Import Wizard, you choose whether the selected tables are created in Import mode or Direct Lake mode:
 
-Credentials you enter here are saved per user and per model in the [user options](xref:user-options) file (`.tmuo`) beside the model, encrypted so that only your Windows account can read them. They are not part of the model metadata, so they are not committed to source control and a colleague opening the same model supplies their own.
-
-The generated M expression names the server and the object only. It never contains a password, a token or a key.
+- Import tables read their schema through the item's SQL analytics endpoint. See [Choosing objects to import](xref:import-tables#choosing-objects-to-import).
+- Direct Lake tables read directly from OneLake. See @direct-lake-sql-model.

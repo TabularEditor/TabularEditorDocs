@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Adding measures and other calculated objects
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ The remainder of this article describes how to create measures and other calcula
 Once you have [imported some tables](xref:importing-tables-data-modeling#importing-new-tables) to your model and [created relationships between them](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram), it is time to add some explicit measures containing your business logic.
 
 > [!TIP]
-> Technically, you are not required to add explicit measures to your model before visualizing data in a Power BI report. However, it is a best practice to always do so, as MDX-based client tools (such as Excel and Tabular Editor 3's Pivot Grid) require explicit measures. In addition, [Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
+> Technically, you are not required to add explicit measures to your model before visualizing data in a Power BI report. However, it is a best practice to always do so, as MDX-based client tools (such as Excel and Tabular Editor 3's Pivot Grid) require explicit measures. In addition, [Calculation Groups](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
 
 To add a new measure using Tabular Editor, right-click on the table in which you want to add the measure, then choose **Create > Measure** (ALT+1).
 
@@ -46,7 +46,7 @@ The **Expression Editor** view is used to provide the DAX expression for the mea
 
 ![Add Measure Edit Dax](~/content/assets/images/add-measure-edit-dax.png)
 
-The dropdown box at the top left corner of the **Expression Editor** is used to switch between different DAX properties of the currently selected object. For example, in newer versions of Analysis Services, measures have an `Expression` property as well as a [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Other types of objects can have different properties that contain DAX code. For example, [KPIs](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) have three different DAX properties. To add a KPI in Tabular Editor, right-click on a measure and choose **Create > KPI**.
+The dropdown box at the top left corner of the **Expression Editor** is used to switch between different DAX properties of the currently selected object. For example, in newer versions of Analysis Services, measures have an `Expression` property as well as a [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Other types of objects can have different properties that contain DAX code. For example, [KPIs](https://docs.microsoft.com/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) have three different DAX properties. To add a KPI in Tabular Editor, right-click on a measure and choose **Create > KPI**.
 
 ![Editing Kpis](~/content/assets/images/editing-kpis.png)
 
@@ -78,7 +78,7 @@ To add a calculated table, right-click on the model or on the "Tables" folder, a
 
 # Adding calculation groups
 
-To add a [calculation group](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Give the Calculation Group a name. Also consider a different name for the default **Name** column.
+To add a [calculation group](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Give the Calculation Group a name. Also consider a different name for the default **Name** column.
 
 > [!IMPORTANT]
 > This option is only available on models at compatibility level 1470 or higher. Analysis Services supports calculation groups from compatibility level 1500.
@@ -111,7 +111,7 @@ Whenever a change is made to an object or property in Tabular Editor, the comple
 - **Edit > Redo** (CTRL+Y)
 
 > [!NOTE]
-> All text editors in Tabular Editor 3 have their own undo/redo history, so if the cursor is currently within a text editor, the keyboard shortcuts will undo/redo the typing within that editor. You can use the options in the **Edit** menu to perform an undo/redo at the model level, or deactivate the current text editor by clicking on another element in the user interface (such as the TOM Explorer).
+> Text editors in Tabular Editor 3 have their own undo history. When the cursor is in a text editor, **Ctrl+Z** and **Ctrl+Y** undo and redo typing in that editor. To undo a model change, click the TOM Explorer first, or select the model undo entry in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 
 # Navigation
 

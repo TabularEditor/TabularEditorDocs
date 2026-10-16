@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: Migración desde Power BI Desktop
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -75,7 +75,7 @@ El flujo de trabajo típico en este escenario es el siguiente:
 Dado que, en este escenario, la "fuente de verdad" de los metadatos del modelo es la estructura de archivos o carpetas almacenada en disco, este enfoque no solo permite el desarrollo en paralelo con integración del control de versiones, sino también la integración continua y la entrega/despliegue continuos (CI/CD) mediante un servidor de compilación automatizado como Azure DevOps.
 
 > [!WARNING]
-> En cuanto apliques cambios a un Dataset de Power BI a través del punto de conexión XMLA del servicio de Power BI, ese Dataset ya no se podrá descargar como archivo .pbix. Consulta [Conectividad del Dataset con el punto de conexión XMLA](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) para obtener más información.
+> En cuanto apliques cambios a un Dataset de Power BI a través del punto de conexión XMLA del servicio de Power BI, ese Dataset ya no se podrá descargar como archivo .pbix. Consulta [Conectividad del Dataset con el punto de conexión XMLA](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) para obtener más información.
 
 Cuando usas Tabular Editor para conectarte al Dataset mediante el punto de conexión XMLA, no hay limitaciones en cuanto a los tipos de operaciones de escritura o modificaciones del modelo que se pueden realizar.
 
@@ -131,7 +131,7 @@ Para obtener más información sobre las capacidades del Editor de expresiones a
 
 Con una medida seleccionada en el **Explorador TOM**, usa la opción **Measure > Show dependencies** (SHIFT+F12). Esto hace que se abra una nueva ventana que muestra el árbol de dependencias de la expresión DAX de esa medida. Puedes alternar entre ver las dependencias ascendentes y descendentes.
 
-![Show Dependencies](~/content/assets/images/show-dependencies.png)
+![Mostrar dependencias](~/content/assets/images/show-dependencies.png)
 
 Al hacer doble clic en un elemento de la vista de dependencias, se navegará hasta ese objeto en el **Explorador TOM**.
 
@@ -141,7 +141,7 @@ Busca la medida que quieres modificar en el **Explorador TOM** y selecciónala. 
 
 Una vez seleccionada la medida, busca la propiedad `Format String` en la cuadrícula de **Properties**, expándela y ajusta la cadena de formato según tus preferencias. Fíjate en el botón desplegable a la derecha de la propiedad `Format`. También puedes escribir libremente una cadena de formato directamente en la propiedad `Format String`.
 
-![Format String](~/content/assets/images/format-string.png)
+![Cadena de formato](~/content/assets/images/format-string.png)
 
 ### Cómo modificar la expresión DAX de varias medidas
 
@@ -159,7 +159,7 @@ Consulta @dax-script-introduction para obtener más información.
 
 ### Cómo previsualizar datos en una tabla
 
-Para ver el contenido de una tabla (similar a la pestaña Datos de Power BI Desktop), haz clic con el botón derecho en una tabla y elige "Preview data". Esto abrirá una nueva pestaña con una vista previa del contenido de la tabla. Puedes desplazarte por todas las filas de la tabla y aplicar ordenación o filtrado a las columnas. A diferencia de Power BI Desktop, puedes abrir tantas de estas pestañas de vista previa como quieras y organizarlas una junto a otra en la interfaz de usuario. La vista previa también funciona con tablas en [modo DirectQuery](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) (aunque la vista previa se limitará a los primeros 100 registros).
+Para ver el contenido de una tabla (similar a la pestaña Datos de Power BI Desktop), haz clic con el botón derecho en una tabla y elige "Preview data". Esto abrirá una nueva pestaña con una vista previa del contenido de la tabla. Puedes desplazarte por todas las filas de la tabla y aplicar ordenación o filtrado a las columnas. A diferencia de Power BI Desktop, puedes abrir tantas de estas pestañas de vista previa como quieras y organizarlas una junto a otra en la interfaz de usuario. La vista previa también funciona con tablas en [modo DirectQuery](https://docs.microsoft.com/power-bi/connect-data/desktop-use-directquery) (aunque la vista previa se limitará a los primeros 100 registros).
 
 ![Vista previa de datos](~/content/assets/images/preview-data.png)
 
@@ -170,7 +170,7 @@ Consulta @refresh-preview-query para obtener más información.
 
 ### Cómo agregar un grupo de cálculo
 
-Los [grupos de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) son útiles para definir y reutilizar un contexto de filtro de DAX modificado u otro tipo de lógica de negocio en todas las medidas del modelo. Para agregar un grupo de cálculo con Tabular Editor, usa la opción **Modelo > Nuevo grupo de cálculo** (ALT+7).
+Los [grupos de cálculo](https://docs.microsoft.com/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) son útiles para definir y reutilizar un contexto de filtro de DAX modificado u otro tipo de lógica de negocio en todas las medidas del modelo. Para agregar un grupo de cálculo con Tabular Editor, usa la opción **Modelo > Nuevo grupo de cálculo** (ALT+7).
 
 ![Agregar grupo de cálculo](~/content/assets/images/add-calc-group.png)
 

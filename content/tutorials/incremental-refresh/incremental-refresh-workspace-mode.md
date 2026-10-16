@@ -2,7 +2,7 @@
 uid: incremental-refresh-workspace-mode
 title: Using Workspace Mode on a Model with Incremental Refresh
 author: Kurt Buhler
-updated: 2023-01-09
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ Incremental Refresh creates new partitions upon the first scheduled refresh in a
 
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services, custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services, custom [partitioning](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
 ---
 

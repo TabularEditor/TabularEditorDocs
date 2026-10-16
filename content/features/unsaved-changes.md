@@ -2,7 +2,7 @@
 uid: unsaved-changes
 title: Unsaved change indicators
 author: Daniel Otykier
-updated: 2026-09-22
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,147 +19,133 @@ applies_to:
 ---
 # Unsaved change indicators
 
-Tabular Editor 3 marks every object and property that differs from the last saved version of the model. Changes are marked whether they were made by hand, by a [C# script](xref:csharp-scripts) or macro, or by the [AI Assistant](xref:ai-assistant), and the marks disappear the moment the change is saved, reverted or undone.
+Tabular Editor 3 marks objects and properties that differ from the last saved version of the model. This includes changes from [C# scripts](xref:csharp-scripts), macros and the [AI Assistant](xref:ai-assistant). A mark clears when you save, revert or undo the change.
 
 The indicators appear in two places:
 
-- In the [TOM Explorer](xref:tom-explorer-view), changed objects get a tinted row and a badge on their icon, in the same colors as the model comparison view shown when deploying: orange for edited objects, green for added objects and red for deleted objects. Deleted objects stay visible, struck through, where they used to be, and the tables and folders that contain changed objects get a hatched fill.
-- In the [Properties view](xref:properties-view), properties that differ from the saved model get an orange tinted row.
+- In the [TOM Explorer](xref:tom-explorer-view), changed objects get a colored row and an icon badge: orange (edited), green (added) and red (deleted). These are the colors of the model comparison view shown when deploying.
+- In the [Properties view](xref:properties-view), changed properties get a light orange row.
 
-![Unsaved changes in the TOM Explorer and the Properties view](~/content/assets/images/unsaved-changes/overview.png)
+![TOM Explorer with edited, added and deleted measures highlighted, and the Properties view with the changed Description row highlighted](~/content/assets/images/unsaved-changes/overview.png)
 
-Both views have a **Show changes** toolbar button that filters the view down to what has changed, and both views offer a right-click **Revert** option that puts a single property, a single object or a whole branch of the model back to its saved state, without touching any other unsaved changes.
+Both views have a **Show changes** toolbar button and a right-click **Revert** command.
 
 > [!NOTE]
-> The indicators track changes relative to the source the model was loaded from or last saved to. Deploying the model to a different database does not clear them, since the loaded model still differs from its own source.
+> The indicators track changes relative to the source the model was loaded from or last saved to. Deploying the model to a different database doesn't clear them.
 
 ## Change indicators in the TOM Explorer
 
-Each object in the tree is tinted and badged according to what happened to it since the last save:
+Each object in the tree is marked according to its change since the last save:
 
-- **Edited** objects get a light orange row and an orange dot badge on their icon. This covers any modified property, including changes to a sub-object that has no node of its own in the tree, such as a table's refresh policy or a column's *Alternate Of* settings.
-- **Added** objects get a light green row and a green **+** badge. A new table and all of its new columns are green. Editing a property of a newly added object keeps it green, since the object is still new compared to the saved model.
-- **Deleted** objects get a light red row and a red **−** badge, and their name is struck through. See [Deleted objects](#deleted-objects) below.
+- **Edited** objects get a light orange row and an orange dot badge. This covers any modified property, including changes to a sub-object that has no node in the tree, such as a table's refresh policy or a column's `AlternateOf` settings.
+- **Added** objects get a light green row and a green **+** badge. A new table and all its new columns are green. Editing an added object doesn't change it from green to orange.
+- **Deleted** objects get a light red row, a red **−** badge and a struck-through name. See [Deleted objects](#deleted-objects).
 
-Tables, display folders, table groups and the **Model** node are marked too, when something beneath them has changed: their row gets a hatched fill and their icon gets the badge of the change beneath them. Green when only objects were added, and orange otherwise. This lets you follow the changes down through a collapsed tree, or use the **Show changes** filter to see only the changed objects.
+Tables, display folders, table groups and the **Model** node get a hatched fill when something beneath them has changed. Their icon badge is green when everything changed beneath them is an addition, and orange otherwise.
 
-When an object is selected, the normal selection highlight takes precedence over the tint, so a multi-selection stays readable. The badge on the icon still marks the changed objects within the selection. Error and warning badges also take precedence over the change badge, so an object with a semantic error keeps its error badge even when it has unsaved changes.
+Within a selection, the selection highlight takes precedence over the row color and the icon badge still marks changed objects. Error and warning badges take precedence over the change badge.
 
 > [!TIP]
-> If green and red rows are hard to tell apart, enable **Color blindness mode** under **Tools > Preferences > User Interface > Accessibility**. Added objects are then marked in teal instead of green, both here and in the model comparison view.
+> If green and red rows are hard to tell apart, select **Color blindness mode** in the **Accessibility** group under **Tools > Preferences > Tabular Editor > User Interface**. Added objects are then teal instead of green, both here and in the model comparison view.
 
 ### Show changes
 
-The **Show changes** button on the TOM Explorer toolbar filters the tree down to objects with unsaved changes, together with the tables, folders and groups needed to reach them. While the filter is active, the title of the view reads **TOM Explorer (Changed)**.
+The **Show changes** button on the TOM Explorer toolbar filters the tree to objects with unsaved changes, plus the tables, folders and groups that contain them. While the filter is active, the view title reads **TOM Explorer (Changed)**.
 
-![Show changes filter in the TOM Explorer](~/content/assets/images/unsaved-changes/tom-explorer-show-changes.png)
+![TOM Explorer with the Show changes filter active, listing only changed objects and their containers](~/content/assets/images/unsaved-changes/tom-explorer-show-changes.png)
 
-The filter is applied together with the other toolbar toggles and the search box. For example, hiding columns with **Ctrl+2** also hides changed columns from the filtered view.
+The filter combines with the other toolbar toggles and the search box. For example, hiding columns with **Ctrl+2** also hides changed columns from the filtered view.
 
 ## Change indicators in the Properties view
 
-When you select a changed object, the properties that differ from the saved model are drawn with the same light orange tint. A collapsed row that holds a sub-object, such as a measure's **KPI** row or a table's **Refresh Policy** row, is marked when anything inside the sub-object has changed. For indexed rows such as **Annotations**, only the individual annotation that changed is marked.
+When you select a changed object, the changed properties get the same light orange row. A collapsed row that holds a sub-object, such as a measure's **KPI** row or a table's **Refresh Policy** row, is marked when anything inside the sub-object has changed. For indexed rows such as **Annotations**, only the changed annotation is marked. When several objects are selected, a property row is marked if any of the selected objects changed that property.
 
-When several objects are selected, a property row is marked if any of the selected objects changed that property.
+The **Show changes** button on the Properties view toolbar hides unchanged rows. While the filter is active, the view title reads **Properties (Changed)**.
 
-The **Show changes** button on the Properties view toolbar hides all unchanged rows, so that only the changed properties remain. While the filter is active, the title of the view reads **Properties (Changed)**.
-
-![Show changes filter in the Properties view](~/content/assets/images/unsaved-changes/properties-show-changes.png)
+![Properties view with the Show changes filter active, listing only changed properties](~/content/assets/images/unsaved-changes/properties-show-changes.png)
 
 ## Reverting changes
 
-**File > Reload from disk** discards every unsaved change at once, by reloading the model metadata from its source. The command reads **Reload from server** for a model you opened from a server. The **Revert** options below undo individual changes instead, leaving all other unsaved changes in place.
+**File > Reload from disk** discards all unsaved changes and reloads the model from its source. For a model opened from a server, the command is **File > Reload from server**. **Revert** undoes individual changes and leaves all other unsaved changes in place.
 
-A revert behaves exactly like typing the old value back in, or recreating the deleted object by hand: DAX references are fixed up, dependent objects are recalculated, and the whole revert becomes a single step on the undo stack. If you change your mind, one **Edit > Undo** (**Ctrl+Z**) brings the reverted change back.
+A revert works like entering the old value or recreating the deleted object by hand: Tabular Editor updates DAX references and dependent objects, and adds the revert to the undo stack as one step. To undo a revert, use **Edit > Undo** (**Ctrl+Z**).
 
 ### Reverting a single property
 
-Right-click a marked row in the Properties view and choose **Revert** to put that property back to the value it had at the last save. Every other unsaved change on the object stays in place.
+Right-click a marked row in the Properties view and choose **Revert** to restore its saved value. The object's other unsaved changes stay in place.
 
-![Revert a single property](~/content/assets/images/unsaved-changes/revert-property.png)
+![Properties view with changed Description and Format String rows and the right-click Revert command](~/content/assets/images/unsaved-changes/revert-property.png)
 
-The **Revert** option is only enabled on rows that have unsaved changes. With several objects selected, **Revert** on a merged row reverts the property on all the selected objects that changed it, as a single undoable step. **Revert** on a container row such as **Annotations** reverts all the annotations at once: edited annotations return to their saved values, added annotations are removed and deleted annotations come back.
+**Revert** is enabled only on rows with unsaved changes. With several objects selected, **Revert** on a merged row reverts the property on every selected object that changed it, as one undo step. **Revert** on a container row such as **Annotations** reverts all its annotations: edited annotations return to their saved values, added annotations are removed and deleted annotations are restored.
 
 ### Reverting an object or a branch of the model
 
-Right-click a marked object in the TOM Explorer and choose **Revert** to return the object, and everything beneath it, to the way it was at the last save. **Revert** is also available on tables, display folders, table groups and the **Model** node, even though these are not marked themselves, as long as something beneath them has changed. Choosing **Revert** on the **Model** node discards every unsaved change in the model, as a single undoable step.
+Right-click a marked object in the TOM Explorer and choose **Revert** to return the object and everything beneath it to its last saved state. **Revert** is also available on tables, display folders, table groups and the **Model** node when something beneath them has changed. **Revert** on the **Model** node discards all unsaved changes in the model, as one undo step.
 
-![Revert an object in the TOM Explorer](~/content/assets/images/unsaved-changes/revert-object.png)
+![TOM Explorer right-click menu on an edited measure with Revert](~/content/assets/images/unsaved-changes/revert-object.png)
 
-When reverting an object or a branch:
+When you revert an object or a branch:
 
 - Edited properties return to their saved values.
 - Objects added since the last save are removed.
-- Objects deleted since the last save come back exactly as they were saved, including a deleted measure's KPI, or a deleted column's hierarchy levels and relationships.
+- Objects deleted since the last save are restored as saved, including a deleted measure's KPI, or a deleted column's hierarchy levels and relationships.
 - Objects elsewhere in the model keep their unsaved changes.
 
-Anything that cannot be put back is listed in a **Revert incomplete** message, and the rest of the revert stands. This happens, for example, when a deleted object's name has since been given to a new object that cannot be removed.
+If part of a revert fails, a **Revert incomplete** message lists the failures and Tabular Editor applies the rest. For example, a deleted object can't be restored if another object now uses its name and can't be removed.
 
 ## Deleted objects
 
-Deleting an object does not remove it from the TOM Explorer. Until the model is saved, the object stays where it was, struck through on a light red row, with a red **−** badge on its icon. When the info columns are shown, the **Object Type** column reads for example **Measure (Deleted)**. This makes a deletion as easy to spot as an edit.
+Deleting an object doesn't remove it from the TOM Explorer. Until you save the model, the object stays in its place with a struck-through name, a light red row and a red **−** badge. When the info columns are shown, the **Object Type** column reads, for example, **Measure (Deleted)**.
 
-![Deleted objects in the TOM Explorer](~/content/assets/images/unsaved-changes/deleted-objects.png)
+![TOM Explorer with a deleted measure struck through on a red row](~/content/assets/images/unsaved-changes/deleted-objects.png)
 
-Right-click a deleted object and choose **Restore** to bring it back exactly as it was the moment before it was deleted. If the object had unsaved edits before it was deleted, these come back with it and remain marked, so that they can be reverted separately. You can multi-select several deleted objects and restore them in one step.
+Right-click a deleted object and choose **Restore** to restore it as it was when you deleted it. If the object had unsaved edits before you deleted it, the edits are restored too and stay marked, and you can revert them separately. To restore several deleted objects in one step, select them all and choose **Restore**.
 
-Deleted objects are placeholders, not model objects:
+You can't edit, rename, drag or expand a deleted object, and it's never a drop or paste target. Selecting a deleted object doesn't select a model object, so the Properties view shows nothing and the right-click menu has only **Restore**. A selection that mixes deleted and live objects has neither **Restore** nor the normal object commands.
 
-- They cannot be edited, renamed, dragged or expanded, and they are never included in a drag-and-drop or paste target.
-- Selecting them does not select a model object. The Properties view shows nothing, and the right-click menu offers **Restore** only.
-- A selection that mixes deleted and live objects offers neither **Restore** nor the normal object actions.
-- They disappear as soon as the model is saved.
-
-C# scripts can reach the selected deleted objects through `Selected.Deleted`. See [Scripting](#scripting) below.
+C# scripts access the selected deleted objects through `Selected.Deleted`, as described in [Scripting](#scripting).
 
 ### Gathering deleted objects under one node
 
-If you prefer not to have deleted objects mixed in with live ones, check **Gather deleted objects under a "Deleted objects" node** under **Tools > Preferences > TOM Explorer > Unsaved changes**. The deleted objects of a table, hierarchy, role or table group are then shown together under a single **Deleted objects** node at the end of their container, regardless of the display folders they used to be in. The node takes the red highlight and a deleted badge of its own, and the objects beneath it are struck through. Right-click the node and choose **Restore** to bring back everything beneath it in one step.
+If you select **Gather deleted objects under a "Deleted objects" node** in the **Unsaved changes** section under **Tools > Preferences > Tabular Editor > TOM Explorer**, the deleted objects of a table, hierarchy, role or table group are listed under one **Deleted objects** node at the end of their container, whichever display folders they were in. The node has a red row and a deleted badge, and the objects beneath it are struck through. Right-click the node and choose **Restore** to restore everything beneath it in one step.
 
-![Deleted objects gathered under one node](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
+![TOM Explorer with a deleted measure listed under a Deleted objects node at the end of its table](~/content/assets/images/unsaved-changes/deleted-objects-group.png)
 
 ### Keeping deleted objects across saves
 
-By default, deleted objects stay visible until the model is saved, since they are unsaved changes like any other. The **Keep deleted objects visible** preference offers two alternatives:
+By default, deleted objects stay visible until you save. To change that, set the **Keep deleted objects visible** preference to one of its two other options:
 
-- **Never**: Deleted objects vanish from the TOM Explorer at once. They can still be brought back with **Revert** on their container, or with **Edit > Undo**.
-- **Until the model is closed**: Deleted objects stay visible for the whole editing session, even across saves, and remain restorable. Restoring an object that was deleted before the last save creates it anew, so it is then marked as an added object. Objects that were created and deleted between two saves are kept only if they were edited or saved at some point. An object that was created and deleted without ever being touched leaves no trace.
+- **Never**: The TOM Explorer hides deleted objects immediately. To restore them, use **Revert** on their container, or **Edit > Undo**.
+- **Until the model is closed**: Deleted objects stay visible and restorable for the whole editing session, including across saves, while their deletion is still on the undo stack. Restoring an object deleted before the last save creates it again, and it's marked as added. An object you created and deleted in the same session appears only if you edited it or saved the model while it existed.
 
 ## When indicators clear
 
-An object or property loses its mark when it no longer differs from the last saved state of the model. This happens when:
-
-- The model is saved, whether to a file, a folder or a database. Every indicator clears at once.
-- The change is reverted, either through **Revert** in the TOM Explorer or Properties view, or through **File > Reload from disk** (**Reload from server**), which discards them all.
-- The change is undone with **Edit > Undo** back to the point of the last save. Redoing the change brings the mark back, and undoing *past* the last save marks the rolled-back objects instead.
-- A property is set back to its original value by hand. Tabular Editor 3 compares the current value with the saved one, so a net-zero edit does not count as a change.
+A mark reflects the current difference from the last saved state. Saving the model to a file, a folder or a database clears every mark at once. A mark also clears when you revert the change, when you undo back to the point of the last save, or when you set a property back to its saved value by hand. If you undo past the last save, the undone objects are marked as changed, and redoing a change restores its mark.
 
 ## Preferences
 
-The indicators can be adjusted under **Tools > Preferences > TOM Explorer**, in the **Unsaved changes** section:
+The indicator settings are in the **Unsaved changes** section under **Tools > Preferences > Tabular Editor > TOM Explorer**:
 
-![Unsaved changes preferences](~/content/assets/images/unsaved-changes/preferences.png)
+![Unsaved changes section of the TOM Explorer preferences page](~/content/assets/images/unsaved-changes/preferences.png)
 
-- **Mark objects with unsaved changes** (enabled): Tint the rows and badge the icons of added, edited and deleted objects in the TOM Explorer, and mark their containers with a hatched fill. When unchecked, deleted objects still stay visible and the **Show changes** filter still works.
+- **Mark objects with unsaved changes** (enabled): Colors the rows and badges the icons of added, edited and deleted objects in the TOM Explorer, and hatches their containers. Doesn't affect deleted-object visibility or **Show changes**.
 - **Keep deleted objects visible** (Until the model is saved): How long deleted objects stay in the TOM Explorer. See [Keeping deleted objects across saves](#keeping-deleted-objects-across-saves).
-- **Gather deleted objects under a "Deleted objects" node** (disabled): Show a container's deleted objects together under one node instead of each where it used to be. See [Gathering deleted objects under one node](#gathering-deleted-objects-under-one-node).
-- **Mark properties with unsaved changes in the Properties pane** (enabled): Tint the rows of changed properties in the Properties view. When unchecked, the **Show changes** filter in the Properties view still works.
+- **Gather deleted objects under a "Deleted objects" node** (disabled): Lists a container's deleted objects under one node. See [Gathering deleted objects under one node](#gathering-deleted-objects-under-one-node).
+- **Mark properties with unsaved changes in the Properties pane** (enabled): Colors the rows of changed properties in the Properties view. Doesn't affect **Show changes** in the Properties view.
 
-See @preferences for the other settings on this page. The colors used for added objects can be adjusted for color blindness under **Tools > Preferences > User Interface > Accessibility**.
+See @preferences for the other settings on this page.
 
 ## Scripting
 
-The same information and operations are available to [C# scripts](xref:csharp-scripts) and macros, which lets a script inspect what has changed and roll back part of a model without touching the rest.
+[C# scripts](xref:csharp-scripts) and macros can read the same change information and run the same revert operations through these members, which every model object has:
 
-Every model object exposes the following members:
+- `HasUnsavedChanges` returns `true` when the object, or anything beneath it, differs from the last saved state. On the `Model` object, it returns whether the model has any unsaved changes.
+- `Revert()` reverts the object and its children as one undo step. The method also exists on collections such as `Selected.Measures`, and on `Model` for the whole model. If part of the revert fails, it throws an exception that lists the parts it couldn't revert.
+- `Revert("PropertyName")` reverts one property to its saved value, for example `Revert("Expression")` or `Revert("Annotations[MyAnnotation]")`. It does nothing when the property is unchanged.
 
-- `HasUnsavedChanges` returns `true` when the object, or anything beneath it, differs from the last saved state. On the `Model` object, this tells whether the model has unsaved changes at all.
-- `Revert()` puts the object and everything beneath it back to the saved state, as one undoable step. The same method exists on collections such as `Selected.Measures`, and on `Model` for the whole model. An exception listing what could not be put back is thrown when part of the revert fails.
-- `Revert("PropertyName")` reverts a single property to its saved value, for example `Revert("Expression")` or `Revert("Annotations[MyAnnotation]")`. It does nothing when the property is unchanged.
+Containers such as tables, hierarchies and roles have a `DeletedObjects` collection that lists the objects deleted from them in the current session. Each entry has a `Name`, `ObjectType` and `Parent`, and a `Restore()` method. `Restore()` on the collection restores all entries.
 
-Containers such as tables, hierarchies and roles expose a `DeletedObjects` collection listing the objects deleted from them in the current session. Each entry has a `Name`, `ObjectType` and `Parent`, and a `Restore()` method. Calling `Restore()` on the collection restores all of them at once.
-
-In the TOM Explorer, deleted objects that are currently selected are available through `Selected.Deleted`. Since deleted objects are not model objects, they never appear in `Selected.Measures`, `Selected.Columns` and the other accessors.
+`Selected.Deleted` returns the deleted objects selected in the TOM Explorer. Deleted objects don't appear in `Selected.Measures`, `Selected.Columns` or the other accessors.
 
 ```csharp
 // List the measures with unsaved changes in the selected tables:

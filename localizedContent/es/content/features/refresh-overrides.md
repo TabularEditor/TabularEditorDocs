@@ -2,7 +2,7 @@
 uid: refresh-overrides
 title: Perfiles de sobrescritura de actualización
 author: Daniel Otykier
-updated: 2026-01-20
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,7 +36,7 @@ Las sobrescrituras de actualización resuelven este problema al mantener las con
 
 ## Estructura del perfil de sobrescritura
 
-Los perfiles de sobrescritura usan JSON que sigue la [especificación del comando de actualización de TMSL](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). El JSON es una matriz de objetos de sobrescritura, donde cada objeto puede contener uno o varios de los siguientes:
+Los perfiles de anulación utilizan JSON que sigue la [especificación del comando de actualización de TMSL](https://learn.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). El JSON es una matriz de objetos de sobrescritura, donde cada objeto puede contener uno o varios de los siguientes:
 
 - `scope` - Limita la sobrescritura a una tabla o partición específicas (opcional)
 - `dataSources` - Sobrescribe las propiedades de conexión de la fuente de datos

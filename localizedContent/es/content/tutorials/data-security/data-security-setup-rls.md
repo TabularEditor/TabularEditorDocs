@@ -2,7 +2,7 @@
 uid: data-security-setup-rls
 title: Configurar o modificar RLS
 author: Kurt Buhler
-updated: 2023-03-14
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -109,19 +109,19 @@ Para modificar un permiso de tabla existente para un rol específico:
 ```dax
 EVALUATE
 
-// Crea una tabla para probar tu RLS
+// Create a table to test your RLS
 ADDCOLUMNS ( 
   VALUES ( 'Regions'[Territory Directors] ),
   "@RLS-Validation",
 
-    // Código de RLS
+    // RLS Code
     VAR _CurrentUser = 
       SELECTCOLUMNS (
         FILTER ( 
           'Employees', 
           'Employees'[Employee Email]
 
-            // Reemplaza USERPRINCIPALNAME() por el correo de un usuario para probar
+            // Replace USERPRINCIPALNAME() with a user email to test
             = "gal.aehad@spaceparts.co" // USERPRINCIPALNAME ()
         ),
         "@Name", 'Employees'[Employee Name]
@@ -131,8 +131,8 @@ ADDCOLUMNS (
 
 )
 
-// Ordena de TRUE() a FALSE()
-// Cuando sea TRUE(), los datos serán visibles
+// Order from TRUE() to FALSE()
+// Where it is TRUE() the data will be visible
 ORDER BY [@RLS-Validation] DESC
 ```
 
@@ -183,6 +183,6 @@ Puedes asignar y quitar usuarios o grupos de los roles desde Tabular Editor.
 > Si tu organización usa Active Directory local con SQL Server Analysis Services, tendrás que usar la opción **Miembro de Windows AD** en lugar de **Miembro de Azure AD**.
 
 > [!NOTE]
-> Una vez que hayas publicado un Dataset de Power BI en el servicio Power BI, también puedes administrar los miembros del rol desde la [configuración de seguridad del Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Como alternativa, puedes administrar los miembros del rol desde [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (esto se aplica a los modelos AAS/SSAS, además del Dataset de Power BI).
+> Una vez que se haya publicado un Dataset de Power BI en el Servicio de Power BI, también puedes administrar los miembros del rol a través de la [configuración de seguridad del Dataset](https://learn.microsoft.com/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Como alternativa, puedes administrar los miembros del rol a través de [SQL Server Management Studio](https://learn.microsoft.com/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (esto se aplica tanto a los modelos AAS/SSAS como al Dataset de Power BI).
 
 ---

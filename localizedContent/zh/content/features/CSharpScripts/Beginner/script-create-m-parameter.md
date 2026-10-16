@@ -22,9 +22,9 @@ applies_to:
 ### 创建新的 M 分区
 
 ```csharp
-// 此脚本会在模型的“Shared Expressions”中创建一个新的 M 参数。
+// This script creates a new M parameter in the 'Shared Expressions' of a model.
 //
-// 创建一个名为 "New Parameter" 的共享表达式
+// Create a new shared expression called "New Parameter"
 Model.AddExpression( 
     "New Parameter", 
     @"
@@ -36,15 +36,15 @@ Model.AddExpression(
 ]"
 );
 
-// 输出提示，说明如何配置并使用该参数
+// Provides an output informing how to configure and use the parameter
 Info ( 
-    "已创建名为 'New Parameter' 的共享表达式，它是一个 M 参数模板。" + 
+    "Created a new Shared Expression called 'New Parameter', which is an M Parameter template." + 
     "\n------------------------------------------------------\n" + 
-    "配置方法：" +
+    "To configure:" +
     "\n------------------------------------------------------\n    " + 
-    "1. 将文本 'New Parameter' 替换为所需的参数值\n    " +
-    "2. 按需设置数据类型\n    " +
-    "3. 将 M 分区中出现的相关值替换为该参数的引用。" );
+    "1. Replace the text 'New Parameter' with the desired parameter value\n    " +
+    "2. Set the data type appropriately\n    " +
+    "3. Replace any values found in the M partitions with the parameter reference." );
 ```
 
 ### 说明

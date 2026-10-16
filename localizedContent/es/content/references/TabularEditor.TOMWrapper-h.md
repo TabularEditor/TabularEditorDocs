@@ -91,7 +91,7 @@ Propiedades
 | `Boolean`               | IsDataTypeInferred | Obtiene o establece la propiedad IsDataTypeInferred de CalculatedTableColumn. |
 | `Boolean`               | IsNameInferred     | Obtiene o establece la propiedad IsNameInferred de CalculatedTableColumn.     |
 | `CalculatedTableColumn` | MetadataObject     |                                                                                               |
-| `String`                | SourceColumn       | Obtiene o establece la propiedad SourceColumn de CalculatedTableColumn.       |
+| `String`                | Columna de origen  | Obtiene o establece la propiedad SourceColumn de CalculatedTableColumn.       |
 
 ## `Column`
 
@@ -109,16 +109,16 @@ Propiedades
 | ---------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `Alignment`                  | Alignment                                          | Obtiene o establece la propiedad Alignment de la columna.                                            |
 | `String`                     | DataCategory                                       | Obtiene o establece la propiedad DataCategory de la columna.                                         |
-| `DataType`                   | DataType                                           | Obtiene o establece la propiedad DataType de la columna.                                             |
+| `DataType`                   | Tipo de datos                                      | Obtiene o establece la propiedad DataType de la columna.                                             |
 | `String`                     | DaxObjectFullName                                  |                                                                                                                      |
 | `String`                     | DaxObjectName                                      |                                                                                                                      |
 | `String`                     | DaxTableName                                       |                                                                                                                      |
 | `HashSet<IExpressionObject>` | Dependants                                         |                                                                                                                      |
-| `String`                     | Description                                        | Obtiene o establece la propiedad Description de la columna.                                          |
+| `String`                     | Descripción                                        | Obtiene o establece la propiedad Description de la columna.                                          |
 | `String`                     | DisplayFolder                                      | Obtiene o establece la propiedad DisplayFolder de la columna.                                        |
 | `Int32`                      | DisplayOrdinal                                     | Obtiene o establece la propiedad DisplayOrdinal de la columna.                                       |
 | `String`                     | ErrorMessage                                       | Obtiene o establece la propiedad ErrorMessage de la columna.                                         |
-| `String`                     | FormatString                                       | Obtiene o establece la propiedad FormatString de la columna.                                         |
+| `String`                     | Cadena de formato                                  | Obtiene o establece la propiedad FormatString de la columna.                                         |
 | `IndexadorDePerspectiva`     | EnPerspectiva                                      |                                                                                                                      |
 | `Boolean`                    | IsAvailableInMDX                                   | Obtiene o establece la propiedad IsAvailableInMDX de la columna.                                     |
 | `Boolean`                    | IsDefaultImage                                     | Obtiene o establece la propiedad IsDefaultImage de la columna.                                       |
@@ -133,7 +133,7 @@ Propiedades
 | `String`                     | SourceProviderType                                 | Obtiene o establece la propiedad SourceProviderType de la columna.                                   |
 | `ObjectState`                | State                                              | Obtiene o establece la propiedad State de la columna.                                                |
 | `AggregateFunction`          | SummarizeBy                                        | Obtiene o establece la propiedad SummarizeBy de la columna.                                          |
-| `Table`                      | Table                                              |                                                                                                                      |
+| `Table`                      | Tabla                                              |                                                                                                                      |
 | `Int32`                      | TableDetailPosition                                | Obtiene o establece el valor de TableDetailPosition de la columna.                                   |
 | `TranslationIndexer`         | TranslatedDescriptions                             | Colección de descripciones localizadas para esta columna.                                            |
 | `TranslationIndexer`         | TranslatedDisplayFolders                           | Colección de carpetas de visualización localizadas para esta columna.                                |
@@ -169,11 +169,11 @@ Propiedades
 | ------------------- | ------------------- | ------- |
 | `Alignment`         | Alignment           |         |
 | `String`            | DataCategory        |         |
-| `DataType`          | DataType            |         |
+| `DataType`          | Tipo de datos       |         |
 | `String`            | Descripción         |         |
 | `String`            | DisplayFolder       |         |
 | `Int32`             | DisplayOrdinal      |         |
-| `String`            | FormatString        |         |
+| `String`            | Cadena de formato   |         |
 | `Boolean`           | IsAvailableInMDX    |         |
 | `Boolean`           | IsDefaultImage      |         |
 | `Boolean`           | IsDefaultLabel      |         |
@@ -242,7 +242,6 @@ Clase de colección de jerarquías. Proporciona propiedades convenientes para es
 ```csharp
 public class TabularEditor.TOMWrapper.CultureCollection
     : TabularObjectCollection<Culture, Culture, Model>, IList, ICollection, IEnumerable, INotifyCollectionChanged, ICollection<Culture>, IEnumerable<Culture>, IList<Culture>, ITabularObjectCollection, IExpandableIndexer
-// Culture: configuración regional
 
 ```
 
@@ -295,7 +294,7 @@ Propiedades
 | `Nullable<DateTime>` | LastProcessed      |         |
 | `Nullable<DateTime>` | LastSchemaUpdate   |         |
 | `Nullable<DateTime>` | LastUpdate         |         |
-| `String`             | Name               |         |
+| `String`             | Nombre             |         |
 | `String`             | ServerName         |         |
 | `String`             | ServerVersion      |         |
 | `Database`           | TOMDatabase        |         |
@@ -319,10 +318,10 @@ public class TabularEditor.TOMWrapper.DataColumn
 
 Propiedades
 
-| Tipo         | Nombre         | Resumen                                                                               |
-| ------------ | -------------- | ------------------------------------------------------------------------------------- |
-| `DataColumn` | MetadataObject |                                                                                       |
-| `String`     | SourceColumn   | Obtiene o establece la propiedad SourceColumn de la clase DataColumn. |
+| Tipo         | Nombre            | Resumen                                                                               |
+| ------------ | ----------------- | ------------------------------------------------------------------------------------- |
+| `DataColumn` | MetadataObject    |                                                                                       |
+| `String`     | Columna de origen | Obtiene o establece la propiedad SourceColumn de la clase DataColumn. |
 
 ## `DataSource`
 
@@ -492,12 +491,12 @@ Propiedades
 | `String`                 | FullPath                 |         |
 | `TabularModelHandler`    | Handler                  |         |
 | `Int32`                  | MetadataIndex            |         |
-| `Model`                  | Model                    |         |
+| `Model`                  | Modelo                   |         |
 | `String`                 | Nombre                   |         |
 | `ObjectType`             | ObjectType               |         |
 | `Table`                  | ParentTable              |         |
 | `String`                 | Path                     |         |
-| `Table`                  | Table                    |         |
+| `Table`                  | Tabla                    |         |
 | `TranslationIndexer`     | TranslatedDisplayFolders |         |
 | `TranslationIndexer`     | TranslatedNames          |         |
 
@@ -565,7 +564,7 @@ Propiedades
 | `String`                 | DisplayFolder            | Obtiene o establece DisplayFolder de la jerarquía.                                  |
 | `IndexadorDePerspectiva` | EnPerspectiva            |                                                                                                     |
 | `Boolean`                | IsHidden                 | Obtiene o establece IsHidden de la jerarquía.                                       |
-| `LevelCollection`        | Levels                   |                                                                                                     |
+| `LevelCollection`        | Niveles                  |                                                                                                     |
 | `Hierarchy`              | MetadataObject           |                                                                                                     |
 | `Boolean`                | Reordering               | Establézcalo en true cuando se vayan a reordenar varios niveles en una sola acción. |
 | `ObjectState`            | State                    | Obtiene o establece el estado de la jerarquía.                                      |
@@ -604,7 +603,7 @@ Propiedades
 
 | Tipo      | Nombre         | Resumen |
 | --------- | -------------- | ------- |
-| `String`  | Description    |         |
+| `String`  | Descripción    |         |
 | `String`  | DisplayFolder  |         |
 | `Boolean` | IsHidden       |         |
 | `Table`   | Elemento padre |         |
@@ -803,7 +802,7 @@ Propiedades
 | Tipo                 | Nombre          | Resumen |
 | -------------------- | --------------- | ------- |
 | `Int32`              | MetadataIndex   |         |
-| `String`             | Name            |         |
+| `String`             | Nombre          |         |
 | `TranslationIndexer` | TranslatedNames |         |
 
 ## `ITabularObject`
@@ -818,7 +817,7 @@ Propiedades
 
 | Tipo         | Nombre     | Resumen |
 | ------------ | ---------- | ------- |
-| `Model`      | Model      |         |
+| `Model`      | Modelo     |         |
 | `ObjectType` | ObjectType |         |
 
 ## `ITabularObjectCollection`
@@ -1010,7 +1009,7 @@ Propiedades
 | Tipo                 | Nombre          | Resumen |
 | -------------------- | --------------- | ------- |
 | `Int32`              | MetadataIndex   |         |
-| `Model`              | Model           |         |
+| `Model`              | Modelo          |         |
 | `String`             | Nombre          |         |
 | `ObjectType`         | ObjectType      |         |
 | `TranslationIndexer` | TranslatedNames |         |
@@ -1040,7 +1039,7 @@ Enum
 | Valor | Nombre                    | Resumen |
 | ----- | ------------------------- | ------- |
 | `1`   | DisplayFolders            |         |
-| `2`   | Columns                   |         |
+| `2`   | Columnas                  |         |
 | `4`   | Medidas                   |         |
 | `8`   | KPI                       |         |
 | `16`  | Jerarquías                |         |
@@ -1064,7 +1063,7 @@ Propiedades
 
 | Tipo                                       | Nombre                   | Resumen                                                                            |
 | ------------------------------------------ | ------------------------ | ---------------------------------------------------------------------------------- |
-| `DataType`                                 | DataType                 | Obtiene o establece el DataType de la medida.                      |
+| `DataType`                                 | Tipo de datos            | Obtiene o establece el DataType de la medida.                      |
 | `String`                                   | DaxObjectFullName        |                                                                                    |
 | `String`                                   | DaxObjectName            |                                                                                    |
 | `String`                                   | DaxTableName             |                                                                                    |
@@ -1074,7 +1073,7 @@ Propiedades
 | `String`                                   | DisplayFolder            | Obtiene o establece la propiedad DisplayFolder de la medida.       |
 | `String`                                   | ErrorMessage             | Obtiene o establece la propiedad ErrorMessage de la medida.        |
 | `String`                                   | Expresión                | Obtiene o establece la expresión de la medida.                     |
-| `String`                                   | FormatString             | Obtiene o establece la propiedad FormatString de la medida.        |
+| `String`                                   | Cadena de formato        | Obtiene o establece la propiedad FormatString de la medida.        |
 | `IndexadorDePerspectiva`                   | EnPerspectiva            |                                                                                    |
 | `Boolean`                                  | IsHidden                 | Obtiene o establece la propiedad IsHidden de la medida.            |
 | `Boolean`                                  | IsSimpleMeasure          | Obtiene o establece la propiedad IsSimpleMeasure de la medida.     |
@@ -1082,7 +1081,7 @@ Propiedades
 | `medida`                                   | MetadataObject           |                                                                                    |
 | `Boolean`                                  | NeedsValidation          |                                                                                    |
 | `ObjectState`                              | State                    | Obtiene o establece el estado de la medida.                        |
-| `Table`                                    | Table                    |                                                                                    |
+| `Table`                                    | Tabla                    |                                                                                    |
 | `TranslationIndexer`                       | TranslatedDescriptions   | Colección de descripciones localizadas de esta medida.             |
 | `TranslationIndexer`                       | TranslatedDisplayFolders | Colección de carpetas de visualización localizadas de esta medida. |
 
@@ -1114,16 +1113,16 @@ public class TabularEditor.TOMWrapper.MeasureCollection
 
 Propiedades
 
-| Tipo      | Nombre          | Resumen |
-| --------- | --------------- | ------- |
-| `String`  | Descripción     |         |
-| `String`  | DisplayFolder   |         |
-| `String`  | Expression      |         |
-| `String`  | FormatString    |         |
-| `Boolean` | IsHidden        |         |
-| `Boolean` | IsSimpleMeasure |         |
-| `KPI`     | KPI             |         |
-| `Table`   | Parent          |         |
+| Tipo      | Nombre            | Resumen |
+| --------- | ----------------- | ------- |
+| `String`  | Descripción       |         |
+| `String`  | DisplayFolder     |         |
+| `String`  | Expresión         |         |
+| `String`  | Cadena de formato |         |
+| `Boolean` | IsHidden          |         |
+| `Boolean` | IsSimpleMeasure   |         |
+| `KPI`     | KPI               |         |
+| `Table`   | Parent            |         |
 
 Métodos
 
@@ -1336,18 +1335,18 @@ Propiedades
 | ------------------------- | ---------------------- | -------------------------------------------------------------------------------- |
 | `DataSource`              | DataSource             |                                                                                  |
 | `DataViewType`            | DataView               | Obtiene o establece la propiedad `DataView` de la partición.     |
-| `String`                  | Description            | Obtiene o establece la propiedad `Description` de la partición.  |
+| `String`                  | Descripción            | Obtiene o establece la propiedad `Description` de la partición.  |
 | `String`                  | ErrorMessage           | Obtiene o establece la propiedad `ErrorMessage` de la partición. |
-| `String`                  | Expression             |                                                                                  |
+| `String`                  | Expresión              |                                                                                  |
 | `partición`               | MetadataObject         |                                                                                  |
-| `ModeType`                | Mode                   | Obtiene o establece la propiedad `Mode` de la partición.         |
-| `String`                  | Name                   |                                                                                  |
+| `ModeType`                | Modo                   | Obtiene o establece la propiedad `Mode` de la partición.         |
+| `String`                  | Nombre                 |                                                                                  |
 | `String`                  | Query                  |                                                                                  |
 | `DateTime`                | RefreshedTime          |                                                                                  |
 | `String`                  | Source                 |                                                                                  |
 | `TipoDeOrigenDePartición` | SourceType             | Obtiene o establece el SourceType de la partición.               |
 | `ObjectState`             | State                  | Obtiene o establece el State de la partición.                    |
-| `Table`                   | Table                  |                                                                                  |
+| `Table`                   | Tabla                  |                                                                                  |
 | `TranslationIndexer`      | TranslatedDescriptions | Colección de descripciones localizadas para esta partición.      |
 
 Métodos
@@ -1469,7 +1468,7 @@ Propiedades
 
 | Tipo        | Nombre    | Resumen |
 | ----------- | --------- | ------- |
-| `Hierarchy` | Hierarchy |         |
+| `Hierarchy` | Jerarquía |         |
 
 Métodos
 
@@ -1550,7 +1549,7 @@ Propiedades
 | Tipo      | Nombre | Resumen |
 | --------- | ------ | ------- |
 | `Boolean` | Item   |         |
-| `Table`   | Table  |         |
+| `Table`   | Tabla  |         |
 
 Métodos
 
@@ -1579,13 +1578,13 @@ Propiedades
 | `ImpersonationMode`   | ImpersonationMode | Obtiene o establece la propiedad ImpersonationMode de ProviderDataSource. |
 | `DatasourceIsolation` | Isolation         | Obtiene o establece la propiedad Isolation de ProviderDataSource.         |
 | `Boolean`             | IsPowerBIMashup   |                                                                                           |
-| `String`              | Location          |                                                                                           |
+| `String`              | Ubicación         |                                                                                           |
 | `Int32`               | MaxConnections    | Obtiene o establece el valor de MaxConnections de ProviderDataSource.     |
 | `ProviderDataSource`  | MetadataObject    |                                                                                           |
 | `String`              | MQuery            |                                                                                           |
-| `String`              | Name              |                                                                                           |
+| `String`              | Nombre            |                                                                                           |
 | `String`              | Password          | Obtiene o establece el valor de Password de ProviderDataSource.           |
-| `String`              | Provider          | Obtiene o establece el valor de Provider de ProviderDataSource.           |
+| `String`              | Proveedor         | Obtiene o establece el valor de Provider de ProviderDataSource.           |
 | `String`              | SourceID          |                                                                                           |
 | `Int32`               | Timeout           | Obtiene o establece el valor de Timeout de ProviderDataSource.            |
 
@@ -1732,7 +1731,7 @@ Campos
 | `Boolean`         | IgnoreInferredObjects    |         |
 | `Boolean`         | IgnoreInferredProperties |         |
 | `Boolean`         | IgnoreTimestamps         |         |
-| `HashSet<String>` | Levels                   |         |
+| `HashSet<String>` | Niveles                  |         |
 | `Boolean`         | PrefixFilenames          |         |
 | `Boolean`         | SplitMultilineStrings    |         |
 
@@ -1791,20 +1790,20 @@ Propiedades
 | Tipo                         | Nombre                 | Resumen                                                                            |
 | ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |
 | `IEnumerable<Level>`         | AllLevels              |                                                                                    |
-| `ColumnCollection`           | Columns                |                                                                                    |
+| `ColumnCollection`           | Columnas               |                                                                                    |
 | `String`                     | DataCategory           | Obtiene o establece la propiedad DataCategory de la clase `Table`. |
 | `String`                     | DaxObjectFullName      |                                                                                    |
 | `String`                     | DaxObjectName          |                                                                                    |
 | `String`                     | DaxTableName           |                                                                                    |
 | `HashSet<IExpressionObject>` | Dependants             |                                                                                    |
-| `String`                     | Description            | Obtiene o establece la propiedad Description de la tabla.          |
+| `String`                     | Descripción            | Obtiene o establece la propiedad Description de la tabla.          |
 | `String`                     | ErrorMessage           |                                                                                    |
-| `HierarchyCollection`        | Hierarchies            |                                                                                    |
+| `HierarchyCollection`        | Jerarquías             |                                                                                    |
 | `IndexadorDePerspectiva`     | EnPerspectiva          |                                                                                    |
 | `Boolean`                    | IsHidden               | Obtiene o establece la propiedad IsHidden de la tabla.             |
 | `ColecciónDeMedidas`         | Medidas                |                                                                                    |
 | `Table`                      | MetadataObject         |                                                                                    |
-| `String`                     | Name                   |                                                                                    |
+| `String`                     | Nombre                 |                                                                                    |
 | `Table`                      | ParentTable            |                                                                                    |
 | `ColecciónDeParticiones`     | Particiones            |                                                                                    |
 | `TableRLSIndexer`            | RowLevelSecurity       |                                                                                    |
@@ -2031,13 +2030,13 @@ Propiedades
 | ------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `TabularCommonActions`                      | Actions                  |                                                                                                                                                                                                                                                                                                                                                                |
 | `Boolean`                                   | AutoFixup                | Especifica si los cambios en los nombres de los objetos (tablas, columnas, medidas) deben provocar actualizaciones automáticas de las expresiones DAX para reflejar los nombres modificados. Cuando se establece en true, se analizan todas las expresiones del modelo para crear un árbol de dependencias. |
-| `Database`                                  | Database                 |                                                                                                                                                                                                                                                                                                                                                                |
+| `Database`                                  | Base de datos            |                                                                                                                                                                                                                                                                                                                                                                |
 | `Boolean`                                   | DelayBuildDependencyTree |                                                                                                                                                                                                                                                                                                                                                                |
 | `IList<Tuple<NamedMetadataObject, String>>` | Errors                   |                                                                                                                                                                                                                                                                                                                                                                |
 | `Boolean`                                   | HasUnsavedChanges        |                                                                                                                                                                                                                                                                                                                                                                |
 | `Boolean`                                   | IsConnected              |                                                                                                                                                                                                                                                                                                                                                                |
-| `Model`                                     | Model                    |                                                                                                                                                                                                                                                                                                                                                                |
-| `String`                                    | Status                   |                                                                                                                                                                                                                                                                                                                                                                |
+| `Model`                                     | Modelo                   |                                                                                                                                                                                                                                                                                                                                                                |
+| `String`                                    | Estado                   |                                                                                                                                                                                                                                                                                                                                                                |
 | `TabularTree`                               | Tree                     |                                                                                                                                                                                                                                                                                                                                                                |
 | `UndoManager`                               | UndoManager              |                                                                                                                                                                                                                                                                                                                                                                |
 | `Int64`                                     | Version                  |                                                                                                                                                                                                                                                                                                                                                                |
@@ -2141,7 +2140,7 @@ Propiedades
 | Tipo                    | Nombre                   | Resumen |
 | ----------------------- | ------------------------ | ------- |
 | `MetadataObject`        | MetadataObject           |         |
-| `Model`                 | Model                    |         |
+| `Model`                 | Modelo                   |         |
 | `ObjectType`            | ObjectType               |         |
 | `String`                | ObjectTypeName           |         |
 | `IndexadorDeTraducción` | TranslatedDescriptions   |         |
@@ -2321,7 +2320,6 @@ Métodos
 ## `Indexador de traducción`
 
 ```csharp
-// Indexador de traducción
 public class TabularEditor.TOMWrapper.TranslationIndexer
     : IEnumerable<String>, IEnumerable, IExpandableIndexer
 

@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Keyboard shortcuts Tabular Editor 3
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,6 +44,21 @@ applies_to:
 |Redo|Ctrl+Y|
 |Find|Ctrl+F|
 |Replace|Ctrl+H|
+
+## Shortcuts that depend on focus
+
+Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view.
+
+| Shortcut | Text control has focus | TOM Explorer has focus |
+| --- | --- | --- |
+| **Ctrl+Z** / **Ctrl+Y** | undo or redo typing | undo or redo the last model change |
+| **Ctrl+X** / **Ctrl+C** / **Ctrl+V** | cut, copy or paste text | cut, copy or paste the selected objects |
+| **Delete** | delete the selected text | delete the selected objects |
+| **Ctrl+A** | select all text | select all objects at the current level |
+| **Ctrl+D** | duplicate the current line | duplicate the selected objects |
+| **Ctrl+U** | uncomment lines in a document | make the selected objects visible |
+
+**Ctrl+S** saves the document that has focus, such as a DAX query or a diagram. When the TOM Explorer has focus, **Ctrl+S** saves the model. To undo a model change from a text control, see @undo-redo.
 
 ## Data modelling
 
@@ -91,7 +106,6 @@ applies_to:
 |Copy line|Ctrl+Shift+T|
 |Transpose lines|Ctrl+T|
 |Duplicate line|Ctrl+D|
-|Lowercase line|Ctrl+U|
 |Uppercase line|Ctrl+Shift+U|
 |Move lines up|Alt+Up arrow|
 |Move lines down|Alt+Down arrow|

@@ -1,6 +1,8 @@
 ---
 uid: desktop-integration
 title: Integración con Power BI Desktop
+author: Morten Lønskov
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,35 +19,33 @@ applies_to:
 
 # Integración con Power BI Desktop
 
-[Power BI Desktop admite herramientas externas](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools), lo que permite a Tabular Editor realizar operaciones de modelado al trabajar con datos importados o DirectQuery en Power BI Desktop.
+[Power BI Desktop admite Herramientas externas](https://docs.microsoft.com/power-bi/create-reports/desktop-external-tools), lo que permite a Tabular Editor realizar operaciones de modelado al trabajar con datos importados o en modo DirectQuery en Power BI Desktop.
 
-![image](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
+![Tabular Editor 3 iniciado desde la cinta de opciones Herramientas externas de Power BI Desktop, con una medida abierta en el Editor de expresiones](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
 ## Requisitos previos
 
 - [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494) (julio de 2020 o posterior)
 - [La versión más reciente de Tabular Editor](https://tabulareditor.com/downloads)
 
-Además, se recomienda encarecidamente que la opción [fecha/hora automática](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-auto-date-time) esté **deshabilitada** (configuración de Power BI Desktop en "Carga de datos").
+Además, se recomienda encarecidamente que la opción [fecha/hora automática](https://docs.microsoft.com/power-bi/transform-model/desktop-auto-date-time) esté **desactivada** (configuración de Power BI Desktop en "Carga de datos").
 
 ## Arquitectura de herramientas externas
 
-Cuando un Report de Power BI Desktop contiene un Data model (es decir, se han agregado una o más tablas en modo Import o DirectQuery), ese Data model se hospeda dentro de una instancia de Analysis Services administrada por Power BI Desktop. Las herramientas externas pueden conectarse a esta instancia de Analysis Services con distintos fines.
+Cuando un Report de Power BI Desktop contiene un Data model (una o varias tablas en modo Import o DirectQuery), Power BI Desktop aloja ese Data model en una instancia local de Analysis Services. Las herramientas externas se conectan a esta instancia.
 
 > [!IMPORTANT]
-> Los Reports de Power BI Desktop que usan una **conexión en vivo** a SSAS, Azure AS o a un Dataset en un Workspace de Power BI no contienen un Data model. Por tanto, estos Reports **no pueden** usarse con herramientas externas como Tabular Editor.
+> Los Reports de Power BI Desktop que usan una **Live Connection** a SSAS, Azure AS o a un Dataset en un Workspace de Power BI no contienen un Data model, y las herramientas externas como Tabular Editor **no pueden** conectarse a ellos.
 
 > [!IMPORTANT]
-> Los Reports de Power BI Desktop que editan directamente un modelo **Direct Lake** u otro modelo de Fabric no contienen un Data model. En su lugar, Tabular Editor abrirá el modelo directamente desde el servicio, que es básicamente lo mismo que hace Power BI Desktop.
+> Los Reports de Power BI Desktop que editan directamente un modelo **Direct Lake** u otro modelo de Fabric no contienen un Data model. Tabular Editor abre el modelo desde el servicio, igual que Power BI Desktop.
 
-Las herramientas externas pueden conectarse a la instancia de Analysis Services administrada por Power BI Desktop a través de un número de puerto específico asignado por Power BI Desktop. Cuando se inicia una herramienta directamente desde la cinta de opciones "Herramientas externas" de Power BI Desktop, este número de puerto se pasa a la herramienta externa como argumento de la línea de comandos. En el caso de Tabular Editor, esto hace que el Data model se cargue en Tabular Editor.
+Power BI Desktop asigna un número de puerto a la instancia de Analysis Services. Cuando se inicia una herramienta desde la cinta **Herramientas externas**, Power BI Desktop le pasa el número de puerto como argumento de línea de comandos y Tabular Editor carga el Data model.
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Una vez conectada a la instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX contra el Data model e incluso aplicar cambios a los metadatos del modelo mediante [bibliotecas cliente proporcionadas por Microsoft](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no se diferencia de cualquier otro tipo de instancia de Analysis Services.
+Una vez conectada a la instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX sobre el Data model e incluso aplicar cambios a los metadatos del modelo mediante las [bibliotecas cliente proporcionadas por Microsoft](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no se diferencia de cualquier otro tipo de instancia de Analysis Services.
 
 ## Operaciones de modelado compatibles
 
-A partir de la actualización de Power BI Desktop de junio de 2025, ya no hay operaciones de escritura no compatibles. En otras palabras, las herramientas de terceros ahora pueden modificar libremente cualquier aspecto del modelo semántico hospedado en Power BI Desktop, incluida la adición y eliminación de tablas y columnas, el cambio de tipos de datos, etc. Sin embargo, si estás usando una versión de Power BI Desktop anterior a la actualización de junio de 2025, consulta las limitaciones en el artículo [Limitaciones de Power BI Desktop](xref:desktop-limitations).
-
-Más información en [la entrada oficial del blog](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
+A partir de la actualización de junio de 2025 de Power BI Desktop, las herramientas externas pueden cambiar cualquier parte del modelo semántico alojado en Power BI Desktop, lo que incluye agregar y quitar tablas y columnas y cambiar tipos de datos. Para versiones anteriores de Power BI Desktop, consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations) y [la entrada oficial del blog](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).

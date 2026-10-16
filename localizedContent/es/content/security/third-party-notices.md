@@ -379,9 +379,11 @@ Esta licencia regula el uso del software adjunto. Si usas el software, aceptas e
 
 ## Licencia para Snowflake.Data
 
-                               Licencia Apache
-                           Versión 2.0, enero de 2004
-                        http://www.apache.org/licenses/
+```
+                           Apache License
+                       Version 2.0, January 2004
+                    http://www.apache.org/licenses/
+```
 
 TÉRMINOS Y CONDICIONES PARA EL USO, LA REPRODUCCIÓN Y LA DISTRIBUCIÓN
 
@@ -558,14 +560,16 @@ FIN DE LOS TÉRMINOS Y CONDICIONES
 
 APÉNDICE: Cómo aplicar la Licencia Apache a su trabajo.
 
-      Para aplicar la Licencia Apache a su trabajo, adjunte el siguiente
-      aviso estándar, sustituyendo los campos entre llaves "{}"
-      por su propia información identificativa. (No incluya
-      las llaves).  El texto debe incluirse con la sintaxis de
-      comentario adecuada para el formato del archivo. También recomendamos que
-      el nombre del archivo o de la clase y la descripción de su finalidad se incluyan en la
-      misma "página impresa" que el aviso de copyright para facilitar
-      la identificación en archivos de terceros.
+```
+  To apply the Apache License to your work, attach the following
+  boilerplate notice, with the fields enclosed by brackets "{}"
+  replaced with your own identifying information. (Don't include
+  the brackets!)  The text should be enclosed in the appropriate
+  comment syntax for the file format. We also recommend that a
+  file or class name and description of purpose be included on the
+  same "printed page" as the copyright notice for easier
+  identification within third-party archives.
+```
 
 Copyright (c) 2017 Snowflake Computing Inc. Todos los derechos reservados.
 
@@ -573,7 +577,9 @@ Con licencia bajo la Licencia Apache, Versión 2.0 (la "Licencia");
 no podrá usar este archivo salvo en cumplimiento de la Licencia.
 Puede obtener una copia de la Licencia en
 
-       http://www.apache.org/licenses/LICENSE-2.0
+```
+   http://www.apache.org/licenses/LICENSE-2.0
+```
 
 Salvo que lo exija la legislación aplicable o se acuerde por escrito, el software
 distribuido bajo la Licencia se distribuye "TAL CUAL",
@@ -585,9 +591,11 @@ las limitaciones bajo la Licencia.
 
 ## Licencia para Dynamic-LINQ.net
 
-                                 Licencia Apache
-                           Versión 2.0, enero de 2004
-                        http://www.apache.org/licenses/
+```
+                             Apache License
+                       Version 2.0, January 2004
+                    http://www.apache.org/licenses/
+```
 
 TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
 
@@ -764,14 +772,16 @@ FIN DE LOS TÉRMINOS Y CONDICIONES
 
 APÉNDICE: Cómo aplicar la Licencia Apache a su obra.
 
-      Para aplicar la Licencia Apache a su obra, adjunte el siguiente
-      aviso estándar, con los campos entre corchetes "[]"
-      sustituidos por su propia información identificativa. (No incluya
-      los corchetes).  El texto debe ir incluido en la sintaxis de
-      comentario adecuada para el formato del archivo. También recomendamos que
-      se incluya un nombre de archivo o de clase y una descripción del propósito en la
-      misma "página impresa" que el aviso de copyright, para facilitar
-      la identificación en archivos de terceros.
+```
+  To apply the Apache License to your work, attach the following
+  boilerplate notice, with the fields enclosed by brackets "[]"
+  replaced with your own identifying information. (Don't include
+  the brackets!)  The text should be enclosed in the appropriate
+  comment syntax for the file format. We also recommend that a
+  file or class name and description of purpose be included on the
+  same "printed page" as the copyright notice for easier
+  identification within third-party archives.
+```
 
 Copyright [2016] [Stef Heyenrath]
 
@@ -779,7 +789,9 @@ Con licencia conforme a la Licencia Apache, Versión 2.0 (la "Licencia");
 no podrá usar este archivo salvo en cumplimiento de la Licencia.
 Puede obtener una copia de la Licencia en
 
-       http://www.apache.org/licenses/LICENSE-2.0
+```
+   http://www.apache.org/licenses/LICENSE-2.0
+```
 
 Salvo que lo exija la legislación aplicable o se acuerde por escrito, el software
 distribuido bajo la Licencia se distribuye "TAL CUAL",

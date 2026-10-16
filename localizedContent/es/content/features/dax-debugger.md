@@ -2,7 +2,7 @@
 uid: dax-debugger
 title: Depurador de DAX
 author: Daniel Otykier
-updated: 2022-01-19
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ applies_to:
 
 No es ningún secreto que DAX es un lenguaje relativamente complejo y difícil de dominar. La mayoría de los desarrolladores de modelos de datos probablemente han experimentado una situación en la que el código DAX no devolvió el resultado esperado. En este caso, ayuda desglosar el código, variable por variable y llamada a función por llamada a función, para entender mejor qué está pasando.
 
-Hasta ahora, este “desglose” del código era una tarea tediosa y que consumía mucho tiempo, y a menudo implicaba capturar consultas DAX ejecutadas por herramientas cliente, para poder desglosarlas y ejecutar partes más pequeñas de las consultas en [DAX Studio](https://daxstudio.org/) o [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
+Hasta ahora, este «desglose» del código era una tarea tediosa y que llevaba mucho tiempo, y a menudo implicaba capturar consultas DAX ejecutadas por herramientas cliente para poder desglosarlas y ejecutar partes más pequeñas de las consultas en [DAX Studio](https://daxstudio.org/) o [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
 
 Tabular Editor 3 introduce el **Depurador de DAX**, una herramienta que hace que el proceso de depurar paso a paso el código DAX de tu modelo sea mucho, mucho más sencillo. A nivel conceptual, el depurador es similar a los depuradores tradicionales de los IDE, como el que se encuentra en Visual Studio al desarrollar aplicaciones C#.
 
@@ -60,7 +60,7 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 3. (Opcional) Agrega una o varias columnas al Pivot Grid en el área de Filtro, el área de Columnas o el área de Filas.
 4. Haz clic con el botón derecho en la celda de valor dentro del Pivot Grid y elige **Depurar este valor**.
 
-![Debug From Pivot](~/content/assets/images/features/debug-from-pivot.png)
+![Depurar desde tabla dinámica](~/content/assets/images/features/debug-from-pivot.png)
 
 # Depuración mediante una Consulta DAX
 
@@ -68,11 +68,11 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 2. Escribe o pega la consulta DAX. Normalmente, se trata de una consulta compuesta por una llamada a `SUMMARIZECOLUMNS` con una o varias medidas (explícitas), como la que generan los objetos Visual en Power BI.
 
 > [!TIP]
-> Puedes usar el [Performance Analyzer](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-performance-analyzer) en Power BI Desktop para capturar la consulta generada por los objetos Visual.
+> Puedes usar el [Performance Analyzer](https://docs.microsoft.com/power-bi/create-reports/desktop-performance-analyzer) en Power BI Desktop para capturar la consulta generada por los objetos Visual.
 
 3. Pulsa F5 para ejecutar la consulta en Tabular Editor 3. Localiza el valor que quieras depurar, haz clic con el botón derecho en la celda y elige **Depurar**.
 
-![Debug From Query](~/content/assets/images/features/debug-from-query.png)
+![Depurar desde consulta](~/content/assets/images/features/debug-from-query.png)
 
 # Vistas de depuración
 
@@ -113,7 +113,7 @@ Para añadir, duplicar o eliminar expresiones de Inspección, utilice el menú c
 
 La opción **Generar consulta** es idéntica al botón de la lupa de la columna **Valor**, como se resalta en la captura de pantalla siguiente. Al hacer clic en esto, el depurador abrirá un nuevo documento de Consulta DAX, que define tanto el contexto del cálculo como el propio cálculo, lo que te permitirá inspeccionar los resultados con más detalle. Esto resulta especialmente útil cuando la expresión de seguimiento es una expresión de tabla, como se muestra a continuación:
 
-![Inspect Watch](~/content/assets/images/inspect-watch.png)
+![Inspeccionar la ventana de inspección](~/content/assets/images/inspect-watch.png)
 
 > [!TIP]
 > ¿Cuál es la diferencia entre la vista **Locals** y la vista **Watch**?
@@ -125,19 +125,19 @@ La opción **Generar consulta** es idéntica al botón de la lupa de la columna 
 
 Esta vista proporciona información sobre el contexto de evaluación de DAX de la subexpresión actual. Por ejemplo, una expresión `CALCULATE` puede realizar una transición de contexto o agregar un filtro al contexto de evaluación, o un iterador `SUMX` puede agregar un contexto de fila.
 
-![Evaluation Context](~/content/assets/images/evaluation-context.png)
+![contexto de evaluación](~/content/assets/images/evaluation-context.png)
 
 Puede hacer doble clic en un elemento de la pila de contexto de evaluación, para llevar el foco a ese elemento. Esto hará que todas las expresiones de **Watch** se vuelvan a evaluar en el nuevo contexto (es decir, todos los contextos desde la parte inferior de la pila hasta e incluyendo el elemento actualmente enfocado). Esto se ilustra en la animación siguiente. Fíjese también en cómo puede inspeccionar el valor de columnas individuales en el contexto de fila activo desplazándose por las filas dentro de cualquier iteración activa:
 
-![Call Tree](~/content/assets/images/navigating-evaluation-context.gif)
+![Árbol de llamadas](~/content/assets/images/navigating-evaluation-context.gif)
 
 También puedes activar o desactivar filtros individuales del contexto de filtro externo (por ejemplo, las columnas de agrupación en la llamada a [`SUMMARIZECOLUMNS`](https://dax.guide/summarizecolumns) que generó la consulta o los filtros especificados en un Pivot Grid). Esto se ilustra en la animación siguiente. Los filtros activados o desactivados de esta manera se aplicarán tanto a Watch como a Locals.
 
-![Call Tree](~/content/assets/images/toggle-filters.gif)
+![Árbol de llamadas](~/content/assets/images/toggle-filters.gif)
 
 Por último, puede examinar las primeras 1000 filas de cualquier iterador y establecer el contexto de fila actual en una fila específica dentro de esas primeras 1000 haciendo clic en el botón Zoom de la columna **Fila**.
 
-![Browse Row Contexts](~/content/assets/images/browse-row-contexts.png)
+![Explorar contextos de fila](~/content/assets/images/browse-row-contexts.png)
 
 ## Árbol de llamadas
 
@@ -213,7 +213,7 @@ Actualmente, el Depurador de DAX tiene las siguientes limitaciones:
 - Actualmente no se admiten las consultas que contengan medidas implícitas o cálculos con ámbito de consulta.
 - Al examinar las primeras 1000 filas de un iterador que proviene de una expresión de tabla filtrada, la fila seleccionada en la ventana de exploración puede no corresponder siempre al contexto de fila actual en la pila de contexto de evaluación (escribe `CALCULATETABLE('<table name>')` en la ventana **Watch** para inspeccionar el contexto de fila actual).
 - Actualmente, el depurador solo permite depurar expresiones DAX en medidas.
-- Los [cálculos visuales](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview) no se pueden depurar, ya que se definen mediante columnas con alcance de consulta. Actualmente, el depurador no admite objetos con ámbito de consulta.
+- Los [cálculos Visual](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview) no se pueden depurar, ya que se definen mediante columnas con alcance de consulta. Actualmente, el depurador no admite objetos con ámbito de consulta.
 - Si una medida se modifica mediante un elemento de cálculo en el contexto de filtro, los resultados parciales mostrados en la vista Watch / Locals del depurador pueden ser incorrectos.
 
 Si encuentras un problema con el depurador, distinto de los indicados anteriormente, publícalo en nuestro [seguimiento de incidencias](https://github.com/TabularEditor/TabularEditor3/issues) en el sitio de soporte de la comunidad de TE3 en GitHub.

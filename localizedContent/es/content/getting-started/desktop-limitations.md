@@ -2,7 +2,7 @@
 uid: desktop-limitations
 title: Limitaciones de Power BI Desktop (obsoletas)
 author: Morten Lønskov
-updated: 2023-08-21
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Limitaciones de Power BI Desktop
 
-Al usar Tabular Editor (cualquier edición) como [herramienta externa para Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), hay algunas limitaciones que debes tener en cuenta.
+Al usar Tabular Editor (cualquier edición) como [herramienta externa para Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools), hay algunas limitaciones que debes tener en cuenta.
 
 Las limitaciones mencionadas en este artículo también se aplican a Tabular Editor 2.x.
 
@@ -33,7 +33,7 @@ Más información en [la entrada oficial del blog](https://powerbi.microsoft.com
 
 Al usar Power BI, encontrarás tres tipos de archivo habituales:
 
-- **.pbix** (Power BI Report)
+- **.pbix** (Report de Power BI)
 - **.pbit** (Plantilla de Power BI)
 - **.pbip** (Proyecto de Power BI)
 
@@ -58,11 +58,11 @@ Las herramientas externas pueden conectarse a la instancia de Analysis Services 
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Una vez conectada a la instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX sobre el Data model e incluso aplicar cambios a los metadatos del modelo mediante las [bibliotecas de cliente proporcionadas por Microsoft](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no difiere de cualquier otro tipo de instancia de Analysis Services.
+Una vez conectada a una instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX sobre el Data model e incluso aplicar cambios a los metadatos del modelo mediante las [bibliotecas de cliente proporcionadas por Microsoft](https://docs.microsoft.com/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no difiere de cualquier otro tipo de instancia de Analysis Services.
 
 ## Operaciones de modelado del Data model
 
-Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis Services, existen algunas limitaciones importantes respecto al tipo de cambios que las herramientas externas pueden aplicar a los metadatos del modelo. Estas se enumeran [en la documentación oficial de herramientas externas](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) y se repiten aquí para mayor comodidad:
+Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis Services, existen algunas limitaciones importantes respecto al tipo de cambios que las herramientas externas pueden aplicar a los metadatos del modelo. Estas se enumeran [en la documentación oficial de herramientas externas](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations) y se repiten aquí para mayor comodidad:
 
 ### [Antes de junio de 2025](#tab/postjune2023)
 
@@ -87,7 +87,7 @@ Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis 
 
 <a name="columns">1</a> - Al usar herramientas externas para conectarse a la instancia de AS, se admite cambiar el tipo de datos de una columna; sin embargo, no se admite renombrar columnas.
 
-Los _archivos de proyecto_ de Power BI Desktop ofrecen un alcance más amplio de operaciones de escritura compatibles. Los objetos y las operaciones que no se admiten al usar Tabular Editor como herramienta externa pueden estar disponibles al editar los archivos de proyecto de Power BI Desktop. Consulta la documentación de Microsoft para obtener más información: [Proyectos de Power BI Desktop: creación del modelo](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
+Los _archivos de proyecto_ de Power BI Desktop ofrecen un alcance más amplio de operaciones de escritura compatibles. Los objetos y las operaciones que no se admiten al usar Tabular Editor como herramienta externa pueden estar disponibles al editar los archivos de proyecto de Power BI Desktop. Consulta la documentación de Microsoft para obtener más información: [Proyectos de Power BI Desktop: creación del modelo](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring).
 
 ### [Antes de junio de 2023](#tab/prejune2023)
 
@@ -124,7 +124,7 @@ Se puede acceder a todos los metadatos del Tabular Object Model (TOM) en modo de
 
 Cuando usas Tabular Editor (cualquier edición) como herramienta externa para Power BI Desktop, todas las operaciones no compatibles según la lista anterior se deshabilitan de forma predeterminada. En otras palabras, Tabular Editor no te permitirá agregar o cambiar el nombre de tablas o columnas, realizar actualizaciones, etc. en un modelo de Power BI Desktop.
 
-Aunque no sea compatible, resulta que se pueden aplicar varias operaciones sin causar problemas. Por este motivo, Tabular Editor incluye una opción que permite a los usuarios avanzados experimentar habilitando todas las operaciones de modelado de datos, incluso cuando se conecta a un Data model de Power BI Desktop. Puedes habilitar esta opción en **Herramientas > Preferencia > Power BI > Permitir operaciones de modelado _no admitidas_**, pero asegúrate de entender los riesgos antes de hacerlo.
+Aunque no esté admitido, resulta que aún se pueden aplicar varias operaciones sin causar problemas. Por este motivo, Tabular Editor incluye una opción que permite a los usuarios avanzados experimentar, habilitando todas las operaciones de modelado de datos incluso al estar conectados a un Data model de Power BI Desktop. Puedes habilitar esta opción en **Herramientas > Preferencias > Power BI > Permitir operaciones de modelado _no compatibles_**, pero asegúrate de comprender los riesgos antes de hacerlo.
 
 > [!NOTE]
 > En Tabular Editor 2.x, esta configuración está disponible en **Archivo > Preferencia > Permitir características no admitidas de Power BI (experimental)**

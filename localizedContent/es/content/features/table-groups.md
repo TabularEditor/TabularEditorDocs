@@ -2,7 +2,7 @@
 uid: table-groups
 title: Grupos de tablas
 author: Daniel Otykier
-updated: 2026-06-24
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,14 +25,14 @@ Los grupos de tablas son una nueva funcionalidad disponible en Tabular Editor 3 
 
 Puedes configurar los grupos de tablas haciendo clic con el botón derecho en una tabla y eligiendo la opción de menú **Crear > Grupo de tablas**, o bien especificando un nombre para el grupo de tablas en la **vista de propiedades** mientras seleccionas una o varias tablas.
 
-También puedes usar el submenú contextual **Mover al grupo** al hacer clic con el botón derecho en una o varias tablas seleccionadas. El submenú muestra los grupos de tablas existentes, una opción **(Nuevo...)** que crea un nuevo grupo a partir de las tablas seleccionadas y abre el editor para asignarle un nombre, y una opción **(Ninguno)** que elimina la asignación del grupo de tablas.
+También puedes usar, con clic derecho, el submenú **Mover al grupo** en una o varias tablas seleccionadas. El submenú enumera los grupos de tablas existentes, una opción **(Nuevo...)** que crea un grupo nuevo a partir de las tablas seleccionadas y abre el editor para asignarle un nombre, y una opción **(Ninguno)** que quita la asignación al grupo de tablas.
 
 Las tablas se pueden mover entre grupos de tablas arrastrando y soltando en el Explorador TOM. Ten en cuenta que, a diferencia de las carpetas de visualización para medidas, columnas y jerarquías, los grupos de tablas no se pueden anidar.
 
 Al hacer clic con el botón derecho en un grupo de tablas en el Explorador TOM, obtienes las mismas opciones del menú contextual que si hubieras seleccionado la tabla o las tablas dentro de ese grupo de tablas.
 
 > [!NOTE]
-> Los grupos de tablas son una característica exclusiva de Tabular Editor. Las herramientas cliente (como Excel, Power BI Desktop, etc.) no contemplarán los grupos de tablas, ya que el [formato CSDL](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), que especifica el esquema conceptual del modelo de datos, no admite los grupos de tablas.
+> Los grupos de tablas son una característica exclusiva de Tabular Editor. Las herramientas cliente (como Excel, Power BI Desktop, etc.) no tendrán en cuenta los grupos de tablas, ya que el [formato CSDL](https://learn.microsoft.com/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), que especifica el esquema conceptual del Data model, no los admite.
 
 ## Metadatos y scripts
 
@@ -41,37 +41,37 @@ Tabular Editor usa una anotación en cada tabla para especificar a qué grupo de
 A continuación se muestra un ejemplo de C# Script que recorre todas las tablas de un modelo y las organiza en grupos de tablas en función de su tipo y uso:
 
 ```csharp
-// Recorrer todas las tablas:
+// Loop through all tables:
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
     {
-        table.TableGroup = "Grupos de cálculo";
+        table.TableGroup = "Calculation Groups";
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tablas que contienen medidas visibles, pero sin relaciones con otras tablas
-        table.TableGroup = "Grupos de medidas";
+        // Tables containing visible measures, but no relationships to other tables
+        table.TableGroup = "Measure Groups";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tablas que están exclusivamente en el lado "muchos" de las relaciones:
-        table.TableGroup = "Hechos";
+        // Tables exclusively on the "many" side of relationships:
+        table.TableGroup = "Facts";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tablas sin ninguna relación, que son tablas calculadas y no tienen medidas:
-        table.TableGroup = "Tablas de parámetros";
+        // Tables without any relationships, that are Calculated Tables and do not have measures:
+        table.TableGroup = "Parameter Tables";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tablas en el lado "uno" de las relaciones:
-        table.TableGroup = "Dimensiones";
+        // Tables on the "one" side of relationships:
+        table.TableGroup = "Dimensions";
     }
     else
     {
-        // Todas las demás tablas:
-        table.TableGroup = "Varios";
+        // All other tables:
+        table.TableGroup = "Misc";
     }
 }
 ```

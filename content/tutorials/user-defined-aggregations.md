@@ -2,7 +2,7 @@
 uid: user-defined-aggregations
 title: User-defined Aggregations
 author: Just Blindbæk
-updated: 2026-02-19
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,7 @@ Dimension tables are set to **Dual** storage mode so they can participate in bot
 Setting tables to Dual or DirectQuery storage mode alone does not enable aggregation routing — it only creates a composite model where queries are directed based on storage mode. The **Alternate Of** property is what activates user-defined aggregations: it creates an explicit column-level mapping that tells the engine "when a query asks for this column from the detail table, you can use this pre-aggregated column instead." Without `Alternate Of`, the engine has no basis for substitution and will not route queries to the aggregation table. The engine evaluates every incoming query against these mappings to determine whether the aggregation table can answer it, and falls back to DirectQuery only when it cannot.
 
 > [!IMPORTANT]
-> DirectQuery comes with known limitations that affect model design and report functionality. The most relevant for this pattern are: queries against DirectQuery columns depend on source response time; cloud sources have a one-million-row return limit per query; the automatic date/time hierarchy is unavailable for DirectQuery tables; and some DAX functions are not supported in DirectQuery mode. Review the full list before proceeding: [Use DirectQuery in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery).
+> DirectQuery comes with known limitations that affect model design and report functionality. The most relevant for this pattern are: queries against DirectQuery columns depend on source response time; cloud sources have a one-million-row return limit per query; the automatic date/time hierarchy is unavailable for DirectQuery tables; and some DAX functions are not supported in DirectQuery mode. Review the full list before proceeding: [Use DirectQuery in Power BI Desktop](https://learn.microsoft.com/power-bi/connect-data/desktop-use-directquery).
 
 ## Step 1: Set dimension tables to Dual storage mode
 
@@ -170,5 +170,5 @@ In Power BI Desktop, the model view shows the same structure with storage mode i
 
 ## Further Reading
 
-- [Microsoft Docs: User-defined aggregations in Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
-- [Microsoft Docs: Storage modes in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
+- [Microsoft Docs: User-defined aggregations in Power BI](https://learn.microsoft.com/power-bi/transform-model/aggregations-advanced)
+- [Microsoft Docs: Storage modes in Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-storage-mode)

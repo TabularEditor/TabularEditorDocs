@@ -2,7 +2,7 @@
 uid: mcp-server
 title: MCP server
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -200,7 +200,7 @@ With **Model metadata > Write**, an agent changes your model by creating a [C# s
 
 A script can do anything the C# scripting API supports, for example add measures, columns, calculation groups, perspectives, translations, relationships and refresh policies, or bulk-rename and format objects. An agent-run script has these properties:
 
-- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. See @undo-redo.
+- its changes are one undo entry, **C# script (MCP)**, and **Ctrl+Z** undoes the whole script. If a document has focus, **Ctrl+Z** undoes typing in the document. Click the TOM Explorer first, or select **Undo C# script (MCP)** in the **Edit** menu. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 - if the script throws an exception part-way through, all its changes are rolled back.
 - the agent receives a list of every object the script added, changed or removed, plus anything the script printed.
 - messages from `Output`, `Info`, `Warning` or `Error` are returned to the agent as part of the result, and no dialog opens.
@@ -281,7 +281,7 @@ Select **Regenerate token** (the refresh button beside the token) to issue a new
 
 When you use the MCP server, Tabular Editor doesn't contact an AI provider and only answers tool calls from processes on your machine, over a loopback connection. The knowledge base the agent searches is a local database that ships with Tabular Editor and is updated from Tabular Editor's service.
 
-Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no data values from Tabular Editor.
+Your agent sends data to its provider under your subscription and that provider's terms, and your agent's settings control what is sent. With **Model data** at its default, **Deny**, the agent receives no DAX query results from Tabular Editor. Values typed into the model definition, such as a `DATATABLE` expression or an **Enter data** table, are model metadata and reach the agent under **Model metadata > Read**.
 
 See @security-privacy for the wider picture, including the [AI Assistant](xref:ai-assistant), which calls a provider directly and is configured separately.
 
@@ -292,7 +292,7 @@ The MCP server is on by default, and any user can turn it off. Administrators ca
 | Policy | Edition | What it does |
 | -- | -- | -- |
 | `DisableMcpServer` | All | Removes the MCP server. The AI Assistant chat is unaffected |
-| `DisableAi` | All | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component off the machine |
+| `DisableAi` | All | Turns off all AI functionality, the MCP server included. With a `REG_DWORD` value of `1`, the installer also leaves the AI component out of new installations and removes it on upgrade |
 | `RequireMcpAccessToken` | All | Forces token authentication and locks the preference |
 | `DisableCSharpScripts` | All | Stops an agent running a C# script and drafting one into a document. Drafting a DAX query, and every tool that only reads, is unaffected |
 | `BlockUnsafeScripts` | Enterprise | Allows only scripts that stay within the model, for every script in Tabular Editor. An agent script that accesses files, the network, other processes or external assemblies doesn't run, and no review document opens |

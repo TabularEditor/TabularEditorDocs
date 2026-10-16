@@ -2,7 +2,7 @@
 uid: powerbi-xmla
 title: Edición a través del punto de conexión XMLA
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,28 +13,28 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Solo puntos de conexión XMLA de Premium Per User
+          note: Solo puntos de conexión XMLA de Premium por usuario
         - edition: Enterprise
           full: true
 ---
 
 # Edición de un modelo semántico de Power BI mediante el punto de conexión XMLA
 
-Puedes usar Tabular Editor 3 para conectarte a un modelo semántico de Power BI publicado en el servicio Power BI a través del [punto de conexión XMLA](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). El punto de conexión XMLA está disponible para los Workspace asignados a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU).
+Puedes usar Tabular Editor 3 para conectarte a un modelo semántico de Power BI publicado en el servicio de Power BI a través del [punto de conexión XMLA](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools). El punto de conexión XMLA está disponible para los Workspace asignados a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU).
 
 > [!NOTE]
 > Las licencias de Power BI Pro no son suficientes para acceder a los modelos semánticos de Power BI en un Workspace compartido. Se requiere una capacidad de Fabric, una capacidad de Power BI Embedded, una capacidad Premium heredada o una licencia Premium por usuario para tener acceso a XMLA.
 
 ## Requisitos previos
 
-Tabular Editor requiere que el punto de conexión XMLA permita tanto el acceso de lectura como el de escritura. Microsoft habilitó de forma predeterminada el acceso de lectura y escritura a XMLA en todas las SKU de capacidad de Fabric y Power BI en junio de 2025. Si no puedes conectarte, pide a [tu administrador de capacidad](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) que compruebe la configuración descrita en @xmla-as-connectivity.
+Tabular Editor requiere que el punto de conexión XMLA permita tanto el acceso de lectura como el de escritura. Microsoft habilitó de forma predeterminada el acceso de lectura y escritura a XMLA en todas las SKU de capacidad de Fabric y Power BI en junio de 2025. Si no puedes conectarte, pide a [tu administrador de capacidad](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) que verifique la configuración descrita en @xmla-as-connectivity.
 
 > [!IMPORTANT]
 > Si usas Tabular Editor 3, ten en cuenta las [limitaciones de licencia](xref:editions) para conectarte al punto de conexión XMLA de Power BI. Necesitas al menos Tabular Editor 3 Business o Edición Enterprise, según el tipo de Workspace de Power BI que uses.
 
 ## Limitaciones
 
-Al conectarte a un modelo semántico a través del punto de conexión XMLA, todas las operaciones de modelado de datos compatibles con el [Tabular Object Model (TOM)](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) están disponibles para su edición. En otras palabras, las [Limitaciones de Power BI Desktop](xref:desktop-limitations) no se aplican cuando se edita un modelo semántico a través del punto de conexión XMLA del servicio Power BI.
+Al conectarte a un modelo semántico a través del punto de conexión XMLA, todas las operaciones de modelado de datos compatibles con el [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) están disponibles para su edición. En otras palabras, las [Limitaciones de Power BI Desktop](xref:desktop-limitations) no se aplican cuando se edita un modelo semántico a través del punto de conexión XMLA del servicio Power BI.
 
 ## Flujo de trabajo
 
@@ -50,5 +50,5 @@ El flujo de trabajo es el siguiente:
 ## Pasos siguientes
 
 - @new-pbi-model
-- @workspace-mode
+- @Workspace-mode
 - @importing-tables

@@ -1,7 +1,7 @@
 # Tabular Editor 3 BETA-17.4
 
-> [!IMPORTANT]
-> Hay una versión más reciente de Tabular Editor disponible. Puedes encontrar la versión más reciente [aquí](https://docs.tabulareditor.com/references/release-notes).
+> [!IMPORTANTE]
+> Hay disponible una versión más reciente de Tabular Editor. Puedes encontrar la última versión [aquí](https://docs.tabulareditor.com/references/release-notes).
 
 - Descarga [Tabular Editor 3 BETA-17.4](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-17.4.x86.msi)
 - Descarga [Tabular Editor 3 BETA-17.4 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-17.4.x64.msi)

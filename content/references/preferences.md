@@ -2,7 +2,7 @@
 uid: preferences
 title: Controlling preferences
 author: Daniel Otykier
-updated: 2026-09-16
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -1050,7 +1050,7 @@ Password for proxy authentication (stored encrypted).
 
 ##### *Use default credentials* (enabled)
 
-Use the current Windows credentials for proxy authentication. This implements the [same behavior as Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
+Use the current Windows credentials for proxy authentication. This implements the [same behavior as Power BI Desktop](https://docs.microsoft.com/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
 
 ##### *Bypass proxy on local* (enabled)
 
@@ -1062,4 +1062,4 @@ List of addresses that should bypass the proxy (e.g., `localhost;*.company.local
 
 ## Next Steps
 
-For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide (Personalizing TE3)[xrefid: personalizing-te3].
+For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide [Personalizing TE3](xref:personalizing-te3).
