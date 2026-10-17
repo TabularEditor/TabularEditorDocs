@@ -47,7 +47,7 @@ Output(sb.ToString());
 
 **Output:**
 
-```text
+```
 Fields:
   product_name
   product_category
