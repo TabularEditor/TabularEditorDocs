@@ -7,7 +7,7 @@ URL, visits each unique target once, and reports references to broken targets
 (missing files, missing fragments). Local failures are errors (nonzero exit);
 external failures are warnings (network issues are often transient or the
 target blocks bots), emitted as a copy-paste list of URLs to verify by hand.
-
+TEST
 The functional core (extract, resolve, validate) is pure; the imperative shell
 does filesystem, HTTP, and reporting.
 """
