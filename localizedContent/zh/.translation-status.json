@@ -375,8 +375,8 @@
       "status": "translated"
     },
     "features/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:7dc2adbeda0cb31f2e08f9530d215f40d39da97a305b2d70c361c71377a687cf",
+      "status": "translated"
     },
     "features/unsaved-changes.md": {
       "sourceHash": "sha256:b4276f4a2d3144459dfc5e6fa6f6e71d560547cad60cc6c6227c8a2207fc3651",
@@ -547,8 +547,8 @@
       "status": "translated"
     },
     "getting-started/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:adf238552f81c08ae51d0b01e45e454d85808fa4cb5f0346102572f8c292fd10",
+      "status": "translated"
     },
     "getting-started/training-telearn.md": {
       "sourceHash": "sha256:cba2b907335edf7e1310d6323c063305cbed3c66013758b932d91466394b4d85",
@@ -631,7 +631,7 @@
       "status": "translated"
     },
     "how-tos/formula-fixup-dependencies.md": {
-      "sourceHash": "sha256:f1b335d4a4c069ac21bdd9c20b0e34ed6442c63307f9d3a1cfdb29e4992daec5",
+      "sourceHash": "sha256:47edeccaae5f56e9ee945ebb0361b52f61ca0dc746445cb17413f13e5cfdcd1d",
       "status": "translated"
     },
     "how-tos/import-export-translations.md": {
@@ -791,8 +791,8 @@
       "status": "translated"
     },
     "how-tos/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:6b2bda5655200d7d8468b139409d10f4024adeb90e0ae3177833c7003df10ec9",
+      "status": "translated"
     },
     "how-tos/undo-redo.md": {
       "sourceHash": "sha256:857971043360cef22eb83ee113a0ebbe86160e1250ecfce378e7824e924fcc2d",
@@ -1179,8 +1179,8 @@
       "status": "translated"
     },
     "references/release-notes/3_0_3.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:e34eb6b6cc40a550c2b1e5555ab3dd5ae9aab4fe150191da8b217f7e1c44b7f8",
+      "status": "translated"
     },
     "references/release-notes/3_0_4.md": {
       "sourceHash": "sha256:0745acfac1154de9e0b61300052c871454382fff3120fa89b0bf5b794522bcb1",
@@ -1283,8 +1283,8 @@
       "status": "translated"
     },
     "references/release-notes/3_1_2.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:9f7ef93ca36c28f28b2a61b62b7cf68738da2a31a73abbc67ebacd4be6b05915",
+      "status": "translated"
     },
     "references/release-notes/3_1_3.md": {
       "sourceHash": "sha256:63da26ecf5029706dd4a732a7494b15ff4df4bbf3d4e1e7743f61b46d979d2ef",
@@ -1419,8 +1419,8 @@
       "status": "translated"
     },
     "references/release-notes/3_3_4.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:dabac3bc52ea3ecb59ffc39e10a13d252a29530412a604c284cf33fa988e7ccb",
+      "status": "translated"
     },
     "references/release-notes/3_3_5.md": {
       "sourceHash": "sha256:b88d6bc31375caca6ccbc5af1f95d1c64a64bac5d5861d540a5a111046ec2709",
@@ -1527,8 +1527,8 @@
       "status": "translated"
     },
     "references/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:dbc3800f9348e300524d13c2beacfc036c700b0df898692e39929d7b4bfcb440",
+      "status": "translated"
     },
     "references/user-options.md": {
       "sourceHash": "sha256:ad092f6088edad3d3e8bd124c227f618338b081a453118946880a2fdc8dccf9d",
@@ -1555,8 +1555,8 @@
       "status": "translated"
     },
     "security/security-privacy.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:5d9f2e13cdc658c57cd7a23bcc73bedef02662c7efa62cb1bf1e780e53b281cd",
+      "status": "translated"
     },
     "security/terms.md": {
       "sourceHash": "sha256:90fd51f0cff45e9e16b2c200fc4dc3ccf769b97a3c6afcd09b7a688cfc5b87f0",
@@ -1567,8 +1567,8 @@
       "status": "copied"
     },
     "security/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:aecf5ca69ba24fc448be9fbff14d4662f5b333222a4ddec6bb6a064575481147",
+      "status": "translated"
     },
     "toc.yml": {
       "sourceHash": "sha256:11d5df2671e45efed1baf56cd10c6634fc48f5f34b8f40d5b83456258a929108",
@@ -1631,8 +1631,8 @@
       "status": "translated"
     },
     "troubleshooting/toc.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:eb90344041259d96a138c386edc99bc3c992c331f293f88539c4deca6fffd323",
+      "status": "translated"
     },
     "tutorials/calendars.md": {
       "sourceHash": "sha256:42d5fbcac1800e22943c402afc8cc0ab45ecae62d802ffafb492d37a3e4096b2",
@@ -1727,126 +1727,159 @@
       "status": "translated"
     },
     "whats-new/3-11-0.html": {
-      "sourceHash": "sha256:8e741c7bee681e80aef9a0cac12b2c4a08193ba1a64e896f825400209a615dd0",
-      "status": "translated"
+      "sourceHash": "sha256:f05c90ee23a66c16c7f7e97f10f44e50bdd772f3049b4d0e75def4e1562c6664",
+      "status": "copied"
     },
     "whats-new/3-12-0.html": {
-      "sourceHash": "sha256:1185bd5e0f896cf0241dba6051a1d23f8122df33d35ca629751388ca46e5411b",
-      "status": "translated"
+      "sourceHash": "sha256:ac4db83ba7bf38d569d8888e29c900ac98bd8528159db2439b310bcb4613ce33",
+      "status": "copied"
     },
     "whats-new/3-12-1.html": {
-      "sourceHash": "sha256:0e1800850f435b7939eaf29d4c05564b315198f49bd8a9539dd180c2289aaca4",
-      "status": "translated"
+      "sourceHash": "sha256:05454034ab0295fc27adbd530c98851b2c6d978d1297620c005cbac8723068e2",
+      "status": "copied"
     },
     "whats-new/3-13-0.html": {
-      "sourceHash": "sha256:fe072740d52a6d0664d5a54627f904603dca096280c9a0c3e4d67fa0dfa89236",
-      "status": "translated"
+      "sourceHash": "sha256:338340ce38e3d4e0c78ca8939e9f682a39a84144c10c7775b2ebd45fd0a013d8",
+      "status": "copied"
     },
     "whats-new/3-14-0.html": {
-      "sourceHash": "sha256:516c949f7443084eeb6e3c4c5981e5ff4960ddd65622dd0f34b5b9c47b81431e",
-      "status": "translated"
+      "sourceHash": "sha256:0ebf84c1ed96b8df959859fedb4294d14f1a785f7d90c898a23552a840a5d66e",
+      "status": "copied"
     },
     "whats-new/3-15-0.html": {
-      "sourceHash": "sha256:21384e1d1473d31ef1d1076640a94dc9f48033a072ae9e56e37b700954319083",
-      "status": "translated"
+      "sourceHash": "sha256:be61fe699768f176d186e6121c697e035fabed64aa567550d5e9636e31ee0b5c",
+      "status": "copied"
     },
     "whats-new/3-16-0.html": {
-      "sourceHash": "sha256:2ea751dad6a56088eb1e35934df0e3def7ceb65e15877e869778a2c946bbb322",
-      "status": "translated"
+      "sourceHash": "sha256:305e03f418ff43c6b4462466e6df3a048aabbdd677da448067f9f63e9d4131da",
+      "status": "copied"
     },
     "whats-new/3-17-0.html": {
-      "sourceHash": "sha256:5d0ae23d2d1a98813d3c06f3c50039838fe3b4e024ef3b4d61462469d9d904a3",
-      "status": "translated"
+      "sourceHash": "sha256:66246fbfd6abce8bb7bd60f3c922f470b96c4a78315fbf1a9b862db29983b50c",
+      "status": "copied"
     },
     "whats-new/3-17-1.html": {
-      "sourceHash": "sha256:5d0ae23d2d1a98813d3c06f3c50039838fe3b4e024ef3b4d61462469d9d904a3",
-      "status": "translated"
+      "sourceHash": "sha256:66246fbfd6abce8bb7bd60f3c922f470b96c4a78315fbf1a9b862db29983b50c",
+      "status": "copied"
     },
     "whats-new/3-18-0.html": {
-      "sourceHash": "sha256:379bc949c979ed11804eacb3090b760cb0b67f7e10d4a01b1b7e314b1fe98739",
-      "status": "translated"
+      "sourceHash": "sha256:11676c6ea80f5de2ee940db6e5e07bfb1c4d654c363ce8172034e56ea09ad766",
+      "status": "copied"
     },
     "whats-new/3-18-1.html": {
-      "sourceHash": "sha256:264150226e01169f6dd8569bb48d8c13192aedd54d78d17b51df115ca260c0c9",
-      "status": "translated"
+      "sourceHash": "sha256:f38aa0f26bb0eec38c07d2926df761a9237ae36fdb8903b71e4b1a115897ef3c",
+      "status": "copied"
     },
     "whats-new/3-18-2.html": {
-      "sourceHash": "sha256:07289f60b049811a09e673f8642fe4dcbc50efddb8ad77718cf55d16e4b69200",
-      "status": "translated"
+      "sourceHash": "sha256:3aaee936b3713c578ac67b6bf55cfd638a90fd2d1fdca3b9d06d971af73da0ce",
+      "status": "copied"
     },
     "whats-new/3-19-0.html": {
-      "sourceHash": "sha256:264b6c6843e8a6c737c5e88953856e08a9ece0ebd39ac78b2a58cef1b69796db",
-      "status": "translated"
+      "sourceHash": "sha256:c97ca1eaa3a079bbe8ee4ce15231468a917535875b99bf94b66dbfe850ea78f1",
+      "status": "copied"
     },
     "whats-new/3-20-0.html": {
-      "sourceHash": "sha256:165affb599d769434c2e227fc63aa174509c08ec5a501e357ff028b3bb26bbd7",
-      "status": "translated"
+      "sourceHash": "sha256:800086470837f7c0ef96b37778a29897895b6ecc41e8b6aa6127b8dbed13370a",
+      "status": "copied"
     },
     "whats-new/3-21-0.html": {
-      "sourceHash": "sha256:0560eecc9d57bfa393d9415121f00a06c9e0692db7bbf924c81fd5e32f99283c",
-      "status": "translated"
+      "sourceHash": "sha256:433f0fca243c8efa8f7e643fc432faaedfc6ea9d43c4ddbabed6c55468c15afb",
+      "status": "copied"
     },
     "whats-new/3-22-0.html": {
-      "sourceHash": "sha256:d5c122abcc84f8fdea50724e96e35435f1ce4e71e204cbd4b4bf2822dc98bbb1",
-      "status": "translated"
+      "sourceHash": "sha256:d8dadb26e6e39ddb632129d367d22c2512cc8b1cb1f0b4ff9261b2158440fa11",
+      "status": "copied"
     },
     "whats-new/3-22-1.html": {
-      "sourceHash": "sha256:65af209383626dfef5ecc828f1d6050cf336ff370c7f3b58c2233352ab39ef02",
-      "status": "translated"
+      "sourceHash": "sha256:132726eaf4923afa154e884b8084fb50cde7472a2e18de4ec06a1d8b8ee8d990",
+      "status": "copied"
     },
     "whats-new/3-23-0.html": {
-      "sourceHash": "sha256:c8a1848ae04394a58fe7146ebfa57ace75dafed1fbe735e6feba8a43d805ac11",
-      "status": "translated"
+      "sourceHash": "sha256:57003c0ce3231886266229e77c19fd45b4e0c8a8d816b79d2af5201117f44630",
+      "status": "copied"
     },
     "whats-new/3-23-1.html": {
-      "sourceHash": "sha256:258468e5a7e6f2437aa12b410807dceabf6d5b5060c8607ea88b157ee8dc2b8f",
-      "status": "translated"
+      "sourceHash": "sha256:792a9676ccb8bbe2dcf7d1df81d3b3307567e1af2cc15567c78415b2e24d4ec8",
+      "status": "copied"
     },
     "whats-new/3-24-0.html": {
-      "sourceHash": "sha256:addd6ae83a458d866e21cf5b566afd011b438d822206582320568f2a5efa2c5b",
-      "status": "translated"
+      "sourceHash": "sha256:7f944c252f7a8c422aa266d7a6fc28a9c05ae602a41e7846f04249d4fc48ef6a",
+      "status": "copied"
     },
     "whats-new/3-24-1.html": {
-      "sourceHash": "sha256:971a290fd477bc5955d7e55e0868b296e8b4016774ca60206f9e04d719a8e273",
-      "status": "translated"
+      "sourceHash": "sha256:c43935a7d057dd95816594b369f06182a924aa6a892fad182b0eabe93a7e9501",
+      "status": "copied"
     },
     "whats-new/3-24-2.html": {
-      "sourceHash": "sha256:b4c35a93026703f8aa4b295d1bca544dd64c9fbbd0f191e6c484aaed0d501d02",
-      "status": "translated"
+      "sourceHash": "sha256:7a5a2de978c00c85cefdbc798ba050b892549dc039334f947ffffbfd8aa9c6a3",
+      "status": "copied"
     },
     "whats-new/3-25-0.html": {
-      "sourceHash": "sha256:ecb851a842a1bb429299b338684019c5e58c5a41d49e50f52bde33460e1d17c4",
-      "status": "translated"
+      "sourceHash": "sha256:d64545aff7bba1e17aa5ea0c1a64c25699af771f3b12a5ce4d5a1b6e67f8e28c",
+      "status": "copied"
     },
     "whats-new/3-25-1.html": {
-      "sourceHash": "sha256:0164edb73af4cbdf606868a921664852b195a2230d52ae4df0b77028c40ea798",
-      "status": "translated"
+      "sourceHash": "sha256:a22b5f95bd8281add36952622203e4249a87421aa1f355eb2b8fabea4d52ebd3",
+      "status": "copied"
     },
     "whats-new/3-25-2.html": {
-      "sourceHash": "sha256:d698e79f8caf50a91fb5563c900116a4ed42d0259db6412db4cc0e1a44ad7dca",
-      "status": "translated"
+      "sourceHash": "sha256:7dd48026b0f54b9bd1a0087c7a3155cda91de983325d1a59280ff75550f39875",
+      "status": "copied"
     },
     "whats-new/3-25-3.html": {
-      "sourceHash": "sha256:fa93ee8ef8188bc519bde65fb7c222301d13ac1867b883028505bc3a5a7e76c0",
-      "status": "translated"
+      "sourceHash": "sha256:b005281766f013aba39b364a5233f5a3308bef9fc7c98ddf77a6330d625e8878",
+      "status": "copied"
+    },
+    "whats-new/3-26-0.html": {
+      "sourceHash": "sha256:e43a553222c48f862abe7993dc460ee413a0b843c62cc0ad18c8ee4669af8cb1",
+      "status": "copied"
+    },
+    "whats-new/3-26-1.html": {
+      "sourceHash": "sha256:68c34fd5ab34fb25fbf53b557a43128c142fdbc69895090ebb76be287698b5d4",
+      "status": "copied"
+    },
+    "whats-new/3-26-2.html": {
+      "sourceHash": "sha256:9052c24f89a6030cebc66e1dfe7ae2ee4b5dc2f845c6be3f14f02afa04fdc262",
+      "status": "copied"
+    },
+    "whats-new/3-26-3.html": {
+      "sourceHash": "sha256:dccf4025abdb99f91e5f04c0a14759b69591e9ffc4253095f6994516954541bb",
+      "status": "copied"
     },
     "whats-new/generic.html": {
-      "sourceHash": "sha256:5db66c26cee732683b90bc9374802446f747ffb7ee43cbbcad0e977805871f2c",
-      "status": "translated"
+      "sourceHash": "sha256:2b76277d177968724be678e9d085bf68a7a25d3f6071054d57b096853676bd31",
+      "status": "copied"
     },
     "whats-new/index.html": {
-      "sourceHash": "sha256:5b9c85b1dffecec8f9912e589adb5fb38de25f01803f8a3618053f6994580251",
-      "status": "translated"
+      "sourceHash": "sha256:56e416db8f0fa9adcc561aa6bfd06d25309358bcd08aa1983a71d1667cbaf05e",
+      "status": "copied"
     }
   },
   "summary": {
-    "translated": 448,
+    "translated": 430,
     "outdated": 0,
-    "untranslated": 10,
-    "copied": 1,
+    "untranslated": 0,
+    "copied": 33,
     "pinned": 0,
-    "total": 459,
-    "completionPercent": 97.8,
-    "failures": 0
+    "total": 463,
+    "completionPercent": 100.0,
+    "failures": 3
+  },
+  "failures": {
+    "how-tos/Advanced-Filtering-of-the-Explorer-Tree.md": {
+      "error": "code fences 12 -> 6",
+      "at": "2026-10-16T18:26:02Z",
+      "sourceHash": "sha256:88282c7d6522f7528d4115587a3f6a37c0d26be56435f14d66005adbb0770c79"
+    },
+    "how-tos/drag-drop.md": {
+      "error": "code fences 4 -> 2",
+      "at": "2026-10-16T18:26:03Z",
+      "sourceHash": "sha256:ae62dabee90d8104bbccee01dad64504de4a1f6525dd5f07103be4d563f4ae17"
+    },
+    "how-tos/semantic-bridge-rename-objects.md": {
+      "error": "code fences 6 -> 4",
+      "at": "2026-10-19T07:57:05Z",
+      "sourceHash": "sha256:3cb819a90b4c798f3f736dda4333bb4ca4757bc37687178bf68e48702389192f"
+    }
   }
 }
