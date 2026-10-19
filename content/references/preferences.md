@@ -2,7 +2,7 @@
 uid: preferences
 title: Controlling preferences
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,7 +36,7 @@ To access the preferences dialog, go to **Tools > Preferences**.
 
 ### Power BI
 
-**Allow unsupported editing** (disabled): This option is only relevant when Tabular Editor 3 is used as an external tool for Power BI Desktop. When checked, all TOM data modeling properties are available for editing when connected to an instance of Power BI Desktop. It's generally recommended to leave this unchecked, to make sure that you do not accidentally make changes to your Power BI file, [that are not supported by Power BI Desktop](xref:desktop-limitations).
+**Allow unsupported editing** (disabled): applies only to Power BI Desktop versions older than June 2025, which restrict the modeling operations an external tool can make. When checked, all TOM properties are available for editing while Tabular Editor 3 is connected to such a version, including changes that [Power BI Desktop doesn't support](xref:desktop-limitations). The setting has no effect on Power BI Desktop June 2025 or later.
 
 **Hide auto date/time warnings** (disabled): When checked, hides warnings about Power BI auto date/time tables. These warnings appear when the "Auto date/time" setting in Power BI Desktop is enabled, which creates calculated tables that trigger warnings in Tabular Editor 3's built-in DAX analyzer.
 
