@@ -23,6 +23,7 @@ on:
       - 'metadata/build-config.json'
       - 'metadata/language-metadata.json'
       - 'build_scripts/translate-content.py'
+      - 'build_scripts/translation_segments.py'
       - 'build_scripts/config_loader.py'
       - '.github/workflows/translate.yml'
   workflow_dispatch:
@@ -52,6 +53,7 @@ on:
     paths:
       - '.github/workflows/translate.yml'
       - 'build_scripts/translate-content.py'
+      - 'build_scripts/translation_segments.py'
       - 'build_scripts/config_loader.py'
       - 'metadata/build-config.json'
       - 'metadata/language-metadata.json'
@@ -77,6 +79,8 @@ jobs:
         with:
           # The PR's own commit, not the synthetic merge commit: test what will be merged.
           ref: ${{ github.event.pull_request.head.sha }}
+          # Full history: the plan reads the English versions the translations were made from.
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -133,6 +137,7 @@ jobs:
     env:
       TRANSLATED_ENV: ${{ vars.TRANSLATED_ENV }}
       TRANSLATED_SERVICE_TYPE: ${{ vars.TRANSLATED_SERVICE_TYPE }}
+      TRANSLATED_CONTEXT_SEGMENTS: ${{ vars.TRANSLATED_CONTEXT_SEGMENTS }}
       HAS_KEY: ${{ secrets.TRANSLATED_API_KEY != '' }}
     steps:
       - name: Check secret and environment
