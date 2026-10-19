@@ -169,6 +169,8 @@ With Tabular Editor 3, you can collect VertiPaq Analyzer statistics while you ar
 
 To collect statistics, simply hit the **Collect stats** button in the **VertiPaq Analyzer** view.
 
+If statistics can't be read from the model's data, for example when a high-cardinality column exceeds a Power BI capacity's per-query memory limit, the statistics are collected from model metadata only. A **Stats collected without reading data** warning appears with the server error, and cardinalities can be missing or inaccurate. To skip reading statistics from the data, clear **Read statistics from data** under **Tools > Preferences > File Formats > VertiPaq Analyzer**.
+
 ![Vertipaq Analyzer Collect Stats](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 
 Once statistics are collected, VertiPaq Analyzer displays a summary of the model size, number of tables, etc. You can find more detailed statistics on the **Tables**, **Columns**, **Relationships** and **Partitions** tabs.

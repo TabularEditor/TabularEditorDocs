@@ -2,7 +2,7 @@
 uid: dax-editor
 title: DAX Editor
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -42,7 +42,7 @@ DAX calltips update as you cycle syntax alternatives using the Up/Down arrows.
 
 ![Dax Code Assist](~/content/assets/images/dax-code-assist.png)
 
-Most aspects of code assist can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Code Assist**](xref:preferences#dax-editor--code-assist).
+Most aspects of code assist can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Code Assist**](xref:preferences#text-editors--dax-editor--code-assist).
 
 ## Peek Definition
 
@@ -86,7 +86,7 @@ If the measure's expression cannot be analyzed, the wrap is added, on the princi
 
 ## Format DAX
 
-The DAX Editor in Tabular Editor 3 automatically formats your code as you type, i.e. fixing casing of functions and object references, adding proper indentation and spaces between parentheses, etc. All of this can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Auto Formatting**](xref:preferences#dax-editor--auto-formatting).
+The DAX Editor in Tabular Editor 3 automatically formats your code as you type, i.e. fixing casing of functions and object references, adding proper indentation and spaces between parentheses, etc. All of this can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Auto Formatting**](xref:preferences#text-editors--dax-editor--auto-formatting).
 
 However, sometimes it is necessary to format the entire document. This can be done by hitting [F6] or [Shift+F6] if you prefer more frequent line breaks. For DAX Queries, you may also use [Alt+F6] to reformat the code to always add commas at the front of a line, which is useful when debugging. 
 

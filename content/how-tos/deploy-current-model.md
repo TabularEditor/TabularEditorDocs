@@ -2,7 +2,7 @@
 uid: deploy-current-model
 title: Deploy the loaded model
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,8 +25,10 @@ The wizard's value is in what it lets you *leave alone* on the destination. Each
 - **Deploy Data Sources** sends explicit data sources. Clear it to keep the destination's own connection strings and credentials, which is usually what you want when promoting from development to test.
 - **Deploy Table Partitions** synchronizes partitions with the model metadata. Clear it to leave existing partitions, and the data in them, untouched. With it enabled, partitions on the destination that aren't in the model are removed along with their data.
   - **Deploy partitions governed by Incremental Refresh Policies** appears when the option above is enabled, and lets you deploy every partition *except* those an incremental refresh policy generates.
+- **Deploy Shared Expressions** sends the model's shared expressions. Clear it to keep the destination's own shared expressions. This option is available in Tabular Editor 3.
 - **Deploy Model Roles** sends the roles defined in the model. Clear it to keep the destination's roles as they are.
   - **Deploy Model Role Members** sends role membership. Role members are commonly managed on the server rather than in the metadata, so clearing this is normal.
+- **Deploy Linguistic Metadata (Q&A Synonyms, AI Instructions and AI Data Schema)** sends each culture's linguistic metadata. Clear it to keep the Q&A synonyms, AI instructions and AI data schema set up in the Power BI service.
 
 @deployment covers all of this in detail, along with the TMSL script the wizard generates, what a deployment does to data already in the destination, and how to deploy from the command line or a pipeline.
 

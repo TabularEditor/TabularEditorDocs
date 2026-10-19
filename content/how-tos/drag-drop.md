@@ -2,7 +2,7 @@
 uid: drag-drop
 title: Drag and drop objects
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,7 +56,7 @@ In Tabular Editor 3, the move keeps the object's:
 >
 > Press **Ctrl+Z** to undo the move and all of these changes in one step.
 
-DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and returns an error. Measure references are written as `[Measure]` without a table and aren't affected. After a move, run the [Best Practice Analyzer](xref:using-bpa) or check the @messages-view to find the broken references.
+DAX that refers to the column by its old table, such as `'Reseller Sales'[Margin]`, isn't rewritten and keeps pointing at the table the column has left. Measure references are written as `[Measure]` without a table, so they're unaffected. Run @using-bpa or check the @messages-view after a move to catch what broke. In the Messages view, clear **Show Cascading Errors** to list only the expressions you need to fix.
 
 ## Build hierarchies and order calculation items
 
