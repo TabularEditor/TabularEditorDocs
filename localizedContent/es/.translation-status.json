@@ -23,7 +23,7 @@
       "status": "translated"
     },
     "features/auto-reload.md": {
-      "sourceHash": "sha256:12a094cafa3b8bcd0d1143ab195cd05c04cce7aceda6d897e9c63276420524fe",
+      "sourceHash": "sha256:1b25013ea7ca0df1506f97af0d79d1da0fe83c27f1fa19f9f8fa73e039c7f9b4",
       "status": "translated"
     },
     "features/Best-Practice-Analyzer.md": {
@@ -215,7 +215,7 @@
       "status": "translated"
     },
     "features/dax-optimizer-integration.md": {
-      "sourceHash": "sha256:7f360b8d39e0a763558717f52a112f4e908cd7e30b99c94580b0f478277858f1",
+      "sourceHash": "sha256:99732043836a08d92b3e06d9215483d6711ec71964f26bb5e38ca466a294391f",
       "status": "translated"
     },
     "features/dax-package-manager.md": {
@@ -231,7 +231,7 @@
       "status": "translated"
     },
     "features/deployment.md": {
-      "sourceHash": "sha256:ccf07d6fb575c9a62fa94e4e5b3ba9e41543a57b1b651441ecdde3eabe98b0f2",
+      "sourceHash": "sha256:59c740eeb41c5812656c4ecdf7add21b676c2ef38dcda6e8b955e8d08a39b728",
       "status": "translated"
     },
     "features/hierarchical-display.md": {
@@ -251,7 +251,7 @@
       "status": "translated"
     },
     "features/metadata-translation-editor.md": {
-      "sourceHash": "sha256:7dd826b950714972b3429347f09fed22bcdbaf3f149e4f47dc6382ecf26e69e5",
+      "sourceHash": "sha256:9da3d1822e843167af66095f47aaf417f6868dc20d31ed081cb914e7682e1cbf",
       "status": "translated"
     },
     "features/perspective-editor.md": {
@@ -259,7 +259,7 @@
       "status": "translated"
     },
     "features/pivot-grid.md": {
-      "sourceHash": "sha256:13469e84b4715d3989eb9f9220222807cad8eaa30bb5dc6eb1837da1e13d82ee",
+      "sourceHash": "sha256:8b5e42ebb25a83fb72a1dd42178826b3e07c9ca59d91e76d2e922efee202d417",
       "status": "translated"
     },
     "features/refresh-overrides.md": {
@@ -423,7 +423,7 @@
       "status": "translated"
     },
     "features/views/messages-view.md": {
-      "sourceHash": "sha256:c444a771025eab4067d298298fa8391fd1e0157c38582320b097f9d2320d4657",
+      "sourceHash": "sha256:db0847f6ed1bf009751ad3aa4ada7c220f90f78cb4757bb35fa47d7d3c0a4715",
       "status": "translated"
     },
     "features/views/properties-view.md": {
@@ -435,7 +435,7 @@
       "status": "translated"
     },
     "features/views/user-interface.md": {
-      "sourceHash": "sha256:7e6a431584ea6e620b932f5ff895cea2a9a28faecc253b212fe62b033ed833c7",
+      "sourceHash": "sha256:2227d849e02e4070d711ebfccd5753903cdaf829555cab0d47a2fbb43933add9",
       "status": "translated"
     },
     "features/Workspace-Database.md": {
@@ -463,7 +463,7 @@
       "status": "translated"
     },
     "getting-started/creating-and-testing-dax.md": {
-      "sourceHash": "sha256:326a4af18f1bacea3e4b6a52d44c336bab3495074918c9cf49722d2e579a561f",
+      "sourceHash": "sha256:836430b3198033ceaa17a90143a25c7d46e8c1142fc98348688d14668eb46ba0",
       "status": "translated"
     },
     "getting-started/cs-scripts-and-macros.md": {
@@ -611,7 +611,7 @@
       "status": "translated"
     },
     "how-tos/deploy-current-model.md": {
-      "sourceHash": "sha256:678aaf20d780c1b7489968a3ddd0dc11553f102e5db763a0d545b49e368b5301",
+      "sourceHash": "sha256:58521385386ec88ac53dd46854e7567f35e5616760dab3bc173cfda4ff3d84b4",
       "status": "translated"
     },
     "how-tos/drag-drop.md": {
@@ -619,7 +619,7 @@
       "status": "translated"
     },
     "how-tos/duplicate-batchrename.md": {
-      "sourceHash": "sha256:c0595217b896e03211f74b7fe747e6f6d9ca610669b0e08fe07ff459e2b39d20",
+      "sourceHash": "sha256:d3b9138170b47bba94fdedc45130e77ef1d8ffedcb1a4d266f38e6b3b9806591",
       "status": "translated"
     },
     "how-tos/edit-properties.md": {
@@ -659,7 +659,7 @@
       "status": "translated"
     },
     "how-tos/load-save.md": {
-      "sourceHash": "sha256:4ac29ac34e1aee8edd2733d947e4519b26dbdef29ba4a372362a644d0488b1c9",
+      "sourceHash": "sha256:de10907604abecdab5c2b7628b19a6fd4345c1be2ae92a4f0c8b3dd54b342fd4",
       "status": "translated"
     },
     "how-tos/Master-model-pattern.md": {
@@ -671,7 +671,7 @@
       "status": "translated"
     },
     "how-tos/perspectives-translations.md": {
-      "sourceHash": "sha256:65165835a80d24a358493e2af433e6d3833c039846e65fe9977c5d279d0f35f5",
+      "sourceHash": "sha256:64fcbfd8515d82099b04d79577931bed5fd8e8b440a4e58ef070ff7a17cc367c",
       "status": "translated"
     },
     "how-tos/powerbi-xmla-pbix-workaround.md": {
@@ -1075,7 +1075,7 @@
       "status": "translated"
     },
     "references/downloads.md": {
-      "sourceHash": "sha256:d6f5f62ef64bfef5eab06ef77caad78ee695cd60e12114b7af9774a337063085",
+      "sourceHash": "sha256:27c21529bb0408933aedeb5614c99a4a2bc382554c45e4dd75e8f0fc45fa4281",
       "status": "translated"
     },
     "references/FAQ.md": {
@@ -1163,7 +1163,7 @@
       "status": "translated"
     },
     "references/release-history.md": {
-      "sourceHash": "sha256:78226d0901a9debfe95e062f96697ba023c893852edcf6560dc89296382c0fc1",
+      "sourceHash": "sha256:3c28cf2db33088ef78f5af074d2c62d2678fc8a726768d62373c4e453ba16b96",
       "status": "translated"
     },
     "references/release-notes/3_0_1.md": {
@@ -1386,6 +1386,10 @@
       "sourceHash": "sha256:0871275249d3bbd3ca332855873c89ed84a476929a2216333724fd61a05bdfc3",
       "status": "translated"
     },
+    "references/release-notes/3_27_1_0.md": {
+      "sourceHash": "sha256:c6fc5f3a2f35a2df7ef78a0206485bc8bb3b337a77c75fda7e36ca9648233938",
+      "status": "translated"
+    },
     "references/release-notes/3_2_0.md": {
       "sourceHash": "sha256:f80a34035dde22a0619af4ce18d51f59866d2eff27418c893e676f9da877b10c",
       "status": "translated"
@@ -1515,7 +1519,7 @@
       "status": "translated"
     },
     "references/supported-files.md": {
-      "sourceHash": "sha256:b914a46e482200adc4b407c54a40cdc4312d5698ff765fc661d83c4b0333b60a",
+      "sourceHash": "sha256:93d9b802670030915f59f55702d47df2cfd257de11be8bb0ac18171f58f302a1",
       "status": "translated"
     },
     "references/system-requirements.md": {
@@ -1555,7 +1559,7 @@
       "status": "translated"
     },
     "security/security-privacy.md": {
-      "sourceHash": "sha256:5d9f2e13cdc658c57cd7a23bcc73bedef02662c7efa62cb1bf1e780e53b281cd",
+      "sourceHash": "sha256:4867e8f3c3d42016796217650165664b046ae18d0f109e25cae2f9df1f3bf7b3",
       "status": "translated"
     },
     "security/terms.md": {
@@ -1703,7 +1707,7 @@
       "status": "translated"
     },
     "tutorials/new-pbi-model.md": {
-      "sourceHash": "sha256:01b20064a80073530281396fa9208b87035a900d9ed7f608fb741cfc09302af4",
+      "sourceHash": "sha256:8503350984bdac5e40c759969b1fb791033bfe39c86aff6addee287ff8030458",
       "status": "translated"
     },
     "tutorials/powerbi-xmla.md": {
@@ -1856,14 +1860,14 @@
     }
   },
   "summary": {
-    "translated": 428,
+    "translated": 429,
     "outdated": 0,
     "untranslated": 2,
     "copied": 33,
     "pinned": 0,
-    "total": 463,
+    "total": 464,
     "completionPercent": 99.6,
-    "failures": 5
+    "failures": 18
   },
   "failures": {
     "getting-started/personalizing-te3.md": {
@@ -1878,8 +1882,8 @@
     },
     "how-tos/drag-drop.md": {
       "error": "code fences 4 -> 2",
-      "at": "2026-10-16T18:25:52Z",
-      "sourceHash": "sha256:ae62dabee90d8104bbccee01dad64504de4a1f6525dd5f07103be4d563f4ae17"
+      "at": "2026-10-19T12:33:39Z",
+      "sourceHash": "sha256:0426f2b83c294640fed1d3a435902ee1221d185985da9b78e3ce35ad7dede0c3"
     },
     "how-tos/semantic-bridge-rename-objects.md": {
       "error": "code fences 6 -> 4",
@@ -1890,6 +1894,71 @@
       "error": "code fences 4 -> 2",
       "at": "2026-10-16T18:25:55Z",
       "sourceHash": "sha256:0ad80ebc8cbf3ec27662dffc0210986cbabe8f92810bdb7a33717de8fab16037"
+    },
+    "features/Semantic-Model/direct-lake-sql-model.md": {
+      "error": "code fences 2 -> 1",
+      "at": "2026-10-19T12:33:17Z",
+      "sourceHash": "sha256:73344d63079311e84f9818b64bfc4ee152c34968b77b2096ff54785a3a7a8eb2"
+    },
+    "features/ai-assistant.md": {
+      "error": "code fences 4 -> 2",
+      "at": "2026-10-19T12:33:21Z",
+      "sourceHash": "sha256:653e705ba399c654e40c36883e8821688545725b1f1657df3133c8f4629b7d7b"
+    },
+    "features/dax-debugger.md": {
+      "error": "code fences 4 -> 2",
+      "at": "2026-10-19T12:33:24Z",
+      "sourceHash": "sha256:240c1f8e4048f7cf6ab8c97e779b96cb212c203f9200de5b6183be205b89cde9"
+    },
+    "features/dax-editor.md": {
+      "error": "code fences 2 -> 1",
+      "at": "2026-10-19T12:33:25Z",
+      "sourceHash": "sha256:a2a254e8b33e5325bfef77305993edd6b3cc92ff7f7830e8d1d58eb71415ee08"
+    },
+    "features/dax-query.md": {
+      "error": "code fences 6 -> 3",
+      "at": "2026-10-19T12:33:27Z",
+      "sourceHash": "sha256:cfc810bcddec30cd43d0f71a516b57a5cbbe240900a372f9d255b4d508ab7f18"
+    },
+    "features/mcp-server.md": {
+      "error": "code fences 10 -> 5",
+      "at": "2026-10-19T12:33:29Z",
+      "sourceHash": "sha256:11b33ab0816ca299b20337ffce43acefead22d00f79b0e7cad01500f51b2ca0c"
+    },
+    "features/unsaved-changes.md": {
+      "error": "code fences 2 -> 1",
+      "at": "2026-10-19T12:33:33Z",
+      "sourceHash": "sha256:f93949808fcb3a5667d510775e7332f7cb5bc9abe646876e577513435792113d"
+    },
+    "getting-started/refresh-preview-query.md": {
+      "error": "code fences 2 -> 1",
+      "at": "2026-10-19T12:33:37Z",
+      "sourceHash": "sha256:d0e7a9eb57432d790cdaed210b05766df549b82e124d70f0000358cfd176abf4"
+    },
+    "how-tos/xmla-as-connectivity.md": {
+      "error": "code fences 6 -> 5",
+      "at": "2026-10-19T12:33:42Z",
+      "sourceHash": "sha256:1327f49f78176015f7f08cd552b754ea50c38b1c375c04b77da2637df323b550"
+    },
+    "references/preferences.md": {
+      "error": "code fences 12 -> 6",
+      "at": "2026-10-19T12:33:47Z",
+      "sourceHash": "sha256:5d6e1afb9979182cee148aee717272331dc45ac4d34090bee49f433f1a91a9b0"
+    },
+    "references/user-options.md": {
+      "error": "code fences 6 -> 3",
+      "at": "2026-10-19T12:33:54Z",
+      "sourceHash": "sha256:c1c940b4529b30a1be9a016f78877c647519695975505908b58abf3ce615ed86"
+    },
+    "security/ai-compliance.md": {
+      "error": "code fences 2 -> 1",
+      "at": "2026-10-19T12:33:56Z",
+      "sourceHash": "sha256:4368ebec2b14f7f5af7bcd89c66e68b1475dbdb8cd2e5a368c93dcba447c7d0a"
+    },
+    "tutorials/new-as-model.md": {
+      "error": "code fences 2 -> 1",
+      "at": "2026-10-19T12:33:59Z",
+      "sourceHash": "sha256:aafe64ce672080b50a6cced93d8c852b61559993eac2f36f822441f33286f4b3"
     }
   }
 }
