@@ -1877,9 +1877,9 @@
       "sourceHash": "sha256:ae62dabee90d8104bbccee01dad64504de4a1f6525dd5f07103be4d563f4ae17"
     },
     "how-tos/semantic-bridge-rename-objects.md": {
-      "error": "code fences 6 -> 3",
-      "at": "2026-10-16T18:26:05Z",
-      "sourceHash": "sha256:e6486910e9c85e0949fd793b6ef748e19d01c8f3441eda36e07b975682849c7f"
+      "error": "code fences 6 -> 4",
+      "at": "2026-10-19T07:57:05Z",
+      "sourceHash": "sha256:3cb819a90b4c798f3f736dda4333bb4ca4757bc37687178bf68e48702389192f"
     }
   }
 }
