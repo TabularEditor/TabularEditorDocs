@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: 高级安装与激活
 author: Morten Lønskov
-updated: 2026-10-05
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -110,37 +110,60 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
 ```
 
-| MSI 功能        | 在安装程序中显示为        | 说明                                   | 默认安装                                         |
-| ------------- | ---------------- | ------------------------------------ | -------------------------------------------- |
-| `MainFeature` | Tabular Editor 3 | Tabular Editor 3 核心应用程序              | 是（必需）                                        |
-| `AIAssistant` | AI 功能            | @ai-assistant 和 MCP 服务器 | 是，自 3.27.0 起 |
+| MSI 功能        | 在安装程序中显示为        | 说明                                                    | 默认安装                                                           |
+| ------------- | ---------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| `MainFeature` | Tabular Editor 3 | Tabular Editor 3 核心应用程序                               | 是（必需）                                                          |
+| `AIAssistant` | AI 功能            | @ai-assistant 和 @mcp-server | 是，自 3.27.0 起。较早版本仅在选中该组件时才会安装它 |
 
 > [!IMPORTANT]
-> 上述命令会安装 **AI 功能** 组件。在 3.26.x 及更早版本中，必须手动选中它，默认安装不会包含它；从 3.27.0 起，它已成为默认安装的一部分。如果贵组织不希望在用户计算机上安装 AI Assistant 或 MCP 服务器，则必须按下一节所述进行明确指定。
+> 从 3.27.0 开始，除非排除该组件，否则全新安装将包含 **AI 功能** 组件。如果贵组织不允许使用 AI Assistant 或 MCP 服务器，请排除此组件，并按下文所述设置 `DisableAi` 策略。
 
 ### 部署时不包含 AI 功能
 
-若要避免将 AI 文件安装到计算机上，请指定需要的功能，并省略 `AIAssistant`：
+如需安装不含 AI 功能的 Tabular Editor 3，请在 `ADDLOCAL` 中省略 `AIAssistant`：
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
 ```
 
-若要在已安装该组件的计算机上将其移除，请使用同一个组件并加上 `REMOVE`：
+对于已安装该组件的计算机，可在运行该组件时使用 `REMOVE` 将其移除：
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
 ```
 
-无论哪种方式，AI 程序集都不会写入安装文件夹；应用程序中不会出现 **AI Assistant** 窗格和 MCP 服务器；也不会向任何模型提供程序发起连接。 Tabular Editor 3 的其他所有功能都不受影响。
+如果未安装该组件，则安装目录中不会包含 AI 程序集，应用程序中也不会显示 **AI Assistant** 窗格和 MCP 服务器，并且不会向模型提供程序发送任何请求。其他功能不受影响。
 
-升级现有安装时，会保留该计算机原有的功能选择，因此，如果某台计算机在 3.27.0 之前部署时未包含 AI 功能，升级后也不会自动获得这些功能。对于全新安装，由于没有先前的选择可继承，请传入 `ADDLOCAL=MainFeature`。
-
-> [!IMPORTANT]
-> 命令行只控制 _你_ 要部署的内容，而不控制用户能安装什么：AI 功能默认包含在内，因此任何自行运行安装程序的人都会获得这些功能。要让该设置持续生效，还需要同时设置 `DisableAi` @policies。从 3.27.0 起，安装程序会读取该策略，并自动跳过 AI 组件；不管由谁运行、以何种方式运行都是如此。如果该组件已存在，该策略还会在运行时关闭 AI Assistant 和 MCP 服务器。请在整机范围内进行设置，即在 `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` 下设置，这样它会对所有用户生效，并且无法按用户进行覆盖。
+如需更改单台设备上的选择，请再次运行安装程序，并在维护对话框中选择 **修改**。
 
 > [!NOTE]
 > 使用 `ADDLOCAL` 时，除了任何可选功能外，也必须包含 `MainFeature`。如果仅指定 `AIAssistant` 而不包含 `MainFeature`，将导致安装不完整。
+
+### 升级与 AI 功能组件
+
+在现有安装上安装同一组件的较新版本时，安装程序会保留该计算机当前的功能选择。这同样适用于交互式安装和静默安装。在 3.27.0 之前部署且不含 AI 功能的计算机，升级后仍然不含这些功能；已选择 AI 功能的计算机则会保留这些功能。
+
+在以下情况下，安装程序会应用默认选择或命令行中的选择：
+
+| 情况                                                                                    | 结果                                                                                           |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 命令行设置了 `ADDLOCAL`、`REMOVE` 或其他功能属性                                                    | 命令行决定所选内容。 `ADDLOCAL=MainFeature` 会从已安装 AI 功能的计算机中移除这些功能，而 `ADDLOCAL=ALL` 会在未安装这些功能的计算机上安装它们 |
+| 部署会先卸载旧版本，再安装新版本，例如将 Intune 的 supersedence 设置为“卸载”                                    | 该安装会被视为全新安装，除非命令行将其排除，否则会包含 AI 功能                                                            |
+| 该组件针对的运行时与已安装的组件不同，例如在已安装 .NET 8 组件的计算机上部署 .NET 10 组件 | .NET 8 和 .NET 10 组件是两个独立的产品。如果是全新安装，则默认包含 AI 功能，除非通过命令行将其排除  |
+
+无论哪种情况，`DisableAi` 策略都会覆盖该选择。
+
+### 通过 `DisableAi` 策略强制执行此决定
+
+运行安装程序的用户会使用默认选择，其中包含 AI 功能。要让这台计算机上的每次安装都关闭 AI 功能，请在 `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` 下将 `DisableAi` @policies 设为 `1`。 Tabular Editor 3 会在启动时读取该策略，并禁用 AI 助手和 MCP 服务器。
+
+从 3.27.0 开始，安装程序也会读取该策略：
+
+- 全新安装不会安装 AI 功能组件，安装程序也不会显示它
+- 升级会从已安装该组件的计算机上移除它
+- 现有安装会保留 AI 文件，直到下一次升级。在启用该策略期间，Tabular Editor 3 不会加载它们
+
+以本地系统账户运行的部署工具不会读取这台计算机上用户的 `HKEY_CURRENT_USER` 策略。静默部署时，把策略设在 `HKEY_LOCAL_MACHINE` 下，这样安装程序就能读取该策略。
 
 ### 组件名称和其他 MSI 选项
 

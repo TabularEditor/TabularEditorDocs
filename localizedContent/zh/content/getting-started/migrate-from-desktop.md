@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: 从 Power BI Desktop 迁移
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -153,7 +153,7 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 
 你可以在脚本中直接添加或修改 `Description`、`FormatString`、`Visible`、`DetailRows` 等属性。
 
-按 F5 将脚本应用到 Data model。注意，与 **表达式编辑器** 不同，跳转到其他对象不会自动应用你对脚本所做的任何更改。你仍然可以使用 **编辑 > 撤销**（CTRL+Z）来回退 DAX脚本已应用的更改。
+按 F5 将脚本应用到 Data model。注意，与 **表达式编辑器** 不同，跳转到其他对象不会自动应用你对脚本所做的任何更改。要撤销 DAX 脚本应用的更改，请单击 TOM Explorer，然后按 **Ctrl+Z**。在脚本编辑器中，按 **Ctrl+Z** 可撤销输入内容。
 
 有关更多信息，请参阅 @dax-script-introduction。
 

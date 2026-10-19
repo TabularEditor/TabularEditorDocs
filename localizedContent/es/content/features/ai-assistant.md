@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: Asistente de IA
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -188,7 +188,7 @@ En el marco de tus [concesiones de permisos](#permissions-and-consent), el Asist
 
 - **Exploración del modelo**: consulta los metadatos del modelo, incluidas tablas, columnas, medidas, relaciones y sus propiedades
 - **Redacción de consultas DAX**: genera consultas DAX, las ejecuta en tu modelo en modo conectado y devuelve los conjuntos de resultados en el chat
-- **Generación de C# Scripts**: crea C# Scripts para realizar cambios en el modelo. Según tu configuración, el asistente abre el script en una ventana del editor para que lo revises y lo ejecutes, o lo ejecuta automáticamente; consulta [Permitir que el asistente cambie el modelo](#letting-the-assistant-change-your-model). **Ctrl+Z** deshace los cambios en los metadatos del modelo
+- **Generación de C# Scripts**: crea C# Scripts para realizar cambios en el modelo. Según tu configuración, el asistente abre el script en una ventana del editor para que lo ejecutes, o lo ejecuta él mismo; consulta [Permitir que el asistente cambie tu modelo](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**: ejecuta el análisis de BPA, lista las infracciones de las reglas y crea o modifica reglas de BPA
 - **Analizador VertiPaq**: consulta estadísticas de uso de memoria y cardinalidad de columnas
 - **Acceso a documentos**: lee y modifica documentos abiertos: consultas DAX, C# Scripts y scripts DAX
@@ -209,7 +209,7 @@ La configuración está desactivada de forma predeterminada y no está disponibl
 ### Qué ocurre cuando el asistente ejecuta un script
 
 - Si **Vista previa de cambios** está activada (de forma predeterminada), aparece el [cuadro de diálogo de vista previa](xref:csharp-scripts#run-c-scripts-with-preview) antes de que se apliquen los cambios. **Cancelar** revierte los cambios y envía un Report del rechazo al asistente. Si **Vista previa de cambios** está desactivada, los cambios se aplican sin mostrar ningún cuadro de diálogo.
-- Los cambios del script quedan registrados como una única entrada de deshacer: **C# script (AI Assistant)**. **Ctrl+Z** deshace todo el script.
+- Los cambios del script quedan registrados como una única entrada de deshacer: **C# script (AI Assistant)**. El foco permanece en el cuadro de chat, donde **Ctrl+Z** no deshace los cambios del modelo. Para deshacer el C# Script completo, haz clic en el Explorador TOM y pulsa **Ctrl+Z**, o selecciona **Deshacer C# Script (Asistente de IA)** en el menú **Editar**.
 - Si el script falla a mitad de la ejecución, el modelo no se modifica y el asistente genera un Report del error.
 - No se ejecuta ningún script que acceda a archivos, la red o ensamblados externos. Se abre como un artefacto de script con la insignia **Inseguro** y **Ejecutar** deshabilitado, y la respuesta del asistente indica qué utilizaba el script.
 
@@ -484,7 +484,7 @@ Otras formas de reducir el uso de tokens:
 
 ## Desactivar el Asistente de IA
 
-El Asistente de IA es un componente opcional, instalado de forma predeterminada a partir de Tabular Editor 3.27.0. Vuelve a ejecutar el instalador de Tabular Editor 3 para incluirlo o excluirlo de una instalación existente. En la versión portátil, elimina `TabularEditor3.AI.dll` del directorio de instalación para quitar este componente.
+El Asistente de IA es un componente opcional, instalado de forma predeterminada a partir de Tabular Editor 3.27.0. Ejecuta de nuevo el instalador de Tabular Editor 3 y selecciona **Modificar** para incluirlo o excluirlo de una instalación existente. Una actualización mantiene la selección existente; consulta [Actualizaciones y el componente de características de IA](xref:installation-activation-basic#upgrades-and-the-ai-features-component). En la versión portátil, elimina `TabularEditor3.AI.dll` del directorio de instalación para quitar este componente.
 
 El mismo componente contiene el servidor MCP, por lo que excluirlo o eliminar `TabularEditor3.AI.dll` elimina ambos. Para desactivar solo el chat, mantén el componente y establece la directiva `DisableAiChat`.
 

@@ -2,7 +2,7 @@
 uid: user-interface
 title: Basic user interface
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -143,12 +143,13 @@ The **Edit** menu edits the active document or the loaded model metadata.
 
 ![Edit Menu](~/content/assets/images/edit-menu.png)
 
-- **Undo**: undoes the last change to the model metadata. With no active document, **Ctrl+Z** runs this command.
-- **Redo**: redoes the last undone change to the model metadata. With no active document, **Ctrl+Y** runs this command.
+- **Undo**: undoes the last change in the part of the window that has focus. In a text control, such as a document or the **Expression Editor**, it undoes typing and reads **Undo typing**. Elsewhere, it undoes the last change to the model metadata. **Ctrl+Z** runs this command.
+- **Redo**: redoes the last undone change, following the same rules as **Undo**. **Ctrl+Y** runs this command.
+- **Undo** / **Redo** followed by the name of a model change, for example **Undo C# script (MCP)**: appear only when a text control has focus, and undo or redo the last change to the model metadata. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 - **Find**: opens the "Find and replace" dialog on the "Find" tab. See [Find](xref:find-replace#find).
 - **Replace**: opens the "Find and replace" dialog on the "Replace" tab. See [Replace](xref:find-replace#replace).
-- **Cut / Copy / Paste**: with an active document, these apply to the selected text. Otherwise, they apply to the objects selected in the TOM Explorer. For example, to duplicate several measures, select them with **Shift** or **Ctrl** in the TOM Explorer and press **Ctrl+C**, then **Ctrl+V**.
-- **Delete**: deletes the selected text in the active document or, with no active document, the objects selected in the TOM Explorer.
+- **Cut / Copy / Paste**: when a text control has focus, these apply to the selected text. When the TOM Explorer has focus, they apply to the selected objects. For example, to duplicate several measures, select them with **Shift** or **Ctrl** in the TOM Explorer and press **Ctrl+C**, then **Ctrl+V**.
+- **Delete**: deletes the selected text when a text control has focus, or the selected objects when the TOM Explorer has focus.
 
 > [!NOTE]
 > A deletion prompt appears only when several objects are selected, or when other objects depend on the ones you delete. **Undo** (**Ctrl+Z**) restores deleted objects.

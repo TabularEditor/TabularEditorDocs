@@ -2,7 +2,7 @@
 uid: mcp-server
 title: Servidor MCP
 author: Morten Lønskov
-updated: 2026-10-09
+updated: 2026-10-14
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -201,7 +201,7 @@ Con **Model metadata > Write**, un agente modifica tu modelo creando un [C# Scri
 
 Un script puede hacer todo lo que permite la API de scripting de C#; por ejemplo, agregar medidas, columnas, grupos de cálculo, perspectivas, traducciones, relaciones y políticas de actualización, o renombrar y dar formato a objetos de forma masiva. Un script ejecutado por un agente tiene estas propiedades:
 
-- sus cambios aparecen como una sola entrada de deshacer, **C# Script (MCP)**, y **Ctrl+Z** deshace todo el script. Ver @undo-redo.
+- sus cambios aparecen como una sola entrada de deshacer, **C# Script (MCP)**, y **Ctrl+Z** deshace todo el script. Si un documento tiene el foco, **Ctrl+Z** deshace lo que hayas escrito en el documento. Haz clic primero en el Explorador TOM o selecciona **Deshacer C# Script (MCP)** en el menú **Editar**. Consulta [Deshacer en los editores de texto](xref:undo-redo#undo-in-text-editors).
 - si el script genera una excepción a mitad del proceso, se revierten todos sus cambios.
 - el agente recibe una lista de todos los objetos que el script agregó, cambió o quitó, además de cualquier salida que haya generado el script.
 - los mensajes de `Output`, `Info`, `Warning` o `Error` se devuelven al agente como parte del resultado y no se abre ningún cuadro de diálogo.
@@ -293,7 +293,7 @@ El servidor MCP está activado de forma predeterminada y cualquier usuario puede
 | Directiva                                   | Edición    | Qué hace                                                                                                                                                                                                                                                |
 | ------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DisableMcpServer`                          | Todas      | Elimina el servidor MCP. El chat del Asistente de IA no se ve afectado                                                                                                                                                                  |
-| `DisableAi`                                 | Todas      | Desactiva toda la funcionalidad de IA, incluido el servidor MCP. Con un valor `REG_DWORD` de `1`, el instalador también deja desactivado el componente de IA en el equipo                                                               |
+| `DisableAi`                                 | Todas      | Desactiva toda la funcionalidad de IA, incluido el servidor MCP. Con un valor `REG_DWORD` de `1`, el instalador también deja fuera el componente de IA en las instalaciones nuevas y lo elimina al actualizar                           |
 | `RequireMcpAccessToken`                     | Todas      | Fuerza la autenticación por token y bloquea la preferencia                                                                                                                                                                                              |
 | `DisableCSharpScripts`                      | Todos      | Impide que un agente ejecute un C# Script y lo inserte en un documento. La redacción de una consulta DAX y cualquier herramienta que solo lea no se ven afectadas                                                                       |
 | `BlockUnsafeScripts`                        | Enterprise | En Tabular Editor, solo se permiten scripts que se mantengan dentro del modelo. Un script de agente que acceda a archivos, a la red, a otros procesos o a ensamblados externos no se ejecuta, y no se abre ningún documento de revisión |

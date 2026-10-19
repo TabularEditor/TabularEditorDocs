@@ -2,7 +2,7 @@
 uid: undo-redo
 title: Soporte para deshacer y rehacer
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,6 +14,17 @@ applies_to:
 # Soporte para deshacer y rehacer
 
 Presiona **Ctrl+Z** para deshacer un cambio y **Ctrl+Y** para rehacerlo. La pila de deshacer no tiene límite de tamaño y se vacía cuando cargas otro modelo, ya sea desde un archivo o desde una base de datos. Una operación que cambia muchos objetos, como arrastrar una carpeta, un cambio de nombre por lotes o una corrección del Best Practice Analyzer (BPA), cuenta como un solo paso de deshacer.
+
+## Deshacer en editores de texto
+
+En Tabular Editor 3, **Ctrl+Z** y **Ctrl+Y** actúan sobre la parte de la ventana que tiene el foco. Cuando el foco está en un control de texto, estos atajos deshacen y rehacen lo escrito en ese control. Los controles de texto incluyen los documentos de consulta DAX, los documentos de script DAX y de **C# Script**, el **Editor de expresiones** y cualquier celda que estés editando en la vista de **Propiedades**. Cada control de texto tiene su propio historial de deshacer, independiente de la pila de deshacer del modelo. Cuando el foco está en el Explorador TOM o en otra vista, los atajos deshacen y rehacen los cambios del modelo. En el cuadro de chat de AI Assistant, **Ctrl+Z** y **Ctrl+Y** no deshacen ni rehacen los cambios del modelo.
+
+El foco permanece en el documento de script después de ejecutar un C# Script o aplicar un script DAX. Al pulsar **Ctrl+Z** allí, se deshace lo escrito en el script. Si el texto del script se pegó o insertó en un solo paso, **Ctrl+Z** lo elimina por completo y **Ctrl+Y** lo restaura.
+
+Para deshacer un cambio en el modelo mientras un control de texto o el cuadro de chat de AI Assistant tiene el foco, haz una de las siguientes opciones:
+
+- haz clic en el Explorador TOM y, después, pulsa **Ctrl+Z**
+- abre el menú **Editar** y selecciona la opción que lleva el nombre del último cambio del modelo, como **Deshacer C# Script (MCP)**. Cuando un control de texto tiene el foco, esta entrada aparece en la parte superior del menú, por encima de **Deshacer escritura**.
 
 ## Eliminar objetos
 

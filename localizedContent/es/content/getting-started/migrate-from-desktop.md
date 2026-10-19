@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: Migración desde Power BI Desktop
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -153,7 +153,7 @@ Para crear un Script DAX basado en medidas existentes, solo tienes que seleccion
 
 Puedes agregar o modificar propiedades como `Description`, `FormatString`, `Visible`, `DetailRows` y otras directamente en el script.
 
-Pulsa F5 para aplicar el script al Data model. Ten en cuenta que, a diferencia del **Editor de expresiones**, al navegar a otro objeto no se aplicarán automáticamente los cambios realizados en el script. También puedes usar la opción **Edit > Undo** (CTRL+Z) para deshacer cualquier cambio aplicado por un Script DAX.
+Pulsa F5 para aplicar el script al Data model. Ten en cuenta que, a diferencia del **Editor de expresiones**, al navegar a otro objeto no se aplicarán automáticamente los cambios realizados en el script. Para deshacer los cambios aplicados por un script DAX, haz clic en el Explorador TOM y pulsa **Ctrl+Z**. En el editor de scripts, **Ctrl+Z** deshace lo que has escrito.
 
 Consulta @dax-script-introduction para obtener más información.
 

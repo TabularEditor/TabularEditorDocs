@@ -2,7 +2,7 @@
 uid: advanced-scripting
 title: Scripting avanzado
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ La [API de scripting](xref:api-index) proporciona acceso a dos objetos de nivel 
 
 El objeto `Model` es un envoltorio de la clase [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx), que expone un subconjunto de sus propiedades, con algunos métodos y propiedades adicionales para facilitar las operaciones con traducciones, perspectivas y colecciones de objetos. Lo mismo se aplica a cualquier objeto derivado, como tabla, medida, columna, etc., que cuentan con su correspondiente objeto envoltorio. Consulta <xref:api-index> para ver una lista completa de objetos, propiedades y métodos de la biblioteca de envoltorios de Tabular Editor.
 
-La principal ventaja de trabajar a través de este envoltorio es que todos los cambios se pueden deshacer desde la interfaz de usuario de Tabular Editor. Basta con pulsar CTRL+Z después de ejecutar un script y verás que todos los cambios realizados por el script se deshacen de inmediato. Además, este envoltorio ofrece métodos prácticos que convierten muchas tareas habituales en sencillas instrucciones de una sola línea. A continuación veremos algunos ejemplos. Damos por hecho que ya tienes cierta familiaridad con C# y LINQ, ya que estos aspectos de las capacidades de scripting de Tabular Editor no se tratarán aquí. Los usuarios que no estén familiarizados con C# y LINQ deberían poder seguir los ejemplos que se muestran a continuación.
+La principal ventaja de trabajar a través de este envoltorio es que todos los cambios se pueden deshacer desde la interfaz de usuario de Tabular Editor. Pulsa **Ctrl+Z** después de ejecutar un script para deshacer todos los cambios que haya realizado el script. En Tabular Editor 3, el foco permanece en el editor de scripts después de ejecutar el script, así que haz clic en el Explorador TOM antes de pulsar **Ctrl+Z**. Consulta [Deshacer en editores de texto](xref:undo-redo#undo-in-text-editors). Además, este envoltorio ofrece métodos prácticos que convierten muchas tareas habituales en sencillas instrucciones de una sola línea. A continuación veremos algunos ejemplos. Damos por hecho que ya tienes cierta familiaridad con C# y LINQ, ya que estos aspectos de las capacidades de scripting de Tabular Editor no se tratarán aquí. Los usuarios que no estén familiarizados con C# y LINQ deberían poder seguir los ejemplos que se muestran a continuación.
 
 ## Configurar las propiedades de los objetos
 
