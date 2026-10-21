@@ -145,7 +145,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: site
-          retention-days: 30
+          retention-days: ${{ github.event_name == 'push' && 30 || 7 }}
           path: _site
   link_check_job:
     needs: build_job
