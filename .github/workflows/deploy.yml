@@ -1,29 +1,9 @@
 name: Docs CI/CD
 
-# Stage-2 pipeline for the docs site (new governance setup).
-#
 # Flow:
 #   PR         -> build -> preview environment on the test SWA (URL commented on the PR)
 #   main push  -> build once -> staging (test SWA, automatic)
 #                            -> production (prod SWA) AFTER required-reviewer approval
-#
-# BEFORE this lands on main (order matters):
-#   1. Create the GitHub environment "production": add Required Reviewers (the docs release
-#      group), restrict deployments to the main branch, and add AZURE_SWA_TOKEN_PROD as an
-#      ENVIRONMENT secret. If the environment does not exist when this workflow first runs,
-#      GitHub auto-creates it WITHOUT protection rules and the approval gate is a no-op.
-#   2. AZURE_SWA_TOKEN_TEST stays a repository secret (previews + staging need it on PR events).
-#   3. The DNS flip to the new prod SWA must already be done - this PR deletes the old
-#      deploy.yml, so after the merge nothing deploys to the old SWA anymore. (Between the
-#      flip and this merge, main merges reach no live site - keep that window short.)
-#
-# Cleanup that rides along or follows: deploy-staging.yml is deleted before this PR is merged
-# (it only exists to seed the staging SWA from the feature branch), and the old
-# AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUD_081AFFE03 secret is deleted once the old SWA
-# is decommissioned.
-#
-# Fork PRs: repository secrets are not exposed to pull_request runs from forks, so fork PRs
-# build but do not get preview deployments - same limitation as the old setup.
 
 on:
   push:
@@ -109,8 +89,6 @@ jobs:
         run: echo "::notice title=Doctests not executed::Set the TE_CLI_DOWNLOAD_URL repository secret to a te-linux-x64.tar.gz download URL to compile and run the annotated C# blocks in CI. Only annotation validation ran."
 
   build_job:
-    # Same localization-branch carve-out as the old deploy.yml: the bulk 'localization' PR only
-    # builds when a review is requested, to avoid rebuilding on every bot sync.
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
     runs-on: windows-latest
     name: Build Documentation
@@ -167,8 +145,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: site
-          # 30 days so a pending prod approval (GitHub expires them after 30 days) can always
-          # still deploy its artifact, and recent runs stay re-runnable as a rollback path.
           retention-days: 30
           path: _site
   link_check_job:
@@ -246,7 +222,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_TEST }}
           action: "close"
 
-  # main -> staging, automatically (production slot of the test SWA).
+  # main -> staging, automatically
   deploy_staging:
     if: github.event_name == 'push'
     needs: build_job
@@ -261,13 +237,6 @@ jobs:
         with:
           name: site
           path: _site
-      # OPTIONAL (stakeholder decision): keep crawlers off staging without touching the
-      # artifact that prod will reuse - patches only the staging COPY of the SWA config.
-      # Canonical tags already point at prod, so this is belt-and-braces, not required.
-      # - name: Add noindex header to staging copy
-      #   run: |
-      #     jq '.globalHeaders["X-Robots-Tag"] = "noindex"' _site/staticwebapp.config.json > tmp.json
-      #     mv tmp.json _site/staticwebapp.config.json
       - name: Deploy to staging SWA
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -278,9 +247,7 @@ jobs:
           output_location: ""
           skip_app_build: true
 
-  # main -> production, gated. The job pauses here until someone in the 'production'
-  # environment's Required Reviewers approves it in the Actions UI. It then ships the SAME
-  # artifact staging verified - never a rebuild.
+  # main -> production, gated.
   deploy_production:
     if: github.event_name == 'push'
     needs: [build_job, deploy_staging]
