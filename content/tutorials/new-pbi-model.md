@@ -28,7 +28,7 @@ This page walks you through the process of creating a new Power BI semantic mode
 > 
 > [More information](xref:editions).
 
-##### Creating a new semantic model
+## Creating a new semantic model
 
 1. From the File menu, choose New > Model... or hit `CTRL+N`
 

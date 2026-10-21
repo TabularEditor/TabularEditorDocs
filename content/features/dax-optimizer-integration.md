@@ -2,7 +2,7 @@
 uid: dax-optimizer-integration
 title: DAX Optimizer Integration
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -95,7 +95,7 @@ Here, you can choose whether the VPAX should be uploaded as a new model within t
 Once you click the **OK** button, the VPAX file will be uploaded to DAX Optimizer, and you will be able to start analyzing the model.
 
 > [!NOTE]
-> If no VertiPaq Analyzer statistics are available in Tabular Editor 3, these statistics will be collected for the current model before the VPAX file is uploaded. We will also automatically re-collect statistics if the last statistics collection is older than or equal to the statistics of the last VPAX file upload, for the specific model.
+> If no VertiPaq Analyzer statistics are available in Tabular Editor 3, statistics are collected for the current model before the VPAX file is uploaded. Statistics are also re-collected if the last collection is older than or equal to the last VPAX upload for the model. Statistics for an upload are always read from the model's data. If they can't be read, the upload doesn't start.
 
 ### Obfuscation
 
