@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Docs CI/CD
 
 on:
   push:
@@ -9,17 +9,33 @@ on:
     branches:
       - main
 
-# Every job except close_pull_request_job carries the same `if`: run on pushes
-# to main and on open PRs, but only build the translation `localization` branch
-# (Translated review PRs) once a review is requested. GitHub Actions has no way to share a job
-# condition, so the expression is repeated verbatim; keep the copies in sync.
+# Flow:
+#   PR         -> checks + build -> preview environment on the test SWA
+#                                   (URL commented on the PR; removed on close)
+#   main push  -> checks + build once -> staging (test SWA, automatic)
+#                                     -> production (prod SWA) AFTER required-reviewer
+#                                        approval on the `production` environment
 #
 # Job layout:
-#   lint_job, doctest_job      independent checks on the repo sources
-#   build_job                  full multi-language site build
-#   link_check_job             needs the built site from build_job
-#   deploy_job                 waits for all of the above, so a failing check
-#                              blocks the deploy (production and PR previews)
+#   lint_job, doctest_job   independent checks on the repo sources
+#   build_job               full multi-language site build; uploads the `site`
+#                           artifact that every deploy job downloads
+#   link_check_job          needs the built site from build_job
+#   deploy_job              PR preview on the test SWA; waits for all of the
+#                           above, so a failing check blocks the preview
+#   close_preview           PR closed -> removes its preview environment
+#   deploy_staging          main push -> test SWA; waits for all checks, so a
+#                           failing check blocks staging
+#   deploy_production       main push -> prod SWA; needs deploy_staging and is
+#                           gated by the `production` environment's reviewers
+#
+# lint_job, doctest_job, build_job and deploy_job carry the same `if`: run on
+# pushes to main and on open PRs, but only build the translation `localization`
+# branch (Translated review PRs) once a review is requested. GitHub Actions has
+# no way to share a job condition, so the expression is repeated verbatim; keep
+# the copies in sync. link_check_job inherits it through `needs: build_job`;
+# close_preview, deploy_staging and deploy_production have their own event
+# conditions.
 jobs:
   lint_job:
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
@@ -140,9 +156,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: site
+          retention-days: ${{ github.event_name == 'push' && 30 || 7 }}
           path: _site
-          retention-days: 7
-
   link_check_job:
     needs: build_job
     runs-on: ubuntu-latest
@@ -189,18 +204,17 @@ jobs:
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
     needs: [build_job, lint_job, doctest_job, link_check_job]
     runs-on: ubuntu-latest
-    name: Deploy to Azure
+    name: Deploy PR Preview (staging SWA)
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: site
           path: _site
-      - name: Deploy to Azure Static Web Apps
-        id: builddeploy
+      - name: Deploy preview environment
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUD_081AFFE03 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_TEST }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "_site"
@@ -208,14 +222,69 @@ jobs:
           output_location: ""
           skip_app_build: true
 
-  close_pull_request_job:
+  close_preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
-    name: Close Pull Request Job
+    name: Close PR Preview
     steps:
-      - name: Close Pull Request
-        id: closepullrequest
+      - name: Close preview environment
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUD_081AFFE03 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_TEST }}
           action: "close"
+
+  # main -> staging, automatically
+  deploy_staging:
+    if: github.event_name == 'push'
+    needs: [build_job, lint_job, doctest_job, link_check_job]
+    runs-on: ubuntu-latest
+    name: Deploy to Staging
+    environment:
+      name: staging
+      url: https://docs-staging.tabulareditor.com
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+      - name: Deploy to staging SWA
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_TEST }}
+          action: "upload"
+          app_location: "_site"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
+
+  # main -> production, gated.
+  deploy_production:
+    if: github.event_name == 'push'
+    needs: [build_job, deploy_staging]
+    runs-on: ubuntu-latest
+    name: Deploy to Production
+    environment:
+      name: production
+      url: https://docs.tabulareditor.com
+    # If several merges stack up unapproved, older pending deployments are cancelled so only
+    # the newest merge can be approved - stale content can never be promoted by accident.
+    concurrency:
+      group: docs-prod-deploy
+      cancel-in-progress: true
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+      - name: Deploy to production SWA
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # Environment secret under 'production' - unreadable before the approval gate.
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_TOKEN_PROD }}
+          action: "upload"
+          app_location: "_site"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
