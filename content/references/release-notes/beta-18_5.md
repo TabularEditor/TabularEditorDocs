@@ -1,16 +1,16 @@
 ﻿# Tabular Editor 3 BETA-18.5
 
 > [!IMPORTANT]
-> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
+> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/en/references/release-notes).
 
 
 - Download [Tabular Editor 3 BETA-18.5](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x86.msi)
 - Download [Tabular Editor 3 BETA-18.5 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x64.msi)
-- [All releases](https://docs.tabulareditor.com/projects/te3/en/latest/downloads.html)
+- [All releases](xref:downloads)
 
 ## New features in BETA-18.5:
 
-- The Search dialog (CTRL+F) now supports searching the entire model. When this option is selected in the dropdown, another dropdown appears that lets you choose which object properties to search. There are also options for regular expressions, backslash expressions and also [Dynamic LINQ search, similar to Tabular Editor 2.x](https://docs.tabulareditor.com/Advanced-Filtering-of-the-Explorer-Tree.html) (Dynamic LINQ can also be enabled by entering `:` as the first character in the "Find what" field). Search results are displayed in a separate window, and double-clicking on an item in the search results window will take you directly to that item, highlighting the relevant property in the property grid:
+- The Search dialog (CTRL+F) now supports searching the entire model. When this option is selected in the dropdown, another dropdown appears that lets you choose which object properties to search. There are also options for regular expressions, backslash expressions and also [Dynamic LINQ search, similar to Tabular Editor 2.x](xref:advanced-filtering-explorer-tree) (Dynamic LINQ can also be enabled by entering `:` as the first character in the "Find what" field). Search results are displayed in a separate window, and double-clicking on an item in the search results window will take you directly to that item, highlighting the relevant property in the property grid:
 
 ![image](~/content/assets/images/beta-18-5-01.png)
 
