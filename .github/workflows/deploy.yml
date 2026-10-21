@@ -1,10 +1,5 @@
 name: Docs CI/CD
 
-# Flow:
-#   PR         -> build -> preview environment on the test SWA (URL commented on the PR)
-#   main push  -> build once -> staging (test SWA, automatic)
-#                            -> production (prod SWA) AFTER required-reviewer approval
-
 on:
   push:
     branches:
@@ -14,17 +9,33 @@ on:
     branches:
       - main
 
-# Every job except close_pull_request_job carries the same `if`: run on pushes
-# to main and on open PRs, but only build the translation `localization` branch
-# (Translated review PRs) once a review is requested. GitHub Actions has no way to share a job
-# condition, so the expression is repeated verbatim; keep the copies in sync.
+# Flow:
+#   PR         -> checks + build -> preview environment on the test SWA
+#                                   (URL commented on the PR; removed on close)
+#   main push  -> checks + build once -> staging (test SWA, automatic)
+#                                     -> production (prod SWA) AFTER required-reviewer
+#                                        approval on the `production` environment
 #
 # Job layout:
-#   lint_job, doctest_job      independent checks on the repo sources
-#   build_job                  full multi-language site build
-#   link_check_job             needs the built site from build_job
-#   deploy_job                 waits for all of the above, so a failing check
-#                              blocks the deploy (production and PR previews)
+#   lint_job, doctest_job   independent checks on the repo sources
+#   build_job               full multi-language site build; uploads the `site`
+#                           artifact that every deploy job downloads
+#   link_check_job          needs the built site from build_job
+#   deploy_job              PR preview on the test SWA; waits for all of the
+#                           above, so a failing check blocks the preview
+#   close_preview           PR closed -> removes its preview environment
+#   deploy_staging          main push -> test SWA; waits for all checks, so a
+#                           failing check blocks staging
+#   deploy_production       main push -> prod SWA; needs deploy_staging and is
+#                           gated by the `production` environment's reviewers
+#
+# lint_job, doctest_job, build_job and deploy_job carry the same `if`: run on
+# pushes to main and on open PRs, but only build the translation `localization`
+# branch (Translated review PRs) once a review is requested. GitHub Actions has
+# no way to share a job condition, so the expression is repeated verbatim; keep
+# the copies in sync. link_check_job inherits it through `needs: build_job`;
+# close_preview, deploy_staging and deploy_production have their own event
+# conditions.
 jobs:
   lint_job:
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
