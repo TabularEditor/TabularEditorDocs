@@ -225,7 +225,7 @@ jobs:
   # main -> staging, automatically
   deploy_staging:
     if: github.event_name == 'push'
-    needs: build_job
+    needs: [build_job, lint_job, doctest_job, link_check_job]
     runs-on: ubuntu-latest
     name: Deploy to Staging
     environment:
