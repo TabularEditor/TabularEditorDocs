@@ -1,8 +1,8 @@
 ---
 uid: installation-activation-basic
-title: Instalación, activación y configuración básica
+title: Instalación y activación avanzadas
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,74 +17,74 @@ applies_to:
           full: true
 ---
 
-# Instalación, activación y configuración básica
+# Instalación y activación avanzadas
 
-## Resumen
+## Información general
 
-Esta página cubre escenarios avanzados de instalación y activación de Tabular Editor 3: activación manual (sin conexión), gestión de licencias basada en el Registro, implementación desatendida y administración de puestos en la Edición Enterprise.
+Esta página trata de los escenarios avanzados de instalación y activación de Tabular Editor 3: activación manual (sin conexión), gestión de licencias basada en el registro, implementación silenciosa y administración de licencias de usuario de la edición Enterprise.
 
-Para el flujo de activación estándar, consulta @getting-started.
+Para conocer el proceso de activación estándar, consulte @getting-started.
 
-## Activación manual (sin Internet)
+## Activación manual (sin conexión a Internet)
 
 Si no tienes acceso a Internet, por ejemplo, debido a un proxy, Tabular Editor te pedirá que realices una activación manual.
 
-![Aviso de activación manual](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
+![Mensaje de activación manual](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
-Después de introducir tu correo electrónico, aparece un cuadro de diálogo con un enlace a una clave de activación. Copia la URL y ábrela en un navegador web conectado a Internet.
+Después de introducir su correo electrónico, aparecerá un cuadro de diálogo con un enlace a una clave de activación. Copie la URL y ábrala en un navegador web que esté conectado a Internet.
 
 La URL devuelve un objeto JSON:
 
 ![Objeto JSON de activación manual](~/content/assets/images/getting-started/activation_manual_jsonobject.png)
 
-Copia el objeto JSON completo y pégalo en el cuadro de diálogo. El cuadro de diálogo de activación manual debería quedar como el que se muestra a continuación.
+Copia el objeto JSON completo y pégalo en el cuadro de diálogo. Su cuadro de diálogo de activación manual acabará teniendo el aspecto que se muestra en la captura de pantalla a continuación.
 
 ![Activación manual completada](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
-De este modo, se verificará tu licencia de Tabular Editor 3.
+A continuación, se verifica su licencia de Tabular Editor 3.
 
-## Cambiar puestos en la Edición Enterprise
+## Cambio de puestos en la Edición Enterprise
 
-Para cambiar un puesto de la Edición Enterprise, anula el registro del usuario actual de ese puesto a través del [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/). El propietario de la suscripción o el administrador de licencias crea una cuenta o inicia sesión en una existente para administrar los puestos de licencia.
+Para cambiar una licencia Enterprise, da de baja al usuario existente de la licencia a través del [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/). El titular de la suscripción o el administrador de licencias crea una cuenta, o inicia sesión con una existente, para administrar las plazas de licencia.
 
 > [!NOTE]
 > Cambiar un usuario solo es posible en la Edición Enterprise.
 
 ## Detalles del registro
 
-Tabular Editor 3 almacena los detalles de activación de cada usuario de Windows en `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
+Tabular Editor 3 almacena los datos de activación de cada usuario de Windows en `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
 
-| Valor              | Tipo        | Contenido                                                                                                                                                    |
-| ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `LicenseKey`       | `REG_SZ`    | La clave de licencia                                                                                                                                         |
-| `User`             | `REG_SZ`    | La dirección de correo electrónico del usuario con licencia, para licencias multiusuario                                                                     |
-| `ActivationKey`    | `REG_SZ`    | La activación devuelta por el servicio de licencias                                                                                                          |
-| `Activation`       | `REG_SZ`    | Una activación guardada por versiones anteriores de Tabular Editor 3. Tabular Editor 3 la elimina la próxima vez que almacena una activación |
-| `InstallationDate` | `REG_QWORD` | La primera vez que este usuario de Windows inicia Tabular Editor 3. Tabular Editor 3 la crea al iniciarse si no existe                       |
+| Valor | Tipo | Contenido |
+|-------|------|---------|
+| `LicenseKey` | `REG_SZ` | La clave de licencia |
+| `User` | `REG_SZ` | La dirección de correo electrónico del usuario con licencia, para licencias multiusuario |
+| `ActivationKey` | `REG_SZ` | La activación devuelta por el servicio de licencias |
+| `Activation` | `REG_SZ` | Una activación escrita por versiones anteriores de Tabular Editor 3. Tabular Editor 3 la elimina la próxima vez que almacena una activación |
+| `InstallationDate` | `REG_QWORD` | El primer inicio de sesión de Tabular Editor 3 para este usuario de Windows. Tabular Editor 3 lo crea al iniciarse si no existe |
 
-Para ver la clave de licencia actual del usuario de Windows activo, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
+Para ver la clave de licencia actual del usuario activo de Windows, ejecute el siguiente comando en el símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar hasta `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores.
+También puedes usar «regedit.exe» (Editor del Registro de Windows) y navegar hasta «HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3» para ver y modificar los valores.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
-Un administrador del sistema también puede asignar de forma proactiva licencias de Tabular Editor 3 a un equipo, especificando los valores **LicenseKey** y **User** en la clave del Registro `SOFTWARE\Kapacity\Tabular Editor 3` de cada usuario. Consulta [Instalación desatendida y aprovisionamiento previo de la licencia](#silent-installation-and-license-pre-provisioning) para ver el procedimiento completo de implementación.
+Un administrador del sistema también puede asignar de forma proactiva licencias de Tabular Editor 3 a un equipo especificando los valores **LicenseKey** y **User** en la clave de registro `SOFTWARE\Kapacity\Tabular Editor 3` de cada usuario. Consulta [Instalación silenciosa y aprovisionamiento previo de licencias](#silent-installation-and-license-pre-provisioning) para conocer el procedimiento de implementación completo.
 
-## Cambiar una clave de licencia
+## Cambio de una clave de licencia a través del registro
 
-La opción **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`, y desactiva la instalación en el servicio de licencias. La opción solo aparece cuando no hay ningún modelo cargado y la licencia está activada o la reserva de asiento ha caducado. Si no aparece, por ejemplo porque la activación falló, restablece la licencia desde el Editor del Registro:
+La opción **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation` y desactiva la instalación en el servicio de licencias. La opción solo aparece cuando no hay ningún modelo cargado y la licencia está activada o su reserva de licencia ha caducado. Si no se muestra, por ejemplo, porque la activación ha fallado, restablezca la licencia a través del Editor del Registro:
 
-1. Cierra todas las instancias de Tabular Editor 3.
-2. Abre el Editor del Registro de Windows (Inicio > Ejecutar > regedit.exe).
-3. Localiza `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (consulta la captura de pantalla anterior).
-4. Elimina los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`. Deja `InstallationDate` tal cual.
-5. Cierra el Editor del Registro y reinicia Tabular Editor 3.
+1. Cierra todas las instancias de Tabular Editor 3.
+2. Abra el Editor del Registro en Windows (Inicio > Ejecutar > regedit.exe).
+3. Busca `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (consulta la captura de pantalla anterior).
+4. Elimine los valores `LicenseKey`, `User`, `ActivationKey` y `Activation`. Deje `InstallationDate` donde está.
+5. Cierre el Editor del Registro y reinicie Tabular Editor 3.
 
-Como alternativa, ejecuta los siguientes comandos en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe). Un comando Report informa de un error si su valor no existe, y los demás comandos siguen ejecutándose:
+Como alternativa, ejecuta los siguientes comandos en un símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe). Un comando informa de un error si su valor no existe, pero los comandos restantes se ejecutan igualmente:
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /f
@@ -93,16 +93,16 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v ActivationKey /f
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /v Activation /f
 ```
 
-La próxima vez que inicies Tabular Editor 3, se te pedirá una clave de licencia.
+La próxima vez que inicies Tabular Editor 3, se te pedirá una clave de licencia.
 
 > [!NOTE]
-> Eliminar los valores del registro no desactiva la instalación. Usa el [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/) para gestionar tus licencias activadas.
+> Eliminar los valores del registro no desactiva la instalación. Utiliza el [Portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/) para gestionar tus licencias activadas. 
 
-## Instalación desatendida y aprovisionamiento previo de la licencia
+## Instalación silenciosa y aprovisionamiento previo de licencias
 
-Puedes implementar Tabular Editor de forma desatendida y aprovisionar previamente la licencia a través del Registro de Windows. Instala primero y, después, escribe la licencia, que debe estar establecida antes de que la aplicación se inicie por primera vez.
+Puedes implementar Tabular Editor de forma silenciosa y aprovisionar previamente la licencia a través del Registro de Windows. Primero instale y, a continuación, introduzca la licencia, que debe estar en su sitio antes de iniciar la aplicación por primera vez.
 
-### Instalar en silencio
+### Instalación silenciosa
 
 Sin interfaz de usuario, sin reinicio:
 
@@ -110,80 +110,85 @@ Sin interfaz de usuario, sin reinicio:
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3_install.log
 ```
 
-| Funcionalidad MSI | Se muestra en el instalador como | Descripción                                                 | Activar la instalación                                                                                                                        |
-| ----------------- | -------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MainFeature`     | Tabular Editor 3                 | Aplicación principal de Tabular Editor 3                    | Sí (obligatorio)                                                                                                           |
-| `AIAssistant`     | Funciones de IA                  | El @ai-assistant y el @mcp-server | Sí, a partir de la versión 3.27.0. Las versiones anteriores solo lo instalan si se selecciona |
+| Función MSI | Mostrada en el instalador como | Descripción | Instalada de forma predeterminada |
+|-------------|---------------------------|-------------|----------------------|
+| `MainFeature` | Tabular Editor 3 | Aplicación principal de Tabular Editor 3 | Sí (obligatoria) |
+| `AIAssistant` | Funciones de IA | El @ai-assistant y el @mcp-server | Sí, a partir de la versión 3.27.0. Las versiones anteriores lo instalan solo cuando está seleccionado |
 
 > [!IMPORTANT]
-> A partir de la versión 3.27.0, una nueva instalación incluye el componente de **funciones de IA** a menos que lo excluyas. Si tu organización no permite el Asistente de IA ni el servidor MCP, excluye el componente y configura la directiva `DisableAi` como se describe a continuación.
+> A partir de la versión 3.27.0, una nueva instalación incluye el componente **Funciones de IA**, a menos que lo excluyas. Si tu organización no permite el Asistente de IA ni el servidor MCP, excluye el componente y establece la política `DisableAi` como se describe a continuación.
 
-### Desplegar sin las funciones de IA
+### Implementación sin las funciones de IA
 
-No incluyas `AIAssistant` en `ADDLOCAL` para instalar Tabular Editor 3 sin las funciones de IA:
+Deja `AIAssistant` fuera de `ADDLOCAL` para instalar Tabular Editor 3 sin las funciones de IA:
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
 ```
 
-Ejecuta el paquete con `REMOVE` para quitar el componente de los equipos que ya lo tienen:
+Ejecute el paquete con `REMOVE` para eliminar el componente de los equipos que ya lo tengan:
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
 ```
 
-Sin el componente, los ensamblados de IA no están en la carpeta de instalación; el panel del **Asistente de IA** y el servidor MCP no están disponibles en la aplicación, y no se envía ninguna solicitud a un proveedor de modelos. Las demás funciones no se ven afectadas.
+Sin el componente, los ensamblados de IA no están en la carpeta de instalación, el panel **Asistente de IA** y el servidor MCP no están presentes en la aplicación y no se envían solicitudes a ningún proveedor de modelos. Las demás funciones no se ven afectadas.
 
 Para cambiar la selección en un solo equipo, vuelve a ejecutar el instalador y selecciona **Modificar** en el cuadro de diálogo de mantenimiento.
 
 > [!NOTE]
-> Cuando uses `ADDLOCAL`, incluye `MainFeature` en la lista junto con cualquier característica opcional. Si especificas solo `AIAssistant` sin `MainFeature`, la instalación quedará incompleta.
+> Cuando utilice `ADDLOCAL`, incluya `MainFeature` junto con cualquier función opcional. Si se especifica solo `AIAssistant` sin `MainFeature`, la instalación quedará incompleta.
 
 ### Actualizaciones y el componente de funciones de IA
 
-Cuando instalas una versión más reciente del mismo paquete sobre una instalación existente, el instalador conserva la selección de funciones que ya tiene el equipo. Esto se aplica a las instalaciones interactivas y silenciosas. Un equipo implementado sin las funciones de IA antes de la versión 3.27.0 seguirá sin ellas después de la actualización, y un equipo en el que se seleccionaron las funciones de IA las conservará.
+Cuando instala una versión más reciente del mismo paquete sobre una instalación existente, el instalador mantiene la selección de funciones que ya tiene el equipo. Esto se aplica a las instalaciones interactivas y silenciosas. Un equipo implementado sin las funciones de IA antes de la versión 3.27.0 se queda sin ellas después de la actualización, y un equipo en el que se seleccionaron las funciones de IA las conserva.
 
-En estos casos, el instalador aplica la selección predeterminada o la selección indicada en la línea de comandos:
+En estos casos, el instalador aplica la selección predeterminada o la selección de la línea de comandos:
 
-| Situación                                                                                                                                                               | Resultado                                                                                                                                                                                                          |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| La línea de comandos establece `ADDLOCAL`, `REMOVE` u otra propiedad de característica                                                                                  | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` quita las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen         |
-| La implementación desinstala la versión anterior antes de instalar la nueva; por ejemplo, una sustitución de Intune configurada para desinstalar                        | La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya                                                                                                                |
-| El paquete usa un entorno de ejecución distinto del instalado; por ejemplo, el paquete de .NET 10 en un equipo con el paquete de .NET 8 | Los paquetes de .NET 8 y .NET 10 son productos independientes. La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya |
+| Situación | Resultado |
+|--|--|
+| La línea de comandos establece «ADDLOCAL», «REMOVE» u otra propiedad de función | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` elimina las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen |
+| La implementación desinstala la versión anterior antes de instalar la nueva, por ejemplo, una sustitución de Intune configurada para desinstalar | La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya |
 
-La directiva `DisableAi` prevalece sobre la selección en todos los casos.
+La política «DisableAi» anula la selección en todos los casos.
 
-### Imponer la decisión con la directiva DisableAi
+### Cambiar entre los paquetes .NET 8 y .NET 10
 
-Un usuario que ejecuta el instalador obtiene la selección predeterminada, que incluye las funciones de IA. Establece `DisableAi` @policies en `1` bajo `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` para mantener desactivadas las funciones de IA en todas las instalaciones del equipo. Tabular Editor 3 lee la directiva al iniciarse y desactiva el Asistente de IA y el servidor MCP.
+Los paquetes .NET 8 y .NET 10 se sustituyen entre sí. Cuando instala uno en un equipo que tiene la otra edición en la misma versión o en una versión anterior, el instalador elimina la otra edición antes de instalar ningún archivo y conserva la selección de funciones de esa edición. Un dispositivo que tenga instaladas ambas ediciones tendrá una sola instalación después de la siguiente instalación, y en **Configuración > Aplicaciones > Aplicaciones instaladas** aparecerá un solo **Tabular Editor 3**.
+
+Si la otra edición está instalada en una versión más reciente, la instalación se detiene y aparece un mensaje. Desinstala primero la edición más reciente y, a continuación, vuelve a ejecutar el instalador.
+
+### Aplicar la decisión con la directiva DisableAi
+
+Un usuario que ejecute el instalador obtendrá la selección predeterminada, que incluye las funciones de IA. Establezca las @políticas «DisableAi» en «1» en «HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3» para mantener desactivadas las funciones de IA en todas las instalaciones del dispositivo. Tabular Editor 3 lee la política al iniciarse y desactiva el Asistente de IA y el servidor MCP.
 
 A partir de la versión 3.27.0, el instalador también lee la directiva:
 
-- una nueva instalación omite el componente de funciones de IA y el instalador no lo muestra
-- una actualización elimina el componente de un equipo que lo tiene
-- una instalación existente conserva los archivos de IA hasta la siguiente actualización. Tabular Editor 3 no los carga mientras la directiva esté establecida
+- Una nueva instalación omite el componente de funciones de IA, y el instalador no lo muestra.
+- Una actualización elimina el componente de un equipo que lo tiene.
+- Una instalación existente conserva los archivos de IA hasta la siguiente actualización. Tabular Editor 3 no los carga mientras la política esté establecida.
 
-Una herramienta de implementación que se ejecuta con la cuenta del sistema local no lee las directivas de `HKEY_CURRENT_USER` de los usuarios del equipo. Configura la directiva en `HKEY_LOCAL_MACHINE` para que el instalador la lea en una implementación desatendida.
+Una herramienta de implementación que se ejecuta como la cuenta del sistema local no lee las políticas `HKEY_CURRENT_USER` de los usuarios del equipo. Establece la política en «HKEY_LOCAL_MACHINE» para que el instalador la lea en una implementación silenciosa.
 
 ### Nombres de paquetes y otras opciones de MSI
 
-También puedes usar `/package` en lugar de `/i`. Reemplaza `<version>` por la cadena de versión real.
+También puedes usar `/package` en lugar de `/i`. Sustituye «<version>» por la cadena de la versión real.
 
-Los paquetes MSI se llaman `TabularEditor.<version>.<architecture>.<runtime>.msi`, por ejemplo `TabularEditor.3.27.0.x64.Net10.msi` o `TabularEditor.3.27.0.ARM64.Net8.msi`. Elige la arquitectura y el runtime que mejor se adapten a los equipos de destino; consulta @system-requirements. El MSI no instala el .NET Desktop Runtime, así que instálalo primero.
+Los paquetes MSI se denominan «TabularEditor.<version>.<architecture>.<runtime>.msi», por ejemplo, «TabularEditor.3.27.0.x64.Net10.msi» o «TabularEditor.3.27.0.ARM64.Net8.msi». Elija la arquitectura y el tiempo de ejecución que se adapten a los equipos de destino; consulte @system-requirements. El MSI no instala .NET Desktop Runtime, así que despliéguelo primero.
 
-Para obtener información detallada sobre las opciones de línea de comandos de MSI disponibles, consulta la documentación oficial de Microsoft:
-[Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
+Para obtener más información sobre las opciones de línea de comandos de MSI disponibles, consulte la documentación oficial de Microsoft:
+[Opciones de la línea de comandos del instalador estándar de Microsoft - Aplicaciones Win32 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
-### Aprovisiona previamente la licencia
+### Aprovisionar previamente la licencia
 
-Escribe la licencia en el Registro _antes de iniciar la aplicación por primera vez_:
+Escribe la licencia en el Registro *antes del primer inicio* de la aplicación:
 
 ```bat
 REM Per-user license key (HKCU)
 REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
 ```
 
-Si usas una clave de licencia de la **Edición Enterprise**, establece también el correo electrónico del usuario con licencia:
+Si está utilizando una clave de licencia de la **Edición Enterprise**, establezca también el correo electrónico del usuario con licencia:
 
 ```bat
 REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
@@ -191,7 +196,7 @@ REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@exam
 
 **Notas**
 
-- El instalador no acepta un parámetro de licencia; la licencia se gestiona mediante las entradas del Registro anteriores.
-- Las claves se almacenan en **HKCU** (por usuario). Asegúrate de que los comandos se ejecuten en el contexto del usuario de destino (por ejemplo, mediante un script de inicio de sesión) para que los valores se escriban en el perfil correcto.
-- Para conocer más claves y valores, consulta [Detalles del Registro](#registry-details).
+- El instalador no acepta un parámetro de licencia; las licencias se gestionan a través de las entradas del Registro indicadas anteriormente.
+- Las claves se guardan en **HKCU** (por usuario). Asegúrese de que los comandos se ejecuten en el contexto del usuario de destino (por ejemplo, mediante un script de inicio de sesión) para que los valores se escriban en el perfil correcto.
+- Para conocer otras claves y valores, consulte [Detalles del Registro](#registry-details).
 
