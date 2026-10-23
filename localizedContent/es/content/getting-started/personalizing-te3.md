@@ -160,7 +160,7 @@ SUM( 'Sales'[Amount] )
 
 ***
 
-##### [Habilitado](#tab/newline-after-function-on)
+##### _Salto de línea después de las funciones_ (deshabilitado)
 
 Se aplica solo cuando es necesario dividir una llamada de función en varias líneas.
 

@@ -23,7 +23,7 @@ Este documento describe las consideraciones de seguridad y privacidad de Tabular
 
 ## Recomendaciones de Microsoft sobre herramientas de terceros como Tabular Editor
 
-Microsoft respalda el uso de herramientas de terceros de la comunidad, tal y como se indica aquí: [Herramientas comunitarias y de terceros para desarrollar modelos empresariales de Power BI y Analysis Services](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
+Microsoft respalda el uso de herramientas de terceros de la comunidad, tal y como se indica aquí: [Herramientas comunitarias y de terceros para desarrollar modelos empresariales de Power BI y Analysis Services]( https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
 
 La documentación de planificación de la implementación de Power BI de Microsoft menciona específicamente Tabular Editor en escenarios avanzados de modelado de datos y desarrollo en entornos empresariales: [Escenarios de uso de Power BI: Administración avanzada del Data model](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 

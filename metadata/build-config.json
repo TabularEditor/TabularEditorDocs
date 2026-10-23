@@ -32,6 +32,12 @@
       { "pattern": "security/third-party-notices.md" }
     ],
     "ignore": [],
+    "segmentDiff": {
+      "_comment": "Outdated translations are updated from changed segments only (Markdown blocks, JSON keys, toc names). A file whose changed text exceeds maxChangedRatio of its translatable text is sent whole. contextSegments: unchanged English blocks sent on each side of a change as untranslatable context (-1 = the whole page, 0 = none); Translated does not bill context. The repository variable TRANSLATED_CONTEXT_SEGMENTS overrides it.",
+      "enabled": true,
+      "maxChangedRatio": 0.8,
+      "contextSegments": 2
+    },
     "sandboxLimits": {
       "_comment": "Translated warns that excessive sandbox use can get the sandbox key blocked. In sandbox mode a run refuses to exceed these unless --allow-unbounded is given.",
       "maxFilesPerRun": 20,
