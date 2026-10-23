@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -90,6 +90,7 @@ To enforce one of these, add a `REG_DWORD` value with the name below and a non-z
 | DisableAiChat | TE3 | The AI Assistant chat panel is unavailable. Other AI functionality, including the MCP server, is unaffected. |
 | DisableMcpServer | TE3 | The MCP server is unavailable, so external agent tools cannot connect to Tabular Editor 3. The AI Assistant chat is unaffected. |
 | RequireMcpAccessToken | TE3 | Clients connecting to the MCP server must present the access token shown in the **Tools > MCP Server...** dialog, and users cannot turn that requirement off. |
+| RequireNativeLibrarySignatureVerification | TE3 | Tabular Editor 3 verifies the Authenticode signature of the code editor libraries, `Scintilla.dll` and `Lexilla.dll`, before it loads them. If the machine can't validate the publisher's certificate chain, the code editors fail to start and Tabular Editor 3 closes. In the Group Policy editor this policy is called **Require signature verification of the code editor support libraries**. |
 
 ### In the TE CLI
 

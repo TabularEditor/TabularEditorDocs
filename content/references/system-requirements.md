@@ -2,7 +2,7 @@
 uid: system-requirements
 title: System requirements
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -33,7 +33,7 @@ Which Windows versions are supported at any given moment follows Microsoft's .NE
 | .NET 10 *(recommended)* | x64, ARM64 | `.exe` installer, `.msi`, portable `.zip` |
 | .NET 8 | x64, ARM64 | `.exe` installer, `.msi`, portable `.zip` |
 
-The .NET 10 and .NET 8 builds are *functionally identical*. Nothing is available in one and missing from the other, and the two can be installed side by side.
+The .NET 10 and .NET 8 builds are *functionally identical*. Nothing is available in one and missing from the other. Installing one build with the `.exe` or `.msi` installer replaces the other build. See [Switching between the .NET 8 and .NET 10 packages](xref:installation-activation-basic#switching-between-the-net-8-and-net-10-packages).
 
 ARM64 builds are native, from version 3.23.0 onwards.
 

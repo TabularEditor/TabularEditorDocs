@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: Advanced installation and activation
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -149,9 +149,14 @@ In these cases the installer applies the default selection or the selection on t
 |--|--|
 | The command line sets `ADDLOCAL`, `REMOVE` or another feature property | The command line sets the selection. `ADDLOCAL=MainFeature` removes the AI features from machines that have them, and `ADDLOCAL=ALL` installs them on machines that don't |
 | The deployment uninstalls the earlier version before it installs the new one, for example an Intune supersedence set to uninstall | The installation is new and includes the AI features unless the command line excludes them |
-| The package targets a different runtime than the installed one, for example the .NET 10 package on a machine with the .NET 8 package | The .NET 8 and .NET 10 packages are separate products. The installation is new and includes the AI features unless the command line excludes them |
 
 The `DisableAi` policy overrides the selection in every case.
+
+### Switching between the .NET 8 and .NET 10 packages
+
+The .NET 8 and .NET 10 packages replace each other. When you install one on a machine that has the other edition at the same or an earlier version, the installer removes the other edition before it installs any files and keeps that edition's feature selection. A machine that has both editions installed has one installation after the next install, and **Settings > Apps > Installed apps** lists one **Tabular Editor 3**.
+
+If the other edition is installed at a newer version, the installation stops with a message. Uninstall the newer edition first, then run the installer again.
 
 ### Enforcing the decision with the DisableAi policy
 
