@@ -23,7 +23,7 @@ applies_to:
 
 ## Microsoft 关于 Tabular Editor 等第三方工具的建议
 
-Microsoft 在此处说明其支持使用社区第三方工具：[用于开发企业级 Power BI 和 Analysis Services 模型的社区和第三方工具](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
+Microsoft 在此处说明其支持使用社区第三方工具：[用于开发企业级 Power BI 和 Analysis Services 模型的社区和第三方工具]( https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
 
 Microsoft的 Power BI 实施规划文档在高级数据建模场景与企业级开发中明确提及 Tabular Editor：[Power BI 使用场景：高级 Data model 管理](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 

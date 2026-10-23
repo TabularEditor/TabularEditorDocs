@@ -1340,8 +1340,8 @@
       "status": "translated"
     },
     "references/downloads.md": {
-      "sourceHash": "sha256:d6f5f62ef64bfef5eab06ef77caad78ee695cd60e12114b7af9774a337063085",
-      "sourceBlob": "fd0cccde330319b6deb3589f9250ce5b80bebeca",
+      "sourceHash": "sha256:27c21529bb0408933aedeb5614c99a4a2bc382554c45e4dd75e8f0fc45fa4281",
+      "sourceBlob": "551ccb2d3b4f9fe23823564d3f93b843bdc886ff",
       "status": "translated"
     },
     "references/FAQ.md": {
@@ -1450,8 +1450,8 @@
       "status": "translated"
     },
     "references/release-history.md": {
-      "sourceHash": "sha256:78226d0901a9debfe95e062f96697ba023c893852edcf6560dc89296382c0fc1",
-      "sourceBlob": "dcf1babb50bec996e45db97a337d9344203a4473",
+      "sourceHash": "sha256:3c28cf2db33088ef78f5af074d2c62d2678fc8a726768d62373c4e453ba16b96",
+      "sourceBlob": "c081f42cfb2bedc78a85dff2f7217b827b9946d9",
       "status": "translated"
     },
     "references/release-notes/3_0_1.md": {
@@ -1470,8 +1470,9 @@
       "status": "translated"
     },
     "references/release-notes/3_0_3.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:e34eb6b6cc40a550c2b1e5555ab3dd5ae9aab4fe150191da8b217f7e1c44b7f8",
+      "sourceBlob": "e53733eec2e5cae03cc0d3aa97ebf5a3b520a61a",
+      "status": "translated"
     },
     "references/release-notes/3_0_4.md": {
       "sourceHash": "sha256:0745acfac1154de9e0b61300052c871454382fff3120fa89b0bf5b794522bcb1",
@@ -1599,8 +1600,9 @@
       "status": "translated"
     },
     "references/release-notes/3_1_2.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:9f7ef93ca36c28f28b2a61b62b7cf68738da2a31a73abbc67ebacd4be6b05915",
+      "sourceBlob": "22f5fc643cfd26345fab9093675f28d7e622d952",
+      "status": "translated"
     },
     "references/release-notes/3_1_3.md": {
       "sourceHash": "sha256:63da26ecf5029706dd4a732a7494b15ff4df4bbf3d4e1e7743f61b46d979d2ef",
@@ -1768,8 +1770,9 @@
       "status": "translated"
     },
     "references/release-notes/3_3_4.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:dabac3bc52ea3ecb59ffc39e10a13d252a29530412a604c284cf33fa988e7ccb",
+      "sourceBlob": "44b1704c61493dbce2d4bc1ab2dc690fcc6f9282",
+      "status": "translated"
     },
     "references/release-notes/3_3_5.md": {
       "sourceHash": "sha256:b88d6bc31375caca6ccbc5af1f95d1c64a64bac5d5861d540a5a111046ec2709",
@@ -1906,8 +1909,8 @@
       "status": "untranslated"
     },
     "references/user-options.md": {
-      "sourceHash": "sha256:ad092f6088edad3d3e8bd124c227f618338b081a453118946880a2fdc8dccf9d",
-      "sourceBlob": "b93fa6f9a35a52887c890815f84d704a29a2c029",
+      "sourceHash": "sha256:c1c940b4529b30a1be9a016f78877c647519695975505908b58abf3ce615ed86",
+      "sourceBlob": "36936949aa34a7fff8e4fb07abe2ad5ccdc6782c",
       "status": "translated"
     },
     "references/user-settings-files-te2.md": {
@@ -1936,8 +1939,9 @@
       "status": "translated"
     },
     "security/security-privacy.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:5d9f2e13cdc658c57cd7a23bcc73bedef02662c7efa62cb1bf1e780e53b281cd",
+      "sourceBlob": "fb50e726397e3e9f565b8aaecca3838cca6676f1",
+      "status": "translated"
     },
     "security/terms.md": {
       "sourceHash": "sha256:90fd51f0cff45e9e16b2c200fc4dc3ccf769b97a3c6afcd09b7a688cfc5b87f0",
@@ -2260,13 +2264,13 @@
     }
   },
   "summary": {
-    "translated": 448,
+    "translated": 452,
     "outdated": 0,
-    "untranslated": 10,
+    "untranslated": 6,
     "copied": 1,
     "pinned": 0,
     "total": 459,
-    "completionPercent": 97.8,
+    "completionPercent": 98.7,
     "failures": 0
   }
 }
