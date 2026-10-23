@@ -29,13 +29,15 @@ on:
 #   deploy_production       main push -> prod SWA; needs deploy_staging and is
 #                           gated by the `production` environment's reviewers
 #
-# lint_job, doctest_job, build_job and deploy_job carry the same `if`: run on
-# pushes to main and on open PRs, but only build the translation `localization`
-# branch (Translated review PRs) once a review is requested. GitHub Actions has
-# no way to share a job condition, so the expression is repeated verbatim; keep
-# the copies in sync. link_check_job inherits it through `needs: build_job`;
-# close_preview, deploy_staging and deploy_production have their own event
-# conditions.
+# lint_job, doctest_job and build_job carry the same `if`: run on pushes to
+# main and on open PRs, but only build the translation `localization` branch
+# (Translated review PRs) once a review is requested. GitHub Actions has no way
+# to share a job condition, so the expression is repeated verbatim; keep the
+# copies in sync. link_check_job inherits it through `needs: build_job`.
+# deploy_job applies the same open-PR / localization rules but only to
+# pull_request events - never to a push to main, which is deployed by
+# deploy_staging and deploy_production instead. close_preview, deploy_staging
+# and deploy_production have their own event conditions.
 jobs:
   lint_job:
     if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
@@ -201,7 +203,8 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
   deploy_job:
-    if: (github.head_ref != 'localization' && github.event_name == 'push') || (github.head_ref != 'localization' && github.event_name == 'pull_request' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested')
+    # PR events only: a push to main must never create a preview environment.
+    if: github.event_name == 'pull_request' && ((github.head_ref != 'localization' && github.event.action != 'closed') || (github.head_ref == 'localization' && github.event.action == 'review_requested'))
     needs: [build_job, lint_job, doctest_job, link_check_job]
     runs-on: ubuntu-latest
     name: Deploy PR Preview (staging SWA)
