@@ -173,7 +173,7 @@ def diff_blocks(old: list[Block], new: list[Block], prose_key: Callable[[str], s
     """One action per new block. Equal runs reuse the aligned old block; a changed or inserted
     block whose exact text exists elsewhere in the old version (a move) reuses that block; inside
     a replaced run, a block whose `prose_key` matches an old block of the same kind in the run
-    (only code, link targets or the list number changed) is reused with repair; any other
+    (only code, link targets, the list number or the heading level changed) is reused with repair; any other
     untranslatable block (code, comment, table separator) is taken from the English."""
     first_index: dict[str, int] = {}
     for i, b in enumerate(old):

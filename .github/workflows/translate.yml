@@ -7,25 +7,21 @@ name: Translate content (Translated)
 #
 # Jobs:
 #   dry_run    pull requests only; fully offline (--self-test, --plan, --dump-orders).
-#   translate  push to main (only while the TRANSLATED_ENV variable is
-#              'production') and workflow_dispatch (any environment). Folds the open
-#              translation branch into main's tree, runs --run (synchronous: translate,
-#              verify, write in one pass), pushes to `localization` (production) or
-#              `localization-sandbox` (draft PR), and opens/updates the review PR.
-#              The sandbox account has no AI-enabled service type, so a sandbox
-#              --run fails at the first submission.
+#   translate  nightly schedule (only while the TRANSLATED_ENV variable is 'production')
+#              and workflow_dispatch (any environment). One run per night collects every
+#              English change of the day, so text edited several times is paid for once.
+#              Folds the open translation branch into main's tree (status files merged
+#              entry by entry), runs --run (synchronous: translate, verify, write in one
+#              pass), pushes to `localization` (production) or `localization-sandbox`
+#              (draft PR), and opens/updates the review PR. Translations, rejected
+#              deliveries and the report are also uploaded as an artifact, so billed
+#              work survives a failed push. The sandbox account has no AI-enabled
+#              service type, so a sandbox --run fails at the first submission.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'content/**'
-      - 'metadata/build-config.json'
-      - 'metadata/language-metadata.json'
-      - 'build_scripts/translate-content.py'
-      - 'build_scripts/translation_segments.py'
-      - 'build_scripts/config_loader.py'
-      - '.github/workflows/translate.yml'
+  schedule:
+    # 03:00 UTC daily; scheduled runs use the workflow file on the default branch.
+    - cron: '0 3 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -122,8 +118,8 @@ jobs:
 
   translate:
     name: Submit and collect translations
-    # Automatic triggers only in production; a dispatch runs in whatever TRANSLATED_ENV names.
-    if: github.event_name == 'workflow_dispatch' || (github.event_name != 'pull_request' && vars.TRANSLATED_ENV == 'production')
+    # Scheduled runs only in production; a dispatch runs in whatever TRANSLATED_ENV names.
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && vars.TRANSLATED_ENV == 'production')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     permissions:
@@ -181,7 +177,7 @@ jobs:
           INPUT_TARGET_BRANCH: ${{ inputs.target_branch }}
           INPUT_MODE: ${{ inputs.mode }}
         run: |
-          # Empty (the default, and always on push) means auto by environment.
+          # Empty (the default, and always on a scheduled run) means auto by environment.
           target="$INPUT_TARGET_BRANCH"
           if [ -z "$target" ]; then
             if [ "$TRANSLATED_ENV" = "production" ]; then
@@ -251,7 +247,20 @@ jobs:
             exit 0
           fi
 
+          # -X theirs resolves conflicting hunks of the status JSON wholesale from the branch, so
+          # older entries the branch merely carries could overwrite newer ones from main.
+          # --merge-status rebuilds the status files entry by entry from the three versions.
+          main_sha="$(git rev-parse HEAD)"
+          merge_status() {
+            python build_scripts/translate-content.py --merge-status "$main_sha" "origin/$TARGET"
+            if [ -n "$(git status --porcelain localizedContent)" ]; then
+              git add -A localizedContent
+              git commit -q -m "Merge translation status entry by entry"
+            fi
+          }
+
           if git merge --no-edit -X theirs "origin/$TARGET"; then
+            merge_status
             exit 0
           fi
           if ! test -f .git/MERGE_HEAD; then
@@ -264,12 +273,18 @@ jobs:
           if git checkout "origin/$TARGET" -- localizedContent \
             && git add -A localizedContent \
             && { git -c core.editor=true merge --continue || git commit -m "Merge $TARGET (translations)"; }; then
+            merge_status
             exit 0
           fi
           unmerged="$(git diff --name-only --diff-filter=U | tr '\n' ' ')"
           echo "::error::Could not fold origin/$TARGET into main; unmerged paths: ${unmerged:-(none reported)}. Nothing was submitted or pushed. Resolve the conflict on '$TARGET' (or merge/close its PR so the branch is deleted) and rerun."
           git merge --abort || true
           exit 1
+
+      - name: Record the starting commit
+        id: start
+        if: steps.preflight.outputs.ready == 'true'
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Self-test (offline)
         if: steps.preflight.outputs.ready == 'true'
@@ -278,6 +293,9 @@ jobs:
       - name: Translate changed content
         id: translate
         if: steps.preflight.outputs.ready == 'true'
+        # Below the job's 45 minutes: a step timeout fails the step, so the push below still
+        # runs, where a job timeout would cancel the job and discard the billed translations.
+        timeout-minutes: 35
         env:
           TRANSLATED_API_KEY: ${{ secrets.TRANSLATED_API_KEY }}
           INPUT_MODE: ${{ inputs.mode }}
@@ -287,7 +305,7 @@ jobs:
         run: |
           mode="${INPUT_MODE:-translate}"
           report="$RUNNER_TEMP/translation-report.md"
-          run_args=(--run --limit "${INPUT_LIMIT:-0}" --report "$report")
+          run_args=(--run --limit "${INPUT_LIMIT:-0}" --report "$report" --keep-rejected "$RUNNER_TEMP/rejected")
           if [ "$INPUT_FORCE" = "true" ]; then
             run_args+=(--force)
           fi
@@ -310,10 +328,26 @@ jobs:
               ;;
           esac
 
+      - name: Save the translations as a patch
+        # Billed translations exist only on this runner until the push succeeds. The patch
+        # (git apply) is uploaded with the report, so a rejected push or a cancelled run
+        # loses nothing that was paid for.
+        if: ${{ always() && steps.start.outputs.sha != '' && steps.translate.outcome != 'skipped' }}
+        env:
+          START: ${{ steps.start.outputs.sha }}
+        run: |
+          git add -A localizedContent
+          git diff --cached --binary "$START" -- localizedContent > "$RUNNER_TEMP/translations.patch"
+          if [ -s "$RUNNER_TEMP/translations.patch" ]; then
+            echo "Saved $(git diff --cached --name-only "$START" -- localizedContent | wc -l) changed file(s) to translations.patch."
+          else
+            rm "$RUNNER_TEMP/translations.patch"
+          fi
+
       - name: Push to the translation branch
         id: push
-        # Runs even when the translate step failed, so billed translations are kept.
-        if: ${{ !cancelled() && steps.translate.outcome != 'skipped' && inputs.mode != 'dry-run' && inputs.mode != 'probe' }}
+        # Runs even when the translate step failed or the run was cancelled, so billed translations are kept.
+        if: ${{ always() && steps.translate.outcome != 'skipped' && inputs.mode != 'dry-run' && inputs.mode != 'probe' }}
         env:
           TARGET: ${{ steps.target.outputs.branch }}
         run: |
@@ -346,8 +380,8 @@ jobs:
 
       - name: Open or update the review PR
         # No implicit success(): pushed translations get a PR (with a warning line)
-        # even when the translate step failed.
-        if: ${{ !cancelled() && steps.push.outputs.pushed == 'true' }}
+        # even when the translate step failed or the run was cancelled.
+        if: ${{ always() && steps.push.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           TARGET: ${{ steps.target.outputs.branch }}
@@ -402,6 +436,8 @@ jobs:
           path: |
             ${{ runner.temp }}/translation-report.md
             ${{ runner.temp }}/orders
+            ${{ runner.temp }}/translations.patch
+            ${{ runner.temp }}/rejected
 
       - name: Step summary
         if: always()

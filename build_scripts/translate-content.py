@@ -19,6 +19,7 @@ Actions (exactly one per invocation):
   --run          translate every missing/outdated file, verify and write the results
   --baseline     seed the status file from the existing translations (offline)
   --migrate-blobs  record sourceBlob for status entries that only have a sourceHash (offline)
+  --merge-status OURS THEIRS  rebuild the status files entry by entry after merging a translation branch (offline)
   --self-test    offline test suite (no key, no network)
   --probe        check service types and languages against the API
   --dump-orders  write the exact request bodies to a directory instead of sending
@@ -32,21 +33,25 @@ service type, so only production can run), TRANSLATED_API_KEY, and
 TRANSLATED_SERVICE_TYPE (optional override; both environments default to 'AI') and
 TRANSLATED_CONTEXT_SEGMENTS (optional override of translation.segmentDiff.contextSegments).
 
-Exit code 1 on configuration errors or failed API requests. Files that fail verification do
-not fail the run: they are recorded under "failures" in the status file and skipped until
-the English changes or --retry-failed. Full reference: README.md > Translating Content.
+Exit code 1 on configuration errors or failed API requests. A rejected API key (401/403) stops
+the run and records nothing for the file. Any other failed request is recorded under "failures"
+and planned again by the next run. Files whose delivery fails verification do not fail the run:
+they are recorded under "failures" and skipped until the English changes or --retry-failed, and
+--keep-rejected saves the billed delivery. Full reference: README.md > Translating Content.
 """
 
 from __future__ import annotations
 
 import argparse
 import difflib
+import email.utils
 import fnmatch
 import hashlib
 import http.client
 import io
 import json
 import os
+import random
 import re
 import shutil
 import subprocess
@@ -93,7 +98,9 @@ STATUS_COPIED = "copied"
 
 TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-RETRYABLE_HTTP = frozenset({425, 429, 500, 502, 503, 504})
+RETRYABLE_HTTP = frozenset({408, 425, 429, 500, 502, 503, 504})
+AUTH_HTTP = frozenset({401, 403})
+MAX_RETRY_DELAY = 60.0
 REPORT_LIST_CAP = 50
 IDENTITY_MIN_LETTERS = 200
 REPAIR_KINDS = ("fences", "inline code", "markers", "links")  # order used in "repaired: ..." lines
@@ -116,6 +123,7 @@ WHOLE_FILE_TYPE = "file type is translated whole"
 # Markdown structure regexes (mirror normalize-localized-heading-anchors.py).
 FENCE_RE = re.compile(r"^\s*(`{3,}|~{3,})")
 HEADING_RE = re.compile(r"^#{1,6}\s+\S")
+HEADING_MARKS_RE = re.compile(r"^#{1,6}(?=[ \t])")
 # Any `[!word` token: alert markers ([!NOTE]), includes ([!include[...]) and code refs ([!code-yaml[...]).
 # Deliberately broad so a translated marker ([!NOTA]) is still counted and restored positionally.
 ALERT_RE = re.compile(r"\[![A-Za-z][A-Za-z0-9-]*")
@@ -804,8 +812,10 @@ MD_RESTORE_RULES: tuple[tuple[re.Pattern[str], int, str, str], ...] = (
 
 
 def prose_key(text: str) -> str:
-    """The text with everything the repair step restores from English, and a list marker, masked out."""
+    """The text with everything the repair step restores from English, a list marker and heading marks,
+    masked out."""
     text = LIST_ITEM_RE.sub("\x00", text, count=1)
+    text = HEADING_MARKS_RE.sub("\x00", text, count=1)
     for regex, _group, _kind, _what in MD_RESTORE_RULES:
         text = regex.sub("\x00", text)
     return text
@@ -1045,6 +1055,14 @@ def restore_list_marker(english: str, text: str) -> tuple[str, bool]:
     return text, False
 
 
+def restore_heading_marks(english: str, text: str) -> str:
+    source_marks = HEADING_MARKS_RE.match(english)
+    marks = HEADING_MARKS_RE.match(text)
+    if source_marks and marks and source_marks.group(0) != marks.group(0):
+        return source_marks.group(0) + text[marks.end() :]
+    return text
+
+
 def repair_by_value(old: str, new: str, loc: str) -> str | None:
     """`loc` (the translation of `old`) with every code span, marker and link target replaced by its
     counterpart in `new`: the old value at position k becomes the new value at position k, wherever
@@ -1134,8 +1152,10 @@ def md_delta(new_text: str, old_text: str, loc_text: str, context_width: int = 0
             fixed = repair_by_value(old_seg.blocks[a.old_index].text, b.text, loc_seg.blocks[a.old_index].text)
             if fixed is None:
                 actions[j] = Action(ACTION_TRANSLATE)
+            elif b.kind == KIND_LIST_ITEM:
+                repaired_blocks[j] = restore_list_marker(b.text, fixed)[0]
             else:
-                repaired_blocks[j] = restore_list_marker(b.text, fixed)[0] if b.kind == KIND_LIST_ITEM else fixed
+                repaired_blocks[j] = restore_heading_marks(b.text, fixed) if b.kind == KIND_HEADING else fixed
     new_vals, old_vals, loc_vals = frontmatter_values(new_fm), frontmatter_values(old_fm), frontmatter_values(loc_fm)
     reused_fm = {k: loc_vals[k] for k, v in new_vals.items() if old_vals.get(k) == v and k in loc_vals}
     masks: dict[str, list[str]] = {}
@@ -1420,6 +1440,34 @@ class TranslatedApiError(Exception):
         return out
 
 
+class TranslatedAuthError(TranslatedApiError):
+    """The API rejected the key. Nothing was billed; the run stops without recording failures."""
+
+
+def parse_retry_after(value: str | None, now: datetime | None = None) -> float | None:
+    """Seconds to wait from a Retry-After header (delay-seconds or HTTP-date), or None."""
+    if not value or not value.strip():
+        return None
+    v = value.strip()
+    if v.isdigit():
+        return float(v)
+    try:
+        when = email.utils.parsedate_to_datetime(v)
+    except (TypeError, ValueError):
+        return None
+    if when.tzinfo is None:
+        when = when.replace(tzinfo=UTC)
+    return max(0.0, (when - (now or datetime.now(UTC))).total_seconds())
+
+
+def retry_delay(attempt: int, retry_after: float | None, jitter: Callable[[], float]) -> float:
+    """Retry-After when the server sent one, else exponential backoff with jitter; at most MAX_RETRY_DELAY."""
+    if retry_after is not None:
+        return min(retry_after, MAX_RETRY_DELAY)
+    base = min(float(2**attempt * 2), MAX_RETRY_DELAY)
+    return base / 2 + jitter() * base / 2
+
+
 def describe_api_error(payload: str) -> tuple[str, dict[str, Any]]:
     """Build a readable message from an api_error body when it parses, else from the raw text."""
     try:
@@ -1452,10 +1500,12 @@ class TranslatedClient:
         api_key: str,
         sleep: Callable[[float], None] = time.sleep,
         opener: Callable[..., Any] = urllib.request.urlopen,
+        jitter: Callable[[], float] = random.random,
     ) -> None:
         self.base_url = base_url
         self.api_key = api_key
         self.sleep = sleep
+        self.jitter = jitter
         self.opener = opener  # urlopen-compatible; injectable so the self-test can fake HTTP answers offline
 
     def _request(
@@ -1475,6 +1525,7 @@ class TranslatedClient:
         last_error = "retries exhausted"
         for attempt in range(retries + 1):
             req = urllib.request.Request(url, data=data, method=method, headers=headers)
+            retry_after: float | None = None
             try:
                 with self.opener(req, timeout=180) as resp:
                     return json.loads(resp.read().decode("utf-8") or "null")
@@ -1482,14 +1533,22 @@ class TranslatedClient:
                 payload = e.read().decode("utf-8", errors="replace")
                 message, api_error = describe_api_error(payload)
                 last_error = f"{e.code}: {message}"
+                if e.code in AUTH_HTTP:
+                    raise TranslatedAuthError(
+                        f"{method} {endpoint} failed with {last_error}. The API key was rejected: check the "
+                        "TRANSLATED_API_KEY secret, and that it belongs to the TRANSLATED_ENV environment.",
+                        e.code,
+                        api_error,
+                    ) from None
                 if e.code not in RETRYABLE_HTTP:
                     raise TranslatedApiError(
                         f"{method} {endpoint} failed with {last_error}", e.code, api_error
                     ) from None
+                retry_after = parse_retry_after(e.headers.get("Retry-After") if e.headers else None)
             except (urllib.error.URLError, OSError, http.client.HTTPException, json.JSONDecodeError) as e:
                 last_error = f"{type(e).__name__}: {e}"
             if attempt < retries:
-                self.sleep(2**attempt * 2)
+                self.sleep(retry_delay(attempt, retry_after, self.jitter))
         raise TranslatedApiError(f"{method} {endpoint} failed after {retries + 1} attempts ({last_error})")
 
     def _post(self, endpoint: str, body: Any, extra_headers: dict[str, str] | None = None, retries: int = 3) -> Any:
@@ -1591,7 +1650,13 @@ def build_plan(
             plan.current += 1
             continue
         failure = failures.get(rel)
-        if failure and failure.get("sourceHash") == src_hash and not options.retry_failed:
+        # A failed request was not billed, so it is planned again; a rejected delivery waits for --retry-failed.
+        if (
+            failure
+            and failure.get("sourceHash") == src_hash
+            and not failure.get("request")
+            and not options.retry_failed
+        ):
             plan.skipped_failed.append((rel, str(failure.get("error"))))
             continue
         if not exists or entry.get("status") != STATUS_TRANSLATED:
@@ -1919,6 +1984,51 @@ def cmd_migrate_blobs(langs: list[str], sources: dict[str, str], run: GitRunner 
             print(f"  not found     {rel}: no English version in git hashes to the recorded sourceHash")
 
 
+def status_at_ref(ref: str, lang: str, run: GitRunner = run_git) -> dict[str, Any]:
+    """The status file of a language at a git ref; empty sections when the file is missing there."""
+    proc = run(["git", "show", f"{ref}:{status_path(lang).as_posix()}"])
+    status: dict[str, Any] = json.loads(proc.stdout.decode("utf-8")) if proc.returncode == 0 else {}
+    status.setdefault("files", {})
+    status.setdefault("failures", {})
+    return status
+
+
+def merge_entries(base: dict[str, Any], ours: dict[str, Any], theirs: dict[str, Any]) -> tuple[dict[str, Any], int]:
+    """Three-way merge of one status section. An entry the translation branch (theirs) added, changed or
+    removed since the merge base comes from the branch; every other entry comes from ours, so an entry
+    the branch merely carries in an older state never overwrites a newer one. Returns (merged, taken)."""
+    merged: dict[str, Any] = {}
+    taken = 0
+    for key in [*ours, *(k for k in theirs if k not in ours), *(k for k in base if k not in ours and k not in theirs)]:
+        if theirs.get(key) != base.get(key):
+            taken += 1
+            if key in theirs:
+                merged[key] = theirs[key]
+        elif key in ours:
+            merged[key] = ours[key]
+    return merged, taken
+
+
+def cmd_merge_status(langs: list[str], ours_ref: str, theirs_ref: str, run: GitRunner = run_git) -> None:
+    """Rebuild each status file after the translation branch was merged into the run's tree. A text merge
+    (-X theirs) resolves conflicting hunks of the JSON from the branch; this keeps main's entries the branch
+    did not touch."""
+    if not in_git_work_tree(run):
+        raise SystemExit("--merge-status needs a git work tree.")
+    ours_sha, theirs_sha = resolve_git_ref(ours_ref, run), resolve_git_ref(theirs_ref, run)
+    proc = run(["git", "merge-base", ours_sha, theirs_sha])
+    if proc.returncode != 0:
+        raise SystemExit(f"--merge-status: {ours_ref} and {theirs_ref} have no merge base.")
+    base_sha = proc.stdout.decode("utf-8").strip()
+    for lang in langs:
+        base, ours, theirs = (status_at_ref(sha, lang, run) for sha in (base_sha, ours_sha, theirs_sha))
+        status = load_status(lang)
+        status["files"], taken = merge_entries(base["files"], ours["files"], theirs["files"])
+        status["failures"], _ = merge_entries(base["failures"], ours["failures"], theirs["failures"])
+        save_status(lang, status)
+        print(f"{lang}: {taken} status entries taken from {theirs_ref}, the others from {ours_ref}")
+
+
 # ---------------------------------------------------------------------------
 # Commands: run / dump-orders
 # ---------------------------------------------------------------------------
@@ -2179,9 +2289,11 @@ def translate_language(
     passthrough: dict[str, str],
     lenient: bool,
     report: RunReport,
+    rejected_dir: Path | None = None,
 ) -> None:
     """One synchronous /translate/ai request per planned file: translate, repair, verify, write.
-    The status file is saved after every file so an interrupted run loses no billed work."""
+    The status file is saved after every file so an interrupted run loses no billed work. A rejected
+    key stops the run (TranslatedAuthError) before anything else is recorded for the file."""
     lang, status = sub.lang, sub.status
     r = report.lang(lang)
     apply_local_changes(sub, sources, passthrough, r)
@@ -2198,9 +2310,13 @@ def translate_language(
             order = orders[job["idContent"]]
             try:
                 data = client.translate_ai(order)
+            except TranslatedAuthError:
+                raise
             except TranslatedApiError as e:
                 report.request_failures += 1
-                record_failure(status, rel, f"POST translate/ai failed: {e}", job["sourceHash"], apiError=e.details())
+                record_failure(
+                    status, rel, f"POST translate/ai failed: {e}", job["sourceHash"], apiError=e.details(), request=True
+                )
                 r["failed"].append((rel, f"POST translate/ai failed: {e}"))
                 print(f"{lang}: FAILED {rel}: {e}")
                 save_status(lang, status)
@@ -2228,9 +2344,23 @@ def translate_language(
                     f"{delta.changed_chars:,}/{delta.total_chars:,} chars)"
                 )
             record_result(lang, rel, r, problems, repaired, warnings, done)
+            if problems and rejected_dir is not None:
+                kept = keep_rejected(rejected_dir, lang, rel, order, data, problems)
+                print(f"{lang}: kept the rejected delivery of {rel} in {kept}")
             save_status(lang, status)
     finally:
         save_status(lang, status)
+
+
+def keep_rejected(
+    out_dir: Path, lang: str, rel: str, order: dict[str, Any], data: list[dict[str, Any]], problems: list[str]
+) -> Path:
+    """Save a billed delivery that failed verification, so it can be repaired by hand instead of bought again."""
+    path = out_dir / lang / f"{rel}.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    record = {"language": lang, "file": rel, "problems": problems, "order": order, "response": data}
+    path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return path
 
 
 def prepare_all(
@@ -2259,9 +2389,10 @@ def cmd_run(
     allow_unbounded: bool,
     lenient: bool,
     report: RunReport,
+    rejected_dir: Path | None = None,
 ) -> None:
     for sub in prepare_all(config, langs, sources, passthrough, locales, options, allow_unbounded):
-        translate_language(client, sub, sources, passthrough, lenient, report)
+        translate_language(client, sub, sources, passthrough, lenient, report, rejected_dir)
 
 
 def cmd_dump_orders(
@@ -2366,6 +2497,14 @@ class SelfTest:
         else:
             self.failures.append(name)
             print(f"  FAIL  {name}" + (f" -- {detail[:300]}" if detail else ""))
+
+    def expect_raises(self, name: str, fn: Callable[[], object], error: type[BaseException]) -> None:
+        try:
+            fn()
+        except error:
+            self.check(name, True)
+            return
+        self.check(name, False, f"no {error.__name__} raised")
 
     def expect_exit(self, name: str, fn: Callable[[], object], fragment: str = "") -> None:
         try:
@@ -2796,6 +2935,7 @@ class FakeTranslatedClient:
         self.orders: list[dict[str, Any]] = []
         self.translate_calls = 0
         self.raise_on_translate_call: int | None = None  # 1-based call index that raises an API error
+        self.raise_http_status = 400  # status of that error; 401/403 raise TranslatedAuthError
         # id_content -> translated text of a whole-file order, or {segment id -> text} (default: echo the source)
         self.deliveries: dict[str, str | dict[str, str]] = {}
         self.translatable_only = False  # answer with data[] items for translatable segments only
@@ -2804,9 +2944,10 @@ class FakeTranslatedClient:
     def translate_ai(self, order: dict[str, Any]) -> list[dict[str, Any]]:
         self.translate_calls += 1
         if self.raise_on_translate_call == self.translate_calls:
-            raise TranslatedApiError(
-                "POST translate/ai failed with 400: INVALID_PARAMS; boom",
-                400,
+            error = TranslatedAuthError if self.raise_http_status in AUTH_HTTP else TranslatedApiError
+            raise error(
+                f"POST translate/ai failed with {self.raise_http_status}: INVALID_PARAMS; boom",
+                self.raise_http_status,
                 {
                     "code": "INVALID_PARAMS",
                     "message": "boom",
@@ -2947,7 +3088,13 @@ class Harness:
     def passthrough(self) -> dict[str, str]:
         return get_passthrough_sources(self.config, self.sources)
 
-    def run(self, options: PlanOptions | None = None, allow_unbounded: bool = True, lenient: bool = False) -> None:
+    def run(
+        self,
+        options: PlanOptions | None = None,
+        allow_unbounded: bool = True,
+        lenient: bool = False,
+        rejected_dir: Path | None = None,
+    ) -> None:
         cmd_run(
             self.config,
             self.client,
@@ -2959,6 +3106,7 @@ class Harness:
             allow_unbounded,
             lenient,
             self.report,
+            rejected_dir,
         )
 
     def plan(self, options: PlanOptions | None = None) -> LanguagePlan:
@@ -3060,6 +3208,22 @@ def selftest_fake_client(t: SelfTest) -> None:
         )
         t.check("file not written", not target_file("es", "guide.md").exists())
         t.check("other files translated", status["files"]["index.md"]["status"] == STATUS_TRANSLATED)
+        kept_dir = Path("rejected")
+        h.run(PlanOptions(retry_failed=True, file_filters=["guide.md"]), rejected_dir=kept_dir)
+        kept_path = kept_dir / "es" / "guide.md.json"
+        kept = json.loads(kept_path.read_text(encoding="utf-8")) if kept_path.exists() else {}
+        t.check(
+            "--keep-rejected saves the billed delivery with its order and problems",
+            kept.get("file") == "guide.md"
+            and "headings" in kept["problems"][0]
+            and kept["order"]["id_content"] == "es/guide.md"
+            and kept["response"][0]["translation"] == h.client.deliveries["es/guide.md"],
+            str(kept)[:300],
+        )
+        t.check(
+            "only rejected deliveries are kept",
+            [p.name for p in kept_dir.rglob("*.json")] == ["guide.md.json"],
+        )
         t.check("verification failures do not flag the run (exit 0)", not h.report.failed)
         plan = h.plan()
         t.check(
@@ -3194,6 +3358,31 @@ def selftest_fake_client(t: SelfTest) -> None:
             str(status["failures"]),
         )
         t.check("run flagged as failed (exit 1)", h.report.request_failures == 1 and h.report.failed)
+        t.check(
+            "a failed request is not billed, so the next plan sends the file again without --retry-failed",
+            [rel for rel, _ in h.plan().to_submit] == failed and not h.plan().skipped_failed,
+        )
+        h.client.raise_on_translate_call = None
+        h.run()
+        status = load_status("es")
+        t.check(
+            "the next run translates it and clears the failure",
+            not status["failures"] and status["files"][failed[0]]["status"] == STATUS_TRANSLATED,
+            str(status["failures"]),
+        )
+    with mini_repo():
+        h = prod_harness()
+        h.client.raise_on_translate_call = 2
+        h.client.raise_http_status = 401
+        t.expect_raises("a rejected key (401) stops the run", lambda: h.run(), TranslatedAuthError)
+        status = load_status("es")
+        t.check(
+            "after a rejected key: the file translated before is saved, nothing is recorded as failed",
+            sum(1 for f in status["files"].values() if f["status"] == STATUS_TRANSLATED) == 1
+            and not status["failures"]
+            and len(h.plan().to_submit) == 3,
+            str(status),
+        )
 
     t.section("fake client: sandbox caps")
     with mini_repo():
@@ -3506,6 +3695,18 @@ def selftest_segments(t: SelfTest) -> None:
         "without prose_key the same change is translated",
         [m.kind for m in diff_blocks([link_old], [link_new])] == [ACTION_TRANSLATE],
     )
+    t.check(
+        "a heading whose only change is its level is reused with repair; changed heading text is translated",
+        [m.kind for m in diff_blocks([Block("h", "##### Setup\n")], [Block("h", "## Setup\n")], prose_key)]
+        == [ACTION_REPAIR]
+        and [m.kind for m in diff_blocks([Block("h", "## Setup\n")], [Block("h", "## Set up\n")], prose_key)]
+        == [ACTION_TRANSLATE],
+    )
+    t.check(
+        "heading marks restored from English",
+        restore_heading_marks("## Setup\n", "##### Configuración\n") == "## Configuración\n"
+        and restore_heading_marks("## Setup\n", "## Configuración\n") == "## Configuración\n",
+    )
     t.check("width 0 sends no context", context_indices(actions, [a, d, c], 0) == [])
     t.check(
         "width -1 sends every unchanged translatable block",
@@ -3653,6 +3854,21 @@ def selftest_segment_updates(t: SelfTest) -> None:
             out,
         )
         commit_all("Spanish code only")
+
+        write_text(CONTENT_DIR / "seg.md", read_text(CONTENT_DIR / "seg.md").replace("## Details\n", "### Details\n"))
+        commit_all("heading level only")
+        sent = len(h.client.orders)
+        expected = read_text(target_file("es", "seg.md")).replace("## Detalles\n", "### Detalles\n")
+        out = captured(lambda: h.run(PlanOptions(file_filters=["seg.md"])))
+        t.check(
+            "a heading-level change is applied without a request",
+            len(h.client.orders) == sent
+            and read_text(target_file("es", "seg.md")) == expected
+            and "updated seg.md (no changed text to translate)" in out
+            and load_status("es")["files"]["seg.md"]["sourceHash"] == h.sources["seg.md"],
+            out,
+        )
+        commit_all("Spanish heading level")
 
         before = read_text(target_file("es", "seg.md"))
         status_before = load_status("es")["files"]["seg.md"]
@@ -4100,6 +4316,134 @@ def selftest_code_placeholders(t: SelfTest) -> None:
     )
 
 
+class FakeHttpResponse:
+    def __init__(self, body: str) -> None:
+        self.body = body
+
+    def __enter__(self) -> FakeHttpResponse:
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        return None
+
+    def read(self) -> bytes:
+        return self.body.encode("utf-8")
+
+
+def fake_http_error(code: int, retry_after: str | None = None) -> urllib.error.HTTPError:
+    headers = http.client.HTTPMessage()
+    if retry_after is not None:
+        headers["Retry-After"] = retry_after
+    body = io.BytesIO(b'{"code": "E", "message": "m"}')
+    return urllib.error.HTTPError("https://api.example/v2/translate/ai", code, "error", headers, body)
+
+
+def selftest_http_client(t: SelfTest) -> None:
+    t.section("HTTP client: retries, Retry-After, jitter, rejected key")
+    ok_body = '{"data": [{"id": "s1", "translation": "hola"}]}'
+
+    def client_for(answers: list[Any], jitter: float = 0.5) -> tuple[TranslatedClient, list[float], list[int]]:
+        sleeps: list[float] = []
+        calls: list[int] = []
+
+        def opener(_req: Any, timeout: float = 0) -> FakeHttpResponse:
+            calls.append(1)
+            answer = answers.pop(0)
+            if isinstance(answer, BaseException):
+                raise answer
+            return FakeHttpResponse(str(answer))
+
+        return TranslatedClient("https://api.example/v2/", "k", sleeps.append, opener, lambda: jitter), sleeps, calls
+
+    order: dict[str, Any] = {"content": []}
+    client, sleeps, _ = client_for([fake_http_error(429, "7"), ok_body])
+    t.check(
+        "429 waits the Retry-After seconds, then succeeds",
+        client.translate_ai(order)[0]["translation"] == "hola" and sleeps == [7.0],
+        str(sleeps),
+    )
+    client, sleeps, _ = client_for([fake_http_error(503, "600"), ok_body])
+    client.translate_ai(order)
+    t.check("Retry-After is capped", sleeps == [MAX_RETRY_DELAY], str(sleeps))
+    client, sleeps, _ = client_for([fake_http_error(408), fake_http_error(500), ok_body])
+    client.translate_ai(order)
+    t.check(
+        "408 is retried; backoff is jittered between half and all of 2, 4, ... s", sleeps == [1.5, 3.0], str(sleeps)
+    )
+    client, sleeps, calls = client_for([fake_http_error(401)])
+    t.expect_raises("401 raises TranslatedAuthError", lambda: client.translate_ai(order), TranslatedAuthError)
+    t.check("a rejected key is not retried", sleeps == [] and len(calls) == 1)
+    client, sleeps, calls = client_for([fake_http_error(400)])
+    raised: BaseException | None = None
+    try:
+        client.translate_ai(order)
+    except TranslatedApiError as e:
+        raised = e
+    t.check(
+        "400 is not retried and is not an auth error",
+        isinstance(raised, TranslatedApiError) and not isinstance(raised, TranslatedAuthError) and len(calls) == 1,
+    )
+    now = datetime(2026, 1, 1, tzinfo=UTC)
+    t.check(
+        "Retry-After as an HTTP date; unparsable values ignored",
+        parse_retry_after("Thu, 01 Jan 2026 00:00:30 GMT", now) == 30.0
+        and parse_retry_after("soon", now) is None
+        and parse_retry_after(None) is None,
+    )
+    t.check(
+        "backoff without Retry-After stays within 60 s",
+        retry_delay(2, None, lambda: 0.0) == 4.0
+        and retry_delay(2, None, lambda: 1.0) == 8.0
+        and retry_delay(10, None, lambda: 1.0) == MAX_RETRY_DELAY,
+    )
+
+
+def selftest_merge_status(t: SelfTest) -> None:
+    t.section("--merge-status: status files merged entry by entry")
+
+    def entry(source_hash: str) -> dict[str, Any]:
+        return {"sourceHash": source_hash, "status": STATUS_TRANSLATED}
+
+    with git_mini_repo():
+        files = {rel: entry(f"{rel[0]}0") for rel in ("a.md", "b.md", "c.md", "d.md")}
+        save_status("es", {"language": "es", "files": files, "failures": {}})
+        commit_all("base")
+        main = git("rev-parse", "HEAD")
+        git("checkout", "-q", "-b", "localization")
+        status = load_status("es")
+        status["files"]["c.md"] = entry("c1")
+        status["files"]["e.md"] = entry("e1")
+        del status["files"]["d.md"]
+        status["failures"]["b.md"] = {"error": "x", "sourceHash": "b0"}
+        save_status("es", status)
+        commit_all("translation branch")
+        git("checkout", "-q", main)
+        status = load_status("es")
+        status["files"]["b.md"] = entry("b1")
+        status["files"]["c.md"] = entry("c2")
+        status["files"]["f.md"] = entry("f1")
+        save_status("es", status)
+        commit_all("main")
+        ours = git("rev-parse", "HEAD")
+        # Worst case of the fold: a conflict resolved by taking the branch's localizedContent as-is.
+        git("checkout", "localization", "--", status_path("es").as_posix())
+        captured(lambda: cmd_merge_status(["es"], ours, "localization"))
+        merged = load_status("es")
+        t.check(
+            "entries the branch changed, added or removed come from the branch; the others from main",
+            merged["files"]
+            == {
+                "a.md": entry("a0"),
+                "b.md": entry("b1"),
+                "c.md": entry("c1"),
+                "e.md": entry("e1"),
+                "f.md": entry("f1"),
+            },
+            str(merged["files"]),
+        )
+        t.check("failures are merged the same way", set(merged["failures"]) == {"b.md"}, str(merged["failures"]))
+
+
 def cmd_self_test(config: TranslationConfig) -> int:
     t = SelfTest()
     selftest_corpus(t, config)
@@ -4109,6 +4453,8 @@ def cmd_self_test(config: TranslationConfig) -> int:
     selftest_segment_updates(t)
     selftest_segment_edge_cases(t)
     selftest_code_placeholders(t)
+    selftest_http_client(t)
+    selftest_merge_status(t)
     print(f"\nself-test: {t.passed} passed, {len(t.failures)} failed")
     for name in t.failures:
         print(f"  FAILED: {name}")
@@ -4142,6 +4488,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="record the English git blob (sourceBlob) for status entries that only have a sourceHash",
     )
+    actions.add_argument(
+        "--merge-status",
+        nargs=2,
+        metavar=("OURS", "THEIRS"),
+        help="after merging translation branch THEIRS into OURS: rebuild each status file entry by entry, taking "
+        "THEIRS only where it changed an entry since the merge base (offline)",
+    )
     actions.add_argument("--self-test", action="store_true", help="offline self-test (no key, no network)")
     actions.add_argument("--probe", action="store_true", help="check service types and languages against the API")
     actions.add_argument(
@@ -4157,6 +4510,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--retry-failed", action="store_true", help="re-plan files that failed at the current source hash"
     )
     parser.add_argument("--report", help="write a markdown run summary to this path")
+    parser.add_argument(
+        "--keep-rejected",
+        metavar="DIR",
+        help="with --run: save billed deliveries that fail verification (order, response, problems) under DIR",
+    )
     parser.add_argument(
         "--baseline-ref",
         help="git ref whose content/ hashes become the baseline "
@@ -4177,6 +4535,8 @@ def build_parser() -> argparse.ArgumentParser:
 def check_option_combinations(args: argparse.Namespace) -> None:
     if args.repair_existing and not args.baseline:
         raise SystemExit("--repair-existing is only valid together with --baseline.")
+    if args.keep_rejected and not args.run:
+        raise SystemExit("--keep-rejected is only valid together with --run.")
 
 
 def main() -> int:
@@ -4219,6 +4579,9 @@ def main() -> int:
     if args.migrate_blobs:
         cmd_migrate_blobs(langs, sources)
         return 0
+    if args.merge_status:
+        cmd_merge_status(langs, *args.merge_status)
+        return 0
     if args.baseline:
         cmd_baseline(langs, sources, passthrough, args.baseline_ref, args.overwrite_baseline, args.repair_existing)
         return 0
@@ -4234,10 +4597,25 @@ def main() -> int:
     client = require_client(config, "--run")
     check_sandbox_filter(config, options, args.allow_unbounded)
     report = RunReport()
+    rejected_dir = Path(args.keep_rejected) if args.keep_rejected else None
     try:
         cmd_run(
-            config, client, langs, sources, passthrough, locales, options, args.allow_unbounded, args.lenient, report
+            config,
+            client,
+            langs,
+            sources,
+            passthrough,
+            locales,
+            options,
+            args.allow_unbounded,
+            args.lenient,
+            report,
+            rejected_dir,
         )
+    except TranslatedAuthError as e:
+        report.notes.append(f"Run stopped: {e}")
+        print(f"Run stopped: {e}", file=sys.stderr)
+        return 1
     finally:
         summary = report.to_markdown(config)
         print("\n" + summary)
