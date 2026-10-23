@@ -2,7 +2,7 @@
 uid: ai-compliance
 title: AI features compliance guide
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -33,7 +33,7 @@ The [AI Assistant](xref:ai-assistant) and the [Model Context Protocol (MCP) serv
 
 Both features ship in the AI features component, which is part of a default installation from Tabular Editor 3.27.0. They share the permission grants, the administrator policies and the audit log, with the differences described under [Permission grants](#permission-grants).
 
-Tabular Editor ApS doesn't operate an AI service and doesn't include an API key. Prompts, replies, model metadata and model data from either feature never pass through Tabular Editor servers. With telemetry on, Tabular Editor 3 sends AI usage events to Tabular Editor ApS with the provider, the model name, a conversation ID and token counts. The `DisableTelemetry` policy turns them off.
+Tabular Editor ApS doesn't operate an AI service and doesn't include an API key. Prompts, replies, model metadata and model data from either feature never pass through Tabular Editor servers. With telemetry on, Tabular Editor 3 sends AI usage events to Tabular Editor ApS with the provider, the model name, a conversation ID and token counts. For the MCP server, the events carry the tool name, the outcome and duration of each tool call, and the name and version of the MCP client if it's a known client. Tool arguments, tool results and error messages aren't sent. The `DisableTelemetry` policy turns them off.
 
 The [Tabular Editor Trust Center](https://trust.tabulareditor.com/) publishes the independent penetration test report for the AI Assistant, the SOC 2 audit report and the list of sub-processors.
 
