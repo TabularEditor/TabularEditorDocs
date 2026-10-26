@@ -239,7 +239,7 @@
       "status": "translated"
     },
     "features/import-tables.partial.md": {
-      "sourceHash": "sha256:b416ea2b5d09ea7cc44d41ae621ca79a122104ad088f8c8bcd3c7d320ed88431",
+      "sourceHash": "sha256:25ccc3a686c79ee4f06828b13605e788c0b1cfa45c2d721bb2a812c16aec84a0",
       "status": "translated"
     },
     "features/index.md": {
@@ -315,7 +315,7 @@
       "status": "translated"
     },
     "features/table-preview.md": {
-      "sourceHash": "sha256:919ddbf231d1336651625f666704024ac80ce09b637d0c73ccb94aba492afc9e",
+      "sourceHash": "sha256:1fbe31e61f1b2a5e6a035952f236c49dd38a54efe934dfb0cbcaecb6bcc86a8f",
       "status": "translated"
     },
     "features/te-cli/includes/te-cli-preview-notice.md": {
@@ -403,7 +403,7 @@
       "status": "translated"
     },
     "features/views/data-refresh-view.md": {
-      "sourceHash": "sha256:6427f5aec9357680f68f96702ca980623b7f518f505ca0a179451aa63d701b15",
+      "sourceHash": "sha256:0249ef27e84da14ac1b42a614ca58df0ffb72d38b883b008d36a345d409ae839",
       "status": "translated"
     },
     "features/views/diagram-basics.partial.md": {
