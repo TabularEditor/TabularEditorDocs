@@ -307,7 +307,7 @@
       "status": "translated"
     },
     "features/Semantic-Model/semantic-model-types.md": {
-      "sourceHash": "sha256:c6bc2434213fc85c0062d07e80f8e0341d4375cce84561d770944e00a7f1b1d0",
+      "sourceHash": "sha256:9f9e907aebbe834fc734867a3c7c054d7b4deafa71295806d20ad524c7f25e74",
       "status": "translated"
     },
     "features/table-groups.md": {
@@ -387,7 +387,7 @@
       "status": "translated"
     },
     "features/user-context-calculated-columns.md": {
-      "sourceHash": "sha256:2d7a43f84729d3d925e4d918752c57a05335335e8af7547bc7f829a833e46751",
+      "sourceHash": "sha256:75b6912c5c35999747fe9493f6af6f582d0561cf9e47377882cdb3f9a5fdcddd",
       "status": "translated"
     },
     "features/using-bpa-sample-rules-expressions.md": {
@@ -1675,7 +1675,7 @@
       "status": "translated"
     },
     "tutorials/direct-lake-guidance.md": {
-      "sourceHash": "sha256:964fbdf58e990aee599a3a27f26d5b302cafd8bf85c950a79eebb84f497f1a2d",
+      "sourceHash": "sha256:10e0826eb1daa6a7cc5698408baced6facf55b7bbee3172deec7585aad50c6fb",
       "status": "translated"
     },
     "tutorials/importing-tables.md": {
