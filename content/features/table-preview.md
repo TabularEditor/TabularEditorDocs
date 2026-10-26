@@ -1,8 +1,8 @@
-﻿---
+---
 uid: table-preview
 title: Table Preview
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,75 +18,69 @@ applies_to:
 ---
 # Table Preview
 
-A **Table Preview** shows the contents of one table, row by row, without writing a query. Right-click a table in the @tom-explorer-view and choose **Preview data**, or select the table and press **Ctrl+R**.
+A **Table Preview** shows the rows of one table without writing a query. Right-click a table in the @tom-explorer-view and choose **Preview data**, or select the table and press **Ctrl+R**. Previews open as documents, so you can open several at once and dock, float or move them to another monitor.
 
-![Preview Data](~/content/assets/images/preview-data-big.png)
-
-You can open a preview of several tables at once and arrange them however you like. Each preview is an ordinary document, so it can be docked, floated or moved to a second monitor.
+![Table Preview of the Internet Sales table with the filter dropdown of a date column open](~/content/assets/images/preview-data-big.png)
 
 ## Reading the grid
 
-Tabular Editor executes a DAX query that returns only as many rows as the view can show, then pages in more as you scroll. How far you can scroll depends on the storage mode and the engine:
+Tabular Editor runs a DAX query that returns the rows the view can show, and loads more rows as you scroll. The scroll range depends on the storage mode and the engine:
 
-| Table | Scrolling |
-|---|---|
-| Import, on an engine that supports [`WINDOW`](https://dax.guide/window), where the table has a primary key | The full table. Paging uses `WINDOW` against the primary key |
-| Import, without `WINDOW` support or without a primary key | The first rows only; the preview says that scrolling is disabled |
-| DirectQuery | The first rows only, up to the **Row limit** preference; an informational message explains why |
+- An Import table with a primary key, on an engine that supports [`WINDOW`](https://dax.guide/window), scrolls through the full table. Paging uses `WINDOW` against the primary key.
+- An Import table without a primary key, or on an engine without `WINDOW` support, shows the first rows only, and the preview shows that scrolling is disabled.
+- A DirectQuery table shows the first rows only, up to the **Row limit** preference, with a message that paginated browsing isn't available for DirectQuery tables. Filter the grid or write a DAX query to see specific rows.
 
-Preview metadata is cached for the session, so reopening a preview does not re-query the server. Use **Refresh Preview** to re-read it if for example the model has been processed outside Tabular Editor.
+Preview metadata is cached for the session, and reopening a preview doesn't query the server again. If the model was processed outside Tabular Editor, select **Refresh Preview**.
 
-If a calculated column is in an invalid state, its cells read *(Calculation needed)*. Use **Calculate Table** on the toolbar, or **Recalculate table...** on the column's right-click menu, to bring it up to date.
+If a calculated column is in an invalid state, its cells read "(calculation needed)". Select **Calculate Table** on the toolbar, or **Recalculate table...** on the column header's right-click menu to update it.
 
-![Recalculate Table](~/content/assets/images/recalculate-table.png)
+![Column header right-click menu in the Table Preview with Recalculate table selected, above cells that read calculation needed](~/content/assets/images/recalculate-table.png)
 
 ## Column order
 
-By default, columns appear in the order the engine returns them, which is roughly internal column order and often looks arbitrary. Tick *Sort table preview columns alphabetically* under @preferences to have them follow the same order the TOM Explorer uses instead.
+By default, columns appear in the order the engine returns them. **Sort table preview columns alphabetically** in @preferences sorts them by name, as the TOM Explorer does.
 
 ## Finding a column in a wide table
 
-Selecting a column in the @tom-explorer-view scrolls the preview to that column and highlights it. This is on by default and can be turned off for a single preview with **Track selected column** on the toolbar, or for every preview under @preferences.
+By default, selecting a column in the @tom-explorer-view scrolls the preview to that column and highlights it. Clear **Track selected column** on the toolbar to turn this off for one preview, or **Track selected column in TOM Explorer** in @preferences for all previews.
 
 ## Toolbar
 
-The **Table Preview** toolbar and the matching **Table Preview** menu carry the same commands:
+The **Table Preview** toolbar and the **Table Preview** menu have the same commands:
 
 | Command | What it does |
 |---|---|
-| **Impersonation...** | Choose the identity the preview query runs as, to see the data a particular user would see |
-| **Refresh Preview** | Re-read the table, discarding cached metadata |
-| **Auto-refresh** | Refresh this preview automatically whenever changes are made to the deployed model. The default for new previews comes from @preferences |
-| **Track selected column** | Follow the TOM Explorer's column selection, as described above |
-| **Calculate Table** | Recalculate the table's calculated columns |
+| **Impersonation...** | Sets the identity the preview query runs as, to show the data a particular user sees. |
+| **Refresh Preview** | Re-reads the table and discards cached metadata. |
+| **Auto-refresh** | Refreshes this preview automatically when the deployed model changes. The default for new previews is set in @preferences. |
+| **Track selected column** | Follows the column selection in the TOM Explorer. See [Finding a column in a wide table](#finding-a-column-in-a-wide-table). |
+| **Calculate Table** | Recalculates the table's calculated columns. |
 
 ## Right-click menu
 
-On top of the standard grid commands (sorting, filtering, best fit, column chooser), the preview grid adds:
+In addition to the standard grid commands (sorting, filtering, best fit, column chooser), the preview grid has these commands:
 
 | Command | Where it appears | What it does |
 |---|---|---|
-| **Lock column widths** | Column header | Stops the grid resizing columns as you scroll and page in more rows |
-| **Edit expression...** | Header of a calculated column | Opens that column's DAX expression in the **Expression Editor** |
-| **Recalculate table...** | Header of a calculated column that is not up to date | Recalculates the table |
-| **Show actual DAX query...** | Anywhere in the grid | Opens a new, editable [DAX query](xref:dax-query) document containing the query behind the preview |
+| **Lock column widths** | Column header | Stops the grid from resizing columns as you scroll and load more rows. |
+| **Edit expression...** | Header of a calculated column | Opens the column's DAX expression in the **Expression Editor**. |
+| **Recalculate table...** | Header of a calculated column that isn't up to date | Recalculates the table. |
+| **Show actual DAX query...** | Anywhere in the grid | Opens a new, editable [DAX query](xref:dax-query) document with the query behind the preview. |
 
 ### Show actual DAX query
 
-**Show actual DAX query...** takes the query the preview is running, including whatever filter and sort you have applied in the grid, formats it and opens it as a new DAX Query document. It is not executed for you; edit it and run it when you are ready.
-
-The paging wrappers are deliberately left out, so what you get is the query over the data you are looking at rather than the query over one screenful of it.
+**Show actual DAX query...** formats the query the preview runs, including the filter and sort applied in the grid, and opens it as a new DAX Query document without running it. The query has no paging logic and returns all filtered rows.
 
 > [!NOTE]
-> The **DAX Query** view has a command of the same name on its results grid, but it does something different: it shows the last executed query in a read-only window rather than opening a new document.
+> The **DAX Query** view has a command with the same name on its results grid, which shows the last executed query in a read-only window.
 
 ## Filtering
 
-Each column header carries a filter dropdown listing the column's distinct values. On a column with many distinct values the list is capped by *Max. values in filter dropdown* under @preferences, 5,000 by default. Values beyond the cap are not listed and cannot be ticked directly. Raise the cap if you need them, bearing in mind that opening the dropdown then runs a heavier query.
+Each column header has a filter dropdown that lists the column's distinct values, up to the cap set by **Max. values in filter dropdown** in @preferences (5,000 by default). Values beyond the cap aren't listed, and raising the cap makes the dropdown query slower.
 
 ## Preferences
 
-Every setting mentioned on this page lives under **Tools > Preferences > Data Browsing > Table Preview**. See @preferences for the full list.
+The settings on this page are under **Tools > Preferences > Data Browsing > Table Preview**. See @preferences for the full list.
 
 ## Next steps
 
