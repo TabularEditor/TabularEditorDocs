@@ -2,7 +2,7 @@
 uid: user-context-calculated-columns
 title: User-context calculated columns
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,13 +25,17 @@ The calculated column's `ExpressionContext` property sets whether the column is 
 
 | Expression Context | Meaning |
 |---|---|
-| **Standard** | The default. The expression can use only standard functions. The column has one value per row for all users. |
-| **User Context** | The expression can call user-context functions. The column is evaluated per user. |
+| `Standard` | The default. The expression can use only standard functions. The column has one value per row for all users. |
+| `UserContext` | The expression can call user-context functions. The column is evaluated per user. |
 
 Select a calculated column in the @tom-explorer-view and set **Expression Context** under **Options** in the @properties-view.
 
 > [!NOTE]
-> `ExpressionContext` requires compatibility level 1705 or higher, and below 1705 calculated columns are always **Standard**.
+> `ExpressionContext` requires compatibility level 1705 or higher, and below 1705 calculated columns are always `Standard`.
+
+## Direct Lake on OneLake tables
+
+`UserContext` is the only expression context Power BI supports for calculated columns on Direct Lake on OneLake tables. If a calculated column on a Direct Lake table is set to `Standard` when you save the model to the Power BI service, the save fails with the error "Default expression context cannot be used for calculated columns in Direct Lake tables". Direct Lake on SQL tables don't support calculated columns. For the steps to set the expression context on a Direct Lake model, see [Calculated columns on Direct Lake on OneLake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake).
 
 ## What a user-context column can't be used for
 

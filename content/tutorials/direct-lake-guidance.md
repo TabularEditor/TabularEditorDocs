@@ -2,7 +2,7 @@
 uid: direct-lake-guidance
 title: Direct Lake Guidance
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,16 +45,29 @@ The following table summarizes the storage modes available in Power BI semantic 
 
 However, as with Direct Lake on SQL, there are still some [limitations that *do* apply](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Key limitations include:
 
-- Calculated columns on Direct Lake on OneLake tables are supported in preview, but only in *user context*: the value is evaluated at query time for the current user rather than materialized. This means a Direct Lake calculated column respects row-level and object-level security, but it cannot be used as a relationship key and does not respond to report filters or slicers. Use a measure instead when the result must react to filter context. Direct Lake on SQL still does not support calculated columns at all. See [Develop Direct Lake semantic models](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop) for details.
+- Calculated columns on Direct Lake on OneLake tables are supported in preview, and only with the `UserContext` expression context. Direct Lake on SQL doesn't support calculated columns. See [Calculated columns on Direct Lake on OneLake](#calculated-columns-on-direct-lake-on-onelake).
 - Calculated tables cannot reference columns or tables in Direct Lake storage mode. Calculation groups, what-if parameters and field parameters are supported because they create implicit calculated tables that do not reference Direct Lake columns.
 - Non-materialized SQL views are not supported as data sources for Direct Lake on OneLake tables. Use materialized views or ensure the source Delta table contains the columns you need.
 - Shortcuts in a lakehouse are not supported as data sources during the public preview of Direct Lake on OneLake.
 
 For a full and up-to-date list of limitations, see the [Microsoft documentation on Direct Lake considerations and limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
 
+### Calculated columns on Direct Lake on OneLake
+
+A calculated column on a Direct Lake on OneLake table must have its `ExpressionContext` property set to `UserContext`. The column is evaluated at query time and isn't materialized, so it can't be used in a relationship. New calculated columns use `Standard` by default. If a calculated column on a Direct Lake table is set to `Standard` when you save the model to the Power BI service, the save fails with the error "Default expression context cannot be used for calculated columns in Direct Lake tables".
+
+The **Expression Context** property appears in the @properties-view only when the model's compatibility level is 1705 or higher. Set it on each calculated column of a Direct Lake on OneLake table:
+
+1. Select the model in the @tom-explorer-view and check **Compatibility Level** under **Database** in the @properties-view. If it's below 1705, upgrade the model as described in @update-compatibility-level.
+2. Select the calculated column in the @tom-explorer-view.
+3. Under **Options** in the @properties-view, set **Expression Context** to `UserContext`.
+4. Save the model.
+
+Calculated columns on Import tables in the same model can use either expression context. For the objects that can't reference a user-context column, see @user-context-calculated-columns. Microsoft lists the supported combinations of storage mode and expression context in [Using calculated columns in Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance).
+
 ### Composite models
 
-If you need a calculated column that is materialized, usable as a relationship key, or responsive to report filters and slicers, the preview calculated column feature above is not enough. In that case, create a **composite model** by combining Direct Lake tables with Import tables. This is supported with Direct Lake on OneLake, but not with Direct Lake on SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need full calculated columns or custom groupings.
+If you need a calculated column that is materialized or usable as a relationship key, create a **composite model** by combining Direct Lake tables with Import tables, and add the calculated column to an Import table. This is supported with Direct Lake on OneLake, but not with Direct Lake on SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need full calculated columns or custom groupings.
 
 Direct Lake on OneLake also supports combining with DirectQuery tables through XMLA-based tools such as Tabular Editor. Import tables can be added through Power BI web modeling, Power BI Desktop (live editing) or through XMLA tools.
 
