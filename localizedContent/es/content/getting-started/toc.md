@@ -1,75 +1,45 @@
-# [Bienvenido](index.md)
-
-# Introducción a Tabular Editor
-
-## @general-introduction
-
-## @installation-activation-basic
-
-## @migrate-from-vs
-
-## @migrate-from-desktop
-
-## @migrate-from-te2
-
-## @azure-marketplace
+﻿# [Te damos la bienvenida](index.md)
 
 # Primeros pasos con Tabular Editor 3
-
+## @introducción-general
 ## @getting-started
-
+## @instalación-activación-básica
+## @migrate-from-vs
+## @migrar-desde-desktop
+## @migrate-from-te2
+## @azure-marketplace
 ## @editions
-
 ## @training-telearn
 
-# @getting-started-te2
+# @primeros-pasos-te2
 
 # Power BI Desktop y Tabular Editor
-
-## @desktop-integration
-
-## @desktop-limitations
+## @integración-desktop
+## @limitaciones-de-desktop  
 
 # Interfaz de usuario
+## @referencia-interfaz-usuario
+## @referencia-vista-bpa
+## @referencia-vista-actualización-datos
+## @referencia-buscar-reemplazar
+## @referencia-vista-macros
+## @referencia-vista-mensajes
+## @referencia-vista-propiedades
+## @referencia-vista-explorador-tom
+## @referencia-vista-diagrama
+## @referencia-vista-previa-tabla
 
-## @user-interface-reference
-
-## @bpa-view-reference
-
-## @data-refresh-view-reference
-
-## @find-replace-reference
-
-## @macros-view-reference
-
-## @messages-view-reference
-
-## @properties-view-reference
-
-## @tom-explorer-view-reference
-
-## @diagram-view-reference
-
-# Desarrollo en paralelo
-
-## @parallel-development
-
-## @optimizing-workflow-workspace-mode
+# Desarrollo paralelo
+## @desarrollo-paralelo
+## @compartir-macros-reglas-bpa
+## @optimizar-flujo-de-trabajo-modo-espacio-de-trabajo
 
 # Cree modelos más rápido con Tabular Editor
-
-## @boosting-productivity-te3
-
-## @importing-tables-data-modeling
-
-## @refresh-preview-query
-
-## @creating-and-testing-dax
-
-## @dax-script-introduction
-
+## @aumentar-la-productividad-te3
+## @importación-tablas-modelado-datos
+## @actualizar-vista-previa-consulta
+## @crear-y-probar-dax
+## @introduccion-a-los-scripts-de-dax
 ## @bpa
-
-## @cs-scripts-and-macros
-
-## @personalizing-te3
+## @scripts-y-macros-de-cs
+## @personalizar-te3
