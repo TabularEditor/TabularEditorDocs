@@ -1,8 +1,8 @@
----
+﻿---
 uid: user-options
 title: 用户选项（.tmuo）文件
 author: Daniel Otykier
-updated: 2026-09-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,9 +25,9 @@ Tabular Editor 3 引入了一种新的基于 JSON 的文件，用于存储开发
 
 | 您打开的项目                                                                  | 用户选项文件                                 |
 | ----------------------------------------------------------------------- | -------------------------------------- |
-| `SpaceParts.bim`，或任何 `.bim` / `.pbit` / `Database.json` 文件              | `SpaceParts.<UserName>.tmuo`，与其位于同一目录中 |
+| `SpaceParts.bim`，或任何 `.bim` / `.pbit` / `database.json` 文件              | `SpaceParts.<UserName>.tmuo`，与其位于同一目录中 |
 | `model.tmdl` 或 `database.tmdl` 文件                                       | `model.<UserName>.tmuo`，与其位于同一目录中      |
-| 包含 `Database.json` 的文件夹                                                 | `database.<UserName>.tmuo`，位于该文件夹中     |
+| 包含 `database.json` 的文件夹                                                 | `database.<UserName>.tmuo`，位于该文件夹中     |
 | 包含 Tabular Model Definition Language (TMDL) 模型文件的文件夹 | `model.<UserName>.tmuo`，位于该文件夹中        |
 
 TMDL 始终使用 `model` 前缀，以延续早于 `database.tmdl` 的版本中的命名方式。
@@ -106,10 +106,10 @@ TMDL 始终使用 `model` 前缀，以延续早于 `database.tmdl` 的版本中�
 | `Password`                           | 加密对象  | 已设置，_并&#x4E14;_&#x4F60;已选择将其保存。                                                                                                                                           |
 | `Provider`                           | 字符串   | `ServerType` 为 `OleDb`。                                                                                                                                                   |
 | `PasswordKey`、`UserIdKey`            | 字符串   | `ServerType` 为 `OleDb`，且已设置对应的值。                                                                                                                                          |
-| `服务器`                                | 字符串   | `ServerType` 不是 `Odbc`，且已设置。                                                                                                                                              |
+| `Server`                                | 字符串   | `ServerType` 不是 `Odbc`，且已设置。                                                                                                                                              |
 | `ServerKey`、`DatabaseKey`            | 字符串   | `ServerType` 不是 `Sql`，且已设置该值。                                                                                                                                             |
-| `数据库`                                | 字符串   | 已设置。                                                                                                                                                                      |
-| `身份验证`                               | 字符串   | `ServerType` 可以是 `Sql`、`OleDb` 或 `Databricks`。 `Sql`、`WindowsIntegrated`、`AadInteractive`、`AadPassword`、`AadIntegrated`、`AadServicePrincipal`、`AccessToken` 或 `OAuth` 之一。 |
+| `Database`                                | 字符串   | 已设置。                                                                                                                                                                      |
+| `Authentication`                               | 字符串   | `ServerType` 可以是 `Sql`、`OleDb` 或 `Databricks`。 `Sql`、`WindowsIntegrated`、`AadInteractive`、`AadPassword`、`AadIntegrated`、`AadServicePrincipal`、`AccessToken` 或 `OAuth` 之一。 |
 | `Encrypt`                            | 布尔值   | 无论设为 true 还是 false，都会写入。                                                                                                                                                  |
 | `Dsn`                                | 字符串   | 已设置时写入。用于 ODBC。                                                                                                                                                           |
 | `RowLimitClause`、`IdentifierQuoting` | 数字    | 不为默认值时写入。                                                                                                                                                                 |
@@ -121,7 +121,7 @@ TMDL 始终使用 `model` 前缀，以延续早于 `database.tmdl` 的版本中�
 
 ### 部署
 
-`Deployment` 保存 Deployment Wizard 上次用于此模型的内容。一旦该块存在，这六个布尔选项就会始终写入，无论其值为 true 还是 false：
+`Deployment` 保存 Deployment Wizard 上次用于此模型的内容。一旦该块存在，这七个布尔选项就会始终写入，无论其值为 true 还是 false：
 
 | 属性                              | 类型     | 写入时机                                  |
 | ------------------------------- | ------ | ------------------------------------- |
@@ -131,6 +131,7 @@ TMDL 始终使用 `model` 前缀，以延续早于 `database.tmdl` 的版本中�
 | `DeployModelRoles`              | 布尔值    | 始终                                    |
 | `DeployModelRoleMembers`        | 布尔值    | 始终                                    |
 | `DeploySharedExpressions`       | 布尔值    | 始终                                    |
+| `DeployLinguisticMetadata`             | 布尔值    | 始终                                    |
 | `TargetConnectionString`        | 字符串或对象 | 始终返回；未设置时为 `null`。当连接字符串包含密码时，使用对象形式。 |
 | `TargetDatabase`                | 字符串    | 始终返回；未设置时为 `null`。                    |
 | `TargetCredentials`             | 对象     | 用户名和密码均已设置。                           |

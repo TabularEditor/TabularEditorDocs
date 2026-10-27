@@ -4,374 +4,467 @@
   "files": {
     "404.html": {
       "sourceHash": "sha256:8e5748cfcc9ca6d991e8e65c36fb2b411cfec8c78e4f7c7be154ca6200c2f80e",
+      "sourceBlob": "9d9a67896827224867051218fe748baeea2b7f81",
       "status": "translated"
     },
     "_ui-strings.json": {
       "sourceHash": "sha256:01a51cba4185663722f9194cdaf9c8c61d9d65dac841e841120c8661b7485fbf",
+      "sourceBlob": "6bc4e98388d99e464e12eef2a70520fc9e10baeb",
       "status": "translated"
     },
     "features/advanced-refresh.md": {
       "sourceHash": "sha256:3d00373433d7f4f8e01331d50c88cd8e11789d9114235a152cccf67ae4800397",
+      "sourceBlob": "595d6fef56d10834789d1f8265472e19ae61ba47",
       "status": "translated"
     },
     "features/ai-assistant.md": {
       "sourceHash": "sha256:f408187864a033df9803ec001397d671d7d2661b82c6aefcdae02e4bf77e22fc",
+      "sourceBlob": "bddd06ecdb43cbd9bc78b18c27495bc413718fc8",
       "status": "translated"
     },
     "features/ai-audit-log.md": {
       "sourceHash": "sha256:b6c0f43580208c5b37cebbeb8cf7937549023f062d3ab2e0700c73b812f365e9",
+      "sourceBlob": "b99d2865b00c29035f9e1008a651b3ab013ff53f",
       "status": "translated"
     },
     "features/auto-reload.md": {
       "sourceHash": "sha256:12a094cafa3b8bcd0d1143ab195cd05c04cce7aceda6d897e9c63276420524fe",
+      "sourceBlob": "f3813a79cc79cfbf7eb5f4ad66753061c005cec1",
       "status": "translated"
     },
     "features/Best-Practice-Analyzer.md": {
       "sourceHash": "sha256:9b948cd95b2378a11d35a1944861ee43f1ea5baa6ccad09e00654e32055e9f5d",
+      "sourceBlob": "dea840e3b90d43600b5a90815ea1882aec187eae",
       "status": "translated"
     },
     "features/built-in-bpa-rules.md": {
       "sourceHash": "sha256:bdffc9c4bc7c941d725928c7b068e04907b5f111d273daacd59d38e57faf0a30",
+      "sourceBlob": "4028cb601ba4238559d596bf27c4834ae6bac40f",
       "status": "translated"
     },
     "features/code-actions.md": {
       "sourceHash": "sha256:82baf7662cf3be05e7a4b399cd9cf3cf6b7ab76eb6eea7233b020be46862b47b",
+      "sourceBlob": "a7d72c1a74e36ad01c2ba50e5d249dbc24f60d7a",
       "status": "translated"
     },
     "features/Command-line-Options.md": {
       "sourceHash": "sha256:510c1728baadeafa301f650793fa1ad76bb6c03b1e2039b2a4d6962ac6bba218",
+      "sourceBlob": "c2148da283dac1ebe67a27053a7032512a301d5e",
       "status": "translated"
     },
     "features/connectivity/databricks.md": {
       "sourceHash": "sha256:9c696bd069c734d7e6b71f06ca44e4d1c5ab2eea9557350ede06b70f6ebc2ce1",
+      "sourceBlob": "ca07aacf80918aa83cfc89887d270cf03bb810a8",
       "status": "translated"
     },
     "features/connectivity/fabric-onelake.md": {
       "sourceHash": "sha256:eeb03bfca0a8c72a8e89d0160bab987cd13e15b5c6d69824de871c68b445bc37",
+      "sourceBlob": "876294c93ac97b9cce6b29b03f97e5edea129035",
       "status": "translated"
     },
     "features/connectivity/index.md": {
       "sourceHash": "sha256:ea13e9c16277ac6b1bc6fc627a8fd8e7fccfef1cd3cedcb0b0a355f5c468e42b",
+      "sourceBlob": "b7d0f59111937412b5a8751f2db13d576f2df168",
       "status": "translated"
     },
     "features/connectivity/odbc.md": {
       "sourceHash": "sha256:3125fb8485c53abb96e4527f599f790f541b94b59dbd5cfff7e01c05a2a7e121",
+      "sourceBlob": "e49426d53974c10684ef4e52b507e5f6b242f58b",
       "status": "translated"
     },
     "features/connectivity/oledb.md": {
       "sourceHash": "sha256:2152c2f02cb41fb7230b3ad5edbe87984fc3573c922cbc20696207eef97acfaa",
+      "sourceBlob": "596dae2c237609a3423f05f0c93a7a4d435c9ee2",
       "status": "translated"
     },
     "features/connectivity/oracle.md": {
       "sourceHash": "sha256:243c9c3d888c4d0a3358e7504a6d75ed00143daf3650e8300b236e92ba5e5bd2",
+      "sourceBlob": "e6666fba1c9cc9df189efc83e69d83c0f3853a32",
       "status": "translated"
     },
     "features/connectivity/power-bi-dataflows.md": {
       "sourceHash": "sha256:0b225765aba34b8efcb135fc393ab717c78bfbfda6510c7e9cefa52dac19c3e9",
+      "sourceBlob": "0c84343310f1d8541e0e79603c75877e272411f8",
       "status": "translated"
     },
     "features/connectivity/snowflake.md": {
       "sourceHash": "sha256:f5abad907ade122a1002b86867ce69d207d051e4031d22693c65d410b79bb788",
+      "sourceBlob": "d6fd6fd3e1e0a95779907adbf7bd9c9de1c280d8",
       "status": "translated"
     },
     "features/connectivity/sql-server.md": {
       "sourceHash": "sha256:44fa78e2f66178989be76fcf94cf80d0a898b789991a3891226dbe30c257fc37",
+      "sourceBlob": "566a9a774ac1b266a5c15fbb0132b5ecbfc3daa8",
       "status": "translated"
     },
     "features/creating-macros.md": {
       "sourceHash": "sha256:b625c28e6d8e1c750f1cd082ec3a475ebcff8e39fd779818024e2bb3c1c10687",
+      "sourceBlob": "64736b7672327d8e1cf29c922a51b3f8f1baddc7",
       "status": "translated"
     },
     "features/csharp-scripts.md": {
       "sourceHash": "sha256:aaf7aebdfc49037aae8aad82cb5d1b8540478a978c9fe3bc46a9acdb962bc63b",
+      "sourceBlob": "d04304d1be9ea2607b699cfa9aa662ef8020731b",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-add-databricks-metadata-descriptions.md": {
       "sourceHash": "sha256:3e3502fa81133433b74714be43bbc8eb911a90f8848ff98d0f1828f56036f9f9",
+      "sourceBlob": "9f2f9a5953d82619aca182e7e07f1e52a2334c68",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-dlol-to-import.md": {
       "sourceHash": "sha256:d48972b9f153794a3c9d87f029978e777815eed865588eb6e54d87f2d83b40d5",
+      "sourceBlob": "2431a3db254213d085ebf92dbe7732fec85da63a",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-dlsql-to-dlol.md": {
       "sourceHash": "sha256:4680ff0aea6427e90a04380c7c09e6cb98484e75b110d4ac95330e639945d3c1",
+      "sourceBlob": "a2d82652bb9a738a0f3cf9294526a43b5ff91141",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-import-to-dlol.md": {
       "sourceHash": "sha256:db70a79ac1d2956f2b18a83b83c3693704eb1235b271697b020432e3d0a07990",
+      "sourceBlob": "98f5f70405bbec01c36fbafe83d0087d9e023a63",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-count-things.md": {
       "sourceHash": "sha256:67e92ecd96ccbe2ec1373a8d3280182a126d832821001b70e21c990a4742deb2",
+      "sourceBlob": "da055364a63fc18aeec17804379b0a16eeacab65",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-and-replace-M-parameter.md": {
       "sourceHash": "sha256:0ce06f6f7719671d46c05fabbbc25a25721c9069615c6484b6dbe2bf058b8505",
+      "sourceBlob": "fa748cacfa71afe6e19286cfbb041e94cc409a48",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-databricks-relationships.md": {
       "sourceHash": "sha256:7100c6e93a2961e64c4962a5e22d0bca278b2f5c97b1c4509fbc20be236b7b5d",
+      "sourceBlob": "73730477e488ef890341f776cb7f7576ee312d3b",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-date-table.md": {
       "sourceHash": "sha256:a95991c83be2e3b7d7fbfa7c8b1eff5f59467487b66aaed2fe7a43e510f002ca",
+      "sourceBlob": "d214bca353a75f93a4ead8ffb10419acae0ab08e",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-databricks-semantic-model-set-up.md": {
       "sourceHash": "sha256:d18ee6c4ecb762d70373d3632b828a41a5dd76b283a0f742065aed5bc9ce0233",
+      "sourceBlob": "4c3e4fc27c7263a2a08f8ea9dced2fd7f842be2c",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-find-replace-selected-measures.md": {
       "sourceHash": "sha256:01f8139d9460fda1438695c2ff55c02a0671fc22ec442b111dd44236cd0f22c1",
+      "sourceBlob": "f80005ea3fb552e9a84cea242d690fa0389a7727",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-format-power-query.md": {
       "sourceHash": "sha256:a18bc6f534e163a0cc87d75f47b02f13c3f6d47d4dd988ce53f55bd52002126b",
+      "sourceBlob": "c936182183ffab844cb70911d57f98ae6ce35153",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-incremental-refresh.md": {
       "sourceHash": "sha256:ebeaff67ce308880b8ba5be4b9cd198c30a5f48af87df7b477d48ed313bb1907",
+      "sourceBlob": "c61080670ead87cc586cdd71acaeffef655af7c1",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-user-defined-aggregations.md": {
       "sourceHash": "sha256:e4a1668f2fe37b9dfedf705f1ba2052a3f696c10e3422420ee24e7f9a983aa8c",
+      "sourceBlob": "c0fad152d810aff8d047fc97a1cdfc33dd2b75af",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-output-things.md": {
       "sourceHash": "sha256:b610ce223647b635018c8e048c00b9004cc93ebc2309db26c30b383e9497b0fe",
+      "sourceBlob": "2a7b4d9fd9bf7aee8e1e3de2fbe07fc501bfacd8",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-remove-measures-with-error.md": {
       "sourceHash": "sha256:d0a4c46a77e8af7bb00b109e8875d4b549bc0c03f22ec28d2f1bd2d95ce4f20d",
+      "sourceBlob": "0291bce2f09b6dcd79787ed8cbe3013fe3514f9f",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-count-rows.md": {
       "sourceHash": "sha256:691212c34c7c4dc0b39809eedd600fa594cdcb8d8e0d116fa9e6804a07fd1088",
+      "sourceBlob": "843cec9bedafb0b804bd02bda264250c2b65bc69",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-field-parameter.md": {
       "sourceHash": "sha256:68a3acca96d3e372683c73129f700024e3229daa1752be3805653accc56fd91d",
+      "sourceBlob": "16b5b229f315eefaefabc80610a86ae119290c5b",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-m-parameter.md": {
       "sourceHash": "sha256:9e2f4adee2211c2ef4a90fb017b289dbe5bdd935e290172030e5b6f32f1bf2bb",
+      "sourceBlob": "7ddee7e50a4a7287e21f7a1e9e0c2ea0f6c8412a",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-measure-table.md": {
       "sourceHash": "sha256:0a641a1fa1d5b7b7ab73799b15d9434407b3fecc1d721ed1d43a58a4ff1d30e2",
+      "sourceBlob": "85dcab0922799ef70ded284fa5d15ca36994457f",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-sum-measures-from-columns.md": {
       "sourceHash": "sha256:50bd3f2a8ef34e438493f91da92be743f7cd4296a694d3243460abeb47f28c89",
+      "sourceBlob": "752a10e104f215457dc2d3c15eb2e55323aa4041",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-table-groups.md": {
       "sourceHash": "sha256:74dd9a2bda903d85972caedcf9e230ca4843fa87fa490bd82122498db8a261c4",
+      "sourceBlob": "7f89ea59485e72f3b39dbcfb854581bccf88e1e7",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-display-unique-column-values.md": {
       "sourceHash": "sha256:9305105469bd45fb0ce7edbb66fdc9c7ec9be16d377bca79c8265ca16451aeeb",
+      "sourceBlob": "1dbaf8539bacd99ba9608b83094f0dbf16aca869",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-edit-hidden-partitions.md": {
       "sourceHash": "sha256:fe1dfb281e64a7367180a7705a5559be43d8c9368e1c5e7acccab093ee1430d4",
+      "sourceBlob": "967b133b0bd871b6d17ed115a6c723f7c6075e45",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-format-numeric-measures.md": {
       "sourceHash": "sha256:e2c47703f04f15d22d23fd66c8abda9a27e5ff15ffbf6c9e73a9dbc54ba3952d",
+      "sourceBlob": "8057806143c71360baf5228c35dad7b95208ade7",
       "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-show-data-source-dependencies.md": {
       "sourceHash": "sha256:6bd1324dda48a5363b2d1e9d9e893f61f2e3364913c64848180c5069442a1600",
+      "sourceBlob": "c95f1107c52231e316455c302c29650093e5c00b",
       "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library-advanced.md": {
       "sourceHash": "sha256:1bffc5de50a63a02a1499b6c690f8f021a456f69bcea94de8d30589792f76e9f",
+      "sourceBlob": "8dac2ac36c442c6d19cac96b775a2d447aa7531c",
       "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library-beginner.md": {
       "sourceHash": "sha256:8297f36b1b4788ff484bc7fbda33135465e258039c2c4fb91a10d7dd8d8dceb7",
+      "sourceBlob": "544e3bd8ad1015ddd1fdf1e20f4194d3b666b4b5",
       "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library.md": {
       "sourceHash": "sha256:5097363cc7a2ae52c4ad14596dfe2e963ba391ff21942bd0e472c45dca814ec7",
+      "sourceBlob": "052c9c79b00fac845af6faf3dfc417537b257859",
       "status": "translated"
     },
     "features/CSharpScripts/Template/csharp-script-Template.md": {
       "sourceHash": "sha256:d33ce23f236296d5f6a22ccda044b9cc2cc97b36fac41cfb8413f76c85c56af6",
+      "sourceBlob": "11ad23eb33ddda31b959741c47ba60d8998bdfe8",
       "status": "translated"
     },
     "features/Custom-Actions-hidden.md": {
       "sourceHash": "sha256:cce28f9efc24691ee1e3b025b1d5e87244c1dd656d8d4fe1226518fdd05fb40f",
+      "sourceBlob": "82152e8036fb5839a393b6dd935f69f079a3f16d",
       "status": "translated"
     },
     "features/dax-debugger.md": {
       "sourceHash": "sha256:2edb8f85458de285384d61b1bd055fda7ff1f02e451a601cb555acac25c64f50",
+      "sourceBlob": "daa9f9eb4216be244ddabc99d2c24b79ee6adfac",
       "status": "translated"
     },
     "features/dax-editor.md": {
       "sourceHash": "sha256:b8456895d28fb1c0ac0e2e78432a85e2d85bdf9ae2aa1e2d9c9edb2784e55923",
+      "sourceBlob": "b6dbdb572a7d9e9121ec6dc8e6d51f10018dadb5",
       "status": "translated"
     },
     "features/dax-optimizer-integration.md": {
       "sourceHash": "sha256:7f360b8d39e0a763558717f52a112f4e908cd7e30b99c94580b0f478277858f1",
+      "sourceBlob": "187aca039f9ad1bf5d08fd48c59bc1c1cdbe973e",
       "status": "translated"
     },
     "features/dax-package-manager.md": {
       "sourceHash": "sha256:deb8cbd2b8ad4c16f627cfd8b12f903da4b08287cf955f14cc1a8ecddfc7a825",
+      "sourceBlob": "f2b54efe53008a5ff258010a9b9c7dd8ba9ab035",
       "status": "translated"
     },
     "features/dax-query.md": {
       "sourceHash": "sha256:43d7d61f433e79310e7af7d7e44e34ffa6f80b49df061b34d91f9285a55131d4",
+      "sourceBlob": "8c8f8290b7fc114f9a41133437cb64cb7541c74f",
       "status": "translated"
     },
     "features/dax-scripts.md": {
       "sourceHash": "sha256:68a0f9afca10252a6d2c9e4c92642be0d725368a46af4c4a59b7420756d92d83",
+      "sourceBlob": "48ee7a19819e514fd13026e9a5abccd350531cb6",
       "status": "translated"
     },
     "features/deployment.md": {
       "sourceHash": "sha256:ccf07d6fb575c9a62fa94e4e5b3ba9e41543a57b1b651441ecdde3eabe98b0f2",
+      "sourceBlob": "e8b2cef8f04a3e015825aab2432448e6763e29cf",
       "status": "translated"
     },
     "features/hierarchical-display.md": {
       "sourceHash": "sha256:45963c4ab2a25c88ab2bcb5a8115e1569ce71098b36c09b4f3c7e8663dfb1f32",
+      "sourceBlob": "bcc131845c0deb904311df84339e39f4a6c657e2",
       "status": "translated"
     },
     "features/import-tables.partial.md": {
       "sourceHash": "sha256:b416ea2b5d09ea7cc44d41ae621ca79a122104ad088f8c8bcd3c7d320ed88431",
+      "sourceBlob": "586e2c6455a8d676a85c09d69628d9d3f7006e9b",
       "status": "translated"
     },
     "features/index.md": {
       "sourceHash": "sha256:523bfe7e887f482e3eac8691e77879feeac70030cd508acc736994622c6db683",
+      "sourceBlob": "9d66dff2ab0078ddefdc944fda46cd40ebb22951",
       "status": "translated"
     },
     "features/mcp-server.md": {
       "sourceHash": "sha256:9fbfc101f7c6f4a71721ef6382610bdec5123aa3ddd0f4728ee93852bf4f8196",
+      "sourceBlob": "1915106ad79557a9fc86e7c87bc600f974e04249",
       "status": "translated"
     },
     "features/metadata-translation-editor.md": {
       "sourceHash": "sha256:7dd826b950714972b3429347f09fed22bcdbaf3f149e4f47dc6382ecf26e69e5",
+      "sourceBlob": "0aadd2b697b21873edd16fbee8e453c8883b7138",
       "status": "translated"
     },
     "features/perspective-editor.md": {
       "sourceHash": "sha256:d7bd4b9834bb8fac3a1072e4c84d43efe36d64e7443b50f0778f0f76f189476f",
+      "sourceBlob": "b823606a62a57145477463f74a99fec5abf35bf7",
       "status": "translated"
     },
     "features/pivot-grid.md": {
       "sourceHash": "sha256:13469e84b4715d3989eb9f9220222807cad8eaa30bb5dc6eb1837da1e13d82ee",
+      "sourceBlob": "2ec2cc595eb7bce1320d14aee51d119bc658d104",
       "status": "translated"
     },
     "features/refresh-overrides.md": {
       "sourceHash": "sha256:8ebe84c4db022e87ff73603eed7974660e6edab0fcc5a8f416b1290a6f05e413",
+      "sourceBlob": "953a055ad5f45c6d57947adba38711895375a8c6",
       "status": "translated"
     },
     "features/save-to-folder.md": {
       "sourceHash": "sha256:a0787dde9336e2f631234d0d95ec8519ccdb84a1495325090c56e9ec8caeee08",
+      "sourceBlob": "32096acf2a61616cad34cfb6dc26be9b8c9828d4",
       "status": "translated"
     },
     "features/save-with-supporting-files.md": {
       "sourceHash": "sha256:a1b88d752e28fed5063904efd4c743e043cb3fe28591b6cde5a8182d00130b41",
+      "sourceBlob": "42c8e358e5865899c7318909c20cfe907c2c7879",
       "status": "translated"
     },
     "features/script-helper-methods.md": {
       "sourceHash": "sha256:5cb24ef463fa580075848ea2facacb0b906a1e08ff6cb1c62f7e41ae3824fbf6",
+      "sourceBlob": "0e6d57a40fa73f9c43cf764fc9d9534a2e913e74",
       "status": "translated"
     },
     "features/semantic-bridge-metric-view-fields-and-dimensions.md": {
       "sourceHash": "sha256:58bd40eea2c9da6f1cf4b1b24ca50f04ed021a171289ba554edccd4874fbafa4",
+      "sourceBlob": "04720649dd3f611b9bd31a3e139dac9bea1321f4",
       "status": "translated"
     },
     "features/semantic-bridge-metric-view-object-model.md": {
       "sourceHash": "sha256:6028084095ef69f4cd3c5f0e0770809dafca75ba3636e9f02335c7984e06c826",
+      "sourceBlob": "c6a1faafd947b0d7d74f86730285ee36cb63bac7",
       "status": "translated"
     },
     "features/semantic-bridge-metric-view-tabular-translation.md": {
       "sourceHash": "sha256:74be78dd2533ebab27bb4d9dff59a263f12f19b90e8bc746d6206feb4d7f08b5",
+      "sourceBlob": "92ffa33e53833d234015db9a287e0e8a1d621ad2",
       "status": "translated"
     },
     "features/semantic-bridge-metric-view-validation.md": {
       "sourceHash": "sha256:e2f6dddbee46537b3923de827539556524d25ad09b5125e2df1510eac271179c",
+      "sourceBlob": "0dbe93b10b900b5b49137651c119bd2877d30a7f",
       "status": "translated"
     },
     "features/semantic-bridge.md": {
       "sourceHash": "sha256:148612d364d9d289779fdf6bb5119e69a5a06f1162e11a909c5456284fbfcdbb",
+      "sourceBlob": "14794316b4726ee655ed893d0fb88318451c4184",
       "status": "translated"
     },
     "features/Semantic-Model/direct-lake-sql-model.md": {
       "sourceHash": "sha256:7f45a897ce4afe418c209f05ba10729e24bba2a60d8710191bfd66051336293b",
+      "sourceBlob": "ea02d4a245095ae863fc83d1f8efaea45008b918",
       "status": "translated"
     },
     "features/Semantic-Model/direct-query-over-as.md": {
       "sourceHash": "sha256:280fbda0a57da7ba6b11294d3809f7b52c4f25cdf7ca5fa07e85264e5cd1e74d",
+      "sourceBlob": "9f0d50abd8e16a26b6ddce3b950b418e250b9df0",
       "status": "translated"
     },
     "features/Semantic-Model/semantic-model-types.md": {
       "sourceHash": "sha256:c6bc2434213fc85c0062d07e80f8e0341d4375cce84561d770944e00a7f1b1d0",
+      "sourceBlob": "a7d91a750887b553c8810790fd860f03eefd5480",
       "status": "translated"
     },
     "features/table-groups.md": {
       "sourceHash": "sha256:5459da04f54b462c03fc23a93c0ea70583db05f352b5d1fa4eff8de6fd789586",
+      "sourceBlob": "b15486c461048b998fde6c32bce176e758bdf2f3",
       "status": "translated"
     },
     "features/table-preview.md": {
       "sourceHash": "sha256:919ddbf231d1336651625f666704024ac80ce09b637d0c73ccb94aba492afc9e",
+      "sourceBlob": "9d7d9bf467d7d9b87945f6318da3f2c158f3d1af",
       "status": "translated"
     },
     "features/te-cli/includes/te-cli-preview-notice.md": {
       "sourceHash": "sha256:78d64bd2aeab6acb614ba5793a522de28cc7726655789e476ee50e267f561a46",
+      "sourceBlob": "e9dbcc25c59eec001190d9f25f394af5650861ce",
       "status": "translated"
     },
     "features/te-cli/te-cli-auth.md": {
       "sourceHash": "sha256:7c546bae4a34fb5d356b48977274fdb0b106bc862f89d09b59fa857ac78a962e",
+      "sourceBlob": "3348d29f26b1a64a4154901896bb2f0195124d21",
       "status": "translated"
     },
     "features/te-cli/te-cli-automation.md": {
       "sourceHash": "sha256:4816d4daf4c65c11daeb777419b0d539d79055120d6516ab432b7567961fc8f9",
+      "sourceBlob": "f67dfbba4a2cedad06b78a5f3cf17da282f5a858",
       "status": "translated"
     },
     "features/te-cli/te-cli-cicd.md": {
       "sourceHash": "sha256:3407d54cf37c954a2e53d190c14f84502a04f602c3d1605d1e040f479eb57381",
+      "sourceBlob": "af1939b97325f2b52f820a21f08a53d50af5994e",
       "status": "translated"
     },
     "features/te-cli/te-cli-commands.md": {
       "sourceHash": "sha256:3002131eec0fe7c2f8e318c6bdb7227792ff24970f88738da20a4e900af573eb",
+      "sourceBlob": "3e0f0ae6fa8f17b069755ac733e72e9a460b5076",
       "status": "translated"
     },
     "features/te-cli/te-cli-config.md": {
       "sourceHash": "sha256:b9778fc392a9c0f2ec9631c4bda5a71fbb8161103102b2e10f923a0f68205a64",
+      "sourceBlob": "cb3f4b80a49df21e8f49aee372a54bb3a2a56ae5",
       "status": "translated"
     },
     "features/te-cli/te-cli-findings.md": {
       "sourceHash": "sha256:7fbebd98ae9b0954f975e87b2d58ec49c888349ac4e51e5399fd87642dab8ce9",
+      "sourceBlob": "ebd0602375cc90e65a87a64313230be2c2336871",
       "status": "translated"
     },
     "features/te-cli/te-cli-install.md": {
       "sourceHash": "sha256:3846cb039ee6af3f7839e1dc9c3eb4581ae64d35ebba3155ce3e5c0e1e112fe8",
+      "sourceBlob": "7e2c09d12d14142c566a1bc0f2f7f165f5e75a3e",
       "status": "translated"
     },
     "features/te-cli/te-cli-interactive.md": {
       "sourceHash": "sha256:0c276940dcfc72aaed58827820de0b1e253113c0b10a97401cc5c44eb1928663",
+      "sourceBlob": "434b92b9def4a864b3aac654c1bf17a81faea23c",
       "status": "translated"
     },
     "features/te-cli/te-cli-limitations.md": {
       "sourceHash": "sha256:03f4d5fd792465b3ba3aa6e3f731937ca34648c5a8820936ad2b432da7dd66de",
+      "sourceBlob": "11470df38041c9efb886d4f233b7016f233aa243",
       "status": "translated"
     },
     "features/te-cli/te-cli-migrate.md": {
       "sourceHash": "sha256:1bb8b09850ad6534ba7da224d4fd26365b24f27ea1e181031619fdb926130478",
+      "sourceBlob": "92f4fc0f6b5a7ff13ecee6a6090d10c1f00cc721",
       "status": "translated"
     },
     "features/te-cli/te-cli-skill.md": {
       "sourceHash": "sha256:55eb8144d60ffde111240da39e89c8ea98390d868e79363c70024ddad541d8a9",
+      "sourceBlob": "fe2cbae27138b4ffa18c36a2b5df4e85c2c75b9e",
       "status": "translated"
     },
     "features/te-cli/te-cli.md": {
       "sourceHash": "sha256:3809890dbd0821611a2300d79384b21997019d0cccf0e713d81ff2862da558b0",
+      "sourceBlob": "8c5719ca18d018255956508c615509bc0d198e68",
       "status": "translated"
     },
     "features/tmdl.md": {
       "sourceHash": "sha256:0200e992b3cc0f6ea5a18960a70bc722d4f6343d20001ec3ef23f724edbd180e",
+      "sourceBlob": "3dfd0667b205942cb0535306493253abc97adcab",
       "status": "translated"
     },
     "features/toc.md": {
@@ -380,170 +473,212 @@
     },
     "features/unsaved-changes.md": {
       "sourceHash": "sha256:b4276f4a2d3144459dfc5e6fa6f6e71d560547cad60cc6c6227c8a2207fc3651",
+      "sourceBlob": "01f50b550f63849d244f6006fe95f8bd8c19ef36",
       "status": "translated"
     },
     "features/Useful-script-snippets.md": {
       "sourceHash": "sha256:c8a0ddfa6f8ceadc38a222a3c5155f2da992c93f1fe4297a629251f1b5b95c28",
+      "sourceBlob": "c6fc2d702972555e1b16467df49ee861f16b4e74",
       "status": "translated"
     },
     "features/user-context-calculated-columns.md": {
       "sourceHash": "sha256:2d7a43f84729d3d925e4d918752c57a05335335e8af7547bc7f829a833e46751",
+      "sourceBlob": "50940f82680787205217026bca712a95e81ae285",
       "status": "translated"
     },
     "features/using-bpa-sample-rules-expressions.md": {
       "sourceHash": "sha256:5f01197ad9e53d65cb6c7756372e4827a31e994a0a70a16a8aaded9b52339515",
+      "sourceBlob": "c1e81f45fef0c94967f1c517dc46dbbe3c3d8b97",
       "status": "translated"
     },
     "features/using-bpa.md": {
       "sourceHash": "sha256:ea063d06bedae22da258863a7f4727edb1be9b9751602681d1a9a23d66950ee7",
+      "sourceBlob": "86c47854b91121eca8f2b754e32629daaad2640e",
       "status": "translated"
     },
     "features/views/bpa-view.md": {
       "sourceHash": "sha256:dcccdbd044bbd074e52b5abf8e72d8ec7b714d81617f0261b49ab8a776de1670",
+      "sourceBlob": "f13334c63f552805fc2b3d50a215047a5fc4c82a",
       "status": "translated"
     },
     "features/views/data-refresh-view.md": {
       "sourceHash": "sha256:6427f5aec9357680f68f96702ca980623b7f518f505ca0a179451aa63d701b15",
+      "sourceBlob": "8c9ef9694a63cec18b6fac328ee4a313c2f308f4",
       "status": "translated"
     },
     "features/views/diagram-basics.partial.md": {
       "sourceHash": "sha256:6159325df46084d452d7adb3e28b85ba4da85bd270c9e158624ea2a16653d182",
+      "sourceBlob": "efdef982ec12e4c57b53f29fc58582d9f5ac36ab",
       "status": "translated"
     },
     "features/views/diagram-view.md": {
       "sourceHash": "sha256:55ff4574e2a9a8bfc1f92025e34a95a42046daef4cf96315b7c64be03b935796",
+      "sourceBlob": "d9b5d85f347f739c28091049bb3b69fd3ddc4314",
       "status": "translated"
     },
     "features/views/find-replace.md": {
       "sourceHash": "sha256:32a2e329d26e3712c1115ee0cb1965780387888d05c5af11b7bb2b056c8f3d42",
+      "sourceBlob": "e8ea546897ffdd36d31f043833f4cb1a374636ba",
       "status": "translated"
     },
     "features/views/macros-view.md": {
       "sourceHash": "sha256:6f8046bc8d5bcf581c147a3263fefeb4f6dbc160cccd29a0a8b09db2949f055e",
+      "sourceBlob": "371f9dd56bdc565549d82dc6e330c8bed888b8b2",
       "status": "translated"
     },
     "features/views/messages-view.md": {
       "sourceHash": "sha256:c444a771025eab4067d298298fa8391fd1e0157c38582320b097f9d2320d4657",
+      "sourceBlob": "a48bd92d4addbe14a03f74ce7afbadedbabea93f",
       "status": "translated"
     },
     "features/views/properties-view.md": {
       "sourceHash": "sha256:3de52f392fb38a6066663c222690aa9b42ad3d611496e76463eed2c2c416faf6",
+      "sourceBlob": "0de8aa4db131f025fb45835d377d073d3df0bb30",
       "status": "translated"
     },
     "features/views/tom-explorer-view.md": {
       "sourceHash": "sha256:620e8d14dba16e4b5bdbe6ad7beff5b79903b29551ca338efa94d6efaeb041a0",
+      "sourceBlob": "91969425bae2aed64fa70aaa2fe852341d14de15",
       "status": "translated"
     },
     "features/views/user-interface.md": {
       "sourceHash": "sha256:7e6a431584ea6e620b932f5ff895cea2a9a28faecc253b212fe62b033ed833c7",
+      "sourceBlob": "10005d97d86dca7ddc750111b0862c0936c2cb43",
       "status": "translated"
     },
     "features/Workspace-Database.md": {
       "sourceHash": "sha256:3e8d2cab08786abac392997434c23ebe54b1bd2b7e1158513819bf366060c0ee",
+      "sourceBlob": "50cffd07b076258eed8fd54b4fa71126fde31c57",
       "status": "translated"
     },
     "features/workspace-mode.partial.md": {
       "sourceHash": "sha256:e05d93903abab9005d7a7d2b03dcb4f65b0e651c4456beef68750dfb44fabc2f",
+      "sourceBlob": "d7067641fdb0151f99050a21c69b16732db7355d",
       "status": "translated"
     },
     "getting-started/app/index.html": {
       "sourceHash": "sha256:1d58f022bcf30ea4582377c3145def5edc9c8dd96c25abbb66a9ce4b6918c457",
+      "sourceBlob": "12c587ca046b180a307a4e66256db0319db5ac5c",
       "status": "translated"
     },
     "getting-started/azure-marketplace.md": {
       "sourceHash": "sha256:aa36a1b4f471f78d88e57402405aec43b37ccd2d1a53a1444ab1731de18c88b1",
+      "sourceBlob": "f2d05b99fec5603416ae3a279026081a878d53d4",
       "status": "translated"
     },
     "getting-started/boosting-productivity-te3.md": {
       "sourceHash": "sha256:6cbd04a7b267e22d41c812a2efedda6cfc840a8c9e7146b0144cae6a1b077a61",
+      "sourceBlob": "ff0edf619e6010c0a164b69d7781cec92c169845",
       "status": "translated"
     },
     "getting-started/bpa.md": {
       "sourceHash": "sha256:dd602ec731cd29ebb700cf7377396fee262113d74c9c584d8dd17dd46c21fba1",
+      "sourceBlob": "14c8010c6f7ed5500f707a0b9e10a4d5c674cd03",
       "status": "translated"
     },
     "getting-started/creating-and-testing-dax.md": {
       "sourceHash": "sha256:326a4af18f1bacea3e4b6a52d44c336bab3495074918c9cf49722d2e579a561f",
+      "sourceBlob": "dab9ba65e0500cb21f67b7a6218c83d5663e7197",
       "status": "translated"
     },
     "getting-started/cs-scripts-and-macros.md": {
       "sourceHash": "sha256:4c587caf1e8d5a60f4ce6d1e6c9181ba8469b6b46c4dd315239689590ec4b135",
+      "sourceBlob": "f78d1ab47a62093e17dc33851af6f048962eb688",
       "status": "translated"
     },
     "getting-started/dax-script-introduction.md": {
       "sourceHash": "sha256:1c500ed5798529eb123c3f097b3052dd48a97e2bb4a6fb8e2ff8a3c0660048ae",
+      "sourceBlob": "9afd91645a2433cf7b2e627e5a24e2705fd7e5ea",
       "status": "translated"
     },
     "getting-started/desktop-limitations.md": {
       "sourceHash": "sha256:642629068eda1994deaeed8eb17e811e878c3f9fa4d2b73d20d0ca65e87568d5",
+      "sourceBlob": "80696f124337c358bdea791ac18aedb388a1eccd",
       "status": "translated"
     },
     "getting-started/editions.md": {
       "sourceHash": "sha256:f7d969bcc3e0464cabd627045f03454978e6bb68ff4ffc754694dd6c89e07cd4",
+      "sourceBlob": "25c0ca619fda06ba57679a8ceaac6fc35d5742b3",
       "status": "translated"
     },
     "getting-started/general-introduction.md": {
       "sourceHash": "sha256:310091474ffb682608d139342191400badf995a700cbc54e539b70e1fd879f79",
+      "sourceBlob": "cb8d9383005d76762c8ffa4bfd4f14d9f463c299",
       "status": "translated"
     },
     "getting-started/Getting-Started-te2.md": {
       "sourceHash": "sha256:f7f3fc16ac57b499364b970568de8ccd8b6fd1d2122ddcfb4bca709ac5af9776",
+      "sourceBlob": "645a3670337ebca30537d0a4013f0ad0d08b9bd2",
       "status": "translated"
     },
     "getting-started/getting-started.md": {
       "sourceHash": "sha256:a0265501f2a95f673ce169db86208950eec6e2523d1d4f3e0d241b3372d53e96",
+      "sourceBlob": "d703d438dee570508d4e6bc3e223975be91b9530",
       "status": "translated"
     },
     "getting-started/github-flow.md": {
       "sourceHash": "sha256:8a6cff7e623f0d857474b867d285f3a408f81023160652a167ed79531037343a",
+      "sourceBlob": "a80125cade3d4f2402ffd4a7629c267922f96492",
       "status": "translated"
     },
     "getting-started/importing-tables-data-modeling.md": {
       "sourceHash": "sha256:43389d4ff2a11ad55cbcebbcc1550cfdd551c32fbe31dc2f5606340e4c3e57d8",
+      "sourceBlob": "64f9ac7f1bb6d128a2740ddede62941604171ece",
       "status": "translated"
     },
     "getting-started/index.md": {
       "sourceHash": "sha256:04757c50e64426cab3b67466495644cfbd6bd3bfed8379473d675e5bc2ca4ebd",
+      "sourceBlob": "5c4f8089e16f0b76bfd1a176bd640da97a30c6e4",
       "status": "translated"
     },
     "getting-started/installation.md": {
       "sourceHash": "sha256:ef3f254c8f8def44e84251f71974aec719f3b23b69dd37d3c5bc343b3a53ed8a",
+      "sourceBlob": "2435ed67e1a53b4e2e21f968e9e469187862fa6c",
       "status": "translated"
     },
     "getting-started/migrate-from-desktop.md": {
       "sourceHash": "sha256:073cd52677a718dba308dfac64ba1f27b76ba4534f77ddb99b2b4447c1511f70",
+      "sourceBlob": "b1fc8b39d6efcdfb61f7ac50beece138b8666a16",
       "status": "translated"
     },
     "getting-started/migrate-from-te2.md": {
       "sourceHash": "sha256:e3b8f23bb9f7f7e7e0a911db6d0de1ad7f6479cdeed5e6093421e27ff6ce3c20",
+      "sourceBlob": "487a4e16fdd4dd8b6ac57331a6ef68c5155cac28",
       "status": "translated"
     },
     "getting-started/migrate-from-vs.md": {
       "sourceHash": "sha256:e828a626484397cb46e2a36b35675c639dbdd5e17976c21967f337deafbb9f4f",
+      "sourceBlob": "219da009cff71c8ac336668cedead910296cd0cb",
       "status": "translated"
     },
     "getting-started/optimizing-workflow-workspace-mode.md": {
       "sourceHash": "sha256:be881580d2cef038fc74e503591f8110998d40922a7c30bc15936ad7a36dc823",
+      "sourceBlob": "3a930229e6e6fc71e2ffcaf87336a8b56a9efd07",
       "status": "translated"
     },
     "getting-started/parallel-development.md": {
       "sourceHash": "sha256:25d9494276172d9ffcdb40b37e6d5cceee10afd48c413a7299e5f686be0fb613",
+      "sourceBlob": "71cb81c4c14c4e69c7e259f8312f4fb2290e4c95",
       "status": "translated"
     },
     "getting-started/personalizing-te3.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:0e2b6a13cb3a279d40f713d56287aca1a7d6d340ebec4e13842b3d51b42f76d8",
+      "sourceBlob": "8f3836fd27c04e5868769a605ebafa53aa37b130",
+      "status": "translated"
     },
     "getting-started/Power-BI-Desktop-Integration.md": {
       "sourceHash": "sha256:f725405cfbeeb34f15100aa477e813197a3d40640fdcd2de82f2262cf3b41ef8",
+      "sourceBlob": "94d771d91a0b9665b82941bbe23e530e73494b03",
       "status": "translated"
     },
     "getting-started/refresh-preview-query.md": {
       "sourceHash": "sha256:3bdec39f290189d4f7a9e60eebcaf4eed6a54db750203a2d1bf692927d4fa5c7",
+      "sourceBlob": "013c21f02eca15be302eca2ce4059b0850003091",
       "status": "translated"
     },
     "getting-started/sharing-macros-bpa-rules.md": {
       "sourceHash": "sha256:a2c174930bce002fa8691b6585917c06845079b0f8cd1b03133707c45fddf91d",
+      "sourceBlob": "9b691989ed5f710213f587085944acb6c66ef976",
       "status": "translated"
     },
     "getting-started/toc.md": {
@@ -552,242 +687,302 @@
     },
     "getting-started/training-telearn.md": {
       "sourceHash": "sha256:cba2b907335edf7e1310d6323c063305cbed3c66013758b932d91466394b4d85",
+      "sourceBlob": "b397eab6d24a427124a93029d1ca1291c697c75a",
       "status": "translated"
     },
     "getting-started/views/bpa-view-reference.md": {
       "sourceHash": "sha256:15ca9b6b41ad2b4a120b6ef5ea17c4474e72fa68375e5539654e662057eb2383",
+      "sourceBlob": "9c7382004050c2209a0562f6849ff164472fb554",
       "status": "translated"
     },
     "getting-started/views/data-refresh-view-reference.md": {
       "sourceHash": "sha256:5ae489e72f396630aec7b81960492180ce2359df98a403503cc7613fd2f22049",
+      "sourceBlob": "c85ccc03ce66f1e851186a77121fcbb8a7e99900",
       "status": "translated"
     },
     "getting-started/views/diagram-view-reference.md": {
       "sourceHash": "sha256:dfc344df0e16e8b8e186954e9cee6883ce21b968351b5d590947c24c9219617e",
+      "sourceBlob": "72755e9142cd6ea7a41571b151b44af7a66b4e85",
       "status": "translated"
     },
     "getting-started/views/find-replace-reference.md": {
       "sourceHash": "sha256:a207ceafc5c8e3d3a218c80d405fafc3c71a9d9491964366607ee205e28a2b69",
+      "sourceBlob": "ba9c3fe3d81b4b88801c5ee36d1f549b785f2c60",
       "status": "translated"
     },
     "getting-started/views/macros-view-reference.md": {
       "sourceHash": "sha256:684b3ae341bc7955f0f304e04782f7b80505ca4bb2490a7c91e99e19439b743a",
+      "sourceBlob": "9011cd129c99784016784243f0b4ee02a2563935",
       "status": "translated"
     },
     "getting-started/views/messages-view-reference.md": {
       "sourceHash": "sha256:b4e921bba59577a9f8566439d26b22c2fa5e6dd7abc73ca5dee661d2d659c627",
+      "sourceBlob": "e329095be740023fce331f0510f7c95fe8e89bf0",
       "status": "translated"
     },
     "getting-started/views/properties-view-reference.md": {
       "sourceHash": "sha256:6915dedc081501314e88a8e8700a946ec5217564c2b12e8aa45b3b4a54ad2a81",
+      "sourceBlob": "432f1db8f3f038c3b0d981ae84dad1717094ae1e",
       "status": "translated"
     },
     "getting-started/views/table-preview-reference.md": {
       "sourceHash": "sha256:f010ef6c700738379e6cbf20325a39c7b86eafaa5728d59bd4adfd27b6db8dae",
+      "sourceBlob": "4a72949ba4c0d0afa312a7f732d48698f991d30c",
       "status": "translated"
     },
     "getting-started/views/tom-explorer-view-reference.md": {
       "sourceHash": "sha256:e9d173f9dbc158abac089ab057372a1ef392b05a86c538c9e1dc931a0ff9f863",
+      "sourceBlob": "55e085d4cddf2da47e9dd983fd6576aa3a7b1da8",
       "status": "translated"
     },
     "getting-started/views/user-interface-reference.md": {
       "sourceHash": "sha256:4d45273ca50773ebbcc8687abbda271ee00eef21559ad544f7c7e1c85875aac3",
+      "sourceBlob": "f57a8b263b7c1479670f1cbb394b304231ccfa17",
       "status": "translated"
     },
     "how-tos/Advanced-Filtering-of-the-Explorer-Tree.md": {
       "sourceHash": "sha256:65c40ce723d4b32aff6b4591f2bbc7b92f9efcc4d8f5fee3beeeaf4faf58cd71",
+      "sourceBlob": "e9693aede33659c45ebc01810371f096a79a6d4b",
       "status": "translated"
     },
     "how-tos/Advanced-Scripting.md": {
       "sourceHash": "sha256:c840e18a28dd83bd4d3d155855210b5b7f917cfcb41e3ff54fff7b9574015f85",
+      "sourceBlob": "55f6b13aa957f4249b43b1978d9bb7ddec2f13b1",
       "status": "translated"
     },
     "how-tos/change-compatibility-mode.md": {
       "sourceHash": "sha256:3fbf4c15fa1139dceed32d02cc4c59e4d46c17e8bca55704057158be01f44300",
+      "sourceBlob": "82a38c6beda6c8d4f5e8afcef8f2ff733471447b",
       "status": "translated"
     },
     "how-tos/connect-ssas.md": {
       "sourceHash": "sha256:ac0be330421f0ec892ea2f79efbfe6ab6115dbce8b663be873442f6d31266a3b",
+      "sourceBlob": "7ff28f3b00e7b2319aa3fab30c6b5f8e8ebabe84",
       "status": "translated"
     },
     "how-tos/deploy-current-model.md": {
       "sourceHash": "sha256:678aaf20d780c1b7489968a3ddd0dc11553f102e5db763a0d545b49e368b5301",
+      "sourceBlob": "94011f3b3bc0dc6199c2042cc70b9b31cb094366",
       "status": "translated"
     },
     "how-tos/drag-drop.md": {
       "sourceHash": "sha256:56d2daf749079cedf7edccdd1a6981c5cfc49aadfd04b91a2f7a95f481c2e3b9",
+      "sourceBlob": "86ead6b515aa5cf4f317413aa582e47c79afffa2",
       "status": "translated"
     },
     "how-tos/duplicate-batchrename.md": {
       "sourceHash": "sha256:c0595217b896e03211f74b7fe747e6f6d9ca610669b0e08fe07ff459e2b39d20",
+      "sourceBlob": "ba58dd3f3f53b5bde0876bbd4a20833000bc5f0f",
       "status": "translated"
     },
     "how-tos/edit-properties.md": {
       "sourceHash": "sha256:36d9f419afff9ce4d1ba814f1a97ec3c825e569dc0698c82d6ccec72380cbabd",
+      "sourceBlob": "84734a92e2f9f839920b9c909dc9ffc36ad46e98",
       "status": "translated"
     },
     "how-tos/folder-serialization.md": {
       "sourceHash": "sha256:85959de08723f8acb20dc4f76220833d0d9fa9f71724fe1e68673c53041c0294",
+      "sourceBlob": "8a08bf0ee4a1a12987ff8f9bf646bf2e1e1952ab",
       "status": "translated"
     },
     "how-tos/formula-fixup-dependencies.md": {
       "sourceHash": "sha256:f1b335d4a4c069ac21bdd9c20b0e34ed6442c63307f9d3a1cfdb29e4992daec5",
+      "sourceBlob": "b5231255f91b1d601fe3dde75e8334f3f243fb0e",
       "status": "translated"
     },
     "how-tos/import-export-translations.md": {
       "sourceHash": "sha256:e360d9f6fb69f4ed660b150bc7cdbeaad188998f9addaca07a1ba95880158fbc",
+      "sourceBlob": "cf804376de4ed6cdbb410c91ad54adeb9ebab838",
       "status": "translated"
     },
     "how-tos/importing-tables-from-excel.md": {
       "sourceHash": "sha256:6a68727673ad603d2091784ea68b0fd13ebc1eed7c5e279366841237e3319e9a",
+      "sourceBlob": "964498c7544e700c1a20e38f413c22a26c6a7d83",
       "status": "translated"
     },
     "how-tos/Importing-Tables.md": {
       "sourceHash": "sha256:a4ec186a6a0cd94f851af6dc8a7277cad1216b3b63a0d973a7604774abe94f00",
+      "sourceBlob": "15052fae44f4edb632f91662e2ab026e5de5afe0",
       "status": "translated"
     },
     "how-tos/includes/sample-metricview.md": {
       "sourceHash": "sha256:fccd99fc0bee912d39f879757f5b18d263bbe88d130d534fe5663283a2351dad",
+      "sourceBlob": "883819be7e347081b45543d64467304593e62fcd",
       "status": "translated"
     },
     "how-tos/incremental-refresh2-h.md": {
       "sourceHash": "sha256:891d5b8bfa767c0bcfead8fa290e4f5d79116f9c95377fe1c6af51bcc56058f3",
+      "sourceBlob": "d0a1a2f6ff66142d05f782e5dfa959357c4556a9",
       "status": "translated"
     },
     "how-tos/index.md": {
       "sourceHash": "sha256:7e51a733575206571c23bf168421d79bfc414e12300e2a04e23c98d5d1710a45",
+      "sourceBlob": "6202ed72237521668d52857ec6a7db2bfd038f65",
       "status": "translated"
     },
     "how-tos/load-save.md": {
       "sourceHash": "sha256:4ac29ac34e1aee8edd2733d947e4519b26dbdef29ba4a372362a644d0488b1c9",
+      "sourceBlob": "4fa5c3c688bab68fddc3911549d7f0af864511e1",
       "status": "translated"
     },
     "how-tos/Master-model-pattern.md": {
       "sourceHash": "sha256:b31a867bfe995adbb8ee02bdf5ff86f861752c6c98458f05b4b86db0980706a1",
+      "sourceBlob": "75ff116a81458138e84b66dcdcde2da7186bce43",
       "status": "translated"
     },
     "how-tos/metadata-backup.md": {
       "sourceHash": "sha256:c61ea5c6dcce01019831e07daea29cee37a02e0dd5a05da7e71c6f42176893f8",
+      "sourceBlob": "035f1fb0cbc1cf94253b1a1e2e3cec50c4bc6bb9",
       "status": "translated"
     },
     "how-tos/perspectives-translations.md": {
       "sourceHash": "sha256:65165835a80d24a358493e2af433e6d3833c039846e65fe9977c5d279d0f35f5",
+      "sourceBlob": "87113757d34a486c0a4e7d51004a110e50a499d4",
       "status": "translated"
     },
     "how-tos/powerbi-xmla-pbix-workaround.md": {
       "sourceHash": "sha256:6ea66fe373bb9569fccaa28054c7841f07ffd88cd37196005e7a4fe2d78c4607",
+      "sourceBlob": "af4beb618c060fa28c0c3bdd3226ca732e716a6a",
       "status": "translated"
     },
     "how-tos/replace-tables.md": {
       "sourceHash": "sha256:9e243b780ad11b7ed0d7bd28f34b7303a1de04f5c878123852e48aa69d5ffbf1",
+      "sourceBlob": "d3901ed42e65e427c92e58487f5354b3ae3476b7",
       "status": "translated"
     },
     "how-tos/roles-rls.md": {
       "sourceHash": "sha256:252723e16bdc1e9eb192e6a7360e074ed8055c8ffa418d17b769b67b2cbb125d",
+      "sourceBlob": "393cfaa6cb11ecbe45faf578d8ff8d5cb5b9c328",
       "status": "translated"
     },
     "how-tos/script-reference-objects.md": {
       "sourceHash": "sha256:f4807e41f2785b359bc6b9875519aaebdca84da06415bea5a6cd09179a59e18e",
+      "sourceBlob": "433ae78ee0d41f19ea256467943f17ba73976399",
       "status": "translated"
     },
     "how-tos/scripting-add-clone-remove-objects.md": {
       "sourceHash": "sha256:4d28cbac2e46174af4ed28927c660275192fb013621c5b2d37c0dd5563f95f07",
+      "sourceBlob": "d5cfc7faafc9594c64b2ed690a8a6a99368ed8ee",
       "status": "translated"
     },
     "how-tos/scripting-check-object-types.md": {
       "sourceHash": "sha256:e5fb737f603fb9234e8177ce7d888e6f73219b3823561bfea0d2db110e9788c0",
+      "sourceBlob": "c6188ad2a4fd831a36f46a90bbe5a0db795b4404",
       "status": "translated"
     },
     "how-tos/scripting-custom-winforms-dialogs.md": {
       "sourceHash": "sha256:9830c8cea603b15203226db2df1e217209cc5b78e67c14fbbe11f9cbc1f229e5",
+      "sourceBlob": "805245219fd1e9eaadd2cf2a8a3fc1f6492def3d",
       "status": "translated"
     },
     "how-tos/scripting-dynamic-linq-vs-csharp.md": {
       "sourceHash": "sha256:e989800b165f6c5b86076bbdb28e749cd7e882f7be7ee0f72f9e3924634abbe9",
+      "sourceBlob": "60bb8da7e18d3701169c1dd2881e061a6d9ea570",
       "status": "translated"
     },
     "how-tos/scripting-filter-query-linq.md": {
       "sourceHash": "sha256:a269be822be81370fd10a982730d6eb1f47bc3ed2cc6081a28fd7b4428c632fc",
+      "sourceBlob": "d47a4170a72b9f4fc6bdcbd79738021c7689b1f8",
       "status": "translated"
     },
     "how-tos/scripting-navigate-tom-hierarchy.md": {
       "sourceHash": "sha256:f12fd751688eab6151b40579ac6e2840657d4f8693364facbef5bcea131e9f8f",
+      "sourceBlob": "e614d0acf3fd92f519e2034521510c22c0532e8b",
       "status": "translated"
     },
     "how-tos/scripting-perspectives-translations.md": {
       "sourceHash": "sha256:0767acd259fb03acba4804f0ce3f4f31d6fd03fb5313b000bcd7b292835ded09",
+      "sourceBlob": "3abafc41403b22cd846e2bd102ee389041d1f06e",
       "status": "translated"
     },
     "how-tos/scripting-tom-interfaces.md": {
       "sourceHash": "sha256:73b571f60ab78fc67b7523f78e157a21127856a6570e53a9a101f344d2117f3c",
+      "sourceBlob": "ec584a1c307828a28e45d6e31475af68038ede89",
       "status": "translated"
     },
     "how-tos/scripting-ui-helpers.md": {
       "sourceHash": "sha256:23b920a830d6bef0afa9fa6041fa3453824b50057121e5f4a6c2e92470fd00e9",
+      "sourceBlob": "4baf6400520710b715c0c1681b88b9b764a26b11",
       "status": "translated"
     },
     "how-tos/scripting-use-selected-object.md": {
       "sourceHash": "sha256:430cfe77c38d7718c3908af2f7757e19b10fe2c1d5191c9113bc1c4c85fd286a",
+      "sourceBlob": "2b29d7f2bade0e62c41c8179b28cdb4854c8dcac",
       "status": "translated"
     },
     "how-tos/scripting-work-with-annotations.md": {
       "sourceHash": "sha256:31f333c1fa02b5aa1b844b5e6b391f56f13b59fb4d3b6c0c4ef55d5a9a49673d",
+      "sourceBlob": "41280266752bb684f54960988e984871a4bdc929",
       "status": "translated"
     },
     "how-tos/scripting-work-with-dependencies.md": {
       "sourceHash": "sha256:7d89dd667d39a7c6c397c6900e29897c28b1a8b2fdfcd815319928c1b1e79566",
+      "sourceBlob": "450322f96f5e3bb2f2682fb3d2ce182dfb44bc80",
       "status": "translated"
     },
     "how-tos/scripting-work-with-expressions.md": {
       "sourceHash": "sha256:a294b1cad950289516b26454aa616a985abb037bff7f767fb17bb4ef56c77a3d",
+      "sourceBlob": "f0182324a9cba6c10727771deba327160e893c16",
       "status": "translated"
     },
     "how-tos/semantic-bridge-add-object.md": {
       "sourceHash": "sha256:fc45b9109e248917012968eaed3d31ab2731c749be09ea3a3604317771dd6761",
+      "sourceBlob": "5853289794c1248e47cbd9436cf058a2fa7318ae",
       "status": "translated"
     },
     "how-tos/semantic-bridge-how-tos.md": {
       "sourceHash": "sha256:3e7254cf0f1574d7a0b75109d152b36e4911d1ff417a4691b1bcafc115fd175f",
+      "sourceBlob": "dddea8d2f8d97917f10cc82789eba4912e00d7d7",
       "status": "translated"
     },
     "how-tos/semantic-bridge-import.md": {
       "sourceHash": "sha256:5e44456f341235b172a178e01ac6c0ecfee7d3b6a4e4d955ba240a2ee4d0cb47",
+      "sourceBlob": "89dd79eccd4e906b2e55b9cbad4e08321db7d39f",
       "status": "translated"
     },
     "how-tos/semantic-bridge-load-inspect.md": {
       "sourceHash": "sha256:5267a8486231514b4500cae234bf91aad00ecd2ccb5ae44389f46fb01b6a3de3",
+      "sourceBlob": "3be7731cef10e8d6b14c79b065acb008f37f9b94",
       "status": "translated"
     },
     "how-tos/semantic-bridge-metric-view-handle-failures.md": {
       "sourceHash": "sha256:67ad4305aa673c9d258a13b33b0cfb7e00d23a22ab410f4abf197d80676a7a3b",
+      "sourceBlob": "b2b09c89151a48aa879766473e767e8d275fa9b5",
       "status": "translated"
     },
     "how-tos/semantic-bridge-metric-view-import-from-file.md": {
       "sourceHash": "sha256:93070e6a840581a2c023da6990574598fba958968ef7c0c7fab22b489ae793e4",
+      "sourceBlob": "959f065d2b6233804002e1832992992588b3a01b",
       "status": "translated"
     },
     "how-tos/semantic-bridge-remove-object.md": {
       "sourceHash": "sha256:4d3b3a064617e5b8792d448d6bcc6bfca71e449c7eb168e8958466096fae4fb9",
+      "sourceBlob": "1b936b008d16521e46b15e73b9665b3ac8e6ff89",
       "status": "translated"
     },
     "how-tos/semantic-bridge-rename-objects.md": {
       "sourceHash": "sha256:888e6e749bc1d666eb315f3186540a12184bc538bfd73ebf97dbf68645c6092e",
+      "sourceBlob": "8d9a7f0614cca2bc9deb9f7d15040fd9b5ac7243",
       "status": "translated"
     },
     "how-tos/semantic-bridge-serialize.md": {
       "sourceHash": "sha256:27ca90dfaf274d3d7933c2bb5839e2f6f28d213692e91b9e96d0b0199ac3174f",
+      "sourceBlob": "ac7f75806006d35a11fe820823ea3c908f23e61b",
       "status": "translated"
     },
     "how-tos/semantic-bridge-validate-contextual-rules.md": {
       "sourceHash": "sha256:d29e2a536f0c2211f2f2a81896b281b994922d6ed8d82d6aa218fe2432c9b3e0",
+      "sourceBlob": "300d149c870455446d89f1a294f3889e69337624",
       "status": "translated"
     },
     "how-tos/semantic-bridge-validate-default.md": {
       "sourceHash": "sha256:c580f957c8083de4a78ffd1b6c7c97801c7c39821d1362205f014f0d075e11cf",
+      "sourceBlob": "7739e9d5556f4f1270df2248041cbce5fa7a50e8",
       "status": "translated"
     },
     "how-tos/semantic-bridge-validate-simple-rules.md": {
       "sourceHash": "sha256:8022c0d65d92617604199afbf23383d9a1f8ab74184565435f0f57b0d6cbd46e",
+      "sourceBlob": "18d275d46dfd61608e33c2d02367803da333d34c",
       "status": "translated"
     },
     "how-tos/toc.md": {
@@ -796,734 +991,917 @@
     },
     "how-tos/undo-redo.md": {
       "sourceHash": "sha256:857971043360cef22eb83ee113a0ebbe86160e1250ecfce378e7824e924fcc2d",
+      "sourceBlob": "a8f727796c265e8b4d78c6db70b0ce8cf14f858c",
       "status": "translated"
     },
     "how-tos/update-compatibility-level.md": {
       "sourceHash": "sha256:ddde480e65570e65f073ce50cb6f366267f17185b5d7616b4392c5b2617c9808",
+      "sourceBlob": "7d0938f563bad097c57ca5c06dc9335db10f843b",
       "status": "translated"
     },
     "how-tos/xmla-as-connectivity.md": {
       "sourceHash": "sha256:aa83da55214090f28678410499f5c8538315cab4035e722df4503c93b2bbf115",
+      "sourceBlob": "788ba0078f9be1ab9a58a19342277f6f903fee90",
       "status": "translated"
     },
     "includes/ai-assisted.partial.md": {
       "sourceHash": "sha256:719add66234aa9744c77cf681f3f6dbc7d9c6d9eba02b4eede6698fd1915b2f4",
+      "sourceBlob": "9ceb370a56d4571df52acd9d014fd76df2f3609b",
       "status": "translated"
     },
     "includes/feature-comparison.partial.md": {
       "sourceHash": "sha256:5eedcfa0c443e235ce6019a4301dff79f13d3d8df060985c702e1ea1807af6d7",
+      "sourceBlob": "ab3cde69a816175d12b841b20255ff4604dad348",
       "status": "translated"
     },
     "index.md": {
       "sourceHash": "sha256:1418d8c61bcf18dd61bb8e62669fb07c7dee386efb23e817c1e27b923c173439",
+      "sourceBlob": "01783886195694d24057bf51a12805ba3d2d0784",
       "status": "translated"
     },
     "kb/bpa-avoid-invalid-characters-descriptions.md": {
       "sourceHash": "sha256:348a0b21b9c03d6e496e239a00cfdc81d39610af0fd5ad6de6fe1ff623f7ceff",
+      "sourceBlob": "abd0bd25a0c7ab8cf3c87bcffa7352d2812d0e00",
       "status": "translated"
     },
     "kb/bpa-avoid-invalid-characters-names.md": {
       "sourceHash": "sha256:8f013bf4faea84f9a24756e185ded303c9807c17b4ac5eb76df448b810e07eb0",
+      "sourceBlob": "be43497c2908b19810b925678e9b5f15ae8e6d97",
       "status": "translated"
     },
     "kb/bpa-avoid-provider-partitions-structured.md": {
       "sourceHash": "sha256:86ec65070d81d5063e4d173d7c8c0966853f9b6694bbd8e726b468e7cb8b01f5",
+      "sourceBlob": "c0f3a440cee37381b8e7ab7e91dfefe61fffd768",
       "status": "translated"
     },
     "kb/bpa-calculation-groups-no-items.md": {
       "sourceHash": "sha256:744c11cb3577957cc223454875f5ea95726fce0a94970698756f47b0a46c86b6",
+      "sourceBlob": "486293ab4b162ea7556bc08a19b913dff49f899b",
       "status": "translated"
     },
     "kb/bpa-data-column-source.md": {
       "sourceHash": "sha256:a94e71eb040d34b57ad1f867e09460c23bf2d2e59ac848fdb92af82237851292",
+      "sourceBlob": "9bc9e55ba7c019f80f0640b5caf5350475144f57",
       "status": "translated"
     },
     "kb/bpa-date-table-exists.md": {
       "sourceHash": "sha256:de3f26c0b6618516bdc57f3ea4575d35e22ff6dfe2adc856c77b6075b26842e1",
+      "sourceBlob": "97931246d12bdf2fea743e158eeb2dfa0297240a",
       "status": "translated"
     },
     "kb/bpa-do-not-summarize-numeric.md": {
       "sourceHash": "sha256:244d8e116c98cab2126d5fc368471e4f432912e9e19181f58227d94b8322ddb6",
+      "sourceBlob": "f29ab822d626300b222279f055d74e13eebb8684",
       "status": "translated"
     },
     "kb/bpa-expression-required.md": {
       "sourceHash": "sha256:8a411171214efbf1a8fd9da1be301ee6ca0f09bcadf38ce54082acf21984346b",
+      "sourceBlob": "5dd370ef5fd293e5964c5d79ffcdc21e790e7c39",
       "status": "translated"
     },
     "kb/bpa-format-string-columns.md": {
       "sourceHash": "sha256:bf422113bd43cb69befbac033445b65b29a8569d9621a1c91eaf082a26047a9b",
+      "sourceBlob": "694283331456c549c1f1f5e49d83dba23f48995f",
       "status": "translated"
     },
     "kb/bpa-format-string-measures.md": {
       "sourceHash": "sha256:bc6cd3c9bb8d66074e6f7836e4f2dd33f650df390bef17394e5cf385e744fce3",
+      "sourceBlob": "898dab2310a796ea3cfdd58a6bc40e683d6cb71e",
       "status": "translated"
     },
     "kb/bpa-hide-foreign-keys.md": {
       "sourceHash": "sha256:9b67226f8b72ed7990a1c46dba893bcd36e775169fc562099bb3a8e17c47dace",
+      "sourceBlob": "62717d396eab4a7bee47dd8730c82c5baf2cd421",
       "status": "translated"
     },
     "kb/bpa-many-to-many-single-direction.md": {
       "sourceHash": "sha256:b8948a747a93383b100ea910409eca99f2fc04e47360fc3e1210ba55b878d5d1",
+      "sourceBlob": "07454d86b7abeace0927cb1db8bf1198f5d3c1eb",
       "status": "translated"
     },
     "kb/bpa-perspectives-no-objects.md": {
       "sourceHash": "sha256:8c2e025fa682be0443b0d926d49eef193f807af7d1df74736dcbe7d867140506",
+      "sourceBlob": "137725245254b98b6b61d183603a82e1c42f794f",
       "status": "translated"
     },
     "kb/bpa-powerbi-latest-compatibility.md": {
       "sourceHash": "sha256:c4a79210717c4277ec658d7999fe9052678b865a199a22b563bdc9c21f576619",
+      "sourceBlob": "f05a1a043f32c3cd54cdf1dfd6c540728c0c40ed",
       "status": "translated"
     },
     "kb/bpa-relationship-same-datatype.md": {
       "sourceHash": "sha256:291f46cc5c6ef8980aba3c960edd1e0d6d42de202f390d2ada4d4ec71342521f",
+      "sourceBlob": "fb3263fd4840fef07a75407f087d3f9f64913101",
       "status": "translated"
     },
     "kb/bpa-remove-auto-date-table.md": {
       "sourceHash": "sha256:2328dbcb9c6571901c1f6565f73963c973556285e52765be67bf4d2efb3436e5",
+      "sourceBlob": "91451c32838492bbd5d08182d4aa8a6309db38d9",
       "status": "translated"
     },
     "kb/bpa-remove-unused-data-sources.md": {
       "sourceHash": "sha256:58bd7d8482b7e17548d3b8f525c0f21c6648e2872815daadd8e5c1d84443f189",
+      "sourceBlob": "d5b82ed44dbc289e18de400acd317d125adddace",
       "status": "translated"
     },
     "kb/bpa-set-isavailableinmdx-false.md": {
       "sourceHash": "sha256:9a5934a34ee1b4c911d855a78e87163a5427422d1ee59093b47d9c407f3bc50d",
+      "sourceBlob": "0ad2855c492b0a73efffd1987e3a49c52b8f1f7d",
       "status": "translated"
     },
     "kb/bpa-set-isavailableinmdx-true-necessary.md": {
       "sourceHash": "sha256:9f1148b29e5e6ec221f24f0c4998e2da7d4a3955d23fe911dec5d63401e1094a",
+      "sourceBlob": "5c3062ccdc3100c2ccd3089749561a68acafe15d",
       "status": "translated"
     },
     "kb/bpa-specify-application-name.md": {
       "sourceHash": "sha256:3de1a94d6a0b66003b65d5b06669ed905f792c3151cc36117abc73c10f52abcc",
+      "sourceBlob": "50dbf82bb1b645b52ff362db390f0936e03d7fba",
       "status": "translated"
     },
     "kb/bpa-translate-descriptions.md": {
       "sourceHash": "sha256:8c73f97d93d7f0b5635b31d7e96bc5464f15f7cfc06507b8ca549edeae0cd374",
+      "sourceBlob": "24a01fb4145366af9c49fe2f02e50081ab03400d",
       "status": "translated"
     },
     "kb/bpa-translate-display-folders.md": {
       "sourceHash": "sha256:10c7a4f9324e0de5c4c122ea7d10a2b6bb4e412a2f435802fc5e43d30dc65c53",
+      "sourceBlob": "a8b7bb3831ee01d1484896352d34d19171ed1b9d",
       "status": "translated"
     },
     "kb/bpa-translate-hierarchy-levels.md": {
       "sourceHash": "sha256:27062bb6d7edfea8f0d78f3a789b985b18cc844690d29bc4127d55b66cac466d",
+      "sourceBlob": "63265dc258a5cfd66a0bd22537cb34a10566c298",
       "status": "translated"
     },
     "kb/bpa-translate-perspectives.md": {
       "sourceHash": "sha256:8dbbdd6fd6f41cab313d51334c38cb91cdbb7830c560472a5abbdb39d40a7525",
+      "sourceBlob": "8a14a95448ccaa56b9e6943c1dbbca8f00594ada",
       "status": "translated"
     },
     "kb/bpa-translate-visible-names.md": {
       "sourceHash": "sha256:48c6cc3b4998a6ca24f517a88b714f5e92c29add04010e2c607faca34c45d9da",
+      "sourceBlob": "db2d51f609860d881e46d51d9b762de7eb6ff3ae",
       "status": "translated"
     },
     "kb/bpa-trim-object-names.md": {
       "sourceHash": "sha256:f9c4103682dd64f14587c68948264b3049aa3fcdb63997d7ebd3645075c4aa5a",
+      "sourceBlob": "ecfd33ebaf29ae5d8d69f6b4e73c111ed99631c2",
       "status": "translated"
     },
     "kb/bpa-udf-use-compound-names.md": {
       "sourceHash": "sha256:6a626e28ba35b857383cbaf6069708880026531ad2dba4faee0a09cb52bb102e",
+      "sourceBlob": "062f09146b0fd25d65271d4695110f8e5a711b00",
       "status": "translated"
     },
     "kb/bpa-visible-objects-no-description.md": {
       "sourceHash": "sha256:be6aff3d1618ad140b7be83ae59f97756572de2bc8b84eb5e035953f39642abb",
+      "sourceBlob": "975aaa1668ecf93ec148c560cd11e0bba47e3a16",
       "status": "translated"
     },
     "kb/DI001.md": {
       "sourceHash": "sha256:0fdec75eb29be6ad908093cf6a95b9ab331bb568382772bf814fcc919a2dfc2a",
+      "sourceBlob": "d14d422967fbca7f07c93160b418e7e9ce09ca3f",
       "status": "translated"
     },
     "kb/DI002.md": {
       "sourceHash": "sha256:068a81baf4c2c490ef06e51cfb9886723242dce676a9edea26e0948c0b00f702",
+      "sourceBlob": "7ef4489b2398ef807c81418dcead556913dd9fe0",
       "status": "translated"
     },
     "kb/DI003.md": {
       "sourceHash": "sha256:b8e00a8116d08be012100d264b75fec171eedfc043a1bc52b1f2cf074c2dd0e1",
+      "sourceBlob": "5e334e1a8ab5dc88af4ac9e231d9317a09fdd8ec",
       "status": "translated"
     },
     "kb/DI004.md": {
       "sourceHash": "sha256:0252909c58292e84696c2df9ce0ffb93452b96a823a684b06864f7e1d4b8fcec",
+      "sourceBlob": "c277438258ffa2d4288410951b88fd5a5a9c193b",
       "status": "translated"
     },
     "kb/DI005.md": {
       "sourceHash": "sha256:8e03cd78771896db6b9dfb81a57e0a45f42335d6b242e0d474699da70843de53",
+      "sourceBlob": "a824b872fe91c257835ac593a6630bd0aae043e6",
       "status": "translated"
     },
     "kb/DI006.md": {
       "sourceHash": "sha256:96086b12841c4fe8365a83fc91fb167c81d915b2c98e448489bdf55773167704",
+      "sourceBlob": "c211ed688d02976080723fd23e86a8b19171d3ad",
       "status": "translated"
     },
     "kb/DI007.md": {
       "sourceHash": "sha256:78dd569b532ba7d5cb0efe9c96e5623604c5c9dadd67949d65ad14449832c1b7",
+      "sourceBlob": "e77da953e7178ebfc69524bc06db0afb6efe1d3b",
       "status": "translated"
     },
     "kb/DI008.md": {
       "sourceHash": "sha256:5521d0162fdacf2da404c49d5715d5124f4fa682f793dce4df3d7b952519a2bc",
+      "sourceBlob": "6d9ffd07ea2419add3e5a9901f8e737916c81a35",
       "status": "translated"
     },
     "kb/DI009.md": {
       "sourceHash": "sha256:790d74322a9d163c6acb9bf5d2b0e45352b85b954d68f2c1bddb06c4600361b3",
+      "sourceBlob": "7511b303c76658a947af3f720abf1f9750d282cf",
       "status": "translated"
     },
     "kb/DI010.md": {
       "sourceHash": "sha256:bf5c57cf42365ee7869cb9f4d24c5ca20f96f79f73007a587b9034d25bb321df",
+      "sourceBlob": "5a96bc2247629a912bbed0e873743fd722fbc5d1",
       "status": "translated"
     },
     "kb/DI011.md": {
       "sourceHash": "sha256:805dd2b2e2e754ef66ab07bba08fa0755c519e7432af9e83fbf4490a49f68924",
+      "sourceBlob": "34e89e0d3847256197cf309fd91bcaca9407942a",
       "status": "translated"
     },
     "kb/DI012.md": {
       "sourceHash": "sha256:b9934cee7d4ea8c47cb70de48454918e64326fb8f76bee17db773b0f32627462",
+      "sourceBlob": "f90382e17bc4050f8cee1dc86a230c5e58a61a0a",
       "status": "translated"
     },
     "kb/DI013.md": {
       "sourceHash": "sha256:19a2309ca26b9eedf30cde50cb70f3f70e8d8aa786ac98fc3e7bab74143d54e6",
+      "sourceBlob": "bdd5357797a7b753e584fded001ad022bc7e0aeb",
       "status": "translated"
     },
     "kb/DI014.md": {
       "sourceHash": "sha256:be9a88c83f9dfa328b63298e7adf2a809b2cd83ea03cb14886838ac891536f1c",
+      "sourceBlob": "7a2b64d35cd0f94a45875abc87b98cdd97a3c8d7",
       "status": "translated"
     },
     "kb/DI015.md": {
       "sourceHash": "sha256:c1c69cade3182935031f846cbe3f4165a4fd453ca77012e76f4f8cff1de2d3c3",
+      "sourceBlob": "bb8909be2c4ea9cf438c9fce99cb5cd9afeb7449",
       "status": "translated"
     },
     "kb/DR001.md": {
       "sourceHash": "sha256:ad922ebf457863f55e34000fd78fc007c0d69f9bee556d2f79b5cd27c03273fa",
+      "sourceBlob": "567864910b021fdfca495800c76dec356ee776e8",
       "status": "translated"
     },
     "kb/DR002.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:0ad80ebc8cbf3ec27662dffc0210986cbabe8f92810bdb7a33717de8fab16037",
+      "sourceBlob": "edfa81ca29cd1af043dd6742a461098f183f3f6b",
+      "status": "translated"
     },
     "kb/DR003.md": {
       "sourceHash": "sha256:b76298c84d8c1269703dba2770d51a6674dfa4f03979e5aa71a53a456575bb49",
+      "sourceBlob": "8e6a5cd241342f8471369a4f436280446feb5468",
       "status": "translated"
     },
     "kb/DR004.md": {
       "sourceHash": "sha256:d370d93822297f2614b44a30c04d330e5feef34160b080eb9ad3e019c70c7f6b",
+      "sourceBlob": "46db6e8307fa2f884b75663696d014d1c1b0d5f2",
       "status": "translated"
     },
     "kb/DR005.md": {
       "sourceHash": "sha256:5b1451993738cd1b1737d47e96f328e5899f14028c161fe7c92357d74bfd29da",
+      "sourceBlob": "bec87ff60f07821e899b674b3887485c551fde5b",
       "status": "translated"
     },
     "kb/DR006.md": {
       "sourceHash": "sha256:a91536c340fc07b1293e3a2e8cd4e89828d9fbdd8bacf3b23a736cfb8314e329",
+      "sourceBlob": "1f2da5f8e072439b8c6986d3c583de308be71006",
       "status": "translated"
     },
     "kb/DR007.md": {
       "sourceHash": "sha256:a03a20219e9ed635de09831705034fe148912a694c50d8d36b87b4efa26ffbd9",
+      "sourceBlob": "5ef85825e6e5f4702156e2f5b8f74675a6020116",
       "status": "translated"
     },
     "kb/DR008.md": {
       "sourceHash": "sha256:980a8345025fe79ac9cb8c3f841b204702f60dadb9574d72b33ba229cf9a475b",
+      "sourceBlob": "3eb0c734bc8cce8dc91d8eadc5e2480be52a2819",
       "status": "translated"
     },
     "kb/DR009.md": {
       "sourceHash": "sha256:8609e608aaebfce4391671248f28d02870da055a99c90e126d56c4b415ceabb9",
+      "sourceBlob": "d909b86812cef9717b8fb0182f1349a7b1c8d920",
       "status": "translated"
     },
     "kb/DR010.md": {
       "sourceHash": "sha256:76c8d124d90f77650b62cc3b03402177ef55f25898b032bc7b94180130778485",
+      "sourceBlob": "5de81896dba1404a890b2c047c6b80d30b63cfe3",
       "status": "translated"
     },
     "kb/DR011.md": {
       "sourceHash": "sha256:ddb675bac420ba94a6a2eef2f7ab9cb4c9981b23398cc2a984a5cd30197743d2",
+      "sourceBlob": "9906b237f84815fc30ce12ce46e9658243eb510d",
       "status": "translated"
     },
     "kb/DR012.md": {
       "sourceHash": "sha256:dc8c217235ef82b45ca02328f0e1d78ccc12114dddd5a44394126ec3cd638a61",
+      "sourceBlob": "28e69bf7eaeff3de9ab07e8a87481cc695eb391b",
       "status": "translated"
     },
     "kb/DR013.md": {
       "sourceHash": "sha256:3e81af96332221c3b1f36655a6ee3f8dc0b116c019cdb7a5c26c5971c9cfc51f",
+      "sourceBlob": "7f3ef591449a24f94390f77301246fb1205f6102",
       "status": "translated"
     },
     "kb/DR014.md": {
       "sourceHash": "sha256:d435c5959eb47b00a7aab3b846013228ec6d2077a3dc245e50c1a5328c392dbc",
+      "sourceBlob": "eea06f39e674a5efcb913329fff66538e282ac1c",
       "status": "translated"
     },
     "kb/index.md": {
       "sourceHash": "sha256:8331987f38c8b52d8907a3f0d2c773d188e888cc823f2a5a21463d0a163f7a15",
+      "sourceBlob": "7306c1be29588cdb8e38fe55db3d5889dc7f0eb1",
       "status": "translated"
     },
     "kb/RW001.md": {
       "sourceHash": "sha256:cc6cd9a2294f425380d825ff0a5ca882c3bd40a4d5207cf6cce0793f7c6af493",
+      "sourceBlob": "c08d64e9d73fdc1ca299b9b2e82e74238bea6baf",
       "status": "translated"
     },
     "kb/RW002.md": {
       "sourceHash": "sha256:597595d6f8a1102114f51ae992bb519d21095f2a1003a8b1a90d3d96849916c2",
+      "sourceBlob": "f2e2d6b94caa5f166bf99fab7921d862b5b9e52e",
       "status": "translated"
     },
     "kb/RW003.md": {
       "sourceHash": "sha256:289a445b62c13098e4ed6af7fa37901b1aec8bfb4d3b57e1e42eda8f1de9ad5e",
+      "sourceBlob": "c6cdbb64497acfd506e74ba67e4e56842a042b6f",
       "status": "translated"
     },
     "kb/toc.md": {
       "sourceHash": "sha256:db0f8007f8bb5998ac188559ffcd9831d49a8c938f1b41434295625097a0a160",
+      "sourceBlob": "dd2c1e8d930ecabc9af854dd1b328d363be34697",
       "status": "translated"
     },
     "references/accessibility.md": {
       "sourceHash": "sha256:2bca6bf296f3d236dfb29374577829002bf7dc9b42f6d5d29b8bb1e52be1691c",
+      "sourceBlob": "098c02fa53b19cb3e9ca766b8b15458bbec9b329",
       "status": "translated"
     },
     "references/application-language.md": {
       "sourceHash": "sha256:3d8bb1e49bd7cf97c56210ab5c8322b7c419cbb0152966f195cabeabb87d1ded",
+      "sourceBlob": "c676538ed7467d3ba12ee644059cdb9856196175",
       "status": "translated"
     },
     "references/downloads.md": {
-      "sourceHash": "sha256:d6f5f62ef64bfef5eab06ef77caad78ee695cd60e12114b7af9774a337063085",
+      "sourceHash": "sha256:27c21529bb0408933aedeb5614c99a4a2bc382554c45e4dd75e8f0fc45fa4281",
+      "sourceBlob": "551ccb2d3b4f9fe23823564d3f93b843bdc886ff",
       "status": "translated"
     },
     "references/FAQ.md": {
       "sourceHash": "sha256:bf29800bdcc5ace4dd5d3813fc1fb8c48b30a034039a0285bd62768866b924e9",
+      "sourceBlob": "a52f303bdc0045ee8a8afa343a24e967ee09e141",
       "status": "translated"
     },
     "references/FormatDax.md": {
       "sourceHash": "sha256:d6d07781fc5c8cbecb8187caa6123eb0a13f0f145abfa4b8c4cb1274c7e9dcf2",
+      "sourceBlob": "1f798e620c1b8873ff9948ce26655846070868f1",
       "status": "translated"
     },
     "references/index.md": {
       "sourceHash": "sha256:f3f76163564f856590cabfa5c74ee31aadbdd37448f41b46bbd36358c3e60cef",
+      "sourceBlob": "9d07f1812f00c4ef6d531f0eb9a2467c52b265b7",
       "status": "translated"
     },
     "references/Keyboard-Shortcuts2.md": {
       "sourceHash": "sha256:6dac63cca6fed07aeeaa4c9c97b9174104c299528f823785cb9d042fc567f93c",
+      "sourceBlob": "18406beb0667d006856d3e0ac2b616928730258f",
       "status": "translated"
     },
     "references/object-properties/calculation-groups.md": {
       "sourceHash": "sha256:4f230c59f60e75119e22ffada811698effc81878640903305bfa17a506f28dc0",
+      "sourceBlob": "fc8fa1b2e9a6b5596e7eb4a7c5e2a91ed936465c",
       "status": "translated"
     },
     "references/object-properties/calendars.md": {
       "sourceHash": "sha256:a649dea71fd889bb47c4778ea1b387e128dd16ba550fa99848eb12d4dbde7f03",
+      "sourceBlob": "22c32f600f5a47468e2451fe32644c6ac03518a7",
       "status": "translated"
     },
     "references/object-properties/columns.md": {
       "sourceHash": "sha256:ad8d5949aeeb063589faa8dad1fc7ad32f7e5b4081901af99db80e2362654d6d",
+      "sourceBlob": "7f9de93c50705171f0ea1580c988c21ff4c23019",
       "status": "translated"
     },
     "references/object-properties/common-properties.md": {
       "sourceHash": "sha256:99a20e619fbfc8aa59e91d3c78a0d8d6153b21d3c44275b0ec4edb3833a343d7",
+      "sourceBlob": "a85f44eef5b17a8ad1fcb3c911bd1a7d1a280b6c",
       "status": "translated"
     },
     "references/object-properties/data-sources.md": {
       "sourceHash": "sha256:71c36ce369386fe8fbc5fc018e16fa30630605cf1e5fffac0e1d677bbb112bfe",
+      "sourceBlob": "df22b00cf3fa4a2da8379cb4ed75cd34575d7164",
       "status": "translated"
     },
     "references/object-properties/functions.md": {
       "sourceHash": "sha256:16052cd3ae051a78d1b8723a2fc2cd07a675af2d4a75e4eb9adda44ebe2277ce",
+      "sourceBlob": "0c3c36de8e42b90be47ed1c98ff690fabf448265",
       "status": "translated"
     },
     "references/object-properties/hierarchies.md": {
       "sourceHash": "sha256:801a8e2d3f529a5df6324a2449a2f10cb476d1d327c86b797e574f1bb767c64a",
+      "sourceBlob": "c17885494b4dcf220d189e16f14ea22585653083",
       "status": "translated"
     },
     "references/object-properties/index.md": {
       "sourceHash": "sha256:f81a240dfc097835d1528695b989f4fc6f7ceb13f7820ba0510445a0ab92b8e2",
+      "sourceBlob": "777658c2bcd6eeac0aaf867a7068a1622f054d3c",
       "status": "translated"
     },
     "references/object-properties/measures.md": {
       "sourceHash": "sha256:a56d044c177c1c788573e56c9c6c37d079b4b902a07ea3c2d4d1fc9a8c59c746",
+      "sourceBlob": "de6848a00e4ca9dd9831677207e9da83acc3900b",
       "status": "translated"
     },
     "references/object-properties/model.md": {
       "sourceHash": "sha256:b101b856fcb7d2e9040b2fffa33d8fb712a65abbe20d37b332981031e1178bce",
+      "sourceBlob": "bd64cb58342640fb5998aaf98cf6fb50c5648728",
       "status": "translated"
     },
     "references/object-properties/partitions.md": {
       "sourceHash": "sha256:77568919d2c1bb8e7ab595a3ceb5e763f07bb6720148e36e9fc45dd3b50991a1",
+      "sourceBlob": "99eb9dd8860b5e474841385803e43cd5e874ec3e",
       "status": "translated"
     },
     "references/object-properties/perspectives-cultures.md": {
       "sourceHash": "sha256:ad263191d75b254fb88a0c2f3cbbf2e6eeb12f8bcdcc606c41ff059caebeca5a",
+      "sourceBlob": "02968a407205f76b5471f9e2ab140b43a619e5b6",
       "status": "translated"
     },
     "references/object-properties/relationships.md": {
       "sourceHash": "sha256:99a40c5125f2607d9c5e341f2f2cd8eceebf6948da6f2bbf0c8294c49c079424",
+      "sourceBlob": "9fcfcd5ed6d436022bb124a7dfdc5c2f22951325",
       "status": "translated"
     },
     "references/object-properties/security.md": {
       "sourceHash": "sha256:107036e38dcfb54408fdc842b3c188662b652bd10f8ccd43a1969caab93ab4a1",
+      "sourceBlob": "2b99f874ef26c9abce1b6c56533ee665e04b3e33",
       "status": "translated"
     },
     "references/object-properties/tables.md": {
       "sourceHash": "sha256:ed8f9d50743d48e7e97e93a5b9008766228c89f8bab8fef4565f1399795f082f",
+      "sourceBlob": "ee2eb6cae06e4753b42282b1dc5e4aeb8cffb640",
       "status": "translated"
     },
     "references/policies.md": {
       "sourceHash": "sha256:2caab8e0667baf27214a05cd1d8083570418378257a94a739c21abf6060ef5ac",
+      "sourceBlob": "3a1cb3d5d125926e4691709c8a5c7f3e6c5a70e9",
       "status": "translated"
     },
     "references/preferences.md": {
       "sourceHash": "sha256:4b727d58249a9c4583c67d0dc40a32ebd45efe9e006f86cf404c53f094e8bcd9",
+      "sourceBlob": "561866a184e6faadce56d47bde51a32c274f1ec4",
       "status": "translated"
     },
     "references/release-history.md": {
-      "sourceHash": "sha256:78226d0901a9debfe95e062f96697ba023c893852edcf6560dc89296382c0fc1",
+      "sourceHash": "sha256:3c28cf2db33088ef78f5af074d2c62d2678fc8a726768d62373c4e453ba16b96",
+      "sourceBlob": "c081f42cfb2bedc78a85dff2f7217b827b9946d9",
       "status": "translated"
     },
     "references/release-notes/3_0_1.md": {
       "sourceHash": "sha256:9dd7d412075ffeb73fd903e6e560738125b944c1107d5279e06278b3a1c67ac6",
+      "sourceBlob": "eaa08f56a3be3673007e999c59ce874478c7861a",
       "status": "translated"
     },
     "references/release-notes/3_0_10.md": {
       "sourceHash": "sha256:e4ed9e02f1d530888ea3291a800b799de6e5dce5717597aed5b02f96e6874819",
+      "sourceBlob": "4a09302e5a9863660c6f7ffb800ee39032ff7886",
       "status": "translated"
     },
     "references/release-notes/3_0_2.md": {
       "sourceHash": "sha256:c259a508fc8aa8ab579248baa48edc26886cc11a7b46c1c300f5381f7f9a7576",
+      "sourceBlob": "640a8456627d2c06977b1b3d584ef2f8c33e4606",
       "status": "translated"
     },
     "references/release-notes/3_0_3.md": {
       "sourceHash": "sha256:e34eb6b6cc40a550c2b1e5555ab3dd5ae9aab4fe150191da8b217f7e1c44b7f8",
+      "sourceBlob": "e53733eec2e5cae03cc0d3aa97ebf5a3b520a61a",
       "status": "translated"
     },
     "references/release-notes/3_0_4.md": {
       "sourceHash": "sha256:0745acfac1154de9e0b61300052c871454382fff3120fa89b0bf5b794522bcb1",
+      "sourceBlob": "c5d3be45cca8e8823ee5bde6ed3cd399f12d8f68",
       "status": "translated"
     },
     "references/release-notes/3_0_5.md": {
       "sourceHash": "sha256:0bc3323e03649c932b63cb6997eb73c33f7d8211601640a21630c7cb61851ffd",
+      "sourceBlob": "f6d6460df73b652bf239dfce67098268e441472e",
       "status": "translated"
     },
     "references/release-notes/3_0_6.md": {
       "sourceHash": "sha256:1e570cc335e2d65c8c4a137009c2aedaa3aeb09e0a45140121b6bc7cbe1d7468",
+      "sourceBlob": "fdcd7af39cfac6d6f1a09575663b73491ed698df",
       "status": "translated"
     },
     "references/release-notes/3_0_7.md": {
       "sourceHash": "sha256:5abefcdef1f490a553d1a625f1b3ae2c22e063ee14d751d483feeb1d347593bc",
+      "sourceBlob": "61e8539956e33e86ec42193f4a84e3b4caa253e8",
       "status": "translated"
     },
     "references/release-notes/3_0_8.md": {
       "sourceHash": "sha256:cb1bfca1fe61a069fe1f3bf3f53ea69ba4209a25e434d94b0b1ff4fb63d64012",
+      "sourceBlob": "8ac0a6fd92d4cd375f72bee6aa2418ac7615b0e7",
       "status": "translated"
     },
     "references/release-notes/3_0_9.md": {
       "sourceHash": "sha256:645ce98903aff7368af55a9b23fdeff5964c5804e16d3dfbbebe34f2eeaed37d",
+      "sourceBlob": "9826f4dd043afc8284fd6f83a323520be4ac95cc",
       "status": "translated"
     },
     "references/release-notes/3_10_0.md": {
       "sourceHash": "sha256:280c2247e870b506a5134ad2da70ea21f53a5d7b2ad8e9f5319414e2f21d29b9",
+      "sourceBlob": "5ed8e34b1e58c79382f6d55d13fb01651504b6e1",
       "status": "translated"
     },
     "references/release-notes/3_10_1.md": {
       "sourceHash": "sha256:8fcb4cee86daee9325723dc6cb6b9f3ffb3d9a41e67f0fc2c35510b8e0a78521",
+      "sourceBlob": "52b9d415dc4d1794ec1362fe2d6bae47a15de845",
       "status": "translated"
     },
     "references/release-notes/3_11_0.md": {
       "sourceHash": "sha256:00487e4ef0ddf0ee9e93644ec740a1381bc984d716553cb60d2abc0140fc7b6d",
+      "sourceBlob": "79d8d94549a1157183b3d8946453fbc7f6878507",
       "status": "translated"
     },
     "references/release-notes/3_12_0.md": {
       "sourceHash": "sha256:5ce41677cf81415a721c8db3c5c7e435c8b9c6fcf6ba61af7932cfcd2cd7f2b6",
+      "sourceBlob": "cdb6b3c2a3f6ff331a65c0f73641edd54b6e4b21",
       "status": "translated"
     },
     "references/release-notes/3_12_1.md": {
       "sourceHash": "sha256:48c8104c99b0af6a26485ed1e19971ac9a06ca2fa143c55d1c2c5c74fe5252ca",
+      "sourceBlob": "be5152a46c06e8d0490a6911ec4982a0cd877eb7",
       "status": "translated"
     },
     "references/release-notes/3_13_0.md": {
       "sourceHash": "sha256:43b9bff69d3f4fd23c2f98102be764674c6ee63c5832e8dccbf6cadcb2d5cb0a",
+      "sourceBlob": "258c28d26272a5841458961a7d47d2fafeb09fd4",
       "status": "translated"
     },
     "references/release-notes/3_14_0.md": {
       "sourceHash": "sha256:63eea06882ec7b1838526b803fe22776fc3489a78e51a98acc3f4710212f5df9",
+      "sourceBlob": "157e5593dfd730dfd96767d6c0286cfc8ae67517",
       "status": "translated"
     },
     "references/release-notes/3_15_0.md": {
       "sourceHash": "sha256:892511af91a5becc0cddf3c17031eb2772f1c0362f2e144fa6137a9cfef864e1",
+      "sourceBlob": "8efb40552718a548aa30d064a20715ffae67f825",
       "status": "translated"
     },
     "references/release-notes/3_16_0.md": {
       "sourceHash": "sha256:c370d56ce763d64929dab9191dfec25d4d8e5cf4aac5ae242c965213497c07c9",
+      "sourceBlob": "3b266e6b9f7264325abfcf6dc129c2a2a801bdd2",
       "status": "translated"
     },
     "references/release-notes/3_16_1.md": {
       "sourceHash": "sha256:8c963ee75f969d1f42991744d912d3ee9901209fe4729421791fff43cef34c16",
+      "sourceBlob": "beacd90074a0d632e9645d41bc34d3e6f85af898",
       "status": "translated"
     },
     "references/release-notes/3_16_2.md": {
       "sourceHash": "sha256:2afcb4c569c945fcefcbb4ae5db451c3d3e6c386d6ce01520456af225cc397d7",
+      "sourceBlob": "5274249e21b216caf5da1f05c77b11ddc886aa7f",
       "status": "translated"
     },
     "references/release-notes/3_17_0.md": {
       "sourceHash": "sha256:c8d747fa588ed2e9724ca5642094b3183a7848de106206c5acb7a6db003f03ad",
+      "sourceBlob": "e891fe862f50e87038435403460381e9c4275788",
       "status": "translated"
     },
     "references/release-notes/3_17_1.md": {
       "sourceHash": "sha256:43426ca1856ba7146d873c25c365fd7ca9dd6c2dac27172d4302aa08caf73a13",
+      "sourceBlob": "6f2d2154cbdae6bb8b3bbdad7fa5e50c36f5cd03",
       "status": "translated"
     },
     "references/release-notes/3_18_0.md": {
       "sourceHash": "sha256:ccef1d643cac9bbba5813f1f9101466c79a12f8adf5622f1b20780964bd39b36",
+      "sourceBlob": "c3672c4a50f8ab0a36e032f144a6b341b081f570",
       "status": "translated"
     },
     "references/release-notes/3_18_1.md": {
       "sourceHash": "sha256:864335c116512c8d22394bc0b36873a8c4855d1a61a18f15524bd16afabb5869",
+      "sourceBlob": "2bc71e1f2460f5c30020657c7ee0e892a924116b",
       "status": "translated"
     },
     "references/release-notes/3_18_2.md": {
       "sourceHash": "sha256:498e7482728a3b72acb8b42b8eec7caf732df56677d3b44ac0fbf5a32562ef17",
+      "sourceBlob": "9b95477e47178cc9d79e8465f48b606f2dd16fa8",
       "status": "translated"
     },
     "references/release-notes/3_19_0.md": {
       "sourceHash": "sha256:1a50d8f5bbee16ffcefb119bcdc3f2ff8f0ee153f7f9848f0a4acd7383f8ac16",
+      "sourceBlob": "c10bbee907bbb2de24efeb97d8539df353765e0e",
       "status": "translated"
     },
     "references/release-notes/3_1_0.md": {
       "sourceHash": "sha256:0585f4b1aad5d388d66147afa156d2e57e8f615ce5c3d3fb0830925d5393ee61",
+      "sourceBlob": "e68ce4c1162c5a60eae6649d8d24af01ca87b418",
       "status": "translated"
     },
     "references/release-notes/3_1_1.md": {
       "sourceHash": "sha256:1d6e4b185d09f93a6688f14f954a766353fd3daa17ecedd6689735c2c01c5208",
+      "sourceBlob": "2b0eba0cec38d51b57cc59a652c0c18c84479590",
       "status": "translated"
     },
     "references/release-notes/3_1_2.md": {
       "sourceHash": "sha256:9f7ef93ca36c28f28b2a61b62b7cf68738da2a31a73abbc67ebacd4be6b05915",
+      "sourceBlob": "22f5fc643cfd26345fab9093675f28d7e622d952",
       "status": "translated"
     },
     "references/release-notes/3_1_3.md": {
       "sourceHash": "sha256:63da26ecf5029706dd4a732a7494b15ff4df4bbf3d4e1e7743f61b46d979d2ef",
+      "sourceBlob": "4e7945308676e1e8d5544cc425606e7682617054",
       "status": "translated"
     },
     "references/release-notes/3_1_4.md": {
       "sourceHash": "sha256:690c2c05528da4f99adb4177a5e1ca448305c1093948d0cbb7948242961aa453",
+      "sourceBlob": "2f3c6c44bf305d44f19eaafb263980bfa693f1cf",
       "status": "translated"
     },
     "references/release-notes/3_1_5.md": {
       "sourceHash": "sha256:c8984a8ab4c13021d98434ce71d4a54db9636dd3725c313de6795e2d6ad4fd88",
+      "sourceBlob": "c78926795d0da597a40ebe6031648e8327551efd",
       "status": "translated"
     },
     "references/release-notes/3_1_6.md": {
       "sourceHash": "sha256:1e7e09b6f4d7b733050ee43873ffe842c7e55faba945cd9d5afce8996739f183",
+      "sourceBlob": "cc90b8afb55acd451b31b4c4e7f003f07d9f280f",
       "status": "translated"
     },
     "references/release-notes/3_1_7.md": {
       "sourceHash": "sha256:cc33ce5dd956b6802c5184d84ead86749e676bddf9034b7228b0963ab1fa8279",
+      "sourceBlob": "6048b8c0f907deb1d015216badaaafd6c1d9ce09",
       "status": "translated"
     },
     "references/release-notes/3_20_0.md": {
       "sourceHash": "sha256:5a259bbe3b2d0cb22234ba3fb754c0fc17f21a30ad3eea8af4090108d1103488",
+      "sourceBlob": "d4bbcf5383586b8a18c513795f6f746a4922493d",
       "status": "translated"
     },
     "references/release-notes/3_20_1.md": {
       "sourceHash": "sha256:1adab99bfc877197b1138f98ae2889337b269b54951dbf8984609192eeb9f5ab",
+      "sourceBlob": "e3ebbc4d88731257564a1530a8f5cc8c32e3e85b",
       "status": "translated"
     },
     "references/release-notes/3_21_0.md": {
       "sourceHash": "sha256:e989c0564fe64acbba6215cf25eacb1e79c6da59f17756ad9ea74500a059dc8e",
+      "sourceBlob": "f537e5ccbb04821871aa22107ce6f330e4e2c473",
       "status": "translated"
     },
     "references/release-notes/3_22_0.md": {
       "sourceHash": "sha256:71625baf4598ce69ea8022cde2848d04b60229d8c60ad15bb9fb806540d62288",
+      "sourceBlob": "a60ffdea08da101e2afda4254b4af15effb05abc",
       "status": "translated"
     },
     "references/release-notes/3_22_1.md": {
       "sourceHash": "sha256:1e3e64b4b3955f35edd2a9c0bae68ca092be3729c7cf46ee376234ef1f8432f8",
+      "sourceBlob": "311e34b247c68c60aa04d03ee1eadd4906d85b33",
       "status": "translated"
     },
     "references/release-notes/3_23_0.md": {
       "sourceHash": "sha256:5dfe7273a83bb750fb67556bfaa0494f3474489e8584d8a4416f81db7638e4b6",
+      "sourceBlob": "b9930200f2cdc46ff68369cf4a8df41d8c967c24",
       "status": "translated"
     },
     "references/release-notes/3_23_1.md": {
       "sourceHash": "sha256:a9693c900f2bd1ba870cbd36bbd3dae8c5b2cc07046953c0f1c62f8ab073b41a",
+      "sourceBlob": "416f497125bbdd7993af9c127b4391a17cbfeb4a",
       "status": "translated"
     },
     "references/release-notes/3_24_0.md": {
       "sourceHash": "sha256:7e06a6582ce450f85e58773fa486f8dfa2b57ae5ff8ba5228e90a2df42b2b0a2",
+      "sourceBlob": "694dd28542b426a34078f0ebb7bc97cacd16fc49",
       "status": "translated"
     },
     "references/release-notes/3_24_1.md": {
       "sourceHash": "sha256:2f6edfbfe6bac0cf0c6e0ca0c941208626b1ae2df232c8dc14046a2c6312fd9a",
+      "sourceBlob": "d80c0787b330d18c3b56d8dc90a1d890dc225206",
       "status": "translated"
     },
     "references/release-notes/3_24_2.md": {
       "sourceHash": "sha256:002bd955620438ac8a76221d201bf17027262f15b5356fd994a340dae2953c46",
+      "sourceBlob": "cd937eed1367167e0f9719edf02728a0972e2144",
       "status": "translated"
     },
     "references/release-notes/3_25_0.md": {
       "sourceHash": "sha256:94073554f6e49579ce01eeb1ad53b54d66d8a2949d9fb2281123688b597594b1",
+      "sourceBlob": "da844f0a8b78dae1af06c1e44eca177bb7073b88",
       "status": "translated"
     },
     "references/release-notes/3_25_1.md": {
       "sourceHash": "sha256:5327769633fab3d45273026fa50388e6cc572bc4e3ad4e1685ae544d777d96be",
+      "sourceBlob": "40ba9e52b8d1b93c4013f9eb37f28debe2c7e1ca",
       "status": "translated"
     },
     "references/release-notes/3_25_2.md": {
       "sourceHash": "sha256:ed0cfa9bb38b492a133d7742ffb1a57169616ea1f604ef3091d0dba292a5d9c5",
+      "sourceBlob": "ccad60192197d0e3ec62815a58c1600d5c4e70d4",
       "status": "translated"
     },
     "references/release-notes/3_25_3.md": {
       "sourceHash": "sha256:e2aedc2e010c287c6a6480f950eb5abaa06c24faeec99b6f298ca9236e8ecc11",
+      "sourceBlob": "ec4113652b784b9140527d2ab367da6d817b49a7",
       "status": "translated"
     },
     "references/release-notes/3_25_5.md": {
       "sourceHash": "sha256:cbceecff8d36b2bb9f4ba3a54c9957fd081f06ec869f2d37eaa14bd731854744",
+      "sourceBlob": "226f19b5290f99a8ff8655dc203246a8937706af",
       "status": "translated"
     },
     "references/release-notes/3_26_0.md": {
       "sourceHash": "sha256:877aaef72b1b712c4ac6060a0812b8f6a37e85b5d7f7c907d73aaf0aec50b4c0",
+      "sourceBlob": "fa3c637eb355e008f8f7d9912f8de2561524de6e",
       "status": "translated"
     },
     "references/release-notes/3_26_1.md": {
       "sourceHash": "sha256:454c83599c5098dc644a438bdf15a80714a45f53fb63ac17d8514b1b197050c8",
+      "sourceBlob": "65858fc9481c6ba565ccfe93caacf7ffe7ccceab",
       "status": "translated"
     },
     "references/release-notes/3_26_2.md": {
       "sourceHash": "sha256:fa204a34a64c2f6a9e2764031e5c0c255b684edd6cbe18fd195a0d4fea2978bd",
+      "sourceBlob": "2930da424bbf6971360b78779a1eb08f110615ad",
       "status": "translated"
     },
     "references/release-notes/3_26_3.md": {
       "sourceHash": "sha256:feb01ccd22d33c9adb705a0b7f6ef3523f4dfbdf1905410809d6b3f193515335",
+      "sourceBlob": "dbb47faa35f8d709fad409c4e74872e84b2d601a",
       "status": "translated"
     },
     "references/release-notes/3_27_0_0.md": {
       "sourceHash": "sha256:0871275249d3bbd3ca332855873c89ed84a476929a2216333724fd61a05bdfc3",
+      "sourceBlob": "68e25c54d913b88c1582ce16441a2ada3f2fdf1c",
       "status": "translated"
     },
     "references/release-notes/3_2_0.md": {
       "sourceHash": "sha256:f80a34035dde22a0619af4ce18d51f59866d2eff27418c893e676f9da877b10c",
+      "sourceBlob": "a41c0dd3aaa4a476f51d438c306923247438202f",
       "status": "translated"
     },
     "references/release-notes/3_2_1.md": {
       "sourceHash": "sha256:43e1be32e10f7a17a7d86df369eef21a78ebe5b2a52b53a1f83b6fd386b29049",
+      "sourceBlob": "c2517496a26e4b6dc7c78b2badbb770be10cdb03",
       "status": "translated"
     },
     "references/release-notes/3_2_2.md": {
       "sourceHash": "sha256:2da5802638de5f4ebb2f12cffb33be191351e460ce411293e865bf8310ea9747",
+      "sourceBlob": "62caaf92592bee009ac8060d70ccbdced3d09cd6",
       "status": "translated"
     },
     "references/release-notes/3_2_3.md": {
       "sourceHash": "sha256:233ad017abfdf9b6cf5938bcd58d76dfac5aaa83c691e6b8613e8501ead44f6e",
+      "sourceBlob": "959af24862725fb1a013f758fd5f2ba904a5cd43",
       "status": "translated"
     },
     "references/release-notes/3_3_0.md": {
       "sourceHash": "sha256:6407130a08fc4aba3742cdc01f6fcdbe315036324a6ef4ef485750bbab90d75e",
+      "sourceBlob": "39e8bca64ac28021e204576aafacc224d3ec1a17",
       "status": "translated"
     },
     "references/release-notes/3_3_1.md": {
       "sourceHash": "sha256:069220239a8a82d1f0d310a468b3af4959525d5b03e11298fb2049e0ebacc52a",
+      "sourceBlob": "c3aa53c9e8ddecbbcf98afa66cd6b91ec3c07ccc",
       "status": "translated"
     },
     "references/release-notes/3_3_2.md": {
       "sourceHash": "sha256:e11afa6e505c7d0d7a2cc19b12232f05b12a402d1534d689a3987a692ad6eabd",
+      "sourceBlob": "e629c7a0a7a9bea0c8e21dd5bcd359e35b6d50fc",
       "status": "translated"
     },
     "references/release-notes/3_3_3.md": {
       "sourceHash": "sha256:b25a3e45ea9245ff2348aef322932081aa9419469de741bd98ab45435fc01106",
+      "sourceBlob": "18c520088587fa1a866707d98898cb9d84cd40bc",
       "status": "translated"
     },
     "references/release-notes/3_3_4.md": {
       "sourceHash": "sha256:dabac3bc52ea3ecb59ffc39e10a13d252a29530412a604c284cf33fa988e7ccb",
+      "sourceBlob": "44b1704c61493dbce2d4bc1ab2dc690fcc6f9282",
       "status": "translated"
     },
     "references/release-notes/3_3_5.md": {
       "sourceHash": "sha256:b88d6bc31375caca6ccbc5af1f95d1c64a64bac5d5861d540a5a111046ec2709",
+      "sourceBlob": "53e8a962a21b59d14df3ae2f160fdfb2aca78f72",
       "status": "translated"
     },
     "references/release-notes/3_3_6.md": {
       "sourceHash": "sha256:2eea5eec39317d1fc007cffd6971bf08411e04b79984bac9e9e7c5f4a9237329",
+      "sourceBlob": "00dd2df7edb17e10f6ed795ff534113f1c4f12e2",
       "status": "translated"
     },
     "references/release-notes/3_4_0.md": {
       "sourceHash": "sha256:45921e73217c3fd5d69b614e10428aa428b0d466bdb49d83058cb79a49b846c7",
+      "sourceBlob": "2199967ef076f80633a7fe3eeed70b2087c0ded2",
       "status": "translated"
     },
     "references/release-notes/3_4_1.md": {
       "sourceHash": "sha256:2c4222b3083566a37505c7ede112ee3076111acf89a9cacb7335241c5195a1be",
+      "sourceBlob": "3fccb82edbf6e990dd82a79bedd88d1dbadc5c20",
       "status": "translated"
     },
     "references/release-notes/3_4_2.md": {
       "sourceHash": "sha256:8aca2f841be6c495daf791f1c8a812605c4215639dd6d61bf9a99a1450913eb3",
+      "sourceBlob": "9968216781396ba6765dd9d0bed794e7890e1246",
       "status": "translated"
     },
     "references/release-notes/3_5_0.md": {
       "sourceHash": "sha256:3e8574e571c37b8fdf644f42377a8f20e4494f57683aa2aeeb66f6cc5dbb3b3d",
+      "sourceBlob": "881c8d306d8e72265e29483ee7c1d2af573d3eb4",
       "status": "translated"
     },
     "references/release-notes/3_5_1.md": {
       "sourceHash": "sha256:bbf6c0a5eaf0581ef564c23861341ba086a336a7a0c8556b18c82a3b97263de0",
+      "sourceBlob": "6d9a4869705ced67dfbf0b772934ef63f0f3ce04",
       "status": "translated"
     },
     "references/release-notes/3_6_0.md": {
       "sourceHash": "sha256:390ff39fcddb43462ce6371e434faeffaec2542bf1ce3871bf109c31afbebb8e",
+      "sourceBlob": "d9dae63614340c0f7646dd950e14bb4461886ad6",
       "status": "translated"
     },
     "references/release-notes/3_7_0.md": {
       "sourceHash": "sha256:1193e309b3e6b7c5ab312cdfac506a029c5d3fe1a46e55c44cfa73ac02b05559",
+      "sourceBlob": "a398780ba9c12f6fdc6530452736d12834c5b6fe",
       "status": "translated"
     },
     "references/release-notes/3_7_1.md": {
       "sourceHash": "sha256:bb30b3f2c2edfb66b5b948a092b63522ffae1661d74837bec19ab8df42931536",
+      "sourceBlob": "d16329f471e3337ac0299c5b5459a52eefefbcaf",
       "status": "translated"
     },
     "references/release-notes/3_8_0.md": {
       "sourceHash": "sha256:59c7b7c50555df06c3b4d8862429c9dac365f71abe0b2867433c4eb467ff227a",
+      "sourceBlob": "a1a261976822443a76a2ddac1c1407c9ef336916",
       "status": "translated"
     },
     "references/release-notes/3_9_0.md": {
       "sourceHash": "sha256:435580f98c2577516a67e1c12f4c451c0f3116bc864b4dc1f474b47650d048c1",
+      "sourceBlob": "abc613201bffe9a8516062396010f5e4bc93d91b",
       "status": "translated"
     },
     "references/release-notes/beta-16_6.md": {
       "sourceHash": "sha256:cb20f9fb04a9bd84b4354ccda93c724199827bd1bed1afde6704ee1c3515ad3a",
+      "sourceBlob": "5d83f9615f5671ccc033e54def9f496824f7e89b",
       "status": "translated"
     },
     "references/release-notes/beta-17_4.md": {
       "sourceHash": "sha256:4932a0f3a3c1fa9f5691ff457063f111c3c44c7aab43709d18118d5e2214ad1d",
+      "sourceBlob": "84166e224a046502b9156d8fd7432da52ca37969",
       "status": "translated"
     },
     "references/release-notes/beta-18_1.md": {
       "sourceHash": "sha256:948893b0e25d9c457f7757c8c2aed0be34f9fd7897e47dfbb9d48adf34281a9c",
+      "sourceBlob": "60f0d87cdf4bcf21a86bbc3bed6b335a208752e9",
       "status": "translated"
     },
     "references/release-notes/beta-18_2.md": {
       "sourceHash": "sha256:44023c249d6312fe7174132138a20bee776cbaac990f9f63be3609f405cf7ecd",
+      "sourceBlob": "bbb976acab63bafeb87f8223519c3f7cbc45d027",
       "status": "translated"
     },
     "references/release-notes/beta-18_3.md": {
       "sourceHash": "sha256:38d2a3684c5f3f64f6e3ae40109694ce34f5f45c7fa7105e5f4c627377faa3dd",
+      "sourceBlob": "964dad71690f090a70f2654078c6db72849024b0",
       "status": "translated"
     },
     "references/release-notes/beta-18_4.md": {
       "sourceHash": "sha256:f4ab4735ebd2b80d7d6539b8f18065c5588753343112677f54e687d057bbb06b",
+      "sourceBlob": "c46b3385bec532838592f34578f2c176af2176c6",
       "status": "translated"
     },
     "references/release-notes/beta-18_5.md": {
       "sourceHash": "sha256:14d1a1cc25b99f4ecbdfa2e51bd73dae43a6e3dd6536909cb6c7ca610cc84938",
+      "sourceBlob": "9a4cd435e8034c82e0e96aa493c3640811bc0336",
       "status": "translated"
     },
     "references/roadmap.md": {
       "sourceHash": "sha256:b0995af14ffeba3c104b4bcc0d65bfedea42ef4e3ddeeed9e8d2d1f594efc0ef",
+      "sourceBlob": "30feed902ef620fa0946591f63b1da3f6656335b",
       "status": "translated"
     },
     "references/Roadmap2-h.md": {
       "sourceHash": "sha256:91b4c2b6a63a4da62e8cd187dd8fa50e9ed7f8e4344f3a7a509dab9c228850ee",
+      "sourceBlob": "efd79f7499c27eb979d26e8ce014dd21391f61b2",
       "status": "translated"
     },
     "references/shortcuts3.md": {
       "sourceHash": "sha256:01a0120df7bf52cc07963c89f687b30e92c8db68d0c7e529fb00d1ff352c84fc",
+      "sourceBlob": "8f3b3e1887a6e44f18593720504d454d46265c47",
       "status": "translated"
     },
     "references/SQL-Server-2017-support-h.md": {
       "sourceHash": "sha256:91cbe97b5d1fcf552a19c198232c12a472abecf0d5ff75eb7b75b737e00598dd",
+      "sourceBlob": "b328f1840a4813301d1106fc411185bc3f1f080d",
       "status": "translated"
     },
     "references/supported-files.md": {
       "sourceHash": "sha256:b914a46e482200adc4b407c54a40cdc4312d5698ff765fc661d83c4b0333b60a",
+      "sourceBlob": "384658d9b7607b8ea51de37c08f9e4db022514a3",
       "status": "translated"
     },
     "references/system-requirements.md": {
       "sourceHash": "sha256:1ca5de3bd3440c895a05b276f9bf93d2a5fe80092b93928712c99994712827d1",
+      "sourceBlob": "97e7d12c6dc64528f758362a7c052197abc0aac9",
       "status": "translated"
     },
     "references/TabularEditor.TOMWrapper-h.md": {
       "sourceHash": "sha256:d1ed449a9a96c0031fe8b280f1c808858196806f71363d8fa9447e0db6e7d71a",
+      "sourceBlob": "d394d08152bc4c7c5cb5d67b7c2f2863d0830a8d",
       "status": "translated"
     },
     "references/toc.md": {
@@ -1531,35 +1909,43 @@
       "status": "untranslated"
     },
     "references/user-options.md": {
-      "sourceHash": "sha256:ad092f6088edad3d3e8bd124c227f618338b081a453118946880a2fdc8dccf9d",
+      "sourceHash": "sha256:c1c940b4529b30a1be9a016f78877c647519695975505908b58abf3ce615ed86",
+      "sourceBlob": "36936949aa34a7fff8e4fb07abe2ad5ccdc6782c",
       "status": "translated"
     },
     "references/user-settings-files-te2.md": {
       "sourceHash": "sha256:0a2da6cad41a5e1983662c6d621ab9f78f671aa59f2389f31004b7847deef1f9",
+      "sourceBlob": "74cf282fbaa6ceb6103de733d816c5dc3adac328",
       "status": "translated"
     },
     "security/ai-compliance.md": {
       "sourceHash": "sha256:4c6a93c738e015fe6143730853cffa714e10e80d7911eb6ff5f749dda7a364ad",
+      "sourceBlob": "5a4956bb3144397fac8b53cbfbd5d66a90e4c6ed",
       "status": "translated"
     },
     "security/gdpr-delete.md": {
       "sourceHash": "sha256:25dafde7519c658a7212697ee19bee0033405761a2dfda883549908d63e7ea1f",
+      "sourceBlob": "202e91437a2e1c53eadf1921e8bdc18bbd716a50",
       "status": "translated"
     },
     "security/index.md": {
       "sourceHash": "sha256:77a2eb1494aca34dcd4d36cecd7b1aff207a12ce53e149f69626da621fbecbc1",
+      "sourceBlob": "a1dbdc12c24f7ab974e64768956f99a48463acac",
       "status": "translated"
     },
     "security/privacy-policy.md": {
       "sourceHash": "sha256:3b3d626bc3e999fb30369deca46398b5799282797bf93325e4566fab677fa59b",
+      "sourceBlob": "35e671a05751e7f6c0a36d57d229a0ada85ca450",
       "status": "translated"
     },
     "security/security-privacy.md": {
-      "sourceHash": "",
-      "status": "untranslated"
+      "sourceHash": "sha256:5d9f2e13cdc658c57cd7a23bcc73bedef02662c7efa62cb1bf1e780e53b281cd",
+      "sourceBlob": "fb50e726397e3e9f565b8aaecca3838cca6676f1",
+      "status": "translated"
     },
     "security/terms.md": {
       "sourceHash": "sha256:90fd51f0cff45e9e16b2c200fc4dc3ccf769b97a3c6afcd09b7a688cfc5b87f0",
+      "sourceBlob": "ca19992dfe8fa89ca508cbc83c172609d6ab67da",
       "status": "translated"
     },
     "security/third-party-notices.md": {
@@ -1572,62 +1958,77 @@
     },
     "toc.yml": {
       "sourceHash": "sha256:11d5df2671e45efed1baf56cd10c6634fc48f5f34b8f40d5b83456258a929108",
+      "sourceBlob": "b6b79185c71b3a28258ab0af6bd97814d453f14d",
       "status": "translated"
     },
     "todo/as-cicd.md": {
       "sourceHash": "sha256:b9c4e2179d5be3177a2119ec147214c8f0e5f19bc82993fce18a1712717ad839",
+      "sourceBlob": "a6353f134980788549d9de1b2b48c4ccfd06a63f",
       "status": "translated"
     },
     "todo/Maintaining-Calculations-using-Scripting.md": {
       "sourceHash": "sha256:f01409f53e2dd517b8504f021d56725efc821bff3e94d5cf25c223f6ee9ed977",
+      "sourceBlob": "fa43c779e2eff353ce81dd663a8bc2b0cddfdab2",
       "status": "translated"
     },
     "todo/powerbi-cicd.md": {
       "sourceHash": "sha256:a564d8b5f8312289b739fa332d0dfae6a3b07822e454da25c6f10c16b1e4c016",
+      "sourceBlob": "04266dfb17a20c5e49c1a9678ab1b1bf2c41d03d",
       "status": "translated"
     },
     "todo/te2-advanced.md": {
       "sourceHash": "sha256:02b6a9bfe2f57d4a8ca9cca47d635343f4dee8b1759807de26faa9ffd51157f2",
+      "sourceBlob": "7cd22aed96cb2475edbf32cfbdca286c94976d3f",
       "status": "translated"
     },
     "troubleshooting/azure-openai-connection-errors.md": {
       "sourceHash": "sha256:e0212bb587e9af4f18ba63af831a01f9e84b893a8306685475e6a55abbef8650",
+      "sourceBlob": "62dc40b0bda20817c22a73347c263292c141db42",
       "status": "translated"
     },
     "troubleshooting/calendar-blank-value.md": {
       "sourceHash": "sha256:0306783580e503f6745682cf15906a60703d87b56ce743eb0f4e04c6b2ed4ca9",
+      "sourceBlob": "0441b2d4193984196a71087459cbe073fe63a547",
       "status": "translated"
     },
     "troubleshooting/composite-model-measure-formatting.md": {
       "sourceHash": "sha256:d9bc88bd4f53f3ede1eb636f1e9815e87abb0b3d6c2d10a68b4af5fb8dbed0fa",
+      "sourceBlob": "c1beaaa918f415a845e3dfe48c94f4c0ab902183",
       "status": "translated"
     },
     "troubleshooting/databricks-column-comments-length.md": {
       "sourceHash": "sha256:5fb9b67014b00e5af4fe732edd4c5b9c99d00adbe3e251f3213ab4d17f2751d5",
+      "sourceBlob": "8384ed4116a6b07a8705ec2ea293f10a8410f9b3",
       "status": "translated"
     },
     "troubleshooting/databricks-refresh-empty-catalog.md": {
       "sourceHash": "sha256:156740404acee951b2e723d390472cc2fed4ec46603eae94c6a8026baf503681",
+      "sourceBlob": "eee873bfcfd48bf75f4d41fe2959ef9854c9007e",
       "status": "translated"
     },
     "troubleshooting/direct-lake-entity-updates-reverting.md": {
       "sourceHash": "sha256:aab510b71ae2d9128c2c1fc565e2e3a3bee5cf2e568fc57aa33a8710b1f650cc",
+      "sourceBlob": "164e251bce171b4e59ff7a4fe13b4d6d3bf1502d",
       "status": "translated"
     },
     "troubleshooting/index.md": {
       "sourceHash": "sha256:201e48fac8aefa81c9dbcf119fc81fc8783ecc822ec5bcf4dd6fc464b8c15393",
+      "sourceBlob": "a7a225176ee2b15c7abaf6c3e3747e14f8dd92df",
       "status": "translated"
     },
     "troubleshooting/licensing-activation.md": {
       "sourceHash": "sha256:1c17fa9f1b9589f06b54c3acd3fa2edc4cb5ebfd428ea71a2dc6e5fb4ab6ac21",
+      "sourceBlob": "9ad3a2f6b18585fa53faa4b5f52ac3ef986e186a",
       "status": "translated"
     },
     "troubleshooting/locale-not-supported.md": {
       "sourceHash": "sha256:3913bccc1fa6aafb9d2d6ab07f4018ea91efa1c1cc34874fc7267ab9b7034091",
+      "sourceBlob": "aa852b2bcea0af960f5c3c65808971985a321e93",
       "status": "translated"
     },
     "troubleshooting/proxy-settings.md": {
       "sourceHash": "sha256:9de7a8f714d448d4dd5184645833cd2a0ca298d2743cae52595ef2ebb83044c8",
+      "sourceBlob": "a3a5d486c7a589e36b20bada23744006afe59a37",
       "status": "translated"
     },
     "troubleshooting/toc.md": {
@@ -1636,94 +2037,117 @@
     },
     "tutorials/calendars.md": {
       "sourceHash": "sha256:42d5fbcac1800e22943c402afc8cc0ab45ecae62d802ffafb492d37a3e4096b2",
+      "sourceBlob": "dbf139ed2a2573cf48db4ba4254b24295c441f65",
       "status": "translated"
     },
     "tutorials/connecting-to-azure-databricks.md": {
       "sourceHash": "sha256:6a47b35772c99b233424bab2318b397f1d866227cc45646e0d11e9c89c4bc9f3",
+      "sourceBlob": "79fba8437efa8fbd95c8eebf9d72cd774515dbf0",
       "status": "translated"
     },
     "tutorials/creating-macros.md": {
       "sourceHash": "sha256:c6c5951e9b76a66c146878235441b06c929595c6d11e86e2a23f8bc00eb5e9d4",
+      "sourceBlob": "38d8c3225e65db262182e2276a5bfc9acfe66b10",
       "status": "translated"
     },
     "tutorials/data-security/data-security-about.md": {
       "sourceHash": "sha256:4a0551c3deb39c692e470f6ea653b5c125c19ab1bad13b81cc117569c5fa20ac",
+      "sourceBlob": "406353ef6b621c24e83234e5e1b3ee457ccc2139",
       "status": "translated"
     },
     "tutorials/data-security/data-security-setup-ols.md": {
       "sourceHash": "sha256:c2f2266fc6f918d57da5fc9347a5c21aee8b769c020eabca32b0fc4408605cf1",
+      "sourceBlob": "a10baecb1c42450b6792e7dadfd4212e44988bcd",
       "status": "translated"
     },
     "tutorials/data-security/data-security-setup-rls.md": {
       "sourceHash": "sha256:af1e2cdd021ffc9ba788cc24eceae8ec1cdca3d4569adaf0b8f271e7e5607536",
+      "sourceBlob": "2550f485caa3f2ef7292f6a1a4f481bc8f364cfe",
       "status": "translated"
     },
     "tutorials/data-security/data-security-testing.md": {
       "sourceHash": "sha256:99fb2630c22ce822b6247189570559ac4bd907a5e19a2b9698ccaf7e7f55a537",
+      "sourceBlob": "41360870728dbf7d73b6be5c1d2d7eb4f4cd7d8a",
       "status": "translated"
     },
     "tutorials/detail-rows-expression.md": {
       "sourceHash": "sha256:db88c79f625f34221cf230c18f11fad62c76fdd79e8a191e54eecfab82156180",
+      "sourceBlob": "c5b7e3e8450333a7019e1d3826d5b0b5a16e7af2",
       "status": "translated"
     },
     "tutorials/direct-lake-guidance.md": {
       "sourceHash": "sha256:964fbdf58e990aee599a3a27f26d5b302cafd8bf85c950a79eebb84f497f1a2d",
+      "sourceBlob": "a87af70d967a54fb3b1a6c89ce4844609ab99260",
       "status": "translated"
     },
     "tutorials/importing-tables.md": {
       "sourceHash": "sha256:1e9205918c6b3e8b7b93dd6c47efe358059e49876878db2233a25a8476257d1c",
+      "sourceBlob": "ca1a1572338523fded0c48ae9a08d3628911f25d",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-about.md": {
       "sourceHash": "sha256:4ca05cb2809b0aed7ba334a9f4b6c9ccb053658b4c1cc42dc29562b74cfad42d",
+      "sourceBlob": "e76ceb0faedf1fcce7bb3d21a621f79ed8f04680",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-modify.md": {
       "sourceHash": "sha256:9956a6e4fc473c10829c0fcef6ac14a1e569fccd0cfd84d6f3b2cf6fba57c9a4",
+      "sourceBlob": "087f5c46eb42f5235964b9fb57f9b00742727545",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-schema.md": {
       "sourceHash": "sha256:73e8125efd00942a78f5931bbe9f0e440742ee8d6de6f54e43a87c992a0ef5ff",
+      "sourceBlob": "449a21b482c4f9e586a125cee72f121c3e4cc48f",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-setup.md": {
       "sourceHash": "sha256:9b8100d72880bf60b310d4090727ff8ce66c7da042b85c5558754a66d6508739",
+      "sourceBlob": "9db8313ca6d20829cb7bc4ab88de6e58aa663c77",
       "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-workspace-mode.md": {
       "sourceHash": "sha256:8afd82adf5b708dbfd8dc241ca03080817cf808960ba29baf606295334893209",
+      "sourceBlob": "5596ac89dd389793101181495685a43543666b35",
       "status": "translated"
     },
     "tutorials/index.md": {
       "sourceHash": "sha256:08b69c87240fadba66c946ff66b645ca69f32f49a7057d69509af1b6fce4f840",
+      "sourceBlob": "087430031d41af969abfb553a90fdbc49913e236",
       "status": "translated"
     },
     "tutorials/new-as-model.md": {
       "sourceHash": "sha256:617f37b605f71ee0f770b896db1166d532fa0b21fb5e9c084cccfd12324bcbc9",
+      "sourceBlob": "78979a6f1f9cec1aabf2ba6c4ffeaad88b75935b",
       "status": "translated"
     },
     "tutorials/new-pbi-model.md": {
       "sourceHash": "sha256:01b20064a80073530281396fa9208b87035a900d9ed7f608fb741cfc09302af4",
+      "sourceBlob": "807fddf3f679e02e6c641299b610e140a2ffb60a",
       "status": "translated"
     },
     "tutorials/powerbi-xmla.md": {
       "sourceHash": "sha256:bcb5a43d97006c2e63735cda05f2888cecdee8ed344eb20bf4e723d72ab95cdf",
+      "sourceBlob": "dbcf16ba026efd18ef05a0cba40c8b8b1a2a18e7",
       "status": "translated"
     },
     "tutorials/toc.md": {
       "sourceHash": "sha256:8a2515bffeac53dd28f78da28c6c321a4c7687437cb4952039b1f230347996b0",
+      "sourceBlob": "597c98218ac1b44f1503bdd95cc0c54d5da33595",
       "status": "translated"
     },
     "tutorials/udfs.md": {
       "sourceHash": "sha256:4c17768a0dc089431a06fa79ed1785918e2bf24339d93c0976fcbc9781544566",
+      "sourceBlob": "1d54ec06bb59b37caef36ccb4cc67c82fc24089e",
       "status": "translated"
     },
     "tutorials/user-defined-aggregations.md": {
       "sourceHash": "sha256:b5f8ded1057c581a96e8d3f46fea892ea20c77dc028d681125a70abb77290a22",
+      "sourceBlob": "7b6b8a270ab729cc696e138135f3eba22358001e",
       "status": "translated"
     },
     "tutorials/workspace-mode.md": {
       "sourceHash": "sha256:e35e6f82ed64cb2d6a73fe987b64d631ebd2416fba3bb1055e56bb91c89d4eed",
+      "sourceBlob": "ec8fad8afd55f4c28bc7d290a82e2335fccb7068",
       "status": "translated"
     },
     "whats-new/3-11-0.html": {
@@ -1840,13 +2264,13 @@
     }
   },
   "summary": {
-    "translated": 449,
+    "translated": 452,
     "outdated": 0,
-    "untranslated": 9,
+    "untranslated": 6,
     "copied": 1,
     "pinned": 0,
     "total": 459,
-    "completionPercent": 98.0,
+    "completionPercent": 98.7,
     "failures": 0
   }
 }

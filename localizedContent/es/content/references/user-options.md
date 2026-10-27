@@ -1,8 +1,8 @@
----
+﻿---
 uid: user-options
 title: Archivo de opciones de usuario (.tmuo)
 author: Daniel Otykier
-updated: 2026-09-15
+updated: 2026-10-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,14 +25,14 @@ Cuando abres un modelo desde el disco, el archivo se crea junto a él y se nombr
 
 | Lo que abriste                                                                                             | Archivo de opciones de usuario             |
 | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `SpaceParts.bim`, o cualquier archivo `.bim` / `.pbit` / `Database.json`                                   | `SpaceParts.<UserName>.tmuo`, junto a él   |
+| `SpaceParts.bim`, o cualquier archivo `.bim` / `.pbit` / `database.json`                                   | `SpaceParts.<UserName>.tmuo`, junto a él   |
 | Un archivo `model.tmdl` o `database.tmdl`                                                                  | `model.<UserName>.tmuo`, junto a él        |
-| Una carpeta que contiene `Database.json`                                                                   | `database.<UserName>.tmuo`, en esa carpeta |
+| Una carpeta que contiene `database.json`                                                                   | `database.<UserName>.tmuo`, en esa carpeta |
 | Una carpeta que contiene archivos de modelo en Tabular Model Definition Language (TMDL) | `model.<UserName>.tmuo`, en esa carpeta    |
 
 TMDL siempre usa el prefijo `model` para mantener la continuidad con las versiones anteriores a `database.tmdl`.
 
-Para un modelo abierto a través de una conexión, en lugar de desde el disco, no hay ningún lugar junto al modelo donde colocar el archivo, así que se guarda por servidor y por base de datos en `%LocalAppData%\\TabularEditor3\\UserOptions\\`.
+Para un modelo abierto a través de una conexión, en lugar de desde el disco, no hay ningún lugar junto al modelo donde colocar el archivo, así que se guarda por servidor y por base de datos en `%LocalAppData%\TabularEditor3\UserOptions\`.
 
 La opción _Crear archivo de opciones de usuario (.tmuo)_ en @preferencias determina si se crea o no el archivo para un modelo nuevo.
 
@@ -103,14 +103,14 @@ Una anulación cuya Data source ya no exista en el modelo se elimina la próxima
 | `ServerType`                          | Cadena            | Siempre. Uno de `Sql`, `Oracle`, `Odbc`, `OleDb`, `Snowflake`, `Dataflow`, `PostgreSql`, `MySql`, `MariaDb`, `Db2`, `Databricks`, `OneLake`.                                       |
 | `Options`                             | Objeto de cadenas | La colección no está vacía.                                                                                                                                                                        |
 | `UserId`                              | Cadena            | Configurado.                                                                                                                                                                                       |
-| `Contraseña`                          | Objeto cifrado    | Configurado, _y_ elegiste guardarlo.                                                                                                                                                               |
-| `Proveedor`                           | Cadena            | `ServerType` es `OleDb`.                                                                                                                                                                           |
+| `Password`                          | Objeto cifrado    | Configurado, _y_ elegiste guardarlo.                                                                                                                                                               |
+| `Provider`                           | Cadena            | `ServerType` es `OleDb`.                                                                                                                                                                           |
 | `PasswordKey`, `UserIdKey`            | Cadena            | `ServerType` es `OleDb` y el valor correspondiente está configurado.                                                                                                                               |
-| `Servidor`                            | Cadena            | `ServerType` no es `Odbc` y está configurado.                                                                                                                                                      |
+| `Server`                            | Cadena            | `ServerType` no es `Odbc` y está configurado.                                                                                                                                                      |
 | `ServerKey`, `DatabaseKey`            | Cadena            | `ServerType` no es `Sql` y el valor está configurado.                                                                                                                                              |
-| `Base de datos`                       | Cadena            | Configurado.                                                                                                                                                                                       |
-| `Autenticación`                       | Cadena            | `ServerType` es `Sql`, `OleDb` o `Databricks`. Uno de `Sql`, `WindowsIntegrated`, `AadInteractive`, `AadPassword`, `AadIntegrated`, `AadServicePrincipal`, `AccessToken`, `OAuth`. |
-| `Cifrar`                              | Booleano          | Se establece en cualquiera de los dos casos.                                                                                                                                                       |
+| `Database`                       | Cadena            | Configurado.                                                                                                                                                                                       |
+| `Authentication`                       | Cadena            | `ServerType` es `Sql`, `OleDb` o `Databricks`. Uno de `Sql`, `WindowsIntegrated`, `AadInteractive`, `AadPassword`, `AadIntegrated`, `AadServicePrincipal`, `AccessToken`, `OAuth`. |
+| `Encrypt`                              | Booleano          | Se establece en cualquiera de los dos casos.                                                                                                                                                       |
 | `Dsn`                                 | Cadena            | Se establece. Se usa para ODBC.                                                                                                                                                    |
 | `RowLimitClause`, `IdentifierQuoting` | Número            | No tienen sus valores predeterminados.                                                                                                                                                             |
 | `Schema`                              | Cadena            | Se establece.                                                                                                                                                                                      |
@@ -121,16 +121,17 @@ Una anulación cuya Data source ya no exista en el modelo se elimina la próxima
 
 ### Implementación
 
-`Deployment` contiene la última configuración que usó el Asistente de implementación para este modelo. Las seis opciones booleanas siempre se escriben una vez que existe el bloque, tanto si son verdaderas como falsas:
+`Deployment` contiene la última configuración que usó el Asistente de implementación para este modelo. Las siete opciones booleanas siempre se escriben una vez que existe el bloque, tanto si son verdaderas como falsas:
 
 | Propiedad                       | Tipo            | Se escribe cuando                                                                                                                            |
 | ------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DeployDataSources`             | Booleano        | Siempre                                                                                                                                      |
-| `Desplegar particiones`         | Booleano        | Siempre                                                                                                                                      |
+| `DeployPartitions`         | Booleano        | Siempre                                                                                                                                      |
 | `DeployRefreshPolicyPartitions` | Booleano        | Siempre                                                                                                                                      |
 | `DeployModelRoles`              | Booleano        | Siempre                                                                                                                                      |
 | `DeployModelRoleMembers`        | Booleano        | Siempre                                                                                                                                      |
 | `DeploySharedExpressions`       | Booleano        | Siempre                                                                                                                                      |
+| `DeployLinguisticMetadata`             | Booleano        | Siempre                                                                                                                                      |
 | `TargetConnectionString`        | Cadena u objeto | Siempre; `null` si no está configurado. Forma de objeto cuando la cadena de conexión incluye una contraseña. |
 | `TargetDatabase`                | Cadena          | Siempre; `null` si no está configurado.                                                                                      |
 | `TargetCredentials`             | Objeto          | Se han establecido tanto un nombre de usuario como una contraseña.                                                           |
