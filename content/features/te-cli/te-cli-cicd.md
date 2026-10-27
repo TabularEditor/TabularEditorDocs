@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: CI/CD Integration
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,7 +21,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 > [!WARNING]
 > **Do not use the CLI in production pipelines during Limited Public Preview.** Two preview-specific risks apply to pipeline owners:
 >
-> - **Hard expiry.** The preview binary stops functioning on **2026-10-31** - any pipeline depending on it will fail on that date, regardless of your release calendar.
+> - **Hard expiry.** The preview binary stops functioning on **2026-12-31** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
 >
 > Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA version matches your needs.
@@ -35,7 +35,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 - **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr, carrying the finding's code (`code=` on Azure DevOps, `title=` on GitHub). `azdo` / `azure-devops` and `gh` are accepted aliases, `none` means no annotations, and a mistyped value is rejected before the command runs instead of silently emitting nothing.
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
 - **Structured errors.** `--error-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
-- **One findings JSON.** `te validate`, `te bpa run`, `te test run`, and `te query` share a single machine-readable JSON document under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
+- **One findings JSON.** `te validate`, `te bpa run`, `te schemacheck`, `te test run`, and `te query` share a single machine-readable JSON document under `--output-format json` - a `summary`, a flat `findings[]` array with `severity`/`source`/`code`/`message`, and, where resolvable, an `objectPath` you can feed back to `te get`. See @te-cli-findings.
 
 ## Adding the CLI to your repo
 
@@ -54,7 +54,7 @@ your-repo/
 Place the **extracted** binary - not the archive - so the pipeline can call it directly. Pick the build that matches your runner OS/arch; see @te-cli-install for the filename table. The self-contained binary is ~70 MB; consider Git LFS if your repo is sensitive to size.
 
 > [!NOTE]
-> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-10-31** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
+> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-12-31** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
 
 ## GitHub Actions
 
@@ -185,6 +185,20 @@ te deploy --model ./model --target-server my-ws --target-database my-model --ski
 ```
 
 See @te-cli-config for controlling the BPA gate globally via `bpa.onDeploy` / `bpa.onSave` config keys.
+
+## Schema drift check
+
+Run [`te schemacheck`](xref:te-cli-commands#schemacheck) before a deploy to catch source columns that were dropped or retyped since the model was last updated. The agent needs network access and credentials for the model's data sources.
+
+```bash
+# A missing source column fails the step; added or retyped columns are warnings
+te schemacheck --model ./model --non-interactive --ci vsts --trx schema.trx
+
+# Fail on any drift
+te schemacheck --model ./model --non-interactive --fail-on warning --ci github
+```
+
+Tables the CLI can't check are listed with the reason and don't fail the step. To fail on them too, check `tablesSkipped` in the JSON output.
 
 ## Script validation
 

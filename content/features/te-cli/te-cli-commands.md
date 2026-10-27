@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Command Reference
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -195,6 +195,8 @@ te save-as -m ./model.bim -o ./tmdl-out       # Convert BIM to TMDL
 te save-as -o ./project --serialization pbip         # Save as a PBIP project
 te save-as -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
+
+A TMDL folder can be saved with one file per object (column, measure, partition, and so on) instead of one file per table. That choice is stored in the folder, and `te` keeps whatever layout a folder already has; you choose the layout in Tabular Editor 3. When a save writes the standard layout over a folder that used one file per object, `te` prints a warning.
 
 `--serialization pbip` output opens directly in Power BI Desktop and is named after the source model (`SpaceParts.pbip`, not `Model.pbip`). Saving into a folder that already holds a project adds only the files that are missing and leaves everything already there - the report's pages, theme, connection, and item identity - exactly as it was, so a save that changes nothing leaves the project unchanged under source control.
 
@@ -513,7 +515,7 @@ te validate --errors-only                 # Hide warnings and anti-pattern hints
 
 Every finding carries a stable code, shown in the **Code** column of the Errors, Warnings, and Anti-patterns tables as well as in JSON, `--ci` annotations, and `--trx`. Three codes are worth knowing when a hand-written model is involved: `TE0012` (a column and a measure, or two columns, share a name within one table) and `TE0013` (a measure name is repeated across tables) are errors - Analysis Services refuses to load such a model, and `te save-as` refuses to write one unless `--force` or `--skip-validation` is passed; `TE0014` is a warning that a TMDL folder has no `database.tmdl`, so the compatibility level in effect is a substitute for the one the model declared. The folder still loads and `te validate` still exits `0` for `TE0014`; hide it like any other warning with `--no-warnings` or `--errors-only`.
 
-Under `--output-format json`, `te validate` emits the shared findings JSON document (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te test run`, and `te query` - see @te-cli-findings.
+Under `--output-format json`, `te validate` emits the shared findings JSON document (`summary` plus a flat `findings[]` array) shared with `te bpa run`, `te schemacheck`, `te test run`, and `te query` - see @te-cli-findings.
 
 > [!NOTE]
 > `te validate` does not support `--output-format csv` - CSV is rejected up front with an actionable error rather than producing a partial result. Use `text` or `json` for validation output.
@@ -692,6 +694,72 @@ Re-enable a previously disabled built-in BPA rule by removing the rule ID from `
 te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
 ```
 
+### schemacheck
+
+Compare each table in the model with the data source it reads from, and report columns that no longer match. `te schemacheck` never changes the model. To apply what it finds, use [`te set <table> --update-schema`](#set). It replaces the `-SC` flag of Tabular Editor 2; see [Schema check](xref:te-cli-migrate#schema-check) for the differences.
+
+`te schemacheck` accepts:
+
+- `<table>` - optional: check one table. Without it, every table in the model is checked.
+- `--fail-on <severity>` - `error` (default) or `warning`. With `warning`, any drift fails the run.
+- `--ci <fmt>` - emit CI annotations to stderr: `vsts` (aliases `azdo`, `azure-devops`) or `github` (alias `gh`).
+- `--trx <path>` - write a VSTEST `.trx` file with one result per finding.
+- `--source`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table` - for a single table, read the schema from somewhere else. These are the same flags as on [`te add -t Table`](#add). `--source-table` on its own changes only the name of the source table, and keeps the connection.
+
+You don't need to name a connection: each table is compared with the data source its partitions are bound to. The machine running `te` needs network access and credentials for those data sources.
+
+```bash
+te schemacheck                                        # Check every table
+te schemacheck Sales                                  # Check one table
+te schemacheck --fail-on warning                      # Fail on any drift
+te schemacheck --ci vsts --trx schema.trx             # Azure DevOps annotations and test results
+te schemacheck Sales --source-table dbo.fact_sales    # Compare Sales with another source table
+```
+
+#### What it reports
+
+| Finding | Code | Severity |
+| -- | -- | -- |
+| A source column that no column in the table reads. | `SCHEMA_SOURCE_COLUMN_ADDED` | Warning |
+| A column whose data type differs from its source column. | `SCHEMA_DATA_TYPE_CHANGED` | Warning |
+| A column whose source column no longer exists. | `SCHEMA_MISSING_SOURCE_COLUMN` | Error |
+| A legacy SQL query partition whose query can't be read, for example because it's blank or the server can't be reached. | `SCHEMA_SOURCE_QUERY_ERROR` | Error |
+| The source returns the same column name more than once. Only the first is compared. | `SCHEMA_DUPLICATE_SOURCE_COLUMN` | Info |
+| The table was not checked. The message says why. | `SCHEMA_TABLE_SKIPPED` | Info |
+
+An error exits with code `1`, and a warning exits with code `0` unless you pass `--fail-on warning`. This is the rule Tabular Editor 2 used, so a migrated pipeline keeps the result it has today. With `--ci vsts`, a run with only warnings reports **SucceededWithIssues**.
+
+A renamed source column is reported as one missing column and one added column. Point the model column at the new name with `te set <table>/<column> -p SourceColumn=<new name>`, which keeps the column's properties and the DAX that refers to it.
+
+#### What it checks
+
+`te schemacheck` checks tables with legacy SQL query partitions, tables with Power Query (M) partitions, and Direct Lake or Fabric tables. These tables are listed under **Not checked**, with the reason, and never fail the run:
+
+- calculated tables and calculation groups
+- tables with the `TabularEditor_SkipSchemaCheck` annotation
+- tables with no column bound to a source column
+- tables on a source the CLI can't read, such as Oracle, ODBC, SharePoint, or a Power Query expression it can't follow
+
+Legacy partitions on the SQL Server OLE DB providers (`SQLOLEDB` and `MSOLEDBSQL`) can only be checked on Windows. On Linux and macOS, such a table is reported as an error.
+
+#### Annotations
+
+`te schemacheck` honors the schema check annotations from Tabular Editor 2, described in [Ignoring objects](xref:importing-tables-te2#ignoring-objects):
+
+- `TabularEditor_SkipSchemaCheck` on a table skips it. The misspelled `TabularEditor_SkipSkemaCheck` also works.
+- `TabularEditor_IgnoreSourceColumnAdded` on a table hides added source columns.
+- `TabularEditor_IgnoreDataTypeChange` on a table or a column hides data type changes.
+- `TabularEditor_IgnoreMissingSourceColumn` on a table or a column hides missing source columns.
+- `TabularEditor_SchemaCheckNoWarnings` on the model turns every warning into an error, so any drift fails every run. `--fail-on warning` does the same for a single run.
+
+`TabularEditor_AddFalseWhereClause` is ignored, as in Tabular Editor 3: the query is sent as written.
+
+#### Output
+
+Text and JSON output are supported. Under `--output-format json`, `te schemacheck` emits the shared findings JSON document with three extra counts: `tablesChecked`, `tablesSkipped` and `tablesWithDrift` - see @te-cli-findings.
+
+The `--trx` file has one result per finding under the **Schema Checks** suite: failed for an error, warning for a warning, and inconclusive for a table that was not checked. A run without drift writes a single passed result.
+
 ### vertipaq
 
 Analyze VertiPaq storage statistics.
@@ -705,7 +773,9 @@ Analyze VertiPaq storage statistics.
 - `--export <file.vpax>` - export VertiPaq stats to a `.vpax` file for offline analysis.
 - `--import <file.vpax>` - load a previously exported `.vpax` file and analyze it offline.
 - `--obfuscate` - obfuscate names and expressions in exported VPAX.
-- `--top <N>`, `--stats`, `--annotate`, `--save`.
+- `--top <N>`, `--stats`.
+- `--annotate` - prepare the statistics as annotations on each table and column (size, cardinality and so on). On its own it only reports what it would write.
+- `--push` - write the annotations prepared by `--annotate` to the model on the server. Requires `--annotate`, and can't be combined with `--import`.
 - `--auth <method>` - auth method override when connecting to a remote model.
 
 ```bash
@@ -714,6 +784,7 @@ te vertipaq Sales                # Stats limited to the Sales table
 te vertipaq --all                # Tables, columns, relationships, partitions
 te vertipaq --export stats.vpax
 te vertipaq --import stats.vpax  # Analyze offline
+te vertipaq --annotate --push    # Write the statistics to the model as annotations
 ```
 
 ### Formatting expressions
@@ -771,7 +842,7 @@ echo "Info(Model.Name);" | te script --inline -
 te script --file fix.cs --validate               # Compile-only, no model needed
 ```
 
-A run in which any script calls `Error(...)` exits non-zero, reports `"success": false` in JSON, and closes by saying the run completed with errors; changes the script already made are still saved when `--save` is given. `Warning(...)` and `Info(...)` never fail a run. On Windows, the `DisableCSharpScripts` administrator policy refuses `te script` outright - see [Administrator policies](xref:te-cli-config#administrator-policies).
+A run in which any script calls `Error(...)` exits non-zero, reports `"success": false` in JSON, and closes by saying the run completed with errors; changes the script already made are still saved when `--save` is given. `Warning(...)` and `Info(...)` never fail a run. On Windows, the `DisableCSharpScripts` administrator policy refuses `te script` outright, and `BlockUnsafeScripts` refuses a script that reaches outside the model, for example to read a file or call a web service - see [Administrator policies](xref:te-cli-config#administrator-policies).
 
 > [!IMPORTANT]
 > Two behavioral details to know if you're porting an older script:
@@ -883,6 +954,7 @@ Deploy a semantic model to Power BI, Fabric, Azure Analysis Services, or on-prem
 - `--deploy-role-members`
 - `--deploy-shared-expressions`
 - `--create-only`
+- `--skip-linguistic-metadata` - keep the target model's AI instructions, AI data schema and Q&A synonyms instead of replacing them with the model's own. Use it when someone maintains these in the Power BI service with **Prep data for AI**. Also applies with `--deploy-full`.
 - `--skip-bpa` - bypass the BPA gate entirely.
 - `--fix-bpa` - auto-fix BPA violations where rules define a fix expression.
 - `--bpa-rules <path>` - repeatable; override `bpa.rules` from your CLI config for this single deploy. Built-in rules still apply unless `bpa.builtInRules` is `false`.
@@ -898,6 +970,7 @@ te deploy -m ./model --target-server MY.SERVER.COM --target-database my-model --
 te deploy -m ./model --target-server my-workspace --target-database my-model > deploy.tmsl         # Dry run: TMSL only
 te deploy -s src-workspace -d src-model --target-server dst-workspace --target-database copy --execute   # Remote to remote
 te deploy --local --target-server my-workspace --target-database my-model --execute                # Publish a Desktop model
+te deploy -m ./model --target-server my-workspace --target-database my-model --skip-linguistic-metadata --execute   # Keep the AI instructions set up in the service
 ```
 
 > [!IMPORTANT]
@@ -948,7 +1021,6 @@ Run a suite of DAX assertion tests against a deployed model.
 
 - `--suite <path>` - test-suite directory (default: `.te-tests/`).
 - `--tag <tag>` - only tests with this tag.
-- `--fail-on <severity>` - `error` (default) or `warning`.
 - `--ci <fmt>`, `--trx <path>` - CI annotations and TRX output.
 
 ```bash
@@ -968,7 +1040,11 @@ Additional subcommands scaffold tests, print the assertion spec format, switch t
 te test init --example             # Scaffold an example suite
 te test spec                       # Print the full assertion format reference
 te test init --from-model --model ./my-model  # Generate stubs from your measures
+te test snapshot -o baseline.json            # Capture every measure's value
+te test snapshot --diff baseline.json        # Compare against the baseline
 ```
+
+`te test snapshot` writes the snapshot to the file named by `-o, --output-file`, or compares against a baseline with `--diff <path>`; one of the two is required.
 
 ## Connection and authentication
 
@@ -1053,7 +1129,7 @@ JSON output carries `success`, `formatted`, and `errors`. For expressions alread
 
 ### util format-m
 
-Format a loose M/Power Query expression. `-` reads from stdin; no language-specific options. A malformed expression - an unterminated string, for example - is reported as a failure with a non-zero exit code and the original text returned unchanged, never a silently shortened result.
+Format a loose M/Power Query expression. `-` reads from stdin; no language-specific options. Lines are wrapped at 80 characters, the same as `te set --format` uses for M. A malformed expression - an unterminated string, for example - is reported as a failure with a non-zero exit code and the original text returned unchanged, never a silently shortened result.
 
 ```bash
 te util format-m "let x = 1 in x"
@@ -1139,7 +1215,7 @@ te completion fish
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error, a `te script` run in which a script reported an error, a `te deploy` the server accepted with object errors). For `te diff`: differences found. |
+| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error, a `te schemacheck` run that found an error (or any drift with `--fail-on warning`), a `te script` run in which a script reported an error, a `te deploy` the server accepted with object errors). For `te diff`: differences found. |
 | `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 For fine-grained control in CI pipelines, combine exit codes with `--ci <vsts/github>` annotations and `--trx` results files - see @te-cli-cicd.
@@ -1150,5 +1226,5 @@ For fine-grained control in CI pipelines, combine exit codes with `--ci <vsts/gi
 - @te-cli-install - install and set up the CLI.
 - @te-cli-auth - authenticate and manage connections.
 - @te-cli-config - configuration file, BPA gate, post-mutation behavior.
-- @te-cli-findings - the findings JSON shared by validate, bpa run, test run, and query.
+- @te-cli-findings - the findings JSON shared by validate, bpa run, schemacheck, test run, and query.
 - @te-cli-migrate - TE2 → TE3 flag mapping.

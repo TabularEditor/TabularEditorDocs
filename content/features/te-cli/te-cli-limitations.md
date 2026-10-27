@@ -2,7 +2,7 @@
 uid: te-cli-limitations
 title: Behavior Differences and Known Limitations
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,6 +52,15 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 | Limitation | Notes / Workaround |
 | -- | -- |
 | **`te validate` cannot auto-fix Code Action violations** | `te validate` reports Code Action violations but offers no CLI flag to apply the suggested fix. Apply the fix in Tabular Editor 3, or use `te bpa run --fix` for the subset of Code Actions that overlap with BPA rules. |
+
+## Schema check
+
+| Limitation | Notes / Workaround |
+| -- | -- |
+| **Oracle, ODBC and other OLE DB sources are not checked** | Tabular Editor 2's `-SC` checked legacy query partitions on these sources. [`te schemacheck`](xref:te-cli-commands#schemacheck) and `te2 -SC` list such a table under **Not checked**, and it doesn't fail the run. The SQL Server OLE DB providers are still checked. |
+| **OLE DB sources can only be checked on Windows** | Legacy partitions on `SQLOLEDB` or `MSOLEDBSQL` are reported as an error on Linux and macOS. Run the schema check on a Windows agent. |
+| **The single-table override reads SQL Server and Fabric only** | `te schemacheck <table>` with `--source`, `--connection-string` or `--source-table` reads SQL Server, Azure SQL, and Fabric Lakehouse and Warehouse SQL endpoints. A table on any other source is refused. Run without the override flags to check it against its own data source. |
+| **Renamed source columns are reported as missing + added** | Matching is by name, so a rename can't be detected. Remap the column with `te set <table>/<column> -p SourceColumn=<new name>`. |
 
 ## Model initialization and save
 

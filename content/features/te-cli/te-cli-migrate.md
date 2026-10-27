@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migrating from the TE2 Command Line
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,6 +37,13 @@ te Model.bim -S fix.csx -D "localhost\tabular" MyDB -O
 
 > [!NOTE]
 > TE2 mode runs the same `Load → Scripts → Schema Check → Save → BPA → Deploy → TRX` pipeline as `TabularEditor.exe`, including context-sensitive flag behavior (e.g., `-S` after `-D` means `-SHARED`, not `-SCRIPT`).
+
+Scripts (`-S`) in TE2 mode behave as they did in Tabular Editor 2:
+
+- **A failed script stops the run.** If a script throws or doesn't compile, the run exits with code `1` before anything is saved, analyzed or deployed. There is no build output (`-B`, `-F`, `-TMDL`), no BPA result and no `-T` file, and any output from an earlier run is left as it was. A pipeline step that always reads the `.trx` file must handle it being absent.
+- **Compile errors show where they are.** Each error is written to stdout as `Error <code> on line <line>, col <column>: <message>`. With `-V` or `-G`, it becomes an annotation that points at the line in the script file.
+- **Each script runs as one change.** Follow-on changes, such as fixing up DAX that refers to a renamed column, are applied when the script ends rather than after each statement. A script that renames a column and then reads a measure that uses it sees the old expression until the script ends.
+- **`TECLI` is defined.** Scripts see the `TECLI` preprocessor symbol and not `TE3`, as with `te script`. Tabular Editor 2 defines neither.
 
 ## The migrate command
 
@@ -75,12 +82,12 @@ Below is a non-exhaustive summary of the most commonly used flags. Run `te util 
 | `-M` / `-MEMBERS` | `te deploy --deploy-role-members` | |
 | `-FULL` (after `-D`) | `te deploy --deploy-full` | Equivalent to overwrite + connections + partitions + shared + roles + role-members. |
 | `-X` / `-XMLA <file>` | `te deploy ... > <file>` (omit `--execute`) | Script emission is the default: without `--execute`, deploy connects read-only and prints the TMSL to stdout - redirect it to a file. |
-| `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `deploy`, `test run` | Emits `##vso[...]` annotations to stderr. `azdo` and `azure-devops` are accepted aliases. |
+| `-V` / `-VSTS` | `--ci vsts` on `validate`, `bpa run`, `schemacheck`, `deploy`, `test run` | Emits `##vso[...]` annotations to stderr. `azdo` and `azure-devops` are accepted aliases. |
 | `-G` / `-GITHUB` | `--ci github` (alias `gh`) | Emits `::error::` / `::warning::` / `::notice::` annotations. |
-| `-T` / `-TRX <file>` | `--trx <file>` on `validate`, `bpa run`, `test run` | VSTEST `.trx` file for Azure DevOps test publishing. |
+| `-T` / `-TRX <file>` | `--trx <file>` on `validate`, `bpa run`, `schemacheck`, `test run` | VSTEST `.trx` file for Azure DevOps test publishing. |
 | `-W` / `-WARN` | (default) | Warnings always reported in deploy results. |
 | `-E` / `-ERR` | (default) | Deploy returns non-zero exit on DAX errors. |
-| `-SC` / `-SCHEMACHECK` | *Not yet implemented.* | TE2 schema check connects to actual data sources. Different from `te validate` (DAX semantic validation, no data source connection). |
+| `-SC` / `-SCHEMACHECK` | `te schemacheck` | Same exit codes as TE2, and checks more kinds of tables - see [Schema check](#schema-check). |
 | `-L` / `-LOGIN <user> <pass>` (after `-D`) | `te auth login -u <id> -p <secret> -t <tenant>` | Use service principal or env-based credentials. The login is cached, so subsequent commands acquire tokens silently - see @te-cli-auth. |
 
 ## Migration playbook
@@ -90,9 +97,10 @@ The recommended path from a TE2-based pipeline to the new CLI:
 1. **Drop-in replacement.** Replace `TabularEditor.exe` with `te` (or `te2`) in your existing pipeline. Verify the pipeline still runs - TE2 compatibility handles most invocations unchanged.
 2. **Replace flags incrementally.** Convert one flag group at a time:
    - Start with `-A` / `-AX` → `te bpa run` to pick up richer BPA output (`--fail-on`, `--fix`, `--trx`).
+   - Then `-SC` → `te schemacheck`, which also checks Power Query and Direct Lake tables.
    - Then `-D` → `te deploy` for fine-grained deploy control.
    - Finally `-V` / `-G` → `--ci vsts` / `--ci github`.
-3. **Switch to non-interactive CI flags.** Add `--non-interactive` to every `te` command (and `--ci <vsts|github>` on `validate`, `bpa run`, `deploy`, and `test run`), pass `--execute --force` on `deploy`/`refresh` steps that must act, and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
+3. **Switch to non-interactive CI flags.** Add `--non-interactive` to every `te` command (and `--ci <vsts|github>` on `validate`, `bpa run`, `schemacheck`, `deploy`, and `test run`), pass `--execute --force` on `deploy`/`refresh` steps that must act, and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
 4. **Adopt service principal auth.** Replace `-D -L <user> <pass>` with `te auth login -u ... -p ... -t ...` or an environment-credential pipeline step. See @te-cli-auth.
 
 ## Important differences
@@ -102,6 +110,21 @@ The recommended path from a TE2-based pipeline to the new CLI:
 - **Structured output.** Every command supports `--output-format json` for machine-readable output - see @te-cli-automation.
 - **No `start /wait` needed.** The new CLI is a regular console binary; invoke it directly in shell scripts, PowerShell, and CI tasks.
 - **Cross-platform.** The CLI runs on Windows, macOS, and Linux. Local SSAS and Power BI Desktop connections remain Windows-only.
+
+## Schema check
+
+There are two ways to run Tabular Editor 2's schema check with the new CLI:
+
+- **`te2 <model> -SC`** works as before. It checks only the tables Tabular Editor 2 checked, legacy query partitions on a provider data source, and writes the same `-T` results. Use it to move a pipeline over without changing its result.
+- **[`te schemacheck`](xref:te-cli-commands#schemacheck)** is the command for new pipelines. It also checks Power Query (M) and Direct Lake tables, and supports JSON output.
+
+Both use Tabular Editor 2's exit codes: an added or retyped source column is a warning and exits with code `0`, and a missing source column, or a legacy query that can't be read, is an error and exits with code `1`. Both honor Tabular Editor 2's schema check annotations, except `TabularEditor_AddFalseWhereClause`.
+
+Differences from Tabular Editor 2:
+
+- **Some sources are no longer checked.** A legacy query partition on Oracle, ODBC, or an OLE DB provider other than SQL Server is listed under **Not checked** and doesn't fail the run. The SQL Server OLE DB providers are checked on Windows only.
+- **The `-T` file from `te2 -SC` matches Tabular Editor 2's.** It has four results per table, named `Table '<name>' <assertion>`, so Azure DevOps keeps the test history. A table on one of the sources above gets four **Inconclusive** results. `te schemacheck --trx` writes a different file, with one result per finding.
+- **Duplicate source columns no longer stop the run.** Tabular Editor 2 showed a dialog box when a source returned the same column twice. The CLI reports it once as information.
 
 ## Related pages
 
