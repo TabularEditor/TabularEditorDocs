@@ -126,7 +126,7 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart ADDLOCAL=MainFeature /l*v C:\Temp\TE3_install.log
 ```
 
-使用“REMOVE”运行软件包，以从已安装该组件的计算机中将其移除：
+使用`REMOVE`运行软件包，以从已安装该组件的计算机中将其移除：
 
 ```powershell
 msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssistant /l*v C:\Temp\TE3_install.log
@@ -168,13 +168,13 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssista
 - 升级将从已安装该组件的计算机中将其删除
 - 现有安装将保留 AI 文件，直至下一次升级。在设置策略时，Tabular Editor 3 不会加载它们。
 
-以本地系统账户运行的部署工具不会读取计算机用户的 `HKEY_CURRENT_USER` 策略。在“HKEY_LOCAL_MACHINE”下设置策略，以便安装程序在静默部署中读取该策略。
+以本地系统账户运行的部署工具不会读取计算机用户的 `HKEY_CURRENT_USER` 策略。在`HKEY_LOCAL_MACHINE`下设置策略，以便安装程序在静默部署中读取该策略。
 
 ### 组件名称和其他 MSI 选项
 
-您还可以使用 `/package` 代替 `/i`。将“<version>”替换为实际的版本字符串。
+您还可以使用 `/package` 代替 `/i`。将`<version>`替换为实际的版本字符串。
 
-MSI 包的命名方式为“TabularEditor.<version>.<architecture>.<runtime>.msi”，例如“TabularEditor.3.27.0.x64.Net10.msi”或“TabularEditor.3.27.0.ARM64.Net8.msi”。选择适合目标计算机的架构和运行时；请参阅@system-requirements。MSI 不会安装 .NET Desktop Runtime，因此请先部署该运行时。
+MSI 包的命名方式为`TabularEditor.<version>.<architecture>.<runtime>.msi`，例如`TabularEditor.3.27.0.x64.Net10.msi`或`TabularEditor.3.27.0.ARM64.Net8.msi`。选择适合目标计算机的架构和运行时；请参阅@system-requirements。MSI 不会安装 .NET Desktop Runtime，因此请先部署该运行时。
 
 有关可用 MSI 命令行选项的详细信息，请参阅 Microsoft 官方文档：
 [Microsoft Standard Installer 命令行选项 - Win32 应用 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)

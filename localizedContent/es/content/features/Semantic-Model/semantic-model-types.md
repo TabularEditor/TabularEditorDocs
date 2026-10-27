@@ -59,7 +59,7 @@ Tabular Editor puede trabajar con varios tipos de modelos diferentes. A continua
 
 <a name="TE3Prem">3</a> - Solo funciones de Tabular Editor 3. Las operaciones realizadas a través del punto de conexión XMLA requieren una licencia Business o Enterprise. [Más información](xref:editions).
 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake en SQL solo admite grupos de cálculo, parámetros «what-if» y parámetros de campo, que crean implícitamente tablas calculadas. No se admiten tablas calculadas generales.
-<a name="DirectLakeCalcColumn">5</a> - Función de vista previa. Las columnas calculadas de las tablas de Direct Lake en OneLake deben usar el contexto de expresión «UserContext». Se evalúan en el momento de la consulta y no se materializan, por lo que no se pueden usar como claves de relación. Consulte [Directrices de Direct Lake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake) para obtener más detalles.
+<a name="DirectLakeCalcColumn">5</a> - Función de vista previa. Las columnas calculadas de las tablas de Direct Lake en OneLake deben usar el contexto de expresión `UserContext`. Se evalúan en el momento de la consulta y no se materializan, por lo que no se pueden usar como claves de relación. Consulte [Directrices de Direct Lake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake) para obtener más detalles.
 
 >[!NOTE]
 > La versión de junio de 2025 de Power BI Desktop eliminó todas las limitaciones de modelado para herramientas de terceros. Antes de eso, no se admitían varias operaciones de modelado. Consulte [Limitaciones de Power BI Desktop](xref:desktop-limitations).

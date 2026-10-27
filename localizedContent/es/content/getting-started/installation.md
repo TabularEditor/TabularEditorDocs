@@ -68,7 +68,7 @@ Para ver la clave de licencia actual del usuario activo de Windows, ejecute el s
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-También puedes usar «regedit.exe» (Editor del Registro de Windows) y navegar hasta «HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3» para ver y modificar los valores.
+También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar hasta `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -147,10 +147,10 @@ En estos casos, el instalador aplica la selección predeterminada o la selecció
 
 | Situación | Resultado |
 |--|--|
-| La línea de comandos establece «ADDLOCAL», «REMOVE» u otra propiedad de función | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` elimina las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen |
+| La línea de comandos establece `ADDLOCAL`, `REMOVE` u otra propiedad de función | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` elimina las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen |
 | La implementación desinstala la versión anterior antes de instalar la nueva, por ejemplo, una sustitución de Intune configurada para desinstalar | La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya |
 
-La política «DisableAi» anula la selección en todos los casos.
+La política `DisableAi` anula la selección en todos los casos.
 
 ### Cambiar entre los paquetes .NET 8 y .NET 10
 
@@ -160,7 +160,7 @@ Si la otra edición está instalada en una versión más reciente, la instalaci�
 
 ### Aplicar la decisión con la directiva DisableAi
 
-Un usuario que ejecute el instalador obtendrá la selección predeterminada, que incluye las funciones de IA. Establezca las @políticas «DisableAi» en «1» en «HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3» para mantener desactivadas las funciones de IA en todas las instalaciones del dispositivo. Tabular Editor 3 lee la política al iniciarse y desactiva el Asistente de IA y el servidor MCP.
+Un usuario que ejecute el instalador obtendrá la selección predeterminada, que incluye las funciones de IA. Establezca las @políticas `DisableAi` en `1` en `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` para mantener desactivadas las funciones de IA en todas las instalaciones del dispositivo. Tabular Editor 3 lee la política al iniciarse y desactiva el Asistente de IA y el servidor MCP.
 
 A partir de la versión 3.27.0, el instalador también lee la directiva:
 
@@ -168,13 +168,13 @@ A partir de la versión 3.27.0, el instalador también lee la directiva:
 - Una actualización elimina el componente de un equipo que lo tiene.
 - Una instalación existente conserva los archivos de IA hasta la siguiente actualización. Tabular Editor 3 no los carga mientras la política esté establecida.
 
-Una herramienta de implementación que se ejecuta como la cuenta del sistema local no lee las políticas `HKEY_CURRENT_USER` de los usuarios del equipo. Establece la política en «HKEY_LOCAL_MACHINE» para que el instalador la lea en una implementación silenciosa.
+Una herramienta de implementación que se ejecuta como la cuenta del sistema local no lee las políticas `HKEY_CURRENT_USER` de los usuarios del equipo. Establece la política en `HKEY_LOCAL_MACHINE` para que el instalador la lea en una implementación silenciosa.
 
 ### Nombres de paquetes y otras opciones de MSI
 
-También puedes usar `/package` en lugar de `/i`. Sustituye «<version>» por la cadena de la versión real.
+También puedes usar `/package` en lugar de `/i`. Sustituye `<version>` por la cadena de la versión real.
 
-Los paquetes MSI se denominan «TabularEditor.<version>.<architecture>.<runtime>.msi», por ejemplo, «TabularEditor.3.27.0.x64.Net10.msi» o «TabularEditor.3.27.0.ARM64.Net8.msi». Elija la arquitectura y el tiempo de ejecución que se adapten a los equipos de destino; consulte @system-requirements. El MSI no instala .NET Desktop Runtime, así que despliéguelo primero.
+Los paquetes MSI se denominan `TabularEditor.<version>.<architecture>.<runtime>.msi`, por ejemplo, `TabularEditor.3.27.0.x64.Net10.msi` o `TabularEditor.3.27.0.ARM64.Net8.msi`. Elija la arquitectura y el tiempo de ejecución que se adapten a los equipos de destino; consulte @system-requirements. El MSI no instala .NET Desktop Runtime, así que despliéguelo primero.
 
 Para obtener más información sobre las opciones de línea de comandos de MSI disponibles, consulte la documentación oficial de Microsoft:
 [Opciones de la línea de comandos del instalador estándar de Microsoft - Aplicaciones Win32 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)

@@ -175,7 +175,7 @@ El archivo .platform contiene metadatos sobre el elemento del modelo semántico,
 Este archivo es un archivo JSON que no debe editarse manualmente a menos que comprenda el formato de los elementos de Fabric.
 
 > [!NOTE]
-> Esta sincronización se aplica a un modelo cuyos metadatos llevan un nombre o una descripción. Un modelo semántico de Proyecto de Power BI (PBIP) creado por Power BI Desktop no contiene ninguno de los dos en su TMDL: ambos solo existen en el archivo «.platform».
+> Esta sincronización se aplica a un modelo cuyos metadatos llevan un nombre o una descripción. Un modelo semántico de Proyecto de Power BI (PBIP) creado por Power BI Desktop no contiene ninguno de los dos en su TMDL: ambos solo existen en el archivo `.platform`.
 
 ### definition.pbism
 
@@ -193,9 +193,9 @@ Todos los archivos auxiliares se pueden guardar individualmente usando Ctrl+S o 
 
 ### Opciones de usuario (.tmuo)
 
-Un archivo «.tmuo» contiene su propia configuración local del equipo para un modelo: la base de datos del área de trabajo, las anulaciones de credenciales de la fuente de datos, la configuración de importación de tablas, las anulaciones de actualización y las concesiones de permisos de IA. Se encuentra junto al modelo y lleva el nombre de este y su nombre de usuario de Windows, de modo que varios desarrolladores pueden trabajar en el mismo modelo sin interferir entre sí.
+Un archivo `.tmuo` contiene su propia configuración local del equipo para un modelo: la base de datos del área de trabajo, las anulaciones de credenciales de la fuente de datos, la configuración de importación de tablas, las anulaciones de actualización y las concesiones de permisos de IA. Se encuentra junto al modelo y lleva el nombre de este y su nombre de usuario de Windows, de modo que varios desarrolladores pueden trabajar en el mismo modelo sin interferir entre sí.
 
-Las credenciales que contiene están cifradas con tu clave de usuario de Windows, lo que significa que el archivo no se puede compartir de forma útil. Añada «*.tmuo» a «.gitignore».
+Las credenciales que contiene están cifradas con tu clave de usuario de Windows, lo que significa que el archivo no se puede compartir de forma útil. Añada `*.tmuo` a `.gitignore`.
 
 Consulte @user-options para ver el contenido completo y dónde se escribe el archivo para cada formato de modelo.
 

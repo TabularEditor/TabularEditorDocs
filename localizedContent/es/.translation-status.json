@@ -1871,13 +1871,6 @@
     "pinned": 0,
     "total": 465,
     "completionPercent": 100.0,
-    "failures": 1
-  },
-  "failures": {
-    "how-tos/xmla-as-connectivity.md": {
-      "error": "link targets 29 -> 28 (missing ['https://learn.microsoft.com/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names'], added [])",
-      "at": "2026-10-23T11:04:25Z",
-      "sourceHash": "sha256:1327f49f78176015f7f08cd552b754ea50c38b1c375c04b77da2637df323b550"
-    }
+    "failures": 0
   }
 }

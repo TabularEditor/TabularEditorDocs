@@ -54,9 +54,9 @@ Tabular Editor no actualiza los metadatos lingüísticos conservados, por lo que
 
 ## Credenciales del origen de datos
 
-De forma predeterminada, Tabular Editor no guarda contraseñas, claves de cuenta ni otros secretos cuando guarda un modelo en el disco. Por lo tanto, un modelo cargado desde un archivo puede tener orígenes de datos con un secreto faltante. El asistente de implementación comprueba esto antes de realizar la implementación. Un secreto se considera ausente cuando está vacío o es «********». El asistente comprueba:
+De forma predeterminada, Tabular Editor no guarda contraseñas, claves de cuenta ni otros secretos cuando guarda un modelo en el disco. Por lo tanto, un modelo cargado desde un archivo puede tener orígenes de datos con un secreto faltante. El asistente de implementación comprueba esto antes de realizar la implementación. Un secreto se considera ausente cuando está vacío o es `********`. El asistente comprueba:
 
-- un origen de datos de proveedor cuya cadena de conexión contiene una palabra clave de contraseña, como «Password» o «Pwd»,
+- un origen de datos de proveedor cuya cadena de conexión contiene una palabra clave de contraseña, como `Password` o `Pwd`,
 - un origen de datos del proveedor que suplanta a una cuenta de Windows específica,
 - un origen de datos estructurado que utiliza la autenticación de Windows o de nombre de usuario/contraseña, o una clave de cuenta.
 

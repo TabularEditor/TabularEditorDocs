@@ -61,7 +61,7 @@ HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor
 
 | 设置类型 | 注册表类型 | 注意事项 |
 |--|--|--|
-| 开/关策略 | `REG_DWORD` | 任何非零值都会强制执行该策略。“0”和不存在该值都表示不强制执行该策略。|
+| 开/关策略 | `REG_DWORD` | 任何非零值都会强制执行该策略。`0`和不存在该值都表示不强制执行该策略。|
 | 选择 | `REG_SZ` | 选择的名称，例如 `Read`，这是管理模板写入的内容。也接受包含选项在列表中的位置的 `REG_DWORD`。|
 | 数字 | `REG_DWORD` | 管理模板写入的内容。也接受包含该数字的 `REG_SZ`。|
 | 列表 | `REG_MULTI_SZ` | 每行一个条目。也接受条目由分号分隔的 `REG_SZ`。|
@@ -77,14 +77,14 @@ Tabular Editor 在启动时读取一次策略值。更改将在您下次启动�
 |--|--|--|
 | DisableUpdates | TE3、TE2 | Tabular Editor 将不会检查是否有更新版本在线可用。用户也无法手动检查更新。|
 | DisableCSharpScripts | TE3、TE2 | Tabular Editor 不允许用户创建或执行 C# 脚本。|
-| DisableMacros | TE3、TE2 | Tabular Editor 不允许用户保存或运行宏。应用程序启动时，不会加载存储在“%LocalAppData%”文件夹中的宏。|
+| DisableMacros | TE3、TE2 | Tabular Editor 不允许用户保存或运行宏。应用程序启动时，不会加载存储在`%LocalAppData%`文件夹中的宏。|
 | DisableBpaDownload | TE3、CLI、TE2 | 无法从网络下载 Best Practice Analyzer 规则。存储在本地或与模型一起存储的规则仍可正常使用。|
 | DisableWebDaxFormatter | TE3、CLI、TE2 | 已禁用将代码发送到 daxformatter.com 的 DAX 格式化工具。Tabular Editor 3 仍提供其内置的格式化工具，该工具不会通过网络发送任何内容。|
 | DisableErrorReports | TE3 | 用户无法向 Tabular Editor 支持团队发送错误或崩溃报告。|
 | DisableTelemetry | TE3、CLI | 不收集匿名使用数据，也不将此类数据发送给 Tabular Editor 支持团队。|
 | DisableDaxOptimizer | TE3 | DAX Optimizer 集成不可用。|
-| DisableDaxOptimizerUpload | TE3 | 用户无法通过 DAX Optimizer 集成上传 VertiPaq Analyzer 文件。当强制执行“DisableDaxOptimizer”时隐含。|
-| RequireDaxOptimizerObfuscation | TE3 | 用户无法通过 DAX 优化器集成上传明文 VertiPaq 分析器文件；只能上传混淆的文件。当强制执行“DisableDaxOptimizer”或“DisableDaxOptimizerUpload”时隐含。|
+| DisableDaxOptimizerUpload | TE3 | 用户无法通过 DAX Optimizer 集成上传 VertiPaq Analyzer 文件。当强制执行`DisableDaxOptimizer`时隐含。|
+| RequireDaxOptimizerObfuscation | TE3 | 用户无法通过 DAX 优化器集成上传明文 VertiPaq 分析器文件；只能上传混淆的文件。当强制执行`DisableDaxOptimizer`或`DisableDaxOptimizerUpload`时隐含。|
 | DisableDaxPackageManager | TE3 | DAX 包管理器不可用。|
 | DisableAi | TE3 | 所有 AI 功能均已关闭：AI 助手、MCP 服务器和所有由 AI 提供支持的功能均不可用，应用程序启动时不会加载任何与 AI 相关的项，并且所有存储的提供商配置（包括 API 密钥）都将被清除。|
 | DisableAiChat | TE3 | AI 助手聊天面板不可用。其他 AI 功能（包括 MCP 服务器）不受影响。|
@@ -126,7 +126,7 @@ CLI 没有版本，因此，无论计算机持有何种许可证，CLI 都会直
 
 |值|可接受的值|限制对……的访问|
 |--|--|--|
-| MaxModelMetadataAccess | 拒绝、读取、写入 | 打开模型的元数据：表、列和度量值名称、表达式、描述、Best Practice Analyzer 结果和 VertiPaq 统计信息。`Write` 还允许助手对模型运行其自身的 C# 脚本。如果设置为“拒绝”，则完全不会发送有关打开的模型的任何信息：没有模型摘要，没有模型已更改的通知，也没有当前所选内容。|
+| MaxModelMetadataAccess | 拒绝、读取、写入 | 打开模型的元数据：表、列和度量值名称、表达式、描述、Best Practice Analyzer 结果和 VertiPaq 统计信息。`Write` 还允许助手对模型运行其自身的 C# 脚本。如果设置为`Deny`，则完全不会发送有关打开的模型的任何信息：没有模型摘要，没有模型已更改的通知，也没有当前所选内容。|
 | MaxModelDataAccess | 拒绝、读取 | 来自模型的数据值，即 DAX 查询的结果。|
 | MaxBpaAccess | 拒绝、读取、写入 | Best Practice Analyzer 规则。`Read` 允许列出规则并运行分析；`Write` 还允许添加和更改规则。|
 | MaxDocumentsAccess | 拒绝、读取、写入 | 用户已打开的文档，例如 C# 脚本和 DAX 查询。`Read` 允许读取其内容；`Write` 还允许对其进行更改。|
@@ -137,7 +137,7 @@ CLI 没有版本，因此，无论计算机持有何种许可证，CLI 都会直
 | McpMaxDocumentsAccess | 拒绝、读取、写入 | |
 | McpMaxMacrosAccess | 拒绝、读、写 | |
 
-五个“McpMax…”值仅适用于 MCP 服务器。当其中一个未设置时，MCP 服务器将继承相应的 `Max...` 限制。它们只能降低该限制，绝不能提高该限制，因此无人值守代理的权限绝不能超过交互式助手的权限。
+五个`McpMax...`值仅适用于 MCP 服务器。当其中一个未设置时，MCP 服务器将继承相应的 `Max...` 限制。它们只能降低该限制，绝不能提高该限制，因此无人值守代理的权限绝不能超过交互式助手的权限。
 
 ### AI 提供程序
 
@@ -148,12 +148,12 @@ CLI 没有版本，因此，无论计算机持有何种许可证，CLI 都会直
 | AiModel | 名称 | | 锁定模型或 Azure OpenAI 部署名称。聊天面板中的模型选择器被一个普通指示器替换，因此用户无法切换模型。|
 | AiOrganizationId | 名称 | | 锁定向其计费的 OpenAI 组织请求。|
 | AiProjectId | 名称 | | 锁定 OpenAI 项目请求的计费对象。|
-| AiAllowedProviders | 列表 | 上述任何提供程序名称 | 限制用户可以配置的提供程序。无论是否列出，`AiProvider` 设置的提供商均被允许，并且始终提供“无” - 允许列表并不是阻止用户关闭助手的办法。|
+| AiAllowedProviders | 列表 | 上述任何提供程序名称 | 限制用户可以配置的提供程序。无论是否列出，`AiProvider` 设置的提供商均被允许，并且始终提供`None` - 允许列表并不是阻止用户关闭助手的办法。|
 | AiAllowedEndpointHosts | 列表 | 主机名 | 限制端点可以指向的主机，例如 `gateway.contoso.com` 或 `*.contoso.com`。|
 
 锁定的设置在**工具 > 首选项 > AI 功能 > AI 助手**下显示为只读，无论用户之前选择了什么，AI 助手都会使用锁定的配置。用户的个人偏好设置中不会写入任何内容，因此如果删除该策略，其提供商、端点、模型和 API 密钥将恢复。API 密钥绝不会通过策略分发。
 
-主机名仅与端点 URL 的主机部分进行匹配。匹配时忽略大小写，并忽略端口。开头的“*.”涵盖域的子域，但不涵盖域本身，因此如果两者都需要，请同时列出。每当设置端点时，该列表都适用于每个提供商，因此不能使用基准 URL 覆盖来绕过它。
+主机名仅与端点 URL 的主机部分进行匹配。匹配时忽略大小写，并忽略端口。开头的`*.`涵盖域的子域，但不涵盖域本身，因此如果两者都需要，请同时列出。每当设置端点时，该列表都适用于每个提供商，因此不能使用基准 URL 覆盖来绕过它。
 
 政策不允许的配置将被拒绝，AI 助手会说明是哪条规则拒绝了该配置，而不是发送请求：不在允许列表中的提供商、不在主机允许列表中的端点主机、在适用主机允许列表时不是有效 URL 的端点，或者根本没有端点的已锁定 Azure OpenAI 或自定义提供商。
 
@@ -180,7 +180,7 @@ Tabular Editor 3 保留 AI 助手和 MCP 服务器活动的本地记录，包括
 |值|类型|作用|
 |--|--|--|
 | AiAuditLogPath | 路径 | 重定向审计日志，以便集中收集。支持指向网络共享的 UNC 路径。未设置策略时，日志将写入 `%LocalAppData%\TabularEditor3\AI\audit`，每天一个 `ai-audit-<date>.jsonl` 文件，记录的脚本位于 `audit\scripts\<date>` 下。|
-| AiAuditLogRetentionDays | 数字，0 至 3650 | 保留多少天的审计日志；较旧的文件将被删除。“0”表示保留所有内容。默认为 30 天。|
+| AiAuditLogRetentionDays | 数字，0 至 3650 | 保留多少天的审计日志；较旧的文件将被删除。`0`表示保留所有内容。默认为 30 天。|
 
 ## 没有企业版会发生什么
 
@@ -200,7 +200,7 @@ Tabular Editor 3 保留 AI 助手和 MCP 服务器活动的本地记录，包括
 
 ## 使用管理模板
 
-Tabular Editor 3.27 及更高版本会安装一对组策略管理模板，因此上述策略可以从组策略编辑器中设置，而无需编辑注册表。您可以在安装文件夹的“Policies”文件夹中找到它们，默认情况下，该文件夹为“C:\Program Files\Tabular Editor 3\Policies”：
+Tabular Editor 3.27 及更高版本会安装一对组策略管理模板，因此上述策略可以从组策略编辑器中设置，而无需编辑注册表。您可以在安装文件夹的`Policies`文件夹中找到它们，默认情况下，该文件夹为`C:\Program Files\Tabular Editor 3\Policies`：
 
 - `TabularEditorApS.admx`
 - `en-US\TabularEditorApS.adml`
@@ -228,7 +228,7 @@ Tabular Editor 3 和 CLI 共享的策略直接位于**Tabular Editor**下方。�
 
 将策略设置为**已启用**会写入其注册表值。将其设置为**禁用**，或将其保留为**未配置**，则表示该策略未实施。模板不会写入旧的 `Kapacity\Tabular Editor` 键，因此，如果策略还需要应用于 Tabular Editor 2，请手动设置该键。
 
-对于企业版策略，**Disabled** 会删除注册表值，而不是写入“0”。这是有意的：只要存在 Enterprise 值，就会将 AI 助手和 MCP 服务器置于 Enterprise 许可证检查之后，因此管理员刚刚禁用的策略绝不能留下任何值。
+对于企业版策略，**Disabled** 会删除注册表值，而不是写入`0`。这是有意的：只要存在 Enterprise 值，就会将 AI 助手和 MCP 服务器置于 Enterprise 许可证检查之后，因此管理员刚刚禁用的策略绝不能留下任何值。
 
 ## 禁用网络通信
 

@@ -19,7 +19,7 @@ applies_to:
 ---
 # Cambiar el nombre de objetos en una vista de métrica
 
-Esta guía práctica muestra cómo cambiar el nombre de un campo de una vista de métrica, y el mismo patrón se aplica a todas las colecciones de una vista de métrica: «Campos», «Medidas», «Dimensiones» y «Uniones».
+Esta guía práctica muestra cómo cambiar el nombre de un campo de una vista de métrica, y el mismo patrón se aplica a todas las colecciones de una vista de métrica: `Fields`, `Measures`, `Dimensions` y `Joins`.
 
 > [!NOTE]
 > Estas guías prácticas están dirigidas a Tabular Editor 3.26.2 y versiones posteriores, ya que las versiones anteriores no admiten las funciones de la vista de métricas v1.1 que se muestran aquí.

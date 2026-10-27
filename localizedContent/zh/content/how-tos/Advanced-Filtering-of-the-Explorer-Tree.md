@@ -41,7 +41,7 @@ applies_to:
 
 在**筛选条件**文本框中，`?`匹配任意单个字符，`*`匹配任意零个或多个字符的序列，并且与简单搜索一样，匹配不区分大小写。`*sales*`给出与上述相同的结果，而`sales*`仅显示名称以“sales”开头的对象。
 
-在“按父级”模式下搜索“sales*”将得到以下结果：
+在“按父级”模式下搜索`sales*`将得到以下结果：
 
 ![在“按父级”模式下搜索“sales*”的结果](~/content/assets/images/advanced-filtering-of-the-explorer-tree-07.png)
 
@@ -49,7 +49,7 @@ applies_to:
 
 ![在“按子级”模式下搜索“sales*”的结果](~/content/assets/images/advanced-filtering-of-the-explorer-tree-08.png)
 
-对“sales*”进行扁平搜索，显示信息列（**Ctrl+F1**），以查看每个对象的详细信息：
+对`sales*`进行扁平搜索，显示信息列（**Ctrl+F1**），以查看每个对象的详细信息：
 
 ![sales* 的平面搜索结果，信息列显示父级和类型](~/content/assets/images/advanced-filtering-of-the-explorer-tree-09.png)
 

@@ -41,7 +41,7 @@ Ahora aparece la tabla «Empleado», porque algunas de sus columnas contienen la
 
 En el cuadro de texto **Filtro**, `?` coincide con cualquier carácter individual y `*` coincide con cualquier secuencia de cero o más caracteres, y la coincidencia no distingue entre mayúsculas y minúsculas, como en la búsqueda simple. `*sales*` da los mismos resultados que los anteriores, y `sales*` muestra solo los objetos cuyos nombres comienzan por «sales».
 
-Una búsqueda de «sales*» en el modo «Por elemento principal» da estos resultados:
+Una búsqueda de `sales*` en el modo «Por elemento principal» da estos resultados:
 
 ![Resultados de la búsqueda de sales* en el modo «Por elemento principal»](~/content/assets/images/advanced-filtering-of-the-explorer-tree-07.png)
 
@@ -49,7 +49,7 @@ La misma búsqueda en el modo «Por elemento secundario» da estos resultados:
 
 ![Resultados de la búsqueda de sales* en el modo «Por elemento secundario»](~/content/assets/images/advanced-filtering-of-the-explorer-tree-08.png)
 
-Búsqueda plana de «sales*», con las columnas de información mostradas (**Ctrl+F1**) para obtener detalles sobre cada objeto:
+Búsqueda plana de `sales*`, con las columnas de información mostradas (**Ctrl+F1**) para obtener detalles sobre cada objeto:
 
 ![Resultados de la búsqueda plana para sales* con columnas de información que muestran el elemento principal y el tipo](~/content/assets/images/advanced-filtering-of-the-explorer-tree-09.png)
 
@@ -57,7 +57,7 @@ Puede colocar cualquier número de comodines en cualquier parte de la cadena.
 
 ## Búsqueda Dynamic LINQ
 
-El filtro también acepta expresiones [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions), la sintaxis que utilizan las [reglas del Best Practice Analyzer](xref:best-practice-analyzer). Inicie la cadena de búsqueda con «:`» (dos puntos) para cambiar al modo Dynamic LINQ. Por ejemplo, este filtro muestra todos los objetos cuyo nombre termina en «Key» (distingue entre mayúsculas y minúsculas):
+El filtro también acepta expresiones [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions), la sintaxis que utilizan las [reglas del Best Practice Analyzer](xref:best-practice-analyzer). Inicie la cadena de búsqueda con `:` (dos puntos) para cambiar al modo Dynamic LINQ. Por ejemplo, este filtro muestra todos los objetos cuyo nombre termina en «Key» (distingue entre mayúsculas y minúsculas):
 
 ```text
 :Name.EndsWith("Key")

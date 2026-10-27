@@ -24,12 +24,12 @@ Cuando abre un modelo desde el disco, el archivo se crea junto a él, con el mis
 
 | Lo que ha abierto | Archivo de opciones de usuario |
 |---|---|
-| `SpaceParts.bim`, o cualquier archivo `.bim` / `.pbit` / `database.json` | `SpaceParts.<Nombre de usuario>.tmuo`, junto a él |
-| Un archivo «model.tmdl» o «database.tmdl» | «model.<Nombre de usuario>.tmuo`, junto a él |
-| Una carpeta que contiene `database.json` | `database.<Nombre de usuario>.tmuo`, en esa carpeta |
-| Una carpeta que contiene archivos de modelo del Lenguaje de definición de modelo tabular (TMDL) | `model.<Nombre de usuario>.tmuo`, en esa carpeta |
+| `SpaceParts.bim`, o cualquier archivo `.bim` / `.pbit` / `database.json` | `SpaceParts.<UserName>.tmuo`, junto a él |
+| Un archivo `model.tmdl` o `database.tmdl` | `model.<UserName>.tmuo`, junto a él |
+| Una carpeta que contiene `database.json` | `database.<UserName>.tmuo`, en esa carpeta |
+| Una carpeta que contiene archivos de modelo del Lenguaje de definición de modelo tabular (TMDL) | `model.<UserName>.tmuo`, en esa carpeta |
 
-TMDL siempre utiliza el prefijo «model», para mantener la continuidad con las versiones anteriores a «database.tmdl».
+TMDL siempre utiliza el prefijo `model`, para mantener la continuidad con las versiones anteriores a `database.tmdl`.
 
 En el caso de un modelo abierto a través de una conexión y no desde el disco, no hay ningún lugar aparte del modelo donde colocar el archivo, por lo que se guarda por servidor y base de datos en `%LocalAppData%\TabularEditor3\UserOptions\`.
 
@@ -114,9 +114,9 @@ Una anulación cuyo origen de datos ya no exista en el modelo se eliminará la p
 | `RowLimitClause`, `IdentifierQuoting` | Número | No con sus valores predeterminados. |
 | `Schema` | Cadena | Establecida. |
 
-En `Options` es donde acaba todo lo específico de un proveedor, como cadenas simples: un almacén de Snowflake es `Options.warehouse`, un espacio de trabajo de OneLake es `Options.workspaceid`. Las propiedades «…Key» son los *nombres* de las claves de la cadena de conexión, como «PWD», no secretos.
+En `Options` es donde acaba todo lo específico de un proveedor, como cadenas simples: un almacén de Snowflake es `Options.warehouse`, un espacio de trabajo de OneLake es `Options.workspaceid`. Las propiedades `…Key` son los *nombres* de las claves de la cadena de conexión, como `PWD`, no secretos.
 
-`Password` es el único valor cifrado aquí. `UserId`, `Server`, `Database`, `Dsn` y todo lo que hay en `Options` se almacenan como texto sin formato, por lo que debe tratar el archivo como confidencial incluso cuando no contenga ninguna contraseña. Un token de acceso de Power BI se almacena como «Password» y está cifrado.
+`Password` es el único valor cifrado aquí. `UserId`, `Server`, `Database`, `Dsn` y todo lo que hay en `Options` se almacenan como texto sin formato, por lo que debe tratar el archivo como confidencial incluso cuando no contenga ninguna contraseña. Un token de acceso de Power BI se almacena como `Password` y está cifrado.
 
 ### Implementación
 

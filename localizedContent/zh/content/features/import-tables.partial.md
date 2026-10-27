@@ -116,11 +116,11 @@ Tabular Editor 连接到相关数据源，根据需要提示输入凭据，并�
 
 在上面的截图中，Tabular Editor 检测到两个尚未导入的新源列（`Color` 和 `Material`），并标记了两个要删除的现有列（`Colour` 和 `Substance Type`），因为它们的名称不再与源列匹配。重命名检测仅适用于简单更改。在这里，在源中，`Colour` 被重命名为 `Color`，`Substance Type` 被重命名为 `Material`，但名称差异较大，以至于 Tabular Editor 将每次重命名都报告为一次删除和一次添加。
 
-按住 **Ctrl** 键，在“架构更改”对话框中选择“Color”（导入）和“Colour”（移除）行，然后右键单击，将移除和添加合并为单个 SourceColumn 更新。引用 `[Colour]` 的现有 DAX 公式仍可正常工作：
+按住 **Ctrl** 键，在“架构更改”对话框中选择`Color`（导入）和`Colour`（移除）行，然后右键单击，将移除和添加合并为单个 SourceColumn 更新。引用 `[Colour]` 的现有 DAX 公式仍可正常工作：
 
 ![合并 Sourcecolumn 更新](~/content/assets/images/combine-sourcecolumn-update.png)
 
-如果您只想更新 `SourceColumn` 属性并保留导入列的名称，请在下拉列表中清除“名称”更新操作：
+如果您只想更新 `SourceColumn` 属性并保留导入列的名称，请在下拉列表中清除 `Name` 更新操作：
 
 ![取消选择名称](~/content/assets/images/deselect-name.png)
 
@@ -145,7 +145,7 @@ Tabular Editor 连接到相关数据源，根据需要提示输入凭据，并�
 6. 如果架构发生更改，则会显示上图所示的**应用架构更改**对话框。
 
 > [!NOTE]
-> 如果您的 M 表达式组合来自多个源的数据（例如通过 M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin) 函数），您可能需要将 Power BI 服务中语义模型的[**隐私级别**](https://powerbi.microsoft.com/blog/privacy-levels-for-cloud-data-sources/)从“私有”更改为“组织”。否则，您可能会看到一个错误，指出“`<Query>` 引用了其他查询或步骤，因此可能无法直接访问数据源。请重建此数据组合。`。即使未启用**使用 Analysis Services 进行更改检测**，也可能出现此错误，因为当 M 表达式对于 Tabular Editor 3 的内置架构检测来说过于复杂时，Tabular Editor 3 将自动回退到此检测机制。
+> 如果您的 M 表达式组合来自多个源的数据（例如通过 M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin) 函数），您可能需要将 Power BI 服务中语义模型的[**隐私级别**](https://powerbi.microsoft.com/blog/privacy-levels-for-cloud-data-sources/)从“私有”更改为“组织”。否则，您可能会看到一个错误，指出`<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`。即使未启用**使用 Analysis Services 进行更改检测**，也可能出现此错误，因为当 M 表达式对于 Tabular Editor 3 的内置架构检测来说过于复杂时，Tabular Editor 3 将自动回退到此检测机制。
 
 ### 通过 Analysis Services 导入新表
 

@@ -26,7 +26,7 @@ Esta página te guía a través del proceso de creación de un nuevo modelo tabu
 
 ## Creación de un nuevo modelo
 
-- En el menú Archivo, seleccione Nuevo > Modelo... o pulse «CTRL+N». 
+- En el menú Archivo, seleccione Nuevo > Modelo... o pulse `CTRL+N`. 
 
 ![Nuevo modelo](~/content/assets/images/new-as-model-new-model.png)
 
@@ -67,11 +67,11 @@ En nuestro ejemplo, establecemos las siguientes propiedades:
 | Protocolo | `tds` |
 | Base de datos | `AdventureWorksDW2017` |
 | Servidor | `localhost` |
-| AuthenticationKind | «ServiceAccount» |
+| AuthenticationKind | `ServiceAccount` |
 
 Pulse Guardar (Ctrl+S). Se le pedirá que proporcione una ruta y un nombre de archivo para el archivo Model.bim, que contendrá los metadatos del modelo que ha creado hasta ahora. También puede guardar el modelo como una estructura de carpetas (Archivo > Guardar en carpeta...), lo cual se recomienda si tiene previsto integrar los metadatos de su modelo en un entorno con control de versiones. Si está utilizando una base de datos del área de trabajo, Tabular Editor 3 también sincronizará los metadatos con la instancia conectada de Analysis Services.
 
-A continuación, añade una nueva tabla al modelo haciendo clic con el botón derecho en la carpeta «Tablas» y eligiendo «Crear > Tabla» (también puedes pulsar Alt+5). Ponga un nombre a la tabla; en nuestro ejemplo, «Internet Sales». Expanda la tabla, localice la partición en la tabla e introduzca la siguiente consulta M como expresión de partición para rellenar la tabla con datos:
+A continuación, añade una nueva tabla al modelo haciendo clic con el botón derecho en la carpeta «Tablas» y eligiendo «Crear > Tabla» (también puedes pulsar Alt+5). Ponga un nombre a la tabla; en nuestro ejemplo, `Internet Sales`. Expanda la tabla, localice la partición en la tabla e introduzca la siguiente consulta M como expresión de partición para rellenar la tabla con datos:
 
 ```M
 let

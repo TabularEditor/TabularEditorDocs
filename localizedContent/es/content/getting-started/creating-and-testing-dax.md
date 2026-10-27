@@ -46,7 +46,7 @@ La vista **Editor de expresiones** se utiliza para proporcionar la expresión DA
 
 ![Añadir medida Editar DAX](~/content/assets/images/add-measure-edit-dax.png)
 
-El cuadro desplegable situado en la esquina superior izquierda del **Editor de expresiones** se utiliza para cambiar entre las diferentes propiedades DAX del objeto seleccionado actualmente. Por ejemplo, en las versiones más recientes de Analysis Services, las medidas tienen una propiedad «Expression», así como una [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Otros tipos de objetos pueden tener diferentes propiedades que contengan código DAX. Por ejemplo, los [KPI](https://docs.microsoft.com/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) tienen tres propiedades DAX diferentes. Para añadir un KPI en Tabular Editor, haga clic derecho en una medida y elija **Crear > KPI**.
+El cuadro desplegable situado en la esquina superior izquierda del **Editor de expresiones** se utiliza para cambiar entre las diferentes propiedades DAX del objeto seleccionado actualmente. Por ejemplo, en las versiones más recientes de Analysis Services, las medidas tienen una propiedad `Expression`, así como una [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Otros tipos de objetos pueden tener diferentes propiedades que contengan código DAX. Por ejemplo, los [KPI](https://docs.microsoft.com/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) tienen tres propiedades DAX diferentes. Para añadir un KPI en Tabular Editor, haga clic derecho en una medida y elija **Crear > KPI**.
 
 ![Editar KPI](~/content/assets/images/editing-kpis.png)
 
@@ -54,7 +54,7 @@ Si quieres que tu medida esté oculta, simplemente haz clic derecho y elige la o
 
 ## Otras propiedades de las medidas
 
-Además de las propiedades «Nombre», «Expresión» y «Oculto», puede utilizar la vista **Propiedades** para revisar y editar el valor de todas las propiedades de los objetos seleccionados actualmente en el **Explorador TOM**. En el caso de las medidas, aquí es donde puede establecer la «Cadena de formato», por ejemplo. Para obtener más información, consulte [Vista de propiedades](xref:properties-view).
+Además de las propiedades `Name`, `Expression` y `Hidden`, puede utilizar la vista **Propiedades** para revisar y editar el valor de todas las propiedades de los objetos seleccionados actualmente en el **Explorador TOM**. En el caso de las medidas, aquí es donde puede establecer `Format String`, por ejemplo. Para obtener más información, consulte [Vista de propiedades](xref:properties-view).
 
 # Añadir columnas calculadas
 
@@ -143,7 +143,7 @@ El seguimiento se aplica a un único objeto seleccionado. Si se seleccionan vari
 
 # Carpetas de visualización
 
-Cuando tu modelo empiece a tener un número considerable de medidas, una buena práctica es organizarlas mediante carpetas de visualización. En Tabular Editor, para crear una carpeta de visualización, edita la propiedad «Carpeta de visualización» a través de la vista **Propiedades** o, alternativamente, haz clic con el botón derecho en la(s) medida(s) y selecciona la opción **Crear > Carpeta de visualización**.
+Cuando tu modelo empiece a tener un número considerable de medidas, una buena práctica es organizarlas mediante carpetas de visualización. En Tabular Editor, para crear una carpeta de visualización, edita la propiedad `Display Folder` a través de la vista **Propiedades** o, alternativamente, haz clic con el botón derecho en la(s) medida(s) y selecciona la opción **Crear > Carpeta de visualización**.
 
 También puede cortar/copiar/pegar o arrastrar y soltar objetos entre carpetas de visualización.
 

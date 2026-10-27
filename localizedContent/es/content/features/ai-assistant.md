@@ -86,10 +86,10 @@ Seleccione **Anthropic** como proveedor e introduzca su clave de API. El nombre 
 Seleccione **Azure OpenAI** como proveedor y configure estos campos:
 
 - **Clave de API**: la clave de acceso a tu recurso de Azure OpenAI
-- **Punto de conexión del servicio**: la URL del recurso, por ejemplo, `https://your-resource.openai.azure.com`. El certificado SSL se emite para «*.openai.azure.com», por lo que una dirección «*.privatelink.openai.azure.com» no supera la validación del certificado.
+- **Punto de conexión del servicio**: la URL del recurso, por ejemplo, `https://your-resource.openai.azure.com`. El certificado SSL se emite para `*.openai.azure.com`, por lo que una dirección `*.privatelink.openai.azure.com` no supera la validación del certificado.
 - **Implementación**: el nombre de la implementación que se muestra en la columna **Nombre** de **Implementaciones**
 
-Azure OpenAI requiere el nombre de la implementación en cada llamada a la API. El nombre se establece cuando se crea la implementación y, a menudo, coincide con el modelo al que sirve, por ejemplo, «gpt-4o», pero puede ser diferente. Si introduce el nombre del recurso o un nombre de modelo que no existe como implementación, la solicitud fallará.
+Azure OpenAI requiere el nombre de la implementación en cada llamada a la API. El nombre se establece cuando se crea la implementación y, a menudo, coincide con el modelo al que sirve, por ejemplo, `gpt-4o`, pero puede ser diferente. Si introduce el nombre del recurso o un nombre de modelo que no existe como implementación, la solicitud fallará.
 
 Encuentra el nombre de la implementación en el [portal de Azure AI Foundry](https://ai.azure.com):
 
@@ -123,13 +123,13 @@ Estas herramientas alojan modelos con una API compatible con OpenAI, en la estac
 ### Ejemplo: Ollama
 
 1. [Descarga e instala Ollama](https://ollama.com/download)
-2. Extraiga un modelo, por ejemplo, «ollama pull llama3.1».
+2. Extraiga un modelo, por ejemplo, `ollama pull llama3.1`.
 3. Inicie el servidor de Ollama. Se inicia automáticamente después de la instalación, de forma predeterminada en el puerto 11434.
 4. En Tabular Editor, vaya a **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**
 5. Establezca **Elegir proveedor** en **Personalizado (compatible con OpenAI)**
 6. Establezca **Punto de conexión del servicio** en `http://localhost:11434/v1`
 7. Establezca **Nombre del modelo** como el modelo que ha extraído, por ejemplo, `llama3.1`.
-8. Establezca **Clave de API** en cualquier valor que no esté vacío, por ejemplo, «ollama». Ollama no requiere autenticación, pero el campo no puede estar en blanco.
+8. Establezca **Clave de API** en cualquier valor que no esté vacío, por ejemplo, `ollama`. Ollama no requiere autenticación, pero el campo no puede estar en blanco.
 
 ### Ejemplo: LM Studio
 
@@ -166,10 +166,10 @@ Configura un modelo de OpenAI implementado en Microsoft Foundry, como GPT-4o o G
    - `https://your-resource.services.ai.azure.com/openai/v1`
    - `https://your-resource.openai.azure.com/openai/v1`
 4. Introduzca su **clave de API** de Foundry.
-5. Establece **Nombre del modelo** como el nombre de tu implementación, por ejemplo, «gpt-5.4-mini».
+5. Establece **Nombre del modelo** como el nombre de tu implementación, por ejemplo, `gpt-5.4-mini`.
 
 > [!NOTE]
-> El portal de Microsoft Foundry no muestra la URL base. Muestra un **URI de destino** con la ruta completa de la API, por ejemplo, «https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses». Para la URL base, use solo `https://your-resource.services.ai.azure.com/openai/v1`.
+> El portal de Microsoft Foundry no muestra la URL base. Muestra un **URI de destino** con la ruta completa de la API, por ejemplo, `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`. Para la URL base, use solo `https://your-resource.services.ai.azure.com/openai/v1`.
 
 ### Modelos de Anthropic en Microsoft Foundry
 
@@ -196,7 +196,7 @@ Dentro de tus [concesiones de permisos](#permissions-and-consent), el Asistente 
 - **Errores del modelo**: enumera los errores, las advertencias y los mensajes de Analysis Services del modelo, los mismos que muestra la [vista Mensajes](xref:messages-view), con las causas raíz en primer lugar. Se informa al asistente cuando cambian los errores del modelo.
 - **Acceso a documentos**: lee y modifica consultas DAX abiertas, scripts de C# y scripts DAX, y lee los errores y advertencias de todos los documentos abiertos, incluidas las Pivot Grids. El documento activo forma parte del contexto del asistente, por lo que puede preguntar «¿Por qué veo este error en esta consulta?». No puede leer ni cambiar la estructura de un Pivot Grid.
 - **Búsqueda en la base de conocimientos**: busca en la documentación integrada de Tabular Editor.
-- **Navegación por la interfaz de usuario**: genera enlaces de acción «te3://» que abren cuadros de diálogo y funciones específicos de Tabular Editor.
+- **Navegación por la interfaz de usuario**: genera enlaces de acción `te3://` que abren cuadros de diálogo y funciones específicos de Tabular Editor.
 
 Un agente conectado a través del [servidor MCP](xref:mcp-server) tiene las mismas capacidades, excepto la navegación por la interfaz de usuario. Ambos cambian su modelo ejecutando un script de C# como un único paso que se puede deshacer. Difieren en la forma de revisar los cambios y conceder permisos; consulta [Diferencias entre el servidor MCP y el asistente de IA](#mcp-server-and-ai-assistant-differences).
 
@@ -252,7 +252,7 @@ Si la opción **Vista previa de los cambios** está activada, al ejecutar un C# 
 
 ## Instrucciones personalizadas
 
-Las *instrucciones personalizadas* son conjuntos de instrucciones que guían al asistente de IA en tareas específicas. El asistente recibe una lista de todas las instrucciones disponibles con su «descripción» y carga el texto completo solo de aquellas que sean relevantes para tu solicitud, así que procura que las descripciones sean precisas y específicas. Una instrucción cargada permanece vigente durante el resto de la conversación.
+Las *instrucciones personalizadas* son conjuntos de instrucciones que guían al asistente de IA en tareas específicas. El asistente recibe una lista de todas las instrucciones disponibles con su `description` y carga el texto completo solo de aquellas que sean relevantes para tu solicitud, así que procura que las descripciones sean precisas y específicas. Una instrucción cargada permanece vigente durante el resto de la conversación.
 
 ### Instrucciones personalizadas integradas
 
@@ -277,7 +277,7 @@ Escriba `/` para ver las instrucciones personalizadas disponibles. Comience su m
 
 ### Añadir sus propias instrucciones personalizadas
 
-Cree una instrucción personalizada colocando un archivo `.md` en `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. La carpeta se crea la primera vez que se ejecuta el asistente de IA, con un archivo «example.md» en ella para copiarlo. **Abrir carpeta de instrucciones personalizadas** en la barra de herramientas del Asistente de IA la abre.
+Cree una instrucción personalizada colocando un archivo `.md` en `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. La carpeta se crea la primera vez que se ejecuta el asistente de IA, con un archivo `example.md` en ella para copiarlo. **Abrir carpeta de instrucciones personalizadas** en la barra de herramientas del Asistente de IA la abre.
 
 El encabezado YAML que define los metadatos de la instrucción es opcional:
 
@@ -304,26 +304,26 @@ injected into the AI's system prompt when the instruction is activated.
 | `always_inject` | No | false | Si es true, se incluye siempre en el «prompt» del sistema. Esta instrucción no se ofrece en el autocompletado `/` |
 | `hidden` | No | false | Si es true, no se muestra en el autocompletado de `/command` |
 
-Una instrucción personalizada cuyo «id» coincide con una instrucción integrada anula la versión integrada.
+Una instrucción personalizada cuyo `id` coincide con una instrucción integrada anula la versión integrada.
 
 Tabular Editor lee los archivos de la siguiente manera:
 
-- La materia preliminar debe comenzar con «---» en la primera línea del archivo y terminar con una línea «---». Si no es así, o si no se puede analizar el YAML, todo el archivo se trata como contenido de la instrucción y se aplican todos los valores predeterminados anteriores.
-- Las claves que no figuran en la tabla anterior se ignoran. Los archivos de versiones anteriores que aún tienen una sección «triggers:`» se cargan sin cambios.
+- La materia preliminar debe comenzar con `---` en la primera línea del archivo y terminar con una línea `---`. Si no es así, o si no se puede analizar el YAML, todo el archivo se trata como contenido de la instrucción y se aplican todos los valores predeterminados anteriores.
+- Las claves que no figuran en la tabla anterior se ignoran. Los archivos de versiones anteriores que aún tienen una sección `triggers:` se cargan sin cambios.
 - `{{version}}` en cualquier parte del cuerpo se sustituye por la versión del componente de IA de Tabular Editor.
 - Solo se leen los archivos `.md` que se encuentran directamente en la carpeta; no se buscan subcarpetas.
 
 ### Instrucciones personalizadas de tu empresa
 
-Un administrador puede publicar una carpeta de instrucciones personalizadas para todos con la [política](xref:policies) `AiCustomInstructionsPath`, y la carpeta puede ser un recurso compartido de red de solo lectura. Esas instrucciones se cargan para todos los usuarios además de las integradas y funcionan como las demás instrucciones: se ofrecen en el autocompletado «/», se eligen por su descripción y se invocan mediante «/id».
+Un administrador puede publicar una carpeta de instrucciones personalizadas para todos con la [política](xref:policies) `AiCustomInstructionsPath`, y la carpeta puede ser un recurso compartido de red de solo lectura. Esas instrucciones se cargan para todos los usuarios además de las integradas y funcionan como las demás instrucciones: se ofrecen en el autocompletado `/`, se eligen por su descripción y se invocan mediante `/id`.
 
-Cuando el mismo «id» existe en más de un lugar, la prioridad es la siguiente:
+Cuando el mismo `id` existe en más de un lugar, la prioridad es la siguiente:
 
 1. La carpeta de tu organización
 2. Tu propia carpeta
 3. Las instrucciones integradas
 
-Una política independiente, «DisableUserCustomInstructions», hace que Tabular Editor ignore las instrucciones de su propia carpeta y desactive **Abrir carpeta de instrucciones personalizadas**. Las instrucciones integradas y de la organización siguen cargándose. Ambas políticas requieren Tabular Editor 3 Edición Enterprise.
+Una política independiente, `DisableUserCustomInstructions`, hace que Tabular Editor ignore las instrucciones de su propia carpeta y desactive **Abrir carpeta de instrucciones personalizadas**. Las instrucciones integradas y de la organización siguen cargándose. Ambas políticas requieren Tabular Editor 3 Edición Enterprise.
 
 ## Permisos y consentimiento
 
@@ -447,7 +447,7 @@ Cada mensaje enviado al asistente de IA consume tokens de entrada. El coste en t
 
 ### Contador de tokens
 
-El contador de tokens se encuentra en la barra de estado situada encima del cuadro de mensajes, junto al [indicador de modelo activo](#choosing-a-model). La barra indica los tokens usados/totales en miles y se muestra en verde, ámbar o rojo a medida que se va llenando el contexto. Un «±» delante de la cifra significa que aún no se dispone de un recuento exacto.
+El contador de tokens se encuentra en la barra de estado situada encima del cuadro de mensajes, junto al [indicador de modelo activo](#choosing-a-model). La barra indica los tokens usados/totales en miles y se muestra en verde, ámbar o rojo a medida que se va llenando el contexto. Un `±` delante de la cifra significa que aún no se dispone de un recuento exacto.
 
 Pasa el cursor por encima del contador para ver un desglose:
 
@@ -457,7 +457,7 @@ Pasa el cursor por encima del contador para ver un desglose:
 | **Esta conversación (facturada)** | Las mismas cuatro cifras acumuladas en cada solicitud de la conversación, incluidos los viajes de ida y vuelta de las herramientas |
 | **Contexto** | Tokens actualmente en la ventana de contexto, en comparación con el tamaño real de la ventana |
 
-Una línea dice, por ejemplo, «37 588 de entrada + 131 744 en caché · escritura 37 558 · salida 2866». Las partes relativas a la caché se omiten en el caso de los proveedores que no admiten el almacenamiento en caché de «prompts», y se omite una sección cuando no hay nada que informar.
+Una línea dice, por ejemplo, `37,588 input + 131,744 cached · write 37,558 · output 2,866`. Las partes relativas a la caché se omiten en el caso de los proveedores que no admiten el almacenamiento en caché de «prompts», y se omite una sección cuando no hay nada que informar.
 
 > [!TIP]
 > Compara **Último turno** con **Esta conversación (facturada)** para ver cuánto cuesta una sola pregunta. En una conversación larga, es normal que haya una cifra elevada en **Esta conversación (facturada)** junto a una cifra baja en **Último turno**.
@@ -493,4 +493,4 @@ El Asistente de IA es un componente opcional que se instala de forma predetermin
 El mismo componente contiene el servidor MCP, por lo que, si lo excluyes o eliminas `TabularEditor3.AI.dll`, se eliminarán ambos. Para desactivar solo el chat, mantenga el componente y establezca la política `DisableAiChat`.
 
 > [!NOTE]
-> Tanto si el componente está instalado como si no, un administrador del sistema puede desactivar todas las funciones de IA en Tabular Editor 3, incluido el servidor MCP, con la [política «DisableAi»](xref:policies). `DisableMcpServer` desactiva únicamente el servidor MCP. Consulte @policies.
+> Tanto si el componente está instalado como si no, un administrador del sistema puede desactivar todas las funciones de IA en Tabular Editor 3, incluido el servidor MCP, con la [política `DisableAi`](xref:policies). `DisableMcpServer` desactiva únicamente el servidor MCP. Consulte @policies.

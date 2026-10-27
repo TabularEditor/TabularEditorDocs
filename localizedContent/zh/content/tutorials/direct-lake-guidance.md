@@ -54,13 +54,13 @@ applies_to:
 
 ### Direct Lake on OneLake 上的计算列
 
-Direct Lake on OneLake 表上的计算列必须将其 `ExpressionContext` 属性设置为 `UserContext`。该列在查询时进行评估，且未物化，因此无法在关系中使用。新计算列默认使用 `Standard`。如果您在将模型保存到 Power BI 服务时将 Direct Lake 表中的计算列设置为“Standard”，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。
+Direct Lake on OneLake 表上的计算列必须将其 `ExpressionContext` 属性设置为 `UserContext`。该列在查询时进行评估，且未物化，因此无法在关系中使用。新计算列默认使用 `Standard`。如果您在将模型保存到 Power BI 服务时将 Direct Lake 表中的计算列设置为`Standard`，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。
 
 只有当模型的兼容级别为 1705 或更高时，**表达式上下文**属性才会显示在 @properties-view 中。在 Direct Lake on OneLake 表的每个计算列上设置该属性：
 
 1. 在 @tom-explorer-view 中选择模型，然后在 @properties-view 的**数据库**下勾选**兼容级别**。如果低于 1705，请按照 @update-compatibility-level 中的说明升级模型。
 2. 在 @tom-explorer-view 中选择计算列。
-3. 在@properties-view的**选项**下，将**表达式上下文**设置为“UserContext”。
+3. 在@properties-view的**选项**下，将**表达式上下文**设置为`UserContext`。
 4. 保存模型。
 
 同一模型中导入表格上的计算列可以使用任一表达式上下文。对于无法引用用户上下文列的对象，请参阅 @user-context-calculated-columns。Microsoft 在[在 Power BI Desktop 中使用计算列](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance)中列出了受支持的存储模式和表达式上下文组合。
@@ -126,7 +126,7 @@ Direct Lake on OneLake 还支持通过基于 XMLA 的工具（例如 Tabular Edi
 
 ## 检查 Direct Lake 分区
 
-Direct Lake 分区没有查询表达式。当您在 @tom-explorer-view 中选择一个分区时，**表达式编辑器**会显示其“数据覆盖范围定义表达式”；如果分区没有数据覆盖范围定义，则不显示任何内容。由增量刷新策略生成的分区表现方式相同。
+Direct Lake 分区没有查询表达式。当您在 @tom-explorer-view 中选择一个分区时，**表达式编辑器**会显示其`Data Coverage Definition Expression`；如果分区没有数据覆盖范围定义，则不显示任何内容。由增量刷新策略生成的分区表现方式相同。
 
 ## Power Query (M) 表达式
 
@@ -136,7 +136,7 @@ Direct Lake 分区没有查询表达式。当您在 @tom-explorer-view 中选择
 
 要手动为**Direct Lake on OneLake**模式设置表，您需要执行以下操作：
 
-1. **创建共享表达式**：Direct Lake 表格使用“实体”分区，这些分区必须引用模型中的共享表达式。如果还没有此共享表达式，请先创建它。将其命名为“DatabaseQuery”：
+1. **创建共享表达式**：Direct Lake 表格使用“实体”分区，这些分区必须引用模型中的共享表达式。如果还没有此共享表达式，请先创建它。将其命名为`DatabaseQuery`：
 
 ![创建共享表达式](../assets/images/create-shared-expression.png)
 
@@ -173,7 +173,7 @@ in
 
 ![更新表架构实体](../assets/images/update-table-schema-entity.png)
 
-  或者，手动将数据列添加到表（Alt+4），并为每一列指定“名称”、“数据类型”、“源列”以及任何其他相关属性。
+  或者，手动将数据列添加到表（Alt+4），并为每一列指定`Name`、`Data Type`、`Source Column`以及任何其他相关属性。
 
 > [!NOTE]
 > 将 Direct Lake 表添加到模型时，在第一次元数据部署后需要手动“刷新”该表。否则，查询时该表将不包含任何数据。此刷新只需执行一次。如果选中**工具 > 首选项 > 模型部署 > 数据刷新**下的**保存新表时自动刷新**，Tabular Editor 3 将在保存模型元数据时自动刷新表。
@@ -213,7 +213,7 @@ in
 
 将`<schema-name>`替换为仓库/湖仓中的架构名称，将`<table/view-name>`替换为您要导入的表或视图的名称。请注意，导入模式下的表格可以使用非物化视图作为数据源，因为在刷新操作期间，数据是通过 SQL 端点查询的。
 
-3. **更新列元数据**（仅限手动设置）：由于您手动配置的分区没有列，请使用 Tabular Editor 的**更新表架构**功能从湖仓/仓库检索列名称和数据类型。或者，手动创建数据列（ **Alt+4** ），并为每一列指定“名称”、“数据类型”、“源列”以及任何其他相关属性。
+3. **更新列元数据**（仅限手动设置）：由于您手动配置的分区没有列，请使用 Tabular Editor 的**更新表架构**功能从湖仓/仓库检索列名称和数据类型。或者，手动创建数据列（ **Alt+4** ），并为每一列指定`Name`、`Data Type`、`Source Column`以及任何其他相关属性。
 
 ## 在存储模式之间进行转换
 

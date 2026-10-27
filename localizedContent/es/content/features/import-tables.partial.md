@@ -78,7 +78,7 @@ Seleccione varias tablas y vistas de la izquierda para importarlas todas a la ve
 > [!TIP]
 > Si controla el origen, cree una vista sobre cada tabla que importe. En la vista, corrija los nombres y la ortografía que usa el modelo semántico y elimine las columnas que no necesita, como las columnas del sistema y las marcas de tiempo.
 >
-> En el modelo, importe todas las columnas de la vista, lo que genera una sentencia «SELECT * FROM ...». Cuando cambia el origen, **Actualizar esquema de tabla...** en Tabular Editor muestra qué ha cambiado.
+> En el modelo, importe todas las columnas de la vista, lo que genera una sentencia `SELECT * FROM ...`. Cuando cambia el origen, **Actualizar esquema de tabla...** en Tabular Editor muestra qué ha cambiado.
 
 ![Importación avanzada](~/content/assets/images/advanced-import.png)
 
@@ -86,7 +86,7 @@ Cuando establece el modo de vista previa en **Solo esquema** en el menú despleg
 
 ![Confirmar selección](~/content/assets/images/confirm-selection.png)
 
-En la última página, confirme su selección y elija el tipo de partición que desea crear. El valor predeterminado es «SQL» para los orígenes de datos de proveedor y «M» para los orígenes de datos estructurados.
+En la última página, confirme su selección y elija el tipo de partición que desea crear. El valor predeterminado es `SQL` para los orígenes de datos de proveedor y `M` para los orígenes de datos estructurados.
 
 ![Confirmar selección Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
 
@@ -114,7 +114,7 @@ Tabular Editor se conecta a los orígenes de datos pertinentes, solicita las cre
 
 ![Cuadro de diálogo de comparación de esquema](~/content/assets/images/schema-compare-dialog.png)
 
-En la captura de pantalla anterior, Tabular Editor detectó dos nuevas columnas de origen que aún no se han importado («Color» y «Material») y marcó dos columnas existentes para su eliminación («Colour» y «Substance Type»), porque sus nombres ya no coinciden con ninguna columna de origen. La detección de cambios de nombre solo funciona para cambios simples. En este caso, «Colour» se ha renombrado como «Color» y «Substance Type» como «Material» en el origen, pero los nombres difieren lo suficiente como para que Tabular Editor considere cada cambio de nombre como una eliminación y una adición.
+En la captura de pantalla anterior, Tabular Editor detectó dos nuevas columnas de origen que aún no se han importado (`Color` y `Material`) y marcó dos columnas existentes para su eliminación (`Colour` y `Substance Type`), porque sus nombres ya no coinciden con ninguna columna de origen. La detección de cambios de nombre solo funciona para cambios simples. En este caso, `Colour` se ha renombrado como `Color` y `Substance Type` como `Material` en el origen, pero los nombres difieren lo suficiente como para que Tabular Editor considere cada cambio de nombre como una eliminación y una adición.
 
 Mantenga pulsada la tecla **Ctrl**, seleccione las filas `Color` (importar) y `Colour` (eliminar) en el cuadro de diálogo Cambio de esquema y, a continuación, haga clic con el botón derecho para combinar la eliminación y la adición en una sola actualización de SourceColumn. Las fórmulas DAX existentes que hacen referencia a `[Colour]` siguen funcionando:
 
@@ -145,7 +145,7 @@ Con la opción habilitada, una actualización de esquema ejecuta estos pasos:
 6. Si el esquema ha cambiado, aparecerá el cuadro de diálogo **Aplicar cambios de esquema** que se muestra arriba.
 
 > [!NOTE]
-> Si sus expresiones M combinan datos de varios orígenes, por ejemplo, a través de la función M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin), es posible que deba cambiar el [**Nivel de privacidad**](https://powerbi.microsoft.com/blog/privacy-levels-for-cloud-data-sources/) de «Privado» a «Organizacional» en el modelo semántico del servicio Power BI. De lo contrario, es posible que vea un error que indique que «<Query> hace referencia a otras consultas o pasos, por lo que es posible que no pueda acceder directamente a un origen de datos. Vuelva a crear esta combinación de datos.». Este error también puede producirse incluso si no está habilitada la opción **Usar Analysis Services para detección de cambios**, ya que Tabular Editor 3 recurrirá automáticamente a este mecanismo de detección cuando la expresión M sea demasiado compleja para la detección de esquemas integrada de Tabular Editor 3.
+> Si sus expresiones M combinan datos de varios orígenes, por ejemplo, a través de la función M [`Table.NestedJoin`](https://learn.microsoft.com/powerquery-m/table-nestedjoin), es posible que deba cambiar el [**Nivel de privacidad**](https://powerbi.microsoft.com/blog/privacy-levels-for-cloud-data-sources/) de «Privado» a «Organizacional» en el modelo semántico del servicio Power BI. De lo contrario, es posible que vea un error que indique que `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. Este error también puede producirse incluso si no está habilitada la opción **Usar Analysis Services para detección de cambios**, ya que Tabular Editor 3 recurrirá automáticamente a este mecanismo de detección cuando la expresión M sea demasiado compleja para la detección de esquemas integrada de Tabular Editor 3.
 
 ### Importación de nuevas tablas a través de Analysis Services
 

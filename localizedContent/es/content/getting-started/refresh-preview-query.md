@@ -108,7 +108,7 @@ Pivot Grid se actualiza automáticamente cuando se realiza un cambio en el model
 
 Una forma más directa de consultar los datos de tu modelo es escribir una consulta DAX. Use la opción de menú **Archivo > Nuevo > Consulta DAX** para crear un nuevo documento de consulta DAX. Puede tener varios documentos de consultas DAX abiertos al mismo tiempo.
 
-Las consultas DAX se pueden guardar y cargar en archivos independientes y desde ellos utilizando la extensión de archivo «.dax» o «.msdax». Consulta @supported-files para obtener más información.
+Las consultas DAX se pueden guardar y cargar en archivos independientes y desde ellos utilizando la extensión de archivo `.dax` o `.msdax`. Consulta @supported-files para obtener más información.
 
 Escriba su consulta DAX `EVALUATE` en el editor y pulse **Consulta > Ejecutar** (F5) para enviar la consulta a Analysis Services y ver el resultado. De forma predeterminada, Tabular Editor 3 limita el número de filas devueltas por Analysis Services a 1000, pero esto se puede cambiar en **Herramientas > Preferencias > Exploración de datos > Consulta DAX**. Si una consulta supera este límite, Tabular Editor 3 muestra un acceso directo que le permite recuperar todos los registros (vea la captura de pantalla a continuación).
 
@@ -150,7 +150,7 @@ La función CustomData le permite pasar un valor de cadena personalizado que se 
 
 ![Seleccionar simulación de usuario](~/content/assets/images/impersonation-customdata.png)
 
-Cuando introduce un valor en el campo de entrada **CustomData**, Tabular Editor 3 añade la [propiedad «CustomData»](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, este valor puede recuperarse dentro de sus expresiones DAX utilizando la [función `CUSTOMDATA()`](https://dax.guide/customdata/).
+Cuando introduce un valor en el campo de entrada **CustomData**, Tabular Editor 3 añade la [propiedad `CustomData`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, este valor puede recuperarse dentro de sus expresiones DAX utilizando la [función `CUSTOMDATA()`](https://dax.guide/customdata/).
 
 CustomData se usa habitualmente para implementar seguridad dinámica a nivel de filas cuando una aplicación utiliza autenticación personalizada. El valor que proporcione puede aprovecharse en expresiones de filtro de roles para controlar qué filas pueden ver los usuarios en función de los datos personalizados que se transmiten a través de la cadena de conexión.
 

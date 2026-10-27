@@ -20,7 +20,7 @@ applies_to:
 ---
 # Recarga automática desde el disco
 
-Cuando los archivos de metadatos de un modelo que ha cargado desde un archivo o una carpeta cambian en el disco, Tabular Editor vuelve a cargar el modelo automáticamente. Si tiene cambios sin guardar, aparecerá un mensaje en el que podrá elegir si desea volver a cargar o conservar sus cambios. Las fuentes típicas de cambios externos son un agente de IA, un script, otro editor, un «git pull» o un compañero que edita una carpeta compartida.
+Cuando los archivos de metadatos de un modelo que ha cargado desde un archivo o una carpeta cambian en el disco, Tabular Editor vuelve a cargar el modelo automáticamente. Si tiene cambios sin guardar, aparecerá un mensaje en el que podrá elegir si desea volver a cargar o conservar sus cambios. Las fuentes típicas de cambios externos son un agente de IA, un script, otro editor, un `git pull` o un compañero que edita una carpeta compartida.
 
 ![Diagrama: Archivo > Guardar escribe el modelo en Tabular Editor en los archivos del disco; otra herramienta escribe en los archivos; una recarga automática vuelve a cargar los archivos modificados en Tabular Editor](~/content/assets/images/features/auto-reload-sync.png)
 
@@ -32,8 +32,8 @@ Cuando los archivos de metadatos de un modelo que ha cargado desde un archivo o 
 | Modelo cargado desde | Archivos supervisados |
 |---|---|
 | Un archivo `.bim` | Ese archivo. Se omiten otros archivos de la misma carpeta. |
-| Una carpeta en formato JSON (Database.json) | Todos los archivos «.json» situados por debajo de la raíz del modelo, incluidas las subcarpetas. |
-| Una carpeta en formato [Lenguaje de definición de modelo tabular (TMDL)](xref:tmdl) | Todos los archivos «.tmdl» situados debajo de la raíz del modelo, incluidas las subcarpetas. |
+| Una carpeta en formato JSON (Database.json) | Todos los archivos `.json` situados por debajo de la raíz del modelo, incluidas las subcarpetas. |
+| Una carpeta en formato [Lenguaje de definición de modelo tabular (TMDL)](xref:tmdl) | Todos los archivos `.tmdl` situados debajo de la raíz del modelo, incluidas las subcarpetas. |
 | Una base de datos del área de trabajo | Los archivos que respaldan el modelo en [modo de área de trabajo](xref:workspace-mode), según las mismas reglas que las filas anteriores. |
 | Una base de datos o Power BI Desktop, fuera del modo de área de trabajo | Ninguno. El modelo no tiene archivos en el disco. |
 | Una plantilla `.pbit` o un modelo que nunca ha guardado | Ninguno. |

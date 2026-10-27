@@ -108,7 +108,7 @@ Cuando esto está marcado, se inserta un carácter de tabulación (`\t`) cada ve
 
 ##### *Estilo de comentario* (barras diagonales)
 
-DAX admite comentarios de línea que usan barras diagonales («//») o guiones («--»). Este ajuste determina qué estilo de comentario se utiliza cuando Tabular Editor 3 genera código DAX, como cuando se utiliza la función de script DAX.
+DAX admite comentarios de línea que usan barras diagonales (`//`) o guiones (`--`). Este ajuste determina qué estilo de comentario se utiliza cuando Tabular Editor 3 genera código DAX, como cuando se utiliza la función de script DAX.
 
 ## Configuración de DAX
 
@@ -240,7 +240,7 @@ Cuando esto está marcado, los prefijos de tabla se eliminan automáticamente de
 
 ##### *Mayúsculas preferidas para palabras clave* (predeterminado = MAYÚSCULAS)
 
-Este ajuste le permite cambiar las mayúsculas y minúsculas utilizadas para las palabras clave, como «ORDER BY», «VAR», «EVALUATE», etc. Esto también se aplica cuando se inserta una palabra clave a través de la función de autocompletar, incluidos los valores fijos de las palabras clave de las funciones que las utilizan. Consulta @preferences para ver la lista completa.
+Este ajuste le permite cambiar las mayúsculas y minúsculas utilizadas para las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. Esto también se aplica cuando se inserta una palabra clave a través de la función de autocompletar, incluidos los valores fijos de las palabras clave de las funciones que las utilizan. Consulta @preferences para ver la lista completa.
 
 ##### *Mayúsculas preferidas para funciones* (predeterminado = MAYÚSCULAS)
 

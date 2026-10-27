@@ -45,7 +45,7 @@ La siguiente tabla resume los modos de almacenamiento disponibles en los modelos
 
 Sin embargo, al igual que con Direct Lake en SQL, todavía hay algunas [limitaciones que *sí* se aplican](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las limitaciones principales se incluyen las siguientes:
 
-- Las columnas calculadas en las tablas de Direct Lake en OneLake son compatibles en la versión preliminar, y solo con el contexto de expresión «UserContext». Direct Lake en SQL no admite columnas calculadas. Consulte [Columnas calculadas en Direct Lake en OneLake](#calculated-columns-on-direct-lake-on-onelake).
+- Las columnas calculadas en las tablas de Direct Lake en OneLake son compatibles en la versión preliminar, y solo con el contexto de expresión `UserContext`. Direct Lake en SQL no admite columnas calculadas. Consulte [Columnas calculadas en Direct Lake en OneLake](#calculated-columns-on-direct-lake-on-onelake).
 - Las tablas calculadas no pueden hacer referencia a columnas o tablas en el modo de almacenamiento Direct Lake. Los grupos de cálculos, los parámetros de simulación y los parámetros de campo son compatibles porque crean tablas calculadas implícitas que no hacen referencia a columnas Direct Lake.
 - Las vistas SQL no materializadas no son compatibles como orígenes de datos para las tablas de Direct Lake en OneLake. Utilice vistas materializadas o asegúrese de que la tabla Delta de origen contenga las columnas que necesita.
 - Los accesos directos en un lakehouse no son compatibles como fuentes de datos durante la vista previa pública de Direct Lake en OneLake.
@@ -60,7 +60,7 @@ La propiedad **Contexto de expresión** aparece en la @properties-view solo cuan
 
 1. Seleccione el modelo en la @tom-explorer-view y compruebe el **Nivel de compatibilidad** en **Base de datos** en la @properties-view. Si es inferior a 1705, actualice el modelo como se describe en @update-compatibility-level.
 2. Seleccione la columna calculada en la @tom-explorer-view.
-3. En **Opciones** en la @properties-view, establezca **Contexto de expresión** en «UserContext».
+3. En **Opciones** en la @properties-view, establezca **Contexto de expresión** en `UserContext`.
 4. Guarde el modelo.
 
 Las columnas calculadas de las tablas de importación del mismo modelo pueden usar cualquiera de los dos contextos de expresión. Para los objetos que no pueden hacer referencia a una columna de contexto de usuario, consulte @user-context-calculated-columns. Microsoft enumera las combinaciones compatibles de modo de almacenamiento y contexto de expresión en [Uso de columnas calculadas en Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance).
@@ -85,7 +85,7 @@ En el caso de un modelo **Direct Lake en SQL**, la intercalación no distingue e
 >
 > 1. Cree un nuevo modelo en Tabular Editor 3 (Archivo > Nuevo > Modelo...)
 > 2. Desmarque «Usar base de datos del área de trabajo».
-> 3. Establezca la propiedad ** intercalación ** del modelo como «Latin1_General_100_BIN2_UTF8»
+> 3. Establezca la propiedad ** intercalación ** del modelo como `Latin1_General_100_BIN2_UTF8`
 > 4. Guarde el modelo (Ctrl+S).
 > 5. Ahora, abra el modelo desde el archivo que acaba de guardar. Cuando se le pida que se conecte a una base de datos de área de trabajo, elija «Sí».
 >
@@ -126,7 +126,7 @@ La tabla importada ya tiene sus columnas, en el mismo orden que en el origen, y 
 
 ## Inspección de una partición Direct Lake
 
-Una partición de Direct Lake no tiene expresión de consulta. Cuando selecciona una en la @tom-explorer-view, el **Editor de expresiones** muestra su «Expresión de definición de cobertura de datos», o nada si la partición no tiene una definición de cobertura de datos. Las particiones generadas por una directiva de actualización incremental se comportan de la misma manera.
+Una partición de Direct Lake no tiene expresión de consulta. Cuando selecciona una en la @tom-explorer-view, el **Editor de expresiones** muestra su `Data Coverage Definition Expression`, o nada si la partición no tiene una definición de cobertura de datos. Las particiones generadas por una directiva de actualización incremental se comportan de la misma manera.
 
 ## Expresiones de Power Query (M)
 
@@ -136,7 +136,7 @@ Esta sección contiene una descripción más técnica sobre cómo deben configur
 
 Para configurar manualmente una tabla para el modo **Direct Lake en OneLake**, debe hacer lo siguiente:
 
-1. **Crear una expresión compartida**: Las tablas de Direct Lake utilizan particiones de «Entidad», que deben hacer referencia a una expresión compartida en el modelo. Empieza por crear esta expresión compartida, si aún no la tienes. Llámala «DatabaseQuery»:
+1. **Crear una expresión compartida**: Las tablas de Direct Lake utilizan particiones de «Entidad», que deben hacer referencia a una expresión compartida en el modelo. Empieza por crear esta expresión compartida, si aún no la tienes. Llámala `DatabaseQuery`:
 
 ![Crear expresión compartida](../assets/images/create-shared-expression.png)
 
@@ -161,7 +161,7 @@ in
 | ----------|-------|
 | Nombre | (Recomendado) Establecer el mismo nombre que la tabla |
 | Nombre de la entidad | (Obligatorio) Establecer el nombre de la tabla en el lakehouse/almacén |
-| Origen de la expresión | (Obligatorio) Establezca la expresión compartida que creó en el paso 1, normalmente «DatabaseQuery» |
+| Origen de la expresión | (Obligatorio) Establezca la expresión compartida que creó en el paso 1, normalmente `DatabaseQuery` |
 | Modo | (Obligatorio) `DirectLake` |
 | Nombre del esquema | (Opcional) Establézcalo como el nombre del esquema en el lakehouse/almacén, si corresponde. Si no se establece, se usará el esquema predeterminado. |
 
@@ -173,7 +173,7 @@ in
 
 ![Actualizar entidad de esquema de tabla](../assets/images/update-table-schema-entity.png)
 
-  Como alternativa, añada manualmente columnas de datos a la tabla (Alt+4) y especifique el «Nombre», el «Tipo de datos», la «Columna de origen» y cualquier otra propiedad relevante para cada columna.
+  Como alternativa, añada manualmente columnas de datos a la tabla (Alt+4) y especifique `Name`, `Data Type`, `Source Column` y cualquier otra propiedad relevante para cada columna.
 
 > [!NOTE]
 > Cuando se agrega una tabla Direct Lake al modelo, es necesario «actualizarla» manualmente después de la primera implementación de metadatos. De lo contrario, la tabla no contendrá ningún dato cuando se consulte. Esta actualización solo debe realizarse una vez. Tabular Editor 3 actualizará automáticamente la tabla cuando se guarden los metadatos del modelo, si está activada la opción **Actualización automática al guardar nuevas tablas** en **Herramientas > Preferencias > Implementación del modelo > Actualización de datos**.
@@ -213,7 +213,7 @@ Sustituye `<sql-endpoint>` por la cadena de conexión del [punto de conexión de
 
 Sustituya `<schema-name>` por el nombre del esquema en el almacén/lakehouse y `<table/view-name>` por el nombre de la tabla o vista que quiera importar. Tenga en cuenta que las tablas en modo de importación pueden usar vistas no materializadas como origen de datos, ya que los datos se consultan a través del punto de conexión SQL durante las operaciones de actualización.
 
-3. **Actualizar los metadatos de las columnas** (solo en la configuración manual): dado que una partición que ha configurado manualmente no tiene columnas, utilice la función **Actualizar esquema de tabla** de Tabular Editor para recuperar los nombres de las columnas y los tipos de datos del lakehouse/almacén de datos. Como alternativa, cree columnas de datos manualmente (**Alt+4**) y especifique el «Nombre», el «Tipo de datos», la «Columna de origen» y cualquier otra propiedad relevante para cada columna.
+3. **Actualizar los metadatos de las columnas** (solo en la configuración manual): dado que una partición que ha configurado manualmente no tiene columnas, utilice la función **Actualizar esquema de tabla** de Tabular Editor para recuperar los nombres de las columnas y los tipos de datos del lakehouse/almacén de datos. Como alternativa, cree columnas de datos manualmente (**Alt+4**) y especifique `Name`, `Data Type`, `Source Column` y cualquier otra propiedad relevante para cada columna.
 
 ## Conversión entre modos de almacenamiento
 

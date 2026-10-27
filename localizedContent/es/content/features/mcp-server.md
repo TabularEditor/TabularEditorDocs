@@ -39,7 +39,7 @@ Los cambios del agente pasan por el [envoltorio del Tabular Object Model (TOM)](
 2. Revise los permisos. Consulte [Establecer permisos del agente](#set-agent-permissions).
 3. Haz clic en **Iniciar servidor**.
 
-El cuadro de diálogo muestra la dirección en la que escucha el servidor: `http://127.0.0.1`, a menos que haya cambiado el puerto. El indicador de la barra de estado cambia de **MCP detenido** a **MCP iniciado**, con la dirección en su información sobre herramientas.
+El cuadro de diálogo muestra la dirección en la que escucha el servidor: `http://127.0.0.1:42100/`, a menos que haya cambiado el puerto. El indicador de la barra de estado cambia de **MCP detenido** a **MCP iniciado**, con la dirección en su información sobre herramientas.
 
 ![El cuadro de diálogo del servidor MCP, que muestra la URL del servidor, un token de acceso enmascarado y las cinco filas de permisos del agente configuradas con niveles distintos de los predeterminados](~/content/assets/images/features/mcp-server/mcp-server-dialog.png)
 
@@ -66,7 +66,7 @@ Abra **Herramientas > Preferencias > Funciones de IA > Servidor MCP** para confi
 
 ## Registra tu agente
 
-En el cuadro de diálogo del servidor, seleccione su agente en **Exportar configuración** y pegue la configuración copiada en su agente. Registra cada agente una sola vez, y la configuración registra el servidor con el nombre «tabular-editor».
+En el cuadro de diálogo del servidor, seleccione su agente en **Exportar configuración** y pegue la configuración copiada en su agente. Registra cada agente una sola vez, y la configuración registra el servidor con el nombre `tabular-editor`.
 
 ![El menú desplegable «Exportar configuración», expandido para mostrar Claude Code, VS Code, Copilot CLI, Codex y Cursor](~/content/assets/images/features/mcp-server/export-configuration.png)
 
@@ -123,7 +123,7 @@ url = "http://127.0.0.1:42100/"
 
 Cuando la opción **Requerir token de acceso** está activada, la configuración exportada incluye el token en el formato de cada cliente. Copie la configuración del cuadro de diálogo; no la escriba a mano.
 
-Cualquier otro cliente MCP se conecta a «http://127.0.0.1» a través de HTTP transmisible. Si la opción **Requerir token de acceso** está activada, envía el token en un encabezado «Authorization: Bearer <token>».
+Cualquier otro cliente MCP se conecta a `http://127.0.0.1:42100/` a través de HTTP transmisible. Si la opción **Requerir token de acceso** está activada, envía el token en un encabezado `Authorization: Bearer <token>`.
 
 ### Comprueba que haya funcionado
 
@@ -133,7 +133,7 @@ Pregúntale a tu agente:
 
 El agente responde con el nombre del modelo, cómo se carga el modelo, si tiene cambios sin guardar y su nivel de compatibilidad, o informa de que no hay ningún modelo abierto. No aparece ningún mensaje en Tabular Editor.
 
-El nombre del modelo que recibe el agente sigue la configuración **Detalle del origen del modelo** en **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**. Con **Solo nombre**, el agente no recibe rutas de archivo ni nombres de servidores, y con **Oculto**, recibe «Modelo cargado» en lugar del nombre del modelo.
+El nombre del modelo que recibe el agente sigue la configuración **Detalle del origen del modelo** en **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**. Con **Solo nombre**, el agente no recibe rutas de archivo ni nombres de servidores, y con **Oculto**, recibe `Model loaded` en lugar del nombre del modelo.
 
 ## Establecer permisos del agente
 
@@ -273,7 +273,7 @@ Registra el segundo puerto con tu agente con su propio nombre y nombra la instan
 
 ## Ejecución en un equipo compartido
 
-El servidor se vincula a `127.0.0.1`, a la que otros equipos no pueden acceder. También rechaza las solicitudes del navegador con un encabezado «Origin» no local.
+El servidor se vincula a `127.0.0.1`, a la que otros equipos no pueden acceder. También rechaza las solicitudes del navegador con un encabezado `Origin` no local.
 
 Cuando la opción **Requerir token de acceso** está desactivada, cualquier proceso del equipo puede conectarse sin credenciales. En un host en el que varias personas han iniciado sesión a la vez, como un Escritorio remoto o un servidor Citrix, eso incluye procesos en las sesiones de otras personas.
 
@@ -300,7 +300,7 @@ El servidor MCP está activado de forma predeterminada, y cualquier usuario pued
 | `RequireMcpAccessToken` | Todos | Fuerza la autenticación con token y bloquea la preferencia |
 | `DisableCSharpScripts` | Todos | Impide que un agente ejecute un script de C# y lo redacte en un documento. La redacción de una consulta DAX y todas las herramientas que solo leen no se ven afectadas |
 | `BlockUnsafeScripts` | Enterprise | Permite únicamente los scripts que permanecen dentro del modelo, para cada script en Tabular Editor. Un script de agente que accede a archivos, a la red, a otros procesos o a ensamblados externos no se ejecuta, y no se abre ningún documento de revisión |
-| Límites de permisos `Max...` y `McpMax...` | Enterprise | Limitan cada recurso. Los límites «Max...» se aplican al asistente de IA y al servidor MCP. Los límites «McpMax...» se aplican únicamente al servidor MCP y solo pueden reducir el límite «Max...» |
+| Límites de permisos `Max...` y `McpMax...` | Enterprise | Limitan cada recurso. Los límites `Max...` se aplican al asistente de IA y al servidor MCP. Los límites `McpMax...` se aplican únicamente al servidor MCP y solo pueden reducir el límite `Max...` |
 | `AiAuditLogPath`, `AiAuditLogRetentionDays` | Enterprise | Establecen la ubicación y el período de conservación del [registro de auditoría](xref:ai-audit-log) |
 | `AiProvider` y valores relacionados | Enterprise | Bloquear el proveedor del asistente de IA. El servidor MCP no se ve afectado |
 

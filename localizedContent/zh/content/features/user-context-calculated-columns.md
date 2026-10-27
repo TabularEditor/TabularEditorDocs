@@ -35,7 +35,7 @@ applies_to:
 
 ## Direct Lake on OneLake 表
 
-`UserContext` 是 Power BI 对 Direct Lake on OneLake 表上的计算列支持的唯一表达式上下文。当您将模型保存到 Power BI 服务时，如果 Direct Lake 表上的计算列设置为“Standard”，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。Direct Lake on SQL 表不支持计算列。有关在 Direct Lake 模型上设置表达式上下文的步骤，请参阅[Direct Lake on OneLake 上的计算列](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake)。
+`UserContext` 是 Power BI 对 Direct Lake on OneLake 表上的计算列支持的唯一表达式上下文。当您将模型保存到 Power BI 服务时，如果 Direct Lake 表上的计算列设置为`Standard`，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。Direct Lake on SQL 表不支持计算列。有关在 Direct Lake 模型上设置表达式上下文的步骤，请参阅[Direct Lake on OneLake 上的计算列](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake)。
 
 ## 用户上下文列不能用于哪些情况
 

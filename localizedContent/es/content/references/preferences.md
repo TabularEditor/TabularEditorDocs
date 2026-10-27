@@ -78,9 +78,9 @@ La versión que estás ejecutando se muestra debajo de estos ajustes, junto con 
 
 ### Gestionado por tu organización
 
-Cuando un administrador ha configurado [políticas](xref:policies), se añade a esta página una sección de solo lectura, **Gestionado por su organización**, en la que se enumeran todos los valores de las políticas que Tabular Editor ha encontrado, en forma de «Nombre = valor». Pase el cursor sobre una entrada para ver de qué clave de registro y de qué subárbol procede.
+Cuando un administrador ha configurado [políticas](xref:policies), se añade a esta página una sección de solo lectura, **Gestionado por su organización**, en la que se enumeran todos los valores de las políticas que Tabular Editor ha encontrado, en forma de `Name = value`. Pase el cursor sobre una entrada para ver de qué clave de registro y de qué subárbol procede.
 
-Un valor que Tabular Editor no ha podido interpretar se muestra con el marcador «(inválido)» en lugar de omitirse. Ese marcador es la forma más rápida de encontrar el error tipográfico detrás de una política que parece no hacer nada, así que compruebe aquí primero cuando una política no surta efecto.
+Un valor que Tabular Editor no ha podido interpretar se muestra con el marcador `(invalid)` en lugar de omitirse. Ese marcador es la forma más rápida de encontrar el error tipográfico detrás de una política que parece no hacer nada, así que compruebe aquí primero cuando una política no surta efecto.
 
 La sección no aparece cuando no se aplica ninguna directiva. Los ajustes que una política bloquea o limita se muestran en modo de solo lectura en otra parte de este cuadro de diálogo y en el cuadro de diálogo **Herramientas > Servidor MCP...**, con una información sobre herramientas que así lo indica.
 
@@ -342,7 +342,7 @@ Configuración de conexión para el chat del Asistente de IA. La página secunda
 
 **URL base** / **Punto de conexión del servicio**: A dónde se envían las solicitudes. OpenAI y Anthropic proporcionan un valor predeterminado y el campo es opcional. Azure OpenAI y Personalizado no tienen ningún valor predeterminado, por lo que se requiere un punto de conexión.
 
-**Clave de API**: Tu propia clave para el proveedor elegido. Se almacena cifrada en esta máquina en «Preferences.json». Tabular Editor no incluye ninguna clave integrada y nunca actúa como proxy de tus solicitudes.
+**Clave de API**: Tu propia clave para el proveedor elegido. Se almacena cifrada en esta máquina en `Preferences.json`. Tabular Editor no incluye ninguna clave integrada y nunca actúa como proxy de tus solicitudes.
 
 **ID de organización de OpenAI** e **ID de proyecto de OpenAI**: Opcionales y solo se muestran para el proveedor OpenAI. Úselos cuando su cuenta de OpenAI facture o determine el uso por organización o proyecto.
 
@@ -384,7 +384,7 @@ Configuración del [servidor MCP](xref:mcp-server), que permite que un agente ex
 
 **Iniciar el servidor MCP automáticamente** (deshabilitado): Inicia el servidor cuando se inicie Tabular Editor, de modo que un agente pueda conectarse sin que tengas que iniciarlo manualmente. Si el puerto está en uso al iniciar, el servidor no se inicia y no se muestra ningún mensaje.
 
-**Requerir token de acceso** (deshabilitado): hace que los agentes presenten un token al portador, que se muestra en el cuadro de diálogo **Herramientas > Servidor MCP...**. El servidor escucha solo en la interfaz de bucle invertido, por lo que esto es más importante en un equipo en el que varias personas han iniciado sesión a la vez, como un Escritorio remoto o un host Citrix, donde cada sesión puede acceder a «127.0.0.1». Los administradores pueden aplicarlo con la [directiva](xref:policies) `RequireMcpAccessToken`.
+**Requerir token de acceso** (deshabilitado): hace que los agentes presenten un token al portador, que se muestra en el cuadro de diálogo **Herramientas > Servidor MCP...**. El servidor escucha solo en la interfaz de bucle invertido, por lo que esto es más importante en un equipo en el que varias personas han iniciado sesión a la vez, como un Escritorio remoto o un host Citrix, donde cada sesión puede acceder a `127.0.0.1`. Los administradores pueden aplicarlo con la [directiva](xref:policies) `RequireMcpAccessToken`.
 
 **Puerto** (42100): El puerto de bucle invertido en el que escucha el servidor, de 1024 a 49151. Si se cambia, se invalidan los registros de agentes existentes, que apuntan a una dirección fija. Si el puerto está ocupado cuando inicia el servidor manualmente, Tabular Editor ofrece el siguiente puerto libre que encuentre.
 
@@ -437,13 +437,13 @@ Estos ajustes controlan cómo gestiona Tabular Editor 3 los metadatos del model
 
 **Agregar anotación de metadatos al implementar** (deshabilitado): Añade detalles de la implementación al modelo implementado: el usuario, el equipo cliente, la hora, la versión de Tabular Editor y el modo de implementación.
 
-**Guardar copia de seguridad de Model.bim al implementar** (habilitado): Guarda una copia comprimida del archivo «Model.bim» del modelo en la carpeta **Ubicación de la copia de seguridad** en cada implementación. No se guarda ninguna copia de seguridad mientras **Ubicación de copia de seguridad** esté vacía.
+**Guardar copia de seguridad de Model.bim al implementar** (habilitado): Guarda una copia comprimida del archivo `Model.bim` del modelo en la carpeta **Ubicación de la copia de seguridad** en cada implementación. No se guarda ninguna copia de seguridad mientras **Ubicación de copia de seguridad** esté vacía.
 
 **Ubicación de copia de seguridad**: La carpeta para las copias de seguridad de las implementaciones. Disponible cuando se selecciona **Guardar copia de seguridad de Model.bim al implementar**.
 
 ### Opciones de guardado de modelo
 
-**Guardar copia de seguridad de Model.bim al guardar modelo** (habilitado): Guarda una copia comprimida del archivo «Model.bim» del modelo en la carpeta **Ubicación de la copia de seguridad** cada vez que guarda el modelo. No se guarda ninguna copia de seguridad mientras **Ubicación de copia de seguridad** esté vacía.
+**Guardar copia de seguridad de Model.bim al guardar modelo** (habilitado): Guarda una copia comprimida del archivo `Model.bim` del modelo en la carpeta **Ubicación de la copia de seguridad** cada vez que guarda el modelo. No se guarda ninguna copia de seguridad mientras **Ubicación de copia de seguridad** esté vacía.
 
 **Ubicación de copia de seguridad**: La carpeta para guardar las copias de seguridad. Disponible cuando se selecciona **Guardar copia de seguridad de Model.bim al guardar modelo**.
 
@@ -502,9 +502,9 @@ Estos ajustes controlan cómo gestiona Tabular Editor 3 los metadatos del model
 
 ### Configuración de consulta
 
-**Selección inteligente** (habilitada): Cuando ejecuta parte de una consulta, Tabular Editor convierte esa selección en una consulta DAX válida en su nombre, envolviendo una expresión escalar entre llaves y añadiendo la sección `DEFINE` o la palabra clave `EVALUATE` cuando no forman parte de la selección. En un documento con varias consultas `DEFINE ... EVALUATE`, la sección `DEFINE` añadida es la que pertenece a la consulta seleccionada. Una referencia de columna seleccionada, incluida una en una cláusula «ORDER BY», devuelve los valores distintos de la columna.
+**Selección inteligente** (habilitada): Cuando ejecuta parte de una consulta, Tabular Editor convierte esa selección en una consulta DAX válida en su nombre, envolviendo una expresión escalar entre llaves y añadiendo la sección `DEFINE` o la palabra clave `EVALUATE` cuando no forman parte de la selección. En un documento con varias consultas `DEFINE ... EVALUATE`, la sección `DEFINE` añadida es la que pertenece a la consulta seleccionada. Una referencia de columna seleccionada, incluida una en una cláusula `ORDER BY`, devuelve los valores distintos de la columna.
 
-**Límite de filas** (1000): Encierra cada sentencia `EVALUATE` en una llamada `TOPN`, para evitar que una consulta accidental sobre una tabla grande se ejecute durante mucho tiempo o agote la memoria. Establézcalo en «0» para eliminar el límite por completo.
+**Límite de filas** (1000): Encierra cada sentencia `EVALUATE` en una llamada `TOPN`, para evitar que una consulta accidental sobre una tabla grande se ejecute durante mucho tiempo o agote la memoria. Establézcalo en `0` para eliminar el límite por completo.
 
 ### Generación de código
 
@@ -552,7 +552,7 @@ El editor DAX de Tabular Editor 3 es altamente configurable. Esta página ofrec
 
 **Usar tabulaciones** (desactivado): cuando está marcado, se inserta un carácter de tabulación (`\t`) cada vez que se pulsa la tecla TAB. De lo contrario, se inserta un número de espacios correspondiente al ajuste **Ancho de sangría**.
 
-**Estilo de comentario** (barras diagonales): DAX admite comentarios de línea que utilizan barras diagonales («//») o guiones («--»). Este ajuste determina qué estilo de comentario se utiliza cuando Tabular Editor 3 genera código DAX.
+**Estilo de comentario** (barras diagonales): DAX admite comentarios de línea que utilizan barras diagonales (`//`) o guiones (`--`). Este ajuste determina qué estilo de comentario se utiliza cuando Tabular Editor 3 genera código DAX.
 
 **Documentación de funciones DAX**: Use esta configuración para especificar qué URL abrir en el navegador web predeterminado cada vez que pulse F12 mientras el cursor esté situado sobre una función DAX. Las opciones incluyen https://dax.guide (recomendada) y la documentación oficial de Microsoft.
 
@@ -645,7 +645,7 @@ Además de formatear los espacios en blanco del código DAX, Tabular Editor 3 ta
 
 **Corregir calificadores de medida/columna** (habilitado): Cuando está marcada esta opción, los prefijos de tabla se eliminan automáticamente de las referencias a medidas y se insertan automáticamente en las referencias a columnas.
 
-**Mayúsculas preferidas para palabras clave** (MAYÚSCULAS): Este ajuste le permite cambiar las mayúsculas utilizadas para las palabras clave, como «ORDER BY», «VAR», «EVALUATE», etc. También rige los valores fijos de las palabras clave que ofrece el autocompletado para las funciones que los utilizan: «ASC» y «DESC», «KEEP», «FIRST», «LAST» y «DEFAULT», las direcciones de «CROSSFILTER» y «EXPLICIT» e «INFERRED» de «LOOKUP». Elija **Poner en mayúscula solo la primera letra** para que se le ofrezca «Explicit» en lugar de «EXPLICIT».
+**Mayúsculas preferidas para palabras clave** (MAYÚSCULAS): Este ajuste le permite cambiar las mayúsculas utilizadas para las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. También rige los valores fijos de las palabras clave que ofrece el autocompletado para las funciones que los utilizan: `ASC` y `DESC`, `KEEP`, `FIRST`, `LAST` y `DEFAULT`, las direcciones de `CROSSFILTER` y `EXPLICIT` e `INFERRED` de `LOOKUP`. Elija **Poner en mayúscula solo la primera letra** para que se le ofrezca `Explicit` en lugar de `EXPLICIT`.
 
 **Mayúsculas preferidas para funciones** (MAYÚSCULAS): Este ajuste le permite cambiar las mayúsculas utilizadas para las funciones, como `CALCULATE(...)`, `SUM(...)`, etc.
 
@@ -761,7 +761,7 @@ Configure la integración con DAX Optimizer (solo en la Edición Enterprise):
 - **Sistema**: Utilizar la configuración de proxy del sistema
 - **Personalizado**: Especifique una configuración de proxy personalizada.
 
-**Dirección de proxy**: La dirección del servidor proxy (p. ej., `http://proxy.company.com`).
+**Dirección de proxy**: La dirección del servidor proxy (p. ej., `http://proxy.company.com:8080`).
 
 **Usuario del proxy**: Nombre de usuario para la autenticación del proxy, si es necesario.
 

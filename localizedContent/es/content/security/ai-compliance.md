@@ -29,11 +29,11 @@ El [asistente de IA](xref:ai-assistant) y el [servidor del Protocolo de Contexto
 | Función | Qué hace | Qué llama al proveedor de IA | Tráfico de red |
 | -- | -- | -- | -- |
 | Asistente de IA | Un panel de chat en Tabular Editor 3 que lee, consulta y modifica el modelo semántico abierto | Tabular Editor 3, desde el equipo del usuario, con una clave de API que introduce el usuario | Saliente hacia el punto de conexión del proveedor configurado |
-| Servidor MCP | Un servidor local al que se conecta un agente de IA que el usuario ya ejecuta, como Claude Code, GitHub Copilot, Codex o Cursor. A continuación, el agente lee, consulta y modifica el modelo semántico abierto | El agente, con su propia configuración y suscripción | Tráfico entrante solo en «127.0.0.1» |
+| Servidor MCP | Un servidor local al que se conecta un agente de IA que el usuario ya ejecuta, como Claude Code, GitHub Copilot, Codex o Cursor. A continuación, el agente lee, consulta y modifica el modelo semántico abierto | El agente, con su propia configuración y suscripción | Tráfico entrante solo en `127.0.0.1` |
 
 Ambas funciones se incluyen en el componente de funciones de IA, que forma parte de la instalación predeterminada de Tabular Editor 3.27.0. Comparten las concesiones de permisos, las políticas de administrador y el registro de auditoría, con las diferencias descritas en [Concesiones de permisos](#permission-grants).
 
-Tabular Editor ApS no gestiona ningún servicio de IA y no incluye ninguna clave de API. Las indicaciones, las respuestas, los metadatos del modelo y los datos del modelo de cualquiera de las dos funciones nunca pasan por los servidores de Tabular Editor. Con la telemetría activada, Tabular Editor 3 envía eventos de uso de la IA a Tabular Editor ApS con el proveedor, el nombre del modelo, un ID de conversación y el número de «tokens». En el caso del servidor MCP, los eventos incluyen el nombre de la herramienta, el resultado y la duración de cada llamada a la herramienta, así como el nombre y la versión del cliente MCP si se trata de un cliente conocido. No se envían los argumentos de las herramientas, los resultados de las herramientas ni los mensajes de error. La directiva «DisableTelemetry» los desactiva.
+Tabular Editor ApS no gestiona ningún servicio de IA y no incluye ninguna clave de API. Las indicaciones, las respuestas, los metadatos del modelo y los datos del modelo de cualquiera de las dos funciones nunca pasan por los servidores de Tabular Editor. Con la telemetría activada, Tabular Editor 3 envía eventos de uso de la IA a Tabular Editor ApS con el proveedor, el nombre del modelo, un ID de conversación y el número de «tokens». En el caso del servidor MCP, los eventos incluyen el nombre de la herramienta, el resultado y la duración de cada llamada a la herramienta, así como el nombre y la versión del cliente MCP si se trata de un cliente conocido. No se envían los argumentos de las herramientas, los resultados de las herramientas ni los mensajes de error. La directiva `DisableTelemetry` los desactiva.
 
 El [Centro de confianza de Tabular Editor](https://trust.tabulareditor.com/) publica el informe de la prueba de penetración independiente para el Asistente de IA, el informe de auditoría SOC 2 y la lista de subencargados del tratamiento.
 
@@ -47,7 +47,7 @@ Una solicitud al proveedor contiene:
 
 - la indicación del sistema y las instrucciones personalizadas vigentes, incluidas las que publique tu organización
 - los mensajes del usuario y el historial de la conversación
-- contexto sobre el modelo abierto añadido a los mensajes del usuario: el nombre de la base de datos, el número de objetos, la selección actual, el título del documento activo, los errores del modelo y los cambios recientes. El ajuste **Metadatos del modelo** de un usuario no los retiene; un límite de «MaxModelMetadataAccess» de «Deny» sí lo hace.
+- contexto sobre el modelo abierto añadido a los mensajes del usuario: el nombre de la base de datos, el número de objetos, la selección actual, el título del documento activo, los errores del modelo y los cambios recientes. El ajuste **Metadatos del modelo** de un usuario no los retiene; un límite de `MaxModelMetadataAccess` de `Deny` sí lo hace.
 - los resultados de las herramientas que el asistente ha llamado, dentro de los [permisos concedidos](#permission-grants)
 - pasajes de la base de conocimientos de Tabular Editor, una base de datos local creada a partir de la documentación de Tabular Editor, el blog, los problemas de GitHub y los debates
 
@@ -59,11 +59,11 @@ El acuerdo de su organización con el proveedor rige la retención, la región e
 
 ### Servidor MCP
 
-El servidor MCP es un «listener» HTTP vinculado a `127.0.0.1`, en el puerto 42100 de forma predeterminada. No tiene clave de API, no realiza solicitudes salientes y rechaza las solicitudes del navegador con un encabezado «Origin» no local.
+El servidor MCP es un «listener» HTTP vinculado a `127.0.0.1`, en el puerto 42100 de forma predeterminada. No tiene clave de API, no realiza solicitudes salientes y rechaza las solicitudes del navegador con un encabezado `Origin` no local.
 
 El agente conectado envía lo que lee de Tabular Editor 3 a su propio proveedor, según la configuración del agente y las condiciones del proveedor. Tabular Editor 3 no tiene ningún ajuste para el proveedor del agente, por lo que debes controlar al agente a través de sus propios controles administrativos. Las propias herramientas del agente, como el acceso a archivos y al shell, también están fuera de Tabular Editor 3. La preferencia **Detalle del origen del modelo** establece qué parte de la ruta del archivo o del servidor del modelo recibe el agente junto con el nombre del modelo, y no cambia los detalles de la conexión en los metadatos del modelo. Consulte [Comprobar que ha funcionado](xref:mcp-server#check-that-it-worked). Los archivos de modelo en el disco, los archivos de conversación y los archivos de auditoría pueden ser leídos por cualquier agente que se ejecute como el usuario.
 
-La opción **Requerir token de acceso** está desactivada de forma predeterminada. Mientras esté desactivada, cualquier proceso del equipo puede conectarse al servidor sin credenciales, incluidos los procesos de las sesiones de otros usuarios en un Escritorio remoto o en un host Citrix. La política «RequireMcpAccessToken» impone el token para todos los usuarios. Los archivos de registro del agente almacenan el token en texto plano, y la opción **Regenerar token** en el cuadro de diálogo **Herramientas > Servidor MCP...** invalida todos los registros existentes. Consulte [Ejecución en un equipo compartido](xref:mcp-server#running-on-a-shared-machine).
+La opción **Requerir token de acceso** está desactivada de forma predeterminada. Mientras esté desactivada, cualquier proceso del equipo puede conectarse al servidor sin credenciales, incluidos los procesos de las sesiones de otros usuarios en un Escritorio remoto o en un host Citrix. La política `RequireMcpAccessToken` impone el token para todos los usuarios. Los archivos de registro del agente almacenan el token en texto plano, y la opción **Regenerar token** en el cuadro de diálogo **Herramientas > Servidor MCP...** invalida todos los registros existentes. Consulte [Ejecución en un equipo compartido](xref:mcp-server#running-on-a-shared-machine).
 
 ### Puntos de conexión de red
 
@@ -71,9 +71,9 @@ Permite estos puntos finales a través de tu cortafuegos o proxy para las funcio
 
 | Tráfico | Punto de conexión |
 | -- | -- |
-| Solicitudes del Asistente de IA | El punto de conexión del proveedor configurado, por ejemplo, «https://api.openai.com», «https://api.anthropic.com», un recurso de Azure OpenAI o tu propia pasarela |
+| Solicitudes del Asistente de IA | El punto de conexión del proveedor configurado, por ejemplo, `https://api.openai.com`, `https://api.anthropic.com`, un recurso de Azure OpenAI o tu propia pasarela |
 | Catálogo de modelos de IA | `https://api.tabulareditor.com/AiModels`. Una solicitud anónima de la lista de modelos, realizada cuando un usuario abre la lista de modelos de OpenAI o Anthropic. La lista se almacena en caché durante 24 horas. `DisableUpdates` la desactiva |
-| Actualizaciones de la base de conocimientos de IA | `https://cdn.tabulareditor.com`. Una comprobación como máximo una vez al día mientras el asistente de IA esté configurado, sin datos sobre el usuario ni el modelo. Ninguna directiva lo desactiva, excepto «DisableAi». Los usuarios desmarcan **Buscar actualizaciones de la base de conocimientos al iniciar** en **Herramientas > Preferencias > Funciones de IA > Asistente de IA** |
+| Actualizaciones de la base de conocimientos de IA | `https://cdn.tabulareditor.com`. Una comprobación como máximo una vez al día mientras el asistente de IA esté configurado, sin datos sobre el usuario ni el modelo. Ninguna directiva lo desactiva, excepto `DisableAi`. Los usuarios desmarcan **Buscar actualizaciones de la base de conocimientos al iniciar** en **Herramientas > Preferencias > Funciones de IA > Asistente de IA** |
 | Servidor MCP | Ninguno |
 
 La validación de licencias, las comprobaciones de actualizaciones y la telemetría utilizan solicitudes separadas. Consulte [Solicitudes web](xref:security-privacy#web-requests).
@@ -106,14 +106,14 @@ Las concesiones de permisos controlan a qué acceden el asistente de IA y el ser
 | Documentos | Lectura: el contenido de los documentos abiertos de scripts de C#, consultas DAX y scripts DAX, así como los errores y las advertencias de los documentos abiertos, incluidas las tablas dinámicas. Escritura: crearlos y sobrescribirlos | Escritura | `MaxDocumentsAccess` | `McpMaxDocumentsAccess` |
 | Macros | Lectura: la biblioteca de macros del usuario, incluido el código de las macros | Escritura | `MaxMacrosAccess` | `McpMaxMacrosAccess` |
 
-En los niveles predeterminados, las funciones de IA leen la definición del modelo, ejecutan Best Practice Analyzer, leen la biblioteca de macros y leen y sobrescriben los documentos de script y de consultas abiertos. No leen los valores de los datos ni cambian el modelo. El código de las macros y los documentos abiertos pueden contener cadenas de conexión y otras credenciales. Establece «MaxMacrosAccess» y «MaxDocumentsAccess» si es el caso en tu organización.
+En los niveles predeterminados, las funciones de IA leen la definición del modelo, ejecutan Best Practice Analyzer, leen la biblioteca de macros y leen y sobrescriben los documentos de script y de consultas abiertos. No leen los valores de los datos ni cambian el modelo. El código de las macros y los documentos abiertos pueden contener cadenas de conexión y otras credenciales. Establece `MaxMacrosAccess` y `MaxDocumentsAccess` si es el caso en tu organización.
 
 El asistente de IA y el servidor MCP aplican los permisos de la siguiente manera:
 
 - **Asistente de IA.** Cuando una solicitud necesita un acceso que no cubre el permiso permanente, aparece una tarjeta de permiso en el chat. El usuario lo permite para el turno, para la sesión o siempre, y para **Metadatos del modelo** y **Datos del modelo** también para el modelo actual. No aparece ninguna tarjeta para el acceso por encima de un límite de permisos.
 - **Servidor MCP.** No aparece ningún mensaje. El servidor lee los permisos permanentes cuando se inicia, y las herramientas que un permiso no cubre no se ofrecen al agente. Los permisos concedidos para un modelo o una sesión se aplican únicamente al chat.
 
-Un límite de permisos prevalece sobre todas las concesiones de los usuarios, incluidas las concesiones otorgadas para un modelo y las concesiones otorgadas antes de establecer la política, y el ajuste correspondiente ofrece solo los niveles hasta el límite. Un límite «McpMax...» solo reduce el límite compartido para el servidor MCP. Consulta [Permisos y consentimiento](xref:ai-assistant#permissions-and-consent).
+Un límite de permisos prevalece sobre todas las concesiones de los usuarios, incluidas las concesiones otorgadas para un modelo y las concesiones otorgadas antes de establecer la política, y el ajuste correspondiente ofrece solo los niveles hasta el límite. Un límite `McpMax...` solo reduce el límite compartido para el servidor MCP. Consulta [Permisos y consentimiento](xref:ai-assistant#permissions-and-consent).
 
 ## Medidas de protección ante cambios en el modelo
 
@@ -130,7 +130,7 @@ Las funciones de IA ejecutan scripts que modifican un modelo solo cuando los **M
 - En un script que ejecuta el Asistente de IA o un agente MCP, `ReadFile`, `SaveFile`, `Bpa.ExportCsv`, `ExecuteCommand`, las llamadas que ejecutan una macro y las llamadas de Semantic Bridge siempre fallan. `ExecuteCommand` envía al servidor comandos del lenguaje de scripting de modelo tabular (TMSL) y de XML for Analysis (XMLA).
 - En los mismos scripts, los métodos auxiliares de DAX requieren **Datos del modelo** en **Lectura**, al igual que la herramienta de consultas DAX.
 
-La política «BlockUnsafeScripts» aplica la misma comprobación de seguridad a todos los scripts y macros: del usuario, de Best Practice Analyzer, del asistente de IA, del servidor MCP o de Tabular Editor CLI. `DisableCSharpScripts` desactiva los documentos de script de C# y elimina la herramienta que ejecuta los scripts del Asistente de IA y ambas herramientas de script del servidor MCP. Las macros siguen ejecutándose, a menos que también se establezca `DisableMacros`. Consulta [Cómo cambia un agente tu modelo](xref:mcp-server#how-an-agent-changes-your-model).
+La política `BlockUnsafeScripts` aplica la misma comprobación de seguridad a todos los scripts y macros: del usuario, de Best Practice Analyzer, del asistente de IA, del servidor MCP o de Tabular Editor CLI. `DisableCSharpScripts` desactiva los documentos de script de C# y elimina la herramienta que ejecuta los scripts del Asistente de IA y ambas herramientas de script del servidor MCP. Las macros siguen ejecutándose, a menos que también se establezca `DisableMacros`. Consulta [Cómo cambia un agente tu modelo](xref:mcp-server#how-an-agent-changes-your-model).
 
 ## Controles del administrador
 
@@ -175,7 +175,7 @@ Obtenga los nombres de las herramientas para `McpDisabledTools` de los registros
 | Una lista de proveedores aprobados | `AiAllowedProviders` | Enterprise |
 | Una lista de hosts de puntos de conexión aprobados | `AiAllowedEndpointHosts` | Enterprise |
 
-`AiProvider`, `AiEndpoint`, `AiModel`, `AiOrganizationId` y `AiProjectId` sustituyen la configuración del usuario, y si `AiProvider` se establece en `None`, el Asistente de IA se desactiva. Si la configuración interrumpe `AiAllowedProviders` o `AiAllowedEndpointHosts`, el asistente de IA no envía la solicitud y un error indica el nombre del proveedor o del host del punto de conexión. `AiAllowedEndpointHosts` solo comprueba un punto de conexión que introduce el usuario, por lo que OpenAI y Anthropic, sin un punto de conexión personalizado, acceden a su API pública independientemente de lo que contenga la lista. Combínelo con «AiProvider» o «AiAllowedProviders». Ninguna política requiere HTTPS; bloquee `AiEndpoint` a una dirección `https://`. Las directivas no distribuyen claves de API. Si el punto de conexión está bloqueado para un recurso que pertenece a su organización, como un recurso de Azure OpenAI o una pasarela interna, solo funcionarán las claves que emita su organización. Con un punto de conexión público como «api.openai.com», los usuarios pueden introducir una clave personal. Estas políticas se aplican únicamente al asistente de IA.
+`AiProvider`, `AiEndpoint`, `AiModel`, `AiOrganizationId` y `AiProjectId` sustituyen la configuración del usuario, y si `AiProvider` se establece en `None`, el Asistente de IA se desactiva. Si la configuración interrumpe `AiAllowedProviders` o `AiAllowedEndpointHosts`, el asistente de IA no envía la solicitud y un error indica el nombre del proveedor o del host del punto de conexión. `AiAllowedEndpointHosts` solo comprueba un punto de conexión que introduce el usuario, por lo que OpenAI y Anthropic, sin un punto de conexión personalizado, acceden a su API pública independientemente de lo que contenga la lista. Combínelo con `AiProvider` o `AiAllowedProviders`. Ninguna política requiere HTTPS; bloquee `AiEndpoint` a una dirección `https://`. Las directivas no distribuyen claves de API. Si el punto de conexión está bloqueado para un recurso que pertenece a su organización, como un recurso de Azure OpenAI o una pasarela interna, solo funcionarán las claves que emita su organización. Con un punto de conexión público como `api.openai.com`, los usuarios pueden introducir una clave personal. Estas políticas se aplican únicamente al asistente de IA.
 
 ### Instrucciones personalizadas y el puerto MCP
 
@@ -188,19 +188,19 @@ Obtenga los nombres de las herramientas para `McpDisabledTools` de los registros
 
 ### Políticas de la Edición Enterprise en otras ediciones
 
-Si hay algún valor de política Enterprise en un equipo cuya licencia no sea Enterprise, el asistente de IA y el servidor MCP no se inician, y un valor `BlockUnsafeScripts` impide que se ejecuten todos los scripts y macros. Un valor que Tabular Editor 3 no pueda interpretar deniega el recurso por un límite de permisos, hace que el Asistente de IA no esté disponible para «AiProvider» y aplica «BlockUnsafeScripts». Cualquier otro valor no válido se ignora y el ajuste que controla permanece sin restricciones. Implemente las políticas Enterprise solo en los equipos con una licencia coincidente. Consulte [Qué sucede sin la Edición Enterprise](xref:policies#what-happens-without-enterprise-edition).
+Si hay algún valor de política Enterprise en un equipo cuya licencia no sea Enterprise, el asistente de IA y el servidor MCP no se inician, y un valor `BlockUnsafeScripts` impide que se ejecuten todos los scripts y macros. Un valor que Tabular Editor 3 no pueda interpretar deniega el recurso por un límite de permisos, hace que el Asistente de IA no esté disponible para `AiProvider` y aplica `BlockUnsafeScripts`. Cualquier otro valor no válido se ignora y el ajuste que controla permanece sin restricciones. Implemente las políticas Enterprise solo en los equipos con una licencia coincidente. Consulte [Qué sucede sin la Edición Enterprise](xref:policies#what-happens-without-enterprise-edition).
 
 Para comprobar qué políticas se aplican en un equipo, abra **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**. La sección **Gestionado por su organización** enumera todos los valores de políticas encontrados, su clave de origen y cualquier valor marcado como **(no válido)**.
 
 ## Registro de auditoría
 
-En la Edición Enterprise, Tabular Editor 3 escribe un registro local de la actividad del Asistente de IA y del servidor MCP en un archivo JSON Lines al día. Cada registro incluye una marca de tiempo UTC, la función («chat» o «mcp»), la sesión y el nombre del modelo abierto al que se aplican, así como el nombre de usuario de Windows. No se registra nada antes de activar una licencia.
+En la Edición Enterprise, Tabular Editor 3 escribe un registro local de la actividad del Asistente de IA y del servidor MCP en un archivo JSON Lines al día. Cada registro incluye una marca de tiempo UTC, la función (`chat` o `mcp`), la sesión y el nombre del modelo abierto al que se aplican, así como el nombre de usuario de Windows. No se registra nada antes de activar una licencia.
 
 El registro recoge:
 
 - solicitudes de permiso y respuesta del usuario
-- cada llamada a una herramienta, con el nombre de la herramienta, los permisos que necesitaba, su resultado («ok», «error», «denied» o «cancelled»), su duración y los nombres y el tamaño total de sus argumentos
-- Todos los scripts de C# enviados para su ejecución, incluidos los scripts que fallaron en tiempo de ejecución, fueron rechazados o devueltos para su revisión, guardados como archivo «.csx» con su hash SHA-256.
+- cada llamada a una herramienta, con el nombre de la herramienta, los permisos que necesitaba, su resultado (`ok`, `error`, `denied` o `cancelled`), su duración y los nombres y el tamaño total de sus argumentos
+- Todos los scripts de C# enviados para su ejecución, incluidos los scripts que fallaron en tiempo de ejecución, fueron rechazados o devueltos para su revisión, guardados como archivo `.csx` con su hash SHA-256.
 - el proveedor, el modelo, el host del punto de conexión y el número de tokens para cada turno del chat
 - Cambios en la configuración de la IA
 - Inicio y parada del servidor MCP, con el nivel de permiso de cada recurso
@@ -208,7 +208,7 @@ El registro recoge:
 
 No se registran el texto de la indicación, el texto de la respuesta, los valores de los argumentos, los valores de los datos del modelo, las claves de API ni los tokens de acceso. No se guardan los scripts que no se compilan ni los scripts que las funciones de IA escriben en un documento para que el usuario los ejecute.
 
-Los archivos con más de 30 días de antigüedad se eliminan, a menos que «AiAuditLogRetentionDays» establezca otro período; si se establece «0», se conservan todos los archivos. Cada copia de Tabular Editor 3 elimina los archivos caducados de la carpeta en la que escribe antes de escribir su primer registro en una sesión.
+Los archivos con más de 30 días de antigüedad se eliminan, a menos que `AiAuditLogRetentionDays` establezca otro período; si se establece `0`, se conservan todos los archivos. Cada copia de Tabular Editor 3 elimina los archivos caducados de la carpeta en la que escribe antes de escribir su primer registro en una sesión.
 
 El registro lo escribe el propio proceso de Tabular Editor 3 del usuario, por lo que este tiene acceso de escritura y eliminación al mismo, incluso en un recurso compartido redirigido. Si no se puede escribir el registro, por ejemplo, porque no se puede acceder al recurso compartido, el asistente de IA y el servidor MCP siguen funcionando y el fallo se escribe una vez en el registro de la aplicación de Tabular Editor.
 

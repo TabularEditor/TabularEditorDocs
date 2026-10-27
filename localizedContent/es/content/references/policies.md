@@ -50,11 +50,11 @@ HKEY_CURRENT_USER\Software\Policies\Tabular Editor ApS
 HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor
 ```
 
-- `Tabular Editor ApS\TE3` solo lo lee Tabular Editor 3. Tabular Editor CLI lee «Tabular Editor ApS\TECLI» en su lugar; las otras cuatro claves son las mismas para ambos.
+- `Tabular Editor ApS\TE3` solo lo lee Tabular Editor 3. Tabular Editor CLI lee `Tabular Editor ApS\TECLI` en su lugar; las otras cuatro claves son las mismas para ambos.
 - `Tabular Editor ApS` es la clave compartida, leída tanto por Tabular Editor 3 como por la CLI.
 - `Kapacity\Tabular Editor` es la clave utilizada por las versiones anteriores. Sigue siendo leída y es la única clave que lee Tabular Editor 2, así que establezca también una política allí si también tiene que llegar a Tabular Editor 2.
 
-La prioridad se aplica a cada valor por separado: un valor «DisableTelemetry» de 0 para todo el equipo anula un valor «DisableTelemetry» de 1 por usuario, mientras que un valor «DisableCSharpScripts» establecido solo por usuario sigue aplicándose.
+La prioridad se aplica a cada valor por separado: un valor `DisableTelemetry` de 0 para todo el equipo anula un valor `DisableTelemetry` de 1 por usuario, mientras que un valor `DisableCSharpScripts` establecido solo por usuario sigue aplicándose.
 Los nombres de los valores no distinguen entre mayúsculas y minúsculas.
 
 ## Tipos de valores
@@ -90,19 +90,19 @@ Para aplicar una de estas políticas, añada un valor `REG_DWORD` con el nombre 
 | DisableAiChat | TE3 | El panel de chat del Asistente de IA no está disponible. Otras funcionalidades de IA, incluido el servidor MCP, no se ven afectadas. |
 | DisableMcpServer | TE3 | El servidor MCP no está disponible, por lo que las herramientas de agentes externos no pueden conectarse a Tabular Editor 3. El chat del asistente de IA no se ve afectado. |
 | RequireMcpAccessToken | TE3 | Los clientes que se conecten al servidor MCP deben presentar el token de acceso que se muestra en el cuadro de diálogo **Herramientas > Servidor MCP...**, y los usuarios no pueden desactivar este requisito. |
-| RequireNativeLibrarySignatureVerification | TE3 | Tabular Editor 3 verifica la firma Authenticode de las bibliotecas del editor de código, «Scintilla.dll» y «Lexilla.dll», antes de cargarlas. Si el equipo no puede validar la cadena de certificados del editor, los editores de código no se inician y Tabular Editor 3 se cierra. En el editor de directivas de grupo, esta directiva se denomina **Requerir la verificación de la firma de las bibliotecas de soporte del editor de código**. |
+| RequireNativeLibrarySignatureVerification | TE3 | Tabular Editor 3 verifica la firma Authenticode de las bibliotecas del editor de código, `Scintilla.dll` y `Lexilla.dll`, antes de cargarlas. Si el equipo no puede validar la cadena de certificados del editor, los editores de código no se inician y Tabular Editor 3 se cierra. En el editor de directivas de grupo, esta directiva se denomina **Requerir la verificación de la firma de las bibliotecas de soporte del editor de código**. |
 
 ### En Tabular Editor CLI
 
 Tabular Editor CLI respeta las políticas marcadas como **CLI** más arriba, en Windows, leyendo las mismas claves en el mismo orden que Tabular Editor 3. También respeta `BlockUnsafeScripts` de las [políticas Enterprise](#scripts-and-macros) que se indican a continuación, para `te script`, `te macro run` y `te bpa run --fix`.
 
-Una operación rechazada no pasa desapercibida. «te» indica la política que la ha rechazado y sale con un código distinto de cero, por lo que un paso del «pipeline» falla en lugar de parecer que se ha completado con éxito sin que se haya hecho nada.
+Una operación rechazada no pasa desapercibida. `te` indica la política que la ha rechazado y sale con un código distinto de cero, por lo que un paso del «pipeline» falla en lugar de parecer que se ha completado con éxito sin que se haya hecho nada.
 
 La CLI no tiene ediciones, por lo que una política que requiere Tabular Editor 3 Edición Enterprise en la aplicación de escritorio simplemente la aplica la CLI, independientemente de la licencia que tenga el equipo.
 
 ## Políticas Enterprise
 
-Estas políticas determinan lo que puede hacer un script de C# y configuran el Asistente de IA y el servidor MCP. Todas ellas requieren Tabular Editor 3 Edición Enterprise y pertenecen a `Tabular Editor ApS\TE3`, excepto `BlockUnsafeScripts`, que también respeta Tabular Editor CLI y que, por tanto, pertenece a la clave compartida `Tabular Editor ApS`. En su lugar, colócala bajo «TE3» o «TECLI» para que afecte solo a uno de los dos.
+Estas políticas determinan lo que puede hacer un script de C# y configuran el Asistente de IA y el servidor MCP. Todas ellas requieren Tabular Editor 3 Edición Enterprise y pertenecen a `Tabular Editor ApS\TE3`, excepto `BlockUnsafeScripts`, que también respeta Tabular Editor CLI y que, por tanto, pertenece a la clave compartida `Tabular Editor ApS`. En su lugar, colócala bajo `TE3` o `TECLI` para que afecte solo a uno de los dos.
 
 ### Scripts y macros
 
@@ -120,13 +120,13 @@ En el editor de directivas de grupo, esta opción se llama **Permitir únicament
 
 ### Límites de permisos
 
-Cada uno de estos establece un límite superior a lo que el Asistente de IA y el servidor MCP pueden alcanzar para un tipo de recurso. Los valores aceptados son «Denegar», «Leer» y «Escribir», excepto para los datos del modelo, donde «Leer» es el ajuste más alto con sentido.
+Cada uno de estos establece un límite superior a lo que el Asistente de IA y el servidor MCP pueden alcanzar para un tipo de recurso. Los valores aceptados son `Deny`, `Read` y `Write`, excepto para los datos del modelo, donde `Read` es el ajuste más alto con sentido.
 
 Un límite restringe lo que un usuario puede conceder: un permiso existente que supere el límite se reduce a este, la opción correspondiente en **Herramientas > Preferencias > Funciones de IA > Permisos** y en el cuadro de diálogo **Herramientas > Servidor MCP...** se muestra como de solo lectura, y el Asistente de IA ya no solicita un permiso que no se le puede conceder. Ninguna concesión supera un límite: ni un permiso permanente, ni uno concedido para un solo modelo, ni uno concedido en una versión anterior. La propia elección del usuario se mantiene intacta en sus preferencias, por lo que vuelve a aplicarse si se elimina la directiva.
 
 |Valor|Valores aceptados|Limita el acceso a...|
 |--|--|--|
-| MaxModelMetadataAccess | Denegar, Leer, Escribir | Los metadatos del modelo abierto: nombres de tablas, columnas y medidas, expresiones, descripciones, resultados del Best Practice Analyzer y estadísticas de VertiPaq. «Write» también permite al asistente ejecutar sus propios scripts de C# en el modelo. Con «Denegar», no se envía nada en absoluto sobre el modelo abierto: ni el resumen del modelo, ni el aviso de que el modelo ha cambiado, ni la selección actual. |
+| MaxModelMetadataAccess | Denegar, Leer, Escribir | Los metadatos del modelo abierto: nombres de tablas, columnas y medidas, expresiones, descripciones, resultados del Best Practice Analyzer y estadísticas de VertiPaq. `Write` también permite al asistente ejecutar sus propios scripts de C# en el modelo. Con `Deny`, no se envía nada en absoluto sobre el modelo abierto: ni el resumen del modelo, ni el aviso de que el modelo ha cambiado, ni la selección actual. |
 | MaxModelDataAccess | Denegar, Leer | Valores de datos del modelo, es decir, los resultados de las consultas DAX. |
 | MaxBpaAccess | Denegar, Leer, Escribir | Reglas del Best Practice Analyzer. `Read` permite listar las reglas y ejecutar el análisis; `Write` permite además añadir y modificar reglas. |
 | MaxDocumentsAccess | Denegar, Leer, Escribir | Los documentos que el usuario tiene abiertos, como scripts de C# y consultas DAX. `Read` permite leer su contenido; `Write` permite además modificarlos. |
@@ -137,7 +137,7 @@ Un límite restringe lo que un usuario puede conceder: un permiso existente que 
 | McpMaxDocumentsAccess | Denegar, Lectura, Escritura | |
 | McpMaxMacrosAccess | Denegar, Lectura, Escritura | |
 
-Los cinco valores «McpMax...» se aplican únicamente al servidor MCP. Cuando uno de ellos no está establecido, el servidor MCP hereda el límite «Max...» correspondiente. Solo pueden reducir ese límite, nunca aumentarlo, por lo que a un agente desatendido nunca se le permite más que al asistente interactivo.
+Los cinco valores `McpMax...` se aplican únicamente al servidor MCP. Cuando uno de ellos no está establecido, el servidor MCP hereda el límite `Max...` correspondiente. Solo pueden reducir ese límite, nunca aumentarlo, por lo que a un agente desatendido nunca se le permite más que al asistente interactivo.
 
 ### Proveedor de IA
 
@@ -149,11 +149,11 @@ Los cinco valores «McpMax...» se aplican únicamente al servidor MCP. Cuando u
 | AiOrganizationId | Nombre | | Bloquea la organización de OpenAI a la que se facturan las solicitudes. |
 | AiProjectId | Nombre | | Bloquea el proyecto de OpenAI al que se facturan las solicitudes. |
 | AiAllowedProviders | Lista | Cualquiera de los nombres de proveedores anteriores | Restringe qué proveedores pueden configurar los usuarios. Se permite un proveedor establecido por `AiProvider` tanto si aparece en la lista como si no, y siempre se ofrece `None`. Una lista de elementos permitidos no es una forma de impedir que un usuario desactive el asistente. |
-| AiAllowedEndpointHosts | Lista | Nombres de host | Restringe los hosts a los que puede apuntar un extremo, por ejemplo, «gateway.contoso.com» o «*.contoso.com». |
+| AiAllowedEndpointHosts | Lista | Nombres de host | Restringe los hosts a los que puede apuntar un extremo, por ejemplo, `gateway.contoso.com` o `*.contoso.com`. |
 
 Los ajustes bloqueados aparecen como de solo lectura en **Herramientas > Preferencias > Funciones de IA > Asistente de IA**, y el Asistente de IA utiliza la configuración bloqueada, independientemente de lo que el usuario hubiera elegido antes. No se escribe nada en las propias preferencias del usuario, por lo que su proveedor, su punto de conexión, su modelo y su clave de API vuelven a aparecer si se elimina la política. Las claves de API nunca se distribuyen mediante directivas.
 
-Los nombres de host se comparan únicamente con la parte del host de la URL del punto de conexión. La coincidencia no distingue entre mayúsculas y minúsculas y no tiene en cuenta el puerto. Un «*.» inicial cubre los subdominios de un dominio, pero no el dominio en sí, así que enumera ambos si se desean los dos. La lista se aplica a todos los proveedores siempre que se establezca un punto de conexión, por lo que no se puede usar una anulación de la URL base para evitarla.
+Los nombres de host se comparan únicamente con la parte del host de la URL del punto de conexión. La coincidencia no distingue entre mayúsculas y minúsculas y no tiene en cuenta el puerto. Un `*.` inicial cubre los subdominios de un dominio, pero no el dominio en sí, así que enumera ambos si se desean los dos. La lista se aplica a todos los proveedores siempre que se establezca un punto de conexión, por lo que no se puede usar una anulación de la URL base para evitarla.
 
 Se rechaza cualquier configuración que la política no permita, y el Asistente de IA indica qué regla la ha rechazado en lugar de enviar la solicitud: un proveedor que no está en la lista de permitidos, un host de punto de conexión que no está en la lista de permitidos de hosts, un punto de conexión que no es una URL válida cuando se aplica una lista de permitidos de hosts, o un proveedor de Azure OpenAI o personalizado bloqueado que no tiene ningún punto de conexión.
 
@@ -180,7 +180,7 @@ El registro es una función de la Edición Enterprise. En las licencias Enterpri
 |Valor|Tipo|Qué hace|
 |--|--|--|
 | AiAuditLogPath | Ruta | Redirige el registro de auditoría para que se pueda recopilar de forma centralizada. Se admite una ruta UNC a un recurso compartido de red. Cuando la directiva no está establecida, el registro se escribe en `%LocalAppData%\TabularEditor3\AI\audit`, un archivo `ai-audit-<date>.jsonl` por día, con los scripts registrados en `audit\scripts\<date>`. |
-| AiAuditLogRetentionDays | Número, de 0 a 3650 | Número de días del registro de auditoría que se conservarán; los archivos más antiguos se eliminan. «0» conserva todo. El valor predeterminado es 30 días. |
+| AiAuditLogRetentionDays | Número, de 0 a 3650 | Número de días del registro de auditoría que se conservarán; los archivos más antiguos se eliminan. `0` conserva todo. El valor predeterminado es 30 días. |
 
 ## Qué sucede sin la Edición Enterprise
 
@@ -188,9 +188,9 @@ Las políticas de la Edición Enterprise nunca se ignoran sin más. Si se establ
 
 Las políticas Enterprise también fallan de forma cerrada cuando no se puede interpretar un valor. Un límite de permisos mal escrito deniega el recurso en lugar de interpretarse como «sin límite», y un nombre de proveedor que Tabular Editor no reconozca hace que el Asistente de IA no esté disponible en lugar de recurrir a la propia elección del usuario.
 
-`BlockUnsafeScripts` falla de forma cerrada de la misma manera, y vale la pena saber exactamente cómo, porque va más allá de las superficies de la IA. En una copia que no tiene licencia para la edición Enterprise, la presencia del valor impide que se ejecute **ningún** script ni macro, sean seguros o no, y se muestra un mensaje en el que se indica la edición necesaria; las macros desaparecen de los menús hasta que se activa una licencia Enterprise, momento en el que vuelven a aparecer sin necesidad de reiniciar. Un valor que el lector no puede interpretar aplica la restricción en lugar de eliminarla. Un «0» explícito no la aplica, pero sigue contando como configurado, por lo que también deja las superficies de IA detrás de la barrera de Enterprise.
+`BlockUnsafeScripts` falla de forma cerrada de la misma manera, y vale la pena saber exactamente cómo, porque va más allá de las superficies de la IA. En una copia que no tiene licencia para la edición Enterprise, la presencia del valor impide que se ejecute **ningún** script ni macro, sean seguros o no, y se muestra un mensaje en el que se indica la edición necesaria; las macros desaparecen de los menús hasta que se activa una licencia Enterprise, momento en el que vuelven a aparecer sin necesidad de reiniciar. Un valor que el lector no puede interpretar aplica la restricción en lugar de eliminarla. Un `0` explícito no la aplica, pero sigue contando como configurado, por lo que también deja las superficies de IA detrás de la barrera de Enterprise.
 
-Para desactivar todas las funciones de IA sin una licencia Enterprise, use la política general «DisableAi».
+Para desactivar todas las funciones de IA sin una licencia Enterprise, use la política general `DisableAi`.
 
 ## Ver qué políticas están vigentes
 
@@ -200,7 +200,7 @@ Los controles que una política ha bloqueado o limitado en otros lugares de **Pr
 
 ## Uso de las plantillas administrativas
 
-Tabular Editor 3.27 y versiones posteriores instalan un par de plantillas administrativas de directivas de grupo, de modo que las directivas anteriores se pueden configurar desde el editor de directivas de grupo en lugar de editando el registro. Las encontrarás en la carpeta «Policies» de la carpeta de instalación, que por defecto es «C:\Program Files\Tabular Editor 3\Policies»:
+Tabular Editor 3.27 y versiones posteriores instalan un par de plantillas administrativas de directivas de grupo, de modo que las directivas anteriores se pueden configurar desde el editor de directivas de grupo en lugar de editando el registro. Las encontrarás en la carpeta `Policies` de la carpeta de instalación, que por defecto es `C:\Program Files\Tabular Editor 3\Policies`:
 
 - `TabularEditorApS.admx`
 - `en-US\TabularEditorApS.adml`
@@ -226,9 +226,9 @@ A continuación, abra el Editor de directivas de grupo local (`gpedit.msc`) o el
 
 Las políticas compartidas por Tabular Editor 3 y la CLI se encuentran directamente bajo **Tabular Editor**. Las políticas que solo aplica Tabular Editor 3 se encuentran en **Tabular Editor > Tabular Editor 3**, con el Asistente de IA, el servidor MCP y la integración de DAX Optimizer en sus propias subcarpetas.
 
-Al establecer una política como **Habilitada**, se escribe su valor de registro. Establecerla en **Deshabilitada** o dejarla en **No configurada** significa que la directiva no se aplica. Las plantillas no escriben en la clave heredada «Kapacity\Tabular Editor», por lo que debe establecer esa clave manualmente si una política también tiene que llegar a Tabular Editor 2.
+Al establecer una política como **Habilitada**, se escribe su valor de registro. Establecerla en **Deshabilitada** o dejarla en **No configurada** significa que la directiva no se aplica. Las plantillas no escriben en la clave heredada `Kapacity\Tabular Editor`, por lo que debe establecer esa clave manualmente si una política también tiene que llegar a Tabular Editor 2.
 
-En el caso de las políticas Enterprise, **Desactivada** elimina el valor del registro en lugar de escribir un «0». Esto es deliberado: el mero hecho de que exista un valor Enterprise es lo que hace que el Asistente de IA y el servidor MCP dependan de la comprobación de la licencia Enterprise, por lo que una política que un administrador acabe de desactivar no debe dejar ningún valor.
+En el caso de las políticas Enterprise, **Desactivada** elimina el valor del registro en lugar de escribir un `0`. Esto es deliberado: el mero hecho de que exista un valor Enterprise es lo que hace que el Asistente de IA y el servidor MCP dependan de la comprobación de la licencia Enterprise, por lo que una política que un administrador acabe de desactivar no debe dejar ningún valor.
 
 ## Desactivación de las comunicaciones web
 

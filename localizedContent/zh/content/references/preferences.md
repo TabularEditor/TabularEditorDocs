@@ -25,7 +25,7 @@ applies_to:
 要访问“首选项”对话框，请转到**工具 > 首选项**。
 
 > [!NOTE]
-> 所有 Tabular Editor 首选项均针对每个 Windows 用户配置文件存储在“%localappdata%\TabularEditor3”文件夹中。只需复制此文件夹的内容，即可将您的设置迁移到另一台计算机。
+> 所有 Tabular Editor 首选项均针对每个 Windows 用户配置文件存储在`%localappdata%\TabularEditor3`文件夹中。只需复制此文件夹的内容，即可将您的设置迁移到另一台计算机。
 
 > [!TIP]
 > 使用“偏好”对话框顶部的搜索框，可快速找到特定设置。
@@ -78,7 +78,7 @@ applies_to:
 
 ### 由您的组织管理
 
-如果管理员已配置[策略](xref:policies)，则此页面将附加一个只读的**由您的组织管理**部分，其中列出 Tabular Editor 找到的每个策略值，格式为“名称 = 值”。将鼠标悬停在条目上，查看其来自哪个注册表项和配置单元。
+如果管理员已配置[策略](xref:policies)，则此页面将附加一个只读的**由您的组织管理**部分，其中列出 Tabular Editor 找到的每个策略值，格式为`Name = value`。将鼠标悬停在条目上，查看其来自哪个注册表项和配置单元。
 
 Tabular Editor 无法解释的值会显示 `(invalid)` 标记，而不是被省略。该标记是查找看似不起作用的策略背后的拼写错误的最快方法，因此，当策略未生效时，请先在此处检查。
 
@@ -645,7 +645,7 @@ SUM(Sales[Amount])
 
 **修正度量值/列限定符**（启用）：选中此项时，表前缀将自动从度量值引用中移除，并自动插入到列引用中。
 
-**首选关键字大小写**（大写）：此设置允许您更改关键字使用的大小写，例如 `ORDER BY`、`VAR`、`EVALUATE` 等。它还控制着自动补全功能为使用这些关键字的函数提供的固定关键字值：`ASC` 和 `DESC`、`KEEP`、`FIRST`、`LAST` 和 `DEFAULT`、`CROSSFILTER` 方向以及 `LOOKUP` 的 `EXPLICIT` 和 `INFERRED`。选择**仅首字母大写**，以提供“Explicit”而不是“EXPLICIT”。
+**首选关键字大小写**（大写）：此设置允许您更改关键字使用的大小写，例如 `ORDER BY`、`VAR`、`EVALUATE` 等。它还控制着自动补全功能为使用这些关键字的函数提供的固定关键字值：`ASC` 和 `DESC`、`KEEP`、`FIRST`、`LAST` 和 `DEFAULT`、`CROSSFILTER` 方向以及 `LOOKUP` 的 `EXPLICIT` 和 `INFERRED`。选择**仅首字母大写**，以提供`Explicit`而不是`EXPLICIT`。
 
 **首选函数大小写**（大写）：此设置允许您更改函数使用的大小写，例如 `CALCULATE(...)`、`SUM(...)` 等。
 
@@ -761,7 +761,7 @@ SQL、M (Power Query) 和 C# 脚本编辑器提供类似的配置选项，包括
 - **系统**：使用系统代理设置
 - **自定义**：指定自定义代理配置
 
-**代理地址**：代理服务器的地址（例如 `http://proxy.company.com`）。
+**代理地址**：代理服务器的地址（例如 `http://proxy.company.com:8080`）。
 
 **代理用户**：如果需要，这是用于代理身份验证的用户名。
 

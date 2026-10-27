@@ -30,7 +30,7 @@ Tabular Editor lee los metadatos del modelo en la memoria desde un archivo, una 
 
 | Origen | Comando |
 |---|---|
-| Un archivo «Model.bim» o «.bim» | **Archivo > Abrir > Modelo desde archivo...** |
+| Un archivo `Model.bim` o `.bim` | **Archivo > Abrir > Modelo desde archivo...** |
 | Una estructura de carpetas, en formato JSON o en formato [Lenguaje de definición de modelo tabular (TMDL)](xref:tmdl) | **Archivo > Abrir > Modelo desde carpeta...** |
 | Una base de datos XMLA de Analysis Services o de Power BI | **Archivo > Abrir > Modelo desde BD...** (**Ctrl+Mayús+O**) |
 | Una instancia en ejecución de Power BI Desktop | **Archivo > Abrir > Modelo desde BD...**, o inicie Tabular Editor desde la cinta de opciones **Herramientas externas** de Power BI Desktop |
@@ -67,7 +67,7 @@ Para guardar un modelo en otro lugar o en un formato diferente:
 
 En Tabular Editor 3.26 y versiones anteriores, y en Tabular Editor 2, el comando se llama **Archivo > Revertir**.
 
-En Tabular Editor 3.27.0 y versiones posteriores, cuando un agente, un script o un «git pull» modifican los archivos de metadatos del modelo abierto, el modelo se vuelve a cargar, tras un aviso si tiene cambios sin guardar. Consulte [Recarga automática desde el disco](xref:auto-reload).
+En Tabular Editor 3.27.0 y versiones posteriores, cuando un agente, un script o un `git pull` modifican los archivos de metadatos del modelo abierto, el modelo se vuelve a cargar, tras un aviso si tiene cambios sin guardar. Consulte [Recarga automática desde el disco](xref:auto-reload).
 
 Los documentos abiertos de consultas DAX y Pivot Grid permanecen abiertos durante una recarga manual o automática y se conectan al modelo recargado.
 
