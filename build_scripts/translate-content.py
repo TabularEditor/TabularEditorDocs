@@ -8,10 +8,18 @@ The endpoint is synchronous: one POST per file and language returns the translat
 per character), so nothing is pending between runs. Every delivery is repaired against the
 English source (code, markers, link targets restored), verified, and written in the same step.
 
+An outdated translation is updated from changed segments only: the English version it was made
+from (status `sourceBlob`, verified against `sourceHash`) is diffed block by block against the
+current English (translation_segments.py), unchanged blocks are kept from the translation and
+only changed blocks, JSON keys or toc names are sent. Missing files, unaligned translations and
+files whose text mostly changed are sent whole.
+
 Actions (exactly one per invocation):
   --plan         list missing/outdated/orphaned/pinned/unscoped files (offline)
   --run          translate every missing/outdated file, verify and write the results
   --baseline     seed the status file from the existing translations (offline)
+  --migrate-blobs  record sourceBlob for status entries that only have a sourceHash (offline)
+  --merge-status OURS THEIRS  rebuild the status files entry by entry after merging a translation branch (offline)
   --self-test    offline test suite (no key, no network)
   --probe        check service types and languages against the API
   --dump-orders  write the exact request bodies to a directory instead of sending
@@ -22,23 +30,28 @@ under localizedContent/ with a content/ directory.
 
 Environment: TRANSLATED_ENV (sandbox | production; the sandbox account has no AI-enabled
 service type, so only production can run), TRANSLATED_API_KEY, and
-TRANSLATED_SERVICE_TYPE (optional override; both environments default to 'AI').
+TRANSLATED_SERVICE_TYPE (optional override; both environments default to 'AI') and
+TRANSLATED_CONTEXT_SEGMENTS (optional override of translation.segmentDiff.contextSegments).
 
-Exit code 1 on configuration errors or failed API requests. Files that fail verification do
-not fail the run: they are recorded under "failures" in the status file and skipped until
-the English changes or --retry-failed. Full reference: README.md > Translating Content.
+Exit code 1 on configuration errors or failed API requests. A rejected API key (401/403) stops
+the run and records nothing for the file. Any other failed request is recorded under "failures"
+and planned again by the next run. Files whose delivery fails verification do not fail the run:
+they are recorded under "failures" and skipped until the English changes or --retry-failed, and
+--keep-rejected saves the billed delivery. Full reference: README.md > Translating Content.
 """
 
 from __future__ import annotations
 
 import argparse
 import difflib
+import email.utils
 import fnmatch
 import hashlib
 import http.client
 import io
 import json
 import os
+import random
 import re
 import shutil
 import subprocess
@@ -57,6 +70,21 @@ from pathlib import Path
 from typing import Any, Protocol
 
 from config_loader import compute_file_hash, get_default_language, load_build_config
+from translation_segments import (
+    ACTION_ENGLISH,
+    ACTION_REPAIR,
+    ACTION_REUSE,
+    ACTION_TRANSLATE,
+    KIND_HEADING,
+    KIND_LIST_ITEM,
+    LIST_ITEM_RE,
+    Action,
+    Block,
+    context_indices,
+    diff_blocks,
+    reused_layout,
+    segment,
+)
 
 CONTENT_DIR = Path("content")
 LOCALIZED_DIR = Path("localizedContent")
@@ -70,7 +98,9 @@ STATUS_COPIED = "copied"
 
 TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-RETRYABLE_HTTP = frozenset({425, 429, 500, 502, 503, 504})
+RETRYABLE_HTTP = frozenset({408, 425, 429, 500, 502, 503, 504})
+AUTH_HTTP = frozenset({401, 403})
+MAX_RETRY_DELAY = 60.0
 REPORT_LIST_CAP = 50
 IDENTITY_MIN_LETTERS = 200
 REPAIR_KINDS = ("fences", "inline code", "markers", "links")  # order used in "repaired: ..." lines
@@ -88,10 +118,12 @@ CONTENT_TYPES = {
 }
 
 BOM = "﻿"
+WHOLE_FILE_TYPE = "file type is translated whole"
 
 # Markdown structure regexes (mirror normalize-localized-heading-anchors.py).
 FENCE_RE = re.compile(r"^\s*(`{3,}|~{3,})")
 HEADING_RE = re.compile(r"^#{1,6}\s+\S")
+HEADING_MARKS_RE = re.compile(r"^#{1,6}(?=[ \t])")
 # Any `[!word` token: alert markers ([!NOTE]), includes ([!include[...]) and code refs ([!code-yaml[...]).
 # Deliberately broad so a translated marker ([!NOTA]) is still counted and restored positionally.
 ALERT_RE = re.compile(r"\[![A-Za-z][A-Za-z0-9-]*")
@@ -106,6 +138,13 @@ YAML_INDICATOR_START = tuple("-?*&!%@`|>'\"[{:,]}#")
 YAML_SCALARS = frozenset({"true", "false", "yes", "no", "null", "on", "off", "~"})
 HTML_TAG_RE = re.compile(r"<\s*([a-zA-Z][a-zA-Z0-9-]*)")
 HTML_REF_RE = re.compile(r"""\b(?:href|src)\s*=\s*["']([^"']+)["']""")
+# Bookmark anchors that build-docs (normalize-localized-heading-anchors.py) injects into a local tree.
+INJECTED_ANCHOR_RE = re.compile(r'^<a id="[^"]*" data-loc-xref></a>\n', re.M)
+TOC_HREF_RE = re.compile(r"^\s*href:[ \t]*(.*?)[ \t]*$")
+# {{cN}} (inline code) and {{fN}} (fenced block) placeholders; quotation marks the service puts
+# around one are matched so they can be dropped.
+CODE_TOKEN_RE = re.compile(r"([«“\"‘「『]?)\{\{\s*([cf])(\d+)\s*\}\}([»”\"’」』]?)")
+QUOTE_PAIRS = {"«": "»", "“": "”", '"': '"', "‘": "’", "「": "」", "『": "』"}
 PLACEHOLDER_RE = re.compile(r"(?<!\{)\{([a-zA-Z_][a-zA-Z0-9_]*)\}(?!\})")
 ENCODED_PLACEHOLDER_RE = re.compile(r"\{\{([a-zA-Z_][a-zA-Z0-9_]*)\}\}")
 
@@ -137,6 +176,7 @@ class TranslationConfig:
         build_config: dict[str, Any],
         environment: str | None = None,
         service_type_override: str | None = None,
+        context_segments_override: str | None = None,
     ) -> None:
         section = build_config.get("translation")
         if not section:
@@ -158,6 +198,17 @@ class TranslationConfig:
         limits = section.get("sandboxLimits") or {}
         self.max_files_per_run: int = int(limits.get("maxFilesPerRun", 20))
         self.max_chars_per_run: int = int(limits.get("maxCharsPerRun", 200000))
+        segment_diff = section.get("segmentDiff") or {}
+        self.segment_diff: bool = bool(segment_diff.get("enabled", True))
+        self.max_changed_ratio: float = float(segment_diff.get("maxChangedRatio", 0.8))
+        context = (context_segments_override or "").strip() or segment_diff.get("contextSegments", 2)
+        try:
+            self.context_segments: int = int(context)
+        except ValueError:
+            raise SystemExit(
+                f"Context segments must be an integer (-1 = whole page, 0 = none), got {context!r} "
+                "(TRANSLATED_CONTEXT_SEGMENTS or translation.segmentDiff.contextSegments)."
+            ) from None
         self.shared_directories: list[str] = list(build_config.get("sharedDirectories", {}).get("directories", []))
         if not self.sources:
             raise SystemExit("translation.sources in metadata/build-config.json is empty.")
@@ -280,6 +331,96 @@ def hashes_at_git_ref(ref: str, rel_paths: list[str], run: GitRunner = run_git) 
         if proc.returncode == 0:
             result[rel] = hash_bytes(proc.stdout)
     return result
+
+
+_WORK_TREE: dict[str, bool] = {}
+
+
+def in_git_work_tree(run: GitRunner = run_git) -> bool:
+    cwd = os.getcwd()
+    if run is run_git and cwd in _WORK_TREE:
+        return _WORK_TREE[cwd]
+    proc = run(["git", "rev-parse", "--is-inside-work-tree"])
+    inside = proc.returncode == 0 and proc.stdout.strip() == b"true"
+    if run is run_git:
+        _WORK_TREE[cwd] = inside
+    return inside
+
+
+def read_git_blob(blob: str, run: GitRunner = run_git) -> bytes | None:
+    proc = run(["git", "cat-file", "blob", blob])
+    return proc.stdout if proc.returncode == 0 else None
+
+
+def git_stdout(proc: subprocess.CompletedProcess[bytes]) -> str | None:
+    out = proc.stdout.decode("utf-8", errors="replace").strip()
+    return out if proc.returncode == 0 and out else None
+
+
+def current_source_blob(rel: str, source_hash: str, run: GitRunner = run_git) -> str | None:
+    """Git blob id of content/{rel} when the file's hash is `source_hash`; None outside a git work tree."""
+    path = CONTENT_DIR / rel
+    if not path.exists() or hash_bytes(path.read_bytes()) != source_hash or not in_git_work_tree(run):
+        return None
+    # -w stores the blob, so an uncommitted English version stays readable as the base of the next diff.
+    return git_stdout(run(["git", "hash-object", "-w", "--", path.as_posix()]))
+
+
+def blob_at_git_ref(sha: str, rel: str, run: GitRunner = run_git) -> str | None:
+    return git_stdout(run(["git", "rev-parse", "--verify", "--quiet", f"{sha}:{CONTENT_DIR.as_posix()}/{rel}"]))
+
+
+def find_source_blob(rel: str, source_hash: str, run: GitRunner = run_git) -> tuple[str, bytes] | None:
+    """The English version of content/{rel} whose hash is `source_hash`: the working file when it
+    matches, else the newest committed version that does. Returns (blob id, content)."""
+    if not source_hash:
+        return None
+    current = current_source_blob(rel, source_hash, run)
+    if current:
+        return current, (CONTENT_DIR / rel).read_bytes()
+    if not in_git_work_tree(run):
+        return None
+    proc = run(["git", "log", "--no-abbrev", "--format=", "--raw", "--", f"{CONTENT_DIR.as_posix()}/{rel}"])
+    if proc.returncode != 0:
+        return None
+    seen: set[str] = set()
+    for line in proc.stdout.decode("utf-8", errors="replace").splitlines():
+        # :100644 100644 <old blob> <new blob> M<TAB>path
+        parts = line.split()
+        if len(parts) < 5 or not parts[0].startswith(":") or not parts[3].strip("0") or parts[3] in seen:
+            continue
+        seen.add(parts[3])
+        data = read_git_blob(parts[3], run)
+        if data is not None and hash_bytes(data) == source_hash:
+            return parts[3], data
+    return None
+
+
+def recorded_source_text(rel: str, entry: dict[str, Any], run: GitRunner = run_git) -> str | None:
+    """The English text an existing translation was made from: the entry's sourceBlob when its
+    content still hashes to sourceHash, else the version found by find_source_blob."""
+    source_hash = str(entry.get("sourceHash") or "")
+    if not source_hash:
+        return None
+    blob = entry.get("sourceBlob")
+    if isinstance(blob, str) and blob:
+        data = read_git_blob(blob, run)
+        if data is not None and hash_bytes(data) == source_hash:
+            return data.decode("utf-8")
+    found = find_source_blob(rel, source_hash, run)
+    return found[1].decode("utf-8") if found else None
+
+
+def source_entry(
+    rel: str, source_hash: str, status_value: str, run: GitRunner = run_git, blob: str | None = None
+) -> dict[str, Any]:
+    """A status entry; sourceBlob is recorded when the English version is in git (the base of the next diff)."""
+    entry: dict[str, Any] = {"sourceHash": source_hash}
+    blob = blob or current_source_blob(rel, source_hash, run)
+    if blob:
+        entry["sourceBlob"] = blob
+    entry["status"] = status_value
+    return entry
 
 
 def matches_filters(rel: str, file_filters: list[str]) -> bool:
@@ -456,6 +597,56 @@ def decode_placeholders(text: str) -> str:
     return ENCODED_PLACEHOLDER_RE.sub(r"{\1}", text)
 
 
+def mask_code(text: str, fences: bool = True) -> tuple[str, list[str]]:
+    """Replace fenced code blocks (when `fences`) and inline code spans with {{fN}} / {{cN}}
+    placeholders. The service keeps such placeholders intact; it rewrites backticks as quotation
+    marks. Returns (masked text, the original code by N)."""
+    spans: list[str] = []
+
+    def token(kind: str, value: str) -> str:
+        spans.append(value)
+        return "{{" + f"{kind}{len(spans) - 1}" + "}}"
+
+    out: list[str] = []
+    for seg, is_fence in split_fences(text) if fences else [(text, False)]:
+        if is_fence:
+            block = seg[:-1] if seg.endswith("\n") else seg
+            out.append(token("f", block) + seg[len(block) :])
+        else:
+            out.append(INLINE_CODE_RE.sub(lambda m: token("c", m.group(0)), seg))
+    return "".join(out), spans
+
+
+def unmask_code(text: str, spans: list[str]) -> tuple[str, list[str]]:
+    """Put the original code back for every placeholder, dropping quotation marks the service put
+    around one. Returns (text, problems): placeholders missing, repeated or unknown."""
+    seen: Counter[int] = Counter()
+    unknown: list[str] = []
+
+    def put(m: re.Match[str]) -> str:
+        n = int(m.group(3))
+        if n >= len(spans):
+            unknown.append(m.group(0))
+            return m.group(0)
+        seen[n] += 1
+        opening, closing = m.group(1), m.group(4)
+        if opening and QUOTE_PAIRS.get(opening) == closing:
+            opening = closing = ""
+        return opening + spans[n] + closing
+
+    text = CODE_TOKEN_RE.sub(put, text)
+    problems: list[str] = []
+    missing = [n for n in range(len(spans)) if not seen[n]]
+    repeated = sorted(n for n, k in seen.items() if k > 1)
+    if missing:
+        problems.append(f"code placeholders missing in the delivery: {missing[:5]} ({len(missing)} of {len(spans)})")
+    if repeated:
+        problems.append(f"code placeholders repeated in the delivery: {repeated[:5]}")
+    if unknown:
+        problems.append(f"unknown code placeholders in the delivery: {unknown[:5]}")
+    return text, problems
+
+
 def prepare_payload(rel: str, source_text: str) -> tuple[str, str, dict[str, Any]]:
     """Return (content, content_type, extra job info) for a source file."""
     suffix = Path(rel).suffix.lower()
@@ -470,6 +661,9 @@ def prepare_payload(rel: str, source_text: str) -> tuple[str, str, dict[str, Any
     content = to_lf(source_text.lstrip(BOM))
     if suffix == ".json":
         return encode_placeholders(content), content_type, {"mode": "json-placeholders"}
+    if suffix == ".md":
+        masked, spans = mask_code(content)
+        return masked, content_type, {"mode": "raw", "codeSpans": spans}
     return content, content_type, {"mode": "raw"}
 
 
@@ -550,11 +744,14 @@ def count_fence_lines(body: str) -> int:
 
 def restore_positionally(text: str, source_text: str, regex: re.Pattern[str], group: int) -> tuple[str, int] | None:
     """Replace every match of `regex` (its `group`) in `text` with the source's value at the
-    same position. Returns (text, changed) when the counts match, None otherwise."""
+    same position. Returns (text, changed) when the counts match, None otherwise. Values that
+    are the source's values in another order are left as delivered (word order differs by language)."""
     src_values = [m.group(group) for m in regex.finditer(source_text)]
     matches = list(regex.finditer(text))
     if len(src_values) != len(matches):
         return None
+    if Counter(src_values) == Counter(m.group(group) for m in matches):
+        return text, 0
     out: list[str] = []
     pos = 0
     changed = 0
@@ -614,6 +811,16 @@ MD_RESTORE_RULES: tuple[tuple[re.Pattern[str], int, str, str], ...] = (
 )
 
 
+def prose_key(text: str) -> str:
+    """The text with everything the repair step restores from English, a list marker and heading marks,
+    masked out."""
+    text = LIST_ITEM_RE.sub("\x00", text, count=1)
+    text = HEADING_MARKS_RE.sub("\x00", text, count=1)
+    for regex, _group, _kind, _what in MD_RESTORE_RULES:
+        text = regex.sub("\x00", text)
+    return text
+
+
 def repair_markdown_body(source_body: str, translated_body: str, repair: bool = True) -> RepairResult:
     """Repair-then-verify for a Markdown body (LF line endings, no frontmatter).
     Fenced blocks, inline code, alert/include markers and link targets are restored from
@@ -640,7 +847,8 @@ def repair_markdown_body(source_body: str, translated_body: str, repair: bool = 
     for regex, group, kind, what in MD_RESTORE_RULES:
         restored = restore_positionally(tr_text, src_text, regex, group)
         if restored is None:
-            findings = result.warnings if kind in WARNING_KINDS else result.problems
+            lost = sum(1 for _ in regex.finditer(tr_text)) < sum(1 for _ in regex.finditer(src_text))
+            findings = result.warnings if kind in WARNING_KINDS and not lost else result.problems
             findings.append(count_diff(src_text, tr_text, regex, group, what))
         elif restored[1] and repair:
             result.repaired[kind] += restored[1]
@@ -789,6 +997,422 @@ def finalize_translation(
 
 
 # ---------------------------------------------------------------------------
+# Segment-level updates (only what changed since the English the translation was made from)
+# ---------------------------------------------------------------------------
+
+Assembler = Callable[[dict[str, str]], tuple[str, list[str], Counter[str], list[str]]]
+
+
+@dataclass
+class Delta:
+    """The content[] items of a segment-level order and how to rebuild the file from the delivery.
+    `assemble` takes {segment id -> translation} and returns (text, problems, repaired, warnings)."""
+
+    mode: str
+    items: list[dict[str, Any]]
+    assemble: Assembler
+    changed: int  # translatable units sent
+    total: int  # translatable units in the file
+    changed_chars: int
+    total_chars: int
+
+    @property
+    def chars(self) -> int:
+        return sum(len(str(i["text"])) for i in self.items if i["translatable"])
+
+
+def unquote_scalar(value: str) -> str:
+    v = value.strip()
+    if len(v) >= 2 and v[0] == v[-1] == '"':
+        try:
+            return str(json.loads(v))
+        except json.JSONDecodeError:
+            return v
+    if len(v) >= 2 and v[0] == v[-1] == "'":
+        return v[1:-1].replace("''", "'")
+    return v
+
+
+def newline_eol(text: str) -> tuple[str, str, bool]:
+    """(BOM, LF text without BOM, CRLF?) of a source file."""
+    return (BOM if text.startswith(BOM) else ""), to_lf(text.lstrip(BOM)), "\r\n" in text
+
+
+def match_block_end(text: str, english: str) -> str:
+    """`text` with the trailing newline of its English block (a reused last block may lack one)."""
+    if english.endswith("\n") and not text.endswith("\n"):
+        return text + "\n"
+    if not english.endswith("\n") and text.endswith("\n"):
+        return text.rstrip("\n")
+    return text
+
+
+def restore_list_marker(english: str, text: str) -> tuple[str, bool]:
+    source_marker = LIST_ITEM_RE.match(english)
+    delivered_marker = LIST_ITEM_RE.match(text)
+    if source_marker and delivered_marker and source_marker.group(0) != delivered_marker.group(0):
+        return source_marker.group(0) + text[delivered_marker.end() :], True
+    return text, False
+
+
+def restore_heading_marks(english: str, text: str) -> str:
+    source_marks = HEADING_MARKS_RE.match(english)
+    marks = HEADING_MARKS_RE.match(text)
+    if source_marks and marks and source_marks.group(0) != marks.group(0):
+        return source_marks.group(0) + text[marks.end() :]
+    return text
+
+
+def repair_by_value(old: str, new: str, loc: str) -> str | None:
+    """`loc` (the translation of `old`) with every code span, marker and link target replaced by its
+    counterpart in `new`: the old value at position k becomes the new value at position k, wherever
+    the translation placed it. None when one old value maps to two new values or the translation's
+    spans are not the old spans."""
+    text = loc
+    for regex, group, _kind, _what in MD_RESTORE_RULES:
+        old_values = [m.group(group) for m in regex.finditer(old)]
+        new_values = [m.group(group) for m in regex.finditer(new)]
+        if len(old_values) != len(new_values):
+            return None
+        mapping: dict[str, str] = {}
+        for o, n in zip(old_values, new_values, strict=True):
+            if mapping.setdefault(o, n) != n:
+                return None
+        matches = list(regex.finditer(text))
+        if Counter(m.group(group) for m in matches) != Counter(old_values):
+            return None
+        out: list[str] = []
+        pos = 0
+        for m in matches:
+            start, end = m.span(group)
+            out.append(text[pos:start])
+            out.append(mapping[m.group(group)])
+            pos = end
+        out.append(text[pos:])
+        text = "".join(out)
+    return text
+
+
+def finalize_block(block: Block, delivered: str) -> tuple[str, list[str], Counter[str], list[str]]:
+    """Repair and verify one delivered Markdown block against its English block. The delivery must
+    segment as exactly one block of the same kind, so the page keeps aligning with the English.
+    Returns (text, problems, repaired, warnings)."""
+    lines = to_lf(delivered.lstrip(BOM)).split("\n")
+    while lines and not lines[0].strip():
+        lines.pop(0)
+    while lines and not lines[-1].strip():
+        lines.pop()
+    indent = block.text[: len(block.text) - len(block.text.lstrip(" \t"))]
+    if indent and block.kind != KIND_LIST_ITEM:
+        lines = [line if line.startswith(indent) else indent + line.lstrip(" \t") for line in lines]
+    text = match_block_end("\n".join(lines), block.text)
+    seg = segment(text)
+    if seg.lead or len(seg.blocks) != 1 or seg.blocks[0].kind != block.kind or seg.blocks[0].gap:
+        return text, [f"{block.kind} block came back as {' + '.join(seg.kinds) or 'nothing'}"], Counter(), []
+    repaired: Counter[str] = Counter()
+    if block.kind == KIND_HEADING:
+        marks, delivered_marks = block.text.split(None, 1)[0], text.split(None, 1)[0]
+        if marks != delivered_marks:
+            return text, [f"heading level {marks} -> {delivered_marks}"], Counter(), []
+    if block.kind == KIND_LIST_ITEM:
+        text, changed = restore_list_marker(block.text, text)
+        repaired["markers"] += changed
+    result = repair_markdown_body(block.text, text)
+    repaired.update(result.repaired)
+    return result.text, result.problems, +repaired, result.warnings
+
+
+def heading_count(body: str) -> int:
+    return sum(1 for line in markdown_prose(body).splitlines() if HEADING_RE.match(line))
+
+
+def md_delta(new_text: str, old_text: str, loc_text: str, context_width: int = 0) -> Delta | str:
+    bom, new_lf, crlf = newline_eol(new_text)
+    new_fm, new_body = split_frontmatter(new_lf)
+    old_fm, old_body = split_frontmatter(to_lf(old_text.lstrip(BOM)))
+    loc_fm, loc_body = split_frontmatter(INJECTED_ANCHOR_RE.sub("", to_lf(loc_text.lstrip(BOM))))
+    new_seg, old_seg, loc_seg = segment(new_body), segment(old_body), segment(loc_body)
+    if old_seg.kinds != loc_seg.kinds:
+        return f"unaligned ({len(old_seg.blocks)} English blocks, {len(loc_seg.blocks)} translated)"
+    loc_prose = markdown_prose(loc_body)
+    translatable_letters = sum(letters(b.text) for b in loc_seg.blocks if b.translatable)
+    if translatable_letters > IDENTITY_MIN_LETTERS and loc_prose in (
+        markdown_prose(old_body),
+        markdown_prose(new_body),
+    ):
+        return "existing translation is the English text"
+    existing = repair_markdown_body(old_body, loc_body)
+    if existing.problems:
+        return f"existing translation does not verify against its English ({existing.problems[0]})"
+    actions = diff_blocks(old_seg.blocks, new_seg.blocks, prose_key)
+    repaired_blocks: dict[int, str] = {}
+    for j, a in enumerate(actions):
+        if a.kind == ACTION_REPAIR:
+            b = new_seg.blocks[j]
+            fixed = repair_by_value(old_seg.blocks[a.old_index].text, b.text, loc_seg.blocks[a.old_index].text)
+            if fixed is None:
+                actions[j] = Action(ACTION_TRANSLATE)
+            elif b.kind == KIND_LIST_ITEM:
+                repaired_blocks[j] = restore_list_marker(b.text, fixed)[0]
+            else:
+                repaired_blocks[j] = restore_heading_marks(b.text, fixed) if b.kind == KIND_HEADING else fixed
+    new_vals, old_vals, loc_vals = frontmatter_values(new_fm), frontmatter_values(old_fm), frontmatter_values(loc_fm)
+    reused_fm = {k: loc_vals[k] for k, v in new_vals.items() if old_vals.get(k) == v and k in loc_vals}
+    masks: dict[str, list[str]] = {}
+
+    def item(item_id: str, text: str, translatable: bool) -> dict[str, Any]:
+        masked, masks[item_id] = mask_code(text, fences=False)
+        return {"id": item_id, "text": masked, "translatable": translatable}
+
+    def delivered(item_id: str, translations: dict[str, str]) -> tuple[str | None, list[str]]:
+        if item_id not in translations:
+            return None, []
+        text, mask_problems = unmask_code(translations[item_id], masks[item_id])
+        return (None if mask_problems else text), mask_problems
+
+    items: list[dict[str, Any]] = [
+        item(f"fm:{k}", unquote_scalar(v), True) for k, v in new_vals.items() if k not in reused_fm
+    ]
+    changed = {j for j, a in enumerate(actions) if a.kind == ACTION_TRANSLATE}
+    context = set(context_indices(actions, new_seg.blocks, context_width))
+    for j, b in enumerate(new_seg.blocks):
+        if j in changed or j in context:
+            items.append(item(f"{'b' if j in changed else 'c'}{j}", b.text.rstrip("\n"), j in changed))
+    translatable_blocks = [b for b in new_seg.blocks if b.translatable]
+
+    def assemble(translations: dict[str, str]) -> tuple[str, list[str], Counter[str], list[str]]:
+        problems: list[str] = []
+        warnings: list[str] = []
+        repaired: Counter[str] = Counter()
+        texts: list[str] = []
+        pairs: list[tuple[str, str]] = []
+        for j, (b, a) in enumerate(zip(new_seg.blocks, actions, strict=True)):
+            if a.kind == ACTION_ENGLISH:
+                text = b.text
+            elif a.kind == ACTION_REPAIR:
+                text = repaired_blocks[j]
+            elif a.kind == ACTION_REUSE:
+                # Restored against its own English block only: a page-wide positional pass would move
+                # spans across blocks when one block's count drifts.
+                text = loc_seg.blocks[a.old_index].text
+                fixed = repair_markdown_body(b.text, text)
+                if not fixed.problems:
+                    text = fixed.text
+                    repaired.update(fixed.repaired)
+            elif (block := delivered(f"b{j}", translations))[0] is None:
+                problems.extend(f"block {j}: {p}" for p in block[1] or ["missing in the delivery"])
+                text = b.text
+            else:
+                text, block_problems, block_repaired, block_warnings = finalize_block(b, str(block[0]))
+                problems.extend(f"block {j}: {p}" for p in block_problems)
+                warnings.extend(f"block {j}: {w}" for w in block_warnings)
+                repaired.update(block_repaired)
+                pairs.append((b.text, text))
+            texts.append(match_block_end(text, b.text))
+        lead, gaps = reused_layout(actions, new_seg, len(old_seg.blocks), loc_seg)
+        body = new_seg.join(texts, gaps, lead)
+        if count_fence_lines(body) != count_fence_lines(new_body):
+            problems.append(f"code fences {count_fence_lines(new_body)} -> {count_fence_lines(body)}")
+        if heading_count(body) != heading_count(new_body):
+            problems.append(f"headings {heading_count(new_body)} -> {heading_count(body)}")
+        if segment(body).kinds != new_seg.kinds:
+            problems.append("delivered blocks change the page structure")
+        if pairs and sum(letters(e) for e, _ in pairs) > IDENTITY_MIN_LETTERS and all(e == t for e, t in pairs):
+            problems.append("delivered content identical to source")
+        fm = ""
+        if new_fm:
+            # merge_frontmatter reports a value that is missing here (or held a line break) as not found.
+            values = dict(reused_fm)
+            for k in new_vals:
+                if k in reused_fm:
+                    continue
+                value, value_problems = delivered(f"fm:{k}", translations)
+                problems.extend(f"frontmatter '{k}': {p}" for p in value_problems)
+                if value and value.strip() and "\n" not in value.strip():
+                    values[k] = value.strip()
+            synthetic = "---\n" + "".join(f"{k}: {v}\n" for k, v in values.items()) + "---\n"
+            fm, fm_problems = merge_frontmatter(new_fm, synthetic)
+            problems.extend(fm_problems)
+        text = fm + body
+        if crlf:
+            text = text.replace("\n", "\r\n")
+        return bom + text, problems, repaired, warnings
+
+    sent = [i for i in items if i["translatable"]]
+    return Delta(
+        "md-blocks",
+        items,
+        assemble,
+        changed=len(sent),
+        total=len(new_vals) + len(translatable_blocks),
+        changed_chars=sum(len(str(i["text"])) for i in sent),
+        total_chars=sum(len(unquote_scalar(v)) for v in new_vals.values())
+        + sum(len(b.text.rstrip("\n")) for b in translatable_blocks),
+    )
+
+
+def json_delta(new_text: str, old_text: str, loc_text: str) -> Delta | str:
+    bom, new_lf, crlf = newline_eol(new_text)
+    new, old, loc = (json.loads(to_lf(t.lstrip(BOM))) for t in (new_text, old_text, loc_text))
+    if not all(isinstance(x, dict) for x in (new, old, loc)):
+        return "unaligned (JSON root is not an object)"
+    if loc in (old, new):
+        return "existing translation is the English text"
+    reuse = {k for k, v in new.items() if isinstance(v, str) and old.get(k) == v and isinstance(loc.get(k), str)}
+    changed = [k for k, v in new.items() if isinstance(v, str) and k not in reuse]
+    indent = json_indent(new_lf)
+    subset = json.dumps({k: new[k] for k in changed}, indent=indent, ensure_ascii=False) + "\n"
+    items = [{"id": "json", "text": encode_placeholders(subset), "translatable": True}] if changed else []
+
+    def assemble(translations: dict[str, str]) -> tuple[str, list[str], Counter[str], list[str]]:
+        translated: dict[str, Any] = {}
+        if changed:
+            if "json" not in translations:
+                return "", ["no translation in the response"], Counter(), []
+            text, problems = verify_json_strings(subset, translations["json"])
+            if problems:
+                return "", problems, Counter(), []
+            translated = json.loads(text)
+        out = {k: translated[k] if k in translated else loc[k] if k in reuse else v for k, v in new.items()}
+        text = json.dumps(out, indent=indent, ensure_ascii=False) + ("\n" if new_lf.endswith("\n") else "")
+        if crlf:
+            text = text.replace("\n", "\r\n")
+        return bom + text, [], Counter(), []
+
+    strings = [v for v in new.values() if isinstance(v, str)]
+    return Delta(
+        "json-keys",
+        items,
+        assemble,
+        changed=len(changed),
+        total=len(strings),
+        changed_chars=sum(len(new[k]) for k in changed),
+        total_chars=sum(len(v) for v in strings),
+    )
+
+
+def toc_entry_keys(text: str, names: dict[str, str]) -> dict[str, tuple[str, str]]:
+    """{name key -> (name, href on the next line)}: an entry is matched by both, so two entries
+    with the same English name keep their own translations when they move."""
+    lines = to_lf(text.lstrip(BOM)).split("\n")
+    keys: dict[str, tuple[str, str]] = {}
+    for key, name in names.items():
+        i = int(key[1:]) + 1
+        m = TOC_HREF_RE.match(lines[i]) if i < len(lines) else None
+        keys[key] = (name, m.group(1) if m else "")
+    return keys
+
+
+def toc_delta(new_text: str, old_text: str, loc_text: str) -> Delta | str:
+    new_names, old_names, loc_names = yaml_name_map(new_text), yaml_name_map(old_text), yaml_name_map(loc_text)
+    if list(old_names) != list(loc_names):
+        return f"unaligned ({len(old_names)} English names, {len(loc_names)} translated)"
+    if list(loc_names.values()) in (list(old_names.values()), list(new_names.values())):
+        return "existing translation is the English text"
+    old_entries, new_entries = toc_entry_keys(old_text, old_names), toc_entry_keys(new_text, new_names)
+    old_keys, new_keys = list(old_names), list(new_names)
+    first_key: dict[tuple[str, str], str] = {}
+    for k in old_keys:
+        first_key.setdefault(old_entries[k], k)
+    matcher = difflib.SequenceMatcher(
+        None, [old_entries[k] for k in old_keys], [new_entries[k] for k in new_keys], autojunk=False
+    )
+    reused: dict[str, str] = {}
+    for tag, i1, _i2, j1, j2 in matcher.get_opcodes():
+        for j in range(j1, j2):
+            key = new_keys[j]
+            if tag == "equal":
+                reused[key] = loc_names[old_keys[i1 + (j - j1)]]
+            elif new_entries[key] in first_key:
+                reused[key] = loc_names[first_key[new_entries[key]]]
+    changed = [k for k in new_keys if k not in reused]
+    payload = json.dumps({k: new_names[k] for k in changed}, ensure_ascii=False, indent=2)
+    items = [{"id": "toc", "text": payload, "translatable": True}] if changed else []
+
+    def assemble(translations: dict[str, str]) -> tuple[str, list[str], Counter[str], list[str]]:
+        names = dict(reused)
+        if changed:
+            try:
+                delivered = json.loads(translations.get("toc", "").lstrip(BOM))
+            except json.JSONDecodeError as e:
+                return new_text, [f"translated toc payload does not parse: {e}"], Counter(), []
+            if not isinstance(delivered, dict) or set(delivered) != set(changed):
+                got = sorted(delivered) if isinstance(delivered, dict) else type(delivered).__name__
+                return (
+                    new_text,
+                    [f"toc payload keys differ: expected {changed[:5]}, got {str(got)[:120]}"],
+                    Counter(),
+                    [],
+                )
+            names.update({k: str(v) for k, v in delivered.items()})
+        text, problems = reinsert_yaml_names(new_text, json.dumps(names, ensure_ascii=False))
+        return text, problems, Counter(), []
+
+    return Delta(
+        "toc-names",
+        items,
+        assemble,
+        changed=len(changed),
+        total=len(new_keys),
+        changed_chars=sum(len(new_names[k]) for k in changed),
+        total_chars=sum(len(v) for v in new_names.values()),
+    )
+
+
+def plan_delta(
+    config: TranslationConfig, lang: str, rel: str, entry: dict[str, Any], run: GitRunner = run_git
+) -> Delta | str:
+    """A segment-level update for an outdated translation, or why it is translated as a whole file."""
+    suffix = Path(rel).suffix.lower()
+    if suffix not in (".md", ".json", ".yml", ".yaml"):
+        return WHOLE_FILE_TYPE
+    target = target_file(lang, rel)
+    if not target.exists():
+        return "no existing translation"
+    old = recorded_source_text(rel, entry, run)
+    if old is None:
+        return "English version of the translation not found in git"
+    new, loc = read_text(CONTENT_DIR / rel), read_text(target)
+    try:
+        if suffix == ".md":
+            delta = md_delta(new, old, loc, config.context_segments)
+        elif suffix == ".json":
+            delta = json_delta(new, old, loc)
+        else:
+            delta = toc_delta(new, old, loc)
+    except json.JSONDecodeError as e:
+        return f"unaligned (JSON does not parse: {e})"
+    if isinstance(delta, str):
+        return delta
+    if delta.total_chars and delta.changed_chars > config.max_changed_ratio * delta.total_chars:
+        return f"mostly changed ({delta.changed_chars * 100 // delta.total_chars}% of the text)"
+    return delta
+
+
+def map_segment_translations(items: list[dict[str, Any]], data: list[dict[str, Any]]) -> dict[str, str] | str:
+    """{segment id -> translation} from a /translate/ai response. data[] is positional: either one
+    entry per content[] item or one per translatable item. An echoed id must match."""
+    translatable = [i for i in items if i["translatable"]]
+    if len(data) == len(items):
+        pairs = list(zip(items, data, strict=True))
+    elif len(data) == len(translatable):
+        pairs = list(zip(translatable, data, strict=True))
+    else:
+        return f"response has {len(data)} item(s) for {len(items)} segment(s) ({len(translatable)} translatable)"
+    out: dict[str, str] = {}
+    for item, d in pairs:
+        if "id" in d and str(d["id"]) != str(item["id"]):
+            return f"response item id {d['id']!r} where {item['id']!r} was sent"
+        if not item["translatable"]:
+            continue
+        translation = d.get("translation")
+        if not isinstance(translation, str):
+            return f"no translation for segment {item['id']}"
+        out[str(item["id"])] = translation
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Translated API client
 # ---------------------------------------------------------------------------
 
@@ -814,6 +1438,34 @@ class TranslatedApiError(Exception):
                 {"field": p.get("field"), "reason": p.get("reason")} for p in params if isinstance(p, dict)
             ]
         return out
+
+
+class TranslatedAuthError(TranslatedApiError):
+    """The API rejected the key. Nothing was billed; the run stops without recording failures."""
+
+
+def parse_retry_after(value: str | None, now: datetime | None = None) -> float | None:
+    """Seconds to wait from a Retry-After header (delay-seconds or HTTP-date), or None."""
+    if not value or not value.strip():
+        return None
+    v = value.strip()
+    if v.isdigit():
+        return float(v)
+    try:
+        when = email.utils.parsedate_to_datetime(v)
+    except (TypeError, ValueError):
+        return None
+    if when.tzinfo is None:
+        when = when.replace(tzinfo=UTC)
+    return max(0.0, (when - (now or datetime.now(UTC))).total_seconds())
+
+
+def retry_delay(attempt: int, retry_after: float | None, jitter: Callable[[], float]) -> float:
+    """Retry-After when the server sent one, else exponential backoff with jitter; at most MAX_RETRY_DELAY."""
+    if retry_after is not None:
+        return min(retry_after, MAX_RETRY_DELAY)
+    base = min(float(2**attempt * 2), MAX_RETRY_DELAY)
+    return base / 2 + jitter() * base / 2
 
 
 def describe_api_error(payload: str) -> tuple[str, dict[str, Any]]:
@@ -848,10 +1500,12 @@ class TranslatedClient:
         api_key: str,
         sleep: Callable[[float], None] = time.sleep,
         opener: Callable[..., Any] = urllib.request.urlopen,
+        jitter: Callable[[], float] = random.random,
     ) -> None:
         self.base_url = base_url
         self.api_key = api_key
         self.sleep = sleep
+        self.jitter = jitter
         self.opener = opener  # urlopen-compatible; injectable so the self-test can fake HTTP answers offline
 
     def _request(
@@ -871,6 +1525,7 @@ class TranslatedClient:
         last_error = "retries exhausted"
         for attempt in range(retries + 1):
             req = urllib.request.Request(url, data=data, method=method, headers=headers)
+            retry_after: float | None = None
             try:
                 with self.opener(req, timeout=180) as resp:
                     return json.loads(resp.read().decode("utf-8") or "null")
@@ -878,14 +1533,22 @@ class TranslatedClient:
                 payload = e.read().decode("utf-8", errors="replace")
                 message, api_error = describe_api_error(payload)
                 last_error = f"{e.code}: {message}"
+                if e.code in AUTH_HTTP:
+                    raise TranslatedAuthError(
+                        f"{method} {endpoint} failed with {last_error}. The API key was rejected: check the "
+                        "TRANSLATED_API_KEY secret, and that it belongs to the TRANSLATED_ENV environment.",
+                        e.code,
+                        api_error,
+                    ) from None
                 if e.code not in RETRYABLE_HTTP:
                     raise TranslatedApiError(
                         f"{method} {endpoint} failed with {last_error}", e.code, api_error
                     ) from None
+                retry_after = parse_retry_after(e.headers.get("Retry-After") if e.headers else None)
             except (urllib.error.URLError, OSError, http.client.HTTPException, json.JSONDecodeError) as e:
                 last_error = f"{type(e).__name__}: {e}"
             if attempt < retries:
-                self.sleep(2**attempt * 2)
+                self.sleep(retry_delay(attempt, retry_after, self.jitter))
         raise TranslatedApiError(f"{method} {endpoint} failed after {retries + 1} attempts ({last_error})")
 
     def _post(self, endpoint: str, body: Any, extra_headers: dict[str, str] | None = None, retries: int = 3) -> Any:
@@ -987,7 +1650,13 @@ def build_plan(
             plan.current += 1
             continue
         failure = failures.get(rel)
-        if failure and failure.get("sourceHash") == src_hash and not options.retry_failed:
+        # A failed request was not billed, so it is planned again; a rejected delivery waits for --retry-failed.
+        if (
+            failure
+            and failure.get("sourceHash") == src_hash
+            and not failure.get("request")
+            and not options.retry_failed
+        ):
             plan.skipped_failed.append((rel, str(failure.get("error"))))
             continue
         if not exists or entry.get("status") != STATUS_TRANSLATED:
@@ -1043,6 +1712,8 @@ class RunReport:
                 "removed": [],
                 "chars": 0,  # characters submitted
                 "billed_chars": 0,  # characters billed by the API
+                "segmented": [],  # (rel, Delta) written from changed segments only
+                "whole_file": [],  # (rel, reason) outdated files that were sent whole
             },
         )
 
@@ -1065,6 +1736,13 @@ class RunReport:
         for lang, r in sorted(self.per_lang.items()):
             if r["chars"] or r["billed_chars"]:
                 out.append(f"\n{lang}: {r['chars']:,} characters submitted, {r['billed_chars']:,} billed.")
+            if r["segmented"]:
+                changed = sum(d.changed_chars for _, d in r["segmented"])
+                total = sum(d.total_chars for _, d in r["segmented"])
+                out.append(
+                    f"\n{lang}: {len(r['segmented'])} file(s) updated from changed segments only "
+                    f"({changed:,} of {total:,} translatable characters sent)."
+                )
             if r["repaired"]:
                 kinds = ", ".join(f"{n} {kind}" for kind, n in sorted(r["repaired"].items()))
                 out.append(f"\n{lang}: repaired from English: {kinds} in {len(r['repaired_files'])} file(s).")
@@ -1072,6 +1750,10 @@ class RunReport:
                 (f"{lang}: failed (translation kept as before)", [f"`{rel}` — {why}" for rel, why in r["failed"]]),
                 (f"{lang}: written with warnings", [f"`{rel}` — {why}" for rel, why in r["warnings"]]),
                 (f"{lang}: removed (English source gone)", [f"`{x}`" for x in r["removed"]]),
+                (
+                    f"{lang}: translated as a whole file instead of changed segments",
+                    [f"`{rel}` — {why}" for rel, why in r["whole_file"]],
+                ),
             ]
             for title, items in sections:
                 if items:
@@ -1088,7 +1770,10 @@ class RunReport:
 # ---------------------------------------------------------------------------
 
 
-def print_plan(lang: str, plan: LanguagePlan, limit: int = 0) -> None:
+DeltaLookup = Callable[[str, str], Delta | str | None]
+
+
+def print_plan(lang: str, plan: LanguagePlan, limit: int = 0, delta_for: DeltaLookup | None = None) -> None:
     print(
         f"\n{lang}: {plan.current} current, {len(plan.to_submit)} to submit, "
         f"{len(plan.skipped_failed)} failed at this hash, {len(plan.pinned)} pinned, {len(plan.orphans)} orphaned, "
@@ -1099,9 +1784,21 @@ def print_plan(lang: str, plan: LanguagePlan, limit: int = 0) -> None:
     queue = plan.to_submit[:limit] if limit else plan.to_submit
     chars = 0
     for rel, reason in queue:
+        delta = delta_for(rel, reason) if delta_for else None
+        if isinstance(delta, Delta) and not delta.changed:
+            print(f"  update  {'no text':<12} {rel}")
+            continue
+        if isinstance(delta, Delta):
+            chars += delta.chars
+            print(
+                f"  submit  {'changed':<12} {rel} ({delta.changed}/{delta.total} units, "
+                f"{delta.changed_chars:,}/{delta.total_chars:,} chars)"
+            )
+            continue
         content, _, _ = prepare_payload(rel, read_text(CONTENT_DIR / rel))
         chars += len(content)
-        print(f"  submit  {reason:<12} {rel}")
+        note = f" (whole file: {delta})" if delta and delta != WHOLE_FILE_TYPE else ""
+        print(f"  submit  {reason:<12} {rel}{note}")
     if len(queue) < len(plan.to_submit):
         print(f"  ... {len(plan.to_submit) - len(queue)} more beyond --limit {limit}")
     for rel, error in plan.skipped_failed:
@@ -1118,9 +1815,29 @@ def print_plan(lang: str, plan: LanguagePlan, limit: int = 0) -> None:
         print(f"  ~{chars:,} characters would be submitted for {lang}")
 
 
-def cmd_plan(langs: list[str], sources: dict[str, str], passthrough: dict[str, str], options: PlanOptions) -> None:
+def file_delta(
+    config: TranslationConfig, lang: str, rel: str, reason: str, entry: dict[str, Any], options: PlanOptions
+) -> Delta | str | None:
+    """Delta or fallback reason for an outdated file; None for files that are always sent whole."""
+    if reason != "outdated" or options.force or not config.segment_diff:
+        return None
+    return plan_delta(config, lang, rel, entry)
+
+
+def cmd_plan(
+    config: TranslationConfig,
+    langs: list[str],
+    sources: dict[str, str],
+    passthrough: dict[str, str],
+    options: PlanOptions,
+) -> None:
     for lang in langs:
-        print_plan(lang, build_plan(lang, sources, passthrough, load_status(lang), options), options.limit)
+        status = load_status(lang)
+
+        def delta_for(rel: str, reason: str, lang: str = lang, status: dict[str, Any] = status) -> Delta | str | None:
+            return file_delta(config, lang, rel, reason, status["files"].get(rel, {}), options)
+
+        print_plan(lang, build_plan(lang, sources, passthrough, status, options), options.limit, delta_for)
 
 
 def check_existing_translation(
@@ -1156,6 +1873,7 @@ def cmd_baseline(
     run: GitRunner = run_git,
 ) -> None:
     ref_hashes: dict[str, str] = {}
+    sha = ""
     if ref:
         sha = resolve_git_ref(ref, run)
         print(f"baseline ref {ref} -> {sha}")
@@ -1203,7 +1921,8 @@ def cmd_baseline(
             if ref and rel not in ref_hashes:
                 notes.append(f"  new           {rel}: not in content/ at {ref}; baselined at the current hash")
             baseline_hash = ref_hashes.get(rel, src_hash) if ref else src_hash
-            status["files"][rel] = {"sourceHash": baseline_hash, "status": STATUS_TRANSLATED}
+            ref_blob = blob_at_git_ref(sha, rel, run) if ref and rel in ref_hashes else None
+            status["files"][rel] = source_entry(rel, baseline_hash, STATUS_TRANSLATED, run, ref_blob)
             if baseline_hash == src_hash:
                 current += 1
             else:
@@ -1228,6 +1947,88 @@ def cmd_baseline(
             print(f"  outdated      {rel}: {why}")
 
 
+def cmd_migrate_blobs(langs: list[str], sources: dict[str, str], run: GitRunner = run_git) -> None:
+    """Record sourceBlob for status entries that only have a sourceHash (entries from before
+    segment-level updates). The blob is the English version whose content hashes to sourceHash.
+    Passthrough files are copied, never diffed, and are skipped."""
+    if not in_git_work_tree(run):
+        raise SystemExit("--migrate-blobs needs a git work tree with the history of content/.")
+    found: dict[tuple[str, str], tuple[str, bytes] | None] = {}
+    for lang in langs:
+        status = load_status(lang)
+        recorded = kept = 0
+        missing: list[str] = []
+        for rel, entry in status["files"].items():
+            source_hash = str(entry.get("sourceHash") or "")
+            if rel not in sources or not source_hash:
+                continue
+            blob = entry.get("sourceBlob")
+            if isinstance(blob, str) and blob:
+                data = read_git_blob(blob, run)
+                if data is not None and hash_bytes(data) == source_hash:
+                    kept += 1
+                    continue
+            key = (rel, source_hash)
+            if key not in found:
+                found[key] = find_source_blob(rel, source_hash, run)
+            match = found[key]
+            if match is None:
+                missing.append(rel)
+                continue
+            rest = {k: v for k, v in entry.items() if k not in ("sourceHash", "sourceBlob")}
+            status["files"][rel] = {"sourceHash": source_hash, "sourceBlob": match[0], **rest}
+            recorded += 1
+        save_status(lang, status)
+        print(f"\n{lang}: sourceBlob recorded for {recorded}, already valid for {kept}, not found for {len(missing)}")
+        for rel in missing:
+            print(f"  not found     {rel}: no English version in git hashes to the recorded sourceHash")
+
+
+def status_at_ref(ref: str, lang: str, run: GitRunner = run_git) -> dict[str, Any]:
+    """The status file of a language at a git ref; empty sections when the file is missing there."""
+    proc = run(["git", "show", f"{ref}:{status_path(lang).as_posix()}"])
+    status: dict[str, Any] = json.loads(proc.stdout.decode("utf-8")) if proc.returncode == 0 else {}
+    status.setdefault("files", {})
+    status.setdefault("failures", {})
+    return status
+
+
+def merge_entries(base: dict[str, Any], ours: dict[str, Any], theirs: dict[str, Any]) -> tuple[dict[str, Any], int]:
+    """Three-way merge of one status section. An entry the translation branch (theirs) added, changed or
+    removed since the merge base comes from the branch; every other entry comes from ours, so an entry
+    the branch merely carries in an older state never overwrites a newer one. Returns (merged, taken)."""
+    merged: dict[str, Any] = {}
+    taken = 0
+    for key in [*ours, *(k for k in theirs if k not in ours), *(k for k in base if k not in ours and k not in theirs)]:
+        if theirs.get(key) != base.get(key):
+            taken += 1
+            if key in theirs:
+                merged[key] = theirs[key]
+        elif key in ours:
+            merged[key] = ours[key]
+    return merged, taken
+
+
+def cmd_merge_status(langs: list[str], ours_ref: str, theirs_ref: str, run: GitRunner = run_git) -> None:
+    """Rebuild each status file after the translation branch was merged into the run's tree. A text merge
+    (-X theirs) resolves conflicting hunks of the JSON from the branch; this keeps main's entries the branch
+    did not touch."""
+    if not in_git_work_tree(run):
+        raise SystemExit("--merge-status needs a git work tree.")
+    ours_sha, theirs_sha = resolve_git_ref(ours_ref, run), resolve_git_ref(theirs_ref, run)
+    proc = run(["git", "merge-base", ours_sha, theirs_sha])
+    if proc.returncode != 0:
+        raise SystemExit(f"--merge-status: {ours_ref} and {theirs_ref} have no merge base.")
+    base_sha = proc.stdout.decode("utf-8").strip()
+    for lang in langs:
+        base, ours, theirs = (status_at_ref(sha, lang, run) for sha in (base_sha, ours_sha, theirs_sha))
+        status = load_status(lang)
+        status["files"], taken = merge_entries(base["files"], ours["files"], theirs["files"])
+        status["failures"], _ = merge_entries(base["failures"], ours["failures"], theirs["failures"])
+        save_status(lang, status)
+        print(f"{lang}: {taken} status entries taken from {theirs_ref}, the others from {ours_ref}")
+
+
 # ---------------------------------------------------------------------------
 # Commands: run / dump-orders
 # ---------------------------------------------------------------------------
@@ -1242,6 +2043,9 @@ class LanguageSubmission:
     orders: list[dict[str, Any]] = field(default_factory=list)
     jobs: dict[str, dict[str, Any]] = field(default_factory=dict)  # rel -> pending job record
     empty_copies: list[str] = field(default_factory=list)  # nothing translatable: copied through
+    deltas: dict[str, Delta] = field(default_factory=dict)  # rel -> segment-level update sent in its order
+    local_deltas: dict[str, Delta] = field(default_factory=dict)  # changes without translatable text
+    whole_file: list[tuple[str, str]] = field(default_factory=list)  # outdated files sent whole, with the reason
 
     @property
     def chars(self) -> int:
@@ -1249,17 +2053,22 @@ class LanguageSubmission:
 
 
 def build_order(
-    config: TranslationConfig, id_content: str, content: str, content_type: str, locale: str
+    config: TranslationConfig,
+    id_content: str,
+    content: str,
+    content_type: str,
+    locale: str,
+    segments: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    # /translate/ai body: one object per file, target_language singular,
-    # content a list of {text, translatable} segments; the whole file is one segment.
+    # /translate/ai body: one object per file, target_language singular, content a list of
+    # {id, text, translatable} segments: the whole file as one segment, or the given segments.
     order: dict[str, Any] = {
         "id_content": id_content,
         "source_language": config.source_locale,
         "target_language": locale,
         "content_type": content_type,
         "service_type": config.service_type,
-        "content": [{"id": "s1", "text": content, "translatable": True}],
+        "content": segments if segments is not None else [{"id": "s1", "text": content, "translatable": True}],
     }
     if config.instructions:
         order["context"] = {"instructions": config.instructions}
@@ -1280,11 +2089,33 @@ def prepare_submission(
     sub = LanguageSubmission(lang, locale, status, plan)
     queue = plan.to_submit[: options.limit] if options.limit else plan.to_submit
     for rel, reason in queue:
+        id_content = f"{lang}/{rel}"
+        failure = status["failures"].get(rel, {})
+        if options.retry_failed and failure.get("segmentUpdate") and failure.get("sourceHash") == sources[rel]:
+            delta: Delta | str | None = "retry of a failed segment update"
+        else:
+            delta = file_delta(config, lang, rel, reason, status["files"].get(rel, {}), options)
+        if isinstance(delta, Delta):
+            if not delta.changed:
+                sub.local_deltas[rel] = delta
+                continue
+            sub.orders.append(build_order(config, id_content, "", "text/plain", locale, delta.items))
+            sub.jobs[rel] = {
+                "mode": delta.mode,
+                "idContent": id_content,
+                "sourceHash": sources[rel],
+                "reason": "changed",
+                "contentType": "text/plain",
+                "chars": delta.chars,
+            }
+            sub.deltas[rel] = delta
+            continue
+        if delta is not None and delta != WHOLE_FILE_TYPE:
+            sub.whole_file.append((rel, delta))
         content, content_type, info = prepare_payload(rel, read_text(CONTENT_DIR / rel))
         if not content.strip() or info.get("units") == 0:
             sub.empty_copies.append(rel)
             continue
-        id_content = f"{lang}/{rel}"
         sub.orders.append(build_order(config, id_content, content, content_type, locale))
         sub.jobs[rel] = {
             **info,
@@ -1334,16 +2165,46 @@ def apply_local_changes(
             r["copied"].append(rel)
             print(f"{lang}: copied passthrough {rel}")
         # Always (re)record the entry so legacy "translated" tags on passthrough files become "copied".
-        status["files"][rel] = {"sourceHash": passthrough[rel], "status": STATUS_COPIED}
+        status["files"][rel] = source_entry(rel, passthrough[rel], STATUS_COPIED)
     for rel in sub.empty_copies:
         write_text(target_file(lang, rel), read_text(CONTENT_DIR / rel))
-        status["files"][rel] = {"sourceHash": sources[rel], "status": STATUS_TRANSLATED}
+        status["files"][rel] = source_entry(rel, sources[rel], STATUS_TRANSLATED)
         status["failures"].pop(rel, None)
     save_status(lang, status)
 
 
 def billed_chars(data: list[dict[str, Any]]) -> int:
     return sum(int(d["billed_chars"]) for d in data if isinstance(d.get("billed_chars"), (int, float)))
+
+
+def write_delivery(
+    lang: str,
+    rel: str,
+    source_hash: str,
+    text: str,
+    problems: list[str],
+    warnings: list[str],
+    status: dict[str, Any],
+    lenient: bool,
+    structured: bool,
+) -> list[str]:
+    """Write a verified delivery and record it. Returns the problems that rejected it (empty when written).
+    --lenient only makes sense for raw Markdown/HTML, where the assembled text is still usable.
+    A structured payload (toc names, UI strings) with problems rebuilds to English or nothing."""
+    if problems and (not lenient or not text or structured):
+        if lenient:
+            why = "no usable text" if not text else "structured payload cannot be written partially"
+            print(f"{lang}: --lenient ignored for {rel}: {why}")
+        record_failure(status, rel, "; ".join(problems), source_hash)
+        return problems
+    write_text(target_file(lang, rel), text)
+    status["files"][rel] = source_entry(rel, source_hash, STATUS_TRANSLATED)
+    status["failures"].pop(rel, None)
+    if problems:
+        print(f"{lang}: written despite problems ({'; '.join(problems)}): {rel}")
+    if warnings:
+        print(f"{lang}: written with warnings ({'; '.join(warnings)}): {rel}")
+    return []
 
 
 def apply_translation(
@@ -1360,28 +2221,65 @@ def apply_translation(
     if not isinstance(translated, str) or not translated:
         record_failure(status, rel, "no translation in the response", job_hash)
         return ["no translation in the response"], Counter(), []
+    spans = job.get("codeSpans")
+    if isinstance(spans, list):
+        translated, mask_problems = unmask_code(translated, spans)
+        if mask_problems:
+            record_failure(status, rel, "; ".join(mask_problems), job_hash)
+            return mask_problems, Counter(), []
     try:
         text, problems, repaired, warnings = finalize_translation(rel, job, read_text(CONTENT_DIR / rel), translated)
     except Exception as e:  # noqa: BLE001 - reported to the reviewer, never crashes the run
         record_failure(status, rel, f"could not reinsert translation: {e}", job_hash)
         return [f"could not reinsert translation: {e}"], Counter(), []
-    # --lenient only makes sense for raw Markdown/HTML, where the assembled text is still usable.
-    # A structured payload (toc names, UI strings) with problems rebuilds to English or nothing.
     structured = job.get("mode") in ("yaml-names", "json-placeholders")
-    if problems and (not lenient or not text or structured):
-        if lenient:
-            why = "no usable text" if not text else "structured payload cannot be written partially"
-            print(f"{lang}: --lenient ignored for {rel}: {why}")
-        record_failure(status, rel, "; ".join(problems), job_hash)
-        return problems, repaired, warnings
-    write_text(target_file(lang, rel), text)
-    status["files"][rel] = {"sourceHash": job_hash, "status": STATUS_TRANSLATED}
-    status["failures"].pop(rel, None)
+    rejected = write_delivery(lang, rel, job_hash, text, problems, warnings, status, lenient, structured)
+    return rejected, repaired, warnings
+
+
+def apply_delta(
+    lang: str,
+    rel: str,
+    source_hash: str,
+    delta: Delta,
+    translations: dict[str, str],
+    status: dict[str, Any],
+    lenient: bool,
+) -> tuple[list[str], Counter[str], list[str]]:
+    """Rebuild one file from reused, translated and English blocks, verify and write it."""
+    try:
+        text, problems, repaired, warnings = delta.assemble(translations)
+    except Exception as e:  # noqa: BLE001 - reported to the reviewer, never crashes the run
+        record_failure(status, rel, f"could not reassemble translation: {e}", source_hash, segmentUpdate=True)
+        return [f"could not reassemble translation: {e}"], Counter(), []
+    structured = delta.mode != "md-blocks"
+    rejected = write_delivery(lang, rel, source_hash, text, problems, warnings, status, lenient, structured)
+    if rejected:
+        status["failures"][rel]["segmentUpdate"] = True
+    return rejected, repaired, warnings
+
+
+def record_result(
+    lang: str,
+    rel: str,
+    r: dict[str, Any],
+    problems: list[str],
+    repaired: Counter[str],
+    warnings: list[str],
+    done: str,
+) -> None:
     if problems:
-        print(f"{lang}: written despite problems ({'; '.join(problems)}): {rel}")
+        r["failed"].append((rel, "; ".join(problems)))
+        print(f"{lang}: REJECTED {rel}: {'; '.join(problems)}")
+        return
+    r["translated"].append(rel)
+    if repaired:
+        r["repaired"].update(repaired)
+        r["repaired_files"].append(rel)
     if warnings:
-        print(f"{lang}: written with warnings ({'; '.join(warnings)}): {rel}")
-    return [], repaired, warnings
+        r["warnings"].append((rel, "; ".join(warnings)))
+    suffix = f" (repaired {dict(repaired)})" if repaired else ""
+    print(f"{lang}: {done}{suffix}")
 
 
 def translate_language(
@@ -1391,43 +2289,78 @@ def translate_language(
     passthrough: dict[str, str],
     lenient: bool,
     report: RunReport,
+    rejected_dir: Path | None = None,
 ) -> None:
     """One synchronous /translate/ai request per planned file: translate, repair, verify, write.
-    The status file is saved after every file so an interrupted run loses no billed work."""
+    The status file is saved after every file so an interrupted run loses no billed work. A rejected
+    key stops the run (TranslatedAuthError) before anything else is recorded for the file."""
     lang, status = sub.lang, sub.status
     r = report.lang(lang)
     apply_local_changes(sub, sources, passthrough, r)
+    r["whole_file"].extend(sub.whole_file)
     orders = {str(o["id_content"]): o for o in sub.orders}
     try:
+        for rel, local in sub.local_deltas.items():
+            problems, repaired, warnings = apply_delta(lang, rel, sources[rel], local, {}, status, lenient)
+            if not problems:
+                r["segmented"].append((rel, local))
+            record_result(lang, rel, r, problems, repaired, warnings, f"updated {rel} (no changed text to translate)")
+        save_status(lang, status)
         for rel, job in sub.jobs.items():
+            order = orders[job["idContent"]]
             try:
-                data = client.translate_ai(orders[job["idContent"]])
+                data = client.translate_ai(order)
+            except TranslatedAuthError:
+                raise
             except TranslatedApiError as e:
                 report.request_failures += 1
-                record_failure(status, rel, f"POST translate/ai failed: {e}", job["sourceHash"], apiError=e.details())
+                record_failure(
+                    status, rel, f"POST translate/ai failed: {e}", job["sourceHash"], apiError=e.details(), request=True
+                )
                 r["failed"].append((rel, f"POST translate/ai failed: {e}"))
                 print(f"{lang}: FAILED {rel}: {e}")
                 save_status(lang, status)
                 continue
             r["chars"] += int(job["chars"])
             r["billed_chars"] += billed_chars(data)
-            translated = data[0].get("translation") if data else None
-            problems, repaired, warnings = apply_translation(lang, rel, job, translated, status, lenient)
-            if problems:
-                r["failed"].append((rel, "; ".join(problems)))
-                print(f"{lang}: REJECTED {rel}: {'; '.join(problems)}")
+            delta = sub.deltas.get(rel)
+            if delta is None:
+                translated = data[0].get("translation") if data else None
+                problems, repaired, warnings = apply_translation(lang, rel, job, translated, status, lenient)
+                done = f"translated {rel} ({job['reason']}, {job['chars']:,} chars)"
             else:
-                r["translated"].append(rel)
-                if repaired:
-                    r["repaired"].update(repaired)
-                    r["repaired_files"].append(rel)
-                if warnings:
-                    r["warnings"].append((rel, "; ".join(warnings)))
-                suffix = f" (repaired {dict(repaired)})" if repaired else ""
-                print(f"{lang}: translated {rel} ({job['reason']}, {job['chars']:,} chars){suffix}")
+                translations = map_segment_translations(order["content"], data)
+                if isinstance(translations, str):
+                    record_failure(status, rel, translations, job["sourceHash"], segmentUpdate=True)
+                    problems, repaired, warnings = [translations], Counter(), []
+                else:
+                    problems, repaired, warnings = apply_delta(
+                        lang, rel, job["sourceHash"], delta, translations, status, lenient
+                    )
+                if not problems:
+                    r["segmented"].append((rel, delta))
+                done = (
+                    f"translated {rel} (changed segments {delta.changed}/{delta.total}, "
+                    f"{delta.changed_chars:,}/{delta.total_chars:,} chars)"
+                )
+            record_result(lang, rel, r, problems, repaired, warnings, done)
+            if problems and rejected_dir is not None:
+                kept = keep_rejected(rejected_dir, lang, rel, order, data, problems)
+                print(f"{lang}: kept the rejected delivery of {rel} in {kept}")
             save_status(lang, status)
     finally:
         save_status(lang, status)
+
+
+def keep_rejected(
+    out_dir: Path, lang: str, rel: str, order: dict[str, Any], data: list[dict[str, Any]], problems: list[str]
+) -> Path:
+    """Save a billed delivery that failed verification, so it can be repaired by hand instead of bought again."""
+    path = out_dir / lang / f"{rel}.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    record = {"language": lang, "file": rel, "problems": problems, "order": order, "response": data}
+    path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return path
 
 
 def prepare_all(
@@ -1456,9 +2389,10 @@ def cmd_run(
     allow_unbounded: bool,
     lenient: bool,
     report: RunReport,
+    rejected_dir: Path | None = None,
 ) -> None:
     for sub in prepare_all(config, langs, sources, passthrough, locales, options, allow_unbounded):
-        translate_language(client, sub, sources, passthrough, lenient, report)
+        translate_language(client, sub, sources, passthrough, lenient, report, rejected_dir)
 
 
 def cmd_dump_orders(
@@ -1489,6 +2423,12 @@ def cmd_dump_orders(
             "characters": sub.chars,
             "passthroughCopies": sub.plan.to_copy,
             "emptyCopies": sub.empty_copies,
+            "segmented": {
+                rel: {"units": f"{d.changed}/{d.total}", "chars": f"{d.changed_chars}/{d.total_chars}"}
+                for rel, d in sub.deltas.items()
+            },
+            "localUpdates": sorted(sub.local_deltas),
+            "wholeFile": dict(sub.whole_file),
             "orphans": sub.plan.orphans,
             "unscoped": sub.plan.unscoped,
             "pinned": sub.plan.pinned,
@@ -1558,6 +2498,14 @@ class SelfTest:
             self.failures.append(name)
             print(f"  FAIL  {name}" + (f" -- {detail[:300]}" if detail else ""))
 
+    def expect_raises(self, name: str, fn: Callable[[], object], error: type[BaseException]) -> None:
+        try:
+            fn()
+        except error:
+            self.check(name, True)
+            return
+        self.check(name, False, f"no {error.__name__} raised")
+
     def expect_exit(self, name: str, fn: Callable[[], object], fragment: str = "") -> None:
         try:
             fn()
@@ -1608,7 +2556,11 @@ def selftest_corpus(t: SelfTest, config: TranslationConfig) -> None:
         text = read_text(CONTENT_DIR / rel)
         content, _, info = prepare_payload(rel, text)
         try:
-            out, problems, repaired, warnings = finalize_translation(rel, info, text, content, check_identity=False)
+            delivered, mask_problems = unmask_code(content, info.get("codeSpans", []))
+            if mask_problems:
+                bad.append(f"{rel}: {mask_problems}")
+                continue
+            out, problems, repaired, warnings = finalize_translation(rel, info, text, delivered, check_identity=False)
         except Exception as e:  # noqa: BLE001
             bad.append(f"{rel}: raised {e}")
             continue
@@ -1617,6 +2569,35 @@ def selftest_corpus(t: SelfTest, config: TranslationConfig) -> None:
     t.check(f"{len(sources)} scoped sources round-trip byte-for-byte with zero problems", not bad, "; ".join(bad[:5]))
     passthrough = get_passthrough_sources(config, sources)
     t.check("passthrough files are outside the translation scope", not set(passthrough) & set(sources))
+
+    t.section("corpus segmentation (segment -> join, unchanged page rebuilds to itself)")
+    md_sources = [rel for rel in sources if rel.endswith(".md")]
+    bad = []
+    for rel in md_sources:
+        text = read_text(CONTENT_DIR / rel)
+        fm, body = split_frontmatter(to_lf(text.lstrip(BOM)))
+        seg = segment(body)
+        if seg.join() != body:
+            bad.append(f"{rel}: segment/join differs")
+            continue
+        # Stand-in translation: " (es)" after the first line of every translatable block.
+        marked = [b.text.replace("\n", " (es)\n", 1) if b.translatable else b.text for b in seg.blocks]
+        translation = fm + seg.join(marked)
+        delta = md_delta(text, text, translation)
+        if isinstance(delta, str) or delta.changed:
+            bad.append(f"{rel}: {delta if isinstance(delta, str) else f'{delta.changed} changed unit(s)'}")
+            continue
+        out, problems, _, _ = delta.assemble({})
+        expected = (BOM if text.startswith(BOM) else "") + translation
+        if "\r\n" in text:
+            expected = expected.replace("\n", "\r\n")
+        if out != expected or problems:
+            bad.append(f"{rel}: {'differs' if out != expected else ''} {problems}")
+    t.check(
+        f"{len(md_sources)} Markdown sources segment, and an unchanged page rebuilds its translation byte-for-byte",
+        not bad,
+        "; ".join(bad[:5]),
+    )
 
 
 def selftest_fixtures(t: SelfTest) -> None:
@@ -1649,11 +2630,8 @@ def selftest_fixtures(t: SelfTest) -> None:
     dropped_span = identity.replace("`Selected.Tables`", "Selected.Tables")
     out, problems, repaired, warnings = fin(FIXTURE_MD, dropped_span)
     t.check(
-        "dropped inline code span -> warning, not a problem; delivered text kept",
-        not problems
-        and not repaired
-        and warnings == ["inline code spans 2 -> 1 (missing ['`Selected.Tables`'], added [])"]
-        and out == BOM + dropped_span,
+        "dropped inline code span -> problem (the code was lost)",
+        problems == ["inline code spans 2 -> 1 (missing ['`Selected.Tables`'], added [])"] and not warnings,
         f"{problems} {warnings}",
     )
     extra_span = identity.replace("Open `View", "Open `true` `View")
@@ -1665,16 +2643,20 @@ def selftest_fixtures(t: SelfTest) -> None:
         and out == BOM + extra_span,
         f"{problems} {warnings}",
     )
-    out, problems, repaired, warnings = fin(FIXTURE_MD, dropped_span.replace("(guide.md)", "(guia.md)"))
+    out, problems, repaired, warnings = fin(FIXTURE_MD, extra_span.replace("(guide.md)", "(guia.md)"))
     t.check(
-        "inline-code drift does not block the other repairs (link target still restored)",
-        not problems and len(warnings) == 1 and repaired["links"] == 1 and out == BOM + dropped_span,
+        "an added inline code span does not block the other repairs (link target still restored)",
+        not problems and len(warnings) == 1 and repaired["links"] == 1 and out == BOM + extra_span,
         f"{problems} {warnings} {dict(repaired)}",
     )
-    _, problems, _, warnings = fin(FIXTURE_MD, dropped_span, repair=False)
+    _, problems, _, warnings = fin(FIXTURE_MD, extra_span, repair=False)
     t.check(
-        "inline-code drift is a warning in verify-only mode too", not problems and len(warnings) == 1, str(problems)
+        "an added inline code span is a warning in verify-only mode too",
+        not problems and len(warnings) == 1,
+        str(problems),
     )
+    _, problems, _, warnings = fin(FIXTURE_MD, dropped_span, repair=False)
+    t.check("a dropped inline code span is a problem in verify-only mode too", len(problems) == 1, str(problems))
     out, problems, repaired, _ = fin(FIXTURE_MD, identity.replace("[!NOTE]", "[!NOTA]"))
     t.check(
         "[!NOTE] -> [!NOTA] (equal count) -> repaired", out == FIXTURE_MD and not problems and repaired["markers"] == 1
@@ -1953,15 +2935,19 @@ class FakeTranslatedClient:
         self.orders: list[dict[str, Any]] = []
         self.translate_calls = 0
         self.raise_on_translate_call: int | None = None  # 1-based call index that raises an API error
-        self.deliveries: dict[str, str] = {}  # id_content -> translated text (default: echo the source)
+        self.raise_http_status = 400  # status of that error; 401/403 raise TranslatedAuthError
+        # id_content -> translated text of a whole-file order, or {segment id -> text} (default: echo the source)
+        self.deliveries: dict[str, str | dict[str, str]] = {}
+        self.translatable_only = False  # answer with data[] items for translatable segments only
         self.empty_responses: set[str] = set()  # id_content answered with an empty data[]
 
     def translate_ai(self, order: dict[str, Any]) -> list[dict[str, Any]]:
         self.translate_calls += 1
         if self.raise_on_translate_call == self.translate_calls:
-            raise TranslatedApiError(
-                "POST translate/ai failed with 400: INVALID_PARAMS; boom",
-                400,
+            error = TranslatedAuthError if self.raise_http_status in AUTH_HTTP else TranslatedApiError
+            raise error(
+                f"POST translate/ai failed with {self.raise_http_status}: INVALID_PARAMS; boom",
+                self.raise_http_status,
                 {
                     "code": "INVALID_PARAMS",
                     "message": "boom",
@@ -1973,8 +2959,23 @@ class FakeTranslatedClient:
         id_content = str(order["id_content"])
         if id_content in self.empty_responses:
             return []
-        text = self.deliveries.get(id_content, str(order["content"][0]["text"]))
-        return [{"translation": text, "translatable": True, "billed_chars": len(text)}]
+        delivery = self.deliveries.get(id_content)
+        items: list[dict[str, Any]] = order["content"]
+        out: list[dict[str, Any]] = []
+        for item in items:
+            if isinstance(delivery, dict):
+                text = delivery.get(str(item["id"]), str(item["text"]))
+            elif delivery is not None and len(items) == 1:
+                text = delivery
+            else:
+                text = str(item["text"])
+            if self.translatable_only and not item["translatable"]:
+                continue
+            billed = len(text) if item["translatable"] else 0
+            out.append(
+                {"id": item["id"], "translation": text, "translatable": item["translatable"], "billed_chars": billed}
+            )
+        return out
 
     def service_type_names(self) -> list[dict[str, Any]]:
         return [
@@ -2030,12 +3031,46 @@ def mini_repo() -> Iterator[Path]:
     for rel, text in MINI_FILES.items():
         write_text(tmp / CONTENT_DIR / rel, text)
     (tmp / LOCALIZED_DIR / "es" / "content").mkdir(parents=True)
+    ceiling = os.environ.get("GIT_CEILING_DIRECTORIES")
+    # Keep git from finding a repository above the temp dir; git_mini_repo creates one inside it.
+    os.environ["GIT_CEILING_DIRECTORIES"] = str(tmp.parent)
     os.chdir(tmp)
     try:
         yield tmp
     finally:
         os.chdir(cwd)
+        if ceiling is None:
+            os.environ.pop("GIT_CEILING_DIRECTORIES", None)
+        else:
+            os.environ["GIT_CEILING_DIRECTORIES"] = ceiling
+        for p in tmp.rglob("*"):
+            os.chmod(p, 0o700)  # git object files are read-only; rmtree cannot delete them on Windows
         shutil.rmtree(tmp, ignore_errors=True)
+
+
+def git(*args: str) -> str:
+    return subprocess.run(["git", *args], check=True, capture_output=True).stdout.decode("utf-8").strip()
+
+
+def commit_all(message: str) -> None:
+    git("add", "-A")
+    git("commit", "-q", "--allow-empty", "-m", message)
+
+
+@contextmanager
+def git_mini_repo(extra: dict[str, str] | None = None) -> Iterator[Path]:
+    """mini_repo as a git repository with the English sources (plus `extra`) committed."""
+    with mini_repo() as tmp:
+        for rel, text in (extra or {}).items():
+            write_text(CONTENT_DIR / rel, text)
+        git("init", "-q")
+        git("config", "user.email", "selftest@example.com")
+        git("config", "user.name", "selftest")
+        git("config", "core.autocrlf", "false")
+        git("config", "commit.gpgsign", "false")
+        git("config", "core.hooksPath", ".git/no-hooks")
+        commit_all("English sources")
+        yield tmp
 
 
 @dataclass
@@ -2053,7 +3088,13 @@ class Harness:
     def passthrough(self) -> dict[str, str]:
         return get_passthrough_sources(self.config, self.sources)
 
-    def run(self, options: PlanOptions | None = None, allow_unbounded: bool = True, lenient: bool = False) -> None:
+    def run(
+        self,
+        options: PlanOptions | None = None,
+        allow_unbounded: bool = True,
+        lenient: bool = False,
+        rejected_dir: Path | None = None,
+    ) -> None:
         cmd_run(
             self.config,
             self.client,
@@ -2065,6 +3106,7 @@ class Harness:
             allow_unbounded,
             lenient,
             self.report,
+            rejected_dir,
         )
 
     def plan(self, options: PlanOptions | None = None) -> LanguagePlan:
@@ -2166,6 +3208,22 @@ def selftest_fake_client(t: SelfTest) -> None:
         )
         t.check("file not written", not target_file("es", "guide.md").exists())
         t.check("other files translated", status["files"]["index.md"]["status"] == STATUS_TRANSLATED)
+        kept_dir = Path("rejected")
+        h.run(PlanOptions(retry_failed=True, file_filters=["guide.md"]), rejected_dir=kept_dir)
+        kept_path = kept_dir / "es" / "guide.md.json"
+        kept = json.loads(kept_path.read_text(encoding="utf-8")) if kept_path.exists() else {}
+        t.check(
+            "--keep-rejected saves the billed delivery with its order and problems",
+            kept.get("file") == "guide.md"
+            and "headings" in kept["problems"][0]
+            and kept["order"]["id_content"] == "es/guide.md"
+            and kept["response"][0]["translation"] == h.client.deliveries["es/guide.md"],
+            str(kept)[:300],
+        )
+        t.check(
+            "only rejected deliveries are kept",
+            [p.name for p in kept_dir.rglob("*.json")] == ["guide.md.json"],
+        )
         t.check("verification failures do not flag the run (exit 0)", not h.report.failed)
         plan = h.plan()
         t.check(
@@ -2300,6 +3358,31 @@ def selftest_fake_client(t: SelfTest) -> None:
             str(status["failures"]),
         )
         t.check("run flagged as failed (exit 1)", h.report.request_failures == 1 and h.report.failed)
+        t.check(
+            "a failed request is not billed, so the next plan sends the file again without --retry-failed",
+            [rel for rel, _ in h.plan().to_submit] == failed and not h.plan().skipped_failed,
+        )
+        h.client.raise_on_translate_call = None
+        h.run()
+        status = load_status("es")
+        t.check(
+            "the next run translates it and clears the failure",
+            not status["failures"] and status["files"][failed[0]]["status"] == STATUS_TRANSLATED,
+            str(status["failures"]),
+        )
+    with mini_repo():
+        h = prod_harness()
+        h.client.raise_on_translate_call = 2
+        h.client.raise_http_status = 401
+        t.expect_raises("a rejected key (401) stops the run", lambda: h.run(), TranslatedAuthError)
+        status = load_status("es")
+        t.check(
+            "after a rejected key: the file translated before is saved, nothing is recorded as failed",
+            sum(1 for f in status["files"].values() if f["status"] == STATUS_TRANSLATED) == 1
+            and not status["failures"]
+            and len(h.plan().to_submit) == 3,
+            str(status),
+        )
 
     t.section("fake client: sandbox caps")
     with mini_repo():
@@ -2525,11 +3608,853 @@ def selftest_fake_client(t: SelfTest) -> None:
         )
 
 
+# --- segment-level updates ------------------------------------------------------
+
+SEG_MD = (
+    "---\ntitle: Refresh guide\ndescription: How to refresh\nuid: refresh\n---\n"
+    "# Refresh guide\n\nOpen the dialog with **Ctrl+R**.\n\n"
+    "- First option explained.\n- Second option explained.\n\n"
+    "| Option | Meaning |\n|---|---|\n| Full | Refresh everything |\n\n"
+    "```csharp\nvar x = 1;\n```\n\n"
+    "<!-- IMAGE NEEDED: dialog.png -->\n\n- @refresh-uid\n\n"
+    "## Details\n\nThis paragraph is removed later.\n\nFinal paragraph stays.\n"
+)
+SEG_MD_ES = (
+    "---\ntitle: Guía de actualización\ndescription: Cómo actualizar\nuid: refresh\n---\n"
+    "# Guía de actualización\n\nAbre el cuadro de diálogo con **Ctrl+R**.\n\n"
+    "- Primera opción explicada.\n- Segunda opción explicada.\n\n"
+    "| Opción | Significado |\n|---|---|\n| Full | Actualiza todo |\n\n"
+    "```csharp\nvar x = 1;\n```\n\n"
+    "<!-- IMAGE NEEDED: dialog.png -->\n\n- @refresh-uid\n\n"
+    "## Detalles\n\nEste párrafo se elimina más tarde.\n\nEl párrafo final se mantiene.\n"
+)
+SEG_MD_V2 = (
+    SEG_MD.replace("title: Refresh guide", "title: Refresh guide for models")
+    .replace("**Ctrl+R**", "**Ctrl+Shift+R**")
+    .replace("- Second option explained.\n", "- Second option explained.\n- Third option explained.\n")
+    .replace("var x = 1;", "var x = 2;")
+    .replace("This paragraph is removed later.\n\n", "")
+)
+SEG_MD_ES_V2 = (
+    SEG_MD_ES.replace("title: Guía de actualización", "title: Guía de actualización de modelos")
+    .replace("**Ctrl+R**", "**Ctrl+Shift+R**")
+    .replace("- Segunda opción explicada.\n", "- Segunda opción explicada.\n- Tercera opción explicada.\n")
+    .replace("var x = 1;", "var x = 2;")
+    .replace("Este párrafo se elimina más tarde.\n\n", "")
+)
+SEG_V2_DELIVERY = {
+    "fm:title": "Guía de actualización de modelos",
+    "b1": "Abre el cuadro de diálogo con **Ctrl+Shift+R**.",
+    "b4": "- Tercera opción explicada.",
+}
+SEGMENT_SAMPLE = (
+    "\n# Title\n\nPara one\ncontinues here.\n\n- item one\n  continued\n- item two\n***\n\n"
+    "> [!NOTE]\n> Note line\n> second line\n\n| a | b |\n|---|---|\n\n"
+    "```\ncode\n\nmore code\n```\n\n<!-- comment\n\nstill comment -->\n\n"
+    "[!include[part](includes/part.md)]\n\n- @uid-one, @uid-two\n\n"
+    '<img src="a.png" alt="Dialog picture">\n\nhttps://example.com\n'
+)
+
+
+def selftest_segments(t: SelfTest) -> None:
+    t.section("block segmentation and block diff")
+    seg = segment(SEGMENT_SAMPLE)
+    t.check("segment + join round-trips byte-for-byte", seg.join() == SEGMENT_SAMPLE)
+    t.check(
+        "kinds: heading, paragraph, list items (with continuation), rule, alert, table rows, fence, comment",
+        seg.kinds == ["h", "p", "li", "li", "hr", "alert", "tr", "tr", "fence", "comment", "p", "li", "p", "p"],
+        str(seg.kinds),
+    )
+    t.check(
+        "untranslatable: rule, table separator, fence, comment, include line, xref-only item, bare URL",
+        [b.translatable for b in seg.blocks]
+        == [True, True, True, True, False, True, True, False, False, False, False, False, True, False],
+        str([b.translatable for b in seg.blocks]),
+    )
+    t.check("leading blank line kept as the lead", seg.lead == "\n" and seg.blocks[0].text == "# Title\n")
+    a, b, c = (Block("p", f"{x}\n", "\n") for x in "ABC")
+    moved = diff_blocks([a, b, c], [c, a, b])
+    t.check(
+        "a moved block reuses its old translation",
+        [(m.kind, m.old_index) for m in moved] == [(ACTION_REUSE, 2), (ACTION_REUSE, 0), (ACTION_REUSE, 1)],
+        str(moved),
+    )
+    d = Block("p", "D\n", "\n")
+    actions = diff_blocks([a, b, c], [a, d, c])
+    t.check(
+        "a changed block is translated, its neighbours reused",
+        [m.kind for m in actions] == [ACTION_REUSE, ACTION_TRANSLATE, ACTION_REUSE],
+    )
+    t.check("context picks one unchanged block on each side", context_indices(actions, [a, d, c], 1) == [0, 2])
+    link_old, link_new = Block("p", "See [x](a.md) and `A`.\n"), Block("p", "See [x](b.md) and `B`.\n")
+    t.check(
+        "a block whose only change is code or a link target is reused with repair",
+        [(m.kind, m.old_index) for m in diff_blocks([link_old], [link_new], prose_key)] == [(ACTION_REPAIR, 0)],
+    )
+    t.check(
+        "without prose_key the same change is translated",
+        [m.kind for m in diff_blocks([link_old], [link_new])] == [ACTION_TRANSLATE],
+    )
+    t.check(
+        "a heading whose only change is its level is reused with repair; changed heading text is translated",
+        [m.kind for m in diff_blocks([Block("h", "##### Setup\n")], [Block("h", "## Setup\n")], prose_key)]
+        == [ACTION_REPAIR]
+        and [m.kind for m in diff_blocks([Block("h", "## Setup\n")], [Block("h", "## Set up\n")], prose_key)]
+        == [ACTION_TRANSLATE],
+    )
+    t.check(
+        "heading marks restored from English",
+        restore_heading_marks("## Setup\n", "##### Configuración\n") == "## Configuración\n"
+        and restore_heading_marks("## Setup\n", "## Configuración\n") == "## Configuración\n",
+    )
+    t.check("width 0 sends no context", context_indices(actions, [a, d, c], 0) == [])
+    t.check(
+        "width -1 sends every unchanged translatable block",
+        context_indices([*actions, Action(ACTION_ENGLISH)], [a, d, c, Block("fence", "```\nx\n```\n")], -1) == [0, 2],
+    )
+    t.check("no context without a changed block", context_indices([Action(ACTION_REUSE, 0)], [a], -1) == [])
+    t.check(
+        "context width defaults to 2; TRANSLATED_CONTEXT_SEGMENTS overrides the config value",
+        TranslationConfig(mini_build_config()).context_segments == 2
+        and TranslationConfig(mini_build_config(), None, None, "5").context_segments == 5
+        and TranslationConfig(mini_build_config(), None, None, " ").context_segments == 2,
+    )
+    t.expect_exit(
+        "a context width that is not an integer stops the run",
+        lambda: TranslationConfig(mini_build_config(), None, None, "many"),
+        "Context segments must be an integer",
+    )
+    fence_old, fence_new = Block("fence", "```\nx\n```\n"), Block("fence", "```\ny\n```\n")
+    t.check(
+        "a changed untranslatable block is taken from the English",
+        [m.kind for m in diff_blocks([fence_old], [fence_new])] == [ACTION_ENGLISH],
+    )
+    text, problems, repaired, _ = finalize_block(Block("li", "- Item one\n"), "* Elemento uno")
+    t.check(
+        "delivered list marker restored from English",
+        text == "- Elemento uno\n" and not problems and repaired["markers"] == 1,
+        f"{text!r} {problems}",
+    )
+    _, problems, _, _ = finalize_block(Block("h", "## Details\n"), "### Detalles")
+    t.check("heading level change is a problem", problems == ["heading level ## -> ###"], str(problems))
+    _, problems, _, _ = finalize_block(Block("p", "One line.\n"), "Línea uno.\n\nLínea dos.")
+    t.check("a block split in two is a problem", problems == ["p block came back as p + p"], str(problems))
+    _, problems, _, _ = finalize_block(Block("h", "## Details\n"), "Detalles")
+    t.check("a heading delivered as text is a problem", problems == ["h block came back as p"], str(problems))
+    reordered = restore_positionally("usa `b` y `a`", "use `a` and `b`", INLINE_CODE_RE, 0)
+    t.check("reordered inline code is left as delivered", reordered == ("usa `b` y `a`", 0), str(reordered))
+    items = [
+        {"id": "c0", "text": "x", "translatable": False},
+        {"id": "b1", "text": "y", "translatable": True},
+    ]
+    t.check(
+        "response mapped with one item per segment",
+        map_segment_translations(items, [{"translation": "x"}, {"translation": "Y"}]) == {"b1": "Y"},
+    )
+    t.check(
+        "response mapped with one item per translatable segment",
+        map_segment_translations(items, [{"id": "b1", "translation": "Y"}]) == {"b1": "Y"},
+    )
+    t.check(
+        "response with another item count is an error",
+        isinstance(map_segment_translations(items, [{}, {}, {}]), str),
+    )
+    t.check(
+        "response with a mismatched id is an error",
+        "id 'b9'" in str(map_segment_translations(items, [{"id": "c0"}, {"id": "b9", "translation": "Y"}])),
+    )
+
+
+def seg_harness(context: int = 0, ratio: float = 0.8) -> Harness:
+    cfg = mini_build_config()
+    cfg["translation"]["segmentDiff"] = {"enabled": True, "maxChangedRatio": ratio, "contextSegments": context}
+    return Harness(TranslationConfig(cfg, "production", "mt-test"))
+
+
+def seed_seg_translation(h: Harness) -> None:
+    """Whole-file translation of seg.md at the committed English, then commit it."""
+    h.client.deliveries["es/seg.md"] = mask_code(SEG_MD_ES)[0]
+    h.run(PlanOptions(file_filters=["seg.md"]))
+    commit_all("Spanish")
+
+
+def selftest_segment_updates(t: SelfTest) -> None:
+    t.section("segment-level updates: only changed blocks are sent")
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness()
+        seed_seg_translation(h)
+        entry = load_status("es")["files"]["seg.md"]
+        t.check(
+            "whole-file run records sourceBlob of the English",
+            entry.get("sourceBlob") == git("hash-object", "content/seg.md"),
+            str(entry),
+        )
+        write_text(CONTENT_DIR / "seg.md", SEG_MD_V2)
+        commit_all("English v2")
+        out = captured(
+            lambda: print_plan(
+                "es",
+                h.plan(),
+                0,
+                lambda rel, reason: file_delta(
+                    h.config, "es", rel, reason, load_status("es")["files"].get(rel, {}), PlanOptions()
+                ),
+            )
+        )
+        t.check("--plan shows the changed units", "submit  changed      seg.md (3/11 units" in out, out)
+        h.client.deliveries["es/seg.md"] = SEG_V2_DELIVERY
+        h.report = RunReport()
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        order = h.client.orders[-1]
+        t.check(
+            "order holds only the changed title, paragraph and list item",
+            [c["id"] for c in order["content"]] == ["fm:title", "b1", "b4"]
+            and all(c["translatable"] for c in order["content"])
+            and order["content_type"] == "text/plain",
+            str(order["content"]),
+        )
+        written = read_text(target_file("es", "seg.md"))
+        t.check(
+            "file rebuilt: unchanged blocks kept, changed blocks translated, code from English, removed block gone",
+            written == SEG_MD_ES_V2,
+            written,
+        )
+        entry = load_status("es")["files"]["seg.md"]
+        t.check(
+            "status advanced to the new English hash and blob",
+            entry
+            == {
+                "sourceHash": h.sources["seg.md"],
+                "sourceBlob": git("hash-object", "content/seg.md"),
+                "status": STATUS_TRANSLATED,
+            },
+            str(entry),
+        )
+        r = h.report.lang("es")
+        md = h.report.to_markdown(h.config)
+        t.check(
+            "report counts the file as updated from changed segments",
+            [rel for rel, _ in r["segmented"]] == ["seg.md"]
+            and r["chars"] == sum(len(c["text"]) for c in order["content"])
+            and "1 file(s) updated from changed segments only" in md,
+            md,
+        )
+        commit_all("Spanish v2")
+
+        write_text(CONTENT_DIR / "seg.md", SEG_MD_V2.replace("var x = 2;", "var x = 3;"))
+        commit_all("code only")
+        sent = len(h.client.orders)
+        out = captured(lambda: h.run(PlanOptions(file_filters=["seg.md"])))
+        t.check(
+            "a code-only change is applied without a request",
+            len(h.client.orders) == sent
+            and read_text(target_file("es", "seg.md")) == SEG_MD_ES_V2.replace("var x = 2;", "var x = 3;")
+            and "updated seg.md (no changed text to translate)" in out
+            and load_status("es")["files"]["seg.md"]["sourceHash"] == h.sources["seg.md"],
+            out,
+        )
+        commit_all("Spanish code only")
+
+        write_text(CONTENT_DIR / "seg.md", read_text(CONTENT_DIR / "seg.md").replace("## Details\n", "### Details\n"))
+        commit_all("heading level only")
+        sent = len(h.client.orders)
+        expected = read_text(target_file("es", "seg.md")).replace("## Detalles\n", "### Detalles\n")
+        out = captured(lambda: h.run(PlanOptions(file_filters=["seg.md"])))
+        t.check(
+            "a heading-level change is applied without a request",
+            len(h.client.orders) == sent
+            and read_text(target_file("es", "seg.md")) == expected
+            and "updated seg.md (no changed text to translate)" in out
+            and load_status("es")["files"]["seg.md"]["sourceHash"] == h.sources["seg.md"],
+            out,
+        )
+        commit_all("Spanish heading level")
+
+        before = read_text(target_file("es", "seg.md"))
+        status_before = load_status("es")["files"]["seg.md"]
+        write_text(CONTENT_DIR / "seg.md", read_text(CONTENT_DIR / "seg.md").replace("stays.", "stays here."))
+        h.client.deliveries["es/seg.md"] = {"b12": "Línea uno.\n\nLínea dos."}
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        status = load_status("es")
+        t.check(
+            "a delivery that splits a block is rejected; file and status kept",
+            "p block came back as p + p" in status["failures"].get("seg.md", {}).get("error", "")
+            and read_text(target_file("es", "seg.md")) == before
+            and status["files"]["seg.md"] == status_before,
+            str(status["failures"]),
+        )
+        h.client.deliveries["es/seg.md"] = mask_code(before.replace("se mantiene.", "se queda aquí."))[0]
+        h.run(PlanOptions(file_filters=["seg.md"], retry_failed=True))
+        status = load_status("es")
+        t.check(
+            "--retry-failed after a failed segment update sends the whole file; written, failure cleared",
+            [c["id"] for c in h.client.orders[-1]["content"]] == ["s1"]
+            and "seg.md" not in status["failures"]
+            and read_text(target_file("es", "seg.md")).endswith("El párrafo final se queda aquí.\n"),
+            str(status["failures"]),
+        )
+        commit_all("final paragraph")
+
+        write_text(
+            target_file("es", "seg.md"),
+            read_text(target_file("es", "seg.md")).replace(
+                "## Detalles\n", "## Detalles\n\nPárrafo añadido por un revisor.\n"
+            ),
+        )
+        write_text(CONTENT_DIR / "seg.md", read_text(CONTENT_DIR / "seg.md").replace("here.", "now."))
+        h.report = RunReport()
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        r = h.report.lang("es")
+        t.check(
+            "a translation that no longer aligns is sent as a whole file, with the reason reported",
+            [c["id"] for c in h.client.orders[-1]["content"]] == ["s1"]
+            and r["whole_file"]
+            and r["whole_file"][0][1].startswith("unaligned"),
+            str(r["whole_file"]),
+        )
+
+    t.section("segment-level updates: fallbacks, context, response shapes")
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness(ratio=0.3)
+        seed_seg_translation(h)
+        write_text(
+            CONTENT_DIR / "seg.md",
+            SEG_MD.replace("explained.", "described in detail.")
+            .replace("stays.", "stays where it is.")
+            .replace("Refresh everything", "Refresh every table")
+            .replace("removed later", "removed soon"),
+        )
+        reason = file_delta(h.config, "es", "seg.md", "outdated", load_status("es")["files"]["seg.md"], PlanOptions())
+        t.check("mostly changed text is sent as a whole file", str(reason).startswith("mostly changed"), str(reason))
+        t.check(
+            "--force sends the whole file",
+            file_delta(h.config, "es", "seg.md", "outdated", {}, PlanOptions(force=True)) is None,
+        )
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness(context=-1)
+        seed_seg_translation(h)
+        write_text(CONTENT_DIR / "seg.md", SEG_MD.replace("**Ctrl+R**", "**Ctrl+Shift+R**"))
+        h.client.deliveries["es/seg.md"] = {"b1": "Abre el cuadro de diálogo con **Ctrl+Shift+R**."}
+        h.report = RunReport()
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        order = h.client.orders[-1]
+        context_ids = [c["id"] for c in order["content"] if not c["translatable"]]
+        t.check(
+            "contextSegments -1 sends every unchanged translatable block as context; only the change is counted",
+            context_ids == ["c0", "c2", "c3", "c4", "c6", "c10", "c11", "c12"]
+            and [c["id"] for c in order["content"] if c["translatable"]] == ["b1"]
+            and h.report.lang("es")["chars"] == len("Open the dialog with **Ctrl+Shift+R**.")
+            and "**Ctrl+Shift+R**" in read_text(target_file("es", "seg.md")),
+            str(context_ids),
+        )
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness(context=1)
+        seed_seg_translation(h)
+        write_text(CONTENT_DIR / "seg.md", SEG_MD.replace("**Ctrl+R**", "**Ctrl+Shift+R**"))
+        h.client.deliveries["es/seg.md"] = {"b1": "Abre el cuadro de diálogo con **Ctrl+Shift+R**.", "c0": "IGNORED"}
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        order = h.client.orders[-1]
+        t.check(
+            "context segments are sent untranslatable and never written",
+            [(c["id"], c["translatable"]) for c in order["content"]] == [("c0", False), ("b1", True), ("c2", False)]
+            and "IGNORED" not in read_text(target_file("es", "seg.md"))
+            and "**Ctrl+Shift+R**" in read_text(target_file("es", "seg.md")),
+            str(order["content"]),
+        )
+        commit_all("context run")
+        h.client.translatable_only = True
+        write_text(CONTENT_DIR / "seg.md", read_text(CONTENT_DIR / "seg.md").replace("stays.", "stays here."))
+        h.client.deliveries["es/seg.md"] = {"b12": "El párrafo final se queda aquí."}
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        t.check(
+            "a response with items for translatable segments only is mapped",
+            read_text(target_file("es", "seg.md")).endswith("El párrafo final se queda aquí.\n")
+            and "seg.md" not in load_status("es")["failures"],
+            str(load_status("es")["failures"]),
+        )
+
+    t.section("segment-level updates: JSON keys and toc names")
+    with git_mini_repo():
+        h = seg_harness()
+        h.client.deliveries["es/_ui-strings.json"] = '{\n  "greeting": "Hola {{name}}",\n  "bye": "Adiós"\n}\n'
+        h.client.deliveries["es/toc.yml"] = json.dumps({"n0": "Inicio", "n2": "Guía"})
+        h.run(PlanOptions(file_filters=["_ui-strings.json", "toc.yml"]))
+        commit_all("Spanish")
+        write_text(
+            CONTENT_DIR / "_ui-strings.json",
+            '{\n  "greeting": "Hello {name}",\n  "bye": "Goodbye",\n  "extra": "Extra {count}"\n}\n',
+        )
+        write_text(
+            CONTENT_DIR / "toc.yml",
+            "- name: Home\n  href: index.md\n- name: Reference\n  href: ref.md\n- name: Guide\n  href: guide.md\n",
+        )
+        commit_all("English v2")
+        h.client.deliveries["es/_ui-strings.json"] = {
+            "json": '{\n  "bye": "Hasta luego",\n  "extra": "Extra {{count}}"\n}\n'
+        }
+        h.client.deliveries["es/toc.yml"] = {"toc": json.dumps({"n2": "Referencia"})}
+        h.run(PlanOptions(file_filters=["_ui-strings.json", "toc.yml"]))
+        json_order = next(o for o in h.client.orders[::-1] if o["id_content"] == "es/_ui-strings.json")
+        toc_order = next(o for o in h.client.orders[::-1] if o["id_content"] == "es/toc.yml")
+        t.check(
+            "JSON order holds only the changed and the new key",
+            json.loads(decode_placeholders(json_order["content"][0]["text"]))
+            == {"bye": "Goodbye", "extra": "Extra {count}"},
+            str(json_order["content"]),
+        )
+        t.check(
+            "JSON rebuilt with the kept translation and the new ones",
+            read_text(target_file("es", "_ui-strings.json"))
+            == '{\n  "greeting": "Hola {name}",\n  "bye": "Hasta luego",\n  "extra": "Extra {count}"\n}\n',
+            read_text(target_file("es", "_ui-strings.json")),
+        )
+        t.check(
+            "toc order holds only the new name; toc rebuilt with the kept names",
+            json.loads(toc_order["content"][0]["text"]) == {"n2": "Reference"}
+            and read_text(target_file("es", "toc.yml"))
+            == "- name: Inicio\n  href: index.md\n- name: Referencia\n  href: ref.md\n- name: Guía\n  href: guide.md\n",
+            read_text(target_file("es", "toc.yml")),
+        )
+        commit_all("Spanish v2")
+        write_text(CONTENT_DIR / "_ui-strings.json", '{\n  "greeting": "Hello {name}",\n  "bye": "Goodbye"\n}\n')
+        sent = len(h.client.orders)
+        h.run(PlanOptions(file_filters=["_ui-strings.json"]))
+        t.check(
+            "a removed key is dropped without a request",
+            len(h.client.orders) == sent
+            and read_text(target_file("es", "_ui-strings.json"))
+            == '{\n  "greeting": "Hola {name}",\n  "bye": "Hasta luego"\n}\n',
+            read_text(target_file("es", "_ui-strings.json")),
+        )
+
+    t.section("segment-level updates: code and link target changes are repaired without a request")
+    with git_mini_repo():
+        h = seg_harness()
+        index_es = BOM + "---\ntitle: Inicio\n---\n# Inicio\n\nIntroducción breve con `code` y [enlace](guide.md).\n"
+        h.client.deliveries["es/index.md"] = mask_code(index_es)[0]
+        h.run(PlanOptions(file_filters=["index.md"]))
+        commit_all("Spanish")
+        write_text(
+            CONTENT_DIR / "index.md",
+            MINI_FILES["index.md"].replace("`code`", "`code2`").replace("guide.md", "guide2.md"),
+        )
+        sent = len(h.client.orders)
+        h.run(PlanOptions(file_filters=["index.md"]))
+        t.check(
+            "translation kept, inline code and link target taken from the new English, nothing sent",
+            len(h.client.orders) == sent
+            and read_text(target_file("es", "index.md"))
+            == index_es.replace("`code`", "`code2`").replace("guide.md", "guide2.md"),
+            read_text(target_file("es", "index.md")),
+        )
+        commit_all("code and link")
+        write_text(CONTENT_DIR / "index.md", MINI_FILES["index.md"].replace("Short intro", "Long intro"))
+        reason = file_delta(
+            seg_harness(ratio=1.0).config,
+            "es",
+            "index.md",
+            "outdated",
+            load_status("es")["files"]["index.md"],
+            PlanOptions(),
+        )
+        t.check(
+            "a prose change in the same block is translated",
+            isinstance(reason, Delta) and [i["id"] for i in reason.items] == ["b1"],
+            str(reason),
+        )
+        write_text(target_file("es", "index.md"), read_text(target_file("es", "index.md")).replace("](guide2.md)", ""))
+        reason = file_delta(
+            seg_harness(ratio=1.0).config,
+            "es",
+            "index.md",
+            "outdated",
+            load_status("es")["files"]["index.md"],
+            PlanOptions(),
+        )
+        t.check(
+            "a translation that does not verify against its own English is sent as a whole file",
+            str(reason).startswith("existing translation does not verify against its English (link targets"),
+            str(reason),
+        )
+
+    t.section("segment-level updates: source version lookup and --migrate-blobs")
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness()
+        seed_seg_translation(h)
+        status = load_status("es")
+        recorded_blob = status["files"]["seg.md"].pop("sourceBlob")
+        save_status("es", status)
+        write_text(CONTENT_DIR / "seg.md", SEG_MD.replace("**Ctrl+R**", "**Ctrl+Shift+R**"))
+        commit_all("English v2")
+        entry = load_status("es")["files"]["seg.md"]
+        t.check(
+            "an entry without sourceBlob finds the English version by its hash in git history",
+            isinstance(file_delta(h.config, "es", "seg.md", "outdated", entry, PlanOptions()), Delta),
+        )
+        wrong = dict(entry, sourceBlob=git("hash-object", "content/seg.md"))
+        t.check(
+            "a sourceBlob whose content does not match sourceHash is ignored in favour of the lookup",
+            recorded_source_text("seg.md", wrong) == SEG_MD,
+        )
+        t.check(
+            "no English version with the hash -> whole file",
+            file_delta(h.config, "es", "seg.md", "outdated", dict(entry, sourceHash="sha256:0"), PlanOptions())
+            == "English version of the translation not found in git",
+        )
+        out = captured(lambda: cmd_migrate_blobs(["es"], h.sources))
+        t.check(
+            "--migrate-blobs records the blob of the version the translation was made from",
+            load_status("es")["files"]["seg.md"].get("sourceBlob") == recorded_blob
+            and "es: sourceBlob recorded for 1," in out,
+            out,
+        )
+        out = captured(lambda: cmd_migrate_blobs(["es"], h.sources))
+        t.check("--migrate-blobs keeps valid blobs", "recorded for 0," in out, out)
+    with mini_repo():
+        t.expect_exit(
+            "--migrate-blobs outside a git work tree exits",
+            lambda: cmd_migrate_blobs(["es"], {}),
+            "needs a git work tree",
+        )
+        t.check(
+            "outside a git work tree no sourceBlob is recorded",
+            source_entry("index.md", get_scoped_sources(TranslationConfig(mini_build_config()))["index.md"], "x").get(
+                "sourceBlob"
+            )
+            is None,
+        )
+
+
+def assembled(delta: Delta | str, translations: dict[str, str]) -> tuple[str, list[str]]:
+    if isinstance(delta, str):
+        return f"<{delta}>", []
+    text, problems, _, _ = delta.assemble(translations)
+    return text, problems
+
+
+def selftest_segment_edge_cases(t: SelfTest) -> None:
+    t.section("segment-level updates: edge cases")
+    long_para = "Paragraph with enough words to pass the identity threshold of letters. " * 4
+    english = f"# Title\n\n{long_para}\n\nSecond paragraph.\n"
+    t.check(
+        "a translation that is the English text (local --sync fallback copy) is sent whole",
+        md_delta(english.replace("Second", "Next"), english, english) == "existing translation is the English text"
+        and json_delta('{"a": "Hi there"}', '{"a": "Hi"}', '{"a": "Hi"}') == "existing translation is the English text"
+        and toc_delta("- name: B\n", "- name: A\n", "- name: A\n") == "existing translation is the English text",
+    )
+    delta = md_delta(
+        "Use `a` and `b` there.\n\nThen `b` and `c`.\n",
+        "Use `a` and `b` here.\n\nThen `b` and `c`.\n",
+        "Usa `a` y `b` aquí.\n\nLuego `b` y `c` con `d`.\n",
+    )
+    text, problems = assembled(delta, {"b0": "Usa {{c0}} y {{c1}} y `true` allí."})
+    t.check(
+        "an extra span in a new block never shifts spans into a reused block",
+        text == "Usa `a` y `b` y `true` allí.\n\nLuego `b` y `c` con `d`.\n" and not problems,
+        f"{text!r} {problems}",
+    )
+    t.check(
+        "a translation that lost a code span is sent whole",
+        str(md_delta("Use `y` here.\n", "Use `x` here.\n", "Usa x aquí.\n")).startswith(
+            "existing translation does not verify against its English (inline code spans 1 -> 0"
+        ),
+    )
+    delta = md_delta("Run `b` before `a`.\n", "Run `a` before `b`.\n", "Ejecuta `a` antes de `b`.\n")
+    t.check(
+        "spans reordered in the English are mapped by value into the translation",
+        isinstance(delta, Delta) and not delta.items and assembled(delta, {})[0] == "Ejecuta `b` antes de `a`.\n",
+        str(assembled(delta, {})),
+    )
+    zh_old, zh_new = "Use `a` then `b`.\n", "Use `a` then `c`.\n"
+    delta = md_delta(zh_new, zh_old, "先 `b` 后 `a`。\n")
+    t.check(
+        "a changed span lands where the translation placed the old one",
+        isinstance(delta, Delta) and not delta.items and assembled(delta, {})[0] == "先 `c` 后 `a`。\n",
+        str(assembled(delta, {})),
+    )
+    text, problems, _, _ = finalize_block(Block("p", "   Detail one.\n"), "Detalle uno.")
+    t.check(
+        "indentation of a block inside a list is restored", text == "   Detalle uno.\n" and not problems, repr(text)
+    )
+    text, problems, _, _ = finalize_block(Block("p", "Text.\n"), " \nTexto.\n ")
+    t.check("whitespace-only lines around a delivery are dropped", text == "Texto.\n" and not problems, repr(text))
+    delta = md_delta("First.\n\nLast.\n\nAdded.\n", "First.\n\nLast.\n", "Primero.\n\nÚltimo.")
+    text, problems = assembled(delta, {"b2": "Añadido."})
+    t.check(
+        "a block appended after a translation without a final newline stays a separate block",
+        text == "Primero.\n\nÚltimo.\n\nAñadido.\n" and not problems,
+        f"{text!r} {problems}",
+    )
+    delta = md_delta(
+        "1. One.\n2. New.\n3. Two.\n4. Three.\n", "1. One.\n2. Two.\n3. Three.\n", "1. Uno.\n2. Dos.\n3. Tres.\n"
+    )
+    text, problems = assembled(delta, {"b1": "2. Nuevo."})
+    t.check(
+        "a step inserted into a numbered list sends only the new step; later steps are renumbered",
+        isinstance(delta, Delta)
+        and [i["id"] for i in delta.items] == ["b1"]
+        and text == "1. Uno.\n2. Nuevo.\n3. Dos.\n4. Tres.\n"
+        and not problems,
+        f"{text!r} {problems}",
+    )
+    delta = toc_delta(
+        "- name: Overview\n  href: b.md\n- name: Overview\n  href: a.md\n",
+        "- name: Overview\n  href: a.md\n- name: Overview\n  href: b.md\n",
+        "- name: Resumen A\n  href: a.md\n- name: Resumen B\n  href: b.md\n",
+    )
+    t.check(
+        "toc entries with the same name are matched by href when they move",
+        isinstance(delta, Delta)
+        and not delta.changed
+        and assembled(delta, {})[0] == "- name: Resumen B\n  href: b.md\n- name: Resumen A\n  href: a.md\n",
+        str(assembled(delta, {})),
+    )
+    delta = md_delta("# T\n\nText changed.\n", "# T\n\nText.\n", '<a id="t" data-loc-xref></a>\n# T es\n\nTexto.\n')
+    t.check(
+        "bookmark anchors injected by a local build do not break alignment",
+        assembled(delta, {"b1": "Texto cambiado."}) == ("# T es\n\nTexto cambiado.\n", []),
+        str(assembled(delta, {"b1": "Texto cambiado."})),
+    )
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness()
+        seed_seg_translation(h)
+        uncommitted = SEG_MD.replace("**Ctrl+R**", "**Ctrl+Shift+R**")
+        write_text(CONTENT_DIR / "seg.md", uncommitted)
+        h.client.deliveries["es/seg.md"] = {"b1": "Abre el cuadro de diálogo con **Ctrl+Shift+R**."}
+        h.run(PlanOptions(file_filters=["seg.md"]))
+        write_text(CONTENT_DIR / "seg.md", uncommitted.replace("stays.", "stays here."))
+        t.check(
+            "the English of an uncommitted run stays readable as the base of the next diff",
+            recorded_source_text("seg.md", load_status("es")["files"]["seg.md"]) == uncommitted,
+        )
+
+
+def selftest_code_placeholders(t: SelfTest) -> None:
+    t.section("code placeholders (the service turns backticks into quotation marks)")
+    body = FIXTURE_MD.lstrip(BOM)
+    masked, spans = mask_code(body)
+    t.check(
+        "fenced blocks and inline code become {{fN}} / {{cN}}; nothing with a backtick is sent",
+        "`" not in masked
+        and spans
+        == [
+            "`View → Options`",
+            "`Selected.Tables`",
+            "```csharp\n// Assembly references must be at the very top\nvar x = 1;\n```",
+        ]
+        and "{{c0}}" in masked
+        and "{{f2}}\n" in masked,
+        f"{masked!r} {spans}",
+    )
+    t.check("mask + unmask round-trips byte-for-byte", unmask_code(masked, spans) == (body, []))
+    t.check(
+        "quotation marks the service put around a placeholder are dropped",
+        unmask_code("Abre «{{c0}}», “{{ c1 }}” y {{c2}}.", ["`a`", "`b`", "`c`"]) == ("Abre `a`, `b` y `c`.", []),
+    )
+    t.check(
+        "unpaired quotation marks are kept",
+        unmask_code("«{{c0}}” y {{c1}}", ["`a`", "`b`"])[0] == "«`a`” y `b`",
+    )
+    t.check(
+        "a missing, repeated or unknown placeholder is a problem",
+        unmask_code("{{c0}}", ["`a`", "`b`"])[1] == ["code placeholders missing in the delivery: [1] (1 of 2)"]
+        and unmask_code("{{c0}} {{c0}}", ["`a`"])[1] == ["code placeholders repeated in the delivery: [0]"]
+        and unmask_code("{{c0}} {{c7}}", ["`a`"])[1] == ["unknown code placeholders in the delivery: ['{{c7}}']"],
+    )
+    content, _, info = prepare_payload("x.md", FIXTURE_MD)
+    t.check(
+        "Markdown payloads are masked; the job keeps the code",
+        "`" not in content and info.get("codeSpans") == spans and info.get("mode") == "raw",
+    )
+    t.check("JSON and toc payloads are not masked", "codeSpans" not in prepare_payload("a.json", FIXTURE_JSON)[2])
+
+    with mini_repo():
+        h = prod_harness()
+        source = MINI_FILES["index.md"]
+        h.client.deliveries["es/index.md"] = (
+            "---\ntitle: Inicio\n---\n# Inicio\n\nIntroducción breve con «{{c0}}» y [enlace](guide.md).\n"
+        )
+        h.client.deliveries["es/guide.md"] = "# Guía\n\nUna guía breve.\n\n> [!NOTE]\n> Texto.\n"
+        h.run(PlanOptions(file_filters=["index.md", "guide.md"]))
+        index_order = next(str(o["content"][0]["text"]) for o in h.client.orders if o["id_content"] == "es/index.md")
+        t.check(
+            "whole file: the order carries placeholders; quoted placeholders come back as inline code",
+            "{{c0}}" in index_order
+            and "`" not in index_order
+            and read_text(target_file("es", "index.md"))
+            == source.replace("title: Home", "title: Inicio")
+            .replace("# Home", "# Inicio")
+            .replace("Short intro with `code` and [link]", "Introducción breve con `code` y [enlace]"),
+            read_text(target_file("es", "index.md")),
+        )
+        h.client.deliveries["es/index.md"] = "---\ntitle: Inicio\n---\n# Inicio\n\nIntroducción breve con «code».\n"
+        h.run(PlanOptions(file_filters=["index.md"], force=True))
+        status = load_status("es")
+        t.check(
+            "whole file: a delivery that lost a placeholder is rejected, the file kept",
+            "code placeholders missing" in status["failures"].get("index.md", {}).get("error", "")
+            and "`code`" in read_text(target_file("es", "index.md")),
+            str(status["failures"]),
+        )
+
+    delta = md_delta("Set `a` to `b` now.\n\nKeep.\n", "Set `a` to `b`.\n\nKeep.\n", "Pon `a` en `b`.\n\nMantener.\n")
+    t.check(
+        "segment: sent blocks carry placeholders",
+        isinstance(delta, Delta) and [str(i["text"]) for i in delta.items] == ["Set {{c0}} to {{c1}} now."],
+        str(delta),
+    )
+    t.check(
+        "segment: quoted placeholders come back as inline code",
+        assembled(delta, {"b0": "Pon «{{c0}}» en «{{c1}}» ahora."}) == ("Pon `a` en `b` ahora.\n\nMantener.\n", []),
+        str(assembled(delta, {"b0": "Pon «{{c0}}» en «{{c1}}» ahora."})),
+    )
+    t.check(
+        "segment: a block that lost a placeholder is a problem",
+        assembled(delta, {"b0": "Pon «a» en {{c1}} ahora."})[1]
+        == ["block 0: code placeholders missing in the delivery: [0] (1 of 2)"],
+        str(assembled(delta, {"b0": "Pon «a» en {{c1}} ahora."})),
+    )
+
+
+class FakeHttpResponse:
+    def __init__(self, body: str) -> None:
+        self.body = body
+
+    def __enter__(self) -> FakeHttpResponse:
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        return None
+
+    def read(self) -> bytes:
+        return self.body.encode("utf-8")
+
+
+def fake_http_error(code: int, retry_after: str | None = None) -> urllib.error.HTTPError:
+    headers = http.client.HTTPMessage()
+    if retry_after is not None:
+        headers["Retry-After"] = retry_after
+    body = io.BytesIO(b'{"code": "E", "message": "m"}')
+    return urllib.error.HTTPError("https://api.example/v2/translate/ai", code, "error", headers, body)
+
+
+def selftest_http_client(t: SelfTest) -> None:
+    t.section("HTTP client: retries, Retry-After, jitter, rejected key")
+    ok_body = '{"data": [{"id": "s1", "translation": "hola"}]}'
+
+    def client_for(answers: list[Any], jitter: float = 0.5) -> tuple[TranslatedClient, list[float], list[int]]:
+        sleeps: list[float] = []
+        calls: list[int] = []
+
+        def opener(_req: Any, timeout: float = 0) -> FakeHttpResponse:
+            calls.append(1)
+            answer = answers.pop(0)
+            if isinstance(answer, BaseException):
+                raise answer
+            return FakeHttpResponse(str(answer))
+
+        return TranslatedClient("https://api.example/v2/", "k", sleeps.append, opener, lambda: jitter), sleeps, calls
+
+    order: dict[str, Any] = {"content": []}
+    client, sleeps, _ = client_for([fake_http_error(429, "7"), ok_body])
+    t.check(
+        "429 waits the Retry-After seconds, then succeeds",
+        client.translate_ai(order)[0]["translation"] == "hola" and sleeps == [7.0],
+        str(sleeps),
+    )
+    client, sleeps, _ = client_for([fake_http_error(503, "600"), ok_body])
+    client.translate_ai(order)
+    t.check("Retry-After is capped", sleeps == [MAX_RETRY_DELAY], str(sleeps))
+    client, sleeps, _ = client_for([fake_http_error(408), fake_http_error(500), ok_body])
+    client.translate_ai(order)
+    t.check(
+        "408 is retried; backoff is jittered between half and all of 2, 4, ... s", sleeps == [1.5, 3.0], str(sleeps)
+    )
+    client, sleeps, calls = client_for([fake_http_error(401)])
+    t.expect_raises("401 raises TranslatedAuthError", lambda: client.translate_ai(order), TranslatedAuthError)
+    t.check("a rejected key is not retried", sleeps == [] and len(calls) == 1)
+    client, sleeps, calls = client_for([fake_http_error(400)])
+    raised: BaseException | None = None
+    try:
+        client.translate_ai(order)
+    except TranslatedApiError as e:
+        raised = e
+    t.check(
+        "400 is not retried and is not an auth error",
+        isinstance(raised, TranslatedApiError) and not isinstance(raised, TranslatedAuthError) and len(calls) == 1,
+    )
+    now = datetime(2026, 1, 1, tzinfo=UTC)
+    t.check(
+        "Retry-After as an HTTP date; unparsable values ignored",
+        parse_retry_after("Thu, 01 Jan 2026 00:00:30 GMT", now) == 30.0
+        and parse_retry_after("soon", now) is None
+        and parse_retry_after(None) is None,
+    )
+    t.check(
+        "backoff without Retry-After stays within 60 s",
+        retry_delay(2, None, lambda: 0.0) == 4.0
+        and retry_delay(2, None, lambda: 1.0) == 8.0
+        and retry_delay(10, None, lambda: 1.0) == MAX_RETRY_DELAY,
+    )
+
+
+def selftest_merge_status(t: SelfTest) -> None:
+    t.section("--merge-status: status files merged entry by entry")
+
+    def entry(source_hash: str) -> dict[str, Any]:
+        return {"sourceHash": source_hash, "status": STATUS_TRANSLATED}
+
+    with git_mini_repo():
+        files = {rel: entry(f"{rel[0]}0") for rel in ("a.md", "b.md", "c.md", "d.md")}
+        save_status("es", {"language": "es", "files": files, "failures": {}})
+        commit_all("base")
+        main = git("rev-parse", "HEAD")
+        git("checkout", "-q", "-b", "localization")
+        status = load_status("es")
+        status["files"]["c.md"] = entry("c1")
+        status["files"]["e.md"] = entry("e1")
+        del status["files"]["d.md"]
+        status["failures"]["b.md"] = {"error": "x", "sourceHash": "b0"}
+        save_status("es", status)
+        commit_all("translation branch")
+        git("checkout", "-q", main)
+        status = load_status("es")
+        status["files"]["b.md"] = entry("b1")
+        status["files"]["c.md"] = entry("c2")
+        status["files"]["f.md"] = entry("f1")
+        save_status("es", status)
+        commit_all("main")
+        ours = git("rev-parse", "HEAD")
+        # Worst case of the fold: a conflict resolved by taking the branch's localizedContent as-is.
+        git("checkout", "localization", "--", status_path("es").as_posix())
+        captured(lambda: cmd_merge_status(["es"], ours, "localization"))
+        merged = load_status("es")
+        t.check(
+            "entries the branch changed, added or removed come from the branch; the others from main",
+            merged["files"]
+            == {
+                "a.md": entry("a0"),
+                "b.md": entry("b1"),
+                "c.md": entry("c1"),
+                "e.md": entry("e1"),
+                "f.md": entry("f1"),
+            },
+            str(merged["files"]),
+        )
+        t.check("failures are merged the same way", set(merged["failures"]) == {"b.md"}, str(merged["failures"]))
+
+
 def cmd_self_test(config: TranslationConfig) -> int:
     t = SelfTest()
     selftest_corpus(t, config)
     selftest_fixtures(t)
     selftest_fake_client(t)
+    selftest_segments(t)
+    selftest_segment_updates(t)
+    selftest_segment_edge_cases(t)
+    selftest_code_placeholders(t)
+    selftest_http_client(t)
+    selftest_merge_status(t)
     print(f"\nself-test: {t.passed} passed, {len(t.failures)} failed")
     for name in t.failures:
         print(f"  FAILED: {name}")
@@ -2558,6 +4483,18 @@ def build_parser() -> argparse.ArgumentParser:
     actions.add_argument(
         "--baseline", action="store_true", help="mark existing, structurally valid translations as current"
     )
+    actions.add_argument(
+        "--migrate-blobs",
+        action="store_true",
+        help="record the English git blob (sourceBlob) for status entries that only have a sourceHash",
+    )
+    actions.add_argument(
+        "--merge-status",
+        nargs=2,
+        metavar=("OURS", "THEIRS"),
+        help="after merging translation branch THEIRS into OURS: rebuild each status file entry by entry, taking "
+        "THEIRS only where it changed an entry since the merge base (offline)",
+    )
     actions.add_argument("--self-test", action="store_true", help="offline self-test (no key, no network)")
     actions.add_argument("--probe", action="store_true", help="check service types and languages against the API")
     actions.add_argument(
@@ -2573,6 +4510,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--retry-failed", action="store_true", help="re-plan files that failed at the current source hash"
     )
     parser.add_argument("--report", help="write a markdown run summary to this path")
+    parser.add_argument(
+        "--keep-rejected",
+        metavar="DIR",
+        help="with --run: save billed deliveries that fail verification (order, response, problems) under DIR",
+    )
     parser.add_argument(
         "--baseline-ref",
         help="git ref whose content/ hashes become the baseline "
@@ -2593,6 +4535,8 @@ def build_parser() -> argparse.ArgumentParser:
 def check_option_combinations(args: argparse.Namespace) -> None:
     if args.repair_existing and not args.baseline:
         raise SystemExit("--repair-existing is only valid together with --baseline.")
+    if args.keep_rejected and not args.run:
+        raise SystemExit("--keep-rejected is only valid together with --run.")
 
 
 def main() -> int:
@@ -2607,7 +4551,10 @@ def main() -> int:
 
     build_config = load_build_config()
     config = TranslationConfig(
-        build_config, os.environ.get("TRANSLATED_ENV"), os.environ.get("TRANSLATED_SERVICE_TYPE")
+        build_config,
+        os.environ.get("TRANSLATED_ENV"),
+        os.environ.get("TRANSLATED_SERVICE_TYPE"),
+        os.environ.get("TRANSLATED_CONTEXT_SEGMENTS"),
     )
     if args.self_test:
         return cmd_self_test(config)
@@ -2627,7 +4574,13 @@ def main() -> int:
     )
 
     if args.plan:
-        cmd_plan(langs, sources, passthrough, options)
+        cmd_plan(config, langs, sources, passthrough, options)
+        return 0
+    if args.migrate_blobs:
+        cmd_migrate_blobs(langs, sources)
+        return 0
+    if args.merge_status:
+        cmd_merge_status(langs, *args.merge_status)
         return 0
     if args.baseline:
         cmd_baseline(langs, sources, passthrough, args.baseline_ref, args.overwrite_baseline, args.repair_existing)
@@ -2644,10 +4597,25 @@ def main() -> int:
     client = require_client(config, "--run")
     check_sandbox_filter(config, options, args.allow_unbounded)
     report = RunReport()
+    rejected_dir = Path(args.keep_rejected) if args.keep_rejected else None
     try:
         cmd_run(
-            config, client, langs, sources, passthrough, locales, options, args.allow_unbounded, args.lenient, report
+            config,
+            client,
+            langs,
+            sources,
+            passthrough,
+            locales,
+            options,
+            args.allow_unbounded,
+            args.lenient,
+            report,
+            rejected_dir,
         )
+    except TranslatedAuthError as e:
+        report.notes.append(f"Run stopped: {e}")
+        print(f"Run stopped: {e}", file=sys.stderr)
+        return 1
     finally:
         summary = report.to_markdown(config)
         print("\n" + summary)

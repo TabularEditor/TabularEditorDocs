@@ -14,6 +14,7 @@ include = [
     "build_scripts/csharp_doctest.py",
     "build_scripts/te_script_runner.py",
     "build_scripts/translate-content.py",
+    "build_scripts/translation_segments.py",
 ]
 
 [tool.mypy]
@@ -23,5 +24,6 @@ files = [
     "build_scripts/csharp_doctest.py",
     "build_scripts/te_script_runner.py",
     "build_scripts/translate-content.py",
+    "build_scripts/translation_segments.py",
 ]
 strict = true
