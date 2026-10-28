@@ -1,4 +1,4 @@
----
+﻿---
 uid: data-refresh-view
 title: 数据刷新视图
 author: Daniel Otykier
@@ -16,39 +16,37 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-
 # 数据刷新视图
 
-数据刷新视图可让你深入了解服务器上的数据是如何刷新的。当你通过 TOM Explorer 触发一次新的刷新时，列表中会出现一条新的活动刷新记录。
+**数据刷新**视图显示服务器上刷新操作的进度。您从 TOM Explorer 开始的刷新将在此视图中显示为活动刷新。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-refresh-view.png" alt="Data Refresh View" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> Tabular Editor 中的数据刷新视图。可通过右键单击某个表并选择“刷新”来启动新的刷新。</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-refresh-view.png" alt="数据刷新视图" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> Tabular Editor 中的“数据刷新”视图。通过右键单击表并选择“刷新”来开始刷新。</figcaption>
 </figure>
 
-新的刷新将在后台运行，因此你可以继续构建数据集。如果刷新失败，Tabular Editor 会通过弹出窗口通知你。
+在您继续编辑模型时，刷新操作在后台运行，如果刷新失败，则会显示错误消息。
 
-## 数据刷新视图中的列
+## 数据刷新视图列
 
-“数据刷新”视图会为每次刷新操作显示以下信息：
+每个刷新操作都有以下列：
 
-- **对象**：正在刷新的模型对象名称（表、分区或模型）
-- **说明**：关于刷新操作及其当前状态的更多信息
-- **进度**：显示截至目前已导入的行数。
-- **开始时间**：刷新操作开始时的日期和时间。这有助于跟踪操作的发起时间，尤其是在多个刷新任务排队等待时
-- **持续时间**：从刷新操作开始到现在的已用时间；对正在运行的操作会实时更新
+- **对象**：正在刷新的模型对象（表格、分区或模型）。
+- **说明**：有关刷新操作及其当前状态的详细信息。
+- **进度**：迄今为止已导入的行数。
+- **开始时间**：操作开始的日期和时间。
+- **持续时间**：自操作开始以来的已过时间，对于正在进行的操作会实时更新。
 
-### 对刷新操作排序
+### 对刷新操作进行排序
 
-可点击任意列标题，对刷新操作进行排序。这在以下场景中特别有用：
+点击列标题以按该列排序：点击一次为升序，再次点击为降序。例如：
 
-- 点击 **开始时间** 列，可按时间顺序对刷新操作排序：最新的操作显示在最前（降序）或最后（升序）
-- 按 **持续时间** 排序，以识别运行时间较长的操作
-- 按 **对象** 排序，按表或分区名称对刷新进行分组
-
-单击列标题一次按升序排序，再单击一次则按降序排序。在处理多个刷新队列时，这能让你轻松识别最新的刷新操作。
+- 按**开始时间**降序排序，以便首先列出最新的刷新操作
+- 按**持续时间**排序，以查找长时间运行的操作
+- 按**对象**排序，以按表名或分区名对刷新进行分组
 
 > [!NOTE]
-> “数据刷新”窗口中显示的所有信息和持续时间仅为估算值。在处理过程中，Tabular Editor 会监听来自 SSAS 的[跟踪事件](https://learn.microsoft.com/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions)。 SSAS 不保证会将所有跟踪信息发送到客户端（例如，在 CPU/内存消耗达到峰值时，可能会对跟踪事件通知进行限流）。
+> “数据刷新”窗口中显示的所有消息和持续时间仅为估算值。Tabular Editor 在处理过程中侦听[来自 SSAS 的跟踪事件](https://learn.microsoft.com/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions)。不能保证 SSAS 会将所有跟踪消息发送给客户端（例如，在 CPU/内存消耗高峰期，它可能会限制跟踪事件通知）。 
 
 > [!TIP]
-> 如果需要获取有关刷新进度和持续时间的准确可靠信息，建议将[SQL Server Profiler](https://learn.microsoft.com/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16)连接到 SSAS 实例，并在处理过程中手动收集这些信息。
+> 如果您需要有关刷新进度和持续时间的准确可靠信息，应将 [SQL Server Profiler](https://learn.microsoft.com/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) 连接到您的 SSAS 实例，并在处理过程中手动收集信息。
