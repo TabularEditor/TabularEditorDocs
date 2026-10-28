@@ -969,8 +969,8 @@
       "status": "translated"
     },
     "how-tos/xmla-as-connectivity.md": {
-      "sourceHash": "sha256:aa83da55214090f28678410499f5c8538315cab4035e722df4503c93b2bbf115",
-      "sourceBlob": "788ba0078f9be1ab9a58a19342277f6f903fee90",
+      "sourceHash": "sha256:1327f49f78176015f7f08cd552b754ea50c38b1c375c04b77da2637df323b550",
+      "sourceBlob": "7b4d47f025df607ca3f1a813ec54fac3b0bfe197",
       "status": "translated"
     },
     "includes/ai-assisted.partial.md": {
@@ -1917,6 +1917,7 @@
     },
     "security/third-party-notices.md": {
       "sourceHash": "sha256:f21ab9783b89a6295a1343c4cd986b90acbf7940eb0f49d2b3ef33aa05d2282f",
+      "sourceBlob": "27a2a1e06fba56a75e2b9aac3261dd5a8881275e",
       "status": "copied"
     },
     "security/toc.md": {
@@ -2116,130 +2117,162 @@
     },
     "whats-new/3-11-0.html": {
       "sourceHash": "sha256:f05c90ee23a66c16c7f7e97f10f44e50bdd772f3049b4d0e75def4e1562c6664",
+      "sourceBlob": "7f76812dcab7831d9f3d6234e95325f885851d7c",
       "status": "copied"
     },
     "whats-new/3-12-0.html": {
       "sourceHash": "sha256:ac4db83ba7bf38d569d8888e29c900ac98bd8528159db2439b310bcb4613ce33",
+      "sourceBlob": "936108c63b4d36eaf8f5d8cbad6bf52f7fb17126",
       "status": "copied"
     },
     "whats-new/3-12-1.html": {
       "sourceHash": "sha256:05454034ab0295fc27adbd530c98851b2c6d978d1297620c005cbac8723068e2",
+      "sourceBlob": "3e5ef5adb26008ef00959c4540d0f94c8144fb30",
       "status": "copied"
     },
     "whats-new/3-13-0.html": {
       "sourceHash": "sha256:338340ce38e3d4e0c78ca8939e9f682a39a84144c10c7775b2ebd45fd0a013d8",
+      "sourceBlob": "5b41d60e16cd4a7d678579eb2fd2367b94b23903",
       "status": "copied"
     },
     "whats-new/3-14-0.html": {
       "sourceHash": "sha256:0ebf84c1ed96b8df959859fedb4294d14f1a785f7d90c898a23552a840a5d66e",
+      "sourceBlob": "da56748250178f1022b8ce89dce94b4bc3187bdc",
       "status": "copied"
     },
     "whats-new/3-15-0.html": {
       "sourceHash": "sha256:be61fe699768f176d186e6121c697e035fabed64aa567550d5e9636e31ee0b5c",
+      "sourceBlob": "70eee0651cb915c9e3bb4e55359dcc2753053d1b",
       "status": "copied"
     },
     "whats-new/3-16-0.html": {
       "sourceHash": "sha256:305e03f418ff43c6b4462466e6df3a048aabbdd677da448067f9f63e9d4131da",
+      "sourceBlob": "dc7131a4d8a67c92ba8135d2bc296ff2f137c856",
       "status": "copied"
     },
     "whats-new/3-17-0.html": {
       "sourceHash": "sha256:66246fbfd6abce8bb7bd60f3c922f470b96c4a78315fbf1a9b862db29983b50c",
+      "sourceBlob": "0585404a70634e4c37650d727ae5695cee3bc874",
       "status": "copied"
     },
     "whats-new/3-17-1.html": {
       "sourceHash": "sha256:66246fbfd6abce8bb7bd60f3c922f470b96c4a78315fbf1a9b862db29983b50c",
+      "sourceBlob": "0585404a70634e4c37650d727ae5695cee3bc874",
       "status": "copied"
     },
     "whats-new/3-18-0.html": {
       "sourceHash": "sha256:11676c6ea80f5de2ee940db6e5e07bfb1c4d654c363ce8172034e56ea09ad766",
+      "sourceBlob": "24a7bcfb4759c457f93adeb33b007ea76da6ff4a",
       "status": "copied"
     },
     "whats-new/3-18-1.html": {
       "sourceHash": "sha256:f38aa0f26bb0eec38c07d2926df761a9237ae36fdb8903b71e4b1a115897ef3c",
+      "sourceBlob": "db3a3be62155843643678b8d4ea0a27fd6b12f2c",
       "status": "copied"
     },
     "whats-new/3-18-2.html": {
       "sourceHash": "sha256:3aaee936b3713c578ac67b6bf55cfd638a90fd2d1fdca3b9d06d971af73da0ce",
+      "sourceBlob": "a37721ec00780f21b149f1ada088b75ab417a51e",
       "status": "copied"
     },
     "whats-new/3-19-0.html": {
       "sourceHash": "sha256:c97ca1eaa3a079bbe8ee4ce15231468a917535875b99bf94b66dbfe850ea78f1",
+      "sourceBlob": "ebfa42591069e48357bce54335cd175276b888dc",
       "status": "copied"
     },
     "whats-new/3-20-0.html": {
       "sourceHash": "sha256:800086470837f7c0ef96b37778a29897895b6ecc41e8b6aa6127b8dbed13370a",
+      "sourceBlob": "08b564a25d220ab8cef27010649329e55168d34d",
       "status": "copied"
     },
     "whats-new/3-21-0.html": {
       "sourceHash": "sha256:433f0fca243c8efa8f7e643fc432faaedfc6ea9d43c4ddbabed6c55468c15afb",
+      "sourceBlob": "a5aab4711200be74a87a2af0a0cd945deccaf2ed",
       "status": "copied"
     },
     "whats-new/3-22-0.html": {
       "sourceHash": "sha256:d8dadb26e6e39ddb632129d367d22c2512cc8b1cb1f0b4ff9261b2158440fa11",
+      "sourceBlob": "1524750dc4b18f7b0e7e6b236d958ee235313ce1",
       "status": "copied"
     },
     "whats-new/3-22-1.html": {
       "sourceHash": "sha256:132726eaf4923afa154e884b8084fb50cde7472a2e18de4ec06a1d8b8ee8d990",
+      "sourceBlob": "009656732b31c9e2a1ecd8fb24622f0176ffaecc",
       "status": "copied"
     },
     "whats-new/3-23-0.html": {
       "sourceHash": "sha256:57003c0ce3231886266229e77c19fd45b4e0c8a8d816b79d2af5201117f44630",
+      "sourceBlob": "1c80ead1d6ec25efe9bc9ae11df6ba5a7e43f6cc",
       "status": "copied"
     },
     "whats-new/3-23-1.html": {
       "sourceHash": "sha256:792a9676ccb8bbe2dcf7d1df81d3b3307567e1af2cc15567c78415b2e24d4ec8",
+      "sourceBlob": "b2353c1213c6c15ce4967c345549cb220b717569",
       "status": "copied"
     },
     "whats-new/3-24-0.html": {
       "sourceHash": "sha256:7f944c252f7a8c422aa266d7a6fc28a9c05ae602a41e7846f04249d4fc48ef6a",
+      "sourceBlob": "1114e8af14b691f8f721c9f7faaaa055081a1e21",
       "status": "copied"
     },
     "whats-new/3-24-1.html": {
       "sourceHash": "sha256:c43935a7d057dd95816594b369f06182a924aa6a892fad182b0eabe93a7e9501",
+      "sourceBlob": "53d3ce786139c87c89d0b6bbdfcff105a88048c3",
       "status": "copied"
     },
     "whats-new/3-24-2.html": {
       "sourceHash": "sha256:7a5a2de978c00c85cefdbc798ba050b892549dc039334f947ffffbfd8aa9c6a3",
+      "sourceBlob": "286e75b9c1f825078457f45d7a5a3ac5d9e8c189",
       "status": "copied"
     },
     "whats-new/3-25-0.html": {
       "sourceHash": "sha256:d64545aff7bba1e17aa5ea0c1a64c25699af771f3b12a5ce4d5a1b6e67f8e28c",
+      "sourceBlob": "12b5ad1786518c9c00b9039e13f9625794d51f09",
       "status": "copied"
     },
     "whats-new/3-25-1.html": {
       "sourceHash": "sha256:a22b5f95bd8281add36952622203e4249a87421aa1f355eb2b8fabea4d52ebd3",
+      "sourceBlob": "ad246221480671e3b5feac198c3e42a37e052d15",
       "status": "copied"
     },
     "whats-new/3-25-2.html": {
       "sourceHash": "sha256:7dd48026b0f54b9bd1a0087c7a3155cda91de983325d1a59280ff75550f39875",
+      "sourceBlob": "7fbddac4a560c1b1400dd7444b25c4f04b8f28bb",
       "status": "copied"
     },
     "whats-new/3-25-3.html": {
       "sourceHash": "sha256:b005281766f013aba39b364a5233f5a3308bef9fc7c98ddf77a6330d625e8878",
+      "sourceBlob": "3bdcaabd3d8ded2c792d958982d7f1384f1b1acf",
       "status": "copied"
     },
     "whats-new/3-26-0.html": {
       "sourceHash": "sha256:e43a553222c48f862abe7993dc460ee413a0b843c62cc0ad18c8ee4669af8cb1",
+      "sourceBlob": "a99676ef788a8c8eb014cf252c78b2b65af2a193",
       "status": "copied"
     },
     "whats-new/3-26-1.html": {
       "sourceHash": "sha256:68c34fd5ab34fb25fbf53b557a43128c142fdbc69895090ebb76be287698b5d4",
+      "sourceBlob": "564fd0372e9807408e80bb55cbcecfceb922c9f1",
       "status": "copied"
     },
     "whats-new/3-26-2.html": {
       "sourceHash": "sha256:9052c24f89a6030cebc66e1dfe7ae2ee4b5dc2f845c6be3f14f02afa04fdc262",
+      "sourceBlob": "5f8f18ae2065cc41cbb3d8d394931f0ed88f2de1",
       "status": "copied"
     },
     "whats-new/3-26-3.html": {
       "sourceHash": "sha256:dccf4025abdb99f91e5f04c0a14759b69591e9ffc4253095f6994516954541bb",
+      "sourceBlob": "e0d8ca30458c81066746c55286fbeaa01d130e7e",
       "status": "copied"
     },
     "whats-new/generic.html": {
       "sourceHash": "sha256:2b76277d177968724be678e9d085bf68a7a25d3f6071054d57b096853676bd31",
+      "sourceBlob": "2e33dcc38c270d43592f7afe71997ec54c4f831a",
       "status": "copied"
     },
     "whats-new/index.html": {
       "sourceHash": "sha256:56e416db8f0fa9adcc561aa6bfd06d25309358bcd08aa1983a71d1667cbaf05e",
+      "sourceBlob": "d5556b17d875c39c18d0ecc621765100da5080fe",
       "status": "copied"
     }
   },

@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Solo puntos de conexión XMLA de Premium por usuario"
+          note: "Only Premium Per User XMLA Endpoints"
         - edition: Enterprise
           full: true
 ---
@@ -37,11 +37,24 @@ Se abrirá el cuadro de diálogo **Cargar modelo semántico desde la base de dat
 
 ### Color de la barra de estado
 
-**Opciones avanzadas** incluye un selector de **Color de la barra de estado**. El color que elijas se guarda con la conexión y Tabular Editor pinta la barra de estado con ese color siempre que haya un modelo abierto en ese servidor.
+**Opciones avanzadas** incluye un selector de **Color de barra de estado**. El color que elija se guarda con el servidor en la lista de servidores recientes, y Tabular Editor colorea la barra de estado con él cada vez que se abre un modelo en ese servidor.
 
 Por sí solo, ningún color significa nada; lo importante es asignar uno. Asignar a producción un color que no usarías para nada más hace evidente, de un vistazo y sin leer el nombre del servidor, a qué entorno está conectada la ventana que tienes delante. Déjalo en **Predeterminado** para mantener la barra de estado del tema.
 
 Al cerrar el modelo, la barra de estado vuelve al tema activo.
+
+### Servidores recientes y anclados
+
+La lista **Servidor** contiene los servidores a los que se ha conectado. Cuando selecciona un servidor de la lista, se rellenan su tipo de autenticación, su nombre de usuario, su **Modo** y su **Color de barra de estado**. Las contraseñas no se guardan. Cuando selecciona otro servidor o se conecta, se guarda cualquier cambio realizado en cualquiera de estos ajustes para el servidor seleccionado.
+
+En Tabular Editor 3, haga clic con el botón derecho en un servidor de la lista para gestionarlo:
+
+- **Anclar** desplaza el servidor a la parte superior de la lista y lo marca con un icono de chincheta.
+- **Desanclar** devuelve un servidor anclado a la lista normal.
+- **Eliminar** quita el servidor y su configuración guardada de la lista.
+
+![Abrir modelo desde la base de datos permite anclar y eliminar entradas a través de su menú contextual](~/content/assets/images/common/OpenModelPinDeleteOption.png)
+El **Número de servidores recientes mostrados** en **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario** limita únicamente los servidores no anclados, y **Borrar servidores recientes** en la misma página deja los servidores anclados en su sitio. La misma lista y el mismo menú están disponibles en la página **Servidor de destino** del [asistente de implementación](xref:deployment).
 
 ## Seleccionar base de datos
 

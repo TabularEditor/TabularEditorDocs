@@ -1,4 +1,4 @@
----
+﻿---
 uid: new-pbi-model
 title: 创建 Power BI 语义模型
 author: Daniel Otykier
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "仅适用于 Premium Per User XMLA 终结点"
+          note: "Premium Per User XMLA Endpoints Only"
         - edition: Enterprise
           full: true
 ---
@@ -29,7 +29,7 @@ applies_to:
 >
 > [更多信息](xref:editions)。
 
-##### 创建新的语义模型
+## 创建新的语义模型
 
 1. 在“文件”菜单中，选择“新建” > “模型……”或按 `CTRL+N`
 
