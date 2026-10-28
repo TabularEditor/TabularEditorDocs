@@ -366,6 +366,8 @@ As of [version 2.8](https://github.com/TabularEditor/TabularEditor/releases/tag/
 
 You can also annotate tables and columns if you want the schema check to treat them in a specific way. [More information here](xref:importing-tables-te2#ignoring-objects).
 
+The Tabular Editor CLI runs the same check with [`te schemacheck`](xref:te-cli-commands#schemacheck), which also checks Power Query (M) and Direct Lake tables.
+
 ## Command Line output and Exit Codes
 The command line provides various details, depending on the switches used and any events encountered during execution. Exit Codes were introduced in [version 2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4).
 

@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: Installation and Setup
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -127,7 +127,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of the preview end date** (2026-10-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
+> The banner reappears on every command within **14 days of the preview end date** (2026-12-31), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## Shell completion
 
