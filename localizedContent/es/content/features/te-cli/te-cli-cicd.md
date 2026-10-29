@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: Integración de CI/CD
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,12 +20,12 @@ applies_to:
 La CLI de Tabular Editor está diseñada para ejecutarse sin supervisión en pipelines de integración y entrega continuas. Un único binario, una salida estructurada, un modo no interactivo, anotaciones de CI nativas para GitHub Actions y Azure DevOps, y resultados de pruebas compatibles con VSTEST hacen que la CLI sea un reemplazo natural de las invocaciones ad hoc de TE2.
 
 > [!WARNING]
-> **No uses la CLI en pipelines de producción durante la versión preliminar pública limitada.** Hay dos riesgos específicos de esta versión preliminar que afectan a los propietarios de pipelines:
+> **No utilice la CLI en canalizaciones de producción durante la vista previa pública limitada.** Existen dos riesgos específicos de la versión preliminar que afectan a los propietarios de las canalizaciones:
 >
-> - **Caducidad definitiva.** El binario de vista previa deja de funcionar el **2026-10-31**; cualquier pipeline que dependa de él fallará ese día, independientemente de tu calendario de versiones.
-> - **Sin garantía de compatibilidad con versiones anteriores.** Los comandos, las opciones, los formatos de salida y los códigos de salida pueden cambiar entre compilaciones preliminares, así que quizá tengas que actualizar los pasos del pipeline cuando actualices el binario incluido en el repositorio.
+> - **Caducidad estricta.** El binario de la versión preliminar dejará de funcionar el **31/12/2026**. Cualquier canalización que dependa de él fallará en esa fecha, independientemente de su calendario de lanzamientos.
+> - **Sin garantía de compatibilidad con versiones anteriores.** Los comandos, las marcas, los formatos de salida y los códigos de salida pueden cambiar entre las compilaciones de la versión preliminar, por lo que es posible que sea necesario actualizar los pasos del pipeline cuando actualice el binario comercializado.
 >
-> Compila y evalúa en pipelines que no sean de producción, y comparte tus comentarios en el repositorio público [TabularEditor/CLI](https://github.com/TabularEditor/CLI) para que la versión GA se ajuste a tus necesidades.
+> Compila y evalúa en canalizaciones que no sean de producción y comparte tus comentarios en el repositorio público [TabularEditor/CLI](https://github.com/TabularEditor/CLI) para que la versión de disponibilidad general se adapte a tus necesidades.
 
 ## Qué hace que la CLI sea adecuada para CI
 
@@ -36,7 +36,7 @@ La CLI de Tabular Editor está diseñada para ejecutarse sin supervisión en pip
 - **`--ci vsts` / `--ci github`.** Emite anotaciones nativas del pipeline a stderr, con el código del hallazgo (`code=` en Azure DevOps, `title=` en GitHub). `azdo` / `azure-devops` y `gh` son alias aceptados, `none` significa que no se emiten anotaciones, y un valor mal escrito se rechaza antes de ejecutar el comando, en lugar de no emitir nada en silencio.
 - **`--trx <file>`.** Genera resultados VSTEST que Azure DevOps puede consumir al publicar los resultados de pruebas.
 - **Errores estructurados.** `--error-format json` emite `{"error": "...", "hint": "..."}` a stderr para que los pasos del pipeline puedan fallar con mensajes útiles.
-- **Un único JSON de hallazgos.** `te validate`, `te bpa run`, `te test run` y `te query` comparten un único documento JSON legible por máquina con `--output-format json`: un `summary`, un array plano `findings[]` con `severity`/`source`/`code`/`message` y, cuando se puede resolver, un `objectPath` que puedes pasar de nuevo a `te get`. Consulta @te-cli-findings.
+- **Un JSON de resultados.** `te validate`, `te bpa run`, `te schemacheck`, `te test run` y `te query` comparten un único documento JSON legible por máquina en `--output-format json`: un `summary`, una matriz plana `findings[]` con `severity`/`source`/`code`/`message` y, cuando sea posible resolverlo, un `objectPath` que puede enviar como información de retorno a `te get`. Consulta @te-cli-findings.
 
 ## Agregar la CLI a tu repositorio
 
@@ -55,7 +55,7 @@ your-repo/
 Coloca el binario **extraído** —no el archivo comprimido— para que el pipeline pueda invocarlo directamente. Elige la compilación que coincida con el SO y la arquitectura de tu runner; consulta @te-cli-install para ver la tabla de nombres de archivo. El binario autocontenido ocupa ~70 MB; considera usar Git LFS si tu repositorio es sensible al tamaño.
 
 > [!NOTE]
-> Al hacer commit del binario, también dejas fijada la versión de la CLI que hayas incluido en el repositorio, lo cual es deseable para la reproducibilidad de la CI. Para actualizar, sustituye el binario en `tools/te/` y haz commit: los mensajes del commit serán tu registro de versiones. Ten en cuenta que el binario de vista previa caduca el **2026-10-31** independientemente de cuándo lo hayas incorporado al repositorio, así que una copia incluida en el repositorio no es una dependencia permanente; planifica actualizarla (y volver a validar tu pipeline con la nueva superficie de la API) siguiendo la cadencia de las compilaciones preliminares.
+> Al confirmar el binario, también se fija la versión de la CLI a la que usted haya registrado, lo cual es deseable para la reproducibilidad de la CI. Para actualizar, reemplace el binario en `tools/te/` y confírmelo. El mensaje de confirmación es su registro de versiones. Tenga en cuenta que el binario de la versión preliminar sigue caducando el **31-12-2026** independientemente de cuándo lo haya confirmado, por lo que una copia del proveedor no es una dependencia permanente. Planifique su actualización (y vuelva a validar su pipeline con la nueva superficie de la API) según la cadencia de las versiones preliminares.
 
 ## GitHub Actions
 
@@ -186,6 +186,20 @@ te deploy --model ./model --target-server my-ws --target-database my-model --ski
 ```
 
 Consulta @te-cli-config para controlar globalmente el control del BPA mediante las claves de configuración `bpa.onDeploy` / `bpa.onSave`.
+
+## Comprobación de desviación del esquema
+
+Ejecute [`te schemacheck`](xref:te-cli-commands#schemacheck) antes de una implementación para detectar las columnas de origen que se hayan eliminado o cuyo tipo se haya cambiado desde la última actualización del modelo. El agente necesita acceso a la red y credenciales para los orígenes de datos del modelo.
+
+```bash
+# A missing source column fails the step; added or retyped columns are warnings
+te schemacheck --model ./model --non-interactive --ci vsts --trx schema.trx
+
+# Fail on any drift
+te schemacheck --model ./model --non-interactive --fail-on warning --ci github
+```
+
+Las tablas que la CLI no puede comprobar se enumeran junto con el motivo y no provocan que el paso falle. Para que también fallen en ellas, marque `tablesSkipped` en la salida JSON.
 
 ## Validación de scripts
 

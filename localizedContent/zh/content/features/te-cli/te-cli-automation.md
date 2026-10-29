@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: 自动化和脚本
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,7 +37,7 @@ te query -q "EVALUATE VALUES('Date'[Year])" --output-format csv
 te bpa run --output-format json
 ```
 
-在 `--output-format json` 下，`te validate`、`te bpa run`、`te test run` 和 `te query` 共用同一种 JSON 文档结构，包含 `summary`、扁平的 `findings[]` 数组和 `durationMs`——解析时请参见 @te-cli-findings 中的结构定义。
+在`--output-format json`下，`te validate`、`te bpa run`、`te schemacheck`、`te test run`和`te query`共享一个 JSON 文档形状，其中包含一个`summary`、一个扁平的`findings[]`数组和`durationMs` - 请参阅 @te-cli-findings，了解要解析的形状。
 
 > [!NOTE]
 > `--output-format` 和 `--error-format` 相互独立。设置 `--output-format json` _不会_ 将 stderr 切换为 JSON；若要这样做，请传入 `--error-format json`。重定向 stdout 时不会自动切换格式；除非你另行指定，否则默认始终为 `text`。
@@ -60,7 +60,7 @@ te deploy --model ./model --target-server my-workspace --target-database my-mode
 | 退出  | 含义                                                                                                                                                                |
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `0` | 成功。                                                                                                                                                               |
-| `1` | 通用失败——参数无效、命令失败、验证错误、身份验证失败、BPA 质量门在严重性 >= error 时未通过、某次 `te script` 运行中脚本调用了 `Error(...)`，或某次 `te deploy` 已被服务器接受但包含对象错误。针对 `te diff`：发现差异（遵循 `diff`/`cmp` 的惯例）。 |
+| `1` | 一般性失败 - 参数无效、命令失败、验证错误、身份验证失败、BPA 门在严重性 >= 错误的级别上失败、发现错误的 `te schemacheck` 运行（或存在 `--fail-on warning` 的任何偏差）、脚本调用 `Error(...)` 的 `te script` 运行、服务器接受的 `te deploy` 存在对象错误。对于 `te diff`：发现差异（如 `diff`/`cmp` 约定）。|
 | `2` | 仅适用于 `te diff`：比较过程中出错，因此差异状态未知。                                                                                                                                  |
 
 将退出代码与 `--ci <vsts\|github>` 注释以及 `--trx <file>` 结合使用，可在 CI 中展示更丰富的失败信息——请参阅 @te-cli-cicd。

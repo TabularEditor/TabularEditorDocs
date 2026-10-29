@@ -2,7 +2,7 @@
 uid: te-cli-limitations
 title: 行为差异与已知限制
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,11 +54,20 @@ CLI 会针对你在 Tabular Editor 2 和 3 中使用的同一个 `Model` 对象�
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`te validate` 无法自动修复 Code Action 违规项** | `te validate` 会生成 Report 来指出 Code Action 违规项，但不提供用于应用建议修复的 CLI 参数。在 Tabular Editor 3 中应用修复；或者对与 BPA 规则重叠的那部分 Code Action，使用 `te bpa run --fix`。 |
 
+## 架构检查
+
+| 限制                                                                          | 说明 / 变通方法                                                                                                                                                                                                                  |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Oracle、ODBC 和其他 OLE DB 源未被检查** | Tabular Editor 2 的 `-SC` 检查了这些源上的旧式查询分区。[`te schemacheck`](xref:te-cli-commands#schemacheck) 和 `te2 -SC` 将此类表列在**未检查**下，并且不会导致运行失败。仍会检查 SQL Server OLE DB 提供程序。|
+| **OLE DB 数据源只能在 Windows 上检查** | `SQLOLEDB` 或 `MSOLEDBSQL` 上的旧分区在 Linux 和 macOS 上被报告为错误。在 Windows 代理上运行架构检查。|
+| **单表覆盖仅读取 SQL Server 和 Fabric** | `te schemacheck <table>` 与 `--source`、`--connection-string` 或 `--source-table` 一起读取 SQL Server、Azure SQL 以及 Fabric Lakehouse 和 Warehouse SQL 端点。任何其他源上的表均被拒绝。在不使用覆盖标志的情况下运行，以便对照其自身的数据源进行检查。|
+| **已重命名的源列被报告为缺失 + 已添加** | 匹配是按名称进行的，因此无法检测到重命名。使用 `te set <table>/<column> -p SourceColumn=<new name>` 重新映射列。|
+
 ## 模型初始化和保存
 
 | 限制                                          | 说明 / 变通方法                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`--serialization` 不能将序列化格式与 PBIP 容器组合使用** | [`te save-as`](xref:te-cli-commands#save-as) 的 `--serialization` 选项将 `bim`、`tmdl`、`Database.json` 和 `pbip` 视为互斥选项，因此无法为采用 TMSL 序列化的 (`.bim`) 模型生成完整的 PBIP 容器。如果要将 `tmdl` 或 `bim` 输出封装到 `{modelName}.SemanticModel/` 文件夹中，并包含 `.platform` 和 `definition.pbism` 文件，请使用 `--supporting-files`；如果要生成完整的 PBIP（包括 Report 工件），请使用 `--serialization pbip`。 |
+| **`--serialization` 不能将序列化格式与 PBIP 容器组合使用** | [`--serialization`](xref:te-cli-commands#save-as) 的 `te save-as` 选项将 `bim`、`tmdl`、`database.json` 和 `pbip` 视为互斥选项，因此无法为采用 TMSL 序列化的 (`.bim`) 模型生成完整的 PBIP 容器。如果要将 `tmdl` 或 `bim` 输出封装到 `{modelName}.SemanticModel/` 文件夹中，并包含 `.platform` 和 `definition.pbism` 文件，请使用 `--supporting-files`；如果要生成完整的 PBIP（包括 Report 工件），请使用 `--serialization pbip`。 |
 
 ## 模型编辑
 
@@ -79,7 +88,7 @@ CLI 会针对你在 Tabular Editor 2 和 3 中使用的同一个 `Model` 对象�
 | 限制                                           | 说明 / 变通方法                                                                                                                                                                                                                                                         |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **包含空格的 DAX 对象路径必须用 shell 引号括起来**            | 当表名或列名包含空格时，必须在终端中用 shell 引号将整个 DAX 对象引用括起来：`te get "'My Table'[My Column]"`。如果没有外层引号，shell 会将该路径拆分为多个参数，导致解析失败。在 [`te interactive`](xref:te-cli-interactive) 中不需要 shell 引号，因为 REPL 会在 shell 将输入拆分为参数之前接收原始输入。                                                    |
-| **包含保留路径字符的对象名称必须加引号**                       | `/ [ ] ' " * ？ { }` 在对象和筛选器路径中是保留字符。如果名称包含其中任一字符，必须按分段引用规则进行引用，例如 `te get \"Tables/'{foo}'\"` 或 `te get 'Sales/\"my*name\"'`。 `?` 是保留字符，但不表示通配符。 Windows 的 `cmd.exe` shell 无法表示这种混合引号形式——遇到这类名称时，改用 PowerShell 或 POSIX shell（或者用会接收原始整行输入的 `te interactive`）。 |
+| **包含保留路径字符的对象名称必须加引号**                       | `/ [ ] ' " * ? { }` 在对象和筛选器路径中是保留字符。如果名称包含其中任一字符，必须按分段引用规则进行引用，例如 `te get "Tables/'{foo}'"` 或 `te get 'Sales/"my*name"'`。 `?` 是保留字符，但不表示通配符。 Windows 的 `cmd.exe` shell 无法表示这种混合引号形式——遇到这类名称时，改用 PowerShell 或 POSIX shell（或者用会接收原始整行输入的 `te interactive`）。 |
 | **在 `te interactive` 中无法使用 `-`（从 stdin 读取）** | 该 shell 会拒绝这种写法，并提示 _'-' (stdin) is not available inside the interactive shell._ 请将该值直接写在命令中，或在支持管道的操作系统 shell 中运行该命令。                                                                                                         |
 
 ## Report 缺失的限制

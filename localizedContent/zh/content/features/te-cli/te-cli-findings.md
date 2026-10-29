@@ -2,7 +2,7 @@
 uid: te-cli-findings
 title: 机器可读结果（JSON）
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,7 +17,7 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-`te validate`、`te bpa run`、`te test run` 和 `te query` 会使用统一的 JSON 结构来 Report 问题。使用 `--output-format json` 时，这些命令都会输出 **单个文档**，不会出现没有任何内容可供解析的情况。
+`te validate`、`te bpa run`、`te schemacheck`、`te test run`和`te query`在一个共享的 JSON 形状中报告问题。在`--output-format json`下，这些命令中的每个命令都会输出一个**单个文档**——其中任何一个命令都不可能不留下任何内容供解析。
 
 > [!NOTE]
 > `te query` 仅在执行前的 DAX 验证产生至少一个错误时，才会使用此 JSON 结构。查询成功时，会改为输出查询结果：`{columns, rows, rowCount, truncated, durationMs, trace?}`。
@@ -58,9 +58,9 @@ applies_to:
 | 键            | 值/含义                                                                            |
 | ------------ | ------------------------------------------------------------------------------- |
 | `severity`   | `error`、`warning` 或 `info`。                                                     |
-| `source`     | `validate`、`bpa`、`test` 或 `query`。                                              |
-| `code`       | 稳定的发现代码（验证信息 ID、BPA 规则 ID、`TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID` 等）。 |
-| `信息`         | 便于理解的描述。                                                                        |
+| `source` | `validate`、`bpa`、`schemaCheck`、`test` 或 `query`。|
+| `code` | 稳定结果代码（验证消息 ID、BPA 规则 ID、`TEST_FAIL` / `TEST_ERROR` / `TEST_SUITE_INVALID`、[架构检查代码](xref:te-cli-commands#what-it-reports)……）。 |
+| `message`         | 便于理解的描述。                                                                        |
 | `object`     | 该发现所涉及对象的基本名称。                                                                  |
 | `objectType` | 预定义值之一——见下文。                                                                    |
 | `fixable`    | 仅当 BPA 违规项的规则定义了修复表达式时，值才为 `true`。                                              |
@@ -69,7 +69,7 @@ applies_to:
 
 | 键                      | 填充自                          | 含义                                                                                                                                                                      |
 | ---------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `objectPath`           | 仅适用于 `validate` 和 `bpa` 的违规项 | 规范对象路径，可由 `te get` 或 `te set` 直接按原样解析。测试发现项、查询发现项以及 BPA 规则错误中没有此字段。                                                                                                     |
+| `objectPath` | `validate`、`bpa`违规和`schemaCheck` | 标准对象路径，可由`te get`或`te set`按原样解析。对于测试结果、查询结果和 BPA 规则错误，则不存在。|
 | `expressionPosition`   | 仅限 `validate` 和 `query`      | Named Expression 属性中的 `{property, lineNumber, column}`。**在所有来源中，包括 validate 和 query，都是可选的** - 只要分析器未报告任何可用位置，此字段就不存在；并且要么完整提供，要么完全不提供(绝不会只提供部分位置信息)。 |
 | `ruleName`, `category` | 仅限 `bpa`                     | 所违反规则的名称和类别。                                                                                                                                                            |
 
@@ -88,12 +88,13 @@ applies_to:
 | `te validate`      | `valid`（布尔值）。                                                                                                                                                            |
 | `te bpa run`       | `model`、`rulesEvaluated`、`violations`、`ruleErrors`、`ignoredRules`。规则评估错误会以严重性 `error`、`objectType: "BpaRule"` 的形式出现在 `findings` 中；`violations` 和 `ruleErrors` 分别统计这两类数量。 |
 | `te bpa run --fix` | 在同一个文档内新增一个 `fix` 键：`changes`、`fixed`、`fixErrors`、`skipped`、`fixedItems`、`fixErrorItems`。如果修复步骤本身失败，仍会生成文档，并将原因写入 `fix.error`。不带 `--fix` 时不会出现。                          |
+| `te schemacheck` | `tablesChecked`、`tablesSkipped`、`tablesWithDrift`。每个未检查的表也是一个代码为 `SCHEMA_TABLE_SKIPPED` 的`info`发现。|
 | `te test run`      | `suites`、`invalidSuites`、`testSummary`（按状态汇总测试数量；`summary` 仍为共享的严重性汇总）。                                                                                                  |
 | `te query`         | 没有——而且只会在验证错误时出现；见上文说明。                                                                                                                                                  |
 
 ## CI 注释
 
-这四个命令共用同一个注释写入器，用于 `--ci vsts` / `--ci github`（接受 `azdo`、`azure-devops` 和 `gh` 作为别名；`none` 会禁用注释；其他任何值都会在命令运行前被拒绝）。注释会输出到 stderr；stdout 保持可解析：
+所有五个命令共享一个`--ci vsts` / `--ci github`注释写入器（`azdo`、`azure-devops`和`gh`是可接受的别名；`none`禁用注释；在命令运行之前，任何其他内容都会被拒绝）。批注将输出到stderr；stdout仍可被解析：
 
 - 注释会带上发现项的代码：在 Azure DevOps 中使用 `code=`，在 GitHub 中使用 `title=`。
 - 信息级 Info 发现项不是警告：在 GitHub 上会输出 `::notice::`，在 Azure DevOps 上则是一条普通日志行。如果某次 Azure DevOps 运行的发现项只有信息类 Report，则该运行会显示为 **Succeeded**。

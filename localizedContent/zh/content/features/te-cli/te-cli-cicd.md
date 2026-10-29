@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: CI/CD 集成
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,12 +20,12 @@ applies_to:
 Tabular Editor CLI 专为在持续集成和持续交付管道中进行无人值守执行而设计。单一可执行文件、结构化输出、非交互模式、面向 GitHub Actions 和 Azure DevOps 的原生 CI 注解，以及与 VSTEST 兼容的测试结果，使其成为替代临时调用 TE2 的理想选择。
 
 > [!WARNING]
-> **在有限公开预览期间，不要在生产管道中使用 CLI。** 管道所有者需要注意以下两项预览版特有风险：
+> **在有限的公开预览期间，请勿在生产管道中使用 CLI。** 存在两个针对预览版的风险，适用于管道所有者：
 >
-> - **硬性到期。** 预览版二进制文件将于 **2026-10-31** 失效——任何依赖它的管道都会在当天失败，无论你的发布日程如何安排。
-> - **不保证向后兼容。** 命令、选项、输出结构和退出代码可能会在不同预览版本之间变更，因此当你更新随仓库一并提交的二进制文件时，可能需要同步调整管道步骤。
+> - **硬性到期。**预览版二进制文件将于**2026-12-31**停止运行，届时，任何依赖于该文件的管道都将失败，无论您的发布日程如何。
+> - **不保证向后兼容性。**命令、标志、输出格式和退出代码在预览版本之间可能会发生变化，因此当您刷新供应商提供的二进制文件时，可能需要更新管道步骤。
 >
-> 在非生产管道中构建和评估，并在公开的 [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository 中分享反馈，以便 GA 版本更符合你的需求。
+> 请在非生产管道中进行构建和评估，并在公共 [TabularEditor/CLI](https://github.com/TabularEditor/CLI) 仓库中分享反馈，以便 GA 版本符合您的需求。
 
 ## CLI 为何适合 CI
 
@@ -36,7 +36,7 @@ Tabular Editor CLI 专为在持续集成和持续交付管道中进行无人值�
 - **`--ci vsts` / `--ci github`。** 向 stderr 输出原生管道注释，并携带发现项的代码（在 Azure DevOps 中为 `code=`，在 GitHub 中为 `title=`）。 `azdo` / `azure-devops` 和 `gh` 是可接受的别名，`none` 表示不输出注释，而拼写错误的值会在命令运行前被拒绝，而不是悄无声息地什么都不输出。
 - **`--trx <file>`。** 生成可供 Azure DevOps 测试发布使用的 VSTEST 结果。
 - **结构化错误。** `--error-format json` 会向 stderr 输出 `{"error": "...", "hint": "..."}`，以便管道步骤在失败时显示有用的信息。
-- **统一的 findings JSON。** 在 `--output-format json` 下，`te validate`、`te bpa run`、`te test run` 和 `te query` 共用一份机器可读的 JSON 文档——包含 `summary`、一个扁平的 `findings[]` 数组，带有 `severity`/`source`/`code`/`message`，以及在可解析的情况下可回传给 `te get` 的 `objectPath`。见 @te-cli-findings。
+- **一个结果 JSON。**`te validate`、`te bpa run`、`te schemacheck`、`te test run`和`te query`共享一个位于`--output-format json`下的单个机器可读 JSON 文档——一个`summary`，一个包含`severity`/`source`/`code`/`message`的扁平`findings[]`数组，以及在可解析的情况下，一个您可以反馈给`te get`的`objectPath`。请参阅 @te-cli-findings。
 
 ## 将 CLI 添加到你的仓库
 
@@ -55,7 +55,7 @@ your-repo/
 请把**解压后的**二进制文件放到位——不是压缩包——这样管道就能直接调用。选择与 runner 的 OS/架构匹配的构建；文件名对照表见 @te-cli-install。自包含的二进制文件约为 70 MB；如果你的仓库对体积比较敏感，可以考虑使用 Git LFS。
 
 > [!NOTE]
-> 提交这个二进制文件也会把 CLI 版本固定为你提交的那个版本，这有利于 CI 的可重现性。要升级时，替换 `tools/te/` 中的二进制文件并提交——提交信息就是你的版本日志。请注意，无论你何时将其提交到仓库，预览版二进制文件都会在 **2026-10-31** 失效，因此随仓库提交的副本并不是永久依赖——请按预览版的发布节奏更新它（并针对新的 API 面重新验证你的管道）。
+> 提交二进制文件还会将 CLI 版本固定为您签入的版本，这对于 CI 的可重现性是有益的。要升级，请替换 `tools/te/` 中的二进制文件并提交 - 提交信息是您的版本日志。请记住，无论您何时提交预览版二进制文件，它仍将在 **2026-12-31** 过期，因此供应商提供的副本不是永久性依赖项。请计划按照预览版构建的频率对其进行刷新（并根据新的 API 界面重新验证您的管道）。
 
 ## GitHub Actions
 
@@ -118,7 +118,7 @@ jobs:
 
 ## Azure DevOps Pipelines
 
-上述 GitHub Actions 工作流在 Azure DevOps Pipelines 中的等效版本。示例假定 `te.exe` 已提交到 `tools\\te\\te.exe`。 `--ci vsts` 会输出 `##vso[...]` 命令，管道会将其解释为错误、警告和任务状态更新。
+上述 GitHub Actions 工作流在 Azure DevOps Pipelines 中的等效版本。示例假定 `te.exe` 已提交到 `tools\te\te.exe`。 `--ci vsts` 会输出 `##vso[...]` 命令，管道会将其解释为错误、警告和任务状态更新。
 
 ```yaml
 trigger:
@@ -186,6 +186,20 @@ te deploy --model ./model --target-server my-ws --target-database my-model --ski
 ```
 
 要通过 `bpa.onDeploy` / `bpa.onSave` 配置键全局控制 BPA 门禁，参见 @te-cli-config。
+
+## 架构漂移检查
+
+在部署之前运行[`te schemacheck`](xref:te-cli-commands#schemacheck)，以捕获自上次更新模型以来被删除或重新键入的源列。代理需要模型数据源的网络访问权限和凭据。
+
+```bash
+# A missing source column fails the step; added or retyped columns are warnings
+te schemacheck --model ./model --non-interactive --ci vsts --trx schema.trx
+
+# Fail on any drift
+te schemacheck --model ./model --non-interactive --fail-on warning --ci github
+```
+
+CLI 无法检查的表格将列出原因，并且不会导致该步骤失败。要使这些表也失败，请在 JSON 输出中选中 `tablesSkipped`。
 
 ## 脚本验证
 

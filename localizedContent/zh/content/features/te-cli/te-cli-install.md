@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: 安装与设置
 author: Peer Grønnerup
-updated: 2026-09-04
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -128,7 +128,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 在**预览结束日期前后 14 天内**（2026-10-31），无论如何设置 `hidePreviewNotice`，每次运行命令都会再次显示该横幅。这样可确保在 CLI 停止工作前，你能看到明确的警告。
+> 在**预览结束日期**（2026-12-31）**前 14 天内**，横幅会在每个命令中再次显示，无论`hidePreviewNotice`如何。这可确保您在 CLI 停止运行之前看到明显的警告。
 
 ## Shell 自动补全
 
