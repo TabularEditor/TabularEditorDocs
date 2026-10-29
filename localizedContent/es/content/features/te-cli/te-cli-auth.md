@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Autenticación y conexiones
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -61,7 +61,7 @@ te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx
 te auth login --identity     # Alias: -I
 ```
 
-Después de iniciar sesión correctamente con una entidad de servicio, la CLI **almacena las credenciales en caché** para que todos los comandos `te` posteriores puedan adquirir tokens de forma silenciosa; no hace falta volver a pasar `-u / -p / -t` ni establecer las variables de entorno `AZURE_CLIENT_*`. Pasa `--save=false` para iniciar sesión una sola vez sin actualizar la caché, o ejecuta `te auth logout` para borrarla.
+Después de un inicio de sesión correcto de la entidad de servicio, la CLI **almacena en caché las credenciales** para que cada comando `te` posterior pueda adquirir tokens de forma silenciosa; no es necesario volver a pasar `-u / -p / -t` ni establecer las variables de entorno `AZURE_CLIENT_*`. Ejecute `te auth logout` para borrar la caché. Para usar una entidad de servicio sin almacenar sus credenciales en el equipo, omita `te auth login`: establezca `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET` y `AZURE_TENANT_ID` y pase `--auth env` a cada comando.
 
 > [!WARNING]
 > Pasar secretos directamente en la línea de comandos los expone a los listados de procesos y al historial del shell. Es preferible usar la variable de entorno `AZURE_CLIENT_SECRET`, o pasar el secreto por stdin con `-p -`.

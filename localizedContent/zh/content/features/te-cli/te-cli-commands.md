@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: 命令参考
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -61,7 +61,7 @@ CLI 中的对象定位在所有命令中都采用同一套语法。以下参考�
 
 在带引号的分段内，`*` 会被视为字面字符，而不是通配符。因此，`'Sa*'` 会匹配名称恰好为 `Sa*` 的表。
 
-路径中的保留字符包括 `/ [ ] ' \" * ?？ { }`。任何包含 `* ? 的分段？ { }` 的分段必须加引号（`te get "Tables/'{foo}'"`、`te get 'Sales/"my*name"'`）；未加引号会被拒绝并报错，错误会指出该字符并展示加引号后的写法。 `?` 为保留字符，不表示通配符。 CLI 输出的每个路径——无论是在错误、提示、`--paths-only` 输出，还是 JSON 的 `objectPath` 字段中——都会以规范化的加引号形式输出，可直接粘贴回 `te get`。混合引号形式需要 PowerShell 或 bash；cmd.exe 无法表示。
+路径中的保留字符包括 `/ [ ] ' " * ? { }`。任何包含 `* ? { }` 的分段必须加引号（`te get "Tables/'{foo}'"`、`te get 'Sales/"my*name"'`）；未加引号会被拒绝并报错，错误会指出该字符并展示加引号后的写法。 `?` 为保留字符，不表示通配符。 CLI 输出的每个路径——无论是在错误、提示、`--paths-only` 输出，还是 JSON 的 `objectPath` 字段中——都会以规范化的加引号形式输出，可直接粘贴回 `te get`。混合引号形式需要 PowerShell 或 bash；cmd.exe 无法表示。
 
 ### DAX 风格的引用（仅对象路径）
 
@@ -82,9 +82,9 @@ te get "[Total Sales]"               # Model-wide measure-or-column lookup
 
 | 关键字                                                                                                                   | 作用范围 | 含义           |
 | --------------------------------------------------------------------------------------------------------------------- | ---- | ------------ |
-| `Tables`, `度量值`, `Columns`, `Hierarchies`, `分区`, `KPI`, `Sets`                                                        | 模型   | 模型中该类型的所有对象。 |
-| `关系`, `角色`, `Perspectives`, `Cultures`, `DataSources`, `Expressions`, `CalculationGroups`, `Functions`, `Annotations` | 模型   | 模型级容器。       |
-| `度量值`, `Columns`, `Hierarchies`, `分区`, `Calendars`, `CalculationItems`, `KPI`, `Sets`                                 | 表    | 表下的子容器。      |
+| `Tables`, `Measures`, `Columns`, `Hierarchies`, `Partitions`, `KPIs`, `Sets`                                                        | 模型   | 模型中该类型的所有对象。 |
+| `Relationships`, `Roles`, `Perspectives`, `Cultures`, `DataSources`, `Expressions`, `CalculationGroups`, `Functions`, `Annotations` | 模型   | 模型级容器。       |
+| `Measures`, `Columns`, `Hierarchies`, `Partitions`, `Calendars`, `CalculationItems`, `KPIs`, `Sets`                                 | 表    | 表下的子容器。      |
 | `Levels`                                                                                                              | 层次结构 | 层次结构的级别。     |
 | `Members`, `TablePermissions`（别名 `Permissions`）                                                                       | 角色   | 角色的子级对象。     |
 
@@ -135,8 +135,8 @@ te list 'Roles/Re*/Members'            # Members of every role matching Re*
 | `te bpa rules list`   | `te bpa rules ls`          |
 | `te bpa rules remove` | `te bpa rules rm`          |
 | `te config list`      | `te config ls`             |
-| `te 宏 list`           | `te 宏 ls`                  |
-| `te 宏 remove`         | `te 宏 rm`                  |
+| `te macro list`           | `te macro ls`                  |
+| `te macro remove`         | `te macro rm`                  |
 | `te profile list`     | `te profile ls`            |
 | `te profile remove`   | `te profile rm`            |
 | `te session list`     | `te session ls`            |
@@ -148,8 +148,8 @@ te list 'Roles/Re*/Members'            # Members of every role matching Re*
 
 | 选项                         | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-m, --model <path>`       | 语义模型的路径（TMDL 文件夹、`.bim` 文件、`Database.json` 文件夹或 `.SemanticModel` 文件夹）。                                                                                                                                                                                                                                                                                                                                                              |
-| `-s, --server <endpoint>`  | Analysis Services 端点或 Power BI Workspace。服务器名称/FQDN（`MY.SERVER.COM`）、IP 地址（`192.168.1.1`）、`host:port`、`localhost`、`SERVER\\INSTANCE`、`asazure://...` 或 MSOLAP 连接字符串可用于直接连接到 Analysis Services / AAS。单一标记名称（`MyWorkspace`）、Fabric `Name.Workspace[/Model.SemanticModel]` 路径或 `powerbi://...` URL 会指向 Power BI Workspace。名称中包含点号的 Workspace 无法与服务器名称区分，因此会被视为服务器，CLI 会输出警告；如需指向 Power BI，请使用其 `.Workspace` 形式或完整的 `powerbi://` URL。 |
+| `-m, --model <path>`       | 语义模型的路径（TMDL 文件夹、`.bim` 文件、`database.json` 文件夹或 `.SemanticModel` 文件夹）。                                                                                                                                                                                                                                                                                                                                                              |
+| `-s, --server <endpoint>`  | Analysis Services 端点或 Power BI Workspace。服务器名称/FQDN（`MY.SERVER.COM`）、IP 地址（`192.168.1.1`）、`host:port`、`localhost`、`SERVER\INSTANCE`、`asazure://...` 或 MSOLAP 连接字符串可用于直接连接到 Analysis Services / AAS。单一标记名称（`MyWorkspace`）、Fabric `Name.Workspace[/Model.SemanticModel]` 路径或 `powerbi://...` URL 会指向 Power BI Workspace。名称中包含点号的 Workspace 无法与服务器名称区分，因此会被视为服务器，CLI 会输出警告；如需指向 Power BI，请使用其 `.Workspace` 形式或完整的 `powerbi://` URL。 |
 | `-d, --database <name>`    | Workspace 上的语义模型名称。                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `--local`                  | 连接到本地运行的 Analysis Services 实例——Power BI Desktop、Visual Studio Workspace，或独立 SSAS（仅限 Windows）。                                                                                                                                                                                                                                                                                                                                       |
 | `--auth <method>`          | 身份验证方法：`auto`、`interactive`、`spn`、`env`、`managed-identity`（默认值：`auto`）。                                                                                                                                                                                                                                                                                                                                                             |
@@ -182,7 +182,7 @@ te list 'Roles/Re*/Members'            # Members of every role matching Re*
 `te save-as` 接受：
 
 - `-o, --output-path <path>` - 目标文件或文件夹。**可选**：省略时，`te save-as` 会写回源位置，并保留原始格式。
-- `--serialization <fmt>` - `tmdl`、`bim`（别名 `tmsl`）、`database.json`、`pbip`。省略时，格式默认为已加载模型的格式；使用 `-o` 时，会根据输出路径推断格式（`.bim` 会输出为单文件 BIM，`.json` 会输出为包含 `Database.json` 的文件夹）。
+- `--serialization <fmt>` - `tmdl`、`bim`（别名 `tmsl`）、`database.json`、`pbip`。省略时，格式默认为已加载模型的格式；使用 `-o` 时，会根据输出路径推断格式（`.bim` 会输出为单文件 BIM，`.json` 会输出为包含 `database.json` 的文件夹）。
 - `--force` - 跳过验证并覆盖现有输出。某些拒绝情况（例如容器不明确、项目根目录中存在多个 `SemanticModel`）即使使用 `--force` 也会触发。
 - `--skip-bpa` - 完全跳过 BPA 门控检查。
 - `--fix-bpa` - 如果规则定义了修复表达式，则自动修复 BPA 违规项。
@@ -197,12 +197,14 @@ te save-as -o ./project --serialization pbip         # Save as a PBIP project
 te save-as -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
 
+TMDL 文件夹可以采用每个对象（列、度量值、分区等）一个文件的方式保存，而不是每个表一个文件。该选择存储在文件夹中，`te` 会保留文件夹已有的任何布局；你可以在 Tabular Editor 3 中选择布局。当保存操作将标准布局写入每个对象使用一个文件的文件夹时，`te`会显示警告。
+
 使用 `--serialization pbip` 输出的内容可直接在 Power BI Desktop 中打开，且会以源模型命名（`SpaceParts.pbip`，而不是 `Model.pbip`）。保存到已包含项目的文件夹时，只会补充缺失的文件，已存在的所有内容——Report 的页面、主题、连接以及项目标识——都会原样保留。因此，如果一次保存没有任何改动，在版本控制下项目也不会产生变化。
 
 验证会保护保存操作：如果模型存在 Analysis Services 会拒绝的名称冲突（`TE0012` / `TE0013`，参见 [validate](#validate)），则不会写入，除非传入 `--force` 或 `--skip-validation`。
 
 > [!TIP]
-> 使用 `te save-as -o <path> -s <Workspace> -d <model>` 可将远程模型下载到磁盘。如果你只需要原始字节数据（不做 DAX 语义分析），配合 `--skip-validation` 可实现最快的直通下载。
+> 使用 `te save-as -o <path> -s <workspace> -d <model>` 可将远程模型下载到磁盘。如果你只需要原始字节数据（不做 DAX 语义分析），配合 `--skip-validation` 可实现最快的直通下载。
 
 ### init
 
@@ -228,7 +230,7 @@ te init ./existing-dir --force                            # Overwrite non-empty 
 
 ## 模型编辑
 
-会修改内容的命令（`set`、`add`、`remove`、`move`，以及 `script`、`macro run`、`bpa run --fix`）**默认以干运行方式执行**：不带 `--save` 时，命令会报告将会发生哪些更改，并丢弃这些更改（`Dry run - nothing saved.`）。 Add --save to persist.`）。添加 `--save`以保存到源位置，或使用`--save-to <path>`写入其他位置。对于`set`、`add`、`remove`、`move`、`script`和`bpa run`，更改输出会按每个发生更改的对象，以统一 diff 的形式呈现；可用 `--stat`或`--name-only`切换（与默认的`--diff`互斥），也可通过`te config set mutationOutput diff|stat|name-only|none`设置长期默认值。 JSON 输出始终包含完整的 changes 数组。如果变更引入了新的 DAX 验证错误，则会拒绝保存，除非使用`--force\`。
+会修改内容的命令（`set`、`add`、`remove`、`move`，以及 `script`、`macro run`、`bpa run --fix`）**默认以干运行方式执行**：不带 `--save` 时，命令会报告将会发生哪些更改，并丢弃这些更改（`Dry run - nothing saved. Add --save to persist.`）。 Add --save to persist.`--save`--save`--save-to <path>`--save-to <path>`set`set`add`add`remove`remove`move`move`script`script`bpa run`bpa run`--stat`--stat`--name-only`--name-only`--diff`--diff`te config set mutationOutput diff|stat|name-only|none`te config set mutationOutput diff|stat|name-only|none`--force`--force\`。
 
 ### set
 
@@ -240,7 +242,7 @@ te init ./existing-dir --force                            # Overwrite non-empty 
 - `--unset <Name>` - 清除某个属性；可重复使用（`--unset description --unset displayFolder`）。 `-p Name=null` 是简写。适用于所有可以为空的属性(包括文本属性)，也适用于对象值属性(`SortByColumn`、`RefreshPolicy`); `-p "Annotations[key]=null"` 会移除一个注解。数值、布尔值以及固定选项属性无法清空，尝试清空会被拒绝。
 - `--format <PropertyName>` - 格式化该表达式属性（可重复使用；会根据属性自动检测 DAX 或 M）。格式化器会调整 `--long`（减少换行）的行为；而 `--no-space-after-function` 需要在 DAX 属性上配合 `--format` 使用。 `--semicolons` 不能与 `--format` 一起使用：存储在模型中的表达式始终使用逗号分隔，因此分号方言永远无法解析它；如需格式化以分号编写的 DAX，请改用 [`te util format-dax --semicolons`](#util-format-dax)。
 - `--update-schema` - 将表的列与其源架构同步：为源中新增加的列按检测到的类型创建列，对类型发生偏移的列重新设定类型，并保留每个现有列的其他所有信息（名称、说明、格式字符串、显示文件夹、排序依据列、可见性、注解、翻译、透视成员资格）。已删除的源列默认只会发出警告，除非使用 `--drop-removed-columns`（破坏性操作）。重命名后的源列会被视为“删除 + 新增”；请先用 `-p SourceColumn=<newName>` 重新映射它。计算表格和计算组不支持此操作；也不能与 `-p` 或 `--format` 组合使用。在未指定任何连接标志时，会从模型本身读取连接信息——即表分区绑定的数据源、写在表自身查询中的连接，或模型中唯一可用的数据源——而源表则取自分区绑定，找不到时回退到模型表名；当模型有多个可用源时，可用 `--data-source <name>` 进行选择。使用与 `te add` 共享的架构检测标志(`--source sql|lakehouse|warehouse`, `--endpoint`, `--connection-string`, `--source-database`, `--source-table`)显式命名连接时，总是以该显式命名为准。当无法推断源，或找不到源表时，错误信息会说明属于哪种情况，并指出它尝试查找的表名。
-- `-t, --type <kind>` - 用于在同一路径可能解析为多种对象类型时消除歧义（`度量值`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`分区`、`CalculationItem`）。
+- `-t, --type <kind>` - 用于在同一路径可能解析为多种对象类型时消除歧义（`Measure`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`Partition`、`CalculationItem`）。
 - `--save` / `--save-to <path>` - 保存更改。
 - `--diff` / `--stat` / `--name-only` - 更改输出的呈现方式（参见上面的说明）。
 - `--serialization <fmt>` - 保存时覆盖序列化格式（`tmdl`、`bim`（别名 `tmsl`）、`database.json`）。
@@ -499,7 +501,7 @@ te deps --unused --hidden                 # Only hidden, unused objects
 `te validate` 接受以下选项：
 
 - `--ci <fmt>` - 向 stderr 输出 CI 注解：`vsts`（别名 `azdo`、`azure-devops`）或 `github`（别名 `gh`）。 `none` 或空值表示不输出注解；任何其他值都会在命令运行前被拒绝。
-- `--trx <PATH>` - 将结果写入 VSTEST `.trx` 文件。
+- `--trx <path>` - 将结果写入 VSTEST `.trx` 文件。
 - `--errors-only` - `--no-warnings --no-antipatterns` 的简写：仅显示错误。
 - `--no-warnings` - 隐藏语义分析器发出的警告。
 - `--no-antipatterns` - 隐藏反模式建议（DAX 最佳实践提示）。
@@ -514,7 +516,7 @@ te validate --errors-only                 # Hide warnings and anti-pattern hints
 
 每条发现项都有一个稳定的代码，会显示在“错误”“警告”和“反模式”表的 **Code** 列中，也会出现在 JSON、`--ci` 注解和 `--trx` 中。当涉及手工编写的模型时，有三个代码值得了解：`TE0012`（同一表中的某列与某个度量值同名，或两列同名）和 `TE0013`（度量值名称跨表重复）都属于错误——Analysis Services 会拒绝加载此类模型，而 `te save-as` 也会拒绝写出此类模型，除非传入 `--force` 或 `--skip-validation`；`TE0014` 则是一个警告，表示某个 TMDL 文件夹缺少 `database.tmdl`，因此当前生效的兼容级别会替代模型所声明的兼容级别。该文件夹仍可加载，而且对于 `TE0014`，`te validate` 仍会以 `0` 退出；可像隐藏其他警告一样，使用 `--no-warnings` 或 `--errors-only` 将其隐藏。
 
-在 `--output-format json` 下，`te validate` 会输出共享的 findings JSON 文档（`summary` 加上扁平的 `findings[]` 数组），该格式也被 `te bpa run`、`te test run` 和 `te query` 共用——参见 @te-cli-findings。
+在 `--output-format json` 下，`te validate` 输出与 `te bpa run`、`te schemacheck`、`te test run` 和 `te query` 共享的共享发现结果 JSON 文档（`summary` 加上一个扁平的 `findings[]` 数组）— 请参阅 @te-cli-findings。
 
 > [!NOTE]
 > `te validate` 不支持 `--output-format csv`——CSV 会在一开始就被拒绝，并给出可操作的错误提示，而不是生成不完整的结果。验证输出使用 `text` 或 `json`。
@@ -531,7 +533,7 @@ te validate --errors-only                 # Hide warnings and anti-pattern hints
 - `--vpax <file>` - 从 `.vpax` 文件加载 VertiPaq分析器统计信息，以启用可感知 VPA 的规则。
 - `--allow-external-rules` - 允许从嵌入在模型注释中的 URL 获取 BPA 规则文件。
 - `--rule <id>` - 仅按 ID 运行指定规则(s)。可重复指定。
-- `--path <path-filter>` - 将分析限制为包含匹配对象的表。支持字面名称、容器关键字和通配符（例如 `'Sales'`、`'Sa*'`、`'Sales/度量值'`、`'*/Amount'`）。
+- `--path <path-filter>` - 将分析限制为包含匹配对象的表。支持字面名称、容器关键字和通配符（例如 `'Sales'`、`'Sa*'`、`'Sales/Measures'`、`'*/Amount'`）。
 - `--fix` - 应用修复表达式，在可能的情况下自动修复违规项。
 - `--save` - 应用修复后，将模型保存回原始位置。
 - `--save-to <path>` - 应用修复后，将模型保存到其他路径。
@@ -648,7 +650,7 @@ te bpa rules init --force
 
 - `te bpa rules add <id>` - 创建新规则。将每个属性作为命名选项传入：
   - `--name <text>` - 便于阅读的规则名称（必填）。
-  - `--scope <list>` - 规则适用的对象类型（以逗号分隔）：`度量值`、`Column`、`Table`、`Hierarchy`、`分区`、`Relationship`、`Role`、`Perspective`、`Culture` 等 (必填)。
+  - `--scope <list>` - 规则适用的对象类型（以逗号分隔）：`Measure`、`Column`、`Table`、`Hierarchy`、`Partition`、`Relationship`、`Role`、`Perspective`、`Culture` 等 (必填)。
   - `--expression <text>` - Dynamic LINQ 谓词。对于违反规则的对象，返回 `true`（必需）。
   - `--category <text>` - 分组标签（例如 `Performance`、`Naming`、`DAX Expressions`）。
   - `--severity <1|2|3>` - `1`（信息）、`2`（警告，默认）、`3`（错误）。
@@ -693,6 +695,72 @@ te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
 te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
 ```
 
+### schemacheck
+
+将模型中的每个表格与其读取的数据源进行比较，并报告不再匹配的列。`te schemacheck` 绝不会更改模型。要应用其发现的内容，请使用[`te set <table> --update-schema`](#set)。它取代了 Tabular Editor 2 的 `-SC` 标志；有关差异，请参阅[架构检查](xref:te-cli-migrate#schema-check)。
+
+`te schemacheck` 接受：
+
+- `<table>` - 可选：检查一个表。如果没有它，则会检查模型中的每个表格。
+- `--fail-on <severity>` - `error`（默认）或 `warning`。使用 `warning` 时，任何偏差都会导致运行失败。
+- `--ci <fmt>` - 将 CI 注释输出到 stderr：`vsts`（别名为`azdo`、`azure-devops`）或`github`（别名为`gh`）。
+- `--trx <path>` - 写入一个 VSTEST `.trx` 文件，每个发现对应一个结果。
+- `--source`、`--endpoint`、`--connection-string`、`--source-database`、`--source-table` - 对于单个表格，从其他位置读取架构。这些标志与[`te add -t Table`](#add)上的标志相同。`--source-table`本身仅更改源表的名称，并保留连接。
+
+您无需为连接命名：每个表格都会与其分区所绑定的数据源进行比较。运行`te`的计算机需要具备对这些数据源的网络访问权限和凭据。
+
+```bash
+te schemacheck                                        # Check every table
+te schemacheck Sales                                  # Check one table
+te schemacheck --fail-on warning                      # Fail on any drift
+te schemacheck --ci vsts --trx schema.trx             # Azure DevOps annotations and test results
+te schemacheck Sales --source-table dbo.fact_sales    # Compare Sales with another source table
+```
+
+#### 它报告的内容
+
+| 发现项 | 代码 | 严重程度 |
+| ---------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 表中没有列读取的源列。| `SCHEMA_SOURCE_COLUMN_ADDED` | 警告 |
+| 数据类型与其源列不同的列。| `SCHEMA_DATA_TYPE_CHANGED` | 警告 |
+| 源列已不存在的列。| `SCHEMA_MISSING_SOURCE_COLUMN` | 错误 |
+| 无法读取其查询的旧版 SQL 查询分区，例如，因为该分区为空或无法访问服务器。| `SCHEMA_SOURCE_QUERY_ERROR` | 错误 |
+| 源多次返回相同的列名。仅比较第一个。| `SCHEMA_DUPLICATE_SOURCE_COLUMN` | 信息 |
+| 表格未被检查。消息说明了原因。| `SCHEMA_TABLE_SKIPPED` |信息|
+
+除非您传递 `--fail-on warning`，否则将以代码 `1` 退出错误，并以代码 `0` 退出警告。这是 Tabular Editor 2 使用的规则，因此迁移的管道将保留其当前的结果。使用 `--ci vsts` 时，仅包含警告的运行将报告 **SucceededWithIssues**。
+
+已重命名的源列被报告为一列缺失列和一列添加列。使用 `te set <table>/<column> -p SourceColumn=<new name>` 将模型列指向新名称，这将保留该列的属性以及引用该列的 DAX。
+
+#### 它检查的内容
+
+`te schemacheck` 检查具有旧版 SQL 查询分区的表、具有 Power Query (M) 分区的表以及 Direct Lake 或 Fabric 表。以下表格列在**未检查**下，并附有原因，且运行绝不会失败：
+
+- 计算表格和计算组
+- 带有`TabularEditor_SkipSchemaCheck`注释的表格
+- 没有列绑定到源列的表
+- 位于 CLI 无法读取的源上的表格，例如 Oracle、ODBC、SharePoint 或 CLI 无法跟踪的 Power Query 表达式
+
+SQL Server OLE DB 提供程序（`SQLOLEDB` 和 `MSOLEDBSQL`）上的旧分区只能在 Windows 上检查。在 Linux 和 macOS 上，此类表会被报告为错误。
+
+#### 批注
+
+`te schemacheck` 遵循 Tabular Editor 2 的架构检查批注，详见[忽略对象](xref:importing-tables-te2#ignoring-objects)：
+
+- 表上的 `TabularEditor_SkipSchemaCheck` 会跳过该表。拼写错误的 `TabularEditor_SkipSkemaCheck` 也可以使用。
+- 表上的 `TabularEditor_IgnoreSourceColumnAdded` 会隐藏添加的源列。
+- 表或列上的 `TabularEditor_IgnoreDataTypeChange` 会隐藏数据类型更改。
+- 表或列上的 `TabularEditor_IgnoreMissingSourceColumn` 会隐藏缺失的源列。
+- 模型上的 `TabularEditor_SchemaCheckNoWarnings` 会将每个警告都转换为错误，因此任何漂移都会导致每次运行失败。`--fail-on warning` 对单次运行也会执行相同的操作。
+
+`TabularEditor_AddFalseWhereClause` 被忽略，与 Tabular Editor 3 一样：查询按原样发送。
+
+#### 输出
+
+支持文本和 JSON 输出。在`--output-format json`下，`te schemacheck`会输出共享的发现结果 JSON 文档，其中包含三个额外的计数：`tablesChecked`、`tablesSkipped`和`tablesWithDrift` - 请参阅@te-cli-findings。
+
+`--trx` 文件在 **Schema Checks** 套件下每个发现都有一个结果：对于错误为“失败”，对于警告为“警告”，对于未检查的表为“不确定”。没有偏差的运行将写入单个通过的结果。
+
 ### vertipaq
 
 分析 VertiPaq 存储统计信息。
@@ -706,7 +774,9 @@ te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
 - `--export <file.vpax>` - 将 VertiPaq 统计信息导出为 `.vpax` 文件，以便离线分析。
 - `--import <file.vpax>` - 加载之前导出的 `.vpax` 文件并进行离线分析。
 - `--obfuscate` - 对导出的 VPAX 中的名称和表达式进行混淆处理。
-- `--top <N>`、`--stats`、`--annotate`、`--save`。
+- `--top <N>`, `--stats`.
+- `--annotate` - 将统计数据作为每个表和列的注释（大小、基数等）进行准备。其本身仅报告其将写入的内容。
+- `--push` - 将由 `--annotate` 准备的注释写入服务器上的模型。需要`--annotate`，并且不能与`--import`组合使用。
 - `--auth <method>` - 连接到远程模型时，用于覆盖默认的身份验证方法。
 
 ```bash
@@ -715,6 +785,7 @@ te vertipaq Sales                # Stats limited to the Sales table
 te vertipaq --all                # Tables, columns, relationships, partitions
 te vertipaq --export stats.vpax
 te vertipaq --import stats.vpax  # Analyze offline
+te vertipaq --annotate --push    # Write the statistics to the model as annotations
 ```
 
 ### 格式化表达式
@@ -772,7 +843,7 @@ echo "Info(Model.Name);" | te script --inline -
 te script --file fix.cs --validate               # Compile-only, no model needed
 ```
 
-如果有任何脚本调用 `Error(...)`，本次运行将以非零状态退出，在 JSON 中报告 `"success": false`，并在结束时提示本次运行已完成但存在错误；如果指定了 `--save`，脚本此前已做出的更改仍会保存。 `Warning(...)` 和 `Info(...)` 永远不会导致运行失败。在 Windows 上，`DisableCSharpScripts` 管理员策略会直接拒绝执行 `te script`；参见 [管理员策略](xref:te-cli-config#administrator-policies)。
+在任何脚本调用 `Error(...)` 的运行中，退出码为非零，以 JSON 格式报告 `"success": false`，并以“运行已完成，但存在错误”的提示结束；如果提供了 `--save`，则仍会保存脚本已进行的更改。`Warning(...)` 和 `Info(...)` 永远不会导致运行失败。在 Windows 上，`DisableCSharpScripts` 管理员策略会直接拒绝 `te script`，并且 `BlockUnsafeScripts` 会拒绝访问模型外部的脚本，例如读取文件或调用 Web 服务。请参阅[管理员策略](xref:te-cli-config#administrator-policies)。
 
 > [!IMPORTANT]
 > 如果你要迁移旧脚本，需要了解以下两个行为差异：
@@ -834,7 +905,7 @@ te macro remove MyMacro
 
 #### macro init
 
-在配置的路径下创建一个空的宏文件（`{\"Actions\":[]}`）。当解析后的宏文件尚不存在时，只需运行一次该命令。
+在配置的路径下创建一个空的宏文件（`{"Actions":[]}`）。当解析后的宏文件尚不存在时，只需运行一次该命令。
 
 `te macro init` 接受：
 
@@ -884,9 +955,10 @@ te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form w
 - `--deploy-role-members`
 - `--deploy-shared-expressions`
 - `--create-only`
+- `--skip-linguistic-metadata` - 保留目标模型的人工智能指令、人工智能数据架构和问答同义词，而不是用模型自身的相应内容替换它们。当有人使用**为 AI 准备数据**在 Power BI 服务中维护这些内容时，请使用此选项。也适用于 `--deploy-full`。
 - `--skip-bpa` - 完全跳过 BPA 门控检查。
 - `--fix-bpa` - 如果规则定义了修复表达式，则自动修复 BPA 违规项。
-- `--bpa-rules <PATH>` - 可重复指定；仅针对本次部署覆盖 CLI 配置中的 `bpa.rules`。除非 `bpa.builtInRules` 为 `false`，否则内置规则仍会生效。
+- `--bpa-rules <path>` - 可重复指定；仅针对本次部署覆盖 CLI 配置中的 `bpa.rules`。除非 `bpa.builtInRules` 为 `false`，否则内置规则仍会生效。
 - `--force`：跳过交互式确认。
 - `--ci <fmt>`：`vsts`（别名 `azdo`、`azure-devops`）或 `github`（别名 `gh`）；无法识别的值会被直接拒绝。
 - `-p, --profile <name>` - 一次性使用已保存的 @te-cli-auth 配置文件。
@@ -899,6 +971,7 @@ te deploy -m ./model --target-server MY.SERVER.COM --target-database my-model --
 te deploy -m ./model --target-server my-workspace --target-database my-model > deploy.tmsl         # Dry run: TMSL only
 te deploy -s src-workspace -d src-model --target-server dst-workspace --target-database copy --execute   # Remote to remote
 te deploy --local --target-server my-workspace --target-database my-model --execute                # Publish a Desktop model
+te deploy -m ./model --target-server my-workspace --target-database my-model --skip-linguistic-metadata --execute   # Keep the AI instructions set up in the service
 ```
 
 > [!IMPORTANT]
@@ -949,8 +1022,7 @@ te refresh --apply-refresh-policy Sales --execute       # Apply Sales' increment
 
 - `--suite <path>` - 测试套件目录（默认：`.te-tests/`）。
 - `--tag <tag>` - 仅运行带有此标签的测试。
-- `--fail-on <severity>` - `error`（默认）或 `warning`。
-- `--ci <fmt>`, `--trx <PATH>` - CI 标注和 TRX 输出。
+- `--ci <fmt>`, `--trx <path>` - CI 标注和 TRX 输出。
 
 ```bash
 te test run --ci github --trx results.trx
@@ -969,7 +1041,11 @@ te test run --tag revenue
 te test init --example             # Scaffold an example suite
 te test spec                       # Print the full assertion format reference
 te test init --from-model --model ./my-model  # Generate stubs from your measures
+te test snapshot -o baseline.json            # Capture every measure's value
+te test snapshot --diff baseline.json        # Compare against the baseline
 ```
+
+`te test snapshot` 将快照写入名为 `-o, --output-file` 的文件，或使用 `--diff <path>` 与基线进行比较；两者之一是必需的。
 
 ## 连接和身份验证
 
@@ -1054,7 +1130,7 @@ JSON 输出包含 `success`、`formatted` 和 `errors`。对于模型中已有�
 
 ### util format-m
 
-格式化独立的 M/Power Query 表达式。 `-` 从标准输入读取；没有针对特定语言的选项。格式错误的表达式——例如未闭合的字符串——会被 Report 为失败，退出代码为非零，并原样返回原始文本；绝不会在不提示的情况下返回被截短的结果。
+格式化松散的 M/Power Query 表达式。`-` 从 stdin 读取；没有特定于语言的选项。行在 80 个字符处换行，与 `te set --format` 用于 M 的方式相同。格式错误的表达式（例如未终止的字符串）将被报告为失败，并返回非零退出代码，原始文本保持不变，绝不会悄然缩短结果。
 
 ```bash
 te util format-m "let x = 1 in x"
@@ -1140,7 +1216,7 @@ te completion fish
 | 退出  | 含义                                                                                                                                |
 | --- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `0` | 成功。                                                                                                                               |
-| `1` | 通用失败（参数无效、命令失败、验证错误、身份验证失败、BPA gate 在严重性 >= error 时失败、`te script` 运行中脚本 Report 了错误、服务器接受了 `te deploy`，但对象存在错误）。用于 `te diff`：发现差异。 |
+| `1` | 一般性失败（参数无效、命令失败、验证错误、身份验证失败、BPA 关卡在严重性 >= 错误的级别上失败、发现错误的 `te schemacheck` 运行（或与 `--fail-on warning` 的任何偏差）、脚本报告错误的 `te script` 运行、服务器接受但存在对象错误的 `te deploy`）。对于 `te diff`：发现差异。|
 | `2` | 仅适用于 `te diff`：比较时发生错误，因此差异状态未知。                                                                                                  |
 
 如需在 CI 管道中进行更细致的控制，可将退出代码与 `--ci <vsts/github>` 注释以及 `--trx` 结果文件结合使用——参见 @te-cli-cicd。
@@ -1151,5 +1227,5 @@ te completion fish
 - @te-cli-install - 安装并设置 CLI。
 - @te-cli-auth - 进行身份验证并管理连接。
 - @te-cli-config - 配置文件、BPA 门禁和变更后行为。
-- @te-cli-findings - validate、bpa run、test run 和 query 共享的 findings JSON。
+- @te-cli-findings - 由 validate、bpa run、schemacheck、test run 和 query 共享的发现结果 JSON。
 - @te-cli-migrate - TE2 → TE3 标志映射。

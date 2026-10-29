@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI（有限公开预览）
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,8 +52,8 @@ CLI 将命令分为 10 类。每个命令族都对应语义模型生命周期中
 | [模型初始化和保存](xref:te-cli-commands#model-initialization-and-save) | 保存、转换和初始化模型                | [`te save-as`](xref:te-cli-commands#save-as)、[`te init`](xref:te-cli-commands#init)                                                                                                    |
 | [模型编辑](xref:te-cli-commands#model-editing)                     | 获取/设置属性，添加/删除/移动对象         | [`te set`](xref:te-cli-commands#set)、[`te add`](xref:te-cli-commands#add)、[`te remove`](xref:te-cli-commands#remove)、[`te move`](xref:te-cli-commands#move)                            |
 | [检视](xref:te-cli-commands#inspection)                          | 列出对象、搜索、比较差异、分析依赖关系        | [`te list`](xref:te-cli-commands#list)、[`te find`](xref:te-cli-commands#find)、[`te diff`](xref:te-cli-commands#diff)、[`te deps`](xref:te-cli-commands#deps)                            |
-| [分析与质量](xref:te-cli-commands#analysis-and-quality)             | 验证、运行 BPA、格式化 DAX 和 M、分析存储 | [`te validate`](xref:te-cli-commands#validate)、[`te bpa run`](xref:te-cli-commands#bpa-run)、[`te util`](xref:te-cli-commands#utilities)、[`te vertipaq`](xref:te-cli-commands#vertipaq) |
-| [执行](xref:te-cli-commands#execution)                           | 运行 DAX 查询、C# Script 和宏     | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te 宏`](xref:te-cli-commands#macro)                                                             |
+| [分析与质量](xref:te-cli-commands#analysis-and-quality) | 验证、运行 BPA、检查源架构漂移、格式化 DAX 和 M、分析存储 | [`te validate`](xref:te-cli-commands#validate)、[`te bpa run`](xref:te-cli-commands#bpa-run)、[`te schemacheck`](xref:te-cli-commands#schemacheck)、[`te util`](xref:te-cli-commands#utilities)、[`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [执行](xref:te-cli-commands#execution)                           | 运行 DAX 查询、C# Script 和宏     | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro)                                                             |
 | [部署与刷新](xref:te-cli-commands#deployment-and-refresh)           | 部署到 Workspace，触发刷新，应用刷新策略  | [`te deploy`](xref:te-cli-commands#deploy)、[`te refresh`](xref:te-cli-commands#refresh)                                                                                                |
 | [测试](xref:te-cli-commands#testing)                             | 断言测试、快照、A/B 比较             | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                         |
 | [连接与身份验证](xref:te-cli-commands#connection-and-authentication)  | 连接到 Workspace，管理身份验证和配置文件  | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)       |
@@ -92,7 +92,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> 在预览结束日期（2026-10-31）前 14 天内，无论 `hidePreviewNotice` 如何设置，每次执行命令时该横幅都会再次出现。这可确保在 CLI 停止运行之前，你能提前看到醒目的警告。
+> 在**预览结束日期**（2026-12-31）**前 14 天内**，无论 `hidePreviewNotice` 如何，横幅都会在每个命令中再次显示。这可确保您在 CLI 停止运行之前看到明显的警告。
 
 ## 许可概览
 

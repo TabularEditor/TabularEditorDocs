@@ -48,7 +48,7 @@ table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 
 ## Agregar medidas
 
-`AddMeasure()` crea y devuelve una nueva medida en una tabla. El primer parámetro es el nombre, el segundo es una expresión DAX y el tercero es la carpeta de visualización. Todos los parámetros, excepto el primero, son opcionales.
+`AddMeasure()` crea y devuelve una nueva `Measure` en una tabla. El primer parámetro es el nombre, el segundo es una expresión DAX y el tercero es la carpeta de visualización. Todos los parámetros, excepto el primero, son opcionales.
 
 Captura el objeto devuelto en una variable para establecer propiedades adicionales. Este patrón es el mismo en todos los métodos `Add*`.
 
