@@ -20,6 +20,7 @@ Actions (exactly one per invocation):
   --baseline     seed the status file from the existing translations (offline)
   --migrate-blobs  record sourceBlob for status entries that only have a sourceHash (offline)
   --merge-status OURS THEIRS  rebuild the status files entry by entry after merging a translation branch (offline)
+  --apply-renames FROM TO  move translations of English files renamed between two commits (offline)
   --self-test    offline test suite (no key, no network)
   --probe        check service types and languages against the API
   --dump-orders  write the exact request bodies to a directory instead of sending
@@ -2027,6 +2028,61 @@ def cmd_merge_status(langs: list[str], ours_ref: str, theirs_ref: str, run: GitR
         status["failures"], _ = merge_entries(base["failures"], ours["failures"], theirs["failures"])
         save_status(lang, status)
         print(f"{lang}: {taken} status entries taken from {theirs_ref}, the others from {ours_ref}")
+
+
+def content_renames(from_sha: str, to_sha: str, run: GitRunner = run_git) -> list[tuple[str, str]]:
+    """(old, new) paths relative to content/ of every English file git detects as renamed between two commits."""
+    prefix = f"{CONTENT_DIR.as_posix()}/"
+    proc = run(["git", "diff", "--find-renames", "--name-status", "-z", from_sha, to_sha, "--", prefix])
+    if proc.returncode != 0:
+        raise SystemExit(
+            f"git diff {from_sha} {to_sha} failed: {proc.stderr.decode('utf-8', errors='replace').strip()}"
+        )
+    fields = proc.stdout.decode("utf-8").split("\0")
+    renames: list[tuple[str, str]] = []
+    i = 0
+    while i < len(fields) and fields[i]:
+        # Renames and copies carry two paths, every other status one.
+        if fields[i][0] == "R":
+            renames.append((fields[i + 1].removeprefix(prefix), fields[i + 2].removeprefix(prefix)))
+        i += 3 if fields[i][0] in "RC" else 2
+    return renames
+
+
+def cmd_apply_renames(langs: list[str], from_ref: str, to_ref: str, run: GitRunner = run_git) -> None:
+    """Move each language's translation of an English file renamed between FROM and TO to the new path and
+    rekey its status and failure entries. Without the move, the next run deletes the translation as an orphan
+    and translates the page again at its new path. A translation that already exists at the new path is kept
+    and the old one is left for the next run to remove."""
+    if not in_git_work_tree(run):
+        raise SystemExit("--apply-renames needs a git work tree.")
+    renames = content_renames(resolve_git_ref(from_ref, run), resolve_git_ref(to_ref, run), run)
+    for lang in langs:
+        status = load_status(lang)
+        moved, rekeyed = 0, 0
+        kept: list[str] = []
+        for old, new in renames:
+            source, target = target_file(lang, old), target_file(lang, new)
+            if target.exists():
+                if source.exists():
+                    kept.append(f"{old} -> {new}")
+                continue
+            if source.exists():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                source.replace(target)
+                moved += 1
+                print(f"  {lang}: moved {old} -> {new}")
+            for section in ("files", "failures"):
+                if old in status[section]:
+                    status[section][new] = status[section].pop(old)
+                    rekeyed += 1
+        if moved or rekeyed:
+            save_status(lang, status)
+        print(
+            f"{lang}: {len(renames)} renamed English files, {moved} translations moved, {rekeyed} status entries rekeyed"
+        )
+        for pair in kept:
+            print(f"  kept          {pair}: a translation already exists at the new path")
 
 
 # ---------------------------------------------------------------------------
@@ -4444,6 +4500,69 @@ def selftest_merge_status(t: SelfTest) -> None:
         t.check("failures are merged the same way", set(merged["failures"]) == {"b.md"}, str(merged["failures"]))
 
 
+def selftest_apply_renames(t: SelfTest) -> None:
+    t.section("--apply-renames: translations follow renamed English files")
+    with git_mini_repo({"seg.md": SEG_MD}):
+        h = seg_harness()
+        seed_seg_translation(h)
+        seg_entry = load_status("es")["files"]["seg.md"]
+        status = load_status("es")
+        status["failures"]["guide.md"] = {"error": "x", "sourceHash": "g0"}
+        save_status("es", status)
+        write_text(target_file("es", "index.md"), "# Inicio\n")
+        write_text(target_file("es", "home.md"), "# Casa\n")
+        commit_all("Spanish")
+        base = git("rev-parse", "HEAD")
+        (CONTENT_DIR / "docs").mkdir()
+        git("mv", "content/seg.md", "content/docs/seg.md")
+        write_text(CONTENT_DIR / "docs" / "seg.md", SEG_MD.replace("**Ctrl+R**", "**Ctrl+Shift+R**"))
+        git("mv", "content/guide.md", "content/docs/guide.md")
+        git("mv", "content/index.md", "content/home.md")
+        write_text(CONTENT_DIR / "toc.yml", MINI_FILES["toc.yml"].replace("href: guide.md", "href: docs/guide.md"))
+        commit_all("English moves")
+        out = captured(lambda: cmd_apply_renames(["es"], base, "HEAD"))
+        status = load_status("es")
+        t.check(
+            "a renamed and edited file's translation moves with its status entry",
+            target_file("es", "docs/seg.md").exists()
+            and target_file("es", "docs/seg.md").read_text(encoding="utf-8") == SEG_MD_ES
+            and not target_file("es", "seg.md").exists()
+            and status["files"].get("docs/seg.md") == seg_entry
+            and "seg.md" not in status["files"],
+            out,
+        )
+        t.check(
+            "the moved translation is planned as outdated and updated from changed segments",
+            ("docs/seg.md", "outdated") in h.plan().to_submit
+            and isinstance(
+                file_delta(h.config, "es", "docs/seg.md", "outdated", status["files"]["docs/seg.md"], PlanOptions()),
+                Delta,
+            ),
+            str(h.plan().to_submit),
+        )
+        t.check(
+            "a failure entry is rekeyed when there is no translation to move",
+            "docs/guide.md" in status["failures"] and "guide.md" not in status["failures"],
+            str(status["failures"]),
+        )
+        t.check(
+            "an existing translation at the new path is kept",
+            target_file("es", "home.md").read_text(encoding="utf-8") == "# Casa\n"
+            and target_file("es", "index.md").exists()
+            and "kept          index.md -> home.md" in out,
+            out,
+        )
+        t.check("an edited file that was not renamed is left alone", "toc.yml" not in out, out)
+        out = captured(lambda: cmd_apply_renames(["es"], "HEAD", "HEAD"))
+        t.check("no renames -> nothing moved", "0 renamed English files, 0 translations moved" in out, out)
+    with mini_repo():
+        t.expect_exit(
+            "--apply-renames outside a git work tree exits",
+            lambda: cmd_apply_renames(["es"], "HEAD~1", "HEAD"),
+            "needs a git work tree",
+        )
+
+
 def cmd_self_test(config: TranslationConfig) -> int:
     t = SelfTest()
     selftest_corpus(t, config)
@@ -4455,6 +4574,7 @@ def cmd_self_test(config: TranslationConfig) -> int:
     selftest_code_placeholders(t)
     selftest_http_client(t)
     selftest_merge_status(t)
+    selftest_apply_renames(t)
     print(f"\nself-test: {t.passed} passed, {len(t.failures)} failed")
     for name in t.failures:
         print(f"  FAILED: {name}")
@@ -4494,6 +4614,13 @@ def build_parser() -> argparse.ArgumentParser:
         metavar=("OURS", "THEIRS"),
         help="after merging translation branch THEIRS into OURS: rebuild each status file entry by entry, taking "
         "THEIRS only where it changed an entry since the merge base (offline)",
+    )
+    actions.add_argument(
+        "--apply-renames",
+        nargs=2,
+        metavar=("FROM", "TO"),
+        help="move each translation of an English file renamed between commits FROM and TO to the new path and "
+        "rekey its status entries (offline)",
     )
     actions.add_argument("--self-test", action="store_true", help="offline self-test (no key, no network)")
     actions.add_argument("--probe", action="store_true", help="check service types and languages against the API")
@@ -4581,6 +4708,9 @@ def main() -> int:
         return 0
     if args.merge_status:
         cmd_merge_status(langs, *args.merge_status)
+        return 0
+    if args.apply_renames:
+        cmd_apply_renames(langs, *args.apply_renames)
         return 0
     if args.baseline:
         cmd_baseline(langs, sources, passthrough, args.baseline_ref, args.overwrite_baseline, args.repair_existing)
