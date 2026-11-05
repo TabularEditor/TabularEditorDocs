@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: 身份验证与连接
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -61,7 +61,7 @@ te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx
 te auth login --identity     # Alias: -I
 ```
 
-服务主体登录成功后，CLI 会**缓存凭据**，这样后续所有 `te` 命令都能静默获取令牌，无需再次传入 `-u / -p / -t`，也不用设置 `AZURE_CLIENT_*` 环境变量。传入 `--save=false` 可进行一次性登录且不更新缓存，或者运行 `te auth logout` 清除缓存。
+成功登录服务主体后，CLI **缓存凭据**，以便后续的每个 `te` 命令都可以静默获取令牌 - 无需重新传递 `-u / -p / -t` 或设置 `AZURE_CLIENT_*` 环境变量。运行 `te auth logout` 以清除缓存。要使用服务主体而不将其凭据存储在计算机上，请跳过 `te auth login`：设置 `AZURE_CLIENT_ID`、`AZURE_CLIENT_SECRET` 和 `AZURE_TENANT_ID`，并将 `--auth env` 传递给每个命令。
 
 > [!WARNING]
 > 在命令行中直接传递密钥会使其暴露在进程列表和 shell 历史记录中。优先使用 `AZURE_CLIENT_SECRET` 环境变量，或通过 stdin 配合 `-p -` 管道传入密钥。

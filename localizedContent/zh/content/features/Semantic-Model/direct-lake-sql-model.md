@@ -1,6 +1,6 @@
----
+﻿---
 uid: direct-lake-sql-model
-title: SQL 语义模型上的 Direct Lake
+title: Direct Lake on SQL 语义模型
 author: Morten Lønskov
 updated: 2026-10-12
 applies_to:
@@ -18,55 +18,57 @@ applies_to:
 ---
 
 # Direct Lake 语义模型
-
-SQL 语义模型上的 Direct Lake 可通过 SQL 端点直接连接到存储在 [Fabric 中的 OneLake](https://learn.microsoft.com/fabric/onelake/onelake-overview) 中的数据源。
+Direct Lake on SQL 语义模型通过 SQL 端点直接连接到存储在 [Fabric 中的 OneLake](https://learn.microsoft.com/fabric/onelake/onelake-overview) 中的数据源。 
 
 > [!IMPORTANT]
-> 自 [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md) 起，Tabular Editor 3 支持在 OneLake 上使用 Direct Lake，且在大多数情况下建议采用此方式。更多信息请参阅我们的 [Direct Lake 指南](xref:direct-lake-guidance)。
+> 自 [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md) 起，Tabular Editor 3 支持 Direct Lake on OneLake，在大多数情况下都建议使用此功能。有关详细信息，请参阅我们的[Direct Lake 指南](xref:direct-lake-guidance)文章。
 
-Tabular Editor 3 可以创建并连接此类模型。有关本主题的教程，请参阅我们的博客文章：[Direct Lake 语义模型：如何在 Tabular Editor 中使用它们](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/)。
-Tabular Editor 3 可以通过 Lakehouse 和 Warehouse SQL Endpoint 创建 Direct Lake 语义模型。
+Tabular Editor 3 可以创建此类模型并连接到此类模型。有关这方面的教程，请参阅我们的博客文章：[Direct Lake 语义模型：如何在 Tabular Editor 中使用它们](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/)。 
+Tabular Editor 3 可以使用湖仓和数据仓库 SQL 端点创建 Direct Lake 语义模型。 
 
-Tabular Editor 2 可以连接到 Direct Lake 语义模型，但不提供用于创建新表或 Direct Lake 语义模型的内置功能。这需要手动完成，或使用 C# Script 来实现。
+Tabular Editor 2 可以连接到 Direct Lake 语义模型，但没有任何内置功能可用于创建新表或 Direct Lake 语义模型。这需要手动完成或使用 C# 脚本完成。 
 
 > [!NOTE]
 > **Direct Lake 的限制**
-> Direct Lake 模型可进行的更改存在一些限制。有关完整列表，请参阅 [Direct Lake 的注意事项和限制](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。另见 [SQLBI 的这篇文章](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/)，了解如何在 Direct Lake 和导入模式之间做出选择。
+> 对 Direct Lake 模型可以进行的更改存在多项限制。请参阅[Direct Lake 的注意事项和限制](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)，了解完整列表。另请参阅[SQLBI 的这篇文章](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/)，了解有关在 Direct Lake 和导入模式之间进行选择的概述。
 
-## 在 Tabular Editor 3 中创建基于 SQL 的 Direct Lake 模型
+## 在 Tabular Editor 3 中创建 Direct Lake on SQL 模型
 
-在 Tabular Editor 3（3.15.0 或更高版本）中创建基于 SQL 的 Direct Lake 模型时，需要在创建模型时于 _New Model_ 对话框中勾选 Direct Lake 复选框进行指定。
+在 Tabular Editor 3 (3.15.0 或更高版本) 中创建 Direct Lake on SQL 模型时，必须在“_新建模型_”对话框中通过勾选“Direct Lake”复选框来指定。 
 
 ![Direct Lake 新建模型](~/content/assets/images/common/DirectLakeNewModelDialog.png)
 
-使用该复选框可确保设置 Direct Lake 特有的属性与注释，并将表的导入限制为 Direct Lake 支持的数据源。
+使用此复选框可确保设置 Direct Lake 特有属性和批注，并将表的导入限制为 Direct Lake 支持的源。 
 
 > [!NOTE]
-> 基于 SQL 的 Direct Lake 模型当前使用的排序规则与常规 Power BI 导入语义模型不同。这可能会导致在查询模型或在 DAX 代码中引用对象名称时得到不同的结果。更多信息见 Kurt Buhler 的这篇博文：[Power BI 中区分大小写的模型：影响与注意事项](https://data-goblins.com/power-bi/case-specific)。
+> Direct Lake on SQL 模型目前使用的排序规则与常规 Power BI 导入语义模型不同。这可能会导致在查询模型时或在 DAX 代码中引用对象名称时产生不同的结果。
+> 有关更多信息，请参阅 Kurt Buhler 的这篇博客文章：[Power BI 中的区分大小写模型：影响和注意事项](https://data-goblins.com/power-bi/case-specific)。
 
 > [!IMPORTANT]
-> 从 [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md) 开始，“新建模型”对话框中已移除 Direct Lake 复选框。如果在 SQL 上使用 Direct Lake，你必须[手动将模型的排序规则设置为与 Fabric Warehouse 的排序规则一致](xref:direct-lake-guidance#collation)。
+> 自 [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md) 起，“新建模型”对话框中已删除“Direct Lake”复选框。如果使用 Direct Lake on SQL，您必须[手动设置模型的排序规则，使其与 Fabric 仓库的排序规则相匹配](xref:direct-lake-guidance#collation)。
 
-## 为新模型和表导入设定框架
+## 构建新模型和表格导入
 
-Tabular Editor 3（3.15.0 或更高版本）会在首次部署时自动对模型执行框架化（刷新）。这是为了确保启用 Direct Lake 模式；否则模型会自动回退到 DirectQuery。
+Tabular Editor 3（3.15.0 或更高版本）在首次部署时自动对模型进行建模（刷新）。这是为了确保激活 Direct Lake 模式，否则模型将自动回退到 DirectQuery。
 
-此外，在导入新表后，Tabular Editor 3（3.15.0 或更高版本）会在你下次保存模型时对模型进行 framing（刷新）。该首选项位于 **Tools > Preferences > Model Deployment > Data Refresh** 下。
+此外，在导入新表时，Tabular Editor 3（3.15.0 或更高版本）会在下次保存模型时对其进行构架（刷新）。此首选项位于**工具 > 首选项 > 模型部署 > 数据刷新**下。
+
+
 
 ## 识别 Direct Lake 模型
+Tabular Editor 3 标题栏在模型名称后显示打开的模型的存储模式，例如 **(Direct Lake)**、**(DirectQuery)** 或 **(Import)**。如果模型包含多种表格模式，则标题栏显示 **(复合)**。TOM 资源管理器显示每个表的类型和模式（导入、DirectQuery、双重或 Direct Lake）。Direct Lake on SQL 模型不能包含处于导入、DirectQuery 或双重模式的表。
 
-Tabular Editor 顶部的标题栏会显示该 Tabular Editor 实例中当前打开的是哪种类型的模型。此外，TOM Explorer 会显示每张表的类型和模式（Import、DirectQuery、Dual 或 Direct Lake）。如果模型混用了多种表模式，标题栏将显示“混合”。目前，Direct Lake on SQL 模型无法包含处于 Import、DirectQuery 或 Dual 模式的表。
 
 ## 将 Direct Lake 模型转换为导入模式
 
-下面的 C# Script 会将现有模型转换为导入模式。如果你的模型对数据延迟的要求不高，无需 Direct Lake，或者你想避开 Direct Lake 模型的限制，但已经在 Fabric 中开始构建 Direct Lake 模型，那么这会很有用。
+以下 C# 脚本将现有模型转换为导入模式。如果您的模型的数据延迟要求不需要 Direct Lake，或者您想避免 Direct Lake 模型的限制，但已经开始在 Fabric 中构建一个 Direct Lake 模型，则此操作可能很有用。
 
-当 Tabular Editor 通过 XMLA endpoint 连接到语义模型后，即可运行该脚本。不过，Microsoft 不支持直接将更改保存回 Power BI/Fabric Workspace。为规避这一限制，建议使用“Model > Deploy...”选项。这样就可以将新转换的模型作为 Workspace 中的一个新实体进行部署。
+当 Tabular Editor 通过 XMLA 端点连接到语义模型时，可以运行该脚本。但是，Microsoft 不支持将更改直接保存回 Power BI/Fabric 工作区。为了规避这个问题，建议的方法是使用“模型 > 部署…”选项。这样，就可以将新转换的模型作为新实体部署到工作区中。
 
 > [!NOTE]
-> 部署新转换的导入模式模型后，你需要指定用于访问 Lakehouse 的凭据，才能将数据刷新到模型中。
+> 部署新转换的导入模式模型后，您需要指定访问 Lakehouse 的凭据，以便将数据刷新到模型中。
 
-### 将 Direct Lake 模型转换为导入模式的 C# Script
+### 用于将Direct Lake模型转换为导入模式的C#脚本
 
 ```csharp
 // **********************************************************************************

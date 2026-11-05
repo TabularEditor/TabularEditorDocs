@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: Automatización y scripts
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,7 +37,7 @@ te query -q "EVALUATE VALUES('Date'[Year])" --output-format csv
 te bpa run --output-format json
 ```
 
-Con `--output-format json`, `te validate`, `te bpa run`, `te test run` y `te query` comparten una misma estructura de documento JSON con un `summary`, un arreglo plano `findings[]` y `durationMs`; consulta @te-cli-findings para ver la estructura que debes procesar.
+En `--output-format json`, `te validate`, `te bpa run`, `te schemacheck`, `te test run` y `te query` comparten una forma de documento JSON con un `summary`, una matriz plana `findings[]` y `durationMs`. Consulte @te-cli-findings para ver la forma que se debe analizar.
 
 > [!NOTE]
 > `--output-format` y `--error-format` son independientes. Establecer `--output-format json` _no_ cambia stderr a JSON; usa `--error-format json` para eso. No hay cambio automático de formato cuando stdout se redirige; el valor predeterminado siempre es `text`, a menos que indiques lo contrario.
@@ -60,7 +60,7 @@ Todos los comandos de `te` finalizan con un código de estado predecible, para q
 | Salir | Significado                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `0`   | Éxito.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `1`   | Error genérico: argumentos inválidos, error al ejecutar el comando, errores de validación, error de autenticación, la comprobación de BPA falló con una severidad >= error, una ejecución de `te script` en la que un script llamó a `Error(...)`, o un `te deploy` que el servidor aceptó con errores de objeto. Para `te diff`: se encontraron diferencias (como en la convención de `diff`/`cmp`). |
+| `1` | Error genérico: argumentos no válidos, error en el comando, errores de validación, error de autenticación, error en la puerta BPA con una gravedad >= error, una ejecución de `te schemacheck` que encontró un error (o cualquier desviación con `--fail-on warning`), una ejecución de `te script` en la que un script llamó a `Error(...)`, un `te deploy` que el servidor aceptó con errores de objeto. Para `te diff`: se han encontrado diferencias (como la convención `diff`/`cmp`). |
 | `2`   | Solo para `te diff`: se produjo un error durante la comparación, por lo que el estado de las diferencias es desconocido.                                                                                                                                                                                                                                                                                                                                 |
 
 Combina los códigos de salida con las anotaciones `--ci <vsts\|github>` y `--trx <file>` para mostrar información detallada sobre los errores en CI; consulta @te-cli-cicd.
