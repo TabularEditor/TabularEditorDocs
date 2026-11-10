@@ -33,7 +33,13 @@ target/
 
 .vscode/
 .vs/
-.claude/
+# .claude/ is machine-local except the shared diagram skills and page templates
+/.claude/*
+!/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/create-docs-diagram-figma/
+!/.claude/skills/create-docs-diagram-html/
+!/.claude/templates/
 
 ###############
 #  temp file  #
