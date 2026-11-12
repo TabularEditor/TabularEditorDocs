@@ -2,7 +2,7 @@
 uid: object-properties-model
 title: Model properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -224,7 +224,7 @@ Models with calculation groups must have it enabled, because calculation groups 
 
 When `true`, Power BI discourages report authors from creating report-level measures in reports that connect live to this model.
 
-You can't set this property. The TOM library only allows it at an internal compatibility level (2147483647), so Tabular Editor and any other tool that uses TOM reject the change at every released compatibility level. Tabular Editor 3 doesn't show it in the Properties view.
+You can't set this property. Tabular Editor and any other tool that uses TOM reject the change at every released compatibility level. Tabular Editor 3 doesn't show it in the Properties view.
 
 ### Force Unique Names
 `ForceUniqueNames` · bool · Options · compatibility level 1465+
