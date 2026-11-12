@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: Column properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -286,7 +286,7 @@ Whether the engine builds an index on a text column, and whether it saves that i
 | `Explicit` | Build and save the index only when you run a refresh of type `RefreshIndex`. |
 | `Full` | Build and save the index during a full refresh, a recalculation or a `RefreshIndex` refresh. |
 
-In Power BI Desktop, whose engine supports compatibility level 1706, the engine accepts `Off` and `Auto` and rejects `Explicit` and `Full` with the error "Persist String Index feature is disabled". Recent versions of the TOM library only allow values other than `Auto` from compatibility level 1707.
+In Power BI Desktop, whose engine supports compatibility level 1706, the engine accepts `Off` and `Auto` and rejects `Explicit` and `Full` with the error "Persist String Index feature is disabled".
 
 <!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. -->
 
