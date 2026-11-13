@@ -1,30 +1,30 @@
 ---
 uid: perspectives-translations
 title: Perspectivas y traducciones
+author: Morten Lønskov
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       full: true
-      note: Incluye editores dedicados para perspectivas y traducciones
+      note: Includes dedicated Perspective and Translation Editors
 ---
 
 # Trabajar con perspectivas y traducciones
-
-Puedes agregar o editar perspectivas y traducciones (configuraciones regionales) existentes haciendo clic en el nodo Modelo del árbol del Explorador y buscando las propiedades correspondientes en la parte inferior de la cuadrícula de propiedades. Como alternativa, cuando el árbol del Explorador [muestre todos los tipos de objeto](../features/hierarchical-display.md), puedes ver y editar perspectivas, configuraciones regionales y roles directamente en el árbol.
+Puede añadir/editar perspectivas y traducciones (culturas) existentes haciendo clic en el nodo Modelo del árbol del explorador y localizando las propiedades pertinentes en la parte inferior de la cuadrícula de propiedades. Como alternativa, cuando tu árbol del Explorador [muestra todos los tipos de objetos](../features/hierarchical-display.md), puedes ver y editar perspectivas, culturas y roles directamente en el árbol.
 
 ![](~/content/assets/images/perspectives-translations-01.png)
 
-Puedes duplicar una perspectiva, un rol o una traducción existente abriendo el menú con el botón derecho y seleccionando "Duplicar". Esto creará una copia exacta del objeto, que después puedes modificar según tus necesidades.
+Puede duplicar una perspectiva, un rol o una traducción existentes abriendo el menú contextual con el botón derecho del ratón y eligiendo «Duplicar». Esto creará una copia exacta del objeto, que luego podrá modificar según sus necesidades.
 
-Para ver las perspectivas y/o traducciones "en acción", usa las dos listas desplegables de la barra de herramientas, en la parte superior de la pantalla. Al elegir una perspectiva, se ocultarán todos los objetos que no estén incluidos en esa perspectiva, mientras que al elegir una traducción se mostrarán todos los objetos del árbol usando los nombres traducidos y las carpetas de visualización. Al pulsar F2 para cambiar los nombres de los objetos o las carpetas de visualización, o al arrastrar objetos dentro del árbol, los cambios solo se aplicarán a la traducción seleccionada.
+Para ver las perspectivas o las traducciones «en acción», utiliza las dos listas desplegables de la barra de herramientas situada cerca de la parte superior de la pantalla. Al elegir una perspectiva, se ocultarán todos los objetos que no estén incluidos en esa perspectiva, mientras que al elegir una traducción se mostrarán todos los objetos del árbol utilizando los nombres traducidos y las carpetas de visualización. Al pulsar F2 para cambiar los nombres de los objetos/carpetas de visualización o al arrastrar objetos por el árbol, los cambios solo se aplicarán a la traducción seleccionada.
 
-## Perspectivas/traducciones en el contexto de un objeto
+## Perspectivas/traducciones dentro del contexto del objeto
+Cuando se seleccionan uno o más objetos en el árbol, encontrará 4 colecciones de propiedades especiales dentro de la cuadrícula de propiedades:
 
-Cuando se seleccionen uno o más objetos en el árbol, encontrarás 4 colecciones de propiedades especiales en la cuadrícula de propiedades:
+* **Títulos**, **Descripciones** y **Carpetas de visualización** muestran una lista de todas las configuraciones regionales del modelo, con los nombres traducidos, las descripciones y las carpetas de visualización, respectivamente, de los objetos seleccionados para cada configuración regional.
+* **Perspectivas** muestra una lista de todas las perspectivas del modelo, con una indicación de si los objetos seleccionados pertenecen o no a cada perspectiva.
 
-- **Títulos**, **Descripciones** y **Carpetas de visualización** muestran una lista de todas las configuraciones regionales del modelo y, para cada configuración regional, los nombres, descripciones y carpetas de visualización traducidos de los objetos seleccionados, respectivamente.
-- **Perspectivas** muestra una lista de todas las perspectivas del modelo, indicando si los objetos seleccionados pertenecen o no a cada perspectiva.
-
-Puedes usar estas colecciones en la cuadrícula de propiedades para cambiar las traducciones y la pertenencia a perspectivas de uno o más objetos a la vez.
+Puede utilizar estas colecciones en la cuadrícula de propiedades para cambiar las traducciones y las inclusiones de perspectivas de uno o más objetos a la vez.

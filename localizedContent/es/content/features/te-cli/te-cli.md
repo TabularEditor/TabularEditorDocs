@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Vista previa pública limitada)
 author: Peer Grønnerup
-updated: 2026-09-11
+updated: 2026-10-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,7 +52,7 @@ Consulta @te-cli-commands para ver una referencia completa de los comandos, con 
 | [Inicialización y guardado de modelos](xref:te-cli-commands#model-initialization-and-save) | Guardar, convertir e inicializar modelos                                                         | [`te save-as`](xref:te-cli-commands#save-as), [`te init`](xref:te-cli-commands#init)                                                                                                      |
 | [Edición del modelo](xref:te-cli-commands#model-editing)                                   | Obtener y establecer propiedades; añadir, quitar y mover objetos                                 | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move)                            |
 | [Inspección](xref:te-cli-commands#inspection)                                              | Listar objetos, buscar, comparar y analizar dependencias                                         | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps)                            |
-| [Análisis y calidad](xref:te-cli-commands#analysis-and-quality)                            | Validar, ejecutar BPA, dar formato a DAX y M, analizar el almacenamiento                         | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [Análisis y calidad](xref:te-cli-commands#analysis-and-quality) | Validar, ejecutar BPA, comprobar la desviación del esquema de origen, formatear DAX y M, analizar el almacenamiento | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te schemacheck`](xref:te-cli-commands#schemacheck), [`te util`](xref:te-cli-commands#utilities), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
 | [Ejecución](xref:te-cli-commands#execution)                                                | Ejecutar consultas DAX, C# Scripts y macros                                                      | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro)                                                            |
 | [Implementación y actualización](xref:te-cli-commands#deployment-and-refresh)              | Implementar en el Workspace, desencadenar una actualización y aplicar políticas de actualización | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh)                                                                                                  |
 | [Pruebas](xref:te-cli-commands#testing)                                                    | Pruebas de aserciones, instantáneas, comparación A/B                                             | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                            |
@@ -92,7 +92,7 @@ te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> El banner vuelve a aparecer con cada comando durante los **14 días anteriores a la fecha de finalización de la versión preliminar** (2026-10-31), independientemente de `hidePreviewNotice`. Esto garantiza que veas una advertencia antes de que la CLI deje de funcionar.
+> El banner vuelve a aparecer en cada comando dentro de los **14 días posteriores a la fecha de finalización de la versión preliminar** (31-12-2026), independientemente de `hidePreviewNotice`. Esto garantiza que vea una advertencia antes de que la CLI deje de funcionar.
 
 ## Perspectiva de licencias
 

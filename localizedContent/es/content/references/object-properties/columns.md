@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: Propiedades de las columnas
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -74,12 +74,12 @@ El tipo de datos de los valores de la columna. Determina cómo el motor almacena
 | `Decimal`    | Un número de punto fijo con cuatro cifras decimales. Se llama **Número decimal fijo** en Power BI. Úsalo para importes monetarios.               |
 | `DateTime`   | Una fecha y una hora. Power BI lo muestra como **Fecha**, **Hora** o **Fecha/hora**, según la cadena de formato.                                                 |
 | `Boolean`    | `TRUE` o `FALSE`.                                                                                                                                                                |
-| `Binario`    | Datos binarios, como los bytes de una imagen. DAX no puede usar valores binarios y Power BI no carga columnas binarias.                                          |
-| `Automático` | Solo para uso interno.                                                                                                                                                           |
+| `Binary`    | Datos binarios, como los bytes de una imagen. DAX no puede usar valores binarios y Power BI no carga columnas binarias.                                          |
+| `Automatic` | Solo para uso interno.                                                                                                                                                           |
 | `Unknown`    | El valor inicial de una columna nueva. El motor lo reemplaza por el tipo de datos real cuando la columna se guarda en el servidor.                               |
 | `Variant`    | Un valor que puede ser de distintos tipos. Se usa solo para medidas.                                                                                             |
 
-La **vista de propiedades** muestra algunos valores con un nombre más largo; por ejemplo, `Int64` como **Entero / Número entero (int64)** y `Decimal` como **Moneda / Número decimal fijo (decimal)**. La lista desplegable enumera todos los valores de la tabla, incluidos `Automático`, `Desconocido` y `Variant`, y los acepta todos. Para una columna de datos, elige uno de los siete primeros valores.
+La **vista de propiedades** muestra algunos valores con un nombre más largo; por ejemplo, `Int64` como **Entero / Número entero (int64)** y `Decimal` como **Moneda / Número decimal fijo (decimal)**. La lista desplegable enumera todos los valores de la tabla, incluidos `Automatic`, `Unknown` y `Variant`, y los acepta todos. Para una columna de datos, elige uno de los siete primeros valores.
 
 Para una columna de datos, el tipo de datos debe coincidir con los datos que devuelve la consulta de la partición; de lo contrario, el motor convierte los valores durante la actualización. Si una conversión falla, por ejemplo, con un texto que no es un número, la actualización falla. Cambiar el tipo de datos en Tabular Editor no modifica la consulta de la partición: si cambias una columna de `String` a `Int64`, haz también que la consulta devuelva números enteros, por ejemplo, cambiando el tipo en Power Query.
 
@@ -116,7 +116,7 @@ La agregación que las herramientas cliente aplican cuando el autor del Report a
 
 | Valor            | Significado                                                                                                                  |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Predeterminado` | La herramienta cliente lo decide. Las columnas numéricas se suman y las demás no se resumen. |
+| `Default` | La herramienta cliente lo decide. Las columnas numéricas se suman y las demás no se resumen. |
 | `None`           | No resumas. Power BI lo muestra como **No resumir**.                                         |
 | `Sum`            | La suma de los valores.                                                                                      |
 | `Min`            | El valor más pequeño.                                                                                        |
@@ -125,7 +125,7 @@ La agregación que las herramientas cliente aplican cuando el autor del Report a
 | `Average`        | El promedio de los valores.                                                                                  |
 | `DistinctCount`  | El número de valores distintos.                                                                              |
 
-En Power BI Desktop, una columna numérica con `Default` se comporta como `SUM`: se muestra con el icono Σ en el panel **Datos** y se agrega a un Visual como **SUM de** la columna. Una columna de texto con `Default` no se resume. Excel ignora esta propiedad y una tabla dinámica solo realiza agregaciones mediante medidas.
+En Power BI Desktop, una columna numérica con `Default` se comporta como `Sum`: se muestra con el icono Σ en el panel **Datos** y se agrega a un Visual como **SUM de** la columna. Una columna de texto con `Default` no se resume. Excel ignora esta propiedad y una tabla dinámica solo realiza agregaciones mediante medidas.
 
 Establece `None` en las columnas numéricas que no tengan sentido sumar, como claves, años, números de teléfono o precios unitarios; de lo contrario, los autores de Reports obtendrán totales como la suma de todos los ID de cliente. Consulta @kb.bpa-do-not-summarize-numeric.
 
@@ -139,10 +139,10 @@ La alineación horizontal de los valores de la columna en las herramientas clien
 
 | Valor            | Significado                                                                                                                                                        |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Predeterminado` | La herramienta cliente es quien decide. La mayoría de las herramientas alinean los números a la derecha y el texto a la izquierda. |
-| `Izquierda`      | Alinear a la izquierda.                                                                                                                            |
-| `Derecha`        | Alinear a la derecha.                                                                                                                              |
-| `Centro`         | Centrar los valores.                                                                                                                               |
+| `Default` | La herramienta cliente es quien decide. La mayoría de las herramientas alinean los números a la derecha y el texto a la izquierda. |
+| `Left`      | Alinear a la izquierda.                                                                                                                            |
+| `Right`        | Alinear a la derecha.                                                                                                                              |
+| `Center`         | Centrar los valores.                                                                                                                               |
 
 Power BI ignora esta propiedad. Los Visuales de tabla y matriz siempre alinean el texto a la izquierda y los números a la derecha; el resto de alineaciones se configuran en las opciones de formato del Visual. En una tabla dinámica de Excel conectada al modelo, las columnas alineadas a la derecha y al centro también se muestran con la alineación predeterminada.
 
@@ -307,7 +307,7 @@ Indica si el motor crea un índice en una columna de texto y si lo guarda para r
 | `Explicit` | Crea y guarda el índice solo cuando se ejecuta una actualización de tipo `RefreshIndex`.                             |
 | `Full`     | Crea y guarda el índice durante una actualización completa, un recálculo o una actualización de tipo `RefreshIndex`. |
 
-En Power BI Desktop, cuyo motor admite el nivel de compatibilidad 1706, el motor acepta `Off` y `Auto` y rechaza `Explicit` y `Full` con el error "Persist String Index feature is disabled". Las versiones recientes de la biblioteca TOM solo permiten valores distintos de `Auto` a partir del nivel de compatibilidad 1707.
+En Power BI Desktop, cuyo motor admite el nivel de compatibilidad 1706, el motor acepta `Off` y `Auto` y rechaza `Explicit` y `Full` con el error «La función de índice de cadenas persistente está deshabilitada».
 
 <!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. -->
 
@@ -350,7 +350,7 @@ La configuración de seguridad a nivel de objetos (OLS) de esta columna en cada 
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Default` | Ninguna configuración específica para la columna. La columna sigue la configuración de su tabla en el rol. En TOM, el rol no tiene ningún permiso de columna para esta columna. |
 | `None`    | Los usuarios del rol no pueden ver ni consultar la columna. Para ellos, la columna no existe y los Visuales que la usen muestran un error.                                                      |
-| `Leer`    | Los usuarios asignados al rol pueden ver y consultar la columna.                                                                                                                                                |
+| `Read`    | Los usuarios asignados al rol pueden ver y consultar la columna.                                                                                                                                                |
 
 Puedes cambiar el valor de cada rol. Cuando eliges `None` o `Read`, Tabular Editor agrega un permiso de columna para esa columna al permiso de tabla del rol para la tabla de la columna, y crea ese permiso de tabla si el rol aún no tiene uno. Cuando eliges `Default`, Tabular Editor quita el permiso de columna. También puedes establecer los mismos valores en el rol, en **Permisos de columna de OLS** (consulta @object-properties-security). Consulta @data-security-setup-ols.
 

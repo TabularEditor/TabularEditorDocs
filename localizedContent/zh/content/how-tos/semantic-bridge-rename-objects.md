@@ -1,8 +1,8 @@
 ---
 uid: semantic-bridge-rename-objects
-title: 在指标视图中重命名对象
+title: 重命名指标视图中的对象
 author: Greg Baldini
-updated: 2026-09-14
+updated: 2026-09-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,19 +17,19 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+# 重命名指标视图中的对象
 
-# 在指标视图中重命名对象
-
-这篇操作指南演示如何重命名指标视图中的字段。同样的模式适用于 Metric View 中的每个集合：`Fields`、`Measures`、`Dimensions` 和 `Joins`。
+本操作指南演示了如何重命名指标视图字段，相同的模式也适用于指标视图中的每个集合：`Fields`、`Measures`、`Dimensions` 和 `Joins`。
 
 > [!NOTE]
-> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本。较早版本不支持此处所示的 v1.1 指标视图功能。
+> 这些操作指南适用于 Tabular Editor 3.26.2 及更高版本，因为早期版本不支持此处所示的 v1.1 度量视图功能。
+> 原地重命名需要 Tabular Editor 3.27.0 或更高版本。
 
-[!INCLUDE [sample](includes/sample-metricview.md)]
+[!INCLUDE [示例](includes/sample-metricview.md)]
 
 ## 重命名字段
 
-将其赋值给对象的 `Name` 属性。对象的其他所有内容（其表达式、注释、显示名称、同义词和格式）都保持不变，同时它在集合中的位置也不会改变。
+对对象的 `Name` 属性进行赋值会重命名该对象，并保留该对象的其他属性（表达式、注释、显示名称、同义词和格式）及其在集合中的位置。
 
 ```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
@@ -57,25 +57,25 @@ Fields:
   Order Month
 ```
 
-集合的名称索引会随该对象一起更新，因此可以立即通过新名称访问该字段：
+集合索引立即更新：
 
 ```csharp
 var field = view.Fields["Order Month"];
 ```
 
-## 规则
+## 命名规则
 
-- **名称在其所属集合内必须保持唯一。** 如果将某个字段重命名为另一个字段已在使用的名称，则会引发 `ArgumentException`，并且对象和集合都不会发生更改。
-- **名称匹配不区分大小写**，与 Databricks SQL 保持一致。 `view.Fields["ORDER MONTH"]` 会找到上面重命名后的字段。即使重命名仅改变大小写，也仍然值得这样做，因为这会刷新存储的名称。
-- **重命名会应用到内存中的对象模型。** 要将其写出，请序列化该视图。
+- 名称在其集合中必须是唯一的。将字段重命名为另一个字段已使用的名称会引发 `ArgumentException`，并且对象和集合保持不变。
+- 名称匹配不区分大小写，遵循 Databricks SQL。`view.Fields["ORDER MONTH"]` 找到上述重命名的字段，仅大小写不同的重命名会更新存储的名称。
+- 重命名会更改内存中的对象模型。序列化视图以将其写入。
 
 ## 后续步骤
 
-- [向指标视图中添加对象](xref:semantic-bridge-add-object)
-- [从指标视图中移除对象](xref:semantic-bridge-remove-object)
+- [将对象添加到指标视图](xref:semantic-bridge-add-object)
+- [从指标视图中删除对象](xref:semantic-bridge-remove-object)
 - [将指标视图序列化为 YAML](xref:semantic-bridge-serialize)
 
-## 另见
+## 另请参阅
 
 - [指标视图对象模型](xref:semantic-bridge-metric-view-object-model)
 - @semantic-bridge-metric-view-validation

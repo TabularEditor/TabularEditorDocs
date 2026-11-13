@@ -2,7 +2,7 @@
 uid: object-properties-model
 title: Propiedades del modelo
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -99,7 +99,7 @@ Tabular Editor no usa esas operaciones. Si cambias `Collation` en la vista de pr
 
 ### Configuración regional
 
-`configuración regional` · string · Opciones
+`Culture` · string · Opciones
 
 El idioma y la región del modelo, en forma de nombre de configuración regional, como `en-US` o `de-DE`. El motor la utiliza para dar formato a los valores; por ejemplo, el separador decimal y el formato de fecha que usa la función `FORMAT` cuando no se le especifica una configuración regional, y para ordenar y comparar texto de forma sensible al idioma. También es el idioma de los nombres y descripciones no traducidos del modelo. Las traducciones para otros idiomas se representan como configuraciones regionales en la colección `Cultures`. Selecciona la configuración regional en la lista de la vista de propiedades.
 
@@ -111,7 +111,7 @@ Según Microsoft, no se puede cambiar la configuración regional una vez que la 
 
 La configuración regional que usa Power Query para interpretar valores durante la actualización, por ejemplo cuando convierte el texto `1.234,5` en un número o `03/04/2026` en una fecha. Es la misma configuración que **Configuración regional para importar**, dentro de **Configuración regional**, en Power BI Desktop.
 
-Establécela cuando los datos de origen usen un formato distinto de `configuración regional`, por ejemplo un modelo en `en-US` que carga archivos CSV escritos en `de-DE`. Si está vacío, Power Query usa `configuración regional`. Si se establece, tiene prioridad sobre `configuración regional` durante la actualización. Por ejemplo, en un modelo con `configuración regional` establecida en `en-US`, `Date.FromText ( "01/02/2024" )` devuelve el 2 de enero de 2024 cuando `SourceQueryCulture` está vacío, y el 1 de febrero de 2024 cuando es `nl-NL`. En un modelo nuevo guardado desde Power BI Desktop, contiene la **Configuración regional para importar** del archivo, por ejemplo `en-NL`.
+Establécela cuando los datos de origen usen un formato distinto de `Culture`, por ejemplo un modelo en `en-US` que carga archivos CSV escritos en `de-DE`. Si está vacío, Power Query usa `Culture`. Si se establece, tiene prioridad sobre `Culture` durante la actualización. Por ejemplo, en un modelo con `Culture` establecida en `en-US`, `Date.FromText ( "01/02/2024" )` devuelve el 2 de enero de 2024 cuando `SourceQueryCulture` está vacío, y el 1 de febrero de 2024 cuando es `nl-NL`. En un modelo nuevo guardado desde Power BI Desktop, contiene la **Configuración regional para importar** del archivo, por ejemplo `en-NL`.
 
 ### Modo predeterminado
 
@@ -189,8 +189,8 @@ Si un comando de actualización puede sobrescribir las variables de Data source 
 
 | Valor         | Significado                                                                 |
 | ------------- | --------------------------------------------------------------------------- |
-| `No permitir` | Se rechazan las sobrescrituras de variables de Data source. |
-| `Permitir`    | Se permiten las sobrescrituras de variables de Data source. |
+| `Disallow` | Se rechazan las sobrescrituras de variables de Data source. |
+| `Allow`    | Se permiten las sobrescrituras de variables de Data source. |
 
 <!-- TODO (not verifiable from TE3 source): Microsoft's TOM reference only says "Queries won't allow / allow data source variables override". Confirm what "data source variables" are and which commands can override them (possibly related to @refresh-overrides). -->
 
@@ -219,7 +219,7 @@ Cómo el motor crea y conserva los índices específicos de Direct Lake del mode
 | `Auto`           | Crea índices en memoria durante la carga de datos o la ejecución de consultas cuando es necesario, tal como lo describe la biblioteca TOM.                                     |
 | `Explicit`       | El modelo crea y conserva el índice solo cuando se solicita mediante una operación de _actualizar índices_. Los demás tipos de actualización no crean índices. |
 | `Full`           | El modelo crea y conserva índices como parte de las operaciones _refresh full_, _refresh calculate_ y _refresh indexes_.                                                       |
-| `Predeterminado` | Use el comportamiento predeterminado del modelo para la creación y persistencia de índices.                                                                                    |
+| `Default` | Use el comportamiento predeterminado del modelo para la creación y persistencia de índices.                                                                                    |
 
 Esta propiedad requiere un nivel de compatibilidad en versión preliminar y Tabular Editor 3 no la muestra en la vista de propiedades. Puedes establecerla en un C# Script.
 
@@ -243,7 +243,7 @@ Los modelos con grupos de cálculo deben tenerla habilitada, porque los grupos d
 
 Cuando es `true`, Power BI desaconseja a los autores de Report que creen medidas de nivel de Report en Report con conexión en vivo a este modelo.
 
-No puedes establecer esta propiedad. La biblioteca TOM solo lo permite en un nivel de compatibilidad interno (2147483647), por lo que Tabular Editor y cualquier otra herramienta que use TOM rechazan el cambio en todos los niveles de compatibilidad publicados. Tabular Editor 3 no la muestra en la vista de propiedades.
+No puedes establecer esta propiedad. Tabular Editor y cualquier otra herramienta que utilice TOM rechazan el cambio en todos los niveles de compatibilidad publicados. Tabular Editor 3 no la muestra en la vista Propiedades.
 
 ### Forzar nombres únicos
 

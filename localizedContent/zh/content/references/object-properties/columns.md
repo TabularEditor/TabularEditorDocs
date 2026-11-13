@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: 列属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -119,13 +119,13 @@ C# Script @script-create-date-table 会创建日期表，并为其中的名称�
 | `Default`       | 由客户端工具决定。数值列会求和，其他列不会汇总。                   |
 | `None`          | 不要汇总。 Power BI 会将其显示为 **Don't summarize**。 |
 | `Sum`           | 值的总和。                                      |
-| `最小值`           | 最小值。                                       |
-| `最大值`           | 最大值。                                       |
+| `Min`           | 最小值。                                       |
+| `Max`           | 最大值。                                       |
 | `Count`         | 值的数量。                                      |
-| `平均值`           | 值的平均值。                                     |
+| `Average`           | 值的平均值。                                     |
 | `DistinctCount` | 不同值的数量。                                    |
 
-在 Power BI Desktop 中，设置为 `默认` 的数值列会表现得像 `SUM`：它会在 **数据** 窗格中显示为 Σ 图标，并在添加到 Visual 时显示为该列的 **Sum of**。设置为 `Default` 的文本列不会被汇总。 Excel 会忽略此属性，而数据透视表只能通过度量值进行聚合。
+在 Power BI Desktop 中，设置为 `Default` 的数值列会表现得像 `Sum`：它会在 **数据** 窗格中显示为 Σ 图标，并在添加到 Visual 时显示为该列的 **Sum of**。设置为 `Default` 的文本列不会被汇总。 Excel 会忽略此属性，而数据透视表只能通过度量值进行聚合。
 
 对于不适合求和的数值列，例如键、年份、电话号码或单价，请将其设置为 `None`，否则报表作者可能会得到诸如所有客户 ID 的总和之类的总计。参见 @kb.bpa-do-not-summarize-numeric。
 
@@ -139,7 +139,7 @@ C# Script @script-create-date-table 会创建日期表，并为其中的名称�
 
 | 值        | 含义                            |
 | -------- | ----------------------------- |
-| `默认`     | 由客户端工具决定。大多数工具会将数字右对齐，将文本左对齐。 |
+| `Default`     | 由客户端工具决定。大多数工具会将数字右对齐，将文本左对齐。 |
 | `Left`   | 左对齐。                          |
 | `Right`  | 右对齐。                          |
 | `Center` | 将值居中对齐。                       |
@@ -307,7 +307,7 @@ BPA 规则 @kb.bpa-date-table-exists 会标记以下模型：没有日历、没�
 | `Explicit` | 仅当运行 `RefreshIndex` 类型的刷新时，才会生成并保存索引。    |
 | `Full`     | 在完全刷新、重新计算或执行 `RefreshIndex` 刷新时生成并保存索引。 |
 
-在支持 1706 兼容级别的 Power BI Desktop 中，引擎接受 `Off` 和 `Auto`，并拒绝 `Explicit` 和 `Full`，同时报错“Persist String Index feature is disabled”。较新的 TOM 库版本仅从 1707 兼容级别开始允许使用 `Auto` 以外的值。
+在 Power BI Desktop 中，其引擎支持兼容级别 1706，该引擎接受 `Off` 和 `Auto`，并拒绝 `Explicit` 和 `Full`，显示错误“持久化字符串索引功能已禁用”。
 
 <!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. -->
 
@@ -350,16 +350,16 @@ Excel 不再将其用于钻取：在 Excel 数据透视表中，无论 `TableDet
 | --------- | ---------------------------------------------------- |
 | `Default` | 没有列专用设置。该列遵循其表在该角色中的设置。在 TOM 中，该角色未针对该列定义列权限。        |
 | `None`    | 该角色中的用户无法查看或查询该列。对他们来说，该列就像不存在一样，使用该列的 Visual 会显示错误。 |
-| `读取`      | 该角色中的用户可以查看并查询该列。                                    |
+| `Read`      | 该角色中的用户可以查看并查询该列。                                    |
 
-你可以为每个角色更改该值。选择 `无` 或 `读取` 时，Tabular Editor 会将该列的列权限添加到角色在该列所属表上的表格权限中；如果该角色尚未设置该表格权限，则会创建一个。选择 `默认` 时，Tabular Editor 会移除列权限。你也可以在角色的 **OLS 列权限** 下设置相同的值（参见 @object-properties-security）。参见 @data-security-setup-ols。
+你可以为每个角色更改该值。选择 `None` 或 `Read` 时，Tabular Editor 会将该列的列权限添加到角色在该列所属表上的表格权限中；如果该角色尚未设置该表格权限，则会创建一个。选择 `Default` 时，Tabular Editor 会移除列权限。你也可以在角色的 **OLS 列权限** 下设置相同的值（参见 @object-properties-security）。参见 @data-security-setup-ols。
 
 你不能将一个角色的行级安全性与另一个角色的对象级安全性组合使用。如果用户同时属于这种角色组合，引擎会在查询时返回错误。
 
 在 SQL Server 2025 Analysis Services 中观察到的情况是，这些设置会按以下方式组合：
 
-- `默认` 遵循表格设置：当角色的表格权限为 `读取` 时，该列可见；当其为 `无` 时，整个表都会被隐藏，包括此列
-- 列的限制不能比其所属表更宽松；当表为 `无` 时，引擎会拒绝将该列设置为 `读取`
+- `Default` 遵循表格设置：当角色的表格权限为 `Read` 时，该列可见；当其为 `None` 时，整个表都会被隐藏，包括此列
+- 列的限制不能比其所属表更宽松；当表为 `Read` 时，引擎会拒绝将该列设置为 `None`
 - 当用户属于多个都使用 OLS 的角色时，权限会累加；只要其中任一角色允许，用户就能看到表或列
 - 同一角色中的行级安全性和对象级安全性会协同工作。例如，即使角色通过 OLS 隐藏了某个表，该表上的行筛选仍会筛选相关表
 
@@ -431,7 +431,7 @@ Sales[Quantity] * Sales[Unit Price]
 该值有以下两种格式之一：
 
 - `Table[Column]`，表名不加引号，用于表示表达式从其他表中获取的列，例如在 `SUMMARIZE ( 'Date', 'Date'[Year] )` 中为 `Date[Year]`
-- `[Column]` 用于表示表达式创建的列，例如在 `ADDCOLUMNS ( ..., "Sales Amount", ...` 中为 `[Sales Amount]`…… )`，或对于表构造函数或 `UNION`，则为 `[Value]\`
+- `[Column]` 用于表示表达式创建的列，例如在 `[Sales Amount]` 中为 `ADDCOLUMNS ( ..., "Sales Amount", ... )`…… )`[Value]`UNION`UNION`[Value]\`
 
 ### 名称自动推断
 
@@ -466,7 +466,7 @@ Alternate Of 需要 1460 或更高的兼容级别。它不会作为单独的对�
 
 `BaseTable` · 表 · 选项
 
-该列所统计行数的明细表。将其与 `Summarization` 的 `COUNT` 配合使用，用于存储明细行数的列，使引擎能够从聚合表直接回答 `COUNTROWS ( Sales )`。
+该列所统计行数的明细表。将其与 `Summarization` 的 `Count` 配合使用，用于存储明细行数的列，使引擎能够从聚合表直接回答 `COUNTROWS ( Sales )`。
 
 设置 `BaseColumn` 或 `BaseTable` 之一。设置 `BaseTable` 会清除 `BaseColumn`，并将 `Summarization` 设为 `Count`；而将 `Summarization` 更改为任何其他值则会清除 `BaseTable`。只有当 `Summarization` 为 `Count` 时，**属性视图**才会显示 `BaseTable`。
 
