@@ -1344,8 +1344,8 @@
       "status": "translated"
     },
     "references/object-properties/columns.md": {
-      "sourceHash": "sha256:ad8d5949aeeb063589faa8dad1fc7ad32f7e5b4081901af99db80e2362654d6d",
-      "sourceBlob": "7f9de93c50705171f0ea1580c988c21ff4c23019",
+      "sourceHash": "sha256:bfda6ecc45a3b8fc151cee3a8ab73d0509f484e2967a9a82abde1bf670016d69",
+      "sourceBlob": "0f8f7fb76644ad90393852004335df9e6140e7a3",
       "status": "translated"
     },
     "references/object-properties/common-properties.md": {
@@ -1379,13 +1379,13 @@
       "status": "translated"
     },
     "references/object-properties/model.md": {
-      "sourceHash": "sha256:b101b856fcb7d2e9040b2fffa33d8fb712a65abbe20d37b332981031e1178bce",
-      "sourceBlob": "bd64cb58342640fb5998aaf98cf6fb50c5648728",
+      "sourceHash": "sha256:0b22b9d33bd8df5260fe81d90ad03f9ac24bb041c367522a41d24e1f4a8d10a5",
+      "sourceBlob": "a11d1fce81c37565081cd44a6cc46bde06d935a0",
       "status": "translated"
     },
     "references/object-properties/partitions.md": {
-      "sourceHash": "sha256:77568919d2c1bb8e7ab595a3ceb5e763f07bb6720148e36e9fc45dd3b50991a1",
-      "sourceBlob": "99eb9dd8860b5e474841385803e43cd5e874ec3e",
+      "sourceHash": "sha256:c846817be04037cdd6e46282faaf52c1f5b16a974681ad8e6a1db5d6aa56bf2d",
+      "sourceBlob": "ed5efd384e2c99398f0a670d87de7dd191b3ed6d",
       "status": "translated"
     },
     "references/object-properties/perspectives-cultures.md": {

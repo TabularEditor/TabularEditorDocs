@@ -2,7 +2,7 @@
 uid: object-properties-partitions
 title: Propiedades de la partición
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,7 +37,7 @@ Una partición define de dónde procede una parte de los datos de una tabla. Tod
 | Partición de entidad                                | `Entity`       | Una entidad con nombre, como una tabla Delta en un Lakehouse o en un Warehouse. Las tablas Direct Lake usan este tipo. |
 | Partición por intervalo de la política              | `PolicyRange`  | Un intervalo de fechas de la política de actualización incremental de la tabla. El motor crea estas particiones.       |
 
-Todos los tipos comparten las propiedades descritas en [Propiedades de todas las particiones](#propiedades-de-todas-las-particiones). Las secciones siguientes enumeran las propiedades específicas de cada tipo.
+Todos los tipos comparten las propiedades descritas en [Propiedades de todas las particiones](#properties-of-all-partitions). Las secciones siguientes enumeran las propiedades específicas de cada tipo.
 
 ## Propiedades de todas las particiones
 
@@ -114,8 +114,8 @@ Para los modelos de DirectQuery en Analysis Services: si la partición contiene 
 | Valor            | Significado                                                                                              |
 | ---------------- | -------------------------------------------------------------------------------------------------------- |
 | `Full`           | La partición contiene todos los datos.                                                   |
-| `Muestra`        | La partición contiene una muestra de los datos para usarla mientras se diseña el modelo. |
-| `Predeterminado` | La partición usa el `DefaultDataView` del modelo.                                        |
+| `Sample`        | La partición contiene una muestra de los datos para usarla mientras se diseña el modelo. |
+| `Default` | La partición usa el `DefaultDataView` del modelo.                                        |
 
 El Tabular Object Model (TOM) solo define estos tres valores. Según la documentación de Microsoft sobre el modo DirectQuery, la característica **Establecer como muestra** del diseñador de modelos de Visual Studio no se admite actualmente. Power BI no usa vistas de datos, así que deje esta propiedad en su valor predeterminado en los modelos de Power BI y Fabric.
 
@@ -132,7 +132,7 @@ El modo de almacenamiento de la partición, que determina cómo accede el motor 
 | `Dual`           | La partición actúa como Import o DirectQuery, según cuál produzca la mejor consulta en un modelo compuesto. Normalmente se usa para tablas de dimensiones relacionadas tanto con tablas de hechos importadas como con tablas de hechos en DirectQuery. Nivel de compatibilidad 1455+.                                                                           |
 | `DirectLake`     | Los datos se leen directamente de tablas Delta en OneLake y se cargan en memoria bajo demanda. Solo en Fabric. Se usa con particiones de entidad. Nivel de compatibilidad 1604+. No está disponible en las ediciones de Tabular Editor que no admiten Direct Lake. Consulta @direct-lake-guidance. |
 | `Push`           | Los datos se envían a la partición a través de la API REST de Power BI, como en un modelo semántico de tipo push. No hay ninguna consulta de origen. Solo el servicio de Power BI lo admite.                                                                                                                                                                    |
-| `Predeterminado` | La partición usa el `DefaultMode` del modelo. Consulta @object-properties-model.                                                                                                                                                                                                                                                                                   |
+| `Default` | La partición usa el `DefaultMode` del modelo. Consulta @object-properties-model.                                                                                                                                                                                                                                                                                   |
 
 El modo se establece por partición y normalmente todas las particiones de una tabla tienen el mismo modo. La principal excepción es una tabla híbrida, en la que una directiva de actualización incremental importa las particiones históricas y mantiene la más reciente en modo DirectQuery (consulta `Mode` en [política de actualización](#refresh-policy)).
 
@@ -169,9 +169,7 @@ El tipo de partición, que se establece al crearla. Para cambiar el tipo, crea u
 | `Entity`           | Una partición de entidad que lee una entidad con nombre, como una tabla en un Lakehouse. Direct Lake usa este tipo.                    |
 | `PolicyRange`      | Una partición generada por una política de actualización incremental.                                                                                  |
 | `CalculationGroup` | La partición de una tabla de un grupo de cálculo. No contiene ningún origen; el motor la rellena a partir de los elementos de cálculo. |
-| `Inferida`         | Una partición para la que el motor genera la consulta automáticamente. Nivel de compatibilidad 1563+.                                  |
-
-TOM también define el valor `Parquet` para un nivel de compatibilidad interno que Microsoft no publica, por lo que no aparece en tus modelos.
+| `Inferred`         | Una partición para la que el motor genera la consulta automáticamente. Nivel de compatibilidad 1563+.                                  |
 
 <!-- TODO (not verifiable from TE3 source): which kind of table or model feature creates Inferred partitions. TOM only says "populated by executing a query generated by the system" (CL 1563+), and TE3 has no special handling for it. Same open question as on @object-properties-tables. -->
 
@@ -285,11 +283,11 @@ El tamaño del período que cubre la partición.
 
 | Valor       | Significado                                                |
 | ----------- | ---------------------------------------------------------- |
-| `Día`       | Un día.                                    |
-| `Mes`       | Un mes natural.                            |
-| `Trimestre` | Un trimestre natural.                      |
-| `Año`       | Un año natural.                            |
-| `Inválido`  | No se ha establecido ninguna granularidad. |
+| `Day`       | Un día.                                    |
+| `Month`       | Un mes natural.                            |
+| `Quarter` | Un trimestre natural.                      |
+| `Year`       | Un año natural.                            |
+| `Invalid`  | No se ha establecido ninguna granularidad. |
 
 Los períodos recientes suelen ser pequeños (días o meses) y se combinan en otros mayores (trimestres y, después, años) a medida que salen de la ventana de actualización incremental.
 
