@@ -2,7 +2,7 @@
 uid: deploy-current-model
 title: Implementar el modelo cargado
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,22 +13,24 @@ applies_to:
 
 # Implementar el modelo cargado
 
-La implementación envía el modelo que tienes abierto a un servidor, ya sea creando una base de datos nueva o sobrescribiendo una existente. Así es como llevas a un servidor un modelo almacenado en un archivo `.bim` o en una carpeta, y cómo lo promocionas de un entorno a otro.
+La implementación transfiere el modelo que tiene abierto a un servidor, ya sea creando una nueva base de datos o sobrescribiendo una existente. Es la forma de llevar un modelo almacenado en un archivo `.bim` o en una carpeta a un servidor, y de trasladar un modelo de un entorno a otro.
 
-Abre el asistente desde **Model > Deploy...**, elige el servidor y la base de datos de destino y, después, decide qué parte del modelo quieres enviar.
+Abra el asistente con **Modelo > Implementar...**, elija el servidor y la base de datos de destino y, a continuación, elija qué parte del modelo desea enviar.
 
 ## Qué controla cada opción
 
-La utilidad del asistente está en lo que te permite _dejar intacto_ en el destino. Cada opción implica decidir si el destino conserva su propia versión de algo:
+El valor del asistente reside en lo que te permite *dejar tal cual* en el destino. Cada opción es una decisión sobre si el destino mantiene su propia versión de algo:
 
-- **Implementar la estructura del modelo** envía los metadatos del modelo. Esta es la implementación en sí; si la desmarcas, no queda nada por hacer.
-- **Implementar Data sources** envía los Data sources explícitos. Desmárcala para que el destino conserve sus propias cadenas de conexión y credenciales, que suele ser lo que quieres al pasar de desarrollo a pruebas.
-- **Implementar particiones de tabla** sincroniza las particiones con los metadatos del modelo. Desmárcala para dejar intactas las particiones existentes y los datos que contienen. Si está activada, las particiones del destino que no estén en el modelo se eliminan junto con sus datos.
-  - **Implementar particiones regidas por políticas de actualización incremental** aparece cuando la opción anterior está activada y te permite implementar todas las particiones _excepto_ las que genera una política de actualización incremental.
-- **Implementar roles del modelo** envía los roles definidos en el modelo. Desmárcala para conservar los roles del destino tal como están.
-  - **Implementar miembros de roles del modelo** envía la asignación de miembros a los roles. Los miembros de los roles suelen administrarse en el servidor en lugar de en los metadatos, así que es normal desmarcar esta opción.
+- **Implementar estructura del modelo** envía los metadatos del modelo. Esta es la implementación en sí; si se desmarca, no queda nada por hacer.
+- **Implementar orígenes de datos** envía orígenes de datos explícitos. Desmárquela para conservar las cadenas de conexión y las credenciales propias del destino, que suele ser lo que se desea al pasar del entorno de desarrollo al de pruebas.
+- **Implementar particiones de tabla** sincroniza las particiones con los metadatos del modelo. Desmárquela para dejar intactas las particiones existentes y los datos que contienen. Si está habilitada, las particiones del destino que no están en el modelo se eliminan junto con sus datos.
+  - **Implementar particiones regidas por directivas de actualización incremental** aparece cuando la opción anterior está habilitada y le permite implementar todas las particiones *excepto* las que genera una directiva de actualización incremental.
+- **Implementar expresiones compartidas** envía las expresiones compartidas del modelo. Desmárquela para conservar las expresiones compartidas propias del destino. Esta opción está disponible en Tabular Editor 3.
+- **Implementar roles de modelo** envía los roles definidos en el modelo. Desmárcala para mantener los roles del destino tal como están.
+  - **Implementar miembros de roles de modelo** envía la pertenencia a los roles. Los miembros de los roles suelen gestionarse en el servidor en lugar de en los metadatos, por lo que es normal desmarcar esta opción.
+- **Implementar metadatos lingüísticos (sinónimos de preguntas y respuestas, instrucciones de IA y esquema de datos de IA)** envía los metadatos lingüísticos de cada cultura. Desmárquelo para conservar los sinónimos de preguntas y respuestas, las instrucciones de IA y el esquema de datos de IA configurados en el servicio Power BI.
 
-@deployment cubre todo esto en detalle, junto con el script TMSL que genera el asistente, lo que una implementación hace con los datos que ya existen en el destino y cómo implementar desde la línea de comandos o desde un pipeline.
+@deployment trata todo esto en detalle, junto con el script TMSL que genera el asistente, lo que hace una implementación con los datos que ya están en el destino y cómo implementar desde la línea de comandos o un «pipeline».
 
 > [!NOTE]
-> Implementar no es lo mismo que guardar. Si abriste el modelo desde un servidor, **Archivo > Guardar** guarda los cambios en _esa_ base de datos, como se describe en @connect-ssas. Usa la implementación cuando el destino esté en otro lugar.
+> Implementar no es lo mismo que guardar. Si ha abierto el modelo desde un servidor, **Archivo > Guardar** vuelve a escribir en *esa* base de datos, como se describe en @connect-ssas. Use la implementación cuando el destino esté en otro lugar.

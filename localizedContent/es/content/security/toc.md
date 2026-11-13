@@ -1,11 +1,8 @@
 # @security-privacy
+# @ai-compliance
 
-# Legal
-
-## @te3-eula
-
-## @third-party-notices
-
+# Aspectos legales
+## @terms
+## @avisos-de-terceros
 ## @privacy-policy
-
 ## @gdpr-delete

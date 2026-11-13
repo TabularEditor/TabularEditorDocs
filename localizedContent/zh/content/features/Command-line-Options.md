@@ -380,6 +380,8 @@ foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 
 如果你希望架构检查以特定方式处理表和列，也可以为它们添加注释。[更多信息请参见此处](xref:importing-tables-te2#ignoring-objects)。
 
+Tabular Editor CLI 使用[`te schemacheck`](xref:te-cli-commands#schemacheck) 运行相同的检查，该命令还会检查 Power Query (M) 和 Direct Lake 表。
+
 ## 命令行输出与退出代码
 
 命令行会根据所使用的开关以及执行过程中遇到的事件，提供各类详细信息。退出代码在 [2.7.4 版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4) 中引入。
