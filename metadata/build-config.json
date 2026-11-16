@@ -49,6 +49,7 @@
     "_comment": "Directories that contain translatable content (markdown and HTML files)",
     "directories": [
       "features",
+      "cli",
       "getting-started",
       "how-tos",
       "references",
