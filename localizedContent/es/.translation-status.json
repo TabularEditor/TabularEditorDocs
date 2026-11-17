@@ -12,6 +12,71 @@
       "sourceBlob": "6bc4e98388d99e464e12eef2a70520fc9e10baeb",
       "status": "translated"
     },
+    "cli/includes/te-cli-preview-notice.md": {
+      "sourceHash": "sha256:78d64bd2aeab6acb614ba5793a522de28cc7726655789e476ee50e267f561a46",
+      "sourceBlob": "e9dbcc25c59eec001190d9f25f394af5650861ce",
+      "status": "translated"
+    },
+    "cli/index.md": {
+      "sourceHash": "sha256:3809890dbd0821611a2300d79384b21997019d0cccf0e713d81ff2862da558b0",
+      "sourceBlob": "8c5719ca18d018255956508c615509bc0d198e68",
+      "status": "translated"
+    },
+    "cli/te-cli-auth.md": {
+      "sourceHash": "sha256:7c546bae4a34fb5d356b48977274fdb0b106bc862f89d09b59fa857ac78a962e",
+      "sourceBlob": "3348d29f26b1a64a4154901896bb2f0195124d21",
+      "status": "translated"
+    },
+    "cli/te-cli-automation.md": {
+      "sourceHash": "sha256:4816d4daf4c65c11daeb777419b0d539d79055120d6516ab432b7567961fc8f9",
+      "sourceBlob": "f67dfbba4a2cedad06b78a5f3cf17da282f5a858",
+      "status": "translated"
+    },
+    "cli/te-cli-cicd.md": {
+      "sourceHash": "sha256:3407d54cf37c954a2e53d190c14f84502a04f602c3d1605d1e040f479eb57381",
+      "sourceBlob": "af1939b97325f2b52f820a21f08a53d50af5994e",
+      "status": "translated"
+    },
+    "cli/te-cli-commands.md": {
+      "sourceHash": "sha256:3002131eec0fe7c2f8e318c6bdb7227792ff24970f88738da20a4e900af573eb",
+      "sourceBlob": "3e0f0ae6fa8f17b069755ac733e72e9a460b5076",
+      "status": "translated"
+    },
+    "cli/te-cli-config.md": {
+      "sourceHash": "sha256:b9778fc392a9c0f2ec9631c4bda5a71fbb8161103102b2e10f923a0f68205a64",
+      "sourceBlob": "cb3f4b80a49df21e8f49aee372a54bb3a2a56ae5",
+      "status": "translated"
+    },
+    "cli/te-cli-findings.md": {
+      "sourceHash": "sha256:7fbebd98ae9b0954f975e87b2d58ec49c888349ac4e51e5399fd87642dab8ce9",
+      "sourceBlob": "ebd0602375cc90e65a87a64313230be2c2336871",
+      "status": "translated"
+    },
+    "cli/te-cli-install.md": {
+      "sourceHash": "sha256:3846cb039ee6af3f7839e1dc9c3eb4581ae64d35ebba3155ce3e5c0e1e112fe8",
+      "sourceBlob": "7e2c09d12d14142c566a1bc0f2f7f165f5e75a3e",
+      "status": "translated"
+    },
+    "cli/te-cli-interactive.md": {
+      "sourceHash": "sha256:0c276940dcfc72aaed58827820de0b1e253113c0b10a97401cc5c44eb1928663",
+      "sourceBlob": "434b92b9def4a864b3aac654c1bf17a81faea23c",
+      "status": "translated"
+    },
+    "cli/te-cli-limitations.md": {
+      "sourceHash": "sha256:03f4d5fd792465b3ba3aa6e3f731937ca34648c5a8820936ad2b432da7dd66de",
+      "sourceBlob": "11470df38041c9efb886d4f233b7016f233aa243",
+      "status": "translated"
+    },
+    "cli/te-cli-migrate.md": {
+      "sourceHash": "sha256:1bb8b09850ad6534ba7da224d4fd26365b24f27ea1e181031619fdb926130478",
+      "sourceBlob": "92f4fc0f6b5a7ff13ecee6a6090d10c1f00cc721",
+      "status": "translated"
+    },
+    "cli/te-cli-skill.md": {
+      "sourceHash": "sha256:55eb8144d60ffde111240da39e89c8ea98390d868e79363c70024ddad541d8a9",
+      "sourceBlob": "fe2cbae27138b4ffa18c36a2b5df4e85c2c75b9e",
+      "status": "translated"
+    },
     "features/advanced-refresh.md": {
       "sourceHash": "sha256:3d00373433d7f4f8e01331d50c88cd8e11789d9114235a152cccf67ae4800397",
       "sourceBlob": "595d6fef56d10834789d1f8265472e19ae61ba47",
@@ -395,71 +460,6 @@
     "features/table-preview.md": {
       "sourceHash": "sha256:919ddbf231d1336651625f666704024ac80ce09b637d0c73ccb94aba492afc9e",
       "sourceBlob": "9d7d9bf467d7d9b87945f6318da3f2c158f3d1af",
-      "status": "translated"
-    },
-    "features/te-cli/includes/te-cli-preview-notice.md": {
-      "sourceHash": "sha256:78d64bd2aeab6acb614ba5793a522de28cc7726655789e476ee50e267f561a46",
-      "sourceBlob": "e9dbcc25c59eec001190d9f25f394af5650861ce",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-auth.md": {
-      "sourceHash": "sha256:7c546bae4a34fb5d356b48977274fdb0b106bc862f89d09b59fa857ac78a962e",
-      "sourceBlob": "3348d29f26b1a64a4154901896bb2f0195124d21",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-automation.md": {
-      "sourceHash": "sha256:4816d4daf4c65c11daeb777419b0d539d79055120d6516ab432b7567961fc8f9",
-      "sourceBlob": "f67dfbba4a2cedad06b78a5f3cf17da282f5a858",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-cicd.md": {
-      "sourceHash": "sha256:3407d54cf37c954a2e53d190c14f84502a04f602c3d1605d1e040f479eb57381",
-      "sourceBlob": "af1939b97325f2b52f820a21f08a53d50af5994e",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-commands.md": {
-      "sourceHash": "sha256:3002131eec0fe7c2f8e318c6bdb7227792ff24970f88738da20a4e900af573eb",
-      "sourceBlob": "3e0f0ae6fa8f17b069755ac733e72e9a460b5076",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-config.md": {
-      "sourceHash": "sha256:b9778fc392a9c0f2ec9631c4bda5a71fbb8161103102b2e10f923a0f68205a64",
-      "sourceBlob": "cb3f4b80a49df21e8f49aee372a54bb3a2a56ae5",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-findings.md": {
-      "sourceHash": "sha256:7fbebd98ae9b0954f975e87b2d58ec49c888349ac4e51e5399fd87642dab8ce9",
-      "sourceBlob": "ebd0602375cc90e65a87a64313230be2c2336871",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-install.md": {
-      "sourceHash": "sha256:3846cb039ee6af3f7839e1dc9c3eb4581ae64d35ebba3155ce3e5c0e1e112fe8",
-      "sourceBlob": "7e2c09d12d14142c566a1bc0f2f7f165f5e75a3e",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-interactive.md": {
-      "sourceHash": "sha256:0c276940dcfc72aaed58827820de0b1e253113c0b10a97401cc5c44eb1928663",
-      "sourceBlob": "434b92b9def4a864b3aac654c1bf17a81faea23c",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-limitations.md": {
-      "sourceHash": "sha256:03f4d5fd792465b3ba3aa6e3f731937ca34648c5a8820936ad2b432da7dd66de",
-      "sourceBlob": "11470df38041c9efb886d4f233b7016f233aa243",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-migrate.md": {
-      "sourceHash": "sha256:1bb8b09850ad6534ba7da224d4fd26365b24f27ea1e181031619fdb926130478",
-      "sourceBlob": "92f4fc0f6b5a7ff13ecee6a6090d10c1f00cc721",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli-skill.md": {
-      "sourceHash": "sha256:55eb8144d60ffde111240da39e89c8ea98390d868e79363c70024ddad541d8a9",
-      "sourceBlob": "fe2cbae27138b4ffa18c36a2b5df4e85c2c75b9e",
-      "status": "translated"
-    },
-    "features/te-cli/te-cli.md": {
-      "sourceHash": "sha256:3809890dbd0821611a2300d79384b21997019d0cccf0e713d81ff2862da558b0",
-      "sourceBlob": "8c5719ca18d018255956508c615509bc0d198e68",
       "status": "translated"
     },
     "features/tmdl.md": {

@@ -19,6 +19,7 @@
     "build": {
         "content": [
             { "files": "**/*.md", "src": "content/features", "dest": "features" },
+            { "files": "**/*.md", "src": "content/cli", "dest": "cli" },
             { "files": "**/*.md", "src": "content/getting-started", "dest": "getting-started" },
             { "files": "**/*.md", "src": "content/how-tos", "dest": "how-tos" },
             { "files": "**/*.md", "src": "content/references", "dest": "references" },

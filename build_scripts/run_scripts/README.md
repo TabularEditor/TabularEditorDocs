@@ -86,7 +86,7 @@ sign in at [tabulareditor.com](https://tabulareditor.com/download-tabular-editor
 download the archive for your platform and architecture, extract it,
 and put `te` on your PATH (or point `RUN_TE` at it).
 Full instructions, including verification, live in this repo's own docs:
-[te CLI install guide](../../content/features/te-cli/te-cli-install.md).
+[te CLI install guide](../../content/cli/te-cli-install.md).
 
 ## Usage
 
