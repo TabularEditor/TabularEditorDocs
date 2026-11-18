@@ -1,8 +1,8 @@
----
+﻿---
 uid: semantic-model-types
 title: Power BI 语义模型类型
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,7 +54,9 @@ Tabular Editor 支持多种不同的模型类型。下面概述了哪些模型�
 
 <a name="DirectLake">1</a> - 表分区必须是 Entity Partition，才能正常工作。 Direct Lake 模型的每个表只能有一个分区。 <a name="DirectLakeCalculated">2</a> - 计算表格不能引用 OneLake 上的 Direct Lake 表或列。支持计算组、假设分析参数和字段参数。
 
-<a name="TE3Prem">3</a> - 仅限 Tabular Editor 3 功能。通过 XMLA endpoint 执行的操作需要 Business 或 Enterprise 许可证。[更多信息](xref:editions)。 <a name="DirectLakeSQLCalculated">4</a> - SQL 上的 Direct Lake 仅支持计算组、假设分析参数和字段参数，它们会隐式创建计算表格。不支持常规计算表格。 <a name="DirectLakeCalcColumn">5</a> - 预览功能。 OneLake 上 Direct Lake 的计算列不会被物化，而是在当前用户的查询上下文中进行计算：它们遵循行级和对象级安全性，但不能用作关系键，也不会对 Report 筛选器或切片器作出响应。有关详细信息，请参阅 [Direct Lake 指南](xref:direct-lake-guidance)。
+<a name="TE3Prem">3</a> - 仅限 Tabular Editor 3 功能。通过 XMLA endpoint 执行的操作需要 Business 或 Enterprise 许可证。[更多信息](xref:editions)。
+<a name="DirectLakeSQLCalculated">4</a> - Direct Lake on SQL 仅支持计算组、假设分析参数和字段参数，这些参数会隐式创建计算表。不支持常规计算表。
+<a name="DirectLakeCalcColumn">5</a> - 预览功能。Direct Lake on OneLake 表上的计算列必须使用 `UserContext` 表达式上下文。它们在查询时进行评估，且不会物化，因此不能用作关系键。有关详细信息，请参阅[Direct Lake 指南](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake)。
 
 > [!NOTE]
 > 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。在此之前，许多建模操作都不受支持。见 [Power BI Desktop 限制](xref:desktop-limitations)。

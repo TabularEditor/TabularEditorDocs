@@ -2,7 +2,7 @@
 uid: dax-optimizer-integration
 title: DAX优化器集成
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -96,7 +96,7 @@ Tabular Editor 3.18.0 将 **DAX优化器** 作为集成式体验引入其中。 
 点击 **OK** 按钮后，VPAX 文件将上传到 DAX优化器，你就可以开始分析该模型。
 
 > [!NOTE]
-> 如果在 Tabular Editor 3 中没有可用的 VertiPaq分析器统计信息，我们会在上传 VPAX 文件之前先为当前模型收集这些统计信息。对于该模型，如果上一次统计信息收集的时间早于或等于最近一次 VPAX 文件上传时所使用的统计信息时间，我们也会自动重新收集统计信息。
+> 如果 Tabular Editor 3 中没有 VertiPaq 分析器统计数据，则会在上传 VPAX 文件之前收集当前模型的统计数据。如果上次收集的时间晚于或等于模型的上次 VPAX 上传时间，也会重新收集统计数据。上传的统计信息始终从模型的数据中读取。如果无法读取统计数据，则不会开始上传。
 
 ### 混淆
 

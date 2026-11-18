@@ -1,4 +1,4 @@
----
+﻿---
 uid: supported-files
 title: Tipos de archivo compatibles
 author: Morten Lønskov
@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           partial: true
-          note: "La Edición de escritorio no admite archivos de metadatos de modelos"
+          note: "Desktop Edition does not support model metadata files"
         - edition: Business
           full: true
         - edition: Enterprise
@@ -43,13 +43,13 @@ Es el formato original de un modelo semántico que Microsoft admite.
 
 Sin embargo, tiene un gran inconveniente: al ser un único archivo grande, es difícil hacer seguimiento de los cambios y aplicar buenas prácticas de desarrollo en equipo, como el control de versiones con Git.
 
-#### Archivo «.bim» en una carpeta
+**Archivo .bim en una carpeta**
 
 ![Supported File Types BIM](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
 [Descarga el archivo de ejemplo .bim](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
 
-#### Guardar con archivos auxiliares para la integración de Git de Fabric
+**Guardar con archivos auxiliares para la integración de Fabric Git**
 
 Al usar la opción **Guardar con archivos auxiliares** (ediciones Business y Edición Enterprise), Tabular Editor crea una estructura de carpetas compatible con la integración de Git de Microsoft Fabric:
 
@@ -69,7 +69,9 @@ Tabular Editor puede trabajar con dos tipos de formatos de almacenamiento de Pow
 - Archivos de plantilla de Power BI (.pbit)
 - Carpetas del Proyecto de Power BI (.pbip)
 
-#### Carpetas del Proyecto de Power BI (.pbip) _(Versión preliminar)_
+
+
+**Carpetas de proyectos de Power BI (.pbip) (Vista previa)**
 
 Las carpetas del Proyecto de Power BI se introdujeron en junio de 2023 y están disponibles en Power BI Desktop como una funcionalidad en versión preliminar (también conocida como "Modo de desarrollador"). Este formato de almacenamiento es una forma alternativa de guardar el contenido de un archivo .pbix, en un formato más compatible con el control de versiones y con la lectura/edición del contenido por parte de terceros.
 
@@ -83,7 +85,7 @@ Para obtener más información sobre las carpetas del Proyecto de Power BI, cons
 > [!IMPORTANT]
 > El archivo de Proyecto de Power BI es el formato recomendado al usar Power BI con Tabular Editor, ya que admite la [gama más amplia de operaciones de modelado](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring). Realizar cambios en los metadatos del modelo distintos de los enumerados puede hacer que el modelo deje de poder cargarse en Power BI Desktop; en ese caso, el Soporte técnico de Microsoft no podrá ayudarte.
 
-#### Archivo de plantilla de Power BI (.pbit)
+**Archivo de plantilla de Power BI (.pbit)**
 
 Los archivos de plantilla de Power BI son similares a los archivos .pbix, con la diferencia de que no contienen **datos** del modelo; solo **metadatos** del modelo. Por tanto, estos metadatos del modelo se pueden abrir y editar en Tabular Editor.
 
@@ -127,7 +129,7 @@ Microsoft presentó TMDL como una característica en versión preliminar en abri
 
 TMDL está diseñado para admitir el control de código fuente de los Dataset, lo que permite a los usuarios hacer un seguimiento de los cambios, colaborar y automatizar flujos de trabajo con modelos semánticos.
 
-> [!Note]
+> [!NOTE]
 > TMDL está en versión preliminar, lo que significa que aún no es totalmente estable y puede tener algunas limitaciones o problemas.
 
 ![Tipos de archivo compatibles TMDL](~/content/assets/images/file-types/te3-supported-file-tmdl.png)
@@ -140,7 +142,7 @@ Para ampliar información, consulta: [TMDL](xref:tmdl)
 
 [Descargar ejemplo de estructura de carpetas TMDL](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
 
-#### Guardar con archivos auxiliares para la integración de Git de Fabric
+**Guardar con archivos auxiliares para la integración de Fabric Git**
 
 Al usar la opción **Guardar con archivos auxiliares** (ediciones Business y Edición Enterprise), Tabular Editor crea una estructura de carpetas compatible con la integración de Git de Microsoft Fabric:
 
@@ -255,7 +257,7 @@ A diferencia de otros tipos de archivos compatibles, la creación de un archivo 
 > [!WARNING]
 > Si los metadatos de tu modelo son confidenciales, un archivo .vpax también debe considerarse confidencial y compartirse únicamente teniendo esto en cuenta. Si te preocupa proteger la propiedad intelectual, Tabular Editor 3 ofrece una opción para ofuscar archivos VPAX.
 
-#### Ofuscación
+### Archivos VPAX ofuscados (.ovpax)
 
 Si necesitas entregar el archivo VPAX a un tercero, como un consultor o un proveedor de herramientas, puedes ofuscarlo para ocultar los metadatos del modelo. Para hacerlo, selecciona la opción "Obfuscated Export..." en el menú desplegable junto al botón "Export" en la ventana de VertiPaq Analyzer.
 
@@ -303,8 +305,7 @@ Se recomienda almacenar el archivo de reglas de BPA en un sistema de control de 
 Puedes descargar aquí las reglas oficiales de BPA de Microsoft: [PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
 
 ### RecentServers.json
-
-Contiene todos los servidores a los que te has conectado. Te puede venir bien editarlo manualmente para "olvidar" servidores anteriores que ya no sean relevantes.
+Contiene los servidores a los que se ha conectado, con el tipo de autenticación, el nombre de usuario, el modo y el color de la barra de estado guardados para cada uno, así como la lista de servidores anclados. Las contraseñas no se almacenan. Para eliminar o anclar un servidor, haga clic derecho en él en la lista **Servidor** del cuadro de diálogo de conexión. Consulte [Servidores recientes y anclados](xref:xmla-as-connectivity#recent-and-pinned-servers).
 
 ### Layouts.json
 

@@ -1,8 +1,8 @@
 ---
 uid: installation-activation-basic
-title: Instalación, activación y configuración básica
+title: "Instalación, activación y configuración básica"
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -149,9 +149,14 @@ En estos casos, el instalador aplica la selección predeterminada o la selecció
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | La línea de comandos establece `ADDLOCAL`, `REMOVE` u otra propiedad de característica                                                                                  | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` quita las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen         |
 | La implementación desinstala la versión anterior antes de instalar la nueva; por ejemplo, una sustitución de Intune configurada para desinstalar                        | La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya                                                                                                                |
-| El paquete usa un entorno de ejecución distinto del instalado; por ejemplo, el paquete de .NET 10 en un equipo con el paquete de .NET 8 | Los paquetes de .NET 8 y .NET 10 son productos independientes. La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya |
 
 La directiva `DisableAi` prevalece sobre la selección en todos los casos.
+
+### Cambiar entre los paquetes .NET 8 y .NET 10
+
+Los paquetes .NET 8 y .NET 10 se sustituyen entre sí. Cuando instala uno en un equipo que tiene la otra edición en la misma versión o en una versión anterior, el instalador elimina la otra edición antes de instalar ningún archivo y conserva la selección de funciones de esa edición. Un dispositivo que tenga instaladas ambas ediciones tendrá una sola instalación después de la siguiente instalación, y en **Configuración > Aplicaciones > Aplicaciones instaladas** aparecerá un solo **Tabular Editor 3**.
+
+Si la otra edición está instalada en una versión más reciente, la instalación se detiene y aparece un mensaje. Desinstala primero la edición más reciente y, a continuación, vuelve a ejecutar el instalador.
 
 ### Imponer la decisión con la directiva DisableAi
 

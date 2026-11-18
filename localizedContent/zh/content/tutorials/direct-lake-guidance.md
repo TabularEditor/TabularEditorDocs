@@ -1,8 +1,8 @@
----
+﻿---
 uid: direct-lake-guidance
 title: Direct Lake 指南
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,16 +46,29 @@ applies_to:
 
 不过，与 SQL 上的 Direct Lake 一样，仍然存在一些[确实适用的限制](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。主要限制包括：
 
-- OneLake 表上的 Direct Lake 计算列目前以预览版形式提供支持，但仅限&#x4E8E;_&#x7528;户上下文_：其值会在查询时针对当前用户求值，而不会被物化。这意味着 Direct Lake 计算列会遵循行级安全性和对象级安全性，但不能用作关系键，也不会响应 Report 中的筛选器或切片器。如果结果必须响应筛选语境，请改用度量值。 Direct Lake on SQL 仍然完全不支持计算列。详情见[开发 Direct Lake 语义模型](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop)。
+- 预览版支持 Direct Lake on OneLake 表上的计算列，并且仅支持 `UserContext` 表达式上下文。Direct Lake on SQL 不支持计算列。请参阅[Direct Lake on OneLake 上的计算列](#calculated-columns-on-direct-lake-on-onelake)。
 - 计算表格不能引用 Direct Lake 存储模式中的列或表。支持计算组、What-if 参数和字段参数，因为它们会创建不引用 Direct Lake 列的隐式计算表格。
 - 不支持将非物化 SQL 视图用作 OneLake 上的 Direct Lake 表的数据源。使用物化视图，或确保源 Delta 表包含所需的列。
 - 在 Direct Lake on OneLake 公开预览期间，不支持将 Lakehouse 中的快捷方式用作数据源。
 
 如需查看完整且最新的限制列表，请参阅 [Microsoft 关于 Direct Lake 注意事项和限制的文档](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。
 
+### Direct Lake on OneLake 上的计算列
+
+Direct Lake on OneLake 表上的计算列必须将其 `ExpressionContext` 属性设置为 `UserContext`。该列在查询时进行评估，且未物化，因此无法在关系中使用。新的计算列默认使用 `Standard`。如果您在将模型保存到 Power BI 服务时，将 Direct Lake 表中的计算列设置为 `Standard`，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。
+
+只有当模型的兼容级别为 1705 或更高时，**表达式上下文**属性才会显示在 @properties-view 中。在 Direct Lake on OneLake 表的每个计算列上设置该属性：
+
+1. 在 @tom-explorer-view 中选择模型，然后在 @properties-view 中**数据库**下检查**兼容级别**。如果低于 1705，请按照 @update-compatibility-level 中的说明升级模型。
+2. 在 @tom-explorer-view 中选择计算列。
+3. 在 @properties-view 中的**选项**下，将**表达式上下文**设置为 `UserContext`。
+4. 保存模型。
+
+同一模型中导入表格上的计算列可以使用任一表达式上下文。对于无法引用用户上下文列的对象，请参阅 @user-context-calculated-columns。Microsoft 在[在 Power BI Desktop 中使用计算列](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance)中列出了支持的存储模式和表达式上下文的组合。
+
 ### 复合模型
 
-如果你需要的计算列必须已物化、可用作关系键，或能响应 Report 中的筛选器和切片器，那么上述预览版计算列功能还不够。在这种情况下，把 Direct Lake 表和导入表结合起来，创建一个 **复合模型**。 OneLake 上的 Direct Lake 支持这一点，但 SQL 上的 Direct Lake 不支持。在复合模型中，通常会将较大的事实表保留为 Direct Lake 模式，而对需要完整计算列功能或自定义分组的较小维度表使用导入模式。
+如果您需要一个已物化或可用作关系键的计算列，请通过将 Direct Lake 表与导入表相结合来创建**复合模型**，并将计算列添加到导入表中。Direct Lake on OneLake 支持此操作，但 Direct Lake on SQL 不支持。在复合模型中，您通常将较大的事实表保留在 Direct Lake 模式中，同时对需要完整计算列或自定义分组的较小维度表使用导入模式。
 
 OneLake 上的 Direct Lake 还支持通过 Tabular Editor 等基于 XMLA 的工具与 DirectQuery 表组合使用。可以通过 Power BI 网页建模、Power BI Desktop（实时编辑）或 XMLA 工具添加导入表。
 

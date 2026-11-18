@@ -1,8 +1,8 @@
----
+﻿---
 uid: direct-lake-guidance
 title: Guía de Direct Lake
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,16 +46,29 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 
 Sin embargo, al igual que con Direct Lake en SQL, siguen existiendo algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las principales limitaciones se incluyen:
 
-- Las columnas calculadas en Direct Lake sobre tablas de OneLake se admiten en versión preliminar, pero solo en _contexto de usuario_: el valor se evalúa en el momento de la consulta para el usuario actual, en lugar de materializarse. Esto significa que una columna calculada de Direct Lake respeta la seguridad de nivel de fila y la seguridad a nivel de objetos, pero no se puede usar como clave de relación y no responde a los filtros ni a las segmentaciones de un Report. Use una medida en su lugar cuando el resultado deba reaccionar al contexto de filtro. Direct Lake en SQL sigue sin admitir columnas calculadas en absoluto. Consulta [Desarrollar modelos semánticos de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop) para obtener más detalles.
+- Las columnas calculadas en las tablas de Direct Lake en OneLake son compatibles en la versión preliminar y solo con el contexto de expresión `UserContext`. Direct Lake en SQL no admite columnas calculadas. Consulte [Columnas calculadas en Direct Lake en OneLake](#calculated-columns-on-direct-lake-on-onelake).
 - Las tablas calculadas no pueden hacer referencia a columnas ni tablas en el modo de almacenamiento Direct Lake. Se admiten los grupos de cálculo, los parámetros de tipo what-if y los parámetros de campo, porque crean tablas calculadas implícitas que no hacen referencia a columnas de Direct Lake.
 - Las vistas SQL no materializadas no se admiten como Data sources para tablas de Direct Lake en OneLake. Usa vistas materializadas o asegúrate de que la tabla Delta de origen contenga las columnas que necesitas.
 - Los accesos directos en un Lakehouse no se admiten como Data sources durante la versión preliminar pública de Direct Lake en OneLake.
 
 Para obtener una lista completa y actualizada de las limitaciones, consulta la [documentación de Microsoft sobre consideraciones y limitaciones de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
 
+### Columnas calculadas en Direct Lake en OneLake
+
+Una columna calculada de una tabla de Direct Lake en OneLake debe tener su propiedad `ExpressionContext` establecida en `UserContext`. La columna se evalúa en el momento de la consulta y no se materializa, por lo que no se puede usar en una relación. Las nuevas columnas calculadas usan `Standard` de forma predeterminada. Si una columna calculada de una tabla Direct Lake está configurada como `Standard` cuando guarda el modelo en el servicio Power BI, el guardado falla con el error «El contexto de expresión predeterminado no se puede usar para columnas calculadas en tablas Direct Lake».
+
+La propiedad **Contexto de expresión** aparece en la @properties-view solo cuando el nivel de compatibilidad del modelo es 1705 o superior. Establézcala en cada columna calculada de una tabla Direct Lake en OneLake:
+
+1. Seleccione el modelo en la @tom-explorer-view y compruebe el **Nivel de compatibilidad** en **Base de datos** en la @properties-view. Si es inferior a 1705, actualice el modelo como se describe en @update-compatibility-level.
+2. Seleccione la columna calculada en la @tom-explorer-view.
+3. En **Opciones** en la @properties-view, establezca **Contexto de expresión** en `UserContext`.
+4. Guarde el modelo.
+
+Las columnas calculadas de las tablas de importación del mismo modelo pueden usar cualquiera de los dos contextos de expresión. Para los objetos que no pueden hacer referencia a una columna de contexto de usuario, consulte @user-context-calculated-columns. Microsoft enumera las combinaciones admitidas de modo de almacenamiento y contexto de expresión en [Uso de columnas calculadas en Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance).
+
 ### Modelos compuestos
 
-Si necesita una columna calculada que se materialice, pueda usarse como clave de relación o responda a los filtros y las segmentaciones de un Report, la característica de columnas calculadas en versión preliminar mencionada arriba no es suficiente. En ese caso, cree un **modelo compuesto** combinando tablas de Direct Lake con tablas en modo Import. Esto se admite con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente se mantienen las tablas de hechos más grandes en modo Direct Lake, mientras que se usa Import mode para las tablas de dimensiones más pequeñas en las que se necesitan columnas calculadas completas o agrupaciones personalizadas.
+Si necesita una columna calculada que esté materializada o que se pueda usar como clave de relación, cree un **modelo compuesto** combinando tablas Direct Lake con tablas de importación y añada la columna calculada a una tabla de importación. Esto es compatible con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente mantiene las tablas de hechos más grandes en modo Direct Lake mientras utiliza el modo Importación para las tablas de dimensiones más pequeñas en las que necesita columnas calculadas completas o agrupaciones personalizadas.
 
 Direct Lake en OneLake también admite la combinación con tablas DirectQuery mediante herramientas basadas en XMLA, como Tabular Editor. Las tablas en modo Import se pueden agregar mediante el modelado web de Power BI, Power BI Desktop (edición en vivo) o mediante herramientas XMLA.
 

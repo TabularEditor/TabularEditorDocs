@@ -27,14 +27,14 @@ applies_to:
 
 ![基本用户界面](~/content/assets/images/basic-ui.png)
 
-1. **标题栏**：显示当前加载的文件名；如果已连接，还会显示 Analysis Services 数据库或 Power BI 数据集的名称。
-2. **菜单栏**：菜单栏用于访问 Tabular Editor 3 的各项功能。有关所有菜单项的详细说明，请参阅[菜单](#menus)。
-3. **工具栏**：工具栏提供对最常用功能的快速访问。工具栏中可用的所有功能也都可以通过菜单访问。你可以在 **工具 > 自定义...** 中自定义工具栏及其按钮
-4. **TOM Explorer 视图**：以层级结构展示您的数据模型，所有对象均可用 .  来自表示你的 Data model 的 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据中的元数据。顶部的切换按钮可让你筛选要显示的对象。搜索框可按名称筛选对象。
-5. **表达式编辑器**：表达式编辑器提供一种快捷方式，用于编辑 TOM Explorer 中当前选中对象的任意 DAX、SQL 或 M 表达式。如果你关闭了表达式编辑器，只需在 TOM Explorer 中双击某个对象，即可将其重新打开。顶部的下拉列表可让你在不同的表达式属性之间切换，以防当前选定对象包含多个此类属性（例如，KPI 具有目标表达式、状态表达式和趋势表达式，它们是同一个 KPI 对象下的 3 个不同 DAX 表达式）。
-6. **属性视图**：显示 TOM Explorer 中当前选定对象（一个或多个）的所有可用 TOM 属性的详细信息。大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。
-7. **信息视图**：Tabular Editor 3 会持续分析你模型中的 DAX 表达式，查找语义错误。任何此类错误都会在此处显示。此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。
-8. **状态栏**：状态栏会提供与当前选择相关的各种上下文信息、Best Practice Analyzer 的检测结果等。当 [MCP 服务器](xref:mcp-server) 可用时，右侧末端的指示器会显示 **MCP Started** 或 **MCP Stopped**，其工具提示中会显示服务器正在侦听的地址。单击可打开 MCP Server 对话框；右键单击可启动或停止服务器、复制供你的代理使用的注册配置，或跳转到偏好页面。
+1. **标题栏**：已加载文件的名称，或者您已连接的 Analysis Services 数据库或 Power BI 语义模型的名称。
+2. **菜单栏**：Tabular Editor 3 的所有功能。请参阅[菜单](#menus)了解每个菜单。
+3. **工具栏**：最常用的功能。每个工具栏命令也位于菜单中。在**工具 > 自定义……**下自定义工具栏及其按钮。
+4. **TOM 资源管理器视图**：模型对象的树状视图，由 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据构建而成。顶部的切换按钮用于筛选要显示的对象类型，搜索框用于按名称筛选对象。
+5. **表达式编辑器**：编辑在 TOM Explorer 中选定对象的 DAX、SQL 或 M 表达式。如果您将其关闭，请双击 TOM Explorer 中的对象以再次打开。如果对象具有多个表达式属性，则顶部的下拉菜单可在它们之间切换。例如，KPI 具有目标、状态和趋势表达式。
+6. **属性视图**：在 TOM Explorer 中选定对象的所有 TOM 属性。您可以在网格中编辑大多数属性，也可以在选择多个对象时进行编辑。对于某些属性（例如**格式字符串**、**连接字符串**和**角色成员**），可以通过值单元格中的省略号按钮打开对话框或集合编辑器。
+7. **消息视图**：通过对模型的 DAX 表达式进行持续分析发现的语义错误，以及来自 C# 脚本的消息和 Analysis Services 报告的错误。
+8. **状态栏**：有关当前选择、Best Practice Analyzer 发现结果等的信息。连接项将您连接到的数据库和服务器显示为 `<database>@<server>`，或对于 Power BI Desktop 显示为 `<host>:<port>`，对于在没有连接的情况下加载的模型显示为 **(无连接)**。当 [MCP 服务器](xref:mcp-server)可用时，右端的指示器显示 **MCP 已启动** 或 **MCP 已停止**，其工具提示显示服务器侦听的地址。单击指示器以打开**MCP 服务器**对话框，或右键单击指示器以启动或停止服务器、复制代理的注册配置或打开首选项页面。
 
 [视图菜单](#view) 可打开其他视图。
 
@@ -92,6 +92,7 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 > [!NOTE]
 > 默认情况下，菜单和工具栏会锁定在原位。要解锁，请取消选中 **锁定菜单和工具栏**，位于 **工具 > 自定义…… > 选项**。
 
+<!-- SCREENSHOT RESHOOT (3.27.1): active-document.png. Title bar uses the old format. Optional. -->
 ![Active Document](~/content/assets/images/active-document.png)
 
 ### 文件
@@ -112,7 +113,7 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
   ![File Menu Open](~/content/assets/images/file-menu-open.png)
 
   - **从文件加载模型...**：从 .bim 或 .pbit 等文件打开模型元数据。
-  - **从数据库加载模型...**：加载已部署模型的元数据。输入 Analysis Services 或 Power BI 的 XMLA 连接信息，或连接到本地实例，例如 Visual Studio 的集成 Workspace 服务器或 Power BI Desktop。
+  - **从数据库打开模型…**加载已部署模型的元数据。输入 Analysis Services 或 Power BI XMLA 连接详细信息，或连接到本地实例，例如 Visual Studio 的集成工作区服务器或 Power BI Desktop。右键单击**服务器**列表中的服务器，将其固定到列表顶部或将其删除。请参阅@xmla-as-connectivity。
   - **从文件夹加载模型...**：从由任意版本的 Tabular Editor 保存的文件夹结构中打开模型元数据。
   - **文件...**：根据文件扩展名打开 Tabular Editor 3 支持的任意文件类型。参见[支持的文件类型](xref:supported-files)。
   - **从 Metric View YAML 导入...**：从 Databricks Metric View YAML 文件导入模型元数据。
@@ -122,15 +123,17 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 > [!IMPORTANT]
 > 在 Tabular Editor 3 桌面版中，**打开 > 从文件加载模型...** 和 **打开 > 从文件夹加载模型...** 不可用，且 **打开 > 文件...** 只能打开[支持文件](xref:supported-files#supported-file-types)。
 
-- **从磁盘重新加载** / **从服务器重新加载**：从源重新加载模型元数据，并丢弃所有未保存的更改。对于从文件或文件夹加载的模型，此命令显示为 **从磁盘重新加载**；对于从 Analysis Services 或 Power BI 打开的模型，则显示为 **从服务器重新加载**。如果 Tabular Editor 3 作为 Power BI Desktop 的外部工具运行，并且模型在 Power BI Desktop 中发生更改，可使用此命令重新加载模型元数据，而无需重新连接。从文件或文件夹加载的模型会在文件发生更改时自动重新加载。参见 [从磁盘自动重新加载](xref:auto-reload)。
+- **从磁盘重新加载**/**从服务器重新加载**：从源重新加载模型元数据并放弃所有未保存的更改。对于从文件或文件夹加载的模型，该命令显示为**从磁盘重新加载**；对于从 Analysis Services 或 Power BI 打开的模型，该命令显示为**从服务器重新加载**。如果 Tabular Editor 3 作为 Power BI Desktop 的外部工具运行，并且模型在 Power BI Desktop 中发生变化，请使用此命令在不重新连接的情况下重新加载模型元数据。从文件或文件夹加载的模型会在文件发生变化时自动重新加载。请参阅[从磁盘自动重新加载](xref:auto-reload)。打开的 DAX 查询和 Pivot Grid 文档在重新加载期间保持打开状态，并连接到重新加载的模型。
 - **关闭文档**（**Ctrl+W**）：关闭主区域中当前活动的文档或面板，例如 DAX 查询、C# Script 或关系图。如果文档有未保存的更改，系统会提示你保存这些更改。
-- **关闭模型**：卸载模型元数据。如果你修改了元数据，系统会提示你保存这些更改。
+- **关闭模型**：卸载模型元数据。如果您更改了元数据，则会显示保存更改的提示。打开的 DAX 查询和 Pivot Grid 文档将随模型一起关闭，对于每个有未保存更改的文档，都会显示保存提示。
 - **保存**：将活动文档保存到其源文件。如果当前没有活动文档，则会将模型元数据保存回其源：Model.bim 文件、Database.json 文件夹结构、Analysis Services 实例（包括 Power BI Desktop）或 Power BI XMLA endpoint。
 - **另存为...**：将活动文档另存为新文件。如果当前没有活动文档，则将模型元数据另存为新的 .bim（JSON）文件。
 - **保存到文件夹...**：将模型元数据以[文件夹结构](xref:save-to-folder)的形式保存。
 - **全部保存**：一次性保存所有未保存的文档和模型元数据。
 - **最近文件**：列出最近使用的支持文件。
 - **最近的表格模型**：列出最近使用的模型元数据文件和文件夹。
+
+如果将**模型源详细信息**设置为**仅名称**或**隐藏**，则最近文件和模型菜单的悬停文本将显示不带目录的文件名。
 
 > [!IMPORTANT]
 > 在 Tabular Editor 3 桌面版中，**保存到文件夹**和**最近的表格模型**已禁用，而**另存为**仅可用于[支持文件](xref:supported-files#supported-file-types)。
@@ -164,39 +167,39 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 
 ![视图菜单](~/content/assets/images/view-menu.png)
 
-- **TOM Explorer**：TOM Explorer 以分层视图显示当前已加载模型元数据的整个 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。更多信息见 @tom-explorer-view。
-- **AI 助手**：AI 助手视图可让你与 AI 助手交互，协助完成建模任务。
-- **DAX 组件管理器**：DAX 组件管理器视图可让你浏览 DAX 用户定义函数组件，并将其安装到模型中。
-- **Best Practice Analyzer**: 通过让你指定用于最佳实践验证的规则，帮助提升模型质量。更多信息见 @bpa-view。
-- **信息**: 信息视图显示来自各种来源的错误、警告和信息性消息，例如 Tabular Editor 3 语义分析器。更多信息见 @messages-view。
-- **数据刷新**：数据刷新视图用于跟踪后台运行的数据刷新操作。更多信息见 @data-refresh-view。
-- **表达式编辑器**：这是一个“快速编辑器”，可让你编辑 TOM Explorer 中当前选定对象的 DAX、M 或 SQL 表达式。更多信息请参见 @dax-editor。
-- **宏**: 宏视图允许你管理你创建的任何宏。可通过 @csharp-scripts 创建宏。更多信息请参见 @creating-macros。
-- **VertiPaq分析器**：VertiPaq分析器视图允许你收集、导入和导出有关模型数据的详细统计信息，用于优化和调试 DAX 性能。 VertiPaq分析器由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 在 MIT 许可下创建并维护。更多信息请参阅 [GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
-- **依赖关系**：[**DAX 依赖关系**](xref:creating-and-testing-dax#dax-dependencies) 视图会以可视化方式显示当前选中对象与模型中其他对象之间的依赖关系。勾选 **Track TOM Explorer**，即可让其跟随树形结构中的选中项。
-- **DAX优化器**：DAX优化器视图与 [DAX优化器](https://www.daxoptimizer.com) 集成，用于分析模型中的 DAX 性能问题。
-- **日历编辑器**：日历编辑器视图允许你使用现代时间智能功能在模型中定义和管理日历。
-- **透视编辑器**：透视编辑器视图提供一个矩阵概览，显示模型的每个透视中包含了哪些对象。
-- **元数据翻译编辑器**: 元数据翻译编辑器视图提供一个网格，用于编辑模型对象的元数据翻译(区域设置)。
-- **工具栏 / 属性**：其余项可让你切换工具栏的可见性，并打开属性视图（F4）。
+- **TOM 资源管理器**：加载模型的[Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 的树状视图。请参阅@tom-explorer-view。
+- **AI 助手**：与 AI 助手聊天的窗口，用于处理建模任务。
+- **DAX 组件管理器**：浏览 DAX 用户定义函数组件并将其安装到模型中。
+- **Best Practice Analyzer**：根据您定义的最佳实践规则验证模型。请参阅 @bpa-view。
+- **消息**：来自 Tabular Editor 3 语义分析器等来源的错误、警告和信息消息。请参阅 @messages-view。
+- **数据刷新**：跟踪在后台运行的刷新操作。请参阅 @data-refresh-view。
+- **表达式编辑器**：编辑在 TOM Explorer 中选定对象的 DAX、M 或 SQL 表达式。请参阅 @dax-editor。
+- **宏**：管理您从 @csharp-scripts 创建的宏。请参阅 @creating-macros。
+- **VertiPaq 分析器**：收集、导入和导出有关模型中数据的统计信息，用于 DAX 性能优化。VertiPaq Analyzer 由 [SQLBI](https://sqlbi.com) 的 [Marco Russo](https://twitter.com/marcorus) 根据 MIT 许可证创建和维护。请参阅[GitHub 项目页面](https://github.com/sql-bi/VertiPaq-Analyzer)。
+- **依赖项**：[**DAX 依赖项**视图](xref:creating-and-testing-dax#dax-dependencies)显示所选对象与模型中其他对象之间的依赖项。选择**跟踪 TOM Explorer**，使其跟随 TOM Explorer 的选择。
+- **DAX 优化器**：使用 [DAX 优化器](https://www.daxoptimizer.com)分析模型的 DAX 性能问题。
+- **日历编辑器**：为现代时间智能功能定义和管理日历。
+- **透视编辑器**：一个矩阵，显示模型的每个透视包含哪些对象。
+- **元数据翻译编辑器**：用于编辑模型对象的元数据翻译（文化）的网格。
+- **工具栏/属性**：切换工具栏的可见性并打开“属性”视图（**F4**）。
 
-## 模型
+### 模型
 
-**模型**菜单显示可在“模型”对象级别执行的操作（即 TOM Explorer 的根对象）。
+**“模型”**菜单包含对模型对象（TOM Explorer 的根）的操作。
 
 ![模型菜单](~/content/assets/images/model-menu.png)
 
 - **Deploy...**：打开 Tabular Editor Deployment Wizard。参见 [模型部署](xref:deployment)。
 
 > [!IMPORTANT]
-> **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。有关详细信息，请参阅 @editions。
+> **部署**在 Tabular Editor 3 Desktop 版本中不可用。请参阅@editions。
 
-- **序列化选项...**：可配置将模型元数据保存到磁盘时（文件或文件夹结构）的序列化方式。
-- **导入表...** 启动 Tabular Editor 3 导入表向导。有关详细信息，请参阅 @importing-tables。
-- **更新架构 (所有表)...** 检测模型中所有表的数据源中的架构更改，并与当前已导入的列进行比较。有关更多信息，请参阅[更新表架构](xref:importing-tables#updating-table-schema)。
-- **Script DAX**: 为当前选定的对象生成 DAX 脚本(如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX 脚本)。有关详细信息，请参阅 @dax-scripts。
-- **刷新模型**: 当 Tabular Editor 连接到 Analysis Services 实例时，此子菜单包含用于在模型级别启动后台刷新操作的选项。此子菜单包含以下选项。有关详细信息，请参阅 [刷新命令 (TMSL)](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
-  - **自动（模型）**：Analysis Services 将决定要刷新的对象（仅刷新不处于“Ready”状态的对象）。
+- **序列化选项...** 设置模型元数据在保存到文件或文件夹结构时如何进行序列化。
+- **导入表格…** 打开 Tabular Editor 3 导入表格向导。请参阅@importing-tables。
+- **更新架构(所有表格)…**将所有表格的列与其数据源进行比较，并检测架构更改。请参阅[更新表格架构](xref:importing-tables#updating-table-schema)。
+- **脚本 DAX**：为选定对象生成 DAX 脚本，如果未选择任何内容，则为模型中的所有 DAX 对象生成 DAX 脚本。请参阅@dax-scripts。
+- **刷新模型**：当 Tabular Editor 连接到 Analysis Services 时，启动模型的后台刷新。请参阅[刷新命令 (TMSL)](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。子菜单包含以下选项：
+  - **自动(模型)**：Analysis Services 仅刷新不处于“就绪”状态的对象。
   - **完全刷新（模型）**：Analysis Services 对模型执行完全刷新。
   - **计算（模型）**：Analysis Services 将重新计算所有计算表格、计算列、计算组和关系。不会从数据源读取任何数据。
 - **添加 [对象类型]**：其余项用于创建模型的子对象，例如表、数据源和透视。

@@ -2,7 +2,7 @@
 uid: user-context-calculated-columns
 title: Columnas calculadas con contexto de usuario
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,13 +26,17 @@ La propiedad `ExpressionContext` de la columna calculada determina si la columna
 
 | Contexto de expresión   | Significado                                                                                                                                                                                   |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Estándar**            | La opción predeterminada. La expresión solo puede usar funciones estándar. La columna tiene un valor por fila, igual para todos los usuarios. |
-| **Contexto de usuario** | La expresión puede llamar a funciones de contexto de usuario. La columna se evalúa para cada usuario.                                                         |
+| `Standard` | El valor predeterminado. La expresión solo puede usar funciones estándar. La columna tiene un valor por fila para todos los usuarios. |
+| `UserContext` | La expresión puede llamar a funciones de contexto de usuario. La columna se evalúa por usuario. |
 
 Selecciona una columna calculada en @tom-explorer-view y establece **Contexto de expresión** en **Opciones** de @properties-view.
 
 > [!NOTE]
-> `ExpressionContext` requiere un nivel de compatibilidad 1705 o superior; por debajo de 1705, las columnas calculadas siempre son **Standard**.
+> `ExpressionContext` requiere un nivel de compatibilidad de 1705 o superior, y por debajo de 1705 las columnas calculadas son siempre `Standard`.
+
+## Tablas de Direct Lake en OneLake
+
+`UserContext` es el único contexto de expresión que Power BI admite para las columnas calculadas de las tablas de Direct Lake en OneLake. Si una columna calculada de una tabla Direct Lake está configurada como `Standard` cuando guarda el modelo en el servicio Power BI, el guardado falla con el error «El contexto de expresión predeterminado no se puede usar para columnas calculadas en tablas Direct Lake». Las tablas de Direct Lake en SQL no admiten columnas calculadas. Para conocer los pasos para establecer el contexto de expresión en un modelo Direct Lake, consulte [Columnas calculadas en Direct Lake en OneLake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake).
 
 ## Para qué no se puede usar una columna con contexto de usuario
 

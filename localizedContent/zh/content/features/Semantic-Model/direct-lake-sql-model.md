@@ -1,4 +1,4 @@
----
+﻿---
 uid: direct-lake-sql-model
 title: SQL 语义模型上的 Direct Lake
 author: Morten Lønskov
@@ -54,8 +54,8 @@ Tabular Editor 3（3.15.0 或更高版本）会在首次部署时自动对模型
 此外，在导入新表后，Tabular Editor 3（3.15.0 或更高版本）会在你下次保存模型时对模型进行 framing（刷新）。该首选项位于 **Tools > Preferences > Model Deployment > Data Refresh** 下。
 
 ## 识别 Direct Lake 模型
+Tabular Editor 3 标题栏在模型名称后显示打开的模型的存储模式，例如 **(Direct Lake)**、**(DirectQuery)** 或 **(Import)**。如果模型包含多种表格模式，则标题栏显示 **(复合)**。TOM 资源管理器显示每个表的类型和模式（导入、DirectQuery、双重或 Direct Lake）。Direct Lake on SQL 模型不能包含处于导入、DirectQuery 或双重模式的表。
 
-Tabular Editor 顶部的标题栏会显示该 Tabular Editor 实例中当前打开的是哪种类型的模型。此外，TOM Explorer 会显示每张表的类型和模式（Import、DirectQuery、Dual 或 Direct Lake）。如果模型混用了多种表模式，标题栏将显示“混合”。目前，Direct Lake on SQL 模型无法包含处于 Import、DirectQuery 或 Dual 模式的表。
 
 ## 将 Direct Lake 模型转换为导入模式
 

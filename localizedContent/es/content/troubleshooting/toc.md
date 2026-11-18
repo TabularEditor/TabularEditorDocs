@@ -1,9 +1,17 @@
-# @licensing-activation
+# @activación-de-licencias
 
 # @proxy-settings
 
-# @locale-not-supported
+# @idioma-no-compatible
 
-# @calendar-blank-value
+# @valor-en-blanco-en-calendario
 
-# @direct-lake-entity-updates-reverting
+# @reversión-de-actualizaciones-de-entidades-de-direct-lake
+
+# @errores-de-conexión-de-azure-openai
+
+# @formato-medida-modelo-compuesto
+
+# @longitud-comentarios-columna-databricks
+
+# @databricks-actualizar-catálogo-vacío

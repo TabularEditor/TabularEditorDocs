@@ -85,7 +85,7 @@ Para agregar un [grupo de cálculo](https://docs.microsoft.com/analysis-services
 
 Para agregar elementos de cálculo, haz clic con el botón derecho en el grupo de cálculo recién creado y elige **Crear > Elemento de cálculo**. Asigna un nombre al elemento de cálculo y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas.
 
-Puedes organizar el orden de visualización de los elementos de cálculo arrastrándolos en el Explorador TOM o estableciendo la propiedad `Ordinal` en la vista **Propiedades**.
+Puede organizar el orden de visualización de los elementos de cálculo arrastrándolos por el Explorador TOM o estableciendo la propiedad `Ordinal` en la vista **Propiedades**. Al establecer `Ordinal`, el elemento se desplaza a esa posición, y un valor superior a la última posición desplaza el elemento al final.
 
 > [!NOTE]
 > Cuando agregas, cambias el nombre o eliminas elementos de cálculo de un grupo de cálculo, tienes que actualizar el grupo de cálculo antes de poder usarlo en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.
