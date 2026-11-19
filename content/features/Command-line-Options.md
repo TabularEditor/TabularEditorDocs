@@ -2,7 +2,7 @@
 uid: command-line-options
 title: Command Line (Tabular Editor 2)
 author: Daniel Otykier
-updated: 2026-06-09
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,6 +13,8 @@ applies_to:
       none: true
 ---
 # Command Line (Tabular Editor 2)
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 Tabular Editor can be executed from the command-line to perform various tasks, which may be useful in Automated Build and Deployment scenarios, etc.
 

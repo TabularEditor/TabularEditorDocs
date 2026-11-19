@@ -1,6 +1,7 @@
 ﻿---
 uid: shortcuts2
 title: Keyboard shortcuts Tabular Editor 2
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,6 +10,8 @@ applies_to:
       none: true
 ---
 # Keyboard Shortcuts 
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 As of version 2.7.3, Tabular Editor now supports the following keyboard shortcuts:
 

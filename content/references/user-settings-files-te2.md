@@ -1,6 +1,7 @@
 ---
 uid: user-setting-files-te2
 title: User Settings Files Tabular Editor 2
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,6 +11,8 @@ applies_to:
 ---
 
 # User Settings Files Tabular Editor 2
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 When Tabular Editor 2 is started, it writes some additional files to the disk at various locations. What follows is a description of these files and their content:
 
