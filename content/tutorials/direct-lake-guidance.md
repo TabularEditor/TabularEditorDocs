@@ -2,7 +2,7 @@
 uid: direct-lake-guidance
 title: Direct Lake Guidance
 author: Morten Lønskov
-updated: 2026-10-26
+updated: 2026-11-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -48,7 +48,6 @@ However, as with Direct Lake on SQL, there are still some [limitations that *do*
 - Calculated columns on Direct Lake on OneLake tables are supported in preview, and only with the `UserContext` expression context. Direct Lake on SQL doesn't support calculated columns. See [Calculated columns on Direct Lake on OneLake](#calculated-columns-on-direct-lake-on-onelake).
 - Calculated tables cannot reference columns or tables in Direct Lake storage mode. Calculation groups, what-if parameters and field parameters are supported because they create implicit calculated tables that do not reference Direct Lake columns.
 - Non-materialized SQL views are not supported as data sources for Direct Lake on OneLake tables. Use materialized views or ensure the source Delta table contains the columns you need.
-- Shortcuts in a lakehouse are not supported as data sources during the public preview of Direct Lake on OneLake.
 
 For a full and up-to-date list of limitations, see the [Microsoft documentation on Direct Lake considerations and limitations](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
 
@@ -123,6 +122,43 @@ The choices are:
 > If you're working on a model that already contains tables, one or more of the choices mentioned above may not be available, if the model does not support combining tables in different storage modes. For example, if the model contains a table in Direct Lake on SQL mode, you cannot add tables in other modes.
 
 The imported table already has its columns, in the same order as in the source, and you don't need to run **Update Table Schema** after the import. If Tabular Editor can't determine the SQL analytics endpoint of the Lakehouse or Warehouse, and the import settings don't specify one, the import fails with an error that names the missing setting, and no table is created.
+
+## Role-playing dimensions
+
+A *role-playing dimension* is a dimension table related to more than one column of the same fact table, for example a Date table related to both the order date and the ship date of a Sales table. Pick a setup for the Direct Lake semantic model:
+
+| Setup | Model tables | Requires |
+|-------|--------------|----------|
+| Inactive relationships | One Date table with an active relationship to one date column and inactive relationships to the others. Measures for the other roles activate their relationship with [USERELATIONSHIP](https://dax.guide/userelationship). | Any Direct Lake model |
+| One source table per role | One Direct Lake table per Delta table, for example `DimDate` and `DimShipDate`. | A separate table for each role in the Lakehouse/Warehouse |
+| Import tables for the extra roles | A Direct Lake Date table for the main role and Import tables for the other roles. See [Composite models](#composite-models). | Direct Lake on OneLake |
+| Duplicated Direct Lake table | A copy of the Date table, made with **Duplicate** in the **TOM Explorer**, that reads the same Delta table. | New tables added with the [Table Import Wizard](#table-import-wizard). See [Duplicated Direct Lake tables](#duplicated-direct-lake-tables). |
+| One shortcut per role | A copy of the Date table for each role, each reading its own OneLake shortcut to the same Delta table. See [One shortcut per role](#one-shortcut-per-role). | A shortcut for each role in the Lakehouse |
+
+### Duplicated Direct Lake tables
+
+A duplicated Direct Lake table keeps the `SourceLineageTag` values of the original table and its columns. In a Direct Lake table, `SourceLineageTag` holds the name of the table or column in the Lakehouse/Warehouse, so the original and the copy read the same Delta table. While the model contains both tables, adding a table through the **Edit tables** dialog in Power BI web modeling fails with the error "Sequence contains more than one matching element". The [Table Import Wizard](#table-import-wizard) adds tables to a model that contains duplicated Direct Lake tables. If the copy reads a shortcut, as described in [One shortcut per role](#one-shortcut-per-role), **Edit tables** works on the model.
+
+When you delete a Direct Lake table in Power BI web modeling, the source table is added to the `PBI_RemovedChildren` annotation on the shared expression. If another table in the model reads the same Delta table, Power BI web modeling then fails with the error "A child can't be both removed and added" when it lists the tables of the Lakehouse/Warehouse. Remove the entry in Tabular Editor 3:
+
+1. Open the semantic model in Tabular Editor 3.
+2. In the @tom-explorer-view, expand **Shared Expressions** and select the expression that the Direct Lake partitions reference, typically `DatabaseQuery`.
+3. In the @properties-view, under **Annotations**, remove the entry for the Delta table from the `PBI_RemovedChildren` value. Delete the annotation if no entries remain.
+4. Save the model.
+
+Microsoft describes the annotation in [Lineage tags for Power BI semantic models](https://learn.microsoft.com/analysis-services/tom/lineage-tags-for-power-bi-semantic-models).
+
+### One shortcut per role
+
+A [OneLake shortcut](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts) appears as a separate table in the Lakehouse and reads the Delta table it targets. Microsoft supports shortcuts as sources for both Direct Lake on OneLake and Direct Lake on SQL tables. When each role table reads its own shortcut, every Direct Lake table in the model has its own source table, and **Edit tables** and refresh in Power BI work on the model. The copies keep the column names, descriptions, display folders and other changes made to the original table.
+
+1. In the Lakehouse, create a shortcut under **Tables** for each extra role, with the Delta table of the dimension as its target. For example, create `d_date_ship` with `d_date` as its target.
+2. In the @tom-explorer-view, right-click the original table, select **Duplicate** and rename the copy.
+3. Expand **Partitions** under the copy, select its entity partition and set **Entity Name** in the @properties-view to the shortcut name.
+4. Select the copy and set **Source Lineage Tag** to the shortcut name, in the same format as the value on the original table. If the original table has `[dbo].[d_date]`, enter `[dbo].[d_date_ship]`.
+5. Save the model.
+
+The columns of the copy keep their `SourceColumn` and `SourceLineageTag` values, which match the columns of the shortcut. **Duplicate** copies the measures of the original table under new names. Delete the measures the role table doesn't need.
 
 ## Inspecting a Direct Lake partition
 

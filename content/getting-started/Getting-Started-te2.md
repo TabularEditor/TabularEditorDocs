@@ -1,8 +1,9 @@
-﻿---
+---
 uid: getting-started-te2
 title: Getting Started with Tabular Editor 2
-author: Daniel Otykier
-updated: 2026-10-12
+author: Morten Lønskov
+updated: 2026-11-19
+description: Install Tabular Editor 2, the free open-source editor for Analysis Services and Power BI semantic models, then open, edit and deploy a model. Tabular Editor 3 is the commercial version, with a free 30-day trial.
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,100 +11,149 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
-# Getting Started
+# Getting Started with Tabular Editor 2
+
+Tabular Editor 2 is a free, open-source Windows application for editing Analysis Services and Power BI semantic models. This page covers installation, opening and editing a model, deployment, the command line and C# scripting.
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
+
+## Tools by task
+
+Tabular Editor 2, Tabular Editor 3 and the [Tabular Editor CLI](xref:te-cli) cover different tasks:
+
+| Task | Tool | Documentation |
+|------|------|---------------|
+| Edit model metadata in a free desktop application | Tabular Editor 2 | This page |
+| Write DAX with auto-complete and step through it in a debugger | Tabular Editor 3 | @dax-debugger |
+| Run DAX queries and preview table data | Tabular Editor 3 | @refresh-preview-query |
+| Deploy from a CI/CD pipeline | Tabular Editor 2 or Tabular Editor CLI | @command-line-options, @te-cli-cicd |
+| Run Best Practice Analyzer checks | All three | @best-practice-analyzer |
+| Let an AI agent read, query and change the model open in a desktop application | Tabular Editor 3 | @mcp-server |
+| Let an AI agent change model files or deployed models from a terminal | Tabular Editor CLI | @te-cli-skill |
 
 ## Installation
-Simply download the .msi file from the [Release page](https://github.com/TabularEditor/TabularEditor/releases/latest) and run the .msi installation.
+
+Download the .msi installer or the portable .zip file from the [release page](https://github.com/TabularEditor/TabularEditor/releases/latest). Run the .msi, or extract the .zip to a folder and run `TabularEditor.exe`.
+
+The .msi registers Tabular Editor 2 as an [External Tool](xref:desktop-integration) in Power BI Desktop.
 
 ## Prerequisites
-None.
+
+Tabular Editor 2 requires [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48). The .msi installer stops if .NET Framework 4.8 is missing and links to the download.
 
 > [!NOTE]
-> Tabular Editor uses the [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) to load and save metadata to and from Model.bim files or existing databases. This is included in the .msi installer. Visit the official Microsoft documentation for [Analysis Services Client Libraries](https://docs.microsoft.com/azure/analysis-services/analysis-services-data-providers).
+> Tabular Editor 2 uses the [Tabular Object Model](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo) (TOM) to load and save metadata to and from Model.bim files or existing databases. The installer includes the [Analysis Services client libraries](https://learn.microsoft.com/analysis-services/client-libraries).
 
 ## System requirements
 
-- **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
-- **.NET Framework:** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
+- **Operating system:** Windows version supported by .NET Framework 4.8
+- **.NET Framework:** [4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48)
 
-## Working with Tabular Editor
+## Open a model
 
-The recommended workflow is to set up the tables and relationships using SSDT as normal, and then use Tabular Editor to do the rest. That is: Create calculated columns, measures, hierarchies, perspectives, translations, display folders, and every other kind of fine-tuning you can think of.
+Open a model from disk with **File > Open > From File...** (**Ctrl+O**). Supported formats are Model.bim files, folders saved with [Save to folder](xref:save-to-folder) (database.json), [TMDL](xref:tmdl) folders, .pbit files and .pbip projects.
 
-Load a Model.bim file by choosing the Open > From File... option in the File menu (CTRL+O), or open an existing database from an instance of Analysis Services by choosing the Open > From DB... option. In the latter case, you will be prompted for a server name and optional credentials:
+Open a deployed database with **File > Open > From DB...** (**Ctrl+Shift+O**). The **Connect to Tabular Server** dialog asks for a server name and authentication:
 
 ![Connecting to an already deployed Tabular Model](~/content/assets/images/getting-started-te-01.png)
 
-This also works with the new Azure Analysis Services PaaS. The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, not all modeling operations are supported by Microsoft. [More information](Power-BI-Desktop-Integration.md)**
+The server name accepts Analysis Services instances and Azure Analysis Services servers (`asazure://<servername>`). The **Local instance** dropdown lists running instances of Power BI Desktop, Visual Studio integrated workspaces and local Analysis Services. From the June 2025 Power BI Desktop update, external tools can change any part of a model hosted in Power BI Desktop. See @desktop-integration.
 
-After clicking "OK", you will be presented with a list of databases on the server.
+Select **OK**, then select a database from the list on the server.
 
-This is how the UI looks after a model has been loaded into Tabular Editor:
+## Edit the model
+
+The main window looks like this after a model loads:
 
 ![The main UI of Tabular Editor](~/content/assets/images/getting-started-te-02.png)
 
-The tree on the left side of the screen, displays all tables in the Tabular Model. Expanding a table will show all columns, measures and hierarchies within the table, grouped by their Display Folders. Use the buttons just above the tree, to toggle display folders, hidden objects, certain types of objects, or filter out objects by names. Right-clicking anywhere in the tree, will bring up a context menu with common actions, such as adding new measures, making an object hidden, duplicating objects, deleting objects, etc. Hit F2 to rename the currently selected object or multiselect and right-click to batch rename multiple objects.
+The tree on the left lists all tables in the model. Expand a table to see its columns, measures and hierarchies, grouped by display folder. The buttons above the tree toggle display folders, hidden objects and object types, and the text box filters objects by name. Right-click in the tree for common actions such as adding measures, hiding, duplicating and deleting objects. Press **F2** to rename the selected object. When you select several objects, **F2** opens **Batch Rename**:
 
 ![Batch Renaming lets you rename multiple objects simultaneously](~/content/assets/images/getting-started-te-03.png)
 
-On the top right side of the main UI, you see the DAX Editor, which may be used to edit the DAX expression of any measure or calculated column in the model. Click the "DAX Formatter" button to automatically format the code through www.daxformatter.com.
+The **Expression Editor** in the upper right edits the DAX expression of the selected measure or calculated column. **Format DAX** formats the expression through [DAX Formatter](https://www.daxformatter.com).
 
-Use the property grid in the lower right corner, to examine and set properties of objects, such as Format String, Description along with translations and perspective memberships. You can also set the Display Folder property here, but it's easier to simply drag and drop objects within the tree to update their Display Folder (try selecting multiple objects using CTRL or SHIFT).
+The property grid in the lower right shows and sets object properties such as `FormatString`, `Description`, translations and perspective membership. To change `DisplayFolder` for several objects at once, select them with **Ctrl** or **Shift** and drag them to a folder in the tree.
 
-To edit perspectives or translations (cultures), select the "Model" object in the tree, and locate the "Model Perspectives" or "Model Cultures" properties, in the property grid. Click the small ellipsis button to open a collection editor for adding/removing/editing perspectives/cultures.
+To edit perspectives or translations, select the **Model** object in the tree and select the ellipsis button next to the `Perspectives` or `Cultures` property. A collection editor opens for adding, removing and editing items:
 
 ![Editing perspectives - click the ellipsis button to the right](~/content/assets/images/getting-started-te-04.png)
 
-To save your changes back to the Model.bim file, click the save button or hit CTRL+S. If you opened an existing Tabular Database, the changes are saved directly back to the database. You will be prompted if the database was changed since you loaded it into Tabular Editor. You can always undo your changes by pressing CTRL+Z.
-
-If you want to deploy your model to another location, go to the "Model" menu and choose "Deploy".
+Press **Ctrl+S** to save. A model opened from a file saves back to that file, and a model opened from a database saves back to the database. If someone changed the deployed database after you loaded it, a **Change conflict** prompt asks whether to overwrite it. Press **Ctrl+Z** to undo and **Ctrl+Y** to redo.
 
 ## Deployment
-Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
+
+**Model > Deploy...** opens the deployment wizard, which deploys the loaded model to a server. After you select a server and a database, choose which parts of the model to deploy:
 
 ![Deployment Wizard](~/content/assets/images/getting-started-te-05.png)
 
-Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
+| Option | When cleared |
+|--------|--------------|
+| **Deploy Data Sources** | Data sources on the target database stay as they are. The deployment fails if a table uses a data source that doesn't exist on the target. |
+| **Deploy Table Partitions** | Partitions on the target stay as they are, and so does their data. |
+| **Deploy partitions governed by Incremental Refresh Policies** | Partitions created by incremental refresh stay as they are. Requires **Deploy Table Partitions**. |
+| **Deploy Shared Expressions** | Shared expressions on the target stay as they are. Requires compatibility level 1400 or higher. |
+| **Deploy Roles** | Roles on the target stay as they are. |
+| **Deploy Role Members** | Role members on the target stay as they are. Requires **Deploy Roles**. |
 
-Similarly, leaving out "Deploy Table Partitions", will make sure that existing partitions on your tables are not changed, leaving the data in the partitions intact.
+**Deploy Model Structure** is always selected when the target is an existing database. The other options are selected by default when the model contains that type of object, and **Deploy Roles** when the model contains role members. If the database doesn't exist yet, the wizard deploys data sources, partitions and shared expressions with the model, and only the role options apply. The summary page also has **Export Build...** to write deployment files for the Analysis Services Deployment Wizard and **TMSL Script** to show the deployment as a TMSL script.
 
-When the "Deploy Roles" box is checked, the roles in the target database will be updated to reflect what you have in the loaded model, however if the "Deploy Role Members" is unchecked, the members of each role will be unchanged in the target database.
+## Command line
 
-## Command Line usage
-You can use the command line for automated deployment. All deployment options that are available through the GUI, are also available through the command line.
-
-### Deployment Examples
+`TabularEditor.exe` runs deployments, scripts and Best Practice Analyzer checks from the command line. The following examples deploy a model:
 
 `TabularEditor.exe c:\Projects\Model.bim`
 
-Opens the Tabular Editor GUI and loads the specified Model.bim file (without deploying anything).
+Opens Tabular Editor 2 and loads the Model.bim file without deploying anything.
 
 `TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-Deploys the specified Model.bim file to the SSAS instance running on localhost, overwriting or creating the AdventureWorks database. The GUI will not be loaded.
+Creates the AdventureWorks database on the Analysis Services instance on localhost, without opening the user interface. If the database already exists, the deployment fails.
 
-By default, partitions, data sources and roles will not be overwritten in the target database. This behaviour can be changed by adding one or more of the following switches to the command above:
+`TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks -O -P -R -M`
 
-* `-P` Overwrite **p**artitions
-* `-C` Overwrite **c**onnections (data sources)
-* `-R` Overwrite **r**oles
-* `-M` Overwrite role **m**embers
+Overwrites the existing AdventureWorks database, including its partitions, roles and role members.
 
-More information on command-line options can be found [here](../features/Command-line-Options.md).
+Add these switches after the database name to control what the deployment overwrites:
+
+- `-O` overwrite an existing database
+- `-C` overwrite data sources (**c**onnections)
+- `-P` overwrite **p**artitions
+- `-Y` skip partitions with incremental refresh policies (with `-P`)
+- `-S` overwrite **s**hared expressions
+- `-R` overwrite **r**oles
+- `-M` overwrite role **m**embers (with `-R`)
+
+Without these switches, data sources, partitions, shared expressions and roles on the target stay as they are. @command-line-options lists every switch, including scripts, Best Practice Analyzer checks and output for Azure DevOps and GitHub Actions.
 
 > [!NOTE]
-> Since TabularEditor.exe is a Windows Forms application, running it from the command line will execute the application in a different thread, returning control to the caller immediately. This may cause issues when running deployments as part of a batch job where you need to await successful deployment before proceeding with the job. If you experience these issues, use `start /wait` to let TabularEditor finish its job before returning control to the caller:
-> 
+> `TabularEditor.exe` is a Windows Forms application, so a command-line call returns before the deployment finishes. In a batch job that waits for the deployment, use `start /wait`:
+>
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-## Advanced Scripting
-Tabular Editor lets you use C# to script changes to the loaded model. This is practical when you want to apply several changes to many objects at once. The Advanced Script editor has access to two objects:
+The [Tabular Editor CLI](xref:te-cli) runs on Windows, macOS and Linux and accepts most `TabularEditor.exe` switches. See @te-cli-migrate.
 
-* `Selected` which represents all objects that are currently selected in the explorer tree.
-* `Model` which represents the entire Tabular Object Model tree.
+## C# scripting
 
-The Advanced Script editor has some limited IntelliSense functionality to get you started:
+The **C# Script** tab runs C# code against the loaded model. Use it to apply the same change to many objects at once. Scripts have access to two objects:
+
+- `Selected` holds the objects selected in the tree.
+- `Model` holds the entire Tabular Object Model.
+
+The script editor has basic IntelliSense:
 
 ![IntelliSense helps you create scripts for Tabular Editor](~/content/assets/images/getting-started-te-06.png)
 
-More documentation and examples on Advanced Scripting, can be [found here](../how-tos/Advanced-Scripting.md).
+Tabular Editor 2 calls this feature Advanced Scripting. See @advanced-scripting for the scripting API and examples.
+
+## Feature comparison
+
+The table compares Tabular Editor 2, Tabular Editor 3 and the Tabular Editor CLI:
+
+[!include[feature-comparison](../includes/feature-comparison.partial.md)]
+
+## Next steps
+
+- @migrate-from-te2 describes the feature differences between Tabular Editor 2 and Tabular Editor 3.
+- @getting-started covers installing Tabular Editor 3 and starting the free trial.
+- @te-cli-skill installs a skill that teaches AI coding agents the Tabular Editor CLI commands.

@@ -1,0 +1,51 @@
+# Tabular Editor Documentation
+
+> Documentation for Tabular Editor 3, Tabular Editor 2 and the Tabular Editor CLI. All three edit Power BI, Microsoft Fabric and Analysis Services semantic models through the Tabular Object Model (TOM).
+
+The site covers three products:
+
+- Tabular Editor 3 is the commercial Windows desktop application. Its documentation applies to the latest version. Its MCP server lets AI agents such as Claude Code, GitHub Copilot, Codex and Cursor read, query and change the model open in Tabular Editor 3. First-time users get a free 30-day trial with the Enterprise Edition feature set; the trial needs a valid e-mail address and no credit card: https://tabulareditor.com/why-tabular-editor
+- Tabular Editor 2 is the free, open-source (MIT) Windows desktop application.
+- The Tabular Editor CLI (`te`) is a cross-platform command-line interface in Limited Public Preview. It has structured JSON output, predictable exit codes and an agent skill for AI coding agents. It also accepts Tabular Editor 2 command-line flags.
+
+Each page lists the products and Tabular Editor 3 editions it applies to in an "Applies to" block.
+
+## Tabular Editor 3
+
+- [Welcome](https://docs.tabulareditor.com/en/getting-started/index.html): onboarding guide for Tabular Editor 3
+- [Installation and Activation](https://docs.tabulareditor.com/en/getting-started/getting-started.html): install, activate a license or start the free 30-day trial
+- [Compare editions](https://docs.tabulareditor.com/en/getting-started/editions.html): Desktop, Business and Enterprise editions and the scenarios each supports
+- [Migrating from Tabular Editor 2.x](https://docs.tabulareditor.com/en/getting-started/migrate-from-te2.html): feature comparison of Tabular Editor 2 and Tabular Editor 3
+- [Migrating from Power BI Desktop](https://docs.tabulareditor.com/en/getting-started/migrate-from-desktop.html): move semantic model development from Power BI Desktop to Tabular Editor 3
+- [System requirements](https://docs.tabulareditor.com/en/references/system-requirements.html): supported operating systems, runtimes and builds
+- [All downloads](https://docs.tabulareditor.com/en/references/downloads.html): installers for every Tabular Editor 3 version
+- [MCP server](https://docs.tabulareditor.com/en/features/mcp-server.html): connect an AI agent to Tabular Editor 3 to read, query and change the open model
+- [AI Assistant](https://docs.tabulareditor.com/en/features/ai-assistant.html): built-in assistant for model design, DAX authoring and scripted edits
+
+## Tabular Editor CLI
+
+- [Tabular Editor CLI](https://docs.tabulareditor.com/en/cli/index.html): overview, design and target audiences
+- [Installation and Setup](https://docs.tabulareditor.com/en/cli/te-cli-install.html): install the `te` executable
+- [AI Agent Skill](https://docs.tabulareditor.com/en/cli/te-cli-skill.html): skill that teaches AI coding agents the `te` commands
+- [Command Reference](https://docs.tabulareditor.com/en/cli/te-cli-commands.html): every `te` command and option
+- [Migrating from the TE2 Command Line](https://docs.tabulareditor.com/en/cli/te-cli-migrate.html): run `TabularEditor.exe` flags through `te` and map them to `te` commands
+
+## Shared features
+
+- [C# Scripts](https://docs.tabulareditor.com/en/features/csharp-scripts.html): automate model changes with C# in Tabular Editor 2, Tabular Editor 3 and the CLI
+- [Best Practice Analyzer](https://docs.tabulareditor.com/en/features/Best-Practice-Analyzer.html): rule-based checks for semantic models
+- [Tabular Model Definition Language (TMDL)](https://docs.tabulareditor.com/en/features/tmdl.html): text-based model format for source control
+- [Save to folder](https://docs.tabulareditor.com/en/features/save-to-folder.html): store model metadata as one file per object, in JSON or TMDL, for source control
+
+## Tabular Editor 2
+
+- [Getting Started with Tabular Editor 2](https://docs.tabulareditor.com/en/getting-started/Getting-Started-te2.html): install Tabular Editor 2, open and deploy a model
+- [Command Line (Tabular Editor 2)](https://docs.tabulareditor.com/en/features/Command-line-Options.html): `TabularEditor.exe` command-line options
+- [Advanced Scripting](https://docs.tabulareditor.com/en/how-tos/Advanced-Scripting.html): C# scripting introduction for Tabular Editor 2, where C# scripts are called Advanced Scripting
+- [Tabular Editor 2 on GitHub](https://github.com/TabularEditor/TabularEditor): source code, releases and issues
+
+## Optional
+
+- [Full release history](https://docs.tabulareditor.com/en/references/release-history.html): release notes for every Tabular Editor 3 version
+- [API reference](https://docs.tabulareditor.com/en/api/index.html): classes and members available to C# scripts
+- [Sitemap](https://docs.tabulareditor.com/sitemap.xml): every published page

@@ -369,6 +369,18 @@ def copy_index_to_root() -> int:
     return 0
 
 
+def copy_llms_txt_to_root() -> int:
+    """Copy llms.txt (https://llmstxt.org) from content to _site/ root."""
+    src = Path("content/llms.txt")
+    if not src.exists():
+        print("Warning: content/llms.txt not found, skipping llms.txt copy")
+        return 0
+
+    shutil.copy(src, Path("_site/llms.txt"))
+    print("Copied llms.txt to _site/ root")
+    return 0
+
+
 def copy_api_docs(languages: list[str]) -> int:
     """Copy API docs from English to localized sites."""
     en_api = Path("_site/en/api")
@@ -569,7 +581,9 @@ def _build(args: argparse.Namespace) -> int:
     
     # Copy index.html to site root for SWA validation
     copy_index_to_root()
-    
+
+    copy_llms_txt_to_root()
+
     # Inject SEO tags (hreflang, canonical) into HTML files for built languages
     for lang in build_langs:
         run_command(

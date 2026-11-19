@@ -2,7 +2,7 @@
 uid: getting-started
 title: Installation and Activation
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -72,7 +72,7 @@ For details on how Tabular Editor authenticates to the XMLA endpoint and how to 
 
 ### Requesting a trial license
 
-If you have not used Tabular Editor 3 before, you are eligible for a free 30-day trial. When you choose this option, you are prompted for an e-mail address. We use the e-mail address to validate whether you have an existing activation of Tabular Editor 3.
+If you have not used Tabular Editor 3 before, you are eligible for a free 30-day trial with the Enterprise Edition feature set. The trial needs a valid e-mail address and no credit card. When you choose this option, you are prompted for an e-mail address. We use the e-mail address to validate whether you have an existing activation of Tabular Editor 3.
 
 > [!NOTE]
 > Tabular Editor ApS does not send unsolicited e-mails or forward your e-mail address to third parties when you sign up for a 30-day trial license. View our @privacy-policy for more information.

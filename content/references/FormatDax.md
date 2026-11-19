@@ -1,6 +1,7 @@
 ﻿---
 uid: formatdax
 title: FormatDax deprecation
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,6 +10,8 @@ applies_to:
       none: true
 ---
 # FormatDax deprecation
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 The `FormatDax` method (which is one of the available [helper methods](xref:advanced-scripting#helper-methods) in Tabular Editor) has been deprecated with the release of Tabular Editor 2.13.0.
 
