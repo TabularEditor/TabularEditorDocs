@@ -2,7 +2,7 @@
 uid: deploy-current-model
 title: Implementar el modelo cargado
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,8 +25,10 @@ La utilidad del asistente está en lo que te permite _dejar intacto_ en el desti
 - **Implementar Data sources** envía los Data sources explícitos. Desmárcala para que el destino conserve sus propias cadenas de conexión y credenciales, que suele ser lo que quieres al pasar de desarrollo a pruebas.
 - **Implementar particiones de tabla** sincroniza las particiones con los metadatos del modelo. Desmárcala para dejar intactas las particiones existentes y los datos que contienen. Si está activada, las particiones del destino que no estén en el modelo se eliminan junto con sus datos.
   - **Implementar particiones regidas por políticas de actualización incremental** aparece cuando la opción anterior está activada y te permite implementar todas las particiones _excepto_ las que genera una política de actualización incremental.
+- **Implementar expresiones compartidas** envía las expresiones compartidas del modelo. Desmárquela para conservar las expresiones compartidas propias del destino. Esta opción está disponible en Tabular Editor 3.
 - **Implementar roles del modelo** envía los roles definidos en el modelo. Desmárcala para conservar los roles del destino tal como están.
   - **Implementar miembros de roles del modelo** envía la asignación de miembros a los roles. Los miembros de los roles suelen administrarse en el servidor en lugar de en los metadatos, así que es normal desmarcar esta opción.
+- **Implementar metadatos lingüísticos (sinónimos de preguntas y respuestas, instrucciones de IA y esquema de datos de IA)** envía los metadatos lingüísticos de cada cultura. Desmárquela para conservar los sinónimos de preguntas y respuestas, las instrucciones de IA y el esquema de datos de IA configurados en el servicio Power BI.
 
 @deployment cubre todo esto en detalle, junto con el script TMSL que genera el asistente, lo que una implementación hace con los datos que ya existen en el destino y cómo implementar desde la línea de comandos o desde un pipeline.
 

@@ -1,4 +1,4 @@
----
+﻿---
 uid: dax-debugger
 title: Depurador de DAX
 author: Daniel Otykier
@@ -56,8 +56,7 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 - Arrastrar una medida desde el Explorador TOM, o
 - Hacer clic con el botón derecho en una medida en el Explorador TOM y elegir **Agregar a Pivot Grid**, o
 - Seleccionar la medida desde la lista de campos del Pivot Grid (**Pivot Grid > Mostrar campos**)
-
-3. (Opcional) Agrega una o varias columnas al Pivot Grid en el área de Filtro, el área de Columnas o el área de Filas.
+3. (Opcional) Añada una o más columnas o jerarquías al Pivot Grid en el área de Filtros, el área de Columnas o el área de Filas.
 4. Haz clic con el botón derecho en la celda de valor dentro del Pivot Grid y elige **Depurar este valor**.
 
 ![Depurar desde tabla dinámica](~/content/assets/images/features/debug-from-pivot.png)

@@ -2,25 +2,25 @@
 uid: policies
 title: Directivas
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Tabular Editor 2 solo lee la clave heredada del Registro y solo tiene en cuenta las directivas marcadas como TE2 más abajo."
+      note: "Tabular Editor 2 reads the legacy registry key only, and honors only the policies marked TE2 below."
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
           partial: true
-          note: "Solo directivas generales"
+          note: "General policies only"
         - edition: Business
           partial: true
-          note: "Solo directivas generales"
+          note: "General policies only"
         - edition: Enterprise
           full: true
-    - product: CLI de Tabular Editor
+    - product: Tabular Editor CLI
       partial: true
-      note: "En Windows, y solo para las directivas marcadas como CLI más abajo."
+      note: "On Windows, and only for the policies marked CLI below."
 ---
 
 # Directivas
@@ -90,6 +90,7 @@ Para aplicar una de ellas, agrega un valor `REG_DWORD` con el nombre que aparece
 | DisableAiChat                  | TE3           | El panel de chat del Asistente de IA no está disponible. El resto de la funcionalidad de IA, incluido el servidor MCP, no se ve afectada.                                                                                                                                                                          |
 | DisableMcpServer               | TE3           | El servidor MCP no está disponible, así que las herramientas de agentes externos no pueden conectarse a Tabular Editor 3. El chat del Asistente de IA no se ve afectado.                                                                                                                                           |
 | RequireMcpAccessToken          | TE3           | Los clientes que se conecten al servidor MCP deben presentar el token de acceso que se muestra en el cuadro de diálogo **Herramientas > Servidor MCP...**, y los usuarios no pueden desactivar ese requisito.                                                                      |
+| RequireNativeLibrarySignatureVerification | TE3 | Tabular Editor 3 verifica la firma Authenticode de las bibliotecas del editor de código, `Scintilla.dll` y `Lexilla.dll`, antes de cargarlas. Si el equipo no puede validar la cadena de certificados del editor, los editores de código no se inician y Tabular Editor 3 se cierra. En el editor de directivas de grupo, esta directiva se denomina **Requerir verificación de la firma de las bibliotecas de soporte del editor de código**. |
 
 ### En la CLI de TE
 
@@ -148,7 +149,7 @@ Los cinco valores `McpMax...` se aplican únicamente al servidor MCP. Cuando no 
 | AiOrganizationId       | Nombre    |                                                         | Fija la organización de OpenAI a la que se facturan las solicitudes.                                                                                                                                                                                                                   |
 | AiProjectId            | Nombre    |                                                         | Fija el proyecto de OpenAI al que se facturan las solicitudes.                                                                                                                                                                                                                         |
 | AiAllowedProviders     | Lista     | Cualquiera de los nombres de los proveedores anteriores | Restringe qué proveedores pueden configurar los usuarios. Un proveedor establecido por `AiProvider` se permite tanto si figura en la lista como si no, y `None` siempre se ofrece; una lista de permitidos no sirve para evitar que un usuario desactive el asistente. |
-| AiAllowedEndpointHosts | Lista     | Nombres de host                                         | Restringe a qué hosts puede apuntar un endpoint; por ejemplo, `Gateway.contoso.com` o `*.contoso.com`.                                                                                                                                                                                 |
+| AiAllowedEndpointHosts | Lista     | Nombres de host                                         | Restringe a qué hosts puede apuntar un endpoint; por ejemplo, `gateway.contoso.com` o `*.contoso.com`.                                                                                                                                                                                 |
 
 La configuración bloqueada aparece como de solo lectura en **Herramientas > Preferencias > Funciones de IA > Asistente de IA**, y el Asistente de IA usa la configuración bloqueada independientemente de lo que el usuario hubiera elegido antes. No se escribe nada en las preferencias del propio usuario, por lo que su proveedor, endpoint, modelo y clave API vuelven a aparecer si se quita la directiva. Las claves API nunca se distribuyen mediante directiva.
 

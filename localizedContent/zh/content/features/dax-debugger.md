@@ -1,4 +1,4 @@
----
+﻿---
 uid: dax-debugger
 title: DAX调试器
 author: Daniel Otykier
@@ -56,8 +56,7 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 - 从 TOM Explorer 拖动一个度量值，或
 - 在 TOM Explorer 中右键单击某个度量值，然后选择 **添加到 Pivot Grid**，或
 - 从 Pivot Grid 字段列表中选择该度量值（**Pivot Grid > 显示字段**）
-
-3. （可选）在 Pivot Grid 的筛选区域、列区域或行区域中添加一列或多列。
+3. （可选）在“筛选器”区域、“列”区域或“行”区域中，向 Pivot Grid 添加一个或多个列或层次结构。
 4. 在 Pivot Grid 中右键单击数值单元格，然后选择 **调试此值**。
 
 ![从 Pivot Grid 调试](~/content/assets/images/features/debug-from-pivot.png)

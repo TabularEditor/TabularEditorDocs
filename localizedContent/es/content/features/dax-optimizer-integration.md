@@ -2,7 +2,7 @@
 uid: dax-optimizer-integration
 title: Integración con el Optimizador de DAX
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -96,13 +96,13 @@ Aquí puedes elegir si el VPAX debe cargarse como un modelo nuevo dentro del Wor
 Cuando hagas clic en el botón **Aceptar**, el archivo VPAX se subirá al Optimizador de DAX y podrás empezar a analizar el modelo.
 
 > [!NOTE]
-> Si Tabular Editor 3 no tiene estadísticas del Analizador VertiPaq disponibles, esas estadísticas se recopilarán para el modelo actual antes de subir el archivo VPAX. También volveremos a recopilar automáticamente las estadísticas si la última recopilación es anterior o coincide con la de la última subida del archivo VPAX, para ese modelo en concreto.
+> Si no hay estadísticas del Analizador VertiPaq disponibles en Tabular Editor 3, se recopilan estadísticas del modelo actual antes de cargar el archivo VPAX. Las estadísticas también se vuelven a recopilar si la última recopilación es anterior o igual a la última carga de VPAX para el modelo. Las estadísticas de una carga siempre se leen a partir de los datos del modelo. Si no se pueden leer, la carga no se inicia.
 
 ### Ofuscación
 
 De forma predeterminada, los archivos VPAX subidos con Tabular Editor 3 se ofuscarán. En **Subir modelo** puedes activar o desactivar la ofuscación para las subidas de modelos nuevos. Las subidas posteriores de versiones del modelo se ofuscarán o no en función de cómo se haya subido la primera versión. También puedes exportar localmente un archivo VPAX ofuscado sin subirlo al Optimizador de DAX desde la vista **Analizador VertiPaq**. En este caso, se genera un archivo de diccionario y se guarda en tu equipo local, junto al archivo .ovpax exportado. Este archivo de diccionario se usa para desofuscar el contenido del archivo .ovpax.
 
-Cuando se suben datos VPAX ofuscados al servicio del Optimizador de DAX a través de la vista **Optimizador de DAX**, Tabular Editor realiza automáticamente el seguimiento de los diccionarios de ofuscación y los guarda en la carpeta `%LocalAppData%\\TabularEditor3\\DaxOptimizer` de tu equipo local. Por ello, al explorar modelos con la característica **Optimizador de DAX** en Tabular Editor 3, los modelos se desofuscan automáticamente si se encuentra un diccionario adecuado en esta carpeta, lo que ofrece una experiencia más fluida al usar la ofuscación.
+Cuando se suben datos VPAX ofuscados al servicio del Optimizador de DAX a través de la vista **Optimizador de DAX**, Tabular Editor realiza automáticamente el seguimiento de los diccionarios de ofuscación y los guarda en la carpeta `%LocalAppData%\TabularEditor3\DaxOptimizer` de tu equipo local. Por ello, al explorar modelos con la característica **Optimizador de DAX** en Tabular Editor 3, los modelos se desofuscan automáticamente si se encuentra un diccionario adecuado en esta carpeta, lo que ofrece una experiencia más fluida al usar la ofuscación.
 
 Si no se encuentra el diccionario, tendrás la opción de especificar manualmente un archivo de diccionario.
 
@@ -113,7 +113,7 @@ Si no se proporciona ningún archivo de diccionario, solo podrás explorar el mo
 [Más información sobre la ofuscación del Optimizador de DAX](https://docs.daxoptimizer.com/how-to-guides/obfuscating-files).
 
 > [!TIP]
-> Si quieres explorar un modelo ofuscado a través de la interfaz web del Optimizador de DAX, puedes especificar un diccionario desde la ubicación `%LocalAppData%\\TabularEditor3\\DaxOptimizer`. La interfaz web del Optimizador de DAX realiza la desofuscación en el lado del cliente, por lo que tu diccionario nunca se carga en el servicio del Optimizador de DAX.
+> Si quieres explorar un modelo ofuscado a través de la interfaz web del Optimizador de DAX, puedes especificar un diccionario desde la ubicación `%LocalAppData%\TabularEditor3\DaxOptimizer`. La interfaz web del Optimizador de DAX realiza la desofuscación en el lado del cliente, por lo que tu diccionario nunca se carga en el servicio del Optimizador de DAX.
 
 ### Analizar un modelo
 

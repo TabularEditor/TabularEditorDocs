@@ -1,8 +1,8 @@
----
+﻿---
 uid: semantic-model-types
 title: Tipos de modelos semánticos de Power BI
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,7 +54,9 @@ Tabular Editor puede trabajar con varios tipos de modelos. A continuación encon
 
 <a name="DirectLake">1</a> - La partición de la tabla debe ser una partición de entidad para funcionar correctamente. Los modelos Direct Lake solo pueden tener una partición por tabla. <a name="DirectLakeCalculated">2</a> - Las tablas calculadas no pueden hacer referencia a Direct Lake en tablas o columnas de OneLake. Se admiten los grupos de cálculo, los parámetros de hipótesis y los parámetros de campo.
 
-<a name="TE3Prem">3</a> - Solo funciones de Tabular Editor 3. Las operaciones realizadas a través del punto de conexión XMLA requieren una licencia Business o Enterprise. [Más información](xref:editions). <a name="DirectLakeSQLCalculated">4</a> - Direct Lake en SQL solo admite grupos de cálculo, parámetros de hipótesis y parámetros de campo, que crean implícitamente tablas calculadas. No se admiten las tablas calculadas de uso general. <a name="DirectLakeCalcColumn">5</a> - Funcionalidad en versión preliminar. Las columnas calculadas en Direct Lake sobre OneLake se evalúan en el contexto de consulta del usuario actual, en lugar de materializarse: respetan la seguridad a nivel de filas y la seguridad a nivel de objetos, pero no se pueden usar como claves de relación y no responden a los filtros del Report ni a los segmentadores. Consulta la [Guía de Direct Lake](xref:direct-lake-guidance) para obtener más información.
+<a name="TE3Prem">3</a> - Solo funciones de Tabular Editor 3. Las operaciones realizadas a través del punto de conexión XMLA requieren una licencia Business o Enterprise. [Más información](xref:editions).
+<a name="DirectLakeSQLCalculated">4</a> - Direct Lake en SQL solo admite grupos de cálculo, parámetros de simulación y parámetros de campo, que crean implícitamente tablas calculadas. No se admiten tablas calculadas generales.
+<a name="DirectLakeCalcColumn">5</a> - Función de vista previa. Las columnas calculadas de las tablas de Direct Lake en OneLake deben usar el contexto de expresión `UserContext`. Se evalúan en el momento de la consulta y no se materializan, por lo que no se pueden usar como claves de relación. Consulte [Directrices de Direct Lake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake) para obtener más detalles.
 
 > [!NOTE]
 > En la versión de junio de 2025 de Power BI Desktop se eliminaron todas las limitaciones de modelado para las herramientas de terceros. Antes de eso, no se admitían varias operaciones de modelado. Consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations).

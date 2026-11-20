@@ -9,7 +9,7 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       none: true
-    - product: CLI de Tabular Editor
+    - product: Tabular Editor CLI
       none: true
 ---
 
@@ -379,6 +379,8 @@ Si también está usando el modificador "-V", el nivel de gravedad de cada regla
 A partir de la [versión 2.8](https://github.com/TabularEditor/TabularEditor/releases/tag/2.8) (2.8), puede usar el modificador -SC (-SCHEMACHECK) para validar las consultas de origen de las tablas. Esto equivale a invocar la [interfaz de usuario de Refresh Table Metadata](xref:importing-tables-te2#refreshing-table-metadata), con la diferencia de que no se realizará ningún cambio en el modelo, pero las diferencias de esquema se notifican en la consola. Los tipos de datos cambiados y las columnas que se hayan agregado al origen se notificarán como advertencias. Las columnas de origen que falten se notificarán como errores. Si se especifican los modificadores -SC (-SCHEMACHECK) y -S (-SCRIPT), la comprobación de esquema se ejecutará después de que el script se haya ejecutado correctamente, lo que le permite modificar las propiedades de la fuente de datos antes de realizar la comprobación de esquema, por ejemplo, para especificar la contraseña de una credencial.
 
 También puede anotar tablas y columnas si quiere que la comprobación de esquema las trate de una manera específica. [Más información aquí](xref:importing-tables-te2#ignoring-objects).
+
+Tabular Editor CLI ejecuta la misma comprobación con [`te schemacheck`](xref:te-cli-commands#schemacheck), que también comprueba las tablas de Power Query (M) y Direct Lake.
 
 ## Salida de la línea de comandos y códigos de salida
 

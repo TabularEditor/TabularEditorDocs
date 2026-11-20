@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: 高级安装与激活
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -149,9 +149,14 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssista
 | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | 命令行设置了 `ADDLOCAL`、`REMOVE` 或其他功能属性                                                    | 命令行决定所选内容。 `ADDLOCAL=MainFeature` 会从已安装 AI 功能的计算机中移除这些功能，而 `ADDLOCAL=ALL` 会在未安装这些功能的计算机上安装它们 |
 | 部署会先卸载旧版本，再安装新版本，例如将 Intune 的 supersedence 设置为“卸载”                                    | 该安装会被视为全新安装，除非命令行将其排除，否则会包含 AI 功能                                                            |
-| 该组件针对的运行时与已安装的组件不同，例如在已安装 .NET 8 组件的计算机上部署 .NET 10 组件 | .NET 8 和 .NET 10 组件是两个独立的产品。如果是全新安装，则默认包含 AI 功能，除非通过命令行将其排除  |
 
 无论哪种情况，`DisableAi` 策略都会覆盖该选择。
+
+### 在 .NET 8 和 .NET 10 包之间切换
+
+.NET 8 和 .NET 10 包相互替换。当您在一台已安装相同或更早版本另一版本的计算机上安装其中一个版本时，安装程序会在安装任何文件之前先卸载另一版本，并保留该版本的Feature选择。如果一台计算机上同时安装了这两个版本，则在下一次安装后，该计算机上将只保留一个安装，并且**设置 > 应用 > 已安装的应用**中将列出一个**Tabular Editor 3**。
+
+如果安装的另一个版本是较新版本，则安装将停止，并显示一条消息。请先卸载较新版本，然后再次运行安装程序。
 
 ### 通过 `DisableAi` 策略强制执行此决定
 
@@ -169,7 +174,7 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssista
 
 你也可以使用 `/package` 替代 `/i`。将 `<version>` 替换为实际的版本字符串。
 
-MSI 组件的命名格式为 `TabularEditor.<version>`.<architecture>.<runtime>.msi`，例如 `TabularEditor.3.27.0.x64.Net10.msi`或`TabularEditor.3.27.0.ARM64.Net8.msi\`。选择适合目标计算机的体系结构和运行时；参见 @system-requirements。 MSI 不会安装 .NET Desktop Runtime，所以先部署它。
+MSI 组件的命名格式为 `TabularEditor.<version>.<architecture>.<runtime>.msi`.<architecture>.<runtime>.msi`TabularEditor.3.27.0.x64.Net10.msi`TabularEditor.3.27.0.x64.Net10.msi`TabularEditor.3.27.0.ARM64.Net8.msi`TabularEditor.3.27.0.ARM64.Net8.msi\`。选择适合目标计算机的体系结构和运行时；参见 @system-requirements。 MSI 不会安装 .NET Desktop Runtime，所以先部署它。
 
 可用的 MSI 命令行选项详见 Microsoft 官方文档：
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)

@@ -2,7 +2,7 @@
 uid: load-save-model
 title: 加载与保存模型元数据
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "桌面版无法打开或保存模型元数据文件。"
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -69,6 +69,8 @@ Tabular Editor 可将模型元数据从文件、文件夹或服务器读取到�
 在 Tabular Editor 3.26 及更早版本，以及 Tabular Editor 2 中，该命令名为 **文件 > 还原**。
 
 在 Tabular Editor 3.27.0 及更高版本中，当代理、脚本或 `git pull` 更改了已打开模型的元数据文件时，模型会重新加载；如果你有未保存的更改，则会先显示提示。参见 [从磁盘自动重新加载](xref:auto-reload)。
+
+打开的 DAX 查询和 Pivot Grid 文档在手动或自动重新加载过程中保持打开状态，并连接到重新加载的模型。
 
 > [!WARNING]
 > 在让任何工具写入模型元数据之前（包括 Tabular Editor），请先备份。保存会覆盖源，重新加载无法找回你已保存的更改。

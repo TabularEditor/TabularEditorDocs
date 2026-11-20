@@ -2,7 +2,7 @@
 uid: object-properties-model
 title: 模型属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -202,7 +202,7 @@ Power BI 在将模型从旧格式转换时会使用此属性。通过 XMLA endpo
 
 | 值                 | 含义                                   |
 | ----------------- | ------------------------------------ |
-| `自动`              | 查询会在需要时回退到 DirectQuery。这是默认值。        |
+| `Automatic`              | 查询会在需要时回退到 DirectQuery。这是默认值。        |
 | `DirectLakeOnly`  | 已禁用回退功能。无法在 Direct Lake 模式下运行的查询会报错。 |
 | `DirectQueryOnly` | 所有查询都使用 DirectQuery。用它来测试或比较性能。      |
 
@@ -216,10 +216,10 @@ Power BI 在将模型从旧格式转换时会使用此属性。通过 XMLA endpo
 
 | 值    | 含义                                                |
 | ---- | ------------------------------------------------- |
-| `自动` | 按照 TOM 库的说明，在需要时在数据加载或查询执行期间构建内存索引。               |
-| `显式` | 只有在你通过 _刷新索引_ 操作明确请求时，模型才会构建并持久化该索引。其他刷新类型不会构建索引。 |
-| `完全` | 模型会在执行 _完全刷新_、_计算刷新_ 和 _刷新索引_ 操作时构建并持久化索引。        |
-| `默认` | 使用模型默认的索引构建和持久化行为。                                |
+| `Auto` | 按照 TOM 库的说明，在需要时在数据加载或查询执行期间构建内存索引。               |
+| `Explicit` | 只有在你通过 _刷新索引_ 操作明确请求时，模型才会构建并持久化该索引。其他刷新类型不会构建索引。 |
+| `Full` | 模型会在执行 _完全刷新_、_计算刷新_ 和 _刷新索引_ 操作时构建并持久化索引。        |
+| `Default` | 使用模型默认的索引构建和持久化行为。                                |
 
 该属性需要预览版兼容级别，而 Tabular Editor 3 不会在属性视图中显示它。你可以在 C# Script 中设置它。
 
@@ -243,7 +243,7 @@ Power BI 在将模型从旧格式转换时会使用此属性。通过 XMLA endpo
 
 当为 `true` 时，Power BI 会提示 Report 作者不要在实时连接到此模型的 Report 中创建 Report 级度量值。
 
-你无法设置此属性。 TOM 库仅在内部兼容级别 (2147483647) 下才允许设置该属性，因此 Tabular Editor 以及任何其他使用 TOM 的工具都会在所有已发布的兼容级别下拒绝此更改。 Tabular Editor 3 不会在属性视图中显示它。
+您无法设置此属性。Tabular Editor 和任何其他使用 TOM 的工具都会在每个已发布的兼容级别拒绝该更改。Tabular Editor 3 不会在“属性”视图中显示它。
 
 ### 强制唯一名称
 
@@ -285,11 +285,11 @@ Power BI Desktop 中的新模型会将 `ForceUniqueNames` 设为 `false`，而�
 
 | 值                        | 含义                               |
 | ------------------------ | -------------------------------- |
-| `继承`                     | 使用系统定义的行为。                       |
-| `基本`                     | 读者无法访问模型中的敏感元数据，例如度量值定义或其他计算表达式。 |
+| `Inherited`                     | 使用系统定义的行为。                       |
+| `Basic`                     | 读者无法访问模型中的敏感元数据，例如度量值定义或其他计算表达式。 |
 | `CalculationDefinitions` | 读者还可以读取与计算定义相关的元数据。              |
 
-如果模型中的逻辑较为敏感，而读者只需要使用它，就设置为 `基本`。 `MetadataAccessPolicy` 不会隐藏任何数据。要保护数据，请参阅 @roles-and-rls。
+如果模型中的逻辑较为敏感，而读者只需要使用它，就设置为 `Basic`。 `MetadataAccessPolicy` 不会隐藏任何数据。要保护数据，请参阅 @roles-and-rls。
 
 <!-- TODO (not verifiable from TE3 source): the meanings above come from Microsoft's TOM library. Confirm what the system-defined behavior for Inherited is (workspace, tenant or service setting) and exactly which metadata Basic hides. -->
 
@@ -301,7 +301,7 @@ Power BI Desktop 中的新模型会将 `ForceUniqueNames` 设为 `false`，而�
 
 | 值           | 含义                                                                   |
 | ----------- | -------------------------------------------------------------------- |
-| `自动`        | 默认值。当前与 `NonVisual` 相同。根据 Microsoft 的说明，达到未来某个更高兼容级别的模型将使用 `Visual`。 |
+| `Automatic`        | 默认值。当前与 `NonVisual` 相同。根据 Microsoft 的说明，达到未来某个更高兼容级别的模型将使用 `Visual`。 |
 | `Visual`    | 多选或未选中任何项时，返回 `BLANK()`。当 Visual 按计算组分组时，小计会通过在计算组上下文中评估所选度量值来计算。    |
 | `NonVisual` | 多选或未选择任何项时，返回 `SELECTEDMEASURE()`。当 Visual 按计算组分组时，小计会被隐藏。           |
 

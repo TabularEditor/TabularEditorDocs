@@ -1,8 +1,8 @@
----
+﻿---
 uid: system-requirements
 title: 系统要求
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ Tabular Editor 3 是一款 Windows 桌面应用程序。从 3.27.0 版本起，�
 | .NET 10 _（推荐）_ | x64、ARM64 | `.exe` 安装程序、`.msi`、便携式 `.zip` |
 | .NET 8         | x64、ARM64 | `.exe` 安装程序、`.msi`、便携式 `.zip` |
 
-.NET 10 和 .NET 8 的构建&#x5728;_&#x529F;能上完全一致_。两者功能完全对等，没有一方有而另一方缺的内容，而且可以同时安装。
+.NET 10 和 .NET 8 版本在*功能上是相同的*。一个版本中存在的功能在另一个版本中也存在。使用 `.exe` 或 `.msi` 安装程序安装一个版本会替换另一个版本。请参阅[在 .NET 8 和 .NET 10 包之间切换](xref:installation-activation-basic#switching-between-the-net-8-and-net-10-packages)。
 
 从 3.23.0 版本开始，ARM64 构建为原生版本。
 

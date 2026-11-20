@@ -20,7 +20,7 @@ applies_to:
 
 # Asistente de IA
 
-El Asistente de IA es un panel de chat para el desarrollo de modelos semánticos. Explora los metadatos de tu modelo, escribe y ejecuta consultas DAX, genera C# Scripts, ejecuta comprobaciones del Best Practice Analyzer, consulta las estadísticas del Analizador VertiPaq y busca en la base de conocimientos de Tabular Editor. La [configuración de permisos](#permissions-and-consent) controla lo que envía a tu proveedor de IA. El Asistente de IA se ha sometido a pruebas de penetración independientes; consulta el [Centro de confianza de Tabular Editor](https://trust.tabulareditor.com).
+El asistente de IA es un panel de chat para el desarrollo de modelos semánticos. Explora los metadatos de tu modelo, escribe y ejecuta consultas DAX, genera scripts C#, explica y corrige los errores de tu modelo y de los documentos abiertos, ejecuta comprobaciones de Best Practice Analyzer, consulta estadísticas de VertiPaq Analyzer y busca en la base de conocimientos de Tabular Editor. La [configuración de permisos](#permissions-and-consent) controla lo que envía a tu proveedor de IA. El asistente de IA se ha sometido a pruebas de penetración independientes; consulte el [Centro de confianza de Tabular Editor](https://trust.tabulareditor.com).
 
 El Asistente de IA usa un modelo Bring Your Own Key, en el que proporcionas una clave de API de uno de los proveedores compatibles y el asistente se ejecuta directamente contra la API de ese proveedor.
 
@@ -191,7 +191,8 @@ En el marco de tus [concesiones de permisos](#permissions-and-consent), el Asist
 - **Generación de C# Scripts**: crea C# Scripts para realizar cambios en el modelo. Según tu configuración, el asistente abre el script en una ventana del editor para que lo ejecutes, o lo ejecuta él mismo; consulta [Permitir que el asistente cambie tu modelo](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**: ejecuta el análisis de BPA, lista las infracciones de las reglas y crea o modifica reglas de BPA
 - **Analizador VertiPaq**: consulta estadísticas de uso de memoria y cardinalidad de columnas
-- **Acceso a documentos**: lee y modifica documentos abiertos: consultas DAX, C# Scripts y scripts DAX
+- **Errores del modelo**: enumera los errores del modelo, las advertencias y los mensajes de Analysis Services, los mismos que muestra la [vista Mensajes](xref:messages-view), con las causas raíz en primer lugar. Se informa al asistente cuando cambian los errores del modelo.
+- **Acceso a documentos**: lee y modifica consultas DAX abiertas, scripts C# y scripts DAX, y lee los errores y advertencias de todos los documentos abiertos, incluidas las Pivot Grids. El documento activo forma parte del contexto del asistente, por lo que puedes preguntar «¿Por qué veo este error en esta consulta?». No puede leer ni cambiar el diseño de una cuadrícula dinámica.
 - **Búsqueda en la base de conocimientos**: busca en la documentación integrada de Tabular Editor
 - **Navegación por la interfaz de usuario**: genera enlaces de acción `te3://` que abren cuadros de diálogo y funcionalidades específicas de Tabular Editor
 
@@ -211,6 +212,7 @@ La configuración está desactivada de forma predeterminada y no está disponibl
 - Si **Vista previa de cambios** está activada (de forma predeterminada), aparece el [cuadro de diálogo de vista previa](xref:csharp-scripts#run-c-scripts-with-preview) antes de que se apliquen los cambios. **Cancelar** revierte los cambios y envía un Report del rechazo al asistente. Si **Vista previa de cambios** está desactivada, los cambios se aplican sin mostrar ningún cuadro de diálogo.
 - Los cambios del script quedan registrados como una única entrada de deshacer: **C# script (AI Assistant)**. El foco permanece en el cuadro de chat, donde **Ctrl+Z** no deshace los cambios del modelo. Para deshacer el C# Script completo, haz clic en el Explorador TOM y pulsa **Ctrl+Z**, o selecciona **Deshacer C# Script (Asistente de IA)** en el menú **Editar**.
 - Si el script falla a mitad de la ejecución, el modelo no se modifica y el asistente genera un Report del error.
+- Si el script se ejecuta correctamente e introduce o resuelve errores de DAX, el asistente recibe una lista de esos errores, agrupados por causa raíz.
 - No se ejecuta ningún script que acceda a archivos, la red o ensamblados externos. Se abre como un artefacto de script con la insignia **Inseguro** y **Ejecutar** deshabilitado, y la respuesta del asistente indica qué utilizaba el script.
 
 Si pides un script, por ejemplo: "Escríbeme un script que cambie el nombre de todas las medidas a estilo oración", el asistente lo abre como un documento de script que ejecutas tú mismo, incluso con esta configuración activada.
@@ -327,10 +329,10 @@ Establece un nivel de acceso para cada recurso para controlar a qué puede acced
 
 | Recurso                    | Qué abarca                                                                                                                                                                              | Niveles                       | Predeterminado |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | -------------- |
-| **Metadatos del modelo**   | Nombres de tablas, columnas y medidas, expresiones, descripciones y elementos similares. El permiso de lectura también incluye las estadísticas del Analizador VertiPaq | Denegar / Leer / Escribir     | **Leer**       |
-| **Datos del modelo**       | Valores de datos de tu modelo, como los resultados de consultas DAX. Requiere una conexión activa                                                                       | Denegar / Leer                | **Denegar**    |
+| **Metadatos del modelo** | Nombres de tablas, columnas y medidas, expresiones, descripciones y elementos similares. El nivel de lectura también abarca las estadísticas del Analizador VertiPaq y los mensajes de error y advertencia del modelo | Denegar / Lectura / Escritura | **Lectura** |
+| **Datos del modelo** | Valores de datos de su modelo, como los resultados de las consultas DAX y el texto de los errores devueltos por Analysis Services, que pueden contener valores de datos. Las consultas DAX requieren una conexión activa | Denegar / Leer | **Denegar** |
 | **Best Practice Analyzer** | Leer enumera las reglas y ejecuta el análisis; Escribir agrega o modifica reglas                                                                                                        | Denegar / Lectura / Escritura | **Lectura**    |
-| **Documentos**             | Tus documentos abiertos: consultas DAX, C# Scripts y scripts DAX. Lectura permite ver su contenido; Escritura es necesaria para crearlos o modificarlos | Denegar / Lectura / Escritura | **Escritura**  |
+| **Documentos** | Tus documentos abiertos: consultas DAX, scripts C#, scripts DAX y tablas dinámicas. Lectura se refiere a su contenido y a sus errores y advertencias; Escritura es necesaria para crearlos o modificarlos. Los diseños de Pivot Grid no se pueden leer ni modificar | Denegar / Lectura / Escritura | **Escritura** |
 | **macros**                 | Tu biblioteca de macros. Lectura permite listar y leer macros; Escritura se reserva para futuras herramientas de edición de macros                                      | Denegar / Lectura / Escritura | **Escritura**  |
 
 **Escritura** (que aparece como **Lectura/Escritura** en las listas desplegables) incluye **Lectura**.

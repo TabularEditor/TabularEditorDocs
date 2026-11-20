@@ -134,6 +134,8 @@ Pregúntale a tu agente:
 
 El agente responde con el nombre del modelo, cómo se carga, si tiene cambios sin guardar y su nivel de compatibilidad, o reporta que no hay ningún modelo abierto. No aparece ningún mensaje en Tabular Editor.
 
+El nombre del modelo que recibe el agente sigue la configuración **Detalle del origen del modelo** en **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**. Con **Solo nombre**, el agente no recibe rutas de archivo ni nombres de servidores, y con **Oculto**, recibe `Model loaded` en lugar del nombre del modelo.
+
 ## Configurar los permisos del agente
 
 Los permisos controlan qué herramientas recibe un agente, y el [Asistente de IA](xref:ai-assistant) usa los mismos permisos. Configúralos en el cuadro de diálogo **Herramientas > Servidor MCP...** o en **Herramientas > Preferencias > Funciones de IA > Permisos**; ambas opciones modifican la misma configuración.
@@ -146,10 +148,10 @@ Cada recurso tiene un nivel de acceso:
 
 | Recurso                    | Predeterminado | Lo que obtiene el agente                                                                                                                                                                                                              |
 | -------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Metadatos del modelo**   | Lectura        | Lectura: tablas, columnas, medidas, expresiones, descripciones, relaciones y estadísticas del Analizador VertiPaq. Escritura: la capacidad de modificar el modelo mediante C# Scripts |
-| **Datos del modelo**       | Denegar        | Lectura: resultados de consultas DAX (valores de datos de tu modelo). Requiere una conexión en vivo                                                                                |
+| **Metadatos del modelo** | Lectura | Lectura: tablas, columnas, medidas, expresiones, descripciones, relaciones, estadísticas de VertiPaq Analyzer y los mensajes de error y advertencia del modelo. Escritura: la capacidad de cambiar el modelo mediante scripts de C# |
+| **Datos del modelo** | Denegar | Leer: resultados de consultas DAX (valores de datos de tu modelo) y el texto de los errores devueltos por Analysis Services, que pueden contener valores de datos. Las consultas DAX necesitan una conexión activa |
 | **Best Practice Analyzer** | Lectura        | Lectura: el conjunto de reglas y los resultados del análisis. Escritura: añadir y modificar reglas                                                                                    |
-| **Documentos**             | Escritura      | Lectura: el contenido de tus consultas DAX abiertas, C# Scripts y scripts DAX. Escribir: modificarlos y crear scripts de C# y consultas DAX                                           |
+| **Documentos** | Escritura | Lectura: el contenido de tus consultas DAX abiertas, los scripts C# y los scripts DAX, así como los errores y las advertencias de todos los documentos abiertos, incluidas las tablas dinámicas. Escritura: modificarlos y crear scripts de C# y consultas DAX. Los diseños de Pivot Grid no se pueden leer ni modificar |
 | **Macros**                 | Escritura      | Lectura: tu biblioteca de macros, con nombres, descripciones y código. Escritura: no hay herramientas adicionales en esta versión                                                     |
 
 **Escritura** (que aparece como **Lectura/escritura** en las listas desplegables) incluye **Lectura**, y **Datos del modelo** no tiene nivel de **Escritura**.
@@ -182,13 +184,15 @@ Las herramientas del agente dependen de los permisos que le concedas, y la sigui
 | Listar las reglas efectivas del [Best Practice Analyzer](xref:best-practice-analyzer), incluidas las tuyas, y ejecutar el análisis                                         | **Best Practice Analyzer > Lectura**                                |
 | Agregar o cambiar reglas en tu colección local                                                                                                                             | **Best Practice Analyzer > Escritura**                              |
 | Ejecutar una consulta DAX y obtener filas como resultado. Una consulta devuelve 100 filas de forma predeterminada y como máximo 500                        | **Datos del modelo > Lectura** y **Metadatos del modelo > Lectura** |
-| Ver las consultas DAX, los C# Scripts y los scripts DAX que tienes abiertos                                                                                                | **Metadatos del modelo > Lectura**                                  |
-| Leer el contenido de las pestañas abiertas                                                                                                                                 | **Documentos > Lectura**                                            |
-| Editar una pestaña o abrir un nuevo C# Script o una nueva consulta DAX para su revisión                                                                                    | **Documentos > Escritura**                                          |
+| Enumerar los errores, las advertencias y los mensajes de Analysis Services del modelo, empezando por las causas raíz | **Metadatos del modelo > Lectura**. El texto de los errores de Analysis Services también necesita **Datos del modelo > Lectura** |
+| Enumerar tus consultas DAX abiertas, scripts C#, scripts DAX y tablas dinámicas, con el documento activo y el número de errores y advertencias de cada documento | **Metadatos del modelo > Leer** |
+| Leer el contenido de una consulta DAX abierta, un script de C# o un script de DAX | **Documentos > Leer** |
+| Leer los errores y las advertencias de un documento abierto, incluidos los errores que devolvió el servidor la última vez que se ejecutó | **Documentos > Leer**. El texto de los errores del servidor también necesita **Datos del modelo > Leer** |
+| Editar una consulta DAX abierta, un script de C# o un script de DAX, o abrir un nuevo script de C# o una consulta DAX para revisarlos | **Documentos > Escritura** |
 | Leer tu biblioteca de macros                                                                                                                                               | **macros > Lectura**                                                |
 | Cambiar el modelo. Consulta [Cómo un agente cambia tu modelo](#how-an-agent-changes-your-model)                                                            | **Metadatos del modelo > Escritura**                                |
 
-Selecciona objetos en el Explorador TOM antes de mencionarlos en un prompt; por ejemplo, antes de pedir "dales un formato coherente".
+Seleccione objetos en el Explorador TOM antes de hacer referencia a ellos en una solicitud, por ejemplo, antes de pedir «formatear estos de forma coherente». Para preguntar sobre un error en una consulta o un script, haga que su pestaña sea el documento activo primero, por ejemplo, antes de preguntar «¿Por qué veo este error en esta consulta?».
 
 Antes de que un C# Script o una consulta DAX del agente se abra como documento, Tabular Editor compila el script o valida la consulta contra el modelo abierto y devuelve al agente los errores que encuentre. La validación de consultas DAX requiere que Tabular Editor esté conectado a Analysis Services o Power BI.
 
@@ -203,7 +207,7 @@ Un script puede hacer todo lo que permite la API de scripting de C#; por ejemplo
 
 - sus cambios aparecen como una sola entrada de deshacer, **C# Script (MCP)**, y **Ctrl+Z** deshace todo el script. Si un documento tiene el foco, **Ctrl+Z** deshace lo que hayas escrito en el documento. Haz clic primero en el Explorador TOM o selecciona **Deshacer C# Script (MCP)** en el menú **Editar**. Consulta [Deshacer en los editores de texto](xref:undo-redo#undo-in-text-editors).
 - si el script genera una excepción a mitad del proceso, se revierten todos sus cambios.
-- el agente recibe una lista de todos los objetos que el script agregó, cambió o quitó, además de cualquier salida que haya generado el script.
+- El agente recibe una lista de todos los objetos que el script ha añadido, modificado o eliminado, además de todo lo que el script ha impreso. Si el script introdujo o resolvió errores DAX, el resultado también los enumera, agrupados por causa raíz.
 - los mensajes de `Output`, `Info`, `Warning` o `Error` se devuelven al agente como parte del resultado y no se abre ningún cuadro de diálogo.
 - mientras se ejecuta una llamada prolongada, aparece un indicador de **Please wait** y se descartan los clics en Tabular Editor.
 - los objetos y propiedades modificados se marcan en el [Explorador TOM y la vista de propiedades](xref:unsaved-changes) hasta que guardes. **Mostrar cambios** filtra ambas vistas para mostrar solo los cambios, y al hacer clic con el botón derecho en **Revert** puedes deshacer una sola propiedad, un solo objeto o toda una rama.
@@ -282,7 +286,7 @@ Selecciona **Regenerar token** (el botón de actualización junto al token) para
 
 Cuando usas el servidor MCP, Tabular Editor no se comunica con ningún proveedor de IA y solo responde a llamadas a herramientas de procesos de tu máquina, a través de una conexión de loopback. La base de conocimiento que consulta el agente es una base de datos local que se incluye con Tabular Editor y se actualiza desde el servicio de Tabular Editor.
 
-Tu agente envía datos a su proveedor conforme a tu suscripción y a las condiciones de ese proveedor, y la configuración de tu agente controla qué se envía. Con **Datos del modelo** en su valor predeterminado, **Denegar**, el agente no recibe ningún resultado de consultas DAX desde Tabular Editor. Los valores introducidos en la definición del modelo, como una expresión `DATATABLE` o una tabla de **Introducir datos**, son metadatos del modelo y llegan al agente en **Metadatos del modelo > Leer**.
+Tu agente envía datos a su proveedor en virtud de tu suscripción y de las condiciones de dicho proveedor, y la configuración de tu agente controla lo que se envía. Con **Datos del modelo** en su valor predeterminado, **Denegar**, el agente no recibe ningún valor de datos de Tabular Editor, y el texto de los errores de Analysis Services se sustituye por una frase fija. Para que el agente no reciba las rutas de los archivos ni los nombres de los servidores, establezca **Detalles del origen del modelo** en **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario** en **Solo nombre** u **Oculto**.
 
 Consulta @security-privacy para obtener una visión más amplia, incluido el [Asistente de IA](xref:ai-assistant), que se comunica directamente con un proveedor y se configura por separado.
 
