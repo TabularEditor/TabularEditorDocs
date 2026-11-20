@@ -2,7 +2,7 @@
 uid: user-context-calculated-columns
 title: 用户上下文计算列
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-10-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,13 +26,17 @@ _用户上下文计算&#x5217;_&#x662F;指按用户分别进行计算的计算�
 
 | 表达式上下文    | 含义                                   |
 | --------- | ------------------------------------ |
-| **标准**    | 默认选项。表达式只能使用标准函数。对所有用户来说，该列每一行的值都相同。 |
-| **用户上下文** | 表达式可以调用用户上下文函数。该列按用户分别计算。            |
+| `Standard` | 默认值。表达式只能使用标准函数。对于所有用户，该列每行都有一个值。|
+| `UserContext` | 该表达式可以调用用户上下文函数。该列按每位用户进行求值。|
 
 在 @tom-explorer-view 中选择一个计算列，然后在 @properties-view 的 **选项** 下设置 **表达式上下文**。
 
 > [!NOTE]
-> `ExpressionContext` 需要兼容级别 1705 或更高；在 1705 以下，计算列始终为 **Standard**。
+> `ExpressionContext` 需要兼容级别 1705 或更高，而 1705 以下的计算列始终为 `Standard`。
+
+## Direct Lake on OneLake 表
+
+`UserContext` 是 Power BI 对 Direct Lake on OneLake 表上的计算列支持的唯一表达式上下文。当您将模型保存到 Power BI 服务时，如果 Direct Lake 表上的计算列设置为`Standard`，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。Direct Lake on SQL 表不支持计算列。有关在 Direct Lake 模型上设置表达式上下文的步骤，请参阅[Direct Lake on OneLake 上的计算列](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake)。
 
 ## 用户上下文计算列不能用于哪些场景
 

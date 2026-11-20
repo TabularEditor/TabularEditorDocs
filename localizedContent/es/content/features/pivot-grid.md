@@ -1,8 +1,8 @@
----
+﻿---
 uid: pivot-grid
 title: Pivot Grid
 author: Daniel Otykier
-updated: 2026-05-27
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -72,7 +72,7 @@ Estas acciones son:
 
 - **Suplantación...**: Muestra un cuadro de diálogo que te permite especificar un rol o usuario para suplantar a través de la Pivot Grid. Esto es útil cuando quieres probar el comportamiento de tu modelo para distintos usuarios o roles, por ejemplo, cuando se ha aplicado [RLS u OLS](xref:data-security-about) al modelo.
 - **Actualizar**: Vuelve a ejecutar la consulta generada por la Pivot Grid. Esto es útil cuando la actualización automática está deshabilitada o si se han realizado cambios en el modelo fuera de Tabular Editor 3.
-- **Actualización automática**: Activa o desactiva la actualización automática. Cuando la actualización automática está habilitada, la Pivot Grid se actualizará automáticamente cada vez que guardes cambios en el modelo o cuando finalice una [operación de actualización de datos](xref:data-refresh-view).
+- **Actualización automática**: Activa o desactiva la actualización automática. Cuando la actualización automática está habilitada, Pivot Grid se actualizará automáticamente cada vez que guarde los cambios en el modelo o cuando se complete una [operación de actualización de datos](xref:data-refresh-view).
 - **Borrar filtros**: Borra todos los filtros de la Pivot Grid.
 - **Borrar**: Quita todos los campos de la Pivot Grid.
 - **Mostrar valores vacíos en columnas**: Activa o desactiva la visualización de valores vacíos en la Pivot Grid para los campos que se agreguen al área de columnas de la Pivot Grid.
@@ -132,7 +132,7 @@ Después de añadir campos al Pivot Grid, puedes ajustar el ancho de las columna
 
 Para aplicar un "Mejor ajuste" o establecer un ancho específico en píxeles para todas las columnas del Pivot Grid al mismo tiempo, haz clic con el botón derecho en el encabezado "Valores" y selecciona la opción deseada en el menú contextual.
 
-De forma predeterminada, los encabezados de campo se expandirán verticalmente para adaptarse al contenido del nombre del campo. Si quieres limitar la altura de los encabezados de campo a una sola fila, puedes desactivar la opción **Ajustar texto en encabezados de campo** en **Herramientas > Preferencias > Pivot Grid > Encabezados de campo**.
+De forma predeterminada, los encabezados de campo se expanden verticalmente para adaptarse al nombre del campo. Para limitar los encabezados de campo a una sola fila, desactive **Ajuste de línea en encabezados de campo** en **Herramientas > Preferencias > Exploración de datos > Cuadrícula dinámica > Encabezados de campo**.
 
 Para cambiar el orden de los campos en el Pivot Grid, puedes arrastrar campos entre las distintas áreas del Pivot Grid. También puedes arrastrar campos dentro de la misma área para cambiar su orden. Para quitar un campo del Pivot Grid, arrástralo de vuelta a la Lista de campos o haz clic con el botón derecho en el campo y elige **Quitar del Pivot Grid** en el menú contextual.
 
@@ -151,7 +151,23 @@ Al cerrar un Pivot Grid, Tabular Editor te pedirá que guardes el diseño del Pi
 La extensión de archivo usada para guardar diseños del Pivot Grid es `.te3pivot`. Es un archivo json sencillo que especifica qué objetos del modelo se muestran en el Pivot Grid y en qué áreas se colocan. Se hace referencia a los objetos por su nombre y su etiqueta de linaje (si existe), por lo que, por lo general, el diseño de Pivot Grid puede restaurarse incluso si el modelo se ha modificado desde que se guardó el diseño.
 
 > [!NOTE]
-> Es posible abrir un diseño de Pivot Grid que se creó en un modelo diferente, pero tenga en cuenta que los campos del diseño pueden no existir en el modelo al que está conectado actualmente. En esos casos, el Pivot Grid mostrará un mensaje de advertencia y se quitarán del diseño los campos que no existan en el modelo. El mensaje de advertencia se puede desactivar en **Herramientas > Preferencias > Exploración de datos > Pivot Grid > Mostrar advertencia si Pivot Grid no coincide con el modelo**.
+> Puedes abrir una estructura de Pivot Grid que se haya creado en un modelo diferente. Si el diseño utiliza campos que no existen en el modelo al que está conectado, aparece una advertencia y esos campos se eliminan del diseño. Lo mismo sucede cuando un Pivot Grid abierto se mantiene abierto y conectado a un modelo diferente, como se describe en [Cambio de modelos](#switching-models). Para desactivar la advertencia, desmarque **Mostrar advertencia si Pivot Grid no coincide con el modelo** en **Herramientas > Preferencias > Exploración de datos > Pivot Grid**.
+
+## Cambiar de modelo
+
+Cuando abre un modelo diferente, los Pivot Grids abiertos permanecen abiertos y se conectan al nuevo modelo. Cada Pivot Grid conserva su estructura de campos, y cualquier campo que el nuevo modelo no contenga se elimina de la estructura. Cuando se quitan campos, aparece una advertencia: «El modelo que se acaba de abrir no contiene todos los campos utilizados por este Pivot Grid. Los campos que faltan se han quitado de la estructura». Si el nuevo modelo no tiene datos para explorar, como un modelo cargado desde un archivo sin una base de datos de área de trabajo, Pivot Grid se vacía.
+
+Si la opción **Actualización automática** está desactivada para una cuadrícula dinámica, la cuadrícula conserva su diseño y sus valores anteriores hasta que hagas clic en **Actualizar** o abras su lista de campos. En ese momento, se conecta al nuevo modelo y elimina los campos que faltan.
+
+Si una Pivot Grid abierta tiene campos en su diseño, aparece la confirmación **Las Pivot Grids se volverán a vincular al nuevo modelo** antes de que se abra el nuevo modelo:
+
+- **Sí** abre el nuevo modelo.
+- **Sí, no volver a preguntar** abre el nuevo modelo y desactiva la preferencia **Mostrar advertencia si Pivot Grid no coincide con el modelo**, lo que desactiva tanto esta confirmación como la advertencia sobre los campos eliminados.
+- **Cancelar** mantiene el modelo actual cargado con todos los documentos sin cambios.
+
+Para conservar el diseño original, haga clic en **Cancelar** y guarde una copia del Pivot Grid con **Archivo > Guardar como** antes de cambiar de modelo.
+
+Desmarque **Mantener las Pivot Grids abiertas cuando se abra un modelo diferente** en **Herramientas > Preferencias > Exploración de datos > Pivot Grid** para cerrar las Pivot Grids cuando abra un modelo diferente. La opción está seleccionada de forma predeterminada.
 
 ## Características adicionales
 
@@ -166,6 +182,6 @@ El Pivot Grid tiene algunas funciones más que conviene conocer:
 A continuación se muestra una lista de limitaciones y problemas conocidos de los Pivot Grid en Tabular Editor 3.16.0, que estamos trabajando para resolver en próximas versiones:
 
 - Reglas de formato (como conjuntos de iconos, barras de datos, etc.) no se conservan correctamente al guardar un diseño de Pivot Grid como archivo `.te3pivot`.
-- Si abre un archivo .te3pivot en un modelo distinto de aquel del que se guardó el diseño, los campos que no existan en el modelo actual se eliminarán del diseño. Al pulsar Guardar (Ctrl+S), se guardará el diseño con esos campos ya eliminados. Es posible que cambiemos este comportamiento en una versión futura para que el archivo .te3pivot no se sobrescriba sin una confirmación explícita.
+- Si abre un archivo `.te3pivot` en un modelo diferente al del que se guardó el diseño, o cambia de modelo mientras está abierto un Pivot Grid guardado, los campos que no existan en el modelo actual se eliminarán del diseño. Si luego guardas (**Ctrl+S**), el archivo `.te3pivot` se sobrescribe sin esos campos.
 - Las columnas que usan la propiedad **Agrupar por columnas** (incluidas las columnas de parámetros de campo) no se pueden agregar por sí solas al Área de filas ni al Área de columnas. Al hacerlo, aparece el error _"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"_. Esta es una limitación general de los clientes MDX y también se produce al usar una columna de este tipo en una tabla dinámica de Excel. Para solucionarlo, agrega al Pivot Grid la columna de agrupación relacionada _antes_ de agregar la columna dependiente. Por ejemplo, si `[ProductKey]` está configurado como la columna de agrupación de `[ProductName]`, primero agrega `[ProductKey]` al Área de filas o al Área de columnas y luego agrega `[ProductName]`.
 - Aplicar una ordenación ascendente o descendente explícita a una columna del Área de filas o del Área de columnas ordena los valores alfabéticamente como cadenas, independientemente del tipo de datos de la columna. Las fechas con formato de fecha larga (por ejemplo, "4 de mayo de 2024") y los enteros se ordenan de forma lexicográfica, en lugar de cronológicamente o numéricamente. Esta es una limitación de cómo ordenan los clientes MDX, y el mismo comportamiento se produce en una tabla dinámica de Excel conectada al modelo. Para obtener un orden cronológico o numérico, usa la ordenación natural de la columna (no apliques una ordenación explícita) o usa la propiedad **Ordenar por columna** de la columna del modelo para que apunte a una columna con un valor subyacente que se pueda ordenar.

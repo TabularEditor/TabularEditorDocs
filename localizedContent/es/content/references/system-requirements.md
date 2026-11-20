@@ -1,8 +1,8 @@
----
+﻿---
 uid: system-requirements
 title: Requisitos del sistema
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,7 +34,7 @@ Las versiones de Windows compatibles en cada momento se rigen por la política d
 | .NET 10 _(recomendado)_ | x64, ARM64   | instalador `.exe`, `.msi` y `.zip` portátil |
 | .NET 8                                     | x64, ARM64   | instalador `.exe`, `.msi` y `.zip` portátil |
 
-Las compilaciones de .NET 10 y .NET 8 son _funcionalmente idénticas_. No hay nada disponible en una que falte en la otra, y ambas pueden instalarse una junto a la otra.
+Las compilaciones de .NET 10 y .NET 8 son *funcionalmente idénticas*. No hay nada disponible en una que falte en la otra. Al instalar una compilación con el instalador `.exe` o `.msi`, se reemplaza la otra compilación. Consulte [Cambiar entre los paquetes .NET 8 y .NET 10](xref:installation-activation-basic#switching-between-the-net-8-and-net-10-packages).
 
 Las compilaciones ARM64 son nativas a partir de la versión 3.23.0.
 

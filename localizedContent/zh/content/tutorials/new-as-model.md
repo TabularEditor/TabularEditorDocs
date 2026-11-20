@@ -1,4 +1,4 @@
----
+﻿---
 uid: new-as-model
 title: 创建 Analysis Services 模型
 author: Daniel Otykier
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "仅限 SQL Server Standard Edition"
+          note: "Limited to SQL Server Standard Edition"
         - edition: Enterprise
           full: true
 ---
@@ -25,14 +25,13 @@ applies_to:
 > [!NOTE]
 > Tabular Editor 3 商业版仅支持 [SQL Server Standard Edition](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) 和 [Azure Analysis Services Basic Tier](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier)。请注意：在这些层级中，部分建模功能不受支持。
 
-##### 创建新模型
+## 创建新模型
 
 - 在“文件”菜单中，选择“新建” > “模型……”或按 `CTRL+N`
 
 ![新建模型](~/content/assets/images/new-as-model-new-model.png)
 
-- 为模型指定名称，或使用默认名称。然后，选择与目标 Analysis Services 版本相对应的兼容级别。该对话框列出以下选项：
-
+- 为您的模型提供一个名称，或使用默认值。您输入的名称将用于数据库名称、数据库 ID 和模型名称。然后，选择目标 Analysis Services 版本的兼容级别。对话框列出了以下选项：
   - 1200（Azure Analysis Services / SQL Server 2016+）
   - 1400（Azure Analysis Services / SQL Server 2017+）
   - 1500（Azure Analysis Services / SQL Server 2019+）
@@ -51,7 +50,7 @@ applies_to:
 
 模型创建完成后，下一步是添加一个数据源和一些表。
 
-#### 添加数据源和表
+## 添加数据源和表
 
 在将数据导入表格模型之前，你必须先设置一个或多个数据源。找到 TOM Explorer，右键单击“数据源”文件夹，然后选择“创建”。对于兼容级别为 1400 或更高的模型，有两种选择：Legacy 数据源和 Power Query 数据源。若要进一步了解这两类数据源之间的差异，请参阅 [Microsoft Analysis Services 博客](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400)。
 
@@ -102,7 +101,7 @@ in
 
 对你想导入到 Tabular 模型的每个表重复此过程。你无需逐个刷新每个表中的数据——可以直接在模型级别运行刷新操作。
 
-#### 定义关系
+## 定义关系
 
 当你导入了多张表后，在 Tabular Editor 3 中定义它们之间关系的最简单方法是新建一个图表。选择“File > New > Diagram”。然后，多选表并将其拖到图表视图中，或者右键单击这些表并选择“Add to diagram”：
 
@@ -114,7 +113,7 @@ in
 
 关闭图表视图（无需保存，因为之后随时都可以重新构建该图表）。再次按 Ctrl+S 保存模型。现在该添加一些业务逻辑了。如果你使用的是 Workspace Database，现在正适合在模型级别执行一次刷新（automatic 或 calculate），以确保服务器已为这些关系创建相应的支撑结构，从而使模型处于可查询状态。
 
-#### 添加度量值
+## 添加度量值
 
 在 TOM Explorer 中选择一个表，然后按 Alt+1（或选择“创建”>“新建度量值”）为该表添加度量值。为该度量值命名，并为其提供一个 DAX 表达式。
 
@@ -128,7 +127,7 @@ in
 
 如果你没有使用 Workspace Database，则必须先将模型部署到某个 Analysis Services 实例，之后才能执行数据刷新并查询模型。
 
-#### 部署 Data model
+## 部署 Data model
 
 要将模型元数据部署到任意 Analysis Services 实例，请单击“模型”菜单并选择“部署...”。这将打开 Tabular Editor 3 的 Deployment Wizard，它与 Tabular Editor 2.X 的 Deployment Wizard 类似。按照向导各页面上的说明操作，将模型元数据部署到 Analysis Services 实例。你也可以使用 Deployment Wizard 生成 TMSL/XMLA 脚本，并将其交给 Analysis Services 服务器管理员进行手动部署。
 

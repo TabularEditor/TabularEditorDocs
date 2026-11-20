@@ -2,7 +2,7 @@
 uid: command-line-options
 title: 命令行（Tabular Editor 2）
 author: Daniel Otykier
-updated: 2026-06-09
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,6 +14,8 @@ applies_to:
 ---
 
 # 命令行（Tabular Editor 2）
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 Tabular Editor 可通过命令行执行以执行各种任务，这在自动化构建和部署等场景中可能很有用。
 
@@ -379,6 +381,8 @@ foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 从 [2.8 版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.8)开始，你可以使用 -SC（-SCHEMACHECK）开关来验证表的源查询。这相当于调用[刷新表元数据 UI](xref:importing-tables-te2#refreshing-table-metadata)，但不会对模型做任何更改，而是会将架构差异报告到控制台。数据类型更改以及源中新增的列将以警告形式报告。源中缺失的列将以错误形式报告。如果同时指定了 -SC（-SCHEMACHECK）和 -S（-SCRIPT）开关，则架构检查会在脚本成功执行之后运行。这样你就可以在执行架构检查之前修改数据源属性，例如用于指定凭据密码。
 
 如果你希望架构检查以特定方式处理表和列，也可以为它们添加注释。[更多信息请参见此处](xref:importing-tables-te2#ignoring-objects)。
+
+Tabular Editor CLI 使用[`te schemacheck`](xref:te-cli-commands#schemacheck) 运行相同的检查，该检查还会检查 Power Query (M) 和 Direct Lake 表。
 
 ## 命令行输出与退出代码
 
