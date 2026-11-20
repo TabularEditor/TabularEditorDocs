@@ -1,6 +1,7 @@
----
+﻿---
 uid: formatdax
 title: FormatDax 弃用说明
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,6 +11,8 @@ applies_to:
 ---
 
 # FormatDax 弃用说明
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 随着 Tabular Editor 2.13.0 的发布，`FormatDax` 方法（Tabular Editor 中可用的[辅助方法](xref:advanced-scripting#helper-methods)之一）已被弃用。
 

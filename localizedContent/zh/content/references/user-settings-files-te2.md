@@ -1,6 +1,7 @@
 ---
 uid: user-setting-files-te2
 title: Tabular Editor 2 的用户设置文件
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,6 +11,8 @@ applies_to:
 ---
 
 # Tabular Editor 2 的用户设置文件
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 启动 Tabular Editor 2 时，它会在磁盘的多个位置写入一些额外文件。以下是这些文件及其内容的说明：
 

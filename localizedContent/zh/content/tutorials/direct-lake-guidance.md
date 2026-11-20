@@ -2,7 +2,7 @@
 uid: direct-lake-guidance
 title: Direct Lake 指南
 author: Morten Lønskov
-updated: 2026-10-26
+updated: 2026-11-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,6 @@ applies_to:
 - 预览版支持 Direct Lake on OneLake 表上的计算列，并且仅支持 `UserContext` 表达式上下文。Direct Lake on SQL 不支持计算列。请参阅[Direct Lake on OneLake 上的计算列](#calculated-columns-on-direct-lake-on-onelake)。
 - 计算表格不能引用 Direct Lake 存储模式中的列或表。支持计算组、What-if 参数和字段参数，因为它们会创建不引用 Direct Lake 列的隐式计算表格。
 - 不支持将非物化 SQL 视图用作 OneLake 上的 Direct Lake 表的数据源。使用物化视图，或确保源 Delta 表包含所需的列。
-- 在 Direct Lake on OneLake 公开预览期间，不支持将 Lakehouse 中的快捷方式用作数据源。
 
 如需查看完整且最新的限制列表，请参阅 [Microsoft 关于 Direct Lake 注意事项和限制的文档](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。
 
@@ -124,6 +123,43 @@ OneLake 上的 Direct Lake 还支持通过 Tabular Editor 等基于 XMLA 的工�
 > 如果你正在处理的模型已经包含表，而该模型又不支持组合不同存储模式的表，那么上述一个或多个选项可能不可用。例如，如果模型中包含一个采用 Direct Lake on SQL 模式的表，你就不能再添加其他模式的表。
 
 导入后的表已包含所有列，顺序与源中一致，因此导入后无需再运行 **更新表架构**。如果 Tabular Editor 无法确定 Lakehouse 或 Warehouse 的 SQL analytics endpoint，且导入设置中也未指定，则导入会失败，并显示一条指出缺少该设置的错误，同时不会创建任何表。
+
+## 角色扮演维度
+
+*角色扮演维度*是指与同一事实表的多个列相关的维度表，例如与销售表的订单日期和发货日期都相关的日期表。为 Direct Lake 语义模型选择一种设置：
+
+| 设置 | 模型表 | 需要 |
+|-------|--------------|----------|
+| 非活动关系 | 一个日期表，与一个日期列具有活动关系，与其他列具有非活动关系。其他角色的度量值激活它们与 [USERELATIONSHIP](https://dax.guide/userelationship) 的关系。| 任何 Direct Lake 模型 |
+| 每个角色一个源表 | 每个 Delta 表一个 Direct Lake 表，例如 `DimDate` 和 `DimShipDate`。| 为 Lakehouse/仓库中的每个角色提供一个单独的表 |
+| 用于额外角色的导入表 | 用于主角色的 Direct Lake 日期表和用于其他角色的导入表。请参阅[复合模型](#composite-models)。| OneLake 上的 Direct Lake |
+| 复制的 Direct Lake 表 | 使用**TOM 资源管理器**中的**复制**功能创建的日期表的副本，该副本读取同一 Delta 表。| 使用[表格导入向导](#table-import-wizard)添加的新表格。请参阅[重复的 Direct Lake 表格](#duplicated-direct-lake-tables)。|
+| 每个角色一个快捷方式 | 每个角色的日期表副本，每个副本都读取其指向同一 Delta 表的 OneLake 快捷方式。请参阅[每个角色一个快捷方式](#one-shortcut-per-role)。| Lakehouse 中每个角色的快捷方式 |
+
+### 复制的 Direct Lake 表格
+
+重复的 Direct Lake 表保留原始表及其列的 `SourceLineageTag` 值。在 Direct Lake 表中，`SourceLineageTag` 包含湖仓/仓库中表或列的名称，因此原始表和副本读取的是同一张 Delta 表。虽然模型中包含这两个表格，但通过 Power BI Web 建模中的**编辑表格**对话框添加表格时会失败，并显示“序列包含多个匹配元素”的错误。[表格导入向导](#table-import-wizard)将表格添加到包含重复 Direct Lake 表格的模型中。如果副本读取快捷方式（如[每个角色一个快捷方式](#one-shortcut-per-role)中所述），则**编辑表格**可在模型上运行。
+
+在 Power BI Web 建模中删除 Direct Lake 表时，源表将添加到共享表达式的 `PBI_RemovedChildren` 注释中。如果模型中的另一个表格读取相同的 Delta 表格，则 Power BI Web 建模在列出湖仓/仓库的表格时将失败，并显示“子项不能同时被移除和添加”的错误。在 Tabular Editor 3 中删除条目：
+
+1. 在 Tabular Editor 3 中打开语义模型。
+2. 在 @tom-explorer-view 中，展开**共享表达式**，然后选择 Direct Lake 分区引用的表达式，通常为 `DatabaseQuery`。
+3. 在@properties-view的**注释**下，从`PBI_RemovedChildren`值中删除Delta表格的条目。如果没有条目留存，请删除注释。
+4. 保存模型。
+
+Microsoft 在[Power BI 语义模型的沿袭标签](https://learn.microsoft.com/analysis-services/tom/lineage-tags-for-power-bi-semantic-models)中介绍了该注释。
+
+### 每个角色一个快捷方式
+
+[OneLake 快捷方式](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)在 Lakehouse 中显示为单独的表格，并读取其目标 Delta 表格。Microsoft 支持将快捷方式作为 Direct Lake on OneLake 和 Direct Lake on SQL 表的源。当每个角色表读取自己的快捷方式时，模型中的每个 Direct Lake 表都有自己的源表，并且 **编辑表**和 Power BI 中的刷新功能可在模型上运行。副本保留对原始表所做的列名、描述、显示文件夹和其他更改。
+
+1. 在 Lakehouse 中，在**表**下为每个额外角色创建一个快捷方式，并将该维度的 Delta 表作为其目标。例如，创建 `d_date_ship`，并以 `d_date` 作为其目标。
+2. 在 @tom-explorer-view 中，右键单击原始表，选择**复制**并重命名副本。
+3. 展开副本下的**分区**，选择其实体分区，并将@properties-view中的**实体名称**设置为快捷方式名称。
+4. 选择副本，并将**源血统标签**设置为快捷方式名称，其格式与原始表上的值相同。如果原始表具有`[dbo].[d_date]`，请输入`[dbo].[d_date_ship]`。
+5. 保存模型。
+
+副本的列保留其 `SourceColumn` 和 `SourceLineageTag` 值，这些值与快捷方式的列相匹配。**复制**将原始表的度量值以新名称进行复制。删除角色表不需要的度量值。
 
 ## 检查 Direct Lake 分区
 

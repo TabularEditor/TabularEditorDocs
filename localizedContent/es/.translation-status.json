@@ -118,8 +118,8 @@
       "status": "translated"
     },
     "features/Command-line-Options.md": {
-      "sourceHash": "sha256:18c8e31529fd0b9e2b13c41c974cee294eefbacddf20e8cd2d0daec4222fc66d",
-      "sourceBlob": "cab22381f9789dbf3513117f6f798e007620a6b9",
+      "sourceHash": "sha256:60a659edfb19f8eee208d02abd83cdd0e0ac90c977253d825cac28dd02730828",
+      "sourceBlob": "28e5bce9b039881ee15a9915e5585030b2fc46b8",
       "status": "translated"
     },
     "features/connectivity/databricks.md": {
@@ -613,13 +613,13 @@
       "status": "translated"
     },
     "getting-started/Getting-Started-te2.md": {
-      "sourceHash": "sha256:f7f3fc16ac57b499364b970568de8ccd8b6fd1d2122ddcfb4bca709ac5af9776",
-      "sourceBlob": "645a3670337ebca30537d0a4013f0ad0d08b9bd2",
+      "sourceHash": "sha256:8f12f94a94e7348462903ee636bcaf19b947b5f391baae89b8fe39b7d192e5ac",
+      "sourceBlob": "db50e4abd12b350257c47bc353df302ebd4f0e99",
       "status": "translated"
     },
     "getting-started/getting-started.md": {
-      "sourceHash": "sha256:a0265501f2a95f673ce169db86208950eec6e2523d1d4f3e0d241b3372d53e96",
-      "sourceBlob": "d703d438dee570508d4e6bc3e223975be91b9530",
+      "sourceHash": "sha256:8a248fec432232ebf8840d2d7500b17b8370f8954274f192d4e523c1b92a1f03",
+      "sourceBlob": "dd384f683f55a42000308b2ad1b00c059ad31422",
       "status": "translated"
     },
     "getting-started/github-flow.md": {
@@ -808,8 +808,8 @@
       "status": "translated"
     },
     "how-tos/Importing-Tables.md": {
-      "sourceHash": "sha256:a4ec186a6a0cd94f851af6dc8a7277cad1216b3b63a0d973a7604774abe94f00",
-      "sourceBlob": "15052fae44f4edb632f91662e2ab026e5de5afe0",
+      "sourceHash": "sha256:61061d67f15e40bb38f52dc304c1fa910e6403c47f000a6c63d90d540844c9c9",
+      "sourceBlob": "9235d3bfa128f57c68d78cd023ad093f0a0bbc44",
       "status": "translated"
     },
     "how-tos/includes/sample-metricview.md": {
@@ -1020,6 +1020,11 @@
     "includes/feature-comparison.partial.md": {
       "sourceHash": "sha256:5eedcfa0c443e235ce6019a4301dff79f13d3d8df060985c702e1ea1807af6d7",
       "sourceBlob": "ab3cde69a816175d12b841b20255ff4604dad348",
+      "status": "translated"
+    },
+    "includes/te2-te3-note.partial.md": {
+      "sourceHash": "sha256:4228cfe7fd79de4dd450342809786b22a87079d75424b4d7c7293c274f9f10cb",
+      "sourceBlob": "ae371b30a7231edf243f183c65b775eb8a264d67",
       "status": "translated"
     },
     "index.md": {
@@ -1358,8 +1363,8 @@
       "status": "translated"
     },
     "references/FormatDax.md": {
-      "sourceHash": "sha256:d6d07781fc5c8cbecb8187caa6123eb0a13f0f145abfa4b8c4cb1274c7e9dcf2",
-      "sourceBlob": "1f798e620c1b8873ff9948ce26655846070868f1",
+      "sourceHash": "sha256:283984367a9dcb9593cf806a35c8362b7b20da392e4d817112f81d73e49a7088",
+      "sourceBlob": "70b5bcabd3b646b0a66b82ed1dd65c090d27144b",
       "status": "translated"
     },
     "references/index.md": {
@@ -1368,8 +1373,8 @@
       "status": "translated"
     },
     "references/Keyboard-Shortcuts2.md": {
-      "sourceHash": "sha256:6dac63cca6fed07aeeaa4c9c97b9174104c299528f823785cb9d042fc567f93c",
-      "sourceBlob": "18406beb0667d006856d3e0ac2b616928730258f",
+      "sourceHash": "sha256:49621d0d9a72eb1c76ba8fdd55c601a1b29fb18cd1f7535491e5d6b5d8d132cd",
+      "sourceBlob": "22ec94a19326c589bc6db6c02cba2f8efe7bdec5",
       "status": "translated"
     },
     "references/object-properties/calculation-groups.md": {
@@ -1933,8 +1938,8 @@
       "status": "translated"
     },
     "references/user-settings-files-te2.md": {
-      "sourceHash": "sha256:0a2da6cad41a5e1983662c6d621ab9f78f671aa59f2389f31004b7847deef1f9",
-      "sourceBlob": "74cf282fbaa6ceb6103de733d816c5dc3adac328",
+      "sourceHash": "sha256:5ceece47c4f181fdd68456f47333af4b51d2d1b74151527611eb56a30395b134",
+      "sourceBlob": "24ebf08fccc5042a6ed2ed1f9e122dc86c53dbd5",
       "status": "translated"
     },
     "security/ai-compliance.md": {
@@ -2098,8 +2103,8 @@
       "status": "translated"
     },
     "tutorials/direct-lake-guidance.md": {
-      "sourceHash": "sha256:10e0826eb1daa6a7cc5698408baced6facf55b7bbee3172deec7585aad50c6fb",
-      "sourceBlob": "65cf5b878eeb47defb9f424d89498ccaeb912ea2",
+      "sourceHash": "sha256:9332a9536cff355d8356dc0d64ddcaf267fe384c564497112892bd1755292b2c",
+      "sourceBlob": "9d5a14bd81c684ef35ef1abacc3202297035a385",
       "status": "translated"
     },
     "tutorials/importing-tables.md": {
@@ -2334,12 +2339,12 @@
     }
   },
   "summary": {
-    "translated": 433,
+    "translated": 434,
     "outdated": 0,
     "untranslated": 0,
     "copied": 33,
     "pinned": 0,
-    "total": 466,
+    "total": 467,
     "completionPercent": 100.0,
     "failures": 0
   }

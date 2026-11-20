@@ -2,7 +2,7 @@
 uid: command-line-options
 title: Línea de comandos (Tabular Editor 2)
 author: Daniel Otykier
-updated: 2026-06-09
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,6 +14,8 @@ applies_to:
 ---
 
 # Línea de comandos (Tabular Editor 2)
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 Tabular Editor se puede ejecutar desde la línea de comandos para realizar diversas tareas, lo que puede ser útil en escenarios de compilación e implementación automatizadas, etc.
 

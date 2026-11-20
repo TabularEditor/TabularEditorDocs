@@ -2,7 +2,7 @@
 uid: getting-started
 title: Instalación y activación
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,7 +73,7 @@ Para obtener más información sobre cómo Tabular Editor se autentica en el pun
 
 ### Solicitar una licencia de prueba
 
-Si no has usado antes Tabular Editor 3, puedes acceder a una prueba gratuita de 30 días. Al elegir esta opción, se te pedirá una dirección de correo electrónico. Usamos la dirección de correo electrónico para comprobar si ya tienes una activación previa de Tabular Editor 3.
+Si no has usado Tabular Editor 3 antes, puedes optar a una prueba gratuita de 30 días con el conjunto de funciones de la edición Enterprise. Para la versión de prueba se necesita una dirección de correo electrónico válida, pero no una tarjeta de crédito. Cuando elige esta opción, se le pide una dirección de correo electrónico. Utilizamos la dirección de correo electrónico para comprobar si ya tienes una activación de Tabular Editor 3.
 
 > [!NOTE]
 > Tabular Editor ApS no envía correos electrónicos no solicitados ni cede tu dirección de correo electrónico a terceros al registrarte para obtener una licencia de prueba de 30 días. Consulta nuestra @privacy-policy para obtener más información.

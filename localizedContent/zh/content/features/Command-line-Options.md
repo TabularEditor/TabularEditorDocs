@@ -2,7 +2,7 @@
 uid: command-line-options
 title: 命令行（Tabular Editor 2）
 author: Daniel Otykier
-updated: 2026-06-09
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,6 +14,8 @@ applies_to:
 ---
 
 # 命令行（Tabular Editor 2）
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 Tabular Editor 可通过命令行执行以执行各种任务，这在自动化构建和部署等场景中可能很有用。
 
