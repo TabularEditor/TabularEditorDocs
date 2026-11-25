@@ -2,7 +2,7 @@
 uid: unsaved-changes
 title: Unsaved change indicators
 author: Daniel Otykier
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,11 +24,11 @@ Tabular Editor 3 marks objects and properties that differ from the last saved ve
 The indicators appear in two places:
 
 - In the [TOM Explorer](xref:tom-explorer-view), changed objects get a colored row and an icon badge: orange (edited), green (added) and red (deleted). These are the colors of the model comparison view shown when deploying.
-- In the [Properties view](xref:properties-view), changed properties get a light orange row.
+- In the [Properties view](xref:properties-view), changed properties get a light orange row on the **Advanced** tab, and changed fields get the same tint and a change icon on the **Basic** tab.
 
 ![TOM Explorer with edited, added and deleted measures highlighted, and the Properties view with the changed Description row highlighted](~/content/assets/images/unsaved-changes/overview.png)
 
-Both views have a **Show changes** toolbar button and a right-click **Revert** command.
+The TOM Explorer and the property grid of the Properties view have a **Show changes** toolbar button and a right-click **Revert** command.
 
 > [!NOTE]
 > The indicators track changes relative to the source the model was loaded from or last saved to. Deploying the model to a different database doesn't clear them.
@@ -58,9 +58,13 @@ The filter combines with the other toolbar toggles and the search box. For examp
 
 ## Change indicators in the Properties view
 
-When you select a changed object, the changed properties get the same light orange row. A collapsed row that holds a sub-object, such as a measure's **KPI** row or a table's **Refresh Policy** row, is marked when anything inside the sub-object has changed. For indexed rows such as **Annotations**, only the changed annotation is marked. When several objects are selected, a property row is marked if any of the selected objects changed that property.
+When you select a changed object, the changed properties get the same light orange row in the property grid, which is the **Advanced** tab when the **Basic Properties view** preview is on. A collapsed row that holds a sub-object, such as a measure's **KPI** row or a table's **Refresh Policy** row, is marked when anything inside the sub-object has changed. For indexed rows such as **Annotations**, only the changed annotation is marked. When several objects are selected, a property row is marked if any of the selected objects changed that property.
 
-The **Show changes** button on the Properties view toolbar hides unchanged rows. While the filter is active, the view title reads **Properties (Changed)**.
+On the **Basic** tab, a changed field gets the same tint and a change icon after its label. A box in the **Expressions** section gets the icon after its name when its expression changed. Changed rows in **Levels**, **Calculation items** and **Calculation group precedence** get the icon too. The **Levels**, **Calculation items**, **Column mappings**, **Calculation group precedence**, **Expressions** and **Row level security** headings get the icon when something in the section changed.
+
+![Basic tab of the Properties view with changed fields marked](~/content/assets/images/unsaved-changes/properties-basic-changed.png)
+
+The **Show changes** button on the toolbar of the property grid hides unchanged rows. While the filter is active, the view title reads **Properties (Changed)**.
 
 ![Properties view with the Show changes filter active, listing only changed properties](~/content/assets/images/unsaved-changes/properties-show-changes.png)
 
@@ -131,7 +135,7 @@ The indicator settings are in the **Unsaved changes** section under **Tools > Pr
 - **Mark objects with unsaved changes** (enabled): Colors the rows and badges the icons of added, edited and deleted objects in the TOM Explorer, and hatches their containers. Doesn't affect deleted-object visibility or **Show changes**.
 - **Keep deleted objects visible** (Until the model is saved): How long deleted objects stay in the TOM Explorer. See [Keeping deleted objects across saves](#keeping-deleted-objects-across-saves).
 - **Gather deleted objects under a "Deleted objects" node** (disabled): Lists a container's deleted objects under one node. See [Gathering deleted objects under one node](#gathering-deleted-objects-under-one-node).
-- **Mark properties with unsaved changes in the Properties pane** (enabled): Colors the rows of changed properties in the Properties view. Doesn't affect **Show changes** in the Properties view.
+- **Mark properties with unsaved changes in the Properties pane** (enabled): Colors the rows of changed properties on the **Advanced** tab of the Properties view, and marks changed fields, expressions, list rows and section headings on the **Basic** tab. Doesn't affect **Show changes** in the Properties view.
 
 See @preferences for the other settings on this page.
 

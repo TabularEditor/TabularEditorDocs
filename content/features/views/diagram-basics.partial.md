@@ -29,11 +29,19 @@ To edit an existing relationship, right-click on it and choose **Edit relationsh
 
 ## Selection and navigation
 
-A diagram and the TOM Explorer keep the same object selected. Clicking a table, a column or a relationship in the diagram selects it in the tree, without pulling focus away from the diagram. Going the other way, selecting a table or a column in the tree highlights it in every open diagram, scrolling a column into view inside its table shape.
+A diagram and the TOM Explorer keep the same object selected. Clicking a table, a column or a relationship in the diagram selects it in the tree, without pulling focus away from the diagram. Going the other way, selecting a table or a column in the tree highlights it in every open diagram. A selected table's header takes the accent color of the current theme, and a selected column's row takes the selection color of the **TOM Explorer**.
 
 This works for navigation you did not perform by hand in the tree: **Go to** actions and search results highlight in your diagrams too.
 
-A selection that does not resolve to a single table or column, whether several objects or none, clears the diagram's highlight rather than leaving a stale one behind.
+When you select a single table or column outside the diagram and its table is out of view, the diagram pans to the table at the current zoom level. The column list of the table scrolls to the selected column only when the column isn't already visible.
+
+When you select several tables or columns in the tree, the diagram highlights each of their tables, without panning. A selected column counts as its table, and other object types are ignored. A selection that contains no table in the diagram, such as only measures, clears the highlight.
+
+![Diagram with two tables selected in the TOM Explorer, both table headers in the accent color](~/content/assets/images/diagram-selection-tables.png)
+
+![Diagram with one column selected in the TOM Explorer, its row in the selection color](~/content/assets/images/diagram-selection-column.png)
+
+Diagram colors, including table bodies, headers, borders and relationship lines, follow the current [theme and palette](xref:user-interface#changing-themes-and-palettes) and update when you change either.
 
 > [!NOTE]
 > Selecting an object in the TOM Explorer never switches the active document to a diagram. If a diagram is open in the background it updates quietly, and you keep working where you were.

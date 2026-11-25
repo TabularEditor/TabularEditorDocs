@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creating PBIX File from XMLA Endpoint.
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -53,7 +53,7 @@ This will save the remote model into the Power BI Project that will now contain 
 If the .pbip folder is configured to store the model as [TMDL](xref:tmdl) files, you will need to use the Save To Folder option in Tabular Editor instead. Then navigate to the Power BI project folder for the semantic model (ModelName.SemanticModel), open the 'definition' folder and save your model there.
 
 > [!NOTE]
-> To enable TMDL go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL" in the **Serialization mode** dropdown. See [TMDL documentation for more information](xref:tmdl)
+> In Tabular Editor 3, **File > Save to Folder** saves TMDL when **Save to Folder format** under **Tools > Preferences > File Formats > Save-to-folder** is **TMDL**, the default. See [TMDL documentation for more information](xref:tmdl)
 
 ## Step 3.1: Remove incremental refresh partitions and create new (Optional)
 Use the Convert Incremental Refresh script below to delete incremental refresh partitions and create a single partition for each table containing the expression used in the incremental refresh expression.

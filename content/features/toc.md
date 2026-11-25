@@ -70,6 +70,7 @@
 ## @workspace-databases
 ## @workspace-mode
 ## @tmdl
+## @tmdl-per-object-serialization
 ## @save-to-folder
 ## @save-with-supporting-files
 ## @auto-reload

@@ -1,8 +1,8 @@
-﻿---
+---
 uid: direct-lake-guidance
 title: Direct Lake Guidance
 author: Morten Lønskov
-updated: 2026-11-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -53,13 +53,15 @@ For a full and up-to-date list of limitations, see the [Microsoft documentation 
 
 ### Calculated columns on Direct Lake on OneLake
 
-A calculated column on a Direct Lake on OneLake table must have its `ExpressionContext` property set to `UserContext`. The column is evaluated at query time and isn't materialized, so it can't be used in a relationship. New calculated columns use `Standard` by default. If a calculated column on a Direct Lake table is set to `Standard` when you save the model to the Power BI service, the save fails with the error "Default expression context cannot be used for calculated columns in Direct Lake tables".
+A calculated column on a Direct Lake on OneLake table must have its `ExpressionContext` property set to `UserContext`. The column is evaluated at query time and isn't materialized, so it can't be used in a relationship. If a calculated column on a Direct Lake on OneLake table is set to `Standard` when you save the model to the Power BI service, the save fails with the error "Default expression context cannot be used for calculated columns in Direct Lake tables".
 
-The **Expression Context** property appears in the @properties-view only when the model's compatibility level is 1705 or higher. Set it on each calculated column of a Direct Lake on OneLake table:
+At compatibility level 1705 or higher, new calculated columns on Direct Lake on OneLake tables are created with `UserContext`. New calculated columns on Import and Direct Lake on SQL tables in the same model are created with `Standard`.
+
+A calculated column on a Direct Lake on OneLake table that's set to `Standard` gets an error in the @messages-view. The **Expression Context** property appears in the @properties-view only when the model's compatibility level is 1705 or higher. Check the calculated columns before you save:
 
 1. Select the model in the @tom-explorer-view and check **Compatibility Level** under **Database** in the @properties-view. If it's below 1705, upgrade the model as described in @update-compatibility-level.
-2. Select the calculated column in the @tom-explorer-view.
-3. Under **Options** in the @properties-view, set **Expression Context** to `UserContext`.
+2. In the @messages-view, look for the error "Calculated columns on Direct Lake on OneLake tables must have Expression Context set to UserContext."
+3. For each column with the error, select the column in the @tom-explorer-view and set **Expression Context** under **Options** in the @properties-view to `UserContext`.
 4. Save the model.
 
 Calculated columns on Import tables in the same model can use either expression context. For the objects that can't reference a user-context column, see @user-context-calculated-columns. Microsoft lists the supported combinations of storage mode and expression context in [Using calculated columns in Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance).

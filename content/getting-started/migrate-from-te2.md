@@ -2,7 +2,7 @@
 uid: migrate-from-te2
 title: Migrating from Tabular Editor 2.x
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-11-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,13 @@ This article is intended for developers who already have some experience using T
 ## Installation side-by-side
 
 Tabular Editor 3 has a different product code than Tabular Editor 2.x. This means that you can install both tools side-by-side without issues. In fact, the tools are installed into separate program folders and their settings are also kept in separate folders. In other words, the term "upgrade" or "downgrade" between Tabular Editor 2.x and Tabular Editor 3 does not apply. It is better to think of Tabular Editor 3 as an entirely different product.
+
+Tabular Editor 3 starts with its own default preferences. On the first start on a computer that has Tabular Editor 2.x, a prompt appears after startup if your Tabular Editor 2.x serialization settings differ from the Tabular Editor 3 defaults, or if Tabular Editor 2.x has Best Practice Analyzer rules for the local user and Tabular Editor 3 has none. The prompt lists what would be imported:
+
+- **Use Tabular Editor 3 settings** keeps the Tabular Editor 3 defaults.
+- **Import from Tabular Editor 2** copies the listed serialization settings and the local user's Best Practice Analyzer rules into Tabular Editor 3.
+
+The prompt appears once. Other Tabular Editor 2.x preferences aren't imported.
 
 ## Feature comparison
 

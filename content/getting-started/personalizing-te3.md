@@ -2,7 +2,7 @@
 uid: personalizing-te3
 title: Personalizing and configuring Tabular Editor 3 to suit your needs
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,17 +30,17 @@ Most of the settings covered in this article are accessed through the **Tools > 
 
 # General features
 
-The first page you will encounter within the **Preferences** dialog is the **Tabular Editor > Features** page (see screenshot below). Below is a short description of the features on this page, and what they are commonly used for:
+The first page you will encounter within the **Preferences** dialog is the **Tabular Editor > Power BI** page (see screenshot below). Below is a short description of the Power BI settings on this page, and what they are commonly used for:
 
-![Pref General Features](~/content/assets/images/pref-general-features.png)
+![The Power BI preferences page](~/content/assets/images/pref-power-bi.png)
 
 ## Power BI
 
 These settings are mostly useful for developers who use Tabular Editor 3 as an [External Tool for Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools).
 
-##### *Allow unsupported modeling operations* (disabled)
+##### *Allow unsupported modeling operations (pre-June 2025, not recommended)* (disabled)
 
-External Tools for Power BI Desktop have some [limitations](xref:desktop-limitations). By default, Tabular Editor 3 will prevent the user from making unsupported changes to the data model. There may be some advanced modeling features which work well, even though they are not supported cf. the previous link. To unlock all Tabular Object Model objects and properties, enable this setting.
+Applies only to Power BI Desktop versions older than June 2025, which restrict the modeling operations an external tool can make. When checked, all Tabular Object Model objects and properties are available for editing while Tabular Editor 3 is connected to such a version, including changes that Power BI Desktop doesn't support. The setting has no effect on Power BI Desktop June 2025 or later.
 
 ##### *Hide auto date/time warnings* (disabled)
 
@@ -52,7 +52,7 @@ In Power BI Desktop it is common to insert a line break on the first line of a D
 
 ## Metadata Synchronization
 
-These settings controls the behavior of Tabular Editor 3, when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application, such as when another user makes a change to the database, or when you make a change to the model through Power BI Desktop while Tabular Editor 3 is used as an external tool.
+These settings are on the **Tabular Editor > Miscellaneous** page. They control the behavior of Tabular Editor 3, when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application, such as when another user makes a change to the database, or when you make a change to the model through Power BI Desktop while Tabular Editor 3 is used as an external tool.
 
 ##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
 
@@ -118,7 +118,7 @@ These settings determine certain behavior of the DAX code analyzer. The *Locale*
 
 On the **Text Editors > DAX Editor > Auto Formatting** page, you can find a wide range of settings for controlling how your DAX code is formatted.
 
-![Auto Formatting Settings](~/content/assets/images/auto-formatting-settings.png)
+![The DAX Editor Auto Formatting preferences page](~/content/assets/images/auto-formatting-settings.png)
 
 ##### *Auto format code as you type* (enabled)
 

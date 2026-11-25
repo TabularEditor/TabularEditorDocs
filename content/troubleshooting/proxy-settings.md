@@ -2,7 +2,7 @@
 uid: proxy-settings
 title: Proxy settings
 author: Daniel Otykier
-updated: 2024-11-07
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -35,21 +35,20 @@ Typical error messages you would see, are:
 - `Unable to obtain authentication token using the credentials provided`
 - `The requested address is not valid in its context. (login.microsoftonline.com:443)`
 
-When this happens, the first thing you should try is to change the proxy settings in Tabular Editor 3. You can find these settings under **Tools > Preferences > Proxy Settings**:
+When this happens, the first thing you should try is to change the proxy settings in Tabular Editor 3. You can find these settings under **Tools > Preferences > Tabular Editor > Proxy Settings**:
 
 ![Proxy settings in Tabular Editor 3](~/content/assets/images/troubleshooting/proxy-settings.png)
 
 In most cases, changing the **Proxy Type** from `None` to `System` will resolve the issue. This setting tells Tabular Editor 3 to use the system-wide proxy settings configured in Windows. If you are still experiencing issues, you can try setting the **Proxy Type** to `Custom` and enter the proxy server address and port manually.
+
+If the custom proxy requires a user name and password, clear **Use default credentials** and enter them in **Username** and **Password**. If a custom proxy with a user name and password fails to authenticate, enter the password again under **Tools > Preferences > Tabular Editor > Proxy Settings** and click **OK**.
 
 > [!IMPORTANT]
 > After changing the proxy settings, you must restart Tabular Editor 3 for the changes to take effect.
 
 # .NET Core vs. .NET Framework proxy handling
 
-If the suggestion above does not solve the problem, starting with version 3.21.0 of Tabular Editor, you can try the following alternative solution:
-
-> [!NOTE]
-> The solutions outlined below require Tabular Editor 3.21.0 or newer, because the AS configuration options are only available in the AMO/TOM client library v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1). Previous versions of Tabular Editor 3 use an older version of this client library, which ignores these configuration options.
+If the suggestion above does not solve the problem, you can try the following alternative solution:
 
 Create a file called <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> and put it in the installation folder for Tabular Editor 3 (i.e. the same folder that TabularEditor3.exe resides in). Add the following content to the file:
 

@@ -2,7 +2,7 @@
 uid: preferences
 title: Controlling preferences
 author: Morten Lønskov
-updated: 2026-10-19
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,37 +30,89 @@ To access the preferences dialog, go to **Tools > Preferences**.
 > [!TIP]
 > Use the search box at the top of the Preferences dialog to quickly find specific settings.
 
-## Tabular Editor > Features
+## Tabular Editor > Power BI
 
-![Pref General Features](~/content/assets/images/pref-general-features.png)
+![The Power BI preferences page](~/content/assets/images/pref-power-bi.png)
 
-### Power BI
+### Power BI Desktop
 
-**Allow unsupported editing** (disabled): applies only to Power BI Desktop versions older than June 2025, which restrict the modeling operations an external tool can make. When checked, all TOM properties are available for editing while Tabular Editor 3 is connected to such a version, including changes that [Power BI Desktop doesn't support](xref:desktop-limitations). The setting has no effect on Power BI Desktop June 2025 or later.
+**Allow unsupported modeling operations (pre-June 2025, not recommended)** (disabled): Applies only to Power BI Desktop versions older than June 2025, which restrict the modeling operations an external tool can make. When checked, all TOM properties are available for editing while Tabular Editor 3 is connected to such a version, including changes that Power BI Desktop doesn't support. The setting has no effect on Power BI Desktop June 2025 or later.
 
-**Hide auto date/time warnings** (disabled): When checked, hides warnings about Power BI auto date/time tables. These warnings appear when the "Auto date/time" setting in Power BI Desktop is enabled, which creates calculated tables that trigger warnings in Tabular Editor 3's built-in DAX analyzer.
+### Power BI Service
 
-**Line break on first line of DAX** (disabled): In Power BI Desktop it is common to insert a line break on the first line of a DAX expression, due to the way the formula bar displays the DAX code. If you often switch back and forth between Tabular Editor and Power BI Desktop, consider enabling this option to have Tabular Editor 3 insert the line break automatically.
+**API base URL** (`https://api.powerbi.com`): The base URL of the Power BI REST API, which Tabular Editor calls when it lists the workspaces you have access to, for example when you import tables from Power BI dataflows. The list also offers the sovereign cloud endpoints `https://api.powerbigov.us`, `https://api.high.powerbigov.us`, `https://api.mil.powerbigov.us`, `https://api.powerbi.de` and `https://api.powerbi.cn`, and you can type another URL.
 
-**Only for multi-line DAX expressions** (enabled): When "Line break on first line of DAX" is enabled, this sub-setting controls whether the line break is added only for multi-line DAX expressions. When checked, single-line expressions are left unchanged.
+**Default authentication** (Integrated): The authentication mode used by default when you connect to a Power BI or Fabric XMLA endpoint or to Azure Analysis Services: **Integrated**, **Microsoft Entra MFA** or **Username and password**.
 
-**Default Power BI authentication mode** (Integrated): Select the default authentication method (Integrated, ServicePrincipal, or MasterUser) to use when connecting to Power BI datasets.
+### Dataset Preferences
 
-### Best Practice Analyzer
+**Hide auto date/time warnings** (disabled): Hide the warnings that the DAX analyzer raises for the date tables Power BI Desktop adds when its auto date/time option is enabled. The DAX expressions on these tables don't follow best practices.
 
-**Scan for Best Practice violations in the background** (enabled): Runs the Best Practice Analyzer on a background thread whenever the model changes. If you clear it, run the analysis from the **Best Practice Analyzer** window. On large models or with complex rules, background scanning slows down editing.
+**Line break on first line of DAX** (disabled): Make the first character of every DAX expression you edit a line break, which keeps the expression readable in the Power BI Desktop formula bar. Applies to Power BI semantic models only.
 
-**Built-in BPA rules** (enabled for new users): Choose whether to enable, disable, or be prompted about using Tabular Editor's built-in Best Practice Analyzer rules. The built-in rules cover key best practices across formatting, metadata, model layout, DAX expressions, and translations. New installations will have built-in rules enabled by default.
+**Only for multi-line DAX expressions** (enabled): Available while **Line break on first line of DAX** is checked. Add the line break only to expressions that span more than one line.
 
-### Notifications
+## Tabular Editor > Proxy Settings
 
-**Data refresh notification** (enabled): When checked, a notification is displayed when a data refresh operation completes.
+![The Proxy Settings preferences page](~/content/assets/images/pref-proxy-settings.png)
 
-### DAX Formula Fix-up
+Configure the proxy server Tabular Editor uses for web requests. See @proxy-settings for troubleshooting.
 
-**Enable formula fix-up** (enabled): Automatically adjusts references in DAX expressions when objects are renamed or moved. This feature ensures that your DAX code remains valid when you reorganize your model.
+### Proxy Settings
 
-**Enable formula fix-up on paste** (enabled): Automatically adjusts references in DAX expressions when pasting objects. This is useful when copying measures or calculated columns between tables or models.
+**Proxy Type** (None):
+
+- **None**: connect without a proxy
+- **System**: use the proxy configured in Windows
+- **Custom**: use the proxy configured in the **Custom proxy** section
+
+### Custom proxy
+
+These settings are available when **Proxy Type** is **Custom**.
+
+**Proxy address**: The address of the proxy server, for example `http://proxy.company.com:8080`.
+
+**Use default credentials** (enabled): Authenticate to the proxy with your Windows credentials, the [same behavior as Power BI Desktop](https://learn.microsoft.com/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
+
+**Username** and **Password**: The credentials for proxy authentication. Available when **Use default credentials** is cleared. The password is stored encrypted.
+
+### Proxy bypassing
+
+These settings apply when **Proxy Type** is **Custom**.
+
+**Bypass on local** (enabled): Send requests to local addresses directly, without the proxy.
+
+**Bypass list**: Addresses that skip the proxy, separated by semicolons.
+
+## Tabular Editor > Modeling Operations
+
+![The Modeling Operations preferences page](~/content/assets/images/pref-modeling-operations.png)
+
+### Formula fix-up
+
+**Automatic DAX formula fix-up** (enabled): Update the DAX expressions that reference an object when you rename it.
+
+### Clipboard Operations
+
+**Include metadata translations when copying objects** (enabled): Include the object's metadata translations when you copy it to the clipboard.
+
+**Include perspective membership when copying objects** (enabled): Include the perspectives the object belongs to when you copy it to the clipboard.
+
+**Include RLS when copying tables** (enabled): Include the table's row-level security expressions from every role when you copy a table to the clipboard.
+
+**Include OLS when copying tables/columns** (enabled): Include the object-level security settings from every role when you copy a table or column to the clipboard.
+
+**Fix-up table references upon paste/duplicate** (enabled): When you paste or duplicate a table, update the references to that table in the DAX expressions of its objects to the new table name.
+
+### Perspective Membership Inheritance
+
+**Inherit table membership when an object is created on a table** (disabled): New objects are added to the perspectives currently selected. When checked, a new object also joins the perspectives its table belongs to.
+
+**Inherit table membership when an object is pasted/moved to a table** (disabled): When checked, an object you paste or move to a table takes the perspective membership of that table. When cleared, its perspective membership stays unchanged.
+
+**When a table is added to a perspective, also add all child objects to that perspective** (enabled): Add the table's columns, measures and hierarchies to a perspective together with the table.
+
+**When a table is removed from a perspective, also remove all child objects from that perspective** (enabled): Remove the table's columns, measures and hierarchies from a perspective together with the table.
 
 ## Tabular Editor > Updates and Feedback
 
@@ -74,7 +126,7 @@ To access the preferences dialog, go to **Tools > Preferences**.
 
 **Major updates only** (disabled): When checked, only major version updates trigger notifications. Minor and patch updates are ignored. This setting is only available while **Check for updates on start-up** is checked.
 
-The version you are running is shown below these settings, along with a **Check for updates** button that runs the check immediately.
+Below these settings, the page shows the version you're running, for example **Current version: v28.0.0**, and a **Check for updates** button that runs the check immediately. After a check, the line adds **You are using the latest version.** or the version that's available. With **Major updates only** checked, the latest version means the latest major version.
 
 ### Managed by your organization
 
@@ -90,46 +142,11 @@ The section is absent when no policy applies. Settings that a policy locks or li
 
 **Send error reports** (enabled): In cases of crashes, Tabular Editor displays an option for sending a crash report when this is checked.
 
-## Tabular Editor > Defaults
-
-<!-- IMAGE NEEDED: pref-defaults.png
-     The Tabular Editor > Defaults preferences page at its default settings.
-     Alt text: "The Defaults preferences page" -->
-
-**New model compatibility level** (1600): Set the default compatibility level for newly created models. The choices are the same as in the **New Model** dialog:
-
-| Level | Target |
-|---|---|
-| 1200 | Azure Analysis Services / SQL Server 2016+ |
-| 1400 | Azure Analysis Services / SQL Server 2017+ |
-| 1500 | Azure Analysis Services / SQL Server 2019+ |
-| 1600 | Azure Analysis Services / SQL Server 2022+ |
-| 1700 | Azure Analysis Services / SQL Server 2025+ |
-| 1706 | Power BI / Fabric |
-
-1700 is the highest level Analysis Services supports; 1706 is the highest overall and is Power BI and Fabric only.
-
-**Use latest compatibility level as default** (enabled): Automatically use the latest available compatibility level for new models. When enabled, this overrides the specific compatibility level setting above, and the dropdown is disabled.
-
-**New models use workspace database** (enabled): When creating a new model, automatically create a workspace database on Analysis Services. This allows you to immediately test and query your model during development.
-
-**Default save mode** (AlwaysAsk): Choose whether to always save as a file (.bim), folder (multiple JSON files), TMDL (Tabular Model Definition Language), or always ask when saving. Options: AlwaysAsk, File, Folder, TMDL.
-
-**Use PBIX file name when saving to disk** (enabled): When saving a model loaded from a PBIX file, use the PBIX filename as the default. This maintains naming consistency between Power BI files and saved model metadata.
-
-**Create user options for new models** (enabled): Automatically create .tmuo (Tabular Model User Options) files for new models. These files store user-specific settings like diagram layouts and window positions.
-
-## Tabular Editor > Keyboard
-
-![Keyboard mappings](~/content/assets/images/keyboard-mappings.png)
-
-Configure keyboard shortcuts for all Tabular Editor commands. Use the search functionality to quickly find specific commands and assign or modify their keyboard shortcuts to match your preferred workflow.
-
 ## Tabular Editor > User Interface
 
-Control toolbars and menus, how much of the model's source location is shown, window layout, language, accessibility and the recent items lists.
+Control toolbars and menus, how much of the model's source location is shown, window layout, language, accessibility, fonts and the recent items lists.
 
-<!-- SCREENSHOT PLACEHOLDER (3.27.1): new image pref-user-interface.png. Tools > Preferences > Tabular Editor > User Interface with Model source detail visible. Insert as ![User Interface preferences](~/content/assets/images/pref-user-interface.png). -->
+![The User Interface preferences page with the Fonts section](~/content/assets/images/pref-user-interface.png)
 
 ### Toolbars and menus
 
@@ -139,7 +156,7 @@ Control toolbars and menus, how much of the model's source location is shown, wi
 
 **Hide inactive menus** (enabled): Hide the [dynamic menus](xref:user-interface#dynamic-menus-context-dependent) that don't apply to the active document or view.
 
-**Hide version number** (disabled): Hide the Tabular Editor 3 build and version number from the title bar.
+**Hide version number** (disabled): Hide the version, for example **v28.0.0**, from the title bar, which then reads **Tabular Editor 3**.
 
 **Model source detail** (Full path): Set how much of the loaded model's source location appears in the title bar, the status bar connection item, document tab tooltips and the hover text of the recent files and models menus:
 
@@ -166,6 +183,18 @@ Agents connected through the @mcp-server receive the model title at the same lev
 ### Accessibility
 
 **Color blindness mode** (disabled): Mark objects added since the last save in teal where they'd otherwise be green, in the **TOM Explorer** change indicators and the model comparison view. See @accessibility.
+
+### Fonts
+
+Font changes apply when you restart Tabular Editor 3. A **Restart Required** message appears when you click **OK**.
+
+**User interface font** (Language default): The font of menus, tool windows, dialogs, grids, message boxes, code editor tooltips and the AI Assistant chat. The list shows only fonts installed on the machine. **Language default** uses Segoe UI, Microsoft YaHei UI for Chinese and Yu Gothic UI for Japanese.
+
+**User interface font size** (9 pt): The text size of the same elements, from 8 pt to 14 pt.
+
+**Code editor font size** (10 pt): The text size in the DAX, M, SQL and C# editors and in code boxes in dialogs, from 8 pt to 14 pt. Ctrl+mouse wheel zooms one editor for the current session, and **Edit > Reset Zoom** returns it to this size.
+
+If a font or size is set in `TabularEditor3.dll.config`, the first entry of the font list reads **Default** with that font, and the setting keeps applying until you change it here.
 
 ### Recent Items
 
@@ -209,7 +238,7 @@ These settings control how [unsaved changes](xref:unsaved-changes) are indicated
 
 **Gather deleted objects under a "Deleted objects" node** (disabled): Show the deleted objects of a table, hierarchy, role or table group together under a single **Deleted objects** node at the end of their container, instead of each where it used to be. Right-click the node and choose **Restore** to bring back all of them at once.
 
-**Mark properties with unsaved changes in the Properties pane** (enabled): Highlight properties in the Properties view that differ from the last saved version of the model, using a tinted row. When disabled, the **Show changes** toolbar filter in the Properties view still works.
+**Mark properties with unsaved changes in the Properties pane** (enabled): Highlight properties in the Properties view that differ from the last saved version of the model, using a tinted row on the **Advanced** tab and a tinted field with a change icon on the **Basic** tab. When disabled, the **Show changes** toolbar filter in the Properties view still works.
 
 ### Delete
 
@@ -232,99 +261,79 @@ These settings decide the format string Tabular Editor writes when you pick the 
 
 **Put a space between the number and symbol** (disabled): Separate the symbol from the numeric value with a space.
 
-## Tabular Editor > Copy/Paste
+## Tabular Editor > DAX Debugger
 
-<!-- IMAGE NEEDED: pref-copy-paste.png
-     The Tabular Editor > Copy/Paste preferences page at its default settings.
-     Alt text: "The Copy/Paste preferences page" -->
+![The DAX Debugger preferences page](~/content/assets/images/pref-dax-debugger.png)
 
-Control what metadata is included when copying objects:
+Control what the [DAX debugger](xref:dax-debugger) lists and how it opens inspected values.
 
-**Include translations** (enabled): Copy translation metadata with objects. When enabled, any translations defined for the copied object will also be copied.
+### Locals
 
-**Include perspectives** (enabled): Copy perspective membership with objects. When enabled, the copied object will belong to the same perspectives as the original.
+**Include function args** (enabled): List the arguments of function calls in the **Locals** view.
 
-**Include RLS** (enabled): Copy Row-Level Security expressions with objects. This applies when copying tables that have RLS rules defined.
+**Include table expressions** (disabled): List subexpressions that return a table in the **Locals** view.
 
-**Include OLS** (enabled): Copy Object-Level Security settings with objects. This applies when copying objects that have OLS restrictions.
+**Use popup inspector** (enabled): Clicking the magnifying glass next to a **Locals** value shows the result in a dialog. When disabled, the result opens in a new DAX query.
 
-## Tabular Editor > Perspectives
+### Watch
 
-<!-- IMAGE NEEDED: pref-perspectives.png
-     The Tabular Editor > Perspectives preferences page at its default settings.
-     Alt text: "The Perspectives preferences page" -->
+**Use popup inspector** (disabled): Clicking the magnifying glass next to a **Watch** value shows the result in a dialog. When disabled, the result opens in a new DAX query.
 
-Control how perspective membership is handled:
+### DAX queries
 
-**Inherit perspective membership for new objects** (disabled): Newly created objects automatically inherit perspective membership from their parent. For example, a new measure would automatically be added to the same perspectives as its parent table.
+**Ask before editing a DAX query that is being debugged** (enabled): Typing in a DAX query that's being debugged shows the **Stop debugging?** prompt. When disabled, typing in the query stops debugging without the prompt. Selecting **Don't ask again** in the prompt clears this option.
 
-**Inherit perspective membership for relocated objects** (disabled): Objects that are moved inherit perspective membership from their new parent. This is useful when reorganizing your model structure.
+## Tabular Editor > Public Previews
 
-**Inherit when adding table to perspective** (enabled): Automatically add all table objects (columns, measures, hierarchies) when a table is added to a perspective.
+![The Public Previews preferences page](~/content/assets/images/pref-public-previews.png)
 
-**Inherit when removing table from perspective** (enabled): Automatically remove all table objects when a table is removed from a perspective.
+Public previews are features you can try before they're final. They can change before they're released, based on your feedback. Each is off until you turn it on here.
 
-## Tabular Editor > Schema Compare
+**Basic Properties view** (disabled): Show the **Basic** and **Advanced** tabs in the [Properties view](xref:properties-view). **Basic** shows the properties Power BI Desktop shows, as a form, and **Advanced** shows every property. When disabled, the Properties view shows the property grid alone.
 
-![Schema Compare preferences](~/content/assets/images/pref-schema-compare.png)
+**Properties view tab** (Basic): The tab the Properties view shows while **Basic Properties view** is enabled. Available only while **Basic Properties view** is enabled. Clicking a tab in the Properties view also changes this setting.
 
-Configure which changes are ignored during schema comparison when updating table schemas:
+## Tabular Editor > Keyboard
 
-**Ignore Import mode changes** (disabled): Don't flag changes to Import mode properties. Enable this if you want to ignore changes between Import, DirectQuery, and Dual modes during schema comparison.
+![The Keyboard preferences page](~/content/assets/images/keyboard-mappings.png)
 
-**Ignore data type changes** (disabled): Don't flag column data type changes. Enable this if you want to ignore data type changes during schema comparison.
+Configure keyboard shortcuts for all Tabular Editor commands. Use the search functionality to quickly find specific commands and assign or modify their keyboard shortcuts to match your preferred workflow.
 
-**Ignore description changes** (disabled): Don't flag changes to object descriptions. Enable this if you don't want to see description changes in the schema comparison.
+<a name="miscellaneous"></a>
 
-**Ignore decimal to double changes** (disabled): Don't flag changes between decimal and double data types. This is useful when working with data sources that don't distinguish between these types.
+## Tabular Editor > Miscellaneous
 
-**Prioritize Analysis Services schema detector** (disabled): Use Analysis Services metadata as the source of truth for schema detection. When enabled, schema detection queries the Analysis Services instance directly.
+![The Miscellaneous preferences page](~/content/assets/images/pref-miscellaneous.png)
 
-## Tabular Editor > Save to Folder/File
+### Metadata Synchronization
 
-![Save to Folder preferences](~/content/assets/images/pref-save-to-folder.png)
+These settings control how Tabular Editor 3 handles model metadata that changes outside the application. The first three apply to a model loaded from a database on an instance of Analysis Services and use an Analysis Services trace. **Automatically reload from disk (hot reload)** applies to a model loaded from a file or a folder and watches those files.
 
-### Serialization Mode
+**Warn when local metadata is out-of-sync with deployed model** (enabled): Show an information bar when you have local changes to the model that you haven't saved to Analysis Services. The bar disappears when you save (**Ctrl+S**).
 
-**Use TMDL format** (disabled): Save model metadata using the Tabular Model Definition Language (TMDL) format instead of JSON. TMDL is the modern format recommended for version control and collaboration.
+**Track external model changes** (enabled): Start a trace on a local instance of Analysis Services, such as the msmdsrv.exe process of Power BI Desktop, and refresh the local Tabular Object Model and the data browsing views when another tool changes the model.
 
-**Use recommended serialization settings** (enabled): Apply recommended settings for folder-based serialization (overrides custom settings). When enabled, Tabular Editor uses best practices for saving models to folders, optimized for version control.
+**Refresh local Tabular Object Model metadata automatically** (enabled): Available while **Track external model changes** is checked. Refresh the local model metadata when an external change is detected. If you have local changes that you haven't saved, a prompt asks before they're overwritten.
 
-### Legacy (JSON) Serialization Settings
+**Automatically reload from disk (hot reload)** (enabled): Watch the metadata files the model was loaded from, and reload the model when another application, such as an AI agent, a script or another editor, changes them. It covers a model loaded from a `.bim` file or from a folder, and works independently of **Track external model changes**. If the model has unsaved changes, a prompt asks which copy to keep. See [Auto-reload from disk](xref:auto-reload).
 
-**Prefix filenames** (disabled): Add numeric prefixes to filenames for ordering. This can help maintain a consistent file order in file explorers.
+**Cleanup orphaned Tabular Editor traces**: Removes the Analysis Services traces that other instances of Tabular Editor left on the server, for example after Tabular Editor 3 closed unexpectedly. The button and a line stating the number of traces appear only when the connected instance of Analysis Services has such traces.
 
-**Local relationships** (enabled): Store relationship definitions with individual tables instead of in a central location. This makes it easier to see which relationships belong to each table when using version control.
+### Best Practice Analyzer
 
-**Local perspectives** (enabled): Store perspective membership with individual objects instead of in a central location. This reduces merge conflicts in version control.
+**Scan for Best Practice violations in the background** (enabled): Runs the Best Practice Analyzer on a background thread whenever the model changes. If you clear it, run the analysis from the **Best Practice Analyzer** window. On large models or with complex rules, background scanning slows down editing.
 
-**Local translations** (enabled): Store translations with individual objects instead of in a central location. This reduces merge conflicts in version control.
+**Enable built-in best practice rules** (enabled on new installations): Turn the built-in Best Practice Analyzer rules on or off. The rules cover error prevention, performance, maintenance, naming conventions, formatting, model layout, governance and security. See @built-in-bpa-rules.
 
-**Levels**: Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure. The available levels are Data Sources, User Defined Functions (UDFs), Shared Expressions, Perspectives, Relationships, Roles, Tables, Columns, Hierarchies, Measures, Partitions, Calculation Items and Translations.
+### Notifications
 
-**Ignore inferred objects** (enabled): Don't serialize objects that are automatically inferred by the engine. This reduces clutter in saved metadata.
+**Show a notification when data refresh is completed** (enabled): Show a notification when a data refresh operation completes.
 
-**Ignore inferred properties** (enabled): Don't serialize properties that are automatically inferred by the engine. This keeps saved metadata clean and focused on explicitly set values.
+### DAX scripts
 
-**Ignore timestamps** (enabled): Don't serialize timestamp metadata. This is highly recommended for version control as it prevents unnecessary changes in every commit.
+**Use comments as separators** (enabled): Insert comments into generated DAX scripts to make them easier to read.
 
-**Ignore lineage tags** (disabled): Don't serialize Power BI lineage tag metadata. Enable this if you don't want lineage information in your saved metadata.
-
-**Ignore privacy settings** (disabled): Don't serialize data source privacy settings. Enable this if you manage privacy settings separately.
-
-**Include sensitive data** (disabled): Include sensitive information like passwords in serialized metadata. This is not recommended for security reasons.
-
-**Ignore incremental refresh partitions** (disabled): Don't serialize partitions created by incremental refresh policies. Enable this if you want incremental refresh to be managed separately from your saved metadata.
-
-**Split multiline strings** (enabled): Split long string values across multiple lines for better readability in version control. This makes it easier to see changes in DAX expressions and other long text properties.
-
-**Sort arrays** (disabled): Sort array elements alphabetically for consistent serialization. Reduces ordering differences in version control and changes the order of some elements.
-
-### TMDL Serialization Settings
-
-**Indentation mode** (tabs): Choose between tabs or spaces for indentation in TMDL files. Tabs are the default and recommended option.
-
-**Indentation spaces** (4): When using spaces, specify the number of spaces per indentation level.
+**Sort scripted items alphabetically** (disabled): Sort the objects in a DAX script generated from a multi-object selection alphabetically. When cleared, the script follows the selection order.
 
 ## AI Features
 
@@ -406,53 +415,6 @@ One standing grant per resource, governing both the AI Assistant chat and any ag
 
 In the Enterprise, Consultancy and Trial editions an administrator can cap any of these by [policy](xref:policies), separately for the chat and for the MCP server. A capped dropdown is shown read-only. See @ai-assistant for how the chat asks for what a grant does not cover, and @mcp-server for what an agent sees.
 
-<a name="miscellaneous"></a>
-
-## Tabular Editor > Miscellaneous
-
-![Miscellaneous preferences](~/content/assets/images/pref-miscellaneous.png)
-
-### Metadata Synchronization
-
-These settings control how Tabular Editor 3 deals with model metadata that changes outside the application. The first three cover a model loaded from a database on an instance of Analysis Services and rely on an Analysis Services trace. **Automatically reload from disk** covers a model loaded from a file or a folder, and watches those files directly.
-
-**Warn when local metadata is out-of-sync with deployed model** (enabled): When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. The bar disappears when you save (**Ctrl+S**).
-
-**Track external model changes** (enabled): Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
-
-**Refresh local Tabular Object Model metadata automatically** (enabled): When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
-
-**Automatically reload from disk** (enabled): When checked, Tabular Editor watches the metadata files the model was loaded from and reloads the model when another application changes them. Unlike the two settings above, this doesn't involve an Analysis Services trace: it watches the files themselves, so it covers a model loaded from a `.bim` file or from a folder, whether or not a server is involved. If the model has unsaved changes, Tabular Editor asks you which copy to keep. See [Auto-reload from disk](xref:auto-reload).
-
-**Cleanup orphaned Tabular Editor traces**: Removes every Analysis Services trace started by any instance of Tabular Editor. Use it when traces remain after Tabular Editor 3 closed unexpectedly.
-
-> [!NOTE]
-> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
-
-## Model Deployment > General
-
-![Model Deployment preferences](~/content/assets/images/pref-model-deployment.png)
-
-### Deployment Options
-
-**Add metadata annotation upon deployment** (disabled): Adds deployment details to the deployed model: the user, the client machine, the time, the Tabular Editor build and the deployment mode.
-
-**Save Model.bim backup on deployment** (enabled): Saves a compressed copy of the model's `Model.bim` to the **Backup location** folder on every deployment. No backup is saved while **Backup location** is empty.
-
-**Backup location**: The folder for deployment backups. Available when **Save Model.bim backup on deployment** is selected.
-
-### Model Saving Options
-
-**Save Model.bim backup on model save** (enabled): Saves a compressed copy of the model's `Model.bim` to the **Backup location** folder every time you save the model. No backup is saved while **Backup location** is empty.
-
-**Backup location**: The folder for save backups. Available when **Save Model.bim backup on model save** is selected.
-
-## Model Deployment > Data Refresh
-
-### Direct Lake
-
-**Auto-refresh when saving new tables** (enabled): Refreshes a Direct Lake model when you save it with new tables. If you clear it, new tables stay unprocessed until you refresh the model, and queries against them fall back to DirectQuery mode.
-
 ## Data Browsing > Pivot Grid
 
 <!-- SCREENSHOT RESHOOT (3.27.1): pref-pivot-grid.png. Show the Keep Pivot Grids open when a different model is opened section and the Field Headers and Field List labels. -->
@@ -495,10 +457,11 @@ These settings control how Tabular Editor 3 deals with model metadata that chang
 
 **Automatically execute DAX queries by default** (enabled): New DAX queries open with **Auto-execute** enabled, so the query re-runs whenever changes are made to the deployed semantic model. Turn it off if you would rather execute each query yourself.
 
-**Keep existing sorting and filtering in the result grid** (WhenQueryUnchanged): Control whether to preserve grid filters and sorting when re-executing queries:
-- **Never**: sorting and filtering are always reset when a query is executed
-- **WhenQueryUnchanged**: sorting and filtering are reset only when the query is modified
-- **Always**: sorting and filtering are never reset if the columns still exist
+**Keep existing sorting and filtering in the result grid** (When query is unchanged): Control whether to preserve grid filters and sorting when re-executing queries:
+
+- **Never**: sorting and filtering are reset every time you execute the query
+- **When query is unchanged**: sorting and filtering are reset only when you modify the query, ignoring changes to whitespace and comments
+- **Always**: sorting and filtering are never reset for columns that are still in the result
 
 ### Query settings
 
@@ -536,51 +499,93 @@ These settings control how Tabular Editor 3 deals with model metadata that chang
 
 **Track selected column in TOM Explorer** (enabled): When you select a column in the @tom-explorer-view, the open table preview scrolls that column into view and highlights it, which is the quickest way to find one column of a very wide table. The same setting can be turned on and off for a single preview with **Track selected column** on the Table Preview toolbar.
 
+## Text Editors > General
+
+![The Text Editors General preferences page](~/content/assets/images/pref-text-editors-general.png)
+
+Settings shared by the code editors.
+
+**Allow multi-paste** (enabled): Paste the clipboard text into every selection, for example into a block selection made with **Alt**+select.
+
+**Show indicators on scrollbar** (enabled): Mark the messages about the code on the vertical scrollbar. Hover over a marker to read the message, or click it to go to the code. With this checked, the vertical scrollbar is always visible.
+
+**Word Wrap** (disabled): Wrap long lines in the code editors.
+
+**Show visual word wrap indicator at the:** Available while **Word Wrap** is checked. Check **End of line**, **Start of line** or **Line margin** to mark wrapped lines at that position. All three are cleared by default.
+
 ## Text Editors > DAX Editor > General
 
 ![Dax Editor General](~/content/assets/images/dax-editor-general.png)
 
-Tabular Editor 3's DAX editor is highly configurable. This page provides settings for general configuration of the DAX editor:
+Settings for the DAX editor's display, the DAX syntax it accepts, DAX formatting and function documentation. See @dax-editor.
+
+### General
 
 **Line numbers** (enabled): Display line numbers in the left margin of the editor.
 
-**Code folding** (enabled): Enable collapsible regions in DAX code for better readability. Make sure you try out this feature!
+**Code folding** (enabled): Show collapsible regions in DAX code.
 
-**Visible whitespace** (disabled): Show dots for spaces and arrows for tabs. This can be helpful when diagnosing indentation issues.
+**Visible whitespace** (disabled): Show dots for spaces and arrows for tabs, for example when you diagnose indentation issues.
 
-**Indentation guides** (enabled): Display vertical lines to show indentation levels.
+**Indentation guides** (enabled): Display vertical lines that show indentation levels.
 
-**Use tabs** (disabled): When checked, a tab character (`\t`) is inserted whenever the TAB button is hit. Otherwise, a number of spaces corresponding to the **Indent width** setting is inserted.
+**Use tabs** (disabled): When checked, pressing **Tab** inserts a tab character (`\t`). Otherwise, the editor inserts the number of spaces set in **Tab/indent width**.
 
-**Comment style** (slashes): DAX supports line comments that use slashes (`//`) or hyphens (`--`). This setting determines which style of comment is used when Tabular Editor 3 generates DAX code.
+**Tab/indent width** (4): The width of a tab or indent in character columns, from 1 to 20.
 
-**DAX function documentation**: Use this setting to specify which URL to launch in the default web browser, whenever you hit F12 while the cursor is on a DAX function. Options include https://dax.guide (recommended) and Microsoft's official documentation.
+**Comment style:** (Slashes): The comment token Tabular Editor uses when you comment code through a UI action: **Slashes** (`//`) or **Hyphens** (`--`).
 
 ### DAX Settings
 
-**Locale**: Specify the locale for DAX functions and formatting.
+**Locale** (US (A, B, C, 1234.00)): The list separator and decimal separator of DAX code: **US (A, B, C, 1234.00)** or **Non-US (A; B; C; 1234,00)**.
 
-**Analysis Services version settings**: These settings are relevant only when Tabular Editor 3 cannot determine the version of Analysis Services used, as is the case when a Model.bim file is loaded directly. In this case, Tabular Editor tries to guess which version the model will be deployed to, based on the compatibility level. If Tabular Editor reports incorrect semantic or syntax errors, set these to the Analysis Services version you deploy to.
+The remaining settings decide which DAX syntax the editor accepts. Tabular Editor 3 determines this from the instance of Analysis Services the model is connected to. When it can't, for example when you load a Model.bim file, it guesses from the compatibility level. If the editor reports incorrect syntax or semantic errors, set these to match the engine you deploy to. Each defaults to **Auto-detect**.
+
+**Semantic engine** (Auto-detect): The engine version to emulate: **SSAS 2016**, **SSAS 2017**, **SSAS 2019**, **SSAS 2022** or **AAS / PBI (Latest)**. Newer versions support more DAX functions.
+
+**Scalar predicates** (Auto-detect): Whether a single scalar predicate in a `CALCULATE` filter argument can reference multiple columns.
+
+**Directional CF** (Auto-detect): Whether [CROSSFILTER](https://dax.guide/crossfilter) accepts the directional syntax for many-to-many relationships.
+
+**Date Literals** (Auto-detect): Whether the date literal syntax is accepted.
+
+**Measure/Agg Shortcut** (Auto-detect): Whether scalar predicates can contain measure references and aggregation functions.
+
+**Table-named variables** (Auto-detect): Whether a variable can have the same name as a table in the model.
+
+Each of the last five settings offers **Auto-detect**, an **Always allow** option and a **Never allow** option.
+
+### DAX Formatter by SQLBI
+
+**Use daxformatter.com instead of built-in formatter** (disabled): Format DAX code with the [daxformatter.com](https://www.daxformatter.com) web service, which receives the code you format. The built-in formatter sends nothing over the network. Unavailable where an administrator has set the `DisableWebDaxFormatter` [policy](xref:policies).
+
+**Request Timeout (ms)** (5000): Available while **Use daxformatter.com instead of built-in formatter** is checked. How long to wait for daxformatter.com to respond, from 100 to 20,000 milliseconds.
+
+**Default DAX formatting** (Long lines): The formatting that **F6** applies: **Short lines** or **Long lines**. **Shift+F6** applies the other one. If you've customized the format shortcuts under [Keyboard](#tabular-editor--keyboard), this setting doesn't change them.
+
+### DAX function documentation
+
+**Documentation URL** (`https://dax.guide/{0}`): The page that opens in your web browser when you press **F12** with the cursor on a DAX function. Choose [DAX Guide](https://dax.guide) or the Microsoft documentation (`https://docs.microsoft.com/en-us/dax/{0}-function-dax`), or type a custom URL.
 
 ## Text Editors > DAX Editor > Auto Formatting
 
-![Auto Formatting Settings](~/content/assets/images/auto-formatting-settings.png)
+![The DAX Editor Auto Formatting preferences page](~/content/assets/images/auto-formatting-settings.png)
 
-The DAX Editor is **very** powerful and helps you produce beautiful, readable DAX code as you type.
+The DAX editor formats your code as you type. **Use default formatting settings** at the bottom of the page restores every setting on it.
 
-**Auto format code as you type** (enabled): Applies formatting rules when certain keys are pressed. For example, when a parenthesis is closed, everything within the parentheses is formatted according to the other settings on this page.
+**Auto format code as you type** (enabled): Apply the formatting rules when certain keys are pressed. For example, when a parenthesis is closed, everything within the parentheses is formatted according to the other settings on this page. The next three settings are available while this is checked.
 
-**Auto-format function calls** (enabled): Formats function calls (spacing between arguments and parentheses) when a parenthesis is closed.
+**Auto-format function calls** (enabled): Add spacing between function arguments when you type the closing parenthesis.
 
-**Auto-indent** (enabled): This option automatically indents function arguments when a line break is inserted within a function call.
+**Auto-indent** (enabled): Indent the next line when you open a function call or after certain keywords.
 
-**Auto-brace** (enabled): This option automatically inserts the closing brace or quote whenever an opening brace or quote is entered.
+**Auto-brace** (enabled): Insert or skip the matching character when you type an opening or closing brace or quote.
 
-**Wrap selection** (enabled): When enabled, this option automatically wraps the current selection with the closing brace, when an opening brace is entered.
+**Wrap selection** (enabled): When you type a brace with code selected, wrap the selection in the braces. When cleared, the brace replaces the selection.
 
-### Formatting Rules
+### Formatting rules
 
-These settings control how DAX code whitespace is formatted, both when auto-formatting occurs and when code is manually formatted.
+These settings control how DAX code whitespace is formatted, both when auto-formatting occurs and when you format code manually.
 
 **Space after functions** (disabled)
 
@@ -619,6 +624,8 @@ SUM(
 
 ***
 
+**Newline before operator** (enabled): When a binary expression is broken across lines, put the operator at the start of the next line. When cleared, the operator stays at the end of the first line.
+
 **Pad parentheses** (enabled)
 
 # [Enabled](#tab/pad-parentheses-on)
@@ -635,143 +642,285 @@ SUM(Sales[Amount])
 
 ***
 
-**Long format line limit** (120): The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (long lines)** option.
+**Long format line limit** (120): The maximum number of characters on a line before an expression is broken across multiple lines, when you format DAX with long lines. Accepts 10 to 200.
 
-**Short format line limit** (60): The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (short lines)** option.
+**Short format line limit** (60): The maximum number of characters on a line before an expression is broken across multiple lines, when you format DAX with short lines. Accepts 10 to 200.
 
-### Casings and Quotes
+### Casings and quotes
 
 In addition to formatting the DAX code whitespace, Tabular Editor 3 can also fix object references and function/keyword casings.
 
 **Fix measure/column qualifiers** (enabled): When checked, table prefixes are automatically removed from measure references, and automatically inserted on column references.
 
-**Preferred keyword casing** (UPPER): This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc. It also governs the fixed keyword values auto-complete offers for functions that take them: `ASC` and `DESC`, `KEEP`, `FIRST`, `LAST` and `DEFAULT`, the `CROSSFILTER` directions and `LOOKUP`'s `EXPLICIT` and `INFERRED`. Choose **Capitalize first letter only** to be offered `Explicit` rather than `EXPLICIT`.
+**Preferred keyword casing** (Default): The casing of keywords, such as `ORDER BY`, `VAR` and `EVALUATE`: **Default**, **All UPPERCASE**, **All lowercase** or **Capitalize first letter only**. **Default** writes keywords in uppercase, except the `CROSSFILTER` directions `Both`, `Oneway`, `Oneway_LeftFiltersRight` and `Oneway_RightFiltersLeft`. It also governs the fixed keyword values auto-complete offers for functions that take them: `ASC` and `DESC`, `KEEP`, `FIRST`, `LAST` and `DEFAULT`, the `CROSSFILTER` directions and `LOOKUP`'s `EXPLICIT` and `INFERRED`. Choose **Capitalize first letter only** to be offered `Explicit`.
 
-**Preferred function casing** (UPPER): This setting allows you to change the casing used for functions, such as `CALCULATE(...)`, `SUM(...)`, etc.
+**Preferred function casing** (Default): The casing of functions, such as `CALCULATE(...)` and `SUM(...)`, with the same options. **Default** writes functions in uppercase.
 
 **Fix keyword/function casing** (enabled): When checked, casing of keywords and functions is automatically corrected whenever code is auto-formatted or manually formatted.
 
-**Fix object reference casing** (enabled): DAX is a case-insensitive language. When this is enabled, references to tables, columns and measures are automatically corrected such that the casing matches the physical name of the referenced objects.
+**Fix object reference casing** (enabled): DAX is a case-insensitive language. When this is enabled, references to variables, tables, columns and measures are automatically corrected such that the casing matches the definition of the referenced object.
 
-**Always quote tables** (disabled): Referencing certain table names do not require surrounding single quotes in DAX. However, if you prefer table references to always be quoted, you can check this option.
+**Always quote tables** (disabled): Quote every table reference. When cleared, the editor quotes a table name only when it has to, for example when the name contains special characters or matches a DAX function name.
 
-**Always prefix extension columns** (disabled): Extension columns can be defined without a table name. When checked, the DAX editor adds the table prefix to an extension column.
+**Always prefix extension columns** (disabled): Extension columns can be defined without a table name. When checked, the DAX editor adds the table prefix to an extension column, even an empty one: `''[ExtensionColumn]`.
 
 ## Text Editors > DAX Editor > Code Assist
 
 ![DAX Editor Code Assist preferences](~/content/assets/images/pref-dax-code-assist.png)
 
-On this page, you can configure the two most important Code Assist features, namely calltips (aka. "parameter info") and auto-complete.
+Configure parameter info (calltips), auto-complete and the warnings in the DAX editor.
 
-**Auto-complete trigger**: Control when the auto-complete list appears. Options include automatic triggering after typing a certain number of characters, or manual triggering with CTRL+Space.
+### Parameter info
 
-**Calltip trigger**: Control when parameter information appears. Options include automatic triggering when opening a function parenthesis, or manual triggering.
+**Show parameter info automatically** (enabled): Show the parameters of the function you're typing. The dropdown below it sets when parameter info appears: **Only when typing** (the default), **When typing or moving cursor** or **Always**.
 
-**Incremental search** (enabled): Enable fuzzy/incremental searching in auto-complete. This allows you to find items by typing parts of their name, not just the beginning.
+### Code auto-complete
 
-**Suggest table names** (enabled): Include table names in auto-complete suggestions.
+**Show auto-complete popup automatically** (enabled): Open the auto-complete list as you type. When cleared, open it with **Ctrl+Space**.
 
-**Always quote table names** (disabled): Automatically quote table names in suggestions, even when not required.
+**Auto-complete mode** (After entering a whitespace character or a letter): Available while **Show auto-complete popup automatically** is checked. When the list opens: **After entering a letter only**, **After entering a whitespace character or a letter** or **After entering any character**.
 
-**Show first letter only** (disabled): Only show items starting with the typed letter. Disable this to use incremental search instead.
+**Handle character deletion** (enabled): Keep the auto-complete list open and filter it again when you delete characters. When cleared, deleting a character closes the list.
+
+**Show deprecated/not recommended DAX functions** (disabled): List deprecated and not recommended DAX functions in auto-complete.
+
+**Usage based pre-selection** (enabled): Preselect the items you've chosen before in the current session.
+
+**KPI expression references** (Suggest non-empty KPI expressions only): Whether auto-complete suggests references to KPI expressions. For a measure `[Sales Amount]` with a KPI, these are `[_Sales Amount Status]`, `[_Sales Amount Goal]` and `[_Sales Amount Trend]`. Options:
+
+- **Never suggest KPI expressions**
+- **Suggest non-empty KPI expressions only**
+- **Suggest expressions for all model KPIs**
+- **Suggest expressions for all model measures**
+
+**Allow incremental search** (enabled): Filter the list by letters that appear in order in an item's name. For example, typing `icqs` matches `[Internet Current Quarter Sales]`.
+
+**Only first letter of every word** (disabled): Available while **Allow incremental search** is checked. Match the letters you type against the first letter of each word in an item's name only.
+
+### Errors and Warnings
+
+**Show warnings for unused variables** (enabled): Show a warning when a DAX expression declares a variable that it never references.
 
 ## Text Editors > DAX Editor > Code Actions
 
 ![DAX Editor Code Actions preferences](~/content/assets/images/pref-dax-code-actions.png)
 
-Configure automatic code improvement suggestions:
+Configure [code actions](xref:code-actions), the code improvement and refactoring suggestions in the left margin of the DAX editor.
 
-**Variable prefixes**: Define acceptable prefixes for variable names (e.g., `_`, `__`, `$`, `var_`, `var`, `v_`, `v`, `VAR_`). Code actions suggest adding these prefixes to variable names that don't follow the convention.
+**Show code actions** (enabled): Show code action suggestions in the DAX editor.
 
-**Column prefixes**: Define acceptable prefixes for temporary column names (e.g., `@`, `$`, `_`, `x`, `x_`). Code actions suggest adding these prefixes to temporary column names that don't follow the convention.
+**Variable prefix** (`_`): The prefix that code actions apply to variable names: `_`, `__`, `$`, `var_`, `var`, `v_`, `v` or `VAR_`.
 
-## SQL Editor / M Editor / C# Editor
+**Apply variable casing** (disabled): Fix the casing of variable names when you apply a code action for variables.
 
-<!-- IMAGE NEEDED: pref-code-editors.png
-     One of the SQL Editor, M Editor and C# Editor preferences pages. The three share a
-     layout, so a single shot covers the section.
-     Alt text: "The code editor preferences page, shared by the SQL, M and C# editors" -->
+**Preferred variable casing** (Default): Available while **Apply variable casing** is checked. The casing of variable names after the prefix: **Default**, **All UPPERCASE**, **All lowercase** or **Capitalize first letter only**.
 
-Similar configuration options are available for SQL, M (Power Query), and C# script editors, including:
-- Syntax highlighting and color schemes
-- Auto-formatting options
-- Code assist and auto-complete features
-- Comment styles and indentation preferences
+**Extension column prefix** (`@`): The prefix that code actions apply to extension columns: `@`, `$`, `_`, `x` or `x_`.
 
-Each editor can be customized independently to match your preferred coding style.
+## Text Editors > SQL Editor / M Editor / C# Editor
 
-## DAX Formatter
+![The code editor preferences page, shared by the SQL, M and C# editors](~/content/assets/images/pref-code-editors.png)
 
-<!-- IMAGE NEEDED: pref-dax-formatter.png
-     The DAX Formatter preferences page at its default settings.
-     Alt text: "The DAX Formatter preferences page" -->
+The **SQL Editor**, **M Editor** and **C# Editor** nodes each have a **General** page with the same settings. Each editor keeps its own values.
 
-**DAX formatter consent** (disabled): Agree to send DAX code to the external DAX formatting service (www.daxformatter.com). When enabled, you can use this service to format DAX code according to community standards.
+**Line numbers** (enabled): Display line numbers in the left margin of the editor.
 
-**DAX formatter request timeout** (5000): Timeout in milliseconds for DAX formatter requests. Increase this if you frequently get timeout errors when using the DAX formatter.
+**Code folding** (enabled): Show collapsible regions in the code.
 
-## DAX Optimizer Integration
+**Visible whitespace** (disabled): Show dots for spaces and arrows for tabs.
 
-<!-- IMAGE NEEDED: pref-dax-optimizer.png
-     The DAX Optimizer Integration preferences page at its default settings.
-     Alt text: "The DAX Optimizer Integration preferences page" -->
+**Indentation guides** (enabled): Display vertical lines that show indentation levels.
 
-Configure integration with DAX Optimizer (Enterprise Edition only):
+**Use tabs** (disabled): When checked, pressing **Tab** inserts a tab character. Otherwise, the editor inserts spaces.
 
-**Connect automatically** (null/prompt): Automatically connect to DAX Optimizer when available. When not set, a prompt appears the first time.
+## Schema Compare
 
-**Obfuscate VPAX files** (enabled): Anonymize model metadata when sending to DAX Optimizer. This protects sensitive information like table and column names while still allowing analysis.
+![Schema Compare preferences](~/content/assets/images/pref-schema-compare.png)
 
-**Obfuscation dictionary directory** (`%LocalAppData%\TabularEditor3\DaxOptimizer`): Specify where obfuscation dictionaries are stored. The dictionary maintains consistent obfuscation across multiple analyses.
+Configure how Tabular Editor detects and reports source schema changes when you update table schemas.
+
+### Schema Change detection
+
+**Use Analysis Services for change detection** (disabled): Detect schema changes by running a refresh operation on the Analysis Services database. Use it for data sources that Tabular Editor can't read schemas from directly.
+
+### Schema Compare settings
+
+**Ignore new column imports** (disabled): Don't import new columns from the source.
+
+**Ignore column description changes** (disabled): Ignore differences between the description of an imported column and the column description in the source. Some data sources supply column descriptions.
+
+**Ignore column data type changes** (disabled): Don't report source columns that map to a different data type than the imported column has.
+
+**Ignore decimal to floating point data type changes** (disabled): Available while **Ignore column data type changes** is cleared. Don't report columns imported as Decimal that have a floating point type in the source.
+
+## File Formats > General
+
+![The File Formats General preferences page with the serialization settings sections](~/content/assets/images/pref-file-formats-general.png)
+
+The serialization settings on this page and on the **Save-to-folder** pages apply when you save with **File > Save As** or **File > Save to Folder** and the model has no stored serialization settings, or when you uncheck **Use serialization settings from annotations** in the save dialog. **File > Save** uses the settings stored with the model, which you edit under **Model > Serialization options...**.
+
+### Power BI Desktop
+
+**Use PBIX filename as database name when serializing** (enabled): When you save a model loaded from Power BI Desktop as a Model.bim file or a folder, replace the database name, a GUID generated by Power BI Desktop, with the name of the .pbix file.
+
+### New models
+
+**Use latest default** (enabled): Create new models at the latest compatibility level. While checked, **Compatibility level** is unavailable.
+
+**Compatibility level** (1600): The compatibility level of new models when **Use latest default** is cleared. The choices are the same as in the **New Model** dialog:
+
+| Level | Target |
+|---|---|
+| 1200 | Azure Analysis Services / SQL Server 2016+ |
+| 1400 | Azure Analysis Services / SQL Server 2017+ |
+| 1500 | Azure Analysis Services / SQL Server 2019+ |
+| 1600 | Azure Analysis Services / SQL Server 2022+ |
+| 1700 | Azure Analysis Services / SQL Server 2025+ |
+| 1706 | Power BI / Fabric |
+
+1700 is the highest level Analysis Services supports; 1706 is the highest overall and is Power BI and Fabric only.
+
+**Use workspace database** (enabled): Create a workspace database for new models, so you can query and test the model while you develop it.
+
+**Default save format** (Always ask): The format of the first save of a new model: **Always ask**, **File (Model.bim)**, **Folder (Database.json)** or **TMDL**.
+
+**Create user options (.tmuo) file** (enabled): Create the user options (.tmuo) file when you save a new model for the first time. The file holds encrypted data source credentials and other user-specific settings for the model.
+
+### General serialization settings
+
+Every format uses these settings: Model.bim files, Database.json folders and TMDL folders.
+
+**Include sensitive** (disabled): Include sensitive properties, such as the `Password` property of a data source. If you check it, the saved files contain those values in plain text.
+
+**Ignore incremental refresh partitions** (enabled): Don't save the partitions that an incremental refresh policy creates. In Model.bim files and TMDL folders, a table left without partitions gets a single partition with the policy's source expression, so the model opens in Power BI Desktop.
+
+### JSON serialization settings
+
+Model.bim files and Database.json folders use these settings. TMDL folders don't.
+
+**Ignore inferred objects** (enabled): Don't serialize objects that the engine infers.
+
+**Ignore inferred properties** (enabled): Don't serialize properties that the engine infers.
+
+**Ignore timestamps** (enabled): Don't serialize timestamp metadata. A save without model changes then leaves the files unchanged.
+
+**Ignore lineage tags** (disabled): Don't serialize Power BI lineage tags.
+
+**Ignore privacy settings** (disabled): Don't serialize the `PrivacySetting` property of data sources. Check it if you deploy with a version of Microsoft.AnalysisServices.Deployment that doesn't support the property.
+
+**Split multiline strings** (enabled): Write multiline strings, such as DAX expressions, as an array of lines.
+
+**Sort arrays by name** (disabled): Sort some JSON arrays, such as roles and perspectives, by name.
+
+## File Formats > Save-to-folder
+
+![The Save-to-folder preferences page with the Save to Folder format setting](~/content/assets/images/pref-save-to-folder.png)
+
+**Save to Folder format** (TMDL): The format **File > Save to Folder** writes: **TMDL** or **Folder (Database.json)**. A model loaded from a folder keeps its folder's format when you save it with **File > Save**.
+
+Below the format, the page links to **Model > Serialization options...**, which edits the serialization settings stored with the loaded model. Clicking the link applies your changes, closes the Preferences dialog and opens **Model > Serialization options...**. With no model loaded, the menu path is plain text.
+
+## File Formats > Save-to-folder > JSON Serialization
+
+Settings for saves to a Database.json folder. **Reset to default** restores every setting on the page.
+
+### Database.json settings
+
+**Serialize relationships on from-tables** (enabled): Store each relationship as an annotation on the table at its from-side.
+
+**Serialize perspective membership info on objects** (enabled): Store perspective membership as an annotation on each object.
+
+**Serialize translations on translated objects** (enabled): Store metadata translations as an annotation on each translated object.
+
+**Prefix file names sequentially** (disabled): Prefix each file name with the object's position in its collection. The folder then keeps the metadata order.
+
+**Serialization depth** (all levels): The object types that get a file of their own: Data Sources, User Defined Functions (UDFs), Shared Expressions, Perspectives, Relationships, Roles, Tables, Columns, Hierarchies, Measures, Partitions, Calculation Items and Translations. Relationships, Perspectives and Translations are hidden when the matching **Serialize ...** setting above is checked.
+
+## File Formats > Save-to-folder > TMDL Serialization
+
+Settings for saves to a [TMDL](xref:tmdl) folder. **Reset to default** restores every setting on the page.
+
+![The TMDL Serialization preferences page with Save objects to separate files checked](~/content/assets/images/pref-tmdl-serialization.png)
+
+### TMDL settings
+
+**Include metadata order** (enabled): Write the order of objects to `model.tmdl`.
+
+**Indentation** (Tabs): Indent with tabs or spaces.
+
+**Indentation width** (4): The number of spaces per indentation level when **Indentation** is Spaces.
+
+**Encoding** (UTF8): The file encoding of the `.tmdl` files.
+
+**Newline style** (Windows): The line ending: Default, Windows or Linux. Default uses the line ending of the operating system that saves the model.
+
+**Casing style** (camelCase): The casing of TMDL keywords, such as property names and object types.
+
+**Expression trim style** (No trim): How whitespace in expression lines is trimmed: No trim, Trim trailing whitespaces or Trim leading/common whitespaces.
+
+**Save objects to separate files** (disabled): Save each object of a type checked in the tree below it to its own file. Every type is checked by default, and **Tables**, **Perspectives**, **Roles** and **Translations** can't be unchecked. Enterprise Edition only. See @tmdl-per-object-serialization.
 
 ## File Formats > VertiPaq Analyzer
 
-![VertiPaq Analyzer preferences](~/content/assets/images/pref-vertipaq-analyzer.png)
+![The VertiPaq Analyzer preferences page](~/content/assets/images/pref-vertipaq-analyzer.png)
 
-**Include TOM metadata** (enabled): Include Tabular Object Model metadata in VertiPaq Analyzer statistics. This provides richer information about your model structure.
+### VPAX file format
 
-**Read statistics from data** (enabled): Read statistics by scanning actual data (more accurate but slower). When disabled, only metadata is used. If reading statistics from data fails, for example when a high-cardinality column exceeds a Power BI capacity's per-query memory limit, **Collect Stats** collects the statistics from metadata and a **Stats collected without reading data** warning appears.
+**Include TOM** (enabled): Include the complete Tabular Object Model (TOM) in VertiPaq Analyzer (VPAX) exports.
 
-**Direct Lake extraction mode** (ResidentOnly): How to extract statistics from Direct Lake models:
-- **ResidentOnly**: Only analyze data currently loaded in memory
-- **All**: Include non-resident data (slower, may trigger data loading)
+### VertiPaq Analyzer settings
 
-**Read stats from Dynamic Management Views** (disabled): Use DMVs to gather statistics (faster but less accurate). This is an alternative to reading from data.
+**Read statistics from data** (enabled): Scan the model data for statistics. It's more accurate than relying on Dynamic Management Views, and slower on large models. If reading statistics from data fails, for example when a high-cardinality column exceeds a Power BI capacity's per-query memory limit, **Collect Stats** collects the statistics from metadata and a **Stats collected without reading data** warning appears. The settings below are available while this is checked.
 
-**Relationship sample rows** (3): Number of rows to sample when analyzing relationships. Higher values provide more accuracy but take longer.
+**Read statistics from DirectQuery tables** (disabled): Include DirectQuery tables when collecting statistics.
 
-**Column batch size** (50): Number of columns to analyze in each batch. Adjust this based on your model size and performance requirements.
+**RI violation samples** (3): The number of referential integrity violation samples to retrieve, from 1 to 100.
 
-## Power BI Integration
+**Statistics from Direct Lake models** (Resident columns only): Which columns of a Direct Lake model to collect statistics for: **Resident columns only**, **Referenced columns only** or **Full**.
 
-![Power BI Integration preferences](~/content/assets/images/pref-power-bi.png)
+**Column batch size** (50): The batch size used when collecting column statistics, from 1 to 9,999.
 
-**Power BI endpoint base URL** (`https://api.powerbi.com`): The base URL for Power BI API calls. Change this if you're working with a sovereign cloud or custom environment.
+## Model Deployment > General
 
-**Fabric endpoint base URL** (`https://api.fabric.microsoft.com`): The base URL for Microsoft Fabric API calls. Change this if you're working with a sovereign cloud or custom environment.
+![Model Deployment preferences](~/content/assets/images/pref-model-deployment.png)
 
-**Use embedded browser for authentication** (enabled): Use the embedded browser for OAuth authentication instead of the system browser. This provides a more integrated experience.
+### Deployment Options
 
-## Proxy Settings
+**Add metadata annotation upon deployment** (disabled): Adds deployment details to the deployed model: the user, the client machine, the time, the Tabular Editor build and the deployment mode.
 
-![Proxy Settings preferences](~/content/assets/images/pref-proxy-settings.png)
+**Save Model.bim backup on deployment** (enabled): Saves a compressed copy of the model's `Model.bim` to the **Backup location** folder on every deployment. No backup is saved while **Backup location** is empty.
 
-**Proxy type** (None): Choose between:
-- **None**: No proxy configuration
-- **System**: Use system proxy settings
-- **Custom**: Specify custom proxy configuration
+**Backup location**: The folder for deployment backups. Available when **Save Model.bim backup on deployment** is selected.
 
-**Proxy address**: The address of the proxy server (e.g., `http://proxy.company.com:8080`).
+### Model Saving Options
 
-**Proxy user**: Username for proxy authentication if required.
+**Save Model.bim backup on model save** (enabled): Saves a compressed copy of the model's `Model.bim` to the **Backup location** folder every time you save the model. No backup is saved while **Backup location** is empty.
 
-**Proxy password**: Password for proxy authentication (stored encrypted).
+**Backup location**: The folder for save backups. Available when **Save Model.bim backup on model save** is selected.
 
-**Use default credentials** (enabled): Use the current Windows credentials for proxy authentication. This implements the [same behavior as Power BI Desktop](https://docs.microsoft.com/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
+## Model Deployment > Data Refresh
 
-**Bypass proxy on local** (enabled): Bypass the proxy for local addresses. This is recommended for performance.
+### Direct Lake
 
-**Proxy bypass list**: List of addresses that should bypass the proxy (e.g., `localhost;*.company.local`).
+This section appears in Enterprise Edition only.
+
+**Auto-refresh when saving new tables** (enabled): Refreshes a Direct Lake model when you save it with new tables. If you clear it, new tables stay unprocessed until you refresh the model, and queries against them fall back to DirectQuery mode.
+
+## DAX Optimizer > General
+
+![The DAX Optimizer General preferences page](~/content/assets/images/pref-dax-optimizer.png)
+
+Settings for the [DAX Optimizer integration](xref:dax-optimizer-integration).
+
+### DAX Optimizer settings
+
+**Connect automatically on start-up** (disabled): Connect to the DAX Optimizer service when Tabular Editor 3 starts.
+
+### Obfuscation
+
+**Use VPAX obfuscation by default** (enabled): Check the option to obfuscate a VPAX file by default when you upload it to DAX Optimizer.
+
+**VPAX obfuscation dictionary location** (`%LocalAppData%\TabularEditor3\DaxOptimizer`): The folder that stores obfuscation dictionaries.
 
 ## Next Steps
 

@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: Save with supporting files
 author: Peer Grønnerup
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,7 +21,7 @@ applies_to:
 Save with supporting files saves a semantic model together with the metadata files that Microsoft Fabric Git integration requires. Use it to synchronize a model saved by Tabular Editor between a Fabric workspace and a Git repository.
 
 > [!NOTE]
-> Save with supporting files is available when you save to a .bim (TMSL) file, or to a folder with TMDL as the serialization mode.
+> Save with supporting files is available when you save to a .bim (TMSL) file or to a TMDL folder.
 
 ## File structure and model properties
 
@@ -73,7 +73,7 @@ Sales.SemanticModel/
 1. Create or open a semantic model in Tabular Editor 3.
 2. Set the `Name` property of the Database object in the TOM Explorer. It sets the folder name and the `displayName` in the .platform file.
    ![Set Database Name property](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
-3. If you save to a folder, set the serialization mode to TMDL under **Tools > Preferences > File Formats**.
+3. If you save to a folder, check that **Save to Folder format** under **Tools > Preferences > File Formats > Save-to-folder** is **TMDL**. The folder dialog shows **Save with supporting files** only for TMDL saves.
 4. Select **File > Save As** or **File > Save to Folder**.
 5. Choose a folder and select **Save with supporting files**.
    ![Save with supporting files dialog](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)

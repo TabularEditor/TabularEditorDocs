@@ -2,7 +2,7 @@
 uid: system-requirements
 title: System requirements
 author: Morten Lønskov
-updated: 2026-10-23
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,7 +18,7 @@ applies_to:
 ---
 # System requirements
 
-Tabular Editor 3 is a Windows desktop application. From version 3.27.0 it is published on two .NET runtimes, for two processor architectures, in three package formats.
+Tabular Editor 3 is a Windows desktop application, published on two .NET runtimes, for two processor architectures, in three package formats.
 
 ## Operating system
 
@@ -35,13 +35,13 @@ Which Windows versions are supported at any given moment follows Microsoft's .NE
 
 The .NET 10 and .NET 8 builds are *functionally identical*. Nothing is available in one and missing from the other. Installing one build with the `.exe` or `.msi` installer replaces the other build. See [Switching between the .NET 8 and .NET 10 packages](xref:installation-activation-basic#switching-between-the-net-8-and-net-10-packages).
 
-ARM64 builds are native, from version 3.23.0 onwards.
+ARM64 builds are native.
 
 ## .NET runtime
 
 | Build | Needs |
 |---|---|
-| `.exe` installer | The matching [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet): [10](https://dotnet.microsoft.com/download/dotnet/10.0) or [8](https://dotnet.microsoft.com/download/dotnet/8.0). The installer offers to download and install it for you |
+| `.exe` installer | The matching [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet): [10](https://dotnet.microsoft.com/download/dotnet/10.0) or [8](https://dotnet.microsoft.com/download/dotnet/8.0). If the runtime is missing or older than the version the installer requires, the installer downloads and installs it, which needs Internet access. With a current runtime in place, the installer runs without Internet access |
 | `.msi` | The matching .NET Desktop Runtime, installed beforehand. The MSI does *not* bring it along, which is what makes it suitable for unattended deployment |
 | Portable `.zip` | Nothing. It is self-contained |
 

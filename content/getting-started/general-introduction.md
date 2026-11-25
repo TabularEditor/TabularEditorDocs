@@ -2,7 +2,7 @@
 uid: general-introduction
 title: General introduction and architecture
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,7 +50,7 @@ Tabular Editor can load model metadata from the following sources:
 Once the model metadata has been loaded in Tabular Editor, the user is free to add/edit/remove **objects** and change **object properties**. Modifications are not saved back to the source until the user explicitly saves the model, either by choosing **File > Save** or by hitting CTRL+S. If the model metadata was loaded from a file source (sources 1-3 above), that file will then be updated. If the model metadata was loaded from Analysis Services (sources 4-7 above), then the changes are saved back to Analysis Services. Note that certain changes may cause objects to enter a state where they can no longer be queried by end-users. For example, if you add a column to a table, you will need to [refresh the table](xref:refresh-preview-query#refreshing-data) before users can query the contents of that table or any measures that dependent on the table.
 
 > [!WARNING]
-> Certain limitations apply when saving model metadata changes back to Power BI Desktop (source 7 above). See @desktop-limitations for more information.
+> Power BI Desktop versions older than June 2025 don't accept every model change from external tools (source 7 above). See @desktop-integration.
 
 ### TOM objects and properties
 

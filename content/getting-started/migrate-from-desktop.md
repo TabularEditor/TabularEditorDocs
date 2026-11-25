@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: Migrating from Power BI Desktop
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,13 +37,13 @@ Before proceeding, it is important to understand that Tabular Editor can be used
 - **Scenario 2:** Tabular Editor with the Power BI Premium XMLA Endpoint.
 
 > [!IMPORTANT]
-> You cannot use Tabular Editor to directly load a .pbix file. For more information, see <xref:desktop-limitations#power-bi-file-types>.
+> You can't load a .pbix file directly in Tabular Editor. Open the file in Power BI Desktop and connect Tabular Editor to it as an external tool. See @desktop-integration.
 
 ### Scenario 1: Tabular Editor as an External Tool for Power BI Desktop
 
 Generally, this scenario is intended for self-service analysts and Power BI Desktop users without access to Power BI Premium, to make certain data modeling operations easier (for example, adding and editing measures), and to unlock advanced modeling options not otherwise available (calculation groups, perspectives and metadata translations).
 
-External tools connect to the Analysis Services model hosted by Power BI Desktop. This allows the tool to make certain changes to the data model. Currently, however, not all types of data modeling operations are supported by Power BI Desktop. It is important to understand this limitation and how Tabular Editor behaves when used as an external tool for Power BI Desktop. See <xref:desktop-limitations> for more information about this.
+External tools connect to the Analysis Services model hosted by Power BI Desktop and change the data model through it. Power BI Desktop versions older than June 2025 don't accept every modeling operation from external tools. See @desktop-integration.
 
 The typical workflow in this scenario, is the following:
 
@@ -56,7 +56,7 @@ The typical workflow in this scenario, is the following:
 > [!NOTE]
 > As of October 2021, there is a bug in Power BI Desktop that sometimes prevents Desktop from automatically refreshing the field list and visuals to reflect changes made through external tools. When this happens, saving the .pbix file and reopening it, or manually refreshing a table within the model, usually causes the field list and all visuals to update correctly.
 
-The [modeling limitations](xref:desktop-limitations) that apply to External Tools are only relevant regarding write operations/model modifications. You can still use Tabular Editor 3's connected features to browse the data within the model through table data previews, Pivot Grids or DAX queries, as described later in this guide.
+The restrictions of older Power BI Desktop versions apply only to model changes. You can still use Tabular Editor 3's connected features to browse the data within the model through table data previews, Pivot Grids or DAX queries, as described later in this guide.
 
 ### Scenario 2: Tabular Editor with the Power BI Premium XMLA Endpoint
 
@@ -79,7 +79,7 @@ As the model metadata "source of truth" in this scenario, is the file or folder 
 
 When using Tabular Editor to connect to the dataset through the XMLA endpoint, there are no limitations to the types of write operations/model modifications that can be made.
 
-The remainder of this article focuses on differences between Power BI Desktop and Tabular Editor for data model development. Some sections only apply to scenario 2, due to the [modeling limitations](xref:desktop-limitations) that apply when using Tabular Editor as an external tool for Power BI Desktop (scenario 1).
+The remainder of this article focuses on differences between Power BI Desktop and Tabular Editor for data model development.
 
 ## Tabular Editor 3 user interface
 
@@ -186,7 +186,7 @@ To add a new table to a model, use the **Model > Import tables...** option. Tabu
 > Tabular Editor 3 does not support every data source otherwise supported by Power BI. If your model uses a data source not supported by Tabular Editor, the easiest way to import a new table from the same source is to copy an existing table in Tabular Editor (CTRL+C / CTRL+V), and then modify the partition expression and update the table schema as shown below. For this to work, make sure that the **Tools > Preferences > Schema Compare > Use Analysis Services for change detection** option is enabled. See <xref:importing-tables#updating-table-schema-through-analysis-services> for more information.
 
 > [!IMPORTANT]
-> This option is not available by default when using Tabular Editor as an external tool, since adding/editing tables through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
+> When Tabular Editor is connected to a Power BI Desktop version older than June 2025, this option is available only if **Allow unsupported modeling operations** is enabled. See @preferences.
 
 See @importing-tables-data-modeling for more information.
 
@@ -200,7 +200,7 @@ Power Query (M) expressions that define what is loaded into each table reside in
 > Currently, Tabular Editor 3 does not perform any validation of the partition expression. For Power Query (M) expressions, this is planned for a later update of Tabular Editor 3.
 
 > [!IMPORTANT]
-> Partition expressions are read-only by default when using Tabular Editor as an external tool, since editing partitions through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
+> When Tabular Editor is connected to a Power BI Desktop version older than June 2025, partition expressions are read-only unless **Allow unsupported modeling operations** is enabled. See @preferences.
 
 If the Power Query expression changes gives rise to any changes on the imported table columns, a dialog that lets you review these changes will show:
 
@@ -213,7 +213,7 @@ Shared Expressions are M queries that are not directly used to load data into a 
 ![Shared Expression](~/content/assets/images/shared-expression.png)
 
 > [!IMPORTANT]
-> Shared expressions are read-only by default when using Tabular Editor as an external tool, since editing partitions through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
+> When Tabular Editor is connected to a Power BI Desktop version older than June 2025, shared expressions are read-only unless **Allow unsupported modeling operations** is enabled. See @preferences.
 
 ### How to add relationships between tables
 
@@ -227,9 +227,6 @@ The easiest way to add relationships between two tables is to create a new diagr
 ![Shared Expression](~/content/assets/images/create-relationship-through-diagram.gif)
 
 See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
-
-> [!IMPORTANT]
-> Relationships cannot be modified when using Tabular Editor as an external tool, since editing relationships through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
 
 ### How to publish to the Power BI Service
 

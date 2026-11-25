@@ -2,7 +2,7 @@
 uid: object-properties-relationships
 title: Relationship properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,6 +23,8 @@ SUMMARY: Reference for the properties of relationships, such as cardinality, cro
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 This page covers the properties of relationships. For properties that most objects share, see @object-properties-common.
 
@@ -47,12 +49,12 @@ You can create and edit relationships in the **Properties** view or, in Tabular 
 - [State](xref:object-properties-common#state)
 
 ### From Column
-`FromColumn` · Column · Basic
+`FromColumn` · Column · General · **Basic**
 
 The column on the from side of the relationship. In a one-to-many relationship, this is usually the foreign key column in the fact table, for example `Sales[ProductKey]`. Choosing a column also sets `FromTable`.
 
 ### From Cardinality
-`FromCardinality` · RelationshipEndCardinality · Basic
+`FromCardinality` · RelationshipEndCardinality · General · **Basic**
 
 How many rows on the from side can have the same value in `FromColumn`.
 
@@ -63,14 +65,14 @@ How many rows on the from side can have the same value in `FromColumn`.
 | `None` | The cardinality is unspecified. Don't use it. The relationship dialog in Tabular Editor 3 lists only `One` and `Many`, and the **TOM Explorer** shows `None` as `0`. |
 
 ### To Column
-`ToColumn` · Column · Basic
+`ToColumn` · Column · General · **Basic**
 
 The column on the to side of the relationship. In a one-to-many relationship, this is the key column of the dimension table, for example `Product[ProductKey]`. Choosing a column also sets `ToTable`.
 
 The Best Practice Analyzer (BPA) rule @kb.bpa-relationship-same-datatype flags relationships where `FromColumn` and `ToColumn` have different data types.
 
 ### To Cardinality
-`ToCardinality` · RelationshipEndCardinality · Basic
+`ToCardinality` · RelationshipEndCardinality · General · **Basic**
 
 How many rows on the to side can have the same value in `ToColumn`. The values are the same as for `FromCardinality`, and `One` is the usual setting. The two cardinalities together set the type of relationship:
 
@@ -85,7 +87,7 @@ When a column on a `One` side contains duplicate values, refresh fails with an e
 In the Tabular Object Model (TOM), the from side is always the many side of a one-to-many relationship. Tabular Editor accepts `FromCardinality` `One` with `ToCardinality` `Many`, and the engine rejects it when you save, with the error "From end cardinality must always be set to Many, unless the relationship is One-To-One". To relate the tables the other way, swap the from and to columns.
 
 ### Active
-`IsActive` · bool · Basic
+`IsActive` · bool · General · **Basic**
 
 Whether the relationship filters data automatically. The engine rejects a model where active relationships create more than one path between two tables. This happens most often when several relationships use bidirectional cross filtering.
 
@@ -99,7 +101,7 @@ CALCULATE ( [Total Sales], USERELATIONSHIP ( Sales[ShipDate], 'Date'[Date] ) )
 In the Tabular Editor 3 diagram view, you can also right-click a relationship to activate or deactivate it.
 
 ### ID
-`ID` · string · Basic · read-only
+`ID` · string · General · read-only
 
 The internal identifier of the relationship, which is the relationship's name in TOM. Power BI Desktop uses a GUID. Tabular Editor 3 and Tabular Editor 2 give a new relationship a unique name that starts with `New Single Column Relationship`. Use the ID to refer to a specific relationship in a C# script or a Tabular Model Scripting Language (TMSL) command.
 
@@ -114,7 +116,7 @@ The table that contains `FromColumn`. To change it, choose a different `FromColu
 The table that contains `ToColumn`. To change it, choose a different `ToColumn`. Tabular Editor 3 hides this property in the **Properties** view. You can still read it in a C# script.
 
 ### Cross Filtering Behavior
-`CrossFilteringBehavior` · CrossFilteringBehavior · Options
+`CrossFilteringBehavior` · CrossFilteringBehavior · Options · **Basic**
 
 The direction filters flow through the relationship.
 

@@ -2,7 +2,7 @@
 uid: best-practice-analyzer
 title: Best Practice Analyzer
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ The Best Practice Analyzer checks your model against a set of rules and lists ev
 
 A rule is a condition written against the model's objects, plus a severity and a description. Rules cover the things that are easy to get wrong and expensive to discover later: calculated columns that should be pushed to the source, relationships on columns of mismatched data types, measures without a format string, objects left visible that should be hidden.
 
-Press **F10**, or click the issue count in the main window, to open the Best Practice Analyzer. Background scanning can be turned off under **Tools > Preferences > Best Practice Analyzer** (**File > Preferences** in Tabular Editor 2).
+Press **F10**, or click the issue count in the main window, to open the Best Practice Analyzer. Background scanning can be turned off under **Tools > Preferences > Tabular Editor > Miscellaneous** (**File > Preferences** in Tabular Editor 2).
 
 ## Where to go next
 

@@ -2,7 +2,7 @@
 uid: licensing-activation
 title: Install and Activate Tabular Editor 3
 author: Morten Lønskov
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -51,7 +51,7 @@ Tabular Editor 3 contacts `https://api.tabulareditor.com` at startup and periodi
 If activation prompts persist:
 
 1. Confirm `api.tabulareditor.com` is reachable from the affected machine.
-2. Configure proxy settings under **Tools > Preferences > Proxy Settings**. See @proxy-settings for proxy-specific troubleshooting, including the **AnalysisServices.AppSettings.json** override that enables external MSAL proxy support.
+2. Configure proxy settings under **Tools > Preferences > Tabular Editor > Proxy Settings**. See @proxy-settings for proxy-specific troubleshooting, including the **AnalysisServices.AppSettings.json** override that enables external MSAL proxy support.
 3. If the network blocks outbound traffic to the activation endpoint, use [Manual activation](#manual-activation-no-internet) below.
 
 ## Manual activation (no internet)
@@ -126,7 +126,7 @@ Enterprise licenses are seat-based. To activate Tabular Editor 3 on a new user w
 
 Tabular Editor 3 uses outgoing web requests for product activation, update checks, DAX formatting, and downloading external Best Practice rules. If you are behind a proxy:
 
-1. Configure **Tools > Preferences > Proxy Settings**. Switch the **Proxy Type** between `System` and `None`, restart Tabular Editor 3, and retry activation.
+1. Configure **Tools > Preferences > Tabular Editor > Proxy Settings**. Switch the **Proxy Type** between `System` and `None`, restart Tabular Editor 3, and retry activation.
 2. If activation still fails, see @proxy-settings for advanced proxy diagnostics.
 3. If outbound access to `api.tabulareditor.com` is blocked, use [Manual activation](#manual-activation-no-internet).
 
@@ -135,4 +135,4 @@ Tabular Editor 3 uses outgoing web requests for product activation, update check
 
 ## Confirm you are on the latest version
 
-Activation-related bugs are sometimes resolved in newer Tabular Editor 3 releases. Confirm you are on the latest version before submitting a support request. Check for updates under **Tools > Preferences > Updates and Feedback**, or download the latest installer from the [downloads page](xref:downloads).
+Activation-related bugs are sometimes resolved in newer Tabular Editor 3 releases. Confirm you are on the latest version before submitting a support request. Check for updates under **Tools > Preferences > Tabular Editor > Updates and Feedback**, or download the latest installer from the [downloads page](xref:downloads).

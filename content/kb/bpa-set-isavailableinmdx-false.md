@@ -2,7 +2,7 @@
 uid: kb.bpa-set-isavailableinmdx-false
 title: Set IsAvailableInMDX to False
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-11-12
 description: Best practice rule to optimize performance by disabling MDX access for hidden columns that are not used in relationships or hierarchies.
 ---
 
@@ -13,7 +13,7 @@ description: Best practice rule to optimize performance by disabling MDX access 
 This best practice rule identifies hidden columns that have the `IsAvailableInMDX` property set to `true` but don't need to be accessible through MDX queries. Setting this property to `false` for unused hidden columns can improve query performance and reduce memory overhead.
 
 - Category: Performance
-- Severity: Medium (2)
+- Severity: High (3)
 
 ## Applies To
 
@@ -38,7 +38,7 @@ By explicitly setting `IsAvailableInMDX` to `false` for these columns, you optim
 
 The rule triggers when all of the following conditions are met:
 
-1. The column has `IsAvailableInMDX = true`
+1. The column's table has no Direct Lake partitions, and the column has `IsAvailableInMDX = true`
 2. The column is hidden (or its table is hidden)
 3. The column is NOT used in any `SortBy` relationships
 4. The column is NOT used in any hierarchies

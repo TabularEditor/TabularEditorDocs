@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Keyboard shortcuts Tabular Editor 3
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,10 +44,11 @@ applies_to:
 |Redo|Ctrl+Y|
 |Find|Ctrl+F|
 |Replace|Ctrl+H|
+|Reset Zoom|Ctrl+0, Ctrl+NumPad0|
 
 ## Shortcuts that depend on focus
 
-Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view.
+Some shortcuts run a different command depending on the part of the window that has focus. A text control is a document editor, the **Expression Editor** or a cell you're editing in the **Properties** view. A drop-down list or a read-only text box works like the TOM Explorer for **Ctrl+Z** and **Ctrl+Y**.
 
 | Shortcut | Text control has focus | TOM Explorer has focus |
 | --- | --- | --- |
@@ -164,6 +165,9 @@ Some shortcuts run a different command depending on the part of the window that 
 |Step out|Shift+F11|
 |Next row (innermost row context)|F9|
 |Previous row (innermost row context)|Shift+F9|
+|Step into selection|Ctrl+B|
+
+**Stop debugging** has no default shortcut. Assign one under **Tools > Preferences > Tabular Editor > Keyboard**.
 
 ## C# Script
 

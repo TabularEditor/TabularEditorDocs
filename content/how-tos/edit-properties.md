@@ -19,3 +19,6 @@ The Property Grid on the lower right side of the screen, shows most of the prope
 * Format String
 
 Different properties exist, depending on what kind of object was selected.
+
+> [!NOTE]
+> In Tabular Editor 3, you can turn on the **Basic Properties view** public preview in **Tools > Preferences > Tabular Editor > Public Previews**. The Properties view then has two tabs: **Basic**, a form with the properties that Power BI Desktop shows, and **Advanced**, the Property Grid. See @properties-view.

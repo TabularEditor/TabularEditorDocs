@@ -2,7 +2,7 @@
 uid: connect-ssas
 title: Connect and deploy to Analysis Services
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,4 +44,4 @@ Saving updates the database you're connected to. To push the loaded model to a *
 
 ## Editing a Power BI Desktop model
 
-Tabular Editor can attach to a running instance of Power BI Desktop through the **Local Instance** dropdown. As of the June 2025 Power BI Desktop update there are no longer any unsupported write operations, so third-party tools may freely modify the semantic model hosted in Desktop. On earlier versions some operations are restricted; see @desktop-limitations and @desktop-integration.
+Tabular Editor can attach to a running instance of Power BI Desktop through the **Local Instance** dropdown. As of the June 2025 Power BI Desktop update there are no longer any unsupported write operations, so third-party tools may freely modify the semantic model hosted in Desktop. On earlier versions some operations are restricted; see @desktop-integration.

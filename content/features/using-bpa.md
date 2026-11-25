@@ -2,7 +2,7 @@
 uid: using-bpa
 title: Using the Best Practice Analyzer
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -42,7 +42,7 @@ Clicking the link (or pressing F10), brings up the full BPA window.
 
 ### Functionality
 
-Whenever a change is made to the model, the Best Practice Analyzer scans your model for issues in the background. You can disable this feature under **Tools > Preferences > Best Practice Analyzer**.
+Whenever a change is made to the model, the Best Practice Analyzer scans your model for issues in the background. You can disable this feature under **Tools > Preferences > Tabular Editor > Miscellaneous**.
 
 The BPA Window in both TE2 and TE3 allows you to dock the window on one side of your desktop, while keeping the main window in the other side, allowing you to work with your model while you can see BPA issues.
 

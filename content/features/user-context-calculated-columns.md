@@ -2,7 +2,7 @@
 uid: user-context-calculated-columns
 title: User-context calculated columns
 author: Morten Lønskov
-updated: 2026-10-26
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ The calculated column's `ExpressionContext` property sets whether the column is 
 
 | Expression Context | Meaning |
 |---|---|
-| `Standard` | The default. The expression can use only standard functions. The column has one value per row for all users. |
+| `Standard` | The default, except for new calculated columns on [Direct Lake on OneLake tables](#direct-lake-on-onelake-tables). The expression can use only standard functions. The column has one value per row for all users. |
 | `UserContext` | The expression can call user-context functions. The column is evaluated per user. |
 
 Select a calculated column in the @tom-explorer-view and set **Expression Context** under **Options** in the @properties-view.
@@ -35,7 +35,13 @@ Select a calculated column in the @tom-explorer-view and set **Expression Contex
 
 ## Direct Lake on OneLake tables
 
-`UserContext` is the only expression context Power BI supports for calculated columns on Direct Lake on OneLake tables. If a calculated column on a Direct Lake table is set to `Standard` when you save the model to the Power BI service, the save fails with the error "Default expression context cannot be used for calculated columns in Direct Lake tables". Direct Lake on SQL tables don't support calculated columns. For the steps to set the expression context on a Direct Lake model, see [Calculated columns on Direct Lake on OneLake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake).
+`UserContext` is the only expression context Power BI supports for calculated columns on Direct Lake on OneLake tables. If a calculated column on a Direct Lake on OneLake table is set to `Standard` when you save the model to the Power BI service, the save fails with the error "Default expression context cannot be used for calculated columns in Direct Lake tables". Direct Lake on SQL tables don't support calculated columns.
+
+At compatibility level 1705 or higher, a new calculated column on a Direct Lake on OneLake table is created with `UserContext`, also when a C# script or a DAX script adds it. New calculated columns on every other table, including Import and Direct Lake on SQL tables in the same model, are created with `Standard`. A column you copy and paste or duplicate keeps the expression context of its source column. Below compatibility level 1705, new columns are created with `Standard` and the compatibility level isn't changed.
+
+A calculated column on a Direct Lake on OneLake table whose expression context is `Standard` gets an error in the @messages-view and on the column in the @tom-explorer-view. The DAX editor doesn't underline it. 
+
+For the steps to check and fix the expression context of these columns, see [Calculated columns on Direct Lake on OneLake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake).
 
 ## What a user-context column can't be used for
 

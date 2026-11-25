@@ -2,7 +2,7 @@
 uid: object-properties-perspectives-cultures
 title: Perspective and culture properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,6 +23,8 @@ SUMMARY: Reference for the properties of perspectives and cultures (translations
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 This page covers the properties of perspectives and cultures. For properties that most objects share, see @object-properties-common.
 
@@ -45,8 +47,8 @@ The Best Practice Analyzer (BPA) rule @kb.bpa-perspectives-no-objects flags pers
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
@@ -65,13 +67,13 @@ The translation statistics properties show how much of the model is translated i
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
+- [Name](xref:object-properties-common#name) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Altered
-`Altered` · bool (empty when mixed) · Basic · compatibility level 1571+ · *shortcut to* the **Altered** flag of every translation in the culture
+`Altered` · bool (empty when mixed) · General · compatibility level 1571+ · *shortcut to* the **Altered** flag of every translation in the culture
 
 Each translation in a culture carries an *altered* flag in the Tabular Object Model (TOM), which translation tools use to mark translations that a person has reviewed or changed. This property sums up the flags of all translations in the culture:
 

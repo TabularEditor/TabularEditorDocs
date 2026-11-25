@@ -2,7 +2,7 @@
 uid: object-properties-security
 title: Role and security properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page covers the properties of roles, table permissions and role members. A table permission holds a role's security settings for one table. For properties that most objects share, see @object-properties-common.
 
 Security in a semantic model is defined by roles. A role grants its members a level of access to the model and restricts what they see with:
@@ -43,8 +45,8 @@ Members of the model's administrator roles and users with write access to the wo
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
@@ -68,7 +70,7 @@ To secure individual columns, use [OLS Column Permissions](#ols-column-permissio
 > The role also has a collection of table permission objects with the same display name. See [Table Permissions](#table-permissions-1) below.
 
 ### Row Level Security
-`RowLevelSecurity` · per table · Security · read-only · *shortcut to* the role's table permissions
+`RowLevelSecurity` · per table · Security · read-only · *shortcut to* the role's table permissions · **Basic**
 
 The row-level security (RLS) filter of each table in this role. Expand the property to see one entry per table. Each entry is a DAX expression that returns `TRUE` for the rows that members of the role can see, and an empty entry leaves that table unfiltered. Calculation group tables aren't listed. The collapsed value summarizes the settings, for example "RLS enabled on 1 out of 15 tables".
 
@@ -105,7 +107,7 @@ In Power BI, you can't add service principals as role members.
 Members that someone adds on the semantic model's **Security** page in the Power BI service are ordinary role members in the model. Through the XMLA endpoint, they're identical to members added in Tabular Editor: external members with `IdentityProvider` `AzureAD` and the user's object ID as `MemberID`. When you deploy with **Deploy Model Role Members**, the members in your model replace them. To keep the members added in the service, deploy without that option.
 
 ### Model Permission
-`ModelPermission` · ModelPermission · Translations, Perspectives, Security
+`ModelPermission` · ModelPermission · Translations, Perspectives, Security · **Basic**
 
 The level of access the role gives its members to the whole model.
 
@@ -156,7 +158,7 @@ The **Properties** view doesn't show `Name` or `ObjectType` for table permission
 The name of the role this table permission belongs to.
 
 ### Table
-`TableName` · string · Metadata · read-only · *shortcut to* the name of the table
+`TableName` · string · Metadata · read-only · *shortcut to* the name of the table · **Basic**
 
 The name of the table this table permission secures.
 
@@ -200,7 +202,7 @@ The object-level security (OLS) permission of the table in this role.
 
 This is the same setting as [Table Permissions](#table-permissions) on the role and `ObjectLevelSecurity` on the table.
 
-You can't combine RLS and OLS from different roles. A user who is a member of such a combination of roles gets an error at query time, in SQL Server Analysis Services, Azure Analysis Services and Power BI alike. See @data-security-about, [Combine OLS with RLS](xref:data-security-setup-ols#5-combine-ols-with-rls) and Microsoft's [object-level security restrictions](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions).
+RLS in one role and OLS in another role can fail for a user who is a member of both roles. Queries from that user get an error when the OLS applies to the RLS table or to a table connected to it by active relationships. Some of these combinations work, for example column OLS that hides every column of the RLS table. RLS and OLS in the same role always work together. Microsoft's [object-level security restrictions](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions) state that any combination of RLS and OLS from different roles is unsupported. See also @data-security-about and [Combine OLS with RLS](xref:data-security-setup-ols#5-combine-ols-with-rls).
 
 You also can't hide a table with OLS if that breaks a chain of relationships between other tables. The engine rejects it with an error.
 

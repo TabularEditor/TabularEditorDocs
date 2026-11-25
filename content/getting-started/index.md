@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: Welcome
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-13
 ---
 # Welcome
 
@@ -39,7 +39,6 @@ This training material focuses on the Tabular Editor product, so we assume you a
 **Power BI Desktop & Tabular Editor**
 
 - @desktop-integration
-- @desktop-limitations
 
 **User Interface**
 
