@@ -2,7 +2,7 @@
 uid: dax-debugger
 title: DAX Debugger
 author: Daniel Otykier
-updated: 2026-11-24
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -176,7 +176,7 @@ If you close the DAX query or the debug script view while you debug, a **Stop de
 
 ### Stop debugging
 
-Select **Stop debugging** on the **Debug** toolbar or in the **Debug** menu to end the session. The DAX query becomes editable again and the debug script view closes. Watch expressions are kept for the next session. **Stop debugging** has no default keyboard shortcut; assign one under **Tools > Preferences > Tabular Editor > Keyboard**.
+Select **Stop debugging** on the **Debug** toolbar or in the **Debug** menu to end the session. The DAX query becomes editable again, and the debug script view and the **Locals**, **Watch**, **Evaluation Context** and **Call Tree** windows close. Closing the debugged document or the model also ends the session and closes the windows. The next session opens the windows again where you left them, with the same watch expressions. **Stop debugging** has no default keyboard shortcut; assign one under **Tools > Preferences > Tabular Editor > Keyboard**.
 
 ## Scalar predicates
 
