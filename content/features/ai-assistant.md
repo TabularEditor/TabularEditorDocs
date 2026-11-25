@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,12 +46,12 @@ You can also use your own agent through the [MCP server](xref:mcp-server), with 
 
 Configure your AI provider under **Tools > Preferences > AI Features > AI Assistant > AI Provider**. Select a provider from the dropdown (the default is **None (AI disabled)** until you configure one), enter your API key and optionally override the default model.
 
-Leave the model field blank to use the provider's default model. OpenAI and Anthropic have defaults; Azure OpenAI and the Custom provider always need a value.
+Leave the model field blank to use the provider's default model. OpenAI and Anthropic have defaults; Azure OpenAI and the Custom provider always need a value. Selecting OpenAI or Anthropic as the provider fills in the default model name. A model name already saved in Preferences doesn't change when the default changes.
 
 | Provider | Default model | Configuration required |
 | -- | -- | -- |
-| OpenAI | gpt-5.5 | API key. Optional base URL, Organization ID and Project ID |
-| Anthropic | claude-sonnet-4-6 | API key. Optional base URL |
+| OpenAI | gpt-5.6-terra | API key. Optional base URL, Organization ID and Project ID |
+| Anthropic | claude-sonnet-5-5 | API key. Optional base URL |
 | Azure OpenAI | None. A deployment name is required | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | None. A model name is required | API key and custom endpoint URL |
 
@@ -76,7 +76,7 @@ Select **OpenAI** as the provider and enter your API key. If your OpenAI account
 
 Select **Anthropic** as the provider and enter your API key. The model name accepts any Anthropic model available on your account.
 
-![The AI Provider preferences page with Anthropic selected as the provider, the base URL https://api.anthropic.com, a masked API key and claude-sonnet-4-6 as the model name](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![The AI Provider preferences page with Anthropic selected as the provider, an empty Base URL (optional) field, a masked API key and claude-sonnet-5-5 as the model name](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
 > Anthropic enforces input token per minute (ITPM) rate limits based on your account tier. A new API key starts at Tier 1 with 30,000 ITPM for Claude Sonnet 4.x. A single request against a large model can exceed this limit. Purchase $40 or more in API credits to reach Tier 2 (450,000 ITPM). See the [Anthropic rate limits documentation](https://docs.anthropic.com/en/api/rate-limits) for full tier details.
@@ -357,7 +357,7 @@ Open **Tools > Preferences > AI Features > Permissions**, where each resource ha
 The chat has no separate "ask" level and shows a [permission card](#permission-cards-in-the-chat) when it needs a resource set to **Deny**.
 
 > [!NOTE]
-> From 3.27.0, **Model metadata**, **Documents** and **Macros** default to Read or higher, and the chat no longer prompts for them. By default, only DAX query results and Best Practice Analyzer rule edits show a card. Set a resource to **Deny** to get its prompt back.
+> **Model metadata**, **Documents** and **Macros** default to Read or higher, and the chat doesn't prompt for them. By default, only DAX query results and Best Practice Analyzer rule edits show a card. Set a resource to **Deny** to get its prompt back.
 
 > [!NOTE]
 > In Enterprise Edition, administrators can cap these permissions by policy. See @policies.
@@ -488,7 +488,7 @@ Other ways to reduce token usage:
 
 ## Disabling the AI Assistant
 
-The AI Assistant is an optional component, installed by default from Tabular Editor 3.27.0. Run the Tabular Editor 3 installer again and select **Modify** to include or exclude it in an existing installation. An upgrade keeps the existing selection; see [Upgrades and the AI features component](xref:installation-activation-basic#upgrades-and-the-ai-features-component). In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
+The AI Assistant is part of the optional **AI features** installer component, which is selected by default. Run the Tabular Editor 3 installer again and select **Modify** to include or exclude it in an existing installation. An upgrade from an earlier version selects the component, including in unattended upgrades that don't name the components, and later upgrades keep your choice. Administrators keep it off with the `DisableAi` policy or `ADDLOCAL=MainFeature`; see [Upgrades and the AI features component](xref:installation-activation-basic#upgrades-and-the-ai-features-component). In the portable build, delete `TabularEditor3.AI.dll` from the installation directory to remove it.
 
 The same component contains the MCP server, so excluding it or deleting `TabularEditor3.AI.dll` removes both. To turn off only the chat, keep the component and set the `DisableAiChat` policy.
 

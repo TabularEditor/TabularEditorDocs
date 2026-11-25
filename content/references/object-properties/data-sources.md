@@ -2,7 +2,7 @@
 uid: object-properties-data-sources
 title: Data source and expression properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,6 +23,8 @@ SUMMARY: Reference for the properties of legacy and structured data sources, sha
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 This page covers the objects that describe where a model's data comes from: data sources, shared expressions, query groups and data binding hints. For properties that most objects share, see @object-properties-common. For the partitions that use these objects, see @object-properties-partitions.
 
@@ -48,7 +50,7 @@ When you save to Tabular Model Definition Language (TMDL), Tabular Editor 2 and 
 
 To include secrets in the saved files, enable **Include sensitive** in one of these places:
 
-- in Tabular Editor 3, under **Tools > Preferences > File Formats** (see @preferences), or in **Model > Serialization options...** for the current model, which takes precedence over the preferences
+- in Tabular Editor 3, under **Tools > Preferences > File Formats > General** (see @preferences), or in **Model > Serialization options...** for the current model, which takes precedence over the preferences
 - in Tabular Editor 2, under **File > Preferences...** on the **Serialization** tab, under **General Serialization Settings**, or for the model you have open on the **Current Model** tab, under **Current Model Serialization Settings**
 
 Including sensitive data isn't recommended.
@@ -73,8 +75,8 @@ A provider (legacy) data source connects to a source through an OLE DB, ODBC or 
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
@@ -89,7 +91,7 @@ Some provider data sources wrap a Power BI mashup: the `Provider=` keyword in th
 The Windows account the server uses to connect to the source when `ImpersonationMode` is `ImpersonateAccount`, for example `CONTOSO\svc-ssas-reader`. Enter its password in `Password`. For the other impersonation modes, leave it empty.
 
 ### Connection String
-`ConnectionString` · string · Connection Details
+`ConnectionString` · string · Connection Details · **Basic**
 
 The connection string the server uses to open the connection. The keywords depend on the provider, for example:
 
@@ -198,21 +200,21 @@ Most of the properties below are shortcuts to a value in the data source's conne
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Protocol
-`Protocol` · string · Basic
+`Protocol` · string · General · **Basic**
 
 The kind of connection, for example `tds` for SQL Server and Azure SQL, `oracle` for Oracle, `odbc`, `ole-db`, `file` for a local or network file, `azure-blobs` for Azure Blob Storage or `odata` for an OData feed. The protocol sets which of the **Connection Details** and **Credential** properties are used.
 
 The value is free text. The TOM `DataSourceProtocol` class lists the names TOM knows, such as `analysis-services`, `azure-tables`, `db2`, `folder`, `http`, `mysql`, `postgresql`, `sap-hana-sql`, `sharepoint-list` and `teradata` (see [DataSourceProtocol](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.datasourceprotocol) for the full list). When you import tables into a structured data source, Tabular Editor 3 sets it to `tds` for SQL Server and Fabric SQL endpoints, or to `odbc`, `ole-db` or `oracle`.
 
 ### Account
-`Account` · string · Connection Details
+`Account` · string · Connection Details · **Basic**
 
 The storage account name, for protocols that connect to an Azure storage account, such as Azure Blob Storage or Azure Table Storage. Together with `Domain`, it forms the address of the account, for example the account `contosodata` and the domain `blob.core.windows.net`.
 
@@ -224,12 +226,12 @@ All connection address values of the data source. Click the ellipsis button to e
 <!-- TODO (not verifiable from TE3 source or the TOM reference, which only names each ConnectionAddress property): which protocols use Model, ContentType, EmailAddress, Object, Property, Resource and View, with an example value for each. The examples below for Model (analysis-services), EmailAddress (Exchange) and Resource (web URL) are unconfirmed. -->
 
 ### Model
-`AddressModel` · string · Connection Details
+`AddressModel` · string · Connection Details · **Basic**
 
 The name of the model, for protocols that connect to a semantic model or cube, such as `analysis-services`.
 
 ### Connection String
-`ConnectionString` · string · Connection Details
+`ConnectionString` · string · Connection Details · **Basic**
 
 A connection string, for protocols that take one, such as `odbc` and `ole-db`. For example:
 
@@ -240,72 +242,72 @@ Driver={Snowflake};Server=contoso.snowflakecomputing.com;Warehouse=COMPUTE_WH
 A password in the connection string is masked in the **Properties** view and removed when you save to file (see [Credentials and saving](#credentials-and-saving)).
 
 ### ContentType
-`ContentType` · string · Connection Details
+`ContentType` · string · Connection Details · **Basic**
 
 The content type of the source, for protocols that need to know the format of what they read.
 
 ### Database
-`Database` · string · Connection Details
+`Database` · string · Connection Details · **Basic**
 
 The name of the database on the server, for example `AdventureWorks` for the `tds` protocol.
 
 ### Domain
-`Domain` · string · Connection Details
+`Domain` · string · Connection Details · **Basic**
 
 The domain part of the address, for example `blob.core.windows.net` for Azure Blob Storage. It's used together with `Account`.
 
 ### EmailAddress
-`EmailAddress` · string · Connection Details
+`EmailAddress` · string · Connection Details · **Basic**
 
 An email address, for protocols that identify the connection by the user's email address, such as Exchange.
 
 ### Object
-`Object` · string · Connection Details
+`Object` · string · Connection Details · **Basic**
 
 The name of an object in the source, for protocols that address a single object.
 
 ### Path
-`Path` · string · Connection Details
+`Path` · string · Connection Details · **Basic**
 
 The path of a file or folder, for protocols such as `file` and `folder`, for example `\\fileserver\data\sales.csv`. The server that refreshes the model must be able to reach the path.
 
 ### Property
-`Property` · string · Connection Details
+`Property` · string · Connection Details · **Basic**
 
 A protocol-specific address value.
 
 ### Query
-`Query` · string · Connection Details
+`Query` · string · Connection Details · **Basic**
 
 A native query, typically SQL, that the connection sends to the source, for example `SELECT * FROM dbo.Customer`. Most models leave it empty and filter in the M expressions of the partitions.
 
 ### Resource
-`Resource` · string · Connection Details
+`Resource` · string · Connection Details · **Basic**
 
 A protocol-specific resource identifier, such as the URL of a web resource.
 
 ### Schema
-`Schema` · string · Connection Details
+`Schema` · string · Connection Details · **Basic**
 
 The schema in the database, for protocols that address a schema.
 
 ### Server
-`Server` · string · Connection Details
+`Server` · string · Connection Details · **Basic**
 
 The server to connect to, for example `myserver.database.windows.net` for the `tds` protocol. It's the value you usually change when you deploy the same model to a different environment.
 
 ### Url
-`Url` · string · Connection Details
+`Url` · string · Connection Details · **Basic**
 
 The URL of the source, for protocols such as `odata` and `http`, for example `https://services.odata.org/V4/Northwind/Northwind.svc`.
 
 ### View
-`View` · string · Connection Details
+`View` · string · Connection Details · **Basic**
 
 The name of a view in the source, for protocols that address one.
 
 ### AuthenticationKind
-`AuthenticationKind` · string · Credential
+`AuthenticationKind` · string · Credential · **Basic**
 
 How the server authenticates to the source. Pick a value from the dropdown or type one:
 
@@ -397,8 +399,8 @@ See @how-to-work-with-expressions, @script-create-m-parameter and @script-create
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)

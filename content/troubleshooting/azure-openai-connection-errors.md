@@ -2,7 +2,7 @@
 uid: azure-openai-connection-errors
 title: Azure OpenAI connection errors
 author: Morten Lønskov
-updated: 2026-04-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ A result pointing to a private IP range (for example `10.x.x.x`) confirms that y
 
 Options to resolve:
 
-- Add your Azure OpenAI hostname to the bypass list under **Tools > Preferences > Proxy Settings** so the request skips the proxy and goes directly through the VPN tunnel. Separate multiple hostnames with semicolons
+- Add your Azure OpenAI hostname to the bypass list under **Tools > Preferences > Tabular Editor > Proxy Settings** so the request skips the proxy and goes directly through the VPN tunnel. Separate multiple hostnames with semicolons
 - Ask your network team to update the proxy PAC file to bypass `*.openai.azure.com`, or to configure the proxy server to resolve Azure Private DNS zones
 - Use split tunneling so Azure private endpoint IP ranges route directly rather than via the proxy
 

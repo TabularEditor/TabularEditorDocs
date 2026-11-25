@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Refreshing, previewing and querying data
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -58,7 +58,7 @@ To initiate a refresh using Tabular Editor, simply right click on the Table or P
 
 You may also initiate a refresh at the model level through the **Model > Refresh model** menu. Once the refresh operation starts, you will see the text "Data refresh started... <ins>View refresh queue</ins>". Click on the link or locate the **Data refresh** view through the **View > Data refresh** menu option. This will display a list of all refresh operations (both present and current), displaying the status message returned from Analysis Services including progress counters and duration, and allowing you to cancel an unintended refresh.
 
-![Data Refresh View2](~/content/assets/images/data-refresh-view2.png)
+![Data Refresh view with a job expanded to tables and partitions](~/content/assets/images/data-refresh-view2.png)
 
 > [!TIP]
 > The Data Refresh view includes a **Start Time** column that shows when each refresh operation began. Click the column header to sort operations chronologically, making it easy to see your most recent refreshes first. You can sort by any column to organize refresh operations according to your needs. See [Data Refresh view](xref:data-refresh-view) for more details.

@@ -98,20 +98,20 @@ Tabular Editor 3 provides many configuration options. The default settings are s
 
 ### Check for updates on start-up
 
-By default, whenever Tabular Editor 3 is launched, the tool checks online to see if a newer version is available. You control how this update check is performed under **Tools > Preferences > Updates and Feedback**.
+By default, whenever Tabular Editor 3 is launched, the tool checks online to see if a newer version is available. You control how this update check is performed under **Tools > Preferences > Tabular Editor > Updates and Feedback**.
 
 > [!NOTE]
 > Always use the latest version of Tabular Editor 3. Our support team assumes you are on the latest version before submitting a bug report.
 
 ### Opting out of telemetry collection
 
-Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
+Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Tabular Editor > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
 
 ![Collect Telemetry](~/content/assets/images/getting-started/collect-telemetry.png)
 
 ### Proxy settings
 
-If you are on a network with limited internet connectivity, specify the address, username, and password of a proxy server under **Tools > Preferences > Proxy Settings**. This is required before Tabular Editor 3 can use any features that rely on outgoing web requests. Specifically:
+If you are on a network with limited internet connectivity, specify the address, username, and password of a proxy server under **Tools > Preferences > Tabular Editor > Proxy Settings**. This is required before Tabular Editor 3 can use any features that rely on outgoing web requests. Specifically:
 
 - Update checks
 - Product activation

@@ -2,7 +2,7 @@
 uid: undo-redo
 title: Undo/Redo support
 author: Morten Lønskov
-updated: 2026-10-13
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,7 +16,7 @@ Press **Ctrl+Z** to undo a change and **Ctrl+Y** to redo it. The undo stack has 
 
 ## Undo in text editors
 
-In Tabular Editor 3, **Ctrl+Z** and **Ctrl+Y** act on the part of the window that has focus. When focus is in a text control, the shortcuts undo and redo typing in that control. Text controls include DAX query, DAX script and C# script documents, the **Expression Editor** and a cell you're editing in the **Properties** view. Each text control has its own undo history, separate from the model undo stack. When focus is in the TOM Explorer or another view, the shortcuts undo and redo model changes. In the AI Assistant chat box, **Ctrl+Z** and **Ctrl+Y** don't undo or redo model changes.
+In Tabular Editor 3, **Ctrl+Z** and **Ctrl+Y** act on the part of the window that has focus. When focus is in a text control, the shortcuts undo and redo typing in that control. Text controls include DAX query, DAX script and C# script documents, the **Expression Editor** and a cell you're editing in the **Properties** view. Each text control has its own undo history, separate from the model undo stack. When focus is in the TOM Explorer, another view, a drop-down list or a read-only text box, the shortcuts undo and redo model changes. For example, after you pick a value from a list in the **Properties** view, **Ctrl+Z** undoes the change while the list still has focus. In the AI Assistant chat box, **Ctrl+Z** and **Ctrl+Y** don't undo or redo model changes.
 
 Focus stays in the script document after you run a C# script or apply a DAX script. Pressing **Ctrl+Z** there undoes typing in the script. If the script text was pasted or inserted in one step, **Ctrl+Z** removes all of it, and **Ctrl+Y** restores it.
 

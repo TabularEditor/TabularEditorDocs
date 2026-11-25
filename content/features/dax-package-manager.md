@@ -2,7 +2,7 @@
 uid: dax-package-manager
 title: DAX Package Manager
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ You can use the DAX Package Manager with any model that supports DAX User-Define
 ## Interface Layout
 
 ### 1. Launching the DAX Package Manager
-You can open the DPM panel through the **View** menu. It is also possible to assign a custom shortcut to the `View.DaxPackageManager` command, through **Tools > Preferences > Keyboard**.
+You can open the DPM panel through the **View** menu. It is also possible to assign a custom shortcut to the `View.DaxPackageManager` command, through **Tools > Preferences > Tabular Editor > Keyboard**.
 
 - **Menu:** `View → DAX Package Manager`
 - **Shortcut:** *(if assigned in Preferences)*

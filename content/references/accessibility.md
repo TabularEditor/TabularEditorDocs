@@ -2,7 +2,7 @@
 uid: accessibility
 title: Accessibility
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,6 +34,10 @@ Under **Tools > Preferences > Tabular Editor > Keyboard**, you can assign your o
 ## Display scaling
 
 Tabular Editor follows the display scaling set in Windows under **Settings > System > Display**.
+
+## Fonts
+
+Set the font and text size of the user interface and the text size of the code editors in the **Fonts** group under **Tools > Preferences > Tabular Editor > User Interface**. Sizes range from 8 pt to 14 pt, and changes take effect after you restart Tabular Editor. To enlarge one code editor for the current session, press **Ctrl** and turn the mouse wheel, and press **Ctrl+0** to return it to the preference size. See [Fonts](xref:preferences#fonts).
 
 ## Themes
 

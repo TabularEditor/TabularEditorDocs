@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: Advanced installation and activation
 author: Morten Lønskov
-updated: 2026-10-23
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -113,10 +113,10 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3
 | MSI feature | Shown in the installer as | Description | Installed by default |
 |-------------|---------------------------|-------------|----------------------|
 | `MainFeature` | Tabular Editor 3 | Core Tabular Editor 3 application | Yes (required) |
-| `AIAssistant` | AI features | The @ai-assistant and the @mcp-server | Yes, from 3.27.0. Earlier versions install it only when it's selected |
+| `AIAssistant` | AI features | The @ai-assistant and the @mcp-server | Yes |
 
 > [!IMPORTANT]
-> From 3.27.0, a new installation includes the **AI features** component unless you exclude it. If your organization doesn't allow the AI Assistant or the MCP server, exclude the component and set the `DisableAi` policy as described below.
+> A new installation includes the **AI features** component unless you exclude it. If your organization doesn't allow the AI Assistant or the MCP server, exclude the component and set the `DisableAi` policy as described below.
 
 ### Deploying without the AI features
 
@@ -141,9 +141,11 @@ To change the selection on a single machine, run the installer again and select 
 
 ### Upgrades and the AI features component
 
-When you install a newer version of the same package over an existing installation, the installer keeps the feature selection the machine already has. This applies to interactive and silent installations. A machine deployed without the AI features before 3.27.0 stays without them after the upgrade, and a machine where the AI features were selected keeps them.
+An upgrade from v27.1.1 or earlier selects the default components, including **AI features**, whatever the earlier installation had. This applies to interactive upgrades and to unattended upgrades whose command line doesn't name the components. Clear **AI features** during setup to leave the component out. An upgrade from a later version keeps the feature selection the machine has, in interactive and silent installations alike.
 
-In these cases the installer applies the default selection or the selection on the command line:
+To keep the AI features off machines in an unattended upgrade, set the [`DisableAi` policy](#enforcing-the-decision-with-the-disableai-policy) or pass `ADDLOCAL=MainFeature` as shown in [Deploying without the AI features](#deploying-without-the-ai-features).
+
+In these cases the installer applies the selection on the command line or the default selection:
 
 | Situation | Result |
 |--|--|
@@ -162,7 +164,7 @@ If the other edition is installed at a newer version, the installation stops wit
 
 A user who runs the installer gets the default selection, which includes the AI features. Set the `DisableAi` @policies to `1` under `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` to keep the AI features off every installation on the machine. Tabular Editor 3 reads the policy at startup and turns off the AI Assistant and the MCP server.
 
-From 3.27.0 the installer reads the policy as well:
+The installer reads the policy as well:
 
 - a new installation leaves out the AI features component, and the installer doesn't show it
 - an upgrade removes the component from a machine that has it

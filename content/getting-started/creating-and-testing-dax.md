@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Adding measures and other calculated objects
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,14 +54,11 @@ If you want your measure to be hidden, simply right-click and choose the **Make 
 
 ## Other measure properties
 
-In addition to the `Name`, `Expression` and `Hidden` properties, you can use the **Properties** view to review and edit the value of all properties of the currently selected object(s) in the **TOM Explorer**. For measures, this is where you can set the `Format String`, for example. For more information, see [Properties view](xref:properties-view).
+In addition to the `Name`, `Expression` and `Hidden` properties, you can use the **Properties** view to review and edit the value of all properties of the currently selected object(s) in the **TOM Explorer**. For measures, this is where you can set the `Format String`, for example. In Tabular Editor 3, with the **Basic Properties view** public preview turned on, the **Basic** tab of the Properties view shows the fields Power BI Desktop shows, such as **Format** and **Display folder**, and the **Advanced** tab shows every property. For more information, see [Properties view](xref:properties-view).
 
 # Adding calculated columns
 
 To add a calculated column, right-click on the table on which you want to add the column, and choose **Create > Calculated Column** (ALT+2). Give the column a name and edit its DAX expression using the **Expression Editor**, similar to how we did for measures above.
-
-> [!IMPORTANT]
-> This option is not available by default when connected to a Power BI Desktop model. This is because of the [limitations of Power BI Desktop support for external tools](xref:desktop-limitations). Click the link to learn more.
 
 > [!NOTE]
 > When the DAX expression of a calculated column has been changed, the table in which the column resides has to be refreshed before the column can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
@@ -69,9 +66,6 @@ To add a calculated column, right-click on the table on which you want to add th
 # Adding calculated tables
 
 To add a calculated table, right-click on the model or on the "Tables" folder, and choose **Create > Calculated Table** (ALT+6). Give the table a name and edit its DAX expression using the **Expression Editor**, similar to how we did for measures above. Notice that the columns on the table changes automatically, when you make a change to the DAX expression. This can cause cascading effects, if other DAX expressions reference the table, or if columns are used in a hierarchy.
-
-> [!IMPORTANT]
-> This option is not available by default when connected to a Power BI Desktop model. This is because of the [limitations of Power BI Desktop support for external tools](xref:desktop-limitations). Click the link to learn more.
 
 > [!NOTE]
 > When the DAX expression of a calculated table has been changed, the table has to be refreshed before it can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.

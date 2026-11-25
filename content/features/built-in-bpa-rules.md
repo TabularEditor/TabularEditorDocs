@@ -2,7 +2,7 @@
 uid: built-in-bpa-rules
 title: Built-in BPA Rules
 author: Morten Lønskov
-updated: 2026-07-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
+description: 36 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # Built-in BPA Rules
 
 ## Overview
 
-Tabular Editor 3 includes 28 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
+Tabular Editor 3 includes 36 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
 
 Unlike custom rules stored in JSON files, built-in rules:
 - Are integrated directly into the application
@@ -36,21 +36,24 @@ Unlike custom rules stored in JSON files, built-in rules:
 
 ### Rule Categories
 
-The 28 built-in rules cover four areas:
-- **Error Prevention**: Invalid characters, missing expressions, data type mismatches
-- **Performance**: Relationships, partitions, aggregations
-- **Formatting**: Format strings, visibility, naming conventions
-- **Maintenance**: Descriptions, calculation groups, unused objects
+The **Best Practice Analyzer** groups the built-in rules by category:
+- **Error Prevention**: invalid characters, missing expressions and source columns, data type mismatches, MDX availability, user-defined function names
+- **Performance**: MDX availability, date tables, many-to-many relationships, connection string application names
+- **Maintenance**: descriptions, empty calculation groups and perspectives, unused data sources
+- **Naming Conventions**: leading and trailing spaces in names
+- **Formatting**: format strings, summarization of numeric columns, foreign key visibility
+- **Model Layout**: translations
+- **Governance**: Power BI compatibility level
+- **Security**: role permissions and combinations of row-level and object-level security
 
 ### Global and Per-Rule Control
-![Screenshot showing BPA preferences with global enable/disable toggle and per-rule checkboxes](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
+![Manage Best Practice Rules dialog with the Built-in Best Practices collection selected and its rules grouped by category, each with a checkbox](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
 You can enable or disable built-in rules globally or individually. Settings persist across sessions and work independently from your custom rules.
 
 To manage built-in rules:
-1. Go to **Tools** > **Preferences** > **Best Practice Analyzer**
-2. Find the **Built-in Rules** section
-3. Toggle **Enable Built-in Rules** to turn the entire collection on or off
-4. Use the BPA Manager to enable or disable individual rules
+1. Go to **Tools > Preferences > Tabular Editor > Miscellaneous**.
+2. Under **Best Practice Analyzer**, select or clear **Enable built-in best practice rules** to turn the entire collection on or off.
+3. To enable or disable individual rules, open **Tools > Manage BPA rules...**, select the **Built-in Best Practices** collection and select or clear the checkbox of each rule.
 
 ### First-Run Notification
 ![Screenshot of first-run notification dialog introducing built-in BPA rules](~/content/assets/images/features/bpa-built-in-rules-notification.png)
@@ -60,11 +63,11 @@ The first time you open a model after upgrading to a version with built-in rules
 ### Knowledge Base Integration
 
 
-![Screenshot showing BPA window with rule selected and "View Documentation" button highlighted](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
+![Best Practice Analyzer window with the tooltip of a rule open and the Learn more link highlighted](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
 
-Every built-in rule links to a knowledge base article through the `KnowledgeBaseArticle` property. Each article explains what the rule checks, why it matters, and how to fix violations.
+Every built-in rule links to a knowledge base article. Each article explains what the rule checks, why it matters and how to fix violations.
 
-To view documentation, select a rule in the Best Practice Analyzer window.
+To open the article, hover over a rule in the **Best Practice Analyzer** window and click **Learn more** in the tooltip.
 
 ### Read-Only Protection
 
@@ -78,36 +81,57 @@ Built-in rules use reserved ID prefixes. When you create a custom rule, Tabular 
 
 ## Built-in Rules Catalog
 
-The current set includes the following rules:
-
+Each entry links to the rule's knowledge base article. The severity is shown in parentheses.
 
 ### Error Prevention Rules
-- [Avoid Invalid Characters in Object Names](xref:kb.bpa-avoid-invalid-characters-names)
-- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions)
-- [Expression Required for Calculated Objects](xref:kb.bpa-expression-required)
-- [Data Column Must Have Source](xref:kb.bpa-data-column-source)
-- [Relationship Columns Must Have Same Data Type](xref:kb.bpa-relationship-same-datatype)
-- [Avoid Provider Partitions with Structured Data Sources](xref:kb.bpa-avoid-provider-partitions-structured)
-- [Use Compound Names for User-Defined Functions](xref:kb.bpa-udf-use-compound-names)
+- [Data Column Must Have Source](xref:kb.bpa-data-column-source) (3)
+- [Expression Required for Calculated Objects](xref:kb.bpa-expression-required) (3)
+- [Avoid Provider Partitions with Structured Data Sources](xref:kb.bpa-avoid-provider-partitions-structured) (2)
+- [Relationship Columns Must Have Same Data Type](xref:kb.bpa-relationship-same-datatype) (3)
+- [Avoid Invalid Characters in Object Names](xref:kb.bpa-avoid-invalid-characters-names) (3)
+- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions) (3)
+- [Set IsAvailableInMDX to True When Necessary](xref:kb.bpa-set-isavailableinmdx-true-necessary) (3)
+- [Use Compound Names for User-Defined Functions](xref:kb.bpa-udf-use-compound-names) (1)
 
 ### Performance Rules
-- [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction)
-- [Hide Foreign Key Columns](xref:kb.bpa-hide-foreign-keys)
-- [Set SummarizeBy to None for Numeric Columns](xref:kb.bpa-do-not-summarize-numeric)
-- [Remove Auto Date Tables](xref:kb.bpa-remove-auto-date-table)
-- [Remove Unused Data Sources](xref:kb.bpa-remove-unused-data-sources)
-
-### Formatting Rules
-- [Provide Format String for Measures](xref:kb.bpa-format-string-measures)
-- [Provide Format String for Numeric and Date Columns](xref:kb.bpa-format-string-columns)
-- [Visible Objects Should Have Descriptions](xref:kb.bpa-visible-objects-no-description)
-- [Trim Object Names](xref:kb.bpa-trim-object-names)
-- [Date Table Should Exist](xref:kb.bpa-date-table-exists)
+- [Set IsAvailableInMDX to False](xref:kb.bpa-set-isavailableinmdx-false) (3)
+- [Date Table Should Exist](xref:kb.bpa-date-table-exists) (2)
+- [Remove Auto Date Tables](xref:kb.bpa-remove-auto-date-table) (2)
+- [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction) (2)
+- [Specify Application Name in Connection Strings](xref:kb.bpa-specify-application-name) (1)
 
 ### Maintenance Rules
-- [Calculation Groups Should Contain Items](xref:kb.bpa-calculation-groups-no-items)
-- [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects)
-- [Use Latest Power BI Compatibility Level](xref:kb.bpa-powerbi-latest-compatibility)
+- [Remove Unused Data Sources](xref:kb.bpa-remove-unused-data-sources) (1)
+- [Visible Objects Should Have Descriptions](xref:kb.bpa-visible-objects-no-description) (1): five rules, for tables, columns, measures, calculation groups and user-defined functions
+- [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects) (1)
+- [Calculation Groups Should Contain Items](xref:kb.bpa-calculation-groups-no-items) (2)
+
+### Naming Conventions Rules
+- [Trim Object Names](xref:kb.bpa-trim-object-names) (1)
+
+### Formatting Rules
+- [Set SummarizeBy to None for Numeric Columns](xref:kb.bpa-do-not-summarize-numeric) (3)
+- [Hide Foreign Key Columns](xref:kb.bpa-hide-foreign-keys) (2)
+- [Provide Format String for Numeric and Date Columns](xref:kb.bpa-format-string-columns) (2)
+- [Provide Format String for Measures](xref:kb.bpa-format-string-measures) (2)
+
+### Model Layout Rules
+- [Translate Display Folders for All Cultures](xref:kb.bpa-translate-display-folders) (1)
+- [Translate Descriptions for All Cultures](xref:kb.bpa-translate-descriptions) (1)
+- [Translate Visible Object Names for All Cultures](xref:kb.bpa-translate-visible-names) (1)
+- [Translate Hierarchy Level Names for All Cultures](xref:kb.bpa-translate-hierarchy-levels) (1)
+- [Translate Perspective Names for All Cultures](xref:kb.bpa-translate-perspectives) (1)
+
+### Governance Rules
+- [Use Latest Compatibility Level for Power BI Models](xref:kb.bpa-powerbi-latest-compatibility) (3)
+
+### Security Rules
+- [Row-Level and Object-Level Security Require Read Permission](xref:kb.bpa-role-security-not-enforced) (3)
+- [Power BI Roles Must Have Read Permission](xref:kb.bpa-powerbi-role-read-permission) (3)
+- [Roles Without Security Override Secured Roles](xref:kb.bpa-role-unrestricted-read) (2)
+- [Avoid Members in Both an RLS Role and an OLS Role](xref:kb.bpa-role-mixed-rls-ols-members) (3)
+
+The security rules have no automatic fix.
 
 ## Working with Built-in and Custom Rules
 
@@ -158,10 +182,9 @@ When rolling out built-in rules to your team:
 ### Built-in Rules Not Appearing
 
 If built-in rules don't show in the BPA window:
-1. Check that you're using Tabular Editor 3.24.0 or later
-2. Verify that built-in rules are enabled in **Tools** > **Preferences** > **Best Practice Analyzer**
-3. Restart Tabular Editor if you just changed preferences
-4. Confirm your license is active
+1. Verify that **Enable built-in best practice rules** is selected in **Tools > Preferences > Tabular Editor > Miscellaneous**
+2. Restart Tabular Editor if you just changed preferences
+3. Confirm your license is active
 
 ### Cannot Modify Built-in Rule
 
@@ -173,8 +196,7 @@ Built-in rules reserve certain ID prefixes. Choose a different ID that doesn't s
 
 ## Compatibility
 
-- Requires Tabular Editor 3.24.0 or later
-- Works with all compatibility levels (1200+)
+Built-in rules apply to models with compatibility level 1200 and higher. Some rules require a higher level: the rule for members in both a row-level security role and an object-level security role requires 1400, and the two rules for user-defined functions require 1702. Each knowledge base article states the rule's compatibility level.
 
 ## Next Steps
 

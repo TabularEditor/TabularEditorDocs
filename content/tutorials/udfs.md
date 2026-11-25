@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX User-Defined Functions
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-21
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -231,7 +231,7 @@ Each DAX UDF also has a `Namespace` property that sets its place in the TOM Expl
 
 If you store your model as a folder structure, Tabular Editor can write each DAX UDF to its own file. Without this serialization level, all functions are stored in `database.json`, and parallel edits to different functions can conflict in that file.
 
-Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder** (see [Save to folder](xref:save-to-folder#user-defined-functions-udfs)).
+Select the **User Defined Functions (UDFs)** level under **Model > Serialization options...**. For a model you save to a folder for the first time, select it under **Tools > Preferences > File Formats > Save-to-folder > JSON Serialization** (see [Save to folder](xref:save-to-folder#user-defined-functions-udfs)).
 
 ## Best Practices
 

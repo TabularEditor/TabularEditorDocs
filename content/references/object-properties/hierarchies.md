@@ -2,7 +2,7 @@
 uid: object-properties-hierarchies
 title: Hierarchy and level properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of hierarchies and their levels.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page covers the properties of user-defined hierarchies and of the levels in them. For properties that most objects share, see @object-properties-common.
 
 ## Hierarchy
@@ -32,14 +34,14 @@ A hierarchy is a named, ordered list of columns from one table that report autho
 
 All the levels of a hierarchy must come from the table the hierarchy belongs to. To build a hierarchy across tables, first bring the columns into one table, for example with calculated columns that use [RELATED](https://dax.guide/related).
 
-In the **TOM Explorer**, you add levels to a hierarchy by dragging columns onto it. See @drag-drop.
+In the **TOM Explorer**, you add levels to a hierarchy by dragging columns onto it. See @drag-drop. In Tabular Editor 3, the **Levels** section on the **Basic** tab of the Properties view also adds, moves, renames and removes levels. See [Hierarchy levels](xref:properties-view#hierarchy-levels).
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Display Folder](xref:object-properties-common#display-folder)
-- [Hidden](xref:object-properties-common#hidden)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
+- [Display Folder](xref:object-properties-common#display-folder) · **Basic**
+- [Hidden](xref:object-properties-common#hidden) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
@@ -74,8 +76,8 @@ A level is one step in a hierarchy. Each level points to a column of the hierarc
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
@@ -89,14 +91,14 @@ A level is one step in a hierarchy. Each level points to a column of the hierarc
 Levels have no `IsHidden` or `DisplayFolder` of their own and follow their hierarchy in perspectives. If you translate the hierarchy's name, translate its level names too. The Best Practice Analyzer (BPA) rule @kb.bpa-translate-hierarchy-levels flags levels of visible hierarchies that have no translated name in one or more of the model's cultures.
 
 ### Column
-`Column` · Column · Basic
+`Column` · Column · General · **Basic**
 
 The column that provides the values of the level. It must be a column of the same table as the hierarchy, and a column can be used once in the same hierarchy. The level shows the column's values in the column's sort order. To show months in calendar order, set `SortByColumn` on the month name column (see @object-properties-columns).
 
 A hidden column still works in a hierarchy. Hide the level columns to have users browse the data through the hierarchy.
 
 ### Ordinal
-`Ordinal` · int · Basic
+`Ordinal` · int · General
 
 The position of the level within the hierarchy, starting at `0` for the top level. The ordinals of the levels in a hierarchy must be `0`, `1`, `2` and so on, without gaps or duplicates.
 

@@ -2,7 +2,7 @@
 uid: object-properties-calendars
 title: Calendar properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of calendars, time unit column association
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 This page lists the properties of calendars and of the two kinds of column groups that make up a calendar. For properties that most objects share, see @object-properties-common.
 
@@ -50,21 +52,21 @@ The Best Practice Analyzer (BPA) rule @kb.bpa-date-table-exists flags a model th
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Object Type](xref:object-properties-common#object-type)
 - [Lineage Tag](xref:object-properties-common#lineage-tag)
 - [Source Lineage Tag](xref:object-properties-common#source-lineage-tag)
 
 ### Calendar Column Groups
-`CalendarColumnGroups` · CalendarColumnGroupCollection · Basic · read-only
+`CalendarColumnGroups` · CalendarColumnGroupCollection · General · read-only
 
 The column groups that make up the calendar, which are its time unit column associations and its time-related column groups. This is the Tabular Object Model (TOM) name of the collection. The **Properties view** shows the same collection as `ColumnMappings`. In a C# script, you can use either name.
 
 ### Column Mappings
-`ColumnMappings` · CalendarColumnGroupCollection · Basic · read-only · *shortcut to* **Calendar Column Groups**
+`ColumnMappings` · CalendarColumnGroupCollection · General · read-only · *shortcut to* **Calendar Column Groups** · **Basic**
 
-The same collection as `CalendarColumnGroups`, under the name that the **Properties view** shows. You can add, change and remove the groups in the collection. In Tabular Editor 3, double-click the calendar in the @tom-explorer-view to open the **Calendar Editor**. The **...** button of the property and **Edit Column Mappings...** on the right-click menu of the calendar in the **TOM Explorer** both open a collection editor.
+The same collection as `CalendarColumnGroups`, under the name that the **Properties view** shows. You can add, change and remove the groups in the collection. In Tabular Editor 3, double-click the calendar in the @tom-explorer-view to open the **Calendar Editor**. The **...** button of the property and **Edit Column Mappings...** on the right-click menu of the calendar in the **TOM Explorer** both open a collection editor. The **Column mappings** section on the **Basic** tab of the Properties view lists the mappings and opens the **Calendar Editor**. See [Calendar column mappings](xref:properties-view#calendar-column-mappings).
 
 ## Time unit column association
 
@@ -77,7 +79,7 @@ Each time unit can be mapped once per calendar. The **Calendar Editor** has one 
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Primary Column
-`PrimaryColumn` · Column · Basic
+`PrimaryColumn` · Column · General
 
 The column that holds the values of this time unit. Its values must fit the time unit: a column mapped to **Month** identifies a month including its year, such as `January 2025`, and a column mapped to **Month of Year** only identifies the month, such as `January` or `1`.
 
@@ -86,7 +88,7 @@ If the primary column has a `SortByColumn`, the engine also treats the sort colu
 To see the values of the columns while you map them, open a @table-preview of the date table and dock it next to the **Calendar Editor**.
 
 ### Time Unit
-`TimeUnit` · TimeUnit · Basic
+`TimeUnit` · TimeUnit · General
 
 The time unit that the primary column represents. A *complete* time unit identifies a period on its own. A *partial* time unit only identifies a period together with a larger time unit, which the calendar must also map. For example, **Month of Year** needs **Year**.
 

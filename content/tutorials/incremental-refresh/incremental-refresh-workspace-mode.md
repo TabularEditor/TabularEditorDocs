@@ -2,7 +2,7 @@
 uid: incremental-refresh-workspace-mode
 title: Using Workspace Mode on a Model with Incremental Refresh
 author: Kurt Buhler
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ applies_to:
 > [!IMPORTANT]
 > This article only applies to versions 3.4.2 and earlier of Tabular Editor.
 > Since the 3.5.0 update, _Workspace Mode_ will not overwrite deployed Refresh Policy partitions from scheduled refreshes. 
-> Refresh policy partitions will also not be serialized in source control. You can change this setting in _'Tools > Preferences... > Save-to-Folder'_.
+> Refresh policy partitions will also not be serialized in source control. You can change this setting in **Tools > Preferences > File Formats > General**.
 
 ---
 

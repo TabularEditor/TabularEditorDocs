@@ -2,7 +2,7 @@
 uid: dax-query
 title: DAX Queries
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,7 @@ The DAX query window has six different query options.
    - **When query is modified**: Sorting and filtering reset only when the query structure changes.
    - **Always**: Sorting and filtering persist as long as columns remain in the new query.
 
-The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. The **Keep documents open when switching models** section on the same page controls what happens to open DAX queries when you open a different model. See [Switching models](#switching-models).
+The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences > Data Browsing > DAX Query**, in the **Basic** section. The **Keep documents open when switching models** section on the same page controls what happens to open DAX queries when you open a different model. See [Switching models](#switching-models).
 
 ### Switching models
 
@@ -59,9 +59,9 @@ To close DAX queries when you open a different model, clear **Keep DAX Queries o
 
 ### Adding or Updating Measures, Columns and Tables with DAX Queries
 
-Tabular Editor (3.12.0 and higher) has the ability to add or change measures directly through the DAX Query window.
+You can add or change measures directly through the DAX Query window.
 
-From Tabular Editor 3.23.0, Apply and Apply selection also process DEFINE COLUMN and DEFINE TABLE statements. Tabular Editor will create the corresponding calculated columns/tables in your model, or update their expressions if they already exist.
+Apply and Apply selection also process DEFINE COLUMN and DEFINE TABLE statements. Tabular Editor will create the corresponding calculated columns/tables in your model, or update their expressions if they already exist.
 
 There are four options for applying DAX Query defined measures, columns and tables to the model: 
 
@@ -128,11 +128,13 @@ DAX queries are one of the two places where it is possible to run the [DAX Debug
 
 The DAX debugger unlocks the ability to understand how the DAX works inside a single cell. To start the debugger simply right click on the desired cell and choose 'Debug cell', which will start the debugger in the context of the chosen cell.
 
+The debugger steps into measures and functions that the query defines with `DEFINE MEASURE` or `DEFINE FUNCTION`, and the query is read-only until you stop debugging. A measure or function that the query redefines applies to the query's own code only, and model measures that use it keep the model's definition. See [Code defined in the DAX query](xref:dax-debugger#code-defined-in-the-dax-query).
+
 ![Dax Query Debugger](~/content/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
 
 ## Export DAX Query results
 
-Tabular Editor 3, beginning from version 3.16.0, introduces the new capability of exporting the results of a DAX Query to either CSV or Excel. After running the DAX Query, a button activates in the toolbar, enabling users to save the results locally in CSV or Excel format.
+You can export the results of a DAX Query to either CSV or Excel. After running the DAX Query, a button activates in the toolbar, enabling users to save the results locally in CSV or Excel format.
 
 > [!TIP]
 > To Export more than 1001 rows choose "click to get all rows" after running the DAX Query

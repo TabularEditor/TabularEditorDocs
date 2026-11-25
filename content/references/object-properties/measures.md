@@ -2,7 +2,7 @@
 uid: object-properties-measures
 title: Measure and KPI properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of measures and KPIs.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page covers the properties of measures and of the KPIs attached to them. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. For properties that most objects share, see @object-properties-common.
 
 ## Measure
@@ -32,10 +34,10 @@ A measure is a named DAX expression that's evaluated in the filter context of th
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Display Folder](xref:object-properties-common#display-folder)
-- [Hidden](xref:object-properties-common#hidden)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
+- [Display Folder](xref:object-properties-common#display-folder) · **Basic**
+- [Hidden](xref:object-properties-common#hidden) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
@@ -52,7 +54,7 @@ A measure is a named DAX expression that's evaluated in the filter context of th
 - [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
 
 ### Format String
-`FormatString` · string · Basic
+`FormatString` · string · General · **Basic**
 
 The format that client tools apply when they display the measure's value, for example `#,0.00`, `0.0%` or `yyyy-mm-dd`. The syntax is the same as for the DAX [FORMAT](https://dax.guide/format) function. DAX queries return the unformatted value. To pick the format based on the filter context, set `FormatStringExpression`.
 
@@ -112,7 +114,7 @@ To add a KPI in Tabular Editor 3, right-click a measure and select **Create > KP
 
 ### Common properties
 
-- [Description](xref:object-properties-common#description)
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
@@ -133,12 +135,12 @@ The measure this KPI belongs to. C# scripts use it to get from the KPI to its me
 A DAX expression that returns the goal for the measure, for example a fixed number such as `1000000`, another measure such as `[Sales Budget]` or a calculation.
 
 ### Target Format String
-`TargetFormatString` · string · Options
+`TargetFormatString` · string · Options · **Basic**
 
 The format string for the target value, with the same syntax as `FormatString` on a measure.
 
 ### Target Description
-`TargetDescription` · string · Options
+`TargetDescription` · string · Options · **Basic**
 
 A description of the target, shown to users in client tools that support it.
 
@@ -154,7 +156,7 @@ RETURN
 ```
 
 ### Status Graphic
-`StatusGraphic` · string · Options
+`StatusGraphic` · string · Options · **Basic**
 
 The icon set that client tools use to show the status, for example `Traffic Light` or `Shapes`, as a name that the client tool recognizes.
 
@@ -174,7 +176,7 @@ Excel recognizes only a few of these names. In an Excel PivotTable, these names 
 All other names, including `Shapes`, `Thermometer`, `Smiley`, `Cylinder` and names that Excel doesn't know, show a plain colored circle.
 
 ### Status Description
-`StatusDescription` · string · Options
+`StatusDescription` · string · Options · **Basic**
 
 A description of the status, shown to users in client tools that support it.
 
@@ -184,13 +186,13 @@ A description of the status, shown to users in client tools that support it.
 A DAX expression that returns a number between `-1` and `1` that shows whether the measure gets worse (`-1`), stays the same (`0`) or gets better (`1`) over time, for example compared to the previous period.
 
 ### Trend Graphic
-`TrendGraphic` · string · Options
+`TrendGraphic` · string · Options · **Basic**
 
 The icon set that client tools use to show the trend, for example `Standard Arrow`, as a name that the client tool recognizes. In Tabular Editor 3, pick it from the same list of names as `StatusGraphic`, or type any other value.
 
 In Excel, most names show a colored arrow, `Standard Arrow` shows a grey arrow and `Status Arrow - Descending` shows an arrow that points down when the trend is good. A few names, such as `Cylinder`, `Smiley Face` and `Traffic Light - Single`, show a circle.
 
 ### Trend Description
-`TrendDescription` · string · Options
+`TrendDescription` · string · Options · **Basic**
 
 A description of the trend, shown to users in client tools that support it.

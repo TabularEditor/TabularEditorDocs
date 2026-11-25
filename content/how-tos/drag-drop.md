@@ -2,7 +2,7 @@
 uid: drag-drop
 title: Drag and drop objects
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,11 +19,7 @@ Drag and drop in the @tom-explorer-view moves objects between display folders, t
 
 Drag a display folder onto another folder to move it. Every object and subfolder in it moves with it, and the subfolder structure is kept.
 
-<!-- IMAGE NEEDED: drag-drop-display-folders.gif
-     An animation of a display folder being dragged onto another folder in the TOM Explorer,
-     with the measures and subfolders beneath it following. Needs a model with at least two
-     levels of nesting so the shape is visibly preserved.
-     Alt text: "A display folder being dragged onto another folder in the TOM Explorer" -->
+![A display folder being dragged onto another folder in the TOM Explorer](~/content/assets/images/drag-drop-display-folders.gif)
 
 You can also:
 

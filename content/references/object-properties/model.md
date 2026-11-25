@@ -2,7 +2,7 @@
 uid: object-properties-model
 title: Model properties
 author: Jeroen ter Heerdt
-updated: 2026-11-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of the model object, such as culture, coll
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page covers the properties of the model object. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. For properties that most objects share, see @object-properties-common.
 
 ## Model
@@ -38,8 +40,8 @@ The properties in the **Data Access Options** category control how the Power Que
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
@@ -47,14 +49,14 @@ The properties in the **Data Access Options** category control how the Power Que
 - [Translated Descriptions](xref:object-properties-common#translated-descriptions)
 
 ### Database
-`Database` · Database · Basic · read-only
+`Database` · Database · General · read-only · **Basic**
 
 The database that contains the model. Expand the property to see and change database-level settings, such as **Compatibility Level**, which sets the features and properties that the model supports.
 
 In Tabular Editor 3, you can edit these settings under `Database`:
 
 - **Name** and **ID**: the name and ID of the database. Changing them has no effect on a database that's already deployed.
-- **Compatibility Level** and **Compatibility Mode**. When you're connected to a server, Tabular Editor 3 rejects a compatibility level that the server doesn't support.
+- **Compatibility Level** and **Compatibility Mode**. When you're connected to a server, Tabular Editor 3 rejects a compatibility level that the server doesn't support. The **Basic** tab of the Properties view also has **Compatibility mode** and **Compatibility level** on the model's form. See [Model](xref:properties-view#model).
 - **Description**, **Unicode Character Behavior** and **Visible**.
 
 These settings are read-only and only have a value when you're connected to a server: **Version**, **Estimated Size** (in MB), **Last Processed**, **Last Update**, **Last Schema Update**, **Created Timestamp**, **Server Name** and **Server Version**.
@@ -213,7 +215,7 @@ This property needs a preview compatibility level, and Tabular Editor 3 doesn't 
 When `true`, report authors can't build a composite model on top of this model, that is, connect to it with DirectQuery and combine it with other data. When a report author connects to a published model that has this set to `true`, Power BI Desktop doesn't show **Make changes to this model**, and the author can't add other data to the report. Only a live connection to the model remains possible.
 
 ### Discourage Implicit Measures
-`DiscourageImplicitMeasures` · bool · Options · compatibility level 1470+
+`DiscourageImplicitMeasures` · bool · Options · compatibility level 1470+ · **Basic**
 
 When `true`, report authors in Power BI can't create *implicit measures*, the sum or count that Power BI calculates when you drag a numeric column into a visual. Report authors can only use the measures defined in the model, and the `SummarizeBy` setting of columns no longer applies in reports.
 
@@ -338,7 +340,7 @@ Hints that tell Fabric which data connection to use for a data source in the mod
 The DAX User-Defined Functions (UDFs) of the model. See @object-properties-functions and @udfs. The BPA rule @kb.bpa-udf-use-compound-names flags functions whose names don't contain a `.` or `_` separator.
 
 ### Cultures
-`Cultures` · collection of cultures · Translations, Perspectives, Security · read-only
+`Cultures` · collection of cultures · Translations, Perspectives, Security · read-only · **Basic**
 
 The cultures, or translations, of the model. Each culture holds the translated names, descriptions and display folders for one language. Select **...** to add or remove cultures. To edit the translations, use the translation properties on each object or, in Tabular Editor 3, the @metadata-translation-editor. See @object-properties-perspectives-cultures and @how-to-work-with-perspectives-translations. To export the translations of a culture to a JSON file and import them again, see @import-export-translations.
 

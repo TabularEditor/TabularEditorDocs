@@ -36,6 +36,10 @@ Comprehensive guidelines for building high-quality, maintainable Power BI and An
 - @kb.bpa-specify-application-name - Set application names in connection strings for monitoring
 - @kb.bpa-powerbi-latest-compatibility - Maintain compatibility with latest Power BI features
 - @kb.bpa-udf-use-compound-names - Ensure UDF names don't conflict with future built-in DAX functions
+- @kb.bpa-role-security-not-enforced - Use Read permission on roles with row-level or object-level security
+- @kb.bpa-powerbi-role-read-permission - Set every role in a Power BI model to Read permission
+- @kb.bpa-role-unrestricted-read - Find roles that lift the security of other roles
+- @kb.bpa-role-mixed-rls-ols-members - Avoid members whose combined roles mix row-level and object-level security
 
 ## Code Actions
 ### DAX Code Analysis (DI)

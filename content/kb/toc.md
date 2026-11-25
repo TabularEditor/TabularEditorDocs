@@ -27,6 +27,10 @@
 ## @kb.bpa-specify-application-name
 ## @kb.bpa-powerbi-latest-compatibility
 ## @kb.bpa-udf-use-compound-names
+## @kb.bpa-role-security-not-enforced
+## @kb.bpa-powerbi-role-read-permission
+## @kb.bpa-role-unrestricted-read
+## @kb.bpa-role-mixed-rls-ols-members
 
 # Code Actions
 ## DAX Code Analysis (DI)

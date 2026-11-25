@@ -2,7 +2,7 @@
 uid: object-properties-tables
 title: Table properties
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page covers the properties of the three kinds of tables in a semantic model: regular tables, calculated tables and calculation group tables. The [Table](#table) section describes the properties all three share. The sections for calculated tables and calculation group tables list what they add and which table properties the **Properties** view hides for them. For properties that most objects share, see @object-properties-common.
 
 ## Table
@@ -34,9 +36,9 @@ In Tabular Editor 3, you add tables from a data source with @import-tables and v
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
+- [Hidden](xref:object-properties-common#hidden) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
@@ -51,7 +53,7 @@ In Tabular Editor 3, you add tables from a data source with @import-tables and v
 - [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
 
 ### Table Group
-`TableGroup` · string · Basic · *stored as an annotation* (`TabularEditor_TableGroup`)
+`TableGroup` · string · General · *stored as an annotation* (`TabularEditor_TableGroup`)
 
 The table group that contains the table in the **TOM Explorer** of Tabular Editor 3. Table groups work like folders for tables, for example to keep fact tables, dimension tables and calculation groups apart. Leave it empty to show the table at the top level. Table groups can't be nested, and client tools such as Power BI and Excel ignore them.
 
@@ -73,7 +75,7 @@ Incremental refresh is available for Power BI and Fabric models only. The **Prop
 For Analysis Services models, you create and manage the partitions yourself. See @incremental-refresh-about and @incremental-refresh-setup. The @script-implement-incremental-refresh script sets up a refresh policy based on a date column you select, including the `RangeStart` and `RangeEnd` parameters.
 
 ### Refresh Policy
-`RefreshPolicy` · BasicRefreshPolicy · Incremental Refresh · compatibility level 1450+
+`RefreshPolicy` · GeneralRefreshPolicy · Incremental Refresh · compatibility level 1450+
 
 The incremental refresh policy of the table. Expand it in the **Properties** view to set how much history to keep, how much to refresh, the source expression and the other policy settings. The settings are described under refresh policy on @object-properties-partitions. See also @incremental-refresh-policy.
 
@@ -125,7 +127,7 @@ The custom calendars defined on the table. A calendar maps the columns of a date
 In Tabular Editor 3, right-click a table and choose **Create > Calendar...** to add a calendar, then map its columns in the **Calendar Editor**. See @calendars.
 
 ### Data Category
-`DataCategory` · string · Options
+`DataCategory` · string · Options · **Basic**
 
 The kind of data the table holds, for client tools. In Power BI, the value `Time` marks the table as a date table: Power BI uses the table's date column (the column with `IsKey` set to `true`) for time intelligence and turns off the auto date/time table for it. **Mark as date table** in Power BI Desktop sets this value.
 
@@ -243,7 +245,7 @@ The object-level security (OLS) permission of the table in each role of the mode
 With `None`, the table and its metadata don't exist for members of the role, so every measure that refers to the table fails for them. See @data-security-setup-ols and @object-properties-security. To check that OLS and row-level security work as intended, test them with impersonation in Tabular Editor 3. See @data-security-testing.
 
 ### Row Level Security
-`RowLevelSecurity` · per role · Translations, Perspectives, Security · read-only · *shortcut to* the table permissions of each role
+`RowLevelSecurity` · per role · Translations, Perspectives, Security · read-only · *shortcut to* the table permissions of each role · **Basic**
 
 The row-level security (RLS) filter of the table in each role of the model. Expand the property to see one entry per role. Each entry is a DAX expression that returns `TRUE` for the rows that members of the role can see, for example:
 
@@ -296,9 +298,9 @@ A calculation group table has the properties below in addition to the common pro
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
+- [Hidden](xref:object-properties-common#hidden) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Object Type](xref:object-properties-common#object-type)
@@ -307,17 +309,17 @@ A calculation group table has the properties below in addition to the common pro
 - [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
 
 ### Table Group
-`TableGroup` · string · Basic · *stored as an annotation* (`TabularEditor_TableGroup`)
+`TableGroup` · string · General · *stored as an annotation* (`TabularEditor_TableGroup`)
 
 The same as [Table Group](#table-group) on a table.
 
 ### Calculation Group Description
-`CalculationGroupDescription` · string · Basic · *shortcut to* **Description** of the calculation group
+`CalculationGroupDescription` · string · General · *shortcut to* **Description** of the calculation group
 
 The description stored on the calculation group, separate from the table's own `Description`. Client tools don't show it. When you hover over a calculation group table in the **Data** pane of Power BI Desktop, the table's `Description` appears, and Excel's field list shows no descriptions. Put the text for report authors in the table's `Description` and use this property for notes to other developers.
 
 ### Calculation Group Precedence
-`CalculationGroupPrecedence` · int · Basic · *shortcut to* **Precedence** of the calculation group
+`CalculationGroupPrecedence` · int · General · *shortcut to* **Precedence** of the calculation group · **Basic**
 
 The order in which the calculation group is applied when a query uses more than one calculation group. See `Precedence` on @object-properties-calculation-groups.
 

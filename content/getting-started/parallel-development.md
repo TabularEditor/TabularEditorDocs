@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Enabling parallel development using Git and Save to Folder
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -55,7 +55,7 @@ As mentioned above, the model metadata for a tabular model is traditionally stor
 
 The names of each of the files representing individual TOM objects are simply based on the `Name` property of the object itself. The name of the "root" file is **Database.json**, which is why we sometimes refer to the folder-based storage format as simply **Database.json**.
 
-Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**/ See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
+Tabular Editor splits [DAX User-Defined Functions](xref:udfs) out the same way, into a `functions` folder at the model root. Turn this on as soon as more than one person writes functions: until you do, every function lives inside **Database.json**. See [Save to folder](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Pros of using Save to Folder
 
@@ -71,16 +71,17 @@ As it stands, the only disadvantage of storing the tabular model metadata in the
 
 ## Configuring Save to Folder
 
-One size rarely fits all. Tabular Editor has a few configuration options that affect how a model is serialized into the folder structure. In Tabular Editor 3, you can find the general settings under **Tools > Preferences > Save-to-folder**. Once a model is loaded in Tabular Editor, you can find the specific settings that apply to that model under **Model > Serialization options...**. The settings that apply to a specific model are stored as an annotation within the model itself, to ensure that the same settings are used regardless of which user loads and saves the model.
+One size rarely fits all. Tabular Editor has a few configuration options that affect how a model is serialized into the folder structure. In Tabular Editor 3, you can find the general settings under **Tools > Preferences > File Formats**. The **General** page holds the settings shared across formats, the **Save-to-folder** page sets the format **File > Save to Folder** writes (TMDL or Database.json), and its child pages hold the settings for the Database.json format (**JSON Serialization**) and for TMDL (**TMDL Serialization**). Once a model is loaded in Tabular Editor, you can find the specific settings that apply to that model under **Model > Serialization options...**. The settings that apply to a specific model are stored as an annotation within the model itself, to ensure that the same settings are used regardless of which user loads and saves the model.
 
-![Configuring Save To Folder](~/content/assets/images/configuring-save-to-folder.png)
+![The JSON Serialization preferences page under File Formats > Save-to-folder](~/content/assets/images/configuring-save-to-folder.png)
 
 ### Serialization settings
 
-- **Use recommended settings**: (Default: checked) When this is checked, Tabular Editor uses the default settings when saving a model as a folder structure for the first time.
-- **Serialize relationships on from-tables**: (Default: unchecked) When this is checked, Tabular Editor stores relationships as an annotation on the table at the "from-side" (typically the fact table) of the relationship, instead of storing them at the model level. This is useful when in the early development phase of a model, where table names are still subject to change quite often.
-- **Serialize perspective membership info on objects**: (Default: unchecked) When this is checked, Tabular Editor stores information about which perspectives an object (table, column, hierarchy, measure) belongs to, as an annotation on that object, instead of storing the information at the perspective level. This is useful when object names are subject to change, but perspective names are finalised.
-- **Serialize translations on translated objects**: (Default: unchecked) When this is checked, Tabular Editor stores metadata translations as an annotation on each translatable object (table, column, hierarchy, level, measure, etc.), instead of storing the translations at the culture level. This is useful when object names are subject to change.
+In Tabular Editor 3, these settings are on the **JSON Serialization** page and apply to the Database.json format. The defaults listed are those of Tabular Editor 3.
+
+- **Serialize relationships on from-tables**: (Default: checked) When this is checked, Tabular Editor stores relationships as an annotation on the table at the "from-side" (typically the fact table) of the relationship, instead of storing them at the model level. This is useful when in the early development phase of a model, where table names are still subject to change quite often.
+- **Serialize perspective membership info on objects**: (Default: checked) When this is checked, Tabular Editor stores information about which perspectives an object (table, column, hierarchy, measure) belongs to, as an annotation on that object, instead of storing the information at the perspective level. This is useful when object names are subject to change, but perspective names are finalised.
+- **Serialize translations on translated objects**: (Default: checked) When this is checked, Tabular Editor stores metadata translations as an annotation on each translatable object (table, column, hierarchy, level, measure, etc.), instead of storing the translations at the culture level. This is useful when object names are subject to change.
 - **Prefix file names sequentially**: (Default: unchecked) In cases where you want to retain the metadata ordering of array members (such as the order of columns in a table), you can check this to have Tabular Editor prefix the filenames with a sequential integer based on the object's index in the array. This is useful if you use the default drillthrough feature in Excel, and would like [columns to appear in a certain order in the drillthrough](https://github.com/TabularEditor/TabularEditor/issues/46#issuecomment-297932090).
 
 > [!NOTE]
@@ -92,13 +93,15 @@ The checklist allows you to specify which objects will be serialized as individu
 
 In most cases, it is recommended to always serialize objects to the lowest level. However, there may be special cases where this level of detail is not needed.
 
+For TMDL folders, Tabular Editor 3 Enterprise Edition can also store each column, measure, partition and hierarchy, and each function, shared expression, data source and relationship, in its own file. See @tmdl-per-object-serialization.
+
 ## Power BI and version control
 
 As mentioned above, integrating a Power BI report (.pbix) or Power BI template (.pbit) file in version control, does not enable parallel development or conflict resolution, due to these files using a binary file format. At the same time, we have to be aware of the current limitations of using Tabular Editor (or other third party tools) with Power BI Desktop or the Power BI XMLA endpoint respectively.
 
 These limitations are:
 
-- When using Tabular Editor as an external tool for Power BI Desktop, [not all modeling operations are supported](xref:desktop-limitations).
+- When Tabular Editor is an external tool for a Power BI Desktop version older than June 2025, not all modeling operations are supported. See @desktop-integration.
 - Tabular Editor can extract model metadata from a .pbix file loaded in Power BI Desktop, or directly from a .pbit file on disk, but there is **no supported way to update model metadata in a .pbix or .pbit file outside of Power BI Desktop**.
 - Once any changes are made to a Power BI dataset through the XMLA endpoint, [that dataset can no longer be downloaded as a .pbix file](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
 

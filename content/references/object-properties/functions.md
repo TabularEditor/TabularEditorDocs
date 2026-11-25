@@ -2,7 +2,7 @@
 uid: object-properties-functions
 title: Function and set properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,6 +27,8 @@ SUMMARY: Reference for the properties of DAX user-defined functions and of sets.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page lists the properties of DAX user-defined functions and of sets. For properties that most objects share, see @object-properties-common.
 
 ## Function
@@ -39,9 +41,9 @@ Tabular Editor 2 also supports UDFs and lists them under the **Functions** folde
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Hidden](xref:object-properties-common#hidden)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
+- [Hidden](xref:object-properties-common#hidden) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
@@ -54,7 +56,7 @@ Tabular Editor 2 also supports UDFs and lists them under the **Functions** folde
 You call a function by its name in DAX, so the name can't contain spaces. It can contain periods and underscores. Use a compound name such as `Finance.Margin` or `ACME_Margin` to avoid a clash with a built-in DAX function that Microsoft adds later. See @kb.bpa-udf-use-compound-names. When you rename a function, Tabular Editor 3 updates the references to it throughout the model, as @formula-fix-up-dependencies does for measures and columns.
 
 ### Namespace
-`Namespace` · string · Basic · *stored as an annotation* (`TE_Group`)
+`Namespace` · string · General · *stored as an annotation* (`TE_Group`)
 
 The group that the function appears under in the @tom-explorer-view when grouping of user-defined functions by namespace is on. Turn the grouping on with the toggle button above the **TOM Explorer**. Tabular Editor determines the namespace in this order:
 

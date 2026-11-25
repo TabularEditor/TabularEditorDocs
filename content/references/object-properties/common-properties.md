@@ -2,7 +2,7 @@
 uid: object-properties-common
 title: Common properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,10 +26,12 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 
 The properties on this page appear on many object types and work the same way on every object that has them. Each entry gives the property's name in the Tabular Object Model (TOM), its type and its category. The object-specific pages link to these entries. For the other pages, see @object-properties.
 
-## Basic
+A property on this page can be a [basic property](xref:object-properties#basic-properties) for one object type and not for another. For example, `Name` is a basic property of a measure but not of a relationship. The **Common properties** list on each object's page marks the basic ones for that object with **Basic**.
+
+## General
 
 ### Name
-`Name` · string · Basic
+`Name` · string · General
 
 The name of the object. DAX references tables, columns, measures, hierarchies and user-defined functions by their name. Names must be unique among siblings, so two measures can't share a name. In most models, a measure also can't share a name with any column (see `ForceUniqueNames` on @object-properties-model). A KPI or a calculation group has no name of its own and takes its name from the object it belongs to.
 
@@ -38,7 +40,7 @@ When **Formula Fix-up** is enabled under **Tools > Preferences**, renaming an ob
 To rename many objects at once, select them in the **TOM Explorer** and use batch rename, which supports regular expressions. See @duplicate-and-batch. The Best Practice Analyzer (BPA) rules @kb.bpa-trim-object-names and @kb.bpa-avoid-invalid-characters-names flag names with leading or trailing spaces and names with control characters.
 
 ### Description
-`Description` · string · Basic
+`Description` · string · General
 
 Free text that explains what the object is for. Power BI shows the description as a tooltip in the **Data** pane. Excel's PivotTable field list doesn't show descriptions. To translate descriptions, use `TranslatedDescriptions`.
 
@@ -47,14 +49,14 @@ In Tabular Editor 3, the **TOM Explorer** has a **Description** column where you
 The BPA rule @kb.bpa-visible-objects-no-description flags visible objects without a description, and @kb.bpa-avoid-invalid-characters-descriptions flags descriptions that contain control characters.
 
 ### Display Folder
-`DisplayFolder` · string · Basic
+`DisplayFolder` · string · General
 
 The folder that the object appears in, in the field list of client tools. A backslash (`\`) creates a subfolder, for example `Sales\Year to date`, and a semicolon (`;`) shows the object in more than one folder, for example `Sales;Finance`. Display folders don't affect DAX or security. Tabular Editor also uses them to group objects in the **TOM Explorer**.
 
 To move a display folder with its objects and subfolders, drag it onto another folder in the **TOM Explorer**. See @drag-drop.
 
 ### Hidden
-`IsHidden` · bool · Basic
+`IsHidden` · bool · General
 
 When `true`, client tools such as Power BI hide the object from report authors. The object stays in the model, and DAX expressions can still refer to it. Anyone who can query the model can also query a hidden object. To secure data, see @roles-and-rls.
 

@@ -2,7 +2,7 @@
 uid: user-interface
 title: Basic user interface
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,12 +26,12 @@ With a semantic model loaded, Tabular Editor 3 shows the default layout below.
 
 ![Basic user interface](~/content/assets/images/basic-ui.png)
 
-1. **Title bar**: the name of the loaded file, or of the Analysis Services database or Power BI semantic model you're connected to.
+1. **Title bar**: the name of the loaded file, or of the Analysis Services database or Power BI semantic model you're connected to, and the version of Tabular Editor 3, for example **v28.0.0**.
 2. **Menu bar**: all features of Tabular Editor 3. See [Menus](#menus) for each menu.
 3. **Toolbars**: the most used features. Every toolbar command is also in the menus. Customize the toolbars and their buttons under **Tools > Customize...**.
 4. **TOM Explorer view**: a tree of the model's objects, built from the [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata. The toggle buttons at the top filter which object types are shown, and the search box filters objects by name.
 5. **Expression Editor**: edits the DAX, SQL or M expressions of the object selected in the TOM Explorer. If you close it, double-click an object in the TOM Explorer to open it again. If the object has more than one expression property, the dropdown at the top switches between them. For example, a KPI has a target, a status and a trend expression.
-6. **Properties view**: all TOM properties of the objects selected in the TOM Explorer. You can edit most properties in the grid, also with several objects selected. Some properties, such as **Format String**, **Connection String** and **Role Members**, open a dialog or collection editor from the ellipsis button in the value cell.
+6. **Properties view**: the properties of the objects selected in the TOM Explorer, in a grid with all TOM properties. With the **Basic Properties view** public preview turned on, the view has two tabs at the bottom: **Basic** shows the fields Power BI Desktop shows as a form, and **Advanced** shows the grid. You can edit most properties, also with several objects selected. On the **Advanced** tab, some properties, such as **Format String**, **Connection String** and **Role Members**, open a dialog or collection editor from the ellipsis button in the value cell.
 7. **Messages view**: semantic errors found by the continuous analysis of the model's DAX expressions, plus messages from C# scripts and errors reported by Analysis Services.
 8. **Status bar**: information about the current selection, Best Practice Analyzer findings and more. The connection item shows the database and server you're connected to as `<database>@<server>`, or `<host>:<port>` for Power BI Desktop, and **(No connection)** for a model loaded without a connection. When the [MCP server](xref:mcp-server) is available, an indicator at the right-hand end reads **MCP Started** or **MCP Stopped**, and its tooltip shows the address the server listens on. Click the indicator to open the **MCP Server** dialog, or right-click it to start or stop the server, copy a registration configuration for your agent or open the preferences page.
 
@@ -45,7 +45,7 @@ You can resize and rearrange all UI elements, and drag views out of the main win
 
 Choose **Window > Default layout** to reset the application to the default layout, or **Window > Classic layout** to place the TOM Explorer on the left and the Properties view below the Expression Editor, as in Tabular Editor 2.x.
 
-To switch between your own layouts, save the current one with **Window > Capture Layout**, and it becomes an option in the **Window** menu. **Window > Layouts...** lists all layouts, where you apply, load, remove and save them. A layout saved to disk is an .xml file that you can share with other Tabular Editor 3 users.
+To switch between your own layouts, save the current one with **Window > Capture Layout**, and it becomes an option in the **Window** menu. **Window > Layouts...** lists all layouts, where you apply, load, remove and save them. A layout saved to disk is an .xml file that you can share with other Tabular Editor 3 users. A layout keeps the order of tool windows docked as document tabs, such as the **Expression Editor** or **Messages**, and which of them are pinned.
 
 ![Manage Layouts](~/content/assets/images/manage-layouts.png)
 
@@ -89,8 +89,7 @@ The *active document* is the document that has the cursor, such as the Expressio
 > [!NOTE]
 > Menus and toolbars are locked in place by default. To unlock them, clear **Lock menus and toolbars** under **Tools > Customize... > Options**.
 
-<!-- SCREENSHOT RESHOOT (3.27.1): active-document.png. Title bar uses the old format. Optional. -->
-![Active Document](~/content/assets/images/active-document.png)
+![Tabular Editor 3 with DAX Script 1 as the active document](~/content/assets/images/active-document.png)
 
 ### File
 
@@ -141,9 +140,9 @@ With **Model source detail** set to **Name only** or **Hidden**, the hover text 
 
 The **Edit** menu edits the active document or the loaded model metadata.
 
-![Edit Menu](~/content/assets/images/edit-menu.png)
+![The Edit menu with Reset Zoom at the bottom](~/content/assets/images/edit-menu.png)
 
-- **Undo**: undoes the last change in the part of the window that has focus. In a text control, such as a document or the **Expression Editor**, it undoes typing and reads **Undo typing**. Elsewhere, it undoes the last change to the model metadata. **Ctrl+Z** runs this command.
+- **Undo**: undoes the last change in the part of the window that has focus. In a text control, such as a document or the **Expression Editor**, it undoes typing and reads **Undo typing**. Elsewhere, including a drop-down list or a read-only text box, it undoes the last change to the model metadata. **Ctrl+Z** runs this command.
 - **Redo**: redoes the last undone change, following the same rules as **Undo**. **Ctrl+Y** runs this command.
 - **Undo** / **Redo** followed by the name of a model change, for example **Undo C# script (MCP)**: appear only when a text control has focus, and undo or redo the last change to the model metadata. See [Undo in text editors](xref:undo-redo#undo-in-text-editors).
 - **Find**: opens the "Find and replace" dialog on the "Find" tab. See [Find](xref:find-replace#find).
@@ -157,6 +156,7 @@ The **Edit** menu edits the active document or the loaded model metadata.
 - **Select all**: selects all text in the active document, or all objects with the same parent in the TOM Explorer.
 - **Code assist**: shortcuts to the code assist features for DAX. Available while you edit DAX. See [DAX editor](xref:dax-editor#code-assist-features).
 - **Word Wrap**: toggles word wrap in the active text document.
+- **Reset Zoom** (**Ctrl+0** or **Ctrl+NumPad0**): returns a code editor zoomed with Ctrl+mouse wheel to the **Code editor font size** set under **Tools > Preferences > Tabular Editor > User Interface**s. Available only while the active editor or page is zoomed. See [Fonts](xref:preferences#fonts).
 
 ### View
 
@@ -220,9 +220,9 @@ The **Window** menu manages and switches between the views and documents of the 
 
 - **New...** creates [supporting files](xref:supported-files#supported-file-types). The options are the same as under **File > New**.
 - **Float** undocks the current view or document into a floating window.
-- **Pin tab** pins a tab to the left end of the document tabs. The tab right-click menu has commands that close only unpinned tabs.
+- **Pin tab** pins a tab to the left end of the document tabs. The tab right-click menu has commands that close only unpinned tabs, and a **Duplicate** command that opens a new, unsaved copy of a DAX query, DAX script, C# script, diagram or Pivot Grid, including its unsaved edits. A DAX query copy has no results until you run it. 
   
-  ![View Menu](~/content/assets/images/tab-context-menu.png)
+  ![Tab right-click menu with Duplicate and the pin and close commands](~/content/assets/images/tab-context-menu.png)
 
 - **New Horizontal/Vertical Tab Group**: divides the main document area into tab groups, to show several documents side by side or one above the other.
 - **Close All**: closes all document tabs. A prompt to save unsaved changes appears first.
@@ -249,7 +249,7 @@ The **Help** menu links to online resources.
 - **Onboarding Guide**: opens the Tabular Editor 3 onboarding guide for new users.
 - **Community Support**: opens the [public community support site](https://github.com/TabularEditor/TabularEditor3).
 - **Dedicated Support**: sends an e-mail to the dedicated support hotline.
-- **Get Started**: opens the **Get Started** page, which collects courses, demos and documentation for Tabular Editor. Before Tabular Editor 3.27.0, this item was called **What's New**. For release notes, see @release-history.
+- **Get Started**: opens the **Get Started** page, which collects courses, demos and documentation for Tabular Editor. For release notes, see @release-history.
 
 > [!NOTE]
 > Dedicated support is for Tabular Editor 3 Enterprise Edition customers. Other customers use the [public community support site](https://github.com/TabularEditor/TabularEditor3) for technical and product questions.

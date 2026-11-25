@@ -2,7 +2,7 @@
 uid: object-properties
 title: Object properties reference
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ SUMMARY: Reference for every property that Tabular Editor shows in the Propertie
 
 Every object in a semantic model, such as a table, a column or a measure, has a set of properties. These properties come from the Tabular Object Model (TOM), the object model that Analysis Services, Power BI and Fabric use to define semantic models. The @properties-view shows them, and C# scripts read and write them through the @api-index.
 
-This reference describes each property that the Properties view shows. When Tabular Editor has a feature for a property, such as an editor, a Best Practice Analyzer (BPA) rule or a C# script, the entry links to it.
+This reference describes each property that the property grid of the Properties view shows. With the **Basic Properties view** public preview on, the grid is the **Advanced** tab, and the **Basic** tab shows a subset of the properties as a form. When Tabular Editor has a feature for a property, such as an editor, a Best Practice Analyzer (BPA) rule or a C# script, the entry links to it.
 
 To change a property, select one or more objects in the @tom-explorer-view and edit the value in the Properties view. When you select several objects, the new value applies to all of them. See @editing-properties.
 
@@ -51,9 +51,9 @@ To change a property, select one or more objects in the @tom-explorer-view and e
 | @object-properties-calendars | Calendar, time-related column group, time unit column association |
 | @object-properties-functions | User-defined function, set |
 
-Each page has a section per object. The section starts with links to the common properties of the object, followed by one entry per property. Within each object, the properties are listed by category, in the order the Properties view shows them when **Categorized** is selected. The categories are:
+Each page has a section per object. The section starts with links to the common properties of the object, followed by one entry per property. Within each object, the properties are listed by category, in the order the property grid shows them when **Categorized** is selected. The categories are:
 
-- **Basic**: the properties you change most often, such as the name, the description and the format string.
+- **General**: the properties you change most often, such as the name, the description and the format string.
 - **Metadata**: information about the object, such as the object type or the error message. Most of these properties are read-only.
 - **Options**: properties that change how the object behaves, such as expressions, summarization or sort order.
 - **Translations, Perspectives, Security**: per-culture translations, perspective membership and per-role security settings.
@@ -72,6 +72,7 @@ When they apply, these parts follow the category, in this order:
 - **read-only**: you can't change the value.
 - **compatibility level NNNN+**: the minimum compatibility level of the model, for example `compatibility level 1540+`.
 - a marker for a property that Tabular Editor adds. See [Properties that Tabular Editor adds](#properties-that-tabular-editor-adds).
+- **Basic**: the property is a basic property. See [Basic properties](#basic-properties).
 
 For example, the entry for Lineage Tag starts with:
 
@@ -85,6 +86,12 @@ The Properties view hides the properties that don't apply to the current model. 
 - the compatibility level of the model. Many properties need a minimum level, for example `LineageTag` needs 1540 or higher. To see or change the compatibility level, select the model and expand `Database` in the Properties view.
 - the compatibility mode of the model. Some properties exist only for Power BI and Fabric models, or only for Analysis Services models.
 - the state of the object. Some properties appear only when another property has a certain value. For example, the properties of a refresh policy appear only when the table has one.
+
+## Basic properties
+
+The basic properties are the properties that most models need, such as the name of an object, the format string of a measure and the cross filter direction of a relationship. The other properties are advanced.
+
+The line under the heading of a basic property ends with **Basic**. For a common property, such as `Name` or `Description`, the marker is in the **Common properties** list of each object, because which properties are basic depends on the object type.
 
 ## Properties that Tabular Editor adds
 

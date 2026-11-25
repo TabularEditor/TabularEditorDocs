@@ -2,7 +2,7 @@
 uid: object-properties-calculation-groups
 title: Calculation group properties
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of calculation groups and calculation item
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page covers the properties of calculation groups and calculation items. A calculation group always belongs to a calculation group table. The properties of that table, including shortcuts to the calculation group's own properties, are on @object-properties-tables. For properties that most objects share, see @object-properties-common.
 
 ## Calculation group
@@ -41,7 +43,7 @@ In Tabular Editor 3, you create a calculation group by right-clicking the model 
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Precedence
-`Precedence` · int · Options
+`Precedence` · int · Options · **Basic**
 
 The order in which calculation groups are applied when a query uses items from more than one calculation group, for example a time intelligence group and a currency conversion group. The calculation group with the highest precedence is applied first, which makes its calculation item the outermost one. Where that item calls [SELECTEDMEASURE](https://dax.guide/selectedmeasure), the engine uses the result of the calculation item from the group with the next lower precedence, and so on down to the measure.
 
@@ -49,11 +51,13 @@ The order changes the result when the calculation items don't commute. With a ti
 
 The TOM default is `0`. Give each calculation group in the model a different precedence of `0` or higher. The engine rejects a model in which two calculation groups have the same precedence, with an error like "Calculation Group precedence must be greater or equal zero and unique within Model".
 
-When you add or paste a calculation group whose precedence another calculation group in the model already uses, Tabular Editor sets it to one more than the highest precedence in the model. You can also set it on the calculation group table as `CalculationGroupPrecedence`. In a Tabular Editor 3 @dax-scripts document, you set it with the `Precedence` property of the calculation group.
+When you add or paste a calculation group whose precedence another calculation group in the model already uses, Tabular Editor sets it to one more than the highest precedence in the model. You can also set it on the calculation group table as `CalculationGroupPrecedence`, or drag the calculation groups into order in the **Calculation group precedence** section on the **Basic** tab of the Properties view. See [Calculation group precedence](xref:properties-view#calculation-group-precedence). In a Tabular Editor 3 @dax-scripts document, you set it with the `Precedence` property of the calculation group.
 
 ## Calculation item
 
 A calculation item is one entry of a calculation group, for example `YTD`. Report authors see its name as a value in the calculation group's column, and its expression sets how the measure changes when the item is selected. Inside the expression, [SELECTEDMEASURE](https://dax.guide/selectedmeasure) returns the measure that's being evaluated.
+
+In Tabular Editor 3, the **Calculation items** section on the **Basic** tab of the Properties view lists a calculation group's items in order, and adds, moves, renames and removes them. See [Calculation items](xref:properties-view#calculation-items).
 
 A calculation group without calculation items has no effect. The Best Practice Analyzer (BPA) rule @kb.bpa-calculation-groups-no-items flags calculation groups that contain no items.
 
@@ -61,14 +65,14 @@ The `Description` of a calculation item is for developers only. Power BI Desktop
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
 - [Error Message](xref:object-properties-common#error-message)
 - [Object Type](xref:object-properties-common#object-type)
 - [State](xref:object-properties-common#state)
 
 ### Ordinal
-`Ordinal` · int · Basic · compatibility level 1500+
+`Ordinal` · int · General · compatibility level 1500+ · **Basic**
 
 The position of the calculation item within its calculation group, starting at `0`. Client tools sort the items by it, for example to show `Current`, `MTD`, `QTD` and `YTD` in that order in a slicer. The engine exposes it through the ordinal column of the calculation group table.
 
@@ -115,7 +119,7 @@ Calculation items apply to measures only, and columns that are aggregated implic
 In Tabular Editor 3, you write the expression in the **Expression Editor** of the @dax-editor, with auto-complete and parameter info.
 
 ### Format String Expression
-`FormatStringExpression` · string · Options
+`FormatStringExpression` · string · Options · **Basic**
 
 A DAX expression that returns the format string for the measure when this calculation item is selected. Leave it empty to keep the measure's own format. Set it when the item changes the kind of value the measure returns, for example a year-over-year percentage:
 

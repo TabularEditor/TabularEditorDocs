@@ -2,7 +2,7 @@
 uid: load-save-model
 title: Load and save model metadata
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,10 +49,10 @@ For everything Tabular Editor recognizes, including the supporting file types th
 To write a model somewhere else, or in a different format:
 
 - **File > Save As...** saves the model metadata as a single `.bim` file.
-- **File > Save to Folder...** saves the model metadata as a [folder structure](xref:save-to-folder), in either the JSON or the TMDL format, depending on the serialization mode under **Tools > Preferences > File Formats > Save-to-folder**.
+- **File > Save to Folder...** saves the model metadata as a [folder structure](xref:save-to-folder) in the format set in **Save to Folder format** under **Tools > Preferences > File Formats > Save-to-folder**: **TMDL** (default) or **Folder (Database.json)**. See [TMDL](xref:tmdl).
 
 > [!IMPORTANT]
-> A model loaded from a legacy JSON folder structure is saved in that same format when you use **File > Save**, even if your preferences say TMDL. The format changes only when you use **File > Save to Folder...**. See [TMDL](xref:tmdl).
+> A model loaded from a Database.json folder is saved in that same format when you use **File > Save**. To convert it to TMDL, use **File > Save to Folder...** with **Save to Folder format** set to **TMDL**.
 
 ## Reloading
 

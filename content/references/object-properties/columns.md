@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: Column properties
 author: Jeroen ter Heerdt
-updated: 2026-11-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 This page lists the properties of the three kinds of columns and of the two objects that belong to a column, Alternate Of and Variation. For properties that most objects share, see @object-properties-common.
 
 A table contains three kinds of columns:
@@ -40,10 +42,10 @@ These properties apply to data columns, calculated columns and calculated table 
 
 ### Common properties
 
-- [Name](xref:object-properties-common#name)
-- [Description](xref:object-properties-common#description)
-- [Display Folder](xref:object-properties-common#display-folder)
-- [Hidden](xref:object-properties-common#hidden)
+- [Name](xref:object-properties-common#name) · **Basic**
+- [Description](xref:object-properties-common#description) · **Basic**
+- [Display Folder](xref:object-properties-common#display-folder) · **Basic**
+- [Hidden](xref:object-properties-common#hidden) · **Basic**
 - [Annotations](xref:object-properties-common#annotations)
 - [Extended Properties](xref:object-properties-common#extended-properties)
 - [Changed Properties](xref:object-properties-common#changed-properties)
@@ -60,7 +62,7 @@ These properties apply to data columns, calculated columns and calculated table 
 - [Shown in Perspective](xref:object-properties-common#shown-in-perspective)
 
 ### Data Type
-`DataType` · DataType · Basic
+`DataType` · DataType · General · **Basic**
 
 The data type of the column's values. It determines how the engine stores the values and which DAX functions and operators accept them. Both columns of a relationship must have the same data type.
 
@@ -86,14 +88,14 @@ For calculated columns and calculated table columns, the data type follows from 
 The Best Practice Analyzer (BPA) rule @kb.bpa-relationship-same-datatype flags relationships between columns that have different data types.
 
 ### Format String
-`FormatString` · string · Basic
+`FormatString` · string · General · **Basic**
 
 The format that client tools apply when they display the column's values, for example `#,0`, `0.00%` or `yyyy-mm-dd`. The syntax is the same as for the DAX [FORMAT](https://dax.guide/format) function. DAX queries return the unformatted value. The format also applies to the implicit measures that Power BI creates when a report author drags a numeric column into a visual.
 
 Visible numeric and date columns without a format string show raw values such as `1234567.891` or a date with a time part. See @kb.bpa-format-string-columns.
 
 ### Sort By Column
-`SortByColumn` · Column · Basic
+`SortByColumn` · Column · General · **Basic**
 
 Another column in the same table whose values set the order of this column's values. For example, sort a `Month Name` column by a `Month Number` column to show the months in calendar order.
 
@@ -105,7 +107,7 @@ Each value of this column must have exactly one value in the sort column. For ex
 The C# script @script-create-date-table creates a date table and sets `SortByColumn` on its name columns.
 
 ### Summarize By
-`SummarizeBy` · AggregateFunction · Basic
+`SummarizeBy` · AggregateFunction · General · **Basic**
 
 The aggregation that client tools apply when a report author drags the column into a visual as a value, without a measure. Power BI calls this *default summarization*, and the measure it creates on the fly an *implicit measure*.
 
@@ -150,7 +152,7 @@ The property appears at compatibility level 1460 or higher and stays empty until
 The C# script @script-implement-user-defined-aggregations sets up the detail table for a selected aggregation table and configures `AlternateOf` on its numeric columns.
 
 ### Data Category
-`DataCategory` · string · Options
+`DataCategory` · string · Options · **Basic**
 
 The kind of value the column holds, which client tools use to treat the column in a special way. For example, Power BI puts a column with category `City` on a map, shows a column with category `ImageUrl` as an image and shows a column with category `WebUrl` as a clickable link. Leave it empty for a regular column.
 
@@ -240,7 +242,7 @@ Marks the column as the image that represents a row of the table, for example a 
 Marks the column as the label that identifies a row of the table to users, for example the product name. It's a table behavior setting that Power View used. No current client uses it. Power View and Power BI Q&A both supported it and are both retired.
 
 ### Key
-`IsKey` · bool · Options
+`IsKey` · bool · Options · **Basic**
 
 Marks the column as the key of the table, the column whose values identify each row. A table has at most one key column: when you set `IsKey` to `true` on a column, Tabular Editor sets it to `false` on the other columns of the table and leaves `IsUnique` and `IsNullable` unchanged. The key column can't contain duplicate or blank values, so a refresh that loads duplicates fails.
 
@@ -249,7 +251,7 @@ When you mark a table as a date table in Power BI, `IsKey` is set on the date co
 The BPA rule @kb.bpa-date-table-exists flags a model that has no calendar, no table with `DataCategory` `Time` and no `DateTime` key column.
 
 ### Nullable
-`IsNullable` · bool · Options
+`IsNullable` · bool · Options · **Basic**
 
 Whether the column can contain blank (null) values. The default is `true`. If you set it to `false`, a refresh fails when the source returns a blank value, which works as a data quality check. A key column never allows blanks, whatever the value of this property.
 
@@ -345,7 +347,7 @@ A data column gets its values from the table's partitions, in a Power BI model u
 In Tabular Editor 3, the @import-tables wizard creates data columns with their data types and source column mappings, and **Update table schema** updates them when the source changes.
 
 ### Source Column
-`SourceColumn` · string · Basic
+`SourceColumn` · string · General · **Basic**
 
 The name of the column in the result of the partition query that this column gets its values from. It must match the name that the query returns. If it doesn't, for example after someone renamed a column in Power Query, the refresh fails.
 
@@ -395,7 +397,7 @@ Tabular Editor 3 analyzes the expression as soon as you change it and adds, remo
 You can change the column's display properties, such as `FormatString`, `IsHidden` and `SortByColumn`. To rename the column, first set `IsNameInferred` to `false`. The column has the properties under [Properties of all columns](#properties-of-all-columns) and the ones below.
 
 ### Source Column
-`SourceColumn` · string · Basic · read-only
+`SourceColumn` · string · General · read-only
 
 The name of the column in the result of the calculated table's expression that this column gets its values from. Tabular Editor 3 sets it when it analyzes the expression, and the engine sets it when the model is saved to a server. Renaming the column leaves it unchanged, which keeps the link between the column and the expression.
 
@@ -473,7 +475,7 @@ Variations mostly occur in Power BI and Fabric models. Tabular Editor shows the 
 - [Object Type](xref:object-properties-common#object-type)
 
 ### Parent Column
-`Column` · Column · Basic · read-only
+`Column` · Column · General · read-only
 
 The column this variation belongs to.
 

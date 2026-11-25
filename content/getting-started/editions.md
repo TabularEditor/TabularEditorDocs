@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,7 +26,7 @@ The editions differ in two ways: **which data modeling scenarios** they support 
 
 The first difference between the editions is which types of tabular data modeling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":
 
-- Power BI Desktop (make sure you understand the [limitations](xref:desktop-limitations))
+- Power BI Desktop
 - Power BI Premium through the XMLA Endpoint (Premium Per User, **Premium Capacity [A, EM or P SKUs]**, **Fabric Capacity [F SKUs]**)
 - SQL Server (2016+) Analysis Services (Editions: Developer, Standard, **Enterprise**)
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
@@ -159,7 +159,7 @@ If you attempt to open a model that uses one or more of the modeling restriction
 A model that acquires one of these while you are editing it is not silently mangled either: the save is refused, and the message names the feature and, for multiple partitions, the tables in question. Adding a perspective to an Analysis Services model is prevented up front - the **Perspectives** folder is not shown in the TOM Explorer and the command to create one is unavailable.
 
 > [!IMPORTANT]
-> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix, .pbip or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model. [More information](xref:desktop-limitations).
+> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix, .pbip or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model. See @desktop-integration.
 
 ## Personal vs. Transferable licenses
 
