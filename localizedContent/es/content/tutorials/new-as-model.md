@@ -1,4 +1,4 @@
----
+﻿---
 uid: new-as-model
 title: Crear un modelo de Analysis Services
 author: Daniel Otykier
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Limitado a SQL Server Standard Edition"
+          note: "Limited to SQL Server Standard Edition"
         - edition: Enterprise
           full: true
 ---
@@ -25,14 +25,13 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
 > [!NOTE]
 > La Edición Business de Tabular Editor 3 se limita a la [edición Standard de SQL Server](https://docs.microsoft.com/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) y al [nivel Basic de Azure Analysis Services](https://docs.microsoft.com/azure/analysis-services/analysis-services-overview#basic-tier). Ten en cuenta que algunas características de modelado no se admiten en estos niveles.
 
-##### Crear un nuevo modelo
+## Crear un nuevo modelo
 
 - En el menú Archivo, elige Nuevo > Modelo... o pulsa `CTRL+N`
 
 ![Nuevo modelo](~/content/assets/images/new-as-model-new-model.png)
 
-- Indica un nombre para tu modelo o usa el valor predeterminado. Luego, elige el nivel de compatibilidad para la versión de Analysis Services a la que te diriges. El cuadro de diálogo muestra estas opciones:
-
+- Proporcione un nombre para su modelo o use el valor predeterminado. El nombre que introduzca se utilizará para el nombre de la base de datos, el ID de la base de datos y el nombre del modelo. A continuación, elija el nivel de compatibilidad para la versión de Analysis Services a la que se dirige. El cuadro de diálogo muestra estas opciones:
   - 1200 (Azure Analysis Services / SQL Server 2016+)
   - 1400 (Azure Analysis Services / SQL Server 2017+)
   - 1500 (Azure Analysis Services / SQL Server 2019+)
@@ -51,7 +50,7 @@ En esta página te guiamos paso a paso por el proceso de crear desde cero un nue
 
 Una vez creado el modelo, el siguiente paso es agregar un Data source y algunas tablas.
 
-#### Agregar un Data source y tablas
+## Agregar un Data source y tablas
 
 Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. Para obtener más información sobre las diferencias entre estos dos tipos de Data sources, [consulte el blog de Microsoft Analysis Services](https://docs.microsoft.com/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
@@ -102,7 +101,7 @@ Si la tabla que importaste es una tabla de dimensión, recomendamos establecer l
 
 Repite este proceso con cualquier tabla que quieras importar en tu modelo tabular. No tienes que actualizar los datos de cada tabla una por una; en su lugar, puedes ejecutar la operación de actualización a nivel del modelo.
 
-#### Definición de relaciones
+## Definición de relaciones
 
 Una vez que hayas importado varias tablas, la forma más sencilla de definir las relaciones entre ellas con Tabular Editor 3 es crear un nuevo diagrama. Elige "File > New > Diagram". Después, selecciona varias tablas y arrástralas a la Vista de diagrama, o haz clic con el botón derecho en las tablas y elige "Add to diagram":
 
@@ -114,7 +113,7 @@ Para crear una relación entre dos tablas, localiza la columna de clave externa 
 
 Cierra la Vista de diagrama (no hace falta guardarla, ya que siempre puedes reconstruir el diagrama más adelante). Pulsa Ctrl+S de nuevo para guardar el modelo. Ahora toca añadir algo de lógica de negocio. Si estás usando una Workspace Database, este es un buen momento para ejecutar una actualización ("Automatic" o "Calculate") a nivel del modelo, para asegurarte de que en el servidor se crean las estructuras de soporte para las relaciones y, así, dejar el modelo en un estado consultable.
 
-#### Añadir medidas
+## Añadir medidas
 
 Selecciona una de las tablas en el Explorador TOM y pulsa Alt+1 (o elige Create > New Measure) para añadir una medida a esa tabla. Asigna un nombre a la medida y proporciona una expresión DAX para la medida.
 
@@ -128,7 +127,7 @@ Si estás usando una Workspace Database, ahora puedes probar tu nueva medida dir
 
 Si no usaste una Workspace Database, tendrás que desplegar tu modelo en una instancia de Analysis Services antes de poder realizar actualizaciones de datos y consultar el modelo.
 
-#### Implementación del Data model
+## Implementación del Data model
 
 Para implementar los metadatos del modelo en cualquier instancia de Analysis Services, haz clic en el menú "Modelo" y elige "Implementar...". Esto abre el Asistente de implementación de Tabular Editor 3, similar al Asistente de implementación de Tabular Editor 2.X. Sigue las instrucciones de las distintas páginas del asistente para implementar los metadatos del modelo en una instancia de Analysis Services. También puedes usar el Asistente de implementación para generar un script TMSL/XMLA, que puedes entregar a un administrador del servidor de Analysis Services para que lo implemente manualmente.
 

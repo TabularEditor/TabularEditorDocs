@@ -1,13 +1,15 @@
 ---
 uid: perspectives-translations
 title: 透视与翻译
+author: Morten Lønskov
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       full: true
-      note: 包含专用的透视编辑器和翻译编辑器
+      note: Includes dedicated Perspective and Translation Editors
 ---
 
 # 使用透视与翻译

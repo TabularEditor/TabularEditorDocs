@@ -1,8 +1,8 @@
----
+﻿---
 uid: dax-editor
 title: DAX编辑器
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -43,7 +43,7 @@ Tabular Editor 3 的 DAX编辑器提升效率的关键在于其**参数信息**�
 
 ![Dax Code Assist](~/content/assets/images/dax-code-assist.png)
 
-Code Assist 的大多数选项可在 [**工具 > 偏好 > 文本编辑器 > DAX编辑器 > Code Assist**](xref:preferences#dax-editor--code-assist) 中进行配置。
+Code Assist 的大多数选项可在 [**工具 > 偏好 > 文本编辑器 > DAX编辑器 > Code Assist**](xref:preferences#text-editors--dax-editor--code-assist) 中进行配置。
 
 ## 窥视定义
 
@@ -79,15 +79,15 @@ SUMX ( 'Sales', CALCULATE ( 'Sales'[Amount] - 'Sales'[Cost] ) )
 
 仅在确实可能影响结果时，才会添加这层包裹。在以下情况下，插入表达式时不会添加包裹：
 
-- 该引用**不在行语境中**，包括它本来就位于自己的 `CALCULATE( …… )` 中
+- 该引用**不在行语境中**，包括它本来就位于自己的 `CALCULATE( ... )` 中
 - 该度量值的表达式**不从模型中读取任何内容**（例如常量、对其他度量值的引用，或对 `TODAY()` 之类函数的调用）。对表、列、日历或[用户定义函数](xref:udfs)的引用都算作从模型中读取内容，因此也会添加这层包裹
-- 该表达式**已经自行执行了上下文转换**，例如通过 `CALCULATE( …… )` 或 `CALCULATETABLE( …… )` 且不带任何筛选参数。如果带有筛选参数，仍会添加这层包裹，因为筛选参数会在转换之前求值
+- 该表达式**已经自行执行了上下文转换**，例如通过 `CALCULATE( ... )` 或 `CALCULATETABLE( ... )` 且不带任何筛选参数。如果带有筛选参数，仍会添加这层包裹，因为筛选参数会在转换之前求值
 
 如果无法分析该度量值的表达式，就会添加这层包裹。原则是：多加一层即使不需要也无害，漏掉该加的一层则不行。
 
 ## 格式化 DAX
 
-Tabular Editor 3 中的 DAX编辑器会在你输入时自动格式化代码，比如修正函数和对象引用的大小写、添加合适的缩进，以及在括号内外加上适当的空格等。这些都可以在 [**工具 > 偏好 > 文本编辑器 > DAX编辑器 > 自动格式化**](xref:preferences#dax-editor--auto-formatting) 中进行配置。
+Tabular Editor 3 中的 DAX编辑器会在你输入时自动格式化代码，比如修正函数和对象引用的大小写、添加合适的缩进，以及在括号内外加上适当的空格等。这些都可以在 [**工具 > 偏好 > 文本编辑器 > DAX编辑器 > 自动格式化**](xref:preferences#text-editors--dax-editor--auto-formatting) 中进行配置。
 
 不过，有时也需要对整个文档进行格式化。按 [F6] 即可；如果你希望换行更频繁，可按 [Shift+F6]。对于 DAX 查询，你还可以使用 [Alt+F6] 重新格式化代码，让逗号始终放在行首，这在调试时很有用。
 

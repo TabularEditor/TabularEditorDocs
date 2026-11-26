@@ -1,6 +1,7 @@
 ---
 uid: user-setting-files-te2
 title: Archivos de configuración del usuario de Tabular Editor 2
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,6 +11,8 @@ applies_to:
 ---
 
 # Archivos de configuración del usuario de Tabular Editor 2
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 Cuando se inicia Tabular Editor 2, escribe algunos archivos adicionales en el disco en varias ubicaciones. A continuación se describen estos archivos y su contenido:
 

@@ -2,7 +2,7 @@
 uid: load-save-model
 title: Cargar y guardar metadatos del modelo
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "La Edición de escritorio no puede abrir ni guardar archivos de metadatos del modelo."
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -69,6 +69,8 @@ Para guardar un modelo en otro lugar o en otro formato:
 En Tabular Editor 3.26 y versiones anteriores, y en Tabular Editor 2, el comando se llama **Archivo > Revertir**.
 
 En Tabular Editor 3.27.0 y versiones posteriores, cuando un agente, un script o un `git pull` modifica los archivos de metadatos del modelo abierto, el modelo se vuelve a cargar, después de un aviso si tienes cambios sin guardar. Consulta [Recarga automática desde el disco](xref:auto-reload).
+
+Los documentos abiertos de consultas DAX y Pivot Grid permanecen abiertos durante una recarga manual o automática y se conectan al modelo recargado.
 
 > [!WARNING]
 > Haz una copia de seguridad de los metadatos del modelo antes de permitir que cualquier herramienta escriba en ellos, incluido Tabular Editor. Guardar sobrescribe el origen, y la recarga no puede recuperar los cambios que ya hayas guardado.

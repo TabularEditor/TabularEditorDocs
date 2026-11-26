@@ -1,6 +1,7 @@
----
+﻿---
 uid: shortcuts2
 title: Tabular Editor 2 键盘快捷键
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,6 +11,8 @@ applies_to:
 ---
 
 # 键盘快捷键
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 自 2.7.3 版本起，Tabular Editor 支持以下键盘快捷键：
 

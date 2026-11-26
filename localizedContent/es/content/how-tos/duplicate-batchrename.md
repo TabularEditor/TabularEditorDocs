@@ -2,7 +2,7 @@
 uid: duplicate-and-batch
 title: Duplicación de objetos y cambio de nombre en lote
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,4 +19,6 @@ El menú contextual, accesible con clic derecho, del árbol del Explorador le pe
 
 Puede usar RegEx para renombrar y, opcionalmente, elegir si también desea renombrar las traducciones.
 
-Un objeto duplicado conserva los indicadores de error y advertencia del original, por lo que la copia de un objeto con una expresión no válida se marca como no válida de inmediato.
+Un objeto duplicado conserva todos los indicadores de error y advertencia que tenía el original, por lo que una copia de un objeto con una expresión no válida se marca como no válida de inmediato.
+
+Si el original se muestra en más de una carpeta de visualización, la copia aparece en todas ellas y se selecciona después de crearse. Esto también se aplica cuando copia y pega un objeto.

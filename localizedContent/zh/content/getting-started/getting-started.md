@@ -2,7 +2,7 @@
 uid: getting-started
 title: 安装与激活
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,7 +73,7 @@ Tabular Editor 3 的安装是按 **用户** 激活的。如果多个用户共享
 
 ### 申请试用许可证
 
-如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。选择这个选项后，系统会提示你输入电子邮件地址。我们会使用这个电子邮件地址来验证你是否已有 Tabular Editor 3 的激活记录。
+如果您此前从未使用过 Tabular Editor 3，则有资格获得企业版功能集的 30 天免费试用。试用需要提供有效的电子邮件地址，无需信用卡。当您选择此选项时，系统会提示您输入电子邮件地址。我们会使用该电子邮件地址验证您是否已激活 Tabular Editor 3。
 
 > [!NOTE]
 > 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。查看我们的 @privacy-policy 以了解更多信息。

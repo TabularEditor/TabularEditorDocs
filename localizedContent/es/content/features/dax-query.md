@@ -1,8 +1,8 @@
----
+﻿---
 uid: dax-query
 title: Consultas DAX
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,13 @@ La ventana de consultas de DAX tiene seis opciones de consulta distintas.
    - **Cuando se modifica la consulta**: La ordenación y el filtrado se restablecen solo cuando cambia la estructura de la consulta.
    - **Siempre**: La ordenación y el filtrado se conservan mientras las columnas sigan estando en la nueva consulta.
 
-Los valores predeterminados de las preferencias "Ejecutar consulta automáticamente" y "Mantener la ordenación y el filtrado" se pueden configurar en el cuadro de diálogo de Preferencias: **Herramientas > Preferencias... > Exploración de datos > Consulta DAX** > Básico.
+Los valores predeterminados de las preferencias «Ejecutar consulta automáticamente» y «Conservar ordenación y filtrado» se pueden configurar en el cuadro de diálogo Preferencias: **Herramientas > Preferencias... > Exploración de datos > Consulta DAX** > Básico. La sección **Mantener los documentos abiertos al cambiar de modelo** de la misma página controla qué sucede con las consultas DAX abiertas cuando abre un modelo diferente. Consulta [Cambiar de modelo](#switching-models).
+
+### Cambiar de modelo
+
+Cuando abre un modelo diferente, las consultas DAX abiertas permanecen abiertas y se conectan al nuevo modelo. Si se selecciona **Ejecutar automáticamente consultas DAX de forma predeterminada**, la consulta se ejecuta de nuevo con el nuevo modelo; de lo contrario, se ejecuta con el nuevo modelo la próxima vez que la ejecute. Si el nuevo modelo no tiene una base de datos con la que ejecutarse, como un modelo cargado desde un archivo sin una base de datos de área de trabajo, la consulta permanece abierta y no se puede ejecutar.
+
+Para cerrar las consultas DAX cuando abra un modelo diferente, desmarque **Mantener abiertas las consultas DAX cuando se abra un modelo diferente** en **Herramientas > Preferencias > Exploración de datos > Consulta DAX**. La opción está seleccionada de forma predeterminada.
 
 ### Añadir o actualizar medidas, columnas y tablas con consultas DAX
 

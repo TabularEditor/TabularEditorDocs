@@ -160,7 +160,7 @@ CustomData 功能允许你传入一个自定义字符串值，可在 DAX 表达�
 
 ```dax
 'Department'[DepartmentCode] = CUSTOMDATA()
-```
+```   
 
 # VertiPaq分析器
 
@@ -169,6 +169,8 @@ Tabular Editor 3 内置了由 [SQLBI](https://sqlbi.com) 创建的开源工具 [
 使用 Tabular Editor 3，只要你连接到任意 Analysis Services 实例，就可以收集 VertiPaq分析器统计信息。你还可以将统计信息导出为 [.vpax 文件](https://www.youtube.com/watch?v=zRa9y01Ub30)，或从 .vpax 文件导入统计信息。
 
 要收集统计信息，只需在 **VertiPaq分析器** 视图中点击 **收集统计信息** 按钮。
+
+如果无法从模型的数据中读取统计信息，例如当高基数列超过 Power BI 容量的单次查询内存限制时，则仅从模型元数据中收集统计信息。**未读取数据即收集统计信息**警告将与服务器错误一同显示，且基数可能缺失或不准确。要跳过从数据读取统计信息，请在**工具 > 首选项 > 文件格式 > VertiPaq Analyzer**下取消选中**从数据读取统计信息**。
 
 ![VertiPaq分析器收集统计信息](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 

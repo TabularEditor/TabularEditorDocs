@@ -1,8 +1,8 @@
----
+﻿---
 uid: direct-lake-guidance
 title: Guía de Direct Lake
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -46,16 +46,28 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 
 Sin embargo, al igual que con Direct Lake en SQL, siguen existiendo algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Entre las principales limitaciones se incluyen:
 
-- Las columnas calculadas en Direct Lake sobre tablas de OneLake se admiten en versión preliminar, pero solo en _contexto de usuario_: el valor se evalúa en el momento de la consulta para el usuario actual, en lugar de materializarse. Esto significa que una columna calculada de Direct Lake respeta la seguridad de nivel de fila y la seguridad a nivel de objetos, pero no se puede usar como clave de relación y no responde a los filtros ni a las segmentaciones de un Report. Use una medida en su lugar cuando el resultado deba reaccionar al contexto de filtro. Direct Lake en SQL sigue sin admitir columnas calculadas en absoluto. Consulta [Desarrollar modelos semánticos de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-develop) para obtener más detalles.
+- Las columnas calculadas en las tablas de Direct Lake en OneLake son compatibles en la versión preliminar y solo con el contexto de expresión `UserContext`. Direct Lake en SQL no admite columnas calculadas. Consulte [Columnas calculadas en Direct Lake en OneLake](#calculated-columns-on-direct-lake-on-onelake).
 - Las tablas calculadas no pueden hacer referencia a columnas ni tablas en el modo de almacenamiento Direct Lake. Se admiten los grupos de cálculo, los parámetros de tipo what-if y los parámetros de campo, porque crean tablas calculadas implícitas que no hacen referencia a columnas de Direct Lake.
 - Las vistas SQL no materializadas no se admiten como Data sources para tablas de Direct Lake en OneLake. Usa vistas materializadas o asegúrate de que la tabla Delta de origen contenga las columnas que necesitas.
-- Los accesos directos en un Lakehouse no se admiten como Data sources durante la versión preliminar pública de Direct Lake en OneLake.
 
 Para obtener una lista completa y actualizada de las limitaciones, consulta la [documentación de Microsoft sobre consideraciones y limitaciones de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
 
+### Columnas calculadas en Direct Lake en OneLake
+
+Una columna calculada de una tabla de Direct Lake en OneLake debe tener su propiedad `ExpressionContext` establecida en `UserContext`. La columna se evalúa en el momento de la consulta y no se materializa, por lo que no se puede usar en una relación. Las nuevas columnas calculadas usan `Standard` de forma predeterminada. Si una columna calculada de una tabla Direct Lake está configurada como `Standard` cuando guarda el modelo en el servicio Power BI, el guardado falla con el error «El contexto de expresión predeterminado no se puede usar para columnas calculadas en tablas Direct Lake».
+
+La propiedad **Contexto de expresión** aparece en la @properties-view solo cuando el nivel de compatibilidad del modelo es 1705 o superior. Establézcala en cada columna calculada de una tabla Direct Lake en OneLake:
+
+1. Seleccione el modelo en la @tom-explorer-view y compruebe el **Nivel de compatibilidad** en **Base de datos** en la @properties-view. Si es inferior a 1705, actualice el modelo como se describe en @update-compatibility-level.
+2. Seleccione la columna calculada en la @tom-explorer-view.
+3. En **Opciones** en la @properties-view, establezca **Contexto de expresión** en `UserContext`.
+4. Guarde el modelo.
+
+Las columnas calculadas de las tablas de importación del mismo modelo pueden usar cualquiera de los dos contextos de expresión. Para los objetos que no pueden hacer referencia a una columna de contexto de usuario, consulte @user-context-calculated-columns. Microsoft enumera las combinaciones admitidas de modo de almacenamiento y contexto de expresión en [Uso de columnas calculadas en Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance).
+
 ### Modelos compuestos
 
-Si necesita una columna calculada que se materialice, pueda usarse como clave de relación o responda a los filtros y las segmentaciones de un Report, la característica de columnas calculadas en versión preliminar mencionada arriba no es suficiente. En ese caso, cree un **modelo compuesto** combinando tablas de Direct Lake con tablas en modo Import. Esto se admite con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente se mantienen las tablas de hechos más grandes en modo Direct Lake, mientras que se usa Import mode para las tablas de dimensiones más pequeñas en las que se necesitan columnas calculadas completas o agrupaciones personalizadas.
+Si necesita una columna calculada que esté materializada o que se pueda usar como clave de relación, cree un **modelo compuesto** combinando tablas Direct Lake con tablas de importación y añada la columna calculada a una tabla de importación. Esto es compatible con Direct Lake en OneLake, pero no con Direct Lake en SQL. En un modelo compuesto, normalmente mantiene las tablas de hechos más grandes en modo Direct Lake mientras utiliza el modo Importación para las tablas de dimensiones más pequeñas en las que necesita columnas calculadas completas o agrupaciones personalizadas.
 
 Direct Lake en OneLake también admite la combinación con tablas DirectQuery mediante herramientas basadas en XMLA, como Tabular Editor. Las tablas en modo Import se pueden agregar mediante el modelado web de Power BI, Power BI Desktop (edición en vivo) o mediante herramientas XMLA.
 
@@ -111,6 +123,43 @@ Las opciones son:
 > Si estás trabajando en un modelo que ya contiene tablas, es posible que una o varias de las opciones mencionadas anteriormente no estén disponibles si el modelo no admite combinar tablas con distintos modos de almacenamiento. Por ejemplo, si el modelo contiene una tabla en modo Direct Lake en SQL, no puedes agregar tablas en otros modos.
 
 La tabla importada ya incluye sus columnas, en el mismo orden que en el origen, y no es necesario ejecutar **Actualizar esquema de tabla** después de la importación. Si Tabular Editor no puede determinar el punto de conexión de análisis SQL del Lakehouse o del Warehouse, y la configuración de importación no especifica uno, la importación falla con un error que indica la configuración que falta y no se crea ninguna tabla.
+
+## Dimensiones con asignación de roles
+
+Una *dimensión con asignación de roles* es una tabla de dimensiones relacionada con más de una columna de la misma tabla de hechos; por ejemplo, una tabla de fechas relacionada tanto con la fecha del pedido como con la fecha de envío de una tabla de ventas. Elige una configuración para el modelo semántico de Direct Lake:
+
+| Configuración | Tablas del modelo | Requiere |
+|-------|--------------|----------|
+| Relaciones inactivas | Una tabla de fechas con una relación activa con una columna de fechas y relaciones inactivas con las demás. Las medidas para los demás roles activan su relación con [USERELATIONSHIP](https://dax.guide/userelationship). | Cualquier modelo Direct Lake |
+| Una tabla de origen por rol | Una tabla Direct Lake por tabla Delta, por ejemplo, `DimDate` y `DimShipDate`. | Una tabla separada para cada rol en el lakehouse/almacén |
+| Importar tablas para los roles adicionales | Una tabla de fechas Direct Lake para el rol principal y tablas de importación para los demás roles. Consulta [Modelos compuestos](#composite-models). | Direct Lake en OneLake |
+| Tabla Direct Lake duplicada | Una copia de la tabla «Date», creada con **Duplicar** en el **Explorador TOM**, que lee la misma tabla Delta. | Nuevas tablas agregadas con el [Asistente para la importación de tablas](#table-import-wizard). Consulte [Tablas Direct Lake duplicadas](#duplicated-direct-lake-tables). |
+| Un acceso directo por rol | Una copia de la tabla «Date» para cada rol, cada una de las cuales lee su propio acceso directo de OneLake a la misma tabla Delta. Consulte [Un acceso directo por rol](#one-shortcut-per-role). | Un acceso directo para cada rol en el Lakehouse |
+
+### Tablas Direct Lake duplicadas
+
+Una tabla Direct Lake duplicada conserva los valores `SourceLineageTag` de la tabla original y de sus columnas. En una tabla de Direct Lake, `SourceLineageTag` contiene el nombre de la tabla o columna del lakehouse/almacén, por lo que la tabla original y la copia leen la misma tabla Delta. Aunque el modelo contiene ambas tablas, al intentar añadir una tabla a través del cuadro de diálogo **Editar tablas** en el modelado web de Power BI, se produce un error que indica «La secuencia contiene más de un elemento coincidente». El [Asistente para la importación de tablas](#table-import-wizard) añade tablas a un modelo que contiene tablas Direct Lake duplicadas. Si la copia lee un acceso directo, como se describe en [Un acceso directo por rol](#one-shortcut-per-role), **Editar tablas** funciona en el modelo.
+
+Cuando elimina una tabla Direct Lake en el modelado web de Power BI, la tabla de origen se agrega a la anotación `PBI_RemovedChildren` de la expresión compartida. Si otra tabla del modelo lee la misma tabla Delta, el modelado web de Power BI falla con el error «No se puede eliminar y añadir un elemento secundario al mismo tiempo» cuando enumera las tablas del lakehouse/almacén. Elimine la entrada en Tabular Editor 3:
+
+1. Abre el modelo semántico en Tabular Editor 3.
+2. En la @tom-explorer-view, expanda **Expresiones compartidas** y seleccione la expresión a la que hacen referencia las particiones Direct Lake, normalmente `DatabaseQuery`.
+3. En la @properties-view, en **Anotaciones**, quite la entrada de la tabla Delta del valor `PBI_RemovedChildren`. Elimine la anotación si no quedan entradas.
+4. Guarde el modelo.
+
+Microsoft describe la anotación en [Etiquetas de linaje para modelos semánticos de Power BI](https://learn.microsoft.com/analysis-services/tom/lineage-tags-for-power-bi-semantic-models).
+
+### Un acceso directo por rol
+
+Un [acceso directo de OneLake](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts) aparece como una tabla independiente en el lakehouse y lee la tabla Delta a la que apunta. Microsoft admite los accesos directos como orígenes tanto para Direct Lake en OneLake como para Direct Lake en tablas SQL. Cuando cada tabla de roles lee su propio acceso directo, cada tabla de Direct Lake del modelo tiene su propia tabla de origen, y las funciones **Editar tablas** y Actualizar de Power BI funcionan en el modelo. Las copias conservan los nombres de las columnas, las descripciones, las carpetas de visualización y otros cambios realizados en la tabla original.
+
+1. En el Lakehouse, cree un acceso directo en **Tablas** para cada rol adicional, con la tabla Delta de la dimensión como destino. Por ejemplo, cree `d_date_ship` con `d_date` como destino.
+2. En la @tom-explorer-view, haga clic con el botón derecho en la tabla original, seleccione **Duplicar** y cambie el nombre de la copia.
+3. Expanda **Particiones** bajo la copia, seleccione su partición de entidad y establezca **Nombre de entidad** en la @properties-view con el nombre del acceso directo.
+4. Seleccione la copia y establezca **Etiqueta de linaje de origen** con el nombre del acceso directo, en el mismo formato que el valor de la tabla original. Si la tabla original tiene `[dbo].[d_date]`, introduzca `[dbo].[d_date_ship]`.
+5. Guarde el modelo.
+
+Las columnas de la copia conservan sus valores `SourceColumn` y `SourceLineageTag`, que coinciden con las columnas del acceso directo. **Duplicar** copia las medidas de la tabla original con nuevos nombres. Elimine las medidas que la tabla de roles no necesita.
 
 ## Inspeccionar una partición de Direct Lake
 
