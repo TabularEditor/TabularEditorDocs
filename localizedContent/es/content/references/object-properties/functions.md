@@ -2,15 +2,15 @@
 uid: object-properties-functions
 title: Propiedades de funciones y conjuntos
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Admite funciones y conjuntos, pero no Namespace, PackageId ni PackageVersion"
+      note: "Supports functions and sets, but not Namespace, PackageId or PackageVersion"
     - product: Tabular Editor 3
       since: 3.23.0
-      note: "Las funciones definidas por el usuario requieren la versión 3.23.0 o posterior. Los conjuntos se admiten en todas las versiones."
+      note: "User-defined functions need 3.23.0 or later. Sets are supported in all versions."
       editions:
         - edition: Desktop
           full: true
@@ -28,6 +28,8 @@ SUMMARY: Reference for the properties of DAX user-defined functions and of sets.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 En esta página se enumeran las propiedades de las funciones DAX definidas por el usuario y de los conjuntos. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 ## Función
@@ -40,9 +42,9 @@ Tabular Editor 2 también admite las UDF y las muestra en la carpeta **Funciones
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
-- [Oculto](xref:object-properties-common#hidden)
+- [Nombre](xref:object-properties-common#name) · **Básica**
+- [Descripción](xref:object-properties-common#description) · **Básica**
+- [Oculto](xref:object-properties-common#hidden) · **Básico**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Propiedades modificadas](xref:object-properties-common#changed-properties)
@@ -55,8 +57,7 @@ Tabular Editor 2 también admite las UDF y las muestra en la carpeta **Funciones
 En DAX, llamas a una función por su nombre, así que el nombre no puede contener espacios. Puede contener puntos y guiones bajos. Usa un nombre compuesto, como `Finance.Margin` o `ACME_Margin`, para evitar conflictos con una función DAX integrada que Microsoft pueda agregar más adelante. Consulta @kb.bpa-udf-use-compound-names. Cuando cambias el nombre de una función, Tabular Editor 3 actualiza las referencias a ella en todo el modelo, igual que @formula-fix-up-dependencies hace con las medidas y las columnas.
 
 ### Espacio de nombres
-
-`Namespace` · string · Básico · _almacenado como una anotación_ (`TE_Group`)
+`Namespace` · cadena · General · *almacenada como anotación* (`TE_Group`)
 
 El grupo en el que aparece la función en @tom-explorer-view cuando está activada la agrupación de funciones definidas por el usuario por espacio de nombres. Activa la agrupación con el interruptor situado encima del **Explorador TOM**. Tabular Editor determina el espacio de nombres en este orden:
 

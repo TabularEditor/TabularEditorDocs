@@ -2,7 +2,7 @@
 uid: user-interface
 title: Interfaz de usuario básica
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,12 +27,12 @@ Con un modelo semántico cargado, Tabular Editor 3 muestra el diseño predetermi
 
 ![Interfaz de usuario básica](~/content/assets/images/basic-ui.png)
 
-1. **Barra de título**: el nombre del archivo cargado, o de la base de datos de Analysis Services o del modelo semántico de Power BI al que está conectado.
+1. **Barra de título**: el nombre del archivo cargado, o de la base de datos de Analysis Services o del modelo semántico de Power BI al que estás conectado, y la versión de Tabular Editor 3, por ejemplo, **v28.0.0**.
 2. **Barra de menús**: todas las funciones de Tabular Editor 3. Consulte [Menús](#menus) para ver cada menú.
 3. **Barras de herramientas**: las funciones más utilizadas. Todos los comandos de las barras de herramientas también están en los menús. Personalice las barras de herramientas y sus botones en **Herramientas > Personalizar...**.
 4. **Vista del Explorador TOM**: un árbol de los objetos del modelo, construido a partir de los metadatos del [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions). Los botones de activación de la parte superior filtran qué tipos de objetos se muestran, y el cuadro de búsqueda filtra los objetos por nombre.
 5. **Editor de expresiones**: edita las expresiones DAX, SQL o M del objeto seleccionado en el Explorador TOM. Si lo cierra, haga doble clic en un objeto del Explorador TOM para abrirlo de nuevo. Si el objeto tiene más de una propiedad de expresión, el menú desplegable de la parte superior permite alternar entre ellas. Por ejemplo, un KPI tiene un objetivo, un estado y una expresión de tendencia.
-6. **Vista de propiedades**: todas las propiedades TOM de los objetos seleccionados en el Explorador TOM. Puedes editar la mayoría de las propiedades en la cuadrícula, incluso con varios objetos seleccionados. Algunas propiedades, como **Cadena de formato**, **Cadena de conexión** y **Miembros del rol**, abren un cuadro de diálogo o un editor de colecciones desde el botón de puntos suspensivos de la celda de valor.
+6. **Vista de propiedades**: las propiedades de los objetos seleccionados en el Explorador TOM, en una cuadrícula con todas las propiedades TOM. Con la versión preliminar pública de la **vista de propiedades básicas** activada, la vista tiene dos pestañas en la parte inferior: **Básica** muestra los campos que Power BI Desktop muestra como un formulario, y **Avanzada** muestra la cuadrícula. Puedes editar la mayoría de las propiedades, incluso con varios objetos seleccionados. En la pestaña **Avanzado**, algunas propiedades, como **Cadena de formato**, **Cadena de conexión** y **Miembros del rol**, abren un cuadro de diálogo o un editor de colecciones desde el botón de puntos suspensivos de la celda de valor.
 7. **Vista de mensajes**: errores semánticos detectados por el análisis continuo de las expresiones DAX del modelo, además de mensajes de los scripts de C# y errores notificados por Analysis Services.
 8. **Barra de estado**: información sobre la selección actual, los resultados de Best Practice Analyzer y mucho más. El elemento de conexión muestra la base de datos y el servidor al que está conectado como `<database>@<server>`, o `<host>:<port>` para Power BI Desktop, y **(Sin conexión)** para un modelo cargado sin conexión. Cuando el [servidor MCP](xref:mcp-server) está disponible, un indicador en el extremo derecho indica **MCP iniciado** o **MCP detenido**, y su información sobre herramientas muestra la dirección en la que escucha el servidor. Haga clic en el indicador para abrir el cuadro de diálogo **Servidor MCP**, o haga clic con el botón derecho en él para iniciar o detener el servidor, copiar una configuración de registro para su agente o abrir la página de preferencias.
 
@@ -46,7 +46,7 @@ Puedes cambiar el tamaño y reorganizar todos los elementos de la interfaz de us
 
 Elige **Ventana > Diseño predeterminado** para restablecer la aplicación al diseño predeterminado, o **Ventana > Diseño clásico** para colocar el Explorador TOM a la izquierda y la vista de propiedades debajo del Editor de expresiones, como en Tabular Editor 2.x.
 
-Para cambiar entre tus propios diseños, guarda el actual con **Ventana > Capturar diseño** y aparecerá como opción en el menú **Ventana**. **Ventana > Diseños...** muestra todos los diseños; ahí puedes aplicarlos, cargarlos, quitarlos y guardarlos. Un diseño guardado en disco es un archivo .xml que puedes compartir con otros usuarios de Tabular Editor 3.
+Para cambiar entre sus propios diseños, guarde el actual con **Ventana > Capturar diseño**, y se convertirá en una opción del menú **Ventana**. **Ventana > Diseños...** muestra una lista de todos los diseños, donde puedes aplicarlos, cargarlos, eliminarlos y guardarlos. Un diseño guardado en el disco es un archivo .xml que puede compartir con otros usuarios de Tabular Editor 3. Un diseño mantiene el orden de las ventanas de herramientas acopladas como pestañas de documentos, como el **Editor de expresiones** o **Mensajes**, y cuáles de ellas están ancladas.
 
 ![Administrar diseños](~/content/assets/images/manage-layouts.png)
 
@@ -92,8 +92,7 @@ El _documento activo_ es el documento en el que está el cursor, como el Editor 
 > [!NOTE]
 > De forma predeterminada, los menús y las barras de herramientas están bloqueados. Para desbloquearlos, desmarca **Bloquear menús y barras de herramientas** en **Herramientas > Personalizar... > Opciones**.
 
-<!-- SCREENSHOT RESHOOT (3.27.1): active-document.png. Title bar uses the old format. Optional. -->
-![Documento activo](~/content/assets/images/active-document.png)
+![Tabular Editor 3 con el script DAX 1 como documento activo](~/content/assets/images/active-document.png)
 
 ### Archivo
 
@@ -144,9 +143,9 @@ Con **Detalle del origen del modelo** establecido en **Solo nombre** u **Oculto*
 
 El menú **Editar** permite editar el documento activo o los metadatos del modelo cargado.
 
-![Menú Editar](~/content/assets/images/edit-menu.png)
+![El menú «Editar» con «Restablecer zoom» en la parte inferior](~/content/assets/images/edit-menu.png)
 
-- **Deshacer**: deshace el último cambio en la parte de la ventana que tiene el foco. En un control de texto, como un documento o el **Editor de expresiones**, deshace la escritura y se muestra como **Deshacer escritura**. En otros casos, deshace el último cambio en los metadatos del modelo. **Ctrl+Z** ejecuta este comando.
+- **Deshacer**: deshace el último cambio en la parte de la ventana que tiene el foco. En un control de texto, como un documento o el **Editor de expresiones**, deshace la escritura y muestra **Deshacer escritura**. En otros lugares, incluidas las listas desplegables o los cuadros de texto de solo lectura, deshace el último cambio realizado en los metadatos del modelo. **Ctrl+Z** ejecuta este comando.
 - **Rehacer**: rehace el último cambio deshecho, siguiendo las mismas reglas que **Deshacer**. **Ctrl+Y** ejecuta este comando.
 - **Deshacer** / **Rehacer** seguidos del nombre de un cambio del modelo, por ejemplo **Deshacer C# Script (MCP)**: solo aparecen cuando un control de texto tiene el foco y deshacen o rehacen el último cambio en los metadatos del modelo. Consulta [Deshacer en editores de texto](xref:undo-redo#undo-in-text-editors).
 - **Buscar**: abre el cuadro de diálogo "Buscar y reemplazar" en la pestaña "Buscar". Consulta [Buscar](xref:find-replace#find).
@@ -160,6 +159,7 @@ El menú **Editar** permite editar el documento activo o los metadatos del model
 - **Seleccionar todo**: selecciona todo el texto del documento activo o todos los objetos que pertenecen al mismo elemento padre en el Explorador TOM.
 - **Code Assist**: accesos directos a las características de Code Assist para DAX. Disponible mientras editas DAX. Consulta el [Editor de DAX](xref:dax-editor#code-assist-features).
 - **Ajuste de línea**: activa o desactiva el ajuste de línea en el documento de texto activo.
+- **Restablecer zoom** (**Ctrl+0** o **Ctrl+0 del teclado numérico**): devuelve un editor de código ampliado con Ctrl+rueda del ratón al **Tamaño de fuente del editor de código** establecido en **Herramientas > Preferencias > Tabular Editor > Interfaces de usuario**. Disponible solo mientras el editor o la página activos estén ampliados. Consulte [Fuentes](xref:preferences#fonts).
 
 ### Vista
 
@@ -224,10 +224,9 @@ El menú **Ventana** administra y permite cambiar entre las vistas y los documen
 - **Nuevo...** crea [archivos auxiliares](xref:supported-files#supported-file-types). Las opciones son las mismas que en **Archivo > Nuevo**.
 
 - **Flotar** desacopla la vista o el documento actual y lo coloca en una ventana flotante.
-
-- **Fijar pestaña** fija una pestaña en el extremo izquierdo de la barra de pestañas del documento. El menú contextual de la pestaña tiene comandos que cierran solo las pestañas no fijadas.
-
-  ![Menú contextual de pestaña](~/content/assets/images/tab-context-menu.png)
+- **Anclar pestaña** ancla una pestaña al extremo izquierdo de las pestañas del documento. El menú contextual de la pestaña (al hacer clic con el botón derecho) contiene comandos que cierran únicamente las pestañas que no están ancladas, así como un comando **Duplicar** que abre una copia nueva y sin guardar de una consulta DAX, un script DAX, un script C#, un diagrama o una tabla dinámica, incluidas sus modificaciones no guardadas. Una copia de una consulta DAX no tiene resultados hasta que la ejecute. 
+  
+  ![Menú contextual de la pestaña con los comandos «Duplicar», «Anclar» y «Cerrar»](~/content/assets/images/tab-context-menu.png)
 
 - **Nuevo grupo de pestañas horizontal/vertical**: divide el área principal de documentos en grupos de pestañas para mostrar varios documentos uno al lado del otro o uno encima del otro.
 
@@ -259,7 +258,7 @@ El menú **Ayuda** enlaza a recursos en línea.
 - **Guía de introducción**: abre la guía de introducción de Tabular Editor 3 para nuevos usuarios.
 - **Soporte de la comunidad**: abre el [sitio público de soporte comunitario](https://github.com/TabularEditor/TabularEditor3).
 - **Soporte dedicado**: envía un correo electrónico a la línea directa de soporte dedicado.
-- **Primeros pasos**: abre la página **Primeros pasos**, que reúne cursos, demostraciones y documentación de Tabular Editor. Antes de la versión 3.27.0 de Tabular Editor, este elemento se llamaba **Novedades**. Para ver las notas de la versión, consulta @release-history.
+- **Primeros pasos**: abre la página **Primeros pasos**, que recopila cursos, demostraciones y documentación de Tabular Editor. Para consultar las notas de la versión, vea @release-history.
 
 > [!NOTE]
 > El soporte dedicado está reservado a los clientes de la Edición Enterprise de Tabular Editor 3. Los demás clientes deben usar el [sitio público de soporte de la comunidad](https://github.com/TabularEditor/TabularEditor3) para consultas técnicas y relacionadas con el producto.

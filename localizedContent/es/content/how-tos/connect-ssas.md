@@ -2,7 +2,7 @@
 uid: connect-ssas
 title: Conectar y desplegar en Analysis Services
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ Puedes abrir un modelo semántico directamente desde un servidor en lugar de des
 
 Selecciona **Archivo > Abrir > Modelo desde BD...** (**Ctrl+Mayús+O**) e introduce la dirección del servidor. Luego, Tabular Editor muestra las bases de datos de ese servidor para que puedas elegir cuál cargar.
 
-- Para **SQL Server Analysis Services**, usa el nombre de la instancia; por ejemplo, `localhost` o `myserver\\tabular`.
+- Para **SQL Server Analysis Services**, usa el nombre de la instancia; por ejemplo, `localhost` o `myserver\tabular`.
 - Para **Azure Analysis Services**, usa el nombre completo de la instancia, que empieza por `asazure://`.
 - Para el **punto de conexión XMLA de Power BI / Fabric**, usa la cadena de conexión del Workspace, que empieza por `powerbi://`.
 - La lista desplegable **Instancia local** muestra las instancias en ejecución de Power BI Desktop y los Workspaces Integrados de Visual Studio, de modo que puedas conectarte a una sin conocer su puerto.
@@ -44,4 +44,4 @@ Al guardar, se actualiza la base de datos a la que estás conectado. Para enviar
 
 ## Editar un modelo de Power BI Desktop
 
-Tabular Editor puede conectarse a una instancia en ejecución de Power BI Desktop mediante la lista desplegable **Instancia local**. A partir de la actualización de Power BI Desktop de junio de 2025, ya no hay operaciones de escritura no admitidas, por lo que las herramientas de terceros pueden modificar libremente el modelo semántico alojado en Power BI Desktop. En versiones anteriores, algunas operaciones están restringidas; consulta @desktop-limitations y @desktop-integration.
+Tabular Editor puede conectarse a una instancia en ejecución de Power BI Desktop a través del menú desplegable **Instancia local**. A partir de la actualización de junio de 2025 de Power BI Desktop, ya no hay operaciones de escritura no compatibles, por lo que las herramientas de terceros pueden modificar libremente el modelo semántico alojado en Desktop. En versiones anteriores, algunas operaciones están restringidas; consulte @desktop-integration.

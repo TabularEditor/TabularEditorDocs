@@ -2,7 +2,7 @@
 uid: proxy-settings
 title: 代理设置
 author: Daniel Otykier
-updated: 2024-11-07
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,25 +31,24 @@ applies_to:
 
 **信息：**
 
-- `No such host is known。 (login.microsoftonline.com:443)`
+- `No such host is known. (login.microsoftonline.com:443)`
 - `Unable to obtain authentication token using the credentials provided`
-- `The requested address is not valid in its context。 (login.microsoftonline.com:443)`
+- `The requested address is not valid in its context. (login.microsoftonline.com:443)`
 
-出现这种情况时，首先请尝试修改 Tabular Editor 3 的代理设置。你可以在 **工具 > 偏好设置 > 代理设置** 中找到这些设置：
+发生这种情况时，您首先应尝试更改 Tabular Editor 3 中的代理设置。你可以在**工具 > 首选项 > Tabular Editor > 代理设置**下找到这些设置：
 
 ![Tabular Editor 3 中的代理设置](~/content/assets/images/troubleshooting/proxy-settings.png)
 
 在大多数情况下，把 **代理类型** 从 `None` 改成 `System` 就能解决这个问题。这个设置会让 Tabular Editor 3 使用 Windows 中配置的系统级代理设置。如果问题仍然存在，你可以尝试把 **代理类型** 设为 `Custom`，然后手动输入代理服务器地址和端口。
+
+如果自定义代理需要用户名和密码，请取消选中**使用默认凭据**，然后在**用户名**和**密码**中输入用户名和密码。如果具有用户名和密码的自定义代理无法通过身份验证，请在**工具 > 首选项 > Tabular Editor > 代理设置**下再次输入密码，然后点击**确定**。
 
 > [!IMPORTANT]
 > 更改代理设置后，你必须重新启动 Tabular Editor 3，更改才会生效。
 
 # .NET Core 与 .NET Framework 的代理处理差异
 
-如果上述建议仍无法解决问题，从 Tabular Editor 的 3.21.0 版本开始，你可以尝试以下替代方案：
-
-> [!NOTE]
-> 下面列出的解决方案需要 Tabular Editor 3.21.0 或更高版本，因为这些 AS 配置选项仅在 AMO/TOM 客户端库 v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1) 中提供。较早版本的 Tabular Editor 3 使用的是这个客户端库的旧版本，它会忽略这些配置选项。
+如果上述建议无法解决问题，您可以尝试以下替代解决方案：
 
 创建一个名为 <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> 的文件，并将其放入 Tabular Editor 3 的安装目录（即 TabularEditor3.exe 所在的同一目录）。将以下内容添加到该文件中：
 

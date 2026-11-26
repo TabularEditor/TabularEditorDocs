@@ -2,7 +2,7 @@
 uid: best-practice-analyzer
 title: 最佳实践分析器
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ Best Practice Analyzer 会根据一组规则检查你的模型，并列出所有
 
 规则是针对模型对象编写的一个条件，并附带严重性级别和说明。规则涵盖那些容易出错、且事后才发现代价高昂的问题：本应下推到数据源的计算列、基于数据类型不匹配的列建立的关系、缺少格式字符串的度量值，以及本应隐藏却仍然可见的对象。
 
-按 **F10**，或点击主窗口中的问题数量，即可打开 Best Practice Analyzer。可在 **工具 > 偏好 > Best Practice Analyzer** 中关闭后台扫描（Tabular Editor 2 中为 **文件 > 偏好 > Best Practice Analyzer**）。
+按 **F10**，或单击主窗口中的问题计数，以打开 Best Practice Analyzer。可以在**工具 > 首选项 > Tabular Editor > 其他**（Tabular Editor 2 中为**文件 > 首选项**）下关闭后台扫描。
 
 ## 后续阅读
 

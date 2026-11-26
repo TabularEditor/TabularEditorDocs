@@ -2,7 +2,7 @@
 uid: object-properties-partitions
 title: Propiedades de la partición
 author: Jeroen ter Heerdt
-updated: 2026-11-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página describe las propiedades de las particiones, las políticas de actualización para la actualización incremental y las definiciones de cobertura de datos. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 Una partición define de dónde procede una parte de los datos de una tabla. Todas las tablas, salvo los grupos de cálculo, tienen al menos una partición, y la mayoría tienen exactamente una. Cada tipo de partición describe su origen de forma distinta:
@@ -45,8 +47,8 @@ Estas propiedades se aplican a cada tipo de partición. La vista **Propiedades**
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Mensaje de error](xref:object-properties-common#error-message)
@@ -54,16 +56,14 @@ Estas propiedades se aplican a cada tipo de partición. La vista **Propiedades**
 - [Estado](xref:object-properties-common#state)
 
 ### Data source
-
-`DataSource` · DataSource · Básico
+`DataSource` · Fuente de datos · General
 
 El Data source contra el que se ejecuta la consulta de la partición. Tabular Editor muestra esta propiedad en las particiones heredadas (de consulta) y en las particiones de entidad, donde puedes elegir uno de los Data sources del modelo en el menú desplegable. Las particiones de rango de directiva también muestran la propiedad, pero ahí siempre está vacía.
 
 Las particiones M no usan esta propiedad. Su expresión M nombra el Data source directamente, por ejemplo `Sql.Database("myserver", "mydb")`, o hace referencia a un origen de datos estructurado o a una expresión compartida. Consulta @object-properties-data-sources.
 
 ### Expresión
-
-`Expression` · string · Básico
+`Expression` · cadena · General
 
 La expresión que rellena la partición con datos. La vista **Propiedades** solo la muestra en las particiones calculadas, donde contiene la expresión DAX de la tabla calculada. En las particiones heredadas, el mismo texto aparece como `Query`, y en las particiones M como `MExpression`.
 
@@ -72,8 +72,7 @@ El **Explorador TOM** no muestra las particiones de las tablas calculadas (inclu
 En un script en C#, `Expression` lee y escribe la expresión de las particiones heredadas, calculadas y M. Al establecerla en cualquier otro tipo de partición, como una partición de entidad, se produce un error.
 
 ### Query
-
-`Query` · string · Básico
+`Query` · cadena · General
 
 La consulta nativa que el motor envía al Data source heredado para rellenar la partición, por ejemplo:
 

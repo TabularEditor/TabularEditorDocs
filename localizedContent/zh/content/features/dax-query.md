@@ -2,7 +2,7 @@
 uid: dax-query
 title: DAX 查询
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,7 @@ DAX 查询窗口提供六种不同的查询选项。
    - **当查询被修改时**：仅当查询结构发生变化时才会重置排序和筛选。
    - **始终**：只要新查询中仍包含这些列，就会保留排序和筛选。
 
-“自动执行查询”和“保留排序和筛选”偏好的默认值可以在“偏好”对话框中设置：**工具 > 偏好… > 数据浏览 > DAX 查询** > 基本。同一页面上的**切换模型时保持文档打开**部分控制着当您打开不同的模型时，打开的 DAX 查询会发生什么情况。请参阅[切换模型](#switching-models)。
+“自动执行查询”和“保留排序和筛选”首选项的默认值可以在“首选项”对话框的“工具”>“首选项”>“数据浏览”>“DAX 查询”中的“基本”部分进行设置。同一页面上的**切换模型时保持文档打开**部分控制着在您打开其他模型时已打开的 DAX 查询会发生什么。请参阅[切换模型](#switching-models)。
 
 ### 切换模型
 
@@ -59,9 +59,9 @@ DAX 查询窗口提供六种不同的查询选项。
 
 ### 使用 DAX 查询添加或更新度量值、列和表
 
-Tabular Editor（3.12.0 及更高版本）支持通过 DAX 查询窗口直接添加或更改度量值。
+您可以直接通过“DAX 查询”窗口添加或更改度量值。
 
-从 Tabular Editor 3.23.0 起，“应用”和“应用选择”也会处理 DEFINE COLUMN 和 DEFINE TABLE 语句。 Tabular Editor 会在模型中创建相应的计算列/计算表；如果它们已存在，则会更新其表达式。
+“应用”和“应用所选内容”也会处理 DEFINE COLUMN 和 DEFINE TABLE 语句。Tabular Editor 将在您的模型中创建相应的计算列/表，或者如果它们已存在，则更新其表达式。
 
 将 DAX 查询中 DEFINE 的度量值、列和表应用到模型有四个选项：
 
@@ -128,11 +128,13 @@ DAX 查询是可以运行 [DAX 调试器](xref:dax-debugger) 的两个位置之�
 
 DAX调试器使你能够理解 DAX 在单个单元格中是如何工作的。要启动调试器，只需在目标单元格上右键单击并选择“调试单元格”，调试器将以所选单元格为上下文启动。
 
+调试器将单步执行查询使用 `DEFINE MEASURE` 或 `DEFINE FUNCTION` 定义的度量值和函数，并且在您停止调试之前，查询将处于只读状态。查询重新定义的度量值或函数仅适用于查询自身的代码，而使用该度量值或函数的模型度量值则保留模型的定义。请参阅[DAX查询中定义的代码](xref:dax-debugger#code-defined-in-the-dax-query)。
+
 ![Dax 查询 调试器](~/content/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
 
 ## 导出 DAX 查询结果
 
-Tabular Editor 3 从 3.16.0 版本开始，新增将 DAX 查询结果导出为 CSV 或 Excel 的功能。运行 DAX 查询后，工具栏上会激活一个按钮，让你可以将结果以 CSV 或 Excel 格式保存到本地。
+您可以将 DAX 查询的结果导出为 CSV 或 Excel。运行DAX查询后，工具栏中会激活一个按钮，使用户能够以CSV或Excel格式将结果保存到本地。
 
 > [!TIP]
 > 要导出超过 1001 行的数据，请在运行 DAX 查询后选择“单击以获取所有行”

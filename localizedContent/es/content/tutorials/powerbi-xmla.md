@@ -2,7 +2,7 @@
 uid: powerbi-xmla
 title: Edición a través del punto de conexión XMLA
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Solo puntos de conexión XMLA de Premium por usuario
+          note: Premium Per User XMLA Endpoints Only
         - edition: Enterprise
           full: true
 ---
@@ -34,7 +34,8 @@ Tabular Editor requiere que el punto de conexión XMLA permita tanto el acceso d
 
 ## Limitaciones
 
-Al conectarte a un modelo semántico a través del punto de conexión XMLA, todas las operaciones de modelado de datos compatibles con el [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) están disponibles para su edición. En otras palabras, las [Limitaciones de Power BI Desktop](xref:desktop-limitations) no se aplican cuando se edita un modelo semántico a través del punto de conexión XMLA del servicio Power BI.
+Al conectarse a un modelo semántico a través del endpoint XMLA, todas las operaciones de modelado de datos admitidas por el [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) están disponibles para su edición.
+
 
 ## Flujo de trabajo
 

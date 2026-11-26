@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: Creación de un archivo PBIX a partir de un punto de conexión XMLA.
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Solo puntos de conexión XMLA de Premium por usuario"
+          note: "Only Premium Per User XMLA Endpoints"
         - edition: Enterprise
           full: true
 ---
@@ -54,7 +54,7 @@ Esto guardará el modelo remoto en el Proyecto de Power BI, que ahora contendrá
 Si la carpeta .pbip está configurada para almacenar el modelo como archivos [TMDL](xref:tmdl), tendrás que usar la opción Guardar en carpeta en Tabular Editor. Luego, navega hasta la carpeta del Proyecto de Power BI del modelo semántico (ModelName.SemanticModel), abre la carpeta "definition" y guarda ahí tu modelo.
 
 > [!NOTE]
-> Para habilitar TMDL, ve a **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** y selecciona "TMDL" en la lista desplegable **Modo de serialización**. Consulta la [documentación de TMDL para más información](xref:tmdl)
+> En Tabular Editor 3, **Archivo > Guardar en carpeta** guarda el TMDL cuando **Guardar en formato de carpeta** en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** es **TMDL**, que es el valor predeterminado. Consulta la [documentación de TMDL para obtener más información](xref:tmdl)
 
 ## Paso 3,1: Eliminar las particiones de actualización incremental y crear otras nuevas (Opcional)
 

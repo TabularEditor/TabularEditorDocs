@@ -2,7 +2,7 @@
 uid: connect-ssas
 title: 连接并部署到 Analysis Services
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ applies_to:
 
 选择 **文件 > 打开 > 从数据库打开模型...**（**Ctrl+Shift+O**），然后输入服务器地址。随后，Tabular Editor 会列出该服务器上的数据库，供你选择要加载的数据库。
 
-- 对于 **SQL Server Analysis Services**，使用实例名称，例如 `localhost` 或 `myserver\\tabular`。
+- 对于 **SQL Server Analysis Services**，使用实例名称，例如 `localhost` 或 `myserver\tabular`。
 - 对于 **Azure Analysis Services**，使用以 `asazure://` 开头的完整实例名称。
 - 对于 **Power BI / Fabric XMLA endpoint**，请使用以 `powerbi://` 开头的 Workspace 连接字符串。
 - **本地实例**下拉列表会列出正在运行的 Power BI Desktop 实例以及 Visual Studio 集成 Workspace，这样你就可以在不知道端口的情况下附加到其中一个。
@@ -44,4 +44,4 @@ applies_to:
 
 ## 编辑 Power BI Desktop 模型
 
-Tabular Editor 可以通过 **本地实例** 下拉列表附加到正在运行的 Power BI Desktop 实例。自 2025 年六月的 Power BI Desktop 更新起，已不再存在任何不受支持的写入操作，因此第三方工具可以自由修改托管在 Desktop 中的语义模型。在较早版本中，部分操作受限；请参阅 @desktop-limitations 和 @desktop-integration。
+Tabular Editor 可以通过“**本地实例**”下拉菜单连接到正在运行的 Power BI Desktop 实例。截至 2025 年 6 月的 Power BI Desktop 更新，不再存在任何不受支持的写入操作，因此第三方工具可以自由修改托管在 Desktop 中的语义模型。在早期版本中，某些操作受到限制；请参阅@desktop-integration。

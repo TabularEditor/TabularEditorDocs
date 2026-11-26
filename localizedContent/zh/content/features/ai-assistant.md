@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI 助手
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,12 +45,12 @@ AI 助手采用自带密钥（BYOK）模式，你提供来自某个受支持提�
 
 在 **工具 > 偏好 > AI 功能 > AI 助手 > AI 提供商** 中配置 AI 提供商。从下拉列表中选择一个提供商（在你完成配置之前，默认值为 **无（AI 已禁用）**），输入 API 密钥，并可选择覆盖默认模型。
 
-将模型字段留空即可使用提供商的默认模型。 OpenAI 和 Anthropic 都有默认值；Azure OpenAI 和自定义提供程序始终需要填写相应的值。
+将模型字段留空以使用提供商的默认模型。OpenAI 和 Anthropic 有默认值；Azure OpenAI 和自定义提供商始终需要一个值。选择 OpenAI 或 Anthropic 作为提供程序时，将填写默认模型名称。当默认值发生变化时，已保存在“首选项”中的模型名称不会发生变化。
 
 | 提供程序           | 默认模型                    | 需要配置                          |
 | -------------- | ----------------------- | ----------------------------- |
-| OpenAI         | gpt-5.5 | API 密钥。可选：基础 URL、组织 ID 和项目 ID |
-| Anthropic      | claude-sonnet-4-6       | API 密钥。可选：基础 URL              |
+| OpenAI | gpt-5.6-terra | API 密钥。可选的基本URL、组织ID和项目ID |
+| Anthropic | claude-sonnet-5-5 | API 密钥。可选的基本 URL |
 | Azure OpenAI   | 无。必须提供部署名称              | API 密钥、端点 URL 和部署名称           |
 | 自定义（兼容 OpenAI） | 无。必须提供模型名称              | API 密钥和自定义端点 URL              |
 
@@ -75,7 +75,7 @@ AI 助手采用自带密钥（BYOK）模式，你提供来自某个受支持提�
 
 选择 **Anthropic** 作为提供商，然后输入你的 API 密钥。模型名称可以填写你账户中可用的任何 Anthropic 模型。
 
-![AI 提供程序偏好设置页：提供程序选择为 Anthropic，基础 URL 为 https://api.anthropic.com，显示已遮盖的 API 密钥，模型名称为 claude-sonnet-4-6](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![“AI 提供商”偏好设置页面，其中选择了 Anthropic 作为提供商，基础 URL（可选）字段为空，API 密钥已隐藏，模型名称为 claude-sonnet-5-5](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
 > Anthropic 会根据你的账户等级，强制执行每分钟输入 token（ITPM）的速率限制。新创建的 API 密钥起始为 Tier 1，Claude Sonnet 4.x 的 ITPM 上限为 30,000。对大型模型发起的一次请求就可能超过此限制。购买 $40 或以上的 API 额度即可升至第 2 档（450,000 ITPM）。有关各档位的完整详情，请参阅 [Anthropic 速率限制文档](https://docs.anthropic.com/en/api/rate-limits)。
@@ -354,7 +354,7 @@ Tabular Editor 会按以下方式读取这些文件：
 聊天没有单独的“询问”级别，当它需要某个被设为 **拒绝** 的资源时，会显示一张[权限卡片](#permission-cards-in-the-chat)。
 
 > [!NOTE]
-> 从 3.27.0 起，**模型元数据**、**文档** 和 **宏** 默认设置为“读取”或更高级别，聊天也不会再为它们弹出提示。默认情况下，只有 DAX 查询结果和对 Best Practice Analyzer 规则的编辑会显示卡片。将某个资源设为 **拒绝**，就能让它重新弹出提示。
+> **模型元数据**、**文档**和**宏**的默认设置为“读取”或更高权限，聊天不会提示这些内容。默认情况下，只有 DAX 查询结果和 Best Practice Analyzer 规则编辑才会显示卡片。将资源设置为**拒绝**，以恢复其提示。
 
 > [!NOTE]
 > 在企业版中，管理员可以通过策略限制这些权限的上限。参见 @policies。
@@ -485,7 +485,7 @@ Token 计数器位于信息框上方的状态栏中，紧挨着[当前模型指�
 
 ## 禁用 AI 助手
 
-AI 助手是一个可选组件，自 Tabular Editor 3.27.0 起默认随产品安装。再次运行 Tabular Editor 3 安装程序，然后选择 **Modify**，以在现有安装中包含或排除该组件。升级会保留现有选择；请参阅[升级与 AI 功能组件](xref:installation-activation-basic#upgrades-and-the-ai-features-component)。在便携版本中，从安装目录中删除 `TabularEditor3.AI.dll` 即可将其移除。
+AI 助手是可选的**AI 功能**安装程序组件的一部分，该组件默认选中。再次运行 Tabular Editor 3 安装程序，然后选择**修改**，以便在现有安装中包含或排除该组件。从早期版本升级时会选择该组件，包括在未指定组件名称的无人值守升级中，后续升级将保留您的选择。管理员可以通过 `DisableAi` 策略或 `ADDLOCAL=MainFeature` 将其禁用；请参阅[升级和 AI 功能组件](xref:installation-activation-basic#upgrades-and-the-ai-features-component)。在便携式构建中，从安装目录中删除 `TabularEditor3.AI.dll` 以将其移除。
 
 同一个组件还包含 MCP 服务器，因此排除该组件或删除 `TabularEditor3.AI.dll` 会同时移除两者。如果只想关闭聊天功能，保留该组件并设置 `DisableAiChat` 策略。
 

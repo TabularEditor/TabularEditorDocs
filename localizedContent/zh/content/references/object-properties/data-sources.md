@@ -2,7 +2,7 @@
 uid: object-properties-data-sources
 title: 数据源和表达式属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of legacy and structured data sources, sha
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 本页介绍用于描述模型数据来源的对象：数据源、共享表达式、Query Group 以及数据绑定提示。有关大多数对象共有的属性，请参阅 @object-properties-common。有关使用这些对象的分区，请参阅 @object-properties-partitions。
 
@@ -49,7 +51,7 @@ SUMMARY: Reference for the properties of legacy and structured data sources, sha
 
 若要在保存的文件中包含机密信息，请在以下任一位置启用 **包含敏感信息**：
 
-- 在 Tabular Editor 3 中，位于 **工具 > 偏好 > 文件格式**（请参见 @preferences）；或者在当前模型的 **模型 > 序列化选项...** 中设置，且此设置优先于偏好设置
+- 在 Tabular Editor 3 中，在**工具 > 首选项 > 文件格式 > 常规**下（请参阅@preferences），或在当前模型的**模型 > 序列化选项…**下，后者优先于首选项
 - 在 Tabular Editor 2 中，位于 **文件 > 偏好...** 的 **序列化** 选项卡，在 **常规序列化设置** 下设置；或者针对你当前打开的模型，在 **当前模型** 选项卡下的 **当前模型序列化设置** 中设置
 
 不建议包含敏感数据。
@@ -74,8 +76,8 @@ Provider（旧版）数据源使用连接字符串，通过 OLE DB、ODBC 或托
 
 ### 常见属性
 
-- [名称](xref:object-properties-common#name)
-- [说明](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
@@ -88,11 +90,10 @@ Provider（旧版）数据源使用连接字符串，通过 OLE DB、ODBC 或托
 
 `Account` · string · 连接详细信息
 
-当 `ImpersonationMode` 为 `ImpersonateAccount` 时，服务器使用该 Windows 账户连接到源，例如 `CONTOSO\\svc-ssas-reader`。在 `Password` 中输入该账户的密码。其他模拟模式下请留空。
+当 `ImpersonationMode` 为 `ImpersonateAccount` 时，服务器使用该 Windows 账户连接到源，例如 `CONTOSO\svc-ssas-reader`。在 `Password` 中输入该账户的密码。其他模拟模式下请留空。
 
 ### 连接字符串
-
-`ConnectionString` · string · 连接详细信息
+`ConnectionString` · 字符串 · 连接详细信息 · **基本**
 
 服务器用来打开连接的连接字符串。关键字因提供程序而异，例如：
 
@@ -210,23 +211,21 @@ Structured数据源存在于兼容级别为 1400 及以上的 Analysis Services 
 
 ### 常见属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
 
 ### 协议
-
-`Protocol` · 字符串 · 基本
+`Protocol` · 字符串 · 常规 · **基本**
 
 连接类型，例如：SQL Server 和 Azure SQL 使用 `tds`，Oracle 使用 `oracle`；也可以是 `odbc`、`ole-db`；本地或网络文件使用 `file`；Azure Blob Storage 使用 `azure-blobs`；OData 源使用 `odata`。协议决定会使用哪些 **连接详细信息** 和 **凭据** 属性。
 
 该值可自由填写。 TOM `DataSourceProtocol` 类列出了 TOM 识别的名称，例如 `analysis-services`、`azure-tables`、`db2`、`folder`、`http`、`mysql`、`postgresql`、`sap-hana-sql`、`sharepoint-list` 和 `teradata`（完整列表请参阅 [DataSourceProtocol](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.datasourceprotocol)）。将表导入 Structured数据源时，Tabular Editor 3 会将 `Protocol` 设置为 SQL Server 和 Fabric SQL 终结点所用的 `tds`，或设置为 `odbc`、`ole-db` 或 `oracle`。
 
 ### Account
-
-`Account` · 字符串 · 连接详细信息
+`Account` · 字符串 · 连接详细信息 · **基本**
 
 对于连接到 Azure 存储帐户的协议（例如 Azure Blob Storage 或 Azure Table Storage），此属性为存储帐户名称。它与 `Domain` 一起构成帐户地址，例如帐户 `contosodata` 和域 `blob.core.windows.net`。
 
@@ -239,14 +238,12 @@ Structured数据源存在于兼容级别为 1400 及以上的 Analysis Services 
 <!-- TODO (not verifiable from TE3 source or the TOM reference, which only names each ConnectionAddress property): which protocols use Model, ContentType, EmailAddress, Object, Property, Resource and View, with an example value for each. The examples below for Model (analysis-services), EmailAddress (Exchange) and Resource (web URL) are unconfirmed. -->
 
 ### 模型
-
-`AddressModel` · string · 连接详细信息
+`AddressModel` · 字符串 · 连接详情 · **基本**
 
 `analysis-services` 等用于连接到语义模型或多维数据集的协议的模型名称。
 
 ### 连接字符串
-
-`ConnectionString` · string · 连接详细信息
+`ConnectionString` · 字符串 · 连接详细信息 · **基本**
 
 连接字符串，适用于需要连接字符串的协议，例如 `odbc` 和 `ole-db`。例如：
 
@@ -257,86 +254,72 @@ Driver={Snowflake};Server=contoso.snowflakecomputing.com;Warehouse=COMPUTE_WH
 在 **属性** 视图中，连接字符串中的密码会被遮蔽；保存到文件时会被移除（参见[凭据和保存](#credentials-and-saving)）。
 
 ### 内容类型
-
-`ContentType` · string · 连接详细信息
+`ContentType` · 字符串 · 连接详细信息 · **基本**
 
 源内容的类型，适用于需要了解读取内容格式的协议。
 
 ### 数据库
-
-`Database` · string · 连接详细信息
+`Database` · 字符串 · 连接详情 · **基本**
 
 服务器上数据库的名称，例如 `tds` 协议中的 `AdventureWorks`。
 
 ### 域名
-
-`Domain` · string · 连接详细信息
+`Domain` · 字符串 · 连接详情 · **基本**
 
 地址中的域名部分，例如 Azure Blob 存储的 `blob.core.windows.net`。通常与 `Account` 搭配使用。
 
 ### 电子邮件地址
-
-`EmailAddress` · string · 连接详细信息
+`EmailAddress` · 字符串 · 连接详细信息 · **基本**
 
 电子邮件地址，适用于通过用户电子邮件地址标识连接的协议，例如 Exchange。
 
 ### 对象
-
-`Object` · string · 连接详细信息
+`Object` · 字符串 · 连接详细信息 · **基本**
 
 源中对象的名称，适用于指定单个对象的协议。
 
 ### 路径
-
-`Path` · string · 连接详细信息
+`Path` · 字符串 · 连接详情 · **基本**
 
 文件或文件夹的路径，适用于 `file` 和 `folder` 等协议，例如 `\\fileserver\data\sales.csv`。负责刷新模型的服务器必须能够访问该路径。
 
 ### 属性
-
-`Property` · string · 连接详细信息
+`Property` · 字符串 · 连接详细信息 · **基本**
 
 特定协议的地址值。
 
 ### Query
-
-`Query` · 字符串 · 连接详细信息
+`Query` · 字符串 · 连接详情 · **基本**
 
 连接发送到数据源的本机查询，通常为 SQL，例如 `SELECT * FROM dbo.Customer`。大多数模型会将其留空，并在分区的 M 表达式中进行筛选。
 
 ### 资源
-
-`Resource` · 字符串 · 连接详细信息
+`Resource` · 字符串 · 连接详情 · **基本**
 
 特定于协议的资源标识符，例如 Web 资源的 URL。
 
 ### 架构
-
-`Schema` · 字符串 · 连接详细信息
+`Schema` · 字符串 · 连接详细信息 · **基本**
 
 对于按架构寻址的协议，此处为数据库中的架构。
 
 ### 服务器
-
-`Server` · 字符串 · 连接详细信息
+`Server` · 字符串 · 连接详情 · **基本**
 
 要连接的服务器，例如 `tds` 协议中的 `myserver.database.windows.net`。将同一模型部署到不同环境时，你通常会更改这个值。
 
 ### 网址
-
-`Url` · 字符串 · 连接详细信息
+`Url` · 字符串 · 连接详情 · **基本**
 
 源的 URL，适用于 `odata` 和 `http` 等协议，例如 `https://services.odata.org/V4/Northwind/Northwind.svc`。
 
 ### 视图
-
-`View` · 字符串 · 连接详细信息
+`View` · 字符串 · 连接详情 · **基本**
 
 对于按视图寻址的协议，此处为数据源中视图的名称。
 
 ### AuthenticationKind
-
-`AuthenticationKind` · 字符串 · 凭据
+`AuthenticationKind` · 字符串 · 凭据 · **基本**
 
 服务器向数据源进行身份验证的方式。从下拉列表中选择一个值，或直接输入：
 
@@ -437,8 +420,8 @@ _M 参数_ 是带有 `meta` 记录并标记为参数的共享表达式，例如�
 
 ### 常见属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
@@ -516,7 +499,7 @@ Query Group 需要兼容级别 1480 或更高。删除某个 Query Group 时，T
 
 `Folder` · 字符串 · 选项
 
-Query Group 的路径，例如 `Parameters`；若该组嵌套在其他组内，则为 `Staging\\Sales`。 Query Group 的名称与其文件夹相同，修改其中一个会同步修改另一个。
+Query Group 的路径，例如 `Parameters`；若该组嵌套在其他组内，则为 `Staging\Sales`。 Query Group 的名称与其文件夹相同，修改其中一个会同步修改另一个。
 
 Power BI Desktop 使用反斜杠分隔嵌套的 Query Group，并为每个层级创建一个 Query Group。如果组 `Dates` 位于组 `Staging` 内，则模型包含 Query Group `Staging` 和 `Staging\Dates`，而内层组中的查询的 `QueryGroup` 为 `Staging\Dates`。
 

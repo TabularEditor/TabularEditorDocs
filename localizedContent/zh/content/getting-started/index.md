@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: 欢迎
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-13
 ---
 
 # 欢迎
@@ -41,7 +41,6 @@ updated: 2026-09-14
 **Power BI Desktop 与 Tabular Editor**
 
 - @desktop-integration
-- @desktop-limitations
 
 **用户界面**
 

@@ -2,7 +2,7 @@
 uid: user-interface
 title: 基本用户界面
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,12 +27,12 @@ applies_to:
 
 ![基本用户界面](~/content/assets/images/basic-ui.png)
 
-1. **标题栏**：已加载文件的名称，或者您已连接的 Analysis Services 数据库或 Power BI 语义模型的名称。
+1. **标题栏**：已加载文件的名称，或您所连接的 Analysis Services 数据库或 Power BI 语义模型的名称，以及 Tabular Editor 3 的版本，例如 **v28.0.0**。
 2. **菜单栏**：Tabular Editor 3 的所有功能。请参阅[菜单](#menus)了解每个菜单。
 3. **工具栏**：最常用的功能。每个工具栏命令也位于菜单中。在**工具 > 自定义……**下自定义工具栏及其按钮。
 4. **TOM 资源管理器视图**：模型对象的树状视图，由 [Tabular Object Model (TOM)](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据构建而成。顶部的切换按钮用于筛选要显示的对象类型，搜索框用于按名称筛选对象。
 5. **表达式编辑器**：编辑在 TOM Explorer 中选定对象的 DAX、SQL 或 M 表达式。如果您将其关闭，请双击 TOM Explorer 中的对象以再次打开。如果对象具有多个表达式属性，则顶部的下拉菜单可在它们之间切换。例如，KPI 具有目标、状态和趋势表达式。
-6. **属性视图**：在 TOM Explorer 中选定对象的所有 TOM 属性。您可以在网格中编辑大多数属性，也可以在选择多个对象时进行编辑。对于某些属性（例如**格式字符串**、**连接字符串**和**角色成员**），可以通过值单元格中的省略号按钮打开对话框或集合编辑器。
+6. **属性视图**：在包含所有 TOM 属性的网格中显示在 TOM Explorer 中选定对象的属性。启用**基本属性视图**公开预览后，该视图底部有两个选项卡：**基本**显示 Power BI Desktop 以表单形式显示的字段，**高级**显示网格。您可以编辑大多数属性，也可以在选择多个对象时进行编辑。在**“高级”**选项卡上，对于某些属性（例如**“格式字符串”**、**“连接字符串”**和**“角色成员”**），可以通过值单元格中的省略号按钮打开对话框或集合编辑器。
 7. **消息视图**：通过对模型的 DAX 表达式进行持续分析发现的语义错误，以及来自 C# 脚本的消息和 Analysis Services 报告的错误。
 8. **状态栏**：有关当前选择、Best Practice Analyzer 发现结果等的信息。连接项将您连接到的数据库和服务器显示为 `<database>@<server>`，或对于 Power BI Desktop 显示为 `<host>:<port>`，对于在没有连接的情况下加载的模型显示为 **(无连接)**。当 [MCP 服务器](xref:mcp-server)可用时，右端的指示器显示 **MCP 已启动** 或 **MCP 已停止**，其工具提示显示服务器侦听的地址。单击指示器以打开**MCP 服务器**对话框，或右键单击指示器以启动或停止服务器、复制代理的注册配置或打开首选项页面。
 
@@ -46,7 +46,7 @@ applies_to:
 
 选择 **窗口 > 默认布局** 可将应用程序重置为默认布局；或者选择 **窗口 > 经典布局**，将 TOM Explorer 放在左侧，并将属性视图放在表达式编辑器下方，就像 Tabular Editor 2.x 一样。
 
-要在自己保存的布局之间切换，请通过 **窗口 > 捕获布局** 保存当前布局，这样它就会出现在 **窗口** 菜单中供你选择。**窗口 > 布局...** 会列出所有布局，你可以在这里应用、加载、删除和保存布局。保存到磁盘的布局会以 .xml 文件形式存储，你可以与其他 Tabular Editor 3 用户共享。
+要切换您自己的布局，请使用“窗口”>“捕获布局”保存当前布局，它将成为“窗口”菜单中的一个选项。**“窗口”>“布局...”**列出了所有布局，您可以在其中应用、加载、移除和保存布局。保存到磁盘的布局是一个 .xml 文件，您可以与其他 Tabular Editor 3 用户共享该文件。布局会保留作为文档选项卡固定的工具窗口（例如**表达式编辑器**或**消息**）的顺序，以及其中哪些窗口被锁定。
 
 ![管理布局](~/content/assets/images/manage-layouts.png)
 
@@ -92,8 +92,7 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 > [!NOTE]
 > 默认情况下，菜单和工具栏会锁定在原位。要解锁，请取消选中 **锁定菜单和工具栏**，位于 **工具 > 自定义…… > 选项**。
 
-<!-- SCREENSHOT RESHOOT (3.27.1): active-document.png. Title bar uses the old format. Optional. -->
-![Active Document](~/content/assets/images/active-document.png)
+![Tabular Editor 3，其中 DAX 脚本 1 为活动文档](~/content/assets/images/active-document.png)
 
 ### 文件
 
@@ -144,9 +143,9 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 
 **编辑**菜单用于编辑活动文档或已加载的模型元数据。
 
-![编辑菜单](~/content/assets/images/edit-menu.png)
+![“编辑”菜单，底部显示“重置缩放”](~/content/assets/images/edit-menu.png)
 
-- **撤销**：撤销当前获得焦点的窗口区域中的上一项更改。在文本控件中（如文档或 **表达式编辑器**），它会撤销输入，命令名称显示为 **撤销输入**。在其他位置，它会撤销对模型元数据所做的最后一次更改。 **Ctrl+Z** 执行此命令。
+- **撤消**：撤消窗口中具有焦点的部分中的上一次更改。在文本控件（例如文档或**表达式编辑器**）中，它会撤消键入操作，并显示为**撤消键入**。在其他地方（包括下拉列表或只读文本框），它会撤消对模型元数据的上一次更改。**Ctrl+Z** 可运行此命令。
 - **重做**：重做上一次已撤销的更改，规则与 **撤销** 相同。 **Ctrl+Y** 执行此命令。
 - **撤销** / **重做** 后跟模型更改名称，例如 **撤销 C# script (MCP)**：仅当文本控件获得焦点时才会出现，用于撤销或重做对模型元数据所做的最后一次更改。参见 [文本编辑器中的撤销](xref:undo-redo#undo-in-text-editors)。
 - **查找**：打开“查找和替换”对话框，并切换到“查找”选项卡。参见[查找](xref:find-replace#find)。
@@ -160,6 +159,7 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 - **全选**：选中活动文档中的所有文本，或选中 TOM Explorer 中具有相同父级的所有对象。
 - **Code Assist**：用于 DAX 的 Code Assist 功能的快捷方式。在编辑 DAX 时可用。请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
 - **自动换行**：在当前活动的文本文档中切换是否启用自动换行。
+- **重置缩放**（**Ctrl+0** 或 **Ctrl+NumPad0**）：将使用 Ctrl+鼠标滚轮缩放的代码编辑器恢复为在 **工具 > 首选项 > Tabular Editor > 用户界面**下设置的**代码编辑器字体大小**。仅在活动编辑器或页面缩放时可用。请参阅[字体](xref:preferences#fonts)。
 
 ### 视图
 
@@ -224,10 +224,9 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 - **新建...**：用于创建[支持文件](xref:supported-files#supported-file-types)。这些选项与 **文件 > 新建** 中的选项相同。
 
 - **浮动**：将当前视图或文档从停靠状态解除，并在浮动窗口中显示。
-
-- **固定选项卡**：将选项卡固定在文档选项卡区域的最左侧。选项卡的右键菜单中包含仅关闭未固定选项卡的命令。
-
-  ![标签页上下文菜单](~/content/assets/images/tab-context-menu.png)
+- **固定选项卡**将选项卡固定到文档选项卡的左端。选项卡右键菜单包含仅关闭未固定的选项卡的命令，以及**复制**命令，该命令可打开 DAX 查询、DAX 脚本、C# 脚本、图表或数据透视表的未保存的新副本，包括其未保存的编辑内容。在您运行 DAX 查询副本之前，该副本不会有任何结果。 
+  
+  ![包含“复制”以及“固定”和“关闭”命令的选项卡右键菜单](~/content/assets/images/tab-context-menu.png)
 
 - **新建水平/垂直选项卡组**：将主文档区域拆分为多个选项卡组，以并排或上下显示多个文档。
 
@@ -259,7 +258,7 @@ _活动文档_ 是指当前光标所在的文档，比如表达式编辑器或�
 - **入门指南**：打开面向新用户的 Tabular Editor 3 入门指南。
 - **社区支持**：打开我们的[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)。
 - **专属支持**：发送电子邮件至专属支持热线。
-- **开始使用**：这个菜单项会打开 **开始使用** 页面，其中汇集了 Tabular Editor 的课程、演示和文档。在 Tabular Editor 3.27.0 之前，此项名为 **What's New**。有关发布说明，请参阅 @release-history。
+- **入门**：打开**入门**页面，该页面汇集了 Tabular Editor 的课程、演示和文档。有关发布说明，请参阅 @release-history。
 
 > [!NOTE]
 > 专属支持仅面向 Tabular Editor 3 企业版客户。其他客户如果有技术或产品相关问题，可以前往[公开社区支持站点](https://github.com/TabularEditor/TabularEditor3)寻求帮助。

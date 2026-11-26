@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: Asistente de IA
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,12 +45,12 @@ También puedes usar tu propio agente a través del [servidor MCP](xref:mcp-serv
 
 Configura tu proveedor de IA en **Herramientas > Preferencias > Funciones de IA > Asistente de IA > Proveedor de IA**. Selecciona un proveedor en la lista desplegable (el valor predeterminado es **Ninguno (IA deshabilitada)** hasta que configures uno), introduce tu clave de API y, si lo deseas, reemplaza el modelo predeterminado.
 
-Deja en blanco el campo del modelo para usar el modelo predeterminado del proveedor. OpenAI y Anthropic tienen valores predeterminados; Azure OpenAI y el proveedor personalizado siempre requieren un valor.
+Deje el campo del modelo en blanco para usar el modelo predeterminado del proveedor. OpenAI y Anthropic tienen valores predeterminados; Azure OpenAI y el proveedor personalizado siempre necesitan un valor. Al seleccionar OpenAI o Anthropic como proveedor, se rellena el nombre del modelo predeterminado. Un nombre de modelo ya guardado en Preferencias no cambia cuando cambia el predeterminado.
 
 | Proveedor                                                | Modelo predeterminado                                            | Configuración necesaria                                                                |
 | -------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| OpenAI                                                   | gpt-5.5                                          | Clave de API. URL base, ID de organización e ID de proyecto opcionales |
-| Anthropic                                                | claude-sonnet-4-6                                                | Clave de API. URL base opcional                                        |
+| OpenAI | gpt-5.6-terra | Clave de API. URL base, ID de organización e ID de proyecto opcionales |
+| Anthropic | claude-sonnet-5-5 | Clave de API. URL base opcional |
 | Azure OpenAI                                             | Ninguno. Se requiere un nombre de implementación | Clave de API, URL del punto de conexión y nombre de la implementación                  |
 | Personalizado (compatible con OpenAI) | Ninguno. Se requiere un nombre de modelo         | Clave de API y URL personalizada del punto de conexión                                 |
 
@@ -75,7 +75,7 @@ Selecciona **OpenAI** como proveedor e introduce tu clave de API. Si tu cuenta d
 
 Selecciona **Anthropic** como proveedor e introduce tu clave de API. El nombre del modelo admite cualquier modelo de Anthropic disponible en tu cuenta.
 
-![La página de preferencias del Proveedor de IA con Anthropic seleccionado como proveedor, la URL base https://api.anthropic.com, una clave de API oculta y claude-sonnet-4-6 como nombre del modelo](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![La página de preferencias del proveedor de IA con Anthropic seleccionado como proveedor, un campo de URL base (opcional) vacío, una clave API oculta y claude-sonnet-5-5 como nombre del modelo](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
 > Anthropic aplica límites de velocidad de tokens de entrada por minuto (ITPM) en función del nivel de tu cuenta. Una nueva clave de API empieza en el Nivel 1 con 30.000 ITPM para Claude Sonnet 4.x. Una sola solicitud a un modelo grande puede superar este límite. Compra 40 USD o más en créditos de API para alcanzar el Nivel 2 (450.000 ITPM). Consulta la [documentación de límites de velocidad de Anthropic](https://docs.anthropic.com/en/api/rate-limits) para ver todos los detalles de los niveles.
@@ -355,7 +355,7 @@ Abre **Herramientas > Preferencias > Funciones de IA > Permisos**, donde cada re
 El chat no tiene un nivel independiente de "solicitar" y muestra una [tarjeta de permiso](#permission-cards-in-the-chat) cuando necesita un recurso configurado en **Denegar**.
 
 > [!NOTE]
-> A partir de la versión 3.27.0, **Metadatos del modelo**, **Documentos** y **macros** tienen como valor predeterminado Lectura o un nivel superior, y el chat ya no los solicita. De forma predeterminada, solo los resultados de consultas DAX y las ediciones de reglas de Best Practice Analyzer muestran una tarjeta. Establece un recurso en **Denegar** para que vuelva a mostrarse su solicitud.
+> **Metadatos del modelo**, **Documentos** y **Macros** tienen como valor predeterminado Lectura o superior, y el chat no los solicita. De forma predeterminada, solo los resultados de las consultas DAX y las modificaciones de las reglas del Best Practice Analyzer muestran una tarjeta. Establezca un recurso en **Denegar** para que vuelva a aparecer su solicitud.
 
 > [!NOTE]
 > En la Edición Enterprise, los administradores pueden limitar estos permisos mediante una directiva. Consulta @policies.
@@ -486,7 +486,7 @@ Otras formas de reducir el uso de tokens:
 
 ## Desactivar el Asistente de IA
 
-El Asistente de IA es un componente opcional, instalado de forma predeterminada a partir de Tabular Editor 3.27.0. Ejecuta de nuevo el instalador de Tabular Editor 3 y selecciona **Modificar** para incluirlo o excluirlo de una instalación existente. Una actualización mantiene la selección existente; consulta [Actualizaciones y el componente de características de IA](xref:installation-activation-basic#upgrades-and-the-ai-features-component). En la versión portátil, elimina `TabularEditor3.AI.dll` del directorio de instalación para quitar este componente.
+El asistente de IA forma parte del componente opcional del instalador de **funciones de IA**, que está seleccionado de forma predeterminada. Ejecuta de nuevo el instalador de Tabular Editor 3 y selecciona **Modificar** para incluirlo o excluirlo de una instalación existente. Al actualizar desde una versión anterior, se selecciona el componente, incluso en las actualizaciones automáticas que no especifican los componentes, y las actualizaciones posteriores mantienen su elección. Los administradores lo mantienen desactivado con la política `DisableAi` o `ADDLOCAL=MainFeature`; consulte [Actualizaciones y el componente de funciones de IA](xref:installation-activation-basic#upgrades-and-the-ai-features-component). En la compilación portátil, elimina `TabularEditor3.AI.dll` del directorio de instalación para quitarlo.
 
 El mismo componente contiene el servidor MCP, por lo que excluirlo o eliminar `TabularEditor3.AI.dll` elimina ambos. Para desactivar solo el chat, mantén el componente y establece la directiva `DisableAiChat`.
 

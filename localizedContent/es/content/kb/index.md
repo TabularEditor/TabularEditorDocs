@@ -36,6 +36,10 @@ Directrices completas para crear modelos de Power BI y Analysis Services de alta
 - @kb.bpa-specify-application-name - Establecer nombres de aplicación en las cadenas de conexión para la supervisión
 - @kb.bpa-powerbi-latest-compatibility - Mantener la compatibilidad con las últimas funcionalidades de Power BI
 - @kb.bpa-udf-use-compound-names - Asegúrate de que los nombres de las UDF no entren en conflicto con funciones DAX integradas que puedan añadirse en el futuro
+- @kb.bpa-role-security-not-enforced - Usar el permiso de lectura en roles con seguridad a nivel de fila o de objeto
+- @kb.bpa-powerbi-role-read-permission - Establecer el permiso de lectura para todos los roles de un modelo de Power BI
+- @kb.bpa-role-unrestricted-read - Buscar roles que aumenten la seguridad de otros roles
+- @kb.bpa-role-mixed-rls-ols-members - Evitar a los miembros cuyos roles combinados mezclan la seguridad a nivel de fila y a nivel de objeto
 
 ## Acciones de código
 

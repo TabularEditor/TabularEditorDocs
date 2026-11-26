@@ -99,20 +99,20 @@ Tabular Editor 3 ofrece muchas opciones de configuración. La configuración pre
 
 ### Buscar actualizaciones al iniciar
 
-De forma predeterminada, cada vez que se inicia Tabular Editor 3, la herramienta comprueba en línea si hay una versión más reciente disponible. Puedes controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Actualizaciones y comentarios**.
+De forma predeterminada, cada vez que se inicia Tabular Editor 3, la herramienta verifica en línea si hay una versión más reciente disponible. Puede controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**.
 
 > [!NOTE]
 > Usa siempre la versión más reciente de Tabular Editor 3. Nuestro equipo de soporte asume que estás usando la versión más reciente antes de enviar un Report de errores.
 
 ### Desactivar la recopilación de telemetría
 
-Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda a mejorar el producto. Puedes desactivarla en cualquier momento: inicia Tabular Editor 3 y ve a **Herramientas > Preferencias > Actualizaciones y comentarios**. Desmarca la casilla **Ayuda a mejorar Tabular Editor recopilando datos de uso anónimos** para dejar de participar.
+Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda a mejorar el producto. Puedes darte de baja en cualquier momento iniciando Tabular Editor 3 y yendo a **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**. Desmarque la casilla **Ayudar a mejorar Tabular Editor recopilando datos de uso anónimos** para darse de baja.
 
 ![Recopilar telemetría](~/content/assets/images/getting-started/collect-telemetry.png)
 
 ### Configuración del proxy
 
-Si estás en una red con conectividad limitada a Internet, especifica la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Configuración de proxy**. Esto es necesario para que Tabular Editor 3 pueda usar cualquier característica que dependa de solicitudes web salientes. En concreto:
+Si estás en una red con conectividad a Internet limitada, especifica la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Tabular Editor > Configuración de proxy**. Esto es necesario para que Tabular Editor 3 pueda usar cualquier función que dependa de solicitudes web salientes. En concreto:
 
 - Comprobaciones de actualizaciones
 - Activación del producto

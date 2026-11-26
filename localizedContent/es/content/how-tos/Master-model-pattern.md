@@ -1,4 +1,4 @@
----
+﻿---
 uid: master-model-pattern
 title: Patrón del modelo maestro
 applies_to:
@@ -29,7 +29,7 @@ La idea es bastante simple. Empieza agregando varias perspectivas nuevas al mode
 
 ![imagen](~/content/assets/images/master-model-pattern-02.png)
 
-Aquí usamos el signo `-` como prefijo en los nombres de las perspectivas. Más adelante veremos cómo se eliminan estas perspectivas del modelo, de modo que los usuarios finales no las vean. Solo las usan los desarrolladores del modelo.
+Aquí usamos el signo ``$`` como prefijo en los nombres de las perspectivas. Más adelante veremos cómo se eliminan estas perspectivas del modelo, de modo que los usuarios finales no las vean. Solo las usan los desarrolladores del modelo.
 
 Ahora, simplemente agrega a estas perspectivas todos los objetos que se necesiten en los modelos individuales. Usa la lista desplegable de perspectiva en Tabular Editor para confirmar que un modelo contiene los objetos necesarios. Aquí tienes un script práctico que también puedes usar para asegurarte de que todas las dependencias estén incluidas en la perspectiva:
 
@@ -138,7 +138,7 @@ Para las medidas, hacemos lo mismo, pero de forma simplificada: solo quitamos la
 - La medida está oculta (o la tabla donde se encuentra la medida está oculta)
 - No se hace referencia a la medida, directa ni indirectamente, en ninguna expresión DAX de otros objetos visibles de la perspectiva
 
-Si trabajas en un equipo de desarrolladores en el modelo, ya deberías estar usando la funcionalidad ["Guardar en carpeta"](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Asegúrate de marcar la opción "Serializar perspectivas por objeto" en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** (**Archivo > Preferencias > Guardar en carpeta** en Tabular Editor 2) para evitar muchos conflictos de fusión en las definiciones de tus perspectivas.
+Si forma parte de un equipo de desarrolladores que trabaja en el modelo, ya debería estar utilizando la [funcionalidad «Guardar en carpeta»](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Asegúrese de marcar la opción **Serializar información de pertenencia a perspectivas en objetos** en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta > Serialización JSON** (**Archivo > Preferencias > Guardar en carpeta** en Tabular Editor 2), para evitar que se produzcan numerosos conflictos de fusión en sus definiciones de perspectivas.
 
 ![imagen](~/content/assets/images/master-model-pattern-05.png)
 

@@ -2,7 +2,7 @@
 uid: accessibility
 title: Accesibilidad
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,6 +34,10 @@ En **Herramientas > Preferencias > Tabular Editor > Teclado**, puedes asignar tu
 ## Escalado de pantalla
 
 Tabular Editor usa el escalado de pantalla configurado en Windows en **Configuración > Sistema > Pantalla**.
+
+## Fuentes
+
+Establezca la fuente y el tamaño del texto de la interfaz de usuario y el tamaño del texto de los editores de código en el grupo **Fuentes** en **Herramientas > Preferencias > Tabular Editor > Interfaz de usuario**. Los tamaños van de 8 pt a 14 pt, y los cambios se aplican después de reiniciar Tabular Editor. Para ampliar un editor de código en la sesión actual, pulse **Ctrl** y gire la rueda del ratón, y pulse **Ctrl+0** para volver al tamaño preferido. Consulte [Fuentes](xref:preferences#fonts).
 
 ## Temas
 

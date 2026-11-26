@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: 列属性
 author: Jeroen ter Heerdt
-updated: 2026-11-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页列出了三种列的属性，以及属于列的两个对象 Alternate Of 和 Variation 的属性。有关大多数对象共有的属性，参见 @object-properties-common。
 
 一个表包含三种列：
@@ -41,10 +43,10 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [说明](xref:object-properties-common#description)
-- [显示文件夹](xref:object-properties-common#display-folder)
-- [隐藏](xref:object-properties-common#hidden)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
+- [显示文件夹](xref:object-properties-common#display-folder) · **基本**
+- [隐藏](xref:object-properties-common#hidden) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [已更改属性](xref:object-properties-common#changed-properties)
@@ -61,8 +63,7 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 - [在透视视图中显示](xref:object-properties-common#shown-in-perspective)
 
 ### 数据类型
-
-`DataType` · DataType · 基本
+`DataType` · 数据类型 · 常规 · **基本**
 
 列值的数据类型。它决定引擎如何存储这些值，以及哪些 DAX 函数和运算符可接受这些值。关系中的两列必须具有相同的数据类型。
 
@@ -88,16 +89,14 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 Best Practice Analyzer (BPA) 规则 @kb.bpa-relationship-same-datatype 会标记数据类型不同的列之间的关系。
 
 ### 格式字符串
-
-`FormatString` · 字符串 · 基本
+`FormatString` · 字符串 · 常规 · **基本**
 
 客户端工具在显示此列的值时应用的格式，例如 `#,0`、`0.00%` 或 `yyyy-mm-dd`。其语法与 DAX [FORMAT](https://dax.guide/format) 函数相同。 DAX 查询返回未格式化的值。当 Report 作者将数值列拖入 Visual 时，Power BI 会创建隐式度量值，该格式同样适用。
 
 可见的数值列和日期列如果没有格式字符串，就会显示原始值，例如 `1234567.891`，或者显示带时间部分的日期。参见 @kb.bpa-format-string-columns。
 
 ### 按列排序
-
-`SortByColumn` · 列 · 基本
+`SortByColumn` · 列 · 常规 · **基本**
 
 同一表中的另一列，其值用于确定此列值的排序顺序。例如，可按 `Month Number` 列对 `Month Name` 列排序，以按日历顺序显示月份。
 
@@ -109,8 +108,7 @@ Best Practice Analyzer (BPA) 规则 @kb.bpa-relationship-same-datatype 会标记
 C# Script @script-create-date-table 会创建日期表，并为其中的名称列设置 `SortByColumn`。
 
 ### 汇总方式
-
-`SummarizeBy` · 聚合函数 · 基本
+`SummarizeBy` · AggregateFunction · 常规 · **基本**
 
 当 Report 作者在没有度量值的情况下将该列作为值拖入 Visual 时，客户端工具会应用的聚合方式。 Power BI 将这称为 _默认汇总_，并将它即时创建的度量值称为 _隐式度量值_。
 
@@ -157,8 +155,7 @@ Power BI 会忽略此属性。表格和矩阵 Visual 始终将文本左对齐、
 C# Script @script-implement-user-defined-aggregations 会为选定的聚合表创建明细表，并在其数值列上配置 `AlternateOf`。
 
 ### 数据类别
-
-`DataCategory` · string · 选项
+`DataCategory` · 字符串 · 选项 · **基本**
 
 列所包含的值类型，客户端工具会据此以特殊方式处理该列。例如，Power BI 会将类别为 `City` 的列放到地图上，将类别为 `ImageUrl` 的列显示为图像，并将类别为 `WebUrl` 的列显示为可点击的链接。普通列留空即可。
 
@@ -255,8 +252,7 @@ MDX 客户端(如 Excel)会将这些列视为复合键，因此，在数据透�
 将该列标记为用户用来识别表中某一行的标签，例如产品名称。这是 Power View 曾使用的一项表行为设置。目前没有任何客户端使用它。 Power View 和 Power BI Q&A 都支持过它，但两者现已停用。
 
 ### 键
-
-`IsKey` · bool · 选项
+`IsKey` · 布尔值 · 选项 · **基本**
 
 将该列标记为表的键，即其值用于标识每一行的列。一个表最多只能有一个键列：当你将某列的 `IsKey` 设为 `true` 时，Tabular Editor 会将该表中其他列的 `IsKey` 设为 `false`，并保持 `IsUnique` 和 `IsNullable` 不变。键列不能包含重复值或空白值，因此如果刷新时加载了重复值，就会失败。
 
@@ -265,8 +261,7 @@ MDX 客户端(如 Excel)会将这些列视为复合键，因此，在数据透�
 BPA 规则 @kb.bpa-date-table-exists 会标记以下模型：没有日历、没有 `DataCategory` 为 `Time` 的表，也没有 `DateTime` 键列。
 
 ### 可为空值
-
-`IsNullable` · bool · 选项
+`IsNullable` · 布尔值 · 选项 · **基本**
 
 该列是否可以包含空白值（null）。默认值为 `true`。如果将其设为 `false`，当源返回空白值时，刷新会失败，这可作为数据质量检查。键列始终不允许空白值，无论此属性的值是什么。
 
@@ -370,8 +365,7 @@ Excel 不再将其用于钻取：在 Excel 数据透视表中，无论 `TableDet
 在 Tabular Editor 3 中，@import-tables 向导会创建数据列，并设置其数据类型和源列映射，而 **更新表架构** 会在源发生变化时更新这些列。
 
 ### 源列
-
-`SourceColumn` · 字符串 · 基本
+`SourceColumn` · 字符串 · 常规 · **基本**
 
 此列获取值所依据的分区查询结果中的列名。它必须与查询返回的列名一致。如果不一致，例如有人在 Power Query 中重命名了列，刷新就会失败。
 
@@ -423,8 +417,7 @@ Sales[Quantity] * Sales[Unit Price]
 你可以更改列的显示属性，例如 `FormatString`、`IsHidden` 和 `SortByColumn`。要重命名该列，先将 `IsNameInferred` 设置为 `false`。此列具有 [所有列的属性](#properties-of-all-columns) 中列出的属性，以及下面这些属性。
 
 ### 源列
-
-`SourceColumn` · string · 基本 · 只读
+`SourceColumn` · 字符串 · 常规 · 只读
 
 这是计算表格表达式结果中的列名，此列从该列获取值。 Tabular Editor 3 会在分析表达式时设置该属性，而在模型保存到服务器时，引擎也会设置该属性。重命名该列不会更改此值，因此会保留该列与表达式之间的关联。
 
@@ -507,8 +500,7 @@ Alternate Of 需要 1460 或更高的兼容级别。它不会作为单独的对�
 - [对象类型](xref:object-properties-common#object-type)
 
 ### 父列
-
-`Column` · 列 · 基本 · 只读
+`Column` · 列 · 常规 · 只读
 
 此变体所属的列。
 

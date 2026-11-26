@@ -2,7 +2,7 @@
 uid: undo-redo
 title: Soporte para deshacer y rehacer
 author: Morten Lønskov
-updated: 2026-10-13
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,7 +17,7 @@ Presiona **Ctrl+Z** para deshacer un cambio y **Ctrl+Y** para rehacerlo. La pila
 
 ## Deshacer en editores de texto
 
-En Tabular Editor 3, **Ctrl+Z** y **Ctrl+Y** actúan sobre la parte de la ventana que tiene el foco. Cuando el foco está en un control de texto, estos atajos deshacen y rehacen lo escrito en ese control. Los controles de texto incluyen los documentos de consulta DAX, los documentos de script DAX y de **C# Script**, el **Editor de expresiones** y cualquier celda que estés editando en la vista de **Propiedades**. Cada control de texto tiene su propio historial de deshacer, independiente de la pila de deshacer del modelo. Cuando el foco está en el Explorador TOM o en otra vista, los atajos deshacen y rehacen los cambios del modelo. En el cuadro de chat de AI Assistant, **Ctrl+Z** y **Ctrl+Y** no deshacen ni rehacen los cambios del modelo.
+En Tabular Editor 3, **Ctrl+Z** y **Ctrl+Y** actúan sobre la parte de la ventana que tiene el foco. Cuando el foco está en un control de texto, los atajos deshacen y rehacen la escritura en ese control. Los controles de texto incluyen consultas DAX, scripts DAX y documentos de scripts de C#, el **Editor de expresiones** y una celda que esté editando en la vista **Propiedades**. Cada control de texto tiene su propio historial de deshacer, independiente de la pila de deshacer del modelo. Cuando el foco está en el Explorador TOM, en otra vista, en una lista desplegable o en un cuadro de texto de solo lectura, los atajos deshacen y rehacen los cambios en el modelo. Por ejemplo, después de elegir un valor de una lista en la vista **Propiedades**, **Ctrl+Z** deshace el cambio mientras la lista aún tiene el foco. En el cuadro de chat del asistente de IA, **Ctrl+Z** y **Ctrl+Y** no deshacen ni rehacen los cambios en el modelo.
 
 El foco permanece en el documento de script después de ejecutar un C# Script o aplicar un script DAX. Al pulsar **Ctrl+Z** allí, se deshace lo escrito en el script. Si el texto del script se pegó o insertó en un solo paso, **Ctrl+Z** lo elimina por completo y **Ctrl+Y** lo restaura.
 

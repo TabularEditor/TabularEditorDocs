@@ -1,8 +1,8 @@
----
+﻿---
 uid: editions
 title: 比较版本
 author: Søren Toft Joensen
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ applies_to:
 
 各版本之间的第一个区别在于它们支持哪些类型的表格式数据建模场景。要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
 
-- Power BI Desktop（请确保您了解[限制](xref:desktop-limitations)）
+- Power BI Desktop
 - 通过 XMLA 终结点使用的 Power BI Premium（Premium Per User、**Premium 容量 [A、EM 或 P SKUs]**、**Fabric 容量 [F SKUs]**）
 - SQL Server（2016+）Analysis Services（版本：开发人员版、标准版、**企业版**）
 - Azure Analysis Services（层级：开发者层、基本层、**标准层**）
@@ -160,7 +160,7 @@ DAX优化器的 _集成_ 在所有版本中都提供；企业版额外提供的�
 如果你在编辑模型时，它启用了其中某项功能，也不会在不提示的情况下被破坏：系统会拒绝保存，并在信息中注明具体是哪个功能；如果涉及多个分区，还会列出相关的表。在 Analysis Services 模型中添加透视会在一开始就被阻止——TOM Explorer 中不会显示 **Perspectives** 文件夹，创建透视的命令也不可用。
 
 > [!IMPORTANT]
-> 只有当 Power BI Report（.pbix、.pbip 或 .pbit）文件包含 Data model（Import、DirectQuery 或 Composite）时，Tabular Editor 才能在 Power BI Desktop 中作为外部工具使用。**不支持使用 Live connection 的 Report**，因为这些 Report 不包含 Data model。[更多信息](xref:desktop-limitations)。
+> 只有当 Power BI 报表（.pbix、.pbip 或 .pbit）文件包含数据模型（导入、DirectQuery 或复合）时，Tabular Editor 才可作为 Power BI 桌面版的外部工具使用。**不支持使用实时连接的报表**，因为这些报表不包含数据模型。请参阅@desktop-integration。
 
 ## 个人许可证与可转让许可证
 

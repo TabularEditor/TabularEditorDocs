@@ -1,8 +1,8 @@
-﻿---
+---
 uid: direct-lake-guidance
 title: Guía de Direct Lake
 author: Morten Lønskov
-updated: 2026-11-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,13 +54,15 @@ Para obtener una lista completa y actualizada de las limitaciones, consulta la [
 
 ### Columnas calculadas en Direct Lake en OneLake
 
-Una columna calculada de una tabla de Direct Lake en OneLake debe tener su propiedad `ExpressionContext` establecida en `UserContext`. La columna se evalúa en el momento de la consulta y no se materializa, por lo que no se puede usar en una relación. Las nuevas columnas calculadas usan `Standard` de forma predeterminada. Si una columna calculada de una tabla Direct Lake está configurada como `Standard` cuando guarda el modelo en el servicio Power BI, el guardado falla con el error «El contexto de expresión predeterminado no se puede usar para columnas calculadas en tablas Direct Lake».
+Una columna calculada de una tabla de Direct Lake en OneLake debe tener su propiedad `ExpressionContext` establecida en `UserContext`. La columna se evalúa en el momento de la consulta y no se materializa, por lo que no se puede usar en una relación. Si una columna calculada de una tabla Direct Lake en OneLake se establece en `Standard` cuando guarda el modelo en el servicio Power BI, el guardado falla con el error «El contexto de expresión predeterminado no se puede usar para columnas calculadas en tablas Direct Lake».
 
-La propiedad **Contexto de expresión** aparece en la @properties-view solo cuando el nivel de compatibilidad del modelo es 1705 o superior. Establézcala en cada columna calculada de una tabla Direct Lake en OneLake:
+En el nivel de compatibilidad 1705 o superior, las nuevas columnas calculadas de las tablas de Direct Lake en OneLake se crean con `UserContext`. Las nuevas columnas calculadas en tablas de Importación y Direct Lake en SQL del mismo modelo se crean con `Standard`.
+
+Una columna calculada de una tabla Direct Lake en OneLake que esté configurada como `Standard` genera un error en la @messages-view. La propiedad **Contexto de expresión** aparece en la @properties-view solo cuando el nivel de compatibilidad del modelo es 1705 o superior. Comprueba las columnas calculadas antes de guardar:
 
 1. Seleccione el modelo en la @tom-explorer-view y compruebe el **Nivel de compatibilidad** en **Base de datos** en la @properties-view. Si es inferior a 1705, actualice el modelo como se describe en @update-compatibility-level.
-2. Seleccione la columna calculada en la @tom-explorer-view.
-3. En **Opciones** en la @properties-view, establezca **Contexto de expresión** en `UserContext`.
+2. En la @messages-view, busque el error «Las columnas calculadas de las tablas de Direct Lake en OneLake deben tener el contexto de expresión establecido en UserContext».
+3. Para cada columna con el error, seleccione la columna en la @tom-explorer-view y establezca **Contexto de expresión** en **Opciones** en la @properties-view en `UserContext`.
 4. Guarde el modelo.
 
 Las columnas calculadas de las tablas de importación del mismo modelo pueden usar cualquiera de los dos contextos de expresión. Para los objetos que no pueden hacer referencia a una columna de contexto de usuario, consulte @user-context-calculated-columns. Microsoft enumera las combinaciones admitidas de modo de almacenamiento y contexto de expresión en [Uso de columnas calculadas en Power BI Desktop](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance).

@@ -2,7 +2,7 @@
 uid: importing-tables-data-modeling
 title: 导入表并进行 Data model 建模
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2

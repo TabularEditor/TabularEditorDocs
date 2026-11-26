@@ -2,7 +2,7 @@
 uid: object-properties-calculation-groups
 title: Propiedades del grupo de cálculo
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of calculation groups and calculation item
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página describe las propiedades de los grupos de cálculo y los elementos de cálculo. Un grupo de cálculo siempre pertenece a una tabla de grupos de cálculo. Las propiedades de esa tabla, incluidos los accesos directos a las propiedades del propio grupo de cálculo, se describen en @object-properties-tables. Para ver las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 ## Grupo de cálculo
@@ -42,8 +44,7 @@ En Tabular Editor 3, creas un grupo de cálculo haciendo clic con el botón dere
 - [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Precedencia
-
-`Precedence` · int · Opciones
+`Precedence` · int · Opciones · **Básico**
 
 El orden en que se aplican los grupos de cálculo cuando una consulta usa elementos de más de un grupo de cálculo, por ejemplo, un grupo de inteligencia temporal y un grupo de conversión de divisas. El grupo de cálculo con la precedencia más alta se aplica primero, lo que hace que su elemento de cálculo sea el más externo. Cuando ese elemento llama a [SELECTEDMEASURE](https://dax.guide/selectedmeasure), el motor usa el resultado del elemento de cálculo del grupo con la siguiente precedencia inferior, y así sucesivamente hasta llegar a la medida.
 
@@ -51,11 +52,13 @@ El orden cambia el resultado cuando los elementos de cálculo no son conmutativo
 
 El valor predeterminado de TOM es `0`. Asigna a cada grupo de cálculo del modelo una precedencia distinta de `0` o superior. El motor rechaza un modelo en el que dos grupos de cálculo tienen la misma precedencia, con un error como "Calculation Group precedence must be greater or equal zero and unique within Model".
 
-Cuando agregas o pegas un grupo de cálculo cuya precedencia ya la usa otro grupo de cálculo del modelo, Tabular Editor la establece en un valor superior en uno a la precedencia más alta del modelo. También puedes establecerla en la tabla del grupo de cálculo como `CalculationGroupPrecedence`. En un documento @dax-scripts de Tabular Editor 3, la estableces con la propiedad `Precedence` del grupo de cálculo.
+Cuando añade o pega un grupo de cálculos cuya precedencia ya utiliza otro grupo de cálculos del modelo, Tabular Editor le asigna una precedencia superior en una unidad a la precedencia más alta del modelo. También puede establecerlo en la tabla del grupo de cálculos como `CalculationGroupPrecedence`, o bien arrastrar los grupos de cálculos para ordenarlos en la sección **Precedencia del grupo de cálculos** de la pestaña **Básico** de la vista Propiedades. Consulte [Precedencia del grupo de cálculos](xref:properties-view#calculation-group-precedence). En un documento de @dax-scripts de Tabular Editor 3, puede establecerla con la propiedad `Precedence` del grupo de cálculos.
 
 ## Elemento de cálculo
 
 Un elemento de cálculo es una entrada de un grupo de cálculo, por ejemplo, `YTD`. Los autores de Report ven su nombre como un valor en la columna del grupo de cálculo, y su expresión define cómo cambia la medida cuando se selecciona el elemento. Dentro de la expresión, [SELECTEDMEASURE](https://dax.guide/selectedmeasure) devuelve la medida que se está evaluando.
+
+En Tabular Editor 3, la sección **Elementos de cálculo** de la pestaña **Básico** de la vista Propiedades enumera los elementos de un grupo de cálculos en orden, y permite añadirlos, moverlos, cambiarles el nombre y eliminarlos. Consulte [Elementos de cálculo](xref:properties-view#calculation-items).
 
 Un grupo de cálculo sin elementos de cálculo no tiene ningún efecto. La regla @kb.bpa-calculation-groups-no-items del Best Practice Analyzer (BPA) marca los grupos de cálculo que no contienen elementos.
 
@@ -63,15 +66,14 @@ La propiedad `Description` de un elemento de cálculo es solo para desarrollador
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Mensaje de error](xref:object-properties-common#error-message)
 - [Tipo de objeto](xref:object-properties-common#object-type)
 - [Estado](xref:object-properties-common#state)
 
 ### Ordinal
-
-`Ordinal` · int · Básico · nivel de compatibilidad 1500+
+`Ordinal` · int · General · nivel de compatibilidad 1500+ · **Básico**
 
 La posición del elemento de cálculo dentro de su grupo de cálculo, a partir de `0`. Las herramientas cliente ordenan los elementos según este valor; por ejemplo, para mostrar `Current`, `MTD`, `QTD` y `YTD` en ese orden en un segmentador. El motor lo expone a través de la columna ordinal de la tabla del grupo de cálculo.
 
@@ -119,8 +121,7 @@ Los elementos de cálculo se aplican solo a las medidas, y las columnas que se a
 En Tabular Editor 3, escribe la expresión en el **Editor de expresiones** del @dax-editor, con autocompletado e información de parámetros.
 
 ### Expresión de cadena de formato dinámica
-
-`FormatStringExpression` · string · Opciones
+`FormatStringExpression` · cadena · Opciones · **Básico**
 
 Una expresión DAX que devuelve la cadena de formato de la medida cuando se selecciona este elemento de cálculo. Déjalo vacío para conservar el formato propio de la medida. Configúralo cuando el elemento cambie el tipo de valor que devuelve la medida, por ejemplo, un porcentaje interanual:
 

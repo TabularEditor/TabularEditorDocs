@@ -2,7 +2,7 @@
 uid: dax-query
 title: Consultas DAX
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -49,7 +49,7 @@ La ventana de consultas de DAX tiene seis opciones de consulta distintas.
    - **Cuando se modifica la consulta**: La ordenación y el filtrado se restablecen solo cuando cambia la estructura de la consulta.
    - **Siempre**: La ordenación y el filtrado se conservan mientras las columnas sigan estando en la nueva consulta.
 
-Los valores predeterminados de las preferencias «Ejecutar consulta automáticamente» y «Conservar ordenación y filtrado» se pueden configurar en el cuadro de diálogo Preferencias: **Herramientas > Preferencias... > Exploración de datos > Consulta DAX** > Básico. La sección **Mantener los documentos abiertos al cambiar de modelo** de la misma página controla qué sucede con las consultas DAX abiertas cuando abre un modelo diferente. Consulta [Cambiar de modelo](#switching-models).
+Los valores predeterminados de las preferencias «Ejecutar consulta automáticamente» y «Conservar ordenación y filtrado» se pueden configurar en el cuadro de diálogo Preferencias: **Herramientas > Preferencias > Exploración de datos > Consulta DAX**, en la sección **Básico**. La sección **Mantener los documentos abiertos al cambiar de modelo** de la misma página controla lo que sucede con las consultas DAX abiertas cuando se abre un modelo diferente. Consulta [Cambiar de modelo](#switching-models).
 
 ### Cambiar de modelo
 
@@ -59,9 +59,9 @@ Para cerrar las consultas DAX cuando abra un modelo diferente, desmarque **Mante
 
 ### Añadir o actualizar medidas, columnas y tablas con consultas DAX
 
-Tabular Editor (3.12.0 y versiones posteriores) permite agregar o cambiar medidas directamente desde la ventana de Consulta DAX.
+Puedes añadir o cambiar medidas directamente a través de la ventana de consultas DAX.
 
-A partir de Tabular Editor 3.23.0, "Aplicar" y "Aplicar selección" también procesan las instrucciones DEFINE COLUMN y DEFINE TABLE. Tabular Editor creará en el modelo las columnas o tablas calculadas correspondientes, o actualizará sus expresiones si ya existen.
+Las opciones Aplicar y Aplicar selección también procesan las instrucciones DEFINE COLUMN y DEFINE TABLE. Tabular Editor creará las columnas/tablas calculadas correspondientes en su modelo o actualizará sus expresiones si ya existen.
 
 Hay cuatro opciones para aplicar al modelo las medidas, columnas y tablas definidas en la Consulta DAX:
 
@@ -128,11 +128,13 @@ Las consultas DAX son uno de los dos lugares donde es posible ejecutar el [Depur
 
 El Depurador de DAX permite comprender cómo funciona DAX dentro de una sola celda. Para iniciar el depurador, basta con hacer clic con el botón derecho en la celda deseada y elegir "Depurar celda"; esto iniciará el depurador en el contexto de la celda seleccionada.
 
+El depurador entra en las medidas y funciones que la consulta define con `DEFINE MEASURE` o `DEFINE FUNCTION`, y la consulta es de solo lectura hasta que se detiene la depuración. Una medida o función que la consulta redefine se aplica únicamente al propio código de la consulta, y las medidas del modelo que la usan conservan la definición del modelo. Consulte [Código definido en la consulta DAX](xref:dax-debugger#code-defined-in-the-dax-query).
+
 ![Consulta Dax Depurador](~/content/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
 
 ## Exportar resultados de la Consulta DAX
 
-Tabular Editor 3, a partir de la versión 3.16.0, incorpora la nueva capacidad de exportar los resultados de una Consulta DAX a CSV o Excel. Tras ejecutar la Consulta DAX, se activa un botón en la barra de herramientas que permite guardar los resultados localmente en formato CSV o Excel.
+Puedes exportar los resultados de una consulta DAX a CSV o a Excel. Después de ejecutar la consulta DAX, se activa un botón en la barra de herramientas que permite a los usuarios guardar los resultados localmente en formato CSV o Excel.
 
 > [!TIP]
 > Para exportar más de 1001 filas, seleccione "haga clic para obtener todas las filas" después de ejecutar la Consulta DAX

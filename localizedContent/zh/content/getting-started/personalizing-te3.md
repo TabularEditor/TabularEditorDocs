@@ -2,7 +2,7 @@
 uid: personalizing-te3
 title: 根据你的需求个性化定制并配置 Tabular Editor 3
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,17 +30,17 @@ Tabular Editor 3 提供了丰富的配置选项，让你可以根据具体需求
 
 # 常规功能
 
-打开 **偏好** 对话框后，你首先会看到 **Tabular Editor > 功能** 页面（见下方截图）。下面简要说明此页面上的各项功能，以及它们的常见用途：
+您在**偏好设置**对话框中遇到的第一个页面是**Tabular Editor > Power BI**页面（见下图）。以下简要介绍了此页面上的 Power BI 设置及其常见用途：
 
-![偏好设置：常规功能](~/content/assets/images/pref-general-features.png)
+![Power BI 首选项页面](~/content/assets/images/pref-power-bi.png)
 
 ## Power BI
 
 这些设置主要适用于将 Tabular Editor 3 用作 [Power BI Desktop 的外部工具](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools) 的开发人员。
 
-##### _允许执行不受支持的建模操作_（默认禁用）
+##### *允许不受支持的建模操作(2025年6月之前,不推荐)*（已禁用）
 
-Power BI Desktop 的外部工具存在一些 [限制](xref:desktop-limitations)。默认情况下，Tabular Editor 3 会阻止你对 Data model 进行不受支持的更改。有些高级建模功能虽然在上述链接中标为不受支持，但实际可能仍能正常工作。要解锁所有 Tabular Object Model 对象和属性，请启用此设置。
+仅适用于早于 2025 年 6 月的 Power BI Desktop 版本，这些版本限制了外部工具可以执行的建模操作。选中此项后，在 Tabular Editor 3 连接到此类版本时，所有 Tabular Object Model 对象和属性都可进行编辑，包括 Power BI Desktop 不支持的更改。此设置对 2025 年 6 月或更高版本的 Power BI Desktop 无影响。
 
 ##### _隐藏自动日期/时间警告_（已禁用）
 
@@ -52,7 +52,7 @@ Power BI Desktop 的外部工具存在一些 [限制](xref:desktop-limitations)�
 
 ## 元数据同步
 
-这些设置用于控制 Tabular Editor 3 在从 Analysis Services 实例上的数据库加载模型元数据时的行为。这些设置用于指定 Tabular Editor 3 应如何处理从应用程序外部对数据库所做的元数据更改，例如其他用户对数据库进行了更改，或在将 Tabular Editor 3 作为外部工具使用的同时，你通过 Power BI Desktop 对模型进行了更改。
+这些设置位于**Tabular Editor > 其他**页面。当从 Analysis Services 实例上的数据库加载模型元数据时，它们控制 Tabular Editor 3 的行为。这些设置指定了 Tabular Editor 3 应如何处理从应用程序外部应用于数据库的元数据更改，例如当其他用户对数据库进行更改时，或者当您在使用 Tabular Editor 3 作为外部工具时通过 Power BI Desktop 对模型进行更改时。
 
 ##### _当本地元数据与已部署的模型不同步时发出警告_（已启用）
 
@@ -118,7 +118,7 @@ DAX 支持使用斜杠（`//`）或连字符（`--`）的行注释。此设置�
 
 在 **文本编辑器 > DAX编辑器 > 自动格式化** 页面上，你可以找到一系列设置，用于控制 DAX 代码的格式化方式。
 
-![自动格式化设置](~/content/assets/images/auto-formatting-settings.png)
+![DAX编辑器自动格式化首选项页面](~/content/assets/images/auto-formatting-settings.png)
 
 ##### _输入时自动格式化代码_（已启用）
 

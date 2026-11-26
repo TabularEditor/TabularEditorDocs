@@ -2,7 +2,7 @@
 uid: object-properties-calculation-groups
 title: 计算组属性
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of calculation groups and calculation item
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍计算组和计算项的属性。计算组始终属于某个计算组表。该表的属性(包括可直接访问计算组自身属性的快捷方式)见 @object-properties-tables。有关大多数对象共有的属性，见 @object-properties-common。
 
 ## 计算组
@@ -42,8 +44,7 @@ SUMMARY: Reference for the properties of calculation groups and calculation item
 - [对象类型](xref:object-properties-common#object-type)
 
 ### 优先级
-
-`Precedence` · int · 选项
+`Precedence` · int · 选项 · **基本**
 
 当查询同时使用来自多个计算组的项时，例如时间智能组和货币换算组，这些计算组的应用顺序。优先级最高的计算组会最先应用，因此它的计算项位于最外层。当该项调用 [SELECTEDMEASURE](https://dax.guide/selectedmeasure) 时，引擎会使用下一个优先级更低的计算组中的计算项结果，依此类推，直到度量值本身。
 
@@ -51,11 +52,13 @@ SUMMARY: Reference for the properties of calculation groups and calculation item
 
 TOM 默认值为 `0`。为模型中的每个计算组设置不同的优先级，且值为 `0` 或更高。如果模型中有两个计算组使用相同的优先级，引擎会拒绝该模型，并报出类似“Calculation Group precedence must be greater or equal zero and unique within Model”的错误。
 
-当你添加或粘贴一个计算组，而模型中的其他计算组已使用其优先级时，Tabular Editor 会将其设置为比模型中最高优先级高一级。你也可以在计算组表中通过 `CalculationGroupPrecedence` 属性来设置。在 Tabular Editor 3 的 @dax-scripts 文档中，你可以通过计算组的 `Precedence` 属性进行设置。
+当您添加或粘贴一个其优先级已被模型中的另一个计算组使用的计算组时，Tabular Editor 会将其设置为比模型中最高优先级大 1。您还可以在计算组表格中将其设置为 `CalculationGroupPrecedence`，或者在“属性”视图的“基本”选项卡上的“计算组优先级”部分中将计算组拖动到相应位置。请参阅[计算组优先级](xref:properties-view#calculation-group-precedence)。在 Tabular Editor 3 @dax-scripts 文档中，你可以使用计算组的 `Precedence` 属性进行设置。
 
 ## 计算项
 
 计算项是计算组中的一个条目，例如 `YTD`。 Report 作者会在计算组的列中将它的名称视为一个值，而它的表达式会定义选中该项时度量值如何变化。在表达式内部，[SELECTEDMEASURE](https://dax.guide/selectedmeasure) 会返回当前正在求值的度量值。
+
+在 Tabular Editor 3 中，“属性”视图的“基本”选项卡上的“计算项”部分按顺序列出了计算组的项，并可添加、移动、重命名和移除这些项。请参阅[计算项](xref:properties-view#calculation-items)。
 
 没有计算项的计算组不会产生任何效果。 Best Practice Analyzer (BPA) 规则 @kb.bpa-calculation-groups-no-items 会标记不包含任何计算项的计算组。
 
@@ -63,15 +66,14 @@ TOM 默认值为 `0`。为模型中的每个计算组设置不同的优先级，
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [错误消息](xref:object-properties-common#error-message)
 - [对象类型](xref:object-properties-common#object-type)
 - [状态](xref:object-properties-common#state)
 
 ### 序号
-
-`Ordinal` · int · 基本 · 兼容级别 1500+
+`Ordinal` · int · 常规 · 兼容级别 1500+ · **基本**
 
 计算项在其计算组中的位置，从 `0` 开始。客户端工具会按此值对这些项进行排序，例如在切片器中按 `Current`、`MTD`、`QTD` 和 `YTD` 的顺序显示它们。引擎通过计算组表中的 Ordinal 列公开该值。
 
@@ -119,8 +121,7 @@ IF (
 在 Tabular Editor 3 中，你可以在 @dax-editor 的 **表达式编辑器** 中编写该表达式，并使用自动补全和参数提示。
 
 ### 格式字符串表达式
-
-`FormatStringExpression` · 字符串 · 选项
+`FormatStringExpression` · 字符串 · 选项 · **基本**
 
 一个 DAX 表达式，在选中此计算项时返回度量值的格式字符串。将其留空即可保留度量值自身的格式。当该项会改变度量值返回的值类型时，请设置它，例如同比百分比：
 

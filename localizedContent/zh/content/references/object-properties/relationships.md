@@ -2,7 +2,7 @@
 uid: object-properties-relationships
 title: 关系属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of relationships, such as cardinality, cro
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 本页介绍关系的属性。有关大多数对象共有的属性，请参阅 @object-properties-common。
 
@@ -48,14 +50,12 @@ Tabular Editor 3 在 **TOM Explorer** 中显示关系时，会将 from 列放在
 - [状态](xref:object-properties-common#state)
 
 ### 源端列
-
-`FromColumn` · 列 · 基本
+`FromColumn` · 列 · 常规 · **基本**
 
 关系源端的列。在一对多关系中，这通常是事实表中的外键列，例如 `Sales[ProductKey]`。选择列也会设置 `FromTable`。
 
 ### 源端基数
-
-`FromCardinality` · RelationshipEndCardinality · 基本
+`FromCardinality` · RelationshipEndCardinality · 常规 · **基本**
 
 源端在 `FromColumn` 中允许有多少行具有相同的值。
 
@@ -66,16 +66,14 @@ Tabular Editor 3 在 **TOM Explorer** 中显示关系时，会将 from 列放在
 | `None` | 基数未指定。不要使用此值。 Tabular Editor 3 的关系对话框只列出 `One` 和 `Many`，而 **TOM Explorer** 会将 `None` 显示为 `0`。 |
 
 ### 目标端列
-
-`ToColumn` · 列 · 基本
+`ToColumn` · 列 · 常规 · **基本**
 
 关系目标端的列。在一对多关系中，这是维度表的键列，例如 `Product[ProductKey]`。选择列时也会设置 `ToTable`。
 
 Best Practice Analyzer (BPA) 的 @kb.bpa-relationship-same-datatype 规则会标记 `FromColumn` 与 `ToColumn` 数据类型不同的关系。
 
 ### 目标端基数
-
-`ToCardinality` · RelationshipEndCardinality · 基本
+`ToCardinality` · RelationshipEndCardinality · 常规 · **基本**
 
 在目标端，`ToColumn` 中同一值最多可以出现在多少行中。可用值与 `FromCardinality` 相同，通常使用 `One`。这两个基数共同决定关系类型：
 
@@ -90,8 +88,7 @@ Best Practice Analyzer (BPA) 的 @kb.bpa-relationship-same-datatype 规则会标
 在 Tabular Object Model (TOM) 中，From 端始终是一对多关系中的“多”端。 Tabular Editor 会接受将 `FromCardinality` 设为 `One` 且将 `ToCardinality` 设为 `Many` 的设置，但在保存时引擎会拒绝，并报错：“From 端基数必须始终设置为 Many，除非该关系为 One-To-One”。如果要按相反方向关联这些表，请交换 From 列和 To 列。
 
 ### 启用
-
-`IsActive` · bool · 基本
+`IsActive` · 布尔值 · 常规 · **基本**
 
 关系是否自动筛选数据。如果活动关系在两个表之间创建了多于一条路径，引擎会拒绝该模型。这种情况最常见于多个关系使用双向交叉筛选时。
 
@@ -105,8 +102,7 @@ CALCULATE ( [Total Sales], USERELATIONSHIP ( Sales[ShipDate], 'Date'[Date] ) )
 在 Tabular Editor 3 的图表视图中，你也可以右键单击某个关系来将其激活或停用。
 
 ### ID
-
-`ID` · string · 基本 · 只读
+`ID` · 字符串 · 常规 · 只读
 
 关系的内部标识符，在 TOM 中就是该关系的名称。 Power BI Desktop 使用 GUID。 Tabular Editor 3 和 Tabular Editor 2 会为新关系分配一个唯一名称，名称以 `New Single Column Relationship` 开头。在 C# Script 或 Tabular Model Scripting Language (TMSL) 命令中，可以使用 ID 来引用特定关系。
 
@@ -123,8 +119,7 @@ CALCULATE ( [Total Sales], USERELATIONSHIP ( Sales[ShipDate], 'Date'[Date] ) )
 包含 `ToColumn` 的表。若要更改，请选择其他 `ToColumn`。 Tabular Editor 3 会在 **Properties** 视图中隐藏此属性。你仍然可以在 C# Script 中读取该属性。
 
 ### 交叉筛选行为
-
-`CrossFilteringBehavior` · CrossFilteringBehavior · 选项
+`CrossFilteringBehavior` · CrossFilteringBehavior · 选项 · **基本**
 
 筛选沿关系传播的方向。
 

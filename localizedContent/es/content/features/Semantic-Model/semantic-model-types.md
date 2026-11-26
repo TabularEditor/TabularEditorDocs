@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Tipos de modelos semánticos de Power BI
 author: Morten Lønskov
-updated: 2026-10-26
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -58,8 +58,8 @@ Tabular Editor puede trabajar con varios tipos de modelos. A continuación encon
 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake en SQL solo admite grupos de cálculo, parámetros de simulación y parámetros de campo, que crean implícitamente tablas calculadas. No se admiten tablas calculadas generales.
 <a name="DirectLakeCalcColumn">5</a> - Función de vista previa. Las columnas calculadas de las tablas de Direct Lake en OneLake deben usar el contexto de expresión `UserContext`. Se evalúan en el momento de la consulta y no se materializan, por lo que no se pueden usar como claves de relación. Consulte [Directrices de Direct Lake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake) para obtener más detalles.
 
-> [!NOTE]
-> En la versión de junio de 2025 de Power BI Desktop se eliminaron todas las limitaciones de modelado para las herramientas de terceros. Antes de eso, no se admitían varias operaciones de modelado. Consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations).
+>[!NOTE]
+> La versión de junio de 2025 de Power BI Desktop eliminó todas las limitaciones de modelado para herramientas de terceros. Consulte @desktop-integration.
 
 > [!TIP]
 > Para obtener más información sobre las restricciones de los modelos Direct Lake, consulta la [documentación de Direct Lake](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview) de Microsoft

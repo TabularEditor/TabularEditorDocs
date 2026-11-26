@@ -2,7 +2,7 @@
 uid: importing-tables-data-modeling
 title: Importación de tablas y modelado del Data model
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2

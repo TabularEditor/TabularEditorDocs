@@ -2,7 +2,7 @@
 uid: load-save-model
 title: Cargar y guardar metadatos del modelo
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,10 +50,10 @@ Para todo lo que Tabular Editor reconoce, incluidos los tipos de archivo compati
 Para guardar un modelo en otro lugar o en otro formato:
 
 - **Archivo > Guardar como...** guarda los metadatos del modelo en un único archivo `.bim`.
-- **Archivo > Guardar en carpeta...** guarda los metadatos del modelo como una [estructura de carpetas](xref:save-to-folder), en formato JSON o TMDL, según el modo de serialización de **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta**.
+- **Archivo > Guardar en carpeta...** guarda los metadatos del modelo como una [estructura de carpetas](xref:save-to-folder) en el formato establecido en **Formato de Guardar en carpeta** en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta**: **TMDL** (predeterminado) o **Carpeta (Database.json)**. Consulte [TMDL](xref:tmdl).
 
 > [!IMPORTANT]
-> Un modelo cargado desde una estructura de carpetas JSON heredada se guarda en ese mismo formato cuando usas **Archivo > Guardar**, aunque la **preferencia** esté configurada en TMDL. El formato solo cambia cuando usas **Archivo > Guardar en carpeta...**. Consulta [TMDL](xref:tmdl).
+> Un modelo cargado desde una carpeta Database.json se guarda en ese mismo formato cuando usa **Archivo > Guardar**. Para convertirlo a TMDL, use **Archivo > Guardar en carpeta...** con **Guardar en formato de carpeta** establecido en **TMDL**.
 
 ## Recargar
 

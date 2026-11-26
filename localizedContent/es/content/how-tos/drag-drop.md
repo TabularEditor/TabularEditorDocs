@@ -2,7 +2,7 @@
 uid: drag-drop
 title: Arrastrar y soltar objetos
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,11 +19,7 @@ Arrastrar y soltar en la @tom-explorer-view desplaza objetos entre carpetas de v
 
 Arrastre una carpeta de visualización a otra carpeta para moverla. Todos los objetos y subcarpetas que contiene se desplazan con ella, y se mantiene la estructura de subcarpetas.
 
-<!-- IMAGEN NECESARIA: drag-drop-display-folders.gif
-     Una animación de una carpeta de visualización que se arrastra a otra carpeta en el Explorador TOM,
-     con las medidas y las subcarpetas situadas debajo siguiendo el movimiento. Se necesita un modelo con al menos dos
-     niveles de anidamiento para que la forma se conserve visiblemente.
-     Texto alternativo: «Una carpeta de visualización que se está arrastrando a otra carpeta en el Explorador TOM» -->
+![Una carpeta de visualización que se está arrastrando a otra carpeta en el Explorador TOM](~/content/assets/images/drag-drop-display-folders.gif)
 
 También puedes:
 

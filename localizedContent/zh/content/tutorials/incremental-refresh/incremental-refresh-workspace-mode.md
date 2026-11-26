@@ -2,13 +2,13 @@
 uid: incremental-refresh-workspace-mode
 title: 在启用了增量刷新的模型中使用工作区模式
 author: Kurt Buhler
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.4.2 及更早版本
+      since: 3.4.2 and earlier
       editions:
         - edition: Desktop
           none: true
@@ -21,7 +21,9 @@ applies_to:
 # 工作区模式与增量刷新
 
 > [!IMPORTANT]
-> 本文仅适用于 Tabular Editor 3.4.2 及更早版本。自 3.5.0 更新起，_工作区模式_ 不会再覆盖由计划刷新生成的已部署刷新策略分区。刷新策略分区也不会序列化并纳入源代码管理。你可以在 _'工具 > 偏好…… > 保存到文件夹'_。
+> 本文仅适用于 Tabular Editor 3.4.2 及更早版本。
+> 自 3.5.0 更新起，_工作区模式_将不会覆盖通过计划刷新部署的刷新策略分区。 
+> 刷新策略分区也不会在源代码管理中进行序列化。您可以在**工具 > 首选项 > 文件格式 > 常规**中更改此设置。
 
 ---
 
@@ -29,7 +31,7 @@ applies_to:
 
 ---
 
-增量刷新会在一天中的首次计划刷新时创建新的分区。因此，刷新后，任何本地元数据（即 `.bim` 或 `Database.json`）都会与远程模型元数据不同步。因此，__当处理表已配置增量刷新的模型时，不建议使用 _工作区模式_ __。
+增量刷新会在一天中的首次计划刷新时创建新的分区。因此，刷新后，任何本地元数据（即 `.bim` 或 `database.json`）都会与远程模型元数据不同步。因此，__当处理表已配置增量刷新的模型时，不建议使用 _工作区模式_ __。
 
 > [!IMPORTANT]
 > 在 Tabular Editor 3 中设置增量刷新仅限于托管在 Power BI Dataset 服务中的数据集。对于 Analysis Services，需要进行自定义[分区](https://learn.microsoft.com/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。

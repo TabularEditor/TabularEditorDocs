@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: "Actualización, vista previa y consulta de datos"
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -59,7 +59,7 @@ Para iniciar una actualización con Tabular Editor, haz clic con el botón derec
 
 También puedes iniciar una actualización a nivel de modelo desde el menú **Modelo > Actualizar modelo**. Una vez iniciada la operación de actualización, verás el texto "Data refresh started... <ins>Ver cola de actualizaciones</ins>". Haz clic en el enlace o abre la vista **Actualización de datos** desde la opción de menú **Vista > Actualización de datos**. Esto mostrará una lista de todas las operaciones de actualización (tanto las pasadas como las que están en curso), con los mensajes de estado devueltos por Analysis Services, incluidos los contadores de progreso y la duración, y te permitirá cancelar una actualización iniciada por error.
 
-![Vista de actualización de datos](~/content/assets/images/data-refresh-view2.png)
+![Vista de actualización de datos con una tarea expandida a tablas y particiones](~/content/assets/images/data-refresh-view2.png)
 
 > [!TIP]
 > La vista de actualización de datos incluye una columna **Hora de inicio** que muestra cuándo comenzó cada operación de actualización. Haz clic en el encabezado de la columna para ordenar las operaciones cronológicamente; así verás primero las actualizaciones más recientes. Puedes ordenar por cualquier columna para organizar las operaciones de actualización según tus necesidades. Consulta la [vista de actualización de datos](xref:data-refresh-view) para obtener más información.

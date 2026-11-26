@@ -2,7 +2,7 @@
 uid: kb.bpa-set-isavailableinmdx-false
 title: 将 IsAvailableInMDX 设置为 False
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-11-12
 description: 最佳实践规则：对未用于关系或层次结构的隐藏列禁用 MDX 访问，以优化性能。
 ---
 
@@ -13,7 +13,7 @@ description: 最佳实践规则：对未用于关系或层次结构的隐藏列�
 此最佳实践规则用于识别已隐藏但 `IsAvailableInMDX` 属性仍设置为 `true`、且无需通过 MDX 查询访问的列。对于未使用的隐藏列，将此属性设置为 `false` 可以提升查询性能并减少内存开销。
 
 - 类别：性能
-- 严重级别：中等（2）
+- 严重性：高 (3)
 
 ## 适用于
 
@@ -38,7 +38,7 @@ description: 最佳实践规则：对未用于关系或层次结构的隐藏列�
 
 当满足以下所有条件时，此规则会触发：
 
-1. 该列的 `IsAvailableInMDX = true`
+1. 该列所在的表格没有 Direct Lake 分区，并且该列具有 `IsAvailableInMDX = true`
 2. 该列已隐藏（或其所属表已隐藏）
 3. 该列未用于任何 `SortBy` 关系
 4. 该列未用于任何层次结构

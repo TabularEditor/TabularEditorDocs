@@ -2,7 +2,7 @@
 uid: general-introduction
 title: 总体介绍和体系结构
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,7 +50,7 @@ Tabular Editor 可从以下来源加载模型元数据：
 在 Tabular Editor 中加载模型元数据后，你可以自由添加/编辑/删除 **对象**，并更改 **对象属性**。在你明确保存模型之前，修改不会写回到源。你可以选择 **File > Save**，或按 CTRL+S。如果模型元数据是从文件源加载的（以上来源 1-3），该文件会被更新。如果模型元数据是从 Analysis Services 加载的（以上来源 4-7），更改会保存回 Analysis Services。注意，某些更改可能会导致对象进入最终用户无法再查询的状态。例如，如果你在表中添加了一列，在用户能够查询该表内容或任何依赖于该表的度量值之前，你需要先 [刷新表](xref:refresh-preview-query#refreshing-data)。
 
 > [!WARNING]
-> 将模型元数据的更改保存回 Power BI Desktop（以上来源 7）时，会有一些限制。更多信息见 @desktop-limitations。
+> 2025 年 6 月之前的 Power BI Desktop 版本不接受来自外部工具的每项模型更改（上文的来源 7）。请参阅 @desktop-integration。
 
 ### TOM 对象和属性
 
@@ -69,7 +69,7 @@ TOM **对象** 示例：
 TOM **对象属性**示例：
 
 - `Name`（文本）
-- `显示文件夹`（文本）
+- `Display Folder`（文本）
 - `Description`（文本）
 - `Hidden`（true/false）
 - `Summarize By`（可选项之一：None、Sum、Min、Max、...）

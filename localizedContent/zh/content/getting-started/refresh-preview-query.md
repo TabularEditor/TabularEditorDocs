@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: 刷新、预览与查询数据
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -59,7 +59,7 @@ applies_to:
 
 你也可以通过 **模型 > 刷新模型** 菜单在模型级别启动刷新。刷新操作开始后，你会看到文本“数据刷新已开始……<ins>查看刷新队列</ins>”。单击该链接，或通过 **视图 > 数据刷新** 菜单选项打开 **数据刷新** 视图。这将显示所有刷新操作(历史和当前)的列表，显示 Analysis Services 返回的状态消息(包括进度计数器和持续时间)，并允许你取消非预期的刷新。
 
-![数据刷新视图](~/content/assets/images/data-refresh-view2.png)
+![“数据刷新”视图，其中一个作业已展开为表格和分区](~/content/assets/images/data-refresh-view2.png)
 
 > [!TIP]
 > 数据刷新视图包含一个 **开始时间** 列，用来显示每次刷新操作是什么时候开始的。单击列标题即可按时间顺序对操作排序，方便你优先查看最新的刷新记录。你也可以按任意列排序，以便根据需要整理刷新操作。详情请参阅 [数据刷新视图](xref:data-refresh-view)。

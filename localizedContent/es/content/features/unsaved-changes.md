@@ -2,7 +2,7 @@
 uid: unsaved-changes
 title: Indicadores de cambios sin guardar
 author: Daniel Otykier
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,11 +25,11 @@ Tabular Editor 3 marca los objetos y las propiedades que difieren de la última 
 Los indicadores aparecen en dos lugares:
 
 - En el [Explorador TOM](xref:tom-explorer-view), los objetos modificados se muestran con una fila coloreada y una insignia en el icono: naranja (editado), verde (agregado) y rojo (eliminado). Estos son los colores de la vista de comparación del modelo que se muestra al desplegar.
-- En la [vista de propiedades](xref:properties-view), las propiedades modificadas muestran una fila en naranja claro.
+- En la [vista Propiedades](xref:properties-view), las propiedades modificadas aparecen en una fila de color naranja claro en la pestaña **Avanzado**, y los campos modificados aparecen con el mismo color y un icono de modificación en la pestaña **Básico**.
 
 ![Explorador TOM con medidas editadas, agregadas y eliminadas resaltadas, y la vista de propiedades con la fila de Descripción modificada resaltada](~/content/assets/images/unsaved-changes/overview.png)
 
-Ambas vistas tienen un botón **Mostrar cambios** en la barra de herramientas y un comando **Revertir** en el menú contextual.
+El Explorador TOM y la cuadrícula de propiedades de la vista Propiedades tienen un botón de la barra de herramientas **Mostrar cambios** y un comando **Revertir** al que se accede haciendo clic con el botón derecho.
 
 > [!NOTE]
 > Los indicadores registran los cambios con respecto al origen desde el que se cargó el modelo o en el que se guardó por última vez. Desplegar el modelo en otra base de datos no las borra.
@@ -59,9 +59,13 @@ El filtro se combina con los demás conmutadores de la barra de herramientas y c
 
 ## Indicadores de cambios en la vista de propiedades
 
-Cuando seleccionas un objeto modificado, las propiedades modificadas se resaltan con la misma fila en color naranja claro. Una fila contraída que contiene un subobjeto, como la fila **KPI** de una medida o la fila **política de actualización** de una tabla, se marca cuando cambia algo dentro del subobjeto. En las filas indexadas, como **Anotaciones**, solo se marca la anotación modificada. Cuando se seleccionan varios objetos, una fila de propiedad se marca si alguno de los objetos seleccionados cambió esa propiedad.
+Cuando selecciona un objeto modificado, las propiedades modificadas se muestran en la misma fila de color naranja claro en la cuadrícula de propiedades, que es la pestaña **Avanzado** cuando la vista previa **Vista de propiedades básicas** está activada. Una fila contraída que contiene un subobjeto, como la fila **KPI** de una medida o la fila **Política de actualización** de una tabla, se marca cuando se ha modificado algo dentro del subobjeto. En el caso de las filas indexadas, como **Anotaciones**, solo se marca la anotación modificada. Cuando se seleccionan varios objetos, se marca una fila de propiedades si alguno de los objetos seleccionados ha cambiado esa propiedad.
 
-El botón **Mostrar cambios** de la barra de herramientas de la vista de propiedades oculta las filas sin cambios. Mientras el filtro está activo, el título de la vista es **Propiedades (modificadas)**.
+En la pestaña **Básicas**, un campo modificado adquiere el mismo tono y un icono de cambio después de su etiqueta. Un cuadro de la sección **Expresiones** muestra el icono después de su nombre cuando se ha cambiado su expresión. Las filas modificadas en **Niveles**, **Elementos de cálculo** y **Precedencia de grupos de cálculo** también muestran el icono. Los encabezados **Niveles**, **Elementos de cálculo**, **Asignaciones de columnas**, **Precedencia de grupos de cálculo**, **Expresiones** y **Seguridad a nivel de fila** muestran el icono cuando se modifica algo en la sección.
+
+![Pestaña «Básicas» de la vista «Propiedades» con los campos modificados marcados](~/content/assets/images/unsaved-changes/properties-basic-changed.png)
+
+El botón **Mostrar cambios** de la barra de herramientas de la cuadrícula de propiedades oculta las filas que no han cambiado. Mientras el filtro está activo, el título de la vista dice **Propiedades (modificadas)**.
 
 ![Vista de propiedades con el filtro Mostrar cambios activo, que muestra solo las propiedades modificadas](~/content/assets/images/unsaved-changes/properties-show-changes.png)
 
@@ -132,7 +136,7 @@ La configuración de los indicadores se encuentra en la sección **Cambios no gu
 - **Marcar objetos con cambios no guardados** (habilitado): Colorea las filas, añade insignias a los iconos de los objetos agregados, editados y eliminados en el Explorador TOM, y aplica un tramado a sus contenedores. No afecta a la visibilidad de los objetos eliminados ni a **Mostrar cambios**.
 - **Mantener visibles los objetos eliminados** (Hasta que se guarde el modelo): Cuánto tiempo permanecen los objetos eliminados en el Explorador TOM. Consulta [Mantener los objetos eliminados entre guardados](#keeping-deleted-objects-across-saves).
 - **Agrupar objetos eliminados en un nodo "Objetos eliminados"** (deshabilitado): Agrupa los objetos eliminados de un contenedor bajo un único nodo. Consulta [Agrupar los objetos eliminados bajo un único nodo](#gathering-deleted-objects-under-one-node).
-- **Marcar propiedades con cambios no guardados en el panel de propiedades** (habilitado): Colorea las filas de las propiedades modificadas en la vista de propiedades. No afecta a **Mostrar cambios** en la vista de propiedades.
+- **Marcar las propiedades con cambios sin guardar en el panel «Propiedades»** (habilitado): Colorea las filas de las propiedades modificadas en la pestaña **Avanzado** de la vista «Propiedades» y marca los campos, las expresiones, las filas de listas y los encabezados de sección modificados en la pestaña **Básico**. No afecta a **Mostrar cambios** en la vista Propiedades.
 
 Consulta @preferences para ver las demás preferencias de esta página.
 

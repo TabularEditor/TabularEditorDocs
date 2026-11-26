@@ -1,8 +1,8 @@
-﻿---
+---
 uid: direct-lake-guidance
 title: Direct Lake 指南
 author: Morten Lønskov
-updated: 2026-11-09
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,13 +54,15 @@ applies_to:
 
 ### Direct Lake on OneLake 上的计算列
 
-Direct Lake on OneLake 表上的计算列必须将其 `ExpressionContext` 属性设置为 `UserContext`。该列在查询时进行评估，且未物化，因此无法在关系中使用。新的计算列默认使用 `Standard`。如果您在将模型保存到 Power BI 服务时，将 Direct Lake 表中的计算列设置为 `Standard`，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。
+Direct Lake on OneLake 表上的计算列必须将其 `ExpressionContext` 属性设置为 `UserContext`。该列在查询时进行评估，且未物化，因此无法在关系中使用。如果您在将模型保存到 Power BI 服务时，将 OneLake 上 Direct Lake 表中的计算列设置为 `Standard`，则保存将失败，并显示错误“默认表达式上下文不能用于 Direct Lake 表中的计算列”。
 
-只有当模型的兼容级别为 1705 或更高时，**表达式上下文**属性才会显示在 @properties-view 中。在 Direct Lake on OneLake 表的每个计算列上设置该属性：
+在兼容性级别 1705 或更高版本中，Direct Lake on OneLake 表上的新计算列使用 `UserContext` 创建。同一模型中导入表和 Direct Lake on SQL 表上的新计算列使用 `Standard` 创建。
+
+Direct Lake on OneLake 表上设置为 `Standard` 的计算列在 @messages-view 中出现错误。只有当模型的兼容级别为 1705 或更高时，**表达式上下文**属性才会显示在 @properties-view 中。在保存之前，请检查计算列：
 
 1. 在 @tom-explorer-view 中选择模型，然后在 @properties-view 中**数据库**下检查**兼容级别**。如果低于 1705，请按照 @update-compatibility-level 中的说明升级模型。
-2. 在 @tom-explorer-view 中选择计算列。
-3. 在 @properties-view 中的**选项**下，将**表达式上下文**设置为 `UserContext`。
+2. 在 @messages-view 中，查找错误“Direct Lake on OneLake 表格上的计算列必须将表达式上下文设置为 UserContext。”
+3. 对于每列存在错误的列，在 @tom-explorer-view 中选择该列，然后在 @properties-view 的**选项**下将**表达式上下文**设置为 `UserContext`。
 4. 保存模型。
 
 同一模型中导入表格上的计算列可以使用任一表达式上下文。对于无法引用用户上下文列的对象，请参阅 @user-context-calculated-columns。Microsoft 在[在 Power BI Desktop 中使用计算列](https://learn.microsoft.com/power-bi/transform-model/desktop-calculated-columns#materialization-and-performance)中列出了支持的存储模式和表达式上下文的组合。

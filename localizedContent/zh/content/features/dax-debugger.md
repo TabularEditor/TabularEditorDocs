@@ -1,8 +1,8 @@
 ﻿---
 uid: dax-debugger
-title: DAX调试器
+title: DAX 调试器
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,11 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-
-# DAX调试器
-
-> [!NOTE]
-> DAX调试器在 3.2.0 版本中推出。随着我们为调试器添加更多功能，本文信息可能会有所变化。
+# DAX 调试器
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/m4g9BxcUf4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -43,7 +39,7 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 - 通过 Pivot Grid
 - 通过 DAX 查询
 
-启动调试器后，你会看到多个新视图，它们为正在调试的代码提供上下文信息；同时还会有一个 DAX 脚本视图，用于突出显示当前正在调试的那部分代码。
+启动调试器后，系统会向您显示多个新视图，提供有关正在调试的代码的上下文信息。当前正在调试的代码部分，如果属于模型，则会在调试脚本视图中突出显示；如果由查询定义，则会在DAX查询中突出显示。
 
 > [!TIP]
 > 在开始调试会话之前，建议先格式化你的 DAX 代码，让代码更易读。
@@ -64,14 +60,14 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 # 通过 DAX 查询调试
 
 1. 创建一个新的 DAX 查询（**文件 > 新建 > DAX 查询**）。
-2. 输入或粘贴 DAX 查询。通常，这应是一条由 `SUMMARIZECOLUMNS` 调用构成的查询，并包含一个或多个（显式）度量值，例如 Power BI 中的 Visual 所生成的查询。
+2. 输入或粘贴DAX查询。这通常应是一个由 `SUMMARIZECOLUMNS` 调用和一个或多个（显式）度量值组成的查询，例如 Power BI 中由可视化对象生成的查询。度量值可以是模型度量值，也可以是查询使用 `DEFINE MEASURE` 定义的度量值。
 
 > [!TIP]
 > 你可以在 Power BI Desktop 中使用 [Performance Analyzer](https://docs.microsoft.com/power-bi/create-reports/desktop-performance-analyzer) 来捕获由各个 Visual 生成的查询。
 
-3. 按 F5 在 Tabular Editor 3 中执行查询。找到你要调试的值，右键单击该单元格并选择 **调试**。
+3. 按 F5 在 Tabular Editor 3 中执行查询。找到要调试的值，右键单击单元格，然后选择**调试单元格**。
 
-![从查询中调试](~/content/assets/images/features/debug-from-query.png)
+![DAX 查询结果单元格上的右键菜单，显示“调试单元格”](~/content/assets/images/features/debug-from-query.png)
 
 # 调试视图
 
@@ -92,9 +88,9 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 
 ![Inspect locals value](~/content/assets/images/inspect-locals.png)
 
-如果你更想在单独的 DAX 查询窗口中检查局部变量值，可以在 **工具 > 偏好 > DAX调试器 > 局部变量** 中关闭 **使用弹出式检查器** 选项。
+如果您希望在单独的 DAX 查询窗口中检查局部变量值，可以关闭 **工具 > 首选项 > Tabular Editor > DAX 调试器 > 局部变量**下的**使用弹出检查器**选项。
 
-![Dax 调试器设置](~/content/assets/images/features/dax-debugger-settings.png)
+![包含“局部变量”、“监视”和“DAX 查询”部分的 DAX 调试器首选项页面](~/content/assets/images/features/dax-debugger-settings.png)
 
 ## 监视
 
@@ -152,6 +148,43 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 
 ![Step into selection](~/content/assets/images/debugger-step-into-selection.png)
 
+## 函数和查询定义的代码
+
+调试器单步执行 [DAX 用户定义函数](xref:udfs)（DAX UDF）以及 DAX 查询定义的度量值和函数。
+
+### 单步执行函数
+
+您单步执行 DAX UDF 的方式与单步执行 Measure 引用的方式相同。这适用于模型函数以及 DAX 查询使用 `DEFINE FUNCTION` 定义的函数。
+
+在**调用树**中，函数调用对于传递给 `VAL` 参数的每个参数都有一个子节点，后跟一个 `Function F(params)` 节点，例如 `Function Scale(x, f)`，函数体位于其下方。传递给 `EXPR` 的参数和引用类型参数出现在主体中，具体位置为主体使用该参数的每个地方。引用参数的节点显示参数名称，其中参数按调用位置的写法显示，例如 `x: [Sales Amount]`，显示在一行中，并在 60 个字符处截断。如果调用省略了可选参数，则节点将显示参数的默认值。
+
+![包含函数调用节点的调用树、其函数 Scale(x, f) 节点和参数节点，旁边是显示参数的“局部变量”](~/content/assets/images/features/dax-debugger-call-tree-function.png)
+
+当当前项位于函数体中时，**局部变量**会列出函数的参数，每个参数都带有调用传递给它的实参，并隐藏调用代码的变量。`VAL` 参数显示在调用位置计算的值，而 `EXPR` 或引用类型参数显示在当前求值上下文中求值的参数。当当前项位于传递给 `EXPR` 参数的参数中时，**局部变量**会显示该参数的写入范围：调用代码的变量，以及（如果调用位于另一个函数中）封闭函数的参数。
+
+### 在DAX查询中定义的代码
+
+当您调试 DAX 查询中的单元格时，查询使用 `DEFINE MEASURE` 或 `DEFINE FUNCTION` 定义的度量值和函数会在 DAX 查询本身中突出显示。调试脚本视图包含模型度量值，然后是模型函数，并且仅在被调试的代码使用模型度量值或函数时才会打开。当您在查询代码和模型代码之间单步执行时，包含当前项的视图将显示在最前面。右键单击DAX查询中的代码，即可使用**单步执行到选定内容**（**Ctrl+B**）和监视命令，与在调试脚本视图中一样。
+
+如果查询重新定义了模型度量值或函数，则重新定义仅适用于查询自己的代码。使用重新定义对象的模型度量值和函数将保留模型的定义，就像查询运行时一样。
+
+![正在调试的 DAX 查询，其中查询中的函数体被突出显示，调试工具栏上显示“停止调试”按钮](~/content/assets/images/features/dax-debugger-query-debugging.png)
+
+在您调试 DAX 查询时，该查询为只读，并且自动完成功能不会在查询中或在调试脚本视图中打开。如果您在查询中键入、粘贴或删除文本，则会显示 **停止调试？** 提示，并附有“正在调试 DAX 查询时无法对其进行编辑。是否要停止调试以编辑查询？”：
+
+- **确定**将停止调试。编辑未应用，因此请在查询可编辑后重复该操作。
+- **取消**将继续调试，并使查询保持不变。
+
+在选择**确定**之前，请先选择**不再询问**，以便在以后的编辑中停止调试而不显示提示。要恢复显示提示，请在**工具 > 首选项 > Tabular Editor > DAX 调试器 > DAX 查询**下选择**编辑正在调试的 DAX 查询前询问**。
+
+![“停止调试？”提示，其中包含“不再询问”复选框](~/content/assets/images/features/dax-debugger-stop-debugging-prompt.png)
+
+如果您在调试时关闭DAX查询或调试脚本视图，则会显示**停止调试？**提示。选择**确定**以停止调试并关闭文档。
+
+### 停止调试
+
+在**调试**工具栏或**调试**菜单中选择**停止调试**，以结束会话。DAX 查询再次变为可编辑状态，调试脚本视图以及**局部变量**、**监视**、**评估语境**和**调用树**窗口关闭。关闭已调试的文档或模型也会结束会话并关闭窗口。在下一会话中，窗口将再次打开至您上次离开时的位置，并显示相同的观察表达式。**停止调试**没有默认的键盘快捷键；请在**工具 > 首选项 > Tabular Editor > 键盘**下分配一个快捷键。
+
 ## 标量谓词
 
 在 [`CALCULATE`](https://dax.guide/calculate) 或 [`CALCULATETABLE`](https://dax.guide/calculatetable) 函数的筛选参数中使用的标量谓词，会在 **Locals** 视图中以一种特殊方式处理。
@@ -203,16 +236,18 @@ CALCULATE(
 - **下一行 (F9)** - 将最内层迭代的行语境移动到迭代器的下一行。
 - **上一行 (Shift-F9)** - 将最内层迭代的行语境移动到迭代器的上一行。
 
+**停止调试**没有默认快捷键。请参阅[停止调试](#stop-debugging)。
+
 # 限制与已知问题
 
-DAX调试器当前有以下限制：
+DAX 调试器存在以下限制：
 
-- **UDFs：** 当前不支持用户定义函数 (UDF)。如果在正在调试的代码中遇到 UDF，调试器可能会出现异常行为。
-- 调试 DAX 查询时，仅支持部分 DAX 表表达式（例如，可以调试依赖 [SUMMARIZECOLUMNS](https://dax.guide/summarizecolumns) 的查询，但其他表格函数目前不支持）。通常支持由 Power BI 生成的查询（可通过 Power BI Desktop 性能分析器捕获）。
-- 目前不支持包含隐式度量值或查询范围内计算的查询。
+- 调试 DAX 查询时，仅支持 DAX 表表达式的子集（例如，可以调试依赖于 [SUMMARIZECOLUMNS](https://dax.guide/summarizecolumns) 的查询，但不支持其他表函数）。通常支持由 Power BI 生成的查询（可以通过 Power BI Desktop 性能分析器捕获）。
+- 只能调试返回度量值的单元格，该度量值可以是模型度量值，也可以是查询使用 `DEFINE MEASURE` 定义的度量值。内联表达式列的单元格（例如 `SUMMARIZECOLUMNS` 调用中的 `"Twice", Twice([Sales Amount])`）以及隐式度量值无法调试。
+- 不支持引用查询范围 Measure 或函数参数的**监视**表达式。
 - 在浏览由筛选后的表表达式产生的迭代器的前 1000 行时，浏览窗口中选中的行并不总是与评估语境堆栈中的当前行语境相对应（在 **监视** 窗口中输入 `CALCULATETABLE('<table name>')` 以检查当前行语境）。
-- 调试器目前仅允许在度量值上调试 DAX 表达式。
-- 由于 [Visual 计算](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview) 是使用查询作用域的列来定义的，因此无法进行调试。调试器目前不支持查询范围内的对象。
+- 调试器仅允许调试度量值上的DAX表达式。
+- 无法调试依赖于查询范围列的单元格。这包括使用查询范围列定义的[视觉计算](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview)。
 - 如果某个度量值在筛选语境中被计算项修改，那么调试器的“监视/本地变量”视图里显示的部分结果可能不正确。
 
 如果你遇到的调试器问题不在上面的列表中，请将其提交到 TE3 社区支持 GitHub 站点的 [问题跟踪器](https://github.com/TabularEditor/TabularEditor3/issues)。

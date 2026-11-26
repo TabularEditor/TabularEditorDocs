@@ -2,7 +2,7 @@
 uid: accessibility
 title: 辅助功能
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,6 +34,10 @@ Tabular Editor 3 中的大多数辅助功能设置都位于 **工具 > 偏好 > 
 ## 显示缩放
 
 Tabular Editor 会遵循 Windows 中 **设置 > 系统 > 显示** 下配置的显示缩放。
+
+## 字体
+
+在**工具 > 首选项 > Tabular Editor > 用户界面**下的**字体**组中，设置用户界面的字体和文本大小以及代码编辑器的文本大小。大小范围为 8 pt 至 14 pt，更改将在您重启 Tabular Editor 后生效。要放大当前会话的一个代码编辑器，请按 **Ctrl** 并滚动鼠标滚轮，然后按 **Ctrl+0** 将其恢复为首选大小。请参阅[字体](xref:preferences#fonts)。
 
 ## 主题
 

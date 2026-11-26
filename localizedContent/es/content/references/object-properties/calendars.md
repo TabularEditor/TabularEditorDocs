@@ -2,7 +2,7 @@
 uid: object-properties-calendars
 title: Propiedades del calendario
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of calendars, time unit column association
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 En esta página se enumeran las propiedades de los calendarios y de los dos tipos de grupos de columnas que componen un calendario. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
@@ -51,23 +53,21 @@ La regla @kb.bpa-date-table-exists del Best Practice Analyzer (BPA) señala un m
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Tipo de objeto](xref:object-properties-common#object-type)
 - [Etiqueta de linaje](xref:object-properties-common#lineage-tag)
 - [Etiqueta de linaje de origen](xref:object-properties-common#source-lineage-tag)
 
 ### Grupos de columnas del calendario
-
-`CalendarColumnGroups` · CalendarColumnGroupCollection · Básico · solo lectura
+`CalendarColumnGroups` · CalendarColumnGroupCollection · General · solo lectura
 
 Los grupos de columnas que componen el calendario; es decir, las asociaciones de columnas con unidades de tiempo y los grupos de columnas relacionados con el tiempo. Este es el nombre de la colección en el Tabular Object Model (TOM). La **vista de propiedades** muestra la misma colección con el nombre de `ColumnMappings`. En un C# Script, puedes usar cualquiera de los dos nombres.
 
 ### Asignaciones de columnas
+`ColumnMappings` · CalendarColumnGroupCollection · General · solo lectura · *acceso directo a* **Grupos de columnas del calendario** · **Básico**
 
-`ColumnMappings` · CalendarColumnGroupCollection · Básico · solo lectura · _acceso directo a_ **Grupos de columnas del calendario**
-
-La misma colección que `CalendarColumnGroups`, con el nombre que muestra la **vista de propiedades**. Puedes agregar, modificar y quitar los grupos de la colección. En Tabular Editor 3, haz doble clic en el calendario en la @tom-explorer-view para abrir el **Editor de calendario**. Tanto el botón **...** de la propiedad como **Editar asignaciones de columnas...** en el menú contextual del calendario en el **Explorador TOM** abren un editor de colecciones.
+La misma colección que `CalendarColumnGroups`, con el nombre que muestra la **vista Propiedades**. Puedes añadir, cambiar y eliminar los grupos de la colección. En Tabular Editor 3, haz doble clic en el calendario en la @tom-explorer-view para abrir el **Editor de calendarios**. El botón **...** de la propiedad y **Editar asignaciones de columnas...** en el menú contextual del calendario en el **Explorador TOM** abren un editor de colecciones. La sección **Asignaciones de columnas** de la pestaña **Básico** de la vista Propiedades muestra las asignaciones y abre el **Editor de calendarios**. Consulte [Asignaciones de columnas del calendario](xref:properties-view#calendar-column-mappings).
 
 ## Asociación de columna con unidad de tiempo
 
@@ -80,8 +80,7 @@ Cada unidad de tiempo solo puede asignarse una vez en cada calendario. El **Edit
 - [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Columna principal
-
-`PrimaryColumn` · Columna · Básico
+`PrimaryColumn` · Columna · General
 
 La columna que contiene los valores de esta unidad de tiempo. Sus valores deben ajustarse a la unidad de tiempo: una columna asignada a **Mes** identifica un mes junto con su año, como `January 2025`, y una columna asignada a **Mes del año** solo identifica el mes, como `January` o `1`.
 
@@ -90,29 +89,28 @@ Si la columna principal tiene una `SortByColumn`, el motor también trata la col
 Para ver los valores de las columnas mientras las asignas, abre una @table-preview de la tabla de fechas y ancla la vista junto al **Editor de calendario**.
 
 ### Unidad de tiempo
-
-`TimeUnit` · TimeUnit · Básico
+`TimeUnit` · TimeUnit · General
 
 La unidad de tiempo que representa la columna principal. Una unidad de tiempo _completa_ identifica un período por sí sola. Una unidad de tiempo _parcial_ solo identifica un período junto con una unidad de tiempo mayor, que el calendario también debe asignar. Por ejemplo, **Mes del año** necesita **Año**.
 
 | Valor                  | Tipo                          | Significado                                                                                             | Valores de ejemplo         |
 | ---------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------- |
-| `Año`                  | Completa                      | El año.                                                                                 | `2024`, `FY2025`           |
+| `Year`                  | Completa                      | El año.                                                                                 | `2024`, `FY2025`           |
 | `Semester`             | Completa                      | El semestre que incluye el año.                                                         | `H1 2024`                  |
-| `SemesterOfYear`       | Parcial; requiere `Año`       | El semestre dentro del año.                                                             | `H1`, `1`                  |
-| `Trimestre`            | Completo                      | El trimestre incluye el año.                                                            | `Q1 2024`                  |
-| `TrimestreDelAño`      | Parcial, requiere `Año`       | El trimestre dentro del año.                                                            | `Q1`, `1`                  |
-| `TrimestreDelSemestre` | Parcial, requiere `Semestre`  | El trimestre dentro del semestre.                                                       | `1`, `2`                   |
-| `Mes`                  | Completo                      | El mes incluye el año.                                                                  | `enero de 2024`, `2024-01` |
-| `MesDelAño`            | Parcial, requiere `Año`       | El mes dentro del año.                                                                  | `enero`, `1`               |
-| `MesDelSemestre`       | Parcial, requiere `Semestre`  | El mes dentro del semestre.                                                             | de `1` a `6`               |
-| `MesDelTrimestre`      | Parcial, necesita `Trimestre` | El mes dentro del trimestre.                                                            | de `1` a `3`               |
-| `Semana`               | Completo                      | La semana que incluye el año.                                                           | `W50-2023`                 |
-| `WeekOfYear`           | Parcial, necesita `Año`       | La semana dentro del año.                                                               | `W50`, `50`                |
-| `WeekOfSemester`       | Parcial, necesita `Semestre`  | La semana dentro del semestre.                                                          | de `1` a `27`              |
-| `WeekOfQuarter`        | Parcial, necesita `Trimestre` | La semana dentro del trimestre.                                                         | de `1` a `14`              |
-| `WeekOfMonth`          | Parcial, necesita `Mes`       | La semana dentro del mes.                                                               | de `1` a `6`               |
-| `Fecha`                | Completo                      | La fecha.                                                                               | `2025-12-31`               |
+| `SemesterOfYear`       | Parcial; requiere `Year`       | El semestre dentro del año.                                                             | `H1`, `1`                  |
+| `Quarter`            | Completo                      | El trimestre incluye el año.                                                            | `Q1 2024`                  |
+| `QuarterOfYear`      | Parcial, requiere `Year`       | El trimestre dentro del año.                                                            | `Q1`, `1`                  |
+| `QuarterOfSemester` | Parcial, requiere `Semester`  | El trimestre dentro del semestre.                                                       | `1`, `2`                   |
+| `Month`                  | Completo                      | El mes incluye el año.                                                                  | `January 2024`, `2024-01` |
+| `MonthOfYear`            | Parcial, requiere `Year`       | El mes dentro del año.                                                                  | `January`, `1`               |
+| `MonthOfSemester`       | Parcial, requiere `Semester`  | El mes dentro del semestre.                                                             | de `1` a `6`               |
+| `MonthOfQuarter`      | Parcial, necesita `Quarter` | El mes dentro del trimestre.                                                            | de `1` a `3`               |
+| `Week`               | Completo                      | La semana que incluye el año.                                                           | `W50-2023`                 |
+| `WeekOfYear`           | Parcial, necesita `Year`       | La semana dentro del año.                                                               | `W50`, `50`                |
+| `WeekOfSemester`       | Parcial, necesita `Semester`  | La semana dentro del semestre.                                                          | de `1` a `27`              |
+| `WeekOfQuarter`        | Parcial, necesita `Quarter` | La semana dentro del trimestre.                                                         | de `1` a `14`              |
+| `WeekOfMonth`          | Parcial, necesita `Month`       | La semana dentro del mes.                                                               | de `1` a `6`               |
+| `Date`                | Completo                      | La fecha.                                                                               | `2025-12-31`               |
 | `DayOfYear`            | Parcial; requiere `Year`      | El día del año.                                                                         | De `1` a `366`             |
 | `DayOfSemester`        | Parcial; requiere `Semester`  | El día dentro del semestre.                                                             | De `1` a `184`             |
 | `DayOfQuarter`         | Parcial; requiere `Quarter`   | El día dentro del trimestre.                                                            | De `1` a `92`              |

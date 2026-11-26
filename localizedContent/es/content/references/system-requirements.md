@@ -2,7 +2,7 @@
 uid: system-requirements
 title: Requisitos del sistema
 author: Morten Lønskov
-updated: 2026-10-23
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # Requisitos del sistema
 
-Tabular Editor 3 es una aplicación de escritorio para Windows. A partir de la versión 3.27.0, se publica para dos runtimes de .NET, dos arquitecturas de procesador y en tres formatos de paquete.
+Tabular Editor 3 es una aplicación de escritorio de Windows, publicada en dos tiempos de ejecución de .NET, para dos arquitecturas de procesador, en tres formatos de paquete.
 
 ## Sistema operativo
 
@@ -36,13 +36,13 @@ Las versiones de Windows compatibles en cada momento se rigen por la política d
 
 Las compilaciones de .NET 10 y .NET 8 son *funcionalmente idénticas*. No hay nada disponible en una que falte en la otra. Al instalar una compilación con el instalador `.exe` o `.msi`, se reemplaza la otra compilación. Consulte [Cambiar entre los paquetes .NET 8 y .NET 10](xref:installation-activation-basic#switching-between-the-net-8-and-net-10-packages).
 
-Las compilaciones ARM64 son nativas a partir de la versión 3.23.0.
+Las compilaciones ARM64 son nativas.
 
 ## Entorno de ejecución para «.NET»
 
 | Compilación       | Necesita                                                                                                                                                                                                                                                                                                            |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Instalador `.exe` | El [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet) correspondiente: [10](https://dotnet.microsoft.com/download/dotnet/10.0) o [8](https://dotnet.microsoft.com/download/dotnet/8.0). El instalador se ofrece a descargarlo e instalarlo por ti |
+| Instalador `.exe` | El [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet) correspondiente: [10](https://dotnet.microsoft.com/download/dotnet/10.0) u [8](https://dotnet.microsoft.com/download/dotnet/8.0). Si el tiempo de ejecución no está presente o es anterior a la versión que requiere el instalador, el instalador lo descarga e instala, lo que requiere acceso a internet. Con un tiempo de ejecución actual instalado, el instalador se ejecuta sin acceso a Internet |
 | `.msi`            | El .NET Desktop Runtime correspondiente, ya instalado. El MSI _no_ lo incluye, lo que lo hace adecuado para el despliegue sin supervisión                                                                                                                                           |
 | `.zip` portátil   | Nada. Es autónomo                                                                                                                                                                                                                                                                                   |
 

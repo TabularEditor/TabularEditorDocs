@@ -2,7 +2,7 @@
 uid: object-properties-partitions
 title: 分区属性
 author: Jeroen ter Heerdt
-updated: 2026-11-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍分区属性、增量刷新策略和数据覆盖范围定义。有关大多数对象共有的属性，请参阅 @object-properties-common。
 
 分区用于定义表中一部分数据的来源。除计算组外，每个表至少有一个分区，而大多数表恰好只有一个。每种分区描述其数据来源的方式都不同：
@@ -45,8 +47,8 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [错误消息](xref:object-properties-common#error-message)
@@ -54,16 +56,14 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 - [状态](xref:object-properties-common#state)
 
 ### 数据源
-
-`DataSource` · DataSource · 基本
+`DataSource` · 数据源 · 常规
 
 分区查询所使用的数据源。 Tabular Editor 会在旧式（查询）分区和实体分区中显示此属性，你可以从下拉列表中选择模型中的一个数据源。策略范围分区也会列出此属性，但该处始终为空。
 
 M 分区不使用此属性。它们的 M 表达式会直接指定数据源，例如 `Sql.Database("myserver", "mydb")`，或者引用 Structured数据源或共享表达式。见 @object-properties-data-sources。
 
 ### 表达式
-
-`Expression` · string · 基本
+`Expression` · 字符串 · 常规
 
 用于向分区填充数据的表达式。**属性**视图仅在计算分区上显示此属性，此时保存的是计算表格的 DAX 表达式。在旧式分区上，同一内容显示为 `Query`；在 M 分区上则显示为 `MExpression`。
 
@@ -72,8 +72,7 @@ M 分区不使用此属性。它们的 M 表达式会直接指定数据源，例
 在 C# Script 中，`Expression` 同样可读取和写入旧式分区、计算分区和 M 分区的表达式。如果在任何其他类型的分区上设置它，例如实体分区，就会引发错误。
 
 ### Query
-
-`Query` · string · 基本
+`Query` · 字符串 · 常规
 
 引擎为填充分区而发送到旧式数据源的原生查询，例如：
 

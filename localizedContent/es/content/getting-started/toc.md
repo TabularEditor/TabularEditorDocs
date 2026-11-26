@@ -15,7 +15,6 @@
 
 # Power BI Desktop y Tabular Editor
 ## @integración-desktop
-## @desktop-limitations  
 
 # Interfaz de usuario
 ## @referencia-interfaz-usuario

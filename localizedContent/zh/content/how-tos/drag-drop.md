@@ -2,7 +2,7 @@
 uid: drag-drop
 title: 拖放对象
 author: Morten Lønskov
-updated: 2026-10-11
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,11 +19,7 @@ applies_to:
 
 将显示文件夹拖到另一个文件夹上即可移动。其中的每个对象和子文件夹都随之移动，并且子文件夹结构得以保留。
 
-<!-- 需要图片：drag-drop-display-folders.gif
-     一个动画，显示将一个显示文件夹拖到 TOM Explorer 中的另一个文件夹上，
-     其下方的度量值和子文件夹也随之移动。需要一个至少有两层嵌套的模型，
-     嵌套级别，以便明显保留形状。
-     替代文本：“正在将一个显示文件夹拖动到 TOM Explorer 中的另一个文件夹” -->
+![正在将显示文件夹拖动到 TOM Explorer 中的另一个文件夹](~/content/assets/images/drag-drop-display-folders.gif)
 
 您还可以：
 

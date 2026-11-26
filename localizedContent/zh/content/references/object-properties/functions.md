@@ -2,15 +2,15 @@
 uid: object-properties-functions
 title: 函数和集的属性
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "支持函数和集合，但不支持 Namespace、PackageId 或 PackageVersion"
+      note: "Supports functions and sets, but not Namespace, PackageId or PackageVersion"
     - product: Tabular Editor 3
       since: 3.23.0
-      note: "用户定义函数需要 3.23.0 或更高版本。所有版本均支持集合。"
+      note: "User-defined functions need 3.23.0 or later. Sets are supported in all versions."
       editions:
         - edition: Desktop
           full: true
@@ -28,6 +28,8 @@ SUMMARY: Reference for the properties of DAX user-defined functions and of sets.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页列出了 DAX 用户定义函数和集的属性。有关大多数对象共有的属性，参见 @object-properties-common。
 
 ## 函数
@@ -40,9 +42,9 @@ Tabular Editor 2 也支持 UDF，并会在 **Functions** 文件夹下列出它�
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
-- [隐藏](xref:object-properties-common#hidden)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
+- [隐藏](xref:object-properties-common#hidden) · **基本**
 - [批注](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [已更改的属性](xref:object-properties-common#changed-properties)
@@ -55,8 +57,7 @@ Tabular Editor 2 也支持 UDF，并会在 **Functions** 文件夹下列出它�
 在 DAX 中，你是通过函数名来调用函数的，因此名称中不能包含空格。可以包含点号和下划线。使用 `Finance.Margin` 或 `ACME_Margin` 之类的复合名称，以避免与 Microsoft 日后新增的内置 DAX 函数发生冲突。参见 @kb.bpa-udf-use-compound-names。当你重命名函数时，Tabular Editor 3 会更新整个模型中对该函数的所有引用，效果与 @formula-fix-up-dependencies 处理度量值和列时相同。
 
 ### 命名空间
-
-`Namespace` · 字符串 · 基本 · _存储为批注_ (`TE_Group`)
+`Namespace` · 字符串 · 常规 · *存储为注释* (`TE_Group`)
 
 启用按命名空间对用户定义函数分组后，该函数会显示在 @tom-explorer-view 中对应的组下。使用 **TOM Explorer** 上方的切换按钮启用分组。 Tabular Editor 按以下顺序确定命名空间：
 

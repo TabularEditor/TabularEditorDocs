@@ -2,7 +2,7 @@
 uid: azure-openai-connection-errors
 title: Azure OpenAI 连接错误
 author: Morten Lønskov
-updated: 2026-04-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ nslookup yourresource.openai.azure.com
 
 可用的解决办法：
 
-- 在 **工具 > 偏好设置 > 代理设置** 中，将你的 Azure OpenAI 主机名添加到绕过列表，让请求跳过代理并直接通过 VPN 隧道发送。使用分号分隔多个主机名
+- 将您的 Azure OpenAI 主机名添加到**工具 > 首选项 > Tabular Editor > 代理设置**下的绕过列表，以便请求绕过代理并直接通过 VPN 隧道。用分号分隔多个主机名
 - 让网络团队更新代理 PAC 文件，绕过 `*.openai.azure.com`；或者把代理服务器配置为能够解析 Azure Private DNS 区域
 - 使用拆分隧道，使 Azure 专用终结点的 IP 范围直接路由，而不是经过代理
 

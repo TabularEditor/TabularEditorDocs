@@ -2,7 +2,7 @@
 uid: semantic-model-types
 title: Power BI 语义模型类型
 author: Morten Lønskov
-updated: 2026-10-26
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -58,8 +58,8 @@ Tabular Editor 支持多种不同的模型类型。下面概述了哪些模型�
 <a name="DirectLakeSQLCalculated">4</a> - Direct Lake on SQL 仅支持计算组、假设分析参数和字段参数，这些参数会隐式创建计算表。不支持常规计算表。
 <a name="DirectLakeCalcColumn">5</a> - 预览功能。Direct Lake on OneLake 表上的计算列必须使用 `UserContext` 表达式上下文。它们在查询时进行评估，且不会物化，因此不能用作关系键。有关详细信息，请参阅[Direct Lake 指南](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake)。
 
-> [!NOTE]
-> 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。在此之前，许多建模操作都不受支持。见 [Power BI Desktop 限制](xref:desktop-limitations)。
+>[!NOTE]
+> Power BI Desktop 2025 年 6 月版本取消了对第三方工具的所有建模限制。请参阅 @desktop-integration。
 
 > [!TIP]
 > 如需进一步了解 Direct Lake 模型的限制，请参阅 Microsoft 的 [Direct Lake 文档](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview)

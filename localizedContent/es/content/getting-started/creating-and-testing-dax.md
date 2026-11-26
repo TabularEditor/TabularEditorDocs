@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: Agregar medidas y otros objetos calculados
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,14 +54,11 @@ Si quieres que tu medida esté oculta, haz clic con el botón derecho y seleccio
 
 ## Otras propiedades de la medida
 
-Además de las propiedades `Name`, `Expression` y `Hidden`, puedes usar la vista **Properties** para revisar y editar el valor de todas las propiedades del objeto(s) seleccionado actualmente en el **Explorador TOM**. En el caso de las medidas, aquí puedes establecer, por ejemplo, `Format String`. Para más información, consulta [vista de propiedades](xref:properties-view).
+Además de las propiedades `Name`, `Expression` y `Hidden`, puede utilizar la vista **Propiedades** para revisar y editar el valor de todas las propiedades de los objetos seleccionados actualmente en el **Explorador TOM**. En el caso de las medidas, aquí es donde puedes establecer la `Format String`, por ejemplo. En Tabular Editor 3, con la vista previa pública de la **Vista de propiedades básicas** activada, la pestaña **Básicas** de la vista de propiedades muestra los campos que muestra Power BI Desktop, como **Formato** y **Carpeta de visualización**, y la pestaña **Avanzadas** muestra todas las propiedades. Para obtener más información, consulte [Vista de propiedades](xref:properties-view).
 
 # Agregar columnas calculadas
 
 Para agregar una columna calculada, haz clic con el botón derecho en la tabla a la que quieras agregarla y elige **Create > Calculated Column** (ALT+2). Ponle un nombre a la columna y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos con las medidas más arriba.
-
-> [!IMPORTANT]
-> Esta opción no está disponible de forma predeterminada cuando estás conectado a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el vínculo para obtener más información.
 
 > [!NOTE]
 > Cuando se haya cambiado la expresión DAX de una columna calculada, debes actualizar la tabla en la que se encuentra la columna antes de poder usarla en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.
@@ -69,9 +66,6 @@ Para agregar una columna calculada, haz clic con el botón derecho en la tabla a
 # Agregar tablas calculadas
 
 Para agregar una tabla calculada, haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Tabla calculada** (ALT+6). Asigna un nombre a la tabla y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas. Observa que las columnas de la tabla cambian automáticamente cuando haces un cambio en la expresión DAX. Esto puede provocar efectos en cascada si otras expresiones DAX hacen referencia a la tabla o si se usan columnas en una jerarquía.
-
-> [!IMPORTANT]
-> Esta opción no está disponible de forma predeterminada cuando te conectas a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de la compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el enlace para obtener más información.
 
 > [!NOTE]
 > Cuando cambias la expresión DAX de una tabla calculada, tienes que actualizar la tabla antes de poder usarla en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.

@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: 保存并包含支持文件
 author: Peer Grønnerup
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ applies_to:
 “保存并包含支持文件”会在保存语义模型的同时，一并保存 Microsoft Fabric Git 集成所需的元数据文件。它用于在 Fabric Workspace 与 Git repository 之间同步由 Tabular Editor 保存的模型。
 
 > [!NOTE]
-> “保存并包含支持文件”仅在将模型保存为 .bim (TMSL) 文件，或以 TMDL 作为序列化模式保存到文件夹时可用。
+> 当您保存到 .bim (TMSL) 文件或 TMDL 文件夹时，可以使用“保存时包含支持文件”选项。
 
 ## 文件结构和模型属性
 
@@ -75,7 +75,7 @@ Sales.SemanticModel/
 1. 在 Tabular Editor 3 中创建或打开一个语义模型。
 2. 在 TOM Explorer 中设置 Database 对象的 `Name` 属性。这会设置文件夹名称以及 .platform 文件中的 `displayName`。
    ![设置 Database 的 Name 属性](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
-3. 如果保存到文件夹，请在 **工具 > 偏好 > 文件格式** 下将序列化模式设置为 TMDL。
+3. 如果您保存到文件夹，请检查**工具 > 首选项 > 文件格式 > 保存到文件夹**下的**保存到文件夹格式**是否为**TMDL**。文件夹对话框仅在保存为 TMDL 时显示**保存时包含支持文件**。
 4. 选择 **文件 > 另存为** 或 **文件 > 保存到文件夹**。
 5. 选择一个文件夹，然后选择 **保存并包含支持文件**。
    ![“保存并包含支持文件”对话框](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)

@@ -2,7 +2,7 @@
 uid: object-properties
 title: 对象属性参考
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ SUMMARY: Reference for every property that Tabular Editor shows in the Propertie
 
 语义模型中的每个对象，例如表、列或度量值，都有一组属性。这些属性来自 Tabular Object Model (TOM)，也就是 Analysis Services、Power BI 和 Fabric 用来定义语义模型的对象模型。这些属性会显示在 @properties-view 中；C# Script 可通过 @api-index 读取和写入这些属性。
 
-这份参考介绍属性视图中显示的每项属性。如果 Tabular Editor 为某个属性提供了相关功能，例如编辑器、Best Practice Analyzer (BPA) 规则或 C# Script，对应条目会链接到该功能。
+本参考资料介绍了“属性”视图的属性网格中显示的每个属性。启用**“基本属性”视图**公测版后，网格为**“高级”**选项卡，而**“基本”**选项卡以表单形式显示属性的子集。当 Tabular Editor 具有针对某个属性的功能（例如编辑器、Best Practice Analyzer (BPA) 规则或 C# 脚本）时，该条目会链接到该功能。
 
 要更改属性，在 @tom-explorer-view 中选择一个或多个对象，然后在属性视图中编辑其值。当你选择多个对象时，新值将应用于它们全部。参见 @editing-properties。
 
@@ -52,9 +52,9 @@ SUMMARY: Reference for every property that Tabular Editor shows in the Propertie
 | @object-properties-calendars             | 日历、时间相关列组、时间单位列关联                               |
 | @object-properties-functions             | 用户自定义函数、集合                                      |
 
-每个页面都会为每个对象设置一个部分。章节开头会列出指向该对象常见属性的链接，随后是每个属性对应的条目。对于每种对象，属性都会按类别列出，其顺序与在属性视图中选择 **分类** 时显示的顺序一致。类别包括：
+每个页面都有一个针对每个对象的版块。该部分以指向对象常见属性的链接开头，然后是每个属性的一个条目。在每个对象中，属性按类别列出，其顺序与选择“**按类别**”时属性网格显示的顺序相同。类别包括：
 
-- **基本**：最常修改的属性，例如名称、说明和格式字符串。
+- **常规**：您最常更改的属性，例如名称、描述和格式字符串。
 - **元数据**：对象的相关信息，例如对象类型或错误信息。这些属性大多为只读。
 - **选项**：更改对象行为方式的属性，例如表达式、汇总方式或排序顺序。
 - **翻译、透视、安全性**：按区域设置的翻译、透视成员关系以及按角色的安全设置。
@@ -73,6 +73,7 @@ TOM 名称是在 C# Script 中使用的名称。对于少数属性，表格式�
 - **只读**：你不能更改该值。
 - **兼容级别 NNNN+**：模型所需的最低兼容级别，例如 `compatibility level 1540+`。
 - 用于标识该属性是由 Tabular Editor 添加的。参见 [Tabular Editor 添加的属性](#properties-that-tabular-editor-adds)。
+- **基本**：该属性是基本属性。请参阅[基本属性](#basic-properties)。
 
 例如，Lineage tag 的条目开头如下：
 
@@ -86,6 +87,12 @@ TOM 名称是在 C# Script 中使用的名称。对于少数属性，表格式�
 - 模型的兼容级别。许多属性都要求最低兼容级别，例如 `LineageTag` 需要 1540 或更高的兼容级别。要查看或更改兼容级别，请选择模型，然后在属性视图中展开 `Database`。
 - 模型的兼容模式。某些属性仅适用于 Power BI 和 Fabric 模型，或仅适用于 Analysis Services 模型。
 - 对象的状态。某些属性仅在另一个属性具有特定值时才会显示。例如，只有当表具有刷新策略时，才会显示该刷新策略的属性。
+
+## 基本属性
+
+基本属性是大多数模型所需的属性，例如对象的名称、度量值的格式字符串以及关系的交叉筛选器方向。其他属性为高级属性。
+
+基本属性标题下方的行以**基本**结尾。对于常见属性（例如 `Name` 或 `Description`），标记位于每个对象的**常见属性**列表中，因为哪些属性是基本属性取决于对象类型。
 
 ## Tabular Editor 添加的属性
 

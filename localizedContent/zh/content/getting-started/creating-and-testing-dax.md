@@ -2,7 +2,7 @@
 uid: creating-and-testing-dax
 title: 添加度量值和其他计算对象
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,14 +54,11 @@ Tabular Editor 3 使用的新 DAX 代码编辑器已将这些问题全部解决�
 
 ## 其他度量值属性
 
-除了 `Name`、`Expression` 和 `Hidden` 属性之外，你还可以使用 **属性** 视图来查看并编辑 **TOM Explorer** 中当前所选对象(一个或多个)的所有属性值。例如，对于度量值，你可以在这里设置 `Format String`。更多信息请参阅 [属性视图](xref:properties-view)。
+除了`Name`、`Expression`和`Hidden`属性外，您还可以使用**属性**视图查看和编辑**TOM资源管理器**中当前选定对象的所有属性的值。对于度量值，您可以在此处设置`Format String`，例如。在 Tabular Editor 3 中，如果启用了**基本属性视图**的公开预览，则“属性”视图的“基本”选项卡会显示 Power BI Desktop 显示的字段，例如**格式**和**显示文件夹**，而“高级”选项卡会显示所有属性。有关更多信息，请参阅[属性视图](xref:properties-view)。
 
 # 添加计算列
 
 要添加计算列，请右键单击要添加该列的表，然后选择 **创建 > 计算列**（ALT+2）。为该列命名，并使用 **表达式编辑器** 编辑其 DAX 表达式，方式与上面创建度量值时类似。
-
-> [!IMPORTANT]
-> 连接到 Power BI Desktop 模型时，此选项默认不可用。这是因为 [Power BI Desktop 对外部工具支持的限制](xref:desktop-limitations)。单击链接了解更多信息。
 
 > [!NOTE]
 > 当计算列的 DAX 表达式发生更改后，必须先刷新该列所在的表，才能在 Report 中使用该列。更多信息请参阅<xref:refresh-preview-query#refreshing-data>。
@@ -69,9 +66,6 @@ Tabular Editor 3 使用的新 DAX 代码编辑器已将这些问题全部解决�
 # 添加计算表格
 
 要添加计算表格，请在模型或“Tables”文件夹上右键单击，然后选择 **创建 > 计算表格** (ALT+6)。为表格命名，并使用 **表达式编辑器** 编辑其 DAX 表达式，方式与我们在上面创建度量值时类似。注意，当你修改 DAX 表达式时，表中的列会自动更新。如果其他 DAX 表达式引用了该表格，或某些列被用在层次结构中，这可能会产生连锁影响。
-
-> [!IMPORTANT]
-> 连接到 Power BI Desktop 模型时，此选项默认不可用。这是因为 [Power BI Desktop 对外部工具支持的限制](xref:desktop-limitations)。点击链接了解更多。
 
 > [!NOTE]
 > 当计算表格的 DAX 表达式发生更改后，必须先刷新该表格，才能在 Report 中使用。更多信息见 <xref:refresh-preview-query#refreshing-data>。
