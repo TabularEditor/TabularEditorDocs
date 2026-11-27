@@ -2,11 +2,12 @@
 uid: how-to-build-custom-winforms-dialogs
 title: How to Build Custom WinForms Dialogs in Scripts
 author: Morten Lønskov
-updated: 2026-04-13
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "The scope selection dialog example requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -150,6 +151,9 @@ using (var form = new Form())
 
 ## Scope selection dialog (reusable class)
 
+> [!NOTE]
+> In Tabular Editor 2, this example requires a Roslyn compiler. See [Compiling with Roslyn](xref:advanced-scripting#compiling-with-roslyn).
+
 For scripts that need a choice between operating on selected objects or all objects, encapsulate the dialog in a reusable class.
 
 ```csharp
@@ -226,7 +230,7 @@ using (var dialog = new ScopeDialog(Selected.Measures.Count(), Model.AllMeasures
             Selected.Measures.ForEach(m => m.FormatString = "#,##0.00");
             break;
         case ScopeDialog.ScopeOption.All:
-            Model.AllMeasures.ForEach(m => m.FormatString = "#,##0.00");
+            foreach (var m in Model.AllMeasures) m.FormatString = "#,##0.00";
             break;
         case ScopeDialog.ScopeOption.Cancel:
             break;
