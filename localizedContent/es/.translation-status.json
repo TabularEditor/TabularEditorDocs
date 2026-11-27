@@ -2380,14 +2380,14 @@
   },
   "failures": {
     "references/preferences.md": {
-      "error": "POST translate/ai failed: POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction W7wzZPh3FF",
-      "at": "2026-11-26T03:10:00Z",
+      "error": "POST translate/ai failed: POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction lA7OF1YFFL",
+      "at": "2026-11-27T03:09:30Z",
       "sourceHash": "sha256:2444e123f26b163b4015773c7673573483fb02ec4c2e7df1cb2c1984703c2ff0",
       "apiError": {
-        "message": "POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction W7wzZPh3FF",
+        "message": "POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction lA7OF1YFFL",
         "httpStatus": 400,
         "code": "HTTP_400",
-        "id_transaction": "W7wzZPh3FF",
+        "id_transaction": "lA7OF1YFFL",
         "params": [
           {
             "field": "content",
