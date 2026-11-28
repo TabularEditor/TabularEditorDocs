@@ -1,8 +1,9 @@
 ---
 uid: getting-started-te2
-title: Tabular Editor 2 快速入门
-author: Daniel Otykier
-updated: 2026-10-12
+title: Tabular Editor 2 入门
+author: Morten Lønskov
+updated: 2026-11-19
+description: 安装 Tabular Editor 2（面向 Analysis Services 和 Power BI 语义模型的免费开源编辑器），然后打开、编辑和部署模型。Tabular Editor 3 是商业版本，提供 30 天免费试用。
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,106 +11,149 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
+# Tabular Editor 2 入门
 
-# 入门
+Tabular Editor 2 是一款免费的开源 Windows 应用程序，用于编辑 Analysis Services 和 Power BI 语义模型。本页介绍了安装、打开和编辑模型、部署、命令行和 C# 脚本。
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
+
+## 按任务划分的工具
+
+Tabular Editor 2、Tabular Editor 3 和 [Tabular Editor CLI](xref:te-cli) 涵盖不同的任务：
+
+| 任务 | 工具 | 文档 |
+|------|------|---------------|
+| 在免费的桌面应用程序中编辑模型元数据 | Tabular Editor 2 | 本页 |
+| 使用自动补全功能编写 DAX，并在调试器中单步执行 | Tabular Editor 3 | @dax-debugger |
+| 运行 DAX 查询并预览表格数据 | Tabular Editor 3 | @refresh-preview-query |
+| 从 CI/CD 管道部署 | Tabular Editor 2 或 Tabular Editor CLI | @command-line-options、@te-cli-cicd |
+| 运行 Best Practice Analyzer 检查 | 三者均可 | @best-practice-analyzer |
+| 让 AI 代理读取、查询和更改在桌面应用程序中打开的模型 | Tabular Editor 3 | @mcp-server |
+| 让 AI 代理从终端更改模型文件或已部署的模型 | Tabular Editor CLI | @te-cli-skill |
 
 ## 安装
 
-只需从[发布页面](https://github.com/TabularEditor/TabularEditor/releases/latest)下载 .msi 文件，然后运行该 .msi 安装程序即可。
+从[发布页面](https://github.com/TabularEditor/TabularEditor/releases/latest)下载 .msi 安装程序或便携式 .zip 文件。运行 .msi，或将 .zip 解压缩到文件夹并运行 `TabularEditor.exe`。
 
-## 先决条件
+.msi 将 Tabular Editor 2 注册为 Power BI Desktop 中的[外部工具](xref:desktop-integration)。
 
-无。
+## 前提条件
+
+Tabular Editor 2 需要 [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48)。如果缺少 .NET Framework 4.8，.msi 安装程序将停止，并提供下载链接。
 
 > [!NOTE]
-> Tabular Editor 使用 [Tabular Object Model](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 从 Model.bim 文件或现有数据库中加载元数据，并将元数据保存回这些文件或数据库。该组件已包含在 .msi 安装包中。请参阅 Microsoft 官方文档中的 [Analysis Services Client Libraries](https://docs.microsoft.com/azure/analysis-services/analysis-services-data-providers)。
+> Tabular Editor 2 使用 [Tabular Object Model](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo) (TOM) 加载和保存 Model.bim 文件或现有数据库中的元数据。安装程序包含[Analysis Services 客户端库](https://learn.microsoft.com/analysis-services/client-libraries)。
 
 ## 系统要求
 
-- **操作系统：** Windows 7、Windows 8、Windows 10、Windows Server 2016、Windows Server 2019 或更高版本
-- **.NET Framework：** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
+- **操作系统：** .NET Framework 4.8 支持的 Windows 版本
+- **.NET Framework：**[4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48)
 
-## 使用 Tabular Editor
+## 打开模型
 
-推荐的工作流是：像平时一样使用 SSDT 设置表和关系，然后用 Tabular Editor 完成其余工作。也就是说：创建计算列、度量值、层次结构、透视、翻译、显示文件夹，以及你能想到的其他各种细节调整。
+使用**文件 > 打开 > 从文件...** (**Ctrl+O**) 从磁盘打开模型。支持的格式包括 Model.bim 文件、使用[保存到文件夹](xref:save-to-folder)（database.json）保存的文件夹、[TMDL](xref:tmdl) 文件夹、.pbit 文件和 .pbip 项目。
 
-通过选择“打开 > 从文件...”加载 Model.bim 文件……（位于“文件”菜单中，CTRL+O）；或通过选择“打开 > 从数据库...”从 Analysis Services 实例打开现有数据库……选项即可。在后一种情况下，程序会提示你输入服务器名称以及可选的凭据：
+使用**文件 > 打开 > 从数据库…** (**Ctrl+Shift+O**)打开已部署的数据库。**连接到 Tabular Server** 对话框会要求提供服务器名称和身份验证：
 
-![连接到已部署的表格模型](~/content/assets/images/getting-started-te-01.png)
+![正在连接到已部署的表格模型](~/content/assets/images/getting-started-te-01.png)
 
-这也适用于新版 Azure Analysis Services PaaS。可使用“本地实例”下拉列表浏览并连接到任何正在运行的 Power BI Desktop 实例或 Visual Studio 集成工作区。**注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但并非所有建模操作都受 Microsoft 支持。[更多信息](Power-BI-Desktop-Integration.md)**
+服务器名称接受 Analysis Services 实例和 Azure Analysis Services 服务器 (`asazure://<servername>`)。**本地实例**下拉列表列出了正在运行的 Power BI Desktop、Visual Studio 集成工作区和本地 Analysis Services 实例。从 2025 年 6 月的 Power BI Desktop 更新开始，外部工具可以更改托管在 Power BI Desktop 中的模型的任何部分。请参阅 @desktop-integration。
 
-单击“确定”后，你将看到服务器上的数据库列表。
+选择**确定**，然后从服务器上的列表中选择一个数据库。
 
-模型加载到 Tabular Editor 后，界面如下所示：
+## 编辑模型
+
+模型加载后，主窗口如下所示：
 
 ![Tabular Editor 的主界面](~/content/assets/images/getting-started-te-02.png)
 
-屏幕左侧的树状视图显示 Tabular 模型中的所有表。展开某个表会显示该表中的所有列、度量值和层次结构，并按其显示文件夹进行分组。使用树状视图上方的按钮，可切换显示文件夹、隐藏对象、特定类型的对象，或按名称筛选对象。在树状视图中的任意位置右键单击，会弹出包含常用操作的上下文菜单，例如添加新度量值、将对象设为隐藏、复制对象、删除对象等。按 F2 可重命名当前选中的对象；或多选后右键单击，以批量重命名多个对象。
+左侧的树状视图列出了模型中的所有表格。展开表以查看其列、度量值和层次结构，这些内容按显示文件夹分组。树上方的按钮用于切换显示文件夹、隐藏对象和对象类型，文本框用于按名称筛选对象。在树中右键单击，即可执行常见操作，例如添加度量值、隐藏、复制和删除对象。按 **F2** 可重命名所选对象。当您选择多个对象时，按 **F2** 将打开**批量重命名**：
 
-![批量重命名可让你同时重命名多个对象](~/content/assets/images/getting-started-te-03.png)
+![批量重命名让您可以同时重命名多个对象](~/content/assets/images/getting-started-te-03.png)
 
-在主 UI 的右上角，你会看到 DAX编辑器，可用于编辑模型中任意度量值或计算列的 DAX 表达式。单击“DAX Formatter”按钮，通过 www.daxformatter.com 自动格式化代码。
+右上角的**表达式编辑器**用于编辑所选度量值或计算列的 DAX 表达式。**格式化DAX**通过[DAX Formatter](https://www.daxformatter.com)格式化表达式。
 
-使用右下角的属性网格，检查并设置对象的属性，例如格式字符串、说明及其翻译，以及透视成员资格。你也可以在此设置显示文件夹属性，但更简单的做法是直接在树状视图中拖放对象来更新其显示文件夹（可尝试使用 CTRL 或 SHIFT 选择多个对象）。
+右下角的属性网格显示并设置对象属性，例如 `FormatString`、`Description`、翻译和透视成员资格。要一次更改多个对象的`DisplayFolder`，请使用**Ctrl**或**Shift**选中这些对象，然后将它们拖动到树中的文件夹。
 
-要编辑透视或翻译（区域设置），请在树状视图中选择“Model”对象，然后在属性网格中找到“Model Perspectives”或“Model Cultures”属性。点击小省略号按钮，打开集合编辑器，以添加、删除或编辑透视和区域设置。
+要编辑透视或翻译，请在树中选择“**模型**”对象，然后选择 `Perspectives` 或 `Cultures` 属性旁边的省略号按钮。集合编辑器将打开，用于添加、删除和编辑项：
 
-![编辑透视——点击右侧的省略号按钮](~/content/assets/images/getting-started-te-04.png)
+![编辑透视 - 点击右侧的省略号按钮](~/content/assets/images/getting-started-te-04.png)
 
-要将更改保存回 Model.bim 文件，单击保存按钮或按 CTRL+S。如果你打开的是现有 Tabular 数据库，更改将直接保存回该数据库。如果自你将数据库加载到 Tabular Editor 后该数据库发生过更改，系统会提示你。你始终可以按 CTRL+Z 撤销更改。
-
-如果要将模型部署到其他位置，请转到“Model”菜单并选择“Deploy”。
+按 **Ctrl+S** 保存。从文件打开的模型将保存回该文件，从数据库打开的模型将保存回数据库。如果您加载已部署的数据库后有人对其进行了更改，则会显示**更改冲突**提示，询问是否要覆盖它。按 **Ctrl+Z** 撤消，按 **Ctrl+Y** 恢复。
 
 ## 部署
 
-Tabular Editor 自带部署向导 Deployment Wizard，相比从 SSDT 部署有一些优势——尤其是在部署到现有数据库时。在选择要部署到的服务器和数据库后，本次部署你可以选择以下选项：
+**“模型”>“部署...”**将打开部署向导，该向导会将已加载的模型部署到服务器。选择服务器和数据库后，选择要部署模型的哪些部分：
 
-![Deployment Wizard](~/content/assets/images/getting-started-te-05.png)
+![部署向导](~/content/assets/images/getting-started-te-05.png)
 
-不勾选“Deploy Connections”复选框，将确保目标数据库中的所有数据源保持不变。如果你的模型中有一个或多个表所使用的数据源在目标数据库中不存在，则会报错。
+| 选项 | 取消选中时 |
+|--------|--------------|
+| **部署数据源** | 目标数据库上的数据源保持不变。如果表格使用目标上不存在的数据源，则部署将失败。|
+| **部署表分区** | 目标上的分区保持不变，其数据也保持不变。|
+| **部署受增量刷新策略管理的分区** | 由增量刷新创建的分区保持原样。需要**部署表分区**。|
+| **部署共享表达式** | 目标上的共享表达式保持不变。需要兼容级别 1400 或更高版本。|
+| **部署角色** | 目标上的角色保持不变。|
+| **部署角色成员** | 目标上的角色成员保持不变。需要**部署角色**。|
 
-同样，不勾选“Deploy Table Partitions”将确保表上的现有分区不会被更改，从而保持分区中的数据不受影响。
+当目标是现有数据库时，始终会选中**部署模型结构**。当模型包含该类型的对象时，默认选中其他选项；当模型包含角色成员时，选中**部署角色**。如果数据库尚不存在，则向导会使用模型部署数据源、分区和共享表达式，并且仅应用角色选项。摘要页面还包含**导出生成...**，用于为 Analysis Services Deployment Wizard 写入部署文件，以及**TMSL 脚本**，用于将部署显示为 TMSL 脚本。
 
-勾选“Deploy Roles”后，目标数据库中的角色会更新为与已加载模型一致；但如果不勾选“Deploy Role Members”，则目标数据库中各角色的成员将保持不变。
+## 命令行
 
-## 命令行用法
-
-你可以使用命令行进行自动化部署。 GUI 中提供的所有部署选项，命令行同样支持。
-
-### 部署示例
+`TabularEditor.exe` 从命令行运行部署、脚本和 Best Practice Analyzer 检查。以下示例部署了一个模型：
 
 `TabularEditor.exe c:\Projects\Model.bim`
 
-打开 Tabular Editor 的 GUI 并加载指定的 Model.bim 文件（不部署任何内容）。
+打开 Tabular Editor 2 并加载 Model.bim 文件，但不部署任何内容。
 
 `TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-将指定的 Model.bim 文件部署到 localhost 上运行的 SSAS 实例，并覆盖现有或创建新的 AdventureWorks 数据库。不会加载 GUI。
+在本地主机的 Analysis Services 实例上创建 AdventureWorks 数据库，而不打开用户界面。如果数据库已存在，则部署失败。
 
-默认情况下，目标数据库中的分区、数据源和角色不会被覆盖。你可以在上述命令后添加以下一个或多个开关参数，以更改此行为：
+`TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks -O -P -R -M`
 
-- `-P` 覆盖 **p**artitions：分区
-- `-C` 覆盖 **c**onnections（连接，即数据源）
-- `-R` 覆盖 **r**oles：角色
-- `-M` 覆盖角色 **m**embers：成员
+覆盖现有的 AdventureWorks 数据库，包括其分区、角色和角色成员。
 
-有关命令行选项的更多信息，请参见[这里](../features/Command-line-Options.md)。
+在数据库名称后添加以下开关，以控制部署要覆盖的内容：
+
+- `-O` 覆盖现有数据库
+- `-C` 覆盖数据源（**连**接）
+- `-P` 覆盖**p**artition（分区）
+- `-Y` 跳过具有增量刷新策略的分区（使用 `-P`）
+- `-S` 覆盖**共**享表达式
+- `-R` 覆盖**角色**
+- `-M` 覆盖角色**成**员（使用 `-R`）
+
+如果没有这些开关，目标上的数据源、分区、共享表达式和角色将保持原样。@command-line-options 列出了每个开关，包括脚本、Best Practice Analyzer 检查以及 Azure DevOps 和 GitHub Actions 的输出。
 
 > [!NOTE]
-> 由于 TabularEditor.exe 是一个 Windows Forms 应用程序，从命令行运行时会在不同的线程中执行，并会立即将控制权返回给调用方。在批处理作业中运行部署时，这可能会引发问题，因为你需要等待部署成功完成后才能继续执行作业。如果你遇到此类问题，请使用 `start /wait` 让 TabularEditor 先完成工作，再将控制权返回给调用方：
+> `TabularEditor.exe` 是一款 Windows Forms 应用程序，因此命令行调用会在部署完成之前返回。在等待部署的批处理作业中，请使用 `start /wait`：
 >
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-## 高级脚本编写
+[Tabular Editor CLI](xref:te-cli) 在 Windows、macOS 和 Linux 上运行，并接受大多数 `TabularEditor.exe` 开关。请参阅 @te-cli-migrate。
 
-Tabular Editor 允许你使用 C# 通过脚本方式修改已加载的模型。当你需要一次性对大量对象应用多项更改时，这很实用。高级脚本编辑器可访问两个对象：
+## C# 脚本
 
-- `Selected`，表示资源管理器树中当前选中的所有对象。
-- `Model`，表示整个 Tabular Object Model 树。
+**C# Script**选项卡对加载的模型运行C#代码。使用它可将相同的更改一次性应用于多个对象。脚本可以访问两个对象：
 
-高级脚本编辑器提供有限的 IntelliSense 功能，帮助你快速上手：
+- `Selected` 包含在树中选定的对象。
+- `Model` 包含整个 Tabular Object Model。
 
-![IntelliSense 帮助你为 Tabular Editor 创建脚本](~/content/assets/images/getting-started-te-06.png)
+脚本编辑器具有基本的 IntelliSense 功能：
 
-有关高级脚本编写的更多文档和示例，可在[此处](../how-tos/Advanced-Scripting.md)找到。
+![IntelliSense 帮助您为 Tabular Editor 创建脚本](~/content/assets/images/getting-started-te-06.png)
+
+Tabular Editor 2 将此功能称为“高级脚本”。请参阅 @advanced-scripting，了解脚本 API 和示例。
+
+## 功能比较
+
+下表对 Tabular Editor 2、Tabular Editor 3 和 Tabular Editor CLI 进行了比较：
+
+[!include[feature-comparison](../includes/feature-comparison.partial.md)]
+
+## 后续步骤
+
+- @migrate-from-te2 介绍了 Tabular Editor 2 和 Tabular Editor 3 之间的功能差异。
+- @getting-started 介绍了如何安装 Tabular Editor 3 并开始免费试用。
+- @te-cli-skill 安装一项技能，用于向 AI 编码代理教授 Tabular Editor CLI 命令。

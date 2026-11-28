@@ -2,7 +2,7 @@
 uid: object-properties-perspectives-cultures
 title: Propiedades de las perspectivas y configuraciones regionales
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of perspectives and cultures (translations
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 En esta página se describen las propiedades de las perspectivas y las configuraciones regionales. Para ver las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 Para agregar o quitar perspectivas y configuraciones regionales, usa las colecciones **Perspectivas** y **Configuraciones regionales** del modelo (consulta @object-properties-model), o haz clic con el botón derecho en la carpeta **Perspectivas** o **Traducciones** del **Explorador TOM**. Tabular Editor 2 usa los mismos nombres de carpeta. Consulta @perspectivas-traducciones. Para crear y cambiar perspectivas y configuraciones regionales mediante un C# Script, consulta @how-to-work-with-perspectives-translations.
@@ -46,8 +48,8 @@ La regla del Best Practice Analyzer (BPA) @kb.bpa-perspectives-no-objects marca 
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -66,14 +68,13 @@ Las propiedades de estadísticas de traducción muestran qué parte del modelo e
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
+- [Nombre](xref:object-properties-common#name) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Altered
-
-`Altered` · bool (vacío cuando hay valores mixtos) · Básico · nivel de compatibilidad 1571+ · _acceso directo al_ indicador **Altered** de cada traducción de la configuración regional
+`Altered` · bool (vacío cuando es mixto) · General · nivel de compatibilidad 1571+ · *acceso directo a* la marca **Modificada** de cada traducción de la cultura
 
 Cada traducción de una configuración regional lleva un indicador _altered_ en el Tabular Object Model (TOM), que las herramientas de traducción utilizan para marcar las traducciones que una persona ha revisado o modificado. Esta propiedad resume los indicadores de todas las traducciones de la configuración regional:
 

@@ -1,11 +1,25 @@
 ---
 uid: release-history
 title: 完整发布历史
-updated: 2026-10-11
+updated: 2026-11-25
 ---
 
 # 完整发布历史
 
+- 2026-11-25 **Tabular Editor 3 v28.0.0** (*[发布说明](release-notes/3_28_0_0.md)*)
+  - .NET 10 安装程序（.exe）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.Installer.x64.Net10.exe)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.Installer.ARM64.Net10.exe)
+  - .NET 10 便携版（.zip）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.x64.Net10.zip)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.ARM64.Net10.zip)
+  - .NET 10 安装程序（.msi）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.x64.Net10.msi)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.ARM64.Net10.msi)
+  - .NET 8 安装程序（.exe）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.Installer.x64.Net8.exe)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.Installer.ARM64.Net8.exe)
+  - .NET 8 便携版（.zip）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.x64.Net8.zip)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.ARM64.Net8.zip)
+  - .NET 8 安装程序（.msi）： [x64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.x64.Net8.msi)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.28.0.0/TabularEditor.3.28.0.0.ARM64.Net8.msi)
+- 2026-10-23 **Tabular Editor 3.27.1.1** (*[发布说明](release-notes/3_27_1_1.md)*)
+  - .NET 10 安装程序（.exe）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.Installer.x64.Net10.exe)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.Installer.ARM64.Net10.exe)
+  - .NET 10 便携版（.zip）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.x64.Net10.zip)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.ARM64.Net10.zip)
+  - .NET 10 安装程序 (.msi)：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.x64.Net10.msi)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.ARM64.Net10.msi)
+  - .NET 8 安装程序（.exe）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.Installer.x64.Net8.exe)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.Installer.ARM64.Net8.exe)
+  - .NET 8 便携版（.zip）：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.x64.Net8.zip)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.ARM64.Net8.zip)
+  - .NET 8 安装程序 (.msi)：[x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.x64.Net8.msi)、[ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.1/TabularEditor.3.27.1.1.ARM64.Net8.msi)
 - 2026-10-15 **Tabular Editor 3.27.1.0** (_[发布说明](release-notes/3_27_1_0.md)_)
   - .NET 10 安装程序（.exe）： [x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.0/TabularEditor.3.27.1.0.Installer.x64.Net10.exe)， [ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.0/TabularEditor.3.27.1.0.Installer.ARM64.Net10.exe)
   - .NET 10 便携版（.zip）： [x64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.0/TabularEditor.3.27.1.0.x64.Net10.zip)， [ARM64](https://cdn.tabulareditor.com/files/archive/te3/3.27.1.0/TabularEditor.3.27.1.0.ARM64.Net10.zip)

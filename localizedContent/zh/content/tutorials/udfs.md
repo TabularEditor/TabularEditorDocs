@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX 用户自定义函数
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-21
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -230,9 +230,9 @@ DAX 没有命名空间，因此给 DAX UDF 取名时，要使用含义明确且�
 
 ## DAX UDF 与源代码管理
 
-如果你将模型存储为文件夹结构，Tabular Editor 可以将每个 DAX UDF 写入各自的文件。如果不使用这种序列化级别，所有函数都会存储在 `Database.json` 中，而对不同函数的并行编辑可能会在该文件中产生冲突。
+如果你将模型存储为文件夹结构，Tabular Editor 可以将每个 DAX UDF 写入各自的文件。如果不使用这种序列化级别，所有函数都会存储在 `database.json` 中，而对不同函数的并行编辑可能会在该文件中产生冲突。
 
-在 **模型 > 序列化选项...** 下选择 **用户定义函数（UDFs）** 级别。对于首次保存到文件夹的模型，请在 **Tools > 偏好 > File Formats > Save-to-folder** 下选择该序列化级别（参见 [保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)）。
+在**模型 > 序列化选项…**下选择**用户定义函数 (UDF)**级别。对于您首次保存到文件夹的模型，请在**工具 > 首选项 > 文件格式 > 保存到文件夹 > JSON 序列化**下选择该模型（请参阅[保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)）。
 
 ## 最佳实践
 

@@ -2,7 +2,7 @@
 uid: udfs
 title: Funciones DAX definidas por el usuario
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-10-21
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -231,9 +231,9 @@ Cada UDF de DAX también tiene una propiedad `Namespace` que establece su posici
 
 ## Las UDF de DAX y el control de código fuente
 
-Si almacenas el modelo como una estructura de carpetas, Tabular Editor puede escribir cada UDF de DAX en su propio archivo. Sin este nivel de serialización, todas las funciones se almacenan en `Database.json`, y las ediciones en paralelo de distintas funciones pueden entrar en conflicto en ese archivo.
+Si almacenas el modelo como una estructura de carpetas, Tabular Editor puede escribir cada UDF de DAX en su propio archivo. Sin este nivel de serialización, todas las funciones se almacenan en `database.json`, y las ediciones en paralelo de distintas funciones pueden entrar en conflicto en ese archivo.
 
-Selecciona el nivel **Funciones definidas por el usuario (UDFs)** en **Modelo > opciones de serialización...**. Si vas a guardar un modelo en una carpeta por primera vez, selecciona esta opción en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** (consulta [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs)).
+Seleccione el nivel **Funciones definidas por el usuario (UDF)** en **Modelo > Opciones de serialización...**. En el caso de un modelo que guarde en una carpeta por primera vez, selecciónelo en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta > Serialización JSON** (consulte [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs)).
 
 ## Buenas prácticas
 

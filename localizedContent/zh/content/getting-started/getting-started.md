@@ -2,7 +2,7 @@
 uid: getting-started
 title: 安装与激活
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,7 +73,7 @@ Tabular Editor 3 的安装是按 **用户** 激活的。如果多个用户共享
 
 ### 申请试用许可证
 
-如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。选择这个选项后，系统会提示你输入电子邮件地址。我们会使用这个电子邮件地址来验证你是否已有 Tabular Editor 3 的激活记录。
+如果您此前从未使用过 Tabular Editor 3，则有资格获得企业版功能集的 30 天免费试用。试用需要提供有效的电子邮件地址，无需信用卡。当您选择此选项时，系统会提示您输入电子邮件地址。我们会使用该电子邮件地址验证您是否已激活 Tabular Editor 3。
 
 > [!NOTE]
 > 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。查看我们的 @privacy-policy 以了解更多信息。
@@ -99,20 +99,20 @@ Tabular Editor 3 提供了许多配置选项。默认设置已足以满足大多
 
 ### 启动时检查更新
 
-默认情况下，每次启动 Tabular Editor 3 时，工具都会联机检查是否有新版本可用。你可以在 **工具 > 偏好设置 > 更新和反馈** 中控制此更新检查的执行方式。
+默认情况下，每次启动 Tabular Editor 3 时，该工具都会在线检查是否有更新版本可用。您可以在**工具 > 首选项 > Tabular Editor > 更新和反馈**下控制此更新检查的执行方式。
 
 > [!NOTE]
 > 请始终使用最新版本的 Tabular Editor 3。在提交 Bug Report 前，请确保你使用的是最新版本；我们的支持团队会以此为前提。
 
 ### 选择退出遥测数据收集
 
-Tabular Editor 3 会收集匿名使用数据和遥测信息，用来帮助我们改进产品。你可以随时启动 Tabular Editor 3，并前往 **工具 > 偏好设置 > 更新和反馈** 选择退出。要退出，请取消选中 **通过收集匿名使用数据帮助改进 Tabular Editor** 复选框。
+Tabular Editor 3 收集匿名使用数据和遥测数据，这有助于我们改进产品。您可以随时选择退出，方法是启动 Tabular Editor 3 并导航至**工具 > 首选项 > Tabular Editor > 更新和反馈**。取消选中**通过收集匿名使用数据帮助改进 Tabular Editor** 复选框即可选择退出。
 
 ![收集遥测数据](~/content/assets/images/getting-started/collect-telemetry.png)
 
 ### 代理设置
 
-如果你所在的网络互联网连接受限，请在 **工具 > 偏好设置 > 代理设置** 中指定代理服务器的地址、用户名和密码。要让 Tabular Editor 3 使用任何依赖出站 Web 请求的功能，必须先完成此设置。具体包括：
+如果你所在的网络互联网连接有限，请在**工具 > 首选项 > Tabular Editor > 代理设置**下指定代理服务器的地址、用户名和密码。这是 Tabular Editor 3 使用任何依赖于出站 Web 请求的功能的先决条件。具体而言：
 
 - 更新检查
 - 产品激活

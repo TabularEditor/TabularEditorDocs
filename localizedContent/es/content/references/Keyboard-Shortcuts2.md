@@ -1,6 +1,7 @@
----
+﻿---
 uid: shortcuts2
 title: Atajos de teclado de Tabular Editor 2
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,6 +11,8 @@ applies_to:
 ---
 
 # Atajos de teclado
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 A partir de la versión 2.7.3, Tabular Editor admite los siguientes atajos de teclado:
 

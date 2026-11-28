@@ -2,7 +2,7 @@
 uid: object-properties-security
 title: Propiedades de roles y seguridad
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página describe las propiedades de los roles, los permisos de tabla y los miembros de cada rol. Un permiso de tabla contiene la configuración de seguridad de un rol para una tabla. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 La seguridad de un modelo semántico se define mediante los roles. Un rol concede a sus miembros un nivel de acceso al modelo y restringe lo que ven mediante:
@@ -44,8 +46,8 @@ Los miembros de los roles de administrador del modelo y los usuarios con acceso 
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -70,8 +72,7 @@ Para proteger columnas individuales, usa [Permisos de columna de OLS](#ols-colum
 > El rol también tiene una colección de objetos de permisos de tabla que comparten el mismo nombre para mostrar. Consulta [Permisos de tabla](#table-permissions-1) más abajo.
 
 ### Seguridad a nivel de filas
-
-`RowLevelSecurity` · por tabla · Seguridad · solo lectura · _acceso directo a_ los permisos de tabla del rol
+`RowLevelSecurity` · por tabla · Seguridad · solo lectura · *acceso directo a* los permisos de tabla del rol · **Básico**
 
 El filtro de seguridad a nivel de filas (RLS) de cada tabla de este rol. Expande la propiedad para ver una entrada por tabla. Cada entrada es una expresión DAX que devuelve `TRUE` para las filas que pueden ver los miembros del rol, y una entrada vacía deja esa tabla sin filtrar. Las tablas de grupos de cálculo no aparecen en la lista. El valor contraído resume la configuración; por ejemplo: "RLS habilitada en 1 de 15 tablas".
 
@@ -109,8 +110,7 @@ En Power BI, no puedes agregar entidades de servicio como miembros de roles.
 Los miembros que alguien agrega en la página **Seguridad** del modelo semántico en el servicio de Power BI son miembros normales de los roles del modelo. A través del punto de conexión XMLA, son idénticos a los miembros agregados en Tabular Editor: miembros externos con `IdentityProvider` `AzureAD` y el ID de objeto del usuario como `MemberID`. Cuando implementas con **Implementar miembros de roles del modelo**, los miembros de tu modelo los reemplazan. Para conservar los miembros agregados en el servicio, implementa sin esa opción.
 
 ### Permiso del modelo
-
-`ModelPermission` · Permiso del modelo · Traducciones, perspectivas, seguridad
+`ModelPermission` · ModelPermission · Traducciones, perspectivas, seguridad · **Básico**
 
 El nivel de acceso que el rol concede a sus miembros a todo el modelo.
 
@@ -163,8 +163,7 @@ La vista **Propiedades** no muestra `Name` ni `ObjectType` en los permisos de ta
 El nombre del rol al que pertenece este permiso de tabla.
 
 ### Tabla
-
-`TableName` · string · Metadatos · de solo lectura · _acceso directo al_ nombre de la tabla
+`TableName` · cadena · Metadatos · solo lectura · *acceso directo a* el nombre de la tabla · **Básico**
 
 El nombre de la tabla que protege este permiso de tabla.
 
@@ -206,13 +205,13 @@ El permiso de seguridad a nivel de objetos (OLS) de la tabla en este rol.
 
 | Valor            | Significado                                                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| `Predeterminado` | No se ha establecido ningún permiso. Los miembros del rol pueden ver la tabla. |
-| `Lectura`        | Los miembros del rol pueden ver y consultar la tabla.                                          |
-| `Ninguno`        | La tabla se oculta para los miembros del rol, junto con sus columnas, medidas y relaciones.    |
+| `Default` | No se ha establecido ningún permiso. Los miembros del rol pueden ver la tabla. |
+| `Read`        | Los miembros del rol pueden ver y consultar la tabla.                                          |
+| `None`        | La tabla se oculta para los miembros del rol, junto con sus columnas, medidas y relaciones.    |
 
 Es la misma configuración que [Permisos de tabla](#table-permissions) en el rol y `ObjectLevelSecurity` en la tabla.
 
-No puedes combinar RLS y OLS de distintos roles. Un usuario que sea miembro de una combinación de roles de este tipo recibe un error en tiempo de consulta, tanto en SQL Server Analysis Services como en Azure Analysis Services y en Power BI. Consulta @data-security-about, [Combinar OLS con RLS](xref:data-security-setup-ols#5-combine-ols-with-rls) y las [restricciones de Microsoft sobre la seguridad a nivel de objetos](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions).
+La RLS en un rol y la OLS en otro rol pueden fallar en el caso de un usuario que sea miembro de ambos roles. Las consultas de ese usuario generan un error cuando la OLS se aplica a la tabla RLS o a una tabla conectada a ella mediante relaciones activas. Algunas de estas combinaciones funcionan, por ejemplo, la OLS de columna que oculta todas las columnas de la tabla RLS. La RLS y la OLS en el mismo rol siempre funcionan juntas. Las [restricciones de seguridad a nivel de objeto](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions) de Microsoft indican que no se admite ninguna combinación de RLS y OLS de distintos roles. Consulte también @data-security-about y [Combinar OLS con RLS](xref:data-security-setup-ols#5-combine-ols-with-rls).
 
 Tampoco puedes ocultar una tabla con OLS si con ello se rompe una cadena de relaciones con otras tablas. El motor lo rechaza con un error.
 
@@ -244,11 +243,11 @@ Cuando implementas un miembro de Windows con solo `MemberName` establecido, SQL 
 
 `MemberName` · string · Opciones
 
-El nombre del usuario o grupo de Windows en el formato `DOMAIN\\name`, por ejemplo `CONTOSO\\SalesManagers`. Si la cuenta no existe en un dominio en el que confía el servidor, la implementación falla.
+El nombre del usuario o grupo de Windows en el formato `DOMAIN\name`, por ejemplo `CONTOSO\SalesManagers`. Si la cuenta no existe en un dominio en el que confía el servidor, la implementación falla.
 
 ### Rol
 
-`Rol` · ModelRole · Opciones · de solo lectura
+`Role` · ModelRole · Opciones · de solo lectura
 
 El rol al que pertenece este miembro, para C# Scripts que van desde un miembro hasta su rol. La vista **Propiedades** no lo muestra.
 
@@ -321,6 +320,6 @@ Azure Analysis Services y el servicio de Power BI ignoran el valor que configure
 
 ### Rol
 
-`rol` · ModelRole · Options · de solo lectura
+`Role` · ModelRole · Options · de solo lectura
 
 El rol al que pertenece este miembro, para C# Script que permiten pasar de un miembro a su rol. La vista **Properties** no lo muestra.

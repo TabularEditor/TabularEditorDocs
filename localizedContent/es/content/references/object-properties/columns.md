@@ -2,7 +2,7 @@
 uid: object-properties-columns
 title: Propiedades de las columnas
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of data columns, calculated columns, calcu
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 En esta página se enumeran las propiedades de los tres tipos de columnas y de los dos objetos que pertenecen a una columna: Alternate Of y Variation. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 Una tabla contiene tres tipos de columnas:
@@ -41,10 +43,10 @@ Estas propiedades se aplican a las columnas de datos, a las columnas calculadas 
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
-- [Carpeta de visualización](xref:object-properties-common#display-folder)
-- [Oculto](xref:object-properties-common#hidden)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
+- [Carpeta de visualización](xref:object-properties-common#display-folder) · **Básica**
+- [Oculto](xref:object-properties-common#hidden) · **Básico**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Propiedades modificadas](xref:object-properties-common#changed-properties)
@@ -61,8 +63,7 @@ Estas propiedades se aplican a las columnas de datos, a las columnas calculadas 
 - [Mostrado en perspectiva](xref:object-properties-common#shown-in-perspective)
 
 ### Tipo de datos
-
-`DataType` · DataType · Básico
+`DataType` · Tipo de datos · General · **Básico**
 
 El tipo de datos de los valores de la columna. Determina cómo el motor almacena los valores y qué funciones y operadores DAX los admiten. Ambas columnas de una relación deben tener el mismo tipo de datos.
 
@@ -74,12 +75,12 @@ El tipo de datos de los valores de la columna. Determina cómo el motor almacena
 | `Decimal`    | Un número de punto fijo con cuatro cifras decimales. Se llama **Número decimal fijo** en Power BI. Úsalo para importes monetarios.               |
 | `DateTime`   | Una fecha y una hora. Power BI lo muestra como **Fecha**, **Hora** o **Fecha/hora**, según la cadena de formato.                                                 |
 | `Boolean`    | `TRUE` o `FALSE`.                                                                                                                                                                |
-| `Binario`    | Datos binarios, como los bytes de una imagen. DAX no puede usar valores binarios y Power BI no carga columnas binarias.                                          |
-| `Automático` | Solo para uso interno.                                                                                                                                                           |
+| `Binary`    | Datos binarios, como los bytes de una imagen. DAX no puede usar valores binarios y Power BI no carga columnas binarias.                                          |
+| `Automatic` | Solo para uso interno.                                                                                                                                                           |
 | `Unknown`    | El valor inicial de una columna nueva. El motor lo reemplaza por el tipo de datos real cuando la columna se guarda en el servidor.                               |
 | `Variant`    | Un valor que puede ser de distintos tipos. Se usa solo para medidas.                                                                                             |
 
-La **vista de propiedades** muestra algunos valores con un nombre más largo; por ejemplo, `Int64` como **Entero / Número entero (int64)** y `Decimal` como **Moneda / Número decimal fijo (decimal)**. La lista desplegable enumera todos los valores de la tabla, incluidos `Automático`, `Desconocido` y `Variant`, y los acepta todos. Para una columna de datos, elige uno de los siete primeros valores.
+La **vista de propiedades** muestra algunos valores con un nombre más largo; por ejemplo, `Int64` como **Entero / Número entero (int64)** y `Decimal` como **Moneda / Número decimal fijo (decimal)**. La lista desplegable enumera todos los valores de la tabla, incluidos `Automatic`, `Unknown` y `Variant`, y los acepta todos. Para una columna de datos, elige uno de los siete primeros valores.
 
 Para una columna de datos, el tipo de datos debe coincidir con los datos que devuelve la consulta de la partición; de lo contrario, el motor convierte los valores durante la actualización. Si una conversión falla, por ejemplo, con un texto que no es un número, la actualización falla. Cambiar el tipo de datos en Tabular Editor no modifica la consulta de la partición: si cambias una columna de `String` a `Int64`, haz también que la consulta devuelva números enteros, por ejemplo, cambiando el tipo en Power Query.
 
@@ -88,16 +89,14 @@ En las columnas calculadas y las columnas de tablas calculadas, el tipo de datos
 La regla @kb.bpa-relationship-same-datatype del Best Practice Analyzer (BPA) marca las relaciones entre columnas que tienen tipos de datos diferentes.
 
 ### Cadena de formato
-
-`FormatString` · cadena · Básico
+`FormatString` · cadena · General · **Básico**
 
 El formato que las herramientas cliente aplican cuando muestran los valores de la columna, por ejemplo, `#,0`, `0.00%` o `yyyy-mm-dd`. La sintaxis es la misma que la de la función DAX [FORMAT](https://dax.guide/format). Las consultas DAX devuelven el valor sin formato. El formato también se aplica a las medidas implícitas que Power BI crea cuando el autor del Report arrastra una columna numérica a un Visual.
 
 Las columnas numéricas y de fecha visibles sin una cadena de formato muestran valores sin procesar, como `1234567.891` o una fecha con un componente de hora. Consulta @kb.bpa-format-string-columns.
 
 ### Ordenar por columna
-
-`SortByColumn` · Columna · Básico
+`SortByColumn` · Columna · General · **Básico**
 
 Otra columna de la misma tabla cuyos valores establecen el orden de los valores de esta columna. Por ejemplo, ordena la columna `Month Name` por la columna `Month Number` para mostrar los meses en orden de calendario.
 
@@ -109,14 +108,13 @@ Cada valor de esta columna debe tener exactamente un valor en la columna de orde
 El C# Script @script-create-date-table crea una tabla de fechas y establece `SortByColumn` en las columnas de nombres.
 
 ### Resumir por
-
-`SummarizeBy` · Función de agregado · Básico
+`SummarizeBy` · AggregateFunction · General · **Básico**
 
 La agregación que las herramientas cliente aplican cuando el autor del Report arrastra la columna a un Visual como valor, sin una medida. Power BI lo denomina _resumen predeterminado_ y la medida que crea sobre la marcha, _medida implícita_.
 
 | Valor            | Significado                                                                                                                  |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Predeterminado` | La herramienta cliente lo decide. Las columnas numéricas se suman y las demás no se resumen. |
+| `Default` | La herramienta cliente lo decide. Las columnas numéricas se suman y las demás no se resumen. |
 | `None`           | No resumas. Power BI lo muestra como **No resumir**.                                         |
 | `Sum`            | La suma de los valores.                                                                                      |
 | `Min`            | El valor más pequeño.                                                                                        |
@@ -125,7 +123,7 @@ La agregación que las herramientas cliente aplican cuando el autor del Report a
 | `Average`        | El promedio de los valores.                                                                                  |
 | `DistinctCount`  | El número de valores distintos.                                                                              |
 
-En Power BI Desktop, una columna numérica con `Default` se comporta como `SUM`: se muestra con el icono Σ en el panel **Datos** y se agrega a un Visual como **SUM de** la columna. Una columna de texto con `Default` no se resume. Excel ignora esta propiedad y una tabla dinámica solo realiza agregaciones mediante medidas.
+En Power BI Desktop, una columna numérica con `Default` se comporta como `Sum`: se muestra con el icono Σ en el panel **Datos** y se agrega a un Visual como **SUM de** la columna. Una columna de texto con `Default` no se resume. Excel ignora esta propiedad y una tabla dinámica solo realiza agregaciones mediante medidas.
 
 Establece `None` en las columnas numéricas que no tengan sentido sumar, como claves, años, números de teléfono o precios unitarios; de lo contrario, los autores de Reports obtendrán totales como la suma de todos los ID de cliente. Consulta @kb.bpa-do-not-summarize-numeric.
 
@@ -139,10 +137,10 @@ La alineación horizontal de los valores de la columna en las herramientas clien
 
 | Valor            | Significado                                                                                                                                                        |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Predeterminado` | La herramienta cliente es quien decide. La mayoría de las herramientas alinean los números a la derecha y el texto a la izquierda. |
-| `Izquierda`      | Alinear a la izquierda.                                                                                                                            |
-| `Derecha`        | Alinear a la derecha.                                                                                                                              |
-| `Centro`         | Centrar los valores.                                                                                                                               |
+| `Default` | La herramienta cliente es quien decide. La mayoría de las herramientas alinean los números a la derecha y el texto a la izquierda. |
+| `Left`      | Alinear a la izquierda.                                                                                                                            |
+| `Right`        | Alinear a la derecha.                                                                                                                              |
+| `Center`         | Centrar los valores.                                                                                                                               |
 
 Power BI ignora esta propiedad. Los Visuales de tabla y matriz siempre alinean el texto a la izquierda y los números a la derecha; el resto de alineaciones se configuran en las opciones de formato del Visual. En una tabla dinámica de Excel conectada al modelo, las columnas alineadas a la derecha y al centro también se muestran con la alineación predeterminada.
 
@@ -157,8 +155,7 @@ La propiedad aparece en el nivel de compatibilidad 1460 o superior y permanece v
 El C# Script @script-implement-user-defined-aggregations prepara la tabla de detalle de una tabla de agregación seleccionada y configura `AlternateOf` en sus columnas numéricas.
 
 ### Categoría de datos
-
-`DataCategory` · string · Opciones
+`DataCategory` · cadena · Opciones · **Básica**
 
 El tipo de valor que contiene la columna, que las herramientas cliente utilizan para tratar la columna de forma especial. Por ejemplo, Power BI coloca en un mapa una columna con la categoría `City`, muestra como imagen una columna con la categoría `ImageUrl` y muestra como un enlace en el que se puede hacer clic una columna con la categoría `WebUrl`. Déjalo vacío para una columna normal.
 
@@ -255,8 +252,7 @@ Marca la columna como la imagen que representa una fila de la tabla, por ejemplo
 Marca la columna como la etiqueta que identifica una fila de la tabla para los usuarios, por ejemplo, el nombre del producto. Es una configuración de comportamiento de tabla que usaba Power View. Ningún cliente actual lo usa. Power View y Power BI Q&A la admitían, y ambos han sido retirados.
 
 ### Clave
-
-`IsKey` · bool · Opciones
+`IsKey` · booleano · Opciones · **Básico**
 
 Marca la columna como la clave de la tabla, la columna cuyos valores identifican cada fila. Una tabla tiene como máximo una columna clave: cuando estableces `IsKey` en `true` en una columna, Tabular Editor lo establece en `false` en las demás columnas de la tabla y deja `IsUnique` e `IsNullable` sin cambios. La columna clave no puede contener valores duplicados ni en blanco, por lo que una actualización que cargue duplicados falla.
 
@@ -265,8 +261,7 @@ Cuando marcas una tabla como tabla de fechas en Power BI, `IsKey` se establece e
 La regla BPA @kb.bpa-date-table-exists marca un modelo que no tiene ningún calendario, ninguna tabla con `DataCategory` `Time` ni ninguna columna clave de tipo `DateTime`.
 
 ### Admite valores nulos
-
-`IsNullable` · bool · Opciones
+`IsNullable` · booleano · Opciones · **Básico**
 
 Indica si la columna puede contener valores en blanco (nulos). El valor predeterminado es `true`. Si se establece en `false`, la actualización falla cuando el origen devuelve un valor vacío, lo que sirve como comprobación de la calidad de los datos. Una columna clave nunca permite valores en blanco, sea cual sea el valor de esta propiedad.
 
@@ -307,7 +302,7 @@ Indica si el motor crea un índice en una columna de texto y si lo guarda para r
 | `Explicit` | Crea y guarda el índice solo cuando se ejecuta una actualización de tipo `RefreshIndex`.                             |
 | `Full`     | Crea y guarda el índice durante una actualización completa, un recálculo o una actualización de tipo `RefreshIndex`. |
 
-En Power BI Desktop, cuyo motor admite el nivel de compatibilidad 1706, el motor acepta `Off` y `Auto` y rechaza `Explicit` y `Full` con el error "Persist String Index feature is disabled". Las versiones recientes de la biblioteca TOM solo permiten valores distintos de `Auto` a partir del nivel de compatibilidad 1707.
+En Power BI Desktop, cuyo motor admite el nivel de compatibilidad 1706, el motor acepta `Off` y `Auto` y rechaza `Explicit` y `Full` con el error «La función Persist String Index está desactivada».
 
 <!-- TODO (not verifiable from TE3 source): document what the string index is used for (text search such as CONTAINSSTRING?) and when Explicit and Full become available. -->
 
@@ -350,7 +345,7 @@ La configuración de seguridad a nivel de objetos (OLS) de esta columna en cada 
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Default` | Ninguna configuración específica para la columna. La columna sigue la configuración de su tabla en el rol. En TOM, el rol no tiene ningún permiso de columna para esta columna. |
 | `None`    | Los usuarios del rol no pueden ver ni consultar la columna. Para ellos, la columna no existe y los Visuales que la usen muestran un error.                                                      |
-| `Leer`    | Los usuarios asignados al rol pueden ver y consultar la columna.                                                                                                                                                |
+| `Read`    | Los usuarios asignados al rol pueden ver y consultar la columna.                                                                                                                                                |
 
 Puedes cambiar el valor de cada rol. Cuando eliges `None` o `Read`, Tabular Editor agrega un permiso de columna para esa columna al permiso de tabla del rol para la tabla de la columna, y crea ese permiso de tabla si el rol aún no tiene uno. Cuando eliges `Default`, Tabular Editor quita el permiso de columna. También puedes establecer los mismos valores en el rol, en **Permisos de columna de OLS** (consulta @object-properties-security). Consulta @data-security-setup-ols.
 
@@ -370,8 +365,7 @@ Una columna de datos obtiene sus valores de las particiones de la tabla; en un m
 En Tabular Editor 3, el asistente @import-tables crea columnas de datos con sus tipos de datos y asignaciones de columnas de origen, y **Actualizar esquema de la tabla** las actualiza cuando cambia el origen.
 
 ### Columna de origen
-
-`SourceColumn` · cadena · Básico
+`SourceColumn` · cadena · General · **Básico**
 
 El nombre de la columna en el resultado de la consulta de la partición de la que esta columna obtiene sus valores. Debe coincidir con el nombre que devuelve la consulta. Si no coincide, por ejemplo, después de que alguien haya cambiado el nombre de una columna en Power Query, la actualización falla.
 
@@ -423,8 +417,7 @@ Tabular Editor 3 analiza la expresión en cuanto la cambias y agrega, quita y ac
 Puedes cambiar las propiedades de visualización de la columna, como `FormatString`, `IsHidden` y `SortByColumn`. Para cambiar el nombre de la columna, primero establece `IsNameInferred` en `false`. La columna tiene las propiedades descritas en [Properties of all columns](#properties-of-all-columns) y las que se indican a continuación.
 
 ### Columna de origen
-
-`SourceColumn` · string · Básico · de solo lectura
+`SourceColumn` · cadena · General · solo lectura
 
 El nombre de la columna en el resultado de la expresión de la tabla calculada de la que esta columna obtiene sus valores. Tabular Editor 3 la establece cuando analiza la expresión, y el motor la establece cuando el modelo se guarda en un servidor. Cambiar el nombre de la columna no cambia este valor, lo que mantiene el vínculo entre la columna y la expresión.
 
@@ -507,8 +500,7 @@ Las variaciones aparecen sobre todo en modelos de Power BI y Fabric. Tabular Edi
 - [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Columna principal
-
-`Column` · Columna · Básico · solo lectura
+`Column` · Columna · General · solo lectura
 
 La columna a la que pertenece esta variación.
 

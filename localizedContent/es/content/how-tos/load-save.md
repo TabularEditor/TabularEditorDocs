@@ -2,7 +2,7 @@
 uid: load-save-model
 title: Cargar y guardar metadatos del modelo
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "La Edición de escritorio no puede abrir ni guardar archivos de metadatos del modelo."
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -50,10 +50,10 @@ Para todo lo que Tabular Editor reconoce, incluidos los tipos de archivo compati
 Para guardar un modelo en otro lugar o en otro formato:
 
 - **Archivo > Guardar como...** guarda los metadatos del modelo en un único archivo `.bim`.
-- **Archivo > Guardar en carpeta...** guarda los metadatos del modelo como una [estructura de carpetas](xref:save-to-folder), en formato JSON o TMDL, según el modo de serialización de **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta**.
+- **Archivo > Guardar en carpeta...** guarda los metadatos del modelo como una [estructura de carpetas](xref:save-to-folder) en el formato establecido en **Formato de Guardar en carpeta** en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta**: **TMDL** (predeterminado) o **Carpeta (Database.json)**. Consulte [TMDL](xref:tmdl).
 
 > [!IMPORTANT]
-> Un modelo cargado desde una estructura de carpetas JSON heredada se guarda en ese mismo formato cuando usas **Archivo > Guardar**, aunque la **preferencia** esté configurada en TMDL. El formato solo cambia cuando usas **Archivo > Guardar en carpeta...**. Consulta [TMDL](xref:tmdl).
+> Un modelo cargado desde una carpeta Database.json se guarda en ese mismo formato cuando usa **Archivo > Guardar**. Para convertirlo a TMDL, use **Archivo > Guardar en carpeta...** con **Guardar en formato de carpeta** establecido en **TMDL**.
 
 ## Recargar
 
@@ -69,6 +69,8 @@ Para guardar un modelo en otro lugar o en otro formato:
 En Tabular Editor 3.26 y versiones anteriores, y en Tabular Editor 2, el comando se llama **Archivo > Revertir**.
 
 En Tabular Editor 3.27.0 y versiones posteriores, cuando un agente, un script o un `git pull` modifica los archivos de metadatos del modelo abierto, el modelo se vuelve a cargar, después de un aviso si tienes cambios sin guardar. Consulta [Recarga automática desde el disco](xref:auto-reload).
+
+Los documentos abiertos de consultas DAX y Pivot Grid permanecen abiertos durante una recarga manual o automática y se conectan al modelo recargado.
 
 > [!WARNING]
 > Haz una copia de seguridad de los metadatos del modelo antes de permitir que cualquier herramienta escriba en ellos, incluido Tabular Editor. Guardar sobrescribe el origen, y la recarga no puede recuperar los cambios que ya hayas guardado.

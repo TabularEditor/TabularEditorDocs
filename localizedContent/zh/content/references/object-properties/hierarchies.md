@@ -2,7 +2,7 @@
 uid: object-properties-hierarchies
 title: 层次结构和级别属性
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of hierarchies and their levels.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍用户定义的层次结构及其级别的属性。有关大多数对象共有的属性，参见 @object-properties-common。
 
 ## 层次结构
@@ -33,14 +35,14 @@ SUMMARY: Reference for the properties of hierarchies and their levels.
 
 层次结构的所有级别都必须来自该层次结构所属的表。若要跨表构建层次结构，首先要将这些列放到同一个表中，例如使用 [RELATED](https://dax.guide/related) 的计算列。
 
-在 **TOM Explorer** 中，把列拖到层次结构上即可向其中添加级别。参见 @drag-drop。
+在 **TOM Explorer** 中，您可以通过将列拖到层次结构上来向其添加级别。请参阅 @drag-drop。在 Tabular Editor 3 中，属性视图的“基本”选项卡上的“级别”部分也可用于添加、移动、重命名和移除级别。请参阅[层次结构级别](xref:properties-view#hierarchy-levels)。
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
-- [显示文件夹](xref:object-properties-common#display-folder)
-- [隐藏](xref:object-properties-common#hidden)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
+- [显示文件夹](xref:object-properties-common#display-folder) · **基本**
+- [隐藏](xref:object-properties-common#hidden) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [已更改的属性](xref:object-properties-common#changed-properties)
@@ -76,8 +78,8 @@ SUMMARY: Reference for the properties of hierarchies and their levels.
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注解](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [已更改的属性](xref:object-properties-common#changed-properties)
@@ -91,16 +93,14 @@ SUMMARY: Reference for the properties of hierarchies and their levels.
 级别本身不具备 `IsHidden` 或 `DisplayFolder` 属性，而是在透视中沿用其所属层次结构的设置。如果翻译了层次结构的名称，也请同时翻译其各级别的名称。 Best Practice Analyzer (BPA) 规则 @kb.bpa-translate-hierarchy-levels 会标记可见层次结构中在模型的一个或多个区域设置中没有翻译名称的级别。
 
 ### 列
-
-`Column` · 列 · 基本
+`Column` · 列 · 常规 · **基本**
 
 提供该级别值的列。它必须是与该层次结构位于同一表中的列，并且同一列在同一层次结构中只能使用一次。该级别会按列的排序顺序显示该列的值。若要按日历顺序显示月份，请在月份名称列上设置 `SortByColumn`（请参阅 @object-properties-columns）。
 
 隐藏列在层次结构中仍然可用。隐藏级别列，让用户通过层次结构浏览数据。
 
 ### 序号
-
-`Ordinal` · int · 基本
+`Ordinal` · 整数 · 常规
 
 该级别在层次结构中的位置，顶层级别从 `0` 开始计。层次结构中各级别的序号必须为 `0`、`1`、`2` 等，不能有间断或重复。
 

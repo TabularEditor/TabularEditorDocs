@@ -2,7 +2,7 @@
 uid: tmdl
 title: Lenguaje de definición de modelo tabular (TMDL)
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,18 +21,18 @@ applies_to:
 
 **TMDL** es un formato de archivo de metadatos de modelo [anunciado por Microsoft en abril de 2023](https://powerbi.microsoft.com/en-us/blog/announcing-public-preview-of-the-tabular-model-definition-language-tmdl/). Su objetivo es ofrecer una alternativa basada en texto y legible para humanos al formato de archivo model.bim basado en JSON. TMDL se inspira en YAML y, por eso, es fácil de leer y escribir, con un uso mínimo de comillas en las cadenas y caracteres de escape. También serializa un modelo como varios archivos más pequeños en una estructura de carpetas y, por tanto, es más adecuado para la integración con el control de versiones.
 
-## Habilitar TMDL en Tabular Editor 3
+## Guardar un modelo como TMDL en Tabular Editor 3
 
-Para habilitar TMDL en Tabular Editor 3, ve a **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** y, en el desplegable **Modo de serialización**, selecciona "TMDL". La funcionalidad heredada "save-to-folder" seguirá existiendo en paralelo a TMDL, pero no es un formato admitido por Microsoft.
-
-Después de hacerlo, Tabular Editor 3 usará el formato TMDL al guardar un modelo en una carpeta (**Archivo > Guardar en carpeta...**).
+**Archivo > Guardar en carpeta...** guarda el modelo como una carpeta TMDL cuando **Guardar en formato de carpeta** en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** es **TMDL**, el valor predeterminado. La configuración de formato de TMDL, como la sangría, la codificación y las mayúsculas y minúsculas, se encuentra en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta > Serialización de TMDL**. Consulte [Preferencias](xref:preferences#file-formats--save-to-folder--tmdl-serialization).
 
 > [!NOTE]
-> Cuando cargue un modelo desde una estructura de carpetas heredada de Tabular Editor, se seguirá guardando en ese mismo formato al usar **Archivo > Guardar** (Ctrl+S). Solo cuando uses explícitamente el comando **Archivo > Guardar en carpeta...** se guardará el modelo en el nuevo formato TMDL.
+> Un modelo cargado desde una carpeta Database.json se guarda en ese formato cuando se utiliza **Archivo > Guardar** (**Ctrl+S**). Use **Archivo > Guardar en carpeta...** con **Formato de guardar en carpeta** establecido en **TMDL** para convertirlo a TMDL.
+
+En Tabular Editor 3 Edición Enterprise, una carpeta TMDL puede almacenar cada columna, medida, partición y jerarquía, así como cada función, expresión compartida, origen de datos y relación, en su propio archivo. Consulta @tmdl-per-object-serialization.
 
 ## Modelos nuevos
 
-Al guardar un modelo nuevo por primera vez, Tabular Editor (desde la v. 3.7.0) ahora ofrece una opción para guardar el modelo como TMDL, incluso si el modo de serialización predeterminado no está configurado como TMDL, tal como se describe en la sección anterior.
+La configuración **Formato de guardado predeterminado** en **Herramientas > Preferencias > Formatos de archivo > General** controla cómo se guarda un nuevo modelo la primera vez. Con **Preguntar siempre** (opción predeterminada), Tabular Editor le pedirá que elija entre un archivo Model.bim y una carpeta en formato Database.json o TMDL. Con **TMDL**, los nuevos modelos se guardan como carpetas TMDL.
 
 ![Nuevo modelo Tmdl](~/content/assets/images/new-model-tmdl.png)
 

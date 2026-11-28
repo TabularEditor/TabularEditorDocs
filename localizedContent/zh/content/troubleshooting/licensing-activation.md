@@ -2,7 +2,7 @@
 uid: licensing-activation
 title: 安装并激活 Tabular Editor 3
 author: Morten Lønskov
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,7 +52,7 @@ Tabular Editor 3 会在启动时以及随后定期连接 `https://api.tabularedi
 如果激活提示持续出现：
 
 1. 确认受影响的计算机可以访问 `api.tabulareditor.com`。
-2. 在 **工具 > 偏好设置 > 代理设置** 中配置代理。与代理相关的故障排除请参阅 @proxy-settings，其中包括用于启用外部 MSAL 代理支持的 **AnalysisServices.AppSettings.json** 覆盖设置。
+2. 在**工具 > 首选项 > Tabular Editor > 代理设置**下配置代理设置。请参阅 @proxy-settings，了解代理特有的故障排除方法，包括启用外部 MSAL 代理支持的 **AnalysisServices.AppSettings.json** 覆盖。
 3. 如果网络阻止向激活端点的出站连接，请使用下面的[手动激活](#manual-activation-no-internet)。
 
 ## 手动激活（无网络连接）
@@ -127,7 +127,7 @@ Tabular Editor 3 的激活信息会按**用户**存储在 `HKEY_CURRENT_USER` �
 
 Tabular Editor 3 会发起出站 Web 请求，用于产品激活、检查更新、DAX 格式化以及下载外部最佳实践规则。如果你通过代理上网：
 
-1. 在 **工具 > 偏好 > 代理设置** 中进行配置。在 `System` 和 `None` 之间切换 **代理类型**，重启 Tabular Editor 3，然后重试激活。
+1. 配置**工具 > 首选项 > Tabular Editor > 代理设置**。在 `System` 和 `None` 之间切换**代理类型**，然后重新启动 Tabular Editor 3，并重试激活。
 2. 如果激活仍然失败，请参阅 @proxy-settings 进行高级代理诊断。
 3. 如果对 `api.tabulareditor.com` 的出站访问被阻止，使用 [手动激活](#manual-activation-no-internet)。
 
@@ -136,4 +136,4 @@ Tabular Editor 3 会发起出站 Web 请求，用于产品激活、检查更新�
 
 ## 确认你正在使用最新版本
 
-与激活相关的问题有时会在较新的 Tabular Editor 3 版本中修复。提交支持请求前，请先确认你正在使用最新版本。在 **工具 > 偏好 > 更新和反馈** 中检查更新，或从 [下载页面](xref:downloads) 下载最新安装程序。
+与激活相关的错误有时会在较新版本的 Tabular Editor 3 中得到解决。在提交支持请求之前，请确认您使用的是最新版本。在**工具 > 首选项 > Tabular Editor > 更新和反馈**下检查更新，或从[下载页面](xref:downloads)下载最新安装程序。

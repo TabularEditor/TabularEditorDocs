@@ -2,7 +2,7 @@
 uid: auto-reload
 title: 从磁盘自动重新加载
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,7 +12,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "桌面版无法打开或保存模型元数据文件。"
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -26,7 +26,7 @@ applies_to:
 ![图示：文件 > 保存会将 Tabular Editor 中的模型写入磁盘上的文件；另一个工具写入这些文件；自动重新加载再将已更改的文件加载回 Tabular Editor](~/content/assets/images/features/auto-reload-sync.png)
 
 > [!NOTE]
-> 自动重新加载会监视文件，其行为不受 [工具 > 偏好 > Tabular Editor > 杂项](xref:preferences#miscellaneous) 下的 **跟踪外部模型更改** 和 **自动刷新本地 Tabular Object Model 元数据** 影响。这些设置使用 Analysis Services 跟踪来检测连接到的数据库中的更改。
+> 自动重新加载会监视文件，其行为不受 [工具 > 偏好 > Tabular Editor > 杂项](xref:preferences#tabular-editor--miscellaneous) 下的 **跟踪外部模型更改** 和 **自动刷新本地 Tabular Object Model 元数据** 影响。这些设置使用 Analysis Services 跟踪来检测连接到的数据库中的更改。
 
 ## 监视的文件
 
@@ -78,4 +78,4 @@ applies_to:
 
 如果某个持续运行的进程也会写入模型文件夹(例如文件同步客户端，或在后台刷新的 CI 检出副本)，建议将其关闭。每次更改都会触发一次重新加载；如果存在未保存的更改，则会弹出模态提示对话框。
 
-取消选中此设置后，使用 **文件 > 从磁盘重新加载** 加载外部更改，或使用 **文件 > 保存** 用 Tabular Editor 中的模型覆盖它们。有关该页面上的其他设置，请参阅[偏好](xref:preferences#miscellaneous)。
+取消选中此设置后，使用 **文件 > 从磁盘重新加载** 加载外部更改，或使用 **文件 > 保存** 用 Tabular Editor 中的模型覆盖它们。有关该页面上的其他设置，请参阅[偏好](xref:preferences#tabular-editor--miscellaneous)。

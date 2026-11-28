@@ -2,7 +2,7 @@
 uid: dax-package-manager
 title: Administrador de paquetes de DAX
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,10 +38,9 @@ Puede usar el Administrador de paquetes de DAX con cualquier modelo que admita f
 ## Diseño de la interfaz
 
 ### 1. Abrir el Administrador de paquetes de DAX
+Puedes abrir el panel del DPM a través del menú **Vista**. También es posible asignar un atajo de teclado personalizado al comando `View.DaxPackageManager` a través de **Herramientas > Preferencias > Tabular Editor > Teclado**.
 
-Puede abrir el panel de DPM desde el menú **Ver**. También es posible asignar un atajo personalizado al comando `View.DaxPackageManager` desde **Herramientas > Preferencias > Teclado**.
-
-- **Menú:** `Ver → Administrador de paquetes de DAX`
+- **Menú:** `View → DAX Package Manager`
 - **Atajo:** _(si se asignó en Preferencias)_
 
 ---

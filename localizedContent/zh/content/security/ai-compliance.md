@@ -2,7 +2,7 @@
 uid: ai-compliance
 title: AI 功能合规指南
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,10 +12,10 @@ applies_to:
       editions:
         - edition: Desktop
           partial: true
-          note: "仅适用于通用策略。不含权限限制、提供程序锁定或审计日志"
+          note: "General policies only. No permission limits, provider lock or audit log"
         - edition: Business
           partial: true
-          note: "仅适用于通用策略。不含权限限制、提供程序锁定或审计日志"
+          note: "General policies only. No permission limits, provider lock or audit log"
         - edition: Enterprise
           full: true
 ---
@@ -33,7 +33,7 @@ Tabular Editor 3 中的 [AI 助手](xref:ai-assistant) 和 [模型上下文协�
 
 这两项功能都随 AI 功能组件一同提供；自 Tabular Editor 3.27.0 起，该组件已包含在默认安装中。它们共用权限授予、管理员策略和审核日志；差异见[权限授予](#permission-grants)一节所述。
 
-Tabular Editor ApS 不运营 AI 服务，也不提供 API 密钥。任一功能中的提示、回复、模型元数据和模型数据都不会经过 Tabular Editor 服务器。启用遥测后，Tabular Editor 3 会将 AI 使用事件发送给 Tabular Editor ApS，其中包括提供方、模型名称、会话 ID 和令牌计数。可通过 `DisableTelemetry` 策略将其关闭。
+Tabular Editor ApS 不运营 AI 服务，也不提供 API 密钥。来自任一功能的提示、回复、模型元数据和模型数据绝不会经过 Tabular Editor 服务器。在启用遥测的情况下，Tabular Editor 3 会将 AI 使用事件连同提供商、模型名称、会话 ID 和令牌计数一起发送给 Tabular Editor ApS。对于 MCP 服务器，事件包含工具名称、每次工具调用的结果和持续时间，以及 MCP 客户端的名称和版本（如果是已知客户端）。工具参数、工具结果和错误消息不会被发送。`DisableTelemetry` 策略会将其关闭。
 
 [Tabular Editor Trust Center](https://trust.tabulareditor.com/) 发布了 AI Assistant 的独立渗透测试 Report、SOC 2 审计 Report 以及子处理者列表。
 
@@ -61,7 +61,7 @@ AI Assistant 会将请求直接从用户的计算机发送到在 **工具 > 偏�
 
 MCP 服务器是一个绑定到 `127.0.0.1` 的 HTTP 侦听器，默认端口为 42100。它不使用 API 密钥，不发起出站请求，并且会拒绝带有非本地 `Origin` 标头的浏览器请求。
 
-已连接的代理会在代理配置及提供程序条款的约束下，将它从 Tabular Editor 3 读取的内容发送到其所使用的提供程序。 Tabular Editor 3 中没有用于设置代理提供程序的选项，因此应通过代理自身的管理控制来管控该代理。代理自身的工具，例如文件访问和 Shell 访问，也同样在 Tabular Editor 3 之外。任何以该用户身份运行的代理都可以读取磁盘上的模型文件、对话文件和审计文件。
+已连接的代理根据代理的配置和提供商的条款，将其从 Tabular Editor 3 中读取的内容发送给自己的提供商。Tabular Editor 3 没有针对代理提供商的设置，因此请通过代理自身的管理控制来管理代理。代理自身的工具（例如文件和 shell 访问）也位于 Tabular Editor 3 之外。**模型源详细信息**首选项设置代理随模型名称接收的模型文件路径或服务器的多少，并且不会更改模型元数据中的连接详细信息。请参阅[检查是否成功](xref:mcp-server#check-that-it-worked)。以用户身份运行的任何代理都可以读取磁盘上的模型文件、会话文件和审计文件。
 
 **要求访问令牌** 默认处于关闭状态。关闭时，这台计算机上的任何进程都可以在无需凭据的情况下连接到服务器，包括远程桌面或 Citrix 主机上其他用户会话中的进程。 `RequireMcpAccessToken` 策略会对每个用户强制要求使用令牌。代理注册文件会以纯文本存储该令牌，而在 **工具 > MCP 服务器...** 对话框中选择 **重新生成令牌** 会使所有现有注册失效。参见 [在共享计算机上运行](xref:mcp-server#running-on-a-shared-machine)。
 
@@ -88,7 +88,7 @@ MCP 服务器是一个绑定到 `127.0.0.1` 的 HTTP 侦听器，默认端口为
 | MCP 访问令牌   | `Preferences.json`                                                                        | 已使用适用于当前用户的 Windows 数据保护 API 加密                                                             |
 | 长期权限授予     | `Preferences.json`                                                                        | JSON                                                                                        |
 | 按模型授予的权限   | 模型的[用户选项](xref:user-options)（`.tmuo`）文件：若模型从文件加载，该文件位于模型文件旁；若模型从服务器打开，则位于 `UserOptions` 下 | JSON                                                                                        |
-| 对话         | `AI\Conversations`                                                                       | 未加密的 JSON。保存提示、回复和工具结果；当 **模型数据** 设为 **读取** 时，也包括 DAX 查询行。在每次压缩之前都会写入归档副本。文件会一直保留，直到用户删除该对话 |
+| 对话 | `AI\Conversations` | 未加密的 JSON。包含提示、回复和工具结果，包括当**模型数据**处于**读取**状态时的 DAX 查询行和 Analysis Services 错误文本。存档副本在每次压缩之前写入。文件将保留至用户删除对话时 |
 | 用户自定义指令    | `AI\CustomInstructions`                                                                  | Markdown                                                                                    |
 | 知识库        | `kb.sqlite`                                                                               | SQLite 数据库                                                                                  |
 | AI 模型目录    | `AiModels.json`                                                                           | JSON                                                                                        |
@@ -100,10 +100,10 @@ MCP 服务器是一个绑定到 `127.0.0.1` 的 HTTP 侦听器，默认端口为
 
 | 资源      | AI 功能可访问的内容                                       | 默认值 | 两项功能的限制                  | 仅 MCP 服务器的限制                |
 | ------- | ------------------------------------------------- | --- | ------------------------ | --------------------------- |
-| 模型元数据   | 读取：模型定义和 VertiPaq分析器的统计信息。编写：通过 C# Script 更改模型    | 读取  | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess` |
-| 模型数据    | 读取：DAX 查询结果，即模型中的数据值                              | 拒绝  | `MaxModelDataAccess`     | `McpMaxModelDataAccess`     |
+| 模型元数据 | 读取：模型定义、VertiPaq分析器统计数据以及模型的错误和警告。服务器错误文本也需要**模型数据 > 读取**。写入：通过 C# 脚本更改模型 | 读取 | `MaxModelMetadataAccess` | `McpMaxModelMetadataAccess` |
+| 模型数据 | 读取：DAX 查询结果和 Analysis Services 返回的错误文本，其中可能包含来自模型的数据值 | 拒绝 | `MaxModelDataAccess` | `McpMaxModelDataAccess` |
 | 最佳实践分析器 | 读取：规则和分析结果。写入：添加和修改规则                             | 读取  | `MaxBpaAccess`           | `McpMaxBpaAccess`           |
-| 文档      | 读取：已打开的 C# Script、DAX 查询和 DAX 脚本文档内容。写入：创建并覆盖这些文档 | 写入  | `MaxDocumentsAccess`     | `McpMaxDocumentsAccess`     |
+| 文档 | 读取：打开的 C# 脚本、DAX 查询和 DAX 脚本文档的内容，以及打开的文档（包括数据透视网格）的错误和警告。写入：创建和覆盖它们 | 写入 | `MaxDocumentsAccess` | `McpMaxDocumentsAccess` |
 | 宏       | 读取：用户的宏库，包括宏代码                                    | 写入  | `MaxMacrosAccess`        | `McpMaxMacrosAccess`        |
 
 在默认级别下，AI 功能会读取模型定义、运行 Best Practice Analyzer、读取宏库，并读取和覆盖已打开的脚本与查询文档。它们不会读取数据值，也不会更改模型。宏代码和打开的文档可能包含连接字符串及其他凭据。如果你的组织也需要这样做，请设置 `MaxMacrosAccess` 和 `MaxDocumentsAccess`。
@@ -223,7 +223,7 @@ Tabular Editor 3 的便携版无需安装。它在运行时会遵循 `DisableAi`
 | 控制项      | 设置                                                                                     | 效果                               |
 | -------- | -------------------------------------------------------------------------------------- | -------------------------------- |
 | Provider | 将 `AiProvider`、`AiEndpoint`、`AiModel` 和 `AiAllowedEndpointHosts` 设置为你组织拥有且已签订数据处理协议的资源 | AI 助手仅向该端点发送请求，并使用由你组织签发的密钥      |
-| 模型数据     | 将 `MaxModelDataAccess` 设置为 `Deny`                                                      | 任何 DAX 查询结果都不会发送到 AI 助手或 MCP 代理  |
+| 模型数据 | `MaxModelDataAccess` 设置为 `Deny` | 无 DAX 查询结果或 Analysis Services 错误文本传送到 AI 助手或 MCP 代理 |
 | 宏        | 将 `MaxMacrosAccess` 设置为 `Deny`                                                         | 宏代码不会发送给 AI 提供方                  |
 | 脚本       | 将 `BlockUnsafeScripts` 设置为 `1`                                                         | 任何脚本或宏都不能写入文件、访问网络、启动其他程序或加载外部代码 |
 | MCP 身份验证 | 将 `RequireMcpAccessToken` 设置为 `1`                                                      | 只有持有用户访问令牌的客户端才能连接到 MCP 服务器      |
@@ -275,7 +275,7 @@ Tabular Editor ApS 不会接收任何提示词、回复或模型内容。你与 
 
 ### AI 功能能从我们的模型中读取数据吗？
 
-DAX 查询结果需要 **模型数据** 权限为 **读取**，默认是 **拒绝**。在模型定义中键入的值属于元数据的一部分。见 [数据流](#data-flow)。
+DAX 查询结果和 Analysis Services 错误的文本需要**读取**时的**模型数据**，默认值为**拒绝**。在**读取**下方，来自服务器的错误文本被替换为固定句子。在模型定义中输入的值是元数据的一部分。请参阅[数据流](#data-flow)。
 
 ### MCP 代理是否可以使用我们尚未批准的提供程序？
 

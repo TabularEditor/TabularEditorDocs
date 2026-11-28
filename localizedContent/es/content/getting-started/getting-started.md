@@ -2,7 +2,7 @@
 uid: getting-started
 title: Instalación y activación
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,7 +73,7 @@ Para obtener más información sobre cómo Tabular Editor se autentica en el pun
 
 ### Solicitar una licencia de prueba
 
-Si no has usado antes Tabular Editor 3, puedes acceder a una prueba gratuita de 30 días. Al elegir esta opción, se te pedirá una dirección de correo electrónico. Usamos la dirección de correo electrónico para comprobar si ya tienes una activación previa de Tabular Editor 3.
+Si no has usado Tabular Editor 3 antes, puedes optar a una prueba gratuita de 30 días con el conjunto de funciones de la edición Enterprise. Para la versión de prueba se necesita una dirección de correo electrónico válida, pero no una tarjeta de crédito. Cuando elige esta opción, se le pide una dirección de correo electrónico. Utilizamos la dirección de correo electrónico para comprobar si ya tienes una activación de Tabular Editor 3.
 
 > [!NOTE]
 > Tabular Editor ApS no envía correos electrónicos no solicitados ni cede tu dirección de correo electrónico a terceros al registrarte para obtener una licencia de prueba de 30 días. Consulta nuestra @privacy-policy para obtener más información.
@@ -99,20 +99,20 @@ Tabular Editor 3 ofrece muchas opciones de configuración. La configuración pre
 
 ### Buscar actualizaciones al iniciar
 
-De forma predeterminada, cada vez que se inicia Tabular Editor 3, la herramienta comprueba en línea si hay una versión más reciente disponible. Puedes controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Actualizaciones y comentarios**.
+De forma predeterminada, cada vez que se inicia Tabular Editor 3, la herramienta verifica en línea si hay una versión más reciente disponible. Puede controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**.
 
 > [!NOTE]
 > Usa siempre la versión más reciente de Tabular Editor 3. Nuestro equipo de soporte asume que estás usando la versión más reciente antes de enviar un Report de errores.
 
 ### Desactivar la recopilación de telemetría
 
-Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda a mejorar el producto. Puedes desactivarla en cualquier momento: inicia Tabular Editor 3 y ve a **Herramientas > Preferencias > Actualizaciones y comentarios**. Desmarca la casilla **Ayuda a mejorar Tabular Editor recopilando datos de uso anónimos** para dejar de participar.
+Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda a mejorar el producto. Puedes darte de baja en cualquier momento iniciando Tabular Editor 3 y yendo a **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**. Desmarque la casilla **Ayudar a mejorar Tabular Editor recopilando datos de uso anónimos** para darse de baja.
 
 ![Recopilar telemetría](~/content/assets/images/getting-started/collect-telemetry.png)
 
 ### Configuración del proxy
 
-Si estás en una red con conectividad limitada a Internet, especifica la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Configuración de proxy**. Esto es necesario para que Tabular Editor 3 pueda usar cualquier característica que dependa de solicitudes web salientes. En concreto:
+Si estás en una red con conectividad a Internet limitada, especifica la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Tabular Editor > Configuración de proxy**. Esto es necesario para que Tabular Editor 3 pueda usar cualquier función que dependa de solicitudes web salientes. En concreto:
 
 - Comprobaciones de actualizaciones
 - Activación del producto

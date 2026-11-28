@@ -2,7 +2,7 @@
 uid: object-properties-relationships
 title: Propiedades de la relación
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ SUMMARY: Reference for the properties of relationships, such as cardinality, cro
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 Esta página describe las propiedades de las relaciones. Para ver las propiedades comunes a la mayoría de los objetos, consulta @object-properties-common.
 
@@ -48,14 +50,12 @@ Puedes crear y editar relaciones en la vista **Propiedades** o, en Tabular Edito
 - [Estado](xref:object-properties-common#state)
 
 ### Columna de origen
-
-`FromColumn` · Columna · Básico
+`FromColumn` · Columna · General · **Básico**
 
 La columna del lado de origen de la relación. En una relación de uno a varios, suele ser la columna de clave externa de la tabla de hechos, por ejemplo `Sales[ProductKey]`. Al elegir una columna, también se establece `FromTable`.
 
 ### Cardinalidad de origen
-
-`FromCardinality` · Cardinalidad de extremo de relación · Básico
+`FromCardinality` · Cardinalidad del extremo de la relación · General · **Básico**
 
 Cuántas filas del lado de origen pueden tener el mismo valor en `FromColumn`.
 
@@ -66,16 +66,14 @@ Cuántas filas del lado de origen pueden tener el mismo valor en `FromColumn`.
 | `None` | La cardinalidad no está especificada. No lo use. El cuadro de diálogo de la relación en Tabular Editor 3 solo muestra `One` y `Many`, y el **Explorador TOM** muestra `None` como `0`. |
 
 ### Columna de destino
-
-`ToColumn` · Columna · Básico
+`ToColumn` · Columna · General · **Básico**
 
 La columna del lado de destino de la relación. En una relación de uno a muchos, esta es la columna clave de la tabla de dimensiones, por ejemplo `Product[ProductKey]`. Al elegir una columna, también se establece `ToTable`.
 
 La regla @kb.bpa-relationship-same-datatype del Best Practice Analyzer (BPA) señala las relaciones en las que `FromColumn` y `ToColumn` tienen tipos de datos diferentes.
 
 ### Cardinalidad de destino
-
-`ToCardinality` · RelationshipEndCardinality · Básico
+`ToCardinality` · RelationshipEndCardinality · General · **Básico**
 
 Cuántas filas del lado de destino pueden tener el mismo valor en `ToColumn`. Los valores son los mismos que en `FromCardinality`, y `One` es la configuración habitual. Las dos cardinalidades juntas definen el tipo de relación:
 
@@ -90,8 +88,7 @@ Cuando una columna del lado `One` contiene valores duplicados, la actualización
 En el Tabular Object Model (TOM), el extremo "from" siempre es el lado "muchos" en una relación de uno a varios. Tabular Editor acepta `FromCardinality` `One` con `ToCardinality` `Many`, pero el motor lo rechaza al guardar con el error "From end cardinality must always be set to Many, unless la relación is One-To-One". Para relacionar las tablas en el otro sentido, intercambia las columnas de origen y de destino.
 
 ### Activo
-
-`IsActive` · bool · Básico
+`IsActive` · bool · General · **Básico**
 
 Si la relación filtra los datos automáticamente. El motor rechaza un modelo en el que las relaciones activas crean más de una ruta entre dos tablas. Esto ocurre con más frecuencia cuando varias relaciones usan filtrado cruzado bidireccional.
 
@@ -105,8 +102,7 @@ CALCULATE ( [Total Sales], USERELATIONSHIP ( Sales[ShipDate], 'Date'[Date] ) )
 En la Vista de diagrama de Tabular Editor 3, también puedes hacer clic con el botón derecho en una relación para activarla o desactivarla.
 
 ### ID
-
-`ID` · string · Básico · solo de lectura
+`ID` · cadena · General · solo lectura
 
 El identificador interno de la relación, que en TOM es el nombre de la relación. Power BI Desktop usa un GUID. Tabular Editor 3 y Tabular Editor 2 asignan a una relación nueva un nombre único que comienza por `New Single Column Relationship`. Usa el ID para referirte a una relación concreta en un C# Script o en un comando de Tabular Model Scripting Language (TMSL).
 
@@ -123,8 +119,7 @@ La tabla que contiene `FromColumn`. Para cambiarla, elige otra `FromColumn`. Tab
 La tabla que contiene `ToColumn`. Para cambiarla, selecciona otra `ToColumn`. Tabular Editor 3 oculta esta propiedad en la vista **Properties**. Aún puedes leerla en un C# Script.
 
 ### Comportamiento del filtrado cruzado
-
-`CrossFilteringBehavior` · CrossFilteringBehavior · Opciones
+`CrossFilteringBehavior` · CrossFilteringBehavior · Opciones · **Básico**
 
 La dirección en la que los filtros fluyen a través de la relación.
 

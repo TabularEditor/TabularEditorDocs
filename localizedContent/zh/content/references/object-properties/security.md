@@ -2,7 +2,7 @@
 uid: object-properties-security
 title: 角色与安全属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍角色、表格权限和角色成员的属性。表格权限包含角色针对单个表的安全设置。有关大多数对象共有的属性，请参见 @object-properties-common。
 
 语义模型中的安全性由角色定义。角色会授予成员一定级别的模型访问权限，并通过以下方式限制他们能看到的内容：
@@ -44,8 +46,8 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
@@ -58,9 +60,9 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 
 | 值    | 含义                                           |
 | ---- | -------------------------------------------- |
-| `默认` | 未设置权限。如果 `ModelPermission` 允许读取，角色成员就可以看到该表。 |
-| `读取` | 角色成员可以看到并查询该表。                               |
-| `无`  | 该表及其列、度量值和关系都会对角色成员隐藏。任何引用该表的查询和度量值都会返回错误。   |
+| `Default` | 未设置权限。如果 `ModelPermission` 允许读取，角色成员就可以看到该表。 |
+| `Read` | 角色成员可以看到并查询该表。                               |
+| `None`  | 该表及其列、度量值和关系都会对角色成员隐藏。任何引用该表的查询和度量值都会返回错误。   |
 
 不会列出计算组表。 Tabular Editor 会在兼容级别 1400 及更高级别时显示此属性。折叠后的值会汇总这些设置，例如“15 个表中有 2 个已启用 OLS”。
 
@@ -70,8 +72,7 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 > 该角色还包含一个显示名称相同的表格权限对象集合。请参阅下方的[表格权限](#table-permissions-1)。
 
 ### 行级安全性
-
-`RowLevelSecurity` · 每张表 · 安全性 · 只读 · _角色的表格权限的快捷入口_
+`RowLevelSecurity` · 每个表格 · 安全性 · 只读 · *快捷方式指向*角色的表格权限 · **基本**
 
 此角色中每个表的行级安全性（RLS）筛选器。展开此属性可查看每个表对应的一个条目。每个条目都是一个 DAX 表达式：对于角色成员可以看到的行，它返回 `TRUE`；如果条目为空，则该表不应用筛选。此处不会列出计算组表。折叠后的值会汇总这些设置，例如“15 个表中有 1 个启用了 RLS”。
 
@@ -109,8 +110,7 @@ SUMMARY: Reference for the properties of roles, table permissions and role membe
 在 Power BI 服务中，通过语义模型的 **安全性** 页面添加的成员，在模型中会被视为普通角色成员。通过 XMLA endpoint，它们与在 Tabular Editor 中添加的成员完全相同：都是外部成员，`IdentityProvider` 为 `AzureAD`，并以用户的对象 ID 作为 `MemberID`。使用 **部署模型角色成员** 进行部署时，模型中的成员会替换它们。想保留在服务中添加的成员，就在不选中该选项的情况下部署。
 
 ### 模型权限
-
-`ModelPermission` · ModelPermission · 翻译、透视图和安全性
+`ModelPermission` · ModelPermission · 翻译、透视、安全性 · **基本**
 
 角色授予其成员对整个模型的访问级别。
 
@@ -163,8 +163,7 @@ foreach (var tp in Selected.Role.TablePermissions)
 此表格权限所属角色的名称。
 
 ### 表
-
-`TableName` · string · 元数据 · 只读 · _指向表名称的快捷方式_
+`TableName` · 字符串 · 元数据 · 只读 · *指向*表名称的快捷方式 · **基本**
 
 此表格权限所保护的表名称。
 
@@ -206,13 +205,13 @@ foreach (var tp in Selected.Role.TablePermissions)
 
 | 值     | 含义                          |
 | ----- | --------------------------- |
-| `默认值` | 未设置任何权限。角色成员可以看到该表。         |
-| `读取`  | 角色成员可以看到并查询该表。              |
-| `无`   | 该表会对角色成员隐藏，其列、度量值和关系也会一并隐藏。 |
+| `Default` | 未设置任何权限。角色成员可以看到该表。         |
+| `Read`  | 角色成员可以看到并查询该表。              |
+| `None`   | 该表会对角色成员隐藏，其列、度量值和关系也会一并隐藏。 |
 
 这与角色上的 [表格权限](#table-permissions) 以及表上的 `ObjectLevelSecurity` 是同一项设置。
 
-不能将来自不同角色的 RLS 和 OLS 组合使用。属于这类角色组合的用户在查询时会报错，在 SQL Server Analysis Services、Azure Analysis Services 和 Power BI 中均是如此。另见 @data-security-about、[将 OLS 与 RLS 结合使用](xref:data-security-setup-ols#5-combine-ols-with-rls) 以及 Microsoft 的 [对象级安全性限制](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions)。
+对于同时是这两个角色的成员的用户，一个角色中的 RLS 和另一个角色中的 OLS 可能会失败。当 OLS 应用于 RLS 表或通过活动关系与之关联的表时，来自该用户的查询会出现错误。其中一些组合是有效的，例如隐藏 RLS 表格的每一列的列级 OLS。同一角色中的 RLS 和 OLS 始终协同工作。Microsoft 的[对象级安全限制](https://learn.microsoft.com/analysis-services/tabular-models/object-level-security#restrictions)指出，不支持来自不同角色的 RLS 和 OLS 的任何组合。另请参阅 @data-security-about 和[将 OLS 与 RLS 结合](xref:data-security-setup-ols#5-combine-ols-with-rls)。
 
 如果使用 OLS 隐藏某个表会破坏其他表之间的关系链，则也不能这样做。引擎会返回错误并拒绝该操作。
 
@@ -248,7 +247,7 @@ Windows 用户或组的名称，采用 `DOMAIN\name` 格式，例如 `CONTOSO\Sa
 
 ### 角色
 
-`角色` · ModelRole · 选项 · 只读
+`Role` · ModelRole · 选项 · 只读
 
 此成员所属的角色，供 C# Script 从成员反查到其角色时使用。在 **属性** 视图中不会显示该项。
 
@@ -321,6 +320,6 @@ Azure Analysis Services 和 Power BI 服务会忽略你设置的值：
 
 ### 角色
 
-`角色` · ModelRole · 选项 · 只读
+`Role` · ModelRole · 选项 · 只读
 
 此成员所属的角色，供在 C# Script 中从成员反查其角色时使用。**属性** 视图不会显示该项。

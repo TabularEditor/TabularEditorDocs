@@ -2,7 +2,7 @@
 uid: object-properties-model
 title: Propiedades del modelo
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of the model object, such as culture, coll
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página trata las propiedades del objeto del modelo. Cada entrada indica el nombre de la propiedad en el Tabular Object Model (TOM), su tipo y su categoría. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 ## Modelo
@@ -39,8 +41,8 @@ Las propiedades de la categoría **Opciones de acceso a datos** controlan cómo 
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -48,15 +50,14 @@ Las propiedades de la categoría **Opciones de acceso a datos** controlan cómo 
 - [Descripciones traducidas](xref:object-properties-common#translated-descriptions)
 
 ### Base de datos
-
-`Database` · Base de datos · Básico · de solo lectura
+`Database` · Base de datos · General · Solo lectura · **Básico**
 
 La base de datos que contiene el modelo. Expande la propiedad para ver y cambiar la configuración de la base de datos, como el **nivel de compatibilidad**, que determina las características y propiedades que admite el modelo.
 
 En Tabular Editor 3, puedes editar estos ajustes en `Database`:
 
 - **Nombre** e **ID**: el nombre y el ID de la base de datos. Cambiarlos no tiene ningún efecto en una base de datos ya implementada.
-- **nivel de compatibilidad** y **Modo de compatibilidad**. Cuando estás conectado a un servidor, Tabular Editor 3 rechaza un nivel de compatibilidad que el servidor no admite.
+- **Nivel de compatibilidad** y **Modo de compatibilidad**. Cuando está conectado a un servidor, Tabular Editor 3 rechaza un nivel de compatibilidad que el servidor no admite. La pestaña **Básico** de la vista Propiedades también incluye **Modo de compatibilidad** y **Nivel de compatibilidad** en el formulario del modelo. Consulte [Modelo](xref:properties-view#model).
 - **Descripción**, **Comportamiento de caracteres Unicode** y **Visible**.
 
 Estos ajustes son de solo lectura y solo muestran un valor cuando estás conectado a un servidor: **Versión**, **Tamaño estimado** (en MB), **Último procesamiento**, **Última actualización**, **Última actualización del esquema**, **Marca de tiempo de creación**, **Nombre del servidor** y **Versión del servidor**.
@@ -99,7 +100,7 @@ Tabular Editor no usa esas operaciones. Si cambias `Collation` en la vista de pr
 
 ### Configuración regional
 
-`configuración regional` · string · Opciones
+`Culture` · string · Opciones
 
 El idioma y la región del modelo, en forma de nombre de configuración regional, como `en-US` o `de-DE`. El motor la utiliza para dar formato a los valores; por ejemplo, el separador decimal y el formato de fecha que usa la función `FORMAT` cuando no se le especifica una configuración regional, y para ordenar y comparar texto de forma sensible al idioma. También es el idioma de los nombres y descripciones no traducidos del modelo. Las traducciones para otros idiomas se representan como configuraciones regionales en la colección `Cultures`. Selecciona la configuración regional en la lista de la vista de propiedades.
 
@@ -111,7 +112,7 @@ Según Microsoft, no se puede cambiar la configuración regional una vez que la 
 
 La configuración regional que usa Power Query para interpretar valores durante la actualización, por ejemplo cuando convierte el texto `1.234,5` en un número o `03/04/2026` en una fecha. Es la misma configuración que **Configuración regional para importar**, dentro de **Configuración regional**, en Power BI Desktop.
 
-Establécela cuando los datos de origen usen un formato distinto de `configuración regional`, por ejemplo un modelo en `en-US` que carga archivos CSV escritos en `de-DE`. Si está vacío, Power Query usa `configuración regional`. Si se establece, tiene prioridad sobre `configuración regional` durante la actualización. Por ejemplo, en un modelo con `configuración regional` establecida en `en-US`, `Date.FromText ( "01/02/2024" )` devuelve el 2 de enero de 2024 cuando `SourceQueryCulture` está vacío, y el 1 de febrero de 2024 cuando es `nl-NL`. En un modelo nuevo guardado desde Power BI Desktop, contiene la **Configuración regional para importar** del archivo, por ejemplo `en-NL`.
+Establécela cuando los datos de origen usen un formato distinto de `Culture`, por ejemplo un modelo en `en-US` que carga archivos CSV escritos en `de-DE`. Si está vacío, Power Query usa `Culture`. Si se establece, tiene prioridad sobre `Culture` durante la actualización. Por ejemplo, en un modelo con `Culture` establecida en `en-US`, `Date.FromText ( "01/02/2024" )` devuelve el 2 de enero de 2024 cuando `SourceQueryCulture` está vacío, y el 1 de febrero de 2024 cuando es `nl-NL`. En un modelo nuevo guardado desde Power BI Desktop, contiene la **Configuración regional para importar** del archivo, por ejemplo `en-NL`.
 
 ### Modo predeterminado
 
@@ -189,8 +190,8 @@ Si un comando de actualización puede sobrescribir las variables de Data source 
 
 | Valor         | Significado                                                                 |
 | ------------- | --------------------------------------------------------------------------- |
-| `No permitir` | Se rechazan las sobrescrituras de variables de Data source. |
-| `Permitir`    | Se permiten las sobrescrituras de variables de Data source. |
+| `Disallow` | Se rechazan las sobrescrituras de variables de Data source. |
+| `Allow`    | Se permiten las sobrescrituras de variables de Data source. |
 
 <!-- TODO (not verifiable from TE3 source): Microsoft's TOM reference only says "Queries won't allow / allow data source variables override". Confirm what "data source variables" are and which commands can override them (possibly related to @refresh-overrides). -->
 
@@ -219,7 +220,7 @@ Cómo el motor crea y conserva los índices específicos de Direct Lake del mode
 | `Auto`           | Crea índices en memoria durante la carga de datos o la ejecución de consultas cuando es necesario, tal como lo describe la biblioteca TOM.                                     |
 | `Explicit`       | El modelo crea y conserva el índice solo cuando se solicita mediante una operación de _actualizar índices_. Los demás tipos de actualización no crean índices. |
 | `Full`           | El modelo crea y conserva índices como parte de las operaciones _refresh full_, _refresh calculate_ y _refresh indexes_.                                                       |
-| `Predeterminado` | Use el comportamiento predeterminado del modelo para la creación y persistencia de índices.                                                                                    |
+| `Default` | Use el comportamiento predeterminado del modelo para la creación y persistencia de índices.                                                                                    |
 
 Esta propiedad requiere un nivel de compatibilidad en versión preliminar y Tabular Editor 3 no la muestra en la vista de propiedades. Puedes establecerla en un C# Script.
 
@@ -230,8 +231,7 @@ Esta propiedad requiere un nivel de compatibilidad en versión preliminar y Tabu
 Cuando se establece en `true`, los autores de Report no pueden crear un modelo compuesto sobre este modelo; es decir, no pueden conectarse a él con DirectQuery y combinarlo con otros datos. Cuando un autor de Report se conecta a un modelo publicado que tiene esta opción establecida en `true`, Power BI Desktop no muestra **Realizar cambios en este modelo** y el autor no puede agregar otros datos al Report. Solo es posible una conexión en vivo al modelo.
 
 ### Desaconsejar medidas implícitas
-
-`DiscourageImplicitMeasures` · bool · Opciones · nivel de compatibilidad 1470+
+`DiscourageImplicitMeasures` · booleano · Opciones · nivel de compatibilidad 1470+ · **Básico**
 
 Cuando es `true`, los autores de Report en Power BI no pueden crear _medidas implícitas_; es decir, la suma o el recuento que Power BI calcula al arrastrar una columna numérica a un Visual. Los autores de Report solo pueden usar las medidas definidas en el modelo, y la configuración `SummarizeBy` de las columnas deja de aplicarse en los Report.
 
@@ -243,7 +243,7 @@ Los modelos con grupos de cálculo deben tenerla habilitada, porque los grupos d
 
 Cuando es `true`, Power BI desaconseja a los autores de Report que creen medidas de nivel de Report en Report con conexión en vivo a este modelo.
 
-No puedes establecer esta propiedad. La biblioteca TOM solo lo permite en un nivel de compatibilidad interno (2147483647), por lo que Tabular Editor y cualquier otra herramienta que use TOM rechazan el cambio en todos los niveles de compatibilidad publicados. Tabular Editor 3 no la muestra en la vista de propiedades.
+No puedes establecer esta propiedad. Tabular Editor y cualquier otra herramienta que utilice TOM rechazan el cambio en todos los niveles de compatibilidad publicados. Tabular Editor 3 no la muestra en la vista Propiedades.
 
 ### Forzar nombres únicos
 
@@ -370,8 +370,7 @@ Sugerencias que indican a Fabric qué conexión de datos usar para un Data sourc
 Las funciones DAX definidas por el usuario (UDFs) del modelo. Consulta @object-properties-functions y @udfs. La regla de BPA @kb.bpa-udf-use-compound-names marca las funciones cuyos nombres no contienen un separador `.` o `_`.
 
 ### Configuraciones regionales
-
-`Cultures` · colección de configuraciones regionales · traducciones, perspectivas, seguridad · de solo lectura
+`Cultures` · colección de culturas · Traducciones, perspectivas, seguridad · solo lectura · **Básico**
 
 Las configuraciones regionales, o traducciones, del modelo. Cada configuración regional contiene los nombres, las descripciones y las carpetas de visualización traducidos para un idioma. Selecciona **...** para agregar o quitar configuraciones regionales. Para editar las traducciones, usa las propiedades de traducción de cada objeto o, en Tabular Editor 3, el @metadata-translation-editor. Consulta @object-properties-perspectives-cultures y @how-to-work-with-perspectives-translations. Para exportar las traducciones de una configuración regional a un archivo JSON y volver a importarlas, consulta @import-export-translations.
 

@@ -1,8 +1,8 @@
----
+﻿---
 uid: importing-tables-te2
 title: Importación de tablas en TE2
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,6 +12,8 @@ applies_to:
 ---
 
 # Importación de tablas en Tabular Editor 2
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 Si ya tienes un Data source heredado en tu modelo, haz clic con el botón derecho sobre él y elige "Importar tablas...". Tabular Editor intentará conectarse mediante el proveedor de datos y las credenciales especificados en el Data source. Si la conexión se establece correctamente, deberías ver una lista de todas las bases de datos, tablas y vistas accesibles a través del Data source:
 
@@ -89,14 +91,14 @@ A partir de Tabular Editor 2.9.8, puedes excluir objetos de las comprobaciones d
 **Banderas de columna:**
 
 - `TabularEditor_SkipSchemaCheck`: Hace que Tabular Editor omita por completo la comprobación de esquema en esta tabla.
-- `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor ignorará la ausencia aparente de la columna de origen para esta columna concreta.
+- `TabularEditor_IgnoreSourceColumnAdded`: Tabular Editor ignorará la ausencia aparente de la columna de origen para esta columna concreta.
 - `TabularEditor_IgnoreDataTypeChange`: Tabular Editor ignorará los tipos de datos que no coincidan en cualquier columna de la tabla.
 - `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor ignorará las columnas importadas cuya columna de origen aparentemente no exista en el origen.
 
 **Banderas de tabla:**
 
 - `TabularEditor_IgnoreDataTypeChange`: Tabular Editor ignorará el tipo de datos que no coincida en esta columna concreta.
-- `TabularEditor_IgnoreSourceColumnAdded`: Tabular Editor ignorará las columnas adicionales que no estén asignadas a ninguna columna de la tabla.
+- `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor ignorará las columnas adicionales que no estén asignadas a ninguna columna de la tabla.
 
 Las banderas afectan a la comprobación de esquema tanto en la UI como en la CLI.
 

@@ -1,13 +1,15 @@
 ---
 uid: perspectives-translations
 title: Perspectivas y traducciones
+author: Morten Lønskov
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       full: true
-      note: Incluye editores dedicados para perspectivas y traducciones
+      note: Includes dedicated Perspective and Translation Editors
 ---
 
 # Trabajar con perspectivas y traducciones

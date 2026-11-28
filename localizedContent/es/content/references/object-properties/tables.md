@@ -2,7 +2,7 @@
 uid: object-properties-tables
 title: Propiedades de la tabla
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página trata las propiedades de los tres tipos de tablas en un modelo semántico: tablas normales, tablas calculadas y tablas de grupos de cálculo. La sección [Tabla](#table) describe las propiedades que comparten los tres tipos. Las secciones de las tablas calculadas y de las tablas de grupos de cálculo enumeran qué añaden y qué propiedades de tabla oculta para ellas la vista **Propiedades**. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 ## Tabla
@@ -35,9 +37,9 @@ En Tabular Editor 3, puedes agregar tablas desde un Data source con @import-tabl
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
-- [Oculto](xref:object-properties-common#hidden)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
+- [Oculto](xref:object-properties-common#hidden) · **Básico**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Propiedades modificadas](xref:object-properties-common#changed-properties)
@@ -52,8 +54,7 @@ En Tabular Editor 3, puedes agregar tablas desde un Data source con @import-tabl
 - [Mostrado en la perspectiva](xref:object-properties-common#shown-in-perspective)
 
 ### Grupo de tablas
-
-`TableGroup` · string · Básico · _almacenado como una anotación_ (`TabularEditor_TableGroup`)
+`TableGroup` · cadena · General · *almacenado como una anotación* (`TabularEditor_TableGroup`)
 
 El grupo de tablas que contiene la tabla en el **Explorador TOM** de Tabular Editor 3. Los grupos de tablas funcionan como carpetas para las tablas; por ejemplo, para mantener separadas las tablas de hechos, las tablas de dimensiones y los grupos de cálculo. Déjalo vacío para mostrar la tabla en el nivel superior. Los grupos de tablas no se pueden anidar y las herramientas cliente, como Power BI y Excel, los ignoran.
 
@@ -76,8 +77,7 @@ La actualización incremental solo está disponible para modelos de Power BI y F
 En los modelos de Analysis Services, las particiones las creas y administras tú mismo. Consulta @incremental-refresh-about y @incremental-refresh-setup. El script @script-implement-incremental-refresh configura una política de actualización basada en una columna de fecha que selecciones, incluidos los parámetros `RangeStart` y `RangeEnd`.
 
 ### Política de actualización
-
-`RefreshPolicy` · BasicRefreshPolicy · actualización incremental · nivel de compatibilidad 1450+
+`RefreshPolicy` · GeneralRefreshPolicy · Actualización incremental · nivel de compatibilidad 1450+
 
 La política de actualización incremental de la tabla. Expándela en la vista **Propiedades** para definir cuánto historial conservar, cuánto actualizar, la expresión de origen y el resto de la configuración de la política. La configuración se describe en la sección de política de actualización de @object-properties-partitions. Consulta también @incremental-refresh-policy.
 
@@ -133,8 +133,7 @@ Los calendarios personalizados definidos en la tabla. Un calendario asigna las c
 En Tabular Editor 3, haz clic con el botón derecho en una tabla y elige **Crear > Calendario...** para agregar un calendario; después, asigna sus columnas en el **Editor de calendarios**. Consulta @calendars.
 
 ### Categoría de datos
-
-`DataCategory` · string · Opciones
+`DataCategory` · cadena · Opciones · **Básico**
 
 El tipo de datos que contiene la tabla, para las herramientas cliente. En Power BI, el valor `Time` marca la tabla como una tabla de fechas: Power BI usa la columna de fecha de la tabla (la columna con `IsKey` establecido en `true`) para la inteligencia temporal y desactiva la tabla automática de fecha y hora para esa tabla. **Marcar como tabla de fechas** en Power BI Desktop establece este valor.
 
@@ -173,10 +172,10 @@ El Tabular Object Model (TOM) todavía no ha asignado a esta propiedad un nivel 
 
 | Valor            | Significado                                                                                                                                                      |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Predeterminado` | Usa el valor predeterminado del modelo, configurado mediante **Default Direct Lake Indexing Behavior** en @object-properties-model. |
-| `Automático`     | Crea índices en memoria durante la carga de datos o la ejecución de consultas cuando es necesario, tal como lo describe la biblioteca TOM.       |
-| `Completo`       | El motor crea y guarda los índices como parte de una actualización completa, una actualización Calculate y una actualización de tipo indexes.    |
-| `Explícito`      | El motor crea y guarda los índices solo cuando ejecutas una actualización de tipo indexes.                                                       |
+| `Default` | Usa el valor predeterminado del modelo, configurado mediante **Default Direct Lake Indexing Behavior** en @object-properties-model. |
+| `Auto`     | Crea índices en memoria durante la carga de datos o la ejecución de consultas cuando es necesario, tal como lo describe la biblioteca TOM.       |
+| `Full`       | El motor crea y guarda los índices como parte de una actualización completa, una actualización Calculate y una actualización de tipo indexes.    |
+| `Explicit`      | El motor crea y guarda los índices solo cuando ejecutas una actualización de tipo indexes.                                                       |
 
 <!-- TODO (not verifiable from TE3 source): the behavior of each value and which indexes this covers; check the Microsoft documentation once the feature is out of preview. -->
 
@@ -255,15 +254,14 @@ El permiso de seguridad a nivel de objetos (OLS) de la tabla en cada rol del mod
 
 | Valor            | Significado                                                                                                                                                                                                 |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Predeterminado` | No hay ningún permiso establecido para este rol. Los miembros del rol pueden ver la tabla.                                                                                  |
-| `Lectura`        | Los miembros del rol pueden ver y consultar la tabla.                                                                                                                                       |
-| `Ninguno`        | La tabla y todo lo que depende de ella quedan ocultos para los miembros del rol. Las consultas y las medidas que hacen referencia a la tabla devuelven un error para ellos. |
+| `Default` | No hay ningún permiso establecido para este rol. Los miembros del rol pueden ver la tabla.                                                                                  |
+| `Read`        | Los miembros del rol pueden ver y consultar la tabla.                                                                                                                                       |
+| `None`        | La tabla y todo lo que depende de ella quedan ocultos para los miembros del rol. Las consultas y las medidas que hacen referencia a la tabla devuelven un error para ellos. |
 
-Con `Ninguno`, la tabla y sus metadatos no existen para los miembros del rol, por lo que cualquier medida que haga referencia a la tabla produce un error para ellos. Consulta @data-security-setup-ols y @object-properties-security. Para comprobar que OLS y la seguridad a nivel de filas funcionan según lo previsto, pruébalas mediante suplantación en Tabular Editor 3. Consulta @data-security-testing.
+Con `None`, la tabla y sus metadatos no existen para los miembros del rol, por lo que cualquier medida que haga referencia a la tabla produce un error para ellos. Consulta @data-security-setup-ols y @object-properties-security. Para comprobar que OLS y la seguridad a nivel de filas funcionan según lo previsto, pruébalas mediante suplantación en Tabular Editor 3. Consulta @data-security-testing.
 
 ### Seguridad a nivel de filas
-
-`RowLevelSecurity` · por rol · Traducciones, Perspectivas, Seguridad · de solo lectura · _acceso directo a_ los permisos de tabla de cada rol
+`RowLevelSecurity` · por rol · Traducciones, perspectivas, seguridad · solo lectura · *acceso directo a* los permisos de tabla de cada rol · **Básico**
 
 El filtro de seguridad a nivel de filas (RLS) de la tabla en cada rol del modelo. Expande la propiedad para ver una entrada por rol. Cada entrada es una expresión DAX que devuelve `TRUE` para las filas que pueden ver los miembros del rol, por ejemplo:
 
@@ -317,9 +315,9 @@ Una tabla de grupo de cálculo tiene las siguientes propiedades, además de las 
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
-- [Oculto](xref:object-properties-common#hidden)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
+- [Oculto](xref:object-properties-common#hidden) · **Básico**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -328,20 +326,17 @@ Una tabla de grupo de cálculo tiene las siguientes propiedades, además de las 
 - [Mostrado en perspectiva](xref:object-properties-common#shown-in-perspective)
 
 ### Grupo de tablas
-
-`TableGroup` · cadena · Básico · _almacenado como anotación_ (`TabularEditor_TableGroup`)
+`TableGroup` · cadena · General · *almacenado como anotación* (`TabularEditor_TableGroup`)
 
 Igual que [Grupo de tablas](#table-group) en una tabla.
 
 ### Descripción del grupo de cálculo
-
-`CalculationGroupDescription` · cadena · Básico · _acceso directo a_ la **Descripción** del grupo de cálculo
+`CalculationGroupDescription` · cadena · General · *acceso directo a* **Descripción** del grupo de cálculos
 
 La descripción almacenada en el grupo de cálculo, independiente de la `Description` de la propia tabla. Las herramientas cliente no la muestran. Al pasar el cursor sobre una tabla de grupo de cálculo en el panel **Datos** de Power BI Desktop, aparece la `Description` de la tabla, mientras que la lista de campos de Excel no muestra ninguna descripción. Pon el texto para los autores de Report en la `Description` de la tabla y usa esta propiedad para notas destinadas a otros desarrolladores.
 
 ### Precedencia del grupo de cálculo
-
-`CalculationGroupPrecedence` · int · Básico · _acceso directo a_ la **Precedencia** del grupo de cálculo
+`CalculationGroupPrecedence` · int · General · *acceso directo a* **Precedencia** del grupo de cálculos · **Básico**
 
 El orden en que se aplica el grupo de cálculo cuando una consulta utiliza más de un grupo de cálculo. Consulta `Precedence` en @object-properties-calculation-groups.
 

@@ -2,7 +2,7 @@
 uid: desktop-integration
 title: Integración con Power BI Desktop
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -48,4 +48,4 @@ Una vez conectada a la instancia de Analysis Services, una herramienta externa p
 
 ## Operaciones de modelado compatibles
 
-A partir de la actualización de junio de 2025 de Power BI Desktop, las herramientas externas pueden cambiar cualquier parte del modelo semántico alojado en Power BI Desktop, lo que incluye agregar y quitar tablas y columnas y cambiar tipos de datos. Para versiones anteriores de Power BI Desktop, consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations) y [la entrada oficial del blog](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
+A partir de la actualización de junio de 2025 de Power BI Desktop, las herramientas externas pueden cambiar cualquier parte del modelo semántico alojado en Power BI Desktop, lo que incluye añadir y eliminar tablas y columnas y cambiar los tipos de datos. Para versiones anteriores de Power BI Desktop, consulte [la publicación oficial del blog](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).

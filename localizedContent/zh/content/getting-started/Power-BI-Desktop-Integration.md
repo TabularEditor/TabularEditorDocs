@@ -2,7 +2,7 @@
 uid: desktop-integration
 title: Power BI Desktop 集成
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -48,4 +48,4 @@ Power BI Desktop 会为该 Analysis Services 实例分配一个端口号。当�
 
 ## 支持的建模操作
 
-从 2025 年六月的 Power BI Desktop 更新开始，外部工具可以更改托管在 Power BI Desktop 中的语义模型的任何部分，包括添加和删除表与列，以及更改数据类型。对于更早版本的 Power BI Desktop，请参阅 [桌面版限制](xref:desktop-limitations) 和 [官方博客文章](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/)。
+从 2025 年 6 月的 Power BI Desktop 更新开始，外部工具可以更改 Power BI Desktop 中托管的语义模型的任何部分，包括添加和删除表格和列以及更改数据类型。对于较早版本的 Power BI Desktop，请参阅[官方博客文章](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/ )。

@@ -2,7 +2,7 @@
 uid: parallel-development
 title: 通过 Git 和“保存到文件夹”实现并行开发
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -57,7 +57,7 @@ Tabular Editor 的目标是简化这一过程：无论模型是 Analysis Service
 
 每个表示单个 TOM 对象的文件名，直接取自该对象的 `Name` 属性。“根”文件名为 **Database.json**，因此我们有时也会把这种基于文件夹的存储格式简称为 **Database.json**。
 
-Tabular Editor 也会采用同样的方式，将 [DAX 用户自定义函数](xref:udfs) 单独拆分出来，放在模型根目录的 `functions` 文件夹下。只要有不止一个人编写函数，就应尽快启用此选项；否则，每个函数都会保存在 **Database.json** 中。参见 [保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)。
+Tabular Editor 以相同的方式将[DAX 用户自定义函数](xref:udfs)拆分到模型根目录下的 `functions` 文件夹中。当有多人编写函数时，请立即启用此功能：在启用此功能之前，所有函数都位于 **Database.json** 中。请参阅[保存到文件夹](xref:save-to-folder#user-defined-functions-udfs)。
 
 ## 使用“保存到文件夹”的优点
 
@@ -73,16 +73,17 @@ Tabular Editor 也会采用同样的方式，将 [DAX 用户自定义函数](xre
 
 ## 配置保存到文件夹
 
-通用方案很少能适配所有情况。 Tabular Editor 提供了一些配置选项，用于控制如何将模型序列化为文件夹结构。在 Tabular Editor 3 中，你可以在 **工具 > 偏好 > 保存到文件夹** 下找到常规设置。在 Tabular Editor 中加载模型后，你可以在 **模型 > 序列化选项...** 下找到适用于该模型的具体设置。适用于特定模型的设置会作为注释存到模型本身里，以确保不管是谁加载并保存模型，都用同一套设置。
+很少有“一刀切”的方案。Tabular Editor 有一些配置选项，这些选项会影响模型序列化为文件夹结构的方式。在 Tabular Editor 3 中，您可以在**工具 > 首选项 > 文件格式**下找到常规设置。“**常规**”页面包含跨格式共享的设置，“**保存到文件夹**”页面设置“**文件 > 保存到文件夹**”写入的格式（TMDL 或 Database.json），其子页面包含 Database.json 格式（“**JSON 序列化**”）和 TMDL（“**TMDL 序列化**”）的设置。在 Tabular Editor 中加载模型后，您可以在**模型 > 序列化选项…**下找到适用于该模型的具体设置。适用于特定模型的设置将作为注释存储在模型本身中，以确保无论哪个用户加载和保存模型，都使用相同的设置。
 
-![配置保存到文件夹](~/content/assets/images/configuring-save-to-folder.png)
+![“文件格式” > “保存到文件夹”下的“JSON 序列化”首选项页面](~/content/assets/images/configuring-save-to-folder.png)
 
 ### 序列化设置
 
-- **使用推荐设置**：（默认：选中）选中后，Tabular Editor 在首次将模型保存为文件夹结构时会使用默认设置。
-- **在“from”表上序列化关系**：（默认：未选中）选中后，Tabular Editor 会将关系作为注释存储在关系的“from 侧”（通常是事实表）的表上，而不是存储在模型级别。这在模型开发早期阶段很有用，因为此时表名往往还会频繁变更。
-- **在对象上序列化透视归属信息**：（默认：未选中）选中后，Tabular Editor 会将对象（表、列、层次结构、度量值）属于哪些透视的信息作为注释存储在该对象上，而不是存储在透视级别。当对象名称可能变更，但透视名称已最终确定时，这会很有用。
-- **在已翻译的对象上序列化翻译**：（默认：未选中）选中后，Tabular Editor 会将元数据的翻译作为注释存储在每个可翻译对象（表、列、层次结构、级别、度量值等）上，而不是存储在区域设置级别。当对象名称可能变更时，这会很有用。
+在 Tabular Editor 3 中，这些设置位于**JSON 序列化**页面，适用于 Database.json 格式。列出的默认值是 Tabular Editor 3 的默认值。
+
+- **在源表格上序列化关系**：（默认：选中）选中此选项后，Tabular Editor 将关系作为关系“源端”（通常是事实表）表格上的注释进行存储，而不是在模型级别存储。这在模型的早期开发阶段非常有用，因为此时表名仍会经常发生变化。
+- **在对象上序列化透视成员信息**：（默认：选中）选中此选项后，Tabular Editor 会将对象（表、列、层次结构、度量值）所属透视的信息作为该对象的注释进行存储，而不是在透视级别存储该信息。当对象名称可能会发生变化，但透视名称已确定时，此选项非常有用。
+- **在已翻译对象上序列化翻译**：（默认：选中）选中此选项后，Tabular Editor 会将元数据翻译作为每个可翻译对象（表、列、层次结构、级别、度量值等）上的注释存储，而不是在文化级别存储翻译。当对象名称可能发生变化时，此选项非常有用。
 - **按顺序为文件名添加前缀**：（默认：未选中）如果你希望保留数组成员的元数据顺序（例如表中列的顺序），可以选中此项，让 Tabular Editor 基于对象在数组中的索引，在文件名前加上按顺序递增的整数前缀。如果你在 Excel 中使用默认的钻取功能，并希望[在钻取结果中让列按特定顺序显示](https://github.com/TabularEditor/TabularEditor/issues/46#issuecomment-297932090)，这会很有用。
 
 > [!NOTE]
@@ -94,13 +95,15 @@ Tabular Editor 也会采用同样的方式，将 [DAX 用户自定义函数](xre
 
 在大多数情况下，建议始终将对象序列化到最低层级。不过，在某些特殊场景下，可能不需要这么细的粒度。
 
+对于 TMDL 文件夹，Tabular Editor 3 企业版还可以将每个列、度量值、分区和层次结构，以及每个函数、共享表达式、数据源和关系分别存储在各自的文件中。请参阅@tmdl-per-object-serialization。
+
 ## Power BI 与版本控制
 
 如上所述，将 Power BI Report（.pbix）或 Power BI 模板（.pbit）文件纳入版本控制，并不能实现并行开发或冲突解决，因为这些文件采用二进制文件格式。同时，我们也必须了解当前将 Tabular Editor（或其他第三方工具）与 Power BI Desktop 或 Power BI XMLA 端点分别配合使用时的限制。
 
 这些限制包括：
 
-- 当将 Tabular Editor 作为 Power BI Desktop 的外部工具使用时，[并非所有建模操作都受支持](xref:desktop-limitations)。
+- 当 Tabular Editor 是早于 2025 年 6 月的 Power BI Desktop 版本的外部工具时，并非所有建模操作都受支持。请参阅 @desktop-integration。
 - Tabular Editor 可以从 Power BI Desktop 中已加载的 .pbix 文件提取模型元数据，或直接从磁盘上的 .pbit 文件提取，但**在 Power BI Desktop 之外，没有受支持的方法来更新 .pbix 或 .pbit 文件中的模型元数据**。
 - 一旦通过 XMLA endpoint 对某个 Power BI Dataset 进行了任何更改，[该 Dataset 将无法再以 .pbix 文件形式下载](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets)。
 

@@ -2,7 +2,7 @@
 uid: object-properties-data-sources
 title: Propiedades de los Data sources y de las expresiones
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of legacy and structured data sources, sha
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página describe los objetos que indican de dónde provienen los datos de un modelo: Data sources, expresiones compartidas, Query Groups y sugerencias de enlace de datos. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common. Para las particiones que usan estos objetos, consulta @object-properties-partitions.
 
 Un modelo se conecta a sus orígenes mediante uno de estos tipos de Data source:
@@ -45,11 +47,11 @@ En la vista **Properties** de Tabular Editor 2 y 3, las propiedades `Password` s
 
 Cuando guardas el modelo en un archivo `.bim` o en una carpeta en formato JSON, Tabular Editor 2 y 3 eliminan las propiedades `password`, `pwd`, `key` y `secret` de cada Data source. También eliminan la palabra clave de contraseña (`Password`, `Pwd`, `Secret` o `Key`) de las cadenas de conexión, tanto la `ConnectionString` de un origen de datos del proveedor como la que aparece en la dirección de un origen de datos estructurado. Así, los secretos quedan fuera del control de versiones.
 
-Al guardar en Tabular Model Definition Language (TMDL), Tabular Editor 2 y 3 configuran el serializador de Tabular Object Model (TOM) para omitir información restringida, como las contraseñas. El serializador de TMDL escribe todas las contraseñas como `********`, incluida una contraseña dentro de una cadena de conexión; por ejemplo, `connectionString: Data source=srv;user id=u;password=********`.
+Al guardar en Tabular Model Definition Language (TMDL), Tabular Editor 2 y 3 configuran el serializador de Tabular Object Model (TOM) para omitir información restringida, como las contraseñas. El serializador de TMDL escribe todas las contraseñas como `********`, incluida una contraseña dentro de una cadena de conexión; por ejemplo, `connectionString: data source=srv;user id=u;password=********`.
 
 Para incluir secretos en los archivos guardados, habilita **Incluir datos confidenciales** en uno de estos lugares:
 
-- en Tabular Editor 3, en **Herramientas > Preferencias > Formatos de archivo** (consulta @preferences), o en **Modelo > Opciones de serialización...** para el modelo actual, lo cual tiene prioridad sobre las preferencias
+- En Tabular Editor 3, en **Herramientas > Preferencias > Formatos de archivo > General** (consulte @preferences), o en **Modelo > Opciones de serialización...** para el modelo actual, que tiene prioridad sobre las preferencias.
 - en Tabular Editor 2, en **Archivo > Preferencias...**, en la pestaña **Serialización**, en **Configuración general de serialización**, o, para el modelo abierto, en la pestaña **Modelo actual**, en **Configuración de serialización del modelo actual**
 
 No se recomienda incluir datos confidenciales.
@@ -74,8 +76,8 @@ Un Data source del proveedor (heredado) se conecta a un origen mediante un prove
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -91,8 +93,7 @@ Algunos orígenes de datos del proveedor encapsulan un mashup de Power BI: la pa
 La cuenta de Windows que el servidor usa para conectarse al origen cuando `ImpersonationMode` es `ImpersonateAccount`, por ejemplo `CONTOSO\svc-ssas-reader`. Introduce su contraseña en `Password`. Para los demás modos de suplantación, déjalo vacío.
 
 ### Cadena de conexión
-
-`ConnectionString` · string · Detalles de conexión
+`ConnectionString` · cadena · Detalles de la conexión · **Básico**
 
 La cadena de conexión que el servidor usa para abrir la conexión. Las palabras clave dependen del proveedor, por ejemplo:
 
@@ -121,7 +122,7 @@ La identidad de Windows que usa el servidor para conectarse al origen durante la
 | `ImpersonateCurrentUser`       | La identidad del usuario que envía la consulta. Solo se aplica a DirectQuery. Azure Analysis Services no lo admite para orígenes locales.                                                                                     |
 | `ImpersonateAnonymous`         | Una conexión anónima sin una identidad de Windows. La referencia de Microsoft TOM enumera este modo como no compatible.                                                                                                                       |
 | `ImpersonateUnattendedAccount` | Una cuenta desatendida preconfigurada en el servidor.                                                                                                                                                                                                         |
-| `Predeterminado`               | Sin modo explícito. El servidor usa la configuración de suplantación que hereda de la base de datos. Cuando Tabular Editor carga un origen de datos del proveedor con `Default`, lo establece en `ImpersonateServiceAccount`. |
+| `Default`               | Sin modo explícito. El servidor usa la configuración de suplantación que hereda de la base de datos. Cuando Tabular Editor carga un origen de datos del proveedor con `Default`, lo establece en `ImpersonateServiceAccount`. |
 
 En Azure Analysis Services, la mayoría de los orígenes utiliza autenticación SQL o de Microsoft Entra en la cadena de conexión. Consulta [Suplantación en modelos tabulares de Analysis Services](https://learn.microsoft.com/analysis-services/tabular-models/impersonation-ssas-tabular) para ver las opciones que admite cada entorno.
 
@@ -210,23 +211,21 @@ La mayoría de las propiedades siguientes son accesos directos a un valor de los
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
 
 ### Protocolo
-
-`Protocol` · string · Básico
+`Protocol` · cadena · General · **Básico**
 
 El tipo de conexión, por ejemplo `tds` para SQL Server y Azure SQL, `oracle` para Oracle, `odbc`, `ole-db`, `file` para un archivo local o de red, `azure-blobs` para Azure Blob Storage o `odata` para un feed OData. El protocolo determina cuáles de las propiedades de **Detalles de conexión** y **Credencial** se usan.
 
 El valor es texto libre. La clase `DataSourceProtocol` de TOM enumera los nombres que TOM conoce, como `analysis-services`, `azure-tables`, `db2`, `folder`, `http`, `mysql`, `postgresql`, `sap-hana-sql`, `sharepoint-list` y `teradata` (consulta [DataSourceProtocol](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular.datasourceprotocol) para ver la lista completa). Cuando importas tablas a un origen de datos estructurado, Tabular Editor 3 lo establece en `tds` para SQL Server y los puntos de conexión SQL de Fabric, o en `odbc`, `ole-db` u `oracle`.
 
 ### Account
-
-`Account` · string · Detalles de conexión
+`Account` · cadena · Detalles de conexión · **Básico**
 
 El nombre de la cuenta de almacenamiento, para los protocolos que se conectan a una cuenta de almacenamiento de Azure, como Azure Blob Storage o Azure Table Storage. Junto con `Domain`, forma la dirección de la cuenta; por ejemplo, la cuenta `contosodata` y el dominio `blob.core.windows.net`.
 
@@ -239,14 +238,12 @@ Todos los valores de dirección de conexión del Data source. Haz clic en el bot
 <!-- TODO (not verifiable from TE3 source or the TOM reference, which only names each ConnectionAddress property): which protocols use Model, ContentType, EmailAddress, Object, Property, Resource and View, with an example value for each. The examples below for Model (analysis-services), EmailAddress (Exchange) and Resource (web URL) are unconfirmed. -->
 
 ### Modelo
-
-`AddressModel` · string · Detalles de la conexión
+`AddressModel` · cadena · Detalles de la conexión · **Básico**
 
 El nombre del modelo para protocolos que se conectan a un modelo semántico o a un cubo, como `analysis-services`.
 
 ### Cadena de conexión
-
-`ConnectionString` · string · Detalles de la conexión
+`ConnectionString` · cadena · Detalles de la conexión · **Básico**
 
 Una cadena de conexión para protocolos que la admiten, como `odbc` y `ole-db`. Por ejemplo:
 
@@ -257,86 +254,72 @@ Driver={Snowflake};Server=contoso.snowflakecomputing.com;Warehouse=COMPUTE_WH
 La contraseña incluida en la cadena de conexión se enmascara en la vista **Propiedades** y se elimina al guardar el archivo (consulta [Credenciales y guardado](#credentials-and-saving)).
 
 ### Tipo de contenido
-
-`ContentType` · string · Detalles de la conexión
+`ContentType` · cadena · Detalles de la conexión · **Básico**
 
 El tipo de contenido del origen, para protocolos que necesitan conocer el formato de lo que leen.
 
 ### Base de datos
-
-`Database` · string · Detalles de la conexión
+`Database` · cadena · Detalles de la conexión · **Básico**
 
 El nombre de la base de datos en el servidor; por ejemplo, `AdventureWorks` para el protocolo `tds`.
 
 ### Dominio
-
-`Domain` · string · Detalles de la conexión
+`Domain` · cadena · Detalles de conexión · **Básico**
 
 La parte del dominio de la dirección; por ejemplo, `blob.core.windows.net` para Azure Blob Storage. Se usa junto con `Account`.
 
 ### Dirección de correo electrónico
-
-`EmailAddress` · string · Detalles de la conexión
+`EmailAddress` · cadena · Detalles de la conexión · **Básico**
 
 Una dirección de correo electrónico, para protocolos que identifican la conexión por el correo electrónico del usuario, como Exchange.
 
 ### Objeto
-
-`Object` · string · Detalles de la conexión
+`Object` · cadena · Detalles de la conexión · **Básico**
 
 El nombre de un objeto en el origen, para protocolos que hacen referencia a un único objeto.
 
 ### Ruta
-
-`Path` · string · Detalles de la conexión
+`Path` · cadena · Detalles de la conexión · **Básico**
 
 La ruta de un archivo o carpeta, para protocolos como `file` y `folder`; por ejemplo, `\\fileserver\data\sales.csv`. El servidor que actualiza el modelo debe poder acceder a la ruta.
 
 ### Propiedad
-
-`Property` · string · Detalles de la conexión
+`Property` · cadena · Detalles de la conexión · **Básico**
 
 Un valor de dirección específico del protocolo.
 
 ### Query
-
-`Query` · cadena · Detalles de la conexión
+`Query` · cadena · Detalles de la conexión · **Básico**
 
 Una consulta nativa, normalmente SQL, que la conexión envía al origen, por ejemplo `SELECT * FROM dbo.Customer`. La mayoría de los modelos lo dejan vacío y aplican el filtro en las expresiones M de las particiones.
 
 ### Recurso
-
-`Resource` · cadena · Detalles de la conexión
+`Resource` · cadena · Detalles de la conexión · **Básico**
 
 Un identificador de recurso específico del protocolo, como la URL de un recurso web.
 
 ### Esquema
-
-`Schema` · cadena · Detalles de la conexión
+`Schema` · cadena · Detalles de la conexión · **Básico**
 
 El esquema de la base de datos, para los protocolos que hacen referencia a un esquema.
 
 ### Servidor
-
-`Server` · cadena · Detalles de la conexión
+`Server` · cadena · Detalles de la conexión · **Básico**
 
 El servidor al que se conecta, por ejemplo `myserver.database.windows.net` para el protocolo `tds`. Es el valor que normalmente cambias al implementar el mismo modelo en otro entorno.
 
 ### Url
-
-`Url` · cadena · Detalles de la conexión
+`Url` · cadena · Detalles de la conexión · **Básico**
 
 La URL del origen, para protocolos como `odata` y `http`, por ejemplo `https://services.odata.org/V4/Northwind/Northwind.svc`.
 
 ### Vista
-
-`View` · cadena · Detalles de la conexión
+`View` · cadena · Detalles de la conexión · **Básico**
 
 El nombre de una vista en el origen, para los protocolos que permiten especificar una.
 
 ### AuthenticationKind
-
-`AuthenticationKind` · cadena · Credencial
+`AuthenticationKind` · cadena · Credencial · **Básica**
 
 Cómo se autentica el servidor con el origen. Elige un valor de la lista desplegable o escribe uno:
 
@@ -344,7 +327,7 @@ Cómo se autentica el servidor con el origen. Elige un valor de la lista despleg
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Windows`          | Una cuenta de Windows, configurada en `Username` y `Password`.                                                                                                                                                                |
 | `UsernamePassword` | Un nombre de usuario y una contraseña que el origen reconoce, como un inicio de sesión en SQL Server. El asistente **Importar tablas** de Tabular Editor 3 usa este tipo cuando eliges una cuenta específica. |
-| `Clave`            | Una clave de cuenta, por ejemplo, para Azure Blob Storage, almacenada como el valor `Key` en `Credential`.                                                                                                                    |
+| `Key`            | Una clave de cuenta, por ejemplo, para Azure Blob Storage, almacenada como el valor `Key` en `Credential`.                                                                                                                    |
 | `OAuth2`           | Un token de OAuth 2.0, por ejemplo, para fuentes de Microsoft Entra ID.                                                                                                                                       |
 | `ServiceAccount`   | La cuenta con la que se ejecuta el servicio de Analysis Services.                                                                                                                                                             |
 | `CurrentUser`      | La identidad del usuario que ejecuta la consulta.                                                                                                                                                                             |
@@ -393,7 +376,7 @@ En Tabular Editor 3, la opción **Ignorar configuración de privacidad** dentro 
 
 `Username` · string · Credencial
 
-El nombre de usuario que usa el servidor para conectarse, cuando `AuthenticationKind` es `Windows` o `UsernamePassword`, por ejemplo `CONTOSO\\svc-reader` o un inicio de sesión de SQL Server.
+El nombre de usuario que usa el servidor para conectarse, cuando `AuthenticationKind` es `Windows` o `UsernamePassword`, por ejemplo `CONTOSO\svc-reader` o un inicio de sesión de SQL Server.
 
 ### Expresión de contexto
 
@@ -437,8 +420,8 @@ Consulta @how-to-work-with-expressions, @script-create-m-parameter y @script-cre
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -516,9 +499,9 @@ Los Query Group requieren un nivel de compatibilidad 1480 o superior. Cuando se 
 
 `Folder` · cadena · Opciones
 
-La ruta del Query Group, por ejemplo `Parameters` o `Staging\\Sales`, para un grupo dentro de otro grupo. El nombre de un Query Group coincide con el de su carpeta; cambiar uno cambia el otro.
+La ruta del Query Group, por ejemplo `Parameters` o `Staging\Sales`, para un grupo dentro de otro grupo. El nombre de un Query Group coincide con el de su carpeta; cambiar uno cambia el otro.
 
-Power BI Desktop separa los Query Groups anidados con una barra invertida y crea un Query Group para cada nivel. Para un grupo `Dates` dentro de un grupo `Staging`, el modelo contiene los Query Groups `Staging` y `Staging\\Dates`, y las consultas del grupo interno tienen `QueryGroup` `Staging\\Dates`.
+Power BI Desktop separa los Query Groups anidados con una barra invertida y crea un Query Group para cada nivel. Para un grupo `Dates` dentro de un grupo `Staging`, el modelo contiene los Query Groups `Staging` y `Staging\Dates`, y las consultas del grupo interno tienen `QueryGroup` `Staging\Dates`.
 
 ## Sugerencia de vinculación de datos
 

@@ -1,4 +1,4 @@
----
+﻿---
 uid: supported-files
 title: 支持的文件类型
 author: Morten Lønskov
@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           partial: true
-          note: "桌面版不支持模型元数据文件"
+          note: "Desktop Edition does not support model metadata files"
         - edition: Business
           full: true
         - edition: Enterprise
@@ -43,13 +43,13 @@ Tabular Editor 支持语义模型的四种文件类型：.bim、Power BI 文件 
 
 但它有一个明显缺点：由于它是一个单一的大文件，难以跟踪变更，也不利于采用 Git 源代码管理等良好的团队开发实践。
 
-#### 文件夹中的.bim 文件
+**文件夹中的 .bim 文件**
 
 ![支持的 BIM 文件类型](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
 [下载示例 .bim 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
 
-#### Fabric Git 集成：保存并附带支持文件
+**保存时包含用于 Fabric Git 集成的支持文件**
 
 使用“**保存并附带支持文件**”选项（Business 和企业版）时，Tabular Editor 会创建与 Microsoft Fabric Git 集成兼容的文件夹结构：
 
@@ -69,7 +69,9 @@ Tabular Editor 可以处理两种 Power BI 存储格式：
 - Power BI 模板文件（.pbit）
 - Power BI Project 文件夹（.pbip）
 
-#### Power BI Project 文件夹（.pbip） _(预览)_
+
+
+**Power BI Project 文件夹 (.pbip)（预览）**
 
 Power BI Project 文件夹于 2023 年六月推出，目前在 Power BI Desktop 中以预览功能提供（也称为“开发人员模式”）。这种存储格式是保存 .pbix 文件内容的另一种方式，其格式更适合进行版本控制，也更便于第三方读取和编辑内容。
 
@@ -83,7 +85,7 @@ Power BI Project 文件夹的根目录下有一个 .pbip 文件。该文件本�
 > [!IMPORTANT]
 > 将 Power BI 与 Tabular Editor 搭配使用时，建议使用 Power BI Project 文件格式，因为它支持 [最广泛的建模操作](https://learn.microsoft.com/power-bi/developer/projects/projects-overview#model-authoring)。对模型元数据进行上述列表之外的其他类型更改，可能会导致你的模型无法在 Power BI Desktop 中加载；在这种情况下，Microsoft 支持将无法为你提供帮助。
 
-#### Power BI 模板文件（.pbit）
+**Power BI模板文件（.pbit）**
 
 Power BI 模板文件与 .pbix 文件类似，但区别在于它不包含任何模型 **数据**，只包含模型 **元数据**。因此，可以在 Tabular Editor 中打开和编辑此模型元数据。
 
@@ -127,7 +129,7 @@ Microsoft 于 2023 年四月将 TMDL 作为预览功能推出，旨在提供一�
 
 TMDL 的设计目标是支持 Dataset 的源代码管理，让用户能够跟踪更改、协作，并围绕语义模型自动化工作流。
 
-> [!Note]
+> [!NOTE]
 > TMDL 目前处于预览阶段，这意味着它尚未完全稳定，可能会存在一些限制或问题。
 
 ![支持的文件类型：TMDL](~/content/assets/images/file-types/te3-supported-file-tmdl.png)
@@ -140,7 +142,7 @@ TMDL 的设计目标是支持 Dataset 的源代码管理，让用户能够跟踪
 
 [下载 TMDL 文件夹结构示例](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
 
-#### Fabric Git 集成：保存并附带支持文件
+**保存时包含用于 Fabric Git 集成的支持文件**
 
 使用“**保存并附带支持文件**”选项（Business 和企业版）时，Tabular Editor 会创建与 Microsoft Fabric Git 集成兼容的文件夹结构：
 
@@ -255,7 +257,7 @@ DAX 查询是一类表达式，可用于操作和分析语义模型中的数据�
 > [!WARNING]
 > 如果你的模型元数据属于机密信息，那么 .vpax 文件也应视为机密，并仅在充分考虑这一点的情况下共享。如果你担心知识产权泄露，Tabular Editor 3 提供了一个用于混淆 VPAX 文件的选项。
 
-#### 混淆
+### 混淆的 VPAX 文件 (.ovpax)
 
 如果你需要将 VPAX 文件交付给第三方(例如顾问或工具供应商)，可以对文件进行混淆，以隐藏模型元数据。具体做法是：在 Vertipaq Analyzer 窗口中，点击“导出”按钮旁边的下拉按钮，然后选择“混淆导出...”选项。
 
@@ -301,8 +303,7 @@ Tabular Editor 会在 "%localappdata%\\TabularEditor3" 文件夹中维护多个�
 你可以在此处下载微软官方的 BPA 规则：[PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
 
 ### RecentServers.json
-
-包含用户连接过的所有服务器。有时可以手动编辑它，让它“忘记”那些不再相关的旧服务器。
+包含您已连接的服务器，其中为每台服务器保存了身份验证类型、用户名、模式和状态栏颜色，以及已固定的服务器列表。密码不会被存储。要移除或固定服务器，请在连接对话框的**服务器**列表中右键单击该服务器。请参阅[最近使用的服务器和已固定的服务器](xref:xmla-as-connectivity#recent-and-pinned-servers)。
 
 ### Layouts.json
 

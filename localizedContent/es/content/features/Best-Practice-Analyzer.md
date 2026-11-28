@@ -2,7 +2,7 @@
 uid: best-practice-analyzer
 title: Best Practice Analyzer
 author: Morten Lønskov
-updated: 2026-09-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ Best Practice Analyzer comprueba tu modelo con un conjunto de reglas y enumera t
 
 Una regla es una condición definida sobre los objetos del modelo, junto con un nivel de gravedad y una descripción. Las reglas abarcan cosas que es fácil hacer mal y costoso detectar más tarde: columnas calculadas que deberían trasladarse al origen, relaciones entre columnas con tipos de datos que no coinciden, medidas sin cadena de formato y objetos que se han dejado visibles cuando deberían estar ocultos.
 
-Pulsa **F10** o haz clic en el recuento de incidencias de la ventana principal para abrir el Best Practice Analyzer. El análisis en segundo plano se puede desactivar desde **Herramientas > Preferencias > Best Practice Analyzer** (**Archivo > Preferencias** en Tabular Editor 2).
+Pulse **F10** o haga clic en el número de problemas en la ventana principal para abrir Best Practice Analyzer. El análisis en segundo plano se puede desactivar en **Herramientas > Preferencias > Tabular Editor > Varios** (**Archivo > Preferencias** en Tabular Editor 2).
 
 ## Dónde ir después
 

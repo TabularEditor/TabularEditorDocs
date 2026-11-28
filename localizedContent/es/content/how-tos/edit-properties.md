@@ -1,5 +1,5 @@
 ---
-uid: edicion-de-propiedades
+uid: editing-properties
 title: Edición de propiedades
 applies_to:
   products:
@@ -19,4 +19,7 @@ La Cuadrícula de propiedades, situada en la parte inferior derecha de la pantal
 - Oculto (puedes establecerlo para varios objetos desde el menú contextual del árbol del Explorador, haciendo clic con el botón derecho)
 - Cadena de formato
 
-Existen distintas propiedades, según el tipo de objeto seleccionado.
+Existen diferentes propiedades, según el tipo de objeto que se haya seleccionado.
+
+> [!NOTE]
+> En Tabular Editor 3, puede activar la vista previa pública de la **Vista de propiedades básicas** en **Herramientas > Preferencias > Tabular Editor > Vistas previas públicas**. La vista Propiedades tiene entonces dos pestañas: **Básica**, un formulario con las propiedades que muestra Power BI Desktop, y **Avanzada**, la Cuadrícula de propiedades. Consulte @properties-view.

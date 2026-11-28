@@ -1,4 +1,4 @@
----
+﻿---
 uid: direct-lake-sql-model
 title: Direct Lake en modelos semánticos SQL
 author: Morten Lønskov
@@ -55,8 +55,8 @@ Tabular Editor 3 (3.15.0 o superior) enmarca (refresca) automáticamente el mode
 Además, al importar nuevas tablas, Tabular Editor 3 (3.15.0 o superior) enmarca (refresca) el modelo la próxima vez que se guarde. Esta preferencia se encuentra en **Herramientas > Preferencias > Implementación de modelo > Actualización de datos**.
 
 ## Identificación de un modelo Direct Lake
+La barra de título de Tabular Editor 3 muestra el modo de almacenamiento del modelo abierto después del nombre del modelo, como **(Direct Lake)**, **(DirectQuery)** o **(Import)**. Si un modelo contiene una combinación de modos de tabla, la barra de título muestra **(Compuesto)**. El Explorador TOM muestra el tipo y el modo de cada tabla (Import, DirectQuery, Dual o Direct Lake). Un modelo Direct Lake en SQL no puede contener tablas en modo Importación, DirectQuery o Dual.
 
-La barra de título superior de Tabular Editor muestra qué tipo de modelo está abierto en esa instancia de Tabular Editor. Además, el Explorador TOM muestra el tipo y el modo de cada tabla (Import, DirectQuery, Dual o Direct Lake). Si un modelo contiene una combinación de modos de tabla, la barra de título mostrará "Híbrido". Actualmente, no es posible que un modelo Direct Lake on SQL contenga tablas en modo Import, DirectQuery o Dual.
 
 ## Convertir un modelo Direct Lake a Import Mode
 

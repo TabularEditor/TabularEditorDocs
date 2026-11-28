@@ -2,7 +2,7 @@
 uid: migrate-from-te2
 title: Migración desde Tabular Editor 2.x
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-11-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,13 @@ Este artículo está dirigido a desarrolladores que ya tienen algo de experienci
 ## Instalación en paralelo
 
 Tabular Editor 3 tiene un código de producto diferente al de Tabular Editor 2.x. Esto significa que puedes instalar ambas herramientas en paralelo sin problemas. De hecho, las herramientas se instalan en carpetas de programa separadas y su configuración también se guarda en carpetas distintas. En otras palabras, no tiene sentido hablar de “actualizar” o “volver a una versión anterior” entre Tabular Editor 2.x y Tabular Editor 3. Es mejor pensar en Tabular Editor 3 como un producto totalmente distinto.
+
+Tabular Editor 3 se inicia con sus propias preferencias predeterminadas. Al iniciar por primera vez en un ordenador que tiene Tabular Editor 2.x, aparece un mensaje después del inicio si los ajustes de serialización de Tabular Editor 2.x difieren de los valores predeterminados de Tabular Editor 3, o si Tabular Editor 2.x tiene reglas del Best Practice Analyzer para el usuario local y Tabular Editor 3 no tiene ninguna. El mensaje indica lo que se importaría:
+
+- **Usar la configuración de Tabular Editor 3** mantiene los valores predeterminados de Tabular Editor 3.
+- **Importar desde Tabular Editor 2** copia los ajustes de serialización enumerados y las reglas del Best Practice Analyzer del usuario local en Tabular Editor 3.
+
+El mensaje aparece una sola vez. No se importan otras preferencias de Tabular Editor 2.x.
 
 ## Comparación de características
 

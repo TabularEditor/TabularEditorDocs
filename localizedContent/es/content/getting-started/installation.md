@@ -1,8 +1,8 @@
 ---
 uid: installation-activation-basic
-title: Instalación, activación y configuración básica
+title: "Instalación, activación y configuración básica"
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -113,10 +113,10 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3
 | Funcionalidad MSI | Se muestra en el instalador como | Descripción                                                 | Activar la instalación                                                                                                                        |
 | ----------------- | -------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MainFeature`     | Tabular Editor 3                 | Aplicación principal de Tabular Editor 3                    | Sí (obligatorio)                                                                                                           |
-| `AIAssistant`     | Funciones de IA                  | El @ai-assistant y el @mcp-server | Sí, a partir de la versión 3.27.0. Las versiones anteriores solo lo instalan si se selecciona |
+| `AIAssistant` | Funciones de IA | El @ai-assistant y el @mcp-server | Sí |
 
 > [!IMPORTANT]
-> A partir de la versión 3.27.0, una nueva instalación incluye el componente de **funciones de IA** a menos que lo excluyas. Si tu organización no permite el Asistente de IA ni el servidor MCP, excluye el componente y configura la directiva `DisableAi` como se describe a continuación.
+> Una nueva instalación incluye el componente **Funciones de IA** a menos que lo excluyas. Si tu empresa no permite el asistente de IA ni el servidor MCP, excluye el componente y configura la política `DisableAi` como se describe a continuación.
 
 ### Desplegar sin las funciones de IA
 
@@ -141,23 +141,30 @@ Para cambiar la selección en un solo equipo, vuelve a ejecutar el instalador y 
 
 ### Actualizaciones y el componente de funciones de IA
 
-Cuando instalas una versión más reciente del mismo paquete sobre una instalación existente, el instalador conserva la selección de funciones que ya tiene el equipo. Esto se aplica a las instalaciones interactivas y silenciosas. Un equipo implementado sin las funciones de IA antes de la versión 3.27.0 seguirá sin ellas después de la actualización, y un equipo en el que se seleccionaron las funciones de IA las conservará.
+Una actualización desde la versión 27.1.1 o anterior selecciona los componentes predeterminados, incluidas las **funciones de IA**, independientemente de lo que tuviera la instalación anterior. Esto se aplica a las actualizaciones interactivas y a las actualizaciones automáticas cuya línea de comandos no nombra los componentes. Desmarque **Funciones de IA** durante la instalación para no incluir el componente. Una actualización desde una versión posterior mantiene la selección de funciones que tiene el equipo, tanto en las instalaciones interactivas como en las silenciosas.
 
-En estos casos, el instalador aplica la selección predeterminada o la selección indicada en la línea de comandos:
+Para mantener las funciones de IA desactivadas en los equipos en una actualización automática, establezca la [política `DisableAi`](#enforcing-the-decision-with-the-disableai-policy) o pase `ADDLOCAL=MainFeature` como se muestra en [Implementación sin las funciones de IA](#deploying-without-the-ai-features).
+
+En estos casos, el instalador aplica la selección de la línea de comandos o la selección predeterminada:
 
 | Situación                                                                                                                                                               | Resultado                                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | La línea de comandos establece `ADDLOCAL`, `REMOVE` u otra propiedad de característica                                                                                  | La línea de comandos establece la selección. `ADDLOCAL=MainFeature` quita las funciones de IA de los equipos que las tienen, y `ADDLOCAL=ALL` las instala en los equipos que no las tienen         |
 | La implementación desinstala la versión anterior antes de instalar la nueva; por ejemplo, una sustitución de Intune configurada para desinstalar                        | La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya                                                                                                                |
-| El paquete usa un entorno de ejecución distinto del instalado; por ejemplo, el paquete de .NET 10 en un equipo con el paquete de .NET 8 | Los paquetes de .NET 8 y .NET 10 son productos independientes. La instalación es nueva e incluye las funciones de IA, a menos que la línea de comandos las excluya |
 
 La directiva `DisableAi` prevalece sobre la selección en todos los casos.
+
+### Cambiar entre los paquetes .NET 8 y .NET 10
+
+Los paquetes .NET 8 y .NET 10 se sustituyen entre sí. Cuando instala uno en un equipo que tiene la otra edición en la misma versión o en una versión anterior, el instalador elimina la otra edición antes de instalar ningún archivo y conserva la selección de funciones de esa edición. Un dispositivo que tenga instaladas ambas ediciones tendrá una sola instalación después de la siguiente instalación, y en **Configuración > Aplicaciones > Aplicaciones instaladas** aparecerá un solo **Tabular Editor 3**.
+
+Si la otra edición está instalada en una versión más reciente, la instalación se detiene y aparece un mensaje. Desinstala primero la edición más reciente y, a continuación, vuelve a ejecutar el instalador.
 
 ### Imponer la decisión con la directiva DisableAi
 
 Un usuario que ejecuta el instalador obtiene la selección predeterminada, que incluye las funciones de IA. Establece `DisableAi` @policies en `1` bajo `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` para mantener desactivadas las funciones de IA en todas las instalaciones del equipo. Tabular Editor 3 lee la directiva al iniciarse y desactiva el Asistente de IA y el servidor MCP.
 
-A partir de la versión 3.27.0, el instalador también lee la directiva:
+El instalador también lee la directiva:
 
 - una nueva instalación omite el componente de funciones de IA y el instalador no lo muestra
 - una actualización elimina el componente de un equipo que lo tiene
