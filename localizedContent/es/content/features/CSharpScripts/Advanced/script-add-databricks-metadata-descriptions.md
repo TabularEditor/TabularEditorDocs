@@ -2,11 +2,12 @@
 uid: script-add-databricks-metadata-descriptions
 title: Agregar descripciones de metadatos de Databricks
 author: Johnny Winter
-updated: 2026-04-08
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "Requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -25,27 +26,28 @@ El script utiliza las tablas information_schema de Unity Catalog para recuperar 
 
 ## Secuencia de comandos
 
-### Agregar descripciones de metadatos de Databricks
+> [!NOTE]
+> En Tabular Editor 2, este script requiere un compilador Roslyn. Consulta [Compilar con Roslyn](xref:advanced-scripting#compiling-with-roslyn).
 
+### Agregar descripciones de metadatos de Databricks
 ```csharp
-/*
- * Title: Add Databricks Metadata descriptions
- * Author: Johnny Winter, greyskullanalytics.com
- *
- * This script, when executed, will loop through the currently selected tables and send a query to Databricks to see if each table has metadata descriptions defined in Unity Catalog.
- * Where a description exists, this will be added to the semantic model description.
- * Step 1:  Select one or more tables in the model
- * Step 2:  Run this script
- * Step 3:  Enter your Databricks Personal Access Token when prompted
- * Step 4:  The script will connect to Databricks and update the table and column descriptions where they exist. 
- *          For each table processed, a message box will display the number of descriptions updated.
- *          Click OK to continue to the next table.
- * Notes:
- *  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
- *  -   The script auto-detects which driver is installed
- *  -   Each run of the script will prompt the user for a Databricks Personal Access Token
- */
 #r "Microsoft.VisualBasic"
+#r "System.Drawing"
+// Title: Add Databricks Metadata descriptions
+// Author: Johnny Winter, greyskullanalytics.com
+//
+// This script, when executed, will loop through the currently selected tables and send a query to Databricks to see if each table has metadata descriptions defined in Unity Catalog.
+// Where a description exists, this will be added to the semantic model description.
+// Step 1:  Select one or more tables in the model
+// Step 2:  Run this script
+// Step 3:  Enter your Databricks Personal Access Token when prompted
+// Step 4:  The script will connect to Databricks and update the table and column descriptions where they exist. 
+//          For each table processed, a message box will display the number of descriptions updated.
+//          Click OK to continue to the next table.
+// Notes:
+//  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+//  -   The script auto-detects which driver is installed
+//  -   Each run of the script will prompt the user for a Databricks Personal Access Token
 using System;
 using System.Data.Odbc;
 using System.Drawing;
@@ -590,7 +592,6 @@ Either:
     conn.Close();
 }
 ```
-
 ### Explicación
 
 El script usa WinForms para solicitar un token de acceso personal de Databricks, que se utiliza para autenticarse en Databricks. Detecta automáticamente si está instalado el nuevo Databricks ODBC Driver o el controlador heredado Simba Spark ODBC Driver. Para cada tabla seleccionada, el script recupera la información de la cadena de conexión de Databricks y el esquema y el nombre de la tabla a partir de la consulta M de la partición de la tabla seleccionada. A continuación, con el controlador ODBC detectado, envía a Databricks una consulta SQL que interroga las tablas information_schema para obtener la descripción de la tabla definida en Unity Catalog. A continuación, se actualiza la descripción de la tabla en el modelo semántico. También se envía a la tabla seleccionada una segunda consulta SQL con el comando DESCRIBE para obtener las descripciones de las columnas. Los resultados se recorren en un bucle y se añaden descripciones al modelo. Una vez que el script se ha ejecutado en cada tabla seleccionada, se muestra un cuadro de diálogo con el número de descripciones actualizadas.

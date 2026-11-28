@@ -178,13 +178,13 @@
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-add-databricks-metadata-descriptions.md": {
-      "sourceHash": "sha256:3e3502fa81133433b74714be43bbc8eb911a90f8848ff98d0f1828f56036f9f9",
-      "sourceBlob": "9f2f9a5953d82619aca182e7e07f1e52a2334c68",
+      "sourceHash": "sha256:e19d6e1165fe3d0fcb018111f942114fed2c11870a81845e9f1b8cf04db6182a",
+      "sourceBlob": "d4c9bdfff564fee396f6b68f02eda673c0248f23",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-dlol-to-import.md": {
-      "sourceHash": "sha256:d48972b9f153794a3c9d87f029978e777815eed865588eb6e54d87f2d83b40d5",
-      "sourceBlob": "2431a3db254213d085ebf92dbe7732fec85da63a",
+      "sourceHash": "sha256:d32ade16fd517ccb9393ea01ea95ee17b47eaa8377b7ff3cf8070dae7f1e0ad1",
+      "sourceBlob": "663ebfbb24691e2aa26fb02f38f625a8dc63162b",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-dlsql-to-dlol.md": {
@@ -208,8 +208,8 @@
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-databricks-relationships.md": {
-      "sourceHash": "sha256:7100c6e93a2961e64c4962a5e22d0bca278b2f5c97b1c4509fbc20be236b7b5d",
-      "sourceBlob": "73730477e488ef890341f776cb7f7576ee312d3b",
+      "sourceHash": "sha256:905bd9929712c874164c6b40afa2f4d38a86e835b23dc09ebc2b66a7ee6e7abf",
+      "sourceBlob": "d74801188a502ad70951bfe0647064dff874540e",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-date-table.md": {
@@ -233,8 +233,8 @@
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-incremental-refresh.md": {
-      "sourceHash": "sha256:ebeaff67ce308880b8ba5be4b9cd198c30a5f48af87df7b477d48ed313bb1907",
-      "sourceBlob": "c61080670ead87cc586cdd71acaeffef655af7c1",
+      "sourceHash": "sha256:6c71e57c0e820b32a975927d9cc5f2f706fee30e800f6621b84eaab479b46a69",
+      "sourceBlob": "7f7422d99a6b9b5bbcbe4a8ca3a06401c94e324d",
       "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-user-defined-aggregations.md": {
@@ -878,8 +878,8 @@
       "status": "translated"
     },
     "how-tos/scripting-custom-winforms-dialogs.md": {
-      "sourceHash": "sha256:9830c8cea603b15203226db2df1e217209cc5b78e67c14fbbe11f9cbc1f229e5",
-      "sourceBlob": "805245219fd1e9eaadd2cf2a8a3fc1f6492def3d",
+      "sourceHash": "sha256:dd545d435d405e889fc06957d5282a22bb588db9e0e4960b68fd08b3d95a3ddf",
+      "sourceBlob": "90800a112236b6a7359b559abb08a866cf2a9936",
       "status": "translated"
     },
     "how-tos/scripting-dynamic-linq-vs-csharp.md": {
@@ -2386,14 +2386,14 @@
       "segmentUpdate": true
     },
     "references/preferences.md": {
-      "error": "POST translate/ai failed: POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction 4GGBzX9X9v",
-      "at": "2026-11-27T03:09:30Z",
+      "error": "POST translate/ai failed: POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction 32zb533Nwy",
+      "at": "2026-11-28T03:08:45Z",
       "sourceHash": "sha256:2444e123f26b163b4015773c7673573483fb02ec4c2e7df1cb2c1984703c2ff0",
       "apiError": {
-        "message": "POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction 4GGBzX9X9v",
+        "message": "POST translate/ai failed with 400: HTTP_400; Invalid parameters. Please see params field for more information.; content: must NOT have more than 128 items; None: must match exactly one schema in oneOf; transaction 32zb533Nwy",
         "httpStatus": 400,
         "code": "HTTP_400",
-        "id_transaction": "4GGBzX9X9v",
+        "id_transaction": "32zb533Nwy",
         "params": [
           {
             "field": "content",
