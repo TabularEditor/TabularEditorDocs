@@ -2,7 +2,7 @@
 uid: object-properties-measures
 title: 度量值和 KPI 属性
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of measures and KPIs.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍度量值及其关联 KPI 的属性。每个条目都会列出该属性在 Tabular Object Model (TOM) 中的名称，以及其类型和类别。有关大多数对象的通用属性，见 @object-properties-common。
 
 ## 度量值
@@ -33,10 +35,10 @@ SUMMARY: Reference for the properties of measures and KPIs.
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
-- [显示文件夹](xref:object-properties-common#display-folder)
-- [隐藏](xref:object-properties-common#hidden)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
+- [显示文件夹](xref:object-properties-common#display-folder) · **基本**
+- [隐藏](xref:object-properties-common#hidden) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [已更改的属性](xref:object-properties-common#changed-properties)
@@ -53,8 +55,7 @@ SUMMARY: Reference for the properties of measures and KPIs.
 - [在透视中显示](xref:object-properties-common#shown-in-perspective)
 
 ### 格式字符串
-
-`FormatString` · string · 基本
+`FormatString` · 字符串 · 常规 · **基本**
 
 客户端工具显示度量值时使用的格式，例如 `#,0.00`、`0.0%` 或 `yyyy-mm-dd`。其语法与 DAX [FORMAT](https://dax.guide/format) 函数相同。 DAX 查询返回未经格式化的值。要根据筛选语境选择格式，可设置 `FormatStringExpression`。
 
@@ -120,7 +121,7 @@ KPI 始终属于单个度量值，而该度量值本身的值就是 KPI 的 _值
 
 ### 常用属性
 
-- [说明](xref:object-properties-common#description)
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
@@ -144,14 +145,12 @@ KPI 始终属于单个度量值，而该度量值本身的值就是 KPI 的 _值
 一个返回度量值目标的 DAX 表达式，例如固定数字 `1000000`、另一个度量值（如 `[Sales Budget]`）或某个计算。
 
 ### 目标格式字符串
-
-`TargetFormatString` · string · 选项
+`TargetFormatString` · 字符串 · 选项 · **基本**
 
 目标值的格式字符串，语法与度量值上的 `FormatString` 相同。
 
 ### 目标说明
-
-`TargetDescription` · string · 选项
+`TargetDescription` · 字符串 · 选项 · **基本**
 
 目标的说明，将在支持该属性的客户端工具中向用户显示。
 
@@ -168,8 +167,7 @@ RETURN
 ```
 
 ### 状态图标
-
-`StatusGraphic` · string · 选项
+`StatusGraphic` · 字符串 · 选项 · **基本**
 
 客户端工具用于显示状态的图标集，例如 `Traffic Light` 或 `Shapes`，应填写为客户端工具可识别的名称。
 
@@ -189,8 +187,7 @@ Excel 只识别其中少数几个名称。在 Excel 数据透视表中，这些�
 所有其他名称，包括 `Shapes`、`Thermometer`、`Smiley`、`Cylinder` 以及 Excel 不识别的名称，都会显示为一个纯色圆圈。
 
 ### 状态描述
-
-`StatusDescription` · string · 选项
+`StatusDescription` · 字符串 · 选项 · **基本**
 
 状态的说明，会在支持该功能的客户端工具中向用户显示。
 
@@ -201,15 +198,13 @@ Excel 只识别其中少数几个名称。在 Excel 数据透视表中，这些�
 一个 DAX 表达式，返回介于 `-1` 到 `1` 之间的数值，用于指示度量值是否随时间变差 (`-1`)、保持不变 (`0`) 或变好 (`1`)，例如与上一期间相比。
 
 ### 趋势图标
-
-`TrendGraphic` · 字符串 · 选项
+`TrendGraphic` · 字符串 · 选项 · **基本**
 
 客户端工具用于显示趋势的图标集名称，例如 `Standard Arrow`；应使用客户端工具能够识别的名称。在 Tabular Editor 3 中，你可以从与 `StatusGraphic` 相同的名称列表中选择，或输入其他任意值。
 
 在 Excel 中，大多数名称会显示彩色箭头；`Standard Arrow` 显示灰色箭头，而 `Status Arrow - Descending` 会在趋势良好时显示向下箭头。少数名称，例如 `Cylinder`、`Smiley Face` 和 `Traffic Light - Single`，会显示圆圈。
 
 ### 趋势说明
-
-`TrendDescription` · 字符串 · 选项
+`TrendDescription` · 字符串 · 选项 · **基本**
 
 趋势的说明，会在支持该功能的客户端工具中向用户显示。

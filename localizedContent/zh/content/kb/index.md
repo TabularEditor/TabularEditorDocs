@@ -36,6 +36,10 @@
 - @kb.bpa-specify-application-name - 在连接字符串中设置应用程序名称以便监控
 - @kb.bpa-powerbi-latest-compatibility - 保持对最新 Power BI 功能的兼容性
 - @kb.bpa-udf-use-compound-names - 确保 UDF 名称不会与未来的内置 DAX 函数发生冲突
+- @kb.bpa-role-security-not-enforced - 对具有行级或对象级安全性的角色使用“读取”权限
+- @kb.bpa-powerbi-role-read-permission - 将 Power BI 模型中的每个角色设置为“读取”权限
+- @kb.bpa-role-unrestricted-read - 查找提升其他角色安全性的角色
+- @kb.bpa-role-mixed-rls-ols-members - 避免组合角色混合行级安全性和对象级安全性的成员
 
 ## 代码操作
 

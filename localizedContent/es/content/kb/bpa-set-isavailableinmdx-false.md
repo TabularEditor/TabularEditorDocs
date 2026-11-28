@@ -2,7 +2,7 @@
 uid: kb.bpa-set-isavailableinmdx-false
 title: Establecer IsAvailableInMDX en False
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-11-12
 description: Regla de práctica recomendada para optimizar el rendimiento deshabilitando el acceso a MDX para columnas ocultas que no se usan en relaciones ni jerarquías.
 ---
 
@@ -13,7 +13,7 @@ description: Regla de práctica recomendada para optimizar el rendimiento deshab
 Esta regla de prácticas recomendadas identifica columnas ocultas que tienen la propiedad `IsAvailableInMDX` establecida en `true`, pero que no necesitan estar accesibles mediante consultas MDX. Si estableces esta propiedad en `false` para columnas ocultas sin uso, puedes mejorar el rendimiento de las consultas y reducir la sobrecarga de memoria.
 
 - Categoría: Rendimiento
-- Gravedad: Media (2)
+- Gravedad: Alta (3)
 
 ## Se aplica a
 
@@ -38,7 +38,7 @@ Al establecer explícitamente `IsAvailableInMDX` en `false` para estas columnas,
 
 La regla se activa cuando se cumplen todas las condiciones siguientes:
 
-1. La columna tiene `IsAvailableInMDX = true`
+1. La tabla de la columna no tiene particiones Direct Lake, y la columna tiene `IsAvailableInMDX = true`
 2. La columna está oculta (o lo está la tabla que la contiene)
 3. La columna NO se usa en ninguna relación de `SortBy`
 4. La columna NO se usa en ninguna jerarquía

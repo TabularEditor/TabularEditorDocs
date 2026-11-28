@@ -2,7 +2,7 @@
 uid: migrate-from-desktop
 title: 从 Power BI Desktop 迁移
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,13 +37,13 @@ Power BI Premium 提供 XMLA endpoint，使 Data model 开发者能够继续使�
 - \*\*场景 2：\*\*Tabular Editor 连接 Power BI Premium 的 XMLA endpoint。
 
 > [!IMPORTANT]
-> 你无法使用 Tabular Editor 直接加载 .pbix 文件。如需了解更多信息，请参阅 <xref:desktop-limitations#power-bi-file-types>。
+> 您无法直接在 Tabular Editor 中加载 .pbix 文件。在 Power BI Desktop 中打开文件，并将 Tabular Editor 作为外部工具连接到该文件。请参阅 @desktop-integration。
 
 ### 场景 1：将 Tabular Editor 作为 Power BI Desktop 的外部工具
 
 一般而言，本场景面向自助分析师以及无法使用 Power BI Premium 的 Power BI Desktop 用户，旨在简化某些 Data model 建模操作（例如添加和编辑度量值），并解锁其他方式无法使用的高级建模选项（计算组、透视和元数据翻译）。
 
-外部工具连接到由 Power BI Desktop 托管的 Analysis Services 模型。这使该工具能够对 Data model 进行某些更改。不过目前，Power BI Desktop 并不支持所有类型的 Data model 建模操作。理解这一限制，以及将 Tabular Editor 用作 Power BI Desktop 的外部工具时它的行为方式，非常重要。有关此内容的更多信息，请参阅 <xref:desktop-limitations>。
+外部工具连接到 Power BI Desktop 托管的 Analysis Services 模型，并通过该模型更改数据模型。早于 2025 年 6 月的 Power BI Desktop 版本并不接受来自外部工具的所有建模操作。请参阅 @desktop-integration。
 
 此方案的典型工作流如下：
 
@@ -56,7 +56,7 @@ Power BI Premium 提供 XMLA endpoint，使 Data model 开发者能够继续使�
 > [!NOTE]
 > 截至 2021 年十月，Power BI Desktop 存在一个缺陷：有时会阻止 Power BI Desktop 自动刷新字段列表和 Visual，以反映通过外部工具所做的更改。出现这种情况时，保存 .pbix 文件并重新打开，或在模型中手动刷新某个表，通常会使字段列表和所有 Visual 正确更新。
 
-适用于外部工具的[建模限制](xref:desktop-limitations)仅与写入操作或模型修改相关。如本指南后续所述，你仍可使用 Tabular Editor 3 的连接功能，通过表数据预览、Pivot Grid 或 DAX 查询来浏览模型中的数据。
+旧版 Power BI Desktop 的限制仅适用于模型更改。您仍然可以使用 Tabular Editor 3 的连接功能，通过表格数据预览、数据透视网格或 DAX 查询来浏览模型内的数据，具体内容见本指南的后续部分。
 
 ### 场景 2：Tabular Editor 与 Power BI Premium XMLA endpoint 配合使用
 
@@ -79,7 +79,7 @@ Power BI Premium 提供 XMLA endpoint，使 Data model 开发者能够继续使�
 
 使用 Tabular Editor 通过 XMLA endpoint 连接到 Dataset 时，可执行的写入操作或模型修改类型不受限制。
 
-本文其余部分将重点介绍 Power BI Desktop 与 Tabular Editor 在 Data model 开发方面的差异。由于将 Tabular Editor 作为 Power BI Desktop 的外部工具（场景 1）时存在[建模限制](xref:desktop-limitations)，因此部分章节仅适用于场景 2。
+本文的其余部分重点介绍 Power BI Desktop 和 Tabular Editor 在数据模型开发方面的区别。
 
 ## Tabular Editor 3 用户界面
 
@@ -186,7 +186,7 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 > Tabular Editor 3 并不支持 Power BI 所支持的所有数据源。如果你的模型使用了 Tabular Editor 不支持的数据源，从同一数据源导入新表的最简单方式是在 Tabular Editor 中复制现有表 (CTRL+C / CTRL+V)，然后修改分区表达式并按下方所示更新表架构。要让它生效，确保已启用 **工具 > 偏好 > 架构比较 > 使用 Analysis Services 进行更改检测** 选项。更多信息见 <xref:importing-tables#updating-table-schema-through-analysis-services>。
 
 > [!IMPORTANT]
-> 当将 Tabular Editor 用作外部工具时，此选项默认不可用，因为通过外部工具添加/编辑表在 [Power BI Desktop 中不受支持](xref:desktop-limitations)。
+> 当 Tabular Editor 连接到早于 2025 年 6 月的 Power BI Desktop 版本时，只有在启用**允许不受支持的建模操作**时，此选项才可用。请参阅@preferences。
 
 更多信息见 @importing-tables-data-modeling。
 
@@ -200,7 +200,7 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 > 目前，Tabular Editor 3 不会对分区表达式执行任何验证。对于 Power Query (M) 表达式，这项功能计划在 Tabular Editor 3 的后续更新中提供。
 
 > [!IMPORTANT]
-> 将 Tabular Editor 用作外部工具时，分区表达式默认是只读的，因为 Power BI Desktop [不支持](xref:desktop-limitations)通过外部工具编辑分区。
+> 当 Tabular Editor 连接到早于 2025 年 6 月的 Power BI Desktop 版本时，除非启用**允许不受支持的建模操作**，否则分区表达式为只读。请参阅@preferences。
 
 如果 Power Query 表达式的更改导致导入表的列发生变化，会弹出一个对话框，让你查看这些更改：
 
@@ -213,7 +213,7 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 ![共享表达式](~/content/assets/images/shared-expression.png)
 
 > [!IMPORTANT]
-> 将 Tabular Editor 用作外部工具时，共享表达式默认是只读的，因为 Power BI Desktop [不支持](xref:desktop-limitations)通过外部工具编辑分区。
+> 当 Tabular Editor 连接到早于 2025 年 6 月的 Power BI Desktop 版本时，除非启用**允许不受支持的建模操作**，否则共享表达式为只读。请参阅@preferences。
 
 ### 如何在表之间添加关系
 
@@ -227,9 +227,6 @@ Tabular Editor 3 允许你选择多个度量值来创建一个 **DAX脚本**，�
 ![通过图表创建关系](~/content/assets/images/create-relationship-through-diagram.gif)
 
 更多信息，请参阅 [使用图表](xref:importing-tables-data-modeling#working-with-diagrams)。
-
-> [!IMPORTANT]
-> 将 Tabular Editor 用作外部工具时，无法修改关系，因为 Power BI Desktop [不支持](xref:desktop-limitations)通过外部工具编辑关系。
 
 ### 如何发布到 Power BI 服务
 

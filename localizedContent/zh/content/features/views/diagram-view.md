@@ -1,8 +1,8 @@
----
+﻿---
 uid: diagram-view
 title: 图表视图
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2

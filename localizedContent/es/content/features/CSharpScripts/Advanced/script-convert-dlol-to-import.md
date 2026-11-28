@@ -2,11 +2,12 @@
 uid: script-convert-dlol-to-import
 title: Convertir Direct Lake en OneLake a modo Import
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "Requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -25,9 +26,13 @@ También tendrás que conocer el **esquema** de la tabla o vista materializada a
 
 ## Script
 
+> [!NOTE]
+> En Tabular Editor 2, este script requiere un compilador Roslyn. Consulta [Compilar con Roslyn](xref:advanced-scripting#compiling-with-roslyn).
+
 ### Convertir tablas Direct Lake en OneLake al modo Import mode
 
 ```csharp
+#r "System.Drawing"
 // ===================================================================================
 // Convert Direct Lake on OneLake tables back to Import mode
 // ----------------------------------------

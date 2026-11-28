@@ -1,4 +1,4 @@
----
+﻿---
 uid: new-pbi-model
 title: Crear un modelo semántico de Power BI
 author: Daniel Otykier
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Solo puntos de conexión XMLA de Premium por usuario"
+          note: "Premium Per User XMLA Endpoints Only"
         - edition: Enterprise
           full: true
 ---
@@ -29,7 +29,7 @@ Esta página te guía paso a paso por el proceso de crear un nuevo modelo semán
 >
 > [Más información](xref:editions).
 
-##### Crear un nuevo modelo semántico
+## Crear un nuevo modelo semántico
 
 1. En el menú Archivo, elige Nuevo > Modelo... o pulsa `CTRL+N`
 

@@ -2,7 +2,7 @@
 uid: connect-snowflake
 title: 连接到 Snowflake
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,11 +73,7 @@ Snowflake 服务用户（`TYPE = SERVICE`）不能使用密码登录，因此应
 >
 > 转换不会改变密钥对，已为你的 Snowflake 用户注册的公钥仍然有效。
 
-<!-- IMAGE NEEDED: connectivity/snowflake-key-pair.png
-     The Snowflake connection dialog with Key pair selected, so the Private key file field
-     and its browse button are visible and the password field reads Passphrase.
-     House border, 100% DPI.
-     Alt text: "The Snowflake connection dialog with Key pair authentication selected" -->
+![“连接到 Snowflake”对话框，其中选择了“密钥对”，显示“密码”和“私钥文件”字段](~/content/assets/images/features/connectivity/snowflake-key-pair.png)
 
 ## 外部浏览器登录
 

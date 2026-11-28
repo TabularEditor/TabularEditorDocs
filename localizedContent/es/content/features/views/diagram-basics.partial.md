@@ -30,11 +30,19 @@ Para editar una relación existente, haz clic con el botón derecho sobre ella y
 
 ## Selección y navegación
 
-Un diagrama y el Explorador TOM mantienen seleccionado el mismo objeto. Al hacer clic en una tabla, una columna o una relación en el diagrama, se selecciona en el árbol sin apartar el foco del diagrama. A la inversa, al seleccionar una tabla o una columna en el árbol, se resalta en todos los diagramas abiertos y, si es una columna, se desplaza hasta ponerla a la vista dentro del recuadro de su tabla.
+Un diagrama y el Explorador TOM mantienen seleccionado el mismo objeto. Al hacer clic en una tabla, una columna o una relación en el diagrama, se selecciona en el árbol, sin que el foco se desvíe del diagrama. Al contrario, si se selecciona una tabla o una columna en el árbol, se resalta en todos los diagramas abiertos. El encabezado de una tabla seleccionada adopta el color destacado del tema actual, y la fila de una columna seleccionada adopta el color de selección del **Explorador TOM**.
 
 Esto también funciona para la navegación que no realizas manualmente en el árbol: las acciones de **Ir a** y los resultados de búsqueda también se resaltan en los diagramas.
 
-Una selección que no se resuelve en una única tabla o columna —ya sea porque incluye varios objetos o ninguno— quita el resaltado del diagrama, en lugar de dejar uno obsoleto.
+Cuando selecciona una sola tabla o columna fuera del diagrama y su tabla no está a la vista, el diagrama se desplaza hasta la tabla con el nivel de zoom actual. La lista de columnas de la tabla se desplaza hasta la columna seleccionada solo cuando la columna aún no está visible.
+
+Cuando selecciona varias tablas o columnas en el árbol, el diagrama resalta cada una de sus tablas, sin hacer un movimiento panorámico. Una columna seleccionada cuenta como su tabla, y se ignoran los demás tipos de objetos. Una selección que no contiene ninguna tabla en el diagrama, como solo medidas, elimina el resaltado.
+
+![Diagrama con dos tablas seleccionadas en el Explorador TOM, ambos encabezados de tabla en el color de énfasis](~/content/assets/images/diagram-selection-tables.png)
+
+![Diagrama con una columna seleccionada en el Explorador TOM, su fila en el color de selección](~/content/assets/images/diagram-selection-column.png)
+
+Los colores del diagrama, incluidos los cuerpos de las tablas, los encabezados, los bordes y las líneas de relación, siguen el [tema y la paleta](xref:user-interface#changing-themes-and-palettes) actuales y se actualizan cuando cambia cualquiera de ellos.
 
 > [!NOTE]
 > Seleccionar un objeto en el Explorador TOM nunca convierte un diagrama en el documento activo. Si hay un diagrama abierto en segundo plano, se actualiza sin interrumpirte y sigues trabajando donde estabas.

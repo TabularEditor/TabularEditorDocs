@@ -2,7 +2,7 @@
 uid: object-properties-perspectives-cultures
 title: 透视和区域设置属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of perspectives and cultures (translations
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍透视和区域设置的属性。有关大多数对象共有的属性，参见 @object-properties-common。
 
 要添加或删除透视和区域设置，请使用模型上的 **透视** 和 **区域设置** 集合（参见 @object-properties-model），或在 **TOM Explorer** 中右键单击 **透视** 或 **翻译** 文件夹。 Tabular Editor 2 中的文件夹名称也相同。参见 @perspectives-translations。要使用 C# Script 创建和更改透视和区域设置，请参见 @how-to-work-with-perspectives-translations。
@@ -46,8 +48,8 @@ Best Practice Analyzer (BPA) 规则 @kb.bpa-perspectives-no-objects 会标记不
 
 ### 常用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
@@ -66,14 +68,13 @@ Best Practice Analyzer (BPA) 规则 @kb.bpa-perspectives-no-objects 会标记不
 
 ### 常用属性
 
-- [名称](xref:object-properties-common#name)
+- [名称](xref:object-properties-common#name) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
 
 ### Altered
-
-`Altered` · bool（混合状态时为空）· 基本 · 兼容级别 1571+ · _快捷方式_：指向该区域设置中每个翻译的 **Altered** 标志
+`Altered` · 布尔值（混合时为空） · 常规 · 兼容性级别 1571+ · *指向*该文化中每个翻译的**已更改**标志的*快捷方式*
 
 区域设置中的每个翻译在 Tabular Object Model (TOM) 中都带有一个 _altered_ 标志，翻译工具用它来标记人工已审核或已更改的翻译。此属性汇总了该区域设置中所有翻译的标志状态：
 

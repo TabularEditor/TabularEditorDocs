@@ -2,11 +2,12 @@
 uid: script-add-databricks-metadata-descriptions
 title: 添加 Databricks 元数据说明
 author: Johnny Winter
-updated: 2026-04-08
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "Requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -24,27 +25,28 @@ applies_to:
 
 ## 脚本
 
-### 添加 Databricks 元数据说明
+> [!NOTE]
+> 在 Tabular Editor 2 中，此脚本需要 Roslyn 编译器。请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。
 
+### 添加 Databricks 元数据说明
 ```csharp
-/*
- * Title: Add Databricks Metadata descriptions
- * Author: Johnny Winter, greyskullanalytics.com
- *
- * This script, when executed, will loop through the currently selected tables and send a query to Databricks to see if each table has metadata descriptions defined in Unity Catalog.
- * Where a description exists, this will be added to the semantic model description.
- * Step 1:  Select one or more tables in the model
- * Step 2:  Run this script
- * Step 3:  Enter your Databricks Personal Access Token when prompted
- * Step 4:  The script will connect to Databricks and update the table and column descriptions where they exist. 
- *          For each table processed, a message box will display the number of descriptions updated.
- *          Click OK to continue to the next table.
- * Notes:
- *  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
- *  -   The script auto-detects which driver is installed
- *  -   Each run of the script will prompt the user for a Databricks Personal Access Token
- */
 #r "Microsoft.VisualBasic"
+#r "System.Drawing"
+// Title: Add Databricks Metadata descriptions
+// Author: Johnny Winter, greyskullanalytics.com
+//
+// This script, when executed, will loop through the currently selected tables and send a query to Databricks to see if each table has metadata descriptions defined in Unity Catalog.
+// Where a description exists, this will be added to the semantic model description.
+// Step 1:  Select one or more tables in the model
+// Step 2:  Run this script
+// Step 3:  Enter your Databricks Personal Access Token when prompted
+// Step 4:  The script will connect to Databricks and update the table and column descriptions where they exist. 
+//          For each table processed, a message box will display the number of descriptions updated.
+//          Click OK to continue to the next table.
+// Notes:
+//  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+//  -   The script auto-detects which driver is installed
+//  -   Each run of the script will prompt the user for a Databricks Personal Access Token
 using System;
 using System.Data.Odbc;
 using System.Drawing;
@@ -589,7 +591,6 @@ Either:
     conn.Close();
 }
 ```
-
 ### 说明
 
 脚本使用 WinForms 提示用户输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。它会自动检测已安装的是新的 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。对于每个选定的表，脚本会从该表分区中的 M 查询提取 Databricks 连接字符串信息，以及架构和表名。然后，它会使用检测到的 ODBC 驱动程序向 Databricks 发送一条 SQL 查询，查询 information_schema 表，以返回 Unity Catalog 中定义的表描述。然后会将其更新到语义模型的表描述中。还会向所选表发送第二条使用 DESCRIBE 命令的 SQL 查询，以获取列描述。随后会遍历这些结果，并在模型中添加相应的描述。脚本在每个所选表上运行完成后，会显示一个对话框，显示已更新的描述数量。

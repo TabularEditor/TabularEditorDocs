@@ -2,7 +2,7 @@
 uid: script-implement-incremental-refresh
 title: 设置增量刷新
 author: Kurt Buhler
-updated: 2023-03-01
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -10,482 +10,293 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-
 # 配置增量刷新
 
 ## 脚本用途
+此脚本会在导入表上配置增量刷新策略，并按你选择的日期列进行筛选。增量刷新通常用于事实表。有关背景信息，请参阅 @incremental-refresh-about。
 
-如果你想基于某个特定的日期字段为导入表配置增量刷新。此脚本适用于你希望配置增量刷新的 `datetime`、`date` 或 `integer` 日期列。
+运行脚本时，它会列出具有单个 Power Query (M) 分区、datetime 或整数列且没有刷新策略的表。选择一个表，选择一列，然后在对话框中输入策略值。筛选步骤取决于您选择的列：
 
-要使用此脚本，请在要配置增量刷新的表中选中日期列，然后运行脚本。仅当你尚未创建 #"RangeStart" 和 #"RangeEnd" 参数，并且所选表尚未配置刷新策略时，脚本才会运行。
+- **datetime 列：**该步骤将该列与 `RangeStart` 和 `RangeEnd` 参数进行比较。该列在 Power Query 中必须为日期/时间类型。
+- **整数日期键 (yyyyMMdd)：**此步骤使用 `fxDateTimeToInt` 函数转换参数，如果该函数不存在，则脚本会将其添加到模型中。
+
+如果模型中没有 `RangeStart` 和 `RangeEnd` 参数，脚本会创建这两个参数。如果你取消了对话框，脚本就会在不进行任何更改的情况下结束。
 
 > [!NOTE]
-> 此脚本会自动修改该表的 M 分区，以添加筛选步骤。请务必检查是否已正确完成。
->
-> 如果你有很多步骤，务必将此步骤移动到可以折叠到数据源的位置。请确保在 Power Query 中调整所有 \`#"Step References"
-
-> [!NOTE]
-> 此脚本会使用用户输入来生成刷新策略。请确保在用户输入对话框中输入正确的值。
+> 该脚本在分区 M 表达式的最后一个步骤之后添加一个名为 `#"Incremental Refresh"` 的步骤，并将结果存储在表的 `SourceExpression` 中。检查筛选步骤是否折叠到数据源。如果未折叠，请将此步骤移动到可以折叠的位置，并更新步骤引用。
 
 ## 脚本
 
 ### 为所选列实现增量刷新
-
 ```csharp
-// This script will automatically generate an Incremental Refresh policy for a selected table
-// It is generated based on the selected column
-// It requires input from the user with a dialogue pop-up box.
-// This script will automatically generate an Incremental Refresh policy for a selected table
-// It is generated based on the selected column
-// It requires input from the user with a dialogue pop-up box.
+#r "System.Drawing"
+// Configures an incremental refresh policy on the table you select.
+// The policy filters on a datetime column or an integer date key (yyyyMMdd) column.
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 // Hide the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = false;
 
-// Initialize Variables
-Table _Table                = Model.Tables[0];
-string _MExpression         = "";
-Column _Column              = Model.AllColumns.ToList()[0];
-string _ColumnName          = "";
-DataType _ColumnDataType    = DataType.DateTime;
+Func<Column, bool> isDateColumn = c =>
+    c is DataColumn &&
+    (c.DataType == DataType.DateTime || c.DataType == DataType.Int64);
 
-try
-    {   
-        // Select a Table for which you will configure Incremental Refresh.
-        // The Refresh Policy will be enabled and configured for this table.
-        _Table = 
-            Model.Tables.Where(
+// Candidate tables: no refresh policy yet, a single Power Query (M) partition and at least one date column
+var candidateTables = Model.Tables.Where(t =>
+    !t.EnableRefreshPolicy &&
+    t.Partitions.Count == 1 &&
+    t.Partitions[0].SourceType == PartitionSourceType.M &&
+    t.Columns.Any(isDateColumn)
+).ToList();
 
-                // Exclude tables that already have a refresh policy
-                t => 
-                t.EnableRefreshPolicy != true && 
-
-                // Include only 'Table' objects
-                t.ObjectType == ObjectType.Table && 
-
-                // Exclude Calculated Tables
-                t.Columns[0].Type != ColumnType.CalculatedTableColumn && 
-
-                // Only include tables that have a column on the "From" side of the relationship
-                (Model.Relationships.Count() > 0 ?
-                t.Columns.Any(c =>  Model.Relationships.Any(r => r.FromColumn == c) ) : true) && 
-
-                // Exclude tables that don't have a DateTime or Integer column
-                (
-                    t.Columns.Any(c => c.DataType == DataType.DateTime) || 
-                    t.Columns.Any(c => c.DataType == DataType.Int64)
-                )
-            ).SelectTable(null,"Select a Table for which you will configure Incremental Refresh:");
-        
-        _MExpression = _Table.Partitions[0].Expression;
-    
-    try
-    {
-        // Select the column to apply the Refresh Policy. 
-        // The M Expression will be modified using the name of this column.
-        _Column = 
-            _Table.Columns.Where(
-
-                // Include only DateTime or Int columns
-                c => 
-                c.DataType == DataType.DateTime || 
-                c.DataType == DataType.Int64
-
-            ).SelectColumn(null, "Select a DateTime or DateKey (Int) Column to apply the Refresh Policy.");
-        
-        _ColumnName = _Column.DaxObjectName;
-        _ColumnDataType = _Column.DataType;
-    
-        try 
-        {   // Test if 'RangeStart' exists
-            Model.Expressions.Contains(Model.Expressions["RangeStart"]);
-            Info ("RangeStart already exists!");
-        }
-        catch
-        {
-            // Add RangeStart parameter
-            Model.AddExpression( 
-                "RangeStart", 
-                @"
-            #datetime(2023, 01, 01, 0, 0, 0) meta
-            [
-                IsParameterQuery = true,
-                IsParameterQueryRequired = true,
-                Type = type datetime
-            ]"
-            );
-        
-            // Success message for adding 'RangeStart'
-            Info ( "Created 'RangeStart' M Parameter!" );
-        }
-        
-        // Test if the RangeEnd parameter exists
-        try 
-        {   // Test if 'RangeEnd' exists
-            Model.Expressions.Contains(Model.Expressions["RangeEnd"]);
-            Info ("RangeEnd already exists!");
-        }
-        catch
-        {
-            // Add RangeEnd parameter
-            Model.AddExpression( 
-                "RangeEnd", 
-                @"
-            #datetime(2023, 31, 01, 0, 0, 0) meta
-            [
-                IsParameterQuery = true,
-                IsParameterQueryRequired = true,
-                Type = type datetime
-            ]"
-            );
-        
-            // Success message for adding 'RangeEnd'
-            Info ( "Created 'RangeEnd' M Parameter!" );
-        
-        }
-        
-        // Incremental Refresh Configuration
-        // Input box config
-        Font _fontConfig = new Font("Segoe UI", 11);
-        
-        // Label for how long data should be stored
-        var storeDataLabel = new Label();
-        storeDataLabel.Text = "Store data in the last:";
-        storeDataLabel.Location = new Point(20, 20);
-        storeDataLabel.AutoSize = true;
-        storeDataLabel.Font = _fontConfig;
-        
-        // User input for how long data should be stored
-        var storeDataTextBox = new TextBox();
-        storeDataTextBox.Location = new Point(storeDataLabel.Location.X + TextRenderer.MeasureText(storeDataLabel.Text, storeDataLabel.Font).Width + 20, storeDataLabel.Location.Y);
-        storeDataTextBox.Size = new Size(100, 20);
-        storeDataTextBox.Text = "3";
-        storeDataTextBox.Font = _fontConfig;
-        
-        // User selection for how long data should be stored (granularity)
-        var storeDataComboBox = new ComboBox();
-        storeDataComboBox.Location = new Point(storeDataTextBox.Location.X + storeDataTextBox.Width + 20, storeDataLabel.Location.Y);
-        storeDataComboBox.Size = new Size(100, 20);
-        storeDataComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-        storeDataComboBox.Items.AddRange(new object[] { "days", "months", "quarters", "years" });
-        storeDataComboBox.SelectedIndex = 3;
-        storeDataComboBox.Font = _fontConfig;
-        
-        // Label for how much data should be refreshed
-        var refreshDataLabel = new Label();
-        refreshDataLabel.Text = "Refresh data in the last:";
-        refreshDataLabel.Location = new Point(20, storeDataLabel.Location.Y + storeDataLabel.Height + 15);
-        refreshDataLabel.AutoSize = true;
-        refreshDataLabel.Font = _fontConfig;
-        
-        // User input for how much data should be refreshed
-        var refreshDataTextBox = new TextBox();
-        refreshDataTextBox.Location = new Point(storeDataTextBox.Location.X, refreshDataLabel.Location.Y);
-        refreshDataTextBox.Size = new Size(100, 20);
-        refreshDataTextBox.Text = "30";
-        refreshDataTextBox.Font = _fontConfig;
-        
-        // User selection for how much data should be refreshed (Period)
-        var refreshDataComboBox = new ComboBox();
-        refreshDataComboBox.Location = new Point(storeDataComboBox.Location.X, refreshDataLabel.Location.Y);
-        refreshDataComboBox.Size = new Size(100, 20);
-        refreshDataComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-        refreshDataComboBox.Items.AddRange(new object[] { "days", "months", "quarters", "years" });
-        refreshDataComboBox.SelectedIndex = 0;
-        refreshDataComboBox.Font = _fontConfig;
-        
-        // User input to refresh full periods or not
-        var fullPeriodsCheckBox = new CheckBox();
-        fullPeriodsCheckBox.Text = "Refresh only full periods";
-        fullPeriodsCheckBox.Location = new Point(storeDataLabel.Location.X + 3, refreshDataLabel.Location.Y + refreshDataLabel.Height + 15);
-        fullPeriodsCheckBox.AutoSize = true;
-        fullPeriodsCheckBox.Font = _fontConfig;
-        
-        // Form OK button
-        var okButton = new Button();
-        okButton.Text = "OK";
-        okButton.Location = new Point(storeDataLabel.Location.X, fullPeriodsCheckBox.Location.Y + fullPeriodsCheckBox.Height + 15);
-        okButton.MinimumSize = new Size(80, 25);
-        okButton.AutoSize = true;
-        okButton.DialogResult = DialogResult.OK;
-        okButton.Font = _fontConfig;
-        
-        // Form cancel button
-        var cancelButton = new Button();
-        cancelButton.Text = "Cancel";
-        cancelButton.Location = new Point(okButton.Location.X + okButton.Width + 10, okButton.Location.Y);
-        cancelButton.MinimumSize = new Size(80, 25);
-        cancelButton.AutoSize = true;
-        cancelButton.DialogResult = DialogResult.Cancel;
-        cancelButton.Font = _fontConfig;
-        
-        // Adjust the Location of the storeDataLabel to align with the storeDataTextBox
-        storeDataLabel.Location = new Point(storeDataLabel.Location.X, storeDataLabel.Location.Y + 4);
-        refreshDataLabel.Location = new Point(refreshDataLabel.Location.X, refreshDataLabel.Location.Y + 4);
-        
-        // Form config
-        var form = new Form();
-        form.Text = "Incremental Refresh configuration:";
-        form.AutoSize = true;
-        form.MinimumSize = new Size(450, 0);
-        form.FormBorderStyle = FormBorderStyle.FixedDialog;
-        form.MaximizeBox = false;
-        form.MinimizeBox = false;
-        
-        // Open the dialogue in the center of the screen
-        form.StartPosition = FormStartPosition.CenterScreen;
-        
-        // Set the AutoScaleMode property to Dpi
-        form.AutoScaleMode = AutoScaleMode.Dpi;
-        
-        // Add controls to form specified above
-        form.Controls.Add(storeDataLabel);
-        form.Controls.Add(storeDataTextBox);
-        form.Controls.Add(storeDataComboBox);
-        form.Controls.Add(refreshDataLabel);
-        form.Controls.Add(refreshDataTextBox);
-        form.Controls.Add(refreshDataComboBox);
-        form.Controls.Add(fullPeriodsCheckBox);
-        form.Controls.Add(okButton);
-        form.Controls.Add(cancelButton);
-        
-        // Draw the form
-        var result = form.ShowDialog();
-        
-        // Get the values of the user input if entered
-        if (result == DialogResult.OK)
-        {
-            // Enables the refresh policy
-            _Table.EnableRefreshPolicy = true;
-            
-            var storeDataValue = storeDataTextBox.Text;
-            var storeDataComboBoxValue = storeDataComboBox.SelectedItem.ToString();
-            var refreshDataValue = refreshDataTextBox.Text;
-            var refreshDataComboBoxValue = refreshDataComboBox.SelectedItem.ToString();
-            var fullPeriodsChecked = fullPeriodsCheckBox.Checked;
-        
-            // Display the input values in a message box
-            var message = string.Format(
-                "Store data in the last: {0} {1}" + 
-                "\nRefresh data in the last: {2} {3}" + 
-                "\nRefresh only full periods: {4}",
-                storeDataTextBox.Text,
-                storeDataComboBox.SelectedItem.ToString(),
-                refreshDataTextBox.Text,
-                refreshDataComboBox.SelectedItem.ToString(),
-                fullPeriodsCheckBox.Checked);
-        
-            Info(message);
-        
-            // Convert StoreDataGranularity to correct TOM Property
-            RefreshGranularityType StoreDataGranularity = RefreshGranularityType.Day;
-            switch (storeDataComboBox.SelectedItem.ToString())
-            {
-                case "years":
-                    StoreDataGranularity = RefreshGranularityType.Year;
-                    break;
-            
-                case "quarters":
-                    StoreDataGranularity = RefreshGranularityType.Quarter;
-                    break;
-            
-                case "months":
-                    StoreDataGranularity = RefreshGranularityType.Month;
-                    break;
-            
-                case "days":
-                    StoreDataGranularity = RefreshGranularityType.Day;
-                    break; 
-            
-                default:
-                    Error("Bad selection for Incremental Granularity.");
-                    break;
-            }
-
-        
-            // Convert IncrementalGranularity to correct TOM Property
-            RefreshGranularityType IncrementalPeriodGranularity = RefreshGranularityType.Year;
-            switch (refreshDataComboBox.SelectedItem.ToString())
-            {
-                case "years":
-                    IncrementalPeriodGranularity = RefreshGranularityType.Year;
-                    break;
-        
-                case "quarters":
-                    IncrementalPeriodGranularity = RefreshGranularityType.Quarter;
-                    break;
-        
-                case "months":
-                    IncrementalPeriodGranularity = RefreshGranularityType.Month;
-                    break;
-        
-                case "days":
-                    IncrementalPeriodGranularity = RefreshGranularityType.Day;
-                    break; 
-        
-                default:
-                    Error ( "Bad selection for Incremental Granularity." );
-                    break;
-            }
-        
-            // Convert RefreshCompletePeriods checkbox to correct TOM property
-            int RefreshCompletePeriods;
-            if ( fullPeriodsCheckBox.Checked == true )
-            { 
-            RefreshCompletePeriods = -1;
-            }
-            else
-            {
-            RefreshCompletePeriods = 0;
-            }
-        
-            // Set incremental window: period to be refreshed
-            _Table.IncrementalGranularity = IncrementalPeriodGranularity;
-        
-            // Default: 30 days - change # if you want
-            _Table.IncrementalPeriods = Convert.ToInt16(refreshDataTextBox.Text);
-        
-            // Only refresh complete days. Change to 0 if you don't want.
-            _Table.IncrementalPeriodsOffset = RefreshCompletePeriods;
-            
-            // Set rolling window: period to be archived
-            // Granularity = day, can change to month, quarter, year...
-            _Table.RollingWindowGranularity = StoreDataGranularity;
-        
-            // Keep data for 1 year. Includes 1 full year and current partial year 
-            //    i.e. if it is Nov 2023, keeps data from Jan 1, 2022. 
-            //    On Jan 1, 2024, it will drop 2022 automatically.
-            _Table.RollingWindowPeriods = Convert.ToInt16(storeDataTextBox.Text);
-            
-            // If the selected date column is an integer of type YYYYMMDD...
-            if ( _ColumnDataType == DataType.Int64 )
-            {
-                // Add DateTimeToInt Function
-                var _DateTimeToInt = 
-                    Model.AddExpression( 
-                        "fxDateTimeToInt", 
-                        @"(x as datetime) => Date.Year(x) * 10000 + Date.Month(x) * 100 + Date.Day(x)"
-            );
-        
-            _DateTimeToInt.SetAnnotation("PBI_ResultType", "Function");
-            _DateTimeToInt.Kind = ExpressionKind.M;
-        
-            // Source expression obtained from the original M partition
-            _Table.SourceExpression = 
-        
-                // Gets expression before final "in" keyword
-                _MExpression.Split("\nin")[0].TrimEnd() +
-        
-                // Adds comma and newline
-                ",\n" +
-        
-                // Adds step called "Incremental Refresh" for filtering
-                @"    #""Incremental Refresh"" = Table.SelectRows( " +
-        
-                // Gets name of last step (after "in" keyword)
-                _MExpression.Split("\nin")[1].TrimStart() +
-        
-                // Adds 'each' keyword
-                @", each " +
-        
-                // Bases incremental refresh on current column name
-                _ColumnName +
-        
-                // Greater than or equal to RangeStart
-                @" >= fxDateTimeToInt ( #""RangeStart"" ) and " +
-        
-                // and
-                _ColumnName +
-        
-                // Less than RangeEnd
-                @" < fxDateTimeToInt ( #""RangeEnd"" ) )" +
-        
-                // re-add 'in' keyword
-                "\nin\n" +
-        
-                // Reference final step just added
-                @"    #""Incremental Refresh""";
-            }
-        
-        
-            // Otherwise treat it like a normal date/datetime column
-            else
-            {
-                // Source expression obtained from the original M partition
-                _Table.SourceExpression = 
-                    // Gets expression before final "in" keyword
-                    _MExpression.Split("\nin")[0].TrimEnd() +
-        
-                    // Adds comma and newline
-                    ",\n" +
-                    
-                    // Adds step called "Incremental Refresh" for filtering
-                    @"    #""Incremental Refresh"" = Table.SelectRows( " +
-                    
-                    // Gets name of last step (after "in" keyword)
-                    _MExpression.Split("\nin")[1].TrimStart() +
-                    
-                    // Adds 'each' keyword
-                    @", each " +
-                    
-                    // Bases incremental refresh on current column name
-                    _ColumnName +
-                    
-                    // Greater than or equal to RangeStart
-                    @" >= Date.From ( #""RangeStart"" ) and " +
-                    
-                    // and
-                    _ColumnName +
-                    
-                    // Less than RangeEnd
-                    @" < Date.From ( #""RangeEnd"" ) )" +
-                    
-                    // re-add 'in' keyword
-                    "\nin\n" +
-                    
-                    // Reference final step just added
-                    @"    #""Incremental Refresh""";
-            }
-        
-            // Success message for Refresh Policy configuration
-            Info ( 
-                "Successfully configured the Incremental Refresh policy.\n" + 
-                "\nSelect the table and right-click on 'Apply Refresh Policy...'" + 
-                "\nSelect & peform a 'Full Refresh' of all new policy partitons that are created." 
-            );
-            }
-        else if (result == DialogResult.Cancel)
-        {
-            // if the user clicks the Cancel button, close the form and exit the script
-            form.Close();
-            Error ( "Cancelled configuration! Ending script without changes." );
-            return;
-        }
-    }
-    catch
-    {
-        Error( "No valid column selected! Ending script without changes." );
-    }
-    
-}
-catch
+if (candidateTables.Count == 0)
 {
-    Error( "No valid table selected! Ending script without changes." );
+    Error("No table qualifies for incremental refresh. A table needs a single Power Query (M) partition, a datetime or integer column and no existing refresh policy.");
+    return;
 }
+
+var _Table = candidateTables.SelectTable(null, "Select a table (normally a fact table)");
+if (_Table == null)
+{
+    Error("No table selected. Ending script without changes.");
+    return;
+}
+
+var _Column = (DataColumn)_Table.Columns.Where(isDateColumn).SelectColumn(null, "Select a datetime or integer date key (yyyyMMdd) column.");
+if (_Column == null)
+{
+    Error("No column selected. Ending script without changes.");
+    return;
+}
+
+// Split the M expression at its final 'in' keyword
+var _MExpression = _Table.Partitions[0].Expression;
+var inKeywords = Regex.Matches(_MExpression, @"^[ \t]*in\b", RegexOptions.Multiline);
+if (inKeywords.Count == 0)
+{
+    Error("The M expression of '" + _Table.Name + "' has no 'let ... in' structure. Add the filter step manually.");
+    return;
+}
+var lastIn = inKeywords[inKeywords.Count - 1];
+var stepsBeforeIn = _MExpression.Substring(0, lastIn.Index).TrimEnd();
+var lastStep = _MExpression.Substring(lastIn.Index + lastIn.Length).Trim();
+
+// Incremental Refresh Configuration
+// Input box config
+Font _fontConfig = new Font("Segoe UI", 11);
+
+// Label for how long data should be stored
+var storeDataLabel = new Label();
+storeDataLabel.Text = "Store data in the last:";
+storeDataLabel.Location = new Point(20, 20);
+storeDataLabel.AutoSize = true;
+storeDataLabel.Font = _fontConfig;
+
+// User input for how long data should be stored
+var storeDataTextBox = new TextBox();
+storeDataTextBox.Location = new Point(storeDataLabel.Location.X + TextRenderer.MeasureText(storeDataLabel.Text, storeDataLabel.Font).Width + 20, storeDataLabel.Location.Y);
+storeDataTextBox.Size = new Size(100, 20);
+storeDataTextBox.Text = "3";
+storeDataTextBox.Font = _fontConfig;
+
+// User selection for how long data should be stored (granularity)
+var storeDataComboBox = new ComboBox();
+storeDataComboBox.Location = new Point(storeDataTextBox.Location.X + storeDataTextBox.Width + 20, storeDataLabel.Location.Y);
+storeDataComboBox.Size = new Size(100, 20);
+storeDataComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+storeDataComboBox.Items.AddRange(new object[] { "days", "months", "quarters", "years" });
+storeDataComboBox.SelectedIndex = 3;
+storeDataComboBox.Font = _fontConfig;
+
+// Label for how much data should be refreshed
+var refreshDataLabel = new Label();
+refreshDataLabel.Text = "Refresh data in the last:";
+refreshDataLabel.Location = new Point(20, storeDataLabel.Location.Y + storeDataLabel.Height + 15);
+refreshDataLabel.AutoSize = true;
+refreshDataLabel.Font = _fontConfig;
+
+// User input for how much data should be refreshed
+var refreshDataTextBox = new TextBox();
+refreshDataTextBox.Location = new Point(storeDataTextBox.Location.X, refreshDataLabel.Location.Y);
+refreshDataTextBox.Size = new Size(100, 20);
+refreshDataTextBox.Text = "30";
+refreshDataTextBox.Font = _fontConfig;
+
+// User selection for how much data should be refreshed (Period)
+var refreshDataComboBox = new ComboBox();
+refreshDataComboBox.Location = new Point(storeDataComboBox.Location.X, refreshDataLabel.Location.Y);
+refreshDataComboBox.Size = new Size(100, 20);
+refreshDataComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+refreshDataComboBox.Items.AddRange(new object[] { "days", "months", "quarters", "years" });
+refreshDataComboBox.SelectedIndex = 0;
+refreshDataComboBox.Font = _fontConfig;
+
+// User input to refresh full periods or not
+var fullPeriodsCheckBox = new CheckBox();
+fullPeriodsCheckBox.Text = "Refresh only full periods";
+fullPeriodsCheckBox.Location = new Point(storeDataLabel.Location.X + 3, refreshDataLabel.Location.Y + refreshDataLabel.Height + 15);
+fullPeriodsCheckBox.AutoSize = true;
+fullPeriodsCheckBox.Font = _fontConfig;
+
+// Form OK button
+var okButton = new Button();
+okButton.Text = "OK";
+okButton.Location = new Point(storeDataLabel.Location.X, fullPeriodsCheckBox.Location.Y + fullPeriodsCheckBox.Height + 15);
+okButton.MinimumSize = new Size(80, 25);
+okButton.AutoSize = true;
+okButton.DialogResult = DialogResult.OK;
+okButton.Font = _fontConfig;
+
+// Form cancel button
+var cancelButton = new Button();
+cancelButton.Text = "Cancel";
+cancelButton.Location = new Point(okButton.Location.X + okButton.Width + 10, okButton.Location.Y);
+cancelButton.MinimumSize = new Size(80, 25);
+cancelButton.AutoSize = true;
+cancelButton.DialogResult = DialogResult.Cancel;
+cancelButton.Font = _fontConfig;
+
+// Adjust the Location of the labels to align with the text boxes
+storeDataLabel.Location = new Point(storeDataLabel.Location.X, storeDataLabel.Location.Y + 4);
+refreshDataLabel.Location = new Point(refreshDataLabel.Location.X, refreshDataLabel.Location.Y + 4);
+
+// Form config
+var form = new Form();
+form.Text = "Incremental Refresh configuration:";
+form.AutoSize = true;
+form.MinimumSize = new Size(450, 0);
+form.FormBorderStyle = FormBorderStyle.FixedDialog;
+form.MaximizeBox = false;
+form.MinimizeBox = false;
+form.StartPosition = FormStartPosition.CenterScreen;
+form.AutoScaleMode = AutoScaleMode.Dpi;
+form.AcceptButton = okButton;
+form.CancelButton = cancelButton;
+
+form.Controls.Add(storeDataLabel);
+form.Controls.Add(storeDataTextBox);
+form.Controls.Add(storeDataComboBox);
+form.Controls.Add(refreshDataLabel);
+form.Controls.Add(refreshDataTextBox);
+form.Controls.Add(refreshDataComboBox);
+form.Controls.Add(fullPeriodsCheckBox);
+form.Controls.Add(okButton);
+form.Controls.Add(cancelButton);
+
+var result = form.ShowDialog();
+form.Dispose();
+
+if (result != DialogResult.OK)
+{
+    Error("Cancelled configuration! Ending script without changes.");
+    return;
+}
+
+int storeDataPeriods, refreshDataPeriods;
+if (!int.TryParse(storeDataTextBox.Text, out storeDataPeriods) || storeDataPeriods < 1 ||
+    !int.TryParse(refreshDataTextBox.Text, out refreshDataPeriods) || refreshDataPeriods < 1)
+{
+    Error("Enter whole numbers greater than 0 for both periods. Ending script without changes.");
+    return;
+}
+
+// Index order matches the combo box items: days, months, quarters, years
+var granularities = new[] {
+    RefreshGranularityType.Day,
+    RefreshGranularityType.Month,
+    RefreshGranularityType.Quarter,
+    RefreshGranularityType.Year
+};
+
+// Add the RangeStart and RangeEnd parameters if they don't exist
+if (!Model.Expressions.Contains("RangeStart"))
+{
+    Model.AddExpression(
+        "RangeStart",
+        @"#datetime(2023, 1, 1, 0, 0, 0) meta
+[
+    IsParameterQuery = true,
+    IsParameterQueryRequired = true,
+    Type = type datetime
+]");
+}
+
+if (!Model.Expressions.Contains("RangeEnd"))
+{
+    Model.AddExpression(
+        "RangeEnd",
+        @"#datetime(2024, 1, 1, 0, 0, 0) meta
+[
+    IsParameterQuery = true,
+    IsParameterQueryRequired = true,
+    Type = type datetime
+]");
+}
+
+// Configure the refresh policy
+_Table.EnableRefreshPolicy = true;
+_Table.RollingWindowGranularity = granularities[storeDataComboBox.SelectedIndex];
+_Table.RollingWindowPeriods = storeDataPeriods;
+_Table.IncrementalGranularity = granularities[refreshDataComboBox.SelectedIndex];
+_Table.IncrementalPeriods = refreshDataPeriods;
+// -1 refreshes complete periods only
+_Table.IncrementalPeriodsOffset = fullPeriodsCheckBox.Checked ? -1 : 0;
+
+// Power Query column reference, e.g. [#"Order Date"]
+var mColumn = "[#\"" + _Column.SourceColumn.Replace("\"", "\"\"") + "\"]";
+
+string rangeStart, rangeEnd;
+if (_Column.DataType == DataType.Int64)
+{
+    // Integer date key (yyyyMMdd): convert the parameters with a helper function
+    if (!Model.Expressions.Contains("fxDateTimeToInt"))
+    {
+        var dateTimeToInt = Model.AddExpression(
+            "fxDateTimeToInt",
+            @"(x as datetime) => Date.Year(x) * 10000 + Date.Month(x) * 100 + Date.Day(x)");
+        dateTimeToInt.SetAnnotation("PBI_ResultType", "Function");
+        dateTimeToInt.Kind = ExpressionKind.M;
+    }
+    rangeStart = @"fxDateTimeToInt(#""RangeStart"")";
+    rangeEnd = @"fxDateTimeToInt(#""RangeEnd"")";
+}
+else
+{
+    // The column must have the Date/Time type in Power Query
+    rangeStart = @"#""RangeStart""";
+    rangeEnd = @"#""RangeEnd""";
+}
+
+// Add a filter step after the last step of the M expression
+_Table.SourceExpression =
+    stepsBeforeIn + ",\n" +
+    @"    #""Incremental Refresh"" = Table.SelectRows(" + lastStep + ", each " +
+    mColumn + " >= " + rangeStart + " and " + mColumn + " < " + rangeEnd + ")" +
+    "\nin\n" +
+    @"    #""Incremental Refresh""";
+
+Info(
+    "Configured the incremental refresh policy on '" + _Table.Name + "'.\n" +
+    "\nStore data in the last: " + storeDataPeriods + " " + storeDataComboBox.SelectedItem +
+    "\nRefresh data in the last: " + refreshDataPeriods + " " + refreshDataComboBox.SelectedItem +
+    "\nRefresh only full periods: " + fullPeriodsCheckBox.Checked +
+    "\n\nRight-click the table and select 'Apply refresh policy'." +
+    "\nThen run a full refresh of the new policy partitions."
+);
 ```
-
 ### 说明
-
-此代码片段会基于所选日期列，在所选表中配置增量刷新。
+脚本运行后，在 **TOM Explorer** 中右键单击该表，然后选择 **Apply refresh policy**，即可创建策略分区。然后对新分区执行完全刷新。有关步骤，请参阅 @incremental-refresh-setup。
 
 ## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>运行脚本时，系统会提示你选择要配置的表，以及要为其配置策略的 DateTime 或 Int 列。然后，将出现此图所示的对话框，让你输入刷新策略参数。</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="帮助您根据所选列配置增量刷新的提示" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>选择表和列后，此对话框将设置数据存储时长、要刷新的数据量以及是否仅刷新完整期间。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong>确认对话框会告知你刷新策略配置已成功，并用通俗易懂的文字再次说明你所设置的内容。</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="列出在“预算”表中配置的刷新策略值和后续步骤的脚本信息对话框" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong>确认对话框列出了已配置的值和后续步骤。</figcaption>
 </figure>

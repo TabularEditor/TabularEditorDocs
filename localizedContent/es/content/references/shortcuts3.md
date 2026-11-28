@@ -2,7 +2,7 @@
 uid: shortcuts3
 title: Atajos de teclado de Tabular Editor 3
 author: Daniel Otykier
-updated: 2026-10-13
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -45,10 +45,11 @@ applies_to:
 | Rehacer          | Ctrl+Y |
 | Buscar           | Ctrl+F |
 | Reemplazar       | Ctrl+H |
+|Restablecer zoom|Ctrl+0, Ctrl+0 del teclado numérico|
 
 ## Atajos que dependen del foco
 
-Algunos atajos ejecutan un comando diferente según la parte de la ventana que tenga el foco. Un control de texto puede ser un editor de documentos, el **Editor de expresiones** o una celda que estés editando en la vista **Propiedades**.
+Algunos atajos ejecutan un comando diferente según la parte de la ventana que tenga el foco. Un control de texto es un editor de documentos, el **Editor de expresiones** o una celda que está editando en la vista **Propiedades**. Una lista desplegable o un cuadro de texto de solo lectura funciona como el Explorador TOM para **Ctrl+Z** y **Ctrl+Y**.
 
 | Atajo de teclado                     | El control de texto tiene el foco  | El Explorador TOM tiene el foco                  |
 | ------------------------------------ | ---------------------------------- | ------------------------------------------------ |
@@ -165,6 +166,9 @@ Algunos atajos ejecutan un comando diferente según la parte de la ventana que t
 | Salir                                                            | Shift+F11 |
 | Fila siguiente (contexto de fila más interna) | F9        |
 | Fila anterior (contexto de fila más interna)  | Shift+F9  |
+|Entrar en selección|Ctrl+B|
+
+**Detener depuración** no tiene ningún atajo predeterminado. Asigne uno en **Herramientas > Preferencias > Tabular Editor > Teclado**.
 
 ## C# Script
 

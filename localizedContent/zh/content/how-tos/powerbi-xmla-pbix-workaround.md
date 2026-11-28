@@ -2,7 +2,7 @@
 uid: powerbi-xmla-pbix-workaround
 title: 从 XMLA endpoint 创建 PBIX 文件。
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "仅限高级每用户 XMLA 终结点"
+          note: "Only Premium Per User XMLA Endpoints"
         - edition: Enterprise
           full: true
 ---
@@ -54,7 +54,7 @@ applies_to:
 如果 .pbip 文件夹配置为将模型存储为 [TMDL](xref:tmdl) 文件，你就需要改用 Tabular Editor 里的“保存到文件夹”选项。然后导航到该语义模型的 Power BI Project 文件夹（ModelName.SemanticModel），打开 'definition' 文件夹，并将模型保存到该文件夹中。
 
 > [!NOTE]
-> 若要启用 TMDL，请依次转到 **Tools > 偏好 > File Formats > Save-to-folder**，并在 **Serialization mode** 下拉列表中选择“TMDL”。有关详细信息，请参阅 [TMDL 文档](xref:tmdl)
+> 在 Tabular Editor 3 中，当**工具 > 首选项 > 文件格式 > 保存到文件夹**下的**保存到文件夹格式**为默认值**TMDL**时，**文件 > 保存到文件夹**将保存 TMDL。有关详细信息，请参阅[TMDL 文档](xref:tmdl)
 
 ## 步骤 3.1：移除增量刷新的分区并创建新的分区（可选）
 

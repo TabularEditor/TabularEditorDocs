@@ -2,7 +2,7 @@
 uid: save-with-supporting-files
 title: Guardar con archivos de apoyo
 author: Peer Grønnerup
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +22,7 @@ applies_to:
 La opción Guardar con archivos auxiliares guarda un modelo semántico junto con los archivos de metadatos que requiere la integración de Git de Microsoft Fabric. Úselo para sincronizar un modelo guardado con Tabular Editor entre un Workspace de Fabric y un repositorio de Git.
 
 > [!NOTE]
-> Guardar con archivos auxiliares está disponible al guardar en un archivo .bim (TMSL) o en una carpeta, con TMDL como modo de serialización.
+> La opción de guardar con archivos auxiliares está disponible cuando guarda en un archivo .bim (TMSL) o en una carpeta TMDL.
 
 ## Estructura de archivos y propiedades del modelo
 
@@ -75,7 +75,7 @@ Sales.SemanticModel/
 1. Crea o abre un modelo semántico en Tabular Editor 3.
 2. Establece la propiedad `Name` del objeto Database en el Explorador TOM. Esto establece el nombre de la carpeta y el `displayName` en el archivo .platform.
    ![Establecer la propiedad Name de la base de datos](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
-3. Si guardas en una carpeta, establece el modo de serialización en TMDL en **Herramientas > Preferencias > Formatos de archivo**.
+3. Si guarda en una carpeta, compruebe que **Guardar en formato de carpeta** en **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** sea **TMDL**. El cuadro de diálogo de la carpeta muestra **Guardar con archivos auxiliares** solo para los guardados en TMDL.
 4. Selecciona **Archivo > Guardar como** o **Archivo > Guardar en carpeta**.
 5. Elige una carpeta y selecciona **Guardar con archivos complementarios**.
    ![Cuadro de diálogo Guardar con archivos complementarios](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)

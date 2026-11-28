@@ -1,8 +1,8 @@
----
+﻿---
 uid: dax-editor
 title: Editor de DAX
 author: Daniel Otykier
-updated: 2026-09-14
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -43,7 +43,7 @@ Los calltips de DAX se actualizan al alternar entre las opciones de sintaxis con
 
 ![Code Assist de Dax](~/content/assets/images/dax-code-assist.png)
 
-La mayoría de los aspectos de Code Assist se pueden configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Code Assist**](xref:preferences#dax-editor--code-assist).
+La mayoría de los aspectos de Code Assist se pueden configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Code Assist**](xref:preferences#text-editors--dax-editor--code-assist).
 
 ## Ver la definición
 
@@ -87,7 +87,7 @@ Si no se puede analizar la expresión de la medida, se agrega el encapsulado, pa
 
 ## Dar formato a DAX
 
-El Editor de DAX de Tabular Editor 3 formatea automáticamente su código mientras escribe; es decir, corrige las mayúsculas y minúsculas de las funciones y las referencias a objetos, añade la sangría adecuada y los espacios entre paréntesis, etc. Todo esto se puede configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Formato automático**](xref:preferences#dax-editor--auto-formatting).
+El Editor de DAX de Tabular Editor 3 formatea automáticamente su código mientras escribe; es decir, corrige las mayúsculas y minúsculas de las funciones y las referencias a objetos, añade la sangría adecuada y los espacios entre paréntesis, etc. Todo esto se puede configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Formato automático**](xref:preferences#text-editors--dax-editor--auto-formatting).
 
 Sin embargo, a veces es necesario formatear todo el documento. Puedes hacerlo pulsando [F6] o [Shift+F6] si prefieres saltos de línea más frecuentes. Para las Consultas DAX, también puedes usar [Alt+F6] para reformatear el código y hacer que las comas se coloquen siempre al principio de cada línea, lo cual es útil al depurar.
 

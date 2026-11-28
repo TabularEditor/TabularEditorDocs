@@ -2,7 +2,7 @@
 uid: personalizing-te3
 title: Personalización y configuración de Tabular Editor 3 para adaptarlo a tus necesidades
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,17 +30,17 @@ A la mayoría de las opciones tratadas en este artículo se accede desde la opci
 
 # Características generales
 
-La primera página que encontrarás en el cuadro de diálogo **Preferencias** es **Tabular Editor > Características** (consulta la captura de pantalla a continuación). A continuación se muestra una breve descripción de las características de esta página y para qué se suelen usar:
+La primera página que encontrarás en el cuadro de diálogo **Preferencias** es la página **Tabular Editor > Power BI** (consulta la captura de pantalla a continuación). A continuación, encontrará una breve descripción de los ajustes de Power BI de esta página y para qué se suelen utilizar:
 
-![Preferencias: características generales](~/content/assets/images/pref-general-features.png)
+![La página de preferencias de Power BI](~/content/assets/images/pref-power-bi.png)
 
 ## Power BI
 
 Estos ajustes son útiles sobre todo para los desarrolladores que usan Tabular Editor 3 como una [herramienta externa para Power BI Desktop](https://docs.microsoft.com/power-bi/transform-model/desktop-external-tools).
 
-##### _Permitir operaciones de modelado no compatibles_ (deshabilitado)
+##### *Permitir operaciones de modelado no compatibles (anteriores a junio de 2025, no se recomienda)* (deshabilitado)
 
-Las herramientas externas para Power BI Desktop tienen algunas [limitaciones](xref:desktop-limitations). De forma predeterminada, Tabular Editor 3 te impedirá hacer cambios no compatibles en el Data model. Puede haber algunas características avanzadas de modelado que funcionen bien, aunque no estén admitidas; consulta el enlace anterior. Para desbloquear todos los objetos y propiedades del Tabular Object Model, habilita esta configuración.
+Se aplica únicamente a las versiones de Power BI Desktop anteriores a junio de 2025, que restringen las operaciones de modelado que puede realizar una herramienta externa. Cuando está marcada, todos los objetos y propiedades del Tabular Object Model están disponibles para su edición mientras Tabular Editor 3 está conectado a dicha versión, incluidos los cambios que Power BI Desktop no admite. Esta configuración no tiene ningún efecto en Power BI Desktop de junio de 2025 o posterior.
 
 ##### _Ocultar advertencias de fecha/hora automáticas_ (deshabilitado)
 
@@ -52,7 +52,7 @@ En Power BI Desktop es habitual insertar un salto de línea en la primera línea
 
 ## Sincronización de metadatos
 
-Estas opciones controlan el comportamiento de Tabular Editor 3 cuando los metadatos del modelo se cargan desde una base de datos en una instancia de Analysis Services. Estas opciones especifican cómo Tabular Editor 3 gestiona los cambios de metadatos aplicados a la base de datos desde fuera de la aplicación; por ejemplo, cuando otro usuario modifica la base de datos o cuando tú cambias el modelo desde Power BI Desktop mientras usas Tabular Editor 3 como herramienta externa.
+Estos ajustes se encuentran en la página **Tabular Editor > Varios**. Controlan el comportamiento de Tabular Editor 3 cuando los metadatos del modelo se cargan desde una base de datos en una instancia de Analysis Services. Los ajustes especifican cómo debe gestionar Tabular Editor 3 los cambios de metadatos aplicados a la base de datos desde fuera de la aplicación, por ejemplo, cuando otro usuario realiza un cambio en la base de datos o cuando usted realiza un cambio en el modelo a través de Power BI Desktop mientras Tabular Editor 3 se utiliza como herramienta externa.
 
 ##### _Avisar cuando los metadatos locales no estén sincronizados con el modelo implementado_ (habilitado)
 
@@ -118,7 +118,7 @@ Estas opciones determinan determinados comportamientos del analizador de código
 
 En la página **Editores de texto > Editor de DAX > Formato automático**, encontrarás una amplia variedad de configuraciones para controlar cómo se formatea tu código DAX.
 
-![Configuración de formato automático](~/content/assets/images/auto-formatting-settings.png)
+![Página de preferencias de formato automático del Editor de DAX](~/content/assets/images/auto-formatting-settings.png)
 
 ##### _Formatear el código automáticamente mientras escribes_ (habilitado)
 

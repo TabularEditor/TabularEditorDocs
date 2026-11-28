@@ -2,7 +2,7 @@
 uid: object-properties-tables
 title: 表属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍语义模型中三种表的属性：常规表、计算表格和计算组表。[表](#table)部分介绍这三类表共有的属性。计算表格和计算组表章节会列出它们新增的属性，并说明 **属性**视图对它们隐藏了哪些表属性。有关大多数对象共有的属性，见 @object-properties-common。
 
 ## 表
@@ -35,9 +37,9 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
-- [隐藏](xref:object-properties-common#hidden)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
+- [隐藏](xref:object-properties-common#hidden) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [已更改的属性](xref:object-properties-common#changed-properties)
@@ -52,8 +54,7 @@ SUMMARY: Reference for the properties of tables, calculated tables and calculati
 - [在透视中显示](xref:object-properties-common#shown-in-perspective)
 
 ### 表格组
-
-`TableGroup` · 字符串 · 基本 · _存储为注释_ (`TabularEditor_TableGroup`)
+`TableGroup` · 字符串 · 常规 · *存储为批注* (`TabularEditor_TableGroup`)
 
 Tabular Editor 3 的 **TOM Explorer** 中该表所属的表格组。表格组的作用类似于表的文件夹，例如可用来区分事实表、维度表和计算组。将其留空可在顶层显示该表。表格组不能嵌套，Power BI 和 Excel 等客户端工具也会忽略它们。
 
@@ -76,8 +77,7 @@ Tabular Editor 3 的 **TOM Explorer** 中该表所属的表格组。表格组的
 对于 Analysis Services 模型，你需要自行创建和管理分区。参见 @incremental-refresh-about 和 @incremental-refresh-setup。脚本 @script-implement-incremental-refresh 会根据你选择的日期列设置刷新策略，其中包括 `RangeStart` 和 `RangeEnd` 参数。
 
 ### 刷新策略
-
-`RefreshPolicy` · BasicRefreshPolicy · 增量刷新 · 兼容级别 1450+
+`RefreshPolicy` · GeneralRefreshPolicy · 增量刷新 · 兼容级别 1450+
 
 该表的增量刷新策略。在 **属性**视图中展开它，以设置要保留多少历史数据、要刷新多少数据、源表达式以及其他策略设置。这些设置在 @object-properties-partitions 的“刷新策略”下有说明。另见 @incremental-refresh-policy。
 
@@ -133,8 +133,7 @@ Tabular Editor 3 的 **TOM Explorer** 中该表所属的表格组。表格组的
 在 Tabular Editor 3 中，右键单击某个表并选择 **创建 > 日历...** 以添加日历，然后在 **日历编辑器** 中映射其列。参阅 @calendars。
 
 ### 数据类别
-
-`DataCategory` · string · 选项
+`DataCategory` · 字符串 · 选项 · **基本**
 
 表所包含的数据类型，供客户端工具使用。在 Power BI 中，`Time` 值会将该表标记为日期表：Power BI 会使用表的日期列（即 `IsKey` 设置为 `true` 的列）进行时间智能分析，并为该表关闭自动日期/时间表。在 Power BI Desktop 中，可通过 **标记为日期表格** 来设置该值。
 
@@ -262,8 +261,7 @@ Power BI Desktop 创建的自动日期/时间表不是系统托管的。 Desktop
 选择 `None` 时，该表及其元数据对该角色成员而言都不存在，因此所有引用该表的度量值都会对他们报错。参见 @data-security-setup-ols 和 @object-properties-security。要检查 OLS 和行级安全性是否按预期工作，可以在 Tabular Editor 3 中使用身份模拟进行测试。参见 @data-security-testing。
 
 ### 行级安全性
-
-`RowLevelSecurity` · 按角色 · 翻译、透视、安全性 · 只读 · _指向每个角色的表格权限的快捷方式_
+`RowLevelSecurity` · 每个角色 · 转换、透视、安全性 · 只读 · *快捷方式指向*每个角色的表权限 · **基本**
 
 模型中每个角色里该表的行级安全性（RLS）筛选器。展开该属性即可看到每个角色对应的一个条目。每个条目都是一个 DAX 表达式，它会对角色成员可以看到的行返回 `TRUE`，例如：
 
@@ -317,9 +315,9 @@ Microsoft 文档将计算组定位为兼容级别 1500 及以上的功能——�
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
-- [隐藏](xref:object-properties-common#hidden)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
+- [隐藏](xref:object-properties-common#hidden) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [对象类型](xref:object-properties-common#object-type)
@@ -328,20 +326,17 @@ Microsoft 文档将计算组定位为兼容级别 1500 及以上的功能——�
 - [在透视中显示](xref:object-properties-common#shown-in-perspective)
 
 ### 表格组
-
-`TableGroup` · string · 基本 · _以注释形式存储_ (`TabularEditor_TableGroup`)
+`TableGroup` · 字符串 · 常规 · *存储为批注* (`TabularEditor_TableGroup`)
 
 与表上的 [表格组](#table-group) 相同。
 
 ### 计算组描述
-
-`CalculationGroupDescription` · string · 基本 · _快捷方式，对应于_ 计算组的 **Description**
+`CalculationGroupDescription` · 字符串 · 常规 · *指向*计算组**描述**的快捷方式
 
 这是存储在计算组上的描述，与表自身的 `Description` 分开。客户端工具不会显示它。在 Power BI Desktop 的 **数据** 窗格中将鼠标悬停在计算组表上时，会显示该表的 `Description`；而 Excel 的字段列表不显示任何描述。将面向 Report 作者的文本放在表的 `Description` 中，并用此属性记录给其他开发人员的备注。
 
 ### 计算组优先级
-
-`CalculationGroupPrecedence` · int · 基本 · _快捷方式，对应于_ 计算组的 **Precedence**
+`CalculationGroupPrecedence` · int · 常规 · *指向*计算组**优先级**的快捷方式 · **基本**
 
 当查询使用多个计算组时，这是应用计算组的顺序。参见 @object-properties-calculation-groups 中的 `Precedence`。
 

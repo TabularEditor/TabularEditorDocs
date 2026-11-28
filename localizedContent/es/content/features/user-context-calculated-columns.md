@@ -2,7 +2,7 @@
 uid: user-context-calculated-columns
 title: Columnas calculadas con contexto de usuario
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,13 +26,23 @@ La propiedad `ExpressionContext` de la columna calculada determina si la columna
 
 | Contexto de expresión   | Significado                                                                                                                                                                                   |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Estándar**            | La opción predeterminada. La expresión solo puede usar funciones estándar. La columna tiene un valor por fila, igual para todos los usuarios. |
-| **Contexto de usuario** | La expresión puede llamar a funciones de contexto de usuario. La columna se evalúa para cada usuario.                                                         |
+| `Standard` | El valor predeterminado, excepto para las nuevas columnas calculadas en [tablas de Direct Lake en OneLake](#direct-lake-on-onelake-tables). La expresión solo puede usar funciones estándar. La columna tiene un valor por fila para todos los usuarios. |
+| `UserContext` | La expresión puede llamar a funciones de contexto de usuario. La columna se evalúa por usuario. |
 
 Selecciona una columna calculada en @tom-explorer-view y establece **Contexto de expresión** en **Opciones** de @properties-view.
 
 > [!NOTE]
-> `ExpressionContext` requiere un nivel de compatibilidad 1705 o superior; por debajo de 1705, las columnas calculadas siempre son **Standard**.
+> `ExpressionContext` requiere un nivel de compatibilidad de 1705 o superior, y por debajo de 1705 las columnas calculadas son siempre `Standard`.
+
+## Tablas de Direct Lake en OneLake
+
+`UserContext` es el único contexto de expresión que Power BI admite para las columnas calculadas de las tablas de Direct Lake en OneLake. Si una columna calculada de una tabla Direct Lake en OneLake se establece en `Standard` cuando guarda el modelo en el servicio Power BI, el guardado falla con el error «El contexto de expresión predeterminado no se puede usar para columnas calculadas en tablas Direct Lake». Las tablas Direct Lake en SQL no admiten columnas calculadas.
+
+En el nivel de compatibilidad 1705 o superior, se crea una nueva columna calculada en una tabla Direct Lake en OneLake con `UserContext`, también cuando un C# Script o un script DAX la añade. Las nuevas columnas calculadas en todas las demás tablas, incluidas las tablas de importación y Direct Lake en SQL del mismo modelo, se crean con `Standard`. Una columna que copia y pega o duplica conserva el contexto de expresión de su columna de origen. Por debajo del nivel de compatibilidad 1705, las nuevas columnas se crean con `Standard` y el nivel de compatibilidad no se modifica.
+
+Una columna calculada de una tabla de Direct Lake en OneLake cuyo contexto de expresión es `Standard` genera un error en la @messages-view y en la columna de la @tom-explorer-view. El editor DAX no lo subraya. 
+
+Para conocer los pasos para comprobar y corregir el contexto de expresión de estas columnas, consulte [Columnas calculadas en Direct Lake en OneLake](xref:direct-lake-guidance#calculated-columns-on-direct-lake-on-onelake).
 
 ## Para qué no se puede usar una columna con contexto de usuario
 

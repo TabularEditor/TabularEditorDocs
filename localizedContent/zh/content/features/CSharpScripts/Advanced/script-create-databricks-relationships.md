@@ -2,11 +2,12 @@
 uid: script-create-databricks-relationships
 title: 创建 Databricks 关系
 author: Johnny Winter
-updated: 2026-04-08
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "Requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -24,31 +25,32 @@ applies_to:
 
 ## 脚本
 
-### 创建 Databricks 关系
+> [!NOTE]
+> 在 Tabular Editor 2 中，此脚本需要 Roslyn 编译器。请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。
 
+### 创建 Databricks 关系
 ```csharp
-/*
- * Title: Create Databricks Relationships
- * Author: Johnny Winter, greyskullanalytics.com
- *
- * This script, when executed, will loop through the currently selected tables and send a query to the Databricks Information Schema tables to see if any foreign keys
- * have been defined. Where foreign keys are identified, the script will create relationships between the tables in the semantic model.
- * With the exception of dimension columns that are datetime type, key columns will be hidden once relationshsips are created, with primary keys marked as primary keys and IsAvailableInMDX set to false.
- * Step 1:  Select one or more tables in the model. These should be tables which have a foreign key relationship defined in Unity Catalog
-            (typically fact tables, but they could also be bridge tables or outrigger dimensions).
- * Step 2:  Run this script
- * Step 3:  Enter your Databricks Personal Access Token when prompted
- * Step 4:  The script will connect to Databricks and detect where foreign keys exist on the selected table. 
-            If the relationship does not already exist in the semantic model, it will be created.
-            If a relationship already exists between the two tables, the new relationship will be created as inactive
-            For each table processed, a message box will display the number of relationships created.
- *          Click OK to continue to the next table. 
- * Notes:
- *  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
- *  -   The script auto-detects which driver is installed
- *  -   Each run of the script will prompt the user for a Databricks Personal Access Token
- */
 #r "Microsoft.VisualBasic"
+#r "System.Drawing"
+// Title: Create Databricks Relationships
+// Author: Johnny Winter, greyskullanalytics.com
+//
+// This script, when executed, will loop through the currently selected tables and send a query to the Databricks Information Schema tables to see if any foreign keys
+// have been defined. Where foreign keys are identified, the script will create relationships between the tables in the semantic model.
+// With the exception of dimension columns that are datetime type, key columns will be hidden once relationshsips are created, with primary keys marked as primary keys and IsAvailableInMDX set to false.
+// Step 1:  Select one or more tables in the model. These should be tables which have a foreign key relationship defined in Unity Catalog
+//            (typically fact tables, but they could also be bridge tables or outrigger dimensions).
+// Step 2:  Run this script
+// Step 3:  Enter your Databricks Personal Access Token when prompted
+// Step 4:  The script will connect to Databricks and detect where foreign keys exist on the selected table. 
+//            If the relationship does not already exist in the semantic model, it will be created.
+//            If a relationship already exists between the two tables, the new relationship will be created as inactive
+//            For each table processed, a message box will display the number of relationships created.
+//          Click OK to continue to the next table. 
+// Notes:
+//  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+//  -   The script auto-detects which driver is installed
+//  -   Each run of the script will prompt the user for a Databricks Personal Access Token
 using System;
 using System.Data.Odbc;
 using System.Drawing;
@@ -617,7 +619,6 @@ Please check the following prerequisites:
     conn.Close();
 }
 ```
-
 ### 说明
 
 脚本使用 WinForms 来提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。对于每个选中的表，脚本会从该表分区中的 M 查询获取 Databricks 连接字符串信息，以及 schema 和表名。随后，它会使用检测到的 ODBC 驱动程序向 Databricks 发送一条 SQL 查询，通过查询 information_schema 表来查找在 Unity Catalog 中为该表定义的任何外键关系。对于 SQL 查询返回的每一行，脚本都会在模型中查找匹配的表名和列名；如果尚未存在关系，则会创建一个新的关系。对于角色扮演维度，同一张表可能通过多个外键关联到同一目标表，脚本检测到的第一个关系将被设为活动关系，其他随后创建的关系均设为非活动。脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。主键也会在语义模型中标记为 IsKey = TRUE。脚本对所有选定表都运行完成后，会弹出一个对话框，显示新创建了多少个关系。

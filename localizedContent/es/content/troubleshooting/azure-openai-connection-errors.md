@@ -2,7 +2,7 @@
 uid: azure-openai-connection-errors
 title: Errores de conexión de Azure OpenAI
 author: Morten Lønskov
-updated: 2026-04-15
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,7 +38,7 @@ Un resultado que apunte a un rango de direcciones IP privadas (por ejemplo, `10.
 
 Opciones para resolverlo:
 
-- Agrega el nombre de host de Azure OpenAI a la lista de exclusión en **Herramientas > Preferencias > Configuración del proxy** para que la solicitud omita el proxy y vaya directamente por el túnel de la VPN. Separa varios nombres de host con punto y coma
+- Añade tu nombre de host de Azure OpenAI a la lista de exclusiones en **Herramientas > Preferencias > Tabular Editor > Configuración de proxy** para que la solicitud omita el proxy y pase directamente por el túnel VPN. Separe varios nombres de host con punto y coma.
 - Pide a tu equipo de red que actualice el archivo PAC del proxy para omitir `*.openai.azure.com`, o que configure el servidor proxy para resolver las zonas de Azure Private DNS
 - Usa el split tunneling para que los rangos de IP de los puntos de conexión privados de Azure se enruten directamente en lugar de pasar por el proxy
 

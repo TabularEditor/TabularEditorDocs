@@ -1,8 +1,8 @@
----
+﻿---
 uid: importing-tables-te2
 title: 在 TE2 中导入表
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,6 +12,8 @@ applies_to:
 ---
 
 # 在 Tabular Editor 2 中导入表
+
+[!include[te2-te3-note](../includes/te2-te3-note.partial.md)]
 
 如果你的模型中已经有旧式数据源，你可以右键单击它，然后选择“导入表...”。 Tabular Editor 会尝试使用数据源中指定的数据提供程序和凭据进行连接。如果连接成功，你将看到通过该数据源可访问的所有数据库、表和视图的列表：
 

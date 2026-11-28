@@ -2,7 +2,7 @@
 uid: object-properties-partitions
 title: 分区属性
 author: Jeroen ter Heerdt
-updated: 2026-10-09
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 本页介绍分区属性、增量刷新策略和数据覆盖范围定义。有关大多数对象共有的属性，请参阅 @object-properties-common。
 
 分区用于定义表中一部分数据的来源。除计算组外，每个表至少有一个分区，而大多数表恰好只有一个。每种分区描述其数据来源的方式都不同：
@@ -45,8 +47,8 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [注释](xref:object-properties-common#annotations)
 - [扩展属性](xref:object-properties-common#extended-properties)
 - [错误消息](xref:object-properties-common#error-message)
@@ -54,16 +56,14 @@ SUMMARY: Reference for the properties of partitions (legacy, calculated, M, enti
 - [状态](xref:object-properties-common#state)
 
 ### 数据源
-
-`DataSource` · DataSource · 基本
+`DataSource` · 数据源 · 常规
 
 分区查询所使用的数据源。 Tabular Editor 会在旧式（查询）分区和实体分区中显示此属性，你可以从下拉列表中选择模型中的一个数据源。策略范围分区也会列出此属性，但该处始终为空。
 
 M 分区不使用此属性。它们的 M 表达式会直接指定数据源，例如 `Sql.Database("myserver", "mydb")`，或者引用 Structured数据源或共享表达式。见 @object-properties-data-sources。
 
 ### 表达式
-
-`Expression` · string · 基本
+`Expression` · 字符串 · 常规
 
 用于向分区填充数据的表达式。**属性**视图仅在计算分区上显示此属性，此时保存的是计算表格的 DAX 表达式。在旧式分区上，同一内容显示为 `Query`；在 M 分区上则显示为 `MExpression`。
 
@@ -72,8 +72,7 @@ M 分区不使用此属性。它们的 M 表达式会直接指定数据源，例
 在 C# Script 中，`Expression` 同样可读取和写入旧式分区、计算分区和 M 分区的表达式。如果在任何其他类型的分区上设置它，例如实体分区，就会引发错误。
 
 ### Query
-
-`Query` · string · 基本
+`Query` · 字符串 · 常规
 
 引擎为填充分区而发送到旧式数据源的原生查询，例如：
 
@@ -115,7 +114,7 @@ SELECT * FROM dbo.FactSales WHERE OrderDate >= '2024-01-01'
 | -------- | --------------------------- |
 | `Full`   | 该分区包含完整数据。                  |
 | `Sample` | 该分区保存一部分示例数据，供设计模型时使用。      |
-| `默认值`    | 该分区使用模型的 `DefaultDataView`。 |
+| `Default`    | 该分区使用模型的 `DefaultDataView`。 |
 
 Tabular Object Model (TOM) 只定义了这三个值。根据 Microsoft 关于 DirectQuery 模式的文档，Visual Studio 模型设计器的 **设为示例** 功能目前不受支持。 Power BI 不使用数据视图，因此在 Power BI 和 Fabric 模型中，将此属性保留为默认值即可。
 
@@ -127,12 +126,12 @@ Tabular Object Model (TOM) 只定义了这三个值。根据 Microsoft 关于 Di
 
 | 值             | 含义                                                                                                                                                   |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `导入`          | 数据会在刷新时加载到模型内存中。查询不会发送到数据源。                                                                                                                          |
+| `Import`          | 数据会在刷新时加载到模型内存中。查询不会发送到数据源。                                                                                                                          |
 | `DirectQuery` | 数据保留在数据源中。每个查询都会转换为针对数据源的查询，例如 SQL。                                                                                                                  |
-| `双`           | 该分区会作为导入或 DirectQuery 运行，具体取决于在复合模型中哪种方式能生成更优的查询。通常用于同时关联导入模式事实表和 DirectQuery 事实表的维度表。兼容级别 1455+。                                                    |
+| `Dual`           | 该分区会作为导入或 DirectQuery 运行，具体取决于在复合模型中哪种方式能生成更优的查询。通常用于同时关联导入模式事实表和 DirectQuery 事实表的维度表。兼容级别 1455+。                                                    |
 | `DirectLake`  | 数据直接从 OneLake 中的 Delta 表读取，并按需加载到内存中。仅限 Fabric。与实体分区配合使用。兼容级别 1604+。在不支持 Direct Lake 的 Tabular Editor 版本中不可用。请参阅 @direct-lake-guidance。 |
-| `推送`          | 数据通过 Power BI REST API 推送到分区中，与推送语义模型中的方式相同。没有源查询。只有 Power BI 服务支持此功能。                                                                               |
-| `默认`          | 该分区使用模型的 `DefaultMode` 设置。参见 @object-properties-model。                                                                                  |
+| `Push`          | 数据通过 Power BI REST API 推送到分区中，与推送语义模型中的方式相同。没有源查询。只有 Power BI 服务支持此功能。                                                                               |
+| `Default`          | 该分区使用模型的 `DefaultMode` 设置。参见 @object-properties-model。                                                                                  |
 
 模式按分区设置，而一个表的所有分区通常都使用相同的模式。主要的例外情况是混合表格：增量刷新策略会导入历史分区，并将最新分区保留为 DirectQuery 模式（请参阅[刷新策略](#refresh-policy)中的 `Mode`）。
 
@@ -170,8 +169,6 @@ Power BI 服务接受同一个表中同时包含 `Import` 和 `DirectQuery` 分�
 | `PolicyRange`      | 由增量刷新策略生成的分区。                                        |
 | `CalculationGroup` | 计算组表的分区。它不包含源；引擎会根据计算项填充它。                           |
 | `Inferred`         | 引擎自行生成查询的分区。兼容级别为 1563+。                             |
-
-TOM 还定义了值 `Parquet`，对应一个 Microsoft 未发布的内部兼容级别，因此它不会出现在你的模型中。
 
 <!-- TODO (not verifiable from TE3 source): which kind of table or model feature creates Inferred partitions. TOM only says "populated by executing a query generated by the system" (CL 1563+), and TE3 has no special handling for it. Same open question as on @object-properties-tables. -->
 
@@ -244,7 +241,7 @@ in
 
 用于保存与源连接的共享表达式。在 Direct Lake 模型中，这通常是一个名为 `DatabaseQuery` 的共享表达式，这是 Tabular Editor 3 导入向导为其指定的名称。它的 M 表达式取决于 Direct Lake 的类型：
 
-- **SQL 上的 Direct Lake**：`Sql.Database("<SQL endpoint>", "<Lakehouse 或 Warehouse 名称>")`
+- **SQL 上的 Direct Lake**：`Sql.Database("<SQL endpoint>", "<lakehouse or warehouse name>")`
 - **OneLake 上的 Direct Lake**：`AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/<workspace ID>/<item ID>", [HierarchicalNavigation=true])`
 
 Tabular Editor 会通过此共享表达式中的 M 函数区分这两种类型，并将没有表达式源的实体分区视为 SQL 上的 Direct Lake。模型中的所有 Direct Lake 表通常都指向同一个共享表达式。
@@ -285,11 +282,11 @@ Microsoft 文档称此属性保留以供将来使用。 Tabular Editor 会在兼
 
 | 值    | 含义      |
 | ---- | ------- |
-| `日`  | 一天。     |
-| `月`  | 一个自然月。  |
-| `季度` | 一个自然季度。 |
-| `年`  | 一个自然年。  |
-| `无效` | 未设置粒度。  |
+| `Day`  | 一天。     |
+| `Month`  | 一个自然月。  |
+| `Quarter` | 一个自然季度。 |
+| `Year`  | 一个自然年。  |
+| `Invalid` | 未设置粒度。  |
 
 最近的时间段通常较小（按天或按月），随着它们移出增量刷新窗口，会合并为更大的时间段（先按季度，再按年）。
 

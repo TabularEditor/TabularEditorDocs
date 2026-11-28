@@ -2,11 +2,12 @@
 uid: how-to-build-custom-winforms-dialogs
 title: Cómo crear cuadros de diálogo personalizados de WinForms en scripts
 author: Morten Lønskov
-updated: 2026-04-13
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "The scope selection dialog example requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -151,6 +152,9 @@ using (var form = new Form())
 
 ## Cuadro de diálogo de selección de ámbito (clase reutilizable)
 
+> [!NOTE]
+> En Tabular Editor 2, este ejemplo requiere un compilador Roslyn. Consulta [Compilar con Roslyn](xref:advanced-scripting#compiling-with-roslyn).
+
 En los scripts que necesiten elegir entre operar sobre los objetos seleccionados o sobre todos los objetos, encapsula el cuadro de diálogo en una clase reutilizable.
 
 ```csharp
@@ -227,7 +231,7 @@ using (var dialog = new ScopeDialog(Selected.Measures.Count(), Model.AllMeasures
             Selected.Measures.ForEach(m => m.FormatString = "#,##0.00");
             break;
         case ScopeDialog.ScopeOption.All:
-            Model.AllMeasures.ForEach(m => m.FormatString = "#,##0.00");
+            foreach (var m in Model.AllMeasures) m.FormatString = "#,##0.00";
             break;
         case ScopeDialog.ScopeOption.Cancel:
             break;

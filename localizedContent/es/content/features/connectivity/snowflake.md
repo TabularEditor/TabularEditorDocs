@@ -2,7 +2,7 @@
 uid: connect-snowflake
 title: Conectar con Snowflake
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -73,11 +73,7 @@ Cuando cambias entre **Key pair** y otro autenticador, se borra el campo **Passw
 >
 > La conversión conserva el par de claves y la clave pública registrada en tu usuario de Snowflake sigue siendo válida.
 
-<!-- IMAGE NEEDED: connectivity/snowflake-key-pair.png
-     The Snowflake connection dialog with Key pair selected, so the Private key file field
-     and its browse button are visible and the password field reads Passphrase.
-     House border, 100% DPI.
-     Alt text: "The Snowflake connection dialog with Key pair authentication selected" -->
+![El cuadro de diálogo Conectarse a Snowflake con el par de claves seleccionado, que muestra los campos Frase de contraseña y Archivo de clave privada](~/content/assets/images/features/connectivity/snowflake-key-pair.png)
 
 ## Inicios de sesión con navegador externo
 

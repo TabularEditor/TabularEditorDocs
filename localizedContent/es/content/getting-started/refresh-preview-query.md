@@ -1,8 +1,8 @@
 ---
 uid: refresh-preview-query
-title: Actualización, vista previa y consulta de datos
+title: "Actualización, vista previa y consulta de datos"
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -59,7 +59,7 @@ Para iniciar una actualización con Tabular Editor, haz clic con el botón derec
 
 También puedes iniciar una actualización a nivel de modelo desde el menú **Modelo > Actualizar modelo**. Una vez iniciada la operación de actualización, verás el texto "Data refresh started... <ins>Ver cola de actualizaciones</ins>". Haz clic en el enlace o abre la vista **Actualización de datos** desde la opción de menú **Vista > Actualización de datos**. Esto mostrará una lista de todas las operaciones de actualización (tanto las pasadas como las que están en curso), con los mensajes de estado devueltos por Analysis Services, incluidos los contadores de progreso y la duración, y te permitirá cancelar una actualización iniciada por error.
 
-![Vista de actualización de datos](~/content/assets/images/data-refresh-view2.png)
+![Vista de actualización de datos con una tarea expandida a tablas y particiones](~/content/assets/images/data-refresh-view2.png)
 
 > [!TIP]
 > La vista de actualización de datos incluye una columna **Hora de inicio** que muestra cuándo comenzó cada operación de actualización. Haz clic en el encabezado de la columna para ordenar las operaciones cronológicamente; así verás primero las actualizaciones más recientes. Puedes ordenar por cualquier columna para organizar las operaciones de actualización según tus necesidades. Consulta la [vista de actualización de datos](xref:data-refresh-view) para obtener más información.
@@ -140,7 +140,7 @@ Al hacer clic en el botón **Suplantación...** (que también puedes encontrar e
 
 Una vez habilitada la suplantación, el botón **Suplantación...** queda marcado y se aplicará a la vista de datos actual. Al hacer clic en la pequeña flecha junto al botón **Suplantación...**, puedes ver y cambiar rápidamente entre las 10 suplantaciones más recientes que has usado.
 
-![Seleccionar suplantación](~/content/assets/images/impersonation-customdata.png)
+![Seleccionar suplantación](~/content/assets/images/impersonation-dropdown.png)
 
 Cuando la actualización automática está habilitada en una vista de datos, cambiar la suplantación actualizará la vista de inmediato.
 
@@ -150,7 +150,7 @@ La característica CustomData permite pasar un valor de cadena personalizado que
 
 ![Seleccionar suplantación de identidad](~/content/assets/images/impersonation-customdata.png)
 
-Cuando se introduce un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`función CUSTOMDATA()`](https://dax.guide/customdata/).
+Cuando se introduce un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`CUSTOMDATA()`](https://dax.guide/customdata/).
 
 CustomData se usa habitualmente para implementar seguridad a nivel de filas dinámica cuando una aplicación utiliza autenticación personalizada. El valor que proporciones puede utilizarse en las expresiones de filtro del rol para controlar qué filas pueden ver los usuarios en función de los datos personalizados que se pasan a través de la cadena de conexión.
 
@@ -160,7 +160,7 @@ Esta característica es especialmente útil en escenarios de **Power BI Embedded
 
 ```dax
 'Department'[DepartmentCode] = CUSTOMDATA()
-```
+```   
 
 # Analizador VertiPaq
 
@@ -169,6 +169,8 @@ Tabular Editor 3 incluye una versión de la herramienta de código abierto [Anal
 Con Tabular Editor 3, puedes recopilar estadísticas del Analizador VertiPaq mientras estás conectado a cualquier instancia de Analysis Services. También puedes exportar las estadísticas como un [archivo .vpax](https://www.youtube.com/watch?v=zRa9y01Ub30) o importar estadísticas desde un archivo .vpax.
 
 Para recopilar estadísticas, simplemente haz clic en el botón **Recopilar estadísticas** en la vista **Analizador VertiPaq**.
+
+Si no se pueden leer las estadísticas a partir de los datos del modelo, por ejemplo, cuando una columna de alta cardinalidad supera el límite de memoria por consulta de una capacidad de Power BI, las estadísticas se recopilan únicamente a partir de los metadatos del modelo. Aparece una advertencia de **Estadísticas recopiladas sin leer los datos** junto con el error del servidor, y las cardinalidades pueden faltar o ser inexactas. Para omitir la lectura de estadísticas de los datos, desmarque **Leer estadísticas de datos** en **Herramientas > Preferencias > Formatos de archivo > Analizador VertiPaq**.
 
 ![Analizador VertiPaq: Recopilar estadísticas](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 

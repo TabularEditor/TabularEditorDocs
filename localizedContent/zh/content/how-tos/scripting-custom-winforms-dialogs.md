@@ -2,11 +2,12 @@
 uid: how-to-build-custom-winforms-dialogs
 title: 如何在脚本中构建自定义 WinForms 对话框
 author: Morten Lønskov
-updated: 2026-04-13
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "The scope selection dialog example requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -151,6 +152,9 @@ using (var form = new Form())
 
 ## 范围选择对话框（可重用类）
 
+> [!NOTE]
+> 在 Tabular Editor 2 中，此示例需要 Roslyn 编译器。请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。
+
 如果脚本需要在对所选对象操作和对所有对象操作之间做选择，请将该对话框封装为可复用的类。
 
 ```csharp
@@ -227,7 +231,7 @@ using (var dialog = new ScopeDialog(Selected.Measures.Count(), Model.AllMeasures
             Selected.Measures.ForEach(m => m.FormatString = "#,##0.00");
             break;
         case ScopeDialog.ScopeOption.All:
-            Model.AllMeasures.ForEach(m => m.FormatString = "#,##0.00");
+            foreach (var m in Model.AllMeasures) m.FormatString = "#,##0.00";
             break;
         case ScopeDialog.ScopeOption.Cancel:
             break;

@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI 助手
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,7 @@ applies_to:
 
 # AI 助手
 
-AI 助手是用于语义模型开发的聊天面板。它会浏览模型元数据、编写并运行 DAX 查询、生成 C# Script、运行 Best Practice Analyzer 检查、查询 VertiPaq分析器统计信息，并搜索 Tabular Editor 知识库。[权限设置](#permissions-and-consent) 控制它会向你的 AI 提供程序发送哪些内容。 AI 助手已通过独立渗透测试；你可以查看 [Tabular Editor 信任中心](https://trust.tabulareditor.com)。
+AI 助手是一个用于语义模型开发的聊天面板。它可以探索您的模型元数据、编写和运行 DAX 查询、生成 C# 脚本、解释和修复您的模型和打开的文档中的错误、运行 Best Practice Analyzer 检查、查询 VertiPaq Analyzer 统计数据，以及搜索 Tabular Editor 知识库。[权限设置](#permissions-and-consent)控制其向您的 AI 提供商发送的内容。AI 助手已通过独立渗透测试；请参阅[Tabular Editor 安全中心](https://trust.tabulareditor.com)。
 
 AI 助手采用自带密钥（BYOK）模式，你提供来自某个受支持提供商的 API 密钥，助手会直接调用该提供商的 API。
 
@@ -45,12 +45,12 @@ AI 助手采用自带密钥（BYOK）模式，你提供来自某个受支持提�
 
 在 **工具 > 偏好 > AI 功能 > AI 助手 > AI 提供商** 中配置 AI 提供商。从下拉列表中选择一个提供商（在你完成配置之前，默认值为 **无（AI 已禁用）**），输入 API 密钥，并可选择覆盖默认模型。
 
-将模型字段留空即可使用提供商的默认模型。 OpenAI 和 Anthropic 都有默认值；Azure OpenAI 和自定义提供程序始终需要填写相应的值。
+将模型字段留空以使用提供商的默认模型。OpenAI 和 Anthropic 有默认值；Azure OpenAI 和自定义提供商始终需要一个值。选择 OpenAI 或 Anthropic 作为提供程序时，将填写默认模型名称。当默认值发生变化时，已保存在“首选项”中的模型名称不会发生变化。
 
 | 提供程序           | 默认模型                    | 需要配置                          |
 | -------------- | ----------------------- | ----------------------------- |
-| OpenAI         | gpt-5.5 | API 密钥。可选：基础 URL、组织 ID 和项目 ID |
-| Anthropic      | claude-sonnet-4-6       | API 密钥。可选：基础 URL              |
+| OpenAI | gpt-5.6-terra | API 密钥。可选的基本URL、组织ID和项目ID |
+| Anthropic | claude-sonnet-5-5 | API 密钥。可选的基本 URL |
 | Azure OpenAI   | 无。必须提供部署名称              | API 密钥、端点 URL 和部署名称           |
 | 自定义（兼容 OpenAI） | 无。必须提供模型名称              | API 密钥和自定义端点 URL              |
 
@@ -75,7 +75,7 @@ AI 助手采用自带密钥（BYOK）模式，你提供来自某个受支持提�
 
 选择 **Anthropic** 作为提供商，然后输入你的 API 密钥。模型名称可以填写你账户中可用的任何 Anthropic 模型。
 
-![AI 提供程序偏好设置页：提供程序选择为 Anthropic，基础 URL 为 https://api.anthropic.com，显示已遮盖的 API 密钥，模型名称为 claude-sonnet-4-6](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![“AI 提供商”偏好设置页面，其中选择了 Anthropic 作为提供商，基础 URL（可选）字段为空，API 密钥已隐藏，模型名称为 claude-sonnet-5-5](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
 > Anthropic 会根据你的账户等级，强制执行每分钟输入 token（ITPM）的速率限制。新创建的 API 密钥起始为 Tier 1，Claude Sonnet 4.x 的 ITPM 上限为 30,000。对大型模型发起的一次请求就可能超过此限制。购买 $40 或以上的 API 额度即可升至第 2 档（450,000 ITPM）。有关各档位的完整详情，请参阅 [Anthropic 速率限制文档](https://docs.anthropic.com/en/api/rate-limits)。
@@ -190,7 +190,8 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 - **C# 脚本生成**：创建用于模型更改的 C# Script。视你的设置而定，助手会在编辑器窗口中打开脚本供你运行，或由其自行运行；参见[让助手更改你的模型](#letting-the-assistant-change-your-model)
 - **Best Practice Analyzer**：运行 BPA 分析，列出规则违规情况，并创建或修改 BPA 规则
 - **VertiPaq分析器**：查询内存使用统计信息和列的基数
-- **文档访问**：读取并修改已打开的文档：DAX 查询、C# Script 和 DAX 脚本
+- **模型错误**：列出模型的错误、警告和 Analysis Services 消息，与[消息视图](xref:messages-view)中显示的消息相同，并先列出根本原因。当模型的错误发生变化时，助手会收到通知。
+- **文档访问**：读取和修改打开的 DAX 查询、C# 脚本和 DAX 脚本，并读取每个打开的文档（包括 Pivot Grid）的错误和警告。活动文档是助手上下文的一部分，因此您可以询问“为什么我在此查询中看到此错误？”。它无法读取或更改 Pivot Grid 的布局
 - **知识库搜索**：搜索内置的 Tabular Editor 文档
 - **UI 导航**：生成 `te3://` 操作链接，用于打开特定的 Tabular Editor 对话框和功能
 
@@ -210,6 +211,7 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 - 如果 **预览更改** 处于开启状态（默认值），则会在应用更改前显示[预览对话框](xref:csharp-scripts#run-c-scripts-with-preview)。**取消** 会还原这些更改，并将此次拒绝 Report 给助手。如果 **预览更改** 处于关闭状态，则会在不显示对话框的情况下应用更改。
 - 该脚本的更改会作为一个撤销条目显示为：**C# Script (AI Assistant)**。焦点仍在聊天框中，**Ctrl+Z** 无法撤销对模型的更改。要撤销整个脚本，请单击 TOM Explorer 并按 **Ctrl+Z**，或在 **Edit** 菜单中选择 **Undo C# Script (AI Assistant)**。
 - 如果脚本在执行到一半时失败，模型将保持不变，助手会 Report 该错误。
+- 如果脚本成功执行并引入或解决了 DAX 错误，助手将收到这些错误的列表，并按根本原因分组。
 - 访问文件、网络或外部程序集的脚本不会运行。它会以脚本工件形式打开，带有 **Unsafe** 徽章，且 **Execute** 被禁用；助手的回复还会说明脚本使用了什么。
 
 如果你要求生成脚本，例如“给我写一个脚本，把每个度量值都重命名为 sentence case”，助手会将其作为脚本文档打开，由你自行运行，即使启用了此设置也是如此。
@@ -260,7 +262,7 @@ AI 助手包含以下自定义指令：
 | 语义模型设计      | `/model-design`       | 星型架构、关系与交叉筛选、日期表、度量值与计算列、计算组、命名                         |
 | 语义模型组织      | `/organize-model`     | 审核并整理模型元数据：命名约定、表格组、显示文件夹、隐藏列、格式字符串、说明                  |
 | 语义模型大小优化    | `/optimize-model`     | 减少模型内存占用和大小：VertiPaq 度量值、删除列、数据类型调优、结构调整、SKU 限制         |
-| 宏           | `/宏`                  | 用于宏窗口的可复用 C# 宏：选择上下文、通用代码规则                             |
+| 宏           | `/macros`                  | 用于宏窗口的可复用 C# 宏：选择上下文、通用代码规则                             |
 | DAX 用户自定义函数 | `/udf`                | 编写 DAX UDF：语法、`VAL`/`EXPR` 参数模式、类型提示、命名空间、DaxLib        |
 | 最佳实践分析器     | `/bpa`                | 查看违规项，并使用 LINQ Dynamic 表达式编写自定义规则                       |
 
@@ -326,10 +328,10 @@ Tabular Editor 会按以下方式读取这些文件：
 
 | 资源                         | 涵盖内容                                                     | 级别           | 默认值    |
 | -------------------------- | -------------------------------------------------------- | ------------ | ------ |
-| **模型元数据**                  | 表、列和度量值的名称、表达式、描述等。“读取”权限还包括 VertiPaq分析器的统计信息            | 拒绝 / 读取 / 写入 | **读取** |
-| **模型数据**                   | 模型中的数据值，例如 DAX 查询结果。需要实时连接                               | 拒绝 / 读取      | **拒绝** |
+| **模型元数据** | 表、列和度量值名称、表达式、描述等。“读”还包括 VertiPaq Analyzer 统计数据以及模型的错误和警告消息 | 拒绝/读/写 | **读** |
+| **模型数据** | 来自您模型的数据值，例如 DAX 查询结果，以及 Analysis Services 返回的错误文本（其中可能包含数据值）。DAX 查询需要实时连接 | 拒绝/读取 | **拒绝** |
 | **Best Practice Analyzer** | 读取可列出规则并运行分析；写入可添加或修改规则                                  | 拒绝 / 读取 / 写入 | **读取** |
-| **文档**                     | 你当前打开的文档：DAX 查询、C# Script 和 DAX 脚本。读取可访问其内容；创建或修改则需要写入权限 | 拒绝 / 读取 / 写入 | **写入** |
+| **文档** | 您的打开文档：DAX 查询、C# 脚本、DAX 脚本和数据透视网格。“读”是指其内容及其错误和警告；“写”是指需要创建或修改它们。Pivot Grid 布局无法读取或修改 | 拒绝/读取/写入 | **写入** |
 | **宏**                      | 你的宏库。读取可列出并读取宏；写入权限为未来的宏编辑工具预留                           | 拒绝 / 读取 / 写入 | **写入** |
 
 **Write**（在下拉列表中标为 **Read/Write**）也包含 Read 权限。
@@ -352,7 +354,7 @@ Tabular Editor 会按以下方式读取这些文件：
 聊天没有单独的“询问”级别，当它需要某个被设为 **拒绝** 的资源时，会显示一张[权限卡片](#permission-cards-in-the-chat)。
 
 > [!NOTE]
-> 从 3.27.0 起，**模型元数据**、**文档** 和 **宏** 默认设置为“读取”或更高级别，聊天也不会再为它们弹出提示。默认情况下，只有 DAX 查询结果和对 Best Practice Analyzer 规则的编辑会显示卡片。将某个资源设为 **拒绝**，就能让它重新弹出提示。
+> **模型元数据**、**文档**和**宏**的默认设置为“读取”或更高权限，聊天不会提示这些内容。默认情况下，只有 DAX 查询结果和 Best Practice Analyzer 规则编辑才会显示卡片。将资源设置为**拒绝**，以恢复其提示。
 
 > [!NOTE]
 > 在企业版中，管理员可以通过策略限制这些权限的上限。参见 @policies。
@@ -483,7 +485,7 @@ Token 计数器位于信息框上方的状态栏中，紧挨着[当前模型指�
 
 ## 禁用 AI 助手
 
-AI 助手是一个可选组件，自 Tabular Editor 3.27.0 起默认随产品安装。再次运行 Tabular Editor 3 安装程序，然后选择 **Modify**，以在现有安装中包含或排除该组件。升级会保留现有选择；请参阅[升级与 AI 功能组件](xref:installation-activation-basic#upgrades-and-the-ai-features-component)。在便携版本中，从安装目录中删除 `TabularEditor3.AI.dll` 即可将其移除。
+AI 助手是可选的**AI 功能**安装程序组件的一部分，该组件默认选中。再次运行 Tabular Editor 3 安装程序，然后选择**修改**，以便在现有安装中包含或排除该组件。从早期版本升级时会选择该组件，包括在未指定组件名称的无人值守升级中，后续升级将保留您的选择。管理员可以通过 `DisableAi` 策略或 `ADDLOCAL=MainFeature` 将其禁用；请参阅[升级和 AI 功能组件](xref:installation-activation-basic#upgrades-and-the-ai-features-component)。在便携式构建中，从安装目录中删除 `TabularEditor3.AI.dll` 以将其移除。
 
 同一个组件还包含 MCP 服务器，因此排除该组件或删除 `TabularEditor3.AI.dll` 会同时移除两者。如果只想关闭聊天功能，保留该组件并设置 `DisableAiChat` 策略。
 

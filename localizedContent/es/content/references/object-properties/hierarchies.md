@@ -2,7 +2,7 @@
 uid: object-properties-hierarchies
 title: Propiedades de jerarquía y nivel
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of hierarchies and their levels.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 Esta página describe las propiedades de las jerarquías definidas por el usuario y de sus niveles. Para ver las propiedades comunes a la mayoría de los objetos, consulta @object-properties-common.
 
 ## Jerarquía
@@ -33,14 +35,14 @@ Una jerarquía es una lista ordenada de columnas con nombre de una tabla, por la
 
 Todos los niveles de una jerarquía deben proceder de la tabla a la que pertenece la jerarquía. Para crear una jerarquía entre tablas, primero incorpora las columnas a una sola tabla, por ejemplo, con columnas calculadas que usen [RELATED](https://dax.guide/related).
 
-En el **Explorador TOM**, puedes agregar niveles a una jerarquía arrastrando columnas sobre ella. Consulta @drag-drop.
+En el **Explorador TOM**, puede añadir niveles a una jerarquía arrastrando columnas hasta ella. Consulte @drag-drop. En Tabular Editor 3, la sección **Niveles** de la pestaña **Básico** de la vista Propiedades también permite añadir, mover, renombrar y eliminar niveles. Consulte [Niveles de jerarquía](xref:properties-view#hierarchy-levels).
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
-- [Carpeta de visualización](xref:object-properties-common#display-folder)
-- [Oculto](xref:object-properties-common#hidden)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
+- [Carpeta de visualización](xref:object-properties-common#display-folder) · **Básica**
+- [Oculto](xref:object-properties-common#hidden) · **Básico**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Propiedades modificadas](xref:object-properties-common#changed-properties)
@@ -63,7 +65,7 @@ Indica si las herramientas cliente ocultan los miembros con un valor en blanco. 
 
 | Valor              | Significado                                                                                                                               |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `Predeterminado`   | Muestra todos los miembros, incluidos los que están en blanco. Úselo para una jerarquía equilibrada.      |
+| `Default`   | Muestra todos los miembros, incluidos los que están en blanco. Úselo para una jerarquía equilibrada.      |
 | `HideBlankMembers` | Oculta un miembro cuando su valor está en blanco, y sus miembros secundarios aparecen directamente bajo el miembro padre. |
 
 Solo se ocultan los miembros en blanco y un valor de marcador de posición como `N/A` sigue apareciendo. Excel respeta esta propiedad. Power BI la ignora y muestra los miembros en blanco.
@@ -76,8 +78,8 @@ Un nivel es un paso dentro de una jerarquía. Cada nivel apunta a una columna de
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Propiedades modificadas](xref:object-properties-common#changed-properties)
@@ -91,16 +93,14 @@ Un nivel es un paso dentro de una jerarquía. Cada nivel apunta a una columna de
 Los niveles no tienen `IsHidden` ni `DisplayFolder` propios y, en las perspectivas, siguen su jerarquía. Si traduces el nombre de la jerarquía, traduce también los nombres de sus niveles. La regla @kb.bpa-translate-hierarchy-levels del Best Practice Analyzer (BPA) señala los niveles de las jerarquías visibles que no tienen un nombre traducido en una o varias configuraciones regionales del modelo.
 
 ### Columna
-
-`Column` · Column · Básico
+`Column` · Columna · General · **Básico**
 
 La columna que proporciona los valores del nivel. Debe ser una columna de la misma tabla que la jerarquía, y una columna solo puede usarse una vez en la misma jerarquía. El nivel muestra los valores de la columna en el orden de clasificación de la columna. Para mostrar los meses en orden del calendario, establece `SortByColumn` en la columna del nombre del mes (consulta @object-properties-columns).
 
 Una columna oculta sigue funcionando en una jerarquía. Oculta las columnas del nivel para que los usuarios exploren los datos a través de la jerarquía.
 
 ### Ordinal
-
-`Ordinal` · int · Básico
+`Ordinal` · entero · General
 
 La posición del nivel dentro de la jerarquía, empezando por `0` para el nivel superior. Los ordinales de los niveles de una jerarquía deben ser `0`, `1`, `2`, etc., sin huecos ni duplicados.
 

@@ -2,7 +2,7 @@
 uid: built-in-bpa-rules
 title: 内置 BPA 规则
 author: Morten Lønskov
-updated: 2026-07-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Tabular Editor 3 内置 28 条精选最佳实践规则，并集成知识库。
+description: 36 条精选最佳做法规则硬编码到 Tabular Editor 3 中，并集成知识库。
 ---
 
 # 内置 BPA 规则
 
 ## 概览
 
-Tabular Editor 3 包含 28 条内置最佳实践规则。这些规则覆盖语义模型开发中的常见问题，并会随每次发布自动更新。
+Tabular Editor 3 包含 36 条内置最佳做法规则。这些规则涵盖了语义模型开发中的常见问题，并会在每个版本发布时自动更新。
 
 与存储在 JSON 文件中的自定义规则不同，内置规则：
 
@@ -37,24 +37,24 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。这些规则覆盖语�
 
 ### 规则类别
 
-这 28 条内置规则涵盖四个方面：
-
-- **错误预防**：无效字符、缺失表达式、数据类型不匹配
-- **性能**：关系、分区、聚合
-- **格式设置**：格式字符串、可见性、命名规范
-- **维护**：描述、计算组、未使用的对象
+**Best Practice Analyzer** 按类别对内置规则进行分组：
+- **错误预防**：无效字符、缺失的表达式和源列、数据类型不匹配、MDX 可用性、用户定义函数名称
+- **性能**：MDX 可用性、日期表、多对多关系、连接字符串应用程序名称
+- **维护**：说明、空计算组和透视、未使用的数据源
+- **命名约定**：名称中的前导空格和尾随空格
+- **格式化**：格式字符串、数值列的汇总、外键可见性
+- **模型布局**：翻译
+- **治理**：Power BI 兼容级别
+- **安全性**：角色权限以及行级和对象级安全的组合
 
 ### 全局控制与按规则控制
-
-![屏幕截图：BPA 偏好设置，包含全局启用/禁用开关以及按规则的复选框](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
-你可以全局或按规则单独启用或禁用内置规则。这些设置会在会话之间保留，并且与自定义规则相互独立。
+![“管理最佳实践规则”对话框，其中选择了“内置最佳实践”集合，并且其规则按类别分组，每个类别都有一个复选框](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
+您可以全局或单独启用或禁用内置规则。设置在各会话中保持不变，并独立于您的自定义规则。
 
 要管理内置规则：
-
-1. 转到 **工具** > **偏好设置** > **Best Practice Analyzer**
-2. 找到 **内置规则** 部分
-3. 切换 **启用内置规则**，以开启或关闭整个规则集合
-4. 使用 BPA 管理器启用或禁用单个规则
+1. 转到**工具 > 首选项 > Tabular Editor > 其他**。
+2. 在**最佳实践分析器**下，选中或取消选中**启用内置最佳实践规则**，以启用或禁用整个集合。
+3. 要启用或禁用个别规则，请打开**工具 > 管理BPA规则...**，选择**内置最佳实践**集合，然后选中或取消选中每条规则的复选框。
 
 ### 首次运行通知
 
@@ -64,11 +64,12 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。这些规则覆盖语�
 
 ### 知识库集成
 
-![屏幕截图：BPA 窗口中选中了某条规则，并高亮显示“查看文档”按钮](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
 
-每条内置规则都会通过 `KnowledgeBaseArticle` 属性链接到一篇知识库文章。每篇文章都会说明该规则检查什么、为什么重要，以及如何修复违规项。
+![Best Practice Analyzer 窗口，其中显示了一条规则的工具提示，并突出显示了“了解更多”链接](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
 
-要查看文档，请在 Best Practice Analyzer 窗口中选择一条规则。
+每个内置规则都链接到一篇知识库文章。每篇文章都解释了规则检查的内容、其重要性以及如何解决冲突。
+
+要打开文章，请将鼠标悬停在**最佳实践分析器**窗口中的某条规则上，然后单击工具提示中的**了解详细信息**。
 
 ### 只读保护
 
@@ -82,39 +83,57 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。这些规则覆盖语�
 
 ## 内置规则目录
 
-当前规则集包含以下规则：
+每个条目均链接到该规则的知识库文章。严重程度显示在括号中。
 
 ### 错误预防规则
-
-- [避免在对象名称中使用无效字符](xref:kb.bpa-avoid-invalid-characters-names)
-- [避免在说明中使用无效字符](xref:kb.bpa-avoid-invalid-characters-descriptions)
-- [计算对象需要表达式](xref:kb.bpa-expression-required)
-- [数据列必须有来源](xref:kb.bpa-data-column-source)
-- [关系列必须具有相同的数据类型](xref:kb.bpa-relationship-same-datatype)
-- [避免在 Structured数据源中使用提供程序分区](xref:kb.bpa-avoid-provider-partitions-structured)
-- [为用户定义函数使用复合名称](xref:kb.bpa-udf-use-compound-names)
+- [数据列必须有源](xref:kb.bpa-data-column-source) (3)
+- [计算对象需要表达式](xref:kb.bpa-expression-required) (3)
+- [避免使用结构化数据源的提供程序分区](xref:kb.bpa-avoid-provider-partitions-structured) (2)
+- [关系列必须具有相同的数据类型](xref:kb.bpa-relationship-same-datatype) (3)
+- [避免在对象名称中使用无效字符](xref:kb.bpa-avoid-invalid-characters-names) (3)
+- [避免在描述中使用无效字符](xref:kb.bpa-avoid-invalid-characters-descriptions) (3)
+- [在必要时将 IsAvailableInMDX 设置为 True](xref:kb.bpa-set-isavailableinmdx-true-necessary) (3)
+- [对用户定义函数使用复合名称](xref:kb.bpa-udf-use-compound-names) (1)
 
 ### 性能规则
-
-- [多对多关系应使用单向筛选方向](xref:kb.bpa-many-to-many-single-direction)
-- [隐藏外键列](xref:kb.bpa-hide-foreign-keys)
-- [将数值列的 SummarizeBy 设置为 None](xref:kb.bpa-do-not-summarize-numeric)
-- [删除自动日期表](xref:kb.bpa-remove-auto-date-table)
-- [删除未使用的数据源](xref:kb.bpa-remove-unused-data-sources)
-
-### 格式规则
-
-- [为度量值提供格式字符串](xref:kb.bpa-format-string-measures)
-- [为数值列和日期列提供格式字符串](xref:kb.bpa-format-string-columns)
-- [可见对象应提供说明](xref:kb.bpa-visible-objects-no-description)
-- [去除对象名称首尾空格](xref:kb.bpa-trim-object-names)
-- [应包含日期表](xref:kb.bpa-date-table-exists)
+- [将 IsAvailableInMDX 设置为 False](xref:kb.bpa-set-isavailableinmdx-false) (3)
+- [应存在日期表](xref:kb.bpa-date-table-exists) (2)
+- [移除自动日期表](xref:kb.bpa-remove-auto-date-table) (2)
+- [多对多关系应使用单向](xref:kb.bpa-many-to-many-single-direction) (2)
+- [在连接字符串中指定应用程序名称](xref:kb.bpa-specify-application-name) (1)
 
 ### 维护规则
+- [移除未使用的 হয়ত源](xref:kb.bpa-remove-unused-data-sources) (1)
+- [可见对象应有描述](xref:kb.bpa-visible-objects-no-description) (1)：五条规则，适用于表、列、度量值、计算组和用户定义函数
+- [透视应包含对象](xref:kb.bpa-perspectives-no-objects) (1)
+- [计算组应包含项目](xref:kb.bpa-calculation-groups-no-items) (2)
 
-- [计算组应包含计算项](xref:kb.bpa-calculation-groups-no-items)
-- [透视中应包含对象](xref:kb.bpa-perspectives-no-objects)
-- [使用最新的 Power BI 兼容级别](xref:kb.bpa-powerbi-latest-compatibility)
+### 命名约定规则
+- [修剪对象名称](xref:kb.bpa-trim-object-names) (1)
+
+### 格式规则
+- [将数字列的 SummarizeBy 设置为 None](xref:kb.bpa-do-not-summarize-numeric) (3)
+- [隐藏外键列](xref:kb.bpa-hide-foreign-keys) (2)
+- [为数字和日期列提供格式字符串](xref:kb.bpa-format-string-columns) (2)
+- [为度量值提供格式字符串](xref:kb.bpa-format-string-measures) (2)
+
+### 模型布局规则
+- [翻译所有文化的显示文件夹](xref:kb.bpa-translate-display-folders) (1)
+- [翻译所有文化的描述](xref:kb.bpa-translate-descriptions) (1)
+- [为所有文化翻译可见对象名称](xref:kb.bpa-translate-visible-names) (1)
+- [为所有文化翻译层次结构级别名称](xref:kb.bpa-translate-hierarchy-levels) (1)
+- [为所有文化翻译透视名称](xref:kb.bpa-translate-perspectives) (1)
+
+### 治理规则
+- [对 Power BI 模型使用最新兼容级别](xref:kb.bpa-powerbi-latest-compatibility) (3)
+
+### 安全规则
+- [行级和对象级安全性需要读取权限](xref:kb.bpa-role-security-not-enforced) (3)
+- [Power BI 角色必须具有读取权限](xref:kb.bpa-powerbi-role-read-permission) (3)
+- [没有安全权限的角色覆盖有安全权限的角色](xref:kb.bpa-role-unrestricted-read) (2)
+- [避免成员同时具有 RLS 角色和 OLS 角色](xref:kb.bpa-role-mixed-rls-ols-members) (3)
+
+安全规则没有自动修复。
 
 ## 使用内置规则和自定义规则
 
@@ -166,11 +185,9 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。这些规则覆盖语�
 ### 内置规则未显示
 
 如果 BPA 窗口中未显示内置规则：
-
-1. 请确认你使用的是 Tabular Editor 3.24.0 或更高版本
-2. 确认已在 **工具** > **偏好** > **Best Practice Analyzer** 中启用内置规则
-3. 如果你刚更改了偏好，重启 Tabular Editor
-4. 确认你的许可证处于激活状态
+1. 确认在**工具 > 偏好 > Tabular Editor > 其他**中已选中**启用内置最佳做法规则**
+2. 如果你刚更改了偏好，重启 Tabular Editor
+3. 确认你的许可证处于激活状态
 
 ### 无法修改内置规则
 
@@ -182,8 +199,7 @@ Tabular Editor 3 包含 28 条内置最佳实践规则。这些规则覆盖语�
 
 ## 兼容性
 
-- 需要 Tabular Editor 3.24.0 或更高版本
-- 适用于所有兼容级别（1200+）
+内置规则适用于兼容级别为 1200 或更高的模型。某些规则需要更高的级别：同时具有行级安全角色和对象级安全角色的成员的规则需要 1400，用户定义函数的两条规则需要 1702。每篇知识库文章都说明了规则的兼容级别。
 
 ## 下一步
 

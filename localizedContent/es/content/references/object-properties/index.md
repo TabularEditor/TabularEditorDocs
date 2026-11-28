@@ -2,7 +2,7 @@
 uid: object-properties
 title: Referencia de propiedades de los objetos
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ SUMMARY: Reference for every property that Tabular Editor shows in the Propertie
 
 Todos los objetos de un modelo semántico, como una tabla, una columna o una medida, tienen un conjunto de propiedades. Estas propiedades proceden del Tabular Object Model (TOM), el modelo de objetos que Analysis Services, Power BI y Fabric usan para definir modelos semánticos. La @properties-view las muestra y los C# Scripts las leen y las escriben mediante el @api-index.
 
-Esta referencia describe cada propiedad que muestra la vista de propiedades. Cuando Tabular Editor incluye una funcionalidad para una propiedad, como un editor, una regla de Best Practice Analyzer (BPA) o un C# Script, la entrada incluye un enlace a ella.
+Esta referencia describe cada propiedad que muestra la cuadrícula de propiedades de la vista Propiedades. Con la vista previa pública de la **Vista de propiedades básicas** activada, la cuadrícula es la pestaña **Avanzado**, y la pestaña **Básico** muestra un subconjunto de las propiedades en forma de formulario. Cuando Tabular Editor tiene una función para una propiedad, como un editor, una regla del Best Practice Analyzer (BPA) o un C# Script, la entrada enlaza con ella.
 
 Para cambiar una propiedad, selecciona uno o varios objetos en la @tom-explorer-view y edita el valor en la vista de propiedades. Cuando seleccionas varios objetos, el nuevo valor se aplica a todos ellos. Consulta @editing-properties.
 
@@ -52,9 +52,9 @@ Para cambiar una propiedad, selecciona uno o varios objetos en la @tom-explorer-
 | @object-properties-calendars             | Calendario, grupo de columnas relacionadas con el tiempo, asociación de columnas de unidad de tiempo                                       |
 | @object-properties-functions             | Función definida por el usuario, conjunto                                                                                                  |
 
-Cada página tiene una sección para cada objeto. La sección comienza con enlaces a las propiedades comunes del objeto y, a continuación, incluye una entrada por cada propiedad. Dentro de cada objeto, las propiedades se enumeran por categoría, en el orden en que la vista de propiedades las muestra cuando se selecciona **Categorizado**. Las categorías son:
+Cada página tiene una sección por objeto. La sección comienza con enlaces a las propiedades comunes del objeto, seguidos de una entrada por propiedad. Dentro de cada objeto, las propiedades se enumeran por categoría, en el orden en que la cuadrícula de propiedades las muestra cuando se selecciona **Categorizadas**. Las categorías son:
 
-- **Básico**: las propiedades que se modifican con más frecuencia, como el nombre, la descripción y la cadena de formato.
+- **General**: las propiedades que cambia con más frecuencia, como el nombre, la descripción y la cadena de formato.
 - **Metadatos**: información sobre el objeto, como el tipo de objeto o los mensajes de error. La mayoría de estas propiedades son de solo lectura.
 - **Opciones**: propiedades que cambian el comportamiento del objeto, como las expresiones, la agregación o el orden de clasificación.
 - **Traducciones, Perspectivas, Seguridad**: traducciones por configuración regional, pertenencia a perspectivas y configuración de seguridad por rol.
@@ -71,8 +71,9 @@ El nombre TOM es el nombre que usas en un C# Script. Para algunas propiedades, e
 Cuando se aplican, estas partes van después de la categoría, en este orden:
 
 - **solo lectura**: no se puede cambiar el valor.
-- **nivel de compatibilidad NNNN+**: el nivel de compatibilidad mínimo del modelo, por ejemplo `nivel de compatibilidad 1540+`.
+- **nivel de compatibilidad NNNN+**: el nivel de compatibilidad mínimo del modelo, por ejemplo `compatibility level 1540+`.
 - un marcador para una propiedad que añade Tabular Editor. Consulta [Propiedades que añade Tabular Editor](#properties-that-tabular-editor-adds).
+- **Básica**: la propiedad es una propiedad básica. Consulta [Propiedades básicas](#basic-properties).
 
 Por ejemplo, la entrada para la etiqueta de linaje empieza así:
 
@@ -86,6 +87,12 @@ La vista de propiedades oculta las propiedades que no se aplican al modelo actua
 - el nivel de compatibilidad del modelo. Muchas propiedades requieren un nivel mínimo; por ejemplo, `LineageTag` requiere 1540 o superior. Para ver o cambiar el nivel de compatibilidad, selecciona el modelo y expande `Database` en la vista de propiedades.
 - el modo de compatibilidad del modelo. Algunas propiedades existen solo para modelos de Power BI y Fabric, o solo para modelos de Analysis Services.
 - el estado del objeto. Algunas propiedades solo aparecen cuando otra propiedad tiene un valor determinado. Por ejemplo, las propiedades de una política de actualización solo aparecen cuando la tabla tiene una configurada.
+
+## Propiedades básicas
+
+Las propiedades básicas son las propiedades que necesitan la mayoría de los modelos, como el nombre de un objeto, la cadena de formato de una medida y la dirección del filtro cruzado de una relación. Las otras propiedades son avanzadas.
+
+La línea situada debajo del encabezado de una propiedad básica termina con **Básica**. En el caso de una propiedad común, como `Name` o `Description`, el marcador se encuentra en la lista **Propiedades comunes** de cada objeto, ya que las propiedades que son básicas dependen del tipo de objeto.
 
 ## Propiedades que agrega Tabular Editor
 

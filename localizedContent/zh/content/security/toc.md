@@ -1,11 +1,8 @@
 # @security-privacy
+# @ai-compliance
 
 # 法律
-
-## @te3-eula
-
-## @third-party-notices
-
+## @terms
+## @第三方声明
 ## @privacy-policy
-
 ## @gdpr-delete

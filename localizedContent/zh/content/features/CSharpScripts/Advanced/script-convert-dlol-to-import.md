@@ -2,11 +2,12 @@
 uid: script-convert-dlol-to-import
 title: 将 OneLake 上的 Direct Lake 表转换为导入模式
 author: Morten Lønskov
-updated: 2026-10-12
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
-      full: true
+      partial: true
+      note: "Requires a Roslyn compiler"
     - product: Tabular Editor 3
       full: true
 ---
@@ -25,9 +26,13 @@ applies_to:
 
 ## 脚本
 
+> [!NOTE]
+> 在 Tabular Editor 2 中，此脚本需要 Roslyn 编译器。请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。
+
 ### 将 OneLake 上的 Direct Lake 表转换为导入模式
 
 ```csharp
+#r "System.Drawing"
 // ===================================================================================
 // Convert Direct Lake on OneLake tables back to Import mode
 // ----------------------------------------

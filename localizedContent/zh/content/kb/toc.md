@@ -55,6 +55,10 @@
 ## @kb.bpa-powerbi-latest-compatibility
 
 ## @kb.bpa-udf-use-compound-names
+## @kb.bpa-role-security-not-enforced
+## @kb.bpa-powerbi-role-read-permission
+## @kb.bpa-role-unrestricted-read
+## @kb.bpa-role-mixed-rls-ols-members
 
 # 代码操作
 

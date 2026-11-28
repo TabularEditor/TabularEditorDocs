@@ -1,8 +1,8 @@
 ---
-uid: object-properties-medidas
+uid: object-properties-measures
 title: Propiedades de las medidas y de los KPI
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of measures and KPIs.
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
 
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
+
 En esta página se describen las propiedades de las medidas y de los KPI vinculados a ellas. Cada entrada indica el nombre de la propiedad en el Tabular Object Model (TOM), su tipo y su categoría. Para las propiedades que comparten la mayoría de los objetos, consulta @object-properties-common.
 
 ## Medida
@@ -33,10 +35,10 @@ Una medida es una expresión DAX con nombre que se evalúa en el contexto de fil
 
 ### Propiedades comunes
 
-- [Nombre](xref:object-properties-common#name)
-- [Descripción](xref:object-properties-common#description)
-- [Carpeta de visualización](xref:object-properties-common#display-folder)
-- [Oculto](xref:object-properties-common#hidden)
+- [Nombre](xref:object-properties-common#name) · **Básico**
+- [Descripción](xref:object-properties-common#description) · **Básica**
+- [Carpeta de visualización](xref:object-properties-common#display-folder) · **Básica**
+- [Oculto](xref:object-properties-common#hidden) · **Básico**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Propiedades modificadas](xref:object-properties-common#changed-properties)
@@ -53,8 +55,7 @@ Una medida es una expresión DAX con nombre que se evalúa en el contexto de fil
 - [Mostrado en la perspectiva](xref:object-properties-common#shown-in-perspective)
 
 ### Cadena de formato
-
-`FormatString` · string · Básico
+`FormatString` · cadena · General · **Básico**
 
 El formato que aplican las herramientas cliente cuando muestran el valor de la medida, por ejemplo `#,0.00`, `0.0%` o `yyyy-mm-dd`. La sintaxis es la misma que la de la función DAX [FORMAT](https://dax.guide/format). Las consultas DAX devuelven el valor sin formato. Para elegir el formato en función del contexto de filtro, establece `FormatStringExpression`.
 
@@ -120,7 +121,7 @@ Para agregar un KPI en Tabular Editor 3, haz clic con el botón derecho en una m
 
 ### Propiedades comunes
 
-- [Descripción](xref:object-properties-common#description)
+- [Descripción](xref:object-properties-common#description) · **Básica**
 - [Anotaciones](xref:object-properties-common#annotations)
 - [Propiedades extendidas](xref:object-properties-common#extended-properties)
 - [Tipo de objeto](xref:object-properties-common#object-type)
@@ -144,14 +145,12 @@ La medida a la que pertenece este KPI. Los C# Scripts la usan para obtener la me
 Una expresión DAX que devuelve el objetivo de la medida; por ejemplo, un número fijo como `1000000`, otra medida como `[Sales Budget]` o un cálculo.
 
 ### Cadena de formato del objetivo
-
-`TargetFormatString` · string · Opciones
+`TargetFormatString` · cadena · Opciones · **Básico**
 
 La cadena de formato del valor objetivo, con la misma sintaxis que `FormatString` en una medida.
 
 ### Descripción del objetivo
-
-`TargetDescription` · string · Opciones
+`TargetDescription` · cadena · Opciones · **Básico**
 
 Una descripción del objetivo, que se muestra a los usuarios en las herramientas cliente que lo admiten.
 
@@ -168,8 +167,7 @@ RETURN
 ```
 
 ### Gráfico de estado
-
-`StatusGraphic` · string · Opciones
+`StatusGraphic` · cadena · Opciones · **Básico**
 
 El conjunto de iconos que las herramientas cliente usan para mostrar el estado; se especifica como un nombre que la herramienta cliente reconozca, por ejemplo `Traffic Light` o `Shapes`.
 
@@ -189,8 +187,7 @@ Excel solo reconoce algunos de estos nombres. En una tabla dinámica de Excel, e
 Todos los demás nombres, incluidos `Shapes`, `Thermometer`, `Smiley`, `Cylinder` y los nombres que Excel no reconoce, muestran un simple círculo de color.
 
 ### Descripción del estado
-
-`StatusDescription` · cadena · Opciones
+`StatusDescription` · cadena · Opciones · **Básico**
 
 Una descripción del estado, que se muestra a los usuarios en las herramientas de cliente compatibles.
 
@@ -201,15 +198,13 @@ Una descripción del estado, que se muestra a los usuarios en las herramientas d
 Una expresión DAX que devuelve un número entre `-1` y `1` que muestra si la medida empeora (`-1`), se mantiene igual (`0`) o mejora (`1`) con el tiempo, por ejemplo, en comparación con el periodo anterior.
 
 ### Gráfico de tendencia
-
-`TrendGraphic` · cadena · Opciones
+`TrendGraphic` · cadena · Opciones · **Básico**
 
 El conjunto de iconos que las herramientas cliente usan para mostrar la tendencia, por ejemplo `Standard Arrow`, expresado como un nombre que la herramienta cliente reconoce. En Tabular Editor 3, selecciónalo de la misma lista de nombres que `StatusGraphic`, o escribe cualquier otro valor.
 
 En Excel, la mayoría de los nombres muestran una flecha de color; `Standard Arrow` muestra una flecha gris y `Status Arrow - Descending` muestra una flecha que apunta hacia abajo cuando la tendencia es buena. Algunos nombres, como `Cylinder`, `Smiley Face` y `Traffic Light - Single`, muestran un círculo.
 
 ### Descripción de la tendencia
-
-`TrendDescription` · cadena · Opciones
+`TrendDescription` · cadena · Opciones · **Básico**
 
 Una descripción de la tendencia, que se muestra a los usuarios en las herramientas de cliente compatibles.

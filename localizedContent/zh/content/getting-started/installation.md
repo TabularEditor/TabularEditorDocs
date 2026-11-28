@@ -2,7 +2,7 @@
 uid: installation-activation-basic
 title: 高级安装与激活
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -113,10 +113,10 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart /l*v C:\Temp\TE3
 | MSI 功能        | 在安装程序中显示为        | 说明                                                    | 默认安装                                                           |
 | ------------- | ---------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
 | `MainFeature` | Tabular Editor 3 | Tabular Editor 3 核心应用程序                               | 是（必需）                                                          |
-| `AIAssistant` | AI 功能            | @ai-assistant 和 @mcp-server | 是，自 3.27.0 起。较早版本仅在选中该组件时才会安装它 |
+| `AIAssistant` | AI 功能 | @ai-assistant 和 @mcp-server | 是 |
 
 > [!IMPORTANT]
-> 从 3.27.0 开始，除非排除该组件，否则全新安装将包含 **AI 功能** 组件。如果贵组织不允许使用 AI Assistant 或 MCP 服务器，请排除此组件，并按下文所述设置 `DisableAi` 策略。
+> 新安装包含 **AI 功能** 组件，除非您将其排除在外。如果您的组织不允许使用 AI 助手或 MCP 服务器，请排除该组件，并按以下所述设置 `DisableAi` 策略。
 
 ### 部署时不包含 AI 功能
 
@@ -141,23 +141,30 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssista
 
 ### 升级与 AI 功能组件
 
-在现有安装上安装同一组件的较新版本时，安装程序会保留该计算机当前的功能选择。这同样适用于交互式安装和静默安装。在 3.27.0 之前部署且不含 AI 功能的计算机，升级后仍然不含这些功能；已选择 AI 功能的计算机则会保留这些功能。
+从 v27.1.1 或更早版本升级时，无论先前安装了哪些组件，都会选择默认组件，包括**AI 功能**。这适用于交互式升级以及命令行未指定组件的无人值守升级。在安装过程中取消选择**AI 功能**，以不安装该组件。从更高版本升级时，无论是在交互式安装还是在静默安装中，都会保留电脑现有的功能选择。
 
-在以下情况下，安装程序会应用默认选择或命令行中的选择：
+要在无人值守升级中使计算机不使用 AI 功能，请设置[`DisableAi` 策略](#enforcing-the-decision-with-the-disableai-policy)或传递 `ADDLOCAL=MainFeature`，如[不使用 AI 功能进行部署](#deploying-without-the-ai-features)所示。
+
+在这些情况下，安装程序将应用命令行上的选择或默认选择：
 
 | 情况                                                                                    | 结果                                                                                           |
 | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | 命令行设置了 `ADDLOCAL`、`REMOVE` 或其他功能属性                                                    | 命令行决定所选内容。 `ADDLOCAL=MainFeature` 会从已安装 AI 功能的计算机中移除这些功能，而 `ADDLOCAL=ALL` 会在未安装这些功能的计算机上安装它们 |
 | 部署会先卸载旧版本，再安装新版本，例如将 Intune 的 supersedence 设置为“卸载”                                    | 该安装会被视为全新安装，除非命令行将其排除，否则会包含 AI 功能                                                            |
-| 该组件针对的运行时与已安装的组件不同，例如在已安装 .NET 8 组件的计算机上部署 .NET 10 组件 | .NET 8 和 .NET 10 组件是两个独立的产品。如果是全新安装，则默认包含 AI 功能，除非通过命令行将其排除  |
 
 无论哪种情况，`DisableAi` 策略都会覆盖该选择。
+
+### 在 .NET 8 和 .NET 10 包之间切换
+
+.NET 8 和 .NET 10 包相互替换。当您在一台已安装相同或更早版本另一版本的计算机上安装其中一个版本时，安装程序会在安装任何文件之前先卸载另一版本，并保留该版本的Feature选择。如果一台计算机上同时安装了这两个版本，则在下一次安装后，该计算机上将只保留一个安装，并且**设置 > 应用 > 已安装的应用**中将列出一个**Tabular Editor 3**。
+
+如果安装的另一个版本是较新版本，则安装将停止，并显示一条消息。请先卸载较新版本，然后再次运行安装程序。
 
 ### 通过 `DisableAi` 策略强制执行此决定
 
 运行安装程序的用户会使用默认选择，其中包含 AI 功能。要让这台计算机上的每次安装都关闭 AI 功能，请在 `HKEY_LOCAL_MACHINE\Software\Policies\Tabular Editor ApS\TE3` 下将 `DisableAi` @policies 设为 `1`。 Tabular Editor 3 会在启动时读取该策略，并禁用 AI 助手和 MCP 服务器。
 
-从 3.27.0 开始，安装程序也会读取该策略：
+安装程序也会读取该策略：
 
 - 全新安装不会安装 AI 功能组件，安装程序也不会显示它
 - 升级会从已安装该组件的计算机上移除它
@@ -169,7 +176,7 @@ msiexec /i TabularEditor.<version>.x64.Net10.msi /qn /norestart REMOVE=AIAssista
 
 你也可以使用 `/package` 替代 `/i`。将 `<version>` 替换为实际的版本字符串。
 
-MSI 组件的命名格式为 `TabularEditor.<version>`.<architecture>.<runtime>.msi`，例如 `TabularEditor.3.27.0.x64.Net10.msi`或`TabularEditor.3.27.0.ARM64.Net8.msi\`。选择适合目标计算机的体系结构和运行时；参见 @system-requirements。 MSI 不会安装 .NET Desktop Runtime，所以先部署它。
+MSI 组件的命名格式为 `TabularEditor.<version>.<architecture>.<runtime>.msi`.<architecture>.<runtime>.msi`TabularEditor.3.27.0.x64.Net10.msi`TabularEditor.3.27.0.x64.Net10.msi`TabularEditor.3.27.0.ARM64.Net8.msi`TabularEditor.3.27.0.ARM64.Net8.msi\`。选择适合目标计算机的体系结构和运行时；参见 @system-requirements。 MSI 不会安装 .NET Desktop Runtime，所以先部署它。
 
 可用的 MSI 命令行选项详见 Microsoft 官方文档：
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)

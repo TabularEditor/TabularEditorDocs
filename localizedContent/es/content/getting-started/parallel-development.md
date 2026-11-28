@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Habilitar el desarrollo en paralelo con Git y Guardar en carpeta
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -57,7 +57,7 @@ Como se mencionó anteriormente, los metadatos de un modelo tabular se almacenan
 
 Los nombres de cada uno de los archivos que representan objetos TOM individuales se basan simplemente en la propiedad `Name` del propio objeto. El nombre del archivo "raíz" es **Database.json**, por eso a veces nos referimos al formato de almacenamiento basado en carpetas simplemente como **Database.json**.
 
-Tabular Editor separa las [funciones DAX definidas por el usuario](xref:udfs) de la misma manera y las coloca en una carpeta `functions` en la raíz del modelo. Activa esta opción en cuanto haya más de una persona escribiendo funciones: hasta que lo hagas, todas las funciones estarán dentro de **Database.json**. Consulta [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs).
+Tabular Editor separa las [funciones definidas por el usuario de DAX](xref:udfs) de la misma manera, en una carpeta `functions` en la raíz del modelo. Active esta opción tan pronto como más de una persona escriba funciones: hasta que lo haga, todas las funciones estarán dentro de **Database.json**. Consulte [Guardar en carpeta](xref:save-to-folder#user-defined-functions-udfs).
 
 ## Ventajas de usar Guardar en carpeta
 
@@ -73,16 +73,17 @@ Tal y como está ahora, la única desventaja de almacenar los metadatos del mode
 
 ## Configurar Guardar en carpeta
 
-Una misma solución rara vez encaja en todos los casos. Tabular Editor tiene varias opciones de configuración que afectan a cómo se serializa un modelo en la estructura de carpetas. En Tabular Editor 3, puedes encontrar la configuración general en **Herramientas > Preferencia > Guardar en carpeta**. Una vez cargado un modelo en Tabular Editor, puedes encontrar la configuración específica que se aplica a ese modelo en **Modelo > Opciones de serialización...**. La configuración que se aplica a un modelo específico se almacena como una anotación dentro del propio modelo, para garantizar que se use la misma configuración independientemente del usuario que cargue y guarde el modelo.
+Rara vez hay una única solución que sirva para todos. Tabular Editor tiene algunas opciones de configuración que afectan a la forma en que un modelo se serializa en la estructura de carpetas. En Tabular Editor 3, puedes encontrar los ajustes generales en **Herramientas > Preferencias > Formatos de archivo**. La página **General** contiene los ajustes compartidos entre formatos, la página **Guardar en carpeta** establece el formato en el que escribe **Archivo > Guardar en carpeta** (TMDL o Database.json), y sus páginas secundarias contienen los ajustes para el formato Database.json (**Serialización JSON**) y para TMDL (**Serialización TMDL**). Una vez que se carga un modelo en Tabular Editor, puedes encontrar los ajustes específicos que se aplican a ese modelo en **Modelo > Opciones de serialización...**. Los ajustes que se aplican a un modelo específico se almacenan como una anotación dentro del propio modelo, para garantizar que se utilicen los mismos ajustes independientemente del usuario que cargue y guarde el modelo.
 
-![Configuración de Guardar en carpeta](~/content/assets/images/configuring-save-to-folder.png)
+![La página de preferencias de serialización JSON en Formatos de archivo > Guardar en carpeta](~/content/assets/images/configuring-save-to-folder.png)
 
 ### Configuración de serialización
 
-- **Usar la configuración recomendada**: (Predeterminado: activado) Cuando esta opción está activada, Tabular Editor usa la configuración predeterminada la primera vez que guarda un modelo como una estructura de carpetas.
-- **Serializar relaciones en las tablas de origen**: (Predeterminado: desactivado) Cuando esta opción está activada, Tabular Editor almacena las relaciones como una anotación en la tabla del "lado de origen" (normalmente, la tabla de hechos) de la relación, en lugar de almacenarlas a nivel de modelo. Esto resulta útil en las primeras fases de desarrollo de un modelo, cuando los nombres de las tablas aún cambian con bastante frecuencia.
-- **Serializar información de pertenencia a perspectivas en los objetos**: (Predeterminado: desactivado) Cuando esta opción está activada, Tabular Editor almacena la información sobre a qué perspectivas pertenece un objeto (tabla, columna, jerarquía, medida) como una anotación en ese objeto, en lugar de almacenar la información a nivel de perspectiva. Esto resulta útil cuando los nombres de los objetos pueden cambiar, pero los nombres de las perspectivas ya están finalizados.
-- **Serializar traducciones en los objetos traducidos**: (Predeterminado: desactivado) Cuando esta opción está activada, Tabular Editor almacena las traducciones de metadatos como una anotación en cada objeto traducible (tabla, columna, jerarquía, nivel, medida, etc.), en lugar de almacenarlas a nivel de configuración regional. Esto resulta útil cuando los nombres de los objetos pueden cambiar.
+En Tabular Editor 3, estos ajustes se encuentran en la página **Serialización JSON** y se aplican al formato Database.json. Los valores predeterminados que se indican son los de Tabular Editor 3.
+
+- **Serializar relaciones en tablas de origen**: (Predeterminado: marcado) Cuando esto está marcado, Tabular Editor almacena las relaciones como una anotación en la tabla del «lado de origen» (normalmente la tabla de hechos) de la relación, en lugar de almacenarlas a nivel de modelo. Esto es útil en las primeras fases de desarrollo de un modelo, cuando los nombres de las tablas aún están sujetos a cambios con bastante frecuencia.
+- **Serializar información de pertenencia a perspectivas en objetos**: (Predeterminado: marcado) Cuando esto está marcado, Tabular Editor almacena información sobre a qué perspectivas pertenece un objeto (tabla, columna, jerarquía, medida) como una anotación en ese objeto, en lugar de almacenar la información a nivel de perspectiva. Esto resulta útil cuando los nombres de los objetos están sujetos a cambios, pero los nombres de las perspectivas ya están definidos.
+- **Serializar traducciones en objetos traducidos**: (Predeterminado: marcado) Cuando esto está marcado, Tabular Editor almacena las traducciones de metadatos como una anotación en cada objeto traducible (tabla, columna, jerarquía, nivel, medida, etc.), en lugar de almacenar las traducciones a nivel de cultura. Esto resulta útil cuando los nombres de los objetos están sujetos a cambios.
 - **Anteponer números secuenciales a los nombres de archivo**: (Predeterminado: desactivado) En los casos en los que quieras conservar el orden de metadatos de los miembros del array (como el orden de las columnas en una tabla), puedes activar esta opción para que Tabular Editor anteponga a los nombres de archivo un número entero secuencial basado en el índice del objeto en el array. Esto resulta útil si usas la funcionalidad de drillthrough predeterminada de Excel y quieres que [las columnas aparezcan en un orden concreto en el drillthrough](https://github.com/TabularEditor/TabularEditor/issues/46#issuecomment-297932090).
 
 > [!NOTE]
@@ -94,13 +95,15 @@ La lista de verificación te permite especificar qué objetos se serializarán c
 
 En la mayoría de los casos, se recomienda serializar siempre los objetos al nivel más bajo. Sin embargo, puede haber casos especiales en los que no se necesite este nivel de detalle.
 
+En el caso de las carpetas TMDL, Tabular Editor 3 Edición Enterprise también puede almacenar cada columna, medida, partición y jerarquía, así como cada función, expresión compartida, origen de datos y relación, en su propio archivo. Consulte @tmdl-per-object-serialization.
+
 ## Power BI y control de versiones
 
 Como se mencionó anteriormente, integrar un archivo de Report de Power BI (.pbix) o una plantilla de Power BI (.pbit) en el control de versiones no permite el desarrollo en paralelo ni la resolución de conflictos, ya que estos archivos usan un formato binario. Al mismo tiempo, debemos ser conscientes de las limitaciones actuales al usar Tabular Editor (u otras herramientas de terceros) con Power BI Desktop o con el punto de conexión XMLA de Power BI, respectivamente.
 
 Estas limitaciones son:
 
-- Al usar Tabular Editor como herramienta externa para Power BI Desktop, [no se admiten todas las operaciones de modelado](xref:desktop-limitations).
+- Cuando Tabular Editor es una herramienta externa para una versión de Power BI Desktop anterior a junio de 2025, no todas las operaciones de modelado son compatibles. Consulte @desktop-integration.
 - Tabular Editor puede extraer metadatos del modelo desde un archivo .pbix cargado en Power BI Desktop o directamente desde un archivo .pbit en disco, pero **no existe ninguna forma compatible de actualizar los metadatos del modelo en un archivo .pbix o .pbit fuera de Power BI Desktop**.
 - Una vez que se realiza algún cambio en un Dataset de Power BI a través del punto de conexión XMLA, [ese Dataset ya no se puede descargar como un archivo .pbix](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
 

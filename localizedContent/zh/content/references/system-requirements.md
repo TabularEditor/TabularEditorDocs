@@ -1,8 +1,8 @@
----
+﻿---
 uid: system-requirements
 title: 系统要求
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 
 # 系统要求
 
-Tabular Editor 3 是一款 Windows 桌面应用程序。从 3.27.0 版本起，它将针对两种 .NET 运行时、两种处理器架构，并以三种组件格式发布。
+Tabular Editor 3 是一款 Windows 桌面应用程序，基于两种 .NET 运行时发布，适用于两种处理器架构，提供三种软件包格式。
 
 ## 操作系统
 
@@ -34,15 +34,15 @@ Tabular Editor 3 是一款 Windows 桌面应用程序。从 3.27.0 版本起，�
 | .NET 10 _（推荐）_ | x64、ARM64 | `.exe` 安装程序、`.msi`、便携式 `.zip` |
 | .NET 8         | x64、ARM64 | `.exe` 安装程序、`.msi`、便携式 `.zip` |
 
-.NET 10 和 .NET 8 的构建&#x5728;_&#x529F;能上完全一致_。两者功能完全对等，没有一方有而另一方缺的内容，而且可以同时安装。
+.NET 10 和 .NET 8 版本在*功能上是相同的*。一个版本中存在的功能在另一个版本中也存在。使用 `.exe` 或 `.msi` 安装程序安装一个版本会替换另一个版本。请参阅[在 .NET 8 和 .NET 10 包之间切换](xref:installation-activation-basic#switching-between-the-net-8-and-net-10-packages)。
 
-从 3.23.0 版本开始，ARM64 构建为原生版本。
+ARM64 版本是原生版本。
 
 ## .NET 运行时
 
 | 构建          | 所需内容                                                                                                                                                                                                                   |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.exe` 安装程序 | 对应的 [.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet)：[10](https://dotnet.microsoft.com/download/dotnet/10.0) 或 [8](https://dotnet.microsoft.com/download/dotnet/8.0)。安装程序会为你下载并安装它 |
+| `.exe` 安装程序 | 匹配的[.NET Desktop Runtime](https://dotnet.microsoft.com/download/dotnet)：[10](https://dotnet.microsoft.com/download/dotnet/10.0) 或 [8](https://dotnet.microsoft.com/download/dotnet/8.0)。如果运行时缺失或版本早于安装程序所需的版本，安装程序将下载并安装运行时，这需要联网。如果已安装当前运行时，安装程序无需联网即可运行 |
 | `.msi`      | 需要预先安装匹配的 .NET 桌面运行时。 MSI _不&#x4F1A;_&#x5C06;其一并包含，这也是它适合无人值守部署的原因                                                                                                                                     |
 | 便携版 `.zip`  | 无需任何额外组件。它是自包含的                                                                                                                                                                                                        |
 

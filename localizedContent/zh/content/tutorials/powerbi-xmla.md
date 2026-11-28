@@ -2,7 +2,7 @@
 uid: powerbi-xmla
 title: 通过 XMLA endpoint 编辑
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: 仅适用于 Premium Per User XMLA 终结点
+          note: Premium Per User XMLA Endpoints Only
         - edition: Enterprise
           full: true
 ---
@@ -34,7 +34,8 @@ Tabular Editor 要求 XMLA endpoint 同时允许读取和写入访问。 Microso
 
 ## 限制
 
-通过 XMLA endpoint 连接到语义模型时，可编辑 [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 支持的所有 Data model 建模操作。换句话说，通过 Power BI 服务的 XMLA endpoint 编辑语义模型时，[Power BI Desktop 限制](xref:desktop-limitations) 不适用。
+通过 XMLA 端点连接到语义模型时，[Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 支持的所有数据建模操作均可进行编辑。
+
 
 ## 工作流
 

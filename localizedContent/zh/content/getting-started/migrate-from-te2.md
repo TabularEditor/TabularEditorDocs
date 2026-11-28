@@ -2,7 +2,7 @@
 uid: migrate-from-te2
 title: 从 Tabular Editor 2.x 迁移
 author: Daniel Otykier
-updated: 2026-06-10
+updated: 2026-11-23
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,13 @@ applies_to:
 ## 并行安装
 
 Tabular Editor 3 的产品代码与 Tabular Editor 2.x 不同。这意味着你可以将两个工具并排安装，而不会有问题。实际上，这两个工具会安装到不同的程序文件夹中，它们的设置也分别存放在不同的文件夹里。换句话说，Tabular Editor 2.x 与 Tabular Editor 3 之间并不适用“升级”或“降级”的说法。你可以把 Tabular Editor 3 当作一款完全不同的产品。
+
+Tabular Editor 3 启动时使用其自身的默认首选项。在已安装 Tabular Editor 2.x 的计算机上首次启动时，如果您的 Tabular Editor 2.x 序列化设置与 Tabular Editor 3 的默认设置不同，或者如果 Tabular Editor 2.x 为本地用户设置了 Best Practice Analyzer 规则，而 Tabular Editor 3 没有设置此类规则，则启动后会显示提示。提示列出了将要导入的内容：
+
+- **使用 Tabular Editor 3 设置**将保留 Tabular Editor 3 的默认设置。
+- **从 Tabular Editor 2 导入**会将列出的序列化设置和本地用户的 Best Practice Analyzer 规则复制到 Tabular Editor 3 中。
+
+该提示仅显示一次。其他 Tabular Editor 2.x 首选项不会被导入。
 
 ## 功能对比
 

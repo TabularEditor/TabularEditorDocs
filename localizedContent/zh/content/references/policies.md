@@ -1,26 +1,26 @@
 ---
-uid: 策略
+uid: policies
 title: 策略
 author: Morten Lønskov
-updated: 2026-10-14
+updated: 2026-10-23
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Tabular Editor 2 只读取旧版注册表项，并且仅应用下文标记为 TE2 的策略。"
+      note: "Tabular Editor 2 reads the legacy registry key only, and honors only the policies marked TE2 below."
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
           partial: true
-          note: "仅限常规策略"
+          note: "General policies only"
         - edition: Business
           partial: true
-          note: "仅限常规策略"
+          note: "General policies only"
         - edition: Enterprise
           full: true
     - product: Tabular Editor CLI
       partial: true
-      note: "仅适用于 Windows，且仅适用于下文标注为 CLI 的策略。"
+      note: "On Windows, and only for the policies marked CLI below."
 ---
 
 # 策略
@@ -89,6 +89,7 @@ Tabular Editor 只会在启动时读取一次策略值。更改会在下次启�
 | DisableAiChat                  | TE3           | AI 助手聊天面板不可用。其他 AI 功能（包括 MCP 服务器）不受影响。                                                                            |
 | DisableMcpServer               | TE3           | MCP 服务器不可用，因此外部代理工具无法连接到 Tabular Editor 3。 AI 助手聊天不受影响。                                                           |
 | RequireMcpAccessToken          | TE3           | 连接到 MCP 服务器的客户端必须提供 **工具 > MCP 服务器...** 对话框中显示的访问令牌，而且用户无法关闭这一要求。 |
+| RequireNativeLibrarySignatureVerification | TE3 | Tabular Editor 3 在加载代码编辑器库 `Scintilla.dll` 和 `Lexilla.dll` 之前，会先验证其 Authenticode 签名。如果计算机无法验证发布者的证书链，则代码编辑器将无法启动，并且 Tabular Editor 3 将关闭。在组策略编辑器中，此策略的名称为**要求对代码编辑器支持库进行签名验证**。|
 
 ### 在 TE CLI 中
 

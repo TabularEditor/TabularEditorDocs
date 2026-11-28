@@ -2,7 +2,7 @@
 uid: object-properties-common
 title: 通用属性
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,11 +27,12 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 
 本页所列属性适用于多种对象类型，并且在所有包含这些属性的对象上行为一致。每个条目都会列出该属性在 Tabular Object Model (TOM) 中的名称、类型和类别。各对象的专属页面都链接到这些条目。其他页面请参见 @object-properties。
 
-## 基本
+此页面上的属性对于一种对象类型可能是[基本属性](xref:object-properties#basic-properties)，但对于另一种对象类型则不是。例如，`Name` 是度量的基本属性，但不是关系的基本属性。每个对象页面上的**通用属性**列表使用**基本**标记该对象的基本属性。
+
+## 常规
 
 ### 姓名
-
-`Name` · string · 基本
+`Name` · 字符串 · 常规
 
 对象的名称。 DAX 通过名称引用表、列、度量值、层次结构和用户定义函数。名称在同级对象中必须唯一，因此两个度量值不能同名。在大多数模型中，度量值也不能与任何列同名（见 @object-properties-model 中的 `ForceUniqueNames`）。 KPI 或计算组本身没有自己的名称，而是采用其所属对象的名称。
 
@@ -40,8 +41,7 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 要一次重命名多个对象，请在 **TOM Explorer** 中选择它们，然后使用支持正则表达式的批量重命名功能。见 @duplicate-and-batch。 Best Practice Analyzer (BPA) 规则 @kb.bpa-trim-object-names 和 @kb.bpa-avoid-invalid-characters-names 会标记带有前导或尾随空格的名称，以及包含控制字符的名称。
 
 ### 说明
-
-`Description` · string · 基本
+`Description` · 字符串 · 常规
 
 用于说明对象用途的自由文本。 Power BI 会在 **数据** 窗格中将该说明显示为工具提示。 Excel 的数据透视表字段列表不显示描述。要翻译这些描述，请使用 `TranslatedDescriptions`。
 
@@ -50,16 +50,14 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 BPA 规则 @kb.bpa-visible-objects-no-description 会标记没有描述的可见对象，而 @kb.bpa-avoid-invalid-characters-descriptions 会标记包含控制字符的描述。
 
 ### 显示文件夹
+`DisplayFolder` · 字符串 · 常规
 
-`DisplayFolder` · 字符串 · 基本
-
-对象在客户端工具字段列表中显示的文件夹。反斜杠（`\\`）会创建子文件夹，例如 `Sales\\Year to date`；分号（`;`）会让对象显示在多个文件夹中，例如 `Sales;Finance`。显示文件夹不会影响 DAX 或安全性。 Tabular Editor 也会用它们在 **TOM Explorer** 中对对象进行分组。
+对象在客户端工具字段列表中显示的文件夹。反斜杠（`\`）会创建子文件夹，例如 `Sales\Year to date`；分号（`;`）会让对象显示在多个文件夹中，例如 `Sales;Finance`。显示文件夹不会影响 DAX 或安全性。 Tabular Editor 也会用它们在 **TOM Explorer** 中对对象进行分组。
 
 要连同其中的对象和子文件夹一起移动显示文件夹，在 **TOM Explorer** 中将其拖到另一个文件夹上即可。见 @drag-drop。
 
 ### 隐藏
-
-`IsHidden` · 布尔值 · 基本
+`IsHidden` · 布尔值 · 常规
 
 当值为 `true` 时，Power BI 等客户端工具会对 Report 作者隐藏该对象。该对象仍保留在模型中，DAX 表达式仍可引用它。任何能查询该模型的人也都能查询隐藏对象。要保护数据，见 @roles-and-rls。
 
@@ -109,7 +107,7 @@ DAX 用于引用该对象的完全限定名称，例如列的 `'Sales'[Amount]`�
 
 `ObjectTypeName` · 字符串 · 元数据 · 只读 · _计算所得_
 
-对象的类型，例如 `度量值`、`计算列` 或 `Table`。
+对象的类型，例如 `Measure`、`Calculated Column` 或 `Table`。
 
 ### State
 

@@ -1,8 +1,8 @@
----
+﻿---
 uid: editions
 title: Comparar ediciones
 author: Søren Toft Joensen
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ Las ediciones se diferencian en dos aspectos: **qué escenarios de modelado de d
 
 La primera diferencia entre las ediciones es qué tipos de escenarios de modelado de datos tabulares, es decir, de Data model, admiten. Para entender esta diferencia, tenga en cuenta que Analysis Services (Tabular) existe en varias “variantes”:
 
-- Power BI Desktop (asegúrate de entender las [limitaciones](xref:desktop-limitations))
+- Power BI Desktop
 - Power BI Premium a través del punto de conexión XMLA (Premium Per User, **Premium Capacity [SKUs A, EM o P]**, **Fabric Capacity [SKUs F]**)
 - SQL Server (2016+) Analysis Services (ediciones: Developer, Standard y **Enterprise**)
 - Azure Analysis Services (niveles: Developer, Basic y **Standard**)
@@ -160,7 +160,7 @@ Si intentas abrir un modelo que utiliza una o más de las restricciones de model
 Un modelo que incorpore una de estas características mientras lo editas tampoco se estropea sin avisar: se rechaza el guardado y en Mensajes se indica la característica y, si hay varias particiones, las tablas en cuestión. Se bloquea de entrada la posibilidad de agregar una perspectiva a un modelo de Analysis Services: la carpeta **Perspectives** no se muestra en el Explorador TOM y el comando para crear una no está disponible.
 
 > [!IMPORTANT]
-> Tabular Editor solo puede usarse como herramienta externa para Power BI Desktop cuando el archivo de Report de Power BI (.pbix, .pbip o .pbit) contiene un Data model (Importación, DirectQuery o compuesto). **No se admiten los Report que usan Live connection** porque estos Report no incluyen un Data model. [Más información](xref:desktop-limitations).
+> Tabular Editor solo se puede usar como herramienta externa para Power BI Desktop cuando el archivo de informe de Power BI (.pbix, .pbip o .pbit) contiene un modelo de datos (Import, DirectQuery o Composite). **No se admiten los informes que utilizan la conexión en tiempo real**, ya que estos informes no contienen un modelo de datos. Consulte @desktop-integration.
 
 ## Licencias personales vs. transferibles
 

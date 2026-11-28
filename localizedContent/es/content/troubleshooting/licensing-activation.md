@@ -2,7 +2,7 @@
 uid: licensing-activation
 title: Instalar y activar Tabular Editor 3
 author: Morten Lønskov
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,7 +52,7 @@ Tabular Editor 3 contacta con `https://api.tabulareditor.com` al iniciarse y per
 Si los avisos de activación siguen apareciendo:
 
 1. Confirma que se puede acceder a `api.tabulareditor.com` desde el equipo afectado.
-2. Configura el proxy en **Herramientas > Preferencias > Configuración de proxy**. Consulta @proxy-settings para la solución de problemas específicos del proxy, incluida la anulación en **AnalysisServices.AppSettings.json** que habilita la compatibilidad de MSAL con proxies externos.
+2. Configure los ajustes de proxy en **Herramientas > Preferencias > Tabular Editor > Ajustes de proxy**. Consulte @proxy-settings para obtener información sobre la resolución de problemas específicos de los proxies, incluida la anulación de **AnalysisServices.AppSettings.json** que habilita la compatibilidad con proxies MSAL externos.
 3. Si la red bloquea el tráfico saliente hacia el punto de conexión de activación, usa la [activación manual](#manual-activation-no-internet) que se indica a continuación.
 
 ## Activación manual (sin Internet)
@@ -127,7 +127,7 @@ Las licencias Enterprise se asignan por puesto. Para activar Tabular Editor 3 pa
 
 Tabular Editor 3 usa solicitudes web salientes para la activación del producto, la comprobación de actualizaciones, el formato de DAX y la descarga de reglas externas de mejores prácticas. Si estás detrás de un proxy:
 
-1. Configura **Herramientas > Preferencias > Configuración del proxy**. Cambia el **Tipo de proxy** entre `System` y `None`, reinicia Tabular Editor 3 y vuelve a intentar la activación.
+1. Configure **Herramientas > Preferencias > Tabular Editor > Configuración de proxy**. Cambia el **Tipo de proxy** entre `System` y `None`, reinicia Tabular Editor 3 y vuelve a intentar la activación.
 2. Si la activación sigue fallando, consulta @proxy-settings para ver diagnósticos avanzados del proxy.
 3. Si el acceso saliente a `api.tabulareditor.com` está bloqueado, usa [Activación manual](#manual-activation-no-internet).
 
@@ -136,4 +136,4 @@ Tabular Editor 3 usa solicitudes web salientes para la activación del producto,
 
 ## Comprueba que usas la versión más reciente
 
-Los errores relacionados con la activación a veces se corrigen en versiones más recientes de Tabular Editor 3. Comprueba que usas la versión más reciente antes de enviar una solicitud de soporte. Comprueba si hay actualizaciones en **Herramientas > Preferencia > Actualizaciones y comentarios**, o descarga el instalador más reciente desde la [página de descargas](xref:downloads).
+Los errores relacionados con la activación a veces se resuelven en las versiones más recientes de Tabular Editor 3. Confirma que estás usando la última versión antes de enviar una solicitud de soporte. Busque actualizaciones en **Herramientas > Preferencias > Tabular Editor > Actualizaciones y comentarios**, o descargue el instalador más reciente desde la [página de descargas](xref:downloads).

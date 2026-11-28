@@ -2,7 +2,7 @@
 uid: object-properties-calendars
 title: 日历属性
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,6 +25,8 @@ SUMMARY: Reference for the properties of calendars, time unit column association
 -->
 
 [!include[ai-assisted](../../includes/ai-assisted.partial.md)]
+
+[!include[basic-properties-legend](../../includes/basic-properties-legend.partial.md)]
 
 本页列出了日历以及构成日历的两类列组的属性。有关大多数对象共享的属性，请参见 @object-properties-common。
 
@@ -51,23 +53,21 @@ Best Practice Analyzer (BPA) 规则 @kb.bpa-date-table-exists 会标记既没有
 
 ### 通用属性
 
-- [名称](xref:object-properties-common#name)
-- [描述](xref:object-properties-common#description)
+- [名称](xref:object-properties-common#name) · **基本**
+- [描述](xref:object-properties-common#description) · **基本**
 - [对象类型](xref:object-properties-common#object-type)
 - [Lineage tag](xref:object-properties-common#lineage-tag)
 - [Source Lineage tag](xref:object-properties-common#source-lineage-tag)
 
 ### 日历列组
-
-`CalendarColumnGroups` · CalendarColumnGroupCollection · 基本 · 只读
+`CalendarColumnGroups` · CalendarColumnGroupCollection · 常规 · 只读
 
 组成该日历的列组，包括其时间单位列关联和与时间相关的列组。这是该集合的 Tabular Object Model (TOM) 名称。在 **属性视图** 中，该集合显示为 `ColumnMappings`。在 C# Script 中，你可以使用这两个名称中的任意一个。
 
 ### 列映射
+`ColumnMappings` · CalendarColumnGroupCollection · 常规 · 只读 · *快捷方式指向* **日历列组** · **基本**
 
-`ColumnMappings` · CalendarColumnGroupCollection · 基本 · 只读 · _快捷方式：指向_ **日历列组**
-
-与 `CalendarColumnGroups` 是同一个集合，只是用了 **属性视图** 中显示的名称。你可以添加、更改和删除集合中的组。在 Tabular Editor 3 中，在 @tom-explorer-view 里双击日历，即可打开 **日历编辑器**。属性旁的 **...** 按钮，以及在 **TOM Explorer** 中右键单击日历后菜单里的 **编辑列映射...**，都会打开集合编辑器。
+与 `CalendarColumnGroups` 相同的集合，名称为**属性视图**中显示的名称。您可以添加、更改和移除集合中的组。在 Tabular Editor 3 中，双击 @tom-explorer-view 中的日历，以打开**日历编辑器**。属性的 **...** 按钮和 **TOM 资源管理器**中日历的右键菜单上的 **编辑列映射...** 均可打开集合编辑器。“属性”视图的“基本”选项卡上的“列映射”部分列出了映射并打开“日历编辑器”。请参阅[日历列映射](xref:properties-view#calendar-column-mappings)。
 
 ## 时间单位列关联
 
@@ -80,8 +80,7 @@ Best Practice Analyzer (BPA) 规则 @kb.bpa-date-table-exists 会标记既没有
 - [对象类型](xref:object-properties-common#object-type)
 
 ### 主列
-
-`PrimaryColumn` · 列 · 基本
+`PrimaryColumn` · 列 · 常规
 
 包含此时间单位值的列。其值必须与该时间单位匹配：映射到 **Month** 的列用于标识包含年份的月份，例如 `January 2025`；而映射到 **Month of Year** 的列仅标识月份本身，例如 `January` 或 `1`。
 
@@ -90,29 +89,28 @@ Best Practice Analyzer (BPA) 规则 @kb.bpa-date-table-exists 会标记既没有
 若要在映射列时查看其值，请打开日期表的 @table-preview，并将其停靠在 **日历编辑器** 旁边。
 
 ### 时间单位
-
-`TimeUnit` · 时间单位 · 基本
+`TimeUnit` · TimeUnit · 常规
 
 主列所表示的时间单位。_完整_ 的时间单位可单独标识一个时间段。_部分_ 的时间单位只能与更大的时间单位一起才能标识一个时间段，而日历也必须映射该更大的时间单位。例如，**Month of Year** 需要 **年**。
 
 | 值                   | 类型                 | 含义              | 示例值                  |
 | ------------------- | ------------------ | --------------- | -------------------- |
-| `年`                 | 完整                 | 年份。             | `2024`、`FY2025`      |
+| `Year`                 | 完整                 | 年份。             | `2024`、`FY2025`      |
 | `Semester`          | 完整                 | 包含年份的半年。        | `H1 2024`            |
-| `SemesterOfYear`    | 部分，需要 `年`          | 年内的半年。          | `H1`、`1`             |
-| `季度`                | 完整                 | 包含年份的季度。        | `Q1 2024`            |
+| `SemesterOfYear`    | 部分，需要 `Year`          | 年内的半年。          | `H1`、`1`             |
+| `Quarter`                | 完整                 | 包含年份的季度。        | `Q1 2024`            |
 | `QuarterOfYear`     | 不完整，需要搭配 `Year`    | 一年中的季度。         | `Q1`, `1`            |
 | `QuarterOfSemester` | 不完整，需搭配 `Semester` | 半年中的季度。         | `1`, `2`             |
-| `月`                 | 完整                 | 包含年份的月份。        | `2024年一月`, `2024-01` |
-| `MonthOfYear`       | 不完整，需搭配 `Year`     | 一年中的月份。         | `一月`、`1`             |
+| `Month`                 | 完整                 | 包含年份的月份。        | `January 2024`, `2024-01` |
+| `MonthOfYear`       | 不完整，需搭配 `Year`     | 一年中的月份。         | `January`、`1`             |
 | `MonthOfSemester`   | 不完整，需搭配 `Semester` | 半年中的月份。         | 从 `1` 到 `6`          |
 | `MonthOfQuarter`    | 部分，需要 `Quarter`    | 季度中的第几个月。       | `1` 到 `3`            |
-| `周`                 | 完整                 | 包含年份的周次。        | `W50-2023`           |
-| `年内周次`              | 部分，需要 `Year`       | 一年中的第几周。        | `W50`、`50`           |
-| `半年内周次`             | 部分，需要 `Semester`   | 半年中的第几周。        | `1` 到 `27`           |
-| `季度内周次`             | 部分，需要 `Quarter`    | 季度中的第几周。        | `1` 到 `14`           |
-| `月内周次`              | 部分，需要 `Month`      | 月份中的第几周。        | `1` 到 `6`            |
-| `日期`                | 完整                 | 日期。             | `2025-12-31`         |
+| `Week`                 | 完整                 | 包含年份的周次。        | `W50-2023`           |
+| `WeekOfYear`              | 部分，需要 `Year`       | 一年中的第几周。        | `W50`、`50`           |
+| `WeekOfSemester`             | 部分，需要 `Semester`   | 半年中的第几周。        | `1` 到 `27`           |
+| `WeekOfQuarter`             | 部分，需要 `Quarter`    | 季度中的第几周。        | `1` 到 `14`           |
+| `WeekOfMonth`              | 部分，需要 `Month`      | 月份中的第几周。        | `1` 到 `6`            |
+| `Date`                | 完整                 | 日期。             | `2025-12-31`         |
 | `DayOfYear`         | 不完整，需要 `Year`      | 当年的第几天。         | `1` 到 `366`          |
 | `DayOfSemester`     | 不完整，需要 `Semester`  | 半年中的第几天。        | `1` 到 `184`          |
 | `DayOfQuarter`      | 不完整，需要 `Quarter`   | 当季的第几天。         | `1` 到 `92`           |

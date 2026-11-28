@@ -2,7 +2,7 @@
 uid: general-introduction
 title: Introducción general y arquitectura
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,7 +50,7 @@ Tabular Editor puede cargar los metadatos del modelo desde las siguientes fuente
 Una vez cargados los metadatos del modelo en Tabular Editor, puedes agregar/editar/eliminar **objetos** y cambiar las **propiedades de los objetos**. Las modificaciones no se guardan en el origen hasta que guardes el modelo de forma explícita, ya sea seleccionando **Archivo > Guardar** o pulsando CTRL+S. Si los metadatos del modelo se cargaron desde una fuente de archivo (fuentes 1-3 anteriores), ese archivo se actualizará. Si los metadatos del modelo se cargaron desde Analysis Services (fuentes 4-7 anteriores), los cambios se guardan de nuevo en Analysis Services. Ten en cuenta que algunos cambios pueden hacer que los objetos pasen a un estado en el que los usuarios finales ya no puedan consultarlos. Por ejemplo, si agregas una columna a una tabla, tendrás que [actualizar la tabla](xref:refresh-preview-query#refreshing-data) antes de que los usuarios puedan consultar el contenido de esa tabla o cualquier medida que dependa de ella.
 
 > [!WARNING]
-> Se aplican ciertas limitaciones al guardar nuevamente en Power BI Desktop los cambios en los metadatos del modelo (fuente 7 anterior). Consulta @desktop-limitations para más información.
+> Las versiones de Power BI Desktop anteriores a junio de 2025 no aceptan todos los cambios de modelo procedentes de herramientas externas (origen 7 anterior). Consulte @desktop-integration.
 
 ### Objetos y propiedades de TOM
 
@@ -69,7 +69,7 @@ Ejemplos de **objetos** de TOM:
 Ejemplos de **propiedades de objetos** de TOM:
 
 - `Name` (texto)
-- `Carpeta de visualización` (texto)
+- `Display Folder` (texto)
 - `Description` (texto)
 - `Hidden` (verdadero/falso)
 - `Summarize By` (uno de los siguientes: None, Sum, Min, Max, ...)

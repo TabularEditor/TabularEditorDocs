@@ -1,8 +1,8 @@
----
+﻿---
 uid: dax-debugger
-title: Depurador de DAX
+title: Depurador DAX
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,11 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-
-# Depurador de DAX
-
-> [!NOTE]
-> El Depurador de DAX se introdujo en la versión 3.2.0. La información de este artículo está sujeta a cambios a medida que añadimos más capacidades al depurador.
+# Depurador DAX
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/m4g9BxcUf4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -43,7 +39,7 @@ Mientras Tabular Editor 3 está conectado a una instancia de Analysis Services, 
 - Mediante una Pivot Grid
 - A través de una consulta DAX
 
-Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan información contextual sobre el código que estás depurando, además de una vista de script DAX que resalta la parte que se está depurando en ese momento.
+Una vez iniciado el depurador, se le presentan varias vistas nuevas que proporcionan información contextual sobre el código que se está depurando. La parte del código que se está depurando en ese momento se resalta en una vista de script de depuración cuando pertenece al modelo, y en la consulta DAX cuando la consulta la define.
 
 > [!TIP]
 > Antes de iniciar una sesión de depuración, considera dar formato a tu código DAX para que sea más fácil de leer.
@@ -56,8 +52,7 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 - Arrastrar una medida desde el Explorador TOM, o
 - Hacer clic con el botón derecho en una medida en el Explorador TOM y elegir **Agregar a Pivot Grid**, o
 - Seleccionar la medida desde la lista de campos del Pivot Grid (**Pivot Grid > Mostrar campos**)
-
-3. (Opcional) Agrega una o varias columnas al Pivot Grid en el área de Filtro, el área de Columnas o el área de Filas.
+3. (Opcional) Añada una o más columnas o jerarquías al Pivot Grid en el área de Filtros, el área de Columnas o el área de Filas.
 4. Haz clic con el botón derecho en la celda de valor dentro del Pivot Grid y elige **Depurar este valor**.
 
 ![Depurar desde tabla dinámica](~/content/assets/images/features/debug-from-pivot.png)
@@ -65,14 +60,14 @@ Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan
 # Depuración mediante una Consulta DAX
 
 1. Crea una nueva consulta DAX (**Archivo > Nuevo > Consulta DAX**).
-2. Escribe o pega la consulta DAX. Normalmente, se trata de una consulta compuesta por una llamada a `SUMMARIZECOLUMNS` con una o varias medidas (explícitas), como la que generan los objetos Visual en Power BI.
+2. Escriba o pegue la consulta DAX. Por lo general, debería tratarse de una consulta formada por una llamada `SUMMARIZECOLUMNS` con una o más medidas (explícitas), como la generada por los elementos visuales en Power BI. Las medidas pueden ser medidas del modelo o medidas que la consulta define con `DEFINE MEASURE`.
 
 > [!TIP]
 > Puedes usar el [Performance Analyzer](https://docs.microsoft.com/power-bi/create-reports/desktop-performance-analyzer) en Power BI Desktop para capturar la consulta generada por los objetos Visual.
 
-3. Pulsa F5 para ejecutar la consulta en Tabular Editor 3. Localiza el valor que quieras depurar, haz clic con el botón derecho en la celda y elige **Depurar**.
+3. Pulsa F5 para ejecutar la consulta en Tabular Editor 3. Localice el valor que desea depurar, haga clic con el botón derecho en la celda y elija **Depurar celda**.
 
-![Depurar desde consulta](~/content/assets/images/features/debug-from-query.png)
+![Menú contextual en una celda de resultados de una consulta DAX, que muestra la opción «Depurar celda»](~/content/assets/images/features/debug-from-query.png)
 
 # Vistas de depuración
 
@@ -93,9 +88,9 @@ Puede inspeccionar un valor de variables locales haciendo clic en el botón de l
 
 ![Inspeccionar valor de variables locales](~/content/assets/images/inspect-locals.png)
 
-Si prefiere inspeccionar el valor de variables locales en una ventana de Consulta DAX independiente, puede desactivar la opción **Usar inspector emergente** en **Herramientas > Preferencias > Depurador de DAX > Variables locales**.
+Si prefiere inspeccionar el valor de las variables locales en una ventana de consulta DAX independiente, puede desactivar la opción **Usar inspector emergente** en **Herramientas > Preferencias > Tabular Editor > Depurador de DAX > Variables locales**.
 
-![Configuración del depurador de Dax](~/content/assets/images/features/dax-debugger-settings.png)
+![Página de preferencias del Depurador DAX con las secciones Variables locales, Observación y Consultas DAX](~/content/assets/images/features/dax-debugger-settings.png)
 
 ## Inspección
 
@@ -153,6 +148,43 @@ Fíjate en cómo se actualizan los valores de la vista **Locals** a medida que n
 
 ![Entrar en la selección](~/content/assets/images/debugger-step-into-selection.png)
 
+## Funciones y código definido por la consulta
+
+El depurador entra en las [funciones definidas por el usuario de DAX](xref:udfs) (UDF de DAX) y en las medidas y funciones que define una consulta DAX.
+
+### Entrar en funciones
+
+Entra en una UDF de DAX de la misma manera que entra en una referencia de medida. Esto funciona para las funciones del modelo y para las funciones que la consulta DAX define con `DEFINE FUNCTION`.
+
+En el **Árbol de llamadas**, una llamada a función tiene un nodo secundario por cada argumento pasado a un parámetro `VAL`, seguido de un nodo `Function F(params)`, como `Function Scale(x, f)`, con el cuerpo de la función debajo. Los argumentos pasados a `EXPR` y los parámetros de tipo referencia aparecen en el cuerpo, en cada lugar en el que el cuerpo utiliza el parámetro. Un nodo que se refiere a un parámetro muestra el nombre del parámetro con el argumento tal como está escrito en el punto de llamada, como `x: [Sales Amount]`, en una línea y truncado a 60 caracteres. Si la llamada omite un argumento opcional, el nodo muestra el valor predeterminado del parámetro.
+
+![Árbol de llamadas con un nodo de llamada a función, su nodo Function Scale(x, f) y los nodos de parámetros, junto a «Locales» mostrando los parámetros](~/content/assets/images/features/dax-debugger-call-tree-function.png)
+
+Mientras el elemento actual se encuentre dentro del cuerpo de una función, **Locales** mostrará los parámetros de la función, cada uno con el argumento que le pasa la llamada, y ocultará las variables del código de llamada. Un parámetro `VAL` muestra el valor calculado en el punto de llamada, y un parámetro `EXPR` o de tipo referencia muestra su argumento evaluado en el contexto de evaluación actual. Cuando el elemento actual está dentro de un argumento pasado a un parámetro `EXPR`, **Locales** muestra el ámbito en el que está escrito el argumento: las variables del código llamante y los parámetros de la función contenedora si la llamada está dentro de otra función.
+
+### Código definido en la consulta DAX
+
+Cuando depura una celda de una consulta DAX, las medidas y funciones que la consulta define con `DEFINE MEASURE` o `DEFINE FUNCTION` se resaltan en la propia consulta DAX. La vista del script de depuración contiene las medidas del modelo, seguidas de las funciones del modelo, y se abre solo cuando el código depurado utiliza medidas o funciones del modelo. A medida que vas pasando del código de la consulta al código del modelo, la vista que contiene el elemento actual pasa a primer plano. Haga clic con el botón derecho en el código de la consulta DAX para usar **Entrar en selección** (**Ctrl+B**) y los comandos de observación, como en la vista de script de depuración.
+
+Si la consulta redefine una medida o función del modelo, la redefinición se aplica únicamente al código propio de la consulta. Las medidas y funciones del modelo que utilizan el objeto redefinido mantienen la definición del modelo, al igual que cuando se ejecuta la consulta.
+
+![Consulta DAX en proceso de depuración, con el cuerpo de la función resaltado en la consulta y el botón Detener depuración en la barra de herramientas Depuración](~/content/assets/images/features/dax-debugger-query-debugging.png)
+
+La consulta DAX es de solo lectura mientras la depura, y el autocompletado no se abre en la consulta ni en la vista del script de depuración. Si escribe, pega o elimina texto en la consulta, aparece el mensaje **¿Detener depuración?** con el mensaje «No se puede editar una consulta DAX mientras se está depurando. ¿Desea detener la depuración para editar la consulta?»:
+
+- **Aceptar** detiene la depuración. La modificación no se aplica, así que repítala una vez que la consulta sea editable.
+- **Cancelar** mantiene la depuración y deja la consulta sin cambios.
+
+Seleccione **No volver a preguntar** antes de seleccionar **Aceptar** para detener la depuración sin que aparezca el mensaje en futuras modificaciones. Para que vuelva a aparecer el mensaje, seleccione **Preguntar antes de editar una consulta DAX que se está depurando** en **Herramientas > Preferencias > Tabular Editor > Depurador de DAX > Consultas DAX**.
+
+![Mensaje «¿Desea detener la depuración?» con la casilla de verificación «No volver a preguntar»](~/content/assets/images/features/dax-debugger-stop-debugging-prompt.png)
+
+Si cierra la consulta DAX o la vista del script de depuración mientras depura, aparecerá el mensaje **¿Detener depuración?**. Seleccione **Aceptar** para detener la depuración y cerrar el documento.
+
+### Detener depuración
+
+Seleccione **Detener depuración** en la barra de herramientas **Depurar** o en el menú **Depurar** para finalizar la sesión. La consulta DAX vuelve a ser editable y se cierran la vista del script de depuración y las ventanas **Locales**, **Observación**, **Contexto de evaluación** y **Árbol de llamadas**. Cerrar el documento depurado o el modelo también finaliza la sesión y cierra las ventanas. En la siguiente sesión, las ventanas se abrirán de nuevo donde las dejó, con las mismas expresiones de vigilancia. **Detener depuración** no tiene ningún atajo de teclado predeterminado; asigne uno en **Herramientas > Preferencias > Tabular Editor > Teclado**.
+
 ## Predicados escalares
 
 Los predicados escalares usados en los argumentos de filtro de las funciones [`CALCULATE`](https://dax.guide/calculate) o [`CALCULATETABLE`](https://dax.guide/calculatetable) se tratan de forma especial en la vista **Locals**.
@@ -204,16 +236,18 @@ Usa los siguientes atajos de teclado para navegar rápidamente por el árbol de 
 - **Next row (F9)**: cambia el contexto de fila de la iteración más interna a la siguiente fila del iterador.
 - **Previous row (Mayús-F9)**: cambia el contexto de fila de la iteración más interna a la fila anterior del iterador.
 
+**Detener depuración** no tiene ningún método abreviado de teclado predeterminado. Consulte [Detener depuración](#stop-debugging).
+
 # Limitaciones y problemas conocidos
 
-Actualmente, el Depurador de DAX tiene las siguientes limitaciones:
+El depurador de DAX tiene las siguientes limitaciones:
 
-- **UDFs:** Actualmente no se admiten las funciones definidas por el usuario (UDF). Si se encuentra una UDF en el código que se está depurando, el depurador puede comportarse de forma inesperada.
-- Al depurar una Consulta DAX, solo se admite un subconjunto de expresiones de tabla DAX (por ejemplo, se pueden depurar consultas que dependan de [SUMMARIZECOLUMNS](https://dax.guide/summarizecolumns), mientras que actualmente no se admiten otras funciones de tabla). En general, se admiten las consultas generadas por Power BI (que se pueden capturar mediante el Analizador de rendimiento de Power BI Desktop).
-- Actualmente no se admiten las consultas que contengan medidas implícitas o cálculos con ámbito de consulta.
+- Solo se admite un subconjunto de expresiones de tabla DAX al depurar una consulta DAX (por ejemplo, se pueden depurar consultas que dependen de [SUMMARIZECOLUMNS](https://dax.guide/summarizecolumns), mientras que otras funciones de tabla no son compatibles). Por lo general, se admiten las consultas generadas por Power BI (que se pueden capturar a través del analizador de rendimiento de Power BI Desktop).
+- Solo se pueden depurar celdas que devuelvan una medida, ya sea una medida del modelo o una que la consulta defina con `DEFINE MEASURE`. No se pueden depurar las celdas de las columnas de expresiones en línea, como `"Twice", Twice([Sales Amount])` en una llamada `SUMMARIZECOLUMNS`, ni las medidas implícitas.
+- No se admiten las expresiones de **Observación** que hacen referencia a una medida de ámbito de consulta o a un parámetro de función.
 - Al examinar las primeras 1000 filas de un iterador que proviene de una expresión de tabla filtrada, la fila seleccionada en la ventana de exploración puede no corresponder siempre al contexto de fila actual en la pila de contexto de evaluación (escribe `CALCULATETABLE('<table name>')` en la ventana **Watch** para inspeccionar el contexto de fila actual).
-- Actualmente, el depurador solo permite depurar expresiones DAX en medidas.
-- Los [cálculos Visual](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview) no se pueden depurar, ya que se definen mediante columnas con alcance de consulta. Actualmente, el depurador no admite objetos con ámbito de consulta.
+- El depurador solo permite depurar expresiones DAX en medidas.
+- No se pueden depurar las celdas que dependen de columnas con ámbito de consulta. Esto incluye los [cálculos visuales](https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview), que se definen mediante columnas con ámbito de consulta.
 - Si una medida se modifica mediante un elemento de cálculo en el contexto de filtro, los resultados parciales mostrados en la vista Watch / Locals del depurador pueden ser incorrectos.
 
 Si encuentras un problema con el depurador, distinto de los indicados anteriormente, publícalo en nuestro [seguimiento de incidencias](https://github.com/TabularEditor/TabularEditor3/issues) en el sitio de soporte de la comunidad de TE3 en GitHub.

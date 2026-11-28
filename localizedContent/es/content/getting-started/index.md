@@ -2,7 +2,7 @@
 uid: onboarding-te3
 title: Te damos la bienvenida
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-13
 ---
 
 # Te damos la bienvenida
@@ -41,7 +41,6 @@ Este material de formación se centra en el producto Tabular Editor, por lo que 
 **Power BI Desktop y Tabular Editor**
 
 - @desktop-integration
-- @desktop-limitations
 
 **Interfaz de usuario**
 

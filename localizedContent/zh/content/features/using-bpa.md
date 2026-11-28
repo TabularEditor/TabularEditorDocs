@@ -2,7 +2,7 @@
 uid: using-bpa
 title: 使用 Best Practice Analyzer
 author: Morten Lønskov
-updated: 2026-09-14
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -43,7 +43,7 @@ BPA 概览会显示模型中当前被违反的所有已定义规则：
 
 ### 功能
 
-每当模型发生更改时，Best Practice Analyzer 都会在后台扫描你的模型以发现问题。你可以在 **工具 > 偏好设置 > Best Practice Analyzer** 中禁用此功能。
+每当对模型进行更改时，Best Practice Analyzer 都会在后台扫描您的模型是否存在问题。您可以在**工具 > 首选项 > Tabular Editor > 其他**下禁用此功能。
 
 在 TE2 和 TE3 中，BPA 窗口都支持将窗口停靠到桌面一侧，同时把主窗口放在另一侧，让你在处理模型时也能随时看到 BPA 问题。
 
@@ -72,7 +72,7 @@ Best Practice Analyzer 窗口会持续列出模型中所有 **有效规则**，�
 | **内置最佳实践**              | 随 Tabular Editor 3 提供；由 Tabular Editor 团队维护的一组精选规则。参见 @built-in-bpa-rules | 否，但可禁用单个规则 |
 | 每个**外部规则文件或 URL**对应一个条目 | 文件或 URL 指向的位置                                                                          | 取决于来源      |
 | **当前模型中的规则**            | 作为模型本身的一个注释存储，因此会随模型一起携带                                                               | 是的         |
-| **本地用户的规则**             | `%LocalAppData%\\TabularEditor3\\BPARules.json`；仅你自己可见                             | 是的         |
+| **本地用户的规则**             | `%LocalAppData%\TabularEditor3\BPARules.json`；仅你自己可见                             | 是的         |
 | **本地计算机上的规则**           | `%ProgramData%`；此计算机上的每位用户都能看到这些规则                                                     | 是的         |
 
 只有在 @preferences 中打开 _启用内置最佳实践规则_ 时，才会显示内置集合。其规则 ID 为保留项：如果你使用其中任何一个来定义自己的规则，系统将拒绝。

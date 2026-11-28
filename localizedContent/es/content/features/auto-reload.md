@@ -2,7 +2,7 @@
 uid: auto-reload
 title: Recarga automática desde el disco
 author: Morten Lønskov
-updated: 2026-09-23
+updated: 2026-10-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,7 +12,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-          note: "La Edición de escritorio no puede abrir ni guardar archivos de metadatos del modelo."
+          note: "Desktop Edition can't open or save model metadata files."
         - edition: Business
           full: true
         - edition: Enterprise
@@ -26,7 +26,7 @@ Cuando los archivos de metadatos de un modelo que cargaste desde un archivo o un
 ![Diagrama: Archivo > Guardar escribe el modelo de Tabular Editor en los archivos en disco; otra herramienta escribe en los archivos; una recarga automática vuelve a cargar los archivos modificados en Tabular Editor](~/content/assets/images/features/auto-reload-sync.png)
 
 > [!NOTE]
-> La recarga automática supervisa los archivos y es independiente de **Realizar seguimiento de cambios externos del modelo** y **Actualizar automáticamente los metadatos locales de Tabular Object Model** en [Herramientas > Preferencias > Tabular Editor > Varios](xref:preferences#miscellaneous). Esas opciones usan una traza de Analysis Services para detectar cambios en una base de datos conectada.
+> La recarga automática supervisa los archivos y es independiente de **Realizar seguimiento de cambios externos del modelo** y **Actualizar automáticamente los metadatos locales de Tabular Object Model** en [Herramientas > Preferencias > Tabular Editor > Varios](xref:preferences#tabular-editor--miscellaneous). Esas opciones usan una traza de Analysis Services para detectar cambios en una base de datos conectada.
 
 ## Archivos supervisados
 
@@ -78,4 +78,4 @@ La recarga automática está activada de forma predeterminada. Para desactivarla
 
 Desactívala si un proceso que se ejecuta continuamente también escribe en la carpeta del modelo, como un cliente de sincronización de archivos o un checkout de CI que se actualiza en segundo plano. Cada cambio desencadena una recarga o, si tienes cambios sin guardar, aparece un cuadro de diálogo modal.
 
-Con la opción desmarcada, usa **Archivo > Recargar desde el disco** para cargar cambios externos, o **Archivo > Guardar** para sobrescribirlos con el modelo en Tabular Editor. Consulta [Preferencias](xref:preferences#miscellaneous) para ver las demás opciones de esa página.
+Con la opción desmarcada, usa **Archivo > Recargar desde el disco** para cargar cambios externos, o **Archivo > Guardar** para sobrescribirlos con el modelo en Tabular Editor. Consulta [Preferencias](xref:preferences#tabular-editor--miscellaneous) para ver las demás opciones de esa página.

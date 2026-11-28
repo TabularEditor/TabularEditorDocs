@@ -2,7 +2,7 @@
 uid: dax-package-manager
 title: DAX 组件管理器
 author: Daniel Otykier
-updated: 2026-10-12
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -38,10 +38,9 @@ Tabular Editor 中的 **DAX 组件管理器**（DPM）使用户能够直接在�
 ## 界面布局
 
 ### 1. 启动 DAX 组件管理器
+您可以通过**视图**菜单打开 DPM 面板。还可以通过**工具 > 首选项 > Tabular Editor > 键盘**为 `View.DaxPackageManager` 命令分配自定义快捷键。
 
-你可以通过 **视图** 菜单打开 DPM 面板。你也可以通过 **工具 > 偏好 > 键盘** 为 `View.DaxPackageManager` 命令分配自定义快捷键。
-
-- **菜单：** `视图 → DAX 组件管理器`
+- **菜单：** `View → DAX Package Manager`
 - **快捷键：** _(如果已在偏好设置中分配)_
 
 ---

@@ -2,7 +2,7 @@
 uid: object-properties-common
 title: Propiedades comunes
 author: Jeroen ter Heerdt
-updated: 2026-10-05
+updated: 2026-11-13
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,11 +27,12 @@ SUMMARY: Properties that most objects in a semantic model share, such as Name, D
 
 Las propiedades de esta página aparecen en muchos tipos de objetos y funcionan igual en todos los objetos que las tienen. Cada entrada indica el nombre de la propiedad en el Tabular Object Model (TOM), su tipo y su categoría. Las páginas específicas de cada objeto enlazan a estas entradas. Para las demás páginas, consulta @object-properties.
 
-## Básico
+Una propiedad de esta página puede ser una [propiedad básica](xref:object-properties#basic-properties) para un tipo de objeto y no para otro. Por ejemplo, `Name` es una propiedad básica de una medida, pero no de una relación. La lista **Propiedades comunes** de la página de cada objeto indica las propiedades básicas de ese objeto con **Básica**.
+
+## General
 
 ### Nombre
-
-`Name` · string · Básico
+`Name` · cadena · General
 
 El nombre del objeto. DAX hace referencia a tablas, columnas, medidas, jerarquías y funciones definidas por el usuario por su nombre. Los nombres deben ser únicos entre elementos del mismo nivel, por lo que dos medidas no pueden compartir un nombre. En la mayoría de los modelos, una medida tampoco puede compartir nombre con ninguna columna (consulta `ForceUniqueNames` en @object-properties-model). Un KPI o un grupo de cálculo no tiene nombre propio y toma su nombre del objeto al que pertenece.
 
@@ -40,8 +41,7 @@ Cuando la **Corrección de fórmulas** está habilitada en **Herramientas > Pref
 Para cambiar el nombre de muchos objetos a la vez, selecciónalos en el **Explorador TOM** y usa el renombrado por lotes, que admite expresiones regulares. Consulta @duplicate-and-batch. Las reglas del Best Practice Analyzer (BPA) @kb.bpa-trim-object-names y @kb.bpa-avoid-invalid-characters-names señalan los nombres con espacios al principio o al final, así como los nombres con caracteres de control.
 
 ### Descripción
-
-`Description` · string · Básico
+`Description` · cadena · General
 
 Texto libre que explica para qué sirve el objeto. Power BI muestra la descripción como información sobre herramientas en el panel **Datos**. La lista de campos de la tabla dinámica de Excel no muestra descripciones. Para traducir descripciones, usa `TranslatedDescriptions`.
 
@@ -50,16 +50,14 @@ En Tabular Editor 3, el **Explorador TOM** tiene una columna **Descripción** do
 La regla de BPA @kb.bpa-visible-objects-no-description marca los objetos visibles sin descripción, y @kb.bpa-avoid-invalid-characters-descriptions marca las descripciones que contienen caracteres de control.
 
 ### Carpeta de visualización
-
-`DisplayFolder` · string · Básico
+`DisplayFolder` · cadena · General
 
 La carpeta en la que aparece el objeto, en la lista de campos de las herramientas cliente. Una barra invertida (`\`) crea una subcarpeta, por ejemplo `Sales\Year to date`, y un punto y coma (`;`) muestra el objeto en más de una carpeta, por ejemplo `Sales;Finance`. Las carpetas de visualización no afectan a DAX ni a la seguridad. Tabular Editor también las usa para agrupar objetos en el **Explorador TOM**.
 
 Para mover una carpeta de visualización con sus objetos y subcarpetas, arrástrala a otra carpeta en el **Explorador TOM**. Consulta @drag-drop.
 
 ### Oculto
-
-`IsHidden` · bool · Básico
+`IsHidden` · booleano · General
 
 Cuando es `true`, las herramientas cliente como Power BI ocultan el objeto para los autores de Report. El objeto permanece en el modelo y las expresiones DAX pueden seguir haciendo referencia a él. Cualquiera que pueda consultar el modelo también puede consultar un objeto oculto. Para proteger los datos, consulta @roles-and-rls.
 
@@ -109,7 +107,7 @@ En Tabular Editor 3, los errores en las expresiones DAX también aparecen mientr
 
 `ObjectTypeName` · string · Metadatos · solo de lectura · _calculado_
 
-El tipo de objeto, por ejemplo `medida`, `columna calculada` o `Table`.
+El tipo de objeto, por ejemplo `Measure`, `Calculated Column` o `Table`.
 
 ### State
 
